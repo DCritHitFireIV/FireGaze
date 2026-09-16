@@ -1,0 +1,40 @@
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>x64</Platforms>
+    <AssemblyName>FireGaze</AssemblyName>
+    <Name>FireGaze</Name>
+    <Version>1.0.0.0</Version>
+    <Authors>fire</Authors>
+    <Author>fire</Author>
+    <Punchline>插件简介汉化（名字/简介/详情 × 原版/中文/双语）+ 第三方仓库体检清理 + 插件列表自动刷新拦截</Punchline>
+    <Description>FireGaze 是给卫月（Dalamud）用的一体化工具箱，三种功能：① 插件简介汉化：内置 1300+ 条第三方插件简中词表，安装器里的插件名、一行简介、插件详情都可以独立选择「英语原版 / 中文 / 双语」呈现（默认：名字原版、简介中文、详情中英对照）；② 第三方仓库体检：一键扫描你添加的全部库（含已停用的），找出死链、内容不合规、连接失败的条目并列出，支持一键停用、一键删除（删除前自动备份、可撤回）；③ 列表自动刷新拦截：部分插件（如「每日随记」Daily Routines、XSZToolbox，以及经 OmenTools 等公共库转发的调用）会每 10 分钟反射调用卫月「重载全部仓库」，导致安装器列表自刷新、滚动位置被顶回顶部；本插件按调用来源拦截这些后台刷新，手动刷新与打开安装器不受影响。</Description>
+    <PackageProjectUrl>https://github.com/DCritHitFireIV/FireGaze</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DCritHitFireIV/FireGaze</RepositoryUrl>
+    <!-- 固定插件清单里的 API 级别（避免 CI 用新版 Dalamud 构建时把级别写高） -->
+    <DalamudApiLevel>15</DalamudApiLevel>
+    <!-- 国服（XIVLauncherCN）用 build.cmd 设置 DALAMUD_HOME；国际服走 SDK 默认路径 -->
+    <DalamudLibPath Condition="'$(DALAMUD_HOME)' != ''">$(DALAMUD_HOME)\</DalamudLibPath>
+  </PropertyGroup>
+
+  <!-- 词表跟随插件一起打包（发布 zip 里会有 translations.json） -->
+  <ItemGroup>
+    <None Include="..\..\translations.json" Link="translations.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!--
+    0Harmony 不参与编译、也不放在插件根目录：
+      · 放根目录会被卫月当作「私有依赖」加载进插件的 collectible / in-memory ALC，
+        Harmony 建内部动态程序集时会报 FileLoadException 0x80131515（实测踩过）；
+      · 放到 libs/ 后在插件启动时自行 AssemblyLoadContext.Default.LoadFromAssemblyPath()，
+        与 ProxyPlugin 的做法一致。
+  -->
+  <Target Name="CopyHarmonyToLibs" AfterTargets="Build">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\deps\0Harmony.dll"
+          DestinationFolder="$(OutDir)libs"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
