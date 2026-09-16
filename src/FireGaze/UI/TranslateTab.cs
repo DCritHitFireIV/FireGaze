@@ -8,6 +8,7 @@ internal sealed class TranslateTab
     private readonly Plugin plugin;
 
     private string? updateMessage;
+    private string? statusMessage;
     private volatile bool updateInFlight;
 
     public TranslateTab(Plugin plugin)
@@ -39,12 +40,6 @@ internal sealed class TranslateTab
         }
 
         ImGui.SameLine();
-        if (ImGui.Button("重新应用###ApplyNow"))
-        {
-            this.plugin.ApplyTranslations();
-        }
-
-        ImGui.SameLine();
         ImGui.TextDisabled(this.updateInFlight ? "正在更新…" : this.updateMessage ?? string.Empty);
 
         ImGui.Separator();
@@ -55,7 +50,9 @@ internal sealed class TranslateTab
         {
             config.TranslateEnabled = enabled;
             this.plugin.SaveConfig();
-            this.plugin.ApplyTranslations();
+            this.statusMessage = enabled
+                ? $"已启用：本次改写 {this.plugin.ApplyTranslations()} 条清单"
+                : $"已关闭：已把 {this.plugin.RestoreTranslations()} 条还原成原文";
         }
 
         var autoUpdate = config.AutoUpdateTable;
@@ -67,6 +64,13 @@ internal sealed class TranslateTab
 
         ImGui.SameLine();
         ImGui.TextDisabled($"下次自动检查：{this.DescribeNextCheck()}");
+
+        if (!string.IsNullOrEmpty(this.statusMessage))
+        {
+            ImGui.TextWrapped(this.statusMessage);
+        }
+
+        ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
 
         // ---------------- 词表状态 ----------------
         ImGui.Text($"词表：{this.plugin.Table.Count} 条 · 上次应用改写 {this.plugin.LastTranslatedCount} 条清单");

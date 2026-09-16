@@ -607,6 +607,14 @@ public sealed class Plugin : IDalamudPlugin
         return this.LastTranslatedCount;
     }
 
+    /// <summary>关闭汉化时把已经改写的文本还原成原文（总开关可逆）。</summary>
+    public int RestoreTranslations()
+    {
+        var count = this.Patcher.RestoreAll();
+        this.LastTranslatedCount = 0;
+        return count;
+    }
+
     /// <summary>从 GitHub 更新词表并立刻应用。</summary>
     public async Task<(bool Ok, string Message)> UpdateTranslationTableAsync()
     {

@@ -30,9 +30,19 @@ public sealed class ManifestPatcher
     }
 
     /// <summary>应用一次；返回被改写的清单数。</summary>
-    public int ApplyAll()
+    public int ApplyAll() => this.Run(restore: false);
+
+    /// <summary>把已改写的文本还原成原文（关闭汉化时用）；返回被还原的清单数。</summary>
+    public int RestoreAll() => this.Run(restore: true);
+
+    private int Run(bool restore)
     {
-        if (!this.config().TranslateEnabled || this.table.Count == 0)
+        if (this.table.Count == 0)
+        {
+            return 0;
+        }
+
+        if (!restore && !this.config().TranslateEnabled)
         {
             return 0;
         }
@@ -51,7 +61,7 @@ public sealed class ManifestPatcher
             {
                 foreach (var manifest in available)
                 {
-                    if (manifest is not null && this.Patch(manifest, cfg))
+                    if (manifest is not null && this.Patch(manifest, cfg, restore))
                     {
                         patched++;
                     }
@@ -65,7 +75,7 @@ public sealed class ManifestPatcher
                     var manifest = local?.GetType()
                                         .GetProperty("Manifest", BindingFlags.Public | BindingFlags.Instance)
                                         ?.GetValue(local);
-                    if (manifest is not null && this.Patch(manifest, cfg))
+                    if (manifest is not null && this.Patch(manifest, cfg, restore))
                     {
                         patched++;
                     }
@@ -76,12 +86,12 @@ public sealed class ManifestPatcher
         }
         catch (Exception e)
         {
-            this.log("应用汉化失败：" + e.Message);
+            this.log((restore ? "还原汉化失败：" : "应用汉化失败：") + e.Message);
             return 0;
         }
     }
 
-    private bool Patch(object manifest, Configuration cfg)
+    private bool Patch(object manifest, Configuration cfg, bool restore)
     {
         var type = manifest.GetType();
         var internalName = type.GetProperty("InternalName", BindingFlags.Public | BindingFlags.Instance)
@@ -100,13 +110,13 @@ public sealed class ManifestPatcher
             this.fieldCache[type] = fields;
         }
 
-        var changed = ApplyField(fields.Name, manifest, entry.Name, cfg.NameMode, isName: true);
-        changed |= ApplyField(fields.Punchline, manifest, entry.Punchline, cfg.PunchlineMode, isName: false);
-        changed |= ApplyField(fields.Description, manifest, entry.Description, cfg.DescriptionMode, isName: false);
+        var changed = ApplyField(fields.Name, manifest, entry.Name, cfg.NameMode, isName: true, restore);
+        changed |= ApplyField(fields.Punchline, manifest, entry.Punchline, cfg.PunchlineMode, isName: false, restore);
+        changed |= ApplyField(fields.Description, manifest, entry.Description, cfg.DescriptionMode, isName: false, restore);
         return changed;
     }
 
-    private static bool ApplyField(FieldInfo? field, object manifest, TransPair? pair, DisplayMode mode, bool isName)
+    private static bool ApplyField(FieldInfo? field, object manifest, TransPair? pair, DisplayMode mode, bool isName, bool restore = false)
     {
         if (field is null || pair is null)
         {
@@ -123,7 +133,7 @@ public sealed class ManifestPatcher
         var hasTranslation = !string.IsNullOrWhiteSpace(translated);
 
         string target;
-        if (mode == DisplayMode.Original || !hasTranslation)
+        if (restore || mode == DisplayMode.Original || !hasTranslation)
         {
             target = original;
         }
