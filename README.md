@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="Resources/icon.png" alt="FireGaze" width="160" />
+  <img src="Resources/icon.png?v=2" alt="FireGaze" width="160" />
 
   <h1>FireGaze</h1>
   <h5>卫月 (Dalamud) 插件库工具箱</h5>
