@@ -23,6 +23,12 @@ public sealed class Plugin : IDalamudPlugin
 {
     private const string HarmonyId = "firegaze.auto-refresh-blocker";
 
+    /// <summary>
+    /// 列表刷新拦截功能暂时下线（在修复中）：不挂 Harmony 钩子，也不在界面上显示该页签。
+    /// 恢复时把此常量改回 true，并确认 MainWindow 里的页签逻辑（已按其判断）。
+    /// </summary>
+    public static readonly bool BlockerFeatureEnabled = false;
+
     private static Plugin instance = null!;
 
     [PluginService] public static IPluginLog Log { get; private set; } = null!;
@@ -237,6 +243,13 @@ public sealed class Plugin : IDalamudPlugin
     private void OnCommand(string command, string args)
     {
         var arg = args.Trim().ToLowerInvariant();
+
+        if (!BlockerFeatureEnabled && arg is "on" or "off" or "open" or "log")
+        {
+            Chat.Print("[FireGaze] 列表刷新拦截功能暂时关闭（在修复中）。");
+            return;
+        }
+
         switch (arg)
         {
             case "":
@@ -342,6 +355,13 @@ public sealed class Plugin : IDalamudPlugin
 
     private void InstallPatches()
     {
+        if (!BlockerFeatureEnabled)
+        {
+            this.BlockerStatusText = "已暂时关闭（在修复中）";
+            Log.Information("[FireGaze] 列表刷新拦截功能暂时关闭（在修复中），本次不挂钩子");
+            return;
+        }
+
         try
         {
             var directory = this.pluginInterface.AssemblyLocation.Directory?.FullName
