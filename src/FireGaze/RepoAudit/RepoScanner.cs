@@ -42,9 +42,12 @@ public sealed class RepoAuditItem
 
     public DateTime CheckedUtc { get; set; }
 
-    /// <summary>值得处理的问题（会被默认勾选）。</summary>
+    /// <summary>值得处理的问题（会出现在「有问题的」筛选里）。</summary>
     public bool IsProblem => this.Status
         is RepoStatus.Dead or RepoStatus.Invalid or RepoStatus.Blocked or RepoStatus.Unreachable;
+
+    /// <summary>会被默认勾选的项：只勾「死链 + 内容不合规」——连接失败可能是网络插曲，不默认纳入。</summary>
+    public bool IsAutoSelected => this.Status is RepoStatus.Dead or RepoStatus.Invalid;
 
     public bool IsSelectable => this.Status != RepoStatus.Unknown;
 
@@ -61,7 +64,7 @@ public sealed class RepoAuditItem
 }
 
 /// <summary>扫描进度。</summary>
-public readonly record struct ScanProgress(int Done, int Total, int Ok, int Dead, int Invalid, int Unreachable);
+public readonly record struct ScanProgress(int Done, int Total, int Ok, int Dead, int Invalid, int Blocked, int Unreachable);
 
 /// <summary>
 /// 用卫月同款方式体检第三方仓库：
@@ -100,6 +103,7 @@ public static class RepoScanner
         var ok = 0;
         var dead = 0;
         var invalid = 0;
+        var blocked = 0;
         var unreachable = 0;
         var gate = new object();
 
@@ -116,7 +120,7 @@ public static class RepoScanner
                 semaphore.Release();
             }
 
-            int d, o, de, iv, un;
+            int d, o, de, iv, bl, un;
             lock (gate)
             {
                 done++;
@@ -130,6 +134,8 @@ public static class RepoScanner
                         dead++;
                         break;
                     case RepoStatus.Blocked:
+                        blocked++;
+                        break;
                     case RepoStatus.Invalid:
                         invalid++;
                         break;
@@ -142,11 +148,12 @@ public static class RepoScanner
                 o = ok;
                 de = dead;
                 iv = invalid;
+                bl = blocked;
                 un = unreachable;
             }
 
             onItemDone?.Invoke(item);
-            onProgress?.Invoke(new ScanProgress(d, items.Count, o, de, iv, un));
+            onProgress?.Invoke(new ScanProgress(d, items.Count, o, de, iv, bl, un));
         });
 
         await Task.WhenAll(tasks).ConfigureAwait(false);

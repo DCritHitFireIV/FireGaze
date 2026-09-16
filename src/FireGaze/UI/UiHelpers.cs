@@ -11,6 +11,7 @@ internal static class UiHelpers
     public static readonly Vector4 Good = new(0.45f, 0.85f, 0.45f, 1f);
     public static readonly Vector4 Warn = new(0.95f, 0.75f, 0.35f, 1f);
     public static readonly Vector4 Bad = new(0.95f, 0.45f, 0.45f, 1f);
+    public static readonly Vector4 Info = new(0.62f, 0.76f, 0.94f, 1f);
     public static readonly Vector4 Accent = new(0.55f, 0.75f, 1f, 1f);
 
     public static Vector4 StatusColor(RepoStatus status) => status switch
@@ -20,8 +21,20 @@ internal static class UiHelpers
         RepoStatus.Invalid => Warn,
         RepoStatus.Dead => Bad,
         RepoStatus.Blocked => Warn,
-        RepoStatus.Unreachable => Muted,
+        RepoStatus.Unreachable => Info,
         _ => Muted,
+    };
+
+    /// <summary>列表默认按严重度排序（死链 → 内容不合规 → 拒绝访问 → 连接失败 → 空 → 未检查 → 可用）。</summary>
+    public static int SeverityRank(RepoStatus status) => status switch
+    {
+        RepoStatus.Dead => 0,
+        RepoStatus.Invalid => 1,
+        RepoStatus.Blocked => 2,
+        RepoStatus.Unreachable => 3,
+        RepoStatus.Empty => 4,
+        RepoStatus.Unknown => 5,
+        _ => 6,
     };
 
     public static void ColoredText(Vector4 color, string text)

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>FireGaze 仓库体检 — 4 状态帧 mockup</title>
+<style>
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #909090; --accent: #ffb35c;
+    --btn: #3c3c3c; --btn-hover: #4a4a4a; --danger: #8c2e2e; --danger-hover: #a83838;
+    --ok: #79d979; --warn: #f2bf5c; --bad: #f27a7a; --info: #9fc3f0;
+    --row-a: #1f1f1f; --row-b: #242424;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.4;
+  }
+  .stage { padding: 20px; display: grid; grid-template-columns: 740px 740px; gap: 22px; justify-content: center; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; }
+  .window {
+    width: 700px; height: 560px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 4px;
+    display: flex; flex-direction: column; overflow: hidden; position: relative;
+  }
+  .titlebar { height: 30px; background: var(--title); display: flex; align-items: center; padding: 0 10px; font-weight: 600; border-bottom: 1px solid var(--border); }
+  .titlebar .brand { color: var(--accent); }
+  .titlebar .sub { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 12px; }
+  .body { padding: 8px 12px 10px; display: flex; flex-direction: column; gap: 6px; min-height: 0; flex: 1; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); }
+  .tab { padding: 4px 12px; color: var(--muted); }
+  .tab.active { color: var(--text); background: var(--panel); border: 1px solid var(--border); border-bottom-color: transparent; border-radius: 3px 3px 0 0; margin-bottom: -1px; }
+  .hint { color: var(--muted); }
+  .sep { height: 1px; background: var(--border); margin: 2px 0; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .grow { flex: 1; }
+  button { font: inherit; color: var(--text); background: var(--btn); border: 1px solid #4d4d4d; border-radius: 3px; padding: 3px 10px; }
+  button.danger { background: var(--danger); border-color: #a83838; }
+  button:disabled { color: #7c7c7c; background: #2c2c2c; border-color: #3a3a3a; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; }
+  .check { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-block; position: relative; background: #2a2a2a; }
+  .check.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 1px; }
+  .radio { width: 13px; height: 13px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; }
+  .radio.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 50%; }
+  input.search { font: inherit; background: #2a2a2a; border: 1px solid #4d4d4d; border-radius: 3px; color: var(--muted); padding: 2px 8px; width: 170px; }
+  .progress { width: 220px; height: 16px; background: #2b2b2b; border: 1px solid #4d4d4d; border-radius: 3px; overflow: hidden; position: relative; }
+  .progress i { display: block; height: 100%; background: #4d7db8; }
+  .progress span { position: absolute; left: 0; right: 0; text-align: center; top: 0; font-size: 12px; }
+  .table { flex: 1; min-height: 0; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; }
+  .thead, .trow { display: grid; grid-template-columns: 32px 150px 1fr 92px; align-items: center; }
+  .thead { background: #2a2a2a; color: var(--muted); font-size: 13px; border-bottom: 1px solid var(--border); }
+  .tbody { overflow: hidden; }
+  .trow { padding: 3px 0; border-bottom: 1px solid #262626; font-size: 14px; }
+  .trow:nth-child(odd) { background: var(--row-a); } .trow:nth-child(even) { background: var(--row-b); }
+  .cell { padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ok { color: var(--ok); } .warn { color: var(--warn); } .bad { color: var(--bad); } .info { color: var(--info); } .muted { color: var(--muted); }
+  .dim { color: #6f6f6f; }
+  .toolbar { display: flex; align-items: center; gap: 8px; }
+  .modal-wrap { position: absolute; inset: 0; background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; }
+  .modal { width: 470px; background: #212121; border: 1px solid #5a5a5a; border-radius: 4px; padding: 12px 14px; box-shadow: 0 18px 48px rgba(0,0,0,.6); }
+  .modal h4 { margin: 0 0 8px; font-size: 15px; }
+  .modal .url { color: var(--muted); font-size: 13px; margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .modal .row { margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ============ 帧 1：扫描中 ============ -->
+  <div>
+    <p class="caption">帧 1 — 扫描中（进度条带 312/1241 文本，按钮变「取消扫描」；操作条置灰，撤回/备份仍可见）</p>
+    <div class="window">
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+      <div class="body">
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab active">仓库体检</div><div class="tab">列表刷新拦截</div></div>
+        <div>扫描全部第三方仓库（默认含已停用）：检查链接是否失效、内容是否合法仓库文件（与卫月同款校验）。</div>
+        <div class="hint">内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。</div>
+        <div class="row"><button>取消扫描</button><span class="chip"><span class="check on"></span>扫描范围含已停用</span><input class="search" placeholder="搜索仓库地址…" value=""></div>
+        <div class="row"><div class="progress"><i style="width:25%"></i><span>312 / 1241</span></div><span>可用 210 · 死链 40 · 不合规 1 · 拒绝 0 · 连接失败 2</span></div>
+        <div class="sep"></div>
+        <div class="row">
+          <span>显示</span>
+          <span class="chip"><span class="radio on"></span>有问题的</span><span class="chip"><span class="radio"></span>全部</span>
+          <span class="chip"><span class="radio"></span>死链 + 不合规</span><span class="chip"><span class="radio"></span>连接失败</span>
+          <span class="chip"><span class="radio"></span>已停用</span><span class="chip"><span class="radio"></span>可用</span>
+        </div>
+        <div class="toolbar"><button disabled>停用所选（0）</button><button class="danger" disabled>删除所选（0）…</button><span class="muted">│</span><button disabled>全选当前（0）</button><button disabled>清空选择</button></div>
+        <div class="toolbar"><span class="hint">结果 0 行 · 已选 0 —— 勾选列表行，或用「全选当前」</span><span class="grow"></span><button>撤回：删除 84 个 · 20:31</button><button>打开备份目录</button></div>
+        <div class="hint">开始体检 1241 个仓库…</div>
+        <div class="table"><div class="thead"><div class="cell"></div><div class="cell">状态</div><div class="cell">仓库地址</div><div class="cell">首次记录</div></div><div class="tbody"><div class="trow"><div class="cell muted" colspan="4">扫描进行中…</div></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 帧 2：完成态 ============ -->
+  <div>
+    <p class="caption">帧 2 — 完成态：默认只勾「死链 + 内容不合规」；连接失败未勾选并给出提示</p>
+    <div class="window">
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+      <div class="body">
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab active">仓库体检</div><div class="tab">列表刷新拦截</div></div>
+        <div>扫描全部第三方仓库（默认含已停用）：检查链接是否失效、内容是否合法仓库文件（与卫月同款校验）。</div>
+        <div class="hint">内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。</div>
+        <div class="row"><button>开始体检</button><span class="chip"><span class="check on"></span>扫描范围含已停用</span><input class="search" placeholder="搜索仓库地址…" value=""></div>
+        <div>共 1241 个仓库：可用 1151 · 死链 85 · 内容不合规 2 · 拒绝访问 1 · 连接失败 3 · 已停用 42</div>
+        <div class="hint">上次体检：2026-09-16 20:05 · 用时 92s</div>
+        <div class="sep"></div>
+        <div class="row">
+          <span>显示</span>
+          <span class="chip"><span class="radio on"></span>有问题的</span><span class="chip"><span class="radio"></span>全部</span>
+          <span class="chip"><span class="radio"></span>死链 + 不合规</span><span class="chip"><span class="radio"></span>连接失败</span>
+          <span class="chip"><span class="radio"></span>已停用</span><span class="chip"><span class="radio"></span>可用</span>
+        </div>
+        <div class="toolbar"><button>停用所选（87）</button><button class="danger">删除所选（87）…</button><span class="muted">│</span><button>全选当前（88）</button><button>清空选择</button></div>
+        <div class="toolbar"><span class="hint">结果 88 行 · 已选 87（共 88 个问题项）</span><span class="grow"></span><button>撤回：删除 84 个 · 20:31</button><button>打开备份目录</button></div>
+        <div class="hint">体检完成（用时 92s）：已自动勾选 87 个死链/不合规项；另有 3 个「连接失败」需人工确认（可能是网络问题，未勾选）。</div>
+        <div class="table">
+          <div class="thead"><div class="cell"></div><div class="cell">状态</div><div class="cell">仓库地址</div><div class="cell">首次记录</div></div>
+          <div class="tbody">
+            <div class="trow"><div class="cell"><span class="check on"></span></div><div class="cell bad">死链</div><div class="cell">https://raw.githubusercontent.com/y…/main/pluginmaster.json</div><div class="cell muted">未记录</div></div>
+            <div class="trow"><div class="cell"><span class="check on"></span></div><div class="cell warn">内容不合规</div><div class="cell">https://github.com/Jinjyu1211/All…/main/repo.json</div><div class="cell muted">未记录</div></div>
+            <div class="trow"><div class="cell"><span class="check"></span></div><div class="cell info">连接失败</div><div class="cell">https://raw.githubusercontent.com/ne…/main/repo.json</div><div class="cell">09-16 19:24</div></div>
+            <div class="trow"><div class="cell"><span class="check"></span></div><div class="cell warn">拒绝访问</div><div class="cell">https://gp-raw.xuolu.com/raw/ano…/master/repo.json</div><div class="cell muted">未记录</div></div>
+            <div class="trow"><div class="cell"><span class="check"></span></div><div class="cell ok">可用<span class="muted"> · 停用</span></div><div class="cell dim">https://raw.githubusercontent.com/Bl…/master/repo.json</div><div class="cell muted">未记录</div></div>
+            <div class="trow"><div class="cell"><span class="check"></span></div><div class="cell ok">可用</div><div class="cell">https://raw.githubusercontent.com/At…/main/pluginmaster.json</div><div class="cell muted">未记录</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 帧 3：删除确认弹窗 ============ -->
+  <div>
+    <p class="caption">帧 3 — 删除确认弹窗（列出样本 URL、提示含连接失败项、强调可备份撤回）</p>
+    <div class="window">
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+      <div class="body">
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab active">仓库体检</div><div class="tab">列表刷新拦截</div></div>
+        <div>扫描全部第三方仓库（默认含已停用）：检查链接是否失效、内容是否合法仓库文件（与卫月同款校验）。</div>
+        <div class="hint">内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。</div>
+        <div class="row"><button>开始体检</button><span class="chip"><span class="check on"></span>扫描范围含已停用</span><input class="search" placeholder="搜索仓库地址…" value=""></div>
+        <div>共 1241 个仓库：可用 1151 · 死链 85 · 内容不合规 2 · 拒绝访问 1 · 连接失败 3 · 已停用 42</div>
+        <div class="sep"></div>
+        <div class="row"><span class="hint">（略：筛选 / 工具条 —— 同帧 2）</span></div>
+        <div class="modal-wrap">
+          <div class="modal">
+            <h4>确认删除仓库链接</h4>
+            <div>你确定要从仓库列表里删除这 87 个库链接吗？</div>
+            <div style="margin-top:8px">
+              <div class="url">· https://raw.githubusercontent.com/yimo0908/DalamudPlugin/main/plugin…</div>
+              <div class="url">· https://github.com/Jinjyu1211/AllHud/blob/main/repo.json</div>
+              <div class="url">· https://raw.githubusercontent.com/nexai/dalamud-plugins/main/repo.json</div>
+              <div class="url">· https://raw.githubusercontent.com/BluntEXE/VelvetRift/master/repo.json</div>
+              <div class="url">· https://raw.githubusercontent.com/alt-repo/k…/master/repo.json</div>
+              <div class="url">…… 等共 87 条</div>
+            </div>
+            <div class="warn" style="margin-top:8px">注意：其中 3 条是「连接失败」——可能是网络问题而不是死链。</div>
+            <div class="hint" style="margin-top:8px">删除前会自动备份（完整仓库列表 + dalamudConfig.json），删除后可以随时点「撤回」恢复。</div>
+            <div class="hint">想保留链接、只是不想加载的话，建议改用「停用」。</div>
+            <div class="row"><button>确认删除</button><button>取消</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 帧 4：空历史 / 未体检 ============ -->
+  <div>
+    <p class="caption">帧 4 — 空历史（撤回置灰但常驻，「打开备份目录」仍然可见）+ 未体检提示</p>
+    <div class="window">
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+      <div class="body">
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab active">仓库体检</div><div class="tab">列表刷新拦截</div></div>
+        <div>扫描全部第三方仓库（默认含已停用）：检查链接是否失效、内容是否合法仓库文件（与卫月同款校验）。</div>
+        <div class="hint">内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。</div>
+        <div class="row"><button>开始体检</button><span class="chip"><span class="check on"></span>扫描范围含已停用</span><input class="search" placeholder="搜索仓库地址…" value=""></div>
+        <div class="hint">还没有体检过。点「开始体检」扫描一次。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <span>显示</span>
+          <span class="chip"><span class="radio on"></span>有问题的</span><span class="chip"><span class="radio"></span>全部</span>
+          <span class="chip"><span class="radio"></span>死链 + 不合规</span><span class="chip"><span class="radio"></span>连接失败</span>
+          <span class="chip"><span class="radio"></span>已停用</span><span class="chip"><span class="radio"></span>可用</span>
+        </div>
+        <div class="toolbar"><button disabled>停用所选（0）</button><button class="danger" disabled>删除所选（0）…</button><span class="muted">│</span><button disabled>全选当前（0）</button><button disabled>清空选择</button></div>
+        <div class="toolbar"><span class="hint">结果 0 行 · 已选 0 —— 勾选列表行，或用「全选当前」</span><span class="grow"></span><button disabled>撤回上次操作</button><button>打开备份目录</button></div>
+        <div class="table"><div class="thead"><div class="cell"></div><div class="cell">状态</div><div class="cell">仓库地址</div><div class="cell">首次记录</div></div><div class="tbody"></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

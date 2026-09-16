@@ -52,8 +52,12 @@ public sealed class UndoRecord
 
     public int Count => this.Entries.Count;
 
+    /// <summary>给按钮/提示用的简短描述：类型 + 数量 + 时间。</summary>
     public string Describe()
-        => (this.Action == "delete" ? "删除" : "停用") + $" {this.Count} 个仓库";
+    {
+        var action = this.Action == "delete" ? "删除" : this.Action == "rename" ? "修正链接" : "停用";
+        return $"{action} {this.Count} 个 · {this.TimeUtc.ToLocalTime():HH:mm}";
+    }
 }
 
 /// <summary>插件配置。</summary>
