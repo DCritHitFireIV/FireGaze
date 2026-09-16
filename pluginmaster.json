@@ -5,8 +5,9 @@
     "Punchline": "插件简介汉化（名字/简介/详情 × 原版/中文/双语）+ 第三方仓库体检清理 + 插件列表自动刷新拦截",
     "Description": "FireGaze 是给卫月（Dalamud）用的一体化工具箱，三种功能：① 插件简介汉化：内置 1500+ 条第三方插件简中词表，安装器里的插件名、一行简介、插件详情都可以独立选择「英语原版 / 中文 / 双语」呈现（默认：名字原版、简介中文、详情中英对照）；② 第三方仓库体检：一键扫描你添加的全部库（含已停用的），找出死链、内容不合规、连接失败的条目并列出，支持一键停用、一键删除（删除前自动备份、可撤回）；③ 列表自动刷新拦截：部分插件（如「每日随记」Daily Routines、XSZToolbox，以及经 OmenTools 等公共库转发的调用）会每 10 分钟反射调用卫月「重载全部仓库」，导致安装器列表自刷新、滚动位置被顶回顶部；本插件按调用来源拦截这些后台刷新，手动刷新与打开安装器不受影响。",
     "InternalName": "FireGaze",
-    "AssemblyVersion": "1.0.0.0",
+    "AssemblyVersion": "1.0.0.1",
     "RepoUrl": "https://github.com/DCritHitFireIV/FireGaze",
+    "IconUrl": "https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png",
     "ApplicableVersion": "any",
     "Tags": [
       "repository",
