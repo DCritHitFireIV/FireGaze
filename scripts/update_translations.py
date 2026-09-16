@@ -128,10 +128,22 @@ def parse_json_block(content: str) -> dict:
 # ------------------------------------------------------------------ 语料 --
 
 def build_corpus(api_key: str | None, limit: int) -> dict[str, dict]:
-    """InternalName -> {"name":..., "punchline":..., "description":..., "repo_url":...}"""
+    """InternalName -> {"name":..., "punchline":..., "description":..., "repo_url":...}
+
+    同一个 InternalName 可能在多个仓库里出现（国际原版 + 国服汉化分支）。
+    优先保留「原文不是中文」的那一条：国服分支本身就是中文，不需要我们替换；
+    而国际版的英文原文才能在游戏里匹配上。
+    """
     doc = json.loads(http_get(AETHERFEED))
     if not isinstance(doc, list):
         raise RuntimeError("Aetherfeed plugins.json 格式异常")
+
+    def text_of(item: dict) -> str:
+        return " ".join((item.get(k) or "") for k in ("Name", "Punchline", "Description"))
+
+    def score(item: dict) -> tuple[int, int]:
+        text = text_of(item)
+        return (0 if CJK.search(text) else 1, len(text))
 
     corpus: dict[str, dict] = {}
     for repo in doc:
@@ -142,6 +154,15 @@ def build_corpus(api_key: str | None, limit: int) -> dict[str, dict]:
             key = (plugin.get("InternalName") or "").strip()
             if not key:
                 continue
+
+            previous = corpus.get(key)
+            if previous is not None:
+                # 旧条目的得分（用储存的文本重算）
+                prev_text = " ".join((previous.get(k) or "") for k in ("name", "punchline", "description"))
+                prev_score = (0 if CJK.search(prev_text) else 1, len(prev_text))
+                if score(plugin) <= prev_score:
+                    continue
+
             corpus[key] = {
                 "name": (plugin.get("Name") or "").strip(),
                 "punchline": "",
@@ -173,7 +194,10 @@ def enrich_punchlines(corpus: dict[str, dict], needed: set[str]) -> int:
             plugin = by_key.get(key)
             if plugin:
                 entry = corpus[key]
-                entry["punchline"] = (plugin.get("Punchline") or "").strip() or entry["punchline"]
+                punchline = (plugin.get("Punchline") or "").strip()
+                # 源仓库里的简介也可能是中文（国服汉化版）：不拿它覆盖英文原版
+                if punchline and not (CJK.search(punchline) and not CJK.search(entry["punchline"])):
+                    entry["punchline"] = punchline
                 if not entry["name"]:
                     entry["name"] = (plugin.get("Name") or "").strip()
                 if not entry["description"]:
@@ -212,6 +236,14 @@ def main(argv=None) -> int:
     desc_todo: list[tuple[str, str, str]] = []
     stats = {"new": 0, "name": 0, "desc": 0}
 
+    def prefer(existing: str, new_text: str) -> bool:
+        """新文本是否值得替换旧文本：内容真的变了，且不用「国服分支的中文原文」覆盖英文原文。"""
+        if not new_text or existing == new_text:
+            return False
+        if CJK.search(new_text) and not CJK.search(existing):
+            return False
+        return True
+
     for key, entry in corpus.items():
         saved = table.get(key) or {}
         is_new = key not in table
@@ -222,15 +254,15 @@ def main(argv=None) -> int:
         punchline = entry["punchline"]
         description = entry["description"]
 
-        if name and (is_new or (saved.get("Name") or {}).get("Original") != name):
+        saved_name = (saved.get("Name") or {}).get("Original") or ""
+        saved_desc = (saved.get("Description") or {}).get("Original") or ""
+        saved_punch = (saved.get("Punchline") or {}).get("Original") or ""
+
+        if name and (is_new or prefer(saved_name, name)):
             name_todo.append((key, name))
 
-        need_desc = description and (
-            is_new or (saved.get("Description") or {}).get("Original") != description
-        )
-        need_punch = punchline and (
-            is_new or (saved.get("Punchline") or {}).get("Original") != punchline
-        )
+        need_desc = bool(description) and (is_new or prefer(saved_desc, description))
+        need_punch = bool(punchline) and (is_new or prefer(saved_punch, punchline))
         if need_desc or need_punch:
             desc_todo.append((key, punchline, description))
 
@@ -314,16 +346,23 @@ def main(argv=None) -> int:
             translated_p, translated_d = result.get(i, ("", ""))
             with _lock:
                 entry = table.setdefault(key, {})
-                if punchline:
+
+                # 只在「原文变了」或「还没有译文」时写入：
+                # 只改详情的条目不应该把一行简介也重翻一遍（否则会造成无意义的译文漂泊）
+                saved_p = entry.get("Punchline") or {}
+                if punchline and (saved_p.get("Original") != punchline or not saved_p.get("Translated")):
                     entry["Punchline"] = {
                         "Original": punchline,
                         "Translated": translated_p or punchline,
                     }
-                if description:
+
+                saved_d = entry.get("Description") or {}
+                if description and (saved_d.get("Original") != description or not saved_d.get("Translated")):
                     entry["Description"] = {
                         "Original": description,
                         "Translated": translated_d or description,
                     }
+
                 usage["ok"] += 1
 
     name_batches = [name_todo[i:i + 25] for i in range(0, len(name_todo), 25)]
