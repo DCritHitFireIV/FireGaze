@@ -49,6 +49,7 @@ NAME_PROMPT = (
 DESC_PROMPT = (
     "你是专业的 FFXIV 插件文档译者。请把用户给出的 JSON 中每个插件的简介翻译成简体中文。"
     "规则：保持专有名词/插件名/命令（如 Penumbra、Glamourer、/pdr）的英文原样；"
+    "如果输入里带 glossary（英文→国服官方中文的术语表），**必须使用其中的译名**；"
     "不要添加解释、注释或礼貌用语；保留原有换行风格；只输出 JSON，不要代码块。"
     '输出格式：{"items":[{"id":<原 id>,"p":"<Punchline 译文>","d":"<Description 译文>"}]}'
 )
@@ -292,6 +293,16 @@ def main(argv=None) -> int:
     usage = {"in": 0, "out": 0, "ok": 0, "fail": 0}
     started = time.time()
 
+    # 术语表（英文→国服官方译名）：只在真要翻译时才拉，失败不影响主流程
+    glossary: dict[str, str] = {}
+    try:
+        import ffxiv_glossary
+        print("正在构建 FFXIV 官方术语表…")
+        glossary = ffxiv_glossary.build_glossary(refresh=False, verbose=False)
+        print(f"术语表就绪：{len(glossary)} 条")
+    except Exception as error:  # noqa: BLE001
+        print(f"术语表不可用（继续翻译）：{error}")
+
     def translate_names(batch: list[tuple[str, str]]):
         payload = {"items": [{"id": i, "name": name} for i, (_, name) in enumerate(batch)]}
         result: dict[int, str] = {}
@@ -321,10 +332,21 @@ def main(argv=None) -> int:
                 usage["ok"] += 1
 
     def translate_descs(batch: list[tuple[str, str, str]]):
-        payload = {
+        payload: dict = {
             "items": [{"id": i, "p": punchline, "d": description}
                       for i, (_, punchline, description) in enumerate(batch)]
         }
+
+        if glossary:
+            try:
+                import ffxiv_glossary
+                terms = ffxiv_glossary.find_terms(
+                    [f"{p}\n{d}" for _, p, d in batch], glossary)
+                if terms:
+                    payload["glossary"] = [{"en": english, "zh": chinese} for english, chinese in terms]
+            except Exception:  # noqa: BLE001
+                pass
+
         result: dict[int, tuple[str, str]] = {}
         try:
             content = deepseek(api_key, DESC_PROMPT, payload, 8000)
