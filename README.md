@@ -32,7 +32,7 @@ https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/pluginmaster.json
 
 1. 打开 **Dalamud 设置 - 插件 - 第三方插件**，填入上面的仓库链接并保存。
 2. 打开 **插件安装器**，搜索并安装 `FireGaze`。
-3. 进游戏后输入 `/fg` 打开窗口。
+3. 进游戏后输入 `/firegaze` 打开窗口（`/fg` 可能与其它插件冲突，本插件的命令是 `/firegaze`）。
 
 ## 从源码构建
 

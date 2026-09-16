@@ -48,6 +48,7 @@ public sealed class Plugin : IDalamudPlugin
     private PropertyInfo? windowsProp;
     private PropertyInfo? isOpenProp;
     private int tableUpdateBusy;
+    private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
 
     public Plugin(IDalamudPluginInterface pluginInterface)
     {
@@ -86,26 +87,20 @@ public sealed class Plugin : IDalamudPlugin
 
         this.InstallPatches();
 
-        CommandManager.AddHandler(
-            "/fg",
-            new CommandInfo(this.OnCommand)
-            {
-                HelpMessage = "打开 FireGaze 窗口；子命令：/fg on|off|open|log|zh|update",
-            });
-        CommandManager.AddHandler(
+        this.AddCommand(
             "/firegaze",
             new CommandInfo(this.OnCommand)
             {
-                HelpMessage = "同 /fg",
+                HelpMessage = "打开 FireGaze 窗口；子命令：on|off|open|log|zh|update",
             });
-        CommandManager.AddHandler(
+        this.AddCommand(
             "/nar",
             new CommandInfo((_, _) => this.ToggleWindow())
             {
                 HelpMessage = "（旧命令）打开 FireGaze 窗口",
                 ShowInHelp = false,
             });
-        CommandManager.AddHandler(
+        this.AddCommand(
             "/pdz",
             new CommandInfo((_, _) =>
             {
@@ -196,10 +191,34 @@ public sealed class Plugin : IDalamudPlugin
 
         this.pluginInterface.UiBuilder.Draw -= this.windowSystem.Draw;
         this.pluginInterface.UiBuilder.OpenConfigUi -= this.ToggleWindow;
-        CommandManager.RemoveHandler("/fg");
-        CommandManager.RemoveHandler("/firegaze");
-        CommandManager.RemoveHandler("/nar");
-        CommandManager.RemoveHandler("/pdz");
+        foreach (var command in this.registeredCommands)
+        {
+            try
+            {
+                CommandManager.RemoveHandler(command);
+            }
+            catch
+            {
+                // ignore
+            }
+        }
+    }
+
+    /// <summary>
+    /// 注册聊天命令。命令名可能被其他插件占用（如 /fg 已属于别的插件），
+    /// 占用时只记一条警告，不能让插件加载失败。
+    /// </summary>
+    private void AddCommand(string name, CommandInfo info)
+    {
+        try
+        {
+            CommandManager.AddHandler(name, info);
+            this.registeredCommands.Add(name);
+        }
+        catch (Exception e)
+        {
+            Log.Warning($"[FireGaze] 命令 {name} 注册失败（可能已被其他插件占用）：{e.Message}");
+        }
     }
 
     // ------------------------------------------------------------------ 窗口 / 命令
@@ -248,7 +267,7 @@ public sealed class Plugin : IDalamudPlugin
                 Chat.Print("[FireGaze] 正在从 GitHub 更新词表…");
                 break;
             default:
-                Chat.Print("[FireGaze] 用法：/fg [on|off|open|log|zh|update]");
+                Chat.Print("[FireGaze] 用法：/firegaze [on|off|open|log|zh|update]");
                 break;
         }
     }
