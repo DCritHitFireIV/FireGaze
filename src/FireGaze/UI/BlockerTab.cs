@@ -18,7 +18,7 @@ internal sealed class BlockerTab
         var config = this.plugin.Config;
 
         ImGui.TextWrapped("防止浏览插件安装器时自动重载插件仓库。");
-        ImGui.TextDisabled("手动刷新、打开安装器、在卫月设置里改仓库不受影响。（默认关闭，需要时打开）");
+        ImGui.TextDisabled("手动刷新、打开安装器、在卫月设置里改仓库不受影响。");
 
         ImGui.Separator();
         ImGui.Text("拦截模式");
