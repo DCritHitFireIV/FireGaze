@@ -29,8 +29,6 @@ internal sealed class BlockerTab
         }
 
         ImGui.SameLine();
-        ImGui.TextDisabled("(默认) 不拦截");
-
         if (ImGui.RadioButton("全部拦截###ModeAlways", config.BlockerMode == BlockMode.Always))
         {
             this.plugin.SetBlockerMode(BlockMode.Always);

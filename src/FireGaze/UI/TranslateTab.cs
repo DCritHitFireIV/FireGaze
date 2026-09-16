@@ -58,9 +58,6 @@ internal sealed class TranslateTab
             this.plugin.ApplyTranslations();
         }
 
-        ImGui.SameLine();
-        ImGui.TextDisabled("（默认关闭）");
-
         var autoUpdate = config.AutoUpdateTable;
         if (ImGui.Checkbox("每两周自动检查词表更新###AutoUpdateTable", ref autoUpdate))
         {
