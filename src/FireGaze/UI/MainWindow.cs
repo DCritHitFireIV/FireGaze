@@ -7,9 +7,9 @@ namespace FireGaze.UI;
 /// <summary>主窗口的页签。</summary>
 public enum MainTab
 {
-    RepoAudit = 0,
-    Blocker = 1,
-    Translate = 2,
+    Translate = 0,
+    RepoAudit = 1,
+    Blocker = 2,
 }
 
 /// <summary>FireGaze 主窗口（/fg）。</summary>
@@ -51,7 +51,14 @@ internal sealed class MainWindow : Window
 
         if (ImGui.BeginTabBar("###FireGazeTabs"))
         {
-            var flags = this.pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            var flags = this.pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            if (ImGui.BeginTabItem("简介汉化", flags))
+            {
+                this.translateTab.Draw();
+                ImGui.EndTabItem();
+            }
+
+            flags = this.pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("仓库体检", flags))
             {
                 this.repoAuditTab.Draw();
@@ -62,13 +69,6 @@ internal sealed class MainWindow : Window
             if (ImGui.BeginTabItem("列表刷新拦截", flags))
             {
                 this.blockerTab.Draw();
-                ImGui.EndTabItem();
-            }
-
-            flags = this.pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("简介汉化", flags))
-            {
-                this.translateTab.Draw();
                 ImGui.EndTabItem();
             }
 

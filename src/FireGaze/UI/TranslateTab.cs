@@ -7,6 +7,9 @@ internal sealed class TranslateTab
 {
     private readonly Plugin plugin;
 
+    private string? updateMessage;
+    private volatile bool updateInFlight;
+
     public TranslateTab(Plugin plugin)
     {
         this.plugin = plugin;
@@ -16,12 +19,37 @@ internal sealed class TranslateTab
     {
         var config = this.plugin.Config;
 
-        ImGui.TextWrapped(
-            "用内置词表把插件安装器里的简介显示成中文。三个字段可以各自选择展现形式：" +
-            "名字默认「英语原版」，一行简介默认「中文」，插件详情默认「双语（中文 + 空行 + 原文）」。");
+        // ---------------- 顶部：更新词表（最显眼） ----------------
+        if (this.updateInFlight)
+        {
+            ImGui.BeginDisabled();
+            ImGui.Button("从 GitHub 更新词表###UpdateTable");
+            ImGui.EndDisabled();
+        }
+        else if (ImGui.Button("从 GitHub 更新词表###UpdateTable"))
+        {
+            this.updateInFlight = true;
+            this.updateMessage = "正在更新…";
+            _ = Task.Run(async () =>
+            {
+                var (_, message) = await this.plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
+                this.updateMessage = message;
+                this.updateInFlight = false;
+            });
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("重新应用###ApplyNow"))
+        {
+            this.plugin.ApplyTranslations();
+        }
+
+        ImGui.SameLine();
+        ImGui.TextDisabled(this.updateInFlight ? "正在更新…" : this.updateMessage ?? string.Empty);
 
         ImGui.Separator();
 
+        // ---------------- 开关 ----------------
         var enabled = config.TranslateEnabled;
         if (ImGui.Checkbox("启用简介汉化###TranslateEnabled", ref enabled))
         {
@@ -30,7 +58,34 @@ internal sealed class TranslateTab
             this.plugin.ApplyTranslations();
         }
 
-        ImGui.Spacing();
+        ImGui.SameLine();
+        ImGui.TextDisabled("（默认关闭）");
+
+        var autoUpdate = config.AutoUpdateTable;
+        if (ImGui.Checkbox("每两周自动检查词表更新###AutoUpdateTable", ref autoUpdate))
+        {
+            config.AutoUpdateTable = autoUpdate;
+            this.plugin.SaveConfig();
+        }
+
+        ImGui.SameLine();
+        ImGui.TextDisabled($"下次自动检查：{this.DescribeNextCheck()}");
+
+        // ---------------- 词表状态 ----------------
+        ImGui.Text($"词表：{this.plugin.Table.Count} 条 · 上次应用改写 {this.plugin.LastTranslatedCount} 条清单");
+        if (this.plugin.Table.LoadedFrom is not null)
+        {
+            var when = this.plugin.Table.LoadedAt is { } time ? time.ToString("yyyy-MM-dd HH:mm") : "?";
+            ImGui.TextDisabled($"来源：{this.plugin.Table.LoadedFrom}（{when}）");
+        }
+        else
+        {
+            ImGui.TextDisabled("词表未加载");
+        }
+
+        ImGui.Separator();
+
+        // ---------------- 三个字段的呈现方式 ----------------
         if (ImGui.BeginTable("###modeTable", 4, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.PadOuterX))
         {
             ImGui.TableSetupColumn("字段", ImGuiTableColumnFlags.WidthFixed, 90);
@@ -46,58 +101,27 @@ internal sealed class TranslateTab
             ImGui.EndTable();
         }
 
-        ImGui.TextDisabled("双语格式：名字为「中文 (English)」；简介 / 详情为「中文 + 空行 + 原文」。名字的译文取决于词表，没有译名时自动回退原文。");
-
-        ImGui.Separator();
-
-        ImGui.Text($"词表：{this.plugin.Table.Count} 条");
-        ImGui.SameLine();
-        ImGui.TextDisabled(this.plugin.Table.LoadedFrom is null ? "（未加载）" : $"来源：{this.plugin.Table.LoadedFrom}");
-        if (this.plugin.Table.LoadedAt is { } loadedAt)
-        {
-            ImGui.TextDisabled($"词表时间：{loadedAt:yyyy-MM-dd HH:mm}");
-        }
-
-        ImGui.Text($"上次应用：改写 {this.plugin.LastTranslatedCount} 条清单");
-
-        if (ImGui.Button("重新应用###ApplyNow"))
-        {
-            var count = this.plugin.ApplyTranslations();
-            this.plugin.OpenWindow(MainTab.Translate);
-            _ = count;
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Button("从 GitHub 更新词表###UpdateTable"))
-        {
-            this.updateInFlight = true;
-            this.updateMessage = "正在更新…";
-            _ = Task.Run(async () =>
-            {
-                var (_, message) = await this.plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
-                this.updateMessage = message;
-                this.updateInFlight = false;
-            });
-        }
-
-        if (this.updateInFlight)
-        {
-            ImGui.SameLine();
-            ImGui.TextDisabled(this.updateMessage ?? "正在更新…");
-        }
-        else if (!string.IsNullOrEmpty(this.updateMessage))
-        {
-            ImGui.TextWrapped(this.updateMessage);
-        }
-
         ImGui.Spacing();
         ImGui.TextDisabled(
-            "词表按 InternalName 匹配，仅在你看到的原文与我们收录的一致时才替换；" +
-            "上游改了简介或卫月改了字段名时，这一条会自动跳过，重新更新词表即可。");
+            "词表仅在你看到的原文与我们收录的一致时才替换；上游改了简介或卫月改了字段名时自动跳过，重新更新词表即可。");
     }
 
-    private string? updateMessage;
-    private volatile bool updateInFlight;
+    private string DescribeNextCheck()
+    {
+        var config = this.plugin.Config;
+        if (!config.TranslateEnabled || !config.AutoUpdateTable)
+        {
+            return "未启用";
+        }
+
+        if (config.LastTableUpdateCheckUtc == default)
+        {
+            return "游戏启动后";
+        }
+
+        var next = config.LastTableUpdateCheckUtc.AddDays(14);
+        return next <= DateTime.UtcNow ? "即将检查" : next.ToLocalTime().ToString("yyyy-MM-dd HH:mm");
+    }
 
     private void ModeRow(string label, string id, DisplayMode current, Action<DisplayMode> set)
     {

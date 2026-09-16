@@ -17,17 +17,19 @@ internal sealed class BlockerTab
     {
         var config = this.plugin.Config;
 
-        ImGui.TextWrapped(
-            "部分插件会在后台用反射调用卫月的「重载全部插件仓库」接口，刷新完成时安装器里的可用插件列表会被重建，" +
-            "正在浏览的位置会被顶回顶部。实测来源包括：每日随记（Daily Routines）核心管理器的 10 分钟定时器、" +
-            "XSZToolbox 的自更新模块，以及一些公共库（如 OmenTools）在插件安装依赖时的转发调用。");
-        ImGui.Spacing();
-        ImGui.TextWrapped(
-            "本功能给这两个入口挂钩子：识别调用来源 —— 插件自己发起的后台刷新一律跳过；" +
-            "手动点「刷新插件列表」、打开插件安装器、在卫月设置里改仓库、以及 FireGaze 自己做的改动，都照常生效。");
+        ImGui.TextWrapped("防止浏览插件安装器时自动重载插件仓库。");
+        ImGui.TextDisabled("手动刷新、打开安装器、在卫月设置里改仓库不受影响。（默认关闭，需要时打开）");
 
         ImGui.Separator();
         ImGui.Text("拦截模式");
+
+        if (ImGui.RadioButton("关闭拦截###ModeOff", config.BlockerMode == BlockMode.Off))
+        {
+            this.plugin.SetBlockerMode(BlockMode.Off);
+        }
+
+        ImGui.SameLine();
+        ImGui.TextDisabled("(默认) 不拦截");
 
         if (ImGui.RadioButton("全部拦截###ModeAlways", config.BlockerMode == BlockMode.Always))
         {
@@ -35,7 +37,7 @@ internal sealed class BlockerTab
         }
 
         ImGui.SameLine();
-        ImGui.TextDisabled("(默认) 插件发起的后台刷新一律跳过");
+        ImGui.TextDisabled("插件发起的后台刷新一律跳过");
 
         if (ImGui.RadioButton("只在安装器打开时拦截###ModeOpen", config.BlockerMode == BlockMode.InstallerOpenOnly))
         {
@@ -44,14 +46,6 @@ internal sealed class BlockerTab
 
         ImGui.SameLine();
         ImGui.TextDisabled("没在看列表时照常刷新");
-
-        if (ImGui.RadioButton("关闭拦截###ModeOff", config.BlockerMode == BlockMode.Off))
-        {
-            this.plugin.SetBlockerMode(BlockMode.Off);
-        }
-
-        ImGui.SameLine();
-        ImGui.TextDisabled("恢复卫月原始行为");
 
         var writeLog = config.BlockerWriteLog;
         if (ImGui.Checkbox("把拦截记录写进 dalamud.log###WriteLog", ref writeLog))

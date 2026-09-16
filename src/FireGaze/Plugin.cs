@@ -47,12 +47,22 @@ public sealed class Plugin : IDalamudPlugin
     private PropertyInfo? windowSystemProp;
     private PropertyInfo? windowsProp;
     private PropertyInfo? isOpenProp;
+    private int tableUpdateBusy;
 
     public Plugin(IDalamudPluginInterface pluginInterface)
     {
         instance = this;
         this.pluginInterface = pluginInterface;
         this.Config = pluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+
+        // 2.0 之前的默认值是「拦截开启 / 汉化开启」；新默认：两功能都先关着，由用户自己打开
+        if (this.Config.Version < 2)
+        {
+            this.Config.Version = 2;
+            this.Config.BlockerMode = BlockMode.Off;
+            this.Config.TranslateEnabled = false;
+            pluginInterface.SavePluginConfig(this.Config);
+        }
 
         this.ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
         Directory.CreateDirectory(this.ConfigDirectory);
@@ -109,7 +119,11 @@ public sealed class Plugin : IDalamudPlugin
             });
 
         this.translateTimer = new Timer(10_000) { AutoReset = true };
-        this.translateTimer.Elapsed += (_, _) => this.ApplyTranslationsQuiet();
+        this.translateTimer.Elapsed += (_, _) =>
+        {
+            this.ApplyTranslationsQuiet();
+            this.MaybeAutoUpdateTable();
+        };
         this.translateTimer.Start();
 
         Log.Information(
@@ -584,6 +598,48 @@ public sealed class Plugin : IDalamudPlugin
         }
 
         return (ok, message);
+    }
+
+    /// <summary>每两周自动检查一次词表更新（汉化启用时才生效）。</summary>
+    private void MaybeAutoUpdateTable()
+    {
+        if (!this.Config.TranslateEnabled || !this.Config.AutoUpdateTable)
+        {
+            return;
+        }
+
+        if (this.Config.LastTableUpdateCheckUtc != default &&
+            DateTime.UtcNow - this.Config.LastTableUpdateCheckUtc < TimeSpan.FromDays(14))
+        {
+            return;
+        }
+
+        if (Interlocked.Exchange(ref this.tableUpdateBusy, 1) == 1)
+        {
+            return;
+        }
+
+        _ = Task.Run(async () =>
+        {
+            var success = false;
+            try
+            {
+                var (ok, message) = await this.UpdateTranslationTableAsync().ConfigureAwait(false);
+                success = ok;
+                Log.Information($"[FireGaze] 自动更新词表：{message}");
+            }
+            catch (Exception e)
+            {
+                Log.Warning(e, "[FireGaze] 自动更新词表失败");
+            }
+            finally
+            {
+                // 失败时 1 天后重试，成功则 14 天后再查
+                this.Config.LastTableUpdateCheckUtc = success ? DateTime.UtcNow : DateTime.UtcNow.AddDays(-13);
+                this.SaveConfig();
+                Interlocked.Exchange(ref this.tableUpdateBusy, 0);
+            }
+        });
     }
 
     // ------------------------------------------------------------------ 仓库体检

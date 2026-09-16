@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>FireGaze 仓库体检 — mockup</title>
+<style>
+  :root {
+    --win-bg: #191919;
+    --panel: #1f1f1f;
+    --panel-2: #232323;
+    --title: #2b2b2b;
+    --border: #3a3a3a;
+    --text: #e4e4e4;
+    --muted: #909090;
+    --accent: #ffb35c;
+    --btn: #3c3c3c;
+    --btn-hover: #4a4a4a;
+    --danger: #6b2a2a;
+    --danger-hover: #8a3535;
+    --ok: #79d979;
+    --warn: #f2bf5c;
+    --bad: #f27a7a;
+    --row-a: #1f1f1f;
+    --row-b: #242424;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #101010;
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .stage { padding: 24px; display: flex; justify-content: center; }
+  .window {
+    width: 700px; height: 620px;
+    background: var(--win-bg);
+    border: 1px solid #4d4d4d;
+    border-radius: 4px;
+    box-shadow: 0 18px 48px rgba(0,0,0,.55);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .titlebar {
+    height: 30px; background: var(--title);
+    display: flex; align-items: center; padding: 0 10px;
+    font-weight: 600; letter-spacing: .02em;
+    border-bottom: 1px solid var(--border);
+  }
+  .titlebar .brand { color: var(--accent); }
+  .titlebar .sub { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 12px; }
+  .body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; min-height: 0; flex: 1; }
+
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); }
+  .tab { padding: 5px 12px; color: var(--muted); background: transparent; }
+  .tab.active { color: var(--text); background: var(--panel); border: 1px solid var(--border); border-bottom-color: transparent; border-radius: 3px 3px 0 0; margin-bottom: -1px; }
+
+  .hint { color: var(--muted); }
+  .sep { height: 1px; background: var(--border); margin: 2px 0; }
+
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  button {
+    font: inherit; color: var(--text); background: var(--btn);
+    border: 1px solid #4d4d4d; border-radius: 3px; padding: 4px 10px; cursor: pointer;
+  }
+  button:hover { background: var(--btn-hover); }
+  button.danger { background: var(--danger); border-color: #8a3535; }
+  button.danger:hover { background: var(--danger-hover); }
+  button:disabled { color: #7c7c7c; background: #2c2c2c; border-color: #3a3a3a; cursor: default; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; color: var(--text); }
+  .check { width: 13px; height: 13px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-block; position: relative; background: #2a2a2a; }
+  .check.on::after { content: ""; position: absolute; left: 2px; top: 2px; right: 2px; bottom: 2px; background: #d8d8d8; border-radius: 1px; }
+  .radio { width: 12px; height: 12px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; }
+  .radio.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 50%; }
+
+  .progress { width: 220px; height: 14px; background: #2b2b2b; border: 1px solid #4d4d4d; border-radius: 3px; overflow: hidden; }
+  .progress i { display: block; height: 100%; background: #6f9fe0; }
+  .counters { color: var(--text); }
+
+  .table { flex: 1; min-height: 0; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; }
+  .thead, .trow { display: grid; grid-template-columns: 30px 150px 1fr 128px; align-items: center; }
+  .thead { background: #2a2a2a; color: var(--muted); font-size: 12px; border-bottom: 1px solid var(--border); }
+  .tbody { overflow: auto; }
+  .trow { padding: 3px 0; border-bottom: 1px solid #262626; }
+  .trow:nth-child(odd) { background: var(--row-a); }
+  .trow:nth-child(even) { background: var(--row-b); }
+  .cell { padding: 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ok { color: var(--ok); } .warn { color: var(--warn); } .bad { color: var(--bad); } .muted { color: var(--muted); }
+
+  .toolbar { display: flex; align-items: center; gap: 8px; }
+  .split { color: #5c5c5c; }
+  .status { color: var(--muted); }
+  .tooltip {
+    position: absolute; margin-top: 26px; margin-left: 120px;
+    background: #2f2f2f; border: 1px solid #555; border-radius: 3px;
+    padding: 6px 9px; color: #dcdcdc; font-size: 12px; max-width: 300px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.5);
+  }
+  .arrow { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="window">
+    <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 自动刷新拦截</span></div>
+    <div class="body">
+      <div class="tabs">
+        <div class="tab">简介汉化</div>
+        <div class="tab active">仓库体检</div>
+        <div class="tab">列表刷新拦截</div>
+      </div>
+
+      <div>扫描你添加的全部第三方仓库（包含已停用的）：检查链接还能不能用、内容是不是合法的仓库文件（与卫月同款校验）。</div>
+      <div class="hint">内容不合规 = 拿到的不是合法仓库文件：插件安装器无法识别这些条目，可能导致插件列表残缺或排版错乱。</div>
+      <div class="hint">死链 / 内容不合规的库可以一键停用，或直接删除；删除前会自动备份，删除后可以随时撤回。</div>
+
+      <div class="row">
+        <button>开始体检</button>
+        <span class="chip"><span class="check on"></span>包含已停用的库</span>
+      </div>
+
+      <div class="row">
+        <div class="progress"><i style="width:100%"></i></div>
+        <span class="counters">共 1241 个仓库：可用 1151 · 死链 85 · 内容不合规 2 · 连接失败 3&nbsp;&nbsp;<span class="muted">（上次体检：2026-09-16 20:05）</span></span>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row">
+        <span>显示</span>
+        <span class="chip"><span class="radio on"></span>有问题的</span>
+        <span class="chip"><span class="radio"></span>全部</span>
+        <span class="chip"><span class="radio"></span>死链 + 内容不合规</span>
+        <span class="chip"><span class="radio"></span>已停用</span>
+        <span class="chip"><span class="radio"></span>可用</span>
+        <span class="split">│</span>
+        <button>全选问题项</button>
+        <button>清空选择</button>
+      </div>
+
+      <div class="toolbar">
+        <button>停用所选（3）</button>
+        <button class="danger">删除所选（3）…</button>
+        <span class="split">│</span>
+        <button>撤回上次操作（删除 84 个）</button>
+        <button>打开备份目录</button>
+      </div>
+
+      <div class="status">体检完成：死链 85 · 内容不合规 2 · 连接失败 3（问题项已自动勾选）。</div>
+
+      <div class="table">
+        <div class="thead">
+          <div class="cell"><span class="check on"></span></div>
+          <div class="cell">状态</div>
+          <div class="cell">仓库地址</div>
+          <div class="cell">首次记录</div>
+        </div>
+        <div class="tbody">
+          <div class="trow">
+            <div class="cell"><span class="check on"></span></div>
+            <div class="cell bad">死链</div>
+            <div class="cell">…/raw.githubusercontent.com/yimo0908/DalamudPlugin/main/pluginmaster.json</div>
+            <div class="cell muted">—</div>
+          </div>
+          <div class="trow">
+            <div class="cell"><span class="check on"></span></div>
+            <div class="cell warn">内容不合规</div>
+            <div class="cell">…/Jinjyu1211/AllHud/blob/main/repo.json</div>
+            <div class="cell muted">—</div>
+          </div>
+          <div class="trow">
+            <div class="cell"><span class="check on"></span></div>
+            <div class="cell muted">连接失败</div>
+            <div class="cell">…/raw.githubusercontent.com/example/never-ready/repo.json</div>
+            <div class="cell">2026-09-16 19:24</div>
+          </div>
+          <div class="trow">
+            <div class="cell"><span class="check"></span></div>
+            <div class="cell ok">可用</div>
+            <div class="cell">…/raw.githubusercontent.com/AtmoOmen/DalamudPlugins/main/pluginmaster.json</div>
+            <div class="cell muted">—</div>
+          </div>
+          <div class="trow">
+            <div class="cell"><span class="check"></span></div>
+            <div class="cell ok">可用 · 已停用</div>
+            <div class="cell">…/raw.githubusercontent.com/BluntEXE/VelvetRift/master/repo.json</div>
+            <div class="cell muted">—</div>
+          </div>
+          <div class="trow">
+            <div class="cell"><span class="check"></span></div>
+            <div class="cell ok">可用</div>
+            <div class="cell">…/raw.githubusercontent.com/BeSlightly/DalamudRepoBrowser/refs/heads/master/repo.json</div>
+            <div class="cell muted">—</div>
+          </div>
+          <div class="trow">
+            <div class="cell"><span class="check"></span></div>
+            <div class="cell bad">死链</div>
+            <div class="cell">…/raw.githubusercontent.com/Nexaii/dalamud-plugins/main/repo.json</div>
+            <div class="cell muted">—</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

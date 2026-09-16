@@ -63,7 +63,7 @@ public sealed class Configuration : IPluginConfiguration
 
     // ---------------- 列表自动刷新拦截 ----------------
 
-    public BlockMode BlockerMode { get; set; } = BlockMode.Always;
+    public BlockMode BlockerMode { get; set; } = BlockMode.Off;
 
     public bool BlockerWriteLog { get; set; } = true;
 
@@ -76,7 +76,13 @@ public sealed class Configuration : IPluginConfiguration
 
     // ---------------- 简介汉化 ----------------
 
-    public bool TranslateEnabled { get; set; } = true;
+    public bool TranslateEnabled { get; set; }
+
+    /// <summary>每两周自动从 GitHub 检查一次词表更新（汉化启用时才生效）。</summary>
+    public bool AutoUpdateTable { get; set; } = true;
+
+    /// <summary>上次自动检查词表的时间（UTC）。</summary>
+    public DateTime LastTableUpdateCheckUtc { get; set; }
 
     public DisplayMode NameMode { get; set; } = DisplayMode.Original;
 

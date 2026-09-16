@@ -3,7 +3,7 @@
   <img src="Resources/icon.png" alt="FireGaze" width="160" />
 
   <h1>FireGaze</h1>
-  <h5>卫月 (Dalamud) 插件库工具箱 · 简介汉化 / 仓库体检 / 列表刷新拦截</h5>
+  <h5>卫月 (Dalamud) 插件库工具箱</h5>
 
 <p>
   <a href="https://github.com/DCritHitFireIV/FireGaze/releases"><img alt="最新版本" src="https://img.shields.io/github/v/release/DCritHitFireIV/FireGaze?display_name=release&label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC&style=for-the-badge" /></a>
@@ -16,7 +16,9 @@
 基于 **卫月 (Dalamud)** 平台的 **最终幻想 14 (FF14)** 游戏插件
 Final Fantasy XIV Game Plugin Based On Dalamud.
 
-一个窗口做三件事：**简介汉化**（名字 / 一行简介 / 详情 可各自选 原版·中文·双语）、**仓库体检**（扫描全部第三方库，死链一键停用或删除，带备份与撤回）、**列表刷新拦截**（挡掉插件发起的后台刷新，手动刷新不受影响）。
+提供以下功能：第三方插件简介汉化，第三方插件仓库扫描，浏览插件仓库阻止自动重载
+
+Provides: localization of third-party plugin descriptions; scanning of third-party plugin repositories; blocking automatic reloads while browsing plugin repositories.
 
 ### 仓库 / Repo
 
@@ -31,8 +33,6 @@ https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/pluginmaster.json
 1. 打开 **Dalamud 设置 - 插件 - 第三方插件**，填入上面的仓库链接并保存。
 2. 打开 **插件安装器**，搜索并安装 `FireGaze`。
 3. 进游戏后输入 `/fg` 打开窗口。
-
-命令：`/fg` 开/关窗口 · `/fg on|off|open` 拦截模式 · `/fg log` 拦截记录 · `/fg zh` 重新应用汉化 · `/fg update` 更新词表
 
 ## 从源码构建
 

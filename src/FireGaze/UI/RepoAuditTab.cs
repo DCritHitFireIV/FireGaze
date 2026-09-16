@@ -21,6 +21,7 @@ internal sealed class RepoAuditTab
     private int invalidCount;
     private int unreachableCount;
     private string? statusMessage;
+    private bool statusIsError;
     private string filter = "problems";
     private bool deleteRequested;
 
@@ -32,8 +33,10 @@ internal sealed class RepoAuditTab
     public void Draw()
     {
         ImGui.TextWrapped(
-            "扫描你添加的全部第三方仓库（包含已停用的）：检查链接还能不能用、内容是不是合法的仓库文件（与卫月同款校验）。" +
-            "死链 / 内容不合规的库可以一键停用，或直接删除 —— 删除前会自动备份，删除后可以随时撤回。");
+            "扫描你添加的全部第三方仓库（包含已停用的）：检查链接还能不能用、内容是不是合法的仓库文件（与卫月同款校验）。");
+        ImGui.TextDisabled(
+            "内容不合规 = 拿到的不是合法仓库文件：插件安装器无法识别这些条目，可能导致插件列表残缺或排版错乱。");
+        ImGui.TextDisabled("死链 / 内容不合规的库可以一键停用，或直接删除；删除前会自动备份，删除后可以随时撤回。");
 
         ImGui.Spacing();
 
@@ -68,6 +71,53 @@ internal sealed class RepoAuditTab
             this.plugin.SaveConfig();
         }
 
+        // ---------------- 进度 / 统计 ----------------
+        int d, t, ok, dead, invalid, unreachable;
+        bool scan;
+        lock (this.gate)
+        {
+            d = this.done;
+            t = this.total;
+            ok = this.okCount;
+            dead = this.deadCount;
+            invalid = this.invalidCount;
+            unreachable = this.unreachableCount;
+            scan = this.scanning;
+        }
+
+        if (scan && t > 0)
+        {
+            ImGui.ProgressBar((float)d / t, new Vector2(220, 0), $"{d} / {t}");
+            ImGui.SameLine();
+            ImGui.TextUnformatted($"可用 {ok} · 死链 {dead} · 内容不合规 {invalid} · 连接失败 {unreachable}");
+        }
+        else if (t > 0)
+        {
+            ImGui.TextUnformatted(
+                $"共 {t} 个仓库：可用 {ok} · 死链 {dead} · 内容不合规 {invalid} · 连接失败 {unreachable}");
+            if (this.plugin.Config.LastScanUtc != default)
+            {
+                ImGui.SameLine();
+                ImGui.TextDisabled($"（上次体检：{this.plugin.Config.LastScanUtc.ToLocalTime():yyyy-MM-dd HH:mm}）");
+            }
+        }
+        else
+        {
+            ImGui.TextDisabled("还没有体检过。点「开始体检」扫描一次。");
+        }
+
+        ImGui.Separator();
+
+        // ---------------- 过滤器（选择帮手贴着列表） ----------------
+        ImGui.Text("显示");
+        this.FilterRadio("problems", "有问题的");
+        this.FilterRadio("all", "全部");
+        this.FilterRadio("deadinvalid", "死链 + 内容不合规");
+        this.FilterRadio("disabled", "已停用");
+        this.FilterRadio("ok", "可用");
+
+        ImGui.SameLine();
+        ImGui.TextDisabled("│");
         ImGui.SameLine();
         if (ImGui.Button("全选问题项###SelectProblems"))
         {
@@ -89,48 +139,18 @@ internal sealed class RepoAuditTab
             }
         }
 
-        // ---------------- 进度 / 统计 ----------------
-        int d, t, ok, dead, invalid, unreachable;
-        bool scan;
-        lock (this.gate)
-        {
-            d = this.done;
-            t = this.total;
-            ok = this.okCount;
-            dead = this.deadCount;
-            invalid = this.invalidCount;
-            unreachable = this.unreachableCount;
-            scan = this.scanning;
-        }
+        // ---------------- 操作工具条（列表正上方，始终可见） ----------------
+        this.DrawActionBar();
 
-        if (scan && t > 0)
+        // ---------------- 状态行 ----------------
+        if (!string.IsNullOrEmpty(this.statusMessage))
         {
-            ImGui.ProgressBar((float)d / t, new Vector2(220, 0), $"{d} / {t}");
-            ImGui.SameLine();
-            ImGui.TextUnformatted($"可用 {ok} · 死链 {dead} · 内容异常 {invalid} · 连接失败 {unreachable}");
+            UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.statusMessage);
         }
-        else if (t > 0)
+        else if (!this.scanning)
         {
-            ImGui.TextUnformatted(
-                $"共 {t} 个仓库：可用 {ok} · 死链 {dead} · 内容异常 {invalid} · 连接失败 {unreachable}");
-            if (this.plugin.Config.LastScanUtc != default)
-            {
-                ImGui.SameLine();
-                ImGui.TextDisabled($"（上次体检：{this.plugin.Config.LastScanUtc.ToLocalTime():yyyy-MM-dd HH:mm}）");
-            }
+            ImGui.TextDisabled("提示：删除只把链接从仓库列表里去掉；想留着又不加载，用「停用」即可。");
         }
-        else
-        {
-            ImGui.TextDisabled("还没有体检过。点「开始体检」扫描一次。");
-        }
-
-        // ---------------- 过滤器 ----------------
-        ImGui.Text("显示");
-        this.FilterRadio("problems", "有问题的");
-        this.FilterRadio("all", "全部");
-        this.FilterRadio("deadinvalid", "死链 + 内容异常");
-        this.FilterRadio("disabled", "已停用");
-        this.FilterRadio("ok", "可用");
 
         // ---------------- 结果表 ----------------
         List<RepoAuditItem> snapshot;
@@ -139,7 +159,7 @@ internal sealed class RepoAuditTab
             snapshot = this.Filtered();
         }
 
-        var tableHeight = MathF.Max(140f, ImGui.GetContentRegionAvail().Y - 92f);
+        var tableHeight = MathF.Max(140f, ImGui.GetContentRegionAvail().Y - 8f);
         var tableFlags = ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
                          ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings;
 
@@ -173,9 +193,20 @@ internal sealed class RepoAuditTab
                 ImGui.TableNextColumn();
                 var label = item.StatusText + (item.IsEnabled ? string.Empty : " · 已停用");
                 UiHelpers.ColoredText(UiHelpers.StatusColor(item.Status), label);
-                if (ImGui.IsItemHovered() && !string.IsNullOrEmpty(item.Note))
+                if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip(item.Note);
+                    var tip = item.Status switch
+                    {
+                        RepoStatus.Invalid => "内容不合规：插件安装器无法识别这些条目，可能导致插件列表残缺或排版错乱。\n",
+                        RepoStatus.Dead => "链接已失效（404 / 410）。\n",
+                        RepoStatus.Unreachable => "网络问题（超时 / 证书 / 服务器错误），不一定是死链。\n",
+                        RepoStatus.Blocked => "服务器拒绝访问（可能是私有仓库或限流）。\n",
+                        _ => string.Empty,
+                    };
+                    if (!string.IsNullOrEmpty(item.Note) || !string.IsNullOrEmpty(tip))
+                    {
+                        ImGui.SetTooltip(tip + (item.Note ?? string.Empty));
+                    }
                 }
 
                 ImGui.TableNextColumn();
@@ -205,7 +236,15 @@ internal sealed class RepoAuditTab
             ImGui.EndTable();
         }
 
-        // ---------------- 操作按钮（始终可见） ----------------
+        this.DrawDeleteConfirmPopup();
+    }
+
+    /// <summary>
+    /// 操作工具条：选择类操作（停用 / 删除）在前，删除用红色并与安全操作分开；
+    /// 恢复类操作（撤回 / 备份）在后，用竖线分隔；无选择时按钮置灰并给出提示。
+    /// </summary>
+    private void DrawActionBar()
+    {
         var selectedCount = this.selected.Count;
         var canAct = !this.scanning && selectedCount > 0;
 
@@ -214,15 +253,15 @@ internal sealed class RepoAuditTab
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button($"停用所选（{selectedCount}）###DisableSelected"))
+        ImGui.Button($"停用所选（{selectedCount}）###DisableSelected");
+        if (ImGui.IsItemClicked() && canAct)
         {
             this.DisableSelected();
         }
 
-        ImGui.SameLine();
-        if (ImGui.Button($"删除所选（{selectedCount}）…###DeleteSelected"))
+        if (!canAct && ImGui.IsItemHovered())
         {
-            this.deleteRequested = true;
+            ImGui.SetTooltip("先在下面的列表里勾选要处理的仓库");
         }
 
         if (!canAct)
@@ -230,6 +269,36 @@ internal sealed class RepoAuditTab
             ImGui.EndDisabled();
         }
 
+        ImGui.SameLine();
+
+        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.42f, 0.16f, 0.16f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.56f, 0.21f, 0.21f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.64f, 0.25f, 0.25f, 1f));
+        if (!canAct)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        ImGui.Button($"删除所选（{selectedCount}）…###DeleteSelected");
+        if (ImGui.IsItemClicked() && canAct)
+        {
+            this.deleteRequested = true;
+        }
+
+        if (!canAct && ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("先在下面的列表里勾选要处理的仓库");
+        }
+
+        if (!canAct)
+        {
+            ImGui.EndDisabled();
+        }
+
+        ImGui.PopStyleColor(3);
+
+        ImGui.SameLine();
+        ImGui.TextDisabled("│");
         ImGui.SameLine();
 
         var undo = this.plugin.Config.UndoHistory.Count > 0
@@ -248,33 +317,18 @@ internal sealed class RepoAuditTab
         {
             if (ImGui.Button($"撤回上次操作（{undo.Describe()}）###Undo"))
             {
-                this.statusMessage = this.plugin.TryUndoLast(out var message)
-                    ? message
-                    : "撤回失败：" + message;
+                var ok = this.plugin.TryUndoLast(out var message);
+                this.statusMessage = ok ? message : "撤回失败：" + message;
+                this.statusIsError = !ok;
                 this.RefreshFromLive();
             }
 
             ImGui.SameLine();
-            ImGui.TextDisabled($"备份在插件配置目录的 backups/ 里");
+            if (ImGui.Button("打开备份目录###OpenBackups"))
+            {
+                this.plugin.OpenBackupDirectory();
+            }
         }
-
-        ImGui.SameLine();
-        if (ImGui.Button("打开备份目录###OpenBackups"))
-        {
-            this.plugin.OpenBackupDirectory();
-        }
-
-        // ---------------- 状态行 ----------------
-        if (!string.IsNullOrEmpty(this.statusMessage))
-        {
-            ImGui.TextWrapped(this.statusMessage);
-        }
-        else if (!this.scanning)
-        {
-            ImGui.TextDisabled("提示：删除只会把链接从仓库列表里去掉；想留着又不想加载，用「停用」即可。");
-        }
-
-        this.DrawDeleteConfirmPopup();
     }
 
     private void FilterRadio(string key, string label)
@@ -315,6 +369,7 @@ internal sealed class RepoAuditTab
         if (error is not null)
         {
             this.statusMessage = "读取仓库列表失败：" + error;
+            this.statusIsError = true;
             return;
         }
 
@@ -334,6 +389,7 @@ internal sealed class RepoAuditTab
         if (list.Count == 0)
         {
             this.statusMessage = "仓库列表是空的（或者都被排除了）。";
+            this.statusIsError = true;
             return;
         }
 
@@ -349,6 +405,7 @@ internal sealed class RepoAuditTab
         }
 
         this.statusMessage = $"开始体检 {list.Count} 个仓库…";
+        this.statusIsError = false;
 
         var cts = new CancellationTokenSource();
         this.cancellation = cts;
@@ -386,16 +443,29 @@ internal sealed class RepoAuditTab
             catch (OperationCanceledException)
             {
                 this.statusMessage = "扫描已取消。";
+                this.statusIsError = false;
             }
             catch (Exception e)
             {
                 this.statusMessage = "扫描出错：" + e.Message;
+                this.statusIsError = true;
             }
             finally
             {
+                int dead, invalid, unreachable;
                 lock (this.gate)
                 {
                     this.scanning = false;
+                    dead = this.deadCount;
+                    invalid = this.invalidCount;
+                    unreachable = this.unreachableCount;
+                }
+
+                if (this.statusMessage?.StartsWith("扫描出错") != true)
+                {
+                    this.statusMessage =
+                        $"体检完成：死链 {dead} · 内容不合规 {invalid} · 连接失败 {unreachable}（问题项已自动勾选）。";
+                    this.statusIsError = false;
                 }
 
                 this.plugin.Config.LastScanUtc = DateTime.UtcNow;
@@ -418,6 +488,7 @@ internal sealed class RepoAuditTab
         if (error is not null)
         {
             this.statusMessage = "读取仓库列表失败：" + error;
+            this.statusIsError = true;
             return;
         }
 
@@ -440,6 +511,7 @@ internal sealed class RepoAuditTab
         if (record.Entries.Count == 0)
         {
             this.statusMessage = "所选仓库都已经处于停用状态。";
+            this.statusIsError = false;
             return;
         }
 
@@ -447,6 +519,7 @@ internal sealed class RepoAuditTab
         if (error is not null)
         {
             this.statusMessage = "停用失败：" + error;
+            this.statusIsError = true;
             return;
         }
 
@@ -455,6 +528,7 @@ internal sealed class RepoAuditTab
         this.plugin.Repos.TriggerReload(out _);
 
         this.statusMessage = $"已停用 {changed} 个仓库，配置已保存（随时可以点「撤回上次操作」恢复）。";
+        this.statusIsError = false;
         this.RefreshFromLive();
     }
 
@@ -464,6 +538,7 @@ internal sealed class RepoAuditTab
         if (string.IsNullOrEmpty(backup))
         {
             this.statusMessage = "备份失败，已取消删除：" + error;
+            this.statusIsError = true;
             return;
         }
 
@@ -471,6 +546,7 @@ internal sealed class RepoAuditTab
         if (error is not null)
         {
             this.statusMessage = "读取仓库列表失败：" + error;
+            this.statusIsError = true;
             return;
         }
 
@@ -493,6 +569,7 @@ internal sealed class RepoAuditTab
         if (record.Entries.Count == 0)
         {
             this.statusMessage = "所选的仓库已经不在列表里了。";
+            this.statusIsError = false;
             return;
         }
 
@@ -500,6 +577,7 @@ internal sealed class RepoAuditTab
         if (error is not null)
         {
             this.statusMessage = "删除失败：" + error;
+            this.statusIsError = true;
             return;
         }
 
@@ -510,6 +588,7 @@ internal sealed class RepoAuditTab
         this.statusMessage =
             $"已删除 {removed} 个仓库链接（备份：{Path.GetFileName(backup)}）。" +
             "可以点「撤回上次操作」把链接放回原位置。";
+        this.statusIsError = false;
         this.RefreshFromLive();
     }
 
