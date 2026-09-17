@@ -360,6 +360,76 @@ internal static class PluginIconLookup
         return id?.ToString() ?? entry.InternalName;
     }
 
+    /// <summary>
+    /// 把本地缓存的图标纹理**塞回卫月的图标缓存**：插件安装器画到这些插件时会直接命中，
+    /// 不必等它自己重新下载。只在「卫月自己也没有」时补位，绝不覆盖它已经下好的。
+    /// </summary>
+    /// <returns>成功时给出键与被放入的对象（撤回时用对象比对，避免误删卫月自己的）。</returns>
+    internal static bool TryInject(
+        InstalledPluginEntry entry,
+        IDalamudTextureWrap wrap,
+        out string key,
+        out object? instance)
+    {
+        key = string.Empty;
+        instance = null;
+
+        if (!TryResolve() || iconMapField?.GetValue(imageCache) is not IDictionary map)
+        {
+            return false;
+        }
+
+        try
+        {
+            key = KeyOf(entry);
+            if (map.Contains(key) && map[key] is not null)
+            {
+                return false;   // 卫月已有自己的纹理，不插手
+            }
+
+            var loadedIconType = imageCache!.GetType()
+                .GetNestedType("LoadedIcon", BindingFlags.Public | BindingFlags.NonPublic);
+            if (loadedIconType is null)
+            {
+                return false;
+            }
+
+            instance = Activator.CreateInstance(loadedIconType, wrap, DateTime.UtcNow);
+            if (instance is null)
+            {
+                return false;
+            }
+
+            map[key] = instance;
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>插件卸载时撤回我们注入的那一条（只当内容还是我们放进去的那个对象）。</summary>
+    internal static void TryRemoveInjected(string key, object instance)
+    {
+        if (!TryResolve() || iconMapField?.GetValue(imageCache) is not IDictionary map)
+        {
+            return;
+        }
+
+        try
+        {
+            if (map.Contains(key) && ReferenceEquals(map[key], instance))
+            {
+                map.Remove(key);
+            }
+        }
+        catch
+        {
+            // ignore
+        }
+    }
+
     /// <summary>拿卫月图标缓存服务（一次解析，失败就不再试）。</summary>
     private static bool TryResolve()
     {

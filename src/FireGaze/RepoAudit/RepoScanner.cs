@@ -53,6 +53,9 @@ public sealed class RepoAuditItem
 
     public DateTime CheckedUtc { get; set; }
 
+    /// <summary>本次扫描中该仓库命中 304（内容未变，结论沿用上次）——只用于统计与日志。</summary>
+    public bool NotModifiedThisRun { get; set; }
+
     /// <summary>值得处理的问题（会出现在「有问题的」筛选里）。</summary>
     public bool IsProblem => this.Status
         is RepoStatus.Dead or RepoStatus.Invalid or RepoStatus.Blocked or RepoStatus.Unreachable;
@@ -75,7 +78,15 @@ public sealed class RepoAuditItem
 }
 
 /// <summary>扫描进度。</summary>
-public readonly record struct ScanProgress(int Done, int Total, int Ok, int Dead, int Invalid, int Blocked, int Unreachable);
+public readonly record struct ScanProgress(
+    int Done,
+    int Total,
+    int Ok,
+    int Dead,
+    int Invalid,
+    int Blocked,
+    int Unreachable,
+    int NotModified = 0);
 
 /// <summary>
 /// 用卫月同款方式体检第三方仓库：
@@ -88,11 +99,31 @@ public static class RepoScanner
     private const int Concurrency = 6;
     private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(18);
 
-    /// <summary>URL → ETag / Last-Modified：下次带上做条件请求，没变就 304，不用重下整份仓库 JSON。</summary>
-    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> EtagCache = new(StringComparer.Ordinal);
-    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> LastModifiedCache = new(StringComparer.Ordinal);
+    /// <summary>
+    /// URL → 上一次的结论（连同 ETag / Last-Modified）。
+    /// 条件请求拿到 304 时用它**恢复上次状态**——否则重新体检时「内容没变」会被当成「未检查」（2026-09-18 用户报的「状态全变未检查」）。
+    /// </summary>
+    private sealed record CachedOutcome(
+        string? ETag,
+        string? LastModified,
+        RepoStatus Status,
+        string? Note,
+        int HttpStatus,
+        int PluginCount,
+        int DroppedCount);
 
-    private sealed record FetchResult(string Url, int Status, string? Error, string? Text, bool Success, bool NotModified = false);
+    /// <summary>URL → ETag / Last-Modified / 上次结论：下次带上做条件请求，没变就 304，不用重下整份仓库 JSON。</summary>
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, CachedOutcome> OutcomeCache = new(StringComparer.Ordinal);
+
+    private sealed record FetchResult(
+        string Url,
+        int Status,
+        string? Error,
+        string? Text,
+        bool Success,
+        bool NotModified = false,
+        string? ETag = null,
+        string? LastModified = null);
 
     private sealed record FetchOutcome(FetchResult? Success, List<FetchResult> Failures);
 
@@ -161,6 +192,7 @@ public static class RepoScanner
         var invalid = 0;
         var blocked = 0;
         var unreachable = 0;
+        var notModified = 0;
         var gate = new object();
 
         var semaphore = new SemaphoreSlim(Concurrency, Concurrency);
@@ -176,7 +208,7 @@ public static class RepoScanner
                 semaphore.Release();
             }
 
-            int d, o, de, iv, bl, un;
+            int d, o, de, iv, bl, un, nm;
             lock (gate)
             {
                 done++;
@@ -195,9 +227,16 @@ public static class RepoScanner
                     case RepoStatus.Invalid:
                         invalid++;
                         break;
+                    case RepoStatus.Unknown:
+                        break;   // 理论上不会发生：304 会恢复上次结论（见 CachedOutcome）
                     default:
                         unreachable++;
                         break;
+                }
+
+                if (item.NotModifiedThisRun)
+                {
+                    notModified++;
                 }
 
                 d = done;
@@ -206,10 +245,11 @@ public static class RepoScanner
                 iv = invalid;
                 bl = blocked;
                 un = unreachable;
+                nm = notModified;
             }
 
             onItemDone?.Invoke(item);
-            onProgress?.Invoke(new ScanProgress(d, items.Count, o, de, iv, bl, un));
+            onProgress?.Invoke(new ScanProgress(d, items.Count, o, de, iv, bl, un, nm));
         });
 
         await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -218,6 +258,7 @@ public static class RepoScanner
     private static async Task CheckOneAsync(HttpClient client, RepoAuditItem item, CancellationToken cancellationToken)
     {
         item.CheckedUtc = DateTime.UtcNow;
+        item.NotModifiedThisRun = false;
 
         if (string.IsNullOrWhiteSpace(item.Url))
         {
@@ -235,7 +276,22 @@ public static class RepoScanner
 
             if (success.NotModified)
             {
-                // 仓库内容没变：保留上次的结论，不做重复校验
+                // 内容没变：恢复上次的结论（状态 / 备注 / 插件数），不要留下「未检查」
+                item.NotModifiedThisRun = true;
+                if (OutcomeCache.TryGetValue(success.Url, out var cached))
+                {
+                    item.Status = cached.Status;
+                    item.Note = cached.Note;
+                    item.HttpStatus = cached.HttpStatus;
+                    item.PluginCount = cached.PluginCount;
+                    item.DroppedCount = cached.DroppedCount;
+                }
+                else
+                {
+                    item.Status = RepoStatus.Ok;
+                    item.Note = "内容未变（304）";
+                }
+
                 return;
             }
 
@@ -251,6 +307,7 @@ public static class RepoScanner
             {
                 item.Status = RepoStatus.Invalid;
                 item.Note = "内容不是合法仓库 JSON：" + check.Error;
+                Remember(success, item);
                 return;
             }
 
@@ -260,10 +317,29 @@ public static class RepoScanner
             item.Note = check.Count == 0
                 ? "仓库里没有任何插件条目"
                 : $"{check.Count} 个插件" + (check.Dropped > 0 ? $"，{check.Dropped} 条会被卫月丢弃" : string.Empty);
+            Remember(success, item);
             return;
         }
 
         Classify(item, outcome.Failures);
+
+        // 记下这次结论：条件请求下次带上 ETag，拿到 304 就能原样恢复
+        static void Remember(FetchResult success, RepoAuditItem item)
+        {
+            if (string.IsNullOrEmpty(success.ETag) && string.IsNullOrEmpty(success.LastModified))
+            {
+                return;
+            }
+
+            OutcomeCache[success.Url] = new CachedOutcome(
+                success.ETag,
+                success.LastModified,
+                item.Status,
+                item.Note,
+                item.HttpStatus,
+                item.PluginCount,
+                item.DroppedCount);
+        }
     }
 
     private static void Classify(RepoAuditItem item, List<FetchResult> failures)
@@ -359,14 +435,17 @@ public static class RepoScanner
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             // 条件请求：带上上次的 ETag / Last-Modified，没变就是 304（省流量、也省时间）
-            if (EtagCache.TryGetValue(url, out var etag))
+            if (OutcomeCache.TryGetValue(url, out var cached))
             {
-                request.Headers.TryAddWithoutValidation("If-None-Match", etag);
-            }
+                if (!string.IsNullOrEmpty(cached.ETag))
+                {
+                    request.Headers.TryAddWithoutValidation("If-None-Match", cached.ETag);
+                }
 
-            if (LastModifiedCache.TryGetValue(url, out var lastModified))
-            {
-                request.Headers.TryAddWithoutValidation("If-Modified-Since", lastModified);
+                if (!string.IsNullOrEmpty(cached.LastModified))
+                {
+                    request.Headers.TryAddWithoutValidation("If-Modified-Since", cached.LastModified);
+                }
             }
 
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -381,18 +460,16 @@ public static class RepoScanner
                 return new FetchResult(url, 304, null, null, true, true);
             }
 
-            if (response.Headers.ETag is { } newEtag)
-            {
-                EtagCache[url] = newEtag.ToString();
-            }
-
-            if (response.Content.Headers.LastModified is { } modified)
-            {
-                LastModifiedCache[url] = modified.ToString("R");
-            }
-
             var text = await response.Content.ReadAsStringAsync(CancellationToken.None).ConfigureAwait(false);
-            return new FetchResult(url, (int)response.StatusCode, null, text, response.IsSuccessStatusCode);
+            return new FetchResult(
+                url,
+                (int)response.StatusCode,
+                null,
+                text,
+                response.IsSuccessStatusCode,
+                false,
+                response.Headers.ETag?.ToString(),
+                response.Content.Headers.LastModified?.ToString("R"));
         }
         catch (OperationCanceledException)
         {
@@ -410,7 +487,7 @@ public static class RepoScanner
     }
 
     /// <summary>为 GitHub 系地址追加镜像线路（gh.atmoomen.top 只吃 raw 域名；github.com 走 gh-proxy.org）。</summary>
-    private static List<string> BuildChannels(string url)
+    internal static List<string> BuildChannels(string url)
     {
         var list = new List<string> { url };
 

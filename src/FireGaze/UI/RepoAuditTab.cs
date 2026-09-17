@@ -66,11 +66,25 @@ internal sealed class RepoAuditTab
     private readonly List<InstalledPluginEntry> iconWaiting = [];
     private readonly List<InstalledPluginEntry> iconInFlight = [];
     private readonly HashSet<string> iconDead = new(StringComparer.Ordinal);
+
+    /// <summary>后台下载线程完成的队列（UI 线程每帧取；不直接碰 List）。</summary>
+    private readonly System.Collections.Concurrent.ConcurrentQueue<InstalledPluginEntry> iconReady = new();
+
+    /// <summary>后台下载失败的队列。</summary>
+    private readonly System.Collections.Concurrent.ConcurrentQueue<InstalledPluginEntry> iconFailed = new();
+
+    /// <summary>同时在飞几个（用户要求比以前快：8）。</summary>
+    private const int IconConcurrency = 8;
+
+    /// <summary>两次发动之间至少隔多久（毫秒）。</summary>
+    private const int IconKickMs = 100;
+
     private bool iconCheckDone;
     private bool iconDownloadRunning;
     private int iconDownloadTotal;
     private int iconDownloadRequested;
     private int iconDownloadGot;
+    private int iconDownloadFailed;
     private DateTime iconDownloadDeadline;
     private DateTime iconDownloadStartedAt;
     private DateTime nextIconKick;
@@ -101,6 +115,13 @@ internal sealed class RepoAuditTab
         ImGui.TextDisabled("内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。");
 
         // ---------------- 扫描控制 ----------------
+        // 图标下载进行中时，体检按钮就地置灰（别再画第二个同名按钮）
+        var scanBlocked = this.iconDownloadRunning;
+        if (scanBlocked)
+        {
+            ImGui.BeginDisabled();
+        }
+
         if (this.scanning)
         {
             if (ImGui.Button("取消扫描###CancelScan"))
@@ -120,11 +141,8 @@ internal sealed class RepoAuditTab
             this.StartScan();
         }
 
-        if (this.iconDownloadRunning)
+        if (scanBlocked)
         {
-            // 两个网络作业不能同时跑：否则状态行互相覆盖，体检完成句会丢
-            ImGui.BeginDisabled();
-            ImGui.Button("开始体检###StartScanDisabled");
             ImGui.EndDisabled();
             if (ImGui.IsItemHovered())
             {
@@ -143,19 +161,6 @@ internal sealed class RepoAuditTab
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("勾选后连已停用的库一起扫描（该设置会被保存）");
-        }
-
-        // 搜索框放在扫描行，给筛选行留出空间（中文字号下筛选行很宽）
-        ImGui.SameLine();
-        ImGui.SameLine();
-        ImGui.SetNextItemWidth(170);
-        if (ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref this.search, 128))
-        {
-            this.snapshotDirty = true;
-        }
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("按 URL 子串过滤列表（例如输入 \"Atmo\" 只看该作者的库）");
         }
 
         // ---------------- 进度 / 统计 ----------------
@@ -197,7 +202,7 @@ internal sealed class RepoAuditTab
             ImGui.TextWrapped(
                 $"共 {t} 个仓库 ｜ 可用 {ok} · 死链 {dead} · 内容不合规 {invalid} · 拒绝访问 {blocked} · "
                 + $"连接失败 {unreachable}" + (unknown > 0 ? $" · 未检查 {unknown}" : string.Empty)
-                + $" ｜ {machineGroup} ｜ 另：已停用 {disabled}");
+                + $" ｜ {machineGroup} ｜ 已停用 {disabled}");
 
             if (this.plugin.Config.LastScanUtc != default)
             {
@@ -292,7 +297,7 @@ internal sealed class RepoAuditTab
         {
             ImGui.SetTooltip(
                 (indexReady ? string.Empty : "插件数据不可用，暂时不能检查。\n")
-                + "哪些已装插件声明了图标、但图标还没缓存下来。\n"
+                + "哪些已装插件声明了图标、但本地（含落盘缓存）还没有。\n"
                 + "范围是已安装的插件，与上面的筛选和勾选无关；这一步不下载任何东西。");
         }
 
@@ -329,10 +334,10 @@ internal sealed class RepoAuditTab
             ImGui.SetTooltip(
                 (indexReady ? string.Empty : "插件数据不可用，暂时不能下载。\n")
                 + (this.iconCheckDone ? string.Empty : "先点「检查缺图标」，拿到清单再决定。\n")
-                + "让卫月去下载上一步查出来的那些图标。\n"
-                + "限速：每秒最多发动 2 个、同时在下的不超过 4 个。\n"
-                + "本版卫月不落盘缓存图标，重开游戏后会重新下载。\n"
-                + "最多等 45 秒，中途可点「停止下载」。");
+                + "把上一步查出来缺的那些图标下下来（直连 + 镜像竞速，同时最多 8 个）。\n"
+                + "下到的图标会存到本地（配置目录 /icons），重开游戏不用重下，\n"
+                + "插件安装器里也能直接用本地图。\n"
+                + "最多等 120 秒，中途可点「停止下载」。");
         }
 
         if (!canDownload)
@@ -345,6 +350,18 @@ internal sealed class RepoAuditTab
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
                 "读不到卫月的插件列表，可能是卫月升级改了内部字段——「已安装」这一列显示为 —，这次没法判断哪条库链没在用。");
+        }
+
+        // ---------------- 搜索（贴着下面的列表） ----------------
+        ImGui.SetNextItemWidth(220);
+        if (ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref this.search, 128))
+        {
+            this.snapshotDirty = true;
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("按 URL 子串过滤列表（例如输入 \"Atmo\" 只看该作者的库）");
         }
 
         List<RepoAuditItem> snapshot;
@@ -931,16 +948,40 @@ internal sealed class RepoAuditTab
         }
 
         var includeDisabled = this.plugin.Config.ScanIncludeDisabled;
+
+        // 把上一轮的结论先搬过来：重新体检时行上不会闪成「未检查」，真正有变化的那几条会被新结果覆盖
+        Dictionary<string, RepoAuditItem> previous;
+        lock (this.gate)
+        {
+            previous = this.items.ToDictionary(x => x.Url, x => x, StringComparer.Ordinal);
+        }
+
         var list = repos
             .Where(x => includeDisabled || x.IsEnabled)
             .Where(x => !string.IsNullOrWhiteSpace(x.Url))
-            .Select(x => new RepoAuditItem
+            .Select(x =>
             {
-                Url = x.Url,
-                NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(x.Url),
-                IsEnabled = x.IsEnabled,
-                Index = x.Index,
-                FirstSeen = this.plugin.GetFirstSeen(x.Url),
+                var item = new RepoAuditItem
+                {
+                    Url = x.Url,
+                    NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(x.Url),
+                    IsEnabled = x.IsEnabled,
+                    Index = x.Index,
+                    FirstSeen = this.plugin.GetFirstSeen(x.Url),
+                };
+
+                if (previous.TryGetValue(x.Url, out var old) && old.Status != RepoStatus.Unknown)
+                {
+                    item.Status = old.Status;
+                    item.HttpStatus = old.HttpStatus;
+                    item.Note = old.Note;
+                    item.PluginCount = old.PluginCount;
+                    item.DroppedCount = old.DroppedCount;
+                    item.Channel = old.Channel;
+                    item.CheckedUtc = old.CheckedUtc;
+                }
+
+                return item;
             })
             .ToList();
 
@@ -970,6 +1011,7 @@ internal sealed class RepoAuditTab
         this.installedCountsDirty = true;
 
         this.SetStatus($"开始体检 {list.Count} 个仓库…", false);
+        Plugin.Log.Information($"[FireGaze] 开始体检：{list.Count} 个仓库（含已停用 = {(includeDisabled ? "是" : "否")}）");
         var startedAt = DateTime.UtcNow;
 
         var cts = new CancellationTokenSource();
@@ -1046,6 +1088,11 @@ internal sealed class RepoAuditTab
                 this.plugin.TrackFirstSeen();
                 this.plugin.SaveConfig();
                 this.RecomputeCounters();
+
+                Plugin.Log.Information(
+                    $"[FireGaze] 体检完成：用时 {this.lastScanDuration.TotalSeconds:0}s ｜ 共 {this.total} 个仓库 ｜ "
+                    + $"可用 {this.okCount} · 死链 {this.deadCount} · 不合规 {this.invalidCount} · 拒绝 {this.blockedCount} · "
+                    + $"连接失败 {this.unreachableCount} · 未检查 {this.unknownCount}");
             }
         });
     }
@@ -1367,7 +1414,12 @@ internal sealed class RepoAuditTab
                 continue;
             }
 
-            if (PluginIconLookup.TryPeekHandle(entry, out var handle) && !handle.IsNull)
+            // 先试本地落盘缓存（重开游戏后也能直接出图），再试卫月内存里的
+            if (this.plugin.Icons.TryGetHandle(entry, out var cached))
+            {
+                this.iconHandles[entry.InternalName] = cached;
+            }
+            else if (PluginIconLookup.TryPeekHandle(entry, out var handle) && !handle.IsNull)
             {
                 this.iconHandles[entry.InternalName] = handle;
             }
@@ -1504,6 +1556,7 @@ internal sealed class RepoAuditTab
         }
 
         var cached = 0;
+        var fromDisk = 0;
         var noAddress = 0;
 
         this.iconMissing.Clear();
@@ -1514,6 +1567,15 @@ internal sealed class RepoAuditTab
             if (!entry.DeclaresIcon)
             {
                 noAddress++;
+                continue;
+            }
+
+            // 先看我们自己的落盘缓存（重开游戏后也能命中），再看卫月内存里的
+            if (this.plugin.Icons.TryGetHandle(entry, out var cachedHandle) && !cachedHandle.IsNull)
+            {
+                this.iconHandles[entry.InternalName] = cachedHandle;
+                fromDisk++;
+                cached++;
                 continue;
             }
 
@@ -1531,17 +1593,19 @@ internal sealed class RepoAuditTab
         this.iconCheckDone = true;
 
         var names = string.Join("、", this.iconMissing.Take(6).Select(x => x.DisplayName));
-        var summary = $"图标检查：已安装 {index.All.Count} 个插件 ｜ 图标已缓存 {cached} 个 ｜ 缺图标 {this.iconMissing.Count} 个"
+        var summary = $"图标检查：已安装 {index.All.Count} 个插件 ｜ 图标已有 {cached} 个"
+                      + (fromDisk > 0 ? $"，其中本地缓存 {fromDisk} 个" : string.Empty)
+                      + $" ｜ 缺图标 {this.iconMissing.Count} 个"
                       + (noAddress > 0 ? $" ｜ 另有 {noAddress} 个没提供图标地址" : string.Empty)
                       + (this.iconMissing.Count > 0
                           ? $" ｜ {names}" + (this.iconMissing.Count > 6 ? $" 等 {this.iconMissing.Count} 个" : string.Empty)
                           : string.Empty)
-                      + "。本版卫月不落盘缓存图标，重开游戏后要重新下载。";
+                      + "。下好的图标会存在本地，重开游戏不用重下。";
 
         this.SetStatus(summary, false);
     }
 
-    /// <summary>第二步：用户点了下载——按限速把缺的那些交给卫月去下。</summary>
+    /// <summary>第二步：用户点了下载——走我们自己的下载通道（限并发，下完写进本地缓存）。</summary>
     private void StartIconDownload()
     {
         if (this.iconMissing.Count == 0)
@@ -1553,12 +1617,20 @@ internal sealed class RepoAuditTab
         this.iconWaiting.Clear();
         this.iconWaiting.AddRange(this.iconMissing);
         this.iconInFlight.Clear();
+        while (this.iconReady.TryDequeue(out _))
+        {
+        }
+
+        while (this.iconFailed.TryDequeue(out _))
+        {
+        }
 
         this.iconDownloadTotal = this.iconWaiting.Count;
         this.iconDownloadRequested = 0;
         this.iconDownloadGot = 0;
+        this.iconDownloadFailed = 0;
         this.iconDownloadStartedAt = DateTime.Now;
-        this.iconDownloadDeadline = DateTime.Now.AddSeconds(45);
+        this.iconDownloadDeadline = DateTime.Now.AddSeconds(120);
         this.nextIconKick = DateTime.MinValue;
         this.iconDownloadRunning = true;
         this.iconDownloadLine = $"图标下载：已请求 0/{this.iconDownloadTotal} · 拿到 0";
@@ -1566,8 +1638,8 @@ internal sealed class RepoAuditTab
     }
 
     /// <summary>
-    /// 下载推进：每秒最多发动 2 个、同时在下的不超过 4 个（缓速 + 并发上限）；
-    /// 已发动的每帧只做一次只读轮询，不重复下发。
+    /// 下载推进：后台线程只负责下和写盘（结果丢进队列），界面线程在这里取货、建纹理；
+    /// 同时在飞不超过 <see cref="IconConcurrency"/> 个，每 <see cref="IconKickMs"/> 毫秒发动一个。
     /// </summary>
     private void TickIconDownload()
     {
@@ -1585,7 +1657,28 @@ internal sealed class RepoAuditTab
             return;
         }
 
-        // 1) 轮询在下的：拿到就移出
+        // 0) 我们自己的下载：后台已写好盘 → 这里建纹理（界面线程）、计数
+        var loadedAny = false;
+        while (this.iconReady.TryDequeue(out var done))
+        {
+            this.iconInFlight.Remove(done);
+            this.iconDownloadGot++;
+            this.plugin.Icons.EnsureTexture(done);
+            loadedAny = true;
+        }
+
+        while (this.iconFailed.TryDequeue(out var bad))
+        {
+            this.iconInFlight.Remove(bad);
+            this.iconDownloadFailed++;
+        }
+
+        if (loadedAny)
+        {
+            this.plugin.Icons.FlushIndex();
+        }
+
+        // 1) 轮询交给卫月下的（官方库插件）：拿到就移出
         for (var i = this.iconInFlight.Count - 1; i >= 0; i--)
         {
             var entry = this.iconInFlight[i];
@@ -1597,34 +1690,60 @@ internal sealed class RepoAuditTab
             }
         }
 
-        // 2) 缓速发动新的
-        if (this.iconWaiting.Count > 0 && this.iconInFlight.Count < 4 && DateTime.Now >= this.nextIconKick)
+        // 2) 发动新的（一次一个，节奏交给 IconKickMs 控制）
+        if (this.iconWaiting.Count > 0 && this.iconInFlight.Count < IconConcurrency && DateTime.Now >= this.nextIconKick)
         {
             var entry = this.iconWaiting[0];
             this.iconWaiting.RemoveAt(0);
 
-            if (PluginIconLookup.TryPeekHandle(entry, out var ready) && !ready.IsNull)
+            if (this.plugin.Icons.TryGetHandle(entry, out _))
             {
-                this.iconHandles[entry.InternalName] = ready;
-                this.iconDownloadGot++;
+                this.iconDownloadGot++;   // 已在本地（刚下过 / 盘上有）
+            }
+            else if (entry.IsThirdParty && !string.IsNullOrWhiteSpace(entry.IconUrl))
+            {
+                this.KickOurDownload(entry);
             }
             else
             {
-                PluginIconLookup.TryGetHandle(entry, out _);   // 触发卫月下载
+                PluginIconLookup.TryGetHandle(entry, out _);   // 官方库插件：地址由卫月拼，交给它下
                 this.iconInFlight.Add(entry);
             }
 
             this.iconDownloadRequested++;
-            this.nextIconKick = DateTime.Now.AddMilliseconds(500);
+            this.nextIconKick = DateTime.Now.AddMilliseconds(IconKickMs);
         }
 
-        this.iconDownloadLine =
-            $"图标下载：已请求 {this.iconDownloadRequested}/{this.iconDownloadTotal} · 拿到 {this.iconDownloadGot}";
+        this.iconDownloadLine = $"图标下载：已请求 {this.iconDownloadRequested}/{this.iconDownloadTotal} · 拿到 {this.iconDownloadGot}"
+                                + (this.iconDownloadFailed > 0 ? $" · 失败 {this.iconDownloadFailed}" : string.Empty);
 
         if ((this.iconWaiting.Count == 0 && this.iconInFlight.Count == 0) || DateTime.Now >= this.iconDownloadDeadline)
         {
             this.FinishIconDownload();
         }
+    }
+
+    /// <summary>发起一个图标下载（后台线程：下完写盘，结果丢队列）。</summary>
+    private void KickOurDownload(InstalledPluginEntry entry)
+    {
+        this.iconInFlight.Add(entry);
+
+        var url = entry.IconUrl!;
+        _ = Task.Run(async () =>
+        {
+            var result = await IconDownloader.FetchAsync(url, CancellationToken.None).ConfigureAwait(false);
+
+            if (result.Bytes is { Length: > 0 } bytes && IconCache.LooksLikeImage(bytes, result.ContentType))
+            {
+                if (this.plugin.Icons.SaveDownloaded(entry, bytes, result.ContentType))
+                {
+                    this.iconReady.Enqueue(entry);
+                    return;
+                }
+            }
+
+            this.iconFailed.Enqueue(entry);
+        });
     }
 
     /// <summary>
@@ -1639,6 +1758,7 @@ internal sealed class RepoAuditTab
         }
 
         this.iconDownloadRunning = false;
+        this.plugin.Icons.FlushIndex();
 
         var leftover = new List<InstalledPluginEntry>(this.iconWaiting.Count + this.iconInFlight.Count);
         leftover.AddRange(this.iconWaiting);
@@ -1648,6 +1768,7 @@ internal sealed class RepoAuditTab
 
         var total = this.iconDownloadTotal;
         var got = this.iconDownloadGot;
+        var failed = this.iconDownloadFailed;
         var seconds = (DateTime.Now - this.iconDownloadStartedAt).TotalSeconds;
 
         var noAddress = leftover.Count(x => x.IsThirdParty && string.IsNullOrWhiteSpace(x.IconUrl));
@@ -1656,8 +1777,9 @@ internal sealed class RepoAuditTab
             .ToList();
 
         var head = $"图标下载完成：这次请求 {total} 个，拿到 {got} 个"
+                   + (failed > 0 ? $"，失败 {failed} 个" : string.Empty)
                    + (leftover.Count > 0 ? $"，{leftover.Count} 个没拿到" : string.Empty)
-                   + $"；用时 {seconds:0}s。";
+                   + $"；用时 {seconds:0}s。已存的图标重开游戏不用重下。";
 
         if (checkable.Count == 0)
         {

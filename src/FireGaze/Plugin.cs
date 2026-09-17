@@ -32,6 +32,9 @@ public sealed class Plugin : IDalamudPlugin
 
     [PluginService] public static IFramework Framework { get; private set; } = null!;
 
+    /// <summary>纹理服务（图标落盘缓存 → 纹理用；卫月注入）。</summary>
+    [PluginService] public static ITextureProvider Textures { get; private set; } = null!;
+
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
@@ -74,6 +77,8 @@ public sealed class Plugin : IDalamudPlugin
 
         this.ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
         Directory.CreateDirectory(this.ConfigDirectory);
+
+        this.Icons = new UI.IconStore(this.ConfigDirectory);
 
         this.Repos = new DalamudRepos(Path.Combine(this.ConfigDirectory, "backups"));
 
@@ -209,6 +214,9 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>插件配置目录（备份写在这里的 backups/ 下）。</summary>
     public string ConfigDirectory { get; }
 
+    /// <summary>图标落盘缓存（体检页 + 插件安装器共用）。</summary>
+    internal UI.IconStore Icons { get; }
+
     /// <summary>诊断用：与 <see cref="ConfigDirectory"/> 相同（dalamudUI.ini 就在它上两级）。</summary>
     public static string ConfigDirectoryForDiagnostics => instance.ConfigDirectory;
 
@@ -231,6 +239,15 @@ public sealed class Plugin : IDalamudPlugin
     public void Dispose()
     {
         this.SaveConfig(force: true);
+
+        try
+        {
+            this.Icons.Dispose();
+        }
+        catch
+        {
+            // ignore
+        }
 
         try
         {
