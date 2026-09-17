@@ -41,8 +41,6 @@ internal sealed class RepoAuditTab
     private bool sortDescending;
     private bool resetSortRequested;
     private readonly Dictionary<string, ImTextureID> iconHandles = new(StringComparer.Ordinal);
-    private readonly List<InstalledPluginEntry> iconPending = [];
-    private int iconCursor;
 
     // ---------------- 每帧缓存（1000+ 个库时别每帧重算） ----------------
     private List<RepoAuditItem> snapshotCache = [];
@@ -352,11 +350,6 @@ internal sealed class RepoAuditTab
         // ---------------- 结果表 ----------------
         this.TickIconDownload();
 
-        if (this.plugin.Config.ShowInstalledIcons)
-        {
-            this.PumpIconLookups();
-        }
-
         var tableHeight = MathF.Max(120f, ImGui.GetContentRegionAvail().Y - 6f);
         var tableFlags = ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
                          ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings;
@@ -448,6 +441,10 @@ internal sealed class RepoAuditTab
                 for (var rowIndex = clipper.DisplayStart; rowIndex < clipper.DisplayEnd; rowIndex++)
                 {
                     var item = snapshot[rowIndex];
+
+                    // 只对看得见的行做只读检查（不下载）
+                    this.PeekVisibleIcons(item);
+
                     ImGui.TableNextRow();
                     ImGui.TableNextColumn();
 
@@ -1168,20 +1165,6 @@ internal sealed class RepoAuditTab
         this.installedCountsDirty = true;
         this.snapshotDirty = true;
         this.iconHandles.Clear();
-        this.iconPending.Clear();
-        this.iconCursor = 0;
-
-        if (this.installedIndex.Available)
-        {
-            // 预取队列：所有有来源地址的已装插件（不限可见行），每帧取一小批
-            foreach (var entry in this.installedIndex.All)
-            {
-                if (!string.IsNullOrWhiteSpace(entry.RepositoryUrl))
-                {
-                    this.iconPending.Add(entry);
-                }
-            }
-        }
 
         // 不可用时过几秒再试一次（卫月可能还在启动）；但界面一律按「不可用」渲染
         this.installedIndexRetryAfter = this.installedIndex.Available
@@ -1281,34 +1264,31 @@ internal sealed class RepoAuditTab
     }
 
     /// <summary>
-    /// 图标预取：每帧最多试 <paramref name="budget"/> 个（轮转）。
-    /// 不用时间节流：卫月那边一下载完，下一帧就能显示出来。
+    /// 只读地把可见行里已在缓存中的图标取出来显示。
     /// </summary>
-    private void PumpIconLookups(int budget = 12)
+    /// <remarks>
+    /// <b>这里绝不能触发下载</b>：曾经写过“每帧 12 个”的自动预取，185 个插件十几帧内全撒出去，
+    /// 又经 FastDalamudCN 三线路竞速 → 一秒上千行失败日志、网络栈被拖死、游戏未响应。
+    /// 下载一律走「下载图标」按钮那条限速通道。
+    /// </remarks>
+    private void PeekVisibleIcons(RepoAuditItem item)
     {
-        for (var i = 0; i < budget && this.iconPending.Count > 0; i++)
+        if (!this.plugin.Config.ShowInstalledIcons || item.InstalledCount <= 0)
         {
-            if (this.iconCursor >= this.iconPending.Count)
-            {
-                this.iconCursor = 0;
-            }
+            return;
+        }
 
-            var entry = this.iconPending[this.iconCursor];
-
+        foreach (var entry in item.InstalledPlugins)
+        {
             if (this.iconHandles.ContainsKey(entry.InternalName))
             {
-                this.iconPending.RemoveAt(this.iconCursor);
                 continue;
             }
 
-            if (PluginIconLookup.TryGetHandle(entry, out var handle) && !handle.IsNull)
+            if (PluginIconLookup.TryPeekHandle(entry, out var handle) && !handle.IsNull)
             {
                 this.iconHandles[entry.InternalName] = handle;
-                this.iconPending.RemoveAt(this.iconCursor);
-                continue;
             }
-
-            this.iconCursor++;   // 还没好：下次轮到它再看
         }
     }
 
