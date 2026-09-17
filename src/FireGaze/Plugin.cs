@@ -22,7 +22,7 @@ namespace FireGaze;
 /// </summary>
 public sealed class Plugin : IDalamudPlugin
 {
-    private const string HarmonyId = "firegaze.auto-refresh-blocker";
+    private const string HarmonyId = "firegaze.installer-guard";
 
     /// <summary>
     /// 列表刷新拦截（软拦截）：重载照常执行（保留反射调用链，ECommons/OmenTools 等依赖它），
@@ -58,13 +58,10 @@ public sealed class Plugin : IDalamudPlugin
     private PropertyInfo? windowsProp;
     private PropertyInfo? isOpenProp;
     private int tableUpdateBusy;
-    private long userIntentTicks;
+    private long installerVisibleTicks;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
-
-    /// <summary>「用户刚动过安装器」的放行窗口：覆盖一次完整重载（上千仓库可能跑几分钟）。</summary>
-    private static readonly TimeSpan UserIntentWindow = TimeSpan.FromMinutes(3);
 
     public Plugin(IDalamudPluginInterface pluginInterface)
     {
@@ -78,6 +75,18 @@ public sealed class Plugin : IDalamudPlugin
             this.Config.Version = 2;
             this.Config.BlockerMode = BlockMode.Off;
             this.Config.TranslateEnabled = false;
+            pluginInterface.SavePluginConfig(this.Config);
+        }
+
+        // 3.0：拦截规则简化为「安装器打开时不刷新」，旧的「全部跳过」等价于开启
+        if (this.Config.Version < 3)
+        {
+            this.Config.Version = 3;
+            if (this.Config.BlockerMode == BlockMode.Always)
+            {
+                this.Config.BlockerMode = BlockMode.InstallerOpenOnly;
+            }
+
             pluginInterface.SavePluginConfig(this.Config);
         }
 
@@ -348,15 +357,15 @@ public sealed class Plugin : IDalamudPlugin
                 break;
             case "on":
                 this.SetBlockerMode(BlockMode.Always);
-                Chat.Print("[FireGaze] 已开启：插件发起的重载不再重建安装器列表");
+                Chat.Print("[FireGaze] 已开启：安装器打开时不刷新列表");
                 break;
             case "off":
                 this.SetBlockerMode(BlockMode.Off);
-                Chat.Print("[FireGaze] 已关闭列表刷新拦截");
+                Chat.Print("[FireGaze] 已关闭：安装器打开时也照常刷新");
                 break;
             case "open":
                 this.SetBlockerMode(BlockMode.InstallerOpenOnly);
-                Chat.Print("[FireGaze] 只在插件安装器打开时跳过列表重建");
+                Chat.Print("[FireGaze] 已开启：安装器打开时不刷新列表");
                 break;
             case "log":
                 this.PrintBlockedLog();
@@ -419,6 +428,10 @@ public sealed class Plugin : IDalamudPlugin
     // ------------------------------------------------------------------ 博客：拦截
 
     /// <summary>切换拦截模式。</summary>
+    /// <summary>界面开关：开启 = 安装器打开时不刷新列表。</summary>
+    public void SetBlockerEnabled(bool enabled)
+        => this.SetBlockerMode(enabled ? BlockMode.InstallerOpenOnly : BlockMode.Off);
+
     public void SetBlockerMode(BlockMode mode)
     {
         this.Config.BlockerMode = mode;
@@ -519,7 +532,7 @@ public sealed class Plugin : IDalamudPlugin
             if (draw is not null)
             {
                 this.harmony.PatchPrefix(draw, drawPrefix);
-                patched.Add("安装器绘制（采集用户操作）");
+                patched.Add("firegaze.installer.draw");
             }
             else
             {
@@ -530,7 +543,7 @@ public sealed class Plugin : IDalamudPlugin
             if (onOpen is not null)
             {
                 this.harmony.PatchPrefix(onOpen, openPrefix);
-                patched.Add("安装器打开");
+                patched.Add("firegaze.installer.open");
             }
             else
             {
@@ -541,7 +554,7 @@ public sealed class Plugin : IDalamudPlugin
             if (rebuild is not null)
             {
                 this.harmony.PatchPrefix(rebuild, refreshPrefix);
-                patched.Add("列表重建");
+                patched.Add("firegaze.installer.rebuild");
             }
             else
             {
@@ -558,74 +571,59 @@ public sealed class Plugin : IDalamudPlugin
         }
     }
 
-    /// <summary>
-    /// 安装器绘制时的前缀（窗口打开时每帧一次）：记录用户是否正在操作安装器。
-    /// 只读 ImGui IO，不改变任何行为。
-    /// </summary>
+    /// <summary>安装器绘制时的前缀（firegaze.installer.draw，窗口打开时每帧一次）：记录安装器当前可见。</summary>
     private static bool InstallerDrawPrefix()
     {
-        instance?.NoteInstallerActivity();
+        instance?.NoteInstallerVisible();
         return true;
     }
 
-    /// <summary>安装器打开时的前缀：打开本身会触发一次重载，它引发的重建应该被放行。</summary>
+    /// <summary>安装器打开时的前缀（firegaze.installer.open）。</summary>
     private static bool InstallerOpenPrefix()
     {
-        instance?.MarkUserIntent();
+        instance?.NoteInstallerVisible();
         return true;
     }
 
-    /// <summary>列表重建前缀：非用户操作引发的（后台定时重载）就跳过这次重建。</summary>
+    /// <summary>列表重建前缀（firegaze.installer.rebuild）：安装器开着就跳过这次重建。</summary>
     private static bool InstallerRefreshPrefix()
     {
         return instance is null || instance.ShouldAllowListRebuild();
     }
 
-    /// <summary>记录「用户刚动过安装器」——之后一段时间内的列表重建都放行。</summary>
-    private void MarkUserIntent()
+    /// <summary>记录「安装器当前可见」。</summary>
+    private void NoteInstallerVisible()
     {
-        Interlocked.Exchange(ref this.userIntentTicks, DateTime.UtcNow.Ticks);
+        Interlocked.Exchange(ref this.installerVisibleTicks, DateTime.UtcNow.Ticks);
     }
 
-    private void NoteInstallerActivity()
+    /// <summary>安装器是否开着：反射读窗口 IsOpen 为准，Draw/Open 记录做兜底（刚关掉的那一两帧）。</summary>
+    private bool IsInstallerVisible()
     {
-        try
+        if (this.IsInstallerOpen())
         {
-            var io = ImGui.GetIO();
-            if (io.MouseClicked[0] || io.MouseClicked[1] || io.MouseClicked[2])
-            {
-                this.MarkUserIntent();
-            }
+            return true;
         }
-        catch
-        {
-            // 读输入失败不影响任何东西
-        }
+
+        var ticks = Interlocked.Read(ref this.installerVisibleTicks);
+        return ticks != 0 &&
+               DateTime.UtcNow - new DateTime(ticks, DateTimeKind.Utc) <= TimeSpan.FromSeconds(3);
     }
 
     /// <summary>
     /// 是否允许安装器重建「可用插件列表」。
-    /// 规则：用户刚点过/刚打开（<see cref="UserIntentWindow"/> 内）→ 放行；
-    /// 后台重载（插件的定时器等）引发的 → 跳过，列表与滚动位置保持不动。
+    /// 规则：安装器开着 → 跳过这次重建（列表与滚动位置保持不动）；关着 → 照常重建。
     /// </summary>
     private bool ShouldAllowListRebuild()
     {
         try
         {
-            var mode = this.Config.BlockerMode;
-            if (mode == BlockMode.Off)
+            if (this.Config.BlockerMode == BlockMode.Off)
             {
                 return true;
             }
 
-            if (mode == BlockMode.InstallerOpenOnly && !this.IsInstallerOpen())
-            {
-                return true;
-            }
-
-            var ticks = Interlocked.Read(ref this.userIntentTicks);
-            if (ticks != 0 &&
-                DateTime.UtcNow - new DateTime(ticks, DateTimeKind.Utc) <= UserIntentWindow)
+            if (!this.IsInstallerVisible())
             {
                 return true;
             }
@@ -636,7 +634,7 @@ public sealed class Plugin : IDalamudPlugin
                 this.Config.BlockedCount++;
                 count = this.Config.BlockedCount;
 
-                var line = $"{DateTime.Now:HH:mm:ss} 后台重载";
+                var line = $"{DateTime.Now:HH:mm:ss} 安装器打开中";
                 this.Config.RecentBlockedSources.Insert(0, line);
                 while (this.Config.RecentBlockedSources.Count > Configuration.MaxRecentBlocked)
                 {
@@ -648,7 +646,7 @@ public sealed class Plugin : IDalamudPlugin
 
             if (this.Config.BlockerWriteLog)
             {
-                var message = $"[FireGaze] 已跳过安装器列表重建（第 {count} 次）：非用户操作（后台重载）";
+                var message = $"[FireGaze] firegaze.installer.rebuild 已跳过列表重建（第 {count} 次）：安装器打开中";
                 if (count == 1)
                 {
                     Log.Information(message);

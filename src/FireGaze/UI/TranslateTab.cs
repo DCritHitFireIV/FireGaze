@@ -70,8 +70,6 @@ internal sealed class TranslateTab
             ImGui.TextWrapped(this.statusMessage);
         }
 
-        ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
-
         // ---------------- 词表状态 ----------------
         ImGui.Text($"词表：{this.plugin.Table.Count} 条 · 上次应用改写 {this.plugin.LastTranslatedCount} 条清单");
         if (this.plugin.Table.LoadedFrom is not null)
@@ -105,6 +103,7 @@ internal sealed class TranslateTab
         ImGui.Spacing();
         ImGui.TextDisabled(
             "词表仅在你看到的原文与我们收录的一致时才替换；上游改了简介或卫月改了字段名时自动跳过，重新更新词表即可。");
+        ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
     }
 
     private string DescribeNextCheck()
