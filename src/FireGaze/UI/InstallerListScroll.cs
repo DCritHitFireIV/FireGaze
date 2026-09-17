@@ -42,6 +42,8 @@ internal sealed class InstallerListScroll
     private bool loggedStart;
     private bool loggedInstaller;
     private bool loggedList;
+
+    private static bool loggedChain;
     private DateTime lastDump = DateTime.MinValue;
     private long frames;
     private DateTime lastHeartbeat = DateTime.UtcNow;
@@ -90,7 +92,13 @@ internal sealed class InstallerListScroll
         if (!this.loggedInstaller)
         {
             this.loggedInstaller = true;
+            var expectId = ImGuiP.ImHashStr("###XlPluginInstaller");
             Plugin.Log.Information($"[FireGaze] 找到安装器窗口：{WindowName(installer) ?? "(读不到名字)"}（候选命中：{installerHit}）");
+            Plugin.Log.Information(
+                $"[FireGaze] 窗口结构自检：ID=0x{installer.ID:X8}（按名字算是 0x{expectId:X8}）"
+                + $"；Scroll=({installer.Scroll.X:F0},{installer.Scroll.Y:F0})"
+                + $"；ScrollMax=({installer.ScrollMax.X:F0},{installer.ScrollMax.Y:F0})"
+                + $"；LastFrameActive={installer.LastFrameActive}（当前帧 {ImGui.GetFrameCount()}）");
         }
 
         // 安装器这帧有没有在画：LastFrameActive 每帧刷新（WasActive 关窗后会一直留着 true，不能用）
@@ -204,15 +212,26 @@ internal sealed class InstallerListScroll
     /// <summary>找列表子窗口：先按 ImGui 的 child ID 逐层算，再试几个名字。</summary>
     private static ImGuiWindowPtr FindListWindow(ImGuiWindowPtr installer, out string? how)
     {
-        var categories = ImGuiP.FindWindowByID(ImGuiP.GetID(installer, CategoriesChildId));
-        if (!categories.IsNull)
+        // 子窗口 ID = 父窗口 GetID(名字) = ImHashStr(名字, seed=父窗口 ID)。
+        // 父链第一层（安装器窗口）的 ID 已由「按名字找到它」验证过：ImHashStr("###XlPluginInstaller")。
+        var installerId = ImGuiP.ImHashStr("###XlPluginInstaller");
+        var categoriesId = ImGuiP.ImHashStr(CategoriesChildId, installerId);
+        var categories = ImGuiP.FindWindowByID(categoriesId);
+        var listId = ImGuiP.ImHashStr(ListChildId, categoriesId);
+        var byId = categories.IsNull ? ImGuiWindowPtr.Null : ImGuiP.FindWindowByID(listId);
+
+        if (!loggedChain)
         {
-            var byId = ImGuiP.FindWindowByID(ImGuiP.GetID(categories, ListChildId));
-            if (!byId.IsNull)
-            {
-                how = "ID 链（InstallerCategories → ScrollingPlugins）";
-                return byId;
-            }
+            loggedChain = true;
+            Plugin.Log.Information(
+                $"[FireGaze] 子窗口 ID 链：categories=0x{categoriesId:X8}（找到={(categories.IsNull ? "否" : "是")}）"
+                + $"；list=0x{listId:X8}（找到={(byId.IsNull ? "否" : "是")}）");
+        }
+
+        if (!byId.IsNull)
+        {
+            how = "ID 链（InstallerCategories → ScrollingPlugins）";
+            return byId;
         }
 
         var installerName = WindowName(installer);
