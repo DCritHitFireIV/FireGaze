@@ -79,6 +79,15 @@ internal sealed class RepoAuditTab
     /// <summary>两次发动之间至少隔多久（毫秒）。</summary>
     private const int IconKickMs = 100;
 
+    /// <summary>收尾期阈值：待发队列空了、在飞不超过这么多个时，给它们一个短限时。</summary>
+    private const int IconTailMax = 3;
+
+    /// <summary>收尾期最多再等这么久（别为了最后 1～2 个图标干等一分钟）。</summary>
+    private static readonly TimeSpan IconTailGrace = TimeSpan.FromSeconds(4);
+
+    /// <summary>至少要已经完成这么多个，才启用收尾期（小批量不适用，免得把正常的慢请求也砍了）。</summary>
+    private const int IconTailMinDone = 8;
+
     private bool iconCheckDone;
     private bool iconDownloadRunning;
     private int iconDownloadTotal;
@@ -87,6 +96,7 @@ internal sealed class RepoAuditTab
     private int iconDownloadFailed;
     private DateTime iconDownloadDeadline;
     private DateTime iconDownloadStartedAt;
+    private DateTime iconTailDeadline;
     private DateTime nextIconKick;
     private string? iconDownloadLine;
     private List<string>? iconDeadReport;
@@ -353,7 +363,7 @@ internal sealed class RepoAuditTab
                 + "把上一步查出来缺的那些图标下下来（直连 + 镜像竞速，同时最多 8 个）。\n"
                 + "下到的图标会存到本地（配置目录 /icons），重开游戏不用重下，\n"
                 + "插件安装器里也能直接用本地图。\n"
-                + "最多等 120 秒，中途可点「停止下载」。");
+                + "最多等 120 秒；只剩最后几个时会收尾（再等 4 秒就报结果）。中途可点「停止下载」。");
         }
 
         if (!canDownload)
@@ -1652,6 +1662,7 @@ internal sealed class RepoAuditTab
         this.iconDownloadFailed = 0;
         this.iconDownloadStartedAt = DateTime.Now;
         this.iconDownloadDeadline = DateTime.Now.AddSeconds(120);
+        this.iconTailDeadline = default;
         this.nextIconKick = DateTime.MinValue;
         this.iconDownloadRunning = true;
         this.iconDownloadLine = $"图标下载：已请求 0/{this.iconDownloadTotal} · 拿到 0";
@@ -1739,10 +1750,36 @@ internal sealed class RepoAuditTab
             this.nextIconKick = DateTime.Now.AddMilliseconds(IconKickMs);
         }
 
-        this.iconDownloadLine = $"图标下载：已请求 {this.iconDownloadRequested}/{this.iconDownloadTotal} · 拿到 {this.iconDownloadGot}"
-                                + (this.iconDownloadFailed > 0 ? $" · 失败 {this.iconDownloadFailed}" : string.Empty);
+        // 3) 收尾期：待发队列空了、只剩少数几个还在飞（且已经完成了一批）时，只给 4 秒
+        var remaining = this.iconWaiting.Count + this.iconInFlight.Count;
+        var tail = this.iconWaiting.Count == 0
+                   && this.iconInFlight.Count is > 0 and <= IconTailMax
+                   && this.iconDownloadGot + this.iconDownloadFailed >= IconTailMinDone;
 
-        if ((this.iconWaiting.Count == 0 && this.iconInFlight.Count == 0) || DateTime.Now >= this.iconDownloadDeadline)
+        if (tail)
+        {
+            if (this.iconTailDeadline == default)
+            {
+                this.iconTailDeadline = DateTime.Now + IconTailGrace;
+                Plugin.Log.Debug(
+                    $"[FireGaze] 图标下载收尾：只剩 {remaining} 个，最多再等 {IconTailGrace.TotalSeconds:0} 秒");
+            }
+        }
+        else
+        {
+            this.iconTailDeadline = default;
+        }
+
+        var tailLeft = tail ? Math.Max(0, (this.iconTailDeadline - DateTime.Now).TotalSeconds) : 0;
+
+        this.iconDownloadLine = $"图标下载：已请求 {this.iconDownloadRequested}/{this.iconDownloadTotal} · 拿到 {this.iconDownloadGot}"
+                                + (this.iconDownloadFailed > 0 ? $" · 失败 {this.iconDownloadFailed}" : string.Empty)
+                                + (remaining > 0 ? $" · 还剩 {remaining}" : string.Empty)
+                                + (tail ? $"，最多再等 {tailLeft:0} 秒" : string.Empty);
+
+        if ((this.iconWaiting.Count == 0 && this.iconInFlight.Count == 0)
+            || DateTime.Now >= this.iconDownloadDeadline
+            || (tail && DateTime.Now >= this.iconTailDeadline))
         {
             this.FinishIconDownload();
         }
@@ -1845,14 +1882,30 @@ internal sealed class RepoAuditTab
             var deadNames = new List<string>();
             var failed = 0;
 
+            // 整体限时 8 秒：这是收尾确认，不值得让用户等一连串 18 秒超时
+            using var probeBudget = new CancellationTokenSource(TimeSpan.FromSeconds(8));
+
             foreach (var (entry, url) in urls)
             {
-                var probe = await RepoScanner.ProbeUrlAsync(url, CancellationToken.None).ConfigureAwait(false);
-                if (probe.Status is 404 or 410)
+                if (probeBudget.IsCancellationRequested)
                 {
-                    deadNames.Add(entry.InternalName);
+                    failed++;
+                    continue;
                 }
-                else if (!probe.Ok)
+
+                try
+                {
+                    var probe = await RepoScanner.ProbeUrlAsync(url, probeBudget.Token).ConfigureAwait(false);
+                    if (probe.Status is 404 or 410)
+                    {
+                        deadNames.Add(entry.InternalName);
+                    }
+                    else if (!probe.Ok)
+                    {
+                        failed++;
+                    }
+                }
+                catch (OperationCanceledException)
                 {
                     failed++;
                 }
