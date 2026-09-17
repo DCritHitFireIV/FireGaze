@@ -2,11 +2,10 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>仓库体检 × 「本机有没有在用」— 2 状态帧 mockup</title>
+<title>仓库体检 × 「本机装了哪些」+ 图标 + 排序 — 3 状态帧 mockup</title>
 <style>
-  /* 视觉语言同既有还原图：ImGui 深色主题、8pt 网格、层级靠字号/明度，状态色取 UiHelpers.StatusColor。 */
   :root {
-    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a; --row: #212121;
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
     --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
     --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
   }
@@ -15,7 +14,7 @@
     font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.45; }
   .stage { padding: 24px; display: flex; gap: 24px; justify-content: center; align-items: flex-start; }
   .caption { color: var(--muted); font-size: 13px; margin: 0 0 8px 2px; width: 700px; }
-  .window { width: 700px; height: 620px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; }
+  .window { width: 700px; height: 620px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
   .osbar { height: 30px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
   .body { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
   .brandrow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
@@ -30,14 +29,23 @@
   .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .radio { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; flex: none; }
   .radio.on::after { content: ""; position: absolute; inset: 3px; background: #d8d8d8; border-radius: 50%; }
-  .search { flex: 1; min-width: 180px; border: 1px solid #565656; border-radius: 3px; padding: 2px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  .search { flex: 1; min-width: 160px; border: 1px solid #565656; border-radius: 3px; padding: 2px 8px; color: var(--muted); background: #232323; font-size: 14px; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th { text-align: left; color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); padding: 4px 6px; }
+  th { text-align: left; color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); padding: 4px 6px; white-space: nowrap; }
+  th.sortable { cursor: pointer; }
   td { padding: 4px 6px; border-bottom: 1px solid #262626; vertical-align: middle; }
-  tr:nth-child(even) td { background: #1e1e1e; }
+  tr.repo:nth-of-type(odd) td { background: #1e1e1e; }
+  tr.icons td { background: #171717; border-bottom: 1px solid #262626; padding: 4px 6px 6px; }
   .url { color: #cfcfcf; font-size: 13px; }
   .good { color: var(--good); } .bad { color: var(--bad); } .warn { color: var(--warn); } .info { color: var(--info); } .muted { color: var(--muted); }
   .used { color: #9ad3ff; } .unused { color: var(--warn); }
+  .num { color: #dcdcdc; }
+  .car { color: var(--accent); font-size: 12px; }
+  .strip { display: flex; align-items: center; gap: 6px; padding-left: 6px; }
+  .icon { width: 24px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+          font-size: 11px; font-weight: 600; color: #101010; flex: none; }
+  .icon.none { background: #2c2c2c; color: #6f6f6f; border: 1px dashed #4a4a4a; font-weight: 400; }
+  .tip { position: absolute; background: #f0f0f0; color: #141414; font-size: 13px; padding: 3px 8px; border-radius: 3px; box-shadow: 0 2px 8px rgba(0,0,0,.5); white-space: nowrap; }
   .toolbar { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 </style>
 </head>
@@ -45,16 +53,14 @@
 <div class="stage">
 
   <div>
-    <p class="caption">帧 1 — 显示「全部」：每行状态后面多一句灰字（已装 N 个 / 未在使用），其余一处未动</p>
+    <p class="caption">帧 1 — 默认（图标开关关）：多了「已装」一列，列标可点排序；其余一处未动</p>
     <div class="window">
       <div class="osbar">FireGaze</div>
       <div class="body">
         <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
         <div class="hint">扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。</div>
-        <div class="hint">内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。</div>
-        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span><span class="search">搜索 URL…</span></div>
+        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span><span class="row"><span class="chk"></span><span>显示已装插件图标</span></span><span class="search">搜索 URL…</span></div>
         <div class="hint">共 12 个仓库：可用 8 · 死链 1 · 内容不合规 1 · 拒绝访问 0 · 连接失败 1 · 已停用 2 · <span class="unused">未在使用 3</span></div>
-        <div class="hint">上次体检：2026-09-17 21:20 · 用时 4s</div>
         <div class="sep"></div>
         <div class="row"><span>显示</span>
           <span class="row"><span class="radio"></span>有问题的</span>
@@ -66,13 +72,14 @@
           <span class="row"><span class="radio"></span>未在使用</span>
         </div>
         <table>
-          <tr><th style="width:28px"></th><th style="width:190px">状态</th><th>仓库地址</th><th style="width:82px">首次记录</th></tr>
-          <tr><td><span class="chk on"></span></td><td><span class="good">可用</span> <span class="muted">·</span> <span class="used">已装 4 个</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="muted">09-15</td></tr>
-          <tr><td><span class="chk"></span></td><td><span class="good">可用</span> <span class="muted">·</span> <span class="unused">未在使用</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="muted">08-02</td></tr>
-          <tr><td><span class="chk"></span></td><td><span class="bad">死链</span> <span class="muted">·</span> <span class="unused">未在使用</span></td><td class="url">https://example.invalid/pluginmaster.json</td><td class="muted">安装前</td></tr>
-          <tr><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span> <span class="muted">·</span> <span class="used">已装 1 个</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="muted">09-01</td></tr>
-          <tr><td><span class="chk"></span></td><td><span class="good">可用</span> <span class="muted">· 停用 ·</span> <span class="unused">未在使用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="muted">07-11</td></tr>
+          <tr><th style="width:28px"></th><th class="sortable" style="width:150px">状态</th><th class="sortable">仓库地址</th><th class="sortable" style="width:70px">已装 <span class="car">▼</span></th><th class="sortable" style="width:82px">首次记录</th></tr>
+          <tr class="repo"><td><span class="chk on"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="used">4 个</td><td class="muted">09-15</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="unused">未在使用</td><td class="muted">08-02</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="bad">死链</span></td><td class="url">https://example.invalid/pluginmaster.json</td><td class="unused">未在使用</td><td class="muted">安装前</td></tr>
+          <tr class="repo"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="used">1 个</td><td class="muted">09-01</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用 <span class="muted">· 停用</span></span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="unused">未在使用</td><td class="muted">07-11</td></tr>
         </table>
+        <div class="hint">提示：点列标可按该列排序（再点一次反向）。</div>
         <div class="toolbar">
           <span class="btn">停用所选（2）</span><span class="btn danger">删除所选（2）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span>
         </div>
@@ -81,35 +88,79 @@
   </div>
 
   <div>
-    <p class="caption">帧 2 — 显示切到「未在使用」：直接把"这条库我一个插件都没装"筛出来（新增的只有这一个选项）</p>
+    <p class="caption">帧 2 — 打开图标开关：库链下面多一行图标；无图标的排在最后（灰虚线占位）；悬停才显示插件名</p>
     <div class="window">
       <div class="osbar">FireGaze</div>
       <div class="body">
         <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
         <div class="hint">扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。</div>
-        <div class="hint">内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。</div>
-        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span><span class="search">搜索 URL…</span></div>
+        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span><span class="row"><span class="chk on"></span><span>显示已装插件图标</span></span><span class="search">搜索 URL…</span></div>
         <div class="hint">共 12 个仓库：可用 8 · 死链 1 · 内容不合规 1 · 拒绝访问 0 · 连接失败 1 · 已停用 2 · <span class="unused">未在使用 3</span></div>
-        <div class="hint">上次体检：2026-09-17 21:20 · 用时 4s</div>
         <div class="sep"></div>
         <div class="row"><span>显示</span>
           <span class="row"><span class="radio"></span>有问题的</span>
-          <span class="row"><span class="radio"></span>全部</span>
+          <span class="row"><span class="radio on"></span>全部</span>
           <span class="row"><span class="radio"></span>死链 + 不合规</span>
           <span class="row"><span class="radio"></span>连接失败</span>
           <span class="row"><span class="radio"></span>已停用</span>
           <span class="row"><span class="radio"></span>可用</span>
-          <span class="row"><span class="radio on"></span>未在使用</span>
+          <span class="row"><span class="radio"></span>未在使用</span>
         </div>
         <table>
-          <tr><th style="width:28px"></th><th style="width:190px">状态</th><th>仓库地址</th><th style="width:82px">首次记录</th></tr>
-          <tr><td><span class="chk"></span></td><td><span class="good">可用</span> <span class="muted">·</span> <span class="unused">未在使用</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="muted">08-02</td></tr>
-          <tr><td><span class="chk"></span></td><td><span class="bad">死链</span> <span class="muted">·</span> <span class="unused">未在使用</span></td><td class="url">https://example.invalid/pluginmaster.json</td><td class="muted">安装前</td></tr>
-          <tr><td><span class="chk"></span></td><td><span class="good">可用</span> <span class="muted">· 停用 ·</span> <span class="unused">未在使用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="muted">07-11</td></tr>
+          <tr><th style="width:28px"></th><th style="width:150px">状态</th><th>仓库地址</th><th style="width:70px">已装</th><th style="width:82px">首次记录</th></tr>
+          <tr class="repo"><td><span class="chk on"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="used">4 个</td><td class="muted">09-15</td></tr>
+          <tr class="icons"><td></td><td colspan="4"><div class="strip">
+            <span class="icon" style="background:#7fc4ff">Ba</span>
+            <span class="icon" style="background:#ffc46b">BM</span>
+            <span class="icon" style="background:#a6e3a1">Sr</span>
+            <span class="icon none">?</span>
+          </div></td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="unused">未在使用</td><td class="muted">08-02</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="bad">死链</span></td><td class="url">https://example.invalid/pluginmaster.json</td><td class="unused">未在使用</td><td class="muted">安装前</td></tr>
+          <tr class="repo"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="used">1 个</td><td class="muted">09-01</td></tr>
+          <tr class="icons"><td></td><td colspan="4"><div class="strip">
+            <span class="icon" style="background:#d7a2ff">Qt</span>
+          </div></td></tr>
         </table>
-        <div class="hint">（筛选后工具栏的「全选当前（3）」只勾这几条 → 可一键停用/删除）</div>
+        <div class="hint">图标只有在本机缓存里才有；没图标的插件排在最后（灰虚线格）。</div>
         <div class="toolbar">
-          <span class="btn">停用所选（0）</span><span class="btn danger">删除所选（0）…</span><span class="btn">全选当前（3）</span><span class="btn">清空选择</span>
+          <span class="btn">停用所选（2）</span><span class="btn danger">删除所选（2）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span>
+        </div>
+        <div class="tip" style="left:214px; top:596px;">BossMod Reborn</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="caption">帧 3 — 点「已装」列标排行：按已装数量降序（4 → 1 → 未在使用），列标出 ▼，再点一次反向</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="hint">扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。</div>
+        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span><span class="row"><span class="chk"></span><span>显示已装插件图标</span></span><span class="search">搜索 URL…</span></div>
+        <div class="hint">共 12 个仓库：可用 8 · 死链 1 · 内容不合规 1 · 拒绝访问 0 · 连接失败 1 · 已停用 2 · <span class="unused">未在使用 3</span></div>
+        <div class="sep"></div>
+        <div class="row"><span>显示</span>
+          <span class="row"><span class="radio"></span>有问题的</span>
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>死链 + 不合规</span>
+          <span class="row"><span class="radio"></span>连接失败</span>
+          <span class="row"><span class="radio"></span>已停用</span>
+          <span class="row"><span class="radio"></span>可用</span>
+          <span class="row"><span class="radio"></span>未在使用</span>
+        </div>
+        <table>
+          <tr><th style="width:28px"></th><th class="sortable" style="width:150px">状态</th><th class="sortable">仓库地址</th><th class="sortable" style="width:70px">已装 <span class="car">▼</span></th><th class="sortable" style="width:82px">首次记录</th></tr>
+          <tr class="repo"><td><span class="chk on"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="used">4 个</td><td class="muted">09-15</td></tr>
+          <tr class="repo"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="used">1 个</td><td class="muted">09-01</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="unused">未在使用</td><td class="muted">08-02</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="bad">死链</span></td><td class="url">https://example.invalid/pluginmaster.json</td><td class="unused">未在使用</td><td class="muted">安装前</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用 <span class="muted">· 停用</span></span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td class="unused">未在使用</td><td class="muted">07-11</td></tr>
+        </table>
+        <div class="hint">排序只影响显示顺序，不影响筛选与勾选。</div>
+        <div class="toolbar">
+          <span class="btn">停用所选（2）</span><span class="btn danger">删除所选（2）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span>
         </div>
       </div>
     </div>
