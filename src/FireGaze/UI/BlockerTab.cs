@@ -36,10 +36,9 @@ internal sealed class BlockerTab
     {
         var config = this.plugin.Config;
 
-        ImGui.TextWrapped("浏览插件安装器时，列表被后台重载重建会把浏览位置顶回顶部；开启后把重建拦下。");
+        ImGui.TextWrapped("浏览插件安装器时，列表被后台重载重建（或换成「正在加载插件…」）会把浏览位置顶掉；开启后把这两样都拦下。");
         ImGui.TextDisabled("只在安装器一侧拦截：不碰「重载仓库」接口——插件依赖它，重载与插件自动更新照常执行。");
-        ImGui.TextDisabled("开启后：打开安装器触发的那次刷新也会被跳过（列表保持不动）。");
-        ImGui.TextDisabled("在安装器底部点「刷新插件列表」仍然生效（算作用户显式操作）。");
+        ImGui.TextDisabled("关闭时一切照常（不挂钩子、零足迹）。");
 
         ImGui.Separator();
 
@@ -58,7 +57,8 @@ internal sealed class BlockerTab
         ImGui.Separator();
 
         ImGui.Text($"钩子状态：{this.plugin.BlockerStatusText}");
-        ImGui.Text($"已跳过列表重建：{this.plugin.BlockedCount} 次");
+        ImGui.Text($"已跳过列表重建：{this.plugin.BlockedCount} 次 · 最近 {this.plugin.LastSkipNote}");
+        ImGui.Text($"已挡下「正在加载插件…」替换：{this.plugin.ListSuppressNote}");
         ImGui.TextDisabled(string.IsNullOrEmpty(this.plugin.LastAllowNote)
             ? "最近一次放行：—"
             : $"最近一次放行：{this.plugin.LastAllowNote}");
@@ -91,15 +91,12 @@ internal sealed class BlockerTab
 
     private void DrawWindowSection()
     {
-        ImGui.Text("安装器窗口位置");
+        ImGui.Text("列表浏览位置");
 
-        var remember = this.plugin.Config.RememberInstallerWindow;
-        if (ImGui.Checkbox("记住窗口位置（下次在原处打开）###RememberWin", ref remember))
+        var remember = this.plugin.Config.RememberListScroll;
+        if (ImGui.Checkbox("记住看到哪里（下次打开接着看）###RememberScroll", ref remember))
         {
-            this.plugin.SetRememberInstallerWindow(remember);
+            this.plugin.SetRememberListScroll(remember);
         }
-
-        ImGui.TextDisabled("拖动或缩放后自动记住；位置跑到屏幕外时会夹回可见范围。");
-        ImGui.TextDisabled(this.plugin.InstallerWindowNote);
     }
 }

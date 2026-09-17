@@ -81,6 +81,12 @@ internal sealed class HarmonyHost
         this.patch.Invoke(this.instance, [target, harmonyMethod, null, null, null]);
     }
 
+    /// <summary>给某个方法挂后缀钩子（如把 <c>ref bool __result</c> 改掉）。</summary>
+    public void PatchPostfix(MethodBase target, MethodInfo postfix)
+    {
+        this.patch.Invoke(this.instance, [target, null, this.CreateHarmonyMethod(postfix), null, null]);
+    }
+
     /// <summary>取消本实例挂的全部钩子。</summary>
     public void Unpatch(string id) => this.unpatchAll?.Invoke(this.instance, [id]);
 

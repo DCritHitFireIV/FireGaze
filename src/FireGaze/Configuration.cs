@@ -71,18 +71,13 @@ public sealed class Configuration : IPluginConfiguration
 
     public bool BlockerWriteLog { get; set; } = true;
 
-    // ---------------- 安装器窗口位置记忆 ----------------
+    // ---------------- 安装器列表浏览位置 ----------------
 
-    /// <summary>是否记住插件安装器窗口的位置/大小（下次在原处打开）。</summary>
-    public bool RememberInstallerWindow { get; set; } = true;
+    /// <summary>是否记住插件安装器列表的浏览位置（下次打开接着看）。</summary>
+    public bool RememberListScroll { get; set; } = true;
 
-    public float? InstallerWindowX { get; set; }
-
-    public float? InstallerWindowY { get; set; }
-
-    public float? InstallerWindowW { get; set; }
-
-    public float? InstallerWindowH { get; set; }
+    /// <summary>上次离开时列表的滚动位置（像素）。</summary>
+    public float? ListScrollY { get; set; }
 
     public int BlockedCount { get; set; }
 
