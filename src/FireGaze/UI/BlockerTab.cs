@@ -58,6 +58,7 @@ internal sealed class BlockerTab
 
         ImGui.Text($"钩子状态：{this.plugin.BlockerStatusText}");
         ImGui.Text($"已跳过列表重建：{this.plugin.BlockedCount} 次 · 最近 {this.plugin.LastSkipNote}");
+        ImGui.Text($"已跳过「打开安装器」的仓库重载：{this.plugin.OpenSkipNote}");
         ImGui.Text($"已挡下「正在加载插件…」替换：{this.plugin.ListSuppressNote}");
         ImGui.TextDisabled(string.IsNullOrEmpty(this.plugin.LastAllowNote)
             ? "最近一次放行：—"

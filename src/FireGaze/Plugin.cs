@@ -73,6 +73,8 @@ public sealed class Plugin : IDalamudPlugin
     private string lastSkipNote = string.Empty;
     private string lastSuppressNote = string.Empty;
     private int listSuppressCount;
+    private int openReloadSkippedCount;
+    private string lastOpenSkipNote = string.Empty;
     private bool pendingListScrollRestore;
     private int listScrollRestoreAttempts;
     private int listScrollGraceFrames;
@@ -274,6 +276,11 @@ public sealed class Plugin : IDalamudPlugin
     public string ListSuppressNote => this.listSuppressCount == 0
         ? "—"
         : $"{this.listSuppressCount} 次 · 最近 {this.lastSuppressNote}";
+
+    /// <summary>跳过「打开安装器触发仓库重载」的次数与最近时间（界面显示用）。</summary>
+    public string OpenSkipNote => this.openReloadSkippedCount == 0
+        ? "—"
+        : $"{this.openReloadSkippedCount} 次 · 最近 {this.lastOpenSkipNote}";
 
     /// <summary>最近拦下的来源。</summary>
     public IReadOnlyList<string> RecentBlockedSources
@@ -671,6 +678,12 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>安装器打开时的前缀（firegaze.installer.open）。</summary>
+    /// <remarks>
+    /// 拦截开启时直接短路掉 <c>PluginInstallerWindow.OnOpen</c>：
+    /// 它的开头就是 <c>pluginManager.ReloadAllReposAsync()</c> + <c>ScanDevPluginsAsync()</c>，
+    /// 所以“每次打开安装器都联网把所有仓库重拉一遍”（界面卡在「加载插件仓库中…」）就是这里来的。
+    /// 短路只跳开窗动作，窗口照常打开；不走重载接口，不影响依赖安装与插件更新。
+    /// </remarks>
     private static bool InstallerOpenPrefix()
     {
         // 每次打开都清掉上一次会话残留的「用户操作」放行窗口：
@@ -678,7 +691,8 @@ public sealed class Plugin : IDalamudPlugin
         instance?.ResetUserActionGrace();
         instance?.NoteInstallerVisible();
         instance?.BeginListScrollRestore();
-        return true;
+
+        return instance?.ShouldRunInstallerOnOpen() ?? true;
     }
 
     /// <summary>
@@ -758,6 +772,23 @@ public sealed class Plugin : IDalamudPlugin
     {
         this.Config.RememberListScroll = remember;
         this.SaveConfig();
+    }
+
+    /// <summary>
+    /// 开窗时是否让 <c>PluginInstallerWindow.OnOpen</c> 原件继续跑。
+    /// 拦截开启时返回 false：不联网重拉仓库、不扫描 dev 插件、不清搜索框/不重置排序。
+    /// </summary>
+    private bool ShouldRunInstallerOnOpen()
+    {
+        if (this.Config.BlockerMode == BlockMode.Off)
+        {
+            return true;
+        }
+
+        this.openReloadSkippedCount++;
+        this.lastOpenSkipNote = DateTime.Now.ToString("HH:mm:ss");
+        Log.Debug("[FireGaze] 已跳过「打开安装器」触发的仓库重载（拦截开启）");
+        return false;
     }
 
     /// <summary>安装器打开时：准备恢复列表浏览位置。</summary>
