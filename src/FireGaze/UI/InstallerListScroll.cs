@@ -73,11 +73,35 @@ internal sealed class InstallerListScroll
     private bool ctxChecked;
     private bool dumpedThisOpen;
     private bool loggedListId;
-    private bool wasOpen;
-    private bool pendingRestore;
+    private bool wasOpenInstaller;
+    private int notDrawnFrames;
     private int restoreGraceFrames;
     private DateTime lastDump = DateTime.MinValue;
     private ImGuiWindowPtr listWindow = ImGuiWindowPtr.Null;
+
+    /// <summary>位置恢复的小状态机。</summary>
+    private enum RestorePhase
+    {
+        /// <summary>不恢复（没存过 / 开关关了）。</summary>
+        Idle,
+
+        /// <summary>已下令恢复，等列表把内容铺开（ScrollMax &gt; 0）。</summary>
+        WaitingContent,
+
+        /// <summary>正在写 ScrollTarget，直到被 ImGui 采纳。</summary>
+        Applying,
+
+        /// <summary>已到位。</summary>
+        Done,
+
+        /// <summary>写不进去（被 ImGui 重置 / 被用户接管）。</summary>
+        GivenUp,
+    }
+
+    private RestorePhase phase = RestorePhase.Idle;
+    private float restoreTarget;
+    private int restoreFrames;
+    private int offTargetFrames;
 
     // PluginManager 反射句柄（一次缓存）
     private static object? pluginManager;
@@ -105,11 +129,39 @@ internal sealed class InstallerListScroll
 
             if (!open)
             {
-                this.wasOpen = false;
-                this.pendingRestore = false;
-                this.listWindow = ImGuiWindowPtr.Null;
-                this.dumpedThisOpen = false;
+                // 抖动容错：安装器偶尔一帧没画（折叠、切窗）不算关闭，要连续 5 帧没画才当关闭
+                this.notDrawnFrames++;
+                if (this.notDrawnFrames >= 5)
+                {
+                    this.wasOpenInstaller = false;
+                    this.phase = RestorePhase.Idle;
+                    this.restoreFrames = 0;
+                    this.offTargetFrames = 0;
+                    this.listWindow = ImGuiWindowPtr.Null;
+                    this.dumpedThisOpen = false;
+                }
+
                 return;
+            }
+
+            this.notDrawnFrames = 0;
+
+            if (!this.wasOpenInstaller)
+            {
+                this.wasOpenInstaller = true;
+                this.restoreFrames = 0;
+                this.offTargetFrames = 0;
+
+                if (config.RememberListScroll && config.ListScrollY is { } saved && saved > 1f)
+                {
+                    this.restoreTarget = saved;
+                    this.phase = RestorePhase.WaitingContent;
+                    Plugin.Log.Information($"[FireGaze] 安装器已打开，准备恢复列表位置：{saved:F0}");
+                }
+                else
+                {
+                    this.phase = RestorePhase.Idle;
+                }
             }
 
             // 找列表子窗口：先看缓存，再枚举（只在结构体可信时），最后退回 ID 穷举
@@ -158,7 +210,7 @@ internal sealed class InstallerListScroll
 
             if (!this.listWindow.IsNull)
             {
-                this.RememberScroll(config, saveConfig);
+                this.HandleListWindow(config, saveConfig);
             }
 
             this.MaskReloadEffect(config.RememberListScroll, isInstallerOpen);
@@ -349,11 +401,21 @@ internal sealed class InstallerListScroll
 
     // ------------------------------------------------------------------ 位置记忆
 
-    private void RememberScroll(Configuration config, Action saveConfig)
+    /// <summary>
+    /// 读/写列表子窗口的滚动值。
+    /// </summary>
+    /// <remarks>
+    /// 写的时候不能只写 <c>window-&gt;Scroll</c>（ImGui 在 Begin 时会按 ScrollMax 夹一次），
+    /// 要用 ImGui 自己的语义：把 <c>ScrollTarget</c> 指过去（<c>ImGui::SetScrollY()</c> 就是这么干的），
+    /// ImGui 会在该子窗口下一次 Begin 时算好 ScrollMax 再落到 Scroll；同时把 Scroll 也写上，两路兼施，
+    /// 连写几帧直到被采纳（防单帧抖动）。
+    /// </remarks>
+    private void HandleListWindow(Configuration config, Action saveConfig)
     {
         var list = this.listWindow;
         var scroll = list.Scroll.Y;
-        var hasContent = list.ScrollMax.Y > 0f || scroll > 0f;
+        var max = list.ScrollMax.Y;
+        var hasContent = max > 0f || scroll > 0f;
 
         this.LastScrollY = scroll;
 
@@ -365,45 +427,72 @@ internal sealed class InstallerListScroll
             Plugin.Log.Information(
                 $"[FireGaze] 列表子窗口：name={WindowName(list) ?? "?"} id=0x{list.ID:X8}"
                 + $"；父 id=0x{parentId:X8}；hash(名字, 父id)=0x{computed:X8}（{(computed == list.ID ? "一致" : "不一致")}）"
-                + $"；Scroll={scroll:F1}/{list.ScrollMax.Y:F1}");
+                + $"；Scroll={scroll:F1}/{max:F1} ScrollTarget={list.ScrollTarget.Y:F1}");
         }
 
-        if (!this.wasOpen)
+        switch (this.phase)
         {
-            this.wasOpen = true;
-            this.pendingRestore = config.RememberListScroll && config.ListScrollY is not null;
+            case RestorePhase.WaitingContent:
+                if (!hasContent)
+                {
+                    return;   // 列表还在加载：现在写会被夹回 0，等它把内容铺开
+                }
 
-            if (this.pendingRestore)
-            {
-                Plugin.Log.Information($"[FireGaze] 安装器已打开，准备恢复列表位置：{config.ListScrollY:F0}");
-            }
-        }
+                this.phase = RestorePhase.Applying;
+                Plugin.Log.Information($"[FireGaze] 开始恢复列表位置：目标 {this.restoreTarget:F0}（当前 {scroll:F0} / 上限 {max:F0}）");
+                goto case RestorePhase.Applying;
 
-        if (this.pendingRestore)
-        {
-            if (config.ListScrollY is not { } target)
-            {
-                this.pendingRestore = false;
+            case RestorePhase.Applying:
+                if (!hasContent)
+                {
+                    return;
+                }
+
+                // 写进去之后又跑回来了，而且连续两帧都跑 → 放弃（用户自己滚了，或 ImGui 不买账）
+                if (this.restoreFrames > 0 && Math.Abs(scroll - this.restoreTarget) > 30f)
+                {
+                    this.offTargetFrames++;
+                    if (this.offTargetFrames >= 2)
+                    {
+                        this.phase = RestorePhase.GivenUp;
+                        Plugin.Log.Warning($"[FireGaze] 放弃恢复：写入后回到 {scroll:F0}（目标 {this.restoreTarget:F0}）");
+                        return;
+                    }
+                }
+                else
+                {
+                    this.offTargetFrames = 0;
+                }
+
+                if (this.restoreFrames < 3)
+                {
+                    Plugin.Log.Information(
+                        $"[FireGaze] 恢复追踪 #{this.restoreFrames}：Scroll={scroll:F0} / ScrollTarget={list.ScrollTarget.Y:F0} / 上限 {max:F0}");
+                }
+
+                // ImGui::SetScrollY() 的写法：ScrollTarget + 居中比 0 + 边缘吸附 0
+                list.ScrollTarget = new Vector2(list.ScrollTarget.X, this.restoreTarget);
+                list.ScrollTargetCenterRatio = new Vector2(list.ScrollTargetCenterRatio.X, 0f);
+                list.ScrollTargetEdgeSnapDist = new Vector2(list.ScrollTargetEdgeSnapDist.X, 0f);
+                list.Scroll = new Vector2(list.Scroll.X, this.restoreTarget);
+                this.restoreFrames++;
+
+                if (this.restoreFrames >= 6 && Math.Abs(scroll - this.restoreTarget) <= 30f)
+                {
+                    this.phase = RestorePhase.Done;
+                    this.restoreGraceFrames = 3;
+                    Plugin.Log.Information($"[FireGaze] 恢复完成：Scroll={scroll:F0}（目标 {this.restoreTarget:F0}）");
+                }
+                else if (this.restoreFrames >= 30)
+                {
+                    this.phase = RestorePhase.GivenUp;
+                    Plugin.Log.Warning($"[FireGaze] 恢复超时：Scroll={scroll:F0}（目标 {this.restoreTarget:F0}）");
+                }
+
                 return;
-            }
 
-            if (!hasContent)
-            {
-                return;   // 列表还在加载：现在写会被夹回 0
-            }
-
-            if (scroll > 1f)
-            {
-                this.pendingRestore = false;
-                Plugin.Log.Information("[FireGaze] 列表已被手动滚动，放弃本次位置恢复");
-                return;
-            }
-
-            list.Scroll = new Vector2(list.Scroll.X, target);
-            this.pendingRestore = false;
-            this.restoreGraceFrames = 2;
-            Plugin.Log.Information($"[FireGaze] 已恢复列表浏览位置：{target:F0}");
-            return;
+            default:
+                break;   // Idle / Done / GivenUp → 记录
         }
 
         if (!config.RememberListScroll || !hasContent)
