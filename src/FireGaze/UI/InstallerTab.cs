@@ -61,10 +61,11 @@ internal sealed class InstallerTab
 
         ImGui.Spacing();
         ImGui.Separator();
-        var status = block || remember
-            ? this.plugin.InstallerFeatures.StatusText()
-            : "未启用（上面两个开关都关着）";
-        UiHelpers.ColoredWrapped(UiHelpers.Muted, "状态：" + status);
-        UiHelpers.ColoredWrapped(UiHelpers.Muted, "改动立即保存，下次打开插件安装器时生效。");
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "状态：" + this.plugin.InstallerFeatures.StatusText(block, remember));
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "改动立即保存：拦截即刻生效，位置记忆在下次打开插件安装器时生效。");
     }
 }

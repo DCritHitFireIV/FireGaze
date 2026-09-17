@@ -18,7 +18,7 @@ namespace FireGaze;
 /// FireGaze —— 卫月一体化工具箱：
 ///   ① 插件简介汉化（名字 / 一行简介 / 详情 × 原版 / 中文 / 双语）
 ///   ② 第三方仓库体检（扫描死链、内容不合规，支持停用 / 删除 + 备份 + 撤回）
-///   ③ 记住插件安装器列表的浏览位置
+///   ③ 拦住插件安装器的自动刷新（并可选地记住列表浏览位置）
 /// </summary>
 public sealed class Plugin : IDalamudPlugin
 {
@@ -42,6 +42,7 @@ public sealed class Plugin : IDalamudPlugin
 
     private int tableUpdateBusy;
     private readonly UI.InstallerListScroll installerListScroll = new();
+    private bool installerDefaultsNotice;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -67,6 +68,7 @@ public sealed class Plugin : IDalamudPlugin
             this.Config.RememberListScroll = false;
             this.Config.BlockInstallerAutoRefresh = false;
             this.Config.ListScrollY = null;
+            this.installerDefaultsNotice = true;
             pluginInterface.SavePluginConfig(this.Config);
         }
 
@@ -159,6 +161,12 @@ public sealed class Plugin : IDalamudPlugin
             Log.Information(
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {this.Table.Count} 条；" +
                 $"汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}");
+
+            if (this.installerDefaultsNotice)
+            {
+                this.installerDefaultsNotice = false;
+                Chat.Print("[FireGaze] 安装器增强的两项功能已改为默认关闭，可在 /firegaze → 插件安装器 里打开。");
+            }
         }
         catch (Exception e)
         {

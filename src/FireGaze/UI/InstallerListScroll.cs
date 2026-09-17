@@ -79,7 +79,9 @@ internal sealed class InstallerListScroll
     private int missedFrames;
     private int restoreGraceFrames;
     private long maskedRuns;
-    private DateTime lastMaskUtc;
+    private DateTime lastMaskLocal;
+    private bool reflectionComplained;
+    private bool lastRestoreFailed;
     private ImGuiWindowPtr listWindow = ImGuiWindowPtr.Null;
     private RestorePhase phase = RestorePhase.Idle;
     private float restoreTarget;
@@ -274,6 +276,7 @@ internal sealed class InstallerListScroll
                     if (++this.offTargetFrames >= 2)
                     {
                         this.phase = RestorePhase.GivenUp;
+                        this.lastRestoreFailed = true;
                         Plugin.Log.Information($"[FireGaze] 放弃恢复列表位置：写入后回到 {scroll:F0}（目标 {this.restoreTarget:F0}）");
                         return;
                     }
@@ -293,12 +296,14 @@ internal sealed class InstallerListScroll
                 if (this.restoreFrames >= RestoreSettleFrames && Math.Abs(scroll - this.restoreTarget) <= RestoreTolerance)
                 {
                     this.phase = RestorePhase.Done;
+                    this.lastRestoreFailed = false;
                     this.restoreGraceFrames = 3;
                     Plugin.Log.Information($"[FireGaze] 已恢复列表浏览位置：{scroll:F0}");
                 }
                 else if (this.restoreFrames >= RestoreMaxFrames)
                 {
                     this.phase = RestorePhase.GivenUp;
+                    this.lastRestoreFailed = true;
                     Plugin.Log.Information($"[FireGaze] 恢复列表位置超时：停在 {scroll:F0}（目标 {this.restoreTarget:F0}）");
                 }
 
@@ -367,7 +372,7 @@ internal sealed class InstallerListScroll
         }
 
         this.maskedRuns++;
-        this.lastMaskUtc = DateTime.Now;
+        this.lastMaskLocal = DateTime.Now;
         if (!this.loggedMask)
         {
             this.loggedMask = true;
@@ -379,22 +384,58 @@ internal sealed class InstallerListScroll
         }
     }
 
-    /// <summary>给设置页用的一行状态（用户可见）。</summary>
-    public string StatusText()
+    /// <summary>给设置页用的一行状态（用户可见；按两个开关分别报告）。</summary>
+    public string StatusText(bool blockEnabled, bool rememberEnabled)
     {
+        if (!blockEnabled && !rememberEnabled)
+        {
+            return "未启用（上面两个开关都关着）";
+        }
+
         if (this.layoutChecked && !this.layoutOk)
         {
             return "本次已停用（与当前卫月版本不兼容，详见日志）";
         }
 
-        if (this.phase == RestorePhase.GivenUp)
+        if (blockEnabled && !this.ReflectionReady())
         {
-            return "已生效 · 上次打开时的列表位置没能恢复（详见日志）";
+            return "本次已停用（拿不到卫月的插件管理器内部字段，详见日志）";
         }
 
-        return this.maskedRuns > 0
-            ? $"已生效 · 本次已拦下 {this.maskedRuns} 次自动刷新（最近 {this.lastMaskUtc:HH:mm}）"
-            : "已生效 · 本会话还没遇到后台自动刷新";
+        var parts = new List<string>(2);
+
+        if (rememberEnabled)
+        {
+            parts.Add(this.lastRestoreFailed
+                ? "位置记忆：上次打开时的位置没能恢复（详见日志）"
+                : "位置记忆已开启");
+        }
+
+        if (blockEnabled)
+        {
+            parts.Add(this.maskedRuns > 0
+                ? $"拦截已拦下 {this.maskedRuns} 次后台刷新（最近 {this.lastMaskLocal:HH:mm}）"
+                : "拦截已开启（本会话还没遇到后台刷新）");
+        }
+
+        return "已生效 · " + string.Join(" · ", parts);
+    }
+
+    /// <summary>反射句柄齐不齐（卫月改内部字段名时会缺）。只抱怨一次。</summary>
+    private bool ReflectionReady()
+    {
+        var ready = ResolvePluginManager() is not null
+                    && pluginsReadyProp is not null
+                    && reposReadyProp is not null
+                    && repoRefreshTaskField is not null;
+
+        if (!ready && !this.reflectionComplained)
+        {
+            this.reflectionComplained = true;
+            Plugin.Log.Warning("[FireGaze] 拿不到卫月的插件管理器内部字段（可能是卫月升级改了名），拦住自动刷新本次已停用。");
+        }
+
+        return ready;
     }
 
     // ------------------------------------------------------------------ 结构体自检 / 反射
