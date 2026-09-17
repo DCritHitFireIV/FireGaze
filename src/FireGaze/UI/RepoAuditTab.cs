@@ -37,6 +37,7 @@ internal sealed class RepoAuditTab
     private DateTime installedIndexRetryAfter = DateTime.MinValue;
     private bool onlyUnused;
     private bool listBuilt;
+    private DateTime listRetryAfter = DateTime.MinValue;
     private string sortKey = "status";
     private bool sortDescending;
     private bool resetSortRequested;
@@ -1130,7 +1131,7 @@ internal sealed class RepoAuditTab
     /// </summary>
     private void EnsureList()
     {
-        if (this.scanning || this.listBuilt)
+        if (this.scanning || this.listBuilt || DateTime.Now < this.listRetryAfter)
         {
             return;
         }
@@ -1138,8 +1139,11 @@ internal sealed class RepoAuditTab
         var repos = this.plugin.Repos.ReadAll(out var error);
         if (error is not null)
         {
+            // 读配置失败时**绝不能每帧重试**（1241 个库的配置每帧解析一遍会把游戏拖死）
+            this.listRetryAfter = DateTime.Now.AddSeconds(10);
             this.SetStatus("读取仓库列表失败：" + error, true);
-            return;   // 不置 listBuilt，下一帧重试
+            Plugin.Log.Warning("[FireGaze] 读取仓库列表失败（10 秒后重试）：" + error);
+            return;
         }
 
         var list = repos
