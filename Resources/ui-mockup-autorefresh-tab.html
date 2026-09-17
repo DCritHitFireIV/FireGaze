@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>FireGaze 「拦住自动更新」页 — 2 状态帧 mockup</title>
+<style>
+  /* 视觉语言：ImGui 深色主题（中性色打底 + 单一强调色 --accent），
+     8pt 网格间距，层级靠字号/明度，字体栈三层降级。 */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #909090; --accent: #ffb35c;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.4;
+  }
+  .stage { padding: 24px; display: flex; gap: 24px; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 8px 2px; width: 700px; }
+  .window {
+    width: 700px; height: 420px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 4px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .titlebar { height: 32px; background: var(--title); display: flex; align-items: center; padding: 0 16px; font-weight: 600; border-bottom: 1px solid var(--border); }
+  .titlebar .brand { color: var(--accent); }
+  .titlebar .sub { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 12px; }
+  .body { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); }
+  .tab { padding: 4px 12px; color: var(--muted); }
+  .tab.active { color: var(--text); background: var(--panel); border: 1px solid var(--border); border-bottom-color: transparent; border-radius: 3px 3px 0 0; margin-bottom: -1px; }
+  .hint { color: var(--muted); }
+  .sep { height: 1px; background: var(--border); margin: 8px 0; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; }
+  .check { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-block; position: relative; background: #2a2a2a; flex: none; }
+  .check.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 1px; }
+  .row { display: flex; flex-direction: column; gap: 2px; }
+  .indent { padding-left: 22px; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div>
+    <p class="caption">帧 1 — 默认态（两项都开）</p>
+    <div class="window">
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动更新</span></div>
+      <div class="body">
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">拦住自动更新</div></div>
+        <div>让插件安装器别再自己刷新：自动重载不再把列表和你的位置顶掉，并且记住你上次看到哪里。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="chip"><span class="check on"></span>防止打开插件管理器自动刷新</div>
+          <div class="hint indent">刷新仍在后台进行，只是不再把你正在看的列表顶回顶部。</div>
+        </div>
+        <div style="height:8px"></div>
+        <div class="row">
+          <div class="chip"><span class="check on"></span>记住看到哪里（下次打开接着看）</div>
+          <div class="hint indent">关掉窗口再打开，列表会回到上次的位置。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="caption">帧 2 — 关掉第一项（第二项仍开）</p>
+    <div class="window">
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动更新</span></div>
+      <div class="body">
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">拦住自动更新</div></div>
+        <div>让插件安装器别再自己刷新：自动重载不再把列表和你的位置顶掉，并且记住你上次看到哪里。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="chip"><span class="check"></span>防止打开插件管理器自动刷新</div>
+          <div class="hint indent">刷新仍在后台进行，只是不再把你正在看的列表顶回顶部。</div>
+        </div>
+        <div style="height:8px"></div>
+        <div class="row">
+          <div class="chip"><span class="check on"></span>记住看到哪里（下次打开接着看）</div>
+          <div class="hint indent">关掉窗口再打开，列表会回到上次的位置。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
