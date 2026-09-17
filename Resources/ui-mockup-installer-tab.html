@@ -58,27 +58,28 @@
         <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">插件安装器</div></div>
 
         <div>浏览插件安装器时，拦下「正在加载插件…」。</div>
+        <div class="hint">打开安装器不再联网重拉仓库，也不会重置排序与搜索。</div>
         <div class="hint">有需要可以手动刷新插件列表。</div>
 
         <div class="sep"></div>
 
-        <div class="chip"><span class="check"></span>禁止安装器打开期间的列表更新</div>
+        <div class="chip"><span class="check"></span>安装器打开时拦下列表更新</div>
         <div class="chip"><span class="check"></span>记住看到哪里（下次打开接着看）</div>
         <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
 
         <div class="sep"></div>
 
-        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>复制诊断</button><button class="disabled">清空记录</button></div>
-        <div class="frame list" style="height:36px"><span class="dim">（还没有跳过）</span></div>
+        <div class="sect"><span>最近拦下的记录</span><span class="grow"></span><button>复制诊断</button><button class="disabled">清空记录</button></div>
+        <div class="frame list" style="height:36px"><span class="dim">（还没有拦下）</span></div>
 
         <div class="sep"></div>
 
         <div class="frame">
-          <div class="warn">钩子状态：未挂钩（两个开关都关着）</div>
-          <div class="mono">已跳过列表重建：—</div>
-          <div class="mono">已跳过「打开安装器」的仓库重载：—</div>
-          <div class="mono">已挡下「正在加载插件…」替换：—</div>
-          <div class="dim">最近一次放行：—</div>
+          <div class="warn">拦截状态：未启用（两个开关都关着）</div>
+          <div class="mono">已拦下列表重建：—</div>
+          <div class="mono">已拦下「打开安装器」的仓库重载：—</div>
+          <div class="mono">已拦下「正在加载插件…」替换：—</div>
+          <div class="dim">最近一次未拦下：—</div>
         </div>
       </div>
     </div>
@@ -93,32 +94,33 @@
         <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">插件安装器</div></div>
 
         <div>浏览插件安装器时，拦下「正在加载插件…」。</div>
+        <div class="hint">打开安装器不再联网重拉仓库，也不会重置排序与搜索。</div>
         <div class="hint">有需要可以手动刷新插件列表。</div>
 
         <div class="sep"></div>
 
-        <div class="chip"><span class="check on"></span>禁止安装器打开期间的列表更新</div>
+        <div class="chip"><span class="check on"></span>安装器打开时拦下列表更新</div>
         <div class="chip"><span class="check on"></span>记住看到哪里（下次打开接着看）</div>
         <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
 
         <div class="sep"></div>
 
-        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
+        <div class="sect"><span>最近拦下的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
         <div class="frame list" style="height:130px">
-          <div class="mono">13:31:02 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:29:44 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:27:10 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:25:35 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:31:02 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:29:44 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:27:10 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:25:35 拦下列表重建（安装器打开中）</div>
         </div>
 
         <div class="sep"></div>
 
         <div class="frame">
-          <div class="good">钩子状态：已就绪（7/7）</div>
-          <div class="mono">已跳过列表重建：23 次 · 最近 13:31:02</div>
-          <div class="mono">已跳过「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
-          <div class="mono">已挡下「正在加载插件…」替换：2 次 · 最近 13:28:12</div>
-          <div class="dim">最近一次放行：用户操作（点过安装器底部按钮）· 13:30:05</div>
+          <div class="good">拦截状态：已就绪（7/7）</div>
+          <div class="mono">已拦下列表重建：23 次 · 最近 13:31:02</div>
+          <div class="mono">已拦下「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
+          <div class="mono">已拦下「正在加载插件…」替换：2 次 · 最近 13:28:12</div>
+          <div class="dim">最近一次未拦下：用户操作（点过安装器底部按钮）· 13:30:05</div>
         </div>
       </div>
     </div>
@@ -126,42 +128,43 @@
 
   <!-- ============ 帧 3：满态 / 异常态 ============ -->
   <div>
-    <p class="caption">帧 3 — 满态与异常：记录 20 条（列表内滚动条）、钩子部分失败（橙字、长行折行）、框高按实际行数＋余量</p>
+    <p class="caption">帧 3 — 满态与异常：记录 20 条（列表内滚动条）、拦截部分失败（橙字、长行折行）、框高按实际行数＋余量</p>
     <div class="window">
       <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 刷新拦截</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">插件安装器</div></div>
 
         <div>浏览插件安装器时，拦下「正在加载插件…」。</div>
+        <div class="hint">打开安装器不再联网重拉仓库，也不会重置排序与搜索。</div>
         <div class="hint">有需要可以手动刷新插件列表。</div>
 
         <div class="sep"></div>
 
-        <div class="chip"><span class="check on"></span>禁止安装器打开期间的列表更新</div>
+        <div class="chip"><span class="check on"></span>安装器打开时拦下列表更新</div>
         <div class="chip"><span class="check on"></span>记住看到哪里（下次打开接着看）</div>
         <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
 
         <div class="sep"></div>
 
-        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
+        <div class="sect"><span>最近拦下的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
         <div class="frame list" style="height:130px">
-          <div class="mono">13:31:02 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:29:44 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:27:10 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:25:35 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:23:02 跳过列表重建（安装器打开中）</div>
-          <div class="mono">13:21:40 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:31:02 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:29:44 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:27:10 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:25:35 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:23:02 拦下列表重建（安装器打开中）</div>
+          <div class="mono">13:21:40 拦下列表重建（安装器打开中）</div>
           <div class="scrollhint"></div>
         </div>
 
         <div class="sep"></div>
 
         <div class="frame">
-          <div class="warn">钩子状态：部分失败：firegaze.installer.categories、firegaze.installer.list</div>
-          <div class="mono">已跳过列表重建：23 次 · 最近 13:31:02</div>
-          <div class="mono">已跳过「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
-          <div class="mono">已挡下「正在加载插件…」替换：—</div>
-          <div class="dim">最近一次放行：—</div>
+          <div class="warn">拦截状态：部分失败：firegaze.installer.categories、firegaze.installer.list</div>
+          <div class="mono">已拦下列表重建：23 次 · 最近 13:31:02</div>
+          <div class="mono">已拦下「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
+          <div class="mono">已拦下「正在加载插件…」替换：—</div>
+          <div class="dim">最近一次未拦下：—</div>
         </div>
       </div>
     </div>

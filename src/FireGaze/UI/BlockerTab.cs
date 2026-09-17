@@ -36,12 +36,13 @@ internal sealed class BlockerTab
         var config = this.plugin.Config;
 
         ImGui.TextWrapped("浏览插件安装器时，拦下「正在加载插件…」。");
+        ImGui.TextDisabled("打开安装器不再联网重拉仓库，也不会重置排序与搜索。");
         ImGui.TextDisabled("有需要可以手动刷新插件列表。");
 
         ImGui.Separator();
 
         var enabled = config.BlockerMode != BlockMode.Off;
-        if (ImGui.Checkbox("禁止安装器打开期间的列表更新###BlockerEnabled", ref enabled))
+        if (ImGui.Checkbox("安装器打开时拦下列表更新###BlockerEnabled", ref enabled))
         {
             this.plugin.SetBlockerEnabled(enabled);
         }
@@ -64,7 +65,7 @@ internal sealed class BlockerTab
     /// <summary>最近跳过的记录（在状态框上面）。</summary>
     private void DrawRecordsSection()
     {
-        ImGui.Text("最近跳过的记录");
+        ImGui.Text("最近拦下的记录");
 
         var hasRecords = this.plugin.HasBlockerRecords;
         var armed = DateTime.UtcNow < this.clearArmedUntil;
@@ -108,7 +109,7 @@ internal sealed class BlockerTab
         {
             if (sources.Count == 0)
             {
-                ImGui.TextDisabled("（还没有跳过）");
+                ImGui.TextDisabled("（还没有拦下）");
             }
             else
             {
@@ -132,10 +133,10 @@ internal sealed class BlockerTab
 
         var lines = new List<string>
         {
-            CounterLine("已跳过列表重建", this.plugin.BlockedCount, this.plugin.LastSkipNote),
-            CounterLine("已跳过「打开安装器」的仓库重载", this.plugin.OpenSkipCount, this.plugin.OpenSkipTime),
-            CounterLine("已挡下「正在加载插件…」替换", this.plugin.ListSuppressCount, this.plugin.ListSuppressTime),
-            string.IsNullOrEmpty(allow) ? "最近一次放行：—" : $"最近一次放行：{allow}",
+            CounterLine("已拦下列表重建", this.plugin.BlockedCount, this.plugin.LastSkipNote),
+            CounterLine("已拦下「打开安装器」的仓库重载", this.plugin.OpenSkipCount, this.plugin.OpenSkipTime),
+            CounterLine("已拦下「正在加载插件…」替换", this.plugin.ListSuppressCount, this.plugin.ListSuppressTime),
+            string.IsNullOrEmpty(allow) ? "最近一次未拦下：—" : $"最近一次未拦下：{allow}",
         };
 
         // 高度按「实际行数 + 钩子状态那一行的可能换行余量」算，别把最后一行裁掉
@@ -147,7 +148,7 @@ internal sealed class BlockerTab
         {
             UiHelpers.ColoredWrapped(
                 hooked ? UiHelpers.Good : UiHelpers.Warn,
-                $"钩子状态：{this.plugin.HookSummary}");
+                $"拦截状态：{this.plugin.HookSummary}");
 
             foreach (var line in lines)
             {

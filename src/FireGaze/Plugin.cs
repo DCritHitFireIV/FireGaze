@@ -202,7 +202,7 @@ public sealed class Plugin : IDalamudPlugin
             }
             else
             {
-                this.BlockerStatusText = "未挂钩（两个开关都关着）";
+                this.BlockerStatusText = "未启用（两个开关都关着）";
             }
 
             this.translateTimer.Start();
@@ -262,7 +262,7 @@ public sealed class Plugin : IDalamudPlugin
     public DalamudRepos Repos { get; }
 
     /// <summary>钩子状态文字。</summary>
-    public string BlockerStatusText { get; private set; } = "尚未挂钩";
+    public string BlockerStatusText { get; private set; } = "尚未启用";
 
     /// <summary>累计拦截次数。</summary>
     public int BlockedCount => this.Config.BlockedCount;
@@ -294,12 +294,12 @@ public sealed class Plugin : IDalamudPlugin
         => string.Join(
             "\n",
             "FireGaze 拦截状态",
-            $"钩子：{this.HookSummary}",
-            $"钩子明细：{this.BlockerStatusText}",
-            $"已跳过列表重建：{this.Config.BlockedCount} 次（最近 {Show(this.lastSkipNote)}）",
-            $"已跳过打开安装器的仓库重载：{this.openReloadSkippedCount} 次（最近 {Show(this.lastOpenSkipNote)}）",
-            $"已挡下加载态替换：{this.listSuppressCount} 次（最近 {Show(this.lastSuppressNote)}）",
-            $"最近一次放行：{Show(this.lastAllowNote)}",
+            $"拦截状态：{this.HookSummary}",
+            $"拦截明细：{this.BlockerStatusText}",
+            $"已拦下列表重建：{this.Config.BlockedCount} 次（最近 {Show(this.lastSkipNote)}）",
+            $"已拦下打开安装器的仓库重载：{this.openReloadSkippedCount} 次（最近 {Show(this.lastOpenSkipNote)}）",
+            $"已拦下加载态替换：{this.listSuppressCount} 次（最近 {Show(this.lastSuppressNote)}）",
+            $"最近一次未拦下：{Show(this.lastAllowNote)}",
             $"拦截开关：{(this.BlockerActive ? "开" : "关")}；记住列表位置：{(this.Config.RememberListScroll ? "开" : "关")}");
 
     private static string Show(string text) => string.IsNullOrEmpty(text) ? "—" : text;
@@ -449,11 +449,11 @@ public sealed class Plugin : IDalamudPlugin
     {
         if (this.Config.RecentBlockedSources.Count == 0)
         {
-            Chat.Print("[FireGaze] 暂无跳过记录");
+            Chat.Print("[FireGaze] 暂无拦下记录");
             return;
         }
 
-        Chat.Print($"[FireGaze] 累计跳过列表重建 {this.Config.BlockedCount} 次，最近来源：");
+        Chat.Print($"[FireGaze] 已拦下列表重建 {this.Config.BlockedCount} 次，最近：");
         foreach (var line in this.Config.RecentBlockedSources)
         {
             Chat.Print("  " + line);
@@ -516,7 +516,7 @@ public sealed class Plugin : IDalamudPlugin
 
             if (this.startupInitDone)
             {
-                this.BlockerStatusText = "未挂钩（两个开关都关着）";
+                this.BlockerStatusText = "未启用（两个开关都关着）";
             }
 
             return;
@@ -546,7 +546,7 @@ public sealed class Plugin : IDalamudPlugin
         }
 
         this.harmony = null;
-        this.BlockerStatusText = "未挂钩（模式为关闭）";
+        this.BlockerStatusText = "未启用（模式为关闭）";
     }
 
     /// <summary>开关拦截日志。</summary>
@@ -617,7 +617,7 @@ public sealed class Plugin : IDalamudPlugin
             var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
             if (installerType is null)
             {
-                this.BlockerStatusText = "找不到插件安装器类型（卫月版本不兼容），未挂钩";
+                this.BlockerStatusText = "未启用（卫月版本不兼容：找不到插件安装器）";
                 Log.Warning("[FireGaze] " + this.BlockerStatusText);
                 return;
             }
@@ -665,7 +665,7 @@ public sealed class Plugin : IDalamudPlugin
         }
         catch (Exception e)
         {
-            this.BlockerStatusText = "挂钩失败：" + e.Message;
+            this.BlockerStatusText = "启用失败：" + e.Message;
             Log.Error(e, "[FireGaze] 挂钩失败（不影响游戏）");
         }
     }
@@ -1043,7 +1043,7 @@ public sealed class Plugin : IDalamudPlugin
                 this.Config.BlockedCount++;
                 count = this.Config.BlockedCount;
 
-                var line = $"{DateTime.Now:HH:mm:ss} 跳过列表重建（安装器打开中）";
+                var line = $"{DateTime.Now:HH:mm:ss} 拦下列表重建（安装器打开中）";
                 this.Config.RecentBlockedSources.Insert(0, line);
                 while (this.Config.RecentBlockedSources.Count > Configuration.MaxRecentBlocked)
                 {
