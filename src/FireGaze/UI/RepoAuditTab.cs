@@ -279,6 +279,22 @@ internal sealed class RepoAuditTab
         }
 
         ImGui.SameLine();
+        var iconCacheEnabled = this.plugin.Config.IconCacheEnabled;
+        if (ImGui.Checkbox("本地缓存图标###IconCache", ref iconCacheEnabled))
+        {
+            this.plugin.Config.IconCacheEnabled = iconCacheEnabled;
+            this.plugin.SaveConfig();
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(
+                "把下到的图标存到本地（配置目录 /icons），重开游戏不用重下；\n"
+                + "并分批挂回卫月的图标缓存，插件安装器里也能直接用本地图。\n"
+                + "关掉后回到旧行为：只借卫月内存缓存，每次重启都要重新下载。");
+        }
+
+        ImGui.SameLine();
         ImGui.TextDisabled("│");
         ImGui.SameLine();
 
@@ -1555,6 +1571,8 @@ internal sealed class RepoAuditTab
             return;
         }
 
+        Plugin.Log.Information($"[FireGaze] 用户点击：检查缺图标（已装 {index.All.Count} 个插件）");
+
         var cached = 0;
         var fromDisk = 0;
         var noAddress = 0;
@@ -1614,6 +1632,9 @@ internal sealed class RepoAuditTab
             return;
         }
 
+        Plugin.Log.Information(
+            $"[FireGaze] 用户点击：下载图标（待下 {this.iconMissing.Count} 个，并发 {IconConcurrency}）");
+
         this.iconWaiting.Clear();
         this.iconWaiting.AddRange(this.iconMissing);
         this.iconInFlight.Clear();
@@ -1663,7 +1684,11 @@ internal sealed class RepoAuditTab
         {
             this.iconInFlight.Remove(done);
             this.iconDownloadGot++;
-            this.plugin.Icons.EnsureTexture(done);
+            if (this.plugin.Icons.EnsureTexture(done))
+            {
+                Plugin.Log.Debug($"[FireGaze] 图标建纹理：{done.InternalName}");
+            }
+
             loadedAny = true;
         }
 
@@ -1729,6 +1754,8 @@ internal sealed class RepoAuditTab
         this.iconInFlight.Add(entry);
 
         var url = entry.IconUrl!;
+        Plugin.Log.Debug($"[FireGaze] 图标下载开始：{entry.InternalName} ← {url}");
+
         _ = Task.Run(async () =>
         {
             var result = await IconDownloader.FetchAsync(url, CancellationToken.None).ConfigureAwait(false);
@@ -1737,9 +1764,17 @@ internal sealed class RepoAuditTab
             {
                 if (this.plugin.Icons.SaveDownloaded(entry, bytes, result.ContentType))
                 {
+                    Plugin.Log.Debug($"[FireGaze] 图标下载完成：{entry.InternalName}（{bytes.Length} 字节，{result.ContentType}）");
                     this.iconReady.Enqueue(entry);
                     return;
                 }
+
+                Plugin.Log.Debug($"[FireGaze] 图标写盘失败：{entry.InternalName}");
+            }
+            else
+            {
+                Plugin.Log.Debug(
+                    $"[FireGaze] 图标下载失败：{entry.InternalName}（HTTP {result.Status}，{result.Error ?? "不是图片"}）");
             }
 
             this.iconFailed.Enqueue(entry);
@@ -1759,6 +1794,10 @@ internal sealed class RepoAuditTab
 
         this.iconDownloadRunning = false;
         this.plugin.Icons.FlushIndex();
+
+        Plugin.Log.Information(
+            $"[FireGaze] 图标下载结束：请求 {this.iconDownloadRequested} / 拿到 {this.iconDownloadGot} / 失败 {this.iconDownloadFailed}"
+            + $" / 还在等 {this.iconWaiting.Count + this.iconInFlight.Count}；本地缓存共 {this.plugin.Icons.CachedCount} 个");
 
         // 已进本地缓存的从「缺图标」清单里拿掉：按钮上的数字立刻回到真实值
         this.iconMissing.RemoveAll(x => this.plugin.Icons.Has(x));

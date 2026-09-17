@@ -22,6 +22,9 @@ internal sealed class IconStore : IDisposable
 {
     private readonly IconCache cache;
 
+    /// <summary>「本地缓存图标」开关（用户在体检页可关；关掉后回到只用卫月内存缓存）。</summary>
+    private readonly Func<bool> enabled;
+
     /// <summary>正在加载（或已加载）的共享纹理：InternalName → 纹理。</summary>
     private readonly Dictionary<string, ISharedImmediateTexture> textures = new(StringComparer.Ordinal);
 
@@ -49,7 +52,11 @@ internal sealed class IconStore : IDisposable
     /// <summary>预热里等得太久的丢弃（文件坏了 / 解不出来，不要每帧白试）。</summary>
     private static readonly TimeSpan WarmUpGiveUp = TimeSpan.FromSeconds(15);
 
-    public IconStore(string configDirectory) => this.cache = new IconCache(configDirectory);
+    public IconStore(string configDirectory, Func<bool> enabled)
+    {
+        this.cache = new IconCache(configDirectory);
+        this.enabled = enabled;
+    }
 
     /// <summary>缓存目录（写进界面提示，方便用户自己清）。</summary>
     public string CacheDirectory => this.cache.Directory;
@@ -60,6 +67,11 @@ internal sealed class IconStore : IDisposable
     /// <summary>本地有货（内存里或盘上）吗——「检查缺图标」用它判断。</summary>
     public bool Has(InstalledPluginEntry entry)
     {
+        if (!this.enabled())
+        {
+            return false;
+        }
+
         if (this.handles.ContainsKey(entry.InternalName) || this.textures.ContainsKey(entry.InternalName))
         {
             return true;
@@ -73,7 +85,7 @@ internal sealed class IconStore : IDisposable
     public bool TryGetHandle(InstalledPluginEntry entry, out ImTextureID handle)
     {
         handle = ImTextureID.Null;
-        if (this.disposed)
+        if (this.disposed || !this.enabled())
         {
             return false;
         }
@@ -106,6 +118,7 @@ internal sealed class IconStore : IDisposable
     public bool EnsureTexture(InstalledPluginEntry entry)
     {
         if (this.disposed
+            || !this.enabled()
             || this.textures.ContainsKey(entry.InternalName)
             || string.IsNullOrWhiteSpace(entry.IconUrl)
             || !this.cache.TryGetPath(entry.InternalName, entry.IconUrl!, out var path))
@@ -129,7 +142,7 @@ internal sealed class IconStore : IDisposable
     /// <summary>下载线程拿到字节后调它：写进落盘缓存（线程安全）。</summary>
     public bool SaveDownloaded(InstalledPluginEntry entry, byte[] bytes, string? contentType)
     {
-        if (this.disposed || string.IsNullOrWhiteSpace(entry.IconUrl))
+        if (this.disposed || !this.enabled() || string.IsNullOrWhiteSpace(entry.IconUrl))
         {
             return false;
         }
@@ -164,7 +177,7 @@ internal sealed class IconStore : IDisposable
     /// </summary>
     public void ScheduleWarmUp(IReadOnlyList<InstalledPluginEntry> installed)
     {
-        if (this.disposed || this.warmUpQueued)
+        if (this.disposed || !this.enabled() || this.warmUpQueued)
         {
             return;
         }

@@ -394,13 +394,14 @@ internal static class PluginIconLookup
                 return false;
             }
 
-            instance = Activator.CreateInstance(loadedIconType, wrap, DateTime.UtcNow);
+            instance = Activator.CreateInstance(loadedIconType, wrap, DateTime.Now);
             if (instance is null)
             {
                 return false;
             }
 
             map[key] = instance;
+            Plugin.Log.Debug($"[FireGaze] 图标已注入卫月缓存：{entry.InternalName} (key={key})");
             return true;
         }
         catch

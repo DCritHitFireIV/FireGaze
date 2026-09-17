@@ -87,6 +87,12 @@ public sealed class Configuration : IPluginConfiguration
     /// <summary>仓库体检：是否在每条库链下面展开「本机已装插件」的图标（默认关，打开后列表每行会变高）。</summary>
     public bool ShowInstalledIcons { get; set; }
 
+    /// <summary>
+    /// 图标落盘缓存（默认开）：下载的图标存本地、重开游戏不重下，并分批注入回卫月的图标缓存。
+    /// 关掉后回到「只用卫月内存缓存」的旧行为（排查问题时可以一键关掉）。
+    /// </summary>
+    public bool IconCacheEnabled { get; set; } = true;
+
     /// <summary>首次运行标记：安装本插件之前就存在的库没有时间记录。</summary>
     public bool RepoFirstRunDone { get; set; }
 

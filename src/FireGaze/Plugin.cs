@@ -81,7 +81,7 @@ public sealed class Plugin : IDalamudPlugin
         this.ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
         Directory.CreateDirectory(this.ConfigDirectory);
 
-        this.Icons = new UI.IconStore(this.ConfigDirectory);
+        this.Icons = new UI.IconStore(this.ConfigDirectory, () => this.Config.IconCacheEnabled);
 
         this.Repos = new DalamudRepos(Path.Combine(this.ConfigDirectory, "backups"));
 
@@ -378,8 +378,7 @@ public sealed class Plugin : IDalamudPlugin
         {
             this.EnsureIconWarmUpIndex();
             this.Icons.WarmUpStep(4);
-        }
-    }
+        }    }
 
     /// <summary>给图标预热准备「已装插件」索引（后台建一次就够；读不到就过 10 秒再试）。</summary>
     private void EnsureIconWarmUpIndex()
