@@ -42,6 +42,13 @@ internal sealed class RepoAuditTab
     private bool resetSortRequested;
     private readonly Dictionary<string, ImTextureID> iconHandles = new(StringComparer.Ordinal);
 
+    /// <summary>本帧已经查过、确认"缓存里没有"的图标（避免同一帧反复反射；每帧清空）。</summary>
+    private readonly HashSet<string> iconPeekMisses = new(StringComparer.Ordinal);
+
+    /// <summary>本轮 Draw 计时（超过 50ms 会在日志里点名，方便定位是谁在卡）。</summary>
+    private readonly System.Diagnostics.Stopwatch drawWatch = new();
+    private DateTime lastSlowDrawLog = DateTime.MinValue;
+
     // ---------------- 每帧缓存（1000+ 个库时别每帧重算） ----------------
     private List<RepoAuditItem> snapshotCache = [];
     private bool snapshotDirty = true;
@@ -75,6 +82,8 @@ internal sealed class RepoAuditTab
 
     public void Draw()
     {
+        this.drawWatch.Restart();
+
         // 打开本页就能看到库链清单（状态 = 未检查），不必先跑一次网络扫描——「装了没」是离线数据
         this.EnsureList();
         this.EnsureInstalledIndex();
@@ -438,6 +447,8 @@ internal sealed class RepoAuditTab
 
             while (clipper.Step())
             {
+                this.iconPeekMisses.Clear();
+
                 for (var rowIndex = clipper.DisplayStart; rowIndex < clipper.DisplayEnd; rowIndex++)
                 {
                     var item = snapshot[rowIndex];
@@ -563,6 +574,15 @@ internal sealed class RepoAuditTab
         }
 
         this.DrawDeleteConfirmPopup();
+
+        // 自计时：本页一帧超过 50ms 就在日志里点名（定位卡顿用，最多每 5 秒报一次）
+        this.drawWatch.Stop();
+        if (this.drawWatch.ElapsedMilliseconds > 50
+            && DateTime.Now - this.lastSlowDrawLog > TimeSpan.FromSeconds(5))
+        {
+            this.lastSlowDrawLog = DateTime.Now;
+            Plugin.Log.Warning($"[FireGaze] 仓库体检页这一帧用了 {this.drawWatch.ElapsedMilliseconds}ms（{this.items.Count} 个库）");
+        }
     }
 
     /// <summary>
@@ -1280,7 +1300,7 @@ internal sealed class RepoAuditTab
 
         foreach (var entry in item.InstalledPlugins)
         {
-            if (this.iconHandles.ContainsKey(entry.InternalName))
+            if (this.iconHandles.ContainsKey(entry.InternalName) || this.iconPeekMisses.Contains(entry.InternalName))
             {
                 continue;
             }
@@ -1288,6 +1308,10 @@ internal sealed class RepoAuditTab
             if (PluginIconLookup.TryPeekHandle(entry, out var handle) && !handle.IsNull)
             {
                 this.iconHandles[entry.InternalName] = handle;
+            }
+            else
+            {
+                this.iconPeekMisses.Add(entry.InternalName);   // 本帧不再重复查
             }
         }
     }

@@ -278,6 +278,7 @@ internal static class PluginIconLookup
     private static object? imageCache;
     private static MethodInfo? tryGetIcon;
     private static FieldInfo? iconMapField;
+    private static PropertyInfo? loadedTextureProp;
     private static bool resolved;
     private static bool failed;
 
@@ -309,7 +310,8 @@ internal static class PluginIconLookup
             return false;   // 正在下载
         }
 
-        if (loaded.GetType().GetProperty("Texture")?.GetValue(loaded) is IDalamudTextureWrap wrap && !wrap.Handle.IsNull)
+        loadedTextureProp ??= loaded.GetType().GetProperty("Texture");
+        if (loadedTextureProp?.GetValue(loaded) is IDalamudTextureWrap wrap && !wrap.Handle.IsNull)
         {
             handle = wrap.Handle;
             return true;
