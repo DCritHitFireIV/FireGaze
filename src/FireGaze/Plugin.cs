@@ -83,7 +83,7 @@ public sealed class Plugin : IDalamudPlugin
         this.loadedAt = DateTime.UtcNow;
         Framework.Update += this.OnStartupTick;
 
-        Log.Information("[FireGaze] 已加载（初始化将等插件加载阶段结束后进行）");
+        Log.Information($"[FireGaze] 已加载 v{typeof(Plugin).Assembly.GetName().Version}（初始化将等插件加载阶段结束后进行）");
 
         this.AddCommand(
             "/firegaze",

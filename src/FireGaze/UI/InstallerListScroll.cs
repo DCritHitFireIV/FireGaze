@@ -51,7 +51,18 @@ internal sealed class InstallerListScroll
     private void TickCore(Configuration config, Action saveConfig)
     {
         var installer = ImGuiP.FindWindowByID(ImGuiP.ImHashStr(InstallerWindowId));
-        if (installer.IsNull || !installer.WasActive)
+        if (installer.IsNull)
+        {
+            this.wasOpen = false;
+            this.pendingRestore = false;
+            return;
+        }
+
+        // 安装器这帧有没有在画：看 LastFrameActive（每帧刷新），不要用 WasActive——
+        // 窗口关掉之后 WasActive 会一直留着 true，那样就检测不到「下一次打开」。
+        var frame = ImGui.GetFrameCount();
+        var drawnThisFrame = installer.LastFrameActive >= frame - 1;
+        if (!drawnThisFrame)
         {
             this.wasOpen = false;
             this.pendingRestore = false;
@@ -75,7 +86,8 @@ internal sealed class InstallerListScroll
             if (!this.warnedLookup)
             {
                 this.warnedLookup = true;
-                Plugin.Log.Information("[FireGaze] 暂未找到安装器列表子窗口（等它画出来；下次打开安装器时再看）");
+                Plugin.Log.Information("[FireGaze] 暂未找到安装器列表子窗口，下面是当前 ImGui 窗口清单（供排查）：");
+                DumpWindows();
             }
 
             return;
@@ -170,6 +182,41 @@ internal sealed class InstallerListScroll
         }
 
         return ImGuiWindowPtr.Null;
+    }
+
+    /// <summary>排查用：把当前上下文里的窗口名打出来（只打名字里带关键字的，最多 20 个）。</summary>
+    private static void DumpWindows()
+    {
+        var count = 0;
+        foreach (var window in ImGui.GetCurrentContext().Windows)
+        {
+            if (window.IsNull)
+            {
+                continue;
+            }
+
+            var name = WindowName(window);
+            if (name is null)
+            {
+                continue;
+            }
+
+            if (name.Contains("Scrolling", StringComparison.OrdinalIgnoreCase) ||
+                name.Contains("Installer", StringComparison.OrdinalIgnoreCase) ||
+                name.Contains("Categories", StringComparison.OrdinalIgnoreCase))
+            {
+                Plugin.Log.Information($"[FireGaze]   窗口: {name}  (Scroll={window.Scroll.Y:F0}, Max={window.ScrollMax.Y:F0})");
+                if (++count >= 20)
+                {
+                    break;
+                }
+            }
+        }
+
+        if (count == 0)
+        {
+            Plugin.Log.Information("[FireGaze]   （没有任何名字含 Scrolling/Installer/Categories 的窗口）");
+        }
     }
 
     private static unsafe string? WindowName(ImGuiWindowPtr window)
