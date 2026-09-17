@@ -39,6 +39,9 @@ internal sealed class MainWindow : Window
     /// <summary>请求下一帧选中某个页签（由 Plugin.OpenWindow 调用）。</summary>
     public void SelectTab(MainTab tab) => this.pendingSelect = tab;
 
+    /// <summary>窗口每次打开都落在「简介汉化」页（ImGui 会记住上次的页签，这里显式改回）。</summary>
+    public override void OnOpen() => this.pendingSelect = MainTab.Translate;
+
     public override void Draw()
     {
         ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Accent);
