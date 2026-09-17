@@ -1161,7 +1161,11 @@ internal sealed class RepoAuditTab
         }
     }
 
-    /// <summary>图标条：有图标的在前、缺图标的最后（首字母占位）；超出宽度折 `+N`；整条一个 tooltip 一次列出全部名字。</summary>
+    /// <summary>
+    /// 图标条：有图标的在前、缺图标的最后（首字母占位），组内保持原顺序。
+    /// 每个图标悬停显示**它自己**的名字（占位格额外说明图标未缓存）；鼠标停在空白处则一次列出全部名字，
+    /// 而且顺序与图标排列**完全一致**（之前名字按原序列、图标却重排过，所以对不上）。
+    /// </summary>
     private void DrawInstalledIcons(RepoAuditItem item)
     {
         var plugins = item.InstalledPlugins;
@@ -1170,20 +1174,23 @@ internal sealed class RepoAuditTab
             return;
         }
 
-        var withIcon = new List<(InstalledPluginEntry Entry, ImTextureID Handle)>(plugins.Count);
-        var withoutIcon = new List<InstalledPluginEntry>();
+        // 画序：先有图标的（原序），再缺图标的（原序）
+        var sequence = new List<(InstalledPluginEntry Entry, ImTextureID? Handle)>(plugins.Count);
+        var missing = new List<(InstalledPluginEntry Entry, ImTextureID? Handle)>();
 
         foreach (var entry in plugins)
         {
             if (this.iconHandles.TryGetValue(entry.InternalName, out var cached) && !cached.IsNull)
             {
-                withIcon.Add((entry, cached));
+                sequence.Add((entry, cached));
             }
             else
             {
-                withoutIcon.Add(entry);
+                missing.Add((entry, null));
             }
         }
+
+        sequence.AddRange(missing);
 
         const float iconSize = 22f;
         var spacing = ImGui.GetStyle().ItemSpacing.X;
@@ -1194,7 +1201,9 @@ internal sealed class RepoAuditTab
         var maxIcons = Math.Clamp((int)((available + spacing) / (iconSize + spacing)), 1, 8);
 
         var drawn = 0;
-        foreach (var (_, handle) in withIcon)
+        var hoveredIcon = false;
+
+        foreach (var (entry, handle) in sequence)
         {
             if (drawn >= maxIcons)
             {
@@ -1206,27 +1215,27 @@ internal sealed class RepoAuditTab
                 ImGui.SameLine();
             }
 
-            ImGui.Image(handle, new Vector2(iconSize, iconSize));
+            if (handle is { } texture)
+            {
+                ImGui.Image(texture, new Vector2(iconSize, iconSize));
+            }
+            else
+            {
+                DrawIconPlaceholder(entry, iconSize);
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                hoveredIcon = true;
+                ImGui.SetTooltip(handle is null
+                    ? entry.DisplayName + "\n图标还没缓存到本机，插件本身已装"
+                    : entry.DisplayName);
+            }
+
             drawn++;
         }
 
-        foreach (var entry in withoutIcon)
-        {
-            if (drawn >= maxIcons)
-            {
-                break;
-            }
-
-            if (drawn > 0)
-            {
-                ImGui.SameLine();
-            }
-
-            DrawIconPlaceholder(entry, iconSize);
-            drawn++;
-        }
-
-        var hidden = plugins.Count - drawn;
+        var hidden = sequence.Count - drawn;
         if (hidden > 0)
         {
             if (drawn > 0)
@@ -1235,18 +1244,22 @@ internal sealed class RepoAuditTab
             }
 
             ImGui.TextDisabled($"+{hidden}");
+
+            if (ImGui.IsItemHovered())
+            {
+                hoveredIcon = true;
+                ImGui.SetTooltip("另有：" + string.Join("、", sequence.Skip(drawn).Select(x => x.Entry.DisplayName)));
+            }
         }
 
         ImGui.EndGroup();
 
-        if (!ImGui.IsItemHovered())
+        // 停在图标条空白处：一次列出全部名字，顺序与图标排列一致
+        if (!hoveredIcon && ImGui.IsItemHovered())
         {
-            return;
+            ImGui.SetTooltip(
+                $"本机已装 {plugins.Count} 个：" + string.Join("、", sequence.Select(x => x.Entry.DisplayName)));
         }
-
-        var allNames = string.Join("、", plugins.Select(x => x.DisplayName));
-        var note = withoutIcon.Count > 0 ? $"\n（末位 {withoutIcon.Count} 个图标还没缓存到本机）" : string.Empty;
-        ImGui.SetTooltip($"本机已装 {plugins.Count} 个：{allNames}{note}");
     }
 
     /// <summary>没有图标时的占位格：虚线框 + 插件名首字母（与相邻图标同尺寸，不会让行高跳动）。</summary>
