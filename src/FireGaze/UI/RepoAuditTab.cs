@@ -1760,6 +1760,9 @@ internal sealed class RepoAuditTab
         this.iconDownloadRunning = false;
         this.plugin.Icons.FlushIndex();
 
+        // 已进本地缓存的从「缺图标」清单里拿掉：按钮上的数字立刻回到真实值
+        this.iconMissing.RemoveAll(x => this.plugin.Icons.Has(x));
+
         var leftover = new List<InstalledPluginEntry>(this.iconWaiting.Count + this.iconInFlight.Count);
         leftover.AddRange(this.iconWaiting);
         leftover.AddRange(this.iconInFlight);
