@@ -41,7 +41,8 @@ internal sealed class RepoAuditTab
     private bool sortDescending;
     private bool resetSortRequested;
     private readonly Dictionary<string, ImTextureID> iconHandles = new(StringComparer.Ordinal);
-    private DateTime iconRetryAfter = DateTime.MinValue;
+    private readonly List<InstalledPluginEntry> iconPending = [];
+    private int iconCursor;
 
     public RepoAuditTab(Plugin plugin)
     {
@@ -186,7 +187,7 @@ internal sealed class RepoAuditTab
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(indexReady
-                ? "只显示本机没装过插件的库（会同时改变「全选当前」的范围）"
+                ? "只显示本机没装过插件的库"
                 : "本机插件数据不可用，暂时不能按这个筛选");
         }
 
@@ -197,7 +198,7 @@ internal sealed class RepoAuditTab
 
         ImGui.SameLine();
         var showIcons = this.plugin.Config.ShowInstalledIcons;
-        if (ImGui.Checkbox("显示插件图标（列表行会变高）###ShowIcons", ref showIcons))
+        if (ImGui.Checkbox("显示插件图标###ShowIcons", ref showIcons))
         {
             this.plugin.Config.ShowInstalledIcons = showIcons;
             this.plugin.SaveConfig();
@@ -205,14 +206,14 @@ internal sealed class RepoAuditTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("勾选后每条库链下面展开「本机已装」的插件图标；悬停图标条可一次看到全部名字（该设置会被保存）");
+            ImGui.SetTooltip("勾选后每条库链下面展开已安装插件的图标；悬停图标条可一次看到全部名字");
         }
 
         if (!indexReady)
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
-                "读不到卫月的已装插件列表（可能是卫月升级改了内部字段）——「本机已装」这一列显示为 —，本次无法判断哪条库链没在用。");
+                "读不到卫月的已装插件列表，可能是卫月升级改了内部字段——「已安装」这一列显示为 —，本次无法判断哪条库链没在用。");
         }
 
         List<RepoAuditItem> snapshot;
@@ -236,6 +237,11 @@ internal sealed class RepoAuditTab
         }
 
         // ---------------- 结果表 ----------------
+        if (this.plugin.Config.ShowInstalledIcons)
+        {
+            this.PumpIconLookups();
+        }
+
         var tableHeight = MathF.Max(120f, ImGui.GetContentRegionAvail().Y - 6f);
         var tableFlags = ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
                          ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings;
@@ -246,7 +252,7 @@ internal sealed class RepoAuditTab
             ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoSort, 26, 0);
             ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.DefaultSort | ImGuiTableColumnFlags.PreferSortAscending, 120, 1);
             ImGui.TableSetupColumn("仓库地址", ImGuiTableColumnFlags.WidthStretch, 0, 2);
-            ImGui.TableSetupColumn("本机已装", ImGuiTableColumnFlags.WidthFixed, 96, 3);
+            ImGui.TableSetupColumn("已安装", ImGuiTableColumnFlags.WidthFixed, 96, 3);
             ImGui.TableSetupColumn("首次记录", ImGuiTableColumnFlags.WidthFixed, 84, 4);
 
             // 自己逐列发表头（而不是 TableHeadersRow），才能给每列挂 tooltip
@@ -258,7 +264,7 @@ internal sealed class RepoAuditTab
             ImGui.TableHeader("状态");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("默认顺序就是它：死链在最上（点列头可切换升/降）。");
+                ImGui.SetTooltip("默认顺序：死链在最上，点列头可切换升/降。");
             }
 
             ImGui.TableNextColumn();
@@ -269,20 +275,20 @@ internal sealed class RepoAuditTab
             }
 
             ImGui.TableNextColumn();
-            ImGui.TableHeader("本机已装");
+            ImGui.TableHeader("已安装");
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip(
-                    "本机从这条库链装了几个插件（离线统计，装/卸插件后会自动重算）。\n"
-                    + "点一下按数量排行（再点反向）；\n"
-                    + "「—」= 本次读不到已装插件数据（不会当成 0）。");
+                    "本机从这条库链装了 N 个插件。离线统计，装/卸插件后自动重算。\n"
+                    + "点一下按数量排行，再点一下反向；\n"
+                    + "「—」= 本次读不到已装插件数据，不会当成 0。");
             }
 
             ImGui.TableNextColumn();
             ImGui.TableHeader("首次记录");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("FireGaze 第一次看到这条链接的时间；\n安装本插件之前就存在的库没有记录（排序时排最后）。");
+                ImGui.SetTooltip("FireGaze 第一次看到这条链接的时间；\n安装本插件之前就存在的库没有记录，排序时排最后。");
             }
 
             // 读取 ImGui 的排序状态：点列头切换升/降；点「状态」列回到默认的严重度顺序
@@ -549,7 +555,7 @@ internal sealed class RepoAuditTab
         // 非默认排序才显示（这一行常驻内容多，避免把右侧的恢复类按钮挤下去）
         var sortText = this.sortKey switch
         {
-            "installed" => this.sortDescending ? "按本机已装 ↓" : "按本机已装 ↑",
+            "installed" => this.sortDescending ? "按已安装 ↓" : "按已安装 ↑",
             "firstSeen" => this.sortDescending ? "按首次记录 ↓" : "按首次记录 ↑",
             "url" => this.sortDescending ? "按地址 ↓" : "按地址 ↑",
             _ => null,
@@ -1033,6 +1039,20 @@ internal sealed class RepoAuditTab
         this.installedIndex = InstalledPluginsIndex.Build();
         this.installedIndexStale = false;
         this.iconHandles.Clear();
+        this.iconPending.Clear();
+        this.iconCursor = 0;
+
+        if (this.installedIndex.Available)
+        {
+            // 预取队列：所有有来源地址的已装插件（不限可见行），每帧取一小批
+            foreach (var entry in this.installedIndex.All)
+            {
+                if (!string.IsNullOrWhiteSpace(entry.RepositoryUrl))
+                {
+                    this.iconPending.Add(entry);
+                }
+            }
+        }
 
         // 不可用时过几秒再试一次（卫月可能还在启动）；但界面一律按「不可用」渲染
         this.installedIndexRetryAfter = this.installedIndex.Available
@@ -1086,7 +1106,7 @@ internal sealed class RepoAuditTab
 
         if (!indexReady)
         {
-            ImGui.SetTooltip("读不到卫月的已装插件列表（可能是卫月升级改了内部字段），本次无法判断。");
+            ImGui.SetTooltip("读不到卫月的已装插件列表，可能是卫月升级改了内部字段；本次无法判断。");
             return;
         }
 
@@ -1110,9 +1130,38 @@ internal sealed class RepoAuditTab
     }
 
     /// <summary>
-    /// 图标条：有图标的在前、缺图标的最后（首字母占位）；按可用宽度自适应个数，超出折 `+N`；
-    /// 整条一个大 tooltip，一次列出全部名字（不强求逐个悬停）。
+    /// 图标预取：每帧最多试 <paramref name="budget"/> 个（轮转）。
+    /// 不用时间节流：卫月那边一下载完，下一帧就能显示出来。
     /// </summary>
+    private void PumpIconLookups(int budget = 12)
+    {
+        for (var i = 0; i < budget && this.iconPending.Count > 0; i++)
+        {
+            if (this.iconCursor >= this.iconPending.Count)
+            {
+                this.iconCursor = 0;
+            }
+
+            var entry = this.iconPending[this.iconCursor];
+
+            if (this.iconHandles.ContainsKey(entry.InternalName))
+            {
+                this.iconPending.RemoveAt(this.iconCursor);
+                continue;
+            }
+
+            if (PluginIconLookup.TryGetHandle(entry, out var handle) && !handle.IsNull)
+            {
+                this.iconHandles[entry.InternalName] = handle;
+                this.iconPending.RemoveAt(this.iconCursor);
+                continue;
+            }
+
+            this.iconCursor++;   // 还没好：下次轮到它再看
+        }
+    }
+
+    /// <summary>图标条：有图标的在前、缺图标的最后（首字母占位）；超出宽度折 `+N`；整条一个 tooltip 一次列出全部名字。</summary>
     private void DrawInstalledIcons(RepoAuditItem item)
     {
         var plugins = item.InstalledPlugins;
@@ -1121,8 +1170,6 @@ internal sealed class RepoAuditTab
             return;
         }
 
-        var now = DateTime.Now;
-        var retry = now >= this.iconRetryAfter;
         var withIcon = new List<(InstalledPluginEntry Entry, ImTextureID Handle)>(plugins.Count);
         var withoutIcon = new List<InstalledPluginEntry>();
 
@@ -1131,30 +1178,17 @@ internal sealed class RepoAuditTab
             if (this.iconHandles.TryGetValue(entry.InternalName, out var cached) && !cached.IsNull)
             {
                 withIcon.Add((entry, cached));
-                continue;
             }
-
-            if (retry && PluginIconLookup.TryGetHandle(entry, out var handle) && !handle.IsNull)
+            else
             {
-                this.iconHandles[entry.InternalName] = handle;
-                withIcon.Add((entry, handle));
-                continue;
+                withoutIcon.Add(entry);
             }
-
-            withoutIcon.Add(entry);
-        }
-
-        if (retry)
-        {
-            this.iconRetryAfter = now.AddSeconds(2);   // 卫月下载完图标后会自动补上
         }
 
         const float iconSize = 22f;
         var spacing = ImGui.GetStyle().ItemSpacing.X;
 
         ImGui.BeginGroup();
-        ImGui.TextDisabled("本机已装：");
-        ImGui.SameLine();
 
         var available = ImGui.GetContentRegionAvail().X;
         var maxIcons = Math.Clamp((int)((available + spacing) / (iconSize + spacing)), 1, 8);
