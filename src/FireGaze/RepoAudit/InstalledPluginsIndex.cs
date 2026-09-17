@@ -16,6 +16,17 @@ internal sealed class InstalledPluginEntry
     /// <summary>安装时的仓库地址原文（可能是镜像地址，甚至为空 = 手动 / 开发版装的）。</summary>
     public string? RepositoryUrl { get; init; }
 
+    /// <summary>第三方插件在清单里声明的图标地址（可能为空 = 作者没给）。</summary>
+    public string? IconUrl { get; init; }
+
+    /// <summary>官方库（Dip17）通道，官方插件的图标由它拼出来。</summary>
+    public string? Dip17Channel { get; init; }
+
+    /// <summary>这个插件到底“应该”有没有图标（第三方看 IconUrl，官方库看通道）。</summary>
+    public bool DeclaresIcon => this.IsThirdParty
+        ? !string.IsNullOrWhiteSpace(this.IconUrl)
+        : !string.IsNullOrWhiteSpace(this.Dip17Channel);
+
     /// <summary>卫月的 LocalPlugin 实例（给图标缓存用）。</summary>
     public required object RawPlugin { get; init; }
 
@@ -125,6 +136,8 @@ internal sealed class InstalledPluginsIndex
                     InternalName = internalName,
                     DisplayName = displayName,
                     RepositoryUrl = repositoryUrl,
+                    IconUrl = manifest?.GetType().GetProperty("IconUrl", flags)?.GetValue(manifest) as string,
+                    Dip17Channel = manifest?.GetType().GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string,
                     RawPlugin = plugin,
                     Manifest = manifest,
                     IsThirdParty = isThirdParty,

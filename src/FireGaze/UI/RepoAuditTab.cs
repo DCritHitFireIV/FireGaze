@@ -44,6 +44,13 @@ internal sealed class RepoAuditTab
     private readonly List<InstalledPluginEntry> iconPending = [];
     private int iconCursor;
 
+    // ---------------- 图标体检（批量检测缺图标并补齐） ----------------
+    private bool iconAuditRunning;
+    private readonly List<InstalledPluginEntry> iconAuditPending = [];
+    private int iconAuditTotal;
+    private int iconAuditFixed;
+    private DateTime iconAuditDeadline;
+
     public RepoAuditTab(Plugin plugin)
     {
         this.plugin = plugin;
@@ -209,6 +216,28 @@ internal sealed class RepoAuditTab
             ImGui.SetTooltip("勾选后每条库链下面展开已安装插件的图标；悬停图标条可一次看到全部名字");
         }
 
+        ImGui.SameLine();
+        var canAudit = indexReady && !this.scanning && !this.iconAuditRunning;
+        if (!canAudit)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.Button("检查并补齐图标###IconAudit"))
+        {
+            this.StartIconAudit();
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("检查本机已装插件里哪些声明了图标却没下载到，让卫月去补下；完成后会报告仍缺的几个及原因");
+        }
+
+        if (!canAudit)
+        {
+            ImGui.EndDisabled();
+        }
+
         if (!indexReady)
         {
             UiHelpers.ColoredWrapped(
@@ -230,13 +259,23 @@ internal sealed class RepoAuditTab
         // ---------------- 操作工具条 ----------------
         this.DrawActionBar(selectedCount, selectedHidden, snapshot);
 
-        // ---------------- 状态行（只在有事件结果时出现） ----------------
-        if (!string.IsNullOrEmpty(this.statusMessage))
+        // ---------------- 状态行（只在有事件结果时出现；图标体检进行中带进度条） ----------------
+        if (this.iconAuditRunning && this.iconAuditTotal > 0)
+        {
+            ImGui.ProgressBar(
+                (float)this.iconAuditFixed / this.iconAuditTotal,
+                new Vector2(180, 0));
+            ImGui.SameLine();
+            ImGui.TextUnformatted(this.statusMessage ?? string.Empty);
+        }
+        else if (!string.IsNullOrEmpty(this.statusMessage))
         {
             UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.statusMessage);
         }
 
         // ---------------- 结果表 ----------------
+        this.TickIconAudit();
+
         if (this.plugin.Config.ShowInstalledIcons)
         {
             this.PumpIconLookups();
@@ -1118,7 +1157,7 @@ internal sealed class RepoAuditTab
 
         if (item.InstalledPlugins.Count > 0)
         {
-            var names = string.Join("、", item.InstalledPlugins.Take(8).Select(x => x.DisplayName));
+            var names = string.Join("、", item.InstalledPlugins.Take(8).Select(Describe));
             lines.Add(item.InstalledPlugins.Count > 8 ? $"{names}…（共 {item.InstalledPlugins.Count} 个）" : names);
         }
         else
@@ -1127,6 +1166,19 @@ internal sealed class RepoAuditTab
         }
 
         ImGui.SetTooltip(string.Join('\n', lines));
+        return;
+
+        string Describe(InstalledPluginEntry entry)
+        {
+            if (!entry.DeclaresIcon)
+            {
+                return entry.DisplayName;
+            }
+
+            return this.iconHandles.ContainsKey(entry.InternalName)
+                ? entry.DisplayName
+                : entry.DisplayName + " · 缺图标";
+        }
     }
 
     /// <summary>
@@ -1228,7 +1280,9 @@ internal sealed class RepoAuditTab
             {
                 hoveredIcon = true;
                 ImGui.SetTooltip(handle is null
-                    ? entry.DisplayName + "\n图标还没缓存到本机，插件本身已装"
+                    ? entry.DisplayName + (entry.DeclaresIcon
+                        ? "\n图标还没缓存到本机，插件本身已装"
+                        : "\n这个插件没有提供图标")
                     : entry.DisplayName);
             }
 
@@ -1262,7 +1316,149 @@ internal sealed class RepoAuditTab
         }
     }
 
-    /// <summary>没有图标时的占位格：虚线框 + 插件名首字母（与相邻图标同尺寸，不会让行高跳动）。</summary>
+    /// <summary>图标体检：把「声明了图标但本机没缓存」的插件列出来，让卫月去补下。</summary>
+    private void StartIconAudit()
+    {
+        var index = this.installedIndex;
+        if (index is not { Available: true })
+        {
+            return;
+        }
+
+        var missing = index.All
+            .Where(x => x.DeclaresIcon && !this.iconHandles.ContainsKey(x.InternalName))
+            .ToList();
+
+        this.iconAuditPending.Clear();
+        this.iconAuditPending.AddRange(missing);
+        this.iconAuditTotal = missing.Count;
+        this.iconAuditFixed = 0;
+
+        if (missing.Count == 0)
+        {
+            this.statusMessage = "图标体检：声明了图标的插件都已缓存，没有需要补的。";
+            this.statusIsError = false;
+            return;
+        }
+
+        this.iconAuditRunning = true;
+        this.iconAuditDeadline = DateTime.Now.AddSeconds(45);
+        this.statusMessage = $"图标体检：{missing.Count} 个插件缺图标，正在下载… 0/{missing.Count}";
+        this.statusIsError = false;
+    }
+
+    /// <summary>图标体检每帧推一下（下载是卫月那边异步做的，我们只轮询结果）。</summary>
+    private void TickIconAudit()
+    {
+        if (!this.iconAuditRunning)
+        {
+            return;
+        }
+
+        const int budget = 6;
+        for (var i = 0; i < budget && this.iconAuditPending.Count > 0; i++)
+        {
+            var entry = this.iconAuditPending[0];
+
+            if (this.iconHandles.ContainsKey(entry.InternalName))
+            {
+                this.iconAuditPending.RemoveAt(0);
+                this.iconAuditFixed++;
+                continue;
+            }
+
+            if (PluginIconLookup.TryGetHandle(entry, out var handle) && !handle.IsNull)
+            {
+                this.iconHandles[entry.InternalName] = handle;
+                this.iconPending.RemoveAll(x => x.InternalName == entry.InternalName);
+                this.iconAuditPending.RemoveAt(0);
+                this.iconAuditFixed++;
+                continue;
+            }
+
+            // 还没好：移到队尾，下一轮再看（卫月下载队列在跑）
+            this.iconAuditPending.RemoveAt(0);
+            this.iconAuditPending.Add(entry);
+        }
+
+        this.statusMessage = $"图标体检：{this.iconAuditTotal} 个插件缺图标，正在下载… {this.iconAuditFixed}/{this.iconAuditTotal}";
+        this.statusIsError = false;
+
+        if (this.iconAuditPending.Count == 0 || DateTime.Now >= this.iconAuditDeadline)
+        {
+            this.FinishIconAudit();
+        }
+    }
+
+    /// <summary>收尾：报告补齐 / 仍缺，并为仍缺的图标地址跑一次可达性检查（区分失效与网络问题）。</summary>
+    private void FinishIconAudit()
+    {
+        this.iconAuditRunning = false;
+
+        var leftover = this.iconAuditPending.ToList();
+        this.iconAuditPending.Clear();
+
+        var total = this.iconAuditTotal;
+        var fixedCount = this.iconAuditFixed;
+
+        if (leftover.Count == 0)
+        {
+            this.statusMessage = $"图标体检完成：{total} 个缺图标，已全部补上。";
+            this.statusIsError = false;
+            return;
+        }
+
+        var thirdParty = leftover
+            .Where(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconUrl))
+            .Select(x => x.IconUrl!)
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
+        var noAddress = leftover.Count - leftover.Count(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconUrl));
+
+        this.statusMessage =
+            $"图标体检完成：{total} 个缺图标，补上 {fixedCount} 个，{leftover.Count} 个仍缺 ｜ 正在检查这些图标地址…";
+        this.statusIsError = false;
+
+        _ = Task.Run(async () =>
+        {
+            var dead = 0;
+            var failed = 0;
+
+            foreach (var url in thirdParty)
+            {
+                var probe = await RepoScanner.ProbeUrlAsync(url, CancellationToken.None).ConfigureAwait(false);
+                if (probe.Status is 404 or 410)
+                {
+                    dead++;
+                }
+                else if (!probe.Ok)
+                {
+                    failed++;
+                }
+            }
+
+            var parts = new List<string>(3);
+            if (dead > 0)
+            {
+                parts.Add($"其中 {dead} 个图标地址已失效");
+            }
+
+            if (failed > 0)
+            {
+                parts.Add($"{failed} 个下载超时或网络失败");
+            }
+
+            if (noAddress > 0)
+            {
+                parts.Add($"{noAddress} 个没有图标地址，作者就没提供");
+            }
+
+            this.statusMessage =
+                $"图标体检完成：{total} 个缺图标，补上 {fixedCount} 个，{leftover.Count} 个仍缺"
+                + (parts.Count > 0 ? " ｜ " + string.Join("，", parts) : string.Empty);
+            this.statusIsError = false;
+        });
+    }
     private static void DrawIconPlaceholder(InstalledPluginEntry entry, float size)
     {
         var start = ImGui.GetCursorScreenPos();

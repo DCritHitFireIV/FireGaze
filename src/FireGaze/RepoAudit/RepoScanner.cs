@@ -88,6 +88,33 @@ public static class RepoScanner
 
     private sealed record FetchOutcome(FetchResult? Success, List<FetchResult> Failures);
 
+    /// <summary>图标体检用的探测结果：<paramref name="Status"/> 0 = 网络层失败。</summary>
+    public readonly record struct UrlProbe(bool Ok, int Status, string? Error);
+
+    /// <summary>
+    /// 探一次外部地址（图标体检用）：复用体检的多线路竞速与超时策略，只关心“通 / 不通 / 状态码”。
+    /// </summary>
+    public static async Task<UrlProbe> ProbeUrlAsync(string url, CancellationToken cancellationToken)
+    {
+        using var handler = new SocketsHttpHandler
+        {
+            AutomaticDecompression = DecompressionMethods.All,
+            ConnectTimeout = TimeSpan.FromSeconds(10),
+            PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+            MaxConnectionsPerServer = 4,
+        };
+        using var client = new HttpClient(handler) { Timeout = Timeout.InfiniteTimeSpan };
+
+        var outcome = await FetchBestAsync(client, url, cancellationToken).ConfigureAwait(false);
+        if (outcome.Success is { } ok)
+        {
+            return new UrlProbe(true, ok.Status, null);
+        }
+
+        var best = outcome.Failures.OrderByDescending(x => x.Status).FirstOrDefault();
+        return new UrlProbe(false, best?.Status ?? 0, best?.Error);
+    }
+
     /// <summary>
     /// 扫描全部条目（后台线程调用）。每完成一条调用一次 <paramref name="onItemDone"/>，
     /// 进度计数通过 <paramref name="onProgress"/> 上报。
