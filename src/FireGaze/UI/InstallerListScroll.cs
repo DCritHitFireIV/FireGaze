@@ -20,8 +20,8 @@ namespace FireGaze.UI;
 /// </remarks>
 internal sealed class InstallerListScroll
 {
-    /// <summary>安装器窗口名 "…###XlPluginInstaller" 里 ### 之后那段（跨语言稳定）。</summary>
-    private const string InstallerWindowId = "XlPluginInstaller";
+    /// <summary>安装器窗口名里的稳定标记（"插件安装器###XlPluginInstaller"，### 之后那段跨语言固定）。</summary>
+    private const string InstallerWindowMark = "###XlPluginInstaller";
 
     /// <summary>列表外层的分类子窗口。</summary>
     private const string CategoriesChildId = "InstallerCategories";
@@ -34,27 +34,46 @@ internal sealed class InstallerListScroll
     private int restoreGraceFrames;
     private bool warnedLookup;
     private bool loggedLookup;
+    private bool loggedStart;
+    private bool warnedMissingInstaller;
+    private bool loggedInstaller;
 
     /// <summary>每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。</summary>
-    public void Tick(Configuration config, Action saveConfig)
+    public void Tick(Configuration config, Action saveConfig, Func<bool> isInstallerOpen)
     {
         try
         {
-            this.TickCore(config, saveConfig);
+            if (!this.loggedStart)
+            {
+                this.loggedStart = true;
+                Plugin.Log.Information("[FireGaze] 列表位置记忆已启动（每帧检查安装器窗口，不用钩子）");
+            }
+
+            this.TickCore(config, saveConfig, isInstallerOpen);
         }
         catch (Exception e)
         {
-            Plugin.Log.Debug(e, "[FireGaze] 列表位置记忆出错（忽略）");
+            Plugin.Log.Warning(e, "[FireGaze] 列表位置记忆出错（本次忽略）");
         }
     }
 
-    private void TickCore(Configuration config, Action saveConfig)
+    private void TickCore(Configuration config, Action saveConfig, Func<bool> isInstallerOpen)
     {
-        var installer = ImGuiP.FindWindowByID(ImGuiP.ImHashStr(InstallerWindowId));
+        var installer = FindInstallerWindow();
         if (installer.IsNull)
         {
             this.wasOpen = false;
             this.pendingRestore = false;
+
+            // 只有当卫月确实认为「安装器开着」时才报——否则没打开安装器时报这个只会误导
+            if (!this.warnedMissingInstaller && isInstallerOpen())
+            {
+                this.warnedMissingInstaller = true;
+                Plugin.Log.Information(
+                    "[FireGaze] 没找到安装器窗口（没打开过？还是窗口名变了？）。若你刚开过安装器，请把这行连同下面的清单发我：");
+                DumpWindows();
+            }
+
             return;
         }
 
@@ -67,6 +86,12 @@ internal sealed class InstallerListScroll
             this.wasOpen = false;
             this.pendingRestore = false;
             return;
+        }
+
+        if (!this.loggedInstaller)
+        {
+            this.loggedInstaller = true;
+            Plugin.Log.Information($"[FireGaze] 找到安装器窗口：{WindowName(installer) ?? "(名字读不到)"}");
         }
 
         if (!this.wasOpen)
@@ -155,17 +180,37 @@ internal sealed class InstallerListScroll
     /// 找列表子窗口：主路径按 ID 逐层算（ImGui 的 child ID = 父窗口 GetID(名字)），
     /// 兜底按名字扫一遍当前上下文里的所有窗口。
     /// </summary>
-    private static ImGuiWindowPtr FindListWindow(ImGuiWindowPtr installer)
+    /// <summary>按窗口名找安装器窗口（"…###XlPluginInstaller"）。</summary>
+    private static ImGuiWindowPtr FindInstallerWindow()
     {
-        var categories = ImGuiP.FindWindowByID(ImGuiP.GetID(installer, CategoriesChildId));
-        if (!categories.IsNull)
+        foreach (var window in ImGui.GetCurrentContext().Windows)
         {
-            var list = ImGuiP.FindWindowByID(ImGuiP.GetID(categories, ListChildId));
-            if (!list.IsNull)
+            if (window.IsNull)
             {
-                return list;
+                continue;
+            }
+
+            var name = WindowName(window);
+            if (name is null)
+            {
+                continue;
+            }
+
+            if (name.Contains(InstallerWindowMark, StringComparison.Ordinal) ||
+                name.Contains("XlPluginInstaller", StringComparison.Ordinal))
+            {
+                return window;
             }
         }
+
+        return ImGuiWindowPtr.Null;
+    }
+
+    /// <summary>按窗口名找列表子窗口（名字里带 ScrollingPlugins，且属于安装器那棵树）。</summary>
+    private static ImGuiWindowPtr FindListWindow(ImGuiWindowPtr installer)
+    {
+        var installerName = WindowName(installer);
+        ImGuiWindowPtr loose = ImGuiWindowPtr.Null;
 
         foreach (var window in ImGui.GetCurrentContext().Windows)
         {
@@ -175,13 +220,21 @@ internal sealed class InstallerListScroll
             }
 
             var name = WindowName(window);
-            if (name is not null && name.Contains(ListChildId, StringComparison.Ordinal))
+            if (name is null || !name.Contains(ListChildId, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            // 名字形如 "<安装器窗口名>/InstallerCategories/ScrollingPlugins_XXXXXXXX"
+            if (installerName is not null && name.StartsWith(installerName, StringComparison.Ordinal))
             {
                 return window;
             }
+
+            loose = window;   // 兜底：任何叫这个的都先记着
         }
 
-        return ImGuiWindowPtr.Null;
+        return loose;
     }
 
     /// <summary>排查用：把当前上下文里的窗口名打出来（只打名字里带关键字的，最多 20 个）。</summary>
@@ -201,15 +254,17 @@ internal sealed class InstallerListScroll
                 continue;
             }
 
-            if (name.Contains("Scrolling", StringComparison.OrdinalIgnoreCase) ||
-                name.Contains("Installer", StringComparison.OrdinalIgnoreCase) ||
-                name.Contains("Categories", StringComparison.OrdinalIgnoreCase))
+            var interesting = name.Contains("Scrolling", StringComparison.OrdinalIgnoreCase) ||
+                              name.Contains("Installer", StringComparison.OrdinalIgnoreCase) ||
+                              name.Contains("Categories", StringComparison.OrdinalIgnoreCase) ||
+                              name.Contains("插件", StringComparison.Ordinal);
+
+            Plugin.Log.Information(
+                $"[FireGaze]   窗口{(interesting ? "*" : " ")}: {name}  (Scroll={window.Scroll.Y:F0}, Max={window.ScrollMax.Y:F0})");
+
+            if (++count >= 40)
             {
-                Plugin.Log.Information($"[FireGaze]   窗口: {name}  (Scroll={window.Scroll.Y:F0}, Max={window.ScrollMax.Y:F0})");
-                if (++count >= 20)
-                {
-                    break;
-                }
+                break;
             }
         }
 

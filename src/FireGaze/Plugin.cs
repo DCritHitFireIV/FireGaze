@@ -42,6 +42,8 @@ public sealed class Plugin : IDalamudPlugin
 
     private int tableUpdateBusy;
     private readonly UI.InstallerListScroll installerListScroll = new();
+    private object? dalamudInterface;
+    private PropertyInfo? installerOpenProp;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -312,7 +314,29 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>每帧看一眼插件安装器列表的滚动位置（不用钩子，纯 ImGui 公开绑定）。</summary>
     private void TickInstallerListScroll()
     {
-        this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false));
+        this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false), this.IsPluginInstallerOpen);
+    }
+
+    /// <summary>卫月自己怎么看「插件安装器开着没有」（只读反射，不挂钩子）。</summary>
+    private bool IsPluginInstallerOpen()
+    {
+        try
+        {
+            this.dalamudInterface ??= ResolveService("Dalamud.Interface.Internal.DalamudInterface");
+            if (this.dalamudInterface is null)
+            {
+                return false;
+            }
+
+            this.installerOpenProp ??= this.dalamudInterface.GetType()
+                .GetProperty("IsPluginInstallerOpen", BindingFlags.Instance | BindingFlags.Public);
+
+            return this.installerOpenProp?.GetValue(this.dalamudInterface) is true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     // ------------------------------------------------------------------ 配置
