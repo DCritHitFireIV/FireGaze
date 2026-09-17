@@ -45,7 +45,7 @@ internal sealed class MainWindow : Window
         ImGui.TextUnformatted("FireGaze");
         ImGui.PopStyleColor();
         ImGui.SameLine();
-        ImGui.TextDisabled("卫月插件库工具箱 · 汉化 / 体检 / 拦住自动更新");
+        ImGui.TextDisabled("卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新");
 
         ImGui.Separator();
 
@@ -66,7 +66,7 @@ internal sealed class MainWindow : Window
             }
 
             flags = this.pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("拦住自动更新", flags))
+            if (ImGui.BeginTabItem("插件安装器", flags))
             {
                 this.installerTab.Draw();
                 ImGui.EndTabItem();

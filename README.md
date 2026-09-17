@@ -16,7 +16,7 @@
 基于 **卫月 (Dalamud)** 平台的 **最终幻想 14 (FF14)** 游戏插件
 Final Fantasy XIV Game Plugin Based On Dalamud.
 
-提供以下功能：第三方插件简介汉化，第三方插件仓库坏链检测，拦住插件安装器的自动刷新（并记住列表浏览位置）
+提供以下功能：第三方插件简介汉化，第三方插件仓库坏链检测，拦住插件安装器的自动刷新
 
 Provides: localization of third-party plugin descriptions; scanning of third-party plugin repositories; blocking automatic reloads while browsing plugin repositories.
 

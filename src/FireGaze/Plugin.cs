@@ -60,6 +60,16 @@ public sealed class Plugin : IDalamudPlugin
             pluginInterface.SavePluginConfig(this.Config);
         }
 
+        // 3.0：安装器那两项功能改为**默认关**（由用户自己打开）
+        if (this.Config.Version < 3)
+        {
+            this.Config.Version = 3;
+            this.Config.RememberListScroll = false;
+            this.Config.BlockInstallerAutoRefresh = false;
+            this.Config.ListScrollY = null;
+            pluginInterface.SavePluginConfig(this.Config);
+        }
+
         this.ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
         Directory.CreateDirectory(this.ConfigDirectory);
 

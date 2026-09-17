@@ -2,7 +2,7 @@ using Dalamud.Bindings.ImGui;
 
 namespace FireGaze.UI;
 
-/// <summary>「拦住自动更新」页：拦住安装器的自动刷新 + 记住列表浏览位置。</summary>
+/// <summary>「插件安装器」页：拦住安装器的自动刷新 + 记住列表浏览位置（两项都默认关）。</summary>
 internal sealed class InstallerTab
 {
     private readonly Plugin plugin;
@@ -61,7 +61,10 @@ internal sealed class InstallerTab
 
         ImGui.Spacing();
         ImGui.Separator();
-        UiHelpers.ColoredWrapped(UiHelpers.Muted, "状态：" + this.plugin.InstallerFeatures.StatusText());
+        var status = block || remember
+            ? this.plugin.InstallerFeatures.StatusText()
+            : "未启用（上面两个开关都关着）";
+        UiHelpers.ColoredWrapped(UiHelpers.Muted, "状态：" + status);
         UiHelpers.ColoredWrapped(UiHelpers.Muted, "改动立即保存，下次打开插件安装器时生效。");
     }
 }
