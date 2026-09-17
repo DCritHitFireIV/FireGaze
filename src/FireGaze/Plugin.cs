@@ -47,6 +47,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly UI.InstallerListScroll installerListScroll = new();
     private Task<RepoAudit.InstalledPluginsIndex>? iconWarmUpIndexTask;
     private DateTime iconWarmUpRetryAfter = DateTime.MinValue;
+    private bool iconWarmUpRequested;
     private bool installerDefaultsNotice;
     private bool startupInitDone;
     private DateTime loadedAt;
@@ -383,6 +384,11 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>给图标预热准备「已装插件」索引（后台建一次就够；读不到就过 10 秒再试）。</summary>
     private void EnsureIconWarmUpIndex()
     {
+        if (this.iconWarmUpRequested)
+        {
+            return;   // 已经排过一次（含空清单），不要每帧重建索引
+        }
+
         if (this.iconWarmUpIndexTask is null)
         {
             if (DateTime.UtcNow < this.iconWarmUpRetryAfter)
@@ -407,6 +413,7 @@ public sealed class Plugin : IDalamudPlugin
 
         if (index is { Available: true })
         {
+            this.iconWarmUpRequested = true;
             this.Icons.ScheduleWarmUp(index.All);
         }
         else

@@ -38,6 +38,9 @@ internal sealed class IconStore : IDisposable
     /// <summary>安装器打开时的预热清单（本会话只排一次）。</summary>
     private List<InstalledPluginEntry>? warmUpSource;
 
+    /// <summary>本会话是否已经排过预热（空清单也算，否则会每帧重建索引）。</summary>
+    private bool warmUpQueued;
+
     /// <summary>已建纹理、还没拿到句柄的（拿到那一刻会顺手注入卫月缓存）。</summary>
     private readonly List<(InstalledPluginEntry Entry, DateTime Since)> warmUpPending = [];
 
@@ -161,10 +164,12 @@ internal sealed class IconStore : IDisposable
     /// </summary>
     public void ScheduleWarmUp(IReadOnlyList<InstalledPluginEntry> installed)
     {
-        if (this.disposed || this.warmUpSource is not null)
+        if (this.disposed || this.warmUpQueued)
         {
             return;
         }
+
+        this.warmUpQueued = true;
 
         var list = new List<InstalledPluginEntry>();
         foreach (var entry in installed)
@@ -182,7 +187,16 @@ internal sealed class IconStore : IDisposable
 
         this.warmUpSource = list;
         this.warmUpCursor = 0;
-        Plugin.Log.Information($"[FireGaze] 插件安装器已打开：本地缓存的 {list.Count} 个图标将分批挂上（不重新下载）");
+
+        // 只在真的有东西要挂时写 Information（空缓存时不要刷屏）
+        if (list.Count > 0)
+        {
+            Plugin.Log.Information($"[FireGaze] 插件安装器已打开：本地缓存的 {list.Count} 个图标将分批挂上（不重新下载）");
+        }
+        else
+        {
+            Plugin.Log.Debug("[FireGaze] 图标预热：本地缓存里暂时没有已装插件的图标");
+        }
     }
 
     /// <summary>每帧推进预热（界面线程；<paramref name="max"/> = 本帧最多处理几个）。</summary>
@@ -224,7 +238,7 @@ internal sealed class IconStore : IDisposable
 
         if (this.warmUpCursor >= this.warmUpSource.Count && this.warmUpPending.Count == 0)
         {
-            this.warmUpSource = null;   // 排完了，收工
+            this.warmUpSource = null;   // 排完了，收工（但 warmUpQueued 仍为 true，不再重建索引）
         }
     }
 
@@ -258,6 +272,7 @@ internal sealed class IconStore : IDisposable
         this.handles.Clear();
         this.textures.Clear();
         this.warmUpSource = null;
+        this.warmUpQueued = true;
         this.warmUpPending.Clear();
     }
 
