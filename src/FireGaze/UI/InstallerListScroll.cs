@@ -94,6 +94,13 @@ internal sealed class InstallerListScroll
             this.loggedInstaller = true;
             var expectId = ImGuiP.ImHashStr("###XlPluginInstaller");
             Plugin.Log.Information($"[FireGaze] 找到安装器窗口：{WindowName(installer) ?? "(读不到名字)"}（候选命中：{installerHit}）");
+            var stackSize = installer.IDStack.Size;
+            uint stackBack = 0;
+            unsafe { if (stackSize > 0) stackBack = *installer.IDStack.Back; }
+            var idFromStack = ImGuiP.ImHashStr(CategoriesChildId, stackBack);
+            Plugin.Log.Information(
+                $"[FireGaze] IDStack 探针：Size={stackSize}；Back=0x{stackBack:X8}（窗口 ID=0x{installer.ID:X8}）"
+                + $"；用它算 categories=0x{idFromStack:X8}（FindWindowByID={(ImGuiP.FindWindowByID(idFromStack).IsNull ? "未命中" : "命中")}）");
             Plugin.Log.Information(
                 $"[FireGaze] 窗口结构自检：ID=0x{installer.ID:X8}（按名字算是 0x{expectId:X8}）"
                 + $"；Scroll=({installer.Scroll.X:F0},{installer.Scroll.Y:F0})"
