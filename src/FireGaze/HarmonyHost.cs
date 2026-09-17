@@ -103,6 +103,8 @@ internal sealed class HarmonyHost
     {
         error = null;
 
+        // 1) 默认 ALC 里已经有 0Harmony（别的插件加载过）→ 直接复用。
+        //    这样不新增任何全局副作用（重要：其他插件的自保护/加固器对默认 ALC 的变化很敏感）。
         foreach (var loaded in AssemblyLoadContext.Default.Assemblies)
         {
             if (string.Equals(loaded.GetName().Name, HarmonyAssemblyName, StringComparison.OrdinalIgnoreCase))
@@ -118,9 +120,20 @@ internal sealed class HarmonyHost
             return null;
         }
 
+        // 2) 加载进我们自己的隔离 ALC（非可回收），不污染默认 ALC。
+        //    与插件自身的 collectible / in-memory ALC 不同：这里是从磁盘加载的普通 ALC，
+        //    Harmony 自建动态程序集不会有 0x80131515 问题，也不会改变其他插件看到的环境。
         try
         {
-            return AssemblyLoadContext.Default.LoadFromAssemblyPath(path);
+            var context = new AssemblyLoadContext("FireGaze.Harmony", isCollectible: false);
+            context.Resolving += (ctx, name) =>
+                string.Equals(name.Name, HarmonyAssemblyName, StringComparison.OrdinalIgnoreCase)
+                    ? ctx.LoadFromAssemblyPath(path)
+                    : null;
+
+            var assembly = context.LoadFromAssemblyPath(path);
+            HarmonyContext = context;   // 保持引用
+            return assembly;
         }
         catch (Exception e)
         {
@@ -128,4 +141,7 @@ internal sealed class HarmonyHost
             return null;
         }
     }
+
+    /// <summary>我们自己的 0Harmony ALC（保持引用，防被回收；非可回收 ALC 本身也不会被回收）。</summary>
+    private static AssemblyLoadContext? HarmonyContext { get; set; }
 }
