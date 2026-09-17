@@ -6,17 +6,23 @@ using FireGaze.RepoAudit;
 namespace FireGaze.UI;
 
 /// <summary>
-/// 图标落盘缓存的「界面侧」：把缓存文件变成纹理、并把它塞回卫月的图标缓存。
+/// 图标落盘缓存的「界面侧」：把缓存文件变成**我们自己的**纹理、并把它塞回卫月的图标缓存。
 /// </summary>
 /// <remarks>
 /// 两个目的：
 /// <list type="number">
 /// <item>体检页显示图标（第一次下载后，重开游戏直接从本地出图，不再重下）；</item>
 /// <item>把纹理注入卫月 <c>PluginImageCache.pluginIconMap</c>（只补我们没有、它也没有的键），
-/// 这样**插件安装器**里那些插件也能立刻用上本地缓存，不必等它自己重新下载。</item>
+/// 这样**插件安装器**里那些插件也能立刻用上本地缓存。</item>
 /// </list>
-/// 注入的条目在 <see cref="Dispose"/> 时按「还是不是我们放进去的那个对象」逐个撤回，
-/// 免得插件卸载后安装器还指向已经销毁的纹理。
+/// <para>
+/// <b>2026-09-18 血教训（渲染器崩溃）</b>：第一版用 <c>GetFromFileAbsolute</c>（共享纹理）并且只留了
+/// <c>wrap.Handle</c>（一个裸指针）——共享纹理会被纹理管理器的清理线程释放，之后画这个裸句柄
+/// 直接把 DX11 渲染线程带崩（CLR 未处理异常 + <c>Dx11Renderer.RenderDrawDataInternal</c>，转储
+/// <c>dalamud_appcrash_20260918_030142</c>）。现在改成：用 <c>CreateFromImageAsync</c> **自己创建并持有
+/// <see cref="IDalamudTextureWrap"/> 对象**（保住引用；文档也要求「用后自行 Dispose」），
+/// 画的时候现取 <c>Handle</c>，卸载时先撤回注入、再逐个 Dispose。
+/// </para>
 /// </remarks>
 internal sealed class IconStore : IDisposable
 {
@@ -25,17 +31,16 @@ internal sealed class IconStore : IDisposable
     /// <summary>「本地缓存图标」开关（用户在体检页可关；关掉后回到只用卫月内存缓存）。</summary>
     private readonly Func<bool> enabled;
 
-    /// <summary>正在加载（或已加载）的共享纹理：InternalName → 纹理。</summary>
-    private readonly Dictionary<string, ISharedImmediateTexture> textures = new(StringComparer.Ordinal);
+    /// <summary>正在创建的纹理（后台由卫月解码）：InternalName → 任务。</summary>
+    private readonly Dictionary<string, Task<IDalamudTextureWrap>> loading = new(StringComparer.Ordinal);
 
-    /// <summary>已经拿到句柄、可以直接画的：InternalName → 句柄。</summary>
-    private readonly Dictionary<string, ImTextureID> handles = new(StringComparer.Ordinal);
+    /// <summary>已经拿到、**由我们持有**的纹理：InternalName → 纹理。</summary>
+    private readonly Dictionary<string, IDalamudTextureWrap> wraps = new(StringComparer.Ordinal);
 
     /// <summary>我们注入进卫月缓存的对象（撤回时要按对象比对）：键 → LoadedIcon 实例。</summary>
     private readonly Dictionary<string, object> injected = new(StringComparer.Ordinal);
 
     private bool disposed;
-
     private DateTime nextFlush = DateTime.MinValue;
 
     /// <summary>安装器打开时的预热清单（本会话只排一次）。</summary>
@@ -46,6 +51,8 @@ internal sealed class IconStore : IDisposable
 
     /// <summary>已建纹理、还没拿到句柄的（拿到那一刻会顺手注入卫月缓存）。</summary>
     private readonly List<(InstalledPluginEntry Entry, DateTime Since)> warmUpPending = [];
+
+    private bool loggedProvider;
 
     private int warmUpCursor;
 
@@ -72,7 +79,7 @@ internal sealed class IconStore : IDisposable
             return false;
         }
 
-        if (this.handles.ContainsKey(entry.InternalName) || this.textures.ContainsKey(entry.InternalName))
+        if (this.wraps.ContainsKey(entry.InternalName) || this.loading.ContainsKey(entry.InternalName))
         {
             return true;
         }
@@ -90,36 +97,43 @@ internal sealed class IconStore : IDisposable
             return false;
         }
 
-        if (this.handles.TryGetValue(entry.InternalName, out handle))
+        if (this.wraps.TryGetValue(entry.InternalName, out var ready))
         {
-            return true;
+            handle = ready.Handle;
+            return !handle.IsNull;
         }
 
-        if (!this.textures.TryGetValue(entry.InternalName, out var shared))
-        {
-            if (!this.EnsureTexture(entry) || !this.textures.TryGetValue(entry.InternalName, out shared))
-            {
-                return false;
-            }
-        }
-
-        if (!shared.TryGetWrap(out var wrap, out _) || wrap is null || wrap.Handle.IsNull)
+        if (!this.loading.TryGetValue(entry.InternalName, out var task) && !this.EnsureTexture(entry))
         {
             return false;
         }
 
+        if (!this.loading.TryGetValue(entry.InternalName, out task) || !task.IsCompleted)
+        {
+            return false;
+        }
+
+        this.loading.Remove(entry.InternalName);
+
+        if (task.Status != TaskStatus.RanToCompletion || task.Result is not { } wrap || wrap.Handle.IsNull)
+        {
+            Plugin.Log.Debug($"[FireGaze] 图标纹理解码失败：{entry.InternalName}");
+            return false;
+        }
+
+        this.wraps[entry.InternalName] = wrap;
         handle = wrap.Handle;
-        this.handles[entry.InternalName] = handle;
         this.TryInject(entry, wrap);
         return true;
     }
 
-    /// <summary>有落盘文件就建立共享纹理（界面线程调用；实际解码由卫月在后台做）。</summary>
+    /// <summary>有落盘文件就开始建纹理（界面线程调用；解码在卫月内部异步做）。</summary>
     public bool EnsureTexture(InstalledPluginEntry entry)
     {
         if (this.disposed
             || !this.enabled()
-            || this.textures.ContainsKey(entry.InternalName)
+            || this.wraps.ContainsKey(entry.InternalName)
+            || this.loading.ContainsKey(entry.InternalName)
             || string.IsNullOrWhiteSpace(entry.IconUrl)
             || !this.cache.TryGetPath(entry.InternalName, entry.IconUrl!, out var path))
         {
@@ -128,8 +142,19 @@ internal sealed class IconStore : IDisposable
 
         try
         {
-            // 我们的路径一定是全路径（配置目录在 %APPDATA% 下），所以用 GetFromFileAbsolute
-            this.textures[entry.InternalName] = Plugin.Textures.GetFromFileAbsolute(path);
+            if (!this.loggedProvider)
+            {
+                this.loggedProvider = true;
+                Plugin.Log.Debug($"[FireGaze] 图标纹理提供者：{Plugin.Textures.GetType().FullName}");
+            }
+
+            var bytes = File.ReadAllBytes(path);
+            var task = Plugin.Textures.CreateFromImageAsync(
+                bytes,
+                $"FireGaze:{entry.InternalName}",
+                CancellationToken.None);
+
+            this.loading[entry.InternalName] = task;
             return true;
         }
         catch (Exception e)
@@ -237,7 +262,7 @@ internal sealed class IconStore : IDisposable
             }
         }
 
-        // 2) 从清单里取新的建纹理
+        // 2) 从清单里取新的开始建纹理
         while (max > 0 && this.warmUpCursor < this.warmUpSource.Count)
         {
             var entry = this.warmUpSource[this.warmUpCursor++];
@@ -268,7 +293,7 @@ internal sealed class IconStore : IDisposable
             // ignore
         }
 
-        // 把注入进卫月缓存的条目撤回（只撤我们自己放进去的那些）
+        // ① 先把注入进卫月缓存的条目撤回（只撤我们自己放进去的那些）
         foreach (var (key, instance) in this.injected)
         {
             try
@@ -282,8 +307,11 @@ internal sealed class IconStore : IDisposable
         }
 
         this.injected.Clear();
-        this.handles.Clear();
-        this.textures.Clear();
+
+        // 我们的纹理归卫月的「插件作用域」管（TextureManagerPluginScoped 在卸载时会统一释放）：
+        // 这里只丢掉引用，**不自己 Dispose**——直接 Dispose 会和渲染线程抢，也容易双重释放。
+        this.wraps.Clear();
+        this.loading.Clear();
         this.warmUpSource = null;
         this.warmUpQueued = true;
         this.warmUpPending.Clear();
