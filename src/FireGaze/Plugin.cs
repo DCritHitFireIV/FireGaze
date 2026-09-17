@@ -39,6 +39,8 @@ public sealed class Plugin : IDalamudPlugin
 
     [PluginService] public static IChatGui Chat { get; private set; } = null!;
 
+    [PluginService] public static IFramework Framework { get; private set; } = null!;
+
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
@@ -57,6 +59,8 @@ public sealed class Plugin : IDalamudPlugin
     private PropertyInfo? isOpenProp;
     private int tableUpdateBusy;
     private long userIntentTicks;
+    private bool startupInitDone;
+    private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
 
     /// <summary>「用户刚动过安装器」的放行窗口：覆盖一次完整重载（上千仓库可能跑几分钟）。</summary>
@@ -89,24 +93,17 @@ public sealed class Plugin : IDalamudPlugin
         this.Patcher = new ManifestPatcher(() => this.Config, this.Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
-        this.ReloadTranslationTable(out _);
-        this.TrackFirstSeen();
-
         this.window = new MainWindow(this);
         this.windowSystem.AddWindow(this.window);
         pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
         pluginInterface.UiBuilder.OpenConfigUi += this.ToggleWindow;
 
-        // 懒加载：模式为「关闭」时完全不碰 Harmony（连 0Harmony.dll 都不加载），
-        // 避免给其他插件带去任何副作用。切模式时再按需安装/卸载。
-        if (this.Config.BlockerMode != BlockMode.Off)
-        {
-            this.InstallPatches();
-        }
-        else
-        {
-            this.BlockerStatusText = "未挂钩（模式为关闭）";
-        }
+        // 重活（词表、挂钩、定时器）一律延后到「所有插件加载完」之后：
+        // 加壳插件的模块初始化器会在加载阶段扫描/改写进程内存，我们需要在那个窗口里保持安静。
+        this.loadedAt = DateTime.UtcNow;
+        Framework.Update += this.OnStartupTick;
+
+        Log.Information("[FireGaze] 已加载（初始化将等插件加载阶段结束后进行）");
 
         this.AddCommand(
             "/firegaze",
@@ -140,11 +137,81 @@ public sealed class Plugin : IDalamudPlugin
             this.ApplyTranslationsQuiet();
             this.MaybeAutoUpdateTable();
         };
-        this.translateTimer.Start();
+    }
 
-        Log.Information(
-            $"[FireGaze] 已加载：词表 {this.Table.Count} 条；拦截模式 = {this.Config.BlockerMode}；" +
-            $"汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}");
+    /// <summary>
+    /// 延迟初始化：等所有插件都不在加载中（或超时 30 秒）再动手。
+    /// 加壳插件（.NET Reactor 系）在模块初始化器里会扫描/改写进程内存，
+    /// 我们在这个窗口里不加载 0Harmony、不打补丁、不开定时器，避免把它们搞崩。
+    /// </summary>
+    private void OnStartupTick(IFramework framework)
+    {
+        if (this.startupInitDone)
+        {
+            return;
+        }
+
+        if (this.AnyPluginLoading() && DateTime.UtcNow - this.loadedAt < TimeSpan.FromSeconds(30))
+        {
+            return;
+        }
+
+        this.startupInitDone = true;
+        Framework.Update -= this.OnStartupTick;
+
+        try
+        {
+            this.ReloadTranslationTable(out _);
+            this.TrackFirstSeen();
+
+            if (this.Config.BlockerMode != BlockMode.Off)
+            {
+                this.InstallPatches();
+            }
+            else
+            {
+                this.BlockerStatusText = "未挂钩（模式为关闭）";
+            }
+
+            this.translateTimer.Start();
+
+            Log.Information(
+                $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {this.Table.Count} 条；" +
+                $"拦截模式 = {this.Config.BlockerMode}；汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}");
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "[FireGaze] 延迟初始化失败");
+        }
+    }
+
+    /// <summary>是否还有插件正在加载（反射读 PluginState == Loading）。</summary>
+    private bool AnyPluginLoading()
+    {
+        try
+        {
+            var manager = ResolveService("Dalamud.Plugin.Internal.PluginManager");
+            var prop = manager?.GetType().GetProperty("InstalledPlugins", BindingFlags.Public | BindingFlags.Instance);
+            if (prop?.GetValue(manager) is not System.Collections.IEnumerable plugins)
+            {
+                return false;
+            }
+
+            foreach (var plugin in plugins)
+            {
+                var state = plugin?.GetType().GetProperty("State", BindingFlags.Public | BindingFlags.Instance)?.GetValue(plugin);
+                if (state?.ToString() == "Loading")
+                {
+                    return true;
+                }
+            }
+        }
+        catch
+        {
+            // 读不到就当没有，靠超时兜底
+        }
+
+        return false;
     }
 
     /// <summary>当前配置。</summary>
@@ -190,6 +257,15 @@ public sealed class Plugin : IDalamudPlugin
     public void Dispose()
     {
         this.SaveConfig(force: true);
+
+        try
+        {
+            Framework.Update -= this.OnStartupTick;
+        }
+        catch
+        {
+            // ignore
+        }
 
         try
         {
@@ -352,7 +428,7 @@ public sealed class Plugin : IDalamudPlugin
         {
             this.UninstallPatches();
         }
-        else if (this.harmony is null)
+        else if (this.harmony is null && this.startupInitDone)
         {
             this.InstallPatches();
         }
