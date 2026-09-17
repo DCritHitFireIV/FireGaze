@@ -277,10 +277,48 @@ internal static class PluginIconLookup
 {
     private static object? imageCache;
     private static MethodInfo? tryGetIcon;
+    private static FieldInfo? iconMapField;
     private static bool resolved;
     private static bool failed;
 
-    /// <summary>尝试取图标；未缓存时返回 false（卫月会在后台开始下载，稍后重试即可）。</summary>
+    /// <summary>
+    /// **只读检查**：本机图标缓存里现在有没有这个插件的图，不触发下载。
+    /// </summary>
+    /// <remarks>
+    /// 直接读卫月 <c>PluginImageCache.pluginIconMap</c>：值非空 = 已缓存；
+    /// 键存在但值为空 = 卫月正在下；键不存在 = 没让它下过。三种情况都不进下载队列。
+    /// </remarks>
+    public static bool TryPeekHandle(InstalledPluginEntry entry, out ImTextureID handle)
+    {
+        handle = ImTextureID.Null;
+
+        if (!TryResolve() || iconMapField?.GetValue(imageCache) is not IDictionary map)
+        {
+            return false;
+        }
+
+        var key = KeyOf(entry);
+        if (!map.Contains(key))
+        {
+            return false;
+        }
+
+        var loaded = map[key];
+        if (loaded is null)
+        {
+            return false;   // 正在下载
+        }
+
+        if (loaded.GetType().GetProperty("Texture")?.GetValue(loaded) is IDalamudTextureWrap wrap && !wrap.Handle.IsNull)
+        {
+            handle = wrap.Handle;
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>请求卫月下载这个插件的图标（会进卫月的下载队列；缓存里已有则直接返回）。</summary>
     public static bool TryGetHandle(InstalledPluginEntry entry, out ImTextureID handle)
     {
         handle = ImTextureID.Null;
@@ -313,6 +351,22 @@ internal static class PluginIconLookup
         return false;
     }
 
+    private static string KeyOf(InstalledPluginEntry entry)
+    {
+        var id = entry.RawPlugin.GetType()
+            .GetProperty("EffectiveWorkingPluginId", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            ?.GetValue(entry.RawPlugin);
+
+        return id?.ToString() ?? entry.InternalName;
+    }
+
+    /// <summary>拿卫月图标缓存服务（一次解析，失败就不再试）。</summary>
+    private static bool TryResolve()
+    {
+        ResolveMethod();
+        return !failed && imageCache is not null;
+    }
+
     private static MethodInfo? ResolveMethod()
     {
         if (resolved)
@@ -339,8 +393,9 @@ internal static class PluginIconLookup
 
             // TryGetIcon 只有一个重载：参数里含内部类型 LocalPlugin，没法按类型精确匹配，按名字取即可
             tryGetIcon = cacheType.GetMethod("TryGetIcon", BindingFlags.Instance | BindingFlags.Public);
+            iconMapField = cacheType.GetField("pluginIconMap", BindingFlags.Instance | BindingFlags.NonPublic);
 
-            failed = imageCache is null || tryGetIcon is null;
+            failed = imageCache is null || tryGetIcon is null || iconMapField is null;
             return failed ? null : tryGetIcon;
         }
         catch
