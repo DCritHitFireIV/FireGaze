@@ -18,29 +18,13 @@ namespace FireGaze;
 /// FireGaze —— 卫月一体化工具箱：
 ///   ① 插件简介汉化（名字 / 一行简介 / 详情 × 原版 / 中文 / 双语）
 ///   ② 第三方仓库体检（扫描死链、内容不合规，支持停用 / 删除 + 备份 + 撤回）
-///   ③ 插件列表自动刷新拦截（拦掉插件发起的后台仓库重载）
+///   ③ 记住插件安装器列表的浏览位置
 /// </summary>
 public sealed class Plugin : IDalamudPlugin
 {
-    private const string HarmonyId = "firegaze.installer-guard";
-
-    /// <summary>
-    /// 列表刷新拦截（软拦截）：重载照常执行（保留反射调用链，ECommons/OmenTools 等依赖它），
-    /// 只跳过它引发的「安装器可用列表重建」，所以浏览时位置不会被顶回顶部。
-    /// 下线开关：改成 false 即完全不挂钩、不显示页签。
-    /// </summary>
-    public static readonly bool BlockerFeatureEnabled = true;
-
-    /// <summary>
-    /// 「用户刚才在安装器里显式操作过」的放行窗口。
-    /// 为什么按点击判定：安装器底部「刷新插件列表」与「打开安装器」调用的是同一个
-    /// <c>PluginManager.ReloadAllReposAsync()</c>，列表重建又走同一个
-    /// <c>OnAvailablePluginsChanged</c> 事件，事件侧分不出是谁发起的；
-    /// 只有「底部按钮行里的那次点击」能可靠地代表用户显式刷新。
-    /// </summary>
-    private static readonly TimeSpan UserActionGrace = TimeSpan.FromSeconds(30);
-
     private static Plugin instance = null!;
+
+    private const string HarmonyId = "firegaze.installer";
 
     [PluginService] public static IPluginLog Log { get; private set; } = null!;
 
@@ -58,30 +42,13 @@ public sealed class Plugin : IDalamudPlugin
     private HarmonyHost? harmony;
 
     private readonly object saveLock = new();
-    private readonly object recordLock = new();
-    private readonly HashSet<string> loggedSources = new(StringComparer.Ordinal);
     private DateTime lastSave = DateTime.MinValue;
 
-    private object? dalamudInterface;
-    private PropertyInfo? windowSystemProp;
-    private PropertyInfo? windowsProp;
-    private PropertyInfo? isOpenProp;
     private int tableUpdateBusy;
-    private long installerVisibleTicks;
-    private long userActionTicks;
-    private string lastAllowNote = string.Empty;
-    private string? hookSummary;
-    private string lastSkipNote = string.Empty;
-    private string lastSuppressNote = string.Empty;
-    private int listSuppressCount;
-    private int openReloadSkippedCount;
-    private string lastOpenSkipNote = string.Empty;
     private bool pendingListScrollRestore;
     private int listScrollRestoreAttempts;
     private int listScrollGraceFrames;
-    private bool listReady;
-    private bool sawListReady;
-    private bool listLoadingForced;
+    private bool listHasContent;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -92,24 +59,11 @@ public sealed class Plugin : IDalamudPlugin
         this.pluginInterface = pluginInterface;
         this.Config = pluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
 
-        // 2.0 之前的默认值是「拦截开启 / 汉化开启」；新默认：两功能都先关着，由用户自己打开
+        // 2.0 之前的默认值是「汉化开启」；新默认先关着，由用户自己打开
         if (this.Config.Version < 2)
         {
             this.Config.Version = 2;
-            this.Config.BlockerMode = BlockMode.Off;
             this.Config.TranslateEnabled = false;
-            pluginInterface.SavePluginConfig(this.Config);
-        }
-
-        // 3.0：拦截规则简化为「安装器打开时不刷新」，旧的「全部跳过」等价于开启
-        if (this.Config.Version < 3)
-        {
-            this.Config.Version = 3;
-            if (this.Config.BlockerMode == BlockMode.Always)
-            {
-                this.Config.BlockerMode = BlockMode.InstallerOpenOnly;
-            }
-
             pluginInterface.SavePluginConfig(this.Config);
         }
 
@@ -196,20 +150,16 @@ public sealed class Plugin : IDalamudPlugin
             this.ReloadTranslationTable(out _);
             this.TrackFirstSeen();
 
-            if (this.NeedsInstallerHooks)
+            if (this.Config.RememberListScroll)
             {
                 this.InstallPatches();
-            }
-            else
-            {
-                this.BlockerStatusText = "未启用（两个开关都关着）";
             }
 
             this.translateTimer.Start();
 
             Log.Information(
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {this.Table.Count} 条；" +
-                $"拦截模式 = {this.Config.BlockerMode}；汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}");
+                $"汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}；记住列表位置 = {(this.Config.RememberListScroll ? "开" : "关")}");
         }
         catch (Exception e)
         {
@@ -260,61 +210,6 @@ public sealed class Plugin : IDalamudPlugin
 
     /// <summary>卫月仓库配置读写。</summary>
     public DalamudRepos Repos { get; }
-
-    /// <summary>钩子状态文字。</summary>
-    public string BlockerStatusText { get; private set; } = "尚未启用";
-
-    /// <summary>累计拦截次数。</summary>
-    public int BlockedCount => this.Config.BlockedCount;
-
-    /// <summary>钩子就缇情况（界面用短句：已就绪（7/7） / 部分失败：…）。</summary>
-    public string HookSummary => this.hookSummary ?? this.BlockerStatusText;
-
-    /// <summary>当前是否真的在拦（编译期下线开关 + 拦截开关都开着）。</summary>
-    private bool BlockerActive => BlockerFeatureEnabled && this.Config.BlockerMode != BlockMode.Off;
-
-    /// <summary>最近一次「放行」的原因（供界面显示，便于验证手动刷新有没有生效）。</summary>
-    public string LastAllowNote => this.lastAllowNote;
-
-    /// <summary>最近一次跳过/拦下的时间（可能为空：还没发生过）。</summary>
-    public string LastSkipNote => this.lastSkipNote;
-
-    /// <summary>跳过「打开安装器触发仓库重载」的次数与最近时间。</summary>
-    public int OpenSkipCount => this.openReloadSkippedCount;
-
-    public string OpenSkipTime => this.lastOpenSkipNote;
-
-    /// <summary>挡下「正在加载插件…」替换的次数与最近时间。</summary>
-    public int ListSuppressCount => this.listSuppressCount;
-
-    public string ListSuppressTime => this.lastSuppressNote;
-
-    /// <summary>拼一份可粘贴的诊断文本（钩子状态 + 计数 + 最近放行），写进剪贴板用。</summary>
-    public string BuildDiagnostics()
-        => string.Join(
-            "\n",
-            "FireGaze 拦截状态",
-            $"拦截状态：{this.HookSummary}",
-            $"拦截明细：{this.BlockerStatusText}",
-            $"已拦下列表重建：{this.Config.BlockedCount} 次（最近 {Show(this.lastSkipNote)}）",
-            $"已拦下打开安装器的仓库重载：{this.openReloadSkippedCount} 次（最近 {Show(this.lastOpenSkipNote)}）",
-            $"已拦下加载态替换：{this.listSuppressCount} 次（最近 {Show(this.lastSuppressNote)}）",
-            $"最近一次未拦下：{Show(this.lastAllowNote)}",
-            $"拦截开关：{(this.BlockerActive ? "开" : "关")}；记住列表位置：{(this.Config.RememberListScroll ? "开" : "关")}");
-
-    private static string Show(string text) => string.IsNullOrEmpty(text) ? "—" : text;
-
-    /// <summary>最近拦下的来源。</summary>
-    public IReadOnlyList<string> RecentBlockedSources
-    {
-        get
-        {
-            lock (this.recordLock)
-            {
-                return this.Config.RecentBlockedSources.ToArray();
-            }
-        }
-    }
 
     /// <summary>最近一次汉化应用改写的清单数。</summary>
     public int LastTranslatedCount { get; private set; }
@@ -404,31 +299,10 @@ public sealed class Plugin : IDalamudPlugin
     {
         var arg = args.Trim().ToLowerInvariant();
 
-        if (!BlockerFeatureEnabled && arg is "on" or "off" or "open" or "log")
-        {
-            Chat.Print("[FireGaze] 列表刷新拦截功能暂时关闭。");
-            return;
-        }
-
         switch (arg)
         {
             case "":
                 this.ToggleWindow();
-                break;
-            case "on":
-                this.SetBlockerMode(BlockMode.InstallerOpenOnly);
-                Chat.Print("[FireGaze] 已开启：安装器打开时不刷新列表");
-                break;
-            case "off":
-                this.SetBlockerMode(BlockMode.Off);
-                Chat.Print("[FireGaze] 已关闭：安装器打开时也照常刷新");
-                break;
-            case "open":
-                this.SetBlockerMode(BlockMode.InstallerOpenOnly);
-                Chat.Print("[FireGaze] 已开启：安装器打开时不刷新列表");
-                break;
-            case "log":
-                this.PrintBlockedLog();
                 break;
             case "zh":
                 var count = this.Patcher.ApplyAll();
@@ -440,23 +314,8 @@ public sealed class Plugin : IDalamudPlugin
                 Chat.Print("[FireGaze] 正在从 GitHub 更新词表…");
                 break;
             default:
-                Chat.Print("[FireGaze] 用法：/firegaze [on|off|open|log|zh|update]");
+                Chat.Print("[FireGaze] 用法：/firegaze [zh|update]");
                 break;
-        }
-    }
-
-    private void PrintBlockedLog()
-    {
-        if (this.Config.RecentBlockedSources.Count == 0)
-        {
-            Chat.Print("[FireGaze] 暂无拦下记录");
-            return;
-        }
-
-        Chat.Print($"[FireGaze] 已拦下列表重建 {this.Config.BlockedCount} 次，最近：");
-        foreach (var line in this.Config.RecentBlockedSources)
-        {
-            Chat.Print("  " + line);
         }
     }
 
@@ -485,55 +344,65 @@ public sealed class Plugin : IDalamudPlugin
         }
     }
 
-    // ------------------------------------------------------------------ 博客：拦截
+    // ------------------------------------------------------------------ 安装器钩子
 
-    /// <summary>切换拦截模式。</summary>
-    /// <summary>界面开关：开启 = 安装器打开时不刷新列表。</summary>
-    public void SetBlockerEnabled(bool enabled)
-        => this.SetBlockerMode(enabled ? BlockMode.InstallerOpenOnly : BlockMode.Off);
-
-    /// <summary>
-    /// 只要「拦截」或「记住列表位置」任一个开着，就需要钩子（两者共用安装器侧的前缀）。
-    /// 拦截关着时，拦截类钩子内部会自成空转（BlockerActive 检查），不会拦任何东西。
-    /// </summary>
-    private bool NeedsInstallerHooks
-        => BlockerFeatureEnabled && this.Config.BlockerMode != BlockMode.Off
-           || this.Config.RememberListScroll;
-
-    public void SetBlockerMode(BlockMode mode)
+    private void InstallPatches()
     {
-        this.Config.BlockerMode = mode;
-        this.SaveConfig();
-        this.SyncPatches();
-    }
-
-    /// <summary>开关变化后按需装/卸钩子。</summary>
-    private void SyncPatches()
-    {
-        if (!this.NeedsInstallerHooks)
+        if (this.harmony is not null)
         {
-            this.UninstallPatches();
+            return;   // 已经挂过了
+        }
 
-            if (this.startupInitDone)
+        try
+        {
+            var directory = this.pluginInterface.AssemblyLocation.Directory?.FullName
+                            ?? Path.GetDirectoryName(this.pluginInterface.AssemblyLocation.FullName)
+                            ?? ".";
+
+            this.harmony = HarmonyHost.Create(HarmonyId, directory, out var harmonyError);
+            if (this.harmony is null)
             {
-                this.BlockerStatusText = "未启用（两个开关都关着）";
+                Log.Error("[FireGaze] Harmony 不可用（记住列表位置将不生效）：" + (harmonyError ?? "未知原因"));
+                this.harmony = null;
+                return;
             }
 
-            return;
-        }
+            Log.Information("[FireGaze] 0Harmony：" + HarmonyHost.Resolution);
 
-        if (this.harmony is null && this.startupInitDone)
-        {
-            this.InstallPatches();
+            var dalamud = typeof(IDalamudPluginInterface).Assembly;
+            var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
+            if (installerType is null)
+            {
+                Log.Warning("[FireGaze] 未找到 PluginInstallerWindow（卫月版本不兼容），记住列表位置不生效");
+                this.UninstallPatches();
+                return;
+            }
+
+            var openPrefix = typeof(Plugin).GetMethod(nameof(InstallerOpenPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+            var categoriesPrefix = typeof(Plugin).GetMethod(nameof(InstallerCategoriesPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+            var listContentPrefix = typeof(Plugin).GetMethod(nameof(InstallerListContentPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+
+            var patched = new List<string>();
+            var failed = new List<string>();
+
+            // 列表浏览位置：开窗时准备恢复；分类选择器前缀里发 SetNextWindowScroll（其后紧接着就是
+            // 列表子窗口 ScrollingPlugins 的 Begin）；列表内容前缀里读/确认滚动位置。
+            this.PatchInstallerHook(installerType, "OnOpen", "firegaze.installer.open", openPrefix, patched, failed);
+            this.PatchInstallerHook(installerType, "DrawPluginCategorySelectors", "firegaze.installer.categories", categoriesPrefix, patched, failed);
+            this.PatchInstallerHook(installerType, "DrawPluginCategoryContent", "firegaze.installer.list", listContentPrefix, patched, failed);
+
+            Log.Information(failed.Count == 0
+                ? $"[FireGaze] 已挂钩（{patched.Count}）：{string.Join(" / ", patched)}"
+                : $"[FireGaze] 已挂钩（{patched.Count}）：{string.Join(" / ", patched)}；失败：{string.Join(" / ", failed)}");
         }
-        else if (this.harmony is not null)
+        catch (Exception e)
         {
-            // 已经挂着；只需刷新「已就绪 N/7」的显示
-            this.BlockerStatusText = this.hookSummary ?? this.BlockerStatusText;
+            Log.Error(e, "[FireGaze] 挂钩失败（不影响游戏）");
+            this.harmony = null;
         }
     }
 
-    /// <summary>卸下钩子（模式切回「关闭」时调用）。已加载的 0Harmony 无法从默认 ALC 卸下，但不再使用。</summary>
+    /// <summary>卸下全部钩子。</summary>
     private void UninstallPatches()
     {
         try
@@ -546,128 +415,6 @@ public sealed class Plugin : IDalamudPlugin
         }
 
         this.harmony = null;
-        this.BlockerStatusText = "未启用（模式为关闭）";
-    }
-
-    /// <summary>开关拦截日志。</summary>
-    public void SetBlockerWriteLog(bool value)
-    {
-        this.Config.BlockerWriteLog = value;
-        this.SaveConfig();
-    }
-
-    /// <summary>清空拦截记录。</summary>
-    public void ClearBlockedRecords()
-    {
-        lock (this.recordLock)
-        {
-            this.Config.BlockedCount = 0;
-            this.Config.RecentBlockedSources.Clear();
-        }
-
-        // 同屏显示的几个内存计数/时间戳一起清，否则清完会出现「0 次 · 最近 13:13:56」这种自相矛盾
-        this.lastSkipNote = string.Empty;
-        this.lastAllowNote = string.Empty;
-        this.lastSuppressNote = string.Empty;
-        this.lastOpenSkipNote = string.Empty;
-        this.listSuppressCount = 0;
-        this.openReloadSkippedCount = 0;
-        this.listLoadingForced = false;
-
-        this.SaveConfig();
-    }
-
-    /// <summary>是否还有可清空的记录/计数（界面上把「清空记录」置灰用）。</summary>
-    public bool HasBlockerRecords
-    {
-        get
-        {
-            lock (this.recordLock)
-            {
-                return this.Config.RecentBlockedSources.Count > 0;
-            }
-        }
-    }
-
-    private void InstallPatches()
-    {
-        if (this.harmony is not null)
-        {
-            // 已经挂过了（切换模式时重复调用）
-            return;
-        }
-
-        try
-        {
-            var directory = this.pluginInterface.AssemblyLocation.Directory?.FullName
-                            ?? Path.GetDirectoryName(this.pluginInterface.AssemblyLocation.FullName)
-                            ?? ".";
-
-            this.harmony = HarmonyHost.Create(HarmonyId, directory, out var harmonyError);
-            if (this.harmony is null)
-            {
-                this.BlockerStatusText = "Harmony 不可用：" + (harmonyError ?? "未知原因");
-                Log.Error("[FireGaze] " + this.BlockerStatusText);
-                return;
-            }
-
-            Log.Information("[FireGaze] 0Harmony：" + HarmonyHost.Resolution);
-
-            var dalamud = typeof(IDalamudPluginInterface).Assembly;
-            var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
-            if (installerType is null)
-            {
-                this.BlockerStatusText = "未启用（卫月版本不兼容：找不到插件安装器）";
-                Log.Warning("[FireGaze] " + this.BlockerStatusText);
-                return;
-            }
-
-            var drawPrefix = typeof(Plugin).GetMethod(nameof(InstallerDrawPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var openPrefix = typeof(Plugin).GetMethod(nameof(InstallerOpenPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var footerPrefix = typeof(Plugin).GetMethod(nameof(InstallerFooterPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var categoriesPrefix = typeof(Plugin).GetMethod(nameof(InstallerCategoriesPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var listContentPrefix = typeof(Plugin).GetMethod(nameof(InstallerListContentPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var listLoadingPostfix = typeof(Plugin).GetMethod(nameof(InstallerListLoadingPostfix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var refreshPrefix = typeof(Plugin).GetMethod(nameof(InstallerRefreshPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-
-            var patched = new List<string>();
-            var failed = new List<string>();
-
-            // 只在「插件安装器」这一侧挂钩：完全不碰「重载仓库」的接口，
-            // 避免影响依赖反射调用链的插件（ECommons/OmenTools/OmniToolbox/XSZ 等）。
-            this.PatchInstallerHook(installerType, "Draw", "firegaze.installer.draw", drawPrefix, patched, failed, false);
-            this.PatchInstallerHook(installerType, "OnOpen", "firegaze.installer.open", openPrefix, patched, failed, false);
-
-            // 底部按钮行：用来识别「用户显式点了刷新」（事件侧无法区分手动刷新与打开安装器）。
-            this.PatchInstallerHook(installerType, "DrawFooter", "firegaze.installer.footer", footerPrefix, patched, failed, false);
-
-            this.PatchInstallerHook(installerType, "OnAvailablePluginsChanged", "firegaze.installer.rebuild", refreshPrefix, patched, failed, false);
-
-            // 列表浏览位置：分类选择器前缀（其后紧接着就是列表子窗口 ScrollingPlugins 的 Begin）
-            //   + 列表内容前缀（此刻当前窗口就是那个子窗口）。
-            this.PatchInstallerHook(installerType, "DrawPluginCategorySelectors", "firegaze.installer.categories", categoriesPrefix, patched, failed, false);
-            this.PatchInstallerHook(installerType, "DrawPluginCategoryContent", "firegaze.installer.list", listContentPrefix, patched, failed, false);
-
-            // 列表加载态：用后缀（原方法照跑，失败信息照显），只把返回值改成「已就绪」，
-            // 免得后台重载期间把整份列表替换成「正在加载插件…」。
-            this.PatchInstallerHook(installerType, "DrawPluginListLoading", "firegaze.installer.loading", listLoadingPostfix, patched, failed, true);
-
-            var ok = patched.Count;
-            var total = ok + failed.Count;
-            this.hookSummary = failed.Count == 0
-                ? $"已就绪（{ok}/{total}）"
-                : $"部分失败：{string.Join("、", failed)}";
-
-            this.BlockerStatusText = failed.Count == 0
-                ? "已挂钩：" + string.Join(" / ", patched)
-                : $"已挂钩：{string.Join(" / ", patched)}（失败：{string.Join(" / ", failed)}）";
-            Log.Information($"[FireGaze] {this.BlockerStatusText}");
-        }
-        catch (Exception e)
-        {
-            this.BlockerStatusText = "启用失败：" + e.Message;
-            Log.Error(e, "[FireGaze] 挂钩失败（不影响游戏）");
-        }
     }
 
     /// <summary>
@@ -680,8 +427,7 @@ public sealed class Plugin : IDalamudPlugin
         string hookName,
         MethodInfo hook,
         List<string> patched,
-        List<string> failed,
-        bool postfix)
+        List<string> failed)
     {
         try
         {
@@ -696,15 +442,7 @@ public sealed class Plugin : IDalamudPlugin
                 return;
             }
 
-            if (postfix)
-            {
-                this.harmony!.PatchPostfix(target, hook);
-            }
-            else
-            {
-                this.harmony!.PatchPrefix(target, hook);
-            }
-
+            this.harmony!.PatchPrefix(target, hook);
             patched.Add(hookName);
         }
         catch (Exception e)
@@ -712,13 +450,6 @@ public sealed class Plugin : IDalamudPlugin
             failed.Add(hookName);
             Log.Warning(e, $"[FireGaze] 挂钩 {hookName} 失败");
         }
-    }
-
-    /// <summary>安装器绘制时的前缀（firegaze.installer.draw，窗口打开时每帧一次）：记录安装器当前可见。</summary>
-    private static bool InstallerDrawPrefix()
-    {
-        instance?.NoteInstallerVisible();
-        return true;
     }
 
     /// <summary>分类选择器前缀（firegaze.installer.categories）：恢复列表浏览位置。</summary>
@@ -735,102 +466,12 @@ public sealed class Plugin : IDalamudPlugin
         return true;
     }
 
-    /// <summary>
-    /// 列表加载态后缀（firegaze.installer.loading）：原方法照跑（失败提示照显），
-    /// 只把返回值改为「已就绪」——拦截开启时继续用旧列表显示，不被「正在加载插件…」替掉。
-    /// </summary>
-    private static void InstallerListLoadingPostfix(ref bool __result)
-    {
-        instance?.NoteListLoadingResult(ref __result);
-    }
-
-    /// <summary>安装器打开时的前缀（firegaze.installer.open）。</summary>
-    /// <remarks>
-    /// 拦截开启时直接短路掉 <c>PluginInstallerWindow.OnOpen</c>：
-    /// 它的开头就是 <c>pluginManager.ReloadAllReposAsync()</c> + <c>ScanDevPluginsAsync()</c>，
-    /// 所以“每次打开安装器都联网把所有仓库重拉一遍”（界面卡在「加载插件仓库中…」）就是这里来的。
-    /// 短路只跳开窗动作，窗口照常打开；不走重载接口，不影响依赖安装与插件更新。
-    /// </remarks>
+    /// <summary>安装器打开时的前缀（firegaze.installer.open）：准备恢复列表浏览位置。</summary>
     private static bool InstallerOpenPrefix()
     {
-        // 每次打开都清掉上一次会话残留的「用户操作」放行窗口：
-        // 于是「打开安装器触发的那次刷新」依旧会被跳过（用户没有点过任何东西）。
-        instance?.ResetUserActionGrace();
-        instance?.NoteInstallerVisible();
         instance?.BeginListScrollRestore();
-
-        return instance?.ShouldRunInstallerOnOpen() ?? true;
-    }
-
-    /// <summary>
-    /// 安装器底部按钮行的前缀（firegaze.installer.footer，窗口打开时每帧一次）。
-    /// 这一行里有「更新插件 / 扫描开发版插件 / 刷新插件列表 / 设置 / 关闭」，
-    /// 点其中任何一个都算用户显式操作；「刷新插件列表」会发起一次仓库重载，
-    /// 而它与「打开安装器」在事件侧无法区分，所以在这里按点击打标记。
-    /// </summary>
-    private static bool InstallerFooterPrefix()
-    {
-        instance?.NoteFooterInteraction();
         return true;
     }
-
-    /// <summary>记录「用户刚在安装器底部按钮行里点过鼠标」。</summary>
-    private void NoteFooterInteraction()
-    {
-        try
-        {
-            if (!this.BlockerActive)
-            {
-                return;
-            }
-
-            if (!ImGui.IsMouseClicked(ImGuiMouseButton.Left))
-            {
-                return;
-            }
-
-            // DrawFooter 在安装器窗口上下文里执行，这里的几何就是安装器窗口自己的。
-            var mouse = ImGui.GetMousePos();
-            var windowPos = ImGui.GetWindowPos();
-            var contentMax = ImGui.GetWindowContentRegionMax();
-
-            var rowHeight = ImGui.GetFrameHeight() + 8f;
-            var rowTop = windowPos.Y + contentMax.Y - rowHeight;
-            var rowBottom = windowPos.Y + contentMax.Y + 8f;
-
-            if (mouse.Y < rowTop || mouse.Y > rowBottom)
-            {
-                return;
-            }
-
-            if (mouse.X < windowPos.X - 4f || mouse.X > windowPos.X + contentMax.X + 4f)
-            {
-                return;
-            }
-
-            Interlocked.Exchange(ref this.userActionTicks, DateTime.UtcNow.Ticks);
-            Log.Debug("[FireGaze] 检测到安装器底部按钮行的点击 → 接下来 30 秒内的列表重建放行");
-        }
-        catch (Exception e)
-        {
-            Log.Debug(e, "[FireGaze] 记录安装器底部点击失败");
-        }
-    }
-
-    /// <summary>列表重建前缀（firegaze.installer.rebuild）：安装器开着就跳过这次重建。</summary>
-    private static bool InstallerRefreshPrefix()
-    {
-        return instance is null || instance.ShouldAllowListRebuild();
-    }
-
-    /// <summary>记录「安装器当前可见」。</summary>
-    private void NoteInstallerVisible()
-    {
-        Interlocked.Exchange(ref this.installerVisibleTicks, DateTime.UtcNow.Ticks);
-    }
-
-    /// <summary>清空「用户操作」放行窗口（窗口每次打开时调用）。</summary>
-    private void ResetUserActionGrace() => Interlocked.Exchange(ref this.userActionTicks, 0);
 
     // ---------------------------------------------------------- 安装器列表浏览位置
 
@@ -839,24 +480,15 @@ public sealed class Plugin : IDalamudPlugin
     {
         this.Config.RememberListScroll = remember;
         this.SaveConfig();
-        this.SyncPatches();
-    }
 
-    /// <summary>
-    /// 开窗时是否让 <c>PluginInstallerWindow.OnOpen</c> 原件继续跑。
-    /// 拦截开启时返回 false：不联网重拉仓库、不扫描 dev 插件、不清搜索框/不重置排序。
-    /// </summary>
-    private bool ShouldRunInstallerOnOpen()
-    {
-        if (!this.BlockerActive)
+        if (remember && this.harmony is null && this.startupInitDone)
         {
-            return true;
+            this.InstallPatches();
         }
-
-        this.openReloadSkippedCount++;
-        this.lastOpenSkipNote = DateTime.Now.ToString("HH:mm:ss");
-        Log.Debug("[FireGaze] 已跳过「打开安装器」触发的仓库重载（拦截开启）");
-        return false;
+        else if (!remember && this.harmony is not null)
+        {
+            this.UninstallPatches();
+        }
     }
 
     /// <summary>安装器打开时：准备恢复列表浏览位置。</summary>
@@ -892,9 +524,10 @@ public sealed class Plugin : IDalamudPlugin
                 return;
             }
 
-            if (!this.listReady)
+            if (!this.listHasContent)
             {
-                // 列表还在加载（内容为空）时发会立刻被夹到 0，等就绪再发。
+                // 列表还在加载（仓库重载中会显示「正在加载插件…」，此时子窗口没有内容）
+                // 或列表本来就放得下 → 发了也会被夹到 0，等内容出来再发。
                 return;
             }
 
@@ -918,6 +551,10 @@ public sealed class Plugin : IDalamudPlugin
     {
         try
         {
+            // 记下「列表有没有可滚动内容」：仓库重载期间列表会被「正在加载插件…」替掉，
+            // 此时子窗口内容为空，既不该记录（会把 0 覆盖上去）也不该恢复。
+            this.listHasContent = ImGui.GetScrollMaxY() > 0f || ImGui.GetScrollY() > 0f;
+
             if (this.pendingListScrollRestore)
             {
                 if (this.Config.ListScrollY is { } target && Math.Abs(ImGui.GetScrollY() - target) < 2f)
@@ -958,167 +595,6 @@ public sealed class Plugin : IDalamudPlugin
         {
             Log.Debug(e, "[FireGaze] 记录列表浏览位置失败");
         }
-    }
-
-    /// <summary>
-    /// 列表「是否就绪」的观察点：<paramref name="ready"/> 为 false 表示仓库正在重载
-    /// （原方法会画「正在加载插件…」，并且让调用者跳过整个列表）。
-    /// 拦截开启且以前成功画过列表时，把返回值改成 true：继续用旧列表显示，不拿加载态替掉它。
-    /// </summary>
-    private void NoteListLoadingResult(ref bool ready)
-    {
-        this.listReady = ready;
-
-        if (ready)
-        {
-            this.sawListReady = true;
-            this.listLoadingForced = false;
-            return;
-        }
-
-        if (!this.sawListReady || !this.BlockerActive || !this.IsInstallerVisible())
-        {
-            return;
-        }
-
-        ready = true;
-
-        if (!this.listLoadingForced)
-        {
-            this.listLoadingForced = true;
-            this.listSuppressCount++;
-            this.lastSuppressNote = DateTime.Now.ToString("HH:mm:ss");
-            Log.Debug("[FireGaze] 仓库重载中 → 保留旧列表显示（不显示「正在加载插件…」）");
-        }
-    }
-
-    /// <summary>安装器是否开着：反射读窗口 IsOpen 为准，Draw/Open 记录做兜底（刚关掉的那一两帧）。</summary>
-    private bool IsInstallerVisible()
-    {
-        if (this.IsInstallerOpen())
-        {
-            return true;
-        }
-
-        var ticks = Interlocked.Read(ref this.installerVisibleTicks);
-        return ticks != 0 &&
-               DateTime.UtcNow - new DateTime(ticks, DateTimeKind.Utc) <= TimeSpan.FromSeconds(3);
-    }
-
-    /// <summary>
-    /// 是否允许安装器重建「可用插件列表」。
-    /// 规则：安装器开着 → 跳过这次重建（列表与滚动位置保持不动）；关着 → 照常重建。
-    /// </summary>
-    private bool ShouldAllowListRebuild()
-    {
-        try
-        {
-            if (!this.BlockerActive)
-            {
-                return true;
-            }
-
-            if (!this.IsInstallerVisible())
-            {
-                return true;
-            }
-
-            // 用户刚在安装器里点过底部按钮（尤其「刷新插件列表」）→ 放行，保证手动刷新有效。
-            var userTicks = Interlocked.Read(ref this.userActionTicks);
-            if (userTicks != 0 &&
-                DateTime.UtcNow - new DateTime(userTicks, DateTimeKind.Utc) <= UserActionGrace)
-            {
-                this.lastAllowNote = $"用户操作（点过安装器底部按钮）· {DateTime.Now:HH:mm:ss}";
-                if (this.Config.BlockerWriteLog)
-                {
-                    Log.Debug("[FireGaze] 检测到用户刚在安装器里操作过 → 本次列表重建放行");
-                }
-
-                return true;
-            }
-
-            int count;
-            lock (this.recordLock)
-            {
-                this.Config.BlockedCount++;
-                count = this.Config.BlockedCount;
-
-                var line = $"{DateTime.Now:HH:mm:ss} 拦下列表重建（安装器打开中）";
-                this.Config.RecentBlockedSources.Insert(0, line);
-                while (this.Config.RecentBlockedSources.Count > Configuration.MaxRecentBlocked)
-                {
-                    this.Config.RecentBlockedSources.RemoveAt(this.Config.RecentBlockedSources.Count - 1);
-                }
-            }
-
-            this.SaveConfig(force: false);
-
-            this.lastSkipNote = DateTime.Now.ToString("HH:mm:ss");
-            if (this.Config.BlockerWriteLog)
-            {
-                Log.Information($"[FireGaze] firegaze.installer.rebuild 已跳过列表重建（第 {count} 次）：安装器打开中");
-            }
-
-            return false;
-        }
-        catch (Exception e)
-        {
-            Log.Error(e, "[FireGaze] 列表重建判断出错，本次放行");
-            return true;
-        }
-    }
-
-    /// <summary>插件安装器窗口是否开着。</summary>
-    private bool IsInstallerOpen()
-    {
-        try
-        {
-            this.dalamudInterface ??= ResolveService("Dalamud.Interface.Internal.DalamudInterface");
-            if (this.dalamudInterface is null)
-            {
-                return false;
-            }
-
-            if (this.windowSystemProp is null)
-            {
-                this.windowSystemProp = this.dalamudInterface.GetType()
-                    .GetProperty("WindowSystem", BindingFlags.Instance | BindingFlags.Public);
-            }
-
-            var windowSystem = this.windowSystemProp?.GetValue(this.dalamudInterface);
-            if (windowSystem is null)
-            {
-                return false;
-            }
-
-            this.windowsProp ??= windowSystem.GetType().GetProperty("Windows", BindingFlags.Instance | BindingFlags.Public);
-            if (this.windowsProp?.GetValue(windowSystem) is not System.Collections.IEnumerable windows)
-            {
-                return false;
-            }
-
-            foreach (var item in windows)
-            {
-                if (item is null)
-                {
-                    continue;
-                }
-
-                if (item.GetType().Name != "PluginInstallerWindow")
-                {
-                    continue;
-                }
-
-                this.isOpenProp ??= item.GetType().GetProperty("IsOpen", BindingFlags.Instance | BindingFlags.Public);
-                return this.isOpenProp?.GetValue(item) is true;
-            }
-        }
-        catch (Exception e)
-        {
-            Log.Debug(e, "[FireGaze] 查询安装器窗口状态失败");
-        }
-
-        return false;
     }
 
     // ------------------------------------------------------------------ 简介汉化

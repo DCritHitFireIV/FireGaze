@@ -6,16 +6,16 @@
     <Platforms>x64</Platforms>
     <AssemblyName>FireGaze</AssemblyName>
     <Name>FireGaze</Name>
-    <Version>1.0.0.21</Version>
+    <Version>1.0.0.22</Version>
     <Authors>fire</Authors>
     <Author>fire</Author>
     <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
     <Punchline>提供对第三方插件简介汉化等功能</Punchline>
     <Description>第三方插件简介汉化
 第三方插件仓库坏链检测
-浏览插件仓库阻止列表被自动重载顶回顶部（已知问题：拦截可能不生效，见插件内「插件安装器」页说明）
+记住插件安装器列表的浏览位置（下次打开接着看）
 
-Localization of third-party plugin descriptions; dead-link detection for third-party plugin repositories; keeping the installer list from being rebuilt out from under you while browsing (known issue: the blocking may not always take effect - see the "Plugin Installer" tab in the plugin).</Description>
+Localization of third-party plugin descriptions; dead-link detection for third-party plugin repositories; remembering your scroll position in the plugin installer list.</Description>
     <PackageProjectUrl>https://github.com/DCritHitFireIV/FireGaze</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DCritHitFireIV/FireGaze</RepositoryUrl>
     <!-- 固定插件清单里的 API 级别（避免 CI 用新版 Dalamud 构建时把级别写高） -->

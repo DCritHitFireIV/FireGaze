@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>FireGaze 插件安装器页 — 3 状态帧 mockup（与实现一致）</title>
+<title>FireGaze 插件安装器页 — 2 状态帧 mockup</title>
 <style>
+  /* 视觉语言沿用本仓库其它还原图：ImGui 深色主题（中性色打底 + 单一强调色 --accent），
+     字体栈三层降级，间距走 8pt 网格，层级靠颜色明度而非边框。 */
   :root {
     --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
-    --text: #e4e4e4; --muted: #909090; --accent: #ffb35c;
-    --btn: #3c3c3c; --frame: #202020;
-    --good: #73d973; --warn: #f2bf5c; --bad: #f27a7a;
+    --text: #e4e4e4; --muted: #909090; --accent: #ffb35c; --btn: #3c3c3c;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -16,168 +16,59 @@
     font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
     font-size: 15px; line-height: 1.4;
   }
-  .stage { padding: 20px; display: flex; gap: 22px; justify-content: center; align-items: flex-start; }
-  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 700px; }
+  .stage { padding: 20px; display: flex; gap: 24px; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 8px 2px; width: 700px; }
   .window {
-    width: 700px; height: 620px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 4px;
+    width: 700px; height: 420px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 4px;
     display: flex; flex-direction: column; overflow: hidden;
   }
-  .titlebar { height: 30px; background: var(--title); display: flex; align-items: center; padding: 0 10px; font-weight: 600; border-bottom: 1px solid var(--border); }
+  .titlebar { height: 32px; background: var(--title); display: flex; align-items: center; padding: 0 16px; font-weight: 600; border-bottom: 1px solid var(--border); }
   .titlebar .brand { color: var(--accent); }
   .titlebar .sub { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 12px; }
-  .body { padding: 8px 12px 10px; display: flex; flex-direction: column; gap: 6px; min-height: 0; flex: 1; overflow: hidden; }
+  .body { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
   .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); }
   .tab { padding: 4px 12px; color: var(--muted); }
   .tab.active { color: var(--text); background: var(--panel); border: 1px solid var(--border); border-bottom-color: transparent; border-radius: 3px 3px 0 0; margin-bottom: -1px; }
   .hint { color: var(--muted); }
-  .sep { height: 1px; background: var(--border); margin: 2px 0; }
-  .row { display: flex; align-items: center; gap: 8px; }
-  .grow { flex: 1; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; }
+  .sep { height: 1px; background: var(--border); margin: 8px 0; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; }
   .check { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-block; position: relative; background: #2a2a2a; flex: none; }
   .check.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 1px; }
-  button { font: inherit; color: var(--text); background: var(--btn); border: 1px solid #4d4d4d; border-radius: 3px; padding: 2px 8px; font-size: 13px; }
-  button.disabled { color: #7c7c7c; background: #2c2c2c; border-color: #3a3a3a; }
-  .frame { border: 1px solid var(--border); border-radius: 3px; background: #1c1c1c; padding: 6px 8px; }
-  .frame.list { overflow: hidden; }
-  .mono { font-variant-numeric: tabular-nums; }
-  .good { color: var(--good); } .warn { color: var(--warn); } .dim { color: #6f6f6f; }
-  .sect { display: flex; align-items: center; }
-  .scrollhint { height: 3px; background: #4d4d4d; border-radius: 2px; width: 60%; margin: 2px 0 0 20%; }
 </style>
 </head>
 <body>
 <div class="stage">
 
-  <!-- ============ 帧 1：真实默认态 ============ -->
   <div>
-    <p class="caption">帧 1 — 真实默认态：拦截未勾、记住看到哪里未勾（新默认＝关）、写日志默认勾；两个开关都关 → 不挂钩子；记录框收缩为 1 行</p>
+    <p class="caption">帧 1 — 默认态（未勾选）：本页只剩「记住看到哪里」+ 已知问题</p>
     <div class="window">
-      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 刷新拦截</span></div>
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 安装器</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">插件安装器</div></div>
-
-        <div>浏览插件安装器时，拦下「正在加载插件…」。</div>
-        <div class="hint">打开安装器不再联网重拉仓库，也不会重置排序与搜索。</div>
-        <div class="hint">有需要可以手动刷新插件列表。</div>
-
+        <div>记住插件安装器列表的浏览位置，下次打开接着看。</div>
+        <div class="hint">想刷新列表内容，点安装器底部的「刷新插件列表」。</div>
         <div class="sep"></div>
-
-        <div class="chip"><span class="check"></span>安装器打开时拦下列表更新</div>
         <div class="chip"><span class="check"></span>记住看到哪里（下次打开接着看）</div>
-        <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
-
         <div class="sep"></div>
-
-        <div class="sect"><span>最近拦下的记录</span><span class="grow"></span><button>复制诊断</button><button class="disabled">清空记录</button></div>
-        <div class="frame list" style="height:36px"><span class="dim">（还没有拦下）</span></div>
-
-        <div class="sep"></div>
-
-        <div class="frame">
-          <div class="warn">拦截状态：未启用（两个开关都关着）</div>
-          <div class="mono">已拦下列表重建：—</div>
-          <div class="mono">已拦下「打开安装器」的仓库重载：—</div>
-          <div class="mono">已拦下「正在加载插件…」替换：—</div>
-          <div class="dim">最近一次未拦下：—</div>
-        </div>
-        <div class="sep"></div>
-        <div class="dim">目前已知问题：</div>
-        <div class="dim">· 浏览仓库列表时自动拦截未生效，可以先使用「记住看到哪里（下次打开接着看）」暂替。</div>
-        <div class="dim">· 开启本插件的情况下，更新新版本的 OmniToolbox / XSZToolbox / PFRadar / OCNFarmer 时会加载失败，需要重启一次游戏解决。</div>
+        <div class="hint">目前已知问题：</div>
+        <div class="hint">· 开启本插件的情况下，更新新版本的 OmniToolbox / XSZToolbox / PFRadar / OCNFarmer 时会加载失败，需要重启一次游戏解决。</div>
       </div>
     </div>
   </div>
 
-  <!-- ============ 帧 2：开启 + 有记录 ============ -->
   <div>
-    <p class="caption">帧 2 — 两个开关都开：钩子就绪（绿）；计数 0 值统一显示「—」；状态框按实际行数算高（含最后一行放行）</p>
+    <p class="caption">帧 2 — 已勾选：钩子只装 3 个（OnOpen / 分类选择器 / 列表内容），不再有任何拦截</p>
     <div class="window">
-      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 刷新拦截</span></div>
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 安装器</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">插件安装器</div></div>
-
-        <div>浏览插件安装器时，拦下「正在加载插件…」。</div>
-        <div class="hint">打开安装器不再联网重拉仓库，也不会重置排序与搜索。</div>
-        <div class="hint">有需要可以手动刷新插件列表。</div>
-
+        <div>记住插件安装器列表的浏览位置，下次打开接着看。</div>
+        <div class="hint">想刷新列表内容，点安装器底部的「刷新插件列表」。</div>
         <div class="sep"></div>
-
-        <div class="chip"><span class="check on"></span>安装器打开时拦下列表更新</div>
         <div class="chip"><span class="check on"></span>记住看到哪里（下次打开接着看）</div>
-        <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
-
         <div class="sep"></div>
-
-        <div class="sect"><span>最近拦下的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
-        <div class="frame list" style="height:130px">
-          <div class="mono">13:31:02 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:29:44 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:27:10 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:25:35 拦下列表重建（安装器打开中）</div>
-        </div>
-
-        <div class="sep"></div>
-
-        <div class="frame">
-          <div class="good">拦截状态：已就绪（7/7）</div>
-          <div class="mono">已拦下列表重建：23 次 · 最近 13:31:02</div>
-          <div class="mono">已拦下「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
-          <div class="mono">已拦下「正在加载插件…」替换：2 次 · 最近 13:28:12</div>
-          <div class="dim">最近一次未拦下：用户操作（点过安装器底部按钮）· 13:30:05</div>
-        </div>
-        <div class="sep"></div>
-        <div class="dim">目前已知问题：</div>
-        <div class="dim">· 浏览仓库列表时自动拦截未生效，可以先使用「记住看到哪里（下次打开接着看）」暂替。</div>
-        <div class="dim">· 开启本插件的情况下，更新新版本的 OmniToolbox / XSZToolbox / PFRadar / OCNFarmer 时会加载失败，需要重启一次游戏解决。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ 帧 3：满态 / 异常态 ============ -->
-  <div>
-    <p class="caption">帧 3 — 满态与异常：记录 20 条（列表内滚动条）、拦截部分失败（橙字、长行折行）、框高按实际行数＋余量</p>
-    <div class="window">
-      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 刷新拦截</span></div>
-      <div class="body">
-        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">插件安装器</div></div>
-
-        <div>浏览插件安装器时，拦下「正在加载插件…」。</div>
-        <div class="hint">打开安装器不再联网重拉仓库，也不会重置排序与搜索。</div>
-        <div class="hint">有需要可以手动刷新插件列表。</div>
-
-        <div class="sep"></div>
-
-        <div class="chip"><span class="check on"></span>安装器打开时拦下列表更新</div>
-        <div class="chip"><span class="check on"></span>记住看到哪里（下次打开接着看）</div>
-        <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
-
-        <div class="sep"></div>
-
-        <div class="sect"><span>最近拦下的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
-        <div class="frame list" style="height:130px">
-          <div class="mono">13:31:02 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:29:44 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:27:10 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:25:35 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:23:02 拦下列表重建（安装器打开中）</div>
-          <div class="mono">13:21:40 拦下列表重建（安装器打开中）</div>
-          <div class="scrollhint"></div>
-        </div>
-
-        <div class="sep"></div>
-
-        <div class="frame">
-          <div class="warn">拦截状态：部分失败：firegaze.installer.categories、firegaze.installer.list</div>
-          <div class="mono">已拦下列表重建：23 次 · 最近 13:31:02</div>
-          <div class="mono">已拦下「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
-          <div class="mono">已拦下「正在加载插件…」替换：—</div>
-          <div class="dim">最近一次未拦下：—</div>
-        </div>
-        <div class="sep"></div>
-        <div class="dim">目前已知问题：</div>
-        <div class="dim">· 浏览仓库列表时自动拦截未生效，可以先使用「记住看到哪里（下次打开接着看）」暂替。</div>
-        <div class="dim">· 开启本插件的情况下，更新新版本的 OmniToolbox / XSZToolbox / PFRadar / OCNFarmer 时会加载失败，需要重启一次游戏解决。</div>
+        <div class="hint">目前已知问题：</div>
+        <div class="hint">· 开启本插件的情况下，更新新版本的 OmniToolbox / XSZToolbox / PFRadar / OCNFarmer 时会加载失败，需要重启一次游戏解决。</div>
       </div>
     </div>
   </div>

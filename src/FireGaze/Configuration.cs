@@ -2,19 +2,6 @@ using Dalamud.Configuration;
 
 namespace FireGaze;
 
-/// <summary>后台自动刷新的拦截模式。</summary>
-public enum BlockMode
-{
-    /// <summary>只要不是卫月自己发起的刷新，一律拦掉（默认）。</summary>
-    Always = 0,
-
-    /// <summary>只在「插件安装器」窗口开着的时候拦（没在看列表就照常刷新）。</summary>
-    InstallerOpenOnly = 1,
-
-    /// <summary>关闭拦截。</summary>
-    Off = 2,
-}
-
 /// <summary>某个字段的展示方式。</summary>
 public enum DisplayMode
 {
@@ -65,26 +52,13 @@ public sealed class Configuration : IPluginConfiguration
 {
     public int Version { get; set; } = 1;
 
-    // ---------------- 列表自动刷新拦截 ----------------
-
-    public BlockMode BlockerMode { get; set; } = BlockMode.Off;
-
-    public bool BlockerWriteLog { get; set; } = true;
-
     // ---------------- 安装器列表浏览位置 ----------------
 
-    /// <summary>是否记住插件安装器列表的浏览位置（下次打开接着看）。默认关（与拦截开关一致：零足迹，由用户自己开）。</summary>
+    /// <summary>是否记住插件安装器列表的浏览位置（下次打开接着看）。默认关：零足迹，由用户自己开。</summary>
     public bool RememberListScroll { get; set; }
 
     /// <summary>上次离开时列表的滚动位置（像素）。</summary>
     public float? ListScrollY { get; set; }
-
-    public int BlockedCount { get; set; }
-
-    /// <summary>最近被拦下的来源（新的在前，最多 <see cref="MaxRecentBlocked"/> 条）。</summary>
-    public List<string> RecentBlockedSources { get; set; } = [];
-
-    public const int MaxRecentBlocked = 20;
 
     // ---------------- 简介汉化 ----------------
 
