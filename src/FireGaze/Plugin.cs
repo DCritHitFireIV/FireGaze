@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Timers;
+using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Command;
 using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
@@ -55,9 +56,11 @@ public sealed class Plugin : IDalamudPlugin
     private PropertyInfo? windowsProp;
     private PropertyInfo? isOpenProp;
     private int tableUpdateBusy;
-    private long pendingPluginReloadTicks;
-    private string? pendingPluginReloadSource;
+    private long userIntentTicks;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
+
+    /// <summary>「用户刚动过安装器」的放行窗口：覆盖一次完整重载（上千仓库可能跑几分钟）。</summary>
+    private static readonly TimeSpan UserIntentWindow = TimeSpan.FromMinutes(3);
 
     public Plugin(IDalamudPluginInterface pluginInterface)
     {
@@ -379,61 +382,54 @@ public sealed class Plugin : IDalamudPlugin
                 return;
             }
 
-            var manager = ResolveService("Dalamud.Plugin.Internal.PluginManager");
-            if (manager is null)
+            var dalamud = typeof(IDalamudPluginInterface).Assembly;
+            var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
+            if (installerType is null)
             {
-                this.BlockerStatusText = "找不到 PluginManager（卫月版本不兼容），未挂钩";
+                this.BlockerStatusText = "找不到插件安装器类型（卫月版本不兼容），未挂钩";
                 Log.Warning("[FireGaze] " + this.BlockerStatusText);
                 return;
             }
 
-            var target = manager.GetType();
-            var reloadPrefix = typeof(Plugin).GetMethod(nameof(ReloadNotePrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+            var drawPrefix = typeof(Plugin).GetMethod(nameof(InstallerDrawPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+            var openPrefix = typeof(Plugin).GetMethod(nameof(InstallerOpenPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
             var refreshPrefix = typeof(Plugin).GetMethod(nameof(InstallerRefreshPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
 
             var patched = new List<string>();
 
-            // 1) 重载入口：只「听」不拦——记录这次重载是不是插件发起的，方法本身照常执行
-            foreach (var name in new[] { "SetPluginReposFromConfigAsync", "ReloadAllReposAsync" })
+            // 只在「插件安装器」这一侧挂钩：完全不碰「重载仓库」的接口，
+            // 避免影响依赖反射调用链的插件（ECommons/OmenTools/OmniToolbox/XSZ 等）。
+            var draw = installerType.GetMethod("Draw", BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            if (draw is not null)
             {
-                var method = target.GetMethod(name, BindingFlags.Instance | BindingFlags.Public);
-                if (method is null)
-                {
-                    Log.Warning($"[FireGaze] 未找到 {target.FullName}.{name}");
-                    continue;
-                }
-
-                this.harmony.PatchPrefix(method, reloadPrefix);
-                patched.Add(name);
-            }
-
-            // 2) 真正的拦截点：安装器的「可用列表重建」
-            //    PluginManager.NotifyAvailablePluginsChanged → OnAvailablePluginsChanged 事件
-            //    → PluginInstallerWindow.OnAvailablePluginsChanged（pluginListAvailable = ...; ResortPlugins()）
-            var dalamud = typeof(IDalamudPluginInterface).Assembly;
-            var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
-            var installerHandler = installerType?.GetMethod(
-                "OnAvailablePluginsChanged",
-                BindingFlags.Instance | BindingFlags.NonPublic);
-
-            if (installerHandler is not null)
-            {
-                this.harmony.PatchPrefix(installerHandler, refreshPrefix);
-                patched.Add("安装器列表重建");
+                this.harmony.PatchPrefix(draw, drawPrefix);
+                patched.Add("安装器绘制（采集用户操作）");
             }
             else
             {
-                // 回退：直接拦「可用列表变更通知」（副作用：DetectAvailablePluginUpdates 也一并跳过）
-                var notify = target.GetMethod("NotifyAvailablePluginsChanged", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (notify is not null)
-                {
-                    this.harmony.PatchPrefix(notify, refreshPrefix);
-                    patched.Add("可用列表通知（回退）");
-                }
-                else
-                {
-                    Log.Warning("[FireGaze] 未找到安装器列表重建 / 可用列表通知方法");
-                }
+                Log.Warning("[FireGaze] 未找到 PluginInstallerWindow.Draw");
+            }
+
+            var onOpen = installerType.GetMethod("OnOpen", BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            if (onOpen is not null)
+            {
+                this.harmony.PatchPrefix(onOpen, openPrefix);
+                patched.Add("安装器打开");
+            }
+            else
+            {
+                Log.Warning("[FireGaze] 未找到 PluginInstallerWindow.OnOpen");
+            }
+
+            var rebuild = installerType.GetMethod("OnAvailablePluginsChanged", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+            if (rebuild is not null)
+            {
+                this.harmony.PatchPrefix(rebuild, refreshPrefix);
+                patched.Add("列表重建");
+            }
+            else
+            {
+                Log.Warning("[FireGaze] 未找到 PluginInstallerWindow.OnAvailablePluginsChanged");
             }
 
             this.BlockerStatusText = patched.Count == 0 ? "未找到目标方法" : "已挂钩：" + string.Join(" / ", patched);
@@ -447,70 +443,59 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    /// 重载入口的前缀：永远返回 true（放行），只记录发起者。
-    /// 插件发起 → 打上待定标记，等它引发的列表重建到来时跳过；
-    /// 卫月自己发起 → 清掉标记，保证它的列表重建正常进行。
+    /// 安装器绘制时的前缀（窗口打开时每帧一次）：记录用户是否正在操作安装器。
+    /// 只读 ImGui IO，不改变任何行为。
     /// </summary>
-    private static bool ReloadNotePrefix(MethodBase __originalMethod)
+    private static bool InstallerDrawPrefix()
     {
-        try
-        {
-            instance?.NoteReloadCall(__originalMethod);
-        }
-        catch
-        {
-            // 绝不能影响原方法
-        }
-
+        instance?.NoteInstallerActivity();
         return true;
     }
 
-    /// <summary>安装器列表重建的前缀：有待定标记（且模式允许）时返回 false，跳过这次重建。</summary>
+    /// <summary>安装器打开时的前缀：打开本身会触发一次重载，它引发的重建应该被放行。</summary>
+    private static bool InstallerOpenPrefix()
+    {
+        instance?.MarkUserIntent();
+        return true;
+    }
+
+    /// <summary>列表重建前缀：非用户操作引发的（后台定时重载）就跳过这次重建。</summary>
     private static bool InstallerRefreshPrefix()
     {
         return instance is null || instance.ShouldAllowListRebuild();
     }
 
-    private void NoteReloadCall(MethodBase original)
+    /// <summary>记录「用户刚动过安装器」——之后一段时间内的列表重建都放行。</summary>
+    private void MarkUserIntent()
+    {
+        Interlocked.Exchange(ref this.userIntentTicks, DateTime.UtcNow.Ticks);
+    }
+
+    private void NoteInstallerActivity()
     {
         try
         {
-            var caller = this.FindPluginCaller();
-            if (caller is null)
+            var io = ImGui.GetIO();
+            if (io.MouseClicked[0] || io.MouseClicked[1] || io.MouseClicked[2])
             {
-                // 卫月本体（打开安装器 / 点刷新 / 设置里改仓库 / 自身定时检查）或 FireGaze 自己：
-                // 这次重建应该正常进行
-                Interlocked.Exchange(ref this.pendingPluginReloadTicks, 0);
-                this.pendingPluginReloadSource = null;
-                return;
+                this.MarkUserIntent();
             }
-
-            this.pendingPluginReloadSource = $"{caller} → {original.Name}";
-            Interlocked.Exchange(ref this.pendingPluginReloadTicks, DateTime.UtcNow.Ticks);
         }
-        catch (Exception e)
+        catch
         {
-            Log.Debug(e, "[FireGaze] 记录重载来源失败");
+            // 读输入失败不影响任何东西
         }
     }
 
+    /// <summary>
+    /// 是否允许安装器重建「可用插件列表」。
+    /// 规则：用户刚点过/刚打开（<see cref="UserIntentWindow"/> 内）→ 放行；
+    /// 后台重载（插件的定时器等）引发的 → 跳过，列表与滚动位置保持不动。
+    /// </summary>
     private bool ShouldAllowListRebuild()
     {
         try
         {
-            var ticks = Interlocked.Read(ref this.pendingPluginReloadTicks);
-            if (ticks == 0)
-            {
-                return true;
-            }
-
-            // 安全网：标记太旧（重载失败 / 被合并）就忽略，避免误拦用户发起的重建
-            if (DateTime.UtcNow - new DateTime(ticks, DateTimeKind.Utc) > TimeSpan.FromMinutes(30))
-            {
-                Interlocked.Exchange(ref this.pendingPluginReloadTicks, 0);
-                return true;
-            }
-
             var mode = this.Config.BlockerMode;
             if (mode == BlockMode.Off)
             {
@@ -522,9 +507,12 @@ public sealed class Plugin : IDalamudPlugin
                 return true;
             }
 
-            Interlocked.Exchange(ref this.pendingPluginReloadTicks, 0);
-            var source = this.pendingPluginReloadSource ?? "(未知来源)";
-            this.pendingPluginReloadSource = null;
+            var ticks = Interlocked.Read(ref this.userIntentTicks);
+            if (ticks != 0 &&
+                DateTime.UtcNow - new DateTime(ticks, DateTimeKind.Utc) <= UserIntentWindow)
+            {
+                return true;
+            }
 
             int count;
             lock (this.recordLock)
@@ -532,8 +520,8 @@ public sealed class Plugin : IDalamudPlugin
                 this.Config.BlockedCount++;
                 count = this.Config.BlockedCount;
 
-                this.Config.RecentBlockedSources.RemoveAll(x => x == source);
-                this.Config.RecentBlockedSources.Insert(0, source);
+                var line = $"{DateTime.Now:HH:mm:ss} 后台重载";
+                this.Config.RecentBlockedSources.Insert(0, line);
                 while (this.Config.RecentBlockedSources.Count > Configuration.MaxRecentBlocked)
                 {
                     this.Config.RecentBlockedSources.RemoveAt(this.Config.RecentBlockedSources.Count - 1);
@@ -544,14 +532,8 @@ public sealed class Plugin : IDalamudPlugin
 
             if (this.Config.BlockerWriteLog)
             {
-                bool first;
-                lock (this.recordLock)
-                {
-                    first = this.loggedSources.Add(source);
-                }
-
-                var message = $"[FireGaze] 已跳过安装器列表重建（第 {count} 次）：{source}";
-                if (first)
+                var message = $"[FireGaze] 已跳过安装器列表重建（第 {count} 次）：非用户操作（后台重载）";
+                if (count == 1)
                 {
                     Log.Information(message);
                 }
@@ -569,60 +551,6 @@ public sealed class Plugin : IDalamudPlugin
             return true;
         }
     }
-
-    /// <summary>找出第一个「不是卫月自己」的调用帧；整条调用链都在卫月 / FireGaze 里就返回 null。</summary>
-    private string? FindPluginCaller()
-    {
-        var trace = new StackTrace(1, false);
-        var self = typeof(Plugin).Assembly;
-        var chain = new List<string>();
-        var assemblies = new HashSet<string>(StringComparer.Ordinal);
-
-        foreach (var frame in trace.GetFrames())
-        {
-            var method = frame.GetMethod();
-            if (method is null)
-            {
-                continue;
-            }
-
-            var assembly = method.DeclaringType?.Assembly ?? method.Module.Assembly;
-            if (ReferenceEquals(assembly, self))
-            {
-                continue;
-            }
-
-            var assemblyName = assembly.GetName().Name;
-            if (assemblyName is null || IsIgnored(assemblyName))
-            {
-                continue;
-            }
-
-            if (!assemblies.Add(assemblyName))
-            {
-                continue;
-            }
-
-            var type = method.DeclaringType?.FullName;
-            chain.Add(type is null ? assemblyName : $"{assemblyName} · {type}.{method.Name}");
-
-            if (chain.Count >= 3)
-            {
-                break;
-            }
-        }
-
-        return chain.Count == 0 ? null : string.Join(" ← ", chain);
-    }
-
-    private static bool IsIgnored(string assemblyName) =>
-        assemblyName is "Dalamud" or "0Harmony" or "netstandard" or "mscorlib" or "Newtonsoft.Json" or "Serilog" or "ImGui.NET" ||
-        assemblyName.StartsWith("Dalamud.", StringComparison.Ordinal) ||
-        assemblyName.StartsWith("System.", StringComparison.Ordinal) ||
-        assemblyName.StartsWith("Microsoft.", StringComparison.Ordinal) ||
-        assemblyName.StartsWith("FFXIVClientStructs", StringComparison.Ordinal) ||
-        assemblyName.StartsWith("Lumina", StringComparison.Ordinal) ||
-        assemblyName.StartsWith("InteropGenerator", StringComparison.Ordinal);
 
     /// <summary>插件安装器窗口是否开着。</summary>
     private bool IsInstallerOpen()

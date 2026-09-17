@@ -17,9 +17,9 @@ internal sealed class BlockerTab
     {
         var config = this.plugin.Config;
 
-        ImGui.TextWrapped("防止浏览插件安装器时列表被自动重载顶回顶部。");
-        ImGui.TextDisabled("重载本身照常执行（插件依赖它，不打断）；只跳过它引发的「安装器列表重建」。");
-        ImGui.TextDisabled("手动刷新、打开安装器、在卫月设置里改仓库不受影响。");
+        ImGui.TextWrapped("防止浏览插件安装器时列表被后台重载顶回顶部。");
+        ImGui.TextDisabled("只在安装器一侧做拦截：完全不碰「重载仓库」接口——插件依赖它，重载与插件自动更新照常执行。");
+        ImGui.TextDisabled("你点过安装器（刷新 / 安装 / 刚打开）后 3 分钟内的列表重建照常放行。");
 
         ImGui.Separator();
         ImGui.Text("跳过模式");
@@ -30,13 +30,13 @@ internal sealed class BlockerTab
         }
 
         ImGui.SameLine();
-        if (ImGui.RadioButton("全部跳过###ModeAlways", config.BlockerMode == BlockMode.Always))
+        if (ImGui.RadioButton("跳过###ModeAlways", config.BlockerMode == BlockMode.Always))
         {
             this.plugin.SetBlockerMode(BlockMode.Always);
         }
 
         ImGui.SameLine();
-        ImGui.TextDisabled("插件发起的重载，一律不重建安装器列表");
+        ImGui.TextDisabled("后台重载不再重建安装器列表");
 
         if (ImGui.RadioButton("只在安装器打开时跳过###ModeOpen", config.BlockerMode == BlockMode.InstallerOpenOnly))
         {
@@ -63,12 +63,12 @@ internal sealed class BlockerTab
         }
 
         ImGui.Separator();
-        ImGui.Text("最近跳过的来源");
+        ImGui.Text("最近跳过的记录");
 
         var sources = this.plugin.RecentBlockedSources;
         if (sources.Count == 0)
         {
-            ImGui.TextDisabled("（还没有跳过过 —— 也有可能这段时间没有插件在后台重载）");
+            ImGui.TextDisabled("（还没有跳过过 —— 也有可能这段时间没有后台重载）");
             return;
         }
 
