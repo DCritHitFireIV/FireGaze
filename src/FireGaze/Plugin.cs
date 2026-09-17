@@ -31,6 +31,15 @@ public sealed class Plugin : IDalamudPlugin
     /// </summary>
     public static readonly bool BlockerFeatureEnabled = true;
 
+    /// <summary>
+    /// 「用户刚才在安装器里显式操作过」的放行窗口。
+    /// 为什么按点击判定：安装器底部「刷新插件列表」与「打开安装器」调用的是同一个
+    /// <c>PluginManager.ReloadAllReposAsync()</c>，列表重建又走同一个
+    /// <c>OnAvailablePluginsChanged</c> 事件，事件侧分不出是谁发起的；
+    /// 只有「底部按钮行里的那次点击」能可靠地代表用户显式刷新。
+    /// </summary>
+    private static readonly TimeSpan UserActionGrace = TimeSpan.FromSeconds(30);
+
     private static Plugin instance = null!;
 
     [PluginService] public static IPluginLog Log { get; private set; } = null!;
@@ -59,6 +68,8 @@ public sealed class Plugin : IDalamudPlugin
     private PropertyInfo? isOpenProp;
     private int tableUpdateBusy;
     private long installerVisibleTicks;
+    private long userActionTicks;
+    private string lastAllowNote = string.Empty;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -243,6 +254,9 @@ public sealed class Plugin : IDalamudPlugin
 
     /// <summary>累计拦截次数。</summary>
     public int BlockedCount => this.Config.BlockedCount;
+
+    /// <summary>最近一次「放行」的原因（供界面显示，便于验证手动刷新有没有生效）。</summary>
+    public string LastAllowNote => this.lastAllowNote;
 
     /// <summary>最近拦下的来源。</summary>
     public IReadOnlyList<string> RecentBlockedSources
@@ -511,6 +525,8 @@ public sealed class Plugin : IDalamudPlugin
                 return;
             }
 
+            Log.Information("[FireGaze] 0Harmony：" + HarmonyHost.Resolution);
+
             var dalamud = typeof(IDalamudPluginInterface).Assembly;
             var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
             if (installerType is null)
@@ -522,6 +538,7 @@ public sealed class Plugin : IDalamudPlugin
 
             var drawPrefix = typeof(Plugin).GetMethod(nameof(InstallerDrawPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
             var openPrefix = typeof(Plugin).GetMethod(nameof(InstallerOpenPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+            var footerPrefix = typeof(Plugin).GetMethod(nameof(InstallerFooterPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
             var refreshPrefix = typeof(Plugin).GetMethod(nameof(InstallerRefreshPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
 
             var patched = new List<string>();
@@ -548,6 +565,18 @@ public sealed class Plugin : IDalamudPlugin
             else
             {
                 Log.Warning("[FireGaze] 未找到 PluginInstallerWindow.OnOpen");
+            }
+
+            // 底部按钮行：用来识别「用户显式点了刷新」（事件侧无法区分手动刷新与打开安装器）。
+            var footer = installerType.GetMethod("DrawFooter", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+            if (footer is not null)
+            {
+                this.harmony.PatchPrefix(footer, footerPrefix);
+                patched.Add("firegaze.installer.footer");
+            }
+            else
+            {
+                Log.Warning("[FireGaze] 未找到 PluginInstallerWindow.DrawFooter（手动刷新的放行判定会失效）");
             }
 
             var rebuild = installerType.GetMethod("OnAvailablePluginsChanged", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
@@ -581,8 +610,66 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>安装器打开时的前缀（firegaze.installer.open）。</summary>
     private static bool InstallerOpenPrefix()
     {
+        // 每次打开都清掉上一次会话残留的「用户操作」放行窗口：
+        // 于是「打开安装器触发的那次刷新」依旧会被跳过（用户没有点过任何东西）。
+        instance?.ResetUserActionGrace();
         instance?.NoteInstallerVisible();
         return true;
+    }
+
+    /// <summary>
+    /// 安装器底部按钮行的前缀（firegaze.installer.footer，窗口打开时每帧一次）。
+    /// 这一行里有「更新插件 / 扫描开发版插件 / 刷新插件列表 / 设置 / 关闭」，
+    /// 点其中任何一个都算用户显式操作；「刷新插件列表」会发起一次仓库重载，
+    /// 而它与「打开安装器」在事件侧无法区分，所以在这里按点击打标记。
+    /// </summary>
+    private static bool InstallerFooterPrefix()
+    {
+        instance?.NoteFooterInteraction();
+        return true;
+    }
+
+    /// <summary>记录「用户刚在安装器底部按钮行里点过鼠标」。</summary>
+    private void NoteFooterInteraction()
+    {
+        try
+        {
+            if (this.Config.BlockerMode == BlockMode.Off)
+            {
+                return;
+            }
+
+            if (!ImGui.IsMouseClicked(ImGuiMouseButton.Left))
+            {
+                return;
+            }
+
+            // DrawFooter 在安装器窗口上下文里执行，这里的几何就是安装器窗口自己的。
+            var mouse = ImGui.GetMousePos();
+            var windowPos = ImGui.GetWindowPos();
+            var contentMax = ImGui.GetWindowContentRegionMax();
+
+            var rowHeight = ImGui.GetFrameHeight() + 8f;
+            var rowTop = windowPos.Y + contentMax.Y - rowHeight;
+            var rowBottom = windowPos.Y + contentMax.Y + 8f;
+
+            if (mouse.Y < rowTop || mouse.Y > rowBottom)
+            {
+                return;
+            }
+
+            if (mouse.X < windowPos.X - 4f || mouse.X > windowPos.X + contentMax.X + 4f)
+            {
+                return;
+            }
+
+            Interlocked.Exchange(ref this.userActionTicks, DateTime.UtcNow.Ticks);
+            Log.Debug("[FireGaze] 检测到安装器底部按钮行的点击 → 接下来 30 秒内的列表重建放行");
+        }
+        catch (Exception e)
+        {
+            Log.Debug(e, "[FireGaze] 记录安装器底部点击失败");
+        }
     }
 
     /// <summary>列表重建前缀（firegaze.installer.rebuild）：安装器开着就跳过这次重建。</summary>
@@ -596,6 +683,9 @@ public sealed class Plugin : IDalamudPlugin
     {
         Interlocked.Exchange(ref this.installerVisibleTicks, DateTime.UtcNow.Ticks);
     }
+
+    /// <summary>清空「用户操作」放行窗口（窗口每次打开时调用）。</summary>
+    private void ResetUserActionGrace() => Interlocked.Exchange(ref this.userActionTicks, 0);
 
     /// <summary>安装器是否开着：反射读窗口 IsOpen 为准，Draw/Open 记录做兜底（刚关掉的那一两帧）。</summary>
     private bool IsInstallerVisible()
@@ -625,6 +715,20 @@ public sealed class Plugin : IDalamudPlugin
 
             if (!this.IsInstallerVisible())
             {
+                return true;
+            }
+
+            // 用户刚在安装器里点过底部按钮（尤其「刷新插件列表」）→ 放行，保证手动刷新有效。
+            var userTicks = Interlocked.Read(ref this.userActionTicks);
+            if (userTicks != 0 &&
+                DateTime.UtcNow - new DateTime(userTicks, DateTimeKind.Utc) <= UserActionGrace)
+            {
+                this.lastAllowNote = $"用户操作（点过安装器底部按钮）· {DateTime.Now:HH:mm:ss}";
+                if (this.Config.BlockerWriteLog)
+                {
+                    Log.Debug("[FireGaze] 检测到用户刚在安装器里操作过 → 本次列表重建放行");
+                }
+
                 return true;
             }
 

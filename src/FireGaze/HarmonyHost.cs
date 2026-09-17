@@ -109,7 +109,33 @@ internal sealed class HarmonyHost
         {
             if (string.Equals(loaded.GetName().Name, HarmonyAssemblyName, StringComparison.OrdinalIgnoreCase))
             {
+                Resolution = "复用默认 ALC 里已有的副本";
                 return loaded;
+            }
+        }
+
+        // 1.5) 别的（非可回收）ALC 里已经有副本 → 也复用。
+        //      典型场景：dev 插件热重载 / 用户在安装器里禁用再启用（不重启游戏）。
+        //      上一个实例的隔离 ALC 是非可回收的，副本还活着；
+        //      此时若再新建一个 ALC 载入第二份 0Harmony，两份 MonoMod 类型并存会让
+        //      Harmony 打补丁时抛 TypeLoadException
+        //      （MonoMod.Utils.Cil.ILGeneratorProxy[TTarget] 泛型约束校验失败）→ 钩子全挂掉。
+        foreach (var context in AssemblyLoadContext.All)
+        {
+            if (context.IsCollectible)
+            {
+                // 可回收 ALC（插件的私有依赖 ALC）可能随时被卸载，不能长期引用它的程序集。
+                continue;
+            }
+
+            foreach (var loaded in context.Assemblies)
+            {
+                if (string.Equals(loaded.GetName().Name, HarmonyAssemblyName, StringComparison.OrdinalIgnoreCase))
+                {
+                    HarmonyContext = context;
+                    Resolution = $"复用已有隔离 ALC 里的副本（{context.Name}）";
+                    return loaded;
+                }
             }
         }
 
@@ -133,6 +159,7 @@ internal sealed class HarmonyHost
 
             var assembly = context.LoadFromAssemblyPath(path);
             HarmonyContext = context;   // 保持引用
+            Resolution = "已载入隔离 ALC（FireGaze.Harmony）";
             return assembly;
         }
         catch (Exception e)
@@ -141,6 +168,9 @@ internal sealed class HarmonyHost
             return null;
         }
     }
+
+    /// <summary>0Harmony 的来源描述（写日志用）。</summary>
+    internal static string Resolution { get; private set; } = string.Empty;
 
     /// <summary>我们自己的 0Harmony ALC（保持引用，防被回收；非可回收 ALC 本身也不会被回收）。</summary>
     private static AssemblyLoadContext? HarmonyContext { get; set; }

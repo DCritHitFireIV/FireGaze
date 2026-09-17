@@ -17,14 +17,15 @@ internal sealed class BlockerTab
     {
         var config = this.plugin.Config;
 
-        ImGui.TextWrapped("防止浏览插件安装器时列表被自动重载顶回顶部。");
+        ImGui.TextWrapped("浏览插件安装器时，列表被后台重载重建会把浏览位置顶回顶部；开启后把重建拦下。");
         ImGui.TextDisabled("只在安装器一侧拦截：不碰「重载仓库」接口——插件依赖它，重载与插件自动更新照常执行。");
-        ImGui.TextDisabled("安装器关闭时列表照常重建；想让列表立刻更新，把安装器关掉再打开即可。");
+        ImGui.TextDisabled("开启后：打开安装器触发的那次刷新也会被跳过（列表保持不动）。");
+        ImGui.TextDisabled("在安装器底部点「刷新插件列表」仍然生效（算作用户显式操作）。");
 
         ImGui.Separator();
 
         var enabled = config.BlockerMode != BlockMode.Off;
-        if (ImGui.Checkbox("安装器打开时不刷新列表###BlockerEnabled", ref enabled))
+        if (ImGui.Checkbox("禁止安装器打开期间的列表更新###BlockerEnabled", ref enabled))
         {
             this.plugin.SetBlockerEnabled(enabled);
         }
@@ -39,6 +40,9 @@ internal sealed class BlockerTab
 
         ImGui.Text($"钩子状态：{this.plugin.BlockerStatusText}");
         ImGui.Text($"已跳过列表重建：{this.plugin.BlockedCount} 次");
+        ImGui.TextDisabled(string.IsNullOrEmpty(this.plugin.LastAllowNote)
+            ? "最近一次放行：—"
+            : $"最近一次放行：{this.plugin.LastAllowNote}");
 
         if (ImGui.Button("清空记录###ClearBlocked"))
         {
