@@ -3,9 +3,12 @@ using FireGaze.RepoAudit;
 
 namespace FireGaze.UI;
 
-/// <summary>「插件安装器」页：列表刷新拦截 + 安装器窗口位置记忆。</summary>
+/// <summary>「插件安装器」页：列表刷新拦截 + 列表浏览位置。</summary>
 internal sealed class BlockerTab
 {
+    private const string ClearButtonLabel = "清空记录";
+    private const string ClearButtonId = "###ClearBlocked";
+
     private readonly Plugin plugin;
 
     public BlockerTab(Plugin plugin)
@@ -15,30 +18,22 @@ internal sealed class BlockerTab
 
     public void Draw()
     {
-        var drewSection = false;
-
         if (Plugin.BlockerFeatureEnabled)
         {
-            this.DrawBlockerSection();
-            drewSection = true;
+            this.DrawToggleSection();
         }
 
-        if (drewSection)
-        {
-            ImGui.Separator();
-            ImGui.Spacing();
-        }
-
-        this.DrawWindowSection();
+        this.DrawRecordsSection();
+        this.DrawStatusSection();
     }
 
-    private void DrawBlockerSection()
+    /// <summary>说明 + 开关。</summary>
+    private void DrawToggleSection()
     {
         var config = this.plugin.Config;
 
-        ImGui.TextWrapped("浏览插件安装器时，列表被后台重载重建（或换成「正在加载插件…」）会把浏览位置顶掉；开启后把这两样都拦下。");
-        ImGui.TextDisabled("只在安装器一侧拦截：不碰「重载仓库」接口——插件依赖它，重载与插件自动更新照常执行。");
-        ImGui.TextDisabled("关闭时一切照常（不挂钩子、零足迹）。");
+        ImGui.TextWrapped("浏览插件安装器时，拦下「正在加载插件…」。");
+        ImGui.TextDisabled("有需要可以手动刷新插件列表。");
 
         ImGui.Separator();
 
@@ -48,6 +43,12 @@ internal sealed class BlockerTab
             this.plugin.SetBlockerEnabled(enabled);
         }
 
+        var remember = config.RememberListScroll;
+        if (ImGui.Checkbox("记住看到哪里（下次打开接着看）###RememberScroll", ref remember))
+        {
+            this.plugin.SetRememberListScroll(remember);
+        }
+
         var writeLog = config.BlockerWriteLog;
         if (ImGui.Checkbox("把记录写进 dalamud.log###WriteLog", ref writeLog))
         {
@@ -55,49 +56,73 @@ internal sealed class BlockerTab
         }
 
         ImGui.Separator();
+    }
 
-        ImGui.Text($"钩子状态：{this.plugin.BlockerStatusText}");
-        ImGui.Text($"已跳过列表重建：{this.plugin.BlockedCount} 次 · 最近 {this.plugin.LastSkipNote}");
-        ImGui.Text($"已跳过「打开安装器」的仓库重载：{this.plugin.OpenSkipNote}");
-        ImGui.Text($"已挡下「正在加载插件…」替换：{this.plugin.ListSuppressNote}");
-        ImGui.TextDisabled(string.IsNullOrEmpty(this.plugin.LastAllowNote)
-            ? "最近一次放行：—"
-            : $"最近一次放行：{this.plugin.LastAllowNote}");
-
-        if (ImGui.Button("清空记录###ClearBlocked"))
+    /// <summary>最近跳过的记录（在状态框上面）。</summary>
+    private void DrawRecordsSection()
+    {
+        ImGui.Text("最近跳过的记录");
+        ImGui.SameLine(this.RightAlignedOffsetFor(ClearButtonLabel));
+        if (ImGui.SmallButton(ClearButtonLabel + ClearButtonId))
         {
             this.plugin.ClearBlockedRecords();
         }
 
-        ImGui.Separator();
-        ImGui.Text("最近跳过的记录");
-
         var sources = this.plugin.RecentBlockedSources;
-        if (sources.Count == 0)
+        if (ImGui.BeginChild("###BlockedList", new System.Numerics.Vector2(0, 150), true))
         {
-            ImGui.TextDisabled("（还没有跳过过）");
-            return;
+            if (sources.Count == 0)
+            {
+                ImGui.TextDisabled("（还没有跳过过）");
+            }
+            else
+            {
+                foreach (var line in sources)
+                {
+                    ImGui.TextUnformatted(line);
+                }
+            }
         }
 
-        if (ImGui.BeginChild("###BlockedList", new System.Numerics.Vector2(0, 140), true))
+        ImGui.EndChild();
+
+        ImGui.Separator();
+    }
+
+    /// <summary>钩子状态（放最下面）。</summary>
+    private void DrawStatusSection()
+    {
+        var lines = new[]
         {
-            foreach (var line in sources)
+            $"钩子状态：{this.plugin.BlockerStatusText}",
+            $"已跳过列表重建：{this.plugin.BlockedCount} 次 · 最近 {this.plugin.LastSkipNote}",
+            $"已跳过「打开安装器」的仓库重载：{this.plugin.OpenSkipNote}",
+            $"已挡下「正在加载插件…」替换：{this.plugin.ListSuppressNote}",
+        };
+
+        var height = (ImGui.GetTextLineHeightWithSpacing() * lines.Length)
+                     + (ImGui.GetStyle().WindowPadding.Y * 2f)
+                     + 2f;
+
+        if (ImGui.BeginChild("###BlockerStatus", new System.Numerics.Vector2(0, height), true))
+        {
+            foreach (var line in lines)
             {
-                ImGui.TextWrapped(line);
+                ImGui.TextUnformatted(line);
             }
+
+            ImGui.TextDisabled(string.IsNullOrEmpty(this.plugin.LastAllowNote)
+                ? "最近一次放行：—"
+                : $"最近一次放行：{this.plugin.LastAllowNote}");
         }
 
         ImGui.EndChild();
     }
 
-    private void DrawWindowSection()
+    /// <summary>把下一个控件右对齐（ImGui 的 SameLine 参数是「距行首的绝对偏移」）。</summary>
+    private float RightAlignedOffsetFor(string text)
     {
-        ImGui.Text("列表浏览位置");
-
-        var remember = this.plugin.Config.RememberListScroll;
-        if (ImGui.Checkbox("记住看到哪里（下次打开接着看）###RememberScroll", ref remember))
-        {
-            this.plugin.SetRememberListScroll(remember);
-        }
+        var width = ImGui.CalcTextSize(text).X + (ImGui.GetStyle().FramePadding.X * 2f);
+        return ImGui.GetContentRegionMax().X - width;
     }
 }
