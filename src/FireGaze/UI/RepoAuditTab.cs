@@ -57,6 +57,9 @@ internal sealed class RepoAuditTab
     private bool snapshotDirty = true;
     private DateTime snapshotNextAllowed = DateTime.MinValue;
     private bool installedCountsDirty = true;
+    private int problemCountCache;
+    private int installedInUseCache;
+    private int installedUnusedCache;
 
     // ---------------- 图标检查 / 下载（先查，再由用户决定下不下） ----------------
     private readonly List<InstalledPluginEntry> iconMissing = [];
@@ -183,14 +186,7 @@ internal sealed class RepoAuditTab
             string machineGroup;
             if (index is { Available: true })
             {
-                int inUse, unused;
-                lock (this.gate)
-                {
-                    inUse = this.items.Count(x => x.InstalledCount > 0);
-                    unused = this.items.Count(x => x.InstalledCount == 0);
-                }
-
-                machineGroup = $"已安装 {inUse} · 未安装 {unused}";
+                machineGroup = $"已安装 {this.installedInUseCache} · 未安装 {this.installedUnusedCache}";
             }
             else
             {
@@ -451,15 +447,21 @@ internal sealed class RepoAuditTab
                 if (specs.SpecsCount > 0)
                 {
                     var spec = specs.Specs[0];
-                    this.sortKey = spec.ColumnUserID switch
+                    var newKey = spec.ColumnUserID switch
                     {
                         3 => "installed",
                         4 => "firstSeen",
                         2 => "url",
                         _ => "status",
                     };
-                    this.sortDescending = spec.SortDirection == ImGuiSortDirection.Descending;
-                    this.snapshotDirty = true;
+                    var newDescending = spec.SortDirection == ImGuiSortDirection.Descending;
+
+                    if (newKey != this.sortKey || newDescending != this.sortDescending)
+                    {
+                        this.sortKey = newKey;
+                        this.sortDescending = newDescending;
+                        this.snapshotDirty = true;
+                    }
                 }
             }
 
@@ -797,13 +799,7 @@ internal sealed class RepoAuditTab
         _ => item.Note ?? string.Empty,
     };
 
-    private int ProblemCount()
-    {
-        lock (this.gate)
-        {
-            return this.items.Count(x => x.IsProblem);
-        }
-    }
+    private int ProblemCount() => this.problemCountCache;
 
     private void FilterRadio(string key, string label)
     {
@@ -906,6 +902,7 @@ internal sealed class RepoAuditTab
             this.unknownCount = this.items.Count(x => x.Status == RepoStatus.Unknown);
             this.disabledCount = this.items.Count(x => !x.IsEnabled);
             this.total = this.items.Count;
+            this.problemCountCache = this.items.Count(x => x.IsProblem);
         }
     }
 
@@ -1277,6 +1274,8 @@ internal sealed class RepoAuditTab
             }
         }
 
+        this.installedInUseCache = this.items.Count(x => x.InstalledCount > 0);
+        this.installedUnusedCache = this.items.Count(x => x.InstalledCount == 0);
         this.snapshotDirty = true;
     }
 
