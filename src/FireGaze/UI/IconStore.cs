@@ -101,7 +101,8 @@ internal sealed class IconStore : IDisposable
 
         try
         {
-            this.textures[entry.InternalName] = Plugin.Textures.GetFromFile(path);
+            // 我们的路径一定是全路径（配置目录在 %APPDATA% 下），所以用 GetFromFileAbsolute
+            this.textures[entry.InternalName] = Plugin.Textures.GetFromFileAbsolute(path);
             return true;
         }
         catch (Exception e)
