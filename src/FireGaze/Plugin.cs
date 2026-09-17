@@ -45,6 +45,8 @@ public sealed class Plugin : IDalamudPlugin
 
     private int tableUpdateBusy;
     private readonly UI.InstallerListScroll installerListScroll = new();
+    private Task<RepoAudit.InstalledPluginsIndex>? iconWarmUpIndexTask;
+    private DateTime iconWarmUpRetryAfter = DateTime.MinValue;
     private bool installerDefaultsNotice;
     private bool startupInitDone;
     private DateTime loadedAt;
@@ -365,10 +367,52 @@ public sealed class Plugin : IDalamudPlugin
         this.SaveConfig();
     }
 
-    /// <summary>每帧看一眼插件安装器（记住滚动位置 / 拦住自动刷新；不用钩子）。</summary>
+    /// <summary>每帧看一眼插件安装器（记住滚动位置 / 拦住自动刷新 / 图标预热；不用钩子）。</summary>
     private void TickInstallerListScroll()
     {
         this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false));
+
+        // 安装器开着 → 把本地缓存的图标分批挂回卫月的图标缓存（安装器直接用本地图，不重新下载）
+        if (this.installerListScroll.IsOpen)
+        {
+            this.EnsureIconWarmUpIndex();
+            this.Icons.WarmUpStep(4);
+        }
+    }
+
+    /// <summary>给图标预热准备「已装插件」索引（后台建一次就够；读不到就过 10 秒再试）。</summary>
+    private void EnsureIconWarmUpIndex()
+    {
+        if (this.iconWarmUpIndexTask is null)
+        {
+            if (DateTime.UtcNow < this.iconWarmUpRetryAfter)
+            {
+                return;
+            }
+
+            this.iconWarmUpIndexTask = Task.Run(RepoAudit.InstalledPluginsIndex.Build);
+            return;
+        }
+
+        if (!this.iconWarmUpIndexTask.IsCompleted)
+        {
+            return;
+        }
+
+        var index = this.iconWarmUpIndexTask.Status == TaskStatus.RanToCompletion
+            ? this.iconWarmUpIndexTask.Result
+            : null;
+
+        this.iconWarmUpIndexTask = null;
+
+        if (index is { Available: true })
+        {
+            this.Icons.ScheduleWarmUp(index.All);
+        }
+        else
+        {
+            this.iconWarmUpRetryAfter = DateTime.UtcNow.AddSeconds(10);
+        }
     }
 
     // ------------------------------------------------------------------ 配置

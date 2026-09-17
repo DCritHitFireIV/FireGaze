@@ -94,6 +94,9 @@ internal sealed class InstallerListScroll
     private static PropertyInfo? reposReadyProp;
     private static FieldInfo? repoRefreshTaskField;
 
+    /// <summary>安装器窗口现在开着吗（图标预热用）。</summary>
+    public bool IsOpen => this.installerWasOpen;
+
     /// <summary>每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。</summary>
     public void Tick(Configuration config, Action saveConfig)
     {
