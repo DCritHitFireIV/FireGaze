@@ -86,7 +86,7 @@
         <div class="toolbar"><span class="btn disabled">停用所选（0）</span><span class="btn danger disabled">删除所选（0）…</span><span class="btn">全选当前（12）</span><span class="btn">清空选择</span></div>
         <div class="tablewrap">
           <table>
-            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">本库已装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="bad">死链</span></td><td class="url">https://raw.githubusercontent.com/…/old-plugins.json</td><td class="muted">0 个</td><td class="muted">08-02</td></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="muted">0 个</td><td class="muted">09-04</td></tr>
@@ -130,10 +130,10 @@
         <div class="row"><span class="search">搜索仓库地址…</span></div>
         <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:13px">结果 12 行 · 已选 1</span><span class="row"><span class="btn">撤回：删除 2 个 · 12:03</span><span class="btn">打开备份目录</span></span></div>
         <div class="toolbar"><span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（12）</span><span class="btn">清空选择</span></div>
-        <div class="hint">图标检查：已安装 42 个插件 ｜ 图标已有 31 个，其中本地缓存 20 个 ｜ 缺图标 8 个 ｜ 另有 3 个没提供图标地址 ｜ BadApple、BossMod Reborn、SrankTool 等 8 个。下好的图标会存在本地，重开游戏不用重下。</div>
+        <div class="hint">图标检查：已安装 42 个插件 ｜ 图标已有 31 个，其中本地缓存 20 个 ｜ 缺图标 8 个 ｜ 另有 3 个没提供图标地址 ｜ BadApple、BossMod Reborn、SrankTool 等 8 个 · 悬停看全部。下好的图标会存在本地，重开游戏不用重下。</div>
         <div class="tablewrap">
           <table>
-            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">本库已装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="bad">死链</span></td><td class="url">https://raw.githubusercontent.com/…/old-plugins.json</td><td class="muted">0 个</td><td class="muted">08-02</td></tr>
             <tr class="repo picked"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="muted">0 个</td><td class="muted">09-04</td></tr>
@@ -148,7 +148,7 @@
   </div>
 
   <div>
-    <p class="caption">帧 3 — 下载中：进度条 = 拿到/总数（与文字同一个分子）；只剩最后几个时收尾，最多再等 4 秒</p>
+    <p class="caption">帧 3 — 下载中：进度条 = 拿到/总数；只剩最后几个时收尾，最多再等 4 秒；失败/未完成/还剩 加起来 = 总数</p>
     <div class="window">
       <div class="osbar">FireGaze</div>
       <div class="body">
@@ -175,10 +175,10 @@
         <div class="row"><span class="search">搜索仓库地址…</span></div>
         <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:13px">结果 12 行 · 已选 1</span><span class="row"><span class="btn">撤回：删除 2 个 · 12:03</span><span class="btn">打开备份目录</span></span></div>
         <div class="toolbar"><span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（12）</span><span class="btn">清空选择</span></div>
-        <div class="row"><span class="progress"><i></i></span><span class="hint">图标下载：拿到 5/8 · 还剩 2，最多再等 4 秒</span></div>
+        <div class="row"><span class="progress"><i></i></span><span class="hint">图标下载：拿到 5/8 · 失败 1 · 还剩 2，最多再等 4 秒</span></div>
         <div class="tablewrap">
           <table>
-            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">本库已装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="bad">死链</span></td><td class="url">https://raw.githubusercontent.com/…/old-plugins.json</td><td class="muted">0 个</td><td class="muted">08-02</td></tr>
             <tr class="repo picked"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="muted">0 个</td><td class="muted">09-04</td></tr>
@@ -192,7 +192,7 @@
   </div>
 
   <div>
-    <p class="caption">帧 4 — 下载完：拿到/失败/未完成三段同词；地址失效的不再计入按钮；tooltip 悬停行高亮、只留本列内容</p>
+    <p class="caption">帧 4 — 下载完：拿到/失败/未完成三段同词；地址失效的不再计入按钮；tooltip 悬停行高亮、只留本列内容、标签用产品口径（· 图标地址失效）</p>
     <div class="window">
       <div class="osbar">FireGaze</div>
       <div class="body">
@@ -222,7 +222,7 @@
         <div class="hint">图标下载完成：拿到 6 / 8 个 · 失败 1 · 未完成 1；用时 18s。已存的图标重开游戏不用重下。 1 个图标地址已失效，需要插件作者更新清单；1 个未完成，可以再点一次。</div>
         <div class="tablewrap">
           <table>
-            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+            <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">本库已装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
             <tr class="repo"><td><span class="chk"></span></td><td><span class="bad">死链</span></td><td class="url">https://raw.githubusercontent.com/…/old-plugins.json</td><td class="muted">0 个</td><td class="muted">08-02</td></tr>
             <tr class="repo picked"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
             <tr class="repo hovered"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td>4 个</td><td class="muted">09-04</td></tr>
@@ -230,7 +230,7 @@
             <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>4 个</td><td class="muted">09-15</td></tr>
           </table>
           <div class="scrollbar"><i></i></div>
-          <div class="tip" style="left:300px; top:60px;">已装 4 个：BadApple · 缺图标、BossMod Reborn · 缺图标、SrankTool、NamePlate</div>
+          <div class="tip" style="left:300px; top:118px;">已装 4 个：BadApple、BossMod Reborn · 图标地址失效、SrankTool、NamePlate</div>
         </div>
       </div>
     </div>

@@ -99,6 +99,9 @@ internal sealed class RepoAuditTab
     private DateTime iconTailDeadline;
     private DateTime nextIconKick;
     private string? iconDownloadLine;
+
+    /// <summary>最近一次「检查缺图标」的完整名单（状态行悬停时展开）。</summary>
+    private List<string>? iconMissingNames;
     private List<string>? iconDeadReport;
     private long statusVersion;
 
@@ -418,6 +421,12 @@ internal sealed class RepoAuditTab
         else if (!string.IsNullOrEmpty(this.statusMessage))
         {
             UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.statusMessage);
+
+            // 缺图标名单在状态行里只能给前几个，悬停看全部（IC2-06）
+            if (this.iconMissingNames is { Count: > 0 } names && ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip($"缺图标 {names.Count} 个：\n" + string.Join("、", names));
+            }
         }
 
         // ---------------- 结果表 ----------------
@@ -433,7 +442,7 @@ internal sealed class RepoAuditTab
             ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoSort, 26, 0);
             ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.DefaultSort | ImGuiTableColumnFlags.PreferSortAscending, 120, 1);
             ImGui.TableSetupColumn("仓库地址", ImGuiTableColumnFlags.WidthStretch, 0, 2);
-            ImGui.TableSetupColumn("已安装", ImGuiTableColumnFlags.WidthFixed, 96, 3);
+            ImGui.TableSetupColumn("本库已装", ImGuiTableColumnFlags.WidthFixed, 96, 3);
             ImGui.TableSetupColumn("首次记录", ImGuiTableColumnFlags.WidthFixed, 84, 4);
 
             // 自己逐列发表头（而不是 TableHeadersRow），才能给每列挂 tooltip
@@ -456,7 +465,7 @@ internal sealed class RepoAuditTab
             }
 
             ImGui.TableNextColumn();
-            ImGui.TableHeader("已安装");
+            ImGui.TableHeader("本库已装");
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip(
@@ -1570,6 +1579,7 @@ internal sealed class RepoAuditTab
         this.statusVersion++;
         this.statusMessage = message;
         this.statusIsError = isError;
+        this.iconMissingNames = null;   // 名单只跟随「检查缺图标」那一条
     }
 
     /// <summary>第一步：只查不下载——列出「声明了图标、但图标还没缓存下来」的已装插件。</summary>
@@ -1626,11 +1636,12 @@ internal sealed class RepoAuditTab
                       + $" ｜ 缺图标 {this.iconMissing.Count} 个"
                       + (noAddress > 0 ? $" ｜ 另有 {noAddress} 个没提供图标地址" : string.Empty)
                       + (this.iconMissing.Count > 0
-                          ? $" ｜ {names}" + (this.iconMissing.Count > 6 ? $" 等 {this.iconMissing.Count} 个" : string.Empty)
+                          ? $" ｜ {names}" + (this.iconMissing.Count > 6 ? $" 等 {this.iconMissing.Count} 个 · 悬停看全部" : string.Empty)
                           : string.Empty)
                       + "。下好的图标会存在本地，重开游戏不用重下。";
 
         this.SetStatus(summary, false);
+        this.iconMissingNames = this.iconMissing.Select(x => x.DisplayName).ToList();
     }
 
     /// <summary>第二步：用户点了下载——走我们自己的下载通道（限并发，下完写进本地缓存）。</summary>
