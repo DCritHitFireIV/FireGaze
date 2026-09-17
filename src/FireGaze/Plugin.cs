@@ -41,6 +41,7 @@ public sealed class Plugin : IDalamudPlugin
     private DateTime lastSave = DateTime.MinValue;
 
     private int tableUpdateBusy;
+    private readonly UI.InstallerListScroll installerListScroll = new();
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -74,6 +75,7 @@ public sealed class Plugin : IDalamudPlugin
         this.window = new MainWindow(this);
         this.windowSystem.AddWindow(this.window);
         pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
+        pluginInterface.UiBuilder.Draw += this.TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi += this.ToggleWindow;
 
         // 重活（词表、挂钩、定时器）一律延后到「所有插件加载完」之后：
@@ -229,6 +231,7 @@ public sealed class Plugin : IDalamudPlugin
         }
 
         this.pluginInterface.UiBuilder.Draw -= this.windowSystem.Draw;
+        this.pluginInterface.UiBuilder.Draw -= this.TickInstallerListScroll;
         this.pluginInterface.UiBuilder.OpenConfigUi -= this.ToggleWindow;
         foreach (var command in this.registeredCommands)
         {
@@ -295,6 +298,21 @@ public sealed class Plugin : IDalamudPlugin
                 Chat.Print("[FireGaze] 用法：/firegaze [zh|update]");
                 break;
         }
+    }
+
+    // ------------------------------------------------------------------ 安装器列表浏览位置
+
+    /// <summary>开关：是否记住列表浏览位置。</summary>
+    public void SetRememberListScroll(bool remember)
+    {
+        this.Config.RememberListScroll = remember;
+        this.SaveConfig();
+    }
+
+    /// <summary>每帧看一眼插件安装器列表的滚动位置（不用钩子，纯 ImGui 公开绑定）。</summary>
+    private void TickInstallerListScroll()
+    {
+        this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false));
     }
 
     // ------------------------------------------------------------------ 配置
