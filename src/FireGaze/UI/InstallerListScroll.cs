@@ -209,54 +209,72 @@ internal sealed class InstallerListScroll
         return ImGuiWindowPtr.Null;
     }
 
-    /// <summary>找列表子窗口：先按 ImGui 的 child ID 逐层算，再试几个名字。</summary>
+    /// <summary>
+    /// 找列表子窗口：把「可能的名字 × 可能的 seed」全试一遍，命中即用。
+    /// （子窗口 ID = ImGui 在 BeginChild 时按「当前窗口 ID 栈 + 名字」算出来的哈希；
+    /// 不同绑定/版本对 seed 的处理可能不同，所以这里穷举，并把命中的组合写进日志。）
+    /// </summary>
     private static ImGuiWindowPtr FindListWindow(ImGuiWindowPtr installer, out string? how)
     {
-        // 子窗口 ID = 父窗口 GetID(名字) = ImHashStr(名字, seed=父窗口 ID)。
-        // 父链第一层（安装器窗口）的 ID 已由「按名字找到它」验证过：ImHashStr("###XlPluginInstaller")。
         var installerId = ImGuiP.ImHashStr("###XlPluginInstaller");
-        var categoriesId = ImGuiP.ImHashStr(CategoriesChildId, installerId);
-        var categories = ImGuiP.FindWindowByID(categoriesId);
-        var listId = ImGuiP.ImHashStr(ListChildId, categoriesId);
-        var byId = categories.IsNull ? ImGuiWindowPtr.Null : ImGuiP.FindWindowByID(listId);
-
-        if (!loggedChain)
+        var seeds = new (string Label, uint Seed)[]
         {
-            loggedChain = true;
-            Plugin.Log.Information(
-                $"[FireGaze] 子窗口 ID 链：categories=0x{categoriesId:X8}（找到={(categories.IsNull ? "否" : "是")}）"
-                + $"；list=0x{listId:X8}（找到={(byId.IsNull ? "否" : "是")}）");
-        }
+            ("父ID种子", installerId),
+            ("无种子", 0u),
+            ("DalamudCore+父ID", ImGuiP.ImHashStr("DalamudCore", installerId)),
+            ("DalamudCore", ImGuiP.ImHashStr("DalamudCore")),
+        };
 
-        if (!byId.IsNull)
-        {
-            how = "ID 链（InstallerCategories → ScrollingPlugins）";
-            return byId;
-        }
+        var report = new List<string>();
 
-        var installerName = WindowName(installer);
-        foreach (var candidate in new[]
-                 {
-                     ListChildId,
-                     installerName is null ? null : $"{installerName}/{CategoriesChildId}/{ListChildId}",
-                     installerName is null ? null : $"{installerName}/{ListChildId}",
-                 })
+        foreach (var categoriesName in new[] { CategoriesChildId, "###" + CategoriesChildId })
         {
-            if (candidate is null)
+            foreach (var (seedLabel, seed) in seeds)
             {
-                continue;
-            }
+                var categoriesId = ImGuiP.ImHashStr(categoriesName, seed);
+                var categories = ImGuiP.FindWindowByID(categoriesId);
+                report.Add($"categories[{categoriesName}/{seedLabel}]={(categories.IsNull ? "x" : "v")}");
+                if (categories.IsNull)
+                {
+                    continue;
+                }
 
-            var byName = ImGuiP.FindWindowByName(candidate);
-            if (!byName.IsNull)
-            {
-                how = $"名字（{candidate}）";
-                return byName;
+                foreach (var listName in new[] { ListChildId, "###" + ListChildId })
+                {
+                    foreach (var (seed2Label, seed2) in seeds)
+                    {
+                        var listId = ImGuiP.ImHashStr(listName, seed2);
+                        var list = ImGuiP.FindWindowByID(listId);
+                        report.Add($"list[{listName}/{seed2Label}]={(list.IsNull ? "x" : "v")}");
+                        if (!list.IsNull)
+                        {
+                            LogChainOnce(report);
+                            how = $"ID 探测命中：{categoriesName}/{seedLabel} → {listName}/{seed2Label}";
+                            return list;
+                        }
+                    }
+                }
+
+                LogChainOnce(report);
+                how = $"ID 探测命中（父级）：{categoriesName}/{seedLabel}（列表层未命中）";
+                return ImGuiWindowPtr.Null;
             }
         }
 
+        LogChainOnce(report);
         how = null;
         return ImGuiWindowPtr.Null;
+    }
+
+    private static void LogChainOnce(List<string> report)
+    {
+        if (loggedChain)
+        {
+            return;
+        }
+
+        loggedChain = true;
+        Plugin.Log.Information("[FireGaze] 子窗口 ID 探测结果：" + string.Join(" ", report));
     }
 
     /// <summary>排查用：把 dalamudUI.ini 里的窗口名打出来（读文件，不碰 ImGui 结构体）。</summary>
