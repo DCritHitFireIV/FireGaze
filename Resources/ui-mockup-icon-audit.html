@@ -50,7 +50,7 @@
 <div class="stage">
 
   <div>
-    <p class="caption">帧 1 — 默认：按钮在筛选行第二行末尾，不新增控件行；状态行平时不占位</p>
+    <p class="caption">帧 1 — 默认态：图标开关是关的；按钮在筛选行第二行末尾，用 │ 与两个开关分组</p>
     <div class="window">
       <div class="osbar">FireGaze</div>
       <div class="body">
@@ -68,7 +68,8 @@
         <div class="row"><span class="muted" style="font-size:13px">筛选</span>
           <span class="row"><span class="chk"></span><span>只看本机未装的</span></span>
           <span class="row"><span class="chk on"></span><span>显示插件图标</span></span>
-          <span class="btn">检查并补齐图标</span>
+          <span class="muted">│</span>
+          <span class="btn">检查并下载图标</span>
         </div>
         <table>
           <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
@@ -89,7 +90,7 @@
   </div>
 
   <div>
-    <p class="caption">帧 2 — 点下按钮：状态行（已有位置）显示进度，按钮变灰不可重复点</p>
+    <p class="caption">帧 2 — 运行中：按钮变「停止检查」；进度落在动作条下方，用「已试」而不是「已补上」计进度</p>
     <div class="window">
       <div class="osbar">FireGaze</div>
       <div class="body">
@@ -107,20 +108,23 @@
         <div class="row"><span class="muted" style="font-size:13px">筛选</span>
           <span class="row"><span class="chk"></span><span>只看本机未装的</span></span>
           <span class="row"><span class="chk on"></span><span>显示插件图标</span></span>
-          <span class="btn busy">检查并补齐图标</span>
+          <span class="btn">停止检查</span>
         </div>
-        <div class="row"><span class="progress"><i></i></span><span class="hint">图标体检：12 个插件缺图标，正在下载… 3/12</span></div>
         <table>
           <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
           <tr class="repo"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
           <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>4 个</td><td class="muted">09-15</td></tr>
         </table>
+        <div class="sep"></div>
+        <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:13px">结果 5 行 · 已选 1</span><span class="row"><span class="btn">撤回：删除 2 个 · 12:03</span><span class="btn">打开备份目录</span></span></div>
+        <div class="toolbar"><span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span></div>
+        <div class="row" style="margin-top:4px"><span class="progress" style="width:120px"><i></i></span><span class="hint">图标检查：已试 9/12 · 补上 3</span></div>
       </div>
     </div>
   </div>
 
   <div>
-    <p class="caption">帧 3 — 完成：状态行给结果；每个库的「已安装」tooltip 里给缺图标的插件名加后缀</p>
+    <p class="caption">帧 3 — 完成：一句话给分母、三类归属与下一步；后缀只标确认失效的那类</p>
     <div class="window">
       <div class="osbar">FireGaze</div>
       <div class="body">
@@ -137,11 +141,11 @@
         </div>
         <div class="row"><span class="muted" style="font-size:13px">筛选</span>
           <span class="row"><span class="chk"></span><span>只看本机未装的</span></span>
-          <span class="row"><span class="chk on"></span><span>显示插件图标</span></span>
-          <span class="btn">检查并补齐图标</span>
+          <span class="row"><span class="chk"></span><span>显示插件图标</span></span>
+          <span class="muted">│</span>
+          <span class="btn">检查并下载图标</span>
         </div>
-        <div class="row"><span class="hint">图标体检完成：12 个缺图标，补上 10 个，2 个仍缺 ｜ 其中 1 个图标地址已失效 404，1 个下载超时</span></div>
-        <table>
+                <table>
           <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
           <tr class="repo"><td><span class="chk on"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
           <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>4 个</td><td class="muted">09-15</td></tr>
@@ -155,10 +159,11 @@
         <div class="toolbar">
           <span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span>
         </div>
-        <div class="tip" style="left:360px; top:352px;">本机从这条库链装了 4 个插件。
-离线统计，装/卸插件后自动重算。
-BadApple、BossMod Reborn · 缺图标
-SrankTool、NamePlate</div>
+        <div class="hint" style="margin-top:4px">本次图标检查：本机已装 42 个插件，其中 8 个作者没给图标地址，补不了；12 个本机没下载到，这次补上 10 个，1 个仍未完成；用时 18s。 1 个图标地址已失效，需要插件作者更新清单；1 个没下完，可以再点一次。</div>
+        <div class="tip" style="left:330px; top:330px;">本机从这条库链装了 4 个插件。
+这条库一共提供多少个插件，把鼠标放在仓库地址上看
+BadApple、BossMod Reborn · 图标地址失效、SrankTool、NamePlate
+带「图标地址失效」的插件要作者更新清单；图标只影响列表里的小图，不影响插件运行。</div>
       </div>
     </div>
   </div>

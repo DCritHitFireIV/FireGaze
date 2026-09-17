@@ -47,9 +47,15 @@ internal sealed class RepoAuditTab
     // ---------------- 图标体检（批量检测缺图标并补齐） ----------------
     private bool iconAuditRunning;
     private readonly List<InstalledPluginEntry> iconAuditPending = [];
+    private readonly HashSet<string> iconAuditTried = new(StringComparer.Ordinal);
+    private readonly HashSet<string> iconDead = new(StringComparer.Ordinal);
     private int iconAuditTotal;
     private int iconAuditFixed;
     private DateTime iconAuditDeadline;
+    private DateTime iconAuditStartedAt;
+    private string? iconAuditLastLine;
+    private List<string>? iconDeadReport;
+    private long statusVersion;
 
     public RepoAuditTab(Plugin plugin)
     {
@@ -88,6 +94,18 @@ internal sealed class RepoAuditTab
         else if (ImGui.Button("开始体检###StartScan"))
         {
             this.StartScan();
+        }
+
+        if (this.iconAuditRunning)
+        {
+            // 两个网络作业不能同时跑：否则状态行互相覆盖，体检完成句会丢
+            ImGui.BeginDisabled();
+            ImGui.Button("开始体检###StartScanDisabled");
+            ImGui.EndDisabled();
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("图标检查进行中，先等它跑完或点「停止检查」");
+            }
         }
 
         ImGui.SameLine();
@@ -213,24 +231,39 @@ internal sealed class RepoAuditTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("勾选后每条库链下面展开已安装插件的图标；悬停图标条可一次看到全部名字");
+            ImGui.SetTooltip("勾选后每条库链下面展开已安装插件的图标；列表每行会变高，可视的库链会变少；悬停图标条可一次看到全部名字");
         }
 
         ImGui.SameLine();
-        var canAudit = indexReady && !this.scanning && !this.iconAuditRunning;
+        ImGui.TextDisabled("│");
+        ImGui.SameLine();
+
+        var canAudit = indexReady && !this.scanning;
         if (!canAudit)
         {
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button("检查并补齐图标###IconAudit"))
+        if (ImGui.Button(this.iconAuditRunning ? "停止检查###IconAudit" : "检查并下载图标###IconAudit"))
         {
-            this.StartIconAudit();
+            if (this.iconAuditRunning)
+            {
+                this.FinishIconAudit();
+            }
+            else
+            {
+                this.StartIconAudit();
+            }
         }
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("检查本机已装插件里哪些声明了图标却没下载到，让卫月去补下；完成后会报告仍缺的几个及原因");
+            ImGui.SetTooltip(
+                (indexReady ? string.Empty : "本机插件数据不可用，暂时不能检查。\n")
+                + "检查本机已装插件里哪些声明了图标却没下载到，并让卫月重新下一次。\n"
+                + "范围：本机所有已装插件，与上面的筛选和勾选无关。\n"
+                + "本版卫月不落盘缓存图标，重开游戏后会重新下载。\n"
+                + "最多等 45 秒，中途可点「停止检查」。");
         }
 
         if (!canAudit)
@@ -259,14 +292,14 @@ internal sealed class RepoAuditTab
         // ---------------- 操作工具条 ----------------
         this.DrawActionBar(selectedCount, selectedHidden, snapshot);
 
-        // ---------------- 状态行（只在有事件结果时出现；图标体检进行中带进度条） ----------------
+        // ---------------- 状态行（只在有事件结果时出现；图标检查进行中带进度条） ----------------
         if (this.iconAuditRunning && this.iconAuditTotal > 0)
         {
             ImGui.ProgressBar(
-                (float)this.iconAuditFixed / this.iconAuditTotal,
-                new Vector2(180, 0));
+                this.iconAuditTotal == 0 ? 0f : (float)this.iconAuditTried.Count / this.iconAuditTotal,
+                new Vector2(120, 0));
             ImGui.SameLine();
-            ImGui.TextUnformatted(this.statusMessage ?? string.Empty);
+            UiHelpers.ColoredWrapped(UiHelpers.Muted, this.iconAuditLastLine ?? string.Empty);
         }
         else if (!string.IsNullOrEmpty(this.statusMessage))
         {
@@ -636,8 +669,7 @@ internal sealed class RepoAuditTab
             if (ImGui.Button(undoLabel))
             {
                 var ok = this.plugin.TryUndoLast(out var message);
-                this.statusMessage = ok ? message : "撤回失败：" + message;
-                this.statusIsError = !ok;
+                this.SetStatus(ok ? message : "撤回失败：" + message, !ok);
                 this.RefreshFromLive();
             }
 
@@ -781,8 +813,7 @@ internal sealed class RepoAuditTab
         var repos = this.plugin.Repos.ReadAll(out var error);
         if (error is not null)
         {
-            this.statusMessage = "读取仓库列表失败：" + error;
-            this.statusIsError = true;
+            this.SetStatus("读取仓库列表失败：" + error, true);
             return;
         }
 
@@ -801,8 +832,7 @@ internal sealed class RepoAuditTab
 
         if (list.Count == 0)
         {
-            this.statusMessage = "仓库列表是空的（或者都被排除了）。";
-            this.statusIsError = true;
+            this.SetStatus("仓库列表是空的（或者都被排除了）。", true);
             return;
         }
 
@@ -822,8 +852,7 @@ internal sealed class RepoAuditTab
             this.listBuilt = true;
         }
 
-        this.statusMessage = $"开始体检 {list.Count} 个仓库…";
-        this.statusIsError = false;
+        this.SetStatus($"开始体检 {list.Count} 个仓库…", false);
         var startedAt = DateTime.UtcNow;
 
         var cts = new CancellationTokenSource();
@@ -863,13 +892,11 @@ internal sealed class RepoAuditTab
             }
             catch (OperationCanceledException)
             {
-                this.statusMessage = "扫描已取消。";
-                this.statusIsError = false;
+                this.SetStatus("扫描已取消。", false);
             }
             catch (Exception e)
             {
-                this.statusMessage = "扫描出错：" + e.Message;
-                this.statusIsError = true;
+                this.SetStatus("扫描出错：" + e.Message, true);
             }
             finally
             {
@@ -912,8 +939,7 @@ internal sealed class RepoAuditTab
         var live = this.plugin.Repos.ReadAll(out var error);
         if (error is not null)
         {
-            this.statusMessage = "读取仓库列表失败：" + error;
-            this.statusIsError = true;
+            this.SetStatus("读取仓库列表失败：" + error, true);
             return;
         }
 
@@ -935,16 +961,14 @@ internal sealed class RepoAuditTab
 
         if (record.Entries.Count == 0)
         {
-            this.statusMessage = "所选仓库都已经处于停用状态。";
-            this.statusIsError = false;
+            this.SetStatus("所选仓库都已经处于停用状态。", false);
             return;
         }
 
         var changed = this.plugin.Repos.SetEnabled(targets, false, out error);
         if (error is not null)
         {
-            this.statusMessage = "停用失败：" + error;
-            this.statusIsError = true;
+            this.SetStatus("停用失败：" + error, true);
             return;
         }
 
@@ -952,8 +976,7 @@ internal sealed class RepoAuditTab
         this.plugin.Repos.Save(out _);
         this.plugin.Repos.TriggerReload(out _);
 
-        this.statusMessage = $"已停用 {changed} 个仓库（{DateTime.Now:HH:mm}）—— 链接保留、不再加载；可点「撤回」恢复。";
-        this.statusIsError = false;
+        this.SetStatus($"已停用 {changed} 个仓库（{DateTime.Now:HH:mm}）—— 链接保留、不再加载；可点「撤回」恢复。", false);
         this.RefreshFromLive();
     }
 
@@ -962,16 +985,14 @@ internal sealed class RepoAuditTab
         var backup = this.plugin.Repos.BackupRepos(out var error);
         if (string.IsNullOrEmpty(backup))
         {
-            this.statusMessage = "备份失败，已取消删除：" + error;
-            this.statusIsError = true;
+            this.SetStatus("备份失败，已取消删除：" + error, true);
             return;
         }
 
         var live = this.plugin.Repos.ReadAll(out error);
         if (error is not null)
         {
-            this.statusMessage = "读取仓库列表失败：" + error;
-            this.statusIsError = true;
+            this.SetStatus("读取仓库列表失败：" + error, true);
             return;
         }
 
@@ -993,16 +1014,14 @@ internal sealed class RepoAuditTab
 
         if (record.Entries.Count == 0)
         {
-            this.statusMessage = "所选的仓库已经不在列表里了。";
-            this.statusIsError = false;
+            this.SetStatus("所选的仓库已经不在列表里了。", false);
             return;
         }
 
         var removed = this.plugin.Repos.Remove(record.Entries.Select(x => x.Url), out error);
         if (error is not null)
         {
-            this.statusMessage = "删除失败：" + error;
-            this.statusIsError = true;
+            this.SetStatus("删除失败：" + error, true);
             return;
         }
 
@@ -1034,8 +1053,7 @@ internal sealed class RepoAuditTab
         var repos = this.plugin.Repos.ReadAll(out var error);
         if (error is not null)
         {
-            this.statusMessage = "读取仓库列表失败：" + error;
-            this.statusIsError = true;
+            this.SetStatus("读取仓库列表失败：" + error, true);
             return;   // 不置 listBuilt，下一帧重试
         }
 
@@ -1165,19 +1183,20 @@ internal sealed class RepoAuditTab
             lines.Add("只表示本机没从它装过插件：可能你在别的机器装过、它只是备用源、或插件是手动/开发版装的。");
         }
 
+        if (item.InstalledPlugins.Any(x => this.iconDead.Contains(x.InternalName)))
+        {
+            lines.Add("带「图标地址失效」的插件要作者更新清单；图标只影响列表里的小图，不影响插件运行。");
+        }
+
         ImGui.SetTooltip(string.Join('\n', lines));
         return;
 
         string Describe(InstalledPluginEntry entry)
         {
-            if (!entry.DeclaresIcon)
-            {
-                return entry.DisplayName;
-            }
-
-            return this.iconHandles.ContainsKey(entry.InternalName)
-                ? entry.DisplayName
-                : entry.DisplayName + " · 缺图标";
+            // 只标「确认失效」这一类；「本机还没下到」是常态（卫月不落盘缓存），不在这里断言
+            return this.iconDead.Contains(entry.InternalName)
+                ? entry.DisplayName + " · 图标地址失效"
+                : entry.DisplayName;
         }
     }
 
@@ -1279,11 +1298,16 @@ internal sealed class RepoAuditTab
             if (ImGui.IsItemHovered())
             {
                 hoveredIcon = true;
-                ImGui.SetTooltip(handle is null
-                    ? entry.DisplayName + (entry.DeclaresIcon
-                        ? "\n图标还没缓存到本机，插件本身已装"
-                        : "\n这个插件没有提供图标")
-                    : entry.DisplayName);
+
+                var tooltip = handle is not null
+                    ? entry.DisplayName
+                    : this.iconDead.Contains(entry.InternalName)
+                        ? entry.DisplayName + "\n图标地址已失效，需要作者更新清单"
+                        : entry.DeclaresIcon
+                            ? entry.DisplayName + "\n图标还没缓存到本机，插件本身已装；只影响列表里的小图，不影响插件运行"
+                            : entry.DisplayName + "\n这个插件没有提供图标；只影响列表里的小图，不影响插件运行";
+
+                ImGui.SetTooltip(tooltip);
             }
 
             drawn++;
@@ -1316,7 +1340,14 @@ internal sealed class RepoAuditTab
         }
     }
 
-    /// <summary>图标体检：把「声明了图标但本机没缓存」的插件列出来，让卫月去补下。</summary>
+    /// <summary>写状态行（并推进世代号：图标检查的后台结果只在没人动过状态行时才回写）。</summary>
+    private void SetStatus(string? message, bool isError)
+    {
+        this.statusVersion++;
+        this.SetStatus(message, isError);
+    }
+
+    /// <summary>图标检查：把「作者声明了图标、但本机没缓存」的插件列出来，让卫月去重下。</summary>
     private void StartIconAudit()
     {
         var index = this.installedIndex;
@@ -1331,25 +1362,36 @@ internal sealed class RepoAuditTab
 
         this.iconAuditPending.Clear();
         this.iconAuditPending.AddRange(missing);
+        this.iconAuditTried.Clear();
         this.iconAuditTotal = missing.Count;
         this.iconAuditFixed = 0;
+        this.iconAuditStartedAt = DateTime.Now;
 
         if (missing.Count == 0)
         {
-            this.statusMessage = "图标体检：声明了图标的插件都已缓存，没有需要补的。";
-            this.statusIsError = false;
+            this.SetStatus("图标检查：声明了图标的插件本机都已缓存，没有需要下载的。", false);
             return;
         }
 
         this.iconAuditRunning = true;
         this.iconAuditDeadline = DateTime.Now.AddSeconds(45);
-        this.statusMessage = $"图标体检：{missing.Count} 个插件缺图标，正在下载… 0/{missing.Count}";
-        this.statusIsError = false;
+        this.iconAuditLastLine = $"图标检查：已试 0/{missing.Count} · 补上 0";
+        this.SetStatus(null, false);
     }
 
-    /// <summary>图标体检每帧推一下（下载是卫月那边异步做的，我们只轮询结果）。</summary>
+    /// <summary>图标检查每帧推一下（下载在卫月那边异步做，我们只轮询结果）。</summary>
     private void TickIconAudit()
     {
+        // 后台探到的「地址已失效」名单，在渲染线程合并（避免跨线程改集合）
+        if (this.iconDeadReport is { } report)
+        {
+            this.iconDeadReport = null;
+            foreach (var name in report)
+            {
+                this.iconDead.Add(name);
+            }
+        }
+
         if (!this.iconAuditRunning)
         {
             return;
@@ -1359,6 +1401,7 @@ internal sealed class RepoAuditTab
         for (var i = 0; i < budget && this.iconAuditPending.Count > 0; i++)
         {
             var entry = this.iconAuditPending[0];
+            this.iconAuditTried.Add(entry.InternalName);
 
             if (this.iconHandles.ContainsKey(entry.InternalName))
             {
@@ -1371,18 +1414,19 @@ internal sealed class RepoAuditTab
             {
                 this.iconHandles[entry.InternalName] = handle;
                 this.iconPending.RemoveAll(x => x.InternalName == entry.InternalName);
+                this.iconDead.Remove(entry.InternalName);
                 this.iconAuditPending.RemoveAt(0);
                 this.iconAuditFixed++;
                 continue;
             }
 
-            // 还没好：移到队尾，下一轮再看（卫月下载队列在跑）
+            // 还没好：移到队尾，下一轮再看
             this.iconAuditPending.RemoveAt(0);
             this.iconAuditPending.Add(entry);
         }
 
-        this.statusMessage = $"图标体检：{this.iconAuditTotal} 个插件缺图标，正在下载… {this.iconAuditFixed}/{this.iconAuditTotal}";
-        this.statusIsError = false;
+        this.iconAuditLastLine =
+            $"图标检查：已试 {this.iconAuditTried.Count}/{this.iconAuditTotal} · 补上 {this.iconAuditFixed}";
 
         if (this.iconAuditPending.Count == 0 || DateTime.Now >= this.iconAuditDeadline)
         {
@@ -1390,9 +1434,17 @@ internal sealed class RepoAuditTab
         }
     }
 
-    /// <summary>收尾：报告补齐 / 仍缺，并为仍缺的图标地址跑一次可达性检查（区分失效与网络问题）。</summary>
+    /// <summary>
+    /// 收尾：报「分母 + 三类归属 + 下一步」，并对仍未完成的图标地址探一次可达性。
+    /// 三类分别是：作者没给地址（补不了）、没下载到（可再点一次）、地址已失效（要作者改）。
+    /// </summary>
     private void FinishIconAudit()
     {
+        if (!this.iconAuditRunning)
+        {
+            return;
+        }
+
         this.iconAuditRunning = false;
 
         var leftover = this.iconAuditPending.ToList();
@@ -1400,36 +1452,48 @@ internal sealed class RepoAuditTab
 
         var total = this.iconAuditTotal;
         var fixedCount = this.iconAuditFixed;
+        var installedTotal = this.installedIndex?.All.Count ?? 0;
+        var seconds = (DateTime.Now - this.iconAuditStartedAt).TotalSeconds;
 
-        if (leftover.Count == 0)
+        var noAddress = leftover.Count(x => x.IsThirdParty && string.IsNullOrWhiteSpace(x.IconUrl));
+        var checkable = leftover
+            .Where(x => !(x.IsThirdParty && string.IsNullOrWhiteSpace(x.IconUrl)))
+            .ToList();
+
+        var head = $"本次图标检查：本机已装 {installedTotal} 个插件"
+                   + $"，其中 {noAddress} 个作者没给图标地址，补不了"
+                   + $"；{total} 个本机没下载到，这次补上 {fixedCount} 个"
+                   + (checkable.Count > 0 ? $"，{checkable.Count} 个仍未完成" : string.Empty)
+                   + $"；用时 {seconds:0}s。";
+
+        if (checkable.Count == 0)
         {
-            this.statusMessage = $"图标体检完成：{total} 个缺图标，已全部补上。";
-            this.statusIsError = false;
+            this.SetStatus(head, false);
             return;
         }
 
-        var thirdParty = leftover
-            .Where(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconUrl))
-            .Select(x => x.IconUrl!)
-            .Distinct(StringComparer.Ordinal)
-            .ToList();
-        var noAddress = leftover.Count - leftover.Count(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconUrl));
+        this.SetStatus(head + " 正在确认那几个的图标地址…", false);
 
-        this.statusMessage =
-            $"图标体检完成：{total} 个缺图标，补上 {fixedCount} 个，{leftover.Count} 个仍缺 ｜ 正在检查这些图标地址…";
-        this.statusIsError = false;
+        var urls = checkable
+            .Where(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconUrl))
+            .Select(x => (Entry: x, Url: x.IconUrl!))
+            .DistinctBy(x => x.Url, StringComparer.Ordinal)
+            .ToList();
+        var official = checkable.Count - urls.Count;
+
+        var version = this.statusVersion;
 
         _ = Task.Run(async () =>
         {
-            var dead = 0;
+            var deadNames = new List<string>();
             var failed = 0;
 
-            foreach (var url in thirdParty)
+            foreach (var (entry, url) in urls)
             {
                 var probe = await RepoScanner.ProbeUrlAsync(url, CancellationToken.None).ConfigureAwait(false);
                 if (probe.Status is 404 or 410)
                 {
-                    dead++;
+                    deadNames.Add(entry.InternalName);
                 }
                 else if (!probe.Ok)
                 {
@@ -1437,28 +1501,32 @@ internal sealed class RepoAuditTab
                 }
             }
 
-            var parts = new List<string>(3);
-            if (dead > 0)
+            if (version != this.statusVersion)
             {
-                parts.Add($"其中 {dead} 个图标地址已失效");
+                return;   // 期间用户做了别的动作（停用 / 删除 / 撤回 / 扫描），别覆盖人家的确认消息
+            }
+
+            var parts = new List<string>(3);
+            if (deadNames.Count > 0)
+            {
+                parts.Add($"{deadNames.Count} 个图标地址已失效，需要插件作者更新清单");
             }
 
             if (failed > 0)
             {
-                parts.Add($"{failed} 个下载超时或网络失败");
+                parts.Add($"{failed} 个没下完，可以再点一次");
             }
 
-            if (noAddress > 0)
+            if (official > 0)
             {
-                parts.Add($"{noAddress} 个没有图标地址，作者就没提供");
+                parts.Add($"{official} 个是官方库插件，稍后自己会下好");
             }
 
-            this.statusMessage =
-                $"图标体检完成：{total} 个缺图标，补上 {fixedCount} 个，{leftover.Count} 个仍缺"
-                + (parts.Count > 0 ? " ｜ " + string.Join("，", parts) : string.Empty);
-            this.statusIsError = false;
+            this.iconDeadReport = deadNames;
+            this.SetStatus(head + (parts.Count > 0 ? " " + string.Join("；", parts) + "。" : string.Empty), false);
         });
     }
+
     private static void DrawIconPlaceholder(InstalledPluginEntry entry, float size)
     {
         var start = ImGui.GetCursorScreenPos();
