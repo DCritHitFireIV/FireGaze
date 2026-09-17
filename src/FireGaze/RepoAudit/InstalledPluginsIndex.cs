@@ -206,21 +206,19 @@ internal sealed class InstalledPluginsIndex
 
     /// <summary>取某条库链在本机装的插件；不可用时返回 false（调用方应显示 `—`）。</summary>
     public bool TryGetInstalled(string repositoryUrl, out List<InstalledPluginEntry> plugins)
+        => this.TryGetInstalledByNormalized(NormalizeRepositoryUrl(repositoryUrl), out plugins);
+
+    /// <summary>同 <see cref="TryGetInstalled(string, out List{InstalledPluginEntry})"/>，但用调用方已经归一化好的键（省一次解析）。</summary>
+    public bool TryGetInstalledByNormalized(string normalizedUrl, out List<InstalledPluginEntry> plugins)
     {
         plugins = [];
 
-        if (!this.Available)
+        if (!this.Available || string.IsNullOrEmpty(normalizedUrl))
         {
             return false;
         }
 
-        var key = NormalizeRepositoryUrl(repositoryUrl);
-        if (key.Length == 0)
-        {
-            return false;
-        }
-
-        if (this.byRepository.TryGetValue(key, out var found))
+        if (this.byRepository.TryGetValue(normalizedUrl, out var found))
         {
             plugins = found;
             return true;

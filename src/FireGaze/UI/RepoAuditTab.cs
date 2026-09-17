@@ -34,8 +34,10 @@ internal sealed class RepoAuditTab
     // ---------------- 「已安装」相关 ----------------
     private InstalledPluginsIndex? installedIndex;
     private bool installedIndexStale = true;
+    private Task<InstalledPluginsIndex>? installedIndexBuild;
     private DateTime installedIndexRetryAfter = DateTime.MinValue;
     private bool onlyUnused;
+    private bool onlyWithPlugins;
     private bool listBuilt;
     private DateTime listRetryAfter = DateTime.MinValue;
     private string sortKey = "status";
@@ -229,7 +231,26 @@ internal sealed class RepoAuditTab
             ImGui.BeginDisabled();
         }
 
-        ImGui.Checkbox("只看未安装的库###OnlyUnused", ref this.onlyUnused);
+        if (ImGui.Checkbox("只看有插件的###OnlyWithPlugins", ref this.onlyWithPlugins) && this.onlyWithPlugins)
+        {
+            this.onlyUnused = false;
+            this.snapshotDirty = true;
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(indexReady
+                ? "只显示装了插件的库，适合逐条看图标缺不缺"
+                : "插件数据不可用，暂时不能按这个筛选");
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Checkbox("只看未安装的###OnlyUnused", ref this.onlyUnused) && this.onlyUnused)
+        {
+            this.onlyWithPlugins = false;
+            this.snapshotDirty = true;
+        }
+
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(indexReady
@@ -322,7 +343,7 @@ internal sealed class RepoAuditTab
             ImGui.EndDisabled();
         }
 
-        if (!indexReady)
+        if (this.installedIndex is { Available: false })
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
@@ -817,10 +838,17 @@ internal sealed class RepoAuditTab
             query = query.Where(x => x.Url.Contains(this.search.Trim(), StringComparison.OrdinalIgnoreCase));
         }
 
-        // 与健康度正交的第二个轴：只看没从它装过插件的库（数据不可用时该开关是禁用的）
-        if (this.onlyUnused && this.installedIndex is { Available: true })
+        // 与健康度正交的第二个轴：只看装了插件的库 / 只看没装过插件的库（数据不可用时开关是禁用的）
+        if (this.installedIndex is { Available: true })
         {
-            query = query.Where(x => x.InstalledCount == 0);
+            if (this.onlyWithPlugins)
+            {
+                query = query.Where(x => x.InstalledCount > 0);
+            }
+            else if (this.onlyUnused)
+            {
+                query = query.Where(x => x.InstalledCount == 0);
+            }
         }
 
         var result = this.SortItems(query);
@@ -906,6 +934,7 @@ internal sealed class RepoAuditTab
             .Select(x => new RepoAuditItem
             {
                 Url = x.Url,
+                NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(x.Url),
                 IsEnabled = x.IsEnabled,
                 Index = x.Index,
                 FirstSeen = this.plugin.GetFirstSeen(x.Url),
@@ -1151,6 +1180,7 @@ internal sealed class RepoAuditTab
             .Select(entry => new RepoAuditItem
             {
                 Url = entry.Url,
+                NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(entry.Url),
                 IsEnabled = entry.IsEnabled,
                 Index = entry.Index,
                 FirstSeen = this.plugin.GetFirstSeen(entry.Url),
@@ -1176,24 +1206,47 @@ internal sealed class RepoAuditTab
         this.installedCountsDirty = true;
     }
 
-    /// <summary>读/刷新「已安装插件」索引；读不到时界面必须显示 `—`（不能显示假 0）。</summary>
+    /// <summary>
+    /// 读/刷新「已安装插件」索引；读不到时界面必须显示 `—`（不能显示假 0）。
+    /// 构建放到后台：185 个插件的反射 + 图标缓存读取在主线程会顶出 80–100ms 的掉帧（实测过）。
+    /// </summary>
     private void EnsureInstalledIndex()
     {
+        if (this.installedIndexBuild is not null)
+        {
+            if (this.installedIndexBuild.IsCompleted)
+            {
+                var built = this.installedIndexBuild.Status == TaskStatus.RanToCompletion
+                    ? this.installedIndexBuild.Result
+                    : null;
+
+                this.installedIndexBuild = null;
+
+                if (built is not null)
+                {
+                    this.installedIndex = built;
+                    this.installedIndexStale = false;
+                    this.installedCountsDirty = true;
+                    this.snapshotDirty = true;
+                    this.iconHandles.Clear();
+                    this.iconPeekMisses.Clear();
+
+                    // 不可用时过几秒再试一次（卫月可能还在启动）；界面一律按「不可用」渲染
+                    this.installedIndexRetryAfter = built.Available
+                        ? DateTime.MaxValue
+                        : DateTime.Now.AddSeconds(5);
+                }
+            }
+
+            return;
+        }
+
         if (!this.installedIndexStale || DateTime.Now < this.installedIndexRetryAfter)
         {
             return;
         }
 
-        this.installedIndex = InstalledPluginsIndex.Build();
-        this.installedIndexStale = false;
-        this.installedCountsDirty = true;
-        this.snapshotDirty = true;
-        this.iconHandles.Clear();
-
-        // 不可用时过几秒再试一次（卫月可能还在启动）；但界面一律按「不可用」渲染
-        this.installedIndexRetryAfter = this.installedIndex.Available
-            ? DateTime.MaxValue
-            : DateTime.Now.AddSeconds(3);
+        this.installedIndexBuild = Task.Run(InstalledPluginsIndex.Build);
     }
 
     /// <summary>把索引结果填到每一行（不可用 → -1，不参与任何「0 个」的断言）。</summary>
@@ -1213,7 +1266,7 @@ internal sealed class RepoAuditTab
             {
                 if (index is { Available: true })
                 {
-                    item.InstalledPlugins = index.TryGetInstalled(item.Url, out var plugins) ? plugins : [];
+                    item.InstalledPlugins = index.TryGetInstalledByNormalized(item.NormalizedUrl, out var plugins) ? plugins : [];
                     item.InstalledCount = item.InstalledPlugins.Count;
                 }
                 else
@@ -1704,6 +1757,7 @@ internal sealed class RepoAuditTab
                     list.Add(new RepoAuditItem
                     {
                         Url = entry.Url,
+                        NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(entry.Url),
                         IsEnabled = entry.IsEnabled,
                         Index = entry.Index,
                         FirstSeen = this.plugin.GetFirstSeen(entry.Url),

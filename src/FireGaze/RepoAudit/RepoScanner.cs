@@ -20,6 +20,9 @@ public sealed class RepoAuditItem
 {
     public string Url { get; init; } = string.Empty;
 
+    /// <summary>归一化后的仓库地址（只算一次，供「已安装」匹配用，避免每帧对上千个 URL 重复解析）。</summary>
+    public string NormalizedUrl { get; set; } = string.Empty;
+
     public bool IsEnabled { get; set; }
 
     public int Index { get; set; }
