@@ -48,6 +48,9 @@ internal sealed class InstallerListScroll
     /// <summary>上下文里枚举到的窗口数（-1 = 还没查）。</summary>
     public int CtxWindowCount { get; private set; } = -1;
 
+    /// <summary>这一帧真的在画的窗口数（其余是积压的旧窗口）。</summary>
+    public int LiveWindows { get; private set; } = -1;
+
     /// <summary>列表子窗口的探测结论。</summary>
     public string ListVerdict { get; private set; } = "尚未检查";
 
@@ -109,13 +112,20 @@ internal sealed class InstallerListScroll
                 return;
             }
 
-            // 找列表子窗口：先枚举（只在结构体可信时），再退回 ID 穷举
+            // 找列表子窗口：先看缓存，再枚举（只在结构体可信时），最后退回 ID 穷举
             var how = "—";
             var list = ImGuiWindowPtr.Null;
 
-            if (this.CtxLayoutOk)
+            if (!this.listWindow.IsNull && this.listWindow.LastFrameActive >= frame - 1)
             {
-                list = FindListWindowEnumerated(ctx, out how);
+                list = this.listWindow;
+                how = "缓存";
+            }
+
+            if (list.IsNull && this.CtxLayoutOk)
+            {
+                list = FindListWindowEnumerated(ctx, out how, out var liveCount);
+                this.LiveWindows = liveCount;
             }
 
             if (list.IsNull)
@@ -237,16 +247,26 @@ internal sealed class InstallerListScroll
         return ImGuiWindowPtr.Null;
     }
 
-    /// <summary>枚举上下文里的窗口，按名字找列表子窗口（结构体可信时才调用）。</summary>
-    private static ImGuiWindowPtr FindListWindowEnumerated(ImGuiContextPtr ctx, out string how)
+    /// <summary>枚举上下文里的窗口，找**活着的**列表子窗口（结构体可信时才调用）。</summary>
+    /// <remarks>
+    /// 两个坑都在这里处理：
+    /// ① 子窗口的 ImGui 名字是「父窗口路径 + 名字 + _ID 后缀」（如
+    ///    <c>插件安装器###XlPluginInstaller/InstallerCategories_514EEA57/ScrollingPlugins_70AB139F</c>），
+    ///    所以只能用 Contains 匹配，不能用等号；
+    /// ② 窗口表里会积压大量早就不画的旧窗口（实测 2 万+），必须用 LastFrameActive 挑出
+    ///    「这一帧真的在画」的那个，否则会读到陈旧的 Scroll。
+    /// </remarks>
+    private static ImGuiWindowPtr FindListWindowEnumerated(ImGuiContextPtr ctx, out string how, out int liveCount)
     {
-        how = "枚举";
+        how = "枚举（活窗口）";
+        liveCount = 0;
 
         try
         {
             var size = ctx.Windows.Size;
-            var count = Math.Min(size, 1024);
-            for (var i = 0; i < count; i++)
+            var frame = ImGui.GetFrameCount();
+
+            for (var i = 0; i < size; i++)
             {
                 var window = ctx.Windows[i];
                 if (window.IsNull)
@@ -254,9 +274,24 @@ internal sealed class InstallerListScroll
                     continue;
                 }
 
-                var name = WindowName(window);
-                if (string.Equals(name, ListChildId, StringComparison.Ordinal))
+                // 先做廉价的「这帧在画吗」过滤，再读名字（否则要对 2 万多个窗口做字符串读取）
+                if (window.LastFrameActive < frame - 1)
                 {
+                    continue;
+                }
+
+                liveCount++;
+
+                var name = WindowName(window);
+                if (name is null)
+                {
+                    continue;
+                }
+
+                if (name.Contains(ListChildId, StringComparison.Ordinal)
+                    && !name.Contains("/plugin_child_", StringComparison.Ordinal))
+                {
+                    how = $"枚举命中（活窗口 {liveCount} 个中）";
                     return window;
                 }
             }
@@ -452,18 +487,22 @@ internal sealed class InstallerListScroll
         try
         {
             var size = ctx.Windows.Size;
-            var count = Math.Min(size, 512);
-            var lines = new List<string>(count + 4) { $"frame={ImGui.GetFrameCount()} windows={size} dumped={count}" };
+            var frame = ImGui.GetFrameCount();
+            var lines = new List<string>(2048)
+            {
+                $"frame={frame} windows={size}（列表里会积压旧窗口，下面只写「这一帧还在画」的）",
+            };
 
-            for (var i = 0; i < count; i++)
+            var live = 0;
+            for (var i = 0; i < size; i++)
             {
                 var window = ctx.Windows[i];
-                if (window.IsNull)
+                if (window.IsNull || window.LastFrameActive < frame - 1)
                 {
-                    lines.Add($"[{i}] (null)");
                     continue;
                 }
 
+                live++;
                 var name = WindowName(window) ?? "(unreadable)";
                 var parent = window.ParentWindow;
                 lines.Add(
@@ -474,15 +513,16 @@ internal sealed class InstallerListScroll
                     + $" lastFrame={window.LastFrameActive}");
             }
 
+            lines.Insert(1, $"live={live}");
+
             var path = Path.Combine(Plugin.ConfigDirectoryForDiagnostics, "installer-window-dump.txt");
             File.WriteAllLines(path, lines);
             this.DumpPath = path;
-            Plugin.Log.Information($"[FireGaze] 已把 {count}/{size} 个 ImGui 窗口写进 {path}");
+            Plugin.Log.Information($"[FireGaze] 活窗口 {live} 个 / 窗口表 {size} 个，已写进 {path}");
 
             foreach (var line in lines.Where(l =>
                          l.Contains("Installer", StringComparison.OrdinalIgnoreCase) ||
-                         l.Contains("Scrolling", StringComparison.OrdinalIgnoreCase) ||
-                         l.Contains("插件", StringComparison.Ordinal)))
+                         l.Contains("Scrolling", StringComparison.OrdinalIgnoreCase)))
             {
                 Plugin.Log.Information("[FireGaze]   窗口：" + line);
             }

@@ -30,6 +30,7 @@ internal sealed class InstallerTab
 
         var probe = this.plugin.InstallerProbe;
         ImGui.BulletText($"结构体自检：{probe.CtxVerdict}");
+        ImGui.BulletText($"活窗口数：{(probe.LiveWindows < 0 ? "—" : probe.LiveWindows.ToString())}（窗口表里还积压着旧窗口）");
         ImGui.BulletText($"列表子窗口：{probe.ListVerdict}");
         ImGui.BulletText($"最近读到滚动值：{probe.LastScrollY:F0}");
         ImGui.BulletText($"防刷新顶飞：{probe.MaskVerdict}");
