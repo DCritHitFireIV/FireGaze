@@ -9,14 +9,12 @@ public enum MainTab
 {
     Translate = 0,
     RepoAudit = 1,
-    Installer = 2,
 }
 
 /// <summary>FireGaze 主窗口（/fg）。</summary>
 internal sealed class MainWindow : Window
 {
     private readonly RepoAuditTab repoAuditTab;
-    private readonly InstallerTab installerTab;
     private readonly TranslateTab translateTab;
 
     private MainTab? pendingSelect;
@@ -33,7 +31,6 @@ internal sealed class MainWindow : Window
 
         this.repoAuditTab = new RepoAuditTab(plugin);
         this.translateTab = new TranslateTab(plugin);
-        this.installerTab = new InstallerTab(plugin);
     }
 
     /// <summary>请求下一帧选中某个页签（由 Plugin.OpenWindow 调用）。</summary>
@@ -45,7 +42,7 @@ internal sealed class MainWindow : Window
         ImGui.TextUnformatted("FireGaze");
         ImGui.PopStyleColor();
         ImGui.SameLine();
-        ImGui.TextDisabled("卫月插件库工具箱 · 汉化 / 体检 / 安装器");
+        ImGui.TextDisabled("卫月插件库工具箱 · 汉化 / 体检");
 
         ImGui.Separator();
 
@@ -62,13 +59,6 @@ internal sealed class MainWindow : Window
             if (ImGui.BeginTabItem("仓库体检", flags))
             {
                 this.repoAuditTab.Draw();
-                ImGui.EndTabItem();
-            }
-
-            flags = this.pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("插件安装器", flags))
-            {
-                this.installerTab.Draw();
                 ImGui.EndTabItem();
             }
 

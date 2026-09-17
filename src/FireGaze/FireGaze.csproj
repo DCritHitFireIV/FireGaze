@@ -6,16 +6,15 @@
     <Platforms>x64</Platforms>
     <AssemblyName>FireGaze</AssemblyName>
     <Name>FireGaze</Name>
-    <Version>1.0.0.22</Version>
+    <Version>1.0.0.23</Version>
     <Authors>fire</Authors>
     <Author>fire</Author>
     <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
     <Punchline>提供对第三方插件简介汉化等功能</Punchline>
     <Description>第三方插件简介汉化
 第三方插件仓库坏链检测
-记住插件安装器列表的浏览位置（下次打开接着看）
 
-Localization of third-party plugin descriptions; dead-link detection for third-party plugin repositories; remembering your scroll position in the plugin installer list.</Description>
+Localization of third-party plugin descriptions; dead-link detection for third-party plugin repositories.</Description>
     <PackageProjectUrl>https://github.com/DCritHitFireIV/FireGaze</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DCritHitFireIV/FireGaze</RepositoryUrl>
     <!-- 固定插件清单里的 API 级别（避免 CI 用新版 Dalamud 构建时把级别写高） -->
@@ -28,18 +27,5 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
   <ItemGroup>
     <None Include="..\..\translations.json" Link="translations.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
-  <!--
-    0Harmony 不参与编译、也不放在插件根目录：
-      · 放根目录会被卫月当作「私有依赖」加载进插件的 collectible / in-memory ALC，
-        Harmony 建内部动态程序集时会报 FileLoadException 0x80131515（实测踩过）；
-      · 放到 libs/ 后在插件启动时自行 AssemblyLoadContext.Default.LoadFromAssemblyPath()，
-        与 ProxyPlugin 的做法一致。
-  -->
-  <Target Name="CopyHarmonyToLibs" AfterTargets="Build">
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\deps\0Harmony.dll"
-          DestinationFolder="$(OutDir)libs"
-          SkipUnchangedFiles="true" />
-  </Target>
 
 </Project>

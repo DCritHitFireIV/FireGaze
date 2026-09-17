@@ -24,8 +24,6 @@ public sealed class Plugin : IDalamudPlugin
 {
     private static Plugin instance = null!;
 
-    private const string HarmonyId = "firegaze.installer";
-
     [PluginService] public static IPluginLog Log { get; private set; } = null!;
 
     [PluginService] public static ICommandManager CommandManager { get; private set; } = null!;
@@ -39,16 +37,10 @@ public sealed class Plugin : IDalamudPlugin
     private readonly MainWindow window;
     private readonly Timer translateTimer;
 
-    private HarmonyHost? harmony;
-
     private readonly object saveLock = new();
     private DateTime lastSave = DateTime.MinValue;
 
     private int tableUpdateBusy;
-    private bool pendingListScrollRestore;
-    private int listScrollRestoreAttempts;
-    private int listScrollGraceFrames;
-    private bool listHasContent;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -128,7 +120,7 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>
     /// 延迟初始化：等所有插件都不在加载中（或超时 30 秒）再动手。
     /// 加壳插件（.NET Reactor 系）在模块初始化器里会扫描/改写进程内存，
-    /// 我们在这个窗口里不加载 0Harmony、不打补丁、不开定时器，避免把它们搞崩。
+    /// 我们在这个窗口里不做任何重活、不开定时器，避免把它们搞崩。
     /// </summary>
     private void OnStartupTick(IFramework framework)
     {
@@ -150,16 +142,11 @@ public sealed class Plugin : IDalamudPlugin
             this.ReloadTranslationTable(out _);
             this.TrackFirstSeen();
 
-            if (this.Config.RememberListScroll)
-            {
-                this.InstallPatches();
-            }
-
             this.translateTimer.Start();
 
             Log.Information(
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {this.Table.Count} 条；" +
-                $"汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}；记住列表位置 = {(this.Config.RememberListScroll ? "开" : "关")}");
+                $"汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}");
         }
         catch (Exception e)
         {
@@ -229,15 +216,6 @@ public sealed class Plugin : IDalamudPlugin
         catch
         {
             // ignore
-        }
-
-        try
-        {
-            this.harmony?.Unpatch(HarmonyId);
-        }
-        catch (Exception e)
-        {
-            Log.Warning(e, "[FireGaze] 卸载钩子失败");
         }
 
         try
@@ -345,257 +323,6 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     // ------------------------------------------------------------------ 安装器钩子
-
-    private void InstallPatches()
-    {
-        if (this.harmony is not null)
-        {
-            return;   // 已经挂过了
-        }
-
-        try
-        {
-            var directory = this.pluginInterface.AssemblyLocation.Directory?.FullName
-                            ?? Path.GetDirectoryName(this.pluginInterface.AssemblyLocation.FullName)
-                            ?? ".";
-
-            this.harmony = HarmonyHost.Create(HarmonyId, directory, out var harmonyError);
-            if (this.harmony is null)
-            {
-                Log.Error("[FireGaze] Harmony 不可用（记住列表位置将不生效）：" + (harmonyError ?? "未知原因"));
-                this.harmony = null;
-                return;
-            }
-
-            Log.Information("[FireGaze] 0Harmony：" + HarmonyHost.Resolution);
-
-            var dalamud = typeof(IDalamudPluginInterface).Assembly;
-            var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
-            if (installerType is null)
-            {
-                Log.Warning("[FireGaze] 未找到 PluginInstallerWindow（卫月版本不兼容），记住列表位置不生效");
-                this.UninstallPatches();
-                return;
-            }
-
-            var openPrefix = typeof(Plugin).GetMethod(nameof(InstallerOpenPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var categoriesPrefix = typeof(Plugin).GetMethod(nameof(InstallerCategoriesPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-            var listContentPrefix = typeof(Plugin).GetMethod(nameof(InstallerListContentPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
-
-            var patched = new List<string>();
-            var failed = new List<string>();
-
-            // 列表浏览位置：开窗时准备恢复；分类选择器前缀里发 SetNextWindowScroll（其后紧接着就是
-            // 列表子窗口 ScrollingPlugins 的 Begin）；列表内容前缀里读/确认滚动位置。
-            this.PatchInstallerHook(installerType, "OnOpen", "firegaze.installer.open", openPrefix, patched, failed);
-            this.PatchInstallerHook(installerType, "DrawPluginCategorySelectors", "firegaze.installer.categories", categoriesPrefix, patched, failed);
-            this.PatchInstallerHook(installerType, "DrawPluginCategoryContent", "firegaze.installer.list", listContentPrefix, patched, failed);
-
-            Log.Information(failed.Count == 0
-                ? $"[FireGaze] 已挂钩（{patched.Count}）：{string.Join(" / ", patched)}"
-                : $"[FireGaze] 已挂钩（{patched.Count}）：{string.Join(" / ", patched)}；失败：{string.Join(" / ", failed)}");
-        }
-        catch (Exception e)
-        {
-            Log.Error(e, "[FireGaze] 挂钩失败（不影响游戏）");
-            this.harmony = null;
-        }
-    }
-
-    /// <summary>卸下全部钩子。</summary>
-    private void UninstallPatches()
-    {
-        try
-        {
-            this.harmony?.Unpatch(HarmonyId);
-        }
-        catch (Exception e)
-        {
-            Log.Warning(e, "[FireGaze] 卸载钩子失败");
-        }
-
-        this.harmony = null;
-    }
-
-    /// <summary>
-    /// 给安装器的一个方法挂钩。单个钩子失败只记警告，不影响其他钩子
-    /// （卫月改版换名时最多丢一个功能，不会整片失效）。
-    /// </summary>
-    private void PatchInstallerHook(
-        Type installerType,
-        string methodName,
-        string hookName,
-        MethodInfo hook,
-        List<string> patched,
-        List<string> failed)
-    {
-        try
-        {
-            var target = installerType.GetMethod(
-                methodName,
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
-
-            if (target is null)
-            {
-                failed.Add(hookName);
-                Log.Warning($"[FireGaze] 未找到 PluginInstallerWindow.{methodName}");
-                return;
-            }
-
-            this.harmony!.PatchPrefix(target, hook);
-            patched.Add(hookName);
-        }
-        catch (Exception e)
-        {
-            failed.Add(hookName);
-            Log.Warning(e, $"[FireGaze] 挂钩 {hookName} 失败");
-        }
-    }
-
-    /// <summary>分类选择器前缀（firegaze.installer.categories）：恢复列表浏览位置。</summary>
-    private static bool InstallerCategoriesPrefix()
-    {
-        instance?.RestoreListScroll();
-        return true;
-    }
-
-    /// <summary>列表内容前缀（firegaze.installer.list）：此刻当前窗口 = 列表子窗口 ScrollingPlugins，读/确认滚动位置。</summary>
-    private static bool InstallerListContentPrefix()
-    {
-        instance?.NoteListScroll();
-        return true;
-    }
-
-    /// <summary>安装器打开时的前缀（firegaze.installer.open）：准备恢复列表浏览位置。</summary>
-    private static bool InstallerOpenPrefix()
-    {
-        instance?.BeginListScrollRestore();
-        return true;
-    }
-
-    // ---------------------------------------------------------- 安装器列表浏览位置
-
-    /// <summary>开关：是否记住列表浏览位置。</summary>
-    public void SetRememberListScroll(bool remember)
-    {
-        this.Config.RememberListScroll = remember;
-        this.SaveConfig();
-
-        if (remember && this.harmony is null && this.startupInitDone)
-        {
-            this.InstallPatches();
-        }
-        else if (!remember && this.harmony is not null)
-        {
-            this.UninstallPatches();
-        }
-    }
-
-    /// <summary>安装器打开时：准备恢复列表浏览位置。</summary>
-    private void BeginListScrollRestore()
-    {
-        this.pendingListScrollRestore = this.Config.RememberListScroll && this.Config.ListScrollY is not null;
-        this.listScrollRestoreAttempts = 0;
-
-        if (this.pendingListScrollRestore)
-        {
-            Log.Debug($"[FireGaze] 准备恢复列表浏览位置：{this.Config.ListScrollY:F0}");
-        }
-    }
-
-    /// <summary>
-    /// 恢复列表浏览位置。在「分类选择器」前缀里发：它后面紧跟的就是列表子窗口
-    /// <c>ScrollingPlugins</c> 的 <c>Begin</c>（中间没有别的窗口 Begin），所以
-    /// <c>SetNextWindowScroll</c> 会被那个子窗口立即消费，不会闪一下。
-    /// 一直不生效（内容变短被夹到顶部）就放弃。
-    /// </summary>
-    private void RestoreListScroll()
-    {
-        try
-        {
-            if (!this.pendingListScrollRestore)
-            {
-                return;
-            }
-
-            if (this.Config.ListScrollY is not { } y)
-            {
-                this.pendingListScrollRestore = false;
-                return;
-            }
-
-            if (!this.listHasContent)
-            {
-                // 列表还在加载（仓库重载中会显示「正在加载插件…」，此时子窗口没有内容）
-                // 或列表本来就放得下 → 发了也会被夹到 0，等内容出来再发。
-                return;
-            }
-
-            if (++this.listScrollRestoreAttempts > 20)
-            {
-                this.pendingListScrollRestore = false;
-                return;
-            }
-
-            ImGuiP.SetNextWindowScroll(new System.Numerics.Vector2(-1f, y));
-        }
-        catch (Exception e)
-        {
-            Log.Debug(e, "[FireGaze] 恢复列表浏览位置失败");
-            this.pendingListScrollRestore = false;
-        }
-    }
-
-    /// <summary>记录列表滚动位置（前缀里执行时当前窗口就是列表子窗口）。</summary>
-    private void NoteListScroll()
-    {
-        try
-        {
-            // 记下「列表有没有可滚动内容」：仓库重载期间列表会被「正在加载插件…」替掉，
-            // 此时子窗口内容为空，既不该记录（会把 0 覆盖上去）也不该恢复。
-            this.listHasContent = ImGui.GetScrollMaxY() > 0f || ImGui.GetScrollY() > 0f;
-
-            if (this.pendingListScrollRestore)
-            {
-                if (this.Config.ListScrollY is { } target && Math.Abs(ImGui.GetScrollY() - target) < 2f)
-                {
-                    this.pendingListScrollRestore = false;
-                    this.listScrollGraceFrames = 1;
-                }
-
-                return;   // 恢复未到位前不要覆盖记录
-            }
-
-            if (!this.Config.RememberListScroll)
-            {
-                return;
-            }
-
-            if (this.listScrollGraceFrames > 0)
-            {
-                this.listScrollGraceFrames--;
-                return;
-            }
-
-            if (ImGui.GetScrollMaxY() <= 0f && ImGui.GetScrollY() <= 0f)
-            {
-                return;   // 列表没内容（加载中/空）→ 不拿 0 去覆盖
-            }
-
-            var y = ImGui.GetScrollY();
-            if (this.Config.ListScrollY == y)
-            {
-                return;
-            }
-
-            this.Config.ListScrollY = y;
-            this.SaveConfig(force: false);
-        }
-        catch (Exception e)
-        {
-            Log.Debug(e, "[FireGaze] 记录列表浏览位置失败");
-        }
-    }
 
     // ------------------------------------------------------------------ 简介汉化
 
