@@ -24,5 +24,22 @@ internal sealed class InstallerTab
         {
             this.plugin.SetRememberListScroll(remember);
         }
+
+        ImGui.Separator();
+        ImGui.TextWrapped("实验 / 诊断（用来定位那个列表子窗口，以及「重载把列表顶掉」的问题）");
+
+        var probe = this.plugin.InstallerProbe;
+        ImGui.BulletText($"结构体自检：{probe.CtxVerdict}");
+        ImGui.BulletText($"列表子窗口：{probe.ListVerdict}");
+        ImGui.BulletText($"最近读到滚动值：{probe.LastScrollY:F0}");
+        ImGui.BulletText($"防刷新顶飞：{probe.MaskVerdict}");
+        ImGui.BulletText($"窗口清单 dump：{probe.DumpPath}");
+
+        if (ImGui.Button("测试：触发一次仓库重载###ProbeReload"))
+        {
+            Plugin.Chat?.Print(probe.TriggerRepoReload()
+                ? "[FireGaze] 已触发一次仓库重载（看着安装器列表，看它会不会被顶回顶部）"
+                : "[FireGaze] 触发失败，看 dalamud.log");
+        }
     }
 }

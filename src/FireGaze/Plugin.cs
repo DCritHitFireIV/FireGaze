@@ -314,6 +314,9 @@ public sealed class Plugin : IDalamudPlugin
         this.SaveConfig();
     }
 
+    /// <summary>实验用：安装器列表探针（页签显示状态、触发重载测试）。</summary>
+    internal UI.InstallerListScroll InstallerProbe => this.installerListScroll;
+
     /// <summary>每帧看一眼插件安装器列表的滚动位置（不用钩子，纯 ImGui 公开绑定）。</summary>
     private void TickInstallerListScroll()
     {
