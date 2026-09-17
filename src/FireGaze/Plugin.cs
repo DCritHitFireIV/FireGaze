@@ -97,7 +97,16 @@ public sealed class Plugin : IDalamudPlugin
         pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
         pluginInterface.UiBuilder.OpenConfigUi += this.ToggleWindow;
 
-        this.InstallPatches();
+        // 懒加载：模式为「关闭」时完全不碰 Harmony（连 0Harmony.dll 都不加载），
+        // 避免给其他插件带去任何副作用。切模式时再按需安装/卸载。
+        if (this.Config.BlockerMode != BlockMode.Off)
+        {
+            this.InstallPatches();
+        }
+        else
+        {
+            this.BlockerStatusText = "未挂钩（模式为关闭）";
+        }
 
         this.AddCommand(
             "/firegaze",
@@ -338,6 +347,31 @@ public sealed class Plugin : IDalamudPlugin
     {
         this.Config.BlockerMode = mode;
         this.SaveConfig();
+
+        if (mode == BlockMode.Off)
+        {
+            this.UninstallPatches();
+        }
+        else if (this.harmony is null)
+        {
+            this.InstallPatches();
+        }
+    }
+
+    /// <summary>卸下钩子（模式切回「关闭」时调用）。已加载的 0Harmony 无法从默认 ALC 卸下，但不再使用。</summary>
+    private void UninstallPatches()
+    {
+        try
+        {
+            this.harmony?.Unpatch(HarmonyId);
+        }
+        catch (Exception e)
+        {
+            Log.Warning(e, "[FireGaze] 卸载钩子失败");
+        }
+
+        this.harmony = null;
+        this.BlockerStatusText = "未挂钩（模式为关闭）";
     }
 
     /// <summary>开关拦截日志。</summary>
@@ -365,6 +399,12 @@ public sealed class Plugin : IDalamudPlugin
         {
             this.BlockerStatusText = "已暂时关闭（在修复中）";
             Log.Information("[FireGaze] 列表刷新拦截功能暂时关闭（在修复中），本次不挂钩子");
+            return;
+        }
+
+        if (this.harmony is not null)
+        {
+            // 已经挂过了（切换模式时重复调用）
             return;
         }
 
