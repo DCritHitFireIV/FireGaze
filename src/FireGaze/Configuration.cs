@@ -84,6 +84,9 @@ public sealed class Configuration : IPluginConfiguration
     /// <summary>是否连已停用的库一起扫描（默认是）。</summary>
     public bool ScanIncludeDisabled { get; set; } = true;
 
+    /// <summary>仓库体检：是否在每条库链下面展开「本机已装插件」的图标（默认关，打开后列表每行会变高）。</summary>
+    public bool ShowInstalledIcons { get; set; }
+
     /// <summary>首次运行标记：安装本插件之前就存在的库没有时间记录。</summary>
     public bool RepoFirstRunDone { get; set; }
 

@@ -31,13 +31,33 @@ internal sealed class RepoAuditTab
     private bool deleteRequested;
     private TimeSpan lastScanDuration;
 
+    // ---------------- 「本机已装」相关 ----------------
+    private InstalledPluginsIndex? installedIndex;
+    private bool installedIndexStale = true;
+    private DateTime installedIndexRetryAfter = DateTime.MinValue;
+    private bool onlyUnused;
+    private bool listBuilt;
+    private string sortKey = "status";
+    private bool sortDescending;
+    private bool resetSortRequested;
+    private readonly Dictionary<string, ImTextureID> iconHandles = new(StringComparer.Ordinal);
+    private DateTime iconRetryAfter = DateTime.MinValue;
+
     public RepoAuditTab(Plugin plugin)
     {
         this.plugin = plugin;
+
+        // 装 / 卸 / 启停插件后，本机已装索引要重算（内存操作，不联网）
+        plugin.PluginInterface.ActivePluginsChanged += _ => this.installedIndexStale = true;
     }
 
     public void Draw()
     {
+        // 打开本页就能看到库链清单（状态 = 未检查），不必先跑一次网络扫描——「本机装了没」是离线数据
+        this.EnsureList();
+        this.EnsureInstalledIndex();
+        this.FillInstalledCounts();
+
         // ---------------- 说明（压到两行以内） ----------------
         ImGui.TextWrapped("扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。");
         ImGui.TextDisabled("内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。");
@@ -110,9 +130,29 @@ internal sealed class RepoAuditTab
         }
         else if (t > 0)
         {
+            var index = this.installedIndex;
+            string machineGroup;
+            if (index is { Available: true })
+            {
+                int inUse, unused;
+                lock (this.gate)
+                {
+                    inUse = this.items.Count(x => x.InstalledCount > 0);
+                    unused = this.items.Count(x => x.InstalledCount == 0);
+                }
+
+                machineGroup = $"本机：已装 {inUse} · 未装 {unused}";
+            }
+            else
+            {
+                machineGroup = "本机：数据不可用";
+            }
+
             ImGui.TextWrapped(
-                $"共 {t} 个仓库：可用 {ok} · 死链 {dead} · 内容不合规 {invalid} · 拒绝访问 {blocked} · " +
-                $"连接失败 {unreachable} · 已停用 {disabled}" + (unknown > 0 ? $" · 未检查 {unknown}" : string.Empty));
+                $"共 {t} 个仓库 ｜ 可用 {ok} · 死链 {dead} · 内容不合规 {invalid} · 拒绝访问 {blocked} · "
+                + $"连接失败 {unreachable}" + (unknown > 0 ? $" · 未检查 {unknown}" : string.Empty)
+                + $" ｜ {machineGroup} ｜ 另：已停用 {disabled}");
+
             if (this.plugin.Config.LastScanUtc != default)
             {
                 ImGui.TextDisabled(
@@ -130,10 +170,50 @@ internal sealed class RepoAuditTab
         ImGui.Text("显示");
         this.FilterRadio("problems", "有问题的");
         this.FilterRadio("all", "全部");
-        this.FilterRadio("deadinvalid", "死链 + 不合规");
         this.FilterRadio("unreachable", "连接失败");
         this.FilterRadio("disabled", "已停用");
         this.FilterRadio("ok", "可用");
+
+        // 第二行：与健康度正交的两个开关（本机使用情况 / 图标展开）
+        var indexReady = this.installedIndex is { Available: true };
+
+        if (!indexReady)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        ImGui.Checkbox("只看本机未装的###OnlyUnused", ref this.onlyUnused);
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(indexReady
+                ? "只显示本机没装过插件的库（会同时改变「全选当前」的范围）"
+                : "本机插件数据不可用，暂时不能按这个筛选");
+        }
+
+        if (!indexReady)
+        {
+            ImGui.EndDisabled();
+        }
+
+        ImGui.SameLine();
+        var showIcons = this.plugin.Config.ShowInstalledIcons;
+        if (ImGui.Checkbox("显示插件图标（列表行会变高）###ShowIcons", ref showIcons))
+        {
+            this.plugin.Config.ShowInstalledIcons = showIcons;
+            this.plugin.SaveConfig();
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("勾选后每条库链下面展开「本机已装」的插件图标；悬停图标条可一次看到全部名字（该设置会被保存）");
+        }
+
+        if (!indexReady)
+        {
+            UiHelpers.ColoredWrapped(
+                UiHelpers.Warn,
+                "读不到卫月的已装插件列表（可能是卫月升级改了内部字段）——「本机已装」这一列显示为 —，本次无法判断哪条库链没在用。");
+        }
 
         List<RepoAuditItem> snapshot;
         int selectedCount;
@@ -160,14 +240,82 @@ internal sealed class RepoAuditTab
         var tableFlags = ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
                          ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings;
 
-        if (ImGui.BeginTable("###RepoRows", 4, tableFlags, new Vector2(0, tableHeight)))
+        if (ImGui.BeginTable("###RepoRows", 5, tableFlags | ImGuiTableFlags.Sortable, new Vector2(0, tableHeight)))
         {
             ImGui.TableSetupScrollFreeze(0, 1);
-            ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed, 32);
-            ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed, 140);
-            ImGui.TableSetupColumn("仓库地址", ImGuiTableColumnFlags.WidthStretch);
-            ImGui.TableSetupColumn("首次记录", ImGuiTableColumnFlags.WidthFixed, 96);
-            ImGui.TableHeadersRow();
+            ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoSort, 26, 0);
+            ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.DefaultSort | ImGuiTableColumnFlags.PreferSortAscending, 120, 1);
+            ImGui.TableSetupColumn("仓库地址", ImGuiTableColumnFlags.WidthStretch, 0, 2);
+            ImGui.TableSetupColumn("本机已装", ImGuiTableColumnFlags.WidthFixed, 96, 3);
+            ImGui.TableSetupColumn("首次记录", ImGuiTableColumnFlags.WidthFixed, 84, 4);
+
+            // 自己逐列发表头（而不是 TableHeadersRow），才能给每列挂 tooltip
+            ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
+            ImGui.TableNextColumn();
+            ImGui.TableHeader("##sel");
+
+            ImGui.TableNextColumn();
+            ImGui.TableHeader("状态");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("默认顺序就是它：死链在最上（点列头可切换升/降）。");
+            }
+
+            ImGui.TableNextColumn();
+            ImGui.TableHeader("仓库地址");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("列里是库链地址；悬停具体行可看这条库一共提供多少个插件。");
+            }
+
+            ImGui.TableNextColumn();
+            ImGui.TableHeader("本机已装");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(
+                    "本机从这条库链装了几个插件（离线统计，装/卸插件后会自动重算）。\n"
+                    + "点一下按数量排行（再点反向）；\n"
+                    + "「—」= 本次读不到已装插件数据（不会当成 0）。");
+            }
+
+            ImGui.TableNextColumn();
+            ImGui.TableHeader("首次记录");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("FireGaze 第一次看到这条链接的时间；\n安装本插件之前就存在的库没有记录（排序时排最后）。");
+            }
+
+            // 读取 ImGui 的排序状态：点列头切换升/降；点「状态」列回到默认的严重度顺序
+            var specs = ImGui.TableGetSortSpecs();
+            if (!specs.IsNull)
+            {
+                if (this.resetSortRequested)
+                {
+                    this.resetSortRequested = false;
+                    specs.SpecsCount = 1;
+                    specs.Specs[0] = new ImGuiTableColumnSortSpecs
+                    {
+                        ColumnUserID = 1,
+                        ColumnIndex = 1,
+                        SortOrder = 0,
+                        SortDirection = ImGuiSortDirection.Ascending,
+                    };
+                    specs.SpecsDirty = true;
+                }
+
+                if (specs.SpecsCount > 0)
+                {
+                    var spec = specs.Specs[0];
+                    this.sortKey = spec.ColumnUserID switch
+                    {
+                        3 => "installed",
+                        4 => "firstSeen",
+                        2 => "url",
+                        _ => "status",
+                    };
+                    this.sortDescending = spec.SortDirection == ImGuiSortDirection.Descending;
+                }
+            }
 
             foreach (var item in snapshot)
             {
@@ -175,6 +323,13 @@ internal sealed class RepoAuditTab
                 ImGui.TableNextColumn();
 
                 var isSelected = this.selected.Contains(item.Url);
+
+                // 未体检的行不可勾选：没有体检结论就没有可依据的处理
+                if (!item.IsSelectable)
+                {
+                    ImGui.BeginDisabled();
+                }
+
                 if (ImGui.Checkbox("##sel-" + item.Url, ref isSelected))
                 {
                     if (isSelected)
@@ -184,6 +339,15 @@ internal sealed class RepoAuditTab
                     else
                     {
                         this.selected.Remove(item.Url);
+                    }
+                }
+
+                if (!item.IsSelectable)
+                {
+                    ImGui.EndDisabled();
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.SetTooltip("还没体检过：先点「开始体检」，再决定要不要处理这个库。");
                     }
                 }
 
@@ -235,6 +399,9 @@ internal sealed class RepoAuditTab
                 }
 
                 ImGui.TableNextColumn();
+                this.DrawInstalledCell(item, indexReady);
+
+                ImGui.TableNextColumn();
                 if (string.IsNullOrEmpty(item.FirstSeen))
                 {
                     ImGui.TextDisabled("未记录");
@@ -250,6 +417,18 @@ internal sealed class RepoAuditTab
                     {
                         ImGui.SetTooltip(item.FirstSeen);
                     }
+                }
+
+                // 图标条：表格没有 colspan，放进最宽的「仓库地址」列；这一行只用来放图标
+                if (showIcons && item.InstalledCount > 0)
+                {
+                    ImGui.TableNextRow();
+                    ImGui.TableNextColumn();
+                    ImGui.TableNextColumn();
+                    ImGui.TableNextColumn();
+                    this.DrawInstalledIcons(item);
+                    ImGui.TableNextColumn();
+                    ImGui.TableNextColumn();
                 }
             }
 
@@ -333,7 +512,7 @@ internal sealed class RepoAuditTab
         {
             lock (this.gate)
             {
-                foreach (var item in snapshot)
+                foreach (var item in snapshot.Where(x => x.IsSelectable))
                 {
                     this.selected.Add(item.Url);
                 }
@@ -366,6 +545,20 @@ internal sealed class RepoAuditTab
             ? $"结果 {snapshot.Count} 行 · 已选 0 —— 勾选列表行，或用「全选当前」"
             : $"结果 {snapshot.Count} 行 · 已选 {selectedCount}（共 {this.ProblemCount()} 个问题项"
               + (selectedHidden > 0 ? $"，其中 {selectedHidden} 项不在当前筛选内）" : "）");
+
+        // 非默认排序才显示（这一行常驻内容多，避免把右侧的恢复类按钮挤下去）
+        var sortText = this.sortKey switch
+        {
+            "installed" => this.sortDescending ? "按本机已装 ↓" : "按本机已装 ↑",
+            "firstSeen" => this.sortDescending ? "按首次记录 ↓" : "按首次记录 ↑",
+            "url" => this.sortDescending ? "按地址 ↓" : "按地址 ↑",
+            _ => null,
+        };
+
+        if (sortText is not null)
+        {
+            hint += $" · {sortText}";
+        }
 
         ImGui.TextDisabled(hint);
         var hintWidth = ImGui.GetItemRectSize().X;
@@ -458,7 +651,6 @@ internal sealed class RepoAuditTab
         IEnumerable<RepoAuditItem> query = this.filter switch
         {
             "all" => this.items,
-            "deadinvalid" => this.items.Where(x => x.Status is RepoStatus.Dead or RepoStatus.Invalid),
             "unreachable" => this.items.Where(x => x.Status is RepoStatus.Unreachable),
             "disabled" => this.items.Where(x => !x.IsEnabled),
             "ok" => this.items.Where(x => x.Status is RepoStatus.Ok or RepoStatus.Empty),
@@ -470,10 +662,47 @@ internal sealed class RepoAuditTab
             query = query.Where(x => x.Url.Contains(this.search.Trim(), StringComparison.OrdinalIgnoreCase));
         }
 
-        return query
-            .OrderBy(x => UiHelpers.SeverityRank(x.Status))
-            .ThenBy(x => x.Url, StringComparer.Ordinal)
-            .ToList();
+        // 与健康度正交的第二个轴：只看本机没从它装过插件的库（数据不可用时该开关是禁用的）
+        if (this.onlyUnused && this.installedIndex is { Available: true })
+        {
+            query = query.Where(x => x.InstalledCount == 0);
+        }
+
+        return this.SortItems(query);
+    }
+
+    /// <summary>
+    /// 排序：默认按严重度（死链在最上，<c>UiHelpers.SeverityRank</c>）；列头可切换升/降；平序一律按 URL。
+    /// 不可用（`—`）与「未记录」在升序里排最后。
+    /// </summary>
+    private List<RepoAuditItem> SortItems(IEnumerable<RepoAuditItem> query)
+    {
+        var list = query.ToList();
+
+        Comparison<RepoAuditItem> primary = this.sortKey switch
+        {
+            "installed" => (a, b) => InstalledRank(a).CompareTo(InstalledRank(b)),
+            "firstSeen" => (a, b) => string.Compare(FirstSeenRank(a), FirstSeenRank(b), StringComparison.Ordinal),
+            "url" => (a, b) => string.Compare(a.Url, b.Url, StringComparison.OrdinalIgnoreCase),
+            _ => (a, b) => UiHelpers.SeverityRank(a.Status).CompareTo(UiHelpers.SeverityRank(b.Status)),
+        };
+
+        list.Sort((a, b) =>
+        {
+            var result = primary(a, b);
+            if (result == 0)
+            {
+                result = string.Compare(a.Url, b.Url, StringComparison.OrdinalIgnoreCase);
+            }
+
+            return this.sortDescending ? -result : result;
+        });
+
+        return list;
+
+        static int InstalledRank(RepoAuditItem item) => item.InstalledCount < 0 ? int.MaxValue : item.InstalledCount;
+
+        static string FirstSeenRank(RepoAuditItem item) => string.IsNullOrEmpty(item.FirstSeen) ? "9999" : item.FirstSeen;
     }
 
     // ------------------------------------------------------------------ 统计
@@ -542,6 +771,10 @@ internal sealed class RepoAuditTab
             this.unreachableCount = this.disabledCount = this.unknownCount = 0;
             this.scanning = true;
             this.filter = "problems";
+            this.sortKey = "status";
+            this.sortDescending = false;
+            this.resetSortRequested = true;
+            this.listBuilt = true;
         }
 
         this.statusMessage = $"开始体检 {list.Count} 个仓库…";
@@ -740,6 +973,269 @@ internal sealed class RepoAuditTab
     }
 
     /// <summary>操作之后按当前配置重建列表，保留还在的条目的扫描结果，并重算统计。</summary>
+    // ------------------------------------------------------------------ 「本机已装」
+
+    /// <summary>
+    /// 打开页面就把库链清单建出来（状态 = 未检查，不可勾选），不必先跑一次网络扫描：
+    /// 「本机装了没」是离线数据，体检只负责回填健康度。
+    /// </summary>
+    private void EnsureList()
+    {
+        if (this.scanning || this.listBuilt)
+        {
+            return;
+        }
+
+        var repos = this.plugin.Repos.ReadAll(out var error);
+        if (error is not null)
+        {
+            this.statusMessage = "读取仓库列表失败：" + error;
+            this.statusIsError = true;
+            return;   // 不置 listBuilt，下一帧重试
+        }
+
+        var list = repos
+            .Where(x => !string.IsNullOrWhiteSpace(x.Url))
+            .Select(entry => new RepoAuditItem
+            {
+                Url = entry.Url,
+                IsEnabled = entry.IsEnabled,
+                Index = entry.Index,
+                FirstSeen = this.plugin.GetFirstSeen(entry.Url),
+            })
+            .ToList();
+
+        lock (this.gate)
+        {
+            this.items = list;
+
+            // 还没体检过：默认看「全部」，否则「有问题的」会是空列表（旧行为是扫描后才建列表）
+            if (list.Count > 0 && list.All(x => x.Status == RepoStatus.Unknown))
+            {
+                this.filter = "all";
+            }
+
+            this.total = list.Count;
+        }
+
+        this.RecomputeCounters();
+        this.listBuilt = true;
+    }
+
+    /// <summary>读/刷新「本机已装插件」索引；读不到时界面必须显示 `—`（不能显示假 0）。</summary>
+    private void EnsureInstalledIndex()
+    {
+        if (!this.installedIndexStale || DateTime.Now < this.installedIndexRetryAfter)
+        {
+            return;
+        }
+
+        this.installedIndex = InstalledPluginsIndex.Build();
+        this.installedIndexStale = false;
+        this.iconHandles.Clear();
+
+        // 不可用时过几秒再试一次（卫月可能还在启动）；但界面一律按「不可用」渲染
+        this.installedIndexRetryAfter = this.installedIndex.Available
+            ? DateTime.MaxValue
+            : DateTime.Now.AddSeconds(3);
+    }
+
+    /// <summary>把索引结果填到每一行（不可用 → -1，不参与任何「0 个」的断言）。</summary>
+    private void FillInstalledCounts()
+    {
+        var index = this.installedIndex;
+
+        lock (this.gate)
+        {
+            foreach (var item in this.items)
+            {
+                if (index is { Available: true })
+                {
+                    item.InstalledPlugins = index.TryGetInstalled(item.Url, out var plugins) ? plugins : [];
+                    item.InstalledCount = item.InstalledPlugins.Count;
+                }
+                else
+                {
+                    item.InstalledPlugins = [];
+                    item.InstalledCount = -1;
+                }
+            }
+        }
+    }
+
+    /// <summary>「本机已装」单元格：一律放数字（0 也是数字）；数据不可用显示 `—`。</summary>
+    private void DrawInstalledCell(RepoAuditItem item, bool indexReady)
+    {
+        if (!indexReady || item.InstalledCount < 0)
+        {
+            ImGui.TextDisabled("—");
+        }
+        else if (item.InstalledCount == 0)
+        {
+            ImGui.TextDisabled("0 个");
+        }
+        else
+        {
+            ImGui.TextUnformatted($"{item.InstalledCount} 个");
+        }
+
+        if (!ImGui.IsItemHovered())
+        {
+            return;
+        }
+
+        if (!indexReady)
+        {
+            ImGui.SetTooltip("读不到卫月的已装插件列表（可能是卫月升级改了内部字段），本次无法判断。");
+            return;
+        }
+
+        var lines = new List<string>
+        {
+            $"本机从这条库链装了 {item.InstalledCount} 个插件。",
+            "（这条库一共提供多少个插件，把鼠标放在仓库地址上看）",
+        };
+
+        if (item.InstalledPlugins.Count > 0)
+        {
+            var names = string.Join("、", item.InstalledPlugins.Take(8).Select(x => x.DisplayName));
+            lines.Add(item.InstalledPlugins.Count > 8 ? $"{names}…（共 {item.InstalledPlugins.Count} 个）" : names);
+        }
+        else
+        {
+            lines.Add("只表示本机没从它装过插件：可能你在别的机器装过、它只是备用源、或插件是手动/开发版装的。");
+        }
+
+        ImGui.SetTooltip(string.Join('\n', lines));
+    }
+
+    /// <summary>
+    /// 图标条：有图标的在前、缺图标的最后（首字母占位）；按可用宽度自适应个数，超出折 `+N`；
+    /// 整条一个大 tooltip，一次列出全部名字（不强求逐个悬停）。
+    /// </summary>
+    private void DrawInstalledIcons(RepoAuditItem item)
+    {
+        var plugins = item.InstalledPlugins;
+        if (plugins.Count == 0)
+        {
+            return;
+        }
+
+        var now = DateTime.Now;
+        var retry = now >= this.iconRetryAfter;
+        var withIcon = new List<(InstalledPluginEntry Entry, ImTextureID Handle)>(plugins.Count);
+        var withoutIcon = new List<InstalledPluginEntry>();
+
+        foreach (var entry in plugins)
+        {
+            if (this.iconHandles.TryGetValue(entry.InternalName, out var cached) && !cached.IsNull)
+            {
+                withIcon.Add((entry, cached));
+                continue;
+            }
+
+            if (retry && PluginIconLookup.TryGetHandle(entry, out var handle) && !handle.IsNull)
+            {
+                this.iconHandles[entry.InternalName] = handle;
+                withIcon.Add((entry, handle));
+                continue;
+            }
+
+            withoutIcon.Add(entry);
+        }
+
+        if (retry)
+        {
+            this.iconRetryAfter = now.AddSeconds(2);   // 卫月下载完图标后会自动补上
+        }
+
+        const float iconSize = 22f;
+        var spacing = ImGui.GetStyle().ItemSpacing.X;
+
+        ImGui.BeginGroup();
+        ImGui.TextDisabled("本机已装：");
+        ImGui.SameLine();
+
+        var available = ImGui.GetContentRegionAvail().X;
+        var maxIcons = Math.Clamp((int)((available + spacing) / (iconSize + spacing)), 1, 8);
+
+        var drawn = 0;
+        foreach (var (_, handle) in withIcon)
+        {
+            if (drawn >= maxIcons)
+            {
+                break;
+            }
+
+            if (drawn > 0)
+            {
+                ImGui.SameLine();
+            }
+
+            ImGui.Image(handle, new Vector2(iconSize, iconSize));
+            drawn++;
+        }
+
+        foreach (var entry in withoutIcon)
+        {
+            if (drawn >= maxIcons)
+            {
+                break;
+            }
+
+            if (drawn > 0)
+            {
+                ImGui.SameLine();
+            }
+
+            DrawIconPlaceholder(entry, iconSize);
+            drawn++;
+        }
+
+        var hidden = plugins.Count - drawn;
+        if (hidden > 0)
+        {
+            if (drawn > 0)
+            {
+                ImGui.SameLine();
+            }
+
+            ImGui.TextDisabled($"+{hidden}");
+        }
+
+        ImGui.EndGroup();
+
+        if (!ImGui.IsItemHovered())
+        {
+            return;
+        }
+
+        var allNames = string.Join("、", plugins.Select(x => x.DisplayName));
+        var note = withoutIcon.Count > 0 ? $"\n（末位 {withoutIcon.Count} 个图标还没缓存到本机）" : string.Empty;
+        ImGui.SetTooltip($"本机已装 {plugins.Count} 个：{allNames}{note}");
+    }
+
+    /// <summary>没有图标时的占位格：虚线框 + 插件名首字母（与相邻图标同尺寸，不会让行高跳动）。</summary>
+    private static void DrawIconPlaceholder(InstalledPluginEntry entry, float size)
+    {
+        var start = ImGui.GetCursorScreenPos();
+        var drawList = ImGui.GetWindowDrawList();
+        drawList.AddRect(
+            start,
+            start + new Vector2(size, size),
+            ImGui.GetColorU32(new Vector4(0.45f, 0.45f, 0.45f, 1f)),
+            4f);
+
+        var initial = string.IsNullOrEmpty(entry.DisplayName) ? "?" : entry.DisplayName[..1].ToUpperInvariant();
+        var textSize = ImGui.CalcTextSize(initial);
+        drawList.AddText(
+            start + ((new Vector2(size, size) - textSize) * 0.5f),
+            ImGui.GetColorU32(UiHelpers.Muted),
+            initial);
+
+        ImGui.Dummy(new Vector2(size, size));
+    }
+
     private void RefreshFromLive()
     {
         var live = this.plugin.Repos.ReadAll(out _);
@@ -791,11 +1287,18 @@ internal sealed class RepoAuditTab
         }
 
         int count, unreachable;
+        int noInstalled, withInstalled, withInstalledTotal;
+        bool indexAvailable;
         List<RepoAuditItem> preview;
         lock (this.gate)
         {
             count = this.selected.Count;
             unreachable = this.items.Count(x => this.selected.Contains(x.Url) && x.Status == RepoStatus.Unreachable);
+            indexAvailable = this.installedIndex is { Available: true };
+            var chosen = this.items.Where(x => this.selected.Contains(x.Url)).ToList();
+            noInstalled = chosen.Count(x => x.InstalledCount == 0);
+            withInstalled = chosen.Count(x => x.InstalledCount > 0);
+            withInstalledTotal = chosen.Where(x => x.InstalledCount > 0).Sum(x => x.InstalledCount);
             preview = this.items
                 .Where(x => this.selected.Contains(x.Url))
                 .OrderBy(x => UiHelpers.SeverityRank(x.Status))
@@ -819,6 +1322,30 @@ internal sealed class RepoAuditTab
         if (unreachable > 0)
         {
             UiHelpers.ColoredWrapped(UiHelpers.Warn, $"注意：其中 {unreachable} 条是「连接失败」——可能是网络问题而不是死链。");
+        }
+
+        // 「本机没在用」不等于「可以删」；反过来，删掉有插件的库会让那些插件失去更新来源
+        if (!indexAvailable)
+        {
+            UiHelpers.ColoredWrapped(
+                UiHelpers.Warn,
+                "本次读不到已装插件列表，无法判断这些库里有没有你在用的插件。");
+        }
+        else
+        {
+            if (noInstalled > 0)
+            {
+                UiHelpers.ColoredWrapped(
+                    UiHelpers.Muted,
+                    $"其中 {noInstalled} 条本机没有从它装过插件——不代表这个库没用：可能你在别的机器装过、它只是备用源、或插件是手动/开发版装的。");
+            }
+
+            if (withInstalled > 0)
+            {
+                UiHelpers.ColoredWrapped(
+                    UiHelpers.Warn,
+                    $"其中 {withInstalled} 个库上有 {withInstalledTotal} 个已装插件：删除库链不会卸载它们，但从此不再有更新来源。");
+            }
         }
 
         ImGui.Spacing();

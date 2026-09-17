@@ -35,6 +35,14 @@ public sealed class RepoAuditItem
 
     public int PluginCount { get; set; }
 
+    /// <summary>
+    /// 本机从这条库链装的插件数；<b>-1 = 本机插件数据不可用</b>（界面必须显示 `—`，不能当 0）。
+    /// </summary>
+    internal int InstalledCount { get; set; } = -1;
+
+    /// <summary>本机从这条库链装的插件（按名字排序；无可用时为空）。</summary>
+    internal List<InstalledPluginEntry> InstalledPlugins { get; set; } = [];
+
     public int DroppedCount { get; set; }
 
     /// <summary>命中的线路（直连 / 镜像）。</summary>

@@ -338,6 +338,9 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>设置页要用的安装器功能状态（只读）。</summary>
     internal UI.InstallerListScroll InstallerFeatures => this.installerListScroll;
 
+    /// <summary>卫月插件接口（仓库体检页订阅「插件列表变化」用）。</summary>
+    internal IDalamudPluginInterface PluginInterface => this.pluginInterface;
+
     /// <summary>开关：是否拦住插件安装器的自动刷新。</summary>
     public void SetBlockInstallerAutoRefresh(bool block)
     {
