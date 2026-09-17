@@ -89,6 +89,16 @@ internal sealed class InstallerListScroll
             return;
         }
 
+        // 安装器这帧有没有在画：LastFrameActive 每帧刷新（WasActive 关窗后会一直留着 true，不能用）
+        var frame = ImGui.GetFrameCount();
+        if (installer.LastFrameActive < frame - 1)
+        {
+            this.wasOpen = false;
+            this.pendingRestore = false;
+            return;
+        }
+
+        // 只有在「安装器这帧真的在画」时才做自检/探测——否则子窗口本来就不在，结论会误导
         if (!this.loggedInstaller)
         {
             this.loggedInstaller = true;
@@ -105,16 +115,7 @@ internal sealed class InstallerListScroll
                 $"[FireGaze] 窗口结构自检：ID=0x{installer.ID:X8}（按名字算是 0x{expectId:X8}）"
                 + $"；Scroll=({installer.Scroll.X:F0},{installer.Scroll.Y:F0})"
                 + $"；ScrollMax=({installer.ScrollMax.X:F0},{installer.ScrollMax.Y:F0})"
-                + $"；LastFrameActive={installer.LastFrameActive}（当前帧 {ImGui.GetFrameCount()}）");
-        }
-
-        // 安装器这帧有没有在画：LastFrameActive 每帧刷新（WasActive 关窗后会一直留着 true，不能用）
-        var frame = ImGui.GetFrameCount();
-        if (installer.LastFrameActive < frame - 1)
-        {
-            this.wasOpen = false;
-            this.pendingRestore = false;
-            return;
+                + $"；LastFrameActive={installer.LastFrameActive}（当前帧 {frame}）");
         }
 
         if (!this.loggedList)
