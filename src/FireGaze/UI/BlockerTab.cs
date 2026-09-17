@@ -157,6 +157,21 @@ internal sealed class BlockerTab
         }
 
         ImGui.EndChild();
+
+        this.DrawKnownIssues();
+    }
+
+    /// <summary>已知问题（页底灰色小字）。</summary>
+    private void DrawKnownIssues()
+    {
+        ImGui.Separator();
+        UiHelpers.ColoredWrapped(UiHelpers.Muted, "目前已知问题：");
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "· 浏览仓库列表时自动拦截未生效，可以先使用「记住看到哪里（下次打开接着看）」暂替。");
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "· 开启本插件的情况下，更新新版本的 OmniToolbox / XSZToolbox / PFRadar / OCNFarmer 时会加载失败，需要重启一次游戏解决。");
     }
 
     private static string CounterLine(string label, int count, string time)
