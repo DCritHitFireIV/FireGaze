@@ -42,8 +42,6 @@ public sealed class Plugin : IDalamudPlugin
 
     private int tableUpdateBusy;
     private readonly UI.InstallerListScroll installerListScroll = new();
-    private object? dalamudInterface;
-    private PropertyInfo? installerOpenProp;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -314,35 +312,17 @@ public sealed class Plugin : IDalamudPlugin
         this.SaveConfig();
     }
 
-    /// <summary>实验用：安装器列表探针（页签显示状态、触发重载测试）。</summary>
-    internal UI.InstallerListScroll InstallerProbe => this.installerListScroll;
-
-    /// <summary>每帧看一眼插件安装器列表的滚动位置（不用钩子，纯 ImGui 公开绑定）。</summary>
-    private void TickInstallerListScroll()
+    /// <summary>开关：是否拦住插件安装器的自动刷新。</summary>
+    public void SetBlockInstallerAutoRefresh(bool block)
     {
-        this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false), this.IsPluginInstallerOpen);
+        this.Config.BlockInstallerAutoRefresh = block;
+        this.SaveConfig();
     }
 
-    /// <summary>卫月自己怎么看「插件安装器开着没有」（只读反射，不挂钩子）。</summary>
-    private bool IsPluginInstallerOpen()
+    /// <summary>每帧看一眼插件安装器（记住滚动位置 / 拦住自动刷新；不用钩子）。</summary>
+    private void TickInstallerListScroll()
     {
-        try
-        {
-            this.dalamudInterface ??= ResolveService("Dalamud.Interface.Internal.DalamudInterface");
-            if (this.dalamudInterface is null)
-            {
-                return false;
-            }
-
-            this.installerOpenProp ??= this.dalamudInterface.GetType()
-                .GetProperty("IsPluginInstallerOpen", BindingFlags.Instance | BindingFlags.Public);
-
-            return this.installerOpenProp?.GetValue(this.dalamudInterface) is true;
-        }
-        catch
-        {
-            return false;
-        }
+        this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false));
     }
 
     // ------------------------------------------------------------------ 配置

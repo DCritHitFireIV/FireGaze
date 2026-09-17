@@ -52,13 +52,16 @@ public sealed class Configuration : IPluginConfiguration
 {
     public int Version { get; set; } = 1;
 
-    // ---------------- 安装器列表浏览位置 ----------------
+    // ---------------- 插件安装器（位置记忆 + 拦住自动刷新） ----------------
 
     /// <summary>是否记住插件安装器列表的浏览位置（下次打开接着看）。</summary>
     public bool RememberListScroll { get; set; } = true;
 
     /// <summary>上次离开时列表的滚动位置（像素）。</summary>
     public float? ListScrollY { get; set; }
+
+    /// <summary>防止打开插件管理器时自动刷新（刷新照常跑，只是不再把列表和位置顶掉）。</summary>
+    public bool BlockInstallerAutoRefresh { get; set; } = true;
 
     // ---------------- 简介汉化 ----------------
 

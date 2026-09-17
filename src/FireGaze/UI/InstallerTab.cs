@@ -2,7 +2,7 @@ using Dalamud.Bindings.ImGui;
 
 namespace FireGaze.UI;
 
-/// <summary>「插件安装器」页：记住列表浏览位置。</summary>
+/// <summary>「拦住自动更新」页：拦住安装器的自动刷新 + 记住列表浏览位置。</summary>
 internal sealed class InstallerTab
 {
     private readonly Plugin plugin;
@@ -14,10 +14,18 @@ internal sealed class InstallerTab
 
     public void Draw()
     {
-        ImGui.TextWrapped("记住插件安装器列表的浏览位置，下次打开接着看。");
-        ImGui.TextDisabled("实现方式：只读/写 ImGui 里那个列表子窗口的滚动值（不使用任何钩子）。");
-
+        ImGui.TextWrapped("让插件安装器别再自己刷新：自动重载不再把列表和你的位置顶掉，并且记住你上次看到哪里。");
         ImGui.Separator();
+
+        var block = this.plugin.Config.BlockInstallerAutoRefresh;
+        if (ImGui.Checkbox("防止打开插件管理器自动刷新###BlockAutoRefresh", ref block))
+        {
+            this.plugin.SetBlockInstallerAutoRefresh(block);
+        }
+
+        ImGui.TextDisabled("刷新仍在后台进行，只是不再把你正在看的列表顶回顶部。");
+
+        ImGui.Spacing();
 
         var remember = this.plugin.Config.RememberListScroll;
         if (ImGui.Checkbox("记住看到哪里（下次打开接着看）###RememberScroll", ref remember))
@@ -25,22 +33,6 @@ internal sealed class InstallerTab
             this.plugin.SetRememberListScroll(remember);
         }
 
-        ImGui.Separator();
-        ImGui.TextWrapped("实验 / 诊断（用来定位那个列表子窗口，以及「重载把列表顶掉」的问题）");
-
-        var probe = this.plugin.InstallerProbe;
-        ImGui.BulletText($"结构体自检：{probe.CtxVerdict}");
-        ImGui.BulletText($"活窗口数：{(probe.LiveWindows < 0 ? "—" : probe.LiveWindows.ToString())}（窗口表里还积压着旧窗口）");
-        ImGui.BulletText($"列表子窗口：{probe.ListVerdict}");
-        ImGui.BulletText($"最近读到滚动值：{probe.LastScrollY:F0}");
-        ImGui.BulletText($"防刷新顶飞：{probe.MaskVerdict}");
-        ImGui.BulletText($"窗口清单 dump：{probe.DumpPath}");
-
-        if (ImGui.Button("测试：触发一次仓库重载###ProbeReload"))
-        {
-            Plugin.Chat?.Print(probe.TriggerRepoReload()
-                ? "[FireGaze] 已触发一次仓库重载（看着安装器列表，看它会不会被顶回顶部）"
-                : "[FireGaze] 触发失败，看 dalamud.log");
-        }
+        ImGui.TextDisabled("关掉窗口再打开，列表会回到上次的位置。");
     }
 }
