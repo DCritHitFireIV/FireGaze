@@ -71,6 +71,19 @@ public sealed class Configuration : IPluginConfiguration
 
     public bool BlockerWriteLog { get; set; } = true;
 
+    // ---------------- 安装器窗口位置记忆 ----------------
+
+    /// <summary>是否记住插件安装器窗口的位置/大小（下次在原处打开）。</summary>
+    public bool RememberInstallerWindow { get; set; } = true;
+
+    public float? InstallerWindowX { get; set; }
+
+    public float? InstallerWindowY { get; set; }
+
+    public float? InstallerWindowW { get; set; }
+
+    public float? InstallerWindowH { get; set; }
+
     public int BlockedCount { get; set; }
 
     /// <summary>最近被拦下的来源（新的在前，最多 <see cref="MaxRecentBlocked"/> 条）。</summary>

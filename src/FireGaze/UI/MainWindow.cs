@@ -16,7 +16,7 @@ public enum MainTab
 internal sealed class MainWindow : Window
 {
     private readonly RepoAuditTab repoAuditTab;
-    private readonly BlockerTab? blockerTab;
+    private readonly BlockerTab blockerTab;
     private readonly TranslateTab translateTab;
 
     private MainTab? pendingSelect;
@@ -33,10 +33,7 @@ internal sealed class MainWindow : Window
 
         this.repoAuditTab = new RepoAuditTab(plugin);
         this.translateTab = new TranslateTab(plugin);
-        if (Plugin.BlockerFeatureEnabled)
-        {
-            this.blockerTab = new BlockerTab(plugin);
-        }
+        this.blockerTab = new BlockerTab(plugin);
     }
 
     /// <summary>请求下一帧选中某个页签（由 Plugin.OpenWindow 调用）。</summary>
@@ -68,14 +65,12 @@ internal sealed class MainWindow : Window
                 ImGui.EndTabItem();
             }
 
-            if (Plugin.BlockerFeatureEnabled)
+            // 页签常驻（窗口位置记忆不依赖拦截功能开不开）；拦截开关被下时页内会隐藏那一节。
+            flags = this.pendingSelect == MainTab.Blocker ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            if (ImGui.BeginTabItem("插件安装器", flags))
             {
-                flags = this.pendingSelect == MainTab.Blocker ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-                if (ImGui.BeginTabItem("列表刷新拦截", flags))
-                {
-                    this.blockerTab!.Draw();
-                    ImGui.EndTabItem();
-                }
+                this.blockerTab.Draw();
+                ImGui.EndTabItem();
             }
 
             ImGui.EndTabBar();

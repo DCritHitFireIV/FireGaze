@@ -3,7 +3,7 @@ using FireGaze.RepoAudit;
 
 namespace FireGaze.UI;
 
-/// <summary>「列表刷新拦截」页。</summary>
+/// <summary>「插件安装器」页：列表刷新拦截 + 安装器窗口位置记忆。</summary>
 internal sealed class BlockerTab
 {
     private readonly Plugin plugin;
@@ -14,6 +14,25 @@ internal sealed class BlockerTab
     }
 
     public void Draw()
+    {
+        var drewSection = false;
+
+        if (Plugin.BlockerFeatureEnabled)
+        {
+            this.DrawBlockerSection();
+            drewSection = true;
+        }
+
+        if (drewSection)
+        {
+            ImGui.Separator();
+            ImGui.Spacing();
+        }
+
+        this.DrawWindowSection();
+    }
+
+    private void DrawBlockerSection()
     {
         var config = this.plugin.Config;
 
@@ -59,7 +78,7 @@ internal sealed class BlockerTab
             return;
         }
 
-        if (ImGui.BeginChild("###BlockedList", new System.Numerics.Vector2(0, 160), true))
+        if (ImGui.BeginChild("###BlockedList", new System.Numerics.Vector2(0, 140), true))
         {
             foreach (var line in sources)
             {
@@ -68,5 +87,19 @@ internal sealed class BlockerTab
         }
 
         ImGui.EndChild();
+    }
+
+    private void DrawWindowSection()
+    {
+        ImGui.Text("安装器窗口位置");
+
+        var remember = this.plugin.Config.RememberInstallerWindow;
+        if (ImGui.Checkbox("记住窗口位置（下次在原处打开）###RememberWin", ref remember))
+        {
+            this.plugin.SetRememberInstallerWindow(remember);
+        }
+
+        ImGui.TextDisabled("拖动或缩放后自动记住；位置跑到屏幕外时会夹回可见范围。");
+        ImGui.TextDisabled(this.plugin.InstallerWindowNote);
     }
 }

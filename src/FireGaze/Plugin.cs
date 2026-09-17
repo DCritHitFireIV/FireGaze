@@ -258,6 +258,25 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>最近一次「放行」的原因（供界面显示，便于验证手动刷新有没有生效）。</summary>
     public string LastAllowNote => this.lastAllowNote;
 
+    /// <summary>已记住的安装器窗口位置（界面显示用）。</summary>
+    public string InstallerWindowNote
+    {
+        get
+        {
+            var c = this.Config;
+            if (c.InstallerWindowX is not { } x || c.InstallerWindowY is not { } y)
+            {
+                return "尚未记录位置（打开一次安装器即可）";
+            }
+
+            var size = c.InstallerWindowW is { } w && c.InstallerWindowH is { } h
+                ? $" · {w:F0}×{h:F0}"
+                : string.Empty;
+
+            return $"已记录：{x:F0}, {y:F0}{size}";
+        }
+    }
+
     /// <summary>最近拦下的来源。</summary>
     public IReadOnlyList<string> RecentBlockedSources
     {
@@ -604,6 +623,7 @@ public sealed class Plugin : IDalamudPlugin
     private static bool InstallerDrawPrefix()
     {
         instance?.NoteInstallerVisible();
+        instance?.NoteInstallerWindowRect();
         return true;
     }
 
@@ -614,6 +634,10 @@ public sealed class Plugin : IDalamudPlugin
         // 于是「打开安装器触发的那次刷新」依旧会被跳过（用户没有点过任何东西）。
         instance?.ResetUserActionGrace();
         instance?.NoteInstallerVisible();
+
+        // 此刻（WindowHost 在本帧的 ImGui.Begin 之前调用 OnOpen）设置「下一个窗口」的位置是安全的：
+        // 后面到 Begin 之间只有本窗口的 PreDraw（无操作）与 ApplyConditionals（只发窗口属性）。
+        instance?.RestoreInstallerWindowRect();
         return true;
     }
 
@@ -686,6 +710,96 @@ public sealed class Plugin : IDalamudPlugin
 
     /// <summary>清空「用户操作」放行窗口（窗口每次打开时调用）。</summary>
     private void ResetUserActionGrace() => Interlocked.Exchange(ref this.userActionTicks, 0);
+
+    // ---------------------------------------------------------- 安装器窗口位置
+
+    /// <summary>开关：是否记住安装器窗口位置。</summary>
+    public void SetRememberInstallerWindow(bool remember)
+    {
+        this.Config.RememberInstallerWindow = remember;
+        this.SaveConfig();
+    }
+
+    /// <summary>
+    /// 窗口打开时恢复上次的位置/大小（在 <c>ImGui.Begin</c> 之前发 SetNextWindow，所以不会闪）。
+    /// 位置跑到屏幕外（换分辨率/显示器、卫月窗口被拖出过）时夹回可见范围。
+    /// </summary>
+    private void RestoreInstallerWindowRect()
+    {
+        try
+        {
+            var config = this.Config;
+            if (!config.RememberInstallerWindow)
+            {
+                return;
+            }
+
+            if (config.InstallerWindowX is not { } x || config.InstallerWindowY is not { } y)
+            {
+                return;
+            }
+
+            var pos = new System.Numerics.Vector2(x, y);
+
+            var viewport = ImGui.GetMainViewport();
+            var workPos = viewport.WorkPos;
+            var workSize = viewport.WorkSize;
+            if (workSize.X > 1f && workSize.Y > 1f)
+            {
+                pos.X = Math.Clamp(pos.X, workPos.X - 4f, workPos.X + workSize.X - 120f);
+                pos.Y = Math.Clamp(pos.Y, workPos.Y - 4f, workPos.Y + workSize.Y - 40f);
+            }
+
+            ImGui.SetNextWindowPos(pos, ImGuiCond.Always);
+
+            if (config.InstallerWindowW is { } w && config.InstallerWindowH is { } h && w > 320f && h > 240f)
+            {
+                ImGui.SetNextWindowSize(new System.Numerics.Vector2(w, h), ImGuiCond.Always);
+            }
+
+            Log.Debug($"[FireGaze] 恢复安装器窗口位置：{pos.X:F0}, {pos.Y:F0}");
+        }
+        catch (Exception e)
+        {
+            Log.Debug(e, "[FireGaze] 恢复安装器窗口位置失败");
+        }
+    }
+
+    /// <summary>记录安装器窗口当前的位置/大小（拖动/缩放后立即生效，落盘走 SaveConfig 的节流）。</summary>
+    private void NoteInstallerWindowRect()
+    {
+        try
+        {
+            var config = this.Config;
+            if (!config.RememberInstallerWindow)
+            {
+                return;
+            }
+
+            var pos = ImGui.GetWindowPos();
+            var size = ImGui.GetWindowSize();
+            if (float.IsNaN(pos.X) || float.IsNaN(pos.Y) || float.IsNaN(size.X) || float.IsNaN(size.Y))
+            {
+                return;
+            }
+
+            if (config.InstallerWindowX == pos.X && config.InstallerWindowY == pos.Y &&
+                config.InstallerWindowW == size.X && config.InstallerWindowH == size.Y)
+            {
+                return;
+            }
+
+            config.InstallerWindowX = pos.X;
+            config.InstallerWindowY = pos.Y;
+            config.InstallerWindowW = size.X;
+            config.InstallerWindowH = size.Y;
+            this.SaveConfig(force: false);
+        }
+        catch (Exception e)
+        {
+            Log.Debug(e, "[FireGaze] 记录安装器窗口位置失败");
+        }
+    }
 
     /// <summary>安装器是否开着：反射读窗口 IsOpen 为准，Draw/Open 记录做兜底（刚关掉的那一两帧）。</summary>
     private bool IsInstallerVisible()
