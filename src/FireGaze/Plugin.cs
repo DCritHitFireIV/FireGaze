@@ -305,12 +305,20 @@ public sealed class Plugin : IDalamudPlugin
 
     // ------------------------------------------------------------------ 安装器列表浏览位置
 
-    /// <summary>开关：是否记住列表浏览位置。</summary>
+    /// <summary>开关：是否记住列表浏览位置（关掉时把已记住的位置一并清掉，等于「忘掉」）。</summary>
     public void SetRememberListScroll(bool remember)
     {
         this.Config.RememberListScroll = remember;
+        if (!remember)
+        {
+            this.Config.ListScrollY = null;
+        }
+
         this.SaveConfig();
     }
+
+    /// <summary>设置页要用的安装器功能状态（只读）。</summary>
+    internal UI.InstallerListScroll InstallerFeatures => this.installerListScroll;
 
     /// <summary>开关：是否拦住插件安装器的自动刷新。</summary>
     public void SetBlockInstallerAutoRefresh(bool block)

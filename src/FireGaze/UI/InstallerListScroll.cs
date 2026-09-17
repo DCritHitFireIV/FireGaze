@@ -79,6 +79,7 @@ internal sealed class InstallerListScroll
     private int missedFrames;
     private int restoreGraceFrames;
     private long maskedRuns;
+    private DateTime lastMaskUtc;
     private ImGuiWindowPtr listWindow = ImGuiWindowPtr.Null;
     private RestorePhase phase = RestorePhase.Idle;
     private float restoreTarget;
@@ -366,6 +367,7 @@ internal sealed class InstallerListScroll
         }
 
         this.maskedRuns++;
+        this.lastMaskUtc = DateTime.Now;
         if (!this.loggedMask)
         {
             this.loggedMask = true;
@@ -375,6 +377,24 @@ internal sealed class InstallerListScroll
         {
             Plugin.Log.Debug($"[FireGaze] 已拦住第 {this.maskedRuns} 次自动刷新");
         }
+    }
+
+    /// <summary>给设置页用的一行状态（用户可见）。</summary>
+    public string StatusText()
+    {
+        if (this.layoutChecked && !this.layoutOk)
+        {
+            return "本次已停用（与当前卫月版本不兼容，详见日志）";
+        }
+
+        if (this.phase == RestorePhase.GivenUp)
+        {
+            return "已生效 · 上次打开时的列表位置没能恢复（详见日志）";
+        }
+
+        return this.maskedRuns > 0
+            ? $"已生效 · 本次已拦下 {this.maskedRuns} 次自动刷新（最近 {this.lastMaskUtc:HH:mm}）"
+            : "已生效 · 本会话还没遇到后台自动刷新";
     }
 
     // ------------------------------------------------------------------ 结构体自检 / 反射

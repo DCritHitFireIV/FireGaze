@@ -14,7 +14,11 @@ internal sealed class InstallerTab
 
     public void Draw()
     {
-        ImGui.TextWrapped("让插件安装器别再自己刷新：自动重载不再把列表和你的位置顶掉，并且记住你上次看到哪里。");
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "插件安装器会在后台刷新插件仓库，刷新时列表会被重置回顶部。下面的开关用来去掉这种打断："
+            + "它们只影响列表显示，不会阻止插件更新、也不影响联网。");
+
         ImGui.Separator();
 
         var block = this.plugin.Config.BlockInstallerAutoRefresh;
@@ -23,7 +27,13 @@ internal sealed class InstallerTab
             this.plugin.SetBlockInstallerAutoRefresh(block);
         }
 
-        ImGui.TextDisabled("刷新仍在后台进行，只是不再把你正在看的列表顶回顶部。");
+        ImGui.Indent();
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            block
+                ? "开启中：后台刷新照常进行，但不会再把你正在看的列表顶回顶部。"
+                : "已关闭：后台刷新时，列表和滚动位置会被重置回顶部。");
+        ImGui.Unindent();
 
         ImGui.Spacing();
 
@@ -33,6 +43,25 @@ internal sealed class InstallerTab
             this.plugin.SetRememberListScroll(remember);
         }
 
-        ImGui.TextDisabled("关掉窗口再打开，列表会回到上次的位置。");
+        ImGui.Indent();
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            remember
+                ? "开启中：关掉窗口再打开，列表会回到上次的位置。"
+                : "已关闭：每次都从列表顶部开始。");
+
+        if (remember && !block)
+        {
+            UiHelpers.ColoredWrapped(
+                UiHelpers.Warn,
+                "提示：上面那项关着时，后台刷新可能把记住的位置清零，这一项就会时灵时不灵。");
+        }
+
+        ImGui.Unindent();
+
+        ImGui.Spacing();
+        ImGui.Separator();
+        UiHelpers.ColoredWrapped(UiHelpers.Muted, "状态：" + this.plugin.InstallerFeatures.StatusText());
+        UiHelpers.ColoredWrapped(UiHelpers.Muted, "改动立即保存，下次打开插件安装器时生效。");
     }
 }
