@@ -94,6 +94,7 @@ internal sealed class RepoAuditTab
         this.EnsureList();
         this.EnsureInstalledIndex();
         this.FillInstalledCounts();
+        var tSetup = this.drawWatch.ElapsedMilliseconds;
 
         // ---------------- 说明（压到两行以内） ----------------
         ImGui.TextWrapped("扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。");
@@ -357,6 +358,8 @@ internal sealed class RepoAuditTab
             selectedHidden = this.selected.Count(url => !visible.Contains(url));
         }
 
+        var tFilter = this.drawWatch.ElapsedMilliseconds;
+
         // ---------------- 操作工具条 ----------------
         this.DrawActionBar(selectedCount, selectedHidden, snapshot);
 
@@ -599,13 +602,16 @@ internal sealed class RepoAuditTab
 
         this.DrawDeleteConfirmPopup();
 
-        // 自计时：本页一帧超过 50ms 就在日志里点名（定位卡顿用，最多每 5 秒报一次）
+        // 自计时：本页一帧超过 50ms 就在日志里点名（定位卡顿用，最多每 5 秒报一次）；带三段细分
         this.drawWatch.Stop();
-        if (this.drawWatch.ElapsedMilliseconds > 50
+        var tTotal = this.drawWatch.ElapsedMilliseconds;
+        if (tTotal > 50
             && DateTime.Now - this.lastSlowDrawLog > TimeSpan.FromSeconds(5))
         {
             this.lastSlowDrawLog = DateTime.Now;
-            Plugin.Log.Warning($"[FireGaze] 仓库体检页这一帧用了 {this.drawWatch.ElapsedMilliseconds}ms（{this.items.Count} 个库）");
+            Plugin.Log.Warning(
+                $"[FireGaze] 仓库体检页这一帧用了 {tTotal}ms（{this.items.Count} 个库"
+                + $" · 准备 {tSetup}ms / 控件 {tFilter - tSetup}ms / 表格 {tTotal - tFilter}ms）");
         }
     }
 
@@ -1484,7 +1490,8 @@ internal sealed class RepoAuditTab
     private void SetStatus(string? message, bool isError)
     {
         this.statusVersion++;
-        this.SetStatus(message, isError);
+        this.statusMessage = message;
+        this.statusIsError = isError;
     }
 
     /// <summary>第一步：只查不下载——列出「声明了图标、但图标还没缓存下来」的已装插件。</summary>
