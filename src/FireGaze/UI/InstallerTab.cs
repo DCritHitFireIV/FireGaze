@@ -22,7 +22,7 @@ internal sealed class InstallerTab
         ImGui.Separator();
 
         var block = this.plugin.Config.BlockInstallerAutoRefresh;
-        if (ImGui.Checkbox("防止打开插件管理器自动刷新###BlockAutoRefresh", ref block))
+        if (ImGui.Checkbox("拦截打开插件管理器时的自动刷新###BlockAutoRefresh", ref block))
         {
             this.plugin.SetBlockInstallerAutoRefresh(block);
         }
