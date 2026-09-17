@@ -109,7 +109,7 @@ public sealed class Plugin : IDalamudPlugin
             "/firegaze",
             new CommandInfo(this.OnCommand)
             {
-                HelpMessage = "打开 FireGaze 窗口；子命令：on|off|open|log|zh|update",
+                HelpMessage = "打开 FireGaze 窗口",
             });
         this.AddCommand(
             "/nar",
