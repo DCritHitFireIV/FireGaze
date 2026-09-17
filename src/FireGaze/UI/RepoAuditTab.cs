@@ -85,8 +85,8 @@ internal sealed class RepoAuditTab
     /// <summary>收尾期最多再等这么久（别为了最后 1～2 个图标干等一分钟）。</summary>
     private static readonly TimeSpan IconTailGrace = TimeSpan.FromSeconds(4);
 
-    /// <summary>至少要已经完成这么多个，才启用收尾期（小批量不适用，免得把正常的慢请求也砍了）。</summary>
-    private const int IconTailMinDone = 8;
+    /// <summary>至少已经发动过这么多个才启用收尾期（一两个图标的小批量不适用，免得把正常的慢请求也砍了）。</summary>
+    private const int IconTailMinRequested = 4;
 
     private bool iconCheckDone;
     private bool iconDownloadRunning;
@@ -1750,11 +1750,11 @@ internal sealed class RepoAuditTab
             this.nextIconKick = DateTime.Now.AddMilliseconds(IconKickMs);
         }
 
-        // 3) 收尾期：待发队列空了、只剩少数几个还在飞（且已经完成了一批）时，只给 4 秒
+        // 3) 收尾期：待发队列空了、只剩少数几个还在飞（且已经发过几个）时，只给 4 秒
         var remaining = this.iconWaiting.Count + this.iconInFlight.Count;
         var tail = this.iconWaiting.Count == 0
                    && this.iconInFlight.Count is > 0 and <= IconTailMax
-                   && this.iconDownloadGot + this.iconDownloadFailed >= IconTailMinDone;
+                   && this.iconDownloadRequested >= IconTailMinRequested;
 
         if (tail)
         {
