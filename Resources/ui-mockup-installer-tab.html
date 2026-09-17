@@ -2,12 +2,13 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>FireGaze 插件安装器页 — 2 状态帧 mockup</title>
+<title>FireGaze 插件安装器页 — 3 状态帧 mockup（与实现一致）</title>
 <style>
   :root {
     --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
     --text: #e4e4e4; --muted: #909090; --accent: #ffb35c;
     --btn: #3c3c3c; --frame: #202020;
+    --good: #73d973; --warn: #f2bf5c; --bad: #f27a7a;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -15,8 +16,8 @@
     font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
     font-size: 15px; line-height: 1.4;
   }
-  .stage { padding: 20px; display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
-  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; }
+  .stage { padding: 20px; display: flex; gap: 22px; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 700px; }
   .window {
     width: 700px; height: 620px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 4px;
     display: flex; flex-direction: column; overflow: hidden;
@@ -24,7 +25,7 @@
   .titlebar { height: 30px; background: var(--title); display: flex; align-items: center; padding: 0 10px; font-weight: 600; border-bottom: 1px solid var(--border); }
   .titlebar .brand { color: var(--accent); }
   .titlebar .sub { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 12px; }
-  .body { padding: 8px 12px 10px; display: flex; flex-direction: column; gap: 6px; min-height: 0; flex: 1; }
+  .body { padding: 8px 12px 10px; display: flex; flex-direction: column; gap: 6px; min-height: 0; flex: 1; overflow: hidden; }
   .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); }
   .tab { padding: 4px 12px; color: var(--muted); }
   .tab.active { color: var(--text); background: var(--panel); border: 1px solid var(--border); border-bottom-color: transparent; border-radius: 3px 3px 0 0; margin-bottom: -1px; }
@@ -36,19 +37,21 @@
   .check { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-block; position: relative; background: #2a2a2a; flex: none; }
   .check.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 1px; }
   button { font: inherit; color: var(--text); background: var(--btn); border: 1px solid #4d4d4d; border-radius: 3px; padding: 2px 8px; font-size: 13px; }
+  button.disabled { color: #7c7c7c; background: #2c2c2c; border-color: #3a3a3a; }
   .frame { border: 1px solid var(--border); border-radius: 3px; background: #1c1c1c; padding: 6px 8px; }
-  .frame.list { height: 150px; overflow: hidden; }
+  .frame.list { overflow: hidden; }
   .mono { font-variant-numeric: tabular-nums; }
-  .dim { color: #6f6f6f; }
+  .good { color: var(--good); } .warn { color: var(--warn); } .dim { color: #6f6f6f; }
   .sect { display: flex; align-items: center; }
+  .scrollhint { height: 3px; background: #4d4d4d; border-radius: 2px; width: 60%; margin: 2px 0 0 20%; }
 </style>
 </head>
 <body>
 <div class="stage">
 
-  <!-- ============ 帧 1：默认（关） ============ -->
+  <!-- ============ 帧 1：真实默认态 ============ -->
   <div>
-    <p class="caption">帧 1 — 默认状态：开关未勾选、还没有跳过记录、钩子未挂（状态框在页面最下方）</p>
+    <p class="caption">帧 1 — 真实默认态：拦截未勾、记住看到哪里未勾（新默认＝关）、写日志默认勾；两个开关都关 → 不挂钩子；记录框收缩为 1 行</p>
     <div class="window">
       <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 刷新拦截</span></div>
       <div class="body">
@@ -61,18 +64,18 @@
 
         <div class="chip"><span class="check"></span>禁止安装器打开期间的列表更新</div>
         <div class="chip"><span class="check"></span>记住看到哪里（下次打开接着看）</div>
-        <div class="chip"><span class="check"></span>把记录写进 dalamud.log</div>
+        <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
 
         <div class="sep"></div>
 
-        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>清空记录</button></div>
-        <div class="frame list"><span class="dim">（还没有跳过过）</span></div>
+        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>复制诊断</button><button class="disabled">清空记录</button></div>
+        <div class="frame list" style="height:36px"><span class="dim">（还没有跳过）</span></div>
 
         <div class="sep"></div>
 
         <div class="frame">
-          <div>钩子状态：尚未挂钩</div>
-          <div class="mono">已跳过列表重建：0 次 · 最近 —</div>
+          <div class="warn">钩子状态：未挂钩（两个开关都关着）</div>
+          <div class="mono">已跳过列表重建：—</div>
           <div class="mono">已跳过「打开安装器」的仓库重载：—</div>
           <div class="mono">已挡下「正在加载插件…」替换：—</div>
           <div class="dim">最近一次放行：—</div>
@@ -83,7 +86,7 @@
 
   <!-- ============ 帧 2：开启 + 有记录 ============ -->
   <div>
-    <p class="caption">帧 2 — 开启后：记录列表在上、钩子状态框在最下；长状态行（钩子清单）会换行</p>
+    <p class="caption">帧 2 — 两个开关都开：钩子就绪（绿）；计数 0 值统一显示「—」；状态框按实际行数算高（含最后一行放行）</p>
     <div class="window">
       <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 刷新拦截</span></div>
       <div class="body">
@@ -100,27 +103,65 @@
 
         <div class="sep"></div>
 
-        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>清空记录</button></div>
-        <div class="frame list">
-          <div class="mono">13:13:56 安装器打开中</div>
-          <div class="mono">13:10:20 安装器打开中</div>
-          <div class="mono">13:05:35 安装器打开中</div>
-          <div class="mono">13:03:28 安装器打开中</div>
-          <div class="mono">13:03:17 安装器打开中</div>
-          <div class="mono">13:03:12 安装器打开中</div>
-          <div class="mono">13:03:07 安装器打开中</div>
+        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
+        <div class="frame list" style="height:130px">
+          <div class="mono">13:31:02 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:29:44 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:27:10 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:25:35 跳过列表重建（安装器打开中）</div>
         </div>
 
         <div class="sep"></div>
 
         <div class="frame">
-          <div>钩子状态：已挂钩：firegaze.installer.draw / firegaze.installer.open /
-            firegaze.installer.footer / firegaze.installer.rebuild / firegaze.installer.categories /
-            firegaze.installer.list / firegaze.installer.loading</div>
-          <div class="mono">已跳过列表重建：23 次 · 最近 13:13:56</div>
-          <div class="mono">已跳过「打开安装器」的仓库重载：9 次 · 最近 13:13:10</div>
-          <div class="mono">已挡下「正在加载插件…」替换：2 次 · 最近 13:10:12</div>
-          <div class="dim">最近一次放行：用户操作（点过安装器底部按钮）· 13:12:30</div>
+          <div class="good">钩子状态：已就绪（7/7）</div>
+          <div class="mono">已跳过列表重建：23 次 · 最近 13:31:02</div>
+          <div class="mono">已跳过「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
+          <div class="mono">已挡下「正在加载插件…」替换：2 次 · 最近 13:28:12</div>
+          <div class="dim">最近一次放行：用户操作（点过安装器底部按钮）· 13:30:05</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 帧 3：满态 / 异常态 ============ -->
+  <div>
+    <p class="caption">帧 3 — 满态与异常：记录 20 条（列表内滚动条）、钩子部分失败（橙字、长行折行）、框高按实际行数＋余量</p>
+    <div class="window">
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 刷新拦截</span></div>
+      <div class="body">
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab active">插件安装器</div></div>
+
+        <div>浏览插件安装器时，拦下「正在加载插件…」。</div>
+        <div class="hint">有需要可以手动刷新插件列表。</div>
+
+        <div class="sep"></div>
+
+        <div class="chip"><span class="check on"></span>禁止安装器打开期间的列表更新</div>
+        <div class="chip"><span class="check on"></span>记住看到哪里（下次打开接着看）</div>
+        <div class="chip"><span class="check on"></span>把记录写进 dalamud.log</div>
+
+        <div class="sep"></div>
+
+        <div class="sect"><span>最近跳过的记录</span><span class="grow"></span><button>复制诊断</button><button>清空记录</button></div>
+        <div class="frame list" style="height:130px">
+          <div class="mono">13:31:02 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:29:44 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:27:10 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:25:35 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:23:02 跳过列表重建（安装器打开中）</div>
+          <div class="mono">13:21:40 跳过列表重建（安装器打开中）</div>
+          <div class="scrollhint"></div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="frame">
+          <div class="warn">钩子状态：部分失败：firegaze.installer.categories、firegaze.installer.list</div>
+          <div class="mono">已跳过列表重建：23 次 · 最近 13:31:02</div>
+          <div class="mono">已跳过「打开安装器」的仓库重载：9 次 · 最近 13:31:00</div>
+          <div class="mono">已挡下「正在加载插件…」替换：—</div>
+          <div class="dim">最近一次放行：—</div>
         </div>
       </div>
     </div>

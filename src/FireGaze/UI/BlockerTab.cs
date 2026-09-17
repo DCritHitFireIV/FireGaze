@@ -6,10 +6,13 @@ namespace FireGaze.UI;
 /// <summary>「插件安装器」页：列表刷新拦截 + 列表浏览位置。</summary>
 internal sealed class BlockerTab
 {
-    private const string ClearButtonLabel = "清空记录";
-    private const string ClearButtonId = "###ClearBlocked";
+    private const string ClearId = "###ClearBlocked";
+    private const string CopyId = "###CopyDiag";
 
     private readonly Plugin plugin;
+
+    /// <summary>「清空记录」的二次确认截止时间（第一次点击后几秒内再点才真清）。</summary>
+    private DateTime clearArmedUntil = DateTime.MinValue;
 
     public BlockerTab(Plugin plugin)
     {
@@ -62,18 +65,50 @@ internal sealed class BlockerTab
     private void DrawRecordsSection()
     {
         ImGui.Text("最近跳过的记录");
-        ImGui.SameLine(this.RightAlignedOffsetFor(ClearButtonLabel));
-        if (ImGui.SmallButton(ClearButtonLabel + ClearButtonId))
+
+        var hasRecords = this.plugin.HasBlockerRecords;
+        var armed = DateTime.UtcNow < this.clearArmedUntil;
+
+        ImGui.SameLine(this.RightAlignedOffsetFor("复制诊断", "清空记录"));
+        if (ImGui.SmallButton("复制诊断" + CopyId))
         {
-            this.plugin.ClearBlockedRecords();
+            ImGui.SetClipboardText(this.plugin.BuildDiagnostics());
+        }
+
+        ImGui.SameLine();
+        ImGui.BeginDisabled(!hasRecords);
+        if (ImGui.SmallButton((armed ? "确认清空？" : "清空记录") + ClearId))
+        {
+            if (armed)
+            {
+                this.plugin.ClearBlockedRecords();
+                this.clearArmedUntil = DateTime.MinValue;
+            }
+            else
+            {
+                this.clearArmedUntil = DateTime.UtcNow.AddSeconds(5);
+            }
+        }
+
+        ImGui.EndDisabled();
+
+        if (armed)
+        {
+            ImGui.SameLine();
+            ImGui.TextDisabled("再点一次即清空（含计数）");
         }
 
         var sources = this.plugin.RecentBlockedSources;
-        if (ImGui.BeginChild("###BlockedList", new System.Numerics.Vector2(0, 150), true))
+        var rows = Math.Clamp(sources.Count, 1, 6);
+        var height = (ImGui.GetTextLineHeightWithSpacing() * rows)
+                     + (ImGui.GetStyle().WindowPadding.Y * 2f)
+                     + 2f;
+
+        if (ImGui.BeginChild("###BlockedList", new System.Numerics.Vector2(0, height), true))
         {
             if (sources.Count == 0)
             {
-                ImGui.TextDisabled("（还没有跳过过）");
+                ImGui.TextDisabled("（还没有跳过）");
             }
             else
             {
@@ -92,37 +127,52 @@ internal sealed class BlockerTab
     /// <summary>钩子状态（放最下面）。</summary>
     private void DrawStatusSection()
     {
-        var lines = new[]
+        var hooked = this.plugin.HookSummary.StartsWith("已就绪", StringComparison.Ordinal);
+        var allow = this.plugin.LastAllowNote;
+
+        var lines = new List<string>
         {
-            $"钩子状态：{this.plugin.BlockerStatusText}",
-            $"已跳过列表重建：{this.plugin.BlockedCount} 次 · 最近 {this.plugin.LastSkipNote}",
-            $"已跳过「打开安装器」的仓库重载：{this.plugin.OpenSkipNote}",
-            $"已挡下「正在加载插件…」替换：{this.plugin.ListSuppressNote}",
+            CounterLine("已跳过列表重建", this.plugin.BlockedCount, this.plugin.LastSkipNote),
+            CounterLine("已跳过「打开安装器」的仓库重载", this.plugin.OpenSkipCount, this.plugin.OpenSkipTime),
+            CounterLine("已挡下「正在加载插件…」替换", this.plugin.ListSuppressCount, this.plugin.ListSuppressTime),
+            string.IsNullOrEmpty(allow) ? "最近一次放行：—" : $"最近一次放行：{allow}",
         };
 
-        var height = (ImGui.GetTextLineHeightWithSpacing() * lines.Length)
+        // 高度按「实际行数 + 钩子状态那一行的可能换行余量」算，别把最后一行裁掉
+        var height = (ImGui.GetTextLineHeightWithSpacing() * (lines.Count + 2))
                      + (ImGui.GetStyle().WindowPadding.Y * 2f)
                      + 2f;
 
         if (ImGui.BeginChild("###BlockerStatus", new System.Numerics.Vector2(0, height), true))
         {
+            UiHelpers.ColoredWrapped(
+                hooked ? UiHelpers.Good : UiHelpers.Warn,
+                $"钩子状态：{this.plugin.HookSummary}");
+
             foreach (var line in lines)
             {
-                ImGui.TextUnformatted(line);
+                ImGui.TextWrapped(line);
             }
-
-            ImGui.TextDisabled(string.IsNullOrEmpty(this.plugin.LastAllowNote)
-                ? "最近一次放行：—"
-                : $"最近一次放行：{this.plugin.LastAllowNote}");
         }
 
         ImGui.EndChild();
     }
 
-    /// <summary>把下一个控件右对齐（ImGui 的 SameLine 参数是「距行首的绝对偏移」）。</summary>
-    private float RightAlignedOffsetFor(string text)
+    private static string CounterLine(string label, int count, string time)
+        => count == 0 || string.IsNullOrEmpty(time)
+            ? $"{label}：—"
+            : $"{label}：{count} 次 · 最近 {time}";
+
+    /// <summary>把若干小按钮右对齐（ImGui 的 SameLine 参数是「距行首的绝对偏移」）。</summary>
+    private float RightAlignedOffsetFor(params string[] labels)
     {
-        var width = ImGui.CalcTextSize(text).X + (ImGui.GetStyle().FramePadding.X * 2f);
+        var width = 0f;
+        foreach (var label in labels)
+        {
+            width += ImGui.CalcTextSize(label).X + (ImGui.GetStyle().FramePadding.X * 2f);
+        }
+
+        width += ImGui.GetStyle().ItemSpacing.X * (labels.Length - 1);
         return ImGui.GetContentRegionMax().X - width;
     }
 }

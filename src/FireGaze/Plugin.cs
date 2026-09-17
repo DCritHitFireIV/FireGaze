@@ -70,6 +70,7 @@ public sealed class Plugin : IDalamudPlugin
     private long installerVisibleTicks;
     private long userActionTicks;
     private string lastAllowNote = string.Empty;
+    private string? hookSummary;
     private string lastSkipNote = string.Empty;
     private string lastSuppressNote = string.Empty;
     private int listSuppressCount;
@@ -195,13 +196,13 @@ public sealed class Plugin : IDalamudPlugin
             this.ReloadTranslationTable(out _);
             this.TrackFirstSeen();
 
-            if (this.Config.BlockerMode != BlockMode.Off)
+            if (this.NeedsInstallerHooks)
             {
                 this.InstallPatches();
             }
             else
             {
-                this.BlockerStatusText = "未挂钩（模式为关闭）";
+                this.BlockerStatusText = "未挂钩（两个开关都关着）";
             }
 
             this.translateTimer.Start();
@@ -266,21 +267,42 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>累计拦截次数。</summary>
     public int BlockedCount => this.Config.BlockedCount;
 
+    /// <summary>钩子就缇情况（界面用短句：已就绪（7/7） / 部分失败：…）。</summary>
+    public string HookSummary => this.hookSummary ?? this.BlockerStatusText;
+
+    /// <summary>当前是否真的在拦（编译期下线开关 + 拦截开关都开着）。</summary>
+    private bool BlockerActive => BlockerFeatureEnabled && this.Config.BlockerMode != BlockMode.Off;
+
     /// <summary>最近一次「放行」的原因（供界面显示，便于验证手动刷新有没有生效）。</summary>
     public string LastAllowNote => this.lastAllowNote;
 
-    /// <summary>最近一次跳过列表重建/挡下加载态的时间（界面显示用）。</summary>
+    /// <summary>最近一次跳过/拦下的时间（可能为空：还没发生过）。</summary>
     public string LastSkipNote => this.lastSkipNote;
 
-    /// <summary>挡下「正在加载插件…」替换的次数与最近时间（界面显示用）。</summary>
-    public string ListSuppressNote => this.listSuppressCount == 0
-        ? "—"
-        : $"{this.listSuppressCount} 次 · 最近 {this.lastSuppressNote}";
+    /// <summary>跳过「打开安装器触发仓库重载」的次数与最近时间。</summary>
+    public int OpenSkipCount => this.openReloadSkippedCount;
 
-    /// <summary>跳过「打开安装器触发仓库重载」的次数与最近时间（界面显示用）。</summary>
-    public string OpenSkipNote => this.openReloadSkippedCount == 0
-        ? "—"
-        : $"{this.openReloadSkippedCount} 次 · 最近 {this.lastOpenSkipNote}";
+    public string OpenSkipTime => this.lastOpenSkipNote;
+
+    /// <summary>挡下「正在加载插件…」替换的次数与最近时间。</summary>
+    public int ListSuppressCount => this.listSuppressCount;
+
+    public string ListSuppressTime => this.lastSuppressNote;
+
+    /// <summary>拼一份可粘贴的诊断文本（钩子状态 + 计数 + 最近放行），写进剪贴板用。</summary>
+    public string BuildDiagnostics()
+        => string.Join(
+            "\n",
+            "FireGaze 拦截状态",
+            $"钩子：{this.HookSummary}",
+            $"钩子明细：{this.BlockerStatusText}",
+            $"已跳过列表重建：{this.Config.BlockedCount} 次（最近 {Show(this.lastSkipNote)}）",
+            $"已跳过打开安装器的仓库重载：{this.openReloadSkippedCount} 次（最近 {Show(this.lastOpenSkipNote)}）",
+            $"已挡下加载态替换：{this.listSuppressCount} 次（最近 {Show(this.lastSuppressNote)}）",
+            $"最近一次放行：{Show(this.lastAllowNote)}",
+            $"拦截开关：{(this.BlockerActive ? "开" : "关")}；记住列表位置：{(this.Config.RememberListScroll ? "开" : "关")}");
+
+    private static string Show(string text) => string.IsNullOrEmpty(text) ? "—" : text;
 
     /// <summary>最近拦下的来源。</summary>
     public IReadOnlyList<string> RecentBlockedSources
@@ -394,7 +416,7 @@ public sealed class Plugin : IDalamudPlugin
                 this.ToggleWindow();
                 break;
             case "on":
-                this.SetBlockerMode(BlockMode.Always);
+                this.SetBlockerMode(BlockMode.InstallerOpenOnly);
                 Chat.Print("[FireGaze] 已开启：安装器打开时不刷新列表");
                 break;
             case "off":
@@ -470,18 +492,44 @@ public sealed class Plugin : IDalamudPlugin
     public void SetBlockerEnabled(bool enabled)
         => this.SetBlockerMode(enabled ? BlockMode.InstallerOpenOnly : BlockMode.Off);
 
+    /// <summary>
+    /// 只要「拦截」或「记住列表位置」任一个开着，就需要钩子（两者共用安装器侧的前缀）。
+    /// 拦截关着时，拦截类钩子内部会自成空转（BlockerActive 检查），不会拦任何东西。
+    /// </summary>
+    private bool NeedsInstallerHooks
+        => BlockerFeatureEnabled && this.Config.BlockerMode != BlockMode.Off
+           || this.Config.RememberListScroll;
+
     public void SetBlockerMode(BlockMode mode)
     {
         this.Config.BlockerMode = mode;
         this.SaveConfig();
+        this.SyncPatches();
+    }
 
-        if (mode == BlockMode.Off)
+    /// <summary>开关变化后按需装/卸钩子。</summary>
+    private void SyncPatches()
+    {
+        if (!this.NeedsInstallerHooks)
         {
             this.UninstallPatches();
+
+            if (this.startupInitDone)
+            {
+                this.BlockerStatusText = "未挂钩（两个开关都关着）";
+            }
+
+            return;
         }
-        else if (this.harmony is null && this.startupInitDone)
+
+        if (this.harmony is null && this.startupInitDone)
         {
             this.InstallPatches();
+        }
+        else if (this.harmony is not null)
+        {
+            // 已经挂着；只需刷新「已就绪 N/7」的显示
+            this.BlockerStatusText = this.hookSummary ?? this.BlockerStatusText;
         }
     }
 
@@ -517,18 +565,32 @@ public sealed class Plugin : IDalamudPlugin
             this.Config.RecentBlockedSources.Clear();
         }
 
+        // 同屏显示的几个内存计数/时间戳一起清，否则清完会出现「0 次 · 最近 13:13:56」这种自相矛盾
+        this.lastSkipNote = string.Empty;
+        this.lastAllowNote = string.Empty;
+        this.lastSuppressNote = string.Empty;
+        this.lastOpenSkipNote = string.Empty;
+        this.listSuppressCount = 0;
+        this.openReloadSkippedCount = 0;
+        this.listLoadingForced = false;
+
         this.SaveConfig();
+    }
+
+    /// <summary>是否还有可清空的记录/计数（界面上把「清空记录」置灰用）。</summary>
+    public bool HasBlockerRecords
+    {
+        get
+        {
+            lock (this.recordLock)
+            {
+                return this.Config.RecentBlockedSources.Count > 0;
+            }
+        }
     }
 
     private void InstallPatches()
     {
-        if (!BlockerFeatureEnabled)
-        {
-            this.BlockerStatusText = "已暂时关闭（在修复中）";
-            Log.Information("[FireGaze] 列表刷新拦截功能暂时关闭（在修复中），本次不挂钩子");
-            return;
-        }
-
         if (this.harmony is not null)
         {
             // 已经挂过了（切换模式时重复调用）
@@ -590,10 +652,15 @@ public sealed class Plugin : IDalamudPlugin
             // 免得后台重载期间把整份列表替换成「正在加载插件…」。
             this.PatchInstallerHook(installerType, "DrawPluginListLoading", "firegaze.installer.loading", listLoadingPostfix, patched, failed, true);
 
-            this.BlockerStatusText = patched.Count == 0
-                ? "未挂钩（未找到目标方法）"
-                : "已挂钩：" + string.Join(" / ", patched) +
-                  (failed.Count > 0 ? $"（失败：{string.Join(" / ", failed)}）" : string.Empty);
+            var ok = patched.Count;
+            var total = ok + failed.Count;
+            this.hookSummary = failed.Count == 0
+                ? $"已就绪（{ok}/{total}）"
+                : $"部分失败：{string.Join("、", failed)}";
+
+            this.BlockerStatusText = failed.Count == 0
+                ? "已挂钩：" + string.Join(" / ", patched)
+                : $"已挂钩：{string.Join(" / ", patched)}（失败：{string.Join(" / ", failed)}）";
             Log.Information($"[FireGaze] {this.BlockerStatusText}");
         }
         catch (Exception e)
@@ -712,7 +779,7 @@ public sealed class Plugin : IDalamudPlugin
     {
         try
         {
-            if (this.Config.BlockerMode == BlockMode.Off)
+            if (!this.BlockerActive)
             {
                 return;
             }
@@ -772,6 +839,7 @@ public sealed class Plugin : IDalamudPlugin
     {
         this.Config.RememberListScroll = remember;
         this.SaveConfig();
+        this.SyncPatches();
     }
 
     /// <summary>
@@ -780,7 +848,7 @@ public sealed class Plugin : IDalamudPlugin
     /// </summary>
     private bool ShouldRunInstallerOnOpen()
     {
-        if (this.Config.BlockerMode == BlockMode.Off)
+        if (!this.BlockerActive)
         {
             return true;
         }
@@ -908,7 +976,7 @@ public sealed class Plugin : IDalamudPlugin
             return;
         }
 
-        if (!this.sawListReady || this.Config.BlockerMode == BlockMode.Off || !this.IsInstallerVisible())
+        if (!this.sawListReady || !this.BlockerActive || !this.IsInstallerVisible())
         {
             return;
         }
@@ -945,7 +1013,7 @@ public sealed class Plugin : IDalamudPlugin
     {
         try
         {
-            if (this.Config.BlockerMode == BlockMode.Off)
+            if (!this.BlockerActive)
             {
                 return true;
             }
@@ -975,7 +1043,7 @@ public sealed class Plugin : IDalamudPlugin
                 this.Config.BlockedCount++;
                 count = this.Config.BlockedCount;
 
-                var line = $"{DateTime.Now:HH:mm:ss} 安装器打开中";
+                var line = $"{DateTime.Now:HH:mm:ss} 跳过列表重建（安装器打开中）";
                 this.Config.RecentBlockedSources.Insert(0, line);
                 while (this.Config.RecentBlockedSources.Count > Configuration.MaxRecentBlocked)
                 {

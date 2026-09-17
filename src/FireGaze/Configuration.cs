@@ -73,8 +73,8 @@ public sealed class Configuration : IPluginConfiguration
 
     // ---------------- 安装器列表浏览位置 ----------------
 
-    /// <summary>是否记住插件安装器列表的浏览位置（下次打开接着看）。</summary>
-    public bool RememberListScroll { get; set; } = true;
+    /// <summary>是否记住插件安装器列表的浏览位置（下次打开接着看）。默认关（与拦截开关一致：零足迹，由用户自己开）。</summary>
+    public bool RememberListScroll { get; set; }
 
     /// <summary>上次离开时列表的滚动位置（像素）。</summary>
     public float? ListScrollY { get; set; }
