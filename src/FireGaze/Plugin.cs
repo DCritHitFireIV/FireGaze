@@ -193,6 +193,9 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>插件配置目录（备份写在这里的 backups/ 下）。</summary>
     public string ConfigDirectory { get; }
 
+    /// <summary>诊断用：与 <see cref="ConfigDirectory"/> 相同（dalamudUI.ini 就在它上两级）。</summary>
+    public static string ConfigDirectoryForDiagnostics => instance.ConfigDirectory;
+
     /// <summary>翻译词表。</summary>
     public TranslationTable Table { get; }
 

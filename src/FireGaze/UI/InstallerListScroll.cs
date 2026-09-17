@@ -9,38 +9,42 @@ namespace FireGaze.UI;
 /// </summary>
 /// <remarks>
 /// 列表是安装器窗口里的一层子窗口（<c>InstallerCategories</c> → <c>ScrollingPlugins</c>），
-/// 而 ImGui 不持久化 child window（实测 <c>dalamudUI.ini</c> 里只有父窗口 <c>###XlPluginInstaller</c>），
-/// 所以这里每帧从 ImGui 里把那层子窗口找出来，直接读/写它的 <c>Scroll</c>：
-///   · 打开安装器时（窗口从"没在画"变成"在画"）记下待恢复标记；
-///   · 等列表内容出来（仓库重载期间列表会被「正在加载插件仓库中…」替掉，此时没有内容），
-///     且用户还没自己滚过，就把上次的位置写回去；
-///   · 平时每帧读当前位置存进配置（内存每帧、落盘走 SaveConfig 的节流）。
-/// 全程只用 Dalamud 公开的 ImGui 绑定（<c>ImGuiP</c>），找不到窗口就静默跳过——
-/// 失效只会"记不住位置"，不会影响游戏、也不会碰别的插件。
+/// 而 ImGui 不持久化 child window（实测 <c>dalamudUI.ini</c> 里没有它的记录），
+/// 所以这里每帧把那个子窗口找出来、直接读/写它的 <c>Scroll</c>。
+///
+/// <para><b>只走函数调用，不读 ImGui 结构体</b>：早期版本用
+/// <c>ImGui.GetCurrentContext().Windows</c> 遍历窗口，实测读出来 16553 个窗口（绑定与运行时
+/// ImGui 的 <c>ImGuiContext</c> 偏移不一致 → 全是垃圾数据），所以改成只用
+/// <c>ImGuiP.FindWindowByName</c> / <c>FindWindowByID</c> / <c>GetID</c> 这些函数调用。</para>
+///
+/// 找不到窗口就静默跳过——失效只会"记不住位置"，不会影响游戏、也不会碰别的插件。
 /// </remarks>
 internal sealed class InstallerListScroll
 {
-    /// <summary>安装器窗口名里的稳定标记（"插件安装器###XlPluginInstaller"，### 之后那段跨语言固定）。</summary>
-    private const string InstallerWindowMark = "###XlPluginInstaller";
+    /// <summary>安装器窗口的可能名字（卫月用的是 "插件安装器###XlPluginInstaller"；带 ### 的写法各版本可能不同）。</summary>
+    private static readonly string[] InstallerNameCandidates =
+    [
+        "###XlPluginInstaller",
+        "XlPluginInstaller",
+        "插件安装器###XlPluginInstaller",
+        "Plugin Installer###XlPluginInstaller",
+    ];
 
-    /// <summary>列表外层的分类子窗口。</summary>
+    /// <summary>列表外层的分类子窗口（ImRaii.Child("InstallerCategories")）。</summary>
     private const string CategoriesChildId = "InstallerCategories";
 
-    /// <summary>真正滚动的那层子窗口（名字里带这个就跑不掉）。</summary>
+    /// <summary>真正滚动的那层子窗口（ImRaii.Child("ScrollingPlugins")）。</summary>
     private const string ListChildId = "ScrollingPlugins";
 
     private bool wasOpen;
     private bool pendingRestore;
     private int restoreGraceFrames;
-    private bool warnedLookup;
-    private bool loggedLookup;
     private bool loggedStart;
+    private bool loggedInstaller;
+    private bool loggedList;
+    private DateTime lastDump = DateTime.MinValue;
     private long frames;
     private DateTime lastHeartbeat = DateTime.UtcNow;
-    private DateTime lastDump = DateTime.MinValue;
-    private int lastWindowCount = -1;
-    private bool sawInstallerWindow;
-    private bool loggedInstaller;
 
     /// <summary>每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。</summary>
     public void Tick(Configuration config, Action saveConfig, Func<bool> isInstallerOpen)
@@ -53,16 +57,17 @@ internal sealed class InstallerListScroll
                 Plugin.Log.Information("[FireGaze] 列表位置记忆已启动（每帧检查安装器窗口，不用钩子）");
             }
 
-            this.TickCore(config, saveConfig, isInstallerOpen);
+            this.TickCore(config, saveConfig);
 
-            // 心跳：证明"还在跑"，并暴露我们这一帧能看到多少个 ImGui 窗口
             this.frames++;
             if ((DateTime.UtcNow - this.lastHeartbeat).TotalSeconds >= 60)
             {
                 this.lastHeartbeat = DateTime.UtcNow;
-                var n = ImGui.GetCurrentContext().Windows.Size;
+                var probe = string.Join(
+                    " / ",
+                    InstallerNameCandidates.Select(c => c + "=" + (ImGuiP.FindWindowByName(c).IsNull ? "x" : "v")));
                 Plugin.Log.Information(
-                    $"[FireGaze] 列表位置记忆心跳：{this.frames} 帧；本帧可见 ImGui 窗口 {n} 个；找到安装器窗口={(this.sawInstallerWindow ? "是" : "否")}");
+                    $"[FireGaze] 列表位置记忆心跳：{this.frames} 帧；安装器窗口={(this.loggedInstaller ? "找到" : "未找到")}；列表窗口={(this.loggedList ? "找到" : "未找到")}；卫月说开着={isInstallerOpen()}；候选探测：{probe}");
             }
         }
         catch (Exception e)
@@ -71,50 +76,45 @@ internal sealed class InstallerListScroll
         }
     }
 
-    private void TickCore(Configuration config, Action saveConfig, Func<bool> isInstallerOpen)
+    private void TickCore(Configuration config, Action saveConfig)
     {
-        var installer = FindInstallerWindow();
+        var installer = FindInstallerWindow(out var installerHit);
         if (installer.IsNull)
         {
             this.wasOpen = false;
             this.pendingRestore = false;
-
-            // 窗口数一变（多半就是安装器刚被画出来 / 别的插件开窗）就 dump 一次——
-            // 不再依赖 IsPluginInstallerOpen 那个反射，免得它不灵就没日志。
-            var windowCount = ImGui.GetCurrentContext().Windows.Size;
-            if (windowCount != this.lastWindowCount)
-            {
-                this.lastWindowCount = windowCount;
-
-                if ((DateTime.UtcNow - this.lastDump).TotalSeconds >= 30)
-                {
-                    this.lastDump = DateTime.UtcNow;
-                    Plugin.Log.Information(
-                        $"[FireGaze] 窗口数变成 {windowCount} 个但仍没找到安装器窗口（卫月说开着={isInstallerOpen()})，清单如下：");
-                    DumpWindows();
-                }
-            }
-
+            this.DumpOnce();
             return;
         }
 
-        // 安装器这帧有没有在画：看 LastFrameActive（每帧刷新），不要用 WasActive——
-        // 窗口关掉之后 WasActive 会一直留着 true，那样就检测不到「下一次打开」。
+        if (!this.loggedInstaller)
+        {
+            this.loggedInstaller = true;
+            Plugin.Log.Information($"[FireGaze] 找到安装器窗口：{WindowName(installer) ?? "(读不到名字)"}（候选命中：{installerHit}）");
+        }
+
+        // 安装器这帧有没有在画：LastFrameActive 每帧刷新（WasActive 关窗后会一直留着 true，不能用）
         var frame = ImGui.GetFrameCount();
-        var drawnThisFrame = installer.LastFrameActive >= frame - 1;
-        if (!drawnThisFrame)
+        if (installer.LastFrameActive < frame - 1)
         {
             this.wasOpen = false;
             this.pendingRestore = false;
             return;
         }
 
-        this.sawInstallerWindow = true;
-
-        if (!this.loggedInstaller)
+        if (!this.loggedList)
         {
-            this.loggedInstaller = true;
-            Plugin.Log.Information($"[FireGaze] 找到安装器窗口：{WindowName(installer) ?? "(名字读不到)"}");
+            var probe = FindListWindow(installer, out var listHow);
+            if (!probe.IsNull)
+            {
+                this.loggedList = true;
+                Plugin.Log.Information(
+                    $"[FireGaze] 已找到安装器列表窗口：{WindowName(probe) ?? "(读不到名字)"}（方式：{listHow}）");
+            }
+            else
+            {
+                this.DumpOnce();
+            }
         }
 
         if (!this.wasOpen)
@@ -124,27 +124,14 @@ internal sealed class InstallerListScroll
 
             if (this.pendingRestore)
             {
-                Plugin.Log.Debug($"[FireGaze] 安装器已打开，准备恢复列表位置：{config.ListScrollY:F0}");
+                Plugin.Log.Information($"[FireGaze] 安装器已打开，准备恢复列表位置：{config.ListScrollY:F0}");
             }
         }
 
-        var list = FindListWindow(installer);
+        var list = FindListWindow(installer, out _);
         if (list.IsNull)
         {
-            if (!this.warnedLookup)
-            {
-                this.warnedLookup = true;
-                Plugin.Log.Information("[FireGaze] 暂未找到安装器列表子窗口，下面是当前 ImGui 窗口清单（供排查）：");
-                DumpWindows();
-            }
-
             return;
-        }
-
-        if (!this.loggedLookup)
-        {
-            this.loggedLookup = true;
-            Plugin.Log.Information($"[FireGaze] 已找到安装器列表窗口：{WindowName(list) ?? "(名字读不到)"}");
         }
 
         var scroll = list.Scroll.Y;
@@ -160,13 +147,11 @@ internal sealed class InstallerListScroll
 
             if (!hasContent)
             {
-                // 列表还在加载（或本来就放得下）→ 现在写会被夹回 0，等内容出来再说
-                return;
+                return;   // 列表还在加载：现在写会被夹回 0
             }
 
             if (scroll > 1f)
             {
-                // 用户自己先滚了：不抢
                 this.pendingRestore = false;
                 Plugin.Log.Information("[FireGaze] 列表已被手动滚动，放弃本次位置恢复");
                 return;
@@ -199,101 +184,98 @@ internal sealed class InstallerListScroll
         saveConfig();
     }
 
-    /// <summary>
-    /// 找列表子窗口：主路径按 ID 逐层算（ImGui 的 child ID = 父窗口 GetID(名字)），
-    /// 兜底按名字扫一遍当前上下文里的所有窗口。
-    /// </summary>
-    /// <summary>按窗口名找安装器窗口（"…###XlPluginInstaller"）。</summary>
-    private static ImGuiWindowPtr FindInstallerWindow()
+    /// <summary>按候选名字找安装器窗口（只调函数，不读结构体）。</summary>
+    private static ImGuiWindowPtr FindInstallerWindow(out string? hit)
     {
-        foreach (var window in ImGui.GetCurrentContext().Windows)
+        foreach (var candidate in InstallerNameCandidates)
         {
-            if (window.IsNull)
+            var window = ImGuiP.FindWindowByName(candidate);
+            if (!window.IsNull)
             {
-                continue;
-            }
-
-            var name = WindowName(window);
-            if (name is null)
-            {
-                continue;
-            }
-
-            if (name.Contains(InstallerWindowMark, StringComparison.Ordinal) ||
-                name.Contains("XlPluginInstaller", StringComparison.Ordinal))
-            {
+                hit = candidate;
                 return window;
             }
         }
 
+        hit = null;
         return ImGuiWindowPtr.Null;
     }
 
-    /// <summary>按窗口名找列表子窗口（名字里带 ScrollingPlugins，且属于安装器那棵树）。</summary>
-    private static ImGuiWindowPtr FindListWindow(ImGuiWindowPtr installer)
+    /// <summary>找列表子窗口：先按 ImGui 的 child ID 逐层算，再试几个名字。</summary>
+    private static ImGuiWindowPtr FindListWindow(ImGuiWindowPtr installer, out string? how)
     {
-        var installerName = WindowName(installer);
-        ImGuiWindowPtr loose = ImGuiWindowPtr.Null;
-
-        foreach (var window in ImGui.GetCurrentContext().Windows)
+        var categories = ImGuiP.FindWindowByID(ImGuiP.GetID(installer, CategoriesChildId));
+        if (!categories.IsNull)
         {
-            if (window.IsNull)
+            var byId = ImGuiP.FindWindowByID(ImGuiP.GetID(categories, ListChildId));
+            if (!byId.IsNull)
             {
-                continue;
+                how = "ID 链（InstallerCategories → ScrollingPlugins）";
+                return byId;
             }
-
-            var name = WindowName(window);
-            if (name is null || !name.Contains(ListChildId, StringComparison.Ordinal))
-            {
-                continue;
-            }
-
-            // 名字形如 "<安装器窗口名>/InstallerCategories/ScrollingPlugins_XXXXXXXX"
-            if (installerName is not null && name.StartsWith(installerName, StringComparison.Ordinal))
-            {
-                return window;
-            }
-
-            loose = window;   // 兜底：任何叫这个的都先记着
         }
 
-        return loose;
+        var installerName = WindowName(installer);
+        foreach (var candidate in new[]
+                 {
+                     ListChildId,
+                     installerName is null ? null : $"{installerName}/{CategoriesChildId}/{ListChildId}",
+                     installerName is null ? null : $"{installerName}/{ListChildId}",
+                 })
+        {
+            if (candidate is null)
+            {
+                continue;
+            }
+
+            var byName = ImGuiP.FindWindowByName(candidate);
+            if (!byName.IsNull)
+            {
+                how = $"名字（{candidate}）";
+                return byName;
+            }
+        }
+
+        how = null;
+        return ImGuiWindowPtr.Null;
     }
 
-    /// <summary>排查用：把当前上下文里的窗口名打出来（只打名字里带关键字的，最多 20 个）。</summary>
-    private static void DumpWindows()
+    /// <summary>排查用：把 dalamudUI.ini 里的窗口名打出来（读文件，不碰 ImGui 结构体）。</summary>
+    private void DumpOnce()
     {
-        var count = 0;
-        foreach (var window in ImGui.GetCurrentContext().Windows)
+        if ((DateTime.UtcNow - this.lastDump).TotalSeconds < 30)
         {
-            if (window.IsNull)
-            {
-                continue;
-            }
-
-            var name = WindowName(window);
-            if (name is null)
-            {
-                continue;
-            }
-
-            var interesting = name.Contains("Scrolling", StringComparison.OrdinalIgnoreCase) ||
-                              name.Contains("Installer", StringComparison.OrdinalIgnoreCase) ||
-                              name.Contains("Categories", StringComparison.OrdinalIgnoreCase) ||
-                              name.Contains("插件", StringComparison.Ordinal);
-
-            Plugin.Log.Information(
-                $"[FireGaze]   窗口{(interesting ? "*" : " ")}: {name}  (Scroll={window.Scroll.Y:F0}, Max={window.ScrollMax.Y:F0})");
-
-            if (++count >= 40)
-            {
-                break;
-            }
+            return;
         }
 
-        if (count == 0)
+        this.lastDump = DateTime.UtcNow;
+
+        try
         {
-            Plugin.Log.Information("[FireGaze]   （没有任何名字含 Scrolling/Installer/Categories 的窗口）");
+            var ini = Path.GetFullPath(Path.Combine(Plugin.ConfigDirectoryForDiagnostics, "..", "..", "dalamudUI.ini"));
+            if (!File.Exists(ini))
+            {
+                Plugin.Log.Information($"[FireGaze] 找不到 {ini}，无法列出窗口名");
+                return;
+            }
+
+            var keys = File.ReadAllLines(ini)
+                .Where(l => l.StartsWith("[Window][", StringComparison.Ordinal))
+                .Select(l => l.Substring("[Window][".Length).TrimEnd(']'))
+                .ToList();
+
+            Plugin.Log.Information($"[FireGaze] 未找到安装器窗口；dalamudUI.ini 里共 {keys.Count} 个窗口，相关的是：");
+            foreach (var key in keys.Where(k =>
+                         k.Contains("Installer", StringComparison.OrdinalIgnoreCase) ||
+                         k.Contains("插件", StringComparison.Ordinal) ||
+                         k.Contains("Scrolling", StringComparison.OrdinalIgnoreCase)))
+            {
+                Plugin.Log.Information($"[FireGaze]   窗口: {key}");
+            }
+        }
+        catch (Exception e)
+        {
+            Plugin.Log.Warning(e, "[FireGaze] 列出窗口名失败");
         }
     }
 
