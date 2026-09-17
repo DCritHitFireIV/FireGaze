@@ -24,10 +24,11 @@ public sealed class Plugin : IDalamudPlugin
     private const string HarmonyId = "firegaze.auto-refresh-blocker";
 
     /// <summary>
-    /// 列表刷新拦截功能暂时下线（在修复中）：不挂 Harmony 钩子，也不在界面上显示该页签。
-    /// 恢复时把此常量改回 true，并确认 MainWindow 里的页签逻辑（已按其判断）。
+    /// 列表刷新拦截（软拦截）：重载照常执行（保留反射调用链，ECommons/OmenTools 等依赖它），
+    /// 只跳过它引发的「安装器可用列表重建」，所以浏览时位置不会被顶回顶部。
+    /// 下线开关：改成 false 即完全不挂钩、不显示页签。
     /// </summary>
-    public static readonly bool BlockerFeatureEnabled = false;
+    public static readonly bool BlockerFeatureEnabled = true;
 
     private static Plugin instance = null!;
 
@@ -54,6 +55,8 @@ public sealed class Plugin : IDalamudPlugin
     private PropertyInfo? windowsProp;
     private PropertyInfo? isOpenProp;
     private int tableUpdateBusy;
+    private long pendingPluginReloadTicks;
+    private string? pendingPluginReloadSource;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
 
     public Plugin(IDalamudPluginInterface pluginInterface)
@@ -246,7 +249,7 @@ public sealed class Plugin : IDalamudPlugin
 
         if (!BlockerFeatureEnabled && arg is "on" or "off" or "open" or "log")
         {
-            Chat.Print("[FireGaze] 列表刷新拦截功能暂时关闭（在修复中）。");
+            Chat.Print("[FireGaze] 列表刷新拦截功能暂时关闭。");
             return;
         }
 
@@ -257,15 +260,15 @@ public sealed class Plugin : IDalamudPlugin
                 break;
             case "on":
                 this.SetBlockerMode(BlockMode.Always);
-                Chat.Print("[FireGaze] 已开启拦截（所有后台自动刷新）");
+                Chat.Print("[FireGaze] 已开启：插件发起的重载不再重建安装器列表");
                 break;
             case "off":
                 this.SetBlockerMode(BlockMode.Off);
-                Chat.Print("[FireGaze] 已关闭拦截");
+                Chat.Print("[FireGaze] 已关闭列表刷新拦截");
                 break;
             case "open":
                 this.SetBlockerMode(BlockMode.InstallerOpenOnly);
-                Chat.Print("[FireGaze] 只在插件安装器打开时拦截");
+                Chat.Print("[FireGaze] 只在插件安装器打开时跳过列表重建");
                 break;
             case "log":
                 this.PrintBlockedLog();
@@ -289,11 +292,11 @@ public sealed class Plugin : IDalamudPlugin
     {
         if (this.Config.RecentBlockedSources.Count == 0)
         {
-            Chat.Print("[FireGaze] 暂无拦截记录");
+            Chat.Print("[FireGaze] 暂无跳过记录");
             return;
         }
 
-        Chat.Print($"[FireGaze] 累计拦截 {this.Config.BlockedCount} 次，最近来源：");
+        Chat.Print($"[FireGaze] 累计跳过列表重建 {this.Config.BlockedCount} 次，最近来源：");
         foreach (var line in this.Config.RecentBlockedSources)
         {
             Chat.Print("  " + line);
@@ -385,9 +388,12 @@ public sealed class Plugin : IDalamudPlugin
             }
 
             var target = manager.GetType();
-            var prefix = typeof(Plugin).GetMethod(nameof(BlockerPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+            var reloadPrefix = typeof(Plugin).GetMethod(nameof(ReloadNotePrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
+            var refreshPrefix = typeof(Plugin).GetMethod(nameof(InstallerRefreshPrefix), BindingFlags.Static | BindingFlags.NonPublic)!;
 
             var patched = new List<string>();
+
+            // 1) 重载入口：只「听」不拦——记录这次重载是不是插件发起的，方法本身照常执行
             foreach (var name in new[] { "SetPluginReposFromConfigAsync", "ReloadAllReposAsync" })
             {
                 var method = target.GetMethod(name, BindingFlags.Instance | BindingFlags.Public);
@@ -397,8 +403,37 @@ public sealed class Plugin : IDalamudPlugin
                     continue;
                 }
 
-                this.harmony.PatchPrefix(method, prefix);
+                this.harmony.PatchPrefix(method, reloadPrefix);
                 patched.Add(name);
+            }
+
+            // 2) 真正的拦截点：安装器的「可用列表重建」
+            //    PluginManager.NotifyAvailablePluginsChanged → OnAvailablePluginsChanged 事件
+            //    → PluginInstallerWindow.OnAvailablePluginsChanged（pluginListAvailable = ...; ResortPlugins()）
+            var dalamud = typeof(IDalamudPluginInterface).Assembly;
+            var installerType = dalamud.GetType("Dalamud.Interface.Internal.Windows.PluginInstaller.PluginInstallerWindow");
+            var installerHandler = installerType?.GetMethod(
+                "OnAvailablePluginsChanged",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+
+            if (installerHandler is not null)
+            {
+                this.harmony.PatchPrefix(installerHandler, refreshPrefix);
+                patched.Add("安装器列表重建");
+            }
+            else
+            {
+                // 回退：直接拦「可用列表变更通知」（副作用：DetectAvailablePluginUpdates 也一并跳过）
+                var notify = target.GetMethod("NotifyAvailablePluginsChanged", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (notify is not null)
+                {
+                    this.harmony.PatchPrefix(notify, refreshPrefix);
+                    patched.Add("可用列表通知（回退）");
+                }
+                else
+                {
+                    Log.Warning("[FireGaze] 未找到安装器列表重建 / 可用列表通知方法");
+                }
             }
 
             this.BlockerStatusText = patched.Count == 0 ? "未找到目标方法" : "已挂钩：" + string.Join(" / ", patched);
@@ -412,28 +447,67 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    /// 前缀钩子：返回 false 时用 <paramref name="__result"/> 顶替原方法返回值
-    /// （目标是 async Task，不能返回 null，否则调用方 await 会炸）。
+    /// 重载入口的前缀：永远返回 true（放行），只记录发起者。
+    /// 插件发起 → 打上待定标记，等它引发的列表重建到来时跳过；
+    /// 卫月自己发起 → 清掉标记，保证它的列表重建正常进行。
     /// </summary>
-    private static bool BlockerPrefix(MethodBase __originalMethod, ref Task __result)
+    private static bool ReloadNotePrefix(MethodBase __originalMethod)
     {
-        if (instance is null || instance.OnBlockerPrefix(__originalMethod))
+        try
         {
-            return true;
+            instance?.NoteReloadCall(__originalMethod);
+        }
+        catch
+        {
+            // 绝不能影响原方法
         }
 
-        __result = Task.CompletedTask;
-        return false;
+        return true;
     }
 
-    private bool OnBlockerPrefix(MethodBase original)
+    /// <summary>安装器列表重建的前缀：有待定标记（且模式允许）时返回 false，跳过这次重建。</summary>
+    private static bool InstallerRefreshPrefix()
+    {
+        return instance is null || instance.ShouldAllowListRebuild();
+    }
+
+    private void NoteReloadCall(MethodBase original)
     {
         try
         {
             var caller = this.FindPluginCaller();
             if (caller is null)
             {
-                // 卫月自己发起的（安装器 / 刷新按钮 / 设置里改仓库 / 卫月定时检查 / FireGaze 自己改仓库）
+                // 卫月本体（打开安装器 / 点刷新 / 设置里改仓库 / 自身定时检查）或 FireGaze 自己：
+                // 这次重建应该正常进行
+                Interlocked.Exchange(ref this.pendingPluginReloadTicks, 0);
+                this.pendingPluginReloadSource = null;
+                return;
+            }
+
+            this.pendingPluginReloadSource = $"{caller} → {original.Name}";
+            Interlocked.Exchange(ref this.pendingPluginReloadTicks, DateTime.UtcNow.Ticks);
+        }
+        catch (Exception e)
+        {
+            Log.Debug(e, "[FireGaze] 记录重载来源失败");
+        }
+    }
+
+    private bool ShouldAllowListRebuild()
+    {
+        try
+        {
+            var ticks = Interlocked.Read(ref this.pendingPluginReloadTicks);
+            if (ticks == 0)
+            {
+                return true;
+            }
+
+            // 安全网：标记太旧（重载失败 / 被合并）就忽略，避免误拦用户发起的重建
+            if (DateTime.UtcNow - new DateTime(ticks, DateTimeKind.Utc) > TimeSpan.FromMinutes(30))
+            {
+                Interlocked.Exchange(ref this.pendingPluginReloadTicks, 0);
                 return true;
             }
 
@@ -448,20 +522,21 @@ public sealed class Plugin : IDalamudPlugin
                 return true;
             }
 
+            Interlocked.Exchange(ref this.pendingPluginReloadTicks, 0);
+            var source = this.pendingPluginReloadSource ?? "(未知来源)";
+            this.pendingPluginReloadSource = null;
+
             int count;
             lock (this.recordLock)
             {
                 this.Config.BlockedCount++;
                 count = this.Config.BlockedCount;
 
-                var line = $"{caller} → {original.Name}";
-                this.Config.RecentBlockedSources.RemoveAll(x => x == line);
-                this.Config.RecentBlockedSources.Insert(0, line);
-                if (this.Config.RecentBlockedSources.Count > Configuration.MaxRecentBlocked)
+                this.Config.RecentBlockedSources.RemoveAll(x => x == source);
+                this.Config.RecentBlockedSources.Insert(0, source);
+                while (this.Config.RecentBlockedSources.Count > Configuration.MaxRecentBlocked)
                 {
-                    this.Config.RecentBlockedSources.RemoveRange(
-                        Configuration.MaxRecentBlocked,
-                        this.Config.RecentBlockedSources.Count - Configuration.MaxRecentBlocked);
+                    this.Config.RecentBlockedSources.RemoveAt(this.Config.RecentBlockedSources.Count - 1);
                 }
             }
 
@@ -472,10 +547,10 @@ public sealed class Plugin : IDalamudPlugin
                 bool first;
                 lock (this.recordLock)
                 {
-                    first = this.loggedSources.Add(caller);
+                    first = this.loggedSources.Add(source);
                 }
 
-                var message = $"[FireGaze] 已拦截后台刷新（第 {count} 次）：{caller} → {original.Name}";
+                var message = $"[FireGaze] 已跳过安装器列表重建（第 {count} 次）：{source}";
                 if (first)
                 {
                     Log.Information(message);
@@ -490,7 +565,7 @@ public sealed class Plugin : IDalamudPlugin
         }
         catch (Exception e)
         {
-            Log.Error(e, "[FireGaze] 拦截判断出错，本次放行");
+            Log.Error(e, "[FireGaze] 列表重建判断出错，本次放行");
             return true;
         }
     }
