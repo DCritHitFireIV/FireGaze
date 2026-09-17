@@ -35,7 +35,11 @@ internal sealed class InstallerListScroll
     private bool warnedLookup;
     private bool loggedLookup;
     private bool loggedStart;
-    private bool warnedMissingInstaller;
+    private long frames;
+    private DateTime lastHeartbeat = DateTime.UtcNow;
+    private DateTime lastDump = DateTime.MinValue;
+    private int lastWindowCount = -1;
+    private bool sawInstallerWindow;
     private bool loggedInstaller;
 
     /// <summary>每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。</summary>
@@ -50,6 +54,16 @@ internal sealed class InstallerListScroll
             }
 
             this.TickCore(config, saveConfig, isInstallerOpen);
+
+            // 心跳：证明"还在跑"，并暴露我们这一帧能看到多少个 ImGui 窗口
+            this.frames++;
+            if ((DateTime.UtcNow - this.lastHeartbeat).TotalSeconds >= 60)
+            {
+                this.lastHeartbeat = DateTime.UtcNow;
+                var n = ImGui.GetCurrentContext().Windows.Size;
+                Plugin.Log.Information(
+                    $"[FireGaze] 列表位置记忆心跳：{this.frames} 帧；本帧可见 ImGui 窗口 {n} 个；找到安装器窗口={(this.sawInstallerWindow ? "是" : "否")}");
+            }
         }
         catch (Exception e)
         {
@@ -65,13 +79,20 @@ internal sealed class InstallerListScroll
             this.wasOpen = false;
             this.pendingRestore = false;
 
-            // 只有当卫月确实认为「安装器开着」时才报——否则没打开安装器时报这个只会误导
-            if (!this.warnedMissingInstaller && isInstallerOpen())
+            // 窗口数一变（多半就是安装器刚被画出来 / 别的插件开窗）就 dump 一次——
+            // 不再依赖 IsPluginInstallerOpen 那个反射，免得它不灵就没日志。
+            var windowCount = ImGui.GetCurrentContext().Windows.Size;
+            if (windowCount != this.lastWindowCount)
             {
-                this.warnedMissingInstaller = true;
-                Plugin.Log.Information(
-                    "[FireGaze] 没找到安装器窗口（没打开过？还是窗口名变了？）。若你刚开过安装器，请把这行连同下面的清单发我：");
-                DumpWindows();
+                this.lastWindowCount = windowCount;
+
+                if ((DateTime.UtcNow - this.lastDump).TotalSeconds >= 30)
+                {
+                    this.lastDump = DateTime.UtcNow;
+                    Plugin.Log.Information(
+                        $"[FireGaze] 窗口数变成 {windowCount} 个但仍没找到安装器窗口（卫月说开着={isInstallerOpen()})，清单如下：");
+                    DumpWindows();
+                }
             }
 
             return;
@@ -87,6 +108,8 @@ internal sealed class InstallerListScroll
             this.pendingRestore = false;
             return;
         }
+
+        this.sawInstallerWindow = true;
 
         if (!this.loggedInstaller)
         {
