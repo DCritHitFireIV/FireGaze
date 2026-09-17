@@ -154,7 +154,7 @@ internal sealed class RepoAuditTab
         if (scanBlocked)
         {
             ImGui.EndDisabled();
-            if (ImGui.IsItemHovered())
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip("图标下载进行中，先等它跑完或点「停止下载」");
             }
@@ -290,7 +290,7 @@ internal sealed class RepoAuditTab
 
         ImGui.SameLine();
         var iconCacheEnabled = this.plugin.Config.IconCacheEnabled;
-        if (ImGui.Checkbox("本地缓存图标###IconCache", ref iconCacheEnabled))
+        if (ImGui.Checkbox("启用图标缓存###IconCache", ref iconCacheEnabled))
         {
             this.plugin.Config.IconCacheEnabled = iconCacheEnabled;
             this.plugin.SaveConfig();
@@ -314,12 +314,12 @@ internal sealed class RepoAuditTab
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button("检查缺图标###IconCheck"))
+        if (ImGui.Button(this.iconCheckDone ? "重新检查缺图标###IconCheck" : "检查缺图标###IconCheck"))
         {
             this.RunIconCheck();
         }
 
-        if (ImGui.IsItemHovered())
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(
                 (indexReady ? string.Empty : "插件数据不可用，暂时不能检查。\n")
@@ -355,7 +355,7 @@ internal sealed class RepoAuditTab
             }
         }
 
-        if (ImGui.IsItemHovered())
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(
                 (indexReady ? string.Empty : "插件数据不可用，暂时不能下载。\n")
@@ -1682,6 +1682,9 @@ internal sealed class RepoAuditTab
             {
                 this.iconDead.Add(name);
             }
+
+            // 地址确认失效的别继续占着「下载图标（N）」的计数：再点也只会再失败一次
+            this.iconMissing.RemoveAll(x => report.Contains(x.InternalName));
         }
 
         if (!this.iconDownloadRunning)
@@ -1772,7 +1775,7 @@ internal sealed class RepoAuditTab
 
         var tailLeft = tail ? Math.Max(0, (this.iconTailDeadline - DateTime.Now).TotalSeconds) : 0;
 
-        this.iconDownloadLine = $"图标下载：已请求 {this.iconDownloadRequested}/{this.iconDownloadTotal} · 拿到 {this.iconDownloadGot}"
+        this.iconDownloadLine = $"图标下载：拿到 {this.iconDownloadGot}/{this.iconDownloadTotal}"
                                 + (this.iconDownloadFailed > 0 ? $" · 失败 {this.iconDownloadFailed}" : string.Empty)
                                 + (remaining > 0 ? $" · 还剩 {remaining}" : string.Empty)
                                 + (tail ? $"，最多再等 {tailLeft:0} 秒" : string.Empty);
@@ -1855,9 +1858,9 @@ internal sealed class RepoAuditTab
             .Where(x => !(x.IsThirdParty && string.IsNullOrWhiteSpace(x.IconUrl)))
             .ToList();
 
-        var head = $"图标下载完成：这次请求 {total} 个，拿到 {got} 个"
-                   + (failed > 0 ? $"，失败 {failed} 个" : string.Empty)
-                   + (leftover.Count > 0 ? $"，{leftover.Count} 个没拿到" : string.Empty)
+        var head = $"图标下载完成：拿到 {got} / {total} 个"
+                   + (failed > 0 ? $" · 失败 {failed}" : string.Empty)
+                   + (leftover.Count > 0 ? $" · 未完成 {leftover.Count}" : string.Empty)
                    + $"；用时 {seconds:0}s。已存的图标重开游戏不用重下。";
 
         if (checkable.Count == 0)
@@ -1924,7 +1927,7 @@ internal sealed class RepoAuditTab
 
             if (failed > 0)
             {
-                parts.Add($"{failed} 个没下完，可以再点一次");
+                parts.Add($"{failed} 个未完成，可以再点一次");
             }
 
             if (official > 0)
