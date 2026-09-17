@@ -81,10 +81,15 @@ public readonly record struct ScanProgress(int Done, int Total, int Ok, int Dead
 /// </summary>
 public static class RepoScanner
 {
-    private const int Concurrency = 16;
+    /// <summary>同时在查的库数。1000+ 个库时别再往上加：并发高了会和卫月自己的仓库重载抢网络，游戏会卡。</summary>
+    private const int Concurrency = 6;
     private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(18);
 
-    private sealed record FetchResult(string Url, int Status, string? Error, string? Text, bool Success);
+    /// <summary>URL → ETag / Last-Modified：下次带上做条件请求，没变就 304，不用重下整份仓库 JSON。</summary>
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> EtagCache = new(StringComparer.Ordinal);
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> LastModifiedCache = new(StringComparer.Ordinal);
+
+    private sealed record FetchResult(string Url, int Status, string? Error, string? Text, bool Success, bool NotModified = false);
 
     private sealed record FetchOutcome(FetchResult? Success, List<FetchResult> Failures);
 
@@ -94,25 +99,38 @@ public static class RepoScanner
     /// <summary>
     /// 探一次外部地址（图标体检用）：复用体检的多线路竞速与超时策略，只关心“通 / 不通 / 状态码”。
     /// </summary>
+    private static readonly SemaphoreSlim ProbeGate = new(4, 4);
+
+    private static readonly Lazy<HttpClient> ProbeClient = new(() => new HttpClient(new SocketsHttpHandler
+    {
+        AutomaticDecompression = DecompressionMethods.All,
+        ConnectTimeout = TimeSpan.FromSeconds(10),
+        PooledConnectionLifetime = TimeSpan.FromMinutes(5),
+        MaxConnectionsPerServer = 4,
+    })
+    {
+        Timeout = Timeout.InfiniteTimeSpan,
+    });
+
     public static async Task<UrlProbe> ProbeUrlAsync(string url, CancellationToken cancellationToken)
     {
-        using var handler = new SocketsHttpHandler
+        await ProbeGate.WaitAsync(cancellationToken).ConfigureAwait(false);
+        try
         {
-            AutomaticDecompression = DecompressionMethods.All,
-            ConnectTimeout = TimeSpan.FromSeconds(10),
-            PooledConnectionLifetime = TimeSpan.FromMinutes(5),
-            MaxConnectionsPerServer = 4,
-        };
-        using var client = new HttpClient(handler) { Timeout = Timeout.InfiniteTimeSpan };
+            var outcome = await FetchBestAsync(ProbeClient.Value, url, cancellationToken).ConfigureAwait(false);
+            if (outcome.Success is { } ok)
+            {
+                // 304 也算“地址活着”
+                return new UrlProbe(true, ok.Status == 304 ? 200 : ok.Status, null);
+            }
 
-        var outcome = await FetchBestAsync(client, url, cancellationToken).ConfigureAwait(false);
-        if (outcome.Success is { } ok)
-        {
-            return new UrlProbe(true, ok.Status, null);
+            var best = outcome.Failures.OrderByDescending(x => x.Status).FirstOrDefault();
+            return new UrlProbe(false, best?.Status ?? 0, best?.Error);
         }
-
-        var best = outcome.Failures.OrderByDescending(x => x.Status).FirstOrDefault();
-        return new UrlProbe(false, best?.Status ?? 0, best?.Error);
+        finally
+        {
+            ProbeGate.Release();
+        }
     }
 
     /// <summary>
@@ -130,7 +148,7 @@ public static class RepoScanner
             AutomaticDecompression = DecompressionMethods.All,
             ConnectTimeout = TimeSpan.FromSeconds(10),
             PooledConnectionLifetime = TimeSpan.FromMinutes(5),
-            MaxConnectionsPerServer = 32,
+            MaxConnectionsPerServer = 8,
         };
         using var client = new HttpClient(handler) { Timeout = Timeout.InfiniteTimeSpan };
 
@@ -211,6 +229,12 @@ public static class RepoScanner
         {
             item.HttpStatus = success.Status;
             item.Channel = DescribeChannel(item.Url, success.Url);
+
+            if (success.NotModified)
+            {
+                // 仓库内容没变：保留上次的结论，不做重复校验
+                return;
+            }
 
             var check = ManifestCheck.Check(success.Text ?? string.Empty);
             if (!check.CheckerAvailable)
@@ -330,14 +354,39 @@ public static class RepoScanner
         {
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.CacheControl = new CacheControlHeaderValue { NoCache = true };
+
+            // 条件请求：带上上次的 ETag / Last-Modified，没变就是 304（省流量、也省时间）
+            if (EtagCache.TryGetValue(url, out var etag))
+            {
+                request.Headers.TryAddWithoutValidation("If-None-Match", etag);
+            }
+
+            if (LastModifiedCache.TryGetValue(url, out var lastModified))
+            {
+                request.Headers.TryAddWithoutValidation("If-Modified-Since", lastModified);
+            }
 
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             timeout.CancelAfter(RequestTimeout);
 
             using var response = await client
-                .SendAsync(request, HttpCompletionOption.ResponseContentRead, timeout.Token)
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, timeout.Token)
                 .ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.NotModified)
+            {
+                return new FetchResult(url, 304, null, null, true, true);
+            }
+
+            if (response.Headers.ETag is { } newEtag)
+            {
+                EtagCache[url] = newEtag.ToString();
+            }
+
+            if (response.Content.Headers.LastModified is { } modified)
+            {
+                LastModifiedCache[url] = modified.ToString("R");
+            }
 
             var text = await response.Content.ReadAsStringAsync(CancellationToken.None).ConfigureAwait(false);
             return new FetchResult(url, (int)response.StatusCode, null, text, response.IsSuccessStatusCode);

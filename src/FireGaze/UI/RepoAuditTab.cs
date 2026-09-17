@@ -44,6 +44,12 @@ internal sealed class RepoAuditTab
     private readonly List<InstalledPluginEntry> iconPending = [];
     private int iconCursor;
 
+    // ---------------- 每帧缓存（1000+ 个库时别每帧重算） ----------------
+    private List<RepoAuditItem> snapshotCache = [];
+    private bool snapshotDirty = true;
+    private DateTime snapshotNextAllowed = DateTime.MinValue;
+    private bool installedCountsDirty = true;
+
     // ---------------- 图标检查 / 下载（先查，再由用户决定下不下） ----------------
     private readonly List<InstalledPluginEntry> iconMissing = [];
     private readonly List<InstalledPluginEntry> iconWaiting = [];
@@ -129,7 +135,10 @@ internal sealed class RepoAuditTab
         ImGui.SameLine();
         ImGui.SameLine();
         ImGui.SetNextItemWidth(170);
-        ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref this.search, 128);
+        if (ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref this.search, 128))
+        {
+            this.snapshotDirty = true;
+        }
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("按 URL 子串过滤列表（例如输入 \"Atmo\" 只看该作者的库）");
@@ -426,13 +435,21 @@ internal sealed class RepoAuditTab
                         _ => "status",
                     };
                     this.sortDescending = spec.SortDirection == ImGuiSortDirection.Descending;
+                    this.snapshotDirty = true;
                 }
             }
 
-            foreach (var item in snapshot)
+            // 行裁剪：1000+ 个库时只画看得见的那几行（否则每帧几千个 ImGui 项，必卡）
+            var clipper = new ImGuiListClipper();
+            clipper.Begin(snapshot.Count);
+
+            while (clipper.Step())
             {
-                ImGui.TableNextRow();
-                ImGui.TableNextColumn();
+                for (var rowIndex = clipper.DisplayStart; rowIndex < clipper.DisplayEnd; rowIndex++)
+                {
+                    var item = snapshot[rowIndex];
+                    ImGui.TableNextRow();
+                    ImGui.TableNextColumn();
 
                 var isSelected = this.selected.Contains(item.Url);
 
@@ -541,6 +558,7 @@ internal sealed class RepoAuditTab
                     this.DrawInstalledIcons(item);
                     ImGui.TableNextColumn();
                     ImGui.TableNextColumn();
+                    }
                 }
             }
 
@@ -754,11 +772,19 @@ internal sealed class RepoAuditTab
         if (ImGui.RadioButton($"{label}###Filter-{key}", this.filter == key))
         {
             this.filter = key;
+            this.snapshotDirty = true;
         }
     }
 
     private List<RepoAuditItem> Filtered()
     {
+        // 缓存：筛选 / 排序 / 数据没变就不重算（体检进行中每 250ms 最多重算一次）
+        var now = DateTime.Now;
+        if (!this.snapshotDirty && now < this.snapshotNextAllowed)
+        {
+            return this.snapshotCache;
+        }
+
         IEnumerable<RepoAuditItem> query = this.filter switch
         {
             "all" => this.items,
@@ -779,7 +805,11 @@ internal sealed class RepoAuditTab
             query = query.Where(x => x.InstalledCount == 0);
         }
 
-        return this.SortItems(query);
+        var result = this.SortItems(query);
+        this.snapshotCache = result;
+        this.snapshotDirty = false;
+        this.snapshotNextAllowed = now.AddMilliseconds(this.scanning ? 250 : 0);
+        return result;
     }
 
     /// <summary>
@@ -886,6 +916,9 @@ internal sealed class RepoAuditTab
             this.listBuilt = true;
         }
 
+        this.snapshotDirty = true;
+        this.installedCountsDirty = true;
+
         this.SetStatus($"开始体检 {list.Count} 个仓库…", false);
         var startedAt = DateTime.UtcNow;
 
@@ -940,6 +973,7 @@ internal sealed class RepoAuditTab
                 lock (this.gate)
                 {
                     this.scanning = false;
+                    this.snapshotDirty = true;
                     dead = this.deadCount;
                     invalid = this.invalidCount;
                     unreachable = this.unreachableCount;
@@ -1117,6 +1151,8 @@ internal sealed class RepoAuditTab
 
         this.RecomputeCounters();
         this.listBuilt = true;
+        this.snapshotDirty = true;
+        this.installedCountsDirty = true;
     }
 
     /// <summary>读/刷新「已安装插件」索引；读不到时界面必须显示 `—`（不能显示假 0）。</summary>
@@ -1129,6 +1165,8 @@ internal sealed class RepoAuditTab
 
         this.installedIndex = InstalledPluginsIndex.Build();
         this.installedIndexStale = false;
+        this.installedCountsDirty = true;
+        this.snapshotDirty = true;
         this.iconHandles.Clear();
         this.iconPending.Clear();
         this.iconCursor = 0;
@@ -1154,6 +1192,12 @@ internal sealed class RepoAuditTab
     /// <summary>把索引结果填到每一行（不可用 → -1，不参与任何「0 个」的断言）。</summary>
     private void FillInstalledCounts()
     {
+        if (!this.installedCountsDirty)
+        {
+            return;
+        }
+
+        this.installedCountsDirty = false;
         var index = this.installedIndex;
 
         lock (this.gate)
@@ -1172,6 +1216,8 @@ internal sealed class RepoAuditTab
                 }
             }
         }
+
+        this.snapshotDirty = true;
     }
 
     /// <summary>「已安装」单元格：一律放数字（0 也是数字）；数据不可用显示 `—`。</summary>
