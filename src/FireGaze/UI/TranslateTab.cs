@@ -10,6 +10,7 @@ internal sealed class TranslateTab
     private string? updateMessage;
     private string? statusMessage;
     private volatile bool updateInFlight;
+    private bool noticeReview;
 
     public TranslateTab(Plugin plugin)
     {
@@ -36,6 +37,7 @@ internal sealed class TranslateTab
                 var (_, message) = await this.plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
                 this.updateMessage = message;
                 this.updateInFlight = false;
+                this.noticeReview = true;
             });
         }
 
@@ -104,6 +106,44 @@ internal sealed class TranslateTab
         ImGui.TextDisabled(
             "词表仅在你看到的原文与我们收录的一致时才替换；上游改了简介或卫月改了字段名时自动跳过，重新更新词表即可。");
         ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
+
+        // ---------------- 参与翻译 ----------------
+        ImGui.Separator();
+        var pending = this.plugin.Contributions.Count;
+        if (pending > 0)
+        {
+            ImGui.Button($"参与翻译（{pending}）###OpenContribute");
+        }
+        else
+        {
+            ImGui.Button("参与翻译###OpenContribute");
+        }
+
+        if (ImGui.IsItemClicked())
+        {
+            this.plugin.OpenContributeWindow();
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("搜索全部第三方插件，看到翻译不合适就改、没有译文就补上。\n改动先存在本地，攒够了自己导出、在 GitHub 提 issue。");
+        }
+
+        ImGui.SameLine();
+        ImGui.TextDisabled(pending > 0
+            ? $"待提交 {pending} 条（已存在本地，不会自动发出去）"
+            : "改进词表、帮自己喜欢的插件翻译");
+
+        if (this.noticeReview)
+        {
+            this.noticeReview = false;
+            if (this.plugin.HasReviewPending())
+            {
+                UiHelpers.ColoredWrapped(
+                    UiHelpers.Warn,
+                    "有新词表：部分条目的原文改过了，旧译文可能对不上，可以到「参与翻译」里筛「待复核」看一眼。");
+            }
+        }
     }
 
     private string DescribeNextCheck()

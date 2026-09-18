@@ -244,6 +244,15 @@ public sealed class DalamudRepos
         return inserted;
     }
 
+    /// <summary>添加一条仓库（已存在则跳过）；返回实际添加的条数。</summary>
+    public int Add(string url, out string? error)
+    {
+        var added = this.Insert(
+            [new UndoEntry { Url = url, IsEnabled = true, Index = int.MaxValue }],
+            out error);
+        return added;
+    }
+
     /// <summary>让卫月把当前配置写回磁盘（下一帧生效）。</summary>
     public bool Save(out string? error)
     {

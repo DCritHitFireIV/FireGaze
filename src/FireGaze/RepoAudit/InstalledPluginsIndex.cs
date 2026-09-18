@@ -353,6 +353,11 @@ internal static class PluginIconLookup
 
     private static string KeyOf(InstalledPluginEntry entry)
     {
+        if (entry.RawPlugin is null)
+        {
+            return entry.InternalName;
+        }
+
         var id = entry.RawPlugin.GetType()
             .GetProperty("EffectiveWorkingPluginId", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
             ?.GetValue(entry.RawPlugin);

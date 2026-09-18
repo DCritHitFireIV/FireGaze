@@ -79,11 +79,21 @@ public sealed class Configuration : IPluginConfiguration
 
     public DisplayMode DescriptionMode { get; set; } = DisplayMode.Both;
 
+    // ---------------- 参与翻译 ----------------
+
+    /// <summary>「参与翻译」窗口是否在列表里显示插件图标。默认关；只显示本地已缓存的，不会为此下载。</summary>
+    public bool ShowIconsInContribute { get; set; }
+
+    /// <summary>「参与翻译」是否连已停用仓库里的插件一起列出（默认是）。</summary>
+    public bool ContributeShowDisabled { get; set; } = true;
+
+    /// <summary>有译文需要复核（上游原文改过）时，在简介汉化页提醒一次。</summary>
+    public bool ContributeNeedsAttention { get; set; }
+
     // ---------------- 仓库体检 ----------------
 
     /// <summary>是否连已停用的库一起扫描（默认是）。</summary>
     public bool ScanIncludeDisabled { get; set; } = true;
-
     /// <summary>仓库体检：是否在每条库链下面展开「本机已装插件」的图标（默认关，打开后列表每行会变高）。</summary>
     public bool ShowInstalledIcons { get; set; }
 

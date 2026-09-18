@@ -303,6 +303,91 @@ def main(argv=None) -> int:
     except Exception as error:  # noqa: BLE001
         print(f"术语表不可用（继续翻译）：{error}")
 
+    # 需要复核 / 需要新机器译的条目（收尾时写报告）
+    needs_review: list[tuple[str, str, str, str]] = []   # key, field, 旧原文, 旧译文
+    failed: list[tuple[str, str, str]] = []              # key, field, 原因
+
+    def set_name(key: str, original: str, translated: str | None) -> None:
+        """写插件名。translated=None = 这次没拿到译文（只对齐原文，绝不覆盖已有的）。"""
+        entry = table.setdefault(key, {})
+        saved = entry.get("Name") or {}
+        old_original = saved.get("Original") or ""
+        old_translated = saved.get("Translated") or ""
+        is_user = str(saved.get("Source") or "").lower() == "user"
+        source_changed = bool(old_original) and old_original != original
+
+        if old_translated and not source_changed:
+            # 上游原文没变 → 现有译文永远优先（用户译或机器译都是）
+            if old_original != original:
+                saved["Original"] = original          # 首次记录原文
+            saved.setdefault("Translated", old_translated)
+            if not saved.get("Source"):
+                saved["Source"] = "user" if is_user else "ai"
+            entry["Name"] = saved
+            return
+
+        if not translated:
+            # 拿不到新译文：保留现有译文，只对齐原文；如果原文确实变了，记一笔待复核
+            if source_changed:
+                needs_review.append((key, "Name", old_original, old_translated))
+            if old_original != original or not old_translated:
+                saved["Original"] = original
+            if old_translated and not saved.get("Translated"):
+                saved["Translated"] = old_translated
+            saved.setdefault("Source", "user" if is_user else "ai")
+            entry["Name"] = saved
+            failed.append((key, "Name", "这次没拿到译文"))
+            return
+
+        # 有译文：只有「原来没译文」或「原文真的变了」才写
+        # 用户译在原文变了时会被新机器译覆盖 —— 按用户要求先把旧译文记进待复核
+        if is_user and old_translated:
+            needs_review.append((key, "Name", old_original, old_translated))
+
+        new_pair = {"Original": original, "Translated": translated, "Source": "ai"}
+        if is_user and old_translated and old_translated == translated:
+            new_pair["Source"] = "user"      # 与新译文完全重合：保留用户译
+            new_pair.pop("Review", None)
+        entry["Name"] = new_pair
+
+    def set_desc_pair(key: str, field: str, original: str, translated: str | None) -> None:
+        """写 Punchline / Description，规则与 set_name 一致。"""
+        entry = table.setdefault(key, {})
+        saved = entry.get(field) or {}
+        old_original = saved.get("Original") or ""
+        old_translated = saved.get("Translated") or ""
+        is_user = str(saved.get("Source") or "").lower() == "user"
+        source_changed = bool(old_original) and old_original != original
+
+        if old_translated and not source_changed:
+            if old_original != original:
+                saved["Original"] = original
+            saved.setdefault("Translated", old_translated)
+            if not saved.get("Source"):
+                saved["Source"] = "user" if is_user else "ai"
+            entry[field] = saved
+            return
+
+        if not translated:
+            if source_changed:
+                needs_review.append((key, field, old_original, old_translated))
+            saved["Original"] = original
+            if old_translated:
+                saved["Translated"] = old_translated
+                saved.setdefault("Source", "user" if is_user else "ai")
+                saved["Review"] = "原文已更新，译文还停在旧版"
+            entry[field] = saved
+            failed.append((key, field, "这次没拿到译文"))
+            return
+
+        if is_user and old_translated:
+            needs_review.append((key, field, old_original, old_translated))
+
+        new_pair = {"Original": original, "Translated": translated, "Source": "ai"}
+        if is_user and old_translated and old_translated == translated:
+            new_pair["Source"] = "user"
+        entry[field] = new_pair
+
     def translate_names(batch: list[tuple[str, str]]):
         payload = {"items": [{"id": i, "name": name} for i, (_, name) in enumerate(batch)]}
         result: dict[int, str] = {}
@@ -327,8 +412,7 @@ def main(argv=None) -> int:
             if not translated or not CJK.search(translated):
                 translated = name
             with _lock:
-                entry = table.setdefault(key, {})
-                entry["Name"] = {"Original": name, "Translated": translated}
+                set_name(key, name, translated)
                 usage["ok"] += 1
 
     def translate_descs(batch: list[tuple[str, str, str]]):
@@ -367,24 +451,10 @@ def main(argv=None) -> int:
         for i, (key, punchline, description) in enumerate(batch):
             translated_p, translated_d = result.get(i, ("", ""))
             with _lock:
-                entry = table.setdefault(key, {})
-
-                # 只在「原文变了」或「还没有译文」时写入：
-                # 只改详情的条目不应该把一行简介也重翻一遍（否则会造成无意义的译文漂泊）
-                saved_p = entry.get("Punchline") or {}
-                if punchline and (saved_p.get("Original") != punchline or not saved_p.get("Translated")):
-                    entry["Punchline"] = {
-                        "Original": punchline,
-                        "Translated": translated_p or punchline,
-                    }
-
-                saved_d = entry.get("Description") or {}
-                if description and (saved_d.get("Original") != description or not saved_d.get("Translated")):
-                    entry["Description"] = {
-                        "Original": description,
-                        "Translated": translated_d or description,
-                    }
-
+                if punchline:
+                    set_desc_pair(key, "Punchline", punchline, translated_p or None)
+                if description:
+                    set_desc_pair(key, "Description", description, translated_d or None)
                 usage["ok"] += 1
 
     name_batches = [name_todo[i:i + 25] for i in range(0, len(name_todo), 25)]
@@ -395,6 +465,28 @@ def main(argv=None) -> int:
         list(executor.map(translate_descs, desc_batches))
 
     # 清掉语料里已经消失的条目？不删：保持历史译文，避免上游临时抽风导致词表缩水。
+
+    # 上游原文改过、旧译文可能对不上的条目：写一份报告，供人工/插件侧（参与翻译）复核
+    if needs_review:
+        review_path = os.path.join(os.path.dirname(os.path.abspath(args.table)), "scripts", "translation-review.md")
+        try:
+            with open(review_path, "w", encoding="utf-8") as handle:
+                handle.write("# 需要复核的译文\n\n")
+                handle.write(f"生成时间：{time.strftime('%Y-%m-%d %H:%M')}\n\n")
+                handle.write("上游原文改过了，以下条目的译文停在旧版；玩家提交过的译文会优先保留。\n\n")
+                handle.write("| 插件 | 字段 | 旧原文 | 旧译文 |\n|---|---|---|---|\n")
+                for key, field, old_original, old_translated in needs_review:
+                    def cell(text: str) -> str:
+                        return (text or "").replace("|", "\\|").replace("\n", " ")[:120]
+                    handle.write(f"| {cell(key)} | {field} | {cell(old_original)} | {cell(old_translated)} |\n")
+            print(f"需要复核：{len(needs_review)} 处，报告写到 {review_path}")
+        except Exception as error:  # noqa: BLE001
+            print(f"写复核报告失败：{error}")
+
+    if failed:
+        print(f"【需要注意】{len(failed)} 个字段这次没拿到译文，已保留原译文：")
+        for key, field, reason in failed[:10]:
+            print(f"  {key} / {field}：{reason}")
 
     with open(args.table, "w", encoding="utf-8") as handle:
         json.dump(table, handle, ensure_ascii=False, indent=1)

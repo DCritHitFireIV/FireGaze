@@ -38,6 +38,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
+    private readonly ContributeWindow contributeWindow;
     private readonly Timer translateTimer;
 
     private readonly object saveLock = new();
@@ -89,11 +90,14 @@ public sealed class Plugin : IDalamudPlugin
                               ?? Path.GetDirectoryName(pluginInterface.AssemblyLocation.FullName)
                               ?? ".";
         this.Table = new TranslationTable(this.ConfigDirectory, pluginDirectory);
+        this.Contributions = new ContributionsStore(this.ConfigDirectory);
         this.Patcher = new ManifestPatcher(() => this.Config, this.Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
         this.window = new MainWindow(this);
         this.windowSystem.AddWindow(this.window);
+        this.contributeWindow = new ContributeWindow(this, this.Contributions);
+        this.windowSystem.AddWindow(this.contributeWindow);
         pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
         pluginInterface.UiBuilder.Draw += this.TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi += this.ToggleWindow;
@@ -175,6 +179,11 @@ public sealed class Plugin : IDalamudPlugin
                 this.installerDefaultsNotice = false;
                 Chat.Print("[FireGaze] 安装器增强的两项功能已改为默认关闭，可在 /firegaze → 插件安装器 里打开。");
             }
+
+            if (this.HasReviewPending())
+            {
+                Chat.Print("[FireGaze] 有新词表：部分条目的原文改过了，可以到「参与翻译」里筛「待复核」看一眼。");
+            }
         }
         catch (Exception e)
         {
@@ -213,6 +222,9 @@ public sealed class Plugin : IDalamudPlugin
 
     /// <summary>当前配置。</summary>
     public Configuration Config { get; private set; }
+
+    /// <summary>本地待提交的翻译贡献（配置目录，不联网）。</summary>
+    internal ContributionsStore Contributions { get; }
 
     /// <summary>插件配置目录（备份写在这里的 backups/ 下）。</summary>
     public string ConfigDirectory { get; }
@@ -317,6 +329,13 @@ public sealed class Plugin : IDalamudPlugin
         this.window.BringToFront();
     }
 
+    /// <summary>打开「参与翻译」独立窗口。</summary>
+    public void OpenContributeWindow()
+    {
+        this.contributeWindow.IsOpen = true;
+        this.contributeWindow.BringToFront();
+    }
+
     private void OnCommand(string command, string args)
     {
         var arg = args.Trim().ToLowerInvariant();
@@ -335,8 +354,11 @@ public sealed class Plugin : IDalamudPlugin
                 _ = this.UpdateTranslationTableAsync();
                 Chat.Print("[FireGaze] 正在从 GitHub 更新词表…");
                 break;
+            case "translate":
+                this.OpenContributeWindow();
+                break;
             default:
-                Chat.Print("[FireGaze] 用法：/firegaze [zh|update]");
+                Chat.Print("[FireGaze] 用法：/firegaze [zh|update|translate]");
                 break;
         }
     }
@@ -453,6 +475,76 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>重新加载词表。</summary>
     public bool ReloadTranslationTable(out string? error) => this.Table.Load(out error);
 
+    /// <summary>
+    /// 把词表拷一份给后台线程用（翻译搜索索引在别的线程上读）。
+    /// 宿主线程可能同时在改词表，所以这里做一次带锁拷贝。
+    /// </summary>
+    public Dictionary<string, TransEntry> SnapshotTable()
+    {
+        var copy = new Dictionary<string, TransEntry>(StringComparer.Ordinal);
+        foreach (var (key, value) in this.Table.Enumerate())
+        {
+            copy[key] = value;
+        }
+
+        return copy;
+    }
+
+    /// <summary>玩家刚提交了译文：把「待复核」标记清掉，并立刻重新应用一遍。</summary>
+    public void MarkTranslationReview(string internalName, string field)
+    {
+        this.Table.ClearReview(internalName, field);
+        this.Config.ContributeNeedsAttention = true;
+        this.ApplyTranslations();
+    }
+
+    /// <summary>有没有译文需要复核（上游原文改过）。</summary>
+    public bool HasReviewPending()
+    {
+        try
+        {
+            return this.Table.ReviewCount > 0;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// 添加一条第三方仓库（参与翻译窗口用）：先自动备份，再加，再让卫月重新拉取。
+    /// 返回是否真的加上了。
+    /// </summary>
+    public bool AddThirdPartyRepository(string url, out string message)
+    {
+        var existing = this.Repos.ReadAll(out var readError);
+        if (readError is not null)
+        {
+            message = "读不到仓库列表：" + readError;
+            return false;
+        }
+
+        if (existing.Any(x => string.Equals(x.Url, url, StringComparison.Ordinal)))
+        {
+            message = "这条库已经在你的列表里了";
+            return false;
+        }
+
+        var backup = this.Repos.BackupRepos(out _);
+        var added = this.Repos.Add(url, out var error);
+        if (added <= 0)
+        {
+            message = "添加失败：" + (error ?? "未知原因");
+            return false;
+        }
+
+        this.Repos.Save(out _);
+        this.Repos.TriggerReload(out _);
+        this.TrackFirstSeen();
+        message = $"已添加；卫月正在抓取它的插件，稍等片刻就能在列表里搜到（备份：{Path.GetFileName(backup)}）";
+        return true;
+    }
+
     /// <summary>应用一次汉化（计时器用，静默）。</summary>
     private void ApplyTranslationsQuiet()
     {
@@ -488,6 +580,8 @@ public sealed class Plugin : IDalamudPlugin
         if (ok)
         {
             this.Patcher.ApplyAll();
+            this.Config.ContributeNeedsAttention = this.HasReviewPending();
+            this.SaveConfig();
         }
 
         return (ok, message);
