@@ -494,7 +494,6 @@ public sealed class Plugin : IDalamudPlugin
     public void MarkTranslationReview(string internalName, string field)
     {
         this.Table.ClearReview(internalName, field);
-        this.Config.ContributeNeedsAttention = true;
         this.ApplyTranslations();
     }
 
@@ -580,8 +579,6 @@ public sealed class Plugin : IDalamudPlugin
         if (ok)
         {
             this.Patcher.ApplyAll();
-            this.Config.ContributeNeedsAttention = this.HasReviewPending();
-            this.SaveConfig();
         }
 
         return (ok, message);

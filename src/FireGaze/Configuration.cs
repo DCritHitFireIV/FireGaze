@@ -87,9 +87,6 @@ public sealed class Configuration : IPluginConfiguration
     /// <summary>「参与翻译」是否连已停用仓库里的插件一起列出（默认是）。</summary>
     public bool ContributeShowDisabled { get; set; } = true;
 
-    /// <summary>有译文需要复核（上游原文改过）时，在简介汉化页提醒一次。</summary>
-    public bool ContributeNeedsAttention { get; set; }
-
     // ---------------- 仓库体检 ----------------
 
     /// <summary>是否连已停用的库一起扫描（默认是）。</summary>
