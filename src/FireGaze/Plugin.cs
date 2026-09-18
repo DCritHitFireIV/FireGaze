@@ -38,7 +38,6 @@ public sealed class Plugin : IDalamudPlugin
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
-    private readonly ContributeWindow contributeWindow;
     private readonly Timer translateTimer;
 
     private readonly object saveLock = new();
@@ -96,8 +95,6 @@ public sealed class Plugin : IDalamudPlugin
 
         this.window = new MainWindow(this);
         this.windowSystem.AddWindow(this.window);
-        this.contributeWindow = new ContributeWindow(this, this.Contributions);
-        this.windowSystem.AddWindow(this.contributeWindow);
         pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
         pluginInterface.UiBuilder.Draw += this.TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi += this.ToggleWindow;
@@ -329,11 +326,16 @@ public sealed class Plugin : IDalamudPlugin
         this.window.BringToFront();
     }
 
-    /// <summary>打开「参与翻译」独立窗口。</summary>
-    public void OpenContributeWindow()
+    /// <summary>打开「参与翻译」页（第四个页签）；includeOfficial = 连官方主库一起翻。</summary>
+    public void OpenContributeWindow(bool includeOfficial)
     {
-        this.contributeWindow.IsOpen = true;
-        this.contributeWindow.BringToFront();
+        if (this.Config.ContributeIncludeOfficial != includeOfficial)
+        {
+            this.Config.ContributeIncludeOfficial = includeOfficial;
+            this.SaveConfig();
+        }
+
+        this.OpenWindow(MainTab.Contribute);
     }
 
     private void OnCommand(string command, string args)
@@ -355,7 +357,7 @@ public sealed class Plugin : IDalamudPlugin
                 Chat.Print("[FireGaze] 正在从 GitHub 更新词表…");
                 break;
             case "translate":
-                this.OpenContributeWindow();
+                this.OpenContributeWindow(this.Config.ContributeIncludeOfficial);
                 break;
             default:
                 Chat.Print("[FireGaze] 用法：/firegaze [zh|update|translate]");

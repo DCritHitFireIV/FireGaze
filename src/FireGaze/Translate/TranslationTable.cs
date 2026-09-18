@@ -214,6 +214,16 @@ public sealed class TranslationTable
             return false;   // 原文对不上：宁可不写，也不要错位
         }
 
+        // 上游本来就空着、玩家自己补的：把原文置空，译文照写
+        if (string.IsNullOrWhiteSpace(pair.Original) && string.IsNullOrWhiteSpace(original))
+        {
+            pair.Original = string.Empty;
+        }
+        else if (string.IsNullOrWhiteSpace(pair.Original))
+        {
+            pair.Original = original;
+        }
+
         pair.Translated = translated ?? string.Empty;
         pair.Source = "user";
         pair.Review = null;

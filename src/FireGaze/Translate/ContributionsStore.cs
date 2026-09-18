@@ -30,6 +30,9 @@ internal sealed class ContributionRecord
     /// <summary>词表里这原文有没有人动过（提交时对不上 = true）。</summary>
     public bool Stale { get; set; }
 
+    /// <summary>是不是官方主库（Dip17）里的插件。</summary>
+    public bool Official { get; set; }
+
     public string? Note { get; set; }
 }
 

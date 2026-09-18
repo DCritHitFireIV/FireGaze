@@ -110,29 +110,34 @@ internal sealed class TranslateTab
         // ---------------- 参与翻译 ----------------
         ImGui.Separator();
         var pending = this.plugin.Contributions.Count;
-        if (pending > 0)
+        if (ImGui.Button("参与翻译，只翻第三方###OpenContribute"))
         {
-            ImGui.Button($"参与翻译（{pending}）###OpenContribute");
-        }
-        else
-        {
-            ImGui.Button("参与翻译###OpenContribute");
-        }
-
-        if (ImGui.IsItemClicked())
-        {
-            this.plugin.OpenContributeWindow();
+            this.plugin.OpenContributeWindow(includeOfficial: false);
         }
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("搜索全部第三方插件，看到翻译不合适就改、没有译文就补上。\n改动先存在本地，攒够了自己导出、在 GitHub 提 issue。");
+            ImGui.SetTooltip(
+                "搜索第三方插件库里的插件，缺译文就补、不合适就改；\n"
+                + "改动先存在本地，攒够了一条提交。");
         }
 
         ImGui.SameLine();
-        ImGui.TextDisabled(pending > 0
-            ? $"待提交 {pending} 条（已存在本地，不会自动发出去）"
-            : "改进词表、帮自己喜欢的插件翻译");
+        if (ImGui.Button("连官方库一起翻###OpenContributeOfficial"))
+        {
+            this.plugin.OpenContributeWindow(includeOfficial: true);
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("把官方主库（Dip17）里的插件也列进来；本页的汉化只替第三方库，官方库需要你自己接受提交后的词表。");
+        }
+
+        if (pending > 0)
+        {
+            ImGui.SameLine();
+            ImGui.TextDisabled($"已存 {pending} 条待提交（不会自动发出去）");
+        }
 
         if (this.noticeReview)
         {

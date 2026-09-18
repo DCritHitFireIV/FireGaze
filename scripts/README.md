@@ -29,6 +29,23 @@
 
 需要仓库 secret `DEEPSEEK_API_KEY`。
 
+## 玩家贡献（「参与翻译」页）
+
+插件里第四个页签「参与翻译」让玩家直接改译文，存在插件配置目录的 `contributions.json`，
+攒够了一条提交到 GitHub issue。收到后：
+
+```bash
+python scripts/import_contributions.py <issue 里的 json 或玩家导出的文件> [--dry-run]
+```
+
+规则（与插件、`update_translations.py` 三边一致）：
+
+- 写回的条目 `Source` = `user`，**机器翻译永不覆盖**；旧值追加进 `translation-history.jsonl`（可回滚）；
+- 上游原文变了（贡献里的 Original 与词表对不上）→ **跳过**并列出来，由人决定；
+- 包含官方主库（Dip17）的插件：Aetherfeed 语料不含官方库，那部分译文只能靠玩家/人维护；
+- 上游本来就空着的字段（没写一行简介 / 详情）**不算缺译**，但玩家可以补，补的也算 `user`。
+
+
 ## 手动维护
 
 ```bash

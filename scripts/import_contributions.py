@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""import_contributions.py — 把玩家在「参与翻译」窗口导出的贡献写回词表。
+"""import_contributions.py — 把玩家在「参与翻译」页的贡献写回词表。
+
+来源两种，都很常见：
+  ① 玩家在 GitHub 提的 issue：正文里的 ```json``` 代码块（一键提交会把整份 JSON 放在里面）；
+  ② 玩家提交的 attachments 文件 contributions-*.json。
+两种都把 JSON 存成一个文件，路径当第一个参数传进来即可。
 
 用法：
     python scripts/import_contributions.py <导出文件.json> [--table translations.json] [--dry-run]
 
 规则（与插件里的口径一致）：
   ① 玩家译文一旦写入，`Source` = `user`，机器翻译永不覆盖；
-  ② 上游原文变了（与贡献里的 Original 对不上）→ 不写原处，记入 needs-review，
+  ② 上游原文变了（与贡献里的 Original 对不上）→ 不写原处，记入报告，
      由人决定是不是还要这条译文；
   ③ 每次写入都会把旧值追加到 scripts/translation-history.jsonl，可回滚；
-  ④ 原文改过（记录里 Stale=true，或表里的原文与贡献对不上）→ 写入时加 `Review` 说明。
+  ④ 原文改过（记录里 Stale=true，或表里的原文与贡献对不上）→ 写入时加 `Review` 说明；
+  ⑤ 官方主库插件（记录里 Official=true）同样接受：上游本来就没有中文，
+     玩家提交的译文会成为唯一来源；注意 update_translations.py 的语料不含官方库，
+     所以这类条目只能靠人/玩家维护。
 """
 
 from __future__ import annotations
@@ -105,6 +113,10 @@ def main(argv=None) -> int:
     print(f"应用 {applied} 条；跳过 {len(skipped)} 条")
     for line in skipped[:20]:
         print(f"  [跳过] {line}")
+
+    official = sum(1 for record in records if record.get("Official"))
+    if official:
+        print(f"其中官方库条目 {official} 条（这类译文只能靠玩家/人维护）")
 
     if args.dry_run:
         print("--dry-run：没有写任何文件。")

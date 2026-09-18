@@ -26,8 +26,11 @@ internal sealed class TranslationIndexEntry
     /// <summary>词表里对这个插件的现有记录（没有 = null）。</summary>
     public TransEntry? Entry { get; init; }
 
-    /// <summary>有多少个字段能翻（原文非空）。</summary>
+    /// <summary>有多少个字段能翻。注意：不包括上游本来就是空、玩家也没贡献过的字段。</summary>
     public int TotalFields { get; init; }
+
+    /// <summary>上游本来就是空、但玩家贡献过的字段数（算进完成度，不算缺译）。</summary>
+    public int TemplateFields { get; init; }
 
     /// <summary>有多少个字段已经有译文。</summary>
     public int TranslatedFields { get; init; }
@@ -38,7 +41,13 @@ internal sealed class TranslationIndexEntry
     /// <summary>有没有「原文改过、还没重译」的字段。</summary>
     public bool HasReview { get; init; }
 
-    /// <summary>缺译文的字段名（Name / Punchline / Description）。</summary>
+    /// <summary>是不是官方主库（Dip17）里的插件。</summary>
+    public bool IsOfficial { get; init; }
+
+    /// <summary>上游没提供、但玩家可以补上译文的字段（Name / Punchline / Description）。</summary>
+    public List<string> ContributableFields { get; } = [];
+
+    /// <summary>缺译文的字段名（Name / Punchline / Description）；上游没提供的字段不算缺译。</summary>
     public List<string> MissingFields { get; } = [];
 
     /// <summary>整条插件的状态（用户筛选「缺译文 / 机器译 / 玩家译」用）。</summary>
@@ -61,8 +70,15 @@ internal sealed class TranslationIndexEntry
     /// <summary>搜索用的归一化文本（名称 + 原文 + 译文）。</summary>
     internal string SearchBlob { get; set; } = string.Empty;
 
-    /// <summary>完成度：已有译文的字段 / 能翻的字段。</summary>
-    public float Completion => this.TotalFields == 0 ? 0f : (float)this.TranslatedFields / this.TotalFields;
+    /// <summary>完成度：已有译文的字段 / 该有译文的字段（含玩家补的空字段）。</summary>
+    public float Completion
+    {
+        get
+        {
+            var total = this.TotalFields + this.TemplateFields;
+            return total == 0 ? 0f : (float)this.TranslatedFields / total;
+        }
+    }
 
     public void FinalizeState()
     {
@@ -220,25 +236,39 @@ internal sealed class TranslationIndex
         };
 
         var total = 0;
+        var template = 0;
         var translated = 0;
         var user = false;
         var review = false;
         var missing = new List<string>();
+        var contributable = new List<string>();
 
         foreach (var (field, original, pair) in fields)
         {
-            if (string.IsNullOrWhiteSpace(original) && pair is null)
+            var hasOriginal = !string.IsNullOrWhiteSpace(original);
+            var hasTranslation = pair is { HasTranslation: true };
+
+            if (!hasOriginal && !hasTranslation)
             {
+                // 上游压根没提供这个字段：不算缺译，但允许玩家贡献一份
+                contributable.Add(field);
                 continue;
             }
 
-            total++;
-            if (pair is { HasTranslation: true })
+            if (!hasOriginal)
             {
+                // 上游没提供、玩家自己写了：算进完成度，不算缺译
+                template++;
+                translated++;
+            }
+            else if (hasTranslation)
+            {
+                total++;
                 translated++;
             }
             else
             {
+                total++;
                 missing.Add(field);
             }
 
@@ -247,7 +277,7 @@ internal sealed class TranslationIndex
         }
 
         // 三个字段都没有原文、词表里也没有：没什么可翻的，直接不进列表
-        if (total == 0)
+        if (total + template == 0 && !user)
         {
             return null;
         }
@@ -267,12 +297,15 @@ internal sealed class TranslationIndex
             IsThirdParty = isThirdParty,
             Manifest = manifest,
             TotalFields = total,
+            TemplateFields = template,
             TranslatedFields = translated,
             HasUserTranslation = user,
             HasReview = review,
+            IsOfficial = !isThirdParty,
         };
 
         result.MissingFields.AddRange(missing);
+        result.ContributableFields.AddRange(contributable);
         result.FinalizeState();
         return result;
     }
