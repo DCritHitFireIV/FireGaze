@@ -767,6 +767,7 @@ internal sealed class ContributeWindow
             this.buildTask = null;
             this.index = finished.Status == TaskStatus.RanToCompletion ? finished.Result : null;
             this.rebuildPending = true;
+            this.rebuildRepoPending = true;
             if (this.index is { Available: false })
             {
                 this.retryAfter = DateTime.UtcNow.AddSeconds(10);
