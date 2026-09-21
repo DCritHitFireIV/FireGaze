@@ -434,12 +434,12 @@ internal sealed class RepoAuditTab
 
         var tableHeight = MathF.Max(120f, ImGui.GetContentRegionAvail().Y - 6f);
         var tableFlags = ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
-                         ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings;
+                         ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings;
 
         if (ImGui.BeginTable("###RepoRows", 5, tableFlags | ImGuiTableFlags.Sortable, new Vector2(0, tableHeight)))
         {
             ImGui.TableSetupScrollFreeze(0, 1);
-            ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoSort, 26, 0);
+            ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize | ImGuiTableColumnFlags.NoSort, 26, 0);
             ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.DefaultSort | ImGuiTableColumnFlags.PreferSortAscending, 120, 1);
             ImGui.TableSetupColumn("仓库地址", ImGuiTableColumnFlags.WidthStretch, 0, 2);
             ImGui.TableSetupColumn("本库已装", ImGuiTableColumnFlags.WidthFixed, 96, 3);

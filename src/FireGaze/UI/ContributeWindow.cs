@@ -275,20 +275,20 @@ internal sealed class ContributeWindow
         this.RebuildFiltered();
 
         var showIconColumn = this.plugin.Config.ShowIconsInContribute;
-        var columns = showIconColumn ? 7 : 6;
+        var columns = showIconColumn ? 8 : 7;   // ##sel + 状态 + [图标] + 插件名 + 来源库 + 原文 + 译文 + 操作
 
         if (!ImGui.BeginTable(
                 "###ContributeRows",
                 columns,
                 ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
-                ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
+                ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
                 new Vector2(0, tableHeight)))
         {
             return;
         }
 
         ImGui.TableSetupScrollFreeze(0, 1);
-        ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoSort, 26, 0);
+        ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize | ImGuiTableColumnFlags.NoSort, 26, 0);
         ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed, 72, 1);
         if (showIconColumn)
         {
@@ -299,7 +299,7 @@ internal sealed class ContributeWindow
         ImGui.TableSetupColumn("来源库", ImGuiTableColumnFlags.WidthFixed, 118, 4);
         ImGui.TableSetupColumn("原文", ImGuiTableColumnFlags.WidthStretch, 0, 5);
         ImGui.TableSetupColumn("译文", ImGuiTableColumnFlags.WidthFixed, 118, 6);
-        ImGui.TableSetupColumn("##action", ImGuiTableColumnFlags.WidthFixed, 58, 7);
+        ImGui.TableSetupColumn("##action", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 58, 7);
 
         ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
         ImGui.TableNextColumn();
@@ -383,14 +383,14 @@ internal sealed class ContributeWindow
                 "###ContributeRepos",
                 columns,
                 ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
-                ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
+                ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
                 new Vector2(0, tableHeight)))
         {
             return;
         }
 
         ImGui.TableSetupScrollFreeze(0, 1);
-        ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed, 26, 0);
+        ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 26, 0);
         ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed, 72, 1);
         if (showIconColumn)
         {
@@ -400,7 +400,7 @@ internal sealed class ContributeWindow
         ImGui.TableSetupColumn("仓库", ImGuiTableColumnFlags.WidthFixed, 210, 3);
         ImGui.TableSetupColumn("插件数", ImGuiTableColumnFlags.WidthFixed, 190, 4);
         ImGui.TableSetupColumn("说明", ImGuiTableColumnFlags.WidthStretch, 0, 5);
-        ImGui.TableSetupColumn("##action", ImGuiTableColumnFlags.WidthFixed, 58, 6);
+        ImGui.TableSetupColumn("操作", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 104, 6);
 
         ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
         ImGui.TableNextColumn();
@@ -568,11 +568,12 @@ internal sealed class ContributeWindow
                 ? "卫月官方主库"
                 : group.Enabled
                     ? "已经在你的库里"
-                    : "这条库已停用或者没有启用");
+                    : "这条库已停用");
 
+        // 启用 / 加库按钮独占最后一列：列宽拖窄也不会把按钮挤到下一行、把行高顶起来
+        ImGui.TableNextColumn();
         if (!group.IsOfficial && !group.Enabled && !string.IsNullOrWhiteSpace(group.Url))
         {
-            ImGui.SameLine();
             if (ImGui.SmallButton("启用###en-" + id))
             {
                 this.plugin.Repos.SetEnabled([group.Url], true, out _);
@@ -588,12 +589,9 @@ internal sealed class ContributeWindow
             {
                 ImGui.SetTooltip("保留链接、把它重新启用；启用后卫月会去抓它的插件");
             }
-        }
 
-        ImGui.TableNextColumn();
-        if (!group.IsOfficial && !group.Enabled && !string.IsNullOrWhiteSpace(group.Url))
-        {
-            if (ImGui.SmallButton("加到我的库###add-" + id))
+            ImGui.SameLine();
+            if (ImGui.SmallButton("加库###add-" + id))
             {
                 this.repoInput = group.Url;
                 this.SetStatus("地址已填到操作条的输入框，点「添加到我的库」确认", isError: false);
