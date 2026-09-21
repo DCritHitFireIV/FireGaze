@@ -1853,7 +1853,15 @@ internal sealed class ContributeWindow
                 }
 
                 ImGui.TableNextColumn();
-                UiHelpers.Fitted(record.DisplayName, record.DisplayName + "\n" + record.InternalName);
+                if (ImGui.SmallButton(record.DisplayName + "###recname-" + key))
+                {
+                    this.EditExistingContribution(record);   // 点名字也能进详情，跟上面一致
+                }
+
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip(record.DisplayName + "\n" + record.InternalName + "\n点开详情，改这一条译文");
+                }
 
                 ImGui.TableNextColumn();
                 ImGui.TextDisabled(FieldLabel(record.Field));
@@ -1916,7 +1924,15 @@ internal sealed class ContributeWindow
                 var record = records[i];
                 ImGui.TableNextRow();
                 ImGui.TableNextColumn();
-                UiHelpers.Fitted(record.DisplayName, record.DisplayName + "\n" + record.InternalName);
+                if (ImGui.SmallButton(record.DisplayName + "###hisname-" + record.InternalName + record.Field))
+                {
+                    this.EditExistingContribution(record);   // 留档里点名字也进详情（会新开一份待提交，留档本身不动）
+                }
+
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip(record.DisplayName + "\n" + record.InternalName + "\n看这一条在详情里的样子");
+                }
                 ImGui.TableNextColumn();
                 ImGui.TextDisabled(FieldLabel(record.Field));
                 ImGui.TableNextColumn();
