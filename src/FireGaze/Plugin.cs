@@ -90,6 +90,7 @@ public sealed class Plugin : IDalamudPlugin
                               ?? ".";
         this.Table = new TranslationTable(this.ConfigDirectory, pluginDirectory);
         this.Contributions = new ContributionsStore(this.ConfigDirectory);
+        this.Candidates = new CandidatesStore(this.ConfigDirectory);
         this.Patcher = new ManifestPatcher(() => this.Config, this.Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
@@ -232,6 +233,9 @@ public sealed class Plugin : IDalamudPlugin
 
     /// <summary>本地待提交的翻译贡献（配置目录，不联网）。</summary>
     internal ContributionsStore Contributions { get; }
+
+    /// <summary>候选译文（仓库里的 candidates.json + 本机偏好；每周一由工作流更新）。</summary>
+    internal CandidatesStore Candidates { get; }
 
     /// <summary>插件配置目录（备份写在这里的 backups/ 下）。</summary>
     public string ConfigDirectory { get; }

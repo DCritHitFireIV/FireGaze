@@ -45,8 +45,14 @@ internal sealed class ContributeWindow
     /// <summary>本地上限检查没过时记下原因（保存后显示在状态行）。</summary>
     private string? ruleIssue;
 
-    /// <summary>重建索引时不要反复反射卫月内部：改成按条目就地重算状态，见 <see cref="RefreshEntryState"/>。</summary>
+    /// <summary>重建索引时不要反复反射卫月内部：改成按条目就地重算状态，见 <see cref="RefreshEntryStates"/>。</summary>
     private bool refreshStatesRequested;
+
+    /// <summary>评分视图：正在拉候选清单。</summary>
+    private volatile bool reviewRefreshing;
+
+    /// <summary>评分视图当前页（从 0 开始，每页 10 条）。</summary>
+    private int reviewPage;
     private readonly HashSet<string> expandedRepos = new(StringComparer.Ordinal);
 
     private TranslationIndex? index;
@@ -194,6 +200,17 @@ internal sealed class ContributeWindow
             this.view = "repos";
         }
 
+        ImGui.SameLine();
+        if (ImGui.RadioButton("评分###ViewReview", this.view == "review"))
+        {
+            this.view = "review";
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("看别人提交、还没定下来的候选译文；给喜欢的点个赞，或只在本机选一条自己喜欢的（只存本地）。");
+        }
+
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("按仓库：一条库链一行，像仓库体检那样看哪些库缺译文多、需不需要加进来。");
@@ -215,6 +232,10 @@ internal sealed class ContributeWindow
         if (this.view == "repos")
         {
             this.DrawRepoTable(topHeight);
+        }
+        else if (this.view == "review")
+        {
+            this.DrawReviewView(topHeight);
         }
         else
         {
@@ -391,6 +412,256 @@ internal sealed class ContributeWindow
         }
 
         ImGui.EndTable();
+    }
+
+    // ------------------------------------------------------------------ 评分视图（候选译文）
+
+    private const int ReviewPageSize = 10;
+
+    /// <summary>
+    /// 「评分」视图：把仓库里 candidates.json 的候选译文列出来。
+    /// **0 赞的单独分组、排在最前**（「还没人评」），已有人评的按赞数排。
+    /// 👍/👎 在 GitHub 的对应评论上投；这里只显示 👍 数与本人选的偏好（存本地）。
+    /// </summary>
+    private void DrawReviewView(float tableHeight)
+    {
+        var store = this.plugin.Candidates;
+        var list = store.Sorted();
+
+        ImGui.Text($"候选 {store.Count} 条 · 还没人评 {store.NewCount} 条 · 我选过 {store.FavoriteCount} 条");
+        ImGui.SameLine();
+
+        if (this.reviewRefreshing)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.Button("刷新候选###RefreshCandidates"))
+        {
+            this.RefreshCandidates();
+        }
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip("从 GitHub 拉最新的候选清单（每周一由工作流更新）；\n依次试镜像，拉不到就继续用本地缓存。");
+        }
+
+        if (this.reviewRefreshing)
+        {
+            ImGui.EndDisabled();
+            ImGui.SameLine();
+            ImGui.TextDisabled("正在刷新…");
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("打开提交列表###OpenIssues"))
+        {
+            OpenInBrowser(ContributionsStore.RepoUrl + "/issues");
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("在浏览器里看所有提交：每条译文一条评论，给评论点 👍 就是投票");
+        }
+
+        if (store.LastLoadedLocal != default)
+        {
+            ImGui.SameLine();
+            ImGui.TextDisabled($"（清单：{store.LastLoadedLocal:MM-dd HH:mm}）");
+        }
+
+        if (!string.IsNullOrEmpty(store.LastError))
+        {
+            UiHelpers.ColoredWrapped(UiHelpers.Warn, "上次刷新没成功：" + store.LastError);
+        }
+
+        if (list.Count == 0)
+        {
+            ImGui.TextDisabled("还没有候选译文。等有人提交，或点上面的「刷新候选」拉一次。");
+            return;
+        }
+
+        // 分页：每页 10 条
+        var pages = Math.Max(1, (list.Count + ReviewPageSize - 1) / ReviewPageSize);
+        this.reviewPage = Math.Clamp(this.reviewPage, 0, pages - 1);
+        var start = this.reviewPage * ReviewPageSize;
+        var end = Math.Min(start + ReviewPageSize, list.Count);
+
+        ImGui.SameLine();
+        if (this.reviewPage <= 0)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.SmallButton("◀ 上一页###RevPrev"))
+        {
+            this.reviewPage--;
+        }
+
+        if (this.reviewPage <= 0)
+        {
+            ImGui.EndDisabled();
+        }
+
+        ImGui.SameLine();
+        ImGui.TextDisabled($"第 {this.reviewPage + 1} / {pages} 页（每页 {ReviewPageSize} 条）");
+        ImGui.SameLine();
+        if (this.reviewPage >= pages - 1)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.SmallButton("下一页 ▶###RevNext"))
+        {
+            this.reviewPage++;
+        }
+
+        if (this.reviewPage >= pages - 1)
+        {
+            ImGui.EndDisabled();
+        }
+
+        if (!ImGui.BeginTable(
+                "###ReviewRows",
+                5,
+                ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
+                ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
+                new Vector2(0, MathF.Max(120f, tableHeight))))
+        {
+            return;
+        }
+
+        ImGui.TableSetupScrollFreeze(0, 1);
+        ImGui.TableSetupColumn("插件", ImGuiTableColumnFlags.WidthFixed, 170, 0);
+        ImGui.TableSetupColumn("字段", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 76, 1);
+        ImGui.TableSetupColumn("候选译文", ImGuiTableColumnFlags.WidthStretch, 0, 2);
+        ImGui.TableSetupColumn("票", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 92, 3);
+        ImGui.TableSetupColumn("##act", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 132, 4);
+
+        ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("插件");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("字段");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("候选译文");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("别人提交的译法；悬停看全文。同一个插件的同一字段可能有好几条候选。");
+        }
+
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("票");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("👍 票数；反对票不显示。点赞 / 反对在 GitHub 的对应评论上点。");
+        }
+
+        ImGui.TableNextColumn();
+
+        var lastGroup = string.Empty;
+        for (var i = start; i < end; i++)
+        {
+            var entry = list[i];
+            var group = entry.IsNew ? "new" : "voted";
+            if (group != lastGroup)
+            {
+                lastGroup = group;
+                ImGui.TableNextRow();
+                ImGui.TableNextColumn();
+                if (group == "new")
+                {
+                    UiHelpers.ColoredText(UiHelpers.Info, "还没人评（新来的）");
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.SetTooltip("这些还没人点过赞；满 30 天没赞会被归档，不再出现在这里。");
+                    }
+                }
+                else
+                {
+                    UiHelpers.ColoredText(UiHelpers.Good, "已有人评");
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.SetTooltip("按 👍 从多到少排；👍 ≥ 1 的会在周一并入正式词表。");
+                    }
+                }
+            }
+
+            ImGui.TableNextRow();
+
+            ImGui.TableNextColumn();
+            ImGui.TextUnformatted(entry.InternalName);
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(entry.InternalName + "\n" + entry.FirstSeen + " 进来");
+            }
+
+            ImGui.TableNextColumn();
+            ImGui.TextDisabled(entry.FieldLabel);
+
+            ImGui.TableNextColumn();
+            UiHelpers.Fitted(entry.Translated.Replace('\n', ' '), "原文：" + entry.Original + "\n\n译文：" + entry.Translated);
+
+            ImGui.TableNextColumn();
+            if (entry.IsNew)
+            {
+                ImGui.TextDisabled("还没人评");
+            }
+            else
+            {
+                UiHelpers.ColoredText(UiHelpers.Good, $"👍 {entry.Votes}");
+            }
+
+            ImGui.TableNextColumn();
+            var favorite = store.IsFavorite(entry);
+            if (favorite)
+            {
+                UiHelpers.ColoredText(UiHelpers.Accent, "✔");
+                ImGui.SameLine();
+            }
+
+            if (ImGui.SmallButton((favorite ? "取消###fav-" : "选它###fav-") + entry.Key))
+            {
+                store.ToggleFavorite(entry);
+                this.SetStatus(favorite ? "已取消本机选择" : "已在本机选上这一条（只存本地，不上传）", isError: false);
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("只记在本机：哪个译法你更喜欢。不上传、不改词表。");
+            }
+
+            ImGui.SameLine();
+            if (ImGui.SmallButton("看/投票###vote-" + entry.Key))
+            {
+                OpenInBrowser(entry.IssueUrl);
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("打开这条提交的 GitHub 页面：那里每条译文是一条评论，给评论点 👍 / 👎 就是投票。");
+            }
+        }
+
+        ImGui.EndTable();
+    }
+
+    private void RefreshCandidates()
+    {
+        if (this.reviewRefreshing)
+        {
+            return;
+        }
+
+        this.reviewRefreshing = true;
+        _ = Task.Run(async () =>
+        {
+            var (ok, message) = await this.plugin.Candidates
+                .UpdateFromGitHubAsync(CancellationToken.None)
+                .ConfigureAwait(false);
+            this.reviewRefreshing = false;
+            this.SetStatus(message, !ok);
+        });
     }
 
     /// <summary>仓库视图：一行一条库链（点开展开它提供的插件）。</summary>

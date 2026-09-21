@@ -215,6 +215,7 @@ internal sealed class TranslationIndex
             }
 
             var map = new Dictionary<string, TranslationIndexEntry>(StringComparer.Ordinal);
+            var skippedOrUnusable = 0;
 
             foreach (var repo in repos)
             {
@@ -250,6 +251,7 @@ internal sealed class TranslationIndex
                     var entry = Create(manifest, repoUrl, repoEnabled, isThirdParty, table);
                     if (entry is null)
                     {
+                        skippedOrUnusable++;
                         continue;
                     }
 
@@ -277,7 +279,7 @@ internal sealed class TranslationIndex
             }
 
             Plugin.Log.Debug(
-                $"[FireGaze] 参与翻译索引：{index.all.Count} 个插件（缺译 {index.MissingCount} · 玩家译 {index.UserCount}）");
+                $"[FireGaze] 参与翻译索引：{index.all.Count} 个插件（缺译 {index.MissingCount} · 玩家译 {index.UserCount}；跳过测试版/无内容 {skippedOrUnusable} 个）");
             return index;
         }
         catch (Exception e)
@@ -299,6 +301,13 @@ internal sealed class TranslationIndex
 
         var internalName = type.GetProperty("InternalName", flags)?.GetValue(manifest) as string;
         if (string.IsNullOrWhiteSpace(internalName))
+        {
+            return null;
+        }
+
+        // 测试版专用插件（卫月自家标记 IsTestingExclusive）不进这份列表：
+        // 它们是测试分支、随时改，玩家基本用不到，也永远补不完 —— 用户 2026-09-22 定：不算缺译。
+        if (type.GetProperty("IsTestingExclusive", flags)?.GetValue(manifest) as bool? == true)
         {
             return null;
         }
