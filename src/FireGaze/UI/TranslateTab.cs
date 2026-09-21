@@ -58,7 +58,7 @@ internal sealed class TranslateTab
         }
 
         var autoUpdate = config.AutoUpdateTable;
-        if (ImGui.Checkbox("每两周自动检查词表更新###AutoUpdateTable", ref autoUpdate))
+        if (ImGui.Checkbox("每 7 天自动检查词表更新###AutoUpdateTable", ref autoUpdate))
         {
             config.AutoUpdateTable = autoUpdate;
             this.plugin.SaveConfig();

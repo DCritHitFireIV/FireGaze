@@ -5196,15 +5196,18 @@
  "SamplePlugin": {
   "Punchline": {
    "Original": "Répare automatiquement votre équipement sous un seuil donné, via matière sombre ou PNJ.",
-   "Translated": "当装备耐久低于设定阈值时，自动通过暗物质或 NPC 进行修理。"
+   "Translated": "在低于设定阈值时自动修理装备，可通过暗物质或 NPC 进行。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Surveille l'état de votre équipement et déclenche une réparation automatique dès\r\nqu'une pièce passe sous un seuil configurable. Deux méthodes au choix : matière sombre (sur soi,\r\nsans rien consommer tant que le seuil n'est pas franchi) ou PNJ réparateur (déplacement automatique\r\nvia vnavmesh puis réparation gratuite). Inclut une jauge visuelle façon RepairMe affichant l'état de\r\nchaque pièce d'équipement.",
-   "Translated": "监控装备状态，当某件装备低于可配置阈值时自动触发修理。两种方式可选：暗物质（随身修理，未达阈值前不消耗任何材料）或修理 NPC（通过 vnavmesh 自动移动后免费修理）。包含类似 RepairMe 的可视化进度条，显示每件装备的状态。"
+   "Translated": "监控装备状态，并在某件装备低于可配置阈值时触发自动修理。两种方式可选：暗物质（随身使用，未达到阈值前不消耗任何物品）或修理 NPC（通过 vnavmesh 自动移动，然后免费修理）。包含类似 RepairMe 的可视化进度条，显示每件装备的状态。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "Auto-Repair Kit",
-   "Translated": "自动修理工具"
+   "Translated": "自动修理工具",
+   "Source": "ai"
   }
  },
  "AQuestReborn": {
@@ -6026,11 +6029,13 @@
   },
   "Description": {
    "Original": "使用强化药（爆发药）时，为角色播放嗷嗷有劲的 RGB 能量光效。支持六档垂直位置调节、无需消耗爆发药的即时预览、一键清除当前光效，并可按角色分别记住高度设置。原作者：Loskh。本版本为私人修复版本。",
-   "Translated": "使用强化药（爆发药）时，为角色播放嗷嗷有劲的 RGB 能量光效。支持六档垂直位置调节、无需消耗爆发药的即时预览、一键清除当前光效，并可按角色分别记住高度设置。原作者：Loskh。本版本为私人修复版本。"
+   "Translated": "使用强化药（爆发药）时，为角色播放嗷嗷有劲的 RGB 能量光效。支持六档垂直位置调节、无需消耗爆发药的即时预览、一键清除当前光效，并可按角色分别记住高度设置。原作者：Loskh。本版本为私人修复版本。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "AoAoEnergy",
-   "Translated": "AoAoEnergy"
+   "Translated": "AoAoEnergy",
+   "Source": "ai"
   }
  },
  "TheCollector": {
@@ -9508,15 +9513,18 @@
  "BetterTargetingSystemPvP": {
   "Punchline": {
    "Original": "Better Targeting without PvP restrictions",
-   "Translated": "无 PvP 限制的更好选定目标"
+   "Translated": "无 PvP 限制的更好的选定目标",
+   "Source": "ai"
   },
   "Description": {
    "Original": "A more intelligent targeting system for the game which also includes new keybinds.",
-   "Translated": "更智能的游戏选定目标系统，还包含新的按键绑定。"
+   "Translated": "更智能的游戏选定目标系统，还包含新的按键绑定。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "Better Targeting System PvP",
-   "Translated": "PvP瞄准优化"
+   "Translated": "优化选敌系统 PvP",
+   "Source": "ai"
   }
  },
  "Dalamud.LoadingImage2": {
@@ -21776,7 +21784,8 @@
   },
   "Description": {
    "Original": "FireGaze 是给卫月（Dalamud）用的一体化工具箱，三种功能：① 插件简介汉化：内置 1500+ 条第三方插件简中词表，安装器里的插件名、一行简介、插件详情都可以独立选择「英语原版 / 中文 / 双语」呈现（默认：名字原版、简介中文、详情中英对照）；② 第三方仓库体检：一键扫描你添加的全部库（含已停用的），找出死链、内容不合规、连接失败的条目并列出，支持一键停用、一键删除（删除前自动备份、可撤回）；③ 列表自动刷新拦截：部分插件（如「每日随记」Daily Routines、XSZToolbox，以及经 OmenTools 等公共库转发的调用）会每 10 分钟反射调用卫月「重载全部仓库」，导致安装器列表自刷新、滚动位置被顶回顶部；本插件按调用来源拦截这些后台刷新，手动刷新与打开安装器不受影响。",
-   "Translated": "FireGaze 是给卫月（Dalamud）用的一体化工具箱，三种功能：① 插件简介汉化：内置 1500+ 条第三方插件简中词表，安装器里的插件名、一行简介、插件详情都可以独立选择「英语原版 / 中文 / 双语」呈现（默认：名字原版、简介中文、详情中英对照）；② 第三方仓库体检：一键扫描你添加的全部库（含已停用的），找出死链、内容不合规、连接失败的条目并列出，支持一键停用、一键删除（删除前自动备份、可撤回）；③ 列表自动刷新拦截：部分插件（如「每日随记」Daily Routines、XSZToolbox，以及经 OmenTools 等公共库转发的调用）会每 10 分钟反射调用卫月「重载全部仓库」，导致安装器列表自刷新、滚动位置被顶回顶部；本插件按调用来源拦截这些后台刷新，手动刷新与打开安装器不受影响。"
+   "Translated": "FireGaze 是给卫月（Dalamud）用的一体化工具箱，三种功能：① 插件简介汉化：内置 1500+ 条第三方插件简中词表，安装器里的插件名、一行简介、插件详情都可以独立选择「英语原版 / 中文 / 双语」呈现（默认：名字原版、简介中文、详情中英对照）；② 第三方仓库体检：一键扫描你添加的全部库（含已停用的），找出死链、内容不合规、连接失败的条目并列出，支持一键停用、一键删除（删除前自动备份、可撤回）；③ 列表自动刷新拦截：部分插件（如「每日随记」Daily Routines、XSZToolbox，以及经 OmenTools 等公共库转发的调用）会每 10 分钟反射调用卫月「重载全部仓库」，导致安装器列表自刷新、滚动位置被顶回顶部；本插件按调用来源拦截这些后台刷新，手动刷新与打开安装器不受影响。",
+   "Source": "ai"
   }
  },
  "PixelPerfect": {
@@ -22192,7 +22201,8 @@
  "AutoMakeTimeline": {
   "Name": {
    "Original": "Auto Make Timeline",
-   "Translated": "自动生成时间轴"
+   "Translated": "自动生成时间轴",
+   "Source": "ai"
   },
   "Description": {
    "Original": "/amt on プラグイン機能を有効化。\n- /amt off プラグイン機能を無効化。",
@@ -23285,526 +23295,636 @@
    "Translated": "显示死者宫殿、天之御柱和正统优雷卡中可能的陷阱与诅咒宝藏位置。\n\n此插件需要 Splatoon 才能在屏幕上渲染各种绘制。"
   }
  },
- "WhoPulled": {
-  "Name": {
-   "Original": "WhoPulled",
-   "Translated": "谁开的怪"
-  },
-  "Description": {
-   "Original": "Identifies the player who first engaged an overworld hunt, including players outside your party.",
-   "Translated": "识别首个攻击野外狩猎怪物的玩家，包括你小队之外的玩家。"
-  }
- },
- "SentinelRelay": {
-  "Name": {
-   "Original": "Sentinel Relay",
-   "Translated": "Sentinel Relay"
-  },
-  "Punchline": {
-   "Original": "Private FFXIV-to-Discord chat relay with no hosted backend.",
-   "Translated": "私人的 FFXIV 到 Discord 聊天转发，无需托管后端。"
-  },
-  "Description": {
-   "Original": "Sends explicitly selected FFXIV chat channels directly to a per-character Discord webhook. All filters default off; no bot, paid hosting, or Discord-to-FFXIV control is required.",
-   "Translated": "将明确选定的 FFXIV 聊天频道直接发送到每个角色的 Discord webhook。所有过滤器默认关闭；无需机器人、付费托管或 Discord 到 FFXIV 的控制。"
-  }
- },
- "FishingClues": {
-  "Name": {
-   "Original": "Fishing Clues",
-   "Translated": "钓鱼线索"
-  },
-  "Punchline": {
-   "Original": "A Better Fishing Log",
-   "Translated": "更好的钓鱼日志"
-  },
-  "Description": {
-   "Original": "A better Fishing Log: spoiler-conscious, and packed with the info you actually need to find and catch fish.",
-   "Translated": "更好的钓鱼日志：注重防剧透，并包含你寻找和钓上鱼真正需要的信息。"
-  }
- },
- "Soumen": {
-  "Name": {
-   "Original": "Soumen",
-   "Translated": "Soumen"
-  },
-  "Description": {
-   "Original": "读取小队坐标并使用 vnavmesh 自动导航。",
-   "Translated": "读取小队坐标并使用 vnavmesh 自动导航。"
-  }
- },
- "Saru": {
-  "Name": {
-   "Original": "Saru",
-   "Translated": "Saru"
-  },
-  "Punchline": {
-   "Original": "JavaScript automation scripts and collected object information.",
-   "Translated": "JavaScript 自动化脚本及收集的对象信息。"
-  },
-  "Description": {
-   "Original": "/saru opens the Saru workspace. /saru start <scriptname> starts a script and /saru stop stops all running scripts.",
-   "Translated": "/saru 打开 Saru 工作区。/saru start <scriptname> 启动脚本，/saru stop 停止所有正在运行的脚本。"
-  }
- },
- "Ariadne": {
-  "Name": {
-   "Original": "Ariadne",
-   "Translated": "Ariadne"
-  },
-  "Description": {
-   "Original": "Bridge between the game session and Mnemosyne, an out-of-process navmesh cache. Detects zone loads, fetches cached meshes so vnavmesh skips its build, and exposes IPC so other plugins can request meshes or paths directly.",
-   "Translated": "在游戏会话与 Mnemosyne（进程外导航网格缓存）之间架起桥梁。检测区域加载，获取缓存网格以便 vnavmesh 跳过其构建，并暴露 IPC 以便其他插件可以直接请求网格或路径。"
-  }
- },
- "HiraganaTrainer": {
-  "Name": {
-   "Original": "Hiragana Trainer",
-   "Translated": "平假名练习"
-  },
-  "Punchline": {
-   "Original": "Train hiragana and katakana with spaced repetition, without leaving the game.",
-   "Translated": "无需离开游戏，通过间隔重复训练平假名和片假名。"
-  },
-  "Description": {
-   "Original": "A hiragana/katakana trainer using SRS (Leitner). Open it with /kana or let\r\nthe plugin remind you while you're queuing for a duty, with a configurable cooldown.",
-   "Translated": "使用 SRS（Leitner）的平假名/片假名训练器。使用 /kana 打开，或让插件在您排队副本时提醒您，冷却时间可配置。"
-  }
- },
- "RandomClassPicker": {
-  "Name": {
-   "Original": "Random Class Picker",
-   "Translated": "随机职业选择"
-  },
-  "Description": {
-   "Original": "随机换职业：从已保存套装里用真随机（random.org 大气噪声）抽一个职业并直接切换，支持按职能随机、职业池勾选、抽中次数统计。随机每日任务：在任务搜索器上叠加面板，勾选后随机抽一个未完成的随机任务并直接排队。另有服务器信息栏快捷图标，左键一点即抽即切。",
-   "Translated": "随机换职业：从已保存套装里用真随机（random.org 大气噪声）抽一个职业并直接切换，支持按职能随机、职业池勾选、抽中次数统计。随机每日任务：在任务搜索器上叠加面板，勾选后随机抽一个未完成的随机任务并直接排队。另有服务器信息栏快捷图标，左键一点即抽即切。"
-  }
- },
- "Knightshopper": {
-  "Name": {
-   "Original": "Knightshopper",
-   "Translated": "Knightshopper"
-  },
-  "Punchline": {
-   "Original": "Knightshopping made easy - ShopMore, click less.",
-   "Translated": "让购物变得轻松——ShopMore，少点击。"
-  },
-  "Description": {
-   "Original": "Your personal shopper who will take care of all your currency spendings!\n\nKnightshopper: because even knights deserve a squire for their shopping.",
-   "Translated": "您的私人购物助手，将为您处理所有货币消费！\n\nKnightshopper：因为即使是骑士也值得拥有一位购物侍从。"
-  }
- },
- "DialogueInspect": {
-  "Name": {
-   "Original": "DialogueInspect",
-   "Translated": "对话检查"
-  },
-  "Description": {
-   "Original": "ターゲットしたNPCの会話リストをタブ化し、項目をマークしてプリセット保存します。/di start で近くのNPCに話しかけ、マークした項目を選びます。",
-   "Translated": "ターゲットしたNPCの会話リストをタブ化し、項目をマークしてプリセット保存します。/di start で近くのNPCに話しかけ、マークした項目を選びます。"
-  }
- },
- "AuraCanAI.Dalamud": {
-  "Name": {
-   "Original": "AuraCanAI",
-   "Translated": "AuraCanAI"
-  },
-  "Description": {
-   "Original": "AuraCanAI 鍗湀鎻掍欢鐗?娓告垙鍐?AI 瑙掕壊鎵紨鍔╂墜銆傛彁渚涙湰鍦扮綉椤垫帶鍒跺彴(localhost:8051),鏀寔 DeepSeek 澶фā鍨嬭鑹叉壆婕斻€佽亰澶╄闊虫彁绀?TTS)銆佺帺瀹惰繘鍑?娉ㄨ鎻愰啋銆佽亰澶╄褰曞綊妗ｄ笌鍏ㄦ枃妫€绱€佺帺瀹跺娉ㄣ€侀檮杩戠帺瀹朵笌娲荤偣鍦板浘銆佽涓鸿缃€丮IDI 婕斿涓庡弻寮€鍚堝銆佺Щ鍔ㄥ唴鏍搞€傛寚浠?/aca",
-   "Translated": "AuraCanAI 鍗湀鎻掍欢鐗?娓告垙鍐?AI 瑙掕壊鎵紨鍔╂墜銆傛彁渚涙湰鍦扮綉椤垫帶鍒跺彴(localhost:8051),鏀寔 DeepSeek 澶фā鍨嬭鑹叉壆婕斻€佽亰澶╄闊虫彁绀?TTS)銆佺帺瀹惰繘鍑?娉ㄨ鎻愰啋銆佽亰澶╄褰曞綊妗ｄ笌鍏ㄦ枃妫€绱€佺帺瀹跺娉ㄣ€侀檮杩戠帺瀹朵笌娲荤偣鍦板浘銆佽涓鸿缃€丮IDI 婕斿涓庡弻寮€鍚堝銆佺Щ鍔ㄥ唴鏍搞€傛寚浠?/aca"
-  }
- },
- "EzCountdown": {
-  "Name": {
-   "Original": "EzCountdown",
-   "Translated": "EzCountdown"
-  },
-  "Punchline": {
-   "Original": "Fast shorthand countdown commands (/12, /0).",
-   "Translated": "快速简写倒计时命令（/12、/0）。"
-  },
-  "Description": {
-   "Original": "Simple shorthand countdown commands for FFXIV (e.g., /12 for a 12s countdown, /0 to cancel).",
-   "Translated": "适用于 FFXIV 的简单简写倒计时命令（例如，/12 表示 12 秒倒计时，/0 表示取消）。"
-  }
- },
- "EzSlides": {
-  "Name": {
-   "Original": "EzSlides",
-   "Translated": "EzSlides"
-  },
-  "Punchline": {
-   "Original": "Upload and view local images as slides.",
-   "Translated": "上传并查看本地图片作为幻灯片。"
-  },
-  "Description": {
-   "Original": "An in-game image and slide viewer for Final Fantasy XIV.",
-   "Translated": "适用于《最终幻想 XIV》的游戏内图片和幻灯片查看器。"
-  }
- },
- "XIVLibra": {
-  "Name": {
-   "Original": "XIVLibra",
-   "Translated": "XIVLibra"
-  },
-  "Punchline": {
-   "Original": "Real-time combat metrics, encounter history, and analysis overlay.",
-   "Translated": "实时战斗数据、遭遇历史和分析悬浮窗。"
-  },
-  "Description": {
-   "Original": "A real-time combat meter for Final Fantasy XIV.",
-   "Translated": "最终幻想XIV的实时战斗统计插件。"
-  }
- },
- "BurstTimers": {
-  "Name": {
-   "Original": "Burst Timers",
-   "Translated": "爆发计时器"
-  },
-  "Punchline": {
-   "Original": "Party buff, Dokumori, and personal potion countdown bars.",
-   "Translated": "团队增益、介毒之术和个人爆发药倒计时条。"
-  },
-  "Description": {
-   "Original": "Shows single two-minute timers for Dokumori on your target and Embolden, Starry Muse, Brotherhood, and Searing Light on you, plus your actual combat potion cooldown. Configure with /bursttimers.",
-   "Translated": "显示目标身上的介毒之术以及自身身上的鼓励、星空构想、义结金兰和灼热之光的单次两分钟计时器，外加实际战斗药冷却时间。使用 /bursttimers 进行配置。"
-  }
- },
- "AcousticKitty": {
-  "Name": {
-   "Original": "Acoustic Kitty",
-   "Translated": "Acoustic Kitty"
-  },
-  "Punchline": {
-   "Original": "Counterintelligence plugin.",
-   "Translated": "反侦察插件。"
-  },
-  "Description": {
-   "Original": "Cross-references nearby in-game characters against their Lodestone profile, and builds an audit queue against EchoVault's registration to see if they're already verified sightings contributors. Echo's API used to find stalkers can optionally be routed through a SOCKS5 proxy.",
-   "Translated": "将附近游戏内角色与其返回磁石档案进行交叉比对，并针对 EchoVault 的注册信息建立审核队列，以查看他们是否已是已验证的目击贡献者。用于查找跟踪者的 Echo API 可选择通过 SOCKS5 代理路由。"
-  }
- },
- "MahjongHater": {
-  "Name": {
-   "Original": "MahjongHater",
-   "Translated": "麻将克星"
-  },
-  "Punchline": {
-   "Original": "Doman Mahjong advisor: discard, call and riichi recommendations with reasoning.",
-   "Translated": "多玛方城战顾问：提供弃牌、鸣牌和立直建议及理由。"
-  },
-  "Description": {
-   "Original": "Doman Mahjong (Emj) solver — best-discard advisor, win-probability display, full han+fu scoring engine for FFXIV Gold Saucer.",
-   "Translated": "多玛方城战（Emj）求解器——最佳弃牌顾问、胜率显示，以及适用于最终幻想XIV金碟游乐场的完整番+符计分引擎。"
-  }
- },
- "TildeTools": {
-  "Name": {
-   "Original": "TildeTools",
-   "Translated": "TildeTools"
-  },
-  "Punchline": {
-   "Original": "A box of small tools, each switched on or off on its own.",
-   "Translated": "一盒小工具，每个都可单独开启或关闭。"
-  },
-  "Description": {
-   "Original": "A collection of tools under one window, each with its own tab and master switch. Includes Emote Splitter, which raises the chat box's length limit and sends long messages as paced chunks so the server does not drop them.",
-   "Translated": "一个窗口下汇集多种工具，每个都有自己的标签页和总开关。包含表情拆分器，可提高聊天框长度上限，并将长消息按节奏分段发送，以免服务器丢弃。"
-  }
- },
  "Intoner": {
   "Name": {
    "Original": "Intoner",
-   "Translated": "Intoner"
+   "Translated": "Intoner",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "little plugin that could.",
-   "Translated": "一个小小的插件。"
+   "Translated": "一个小小的插件。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "WIP.",
-   "Translated": "开发中。"
+   "Translated": "开发中。",
+   "Source": "ai"
   }
  },
  "CycleOpener": {
   "Name": {
    "Original": "Cycle & Opener",
-   "Translated": "循环与起手"
+   "Translated": "循环与起手",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Cycles et ouvertures par niveau pour 21 jobs de combat.",
-   "Translated": "21 个战斗职业的循环与起手，按等级划分。"
+   "Translated": "为 21 个战斗职业提供按等级的循环与起手。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Guides statiques de cycles, priorités et ouvertures par niveau. Mage noir et Mage blanc, mono/multicible, niveau automatique ou manuel, dans une seule fenêtre. Noms des sorts dans la langue du client ; explications en français. /cycle. Sans suivi du combat. Version expérimentale ; essais en jeu encore à confirmer. Fiches Mage noir et Mage blanc, sans action automatique ; quêtes de classe et de job supposées terminées.",
-   "Translated": "静态的循环、优先级与按等级起手指南。黑魔法师与白魔法师，单体/多目标，等级自动或手动，全部在一个窗口内。技能名称使用客户端语言；说明为法语。/cycle。不追踪战斗。实验性版本；游戏内测试仍待确认。黑魔法师与白魔法师卡片，无自动操作；假设职业任务与特职任务已完成。"
+   "Translated": "静态的循环、优先级和按等级起手指南。黑魔法师和白魔法师，单体/多目标，自动或手动等级，全部在一个窗口中。技能名称使用客户端语言；说明为法语。/cycle。无战斗追踪。实验性版本；游戏内测试仍待确认。黑魔法师和白魔法师资料，无自动操作；假定职业任务和特职任务已完成。",
+   "Source": "ai"
   }
  },
  "ArenaPilot": {
   "Name": {
    "Original": "ArenaPilot-斗兽塔助手",
-   "Translated": "ArenaPilot-斗兽塔助手"
+   "Translated": "ArenaPilot-斗兽塔助手",
+   "Source": "ai"
   },
   "Description": {
    "Original": "自动执行已支持的斗兽奇弈流程，包括入场、编队、路线导航、战斗准备、奖励领取、休息、宝箱、商店和最终结算。",
-   "Translated": "自动执行已支持的斗兽奇弈流程，包括入场、编队、路线导航、战斗准备、奖励领取、休息、宝箱、商店和最终结算。"
+   "Translated": "自动执行已支持的斗兽奇弈流程，包括入场、编队、路线导航、战斗准备、奖励领取、休息、宝箱、商店和最终结算。",
+   "Source": "ai"
   }
  },
  "Phantom": {
   "Name": {
    "Original": "肝武助手",
-   "Translated": "肝武助手"
+   "Translated": "肝武助手",
+   "Source": "ai"
   },
   "Description": {
    "Original": "统一追踪幻武、深层迷宫武器、旧肝武、特殊工具、绝武与妖表收藏。支持全系列按角色持有同步、秘影与 FATE 导航、妖表奖励扫描和雇员库存缓存读取。",
-   "Translated": "统一追踪幻武、深层迷宫武器、旧肝武、特殊工具、绝武与妖表收藏。支持全系列按角色持有同步、秘影与 FATE 导航、妖表奖励扫描和雇员库存缓存读取。"
+   "Translated": "统一追踪幻武、深层迷宫武器、旧肝武、特殊工具、绝武与妖表收藏。支持全系列按角色持有同步、秘影与 FATE 导航、妖表奖励扫描和雇员库存缓存读取。",
+   "Source": "ai"
   }
  },
  "DjScraperPlugin": {
   "Name": {
    "Original": "DJ Scraper",
-   "Translated": "DJ Scraper"
+   "Translated": "DJ Scraper",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Download and prepare playlist tracks from an in-game window.",
-   "Translated": "在游戏内窗口中下载并准备播放列表曲目。"
+   "Translated": "从游戏内窗口下载并准备播放列表曲目。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "An experimental companion for creating Thunderdome playlist tracks.",
-   "Translated": "用于创建 Thunderdome 播放列表曲目的实验性辅助工具。"
+   "Translated": "用于创建 Thunderdome 播放列表曲目的实验性配套工具。",
+   "Source": "ai"
   }
  },
  "TouchControl": {
   "Name": {
    "Original": "Touch Control",
-   "Translated": "触控操作"
+   "Translated": "触摸控制",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Gacha-style on-screen touch controls: virtual joystick, skill wheel and menu buttons.",
-   "Translated": "扭蛋风格的屏幕触控操作：虚拟摇杆、技能轮盘和菜单按钮。"
+   "Translated": "扭蛋风格的屏幕触控操作：虚拟摇杆、技能轮盘和菜单按钮。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Draws a mobile-game style control overlay on top of FFXIV for touchscreens and handhelds.\nA virtual joystick drives movement, a configurable skill wheel mirrors your hotbars with cooldowns,\nand quick buttons open the main menu windows, jump, sprint, target and interact.\nEvery control can be dragged and resized in edit mode.",
-   "Translated": "在 FFXIV 上绘制手游风格的触控操作覆盖层，适用于触摸屏和掌机。\n虚拟摇杆驱动移动，可配置的技能轮盘映射你的热键栏并显示冷却，\n快捷按钮可打开主菜单窗口、跳跃、冲刺、选中目标和交互。\n每个控件都可以在编辑模式下拖动和调整大小。"
+   "Translated": "在 FFXIV 上层绘制手游风格的触控操作界面，适用于触摸屏和掌机。\n虚拟摇杆驱动移动，可配置的技能轮盘映射你的热键栏并显示冷却，\n快捷按钮可打开主菜单窗口、跳跃、冲刺、选中目标和交互。\n每个控件都可以在编辑模式下拖动和调整大小。",
+   "Source": "ai"
   }
  },
  "DesTarget": {
   "Name": {
    "Original": "DesTarget",
-   "Translated": "DesTarget"
+   "Translated": "DesTarget",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Target what you're looking at.",
-   "Translated": "锁定你正在看的目标。"
+   "Translated": "锁定你正在注视的目标。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Smart targetting system using camera and range prioritization. Works in all content.",
-   "Translated": "使用摄像机和距离优先级的智能目标选择系统。适用于所有内容。"
+   "Translated": "使用镜头与距离优先级的智能目标选择系统。适用于所有内容。",
+   "Source": "ai"
   }
  },
  "MsqTitleScreen": {
   "Name": {
    "Original": "MSQ Title Screen",
-   "Translated": "主线标题界面"
+   "Translated": "主线标题界面",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Shows the title screen of the expansion you are actually playing through.",
-   "Translated": "显示你实际正在游玩的资料片标题画面。"
+   "Translated": "显示你实际正在游玩的资料片标题画面。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "The game picks its title screen from the furthest main scenario progress on the PC, so a character partway through an older expansion still boots into the newest screen.\n\nThis pins the game's own title screen setting to the story position of the character you last played, logo and music included. No game files are touched - it writes the same setting the title screen's Movies & Title menu does.",
-   "Translated": "游戏会根据该电脑上最远的主线剧情进度来选择标题画面，因此一个仍在旧资料片中途的角色依然会启动到最新的标题画面。\n\n此插件将游戏自带的标题画面设置固定为你上次游玩角色的剧情位置，包括标志和音乐。不会改动任何游戏文件——它写入的是与标题画面“影片与标题”菜单相同的设置。"
+   "Translated": "游戏会根据该 PC 上最远的主线进度选择标题画面，因此一个仍在较旧资料片中途的角色依然会启动到最新的标题画面。\n\n这会将游戏自身的标题画面设置固定为你上次游玩角色的剧情进度，包括标志与音乐。不会改动任何游戏文件——它写入的正是标题画面 Movies & Title 菜单所写入的同一设置。",
+   "Source": "ai"
   }
  },
  "Pulsar": {
   "Name": {
    "Original": "Pulsar",
-   "Translated": "Pulsar"
+   "Translated": "Pulsar",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "A plugin to sync sound files.",
-   "Translated": "用于同步声音文件的插件。"
+   "Translated": "用于同步声音文件的插件。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "A plugin to sync sound files. /pulsar to open config. Requires a compatible sync plugin, like Lightless.",
-   "Translated": "用于同步声音文件的插件。/pulsar 打开配置。需要兼容的同步插件，例如 Lightless。"
+   "Translated": "用于同步声音文件的插件。/pulsar 打开配置。需要兼容的同步插件，例如 Lightless。",
+   "Source": "ai"
   }
  },
  "ChatBound": {
   "Name": {
    "Original": "ChatBound",
-   "Translated": "ChatBound"
+   "Translated": "ChatBound",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Choose what your local chat profile can understand.",
-   "Translated": "选择你的本地聊天配置能理解的内容。"
+   "Translated": "选择你的本地聊天配置能理解的内容。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Local, consent-oriented incoming chat profiles for FFXIV.",
-   "Translated": "面向 FFXIV 的本地、基于同意的接收聊天配置。"
+   "Translated": "面向 FFXIV 的本地、以同意为导向的接收聊天配置。",
+   "Source": "ai"
   }
  },
  "CollectionGuard": {
   "Name": {
    "Original": "已收藏提示",
-   "Translated": "已收藏提示"
+   "Translated": "已收藏提示",
+   "Source": "ai"
   },
   "Description": {
    "Original": "打开收藏柜或幻化柜的存入列表后，插件会在装备行右缘显示非交互状态色条：金色表示同物品已存入幻化柜，橙红表示该部位已存在于已存套装中，浅蓝表示收藏柜已有。悬停时在游戏窗口外侧显示完整说明。插件只读取本地状态，不发送网络请求。",
-   "Translated": "打开收藏柜或幻化柜的存入列表后，插件会在装备行右缘显示非交互状态色条：金色表示同物品已存入幻化柜，橙红表示该部位已存在于已存套装中，浅蓝表示收藏柜已有。悬停时在游戏窗口外侧显示完整说明。插件只读取本地状态，不发送网络请求。"
+   "Translated": "打开收藏柜或幻化柜的存入列表后，插件会在装备行右缘显示非交互状态色条：金色表示同物品已存入幻化柜，橙红表示该部位已存在于已存套装中，浅蓝表示收藏柜已有。悬停时在游戏窗口外侧显示完整说明。插件只读取本地状态，不发送网络请求。",
+   "Source": "ai"
   }
  },
  "pvpauto": {
   "Name": {
    "Original": "FFXIVPVPAuto",
-   "Translated": "FFXIVPVPAuto"
+   "Translated": "FFXIVPVPAuto",
+   "Source": "ai"
   },
   "Description": {
    "Original": "一个简单的绿色插件。",
-   "Translated": "一个简单的绿色插件。"
+   "Translated": "一个简单的绿色插件。",
+   "Source": "ai"
   }
  },
  "Ghost": {
   "Name": {
    "Original": "Ghost",
-   "Translated": "Ghost"
+   "Translated": "Ghost",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "One plugin. Pick a mode, then Start.",
-   "Translated": "一个插件。选择模式，然后开始。"
+   "Translated": "一个插件。选择模式，然后开始。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Assist clicks quest dialogs by type and fires job priority trees when you have a target. Later modes share the same services.",
-   "Translated": "按类型辅助点击任务对话，并在你有目标时触发职业优先级树。后续模式共享相同的服务。"
+   "Translated": "按类型辅助点击任务对话，并在你有目标时触发职业优先级树。后续模式共享相同的服务。",
+   "Source": "ai"
   }
  },
  "DalamudActCompatRepair": {
   "Name": {
    "Original": "DACT 修复工具",
-   "Translated": "DACT 修复工具"
+   "Translated": "DACT 修复工具",
+   "Source": "ai"
   },
   "Description": {
    "Original": "独立卫月插件。停用 DACT 主插件后，将错误编号 4.4.0.0 备份并修复为 0.4.4.0；保留配置，完成后重启一次游戏。",
-   "Translated": "独立卫月插件。停用 DACT 主插件后，将错误编号 4.4.0.0 备份并修复为 0.4.4.0；保留配置，完成后重启一次游戏。"
+   "Translated": "独立卫月插件。停用 DACT 主插件后，将错误编号 4.4.0.0 备份并修复为 0.4.4.0；保留配置，完成后重启一次游戏。",
+   "Source": "ai"
   }
  },
  "Zhuangzi": {
   "Name": {
    "Original": "Zhuangzi",
-   "Translated": "Zhuangzi"
+   "Translated": "Zhuangzi",
+   "Source": "ai"
   },
   "Description": {
    "Original": "/zz→打开Zhuangzi配置窗口",
-   "Translated": "/zz→打开Zhuangzi配置窗口"
+   "Translated": "/zz→打开Zhuangzi配置窗口",
+   "Source": "ai"
   }
  },
  "DiceMaster": {
   "Name": {
    "Original": "DiceMaster",
-   "Translated": "DiceMaster"
+   "Translated": "DiceMaster",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Shared animated dice for roleplay rooms.",
-   "Translated": "用于角色扮演房间的共享动画骰子。"
+   "Translated": "用于角色扮演房间的共享动画骰子。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Roll polyhedral dice together in a dedicated Dice Window. Configure your relay, create or join a room, and use /dicemaster to open the controls.",
-   "Translated": "在专用骰子窗口中一起投掷多面骰子。配置你的中继，创建或加入房间，并使用 /dicemaster 打开控制面板。"
+   "Translated": "在专用骰子窗口中一起投掷多面骰子。配置你的中继，创建或加入房间，并使用 /dicemaster 打开控制面板。",
+   "Source": "ai"
   }
  },
  "Sceneweaver": {
   "Name": {
    "Original": "Sceneweaver",
-   "Translated": "Sceneweaver"
+   "Translated": "Sceneweaver",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "One scene. Multiple stages.",
-   "Translated": "一个场景。多个舞台。"
+   "Translated": "一个场景。多个舞台。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Development preview: shared scene editor for Intoner and Stagehand, with dual-save, conversion reports and base-color asset previews. Open with /sceneweaver. In-game validation is pending.",
-   "Translated": "开发预览：用于 Intoner 和 Stagehand 的共享场景编辑器，支持双重保存、转换报告和基础颜色资源预览。使用 /sceneweaver 打开。游戏内验证尚未完成。"
+   "Translated": "开发预览：用于 Intoner 和 Stagehand 的共享场景编辑器，支持双重保存、转换报告和基础颜色资源预览。使用 /sceneweaver 打开。游戏内验证待定。",
+   "Source": "ai"
   }
  },
  "SimpleTeleport": {
   "Name": {
    "Original": "SimpleHacks",
-   "Translated": "SimpleHacks"
+   "Translated": "SimpleHacks",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Coordinate movement, waypoints, and speed controls.",
-   "Translated": "协调移动、路径点和速度控制。"
+   "Translated": "协调移动、路径点和速度控制。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Manual coordinate teleporting, waypoints, and movement speed controls.",
-   "Translated": "手动坐标传送、路径点和移动速度控制。"
+   "Translated": "手动坐标传送、路径点和移动速度控制。",
+   "Source": "ai"
   }
  },
  "PlayerMapping": {
   "Name": {
    "Original": "PlayerMapping",
-   "Translated": "玩家映射"
+   "Translated": "玩家映射",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Realtime player overlay on the current map.",
-   "Translated": "在当前地图上实时显示玩家叠加层。"
+   "Translated": "在当前地图上实时显示玩家叠加层。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "周囲のプレイヤー・モブ・FATEを地図に表示します。初回利用時に、配布元から案内された利用キーの入力が必要です。",
-   "Translated": "周囲のプレイヤー・モブ・FATEを地図に表示します。初回利用時に、配布元から案内された利用キーの入力が必要です。"
+   "Translated": "周囲のプレイヤー・モブ・FATEを地図に表示します。初回利用時に、配布元から案内された利用キーの入力が必要です。",
+   "Source": "ai"
   }
  },
  "ArctisGameBudsBattery": {
   "Name": {
    "Original": "Arctis GameBuds Battery",
-   "Translated": "Arctis GameBuds Battery"
+   "Translated": "Arctis GameBuds Battery",
+   "Source": "ai"
   },
   "Description": {
    "Original": "SteelSeries Arctis GameBudsのUSBドングルから左右イヤホンのバッテリー残量を取得し、オーバーレイとDTRバーへ表示します。VID 1038 / PID 230A対応。ケース残量・Bluetooth単独接続には対応していません。",
-   "Translated": "SteelSeries Arctis GameBudsのUSBドングルから左右イヤホンのバッテリー残量を取得し、オーバーレイとDTRバーへ表示します。VID 1038 / PID 230A対応。ケース残量・Bluetooth単独接続には対応していません。"
+   "Translated": "SteelSeries Arctis GameBudsのUSBドングルから左右イヤホンのバッテリー残量を取得し、オーバーレイとDTRバーへ表示します。VID 1038 / PID 230A対応。ケース残量・Bluetooth単独接続には対応していません。",
+   "Source": "ai"
   }
  },
  "AdvancedPenumbraModConverter": {
   "Name": {
    "Original": "Advanced Penumbra Mod Converter",
-   "Translated": "高级 Penumbra 模组转换器"
+   "Translated": "高级 Penumbra Mod 转换器",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Move Penumbra mods to other items, slots and races.",
-   "Translated": "将 Penumbra 模组转魔到其他物品、槽位和种族。"
+   "Translated": "将 Penumbra 模组转魔到其他物品、槽位和种族。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Convert gear, facewear, hair, face, tail and Viera-ear assets in Penumbra mods to other items, slots and races. Supports the Penumbra 1.7+ mod format, retargets game paths, model/material references and metadata, previews every change, and can revert conversions.",
-   "Translated": "将 Penumbra 模组中的装备、面部饰品、发型、面部、尾巴和维埃拉耳部资源转魔到其他物品、槽位和种族。支持 Penumbra 1.7+ 模组格式，重定向游戏路径、模型/材质引用和元数据，预览每项更改，并可还原转魔。"
+   "Translated": "将 Penumbra 模组中的装备、面部配饰、发型、面部、尾巴和维埃拉耳部资源转魔到其他物品、槽位和种族。支持 Penumbra 1.7+ 模组格式，重定向游戏路径、模型/材质引用和元数据，预览每项更改，并可还原转魔。",
+   "Source": "ai"
   }
  },
  "XIVPortStudio": {
   "Name": {
    "Original": "XIV Port Studio",
-   "Translated": "XIV Port Studio"
+   "Translated": "XIV Port Studio",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "Set up materials and textures for imported FFXIV gear.",
-   "Translated": "为导入的 FFXIV 装备设置材质和纹理。"
+   "Translated": "为导入的 FFXIV 装备设置材质和纹理。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Toolkit for porting outfits from other games into FFXIV. Pick an item, then define the materials and textures it should use so the result can be exported as a Penumbra mod.",
-   "Translated": "用于将其他游戏的服装移植到 FFXIV 的工具包。选择一个物品，然后定义它应使用的材质和纹理，以便结果可以导出为 Penumbra 模组。"
+   "Translated": "用于将其他游戏中的服装移植到 FFXIV 的工具包。选择一个物品，然后定义它应使用的材质和纹理，以便结果可以作为 Penumbra 模组导出。",
+   "Source": "ai"
   }
  },
  "MinimalMeter": {
   "Name": {
    "Original": "Minimal Meter",
-   "Translated": "极简仪表"
+   "Translated": "极简仪表",
+   "Source": "ai"
   },
   "Punchline": {
    "Original": "A quiet damage meter that gets out of the way.",
-   "Translated": "一个安静、不碍事的伤害统计。"
+   "Translated": "一个安静、不碍事的伤害统计。",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Real-time damage, healing and DPS for you and your party, drawn as a transparent overlay with no window chrome. Derived from Sansflaire's Damage Meter.",
-   "Translated": "实时显示你和小队的伤害、治疗和 DPS，以无窗口边框的透明悬浮层呈现。源自 Sansflaire 的 Damage Meter。"
+   "Translated": "实时显示你和小队的伤害、治疗与 DPS，以无窗口边框的透明悬浮层呈现。源自 Sansflaire 的 Damage Meter。",
+   "Source": "ai"
+  }
+ },
+ "WhoPulled": {
+  "Name": {
+   "Original": "WhoPulled",
+   "Translated": "谁开的怪",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Identifies the player who first engaged an overworld hunt, including players outside your party.",
+   "Translated": "识别首个攻击野外狩猎怪物的玩家，包括你小队之外的玩家。",
+   "Source": "ai"
+  }
+ },
+ "SentinelRelay": {
+  "Name": {
+   "Original": "Sentinel Relay",
+   "Translated": "Sentinel Relay",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Private FFXIV-to-Discord chat relay with no hosted backend.",
+   "Translated": "私人的 FFXIV 到 Discord 聊天转发，无需托管后端。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Sends explicitly selected FFXIV chat channels directly to a per-character Discord webhook. All filters default off; no bot, paid hosting, or Discord-to-FFXIV control is required.",
+   "Translated": "将明确选定的 FFXIV 聊天频道直接发送到按角色区分的 Discord webhook。所有过滤器默认关闭；无需机器人、付费托管或 Discord 到 FFXIV 的控制。",
+   "Source": "ai"
+  }
+ },
+ "FishingClues": {
+  "Name": {
+   "Original": "Fishing Clues",
+   "Translated": "钓鱼线索",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "A Better Fishing Log",
+   "Translated": "更好的钓鱼笔记",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A better Fishing Log: spoiler-conscious, and packed with the info you actually need to find and catch fish.",
+   "Translated": "更好的钓鱼笔记：注意防剧透，并包含你寻找和钓上鱼真正需要的信息。",
+   "Source": "ai"
+  }
+ },
+ "Soumen": {
+  "Name": {
+   "Original": "Soumen",
+   "Translated": "Soumen",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "读取小队坐标并使用 vnavmesh 自动导航。",
+   "Translated": "读取小队坐标并使用 vnavmesh 自动导航。",
+   "Source": "ai"
+  }
+ },
+ "Saru": {
+  "Name": {
+   "Original": "Saru",
+   "Translated": "Saru",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "JavaScript automation scripts and collected object information.",
+   "Translated": "JavaScript 自动化脚本及收集的对象信息。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "/saru opens the Saru workspace. /saru start <scriptname> starts a script and /saru stop stops all running scripts.",
+   "Translated": "/saru 打开 Saru 工作区。/saru start <scriptname> 启动脚本，/saru stop 停止所有正在运行的脚本。",
+   "Source": "ai"
+  }
+ },
+ "Ariadne": {
+  "Name": {
+   "Original": "Ariadne",
+   "Translated": "Ariadne",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Bridge between the game session and Mnemosyne, an out-of-process navmesh cache. Detects zone loads, fetches cached meshes so vnavmesh skips its build, and exposes IPC so other plugins can request meshes or paths directly.",
+   "Translated": "在游戏会话与 Mnemosyne（进程外导航网格缓存）之间架起桥梁。检测区域加载，获取缓存网格以便 vnavmesh 跳过其构建，并暴露 IPC 以便其他插件直接请求网格或路径。",
+   "Source": "ai"
+  }
+ },
+ "HiraganaTrainer": {
+  "Name": {
+   "Original": "Hiragana Trainer",
+   "Translated": "平假名练习",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Train hiragana and katakana with spaced repetition, without leaving the game.",
+   "Translated": "无需离开游戏，用间隔重复训练平假名和片假名。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A hiragana/katakana trainer using SRS (Leitner). Open it with /kana or let\r\nthe plugin remind you while you're queuing for a duty, with a configurable cooldown.",
+   "Translated": "使用 SRS（Leitner）的平假名/片假名训练器。用 /kana 打开，或让插件在你排队副本时提醒你，冷却时间可配置。",
+   "Source": "ai"
+  }
+ },
+ "RandomClassPicker": {
+  "Name": {
+   "Original": "Random Class Picker",
+   "Translated": "随机职业选择器",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "随机换职业：从已保存套装里用真随机（random.org 大气噪声）抽一个职业并直接切换，支持按职能随机、职业池勾选、抽中次数统计。随机每日任务：在任务搜索器上叠加面板，勾选后随机抽一个未完成的随机任务并直接排队。另有服务器信息栏快捷图标，左键一点即抽即切。",
+   "Translated": "随机换职业：从已保存套装里用真随机（random.org 大气噪声）抽一个职业并直接切换，支持按职能随机、职业池勾选、抽中次数统计。随机每日任务：在任务搜索器上叠加面板，勾选后随机抽一个未完成的随机任务并直接排队。另有服务器信息栏快捷图标，左键一点即抽即切。",
+   "Source": "ai"
+  }
+ },
+ "Knightshopper": {
+  "Name": {
+   "Original": "Knightshopper",
+   "Translated": "Knightshopper",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Knightshopping made easy - ShopMore, click less.",
+   "Translated": "让购物更轻松——ShopMore，少点击。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Your personal shopper who will take care of all your currency spendings!\n\nKnightshopper: because even knights deserve a squire for their shopping.",
+   "Translated": "你的私人购物助手，会帮你处理所有货币消费！\n\nKnightshopper：因为即使是骑士也值得拥有一个购物侍从。",
+   "Source": "ai"
+  }
+ },
+ "DialogueInspect": {
+  "Name": {
+   "Original": "DialogueInspect",
+   "Translated": "对话检查",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "ターゲットしたNPCの会話リストをタブ化し、項目をマークしてプリセット保存します。/di start で近くのNPCに話しかけ、マークした項目を選びます。",
+   "Translated": "ターゲットしたNPCの会話リストをタブ化し、項目をマークしてプリセット保存します。/di start で近くのNPCに話しかけ、マークした項目を選びます。",
+   "Source": "ai"
+  }
+ },
+ "AuraCanAI.Dalamud": {
+  "Name": {
+   "Original": "AuraCanAI",
+   "Translated": "AuraCanAI",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "AuraCanAI 鍗湀鎻掍欢鐗?娓告垙鍐?AI 瑙掕壊鎵紨鍔╂墜銆傛彁渚涙湰鍦扮綉椤垫帶鍒跺彴(localhost:8051),鏀寔 DeepSeek 澶фā鍨嬭鑹叉壆婕斻€佽亰澶╄闊虫彁绀?TTS)銆佺帺瀹惰繘鍑?娉ㄨ鎻愰啋銆佽亰澶╄褰曞綊妗ｄ笌鍏ㄦ枃妫€绱€佺帺瀹跺娉ㄣ€侀檮杩戠帺瀹朵笌娲荤偣鍦板浘銆佽涓鸿缃€丮IDI 婕斿涓庡弻寮€鍚堝銆佺Щ鍔ㄥ唴鏍搞€傛寚浠?/aca",
+   "Translated": "AuraCanAI 鍗湀鎻掍欢鐗?娓告垙鍐?AI 瑙掕壊鎵紨鍔╂墜銆傛彁渚涙湰鍦扮綉椤垫帶鍒跺彴(localhost:8051),鏀寔 DeepSeek 澶фā鍨嬭鑹叉壆婕斻€佽亰澶╄闊虫彁绀?TTS)銆佺帺瀹惰繘鍑?娉ㄨ鎻愰啋銆佽亰澶╄褰曞綊妗ｄ笌鍏ㄦ枃妫€绱€佺帺瀹跺娉ㄣ€侀檮杩戠帺瀹朵笌娲荤偣鍦板浘銆佽涓鸿缃€丮IDI 婕斿涓庡弻寮€鍚堝銆佺Щ鍔ㄥ唴鏍搞€傛寚浠?/aca",
+   "Source": "ai"
+  }
+ },
+ "EzCountdown": {
+  "Name": {
+   "Original": "EzCountdown",
+   "Translated": "EzCountdown",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Fast shorthand countdown commands (/12, /0).",
+   "Translated": "快捷的简写倒计时命令（/12、/0）。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Simple shorthand countdown commands for FFXIV (e.g., /12 for a 12s countdown, /0 to cancel).",
+   "Translated": "FFXIV 的简单简写倒计时命令（例如 /12 表示 12 秒倒计时，/0 取消）。",
+   "Source": "ai"
+  }
+ },
+ "EzSlides": {
+  "Name": {
+   "Original": "EzSlides",
+   "Translated": "EzSlides",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Upload and view local images as slides.",
+   "Translated": "上传并查看本地图片作为幻灯片。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "An in-game image and slide viewer for Final Fantasy XIV.",
+   "Translated": "《最终幻想 XIV》的游戏内图片和幻灯片查看器。",
+   "Source": "ai"
+  }
+ },
+ "XIVLibra": {
+  "Name": {
+   "Original": "XIVLibra",
+   "Translated": "XIVLibra",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Real-time combat metrics, encounter history, and analysis overlay.",
+   "Translated": "实时战斗数据、遭遇历史和分析悬浮窗。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A real-time combat meter for Final Fantasy XIV.",
+   "Translated": "《最终幻想XIV》的实时战斗统计插件。",
+   "Source": "ai"
+  }
+ },
+ "BurstTimers": {
+  "Name": {
+   "Original": "Burst Timers",
+   "Translated": "爆发计时器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Party buff, Dokumori, and personal potion countdown bars.",
+   "Translated": "团队增益、介毒之术和个人爆发药倒计时条。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Shows single two-minute timers for Dokumori on your target and Embolden, Starry Muse, Brotherhood, and Searing Light on you, plus your actual combat potion cooldown. Configure with /bursttimers.",
+   "Translated": "显示目标身上的介毒之术以及你身上的鼓励、星空构想、义结金兰和灼热之光的单个两分钟计时器，外加你实际的战斗爆发药冷却时间。使用 /bursttimers 进行配置。",
+   "Source": "ai"
+  }
+ },
+ "AcousticKitty": {
+  "Name": {
+   "Original": "Acoustic Kitty",
+   "Translated": "Acoustic Kitty",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Counterintelligence plugin.",
+   "Translated": "反侦察插件。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Cross-references nearby in-game characters against their Lodestone profile, and builds an audit queue against EchoVault's registration to see if they're already verified sightings contributors. Echo's API used to find stalkers can optionally be routed through a SOCKS5 proxy.",
+   "Translated": "将附近游戏内角色与其返回磁石档案进行交叉比对，并针对 EchoVault 的注册信息建立审核队列，以查看他们是否已是已验证的目击贡献者。用于查找跟踪者的 Echo API 可选择通过 SOCKS5 代理路由。",
+   "Source": "ai"
+  }
+ },
+ "MahjongHater": {
+  "Name": {
+   "Original": "MahjongHater",
+   "Translated": "麻将克星",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Doman Mahjong advisor: discard, call and riichi recommendations with reasoning.",
+   "Translated": "多玛麻将顾问：提供弃牌、鸣牌和立直建议及理由。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Doman Mahjong (Emj) solver — best-discard advisor, win-probability display, full han+fu scoring engine for FFXIV Gold Saucer.",
+   "Translated": "多玛麻将（Emj）求解器——最佳弃牌顾问、胜率显示，以及适用于《最终幻想XIV》金碟游乐场的完整番+符计分引擎。",
+   "Source": "ai"
+  }
+ },
+ "TildeTools": {
+  "Name": {
+   "Original": "TildeTools",
+   "Translated": "TildeTools",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "A box of small tools, each switched on or off on its own.",
+   "Translated": "一盒小工具，每个都可单独开启或关闭。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A collection of tools under one window, each with its own tab and master switch. Includes Emote Splitter, which raises the chat box's length limit and sends long messages as paced chunks so the server does not drop them.",
+   "Translated": "一个窗口下汇集多种工具，每个都有自己的标签页和总开关。包括 Emote Splitter，它提高了聊天框的长度限制，并将长消息按节奏分块发送，以免服务器丢弃它们。",
+   "Source": "ai"
   }
  }
 }

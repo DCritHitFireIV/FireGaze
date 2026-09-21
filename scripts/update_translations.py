@@ -245,6 +245,14 @@ def main(argv=None) -> int:
             return False
         return True
 
+    def upstream_is_localized(text: str) -> bool:
+        """上游给的原文已经是中文（国服/汉化分支的简介）：直接当译文用，不再送机器翻译。
+
+        原因：机器翻译会把它当外文重译一遍，既浪费又可能改得很奇怪；
+        而对这类条目，非中文玩家看到的原文本来就已经是中文。
+        """
+        return bool(text) and bool(CJK.search(text))
+
     for key, entry in corpus.items():
         saved = table.get(key) or {}
         is_new = key not in table
@@ -339,6 +347,10 @@ def main(argv=None) -> int:
             failed.append((key, "Name", "这次没拿到译文"))
             return
 
+        # 上游原文本身就是中文：直接当译文用（这类条目不送机器翻译）
+        if upstream_is_localized(original):
+            translated = original
+
         # 有译文：只有「原来没译文」或「原文真的变了」才写
         # 用户译在原文变了时会被新机器译覆盖 —— 按用户要求先把旧译文记进待复核
         if is_user and old_translated:
@@ -379,6 +391,10 @@ def main(argv=None) -> int:
             entry[field] = saved
             failed.append((key, field, "这次没拿到译文"))
             return
+
+        # 上游原文本身就是中文：直接当译文用（这类条目不送机器翻译）
+        if upstream_is_localized(original):
+            translated = original
 
         if is_user and old_translated:
             needs_review.append((key, field, old_original, old_translated))
