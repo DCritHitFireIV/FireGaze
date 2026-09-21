@@ -1,7 +1,6 @@
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
 namespace FireGaze.Translate;
 
 /// <summary>一对原文 / 译文。</summary>
@@ -60,6 +59,9 @@ public sealed class TranslationTable
     private readonly object gate = new();
     private Dictionary<string, TransEntry> table = new(StringComparer.Ordinal);
 
+    /// <summary>词表文件里的元数据键（以下划线开口的键都不当插件条目）。</summary>
+    private const string MetaKey = "_meta";
+
     public TranslationTable(string configDirectory, string pluginDirectory)
     {
         this.configDirectory = configDirectory;
@@ -108,6 +110,12 @@ public sealed class TranslationTable
 
     public DateTime? LoadedAt { get; private set; }
 
+    /// <summary>
+    /// 词表自身的维护日期（工作流跑的那天，存在文件的 <c>_meta.updatedAt</c> 里），
+    /// 没有就是 null（老词表）。
+    /// </summary>
+    public string? MaintainedAt { get; private set; }
+
     public bool TryGet(string internalName, out TransEntry entry)
     {
         lock (this.gate)
@@ -136,16 +144,14 @@ public sealed class TranslationTable
                     continue;
                 }
 
-                var dict = JsonSerializer.Deserialize<Dictionary<string, TransEntry>>(
-                    File.ReadAllText(candidate),
-                    JsonOptions);
-
+                var dict = ParseTable(File.ReadAllText(candidate), out var maintainedAt);
                 if (dict is null || dict.Count == 0)
                 {
                     continue;
                 }
 
-                this.table = new Dictionary<string, TransEntry>(dict, StringComparer.Ordinal);
+                this.table = dict;
+                this.MaintainedAt = maintainedAt;
                 this.LoadedFrom = candidate;
                 this.LoadedAt = File.GetLastWriteTime(candidate);
                 return true;            }
@@ -276,8 +282,20 @@ public sealed class TranslationTable
             string json;
             lock (this.gate)
             {
+                // 保住 _meta（词表维护日期）：玩家改几条译文不应该抹掉它
+                var payload = new Dictionary<string, object?>(this.table.Count + 1, StringComparer.Ordinal);
+                if (!string.IsNullOrEmpty(this.MaintainedAt))
+                {
+                    payload[MetaKey] = new Dictionary<string, string> { ["updatedAt"] = this.MaintainedAt! };
+                }
+
+                foreach (var (key, value) in this.table)
+                {
+                    payload[key] = value;
+                }
+
                 json = JsonSerializer.Serialize(
-                    this.table,
+                    payload,
                     new JsonSerializerOptions
                     {
                         WriteIndented = true,          // 1 空格缩进与仓库里的 translations.json 一致
@@ -297,6 +315,40 @@ public sealed class TranslationTable
         }
     }
 
+    /// <summary>解析一份词表：以下划线开口的键走元数据（目前只有 <c>_meta.updatedAt</c>），其余当插件条目。</summary>
+    private static Dictionary<string, TransEntry>? ParseTable(string text, out string? maintainedAt)
+    {
+        maintainedAt = null;
+        var raw = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(text, JsonOptions);
+        if (raw is null)
+        {
+            return null;
+        }
+
+        var result = new Dictionary<string, TransEntry>(StringComparer.Ordinal);
+        foreach (var (key, value) in raw)
+        {
+            if (key.StartsWith('_'))
+            {
+                if (key == MetaKey && value.ValueKind == JsonValueKind.Object &&
+                    value.TryGetProperty("updatedAt", out var at) && at.ValueKind == JsonValueKind.String)
+                {
+                    maintainedAt = at.GetString();
+                }
+
+                continue;
+            }
+
+            var entry = value.Deserialize<TransEntry>(JsonOptions);
+            if (entry is not null)
+            {
+                result[key] = entry;
+            }
+        }
+
+        return result;
+    }
+
     /// <summary>从 GitHub 拉取最新词表（失败会依次尝试镜像），成功后写入插件配置目录。</summary>
     public async Task<(bool Ok, string Message)> UpdateFromGitHubAsync(CancellationToken cancellationToken)
     {
@@ -313,7 +365,7 @@ public sealed class TranslationTable
             try
             {
                 var text = await client.GetStringAsync(url, cancellationToken).ConfigureAwait(false);
-                var dict = JsonSerializer.Deserialize<Dictionary<string, TransEntry>>(text, JsonOptions);
+                var dict = ParseTable(text, out var maintainedAt);
                 if (dict is null || dict.Count == 0)
                 {
                     errors.Add($"{url}：内容为空");
@@ -324,7 +376,8 @@ public sealed class TranslationTable
                 var target = Path.Combine(this.configDirectory, "translations.json");
                 await File.WriteAllTextAsync(target, text, cancellationToken).ConfigureAwait(false);
 
-                this.table = new Dictionary<string, TransEntry>(dict, StringComparer.Ordinal);
+                this.table = dict;
+                this.MaintainedAt = maintainedAt;
                 this.LoadedFrom = target;
                 this.LoadedAt = DateTime.Now;
                 return (true, $"已更新词表：{dict.Count} 条（{url}）");

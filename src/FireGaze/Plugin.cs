@@ -326,17 +326,8 @@ public sealed class Plugin : IDalamudPlugin
         this.window.BringToFront();
     }
 
-    /// <summary>打开「参与翻译」页（第四个页签）；includeOfficial = 连官方主库一起翻。</summary>
-    public void OpenContributeWindow(bool includeOfficial)
-    {
-        if (this.Config.ContributeIncludeOfficial != includeOfficial)
-        {
-            this.Config.ContributeIncludeOfficial = includeOfficial;
-            this.SaveConfig();
-        }
-
-        this.OpenWindow(MainTab.Contribute);
-    }
+    /// <summary>打开「参与翻译」页（第四个页签）。</summary>
+    public void OpenContributeWindow() => this.OpenWindow(MainTab.Contribute);
 
     private void OnCommand(string command, string args)
     {
@@ -357,7 +348,7 @@ public sealed class Plugin : IDalamudPlugin
                 Chat.Print("[FireGaze] 正在从 GitHub 更新词表…");
                 break;
             case "translate":
-                this.OpenContributeWindow(this.Config.ContributeIncludeOfficial);
+                this.OpenContributeWindow();
                 break;
             default:
                 Chat.Print("[FireGaze] 用法：/firegaze [zh|update|translate]");

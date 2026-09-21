@@ -4,13 +4,13 @@ using Dalamud.Interface.Windowing;
 
 namespace FireGaze.UI;
 
-/// <summary>主窗口的页签。</summary>
+/// <summary>主窗口的页签（顺序就是界面上的顺序：简介汉化 → 仓库体检 → 插件安装器 → 参与翻译）。</summary>
 public enum MainTab
 {
     Translate = 0,
-    Contribute = 1,
-    RepoAudit = 2,
-    Installer = 3,
+    RepoAudit = 1,
+    Installer = 2,
+    Contribute = 3,
 }
 
 /// <summary>FireGaze 主窗口（/fg）。</summary>
@@ -64,13 +64,6 @@ internal sealed class MainWindow : Window
                 ImGui.EndTabItem();
             }
 
-            flags = this.pendingSelect == MainTab.Contribute ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("参与翻译", flags))
-            {
-                this.contributeTab.Draw();
-                ImGui.EndTabItem();
-            }
-
             flags = this.pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("仓库体检", flags))
             {
@@ -82,6 +75,13 @@ internal sealed class MainWindow : Window
             if (ImGui.BeginTabItem("插件安装器", flags))
             {
                 this.installerTab.Draw();
+                ImGui.EndTabItem();
+            }
+
+            flags = this.pendingSelect == MainTab.Contribute ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            if (ImGui.BeginTabItem("参与翻译", flags))
+            {
+                this.contributeTab.Draw();
                 ImGui.EndTabItem();
             }
 

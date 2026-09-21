@@ -57,7 +57,8 @@ def main(argv=None) -> int:
     if os.path.exists(args.table):
         table = load_json(args.table)
 
-    print(f"词表现有 {len(table)} 条；本次贡献 {len(records)} 条")
+    entries = {key: value for key, value in table.items() if not key.startswith("_")}
+    print(f"词表现有 {len(entries)} 条；本次贡献 {len(records)} 条")
 
     applied = 0
     skipped: list[str] = []
@@ -123,8 +124,15 @@ def main(argv=None) -> int:
         return 0
 
     if applied:
+        # 词表头部记上维护日期（收到贡献也是一次维护）
+        ordered: dict = {"_meta": {"updatedAt": time.strftime("%Y-%m-%d")}}
+        for key, value in table.items():
+            if key.startswith("_"):
+                continue
+            ordered[key] = value
+
         with open(args.table, "w", encoding="utf-8") as handle:
-            json.dump(table, handle, ensure_ascii=False, indent=1)
+            json.dump(ordered, handle, ensure_ascii=False, indent=1)
 
         with open(HISTORY, "a", encoding="utf-8") as handle:
             for row in history:

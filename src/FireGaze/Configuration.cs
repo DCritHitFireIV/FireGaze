@@ -90,8 +90,8 @@ public sealed class Configuration : IPluginConfiguration
     /// <summary>「参与翻译」是否连已停用仓库里的插件一起列出（默认是）。</summary>
     public bool ContributeShowDisabled { get; set; } = true;
 
-    /// <summary>「参与翻译」是否连官方主库（Dip17）的插件一起列出、一起翻（默认否）。</summary>
-    public bool ContributeIncludeOfficial { get; set; }
+    /// <summary>「参与翻译」是否连官方主库（Dip17）的插件一起列出、一起翻（默认是：官库也能翻，缺译会少很多）。</summary>
+    public bool ContributeIncludeOfficial { get; set; } = true;
 
     // ---------------- 仓库体检 ----------------
 

@@ -109,38 +109,7 @@ internal sealed class TranslateTab
             "词表仅在你看到的原文与我们收录的一致时才替换；上游改了简介或卫月改了字段名时自动跳过，重新更新词表即可。");
         ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
 
-        // ---------------- 参与翻译 ----------------
-        ImGui.Separator();
-        var pending = this.plugin.Contributions.Count;
-        if (ImGui.Button("参与翻译，只翻第三方###OpenContribute"))
-        {
-            this.plugin.OpenContributeWindow(includeOfficial: false);
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip(
-                "搜索第三方插件库里的插件，缺译文就补、不合适就改；\n"
-                + "改动先存在本地，攒够了一条提交。");
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Button("连官方库一起翻###OpenContributeOfficial"))
-        {
-            this.plugin.OpenContributeWindow(includeOfficial: true);
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("把官方主库（Dip17）里的插件也列进来；本页的汉化只替第三方库，官方库需要你自己接受提交后的词表。");
-        }
-
-        if (pending > 0)
-        {
-            ImGui.SameLine();
-            ImGui.TextDisabled($"已存 {pending} 条待提交（不会自动发出去）");
-        }
-
+        // ---------------- 复核提醒（不再从这里进「参与翻译」，那个是独立页签） ----------------
         if (this.noticeReview)
         {
             this.noticeReview = false;
@@ -153,16 +122,23 @@ internal sealed class TranslateTab
         }
     }
 
-    /// <summary>「词表更新」那一行的文字：哪一天（周几）拿到的、或随版本装上的这份词表。
-    /// 词表由 GitHub 工作流每周一更新；这里显示的是本机手里这份的时间。</summary>
+    /// <summary>「词表更新」那一行：优先用词表自带的维护日期（工作流跑的那天），其次本机更新时间，最后随插件版本的日期。</summary>
     private string DescribeTableUpdate()
     {
-        if (this.plugin.Config.LastTableUpdateUtc != default)
+        // ① 词表文件里的 _meta.updatedAt（上游维护日期，离线可读）
+        if (DateTime.TryParse(this.plugin.Table.MaintainedAt, out var maintained))
         {
-            var when = this.plugin.Config.LastTableUpdateUtc;
-            return $"词表更新：{when:yyyy-MM-dd}（{WeekdayLabel(when.DayOfWeek)}）";
+            return $"词表更新：{maintained:yyyy-MM-dd}（{WeekdayLabel(maintained.DayOfWeek)}）";
         }
 
+        // ② 本机最后一次从 GitHub 换上的时间
+        if (this.plugin.Config.LastTableUpdateUtc != default)
+        {
+            var local = this.plugin.Config.LastTableUpdateUtc;
+            return $"词表更新：{local:yyyy-MM-dd}（{WeekdayLabel(local.DayOfWeek)}）";
+        }
+
+        // ③ 老词表：只能显示随插件版本装上的时间
         var loaded = this.plugin.Table.LoadedAt ?? default;
         return loaded == default
             ? "词表更新：未知"

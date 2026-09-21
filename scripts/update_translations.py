@@ -230,6 +230,8 @@ def main(argv=None) -> int:
     table: dict[str, dict] = {}
     if os.path.exists(args.table):
         table = json.load(open(args.table, encoding="utf-8"))
+        # 以下划线开口的键是元数据（_meta.updatedAt = 词表维护日期），不当插件条目
+        table = {key: value for key, value in table.items() if not key.startswith("_")}
     print(f"现有词表：{len(table)} 条")
 
     # 找出需要处理的部分：缺条目，或三个字段里任意一个的原文变了 / 还没有译文
@@ -286,8 +288,25 @@ def main(argv=None) -> int:
     stats["desc"] = len(desc_todo)
     print(f"待翻译：插件名 {len(name_todo)} 条 / 简介+详情 {len(desc_todo)} 条（新增 {stats['new']} 条）")
 
-    if args.stats_only or (not name_todo and not desc_todo):
-        print("无需翻译（或 --stats-only）。")
+    def write_table(path: str) -> None:
+        """写回词表：头部记上维护日期（插件界面显示「词表更新：YYYY-MM-DD（周X）」，离线可读）。"""
+        ordered: dict = {"_meta": {"updatedAt": time.strftime("%Y-%m-%d")}}
+        for key, value in table.items():
+            if key.startswith("_"):
+                continue
+            ordered[key] = value
+
+        with open(path, "w", encoding="utf-8") as handle:
+            json.dump(ordered, handle, ensure_ascii=False, indent=1)
+
+    if args.stats_only:
+        print("无需翻译（--stats-only 不写文件）。")
+        return 0
+
+    if not name_todo and not desc_todo:
+        # 没有要翻的，也要把维护日期带上（当天跑过一次就是一次维护）
+        write_table(args.table)
+        print(f"无需翻译：只更新词表维护日期 -> {args.table}")
         return 0
 
     if not api_key:
@@ -504,8 +523,8 @@ def main(argv=None) -> int:
         for key, field, reason in failed[:10]:
             print(f"  {key} / {field}：{reason}")
 
-    with open(args.table, "w", encoding="utf-8") as handle:
-        json.dump(table, handle, ensure_ascii=False, indent=1)
+    # 词表头部记上维护日期：插件界面显示「词表更新：YYYY-MM-DD（周X）」，离线可读
+    write_table(args.table)
 
     print(
         f"完成：成功 {usage['ok']} / 失败 {usage['fail']}，用时 {round(time.time() - started, 1)}s，"
