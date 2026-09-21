@@ -44,6 +44,9 @@ internal sealed class ContributeWindow
 
     /// <summary>本地上限检查没过时记下原因（保存后显示在状态行）。</summary>
     private string? ruleIssue;
+
+    /// <summary>重建索引时不要反复反射卫月内部：改成按条目就地重算状态，见 <see cref="RefreshEntryState"/>。</summary>
+    private bool refreshStatesRequested;
     private readonly HashSet<string> expandedRepos = new(StringComparer.Ordinal);
 
     private TranslationIndex? index;
@@ -119,6 +122,7 @@ internal sealed class ContributeWindow
         ImGui.Separator();
 
         // ---------------- 索引 ----------------
+        this.RefreshEntryStates();
         this.EnsureIndex();
 
         if (this.index is null)
@@ -1055,21 +1059,37 @@ internal sealed class ContributeWindow
     }
 
     /// <summary>
-    /// 改过译文后把搜索索引在后台重建一次：
-    /// 状态列（缺译 / 机器译 / 你译）与完成度是建索引时算出来的，
-    /// 不重建就会出现「上栏还写着机器译、下栏已经是你改的那条」这种自相矛盾。
-    /// 重建期间旧索引继续用，不会闪空白。
+    /// 改过译文后刷新受影响的条目状态（缺译 / 机器译 / 你译、完成度）。
+    ///
+    /// 早先的做法是在后台重新跑一遍 <see cref="TranslationIndex.Build"/>：那会从**后台线程**反射遍历
+    /// 卫月的仓库/清单列表，而卫月自己的仓库重载（<c>ReloadAllReposAsync</c>）也会在别的线程动同一批集合，
+    /// 撞上就会读到正在被改动的集合。改成就地重算：只动我们自己的缓存，不再碰卫月的内部结构。
     /// </summary>
     private void RefreshIndexSoon()
     {
         this.InvalidateIndex();
-        if (this.buildTask is not null)
+        this.refreshStatesRequested = true;
+    }
+
+    /// <summary>把每一行看得见的状态按当前词表重算（不反射卫月；一帧最多跑一次）。</summary>
+    private void RefreshEntryStates()
+    {
+        if (!this.refreshStatesRequested)
         {
-            return;   // 上一次还在建，等它完事
+            return;
         }
 
-        var table = this.plugin.SnapshotTable();
-        this.buildTask = Task.Run(() => TranslationIndex.Build(table));
+        this.refreshStatesRequested = false;
+        if (this.index is not { Available: true })
+        {
+            return;
+        }
+
+        foreach (var entry in this.index.All)
+        {
+            this.plugin.Table.TryGet(entry.InternalName, out var current);
+            entry.RefreshFrom(current);
+        }
     }
 
     // ------------------------------------------------------------------ 行

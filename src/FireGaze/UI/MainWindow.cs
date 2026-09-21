@@ -43,7 +43,14 @@ internal sealed class MainWindow : Window
     public void SelectTab(MainTab tab) => this.pendingSelect = tab;
 
     /// <summary>窗口每次打开都落在「简介汉化」页（ImGui 会记住上次的页签，这里显式改回）。</summary>
-    public override void OnOpen() => this.pendingSelect = MainTab.Translate;
+    public override void OnOpen()
+    {
+        this.pendingSelect = MainTab.Translate;
+        Plugin.Log.Debug("[FireGaze] 窗口已打开（页签回到「简介汉化」）");
+    }
+
+    /// <summary>关窗也记一笔：掉帧/崩溃排查时能看出当时在看哪一页。</summary>
+    public override void OnClose() => Plugin.Log.Debug("[FireGaze] 窗口已关闭");
 
     public override void Draw()
     {

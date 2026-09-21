@@ -24,22 +24,22 @@ internal sealed class TranslationIndexEntry
     public string OriginalDescription { get; init; } = string.Empty;
 
     /// <summary>词表里对这个插件的现有记录（没有 = null）。</summary>
-    public TransEntry? Entry { get; init; }
+    public TransEntry? Entry { get; private set; }
 
     /// <summary>有多少个字段能翻。注意：不包括上游本来就是空、玩家也没贡献过的字段。</summary>
-    public int TotalFields { get; init; }
+    public int TotalFields { get; private set; }
 
     /// <summary>上游本来就是空、但玩家贡献过的字段数（算进完成度，不算缺译）。</summary>
-    public int TemplateFields { get; init; }
+    public int TemplateFields { get; private set; }
 
     /// <summary>有多少个字段已经有译文。</summary>
-    public int TranslatedFields { get; init; }
+    public int TranslatedFields { get; private set; }
 
     /// <summary>有没有玩家提交的字段。</summary>
-    public bool HasUserTranslation { get; init; }
+    public bool HasUserTranslation { get; private set; }
 
     /// <summary>有没有「原文改过、还没重译」的字段。</summary>
-    public bool HasReview { get; init; }
+    public bool HasReview { get; private set; }
 
     /// <summary>是不是官方主库（Dip17）里的插件。</summary>
     public bool IsOfficial { get; init; }
@@ -85,6 +85,83 @@ internal sealed class TranslationIndexEntry
         this.State = this.MissingFields.Count > 0
             ? "missing"
             : this.HasUserTranslation ? "user" : "machine";
+    }
+
+    /// <summary>
+    /// 按当前词表重算这一行的状态与完成度（保存 / 删除 / 撤回后刷新用）。
+    /// 不反射卫月、也不重建整个索引 —— 只动我们自己的缓存。
+    /// </summary>
+    public void RefreshFrom(TransEntry? entry)
+    {
+        this.Entry = entry;
+        this.Evaluate();
+    }
+
+    /// <summary>与建索引时同一套判定：哪个字段缺译 / 哪个字段上游没给 / 完成度多少。</summary>
+    internal void Evaluate()
+    {
+        this.MissingFields.Clear();
+        this.ContributableFields.Clear();
+
+        var total = 0;
+        var template = 0;
+        var translated = 0;
+        var user = false;
+        var review = false;
+        var missing = new List<string>();
+        var contributable = new List<string>();
+
+        var fields = new (string Field, string Original, TransPair? Pair)[]
+        {
+            ("Name", this.OriginalName, this.Entry?.Name),
+            ("Punchline", this.OriginalPunchline, this.Entry?.Punchline),
+            ("Description", this.OriginalDescription, this.Entry?.Description),
+        };
+
+        foreach (var (field, original, pair) in fields)
+        {
+            var hasOriginal = !string.IsNullOrWhiteSpace(original);
+            var hasTranslation = pair is { HasTranslation: true };
+
+            if (hasOriginal && !hasTranslation && TranslationIndex.HasCjk(original))
+            {
+                continue;   // 上游原文本身就是中文：不用翻，也不算缺译
+            }
+
+            if (!hasOriginal && !hasTranslation)
+            {
+                contributable.Add(field);
+                continue;
+            }
+
+            if (!hasOriginal)
+            {
+                template++;
+                translated++;
+            }
+            else if (hasTranslation)
+            {
+                total++;
+                translated++;
+            }
+            else
+            {
+                total++;
+                missing.Add(field);
+            }
+
+            user |= pair is { IsUserSource: true };
+            review |= pair?.Review is not null;
+        }
+
+        this.TotalFields = total;
+        this.TemplateFields = template;
+        this.TranslatedFields = translated;
+        this.HasUserTranslation = user;
+        this.HasReview = review;
+        this.MissingFields.AddRange(missing);
+        this.ContributableFields.AddRange(contributable);
+        this.FinalizeState();
     }
 }
 
@@ -234,67 +311,6 @@ internal sealed class TranslationIndex
 
         table.TryGetValue(internalName, out var entry);
 
-        // 三个字段的现状
-        var fields = new (string Field, string Original, TransPair? Pair)[]
-        {
-            ("Name", name, entry?.Name),
-            ("Punchline", punchline, entry?.Punchline),
-            ("Description", description, entry?.Description),
-        };
-
-        var total = 0;
-        var template = 0;
-        var translated = 0;
-        var user = false;
-        var review = false;
-        var missing = new List<string>();
-        var contributable = new List<string>();
-
-        foreach (var (field, original, pair) in fields)
-        {
-            var hasOriginal = !string.IsNullOrWhiteSpace(original);
-            var hasTranslation = pair is { HasTranslation: true };
-
-            // 上游原文本身就是中文（国服/汉化分支的简介）：不用翻，也不算缺译
-            if (hasOriginal && !hasTranslation && HasCjk(original))
-            {
-                continue;
-            }
-
-            if (!hasOriginal && !hasTranslation)
-            {
-                // 上游压根没提供这个字段：不算缺译，但允许玩家贡献一份
-                contributable.Add(field);
-                continue;
-            }
-
-            if (!hasOriginal)
-            {
-                // 上游没提供、玩家自己写了：算进完成度，不算缺译
-                template++;
-                translated++;
-            }
-            else if (hasTranslation)
-            {
-                total++;
-                translated++;
-            }
-            else
-            {
-                total++;
-                missing.Add(field);
-            }
-
-            user |= pair is { IsUserSource: true };
-            review |= pair?.Review is not null;
-        }
-
-        // 三个字段都没有原文、词表里也没有：没什么可翻的，直接不进列表
-        if (total + template == 0 && !user)
-        {
-            return null;
-        }
-
         var result = new TranslationIndexEntry
         {
             InternalName = internalName,
@@ -304,22 +320,22 @@ internal sealed class TranslationIndex
             OriginalName = name,
             OriginalPunchline = punchline,
             OriginalDescription = description,
-            Entry = entry,
             DeclaresIcon = !string.IsNullOrWhiteSpace(iconUrl) || !string.IsNullOrWhiteSpace(dip17),
             IconUrl = iconUrl,
             IsThirdParty = isThirdParty,
             Manifest = manifest,
-            TotalFields = total,
-            TemplateFields = template,
-            TranslatedFields = translated,
-            HasUserTranslation = user,
-            HasReview = review,
             IsOfficial = !isThirdParty,
         };
 
-        result.MissingFields.AddRange(missing);
-        result.ContributableFields.AddRange(contributable);
-        result.FinalizeState();
+        // 三个字段的现状由 Evaluate() 统一判定（与保存后的就地刷新共用一套逻辑）
+        result.RefreshFrom(entry);
+
+        // 三个字段都没有原文、词表里也没有：没什么可翻的，直接不进列表
+        if (result.TotalFields + result.TemplateFields == 0 && !result.HasUserTranslation)
+        {
+            return null;
+        }
+
         return result;
     }
 
@@ -335,7 +351,7 @@ internal sealed class TranslationIndex
     };
 
     /// <summary>这段文字里有没有中日韩汉字（用来判断「上游原文本身就是中文」）。</summary>
-    private static bool HasCjk(string text)
+    internal static bool HasCjk(string text)
     {
         foreach (var ch in text)
         {

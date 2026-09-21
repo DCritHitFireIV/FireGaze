@@ -135,8 +135,17 @@ public sealed class Plugin : IDalamudPlugin
         this.translateTimer = new Timer(10_000) { AutoReset = true };
         this.translateTimer.Elapsed += (_, _) =>
         {
-            this.ApplyTranslationsQuiet();
-            this.MaybeAutoUpdateTable();
+            // 定时器线程上的未处理异常会直接终止游戏进程（Dalamud.Boot 的 0x12345679），
+            // 所以这里**全程包住**：宁可少应用一次汉化，也不能把游戏带下去。
+            try
+            {
+                this.ApplyTranslationsQuiet();
+                this.MaybeAutoUpdateTable();
+            }
+            catch (Exception e)
+            {
+                Log.Warning(e, "[FireGaze] 定时任务出错（已拦下，不影响游戏）");
+            }
         };
     }
 
@@ -387,14 +396,22 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>每帧看一眼插件安装器（记住滚动位置 / 拦住自动刷新 / 图标预热；不用钩子）。</summary>
     private void TickInstallerListScroll()
     {
-        this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false));
-
-        // 安装器开着 → 把本地缓存的图标分批挂回卫月的图标缓存（安装器直接用本地图，不重新下载）
-        if (this.installerListScroll.IsOpen)
+        try
         {
-            this.EnsureIconWarmUpIndex();
-            this.Icons.WarmUpStep(4);
-        }    }
+            this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false));
+
+            // 安装器开着 → 把本地缓存的图标分批挂回卫月的图标缓存（安装器直接用本地图，不重新下载）
+            if (this.installerListScroll.IsOpen)
+            {
+                this.EnsureIconWarmUpIndex();
+                this.Icons.WarmUpStep(4);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Warning(e, "[FireGaze] 安装器列表这一帧出错（已拦下，不影响游戏）");
+        }
+    }
 
     /// <summary>给图标预热准备「已装插件」索引（后台建一次就够；读不到就过 10 秒再试）。</summary>
     private void EnsureIconWarmUpIndex()
