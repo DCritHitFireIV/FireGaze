@@ -16,8 +16,8 @@ internal sealed class InstallerTab
     {
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
-            "插件安装器会在后台刷新插件仓库，刷新时列表会被重置回顶部。下面的开关用来去掉这种打断："
-            + "它们只影响列表显示，不会阻止插件更新、也不影响联网。");
+            "以下开关会将仓库刷新限制在后台，阻止插件安装器在使用时自动更新插件仓库，将列表重置回顶部。"
+            + "此功能不影响获取新的插件列表，只影响列表显示。");
 
         ImGui.Separator();
 

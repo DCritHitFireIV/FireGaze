@@ -106,7 +106,7 @@ internal sealed class TranslateTab
 
         ImGui.Spacing();
         ImGui.TextDisabled(
-            "词表仅在你看到的原文与我们收录的一致时才替换；上游改了简介或卫月改了字段名时自动跳过，重新更新词表即可。");
+            "上游更新了简介后会跳过该段的翻译，词表维护后重新更新即可。");
         ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
 
         // ---------------- 复核提醒（不再从这里进「参与翻译」，那个是独立页签） ----------------
@@ -122,27 +122,27 @@ internal sealed class TranslateTab
         }
     }
 
-    /// <summary>「词表更新」那一行：优先用词表自带的维护日期（工作流跑的那天），其次本机更新时间，最后随插件版本的日期。</summary>
+    /// <summary>「词表维护」那一行：优先用词表自带的维护日期（工作流跑的那天），其次本机更新时间，最后随插件版本的日期。</summary>
     private string DescribeTableUpdate()
     {
         // ① 词表文件里的 _meta.updatedAt（上游维护日期，离线可读）
         if (DateTime.TryParse(this.plugin.Table.MaintainedAt, out var maintained))
         {
-            return $"词表更新：{maintained:yyyy-MM-dd}（{WeekdayLabel(maintained.DayOfWeek)}）";
+            return $"词表维护：{maintained:yyyy-MM-dd}（{WeekdayLabel(maintained.DayOfWeek)}）";
         }
 
         // ② 本机最后一次从 GitHub 换上的时间
         if (this.plugin.Config.LastTableUpdateUtc != default)
         {
             var local = this.plugin.Config.LastTableUpdateUtc;
-            return $"词表更新：{local:yyyy-MM-dd}（{WeekdayLabel(local.DayOfWeek)}）";
+            return $"词表维护：{local:yyyy-MM-dd}（{WeekdayLabel(local.DayOfWeek)}）";
         }
 
         // ③ 老词表：只能显示随插件版本装上的时间
         var loaded = this.plugin.Table.LoadedAt ?? default;
         return loaded == default
-            ? "词表更新：未知"
-            : $"随插件版本：{loaded:yyyy-MM-dd}";
+            ? "词表维护：未知"
+            : $"词表维护：随插件版本 {loaded:yyyy-MM-dd}";
     }
 
     private static string WeekdayLabel(DayOfWeek day) => day switch

@@ -94,8 +94,9 @@ internal sealed class ContributeWindow
     public void Draw()
     {
         // ---------------- 顶部说明 ----------------
-        ImGui.TextWrapped("搜索插件名、一行简介、插件详情；看到翻译不合适就改，没有译文就补上。");
-        ImGui.TextDisabled("提交的译文优先于机器翻译，之后不会被覆盖；攒够了一条提交，也可导出留存。");
+        ImGui.TextWrapped("对插件名、一行简介、插件详情的翻译做出贡献。");
+        // TODO(文案待补)：用户指明这句还没写完 —— 「可以在 Github…」后面的提交/评审入口待定，先按原话保留。
+        ImGui.TextDisabled("提交的译文优先于机器翻译，每周一词表维护时将汇总本周提交交给大家评审，可以在 Github（待补完）");
         ImGui.TextDisabled("本地改动只在你这里生效；点「从 GitHub 更新词表」会整份覆盖本地改动，没提交出去的译文会消失。");
 
         ImGui.Separator();

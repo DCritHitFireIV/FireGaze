@@ -124,8 +124,8 @@ internal sealed class RepoAuditTab
         var tSetup = this.drawWatch.ElapsedMilliseconds;
 
         // ---------------- 说明（压到两行以内） ----------------
-        ImGui.TextWrapped("扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。");
-        ImGui.TextDisabled("内容不合规 = 安装器无法识别该仓库：可能导致插件列表残缺或排版错乱。");
+        ImGui.TextWrapped("扫描全部第三方仓库，检查链接是否失效、链接是否合规（与卫月同款校验）");
+        ImGui.TextDisabled("链接不合规表示安装器无法识别该仓库，可能导致插件列表残缺或排版错乱。");
 
         // ---------------- 扫描控制 ----------------
         // 图标下载进行中时，体检按钮就地置灰（别再画第二个同名按钮）
@@ -165,7 +165,7 @@ internal sealed class RepoAuditTab
 
         ImGui.SameLine();
         var includeDisabled = this.plugin.Config.ScanIncludeDisabled;
-        if (ImGui.Checkbox("扫描范围含已停用###IncDisabled", ref includeDisabled))
+        if (ImGui.Checkbox("扫描包含已停用仓库###IncDisabled", ref includeDisabled))
         {
             this.plugin.Config.ScanIncludeDisabled = includeDisabled;
             this.plugin.SaveConfig();
@@ -213,7 +213,7 @@ internal sealed class RepoAuditTab
             }
 
             ImGui.TextWrapped(
-                $"共 {t} 个仓库 ｜ 可用 {ok} · 死链 {dead} · 内容不合规 {invalid} · 拒绝访问 {blocked} · "
+                $"共 {t} 个仓库 ｜ 可用 {ok} · 死链 {dead} · 链接不合规 {invalid} · 拒绝访问 {blocked} · "
                 + $"连接失败 {unreachable}" + (unknown > 0 ? $" · 未检查 {unknown}" : string.Empty)
                 + $" ｜ {machineGroup} ｜ 已停用 {disabled}");
 
@@ -846,7 +846,7 @@ internal sealed class RepoAuditTab
     private string StatusTooltip(RepoAuditItem item) => item.Status switch
     {
         RepoStatus.Invalid =>
-            "内容不合规：这个链接返回的不是仓库 JSON（常见原因：填了 GitHub 网页地址而不是 raw 地址）。\n"
+            "链接不合规：这个链接返回的不是仓库 JSON（常见原因：填了 GitHub 网页地址而不是 raw 地址）。\n"
             + "后果：该库的插件会全部加载不出来，还可能导致插件列表残缺或排版错乱。\n"
             + (item.Note ?? string.Empty),
         RepoStatus.Dead => "链接已失效（404 / 410）。\n" + (item.Note ?? string.Empty),

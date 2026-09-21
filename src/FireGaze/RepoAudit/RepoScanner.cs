@@ -69,7 +69,7 @@ public sealed class RepoAuditItem
     {
         RepoStatus.Ok => "可用",
         RepoStatus.Empty => "空仓库",
-        RepoStatus.Invalid => "内容不合规",
+        RepoStatus.Invalid => "链接不合规",
         RepoStatus.Dead => "死链",
         RepoStatus.Blocked => "拒绝访问",
         RepoStatus.Unreachable => "连接失败",
