@@ -21,7 +21,7 @@
 - Aetherfeed 只有 Name/Description，缺 Punchline 的条目会回抓源仓库补齐（带镜像兜底）；
 - 同一个插件有国际版 + 国服汉化分支时，**优先保留英文原文**（中文原文会让游戏里的英文匹配不上）；
 - **官方术语表**（`ffxiv_glossary.py`）：运行时从两个公开 datamining 仓库按行 key 拼出「英文 → 国服官方中文」对照（地名/副本/职业/技能/状态等 3.5 万条），把命中的译名随批次喂给模型——例如 `Palace of the Dead → 死者宫殿`、`Eureka Orthos → 正统优雷卡`；游戏文本不入库，只在运行时拉取并缓存到 `scripts/.cache/`（已 gitignore）；
-- 完成后自动提交 `translations.json`；用户侧可用 `/firegaze update` 或等插件每 7 天一次自动更新拿到。
+- 完成后自动提交 `translations.json`；用户侧可用 `/firegaze update` 或等插件每两周一次自动更新拿到（词表本身每周一更新）。
 
 数据源：
 - 英文：[`xivapi/ffxiv-datamining`](https://github.com/xivapi/ffxiv-datamining)（`csv/en/<Sheet>.csv`）

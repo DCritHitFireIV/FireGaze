@@ -58,7 +58,7 @@ internal sealed class TranslateTab
         }
 
         var autoUpdate = config.AutoUpdateTable;
-        if (ImGui.Checkbox("每 7 天自动检查词表更新###AutoUpdateTable", ref autoUpdate))
+        if (ImGui.Checkbox("每两周自动检查词表更新###AutoUpdateTable", ref autoUpdate))
         {
             config.AutoUpdateTable = autoUpdate;
             this.plugin.SaveConfig();
@@ -153,20 +153,20 @@ internal sealed class TranslateTab
         }
     }
 
-    /// <summary>「上次拿到」那一行的文字：哪一天（周几）拿到的这份词表。</summary>
+    /// <summary>「词表更新」那一行的文字：哪一天（周几）拿到的、或随版本装上的这份词表。
+    /// 词表由 GitHub 工作流每周一更新；这里显示的是本机手里这份的时间。</summary>
     private string DescribeTableUpdate()
     {
-        // 优先用真的从 GitHub 换上的时间；没有（还没更新过 / 老配置）就用词表文件自己的时间
-        var when = this.plugin.Config.LastTableUpdateUtc != default
-            ? this.plugin.Config.LastTableUpdateUtc
-            : this.plugin.Table.LoadedAt ?? default;
-
-        if (when == default)
+        if (this.plugin.Config.LastTableUpdateUtc != default)
         {
-            return "上次拿到：未知";
+            var when = this.plugin.Config.LastTableUpdateUtc;
+            return $"词表更新：{when:yyyy-MM-dd}（{WeekdayLabel(when.DayOfWeek)}）";
         }
 
-        return $"上次拿到：{when:yyyy-MM-dd}（{WeekdayLabel(when.DayOfWeek)}）";
+        var loaded = this.plugin.Table.LoadedAt ?? default;
+        return loaded == default
+            ? "词表更新：未知"
+            : $"随插件版本：{loaded:yyyy-MM-dd}";
     }
 
     private static string WeekdayLabel(DayOfWeek day) => day switch

@@ -67,7 +67,7 @@ public sealed class Configuration : IPluginConfiguration
 
     public bool TranslateEnabled { get; set; }
 
-    /// <summary>每 7 天自动从 GitHub 检查一次词表更新（汉化启用时才生效）。</summary>
+    /// <summary>每两周自动从 GitHub 检查一次词表更新（汉化启用时才生效）。</summary>
     public bool AutoUpdateTable { get; set; } = true;
 
     /// <summary>上次自动检查词表的时间（UTC）。</summary>

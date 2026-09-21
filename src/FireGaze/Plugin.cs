@@ -588,7 +588,7 @@ public sealed class Plugin : IDalamudPlugin
         return (ok, message);
     }
 
-    /// <summary>每 7 天自动检查一次词表更新（汉化启用时才生效）。</summary>
+    /// <summary>每两周自动检查一次词表更新（汉化启用时才生效）。</summary>
     private void MaybeAutoUpdateTable()
     {
         if (!this.Config.TranslateEnabled || !this.Config.AutoUpdateTable)
@@ -597,7 +597,7 @@ public sealed class Plugin : IDalamudPlugin
         }
 
         if (this.Config.LastTableUpdateCheckUtc != default &&
-            DateTime.UtcNow - this.Config.LastTableUpdateCheckUtc < TimeSpan.FromDays(7))
+            DateTime.UtcNow - this.Config.LastTableUpdateCheckUtc < TimeSpan.FromDays(14))
         {
             return;
         }
@@ -622,8 +622,8 @@ public sealed class Plugin : IDalamudPlugin
             }
             finally
             {
-                // 失败时 1 天后重试，成功则 7 天后再查
-                this.Config.LastTableUpdateCheckUtc = success ? DateTime.UtcNow : DateTime.UtcNow.AddDays(-6);
+                // 失败时 1 天后重试，成功则 14 天后再查
+                this.Config.LastTableUpdateCheckUtc = success ? DateTime.UtcNow : DateTime.UtcNow.AddDays(-13);
                 this.SaveConfig();
                 Interlocked.Exchange(ref this.tableUpdateBusy, 0);
             }
