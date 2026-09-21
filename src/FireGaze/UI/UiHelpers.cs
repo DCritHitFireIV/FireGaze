@@ -77,4 +77,49 @@ internal static class UiHelpers
             ImGui.EndTooltip();
         }
     }
+
+    /// <summary>
+    /// 按当前单元格宽度显示文本：放得下就**完整显示**，放不下才用「头…尾」省略。
+    /// 表格列宽可以拖，所以拖宽之后应该看得到完整内容，而不是不管多宽都写死省略。
+    /// </summary>
+    public static void Fitted(string text, string? tooltip = null)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            return;
+        }
+
+        var available = ImGui.GetContentRegionAvail().X - 2f;
+        var full = ImGui.CalcTextSize(text).X;
+
+        if (available <= 1f || full <= available)
+        {
+            ImGui.TextUnformatted(text);
+        }
+        else
+        {
+            // 按「总宽 / 可用宽」的比例估算能放几个字符，并给省略号留位
+            var keep = Math.Clamp((int)(text.Length * (available / full)) - 2, 8, text.Length);
+            var candidate = Shorten(text, keep);
+
+            // 中英混排时估算可能偏宽：实测一次，还超就再收一轮
+            var width = ImGui.CalcTextSize(candidate).X;
+            if (width > available)
+            {
+                keep = Math.Clamp((int)(candidate.Length * (available / width)) - 2, 8, candidate.Length);
+                candidate = Shorten(text, keep);
+            }
+
+            ImGui.TextUnformatted(candidate);
+        }
+
+        if (!string.IsNullOrEmpty(tooltip) && ImGui.IsItemHovered())
+        {
+            ImGui.BeginTooltip();
+            ImGui.PushTextWrapPos(ImGui.GetFontSize() * 42f);
+            ImGui.TextUnformatted(tooltip);
+            ImGui.PopTextWrapPos();
+            ImGui.EndTooltip();
+        }
+    }
 }

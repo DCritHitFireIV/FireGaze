@@ -658,9 +658,8 @@ internal sealed class ContributeWindow
             ImGui.TextDisabled($"{plugin.TranslatedFields}/{plugin.TotalFields + plugin.TemplateFields}");
 
             ImGui.TableNextColumn();
-            UiHelpers.Truncated(
+            UiHelpers.Fitted(
                 FirstNonEmpty(plugin.OriginalPunchline, plugin.OriginalDescription),
-                40,
                 plugin.OriginalPunchline + "\n\n" + plugin.OriginalDescription);
 
             ImGui.TableNextColumn();
@@ -1052,7 +1051,7 @@ internal sealed class ContributeWindow
         // 原文
         ImGui.TableNextColumn();
         var preview = FirstNonEmpty(entry.OriginalPunchline, entry.OriginalDescription);
-        UiHelpers.Truncated(preview, 44, entry.OriginalPunchline + "\n\n" + entry.OriginalDescription);
+        UiHelpers.Fitted(preview, entry.OriginalPunchline + "\n\n" + entry.OriginalDescription);
 
         // 译文
         ImGui.TableNextColumn();
@@ -1065,7 +1064,7 @@ internal sealed class ContributeWindow
         }
         else
         {
-            UiHelpers.Truncated(current, 22, current);
+            UiHelpers.Fitted(current, current);
         }
 
         if (ImGui.IsItemHovered())
@@ -1185,7 +1184,7 @@ internal sealed class ContributeWindow
         else if (entry.RepositoryUrl is not null)
         {
             ImGui.SameLine();
-            UiHelpers.Truncated(entry.RepositoryUrl, 50, entry.RepositoryUrl);
+            UiHelpers.Fitted(entry.RepositoryUrl, entry.RepositoryUrl);
         }
 
         if (this.editingBatch.Count > 0)

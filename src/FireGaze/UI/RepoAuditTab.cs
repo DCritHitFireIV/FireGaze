@@ -586,7 +586,7 @@ internal sealed class RepoAuditTab
                     ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
                 }
 
-                UiHelpers.Truncated(item.Url, 56, item.Url + (string.IsNullOrEmpty(item.Note) ? string.Empty : "\n" + item.Note));
+                UiHelpers.Fitted(item.Url, item.Url + (string.IsNullOrEmpty(item.Note) ? string.Empty : "\n" + item.Note));
                 if (!item.IsEnabled)
                 {
                     ImGui.PopStyleColor();
