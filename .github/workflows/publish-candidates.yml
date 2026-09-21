@@ -1,0 +1,48 @@
+name: publish-candidates
+
+# 每周一汇总玩家提交的候选译文（在 update-translations 之后半小时跑）：
+#   · 👍 ≥ 1 的候选 → 并入 translations.json（Source: user，机器翻译永不覆盖）
+#   · 0 赞、且已经放满 30 天的候选 → 归档到 candidates-archive.json，不再出现在插件清单里
+#   · 其余 → 留在 candidates.json（插件的「参与翻译 → 评分」视图读它，显示 👍 数）
+# 票数来自 issue 里**每条译文那条评论**上的 👍 / 👎（validate-contribution 工作流会逐条贴出来）。
+# 全过程纯确定性脚本，不调用模型、不花 token。
+
+on:
+  schedule:
+    # 周一 04:30 UTC = 北京时间 12:30
+    - cron: '30 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 汇总候选、按票并入、清理超期
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/build_candidates.py --repo "${{ github.repository }}"
+
+      - name: 提交结果
+        run: |
+          if git diff --quiet -- candidates.json candidates-archive.json translations.json; then
+            echo "候选与词表都没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add candidates.json candidates-archive.json translations.json
+          git commit -m "chore: 更新候选译文与投票结果"
+          git push

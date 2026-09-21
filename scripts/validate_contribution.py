@@ -113,6 +113,8 @@ def main(argv=None) -> int:
     parser.add_argument("--file", default="", help="从哪个文件读正文")
     parser.add_argument("--report", default="report.md", help="评论正文写到哪个文件")
     parser.add_argument("--clean-out", default="", help="把过滤后的干净 JSON 写到哪个文件")
+    parser.add_argument("--entries-dir", default="", help="每条译文写一个评论文件（贴到 issue 上供点赞投票用）")
+    parser.add_argument("--max-entries", type=int, default=10, help="每个 issue 最多贴几条评论（防止刷屏）")
     args = parser.parse_args(argv)
 
     if args.env:
@@ -189,6 +191,40 @@ def main(argv=None) -> int:
     if args.clean_out:
         with open(args.clean_out, "w", encoding="utf-8") as handle:
             json.dump({"contributions": accepted}, handle, ensure_ascii=False, indent=1)
+
+    if args.entries_dir:
+        # 每条译文一条评论文件：玩家给**评论**点 👍 / 👎，汇总脚本按评论统计票数。
+        # 用「一个文件一条评论」是为了让工作流能直接 gh issue comment --body-file（不怕换行/引号）。
+        os.makedirs(args.entries_dir, exist_ok=True)
+        written = 0
+        for item in accepted[: args.max_entries]:
+            marker = json.dumps(
+                {
+                    "InternalName": item["InternalName"],
+                    "Field": item["Field"],
+                    "Original": item["Original"],
+                    "Translated": item["Translated"],
+                },
+                ensure_ascii=False,
+                separators=(",", ":"),
+            )
+            field_name = {"Name": "插件名", "Punchline": "一行简介", "Description": "插件详情"}.get(item["Field"], item["Field"])
+            body = (
+                f"**{item['InternalName']} · {field_name}**\n\n"
+                f"译文：{item['Translated']}\n\n"
+                f"给这条点 👍 赞成、👎 反对（不用留言）。0 赞满 30 天会归档。\n\n"
+                f"<!-- fg-entry: {marker} -->"
+            )
+            written += 1
+            with open(os.path.join(args.entries_dir, f"comment-{written:02d}.md"), "w", encoding="utf-8", newline="\n") as handle:
+                handle.write(body + "\n")
+
+        if len(accepted) > args.max_entries:
+            with open(os.path.join(args.entries_dir, "comment-99-note.md"), "w", encoding="utf-8", newline="\n") as handle:
+                handle.write(
+                    f"这个 issue 还有 {len(accepted) - args.max_entries} 条没逐条贴出来"
+                    f"（一次最多贴 {args.max_entries} 条）。需要的话拆成几个 issue 再提交一次。\n"
+                )
 
     print(f"收到 {len(items)}，可用 {len(accepted)}，不收 {len(rejected)}；报告：{args.report}")
     return 0 if accepted else 1

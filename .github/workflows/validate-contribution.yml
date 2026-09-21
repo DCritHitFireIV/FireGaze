@@ -36,7 +36,8 @@ jobs:
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
           set +e
-          python scripts/validate_contribution.py --env ISSUE_BODY --report report.md --clean-out clean.json
+          python scripts/validate_contribution.py --env ISSUE_BODY \
+            --report report.md --clean-out clean.json --entries-dir entry-comments
           echo "result=$?" >> "$GITHUB_OUTPUT"
 
       - name: 评论结果
@@ -45,13 +46,16 @@ jobs:
         run: |
           gh issue comment "${{ github.event.issue.number }}" --body-file report.md
 
-      - name: 收下可用的条目（写进 issue 评论附件的候选清单）
+      - name: 逐条贴出来供点赞投票
         if: steps.validate.outputs.result == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh issue comment "${{ github.event.issue.number }}" \
-            --body "已通过规则校验，条目见上表。维护时会并入 \`translations.json\`（\`Source: user\`，机器翻译不会覆盖）。"
+          shopt -s nullglob
+          for file in entry-comments/*.md; do
+            gh issue comment "${{ github.event.issue.number }}" --body-file "$file"
+          done
+          echo "已贴出 $(ls entry-comments | wc -l) 条待投票的译文"
 
       - name: 一条都不收就关掉
         if: steps.validate.outputs.result != '0'
