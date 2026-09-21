@@ -1,0 +1,63 @@
+name: validate-contribution
+
+# 玩家在「参与翻译」页点「一键提交」会开一个 issue（正文里带 ```json``` 代码块）。
+# 这个工作流只做**规则校验**（纯 Python，不调用任何模型、不花 token）：
+#   · 结构只认 InternalName / Field / Original / Translated，其余字段一律忽略（不收玩家信息）
+#   · 长度上限：插件名 ≤ 40、一行简介 < 100、插件详情 < 1000
+#   · 控制字符、网址、HTML 标记、极短违规词表 → 不收
+# 结果以评论贴回 issue；一条都不收就自动打标签并关掉，维护者不必逐条看。
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  validate:
+    # 只处理带我们标记的 issue（其余 issue 不动）
+    if: contains(github.event.issue.body, 'FireGaze 翻译贡献')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 校验提交内容
+        id: validate
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          set +e
+          python scripts/validate_contribution.py --env ISSUE_BODY --report report.md --clean-out clean.json
+          echo "result=$?" >> "$GITHUB_OUTPUT"
+
+      - name: 评论结果
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --body-file report.md
+
+      - name: 收下可用的条目（写进 issue 评论附件的候选清单）
+        if: steps.validate.outputs.result == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" \
+            --body "已通过规则校验，条目见上表。维护时会并入 \`translations.json\`（\`Source: user\`，机器翻译不会覆盖）。"
+
+      - name: 一条都不收就关掉
+        if: steps.validate.outputs.result != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" \
+            --body "这次没有可用的条目，已自动关闭。改好后可以重新提交。"
+          gh issue close "${{ github.event.issue.number }}" --reason "not planned"

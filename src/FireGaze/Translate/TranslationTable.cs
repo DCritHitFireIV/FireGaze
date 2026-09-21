@@ -241,6 +241,58 @@ public sealed class TranslationTable
         return true;
     }
 
+    /// <summary>读某个字段现在的译文与来源（界面记录「改之前是什么」用）。</summary>
+    public (string Translated, string? Source) GetTranslation(string internalName, string field)
+    {
+        lock (this.gate)
+        {
+            if (!this.table.TryGetValue(internalName, out var entry))
+            {
+                return (string.Empty, null);
+            }
+
+            var pair = field.ToLowerInvariant() switch
+            {
+                "name" => entry.Name,
+                "punchline" => entry.Punchline,
+                _ => entry.Description,
+            };
+
+            return pair is null ? (string.Empty, null) : (pair.Translated, pair.Source);
+        }
+    }
+
+    /// <summary>直接写回一个字段（删掉某条贡献时恢复成改之前的样子）。</summary>
+    public bool SetTranslation(string internalName, string field, string translated, string? source)
+    {
+        lock (this.gate)
+        {
+            if (!this.table.TryGetValue(internalName, out var entry))
+            {
+                entry = new TransEntry();
+                this.table[internalName] = entry;
+            }
+
+            var pair = field.ToLowerInvariant() switch
+            {
+                "name" => entry.Name ??= new TransPair(),
+                "punchline" => entry.Punchline ??= new TransPair(),
+                "description" => entry.Description ??= new TransPair(),
+                _ => null,
+            };
+
+            if (pair is null)
+            {
+                return false;
+            }
+
+            pair.Translated = translated ?? string.Empty;
+            pair.Source = string.IsNullOrEmpty(source) ? null : source;
+            pair.Review = null;
+            return true;
+        }
+    }
+
     /// <summary>清掉某个插件的「待复核」标记（原文改过、但玩家已重新提交时用）。</summary>
     public void ClearReview(string internalName, string field)
     {

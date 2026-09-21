@@ -27,6 +27,23 @@ internal sealed class ContributeWindow
     private readonly ContributionsStore store;
     private readonly List<TranslationIndexEntry> filtered = [];
     private readonly HashSet<string> selected = new(StringComparer.Ordinal);
+
+    /// <summary>下栏勾选的待提交译文（键 = InternalName:Field）。</summary>
+    private readonly HashSet<string> selectedRecords = new(StringComparer.Ordinal);
+
+    /// <summary>下栏当前页签：-1 = 待提交，>=0 = 历史留档的第几批。</summary>
+    private int workspaceTab = -1;
+
+    private bool clearRequested;
+
+    /// <summary>提交分两步：0 = 还没导出；1 = 已打开 GitHub 页、等玩家点「确认已提交」。</summary>
+    private int submitStage;
+
+    /// <summary>一次额外提示（比如提交时完整内容落到了哪个文件）。</summary>
+    private string? extraHint;
+
+    /// <summary>本地上限检查没过时记下原因（保存后显示在状态行）。</summary>
+    private string? ruleIssue;
     private readonly HashSet<string> expandedRepos = new(StringComparer.Ordinal);
 
     private TranslationIndex? index;
@@ -186,18 +203,22 @@ internal sealed class ContributeWindow
             UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.repoMessage);
         }
 
-        // ---------------- 列表 + 底部提交栏 ----------------
-        var footerHeight = 30f + ImGui.GetTextLineHeightWithSpacing() + ImGui.GetStyle().ItemSpacing.Y * 3f;
-        var tableHeight = MathF.Max(120f, ImGui.GetContentRegionAvail().Y - footerHeight);
+        // ---------------- 上面：清单（工作区） 下面：改过的译文（终端） ----------------
+        var available = ImGui.GetContentRegionAvail().Y;
+        var bottomHeight = Math.Clamp(available * 0.42f, 150f, 420f);
+        var topHeight = MathF.Max(140f, available - bottomHeight - ImGui.GetStyle().ItemSpacing.Y * 4f - 62f);
 
         if (this.view == "repos")
         {
-            this.DrawRepoTable(tableHeight);
+            this.DrawRepoTable(topHeight);
         }
         else
         {
-            this.DrawPluginTable(tableHeight);
+            this.DrawPluginTable(topHeight);
         }
+
+        ImGui.Separator();
+        this.DrawWorkspace(bottomHeight);
 
         if (this.editing is not null && !this.editOpened)
         {
@@ -206,7 +227,17 @@ internal sealed class ContributeWindow
         }
 
         this.DrawEditPopup();
-        this.DrawSubmitBar();
+
+        // ---------------- 状态行（最底） ----------------
+        if (!string.IsNullOrEmpty(this.statusMessage))
+        {
+            UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.statusMessage);
+        }
+
+        if (!string.IsNullOrEmpty(this.extraHint))
+        {
+            UiHelpers.ColoredWrapped(UiHelpers.Warn, this.extraHint);
+        }
     }
 
     /// <summary>筛选行 + 几个显示开关。</summary>
@@ -1020,6 +1051,25 @@ internal sealed class ContributeWindow
     {
         // 译文变了：重建搜索结果（不重建反射索引，够快）
         this.rebuildPending = true;
+        this.rebuildRepoPending = true;
+    }
+
+    /// <summary>
+    /// 改过译文后把搜索索引在后台重建一次：
+    /// 状态列（缺译 / 机器译 / 你译）与完成度是建索引时算出来的，
+    /// 不重建就会出现「上栏还写着机器译、下栏已经是你改的那条」这种自相矛盾。
+    /// 重建期间旧索引继续用，不会闪空白。
+    /// </summary>
+    private void RefreshIndexSoon()
+    {
+        this.InvalidateIndex();
+        if (this.buildTask is not null)
+        {
+            return;   // 上一次还在建，等它完事
+        }
+
+        var table = this.plugin.SnapshotTable();
+        this.buildTask = Task.Run(() => TranslationIndex.Build(table));
     }
 
     // ------------------------------------------------------------------ 行
@@ -1223,10 +1273,16 @@ internal sealed class ContributeWindow
     {
         this.editing = entry;
         this.editOpened = false;
-        this.editName = entry.Entry?.Name?.Translated ?? string.Empty;
-        this.editPunchline = entry.Entry?.Punchline?.Translated ?? string.Empty;
-        this.editDescription = entry.Entry?.Description?.Translated ?? string.Empty;
+
+        // 下面那一栏已经有这条译文时，直接进原来那份改（不新建、不堆历史版本）
+        this.editName = this.Pending(entry, "Name") ?? entry.Entry?.Name?.Translated ?? string.Empty;
+        this.editPunchline = this.Pending(entry, "Punchline") ?? entry.Entry?.Punchline?.Translated ?? string.Empty;
+        this.editDescription = this.Pending(entry, "Description") ?? entry.Entry?.Description?.Translated ?? string.Empty;
     }
+
+    /// <summary>下栏（待提交）里这条字段的译文；没有就是 null。</summary>
+    private string? Pending(TranslationIndexEntry entry, string field)
+        => this.store.Find(entry.InternalName, field)?.Translated;
 
     /// <summary>批量翻译：把勾选的插件排成一列，改完一个自动接下一个。</summary>
     private void BeginBatchEdit()
@@ -1388,12 +1444,23 @@ internal sealed class ContributeWindow
         }
 
         ImGui.TextDisabled(upstream ? "译文" : "你补的内容");
+        ImGui.SameLine();
+        var limit = ContributionRules.LimitOf(field);
+        var used = (value ?? string.Empty).Length;
+        UiHelpers.ColoredText(used > limit ? UiHelpers.Bad : UiHelpers.Muted, $"{used}/{limit} 字");
+        if (used > limit && ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip($"超过上限（{limit} 字）提交时会被退回，先精简一下");
+        }
+
         ImGui.SetNextItemWidth(-1);
+        var text = value ?? string.Empty;
         ImGui.InputTextMultiline(
             "###trans-" + field,
-            ref value,
+            ref text,
             4096,
             new Vector2(0, ImGui.GetTextLineHeight() * 4));
+        value = text;
     }
 
     private void SaveEdit()
@@ -1405,14 +1472,20 @@ internal sealed class ContributeWindow
         }
 
         var changed = 0;
+        this.ruleIssue = null;
         changed += this.Commit(entry, "Name", entry.OriginalName, this.editName);
         changed += this.Commit(entry, "Punchline", entry.OriginalPunchline, this.editPunchline);
         changed += this.Commit(entry, "Description", entry.OriginalDescription, this.editDescription);
 
-        if (changed > 0)
+        if (this.ruleIssue is not null)
+        {
+            this.SetStatus($"有字段没存上（规则拦下）：{this.ruleIssue}", isError: true);
+        }
+        else if (changed > 0)
         {
             this.plugin.Table.SaveToConfigDirectory(out var error);
             this.plugin.ApplyTranslations();
+            this.RefreshIndexSoon();
             this.SetStatus(
                 error is null
                     ? $"已存到本地 {changed} 处译文；攒够后在下面一条提交"
@@ -1438,6 +1511,14 @@ internal sealed class ContributeWindow
     {
         var upstream = !string.IsNullOrWhiteSpace(original);
         var next = value ?? string.Empty;
+
+        // 与 GitHub 那边同一套规则，先在这里拦一次：超长 / 网址 / HTML / 控制字符
+        var reason = ContributionRules.Check(field, next);
+        if (reason is not null)
+        {
+            this.ruleIssue = $"{FieldLabel(field)}：{reason}";
+            return 0;
+        }
         if (!upstream && string.IsNullOrWhiteSpace(next))
         {
             return 0;   // 上游没有、玩家也没写：没什么可提交的
@@ -1462,6 +1543,10 @@ internal sealed class ContributeWindow
             return 0;
         }
 
+        // 记下「改之前是什么」：删掉这条贡献时要用它恢复
+        var (previousText, previousSource) = this.plugin.Table.GetTranslation(entry.InternalName, field);
+        var existing = this.store.Find(entry.InternalName, field);
+
         this.plugin.Table.MarkUserTranslation(entry.InternalName, field, original, next);
         this.store.AddOrReplace(new ContributionRecord
         {
@@ -1472,63 +1557,141 @@ internal sealed class ContributeWindow
             Field = field,
             Original = original,
             Translated = next,
+            Previous = existing?.Previous ?? previousText,
+            PreviousSource = existing?.PreviousSource ?? previousSource,
             Stale = entry.HasReview,
-            Official = entry.IsOfficial,
         });
 
         return 1;
     }
 
-    // ------------------------------------------------------------------ 待提交 / 导出
+    // ------------------------------------------------------------------ 下面那一栏：改过的译文 / 历史提交记录
 
-    private void DrawSubmitBar()
+    /// <summary>
+    /// 下半栏（像编辑器下方的工作区）：页签 = 待提交 + 每一批历史提交（命名用日期，悬停看具体时间）。
+    /// 待提交里可以直接改 / 删 / 清空 / 撤回；历史快照只读。
+    /// </summary>
+    private void DrawWorkspace(float height)
     {
-        ImGui.Separator();
-        var count = this.store.Count;
-        ImGui.Text($"待提交 {count} 条");
+        if (ImGui.BeginChild("###ContributeWorkspace", new Vector2(0, height)))
+        {
+            var pendingCount = this.store.Count;
+            var tabFlags = ImGuiTabBarFlags.None;
 
-        ImGui.SameLine();
-        var canSubmit = count > 0;
-        if (!canSubmit)
+            if (ImGui.BeginTabBar("###ContributeWorkspaceTabs", tabFlags))
+            {
+                var pendingLabel = pendingCount > 0 ? $"待提交（{pendingCount}）###ws-pending" : "待提交###ws-pending";
+                if (ImGui.BeginTabItem(pendingLabel))
+                {
+                    this.workspaceTab = -1;
+                    ImGui.EndTabItem();
+                }
+
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip("你改过、还没提交的译文；可直接改或删。");
+                }
+
+                // 历史提交：一批一个页签（最新的在最左，跟「待提交」接着），名字用日期，悬停看具体几点
+                for (var i = this.store.History.Count - 1; i >= 0; i--)
+                {
+                    var batch = this.store.History[i];
+                    var sameDay = this.store.History.Count(x => x.DateLabel == batch.DateLabel) > 1;
+                    var name = sameDay
+                        ? $"{batch.DateLabel} {batch.SubmittedLocal:HH:mm}"
+                        : batch.DateLabel;
+                    var label = $"{name}（{batch.Contributions.Count}）###ws-{i}-{batch.SubmittedLocal:yyyyMMddHHmmss}";
+                    if (ImGui.BeginTabItem(label))
+                    {
+                        this.workspaceTab = i;
+                        ImGui.EndTabItem();
+                    }
+
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.SetTooltip($"提交于 {batch.TimeLabel}（本地留档，只读）");
+                    }
+                }
+
+                ImGui.EndTabBar();
+            }
+
+            this.DrawWorkspaceButtons();
+
+            if (this.workspaceTab < 0 || this.workspaceTab >= this.store.History.Count)
+            {
+                this.DrawPendingTable();
+            }
+            else
+            {
+                this.DrawHistoryTable(this.store.History[this.workspaceTab]);
+            }
+        }
+
+        ImGui.EndChild();
+    }
+
+    /// <summary>下栏的按钮组：只留一键提交 / 删除 / 清空 / 撤回 / 查看历史提交记录。</summary>
+    private void DrawWorkspaceButtons()
+    {
+        var pending = this.store.Count;
+        var selectedCount = this.selectedRecords.Count;
+        var onHistoryTab = this.workspaceTab >= 0;
+
+        // 在只读的留档页签上，这些按钮作用于「待提交」，看不见却在改东西 → 直接置灰
+        if (pending == 0 || onHistoryTab)
         {
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button("一键提交###SubmitContrib"))
+        var submitLabel = this.submitStage == 0
+            ? $"一键提交（{pending}）###SubmitContrib"
+            : "确认已提交###SubmitContrib";
+        if (ImGui.Button(submitLabel))
         {
-            this.OpenIssue(compact: false);
+            this.SubmitContributions();
         }
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip(
-                "打开 GitHub 的提交页，标题和正文都填好，按 Submit 就发出去；\n"
-                + "不需要手动存文件、也不需要 GitHub 账号以外的东西。");
+                onHistoryTab
+                    ? "你正在看历史留档（只读）；切回「待提交」页签才能提交。"
+                    : pending == 0
+                        ? "先在下面攒几条译文（上面表格里点「补上… / 改进…」）"
+                        : this.submitStage == 0
+                            ? "第 1 步：打开 GitHub 的提交页（标题、正文都填好）；\n待提交这里原样留着。\n"
+                              + "在网页上按 Submit 之后，回来点「确认已提交」。"
+                            : "第 2 步：确认你已经在 GitHub 上按过 Submit；\n点它才会清空待提交并在本地留一份历史记录。\n"
+                              + "没提交成功就再点一次「一键提交」重发。");
+        }
+
+        if (pending == 0 || onHistoryTab)
+        {
+            ImGui.EndDisabled();
         }
 
         ImGui.SameLine();
-        if (ImGui.Button("复制 JSON###CopyContrib"))
+        if (selectedCount == 0)
         {
-            ImGui.SetClipboardText(this.store.BuildJson());
-            this.SetStatus("已复制 JSON：贴到 issue 里即可", isError: false);
+            ImGui.BeginDisabled();
         }
 
-        ImGui.SameLine();
-        if (ImGui.Button("导出文件###ExportContrib"))
+        if (ImGui.Button($"删除勾选（{selectedCount}）###DeleteContrib"))
         {
-            var path = this.store.SaveExportFile();
-            this.SetStatus(path is null ? "导出失败（写不进配置目录）" : "已导出：" + path, path is null);
+            this.DeleteSelectedContributions();
         }
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("备一手用：写一份 JSON 到配置目录的 contributions\\ 下，内容与「复制 JSON」一样。");
+            ImGui.SetTooltip(selectedCount == 0
+                ? "勾选下面表格里要删的条目；删掉后词表会恢复成改之前的样子，也可以用「撤回」找回。"
+                : $"删掉勾选的 {selectedCount} 条，并把词表恢复成改之前的样子");
         }
 
-        ImGui.SameLine();
-        if (ImGui.Button("打开目录###OpenExportDir"))
+        if (selectedCount == 0)
         {
-            this.store.OpenExportDirectory();
+            ImGui.EndDisabled();
         }
 
         ImGui.SameLine();
@@ -1537,34 +1700,71 @@ internal sealed class ContributeWindow
             ImGui.OpenPopup("清空待提交###ConfirmClear");
         }
 
-        if (!canSubmit)
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("把「待提交」整栏清掉（有二次确认，而且可以用「撤回」找回）");
+        }
+
+        ImGui.SameLine();
+        if (!this.store.CanUndo)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.Button("撤回###UndoContrib"))
+        {
+            this.UndoContributions();
+        }
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(this.store.CanUndo ? "把上一次删除 / 清空恢复回来" : "还没有可撤回的删除或清空");
+        }
+
+        if (!this.store.CanUndo)
         {
             ImGui.EndDisabled();
         }
 
-        // 条目太多时提醒一句（一键提交装不下全部）
-        if (count > 0 && this.EstimateIssueTooLong())
+        ImGui.SameLine();
+        if (this.store.History.Count == 0)
         {
-            UiHelpers.ColoredWrapped(
-                UiHelpers.Warn,
-                "条数较多：一键提交只能带上摘要，把你导出的文件作为附件一起提交，或先用「复制 JSON」。");
+            ImGui.BeginDisabled();
         }
 
-        if (!string.IsNullOrEmpty(this.statusMessage))
+        if (ImGui.Button("查看历史提交记录###ViewHistory"))
         {
-            UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.statusMessage);
+            this.workspaceTab = this.store.History.Count - 1;
+            this.SetStatus($"已切到最近一次提交（{this.store.History[^1].TimeLabel}）", isError: false);
         }
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(this.store.History.Count == 0
+                ? "还没有提交过；提交后每次都会在本地存一份，按日期分页签回看"
+                : $"本地留档共 {this.store.History.Count} 批；页签按日期排列，悬停看具体时间");
+        }
+
+        if (this.store.History.Count == 0)
+        {
+            ImGui.EndDisabled();
+        }
+
+        ImGui.SameLine();
+        ImGui.TextDisabled(
+            this.workspaceTab < 0
+                ? "这一栏是你改过、还没提交的译文"
+                : "历史留档：只读，可对照看当时交了什么");
 
         // 清空的二次确认
-        ImGui.SetNextWindowSize(new Vector2(400, 0), ImGuiCond.Appearing);
+        ImGui.SetNextWindowSize(new Vector2(420, 0), ImGuiCond.Appearing);
         if (ImGui.BeginPopupModal("清空待提交###ConfirmClear", ImGuiWindowFlags.AlwaysAutoResize))
         {
-            ImGui.TextWrapped("清空后本地这份待提交清单就没了（导出的文件还在）。确定吗？");
+            ImGui.TextWrapped("清空后待提交这一栏就空了，词表会恢复成你改之前的样子（之后可以用「撤回」找回）。确定吗？");
             ImGui.Spacing();
             if (ImGui.Button("清空", new Vector2(120, 0)))
             {
-                this.store.ClearAll();
-                this.SetStatus("已清空待提交清单", isError: false);
+                this.clearRequested = true;
                 ImGui.CloseCurrentPopup();
             }
 
@@ -1576,12 +1776,283 @@ internal sealed class ContributeWindow
 
             ImGui.EndPopup();
         }
+
+        if (this.clearRequested)
+        {
+            this.clearRequested = false;
+            this.ClearContributions();
+        }
     }
 
-    /// <summary>一键提交的正文会不会太大（粗略估算，超了就用摘要）。</summary>
+    /// <summary>待提交列表：勾选 + 行内「改」「删」。</summary>
+    private void DrawPendingTable()
+    {
+        var records = this.store.Records;
+        if (records.Count == 0)
+        {
+            ImGui.TextDisabled("还没改过任何译文。在上面点插件名或「补上…」，改完就会出现在这里。");
+            return;
+        }
+
+        var tableHeight = MathF.Max(80f, ImGui.GetContentRegionAvail().Y - 4f);
+        if (!ImGui.BeginTable(
+                "###PendingRows",
+                5,
+                ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
+                ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
+                new Vector2(0, tableHeight)))
+        {
+            return;
+        }
+
+        ImGui.TableSetupScrollFreeze(0, 1);
+        ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 26, 0);
+        ImGui.TableSetupColumn("插件", ImGuiTableColumnFlags.WidthFixed, 170, 1);
+        ImGui.TableSetupColumn("字段", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 76, 2);
+        ImGui.TableSetupColumn("译文", ImGuiTableColumnFlags.WidthStretch, 0, 3);
+        ImGui.TableSetupColumn("##action", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 56, 4);
+
+        ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("##sel");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("插件");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("字段");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("译文");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("悬停看全文；点「改」重新编辑（同一个插件一个字段只会有一条）");
+        }
+
+        ImGui.TableNextColumn();
+
+        var clipper = new ImGuiListClipper();
+        clipper.Begin(records.Count);
+        while (clipper.Step())
+        {
+            for (var i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
+            {
+                var record = records[i];
+                var key = RecordKey(record);
+                ImGui.TableNextRow();
+
+                ImGui.TableNextColumn();
+                var picked = this.selectedRecords.Contains(key);
+                if (ImGui.Checkbox("##rec-" + key, ref picked))
+                {
+                    if (picked)
+                    {
+                        this.selectedRecords.Add(key);
+                    }
+                    else
+                    {
+                        this.selectedRecords.Remove(key);
+                    }
+                }
+
+                ImGui.TableNextColumn();
+                UiHelpers.Fitted(record.DisplayName, record.DisplayName + "\n" + record.InternalName);
+
+                ImGui.TableNextColumn();
+                ImGui.TextDisabled(FieldLabel(record.Field));
+
+                ImGui.TableNextColumn();
+                UiHelpers.Fitted(record.Translated.Replace('\n', ' '), record.Translated);
+
+                ImGui.TableNextColumn();
+                if (ImGui.SmallButton("改###editrec-" + key))
+                {
+                    this.EditExistingContribution(record);
+                }
+            }
+        }
+
+        ImGui.EndTable();
+    }
+
+    /// <summary>历史留档（只读）。</summary>
+    private void DrawHistoryTable(ContributionBatch batch)
+    {
+        var records = batch.Contributions;
+        var tableHeight = MathF.Max(80f, ImGui.GetContentRegionAvail().Y - 4f);
+        if (!ImGui.BeginTable(
+                "###HistoryRows",
+                4,
+                ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
+                ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
+                new Vector2(0, tableHeight)))
+        {
+            return;
+        }
+
+        ImGui.TableSetupScrollFreeze(0, 1);
+        ImGui.TableSetupColumn("插件", ImGuiTableColumnFlags.WidthFixed, 170, 0);
+        ImGui.TableSetupColumn("字段", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 76, 1);
+        ImGui.TableSetupColumn("译文", ImGuiTableColumnFlags.WidthStretch, 0, 2);
+        ImGui.TableSetupColumn("时间", ImGuiTableColumnFlags.WidthFixed, 120, 3);
+
+        ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("插件");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("字段");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("译文");
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("时间");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("这批译文是什么时候提交的（本地留档）");
+        }
+
+        var clipper = new ImGuiListClipper();
+        clipper.Begin(records.Count);
+        while (clipper.Step())
+        {
+            for (var i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
+            {
+                var record = records[i];
+                ImGui.TableNextRow();
+                ImGui.TableNextColumn();
+                UiHelpers.Fitted(record.DisplayName, record.DisplayName + "\n" + record.InternalName);
+                ImGui.TableNextColumn();
+                ImGui.TextDisabled(FieldLabel(record.Field));
+                ImGui.TableNextColumn();
+                UiHelpers.Fitted(record.Translated.Replace('\n', ' '), record.Translated);
+                ImGui.TableNextColumn();
+                ImGui.TextDisabled(record.TimeLocal.ToString("MM-dd HH:mm"));
+            }
+        }
+
+        ImGui.EndTable();
+    }
+
+    private static string RecordKey(ContributionRecord record) => record.InternalName + ":" + record.Field;
+
+    /// <summary>从下面那一栏打开已有译文：直接进原来的那份改，不新建。</summary>
+    private void EditExistingContribution(ContributionRecord record)
+    {
+        var entry = this.index?.All.FirstOrDefault(
+            x => string.Equals(x.InternalName, record.InternalName, StringComparison.Ordinal));
+        if (entry is null)
+        {
+            this.SetStatus($"{record.DisplayName} 现在不在你的插件库里，只能删掉这条", isError: true);
+            return;
+        }
+
+        this.BeginEdit(entry);
+    }
+
+    private void DeleteSelectedContributions()
+    {
+        var deleted = 0;
+        foreach (var key in this.selectedRecords.ToList())
+        {
+            var separator = key.IndexOf(':');
+            if (separator <= 0)
+            {
+                continue;
+            }
+
+            var internalName = key[..separator];
+            var field = key[(separator + 1)..];
+            var record = this.store.Remove(internalName, field);
+            if (record is null)
+            {
+                continue;
+            }
+
+            this.plugin.Table.SetTranslation(internalName, field, record.Previous, record.PreviousSource);
+            deleted++;
+        }
+
+        this.selectedRecords.Clear();
+        if (deleted > 0)
+        {
+            this.plugin.Table.SaveToConfigDirectory(out _);
+            this.plugin.ApplyTranslations();
+            this.InvalidateIndex();
+        }
+
+        this.SetStatus($"已删除 {deleted} 条待提交译文；词表已恢复成改之前的样子（可用「撤回」找回）", isError: false);
+    }
+
+    private void ClearContributions()
+    {
+        var count = this.store.Count;
+        foreach (var record in this.store.Records.ToList())
+        {
+            this.plugin.Table.SetTranslation(record.InternalName, record.Field, record.Previous, record.PreviousSource);
+        }
+
+        this.store.ClearAll();
+        this.selectedRecords.Clear();
+        this.plugin.Table.SaveToConfigDirectory(out _);
+        this.plugin.ApplyTranslations();
+        this.InvalidateIndex();
+        this.SetStatus($"已清空 {count} 条待提交译文（可用「撤回」找回）", isError: false);
+    }
+
+    private void UndoContributions()
+    {
+        var restored = this.store.Undo(out var message);
+        foreach (var record in restored)
+        {
+            this.plugin.Table.MarkUserTranslation(record.InternalName, record.Field, record.Original, record.Translated);
+        }
+
+        if (restored.Count > 0)
+        {
+            this.plugin.Table.SaveToConfigDirectory(out _);
+            this.plugin.ApplyTranslations();
+        }
+
+        this.RefreshIndexSoon();
+        this.SetStatus(message, restored.Count == 0);
+    }
+
+    /// <summary>
+    /// 一键提交（两步）：① 先打开填好的 GitHub 提交页，待提交原样留着；
+    /// ② 玩家在网页按过 Submit，回来点「确认已提交」才归档 + 清空。
+    /// 这样浏览器没打开 / 玩家没提交时，不会再谎报「已提交」。
+    /// </summary>
+    private void SubmitContributions()
+    {
+        if (this.store.Count == 0)
+        {
+            return;
+        }
+
+        if (this.submitStage == 0)
+        {
+            if (!this.OpenIssue(compact: false))
+            {
+                return;   // 打不开浏览器就什么都不动，状态行保留错误
+            }
+
+            this.submitStage = 1;
+            this.SetStatus(
+                $"已打开 GitHub 提交页（{this.store.Count} 条）：在网页上按 Submit，回来点「确认已提交」",
+                isError: false);
+            return;
+        }
+
+        var count = this.store.Count;
+        var batch = this.store.ArchiveSubmission();
+        this.workspaceTab = batch is null ? -1 : this.store.History.Count - 1;
+        this.selectedRecords.Clear();
+        this.submitStage = 0;
+        this.SetStatus(
+            $"已确认提交 {count} 条；本地留档（{batch?.TimeLabel}）可在上面的页签回看",
+            isError: false);
+    }
+
+    /// <summary>一键提交的正文会不会太大（粗略估算，超了就用摘要 + 自动导出文件）。</summary>
     private bool EstimateIssueTooLong() => this.store.BuildJson().Length > 7000;
 
-    private void OpenIssue(bool compact)
+    private bool OpenIssue(bool compact)
     {
         try
         {
@@ -1592,22 +2063,25 @@ internal sealed class ContributeWindow
             string encoded;
             if (useCompact)
             {
+                // 条数太多：正文改成摘要，完整 JSON 自动落到本地文件（不用玩家手动导出）
+                var path = this.store.SaveExportFile();
+                this.store.OpenExportDirectory();
+                this.extraHint = path is null
+                    ? "完整内容没能落盘，请用「复制 JSON」备份后再发。"
+                    : $"完整内容已存到 {path}，把那个文件当附件一起提交。";
+
                 var summary = new System.Text.StringBuilder();
                 summary.AppendLine("### FireGaze 翻译贡献");
                 summary.AppendLine();
                 summary.AppendLine($"- 导出时间：{DateTime.Now:yyyy-MM-dd HH:mm}");
                 summary.AppendLine($"- 条数：{this.store.Count}");
-                summary.AppendLine("- 完整内容见附件或「复制 JSON」（下面只列前若干条）");
+                summary.AppendLine("- 说明：条数较多，下面只列前 20 条；完整列表见附件。");
                 summary.AppendLine();
                 foreach (var record in this.store.Records.Take(20))
                 {
-                    summary.AppendLine($"- {record.InternalName} / {record.Field}：{record.Translated}");
+                    summary.AppendLine($"- {record.InternalName} / {record.Field}：{record.Translated.Replace('\n', ' ')}");
                 }
 
-                summary.AppendLine();
-                summary.AppendLine("```json");
-                summary.AppendLine(this.store.BuildJson());
-                summary.AppendLine("```");
                 body = summary.ToString();
             }
 
@@ -1624,11 +2098,12 @@ internal sealed class ContributeWindow
             }
 
             Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
-            this.SetStatus("已打开浏览器；确认无误后按 Submit 就发出去了", isError: false);
+            return true;
         }
         catch (Exception e)
         {
-            this.SetStatus("打开浏览器失败：" + e.Message, isError: true);
+            this.SetStatus("打开浏览器失败：" + e.Message + "（待提交没有动）", isError: true);
+            return false;
         }
     }
 
