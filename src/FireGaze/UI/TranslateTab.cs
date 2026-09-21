@@ -74,10 +74,12 @@ internal sealed class TranslateTab
 
         // ---------------- 词表状态 ----------------
         ImGui.Text($"词表：{this.plugin.Table.Count} 条 · 上次应用改写 {this.plugin.LastTranslatedCount} 条清单");
+        ImGui.SameLine();
+        ImGui.TextDisabled("· " + this.DescribeTableUpdate());
         if (this.plugin.Table.LoadedFrom is not null)
         {
             var when = this.plugin.Table.LoadedAt is { } time ? time.ToString("yyyy-MM-dd HH:mm") : "?";
-            ImGui.TextDisabled($"来源：{this.plugin.Table.LoadedFrom}（{when}）");
+            ImGui.TextDisabled($"来源文件：{this.plugin.Table.LoadedFrom}（本地改动时间 {when}）");
         }
         else
         {
@@ -150,6 +152,33 @@ internal sealed class TranslateTab
             }
         }
     }
+
+    /// <summary>「上次拿到」那一行的文字：哪一天（周几）拿到的这份词表。</summary>
+    private string DescribeTableUpdate()
+    {
+        // 优先用真的从 GitHub 换上的时间；没有（还没更新过 / 老配置）就用词表文件自己的时间
+        var when = this.plugin.Config.LastTableUpdateUtc != default
+            ? this.plugin.Config.LastTableUpdateUtc
+            : this.plugin.Table.LoadedAt ?? default;
+
+        if (when == default)
+        {
+            return "上次拿到：未知";
+        }
+
+        return $"上次拿到：{when:yyyy-MM-dd}（{WeekdayLabel(when.DayOfWeek)}）";
+    }
+
+    private static string WeekdayLabel(DayOfWeek day) => day switch
+    {
+        DayOfWeek.Monday => "周一",
+        DayOfWeek.Tuesday => "周二",
+        DayOfWeek.Wednesday => "周三",
+        DayOfWeek.Thursday => "周四",
+        DayOfWeek.Friday => "周五",
+        DayOfWeek.Saturday => "周六",
+        _ => "周日",
+    };
 
     private string DescribeNextCheck()
     {

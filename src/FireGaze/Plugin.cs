@@ -580,6 +580,8 @@ public sealed class Plugin : IDalamudPlugin
         var (ok, message) = await this.Table.UpdateFromGitHubAsync(CancellationToken.None).ConfigureAwait(false);
         if (ok)
         {
+            this.Config.LastTableUpdateUtc = DateTime.Now;
+            this.SaveConfig();
             this.Patcher.ApplyAll();
         }
 

@@ -73,6 +73,9 @@ public sealed class Configuration : IPluginConfiguration
     /// <summary>上次自动检查词表的时间（UTC）。</summary>
     public DateTime LastTableUpdateCheckUtc { get; set; }
 
+    /// <summary>上次真的把词表换成新版的本地时间（自动检查或手动都算）。</summary>
+    public DateTime LastTableUpdateUtc { get; set; }
+
     public DisplayMode NameMode { get; set; } = DisplayMode.Original;
 
     public DisplayMode PunchlineMode { get; set; } = DisplayMode.Chinese;
