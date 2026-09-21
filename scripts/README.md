@@ -29,6 +29,22 @@
 
 需要仓库 secret `DEEPSEEK_API_KEY`。
 
+### 补全「一行简介」与 Aetherfeed 没收录的仓库（本地偶尔跑一次）
+
+Aetherfeed 的语料**完全不含 Punchline**（一行简介），而且它是公开仓库索引，会漏掉国服/小众库。
+所以偶尔用本机的 Dalamud 配置跑一遍，把你这 1000+ 个仓库文件当语料：
+
+```bash
+python scripts/update_translations.py --repos "%APPDATA%\XIVLauncherCN\dalamudConfig.json"
+```
+
+- `--repos` 也接受「一行一个仓库地址」的纯文本文件；
+- 它会抓每个仓库的 pluginmaster.json，把 Name/Punchline/Description 一次取全（比 Aetherfeed 新，也会修正原文已变的条目）；
+- 加 `--stats-only` 可先看差异不写文件（2026-09-21 实测：Aetherfeed 1669 → 合并后 1724 个插件，
+  补出 101 条一行简介、把 384 处缺口翻完，之后 `--stats-only` 报 0 待翻译）；
+- 每周的 GitHub 工作流**不带** `--repos`（跑在云端、拿不到你的配置，也用不着每周围着 1178 个仓库转）。
+
+
 ## 玩家贡献（「参与翻译」页）
 
 插件里第四个页签「参与翻译」让玩家直接改译文，存在插件配置目录的 `contributions.json`，

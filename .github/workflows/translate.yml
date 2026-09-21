@@ -3,6 +3,8 @@ name: update-translations
 # 节奏（三处对齐，可单独改）：
 #   · 下载数：download-count.yml 每 6 小时回写一次下载数（数据统计，与译文无关）
 #   · 全量译文：周一 12:00（北京时间）跑本工作流，只翻译新增或原文改过的条目
+#   · 一行简介与冷门仓库：Aetherfeed 不含 Punchline、也不收录国服/小众库，
+#     维护者偶尔在本地跑 `python scripts/update_translations.py --repos <dalamudConfig.json>` 补全
 #   · 玩家贡献：「参与翻译」页提交的 issue —— 由维护者确认后跑
 #     scripts/import_contributions.py 写回词表（用户译文 Source=user，机器译永不覆盖），
 #     没有固定定时（有人提交就处理）；插件侧每两周拉一次新词表（词表本身每周一更新）。

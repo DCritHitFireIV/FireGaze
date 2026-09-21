@@ -71,6 +71,17 @@ def http_get(url: str, timeout: int = 30) -> str:
         return response.read().decode("utf-8", errors="replace")
 
 
+def http_get_mirrors(url: str, timeout: int = 60) -> str:
+    """直连失败就依次走国内镜像（raw.githubusercontent 直连经常不通/超时）。"""
+    last: Exception | None = None
+    for candidate in mirror_urls(url):
+        try:
+            return http_get(candidate, timeout=timeout)
+        except Exception as error:  # noqa: BLE001
+            last = error
+    raise last if last else RuntimeError(f"取不到：{url}")
+
+
 def mirror_urls(url: str) -> list[str]:
     urls = [url]
     if url.startswith("https://raw.githubusercontent.com/"):
@@ -128,23 +139,103 @@ def parse_json_block(content: str) -> dict:
 
 # ------------------------------------------------------------------ 语料 --
 
-def build_corpus(api_key: str | None, limit: int) -> dict[str, dict]:
-    """InternalName -> {"name":..., "punchline":..., "description":..., "repo_url":...}
+CORPUS_FIELDS = ("name", "punchline", "description")
 
-    同一个 InternalName 可能在多个仓库里出现（国际原版 + 国服汉化分支）。
-    优先保留「原文不是中文」的那一条：国服分支本身就是中文，不需要我们替换；
+
+def _text_of(item: dict) -> str:
+    return " ".join((item.get(k) or "") for k in CORPUS_FIELDS)
+
+
+def _score(item: dict) -> tuple[int, int]:
+    """越靠后越优先：先把「含中文的」排后面，再比文本长度。"""
+    text = _text_of(item)
+    return (0 if CJK.search(text) else 1, len(text))
+
+
+def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
+    """把一条插件并进语料；被采纳返回 True。
+
+    同一个 InternalName 可能在多个仓库里出现（国际原版 + 国服汉化分支），
+    优先保留「原文不是中文」的那一条：国服分支本身就是中文、不需要我们替换，
     而国际版的英文原文才能在游戏里匹配上。
     """
-    doc = json.loads(http_get(AETHERFEED))
+    key = (plugin.get("InternalName") or "").strip()
+    if not key:
+        return False
+
+    candidate = {
+        "name": (plugin.get("Name") or "").strip(),
+        "punchline": (plugin.get("Punchline") or "").strip(),
+        "description": (plugin.get("Description") or "").strip(),
+        "repo_url": repo_url,
+    }
+
+    previous = corpus.get(key)
+    if previous is not None and _score(candidate) <= _score(previous):
+        return False
+
+    corpus[key] = candidate
+    return True
+
+
+def fetch_repo_plugins_safe(url: str) -> tuple[str, list[dict]]:
+    try:
+        return url, fetch_repo_plugins(url)
+    except Exception:  # noqa: BLE001
+        return url, []
+
+
+def add_repo_corpus(corpus: dict[str, dict], urls: list[str]) -> int:
+    """用一整套仓库文件补语料（带 Punchline）。
+
+    Aetherfeed 只给 Name/Description，**完全没有 Punchline**；
+    而玩家手里那 1000+ 个仓库文件才是「一行简介」的真正来源，
+    同时也覆盖 Aetherfeed 没收的仓库（国服/小众库）。
+    """
+    print(f"从 {len(urls)} 个仓库文件补语料（含一行简介）…")
+    taken = 0
+    done = 0
+
+    with cf.ThreadPoolExecutor(max_workers=16) as executor:
+        for url, plugins in executor.map(fetch_repo_plugins_safe, urls):
+            done += 1
+            for plugin in plugins:
+                if merge_plugin(corpus, plugin, url):
+                    taken += 1
+            if done % 200 == 0:
+                print(f"  已抓 {done}/{len(urls)} 个仓库…")
+
+    print(f"仓库文件贡献/更新了 {taken} 条插件")
+    return taken
+
+
+def load_repo_urls(path: str) -> list[str]:
+    """从 Dalamud 配置（dalamudConfig.json）或纯文本清单里读出第三方仓库地址。"""
+    with open(path, encoding="utf-8-sig") as handle:
+        raw = handle.read()
+
+    if path.lower().endswith(".json"):
+        doc = json.loads(raw)
+        node = doc.get("ThirdRepoList") if isinstance(doc, dict) else None
+        if isinstance(node, dict):
+            node = node.get("$values")
+        urls: list[str] = []
+        for item in node or []:
+            if isinstance(item, dict) and item.get("Url"):
+                urls.append(item["Url"])
+            elif isinstance(item, str):
+                urls.append(item)
+        return urls
+
+    return [line.strip() for line in raw.splitlines()
+            if line.strip() and not line.strip().startswith("#")]
+
+
+def build_corpus(api_key: str | None, limit: int) -> dict[str, dict]:
+    """InternalName -> {"name":..., "punchline":..., "description":..., "repo_url":...}"""
+    doc = json.loads(http_get_mirrors(AETHERFEED))
     if not isinstance(doc, list):
         raise RuntimeError("Aetherfeed plugins.json 格式异常")
-
-    def text_of(item: dict) -> str:
-        return " ".join((item.get(k) or "") for k in ("Name", "Punchline", "Description"))
-
-    def score(item: dict) -> tuple[int, int]:
-        text = text_of(item)
-        return (0 if CJK.search(text) else 1, len(text))
 
     corpus: dict[str, dict] = {}
     for repo in doc:
@@ -152,24 +243,7 @@ def build_corpus(api_key: str | None, limit: int) -> dict[str, dict]:
             continue
         repo_url = repo.get("repo_url") or ""
         for plugin in repo.get("plugins") or []:
-            key = (plugin.get("InternalName") or "").strip()
-            if not key:
-                continue
-
-            previous = corpus.get(key)
-            if previous is not None:
-                # 旧条目的得分（用储存的文本重算）
-                prev_text = " ".join((previous.get(k) or "") for k in ("name", "punchline", "description"))
-                prev_score = (0 if CJK.search(prev_text) else 1, len(prev_text))
-                if score(plugin) <= prev_score:
-                    continue
-
-            corpus[key] = {
-                "name": (plugin.get("Name") or "").strip(),
-                "punchline": "",
-                "description": (plugin.get("Description") or "").strip(),
-                "repo_url": repo_url,
-            }
+            merge_plugin(corpus, plugin, repo_url)
 
     print(f"Aetherfeed：{len(doc)} 个仓库 / {len(corpus)} 个插件")
     return corpus
@@ -220,12 +294,24 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--table", default=DEFAULT_TABLE)
     parser.add_argument("--stats-only", action="store_true", help="只报告差异，不翻译")
+    parser.add_argument("--repos", default="",
+                        help="额外语料：Dalamud 配置（dalamudConfig.json）或一行一个仓库地址的文本文件；"
+                             "能补全 Aetherfeed 没有的仓库，并把「一行简介」一次抓齐")
     parser.add_argument("--limit", type=int, default=0, help="最多翻译多少条（调试）")
     args = parser.parse_args(argv)
 
     api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip() or None
 
     corpus = build_corpus(api_key, args.limit)
+
+    if args.repos:
+        try:
+            repo_urls = load_repo_urls(args.repos)
+            print(f"{args.repos}：{len(repo_urls)} 个仓库地址")
+            add_repo_corpus(corpus, repo_urls)
+            print(f"合并后语料：{len(corpus)} 个插件")
+        except Exception as error:  # noqa: BLE001
+            print(f"补充语料失败（继续用 Aetherfeed）：{error}")
 
     table: dict[str, dict] = {}
     if os.path.exists(args.table):
@@ -268,16 +354,26 @@ def main(argv=None) -> int:
         saved_name = (saved.get("Name") or {}).get("Original") or ""
         saved_desc = (saved.get("Description") or {}).get("Original") or ""
         saved_punch = (saved.get("Punchline") or {}).get("Original") or ""
+        saved_name_t = (saved.get("Name") or {}).get("Translated") or ""
+        saved_desc_t = (saved.get("Description") or {}).get("Translated") or ""
+        saved_punch_t = (saved.get("Punchline") or {}).get("Translated") or ""
 
-        if name and (is_new or prefer(saved_name, name)):
+        if name and (is_new or not saved_name_t or prefer(saved_name, name)):
             name_todo.append((key, name))
 
-        need_desc = bool(description) and (is_new or prefer(saved_desc, description))
-        need_punch = bool(punchline) and (is_new or prefer(saved_punch, punchline))
-        if need_desc or need_punch:
+        # 「原文在、但表里没译文 / 连这个字段都还没收录」也要排进待翻译：
+        # 旧逻辑只看「新增或原文变了」，导致 Aetherfeed 从来不给 Punchline 的那批条目
+        # 永远停在「没翻译」。（一行简介的原文要等下面的 enrich 去源仓库回抓）
+        need_desc = bool(description) and (is_new or not saved_desc_t or prefer(saved_desc, description))
+        need_punch = bool(punchline) and (is_new or not saved_punch_t or prefer(saved_punch, punchline))
+        # 表里连一行简介都没有、但 Aetherfeed 不含 Punchline → 排进来，稍后回抓源仓库补。
+        # 用了 --repos 时语料已经把各仓库的 Punchline 抓全了，不必再回抓（否则会反复重试）。
+        want_punch_from_repo = (not saved_punch_t) and bool(description) and not args.repos
+        if need_desc or need_punch or want_punch_from_repo:
             desc_todo.append((key, punchline, description))
 
-    # 新条目的仓库可能还没取到 Punchline
+    # 新条目的仓库可能还没取到 Punchline；Aetherfeed 永远不给 Punchline，
+    # 所以「表里没有一行简介」的条目也要回抓源仓库。
     if not args.stats_only:
         missing_punch = {k for k, p, d in desc_todo if not p and d}
         if missing_punch:

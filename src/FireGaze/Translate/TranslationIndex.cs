@@ -151,6 +151,13 @@ internal sealed class TranslationIndex
                 var repoEnabled = repoType.GetProperty("IsEnabled", flags)?.GetValue(repo) as bool? ?? false;
                 var isThirdParty = repoType.GetProperty("IsThirdParty", flags)?.GetValue(repo) as bool? ?? false;
 
+                // 官方主库（Dip17）不进参与翻译列表：那不是本词表的范围，
+                // 而且官库插件的简介由官方发布方维护，玩家改这里的意义不大。
+                if (!isThirdParty)
+                {
+                    continue;
+                }
+
                 if (repoType.GetProperty("PluginMaster", flags)?.GetValue(repo) is not IEnumerable manifests)
                 {
                     continue;
@@ -248,6 +255,12 @@ internal sealed class TranslationIndex
             var hasOriginal = !string.IsNullOrWhiteSpace(original);
             var hasTranslation = pair is { HasTranslation: true };
 
+            // 上游原文本身就是中文（国服/汉化分支的简介）：不用翻，也不算缺译
+            if (hasOriginal && !hasTranslation && HasCjk(original))
+            {
+                continue;
+            }
+
             if (!hasOriginal && !hasTranslation)
             {
                 // 上游压根没提供这个字段：不算缺译，但允许玩家贡献一份
@@ -320,6 +333,24 @@ internal sealed class TranslationIndex
             list.Cast<object?>().Select(x => x?.ToString() ?? string.Empty).Where(x => x.Length > 0)),
         _ => value.ToString() ?? string.Empty,
     };
+
+    /// <summary>这段文字里有没有中日韩汉字（用来判断「上游原文本身就是中文」）。</summary>
+    private static bool HasCjk(string text)
+    {
+        foreach (var ch in text)
+        {
+            if ((ch >= 0x3400 && ch <= 0x4DBF) ||    // 扩展 A
+                (ch >= 0x4E00 && ch <= 0x9FFF) ||    // 基本区
+                (ch >= 0xF900 && ch <= 0xFAFF) ||    // 兼容汉字
+                (ch >= 0x3000 && ch <= 0x303F) ||    // 中文标点
+                (ch >= 0xFF00 && ch <= 0xFFEF))      // 全角字符
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     private static string BuildBlob(TranslationIndexEntry entry)
     {

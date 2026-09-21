@@ -222,22 +222,8 @@ internal sealed class ContributeWindow
             ImGui.SetTooltip(
                 "缺译文 = 上游给了内容、但还没有译文。\n"
                 + "上游本来就空着的字段不算缺译，但你可以自己补一份。\n"
+                + "上游原文本身就是中文的也不算缺译（那是国服/汉化分支的简介）。\n"
                 + "待复核 = 上游原文改过、译文还没跟上。");
-        }
-
-        ImGui.SameLine();
-        var includeOfficial = this.plugin.Config.ContributeIncludeOfficial;
-        if (ImGui.Checkbox("含官方库###ContributeOfficial", ref includeOfficial))
-        {
-            this.plugin.Config.ContributeIncludeOfficial = includeOfficial;
-            this.plugin.SaveConfig();
-            this.rebuildPending = true;
-            this.rebuildRepoPending = true;
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("官方主库（Dip17）里的插件也一起列出来、一起翻；不勾就只看第三方库。");
         }
 
         ImGui.SameLine();
@@ -722,33 +708,156 @@ internal sealed class ContributeWindow
             this.selected.Clear();
         }
 
-        // 加库
+        // ---- 批量加库：把勾选插件所在的库一次加进来 ----
         ImGui.SameLine();
         ImGui.TextDisabled("│");
         ImGui.SameLine();
-        ImGui.SetNextItemWidth(260);
-        ImGui.InputTextWithHint("###AddRepoUrl", "仓库地址（pluginmaster.json）", ref this.repoInput, 512);
-        ImGui.SameLine();
-        var canAdd = this.repoInput.Trim().Length > 0;
-        if (!canAdd)
+
+        var addable = this.SelectedReposToAdd();
+        if (addable.Count == 0)
         {
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button("添加到我的库###AddRepo"))
+        if (ImGui.Button($"添加到我的库（{addable.Count}）###AddSelectedRepos"))
+        {
+            this.AddSelectedRepositories(addable);
+        }
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(addable.Count == 0
+                ? "先在左边勾选插件（勾的插件所在库会被一次加进来）；\n已经在你的库里的会跳过。"
+                : $"把勾选的插件所在的 {addable.Count} 条库加进你的第三方插件列表；\n添加前会自动备份一份仓库列表。");
+        }
+
+        if (addable.Count == 0)
+        {
+            ImGui.EndDisabled();
+        }
+
+        // ---- 撤回上一次「添加」 ----
+        ImGui.SameLine();
+        var lastAdd = this.LastAddRecord();
+        if (lastAdd is null)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.Button($"撤回添加（{lastAdd?.Count ?? 0}）###UndoAdd"))
+        {
+            this.UndoLastAdd();
+        }
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(lastAdd is null
+                ? "还没有刚添加过的库；每次「添加到我的库」后都可以在这里一键撤回。"
+                : $"把刚加进来的 {lastAdd.Count} 条库从列表里移除（{lastAdd.TimeUtc.ToLocalTime():HH:mm} 那次添加）");
+        }
+
+        if (lastAdd is null)
+        {
+            ImGui.EndDisabled();
+        }
+
+        // ---- 单条：粘地址添加 ----
+        ImGui.SameLine();
+        ImGui.TextDisabled("│");
+        ImGui.SameLine();
+        ImGui.SetNextItemWidth(230);
+        ImGui.InputTextWithHint("###AddRepoUrl", "或粘一条仓库地址…", ref this.repoInput, 512);
+        ImGui.SameLine();
+        var canAddUrl = this.repoInput.Trim().Length > 0;
+        if (!canAddUrl)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.Button("添加这条###AddRepoUrlBtn"))
         {
             this.AddRepository();
         }
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("把这条库加进你的第三方插件列表，加完卫月会自己去抓它的插件；\n添加前会自动备份一份仓库列表，随时可撤回。");
+            ImGui.SetTooltip("把这一条库加进你的第三方插件列表（pluginmaster.json 地址）；\n添加前会自动备份，加错了用右边的「撤回添加」。");
         }
 
-        if (!canAdd)
+        if (!canAddUrl)
         {
             ImGui.EndDisabled();
         }
+    }
+
+    /// <summary>勾选的插件里，有哪些库链是本机还没有的（可以一次加进来）。</summary>
+    private List<string> SelectedReposToAdd()
+    {
+        var result = new List<string>();
+        if (this.selected.Count == 0 || this.index is not { Available: true })
+        {
+            return result;
+        }
+
+        var existing = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var repo in this.plugin.Repos.ReadAll(out _))
+        {
+            if (!string.IsNullOrWhiteSpace(repo.Url))
+            {
+                existing.Add(repo.Url);
+            }
+        }
+
+        foreach (var entry in this.index.All)
+        {
+            if (!this.selected.Contains(entry.InternalName) || string.IsNullOrWhiteSpace(entry.RepositoryUrl))
+            {
+                continue;
+            }
+
+            if (existing.Contains(entry.RepositoryUrl) || result.Contains(entry.RepositoryUrl))
+            {
+                continue;
+            }
+
+            result.Add(entry.RepositoryUrl);
+        }
+
+        return result;
+    }
+
+    /// <summary>最近一次「添加库」的撤回记录（不是最近的就不给撤）。</summary>
+    private UndoRecord? LastAddRecord()
+    {
+        var history = this.plugin.Config.UndoHistory;
+        if (history.Count == 0)
+        {
+            return null;
+        }
+
+        var last = history[^1];
+        return last.Action == "add" ? last : null;
+    }
+
+    private void AddSelectedRepositories(List<string> urls)
+    {
+        if (urls.Count == 0)
+        {
+            return;
+        }
+
+        var ok = this.plugin.AddThirdPartyRepositories(urls, out var message);
+        this.SetStatus(message, !ok);
+        this.rebuildPending = true;
+        this.rebuildRepoPending = true;
+    }
+
+    private void UndoLastAdd()
+    {
+        var ok = this.plugin.TryUndoLast(out var message);
+        this.SetStatus(message, !ok);
+        this.rebuildPending = true;
+        this.rebuildRepoPending = true;
     }
 
     private void EnsureIndex()
@@ -809,11 +918,6 @@ internal sealed class ContributeWindow
 
         foreach (var entry in this.index.All)
         {
-            if (entry.IsOfficial && !this.plugin.Config.ContributeIncludeOfficial)
-            {
-                continue;
-            }
-
             if (!this.plugin.Config.ContributeShowDisabled)
             {
                 // 只看已启用的库（官方主库没有 RepositoryUrl，永远算启用）

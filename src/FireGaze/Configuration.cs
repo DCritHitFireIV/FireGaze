@@ -42,7 +42,10 @@ public sealed class UndoRecord
     /// <summary>给按钮/提示用的简短描述：类型 + 数量 + 时间。</summary>
     public string Describe()
     {
-        var action = this.Action == "delete" ? "删除" : this.Action == "rename" ? "修正链接" : "停用";
+        var action = this.Action == "delete" ? "删除"
+            : this.Action == "rename" ? "修正链接"
+            : this.Action == "add" ? "添加"
+            : "停用";
         return $"{action} {this.Count} 个 · {this.TimeUtc.ToLocalTime():HH:mm}";
     }
 }
@@ -89,9 +92,6 @@ public sealed class Configuration : IPluginConfiguration
 
     /// <summary>「参与翻译」是否连已停用仓库里的插件一起列出（默认是）。</summary>
     public bool ContributeShowDisabled { get; set; } = true;
-
-    /// <summary>「参与翻译」是否连官方主库（Dip17）的插件一起列出、一起翻（默认是：官库也能翻，缺译会少很多）。</summary>
-    public bool ContributeIncludeOfficial { get; set; } = true;
 
     // ---------------- 仓库体检 ----------------
 

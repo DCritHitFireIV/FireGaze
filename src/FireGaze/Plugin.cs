@@ -505,11 +505,13 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    /// 添加一条第三方仓库（参与翻译窗口用）：先自动备份，再加，再让卫月重新拉取。
-    /// 返回是否真的加上了。
+    /// 一次加多条库（参与翻译页批量添加用）：自动备份一次、跳过已经在列表里的，
+    /// 加完记一条可撤回的「添加」（右侧的「撤回添加」按钮就是撤它）。
     /// </summary>
-    public bool AddThirdPartyRepository(string url, out string message)
+    public bool AddThirdPartyRepositories(IReadOnlyList<string> urls, out string message)
     {
+        message = string.Empty;
+
         var existing = this.Repos.ReadAll(out var readError);
         if (readError is not null)
         {
@@ -517,26 +519,44 @@ public sealed class Plugin : IDalamudPlugin
             return false;
         }
 
-        if (existing.Any(x => string.Equals(x.Url, url, StringComparison.Ordinal)))
+        var present = new HashSet<string>(existing.Select(x => x.Url), StringComparer.Ordinal);
+        var wanted = urls.Where(u => !string.IsNullOrWhiteSpace(u) && !present.Contains(u))
+                         .Distinct(StringComparer.Ordinal)
+                         .ToList();
+        if (wanted.Count == 0)
         {
-            message = "这条库已经在你的列表里了";
+            message = "这些库都已经在你的列表里了";
             return false;
         }
 
         var backup = this.Repos.BackupRepos(out _);
-        var added = this.Repos.Add(url, out var error);
-        if (added <= 0)
+        var added = wanted.Where(url => this.Repos.Add(url, out _) > 0).ToList();
+        if (added.Count == 0)
         {
-            message = "添加失败：" + (error ?? "未知原因");
+            message = "添加失败：一条也没加上";
             return false;
         }
 
         this.Repos.Save(out _);
         this.Repos.TriggerReload(out _);
         this.TrackFirstSeen();
-        message = $"已添加；卫月正在抓取它的插件，稍等片刻就能在列表里搜到（备份：{Path.GetFileName(backup)}）";
+
+        this.RecordUndo(new UndoRecord
+        {
+            Action = "add",
+            TimeUtc = DateTime.UtcNow,
+            Entries = added.Select(url => new UndoEntry { Url = url, IsEnabled = true, Index = 0 }).ToList(),
+            BackupPath = string.IsNullOrEmpty(backup) ? null : backup,
+        });
+
+        message = $"已添加 {added.Count} 条库（可撤回）；卫月正在抓取它们的插件"
+                  + (wanted.Count > added.Count ? $"，另有 {wanted.Count - added.Count} 条没加上" : string.Empty);
         return true;
     }
+
+    /// <summary>添加一条第三方仓库（参与翻译页单条添加用）：先自动备份，再加，再让卫月重新拉取。</summary>
+    public bool AddThirdPartyRepository(string url, out string message)
+        => this.AddThirdPartyRepositories([url], out message);
 
     /// <summary>应用一次汉化（计时器用，静默）。</summary>
     private void ApplyTranslationsQuiet()
@@ -696,7 +716,12 @@ public sealed class Plugin : IDalamudPlugin
         var record = this.Config.UndoHistory[^1];
         string? error;
 
-        if (record.Action == "delete")
+        if (record.Action == "add")
+        {
+            var removed = this.Repos.Remove(record.Entries.Select(x => x.Url), out error);
+            message = $"已撤回添加：移除了 {removed} 条库";
+        }
+        else if (record.Action == "delete")
         {
             var inserted = this.Repos.Insert(record.Entries, out error);
             message = $"已把 {inserted} 个仓库链接放回列表";
