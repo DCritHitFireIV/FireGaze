@@ -116,6 +116,18 @@ public sealed class TranslationTable
     /// </summary>
     public string? MaintainedAt { get; private set; }
 
+    private int revision;
+
+    /// <summary>
+    /// 词表内容的版本号：每次加载 / 从 GitHub 更新 / 写回配置目录都 +1。
+    /// 「参与翻译」窗口拿它判断自己手里的对照结果是不是旧词表算出来的
+    /// ——否则玩家点过「从 GitHub 更新词表」之后，窗口仍按旧词表报缺译
+    /// （2026-09-22 实机遇到：表已换成 1743 条，窗口还拿 1728 条的旧快照报缺译）。
+    /// </summary>
+    public int Revision => Volatile.Read(ref this.revision);
+
+    private void BumpRevision() => Interlocked.Increment(ref this.revision);
+
     public bool TryGet(string internalName, out TransEntry entry)
     {
         lock (this.gate)
@@ -184,6 +196,7 @@ public sealed class TranslationTable
         this.MaintainedAt = best.MaintainedAt;
         this.LoadedFrom = best.Path;
         this.LoadedAt = File.GetLastWriteTime(best.Path);
+        this.BumpRevision();
         return true;
     }
 
@@ -381,6 +394,7 @@ public sealed class TranslationTable
             File.WriteAllText(target, json + Environment.NewLine, System.Text.Encoding.UTF8);
             this.LoadedFrom = target;
             this.LoadedAt = DateTime.Now;
+            this.BumpRevision();
             return true;
         }
         catch (Exception e)
@@ -466,6 +480,7 @@ public sealed class TranslationTable
                 this.MaintainedAt = maintainedAt;
                 this.LoadedFrom = target;
                 this.LoadedAt = DateTime.Now;
+                this.BumpRevision();
                 return (true, $"已更新词表：{dict.Count} 条（{url}）");
             }
             catch (Exception e)

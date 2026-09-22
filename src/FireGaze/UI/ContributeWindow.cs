@@ -49,6 +49,9 @@ internal sealed class ContributeWindow : Window
     /// <summary>重建索引时不要反复反射卫月内部：改成按条目就地重算状态，见 <see cref="RefreshEntryStates"/>。</summary>
     private bool refreshStatesRequested;
 
+    /// <summary>上次看到的词表版本号（<see cref="TranslationTable.Revision"/>），变了就按新词表重算每一行。</summary>
+    private int seenTableRevision = -1;
+
     private readonly HashSet<string> expandedRepos = new(StringComparer.Ordinal);
 
     private TranslationIndex? index;
@@ -132,6 +135,16 @@ internal sealed class ContributeWindow : Window
         ImGui.Separator();
 
         // ---------------- 索引 ----------------
+        // 词表被换过（比如刚点过「从 GitHub 更新词表」）就重算每行状态：
+        // 插件清单是一次性快照，不重算的话会一直显示旧词表算出来的「缺译文」。
+        var tableRevision = this.plugin.Table.Revision;
+        if (this.seenTableRevision != tableRevision)
+        {
+            Plugin.Log.Debug($"[FireGaze] 词表版本变化（{this.seenTableRevision} → {tableRevision}）：重算参与翻译列表状态");
+            this.seenTableRevision = tableRevision;
+            this.RefreshIndexSoon();
+        }
+
         this.RefreshEntryStates();
         this.EnsureIndex();
 
