@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
@@ -33,6 +34,16 @@ internal sealed class ContributeWindow : Window
     private DateTime lastDrawErrorAt = DateTime.MinValue;
 
     private int drawErrorCount;
+
+    /// <summary>
+    /// 后台推送的结果队列。
+    ///
+    /// 关键约定：**后台线程只发请求，绝不碰 store / 列表**。
+    /// 以前是在 Task 里直接 ArchiveSubmission()（清空待提交、追写留档），
+    /// 而 UI 每帧都在遍历同一个 List —— 撞上就抛「集合已被修改 / 索引超界」，
+    /// 表现就是「一点提交就报错」。现在统一在主线程 FinishSubmitIfNeeded() 里收尾。
+    /// </summary>
+    private readonly ConcurrentQueue<(bool Ok, string Message, int Count)> submitResults = new();
 
     /// <summary>下栏勾选的待提交译文（键 = InternalName:Field）。</summary>
     private readonly HashSet<string> selectedRecords = new(StringComparer.Ordinal);
@@ -186,16 +197,23 @@ internal sealed class ContributeWindow : Window
             }
 
             this.drawErrorCount++;
+            var detail = e.GetType().Name + "：" + (e.Message ?? string.Empty);
+            if (detail.Length > 140)
+            {
+                detail = detail[..140] + "…";
+            }
+
             UiHelpers.ColoredWrapped(
                 UiHelpers.Bad,
-                this.drawErrorCount <= 1
-                    ? "这个窗口刚才出错了一次（已写进日志）；换页签或重开窗口可以继续用。"
-                    : $"这个窗口又出错了 {this.drawErrorCount} 次（已写进日志）。");
+                $"这个窗口刚才出错了 {this.drawErrorCount} 次（已写进日志）：{detail}");
         }
     }
 
     private void DrawCore()
     {
+        // 后台推送的收尾必须在主线程做（归档 / 导出都动 store，而下面每帧都要遍历它）
+        this.FinishSubmitIfNeeded();
+
         // ---------------- 顶部说明 ----------------
         ImGui.TextWrapped("对插件名、一行简介、插件详情的翻译做出贡献。");
         ImGui.TextDisabled("提交的译文优先于机器翻译；点「一键提交」会把这一批直接发给维护者审核，通过后随词表更新。");
@@ -2570,19 +2588,52 @@ internal sealed class ContributeWindow : Window
             return;
         }
 
-        this.submitBusy = true;
         var count = this.store.Count;
-        var title = $"FireGaze 翻译贡献 {DateTime.Now:yyyy-MM-dd HH:mm}（{count} 条）";
-        var markdown = this.BuildSubmitMarkdown();
-        var url = this.plugin.Config.PushUrl;
+        string title;
+        string markdown;
+        string url;
 
+        try
+        {
+            title = $"FireGaze 翻译贡献 {DateTime.Now:yyyy-MM-dd HH:mm}（{count} 条）";
+            markdown = this.BuildSubmitMarkdown();
+            url = this.plugin.Config.PushUrl;
+        }
+        catch (Exception e)
+        {
+            Plugin.Log.Error(e, "[FireGaze] 组装提交内容时出错");
+            this.SetStatus($"提交前就出错了：{e.GetType().Name}：{e.Message}", isError: true);
+            return;
+        }
+
+        this.submitBusy = true;
+
+        // 后台只负责发请求；收尾（归档 / 导出 / 状态行）一律回主线程做，
+        // 见 FinishSubmitIfNeeded() —— 否则会和绘制中的遍历撞车。
         _ = Task.Run(async () =>
         {
-            var (ok, message) = await PushNotifier
-                .SendAsync(url, title, markdown, CancellationToken.None)
-                .ConfigureAwait(false);
+            try
+            {
+                var (ok, message) = await PushNotifier
+                    .SendAsync(url, title, markdown, CancellationToken.None)
+                    .ConfigureAwait(false);
+                this.submitResults.Enqueue((ok, message, count));
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.Error(e, "[FireGaze] 推送翻译贡献时出错");
+                this.submitResults.Enqueue((false, $"推送时出错：{e.GetType().Name}：{e.Message}", count));
+            }
+        });
+    }
 
+    /// <summary>把后台推送的结果在主线程收尾（归档 / 导出 / 状态行）；每帧开头跑一次。</summary>
+    private void FinishSubmitIfNeeded()
+    {
+        while (this.submitResults.TryDequeue(out var result))
+        {
             this.submitBusy = false;
+            var (ok, message, count) = result;
 
             if (!ok)
             {
@@ -2592,7 +2643,7 @@ internal sealed class ContributeWindow : Window
                     ? $"{message}；内容还在「待提交」里，可以稍后再点一次。"
                     : $"{message}；已把这一批导出到 {path}，内容还在「待提交」里。";
                 this.SetStatus("推送失败（待提交没有动）", isError: true);
-                return;
+                continue;
             }
 
             this.store.ArchiveSubmission();
@@ -2600,7 +2651,7 @@ internal sealed class ContributeWindow : Window
             this.selectedRecords.Clear();
             this.extraHint = null;
             this.SetStatus($"已提交 {count} 条：{message}；可在「历史提交」页签里回看", isError: false);
-        });
+        }
     }
 
     /// <summary>推送给维护者的正文：人看的清单 + 可直接落盘的 JSON。</summary>
