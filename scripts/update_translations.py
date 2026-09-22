@@ -34,6 +34,12 @@ DEFAULT_TABLE = os.path.join(REPO_ROOT, "translations.json")
 AETHERFEED = "https://raw.githubusercontent.com/Aetherfeed/aetherfeed.github.io/refs/heads/main/public/data/plugins.json"
 CJK = re.compile(r"[\u4e00-\u9fff]")
 
+# 仓库文件的容错解析：卫月（Json.NET）允许注释与尾随逗号，我们也得允许，
+# 否则整座仓库的插件（含 Punchline）会静默漏掉（2026-09-22 实例）。
+_TRAILING_COMMA = re.compile(r",(\s*[\]}]+)")
+_LINE_COMMENT = re.compile(r"^\s*//[^\n]*$", re.M)
+_BLOCK_COMMENT = re.compile(r"/\*.*?\*/", re.S)
+
 NAME_PROMPT = (
     "你是 FFXIV 插件生态的译者。输入一组卫月插件的英文名，请判断是否需要译成简体中文。"
     "规则："
@@ -92,13 +98,34 @@ def mirror_urls(url: str) -> list[str]:
     return urls
 
 
+def parse_repo_json(text: str):
+    """按卫月（Json.NET）的口径解析仓库文件：**允许注释与尾随逗号**。
+
+    真实案例（2026-09-22）：Ashylila/AshPluggyRepo 的 repo.json 在数组末尾多一个逗号，
+    严格 json 直接抛异常 → 整座仓库的插件（含 Punchline）进不了语料 → 工作流永远看不到
+    这些一行简介，词表里就一直是「没有这一字段」，游戏里看着就是永远缺译。
+    卫月自己能读，所以游戏里有原文 —— 我们也得能读。
+    """
+    cleaned = text.lstrip("\ufeff")
+    try:
+        return json.loads(cleaned)
+    except Exception:  # noqa: BLE001
+        pass
+
+    relaxed = _TRAILING_COMMA.sub(r"\1", _BLOCK_COMMENT.sub("", _LINE_COMMENT.sub("", cleaned)))
+    try:
+        return json.loads(relaxed)
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def fetch_repo_plugins(repo_url: str) -> list[dict]:
     for candidate in mirror_urls(repo_url):
         try:
-            doc = json.loads(http_get(candidate).lstrip("\ufeff"))
+            doc = parse_repo_json(http_get(candidate))
             if isinstance(doc, list):
                 return [x for x in doc if isinstance(x, dict)]
-        except Exception:
+        except Exception:  # noqa: BLE001
             continue
     return []
 
