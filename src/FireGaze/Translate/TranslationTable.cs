@@ -447,6 +447,17 @@ public sealed class TranslationTable
                     continue;
                 }
 
+                // 防倒退：GitHub 上那份比本机的还旧（比如本地刚跟过一轮新的、还没推上去）
+                // 就不要拿它覆盖本机，否则玩家会莫名其妙 “更新” 成更少的条数。
+                var remoteDate = DateTime.TryParse(maintainedAt, out var remote) ? remote : (DateTime?)null;
+                var localDate = DateTime.TryParse(this.MaintainedAt, out var local) ? local : (DateTime?)null;
+                if (localDate is not null && (remoteDate is null || remoteDate < localDate))
+                {
+                    var remoteLabel = remoteDate is null ? "没有维护日期" : $"{remoteDate:yyyy-MM-dd}";
+                    return (false, $"GitHub 上那份词表更旧（本机 {localDate:yyyy-MM-dd} / 远端 {remoteLabel}），没有替换。"
+                                    + "要强制用远端那份，删掉配置目录里的 translations.json 再更新。");
+                }
+
                 Directory.CreateDirectory(this.configDirectory);
                 var target = Path.Combine(this.configDirectory, "translations.json");
                 await File.WriteAllTextAsync(target, text, cancellationToken).ConfigureAwait(false);
