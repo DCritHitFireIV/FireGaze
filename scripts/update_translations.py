@@ -188,8 +188,13 @@ def _text_of(item: dict) -> str:
     return " ".join((item.get(k) or "") for k in CORPUS_FIELDS)
 
 
+def _lang_score(text: str) -> tuple[int, int]:
+    """文本优先级：先要「不是中文原文」，再要更长。"""
+    return (0 if CJK.search(text) else 1, len(text))
+
+
 def _score(item: dict) -> tuple[int, int]:
-    """越靠后越优先：先把「含中文的」排后面，再比文本长度。"""
+    """整条插件的优先级（越靠后越优先）：先要「不是中文原文」，再比总文本长度。"""
     text = _text_of(item)
     return (0 if CJK.search(text) else 1, len(text))
 
@@ -197,9 +202,12 @@ def _score(item: dict) -> tuple[int, int]:
 def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
     """把一条插件并进语料；被采纳返回 True。
 
-    同一个 InternalName 可能在多个仓库里出现（国际原版 + 国服汉化分支），
-    优先保留「原文不是中文」的那一条：国服分支本身就是中文、不需要我们替换，
-    而国际版的英文原文才能在游戏里匹配上。
+    同一个 InternalName 可能在多个仓库里出现（国际原版 + 国服汉化分支 + 各种聚合库）：
+    · 主版本还是「整条二选一」：先要原文不是中文，再要文本更长（原来是这个口径，别动，
+      改成逐字段合并会把各种 CN 分支的名字/详情都卷进来，平得一堆「原文变了」重翻）；
+    · **只补一处**：主版本没有一行简介、而另一份提供（且不是中文）时，把简介拿过来。
+      不补就会像 LMeter / SmartStrafe / PyonCam / RacingwayRewrite 那样，
+      游戏里永远缺那一条简介（2026-09-22 实测）。
     """
     key = (plugin.get("InternalName") or "").strip()
     if not key:
@@ -213,11 +221,20 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
     }
 
     previous = corpus.get(key)
-    if previous is not None and _score(candidate) <= _score(previous):
-        return False
+    if previous is None:
+        corpus[key] = candidate
+        return bool(_text_of(candidate))
 
-    corpus[key] = candidate
-    return True
+    if _score(candidate) > _score(previous):
+        corpus[key] = candidate
+        return True
+
+    # 主版本不看：只把缺的一行简介补上
+    if not previous["punchline"] and candidate["punchline"] and not upstream_is_localized(candidate["punchline"]):
+        previous["punchline"] = candidate["punchline"]
+        return True
+
+    return False
 
 
 def fetch_repo_plugins_safe(url: str) -> tuple[str, list[dict]]:
