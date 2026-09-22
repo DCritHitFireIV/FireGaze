@@ -7,6 +7,7 @@ using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
+using FireGaze.Internal.Configuration;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 using FireGaze.UI;
@@ -15,10 +16,10 @@ using Timer = System.Timers.Timer;
 namespace FireGaze;
 
 /// <summary>
-/// FireGaze —— 卫月一体化工具箱：
-///   ① 插件简介汉化（名字 / 一行简介 / 详情 × 原版 / 中文 / 双语）
-///   ② 第三方仓库体检（扫描死链、内容不合规，支持停用 / 删除 + 备份 + 撤回）
-///   ③ 拦住插件安装器的自动刷新（并可选地记住列表浏览位置）
+///     FireGaze —— 卫月一体化工具箱：
+///       ① 插件简介汉化（名字 / 一行简介 / 详情 × 原版 / 中文 / 双语）
+///       ② 第三方仓库体检（扫描死链、内容不合规，支持停用 / 删除 + 备份 + 撤回）
+///       ③ 拦住插件安装器的自动刷新（并可选地记住列表浏览位置）
 /// </summary>
 public sealed class Plugin : IDalamudPlugin
 {
@@ -32,7 +33,9 @@ public sealed class Plugin : IDalamudPlugin
 
     [PluginService] public static IFramework Framework { get; private set; } = null!;
 
-    /// <summary>纹理服务（图标落盘缓存 → 纹理用；卫月注入）。</summary>
+    /// <summary>
+    ///     纹理服务（图标落盘缓存 → 纹理用；卫月注入）。
+    /// </summary>
     [PluginService] public static ITextureProvider Textures { get; private set; } = null!;
 
     private readonly IDalamudPluginInterface pluginInterface;
@@ -58,76 +61,68 @@ public sealed class Plugin : IDalamudPlugin
     {
         instance = this;
         this.pluginInterface = pluginInterface;
-        this.Config = pluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+        Config = pluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
 
-        // 2.0 之前的默认值是「汉化开启」；新默认先关着，由用户自己打开
-        if (this.Config.Version < 2)
+        // 配置迁移走单步迁移器（Internal/Configuration），缺台阶直接抛错；只在真的迁移过时保存一次
+        var previousConfigVersion = ConfigurationMigrator.Migrate(Config);
+        if (previousConfigVersion < ConfigurationMigrator.LatestVersion)
         {
-            this.Config.Version = 2;
-            this.Config.TranslateEnabled = false;
-            pluginInterface.SavePluginConfig(this.Config);
+            pluginInterface.SavePluginConfig(Config);
         }
 
-        // 3.0：安装器那两项功能改为**默认关**（由用户自己打开）
-        if (this.Config.Version < 3)
-        {
-            this.Config.Version = 3;
-            this.Config.RememberListScroll = false;
-            this.Config.BlockInstallerAutoRefresh = false;
-            this.Config.ListScrollY = null;
-            this.installerDefaultsNotice = true;
-            pluginInterface.SavePluginConfig(this.Config);
-        }
+        // 迁移前版本 < 3 的用户提示一次「安装器的两项功能已改为默认关」
+        installerDefaultsNotice = previousConfigVersion < 3;
 
-        this.ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
-        Directory.CreateDirectory(this.ConfigDirectory);
+        ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
+        Directory.CreateDirectory(ConfigDirectory);
 
-        this.Icons = new UI.IconStore(this.ConfigDirectory, () => this.Config.IconCacheEnabled);
+        Icons = new UI.IconStore(ConfigDirectory, () => Config.IconCacheEnabled);
 
-        this.Repos = new DalamudRepos(Path.Combine(this.ConfigDirectory, "backups"));
+        Repos = new DalamudRepos(Path.Combine(ConfigDirectory, "backups"));
 
         var pluginDirectory = pluginInterface.AssemblyLocation.Directory?.FullName
                               ?? Path.GetDirectoryName(pluginInterface.AssemblyLocation.FullName)
                               ?? ".";
-        this.Table = new TranslationTable(this.ConfigDirectory, pluginDirectory);
-        this.Contributions = new ContributionsStore(this.ConfigDirectory);
-        this.Patcher = new ManifestPatcher(() => this.Config, this.Table, m => Log.Warning("[FireGaze] " + m));
+        Table = new TranslationTable(ConfigDirectory, pluginDirectory);
+        Contributions = new ContributionsStore(ConfigDirectory);
+        Patcher = new ManifestPatcher(() => Config, Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
-        this.window = new MainWindow(this);
-        this.windowSystem.AddWindow(this.window);
-        this.contributeWindow = new ContributeWindow(this, this.Contributions);
-        this.windowSystem.AddWindow(this.contributeWindow);
-        pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
-        pluginInterface.UiBuilder.Draw += this.TickInstallerListScroll;
-        pluginInterface.UiBuilder.OpenConfigUi += this.ToggleWindow;
+        window = new MainWindow(this);
+        windowSystem.AddWindow(window);
+        contributeWindow = new ContributeWindow(this, Contributions);
+        windowSystem.AddWindow(contributeWindow);
+        pluginInterface.UiBuilder.Draw += windowSystem.Draw;
+        pluginInterface.UiBuilder.Draw += TickInstallerListScroll;
+        pluginInterface.UiBuilder.OpenConfigUi += ToggleWindow;
+        pluginInterface.UiBuilder.OpenMainUi += OpenMainWindow;
 
         // 重活（词表、挂钩、定时器）一律延后到「所有插件加载完」之后：
         // 加壳插件的模块初始化器会在加载阶段扫描/改写进程内存，我们需要在那个窗口里保持安静。
-        this.loadedAt = DateTime.UtcNow;
-        Framework.Update += this.OnStartupTick;
+        loadedAt = DateTime.UtcNow;
+        Framework.Update += OnStartupTick;
 
         Log.Information($"[FireGaze] 已加载 v{typeof(Plugin).Assembly.GetName().Version}（初始化将等插件加载阶段结束后进行）");
 
-        this.AddCommand(
+        AddCommand(
             "/firegaze",
-            new CommandInfo(this.OnCommand)
+            new CommandInfo(OnCommand)
             {
                 HelpMessage = "打开 FireGaze 窗口",
             });
-        this.AddCommand(
+        AddCommand(
             "/nar",
-            new CommandInfo((_, _) => this.ToggleWindow())
+            new CommandInfo((_, _) => ToggleWindow())
             {
                 HelpMessage = "（旧命令）打开 FireGaze 窗口",
                 ShowInHelp = false,
             });
-        this.AddCommand(
+        AddCommand(
             "/pdz",
             new CommandInfo((_, _) =>
             {
-                this.ReloadTranslationTable(out _);
-                this.Patcher.ApplyAll();
+                ReloadTranslationTable(out _);
+                Patcher.ApplyAll();
                 Chat.Print("[FireGaze] 已重新加载词表并应用");
             })
             {
@@ -135,15 +130,15 @@ public sealed class Plugin : IDalamudPlugin
                 ShowInHelp = false,
             });
 
-        this.translateTimer = new Timer(10_000) { AutoReset = true };
-        this.translateTimer.Elapsed += (_, _) =>
+        translateTimer = new Timer(10_000) { AutoReset = true };
+        translateTimer.Elapsed += (_, _) =>
         {
             // 定时器线程上的未处理异常会直接终止游戏进程（Dalamud.Boot 的 0x12345679），
             // 所以这里**全程包住**：宁可少应用一次汉化，也不能把游戏带下去。
             try
             {
-                this.ApplyTranslationsQuiet();
-                this.MaybeAutoUpdateTable();
+                ApplyTranslationsQuiet();
+                MaybeAutoUpdateTable();
             }
             catch (Exception e)
             {
@@ -153,44 +148,44 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    /// 延迟初始化：等所有插件都不在加载中（或超时 30 秒）再动手。
-    /// 加壳插件（.NET Reactor 系）在模块初始化器里会扫描/改写进程内存，
-    /// 我们在这个窗口里不做任何重活、不开定时器，避免把它们搞崩。
+    ///     延迟初始化：等所有插件都不在加载中（或超时 30 秒）再动手。
+    ///     加壳插件（.NET Reactor 系）在模块初始化器里会扫描/改写进程内存，
+    ///     我们在这个窗口里不做任何重活、不开定时器，避免把它们搞崩。
     /// </summary>
     private void OnStartupTick(IFramework framework)
     {
-        if (this.startupInitDone)
+        if (startupInitDone)
         {
             return;
         }
 
-        if (this.AnyPluginLoading() && DateTime.UtcNow - this.loadedAt < TimeSpan.FromSeconds(30))
+        if (AnyPluginLoading() && DateTime.UtcNow - loadedAt < TimeSpan.FromSeconds(30))
         {
             return;
         }
 
-        this.startupInitDone = true;
-        Framework.Update -= this.OnStartupTick;
+        startupInitDone = true;
+        Framework.Update -= OnStartupTick;
 
         try
         {
-            this.ReloadTranslationTable(out _);
-            this.TrackFirstSeen();
+            ReloadTranslationTable(out _);
+            TrackFirstSeen();
 
-            this.translateTimer.Start();
+            translateTimer.Start();
 
             Log.Information(
-                $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {this.Table.Count} 条；" +
-                $"汉化 = {(this.Config.TranslateEnabled ? "开" : "关")}");
+                $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {Table.Count} 条；" +
+                $"汉化 = {(Config.TranslateEnabled ? "开" : "关")}");
             Log.Information("[FireGaze] 页签顺序：简介汉化 / 仓库体检 / 插件安装器 / 参与翻译");
 
-            if (this.installerDefaultsNotice)
+            if (installerDefaultsNotice)
             {
-                this.installerDefaultsNotice = false;
+                installerDefaultsNotice = false;
                 Chat.Print("[FireGaze] 安装器增强的两项功能已改为默认关闭，可在 /firegaze → 插件安装器 里打开。");
             }
 
-            if (this.HasReviewPending())
+            if (HasReviewPending())
             {
                 Chat.Print("[FireGaze] 有新词表：部分条目的原文改过了，可以到「参与翻译」里筛「待复核」看一眼。");
             }
@@ -201,7 +196,9 @@ public sealed class Plugin : IDalamudPlugin
         }
     }
 
-    /// <summary>是否还有插件正在加载（反射读 PluginState == Loading）。</summary>
+    /// <summary>
+    ///     是否还有插件正在加载（反射读 PluginState == Loading）。
+    /// </summary>
     private bool AnyPluginLoading()
     {
         try
@@ -230,31 +227,49 @@ public sealed class Plugin : IDalamudPlugin
         return false;
     }
 
-    /// <summary>当前配置。</summary>
+    /// <summary>
+    ///     当前配置。
+    /// </summary>
     public Configuration Config { get; private set; }
 
-    /// <summary>本地待提交的翻译贡献（配置目录，不联网）。</summary>
+    /// <summary>
+    ///     本地待提交的翻译贡献（配置目录，不联网）。
+    /// </summary>
     internal ContributionsStore Contributions { get; }
 
-    /// <summary>插件配置目录（备份写在这里的 backups/ 下）。</summary>
+    /// <summary>
+    ///     插件配置目录（备份写在这里的 backups/ 下）。
+    /// </summary>
     public string ConfigDirectory { get; }
 
-    /// <summary>图标落盘缓存（体检页 + 插件安装器共用）。</summary>
+    /// <summary>
+    ///     图标落盘缓存（体检页 + 插件安装器共用）。
+    /// </summary>
     internal UI.IconStore Icons { get; }
 
-    /// <summary>诊断用：与 <see cref="ConfigDirectory"/> 相同（dalamudUI.ini 就在它上两级）。</summary>
+    /// <summary>
+    ///     诊断用：与 <see cref="ConfigDirectory"/> 相同（dalamudUI.ini 就在它上两级）。
+    /// </summary>
     public static string ConfigDirectoryForDiagnostics => instance.ConfigDirectory;
 
-    /// <summary>翻译词表。</summary>
+    /// <summary>
+    ///     翻译词表。
+    /// </summary>
     public TranslationTable Table { get; }
 
-    /// <summary>清单改写器。</summary>
+    /// <summary>
+    ///     清单改写器。
+    /// </summary>
     public ManifestPatcher Patcher { get; }
 
-    /// <summary>卫月仓库配置读写。</summary>
+    /// <summary>
+    ///     卫月仓库配置读写。
+    /// </summary>
     public DalamudRepos Repos { get; }
 
-    /// <summary>最近一次汉化应用改写的清单数。</summary>
+    /// <summary>
+    ///     最近一次汉化应用改写的清单数。
+    /// </summary>
     public int LastTranslatedCount { get; private set; }
 
     public string Name => "FireGaze";
@@ -263,11 +278,11 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
-        this.SaveConfig(force: true);
+        SaveConfig(force: true);
 
         try
         {
-            this.Icons.Dispose();
+            Icons.Dispose();
         }
         catch
         {
@@ -276,7 +291,7 @@ public sealed class Plugin : IDalamudPlugin
 
         try
         {
-            Framework.Update -= this.OnStartupTick;
+            Framework.Update -= OnStartupTick;
         }
         catch
         {
@@ -285,18 +300,19 @@ public sealed class Plugin : IDalamudPlugin
 
         try
         {
-            this.translateTimer.Stop();
-            this.translateTimer.Dispose();
+            translateTimer.Stop();
+            translateTimer.Dispose();
         }
         catch
         {
             // ignore
         }
 
-        this.pluginInterface.UiBuilder.Draw -= this.windowSystem.Draw;
-        this.pluginInterface.UiBuilder.Draw -= this.TickInstallerListScroll;
-        this.pluginInterface.UiBuilder.OpenConfigUi -= this.ToggleWindow;
-        foreach (var command in this.registeredCommands)
+        pluginInterface.UiBuilder.Draw -= windowSystem.Draw;
+        pluginInterface.UiBuilder.Draw -= TickInstallerListScroll;
+        pluginInterface.UiBuilder.OpenConfigUi -= ToggleWindow;
+        pluginInterface.UiBuilder.OpenMainUi -= OpenMainWindow;
+        foreach (var command in registeredCommands)
         {
             try
             {
@@ -310,15 +326,15 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    /// 注册聊天命令。命令名可能被其他插件占用（如 /fg 已属于别的插件），
-    /// 占用时只记一条警告，不能让插件加载失败。
+    ///     注册聊天命令。命令名可能被其他插件占用（如 /fg 已属于别的插件），
+    ///     占用时只记一条警告，不能让插件加载失败。
     /// </summary>
     private void AddCommand(string name, CommandInfo info)
     {
         try
         {
             CommandManager.AddHandler(name, info);
-            this.registeredCommands.Add(name);
+            registeredCommands.Add(name);
         }
         catch (Exception e)
         {
@@ -328,22 +344,37 @@ public sealed class Plugin : IDalamudPlugin
 
     // ------------------------------------------------------------------ 窗口 / 命令
 
-    /// <summary>切换主窗口。</summary>
-    public void ToggleWindow() => this.window.Toggle();
+    /// <summary>
+    ///     切换主窗口。
+    /// </summary>
+    public void ToggleWindow() => window.Toggle();
 
-    /// <summary>打开主窗口并跳到指定页。</summary>
-    public void OpenWindow(MainTab tab)
+    /// <summary>
+    ///     打开主窗口（供卫月插件安装器的「主界面」入口调用；不切换页签）。
+    /// </summary>
+    public void OpenMainWindow()
     {
-        this.window.SelectTab(tab);
-        this.window.IsOpen = true;
-        this.window.BringToFront();
+        window.IsOpen = true;
+        window.BringToFront();
     }
 
-    /// <summary>打开「参与翻译」窗口（独立窗口，入口在「简介汉化」页更新词表旁边的小按钮）。</summary>
+    /// <summary>
+    ///     打开主窗口并跳到指定页。
+    /// </summary>
+    public void OpenWindow(MainTab tab)
+    {
+        window.SelectTab(tab);
+        window.IsOpen = true;
+        window.BringToFront();
+    }
+
+    /// <summary>
+    ///     打开「参与翻译」窗口（独立窗口，入口在「简介汉化」页更新词表旁边的小按钮）。
+    /// </summary>
     public void OpenContributeWindow()
     {
-        this.contributeWindow.IsOpen = true;
-        this.contributeWindow.BringToFront();
+        contributeWindow.IsOpen = true;
+        contributeWindow.BringToFront();
     }
 
     private void OnCommand(string command, string args)
@@ -353,19 +384,19 @@ public sealed class Plugin : IDalamudPlugin
         switch (arg)
         {
             case "":
-                this.ToggleWindow();
+                ToggleWindow();
                 break;
             case "zh":
-                var count = this.Patcher.ApplyAll();
-                this.LastTranslatedCount = count;
+                var count = Patcher.ApplyAll();
+                LastTranslatedCount = count;
                 Chat.Print($"[FireGaze] 已重新应用简介汉化（改写 {count} 条）");
                 break;
             case "update":
-                _ = this.UpdateTranslationTableAsync();
+                _ = UpdateTranslationTableAsync();
                 Chat.Print("[FireGaze] 正在从 GitHub 更新词表…");
                 break;
             case "translate":
-                this.OpenContributeWindow();
+                OpenContributeWindow();
                 break;
             default:
                 Chat.Print("[FireGaze] 用法：/firegaze [zh|update|translate]");
@@ -375,43 +406,53 @@ public sealed class Plugin : IDalamudPlugin
 
     // ------------------------------------------------------------------ 安装器列表浏览位置
 
-    /// <summary>开关：是否记住列表浏览位置（关掉时把已记住的位置一并清掉，等于「忘掉」）。</summary>
+    /// <summary>
+    ///     开关：是否记住列表浏览位置（关掉时把已记住的位置一并清掉，等于「忘掉」）。
+    /// </summary>
     public void SetRememberListScroll(bool remember)
     {
-        this.Config.RememberListScroll = remember;
+        Config.RememberListScroll = remember;
         if (!remember)
         {
-            this.Config.ListScrollY = null;
+            Config.ListScrollY = null;
         }
 
-        this.SaveConfig();
+        SaveConfig();
     }
 
-    /// <summary>设置页要用的安装器功能状态（只读）。</summary>
-    internal UI.InstallerListScroll InstallerFeatures => this.installerListScroll;
+    /// <summary>
+    ///     设置页要用的安装器功能状态（只读）。
+    /// </summary>
+    internal UI.InstallerListScroll InstallerFeatures => installerListScroll;
 
-    /// <summary>卫月插件接口（仓库体检页订阅「插件列表变化」用）。</summary>
-    internal IDalamudPluginInterface PluginInterface => this.pluginInterface;
+    /// <summary>
+    ///     卫月插件接口（仓库体检页订阅「插件列表变化」用）。
+    /// </summary>
+    internal IDalamudPluginInterface PluginInterface => pluginInterface;
 
-    /// <summary>开关：是否拦住插件安装器的自动刷新。</summary>
+    /// <summary>
+    ///     开关：是否拦住插件安装器的自动刷新。
+    /// </summary>
     public void SetBlockInstallerAutoRefresh(bool block)
     {
-        this.Config.BlockInstallerAutoRefresh = block;
-        this.SaveConfig();
+        Config.BlockInstallerAutoRefresh = block;
+        SaveConfig();
     }
 
-    /// <summary>每帧看一眼插件安装器（记住滚动位置 / 拦住自动刷新 / 图标预热；不用钩子）。</summary>
+    /// <summary>
+    ///     每帧看一眼插件安装器（记住滚动位置 / 拦住自动刷新 / 图标预热；不用钩子）。
+    /// </summary>
     private void TickInstallerListScroll()
     {
         try
         {
-            this.installerListScroll.Tick(this.Config, () => this.SaveConfig(force: false));
+            installerListScroll.Tick(Config, () => SaveConfig(force: false));
 
             // 安装器开着 → 把本地缓存的图标分批挂回卫月的图标缓存（安装器直接用本地图，不重新下载）
-            if (this.installerListScroll.IsOpen)
+            if (installerListScroll.IsOpen)
             {
-                this.EnsureIconWarmUpIndex();
-                this.Icons.WarmUpStep(4);
+                EnsureIconWarmUpIndex();
+                Icons.WarmUpStep(4);
             }
         }
         catch (Exception e)
@@ -420,65 +461,69 @@ public sealed class Plugin : IDalamudPlugin
         }
     }
 
-    /// <summary>给图标预热准备「已装插件」索引（后台建一次就够；读不到就过 10 秒再试）。</summary>
+    /// <summary>
+    ///     给图标预热准备「已装插件」索引（后台建一次就够；读不到就过 10 秒再试）。
+    /// </summary>
     private void EnsureIconWarmUpIndex()
     {
-        if (this.iconWarmUpRequested)
+        if (iconWarmUpRequested)
         {
             return;   // 已经排过一次（含空清单），不要每帧重建索引
         }
 
-        if (this.iconWarmUpIndexTask is null)
+        if (iconWarmUpIndexTask is null)
         {
-            if (DateTime.UtcNow < this.iconWarmUpRetryAfter)
+            if (DateTime.UtcNow < iconWarmUpRetryAfter)
             {
                 return;
             }
 
-            this.iconWarmUpIndexTask = Task.Run(RepoAudit.InstalledPluginsIndex.Build);
+            iconWarmUpIndexTask = Task.Run(RepoAudit.InstalledPluginsIndex.Build);
             return;
         }
 
-        if (!this.iconWarmUpIndexTask.IsCompleted)
+        if (!iconWarmUpIndexTask.IsCompleted)
         {
             return;
         }
 
-        var index = this.iconWarmUpIndexTask.Status == TaskStatus.RanToCompletion
-            ? this.iconWarmUpIndexTask.Result
+        var index = iconWarmUpIndexTask.Status == TaskStatus.RanToCompletion
+            ? iconWarmUpIndexTask.Result
             : null;
 
-        this.iconWarmUpIndexTask = null;
+        iconWarmUpIndexTask = null;
 
         if (index is { Available: true })
         {
-            this.iconWarmUpRequested = true;
-            this.Icons.ScheduleWarmUp(index.All);
+            iconWarmUpRequested = true;
+            Icons.ScheduleWarmUp(index.All);
         }
         else
         {
-            this.iconWarmUpRetryAfter = DateTime.UtcNow.AddSeconds(10);
+            iconWarmUpRetryAfter = DateTime.UtcNow.AddSeconds(10);
         }
     }
 
     // ------------------------------------------------------------------ 配置
 
-    /// <summary>保存插件配置。</summary>
+    /// <summary>
+    ///     保存插件配置。
+    /// </summary>
     public void SaveConfig(bool force = true)
     {
-        lock (this.saveLock)
+        lock (saveLock)
         {
-            if (!force && DateTime.UtcNow - this.lastSave < TimeSpan.FromSeconds(30))
+            if (!force && DateTime.UtcNow - lastSave < TimeSpan.FromSeconds(30))
             {
                 return;
             }
 
-            this.lastSave = DateTime.UtcNow;
+            lastSave = DateTime.UtcNow;
         }
 
         try
         {
-            this.pluginInterface.SavePluginConfig(this.Config);
+            pluginInterface.SavePluginConfig(Config);
         }
         catch (Exception e)
         {
@@ -490,17 +535,19 @@ public sealed class Plugin : IDalamudPlugin
 
     // ------------------------------------------------------------------ 简介汉化
 
-    /// <summary>重新加载词表。</summary>
-    public bool ReloadTranslationTable(out string? error) => this.Table.Load(out error);
+    /// <summary>
+    ///     重新加载词表。
+    /// </summary>
+    public bool ReloadTranslationTable(out string? error) => Table.Load(out error);
 
     /// <summary>
-    /// 把词表拷一份给后台线程用（翻译搜索索引在别的线程上读）。
-    /// 宿主线程可能同时在改词表，所以这里做一次带锁拷贝。
+    ///     把词表拷一份给后台线程用（翻译搜索索引在别的线程上读）。
+    ///     宿主线程可能同时在改词表，所以这里做一次带锁拷贝。
     /// </summary>
     public Dictionary<string, TransEntry> SnapshotTable()
     {
         var copy = new Dictionary<string, TransEntry>(StringComparer.Ordinal);
-        foreach (var (key, value) in this.Table.Enumerate())
+        foreach (var (key, value) in Table.Enumerate())
         {
             copy[key] = value;
         }
@@ -508,19 +555,23 @@ public sealed class Plugin : IDalamudPlugin
         return copy;
     }
 
-    /// <summary>玩家刚提交了译文：把「待复核」标记清掉，并立刻重新应用一遍。</summary>
+    /// <summary>
+    ///     玩家刚提交了译文：把「待复核」标记清掉，并立刻重新应用一遍。
+    /// </summary>
     public void MarkTranslationReview(string internalName, string field)
     {
-        this.Table.ClearReview(internalName, field);
-        this.ApplyTranslations();
+        Table.ClearReview(internalName, field);
+        ApplyTranslations();
     }
 
-    /// <summary>有没有译文需要复核（上游原文改过）。</summary>
+    /// <summary>
+    ///     有没有译文需要复核（上游原文改过）。
+    /// </summary>
     public bool HasReviewPending()
     {
         try
         {
-            return this.Table.ReviewCount > 0;
+            return Table.ReviewCount > 0;
         }
         catch
         {
@@ -529,21 +580,21 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    /// 一次加多条库（参与翻译页批量添加用）：自动备份一次、跳过已经在列表里的，
-    /// 加完记一条可撤回的「添加」（右侧的「撤回添加」按钮就是撤它）。
+    ///     一次加多条库（参与翻译页批量添加用）：自动备份一次、跳过已经在列表里的，
+    ///     加完记一条可撤回的「添加」（右侧的「撤回添加」按钮就是撤它）。
     /// </summary>
     public bool AddThirdPartyRepositories(IReadOnlyList<string> urls, out string message)
     {
         message = string.Empty;
 
-        var existing = this.Repos.ReadAll(out var readError);
+        var existing = Repos.ReadAll(out var readError);
         if (readError is not null)
         {
             message = "读不到仓库列表：" + readError;
             return false;
         }
 
-        var present = new HashSet<string>(existing.Select(x => x.Url), StringComparer.Ordinal);
+        var present = new HashSet<string>(existing.Select(x => x.URL), StringComparer.Ordinal);
         var wanted = urls.Where(u => !string.IsNullOrWhiteSpace(u) && !present.Contains(u))
                          .Distinct(StringComparer.Ordinal)
                          .ToList();
@@ -553,23 +604,23 @@ public sealed class Plugin : IDalamudPlugin
             return false;
         }
 
-        var backup = this.Repos.BackupRepos(out _);
-        var added = wanted.Where(url => this.Repos.Add(url, out _) > 0).ToList();
+        var backup = Repos.BackupRepos(out _);
+        var added = wanted.Where(url => Repos.Add(url, out _) > 0).ToList();
         if (added.Count == 0)
         {
             message = "添加失败：一条也没加上";
             return false;
         }
 
-        this.Repos.Save(out _);
-        this.Repos.TriggerReload(out _);
-        this.TrackFirstSeen();
+        Repos.Save(out _);
+        Repos.TriggerReload(out _);
+        TrackFirstSeen();
 
-        this.RecordUndo(new UndoRecord
+        RecordUndo(new UndoRecord
         {
             Action = "add",
-            TimeUtc = DateTime.UtcNow,
-            Entries = added.Select(url => new UndoEntry { Url = url, IsEnabled = true, Index = 0 }).ToList(),
+            TimeUTC = DateTime.UtcNow,
+            Entries = added.Select(url => new UndoEntry { URL = url, IsEnabled = true, Index = 0 }).ToList(),
             BackupPath = string.IsNullOrEmpty(backup) ? null : backup,
         });
 
@@ -578,16 +629,20 @@ public sealed class Plugin : IDalamudPlugin
         return true;
     }
 
-    /// <summary>添加一条第三方仓库（参与翻译页单条添加用）：先自动备份，再加，再让卫月重新拉取。</summary>
+    /// <summary>
+    ///     添加一条第三方仓库（参与翻译页单条添加用）：先自动备份，再加，再让卫月重新拉取。
+    /// </summary>
     public bool AddThirdPartyRepository(string url, out string message)
-        => this.AddThirdPartyRepositories([url], out message);
+        => AddThirdPartyRepositories([url], out message);
 
-    /// <summary>应用一次汉化（计时器用，静默）。</summary>
+    /// <summary>
+    ///     应用一次汉化（计时器用，静默）。
+    /// </summary>
     private void ApplyTranslationsQuiet()
     {
         try
         {
-            this.LastTranslatedCount = this.Patcher.ApplyAll();
+            LastTranslatedCount = Patcher.ApplyAll();
         }
         catch
         {
@@ -595,32 +650,38 @@ public sealed class Plugin : IDalamudPlugin
         }
     }
 
-    /// <summary>立刻应用一次汉化（UI 按钮用）。</summary>
+    /// <summary>
+    ///     立刻应用一次汉化（UI 按钮用）。
+    /// </summary>
     public int ApplyTranslations()
     {
-        this.LastTranslatedCount = this.Patcher.ApplyAll();
-        return this.LastTranslatedCount;
+        LastTranslatedCount = Patcher.ApplyAll();
+        return LastTranslatedCount;
     }
 
-    /// <summary>关闭汉化时把已经改写的文本还原成原文（总开关可逆）。</summary>
+    /// <summary>
+    ///     关闭汉化时把已经改写的文本还原成原文（总开关可逆）。
+    /// </summary>
     public int RestoreTranslations()
     {
-        var count = this.Patcher.RestoreAll();
-        this.LastTranslatedCount = 0;
+        var count = Patcher.RestoreAll();
+        LastTranslatedCount = 0;
         return count;
     }
 
-    /// <summary>从 GitHub 更新词表并立刻应用。</summary>
+    /// <summary>
+    ///     从 GitHub 更新词表并立刻应用。
+    /// </summary>
     public async Task<(bool Ok, string Message)> UpdateTranslationTableAsync()
     {
-        var (ok, message) = await this.Table.UpdateFromGitHubAsync(CancellationToken.None).ConfigureAwait(false);
+        var (ok, message) = await Table.UpdateFromGitHubAsync(CancellationToken.None).ConfigureAwait(false);
         if (ok)
         {
             // 下载下来的那份不能盖掉本地还没交出去的译文（用户 2026-09-22 定：要保留，而且要优先）
-            var kept = this.ReapplyPendingContributions();
-            this.Config.LastTableUpdateUtc = DateTime.Now;
-            this.SaveConfig();
-            this.Patcher.ApplyAll();
+            var kept = ReapplyPendingContributions();
+            Config.LastTableUpdateUTC = DateTime.Now;
+            SaveConfig();
+            Patcher.ApplyAll();
             if (kept > 0)
             {
                 message += $"；本地还没提交的 {kept} 条译文已保留并优先生效";
@@ -631,16 +692,16 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    /// 把「待提交」里还没交出去的译文重新盖回词表（从 GitHub 更新词表之后调用）。
-    /// 规则：本地译文优先于下载下来的版本；上游原文改过的那几条会进「待复核」。
-    /// 返回重新盖上去的字段数。
+    ///     把「待提交」里还没交出去的译文重新盖回词表（从 GitHub 更新词表之后调用）。
+    ///     规则：本地译文优先于下载下来的版本；上游原文改过的那几条会进「待复核」。
+    ///     返回重新盖上去的字段数。
     /// </summary>
     public int ReapplyPendingContributions()
     {
         var applied = 0;
-        foreach (var record in this.Contributions.Records)
+        foreach (var record in Contributions.Records)
         {
-            if (this.Table.MarkUserTranslation(record.InternalName, record.Field, record.Original, record.Translated))
+            if (Table.MarkUserTranslation(record.InternalName, record.Field, record.Original, record.Translated))
             {
                 applied++;
             }
@@ -648,27 +709,29 @@ public sealed class Plugin : IDalamudPlugin
 
         if (applied > 0)
         {
-            this.Table.SaveToConfigDirectory(out _);
+            Table.SaveToConfigDirectory(out _);
         }
 
         return applied;
     }
 
-    /// <summary>每两周自动检查一次词表更新（汉化启用时才生效）。</summary>
+    /// <summary>
+    ///     每两周自动检查一次词表更新（汉化启用时才生效）。
+    /// </summary>
     private void MaybeAutoUpdateTable()
     {
-        if (!this.Config.TranslateEnabled || !this.Config.AutoUpdateTable)
+        if (!Config.TranslateEnabled || !Config.AutoUpdateTable)
         {
             return;
         }
 
-        if (this.Config.LastTableUpdateCheckUtc != default &&
-            DateTime.UtcNow - this.Config.LastTableUpdateCheckUtc < TimeSpan.FromDays(14))
+        if (Config.LastTableUpdateCheckUTC != default &&
+            DateTime.UtcNow - Config.LastTableUpdateCheckUTC < TimeSpan.FromDays(14))
         {
             return;
         }
 
-        if (Interlocked.Exchange(ref this.tableUpdateBusy, 1) == 1)
+        if (Interlocked.Exchange(ref tableUpdateBusy, 1) == 1)
         {
             return;
         }
@@ -678,7 +741,7 @@ public sealed class Plugin : IDalamudPlugin
             var success = false;
             try
             {
-                var (ok, message) = await this.UpdateTranslationTableAsync().ConfigureAwait(false);
+                var (ok, message) = await UpdateTranslationTableAsync().ConfigureAwait(false);
                 success = ok;
                 Log.Information($"[FireGaze] 自动更新词表：{message}");
             }
@@ -689,50 +752,52 @@ public sealed class Plugin : IDalamudPlugin
             finally
             {
                 // 失败时 1 天后重试，成功则 14 天后再查
-                this.Config.LastTableUpdateCheckUtc = success ? DateTime.UtcNow : DateTime.UtcNow.AddDays(-13);
-                this.SaveConfig();
-                Interlocked.Exchange(ref this.tableUpdateBusy, 0);
+                Config.LastTableUpdateCheckUTC = success ? DateTime.UtcNow : DateTime.UtcNow.AddDays(-13);
+                SaveConfig();
+                Interlocked.Exchange(ref tableUpdateBusy, 0);
             }
         });
     }
 
     // ------------------------------------------------------------------ 仓库体检
 
-    /// <summary>记录首次见到的仓库（安装前就存在的记为「无记录」）。</summary>
+    /// <summary>
+    ///     记录首次见到的仓库（安装前就存在的记为「无记录」）。
+    /// </summary>
     public void TrackFirstSeen()
     {
         try
         {
-            var repos = this.Repos.ReadAll(out _);
+            var repos = Repos.ReadAll(out _);
             var now = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
             var changed = false;
 
-            if (!this.Config.RepoFirstRunDone)
+            if (!Config.RepoFirstRunDone)
             {
                 foreach (var repo in repos)
                 {
-                    if (!string.IsNullOrEmpty(repo.Url) && !this.Config.RepoFirstSeen.ContainsKey(repo.Url))
+                    if (!string.IsNullOrEmpty(repo.URL) && !Config.RepoFirstSeen.ContainsKey(repo.URL))
                     {
-                        this.Config.RepoFirstSeen[repo.Url] = string.Empty;
+                        Config.RepoFirstSeen[repo.URL] = string.Empty;
                         changed = true;
                     }
                 }
 
-                this.Config.RepoFirstRunDone = true;
+                Config.RepoFirstRunDone = true;
             }
 
             foreach (var repo in repos)
             {
-                if (!string.IsNullOrEmpty(repo.Url) && !this.Config.RepoFirstSeen.ContainsKey(repo.Url))
+                if (!string.IsNullOrEmpty(repo.URL) && !Config.RepoFirstSeen.ContainsKey(repo.URL))
                 {
-                    this.Config.RepoFirstSeen[repo.Url] = now;
+                    Config.RepoFirstSeen[repo.URL] = now;
                     changed = true;
                 }
             }
 
             if (changed)
             {
-                this.SaveConfig();
+                SaveConfig();
             }
         }
         catch (Exception e)
@@ -741,49 +806,55 @@ public sealed class Plugin : IDalamudPlugin
         }
     }
 
-    /// <summary>取某仓库的首次记录时间（null = 无记录）。</summary>
+    /// <summary>
+    ///     取某仓库的首次记录时间（null = 无记录）。
+    /// </summary>
     public string? GetFirstSeen(string url)
-        => this.Config.RepoFirstSeen.TryGetValue(url, out var value) && !string.IsNullOrEmpty(value) ? value : null;
+        => Config.RepoFirstSeen.TryGetValue(url, out var value) && !string.IsNullOrEmpty(value) ? value : null;
 
-    /// <summary>推入一条撤销记录。</summary>
+    /// <summary>
+    ///     推入一条撤销记录。
+    /// </summary>
     public void RecordUndo(UndoRecord record)
     {
-        this.Config.UndoHistory.Add(record);
-        while (this.Config.UndoHistory.Count > Configuration.MaxUndo)
+        Config.UndoHistory.Add(record);
+        while (Config.UndoHistory.Count > Configuration.MaxUndo)
         {
-            this.Config.UndoHistory.RemoveAt(0);
+            Config.UndoHistory.RemoveAt(0);
         }
 
-        this.SaveConfig();
+        SaveConfig();
     }
 
-    /// <summary>撤回最近一次「停用 / 删除」。</summary>
+    /// <summary>
+    ///     撤回最近一次「停用 / 删除」。
+    /// </summary>
     public bool TryUndoLast(out string message)
     {
         message = string.Empty;
-        if (this.Config.UndoHistory.Count == 0)
+        if (Config.UndoHistory.Count == 0)
         {
             message = "没有可撤回的操作";
             return false;
         }
 
-        var record = this.Config.UndoHistory[^1];
+        var record = Config.UndoHistory[^1];
         string? error;
 
         if (record.Action == "add")
         {
-            var removed = this.Repos.Remove(record.Entries.Select(x => x.Url), out error);
+            var removed = Repos.Remove(record.Entries.Select(x => x.URL), out error);
             message = $"已撤回添加：移除了 {removed} 条库";
         }
         else if (record.Action == "delete")
         {
-            var inserted = this.Repos.Insert(record.Entries, out error);
+            var inserted = Repos.Insert(record.Entries, out error);
             message = $"已把 {inserted} 个仓库链接放回列表";
         }
         else
         {
-            var urls = record.Entries.Where(x => x.IsEnabled).Select(x => x.Url);
-            var changed = this.Repos.SetEnabled(urls, true, out error);
+            var urls = record.Entries.Where(x => x.IsEnabled).Select(x => x.URL);
+            var changed = Repos.SetEnabled(urls, true, out error);
             message = $"已重新启用 {changed} 个仓库";
         }
 
@@ -793,20 +864,22 @@ public sealed class Plugin : IDalamudPlugin
             return false;
         }
 
-        this.Config.UndoHistory.RemoveAt(this.Config.UndoHistory.Count - 1);
-        this.SaveConfig();
-        this.Repos.Save(out _);
-        this.Repos.TriggerReload(out _);
-        this.TrackFirstSeen();
+        Config.UndoHistory.RemoveAt(Config.UndoHistory.Count - 1);
+        SaveConfig();
+        Repos.Save(out _);
+        Repos.TriggerReload(out _);
+        TrackFirstSeen();
         return true;
     }
 
-    /// <summary>打开备份目录。</summary>
+    /// <summary>
+    ///     打开备份目录。
+    /// </summary>
     public void OpenBackupDirectory()
     {
         try
         {
-            var dir = Path.Combine(this.ConfigDirectory, "backups");
+            var dir = Path.Combine(ConfigDirectory, "backups");
             Directory.CreateDirectory(dir);
             Process.Start(new ProcessStartInfo
             {
@@ -821,7 +894,9 @@ public sealed class Plugin : IDalamudPlugin
         }
     }
 
-    /// <summary>卫月内部服务（internal）只能用反射拿。</summary>
+    /// <summary>
+    ///     卫月内部服务（internal）只能用反射拿。
+    /// </summary>
     private static object? ResolveService(string typeName)
     {
         try

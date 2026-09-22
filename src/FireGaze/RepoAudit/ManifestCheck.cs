@@ -5,14 +5,16 @@ using Newtonsoft.Json;
 namespace FireGaze.RepoAudit;
 
 /// <summary>
-/// 用卫月自己的类型做仓库内容契约校验，判定结果和卫月 <c>PluginRepository.ReloadAsync</c> 完全一致：
-///   · 反序列化目标 = <c>Dalamud.Plugin.Internal.Types.Manifest.RemotePluginManifest</c>（internal，反射拿）；
-///   · 反序列化器 = 游戏进程里那个 Newtonsoft.Json（与卫月同版本、同设置）；
-///   · 单条过滤规则 = <c>IsValidManifest</c>（InternalName / Name 非空，AssemblyVersion 不为 null）。
+///     用卫月自己的类型做仓库内容契约校验，判定结果和卫月 <c>PluginRepository.ReloadAsync</c> 完全一致：
+///       · 反序列化目标 = <c>Dalamud.Plugin.Internal.Types.Manifest.RemotePluginManifest</c>（internal，反射拿）；
+///       · 反序列化器 = 游戏进程里那个 Newtonsoft.Json（与卫月同版本、同设置）；
+///       · 单条过滤规则 = <c>IsValidManifest</c>（InternalName / Name 非空，AssemblyVersion 不为 null）。
 /// </summary>
 internal static class ManifestCheck
 {
-    /// <summary>校验结果。</summary>
+    /// <summary>
+    ///     校验结果。
+    /// </summary>
     /// <param name="Ok">内容能否被卫月当仓库加载。</param>
     /// <param name="Count">数组里条目总数。</param>
     /// <param name="Dropped">会被卫月单条丢弃的条目数。</param>
@@ -86,7 +88,9 @@ internal static class ManifestCheck
         return message.Length <= 160 ? message : message[..160] + "…";
     }
 
-    /// <summary>线程安全的一次性初始化（扫描是多线程的，必须在锁里完成后再置位）。</summary>
+    /// <summary>
+    ///     线程安全的一次性初始化（扫描是多线程的，必须在锁里完成后再置位）。
+    /// </summary>
     private static void EnsureInitialized()
     {
         if (Volatile.Read(ref initialized))
@@ -140,7 +144,9 @@ internal static class ManifestCheck
     }
 }
 
-/// <summary>校验器没法用 IPluginLog（静态类初始化太早时的兜底日志）。</summary>
+/// <summary>
+///     校验器没法用 IPluginLog（静态类初始化太早时的兜底日志）。
+/// </summary>
 internal static class PluginLogFallback
 {
     public static Action<string>? Sink { get; set; }

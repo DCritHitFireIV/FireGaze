@@ -6,9 +6,9 @@ using Dalamud.Bindings.ImGui;
 namespace FireGaze.UI;
 
 /// <summary>
-/// 插件安装器增强（<b>全程不使用任何钩子</b>）：
-/// ① 记住列表的浏览位置（下次打开接着看）；
-/// ② 拦住自动刷新：重载仓库期间不让安装器把列表换成「正在加载插件…」，从而不把列表和位置顶掉。
+///     插件安装器增强（<b>全程不使用任何钩子</b>）：
+///     ① 记住列表的浏览位置（下次打开接着看）；
+///     ② 拦住自动刷新：重载仓库期间不让安装器把列表换成「正在加载插件…」，从而不把列表和位置顶掉。
 /// </summary>
 /// <remarks>
 /// 列表是安装器窗口里的一层子窗口（<c>InstallerCategories</c> → <c>ScrollingPlugins</c>）。
@@ -25,7 +25,9 @@ namespace FireGaze.UI;
 /// </remarks>
 internal sealed class InstallerListScroll
 {
-    /// <summary>安装器窗口的可能名字（卫月用的是 "插件安装器###XlPluginInstaller"）。</summary>
+    /// <summary>
+    ///     安装器窗口的可能名字（卫月用的是 "插件安装器###XlPluginInstaller"）。
+    /// </summary>
     private static readonly string[] InstallerNameCandidates =
     [
         "###XlPluginInstaller",
@@ -34,37 +36,59 @@ internal sealed class InstallerListScroll
         "XlPluginInstaller",
     ];
 
-    /// <summary>真正滚动的那层子窗口（ImRaii.Child("ScrollingPlugins")）。</summary>
-    private const string ListChildId = "ScrollingPlugins";
+    /// <summary>
+    ///     真正滚动的那层子窗口（ImRaii.Child("ScrollingPlugins")）。
+    /// </summary>
+    private const string ListChildID = "ScrollingPlugins";
 
-    /// <summary>连续多少帧没画才算安装器关掉了（折叠/切窗会让个别帧画不到）。</summary>
+    /// <summary>
+    ///     连续多少帧没画才算安装器关掉了（折叠/切窗会让个别帧画不到）。
+    /// </summary>
     private const int CloseAfterMissedFrames = 5;
 
-    /// <summary>恢复时允许的偏差（像素）。</summary>
+    /// <summary>
+    ///     恢复时允许的偏差（像素）。
+    /// </summary>
     private const float RestoreTolerance = 30f;
 
-    /// <summary>最多连写多少帧。</summary>
+    /// <summary>
+    ///     最多连写多少帧。
+    /// </summary>
     private const int RestoreMaxFrames = 30;
 
-    /// <summary>写够这么多帧且没跑偏就算恢复完成。</summary>
+    /// <summary>
+    ///     写够这么多帧且没跑偏就算恢复完成。
+    /// </summary>
     private const int RestoreSettleFrames = 6;
 
-    /// <summary>位置恢复的小状态机。</summary>
+    /// <summary>
+    ///     位置恢复的小状态机。
+    /// </summary>
     private enum RestorePhase
     {
-        /// <summary>不恢复（没存过 / 开关关了）。</summary>
+        /// <summary>
+        ///     不恢复（没存过 / 开关关了）。
+        /// </summary>
         Idle,
 
-        /// <summary>已下令恢复，等列表把内容铺开（ScrollMax &gt; 0）。</summary>
+        /// <summary>
+        ///     已下令恢复，等列表把内容铺开（ScrollMax &gt; 0）。
+        /// </summary>
         WaitingContent,
 
-        /// <summary>正在写 ScrollTarget，直到被 ImGui 采纳。</summary>
+        /// <summary>
+        ///     正在写 ScrollTarget，直到被 ImGui 采纳。
+        /// </summary>
         Applying,
 
-        /// <summary>已到位。</summary>
+        /// <summary>
+        ///     已到位。
+        /// </summary>
         Done,
 
-        /// <summary>写不进去（被 ImGui 重置 / 被用户接管）。</summary>
+        /// <summary>
+        ///     写不进去（被 ImGui 重置 / 被用户接管）。
+        /// </summary>
         GivenUp,
     }
 
@@ -94,18 +118,22 @@ internal sealed class InstallerListScroll
     private static PropertyInfo? reposReadyProp;
     private static FieldInfo? repoRefreshTaskField;
 
-    /// <summary>安装器窗口现在开着吗（图标预热用）。</summary>
-    public bool IsOpen => this.installerWasOpen;
+    /// <summary>
+    ///     安装器窗口现在开着吗（图标预热用）。
+    /// </summary>
+    public bool IsOpen => installerWasOpen;
 
-    /// <summary>每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。</summary>
+    /// <summary>
+    ///     每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。
+    /// </summary>
     public void Tick(Configuration config, Action saveConfig)
     {
         try
         {
             var ctx = ImGui.GetCurrentContext();
-            if (!this.layoutChecked)
+            if (!layoutChecked)
             {
-                this.CheckLayout(ctx);
+                CheckLayout(ctx);
             }
 
             var installer = FindInstallerWindow();
@@ -114,42 +142,42 @@ internal sealed class InstallerListScroll
 
             if (!open)
             {
-                if (++this.missedFrames >= CloseAfterMissedFrames)
+                if (++missedFrames >= CloseAfterMissedFrames)
                 {
-                    this.OnClosed();
+                    OnClosed();
                 }
 
                 return;
             }
 
-            this.missedFrames = 0;
+            missedFrames = 0;
 
-            if (!this.installerWasOpen)
+            if (!installerWasOpen)
             {
-                this.installerWasOpen = true;
-                this.sawListContent = false;
-                this.restoreFrames = 0;
-                this.offTargetFrames = 0;
-                this.phase = RestorePhase.Idle;
+                installerWasOpen = true;
+                sawListContent = false;
+                restoreFrames = 0;
+                offTargetFrames = 0;
+                phase = RestorePhase.Idle;
 
                 if (config.RememberListScroll && config.ListScrollY is { } saved && saved > 1f)
                 {
-                    this.restoreTarget = saved;
-                    this.phase = RestorePhase.WaitingContent;
+                    restoreTarget = saved;
+                    phase = RestorePhase.WaitingContent;
                 }
             }
 
-            var list = this.FindListWindow(ctx, frame);
+            var list = FindListWindow(ctx, frame);
             if (!list.IsNull)
             {
-                this.listWindow = list;
-                this.HandleListWindow(config, saveConfig);
+                listWindow = list;
+                HandleListWindow(config, saveConfig);
             }
 
             // 列表铺开过、安装器还开着 → 这时候才值得拦自动刷新（否则会把「正在加载插件…」也藏掉）
-            if (config.BlockInstallerAutoRefresh && this.sawListContent)
+            if (config.BlockInstallerAutoRefresh && sawListContent)
             {
-                this.KeepListWhileReloading();
+                KeepListWhileReloading();
             }
         }
         catch (Exception e)
@@ -158,20 +186,24 @@ internal sealed class InstallerListScroll
         }
     }
 
-    /// <summary>窗口关掉（或连续多帧没画）时复位状态。</summary>
+    /// <summary>
+    ///     窗口关掉（或连续多帧没画）时复位状态。
+    /// </summary>
     private void OnClosed()
     {
-        this.installerWasOpen = false;
-        this.sawListContent = false;
-        this.listWindow = ImGuiWindowPtr.Null;
-        this.phase = RestorePhase.Idle;
-        this.restoreFrames = 0;
-        this.offTargetFrames = 0;
+        installerWasOpen = false;
+        sawListContent = false;
+        listWindow = ImGuiWindowPtr.Null;
+        phase = RestorePhase.Idle;
+        restoreFrames = 0;
+        offTargetFrames = 0;
     }
 
     // ------------------------------------------------------------------ 找回那个子窗口
 
-    /// <summary>按候选名字找安装器主窗口。</summary>
+    /// <summary>
+    ///     按候选名字找安装器主窗口。
+    /// </summary>
     private static ImGuiWindowPtr FindInstallerWindow()
     {
         foreach (var candidate in InstallerNameCandidates)
@@ -186,32 +218,36 @@ internal sealed class InstallerListScroll
         return ImGuiWindowPtr.Null;
     }
 
-    /// <summary>拿列表子窗口：先用缓存（每帧验证一次“还活着”），失效了就重新枚举。</summary>
+    /// <summary>
+    ///     拿列表子窗口：先用缓存（每帧验证一次“还活着”），失效了就重新枚举。
+    /// </summary>
     private ImGuiWindowPtr FindListWindow(ImGuiContextPtr ctx, int frame)
     {
-        if (!this.listWindow.IsNull && this.listWindow.LastFrameActive >= frame - 1)
+        if (!listWindow.IsNull && listWindow.LastFrameActive >= frame - 1)
         {
-            return this.listWindow;
+            return listWindow;
         }
 
-        this.listWindow = ImGuiWindowPtr.Null;
+        listWindow = ImGuiWindowPtr.Null;
 
-        if (!this.layoutOk)
+        if (!layoutOk)
         {
             return ImGuiWindowPtr.Null;
         }
 
         var found = EnumerateListWindow(ctx, frame);
-        if (!found.IsNull && !this.loggedFind)
+        if (!found.IsNull && !loggedFind)
         {
-            this.loggedFind = true;
+            loggedFind = true;
             Plugin.Log.Debug($"[FireGaze] 已找到安装器列表子窗口：{WindowName(found) ?? "?"}");
         }
 
         return found;
     }
 
-    /// <summary>遍历 ImGui 窗口表，找这帧真在画的列表子窗口。</summary>
+    /// <summary>
+    ///     遍历 ImGui 窗口表，找这帧真在画的列表子窗口。
+    /// </summary>
     private static ImGuiWindowPtr EnumerateListWindow(ImGuiContextPtr ctx, int frame)
     {
         try
@@ -227,7 +263,7 @@ internal sealed class InstallerListScroll
 
                 var name = WindowName(window);
                 if (name is not null
-                    && name.Contains(ListChildId, StringComparison.Ordinal)
+                    && name.Contains(ListChildID, StringComparison.Ordinal)
                     && !name.Contains("/plugin_child_", StringComparison.Ordinal))
                 {
                     return window;
@@ -246,17 +282,17 @@ internal sealed class InstallerListScroll
 
     private void HandleListWindow(Configuration config, Action saveConfig)
     {
-        var list = this.listWindow;
+        var list = listWindow;
         var scroll = list.Scroll.Y;
         var max = list.ScrollMax.Y;
         var hasContent = max > 0f || scroll > 0f;
 
         if (hasContent)
         {
-            this.sawListContent = true;
+            sawListContent = true;
         }
 
-        switch (this.phase)
+        switch (phase)
         {
             case RestorePhase.WaitingContent:
                 if (!hasContent)
@@ -264,7 +300,7 @@ internal sealed class InstallerListScroll
                     return;   // 列表还在加载：现在写会被夹回 0，等它把内容铺开
                 }
 
-                this.phase = RestorePhase.Applying;
+                phase = RestorePhase.Applying;
                 goto case RestorePhase.Applying;
 
             case RestorePhase.Applying:
@@ -274,40 +310,40 @@ internal sealed class InstallerListScroll
                 }
 
                 // 写进去之后又跑回来了，而且连续两帧都跑 → 放弃（用户自己滚了，或 ImGui 不买账）
-                if (this.restoreFrames > 0 && Math.Abs(scroll - this.restoreTarget) > RestoreTolerance)
+                if (restoreFrames > 0 && Math.Abs(scroll - restoreTarget) > RestoreTolerance)
                 {
-                    if (++this.offTargetFrames >= 2)
+                    if (++offTargetFrames >= 2)
                     {
-                        this.phase = RestorePhase.GivenUp;
-                        this.lastRestoreFailed = true;
-                        Plugin.Log.Information($"[FireGaze] 放弃恢复列表位置：写入后回到 {scroll:F0}（目标 {this.restoreTarget:F0}）");
+                        phase = RestorePhase.GivenUp;
+                        lastRestoreFailed = true;
+                        Plugin.Log.Information($"[FireGaze] 放弃恢复列表位置：写入后回到 {scroll:F0}（目标 {restoreTarget:F0}）");
                         return;
                     }
                 }
                 else
                 {
-                    this.offTargetFrames = 0;
+                    offTargetFrames = 0;
                 }
 
                 // ImGui::SetScrollY() 的写法：ScrollTarget + 居中比 0 + 边缘吸附 0，并连写几帧
-                list.ScrollTarget = new Vector2(list.ScrollTarget.X, this.restoreTarget);
+                list.ScrollTarget = new Vector2(list.ScrollTarget.X, restoreTarget);
                 list.ScrollTargetCenterRatio = new Vector2(list.ScrollTargetCenterRatio.X, 0f);
                 list.ScrollTargetEdgeSnapDist = new Vector2(list.ScrollTargetEdgeSnapDist.X, 0f);
-                list.Scroll = new Vector2(list.Scroll.X, this.restoreTarget);
-                this.restoreFrames++;
+                list.Scroll = new Vector2(list.Scroll.X, restoreTarget);
+                restoreFrames++;
 
-                if (this.restoreFrames >= RestoreSettleFrames && Math.Abs(scroll - this.restoreTarget) <= RestoreTolerance)
+                if (restoreFrames >= RestoreSettleFrames && Math.Abs(scroll - restoreTarget) <= RestoreTolerance)
                 {
-                    this.phase = RestorePhase.Done;
-                    this.lastRestoreFailed = false;
-                    this.restoreGraceFrames = 3;
+                    phase = RestorePhase.Done;
+                    lastRestoreFailed = false;
+                    restoreGraceFrames = 3;
                     Plugin.Log.Information($"[FireGaze] 已恢复列表浏览位置：{scroll:F0}");
                 }
-                else if (this.restoreFrames >= RestoreMaxFrames)
+                else if (restoreFrames >= RestoreMaxFrames)
                 {
-                    this.phase = RestorePhase.GivenUp;
-                    this.lastRestoreFailed = true;
-                    Plugin.Log.Information($"[FireGaze] 恢复列表位置超时：停在 {scroll:F0}（目标 {this.restoreTarget:F0}）");
+                    phase = RestorePhase.GivenUp;
+                    lastRestoreFailed = true;
+                    Plugin.Log.Information($"[FireGaze] 恢复列表位置超时：停在 {scroll:F0}（目标 {restoreTarget:F0}）");
                 }
 
                 return;
@@ -321,9 +357,9 @@ internal sealed class InstallerListScroll
             return;
         }
 
-        if (this.restoreGraceFrames > 0)
+        if (restoreGraceFrames > 0)
         {
-            this.restoreGraceFrames--;
+            restoreGraceFrames--;
             return;
         }
 
@@ -339,10 +375,10 @@ internal sealed class InstallerListScroll
     // ------------------------------------------------------------------ 拦住自动刷新
 
     /// <summary>
-    /// 重载仓库期间把 <c>PluginManager.repoRefreshTask</c> 换成已完成 Task，让 <c>ReposReady</c> 保持 true：
-    /// 安装器就不会切到「正在加载插件…」，列表子窗口不会被 ImGui 回收，滚动位置也就保住了。
-    /// 重载本身照常在后台跑（数据照常更新），我们只是不让它把 UI 掀翻。
-    /// 只在「确实有一个重载在跑」时才动手。
+    ///     重载仓库期间把 <c>PluginManager.repoRefreshTask</c> 换成已完成 Task，让 <c>ReposReady</c> 保持 true：
+    ///     安装器就不会切到「正在加载插件…」，列表子窗口不会被 ImGui 回收，滚动位置也就保住了。
+    ///     重载本身照常在后台跑（数据照常更新），我们只是不让它把 UI 掀翻。
+    ///     只在「确实有一个重载在跑」时才动手。
     /// </summary>
     private void KeepListWhileReloading()
     {
@@ -374,20 +410,22 @@ internal sealed class InstallerListScroll
             return;
         }
 
-        this.maskedRuns++;
-        this.lastMaskLocal = DateTime.Now;
-        if (!this.loggedMask)
+        maskedRuns++;
+        lastMaskLocal = DateTime.Now;
+        if (!loggedMask)
         {
-            this.loggedMask = true;
+            loggedMask = true;
             Plugin.Log.Information("[FireGaze] 已拦住一次自动刷新（重载照常进行，只是不再把列表顶掉）");
         }
         else
         {
-            Plugin.Log.Debug($"[FireGaze] 已拦住第 {this.maskedRuns} 次自动刷新");
+            Plugin.Log.Debug($"[FireGaze] 已拦住第 {maskedRuns} 次自动刷新");
         }
     }
 
-    /// <summary>给设置页用的一行状态（用户可见；按两个开关分别报告）。</summary>
+    /// <summary>
+    ///     给设置页用的一行状态（用户可见；按两个开关分别报告）。
+    /// </summary>
     public string StatusText(bool blockEnabled, bool rememberEnabled)
     {
         if (!blockEnabled && !rememberEnabled)
@@ -395,12 +433,12 @@ internal sealed class InstallerListScroll
             return "未启用（上面两个开关都关着）";
         }
 
-        if (this.layoutChecked && !this.layoutOk)
+        if (layoutChecked && !layoutOk)
         {
             return "本次已停用（与当前卫月版本不兼容，详见日志）";
         }
 
-        if (blockEnabled && !this.ReflectionReady())
+        if (blockEnabled && !ReflectionReady())
         {
             return "本次已停用（拿不到卫月的插件管理器内部字段，详见日志）";
         }
@@ -409,22 +447,24 @@ internal sealed class InstallerListScroll
 
         if (rememberEnabled)
         {
-            parts.Add(this.lastRestoreFailed
+            parts.Add(lastRestoreFailed
                 ? "位置记忆：上次打开时的位置没能恢复（详见日志）"
                 : "位置记忆已开启");
         }
 
         if (blockEnabled)
         {
-            parts.Add(this.maskedRuns > 0
-                ? $"拦截已拦下 {this.maskedRuns} 次后台刷新（最近 {this.lastMaskLocal:HH:mm}）"
+            parts.Add(maskedRuns > 0
+                ? $"拦截已拦下 {maskedRuns} 次后台刷新（最近 {lastMaskLocal:HH:mm}）"
                 : "拦截已开启（本会话还没遇到后台刷新）");
         }
 
         return "已生效 · " + string.Join(" · ", parts);
     }
 
-    /// <summary>反射句柄齐不齐（卫月改内部字段名时会缺）。只抱怨一次。</summary>
+    /// <summary>
+    ///     反射句柄齐不齐（卫月改内部字段名时会缺）。只抱怨一次。
+    /// </summary>
     private bool ReflectionReady()
     {
         var ready = ResolvePluginManager() is not null
@@ -432,9 +472,9 @@ internal sealed class InstallerListScroll
                     && reposReadyProp is not null
                     && repoRefreshTaskField is not null;
 
-        if (!ready && !this.reflectionComplained)
+        if (!ready && !reflectionComplained)
         {
-            this.reflectionComplained = true;
+            reflectionComplained = true;
             Plugin.Log.Warning("[FireGaze] 拿不到卫月的插件管理器内部字段（可能是卫月升级改了名），拦住自动刷新本次已停用。");
         }
 
@@ -444,13 +484,13 @@ internal sealed class InstallerListScroll
     // ------------------------------------------------------------------ 结构体自检 / 反射
 
     /// <summary>
-    /// 布局自检：用函数版的 FrameCount / CurrentWindow 跟结构体里的字段对拍。
-    /// （<c>Windows</c> 字段夹在这两者之间，两个都对得上才敢遍历；对不上就整个不碰，
-    /// 免得读到野指针把游戏带崩。）正常情况下静默，对不上才记一条警告。
+    ///     布局自检：用函数版的 FrameCount / CurrentWindow 跟结构体里的字段对拍。
+    ///     （<c>Windows</c> 字段夹在这两者之间，两个都对得上才敢遍历；对不上就整个不碰，
+    ///     免得读到野指针把游戏带崩。）正常情况下静默，对不上才记一条警告。
     /// </summary>
     private unsafe void CheckLayout(ImGuiContextPtr ctx)
     {
-        this.layoutChecked = true;
+        layoutChecked = true;
 
         try
         {
@@ -459,7 +499,7 @@ internal sealed class InstallerListScroll
             var match = ImGui.GetFrameCount() == ctx.FrameCount
                         && (nint)currentFunction.Handle == (nint)currentStruct.Handle;
 
-            this.layoutOk = match;
+            layoutOk = match;
 
             if (!match)
             {
@@ -470,7 +510,7 @@ internal sealed class InstallerListScroll
         }
         catch (Exception e)
         {
-            this.layoutOk = false;
+            layoutOk = false;
             Plugin.Log.Warning(e, "[FireGaze] ImGui 结构体自检失败");
         }
     }

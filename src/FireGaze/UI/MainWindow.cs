@@ -4,7 +4,9 @@ using Dalamud.Interface.Windowing;
 
 namespace FireGaze.UI;
 
-/// <summary>主窗口的页签（顺序就是界面上的顺序：简介汉化 → 仓库体检 → 插件安装器 → 参与翻译）。</summary>
+/// <summary>
+///     主窗口的页签（顺序就是界面上的顺序：简介汉化 → 仓库体检 → 插件安装器 → 参与翻译）。
+/// </summary>
 public enum MainTab
 {
     Translate = 0,
@@ -13,7 +15,9 @@ public enum MainTab
     Contribute = 3,
 }
 
-/// <summary>FireGaze 主窗口（/fg）。</summary>
+/// <summary>
+///     FireGaze 主窗口（/fg）。
+/// </summary>
 internal sealed class MainWindow : Window
 {
     private readonly RepoAuditTab repoAuditTab;
@@ -25,29 +29,35 @@ internal sealed class MainWindow : Window
     public MainWindow(Plugin plugin)
         : base("FireGaze###FireGaze", ImGuiWindowFlags.None)
     {
-        this.Size = new Vector2(700, 620);
-        this.SizeCondition = ImGuiCond.FirstUseEver;
-        this.SizeConstraints = new WindowSizeConstraints
+        Size = new Vector2(700, 620);
+        SizeCondition = ImGuiCond.FirstUseEver;
+        SizeConstraints = new WindowSizeConstraints
         {
             MinimumSize = new Vector2(560, 440),
         };
 
-        this.repoAuditTab = new RepoAuditTab(plugin);
-        this.installerTab = new InstallerTab(plugin);
-        this.translateTab = new TranslateTab(plugin);
+        repoAuditTab = new RepoAuditTab(plugin);
+        installerTab = new InstallerTab(plugin);
+        translateTab = new TranslateTab(plugin);
     }
 
-    /// <summary>请求下一帧选中某个页签（由 Plugin.OpenWindow 调用）。</summary>
-    public void SelectTab(MainTab tab) => this.pendingSelect = tab;
+    /// <summary>
+    ///     请求下一帧选中某个页签（由 Plugin.OpenWindow 调用）。
+    /// </summary>
+    public void SelectTab(MainTab tab) => pendingSelect = tab;
 
-    /// <summary>窗口每次打开都落在「简介汉化」页（ImGui 会记住上次的页签，这里显式改回）。</summary>
+    /// <summary>
+    ///     窗口每次打开都落在「简介汉化」页（ImGui 会记住上次的页签，这里显式改回）。
+    /// </summary>
     public override void OnOpen()
     {
-        this.pendingSelect = MainTab.Translate;
+        pendingSelect = MainTab.Translate;
         Plugin.Log.Debug("[FireGaze] 窗口已打开（页签回到「简介汉化」）");
     }
 
-    /// <summary>关窗也记一笔：掉帧/崩溃排查时能看出当时在看哪一页。</summary>
+    /// <summary>
+    ///     关窗也记一笔：掉帧/崩溃排查时能看出当时在看哪一页。
+    /// </summary>
     public override void OnClose() => Plugin.Log.Debug("[FireGaze] 窗口已关闭");
 
     public override void Draw()
@@ -62,30 +72,30 @@ internal sealed class MainWindow : Window
 
         if (ImGui.BeginTabBar("###FireGazeTabs"))
         {
-            var flags = this.pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            var flags = pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("简介汉化", flags))
             {
-                this.translateTab.Draw();
+                translateTab.Draw();
                 ImGui.EndTabItem();
             }
 
-            flags = this.pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            flags = pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("仓库体检", flags))
             {
-                this.repoAuditTab.Draw();
+                repoAuditTab.Draw();
                 ImGui.EndTabItem();
             }
 
-            flags = this.pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            flags = pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("插件安装器", flags))
             {
-                this.installerTab.Draw();
+                installerTab.Draw();
                 ImGui.EndTabItem();
             }
 
             ImGui.EndTabBar();
         }
 
-        this.pendingSelect = null;
+        pendingSelect = null;
     }
 }

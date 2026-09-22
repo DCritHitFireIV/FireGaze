@@ -3,7 +3,9 @@ using System.Net.Http.Headers;
 
 namespace FireGaze.RepoAudit;
 
-/// <summary>一个仓库的体检状态。</summary>
+/// <summary>
+///     一个仓库的体检状态。
+/// </summary>
 public enum RepoStatus
 {
     Unknown = 0,
@@ -15,57 +17,73 @@ public enum RepoStatus
     Unreachable = 6,
 }
 
-/// <summary>体检结果条目（列表的一行）。</summary>
+/// <summary>
+///     体检结果条目（列表的一行）。
+/// </summary>
 public sealed class RepoAuditItem
 {
-    public string Url { get; init; } = string.Empty;
+    public string URL { get; init; } = string.Empty;
 
-    /// <summary>归一化后的仓库地址（只算一次，供「已安装」匹配用，避免每帧对上千个 URL 重复解析）。</summary>
-    public string NormalizedUrl { get; set; } = string.Empty;
+    /// <summary>
+    ///     归一化后的仓库地址（只算一次，供「已安装」匹配用，避免每帧对上千个 URL 重复解析）。
+    /// </summary>
+    public string NormalizedURL { get; set; } = string.Empty;
 
     public bool IsEnabled { get; set; }
 
     public int Index { get; set; }
 
-    /// <summary>首次被 FireGaze 记录到的时间（yyyy-MM-dd HH:mm）；null = 安装本插件前就存在，无记录。</summary>
+    /// <summary>
+    ///     首次被 FireGaze 记录到的时间（yyyy-MM-dd HH:mm）；null = 安装本插件前就存在，无记录。
+    /// </summary>
     public string? FirstSeen { get; set; }
 
     public RepoStatus Status { get; set; } = RepoStatus.Unknown;
 
-    public int HttpStatus { get; set; }
+    public int HTTPStatus { get; set; }
 
     public string? Note { get; set; }
 
     public int PluginCount { get; set; }
 
     /// <summary>
-    /// 本机从这条库链装的插件数；<b>-1 = 本机插件数据不可用</b>（界面必须显示 `—`，不能当 0）。
+    ///     本机从这条库链装的插件数；<b>-1 = 本机插件数据不可用</b>（界面必须显示 `—`，不能当 0）。
     /// </summary>
     internal int InstalledCount { get; set; } = -1;
 
-    /// <summary>本机从这条库链装的插件（按名字排序；无可用时为空）。</summary>
+    /// <summary>
+    ///     本机从这条库链装的插件（按名字排序；无可用时为空）。
+    /// </summary>
     internal List<InstalledPluginEntry> InstalledPlugins { get; set; } = [];
 
     public int DroppedCount { get; set; }
 
-    /// <summary>命中的线路（直连 / 镜像）。</summary>
+    /// <summary>
+    ///     命中的线路（直连 / 镜像）。
+    /// </summary>
     public string? Channel { get; set; }
 
-    public DateTime CheckedUtc { get; set; }
+    public DateTime CheckedUTC { get; set; }
 
-    /// <summary>本次扫描中该仓库命中 304（内容未变，结论沿用上次）——只用于统计与日志。</summary>
+    /// <summary>
+    ///     本次扫描中该仓库命中 304（内容未变，结论沿用上次）——只用于统计与日志。
+    /// </summary>
     public bool NotModifiedThisRun { get; set; }
 
-    /// <summary>值得处理的问题（会出现在「有问题的」筛选里）。</summary>
-    public bool IsProblem => this.Status
+    /// <summary>
+    ///     值得处理的问题（会出现在「有问题的」筛选里）。
+    /// </summary>
+    public bool IsProblem => Status
         is RepoStatus.Dead or RepoStatus.Invalid or RepoStatus.Blocked or RepoStatus.Unreachable;
 
-    /// <summary>会被默认勾选的项：只勾「死链 + 内容不合规」——连接失败可能是网络插曲，不默认纳入。</summary>
-    public bool IsAutoSelected => this.Status is RepoStatus.Dead or RepoStatus.Invalid;
+    /// <summary>
+    ///     会被默认勾选的项：只勾「死链 + 内容不合规」——连接失败可能是网络插曲，不默认纳入。
+    /// </summary>
+    public bool IsAutoSelected => Status is RepoStatus.Dead or RepoStatus.Invalid;
 
-    public bool IsSelectable => this.Status != RepoStatus.Unknown;
+    public bool IsSelectable => Status != RepoStatus.Unknown;
 
-    public string StatusText => this.Status switch
+    public string StatusText => Status switch
     {
         RepoStatus.Ok => "可用",
         RepoStatus.Empty => "空仓库",
@@ -77,7 +95,9 @@ public sealed class RepoAuditItem
     };
 }
 
-/// <summary>扫描进度。</summary>
+/// <summary>
+///     扫描进度。
+/// </summary>
 public readonly record struct ScanProgress(
     int Done,
     int Total,
@@ -89,34 +109,38 @@ public readonly record struct ScanProgress(
     int NotModified = 0);
 
 /// <summary>
-/// 用卫月同款方式体检第三方仓库：
-///   HTTP GET（Accept: application/json、no-cache、超时） → 状态码 → 内容契约校验。
-/// GitHub 系地址会同时向可用镜像竞速（直连被墙的环境下也能得到正确结论）。
+///     用卫月同款方式体检第三方仓库：
+///       HTTP GET（Accept: application/json、no-cache、超时） → 状态码 → 内容契约校验。
+///     GitHub 系地址会同时向可用镜像竞速（直连被墙的环境下也能得到正确结论）。
 /// </summary>
 public static class RepoScanner
 {
-    /// <summary>同时在查的库数。1000+ 个库时别再往上加：并发高了会和卫月自己的仓库重载抢网络，游戏会卡。</summary>
+    /// <summary>
+    ///     同时在查的库数。1000+ 个库时别再往上加：并发高了会和卫月自己的仓库重载抢网络，游戏会卡。
+    /// </summary>
     private const int Concurrency = 6;
     private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(18);
 
     /// <summary>
-    /// URL → 上一次的结论（连同 ETag / Last-Modified）。
-    /// 条件请求拿到 304 时用它**恢复上次状态**——否则重新体检时「内容没变」会被当成「未检查」（2026-09-18 用户报的「状态全变未检查」）。
+    ///     URL → 上一次的结论（连同 ETag / Last-Modified）。
+    ///     条件请求拿到 304 时用它**恢复上次状态**——否则重新体检时「内容没变」会被当成「未检查」（2026-09-18 用户报的「状态全变未检查」）。
     /// </summary>
     private sealed record CachedOutcome(
         string? ETag,
         string? LastModified,
         RepoStatus Status,
         string? Note,
-        int HttpStatus,
+        int HTTPStatus,
         int PluginCount,
         int DroppedCount);
 
-    /// <summary>URL → ETag / Last-Modified / 上次结论：下次带上做条件请求，没变就 304，不用重下整份仓库 JSON。</summary>
+    /// <summary>
+    ///     URL → ETag / Last-Modified / 上次结论：下次带上做条件请求，没变就 304，不用重下整份仓库 JSON。
+    /// </summary>
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, CachedOutcome> OutcomeCache = new(StringComparer.Ordinal);
 
     private sealed record FetchResult(
-        string Url,
+        string URL,
         int Status,
         string? Error,
         string? Text,
@@ -127,11 +151,13 @@ public static class RepoScanner
 
     private sealed record FetchOutcome(FetchResult? Success, List<FetchResult> Failures);
 
-    /// <summary>图标体检用的探测结果：<paramref name="Status"/> 0 = 网络层失败。</summary>
-    public readonly record struct UrlProbe(bool Ok, int Status, string? Error);
+    /// <summary>
+    ///     图标体检用的探测结果：<paramref name="Status"/> 0 = 网络层失败。
+    /// </summary>
+    public readonly record struct URLProbe(bool Ok, int Status, string? Error);
 
     /// <summary>
-    /// 探一次外部地址（图标体检用）：复用体检的多线路竞速与超时策略，只关心“通 / 不通 / 状态码”。
+    ///     探一次外部地址（图标体检用）：复用体检的多线路竞速与超时策略，只关心“通 / 不通 / 状态码”。
     /// </summary>
     private static readonly SemaphoreSlim ProbeGate = new(4, 4);
 
@@ -146,7 +172,7 @@ public static class RepoScanner
         Timeout = Timeout.InfiniteTimeSpan,
     });
 
-    public static async Task<UrlProbe> ProbeUrlAsync(string url, CancellationToken cancellationToken)
+    public static async Task<URLProbe> ProbeURLAsync(string url, CancellationToken cancellationToken)
     {
         await ProbeGate.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
@@ -155,11 +181,11 @@ public static class RepoScanner
             if (outcome.Success is { } ok)
             {
                 // 304 也算“地址活着”
-                return new UrlProbe(true, ok.Status == 304 ? 200 : ok.Status, null);
+                return new URLProbe(true, ok.Status == 304 ? 200 : ok.Status, null);
             }
 
             var best = outcome.Failures.OrderByDescending(x => x.Status).FirstOrDefault();
-            return new UrlProbe(false, best?.Status ?? 0, best?.Error);
+            return new URLProbe(false, best?.Status ?? 0, best?.Error);
         }
         finally
         {
@@ -168,8 +194,8 @@ public static class RepoScanner
     }
 
     /// <summary>
-    /// 扫描全部条目（后台线程调用）。每完成一条调用一次 <paramref name="onItemDone"/>，
-    /// 进度计数通过 <paramref name="onProgress"/> 上报。
+    ///     扫描全部条目（后台线程调用）。每完成一条调用一次 <paramref name="onItemDone"/>，
+    ///     进度计数通过 <paramref name="onProgress"/> 上报。
     /// </summary>
     public static async Task ScanAsync(
         IReadOnlyList<RepoAuditItem> items,
@@ -257,32 +283,32 @@ public static class RepoScanner
 
     private static async Task CheckOneAsync(HttpClient client, RepoAuditItem item, CancellationToken cancellationToken)
     {
-        item.CheckedUtc = DateTime.UtcNow;
+        item.CheckedUTC = DateTime.UtcNow;
         item.NotModifiedThisRun = false;
 
-        if (string.IsNullOrWhiteSpace(item.Url))
+        if (string.IsNullOrWhiteSpace(item.URL))
         {
             item.Status = RepoStatus.Invalid;
             item.Note = "空的仓库地址";
             return;
         }
 
-        var outcome = await FetchBestAsync(client, item.Url, cancellationToken).ConfigureAwait(false);
+        var outcome = await FetchBestAsync(client, item.URL, cancellationToken).ConfigureAwait(false);
 
         if (outcome.Success is { } success)
         {
-            item.HttpStatus = success.Status;
-            item.Channel = DescribeChannel(item.Url, success.Url);
+            item.HTTPStatus = success.Status;
+            item.Channel = DescribeChannel(item.URL, success.URL);
 
             if (success.NotModified)
             {
                 // 内容没变：恢复上次的结论（状态 / 备注 / 插件数），不要留下「未检查」
                 item.NotModifiedThisRun = true;
-                if (OutcomeCache.TryGetValue(success.Url, out var cached))
+                if (OutcomeCache.TryGetValue(success.URL, out var cached))
                 {
                     item.Status = cached.Status;
                     item.Note = cached.Note;
-                    item.HttpStatus = cached.HttpStatus;
+                    item.HTTPStatus = cached.HTTPStatus;
                     item.PluginCount = cached.PluginCount;
                     item.DroppedCount = cached.DroppedCount;
                 }
@@ -331,12 +357,12 @@ public static class RepoScanner
                 return;
             }
 
-            OutcomeCache[success.Url] = new CachedOutcome(
+            OutcomeCache[success.URL] = new CachedOutcome(
                 success.ETag,
                 success.LastModified,
                 item.Status,
                 item.Note,
-                item.HttpStatus,
+                item.HTTPStatus,
                 item.PluginCount,
                 item.DroppedCount);
         }
@@ -349,24 +375,24 @@ public static class RepoScanner
         if (statuses.Any(s => s is 404 or 410))
         {
             item.Status = RepoStatus.Dead;
-            item.HttpStatus = statuses.First(s => s is 404 or 410);
-            item.Note = $"HTTP {item.HttpStatus}（链接已失效）";
+            item.HTTPStatus = statuses.First(s => s is 404 or 410);
+            item.Note = $"HTTP {item.HTTPStatus}（链接已失效）";
             return;
         }
 
         if (statuses.Any(s => s is 401 or 403 or 429))
         {
             item.Status = RepoStatus.Blocked;
-            item.HttpStatus = statuses.First(s => s is 401 or 403 or 429);
-            item.Note = $"HTTP {item.HttpStatus}（拒绝访问，可能是私有仓库或限流）";
+            item.HTTPStatus = statuses.First(s => s is 401 or 403 or 429);
+            item.Note = $"HTTP {item.HTTPStatus}（拒绝访问，可能是私有仓库或限流）";
             return;
         }
 
         if (statuses.Count > 0)
         {
             item.Status = RepoStatus.Unreachable;
-            item.HttpStatus = statuses[0];
-            item.Note = $"HTTP {item.HttpStatus}";
+            item.HTTPStatus = statuses[0];
+            item.Note = $"HTTP {item.HTTPStatus}";
             return;
         }
 
@@ -384,7 +410,9 @@ public static class RepoScanner
     private static string DescribeChannel(string original, string used)
         => string.Equals(original, used, StringComparison.OrdinalIgnoreCase) ? "直连" : "镜像";
 
-    /// <summary>直连 + 镜像一起竞速，取第一个成功的结果。</summary>
+    /// <summary>
+    ///     直连 + 镜像一起竞速，取第一个成功的结果。
+    /// </summary>
     private static async Task<FetchOutcome> FetchBestAsync(HttpClient client, string url, CancellationToken cancellationToken)
     {
         var channels = BuildChannels(url);
@@ -486,7 +514,9 @@ public static class RepoScanner
         }
     }
 
-    /// <summary>为 GitHub 系地址追加镜像线路（gh.atmoomen.top 只吃 raw 域名；github.com 走 gh-proxy.org）。</summary>
+    /// <summary>
+    ///     为 GitHub 系地址追加镜像线路（gh.atmoomen.top 只吃 raw 域名；github.com 走 gh-proxy.org）。
+    /// </summary>
     internal static List<string> BuildChannels(string url)
     {
         var list = new List<string> { url };

@@ -5,15 +5,19 @@ using FireGaze.RepoAudit;
 
 namespace FireGaze.Translate;
 
-/// <summary>翻译搜索索引里的一条：一个插件在词表里的现状。</summary>
+/// <summary>
+///     翻译搜索索引里的一条：一个插件在词表里的现状。
+/// </summary>
 internal sealed class TranslationIndexEntry
 {
     public required string InternalName { get; init; }
 
     public required string DisplayName { get; init; }
 
-    /// <summary>插件所在的库链地址（官方主库为空）。</summary>
-    public string? RepositoryUrl { get; init; }
+    /// <summary>
+    ///     插件所在的库链地址（官方主库为空）。
+    /// </summary>
+    public string? RepositoryURL { get; init; }
 
     public bool RepositoryEnabled { get; init; }
 
@@ -23,85 +27,119 @@ internal sealed class TranslationIndexEntry
 
     public string OriginalDescription { get; init; } = string.Empty;
 
-    /// <summary>词表里对这个插件的现有记录（没有 = null）。</summary>
+    /// <summary>
+    ///     词表里对这个插件的现有记录（没有 = null）。
+    /// </summary>
     public TransEntry? Entry { get; private set; }
 
-    /// <summary>有多少个字段能翻。注意：不包括上游本来就是空、玩家也没贡献过的字段。</summary>
+    /// <summary>
+    ///     有多少个字段能翻。注意：不包括上游本来就是空、玩家也没贡献过的字段。
+    /// </summary>
     public int TotalFields { get; private set; }
 
-    /// <summary>上游本来就是空、但玩家贡献过的字段数（算进完成度，不算缺译）。</summary>
+    /// <summary>
+    ///     上游本来就是空、但玩家贡献过的字段数（算进完成度，不算缺译）。
+    /// </summary>
     public int TemplateFields { get; private set; }
 
-    /// <summary>有多少个字段已经有译文。</summary>
+    /// <summary>
+    ///     有多少个字段已经有译文。
+    /// </summary>
     public int TranslatedFields { get; private set; }
 
-    /// <summary>有没有玩家提交的字段。</summary>
+    /// <summary>
+    ///     有没有玩家提交的字段。
+    /// </summary>
     public bool HasUserTranslation { get; private set; }
 
-    /// <summary>有没有「原文改过、还没重译」的字段。</summary>
+    /// <summary>
+    ///     有没有「原文改过、还没重译」的字段。
+    /// </summary>
     public bool HasReview { get; private set; }
 
-    /// <summary>是不是官方主库（Dip17）里的插件。</summary>
+    /// <summary>
+    ///     是不是官方主库（Dip17）里的插件。
+    /// </summary>
     public bool IsOfficial { get; init; }
 
-    /// <summary>上游没提供、但玩家可以补上译文的字段（Name / Punchline / Description）。</summary>
+    /// <summary>
+    ///     上游没提供、但玩家可以补上译文的字段（Name / Punchline / Description）。
+    /// </summary>
     public List<string> ContributableFields { get; } = [];
 
-    /// <summary>缺译文的字段名（Name / Punchline / Description）；上游没提供的字段不算缺译。</summary>
+    /// <summary>
+    ///     缺译文的字段名（Name / Punchline / Description）；上游没提供的字段不算缺译。
+    /// </summary>
     public List<string> MissingFields { get; } = [];
 
-    /// <summary>整条插件的状态（用户筛选「缺译文 / 机器译 / 玩家译」用）。</summary>
+    /// <summary>
+    ///     整条插件的状态（用户筛选「缺译文 / 机器译 / 玩家译」用）。
+    /// </summary>
     public string State { get; private set; } = "missing";
 
-    /// <summary>可以显示图标（作者声明了图标地址 / 官方库通道）。</summary>
+    /// <summary>
+    ///     可以显示图标（作者声明了图标地址 / 官方库通道）。
+    /// </summary>
     public bool DeclaresIcon { get; init; }
 
-    /// <summary>IconUrl（给卫月的图标服务用）。</summary>
-    public string? IconUrl { get; init; }
+    /// <summary>
+    ///     IconURL（给卫月的图标服务用）。
+    /// </summary>
+    public string? IconURL { get; init; }
 
-    /// <summary>是否第三方库插件。</summary>
+    /// <summary>
+    ///     是否第三方库插件。
+    /// </summary>
     public bool IsThirdParty { get; init; } = true;
 
-    /// <summary>给图标缓存用的包装（本地缓存命中时才有）。</summary>
+    /// <summary>
+    ///     给图标缓存用的包装（本地缓存命中时才有）。
+    /// </summary>
     public object? RawPlugin { get; init; }
 
     public object? Manifest { get; init; }
 
-    /// <summary>搜索用的归一化文本（名称 + 原文 + 译文）。</summary>
+    /// <summary>
+    ///     搜索用的归一化文本（名称 + 原文 + 译文）。
+    /// </summary>
     internal string SearchBlob { get; set; } = string.Empty;
 
-    /// <summary>完成度：已有译文的字段 / 该有译文的字段（含玩家补的空字段）。</summary>
+    /// <summary>
+    ///     完成度：已有译文的字段 / 该有译文的字段（含玩家补的空字段）。
+    /// </summary>
     public float Completion
     {
         get
         {
-            var total = this.TotalFields + this.TemplateFields;
-            return total == 0 ? 0f : (float)this.TranslatedFields / total;
+            var total = TotalFields + TemplateFields;
+            return total == 0 ? 0f : (float)TranslatedFields / total;
         }
     }
 
     public void FinalizeState()
     {
-        this.State = this.MissingFields.Count > 0
+        State = MissingFields.Count > 0
             ? "missing"
-            : this.HasUserTranslation ? "user" : "machine";
+            : HasUserTranslation ? "user" : "machine";
     }
 
     /// <summary>
-    /// 按当前词表重算这一行的状态与完成度（保存 / 删除 / 撤回后刷新用）。
-    /// 不反射卫月、也不重建整个索引 —— 只动我们自己的缓存。
+    ///     按当前词表重算这一行的状态与完成度（保存 / 删除 / 撤回后刷新用）。
+    ///     不反射卫月、也不重建整个索引 —— 只动我们自己的缓存。
     /// </summary>
     public void RefreshFrom(TransEntry? entry)
     {
-        this.Entry = entry;
-        this.Evaluate();
+        Entry = entry;
+        Evaluate();
     }
 
-    /// <summary>与建索引时同一套判定：哪个字段缺译 / 哪个字段上游没给 / 完成度多少。</summary>
+    /// <summary>
+    ///     与建索引时同一套判定：哪个字段缺译 / 哪个字段上游没给 / 完成度多少。
+    /// </summary>
     internal void Evaluate()
     {
-        this.MissingFields.Clear();
-        this.ContributableFields.Clear();
+        MissingFields.Clear();
+        ContributableFields.Clear();
 
         var total = 0;
         var template = 0;
@@ -113,9 +151,9 @@ internal sealed class TranslationIndexEntry
 
         var fields = new (string Field, string Original, TransPair? Pair)[]
         {
-            ("Name", this.OriginalName, this.Entry?.Name),
-            ("Punchline", this.OriginalPunchline, this.Entry?.Punchline),
-            ("Description", this.OriginalDescription, this.Entry?.Description),
+            ("Name", OriginalName, Entry?.Name),
+            ("Punchline", OriginalPunchline, Entry?.Punchline),
+            ("Description", OriginalDescription, Entry?.Description),
         };
 
         foreach (var (field, original, pair) in fields)
@@ -154,20 +192,20 @@ internal sealed class TranslationIndexEntry
             review |= pair?.Review is not null;
         }
 
-        this.TotalFields = total;
-        this.TemplateFields = template;
-        this.TranslatedFields = translated;
-        this.HasUserTranslation = user;
-        this.HasReview = review;
-        this.MissingFields.AddRange(missing);
-        this.ContributableFields.AddRange(contributable);
-        this.FinalizeState();
+        TotalFields = total;
+        TemplateFields = template;
+        TranslatedFields = translated;
+        HasUserTranslation = user;
+        HasReview = review;
+        MissingFields.AddRange(missing);
+        ContributableFields.AddRange(contributable);
+        FinalizeState();
     }
 }
 
 /// <summary>
-/// 「参与翻译」的搜索索引：遍历卫月当前认得的所有插件库（含已停用的），
-/// 取每个插件的原文，再与词表对照 —— 全程读内存，不联网。
+///     「参与翻译」的搜索索引：遍历卫月当前认得的所有插件库（含已停用的），
+///     取每个插件的原文，再与词表对照 —— 全程读内存，不联网。
 /// </summary>
 internal sealed class TranslationIndex
 {
@@ -177,25 +215,31 @@ internal sealed class TranslationIndex
     {
     }
 
-    /// <summary>数据是否可信（读得到卫月的插件库列表）。</summary>
+    /// <summary>
+    ///     数据是否可信（读得到卫月的插件库列表）。
+    /// </summary>
     public bool Available { get; private init; }
 
     public string? FailureReason { get; private init; }
 
     public DateTime CapturedLocal { get; private init; }
 
-    public IReadOnlyList<TranslationIndexEntry> All => this.all;
+    public IReadOnlyList<TranslationIndexEntry> All => all;
 
-    /// <summary>有多少条能翻的插件（原文里有至少一个字段非空）。</summary>
-    public int TranslatableCount => this.all.Count;
+    /// <summary>
+    ///     有多少条能翻的插件（原文里有至少一个字段非空）。
+    /// </summary>
+    public int TranslatableCount => all.Count;
 
-    public int MissingCount => this.all.Count(x => x.State == "missing");
+    public int MissingCount => all.Count(x => x.State == "missing");
 
-    public int UserCount => this.all.Count(x => x.HasUserTranslation);
+    public int UserCount => all.Count(x => x.HasUserTranslation);
 
-    public int ReviewCount => this.all.Count(x => x.HasReview);
+    public int ReviewCount => all.Count(x => x.HasReview);
 
-    /// <summary>建一次索引（读卫月内存，不联网；可以放后台线程）。</summary>
+    /// <summary>
+    ///     建一次索引（读卫月内存，不联网；可以放后台线程）。
+    /// </summary>
     public static TranslationIndex Build(Dictionary<string, TransEntry> table)
     {
         try
@@ -225,7 +269,7 @@ internal sealed class TranslationIndex
                 }
 
                 var repoType = repo.GetType();
-                var repoUrl = repoType.GetProperty("PluginMasterUrl", flags)?.GetValue(repo) as string;
+                var repoURL = repoType.GetProperty("PluginMasterUrl", flags)?.GetValue(repo) as string;
                 var repoEnabled = repoType.GetProperty("IsEnabled", flags)?.GetValue(repo) as bool? ?? false;
                 var isThirdParty = repoType.GetProperty("IsThirdParty", flags)?.GetValue(repo) as bool? ?? false;
 
@@ -248,7 +292,7 @@ internal sealed class TranslationIndex
                         continue;
                     }
 
-                    var entry = Create(manifest, repoUrl, repoEnabled, isThirdParty, table);
+                    var entry = Create(manifest, repoURL, repoEnabled, isThirdParty, table);
                     if (entry is null)
                     {
                         skippedOrUnusable++;
@@ -257,7 +301,7 @@ internal sealed class TranslationIndex
 
                     // 同一个内部名可能同时出现在主库与第三方库：留信息更全的那条
                     if (map.TryGetValue(entry.InternalName, out var existing) &&
-                        !(existing.RepositoryUrl is null && entry.RepositoryUrl is not null))
+                        !(existing.RepositoryURL is null && entry.RepositoryURL is not null))
                     {
                         continue;
                     }
@@ -291,7 +335,7 @@ internal sealed class TranslationIndex
 
     private static TranslationIndexEntry? Create(
         object manifest,
-        string? repoUrl,
+        string? repoURL,
         bool repoEnabled,
         bool isThirdParty,
         Dictionary<string, TransEntry> table)
@@ -315,7 +359,7 @@ internal sealed class TranslationIndex
         var name = type.GetProperty("Name", flags)?.GetValue(manifest) as string ?? string.Empty;
         var punchline = type.GetProperty("Punchline", flags)?.GetValue(manifest) as string ?? string.Empty;
         var description = TextOf(type.GetProperty("Description", flags)?.GetValue(manifest));
-        var iconUrl = type.GetProperty("IconUrl", flags)?.GetValue(manifest) as string;
+        var iconURL = type.GetProperty("IconUrl", flags)?.GetValue(manifest) as string;
         var dip17 = type.GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string;
 
         table.TryGetValue(internalName, out var entry);
@@ -324,13 +368,13 @@ internal sealed class TranslationIndex
         {
             InternalName = internalName,
             DisplayName = string.IsNullOrWhiteSpace(name) ? internalName : name,
-            RepositoryUrl = string.IsNullOrWhiteSpace(repoUrl) ? null : repoUrl,
+            RepositoryURL = string.IsNullOrWhiteSpace(repoURL) ? null : repoURL,
             RepositoryEnabled = repoEnabled,
             OriginalName = name,
             OriginalPunchline = punchline,
             OriginalDescription = description,
-            DeclaresIcon = !string.IsNullOrWhiteSpace(iconUrl) || !string.IsNullOrWhiteSpace(dip17),
-            IconUrl = iconUrl,
+            DeclaresIcon = !string.IsNullOrWhiteSpace(iconURL) || !string.IsNullOrWhiteSpace(dip17),
+            IconURL = iconURL,
             IsThirdParty = isThirdParty,
             Manifest = manifest,
             IsOfficial = !isThirdParty,
@@ -359,7 +403,9 @@ internal sealed class TranslationIndex
         _ => value.ToString() ?? string.Empty,
     };
 
-    /// <summary>这段文字里有没有中日韩汉字（用来判断「上游原文本身就是中文」）。</summary>
+    /// <summary>
+    ///     这段文字里有没有中日韩汉字（用来判断「上游原文本身就是中文」）。
+    /// </summary>
     internal static bool HasCjk(string text)
     {
         foreach (var ch in text)
@@ -377,7 +423,9 @@ internal sealed class TranslationIndex
         return false;
     }
 
-    /// <summary>有没有日语假名（平/片假名、半角片假名、片假名扩展）。</summary>
+    /// <summary>
+    ///     有没有日语假名（平/片假名、半角片假名、片假名扩展）。
+    /// </summary>
     internal static bool HasKana(string text)
     {
         foreach (var ch in text)
@@ -394,8 +442,8 @@ internal sealed class TranslationIndex
     }
 
     /// <summary>
-    /// 上游原文是不是「本来就是中文」：有汉字、而且没有假名。
-    /// 日文夹着汉字，光看汉字会把它当成中文 —— 但玩家要的是中文译文（2026-09-22 用户定：日语也要翻）。
+    ///     上游原文是不是「本来就是中文」：有汉字、而且没有假名。
+    ///     日文夹着汉字，光看汉字会把它当成中文 —— 但玩家要的是中文译文（2026-09-22 用户定：日语也要翻）。
     /// </summary>
     internal static bool IsChinese(string text) => HasCjk(text) && !HasKana(text);
 

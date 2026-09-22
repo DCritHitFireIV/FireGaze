@@ -4,11 +4,11 @@ using System.Reflection;
 namespace FireGaze.Translate;
 
 /// <summary>
-/// 把词表注入卫月内存中的插件清单：
-///   · AvailablePlugins（安装器「可用插件」列表）与 InstalledPlugins（已安装列表）的 Manifest；
-///   · 三个字段各自按 <see cref="DisplayMode"/> 显示：名字 / 一行简介 / 插件详情；
-///   · 只在「当前内容命中我们认识的变体（原文 / 纯译文 / 双语）」时才替换 ——
-///     不会覆盖 FastDalamudCN 等其他插件的产物，也不会反复书写。
+///     把词表注入卫月内存中的插件清单：
+///       · AvailablePlugins（安装器「可用插件」列表）与 InstalledPlugins（已安装列表）的 Manifest；
+///       · 三个字段各自按 <see cref="DisplayMode"/> 显示：名字 / 一行简介 / 插件详情；
+///       · 只在「当前内容命中我们认识的变体（原文 / 纯译文 / 双语）」时才替换 ——
+///         不会覆盖 FastDalamudCN 等其他插件的产物，也不会反复书写。
 /// </summary>
 public sealed class ManifestPatcher
 {
@@ -29,53 +29,57 @@ public sealed class ManifestPatcher
         this.log = log;
     }
 
-    /// <summary>应用一次；返回被改写的清单数。</summary>
-    public int ApplyAll() => this.Run(restore: false);
+    /// <summary>
+    ///     应用一次；返回被改写的清单数。
+    /// </summary>
+    public int ApplyAll() => Run(restore: false);
 
-    /// <summary>把已改写的文本还原成原文（关闭汉化时用）；返回被还原的清单数。</summary>
-    public int RestoreAll() => this.Run(restore: true);
+    /// <summary>
+    ///     把已改写的文本还原成原文（关闭汉化时用）；返回被还原的清单数。
+    /// </summary>
+    public int RestoreAll() => Run(restore: true);
 
     private int Run(bool restore)
     {
-        if (this.table.Count == 0)
+        if (table.Count == 0)
         {
             return 0;
         }
 
-        if (!restore && !this.config().TranslateEnabled)
+        if (!restore && !config().TranslateEnabled)
         {
             return 0;
         }
 
         try
         {
-            if (this.pluginManager is null && !this.ResolvePluginManager())
+            if (pluginManager is null && !ResolvePluginManager())
             {
                 return 0;
             }
 
-            var cfg = this.config();
+            var cfg = config();
             var patched = 0;
 
-            if (this.propAvailable?.GetValue(this.pluginManager) is IEnumerable available)
+            if (propAvailable?.GetValue(pluginManager) is IEnumerable available)
             {
                 foreach (var manifest in available)
                 {
-                    if (manifest is not null && this.Patch(manifest, cfg, restore))
+                    if (manifest is not null && Patch(manifest, cfg, restore))
                     {
                         patched++;
                     }
                 }
             }
 
-            if (this.propInstalled?.GetValue(this.pluginManager) is IEnumerable installed)
+            if (propInstalled?.GetValue(pluginManager) is IEnumerable installed)
             {
                 foreach (var local in installed)
                 {
                     var manifest = local?.GetType()
                                         .GetProperty("Manifest", BindingFlags.Public | BindingFlags.Instance)
                                         ?.GetValue(local);
-                    if (manifest is not null && this.Patch(manifest, cfg, restore))
+                    if (manifest is not null && Patch(manifest, cfg, restore))
                     {
                         patched++;
                     }
@@ -86,7 +90,7 @@ public sealed class ManifestPatcher
         }
         catch (Exception e)
         {
-            this.log((restore ? "还原汉化失败：" : "应用汉化失败：") + e.Message);
+            log((restore ? "还原汉化失败：" : "应用汉化失败：") + e.Message);
             return 0;
         }
     }
@@ -97,17 +101,17 @@ public sealed class ManifestPatcher
         var internalName = type.GetProperty("InternalName", BindingFlags.Public | BindingFlags.Instance)
                                ?.GetValue(manifest) as string;
 
-        if (string.IsNullOrEmpty(internalName) || !this.table.TryGet(internalName, out var entry))
+        if (string.IsNullOrEmpty(internalName) || !table.TryGet(internalName, out var entry))
         {
             return false;
         }
 
-        if (!this.fieldCache.TryGetValue(type, out var fields))
+        if (!fieldCache.TryGetValue(type, out var fields))
         {
             fields = (FindField(type, "<Name>k__BackingField"),
                       FindField(type, "<Punchline>k__BackingField"),
                       FindField(type, "<Description>k__BackingField"));
-            this.fieldCache[type] = fields;
+            fieldCache[type] = fields;
         }
 
         var changed = ApplyField(fields.Name, manifest, entry.Name, cfg.NameMode, isName: true, restore);
@@ -223,20 +227,20 @@ public sealed class ManifestPatcher
 
             var get = serviceOpen.MakeGenericType(managerType)
                                  .GetMethod("Get", BindingFlags.Public | BindingFlags.Static);
-            this.pluginManager = get?.Invoke(null, null);
-            if (this.pluginManager is null)
+            pluginManager = get?.Invoke(null, null);
+            if (pluginManager is null)
             {
                 return false;
             }
 
-            var type = this.pluginManager.GetType();
-            this.propAvailable = type.GetProperty("AvailablePlugins", BindingFlags.Public | BindingFlags.Instance);
-            this.propInstalled = type.GetProperty("InstalledPlugins", BindingFlags.Public | BindingFlags.Instance);
+            var type = pluginManager.GetType();
+            propAvailable = type.GetProperty("AvailablePlugins", BindingFlags.Public | BindingFlags.Instance);
+            propInstalled = type.GetProperty("InstalledPlugins", BindingFlags.Public | BindingFlags.Instance);
             return true;
         }
         catch (Exception e)
         {
-            this.log("无法获取 PluginManager：" + e.Message);
+            log("无法获取 PluginManager：" + e.Message);
             return false;
         }
     }

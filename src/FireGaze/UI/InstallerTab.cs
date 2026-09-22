@@ -2,7 +2,9 @@ using Dalamud.Bindings.ImGui;
 
 namespace FireGaze.UI;
 
-/// <summary>「插件安装器」页：拦住安装器的自动刷新 + 记住列表浏览位置（两项都默认关）。</summary>
+/// <summary>
+///     「插件安装器」页：拦住安装器的自动刷新 + 记住列表浏览位置（两项都默认关）。
+/// </summary>
 internal sealed class InstallerTab
 {
     private readonly Plugin plugin;
@@ -21,10 +23,10 @@ internal sealed class InstallerTab
 
         ImGui.Separator();
 
-        var block = this.plugin.Config.BlockInstallerAutoRefresh;
+        var block = plugin.Config.BlockInstallerAutoRefresh;
         if (ImGui.Checkbox("拦截打开插件管理器时的自动刷新###BlockAutoRefresh", ref block))
         {
-            this.plugin.SetBlockInstallerAutoRefresh(block);
+            plugin.SetBlockInstallerAutoRefresh(block);
         }
 
         ImGui.Indent();
@@ -37,10 +39,10 @@ internal sealed class InstallerTab
 
         ImGui.Spacing();
 
-        var remember = this.plugin.Config.RememberListScroll;
+        var remember = plugin.Config.RememberListScroll;
         if (ImGui.Checkbox("记住看到哪里（下次打开接着看）###RememberScroll", ref remember))
         {
-            this.plugin.SetRememberListScroll(remember);
+            plugin.SetRememberListScroll(remember);
         }
 
         ImGui.Indent();
@@ -63,7 +65,7 @@ internal sealed class InstallerTab
         ImGui.Separator();
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
-            "状态：" + this.plugin.InstallerFeatures.StatusText(block, remember));
+            "状态：" + plugin.InstallerFeatures.StatusText(block, remember));
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
             "改动立即保存：拦截即刻生效，位置记忆在下次打开插件安装器时生效。");

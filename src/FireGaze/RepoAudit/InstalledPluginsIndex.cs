@@ -6,28 +6,40 @@ using Dalamud.Plugin;
 
 namespace FireGaze.RepoAudit;
 
-/// <summary>本机已装插件的一条记录（从卫月读来，不联网）。</summary>
+/// <summary>
+///     本机已装插件的一条记录（从卫月读来，不联网）。
+/// </summary>
 internal sealed class InstalledPluginEntry
 {
     public required string InternalName { get; init; }
 
     public required string DisplayName { get; init; }
 
-    /// <summary>安装时的仓库地址原文（可能是镜像地址，甚至为空 = 手动 / 开发版装的）。</summary>
-    public string? RepositoryUrl { get; init; }
+    /// <summary>
+    ///     安装时的仓库地址原文（可能是镜像地址，甚至为空 = 手动 / 开发版装的）。
+    /// </summary>
+    public string? RepositoryURL { get; init; }
 
-    /// <summary>第三方插件在清单里声明的图标地址（可能为空 = 作者没给）。</summary>
-    public string? IconUrl { get; init; }
+    /// <summary>
+    ///     第三方插件在清单里声明的图标地址（可能为空 = 作者没给）。
+    /// </summary>
+    public string? IconURL { get; init; }
 
-    /// <summary>官方库（Dip17）通道，官方插件的图标由它拼出来。</summary>
+    /// <summary>
+    ///     官方库（Dip17）通道，官方插件的图标由它拼出来。
+    /// </summary>
     public string? Dip17Channel { get; init; }
 
-    /// <summary>这个插件到底“应该”有没有图标（第三方看 IconUrl，官方库看通道）。</summary>
-    public bool DeclaresIcon => this.IsThirdParty
-        ? !string.IsNullOrWhiteSpace(this.IconUrl)
-        : !string.IsNullOrWhiteSpace(this.Dip17Channel);
+    /// <summary>
+    ///     这个插件到底“应该”有没有图标（第三方看 IconURL，官方库看通道）。
+    /// </summary>
+    public bool DeclaresIcon => IsThirdParty
+        ? !string.IsNullOrWhiteSpace(IconURL)
+        : !string.IsNullOrWhiteSpace(Dip17Channel);
 
-    /// <summary>卫月的 LocalPlugin 实例（给图标缓存用）。</summary>
+    /// <summary>
+    ///     卫月的 LocalPlugin 实例（给图标缓存用）。
+    /// </summary>
     public required object RawPlugin { get; init; }
 
     public object? Manifest { get; init; }
@@ -38,7 +50,7 @@ internal sealed class InstalledPluginEntry
 }
 
 /// <summary>
-/// 「本机装了哪些插件、各来自哪条库链」的索引。
+///     「本机装了哪些插件、各来自哪条库链」的索引。
 /// </summary>
 /// <remarks>
 /// 全程反射读卫月内部、不联网。**读不到时 <see cref="Available"/> = false**：界面必须显示 `—`，
@@ -46,7 +58,9 @@ internal sealed class InstalledPluginEntry
 /// </remarks>
 internal sealed class InstalledPluginsIndex
 {
-    /// <summary>本插件自己用的镜像前缀（RepoScanner.BuildChannels 同源），匹配前要还原成原始地址。</summary>
+    /// <summary>
+    ///     本插件自己用的镜像前缀（RepoScanner.BuildChannels 同源），匹配前要还原成原始地址。
+    /// </summary>
     private static readonly string[] MirrorPrefixes =
     [
         "https://gh.atmoomen.top/",
@@ -60,21 +74,31 @@ internal sealed class InstalledPluginsIndex
     {
     }
 
-    /// <summary>数据是否可信（读得到卫月的已装插件列表）。</summary>
+    /// <summary>
+    ///     数据是否可信（读得到卫月的已装插件列表）。
+    /// </summary>
     public bool Available { get; private init; }
 
-    /// <summary>统计时间（本地）。</summary>
+    /// <summary>
+    ///     统计时间（本地）。
+    /// </summary>
     public DateTime CapturedLocal { get; private init; }
 
-    /// <summary>不可信的原因（给界面/日志用）。</summary>
+    /// <summary>
+    ///     不可信的原因（给界面/日志用）。
+    /// </summary>
     public string? FailureReason { get; private init; }
 
-    public IReadOnlyList<InstalledPluginEntry> All => this.all;
+    public IReadOnlyList<InstalledPluginEntry> All => all;
 
-    /// <summary>有已装插件的库链数量。</summary>
-    public int RepositoriesInUse => this.byRepository.Count;
+    /// <summary>
+    ///     有已装插件的库链数量。
+    /// </summary>
+    public int RepositoriesInUse => byRepository.Count;
 
-    /// <summary>读一次卫月的已装插件列表并建索引。</summary>
+    /// <summary>
+    ///     读一次卫月的已装插件列表并建索引。
+    /// </summary>
     public static InstalledPluginsIndex Build() => BuildCore();
 
     private static InstalledPluginsIndex BuildCore()
@@ -123,7 +147,7 @@ internal sealed class InstalledPluginsIndex
                                   ?? manifest?.GetType().GetProperty("Name", flags)?.GetValue(manifest) as string
                                   ?? internalName;
 
-                var repositoryUrl = type.GetProperty("InstalledFromUrl", flags)?.GetValue(plugin) as string
+                var repositoryURL = type.GetProperty("InstalledFromUrl", flags)?.GetValue(plugin) as string
                                     ?? manifest?.GetType().GetProperty("InstalledFromUrl", flags)?.GetValue(manifest) as string;
 
                 var isDev = type.GetProperty("IsDev", flags)?.GetValue(plugin) as bool? ?? false;
@@ -135,8 +159,8 @@ internal sealed class InstalledPluginsIndex
                 {
                     InternalName = internalName,
                     DisplayName = displayName,
-                    RepositoryUrl = repositoryUrl,
-                    IconUrl = manifest?.GetType().GetProperty("IconUrl", flags)?.GetValue(manifest) as string,
+                    RepositoryURL = repositoryURL,
+                    IconURL = manifest?.GetType().GetProperty("IconUrl", flags)?.GetValue(manifest) as string,
                     Dip17Channel = manifest?.GetType().GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string,
                     RawPlugin = plugin,
                     Manifest = manifest,
@@ -147,12 +171,12 @@ internal sealed class InstalledPluginsIndex
                 all.Add(entry);
 
                 // 手动装 / 开发版没有来源地址，不参与"来自哪条库链"的统计
-                if (string.IsNullOrWhiteSpace(repositoryUrl))
+                if (string.IsNullOrWhiteSpace(repositoryURL))
                 {
                     continue;
                 }
 
-                var key = NormalizeRepositoryUrl(repositoryUrl);
+                var key = NormalizeRepositoryURL(repositoryURL);
                 if (key.Length == 0)
                 {
                     continue;
@@ -204,21 +228,25 @@ internal sealed class InstalledPluginsIndex
         FailureReason = reason,
     };
 
-    /// <summary>取某条库链在本机装的插件；不可用时返回 false（调用方应显示 `—`）。</summary>
-    public bool TryGetInstalled(string repositoryUrl, out List<InstalledPluginEntry> plugins)
-        => this.TryGetInstalledByNormalized(NormalizeRepositoryUrl(repositoryUrl), out plugins);
+    /// <summary>
+    ///     取某条库链在本机装的插件；不可用时返回 false（调用方应显示 `—`）。
+    /// </summary>
+    public bool TryGetInstalled(string repositoryURL, out List<InstalledPluginEntry> plugins)
+        => TryGetInstalledByNormalized(NormalizeRepositoryURL(repositoryURL), out plugins);
 
-    /// <summary>同 <see cref="TryGetInstalled(string, out List{InstalledPluginEntry})"/>，但用调用方已经归一化好的键（省一次解析）。</summary>
-    public bool TryGetInstalledByNormalized(string normalizedUrl, out List<InstalledPluginEntry> plugins)
+    /// <summary>
+    ///     同 <see cref="TryGetInstalled(string, out List{InstalledPluginEntry})"/>，但用调用方已经归一化好的键（省一次解析）。
+    /// </summary>
+    public bool TryGetInstalledByNormalized(string normalizedURL, out List<InstalledPluginEntry> plugins)
     {
         plugins = [];
 
-        if (!this.Available || string.IsNullOrEmpty(normalizedUrl))
+        if (!Available || string.IsNullOrEmpty(normalizedURL))
         {
             return false;
         }
 
-        if (this.byRepository.TryGetValue(normalizedUrl, out var found))
+        if (byRepository.TryGetValue(normalizedURL, out var found))
         {
             plugins = found;
             return true;
@@ -228,10 +256,10 @@ internal sealed class InstalledPluginsIndex
     }
 
     /// <summary>
-    /// 归一化仓库地址以便匹配：trim → 去掉已知镜像前缀（还原成原始地址）→ scheme/host 小写 → 去尾斜杠。
-    /// （路径部分保持原样：GitHub raw 的 owner/repo 是区分大小写的。）
+    ///     归一化仓库地址以便匹配：trim → 去掉已知镜像前缀（还原成原始地址）→ scheme/host 小写 → 去尾斜杠。
+    ///     （路径部分保持原样：GitHub raw 的 owner/repo 是区分大小写的。）
     /// </summary>
-    public static string NormalizeRepositoryUrl(string? url)
+    public static string NormalizeRepositoryURL(string? url)
     {
         var text = (url ?? string.Empty).Trim();
         if (text.Length == 0)
@@ -268,8 +296,8 @@ internal sealed class InstalledPluginsIndex
 }
 
 /// <summary>
-/// 插件图标：借用卫月自己的图标缓存（<c>PluginImageCache.TryGetIcon</c>），
-/// 由卫月负责下载与缓存，本插件不联网。拿不到就返回 false，由界面画占位格。
+///     插件图标：借用卫月自己的图标缓存（<c>PluginImageCache.TryGetIcon</c>），
+///     由卫月负责下载与缓存，本插件不联网。拿不到就返回 false，由界面画占位格。
 /// </summary>
 internal static class PluginIconLookup
 {
@@ -281,7 +309,7 @@ internal static class PluginIconLookup
     private static bool failed;
 
     /// <summary>
-    /// **只读检查**：本机图标缓存里现在有没有这个插件的图，不触发下载。
+    ///     **只读检查**：本机图标缓存里现在有没有这个插件的图，不触发下载。
     /// </summary>
     /// <remarks>
     /// 直接读卫月 <c>PluginImageCache.pluginIconMap</c>：值非空 = 已缓存；
@@ -318,7 +346,9 @@ internal static class PluginIconLookup
         return false;
     }
 
-    /// <summary>请求卫月下载这个插件的图标（会进卫月的下载队列；缓存里已有则直接返回）。</summary>
+    /// <summary>
+    ///     请求卫月下载这个插件的图标（会进卫月的下载队列；缓存里已有则直接返回）。
+    /// </summary>
     public static bool TryGetHandle(InstalledPluginEntry entry, out ImTextureID handle)
     {
         handle = ImTextureID.Null;
@@ -366,8 +396,8 @@ internal static class PluginIconLookup
     }
 
     /// <summary>
-    /// 把本地缓存的图标纹理**塞回卫月的图标缓存**：插件安装器画到这些插件时会直接命中，
-    /// 不必等它自己重新下载。只在「卫月自己也没有」时补位，绝不覆盖它已经下好的。
+    ///     把本地缓存的图标纹理**塞回卫月的图标缓存**：插件安装器画到这些插件时会直接命中，
+    ///     不必等它自己重新下载。只在「卫月自己也没有」时补位，绝不覆盖它已经下好的。
     /// </summary>
     /// <returns>成功时给出键与被放入的对象（撤回时用对象比对，避免误删卫月自己的）。</returns>
     internal static bool TryInject(
@@ -415,7 +445,9 @@ internal static class PluginIconLookup
         }
     }
 
-    /// <summary>插件卸载时撤回我们注入的那一条（只当内容还是我们放进去的那个对象）。</summary>
+    /// <summary>
+    ///     插件卸载时撤回我们注入的那一条（只当内容还是我们放进去的那个对象）。
+    /// </summary>
     internal static void TryRemoveInjected(string key, object instance)
     {
         if (!TryResolve() || iconMapField?.GetValue(imageCache) is not IDictionary map)
@@ -436,7 +468,9 @@ internal static class PluginIconLookup
         }
     }
 
-    /// <summary>拿卫月图标缓存服务（一次解析，失败就不再试）。</summary>
+    /// <summary>
+    ///     拿卫月图标缓存服务（一次解析，失败就不再试）。
+    /// </summary>
     private static bool TryResolve()
     {
         ResolveMethod();

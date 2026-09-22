@@ -6,7 +6,7 @@ using FireGaze.RepoAudit;
 namespace FireGaze.UI;
 
 /// <summary>
-/// 图标落盘缓存的「界面侧」：把缓存文件变成**我们自己的**纹理、并把它塞回卫月的图标缓存。
+///     图标落盘缓存的「界面侧」：把缓存文件变成**我们自己的**纹理、并把它塞回卫月的图标缓存。
 /// </summary>
 /// <remarks>
 /// 两个目的：
@@ -28,92 +28,116 @@ internal sealed class IconStore : IDisposable
 {
     private readonly IconCache cache;
 
-    /// <summary>「本地缓存图标」开关（用户在体检页可关；关掉后回到只用卫月内存缓存）。</summary>
+    /// <summary>
+    ///     「本地缓存图标」开关（用户在体检页可关；关掉后回到只用卫月内存缓存）。
+    /// </summary>
     private readonly Func<bool> enabled;
 
-    /// <summary>正在创建的纹理（后台由卫月解码）：InternalName → 任务。</summary>
+    /// <summary>
+    ///     正在创建的纹理（后台由卫月解码）：InternalName → 任务。
+    /// </summary>
     private readonly Dictionary<string, Task<IDalamudTextureWrap>> loading = new(StringComparer.Ordinal);
 
-    /// <summary>已经拿到、**由我们持有**的纹理：InternalName → 纹理。</summary>
+    /// <summary>
+    ///     已经拿到、**由我们持有**的纹理：InternalName → 纹理。
+    /// </summary>
     private readonly Dictionary<string, IDalamudTextureWrap> wraps = new(StringComparer.Ordinal);
 
-    /// <summary>我们注入进卫月缓存的对象（撤回时要按对象比对）：键 → LoadedIcon 实例。</summary>
+    /// <summary>
+    ///     我们注入进卫月缓存的对象（撤回时要按对象比对）：键 → LoadedIcon 实例。
+    /// </summary>
     private readonly Dictionary<string, object> injected = new(StringComparer.Ordinal);
 
     private bool disposed;
     private DateTime nextFlush = DateTime.MinValue;
 
-    /// <summary>安装器打开时的预热清单（本会话只排一次）。</summary>
+    /// <summary>
+    ///     安装器打开时的预热清单（本会话只排一次）。
+    /// </summary>
     private List<InstalledPluginEntry>? warmUpSource;
 
-    /// <summary>本会话是否已经排过预热（空清单也算，否则会每帧重建索引）。</summary>
+    /// <summary>
+    ///     本会话是否已经排过预热（空清单也算，否则会每帧重建索引）。
+    /// </summary>
     private bool warmUpQueued;
 
-    /// <summary>已建纹理、还没拿到句柄的（拿到那一刻会顺手注入卫月缓存）。</summary>
+    /// <summary>
+    ///     已建纹理、还没拿到句柄的（拿到那一刻会顺手注入卫月缓存）。
+    /// </summary>
     private readonly List<(InstalledPluginEntry Entry, DateTime Since)> warmUpPending = [];
 
     private bool loggedProvider;
 
     private int warmUpCursor;
 
-    /// <summary>预热里等得太久的丢弃（文件坏了 / 解不出来，不要每帧白试）。</summary>
+    /// <summary>
+    ///     预热里等得太久的丢弃（文件坏了 / 解不出来，不要每帧白试）。
+    /// </summary>
     private static readonly TimeSpan WarmUpGiveUp = TimeSpan.FromSeconds(15);
 
     public IconStore(string configDirectory, Func<bool> enabled)
     {
-        this.cache = new IconCache(configDirectory);
+        cache = new IconCache(configDirectory);
         this.enabled = enabled;
     }
 
-    /// <summary>缓存目录（写进界面提示，方便用户自己清）。</summary>
-    public string CacheDirectory => this.cache.Directory;
+    /// <summary>
+    ///     缓存目录（写进界面提示，方便用户自己清）。
+    /// </summary>
+    public string CacheDirectory => cache.Directory;
 
-    /// <summary>缓存里有多少个插件的图标。</summary>
-    public int CachedCount => this.cache.Count;
+    /// <summary>
+    ///     缓存里有多少个插件的图标。
+    /// </summary>
+    public int CachedCount => cache.Count;
 
-    /// <summary>本地有货（内存里或盘上）吗——「检查缺图标」用它判断。</summary>
+    /// <summary>
+    ///     本地有货（内存里或盘上）吗——「检查缺图标」用它判断。
+    /// </summary>
     public bool Has(InstalledPluginEntry entry)
     {
-        if (!this.enabled())
+        if (!enabled())
         {
             return false;
         }
 
-        if (this.wraps.ContainsKey(entry.InternalName) || this.loading.ContainsKey(entry.InternalName))
+        if (wraps.ContainsKey(entry.InternalName) || loading.ContainsKey(entry.InternalName))
         {
             return true;
         }
 
-        return !string.IsNullOrWhiteSpace(entry.IconUrl)
-               && this.cache.TryGetPath(entry.InternalName, entry.IconUrl!, out _);
+        return !string.IsNullOrWhiteSpace(entry.IconURL)
+               && cache.TryGetPath(entry.InternalName, entry.IconURL!, out _);
     }
 
-    /// <summary>拿句柄；没有就从盘上建纹理（解码是异步的，可能这一帧还没有）。</summary>
+    /// <summary>
+    ///     拿句柄；没有就从盘上建纹理（解码是异步的，可能这一帧还没有）。
+    /// </summary>
     public bool TryGetHandle(InstalledPluginEntry entry, out ImTextureID handle)
     {
         handle = ImTextureID.Null;
-        if (this.disposed || !this.enabled())
+        if (disposed || !enabled())
         {
             return false;
         }
 
-        if (this.wraps.TryGetValue(entry.InternalName, out var ready))
+        if (wraps.TryGetValue(entry.InternalName, out var ready))
         {
             handle = ready.Handle;
             return !handle.IsNull;
         }
 
-        if (!this.loading.TryGetValue(entry.InternalName, out var task) && !this.EnsureTexture(entry))
+        if (!loading.TryGetValue(entry.InternalName, out var task) && !EnsureTexture(entry))
         {
             return false;
         }
 
-        if (!this.loading.TryGetValue(entry.InternalName, out task) || !task.IsCompleted)
+        if (!loading.TryGetValue(entry.InternalName, out task) || !task.IsCompleted)
         {
             return false;
         }
 
-        this.loading.Remove(entry.InternalName);
+        loading.Remove(entry.InternalName);
 
         if (task.Status != TaskStatus.RanToCompletion || task.Result is not { } wrap || wrap.Handle.IsNull)
         {
@@ -121,30 +145,32 @@ internal sealed class IconStore : IDisposable
             return false;
         }
 
-        this.wraps[entry.InternalName] = wrap;
+        wraps[entry.InternalName] = wrap;
         handle = wrap.Handle;
-        this.TryInject(entry, wrap);
+        TryInject(entry, wrap);
         return true;
     }
 
-    /// <summary>有落盘文件就开始建纹理（界面线程调用；解码在卫月内部异步做）。</summary>
+    /// <summary>
+    ///     有落盘文件就开始建纹理（界面线程调用；解码在卫月内部异步做）。
+    /// </summary>
     public bool EnsureTexture(InstalledPluginEntry entry)
     {
-        if (this.disposed
-            || !this.enabled()
-            || this.wraps.ContainsKey(entry.InternalName)
-            || this.loading.ContainsKey(entry.InternalName)
-            || string.IsNullOrWhiteSpace(entry.IconUrl)
-            || !this.cache.TryGetPath(entry.InternalName, entry.IconUrl!, out var path))
+        if (disposed
+            || !enabled()
+            || wraps.ContainsKey(entry.InternalName)
+            || loading.ContainsKey(entry.InternalName)
+            || string.IsNullOrWhiteSpace(entry.IconURL)
+            || !cache.TryGetPath(entry.InternalName, entry.IconURL!, out var path))
         {
             return false;
         }
 
         try
         {
-            if (!this.loggedProvider)
+            if (!loggedProvider)
             {
-                this.loggedProvider = true;
+                loggedProvider = true;
                 Plugin.Log.Debug($"[FireGaze] 图标纹理提供者：{Plugin.Textures.GetType().FullName}");
             }
 
@@ -154,7 +180,7 @@ internal sealed class IconStore : IDisposable
                 $"FireGaze:{entry.InternalName}",
                 CancellationToken.None);
 
-            this.loading[entry.InternalName] = task;
+            loading[entry.InternalName] = task;
             return true;
         }
         catch (Exception e)
@@ -164,67 +190,71 @@ internal sealed class IconStore : IDisposable
         }
     }
 
-    /// <summary>下载线程拿到字节后调它：写进落盘缓存（线程安全）。</summary>
+    /// <summary>
+    ///     下载线程拿到字节后调它：写进落盘缓存（线程安全）。
+    /// </summary>
     public bool SaveDownloaded(InstalledPluginEntry entry, byte[] bytes, string? contentType)
     {
-        if (this.disposed || !this.enabled() || string.IsNullOrWhiteSpace(entry.IconUrl))
+        if (disposed || !enabled() || string.IsNullOrWhiteSpace(entry.IconURL))
         {
             return false;
         }
 
-        var ok = this.cache.Save(
+        var ok = cache.Save(
             entry.InternalName,
-            entry.IconUrl!,
+            entry.IconURL!,
             bytes,
-            IconCache.ExtensionFor(contentType, entry.IconUrl!));
+            IconCache.ExtensionFor(contentType, entry.IconURL!));
 
-        this.cache.Flush();
+        cache.Flush();
         return ok;
     }
 
-    /// <summary>把缓存索引写盘（界面线程在下载推进时调；最多每秒一次）。</summary>
+    /// <summary>
+    ///     把缓存索引写盘（界面线程在下载推进时调；最多每秒一次）。
+    /// </summary>
     public void FlushIndex()
     {
         var now = DateTime.UtcNow;
-        if (now < this.nextFlush)
+        if (now < nextFlush)
         {
             return;
         }
 
-        this.nextFlush = now.AddSeconds(1);
-        this.cache.Flush();
+        nextFlush = now.AddSeconds(1);
+        cache.Flush();
     }
 
     /// <summary>
-    /// 插件安装器打开时调：把「盘上有图」的已装插件排进预热队列。
-    /// 之后的 <see cref="WarmUpStep"/> 会分批建纹理——纹理就绪时自动注入卫月缓存，
-    /// 安装器画到这些插件就直接用本地图，不再自己重新下载。
+    ///     插件安装器打开时调：把「盘上有图」的已装插件排进预热队列。
+    ///     之后的 <see cref="WarmUpStep"/> 会分批建纹理——纹理就绪时自动注入卫月缓存，
+    ///     安装器画到这些插件就直接用本地图，不再自己重新下载。
     /// </summary>
     public void ScheduleWarmUp(IReadOnlyList<InstalledPluginEntry> installed)
     {
-        if (this.disposed || !this.enabled() || this.warmUpQueued)
+        if (disposed || !enabled() || warmUpQueued)
         {
             return;
         }
 
-        this.warmUpQueued = true;
+        warmUpQueued = true;
 
         var list = new List<InstalledPluginEntry>();
         foreach (var entry in installed)
         {
-            if (string.IsNullOrWhiteSpace(entry.IconUrl))
+            if (string.IsNullOrWhiteSpace(entry.IconURL))
             {
                 continue;
             }
 
-            if (this.cache.TryGetPath(entry.InternalName, entry.IconUrl!, out _))
+            if (cache.TryGetPath(entry.InternalName, entry.IconURL!, out _))
             {
                 list.Add(entry);
             }
         }
 
-        this.warmUpSource = list;
-        this.warmUpCursor = 0;
+        warmUpSource = list;
+        warmUpCursor = 0;
 
         // 只在真的有东西要挂时写 Information（空缓存时不要刷屏）
         if (list.Count > 0)
@@ -237,56 +267,58 @@ internal sealed class IconStore : IDisposable
         }
     }
 
-    /// <summary>每帧推进预热（界面线程；<paramref name="max"/> = 本帧最多处理几个）。</summary>
+    /// <summary>
+    ///     每帧推进预热（界面线程；<paramref name="max"/> = 本帧最多处理几个）。
+    /// </summary>
     public void WarmUpStep(int max)
     {
-        if (this.disposed || max <= 0 || this.warmUpSource is null)
+        if (disposed || max <= 0 || warmUpSource is null)
         {
             return;
         }
 
         // 1) 已经把纹理建上了的：拿到句柄（= 注入完成）就出队
         var now = DateTime.Now;
-        for (var i = this.warmUpPending.Count - 1; i >= 0 && max > 0; i--)
+        for (var i = warmUpPending.Count - 1; i >= 0 && max > 0; i--)
         {
-            var (entry, since) = this.warmUpPending[i];
+            var (entry, since) = warmUpPending[i];
 
-            if (this.TryGetHandle(entry, out _))
+            if (TryGetHandle(entry, out _))
             {
-                this.warmUpPending.RemoveAt(i);
+                warmUpPending.RemoveAt(i);
                 max--;
             }
             else if (now - since > WarmUpGiveUp)
             {
-                this.warmUpPending.RemoveAt(i);   // 解不出来（文件坏 / 格式不支持）：别再等
+                warmUpPending.RemoveAt(i);   // 解不出来（文件坏 / 格式不支持）：别再等
             }
         }
 
         // 2) 从清单里取新的开始建纹理
-        while (max > 0 && this.warmUpCursor < this.warmUpSource.Count)
+        while (max > 0 && warmUpCursor < warmUpSource.Count)
         {
-            var entry = this.warmUpSource[this.warmUpCursor++];
-            if (this.EnsureTexture(entry))
+            var entry = warmUpSource[warmUpCursor++];
+            if (EnsureTexture(entry))
             {
-                this.warmUpPending.Add((entry, now));
+                warmUpPending.Add((entry, now));
             }
 
             max--;
         }
 
-        if (this.warmUpCursor >= this.warmUpSource.Count && this.warmUpPending.Count == 0)
+        if (warmUpCursor >= warmUpSource.Count && warmUpPending.Count == 0)
         {
-            this.warmUpSource = null;   // 排完了，收工（但 warmUpQueued 仍为 true，不再重建索引）
+            warmUpSource = null;   // 排完了，收工（但 warmUpQueued 仍为 true，不再重建索引）
         }
     }
 
     public void Dispose()
     {
-        this.disposed = true;
+        disposed = true;
 
         try
         {
-            this.cache.Flush();
+            cache.Flush();
         }
         catch
         {
@@ -294,7 +326,7 @@ internal sealed class IconStore : IDisposable
         }
 
         // ① 先把注入进卫月缓存的条目撤回（只撤我们自己放进去的那些）
-        foreach (var (key, instance) in this.injected)
+        foreach (var (key, instance) in injected)
         {
             try
             {
@@ -306,15 +338,15 @@ internal sealed class IconStore : IDisposable
             }
         }
 
-        this.injected.Clear();
+        injected.Clear();
 
         // 我们的纹理归卫月的「插件作用域」管（TextureManagerPluginScoped 在卸载时会统一释放）：
         // 这里只丢掉引用，**不自己 Dispose**——直接 Dispose 会和渲染线程抢，也容易双重释放。
-        this.wraps.Clear();
-        this.loading.Clear();
-        this.warmUpSource = null;
-        this.warmUpQueued = true;
-        this.warmUpPending.Clear();
+        wraps.Clear();
+        loading.Clear();
+        warmUpSource = null;
+        warmUpQueued = true;
+        warmUpPending.Clear();
     }
 
     private void TryInject(InstalledPluginEntry entry, IDalamudTextureWrap wrap)
@@ -323,7 +355,7 @@ internal sealed class IconStore : IDisposable
         {
             if (PluginIconLookup.TryInject(entry, wrap, out var key, out var instance) && instance is not null)
             {
-                this.injected[key] = instance;
+                injected[key] = instance;
             }
         }
         catch

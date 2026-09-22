@@ -3,7 +3,7 @@ using System.Net;
 namespace FireGaze.RepoAudit;
 
 /// <summary>
-/// 图标下载：自己的 HttpClient + 体检同款的多线路（直连 / 镜像），只取二进制，不做 JSON 校验。
+///     图标下载：自己的 HttpClient + 体检同款的多线路（直连 / 镜像），只取二进制，不做 JSON 校验。
 /// </summary>
 /// <remarks>
 /// 为什么不借卫月的下载器：卫月的图标缓存**不落盘**（重开游戏全部重下），
@@ -23,10 +23,14 @@ internal static class IconDownloader
         Timeout = Timeout.InfiniteTimeSpan,
     });
 
-    /// <summary>下载结果：<paramref name="Bytes"/> 非空 = 成功。</summary>
+    /// <summary>
+    ///     下载结果：<paramref name="Bytes"/> 非空 = 成功。
+    /// </summary>
     public readonly record struct Result(byte[]? Bytes, string? ContentType, int Status, string? Error);
 
-    /// <summary>下载一张图标（带 15 秒超时；GitHub 地址会自动加镜像竞速）。</summary>
+    /// <summary>
+    ///     下载一张图标（带 15 秒超时；GitHub 地址会自动加镜像竞速）。
+    /// </summary>
     public static async Task<Result> FetchAsync(string url, CancellationToken cancellationToken)
     {
         var channels = RepoScanner.BuildChannels(url);

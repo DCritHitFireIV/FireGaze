@@ -4,7 +4,9 @@ using FireGaze.RepoAudit;
 
 namespace FireGaze.UI;
 
-/// <summary>界面小工具。</summary>
+/// <summary>
+///     界面小工具。
+/// </summary>
 internal static class UiHelpers
 {
     public static readonly Vector4 Muted = new(0.65f, 0.65f, 0.65f, 1f);
@@ -25,7 +27,9 @@ internal static class UiHelpers
         _ => Muted,
     };
 
-    /// <summary>列表默认按严重度排序（死链 → 内容不合规 → 拒绝访问 → 连接失败 → 空 → 未检查 → 可用）。</summary>
+    /// <summary>
+    ///     列表默认按严重度排序（死链 → 内容不合规 → 拒绝访问 → 连接失败 → 空 → 未检查 → 可用）。
+    /// </summary>
     public static int SeverityRank(RepoStatus status) => status switch
     {
         RepoStatus.Dead => 0,
@@ -51,7 +55,9 @@ internal static class UiHelpers
         ImGui.PopStyleColor();
     }
 
-    /// <summary>把长 URL 缩成「头…尾」的形式。</summary>
+    /// <summary>
+    ///     把长 URL 缩成「头…尾」的形式。
+    /// </summary>
     public static string Shorten(string url, int max = 78)
     {
         if (url.Length <= max)
@@ -65,9 +71,9 @@ internal static class UiHelpers
     }
 
     /// <summary>
-    /// 算「头…尾」要保留几个字符。下限不能超过文本长度本身
-    /// —— 短文本 + 窄列时 Math.Clamp(min &gt; max) 会抛 ArgumentException，
-    /// 2026-09-22 就是这个把「参与翻译」整窗炸掉。抽出来是为了能在 fgtest 里离线跑。
+    ///     算「头…尾」要保留几个字符。下限不能超过文本长度本身
+    ///     —— 短文本 + 窄列时 Math.Clamp(min &gt; max) 会抛 ArgumentException，
+    ///     2026-09-22 就是这个把「参与翻译」整窗炸掉。抽出来是为了能在 fgtest 里离线跑。
     /// </summary>
     internal static int KeepCount(int length, float available, float full)
     {
@@ -79,7 +85,9 @@ internal static class UiHelpers
         return Math.Clamp((int)(length * (available / full)) - 2, Math.Min(8, length), length);
     }
 
-    /// <summary>带悬停提示的截断文本。</summary>
+    /// <summary>
+    ///     带悬停提示的截断文本。
+    /// </summary>
     public static void Truncated(string text, int max, string? tooltip = null)
     {
         ImGui.TextUnformatted(Shorten(text, max));
@@ -94,8 +102,8 @@ internal static class UiHelpers
     }
 
     /// <summary>
-    /// 按当前单元格宽度显示文本：放得下就**完整显示**，放不下才用「头…尾」省略。
-    /// 表格列宽可以拖，所以拖宽之后应该看得到完整内容，而不是不管多宽都写死省略。
+    ///     按当前单元格宽度显示文本：放得下就**完整显示**，放不下才用「头…尾」省略。
+    ///     表格列宽可以拖，所以拖宽之后应该看得到完整内容，而不是不管多宽都写死省略。
     /// </summary>
     public static void Fitted(string text, string? tooltip = null)
     {

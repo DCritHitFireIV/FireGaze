@@ -1,16 +1,17 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FireGaze.RepoAudit;
 
 /// <summary>
-/// 插件图标的**落盘缓存**（卫月自己不落盘：每次重开游戏都要重新下载）。
+///     插件图标的**落盘缓存**（卫月自己不落盘：每次重开游戏都要重新下载）。
 /// </summary>
 /// <remarks>
 /// 目录结构：<c>&lt;配置目录&gt;/icons/</c>
 /// <list type="bullet">
-/// <item><c>icons.json</c>：InternalName → { Url, File, SavedUtc }；</item>
+/// <item><c>icons.json</c>：InternalName → { URL, File, SavedUTC }；</item>
 /// <item>图标文件本身：文件名 = 图标地址的 SHA-1 前 16 位 + 扩展名（同一张图被多个插件引用时只存一份）。</item>
 /// </list>
 /// 地址变了（作者换了新图标）→ 旧文件作废，下次重新下载。所有公开方法都可从后台线程调用（内部加锁）。
@@ -19,11 +20,14 @@ internal sealed class IconCache
 {
     private sealed class Entry
     {
-        public string Url { get; set; } = string.Empty;
+        [JsonPropertyName("Url")]
+        public string URL { get; set; } = string.Empty;
 
+        [JsonPropertyName("File")]
         public string File { get; set; } = string.Empty;
 
-        public DateTime SavedUtc { get; set; }
+        [JsonPropertyName("SavedUtc")]
+        public DateTime SavedUTC { get; set; }
     }
 
     private readonly string dir;
@@ -34,45 +38,51 @@ internal sealed class IconCache
 
     public IconCache(string configDirectory)
     {
-        this.dir = Path.Combine(configDirectory, "icons");
-        this.indexPath = Path.Combine(this.dir, "icons.json");
-        this.Load();
+        dir = Path.Combine(configDirectory, "icons");
+        indexPath = Path.Combine(dir, "icons.json");
+        Load();
     }
 
-    /// <summary>缓存目录（界面上写给用户看 / 手动清理用）。</summary>
-    public string Directory => this.dir;
+    /// <summary>
+    ///     缓存目录（界面上写给用户看 / 手动清理用）。
+    /// </summary>
+    public string Directory => dir;
 
-    /// <summary>缓存里有多少个插件的图标。</summary>
+    /// <summary>
+    ///     缓存里有多少个插件的图标。
+    /// </summary>
     public int Count
     {
         get
         {
-            lock (this.gate)
+            lock (gate)
             {
-                return this.index.Count;
+                return index.Count;
             }
         }
     }
 
-    /// <summary>这个插件的图标在缓存里吗（地址还必须对得上）。</summary>
+    /// <summary>
+    ///     这个插件的图标在缓存里吗（地址还必须对得上）。
+    /// </summary>
     public bool TryGetPath(string internalName, string url, out string path)
     {
         path = string.Empty;
 
-        lock (this.gate)
+        lock (gate)
         {
-            if (!this.index.TryGetValue(internalName, out var entry)
-                || !string.Equals(entry.Url, url, StringComparison.Ordinal))
+            if (!index.TryGetValue(internalName, out var entry)
+                || !string.Equals(entry.URL, url, StringComparison.Ordinal))
             {
                 return false;
             }
 
-            var full = Path.Combine(this.dir, entry.File);
+            var full = Path.Combine(dir, entry.File);
             if (!File.Exists(full))
             {
                 // 文件被人删了 → 索引也清掉，免得每次都说"有"
-                this.index.Remove(internalName);
-                this.dirty = true;
+                index.Remove(internalName);
+                dirty = true;
                 return false;
             }
 
@@ -81,24 +91,26 @@ internal sealed class IconCache
         }
     }
 
-    /// <summary>把下载到的字节写进缓存（后台线程可调）。</summary>
+    /// <summary>
+    ///     把下载到的字节写进缓存（后台线程可调）。
+    /// </summary>
     public bool Save(string internalName, string url, byte[] bytes, string extension)
     {
         try
         {
-            lock (this.gate)
+            lock (gate)
             {
-                System.IO.Directory.CreateDirectory(this.dir);
+                System.IO.Directory.CreateDirectory(dir);
 
                 var name = Hash(url) + extension;
-                File.WriteAllBytes(Path.Combine(this.dir, name), bytes);
-                this.index[internalName] = new Entry
+                File.WriteAllBytes(Path.Combine(dir, name), bytes);
+                index[internalName] = new Entry
                 {
-                    Url = url,
+                    URL = url,
                     File = name,
-                    SavedUtc = DateTime.UtcNow,
+                    SavedUTC = DateTime.UtcNow,
                 };
-                this.dirty = true;
+                dirty = true;
             }
 
             return true;
@@ -109,28 +121,30 @@ internal sealed class IconCache
         }
     }
 
-    /// <summary>把索引写盘（攒几次一起写，失败只当没写）。</summary>
+    /// <summary>
+    ///     把索引写盘（攒几次一起写，失败只当没写）。
+    /// </summary>
     public void Flush()
     {
         try
         {
-            lock (this.gate)
+            lock (gate)
             {
-                if (!this.dirty)
+                if (!dirty)
                 {
                     return;
                 }
 
-                System.IO.Directory.CreateDirectory(this.dir);
+                System.IO.Directory.CreateDirectory(dir);
                 var json = JsonSerializer.Serialize(
-                    this.index.ToDictionary(x => x.Key, x => x.Value, StringComparer.Ordinal),
+                    index.ToDictionary(x => x.Key, x => x.Value, StringComparer.Ordinal),
                     new JsonSerializerOptions { WriteIndented = false });
 
                 // 先写临时文件再替换：中途断电不会留下半个 JSON
-                var tmp = this.indexPath + ".tmp";
+                var tmp = indexPath + ".tmp";
                 File.WriteAllText(tmp, json, Encoding.UTF8);
-                File.Move(tmp, this.indexPath, true);
-                this.dirty = false;
+                File.Move(tmp, indexPath, true);
+                dirty = false;
             }
         }
         catch
@@ -143,13 +157,14 @@ internal sealed class IconCache
     {
         try
         {
-            if (!File.Exists(this.indexPath))
+            if (!File.Exists(indexPath))
             {
                 return;
             }
 
             var parsed = JsonSerializer.Deserialize<Dictionary<string, Entry>>(
-                File.ReadAllText(this.indexPath, Encoding.UTF8));
+                File.ReadAllText(indexPath, Encoding.UTF8),
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (parsed is null)
             {
@@ -160,14 +175,14 @@ internal sealed class IconCache
             {
                 if (!string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(value?.File))
                 {
-                    this.index[key] = value!;
+                    index[key] = value!;
                 }
             }
         }
         catch
         {
             // 索引坏了就当没有缓存（下次下载会覆盖）
-            this.index.Clear();
+            index.Clear();
         }
     }
 
@@ -177,7 +192,9 @@ internal sealed class IconCache
         return Convert.ToHexString(bytes)[..16].ToLowerInvariant();
     }
 
-    /// <summary>从 Content-Type / 地址后缀猜扩展名（纹理解码看内容，扩展名只是给人看的）。</summary>
+    /// <summary>
+    ///     从 Content-Type / 地址后缀猜扩展名（纹理解码看内容，扩展名只是给人看的）。
+    /// </summary>
     public static string ExtensionFor(string? contentType, string url)
     {
         var type = contentType?.Split(';')[0].Trim().ToLowerInvariant() ?? string.Empty;
@@ -208,7 +225,9 @@ internal sealed class IconCache
         return ".img";
     }
 
-    /// <summary>内容像不像图片（防止把 404 页面 / HTML 错误页当图标存下来）。</summary>
+    /// <summary>
+    ///     内容像不像图片（防止把 404 页面 / HTML 错误页当图标存下来）。
+    /// </summary>
     public static bool LooksLikeImage(byte[] bytes, string? contentType)
     {
         if (bytes.Length < 8)

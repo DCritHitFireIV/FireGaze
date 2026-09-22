@@ -5,8 +5,10 @@ using FireGaze.RepoAudit;
 
 namespace FireGaze.UI;
 
-/// <summary>「仓库体检」页：扫描全部第三方仓库 → 展示问题 → 停用 / 删除（带备份与撤回）。</summary>
-internal sealed class RepoAuditTab
+/// <summary>
+///     「仓库体检」页：扫描全部第三方仓库 → 展示问题 → 停用 / 删除（带备份与撤回）。
+/// </summary>
+internal sealed partial class RepoAuditTab
 {
     private readonly Plugin plugin;
     private readonly object gate = new();
@@ -45,10 +47,14 @@ internal sealed class RepoAuditTab
     private bool resetSortRequested;
     private readonly Dictionary<string, ImTextureID> iconHandles = new(StringComparer.Ordinal);
 
-    /// <summary>本帧已经查过、确认"缓存里没有"的图标（避免同一帧反复反射；每帧清空）。</summary>
+    /// <summary>
+    ///     本帧已经查过、确认"缓存里没有"的图标（避免同一帧反复反射；每帧清空）。
+    /// </summary>
     private readonly HashSet<string> iconPeekMisses = new(StringComparer.Ordinal);
 
-    /// <summary>本轮 Draw 计时（超过 50ms 会在日志里点名，方便定位是谁在卡）。</summary>
+    /// <summary>
+    ///     本轮 Draw 计时（超过 50ms 会在日志里点名，方便定位是谁在卡）。
+    /// </summary>
     private readonly System.Diagnostics.Stopwatch drawWatch = new();
     private DateTime lastSlowDrawLog = DateTime.MinValue;
 
@@ -67,25 +73,39 @@ internal sealed class RepoAuditTab
     private readonly List<InstalledPluginEntry> iconInFlight = [];
     private readonly HashSet<string> iconDead = new(StringComparer.Ordinal);
 
-    /// <summary>后台下载线程完成的队列（UI 线程每帧取；不直接碰 List）。</summary>
+    /// <summary>
+    ///     后台下载线程完成的队列（UI 线程每帧取；不直接碰 List）。
+    /// </summary>
     private readonly System.Collections.Concurrent.ConcurrentQueue<InstalledPluginEntry> iconReady = new();
 
-    /// <summary>后台下载失败的队列。</summary>
+    /// <summary>
+    ///     后台下载失败的队列。
+    /// </summary>
     private readonly System.Collections.Concurrent.ConcurrentQueue<InstalledPluginEntry> iconFailed = new();
 
-    /// <summary>同时在飞几个（用户要求比以前快：8）。</summary>
+    /// <summary>
+    ///     同时在飞几个（用户要求比以前快：8）。
+    /// </summary>
     private const int IconConcurrency = 8;
 
-    /// <summary>两次发动之间至少隔多久（毫秒）。</summary>
+    /// <summary>
+    ///     两次发动之间至少隔多久（毫秒）。
+    /// </summary>
     private const int IconKickMs = 100;
 
-    /// <summary>收尾期阈值：待发队列空了、在飞不超过这么多个时，给它们一个短限时。</summary>
+    /// <summary>
+    ///     收尾期阈值：待发队列空了、在飞不超过这么多个时，给它们一个短限时。
+    /// </summary>
     private const int IconTailMax = 3;
 
-    /// <summary>收尾期最多再等这么久（别为了最后 1～2 个图标干等一分钟）。</summary>
+    /// <summary>
+    ///     收尾期最多再等这么久（别为了最后 1～2 个图标干等一分钟）。
+    /// </summary>
     private static readonly TimeSpan IconTailGrace = TimeSpan.FromSeconds(4);
 
-    /// <summary>至少已经发动过这么多个才启用收尾期（一两个图标的小批量不适用，免得把正常的慢请求也砍了）。</summary>
+    /// <summary>
+    ///     至少已经发动过这么多个才启用收尾期（一两个图标的小批量不适用，免得把正常的慢请求也砍了）。
+    /// </summary>
     private const int IconTailMinRequested = 4;
 
     private bool iconCheckDone;
@@ -100,7 +120,9 @@ internal sealed class RepoAuditTab
     private DateTime nextIconKick;
     private string? iconDownloadLine;
 
-    /// <summary>最近一次「检查缺图标」的完整名单（状态行悬停时展开）。</summary>
+    /// <summary>
+    ///     最近一次「检查缺图标」的完整名单（状态行悬停时展开）。
+    /// </summary>
     private List<string>? iconMissingNames;
     private List<string>? iconDeadReport;
     private long statusVersion;
@@ -110,18 +132,18 @@ internal sealed class RepoAuditTab
         this.plugin = plugin;
 
         // 装 / 卸 / 启停插件后，已安装索引要重算（内存操作，不联网）
-        plugin.PluginInterface.ActivePluginsChanged += _ => this.installedIndexStale = true;
+        plugin.PluginInterface.ActivePluginsChanged += _ => installedIndexStale = true;
     }
 
     public void Draw()
     {
-        this.drawWatch.Restart();
+        drawWatch.Restart();
 
         // 打开本页就能看到库链清单（状态 = 未检查），不必先跑一次网络扫描——「装了没」是离线数据
-        this.EnsureList();
-        this.EnsureInstalledIndex();
-        this.FillInstalledCounts();
-        var tSetup = this.drawWatch.ElapsedMilliseconds;
+        EnsureList();
+        EnsureInstalledIndex();
+        FillInstalledCounts();
+        var tSetup = drawWatch.ElapsedMilliseconds;
 
         // ---------------- 说明（压到两行以内） ----------------
         ImGui.TextWrapped("扫描全部第三方仓库，检查链接是否失效、链接是否合规（与卫月同款校验）");
@@ -129,19 +151,19 @@ internal sealed class RepoAuditTab
 
         // ---------------- 扫描控制 ----------------
         // 图标下载进行中时，体检按钮就地置灰（别再画第二个同名按钮）
-        var scanBlocked = this.iconDownloadRunning;
+        var scanBlocked = iconDownloadRunning;
         if (scanBlocked)
         {
             ImGui.BeginDisabled();
         }
 
-        if (this.scanning)
+        if (scanning)
         {
             if (ImGui.Button("取消扫描###CancelScan"))
             {
                 try
                 {
-                    this.cancellation?.Cancel();
+                    cancellation?.Cancel();
                 }
                 catch
                 {
@@ -151,7 +173,7 @@ internal sealed class RepoAuditTab
         }
         else if (ImGui.Button("开始体检###StartScan"))
         {
-            this.StartScan();
+            StartScan();
         }
 
         if (scanBlocked)
@@ -164,11 +186,11 @@ internal sealed class RepoAuditTab
         }
 
         ImGui.SameLine();
-        var includeDisabled = this.plugin.Config.ScanIncludeDisabled;
+        var includeDisabled = plugin.Config.ScanIncludeDisabled;
         if (ImGui.Checkbox("扫描包含已停用仓库###IncDisabled", ref includeDisabled))
         {
-            this.plugin.Config.ScanIncludeDisabled = includeDisabled;
-            this.plugin.SaveConfig();
+            plugin.Config.ScanIncludeDisabled = includeDisabled;
+            plugin.SaveConfig();
         }
 
         if (ImGui.IsItemHovered())
@@ -179,18 +201,18 @@ internal sealed class RepoAuditTab
         // ---------------- 进度 / 统计 ----------------
         int d, t, ok, dead, invalid, blocked, unreachable, disabled, unknown;
         bool scan;
-        lock (this.gate)
+        lock (gate)
         {
-            d = this.done;
-            t = this.total;
-            ok = this.okCount;
-            dead = this.deadCount;
-            invalid = this.invalidCount;
-            blocked = this.blockedCount;
-            unreachable = this.unreachableCount;
-            disabled = this.disabledCount;
-            unknown = this.unknownCount;
-            scan = this.scanning;
+            d = done;
+            t = total;
+            ok = okCount;
+            dead = deadCount;
+            invalid = invalidCount;
+            blocked = blockedCount;
+            unreachable = unreachableCount;
+            disabled = disabledCount;
+            unknown = unknownCount;
+            scan = scanning;
         }
 
         if (scan && t > 0)
@@ -201,11 +223,11 @@ internal sealed class RepoAuditTab
         }
         else if (t > 0)
         {
-            var index = this.installedIndex;
+            var index = installedIndex;
             string machineGroup;
             if (index is { Available: true })
             {
-                machineGroup = $"已安装 {this.installedInUseCache} · 未安装 {this.installedUnusedCache}";
+                machineGroup = $"已安装 {installedInUseCache} · 未安装 {installedUnusedCache}";
             }
             else
             {
@@ -217,10 +239,10 @@ internal sealed class RepoAuditTab
                 + $"连接失败 {unreachable}" + (unknown > 0 ? $" · 未检查 {unknown}" : string.Empty)
                 + $" ｜ {machineGroup} ｜ 已停用 {disabled}");
 
-            if (this.plugin.Config.LastScanUtc != default)
+            if (plugin.Config.LastScanUTC != default)
             {
                 ImGui.TextDisabled(
-                    $"上次体检：{this.plugin.Config.LastScanUtc.ToLocalTime():yyyy-MM-dd HH:mm} · 用时 {this.lastScanDuration.TotalSeconds:0}s");
+                    $"上次体检：{plugin.Config.LastScanUTC.ToLocalTime():yyyy-MM-dd HH:mm} · 用时 {lastScanDuration.TotalSeconds:0}s");
             }
         }
         else
@@ -232,24 +254,24 @@ internal sealed class RepoAuditTab
 
         // ---------------- 筛选 + 搜索 ----------------
         ImGui.Text("显示");
-        this.FilterRadio("problems", "有问题的");
-        this.FilterRadio("all", "全部");
-        this.FilterRadio("unreachable", "连接失败");
-        this.FilterRadio("disabled", "已停用");
-        this.FilterRadio("ok", "可用");
+        FilterRadio("problems", "有问题的");
+        FilterRadio("all", "全部");
+        FilterRadio("unreachable", "连接失败");
+        FilterRadio("disabled", "已停用");
+        FilterRadio("ok", "可用");
 
         // 第二行：与健康度正交的两个开关（使用情况 / 图标展开）
-        var indexReady = this.installedIndex is { Available: true };
+        var indexReady = installedIndex is { Available: true };
 
         if (!indexReady)
         {
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Checkbox("只看有插件的###OnlyWithPlugins", ref this.onlyWithPlugins) && this.onlyWithPlugins)
+        if (ImGui.Checkbox("只看有插件的###OnlyWithPlugins", ref onlyWithPlugins) && onlyWithPlugins)
         {
-            this.onlyUnused = false;
-            this.snapshotDirty = true;
+            onlyUnused = false;
+            snapshotDirty = true;
         }
 
         if (ImGui.IsItemHovered())
@@ -260,10 +282,10 @@ internal sealed class RepoAuditTab
         }
 
         ImGui.SameLine();
-        if (ImGui.Checkbox("只看未安装的###OnlyUnused", ref this.onlyUnused) && this.onlyUnused)
+        if (ImGui.Checkbox("只看未安装的###OnlyUnused", ref onlyUnused) && onlyUnused)
         {
-            this.onlyWithPlugins = false;
-            this.snapshotDirty = true;
+            onlyWithPlugins = false;
+            snapshotDirty = true;
         }
 
         if (ImGui.IsItemHovered())
@@ -279,11 +301,11 @@ internal sealed class RepoAuditTab
         }
 
         ImGui.SameLine();
-        var showIcons = this.plugin.Config.ShowInstalledIcons;
+        var showIcons = plugin.Config.ShowInstalledIcons;
         if (ImGui.Checkbox("显示插件图标###ShowIcons", ref showIcons))
         {
-            this.plugin.Config.ShowInstalledIcons = showIcons;
-            this.plugin.SaveConfig();
+            plugin.Config.ShowInstalledIcons = showIcons;
+            plugin.SaveConfig();
         }
 
         if (ImGui.IsItemHovered())
@@ -292,11 +314,11 @@ internal sealed class RepoAuditTab
         }
 
         ImGui.SameLine();
-        var iconCacheEnabled = this.plugin.Config.IconCacheEnabled;
+        var iconCacheEnabled = plugin.Config.IconCacheEnabled;
         if (ImGui.Checkbox("启用图标缓存###IconCache", ref iconCacheEnabled))
         {
-            this.plugin.Config.IconCacheEnabled = iconCacheEnabled;
-            this.plugin.SaveConfig();
+            plugin.Config.IconCacheEnabled = iconCacheEnabled;
+            plugin.SaveConfig();
         }
 
         if (ImGui.IsItemHovered())
@@ -311,15 +333,15 @@ internal sealed class RepoAuditTab
         ImGui.TextDisabled("│");
         ImGui.SameLine();
 
-        var canCheck = indexReady && !this.scanning && !this.iconDownloadRunning;
+        var canCheck = indexReady && !scanning && !iconDownloadRunning;
         if (!canCheck)
         {
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button(this.iconCheckDone ? "重新检查缺图标###IconCheck" : "检查缺图标###IconCheck"))
+        if (ImGui.Button(iconCheckDone ? "重新检查缺图标###IconCheck" : "检查缺图标###IconCheck"))
         {
-            this.RunIconCheck();
+            RunIconCheck();
         }
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
@@ -338,23 +360,23 @@ internal sealed class RepoAuditTab
         ImGui.SameLine();
 
         // 第二步：看过清单后由用户决定下不下
-        var canDownload = indexReady && !this.scanning && this.iconCheckDone;
+        var canDownload = indexReady && !scanning && iconCheckDone;
         if (!canDownload)
         {
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button(this.iconDownloadRunning
+        if (ImGui.Button(iconDownloadRunning
                 ? "停止下载###IconDownload"
-                : $"下载图标（{this.iconMissing.Count}）###IconDownload"))
+                : $"下载图标（{iconMissing.Count}）###IconDownload"))
         {
-            if (this.iconDownloadRunning)
+            if (iconDownloadRunning)
             {
-                this.FinishIconDownload();
+                FinishIconDownload();
             }
             else
             {
-                this.StartIconDownload();
+                StartIconDownload();
             }
         }
 
@@ -362,7 +384,7 @@ internal sealed class RepoAuditTab
         {
             ImGui.SetTooltip(
                 (indexReady ? string.Empty : "插件数据不可用，暂时不能下载。\n")
-                + (this.iconCheckDone ? string.Empty : "先点「检查缺图标」，拿到清单再决定。\n")
+                + (iconCheckDone ? string.Empty : "先点「检查缺图标」，拿到清单再决定。\n")
                 + "把上一步查出来缺的那些图标下下来（直连 + 镜像竞速，同时最多 8 个）。\n"
                 + "下到的图标会存到本地（配置目录 /icons），重开游戏不用重下，\n"
                 + "插件安装器里也能直接用本地图。\n"
@@ -374,7 +396,7 @@ internal sealed class RepoAuditTab
             ImGui.EndDisabled();
         }
 
-        if (this.installedIndex is { Available: false })
+        if (installedIndex is { Available: false })
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
@@ -383,9 +405,9 @@ internal sealed class RepoAuditTab
 
         // ---------------- 搜索（贴着下面的列表） ----------------
         ImGui.SetNextItemWidth(220);
-        if (ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref this.search, 128))
+        if (ImGui.InputTextWithHint("###RepoSearch", "搜索仓库地址…", ref search, 128))
         {
-            this.snapshotDirty = true;
+            snapshotDirty = true;
         }
 
         if (ImGui.IsItemHovered())
@@ -396,41 +418,41 @@ internal sealed class RepoAuditTab
         List<RepoAuditItem> snapshot;
         int selectedCount;
         int selectedHidden;
-        lock (this.gate)
+        lock (gate)
         {
-            snapshot = this.Filtered();
-            selectedCount = this.selected.Count;
-            var visible = new HashSet<string>(snapshot.Select(x => x.Url), StringComparer.Ordinal);
-            selectedHidden = this.selected.Count(url => !visible.Contains(url));
+            snapshot = Filtered();
+            selectedCount = selected.Count;
+            var visible = new HashSet<string>(snapshot.Select(x => x.URL), StringComparer.Ordinal);
+            selectedHidden = selected.Count(url => !visible.Contains(url));
         }
 
-        var tFilter = this.drawWatch.ElapsedMilliseconds;
+        var tFilter = drawWatch.ElapsedMilliseconds;
 
         // ---------------- 操作工具条 ----------------
-        this.DrawActionBar(selectedCount, selectedHidden, snapshot);
+        DrawActionBar(selectedCount, selectedHidden, snapshot);
 
         // ---------------- 状态行（只在有事件结果时出现；图标检查进行中带进度条） ----------------
-        if (this.iconDownloadRunning && this.iconDownloadTotal > 0)
+        if (iconDownloadRunning && iconDownloadTotal > 0)
         {
             ImGui.ProgressBar(
-                (float)this.iconDownloadGot / this.iconDownloadTotal,
+                (float)iconDownloadGot / iconDownloadTotal,
                 new Vector2(120, 0));
             ImGui.SameLine();
-            UiHelpers.ColoredWrapped(UiHelpers.Muted, this.iconDownloadLine ?? string.Empty);
+            UiHelpers.ColoredWrapped(UiHelpers.Muted, iconDownloadLine ?? string.Empty);
         }
-        else if (!string.IsNullOrEmpty(this.statusMessage))
+        else if (!string.IsNullOrEmpty(statusMessage))
         {
-            UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.statusMessage);
+            UiHelpers.ColoredWrapped(statusIsError ? UiHelpers.Bad : UiHelpers.Muted, statusMessage);
 
             // 缺图标名单在状态行里只能给前几个，悬停看全部（IC2-06）
-            if (this.iconMissingNames is { Count: > 0 } names && ImGui.IsItemHovered())
+            if (iconMissingNames is { Count: > 0 } names && ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip($"缺图标 {names.Count} 个：\n" + string.Join("、", names));
             }
         }
 
         // ---------------- 结果表 ----------------
-        this.TickIconDownload();
+        TickIconDownload();
 
         var tableHeight = MathF.Max(120f, ImGui.GetContentRegionAvail().Y - 6f);
         var tableFlags = ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
@@ -485,9 +507,9 @@ internal sealed class RepoAuditTab
             var specs = ImGui.TableGetSortSpecs();
             if (!specs.IsNull)
             {
-                if (this.resetSortRequested)
+                if (resetSortRequested)
                 {
-                    this.resetSortRequested = false;
+                    resetSortRequested = false;
                     specs.SpecsCount = 1;
                     specs.Specs[0] = new ImGuiTableColumnSortSpecs
                     {
@@ -511,11 +533,11 @@ internal sealed class RepoAuditTab
                     };
                     var newDescending = spec.SortDirection == ImGuiSortDirection.Descending;
 
-                    if (newKey != this.sortKey || newDescending != this.sortDescending)
+                    if (newKey != sortKey || newDescending != sortDescending)
                     {
-                        this.sortKey = newKey;
-                        this.sortDescending = newDescending;
-                        this.snapshotDirty = true;
+                        sortKey = newKey;
+                        sortDescending = newDescending;
+                        snapshotDirty = true;
                     }
                 }
             }
@@ -526,19 +548,19 @@ internal sealed class RepoAuditTab
 
             while (clipper.Step())
             {
-                this.iconPeekMisses.Clear();
+                iconPeekMisses.Clear();
 
                 for (var rowIndex = clipper.DisplayStart; rowIndex < clipper.DisplayEnd; rowIndex++)
                 {
                     var item = snapshot[rowIndex];
 
                     // 只对看得见的行做只读检查（不下载）
-                    this.PeekVisibleIcons(item);
+                    PeekVisibleIcons(item);
 
                     ImGui.TableNextRow();
                     ImGui.TableNextColumn();
 
-                var isSelected = this.selected.Contains(item.Url);
+                var isSelected = selected.Contains(item.URL);
 
                 // 未体检的行不可勾选：没有体检结论就没有可依据的处理
                 if (!item.IsSelectable)
@@ -546,15 +568,15 @@ internal sealed class RepoAuditTab
                     ImGui.BeginDisabled();
                 }
 
-                if (ImGui.Checkbox("##sel-" + item.Url, ref isSelected))
+                if (ImGui.Checkbox("##sel-" + item.URL, ref isSelected))
                 {
                     if (isSelected)
                     {
-                        this.selected.Add(item.Url);
+                        selected.Add(item.URL);
                     }
                     else
                     {
-                        this.selected.Remove(item.Url);
+                        selected.Remove(item.URL);
                     }
                 }
 
@@ -577,7 +599,7 @@ internal sealed class RepoAuditTab
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip(this.StatusTooltip(item));
+                    ImGui.SetTooltip(StatusTooltip(item));
                 }
 
                 ImGui.TableNextColumn();
@@ -586,24 +608,24 @@ internal sealed class RepoAuditTab
                     ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
                 }
 
-                UiHelpers.Fitted(item.Url, item.Url + (string.IsNullOrEmpty(item.Note) ? string.Empty : "\n" + item.Note));
+                UiHelpers.Fitted(item.URL, item.URL + (string.IsNullOrEmpty(item.Note) ? string.Empty : "\n" + item.Note));
                 if (!item.IsEnabled)
                 {
                     ImGui.PopStyleColor();
                 }
 
-                if (ImGui.BeginPopupContextItem("##ctx-" + item.Url))
+                if (ImGui.BeginPopupContextItem("##ctx-" + item.URL))
                 {
                     if (ImGui.MenuItem("复制链接"))
                     {
-                        ImGui.SetClipboardText(item.Url);
+                        ImGui.SetClipboardText(item.URL);
                     }
 
                     if (ImGui.MenuItem("在浏览器打开"))
                     {
                         try
                         {
-                            Process.Start(new ProcessStartInfo { FileName = item.Url, UseShellExecute = true });
+                            Process.Start(new ProcessStartInfo { FileName = item.URL, UseShellExecute = true });
                         }
                         catch
                         {
@@ -615,7 +637,7 @@ internal sealed class RepoAuditTab
                 }
 
                 ImGui.TableNextColumn();
-                this.DrawInstalledCell(item, indexReady);
+                DrawInstalledCell(item, indexReady);
 
                 ImGui.TableNextColumn();
                 if (string.IsNullOrEmpty(item.FirstSeen))
@@ -642,7 +664,7 @@ internal sealed class RepoAuditTab
                     ImGui.TableNextColumn();
                     ImGui.TableNextColumn();
                     ImGui.TableNextColumn();
-                    this.DrawInstalledIcons(item);
+                    DrawInstalledIcons(item);
                     ImGui.TableNextColumn();
                     ImGui.TableNextColumn();
                     }
@@ -652,1455 +674,54 @@ internal sealed class RepoAuditTab
             ImGui.EndTable();
         }
 
-        this.DrawDeleteConfirmPopup();
+        DrawDeleteConfirmPopup();
 
         // 自计时：本页一帧超过 50ms 就在日志里点名（定位卡顿用，最多每 5 秒报一次）；带三段细分
-        this.drawWatch.Stop();
-        var tTotal = this.drawWatch.ElapsedMilliseconds;
+        drawWatch.Stop();
+        var tTotal = drawWatch.ElapsedMilliseconds;
         if (tTotal > 50
-            && DateTime.Now - this.lastSlowDrawLog > TimeSpan.FromSeconds(5))
+            && DateTime.Now - lastSlowDrawLog > TimeSpan.FromSeconds(5))
         {
-            this.lastSlowDrawLog = DateTime.Now;
+            lastSlowDrawLog = DateTime.Now;
             Plugin.Log.Warning(
-                $"[FireGaze] 仓库体检页这一帧用了 {tTotal}ms（{this.items.Count} 个库"
+                $"[FireGaze] 仓库体检页这一帧用了 {tTotal}ms（{items.Count} 个库"
                 + $" · 准备 {tSetup}ms / 控件 {tFilter - tSetup}ms / 表格 {tTotal - tFilter}ms）");
         }
     }
 
-    /// <summary>
-    /// 操作工具条：第一行是选择类动作（停用 │ 删除… + 全选/清空），删除用红色并与停用拉开距离；
-    /// 第二行左侧是动态选择摘要，右侧是恢复类动作（撤回 / 备份目录，永远渲染）。
-    /// </summary>
-    private void DrawActionBar(int selectedCount, int selectedHidden, List<RepoAuditItem> snapshot)
-    {
-        var canAct = !this.scanning && selectedCount > 0;
-        var filteredCount = snapshot.Count;
 
-        if (!canAct)
-        {
-            ImGui.BeginDisabled();
-        }
 
-        ImGui.Button($"停用所选（{selectedCount}）###DisableSelected");
-        if (ImGui.IsItemClicked() && canAct)
-        {
-            this.DisableSelected();
-        }
 
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("保留链接、只是不再加载这些库（可随时撤回）");
-        }
 
-        if (!canAct)
-        {
-            ImGui.EndDisabled();
-        }
 
-        // 危险动作：与「停用」拉开间距 + 红色 + 独立分组
-        ImGui.SameLine();
-        ImGui.SameLine();
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.55f, 0.18f, 0.18f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.68f, 0.24f, 0.24f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.76f, 0.28f, 0.28f, 1f));
-
-        if (!canAct)
-        {
-            ImGui.BeginDisabled();
-        }
-
-        ImGui.Button($"删除所选（{selectedCount}）…###DeleteSelected");
-        if (ImGui.IsItemClicked() && canAct)
-        {
-            this.deleteRequested = true;
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("从仓库列表移除（会先自动备份，之后可撤回）");
-        }
-
-        if (!canAct)
-        {
-            ImGui.EndDisabled();
-        }
-
-        ImGui.PopStyleColor(3);
-
-        ImGui.SameLine();
-        ImGui.TextDisabled("│");
-        ImGui.SameLine();
-
-        var canSelect = !this.scanning;
-        if (!canSelect)
-        {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.Button($"全选当前（{filteredCount}）###SelectFiltered"))
-        {
-            lock (this.gate)
-            {
-                foreach (var item in snapshot.Where(x => x.IsSelectable))
-                {
-                    this.selected.Add(item.Url);
-                }
-            }
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("只勾选当前筛选/搜索结果显示的行");
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Button("清空选择###ClearSelection"))
-        {
-            lock (this.gate)
-            {
-                this.selected.Clear();
-            }
-        }
-
-        if (!canSelect)
-        {
-            ImGui.EndDisabled();
-        }
-
-        // ---------------- 第二行：选择摘要 + 恢复动作 ----------------
-        var undo = this.plugin.Config.UndoHistory.Count > 0 ? this.plugin.Config.UndoHistory[^1] : null;
-
-        var hint = selectedCount == 0
-            ? $"结果 {snapshot.Count} 行 · 已选 0 —— 勾选列表行，或用「全选当前」"
-            : $"结果 {snapshot.Count} 行 · 已选 {selectedCount}（共 {this.ProblemCount()} 个问题项"
-              + (selectedHidden > 0 ? $"，其中 {selectedHidden} 项不在当前筛选内）" : "）");
-
-        // 非默认排序才显示（这一行常驻内容多，避免把右侧的恢复类按钮挤下去）
-        var sortText = this.sortKey switch
-        {
-            "installed" => this.sortDescending ? "按已安装 ↓" : "按已安装 ↑",
-            "firstSeen" => this.sortDescending ? "按首次记录 ↓" : "按首次记录 ↑",
-            "url" => this.sortDescending ? "按地址 ↓" : "按地址 ↑",
-            _ => null,
-        };
-
-        if (sortText is not null)
-        {
-            hint += $" · {sortText}";
-        }
-
-        ImGui.TextDisabled(hint);
-        var hintWidth = ImGui.GetItemRectSize().X;
-
-        // 靠右摆放恢复类动作（SameLine 的参数是「距行首的绝对偏移」，不是剩余宽度）
-        var undoLabel = undo is null ? "撤回上次操作###Undo" : $"撤回：{undo.Describe()}###Undo";
-        var undoWidth = ImGui.CalcTextSize(undoLabel.Replace("###Undo", string.Empty)).X + 24;
-        var backupWidth = ImGui.CalcTextSize("打开备份目录").X + 24;
-        var totalWidth = undoWidth + backupWidth + 12;
-        var maxX = ImGui.GetContentRegionMax().X;
-        var targetX = maxX - totalWidth;
-
-        if (targetX < hintWidth + 12)
-        {
-            // 一行放不下（长提示 + 长撤回标签）：按钮换到下一行，仍然右对齐
-            ImGui.NewLine();
-            targetX = MathF.Max(4f, maxX - totalWidth);
-        }
-
-        ImGui.SameLine(targetX);
-
-        if (undo is null)
-        {
-            ImGui.BeginDisabled();
-            ImGui.Button("撤回上次操作###Undo");
-            ImGui.EndDisabled();
-        }
-        else
-        {
-            if (ImGui.Button(undoLabel))
-            {
-                var ok = this.plugin.TryUndoLast(out var message);
-                this.SetStatus(ok ? message : "撤回失败：" + message, !ok);
-                this.RefreshFromLive();
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                var lines = new List<string>
-                {
-                    $"备份：{Path.GetFileName(undo.BackupPath ?? "（无）")}",
-                    $"剩余可撤回：{this.plugin.Config.UndoHistory.Count} 步",
-                };
-                lines.AddRange(undo.Entries.Take(3).Select(x => "样本：" + UiHelpers.Shorten(x.Url, 60)));
-                ImGui.SetTooltip(string.Join('\n', lines));
-            }
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Button("打开备份目录###OpenBackups"))
-        {
-            this.plugin.OpenBackupDirectory();
-        }
-    }
-
-    private string StatusTooltip(RepoAuditItem item) => item.Status switch
-    {
-        RepoStatus.Invalid =>
-            "链接不合规：这个链接返回的不是仓库 JSON（常见原因：填了 GitHub 网页地址而不是 raw 地址）。\n"
-            + "后果：该库的插件会全部加载不出来，还可能导致插件列表残缺或排版错乱。\n"
-            + (item.Note ?? string.Empty),
-        RepoStatus.Dead => "链接已失效（404 / 410）。\n" + (item.Note ?? string.Empty),
-        RepoStatus.Unreachable =>
-            "连接失败：超时 / 证书 / 服务器错误，不一定是死链（可能是网络问题）。\n"
-            + "建议先「重新体检」确认，再决定是否停用。\n" + (item.Note ?? string.Empty),
-        RepoStatus.Blocked => "服务器拒绝访问：可能是私有仓库、限流或需要登录。\n" + (item.Note ?? string.Empty),
-        _ => item.Note ?? string.Empty,
-    };
-
-    private int ProblemCount() => this.problemCountCache;
-
-    private void FilterRadio(string key, string label)
-    {
-        ImGui.SameLine();
-        if (ImGui.RadioButton($"{label}###Filter-{key}", this.filter == key))
-        {
-            this.filter = key;
-            this.snapshotDirty = true;
-        }
-    }
-
-    private List<RepoAuditItem> Filtered()
-    {
-        // 缓存：筛选 / 排序 / 数据没变就不重算（体检进行中每 250ms 最多重算一次）
-        var now = DateTime.Now;
-        if (!this.snapshotDirty && now < this.snapshotNextAllowed)
-        {
-            return this.snapshotCache;
-        }
-
-        IEnumerable<RepoAuditItem> query = this.filter switch
-        {
-            "all" => this.items,
-            "unreachable" => this.items.Where(x => x.Status is RepoStatus.Unreachable),
-            "disabled" => this.items.Where(x => !x.IsEnabled),
-            "ok" => this.items.Where(x => x.Status is RepoStatus.Ok or RepoStatus.Empty),
-            _ => this.items.Where(x => x.IsProblem),
-        };
-
-        if (!string.IsNullOrWhiteSpace(this.search))
-        {
-            query = query.Where(x => x.Url.Contains(this.search.Trim(), StringComparison.OrdinalIgnoreCase));
-        }
-
-        // 与健康度正交的第二个轴：只看装了插件的库 / 只看没装过插件的库（数据不可用时开关是禁用的）
-        if (this.installedIndex is { Available: true })
-        {
-            if (this.onlyWithPlugins)
-            {
-                query = query.Where(x => x.InstalledCount > 0);
-            }
-            else if (this.onlyUnused)
-            {
-                query = query.Where(x => x.InstalledCount == 0);
-            }
-        }
-
-        var result = this.SortItems(query);
-        this.snapshotCache = result;
-        this.snapshotDirty = false;
-        this.snapshotNextAllowed = now.AddMilliseconds(this.scanning ? 250 : 0);
-        return result;
-    }
-
-    /// <summary>
-    /// 排序：默认按严重度（死链在最上，<c>UiHelpers.SeverityRank</c>）；列头可切换升/降；平序一律按 URL。
-    /// 不可用（`—`）与「未记录」在升序里排最后。
-    /// </summary>
-    private List<RepoAuditItem> SortItems(IEnumerable<RepoAuditItem> query)
-    {
-        var list = query.ToList();
-
-        Comparison<RepoAuditItem> primary = this.sortKey switch
-        {
-            "installed" => (a, b) => InstalledRank(a).CompareTo(InstalledRank(b)),
-            "firstSeen" => (a, b) => string.Compare(FirstSeenRank(a), FirstSeenRank(b), StringComparison.Ordinal),
-            "url" => (a, b) => string.Compare(a.Url, b.Url, StringComparison.OrdinalIgnoreCase),
-            _ => (a, b) => UiHelpers.SeverityRank(a.Status).CompareTo(UiHelpers.SeverityRank(b.Status)),
-        };
-
-        list.Sort((a, b) =>
-        {
-            var result = primary(a, b);
-            if (result == 0)
-            {
-                result = string.Compare(a.Url, b.Url, StringComparison.OrdinalIgnoreCase);
-            }
-
-            return this.sortDescending ? -result : result;
-        });
-
-        return list;
-
-        static int InstalledRank(RepoAuditItem item) => item.InstalledCount < 0 ? int.MaxValue : item.InstalledCount;
-
-        static string FirstSeenRank(RepoAuditItem item) => string.IsNullOrEmpty(item.FirstSeen) ? "9999" : item.FirstSeen;
-    }
 
     // ------------------------------------------------------------------ 统计
 
-    private void RecomputeCounters()
-    {
-        lock (this.gate)
-        {
-            this.okCount = this.items.Count(x => x.Status is RepoStatus.Ok or RepoStatus.Empty);
-            this.deadCount = this.items.Count(x => x.Status == RepoStatus.Dead);
-            this.invalidCount = this.items.Count(x => x.Status == RepoStatus.Invalid);
-            this.blockedCount = this.items.Count(x => x.Status == RepoStatus.Blocked);
-            this.unreachableCount = this.items.Count(x => x.Status == RepoStatus.Unreachable);
-            this.unknownCount = this.items.Count(x => x.Status == RepoStatus.Unknown);
-            this.disabledCount = this.items.Count(x => !x.IsEnabled);
-            this.total = this.items.Count;
-            this.problemCountCache = this.items.Count(x => x.IsProblem);
-        }
-    }
 
     // ------------------------------------------------------------------ 扫描
 
-    private void StartScan()
-    {
-        if (this.scanning)
-        {
-            return;
-        }
-
-        this.plugin.TrackFirstSeen();
-
-        var repos = this.plugin.Repos.ReadAll(out var error);
-        if (error is not null)
-        {
-            this.SetStatus("读取仓库列表失败：" + error, true);
-            return;
-        }
-
-        var includeDisabled = this.plugin.Config.ScanIncludeDisabled;
-
-        // 把上一轮的结论先搬过来：重新体检时行上不会闪成「未检查」，真正有变化的那几条会被新结果覆盖
-        Dictionary<string, RepoAuditItem> previous;
-        lock (this.gate)
-        {
-            previous = this.items.ToDictionary(x => x.Url, x => x, StringComparer.Ordinal);
-        }
-
-        var list = repos
-            .Where(x => includeDisabled || x.IsEnabled)
-            .Where(x => !string.IsNullOrWhiteSpace(x.Url))
-            .Select(x =>
-            {
-                var item = new RepoAuditItem
-                {
-                    Url = x.Url,
-                    NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(x.Url),
-                    IsEnabled = x.IsEnabled,
-                    Index = x.Index,
-                    FirstSeen = this.plugin.GetFirstSeen(x.Url),
-                };
-
-                if (previous.TryGetValue(x.Url, out var old) && old.Status != RepoStatus.Unknown)
-                {
-                    item.Status = old.Status;
-                    item.HttpStatus = old.HttpStatus;
-                    item.Note = old.Note;
-                    item.PluginCount = old.PluginCount;
-                    item.DroppedCount = old.DroppedCount;
-                    item.Channel = old.Channel;
-                    item.CheckedUtc = old.CheckedUtc;
-                }
-
-                return item;
-            })
-            .ToList();
-
-        if (list.Count == 0)
-        {
-            this.SetStatus("仓库列表是空的（或者都被排除了）。", true);
-            return;
-        }
-
-        lock (this.gate)
-        {
-            this.items = list;
-            this.selected.Clear();
-            this.done = 0;
-            this.total = list.Count;
-            this.okCount = this.deadCount = this.invalidCount = this.blockedCount = 0;
-            this.unreachableCount = this.disabledCount = this.unknownCount = 0;
-            this.scanning = true;
-            this.filter = "problems";
-            this.sortKey = "status";
-            this.sortDescending = false;
-            this.resetSortRequested = true;
-            this.listBuilt = true;
-        }
-
-        this.snapshotDirty = true;
-        this.installedCountsDirty = true;
-
-        this.SetStatus($"开始体检 {list.Count} 个仓库…", false);
-        Plugin.Log.Information($"[FireGaze] 开始体检：{list.Count} 个仓库（含已停用 = {(includeDisabled ? "是" : "否")}）");
-        var startedAt = DateTime.UtcNow;
-
-        var cts = new CancellationTokenSource();
-        this.cancellation = cts;
-
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                await RepoScanner.ScanAsync(
-                    list,
-                    item =>
-                    {
-                        // 只默认勾选「死链 + 内容不合规」；连接失败可能是网络问题，不默认纳入
-                        if (item.IsAutoSelected)
-                        {
-                            lock (this.gate)
-                            {
-                                this.selected.Add(item.Url);
-                            }
-                        }
-                    },
-                    progress =>
-                    {
-                        lock (this.gate)
-                        {
-                            this.done = progress.Done;
-                            this.total = progress.Total;
-                            this.okCount = progress.Ok;
-                            this.deadCount = progress.Dead;
-                            this.invalidCount = progress.Invalid;
-                            this.blockedCount = progress.Blocked;
-                            this.unreachableCount = progress.Unreachable;
-                        }
-                    },
-                    cts.Token).ConfigureAwait(false);
-            }
-            catch (OperationCanceledException)
-            {
-                this.SetStatus("扫描已取消。", false);
-            }
-            catch (Exception e)
-            {
-                this.SetStatus("扫描出错：" + e.Message, true);
-            }
-            finally
-            {
-                this.lastScanDuration = DateTime.UtcNow - startedAt;
-
-                int dead, invalid, unreachable;
-                lock (this.gate)
-                {
-                    this.scanning = false;
-                    this.snapshotDirty = true;
-                    dead = this.deadCount;
-                    invalid = this.invalidCount;
-                    unreachable = this.unreachableCount;
-                }
-
-                if (this.statusMessage?.StartsWith("开始体检") == true)
-                {
-                    this.statusMessage =
-                        $"体检完成（用时 {this.lastScanDuration.TotalSeconds:0}s）：已自动勾选 {dead + invalid} 个死链/不合规项"
-                        + (unreachable > 0 ? $"；另有 {unreachable} 个「连接失败」需人工确认（可能是网络问题，未勾选）。" : "。");
-                    this.statusIsError = false;
-                }
-
-                this.plugin.Config.LastScanUtc = DateTime.UtcNow;
-                foreach (var item in list)
-                {
-                    item.FirstSeen = this.plugin.GetFirstSeen(item.Url) ?? item.FirstSeen;
-                }
-
-                this.plugin.TrackFirstSeen();
-                this.plugin.SaveConfig();
-                this.RecomputeCounters();
-
-                Plugin.Log.Information(
-                    $"[FireGaze] 体检完成：用时 {this.lastScanDuration.TotalSeconds:0}s ｜ 共 {this.total} 个仓库 ｜ "
-                    + $"可用 {this.okCount} · 死链 {this.deadCount} · 不合规 {this.invalidCount} · 拒绝 {this.blockedCount} · "
-                    + $"连接失败 {this.unreachableCount} · 未检查 {this.unknownCount}");
-            }
-        });
-    }
 
     // ------------------------------------------------------------------ 操作
 
-    private void DisableSelected()
-    {
-        var live = this.plugin.Repos.ReadAll(out var error);
-        if (error is not null)
-        {
-            this.SetStatus("读取仓库列表失败：" + error, true);
-            return;
-        }
 
-        var liveMap = live.ToDictionary(x => x.Url, x => x, StringComparer.Ordinal);
-        var record = new UndoRecord { Action = "disable", TimeUtc = DateTime.UtcNow };
-        var targets = new List<string>();
 
-        foreach (var url in this.selected)
-        {
-            if (liveMap.TryGetValue(url, out var entry))
-            {
-                targets.Add(url);
-                if (entry.IsEnabled)
-                {
-                    record.Entries.Add(new UndoEntry { Url = url, IsEnabled = true, Index = entry.Index });
-                }
-            }
-        }
-
-        if (record.Entries.Count == 0)
-        {
-            this.SetStatus("所选仓库都已经处于停用状态。", false);
-            return;
-        }
-
-        var changed = this.plugin.Repos.SetEnabled(targets, false, out error);
-        if (error is not null)
-        {
-            this.SetStatus("停用失败：" + error, true);
-            return;
-        }
-
-        this.plugin.RecordUndo(record);
-        this.plugin.Repos.Save(out _);
-        this.plugin.Repos.TriggerReload(out _);
-
-        this.SetStatus($"已停用 {changed} 个仓库（{DateTime.Now:HH:mm}）—— 链接保留、不再加载；可点「撤回」恢复。", false);
-        this.RefreshFromLive();
-    }
-
-    private void DeleteSelected()
-    {
-        var backup = this.plugin.Repos.BackupRepos(out var error);
-        if (string.IsNullOrEmpty(backup))
-        {
-            this.SetStatus("备份失败，已取消删除：" + error, true);
-            return;
-        }
-
-        var live = this.plugin.Repos.ReadAll(out error);
-        if (error is not null)
-        {
-            this.SetStatus("读取仓库列表失败：" + error, true);
-            return;
-        }
-
-        var liveMap = live.ToDictionary(x => x.Url, x => x, StringComparer.Ordinal);
-        var record = new UndoRecord
-        {
-            Action = "delete",
-            TimeUtc = DateTime.UtcNow,
-            BackupPath = backup,
-        };
-
-        foreach (var url in this.selected)
-        {
-            if (liveMap.TryGetValue(url, out var entry))
-            {
-                record.Entries.Add(new UndoEntry { Url = url, IsEnabled = entry.IsEnabled, Index = entry.Index });
-            }
-        }
-
-        if (record.Entries.Count == 0)
-        {
-            this.SetStatus("所选的仓库已经不在列表里了。", false);
-            return;
-        }
-
-        var removed = this.plugin.Repos.Remove(record.Entries.Select(x => x.Url), out error);
-        if (error is not null)
-        {
-            this.SetStatus("删除失败：" + error, true);
-            return;
-        }
-
-        this.plugin.RecordUndo(record);
-        this.plugin.Repos.Save(out _);
-        this.plugin.Repos.TriggerReload(out _);
-
-        this.statusMessage =
-            $"已删除 {removed} 个链接（{DateTime.Now:HH:mm}），备份：{Path.GetFileName(backup)}；" +
-            "可点「撤回」把链接放回原位置。";
-        this.statusIsError = false;
-        this.RefreshFromLive();
-    }
-
-    /// <summary>操作之后按当前配置重建列表，保留还在的条目的扫描结果，并重算统计。</summary>
+    /// <summary>
+    ///     操作之后按当前配置重建列表，保留还在的条目的扫描结果，并重算统计。
+    /// </summary>
     // ------------------------------------------------------------------ 「已安装」
 
-    /// <summary>
-    /// 打开页面就把库链清单建出来（状态 = 未检查，不可勾选），不必先跑一次网络扫描：
-    /// 「装了没」是离线数据，体检只负责回填健康度。
-    /// </summary>
-    private void EnsureList()
-    {
-        if (this.scanning || this.listBuilt || DateTime.Now < this.listRetryAfter)
-        {
-            return;
-        }
 
-        var repos = this.plugin.Repos.ReadAll(out var error);
-        if (error is not null)
-        {
-            // 读配置失败时**绝不能每帧重试**（1241 个库的配置每帧解析一遍会把游戏拖死）
-            this.listRetryAfter = DateTime.Now.AddSeconds(10);
-            this.SetStatus("读取仓库列表失败：" + error, true);
-            Plugin.Log.Warning("[FireGaze] 读取仓库列表失败（10 秒后重试）：" + error);
-            return;
-        }
 
-        var list = repos
-            .Where(x => !string.IsNullOrWhiteSpace(x.Url))
-            .Select(entry => new RepoAuditItem
-            {
-                Url = entry.Url,
-                NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(entry.Url),
-                IsEnabled = entry.IsEnabled,
-                Index = entry.Index,
-                FirstSeen = this.plugin.GetFirstSeen(entry.Url),
-            })
-            .ToList();
 
-        lock (this.gate)
-        {
-            this.items = list;
 
-            // 还没体检过：默认看「全部」，否则「有问题的」会是空列表（旧行为是扫描后才建列表）
-            if (list.Count > 0 && list.All(x => x.Status == RepoStatus.Unknown))
-            {
-                this.filter = "all";
-            }
 
-            this.total = list.Count;
-        }
 
-        this.RecomputeCounters();
-        this.listBuilt = true;
-        this.snapshotDirty = true;
-        this.installedCountsDirty = true;
-    }
 
-    /// <summary>
-    /// 读/刷新「已安装插件」索引；读不到时界面必须显示 `—`（不能显示假 0）。
-    /// 构建放到后台：185 个插件的反射 + 图标缓存读取在主线程会顶出 80–100ms 的掉帧（实测过）。
-    /// </summary>
-    private void EnsureInstalledIndex()
-    {
-        if (this.installedIndexBuild is not null)
-        {
-            if (this.installedIndexBuild.IsCompleted)
-            {
-                var built = this.installedIndexBuild.Status == TaskStatus.RanToCompletion
-                    ? this.installedIndexBuild.Result
-                    : null;
 
-                this.installedIndexBuild = null;
 
-                if (built is not null)
-                {
-                    this.installedIndex = built;
-                    this.installedIndexStale = false;
-                    this.installedCountsDirty = true;
-                    this.snapshotDirty = true;
-                    this.iconHandles.Clear();
-                    this.iconPeekMisses.Clear();
 
-                    // 不可用时过几秒再试一次（卫月可能还在启动）；界面一律按「不可用」渲染
-                    this.installedIndexRetryAfter = built.Available
-                        ? DateTime.MaxValue
-                        : DateTime.Now.AddSeconds(5);
-                }
-            }
 
-            return;
-        }
 
-        if (!this.installedIndexStale || DateTime.Now < this.installedIndexRetryAfter)
-        {
-            return;
-        }
 
-        this.installedIndexBuild = Task.Run(InstalledPluginsIndex.Build);
-    }
 
-    /// <summary>把索引结果填到每一行（不可用 → -1，不参与任何「0 个」的断言）。</summary>
-    private void FillInstalledCounts()
-    {
-        if (!this.installedCountsDirty)
-        {
-            return;
-        }
-
-        this.installedCountsDirty = false;
-        var index = this.installedIndex;
-
-        lock (this.gate)
-        {
-            foreach (var item in this.items)
-            {
-                if (index is { Available: true })
-                {
-                    item.InstalledPlugins = index.TryGetInstalledByNormalized(item.NormalizedUrl, out var plugins) ? plugins : [];
-                    item.InstalledCount = item.InstalledPlugins.Count;
-                }
-                else
-                {
-                    item.InstalledPlugins = [];
-                    item.InstalledCount = -1;
-                }
-            }
-        }
-
-        this.installedInUseCache = this.items.Count(x => x.InstalledCount > 0);
-        this.installedUnusedCache = this.items.Count(x => x.InstalledCount == 0);
-        this.snapshotDirty = true;
-    }
-
-    /// <summary>「已安装」单元格：一律放数字（0 也是数字）；数据不可用显示 `—`。</summary>
-    private void DrawInstalledCell(RepoAuditItem item, bool indexReady)
-    {
-        if (!indexReady || item.InstalledCount < 0)
-        {
-            ImGui.TextDisabled("—");
-        }
-        else if (item.InstalledCount == 0)
-        {
-            ImGui.TextDisabled("0 个");
-        }
-        else
-        {
-            ImGui.TextUnformatted($"{item.InstalledCount} 个");
-        }
-
-        if (!ImGui.IsItemHovered())
-        {
-            return;
-        }
-
-        if (!indexReady)
-        {
-            ImGui.SetTooltip("读不到卫月的已装插件列表，可能是卫月升级改了内部字段；本次无法判断。");
-            return;
-        }
-
-        var lines = new List<string>
-        {
-            $"从这条库链装了 {item.InstalledCount} 个插件。",
-            "这条库一共提供多少个插件，把鼠标放在仓库地址上看",
-        };
-
-        if (item.InstalledPlugins.Count > 0)
-        {
-            var names = string.Join("、", item.InstalledPlugins.Take(8).Select(Describe));
-            lines.Add(item.InstalledPlugins.Count > 8 ? $"{names}…（共 {item.InstalledPlugins.Count} 个）" : names);
-        }
-        else
-        {
-            lines.Add("只表示没从它装过插件：可能你在别的机器装过、它只是备用源、或插件是手动/开发版装的。");
-        }
-
-        if (item.InstalledPlugins.Any(x => this.iconDead.Contains(x.InternalName)))
-        {
-            lines.Add("带「缺图标」的是这次检查没缓存到的，可以点「下载图标」；带「图标地址失效」的要作者更新清单。图标只影响列表里的小图，不影响插件运行。");
-        }
-
-        ImGui.SetTooltip(string.Join('\n', lines));
-        return;
-
-        string Describe(InstalledPluginEntry entry)
-        {
-            // 只标「确认失效」这一类；「还没下到」是常态（卫月不落盘缓存），不在这里断言
-            return this.iconDead.Contains(entry.InternalName)
-                ? entry.DisplayName + " · 图标地址失效"
-                : entry.DisplayName;
-        }
-    }
-
-    /// <summary>
-    /// 只读地把可见行里已在缓存中的图标取出来显示。
-    /// </summary>
-    /// <remarks>
-    /// <b>这里绝不能触发下载</b>：曾经写过“每帧 12 个”的自动预取，185 个插件十几帧内全撒出去，
-    /// 又经 FastDalamudCN 三线路竞速 → 一秒上千行失败日志、网络栈被拖死、游戏未响应。
-    /// 下载一律走「下载图标」按钮那条限速通道。
-    /// </remarks>
-    private void PeekVisibleIcons(RepoAuditItem item)
-    {
-        if (!this.plugin.Config.ShowInstalledIcons || item.InstalledCount <= 0)
-        {
-            return;
-        }
-
-        foreach (var entry in item.InstalledPlugins)
-        {
-            if (this.iconHandles.ContainsKey(entry.InternalName) || this.iconPeekMisses.Contains(entry.InternalName))
-            {
-                continue;
-            }
-
-            // 先试本地落盘缓存（重开游戏后也能直接出图），再试卫月内存里的
-            if (this.plugin.Icons.TryGetHandle(entry, out var cached))
-            {
-                this.iconHandles[entry.InternalName] = cached;
-            }
-            else if (PluginIconLookup.TryPeekHandle(entry, out var handle) && !handle.IsNull)
-            {
-                this.iconHandles[entry.InternalName] = handle;
-            }
-            else
-            {
-                this.iconPeekMisses.Add(entry.InternalName);   // 本帧不再重复查
-            }
-        }
-    }
-
-    /// <summary>
-    /// 图标条：有图标的在前、缺图标的最后（首字母占位），组内保持原顺序。
-    /// 每个图标悬停显示**它自己**的名字（占位格额外说明图标未缓存）；鼠标停在空白处则一次列出全部名字，
-    /// 而且顺序与图标排列**完全一致**（之前名字按原序列、图标却重排过，所以对不上）。
-    /// </summary>
-    private void DrawInstalledIcons(RepoAuditItem item)
-    {
-        var plugins = item.InstalledPlugins;
-        if (plugins.Count == 0)
-        {
-            return;
-        }
-
-        // 画序：先有图标的（原序），再缺图标的（原序）
-        var sequence = new List<(InstalledPluginEntry Entry, ImTextureID? Handle)>(plugins.Count);
-        var missing = new List<(InstalledPluginEntry Entry, ImTextureID? Handle)>();
-
-        foreach (var entry in plugins)
-        {
-            if (this.iconHandles.TryGetValue(entry.InternalName, out var cached) && !cached.IsNull)
-            {
-                sequence.Add((entry, cached));
-            }
-            else
-            {
-                missing.Add((entry, null));
-            }
-        }
-
-        sequence.AddRange(missing);
-
-        const float iconSize = 22f;
-        var spacing = ImGui.GetStyle().ItemSpacing.X;
-
-        ImGui.BeginGroup();
-
-        var available = ImGui.GetContentRegionAvail().X;
-        var maxIcons = Math.Clamp((int)((available + spacing) / (iconSize + spacing)), 1, 8);
-
-        var drawn = 0;
-        var hoveredIcon = false;
-
-        foreach (var (entry, handle) in sequence)
-        {
-            if (drawn >= maxIcons)
-            {
-                break;
-            }
-
-            if (drawn > 0)
-            {
-                ImGui.SameLine();
-            }
-
-            if (handle is { } texture)
-            {
-                ImGui.Image(texture, new Vector2(iconSize, iconSize));
-            }
-            else
-            {
-                DrawIconPlaceholder(entry, iconSize);
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                hoveredIcon = true;
-
-                var tooltip = handle is not null
-                    ? entry.DisplayName
-                    : this.iconDead.Contains(entry.InternalName)
-                        ? entry.DisplayName + "\n图标地址已失效，需要作者更新清单"
-                        : entry.DeclaresIcon
-                            ? entry.DisplayName + "\n图标还没缓存下来；只影响列表里的小图，不影响插件运行"
-                            : entry.DisplayName + "\n这个插件没有提供图标；只影响列表里的小图，不影响插件运行";
-
-                ImGui.SetTooltip(tooltip);
-            }
-
-            drawn++;
-        }
-
-        var hidden = sequence.Count - drawn;
-        if (hidden > 0)
-        {
-            if (drawn > 0)
-            {
-                ImGui.SameLine();
-            }
-
-            ImGui.TextDisabled($"+{hidden}");
-
-            if (ImGui.IsItemHovered())
-            {
-                hoveredIcon = true;
-                ImGui.SetTooltip("另有：" + string.Join("、", sequence.Skip(drawn).Select(x => x.Entry.DisplayName)));
-            }
-        }
-
-        ImGui.EndGroup();
-
-        // 停在图标条空白处：一次列出全部名字，顺序与图标排列一致
-        if (!hoveredIcon && ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip(
-                $"已安装 {plugins.Count} 个：" + string.Join("、", sequence.Select(x => x.Entry.DisplayName)));
-        }
-    }
-
-    /// <summary>写状态行（并推进世代号：图标检查的后台结果只在没人动过状态行时才回写）。</summary>
-    private void SetStatus(string? message, bool isError)
-    {
-        this.statusVersion++;
-        this.statusMessage = message;
-        this.statusIsError = isError;
-        this.iconMissingNames = null;   // 名单只跟随「检查缺图标」那一条
-    }
-
-    /// <summary>第一步：只查不下载——列出「声明了图标、但图标还没缓存下来」的已装插件。</summary>
-    private void RunIconCheck()
-    {
-        var index = this.installedIndex;
-        if (index is not { Available: true })
-        {
-            return;
-        }
-
-        Plugin.Log.Information($"[FireGaze] 用户点击：检查缺图标（已装 {index.All.Count} 个插件）");
-
-        var cached = 0;
-        var fromDisk = 0;
-        var noAddress = 0;
-
-        this.iconMissing.Clear();
-        this.iconDead.Clear();
-
-        foreach (var entry in index.All)
-        {
-            if (!entry.DeclaresIcon)
-            {
-                noAddress++;
-                continue;
-            }
-
-            // 先看我们自己的落盘缓存（重开游戏后也能命中），再看卫月内存里的
-            if (this.plugin.Icons.TryGetHandle(entry, out var cachedHandle) && !cachedHandle.IsNull)
-            {
-                this.iconHandles[entry.InternalName] = cachedHandle;
-                fromDisk++;
-                cached++;
-                continue;
-            }
-
-            // 只读检查：直接看卫月的图标缓存，不触发任何下载
-            if (PluginIconLookup.TryPeekHandle(entry, out var handle) && !handle.IsNull)
-            {
-                this.iconHandles[entry.InternalName] = handle;
-                cached++;
-                continue;
-            }
-
-            this.iconMissing.Add(entry);
-        }
-
-        this.iconCheckDone = true;
-
-        var names = string.Join("、", this.iconMissing.Take(6).Select(x => x.DisplayName));
-        var summary = $"图标检查：已安装 {index.All.Count} 个插件 ｜ 图标已有 {cached} 个"
-                      + (fromDisk > 0 ? $"，其中本地缓存 {fromDisk} 个" : string.Empty)
-                      + $" ｜ 缺图标 {this.iconMissing.Count} 个"
-                      + (noAddress > 0 ? $" ｜ 另有 {noAddress} 个没提供图标地址" : string.Empty)
-                      + (this.iconMissing.Count > 0
-                          ? $" ｜ {names}" + (this.iconMissing.Count > 6 ? $" 等 {this.iconMissing.Count} 个 · 悬停看全部" : string.Empty)
-                          : string.Empty)
-                      + "。下好的图标会存在本地，重开游戏不用重下。";
-
-        this.SetStatus(summary, false);
-        this.iconMissingNames = this.iconMissing.Select(x => x.DisplayName).ToList();
-    }
-
-    /// <summary>第二步：用户点了下载——走我们自己的下载通道（限并发，下完写进本地缓存）。</summary>
-    private void StartIconDownload()
-    {
-        if (this.iconMissing.Count == 0)
-        {
-            this.SetStatus("图标检查：没有需要下载的图标。", false);
-            return;
-        }
-
-        Plugin.Log.Information(
-            $"[FireGaze] 用户点击：下载图标（待下 {this.iconMissing.Count} 个，并发 {IconConcurrency}）");
-
-        this.iconWaiting.Clear();
-        this.iconWaiting.AddRange(this.iconMissing);
-        this.iconInFlight.Clear();
-        while (this.iconReady.TryDequeue(out _))
-        {
-        }
-
-        while (this.iconFailed.TryDequeue(out _))
-        {
-        }
-
-        this.iconDownloadTotal = this.iconWaiting.Count;
-        this.iconDownloadRequested = 0;
-        this.iconDownloadGot = 0;
-        this.iconDownloadFailed = 0;
-        this.iconDownloadStartedAt = DateTime.Now;
-        this.iconDownloadDeadline = DateTime.Now.AddSeconds(120);
-        this.iconTailDeadline = default;
-        this.nextIconKick = DateTime.MinValue;
-        this.iconDownloadRunning = true;
-        this.iconDownloadLine = $"图标下载：已请求 0/{this.iconDownloadTotal} · 拿到 0";
-        this.SetStatus(null, false);
-    }
-
-    /// <summary>
-    /// 下载推进：后台线程只负责下和写盘（结果丢进队列），界面线程在这里取货、建纹理；
-    /// 同时在飞不超过 <see cref="IconConcurrency"/> 个，每 <see cref="IconKickMs"/> 毫秒发动一个。
-    /// </summary>
-    private void TickIconDownload()
-    {
-        if (this.iconDeadReport is { } report)
-        {
-            this.iconDeadReport = null;
-            foreach (var name in report)
-            {
-                this.iconDead.Add(name);
-            }
-
-            // 地址确认失效的别继续占着「下载图标（N）」的计数：再点也只会再失败一次
-            this.iconMissing.RemoveAll(x => report.Contains(x.InternalName));
-        }
-
-        if (!this.iconDownloadRunning)
-        {
-            return;
-        }
-
-        // 0) 我们自己的下载：后台已写好盘 → 这里建纹理（界面线程）、计数
-        var loadedAny = false;
-        while (this.iconReady.TryDequeue(out var done))
-        {
-            this.iconInFlight.Remove(done);
-            this.iconDownloadGot++;
-            if (this.plugin.Icons.EnsureTexture(done))
-            {
-                Plugin.Log.Debug($"[FireGaze] 图标建纹理：{done.InternalName}");
-            }
-
-            loadedAny = true;
-        }
-
-        while (this.iconFailed.TryDequeue(out var bad))
-        {
-            this.iconInFlight.Remove(bad);
-            this.iconDownloadFailed++;
-        }
-
-        if (loadedAny)
-        {
-            this.plugin.Icons.FlushIndex();
-        }
-
-        // 1) 轮询交给卫月下的（官方库插件）：拿到就移出
-        for (var i = this.iconInFlight.Count - 1; i >= 0; i--)
-        {
-            var entry = this.iconInFlight[i];
-            if (PluginIconLookup.TryPeekHandle(entry, out var handle) && !handle.IsNull)
-            {
-                this.iconHandles[entry.InternalName] = handle;
-                this.iconInFlight.RemoveAt(i);
-                this.iconDownloadGot++;
-            }
-        }
-
-        // 2) 发动新的（一次一个，节奏交给 IconKickMs 控制）
-        if (this.iconWaiting.Count > 0 && this.iconInFlight.Count < IconConcurrency && DateTime.Now >= this.nextIconKick)
-        {
-            var entry = this.iconWaiting[0];
-            this.iconWaiting.RemoveAt(0);
-
-            if (this.plugin.Icons.TryGetHandle(entry, out _))
-            {
-                this.iconDownloadGot++;   // 已在本地（刚下过 / 盘上有）
-            }
-            else if (entry.IsThirdParty && !string.IsNullOrWhiteSpace(entry.IconUrl))
-            {
-                this.KickOurDownload(entry);
-            }
-            else
-            {
-                PluginIconLookup.TryGetHandle(entry, out _);   // 官方库插件：地址由卫月拼，交给它下
-                this.iconInFlight.Add(entry);
-            }
-
-            this.iconDownloadRequested++;
-            this.nextIconKick = DateTime.Now.AddMilliseconds(IconKickMs);
-        }
-
-        // 3) 收尾期：待发队列空了、只剩少数几个还在飞（且已经发过几个）时，只给 4 秒
-        var remaining = this.iconWaiting.Count + this.iconInFlight.Count;
-        var tail = this.iconWaiting.Count == 0
-                   && this.iconInFlight.Count is > 0 and <= IconTailMax
-                   && this.iconDownloadRequested >= IconTailMinRequested;
-
-        if (tail)
-        {
-            if (this.iconTailDeadline == default)
-            {
-                this.iconTailDeadline = DateTime.Now + IconTailGrace;
-                Plugin.Log.Debug(
-                    $"[FireGaze] 图标下载收尾：只剩 {remaining} 个，最多再等 {IconTailGrace.TotalSeconds:0} 秒");
-            }
-        }
-        else
-        {
-            this.iconTailDeadline = default;
-        }
-
-        var tailLeft = tail ? Math.Max(0, (this.iconTailDeadline - DateTime.Now).TotalSeconds) : 0;
-
-        this.iconDownloadLine = $"图标下载：拿到 {this.iconDownloadGot}/{this.iconDownloadTotal}"
-                                + (this.iconDownloadFailed > 0 ? $" · 失败 {this.iconDownloadFailed}" : string.Empty)
-                                + (remaining > 0 ? $" · 还剩 {remaining}" : string.Empty)
-                                + (tail ? $"，最多再等 {tailLeft:0} 秒" : string.Empty);
-
-        if ((this.iconWaiting.Count == 0 && this.iconInFlight.Count == 0)
-            || DateTime.Now >= this.iconDownloadDeadline
-            || (tail && DateTime.Now >= this.iconTailDeadline))
-        {
-            this.FinishIconDownload();
-        }
-    }
-
-    /// <summary>发起一个图标下载（后台线程：下完写盘，结果丢队列）。</summary>
-    private void KickOurDownload(InstalledPluginEntry entry)
-    {
-        this.iconInFlight.Add(entry);
-
-        var url = entry.IconUrl!;
-        Plugin.Log.Debug($"[FireGaze] 图标下载开始：{entry.InternalName} ← {url}");
-
-        _ = Task.Run(async () =>
-        {
-            var result = await IconDownloader.FetchAsync(url, CancellationToken.None).ConfigureAwait(false);
-
-            if (result.Bytes is { Length: > 0 } bytes && IconCache.LooksLikeImage(bytes, result.ContentType))
-            {
-                if (this.plugin.Icons.SaveDownloaded(entry, bytes, result.ContentType))
-                {
-                    Plugin.Log.Debug($"[FireGaze] 图标下载完成：{entry.InternalName}（{bytes.Length} 字节，{result.ContentType}）");
-                    this.iconReady.Enqueue(entry);
-                    return;
-                }
-
-                Plugin.Log.Debug($"[FireGaze] 图标写盘失败：{entry.InternalName}");
-            }
-            else
-            {
-                Plugin.Log.Debug(
-                    $"[FireGaze] 图标下载失败：{entry.InternalName}（HTTP {result.Status}，{result.Error ?? "不是图片"}）");
-            }
-
-            this.iconFailed.Enqueue(entry);
-        });
-    }
-
-    /// <summary>
-    /// 收尾：报结果，并对仍未拿到的图标地址探一次可达性。
-    /// 三类分别是：作者没给地址（补不了）、没下完（可再点一次）、地址已失效（要作者改）。
-    /// </summary>
-    private void FinishIconDownload()
-    {
-        if (!this.iconDownloadRunning)
-        {
-            return;
-        }
-
-        this.iconDownloadRunning = false;
-        this.plugin.Icons.FlushIndex();
-
-        Plugin.Log.Information(
-            $"[FireGaze] 图标下载结束：请求 {this.iconDownloadRequested} / 拿到 {this.iconDownloadGot} / 失败 {this.iconDownloadFailed}"
-            + $" / 还在等 {this.iconWaiting.Count + this.iconInFlight.Count}；本地缓存共 {this.plugin.Icons.CachedCount} 个");
-
-        // 已进本地缓存的从「缺图标」清单里拿掉：按钮上的数字立刻回到真实值
-        this.iconMissing.RemoveAll(x => this.plugin.Icons.Has(x));
-
-        var leftover = new List<InstalledPluginEntry>(this.iconWaiting.Count + this.iconInFlight.Count);
-        leftover.AddRange(this.iconWaiting);
-        leftover.AddRange(this.iconInFlight);
-        this.iconWaiting.Clear();
-        this.iconInFlight.Clear();
-
-        var total = this.iconDownloadTotal;
-        var got = this.iconDownloadGot;
-        var failed = this.iconDownloadFailed;
-        var seconds = (DateTime.Now - this.iconDownloadStartedAt).TotalSeconds;
-
-        var noAddress = leftover.Count(x => x.IsThirdParty && string.IsNullOrWhiteSpace(x.IconUrl));
-        var checkable = leftover
-            .Where(x => !(x.IsThirdParty && string.IsNullOrWhiteSpace(x.IconUrl)))
-            .ToList();
-
-        var head = $"图标下载完成：拿到 {got} / {total} 个"
-                   + (failed > 0 ? $" · 失败 {failed}" : string.Empty)
-                   + (leftover.Count > 0 ? $" · 未完成 {leftover.Count}" : string.Empty)
-                   + $"；用时 {seconds:0}s。已存的图标重开游戏不用重下。";
-
-        if (checkable.Count == 0)
-        {
-            this.SetStatus(head, false);
-            return;
-        }
-
-        this.SetStatus(head + " 正在确认那几个的图标地址…", false);
-
-        var urls = checkable
-            .Where(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconUrl))
-            .Select(x => (Entry: x, Url: x.IconUrl!))
-            .DistinctBy(x => x.Url, StringComparer.Ordinal)
-            .ToList();
-        var official = checkable.Count - urls.Count;
-
-        var version = this.statusVersion;
-
-        _ = Task.Run(async () =>
-        {
-            var deadNames = new List<string>();
-            var failed = 0;
-
-            // 整体限时 8 秒：这是收尾确认，不值得让用户等一连串 18 秒超时
-            using var probeBudget = new CancellationTokenSource(TimeSpan.FromSeconds(8));
-
-            foreach (var (entry, url) in urls)
-            {
-                if (probeBudget.IsCancellationRequested)
-                {
-                    failed++;
-                    continue;
-                }
-
-                try
-                {
-                    var probe = await RepoScanner.ProbeUrlAsync(url, probeBudget.Token).ConfigureAwait(false);
-                    if (probe.Status is 404 or 410)
-                    {
-                        deadNames.Add(entry.InternalName);
-                    }
-                    else if (!probe.Ok)
-                    {
-                        failed++;
-                    }
-                }
-                catch (OperationCanceledException)
-                {
-                    failed++;
-                }
-            }
-
-            if (version != this.statusVersion)
-            {
-                return;   // 期间用户做了别的动作（停用 / 删除 / 撤回 / 扫描），别覆盖人家的确认消息
-            }
-
-            var parts = new List<string>(3);
-            if (deadNames.Count > 0)
-            {
-                parts.Add($"{deadNames.Count} 个图标地址已失效，需要插件作者更新清单");
-            }
-
-            if (failed > 0)
-            {
-                parts.Add($"{failed} 个未完成，可以再点一次");
-            }
-
-            if (official > 0)
-            {
-                parts.Add($"{official} 个是官方库插件，稍后自己会下好");
-            }
-
-            this.iconDeadReport = deadNames;
-            this.SetStatus(head + (parts.Count > 0 ? " " + string.Join("；", parts) + "。" : string.Empty), false);
-        });
-    }
-
-    private static void DrawIconPlaceholder(InstalledPluginEntry entry, float size)
-    {
-        var start = ImGui.GetCursorScreenPos();
-        var drawList = ImGui.GetWindowDrawList();
-        drawList.AddRect(
-            start,
-            start + new Vector2(size, size),
-            ImGui.GetColorU32(new Vector4(0.45f, 0.45f, 0.45f, 1f)),
-            4f);
-
-        var initial = string.IsNullOrEmpty(entry.DisplayName) ? "?" : entry.DisplayName[..1].ToUpperInvariant();
-        var textSize = ImGui.CalcTextSize(initial);
-        drawList.AddText(
-            start + ((new Vector2(size, size) - textSize) * 0.5f),
-            ImGui.GetColorU32(UiHelpers.Muted),
-            initial);
-
-        ImGui.Dummy(new Vector2(size, size));
-    }
-
-    private void RefreshFromLive()
-    {
-        var live = this.plugin.Repos.ReadAll(out _);
-        var liveUrls = new HashSet<string>(live.Select(x => x.Url), StringComparer.Ordinal);
-
-        lock (this.gate)
-        {
-            var old = this.items.ToDictionary(x => x.Url, x => x, StringComparer.Ordinal);
-            var list = new List<RepoAuditItem>(live.Count);
-
-            foreach (var entry in live)
-            {
-                if (old.TryGetValue(entry.Url, out var item))
-                {
-                    item.IsEnabled = entry.IsEnabled;
-                    item.Index = entry.Index;
-                    list.Add(item);
-                }
-                else
-                {
-                    list.Add(new RepoAuditItem
-                    {
-                        Url = entry.Url,
-                        NormalizedUrl = InstalledPluginsIndex.NormalizeRepositoryUrl(entry.Url),
-                        IsEnabled = entry.IsEnabled,
-                        Index = entry.Index,
-                        FirstSeen = this.plugin.GetFirstSeen(entry.Url),
-                    });
-                }
-            }
-
-            this.items = list;
-            this.selected.RemoveWhere(url => !liveUrls.Contains(url));
-        }
-
-        this.RecomputeCounters();
-    }
-
-    private void DrawDeleteConfirmPopup()
-    {
-        if (this.deleteRequested)
-        {
-            ImGui.OpenPopup("确认删除仓库链接###DeleteConfirm");
-            this.deleteRequested = false;
-        }
-
-        if (!ImGui.BeginPopupModal("确认删除仓库链接###DeleteConfirm", ImGuiWindowFlags.AlwaysAutoResize))
-        {
-            return;
-        }
-
-        int count, unreachable;
-        int noInstalled, withInstalled, withInstalledTotal;
-        bool indexAvailable;
-        List<RepoAuditItem> preview;
-        lock (this.gate)
-        {
-            count = this.selected.Count;
-            unreachable = this.items.Count(x => this.selected.Contains(x.Url) && x.Status == RepoStatus.Unreachable);
-            indexAvailable = this.installedIndex is { Available: true };
-            var chosen = this.items.Where(x => this.selected.Contains(x.Url)).ToList();
-            noInstalled = chosen.Count(x => x.InstalledCount == 0);
-            withInstalled = chosen.Count(x => x.InstalledCount > 0);
-            withInstalledTotal = chosen.Where(x => x.InstalledCount > 0).Sum(x => x.InstalledCount);
-            preview = this.items
-                .Where(x => this.selected.Contains(x.Url))
-                .OrderBy(x => UiHelpers.SeverityRank(x.Status))
-                .Take(5)
-                .ToList();
-        }
-
-        ImGui.TextWrapped($"你确定要从仓库列表里删除这 {count} 个库链接吗？");
-        ImGui.Spacing();
-
-        foreach (var item in preview)
-        {
-            ImGui.TextDisabled("· " + UiHelpers.Shorten(item.Url, 64));
-        }
-
-        if (count > preview.Count)
-        {
-            ImGui.TextDisabled($"…… 等共 {count} 条");
-        }
-
-        if (unreachable > 0)
-        {
-            UiHelpers.ColoredWrapped(UiHelpers.Warn, $"注意：其中 {unreachable} 条是「连接失败」——可能是网络问题而不是死链。");
-        }
-
-        // 「没在用」不等于「可以删」；反过来，删掉有插件的库会让那些插件失去更新来源
-        if (!indexAvailable)
-        {
-            UiHelpers.ColoredWrapped(
-                UiHelpers.Warn,
-                "本次读不到已装插件列表，无法判断这些库里有没有你在用的插件。");
-        }
-        else
-        {
-            if (noInstalled > 0)
-            {
-                UiHelpers.ColoredWrapped(
-                    UiHelpers.Muted,
-                    $"其中 {noInstalled} 条没从它装过插件——不代表这个库没用：可能你在别的机器装过、它只是备用源、或插件是手动/开发版装的。");
-            }
-
-            if (withInstalled > 0)
-            {
-                UiHelpers.ColoredWrapped(
-                    UiHelpers.Warn,
-                    $"其中 {withInstalled} 个库上有 {withInstalledTotal} 个已装插件：删除库链不会卸载它们，但从此不再有更新来源。");
-            }
-        }
-
-        ImGui.Spacing();
-        ImGui.TextWrapped("删除前会自动备份（完整仓库列表 + dalamudConfig.json），删除后可以随时点「撤回」恢复。");
-        ImGui.TextWrapped("想保留链接、只是不想加载的话，建议改用「停用」。");
-        ImGui.Spacing();
-
-        if (ImGui.Button("确认删除", new Vector2(120, 0)))
-        {
-            ImGui.CloseCurrentPopup();
-            this.DeleteSelected();
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Button("取消", new Vector2(120, 0)))
-        {
-            ImGui.CloseCurrentPopup();
-        }
-
-        ImGui.EndPopup();
-    }
 }
