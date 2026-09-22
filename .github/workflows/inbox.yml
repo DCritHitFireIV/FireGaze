@@ -1,0 +1,86 @@
+name: inbox
+
+# 玩家在游戏里点「一键提交」→ 插件打开填好的新建 issue 页 → 玩家按 Submit。
+# 这个工作流接手：把投稿落进仓库 → 在 issue 上回一句「收到了」 → 用 secret 里的地址通知维护者。
+#
+# 为什么不让插件直接推手机：那需要把推送密钥内嵌进发给所有玩家的插件（独立审查 P0-2）。
+# 密钥现在只在仓库 secret `SERVER3_PUSH_URL` 里；没配就跳过通知（其余步骤照跑）。
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  inbox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 把投稿收进仓库
+        id: inbox
+        env:
+          # 用环境变量传正文：把 issue 正文直接插进 shell 命令等于给注入开门（工作流有 contents:write）
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          printf '%s' "$ISSUE_BODY" > "$RUNNER_TEMP/issue-body.md"
+          python scripts/inbox_contribution.py \
+            --issue "${{ github.event.issue.number }}" \
+            --body "$RUNNER_TEMP/issue-body.md" \
+            --author "${{ github.event.issue.user.login }}" \
+            --summary-out "$RUNNER_TEMP/summary.txt" \
+            --comment-out "$RUNNER_TEMP/comment.md" | tee "$RUNNER_TEMP/inbox.log"
+
+      - name: 提交存档
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/contributions/inbox
+          if git diff --quiet --cached; then
+            echo "存档没有变化（同一条 issue 又编辑了？）"
+          else
+            git commit -m "chore: 收下 issue #${{ github.event.issue.number }} 的译文投稿"
+            git push
+          fi
+
+      - name: 回话给提交者
+        if: hashFiles(format('{0}/comment.md', runner.temp)) != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync(process.env.RUNNER_TEMP + '/comment.md', 'utf8');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
+      - name: 通知维护者（配了 secret 才发）
+        env:
+          PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
+        run: |
+          if [ -z "$PUSH_URL" ]; then
+            echo "没有配置 SERVER3_PUSH_URL，跳过手机通知（仓库里已经存下这次投稿）"
+            exit 0
+          fi
+          TITLE="FireGaze 译文投稿 $(cat "$RUNNER_TEMP/summary.txt")"
+          BODY="$(cat "$RUNNER_TEMP/summary.txt")
+
+          https://github.com/${GITHUB_REPOSITORY}/issues/${{ github.event.issue.number }}
+          审核后用 python scripts/import_contributions.py docs/contributions/inbox/<存档>.json --push 收录"
+          curl -sS -X POST "$PUSH_URL" \
+            --data-urlencode "title=$TITLE" \
+            --data-urlencode "desp=$BODY" || echo "通知发送失败（不影响收录）"

@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>参与翻译 — 两栏工作区 + 翻译评分（mockup，3 帧）</title>
+<style>
+  /* ImGui 深色界面还原图：颜色/间距照实机取值（与 ui-mockup-*.html 同一套变量）。
+     帧 1/2 = 参与翻译的两栏（上：清单；下：工作区 + 历史页签）
+     帧 3   = 翻译评分（每页 10 条，只有 👍 计数，👎 不显示票数） */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 720px; }
+  .window { width: 720px; height: 860px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .body { padding: 6px 16px 12px; display: flex; flex-direction: column; gap: 5px; flex: 1; min-height: 0; }
+  .brandrow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .brandrow .brand { color: var(--accent); font-weight: 600; }
+  .brandrow .sub { color: var(--muted); font-size: 13px; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .tabs .tab { padding: 3px 10px; font-size: 14px; color: var(--muted); border: 1px solid transparent; border-bottom: none; border-radius: 3px 3px 0 0; }
+  .tabs .tab.on { color: var(--text); background: #232323; border-color: var(--border); }
+  .hint { color: var(--muted); font-size: 14px; }
+  .sep { height: 1px; background: var(--border); margin: 4px 0; }
+  .btn { display: inline-block; padding: 2px 9px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; white-space: nowrap; }
+  .btn.primary { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.danger { background: #8c2e2e; border-color: #a33a3a; }
+  .btn.disabled { opacity: .45; }
+  .chk { width: 15px; height: 15px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: #2a2a2a; font-size: 12px; flex: none; }
+  .chk.on::after { content: "✔"; }
+  .chk.mid { background: #3a3a3a; }
+  .chk.mid::after { content: "–"; color: var(--muted); }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .radio { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; flex: none; }
+  .radio.on::after { content: ""; position: absolute; inset: 3px; background: #d8d8d8; border-radius: 50%; }
+  .search { width: 260px; border: 1px solid #565656; border-radius: 3px; padding: 2px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); padding: 3px 6px; white-space: nowrap; background: #1d1d1d; }
+  td { padding: 3px 6px; border-bottom: 1px solid #262626; vertical-align: middle; }
+  tr.picked td { background: #22303f; }
+  tr.picked td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
+  .muted { color: var(--muted); } .good { color: var(--good); } .bad { color: var(--bad); } .info { color: var(--info); } .warn { color: var(--warn); }
+  .sepv { color: #5a5a5a; }
+  .urlish { color: #cfcfcf; font-size: 13px; }
+  .top { flex: 1; min-height: 0; overflow: hidden; }
+  .ws { height: 330px; display: flex; flex-direction: column; min-height: 0; border-top: 1px solid var(--border); padding-top: 4px; }
+  .wstabs { display: flex; gap: 2px; align-items: flex-end; }
+  .wstabs .tab { padding: 3px 10px; font-size: 14px; color: var(--muted); border: 1px solid var(--border); border-bottom: none; border-radius: 3px 3px 0 0; background: #1d1d1d; }
+  .wstabs .tab.on { color: var(--text); background: #232323; }
+  .wsbody { flex: 1; min-height: 0; border: 1px solid var(--border); background: #1c1c1c; overflow: hidden; }
+  .tip { position: absolute; background: #232323; border: 1px solid #5a5a5a; color: #eaeaea; font-size: 13px; padding: 5px 9px; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,.6); white-space: pre-line; z-index: 5; }
+  .votes { display: inline-flex; align-items: center; gap: 4px; }
+  .vote { display: inline-flex; align-items: center; gap: 4px; border: 1px solid #565656; background: #2a2a2a; border-radius: 3px; padding: 1px 7px; font-size: 13px; }
+  .vote.on { background: #2f4a6d; border-color: #4b6f9c; }
+  .vote.off.on { background: #5a2f2f; border-color: #8c4a4a; }
+  .cand { border-left: 2px solid #3a3a3a; padding-left: 8px; margin: 2px 0; }
+  .cand.fav { border-left-color: var(--accent); }
+  .pager { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ============================ 帧 1：两栏 · 待提交 ============================ -->
+  <div>
+    <p class="caption">帧 1 — 参与翻译：上面是清单，下面是「工作区」（待提交页签）。底部按钮只剩 一键提交 / 删除 / 清空 / 撤回 / 查看历史提交记录。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="tabs">
+          <div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div>
+        </div>
+        <div class="hint">对插件名、一行简介、插件详情的翻译做出贡献。</div>
+        <div class="hint">提交的译文优先于机器翻译，每周一词表维护时将汇总本周提交交给大家评审，可以在 Github（待补完）</div>
+        <div class="hint">本地改动只在你这里生效；点「从 GitHub 更新词表」会整份覆盖本地改动，没提交出去的译文会消失。</div>
+        <div class="sep"></div>
+
+        <div class="row">
+          <div class="search">搜索插件名、原文、译文…</div>
+          <span class="hint">搜索范围</span>
+          <span class="row"><span class="chk on"></span>插件名</span>
+          <span class="row"><span class="chk on"></span>一行简介</span>
+          <span class="row"><span class="chk on"></span>插件详情</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>缺译文</span>
+          <span class="row"><span class="radio"></span>机器译</span>
+          <span class="row"><span class="radio"></span>我提交过</span>
+          <span class="row"><span class="radio"></span>待复核</span>
+          <span class="row"><span class="chk"></span>显示图标</span>
+          <span class="row"><span class="chk on"></span>连着已停用的库</span>
+        </div>
+        <div class="row">
+          <span class="hint">视图</span>
+          <span class="row"><span class="radio on"></span>按插件</span>
+          <span class="row"><span class="radio"></span>按仓库</span>
+          <span class="row"><span class="radio"></span>评分</span>
+        </div>
+        <div class="row">
+          <span class="btn">翻译所选（0）</span><span class="btn">全选当前</span><span class="btn">清空勾选</span>
+          <span class="sepv">│</span><span class="btn disabled">添加到我的库（0）</span><span class="btn disabled">撤回添加（0）</span>
+          <span class="sepv">│</span><div class="search" style="width:180px">或粘一条仓库地址…</div><span class="btn disabled">添加这条</span>
+        </div>
+
+        <div class="top">
+          <table>
+            <thead><tr><th>☐</th><th>状态</th><th>插件名</th><th>来源库</th><th>原文</th><th>译文</th><th></th></tr></thead>
+            <tbody>
+              <tr class="picked"><td><span class="chk on"></span></td><td class="good">你译</td><td>Penumbra</td><td class="urlish">xero/penumbra</td><td class="muted">Runtime mod loader and manager.</td><td>运行时模组加载与管理器。</td><td><span class="btn">改进…</span></td></tr>
+              <tr><td><span class="chk"></span></td><td class="bad">缺译</td><td>Aetherphone</td><td class="urlish">Aether/phone</td><td class="muted">In-game phone: messages, music…</td><td class="muted">—</td><td><span class="btn">补上…</span></td></tr>
+              <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Questionable</td><td class="urlish">Liza/quest</td><td class="muted">Automates supported quests…</td><td>自动完成受支持的任务…</td><td><span class="btn">改进…</span></td></tr>
+              <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Splatoon</td><td class="urlish">splatoon/repo</td><td class="muted">Scriptable markers and overlays…</td><td>可脚本化的标记与悬浮层…</td><td><span class="btn">改进…</span></td></tr>
+              <tr><td><span class="chk"></span></td><td class="warn">缺译<span class="info"> !</span></td><td>BOCCHI</td><td class="urlish">BOCCHI/repo</td><td class="muted">Optimize Occult Crescent…</td><td class="muted">—</td><td><span class="btn">补上…</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ws">
+          <div class="wstabs">
+            <div class="tab on">待提交（3）</div>
+            <div class="tab">2026-09-21（6）</div>
+            <div class="tab">2026-09-14（2）</div>
+          </div>
+          <div class="wsbody">
+            <table>
+              <thead><tr><th>☐</th><th>插件</th><th>字段</th><th>译文</th><th></th></tr></thead>
+              <tbody>
+                <tr class="picked"><td><span class="chk on"></span></td><td>Penumbra</td><td class="muted">一行简介</td><td>运行时模组加载与管理器。</td><td><span class="btn">改</span></td></tr>
+                <tr><td><span class="chk"></span></td><td>Penumbra</td><td class="muted">插件详情</td><td>一个运行时的模组加载与管理框架，可在不重启游戏的情况下热插拔…</td><td><span class="btn">改</span></td></tr>
+                <tr><td><span class="chk"></span></td><td>Questionable</td><td class="muted">插件名</td><td>任务助手</td><td><span class="btn">改</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row" style="margin-top:6px">
+            <span class="btn primary">一键提交（3）</span>
+            <span class="btn danger">删除（1）</span>
+            <span class="btn">清空</span>
+            <span class="btn">撤回</span>
+            <span class="btn">查看历史提交记录</span>
+            <span class="hint">这一栏是你改过、还没提交的译文</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 帧 2：两栏 · 历史留档 ============================ -->
+  <div>
+    <p class="caption">帧 2 — 点历史页签：只读回看当时交了什么（页签按日期命名，悬停显示具体时间，见紫色提示框）。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="tabs">
+          <div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div>
+        </div>
+        <div class="hint">对插件名、一行简介、插件详情的翻译做出贡献。</div>
+        <div class="sep"></div>
+        <div class="row"><div class="search">搜索插件名、原文、译文…</div><span class="hint">搜索范围</span><span class="row"><span class="chk on"></span>插件名</span><span class="row"><span class="chk on"></span>一行简介</span><span class="row"><span class="chk on"></span>插件详情</span></div>
+        <div class="row"><span class="row"><span class="radio"></span>全部</span><span class="row"><span class="radio on"></span>缺译文</span><span class="row"><span class="radio"></span>机器译</span><span class="row"><span class="radio"></span>我提交过</span><span class="row"><span class="radio"></span>待复核</span><span class="row"><span class="chk"></span>显示图标</span></div>
+        <div class="row"><span class="hint">视图</span><span class="row"><span class="radio on"></span>按插件</span><span class="row"><span class="radio"></span>按仓库</span><span class="row"><span class="radio"></span>评分</span></div>
+
+        <div class="top">
+          <table>
+            <thead><tr><th>☐</th><th>状态</th><th>插件名</th><th>来源库</th><th>原文</th><th>译文</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="chk"></span></td><td class="bad">缺译</td><td>VIWI</td><td class="urlish">VIWI/repo</td><td class="muted">A series of plugin-to-module…</td><td class="muted">—</td><td><span class="btn">补上…</span></td></tr>
+              <tr><td><span class="chk"></span></td><td class="bad">缺译</td><td>Mappy</td><td class="urlish">Mappy/repo</td><td class="muted">In-game map helper…</td><td class="muted">—</td><td><span class="btn">补上…</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ws">
+          <div class="wstabs">
+            <div class="tab">待提交</div>
+            <div class="tab on">2026-09-21（6）</div>
+            <div class="tab">2026-09-14（2）</div>
+          </div>
+          <div class="wsbody">
+            <table>
+              <thead><tr><th>插件</th><th>字段</th><th>译文</th><th>时间</th></tr></thead>
+              <tbody>
+                <tr><td>Penumbra</td><td class="muted">一行简介</td><td>运行时模组加载与管理器。</td><td class="muted">09-21 18:42</td></tr>
+                <tr><td>Penumbra</td><td class="muted">插件详情</td><td>一个运行时的模组加载与管理框架…</td><td class="muted">09-21 18:42</td></tr>
+                <tr><td>Questionable</td><td class="muted">插件名</td><td>任务助手</td><td class="muted">09-21 18:43</td></tr>
+                <tr><td>Splatoon</td><td class="muted">一行简介</td><td>可脚本化的标记与悬浮层</td><td class="muted">09-21 18:44</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row" style="margin-top:6px">
+            <span class="btn disabled">一键提交（0）</span>
+            <span class="btn disabled">删除（0）</span>
+            <span class="btn disabled">清空</span>
+            <span class="btn disabled">撤回</span>
+            <span class="btn">查看历史提交记录</span>
+            <span class="hint">历史留档：只读，可对照看当时交了什么</span>
+          </div>
+        </div>
+      </div>
+      <div class="tip" style="right:26px; bottom:150px; width:210px">提交于 2026-09-21 18:44<br>本地留档，只读<br>共 6 条</div>
+    </div>
+  </div>
+
+  <!-- ============================ 帧 3：翻译评分 ============================ -->
+  <div>
+    <p class="caption">帧 3 — 评分：每页 10 条；只列「赞 ≥ 1」的候选；👍 显示票数、👎 只显示自己点没点（不显示票数），都可再点一下取消；每条可挑一个自己喜欢的。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="tabs">
+          <div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div>
+        </div>
+        <div class="hint">对插件名、一行简介、插件详情的翻译做出贡献。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <span class="hint">视图</span>
+          <span class="row"><span class="radio"></span>按插件</span>
+          <span class="row"><span class="radio"></span>按仓库</span>
+          <span class="row"><span class="radio on"></span>评分</span>
+          <span class="hint">· 每页 10 条 · 只显示有候选的插件 · 共 47 条候选</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="chk on"></span>只看我没评过的</span>
+          <span class="row"><span class="chk"></span>只显示我选过的</span>
+          <span class="pager" style="margin-left:auto">
+            <span class="btn">◀ 上一页</span><span>第 1 / 5 页</span><span class="btn">下一页 ▶</span>
+          </span>
+        </div>
+
+        <div class="top" style="overflow:auto">
+          <div style="border-bottom:1px solid #262626; padding:6px 4px">
+            <div class="row" style="justify-content:space-between">
+              <span><b>Aetherphone</b> <span class="muted">· 一行简介 · aether/phone</span></span>
+              <span class="muted">候选 2 个</span>
+            </div>
+            <div class="muted" style="font-size:13px">原文：In-game phone: messages, music, calls…</div>
+            <div class="cand fav" style="margin-top:4px">
+              <div class="row" style="justify-content:space-between">
+                <span>游戏内手机：消息、音乐、通话…</span>
+                <span class="votes">
+                  <span class="vote on">👍 赞成 7</span>
+                  <span class="vote off">👎 反对</span>
+                  <span class="btn primary">选它</span>
+                </span>
+              </div>
+            </div>
+            <div class="cand">
+              <div class="row" style="justify-content:space-between">
+                <span>把手机搬进游戏：能发消息、听歌、打电话</span>
+                <span class="votes">
+                  <span class="vote">👍 赞成 3</span>
+                  <span class="vote off on">👎 反对</span>
+                  <span class="btn">选它</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-bottom:1px solid #262626; padding:6px 4px">
+            <div class="row" style="justify-content:space-between">
+              <span><b>Questionable</b> <span class="muted">· 插件详情 · Liza/quest</span></span>
+              <span class="muted">候选 1 个</span>
+            </div>
+            <div class="muted" style="font-size:13px">原文：Automates supported quests and steps…</div>
+            <div class="cand" style="margin-top:4px">
+              <div class="row" style="justify-content:space-between">
+                <span>自动完成受支持的任务与步骤…</span>
+                <span class="votes">
+                  <span class="vote">👍 赞成 2</span>
+                  <span class="vote off">👎 反对</span>
+                  <span class="btn">选它</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-bottom:1px solid #262626; padding:6px 4px">
+            <div class="row" style="justify-content:space-between">
+              <span><b>Penumbra</b> <span class="muted">· 一行简介 · xero/penumbra</span></span>
+              <span class="muted">候选 3 个 · 赞 ≥ 1 的 2 个</span>
+            </div>
+            <div class="muted" style="font-size:13px">原文：Runtime mod loader and manager.</div>
+            <div class="cand" style="margin-top:4px">
+              <div class="row" style="justify-content:space-between">
+                <span>运行时模组加载与管理器。</span>
+                <span class="votes"><span class="vote">👍 赞成 12</span><span class="vote off">👎 反对</span><span class="btn">选它</span></span>
+              </div>
+            </div>
+            <div class="cand">
+              <div class="row" style="justify-content:space-between">
+                <span>运行时的模组加载与管理工具</span>
+                <span class="votes"><span class="vote on">👍 赞成 4</span><span class="vote off">👎 反对</span><span class="btn primary">选它</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:6px 4px">
+            <div class="row" style="justify-content:space-between">
+              <span><b>Splatoon</b> <span class="muted">· 一行简介 · splatoon/repo</span></span>
+              <span class="muted">候选 1 个</span>
+            </div>
+            <div class="muted" style="font-size:13px">原文：Scriptable markers and overlays.</div>
+            <div class="cand" style="margin-top:4px">
+              <div class="row" style="justify-content:space-between">
+                <span>可脚本化的标记与悬浮层</span>
+                <span class="votes"><span class="vote">👍 赞成 1</span><span class="vote off">👎 反对</span><span class="btn">选它</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:6px">
+          <span class="hint">悬停 👍 / 👎：只统计票数，不显示谁投的；再点一下取消</span>
+          <span class="pager" style="margin-left:auto"><span class="btn">刷新候选</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

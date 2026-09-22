@@ -1,0 +1,38 @@
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>x64</Platforms>
+    <AssemblyName>FireGaze</AssemblyName>
+    <Name>FireGaze</Name>
+    <Version>1.2.0.24</Version>
+    <Authors>fire</Authors>
+    <Author>fire</Author>
+    <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
+    <Punchline>提供对第三方插件简介汉化等功能</Punchline>
+    <Description>第三方插件简介汉化
+第三方插件仓库坏链检测
+拦住插件安装器自动刷新
+
+Localization of third-party plugin descriptions; dead-link detection for third-party plugin repositories; keeping the plugin installer list from being reset by automatic refreshes.</Description>
+    <PackageProjectUrl>https://github.com/DCritHitFireIV/FireGaze</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DCritHitFireIV/FireGaze</RepositoryUrl>
+    <!-- 固定插件清单里的 API 级别（避免 CI 用新版 Dalamud 构建时把级别写高） -->
+    <DalamudApiLevel>15</DalamudApiLevel>
+    <!-- 国服（XIVLauncherCN）用 build.cmd 设置 DALAMUD_HOME；国际服走 SDK 默认路径 -->
+    <DalamudLibPath Condition="'$(DALAMUD_HOME)' != ''">$(DALAMUD_HOME)\</DalamudLibPath>
+  </PropertyGroup>
+
+  <!-- 离线冒烟测试（fgtest）要能调到 internal 类型：推送客户端、贡献存储等 -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="fgtest" />
+  </ItemGroup>
+
+  <!-- 词表跟随插件一起打包（发布 zip 里会有 translations.json） -->
+  <ItemGroup>
+    <None Include="..\..\translations.json" Link="translations.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

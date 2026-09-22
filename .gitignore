@@ -1,0 +1,15 @@
+# build outputs
+bin/
+obj/
+*.user
+# local backups / scratch
+agents/
+scripts/.local/
+# caches
+scripts/names_cache.jsonl
+scripts/translations_cache.jsonl
+__pycache__/
+*.pyc
+.cache/
+# 注意：scripts/translation-history.jsonl **不**忽略 ——
+# 它是玩家投稿的机器可读历史（docs/contributions.md 由它生成），属于要长期留档的凭证。

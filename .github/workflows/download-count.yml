@@ -1,0 +1,86 @@
+name: update-download-count
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update pluginmaster.json
+        id: update
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+
+          token = os.environ['GH_TOKEN']
+          repo = os.environ['GITHUB_REPOSITORY']
+
+          def api(url):
+              req = urllib.request.Request(
+                  url,
+                  headers={
+                      'Authorization': f'Bearer {token}',
+                      'Accept': 'application/vnd.github+json',
+                  },
+              )
+              with urllib.request.urlopen(req) as response:
+                  return json.load(response)
+
+          total = 0
+          latest_update = 0
+          page = 1
+          while True:
+              releases = api(f'https://api.github.com/repos/{repo}/releases?per_page=100&page={page}')
+              if not releases:
+                  break
+              for release in releases:
+                  for asset in release.get('assets', []):
+                      total += int(asset.get('download_count') or 0)
+                  published = release.get('published_at')
+                  if published:
+                      from datetime import datetime, timezone
+                      ts = int(datetime.fromisoformat(published.replace('Z', '+00:00')).timestamp())
+                      latest_update = max(latest_update, ts)
+              page += 1
+
+          with open('pluginmaster.json', encoding='utf-8') as handle:
+              master = json.load(handle)
+
+          changed = False
+          for item in master:
+              if item.get('DownloadCount') != total:
+                  item['DownloadCount'] = total
+                  changed = True
+              if latest_update and item.get('LastUpdate') != latest_update:
+                  item['LastUpdate'] = latest_update
+                  changed = True
+
+          with open('pluginmaster.json', 'w', encoding='utf-8') as handle:
+              json.dump(master, handle, ensure_ascii=False, indent=2)
+              handle.write('\n')
+
+          print(f'total downloads = {total}, latest update = {latest_update}, changed = {changed}')
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
+              out.write(f'changed={str(changed).lower()}\n')
+          PY
+
+      - name: Commit changes
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pluginmaster.json
+          git commit -m "chore: update download count"
+          git push

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>仓库体检 × 图标缓存 — 4 状态帧 mockup（v2）</title>
+<style>
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 700px; }
+  .window { width: 700px; height: 620px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .body { padding: 6px 16px 12px; display: flex; flex-direction: column; gap: 5px; }
+  .brandrow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .brandrow .brand { color: var(--accent); font-weight: 600; }
+  .brandrow .sub { color: var(--muted); font-size: 13px; }
+  .hint { color: var(--muted); }
+  .sep { height: 1px; background: var(--border); margin: 4px 0; }
+  .btn { display: inline-block; padding: 2px 9px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; }
+  .btn.danger { background: #8c2e2e; border-color: #a33a3a; }
+  .btn.disabled { opacity: .45; }
+  .chk { width: 15px; height: 15px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: #2a2a2a; font-size: 12px; flex: none; }
+  .chk.on::after { content: "✔"; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .radio { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; flex: none; }
+  .radio.on::after { content: ""; position: absolute; inset: 3px; background: #d8d8d8; border-radius: 50%; }
+  .search { flex: 1; min-width: 130px; border: 1px solid #565656; border-radius: 3px; padding: 2px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); padding: 3px 6px; white-space: nowrap; }
+  th .car { color: var(--accent); font-size: 12px; }
+  th .sx { color: #6f6f6f; font-size: 11px; }
+  td { padding: 3px 6px; border-bottom: 1px solid #262626; vertical-align: middle; }
+  tr.repo td { background: #1a1a1a; }
+  .url { color: #cfcfcf; font-size: 13px; }
+  .good { color: var(--good); } .bad { color: var(--bad); } .info { color: var(--info); } .muted { color: var(--muted); }
+  .tip { position: absolute; background: #f0f0f0; color: #141414; font-size: 13px; padding: 4px 9px; border-radius: 3px; box-shadow: 0 2px 8px rgba(0,0,0,.55); white-space: pre-line; }
+  .toolbar { display: flex; gap: 6px; flex-wrap: wrap; }
+  .progress { height: 6px; background: #2c2c2c; border-radius: 3px; overflow: hidden; width: 120px; }
+  .progress > i { display: block; height: 100%; background: var(--accent); width: 62%; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div>
+    <p class="caption">帧 1 — 默认态：先「检查缺图标」（只查不下载）；下载按钮在没检查前是灰的</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="hint">扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。</div>
+        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span></div>
+        <div class="hint">共 12 个仓库 ｜ 可用 8 · 死链 1 · 内容不合规 1 · 拒绝访问 0 · 连接失败 1 · 未检查 1 ｜ <span class="muted">已安装 9 · 未安装 3 ｜ 已停用 2</span></div>
+        <div class="row"><span>显示</span>
+          <span class="row"><span class="radio"></span>有问题的</span>
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>连接失败</span>
+          <span class="row"><span class="radio"></span>已停用</span>
+          <span class="row"><span class="radio"></span>可用</span>
+        </div>
+        <div class="row"><span class="row"><span class="chk"></span><span>只看有插件的</span></span>
+          <span class="row"><span class="chk"></span><span>只看未安装的</span></span>
+          <span class="row"><span class="chk"></span><span>显示插件图标</span></span>
+          <span class="row"><span class="chk on"></span><span>本地缓存图标</span></span>
+          <span class="muted">│</span>
+          <span class="btn">检查缺图标</span>
+          <span class="btn disabled">下载图标（0）</span>
+        </div>
+        <div class="row"><span class="search">搜索仓库地址…</span></div>
+
+        <table>
+          <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>4 个</td><td class="muted">09-15</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="muted">0 个</td><td class="muted">08-02</td></tr>
+        </table>
+        <div class="sep"></div>
+        <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:13px">结果 5 行 · 已选 1</span><span class="row"><span class="btn">撤回：删除 2 个 · 12:03</span><span class="btn">打开备份目录</span></span></div>
+        <div class="toolbar"><span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="caption">帧 2 — 检查完：一句话列出缺谁、缺几个；下载按钮此时才可用，下不下由你决定</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="hint">扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。</div>
+        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span></div>
+        <div class="hint">共 12 个仓库 ｜ 可用 8 · 死链 1 · 内容不合规 1 · 拒绝访问 0 · 连接失败 1 · 未检查 1 ｜ <span class="muted">已安装 9 · 未安装 3 ｜ 已停用 2</span></div>
+        <div class="row"><span>显示</span>
+          <span class="row"><span class="radio"></span>有问题的</span>
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>连接失败</span>
+          <span class="row"><span class="radio"></span>已停用</span>
+          <span class="row"><span class="radio"></span>可用</span>
+        </div>
+        <div class="row"><span class="row"><span class="chk"></span><span>只看有插件的</span></span>
+          <span class="row"><span class="chk"></span><span>只看未安装的</span></span>
+          <span class="row"><span class="chk on"></span><span>显示插件图标</span></span>
+          <span class="row"><span class="chk on"></span><span>本地缓存图标</span></span>
+          <span class="muted">│</span>
+          <span class="btn">检查缺图标</span>
+          <span class="btn">下载图标（8）</span>
+        </div>
+        <div class="row"><span class="search">搜索仓库地址…</span></div>
+
+        <table>
+          <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>4 个</td><td class="muted">09-15</td></tr>
+        </table>
+        <div class="sep"></div>
+        <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:13px">结果 5 行 · 已选 1</span><span class="row"><span class="btn">撤回：删除 2 个 · 12:03</span><span class="btn">打开备份目录</span></span></div>
+        <div class="toolbar"><span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span></div>
+        <div class="hint" style="margin-top:4px">图标检查：已安装 42 个插件 ｜ 图标已有 31 个，其中本地缓存 20 个 ｜ 缺图标 8 个 ｜ BadApple、BossMod Reborn、SrankTool 等 8 个。下好的图标会存在本地，重开游戏不用重下。</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="caption">帧 3 — 下载中：按钮变「停止下载」；同时最多 8 个；只剩最后几个时收尾（再等 4 秒）</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="hint">扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。</div>
+        <div class="row"><span class="btn disabled">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span></div>
+        <div class="hint">共 12 个仓库 ｜ 可用 8 · 死链 1 · 内容不合规 1 · 拒绝访问 0 · 连接失败 1 · 未检查 1 ｜ <span class="muted">已安装 9 · 未安装 3 ｜ 已停用 2</span></div>
+        <div class="row"><span>显示</span>
+          <span class="row"><span class="radio"></span>有问题的</span>
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>连接失败</span>
+          <span class="row"><span class="radio"></span>已停用</span>
+          <span class="row"><span class="radio"></span>可用</span>
+        </div>
+        <div class="row"><span class="row"><span class="chk"></span><span>只看有插件的</span></span>
+          <span class="row"><span class="chk"></span><span>只看未安装的</span></span>
+          <span class="row"><span class="chk on"></span><span>显示插件图标</span></span>
+          <span class="row"><span class="chk on"></span><span>本地缓存图标</span></span>
+          <span class="muted">│</span>
+          <span class="btn disabled">检查缺图标</span>
+          <span class="btn">停止下载</span>
+        </div>
+        <div class="row"><span class="search">搜索仓库地址…</span></div>
+
+        <table>
+          <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>4 个</td><td class="muted">09-15</td></tr>
+        </table>
+        <div class="sep"></div>
+        <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:13px">结果 5 行 · 已选 1</span><span class="row"><span class="btn">撤回：删除 2 个 · 12:03</span><span class="btn">打开备份目录</span></span></div>
+        <div class="toolbar"><span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span></div>
+        <div class="row" style="margin-top:4px"><span class="progress"><i style="width:62%"></i></span><span class="hint">图标下载：已请求 6/8 · 拿到 5 · 还剩 2，最多再等 3 秒</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="caption">帧 4 — 下载完：分母、三类归属、下一步；「已安装」悬停里标出缺的是谁</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="hint">扫描全部第三方仓库：检查链接是否失效、内容是否合规（与卫月同款校验）。</div>
+        <div class="row"><span class="btn">开始体检</span><span class="row"><span class="chk on"></span><span>扫描范围含已停用</span></span></div>
+        <div class="hint">共 12 个仓库 ｜ 可用 8 · 死链 1 · 内容不合规 1 · 拒绝访问 0 · 连接失败 1 · 未检查 1 ｜ <span class="muted">已安装 9 · 未安装 3 ｜ 已停用 2</span></div>
+        <div class="row"><span>显示</span>
+          <span class="row"><span class="radio"></span>有问题的</span>
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>连接失败</span>
+          <span class="row"><span class="radio"></span>已停用</span>
+          <span class="row"><span class="radio"></span>可用</span>
+        </div>
+        <div class="row"><span class="row"><span class="chk"></span><span>只看有插件的</span></span>
+          <span class="row"><span class="chk"></span><span>只看未安装的</span></span>
+          <span class="row"><span class="chk on"></span><span>显示插件图标</span></span>
+          <span class="row"><span class="chk on"></span><span>本地缓存图标</span></span>
+          <span class="muted">│</span>
+          <span class="btn">检查缺图标</span>
+          <span class="btn">下载图标（2）</span>
+        </div>
+        <div class="row"><span class="search">搜索仓库地址…</span></div>
+
+        <table>
+          <tr><th style="width:26px"></th><th style="width:120px">状态 <span class="car">▲</span></th><th>仓库地址</th><th style="width:96px">已安装 <span class="sx">⇅</span></th><th style="width:84px">首次记录 <span class="sx">⇅</span></th></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="warn">内容不合规</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>1 个</td><td class="muted">09-01</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/pluginmaster.json</td><td>4 个</td><td class="muted">09-15</td></tr>
+          <tr class="repo"><td><span class="chk"></span></td><td><span class="good">可用</span></td><td class="url">https://raw.githubusercontent.com/…/repo.json</td><td class="muted">0 个</td><td class="muted">08-02</td></tr>
+        </table>
+        <div class="sep"></div>
+        <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:13px">结果 5 行 · 已选 1</span><span class="row"><span class="btn">撤回：删除 2 个 · 12:03</span><span class="btn">打开备份目录</span></span></div>
+        <div class="toolbar"><span class="btn">停用所选（1）</span><span class="btn danger">删除所选（1）…</span><span class="btn">全选当前（5）</span><span class="btn">清空选择</span></div>
+        <div class="hint" style="margin-top:4px">图标下载完成：这次请求 8 个，拿到 6 个，失败 1 个，1 个没拿到；用时 18s。已存的图标重开游戏不用重下。 1 个图标地址已失效，需要插件作者更新清单；1 个没下完，可以再点一次。</div>
+        <div class="tip" style="left:340px; top:330px;">从这条库链装了 4 个插件。
+这条库一共提供多少个插件，把鼠标放在仓库地址上看
+BadApple、BossMod Reborn · 缺图标、SrankTool、NamePlate
+带「缺图标」的是这次检查没缓存到的，可以点「下载图标」；带「图标地址失效」的要作者更新清单。图标只影响列表里的小图，不影响插件运行。</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

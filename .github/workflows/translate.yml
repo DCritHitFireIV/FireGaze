@@ -1,0 +1,72 @@
+name: update-translations
+
+# 节奏（三处对齐，可单独改）：
+#   · 下载数：download-count.yml 每 6 小时回写一次下载数（数据统计，与译文无关）
+#   · 全量译文：周一 12:00（北京时间）跑本工作流，只翻译新增或原文改过的条目
+#   · 一行简介与冷门仓库：Aetherfeed 不含 Punchline、也不收录国服/小众库，
+#     所以工作流会先看 `scripts/repos.txt`（维护者用 scripts/export-repo-list.py 从本机导出的仓库清单），
+#     拿真实仓库文件当语料；没有这份清单时退回只用 Aetherfeed。
+#   · 玩家贡献：「参与翻译」页点「一键提交」会把译文直接推给维护者（server3 酱），
+#     没定时的自动流程 —— 维护者拿推送里的 JSON 跑
+#     `python scripts/import_contributions.py <json>` 写回词表
+#     （玩家译文 Source=user，机器译永不覆盖）。插件侧每两周拉一次新词表。
+
+on:
+  schedule:
+    # 每周一 04:00 UTC（北京时间中午 12:00）
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+    inputs:
+      recheck:
+        description: 全量重做：把所有非玩家译的简介/详情再送一遍模型
+        type: boolean
+        default: false
+permissions:
+  contents: write
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Update translations
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          RECHECK: ${{ inputs.recheck }}
+        run: |
+          # 有仓库清单（scripts/repos.txt）就带上：Aetherfeed 那份语料**完全没有一行简介**，
+          # 而 Punchline 只在各仓库的 pluginmaster.json 里；这份清单由维护者用
+          # `python scripts/export-repo-list.py` 从本机 Dalamud 配置导出。
+          # 手动触发时勾上 recheck = 走 --recheck（全量重做，默认只处理新增/缺译/译文=原文的）。
+          EXTRA=""
+          if [ "$RECHECK" = "true" ]; then
+            EXTRA="--recheck"
+          fi
+          if [ -s scripts/repos.txt ]; then
+            python scripts/update_translations.py --repos scripts/repos.txt $EXTRA
+          else
+            python scripts/update_translations.py $EXTRA
+          fi
+
+      - name: Commit changes
+        run: |
+          # docs/translation-review.md 是「原文改过、玩家译待复核」的报告：
+          # 以前它写在 scripts/ 下、又没被提交，于是任何覆盖都留不下痕迹（审查 P0-1）。
+          if git diff --quiet -- translations.json docs/; then
+            echo "词表无变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add translations.json docs/
+          git commit -m "chore: update translations"
+          git push
