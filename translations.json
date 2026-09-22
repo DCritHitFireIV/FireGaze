@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "updatedAt": "2026-09-21"
+  "updatedAt": "2026-09-22"
  },
  "DalamudRepoBrowser": {
   "Punchline": {
@@ -4273,12 +4273,14 @@
  },
  "LootView": {
   "Punchline": {
-   "Original": "Comprehensive loot tracking with statistics and analytics",
-   "Translated": "全面的战利品追踪，附带统计与分析"
+   "Original": "See every item you and your party pick up, as it drops.",
+   "Translated": "实时查看你和队员拾取的每件物品。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "A customizable loot tracking window with item icons, rarity colors, and highlight animations. Shows who loots what and can be filtered to show only your loot.",
-   "Translated": "可自定义的战利品追踪窗口，包含物品图标、稀有度颜色和高亮动画。显示谁拾取了什么，并可筛选为仅显示你的战利品。"
+   "Original": "LootView is a live loot tracker for you and your party, with a permanent history and statistics behind it.\n\nWHAT YOU GET\n\n- Live overlay listing every drop with its icon, rarity, quantity, who received it and how long ago.\n- Estimated market value of your haul, priced for your home world through Universalis.\n- Need/Greed panel that appears while rolls are open, showing each roll and marking the winner.\n- Loot tables for dungeons, trials and raids - the duty you are in, or any duty you search for.\n- Searchable history you can filter by item name, rarity, zone, high quality and owner.\n- Statistics: rarity breakdown, top zones, daily and hourly activity, play streaks and period-over-period comparisons.\n- Duty tracker recording your runs, clear times, items per run and personal bests.\n- Export to JSON or CSV whenever you want.\n\nGETTING STARTED\n\nType /lv to open the tracker and /lv config for settings. You can also open it from the server info bar.\nRight-click any row in the list to blacklist an item or copy its name.\n\nPRIVACY\n\nYour history is stored locally in your Dalamud configuration folder and is never uploaded. Market prices are looked up from universalis.app and loot tables from garlandtools.org; both requests send only an item or duty ID. Price lookups can be turned off in the settings.\n\nThe plugin icon was produced programmatically with AI assistance. Everything else you see in the plugin is hand-authored.",
+   "Translated": "LootView 是一个为你和你的队员提供的实时战利品追踪器，背后有永久历史和统计数据。\n\n你将获得\n\n- 实时悬浮窗列出每个掉落物及其图标、稀有度、数量、获得者以及多久之前。\n- 通过 Universalis 为你的主世界定价的收获估算市场价值。\n- 在需求/贪婪掷骰开放时出现的面板，显示每次掷骰并标记获胜者。\n- 地下城、讨伐战和大型任务的战利品表 - 你当前所在的任务，或你搜索的任何任务。\n- 可按物品名称、稀有度、区域、高品质和所有者筛选的可搜索历史。\n- 统计数据：稀有度分布、热门区域、每日和每小时活动、游玩连续记录以及环比比较。\n- 任务追踪器记录你的运行、通关时间、每次运行物品和个人最佳。\n- 随时导出为 JSON 或 CSV。\n\n开始使用\n\n输入 /lv 打开追踪器，输入 /lv config 进行设置。你也可以从服务器信息栏打开它。\n右键点击列表中的任意行可将物品加入黑名单或复制其名称。\n\n隐私\n\n你的历史记录本地存储在 Dalamud 配置文件夹中，绝不会上传。市场价格从 universalis.app 查询，战利品表从 garlandtools.org 查询；两个请求仅发送物品或任务 ID。价格查询可在设置中关闭。\n\n插件图标由 AI 协助以程序化方式生成。插件中你看到的所有其他内容均为手工编写。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "LootView",
@@ -13525,8 +13527,8 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Plan Free Company submarine operations from local SubmarineTracker data: choose which tracked FCs to show, prioritize returns and next actions, forecast leveling and sector unlocks, review recorded salvage income, configure farming routes, and estimate ceruleum fuel runway. Requires Submarine Tracker to be installed and enabled. Open it with /seta. The installer icon was created with AI assistance.",
-   "Translated": "基于本地 SubmarineTracker 数据规划部队潜水艇行动：选择要显示的已追踪部队，优先显示返航和下一步行动，预测升级和区域解锁，查看已记录的打捞收入，配置采集路线，并估算青磷水燃料续航。需要安装并启用 Submarine Tracker。使用 /seta 打开。安装程序图标在 AI 协助下创建。",
+   "Original": "Plan Free Company submarine operations from local SubmarineTracker data: choose which tracked FCs to show, prioritize returns and next actions, forecast leveling and sector unlocks, review recorded salvage income and project future farming earnings, configure farming routes, and estimate ceruleum fuel runway. Requires Submarine Tracker to be installed and enabled. Open it with /seta. The installer icon was created with AI assistance.",
+   "Translated": "基于本地 SubmarineTracker 数据规划部队潜水艇行动：选择要显示的已追踪部队，优先处理返回和下一步行动，预测升级和区域解锁，查看记录的打捞收入和预测未来采集收益，配置采集路线，并估算青磷燃料续航。需要安装并启用 Submarine Tracker。使用 /seta 打开。安装程序图标由 AI 协助创建。",
    "Source": "ai"
   },
   "Name": {
@@ -14940,11 +14942,13 @@
  "BossModRebornTekz": {
   "Punchline": {
    "Original": "Unofficial Tekz fork of BossMod Reborn",
-   "Translated": "BossMod Reborn 的非官方 Tekz 分支"
+   "Translated": "BossMod Reborn 的非官方 Tekz 分支",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "UNOFFICIAL FORK of BossMod Reborn by the Combat Reborn Team - install the original from their own repository if you want the real thing (https://github.com/FFXIV-CombatReborn/BossmodReborn).\n\nThis build tracks upstream and adds extra work on the Occult Crescent critical engagements and FATEs, and on the Beastmaster Crucible of the Unbroken boards, tuned against recorded replays. Bugs here are this fork's, not upstream's - report them at https://github.com/t3knical/BossmodReborn rather than to the Combat Reborn Team.",
-   "Translated": "Combat Reborn 团队制作的 BossMod Reborn 的非官方分支——如果想要原版，请从他们自己的仓库安装（https://github.com/FFXIV-CombatReborn/BossmodReborn）。\n\n此版本会跟进上游，并针对 Occult Crescent 的 critical engagement 和 FATE，以及 Beastmaster 的 Crucible of the Unbroken 排行榜增加了额外工作，并已根据录制的回放进行调整。这里的 bug 属于此分支，而非上游——请在 https://github.com/t3knical/BossmodReborn 报告，而不要报告给 Combat Reborn 团队。"
+   "Original": "UNOFFICIAL FORK of BossMod Reborn by the Combat Reborn Team - install the original from their own repository if you want the real thing (https://github.com/FFXIV-CombatReborn/BossmodReborn).\n\nThis build tracks upstream and adds extra work on the Occult Crescent critical engagements and FATEs, and on the Beastmaster Crucible of the Unbroken boards, tuned against recorded replays. Bugs here are this fork's, not upstream's - report them at https://github.com/t3knical/DalamudPlugins rather than to the Combat Reborn Team.",
+   "Translated": "Combat Reborn 团队 BossMod Reborn 的非官方分支——如需正版请从他们自己的仓库安装（https://github.com/FFXIV-CombatReborn/BossmodReborn）。\n\n此版本跟随上游更新，并额外针对新月岛紧急遭遇战与 FATE，以及驯兽师 Crucible of the Unbroken 的棋盘进行了开发，均依据录制的回放进行调校。此处的 Bug 属于本分支而非上游——请在 https://github.com/t3knical/DalamudPlugins 报告，而不要反馈给 Combat Reborn 团队。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "BossmodReborn (Tekz Fork)",
@@ -19723,12 +19727,14 @@
  },
  "DhogNav": {
   "Punchline": {
-   "Original": "Introduction and full-plugin installation guidance.",
-   "Translated": "简介与完整插件安装指南。"
+   "Original": "DhogNav information and privately granted module access.",
+   "Translated": "DhogNav 信息及私下授予的模块访问权限。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "Open /dnav for an introduction. Get the full plugin through Discord and install it with Aethertek Plugin Manager (APM).",
-   "Translated": "打开 /dnav 查看简介。通过 Discord 获取完整插件，并使用 Aethertek Plugin Manager (APM) 安装。"
+   "Original": "The free public DhogNav plugin provides information and loads authorized DhogNav modules. Module access is arranged privately with McVaxius through the community Discord.",
+   "Translated": "免费的公共 DhogNav 插件提供信息并加载授权的 DhogNav 模块。模块访问权限通过社区 Discord 与 McVaxius 私下安排。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "DhogNav",
@@ -24291,18 +24297,18 @@
  },
  "PlayerMapping": {
   "Name": {
-   "Original": "PlayerMapping",
-   "Translated": "玩家映射",
+   "Original": "HuntPad",
+   "Translated": "HuntPad",
    "Source": "ai"
   },
   "Punchline": {
-   "Original": "Realtime player overlay on the current map.",
-   "Translated": "在当前地图上实时显示玩家叠加层。",
+   "Original": "地図とカウンターで、モブハントをナビゲート。",
+   "Translated": "地図とカウンターで、モブハントをナビゲート。",
    "Source": "ai"
   },
   "Description": {
-   "Original": "周囲のプレイヤー・モブ・FATEを地図に表示します。初回利用時に、配布元から案内された利用キーの入力が必要です。",
-   "Translated": "周囲のプレイヤー・モブ・FATEを地図に表示します。初回利用時に、配布元から案内された利用キーの入力が必要です。",
+   "Original": "HuntPad（ハントパッド）は、モブハントのお供になる情報端末です。周囲のプレイヤー・モブ・FATEの地図表示、位置案内、Sモブトリガーカウンターで狩りを支援します。/huntpadで開閉できます（従来の/playermapも利用可能）。初回利用時に、配布元から案内された利用キーの入力が必要です。",
+   "Translated": "HuntPad（ハントパッド）は、モブハントのお供になる情報端末です。周囲のプレイヤー・モブ・FATEの地図表示、位置案内、Sモブトリガーカウンターで狩りを支援します。/huntpadで開閉できます（従来の/playermapも利用可能）。初回利用時に、配布元から案内された利用キーの入力が必要です。",
    "Source": "ai"
   }
  },
@@ -24393,13 +24399,13 @@
    "Source": "ai"
   },
   "Punchline": {
-   "Original": "Private FFXIV-to-Discord chat relay with no hosted backend.",
-   "Translated": "私人的 FFXIV 到 Discord 聊天转发，无需托管后端。",
+   "Original": "Private per-character FFXIV and Discord chat relay.",
+   "Translated": "私人的按角色 FFXIV 和 Discord 聊天中继。",
    "Source": "ai"
   },
   "Description": {
-   "Original": "Sends explicitly selected FFXIV chat channels directly to a per-character Discord webhook. All filters default off; no bot, paid hosting, or Discord-to-FFXIV control is required.",
-   "Translated": "将明确选定的 FFXIV 聊天频道直接发送到按角色区分的 Discord webhook。所有过滤器默认关闭；无需机器人、付费托管或 Discord 到 FFXIV 的控制。",
+   "Original": "Sends explicitly selected FFXIV chats directly to a per-character Discord webhook and accepts only locally allowed, authorized chat replies. Filters and reply destinations default off.",
+   "Translated": "将明确选定的 FFXIV 聊天直接发送到按角色的 Discord webhook，并仅接受本地允许、已授权的聊天回复。过滤器和回复目标默认关闭。",
    "Source": "ai"
   }
  },
@@ -24599,8 +24605,8 @@
    "Source": "ai"
   },
   "Punchline": {
-   "Original": "Party buff, Dokumori, and personal potion countdown bars.",
-   "Translated": "团队增益、介毒之术和个人爆发药倒计时条。",
+   "Original": "Cooldown and active-duration bars for party buffs, Dokumori, and potions.",
+   "Translated": "队伍增益、介毒之术和药水的冷却与持续时间条。",
    "Source": "ai"
   },
   "Description": {
@@ -24686,6 +24692,217 @@
   "Description": {
    "Original": "Requires Glamourer. Paste an Eorzea Collection glamour URL or id and GlamourLink reads its gear list from Eorzea Collection's undocumented JSON endpoint, resolves it against the game's own item and dye sheets, and applies the result to your character through Glamourer's IPC. Unmatched items are reported rather than guessed silently, and every fuzzy-matched item is labelled as a guess. Optionally saves the result as a named Glamourer design. Saved outfits keep their resolved gear, so applying one needs no call to Eorzea Collection; open /glink library to browse them. Open /glink in game to import.",
    "Translated": "需要 Glamourer。粘贴 Eorzea Collection 幻化 URL 或 id，GlamourLink 会从 Eorzea Collection 未公开的 JSON 端点读取其装备列表，对照游戏自身的物品和染剂表进行解析，并通过 Glamourer 的 IPC 将结果应用到你的角色上。未匹配的物品会被报告，而不是静默猜测，每个模糊匹配的物品都会被标记为猜测。可选择将结果保存为命名的 Glamourer 设计。保存的套装会保留其解析后的装备，因此应用其中一个无需调用 Eorzea Collection；打开 /glink library 浏览它们。在游戏内打开 /glink 进行导入。",
+   "Source": "ai"
+  }
+ },
+ "RetainerUndercut": {
+  "Name": {
+   "Original": "Retainer Undercut",
+   "Translated": "雇员压价",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Fast, safe retainer repricing with preview-first automation.",
+   "Translated": "快速、安全地重新定价雇员，预览优先的自动化。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Preview and apply retainer market repricing with strict HQ/NQ separation, multi-retainer runs, Matchlist protection, per-item rules, safety guards, Price Recovery, and run history.",
+   "Translated": "预览并应用雇员市场重新定价，严格区分 HQ/NQ，多雇员运行，Matchlist 保护，逐物品规则，安全防护，Price Recovery，以及运行历史。",
+   "Source": "ai"
+  }
+ },
+ "mom": {
+  "Name": {
+   "Original": "mom",
+   "Translated": "mom",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "MOM information and privately granted access.",
+   "Translated": "MOM 信息及私下授予的访问权限。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "MOM is a free public front end. Additional functionality is available through privately granted access. Visit the community for access availability and support.",
+   "Translated": "MOM 是一个免费的公共前端。额外功能可通过私下授予的访问权限获得。请访问社区了解访问可用性和支持。",
+   "Source": "ai"
+  }
+ },
+ "PrivateMarks": {
+  "Name": {
+   "Original": "Private Marks",
+   "Translated": "私人标记",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Keep your people in sight. Only on your screen.",
+   "Translated": "让你的人保持在视野中。仅在你的屏幕上。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Manually assign private visual marks to players, with loaded-player edge indicators and optional remembered favourites.",
+   "Translated": "手动为玩家分配私人视觉标记，带有已加载玩家边缘指示器和可选的记忆收藏。",
+   "Source": "ai"
+  }
+ },
+ "MarketBoardCollector": {
+  "Name": {
+   "Original": "TC-Market Supplement",
+   "Translated": "TC-Market Supplement",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "當你自己打開市場板查看物品時，把 Universalis 沒有資料的物品（例如繁中服的舊染劑）的掛單與成交紀錄，匿名回報給社群伺服器（不需要金鑰或帳號，預設開啟，可在 /mbcollector 關閉）。不會操作遊戲、不會記錄你自己的角色資訊；成交紀錄的買家名稱與雇員名稱（市場板上本來就公開顯示）會一併回報。",
+   "Translated": "當你自己打開市場板查看物品時，把 Universalis 沒有資料的物品（例如繁中服的舊染劑）的掛單與成交紀錄，匿名回報給社群伺服器（不需要金鑰或帳號，預設開啟，可在 /mbcollector 關閉）。不會操作遊戲、不會記錄你自己的角色資訊；成交紀錄的買家名稱與雇員名稱（市場板上本來就公開顯示）會一併回報。",
+   "Source": "ai"
+  }
+ },
+ "AnoMechTesting": {
+  "Name": {
+   "Original": "AnoMech Testing",
+   "Translated": "AnoMech Testing",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Testing build of the AnoMech multiplayer branch.",
+   "Translated": "AnoMech 多人分支的测试版本。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Unstable build of the multiplayer work in progress on Evernow/AnoMech's multiplayer-support branch. Spawns fake party members and bosses client-side so you can practice raid mechanics, with several people sharing one simulation. Installs alongside the normal AnoMech and keeps its own settings.",
+   "Translated": "Evernow/AnoMech 多人支持分支上多人功能的开发中不稳定版本。在客户端生成假队员和首领，让你可以练习副本机制，多人共享一个模拟。与普通 AnoMech 并存安装，并保留自己的设置。",
+   "Source": "ai"
+  }
+ },
+ "UniversalModConverter": {
+  "Name": {
+   "Original": "Universal Mod Converter",
+   "Translated": "通用模组转换器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Move Penumbra mods to other items, slots and races.",
+   "Translated": "将 Penumbra 模组移动到其他物品、槽位和种族。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Convert gear, facewear, hair, face, tail, Viera-ear and skin assets in Penumbra mods to other items, slots and races, swap idle and emote animations (optionally as an option group of idle slots), retarget animations to other races, and merge two modpacks into one. Supports the Penumbra 1.7+ mod format, retargets game paths, model/material references and metadata, previews every change, and can revert conversions.",
+   "Translated": "将 Penumbra 模组中的装备、面部饰品、发型、面部、尾巴、维埃拉族耳朵和皮肤资源转换到其他物品、槽位和种族，交换待机动作和情感动作动画（可选作为待机槽位的选项组），将动画重定向到其他种族，并将两个模组包合并为一个。支持 Penumbra 1.7+ 模组格式，重定向游戏路径、模型/材质引用和元数据，预览每项更改，并可还原转换。",
+   "Source": "ai"
+  }
+ },
+ "FFXIVTurkce": {
+  "Name": {
+   "Original": "FFXIV Türkçe",
+   "Translated": "FFXIV Türkçe",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "FFXIV'i oyunun kendi arayüzünde Türkçe oyna.",
+   "Translated": "在游戏自带界面中以土耳其语游玩 FFXIV。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Diyalogları, görev günlüğünü, menüleri ve arayüzdeki yazıları oyunun kendi kutusunun içinde Türkçe gösterir. API anahtarı gerekmez; çeviriler kalıcı önbelleğe alınır.",
+   "Translated": "在游戏自带窗口内以土耳其语显示对话、任务日志、菜单和界面文本。无需 API 密钥；翻译会持久缓存。",
+   "Source": "ai"
+  }
+ },
+ "MechanicNotes": {
+  "Name": {
+   "Original": "机制说明 · Mechanic Notes",
+   "Translated": "机制说明 · Mechanic Notes",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "机制开始时显示一句灰机 Wiki 中文效果说明，覆盖程度因副本而异；批量条目结束时间未知。支持个人名称与正文、选区颜色和粗体、独立历史与复制、个人配置导入导出。使用 /mechanicnotes 调整窗口、预览、查看实际内容覆盖和导出诊断，使用 /mechanicnotes history 打开历史。地区与游戏版本严格匹配。",
+   "Translated": "机制开始时显示一句灰机 Wiki 中文效果说明，覆盖程度因副本而异；批量条目结束时间未知。支持个人名称与正文、选区颜色和粗体、独立历史与复制、个人配置导入导出。使用 /mechanicnotes 调整窗口、预览、查看实际内容覆盖和导出诊断，使用 /mechanicnotes history 打开历史。地区与游戏版本严格匹配。",
+   "Source": "ai"
+  }
+ },
+ "TheExplorersCodex": {
+  "Name": {
+   "Original": "The Explorer's Codex",
+   "Translated": "探索者图鉴",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Zone Completion, inspired by \"All the Things\" from WoW",
+   "Translated": "区域完成度，灵感来自 WoW 的“All the Things”",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Completionist plugin per zone with automation capabilities.",
+   "Translated": "按区域提供完成度插件，具备自动化功能。",
+   "Source": "ai"
+  }
+ },
+ "DesignBulkEditor": {
+  "Name": {
+   "Original": "Design Bulk Editor",
+   "Translated": "设计批量编辑器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Bulk-edit your Glamourer design library and preview changes live, without leaving the game.",
+   "Translated": "批量编辑你的 Glamourer 幻化设计库并实时预览更改，无需离开游戏。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Group Glamourer designs by character, edit names/folders/properties across many designs at once, and preview a staged edit on your logged-in character before saving. Unofficial, community-built, not affiliated with Glamourer/Ottermandias.",
+   "Translated": "按角色分组 Glamourer 设计，一次编辑多个设计的名称/文件夹/属性，并在保存前在已登录角色上预览暂存的编辑。非官方、社区构建，与 Glamourer/Ottermandias 无关。",
+   "Source": "ai"
+  }
+ },
+ "AutoDuty-bld": {
+  "Name": {
+   "Original": "AutoDuty（国服维护版）",
+   "Translated": "AutoDuty（国服维护版）",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "自动跑本，解放双手。",
+   "Translated": "自动跑本，解放双手。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "自动跑本插件，支持亲信战友、副本协助、冒险者分队、异闻副本与常规副本，需要 BossMod、vnavmesh 及循环插件（Wrath Combo、BossMod 自动循环或 RSR）。",
+   "Translated": "自动跑本插件，支持亲信战友、副本协助、冒险者分队、异闻副本与常规副本，需要 BossMod、vnavmesh 及循环插件（Wrath Combo、BossMod 自动循环或 RSR）。",
+   "Source": "ai"
+  }
+ },
+ "LazyCrucible": {
+  "Name": {
+   "Original": "LazyCrucible",
+   "Translated": "LazyCrucible",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Crucible of the Unbroken familiar picks, filled in for every fight",
+   "Translated": "Crucible of the Unbroken 的熟悉选择，为每场战斗自动填充",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "For the Beastmaster duty Crucible of the Unbroken. Fills the ten-familiar run roster at the Bentbranch Meadows entry menu and the three Battlehorn slots before every fight with the familiars that answer that fight's mechanics: elemental weakness, interrupts, dispels, cleanses and crowd control, skipping knocked-out familiars and benching badly hurt ones. Picks are announced in chat. Every automation has its own toggle and manual edits always win. Includes the beast-pick advisor for every board and a read-only recorder that writes each Crucible screen to the Dalamud log. Use /lazycrucible to open.",
+   "Translated": "用于驯兽师任务 Crucible of the Unbroken。在弯枝牧场入口菜单填充十只熟悉的行进名单，并在每场战斗前为三个 Battlehorn 槽位填充能应对该场战斗机制的熟悉：元素弱点、打断、驱散、净化与群体控制，跳过已倒下的熟悉并让重伤的熟悉下场。所选内容会在聊天中公布。每项自动化都有独立开关，手动修改始终优先。包含每个棋盘的野兽选择顾问，以及一个只读记录器，将每个 Crucible 界面写入 Dalamud 日志。使用 /lazycrucible 打开。",
+   "Source": "ai"
+  }
+ },
+ "GearsetOrganizer": {
+  "Name": {
+   "Original": "Gearset Organizer",
+   "Translated": "套装整理器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Organize your saved gearsets.",
+   "Translated": "整理你保存的套装。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Preview and organize existing gearsets by role and job, with guarded sorting and undo. Works independently without companion plugins.",
+   "Translated": "按职能与职业预览并整理现有套装，支持带保护的排序与撤销。可独立运行，无需配套插件。",
    "Source": "ai"
   }
  }

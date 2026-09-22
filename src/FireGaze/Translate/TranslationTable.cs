@@ -125,17 +125,26 @@ public sealed class TranslationTable
     }
 
     /// <summary>加载词表；返回是否至少加载到一份非空词表。</summary>
+    /// <summary>
+    /// 加载词表：配置目录（用户自己存过 / 自动更新下来的）与插件包自带的，
+    /// **取「维护日期更新」的那份**；日期相同则优先配置目录（可能有玩家本地改动）。
+    ///
+    /// 之前的规则是配置目录无脑优先，结果：玩家只要更新过一次词表，
+    /// 插件升级时包里带的新词表（比如补了一行简介、新插件）就永远被旧副本压住。
+    /// </summary>
     public bool Load(out string? error)
     {
         error = null;
 
-        var candidates = new List<string>
-        {
-            Path.Combine(this.configDirectory, "translations.json"),
-            Path.Combine(this.pluginDirectory, "translations.json"),
-        };
+        (string Path, DateTime When, string? MaintainedAt, Dictionary<string, TransEntry> Table) best = default;
+        var found = false;
 
-        foreach (var candidate in candidates)
+        // 先配置目录、后插件包：日期相同时前面（配置目录）优先
+        foreach (var candidate in new[]
+                 {
+                     Path.Combine(this.configDirectory, "translations.json"),
+                     Path.Combine(this.pluginDirectory, "translations.json"),
+                 })
         {
             try
             {
@@ -150,18 +159,32 @@ public sealed class TranslationTable
                     continue;
                 }
 
-                this.table = dict;
-                this.MaintainedAt = maintainedAt;
-                this.LoadedFrom = candidate;
-                this.LoadedAt = File.GetLastWriteTime(candidate);
-                return true;            }
+                var when = DateTime.TryParse(maintainedAt, out var maintained)
+                    ? maintained
+                    : File.GetLastWriteTime(candidate);
+
+                if (!found || when > best.When)
+                {
+                    best = (candidate, when, maintainedAt, dict);
+                    found = true;
+                }
+            }
             catch (Exception e)
             {
                 error = $"词表加载失败（{candidate}）：{e.Message}";
             }
         }
 
-        return false;
+        if (!found || best.Path is null || best.Table is null)
+        {
+            return false;
+        }
+
+        this.table = best.Table;
+        this.MaintainedAt = best.MaintainedAt;
+        this.LoadedFrom = best.Path;
+        this.LoadedAt = File.GetLastWriteTime(best.Path);
+        return true;
     }
 
     /// <summary>
