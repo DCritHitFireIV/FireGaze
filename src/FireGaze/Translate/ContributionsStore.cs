@@ -256,6 +256,91 @@ internal sealed class ContributionsStore
         return batch;
     }
 
+    /// <summary>把这几条从本机历史留档里删掉（不影响词表、也不影响已经交出去的译文）。返回删掉的条数。</summary>
+    public int RemoveFromHistory(IEnumerable<ContributionRecord> records)
+    {
+        var ids = new HashSet<string>(records.Select(x => x.Id), StringComparer.Ordinal);
+        if (ids.Count == 0)
+        {
+            return 0;
+        }
+
+        var removed = 0;
+        foreach (var batch in this.history)
+        {
+            removed += batch.Contributions.RemoveAll(x => ids.Contains(x.Id));
+        }
+
+        if (removed == 0)
+        {
+            return 0;
+        }
+
+        this.history.RemoveAll(x => x.Contributions.Count == 0);
+        this.SaveHistory();
+        this.Changed?.Invoke();
+        return removed;
+    }
+
+    /// <summary>
+    /// 把历史留档里的这几条**移回**待提交（不是复制：留档里不再保留它们），留档里被腾空的批次一并去掉。
+    /// 返回真正加回待提交的条目。
+    /// </summary>
+    public IReadOnlyList<ContributionRecord> RecallFromHistory(IEnumerable<ContributionRecord> records)
+    {
+        var ids = new HashSet<string>(records.Select(x => x.Id), StringComparer.Ordinal);
+        if (ids.Count == 0)
+        {
+            return [];
+        }
+
+        var recalled = new List<ContributionRecord>();
+        foreach (var batch in this.history)
+        {
+            for (var i = batch.Contributions.Count - 1; i >= 0; i--)
+            {
+                var record = batch.Contributions[i];
+                if (!ids.Contains(record.Id))
+                {
+                    continue;
+                }
+
+                recalled.Add(record);
+                batch.Contributions.RemoveAt(i);
+            }
+        }
+
+        if (recalled.Count == 0)
+        {
+            return [];
+        }
+
+        foreach (var record in recalled)
+        {
+            this.AddOrReplace(record);
+        }
+
+        this.history.RemoveAll(x => x.Contributions.Count == 0);
+        this.SaveHistory();
+        this.Changed?.Invoke();
+        return recalled;
+    }
+
+    /// <summary>清空本机历史留档（不影响词表）。返回清掉的条数。</summary>
+    public int ClearHistory()
+    {
+        var count = this.history.Sum(x => x.Contributions.Count);
+        if (count == 0)
+        {
+            return 0;
+        }
+
+        this.history.Clear();
+        this.SaveHistory();
+        this.Changed?.Invoke();
+        return count;
+    }
+
     /// <summary>导出成维护脚本能直接吃的 JSON：**只含翻译本身**，不带任何玩家信息。</summary>
     public string BuildJson()
     {

@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>参与翻译 — 第二版（历史合并/批次分组/两栏自适应/最小尺寸）mockup 5 帧</title>
+<style>
+  /* ImGui 深色界面还原图（与 ui-mockup-*.html 同一套变量）。
+     v2 相对 v1 的改动（按两路 HCI 评审的 P1 项）：
+       · 历史留档合并成「历史提交（N）」一个页签，并**按批次分组**（组头 = 提交时间 + 条数 + 整批勾选）
+       · 上表给最小高度（3 行）、下栏高度随窗口增长，两张表各自带滚动条（评审 F03/F05/F21）
+       · 新按钮统一成「动词 + 宾语」：重新加入待提交 / 删除所选 / 清空历史提交（后者也有确认）
+       · 删除确认：N>1 时列前 3 条 + 等 N 条，带译文片段，默认焦点在「取消」（评审 F09/F10/F11）
+       · 「历史提交」旁常驻一句"存在本机"（评审 F09）；列头补「操作」（评审 F20）
+       · 样例数据不再让「待提交」与「历史」逐字重复（评审 F06） */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 700px; }
+  .caption b { color: #d8d8d8; font-weight: 600; }
+  .window { width: 700px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .window.h680 { height: 680px; } .window.h900 { height: 900px; } .window.h460 { height: 460px; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); flex: none; }
+  .body { padding: 6px 16px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-height: 0; }
+  .brandrow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .brandrow .brand { color: var(--accent); font-weight: 600; }
+  .brandrow .sub { color: var(--muted); font-size: 13px; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 2px; flex: none; }
+  .tabs .tab { padding: 3px 10px; font-size: 14px; color: var(--muted); border: 1px solid transparent; border-bottom: none; border-radius: 3px 3px 0 0; }
+  .tabs .tab.on { color: var(--text); background: #232323; border-color: var(--border); }
+  .hint { color: var(--muted); font-size: 14px; }
+  .sep { height: 1px; background: var(--border); margin: 3px 0; flex: none; }
+  .btn { display: inline-block; padding: 2px 9px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; white-space: nowrap; }
+  .btn.primary { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.danger { background: #8c2e2e; border-color: #a33a3a; }
+  .btn.disabled { opacity: .45; }
+  .chk { width: 15px; height: 15px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: #2a2a2a; font-size: 12px; flex: none; }
+  .chk.on::after { content: "✔"; }
+  .chk.mid::after { content: "–"; color: #cfcfcf; }
+  .chk.mid { background: #35404a; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .radio { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; flex: none; }
+  .radio.on::after { content: ""; position: absolute; inset: 3px; background: #d8d8d8; border-radius: 50%; }
+  .search { width: 250px; border: 1px solid #565656; border-radius: 3px; padding: 2px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  .grid { width: 100%; border-collapse: collapse; font-size: 14px; table-layout: fixed; }
+  .grid th { text-align: left; color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); padding: 3px 6px; white-space: nowrap; background: #1d1d1d; }
+  .grid td { padding: 3px 6px; border-bottom: 1px solid #262626; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .grid tr.picked td { background: #22303f; }
+  .grid tr.picked td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
+  .grid tr.grouphead td { background: #1a2530; color: #cfd8e3; }
+  .grid tr.grouphead td:first-child { box-shadow: inset 2px 0 0 #4a6b8a; }
+  .muted { color: var(--muted); } .good { color: var(--good); } .bad { color: var(--bad); } .info { color: var(--info); } .warn { color: var(--warn); }
+  .sepv { color: #5a5a5a; }
+  .urlish { color: #cfcfcf; font-size: 13px; }
+  .topwrap { flex: 1 1 auto; min-height: 74px; display: flex; border: 1px solid var(--border); background: #1c1c1c; }
+  .topsrc { flex: 1; min-width: 0; overflow: hidden; }
+  .scroll { width: 12px; flex: none; background: #232323; border-left: 1px solid var(--border); position: relative; }
+  .scroll .thumb { position: absolute; left: 2px; right: 2px; top: 30px; height: 90px; background: #5c5c5c; border-radius: 6px; }
+  .scroll.tall .thumb { height: 150px; }
+  .scroll.short .thumb { top: 30px; height: 48px; }
+  .ws { flex: none; display: flex; flex-direction: column; min-height: 0; border-top: 1px solid var(--border); padding-top: 3px; }
+  .wstabs { display: flex; gap: 2px; align-items: flex-end; }
+  .wstabs .tab { padding: 3px 10px; font-size: 14px; color: var(--muted); border: 1px solid var(--border); border-bottom: none; border-radius: 3px 3px 0 0; background: #1d1d1d; }
+  .wstabs .tab.on { color: var(--text); background: #232323; }
+  .wsline { display: flex; border: 1px solid var(--border); background: #1c1c1c; height: 176px; }
+  .wsline.tall { height: 206px; }
+  .wsline.short { height: 96px; }
+  .wsinner { flex: 1; min-width: 0; overflow: hidden; }
+  .wsbtns { margin-top: 5px; }
+  .modal { position: absolute; inset: 0; background: rgba(0,0,0,.45); display: flex; align-items: flex-start; justify-content: center; padding-top: 150px; }
+  .dialog { width: 452px; background: #1f1f1f; border: 1px solid #5a5a5a; border-radius: 4px; box-shadow: 0 6px 24px rgba(0,0,0,.6); padding: 12px 14px; display: flex; flex-direction: column; gap: 9px; }
+  .dialog .title { font-size: 15px; }
+  .dialog .sample { color: #cfcfcf; font-size: 13px; }
+  .dialog .actions { display: flex; gap: 8px; margin-top: 2px; }
+  .dialog .default { outline: 1px solid var(--accent); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ============================ 帧 1：默认窗口 ============================ -->
+  <div>
+    <p class="caption">帧 1 — 默认大小（880×680）。上表吃满剩余高度、自带滚动条；下栏高度固定成"页签 + 五行表格 + 按钮行"，不再按 42% 拍脑袋。<b>按钮名统一成「动词 + 宾语」</b>。</p>
+    <div class="window h680">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div></div>
+        <div class="hint">对插件名、一行简介、插件详情的翻译做出贡献。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名、原文、译文…</div>
+          <span class="hint">搜索范围</span>
+          <span class="row"><span class="chk on"></span>插件名</span>
+          <span class="row"><span class="chk on"></span>一行简介</span>
+          <span class="row"><span class="chk on"></span>插件详情</span>
+          <span class="sepv">│</span>
+          <span class="hint">全部</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>缺译文</span>
+          <span class="row"><span class="radio"></span>机器译</span>
+          <span class="row"><span class="radio"></span>我提交过</span>
+          <span class="row"><span class="radio"></span>待复核</span>
+          <span class="sepv">│</span>
+          <span class="row"><span class="chk"></span>显示图标</span>
+          <span class="row"><span class="chk on"></span>连着已停用的库</span>
+        </div>
+        <div class="row"><span class="hint">视图</span><span class="row"><span class="radio on"></span>按插件</span><span class="row"><span class="radio"></span>按仓库</span><span class="sepv">│</span><span class="hint">1484 个插件 · 缺译文 0 个</span></div>
+        <div class="row">
+          <span class="btn disabled">翻译所选（0）</span><span class="btn">全选当前</span><span class="btn disabled">清空勾选</span>
+          <span class="sepv">│</span><span class="btn disabled">添加到我的库（0）</span><span class="btn disabled">撤回添加（0）</span>
+        </div>
+
+        <div class="topwrap">
+          <div class="topsrc">
+            <table class="grid">
+              <thead><tr><th style="width:24px">☐</th><th style="width:66px">状态</th><th style="width:150px">插件名</th><th style="width:96px">来源库</th><th>原文</th><th style="width:104px">译文</th><th style="width:56px">操作</th></tr></thead>
+              <tbody>
+                <tr><td><span class="chk"></span></td><td class="good">你译</td><td>Penumbra</td><td class="urlish">xero/penumbra</td><td class="muted">Runtime mod loader and manager.</td><td>运行时模组加载与管理器。</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Aetherphone</td><td class="urlish">Aether/phone</td><td class="muted">In-game phone: messages, music…</td><td>游戏内手机：消息、音乐…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Questionable</td><td class="urlish">Liza/quest</td><td class="muted">Automates supported quests…</td><td>自动完成受支持的任务…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Splatoon</td><td class="urlish">splatoon/repo</td><td class="muted">Scriptable markers and overlays…</td><td>可脚本化的标记与悬浮层…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>BOCCHI</td><td class="urlish">BOCCHI/repo</td><td class="muted">Optimize Occult Crescent…</td><td>优化「幻境」…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Mappy</td><td class="urlish">Mappy/repo</td><td class="muted">In-game map helper…</td><td>地图助手…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Glamourer</td><td class="urlish">Ottermandias/Glamourer</td><td class="muted">Unlocks the glamour dresser…</td><td>解锁幻化柜…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>SimpleTweaks</td><td class="urlish">Caraxi/SimpleTweaks</td><td class="muted">A collection of tweaks…</td><td>一堆小调整…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>WrathCombo</td><td class="urlish">PunishXIV/WrathCombo</td><td class="muted">Combo and rotation helper…</td><td>连招与循环助手…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>DelvUI</td><td class="urlish">DelvUI/repo</td><td class="muted">A modern, highly configurable UI…</td><td>现代、可高度定制的界面…</td><td><span class="btn">改进…</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="scroll"><div class="thumb"></div></div>
+        </div>
+
+        <div class="sep"></div>
+        <div class="ws">
+          <div class="wstabs">
+            <div class="tab on">待提交（3）</div>
+            <div class="tab">历史提交（12）</div>
+          </div>
+          <div class="wsline">
+            <div class="wsinner">
+              <table class="grid">
+                <thead><tr><th style="width:24px">☐</th><th style="width:150px">插件</th><th style="width:72px">字段</th><th>译文</th><th style="width:52px">操作</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="chk"></span></td><td>Aetherphone</td><td class="muted">插件名</td><td>以太手机</td><td><span class="btn">改</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>Splatoon</td><td class="muted">一行简介</td><td>可脚本化的标记与悬浮层，配合触发器使用。</td><td><span class="btn">改</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>Mappy</td><td class="muted">插件详情</td><td>游戏内地图助手：标点、路径与地图标签。</td><td><span class="btn">改</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="scroll"><div class="thumb" style="top:30px;height:52px"></div></div>
+          </div>
+          <div class="row wsbtns">
+            <span class="btn primary">一键提交全部（3）</span>
+            <span class="btn disabled">删除勾选（0）</span>
+            <span class="btn">清空待提交</span>
+            <span class="btn">撤回删除</span>
+            <span class="hint">这一栏是你改过、还没提交的译文；提交后会挪进「历史提交」</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 帧 2：窗口拉高 ============================ -->
+  <div>
+    <p class="caption">帧 2 — 同一个窗口拉高（880×900）：<b>上表多显示 6 行，下栏也多 1 行</b>（两栏都跟着长，而不是只有上面长）；两张表各自的滚动条跟着变长。</p>
+    <div class="window h900">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div></div>
+        <div class="hint">对插件名、一行简介、插件详情的翻译做出贡献。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名、原文、译文…</div>
+          <span class="hint">搜索范围</span>
+          <span class="row"><span class="chk on"></span>插件名</span>
+          <span class="row"><span class="chk on"></span>一行简介</span>
+          <span class="row"><span class="chk on"></span>插件详情</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>缺译文</span>
+          <span class="row"><span class="radio"></span>机器译</span>
+          <span class="row"><span class="radio"></span>我提交过</span>
+          <span class="row"><span class="radio"></span>待复核</span>
+          <span class="sepv">│</span>
+          <span class="row"><span class="chk"></span>显示图标</span>
+          <span class="row"><span class="chk on"></span>连着已停用的库</span>
+        </div>
+        <div class="row"><span class="hint">视图</span><span class="row"><span class="radio on"></span>按插件</span><span class="row"><span class="radio"></span>按仓库</span><span class="sepv">│</span><span class="hint">1484 个插件 · 缺译文 0 个</span></div>
+        <div class="row">
+          <span class="btn disabled">翻译所选（0）</span><span class="btn">全选当前</span><span class="btn disabled">清空勾选</span>
+          <span class="sepv">│</span><span class="btn disabled">添加到我的库（0）</span><span class="btn disabled">撤回添加（0）</span>
+        </div>
+
+        <div class="topwrap">
+          <div class="topsrc">
+            <table class="grid">
+              <thead><tr><th style="width:24px">☐</th><th style="width:66px">状态</th><th style="width:150px">插件名</th><th style="width:96px">来源库</th><th>原文</th><th style="width:104px">译文</th><th style="width:56px">操作</th></tr></thead>
+              <tbody>
+                <tr><td><span class="chk"></span></td><td class="good">你译</td><td>Penumbra</td><td class="urlish">xero/penumbra</td><td class="muted">Runtime mod loader and manager.</td><td>运行时模组加载与管理器。</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Aetherphone</td><td class="urlish">Aether/phone</td><td class="muted">In-game phone: messages, music…</td><td>游戏内手机：消息、音乐…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Questionable</td><td class="urlish">Liza/quest</td><td class="muted">Automates supported quests…</td><td>自动完成受支持的任务…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Splatoon</td><td class="urlish">splatoon/repo</td><td class="muted">Scriptable markers and overlays…</td><td>可脚本化的标记与悬浮层…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>BOCCHI</td><td class="urlish">BOCCHI/repo</td><td class="muted">Optimize Occult Crescent…</td><td>优化「幻境」…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Mappy</td><td class="urlish">Mappy/repo</td><td class="muted">In-game map helper…</td><td>地图助手…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Glamourer</td><td class="urlish">Ottermandias/Glamourer</td><td class="muted">Unlocks the glamour dresser…</td><td>解锁幻化柜…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>SimpleTweaks</td><td class="urlish">Caraxi/SimpleTweaks</td><td class="muted">A collection of tweaks…</td><td>一堆小调整…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>WrathCombo</td><td class="urlish">PunishXIV/WrathCombo</td><td class="muted">Combo and rotation helper…</td><td>连招与循环助手…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>DelvUI</td><td class="urlish">DelvUI/repo</td><td class="muted">A modern, highly configurable UI…</td><td>现代、可高度定制的界面…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>OBSPlugin</td><td class="urlish">OBS/repo</td><td class="muted">OBS Studio integration…</td><td>OBS Studio 集成…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>PixelPerfect</td><td class="urlish">Aether/pixel</td><td class="muted">Cleaner screenshots…</td><td>更干净的游戏截图…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Weatherman</td><td class="urlish">Weatherman/repo</td><td class="muted">Weather and time control…</td><td>天气与时间控制…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>AutoRetainer</td><td class="urlish">NightmareXIV/AutoRetainer</td><td class="muted">Automatic retainer management…</td><td>自动管理雇员…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Lifestream</td><td class="urlish">NightmareXIV/Lifestream</td><td class="muted">Instant teleports and more…</td><td>瞬移与更多…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Pandora's Box</td><td class="urlish">Pandora/repo</td><td class="muted">Various tweaks to the game…</td><td>游戏内的各种微调…</td><td><span class="btn">改进…</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="scroll tall"><div class="thumb"></div></div>
+        </div>
+
+        <div class="sep"></div>
+        <div class="ws">
+          <div class="wstabs">
+            <div class="tab on">待提交（3）</div>
+            <div class="tab">历史提交（12）</div>
+          </div>
+          <div class="wsline tall">
+            <div class="wsinner">
+              <table class="grid">
+                <thead><tr><th style="width:24px">☐</th><th style="width:150px">插件</th><th style="width:72px">字段</th><th>译文</th><th style="width:52px">操作</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="chk"></span></td><td>Aetherphone</td><td class="muted">插件名</td><td>以太手机</td><td><span class="btn">改</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>Splatoon</td><td class="muted">一行简介</td><td>可脚本化的标记与悬浮层，配合触发器使用。</td><td><span class="btn">改</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>Mappy</td><td class="muted">插件详情</td><td>游戏内地图助手：标点、路径与地图标签。</td><td><span class="btn">改</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="scroll"><div class="thumb" style="top:30px;height:52px"></div></div>
+          </div>
+          <div class="row wsbtns">
+            <span class="btn primary">一键提交全部（3）</span>
+            <span class="btn disabled">删除勾选（0）</span>
+            <span class="btn">清空待提交</span>
+            <span class="btn">撤回删除</span>
+            <span class="hint">这一栏是你改过、还没提交的译文；提交后会挪进「历史提交」</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 帧 3：历史提交（合并 + 按批次分组） ============================ -->
+  <div>
+    <p class="caption">帧 3 — 历史留档合成一个页签，并<b>按批次分组</b>：组头 = 提交时间 + 条数 + 整批勾选（半选态，短标签以适应 150px 列宽），单条只列「插件 / 字段 / 译文」。复评修的四处：组头不截断、上表最小高度按行高算、计数从筛选行挪到「视图」行、按钮改「移回待提交」明说这是移动。<b>勾选后</b>：重新加入待提交（把这几条移回待提交，留档里不再保留）／删除所选／清空历史提交（都有确认）。</p>
+    <div class="window h680">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div></div>
+        <div class="hint">对插件名、一行简介、插件详情的翻译做出贡献。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名、原文、译文…</div>
+          <span class="hint">搜索范围</span>
+          <span class="row"><span class="chk on"></span>插件名</span>
+          <span class="row"><span class="chk on"></span>一行简介</span>
+          <span class="row"><span class="chk on"></span>插件详情</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>缺译文</span>
+          <span class="row"><span class="radio"></span>机器译</span>
+          <span class="row"><span class="radio"></span>我提交过</span>
+          <span class="row"><span class="radio"></span>待复核</span>
+          <span class="sepv">│</span>
+          <span class="row"><span class="chk"></span>显示图标</span>
+          <span class="row"><span class="chk on"></span>连着已停用的库</span>
+        </div>
+        <div class="row"><span class="hint">视图</span><span class="row"><span class="radio on"></span>按插件</span><span class="row"><span class="radio"></span>按仓库</span><span class="sepv">│</span><span class="hint">1484 个插件 · 缺译文 0 个</span></div>
+        <div class="row">
+          <span class="btn disabled">翻译所选（0）</span><span class="btn">全选当前</span><span class="btn disabled">清空勾选</span>
+          <span class="sepv">│</span><span class="btn disabled">添加到我的库（0）</span><span class="btn disabled">撤回添加（0）</span>
+        </div>
+
+        <div class="topwrap">
+          <div class="topsrc">
+            <table class="grid">
+              <thead><tr><th style="width:24px">☐</th><th style="width:66px">状态</th><th style="width:150px">插件名</th><th style="width:96px">来源库</th><th>原文</th><th style="width:104px">译文</th><th style="width:56px">操作</th></tr></thead>
+              <tbody>
+                <tr><td><span class="chk"></span></td><td class="good">你译</td><td>Penumbra</td><td class="urlish">xero/penumbra</td><td class="muted">Runtime mod loader and manager.</td><td>运行时模组加载与管理器。</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Aetherphone</td><td class="urlish">Aether/phone</td><td class="muted">In-game phone: messages, music…</td><td>游戏内手机：消息、音乐…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Questionable</td><td class="urlish">Liza/quest</td><td class="muted">Automates supported quests…</td><td>自动完成受支持的任务…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Splatoon</td><td class="urlish">splatoon/repo</td><td class="muted">Scriptable markers and overlays…</td><td>可脚本化的标记与悬浮层…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>BOCCHI</td><td class="urlish">BOCCHI/repo</td><td class="muted">Optimize Occult Crescent…</td><td>优化「幻境」…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Mappy</td><td class="urlish">Mappy/repo</td><td class="muted">In-game map helper…</td><td>地图助手…</td><td><span class="btn">改进…</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="scroll"><div class="thumb"></div></div>
+        </div>
+
+        <div class="sep"></div>
+        <div class="ws">
+          <div class="wstabs">
+            <div class="tab">待提交（3）</div>
+            <div class="tab on">历史提交（12）</div>
+          </div>
+          <div class="wsline">
+            <div class="wsinner">
+              <table class="grid">
+                <thead><tr><th style="width:24px">☐</th><th style="width:150px">插件</th><th style="width:72px">字段</th><th>译文</th><th style="width:52px">操作</th></tr></thead>
+                <tbody>
+                  <tr class="grouphead"><td><span class="chk mid"></span></td><td colspan="4">09-22 12:30 · 3 条</td></tr>
+                  <tr class="picked"><td><span class="chk on"></span></td><td>Penumbra</td><td class="muted">一行简介</td><td>运行时模组加载与管理器。</td><td><span class="btn">查看…</span></td></tr>
+                  <tr class="picked"><td><span class="chk on"></span></td><td>Penumbra</td><td class="muted">插件详情</td><td>一个运行时的模组加载与管理框架，可在不重启游戏的情况下热插拔…</td><td><span class="btn">查看…</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>Questionable</td><td class="muted">插件名</td><td>任务助手</td><td><span class="btn">查看…</span></td></tr>
+                  <tr class="grouphead"><td><span class="chk"></span></td><td colspan="4">09-21 20:58 · 6 条</td></tr>
+                  <tr><td><span class="chk"></span></td><td>Aetherphone</td><td class="muted">一行简介</td><td>游戏内手机：消息、音乐…</td><td><span class="btn">查看…</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>BOCCHI</td><td class="muted">一行简介</td><td>优化「幻境」…</td><td><span class="btn">查看…</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="scroll"><div class="thumb" style="top:20px;height:78px"></div></div>
+          </div>
+          <div class="row wsbtns">
+            <span class="btn primary">移回待提交（2）</span>
+            <span class="btn danger">删除所选（2）</span>
+            <span class="btn">清空历史提交</span>
+            <span class="hint">已选 2 条 · 共 12 条 · 3 批（记在这台机器上）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 帧 4：删除确认（N=2） ============================ -->
+  <div>
+    <p class="caption">帧 4 — 删除确认：N&gt;1 时列前几条 + 「等 N 条」，带译文片段，说明「只删本机记录、不改游戏里的译文」，并把默认焦点放在「取消」。</p>
+    <div class="window h680">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+        <div class="tabs"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div></div>
+        <div class="hint">对插件名、一行简介、插件详情的翻译做出贡献。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名、原文、译文…</div>
+          <span class="hint">搜索范围</span>
+          <span class="row"><span class="chk on"></span>插件名</span>
+          <span class="row"><span class="chk on"></span>一行简介</span>
+          <span class="row"><span class="chk on"></span>插件详情</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>缺译文</span>
+          <span class="row"><span class="radio"></span>机器译</span>
+          <span class="row"><span class="radio"></span>我提交过</span>
+          <span class="row"><span class="radio"></span>待复核</span>
+          <span class="sepv">│</span>
+          <span class="row"><span class="chk"></span>显示图标</span>
+          <span class="row"><span class="chk on"></span>连着已停用的库</span>
+        </div>
+        <div class="row"><span class="hint">视图</span><span class="row"><span class="radio on"></span>按插件</span><span class="row"><span class="radio"></span>按仓库</span><span class="sepv">│</span><span class="hint">1484 个插件 · 缺译文 0 个</span></div>
+        <div class="row">
+          <span class="btn disabled">翻译所选（0）</span><span class="btn">全选当前</span><span class="btn disabled">清空勾选</span>
+          <span class="sepv">│</span><span class="btn disabled">添加到我的库（0）</span><span class="btn disabled">撤回添加（0）</span>
+        </div>
+
+        <div class="topwrap">
+          <div class="topsrc">
+            <table class="grid">
+              <thead><tr><th style="width:24px">☐</th><th style="width:66px">状态</th><th style="width:150px">插件名</th><th style="width:96px">来源库</th><th>原文</th><th style="width:104px">译文</th><th style="width:56px">操作</th></tr></thead>
+              <tbody>
+                <tr><td><span class="chk"></span></td><td class="good">你译</td><td>Penumbra</td><td class="urlish">xero/penumbra</td><td class="muted">Runtime mod loader and manager.</td><td>运行时模组加载与管理器。</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Aetherphone</td><td class="urlish">Aether/phone</td><td class="muted">In-game phone: messages, music…</td><td>游戏内手机：消息、音乐…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Questionable</td><td class="urlish">Liza/quest</td><td class="muted">Automates supported quests…</td><td>自动完成受支持的任务…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Splatoon</td><td class="urlish">splatoon/repo</td><td class="muted">Scriptable markers and overlays…</td><td>可脚本化的标记与悬浮层…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>BOCCHI</td><td class="urlish">BOCCHI/repo</td><td class="muted">Optimize Occult Crescent…</td><td>优化「幻境」…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Mappy</td><td class="urlish">Mappy/repo</td><td class="muted">In-game map helper…</td><td>地图助手…</td><td><span class="btn">改进…</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="scroll"><div class="thumb"></div></div>
+        </div>
+
+        <div class="sep"></div>
+        <div class="ws">
+          <div class="wstabs">
+            <div class="tab">待提交（3）</div>
+            <div class="tab on">历史提交（12）</div>
+          </div>
+          <div class="wsline">
+            <div class="wsinner">
+              <table class="grid">
+                <thead><tr><th style="width:24px">☐</th><th style="width:150px">插件</th><th style="width:72px">字段</th><th>译文</th><th style="width:52px">操作</th></tr></thead>
+                <tbody>
+                  <tr class="grouphead"><td><span class="chk mid"></span></td><td colspan="4">09-22 12:30 · 3 条</td></tr>
+                  <tr class="picked"><td><span class="chk on"></span></td><td>Penumbra</td><td class="muted">一行简介</td><td>运行时模组加载与管理器。</td><td><span class="btn">查看…</span></td></tr>
+                  <tr class="picked"><td><span class="chk on"></span></td><td>Penumbra</td><td class="muted">插件详情</td><td>一个运行时的模组加载与管理框架，可在不重启游戏的情况下热插拔…</td><td><span class="btn">查看…</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>Questionable</td><td class="muted">插件名</td><td>任务助手</td><td><span class="btn">查看…</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="scroll"><div class="thumb" style="top:20px;height:78px"></div></div>
+          </div>
+          <div class="row wsbtns">
+            <span class="btn primary">移回待提交（2）</span>
+            <span class="btn danger">删除所选（2）</span>
+            <span class="btn">清空历史提交</span>
+            <span class="hint">已选 2 条 · 共 12 条 · 3 批（记在这台机器上）</span>
+          </div>
+        </div>
+
+        <div class="modal">
+          <div class="dialog">
+            <div class="title">删除选中的 2 条记录？</div>
+            <div class="hint">从本机的历史提交里删掉这 2 条。已经交出去的译文不受影响，游戏里的译文也不会变；删掉后本机无法恢复。</div>
+            <div class="sample">09-22 12:30 · Penumbra / 一行简介：「运行时模组加载与管理器。」</div>
+            <div class="sample">09-22 12:30 · Penumbra / 插件详情：「一个运行时的模组加载与管理框架…」</div>
+            <div class="actions">
+              <span class="btn default">取消</span>
+              <span class="btn danger">删除</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ 帧 5：最小尺寸 ============================ -->
+  <div>
+    <p class="caption">帧 5 — 最小尺寸（620×460）：上表只留 3 行（表头 + 3 行是下限，再小就靠上表自己滚），下栏压到 2 行；两栏都不被挤没，按钮行不折行。这是评审 F05 要求的边界帧。</p>
+    <div class="window h460" style="width:620px">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="tabs" style="margin-bottom:1px"><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab on">参与翻译</div></div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search" style="width:180px">搜索插件名、原文、译文…</div>
+          <span class="row"><span class="chk on"></span>插件名</span>
+          <span class="row"><span class="chk on"></span>一行简介</span>
+          <span class="row"><span class="chk on"></span>插件详情</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>全部</span>
+          <span class="row"><span class="radio"></span>缺译文</span>
+          <span class="row"><span class="radio"></span>机器译</span>
+          <span class="row"><span class="radio"></span>我提交过</span>
+          <span class="row"><span class="radio"></span>待复核</span>
+          <span class="row"><span class="chk"></span>显示图标</span>
+          <span class="row"><span class="chk on"></span>连着已停用的库</span>
+        </div>
+        <div class="row"><span class="hint">视图</span><span class="row"><span class="radio on"></span>按插件</span><span class="row"><span class="radio"></span>按仓库</span><span class="sepv">│</span><span class="hint">1484 个插件 · 缺译文 0 个</span></div>
+        <div class="row"><span class="btn disabled">翻译所选（0）</span><span class="btn">全选当前</span></div>
+
+        <div class="topwrap">
+          <div class="topsrc">
+            <table class="grid">
+              <thead><tr><th style="width:24px">☐</th><th style="width:56px">状态</th><th style="width:120px">插件名</th><th style="width:76px">来源库</th><th>原文</th><th style="width:88px">译文</th><th style="width:52px">操作</th></tr></thead>
+              <tbody>
+                <tr><td><span class="chk"></span></td><td class="good">你译</td><td>Penumbra</td><td class="urlish">xero/penumbra</td><td class="muted">Runtime mod loader…</td><td>运行时模组加载…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Aetherphone</td><td class="urlish">Aether/phone</td><td class="muted">In-game phone…</td><td>游戏内手机…</td><td><span class="btn">改进…</span></td></tr>
+                <tr><td><span class="chk"></span></td><td class="info">机器译</td><td>Questionable</td><td class="urlish">Liza/quest</td><td class="muted">Automates quests…</td><td>自动完成任务…</td><td><span class="btn">改进…</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="scroll short"><div class="thumb"></div></div>
+        </div>
+
+        <div class="sep"></div>
+        <div class="ws">
+          <div class="wstabs"><div class="tab on">待提交（3）</div><div class="tab">历史提交（12）</div></div>
+          <div class="wsline short">
+            <div class="wsinner">
+              <table class="grid">
+                <thead><tr><th style="width:24px">☐</th><th style="width:120px">插件</th><th style="width:64px">字段</th><th>译文</th><th style="width:52px">操作</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="chk"></span></td><td>Aetherphone</td><td class="muted">插件名</td><td>以太手机</td><td><span class="btn">改</span></td></tr>
+                  <tr><td><span class="chk"></span></td><td>Splatoon</td><td class="muted">一行简介</td><td>可脚本化的标记与悬浮层…</td><td><span class="btn">改</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="scroll short"><div class="thumb" style="top:28px;height:34px"></div></div>
+          </div>
+          <div class="row wsbtns">
+            <span class="btn primary">一键提交全部（3）</span>
+            <span class="btn disabled">删除勾选（0）</span>
+            <span class="btn">清空待提交</span>
+            <span class="btn">撤回删除</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
