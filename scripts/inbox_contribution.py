@@ -67,6 +67,30 @@ def check(record: dict) -> tuple[list[str], list[str]]:
     return hard, soft
 
 
+NOTIFY_MAX_ROWS = 20
+NOTIFY_MAX_CHARS = 3500
+
+
+def build_notify(records: list[dict], hard_count: int) -> str:
+    """给手机通知用的译文清单：直接看到每条翻成了什么（过长只放前若干条）。"""
+    lines = [f"{len(records)} 条译文：", ""]
+    for record in records[:NOTIFY_MAX_ROWS]:
+        field = FIELD_LABELS.get(str(record.get("Field") or ""), str(record.get("Field") or ""))
+        text = (record.get("Translated") or "").replace("\n", " ").strip() or "（清除译文）"
+        if len(text) > 60:
+            text = text[:60] + "…"
+        lines.append(f"- `{record.get('InternalName')}` / {field}：{text}")
+    if len(records) > NOTIFY_MAX_ROWS:
+        lines.append(f"…（还有 {len(records) - NOTIFY_MAX_ROWS} 条，见 issue）")
+    if hard_count:
+        lines.append("")
+        lines.append(f"⚠ 有 {hard_count} 条硬问题，收录前要确认")
+    notify = "\n".join(lines)
+    if len(notify) > NOTIFY_MAX_CHARS:
+        notify = notify[:NOTIFY_MAX_CHARS] + "\n…（过长已截断，见 issue）"
+    return notify
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--issue", required=True, help="issue 号")
@@ -75,6 +99,7 @@ def main(argv=None) -> int:
     parser.add_argument("--out-dir", default=DEFAULT_OUT)
     parser.add_argument("--summary-out", default="", help="摘要写到这里（给手机通知用）")
     parser.add_argument("--comment-out", default="", help="回在 issue 上的话写到这里")
+    parser.add_argument("--notify-out", default="", help="手机通知正文写到这里（含译文清单）")
     args = parser.parse_args(argv)
 
     body = open(args.body, encoding="utf-8", errors="replace").read()
@@ -143,7 +168,9 @@ def main(argv=None) -> int:
     comment.append("维护者审核后会并入词表，随词表更新发到游戏里。这一条 issue 与仓库里的存档都是长期凭证。")
     comment_text = "\n".join(comment)
 
-    for target, text in ((args.summary_out, summary), (args.comment_out, comment_text)):
+    notify_text = build_notify(records, hard_count)
+
+    for target, text in ((args.summary_out, summary), (args.comment_out, comment_text), (args.notify_out, notify_text)):
         if target:
             with open(target, "w", encoding="utf-8", newline="\n") as handle:
                 handle.write(text)

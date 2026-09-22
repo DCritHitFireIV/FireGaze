@@ -40,7 +40,8 @@ jobs:
             --body "$RUNNER_TEMP/issue-body.md" \
             --author "${{ github.event.issue.user.login }}" \
             --summary-out "$RUNNER_TEMP/summary.txt" \
-            --comment-out "$RUNNER_TEMP/comment.md" | tee "$RUNNER_TEMP/inbox.log"
+            --comment-out "$RUNNER_TEMP/comment.md" \
+            --notify-out "$RUNNER_TEMP/notify.md" | tee "$RUNNER_TEMP/inbox.log"
 
       - name: 提交存档
         run: |
@@ -81,7 +82,12 @@ jobs:
             exit 0
           fi
           TITLE="FireGaze 译文投稿 $(cat "$RUNNER_TEMP/summary.txt")"
-          BODY="$(cat "$RUNNER_TEMP/summary.txt")
+          if [ -f "$RUNNER_TEMP/notify.md" ]; then
+            DETAILS="$(cat "$RUNNER_TEMP/notify.md")"
+          else
+            DETAILS="$(cat "$RUNNER_TEMP/summary.txt")"
+          fi
+          BODY="$DETAILS
 
           https://github.com/${GITHUB_REPOSITORY}/issues/${{ github.event.issue.number }}
           审核后用 python scripts/import_contributions.py docs/contributions/inbox/<存档>.json --push 收录"
