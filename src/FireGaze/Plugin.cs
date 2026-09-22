@@ -616,12 +616,42 @@ public sealed class Plugin : IDalamudPlugin
         var (ok, message) = await this.Table.UpdateFromGitHubAsync(CancellationToken.None).ConfigureAwait(false);
         if (ok)
         {
+            // 下载下来的那份不能盖掉本地还没交出去的译文（用户 2026-09-22 定：要保留，而且要优先）
+            var kept = this.ReapplyPendingContributions();
             this.Config.LastTableUpdateUtc = DateTime.Now;
             this.SaveConfig();
             this.Patcher.ApplyAll();
+            if (kept > 0)
+            {
+                message += $"；本地还没提交的 {kept} 条译文已保留并优先生效";
+            }
         }
 
         return (ok, message);
+    }
+
+    /// <summary>
+    /// 把「待提交」里还没交出去的译文重新盖回词表（从 GitHub 更新词表之后调用）。
+    /// 规则：本地译文优先于下载下来的版本；上游原文改过的那几条会进「待复核」。
+    /// 返回重新盖上去的字段数。
+    /// </summary>
+    public int ReapplyPendingContributions()
+    {
+        var applied = 0;
+        foreach (var record in this.Contributions.Records)
+        {
+            if (this.Table.MarkUserTranslation(record.InternalName, record.Field, record.Original, record.Translated))
+            {
+                applied++;
+            }
+        }
+
+        if (applied > 0)
+        {
+            this.Table.SaveToConfigDirectory(out _);
+        }
+
+        return applied;
     }
 
     /// <summary>每两周自动检查一次词表更新（汉化启用时才生效）。</summary>

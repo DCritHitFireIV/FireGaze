@@ -350,7 +350,7 @@ def main(argv=None) -> int:
     # 找出需要处理的部分：缺条目，或三个字段里任意一个的原文变了 / 还没有译文
     name_todo: list[tuple[str, str]] = []
     desc_todo: list[tuple[str, str, str]] = []
-    stats = {"new": 0, "name": 0, "desc": 0}
+    stats = {"new": 0, "name": 0, "desc": 0, "upstream_absent": 0}
 
     def prefer(existing: str, new_text: str) -> bool:
         """新文本是否值得替换旧文本：内容真的变了，且不用「国服分支的中文原文」覆盖英文原文。"""
@@ -385,6 +385,12 @@ def main(argv=None) -> int:
         saved_desc_t = (saved.get("Description") or {}).get("Translated") or ""
         saved_punch_t = (saved.get("Punchline") or {}).get("Translated") or ""
 
+        # 上游压根没给这个字段：**不算缺译**，也不排进待翻译（用户 2026-09-22 定）。
+        # 只统计一下，报告里好对账。
+        for upstream_text in (name, punchline, description):
+            if not upstream_text:
+                stats["upstream_absent"] += 1
+
         if name and (is_new or not saved_name_t or prefer(saved_name, name)):
             name_todo.append((key, name))
 
@@ -410,14 +416,26 @@ def main(argv=None) -> int:
     stats["name"] = len(name_todo)
     stats["desc"] = len(desc_todo)
     print(f"待翻译：插件名 {len(name_todo)} 条 / 简介+详情 {len(desc_todo)} 条（新增 {stats['new']} 条）")
+    print(f"上游没给（不计入待翻译、也不算缺译）：{stats['upstream_absent']} 处字段")
 
     def write_table(path: str) -> None:
-        """写回词表：头部记上维护日期（插件界面显示「词表更新：YYYY-MM-DD（周X）」，离线可读）。"""
+        """写回词表：头部记上维护日期（插件界面显示「词表更新：YYYY-MM-DD（周X）」，离线可读）。
+
+        写之前把「原文和译文都是空」的字段丢掉：上游没给、我们也没翻的字段以前会留下
+        `"Punchline": {"Original": "", "Translated": ""}` 这种空壳，看着像漏译（用户 2026-09-22 要求清掉）。
+        """
         ordered: dict = {"_meta": {"updatedAt": time.strftime("%Y-%m-%d")}}
         for key, value in table.items():
             if key.startswith("_"):
                 continue
-            ordered[key] = value
+            cleaned = {
+                field: pair
+                for field, pair in (value or {}).items()
+                if str((pair or {}).get("Translated") or "").strip()
+                or str((pair or {}).get("Original") or "").strip()
+            }
+            if cleaned:
+                ordered[key] = cleaned
 
         with open(path, "w", encoding="utf-8") as handle:
             json.dump(ordered, handle, ensure_ascii=False, indent=1)
