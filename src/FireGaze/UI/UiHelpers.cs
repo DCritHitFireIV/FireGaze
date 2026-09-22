@@ -64,6 +64,21 @@ internal static class UiHelpers
         return url[..head] + "…" + url[^tail..];
     }
 
+    /// <summary>
+    /// 算「头…尾」要保留几个字符。下限不能超过文本长度本身
+    /// —— 短文本 + 窄列时 Math.Clamp(min &gt; max) 会抛 ArgumentException，
+    /// 2026-09-22 就是这个把「参与翻译」整窗炸掉。抽出来是为了能在 fgtest 里离线跑。
+    /// </summary>
+    internal static int KeepCount(int length, float available, float full)
+    {
+        if (length <= 0 || full <= 0f)
+        {
+            return Math.Max(length, 0);
+        }
+
+        return Math.Clamp((int)(length * (available / full)) - 2, Math.Min(8, length), length);
+    }
+
     /// <summary>带悬停提示的截断文本。</summary>
     public static void Truncated(string text, int max, string? tooltip = null)
     {
@@ -98,15 +113,15 @@ internal static class UiHelpers
         }
         else
         {
-            // 按「总宽 / 可用宽」的比例估算能放几个字符，并给省略号留位
-            var keep = Math.Clamp((int)(text.Length * (available / full)) - 2, 8, text.Length);
+            // 按「总宽 / 可用宽」的比例估算能放几个字符，并给省略号留位。
+            var keep = KeepCount(text.Length, available, full);
             var candidate = Shorten(text, keep);
 
             // 中英混排时估算可能偏宽：实测一次，还超就再收一轮
             var width = ImGui.CalcTextSize(candidate).X;
             if (width > available)
             {
-                keep = Math.Clamp((int)(candidate.Length * (available / width)) - 2, 8, candidate.Length);
+                keep = KeepCount(candidate.Length, available, width);
                 candidate = Shorten(text, keep);
             }
 

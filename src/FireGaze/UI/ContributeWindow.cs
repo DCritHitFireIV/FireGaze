@@ -29,6 +29,11 @@ internal sealed class ContributeWindow : Window
     private readonly List<TranslationIndexEntry> filtered = [];
     private readonly HashSet<string> selected = new(StringComparer.Ordinal);
 
+    /// <summary>上次在绘制里出错的时间（限流用，不刷屏）。</summary>
+    private DateTime lastDrawErrorAt = DateTime.MinValue;
+
+    private int drawErrorCount;
+
     /// <summary>下栏勾选的待提交译文（键 = InternalName:Field）。</summary>
     private readonly HashSet<string> selectedRecords = new(StringComparer.Ordinal);
 
@@ -160,7 +165,36 @@ internal sealed class ContributeWindow : Window
         };
     }
 
+    /// <summary>
+    /// 绘制入口只做一件事：兜住异常。绘制路径上任何一处抛异常都不该把整张窗口（乃至游戏）带下去
+    /// —— 2026-09-22 就因为 UiHelpers 里一处 Math.Clamp 抛了 ArgumentException，一开这个窗口就报错。
+    /// 现在最多每 5 秒写一次日志，并在窗口里留一行提示。
+    /// </summary>
     public override void Draw()
+    {
+        try
+        {
+            this.DrawCore();
+        }
+        catch (Exception e)
+        {
+            var now = DateTime.UtcNow;
+            if (now - this.lastDrawErrorAt > TimeSpan.FromSeconds(5))
+            {
+                this.lastDrawErrorAt = now;
+                Plugin.Log.Error(e, "[FireGaze] 参与翻译窗口绘制出错（已跳过这一帧）");
+            }
+
+            this.drawErrorCount++;
+            UiHelpers.ColoredWrapped(
+                UiHelpers.Bad,
+                this.drawErrorCount <= 1
+                    ? "这个窗口刚才出错了一次（已写进日志）；换页签或重开窗口可以继续用。"
+                    : $"这个窗口又出错了 {this.drawErrorCount} 次（已写进日志）。");
+        }
+    }
+
+    private void DrawCore()
     {
         // ---------------- 顶部说明 ----------------
         ImGui.TextWrapped("对插件名、一行简介、插件详情的翻译做出贡献。");
