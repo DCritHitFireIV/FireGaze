@@ -123,9 +123,9 @@ internal sealed class TranslationIndexEntry
             var hasOriginal = !string.IsNullOrWhiteSpace(original);
             var hasTranslation = pair is { HasTranslation: true };
 
-            if (hasOriginal && !hasTranslation && TranslationIndex.HasCjk(original))
+            if (hasOriginal && !hasTranslation && TranslationIndex.IsChinese(original))
             {
-                continue;   // 上游原文本身就是中文：不用翻，也不算缺译
+                continue;   // 上游原文本身就是中文：不用翻，也不算缺译（日文不算，见 IsChinese）
             }
 
             if (!hasOriginal && !hasTranslation)
@@ -376,6 +376,28 @@ internal sealed class TranslationIndex
 
         return false;
     }
+
+    /// <summary>有没有日语假名（平/片假名、半角片假名、片假名扩展）。</summary>
+    internal static bool HasKana(string text)
+    {
+        foreach (var ch in text)
+        {
+            if ((ch >= 0x3040 && ch <= 0x30FF) ||    // 平假名 + 片假名
+                (ch >= 0x31F0 && ch <= 0x31FF) ||    // 片假名扩展
+                (ch >= 0xFF66 && ch <= 0xFF9D))      // 半角片假名
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 上游原文是不是「本来就是中文」：有汉字、而且没有假名。
+    /// 日文夹着汉字，光看汉字会把它当成中文 —— 但玩家要的是中文译文（2026-09-22 用户定：日语也要翻）。
+    /// </summary>
+    internal static bool IsChinese(string text) => HasCjk(text) && !HasKana(text);
 
     private static string BuildBlob(TranslationIndexEntry entry)
     {

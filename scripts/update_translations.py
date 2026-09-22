@@ -34,6 +34,21 @@ DEFAULT_TABLE = os.path.join(REPO_ROOT, "translations.json")
 AETHERFEED = "https://raw.githubusercontent.com/Aetherfeed/aetherfeed.github.io/refs/heads/main/public/data/plugins.json"
 CJK = re.compile(r"[\u4e00-\u9fff]")
 
+# 日语假名（含半角片假名与片假名扩展）：用来区分「中文原文」与「日文原文」。
+# 日文夹着汉字，光看 CJK 会把它当成中文 —— 但玩家要的是中文译文（2026-09-22 用户定）。
+KANA = re.compile(r"[\u3040-\u30ff\u31f0-\u31ff\uff66-\uff9d]")
+
+
+def upstream_is_localized(text: str) -> bool:
+    """上游给的原文已经是**中文**（国服/汉化分支的简介）：直接当译文用，不再送机器翻译。
+
+    原因：机器翻译会把它当外文重译一遍，既浪费又可能改得很奇怪；
+    而对这类条目，非中文玩家看到的原文本来就已经是中文。
+
+    日语**不算**已经本地化：它只是「不是英文」，仍然要翻成中文。
+    """
+    return bool(text) and bool(CJK.search(text)) and not KANA.search(text)
+
 # 仓库文件的容错解析：卫月（Json.NET）允许注释与尾随逗号，我们也得允许，
 # 否则整座仓库的插件（含 Punchline）会静默漏掉（2026-09-22 实例）。
 _TRAILING_COMMA = re.compile(r",(\s*[\]}]+)")
@@ -297,8 +312,8 @@ def enrich_punchlines(corpus: dict[str, dict], needed: set[str]) -> int:
             if plugin:
                 entry = corpus[key]
                 punchline = (plugin.get("Punchline") or "").strip()
-                # 源仓库里的简介也可能是中文（国服汉化版）：不拿它覆盖英文原版
-                if punchline and not (CJK.search(punchline) and not CJK.search(entry["punchline"])):
+                # 源仓库里的简介也可能是中文（国服汉化版）：不拿它覆盖英文原版；日语简介是真原文，可以用
+                if punchline and not (upstream_is_localized(punchline) and not upstream_is_localized(entry["punchline"])):
                     entry["punchline"] = punchline
                 if not entry["name"]:
                     entry["name"] = (plugin.get("Name") or "").strip()
@@ -360,13 +375,18 @@ def main(argv=None) -> int:
             return False
         return True
 
-    def upstream_is_localized(text: str) -> bool:
-        """上游给的原文已经是中文（国服/汉化分支的简介）：直接当译文用，不再送机器翻译。
+    def copy_of_source(saved_text: str, upstream_text: str) -> bool:
+        """旧译文是不是「把日文原文一字不差当译文写进去了」。
 
-        原因：机器翻译会把它当外文重译一遍，既浪费又可能改得很奇怪；
-        而对这类条目，非中文玩家看到的原文本来就已经是中文。
+        以前只把 CJK 当「已经本地化」，于是日文简介被原样当成译文存了下来；
+        这类条目要重新送机器翻译（用户 2026-09-22：日语也要翻成中文）。
+
+        **只认日文**：英文短句（品牌名、标签）本来就常常与原文一致，
+        不能因为「译文 == 原文」就反复重翻（那样每轮都会白花钱、词表还没变化）。
         """
-        return bool(text) and bool(CJK.search(text))
+        text = (saved_text or "").strip()
+        upstream = (upstream_text or "").strip()
+        return bool(text) and text == upstream and bool(KANA.search(upstream))
 
     for key, entry in corpus.items():
         saved = table.get(key) or {}
@@ -397,8 +417,8 @@ def main(argv=None) -> int:
         # 「原文在、但表里没译文 / 连这个字段都还没收录」也要排进待翻译：
         # 旧逻辑只看「新增或原文变了」，导致 Aetherfeed 从来不给 Punchline 的那批条目
         # 永远停在「没翻译」。（一行简介的原文要等下面的 enrich 去源仓库回抓）
-        need_desc = bool(description) and (is_new or not saved_desc_t or prefer(saved_desc, description))
-        need_punch = bool(punchline) and (is_new or not saved_punch_t or prefer(saved_punch, punchline))
+        need_desc = bool(description) and (is_new or not saved_desc_t or copy_of_source(saved_desc_t, description) or prefer(saved_desc, description))
+        need_punch = bool(punchline) and (is_new or not saved_punch_t or copy_of_source(saved_punch_t, punchline) or prefer(saved_punch, punchline))
         # 表里连一行简介都没有、但 Aetherfeed 不含 Punchline → 排进来，稍后回抓源仓库补。
         # 用了 --repos 时语料已经把各仓库的 Punchline 抓全了，不必再回抓（否则会反复重试）。
         want_punch_from_repo = (not saved_punch_t) and bool(description) and not args.repos
@@ -531,7 +551,8 @@ def main(argv=None) -> int:
         is_user = str(saved.get("Source") or "").lower() == "user"
         source_changed = bool(old_original) and old_original != original
 
-        if old_translated and not source_changed:
+        # 旧译文是「外文原文原样当译文」（例如日文简介）→ 不当已有译文，重翻
+        if old_translated and not source_changed and not copy_of_source(old_translated, original):
             if old_original != original:
                 saved["Original"] = original
             saved.setdefault("Translated", old_translated)
