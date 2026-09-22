@@ -55,12 +55,16 @@ jobs:
           fi
 
       - name: 回话给提交者
-        if: hashFiles(format('{0}/comment.md', runner.temp)) != ''
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const body = fs.readFileSync(process.env.RUNNER_TEMP + '/comment.md', 'utf8');
+            const path = process.env.RUNNER_TEMP + '/comment.md';
+            if (!fs.existsSync(path)) {
+              console.log('没有 comment.md（收稿脚本没给回复内容），跳过');
+              return;
+            }
+            const body = fs.readFileSync(path, 'utf8');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
