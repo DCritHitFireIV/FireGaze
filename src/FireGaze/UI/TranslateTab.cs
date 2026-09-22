@@ -89,8 +89,7 @@ internal sealed class TranslateTab
         ImGui.TextDisabled("· " + this.DescribeTableUpdate());
         if (this.plugin.Table.LoadedFrom is not null)
         {
-            var when = this.plugin.Table.LoadedAt is { } time ? time.ToString("yyyy-MM-dd HH:mm") : "?";
-            ImGui.TextDisabled($"来源文件：{this.plugin.Table.LoadedFrom}（本地改动时间 {when}）");
+            ImGui.TextDisabled($"来源文件：{this.plugin.Table.LoadedFrom}");
         }
         else
         {

@@ -39,15 +39,38 @@ CJK = re.compile(r"[\u4e00-\u9fff]")
 KANA = re.compile(r"[\u3040-\u30ff\u31f0-\u31ff\uff66-\uff9d]")
 
 
-def upstream_is_localized(text: str) -> bool:
-    """上游给的原文已经是**中文**（国服/汉化分支的简介）：直接当译文用，不再送机器翻译。
+def has_english_run(text: str, need: int = 3) -> bool:
+    """文本里有没有「连续 need 个英文单词」的片段。
 
-    原因：机器翻译会把它当外文重译一遍，既浪费又可能改得很奇怪；
-    而对这类条目，非中文玩家看到的原文本来就已经是中文。
-
-    日语**不算**已经本地化：它只是「不是英文」，仍然要翻成中文。
+    用来把「中英混排」的原文抖出来（例如作者把中英两版并排写进简介：
+    「将爆发药特效替换为 RGB 效果 / Replace tincture VFX with ...」）——
+    这种不算「已经是中文」，要把里面的英文洗掉（实测 AoAoEnergy 就是这样）。
+    品牌名单词不算（AE3、hackbox 这类不会命中 need≥3）。
     """
-    return bool(text) and bool(CJK.search(text)) and not KANA.search(text)
+    run = 0
+    for token in re.split(r"\s+", text or ""):
+        if re.fullmatch(r"[A-Za-z][A-Za-z'\-]*", token) and len(token) >= 2:
+            run += 1
+            if run >= need:
+                return True
+        else:
+            run = 0
+    return False
+
+
+def upstream_is_localized(text: str) -> bool:
+    """上游给的原文是不是**已经是中文、不需要再翻**。
+
+    三个条件同时满足：有汉字、没有假名、也没有成串的英文。
+    · 日语不算（它只是「不是英文」，仍要翻成中文，2026-09-22 用户定）；
+    · 中英混排也不算（得把英文那半洗掉，2026-09-22 AoAoEnergy 实例）。
+    """
+    return (
+        bool(text)
+        and bool(CJK.search(text))
+        and not KANA.search(text)
+        and not has_english_run(text)
+    )
 
 # 仓库文件的容错解析：卫月（Json.NET）允许注释与尾随逗号，我们也得允许，
 # 否则整座仓库的插件（含 Punchline）会静默漏掉（2026-09-22 实例）。
@@ -375,6 +398,11 @@ def main(argv=None) -> int:
                         help="额外语料：Dalamud 配置（dalamudConfig.json）或一行一个仓库地址的文本文件；"
                              "能补全 Aetherfeed 没有的仓库，并把「一行简介」一次抓齐")
     parser.add_argument("--limit", type=int, default=0, help="最多翻译多少条（调试）")
+    parser.add_argument(
+        "--recheck",
+        action="store_true",
+        help="全量重做：把所有非玩家译的简介/详情再送一遍模型（默认只处理新增/缺译/译文=原文的）",
+    )
     args = parser.parse_args(argv)
 
     api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip() or None
@@ -411,17 +439,15 @@ def main(argv=None) -> int:
         return True
 
     def copy_of_source(saved_text: str, upstream_text: str) -> bool:
-        """旧译文是不是「把日文原文一字不差当译文写进去了」。
+        """旧译文是不是「把外文原文一字不差当译文写进去了」。
 
-        以前只把 CJK 当「已经本地化」，于是日文简介被原样当成译文存了下来；
-        这类条目要重新送机器翻译（用户 2026-09-22：日语也要翻成中文）。
-
-        **只认日文**：英文短句（品牌名、标签）本来就常常与原文一致，
-        不能因为「译文 == 原文」就反复重翻（那样每轮都会白花钱、词表还没变化）。
+        以前只把 CJK 当「已经本地化」，于是日文简介、中英混排的简介都被原样当译文存了下来；
+        这类条目要重新送机器翻译（用户 2026-09-22：日语也要翻，中英混排要把英文洗掉）。
+        插件名不走这里（品牌名本来就常常跟原文一样）。
         """
         text = (saved_text or "").strip()
         upstream = (upstream_text or "").strip()
-        return bool(text) and text == upstream and bool(KANA.search(upstream))
+        return bool(text) and text == upstream and not upstream_is_localized(upstream)
 
     for key, entry in corpus.items():
         saved = table.get(key) or {}
@@ -454,11 +480,39 @@ def main(argv=None) -> int:
         # 永远停在「没翻译」。（一行简介的原文要等下面的 enrich 去源仓库回抓）
         need_desc = bool(description) and (is_new or not saved_desc_t or copy_of_source(saved_desc_t, description) or prefer(saved_desc, description))
         need_punch = bool(punchline) and (is_new or not saved_punch_t or copy_of_source(saved_punch_t, punchline) or prefer(saved_punch, punchline))
+        # 上游原文已经是中文（且没有成串英文、没假名）→ 不翻、不写译文，也不排进待翻译。
+        # 以前会把原文原样写成译文，表里就多出一份「译文 = 原文」的副本（实测 320 处，用户要求去掉）。
+        if upstream_is_localized(description):
+            need_desc = False
+        if upstream_is_localized(punchline):
+            need_punch = False
         # 表里连一行简介都没有、但 Aetherfeed 不含 Punchline → 排进来，稍后回抓源仓库补。
         # 用了 --repos 时语料已经把各仓库的 Punchline 抓全了，不必再回抓（否则会反复重试）。
         want_punch_from_repo = (not saved_punch_t) and bool(description) and not args.repos
         if need_desc or need_punch or want_punch_from_repo:
             desc_todo.append((key, punchline, description))
+
+    if args.recheck:
+        # 全量重做（用户 2026-09-22 要求：规则改完后让大模型把这类全部再过一遍）：
+        # 把所有「非玩家译、上游给了外文原文」的简介/详情重新翻一遍。
+        queued = {k for k, _, _ in desc_todo}
+        recheck_count = 0
+        for key, entry in corpus.items():
+            if key in queued:
+                continue
+            saved = table.get(key) or {}
+            if not any(
+                (entry.get(ck) or "").strip()
+                and not upstream_is_localized(entry.get(ck) or "")
+                and str(((saved.get(field) or {}).get("Source") or "")).lower() != "user"
+                for field, ck in (("Punchline", "punchline"), ("Description", "description"))
+            ):
+                continue
+            desc_todo.append((key, entry["punchline"], entry["description"]))
+            recheck_count += 1
+
+        if recheck_count:
+            print(f"全量重做（--recheck）：{recheck_count} 个插件再送一遍模型")
 
     # 新条目的仓库可能还没取到 Punchline；Aetherfeed 永远不给 Punchline，
     # 所以「表里没有一行简介」的条目也要回抓源仓库。
@@ -476,19 +530,32 @@ def main(argv=None) -> int:
     def write_table(path: str) -> None:
         """写回词表：头部记上维护日期（插件界面显示「词表更新：YYYY-MM-DD（周X）」，离线可读）。
 
-        写之前把「原文和译文都是空」的字段丢掉：上游没给、我们也没翻的字段以前会留下
-        `"Punchline": {"Original": "", "Translated": ""}` 这种空壳，看着像漏译（用户 2026-09-22 要求清掉）。
+        写之前做两道清理：
+        · 丢掉「原文和译文都空」的字段（以前会留下 `"Punchline": {"Original": "", "Translated": ""}` 空壳）；
+        · **上游原文本来就是中文的字段，不保留 Translated 副本** —— 以前会把中文原文原样写成译文，
+          表里就多出一份「译文 = 原文」，看着像没翻译（实测 320 处；用户 2026-09-22 要求自动跳过）。
         """
         ordered: dict = {"_meta": {"updatedAt": time.strftime("%Y-%m-%d")}}
         for key, value in table.items():
             if key.startswith("_"):
                 continue
-            cleaned = {
-                field: pair
-                for field, pair in (value or {}).items()
-                if str((pair or {}).get("Translated") or "").strip()
-                or str((pair or {}).get("Original") or "").strip()
-            }
+
+            cleaned: dict = {}
+            for field, pair in (value or {}).items():
+                pair = pair or {}
+                original = str(pair.get("Original") or "").strip()
+                translated = str(pair.get("Translated") or "").strip()
+                if not original and not translated:
+                    continue
+
+                is_user = str(pair.get("Source") or "").lower() == "user"
+                if translated and is_user is False and upstream_is_localized(original):
+                    keep = {k: v for k, v in pair.items() if k != "Translated"}
+                    cleaned[field] = keep
+                    continue
+
+                cleaned[field] = pair
+
             if cleaned:
                 ordered[key] = cleaned
 
@@ -608,9 +675,11 @@ def main(argv=None) -> int:
             failed.append((key, field, "这次没拿到译文"))
             return
 
-        # 上游原文本身就是中文：直接当译文用（这类条目不送机器翻译）
+        # 上游原文本身就是中文（且没有成串英文/假名）：不写译文副本，只把原文记下来。
+        # 玩家在游戏里看到的本来就是中文，插件也不会去替换（2026-09-22 用户要求：自动跳过）。
         if upstream_is_localized(original):
-            translated = original
+            entry[field] = {"Original": original}
+            return
 
         if is_user and old_translated:
             needs_review.append((key, field, old_original, old_translated))
