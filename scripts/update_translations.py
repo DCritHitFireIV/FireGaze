@@ -80,16 +80,34 @@ _lock = threading.Lock()
 
 # ------------------------------------------------------------------ 网络 --
 
-def http_get(url: str, timeout: int = 30) -> str:
+def http_get(url: str, timeout: int = 30, attempts: int = 2) -> str:
+    """抓一份文件。
+
+    · **先把 URL 里的空格转成 %20**：仓库地址里带空格时（例如
+      `.../master/Animation Wardrobe/pluginmaster.json`）urllib 会直接报
+      InvalidURL "URL can't contain control characters" —— 整座仓库就此消失（2026-09-22 实例）。
+    · 再**重试一次**：puni.sh 那批聚合端点在并发下经常超时，重试就能拉回来。
+    """
+    target = url.replace(" ", "%20")
     request = urllib.request.Request(
-        url,
+        target,
         headers={
             "User-Agent": "FireGaze-Translator/1.0 (+https://github.com/DCritHitFireIV/FireGaze)",
             "Accept": "application/json",
         },
     )
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        return response.read().decode("utf-8", errors="replace")
+
+    last: Exception | None = None
+    for attempt in range(max(1, attempts)):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return response.read().decode("utf-8", errors="replace")
+        except Exception as error:  # noqa: BLE001
+            last = error
+            if attempt + 1 < max(1, attempts):
+                time.sleep(1.5)
+
+    raise last if last else RuntimeError(f"取不到：{url}")
 
 
 def http_get_mirrors(url: str, timeout: int = 60) -> str:
