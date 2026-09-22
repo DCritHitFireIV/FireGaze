@@ -7,7 +7,7 @@
     <Platforms>x64</Platforms>
     <AssemblyName>FireGaze</AssemblyName>
     <Name>FireGaze</Name>
-    <Version>1.2.0.7</Version>
+    <Version>1.2.0.8</Version>
     <Authors>fire</Authors>
     <Author>fire</Author>
     <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
@@ -24,6 +24,11 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
     <!-- 国服（XIVLauncherCN）用 build.cmd 设置 DALAMUD_HOME；国际服走 SDK 默认路径 -->
     <DalamudLibPath Condition="'$(DALAMUD_HOME)' != ''">$(DALAMUD_HOME)\</DalamudLibPath>
   </PropertyGroup>
+
+  <!-- 离线冒烟测试（fgtest）要能调到 internal 类型：推送客户端、贡献存储等 -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="fgtest" />
+  </ItemGroup>
 
   <!-- 词表跟随插件一起打包（发布 zip 里会有 translations.json） -->
   <ItemGroup>

@@ -19,7 +19,6 @@ internal sealed class MainWindow : Window
     private readonly RepoAuditTab repoAuditTab;
     private readonly InstallerTab installerTab;
     private readonly TranslateTab translateTab;
-    private readonly ContributeWindow contributeTab;
 
     private MainTab? pendingSelect;
 
@@ -36,7 +35,6 @@ internal sealed class MainWindow : Window
         this.repoAuditTab = new RepoAuditTab(plugin);
         this.installerTab = new InstallerTab(plugin);
         this.translateTab = new TranslateTab(plugin);
-        this.contributeTab = new ContributeWindow(plugin, plugin.Contributions);
     }
 
     /// <summary>请求下一帧选中某个页签（由 Plugin.OpenWindow 调用）。</summary>
@@ -82,13 +80,6 @@ internal sealed class MainWindow : Window
             if (ImGui.BeginTabItem("插件安装器", flags))
             {
                 this.installerTab.Draw();
-                ImGui.EndTabItem();
-            }
-
-            flags = this.pendingSelect == MainTab.Contribute ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("参与翻译", flags))
-            {
-                this.contributeTab.Draw();
                 ImGui.EndTabItem();
             }
 

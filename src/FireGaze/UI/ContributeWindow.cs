@@ -1,17 +1,18 @@
 using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using Dalamud.Interface.Windowing;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
 /// <summary>
-/// 「参与翻译」页（第四个页签）：搜索全部第三方插件的原文与译文，
-/// 可以逐条改进、也可以给还没有译文的插件补上；
-/// 改动先存在本地（配置目录），攒够了一条提交到 GitHub。
+/// 「参与翻译」独立窗口：搜索全部第三方插件的原文与译文，可以逐条改进、也可以给还没有译文的插件补上；
+/// 改动先存在本地（配置目录），攒够了点「一键提交」直接推给维护者审核。
+/// 入口：「简介汉化」页「从 GitHub 更新词表」右边的小按钮。
 /// </summary>
-internal sealed class ContributeWindow
+internal sealed class ContributeWindow : Window
 {
     /// <summary>一条搜索结果的现状筛选。</summary>
     private enum StateFilter
@@ -36,8 +37,8 @@ internal sealed class ContributeWindow
 
     private bool clearRequested;
 
-    /// <summary>提交分两步：0 = 还没导出；1 = 已打开 GitHub 页、等玩家点「确认已提交」。</summary>
-    private int submitStage;
+    /// <summary>正在推送中（防止连点）。</summary>
+    private volatile bool submitBusy;
 
     /// <summary>一次额外提示（比如提交时完整内容落到了哪个文件）。</summary>
     private string? extraHint;
@@ -48,11 +49,6 @@ internal sealed class ContributeWindow
     /// <summary>重建索引时不要反复反射卫月内部：改成按条目就地重算状态，见 <see cref="RefreshEntryStates"/>。</summary>
     private bool refreshStatesRequested;
 
-    /// <summary>评分视图：正在拉候选清单。</summary>
-    private volatile bool reviewRefreshing;
-
-    /// <summary>评分视图当前页（从 0 开始，每页 10 条）。</summary>
-    private int reviewPage;
     private readonly HashSet<string> expandedRepos = new(StringComparer.Ordinal);
 
     private TranslationIndex? index;
@@ -111,18 +107,26 @@ internal sealed class ContributeWindow
     }
 
     public ContributeWindow(Plugin plugin, ContributionsStore store)
+        : base("参与翻译###FireGazeContribute")
     {
         this.plugin = plugin;
         this.store = store;
+
+        this.Size = new Vector2(880, 680);
+        this.SizeCondition = ImGuiCond.FirstUseEver;
+        this.SizeConstraints = new WindowSizeConstraints
+        {
+            MinimumSize = new Vector2(620, 460),
+        };
+
         this.store.Changed += () => this.rebuildPending = true;
     }
 
-    public void Draw()
+    public override void Draw()
     {
         // ---------------- 顶部说明 ----------------
         ImGui.TextWrapped("对插件名、一行简介、插件详情的翻译做出贡献。");
-        // TODO(文案待补)：用户指明这句还没写完 —— 「可以在 Github…」后面的提交/评审入口待定，先按原话保留。
-        ImGui.TextDisabled("提交的译文优先于机器翻译，每周一词表维护时将汇总本周提交交给大家评审，可以在 Github（待补完）");
+        ImGui.TextDisabled("提交的译文优先于机器翻译；点「一键提交」会把这一批直接发给维护者审核，通过后随词表更新。");
         ImGui.TextDisabled("本地改动只在你这里生效；点「从 GitHub 更新词表」会整份覆盖本地改动，没提交出去的译文会消失。");
 
         ImGui.Separator();
@@ -200,16 +204,6 @@ internal sealed class ContributeWindow
             this.view = "repos";
         }
 
-        ImGui.SameLine();
-        if (ImGui.RadioButton("评分###ViewReview", this.view == "review"))
-        {
-            this.view = "review";
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("看别人提交、还没定下来的候选译文；给喜欢的点个赞，或只在本机选一条自己喜欢的（只存本地）。");
-        }
 
         if (ImGui.IsItemHovered())
         {
@@ -232,10 +226,6 @@ internal sealed class ContributeWindow
         if (this.view == "repos")
         {
             this.DrawRepoTable(topHeight);
-        }
-        else if (this.view == "review")
-        {
-            this.DrawReviewView(topHeight);
         }
         else
         {
@@ -412,256 +402,6 @@ internal sealed class ContributeWindow
         }
 
         ImGui.EndTable();
-    }
-
-    // ------------------------------------------------------------------ 评分视图（候选译文）
-
-    private const int ReviewPageSize = 10;
-
-    /// <summary>
-    /// 「评分」视图：把仓库里 candidates.json 的候选译文列出来。
-    /// **0 赞的单独分组、排在最前**（「还没人评」），已有人评的按赞数排。
-    /// 👍/👎 在 GitHub 的对应评论上投；这里只显示 👍 数与本人选的偏好（存本地）。
-    /// </summary>
-    private void DrawReviewView(float tableHeight)
-    {
-        var store = this.plugin.Candidates;
-        var list = store.Sorted();
-
-        ImGui.Text($"候选 {store.Count} 条 · 还没人评 {store.NewCount} 条 · 我选过 {store.FavoriteCount} 条");
-        ImGui.SameLine();
-
-        if (this.reviewRefreshing)
-        {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.Button("刷新候选###RefreshCandidates"))
-        {
-            this.RefreshCandidates();
-        }
-
-        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-        {
-            ImGui.SetTooltip("从 GitHub 拉最新的候选清单（每周一由工作流更新）；\n依次试镜像，拉不到就继续用本地缓存。");
-        }
-
-        if (this.reviewRefreshing)
-        {
-            ImGui.EndDisabled();
-            ImGui.SameLine();
-            ImGui.TextDisabled("正在刷新…");
-        }
-
-        ImGui.SameLine();
-        if (ImGui.Button("打开提交列表###OpenIssues"))
-        {
-            OpenInBrowser(ContributionsStore.RepoUrl + "/issues");
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("在浏览器里看所有提交：每条译文一条评论，给评论点 👍 就是投票");
-        }
-
-        if (store.LastLoadedLocal != default)
-        {
-            ImGui.SameLine();
-            ImGui.TextDisabled($"（清单：{store.LastLoadedLocal:MM-dd HH:mm}）");
-        }
-
-        if (!string.IsNullOrEmpty(store.LastError))
-        {
-            UiHelpers.ColoredWrapped(UiHelpers.Warn, "上次刷新没成功：" + store.LastError);
-        }
-
-        if (list.Count == 0)
-        {
-            ImGui.TextDisabled("还没有候选译文。等有人提交，或点上面的「刷新候选」拉一次。");
-            return;
-        }
-
-        // 分页：每页 10 条
-        var pages = Math.Max(1, (list.Count + ReviewPageSize - 1) / ReviewPageSize);
-        this.reviewPage = Math.Clamp(this.reviewPage, 0, pages - 1);
-        var start = this.reviewPage * ReviewPageSize;
-        var end = Math.Min(start + ReviewPageSize, list.Count);
-
-        ImGui.SameLine();
-        if (this.reviewPage <= 0)
-        {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.SmallButton("◀ 上一页###RevPrev"))
-        {
-            this.reviewPage--;
-        }
-
-        if (this.reviewPage <= 0)
-        {
-            ImGui.EndDisabled();
-        }
-
-        ImGui.SameLine();
-        ImGui.TextDisabled($"第 {this.reviewPage + 1} / {pages} 页（每页 {ReviewPageSize} 条）");
-        ImGui.SameLine();
-        if (this.reviewPage >= pages - 1)
-        {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.SmallButton("下一页 ▶###RevNext"))
-        {
-            this.reviewPage++;
-        }
-
-        if (this.reviewPage >= pages - 1)
-        {
-            ImGui.EndDisabled();
-        }
-
-        if (!ImGui.BeginTable(
-                "###ReviewRows",
-                5,
-                ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
-                ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
-                new Vector2(0, MathF.Max(120f, tableHeight))))
-        {
-            return;
-        }
-
-        ImGui.TableSetupScrollFreeze(0, 1);
-        ImGui.TableSetupColumn("插件", ImGuiTableColumnFlags.WidthFixed, 170, 0);
-        ImGui.TableSetupColumn("字段", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 76, 1);
-        ImGui.TableSetupColumn("候选译文", ImGuiTableColumnFlags.WidthStretch, 0, 2);
-        ImGui.TableSetupColumn("票", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 92, 3);
-        ImGui.TableSetupColumn("##act", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 132, 4);
-
-        ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
-        ImGui.TableNextColumn();
-        ImGui.TableHeader("插件");
-        ImGui.TableNextColumn();
-        ImGui.TableHeader("字段");
-        ImGui.TableNextColumn();
-        ImGui.TableHeader("候选译文");
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("别人提交的译法；悬停看全文。同一个插件的同一字段可能有好几条候选。");
-        }
-
-        ImGui.TableNextColumn();
-        ImGui.TableHeader("票");
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("👍 票数；反对票不显示。点赞 / 反对在 GitHub 的对应评论上点。");
-        }
-
-        ImGui.TableNextColumn();
-
-        var lastGroup = string.Empty;
-        for (var i = start; i < end; i++)
-        {
-            var entry = list[i];
-            var group = entry.IsNew ? "new" : "voted";
-            if (group != lastGroup)
-            {
-                lastGroup = group;
-                ImGui.TableNextRow();
-                ImGui.TableNextColumn();
-                if (group == "new")
-                {
-                    UiHelpers.ColoredText(UiHelpers.Info, "还没人评（新来的）");
-                    if (ImGui.IsItemHovered())
-                    {
-                        ImGui.SetTooltip("这些还没人点过赞；满 30 天没赞会被归档，不再出现在这里。");
-                    }
-                }
-                else
-                {
-                    UiHelpers.ColoredText(UiHelpers.Good, "已有人评");
-                    if (ImGui.IsItemHovered())
-                    {
-                        ImGui.SetTooltip("按 👍 从多到少排；👍 ≥ 1 的会在周一并入正式词表。");
-                    }
-                }
-            }
-
-            ImGui.TableNextRow();
-
-            ImGui.TableNextColumn();
-            ImGui.TextUnformatted(entry.InternalName);
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip(entry.InternalName + "\n" + entry.FirstSeen + " 进来");
-            }
-
-            ImGui.TableNextColumn();
-            ImGui.TextDisabled(entry.FieldLabel);
-
-            ImGui.TableNextColumn();
-            UiHelpers.Fitted(entry.Translated.Replace('\n', ' '), "原文：" + entry.Original + "\n\n译文：" + entry.Translated);
-
-            ImGui.TableNextColumn();
-            if (entry.IsNew)
-            {
-                ImGui.TextDisabled("还没人评");
-            }
-            else
-            {
-                UiHelpers.ColoredText(UiHelpers.Good, $"👍 {entry.Votes}");
-            }
-
-            ImGui.TableNextColumn();
-            var favorite = store.IsFavorite(entry);
-            if (favorite)
-            {
-                UiHelpers.ColoredText(UiHelpers.Accent, "✔");
-                ImGui.SameLine();
-            }
-
-            if (ImGui.SmallButton((favorite ? "取消###fav-" : "选它###fav-") + entry.Key))
-            {
-                store.ToggleFavorite(entry);
-                this.SetStatus(favorite ? "已取消本机选择" : "已在本机选上这一条（只存本地，不上传）", isError: false);
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("只记在本机：哪个译法你更喜欢。不上传、不改词表。");
-            }
-
-            ImGui.SameLine();
-            if (ImGui.SmallButton("看/投票###vote-" + entry.Key))
-            {
-                OpenInBrowser(entry.IssueUrl);
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("打开这条提交的 GitHub 页面：那里每条译文是一条评论，给评论点 👍 / 👎 就是投票。");
-            }
-        }
-
-        ImGui.EndTable();
-    }
-
-    private void RefreshCandidates()
-    {
-        if (this.reviewRefreshing)
-        {
-            return;
-        }
-
-        this.reviewRefreshing = true;
-        _ = Task.Run(async () =>
-        {
-            var (ok, message) = await this.plugin.Candidates
-                .UpdateFromGitHubAsync(CancellationToken.None)
-                .ConfigureAwait(false);
-            this.reviewRefreshing = false;
-            this.SetStatus(message, !ok);
-        });
     }
 
     /// <summary>仓库视图：一行一条库链（点开展开它提供的插件）。</summary>
@@ -1930,15 +1670,12 @@ internal sealed class ContributeWindow
         var onHistoryTab = this.workspaceTab >= 0;
 
         // 在只读的留档页签上，这些按钮作用于「待提交」，看不见却在改东西 → 直接置灰
-        if (pending == 0 || onHistoryTab)
+        if (pending == 0 || onHistoryTab || this.submitBusy)
         {
             ImGui.BeginDisabled();
         }
 
-        var submitLabel = this.submitStage == 0
-            ? $"一键提交（{pending}）###SubmitContrib"
-            : "确认已提交###SubmitContrib";
-        if (ImGui.Button(submitLabel))
+        if (ImGui.Button(this.submitBusy ? "正在提交…###SubmitContrib" : $"一键提交（{pending}）###SubmitContrib"))
         {
             this.SubmitContributions();
         }
@@ -1950,14 +1687,11 @@ internal sealed class ContributeWindow
                     ? "你正在看历史留档（只读）；切回「待提交」页签才能提交。"
                     : pending == 0
                         ? "先在下面攒几条译文（上面表格里点「补上… / 改进…」）"
-                        : this.submitStage == 0
-                            ? "第 1 步：打开 GitHub 的提交页（标题、正文都填好）；\n待提交这里原样留着。\n"
-                              + "在网页上按 Submit 之后，回来点「确认已提交」。"
-                            : "第 2 步：确认你已经在 GitHub 上按过 Submit；\n点它才会清空待提交并在本地留一份历史记录。\n"
-                              + "没提交成功就再点一次「一键提交」重发。");
+                        : "把这一批译文直接发给维护者审核（推送）；\n推送成功才会清空待提交，并在本地留一份历史记录。\n"
+                          + "推送失败时内容一条不动，并导出到本地文件。");
         }
 
-        if (pending == 0 || onHistoryTab)
+        if (pending == 0 || onHistoryTab || this.submitBusy)
         {
             ImGui.EndDisabled();
         }
@@ -2321,97 +2055,77 @@ internal sealed class ContributeWindow
     }
 
     /// <summary>
-    /// 一键提交（两步）：① 先打开填好的 GitHub 提交页，待提交原样留着；
-    /// ② 玩家在网页按过 Submit，回来点「确认已提交」才归档 + 清空。
-    /// 这样浏览器没打开 / 玩家没提交时，不会再谎报「已提交」。
+    /// 一键提交：把这一批译文直接推给维护者审核（server3 酱）。
+    /// 推送是同步的：**只有推送成功才归档 + 清空**；失败就原样留着并导出到本地，绝不谎报提交成功。
     /// </summary>
     private void SubmitContributions()
     {
-        if (this.store.Count == 0)
+        if (this.store.Count == 0 || this.submitBusy)
         {
             return;
         }
 
-        if (this.submitStage == 0)
+        this.submitBusy = true;
+        var count = this.store.Count;
+        var title = $"FireGaze 翻译贡献 {DateTime.Now:yyyy-MM-dd HH:mm}（{count} 条）";
+        var markdown = this.BuildSubmitMarkdown();
+        var url = this.plugin.Config.PushUrl;
+
+        _ = Task.Run(async () =>
         {
-            if (!this.OpenIssue(compact: false))
+            var (ok, message) = await PushNotifier
+                .SendAsync(url, title, markdown, CancellationToken.None)
+                .ConfigureAwait(false);
+
+            this.submitBusy = false;
+
+            if (!ok)
             {
-                return;   // 打不开浏览器就什么都不动，状态行保留错误
+                // 没推成功：内容一条不动，顺手导出一份文件，玩家可以自己贴给维护者
+                var path = this.store.SaveExportFile();
+                this.extraHint = path is null
+                    ? $"{message}；内容还在「待提交」里，可以稍后再点一次。"
+                    : $"{message}；已把这一批导出到 {path}，内容还在「待提交」里。";
+                this.SetStatus("推送失败（待提交没有动）", isError: true);
+                return;
             }
 
-            this.submitStage = 1;
-            this.SetStatus(
-                $"已打开 GitHub 提交页（{this.store.Count} 条）：在网页上按 Submit，回来点「确认已提交」",
-                isError: false);
-            return;
-        }
-
-        var count = this.store.Count;
-        var batch = this.store.ArchiveSubmission();
-        this.workspaceTab = batch is null ? -1 : this.store.History.Count - 1;
-        this.selectedRecords.Clear();
-        this.submitStage = 0;
-        this.SetStatus(
-            $"已确认提交 {count} 条；本地留档（{batch?.TimeLabel}）可在上面的页签回看",
-            isError: false);
+            this.store.ArchiveSubmission();
+            this.workspaceTab = this.store.History.Count - 1;
+            this.selectedRecords.Clear();
+            this.extraHint = null;
+            this.SetStatus($"已提交 {count} 条：{message}；本地留档可在上面的页签回看", isError: false);
+        });
     }
 
-    /// <summary>一键提交的正文会不会太大（粗略估算，超了就用摘要 + 自动导出文件）。</summary>
-    private bool EstimateIssueTooLong() => this.store.BuildJson().Length > 7000;
-
-    private bool OpenIssue(bool compact)
+    /// <summary>推送给维护者的正文：人看的清单 + 可直接落盘的 JSON。</summary>
+    private string BuildSubmitMarkdown()
     {
-        try
+        var builder = new System.Text.StringBuilder();
+        builder.AppendLine($"# FireGaze 翻译贡献（{this.store.Count} 条）");
+        builder.AppendLine();
+        builder.AppendLine($"- 提交时间：{DateTime.Now:yyyy-MM-dd HH:mm}");
+        builder.AppendLine($"- 条数：{this.store.Count}");
+        builder.AppendLine("- 说明：以下译文由玩家提交，请以 user 来源写入词表；机器翻译不得覆盖。");
+        builder.AppendLine();
+        builder.AppendLine("| 插件 | 字段 | 译文 |");
+        builder.AppendLine("|---|---|---|");
+        foreach (var record in this.store.Records)
         {
-            var title = $"翻译贡献 {DateTime.Now:yyyy-MM-dd}";
-            var body = this.store.BuildMarkdown();
-            var useCompact = compact || this.EstimateIssueTooLong();
-
-            string encoded;
-            if (useCompact)
+            var text = record.Translated.Replace('\n', ' ').Replace("|", "\\|");
+            if (text.Length > 80)
             {
-                // 条数太多：正文改成摘要，完整 JSON 自动落到本地文件（不用玩家手动导出）
-                var path = this.store.SaveExportFile();
-                this.store.OpenExportDirectory();
-                this.extraHint = path is null
-                    ? "完整内容没能落盘，请用「复制 JSON」备份后再发。"
-                    : $"完整内容已存到 {path}，把那个文件当附件一起提交。";
-
-                var summary = new System.Text.StringBuilder();
-                summary.AppendLine("### FireGaze 翻译贡献");
-                summary.AppendLine();
-                summary.AppendLine($"- 导出时间：{DateTime.Now:yyyy-MM-dd HH:mm}");
-                summary.AppendLine($"- 条数：{this.store.Count}");
-                summary.AppendLine("- 说明：条数较多，下面只列前 20 条；完整列表见附件。");
-                summary.AppendLine();
-                foreach (var record in this.store.Records.Take(20))
-                {
-                    summary.AppendLine($"- {record.InternalName} / {record.Field}：{record.Translated.Replace('\n', ' ')}");
-                }
-
-                body = summary.ToString();
+                text = text[..80] + "…";
             }
 
-            encoded = Uri.EscapeDataString(body);
-            var url = $"{ContributionsStore.RepoUrl}/issues/new?title={Uri.EscapeDataString(title)}&body={encoded}";
-
-            // URL 极端长时不再往地址栏里塞（浏览器会截断）
-            if (url.Length > 26000)
-            {
-                url = $"{ContributionsStore.RepoUrl}/issues/new?title={Uri.EscapeDataString(title)}&body="
-                      + Uri.EscapeDataString(
-                          "### FireGaze 翻译贡献\n\n条目较多，正文见附件；请把导出的 JSON 拖进这里。\n\n条数："
-                          + this.store.Count);
-            }
-
-            Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
-            return true;
+            builder.AppendLine($"| {record.InternalName} | {FieldLabel(record.Field)} | {text} |");
         }
-        catch (Exception e)
-        {
-            this.SetStatus("打开浏览器失败：" + e.Message + "（待提交没有动）", isError: true);
-            return false;
-        }
+
+        builder.AppendLine();
+        builder.AppendLine("```json");
+        builder.AppendLine(this.store.BuildJson());
+        builder.AppendLine("```");
+        return builder.ToString();
     }
 
     // ------------------------------------------------------------------ 加库

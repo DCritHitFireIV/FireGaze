@@ -38,6 +38,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
+    private readonly ContributeWindow contributeWindow;
     private readonly Timer translateTimer;
 
     private readonly object saveLock = new();
@@ -90,12 +91,13 @@ public sealed class Plugin : IDalamudPlugin
                               ?? ".";
         this.Table = new TranslationTable(this.ConfigDirectory, pluginDirectory);
         this.Contributions = new ContributionsStore(this.ConfigDirectory);
-        this.Candidates = new CandidatesStore(this.ConfigDirectory);
         this.Patcher = new ManifestPatcher(() => this.Config, this.Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
         this.window = new MainWindow(this);
         this.windowSystem.AddWindow(this.window);
+        this.contributeWindow = new ContributeWindow(this, this.Contributions);
+        this.windowSystem.AddWindow(this.contributeWindow);
         pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
         pluginInterface.UiBuilder.Draw += this.TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi += this.ToggleWindow;
@@ -234,9 +236,6 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>本地待提交的翻译贡献（配置目录，不联网）。</summary>
     internal ContributionsStore Contributions { get; }
 
-    /// <summary>候选译文（仓库里的 candidates.json + 本机偏好；每周一由工作流更新）。</summary>
-    internal CandidatesStore Candidates { get; }
-
     /// <summary>插件配置目录（备份写在这里的 backups/ 下）。</summary>
     public string ConfigDirectory { get; }
 
@@ -340,8 +339,12 @@ public sealed class Plugin : IDalamudPlugin
         this.window.BringToFront();
     }
 
-    /// <summary>打开「参与翻译」页（第四个页签）。</summary>
-    public void OpenContributeWindow() => this.OpenWindow(MainTab.Contribute);
+    /// <summary>打开「参与翻译」窗口（独立窗口，入口在「简介汉化」页更新词表旁边的小按钮）。</summary>
+    public void OpenContributeWindow()
+    {
+        this.contributeWindow.IsOpen = true;
+        this.contributeWindow.BringToFront();
+    }
 
     private void OnCommand(string command, string args)
     {

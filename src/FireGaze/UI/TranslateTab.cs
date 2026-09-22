@@ -42,6 +42,17 @@ internal sealed class TranslateTab
         }
 
         ImGui.SameLine();
+        if (ImGui.SmallButton("参与翻译…###OpenContribute"))
+        {
+            this.plugin.OpenContributeWindow();
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("打开「参与翻译」：搜插件、改译文、攒够了一批直接提交给维护者审核。");
+        }
+
+        ImGui.SameLine();
         ImGui.TextDisabled(this.updateInFlight ? "正在更新…" : this.updateMessage ?? string.Empty);
 
         ImGui.Separator();
@@ -125,24 +136,23 @@ internal sealed class TranslateTab
     /// <summary>「词表维护」那一行：优先用词表自带的维护日期（工作流跑的那天），其次本机更新时间，最后随插件版本的日期。</summary>
     private string DescribeTableUpdate()
     {
-        // ① 词表文件里的 _meta.updatedAt（上游维护日期，离线可读）
+        // ① 词表文件里自带的 _meta.updatedAt —— 这就是「GitHub 上那份词表是哪天维护的」
         if (DateTime.TryParse(this.plugin.Table.MaintainedAt, out var maintained))
         {
             return $"词表维护：{maintained:yyyy-MM-dd}（{WeekdayLabel(maintained.DayOfWeek)}）";
         }
 
-        // ② 本机最后一次从 GitHub 换上的时间
+        // ② 老词表没有维护日期：只本机取用过的时间，不能冒充「维护日期」
         if (this.plugin.Config.LastTableUpdateUtc != default)
         {
-            var local = this.plugin.Config.LastTableUpdateUtc;
-            return $"词表维护：{local:yyyy-MM-dd}（{WeekdayLabel(local.DayOfWeek)}）";
+            return $"词表维护：未标注（本机 {this.plugin.Config.LastTableUpdateUtc:MM-dd} 取到）";
         }
 
-        // ③ 老词表：只能显示随插件版本装上的时间
+        // ③ 随插件装上的那份（同样是未标注）
         var loaded = this.plugin.Table.LoadedAt ?? default;
         return loaded == default
-            ? "词表维护：未知"
-            : $"词表维护：随插件版本 {loaded:yyyy-MM-dd}";
+            ? "词表维护：未标注"
+            : $"词表维护：未标注（随插件版本 {loaded:yyyy-MM-dd}）";
     }
 
     private static string WeekdayLabel(DayOfWeek day) => day switch

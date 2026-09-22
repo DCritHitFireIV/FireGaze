@@ -90,6 +90,12 @@ public sealed class Configuration : IPluginConfiguration
     /// <summary>「参与翻译」窗口是否在列表里显示插件图标。默认关；只显示本地已缓存的，不会为此下载。</summary>
     public bool ShowIconsInContribute { get; set; }
 
+    /// <summary>
+    /// 译文提交的推送地址（server3 酱）：玩家点「一键提交」时把这一批译文直接推给维护者。
+    /// 留空则不发推送（只能导出文件自己发）。
+    /// </summary>
+    public string PushUrl { get; set; } = Translate.PushNotifier.DefaultUrl;
+
     /// <summary>「参与翻译」是否连已停用仓库里的插件一起列出（默认是）。</summary>
     public bool ContributeShowDisabled { get; set; } = true;
 
