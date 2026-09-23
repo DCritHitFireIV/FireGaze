@@ -58,6 +58,16 @@ def has_english_run(text: str, need: int = 3) -> bool:
     return False
 
 
+def _echoed(source: str, output: str) -> bool:
+    """模型把原文原样回显（没翻）。
+
+    2026-09-23 实例：bozjalone 等 7 个日文条目「译文」= 日文原文，安装器里看着像没翻译。
+    """
+    src = " ".join((source or "").split())
+    out = " ".join((output or "").split())
+    return bool(src) and src == out
+
+
 def upstream_is_localized(text: str) -> bool:
     """上游给的原文是不是**已经是中文、不需要再翻**。
 
@@ -554,6 +564,19 @@ def main(argv=None) -> int:
                     cleaned[field] = keep
                     continue
 
+                # 译文与原文一字不差（模型回显的假译文，2026-09-23）→ 不留在表里当成已翻译；
+                # 下次跑翻译时会因为「没有译文」重新排队。
+                if (
+                    field in ("Punchline", "Description")
+                    and translated
+                    and is_user is False
+                    and not upstream_is_localized(original)
+                    and _echoed(original, translated)
+                ):
+                    keep = {k: v for k, v in pair.items() if k != "Translated"}
+                    cleaned[field] = keep
+                    continue
+
                 cleaned[field] = pair
 
             if cleaned:
@@ -740,7 +763,7 @@ def main(argv=None) -> int:
                 set_name(key, name, translated)
                 usage["ok"] += 1
 
-    def translate_descs(batch: list[tuple[str, str, str]]):
+    def translate_descs(batch: list[tuple[str, str, str]], allow_retry: bool = True):
         payload: dict = {
             "items": [{"id": i, "p": punchline, "d": description}
                       for i, (_, punchline, description) in enumerate(batch)]
@@ -773,14 +796,27 @@ def main(argv=None) -> int:
             print(f"  [简介失败] {batch[0][0]}: {error}")
             return
 
+        retry_items: list[tuple[str, str, str]] = []
         for i, (key, punchline, description) in enumerate(batch):
             translated_p, translated_d = result.get(i, ("", ""))
+            # 模型偶尔把原文原样回显（2026-09-23 bozjalone 实例）：不写假译文，稍后单独重试
+            if punchline and not upstream_is_localized(punchline) and _echoed(punchline, translated_p):
+                translated_p = ""
+            if description and not upstream_is_localized(description) and _echoed(description, translated_d):
+                translated_d = ""
+            if (punchline and not translated_p) or (description and not translated_d):
+                retry_items.append((key, punchline, description))
             with _lock:
                 if punchline:
                     set_desc_pair(key, "Punchline", punchline, translated_p or None)
                 if description:
                     set_desc_pair(key, "Description", description, translated_d or None)
                 usage["ok"] += 1
+
+        if retry_items and allow_retry:
+            print(f"  原样回显 {len(retry_items)} 条，单独重试…")
+            for item in retry_items:
+                translate_descs([item], allow_retry=False)
 
     name_batches = [name_todo[i:i + 25] for i in range(0, len(name_todo), 25)]
     desc_batches = [desc_todo[i:i + 8] for i in range(0, len(desc_todo), 8)]
