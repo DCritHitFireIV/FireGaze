@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace FireGaze.Translate;
 
@@ -17,6 +18,9 @@ public sealed class ManifestPatcher
     private readonly Action<string> log;
 
     private readonly Dictionary<Type, (FieldInfo? Name, FieldInfo? Punchline, FieldInfo? Description)> fieldCache = new();
+
+    /// <summary>本会话里我们自己写过的值（按清单对象记）：词表更新后能把自己上一版渲染替换掉。</summary>
+    private readonly ConditionalWeakTable<object, WrittenValues> written = new();
 
     private object? pluginManager;
     private PropertyInfo? propAvailable;
@@ -114,13 +118,33 @@ public sealed class ManifestPatcher
             fieldCache[type] = fields;
         }
 
-        var changed = ApplyField(fields.Name, manifest, entry.Name, cfg.NameMode, isName: true, restore);
-        changed |= ApplyField(fields.Punchline, manifest, entry.Punchline, cfg.PunchlineMode, isName: false, restore);
-        changed |= ApplyField(fields.Description, manifest, entry.Description, cfg.DescriptionMode, isName: false, restore);
+        var remembered = written.GetOrCreateValue(manifest);
+
+        var changed = ApplyField(fields.Name, manifest, entry.Name, cfg.NameMode, isName: true, restore, ref remembered.Name);
+        changed |= ApplyField(fields.Punchline, manifest, entry.Punchline, cfg.PunchlineMode, isName: false, restore, ref remembered.Punchline);
+        changed |= ApplyField(fields.Description, manifest, entry.Description, cfg.DescriptionMode, isName: false, restore, ref remembered.Description);
         return changed;
     }
 
-    private static bool ApplyField(FieldInfo? field, object manifest, TransPair? pair, DisplayMode mode, bool isName, bool restore = false)
+    private sealed class WrittenValues
+    {
+        public string? Name;
+
+        public string? Punchline;
+
+        public string? Description;
+    }
+
+    private static bool ApplyField
+    (
+        FieldInfo? field,
+        object manifest,
+        TransPair? pair,
+        DisplayMode mode,
+        bool isName,
+        bool restore,
+        ref string? lastWritten
+    )
     {
         if (field is null || pair is null)
         {
@@ -142,9 +166,11 @@ public sealed class ManifestPatcher
             var currentEmpty = field.GetValue(manifest) as string;
             if (restore || mode == DisplayMode.Original)
             {
-                if (string.Equals(currentEmpty, translated, StringComparison.Ordinal))
+                if (string.Equals(currentEmpty, translated, StringComparison.Ordinal) ||
+                    (!string.IsNullOrEmpty(lastWritten) && string.Equals(currentEmpty, lastWritten, StringComparison.Ordinal)))
                 {
                     field.SetValue(manifest, string.Empty);
+                    lastWritten = string.Empty;
                     return true;
                 }
 
@@ -157,6 +183,7 @@ public sealed class ManifestPatcher
             }
 
             field.SetValue(manifest, translated);
+            lastWritten = translated;
             return true;
         }
 
@@ -182,21 +209,58 @@ public sealed class ManifestPatcher
             return false;
         }
 
-        // 认识的变体：原文 / 纯译文 / 双语
-        var known = new List<string> { original };
-        if (hasTranslation)
-        {
-            known.Add(translated);
-            known.Add(isName ? $"{translated} ({original})" : translated + "\n\n" + original);
-        }
-
-        if (!known.Exists(x => string.Equals(x, current, StringComparison.Ordinal)))
+        if (!IsKnownCurrent(current, original, translated, isName, lastWritten))
         {
             return false;
         }
 
         field.SetValue(manifest, target);
+        lastWritten = target;
         return true;
+    }
+
+    /// <summary>
+    ///     当前字段值是不是「我们认识的变体」——只有认识才敢替换（不覆盖别的插件的产物）。
+    ///     认识的：原文 / 纯译文 / 双语渲染 / 本会话里我们自己写过的值 /
+    ///     旧译文留下的双语渲染（尾部还是原文，头部是上一版译文）。
+    ///     2026-09-23 bozjalone 实例：旧假译文时代写成的「日文 + 空行 + 日文」，词表修好后必须能被新译文替换。
+    /// </summary>
+    internal static bool IsKnownCurrent(string current, string original, string translated, bool isName, string? lastWritten)
+    {
+        if (string.Equals(current, original, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        if (!string.IsNullOrWhiteSpace(translated))
+        {
+            if (string.Equals(current, translated, StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            var both = isName ? $"{translated} ({original})" : translated + "\n\n" + original;
+            if (string.Equals(current, both, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(lastWritten) && string.Equals(current, lastWritten, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        if (!string.IsNullOrEmpty(original))
+        {
+            var tail = isName ? $" ({original})" : "\n\n" + original;
+            if (current.Length > tail.Length && current.EndsWith(tail, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static FieldInfo? FindField(Type type, string name)
