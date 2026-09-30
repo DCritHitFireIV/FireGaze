@@ -11,6 +11,7 @@ internal sealed class UITextTab
 {
     private readonly UITextEditorWindow editor;
     private readonly UITextStore store;
+    private readonly UITextPatchManager patches;
 
     private InstalledPluginsIndex? index;
     private DateTime indexAt = DateTime.MinValue;
@@ -21,10 +22,11 @@ internal sealed class UITextTab
     private Dictionary<string, (int Total, int Translated, int Skipped)> packInfo = new(StringComparer.Ordinal);
     private DateTime packInfoAt = DateTime.MinValue;
 
-    public UITextTab(UITextEditorWindow editor, UITextStore store)
+    public UITextTab(UITextEditorWindow editor, UITextStore store, UITextPatchManager patches)
     {
         this.editor = editor;
         this.store = store;
+        this.patches = patches;
     }
 
     public void Draw()
@@ -106,14 +108,15 @@ internal sealed class UITextTab
 
         const ImGuiTableFlags flags = ImGuiTableFlags.Borders | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
                                       ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Resizable;
-        if (!ImGui.BeginTable("###UITextPlugins", 4, flags, new System.Numerics.Vector2(0, -1)))
+        if (!ImGui.BeginTable("###UITextPlugins", 5, flags, new System.Numerics.Vector2(0, -1)))
         {
             return;
         }
 
         ImGui.TableSetupColumn("插件", ImGuiTableColumnFlags.WidthStretch, 0.45f);
         ImGui.TableSetupColumn("内部名", ImGuiTableColumnFlags.WidthStretch, 0.25f);
-        ImGui.TableSetupColumn("本地包", ImGuiTableColumnFlags.WidthFixed, 170);
+        ImGui.TableSetupColumn("本地包", ImGuiTableColumnFlags.WidthFixed, 150);
+        ImGui.TableSetupColumn("补丁", ImGuiTableColumnFlags.WidthFixed, 120);
         ImGui.TableSetupColumn("操作", ImGuiTableColumnFlags.WidthFixed, 120);
         ImGui.TableSetupScrollFreeze(0, 1);
         ImGui.TableHeadersRow();
@@ -156,6 +159,28 @@ internal sealed class UITextTab
             }
 
             ImGui.TableNextColumn();
+            var patchStatus = this.patches.StatusOf(plugin, out var patchDetail);
+            if (patchStatus == UITextPatchStatus.NotPatched)
+            {
+                ImGui.TextDisabled("—");
+            }
+            else
+            {
+                var color = patchStatus switch
+                {
+                    UITextPatchStatus.Applied => UiHelpers.Good,
+                    UITextPatchStatus.PendingReload => UiHelpers.Info,
+                    UITextPatchStatus.NeedsRepatch => UiHelpers.Warn,
+                    _ => UiHelpers.Bad,
+                };
+                UiHelpers.ColoredText(color, PatchLabel(patchStatus));
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip(patchDetail);
+                }
+            }
+
+            ImGui.TableNextColumn();
             var canEdit = !string.IsNullOrEmpty(plugin.DLLPath) && File.Exists(plugin.DLLPath);
             ImGui.BeginDisabled(!canEdit);
             if (ImGui.Button(hasPack ? "打开编辑器" : "开始汉化"))
@@ -174,6 +199,15 @@ internal sealed class UITextTab
 
         ImGui.EndTable();
     }
+
+    private static string PatchLabel(UITextPatchStatus status) => status switch
+    {
+        UITextPatchStatus.Applied => "已打",
+        UITextPatchStatus.PendingReload => "待重载",
+        UITextPatchStatus.NeedsRepatch => "需重打",
+        UITextPatchStatus.Failed => "失败",
+        _ => "—",
+    };
 
     /// <summary>
     ///     读一遍本地包摘要（只在刷新列表 / 页面停留超过 5 秒时做）。

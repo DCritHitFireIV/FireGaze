@@ -43,6 +43,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly MainWindow window;
     private readonly ContributeWindow contributeWindow;
     private readonly UI.UITextEditorWindow uiTextEditorWindow;
+    private readonly UIText.UITextPatchManager uiTextPatchManager;
     private readonly Timer translateTimer;
 
     private readonly object saveLock = new();
@@ -87,12 +88,13 @@ public sealed class Plugin : IDalamudPlugin
         Table = new TranslationTable(ConfigDirectory, pluginDirectory);
         Contributions = new ContributionsStore(ConfigDirectory);
         TextPacks = new UIText.UITextStore(ConfigDirectory);
+        uiTextPatchManager = new UIText.UITextPatchManager(this);
         Patcher = new ManifestPatcher(() => Config, Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
-        uiTextEditorWindow = new UI.UITextEditorWindow(this, TextPacks);
+        uiTextEditorWindow = new UI.UITextEditorWindow(this, TextPacks, uiTextPatchManager);
         windowSystem.AddWindow(uiTextEditorWindow);
-        window = new MainWindow(this, new UI.UITextTab(uiTextEditorWindow, TextPacks));
+        window = new MainWindow(this, new UI.UITextTab(uiTextEditorWindow, TextPacks, uiTextPatchManager));
         windowSystem.AddWindow(window);
         contributeWindow = new ContributeWindow(this, Contributions);
         windowSystem.AddWindow(contributeWindow);
@@ -175,6 +177,9 @@ public sealed class Plugin : IDalamudPlugin
         {
             ReloadTranslationTable(out _);
             TrackFirstSeen();
+
+            // 补丁复核：上次打补丁后游戏如果没跑起来（崩了/被强杀），这里会自动还原
+            uiTextPatchManager.VerifyOnStartup();
 
             translateTimer.Start();
 
@@ -277,6 +282,11 @@ public sealed class Plugin : IDalamudPlugin
     internal UIText.UITextStore TextPacks { get; }
 
     /// <summary>
+    ///     插件内部文本的补丁调度（打补丁 / 还原 / 重载 / 更新后重打）。
+    /// </summary>
+    internal UIText.UITextPatchManager TextPatches => uiTextPatchManager;
+
+    /// <summary>
     ///     最近一次汉化应用改写的清单数。
     /// </summary>
     public int LastTranslatedCount { get; private set; }
@@ -287,6 +297,16 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
+        try
+        {
+            // 干净退出 = 补丁没把游戏搞死：把「待确认」全部转正，下次启动就不会误还原
+            uiTextPatchManager.MarkAllVerified();
+        }
+        catch (Exception)
+        {
+            // 退出路径上不抛
+        }
+
         SaveConfig(force: true);
 
         try
@@ -456,6 +476,7 @@ public sealed class Plugin : IDalamudPlugin
         try
         {
             installerListScroll.Tick(Config, () => SaveConfig(force: false));
+            uiTextPatchManager.Tick();
 
             // 安装器开着 → 把本地缓存的图标分批挂回卫月的图标缓存（安装器直接用本地图，不重新下载）
             if (installerListScroll.IsOpen)

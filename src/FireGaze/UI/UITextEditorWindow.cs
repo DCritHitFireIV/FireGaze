@@ -35,6 +35,7 @@ internal sealed class UITextEditorWindow : Window
 
     private readonly Plugin plugin;
     private readonly UITextStore store;
+    private readonly UITextPatchManager patches;
     private readonly FileDialogManager fileDialog = new();
 
     private InstalledPluginEntry? entry;
@@ -57,15 +58,17 @@ internal sealed class UITextEditorWindow : Window
     private string keyInput = string.Empty;
     private string messageKey = string.Empty;
     private Task<(string Channel, UITextTranslateResult Result)>? translateTask;
+    private Task<(bool Ok, string Message)>? patchTask;
     private CancellationTokenSource? translateCancel;
     private int translateDone;
     private int translateTotal;
 
-    public UITextEditorWindow(Plugin plugin, UITextStore store)
+    public UITextEditorWindow(Plugin plugin, UITextStore store, UITextPatchManager patches)
         : base("插件汉化###FireGazeUITextEditor", ImGuiWindowFlags.None)
     {
         this.plugin = plugin;
         this.store = store;
+        this.patches = patches;
         this.Size = new System.Numerics.Vector2(980, 640);
         this.SizeCondition = ImGuiCond.FirstUseEver;
         this.SizeConstraints = new WindowSizeConstraints
@@ -122,6 +125,7 @@ internal sealed class UITextEditorWindow : Window
 
         this.PollExtraction();
         this.PollTranslate();
+        this.PollPatchTask();
         this.DrawHeader();
         ImGui.Separator();
         this.DrawToolbar();
@@ -395,6 +399,47 @@ internal sealed class UITextEditorWindow : Window
         this.SetStatus(summary, outcome.Result.Error is not null && applied == 0);
     }
 
+    private void StartReload()
+    {
+        if (this.entry is null || this.patchTask is { IsCompleted: false })
+        {
+            return;
+        }
+
+        var target = this.entry;
+        this.SetStatus("正在重载插件…", false);
+        this.patchTask = Task.Run(() => this.patches.ReloadAsync(target));
+    }
+
+    private void PollPatchTask()
+    {
+        var task = this.patchTask;
+        if (task is null || !task.IsCompleted)
+        {
+            return;
+        }
+
+        this.patchTask = null;
+        try
+        {
+            var (ok, message) = task.Result;
+            this.SetStatus(message, !ok);
+        }
+        catch (Exception e)
+        {
+            this.SetStatus("重载失败：" + e.Message, true);
+        }
+    }
+
+    private static string DescribePatchStatus(UITextPatchStatus status) => status switch
+    {
+        UITextPatchStatus.Applied => "已打补丁",
+        UITextPatchStatus.PendingReload => "已打补丁，待重载确认",
+        UITextPatchStatus.NeedsRepatch => "插件更新过，需重打",
+        UITextPatchStatus.Failed => "失败（已还原）",
+        _ => "未打补丁",
+    };
+
     // ── 界面 ─────────────────────────────────────────────────────────────
 
     private void DrawHeader()
@@ -473,6 +518,69 @@ internal sealed class UITextEditorWindow : Window
         if (ImGui.Button("保存"))
         {
             this.SaveIfDirty(force: true);
+        }
+
+        // ── 打补丁 ───────────────────────────────────────────
+        ImGui.SameLine();
+        ImGui.TextDisabled("|");
+        ImGui.SameLine();
+        var patchBusy = this.patchTask is { IsCompleted: false };
+        ImGui.BeginDisabled(patchBusy);
+        if (ImGui.Button("应用到插件"))
+        {
+            this.SaveIfDirty(force: true);
+            var (ok, message) = this.patches.Apply(this.entry);
+            this.SetStatus(message, !ok);
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip("把有译文的条目写进插件 DLL（原始文件先备份；随时可还原）。");
+        }
+
+        ImGui.SameLine();
+        ImGui.BeginDisabled(patchBusy || !this.entry.IsLoaded);
+        if (ImGui.Button("重载生效"))
+        {
+            this.StartReload();
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(this.entry.IsLoaded
+                ? "让卫月卸载并重新加载这个插件，补丁立刻生效。"
+                : "插件当前没加载，不需要重载（下次加载就是新版）。");
+        }
+
+        if (patchBusy)
+        {
+            ImGui.SameLine();
+            ImGui.TextDisabled("处理中…");
+        }
+
+        ImGui.SameLine();
+        var patchStatus = this.patches.StatusOf(this.entry, out var patchDetailText);
+        ImGui.TextDisabled("补丁：" + DescribePatchStatus(patchStatus));
+        if (patchDetailText.Length > 0 && ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(patchDetailText);
+        }
+
+        ImGui.SameLine();
+        ImGui.BeginDisabled(!this.patches.HasBackup(this.entry));
+        if (ImGui.Button("还原"))
+        {
+            this.SaveIfDirty(force: true);
+            var (ok, message) = this.patches.Restore(this.entry);
+            this.SetStatus(message, !ok);
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip("把插件 DLL 还原成打补丁之前的原始文件（游戏里重载后恢复英文）。");
         }
 
         ImGui.SameLine();

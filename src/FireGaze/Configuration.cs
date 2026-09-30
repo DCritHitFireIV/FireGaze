@@ -240,4 +240,10 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("UITextTranslateGreyList")]
     public bool UITextTranslateGreyList { get; set; }
+
+    /// <summary>
+    ///     插件更新后自动把补丁重打上去（默认开；重打后仍然要用户自己点「重载生效」）。
+    /// </summary>
+    [JsonProperty("UITextAutoRepatch")]
+    public bool UITextAutoRepatch { get; set; } = true;
 }

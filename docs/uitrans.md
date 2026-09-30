@@ -25,7 +25,12 @@
 | `src/FireGaze/UIText/UITextPack.cs` | 配套包模型（原文→译文、来源、不翻名单、库合并优先级） |
 | `src/FireGaze/UIText/UITextStore.cs` | 本地包读写（`<配置目录>/uitrans/<内部名>.json`）+ 桌面工具 JSON 兼容 |
 | `src/FireGaze/UI/UITextTab.cs` | 「插件汉化」页签：插件列表 + 包状态 + 打开编辑器 |
-| `src/FireGaze/UI/UITextEditorWindow.cs` | 编辑器窗口：逐条翻译、筛选、导入导出 |
+| `src/FireGaze/UI/UITextEditorWindow.cs` | 编辑器窗口：逐条翻译、筛选、导入导出、打补丁/还原/重载 |
+| `src/FireGaze/UIText/UITextPatcher.cs` | 打补丁：dnlib 改写 `ldstr` 字面量（只动字符串，不动代码结构） |
+| `src/FireGaze/UIText/UITextPatchStore.cs` | 补丁状态 + 原始 DLL 备份（都在配置目录里） |
+| `src/FireGaze/UIText/UITextPatchManager.cs` | 打补丁/还原/重载/更新后重打的调度与安全网 |
+| `src/FireGaze/UIText/TranslationChannels.cs` | 翻译通道：Google 免 key / MyMemory / 大模型 / DeepL |
+| `src/FireGaze/UIText/DPAPI.cs` | 用户 API key 的本机加密存储 |
 | `tools/UITextProbe/` | 离线探针（与插件同一份源码）：`--all` / `--json` / `--trace` / `--types` |
 
 ## 抽取器怎么判
@@ -73,9 +78,22 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - 基准样例：**Globetrotter 1.2.17** —— 抽取器判出 11 条候选，与桌面工具人工勾选结果逐条一致，功能串 0 误入。
 - 加壳插件（OmniToolbox / XSZToolbox / PFRadar / OCNFarmer 等）读得动、抽不出串、不崩。
 
+## 打补丁的安全网（顺序即优先级）
+
+1. **先备份**：原始 DLL 复制到 `<配置目录>/uitrans/backups/<内部名>-<哈希前12位>.dll`，插件目录只留最终 DLL；
+2. **先写临时文件再替换**：`<dll>.fguitext.tmp` → `File.Move(overwrite)`，不会留半截 DLL；
+3. **待确认标记**：打完写 `state/<内部名>.json`（PendingVerify），重载后插件加载失败 → **自动还原**；
+4. **崩溃守门**：重载后 15 秒内插件活着 → 转正；游戏如果在这之前崩了/被强杀，下次启动会按「可疑崩溃」自动还原；
+5. **更新重打**：盘上 DLL 的 SHA-256 与打补丁时不一致（插件更新换目录了）→ 自动重打（`UITextAutoRepatch` 默认开），
+   重打后仍需用户点「重载生效」。
+
+口径：
+- 只改**有译文、且没被标「不翻」**的条目，按文本内容匹配、不绑版本号；
+- 被当控件 ID 用的字面量写成 `译文###原文`；原文自带 `###` 时只替换显示段；
+- 命令名 / 日志这类不在包里的字面量**一个字节都不动**（离线回归测试盯着）。
+
 ## 还没做（按计划）
 
-1. 翻译通道：免 key 免费接口（有代理走 Google 端点，否则 MyMemory）+ 用户自填 key（DeepSeek / OpenAI 兼容 / DeepL，DPAPI 存本机）；
-2. 打补丁：dnlib 改字面量 + 备份 + 重载生效 + 一键还原 + 加载失败/崩溃自动回滚 + 更新后自动重打；
-3. 配套库：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）+ 库下载；
-4. HCI 评审（改界面前先出还原图，按仓库既有流程）。
+1. 配套库：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）+ 库下载；
+2. 界面 HCI 评审（先出还原图，按仓库既有流程）；
+3. 批量翻译的单位与限流（免费接口有每日额度；大插件建议用自填 key）。
