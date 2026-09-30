@@ -449,10 +449,6 @@ public static class UIStringExtractor
 
             var (typeName, methodName) = Describe(callee);
             var paramTypes = ParamTypeNames(callee);
-            if (methodName is "get_Item" || typeName.Contains("Sorted", StringComparison.Ordinal))
-            {
-                Trace?.Invoke($"[call] {typeName}::{methodName} argc={paramTypes.Count}");
-            }
             var isNewObj = instr.OpCode.Code == Code.Newobj;
 
             // 实例调用在 IL 里多一个 this（先 push、最后 pop）；签名读不出来时至少要把 this 弹掉，
@@ -469,6 +465,11 @@ public static class UIStringExtractor
                 Pop(stack);
             }
 
+            // 属性赋值 / 对象初始化器的 set_* 是 void：真实语义是「对象引用还在栈上」，
+            // 不能凭空多留一个返回值——多留一个会让对象初始化器后面的调用参数整体错位，
+            // 把 fallback 参数当成 key（2026-10-01 实测：2 参 LocString 的工具提示全被误排）。
+            var isVoidSetter = popThis && methodName.StartsWith("set_", StringComparison.Ordinal);
+
             // 构造函数：当作对象初始化，参数不直接进 UI
             if (instr.OpCode.Code == Code.Newobj)
             {
@@ -479,7 +480,11 @@ public static class UIStringExtractor
             // ① 字符串垫片 / 加工：结果继承入参
             if (UICallSemantics.IsStringProducer(typeName, methodName))
             {
-                Push(stack, MakeResult(callee, argValues, isInternal: false));
+                if (!isVoidSetter)
+                {
+                    Push(stack, MakeResult(callee, argValues, isInternal: false));
+                }
+
                 return;
             }
 
@@ -491,7 +496,11 @@ public static class UIStringExtractor
                     this.MarkUI(scan, argValues[0], fieldLabel, preserveID: false);
                 }
 
-                Push(stack, MakeResult(callee, argValues, isInternal: false));
+                if (!isVoidSetter)
+                {
+                    Push(stack, MakeResult(callee, argValues, isInternal: false));
+                }
+
                 return;
             }
 
@@ -518,7 +527,11 @@ public static class UIStringExtractor
                     }
                 }
 
-                Push(stack, MakeResult(callee, argValues, isInternal: false));
+                if (!isVoidSetter)
+                {
+                    Push(stack, MakeResult(callee, argValues, isInternal: false));
+                }
+
                 return;
             }
 
@@ -534,9 +547,21 @@ public static class UIStringExtractor
                         continue;
                     }
 
+                    // 集合/字典的键名调用：键永远是第一个参数；后面的参数（值 / out 槽）不能跟着算键。
+                    // 否则 LocString(key, fallback) 里的 fallback（真正要显示的文本）会被当成键名整条排除
+                    // —— 2026-10-01 实测：SimpleTweaks 的 2 参 LocString 工具提示全被误排。
+                    if (isKey && i > 0)
+                    {
+                        continue;
+                    }
+
                     this.MarkDangerous(scan, argValues[i], target, isKey);
                 }
-                Push(stack, MakeResult(callee, argValues, isInternal: false));
+                if (!isVoidSetter)
+                {
+                    Push(stack, MakeResult(callee, argValues, isInternal: false));
+                }
+
                 return;
             }
 
@@ -568,7 +593,11 @@ public static class UIStringExtractor
                     }
                 }
 
-                Push(stack, MakeResult(callee, argValues, isInternal));
+                if (!isVoidSetter)
+                {
+                    Push(stack, MakeResult(callee, argValues, isInternal));
+                }
+
                 return;
             }
 
@@ -590,7 +619,10 @@ public static class UIStringExtractor
                 }
             }
 
-            Push(stack, MakeResult(callee, argValues, isInternal: false));
+            if (!isVoidSetter)
+            {
+                Push(stack, MakeResult(callee, argValues, isInternal: false));
+            }
         }
 
         private void MarkUI(MethodScan scan, V value, string target, bool preserveID)
@@ -632,7 +664,19 @@ public static class UIStringExtractor
 
         private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false)
         {
-            Trace?.Invoke($"[danger] {target} ids=[{string.Join(",", value.IDs)}] params=[{string.Join(",", value.Params)}] key={hardKey}");
+            if (Trace is not null)
+            {
+                foreach (var id in value.IDs)
+                {
+                    Trace($"[danger] scan={scan.Key} {target} key={hardKey} params=[{string.Join(",", value.Params)}] text=\"{UITextText.OneLine(this.literals[id].Text)}\"");
+                }
+
+                if (value.IDs.Count == 0 && value.Params.Count > 0)
+                {
+                    Trace($"[danger] scan={scan.Key} {target} key={hardKey} params=[{string.Join(",", value.Params)}]");
+                }
+            }
+
             foreach (var id in value.IDs)
             {
                 var literal = this.literals[id];
@@ -756,6 +800,20 @@ public static class UIStringExtractor
                     {
                         calleeScan.ReturnsDangerous = true;
                         changed = true;
+                    }
+                }
+            }
+
+            if (Trace is not null)
+            {
+                foreach (var scan in this.methods)
+                {
+                    for (var i = 0; i < scan.ParamsKey.Length; i++)
+                    {
+                        if (scan.ParamsKey[i])
+                        {
+                            Trace($"[keyparam] {scan.Key} param={i}");
+                        }
                     }
                 }
             }
