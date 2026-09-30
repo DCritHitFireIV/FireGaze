@@ -26,10 +26,18 @@ internal sealed record UITextPatchState
     public string? PluginVersion { get; set; }
 
     /// <summary>
-    ///     打补丁时「原始 DLL」的 SHA-256：现在盘上的文件对不上就说明插件更新过（需要重打）。
+    ///     打补丁时「原始 DLL」的 SHA-256。
     /// </summary>
     [JsonPropertyName("SourceHash")]
     public string SourceHash { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     打补丁**之后**文件本身的 SHA-256：用来区分「盘上是我们自己的补丁」和「插件更新换掉了文件」。
+    ///     没有它就会把自家的补丁误判成「插件更新了」，然后反复重打（2026-10-01 踩过）。
+    /// </summary>
+    [JsonPropertyName("PatchedHash")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? PatchedHash { get; set; }
 
     [JsonPropertyName("PatchedAt")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

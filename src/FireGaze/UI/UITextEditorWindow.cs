@@ -387,7 +387,7 @@ internal sealed class UITextEditorWindow : Window
 
         this.MarkDirty();
         var failed = outcome.Result.Failed.Count;
-        var summary = $"翻译完成：写入 {applied} 条" +
+        var summary = $"翻译完成（{outcome.Channel}）：写入 {applied} 条" +
                       (failed > 0 ? $" · 失败 {failed} 条" : string.Empty) +
                       (placeholderRejected > 0 ? $" · 占位符对不上跳过 {placeholderRejected} 条" : string.Empty) +
                       (unchanged > 0 ? $" · 原样返回 {unchanged} 条" : string.Empty);
@@ -396,7 +396,16 @@ internal sealed class UITextEditorWindow : Window
             summary += $"（{outcome.Result.Error}）";
         }
 
-        this.SetStatus(summary, outcome.Result.Error is not null && applied == 0);
+        if (outcome.Result.Notes.Count > 0)
+        {
+            summary += "｜" + string.Join("｜", outcome.Result.Notes);
+        }
+
+        Plugin.Log?.Information(
+            $"[内部文本] {this.entry?.InternalName} 翻译通道 {outcome.Channel}：目标 {this.translateTotal}，写入 {applied}，失败 {failed}" +
+            (outcome.Result.Notes.Count > 0 ? "；" + string.Join("；", outcome.Result.Notes) : string.Empty));
+
+        this.SetStatus(summary, applied == 0 && failed > 0);
     }
 
     private void StartReload()
@@ -480,8 +489,15 @@ internal sealed class UITextEditorWindow : Window
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             var targets = this.TranslationTargets().Count;
-            ImGui.SetTooltip($"用当前通道翻 {targets} 条（未翻的候选" +
-                             (this.plugin.Config.UITextTranslateGreyList ? " + 灰名单" : "，灰名单不翻") + "）");
+            var hint = $"用当前通道翻 {targets} 条（未翻的候选" +
+                       (this.plugin.Config.UITextTranslateGreyList ? " + 灰名单" : "，灰名单不翻") + "）";
+            if (targets > 100 && this.plugin.Config.UITextChannel is "auto" or "google" or "mymemory")
+            {
+                hint += "\n注意：免费接口按 IP 限流（Google 会 429、MyMemory 额度只有几千字符/天），" +
+                        "\n上百条建议改用「大模型（自填 key）」，或者分批慢慢翻。";
+            }
+
+            ImGui.SetTooltip(hint);
         }
 
         if (translating)

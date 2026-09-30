@@ -1,5 +1,3 @@
-using System.Collections.Concurrent;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -22,9 +20,25 @@ internal sealed class UITextTranslateResult
     public List<string> Failed { get; } = [];
 
     /// <summary>
-    ///     整条通道级的错误（比如没配 key / 连不上）；有它时 <see cref="Failed" /> 通常也有一堆。
+    ///     整条通道级的错误（比如没配 key / 两条免费通道都被限流）；有它时通常也有一堆失败条目。
     /// </summary>
     public string? Error { get; set; }
+
+    /// <summary>
+    ///     给人看的诊断（最多几条）：比如「Google：HTTP 429 × 120」「MyMemory：HTTP 429 × 120」。
+    ///     免费接口失败时**必须**留下原因，不然用户只看到「失败 N 条」完全猜不到发生了什么。
+    /// </summary>
+    public List<string> Notes { get; } = [];
+
+    public void Note(string text)
+    {
+        if (this.Notes.Count >= 5 || this.Notes.Contains(text, StringComparer.Ordinal))
+        {
+            return;
+        }
+
+        this.Notes.Add(text);
+    }
 }
 
 /// <summary>
@@ -50,22 +64,28 @@ internal interface IUITextChannel
 
 /// <summary>
 ///     免费、免 key 通道：优先 Google 免 key 端点（需要能连上 Google，通常是挂了代理），
-///     连不上就整批退回 MyMemory（国内直连可用，质量一般）。
+///     连不上或**被限流**就换 MyMemory。
 /// </summary>
+/// <remarks>
+///     免费接口是按 IP 限流的（Google 免 key 端点会 429、MyMemory 匿名额度只有几千字符/天），
+///     所以这里**串行 + 每条之间礼让 800ms**，遇到 429/5xx 退避重试，连续被限流就把那条通道冷却；
+///     两条都冷却时整批停下并说清原因——宁可不翻，也不要静默地刷出一堆失败。
+/// </remarks>
 internal sealed class FreeTranslationChannel : IUITextChannel
 {
     private static readonly HttpClient Client = CreateClient();
 
     private readonly bool googleFirst;
-    private volatile bool googleUnavailable;
+    private readonly ProviderState google = new("Google");
+    private readonly ProviderState myMemory = new("MyMemory");
 
     public FreeTranslationChannel(bool googleFirst) => this.googleFirst = googleFirst;
 
-    public string Name => this.googleFirst && !this.googleUnavailable ? "google" : "mymemory";
+    public string Name => this.googleFirst && !this.google.Blocked ? "google" : "mymemory";
 
     public string Description => this.googleFirst
-        ? "免费通道：先试 Google 免 key 端点（需要代理），连不上自动换 MyMemory"
-        : "免费通道：MyMemory（免 key、国内直连，质量一般）";
+        ? "免费：先试 Google 免 key 端点（需要代理），失败/限流换 MyMemory"
+        : "免费：MyMemory（免 key、国内直连，额度很小）";
 
     public async Task<UITextTranslateResult> TranslateAsync(
         IReadOnlyList<UITextTranslateItem> items,
@@ -73,80 +93,178 @@ internal sealed class FreeTranslationChannel : IUITextChannel
         CancellationToken token)
     {
         var result = new UITextTranslateResult();
+        var reasons = new Dictionary<string, int>(StringComparer.Ordinal);
         var done = 0;
-        var options = new ParallelOptions
-        {
-            MaxDegreeOfParallelism = 3,
-            CancellationToken = token,
-        };
 
-        try
+        foreach (var item in items)
         {
-            await Parallel.ForEachAsync(items, options, async (item, ct) =>
+            if (token.IsCancellationRequested)
             {
-                var translated = await this.TranslateOneAsync(item.Text, ct).ConfigureAwait(false);
-                if (translated is null)
-                {
-                    lock (result.Failed)
-                    {
-                        result.Failed.Add(item.Text);
-                    }
-                }
-                else
-                {
-                    lock (result.Translated)
-                    {
-                        result.Translated[item.Text] = translated;
-                    }
-                }
+                result.Error = "已取消";
+                break;
+            }
 
-                progress?.Invoke(Interlocked.Increment(ref done), items.Count);
-            }).ConfigureAwait(false);
+            var order = this.ProviderOrder();
+            if (order.All(p => p.CoolingDown))
+            {
+                result.Error = TranslationThrottle.BothProvidersBlocked;
+                break;
+            }
+
+            var (text, notes) = await this.TranslateOneAsync(item.Text, token).ConfigureAwait(false);
+            if (text is null)
+            {
+                result.Failed.Add(item.Text);
+                foreach (var note in notes)
+                {
+                    reasons[note] = reasons.GetValueOrDefault(note) + 1;
+                }
+            }
+            else
+            {
+                result.Translated[item.Text] = text;
+            }
+
+            progress?.Invoke(++done, items.Count);
+
+            if (done < items.Count)
+            {
+                try
+                {
+                    await Task.Delay(TranslationThrottle.PerRequestDelayMilliseconds, token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    result.Error = "已取消";
+                    break;
+                }
+            }
         }
-        catch (OperationCanceledException)
+
+        foreach (var (reason, count) in reasons.OrderByDescending(x => x.Value).Take(3))
         {
-            result.Error = "已取消";
-        }
-        catch (Exception e)
-        {
-            result.Error = $"{e.GetType().Name}: {e.Message}";
+            result.Note($"{reason} × {count}");
         }
 
         return result;
     }
 
-    private async Task<string?> TranslateOneAsync(string original, CancellationToken token)
+    private List<ProviderState> ProviderOrder() => this.googleFirst
+        ? [this.google, this.myMemory]
+        : [this.myMemory, this.google];
+
+    private async Task<(string? Text, List<string> Notes)> TranslateOneAsync(string original, CancellationToken token)
     {
         var text = UITextText.ForTranslation(original);
+        var notes = new List<string>();
         if (text.Length == 0)
         {
-            return string.Empty;
+            return (string.Empty, notes);
         }
 
-        if (this.googleFirst && !this.googleUnavailable)
+        foreach (var provider in this.ProviderOrder())
         {
+            if (provider.CoolingDown)
+            {
+                notes.Add($"{provider.Label}：冷却中");
+                continue;
+            }
+
+            var (value, failure, rateLimited) = await CallWithRetriesAsync(provider, text, token).ConfigureAwait(false);
+            if (value is not null)
+            {
+                provider.OnSuccess();
+                return (value, notes);
+            }
+
+            if (rateLimited)
+            {
+                provider.OnRateLimited();
+            }
+
+            notes.Add($"{provider.Label}：{failure}");
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+        }
+
+        return (null, notes);
+    }
+
+    private static async Task<(string? Text, string Failure, bool RateLimited)> CallWithRetriesAsync(
+        ProviderState provider,
+        string text,
+        CancellationToken token)
+    {
+        var lastFailure = "未知错误";
+        var rateLimited = false;
+        for (var attempt = 0; attempt < TranslationThrottle.MaxAttempts; attempt++)
+        {
+            if (token.IsCancellationRequested)
+            {
+                return (null, "已取消", false);
+            }
+
             try
             {
-                return await TranslateWithGoogleAsync(text, token).ConfigureAwait(false);
+                var value = provider.Label == "Google"
+                    ? await TranslateWithGoogleAsync(text, token).ConfigureAwait(false)
+                    : await TranslateWithMyMemoryAsync(text, token).ConfigureAwait(false);
+
+                if (value is not null)
+                {
+                    return (value, string.Empty, false);
+                }
+
+                lastFailure = "返回内容为空";
             }
-            catch (OperationCanceledException) when (!token.IsCancellationRequested)
+            catch (HttpRequestException e)
             {
-                this.googleUnavailable = true;
+                lastFailure = DescribeStatus(e);
+                rateLimited = IsRateLimit(e);
             }
-            catch (HttpRequestException)
+            catch (TaskCanceledException) when (!token.IsCancellationRequested)
             {
-                this.googleUnavailable = true;
+                lastFailure = "请求超时";
+            }
+            catch (JsonException)
+            {
+                lastFailure = "返回不是合法 JSON（可能被代理/网关拦了）";
+            }
+            catch (Exception e)
+            {
+                lastFailure = $"{e.GetType().Name}: {e.Message}";
+            }
+
+            if (attempt < TranslationThrottle.MaxAttempts - 1)
+            {
+                try
+                {
+                    await Task.Delay(TranslationThrottle.RetryDelayMilliseconds(attempt), token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    return (null, "已取消", false);
+                }
             }
         }
 
-        try
+        return (null, lastFailure, rateLimited);
+    }
+
+    private static bool IsRateLimit(HttpRequestException e)
+        => e.StatusCode is not null && TranslationThrottle.IsRetryableStatus((int)e.StatusCode.Value);
+
+    private static string DescribeStatus(HttpRequestException e)
+    {
+        if (e.StatusCode is null)
         {
-            return await TranslateWithMyMemoryAsync(text, token).ConfigureAwait(false);
+            return "连不上（" + e.Message + "）";
         }
-        catch (Exception)
-        {
-            return null;
-        }
+
+        var code = (int)e.StatusCode.Value;
+        return code == 429 ? "HTTP 429 被限流" : $"HTTP {code}";
     }
 
     private static async Task<string?> TranslateWithGoogleAsync(string text, CancellationToken token)
@@ -186,7 +304,19 @@ internal sealed class FreeTranslationChannel : IUITextChannel
         }
 
         var translated = value.GetString();
-        return string.IsNullOrWhiteSpace(translated) ? null : translated;
+        if (string.IsNullOrWhiteSpace(translated))
+        {
+            return null;
+        }
+
+        // MyMemory 额度用尽时会把提示语塞进 translatedText
+        if (translated.Contains("MYMEMORY WARNING", StringComparison.OrdinalIgnoreCase)
+            || translated.Contains("QUOTA", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new HttpRequestException("额度用尽（MYMEMORY WARNING）", null, System.Net.HttpStatusCode.TooManyRequests);
+        }
+
+        return translated;
     }
 
     private static HttpClient CreateClient()
@@ -194,6 +324,39 @@ internal sealed class FreeTranslationChannel : IUITextChannel
         var client = new HttpClient { Timeout = TimeSpan.FromSeconds(20) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FireGaze/1.0 (+https://github.com/DCritHitFireIV/FireGaze)");
         return client;
+    }
+
+    /// <summary>
+    ///     一条免费通道的健康状况：连续被限流几次、冷却到什么时候。
+    /// </summary>
+    private sealed class ProviderState
+    {
+        public ProviderState(string label) => this.Label = label;
+
+        public string Label { get; }
+
+        public int RateLimitStreak { get; private set; }
+
+        public DateTime CooldownUntil { get; private set; }
+
+        public bool CoolingDown => DateTime.Now < this.CooldownUntil;
+
+        /// <summary>
+        ///     连续被限流超过阈值就冷却一段时间（免费接口的 429 一般要等几分钟才会恢复）。
+        /// </summary>
+        public bool Blocked => this.CoolingDown;
+
+        public void OnSuccess() => this.RateLimitStreak = 0;
+
+        public void OnRateLimited()
+        {
+            this.RateLimitStreak++;
+            var minutes = TranslationThrottle.CooldownMinutes(this.RateLimitStreak);
+            if (minutes > 0)
+            {
+                this.CooldownUntil = DateTime.Now.AddMinutes(minutes);
+            }
+        }
     }
 }
 
@@ -247,7 +410,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
         {
             token.ThrowIfCancellationRequested();
             var chunk = items.Skip(offset).Take(this.BatchSize).ToList();
-            var translated = await this.TranslateChunkAsync(chunk, token).ConfigureAwait(false);
+            var (translated, failure) = await this.TranslateChunkAsync(chunk, token).ConfigureAwait(false);
             if (translated is null)
             {
                 lock (result.Failed)
@@ -256,6 +419,12 @@ internal sealed class LLMTranslationChannel : IUITextChannel
                     {
                         result.Failed.Add(item.Text);
                     }
+                }
+
+                if (failure is not null)
+                {
+                    result.Note(failure);
+                    result.Error ??= failure;
                 }
             }
             else
@@ -281,23 +450,30 @@ internal sealed class LLMTranslationChannel : IUITextChannel
     }
 
     /// <summary>
-    ///     单块重试一次（模型偶尔会吐坏 JSON）。
+    ///     单块重试一次（模型偶尔会吐坏 JSON）；失败时把原因带回来。
     /// </summary>
-    private async Task<Dictionary<int, string>?> TranslateChunkAsync(List<UITextTranslateItem> chunk, CancellationToken token)
+    private async Task<(Dictionary<int, string>? Result, string? Failure)> TranslateChunkAsync(
+        List<UITextTranslateItem> chunk,
+        CancellationToken token)
     {
+        string? lastFailure = null;
         for (var attempt = 0; attempt < 2; attempt++)
         {
-            var parsed = await this.TryChunkOnceAsync(chunk, token).ConfigureAwait(false);
+            var (parsed, failure) = await this.TryChunkOnceAsync(chunk, token).ConfigureAwait(false);
             if (parsed is not null)
             {
-                return parsed;
+                return (parsed, null);
             }
+
+            lastFailure = failure;
         }
 
-        return null;
+        return (null, lastFailure);
     }
 
-    private async Task<Dictionary<int, string>?> TryChunkOnceAsync(List<UITextTranslateItem> chunk, CancellationToken token)
+    private async Task<(Dictionary<int, string>? Result, string? Failure)> TryChunkOnceAsync(
+        List<UITextTranslateItem> chunk,
+        CancellationToken token)
     {
         var payload = new StringBuilder();
         payload.Append('[');
@@ -345,27 +521,48 @@ internal sealed class LLMTranslationChannel : IUITextChannel
         };
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.apiKey);
 
-        using var response = await Client.SendAsync(request, HttpCompletionOption.ResponseContentRead, token).ConfigureAwait(false);
-        var text = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
-        if (!response.IsSuccessStatusCode)
+        string text;
+        try
         {
-            Plugin.Log?.Warning($"[内部文本] 大模型返回 {(int)response.StatusCode}：{UITextText.OneLine(text, 200)}");
-            return null;
+            using var response = await Client.SendAsync(request, HttpCompletionOption.ResponseContentRead, token).ConfigureAwait(false);
+            text = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                var code = (int)response.StatusCode;
+                var hint = code switch
+                {
+                    401 => "HTTP 401：key 不对或没权限",
+                    402 => "HTTP 402：账户余额不足",
+                    429 => "HTTP 429：请求太频繁",
+                    _ => $"HTTP {code}",
+                };
+                Plugin.Log?.Warning($"[内部文本] 大模型返回 {code}：{UITextText.OneLine(text, 200)}");
+                return (null, $"大模型 {hint}");
+            }
+        }
+        catch (TaskCanceledException) when (!token.IsCancellationRequested)
+        {
+            return (null, "大模型请求超时");
+        }
+        catch (HttpRequestException e)
+        {
+            return (null, "大模型连不上：" + e.Message);
         }
 
         var content = ExtractContent(text);
         if (content is null)
         {
-            return null;
+            return (null, "大模型返回里没有 content（可能被截断）");
         }
 
         var json = UITextText.ExtractJSON(content);
         if (json is null)
         {
-            return null;
+            return (null, "大模型没有按 JSON 回答");
         }
 
-        return ParseTranslations(json);
+        var parsed = ParseTranslations(json);
+        return parsed is null ? (null, "大模型返回的 JSON 结构不对") : (parsed, null);
     }
 
     private static string? ExtractContent(string responseText)
@@ -502,7 +699,9 @@ internal sealed class DeepLTranslationChannel : IUITextChannel
                 var text = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
                 if (!response.IsSuccessStatusCode)
                 {
-                    result.Error = $"DeepL {(int)response.StatusCode}";
+                    var message = $"DeepL HTTP {(int)response.StatusCode}";
+                    result.Error = message;
+                    result.Note(message);
                     result.Failed.AddRange(chunk.Select(x => x.Text));
                     continue;
                 }
@@ -528,7 +727,9 @@ internal sealed class DeepLTranslationChannel : IUITextChannel
             }
             catch (Exception e)
             {
-                result.Error = $"{e.GetType().Name}: {e.Message}";
+                var message = $"DeepL {e.GetType().Name}: {e.Message}";
+                result.Error = message;
+                result.Note(message);
                 result.Failed.AddRange(chunk.Select(x => x.Text));
             }
 

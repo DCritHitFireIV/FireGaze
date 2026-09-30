@@ -84,9 +84,17 @@ internal sealed class UITextPatchManager
         if (!string.IsNullOrEmpty(entry.DLLPath) && File.Exists(entry.DLLPath))
         {
             var hash = UITextPatchStore.HashOf(entry.DLLPath);
-            if (hash.Length > 0 && !string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase))
+            if (hash.Length > 0
+                && !string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(hash, state.PatchedHash, StringComparison.OrdinalIgnoreCase))
             {
                 detail = "插件更新过，补丁需要重打";
+                return UITextPatchStatus.NeedsRepatch;
+            }
+
+            if (state.PatchedHash is { Length: > 0 } && string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase))
+            {
+                detail = "盘上是原始文件（补丁被还原/被更新顶掉了）";
                 return UITextPatchStatus.NeedsRepatch;
             }
         }
@@ -111,17 +119,18 @@ internal sealed class UITextPatchManager
             return (false, "读不到插件主程序集路径。");
         }
 
-        // 已经被我们打过补丁的：先还原回原始文件，避免在译文上叠译文
+        // 基线判定：盘上是「我们自己的旧补丁」就先还原回原始文件，避免在译文上叠译文；
+        // 盘上是别的内容（插件更新 / 第三方改过）就以当前内容为新基线，绝不能拿旧备份去顶掉新版本。
         var existing = this.store.Load(entry.InternalName);
-        if (existing is { PendingVerify: false, BackupPath: { Length: > 0 } } && File.Exists(existing.BackupPath))
+        var samePath = existing is not null && string.Equals(existing.DLLPath, dllPath, StringComparison.OrdinalIgnoreCase);
+        if (samePath && existing!.HasBackup)
         {
             var currentHash = UITextPatchStore.HashOf(dllPath);
-            if (!string.Equals(currentHash, existing.SourceHash, StringComparison.OrdinalIgnoreCase))
+            if (existing.PatchedHash is { Length: > 0 } && string.Equals(currentHash, existing.PatchedHash, StringComparison.OrdinalIgnoreCase))
             {
-                // 盘上是打过补丁的文件：先还原，重新算基线
                 try
                 {
-                    File.Copy(existing.BackupPath, dllPath, overwrite: true);
+                    File.Copy(existing.BackupPath!, dllPath, overwrite: true);
                 }
                 catch (Exception e)
                 {
@@ -160,6 +169,7 @@ internal sealed class UITextPatchManager
             DLLPath = dllPath,
             PluginVersion = entry.Version,
             SourceHash = sourceHash,
+            PatchedHash = UITextPatchStore.HashOf(dllPath),
             PatchedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
             BackupPath = backup,
             AppliedEntries = outcome.PatchedLiterals,
@@ -338,8 +348,11 @@ internal sealed class UITextPatchManager
         }
 
         var hash = UITextPatchStore.HashOf(entry.DLLPath);
-        if (hash.Length == 0 || string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase))
+        if (hash.Length == 0
+            || string.Equals(hash, state.PatchedHash, StringComparison.OrdinalIgnoreCase)
+            || string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase) && state.PatchedHash is null)
         {
+            // 我们的补丁还在盘上 / 还从没打过：都不用重打
             return;
         }
 
