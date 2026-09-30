@@ -47,9 +47,9 @@ internal sealed class UITextStore
                 .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
                 .ToArray()!;
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            Plugin.Log?.Warning(e, "[内部文本] 列包目录失败：{Path}", this.DirectoryPath);
+            Plugin.Log?.Warning("[内部文本] 列包目录失败：" + this.DirectoryPath);
             return [];
         }
     }
@@ -71,16 +71,16 @@ internal sealed class UITextStore
             var pack = UITextPack.FromJSON(json, out var error);
             if (pack is null)
             {
-                Plugin.Log?.Warning("[内部文本] 包读不出来（{Name}）：{Error}", internalName, error);
+                Plugin.Log?.Warning($"[内部文本] 包读不出来（{internalName}）：{error}");
                 return new UITextPack { Meta = { Source = "local" } };
             }
 
             pack.Meta.Source ??= "local";
             return pack;
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            Plugin.Log?.Warning(e, "[内部文本] 读包失败：{Path}", path);
+            Plugin.Log?.Warning($"[内部文本] 读包失败：{path}");
             return new UITextPack { Meta = { Source = "local" } };
         }
     }
@@ -110,7 +110,7 @@ internal sealed class UITextStore
         catch (Exception e)
         {
             error = e.Message;
-            Plugin.Log?.Warning(e, "[内部文本] 写包失败：{Path}", path);
+            Plugin.Log?.Warning($"[内部文本] 写包失败：{path}");
             return false;
         }
     }

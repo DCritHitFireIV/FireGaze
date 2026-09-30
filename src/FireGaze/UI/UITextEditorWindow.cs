@@ -461,6 +461,7 @@ internal sealed class UITextEditorWindow : Window
 
     private void DrawToolbar()
     {
+        var entry = this.entry!;
         if (ImGui.Button("重新抽取"))
         {
             this.StartExtraction();
@@ -529,7 +530,7 @@ internal sealed class UITextEditorWindow : Window
         if (ImGui.Button("应用到插件"))
         {
             this.SaveIfDirty(force: true);
-            var (ok, message) = this.patches.Apply(this.entry);
+            var (ok, message) = this.patches.Apply(entry);
             this.SetStatus(message, !ok);
         }
 
@@ -540,7 +541,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         ImGui.SameLine();
-        ImGui.BeginDisabled(patchBusy || !this.entry.IsLoaded);
+        ImGui.BeginDisabled(patchBusy || !entry.IsLoaded);
         if (ImGui.Button("重载生效"))
         {
             this.StartReload();
@@ -549,7 +550,7 @@ internal sealed class UITextEditorWindow : Window
         ImGui.EndDisabled();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip(this.entry.IsLoaded
+            ImGui.SetTooltip(entry.IsLoaded
                 ? "让卫月卸载并重新加载这个插件，补丁立刻生效。"
                 : "插件当前没加载，不需要重载（下次加载就是新版）。");
         }
@@ -561,7 +562,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         ImGui.SameLine();
-        var patchStatus = this.patches.StatusOf(this.entry, out var patchDetailText);
+        var patchStatus = this.patches.StatusOf(entry, out var patchDetailText);
         ImGui.TextDisabled("补丁：" + DescribePatchStatus(patchStatus));
         if (patchDetailText.Length > 0 && ImGui.IsItemHovered())
         {
@@ -569,11 +570,11 @@ internal sealed class UITextEditorWindow : Window
         }
 
         ImGui.SameLine();
-        ImGui.BeginDisabled(!this.patches.HasBackup(this.entry));
+        ImGui.BeginDisabled(!this.patches.HasBackup(entry));
         if (ImGui.Button("还原"))
         {
             this.SaveIfDirty(force: true);
-            var (ok, message) = this.patches.Restore(this.entry);
+            var (ok, message) = this.patches.Restore(entry);
             this.SetStatus(message, !ok);
         }
 

@@ -45,6 +45,7 @@ internal sealed class UITextPatchManager
     private readonly UITextPatchStore store;
     private readonly UITextStore packs;
 
+    private readonly DateTime processStartedAt = DateTime.Now;
     private DateTime lastTick = DateTime.MinValue;
     private DateTime lastRepatchCheck = DateTime.MinValue;
     private InstalledPluginsIndex? index;
@@ -214,13 +215,9 @@ internal sealed class UITextPatchManager
     /// </summary>
     public async Task<(bool Ok, string Message)> ReloadAsync(InstalledPluginEntry entry)
     {
-        var manifest = entry.Manifest;
-        var canUnload = manifest?.GetType().GetProperty("CanUnloadAsync", BindingFlags.Public | BindingFlags.Instance)?.GetValue(manifest) as bool? ?? false;
-        if (!canUnload)
-        {
-            return (false, "这个插件声明了不能热重载，需要重启游戏才能生效。");
-        }
-
+        // 注意：不要拿 manifest 的 CanUnloadAsync 当闸门。那个标志只决定「Dispose 回不回主线程」，
+        // 卫月自己的重载（LocalPlugin.ReloadAsync）和插件管理器里的禁用/启用都不看它——
+        // 2026-10-01 就是把它当成「不能热重载」误拦过一次（用户手动开关明明有效）。
         var method = entry.RawPlugin.GetType().GetMethod(
             "ReloadAsync",
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
@@ -234,6 +231,12 @@ internal sealed class UITextPatchManager
 
         try
         {
+            var state = this.store.Load(entry.InternalName);
+            if (state is not null)
+            {
+                this.store.Save(state with { ReloadAttempts = state.ReloadAttempts + 1 });
+            }
+
             if (method.Invoke(entry.RawPlugin, null) is Task task)
             {
                 await task.ConfigureAwait(false);
@@ -401,6 +404,12 @@ internal sealed class UITextPatchManager
             }
 
             if (!DateTime.TryParse(state.PendingSince, out var since) || (DateTime.Now - since).TotalSeconds < PendingVerifySeconds)
+            {
+                continue;
+            }
+
+            // 本会话刚打上、又还没重载过：盘上换了文件不等于「验证通过」——等重载（或下次启动）再说
+            if (since > this.processStartedAt && state.ReloadAttempts == 0)
             {
                 continue;
             }

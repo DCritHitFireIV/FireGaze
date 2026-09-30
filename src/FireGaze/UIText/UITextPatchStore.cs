@@ -49,6 +49,13 @@ internal sealed record UITextPatchState
     public int AppliedEntries { get; set; }
 
     /// <summary>
+    ///     本会话里重载过几次（用来区分「补丁已经真的被加载过」和「只是写进了盘」）。
+    /// </summary>
+    [JsonPropertyName("ReloadAttempts")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public int ReloadAttempts { get; set; }
+
+    /// <summary>
     ///     打完补丁、还没确认重载成功：下次启动/重载后要复核，失败就自动还原。
     /// </summary>
     [JsonPropertyName("PendingVerify")]
