@@ -233,6 +233,43 @@ internal sealed class UITextPack
     }
 
     /// <summary>
+    ///     按新一次抽取结果清账：**这次没被列为 候选/灰名单 的条目一律标成「不翻」**，不再打进补丁。
+    ///     用来收拾历史上被误判成 UI 的键名/功能串（比如本地化 key 被翻成中文，导致插件的查找失效）。
+    ///     返回被标了多少条。
+    /// </summary>
+    public int PruneAgainstExtraction(UITextExtraction extraction)
+    {
+        var keep = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var item in extraction.Entries)
+        {
+            if (item.Role != UITextRole.Excluded)
+            {
+                keep.Add(item.Original);
+            }
+        }
+
+        var pruned = 0;
+        foreach (var entry in this.Entries)
+        {
+            if (keep.Contains(entry.Original))
+            {
+                continue;
+            }
+
+            if (!entry.HasTranslation && !this.IsSkipped(entry.Original))
+            {
+                continue;
+            }
+
+            this.MarkSkipped(entry.Original);
+            entry.Review = "新一轮抽取已排除（可能是键名/功能串），不会打进补丁";
+            pruned++;
+        }
+
+        return pruned;
+    }
+
+    /// <summary>
     ///     用一次抽取结果更新包：补上新出现的原文（不带译文）；原文消失的条目不删（可能只是换版本），
     ///     但会清掉它们的 Context 免得误导。
     /// </summary>

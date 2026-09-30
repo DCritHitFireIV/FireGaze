@@ -97,6 +97,7 @@ public static class UIStringExtractor
         public string UIFlowTarget = string.Empty;
         public bool DangerousViaFlow;
         public string DangerousFlowTarget = string.Empty;
+        public bool HardKey;
         public bool UIViaReturn;
     }
 
@@ -111,6 +112,7 @@ public static class UIStringExtractor
         public bool[] ParamsToUIPreserveID = [];
         public bool[] ParamsDangerous = [];
         public string[] ParamsDangerousTarget = [];
+        public bool[] ParamsKey = [];
         public bool ReturnsToUI;
         public bool ReturnsDangerous;
     }
@@ -172,6 +174,7 @@ public static class UIStringExtractor
             scan.ParamsToUIPreserveID = new bool[paramCount];
             scan.ParamsDangerous = new bool[paramCount];
             scan.ParamsDangerousTarget = EmptyStrings(paramCount);
+            scan.ParamsKey = new bool[paramCount];
 
             this.methods.Add(scan);
             this.methodByKey.TryAdd(scan.Key, scan);
@@ -446,6 +449,10 @@ public static class UIStringExtractor
 
             var (typeName, methodName) = Describe(callee);
             var paramTypes = ParamTypeNames(callee);
+            if (methodName is "get_Item" || typeName.Contains("Sorted", StringComparison.Ordinal))
+            {
+                Trace?.Invoke($"[call] {typeName}::{methodName} argc={paramTypes.Count}");
+            }
             var isNewObj = instr.OpCode.Code == Code.Newobj;
 
             // 实例调用在 IL 里多一个 this（先 push、最后 pop）；签名读不出来时至少要把 this 弹掉，
@@ -519,14 +526,15 @@ public static class UIStringExtractor
             if (UICallSemantics.IsDangerousCall(typeName, methodName))
             {
                 var target = UICallSemantics.ShortTarget(typeName, methodName);
+                var isKey = UICallSemantics.IsCollectionKeyCall(typeName, methodName);
                 for (var i = 0; i < argValues.Length; i++)
                 {
-                    if (!IsStringLike(paramTypes[i]))
+                    if (!UICallSemantics.IsStringLikeOrGeneric(paramTypes[i]))
                     {
                         continue;
                     }
 
-                    this.MarkDangerous(scan, argValues[i], target);
+                    this.MarkDangerous(scan, argValues[i], target, isKey);
                 }
                 Push(stack, MakeResult(callee, argValues, isInternal: false));
                 return;
@@ -622,12 +630,14 @@ public static class UIStringExtractor
             }
         }
 
-        private void MarkDangerous(MethodScan scan, V value, string target)
+        private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false)
         {
+            Trace?.Invoke($"[danger] {target} ids=[{string.Join(",", value.IDs)}] params=[{string.Join(",", value.Params)}] key={hardKey}");
             foreach (var id in value.IDs)
             {
                 var literal = this.literals[id];
                 literal.Dangerous = true;
+                literal.HardKey |= hardKey;
                 if (literal.DangerousTarget.Length == 0)
                 {
                     literal.DangerousTarget = target;
@@ -642,6 +652,11 @@ public static class UIStringExtractor
                     if (scan.ParamsDangerousTarget[index].Length == 0)
                     {
                         scan.ParamsDangerousTarget[index] = target;
+                    }
+
+                    if (hardKey)
+                    {
+                        scan.ParamsKey[index] = true;
                     }
                 }
             }
@@ -695,6 +710,7 @@ public static class UIStringExtractor
                         {
                             from.ParamsDangerous[fromParam] = true;
                             from.ParamsDangerousTarget[fromParam] = to.ParamsDangerousTarget[toParam];
+                            from.ParamsKey[fromParam] = to.ParamsKey[toParam];
                             changed = true;
                         }
                     }
@@ -794,6 +810,7 @@ public static class UIStringExtractor
                 else if (scan.ParamsDangerous[param])
                 {
                     literal.DangerousViaFlow = true;
+                    literal.HardKey |= scan.ParamsKey[param];
                     if (literal.DangerousFlowTarget.Length == 0)
                     {
                         literal.DangerousFlowTarget = scan.ParamsDangerousTarget[param];
@@ -856,6 +873,19 @@ public static class UIStringExtractor
 
                 var hasUI = literal.UIDirect || literal.UIViaFlow || literal.UIViaReturn;
                 var hasDanger = literal.Dangerous || literal.DangerousViaFlow;
+
+                // 当键名用过：一律排除（翻它 = 破坏查找，灰名单也不该碰）
+                if (literal.HardKey)
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text,
+                        Context = literal.Context,
+                        Role = UITextRole.Excluded,
+                        Reason = "当集合/字典的键名用（翻了会破坏查找）",
+                    });
+                    continue;
+                }
 
                 if (hasUI && hasDanger)
                 {

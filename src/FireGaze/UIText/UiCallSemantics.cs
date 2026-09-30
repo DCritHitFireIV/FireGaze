@@ -262,6 +262,29 @@ internal static class UICallSemantics
             || typeFullName.Contains("ImGui", StringComparison.OrdinalIgnoreCase));
 
     /// <summary>
+    ///     这个调用是不是「把字符串当集合键名用」——翻它一定会破坏查找（本地化 key 就是这么被误翻的）。
+    /// </summary>
+    public static bool IsCollectionKeyCall(string typeFullName, string methodName) =>
+        (typeFullName.Contains("Dictionary", StringComparison.Ordinal)
+         || typeFullName.Contains("HashSet", StringComparison.Ordinal)
+         || typeFullName.Contains("SortedSet", StringComparison.Ordinal)
+         || typeFullName.Contains("KeyedCollection", StringComparison.Ordinal))
+        && methodName is "get_Item" or "set_Item" or "ContainsKey" or "TryGetValue" or "TryAdd" or "Add" or "Remove";
+
+    /// <summary>
+    ///     判断「这个参数位置是不是字符串」时用的宽松版：泛型参数（<c>!0</c>/<c>!!0</c>）和 object 也算，
+    ///     因为 <c>SortedDictionary&lt;TKey, TValue&gt;.get_Item(TKey)</c> 这种签名读出来是泛型参数，
+    ///     严格判断会把「拿字符串当键名」整条漏掉（2026-10-01 的 key 误翻就是这么来的）。
+    /// </summary>
+    public static bool IsStringLikeOrGeneric(string typeName) =>
+        typeName.Length == 0
+        || typeName.Contains("String", StringComparison.Ordinal)
+        || typeName.Contains("Char", StringComparison.Ordinal)
+        || typeName.Contains("ReadOnlySpan", StringComparison.Ordinal)
+        || typeName.StartsWith("!", StringComparison.Ordinal)
+        || typeName is "System.Object";
+
+    /// <summary>
     ///     对象初始化器 / 字段赋值里的「给人看的字符串」：目前只认命令帮助。
     /// </summary>
     public static string? DescribeUIField(string declaringType, string fieldName)

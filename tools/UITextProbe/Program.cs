@@ -38,6 +38,19 @@ if (args.Length >= 3 && args[1] == "--types")
     return 0;
 }
 
+if (args.Length >= 4 && args[1] == "--predicate")
+{
+    var type = args[2];
+    var method = args[3];
+    Console.WriteLine($"type      = {type}");
+    Console.WriteLine($"method    = {method}");
+    Console.WriteLine($"IsLog     = {UICallSemantics.IsLogCall(type, method)}");
+    Console.WriteLine($"IsProducer= {UICallSemantics.IsStringProducer(type, method)}");
+    Console.WriteLine($"IsUI      = {UICallSemantics.IsUICall(type, method)}");
+    Console.WriteLine($"IsDanger  = {UICallSemantics.IsDangerousCall(type, method)}");
+    return 0;
+}
+
 if (args.Length >= 2 && args[1] == "--strings")
 {
     // 调试用：把程序集里所有 ldstr 字面量打出来（对比两个版本被人改了什么）

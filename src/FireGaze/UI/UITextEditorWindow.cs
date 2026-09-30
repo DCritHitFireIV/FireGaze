@@ -218,10 +218,15 @@ internal sealed class UITextEditorWindow : Window
             }
         }
 
+        // 清账：这一轮没被列为 候选/灰名单 的条目（键名、功能串、过期条目）标成「不翻」，不再打进补丁
+        var pruned = this.pack.PruneAgainstExtraction(result);
         this.SortEntries();
         this.RebuildRows();
         this.MarkDirty();
-        this.SetStatus($"抽取完成：候选 {uiCount} 条 · 灰名单 {ambiguous} 条（灰名单默认不翻）", false);
+        this.SetStatus(
+            $"抽取完成：候选 {uiCount} 条 · 灰名单 {ambiguous} 条（灰名单默认不翻）" +
+            (pruned > 0 ? $" · 已排除 {pruned} 条（键名/功能串/过期条目，不再打进补丁）" : string.Empty),
+            false);
     }
 
     private void SortEntries()
