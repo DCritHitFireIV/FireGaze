@@ -1,0 +1,85 @@
+namespace FireGaze.UIText;
+
+/// <summary>
+///     一条字面量的判定结果。
+/// </summary>
+public enum UITextRole
+{
+    /// <summary>
+    ///     只流向 UI 调用：默认认为可以翻译。
+    /// </summary>
+    UI,
+
+    /// <summary>
+    ///     既流向 UI 调用、又出现在比较 / 键名 / 日志之类的功能语境里：默认不翻，编辑器里要提示原因。
+    /// </summary>
+    Ambiguous,
+
+    /// <summary>
+    ///     明确不是 UI 文本（日志、命令、签名、键名……）：不进候选。
+    /// </summary>
+    Excluded,
+}
+
+/// <summary>
+///     抽取出来的一条字符串字面量。
+/// </summary>
+public sealed class UITextEntry
+{
+    /// <summary>
+    ///     原文（字面量的值）。
+    /// </summary>
+    public string Original { get; init; } = string.Empty;
+
+    /// <summary>
+    ///     代码位置：<c>类型.方法</c>。
+    /// </summary>
+    public string Context { get; init; } = string.Empty;
+
+    /// <summary>
+    ///     判定。
+    /// </summary>
+    public UITextRole Role { get; init; }
+
+    /// <summary>
+    ///     判定依据（人话，会显示在编辑器里）。
+    /// </summary>
+    public string Reason { get; init; } = string.Empty;
+
+    /// <summary>
+    ///     这个字面量被 ImGui 当作控件 ID 用（Button / Selectable / TreeNode 之类）。
+    ///     打补丁时要写成 <c>译文###原文</c>，把 ID 留在原文上，避免译文相同的控件互相撞 ID。
+    /// </summary>
+    public bool PreserveID { get; init; }
+}
+
+/// <summary>
+///     一次抽取的结果。
+/// </summary>
+public sealed class UITextExtraction
+{
+    /// <summary>
+    ///     被抽取的程序集路径。
+    /// </summary>
+    public string AssemblyPath { get; init; } = string.Empty;
+
+    /// <summary>
+    ///     读不出来时的失败原因（加壳 / 加密 / 不是 .NET 程序集）。
+    /// </summary>
+    public string? Error { get; init; }
+
+    /// <summary>
+    ///     全部字面量（含排除的，编辑器里可以按判定筛选）。
+    /// </summary>
+    public List<UITextEntry> Entries { get; init; } = [];
+
+    /// <summary>
+    ///     UI 候选条数。
+    /// </summary>
+    public int UICount => Entries.Count(e => e.Role == UITextRole.UI);
+
+    /// <summary>
+    ///     灰名单条数（既像 UI 又像功能串）。
+    /// </summary>
+    public int AmbiguousCount => Entries.Count(e => e.Role == UITextRole.Ambiguous);
+}

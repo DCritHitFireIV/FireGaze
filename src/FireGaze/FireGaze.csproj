@@ -7,7 +7,7 @@
     <Platforms>x64</Platforms>
     <AssemblyName>FireGaze</AssemblyName>
     <Name>FireGaze</Name>
-    <Version>1.2.0.29</Version>
+    <Version>1.2.0.30</Version>
     <Authors>fire</Authors>
     <Author>fire</Author>
     <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
@@ -41,6 +41,11 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
   <ItemGroup>
     <PackageReference Include="DailyRoutines.CodeAnalysis" Version="2.6.0" PrivateAssets="all"
                       IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+  </ItemGroup>
+
+  <!-- 插件内部文本汉化：读 IL 抽字符串、打补丁（MIT）。要随插件一起发到玩家手里，所以不能设 PrivateAssets -->
+  <ItemGroup>
+    <PackageReference Include="dnlib" Version="4.5.0" />
   </ItemGroup>
 
 </Project>
