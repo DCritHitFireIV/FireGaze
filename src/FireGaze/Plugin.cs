@@ -355,9 +355,13 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    ///     注册聊天命令。命令名可能被其他插件占用（如 /fg 已属于别的插件），
-    ///     占用时只记一条警告，不能让插件加载失败。
+    ///     注册聊天命令。
     /// </summary>
+    /// <remarks>
+    ///     口径：本插件只注册 <c>/firegaze</c>（外加 <c>/nar</c>、<c>/pdz</c> 两个旧别名）。
+    ///     <c>/fg</c> 属于别的插件、**不注册**，一切面向玩家的文案也只写 <c>/firegaze</c>。
+    ///     命令名被占用时只记一条警告，不能让插件加载失败。
+    /// </remarks>
     private void AddCommand(string name, CommandInfo info)
     {
         try
