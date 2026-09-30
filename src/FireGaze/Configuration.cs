@@ -201,4 +201,43 @@ public sealed class Configuration : IPluginConfiguration
 
     [JsonProperty("LastScanUtc")]
     public DateTime LastScanUTC { get; set; }
+
+    // ---------------- 插件内部文本（「插件汉化」页签） ----------------
+
+    /// <summary>
+    ///     翻译通道：<c>auto</c>（免费：能连 Google 就先用 Google，否则 MyMemory）/ <c>google</c> / <c>mymemory</c> /
+    ///     <c>llm</c>（自填 key 的大模型）/ <c>deepl</c>。
+    /// </summary>
+    [JsonProperty("UITextChannel")]
+    public string UITextChannel { get; set; } = "auto";
+
+    /// <summary>
+    ///     大模型预设：<c>deepseek</c>（带关思考开关）/ <c>custom</c>（任何 OpenAI 兼容服务）。
+    /// </summary>
+    [JsonProperty("UITextLLMProvider")]
+    public string UITextLLMProvider { get; set; } = "deepseek";
+
+    [JsonProperty("UITextLLMBaseURL")]
+    public string UITextLLMBaseURL { get; set; } = "https://api.deepseek.com/v1";
+
+    [JsonProperty("UITextLLMModel")]
+    public string UITextLLMModel { get; set; } = "deepseek-flash";
+
+    /// <summary>
+    ///     大模型 API key：**DPAPI 加密后的 base64**，明文不落盘、不上传。
+    /// </summary>
+    [JsonProperty("UITextLLMKey")]
+    public string UITextLLMKeyProtected { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     DeepL API key（同样 DPAPI 加密）。
+    /// </summary>
+    [JsonProperty("UITextDeepLKey")]
+    public string UITextDeepLKeyProtected { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     批量翻译要不要连灰名单一起翻（默认不翻：灰名单是「既进 UI 又进功能语境」的字符串）。
+    /// </summary>
+    [JsonProperty("UITextTranslateGreyList")]
+    public bool UITextTranslateGreyList { get; set; }
 }

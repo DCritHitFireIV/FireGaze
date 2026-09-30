@@ -90,7 +90,7 @@ public sealed class Plugin : IDalamudPlugin
         Patcher = new ManifestPatcher(() => Config, Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
-        uiTextEditorWindow = new UI.UITextEditorWindow(TextPacks);
+        uiTextEditorWindow = new UI.UITextEditorWindow(this, TextPacks);
         windowSystem.AddWindow(uiTextEditorWindow);
         window = new MainWindow(this, new UI.UITextTab(uiTextEditorWindow, TextPacks));
         windowSystem.AddWindow(window);
