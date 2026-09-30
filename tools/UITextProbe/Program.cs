@@ -38,6 +38,38 @@ if (args.Length >= 3 && args[1] == "--types")
     return 0;
 }
 
+if (args.Length >= 2 && args[1] == "--strings")
+{
+    // 调试用：把程序集里所有 ldstr 字面量打出来（对比两个版本被人改了什么）
+    using var module = dnlib.DotNet.ModuleDefMD.Load(positional[0]);
+    var all = new SortedSet<string>(StringComparer.Ordinal);
+    foreach (var type in module.GetTypes())
+    {
+        foreach (var method in type.Methods)
+        {
+            if (!method.HasBody)
+            {
+                continue;
+            }
+
+            foreach (var instruction in method.Body.Instructions)
+            {
+                if (instruction.OpCode.Code == dnlib.DotNet.Emit.Code.Ldstr && instruction.Operand is string text)
+                {
+                    all.Add(text);
+                }
+            }
+        }
+    }
+
+    foreach (var text in all)
+    {
+        Console.WriteLine(text.Replace('\r', ' ').Replace('\n', '↵'));
+    }
+
+    return 0;
+}
+
 var result = UIStringExtractor.Extract(positional[0]);
 if (result.Error is not null)
 {
@@ -75,7 +107,7 @@ foreach (var e in rows)
 {
     var mark = e.Role switch
     {
-        UITextRole.Ui => "✔",
+        UITextRole.UI => "✔",
         UITextRole.Ambiguous => "?",
         _ => "×",
     };
