@@ -15,7 +15,7 @@ internal sealed class UITextTab
     private InstalledPluginsIndex? index;
     private DateTime indexAt = DateTime.MinValue;
     private string search = string.Empty;
-    private bool onlyThirdParty = true;
+    private bool onlyThirdParty;
 
     // 包摘要只在刷新时读一次盘（每帧逐行读文件会拖死界面）
     private Dictionary<string, (int Total, int Translated, int Skipped)> packInfo = new(StringComparer.Ordinal);
@@ -53,13 +53,10 @@ internal sealed class UITextTab
         }
 
         ImGui.SameLine();
-        if (ImGui.Checkbox("只显示第三方插件", ref this.onlyThirdParty))
-        {
-        }
-
+        ImGui.Checkbox("只看第三方插件", ref this.onlyThirdParty);
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("官方库（Dip17）的插件文字由官方维护，这里不处理。");
+            ImGui.SetTooltip("官方插件（Dip17）默认也列出：它们一样是英文界面，只是更新由官方安装器负责，补丁同样会被覆盖、需要重打。");
         }
 
         ImGui.SameLine();
@@ -79,7 +76,8 @@ internal sealed class UITextTab
         }
 
         ImGui.SameLine();
-        ImGui.TextDisabled($"共 {this.index.All.Count} 个插件 · {this.indexAt:HH:mm:ss} 读取");
+        var official = this.index.All.Count(e => !e.IsThirdParty);
+        ImGui.TextDisabled($"已装 {this.index.All.Count} 个（官方 {official} · 第三方 {this.index.All.Count - official}）· {this.indexAt:HH:mm:ss} 读取");
     }
 
     private void DrawTable()
@@ -96,6 +94,15 @@ internal sealed class UITextTab
                         || e.DisplayName.Contains(filter, StringComparison.OrdinalIgnoreCase)
                         || e.InternalName.Contains(filter, StringComparison.OrdinalIgnoreCase))
             .ToList();
+
+        if (items.Count == 0)
+        {
+            ImGui.TextDisabled(this.onlyThirdParty && this.index.All.Any(e => !e.IsThirdParty)
+                ? "当前筛选下没有插件——取消「只看第三方插件」就能看到官方插件。"
+                : "当前筛选下没有插件。");
+        }
+
+        ImGui.TextDisabled($"列出 {items.Count} / {this.index.All.Count} 个");
 
         const ImGuiTableFlags flags = ImGuiTableFlags.Borders | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
                                       ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.Resizable;
@@ -118,6 +125,12 @@ internal sealed class UITextTab
 
             ImGui.TableNextColumn();
             ImGui.TextUnformatted(plugin.DisplayName);
+            if (!plugin.IsThirdParty)
+            {
+                ImGui.SameLine();
+                ImGui.TextDisabled("[官方]");
+            }
+
             if (plugin.IsDev && ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip("开发版插件（补丁会被重新构建覆盖，需要重打）");
