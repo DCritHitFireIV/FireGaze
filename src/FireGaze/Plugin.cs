@@ -42,6 +42,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
     private readonly ContributeWindow contributeWindow;
+    private readonly UI.UITextEditorWindow uiTextEditorWindow;
     private readonly Timer translateTimer;
 
     private readonly object saveLock = new();
@@ -85,10 +86,13 @@ public sealed class Plugin : IDalamudPlugin
                               ?? ".";
         Table = new TranslationTable(ConfigDirectory, pluginDirectory);
         Contributions = new ContributionsStore(ConfigDirectory);
+        TextPacks = new UIText.UITextStore(ConfigDirectory);
         Patcher = new ManifestPatcher(() => Config, Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
-        window = new MainWindow(this);
+        uiTextEditorWindow = new UI.UITextEditorWindow(TextPacks);
+        windowSystem.AddWindow(uiTextEditorWindow);
+        window = new MainWindow(this, new UI.UITextTab(uiTextEditorWindow, TextPacks));
         windowSystem.AddWindow(window);
         contributeWindow = new ContributeWindow(this, Contributions);
         windowSystem.AddWindow(contributeWindow);
@@ -266,6 +270,11 @@ public sealed class Plugin : IDalamudPlugin
     ///     卫月仓库配置读写。
     /// </summary>
     public DalamudRepos Repos { get; }
+
+    /// <summary>
+    ///     插件内部文本的本地包存放（「插件汉化」页签用）。
+    /// </summary>
+    internal UIText.UITextStore TextPacks { get; }
 
     /// <summary>
     ///     最近一次汉化应用改写的清单数。

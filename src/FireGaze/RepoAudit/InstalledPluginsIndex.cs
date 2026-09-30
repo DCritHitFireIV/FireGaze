@@ -38,11 +38,26 @@ internal sealed class InstalledPluginEntry
         : !string.IsNullOrWhiteSpace(Dip17Channel);
 
     /// <summary>
-    ///     卫月的 LocalPlugin 实例（给图标缓存用）。
+    ///     卫月的 LocalPlugin 实例（给图标缓存、内部文本汉化用）。
     /// </summary>
     public required object RawPlugin { get; init; }
 
     public object? Manifest { get; init; }
+
+    /// <summary>
+    ///     插件主程序集路径（读不到就是 null，界面不给「汉化」入口）。
+    /// </summary>
+    public string? DLLPath { get; init; }
+
+    /// <summary>
+    ///     插件清单里的版本号（只作展示，打补丁后提示重打用）。
+    /// </summary>
+    public string? Version { get; init; }
+
+    /// <summary>
+    ///     当前是否已加载。
+    /// </summary>
+    public bool IsLoaded { get; init; }
 
     public bool IsThirdParty { get; init; }
 
@@ -164,6 +179,9 @@ internal sealed class InstalledPluginsIndex
                     Dip17Channel = manifest?.GetType().GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string,
                     RawPlugin = plugin,
                     Manifest = manifest,
+                    DLLPath = (type.GetProperty("DllFile", flags)?.GetValue(plugin) as FileInfo)?.FullName,
+                    Version = manifest?.GetType().GetProperty("AssemblyVersion", flags)?.GetValue(manifest)?.ToString(),
+                    IsLoaded = type.GetProperty("IsLoaded", flags)?.GetValue(plugin) as bool? ?? false,
                     IsThirdParty = isThirdParty,
                     IsDev = isDev,
                 };

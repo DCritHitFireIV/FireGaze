@@ -5,7 +5,7 @@ using Dalamud.Interface.Windowing;
 namespace FireGaze.UI;
 
 /// <summary>
-///     主窗口的页签（顺序就是界面上的顺序：简介汉化 → 仓库体检 → 插件安装器 → 参与翻译）。
+///     主窗口的页签（顺序就是界面上的顺序：简介汉化 → 仓库体检 → 插件安装器 → 参与翻译 → 插件汉化）。
 /// </summary>
 public enum MainTab
 {
@@ -13,6 +13,7 @@ public enum MainTab
     RepoAudit = 1,
     Installer = 2,
     Contribute = 3,
+    UIText = 4,
 }
 
 /// <summary>
@@ -23,10 +24,11 @@ internal sealed class MainWindow : Window
     private readonly RepoAuditTab repoAuditTab;
     private readonly InstallerTab installerTab;
     private readonly TranslateTab translateTab;
+    private readonly UITextTab uiTextTab;
 
     private MainTab? pendingSelect;
 
-    public MainWindow(Plugin plugin)
+    public MainWindow(Plugin plugin, UITextTab uiTextTab)
         : base("FireGaze###FireGaze", ImGuiWindowFlags.None)
     {
         Size = new Vector2(700, 620);
@@ -36,6 +38,7 @@ internal sealed class MainWindow : Window
             MinimumSize = new Vector2(560, 440),
         };
 
+        this.uiTextTab = uiTextTab;
         repoAuditTab = new RepoAuditTab(plugin);
         installerTab = new InstallerTab(plugin);
         translateTab = new TranslateTab(plugin);
@@ -90,6 +93,13 @@ internal sealed class MainWindow : Window
             if (ImGui.BeginTabItem("插件安装器", flags))
             {
                 installerTab.Draw();
+                ImGui.EndTabItem();
+            }
+
+            flags = pendingSelect == MainTab.UIText ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            if (ImGui.BeginTabItem("插件汉化", flags))
+            {
+                this.uiTextTab.Draw();
                 ImGui.EndTabItem();
             }
 
