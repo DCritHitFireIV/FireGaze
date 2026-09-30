@@ -35,6 +35,8 @@ internal static class UICallSemantics
         "CalcTextSize",
         "GetTextLineHeight",
         "PushTextWrapPos",
+        // Dalamud 的「(?) 悬停说明」：文本只画在 tooltip 里，不当控件 ID（ID 来自那个 "(?)" 前缀）
+        "HelpMarker",
     };
 
     /// <summary>
@@ -188,6 +190,15 @@ internal static class UICallSemantics
     /// </summary>
     public static bool IsUICall(string typeFullName, string methodName)
     {
+        // ImU8String 只是字符串构造器（<c>AppendLiteral</c> / <c>AppendFormatted</c>），
+        // 碰它的时候还没画到界面上；真正的 UI 调用是后面接住它的那个（Checkbox 要 ID、TextColored 不要）。
+        // 2026-10-01 实测：Orbwalker 的 "Movement" 经 AppendLiteral 后才进 ImGui.TextColored，
+        // 在构造器上误判成「用 ID」，补丁写成「移动###Movement」，界面上原样漏出后缀。
+        if (typeFullName.Contains("ImU8String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
         if (typeFullName.Contains("ImGui", StringComparison.OrdinalIgnoreCase))
         {
             return true;
@@ -209,6 +220,12 @@ internal static class UICallSemantics
     /// </summary>
     public static bool UsesStringAsID(string typeFullName, string methodName)
     {
+        // 字符串构造器从来不当控件 ID 用（真正的判定在接住它的 UI 调用上）
+        if (typeFullName.Contains("ImU8String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
         if (!typeFullName.Contains("ImGui", StringComparison.OrdinalIgnoreCase))
         {
             return false;
@@ -240,6 +257,13 @@ internal static class UICallSemantics
     public static bool IsStringProducer(string typeFullName, string methodName)
     {
         if (IsStringConversionShim(typeFullName, methodName))
+        {
+            return true;
+        }
+
+        // Dalamud 新版绑定的 UTF-8 字符串构造器：AppendLiteral / AppendFormatted 之后
+        // 字面量还在这个缓冲区里，等接住它的 UI 调用再判定（value 流继承入参）。
+        if (typeFullName.Contains("ImU8String", StringComparison.Ordinal))
         {
             return true;
         }

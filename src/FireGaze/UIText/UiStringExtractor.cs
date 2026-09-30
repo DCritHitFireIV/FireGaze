@@ -49,7 +49,9 @@ public static class UIStringExtractor
         string? CallKey,
         bool CallIsInternal,
         bool IsArray,
-        bool IsThis)
+        bool IsThis,
+        int RefLocal = -1,
+        int RefArg = -1)
     {
         public static readonly V Unknown = new([], [], null, false, false, false);
 
@@ -93,6 +95,13 @@ public static class UIStringExtractor
         public string UnknownTarget = string.Empty;
         public bool UIDirect;
         public string UITarget = string.Empty;
+
+        /// <summary>被控件调用用作文本（需要保留 <c>###原文</c>）。</summary>
+        public bool IDMarked;
+
+        /// <summary>被普通文字调用（Text / TextColored / 悬停说明）画出来，不需要 ID。</summary>
+        public bool PlainTextMarked;
+
         public bool UIViaFlow;
         public string UIFlowTarget = string.Empty;
         public bool DangerousViaFlow;
@@ -250,8 +259,23 @@ public static class UIStringExtractor
 
                 case Code.Ldarga:
                 case Code.Ldarga_S:
+                {
+                    // 取参数地址：带着「这是谁的地址」的信息走，被调方法写完要能写回参数
+                    var index = ParamIndex(scan, ArgIndex(instr));
+                    Push(stack, index >= 0 ? LoadArg(scan, args, index) with { RefArg = index } : V.Unknown);
+                    return;
+                }
+
                 case Code.Ldloca:
                 case Code.Ldloca_S:
+                {
+                    // 取局部变量地址：struct 的 mutating 方法（ImU8String.AppendLiteral 之类）靠这个改局部变量，
+                    // 被调方法的结果要写回本槽（不然字面量就断在这里了——2026-10-01 的 Movement 就是断在这）
+                    var index = LocalIndex(instr);
+                    Push(stack, LoadLocal(locals, index) with { RefLocal = index });
+                    return;
+                }
+
                 case Code.Ldc_I4:
                 case Code.Ldc_I4_0:
                 case Code.Ldc_I4_1:
@@ -277,7 +301,7 @@ public static class UIStringExtractor
                     Push(stack, V.Unknown);
                     return;
 
-                // 这些也会消耗栈顶（取字段 / 取地址 / 间接读取），归到「弹一压一」组
+                // 这些也会消耗栈顶（取字段 / 取地址 / 间接读写 / 初始化），归到「弹一压一」组
                 case Code.Ldfld:
                 case Code.Ldflda:
                 case Code.Ldvirtftn:
@@ -287,8 +311,22 @@ public static class UIStringExtractor
                 case Code.Ldind_R4:
                 case Code.Ldind_R8:
                 case Code.Ldind_Ref:
+                case Code.Ldobj:
                     Pop(stack);
                     Push(stack, V.Unknown);
+                    return;
+
+                // 纯消耗栈顶、不留值（给地址写值 / 初始化默认值）——
+                // 漏了这些会让后面的调用参数整体错位（2026-10-01：default(Vector2) 的 initobj 把 ImGui.Button
+                // 的参数顶歪，字面量永远标不上 UI）
+                case Code.Initobj:
+                    Pop(stack);
+                    return;
+
+                case Code.Stobj:
+                case Code.Cpobj:
+                    Pop(stack);
+                    Pop(stack);
                     return;
 
                 case Code.Stsfld:
@@ -361,7 +399,7 @@ public static class UIStringExtractor
                 case Code.Call:
                 case Code.Callvirt:
                 case Code.Newobj:
-                    this.HandleCall(scan, instr, stack);
+                    this.HandleCall(scan, instr, stack, locals, args);
                     return;
 
                 case Code.Ldlen:
@@ -439,7 +477,7 @@ public static class UIStringExtractor
             }
         }
 
-        private void HandleCall(MethodScan scan, Instruction instr, List<V> stack)
+        private void HandleCall(MethodScan scan, Instruction instr, List<V> stack, Dictionary<int, V> locals, Dictionary<int, V> args)
         {
             if (instr.Operand is not IMethod callee)
             {
@@ -460,15 +498,30 @@ public static class UIStringExtractor
                 argValues[i] = Pop(stack);
             }
 
-            if (popThis)
-            {
-                Pop(stack);
-            }
+            var thisValue = popThis ? Pop(stack) : null;
 
-            // 属性赋值 / 对象初始化器的 set_* 是 void：真实语义是「对象引用还在栈上」，
-            // 不能凭空多留一个返回值——多留一个会让对象初始化器后面的调用参数整体错位，
-            // 把 fallback 参数当成 key（2026-10-01 实测：2 参 LocString 的工具提示全被误排）。
-            var isVoidSetter = popThis && methodName.StartsWith("set_", StringComparison.Ordinal);
+            // 调用完之后怎么处置结果值：
+            //   · 返回 void 的调用**不能**往栈上留值——多留一个会让后面的调用参数整体错位
+            //     （2026-10-01 踩过：对象初始化器的 set_* 把 fallback 顶进 key 参数槽）；
+            //   · 对 struct 的 mutating 调用（ldloca 取地址，例如 ImU8String.AppendLiteral），
+            //     void 的「返回值」其实是写回那个局部变量/参数里的新内容。
+            var isVoid = callee.MethodSig?.RetType.FullName == "System.Void";
+            void Leave(V result)
+            {
+                if (isVoid && thisValue is { RefLocal: >= 0 })
+                {
+                    StoreLocal(locals, thisValue.RefLocal, result);
+                }
+                else if (isVoid && thisValue is { RefArg: >= 0 })
+                {
+                    Store(args, thisValue.RefArg, result);
+                }
+
+                if (!isVoid)
+                {
+                    Push(stack, result);
+                }
+            }
 
             // 构造函数：当作对象初始化，参数不直接进 UI
             if (instr.OpCode.Code == Code.Newobj)
@@ -480,11 +533,7 @@ public static class UIStringExtractor
             // ① 字符串垫片 / 加工：结果继承入参
             if (UICallSemantics.IsStringProducer(typeName, methodName))
             {
-                if (!isVoidSetter)
-                {
-                    Push(stack, MakeResult(callee, argValues, isInternal: false));
-                }
-
+                Leave(MakeResult(callee, argValues, isInternal: false));
                 return;
             }
 
@@ -496,11 +545,7 @@ public static class UIStringExtractor
                     this.MarkUI(scan, argValues[0], fieldLabel, preserveID: false);
                 }
 
-                if (!isVoidSetter)
-                {
-                    Push(stack, MakeResult(callee, argValues, isInternal: false));
-                }
-
+                Leave(MakeResult(callee, argValues, isInternal: false));
                 return;
             }
 
@@ -527,11 +572,7 @@ public static class UIStringExtractor
                     }
                 }
 
-                if (!isVoidSetter)
-                {
-                    Push(stack, MakeResult(callee, argValues, isInternal: false));
-                }
-
+                Leave(MakeResult(callee, argValues, isInternal: false));
                 return;
             }
 
@@ -557,11 +598,7 @@ public static class UIStringExtractor
 
                     this.MarkDangerous(scan, argValues[i], target, isKey);
                 }
-                if (!isVoidSetter)
-                {
-                    Push(stack, MakeResult(callee, argValues, isInternal: false));
-                }
-
+                Leave(MakeResult(callee, argValues, isInternal: false));
                 return;
             }
 
@@ -593,11 +630,7 @@ public static class UIStringExtractor
                     }
                 }
 
-                if (!isVoidSetter)
-                {
-                    Push(stack, MakeResult(callee, argValues, isInternal));
-                }
-
+                Leave(MakeResult(callee, argValues, isInternal));
                 return;
             }
 
@@ -619,10 +652,7 @@ public static class UIStringExtractor
                 }
             }
 
-            if (!isVoidSetter)
-            {
-                Push(stack, MakeResult(callee, argValues, isInternal: false));
-            }
+            Leave(MakeResult(callee, argValues, isInternal: false));
         }
 
         private void MarkUI(MethodScan scan, V value, string target, bool preserveID)
@@ -641,6 +671,11 @@ public static class UIStringExtractor
                 if (preserveID && !isArray)
                 {
                     literal.PreserveID = true;
+                    literal.IDMarked = true;
+                }
+                else
+                {
+                    literal.PlainTextMarked = true;
                 }
             }
 
@@ -858,6 +893,11 @@ public static class UIStringExtractor
                         if (scan.ParamsToUIPreserveID[param])
                         {
                             literal.PreserveID = true;
+                            literal.IDMarked = true;
+                        }
+                        else
+                        {
+                            literal.PlainTextMarked = true;
                         }
                     }
                     else if (literal.UnknownTarget.Length == 0)
@@ -953,6 +993,19 @@ public static class UIStringExtractor
                         Context = literal.Context,
                         Role = UITextRole.Ambiguous,
                         Reason = $"既进 UI（{uiTarget}）又进功能语境（{literal.DangerousTarget}{literal.DangerousFlowTarget}）",
+                        PreserveID = literal.PreserveID,
+                    });
+                }
+                else if (literal.IDMarked && literal.PlainTextMarked)
+                {
+                    // 同一个字符串既当控件标签、又被直接当文字画出来。
+                    // 「译文###原文」会在普通文字处原样漏出后缀，不加又可能让控件 ID 撞车 → 灰名单，让用户自己定。
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text,
+                        Context = literal.Context,
+                        Role = UITextRole.Ambiguous,
+                        Reason = "既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID",
                         PreserveID = literal.PreserveID,
                     });
                 }

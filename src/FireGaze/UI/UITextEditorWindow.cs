@@ -198,6 +198,7 @@ internal sealed class UITextEditorWindow : Window
 
         this.extraction = result;
         this.roles.Clear();
+        var preserve = new Dictionary<string, bool>(StringComparer.Ordinal);
         var uiCount = 0;
         var ambiguous = 0;
         foreach (var item in result.Entries)
@@ -213,6 +214,7 @@ internal sealed class UITextEditorWindow : Window
                 this.roles[item.Original] = (item.Role, item.Reason);
             }
 
+            preserve[item.Original] = preserve.GetValueOrDefault(item.Original) || item.PreserveID;
             var packEntry = this.pack.GetOrAdd(item.Original, item.Context, item.PreserveID);
             if (packEntry.Context is null)
             {
@@ -226,6 +228,17 @@ internal sealed class UITextEditorWindow : Window
             else
             {
                 ambiguous++;
+            }
+        }
+
+        // PreserveID 是抽取的推导值，重新抽取要以这一轮为准。不能只 |= ——
+        // 以前判错过就永远换不掉（2026-10-01 Orbwalker 的 Movement 就被困在「移动###Movement」里）。
+        foreach (var (original, keepID) in preserve)
+        {
+            var entry = this.pack.Find(original);
+            if (entry is not null)
+            {
+                entry.PreserveID = keepID;
             }
         }
 
