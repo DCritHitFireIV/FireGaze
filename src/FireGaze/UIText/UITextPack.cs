@@ -83,6 +83,37 @@ internal sealed class UITextPackMeta
 }
 
 /// <summary>
+///     一次清账的结果：系统排掉多少条、恢复多少条、清掉多少条空壳。
+/// </summary>
+internal sealed record UITextPackPruneOutcome(int Pruned, int Restored, int Removed)
+{
+    /// <summary>这次清账有没有动过包。</summary>
+    public bool Any => this.Pruned > 0 || this.Restored > 0 || this.Removed > 0;
+
+    /// <summary>给界面用的一句话（没动过就返回空串）。</summary>
+    public string Describe()
+    {
+        var parts = new List<string>(3);
+        if (this.Pruned > 0)
+        {
+            parts.Add($"排除 {this.Pruned} 条");
+        }
+
+        if (this.Restored > 0)
+        {
+            parts.Add($"恢复 {this.Restored} 条");
+        }
+
+        if (this.Removed > 0)
+        {
+            parts.Add($"清掉 {this.Removed} 条空壳");
+        }
+
+        return parts.Count == 0 ? string.Empty : "清账：" + string.Join(" · ", parts);
+    }
+}
+
+/// <summary>
 ///     一个插件的内部文本包：原文 → 译文，另有「用户标记不翻」的名单。
 /// </summary>
 internal sealed class UITextPack
@@ -164,6 +195,20 @@ internal sealed class UITextPack
     }
 
     /// <summary>
+    ///     自动清账写在条目备注里的前缀。看到它就说明这条「不翻」是系统排的、可以自动恢复；
+    ///     用户手动标的条目不写备注，重新抽取也不会去动它。
+    /// </summary>
+    public const string AutoSkipNotePrefix = "自动排除：";
+
+    /// <summary>
+    ///     这条「不翻」是不是系统自动排的（能自动恢复）。兼容 v1.2.0.37 用过的旧备注文案。
+    /// </summary>
+    public static bool IsAutoSkipped(UITextPackEntry entry) =>
+        entry.Review is not null
+        && (entry.Review.StartsWith(AutoSkipNotePrefix, StringComparison.Ordinal)
+            || entry.Review.StartsWith("新一轮抽取已排除", StringComparison.Ordinal));
+
+    /// <summary>
     ///     标记「不翻」。
     /// </summary>
     public void MarkSkipped(string original)
@@ -235,9 +280,14 @@ internal sealed class UITextPack
     /// <summary>
     ///     按新一次抽取结果清账：**这次没被列为 候选/灰名单 的条目一律标成「不翻」**，不再打进补丁。
     ///     用来收拾历史上被误判成 UI 的键名/功能串（比如本地化 key 被翻成中文，导致插件的查找失效）。
-    ///     返回被标了多少条。
     /// </summary>
-    public int PruneAgainstExtraction(UITextExtraction extraction)
+    /// <remarks>
+    ///     两个方向都要管：<br />
+    ///     ① 又变回候选的条目要**恢复**——只恢复系统自己排过的（带自动备注），用户手动标的「不翻」绝不碰；<br />
+    ///     ② 没有译文、也没有来源的空壳条目直接从包里清掉——多半是上一轮对着「已经打过补丁的 DLL」
+    ///     抽出来的噪声（<c>译文###原文</c>），留在包里只会污染界面。
+    /// </remarks>
+    public UITextPackPruneOutcome PruneAgainstExtraction(UITextExtraction extraction)
     {
         var keep = new HashSet<string>(StringComparer.Ordinal);
         foreach (var item in extraction.Entries)
@@ -249,24 +299,47 @@ internal sealed class UITextPack
         }
 
         var pruned = 0;
+        var restored = 0;
+        var dropped = new List<string>();
         foreach (var entry in this.Entries)
         {
             if (keep.Contains(entry.Original))
             {
+                // 又变回候选了：只把「上次是系统自动排除」的恢复；用户手动标的「不翻」保持不动
+                if (this.IsSkipped(entry.Original) && IsAutoSkipped(entry))
+                {
+                    this.UnmarkSkipped(entry.Original);
+                    entry.Review = null;
+                    restored++;
+                }
+
                 continue;
             }
 
-            if (!entry.HasTranslation && !this.IsSkipped(entry.Original))
+            if (this.IsSkipped(entry.Original) && !IsAutoSkipped(entry))
             {
                 continue;
             }
 
+            if (!entry.HasTranslation && entry.Source is null)
+            {
+                // 没有译文、也没有来源：纯空壳——清掉（自动不翻的会连不翻名单一起摘掉）
+                dropped.Add(entry.Original);
+                continue;
+            }
+
             this.MarkSkipped(entry.Original);
-            entry.Review = "新一轮抽取已排除（可能是键名/功能串），不会打进补丁";
+            entry.Review = AutoSkipNotePrefix + "已不在新一轮抽取的候选里（键名/功能串，或插件版本变了），不会打进补丁";
             pruned++;
         }
 
-        return pruned;
+        foreach (var original in dropped)
+        {
+            this.UnmarkSkipped(original);
+            this.Remove(original);
+        }
+
+        return new UITextPackPruneOutcome(pruned, restored, dropped.Count);
     }
 
     /// <summary>

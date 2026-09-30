@@ -109,6 +109,52 @@ internal sealed class UITextPatchManager
     public bool HasBackup(InstalledPluginEntry entry) => this.store.Load(entry.InternalName)?.HasBackup == true;
 
     /// <summary>
+    ///     重新抽取该对哪份 DLL：盘上是我们自己的补丁时改读原始备份。
+    ///     否则抽到的是 <c>译文###原文</c>，会把包里好好的条目当成「原文没了」整批清掉（2026-10-01 踩过）。
+    ///     返回的 <paramref name="note" /> 非空时是一句给人看的说明。
+    /// </summary>
+    public string ExtractionSourceOf(InstalledPluginEntry entry, out string note)
+    {
+        note = string.Empty;
+        var path = entry.DLLPath ?? string.Empty;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path))
+        {
+            return path;
+        }
+
+        var state = this.store.Load(entry.InternalName);
+        if (state is null || !state.HasBackup || state.PatchedHash is not { Length: > 0 })
+        {
+            return path;
+        }
+
+        var currentHash = UITextPatchStore.HashOf(path);
+        var chosen = ChooseExtractionSource(path, state, currentHash, out note);
+        return chosen;
+    }
+
+    /// <summary>
+    ///     抽取源判定的纯逻辑（能离线测）：盘上是我们打过的补丁就返回备份，否则返回当前文件。
+    /// </summary>
+    public static string ChooseExtractionSource(string dllPath, UITextPatchState? state, string currentHash, out string note)
+    {
+        note = string.Empty;
+        if (state is null || !state.HasBackup || state.PatchedHash is not { Length: > 0 })
+        {
+            return dllPath;
+        }
+
+        if (!string.Equals(currentHash, state.PatchedHash, StringComparison.OrdinalIgnoreCase))
+        {
+            // 盘上不是我们的补丁（插件更新过 / 已还原）——当前文件就是原始件
+            return dllPath;
+        }
+
+        note = "盘上是打过补丁的 DLL，这次从原始备份抽取";
+        return state.BackupPath!;
+    }
+
+    /// <summary>
     ///     把包里的译文打进插件 DLL（不自动重载）。
     /// </summary>
     public (bool Ok, string Message) Apply(InstalledPluginEntry entry)

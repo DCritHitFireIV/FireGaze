@@ -42,6 +42,7 @@ internal sealed class UITextEditorWindow : Window
     private UITextPack pack = new();
     private Task<UITextExtraction>? extractionTask;
     private UITextExtraction? extraction;
+    private string extractionNote = string.Empty;
     private readonly Dictionary<string, (UITextRole Role, string Reason)> roles = new(StringComparer.Ordinal);
     private List<Row> rows = [];
     private readonly List<Row> visible = [];
@@ -144,7 +145,13 @@ internal sealed class UITextEditorWindow : Window
 
     private void StartExtraction()
     {
-        var path = this.entry?.DLLPath;
+        if (this.entry is null)
+        {
+            this.SetStatus("还没有选插件。", true);
+            return;
+        }
+
+        var path = this.entry.DLLPath;
         if (string.IsNullOrEmpty(path) || !File.Exists(path))
         {
             this.SetStatus("读不到插件主程序集路径，没法抽取。", true);
@@ -156,7 +163,11 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        this.extractionTask = Task.Run(() => UIStringExtractor.Extract(path));
+        // 盘上是我们自己的补丁时一定要改读原始备份：对着补丁后的 DLL 抽到的是「译文###原文」，
+        // 会把包里好好的条目当成「原文没了」整批清掉。
+        var source = this.patches.ExtractionSourceOf(this.entry, out var note);
+        this.extractionNote = note;
+        this.extractionTask = Task.Run(() => UIStringExtractor.Extract(source));
     }
 
     private void PollExtraction()
@@ -218,14 +229,26 @@ internal sealed class UITextEditorWindow : Window
             }
         }
 
-        // 清账：这一轮没被列为 候选/灰名单 的条目（键名、功能串、过期条目）标成「不翻」，不再打进补丁
-        var pruned = this.pack.PruneAgainstExtraction(result);
+        // 清账：这一轮没被列为 候选/灰名单 的条目（键名、功能串、过期条目）标成「不翻」，不再打进补丁；
+        // 又变回候选的自动恢复；已是纯空壳的（没译文也没来源）直接清掉。
+        var prune = this.pack.PruneAgainstExtraction(result);
         this.SortEntries();
         this.RebuildRows();
         this.MarkDirty();
+        var pieces = new List<string>(3);
+        if (this.extractionNote.Length > 0)
+        {
+            pieces.Add(this.extractionNote);
+        }
+
+        if (prune.Any)
+        {
+            pieces.Add(prune.Describe() + "（键名/功能串、版本变了、或上一轮抽错）");
+        }
+
         this.SetStatus(
-            $"抽取完成：候选 {uiCount} 条 · 灰名单 {ambiguous} 条（灰名单默认不翻）" +
-            (pruned > 0 ? $" · 已排除 {pruned} 条（键名/功能串/过期条目，不再打进补丁）" : string.Empty),
+            $"抽取完成：候选 {uiCount} 条 · 灰名单 {ambiguous} 条（灰名单默认不翻）"
+            + (pieces.Count > 0 ? " · " + string.Join(" · ", pieces) : string.Empty),
             false);
     }
 
@@ -953,6 +976,7 @@ internal sealed class UITextEditorWindow : Window
             if (ImGui.MenuItem("取消「不翻」"))
             {
                 this.pack.UnmarkSkipped(row.Entry.Original);
+                row.Entry.Review = null;
                 row.Skipped = false;
                 this.MarkDirty();
             }
@@ -960,6 +984,8 @@ internal sealed class UITextEditorWindow : Window
         else if (ImGui.MenuItem("标记「不翻」"))
         {
             this.pack.MarkSkipped(row.Entry.Original);
+            // 用户手动标的「不翻」要清掉自动备注：从此归用户管，重新抽取不会自动恢复
+            row.Entry.Review = null;
             row.Skipped = true;
             this.MarkDirty();
         }
