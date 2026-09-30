@@ -108,3 +108,17 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 1. 配套库：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）+ 库下载；
 2. 界面 HCI 评审（先出还原图，按仓库既有流程）；
 3. 批量翻译的单位与限流（免费接口有每日额度；大插件建议用自填 key）。
+4. **属性字符串（SimpleTweaks 的名字/描述）**：它们不在 `ldstr` 里（在 CustomAttribute 参数里），抽不到也补不了。
+   实测 SimpleTweaks 1.15.0.7：官方 zh-CN 只覆盖 122/181 个名字、约 136/181 个描述，其余会显示英文。
+   两条路待定：
+   · **A** 写进它自己的 `pluginConfigs/SimpleTweaksPlugin/loc/zh-CN/strings.json`——**会被官方更新覆盖**
+     （改语言 / 点更新会重新下载 strings.json），不推荐；
+   · **B** 扩展抽取器 + 补丁器去改**属性字符串**（fallback 语义：官方有译文时官方优先，没有才显示我们的），待定。
+
+## 血教训：抽取器的栈模型（2026-10-01）
+
+- **属性赋值 / 对象初始化器的 `set_*` 是 void，不能往栈上留返回值**——多留一个会让对象初始化器后面的调用参数整体错位。
+  实测：`Loc.Localize` 里 `_localizationStrings[key] = new LocalizedString {...}` 把 `fallbackValue` 顶进了 key 参数槽，
+  于是 2 参 `LocString(key, fallback)` 的 **fallback**（真正要显示的文本）被当成键名整条排除。
+- 集合/字典的键名调用只把**第一个参数**当键（key 永远是第一个参数），后面的参数不能跟着算键。
+- 排查入口：探针 `--trace` 会打 `[danger] scan=<调用方> <目标> key=… params=… text=…` 与 `[keyparam] <方法> param=N`。
