@@ -76,6 +76,8 @@ public static class UIStringExtractor
         var indexByOriginal = new Dictionary<string, int>(StringComparer.Ordinal);
         var resources = new List<UITextResourceItem>();
         var seenResources = new HashSet<(string Container, string Key)>();
+        var attributes = new List<UITextAttributeItem>();
+        var seenAttributes = new HashSet<string>(StringComparer.Ordinal);
         var errors = new List<string>();
         var resourceKeyCount = 0;
         var succeeded = 0;
@@ -132,6 +134,20 @@ public static class UIStringExtractor
                 }
             }
 
+            // 属性字符串按「值」去重（不同成员共用同一句说明时只留一条，Context 记第一个宿主）
+            foreach (var item in single.Attributes)
+            {
+                if (seenAttributes.Add(item.Value))
+                {
+                    attributes.Add(new UITextAttributeItem
+                    {
+                        Owner = $"{tag}{item.Owner}",
+                        Attribute = item.Attribute,
+                        Value = item.Value,
+                    });
+                }
+            }
+
             resourceKeyCount += single.ResourceKeyCount;
         }
 
@@ -154,6 +170,7 @@ public static class UIStringExtractor
             AssemblyPath = assemblyPaths[0],
             ResourceKeyCount = resourceKeyCount,
             Resources = resources,
+            Attributes = attributes,
             Entries = entries,
         };
     }
@@ -2398,6 +2415,7 @@ public static class UIStringExtractor
                 AssemblyPath = this.path,
                 ResourceKeyCount = this.resourceKeyCount,
                 Resources = this.ScanResources(),
+                Attributes = this.ScanAttributes(),
                 Entries = entries,
             };
         }
@@ -2470,6 +2488,95 @@ public static class UIStringExtractor
             }
 
             return list;
+        }
+
+        /// <summary>
+        ///     扫描自定义特性里的界面文字（构造函数参数；命名参数常是键/ID，不碰）。
+        /// </summary>
+        /// <remarks>
+        ///     哪些特性算界面文本见 <see cref="UITextRules.IsUIAttribute" />。
+        ///     这些字符串不在 <c>ldstr</c> 里，普通 IL 抽取看不到（ARSR / SimpleTweaks 的主要缺口）。
+        /// </remarks>
+        private List<UITextAttributeItem> ScanAttributes()
+        {
+            var list = new List<UITextAttributeItem>();
+
+            void Collect(IHasCustomAttribute host, string owner)
+            {
+                foreach (var attr in host.CustomAttributes)
+                {
+                    if (!UITextRules.IsUIAttribute(attr.TypeFullName))
+                    {
+                        continue;
+                    }
+
+                    var fullName = attr.TypeFullName;
+                    var dot = fullName.LastIndexOf('.');
+                    var shortName = dot >= 0 ? fullName[(dot + 1)..] : fullName;
+
+                    foreach (var argument in attr.ConstructorArguments)
+                    {
+                        foreach (var value in StringValues(argument))
+                        {
+                            if (LooksTranslatable(value))
+                            {
+                                list.Add(new UITextAttributeItem
+                                {
+                                    Owner = owner,
+                                    Attribute = shortName,
+                                    Value = value,
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var type in this.module.GetTypes())
+            {
+                var typeName = type.FullName;
+                Collect(type, typeName);
+                foreach (var method in type.Methods)
+                {
+                    Collect(method, typeName + "::" + method.Name);
+                }
+
+                foreach (var field in type.Fields)
+                {
+                    Collect(field, typeName + "::" + field.Name);
+                }
+
+                foreach (var property in type.Properties)
+                {
+                    Collect(property, typeName + "::" + property.Name);
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>从一个特性参数里取出全部字符串（含字符串数组的每一项）。</summary>
+        private static IEnumerable<string> StringValues(CAArgument argument)
+        {
+            switch (argument.Value)
+            {
+                case UTF8String utf8:
+                    yield return utf8.String;
+                    break;
+                case string text:
+                    yield return text;
+                    break;
+                case IList<CAArgument> list:
+                    foreach (var item in list)
+                    {
+                        foreach (var value in StringValues(item))
+                        {
+                            yield return value;
+                        }
+                    }
+
+                    break;
+            }
         }
 
         private static readonly string[] ThirdPartyResourcePrefixes =

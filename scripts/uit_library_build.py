@@ -171,14 +171,14 @@ def resolve_downloads(targets: list[str], cache_dir: str, refresh: bool) -> dict
     return result
 
 
-def load_companions() -> dict[str, list[str]]:
-    """读仓库根目录的 uit-companions.json（与插件端同一份名单）：主程序集内部名 → 伴生 DLL 文件名。"""
-    path = os.path.join(REPO_ROOT, "uit-companions.json")
+def load_rules() -> dict[str, list[str]]:
+    """读仓库根目录的 uit-rules.json（与插件端同一份）：主程序集内部名 → 伴生 DLL 文件名。"""
+    path = os.path.join(REPO_ROOT, "uit-rules.json")
     try:
         doc = json.loads(io.open(path, encoding="utf-8").read())
-        return {k: list(v or []) for k, v in (doc.get("plugins") or {}).items()}
+        return {k: list(v or []) for k, v in (doc.get("companions") or {}).items()}
     except Exception as error:  # noqa: BLE001
-        print(f"  读 uit-companions.json 失败（只按同名前缀规则）：{error}")
+        print(f"  读 uit-rules.json 失败（只按同名前缀规则）：{error}")
         return {}
 
 
@@ -271,7 +271,25 @@ def merge_probe_resources(lists: list[list[dict]]) -> list[dict]:
     return list(merged.values())
 
 
-def run_probe(probe: str, dll: str) -> tuple[list[dict], list[dict]]:
+def merge_probe_attributes(lists: list[list[dict]], file_names: list[str]) -> list[dict]:
+    """属性字符串按「值」去重（与插件端一致，Context 记第一个宿主）。"""
+    merged: dict[str, dict] = {}
+    multi = len(lists) > 1
+    for index, items in enumerate(lists):
+        tag = f"[{os.path.splitext(file_names[index])[0]}] " if multi else ""
+        for item in items:
+            value = item.get("Value") or ""
+            if not value or value in merged:
+                continue
+            merged[value] = {
+                "Owner": tag + (item.get("Owner") or ""),
+                "Attribute": item.get("Attribute") or "",
+                "Value": value,
+            }
+    return list(merged.values())
+
+
+def run_probe(probe: str, dll: str) -> tuple[list[dict], list[dict], list[dict]]:
     def call(flag: str) -> list[dict]:
         proc = subprocess.run(
             ["dotnet", probe, dll, flag],
@@ -281,7 +299,7 @@ def run_probe(probe: str, dll: str) -> tuple[list[dict], list[dict]]:
             raise RuntimeError(f"{flag} 失败：{(proc.stderr or proc.stdout).strip()[:200]}")
         return json.loads(proc.stdout)
 
-    return call("--json"), call("--resources")
+    return call("--json"), call("--resources"), call("--attributes")
 
 
 # ------------------------------------------------------------------ 翻译 --
@@ -332,12 +350,13 @@ def translate_texts(api_key: str, texts: list[str], glossary: dict[str, list[tup
 # ------------------------------------------------------------------ 包构建 --
 
 def build_pack(name: str, version: str, entries: list[dict], resources: list[dict],
-               existing: dict | None) -> tuple[dict, list[str]]:
+               attributes: list[dict], existing: dict | None) -> tuple[dict, list[str]]:
     old_entries = {e.get("Original", ""): e for e in (existing or {}).get("entries", [])}
     old_resources = {
         r.get("Container", "") + "\x01" + r.get("Key", ""): r
         for r in (existing or {}).get("resources", [])
     }
+    old_attributes = {a.get("Original", ""): a for a in (existing or {}).get("attributes", [])}
 
     pack = {
         "_meta": {
@@ -348,6 +367,7 @@ def build_pack(name: str, version: str, entries: list[dict], resources: list[dic
         },
         "entries": [],
         "resources": [],
+        "attributes": [],
     }
     pending: dict[str, None] = {}
 
@@ -398,6 +418,25 @@ def build_pack(name: str, version: str, entries: list[dict], resources: list[dic
         if not translated:
             pending[value] = None
 
+    seen_attr: set[str] = set()
+    for entry in attributes:
+        value = entry.get("Value") or ""
+        if not value or value in seen_attr:
+            continue
+        seen_attr.add(value)
+        old = old_attributes.get(value) or {}
+        translated = (old.get("Translated") or "").strip()
+        item = {
+            "Original": value,
+            "Translated": translated,
+            "Context": f"[属性] {entry.get('Attribute') or ''} {entry.get('Owner') or ''}".strip(),
+        }
+        if translated:
+            item["Source"] = old.get("Source") or "library"
+        pack["attributes"].append(item)
+        if not translated:
+            pending[value] = None
+
     return pack, list(pending.keys())
 
 
@@ -432,7 +471,7 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"目标 {len(targets)} 个插件；模式：{'dry-run' if args.dry_run else ('翻译' if api_key else '无 key（只盘点）')}")
     links = resolve_downloads(targets, args.cache, args.refresh)
-    companions_map = load_companions()
+    companions_map = load_rules()
 
     total_new = 0
     processed = 0
@@ -444,12 +483,16 @@ def main(argv: list[str] | None = None) -> int:
             files = ensure_dlls(name, url, version, args.cache, companions_map)
             probe_entries: list[list[dict]] = []
             probe_resources: list[list[dict]] = []
+            probe_attributes: list[list[dict]] = []
+            file_names = [os.path.basename(f) for f in files]
             for path in files:
-                file_entries, file_resources = run_probe(args.probe, path)
+                file_entries, file_resources, file_attributes = run_probe(args.probe, path)
                 probe_entries.append(file_entries)
                 probe_resources.append(file_resources)
-            entries = merge_probe_entries(probe_entries, [os.path.basename(f) for f in files])
+                probe_attributes.append(file_attributes)
+            entries = merge_probe_entries(probe_entries, file_names)
             resources = merge_probe_resources(probe_resources)
+            attributes = merge_probe_attributes(probe_attributes, file_names)
         except Exception as error:  # noqa: BLE001
             print(f"  [{name}] 失败：{error}")
             continue
@@ -462,13 +505,14 @@ def main(argv: list[str] | None = None) -> int:
             except Exception:  # noqa: BLE001
                 existing = None
 
-        pack, pending = build_pack(name, version, entries, resources, existing)
+        pack, pending = build_pack(name, version, entries, resources, attributes, existing)
         ui_count = len(pack["entries"])
         res_count = len(pack["resources"])
-        if ui_count + res_count == 0:
+        attr_count = len(pack["attributes"])
+        if ui_count + res_count + attr_count == 0:
             print(f"  [{name}] v{version}：没有可翻的界面文本（界面已经是中文 / 没有字面量），跳过")
             continue
-        print(f"  [{name}] v{version}：字面量 {ui_count} · 资源 {res_count} · 待翻 {len(pending)}")
+        print(f"  [{name}] v{version}：字面量 {ui_count} · 资源 {res_count} · 属性 {attr_count} · 待翻 {len(pending)}")
 
         if args.dry_run:
             total_new += len(pending)
@@ -490,6 +534,10 @@ def main(argv: list[str] | None = None) -> int:
                     item["Translated"] = translated[item["Original"]]
                     item["Source"] = "library"
             for item in pack["resources"]:
+                if not item["Translated"] and item["Original"] in translated:
+                    item["Translated"] = translated[item["Original"]]
+                    item["Source"] = "library"
+            for item in pack["attributes"]:
                 if not item["Translated"] and item["Original"] in translated:
                     item["Translated"] = translated[item["Original"]]
                     item["Source"] = "library"
@@ -526,6 +574,7 @@ def write_index(out_dir: str) -> None:
             "updatedAt": meta.get("updatedAt"),
             "entries": len(pack.get("entries") or []),
             "resources": len(pack.get("resources") or []),
+            "attributes": len(pack.get("attributes") or []),
         }
 
     index = {"updatedAt": time.strftime("%Y-%m-%d"), "plugins": plugins}

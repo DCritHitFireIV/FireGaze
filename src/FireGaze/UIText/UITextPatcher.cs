@@ -27,8 +27,13 @@ internal sealed class UITextPatchOutcome
     /// </summary>
     public int PatchedResources { get; set; }
 
-    /// <summary>实际写进去的总条数（字面量 + 资源）。</summary>
-    public int PatchedTotal => this.PatchedLiterals + this.PatchedResources;
+    /// <summary>
+    ///     真的改掉的属性字符串数（自定义特性参数，含重复出现）。
+    /// </summary>
+    public int PatchedAttributes { get; set; }
+
+    /// <summary>实际写进去的总条数（字面量 + 资源 + 属性）。</summary>
+    public int PatchedTotal => this.PatchedLiterals + this.PatchedResources + this.PatchedAttributes;
 
     /// <summary>
     ///     DLL 里没找回来的条目（可能是插件更新过、或原文已经变了）。
@@ -79,7 +84,18 @@ internal static class UITextPatcher
             resourceMap[(entry.Container, entry.Key)] = entry;
         }
 
-        outcome.Candidates = map.Count + resourceMap.Count;
+        var attributeMap = new Dictionary<string, UITextAttributeEntry>(StringComparer.Ordinal);
+        foreach (var entry in pack.Attributes)
+        {
+            if (!entry.HasTranslation || pack.IsAttributeSkipped(entry.Original))
+            {
+                continue;
+            }
+
+            attributeMap[entry.Original] = entry;
+        }
+
+        outcome.Candidates = map.Count + resourceMap.Count + attributeMap.Count;
         if (outcome.Candidates == 0)
         {
             outcome.Error = "包里还没有可应用的译文。";
@@ -88,6 +104,7 @@ internal static class UITextPatcher
 
         var seen = new HashSet<string>(StringComparer.Ordinal);
         var seenResources = new HashSet<(string Container, string Key)>();
+        var seenAttributes = new HashSet<string>(StringComparer.Ordinal);
         var tempPath = targetPath + ".fguitext.tmp";
         try
         {
@@ -99,6 +116,12 @@ internal static class UITextPatcher
                 if (resourceMap.Count > 0)
                 {
                     PatchResources(module, resourceMap, seenResources, outcome);
+                }
+
+                // ①b 自定义特性参数里的界面文字（UIAttribute / TweakName…）：改 UTF-8 blob 里的字符串
+                if (attributeMap.Count > 0)
+                {
+                    PatchAttributes(module, attributeMap, seenAttributes, outcome);
                 }
 
                 // ② 字面量
@@ -172,7 +195,96 @@ internal static class UITextPatcher
             }
         }
 
+        foreach (var original in attributeMap.Keys)
+        {
+            if (!seenAttributes.Contains(original))
+            {
+                outcome.Missing.Add($"属性：{original}");
+            }
+        }
+
         return outcome;
+    }
+
+    /// <summary>
+    ///     把属性译文写进自定义特性参数：只碰 <see cref="UITextRules.IsUIAttribute" /> 认的特性、
+    ///     只改构造函数参数里的字符串（含字符串数组的每一项）；命名参数常是键/ID，一概不动。
+    /// </summary>
+    /// <remarks>
+    ///     dnlib 的 <c>CAArgument</c> 是**结构体**：不能传参后直接改（改的是副本），
+    ///     必须把返回值写回列表（2026-10-02 踩过：补丁“打成了”但文件里没变）。
+    /// </remarks>
+    private static void PatchAttributes(
+        ModuleDefMD module,
+        Dictionary<string, UITextAttributeEntry> attributeMap,
+        HashSet<string> seen,
+        UITextPatchOutcome outcome)
+    {
+        void Handle(IHasCustomAttribute host)
+        {
+            foreach (var attribute in host.CustomAttributes)
+            {
+                if (!UITextRules.IsUIAttribute(attribute.TypeFullName))
+                {
+                    continue;
+                }
+
+                var arguments = attribute.ConstructorArguments;
+                for (var i = 0; i < arguments.Count; i++)
+                {
+                    arguments[i] = PatchAttributeArgument(arguments[i], attributeMap, seen, outcome);
+                }
+            }
+        }
+
+        foreach (var type in module.GetTypes())
+        {
+            Handle(type);
+            foreach (var method in type.Methods)
+            {
+                Handle(method);
+            }
+
+            foreach (var field in type.Fields)
+            {
+                Handle(field);
+            }
+
+            foreach (var property in type.Properties)
+            {
+                Handle(property);
+            }
+        }
+    }
+
+    /// <summary>返回可能改过的参数（<c>CAArgument</c> 是结构体，调用方要把返回值写回列表）。</summary>
+    private static CAArgument PatchAttributeArgument(
+        CAArgument argument,
+        Dictionary<string, UITextAttributeEntry> attributeMap,
+        HashSet<string> seen,
+        UITextPatchOutcome outcome)
+    {
+        switch (argument.Value)
+        {
+            case UTF8String utf8:
+                if (attributeMap.TryGetValue(utf8.String, out var entry))
+                {
+                    seen.Add(utf8.String);
+                    outcome.PatchedAttributes++;
+                    argument.Value = new UTF8String(entry.Translated);
+                }
+
+                return argument;
+            case IList<CAArgument> list:
+                for (var i = 0; i < list.Count; i++)
+                {
+                    list[i] = PatchAttributeArgument(list[i], attributeMap, seen, outcome);
+                }
+
+                return argument;
+            default:
+                return argument;
+        }
     }
 
     /// <summary>

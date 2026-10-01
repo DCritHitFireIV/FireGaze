@@ -1,9 +1,14 @@
 namespace FireGaze.UIText;
 
 /// <summary>
-///     待翻译的一条：要么是字面量条目（<see cref="Entry" />），要么是资源条目（<see cref="Resource" />），二选一。
+///     待翻译的一条：字面量条目 / 资源条目 / 属性条目，三选一。
 /// </summary>
-internal sealed record UITextTarget(string Original, string? Context, UITextPackEntry? Entry, UITextResourceEntry? Resource);
+internal sealed record UITextTarget(
+    string Original,
+    string? Context,
+    UITextPackEntry? Entry,
+    UITextResourceEntry? Resource,
+    UITextAttributeEntry? Attribute = null);
 
 /// <summary>
 ///     抽取结果合并 / 选翻译目标 / 收译文 —— 三步的共用逻辑。
@@ -28,6 +33,9 @@ internal static class UITextFlow
 
         /// <summary>这一轮抽出来的资源型界面文字条数（容器 + key）。</summary>
         public int ResourceCount;
+
+        /// <summary>这一轮抽出来的属性字符串条数（值去重后）。</summary>
+        public int AttributeCount;
 
         public UITextPackPruneOutcome Prune { get; set; } = new(0, 0, 0);
 
@@ -95,6 +103,18 @@ internal static class UITextFlow
             result.ResourceCount++;
         }
 
+        // 属性字符串（UIAttribute / TweakName…）：同样不参与 Roles，全部按候选。
+        foreach (var item in extraction.Attributes)
+        {
+            if (pack.FindAttribute(item.Value) is null)
+            {
+                result.ReapplyNeeded = true;
+            }
+
+            pack.GetOrAddAttribute(item.Value, $"[属性] {item.Attribute} {item.Owner}");
+            result.AttributeCount++;
+        }
+
         // PreserveID 是抽取的推导值，重新抽取要以这一轮为准（不能只 |=，判错过就永远换不掉）
         foreach (var (original, keepID) in preserve)
         {
@@ -146,6 +166,16 @@ internal static class UITextFlow
 
             var context = "资源：" + entry.Container + " · " + entry.Key;
             list.Add(new UITextTarget(entry.Original, context, null, entry));
+        }
+
+        foreach (var entry in pack.Attributes)
+        {
+            if (entry.HasTranslation || pack.IsAttributeSkipped(entry.Original))
+            {
+                continue;
+            }
+
+            list.Add(new UITextTarget(entry.Original, entry.Context, null, null, entry));
         }
 
         return list;
@@ -231,6 +261,41 @@ internal static class UITextFlow
             }
 
             if (pack.IsResourceSkipped(entry.Container, entry.Key))
+            {
+                continue;
+            }
+
+            var clean = UITextText.CleanTranslated(value);
+            if (string.IsNullOrWhiteSpace(clean)
+                || string.Equals(clean, UITextText.ForTranslation(entry.Original), StringComparison.Ordinal))
+            {
+                unchanged++;
+                continue;
+            }
+
+            var problem = UITextText.CheckPlaceholders(entry.Original, clean);
+            if (problem is not null)
+            {
+                entry.Review = problem;
+                placeholderRejected++;
+                continue;
+            }
+
+            entry.Translated = clean;
+            entry.Source = "ai:" + channelName;
+            entry.Review = null;
+            applied++;
+        }
+
+        // 属性条目：按原文（字符串值）匹配。
+        foreach (var entry in pack.Attributes)
+        {
+            if (!values.TryGetValue(entry.Original, out var value))
+            {
+                continue;
+            }
+
+            if (pack.IsAttributeSkipped(entry.Original))
             {
                 continue;
             }

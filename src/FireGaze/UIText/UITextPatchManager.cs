@@ -144,7 +144,7 @@ internal sealed class UITextPatchManager
     {
         note = string.Empty;
         var dllPath = entry.DLLPath ?? string.Empty;
-        var paths = PluginAssemblies.Resolve(dllPath, entry.InternalName);
+        var paths = UITextRules.ResolveCompanions(dllPath, entry.InternalName);
         if (paths.Count == 0)
         {
             if (dllPath.Length > 0)
@@ -222,7 +222,7 @@ internal sealed class UITextPatchManager
         }
 
         var existing = this.store.Load(entry.InternalName);
-        var files = PluginAssemblies.Resolve(dllPath, entry.InternalName);
+        var files = UITextRules.ResolveCompanions(dllPath, entry.InternalName);
         if (files.Count == 0)
         {
             files.Add(dllPath);
@@ -265,7 +265,7 @@ internal sealed class UITextPatchManager
         }
 
         var pack = this.packs.Load(entry.InternalName);
-        if (pack.Entries.Count == 0 && pack.Resources.Count == 0)
+        if (pack.Entries.Count == 0 && pack.Resources.Count == 0 && pack.Attributes.Count == 0)
         {
             return (false, "这个插件还没有本地译文包。");
         }

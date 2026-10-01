@@ -33,27 +33,32 @@ internal sealed class UITextEditorWindow : Window
     {
         public UITextPackEntry? Entry;
         public UITextResourceEntry? Resource;
+        public UITextAttributeEntry? Attribute;
         public UITextRole Role;
         public string Reason = string.Empty;
         public bool Skipped;
 
         public bool IsResource => this.Resource is not null;
 
-        public string Original => this.Resource?.Original ?? this.Entry!.Original;
+        public bool IsAttribute => this.Attribute is not null;
+
+        public string Original => this.Resource?.Original ?? this.Attribute?.Original ?? this.Entry!.Original;
 
         public string? Context => this.Resource is not null
             ? "资源：" + this.Resource.Container + " · " + this.Resource.Key
-            : this.Entry!.Context;
+            : this.Attribute is not null
+                ? this.Attribute.Context
+                : this.Entry!.Context;
 
-        public bool HasTranslation => this.Resource?.HasTranslation ?? this.Entry!.HasTranslation;
+        public bool HasTranslation => this.Resource?.HasTranslation ?? this.Attribute?.HasTranslation ?? this.Entry!.HasTranslation;
 
-        public string Translated => this.Resource?.Translated ?? this.Entry!.Translated;
+        public string Translated => this.Resource?.Translated ?? this.Attribute?.Translated ?? this.Entry!.Translated;
 
-        public string? Review => this.Resource?.Review ?? this.Entry!.Review;
+        public string? Review => this.Resource?.Review ?? this.Attribute?.Review ?? this.Entry!.Review;
 
-        public string? Source => this.Resource?.Source ?? this.Entry!.Source;
+        public string? Source => this.Resource?.Source ?? this.Attribute?.Source ?? this.Entry!.Source;
 
-        public bool IsUserSource => this.Resource?.IsUserSource ?? this.Entry!.IsUserSource;
+        public bool IsUserSource => this.Resource?.IsUserSource ?? this.Attribute?.IsUserSource ?? this.Entry!.IsUserSource;
     }
 
     private readonly Plugin plugin;
@@ -350,6 +355,17 @@ internal sealed class UITextEditorWindow : Window
                 Skipped = this.pack.IsResourceSkipped(resource.Container, resource.Key),
             });
         }
+
+        foreach (var attribute in this.pack.Attributes)
+        {
+            this.rows.Add(new Row
+            {
+                Attribute = attribute,
+                Role = UITextRole.UI,
+                Reason = "自定义特性参数里的界面文字（打补丁改特性参数，只改构造函数参数）",
+                Skipped = this.pack.IsAttributeSkipped(attribute.Original),
+            });
+        }
     }
 
     // ── 翻译 ─────────────────────────────────────────────────────────────
@@ -359,8 +375,8 @@ internal sealed class UITextEditorWindow : Window
         var includeGrey = this.plugin.Config.UITextTranslateGreyList;
         return this.rows
             .Where(r => !r.Skipped && !r.HasTranslation)
-            .Where(r => r.IsResource || r.Role == UITextRole.UI || (includeGrey && r.Role == UITextRole.Ambiguous))
-            .Select(r => new UITextTarget(r.Original, r.Context, r.Entry, r.Resource))
+            .Where(r => r.IsResource || r.IsAttribute || r.Role == UITextRole.UI || (includeGrey && r.Role == UITextRole.Ambiguous))
+            .Select(r => new UITextTarget(r.Original, r.Context, r.Entry, r.Resource, r.Attribute))
             .ToList();
     }
 
@@ -538,10 +554,11 @@ internal sealed class UITextEditorWindow : Window
         var candidate = this.rows.Count(r => r.Role == UITextRole.UI);
         var ambiguous = this.rows.Count(r => r.Role == UITextRole.Ambiguous);
         var resources = this.pack.Resources.Count;
+        var attributes = this.pack.Attributes.Count;
         var translated = this.rows.Count(r => r.HasTranslation);
         var skipped = this.rows.Count(r => r.Skipped);
         ImGui.TextDisabled(
-            $"候选 {candidate}（含资源 {resources}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
+            $"候选 {candidate}（含资源 {resources} / 属性 {attributes}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
             (this.extractionTask is { IsCompleted: false } ? " · 抽取中…" : string.Empty));
     }
 
@@ -656,7 +673,8 @@ internal sealed class UITextEditorWindow : Window
 
             ImGui.Separator();
             var hasHuman = this.pack.Entries.Any(e => e.IsUserSource && e.HasTranslation)
-                           || this.pack.Resources.Any(r => r.IsUserSource && r.HasTranslation);
+                           || this.pack.Resources.Any(r => r.IsUserSource && r.HasTranslation)
+                           || this.pack.Attributes.Any(a => a.IsUserSource && a.HasTranslation);
             if (ImGui.MenuItem("提交人工译文到公共库…", enabled: hasHuman))
             {
                 this.SubmitContributions();
@@ -871,6 +889,14 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
+        if (row.Attribute is not null)
+        {
+            row.Attribute.Translated = value;
+            row.Attribute.Source = value.Length == 0 ? null : "user";
+            row.Attribute.Review = null;
+            return;
+        }
+
         row.Entry!.Translated = value;
         row.Entry.Source = value.Length == 0 ? null : "user";
         row.Entry.Review = null;
@@ -883,6 +909,13 @@ internal sealed class UITextEditorWindow : Window
         {
             row.Resource.Translated = string.Empty;
             row.Resource.Source = null;
+            return;
+        }
+
+        if (row.Attribute is not null)
+        {
+            row.Attribute.Translated = string.Empty;
+            row.Attribute.Source = null;
             return;
         }
 
@@ -905,6 +938,19 @@ internal sealed class UITextEditorWindow : Window
             }
 
             row.Resource.Review = null;
+        }
+        else if (row.Attribute is not null)
+        {
+            if (skipped)
+            {
+                this.pack.MarkAttributeSkipped(row.Attribute.Original);
+            }
+            else
+            {
+                this.pack.UnmarkAttributeSkipped(row.Attribute.Original);
+            }
+
+            row.Attribute.Review = null;
         }
         else
         {
@@ -1107,6 +1153,22 @@ internal sealed class UITextEditorWindow : Window
             });
         }
 
+        foreach (var attribute in this.pack.Attributes)
+        {
+            if (!seen.Add(attribute.Original))
+            {
+                continue;
+            }
+
+            list.Add(new UITextPackEntry
+            {
+                Original = attribute.Original,
+                Translated = attribute.Translated,
+                Context = attribute.Context ?? "属性",
+                Source = attribute.Source,
+            });
+        }
+
         return list;
     }
 
@@ -1168,6 +1230,26 @@ internal sealed class UITextEditorWindow : Window
                             appliedOne = true;
                         }
 
+                        // 属性条目同样按原文匹配
+                        foreach (var attribute in this.pack.Attributes)
+                        {
+                            if (!string.Equals(attribute.Original, incoming.Original, StringComparison.Ordinal)
+                                || this.pack.IsAttributeSkipped(attribute.Original))
+                            {
+                                continue;
+                            }
+
+                            if (attribute.IsUserSource && attribute.Translated.Length > 0)
+                            {
+                                continue;
+                            }
+
+                            attribute.Translated = incoming.Translated;
+                            attribute.Source = incoming.Source ?? "user";
+                            attribute.Review = null;
+                            appliedOne = true;
+                        }
+
                         if (appliedOne)
                         {
                             applied++;
@@ -1210,7 +1292,11 @@ internal sealed class UITextEditorWindow : Window
             .Where(r => r.IsUserSource && r.HasTranslation)
             .Select(r => new { r.Container, r.Key, r.Original, r.Translated })
             .ToList();
-        var total = entries.Count + resources.Count;
+        var attributes = this.pack.Attributes
+            .Where(a => a.IsUserSource && a.HasTranslation)
+            .Select(a => new { a.Original, a.Translated })
+            .ToList();
+        var total = entries.Count + resources.Count + attributes.Count;
         if (total == 0)
         {
             this.SetStatus("还没有人工译文可提交：先在列表里改几条（改过的会标成人工）再来。", false);
@@ -1218,7 +1304,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         var payload = JsonSerializer.Serialize(
-            new { type = "uit-contribution", plugin = this.entry.InternalName, entries, resources },
+            new { type = "uit-contribution", plugin = this.entry.InternalName, entries, resources, attributes },
             new JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
 
         var header = $"### FireGaze 插件界面文字译文贡献\n\n- 插件：`{this.entry.InternalName}`\n- 条数：{total}\n\n";

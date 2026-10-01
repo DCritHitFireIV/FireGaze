@@ -3,6 +3,13 @@ using FireGaze.UIText;
 // 批量落盘时 stdout 可能被重定向：强制 UTF-8，否则中文按系统 ANSI 码页写出去就不是合法 JSON 了。
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+// 规则文件（伴生程序集 / 额外 UI 特性）默认按当前目录找：CI 在仓库根目录跑、本地也从仓库根跑。
+// （插件里由 Plugin 构造时改指插件目录，会后写覆盖）
+if (string.IsNullOrEmpty(UITextRules.PluginDirectory))
+{
+    UITextRules.PluginDirectory = Directory.GetCurrentDirectory();
+}
+
 // 离线看抽取器对某个插件 DLL 的判定：
 //   dotnet run --project tools/UITextProbe -- <插件.dll> [--all] [--json]
 // 默认只打印 UI 候选 + 灰名单；--all 连排除的一起看（调规则用）。
@@ -104,6 +111,17 @@ if (args.Length >= 2 && args[1] == "--resources")
     return 0;
 }
 
+if (args.Length >= 2 && args[1] == "--attributes")
+{
+    // 自定义特性参数里的界面文字（UIAttribute / TweakName…），落 JSON 给库生成脚本用。
+    var attributeResult = UIStringExtractor.Extract(positional[0]);
+    var attributeJson = System.Text.Json.JsonSerializer.Serialize(
+        attributeResult.Attributes.Select(a => new { a.Owner, a.Attribute, a.Value }),
+        new System.Text.Json.JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+    Console.WriteLine(attributeJson);
+    return 0;
+}
+
 var result = UIStringExtractor.Extract(positional[0]);
 if (result.Error is not null)
 {
@@ -135,7 +153,7 @@ var rows = result.Entries
     .ToArray();
 
 Console.WriteLine($"文件：{result.AssemblyPath}");
-Console.WriteLine($"UI 候选 {result.UICount} · 灰名单 {result.AmbiguousCount} · 资源文本 {result.Resources.Count} · 总字面量 {result.Entries.Count}");
+Console.WriteLine($"UI 候选 {result.UICount} · 灰名单 {result.AmbiguousCount} · 资源文本 {result.Resources.Count} · 属性文本 {result.Attributes.Count} · 总字面量 {result.Entries.Count}");
 Console.WriteLine(new string('-', 120));
 foreach (var e in rows)
 {

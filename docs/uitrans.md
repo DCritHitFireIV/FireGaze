@@ -32,6 +32,7 @@
 | `src/FireGaze/UIText/TranslationChannels.cs` | 翻译通道：Google 免 key / MyMemory / 大模型 / DeepL / 彩云小译 |
 | `src/FireGaze/UIText/FFXIVGlossary.cs` | 随插件打包的「英文 → 国服官方中文」术语表（只喂大模型通道，可关）；数据由 `scripts/ffxiv_glossary.py` 生成 |
 | `src/FireGaze/UIText/UITextLibrary.cs` | 公共译文库客户端：索引 + 按插件按需下载（`uit-packs/`）+ 合并 |
+| `src/FireGaze/UIText/UITextRules.cs` | 静态规则：伴生程序集名单 + 哪些自定义特性算界面文本（`uit-rules.json`，随插件打包） |
 | `src/FireGaze/UIText/DPAPI.cs` | 用户 API key 的本机加密存储 |
 | `tools/UITextProbe/` | 离线探针（与插件同一份源码）：`--all` / `--json` / `--resources` / `--trace` / `--types` |
 | `scripts/uit_library_build.py` | CI 用：下载插件 → 探针抽取 → DeepSeek 增量翻译 → 生成 `uit-packs/*.json` + 索引 |
@@ -200,12 +201,19 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 1. 配套库的**投稿通道**：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）；库下载已做，见「公共译文库」。
 2. 界面 HCI 评审（先出还原图，按仓库既有流程）；
 3. 批量翻译的单位与限流（免费接口有每日额度；大插件建议用自填 key）。
-4. **属性字符串（SimpleTweaks 的名字/描述）**：它们不在 `ldstr` 里（在 CustomAttribute 参数里），抽不到也补不了。
-   实测 SimpleTweaks 1.15.0.7：官方 zh-CN 只覆盖 122/181 个名字、约 136/181 个描述，其余会显示英文。
-   两条路待定：
-   · **A** 写进它自己的 `pluginConfigs/SimpleTweaksPlugin/loc/zh-CN/strings.json`——**会被官方更新覆盖**
-     （改语言 / 点更新会重新下载 strings.json），不推荐；
-   · **B** 扩展抽取器 + 补丁器去改**属性字符串**（fallback 语义：官方有译文时官方优先，没有才显示我们的），待定。
+
+## 属性字符串（自定义特性参数）（2026-10-02 实现）
+
+- 不少插件把界面说明放在**自定义特性（Attribute）参数**里，这些字符串在 UTF-8 的 blob 里、不在 `ldstr` 里，普通抽取看不到：
+  ARSR 的 `[UIAttribute("Make /rotation Manual a toggle command.")]`（856 条）、
+  SimpleTweaks 的 `[TweakName/TweakDescription/TweakConfigOption]`（466 条）。
+- 识别规则（`UITextRules.IsUIAttribute`）：`System.ComponentModel` 的 Description / Category / Display / Tooltip / Label；
+  短名以 `UI`/`Ui` 开头且以 `Attribute` 结尾（UIAttribute / UiTextAttribute…）；以及 `uit-rules.json` 的
+  `uiAttributes` 名单（SimpleTweaks 那套）。**只翻构造函数参数**，命名参数常是键/ID，一概不碰。
+- 包格式新增 `attributes` 段（身份 = 字符串值），编辑器里显示为「属性」行；
+  打补丁用 dnlib 改特性参数（`CAArgument` 是**结构体**，必须把返回值写回列表——只改参数副本会「打成但文件没变」）。
+- SimpleTweaks 的 fallback 语义天然成立：官方 zh 按「类名 / Name」做 key，属性值只是 fallback，
+  所以官方译优先、官方没覆盖的才显示我们的。
 
 ## 血教训：只有「标签」才当 ID 用（2026-10-01）
 

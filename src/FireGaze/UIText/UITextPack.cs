@@ -122,6 +122,37 @@ internal sealed class UITextResourceEntry
 }
 
 /// <summary>
+///     自定义特性参数里的一条译文（身份 = 字符串值本身）。
+/// </summary>
+internal sealed class UITextAttributeEntry
+{
+    [JsonPropertyName("Original")]
+    public string Original { get; set; } = string.Empty;
+
+    [JsonPropertyName("Translated")]
+    public string Translated { get; set; } = string.Empty;
+
+    /// <summary>来源提示（<c>[属性] UIAttribute 类型::成员</c>），只给人工核对用。</summary>
+    [JsonPropertyName("Context")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Context { get; set; }
+
+    [JsonPropertyName("Source")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Source { get; set; }
+
+    [JsonPropertyName("Review")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Review { get; set; }
+
+    [JsonIgnore]
+    public bool IsUserSource => string.Equals(this.Source, "user", StringComparison.OrdinalIgnoreCase);
+
+    [JsonIgnore]
+    public bool HasTranslation => !string.IsNullOrWhiteSpace(this.Translated);
+}
+
+/// <summary>
 ///     一次清账的结果：系统排掉多少条、恢复多少条、清掉多少条空壳。
 /// </summary>
 internal sealed record UITextPackPruneOutcome(int Pruned, int Restored, int Removed)
@@ -171,6 +202,13 @@ internal sealed class UITextPack
     public List<UITextResourceEntry> Resources { get; set; } = [];
 
     /// <summary>
+    ///     自定义特性参数里的译文条目。
+    /// </summary>
+    [JsonPropertyName("attributes")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public List<UITextAttributeEntry> Attributes { get; set; } = [];
+
+    /// <summary>
     ///     用户明确标记「不翻」的原文（留在包里，编辑器要记住，也不参与覆盖率统计的分母口径之外）。
     /// </summary>
     [JsonPropertyName("skipped")]
@@ -184,8 +222,16 @@ internal sealed class UITextPack
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public List<string> SkippedResources { get; set; } = [];
 
+    /// <summary>
+    ///     用户标记「不翻」的属性条目（按原文）。
+    /// </summary>
+    [JsonPropertyName("skippedAttributes")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public List<string> SkippedAttributes { get; set; } = [];
+
     private Dictionary<string, UITextPackEntry>? index;
     private Dictionary<(string Container, string Key), UITextResourceEntry>? resourceIndex;
+    private Dictionary<string, UITextAttributeEntry>? attributeIndex;
 
     [JsonIgnore]
     public int TranslatedCount => this.Entries.Count(e => e.HasTranslation);
@@ -194,9 +240,16 @@ internal sealed class UITextPack
     public int TranslatedResourceCount => this.Resources.Count(e => e.HasTranslation);
 
     [JsonIgnore]
+    public int TranslatedAttributeCount => this.Attributes.Count(e => e.HasTranslation);
+
+    [JsonIgnore]
+    public int TranslatedTotal => this.TranslatedCount + this.TranslatedResourceCount + this.TranslatedAttributeCount;
+
+    [JsonIgnore]
     public int UntranslatedTotal =>
         this.Entries.Count(e => !e.HasTranslation && !this.IsSkipped(e.Original))
-        + this.Resources.Count(e => !e.HasTranslation && !this.IsResourceSkipped(e.Container, e.Key));
+        + this.Resources.Count(e => !e.HasTranslation && !this.IsResourceSkipped(e.Container, e.Key))
+        + this.Attributes.Count(e => !e.HasTranslation && !this.IsAttributeSkipped(e.Original));
 
     /// <summary>
     ///     按「容器 + key」取一条资源译文（没有就返回 null）。
@@ -264,6 +317,59 @@ internal sealed class UITextPack
 
     public void UnmarkResourceSkipped(string container, string key) =>
         this.SkippedResources.RemoveAll(s => string.Equals(s, ResourceSkipToken(container, key), StringComparison.Ordinal));
+
+    /// <summary>按原文（字符串值）取一条属性译文；没有就返回 null。</summary>
+    public UITextAttributeEntry? FindAttribute(string original)
+    {
+        this.EnsureAttributeIndex();
+        return this.attributeIndex!.TryGetValue(original, out var entry) ? entry : null;
+    }
+
+    /// <summary>取一条属性译文、没有就建；Context 只补空。</summary>
+    public UITextAttributeEntry GetOrAddAttribute(string original, string? context)
+    {
+        var entry = this.FindAttribute(original);
+        if (entry is not null)
+        {
+            if (entry.Context is null && context is not null)
+            {
+                entry.Context = context;
+            }
+
+            return entry;
+        }
+
+        entry = new UITextAttributeEntry { Original = original, Context = context };
+        this.Attributes.Add(entry);
+        this.attributeIndex![original] = entry;
+        return entry;
+    }
+
+    /// <summary>删掉一条属性译文（空壳清账用）。</summary>
+    public bool RemoveAttribute(string original)
+    {
+        this.EnsureAttributeIndex();
+        if (!this.attributeIndex!.Remove(original))
+        {
+            return false;
+        }
+
+        this.Attributes.RemoveAll(e => string.Equals(e.Original, original, StringComparison.Ordinal));
+        return true;
+    }
+
+    public bool IsAttributeSkipped(string original) => this.SkippedAttributes.Contains(original, StringComparer.Ordinal);
+
+    public void MarkAttributeSkipped(string original)
+    {
+        if (!this.SkippedAttributes.Contains(original, StringComparer.Ordinal))
+        {
+            this.SkippedAttributes.Add(original);
+        }
+    }
+
+    public void UnmarkAttributeSkipped(string original) =>
+        this.SkippedAttributes.RemoveAll(s => string.Equals(s, original, StringComparison.Ordinal));
 
     /// <summary>
     ///     按原文取一条（没有就返回 null）。索引失准时回退到线性查找，不问自愈。
@@ -477,6 +583,56 @@ internal sealed class UITextPack
             }
         }
 
+        // 属性条目：同一套优先级
+        foreach (var incoming in library.Attributes)
+        {
+            var existing = this.FindAttribute(incoming.Original);
+            if (existing is null)
+            {
+                this.Attributes.Add(new UITextAttributeEntry
+                {
+                    Original = incoming.Original,
+                    Translated = incoming.Translated,
+                    Context = incoming.Context,
+                    Source = incoming.Source ?? "library",
+                });
+                this.attributeIndex![incoming.Original] = this.Attributes[^1];
+                if (incoming.HasTranslation)
+                {
+                    changed++;
+                }
+
+                continue;
+            }
+
+            if (existing.IsUserSource)
+            {
+                continue;
+            }
+
+            if (incoming.HasTranslation)
+            {
+                if (!string.Equals(existing.Translated, incoming.Translated, StringComparison.Ordinal))
+                {
+                    changed++;
+                }
+
+                existing.Translated = incoming.Translated;
+                existing.Source = incoming.Source ?? "library";
+                existing.Review = null;
+            }
+
+            if (incoming.Context is not null)
+            {
+                existing.Context = incoming.Context;
+            }
+        }
+
+        foreach (var skipped in library.SkippedAttributes)
+        {
+            this.MarkAttributeSkipped(skipped);
+        }
+
         return changed;
     }
 
@@ -505,6 +661,12 @@ internal sealed class UITextPack
         foreach (var item in extraction.Resources)
         {
             keepResources.Add((item.Container, item.Key));
+        }
+
+        var keepAttributes = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var item in extraction.Attributes)
+        {
+            keepAttributes.Add(item.Value);
         }
 
         var pruned = 0;
@@ -587,7 +749,45 @@ internal sealed class UITextPack
             this.RemoveResource(container, key);
         }
 
-        return new UITextPackPruneOutcome(pruned, restored, dropped.Count + droppedResources.Count);
+        // 属性条目：同一套清账（值不再出现在任何 UI 特性里 → 自动排掉；又出现 → 恢复）。
+        var droppedAttributes = new List<string>();
+        foreach (var entry in this.Attributes)
+        {
+            if (keepAttributes.Contains(entry.Original))
+            {
+                if (this.IsAttributeSkipped(entry.Original) && IsAutoSkipReview(entry.Review))
+                {
+                    this.UnmarkAttributeSkipped(entry.Original);
+                    entry.Review = null;
+                    restored++;
+                }
+
+                continue;
+            }
+
+            if (this.IsAttributeSkipped(entry.Original) && !IsAutoSkipReview(entry.Review))
+            {
+                continue;
+            }
+
+            if (!entry.HasTranslation && entry.Source is null)
+            {
+                droppedAttributes.Add(entry.Original);
+                continue;
+            }
+
+            this.MarkAttributeSkipped(entry.Original);
+            entry.Review = AutoSkipNotePrefix + "已不在新一轮抽取的 UI 特性里";
+            pruned++;
+        }
+
+        foreach (var original in droppedAttributes)
+        {
+            this.UnmarkAttributeSkipped(original);
+            this.RemoveAttribute(original);
+        }
+
+        return new UITextPackPruneOutcome(pruned, restored, dropped.Count + droppedResources.Count + droppedAttributes.Count);
     }
 
     /// <summary>
@@ -610,6 +810,11 @@ internal sealed class UITextPack
         {
             this.GetOrAddResource(item.Container, item.Key, item.Value);
         }
+
+        foreach (var item in extraction.Attributes)
+        {
+            this.GetOrAddAttribute(item.Value, $"[属性] {item.Attribute} {item.Owner}");
+        }
     }
 
     /// <summary>
@@ -619,6 +824,7 @@ internal sealed class UITextPack
     {
         this.index = null;
         this.resourceIndex = null;
+        this.attributeIndex = null;
     }
 
     private void EnsureIndex()
@@ -646,6 +852,20 @@ internal sealed class UITextPack
         foreach (var entry in this.Resources)
         {
             this.resourceIndex[(entry.Container, entry.Key)] = entry;
+        }
+    }
+
+    private void EnsureAttributeIndex()
+    {
+        if (this.attributeIndex is not null)
+        {
+            return;
+        }
+
+        this.attributeIndex = new Dictionary<string, UITextAttributeEntry>(this.Attributes.Count, StringComparer.Ordinal);
+        foreach (var entry in this.Attributes)
+        {
+            this.attributeIndex[entry.Original] = entry;
         }
     }
 

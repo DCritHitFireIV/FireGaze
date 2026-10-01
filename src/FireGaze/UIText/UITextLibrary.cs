@@ -35,6 +35,9 @@ internal sealed class UITextLibraryIndexEntry
     [JsonPropertyName("resources")]
     public int Resources { get; set; }
 
+    [JsonPropertyName("attributes")]
+    public int Attributes { get; set; }
+
     /// <summary>这个插件的官方中文资源覆盖情况（有 zh 卫星时为 true，库内条目只是补充）。</summary>
     [JsonPropertyName("hasOfficialZh")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

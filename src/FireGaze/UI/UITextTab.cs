@@ -796,7 +796,7 @@ internal sealed class UITextTab
                 return;
             }
 
-            if (merge.UICount + merge.AmbiguousCount + merge.ResourceCount == 0)
+            if (merge.UICount + merge.AmbiguousCount + merge.ResourceCount + merge.AttributeCount == 0)
             {
                 this.FinishRun(run, new RowNote
                 {
@@ -808,10 +808,10 @@ internal sealed class UITextTab
 
             if (run.Mode == RunMode.ExtractOnly)
             {
-                var summary = $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条 · 已翻译 {pack.TranslatedCount} 条";
-                if (merge.ResourceCount > 0)
+                var summary = $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条 · 已翻译 {pack.TranslatedTotal} 条";
+                if (merge.ResourceCount > 0 || merge.AttributeCount > 0)
                 {
-                    summary += $" · 资源文本 {merge.ResourceCount} 条（已译 {pack.TranslatedResourceCount} 条）";
+                    summary += $" · 资源 {merge.ResourceCount}（已译 {pack.TranslatedResourceCount}）· 属性 {merge.AttributeCount}（已译 {pack.TranslatedAttributeCount}）";
                 }
 
                 if (merge.Prune.Any)
@@ -1505,9 +1505,9 @@ internal sealed class UITextTab
                 if (File.Exists(Path.Combine(this.store.DirectoryPath, entry.InternalName + ".json")))
                 {
                     row.HasPack = true;
-                    row.Total = pack.Entries.Count + pack.Resources.Count;
-                    row.Translated = pack.TranslatedCount + pack.TranslatedResourceCount;
-                    row.Skipped = pack.Skipped.Count + pack.SkippedResources.Count;
+                    row.Total = pack.Entries.Count + pack.Resources.Count + pack.Attributes.Count;
+                    row.Translated = pack.TranslatedTotal;
+                    row.Skipped = pack.Skipped.Count + pack.SkippedResources.Count + pack.SkippedAttributes.Count;
                 }
 
                 // 界面入口现读一次（行刷新 5 秒一回，不在每帧做反射）

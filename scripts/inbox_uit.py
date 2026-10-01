@@ -143,6 +143,25 @@ def main(argv=None) -> int:
         target["Source"] = "user"
         accepted += 1
 
+    attributes_by_original = {a.get("Original", ""): a for a in pack.get("attributes") or []}
+    for item in (payload.get("attributes") or [])[:MAX_ENTRIES]:
+        if not isinstance(item, dict):
+            continue
+        original = str(item.get("Original") or "")
+        translated = str(item.get("Translated") or "")
+        reason = check_text(original, translated)
+        if reason:
+            rejected.append(f"`{original[:40]}`：{reason}")
+            continue
+        target = attributes_by_original.get(original)
+        if target is None:
+            target = {"Original": original, "Translated": "", "Context": "[投稿]"}
+            pack.setdefault("attributes", []).append(target)
+            attributes_by_original[original] = target
+        target["Translated"] = translated
+        target["Source"] = "user"
+        accepted += 1
+
     if accepted == 0:
         return fail(args, "这条 issue 里没有可收录的译文。")
 
@@ -207,6 +226,7 @@ def refresh_index(packs_dir: str) -> None:
             "updatedAt": meta.get("updatedAt"),
             "entries": len(pack.get("entries") or []),
             "resources": len(pack.get("resources") or []),
+            "attributes": len(pack.get("attributes") or []),
         }
     index["updatedAt"] = time.strftime("%Y-%m-%d")
     save_json(index_path, index)

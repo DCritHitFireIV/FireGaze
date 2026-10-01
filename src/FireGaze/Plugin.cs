@@ -93,7 +93,9 @@ public sealed class Plugin : IDalamudPlugin
                               ?? Path.GetDirectoryName(pluginInterface.AssemblyLocation.FullName)
                               ?? ".";
         UIText.FFXIVGlossary.PluginDirectory = pluginDirectory;
-        UIText.PluginAssemblies.PluginDirectory = pluginDirectory;
+        UIText.UITextRules.PluginDirectory = pluginDirectory;
+        UIText.UITextRules.WarningSink = (e, m) => Log.Warning(e, m);
+        UIText.UITextRules.DebugSink = (e, m) => Log.Debug(e, m);
         Table = new TranslationTable(ConfigDirectory, pluginDirectory);
         Contributions = new ContributionsStore(ConfigDirectory);
         TextPacks = new UIText.UITextStore(ConfigDirectory);

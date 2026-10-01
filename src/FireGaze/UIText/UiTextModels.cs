@@ -73,6 +73,26 @@ public sealed class UITextResourceItem
 }
 
 /// <summary>
+///     自定义特性（Attribute）参数里的一条界面文字。
+/// </summary>
+/// <remarks>
+///     身份用「值」本身（与字面量一致）：同一个值出现在多个特性里，译文共享。
+///     例：ARSR 的 <c>[UIAttribute("Make /rotation Manual a toggle command.")]</c>、
+///     SimpleTweaks 的 <c>[TweakName("Auto Lock Action Bars")]</c>。
+/// </remarks>
+public sealed class UITextAttributeItem
+{
+    /// <summary>宿主：<c>类型::成员</c>（只给人工核对用）。</summary>
+    public string Owner { get; init; } = string.Empty;
+
+    /// <summary>特性短名（<c>UIAttribute</c>）。</summary>
+    public string Attribute { get; init; } = string.Empty;
+
+    /// <summary>参数里的字符串值。</summary>
+    public string Value { get; init; } = string.Empty;
+}
+
+/// <summary>
 ///     一次抽取的结果。
 /// </summary>
 public sealed class UITextExtraction
@@ -96,6 +116,11 @@ public sealed class UITextExtraction
     ///     从内嵌 <c>.resources</c> 容器里读到的界面文字（资源型本地化）。
     /// </summary>
     public List<UITextResourceItem> Resources { get; init; } = [];
+
+    /// <summary>
+    ///     自定义特性参数里的界面文字（ARSR 的 <c>UIAttribute</c>、SimpleTweaks 的 Tweak* 特性）。
+    /// </summary>
+    public List<UITextAttributeItem> Attributes { get; init; } = [];
 
     /// <summary>
     ///     这个插件里「界面文字放在本地化资源（.resx / ResourceManager）」的字面量个数。
