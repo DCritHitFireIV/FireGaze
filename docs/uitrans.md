@@ -123,7 +123,11 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 1. 配套库：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）+ 库下载；
 2. 界面 HCI 评审（先出还原图，按仓库既有流程）；
 3. 批量翻译的单位与限流（免费接口有每日额度；大插件建议用自填 key）。
-4. **属性字符串（SimpleTweaks 的名字/描述）**：它们不在 `ldstr` 里（在 CustomAttribute 参数里），抽不到也补不了。
+4. **资源型本地化（.resx / ResourceManager）的插件**：界面文字放在 `Resources` 里、代码只用 key 查表（27 个插件、14,479 key，半数自带官方 zh）。
+   资源级打补丁子代理 PoC 已证技术可行（改嵌入资源 + 卫星程序集），但工程量大，**先按「暂不支持」处理**：
+   抽取 / 一键汉化的结果行会提示「还有 N 处界面文字放在本地化资源文件里，暂不支持汉化」；
+   这些 key 本身按 hardKey 排除（翻了查不到资源）。盘点报告：`docs/top100-2026-10-02/sub-localization.md`。
+5. **属性字符串（SimpleTweaks 的名字/描述）**：它们不在 `ldstr` 里（在 CustomAttribute 参数里），抽不到也补不了。
    实测 SimpleTweaks 1.15.0.7：官方 zh-CN 只覆盖 122/181 个名字、约 136/181 个描述，其余会显示英文。
    两条路待定：
    · **A** 写进它自己的 `pluginConfigs/SimpleTweaksPlugin/loc/zh-CN/strings.json`——**会被官方更新覆盖**
@@ -209,6 +213,16 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   筛成匹配器能吃的形态（词只含 `[A-Za-z0-9'’\-.]`、≤4 个词、去掉首尾标点、值单行化），生成 `ffxiv-glossary.tsv`
   （31,701 条，约 0.9 MB，包内压缩后 ~433 KB）随插件打包；`translate.yml` 每周重建，产物确定（不写 mtime、不经有版本差异的压缩器）。
 - 为什么打包而不是运行时下载：与 translations.json 同一套（随插件更新）；运行时零网络依赖，也不去读玩家的客户端。
+
+## 血教训：二级窗口被 ini 记住折叠，看起来像「点不开」（2026-10-02）
+
+- 症状：用户点页签工具栏的「翻译设置…」**看起来没反应**。窗口其实开了，但它在 `dalamudUI.ini` 里被记成
+  `Collapsed=1`，画出来只剩一条标题栏；保存的位置又贴着屏幕边缘，更像什么都没发生。
+- 修法：三个二级窗口（翻译设置 / 文本编辑器 / 参与翻译）在 `OnOpen()` 里
+  `ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always)`——只在打开那一刻强制展开，之后用户想折叠仍可折叠。
+- 依据（反编译本机 Dalamud `WindowHost.DrawInternal`）：开窗那帧先调 `Window.OnOpen()`，再 `PreDraw`/`ApplyConditionals`，
+  最后才 `ImGui.Begin`；我们只在自己 `OnOpen` 里发一次「展开」，不与卫月自身的窗口条件打架。
+- 教训：卫月 `Window` 的 `IsOpen=true` 不等于**看得见**。凡是从按钮打开二级窗口的功能，都要防「被 ini 记住的折叠/异位」。
 
 ## 血教训：深度哨兵不能是 -1（2026-10-01，I-Ching-GL / pvpauto 扫描挂死）
 
