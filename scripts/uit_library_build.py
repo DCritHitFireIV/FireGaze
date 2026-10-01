@@ -24,6 +24,7 @@
 from __future__ import annotations
 
 import argparse
+import glob
 import io
 import json
 import os
@@ -170,32 +171,104 @@ def resolve_downloads(targets: list[str], cache_dir: str, refresh: bool) -> dict
     return result
 
 
-def ensure_dll(name: str, url: str, version: str, cache_dir: str) -> str:
-    dll_dir = os.path.join(cache_dir, "dll")
-    os.makedirs(dll_dir, exist_ok=True)
-    target = os.path.join(dll_dir, name + ".dll")
-    stamp = os.path.join(dll_dir, name + ".version")
-    if os.path.exists(target) and os.path.exists(stamp):
+def load_companions() -> dict[str, list[str]]:
+    """读仓库根目录的 uit-companions.json（与插件端同一份名单）：主程序集内部名 → 伴生 DLL 文件名。"""
+    path = os.path.join(REPO_ROOT, "uit-companions.json")
+    try:
+        doc = json.loads(io.open(path, encoding="utf-8").read())
+        return {k: list(v or []) for k, v in (doc.get("plugins") or {}).items()}
+    except Exception as error:  # noqa: BLE001
+        print(f"  读 uit-companions.json 失败（只按同名前缀规则）：{error}")
+        return {}
+
+
+def ensure_dlls(name: str, url: str, version: str, cache_dir: str,
+                companions_map: dict[str, list[str]]) -> list[str]:
+    """下载插件包，取出主 DLL + 伴生 DLL（按名字前缀规则 or 名单），返回「主在前」的路径列表。"""
+    out_dir = os.path.join(cache_dir, "dll", name)
+    stamp = os.path.join(out_dir, ".version")
+    main_path = os.path.join(out_dir, name + ".dll")
+    if os.path.isdir(out_dir) and os.path.exists(stamp):
         if io.open(stamp, encoding="utf-8").read().strip() == version:
-            return target
+            files = sorted(glob.glob(os.path.join(out_dir, "*.dll")))
+            if files:
+                return ([main_path] if os.path.exists(main_path) else []) + [f for f in files if f != main_path]
 
     payload = http_get_bytes(url)
+    os.makedirs(out_dir, exist_ok=True)
+    for old in glob.glob(os.path.join(out_dir, "*.dll")):
+        os.remove(old)
+
+    listed = [c.lower() for c in companions_map.get(name, [])]
     if payload[:2] == b"PK":
         with zipfile.ZipFile(io.BytesIO(payload)) as archive:
             names = [n for n in archive.namelist() if n.lower().endswith(".dll")]
             if not names:
                 raise RuntimeError("zip 里没有 DLL")
             wanted = (name + ".dll").lower()
-            picked = next((n for n in names if os.path.basename(n).lower() == wanted), None)
-            if picked is None:
-                picked = max(names, key=lambda n: archive.getinfo(n).file_size)
-            with archive.open(picked) as source, io.open(target, "wb") as destination:
-                shutil.copyfileobj(source, destination)
+            main = next((n for n in names if os.path.basename(n).lower() == wanted), None)
+            if main is None:
+                main = max(names, key=lambda n: archive.getinfo(n).file_size)
+            main_stem = os.path.splitext(os.path.basename(main))[0]
+
+            picked = [main]
+            for n in names:
+                base = os.path.basename(n)
+                if base.lower() == os.path.basename(main).lower():
+                    continue
+                is_companion = base.lower().startswith(main_stem.lower() + ".")
+                if is_companion or base.lower() in listed:
+                    picked.append(n)
+
+            for n in picked:
+                target = os.path.join(out_dir, os.path.basename(n))
+                with archive.open(n) as source, io.open(target, "wb") as destination:
+                    shutil.copyfileobj(source, destination)
     else:
-        io.open(target, "wb").write(payload)
+        io.open(main_path, "wb").write(payload)
 
     io.open(stamp, "w", encoding="utf-8").write(version or "0")
-    return target
+    files = sorted(glob.glob(os.path.join(out_dir, "*.dll")))
+    return ([main_path] if os.path.exists(main_path) else []) + [f for f in files if f != main_path]
+
+
+ROLE_RANK = {"UI": 0, "Ambiguous": 1, "Excluded": 2}
+
+
+def merge_probe_entries(lists: list[list[dict]], file_names: list[str]) -> list[dict]:
+    """与插件端 ExtractMany 同口径：同原文取更强判定，PreserveID 取或，多文件给 Context 加文件名前缀。"""
+    merged: dict[str, dict] = {}
+    multi = len(lists) > 1
+    for index, items in enumerate(lists):
+        tag = f"[{os.path.splitext(file_names[index])[0]}] "
+        for raw in items:
+            original = raw.get("Original") or ""
+            if not original:
+                continue
+            item = dict(raw)
+            if multi and not (item.get("Context") or "").startswith(tag):
+                item["Context"] = tag + (item.get("Context") or "")
+            old = merged.get(original)
+            if old is None:
+                merged[original] = item
+                continue
+            if item.get("PreserveID"):
+                old["PreserveID"] = True
+            if ROLE_RANK.get(item.get("Role"), 9) < ROLE_RANK.get(old.get("Role"), 9):
+                item["PreserveID"] = bool(item.get("PreserveID") or old.get("PreserveID"))
+                merged[original] = item
+    return list(merged.values())
+
+
+def merge_probe_resources(lists: list[list[dict]]) -> list[dict]:
+    """资源按「容器 + key」去重。"""
+    merged: dict[tuple[str, str], dict] = {}
+    for items in lists:
+        for item in items:
+            key = (item.get("Container") or "", item.get("Key") or "")
+            if key[0] and key[1] and key not in merged:
+                merged[key] = item
+    return list(merged.values())
 
 
 def run_probe(probe: str, dll: str) -> tuple[list[dict], list[dict]]:
@@ -359,6 +432,7 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"目标 {len(targets)} 个插件；模式：{'dry-run' if args.dry_run else ('翻译' if api_key else '无 key（只盘点）')}")
     links = resolve_downloads(targets, args.cache, args.refresh)
+    companions_map = load_companions()
 
     total_new = 0
     processed = 0
@@ -367,8 +441,15 @@ def main(argv: list[str] | None = None) -> int:
             continue
         url, version = links[name]
         try:
-            dll = ensure_dll(name, url, version, args.cache)
-            entries, resources = run_probe(args.probe, dll)
+            files = ensure_dlls(name, url, version, args.cache, companions_map)
+            probe_entries: list[list[dict]] = []
+            probe_resources: list[list[dict]] = []
+            for path in files:
+                file_entries, file_resources = run_probe(args.probe, path)
+                probe_entries.append(file_entries)
+                probe_resources.append(file_resources)
+            entries = merge_probe_entries(probe_entries, [os.path.basename(f) for f in files])
+            resources = merge_probe_resources(probe_resources)
         except Exception as error:  # noqa: BLE001
             print(f"  [{name}] 失败：{error}")
             continue

@@ -53,6 +53,119 @@ public static class UIStringExtractor
     }
 
     /// <summary>
+    ///     从多个程序集（主程序集 + 伴生程序集）抽取并合并。
+    /// </summary>
+    /// <remarks>
+    ///     同一原文在多个文件里出现时，取「更强的判定」（候选 &gt; 灰名单 &gt; 排除），PreserveID 取或；
+    ///     多文件时给 Context 加 <c>[文件名]</c> 前缀，编辑器里能看出这句在哪个程序集。
+    ///     单个文件读不出来（加壳等）只跳过它；全部读不出来才算失败。
+    /// </remarks>
+    public static UITextExtraction ExtractMany(IReadOnlyList<string> assemblyPaths)
+    {
+        if (assemblyPaths.Count == 0)
+        {
+            return new UITextExtraction();
+        }
+
+        if (assemblyPaths.Count == 1)
+        {
+            return Extract(assemblyPaths[0]);
+        }
+
+        var entries = new List<UITextEntry>();
+        var indexByOriginal = new Dictionary<string, int>(StringComparer.Ordinal);
+        var resources = new List<UITextResourceItem>();
+        var seenResources = new HashSet<(string Container, string Key)>();
+        var errors = new List<string>();
+        var resourceKeyCount = 0;
+        var succeeded = 0;
+
+        foreach (var path in assemblyPaths)
+        {
+            var single = Extract(path);
+            if (single.Error is not null)
+            {
+                errors.Add($"{Path.GetFileName(path)}：{single.Error}");
+                continue;
+            }
+
+            succeeded++;
+            var tag = $"[{Path.GetFileNameWithoutExtension(path)}] ";
+            foreach (var item in single.Entries)
+            {
+                var tagged = item.Context.StartsWith(tag, StringComparison.Ordinal)
+                    ? item
+                    : new UITextEntry
+                    {
+                        Original = item.Original,
+                        Context = tag + item.Context,
+                        Role = item.Role,
+                        Reason = item.Reason,
+                        PreserveID = item.PreserveID,
+                    };
+
+                if (indexByOriginal.TryGetValue(item.Original, out var index))
+                {
+                    var existing = entries[index];
+                    var keep = RoleRank(tagged.Role) < RoleRank(existing.Role) ? tagged : existing;
+                    entries[index] = new UITextEntry
+                    {
+                        Original = existing.Original,
+                        Context = keep.Context,
+                        Role = keep.Role,
+                        Reason = keep.Reason,
+                        PreserveID = existing.PreserveID || tagged.PreserveID,
+                    };
+                }
+                else
+                {
+                    indexByOriginal[item.Original] = entries.Count;
+                    entries.Add(tagged);
+                }
+            }
+
+            foreach (var item in single.Resources)
+            {
+                if (seenResources.Add((item.Container, item.Key)))
+                {
+                    resources.Add(item);
+                }
+            }
+
+            resourceKeyCount += single.ResourceKeyCount;
+        }
+
+        if (succeeded == 0)
+        {
+            return new UITextExtraction
+            {
+                AssemblyPath = assemblyPaths[0],
+                Error = string.Join("；", errors),
+            };
+        }
+
+        if (errors.Count > 0)
+        {
+            Trace?.Invoke($"[extract] 部分程序集跳过：{string.Join("；", errors)}");
+        }
+
+        return new UITextExtraction
+        {
+            AssemblyPath = assemblyPaths[0],
+            ResourceKeyCount = resourceKeyCount,
+            Resources = resources,
+            Entries = entries,
+        };
+    }
+
+    private static int RoleRank(UITextRole role) => role switch
+    {
+        UITextRole.UI => 0,
+        UITextRole.Ambiguous => 1,
+        _ => 2,
+    };
+
+    /// <summary>
     ///     抽象值：一个字符串值由「哪些字面量 + 哪些方法参数 + 哪些本程序集方法的返回值」拼出来。
     /// </summary>
     /// <remarks>

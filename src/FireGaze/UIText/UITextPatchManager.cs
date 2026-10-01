@@ -81,22 +81,35 @@ internal sealed class UITextPatchManager
             return UITextPatchStatus.PendingReload;
         }
 
-        if (!string.IsNullOrEmpty(entry.DLLPath) && File.Exists(entry.DLLPath))
+        // 主程序集 + 伴生程序集逐个看：任意一个变了都算要重打
+        foreach (var file in state.EffectiveFiles)
         {
-            var hash = UITextPatchStore.HashOf(entry.DLLPath);
-            if (hash.Length > 0
-                && !string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(hash, state.PatchedHash, StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(file.Path) || !File.Exists(file.Path))
             {
-                detail = "插件更新过，补丁需要重打";
+                detail = "补丁记录里的文件不在了（插件更新过？）";
                 return UITextPatchStatus.NeedsRepatch;
             }
 
-            if (state.PatchedHash is { Length: > 0 } && string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase))
+            var hash = UITextPatchStore.HashOf(file.Path);
+            if (hash.Length == 0)
+            {
+                detail = "算不出文件哈希";
+                return UITextPatchStatus.NeedsRepatch;
+            }
+
+            if (file.PatchedHash is { Length: > 0 } && string.Equals(hash, file.PatchedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (string.Equals(hash, file.SourceHash, StringComparison.OrdinalIgnoreCase))
             {
                 detail = "盘上是原始文件（补丁被还原/被更新顶掉了）";
                 return UITextPatchStatus.NeedsRepatch;
             }
+
+            detail = "插件更新过，补丁需要重打";
+            return UITextPatchStatus.NeedsRepatch;
         }
 
         detail = $"已打补丁 {state.AppliedEntries} 处（{state.PatchedAt}）";
@@ -123,28 +136,57 @@ internal sealed class UITextPatchManager
     public bool HasBackup(InstalledPluginEntry entry) => this.store.Load(entry.InternalName)?.HasBackup == true;
 
     /// <summary>
-    ///     重新抽取该对哪份 DLL：盘上是我们自己的补丁时改读原始备份。
-    ///     否则抽到的是 <c>译文###原文</c>，会把包里好好的条目当成「原文没了」整批清掉（2026-10-01 踩过）。
-    ///     返回的 <paramref name="note" /> 非空时是一句给人看的说明。
+    ///     重新抽取该对哪几份 DLL：主程序集 + 伴生程序集；其中「盘上是我们自己的补丁」的改读它的原始备份。
+    ///     否则抽到的是 <c>译文###原文</c> 或中文资源值，会把包里好好的条目当成「原文没了」整批清掉。
+    ///     <paramref name="note" /> 非空时是一句给人看的说明。
     /// </summary>
-    public string ExtractionSourceOf(InstalledPluginEntry entry, out string note)
+    public List<string> ExtractionSourceOf(InstalledPluginEntry entry, out string note)
     {
         note = string.Empty;
-        var path = entry.DLLPath ?? string.Empty;
-        if (string.IsNullOrEmpty(path) || !File.Exists(path))
+        var dllPath = entry.DLLPath ?? string.Empty;
+        var paths = PluginAssemblies.Resolve(dllPath, entry.InternalName);
+        if (paths.Count == 0)
         {
-            return path;
+            if (dllPath.Length > 0)
+            {
+                paths.Add(dllPath);
+            }
+
+            return paths;
         }
 
         var state = this.store.Load(entry.InternalName);
-        if (state is null || !state.HasBackup || state.PatchedHash is not { Length: > 0 })
+        if (state is null || !state.HasBackup)
         {
-            return path;
+            return paths;
         }
 
-        var currentHash = UITextPatchStore.HashOf(path);
-        var chosen = ChooseExtractionSource(path, state, currentHash, out note);
-        return chosen;
+        var byName = state.EffectiveFiles
+            .Where(f => f.HasBackup)
+            .ToDictionary(f => Path.GetFileName(f.Path), StringComparer.OrdinalIgnoreCase);
+        var result = new List<string>(paths.Count);
+        var swapped = false;
+        foreach (var path in paths)
+        {
+            if (File.Exists(path)
+                && byName.TryGetValue(Path.GetFileName(path), out var file)
+                && file.PatchedHash is { Length: > 0 }
+                && string.Equals(UITextPatchStore.HashOf(path), file.PatchedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                result.Add(file.BackupPath!);
+                swapped = true;
+                continue;
+            }
+
+            result.Add(path);
+        }
+
+        if (swapped)
+        {
+            note = "盘上是打过补丁的 DLL，这次从原始备份抽取";
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -179,22 +221,45 @@ internal sealed class UITextPatchManager
             return (false, "读不到插件主程序集路径。");
         }
 
-        // 基线判定：盘上是「我们自己的旧补丁」就先还原回原始文件，避免在译文上叠译文；
-        // 盘上是别的内容（插件更新 / 第三方改过）就以当前内容为新基线，绝不能拿旧备份去顶掉新版本。
         var existing = this.store.Load(entry.InternalName);
-        var samePath = existing is not null && string.Equals(existing.DLLPath, dllPath, StringComparison.OrdinalIgnoreCase);
-        if (samePath && existing!.HasBackup)
+        var files = PluginAssemblies.Resolve(dllPath, entry.InternalName);
+        if (files.Count == 0)
         {
-            var currentHash = UITextPatchStore.HashOf(dllPath);
-            if (existing.PatchedHash is { Length: > 0 } && string.Equals(currentHash, existing.PatchedHash, StringComparison.OrdinalIgnoreCase))
+            files.Add(dllPath);
+        }
+
+        // 基线判定：盘上是「我们自己的旧补丁」的文件先还原回原始内容，避免在译文上叠译文。
+        // 按**文件名**匹配（插件更新会换版本目录）；哈希对得上才还原，绝不拿旧备份顶掉新版本。
+        if (existing is not null)
+        {
+            var oldFiles = new Dictionary<string, UITextPatchFile>(StringComparer.OrdinalIgnoreCase);
+            foreach (var old in existing.EffectiveFiles)
             {
+                if (old.HasBackup && old.PatchedHash is { Length: > 0 })
+                {
+                    oldFiles[Path.GetFileName(old.Path)] = old;
+                }
+            }
+
+            foreach (var path in files)
+            {
+                if (!oldFiles.TryGetValue(Path.GetFileName(path), out var old))
+                {
+                    continue;
+                }
+
+                if (!string.Equals(UITextPatchStore.HashOf(path), old.PatchedHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
                 try
                 {
-                    File.Copy(existing.BackupPath!, dllPath, overwrite: true);
+                    File.Copy(old.BackupPath!, path, overwrite: true);
                 }
                 catch (Exception e)
                 {
-                    return (false, "还原旧补丁失败：" + e.Message);
+                    return (false, $"还原旧补丁失败（{Path.GetFileName(path)}）：{e.Message}");
                 }
             }
         }
@@ -205,47 +270,137 @@ internal sealed class UITextPatchManager
             return (false, "这个插件还没有本地译文包。");
         }
 
-        var sourceHash = UITextPatchStore.HashOf(dllPath);
-        if (sourceHash.Length == 0)
+        // 先备份全部要动的文件
+        var fileStates = new List<UITextPatchFile>();
+        foreach (var path in files)
         {
-            return (false, "算不出插件 DLL 的哈希，先不冒险。");
+            var sourceHash = UITextPatchStore.HashOf(path);
+            if (sourceHash.Length == 0)
+            {
+                return (false, $"算不出 {Path.GetFileName(path)} 的哈希，先不冒险。");
+            }
+
+            var backup = this.store.Backup(entry.InternalName, path, sourceHash);
+            if (backup is null)
+            {
+                return (false, $"备份 {Path.GetFileName(path)} 失败，已中止打补丁。");
+            }
+
+            fileStates.Add(new UITextPatchFile { Path = path, SourceHash = sourceHash, BackupPath = backup });
         }
 
-        var backup = this.store.Backup(entry.InternalName, dllPath, sourceHash);
-        if (backup is null)
+        // 全部先打进 .new，一个失败就整套放弃——不会留下「主程序集打了、伴生没打」的半套状态
+        var staged = new List<(UITextPatchFile State, string NewPath)>();
+        var patchedTotal = 0;
+        var missing = new List<string>();
+        foreach (var fileState in fileStates)
         {
-            return (false, "备份原始 DLL 失败，已中止打补丁。");
+            var newPath = fileState.Path + ".fguitext.new";
+            UITextPatchOutcome outcome;
+            try
+            {
+                outcome = UITextPatcher.Patch(fileState.Path, newPath, pack, entry.Version);
+            }
+            catch (Exception e)
+            {
+                foreach (var (_, pending) in staged)
+                {
+                    TryDelete(pending);
+                }
+
+                return (false, $"打补丁出错（{Path.GetFileName(fileState.Path)}）：{e.Message}");
+            }
+
+            if (!outcome.Ok)
+            {
+                foreach (var (_, pending) in staged)
+                {
+                    TryDelete(pending);
+                }
+
+                TryDelete(newPath);
+                return (false, $"{Path.GetFileName(fileState.Path)}：{outcome.Error}");
+            }
+
+            staged.Add((fileState, newPath));
+            patchedTotal += outcome.PatchedTotal;
+            missing.AddRange(outcome.Missing);
         }
 
-        var outcome = UITextPatcher.Patch(dllPath, dllPath, pack, entry.Version);
-        if (!outcome.Ok)
+        // 全部成功才替换（出错则把已替换的从备份还原）
+        try
         {
-            return (false, outcome.Error ?? "打补丁失败。");
+            foreach (var (fileState, newPath) in staged)
+            {
+                File.Move(newPath, fileState.Path, overwrite: true);
+                fileState.PatchedHash = UITextPatchStore.HashOf(fileState.Path);
+            }
+        }
+        catch (Exception e)
+        {
+            foreach (var fileState in fileStates)
+            {
+                if (fileState.HasBackup)
+                {
+                    try
+                    {
+                        File.Copy(fileState.BackupPath!, fileState.Path, overwrite: true);
+                    }
+                    catch (Exception)
+                    {
+                        // 尽力而为，下一条继续
+                    }
+                }
+            }
+
+            return (false, "写入补丁失败，已尝试还原：" + e.Message);
         }
 
+        var main = fileStates[0];
         this.store.Save(new UITextPatchState
         {
             InternalName = entry.InternalName,
-            DLLPath = dllPath,
+            DLLPath = main.Path,
             PluginVersion = entry.Version,
-            SourceHash = sourceHash,
-            PatchedHash = UITextPatchStore.HashOf(dllPath),
+            SourceHash = main.SourceHash,
+            PatchedHash = main.PatchedHash,
             PatchedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-            BackupPath = backup,
-            AppliedEntries = outcome.PatchedTotal,
+            BackupPath = main.BackupPath,
+            AppliedEntries = patchedTotal,
+            Files = fileStates,
             PendingVerify = true,
             PendingSince = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
         });
 
-        var message = $"已写入 {outcome.PatchedTotal} 处译文";
-        if (outcome.Missing.Count > 0)
+        var message = $"已写入 {patchedTotal} 处译文";
+        if (fileStates.Count > 1)
         {
-            message += $"（{outcome.Missing.Count} 条在 DLL 里没找到，可能是插件版本变了）";
+            message += $"（跨 {fileStates.Count} 个程序集）";
+        }
+
+        if (missing.Count > 0)
+        {
+            message += $"（{missing.Count} 条在 DLL 里没找到，可能是插件版本变了）";
         }
 
         message += "；重载插件后生效。";
         Plugin.Log?.Information($"[内部文本] {entry.InternalName}：{message}");
         return (true, message);
+    }
+
+    private static void TryDelete(string path)
+    {
+        try
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+        catch (Exception)
+        {
+            // 临时文件删不掉无所谓
+        }
     }
 
     /// <summary>
@@ -254,29 +409,54 @@ internal sealed class UITextPatchManager
     public (bool Ok, string Message) Restore(InstalledPluginEntry entry, string? reason = null)
     {
         var state = this.store.Load(entry.InternalName);
-        if (state is null || string.IsNullOrEmpty(entry.DLLPath))
+        if (state is null)
         {
             return (false, "这个插件没有打过补丁的记录。");
         }
 
-        if (!state.HasBackup)
+        var restored = 0;
+        foreach (var file in state.EffectiveFiles)
+        {
+            if (!file.HasBackup)
+            {
+                continue;
+            }
+
+            // 插件更新会换版本目录：记录的路径不在了、但名字还是主程序集的话，还原到当前主程序集路径
+            var target = file.Path;
+            if (!File.Exists(target)
+                && !string.IsNullOrEmpty(entry.DLLPath)
+                && string.Equals(Path.GetFileName(file.Path), Path.GetFileName(entry.DLLPath), StringComparison.OrdinalIgnoreCase))
+            {
+                target = entry.DLLPath;
+            }
+
+            if (!File.Exists(target))
+            {
+                continue;
+            }
+
+            try
+            {
+                File.Copy(file.BackupPath!, target, overwrite: true);
+                restored++;
+            }
+            catch (Exception e)
+            {
+                this.store.Save(state with { LastError = "还原失败：" + e.Message });
+                return (false, $"还原 {Path.GetFileName(target)} 失败：{e.Message}");
+            }
+        }
+
+        if (restored == 0)
         {
             this.store.Save(state with { LastError = "找不到备份文件，无法自动还原" });
             return (false, "找不到备份文件（备份目录被清过？）——需要手动重装这个插件。");
         }
 
-        try
-        {
-            File.Copy(state.BackupPath!, entry.DLLPath, overwrite: true);
-        }
-        catch (Exception e)
-        {
-            return (false, "还原失败：" + e.Message);
-        }
-
         this.store.Delete(entry.InternalName);
         var suffix = reason is null ? string.Empty : $"（{reason}）";
-        Plugin.Log?.Information($"[内部文本] {entry.InternalName}：已还原原始 DLL{suffix}");
+        Plugin.Log?.Information($"[内部文本] {entry.InternalName}：已还原原始 DLL{suffix}（{restored} 个文件）");
         return (true, "已还原成原始文件" + suffix + "；重载插件后恢复英文。");
     }
 
@@ -457,16 +637,37 @@ internal sealed class UITextPatchManager
             return;
         }
 
-        var hash = UITextPatchStore.HashOf(entry.DLLPath);
-        if (hash.Length == 0
-            || string.Equals(hash, state.PatchedHash, StringComparison.OrdinalIgnoreCase)
-            || string.Equals(hash, state.SourceHash, StringComparison.OrdinalIgnoreCase) && state.PatchedHash is null)
+        // 主程序集 + 伴生程序集：任意一个「不是我们打过的那个内容」就要重打
+        var needs = false;
+        foreach (var file in state.EffectiveFiles)
         {
-            // 我们的补丁还在盘上 / 还从没打过：都不用重打
-            return;
+            if (string.IsNullOrEmpty(file.Path) || !File.Exists(file.Path))
+            {
+                needs = true;
+                break;
+            }
+
+            var hash = UITextPatchStore.HashOf(file.Path);
+            if (hash.Length == 0)
+            {
+                continue;
+            }
+
+            if (file.PatchedHash is { Length: > 0 } && string.Equals(hash, file.PatchedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (string.Equals(hash, file.SourceHash, StringComparison.OrdinalIgnoreCase) && file.PatchedHash is null)
+            {
+                continue; // 这个文件从没打上过
+            }
+
+            needs = true;
+            break;
         }
 
-        if (!this.plugin.Config.UITextAutoRepatch)
+        if (!needs || !this.plugin.Config.UITextAutoRepatch)
         {
             return;
         }

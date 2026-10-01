@@ -5,6 +5,33 @@ using System.Text.Json.Serialization;
 namespace FireGaze.UIText;
 
 /// <summary>
+///     一个被补丁的文件（主程序集或它的伴生程序集）。
+/// </summary>
+internal sealed record UITextPatchFile
+{
+    /// <summary>文件全路径（插件更新会换版本目录，所以要按文件名匹配而不是全路径）。</summary>
+    [JsonPropertyName("Path")]
+    public string Path { get; set; } = string.Empty;
+
+    /// <summary>打补丁时这个文件的 SHA-256（原始内容）。</summary>
+    [JsonPropertyName("SourceHash")]
+    public string SourceHash { get; set; } = string.Empty;
+
+    /// <summary>打完补丁后这个文件的 SHA-256。</summary>
+    [JsonPropertyName("PatchedHash")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? PatchedHash { get; set; }
+
+    /// <summary>原始文件的备份路径。</summary>
+    [JsonPropertyName("BackupPath")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? BackupPath { get; set; }
+
+    [JsonIgnore]
+    public bool HasBackup => !string.IsNullOrEmpty(this.BackupPath) && File.Exists(this.BackupPath);
+}
+
+/// <summary>
 ///     一个插件的补丁状态（存在 <c>&lt;配置目录&gt;/uitrans/state/&lt;内部名&gt;.json</c>）。
 /// </summary>
 internal sealed record UITextPatchState
@@ -80,8 +107,33 @@ internal sealed record UITextPatchState
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? LastError { get; set; }
 
+    /// <summary>
+    ///     这次补丁动过的全部文件（主程序集 + 伴生程序集）。
+    ///     老版本的状态只有单个 <see cref="DLLPath" />，<see cref="EffectiveFiles" /> 会自动退化成一条。
+    /// </summary>
+    [JsonPropertyName("Files")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<UITextPatchFile>? Files { get; set; }
+
+    /// <summary>
+    ///     实际要看的文件列表（新状态用 <see cref="Files" />；老状态用 DLLPath/SourceHash/PatchedHash/BackupPath）。
+    /// </summary>
     [JsonIgnore]
-    public bool HasBackup => !string.IsNullOrEmpty(this.BackupPath) && File.Exists(this.BackupPath);
+    public IReadOnlyList<UITextPatchFile> EffectiveFiles => this.Files is { Count: > 0 }
+        ? this.Files
+        :
+        [
+            new UITextPatchFile
+            {
+                Path = this.DLLPath,
+                SourceHash = this.SourceHash,
+                PatchedHash = this.PatchedHash,
+                BackupPath = this.BackupPath,
+            },
+        ];
+
+    [JsonIgnore]
+    public bool HasBackup => this.EffectiveFiles.Any(f => f.HasBackup);
 }
 
 /// <summary>
@@ -203,7 +255,7 @@ internal sealed class UITextPatchStore
             lock (this.gate)
             {
                 Directory.CreateDirectory(this.backupDirectory);
-                var target = Path.Combine(this.backupDirectory, $"{Sanitize(internalName)}-{sourceHash[..12]}.dll");
+                var target = Path.Combine(this.backupDirectory, $"{Sanitize(internalName)}-{BackupLabel(internalName, dllPath)}{sourceHash[..12]}.dll");
                 if (!File.Exists(target))
                 {
                     File.Copy(dllPath, target, overwrite: false);
@@ -236,6 +288,16 @@ internal sealed class UITextPatchStore
     }
 
     private string PathOf(string internalName) => Path.Combine(this.stateDirectory, Sanitize(internalName) + ".json");
+
+    /// <summary>
+    ///     备份文件名里区分「哪个文件」：主程序集不带（沿用老命名），伴生程序集带自己的名字，
+    ///     否则多文件会互相覆盖（同一插件、不同文件、哈希不同倒不会撞，但撞上了就串了）。
+    /// </summary>
+    private static string BackupLabel(string internalName, string dllPath)
+    {
+        var stem = Path.GetFileNameWithoutExtension(dllPath);
+        return string.Equals(stem, internalName, StringComparison.OrdinalIgnoreCase) ? string.Empty : Sanitize(stem) + "-";
+    }
 
     private static string Sanitize(string name)
     {

@@ -1,0 +1,6 @@
+{
+  "_comment": "多程序集插件：插件内部名 → 同目录里属于这个插件自己的 DLL 文件名（大小写不敏感）。插件端与 CI 用同一份。通用规则：与本插件主 DLL 同名但带后缀的（Main.Something.dll）自动算伴生；这份名单是给「名字完全不同」的插件用的（如 ARSR 的 RotationSolver.Basic.dll）。",
+  "plugins": {
+    "ascended-rotationsolverreborn": ["RotationSolver.Basic.dll"]
+  }
+}

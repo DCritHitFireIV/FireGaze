@@ -776,8 +776,8 @@ internal sealed class UITextTab
             var packTouchedSincePatch = packTimeBefore > patchedAt.AddSeconds(1);
 
             run.Stage = "正在读取插件界面文本…";
-            var source = this.patches.ExtractionSourceOf(entry, out _);
-            var extraction = await Task.Run(() => UIStringExtractor.Extract(source), token).ConfigureAwait(false);
+            var extractionSources = this.patches.ExtractionSourceOf(entry, out _);
+            var extraction = await Task.Run(() => UIStringExtractor.ExtractMany(extractionSources), token).ConfigureAwait(false);
             if (extraction.Error is not null)
             {
                 this.FinishRun(run, new RowNote
