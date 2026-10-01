@@ -55,9 +55,19 @@ internal sealed class UITextTab
         public DateTime CreatedAt = DateTime.Now;
     }
 
+    private enum RunMode
+    {
+        /// <summary>一键汉化：抽取 → 翻译 → 写入 → 重载。</summary>
+        Full,
+
+        /// <summary>只抽取：列出候选与统计，不翻译、不写补丁。</summary>
+        ExtractOnly,
+    }
+
     private sealed class Run
     {
         public string InternalName = string.Empty;
+        public RunMode Mode = RunMode.Full;
         public string Stage = string.Empty;
         public bool CanCancel;
         public int Done;
@@ -212,7 +222,8 @@ internal sealed class UITextTab
         ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0.12f, 0.15f, 0.19f, 1f));
         if (ImGui.BeginChild("###UITextRunning", new Vector2(0, ImGui.GetFrameHeight() + 8)))
         {
-            UiHelpers.ColoredText(run.CanCancel ? UiHelpers.Info : UiHelpers.Warn, $"正在汉化 {name}：{run.Stage}");
+            var verb = run.Mode == RunMode.ExtractOnly ? "正在抽取" : "正在汉化";
+            UiHelpers.ColoredText(run.CanCancel ? UiHelpers.Info : UiHelpers.Warn, $"{verb} {name}：{run.Stage}");
 
             if (run.CanCancel)
             {
@@ -364,7 +375,7 @@ internal sealed class UITextTab
         {
             ImGui.TableNextRow();
             ImGui.TableNextColumn();
-            this.DrawExpanded(plugin, info);
+            this.DrawExpanded(plugin, info, busy, editorOpen);
             ImGui.TableNextColumn();
         }
 
@@ -432,7 +443,7 @@ internal sealed class UITextTab
         }
     }
 
-    private void DrawExpanded(InstalledPluginEntry plugin, RowInfo? info)
+    private void DrawExpanded(InstalledPluginEntry plugin, RowInfo? info, bool busy, bool editorOpen)
     {
         ImGui.Indent(48f);
 
@@ -473,14 +484,38 @@ internal sealed class UITextTab
         }
 
         ImGui.Spacing();
+        var extracting = this.run is { Mode: RunMode.ExtractOnly } only
+                         && string.Equals(only.InternalName, plugin.InternalName, StringComparison.Ordinal);
+        ImGui.BeginDisabled(busy || editorOpen || extracting);
+        if (ImGui.Button(info is { HasPack: true } ? "重新抽取###UITextExtract" : "抽取界面文本###UITextExtract"))
+        {
+            this.StartExtract(plugin);
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(extracting
+                ? "正在抽取…"
+                : busy || editorOpen
+                    ? "先把当前任务跑完再抽取。"
+                    : "只读一遍插件 DLL，列出能翻的界面文本（不翻译、不写补丁）。\n"
+                      + "插件更新过、或想先看看有多少文本，就点它；结果会记进本地包，编辑器里也能接着改。");
+        }
+
+        ImGui.SameLine();
+        ImGui.BeginDisabled(busy);
         if (ImGui.Button("编辑校对…###UITextOpenEditor"))
         {
             this.editor.OpenFor(plugin);
         }
 
-        if (ImGui.IsItemHovered())
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("逐条改译文、标记「不翻」、重新抽取。适合想自己核对的插件。");
+            ImGui.SetTooltip(busy
+                ? "先把当前任务跑完再进编辑器。"
+                : "逐条改译文、标记「不翻」、重新抽取。适合想自己核对的插件。");
         }
 
         ImGui.SameLine();
@@ -555,6 +590,32 @@ internal sealed class UITextTab
 
     // ── 一键汉化 ─────────────────────────────────────────────────────────
 
+    /// <summary>
+    ///     只抽取（不翻译、不写补丁）：把插件 DLL 里能翻的文本列出来并记进本地包。
+    /// </summary>
+    private void StartExtract(InstalledPluginEntry entry)
+    {
+        if (this.run is not null)
+        {
+            return;
+        }
+
+        if (!this.runs.TryEnter(entry.InternalName, "正在抽取 " + entry.DisplayName, out var reason))
+        {
+            this.notes[entry.InternalName] = new RowNote
+            {
+                Kind = NoteKind.Info,
+                Text = "另一个任务正在跑：" + reason + " 等它结束再点。",
+            };
+            return;
+        }
+
+        var run = new Run { InternalName = entry.InternalName, Mode = RunMode.ExtractOnly, Stage = "正在读取插件界面文本…" };
+        this.run = run;
+        this.notes.Remove(entry.InternalName);
+        run.Task = Task.Run(() => this.RunPipelineAsync(entry, run));
+    }
+
     private void StartOneClick(InstalledPluginEntry entry)
     {
         if (this.run is not null)
@@ -612,6 +673,20 @@ internal sealed class UITextTab
                     Kind = NoteKind.Info,
                     Text = "没找到可翻译的界面文本（插件可能带壳 / 加密，或界面本来就是中文）。",
                 });
+                return;
+            }
+
+            if (run.Mode == RunMode.ExtractOnly)
+            {
+                var summary = $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条 · 已翻译 {pack.TranslatedCount} 条";
+                if (merge.Prune.Any)
+                {
+                    summary += " · " + merge.Prune.Describe();
+                }
+
+                summary += "。要翻译就点「一键汉化」，要逐条看就点「编辑校对…」。";
+                this.FinishRun(run, new RowNote { Kind = NoteKind.Good, Text = summary });
+                this.rowsDirty = true;
                 return;
             }
 
