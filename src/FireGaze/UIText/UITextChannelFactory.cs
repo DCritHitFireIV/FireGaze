@@ -31,6 +31,7 @@ internal static class UITextChannelFactory
     /// </summary>
     public static string Describe(Configuration config) => config.UITextChannel switch
     {
+        "caiyun" => "彩云小译（免费额度：新号 100 万字 / 一个月）",
         "google" => "免费：Google 免 key 端点（需要代理）",
         "mymemory" => "免费：MyMemory（免 key，质量一般）",
         "llm" => $"大模型：{config.UITextLLMModel}",
@@ -46,6 +47,18 @@ internal static class UITextChannelFactory
         error = null;
         switch (config.UITextChannel)
         {
+            case "caiyun":
+            {
+                var token = DPAPI.UnprotectFromBase64(config.UITextCaiyunKeyProtected);
+                if (string.IsNullOrWhiteSpace(token))
+                {
+                    error = "还没填彩云小译的 token（注册后在「应用管理」创建应用，右边「管理」→「访问控制」里复制）。";
+                    return null;
+                }
+
+                return new CaiyunTranslationChannel(token);
+            }
+
             case "google":
                 return new FreeTranslationChannel(googleFirst: true);
             case "mymemory":

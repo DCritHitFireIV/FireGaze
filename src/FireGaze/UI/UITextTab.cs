@@ -749,7 +749,7 @@ internal sealed class UITextTab
                     {
                         Kind = NoteKind.Bad,
                         Text = $"翻译失败：{reason}。已经翻好的 {pack.TranslatedCount} 条不会丢，原来的补丁也还在（界面不会变回英文）——"
-                               + "等几分钟再点右侧「一键汉化」接着来；想稳定跑大批量，可以在「翻译设置」里填自己的大模型 key。",
+                               + "等几分钟再点右侧「一键汉化」接着来；想稳定跑，去「翻译设置」里换成彩云小译（免费、有额度、一次 50 条）或自己的大模型 key。",
                         CanOpenSettings = true,
                     });
                     this.rowsDirty = true;

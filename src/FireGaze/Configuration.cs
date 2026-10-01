@@ -230,6 +230,13 @@ public sealed class Configuration : IPluginConfiguration
     public string UITextLLMKeyProtected { get; set; } = string.Empty;
 
     /// <summary>
+    ///     彩云小译的 token（同样 DPAPI 加密）。注册后到「应用管理」创建应用，
+    ///     页面右边「管理」→「访问控制」里复制的那串。
+    /// </summary>
+    [JsonProperty("UITextCaiyunKey")]
+    public string UITextCaiyunKeyProtected { get; set; } = string.Empty;
+
+    /// <summary>
     ///     DeepL API key（同样 DPAPI 加密）。
     /// </summary>
     [JsonProperty("UITextDeepLKey")]

@@ -63,6 +63,302 @@ internal interface IUITextChannel
 }
 
 /// <summary>
+///     彩云小译（LingoCloud）：一次最多提交 50 条，快到「几百条几秒」；免费额度是新号 100 万字 / 一个月。
+/// </summary>
+/// <remarks>
+///     接口文档：<c>https://docs.caiyunapp.com/lingocloud-api/index.html</c>。
+///     实测（2026-10-01）：单条 0.5s、10 条 0.7s、50 条 0.8s；**52 条就 HTTP 413**（请求体太大），
+///     所以这里按 50 条一批切；真撞上 413 还会对半拆开再试一次（防御）。
+/// </remarks>
+internal sealed class CaiyunTranslationChannel : IUITextChannel
+{
+    /// <summary>一批最多多少条（实测 52 就 413）。</summary>
+    public const int MaxBatchItems = 50;
+
+    /// <summary>两批之间的礼让（毫秒）——别把免费额度当无限用。</summary>
+    private const int BetweenBatchesMilliseconds = 200;
+
+    private const string Endpoint = "https://api.interpreter.caiyunai.com/v1/translator";
+
+    private static readonly HttpClient Client = CreateClient();
+
+    private readonly string token;
+
+    public CaiyunTranslationChannel(string token) => this.token = token;
+
+    public string Name => "caiyun";
+
+    public string Description => "彩云小译（免费额度：新号 100 万字 / 一个月）";
+
+    public async Task<UITextTranslateResult> TranslateAsync(
+        IReadOnlyList<UITextTranslateItem> items,
+        Action<int, int>? progress,
+        CancellationToken token)
+    {
+        var result = new UITextTranslateResult();
+        var done = 0;
+        var batches = SplitBatches(items);
+        for (var b = 0; b < batches.Count; b++)
+        {
+            if (token.IsCancellationRequested)
+            {
+                result.Error = "已取消";
+                break;
+            }
+
+            var batch = batches[b];
+            var fatal = await this.ProcessBatchAsync(batch, result, token).ConfigureAwait(false);
+            done += batch.Count;
+            progress?.Invoke(done, items.Count);
+            if (fatal is not null)
+            {
+                result.Error = fatal;
+                break;
+            }
+
+            if (b < batches.Count - 1)
+            {
+                try
+                {
+                    await Task.Delay(BetweenBatchesMilliseconds, token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    result.Error = "已取消";
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     把条目切成每批 ≤50 条（纯函数，方便离线测）。
+    /// </summary>
+    public static List<List<T>> SplitBatches<T>(IReadOnlyList<T> items, int maxItems = MaxBatchItems)
+    {
+        var batches = new List<List<T>>();
+        for (var start = 0; start < items.Count; start += maxItems)
+        {
+            var batch = new List<T>(Math.Min(maxItems, items.Count - start));
+            for (var i = start; i < start + maxItems && i < items.Count; i++)
+            {
+                batch.Add(items[i]);
+            }
+
+            batches.Add(batch);
+        }
+
+        return batches;
+    }
+
+    /// <summary>
+    ///     解析返回的 <c>target</c>（数组或单条字符串）。拿不到 <paramref name="expected" /> 条时补 null，
+    ///     调用方按位置把译文配回原文。出错时把原因写进 <paramref name="error" />。
+    /// </summary>
+    public static List<string?> ParseTargets(string json, int expected, out string? error)
+    {
+        error = null;
+        var values = new List<string?>();
+        try
+        {
+            using var document = JsonDocument.Parse(json);
+            var root = document.RootElement;
+            if (root.TryGetProperty("target", out var target))
+            {
+                if (target.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var item in target.EnumerateArray())
+                    {
+                        values.Add(item.ValueKind == JsonValueKind.String ? item.GetString() : null);
+                    }
+                }
+                else if (target.ValueKind == JsonValueKind.String)
+                {
+                    values.Add(target.GetString());
+                }
+            }
+            else if (root.TryGetProperty("message", out var message) && message.ValueKind == JsonValueKind.String)
+            {
+                error = message.GetString();
+                return values;
+            }
+            else
+            {
+                error = "返回里没有 target 字段";
+                return values;
+            }
+        }
+        catch (JsonException)
+        {
+            error = "返回不是合法 JSON（可能被代理 / 网关拦了）";
+            return values;
+        }
+
+        while (values.Count < expected)
+        {
+            values.Add(null);
+        }
+
+        return values;
+    }
+
+    /// <summary>
+    ///     单批：拿译文写回 result；失败返回「整批停下」的原因（null = 继续下一批）。
+    /// </summary>
+    private async Task<string?> ProcessBatchAsync(
+        List<UITextTranslateItem> batch,
+        UITextTranslateResult result,
+        CancellationToken token)
+    {
+        var texts = batch.Select(item => UITextText.ForTranslation(item.Text)).ToList();
+        var attempt = 0;
+        while (true)
+        {
+            try
+            {
+                var body = await this.PostAsync(texts, token).ConfigureAwait(false);
+                var targets = ParseTargets(body, batch.Count, out var parseError);
+                if (parseError is not null)
+                {
+                    result.Note("彩云小译：" + parseError);
+                    foreach (var item in batch)
+                    {
+                        result.Failed.Add(item.Text);
+                    }
+
+                    return null;
+                }
+
+                for (var i = 0; i < batch.Count; i++)
+                {
+                    var value = targets[i];
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        result.Failed.Add(batch[i].Text);
+                    }
+                    else
+                    {
+                        result.Translated[batch[i].Text] = value!;
+                    }
+                }
+
+                return null;
+            }
+            catch (CaiyunHttpException e) when (e.StatusCode == 413 && batch.Count > 1)
+            {
+                // 防御：真被嫌大就对半拆（单条还 413 就走下面的通用失败）
+                result.Note("彩云小译：这一批太大，拆成两批重试");
+                var half = batch.Count / 2;
+                var first = await this.ProcessBatchAsync(batch.GetRange(0, half), result, token).ConfigureAwait(false);
+                return first ?? await this.ProcessBatchAsync(batch.GetRange(half, batch.Count - half), result, token).ConfigureAwait(false);
+            }
+            catch (CaiyunHttpException e) when (e.StatusCode is 401 or 403)
+            {
+                return e.StatusCode == 401
+                    ? "彩云小译的 token 无效——到「翻译设置」里检查（应用管理 → 管理 → 访问控制里复制的那串）"
+                    : "彩云小译拒绝访问（HTTP 403）：" + e.Message;
+            }
+            catch (CaiyunHttpException e) when (e.StatusCode is 429 or >= 500)
+            {
+                if (attempt < TranslationThrottle.MaxAttempts - 1)
+                {
+                    try
+                    {
+                        await Task.Delay(TranslationThrottle.RetryDelayMilliseconds(attempt), token).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        return "已取消";
+                    }
+
+                    attempt++;
+                    continue;
+                }
+
+                return $"彩云小译被限流 / 服务端出错（HTTP {e.StatusCode}）：{e.Message}";
+            }
+            catch (CaiyunHttpException e)
+            {
+                return $"彩云小译返回 HTTP {e.StatusCode}：{e.Message}";
+            }
+            catch (TaskCanceledException) when (!token.IsCancellationRequested)
+            {
+                return "彩云小译请求超时（网络或代理问题）";
+            }
+            catch (HttpRequestException e)
+            {
+                return "连不上彩云小译：" + e.Message;
+            }
+        }
+    }
+
+    private async Task<string> PostAsync(IReadOnlyList<string> texts, CancellationToken token)
+    {
+        var payload = JsonSerializer.Serialize(new
+        {
+            source = texts,
+            trans_type = "auto2zh",
+            detect = true,
+            media = "text",
+            request_id = "firegaze",
+        });
+
+        using var request = new HttpRequestMessage(HttpMethod.Post, Endpoint)
+        {
+            Content = new StringContent(payload, Encoding.UTF8, "application/json"),
+        };
+        request.Headers.TryAddWithoutValidation("X-Authorization", "token " + this.token);
+
+        using var response = await Client.SendAsync(request, token).ConfigureAwait(false);
+        var body = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new CaiyunHttpException((int)response.StatusCode, ReadMessage(body));
+        }
+
+        return body;
+    }
+
+    /// <summary>
+    ///     错误响应体是 <c>{"message": "..."}</c>，抠出来给用户看。
+    /// </summary>
+    private static string ReadMessage(string body)
+    {
+        try
+        {
+            using var document = JsonDocument.Parse(body);
+            if (document.RootElement.TryGetProperty("message", out var message) && message.ValueKind == JsonValueKind.String)
+            {
+                return message.GetString() ?? string.Empty;
+            }
+        }
+        catch (JsonException)
+        {
+            // 不是 JSON 就把原文截一段
+        }
+
+        return body.Length > 120 ? body[..120] : body;
+    }
+
+    private static HttpClient CreateClient()
+    {
+        var client = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("FireGaze/1.0 (+https://github.com/DCritHitFireIV/FireGaze)");
+        return client;
+    }
+
+    private sealed class CaiyunHttpException : Exception
+    {
+        public CaiyunHttpException(int statusCode, string message)
+            : base(message) => this.StatusCode = statusCode;
+
+        public int StatusCode { get; }
+    }
+}
+
+/// <summary>
 ///     免费、免 key 通道：优先 Google 免 key 端点（需要能连上 Google，通常是挂了代理），
 ///     连不上或**被限流**就换 MyMemory。
 /// </summary>
@@ -179,7 +475,7 @@ internal sealed class FreeTranslationChannel : IUITextChannel
 
             if (rateLimited)
             {
-                provider.OnRateLimited();
+                provider.OnRateLimited(hardLimit: failure.Contains("429", StringComparison.Ordinal));
             }
 
             notes.Add($"{provider.Label}：{failure}");
@@ -223,6 +519,12 @@ internal sealed class FreeTranslationChannel : IUITextChannel
             {
                 lastFailure = DescribeStatus(e);
                 rateLimited = IsRateLimit(e);
+                if (e.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
+                {
+                    // 429 = 这条通道的额度/频率被卡了，原地重试只会白等 2+5 秒（用户实测一条要 10 秒就是这么来的）。
+                    // 直接返回让上层换另一条通道，并把这条冷却掉。
+                    return (null, lastFailure, true);
+                }
             }
             catch (TaskCanceledException) when (!token.IsCancellationRequested)
             {
@@ -348,10 +650,16 @@ internal sealed class FreeTranslationChannel : IUITextChannel
 
         public void OnSuccess() => this.RateLimitStreak = 0;
 
-        public void OnRateLimited()
+        public void OnRateLimited() => this.OnRateLimited(hardLimit: false);
+
+        /// <summary>
+        ///     被限流：<paramref name="hardLimit" /> = 429（额度/频率被卡）时立刻冷却，不等连续 5 次——
+        ///     否则每一轮都要先撞一次 429 才知道这条通道不能用，那正是「一条要 10 秒」的一半来源。
+        /// </summary>
+        public void OnRateLimited(bool hardLimit)
         {
             this.RateLimitStreak++;
-            var minutes = TranslationThrottle.CooldownMinutes(this.RateLimitStreak);
+            var minutes = hardLimit ? 30 : TranslationThrottle.CooldownMinutes(this.RateLimitStreak);
             if (minutes > 0)
             {
                 this.CooldownUntil = DateTime.Now.AddMinutes(minutes);

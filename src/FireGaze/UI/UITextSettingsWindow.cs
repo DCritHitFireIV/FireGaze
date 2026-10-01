@@ -38,6 +38,7 @@ internal sealed class UITextSettingsWindow : Window
         var channels = new (string Key, string Label)[]
         {
             ("auto", "免费·自动"),
+            ("caiyun", "彩云小译"),
             ("google", "Google 免 key"),
             ("mymemory", "MyMemory"),
             ("llm", "大模型（自填 key）"),
@@ -62,7 +63,10 @@ internal sealed class UITextSettingsWindow : Window
 
         if (config.UITextChannel is "auto" or "google" or "mymemory")
         {
-            ImGui.TextDisabled("免费通道按 IP 限流：Google 会返回 429、MyMemory 额度只有几千字符/天。条目多时建议换「大模型（自填 key）」。");
+            ImGui.TextDisabled(
+                "免费通道按 IP 限流：Google 会返回 429、MyMemory 额度只有几千字符/天，而且是一条一条翻（约 1 条/秒）。\n" +
+                "想免费又要快，用「彩云小译」：注册后到「应用管理」创建应用，页面右边「管理」→「访问控制」里复制 token 填进来，" +
+                "新用户送 100 万字（一个月），一次能提交 50 条、几百条几秒翻完。");
         }
 
         var translateGrey = config.UITextTranslateGreyList;
@@ -129,6 +133,13 @@ internal sealed class UITextSettingsWindow : Window
             }
 
             this.DrawKeyRow("大模型 API key", config.UITextLLMKeyProtected, v => config.UITextLLMKeyProtected = v, ref changed);
+        }
+
+        if (string.Equals(config.UITextChannel, "caiyun", StringComparison.Ordinal))
+        {
+            ImGui.Separator();
+            ImGui.TextDisabled("彩云小译：到「彩云科技开放平台」注册 → 应用管理里创建应用 → 页面右边「管理」→「访问控制」里复制 token 填这里。");
+            this.DrawKeyRow("彩云小译 token", config.UITextCaiyunKeyProtected, v => config.UITextCaiyunKeyProtected = v, ref changed);
         }
 
         if (string.Equals(config.UITextChannel, "deepl", StringComparison.Ordinal))

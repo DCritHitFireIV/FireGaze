@@ -563,8 +563,8 @@ internal sealed class UITextEditorWindow : Window
                        "\n翻完不会自动写入插件——想先核对就留在这里改，想直接生效点「写入并重载」。";
             if (targets > 100 && this.plugin.Config.UITextChannel is "auto" or "google" or "mymemory")
             {
-                hint += "\n注意：免费接口按 IP 限流（Google 会 429、MyMemory 额度只有几千字符/天），" +
-                        "\n上百条建议改用「大模型（自填 key）」，或者分批慢慢翻。";
+                hint += "\n注意：这两条免 key 通道按 IP 限流（Google 会 429、MyMemory 额度只有几千字符/天），而且是一条一条翻。" +
+                        "\n上百条建议改用「彩云小译」（免费额度、一次 50 条）或「大模型（自填 key）」。";
             }
 
             ImGui.SetTooltip(hint);
