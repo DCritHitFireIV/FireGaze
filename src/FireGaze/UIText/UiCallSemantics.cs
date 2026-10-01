@@ -17,6 +17,18 @@ internal static class UICallSemantics
     ];
 
     /// <summary>
+    ///     类型名里含 ImGui 字样、但实际上不是画界面的：参数是文件名 / 过滤器 / 渲染句柄，
+    ///     翻了会直接弄坏功能（2026-10-02 假阳性审计：`{.ktlight}` / `.json` 这些文件过滤器
+    ///     因为命名空间叫 `Dalamud.Interface.ImGuiFileDialog` 被当成了 UI 文本）。
+    /// </summary>
+    private static readonly string[] ImGuiLookalikeTypes =
+    [
+        "ImGuiFileDialog",
+        "FileDialogManager",
+        "ImGuiScene",
+    ];
+
+    /// <summary>
     ///     这些 ImGui 调用只是把文字画出来，不拿这个字符串当控件 ID。
     /// </summary>
     private static readonly HashSet<string> PlainTextCalls = new(StringComparer.Ordinal)
@@ -247,9 +259,17 @@ internal static class UICallSemantics
             return false;
         }
 
+        foreach (var lookalike in ImGuiLookalikeTypes)
+        {
+            if (typeFullName.Contains(lookalike, StringComparison.Ordinal))
+            {
+                return false;
+            }
+        }
+
         if (typeFullName.Contains("ImGui", StringComparison.OrdinalIgnoreCase))
         {
-            return true;
+            return !NonTextCalls.Contains(methodName);
         }
 
         foreach (var prefix in KnownWrapperPrefixes)
@@ -281,6 +301,108 @@ internal static class UICallSemantics
     ///     InputFloat 的 format……这些字符串的绘制路径不处理 ##，所以绝不能给它们加 ###原文。
     ///     2026-10-01 实测：FriendlyFire 的输入框灰字显示成「角色名称（例如苹果汽水）###Character Name (e.g., Apple Soda)」就是这个原因。
     /// </remarks>
+    /// <summary>集合容器类型（List / Dictionary / HashSet / Queue / Stack / 自写 Collection）。</summary>
+    public static bool IsCollectionType(string typeFullName) =>
+        typeFullName.Contains("List`", StringComparison.Ordinal)
+        || typeFullName.Contains("Dictionary", StringComparison.Ordinal)
+        || typeFullName.Contains("HashSet", StringComparison.Ordinal)
+        || typeFullName.Contains("SortedSet", StringComparison.Ordinal)
+        || typeFullName.Contains("Queue`", StringComparison.Ordinal)
+        || typeFullName.Contains("Stack`", StringComparison.Ordinal)
+        || typeFullName.Contains("Collection`", StringComparison.Ordinal);
+
+    /// <summary>往集合里塞元素的调用（元素值可能稍后被画出来，不能当功能语境丢掉）。</summary>
+    public static bool IsCollectionMutator(string typeFullName, string methodName) =>
+        IsCollectionType(typeFullName) && methodName is "Add" or "Enqueue" or "Push" or "TryAdd" or "set_Item";
+
+    /// <summary>集合遍历 / 展开：把集合的值带到元素上（GetEnumerator / get_Current / ToArray）。</summary>
+    public static bool IsContainerAccessor(string typeFullName, string methodName) =>
+        methodName is "GetEnumerator" or "get_Current" or "ToArray" or "ToHashSet" or "ToList"
+        && (IsCollectionType(typeFullName)
+            || typeFullName.Contains("Enumerator", StringComparison.Ordinal)
+            || typeFullName.Contains("Enumerable", StringComparison.Ordinal));
+
+    /// <summary>去掉泛型实参：<c>ConfigRef`1&lt;T&gt;</c> → <c>ConfigRef`1</c>（调用点与定义处的键不一致，2026-10-02）。</summary>
+    public static string StripGenericArgs(string typeFullName)
+    {
+        var tick = typeFullName.IndexOf('`');
+        if (tick < 0)
+        {
+            return typeFullName;
+        }
+
+        var angle = typeFullName.IndexOf('<', tick);
+        return angle < 0 ? typeFullName : typeFullName[..angle];
+    }
+
+    /// <summary>BossMod 的提示容器存储：TextHints / GlobalHints 里的文本会画到提示区。</summary>
+    public static bool IsHintsContainerStore(string calleeTypeFullName, string methodName) =>
+        methodName == "Add"
+        && calleeTypeFullName is "System.Collections.Generic.List`1<System.String>"
+            or "System.Collections.Generic.List`1<System.ValueTuple`2<System.String,System.Boolean>>";
+
+    /// <summary>提示容器的声明类型（BossMod.BossComponent 里的 TextHints / GlobalHints）。</summary>
+    public static bool IsHintsContainerType(string receiverTypeFullName)
+    {
+        var normalized = receiverTypeFullName.Replace('+', '/');
+        return normalized.EndsWith("BossMod.BossComponent/TextHints", StringComparison.Ordinal)
+               || normalized.EndsWith("BossMod.BossComponent/GlobalHints", StringComparison.Ordinal);
+    }
+
+    /// <summary>提示容器的人话说明（写进抽取理由）。</summary>
+    public static string DescribeHintsContainer(string receiverTypeFullName) =>
+        receiverTypeFullName.EndsWith("GlobalHints", StringComparison.Ordinal)
+            ? "BossMod.GlobalHints（→ 提示区）"
+            : "BossMod.TextHints（→ 提示区）";
+
+    /// <summary>BossMod 自动循环选项注册：AddOption 的第 1 参是界面显示名。</summary>
+    public static bool IsAutorotationOptionDisplay(string typeFullName, string methodName) =>
+        methodName == "AddOption"
+        && StripGenericArgs(typeFullName) == "BossMod.Autorotation.RotationModuleDefinition/ConfigRef`1";
+
+    /// <summary>
+    ///     BossMod 选项的定义 / 内部名参数（预设 JSON 的键）：AddOption 第 8 参（internalNameOverride）、
+    ///     DefineRef.As 第 0 参——翻了会读不回旧配置。
+    /// </summary>
+    public static bool IsAutorotationIdentifier(string typeFullName, string methodName, int argIndex) =>
+        (methodName == "AddOption" && argIndex == 8 && IsAutorotationOptionDisplay(typeFullName, methodName))
+        || (methodName == "As" && argIndex == 0
+            && StripGenericArgs(typeFullName) == "BossMod.Autorotation.RotationModuleDefinition/DefineRef");
+
+    /// <summary>
+    ///     资源查表：<c>ResourceManager.GetString("Key")</c> 的参数是查表 key（翻了找不到资源，界面会显示 key 本身）。
+    /// </summary>
+    /// <remarks>
+    ///     2026-10-02 假阳性审计：强类型资源类（<c>UIStrings.get_Add_new_bait</c> 这类 getter）的 key 会经过
+    ///     <c>GetString</c> 的返回值一路“继承”到 UI 调用上，被当成界面文本（AutoHook 1455 条）。
+    ///     这里按「查表 key」处理：key 永远不翻，也不会跟着返回值传播。
+    /// </remarks>
+    public static bool IsResourceKeyCall(string typeFullName, string methodName) =>
+        typeFullName.EndsWith("ResourceManager", StringComparison.Ordinal)
+        && methodName is "GetString" or "GetObject" or "GetStream";
+
+    /// <summary>
+    ///     拿字符串当 ID / 数据用、但**不会画出来**的调用：既不该翻，也不该标 UI。
+    /// </summary>
+    /// <remarks>
+    ///     2026-10-02 假阳性审计：PushID / GetID / SetDragDropPayload / BeginChild 这些参数是控件 ID 或数据，
+    ///     没有任何像素显示它们；翻了没好处、还可能撞 ID。
+    ///     （TableSetupColumn / TabItem 这类确实会把标签画出来，不在名单里。）
+    /// </remarks>
+    private static readonly HashSet<string> NonTextCalls = new(StringComparer.Ordinal)
+    {
+        "PushID",
+        "PopID",
+        "GetID",
+        "SetDragDropPayload",
+        "AcceptDragDropPayload",
+        "SetClipboardText",
+        "BeginChild",
+        "BeginTabBar",
+        "SetNextWindowClass",
+        "GetProcAddress",
+    };
+
     /// <summary>
     ///     本地化查表调用：第 0 个参数是查表用的 key，翻了就查不到译文（跟字典键名同一类危险）。
     /// </summary>
@@ -312,6 +434,14 @@ internal static class UICallSemantics
         if (!typeFullName.Contains("ImGui", StringComparison.OrdinalIgnoreCase))
         {
             return false;
+        }
+
+        foreach (var lookalike in ImGuiLookalikeTypes)
+        {
+            if (typeFullName.Contains(lookalike, StringComparison.Ordinal))
+            {
+                return false;
+            }
         }
 
         if (PlainTextCalls.Contains(methodName))
@@ -349,6 +479,13 @@ internal static class UICallSemantics
             return true;
         }
 
+        // 集合遍历 / 取值：foreach 画字符串数组时，元素值要继承集合的值
+        // （GetEnumerator → get_Current；ToArray / ToList 同理；2026-10-02）
+        if (IsContainerAccessor(typeFullName, methodName))
+        {
+            return true;
+        }
+
         // Dalamud 新版绑定的 UTF-8 字符串构造器：AppendLiteral / AppendFormatted 之后
         // 字面量还在这个缓冲区里，等接住它的 UI 调用再判定（value 流继承入参）。
         if (typeFullName.Contains("ImU8String", StringComparison.Ordinal))
@@ -368,7 +505,11 @@ internal static class UICallSemantics
 
         if (typeFullName is "System.String" or "System.Text.StringBuilder")
         {
-            return StringProducerNames.Contains(methodName);
+            // StringBuilder 只是拼字符串：Append 不是「功能语境」（拿它当危险会让
+            // 同一字面量里界面+日志的组合全变灰，2026-10-02 LightlessSync 573 条）。
+            return StringProducerNames.Contains(methodName)
+                   || methodName is "Append" or "AppendLine" or "AppendFormat" or "AppendJoin"
+                       or "Insert" or "Remove" or "Clear" or "ToString";
         }
 
         return false;

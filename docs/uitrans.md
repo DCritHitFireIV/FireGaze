@@ -180,6 +180,26 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   就丢在这里。修法：夹掉的值进 `carried`，并入下一条指令推上来的值（通常正是同一栈槽的另一分支）。
 - 探针：`--trace <方法名>` 可以只看一个方法的逐条 IL；stdout 强制 UTF-8（否则批量落盘 JSON 按系统码页写，不是合法 UTF-8）。
 
+## 血教训：容器 / 集合 / 返回值的另一批漏抽（2026-10-02，top-100 专项）
+
+- **集合元素流**：`List/Dictionary/HashSet.Add("显示文本")` 以前一律当「功能语境」，但列表往往就是给用户看的
+  （更新日志、选项、提示）。现在：元素并进接收者（局部变量 / 字段），集合被遍历（GetEnumerator / get_Current / ToArray 当字符串加工）
+  才能把它带到 UI；字典 / set_Item 的第 0 参仍是 hardKey。
+- **`Stelem` 写回**：数组初始化 `dup; ldstr; stelem` 以前会多压一份数组（+1 漂移），
+  3 元素 Combo 只抽到第一个（FrenRider `Icon+Text` / `Icon Only`）。改成把合并后的值写回栈上的 dup 副本。
+- **简单字段 getter（`get_Main => _main`）**：对象初始化器 `Main = { "…" }` 靠它把元素并回自动属性字段；
+  不能让它把 FieldKey 带到所有 getter 调用结果上（会把字段拉进危险语境，AnoMech 场景名一度变灰），
+  只在「集合塞元素的接收者」处用 CallKeys 解析回字段。
+- **资源查表 key**：`ResourceManager.GetString("Key")` 的参数是 key（翻了查不到、界面空）。
+  以前强类型资源类（`UIStrings.get_X`）的 key 会跟着返回值流到 UI 被当成界面文本（全量 5k+ 条）——现已按 hardKey 处理。
+- **日志不污染**：日志文本翻译无害，不该把同一字面量拖进灰名单（FrenRider 一批就是这么变灰的）；
+  `StringBuilder.Append` 同理不再是危险语境。
+- **泛型键归一化**：调用点的类型名带泛型实参（`ConfigRef`1<MovementStrategy>`）、方法定义是开放泛型（`ConfigRef`1`），
+  不归一化会让整个方法变「去向不明」（BossMod AddOption 803 条）。`MethodKey` 现在先 `StripGenericArgs`。
+- **插件专用适配（top-100）**：BossMod `TextHints/GlobalHints.Add`（提示文本，→ DrawPlayerHints）与
+  `ConfigRef`1.AddOption` 第 1 参（选项显示名）直接标 UI；`AddOption` 第 8 参 / `DefineRef.As` 第 0 参
+  （预设 JSON 的键）硬键排除；资源型本地化（.resx）暂不支持改值（报告：`top100/analysis/sub-localization.md`）。
+
 ## 术语表的数据来源（2026-10-02 改正）
 
 - **不能从游戏数据读**：① 国服客户端的 exd 只有中文（`PlaceName.exh` 的 `Languages=[ChineseSimplified]`，压根没装英文原文）；

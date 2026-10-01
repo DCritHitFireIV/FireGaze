@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 
@@ -65,7 +66,8 @@ public static class UIStringExtractor
         bool IsThis,
         int RefLocal = -1,
         int RefArg = -1,
-        string? FieldKey = null)
+        string? FieldKey = null,
+        int FromLocal = -1)
     {
         /// <summary>
         ///     一个值里最多带多少项。字段是跨方法合并的，不封顶会组合爆炸
@@ -123,7 +125,7 @@ public static class UIStringExtractor
             AppendCapped(keys, b.CallKeys);
 
             var isArray = a.IsArray || b.IsArray;
-            return new V(ids, prms, keys, isArray, false, -1, -1, a.FieldKey ?? b.FieldKey);
+            return new V(ids, prms, keys, isArray, false, -1, -1, a.FieldKey ?? b.FieldKey, a.FromLocal >= 0 ? a.FromLocal : b.FromLocal);
         }
     }
 
@@ -183,6 +185,9 @@ public static class UIStringExtractor
         private readonly List<V> carried = [];
         private readonly List<MethodScan> methods = [];
         private readonly Dictionary<string, MethodScan> methodByKey = new(StringComparer.Ordinal);
+
+        /// <summary>简单字段 getter（<c>get_X => _x;</c>）→ 它读的字段（2026-10-02，集合初始化器与返回值链靠它接通）。</summary>
+        private readonly Dictionary<string, string> simpleFieldGetters = new(StringComparer.Ordinal);
         private readonly List<(int Literal, string Method, int Param)> passRefs = [];
         private readonly List<(string FromMethod, int FromParam, string ToMethod, int ToParam)> paramFlowRefs = [];
         private readonly List<(string Callee, string Method, int Param)> returnToParamRefs = [];
@@ -299,6 +304,10 @@ public static class UIStringExtractor
                 this.methods.Add(scan);
                 this.methodByKey[scan.Key] = scan;
             }
+
+            // 简单字段 getter（`get_Main => _main`）——对象初始化器里的 `Main = { "..." }` 靠它
+            // 把元素并回 `<Main>k__BackingField`（2026-10-02 AutoHook 更新日志）
+            this.RecordSimpleFieldGetter(scan);
 
             if (scan.Depths.Length != scan.Instructions.Count)
             {
@@ -662,13 +671,16 @@ public static class UIStringExtractor
                 case Code.Ldloc_1:
                 case Code.Ldloc_2:
                 case Code.Ldloc_3:
-                    Push(stack, LoadLocal(locals, code - Code.Ldloc_0));
+                    Push(stack, LoadLocal(locals, code - Code.Ldloc_0) with { FromLocal = code - Code.Ldloc_0 });
                     return;
 
                 case Code.Ldloc:
                 case Code.Ldloc_S:
-                    Push(stack, LoadLocal(locals, LocalIndex(instr)));
+                {
+                    var fromLocal = LocalIndex(instr);
+                    Push(stack, LoadLocal(locals, fromLocal) with { FromLocal = fromLocal });
                     return;
+                }
 
                 case Code.Stloc_0:
                 case Code.Stloc_1:
@@ -712,7 +724,7 @@ public static class UIStringExtractor
                 {
                     // 取参数地址：带着「这是谁的地址」的信息走，被调方法写完要能写回参数
                     var index = ParamIndex(scan, ArgIndex(instr));
-                    Push(stack, index >= 0 ? LoadArg(scan, args, index) with { RefArg = index } : V.Unknown);
+                    Push(stack, index >= 0 ? LoadArg(scan, args, index) with { RefArg = index } : V.This);
                     return;
                 }
 
@@ -743,9 +755,11 @@ public static class UIStringExtractor
                 case Code.Ldc_R8:
                 case Code.Ldnull:
                 case Code.Ldsfld:
-                    // 静态字段：第二遍开始读得懂存进去的值（标题 / 说明常这样中转）
+                    // 静态字段：第二遍开始读得懂存进去的值（标题 / 说明常这样中转）；
+                    // 集合类型的字段即使还没存过，也给 FieldKey——元素要靠它后续并进来（2026-10-02）
                     if (this.useFieldValues && instr.Operand is IField staticField
-                        && this.fieldValues.ContainsKey(FieldKey(staticField)))
+                        && (this.fieldValues.ContainsKey(FieldKey(staticField))
+                            || UICallSemantics.IsCollectionType(staticField.FieldSig?.Type?.FullName ?? string.Empty)))
                     {
                         Push(stack, V.FromField(FieldKey(staticField)));
                         return;
@@ -767,10 +781,11 @@ public static class UIStringExtractor
 
                 case Code.Ldfld:
                 {
-                    // 实例字段：同样在第二遍读得懂（记录 / 配置对象里的字符串）
+                    // 实例字段：同样在第二遍读得懂（记录 / 配置对象里的字符串）；集合字段见 Ldsfld 的注释
                     Pop(stack);
                     if (this.useFieldValues && instr.Operand is IField instanceField
-                        && this.fieldValues.ContainsKey(FieldKey(instanceField)))
+                        && (this.fieldValues.ContainsKey(FieldKey(instanceField))
+                            || UICallSemantics.IsCollectionType(instanceField.FieldSig?.Type?.FullName ?? string.Empty)))
                     {
                         Push(stack, V.FromField(FieldKey(instanceField)));
                         return;
@@ -905,7 +920,15 @@ public static class UIStringExtractor
                         }
                     }
 
-                    Push(stack, array);
+                    // 数组初始化是 `dup; ldstr; stelem` 的序列：栈上留着 dup 出的同一数组副本，
+                    // 把合并后的值**写回那份副本**，而不是再压一份（再压一份会 +1 漂移，
+                    // 2026-10-02 实测 FrenRider 的 3 元素 Combo 只抽到第一个、其余漂到 SetNextItemWidth 参数上）。
+                    // CFG 的栈效果里 stelem 本来就是「弹 3 压 0」，写回后两边一致。
+                    if (stack.Count > 0 && stack[^1].IsArray)
+                    {
+                        stack[^1] = array;
+                    }
+
                     return;
                 }
 
@@ -1143,6 +1166,113 @@ public static class UIStringExtractor
                 return;
             }
 
+            // ⓪a BossMod 提示容器：TextHints / GlobalHints.Add(...) 的文本由提示区画出来（2026-10-02）。
+            //     必须排在「集合塞元素」之前：List<T>.Add 会被下一条规则先吃掉。
+            if (UICallSemantics.IsHintsContainerStore(typeName, methodName)
+                && this.TryGetReceiverDeclaredType(scan, thisValue) is { } receiverType
+                && UICallSemantics.IsHintsContainerType(receiverType))
+            {
+                if (argValues.Length > 0)
+                {
+                    this.MarkUI(scan, argValues[0], UICallSemantics.DescribeHintsContainer(receiverType), preserveID: false);
+                }
+
+                Leave(V.Unknown);
+                return;
+            }
+
+            // ⓪ 集合塞元素：元素值不是「功能语境」——它可能稍后被遍历 / ToArray 画出来。
+            //    不标危险，并进接收者（局部变量 / 字段）的值里，等消费者判定（2026-10-02，
+            //    AutoHook 更新日志、BossMod 提示、各插件选项列表就是这么漏的）。
+            if (UICallSemantics.IsCollectionMutator(typeName, methodName))
+            {
+                if (UICallSemantics.IsCollectionKeyCall(typeName, methodName) && argValues.Length > 0
+                    && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
+                {
+                    this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
+                }
+
+                var collectionField = thisValue?.FieldKey;
+                if (collectionField is null && thisValue is not null)
+                {
+                    foreach (var call in thisValue.CallKeys)
+                    {
+                        if (this.simpleFieldGetters.TryGetValue(call, out var getterField))
+                        {
+                            collectionField = getterField;
+                            break;
+                        }
+                    }
+                }
+
+                var element = V.Unknown;
+                for (var i = argValues.Length - 1; i >= 0; i--)
+                {
+                    if (!UICallSemantics.IsStringLikeOrGeneric(paramTypes[i]))
+                    {
+                        continue;
+                    }
+
+                    // 字典 / set_Item：第 0 个是键名（上面已按 hardKey 处理），不当元素
+                    if (UICallSemantics.IsCollectionKeyCall(typeName, methodName) && i == 0)
+                    {
+                        continue;
+                    }
+
+                    element = argValues[i];
+                    break;
+                }
+
+                if (thisValue is not null && element.IsKnown)
+                {
+                    if (collectionField is { } fieldKey)
+                    {
+                        this.fieldValues.TryAdd(fieldKey, V.FromField(fieldKey));
+                        this.RecordFieldStore(scan, element, fieldKey);
+                    }
+                    else if (thisValue.RefLocal >= 0)
+                    {
+                        StoreLocal(locals, thisValue.RefLocal, element);
+                    }
+                    else if (thisValue.FromLocal >= 0)
+                    {
+                        StoreLocal(locals, thisValue.FromLocal, element);
+                    }
+                }
+
+                Leave(V.Unknown);
+                return;
+            }
+
+            // ⓪c BossMod 自动循环选项：AddOption 第 1 参是显示名；第 8 参是预设 JSON 内部名（绝不能翻）
+            if (UICallSemantics.IsAutorotationOptionDisplay(typeName, methodName))
+            {
+                if (argValues.Length > 1)
+                {
+                    this.MarkUI(scan, argValues[1], UICallSemantics.ShortTarget(typeName, methodName), preserveID: false);
+                }
+
+                if (argValues.Length > 8)
+                {
+                    this.MarkDangerous(scan, argValues[8], "BossMod 选项内部名（预设 JSON 键）", hardKey: true);
+                }
+
+                Leave(V.Unknown);
+                return;
+            }
+
+            // ⓪d BossMod 的 As(标识符, …)：第 0 参是预设 JSON 的键
+            if (methodName == "As" && UICallSemantics.IsAutorotationIdentifier(typeName, methodName, 0))
+            {
+                if (argValues.Length > 0)
+                {
+                    this.MarkDangerous(scan, argValues[0], "BossMod 选项内部名（预设 JSON 键）", hardKey: true);
+                }
+
+                Leave(V.Unknown);
+                return;
+            }
+
             // ① 字符串垫片 / 加工：结果继承入参
             if (UICallSemantics.IsStringProducer(typeName, methodName))
             {
@@ -1150,9 +1280,11 @@ public static class UIStringExtractor
 
                 // 插值处理器这类「先攒后取」的对象：ToStringAndClear / ToString 要连实例自身一起继承，
                 // 否则前面 AppendLiteral 攒下的字面量在最后一步被丢掉（2026-10-02，
-                // 实测 Accountant 的插值界面文本就是这么整条排掉的）。
+                // 实测 Accountant 的插值界面文本就是这么整条排掉的）；
+                // 集合遍历（GetEnumerator / get_Current / ToArray）同样靠实例把集合的值带到元素上。
                 if (!isVoid && IsInstance(callee) && thisValue is not null
-                    && IsStringLike(callee.MethodSig?.RetType.FullName ?? string.Empty))
+                    && (UICallSemantics.IsContainerAccessor(typeName, methodName)
+                        || UICallSemantics.IsStringLikeOrGeneric(callee.MethodSig?.RetType.FullName ?? string.Empty)))
                 {
                     produced = V.Merge(produced, thisValue);
                 }
@@ -1201,14 +1333,24 @@ public static class UIStringExtractor
                 return;
             }
 
-            // ③b 本地化查表调用：第 0 个参数是 key（可能在别的程序集里查表，数据流看不见）
-            if (UICallSemantics.IsLocalizationKeyCall(typeName, methodName))
+            // ③b 本地化 / 资源查表调用：第 0 个参数是 key（可能在别的程序集里查表，数据流看不见）
+            if (UICallSemantics.IsLocalizationKeyCall(typeName, methodName)
+                || UICallSemantics.IsResourceKeyCall(typeName, methodName))
             {
                 if (argValues.Length > 0 && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
                 {
                     this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
                 }
 
+                Leave(MakeResult(callee, argValues, isInternal: false));
+                return;
+            }
+
+            // 日志文本可以安全翻译（翻了只是日志变中文），不该让同一字面量被拖进灰名单：
+            // 不标危险，也不当 UI——只进日志的字符串自然落在「没有流向 UI 调用」里；
+            // 同时出现在界面和日志里的，就应该按界面文本翻（2026-10-02，FrenRider 一批就是这样变灰的）。
+            if (UICallSemantics.IsLogCall(typeName, methodName))
+            {
                 Leave(MakeResult(callee, argValues, isInternal: false));
                 return;
             }
@@ -1365,6 +1507,70 @@ public static class UIStringExtractor
                     fieldScan.ParamsToUIPreserveID[0] = true;
                 }
             }
+        }
+
+        /// <summary>
+        ///     还原「接收者值」的声明类型：用于区分泛型形参的容器实际是什么
+        ///     （BossMod 的提示容器实参类型是 <c>!0</c>，只能靠接收者声明类型认）。
+        /// </summary>
+        private string? TryGetReceiverDeclaredType(MethodScan scan, V? receiver)
+        {
+            if (receiver is null)
+            {
+                return null;
+            }
+
+            if (receiver.Params.Count > 0)
+            {
+                var sig = scan.Def?.MethodSig;
+                var index = receiver.Params[0];
+                if (sig is not null && index >= 0 && index < sig.Params.Count)
+                {
+                    return sig.Params[index].FullName;
+                }
+            }
+
+            if (receiver.IsThis)
+            {
+                return scan.Def?.DeclaringType?.FullName;
+            }
+
+            return null;
+        }
+
+        private void RecordSimpleFieldGetter(MethodScan scan)
+        {
+            var def = scan.Def;
+            if (def is null || def.IsStatic || def.MethodSig?.Params.Count != 0
+                || !def.Name.String.StartsWith("get_", StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            var ops = new List<Instruction>(scan.Instructions.Count);
+            foreach (var instr in scan.Instructions)
+            {
+                if (instr.OpCode.Code != Code.Nop)
+                {
+                    ops.Add(instr);
+                }
+            }
+
+            if (ops.Count != 3
+                || ops[0].OpCode.Code != Code.Ldarg_0
+                || ops[1].OpCode.Code != Code.Ldfld
+                || ops[1].Operand is not IField backing
+                || ops[2].OpCode.Code != Code.Ret)
+            {
+                return;
+            }
+
+            var fieldKey = FieldKey(backing);
+            this.simpleFieldGetters[scan.Key] = fieldKey;
+
+            // 让字段「可见」：getter 里的 ldfld 读得到 FromField，Ret 才会登记 fieldReturnRefs；
+            // 值本身为空壳，真正的元素由集合初始化器（Add）并进来
+            this.fieldValues.TryAdd(fieldKey, V.FromField(fieldKey));
         }
 
         private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false)
@@ -2255,7 +2461,24 @@ public static class UIStringExtractor
             $"{field.DeclaringType?.FullName}::{field.Name.String}";
 
         private static string MethodKey(string typeFullName, string methodName, int paramCount) =>
-            $"{typeFullName}::{methodName}/{paramCount}";
+            $"{StripGenericArgs(typeFullName)}::{methodName}/{paramCount}";
+
+        /// <summary>
+        ///     去掉泛型实参：调用点上读到的类型可能带实例实参（<c>ConfigRef`1&lt;MovementStrategy&gt;</c>），
+        /// 而方法定义处的键是开放泛型类型（<c>ConfigRef`1</c>）——不归一化会整个方法变成「去向不明」
+        /// （2026-10-02 BossMod 的 AddOption 803 条就是这么断的）。
+        /// </summary>
+        private static string StripGenericArgs(string typeFullName)
+        {
+            var tick = typeFullName.IndexOf('`');
+            if (tick < 0)
+            {
+                return typeFullName;
+            }
+
+            var angle = typeFullName.IndexOf('<', tick);
+            return angle < 0 ? typeFullName : typeFullName[..angle];
+        }
 
         private static string ShortKey(string key)
         {
@@ -2302,6 +2525,63 @@ public static class UIStringExtractor
         /// <summary>
         ///     肉眼能看出「可能是一句给人看的英文文本」：有英文、不是十六进制签名、不是 ImGui 内部 ID、不是已经是中文。
         /// </summary>
+        /// <summary>网址 / 路径（可显示，但翻了会弄坏链接或路径；2026-10-02 假阳性审计）。</summary>
+        private static bool LooksLikeURLOrPath(string text)
+        {
+            var trimmed = text.Trim();
+            if (trimmed.Length == 0)
+            {
+                return false;
+            }
+
+            if (trimmed.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+                || trimmed.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            // UNC（\\server）或从根开始的路径（/foo、\XCP）
+            if (trimmed.StartsWith("\\\\", StringComparison.Ordinal)
+                || trimmed.StartsWith("//", StringComparison.Ordinal)
+                || trimmed[0] is '\\' or '/')
+            {
+                return true;
+            }
+
+            // C:\ 这类盘符路径
+            return trimmed.Length > 2
+                   && char.IsAsciiLetter(trimmed[0])
+                   && trimmed[1] == ':'
+                   && trimmed[2] is '\\' or '/';
+        }
+
+        /// <summary>格式化模板：时间格式、.NET 格式占位符——可显示但不是自然语言。</summary>
+        private static bool LooksLikeFormatTemplate(string text)
+        {
+            // 转义的时间分隔符：hh\:mm\:ss
+            if (Regex.IsMatch(text, @"\\[^\w\s]"))
+            {
+                return true;
+            }
+
+            var stripped = Regex.Replace(text, @"\{[^}]*\}", " ");
+
+            // 日期/时间 token 全部拆掉后，没有剩下自然语言单词 → 纯格式串（ yyyyMMdd HH:mm / MM/dd/yyyy…）
+            if (Regex.IsMatch(stripped, "(yyyy|MM|dd|HH|hh|mm|ss|tt|D\\d|N\\d)"))
+            {
+                var tokensRemoved = Regex.Replace(stripped, "(yyyy|yyy|yy|MMMM|MMM|MM|dddd|ddd|dd|HH|hh|mm|ss|tt|D\\d|N\\d)", " ");
+                tokensRemoved = Regex.Replace(tokensRemoved, "[年月日时分秒]", " ");
+                if (!Regex.IsMatch(tokensRemoved, "[A-Za-z]{3,}"))
+                {
+                    return true;
+                }
+            }
+
+            // 去掉占位符后没有一个 3 字母以上的词，却带 : 或占位符 → 纯格式串（ID: / HP: / {0}）
+            return !Regex.IsMatch(stripped, "[A-Za-z]{3,}")
+                   && (text.Contains(':', StringComparison.Ordinal) || text.Contains('{', StringComparison.Ordinal));
+        }
+
         private static bool LooksTranslatable(string text)
         {
             if (text.Length < 2)
@@ -2317,6 +2597,24 @@ public static class UIStringExtractor
 
             // snake_case 小写标识符（base_search_popup 之类）基本是内部名
             if (text.Contains('_', StringComparison.Ordinal) && text.All(c => char.IsLower(c) || char.IsAsciiDigit(c) || c == '_'))
+            {
+                return false;
+            }
+
+            // 全大写 + 下划线的内部标识符（STEP_REORDER_ / SE_UI）
+            if (text.Contains('_', StringComparison.Ordinal) && text.All(c => char.IsUpper(c) || char.IsAsciiDigit(c) || c == '_'))
+            {
+                return false;
+            }
+
+            // 网址 / 路径：可显示，但翻了会弄坏链接或路径
+            if (LooksLikeURLOrPath(text))
+            {
+                return false;
+            }
+
+            // 格式化模板：hh\:mm\:ss / {0:D2}h:{1:D2}m / MM/dd/yyyy——不是给人读的句子
+            if (LooksLikeFormatTemplate(text))
             {
                 return false;
             }
