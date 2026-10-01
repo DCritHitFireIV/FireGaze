@@ -579,6 +579,18 @@ public static class UIStringExtractor
                 return;
             }
 
+            // ③b 本地化查表调用：第 0 个参数是 key（可能在别的程序集里查表，数据流看不见）
+            if (UICallSemantics.IsLocalizationKeyCall(typeName, methodName))
+            {
+                if (argValues.Length > 0 && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
+                {
+                    this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
+                }
+
+                Leave(MakeResult(callee, argValues, isInternal: false));
+                return;
+            }
+
             // ④ 危险语境
             if (UICallSemantics.IsDangerousCall(typeName, methodName))
             {
@@ -983,7 +995,7 @@ public static class UIStringExtractor
                         Original = literal.Text,
                         Context = literal.Context,
                         Role = UITextRole.Excluded,
-                        Reason = "当集合/字典的键名用（翻了会破坏查找）",
+                        Reason = "当集合/字典的键名用或本地化 key（翻了会破坏查找）",
                     });
                     continue;
                 }

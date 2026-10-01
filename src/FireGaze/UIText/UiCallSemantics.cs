@@ -227,6 +227,18 @@ internal static class UICallSemantics
     ///     InputFloat 的 format……这些字符串的绘制路径不处理 ##，所以绝不能给它们加 ###原文。
     ///     2026-10-01 实测：FriendlyFire 的输入框灰字显示成「角色名称（例如苹果汽水）###Character Name (e.g., Apple Soda)」就是这个原因。
     /// </remarks>
+    /// <summary>
+    ///     本地化查表调用：第 0 个参数是查表用的 key，翻了就查不到译文（跟字典键名同一类危险）。
+    /// </summary>
+    /// <remarks>
+    ///     这类方法常常在另一个程序集里（HaselTweaks 的 HaselCommon.TextService.Translate(key)、
+    ///     SimpleTweaks 的 Loc.Localize(key, fallback)），我们只扫主 DLL，看不见里面的字典查找，
+    ///     key 就会被当成普通界面文本翻掉（2026-10-01 实测：HaselTweaks 包里 32 条译文其实是它的 key）。
+    ///     这里按方法名兜底：Translate / Localize 这类名字 + 第 0 个参数是字符串 => 当 key 处理。
+    /// </remarks>
+    public static bool IsLocalizationKeyCall(string typeFullName, string methodName) => methodName is
+        "Translate" or "Localize" or "GetTranslation" or "TryGetTranslation" or "GetLocalized" or "Localized";
+
     public static bool UsesStringAsIDForArgument(string typeFullName, string methodName, int argIndex) => argIndex == 0;
 
     public static bool UsesStringAsID(string typeFullName, string methodName)
