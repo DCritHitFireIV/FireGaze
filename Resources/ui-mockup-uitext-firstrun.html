@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>插件汉化 — 首次一键汉化：选翻译方式 + 免费确认（还原图 v2，4 帧）</title>
+<style>
+  /* ImGui 深色界面还原图（与 Resources/ui-mockup-*.html 同一套变量）。
+     这两张是「一键汉化」第一次点时的居中弹窗：先选通道，选免费再确认一次。
+     实现：src/FireGaze/UI/UITextTab.cs 的 DrawPendingModals / DrawFirstRunModal / DrawFreeConfirmModal。
+     v2（两路盲评后）：默认选「现在就能用」的通道；密钥各通道独立；写配置延后到真正开始；免费确认带插件名与条数估计，
+     并给「改用大模型…」出口；主按钮上色；昂贵动作默认焦点在「取消」。 */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }
+  .frame { width: 820px; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; }
+  .window { width: 820px; min-height: 470px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px;
+            display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px;
+           color: var(--muted); border-bottom: 1px solid var(--border); }
+  /* 全屏模态：遮罩铺满整个视口（实现是 GetMainViewport().GetCenter() + 模态，挡住全部游戏输入） */
+  .dim { position: absolute; inset: 0; background: rgba(0,0,0,.45); }
+  .modal { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+           background: #232323; border: 1px solid #4f4f4f; border-radius: 3px; box-shadow: 0 10px 32px rgba(0,0,0,.55);
+           min-width: 520px; max-width: 620px; }
+  .mbar { background: #2e2e2e; border-bottom: 1px solid #454545; padding: 3px 10px; font-size: 14px; color: #dedede; }
+  .mbody { padding: 10px 14px 12px; }
+  .lead { font-size: 14px; color: #dcdcdc; margin: 0 0 10px; line-height: 1.55; }
+  .radio { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; margin: 7px 0; }
+  .dot { width: 15px; height: 15px; border: 1px solid #8a8a8a; border-radius: 50%; flex: none; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+  .dot.on { border-color: var(--accent); }
+  .dot.on::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .sub { margin: 2px 0 0 23px; }
+  .field { border: 1px solid #565656; border-radius: 3px; background: #1c1c1c; padding: 4px 8px; width: 360px; color: #7f7f7f; font-size: 14px; }
+  .hintline { font-size: 13px; margin: 4px 0 0 23px; }
+  .sep { height: 1px; background: var(--border); margin: 12px 0 10px; }
+  .btn { display: inline-block; padding: 4px 14px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; }
+  .btn.primary { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.disabled { opacity: .45; }
+  .good { color: var(--good); } .bad { color: var(--bad); } .warn { color: var(--warn); } .muted { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- 帧 1：首次点「一键汉化」——已存过 key：默认选中大模型（现在就能用） -->
+  <div class="frame">
+    <p class="caption">帧 1 · 首次点「一键汉化」：默认选「现在就能用」的通道；已有 key 时预选大模型，密钥行带「测试」</p>
+    <div class="window">
+      <div class="osbar">FireGaze — 插件汉化</div>
+      <div class="dim"></div>
+      <div class="modal" style="min-width:600px">
+        <div class="mbar">选择翻译方式</div>
+        <div class="mbody">
+          <p class="lead">「一键汉化」需要一个翻译方式。先花半分钟选好，之后随时能在「翻译设置…」里改。</p>
+
+          <div class="radio"><span class="dot on"></span><span>大模型（推荐）：速度最快、质量最好，用你自己的 API key</span></div>
+          <div class="sub">
+            <div class="hintline good">已保存 sk-****abcd；要换就直接在下面粘贴新的。</div>
+            <div style="display:flex; gap:8px; align-items:center; margin-top:4px">
+              <span class="field">粘贴新的以更换</span>
+              <span class="btn">测试</span>
+            </div>
+            <div class="hintline muted">key 只存在本机（加密保存），不会上传，也不会随任何提交发出去。</div>
+          </div>
+
+          <div class="radio"><span class="dot"></span><span>彩云小译：免费额度（新号 100 万字 / 一个月），一次能翻 50 条</span></div>
+
+          <div class="radio"><span class="dot"></span><span>免费 Google / MyMemory：不用 key，但很慢、随时可能被限流</span></div>
+
+          <p class="lead muted" style="font-size:13px; margin:10px 0 0">点「开始汉化」会翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。</p>
+          <div class="sep"></div>
+          <span class="btn primary" style="min-width:130px; text-align:center">开始汉化</span>
+          <span class="btn" style="margin-left:8px">翻译设置…</span>
+          <span class="btn" style="margin-left:8px">取消</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 帧 2：没有 key 的新手——默认落在免费（唯一开箱可用），主按钮可用 -->
+  <div class="frame">
+    <p class="caption">帧 2 · 没存过 key 的新手：默认落在免费通道（开箱可用）；选中的那一项才展开细节</p>
+    <div class="window" style="min-height:420px">
+      <div class="osbar">FireGaze — 插件汉化</div>
+      <div class="dim"></div>
+      <div class="modal" style="min-width:600px">
+        <div class="mbar">选择翻译方式</div>
+        <div class="mbody">
+          <p class="lead">「一键汉化」需要一个翻译方式。先花半分钟选好，之后随时能在「翻译设置…」里改。</p>
+
+          <div class="radio"><span class="dot"></span><span>大模型（推荐）：速度最快、质量最好，用你自己的 API key</span></div>
+          <div class="radio"><span class="dot"></span><span>彩云小译：免费额度（新号 100 万字 / 一个月），一次能翻 50 条</span></div>
+          <div class="radio"><span class="dot on"></span><span>免费 Google / MyMemory：不用 key，但很慢、随时可能被限流</span></div>
+
+          <p class="lead muted" style="font-size:13px; margin:10px 0 0">点「开始汉化」会翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。</p>
+          <div class="sep"></div>
+          <span class="btn primary" style="min-width:130px; text-align:center">开始汉化</span>
+          <span class="btn" style="margin-left:8px">翻译设置…</span>
+          <span class="btn" style="margin-left:8px">取消</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 帧 3：免费确认（第二张，居中；带插件名 + 条数估计 + 改用大模型的出口） -->
+  <div class="frame">
+    <p class="caption">帧 3 · 选了免费后的第二张居中确认：报「哪个插件、还有多少条、大约多久」，并给「改用大模型…」出口</p>
+    <div class="window" style="min-height:380px">
+      <div class="osbar">FireGaze — 插件汉化</div>
+      <div class="dim"></div>
+      <div class="modal" style="min-width:560px">
+        <div class="mbar">免费接口会慢很多</div>
+        <div class="mbody">
+          <p class="lead warn" style="margin-bottom:6px">「AnoMech」要走免费接口，会慢很多。</p>
+          <p class="lead" style="margin-bottom:4px">免费接口是一条一条翻的，每个词条约 0.8 秒；这个插件还有 208 条要翻，大约 3 分钟。</p>
+          <p class="lead" style="margin-bottom:4px">Google 免 key 端点随时可能限流（429），MyMemory 每天只有约 5000 词。</p>
+          <p class="lead muted" style="font-size:13px">大模型（几秒翻完）和彩云小译（免费额度）都快得多；「翻译设置…」里随时能改。</p>
+          <p class="lead muted" style="font-size:13px">点下去就会开始翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。</p>
+          <div class="sep"></div>
+          <span class="btn" style="min-width:170px; text-align:center">仍要使用免费接口</span>
+          <span class="btn" style="margin-left:8px">改用大模型…</span>
+          <span class="btn" style="margin-left:8px">取消</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 帧 4：选中需要 key 的通道但没填——主按钮置灰，就地说明 -->
+  <div class="frame">
+    <p class="caption">帧 4 · 选了大模型但没 key：主按钮置灰（悬停给提示），不会点下去才报错</p>
+    <div class="window" style="min-height:430px">
+      <div class="osbar">FireGaze — 插件汉化</div>
+      <div class="dim"></div>
+      <div class="modal" style="min-width:600px">
+        <div class="mbar">选择翻译方式</div>
+        <div class="mbody">
+          <p class="lead">「一键汉化」需要一个翻译方式。先花半分钟选好，之后随时能在「翻译设置…」里改。</p>
+
+          <div class="radio"><span class="dot on"></span><span>大模型（推荐）：速度最快、质量最好，用你自己的 API key</span></div>
+          <div class="sub">
+            <div style="display:flex; gap:8px; align-items:center">
+              <span class="field">粘贴大模型 API key（DeepSeek 就到 platform.deepseek.com → API keys 创建一个）</span>
+              <span class="btn">测试</span>
+            </div>
+            <div class="hintline muted">key 只存在本机（加密保存），不会上传，也不会随任何提交发出去。</div>
+          </div>
+
+          <div class="radio"><span class="dot"></span><span>彩云小译：免费额度（新号 100 万字 / 一个月），一次能翻 50 条</span></div>
+          <div class="radio"><span class="dot"></span><span>免费 Google / MyMemory：不用 key，但很慢、随时可能被限流</span></div>
+
+          <p class="lead muted" style="font-size:13px; margin:10px 0 0">点「开始汉化」会翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。</p>
+          <div class="sep"></div>
+          <span class="btn primary disabled" style="min-width:130px; text-align:center">开始汉化</span>
+          <span class="btn" style="margin-left:8px">翻译设置…</span>
+          <span class="btn" style="margin-left:8px">取消</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

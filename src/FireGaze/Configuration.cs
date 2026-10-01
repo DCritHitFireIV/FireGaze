@@ -253,4 +253,16 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("UITextAutoRepatch")]
     public bool UITextAutoRepatch { get; set; } = true;
+
+    /// <summary>
+    ///     用户是否做过翻译通道选择（首次点「一键汉化」时先让选一次，不替用户默默用免费接口）。
+    /// </summary>
+    [JsonProperty("UITextChannelChosen")]
+    public bool UITextChannelChosen { get; set; }
+
+    /// <summary>
+    ///     是否已经确认过「免费接口很慢」——确认过才允许直接用免费通道跑。
+    /// </summary>
+    [JsonProperty("UITextFreeWarned")]
+    public bool UITextFreeWarned { get; set; }
 }

@@ -98,6 +98,30 @@ internal sealed class UITextTab
     private Run? run;
     private bool rowsDirty = true;
 
+    /// <summary>首次点「一键汉化」时的待办：先选通道，选完才开始（免费通道还要再确认一次）。</summary>
+    private sealed class PendingStart
+    {
+        public InstalledPluginEntry Entry = null!;
+        public bool AwaitingFreeConfirm;
+
+        /// <summary>0 = 大模型，1 = 彩云小译，2 = 免费 Google / MyMemory。</summary>
+        public int Choice;
+
+        /// <summary>当前选中通道的密钥输入（每个通道各自一份，切单选就清空——两通道共用会把 key 存成 token）。</summary>
+        public string SecretInput = string.Empty;
+
+        public string TestStatus = string.Empty;
+        public bool TestOk;
+        public bool TestRunning;
+
+        /// <summary>试连的代际号：切单选 / 重开后旧请求的结果不许回写。</summary>
+        public int TestGeneration;
+    }
+
+    private PendingStart? pendingStart;
+    private bool pendingNeedsOpen;
+    private string firstRunError = string.Empty;
+
     public UITextTab(
         Plugin plugin,
         UITextEditorWindow editor,
@@ -120,6 +144,7 @@ internal sealed class UITextTab
         this.DrawToolbar();
         this.DrawRunningBar();
         this.DrawList();
+        this.DrawPendingModals();
     }
 
     // ── 工具条 ───────────────────────────────────────────────────────────
@@ -179,7 +204,7 @@ internal sealed class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("翻译通道、API key、灰名单口径、插件更新后是否自动重打——都在这里改。");
+            ImGui.SetTooltip("翻译方式、API key、灰名单口径、插件更新后是否自动重打——都在这里改。");
         }
 
         if (this.index is null)
@@ -397,9 +422,7 @@ internal sealed class UITextTab
             ImGui.BeginDisabled(busy || editorOpen);
             if (needsAction)
             {
-                ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.23f, 0.37f, 0.55f, 1f));
-                ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.28f, 0.44f, 0.64f, 1f));
-                ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.20f, 0.33f, 0.50f, 1f));
+                UiHelpers.PushPrimaryButton();
             }
 
             if (ImGui.Button("一键汉化"))
@@ -409,7 +432,7 @@ internal sealed class UITextTab
 
             if (needsAction)
             {
-                ImGui.PopStyleColor(3);
+                UiHelpers.PopPrimaryButton();
             }
 
             ImGui.EndDisabled();
@@ -545,7 +568,7 @@ internal sealed class UITextTab
         if (note.CanOpenSettings)
         {
             ImGui.SameLine();
-            if (ImGui.Button("打开翻译设置###UITextOpenSettings"))
+            if (ImGui.Button("翻译设置…###UITextOpenSettings"))
             {
                 this.settings.IsOpen = true;
                 this.settings.BringToFront();
@@ -617,6 +640,57 @@ internal sealed class UITextTab
     }
 
     private void StartOneClick(InstalledPluginEntry entry)
+    {
+        if (this.run is not null)
+        {
+            return;
+        }
+
+        var config = this.plugin.Config;
+
+        // 第一次点：先让用户选一次翻译方式（不替他用最慢的免费接口）
+        if (!config.UITextChannelChosen)
+        {
+            this.OpenFirstRun(entry);
+            return;
+        }
+
+        // 选了免费：先确认过一次「知道它慢」
+        if (IsFreeChannel(config.UITextChannel) && !config.UITextFreeWarned)
+        {
+            this.pendingStart = new PendingStart { Entry = entry, AwaitingFreeConfirm = true, Choice = 2 };
+            this.pendingNeedsOpen = true;
+            return;
+        }
+
+        this.StartOneClickCore(entry);
+    }
+
+    private static bool IsFreeChannel(string channel) => channel is "auto" or "google" or "mymemory";
+
+    private void OpenFirstRun(InstalledPluginEntry entry)
+    {
+        var config = this.plugin.Config;
+        var hasLlmKey = DPAPI.UnprotectFromBase64(config.UITextLLMKeyProtected) is not null;
+        var hasCaiyunKey = DPAPI.UnprotectFromBase64(config.UITextCaiyunKeyProtected) is not null;
+
+        // 默认选一个「现在就能用」的：存了 key 才预选大模型，否则预选免费（新手没有 key，预选大模型必然卡住）
+        this.pendingStart = new PendingStart
+        {
+            Entry = entry,
+            Choice = config.UITextChannel switch
+            {
+                "caiyun" => 1,
+                "google" or "mymemory" => 2,
+                "llm" => 0,
+                _ => hasLlmKey ? 0 : hasCaiyunKey ? 1 : 2,
+            },
+        };
+        this.firstRunError = string.Empty;
+        this.pendingNeedsOpen = true;
+    }
+
+    private void StartOneClickCore(InstalledPluginEntry entry)
     {
         if (this.run is not null)
         {
@@ -812,6 +886,423 @@ internal sealed class UITextTab
             Plugin.Log?.Warning(e, "[内部文本] 一键汉化出错");
             this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = "出错：" + e.Message + "（点右侧「一键汉化」可以重来一次）" });
         }
+    }
+
+    // ── 首次运行：选翻译方式 / 免费确认 ─────────────────────────────
+
+    private void DrawPendingModals()
+    {
+        var pending = this.pendingStart;
+        if (pending is null)
+        {
+            return;
+        }
+
+        if (pending.AwaitingFreeConfirm)
+        {
+            this.DrawFreeConfirmModal(pending);
+        }
+        else
+        {
+            this.DrawFirstRunModal(pending);
+        }
+    }
+
+    private void DrawFirstRunModal(PendingStart pending)
+    {
+        const string Name = "选择翻译方式###UITextFirstRun";
+        if (this.pendingNeedsOpen)
+        {
+            ImGui.OpenPopup(Name);
+            this.pendingNeedsOpen = false;
+        }
+
+        ImGui.SetNextWindowSizeConstraints(new Vector2(560, 0), new Vector2(660, float.MaxValue));
+        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
+        {
+            // 被 Esc / 点到外面关掉 = 取消（下次点「一键汉化」再问）
+            this.notes[pending.Entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已取消，没有开始翻译。" };
+            this.pendingStart = null;
+            return;
+        }
+
+        ImGui.TextWrapped("「一键汉化」需要一个翻译方式。先花半分钟选好，之后随时能在「翻译设置…」里改。");
+        ImGui.Spacing();
+
+        var config = this.plugin.Config;
+        if (ImGui.RadioButton("大模型（推荐）：速度最快、质量最好，用你自己的 API key", pending.Choice == 0) && pending.Choice != 0)
+        {
+            pending.Choice = 0;
+            pending.SecretInput = string.Empty;
+            pending.TestStatus = string.Empty;
+            pending.TestGeneration++;
+            this.firstRunError = string.Empty;
+        }
+
+        if (pending.Choice == 0)
+        {
+            ImGui.Indent(24f);
+            this.DrawSecretRow(pending, "llm", config.UITextLLMKeyProtected, "粘贴大模型 API key（DeepSeek 就到 platform.deepseek.com → API keys 创建一个）");
+            ImGui.Unindent(24f);
+        }
+
+        if (ImGui.RadioButton("彩云小译：免费额度（新号 100 万字 / 一个月），一次能翻 50 条", pending.Choice == 1) && pending.Choice != 1)
+        {
+            pending.Choice = 1;
+            pending.SecretInput = string.Empty;
+            pending.TestStatus = string.Empty;
+            pending.TestGeneration++;
+            this.firstRunError = string.Empty;
+        }
+
+        if (pending.Choice == 1)
+        {
+            ImGui.Indent(24f);
+            this.DrawSecretRow(pending, "caiyun", config.UITextCaiyunKeyProtected, "粘贴彩云小译 token（应用管理 → 右边「管理」→「访问控制」）");
+            ImGui.Unindent(24f);
+        }
+
+        if (ImGui.RadioButton("免费 Google / MyMemory：不用 key，但很慢、随时可能被限流", pending.Choice == 2) && pending.Choice != 2)
+        {
+            pending.Choice = 2;
+            pending.SecretInput = string.Empty;
+            pending.TestStatus = string.Empty;
+            pending.TestGeneration++;
+            this.firstRunError = string.Empty;
+        }
+
+        if (this.firstRunError.Length > 0)
+        {
+            UiHelpers.ColoredWrapped(UiHelpers.Bad, this.firstRunError);
+        }
+
+        ImGui.Spacing();
+        ImGui.TextDisabled("点「开始汉化」会翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。");
+        ImGui.Separator();
+
+        var ready = pending.Choice switch
+        {
+            0 => DPAPI.UnprotectFromBase64(config.UITextLLMKeyProtected) is not null || pending.SecretInput.Trim().Length > 0,
+            1 => DPAPI.UnprotectFromBase64(config.UITextCaiyunKeyProtected) is not null || pending.SecretInput.Trim().Length > 0,
+            _ => true,
+        };
+
+        ImGui.BeginDisabled(!ready);
+        UiHelpers.PushPrimaryButton();
+        if (ImGui.Button("开始汉化", new Vector2(140, 0)))
+        {
+            this.ConfirmFirstRun(pending);
+        }
+
+        UiHelpers.PopPrimaryButton();
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(ready ? "按上面选好的通道开始汉化。" : "先把上面选中通道的 key / token 填上。");
+        }
+
+        ImGui.SetItemDefaultFocus();
+
+        ImGui.SameLine();
+        if (ImGui.Button("翻译设置…", new Vector2(120, 0)))
+        {
+            this.pendingStart = null;
+            ImGui.CloseCurrentPopup();
+            this.notes[pending.Entry.InternalName] = new RowNote
+            {
+                Kind = NoteKind.Info,
+                Text = "已打开翻译设置：选好通道后，回到这一行再点一次「一键汉化」就行。",
+            };
+            this.settings.IsOpen = true;
+            this.settings.BringToFront();
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("取消", new Vector2(90, 0)))
+        {
+            this.pendingStart = null;
+            ImGui.CloseCurrentPopup();
+            this.notes[pending.Entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已取消，没有开始翻译。" };
+        }
+
+        ImGui.EndPopup();
+    }
+
+    /// <summary>一行「已保存 / 粘贴新的」密钥输入（首次运行弹窗里用）。</summary>
+    private void DrawSecretRow(PendingStart pending, string id, string currentProtected, string hint)
+    {
+        var existing = DPAPI.UnprotectFromBase64(currentProtected);
+        if (existing is null)
+        {
+            ImGui.SetNextItemWidth(360);
+            ImGui.InputTextWithHint("###firstrun-" + id, hint, ref pending.SecretInput, 256, ImGuiInputTextFlags.Password);
+        }
+        else
+        {
+            UiHelpers.ColoredText(UiHelpers.Good, "已保存 " + DPAPI.Mask(existing) + "；要换就直接在下面粘贴新的。");
+            ImGui.SetNextItemWidth(360);
+            ImGui.InputTextWithHint("###firstrun-" + id, "粘贴新的以更换", ref pending.SecretInput, 256, ImGuiInputTextFlags.Password);
+        }
+
+        ImGui.SameLine();
+        ImGui.BeginDisabled(pending.TestRunning);
+        if (ImGui.Button("测试###firstrun-test-" + id))
+        {
+            this.StartFirstRunTest(pending);
+        }
+
+        ImGui.EndDisabled();
+        if (pending.TestStatus.Length > 0)
+        {
+            UiHelpers.ColoredText(pending.TestOk ? UiHelpers.Good : UiHelpers.Bad, pending.TestStatus);
+        }
+
+        ImGui.TextDisabled("key 只存在本机（加密保存），不会上传，也不会随任何提交发出去。");
+    }
+
+    /// <summary>拿还没保存的那份 key/token 试翻一条，省得翻译跑起来才发现填错。</summary>
+    private void StartFirstRunTest(PendingStart pending)
+    {
+        if (pending.TestRunning)
+        {
+            return;
+        }
+
+        var config = this.plugin.Config;
+        var probe = new Configuration
+        {
+            UITextChannel = pending.Choice == 0 ? "llm" : "caiyun",
+            UITextLLMProvider = config.UITextLLMProvider,
+            UITextLLMBaseURL = config.UITextLLMBaseURL,
+            UITextLLMModel = config.UITextLLMModel,
+            UITextLLMKeyProtected = config.UITextLLMKeyProtected,
+            UITextCaiyunKeyProtected = config.UITextCaiyunKeyProtected,
+        };
+
+        var input = pending.SecretInput.Trim();
+        if (input.Length > 0)
+        {
+            var protectedValue = DPAPI.ProtectToBase64(input);
+            if (pending.Choice == 0)
+            {
+                probe.UITextLLMKeyProtected = protectedValue;
+            }
+            else
+            {
+                probe.UITextCaiyunKeyProtected = protectedValue;
+            }
+        }
+
+        var channel = UITextChannelFactory.Create(probe, out var error);
+        if (channel is null)
+        {
+            pending.TestOk = false;
+            pending.TestStatus = error ?? "通道不可用。";
+            return;
+        }
+
+        pending.TestRunning = true;
+        pending.TestOk = false;
+        pending.TestStatus = "测试中…";
+        pending.TestGeneration++;
+        var generation = pending.TestGeneration;
+        var items = new List<UITextTranslateItem> { new("Settings", "test") };
+        var probeChannel = channel;
+        _ = Task.Run(async () =>
+        {
+            void Write(bool ok, string status)
+            {
+                // 切单选 / 重开弹窗后旧的试连结果不许回写到新的那一行
+                if (pending.TestGeneration == generation)
+                {
+                    pending.TestOk = ok;
+                    pending.TestStatus = status;
+                    pending.TestRunning = false;
+                }
+            }
+
+            try
+            {
+                var result = await probeChannel.TranslateAsync(items, null, CancellationToken.None).ConfigureAwait(false);
+                if (result.Translated.TryGetValue("Settings", out var text) && !string.IsNullOrWhiteSpace(text))
+                {
+                    Write(true, $"连接正常（{probeChannel.Name}）：Settings → {text}");
+                }
+                else
+                {
+                    Write(false, "连接失败：" + (result.Error ?? "没有返回译文"));
+                }
+            }
+            catch (Exception e)
+            {
+                Write(false, "连接失败：" + e.Message);
+            }
+        });
+    }
+
+    private void ConfirmFirstRun(PendingStart pending)
+    {
+        // 只校验，不写盘：真正写配置推到「确认过免费很慢」或直接开始时（取消不能静默改通道）
+        if (pending.Choice == 0
+            && DPAPI.UnprotectFromBase64(this.plugin.Config.UITextLLMKeyProtected) is null
+            && pending.SecretInput.Trim().Length == 0)
+        {
+            this.firstRunError = "还没填大模型 API key：把 key 粘到上面，或改选「免费 Google / MyMemory」。";
+            return;
+        }
+
+        if (pending.Choice == 1
+            && DPAPI.UnprotectFromBase64(this.plugin.Config.UITextCaiyunKeyProtected) is null
+            && pending.SecretInput.Trim().Length == 0)
+        {
+            this.firstRunError = "还没填彩云小译 token：把 token 粘到上面，或改选「免费 Google / MyMemory」。";
+            return;
+        }
+
+        this.firstRunError = string.Empty;
+        if (pending.Choice == 2 && !this.plugin.Config.UITextFreeWarned)
+        {
+            pending.AwaitingFreeConfirm = true;
+            this.pendingNeedsOpen = true;
+            ImGui.CloseCurrentPopup();
+            return;
+        }
+
+        this.ApplyPendingChoice(pending);
+        this.pendingStart = null;
+        ImGui.CloseCurrentPopup();
+        this.StartOneClickCore(pending.Entry);
+    }
+
+    /// <summary>把弹窗里选好的通道写进配置（只在真正要开始时调）。</summary>
+    private void ApplyPendingChoice(PendingStart pending)
+    {
+        var config = this.plugin.Config;
+        var input = pending.SecretInput.Trim();
+        if (pending.Choice == 0)
+        {
+            if (input.Length > 0)
+            {
+                var protectedValue = DPAPI.ProtectToBase64(input);
+                if (protectedValue.Length > 0)
+                {
+                    config.UITextLLMKeyProtected = protectedValue;
+                }
+            }
+
+            config.UITextChannel = "llm";
+            if (string.IsNullOrWhiteSpace(config.UITextLLMBaseURL))
+            {
+                config.UITextLLMBaseURL = "https://api.deepseek.com/v1";
+            }
+
+            if (string.IsNullOrWhiteSpace(config.UITextLLMModel))
+            {
+                config.UITextLLMModel = "deepseek-flash";
+            }
+        }
+        else if (pending.Choice == 1)
+        {
+            if (input.Length > 0)
+            {
+                var protectedValue = DPAPI.ProtectToBase64(input);
+                if (protectedValue.Length > 0)
+                {
+                    config.UITextCaiyunKeyProtected = protectedValue;
+                }
+            }
+
+            config.UITextChannel = "caiyun";
+        }
+        else
+        {
+            config.UITextChannel = "google";
+        }
+
+        config.UITextChannelChosen = true;
+        this.plugin.SaveConfig();
+    }
+
+    private void DrawFreeConfirmModal(PendingStart pending)
+    {
+        const string Name = "免费接口会慢很多###UITextFreeConfirm";
+        if (this.pendingNeedsOpen)
+        {
+            ImGui.OpenPopup(Name);
+            this.pendingNeedsOpen = false;
+        }
+
+        ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(620, float.MaxValue));
+        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
+        {
+            this.notes[pending.Entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已取消，没有开始翻译。" };
+            this.pendingStart = null;
+            return;
+        }
+
+        UiHelpers.ColoredWrapped(UiHelpers.Warn, $"「{pending.Entry.DisplayName}」要走免费接口，会慢很多。");
+        var estimate = this.FreeEstimate(pending);
+        ImGui.TextWrapped(estimate.Length > 0
+            ? $"免费接口是一条一条翻的，每个词条约 0.8 秒；{estimate}"
+            : "免费接口是一条一条翻的，每个词条约 0.8 秒。");
+        ImGui.TextWrapped("Google 免 key 端点随时可能限流（429），MyMemory 每天只有约 5000 词。");
+        ImGui.Spacing();
+        ImGui.TextDisabled("大模型（几秒翻完）和彩云小译（免费额度）都快得多；「翻译设置…」里随时能改。");
+        ImGui.TextDisabled("点下去就会开始翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。");
+        ImGui.Separator();
+        if (ImGui.Button("仍要使用免费接口", new Vector2(170, 0)))
+        {
+            this.plugin.Config.UITextFreeWarned = true;
+            this.ApplyPendingChoice(pending);
+            this.pendingStart = null;
+            ImGui.CloseCurrentPopup();
+            this.StartOneClickCore(pending.Entry);
+            return;
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("改用大模型…", new Vector2(130, 0)))
+        {
+            pending.Choice = 0;
+            pending.SecretInput = string.Empty;
+            pending.TestStatus = string.Empty;
+            pending.TestGeneration++;
+            pending.AwaitingFreeConfirm = false;
+            this.pendingNeedsOpen = true;
+            ImGui.CloseCurrentPopup();
+            return;
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("取消", new Vector2(90, 0)))
+        {
+            this.pendingStart = null;
+            ImGui.CloseCurrentPopup();
+            this.notes[pending.Entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已取消，没有开始翻译。" };
+            return;
+        }
+
+        // 昂贵动作的默认焦点放「取消」：按 Enter 不会一头撞上免费接口
+        ImGui.SetItemDefaultFocus();
+        ImGui.EndPopup();
+    }
+
+    /// <summary>按包里的剩余条数估一下免费通道要多久（只在有包时给）。</summary>
+    private string FreeEstimate(PendingStart pending)
+    {
+        if (this.rows.TryGetValue(pending.Entry.InternalName, out var info) && info.HasPack)
+        {
+            var remaining = Math.Max(0, info.Total - info.Skipped - info.Translated);
+            if (remaining > 0)
+            {
+                var minutes = Math.Max(1, (int)Math.Ceiling(remaining * 0.8 / 60.0));
+                return $"这个插件还有 {remaining} 条要翻，大约 {minutes} 分钟。";
+            }
+        }
+
+        return string.Empty;
     }
 
     private void FinishRun(Run run, RowNote note)

@@ -41,27 +41,31 @@ public static class UIStringExtractor
     }
 
     /// <summary>
-    ///     抽象值：一个字符串值由「哪些字面量 + 哪些方法参数 + 哪个本程序集方法的返回值」拼出来。
+    ///     抽象值：一个字符串值由「哪些字面量 + 哪些方法参数 + 哪些本程序集方法的返回值」拼出来。
     /// </summary>
+    /// <remarks>
+    ///     <see cref="CallKeys" /> 可以有好几个：字符串加工链（<c>ImU8String.op_Implicit</c> / <c>String.Concat</c> / 插值）
+    ///     会把入参的调用键一路带下去，只留一个的话 <c>ImGui.Text(ImU8String.op_Implicit(x.Name))</c> 这种
+    ///     经过一层垫片就把 <c>x.Name</c> 丢了（2026-10-01：AnoMech / BazookaLens 的标题类文本就是这么漏的）。
+    /// </remarks>
     private sealed record V(
         List<int> IDs,
         List<int> Params,
-        string? CallKey,
-        bool CallIsInternal,
+        List<string> CallKeys,
         bool IsArray,
         bool IsThis,
         int RefLocal = -1,
         int RefArg = -1)
     {
-        public static readonly V Unknown = new([], [], null, false, false, false);
+        public static readonly V Unknown = new([], [], [], false, false);
 
-        public static V FromLiteral(int id) => new([id], [], null, false, false, false);
+        public static V FromLiteral(int id) => new([id], [], [], false, false);
 
-        public static V FromParam(int index) => new([], [index], null, false, false, false);
+        public static V FromParam(int index) => new([], [index], [], false, false);
 
-        public static V This => new([], [], null, false, false, true);
+        public static V This => new([], [], [], false, true);
 
-        public bool IsKnown => this.IDs.Count > 0 || this.Params.Count > 0 || this.CallKey is not null;
+        public bool IsKnown => this.IDs.Count > 0 || this.Params.Count > 0 || this.CallKeys.Count > 0;
 
         public static V Merge(V a, V b)
         {
@@ -79,8 +83,17 @@ public static class UIStringExtractor
             ids.AddRange(b.IDs);
             var prms = new List<int>(a.Params);
             prms.AddRange(b.Params);
+            var keys = new List<string>(a.CallKeys);
+            foreach (var key in b.CallKeys)
+            {
+                if (!keys.Contains(key))
+                {
+                    keys.Add(key);
+                }
+            }
+
             var isArray = a.IsArray || b.IsArray;
-            return new V(ids, prms, a.CallKey ?? b.CallKey, a.CallIsInternal || b.CallIsInternal, isArray, false);
+            return new V(ids, prms, keys, isArray, false);
         }
     }
 
@@ -123,6 +136,7 @@ public static class UIStringExtractor
         public string[] ParamsDangerousTarget = [];
         public bool[] ParamsKey = [];
         public bool ReturnsToUI;
+        public string ReturnsToUITarget = string.Empty;
         public bool ReturnsDangerous;
     }
     private sealed class Scanner
@@ -139,6 +153,18 @@ public static class UIStringExtractor
         private readonly List<(string Callee, string Caller)> returnToReturnRefs = [];
         private readonly List<(int Literal, string Method)> literalReturns = [];
 
+        /// <summary>
+        ///     接口 / 基类虚方法的键 → 本程序集里的实现方法键。
+        ///     <c>IZone.get_Name</c> 自己没有方法体，调用点上拿到的键在 <see cref="methodByKey" /> 里找不到，
+        ///     拆解流就断了（2026-10-01：AnoMech 的场景名 / 区域名整批漏掉）。
+        /// </summary>
+        private readonly Dictionary<string, List<string>> dispatchAliases = new(StringComparer.Ordinal);
+
+        /// <summary>调用点上「这个值进了 UI」但方法可能还没扫描到的记录，建完别名后统一落实成 ReturnsToUI。</summary>
+        private readonly List<(string Key, string Target)> returnToUIRequests = [];
+
+        private readonly Dictionary<string, TypeDef> typesByName = new(StringComparer.Ordinal);
+
         public Scanner(ModuleDefMD module, string path)
         {
             this.module = module;
@@ -149,6 +175,11 @@ public static class UIStringExtractor
         {
             foreach (var type in this.module.GetTypes())
             {
+                if (type.FullName is { Length: > 0 } fullName)
+                {
+                    this.typesByName.TryAdd(fullName, type);
+                }
+
                 foreach (var method in type.Methods)
                 {
                     if (!method.HasBody || method.Body.Instructions.Count == 0)
@@ -160,6 +191,10 @@ public static class UIStringExtractor
                 }
             }
 
+            // 扫描时只记原始键（别名表还没建）；先把接口 / 虚方法展开到实现，再跑不动点
+            this.BuildDispatchAliases();
+            this.ExpandFlowRefs();
+            this.ApplyReturnToUIRequests();
             this.SolveFlow();
             this.Classify();
             return this.BuildResult();
@@ -351,6 +386,12 @@ public static class UIStringExtractor
                                     this.literals[id].UITarget = label;
                                 }
                             }
+
+                            // 赋给「给人看的字段」的也可能是一个方法的返回值
+                            foreach (var key in value.CallKeys)
+                            {
+                                this.returnToUIRequests.Add((key, label));
+                            }
                         }
                     }
 
@@ -367,7 +408,7 @@ public static class UIStringExtractor
 
                 case Code.Newarr:
                     Pop(stack);
-                    Push(stack, new V([], [], null, false, true, false));
+                    Push(stack, new V([], [], [], true, false));
                     return;
 
                 case Code.Ldelem_Ref:
@@ -390,6 +431,13 @@ public static class UIStringExtractor
                         // 字符串数组初始化：把元素并进数组值里，等数组交给 UI 调用时统一上报
                         array.IDs.AddRange(value.IDs);
                         array.Params.AddRange(value.Params);
+                        foreach (var key in value.CallKeys)
+                        {
+                            if (!array.CallKeys.Contains(key))
+                            {
+                                array.CallKeys.Add(key);
+                            }
+                        }
                     }
 
                     Push(stack, array);
@@ -463,8 +511,9 @@ public static class UIStringExtractor
                             this.literalReturns.Add((id, scan.Key));
                         }
 
-                        if (returned.CallIsInternal && returned.CallKey is { } calleeKey)
+                        foreach (var calleeKey in returned.CallKeys)
                         {
+                            // 返回了别的方法的返回值：那个方法的返回值也会进 UI（键在不动点阶段展开成实现）
                             this.returnToReturnRefs.Add((calleeKey, scan.Key));
                         }
                     }
@@ -524,8 +573,15 @@ public static class UIStringExtractor
             }
 
             // 构造函数：当作对象初始化，参数不直接进 UI
+            // 例外：Dalamud 窗口基类的标题（`call Window::.ctor(string)` 在子类构造函数里是 call，不在这条路上，
+            // 但插件直接 `new Window("标题")` 时是 newobj）。
             if (instr.OpCode.Code == Code.Newobj)
             {
+                if (UICallSemantics.IsWindowTitleCall(typeName, methodName) && argValues.Length > 0)
+                {
+                    this.MarkUI(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), preserveID: true);
+                }
+
                 Push(stack, V.Unknown);
                 return;
             }
@@ -565,14 +621,6 @@ public static class UIStringExtractor
                     var preserveThisArgument = preserveID
                                                && UICallSemantics.UsesStringAsIDForArgument(typeName, methodName, i);
                     this.MarkUI(scan, argValues[i], target, preserveThisArgument);
-                    if (argValues[i].CallIsInternal && argValues[i].CallKey is { } called)
-                    {
-                        // 本程序集方法的返回值直接进了 UI 调用 ⇒ 那个方法的返回值会进 UI
-                        if (this.methodByKey.TryGetValue(called, out var calledScan))
-                        {
-                            calledScan.ReturnsToUI = true;
-                        }
-                    }
                 }
 
                 Leave(MakeResult(callee, argValues, isInternal: false));
@@ -639,9 +687,13 @@ public static class UIStringExtractor
                         this.paramFlowRefs.Add((scan.Key, param, key, i));
                     }
 
-                    if (argValues[i].CallIsInternal && argValues[i].CallKey is { } sub)
+                    if (argValues[i].CallKeys.Count > 0)
                     {
-                        this.returnToParamRefs.Add((sub, key, i));
+                        // 这个参数本身是某个方法的返回值 ⇒ 那个方法的返回值会流进这个参数
+                        foreach (var sub in argValues[i].CallKeys)
+                        {
+                            this.returnToParamRefs.Add((sub, key, i));
+                        }
                     }
                 }
 
@@ -710,6 +762,13 @@ public static class UIStringExtractor
                     }
                 }
             }
+
+            // 这个值本身是某个方法的返回值（可能经字符串加工带下来）
+            // ⇒ 那个方法的返回值会进 UI（接口键在 BuildDispatchAliases 之后统一展开到实现）
+            foreach (var key in value.CallKeys)
+            {
+                this.returnToUIRequests.Add((key, target));
+            }
         }
 
         private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false)
@@ -760,15 +819,329 @@ public static class UIStringExtractor
         {
             var ids = new List<int>();
             var prms = new List<int>();
+            var keys = new List<string>();
             foreach (var arg in args)
             {
                 ids.AddRange(arg.IDs);
                 prms.AddRange(arg.Params);
+                foreach (var key in arg.CallKeys)
+                {
+                    if (!keys.Contains(key))
+                    {
+                        keys.Add(key);
+                    }
+                }
             }
 
             var (typeName, methodName) = Describe(callee);
-            var key = MethodKey(typeName, methodName, args.Length);
-            return new V(ids, prms, key, isInternal, false, false);
+            if (isInternal)
+            {
+                var key = MethodKey(typeName, methodName, args.Length);
+                if (!keys.Contains(key))
+                {
+                    keys.Add(key);
+                }
+            }
+
+            return new V(ids, prms, keys, false, false);
+        }
+
+        // ── 接口 / 虚方法展开 ─────────────────────────────────────────────
+
+        /// <summary>
+        ///     给「接口方法 → 实现」建别名：调用点上看到的是接口方法（没有方法体），
+        ///     数据流要顺着别名才能落到真正的方法体上。
+        /// </summary>
+        private void BuildDispatchAliases()
+        {
+            foreach (var type in this.module.GetTypes())
+            {
+                if (type.IsInterface)
+                {
+                    continue;
+                }
+
+                foreach (var method in type.Methods)
+                {
+                    if (!method.HasBody)
+                    {
+                        continue;
+                    }
+
+                    var implKey = MethodKey(type.FullName, method.Name.String, method.MethodSig?.Params.Count ?? 0);
+                    if (!this.methodByKey.ContainsKey(implKey))
+                    {
+                        continue;
+                    }
+
+                    foreach (var root in this.FindDispatchRoots(type, method))
+                    {
+                        if (string.Equals(root, implKey, StringComparison.Ordinal))
+                        {
+                            continue;
+                        }
+
+                        if (!this.dispatchAliases.TryGetValue(root, out var list))
+                        {
+                            list = [];
+                            this.dispatchAliases[root] = list;
+                        }
+
+                        if (!list.Contains(implKey))
+                        {
+                            list.Add(implKey);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>把一个方法键展开成「它自己 + 本程序集里的所有实现」。</summary>
+        private List<string> ExpandDispatch(string key)
+        {
+            if (!this.dispatchAliases.TryGetValue(key, out var impls) || impls.Count == 0)
+            {
+                return [key];
+            }
+
+            var result = new List<string>(impls.Count + 1) { key };
+            foreach (var impl in impls)
+            {
+                if (!result.Contains(impl))
+                {
+                    result.Add(impl);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>扫描时记的流引用都是原始键，这里统一展开成实现键（不动点只看得到有方法体的方法）。</summary>
+        private void ExpandFlowRefs()
+        {
+            if (this.dispatchAliases.Count == 0)
+            {
+                return;
+            }
+
+            var pass = new List<(int Literal, string Method, int Param)>(this.passRefs.Count);
+            foreach (var (literal, method, param) in this.passRefs)
+            {
+                foreach (var expanded in this.ExpandDispatch(method))
+                {
+                    pass.Add((literal, expanded, param));
+                }
+            }
+
+            this.passRefs.Clear();
+            this.passRefs.AddRange(pass);
+
+            var paramFlow = new List<(string FromMethod, int FromParam, string ToMethod, int ToParam)>(this.paramFlowRefs.Count);
+            foreach (var (fromMethod, fromParam, toMethod, toParam) in this.paramFlowRefs)
+            {
+                foreach (var expanded in this.ExpandDispatch(toMethod))
+                {
+                    paramFlow.Add((fromMethod, fromParam, expanded, toParam));
+                }
+            }
+
+            this.paramFlowRefs.Clear();
+            this.paramFlowRefs.AddRange(paramFlow);
+
+            var returnToParam = new List<(string Callee, string Method, int Param)>(this.returnToParamRefs.Count);
+            foreach (var (callee, method, param) in this.returnToParamRefs)
+            {
+                foreach (var expanded in this.ExpandDispatch(callee))
+                {
+                    returnToParam.Add((expanded, method, param));
+                }
+            }
+
+            this.returnToParamRefs.Clear();
+            this.returnToParamRefs.AddRange(returnToParam);
+
+            var returnToReturn = new List<(string Callee, string Caller)>(this.returnToReturnRefs.Count);
+            foreach (var (callee, caller) in this.returnToReturnRefs)
+            {
+                foreach (var expanded in this.ExpandDispatch(callee))
+                {
+                    returnToReturn.Add((expanded, caller));
+                }
+            }
+
+            this.returnToReturnRefs.Clear();
+            this.returnToReturnRefs.AddRange(returnToReturn);
+        }
+
+        /// <summary>把「这个调用结果进了 UI」落实成 <c>ReturnsToUI</c>（接口调用要落到每个实现上）。</summary>
+        private void ApplyReturnToUIRequests()
+        {
+            foreach (var (request, target) in this.returnToUIRequests)
+            {
+                foreach (var key in this.ExpandDispatch(request))
+                {
+                    if (this.methodByKey.TryGetValue(key, out var scan))
+                    {
+                        scan.ReturnsToUI = true;
+                        if (scan.ReturnsToUITarget.Length == 0)
+                        {
+                            scan.ReturnsToUITarget = target;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        ///     找出一个方法实现对应哪些接口方法 / 基类虚方法（作为别名的「根键」）。
+        /// </summary>
+        private List<string> FindDispatchRoots(TypeDef type, MethodDef method)
+        {
+            var roots = new List<string>();
+            var arity = method.MethodSig?.Params.Count ?? 0;
+
+            // 显式接口实现（MethodImpl）
+            foreach (var impl in method.Overrides)
+            {
+                if (impl.MethodDeclaration is { } declaration)
+                {
+                    var (declType, declName) = Describe(declaration);
+                    roots.Add(MethodKey(declType, declName, declaration.MethodSig?.Params.Count ?? 0));
+                }
+            }
+
+            // 隐式接口实现：名字 + 参数个数 + 参数类型（能比就比）
+            foreach (var iface in this.EnumerateInterfaces(type))
+            {
+                foreach (var ifaceMethod in iface.Methods)
+                {
+                    if (!ifaceMethod.Name.Equals(method.Name)
+                        || (ifaceMethod.MethodSig?.Params.Count ?? 0) != arity
+                        || !SignatureMatches(ifaceMethod, method))
+                    {
+                        continue;
+                    }
+
+                    roots.Add(MethodKey(iface.FullName, ifaceMethod.Name.String, arity));
+                }
+            }
+
+            // 基类虚方法
+            var baseType = type.BaseType;
+            while (baseType is not null)
+            {
+                var baseDef = this.ResolveTypeDef(baseType);
+                if (baseDef is null)
+                {
+                    break;
+                }
+
+                foreach (var candidate in baseDef.Methods)
+                {
+                    if (candidate.Name.Equals(method.Name)
+                        && (candidate.MethodSig?.Params.Count ?? 0) == arity
+                        && candidate.IsVirtual
+                        && SignatureMatches(candidate, method))
+                    {
+                        roots.Add(MethodKey(baseDef.FullName, candidate.Name.String, arity));
+                        break;
+                    }
+                }
+
+                baseType = baseDef.BaseType;
+            }
+
+            return roots;
+        }
+
+        /// <summary>类型（含基类）实现的所有接口；只认本程序集里能解析到定义的（外部接口不展开）。</summary>
+        private List<TypeDef> EnumerateInterfaces(TypeDef type)
+        {
+            var result = new List<TypeDef>();
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            var cursor = type;
+            while (cursor is not null)
+            {
+                this.CollectInterfaces(cursor.Interfaces.Select(i => i.Interface), result, seen);
+                cursor = cursor.BaseType is { } baseType ? this.ResolveTypeDef(baseType) : null;
+            }
+
+            return result;
+        }
+
+        /// <summary>广度地收下这些接口以及它们的父接口（迭代，不能写成递归——自递归扫描会当成崩溃隐患）。</summary>
+        private void CollectInterfaces(IEnumerable<ITypeDefOrRef> roots, List<TypeDef> result, HashSet<string> seen)
+        {
+            var pending = new Stack<ITypeDefOrRef>();
+            foreach (var root in roots)
+            {
+                pending.Push(root);
+            }
+
+            while (pending.Count > 0)
+            {
+                var def = this.ResolveTypeDef(pending.Pop());
+                if (def is null || !seen.Add(def.FullName))
+                {
+                    continue;
+                }
+
+                result.Add(def);
+                foreach (var parent in def.Interfaces)
+                {
+                    pending.Push(parent.Interface);
+                }
+            }
+        }
+
+        private TypeDef? ResolveTypeDef(ITypeDefOrRef type)
+        {
+            if (type is TypeDef self)
+            {
+                return self;
+            }
+
+            if (type.FullName is { Length: > 0 } name && this.typesByName.TryGetValue(name, out var found))
+            {
+                return found;
+            }
+
+            try
+            {
+                return type.ResolveTypeDef();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>参数列表是否兼容：泛型参数（<c>!0</c>/<c>!!0</c>）不比具体名字，其余按类型全名。</summary>
+        private static bool SignatureMatches(MethodDef a, MethodDef b)
+        {
+            var left = a.MethodSig?.Params;
+            var right = b.MethodSig?.Params;
+            if (left is null || right is null || left.Count != right.Count)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < left.Count; i++)
+            {
+                var l = left[i].FullName;
+                var r = right[i].FullName;
+                if (l.StartsWith("!", StringComparison.Ordinal) || r.StartsWith("!", StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                if (!string.Equals(l, r, StringComparison.Ordinal))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         // ── 不动点 ───────────────────────────────────────────────────────────
@@ -821,6 +1194,7 @@ public static class UIStringExtractor
                     if (to.ReturnsToUI && !from.ReturnsToUI)
                     {
                         from.ReturnsToUI = true;
+                        from.ReturnsToUITarget = to.ReturnsToUITarget;
                         changed = true;
                     }
 
@@ -843,6 +1217,7 @@ public static class UIStringExtractor
                     if (methodScan.ParamsToUI[param] && !calleeScan.ReturnsToUI)
                     {
                         calleeScan.ReturnsToUI = true;
+                        calleeScan.ReturnsToUITarget = methodScan.ParamsToUITarget[param];
                         changed = true;
                     }
 
@@ -945,6 +1320,10 @@ public static class UIStringExtractor
                 if (scan.ReturnsToUI)
                 {
                     literal.UIViaReturn = true;
+                    if (literal.UIFlowTarget.Length == 0)
+                    {
+                        literal.UIFlowTarget = scan.ReturnsToUITarget;
+                    }
                 }
 
                 if (scan.ReturnsDangerous)

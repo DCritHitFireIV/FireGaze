@@ -186,10 +186,27 @@ internal static class UICallSemantics
     };
 
     /// <summary>
+    ///     Dalamud 窗口基类的构造函数：第 0 个参数就是窗口标题，会显示在标题栏上。
+    /// </summary>
+    /// <remarks>
+    ///     子类构造函数里的 <c>base("标题")</c> 编译成 <c>call Window::.ctor(string)</c>（不是 newobj），
+    ///    以前会落到「外部方法、语义不明」整条排除——2026-10-01 实测 AnoMech 的「AnoMech Settings」、
+    ///     BazookaLens 的三个窗口标题都在这儿漏掉。
+    /// </remarks>
+    public static bool IsWindowTitleCall(string typeFullName, string methodName) =>
+        methodName == ".ctor" && typeFullName.EndsWith("Dalamud.Interface.Windowing.Window", StringComparison.Ordinal);
+
+    /// <summary>
     ///     是不是「在画 UI」的调用。
     /// </summary>
     public static bool IsUICall(string typeFullName, string methodName)
     {
+        // 窗口标题：即使类型名字里没有 ImGui，也是给玩家看的
+        if (IsWindowTitleCall(typeFullName, methodName))
+        {
+            return true;
+        }
+
         // ImU8String 只是字符串构造器（<c>AppendLiteral</c> / <c>AppendFormatted</c>），
         // 碰它的时候还没画到界面上；真正的 UI 调用是后面接住它的那个（Checkbox 要 ID、TextColored 不要）。
         // 2026-10-01 实测：Orbwalker 的 "Movement" 经 AppendLiteral 后才进 ImGui.TextColored，
@@ -243,6 +260,12 @@ internal static class UICallSemantics
 
     public static bool UsesStringAsID(string typeFullName, string methodName)
     {
+        // 窗口标题：ImGui 拿它算窗口 ID，翻完要保留 ###原文（标题自带 ###ID 时 BuildPatched 只换显示段）
+        if (IsWindowTitleCall(typeFullName, methodName))
+        {
+            return true;
+        }
+
         // 字符串构造器从来不当控件 ID 用（真正的判定在接住它的 UI 调用上）
         if (typeFullName.Contains("ImU8String", StringComparison.Ordinal))
         {
@@ -269,6 +292,11 @@ internal static class UICallSemantics
     /// </summary>
     public static string ShortTarget(string typeFullName, string methodName)
     {
+        if (IsWindowTitleCall(typeFullName, methodName))
+        {
+            return "窗口标题";
+        }
+
         var dot = typeFullName.LastIndexOf('.');
         var shortType = dot >= 0 ? typeFullName[(dot + 1)..] : typeFullName;
         return $"{shortType}.{methodName}";

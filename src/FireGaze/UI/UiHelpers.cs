@@ -48,6 +48,19 @@ internal static class UiHelpers
         ImGui.PopStyleColor();
     }
 
+    /// <summary>
+    ///     「要做的事」那种主按钮：比普通按钮深一点、蓝一点，198 行列表里能一眼看到落点。
+    ///     必须配套 <see cref="PopPrimaryButton" />（Push/Pop 数量要成对）。
+    /// </summary>
+    public static void PushPrimaryButton()
+    {
+        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.23f, 0.37f, 0.55f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.28f, 0.44f, 0.64f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.20f, 0.33f, 0.50f, 1f));
+    }
+
+    public static void PopPrimaryButton() => ImGui.PopStyleColor(3);
+
     public static void ColoredWrapped(Vector4 color, string text)
     {
         ImGui.PushStyleColor(ImGuiCol.Text, color);

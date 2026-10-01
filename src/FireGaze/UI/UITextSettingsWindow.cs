@@ -29,7 +29,7 @@ internal sealed class UITextSettingsWindow : Window
 
     public override void Draw()
     {
-        ImGui.TextWrapped("翻译通道决定「一键汉化」用什么把英文翻成中文。免费接口按 IP 限流，条目多时建议用自己的大模型 key。");
+        ImGui.TextWrapped("这里决定「一键汉化」用什么方式把英文翻成中文。免费接口按 IP 限流，条目多时建议用自己的大模型 key。");
         ImGui.Separator();
 
         var config = this.plugin.Config;
@@ -56,6 +56,8 @@ internal sealed class UITextSettingsWindow : Window
                 if (!string.Equals(config.UITextChannel, channels[i].Key, StringComparison.Ordinal))
                 {
                     config.UITextChannel = channels[i].Key;
+                    // 在设置里主动选过通道，就不再在「一键汉化」时重复问一次了
+                    config.UITextChannelChosen = true;
                     changed = true;
                 }
             }
@@ -64,7 +66,7 @@ internal sealed class UITextSettingsWindow : Window
         if (config.UITextChannel is "auto" or "google" or "mymemory")
         {
             ImGui.TextDisabled(
-                "免费通道按 IP 限流：Google 会返回 429、MyMemory 额度只有几千字符/天，而且是一条一条翻（约 1 条/秒）。\n" +
+                "免费通道按 IP 限流：Google 会返回 429、MyMemory 每天只有约 5000 词，而且是一条一条翻（每个词条约 0.8 秒）。\n" +
                 "想免费又要快，用「彩云小译」：注册后到「应用管理」创建应用，页面右边「管理」→「访问控制」里复制 token 填进来，" +
                 "新用户送 100 万字（一个月），一次能提交 50 条、几百条几秒翻完。");
         }
