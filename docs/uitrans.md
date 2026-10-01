@@ -132,7 +132,11 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - **汉化完成后按钮变「打开」**（2026-10-02 用户要求）：行上不再一直摆着「一键汉化」，
   而是变成「打开」（只有设置界面的插件显示「设置」）——有主界面开主界面，没有主界面就开设置界面，
   两者都没有就置灰（点了也不会有反应）。
-  能力直接用卫月的 `IExposedPlugin.HasMainUi / HasConfigUi / OpenMainUi() / OpenConfigUi()`，不做反射。
+  能力走卫月插件安装器同一条路：**`LocalPlugin.DalamudInterface.LocalUiBuilder`** 上的
+  `HasMainUi / HasConfigUi / OpenMain / OpenConfig`（都是 internal，所以 `PluginUiBridge` 用反射；
+  反射一律 DeclaredOnly 沿 `BaseType` 找，开发版插件 `LocalDevPlugin : LocalPlugin` 也找得到）。
+  ⚠️ 血教训：`InstalledPluginsIndex` 拿到的 `RawPlugin` 是内部 `LocalPlugin`（FireGaze 直接反射 `PluginManager.InstalledPlugins`），
+  **不是**给第三方看的 `IExposedPlugin` 包装器——`as IExposedPlugin` 恒为 null，第一版就是这么把按钮弄灰的。
   判定「汉化完成」= 有包且（补丁已应用 或 压根没有可翻文本）；插件更新出新文本时按钮会自动变回「一键汉化」。
 - **一键汉化** = 抽取 → 翻译没翻的条目 → 写入插件 DLL → **自动重载插件**，一次点完；
   取消只在翻译阶段可用（已翻的条目会保留），写入阶段写明「此步不能取消」。失败给下一步：重试 / 打开翻译设置。

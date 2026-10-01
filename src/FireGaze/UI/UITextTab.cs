@@ -1,6 +1,5 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
-using Dalamud.Plugin;
 using FireGaze.RepoAudit;
 using FireGaze.UIText;
 
@@ -46,6 +45,11 @@ internal sealed class UITextTab
         public string PatchDetail = string.Empty;
         public bool HasBackup;
         public bool EditorOpen;
+
+        /// <summary>插件注册了主界面 / 设置界面（汉化完成后「打开」按钮靠它）。</summary>
+        public bool HasMainUI;
+
+        public bool HasConfigUI;
     }
 
     private sealed class RowNote
@@ -443,7 +447,7 @@ internal sealed class UITextTab
             }
             else
             {
-                this.DrawOpenPluginButton(plugin);
+                this.DrawOpenPluginButton(plugin, info!);
             }
 
             if (info is { HasBackup: true })
@@ -470,14 +474,15 @@ internal sealed class UITextTab
 
     /// <summary>
     ///     汉化完成的插件行：按钮变「打开」——有主界面开主界面，没有主界面就开设置界面，
-    ///     两者都没有就置灰（点了也不会有反应）。卫月的 <see cref="IExposedPlugin" /> 直接带这三个能力，不用反射。
+    ///     两者都没有就置灰（点了也不会有反应）。能不能开、开哪个都从 <see cref="PluginUiBridge" /> 现读，
+    ///     和官方插件安装器的按钮同一套机制（反射 <c>LocalPlugin.DalamudInterface.LocalUiBuilder</c>；
+    ///     不能强转 <c>IExposedPlugin</c>——那不是同一个对象）。
     /// </summary>
-    private void DrawOpenPluginButton(InstalledPluginEntry plugin)
+    private void DrawOpenPluginButton(InstalledPluginEntry plugin, RowInfo info)
     {
-        var exposed = plugin.RawPlugin as IExposedPlugin;
-        var hasMain = exposed?.HasMainUi ?? false;
-        var hasConfig = exposed?.HasConfigUi ?? false;
-        var canOpen = plugin.IsLoaded && (hasMain || hasConfig);
+        var hasMain = info.HasMainUI;
+        var hasConfig = info.HasConfigUI;
+        var canOpen = hasMain || hasConfig;
 
         // 有主界面就叫「打开」，只能开设置就叫「设置」；都没有就叫「打开」但置灰（点了不会有反应）
         var label = hasMain || !hasConfig ? "打开" : "设置";
@@ -486,13 +491,10 @@ internal sealed class UITextTab
         {
             try
             {
-                if (hasMain)
+                var opened = PluginUiBridge.Open(plugin.RawPlugin);
+                if (!opened)
                 {
-                    exposed!.OpenMainUi();
-                }
-                else if (hasConfig)
-                {
-                    exposed!.OpenConfigUi();
+                    this.notes[plugin.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "这个插件没有可打开的界面。" };
                 }
             }
             catch (Exception e)
@@ -1507,6 +1509,11 @@ internal sealed class UITextTab
                     row.Translated = pack.TranslatedCount + pack.TranslatedResourceCount;
                     row.Skipped = pack.Skipped.Count + pack.SkippedResources.Count;
                 }
+
+                // 界面入口现读一次（行刷新 5 秒一回，不在每帧做反射）
+                var (hasMainUI, hasConfigUI) = PluginUiBridge.Probe(entry.RawPlugin);
+                row.HasMainUI = hasMainUI;
+                row.HasConfigUI = hasConfigUI;
 
                 row.Patch = this.patches.StatusOf(entry, out var detail);
                 row.PatchDetail = detail;
