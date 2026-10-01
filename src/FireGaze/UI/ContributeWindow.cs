@@ -196,6 +196,12 @@ internal sealed partial class ContributeWindow : Window
         };
     }
 
+    /// <summary>点开时总是展开（折叠状态会被 ImGui 的 ini 记住，2026-10-02 实测）。</summary>
+    public override void OnOpen()
+    {
+        ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
+    }
+
     /// <summary>
     ///     绘制入口只做一件事：兜住异常。绘制路径上任何一处抛异常都不该把整张窗口（乃至游戏）带下去
     ///     —— 2026-09-22 就因为 UiHelpers 里一处 Math.Clamp 抛了 ArgumentException，一开这个窗口就报错。

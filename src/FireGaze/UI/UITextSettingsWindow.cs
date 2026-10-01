@@ -27,6 +27,15 @@ internal sealed class UITextSettingsWindow : Window
     }
 
 
+    /// <summary>
+    ///     从「一键汉化」/ 主窗口点开时总是展开：折叠状态会被 ImGui 的 ini 记住，
+    ///     点开只剩一条标题栏、看起来像「点不开」（2026-10-02 用户实测）。
+    /// </summary>
+    public override void OnOpen()
+    {
+        ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
+    }
+
     public override void Draw()
     {
         ImGui.TextWrapped("这里决定「一键汉化」用什么方式把英文翻成中文。免费接口按 IP 限流，条目多时建议用自己的大模型 key。");

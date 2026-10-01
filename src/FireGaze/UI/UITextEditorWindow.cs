@@ -113,6 +113,12 @@ internal sealed class UITextEditorWindow : Window
         this.SaveIfDirty(force: true);
     }
 
+    /// <summary>点开时总是展开（折叠状态会被 ImGui 的 ini 记住，2026-10-02 实测）。</summary>
+    public override void OnOpen()
+    {
+        ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
+    }
+
     public override void Draw()
     {
         // ImGuiFileDialog 要求每帧画一次，否则弹不出来
