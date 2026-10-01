@@ -43,11 +43,25 @@ jobs:
             --comment-out "$RUNNER_TEMP/comment.md" \
             --notify-out "$RUNNER_TEMP/notify.md" | tee "$RUNNER_TEMP/inbox.log"
 
+      - name: 把界面文字投稿收进 uit-packs
+        # 插件「插件汉化 → 更多 → 提交人工译文到公共库…」发的投稿：并进 uit-packs/<内部名>.json
+        if: contains(github.event.issue.body, 'uit-contribution')
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          printf '%s' "$ISSUE_BODY" > "$RUNNER_TEMP/issue-body.md"
+          python scripts/inbox_uit.py \
+            --issue "${{ github.event.issue.number }}" \
+            --body "$RUNNER_TEMP/issue-body.md" \
+            --author "${{ github.event.issue.user.login }}" \
+            --comment-out "$RUNNER_TEMP/comment.md" \
+            --summary-out "$RUNNER_TEMP/summary.txt" | tee "$RUNNER_TEMP/inbox-uit.log"
+
       - name: 提交存档
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/contributions/inbox
+          git add docs/contributions/inbox uit-packs
           if git diff --quiet --cached; then
             echo "存档没有变化（同一条 issue 又编辑了？）"
           else
@@ -76,6 +90,7 @@ jobs:
       - name: 通知维护者（配了 secret 才发）
         env:
           PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
           if [ -z "$PUSH_URL" ]; then
             echo "没有配置 SERVER3_PUSH_URL，跳过手机通知（仓库里已经存下这次投稿）"
@@ -87,10 +102,18 @@ jobs:
           else
             DETAILS="$(cat "$RUNNER_TEMP/summary.txt")"
           fi
+          case "$ISSUE_BODY" in
+            *uit-contribution*)
+              HOWTO="界面文字投稿已自动并入 uit-packs/，无需手动收录；抽查后随每周库更新对玩家生效"
+              ;;
+            *)
+              HOWTO="审核后用 python scripts/import_contributions.py docs/contributions/inbox/<存档>.json --push 收录"
+              ;;
+          esac
           BODY="$DETAILS
 
           https://github.com/${GITHUB_REPOSITORY}/issues/${{ github.event.issue.number }}
-          审核后用 python scripts/import_contributions.py docs/contributions/inbox/<存档>.json --push 收录"
+          $HOWTO"
           curl -sS -X POST "$PUSH_URL" \
             --data-urlencode "title=$TITLE" \
             --data-urlencode "desp=$BODY" || echo "通知发送失败（不影响收录）"

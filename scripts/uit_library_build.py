@@ -295,7 +295,8 @@ def build_pack(name: str, version: str, entries: list[dict], resources: list[dic
             "PreserveID": bool(entry.get("PreserveID")),
         }
         if translated:
-            item["Source"] = "library"
+            # 保留既有来源：投稿进来的人工译文（user）不能被下次重建洗成 machine 译
+            item["Source"] = old.get("Source") or "library"
         pack["entries"].append(item)
         if not translated:
             pending[original] = None
@@ -317,7 +318,7 @@ def build_pack(name: str, version: str, entries: list[dict], resources: list[dic
             "Translated": translated,
         }
         if translated:
-            item["Source"] = "library"
+            item["Source"] = old.get("Source") or "library"
             if (old.get("Original") or "") != value:
                 item["Review"] = "原文改过了，译文待复核"
         pack["resources"].append(item)

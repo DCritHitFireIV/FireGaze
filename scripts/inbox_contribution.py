@@ -105,6 +105,10 @@ def main(argv=None) -> int:
     body = open(args.body, encoding="utf-8", errors="replace").read()
     payload = rules.extract_json(body)
     if not payload or not payload.get("contributions"):
+        # 「插件界面文字」的投稿（uit-contribution）走 inbox_uit.py，不要回错话
+        if payload and payload.get("type") == "uit-contribution":
+            print("这是插件界面文字的译文投稿（uit-contribution），交给 inbox_uit.py 处理。")
+            return 0
         print("这份 issue 里没有可用的译文（没找到 ```json``` 块）。")
         if args.comment_out:
             with open(args.comment_out, "w", encoding="utf-8", newline="\n") as handle:

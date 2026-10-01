@@ -118,6 +118,9 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   本地缓存 `<配置目录>/uitrans/library/<内部名>.json`（24h TTL，拉不到就用旧缓存 / 直接跳过）。
 - 目标插件清单：`scripts/uit_targets.txt`（首批 = 官方库下载量前 40）。
 - 授权口径（用户定）：默认公开，README 注明「机器/社区翻译，不代表原作者」；作者要求即从库中移除。
+- **投稿（玩家把人工译文交回库）**：编辑器「更多… → 提交人工译文到公共库…」把当前包里 `Source=user` 的条目打成
+  `type=uit-contribution` 的 JSON、打开填好的 issue 页（匿名，不带账号）；`inbox.yml` 里 `inbox_uit.py` 体检后
+  并进对应包（`Source=user`，下次重建保留）、留档并发手机通知。
 
 ## 界面（2026-10-01 两路盲评后的 v2；页签名与顺序按用户 2026-10-01 决定：插件汉化排第一）
 

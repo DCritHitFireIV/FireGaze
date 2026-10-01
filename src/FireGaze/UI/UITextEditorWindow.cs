@@ -1,8 +1,10 @@
 using System.Diagnostics;
+using System.Text.Json;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.ImGuiFileDialog;
 using Dalamud.Interface.Windowing;
 using FireGaze.RepoAudit;
+using FireGaze.Translate;
 using FireGaze.UIText;
 
 namespace FireGaze.UI;
@@ -653,6 +655,19 @@ internal sealed class UITextEditorWindow : Window
             }
 
             ImGui.Separator();
+            var hasHuman = this.pack.Entries.Any(e => e.IsUserSource && e.HasTranslation)
+                           || this.pack.Resources.Any(r => r.IsUserSource && r.HasTranslation);
+            if (ImGui.MenuItem("提交人工译文到公共库…", enabled: hasHuman))
+            {
+                this.SubmitContributions();
+            }
+
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+            {
+                ImGui.SetTooltip("把你手工改过的译文整理成一份贡献，打开 GitHub 提交页（不带任何账号信息）。\n提交后随每周更新进入公共译文库。");
+            }
+
+            ImGui.Separator();
             if (ImGui.MenuItem("打开包目录"))
             {
                 this.OpenPackDirectory();
@@ -1172,6 +1187,81 @@ internal sealed class UITextEditorWindow : Window
                     this.SetStatus("导入失败：" + e.Message, true);
                 }
             });
+    }
+
+    /// <summary>
+    ///     把「人工改过的译文」整理成一份贡献，打开 GitHub 新建 issue 页（匿名，不带账号信息）。
+    ///     与「参与翻译」的简介投稿同一套：玩家在网页上按 Submit；内容太大时先导出 JSON 让玩家拖附件。
+    /// </summary>
+    private void SubmitContributions()
+    {
+        if (this.entry is null)
+        {
+            return;
+        }
+
+        this.SaveIfDirty(force: true);
+
+        var entries = this.pack.Entries
+            .Where(e => e.IsUserSource && e.HasTranslation)
+            .Select(e => new { e.Original, e.Translated, Context = e.Context ?? string.Empty })
+            .ToList();
+        var resources = this.pack.Resources
+            .Where(r => r.IsUserSource && r.HasTranslation)
+            .Select(r => new { r.Container, r.Key, r.Original, r.Translated })
+            .ToList();
+        var total = entries.Count + resources.Count;
+        if (total == 0)
+        {
+            this.SetStatus("还没有人工译文可提交：先在列表里改几条（改过的会标成人工）再来。", false);
+            return;
+        }
+
+        var payload = JsonSerializer.Serialize(
+            new { type = "uit-contribution", plugin = this.entry.InternalName, entries, resources },
+            new JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+
+        var header = $"### FireGaze 插件界面文字译文贡献\n\n- 插件：`{this.entry.InternalName}`\n- 条数：{total}\n\n";
+        var body = header + "```json\n" + payload + "\n```\n";
+        var title = $"[译文贡献] {this.entry.InternalName} · {total} 条";
+        var url = $"{ContributionsStore.RepoURL}/issues/new"
+                  + $"?title={Uri.EscapeDataString(title)}"
+                  + $"&body={Uri.EscapeDataString(body)}";
+
+        if (body.Length > 6000 || url.Length > 20000)
+        {
+            // 太大：完整 JSON 落盘，issue 里只放摘要（玩家把它拖进附件）
+            var path = Path.Combine(this.store.DirectoryPath, $"{this.entry.InternalName}-贡献-{DateTime.Now:yyyyMMdd-HHmm}.json");
+            try
+            {
+                Directory.CreateDirectory(this.store.DirectoryPath);
+                File.WriteAllText(path, payload, new System.Text.UTF8Encoding(false));
+            }
+            catch (Exception e)
+            {
+                this.SetStatus("导出贡献 JSON 失败：" + e.Message, true);
+                return;
+            }
+
+            body = header + $"- 条数较多，完整 JSON 已导出到：`{path}`\n\n请在网页上把它拖进附件后提交。\n";
+            url = $"{ContributionsStore.RepoURL}/issues/new"
+                  + $"?title={Uri.EscapeDataString(title)}"
+                  + $"&body={Uri.EscapeDataString(body)}";
+            this.SetStatus($"已在浏览器打开提交页；完整 JSON 在 {path}，拖进附件再 Submit。", false);
+        }
+        else
+        {
+            this.SetStatus("已在浏览器打开 GitHub 提交页：按绿色 Submit 即可（不带账号信息）。", false);
+        }
+
+        try
+        {
+            Dalamud.Utility.Util.OpenLink(url);
+        }
+        catch (Exception e)
+        {
+            this.SetStatus("打开浏览器失败：" + e.Message, true);
+        }
     }
 
     private void MarkDirty()
