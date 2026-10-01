@@ -1454,9 +1454,9 @@ internal sealed class UITextTab
                 if (File.Exists(Path.Combine(this.store.DirectoryPath, entry.InternalName + ".json")))
                 {
                     row.HasPack = true;
-                    row.Total = pack.Entries.Count;
-                    row.Translated = pack.TranslatedCount;
-                    row.Skipped = pack.Skipped.Count;
+                    row.Total = pack.Entries.Count + pack.Resources.Count;
+                    row.Translated = pack.TranslatedCount + pack.TranslatedResourceCount;
+                    row.Skipped = pack.Skipped.Count + pack.SkippedResources.Count;
                 }
 
                 row.Patch = this.patches.StatusOf(entry, out var detail);

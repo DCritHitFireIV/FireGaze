@@ -1,6 +1,6 @@
 # 插件内部文本汉化（UIText）
 
-> 状态：**进行中**（抽取器 + 编辑器已完成；翻译通道、打补丁、配套库未接）
+> 状态：**进行中**（抽取 / 编辑 / 翻译 / 打补丁 / 按需译文库都已接；投稿通道与 HCI 复盘未接）
 > 起点：2026-10-01。设计口径来自与用户的逐轮讨论（见会话记录），这里是落地版。
 
 ## 目标
@@ -19,20 +19,23 @@
 
 | 文件 | 作用 |
 |---|---|
-| `src/FireGaze/UIText/UIStringExtractor.cs` | IL 静态抽取：判 UI 候选 / 灰名单 / 排除 |
-| `src/FireGaze/UIText/UICallSemantics.cs` | 调用语义：谁是 UI 调用、谁拿字符串当 ID、哪些是危险语境 |
+| `src/FireGaze/UIText/UIStringExtractor.cs` | IL 静态抽取：判 UI 候选 / 灰名单 / 排除；另扫内嵌 `.resources`（资源型本地化） |
+| `src/FireGaze/UIText/UICallSemantics.cs` | 调用语义：谁是 UI 调用、谁拿字符串当 ID、哪些是危险语境（含聊天输出） |
 | `src/FireGaze/UIText/UITextModels.cs` | 抽取结果模型（原文 / 上下文 / 判定 / 依据 / 是否保留 ID） |
-| `src/FireGaze/UIText/UITextPack.cs` | 配套包模型（原文→译文、来源、不翻名单、库合并优先级） |
+| `src/FireGaze/UIText/UITextPack.cs` | 配套包模型（原文→译文 + 资源容器/key、来源、不翻名单、库合并优先级） |
 | `src/FireGaze/UIText/UITextStore.cs` | 本地包读写（`<配置目录>/uitrans/<内部名>.json`）+ 桌面工具 JSON 兼容 |
 | `src/FireGaze/UI/UITextTab.cs` | 「插件汉化」页签：插件列表 + 包状态 + 打开编辑器 |
 | `src/FireGaze/UI/UITextEditorWindow.cs` | 编辑器窗口：逐条翻译、筛选、导入导出、打补丁/还原/重载 |
-| `src/FireGaze/UIText/UITextPatcher.cs` | 打补丁：dnlib 改写 `ldstr` 字面量（只动字符串，不动代码结构） |
+| `src/FireGaze/UIText/UITextPatcher.cs` | 打补丁：dnlib 改写 `ldstr` 字面量 + 重写内嵌 `.resources` 容器 |
 | `src/FireGaze/UIText/UITextPatchStore.cs` | 补丁状态 + 原始 DLL 备份（都在配置目录里） |
 | `src/FireGaze/UIText/UITextPatchManager.cs` | 打补丁/还原/重载/更新后重打的调度与安全网 |
 | `src/FireGaze/UIText/TranslationChannels.cs` | 翻译通道：Google 免 key / MyMemory / 大模型 / DeepL / 彩云小译 |
 | `src/FireGaze/UIText/FFXIVGlossary.cs` | 随插件打包的「英文 → 国服官方中文」术语表（只喂大模型通道，可关）；数据由 `scripts/ffxiv_glossary.py` 生成 |
+| `src/FireGaze/UIText/UITextLibrary.cs` | 公共译文库客户端：索引 + 按插件按需下载（`uit-packs/`）+ 合并 |
 | `src/FireGaze/UIText/DPAPI.cs` | 用户 API key 的本机加密存储 |
-| `tools/UITextProbe/` | 离线探针（与插件同一份源码）：`--all` / `--json` / `--trace` / `--types` |
+| `tools/UITextProbe/` | 离线探针（与插件同一份源码）：`--all` / `--json` / `--resources` / `--trace` / `--types` |
+| `scripts/uit_library_build.py` | CI 用：下载插件 → 探针抽取 → DeepSeek 增量翻译 → 生成 `uit-packs/*.json` + 索引 |
+| `.github/workflows/uit-packs.yml` | 每周一云端生成公共译文包（手动触发可指定插件） |
 
 ## 抽取器怎么判
 
@@ -65,6 +68,56 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - `PreserveID`：这个字面量被 ImGui 当控件 ID 用，打补丁要写 `译文###原文`（显示译文、ID 留在原文）。
 - 合并口径：**人工译永不被机器/库顶掉**；库只能更新 ai / library 的条目。
 - 桌面翻译工具（DalamudLocalizer）的 `[{Original, Translation, Context}]` 可以直接导入导出。
+- **资源型条目**（2026-10-02 新增）：另有 `resources` 段，身份是「容器 + key」，见下节。
+
+```json
+{
+  "_meta": { "format": 2, "source": "library" },
+  "entries": [ { "Original": "Show on decipher", "Translated": "解读时显示", "PreserveID": true } ],
+  "resources": [
+    { "Container": "AutoHook.Resources.Localization.UIStrings.resources", "Key": "AboutTab", "Original": "About", "Translated": "关于" }
+  ],
+  "skippedResources": ["容器\u0001key"]
+}
+```
+
+## 资源型本地化（.resx / ResourceManager）（2026-10-02 实现）
+
+- 现象：部分插件把界面文字放在内嵌 `.resources` 容器里，代码只用 key 查表（`ResourceManager.GetString`）；
+  以前这些 key 里还有 5,461 个被当成字面量翻掉 → 查不到资源、界面变空（盘点见 `top100-2026-10-02/sub-localization.md`）。
+- 现在：**翻值、不翻 key**。
+  · 抽取：`UIStringExtractor.ScanResources` 读主程序集内嵌容器（容器名以程序集名开头、排除第三方库前缀与
+    `ploc` 伪本地化），值过 `LooksTranslatableResourceValue`（JSON / 网址 / 超长文档不要）；
+  · 包：`resources` 段，值为原文；与字面量条目同一套「不翻 / 清账 / 恢复 / 库合并」口径；
+  · 打补丁：`UITextPatcher.PatchResources` 用 `ResourceReader/Writer` 重写容器、`Remove+Add` 替换嵌入资源；
+    非字符串值原样保留，重写失败的容器只跳过它自己。
+- **只补中性资源，不碰卫星程序集**：`ResourceManager` 的查找顺序是「卫星 → 缺失才回退中性」，
+  所以官方 zh 有的 key 保持官方译文，官方没覆盖的 key（GoodFriend 17/98、AutoHook 478/547）和没有 zh 的插件
+  自动用我们的补丁——天然互补，也不顶掉官方翻译。（推翻了早期子代理报告里「改卫星」的建议：
+  实测 Dalamud 不按游戏语言设 UI culture，只有 `CultureFixes` 修法语数字分隔符，实际用的是 Windows 用户语言。）
+- 探针：`UITextProbe <dll> --resources` 输出 key→值的 JSON（库生成脚本用）。
+
+## 聊天输出（IChatGui）（2026-10-02 用户拍板要翻）
+
+- `IChatGui.Print` / `PrintError` 的方法名 `Print` 以前撞上 `IsLogCall` 被当日志排掉（401 条 / 52 插件），
+  `PrintError` 还落在「去向不明」——两条规则口径不一致。
+- 现在 `UICallSemantics.IsChatCall` 把它们按 UI 处理（`IsLogCall` 里先短路排除），聊天栏里玩家看得见；
+  已实测 BazookaLens 的 `IChatGui.PrintError` 文案进候选（fgtest 钉住）。
+
+## 公共译文库（uit-packs/）（2026-10-02 实现）
+
+- 形态（用户定）：**纯数据包、按插件按需下载**——插件本体不带译文；`一键汉化` 先查库，有现成的就下载合并，
+  没有或没覆盖全才用自己的翻译通道；用不到的插件永远不下载。包 = `uit-packs/<内部名>.json`，
+  索引 = `uit-packs/index.json`（插件 → 文件 / 条数 / 日期）。设置页有「从公共译文库下载现成译文」开关（默认开）。
+- 生成（云端）：`scripts/uit_library_build.py`（工作流 `uit-packs.yml`，每周一 13:30 北京；手动触发可指定插件）：
+  Aetherfeed 找仓库 → 拉仓库文件取 `DownloadLinkInstall` → 下载 zip 取主 DLL → 探针抽取 →
+  按「原文 / 容器+key」增量、只翻新增（可带 FF14 术语表）→ 写包 + 索引。
+  **不在维护者本机跑**（与简介词表同一条纪律）；本机只允许 `--dry-run` 盘点。
+- 合并（插件侧 `UITextPack.MergeLibrary`）：**玩家自己改过的（user）永不被顶**；ai / library 条目可被库更新覆盖。
+- 下载线路：raw.githubusercontent + `gh.atmoomen.top` + `gh-proxy.org`（与简介词表同一套）；
+  本地缓存 `<配置目录>/uitrans/library/<内部名>.json`（24h TTL，拉不到就用旧缓存 / 直接跳过）。
+- 目标插件清单：`scripts/uit_targets.txt`（首批 = 官方库下载量前 40）。
+- 授权口径（用户定）：默认公开，README 注明「机器/社区翻译，不代表原作者」；作者要求即从库中移除。
 
 ## 界面（2026-10-01 两路盲评后的 v2；页签名与顺序按用户 2026-10-01 决定：插件汉化排第一）
 
@@ -120,14 +173,10 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 
 ## 还没做（按计划）
 
-1. 配套库：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）+ 库下载；
+1. 配套库的**投稿通道**：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）；库下载已做，见「公共译文库」。
 2. 界面 HCI 评审（先出还原图，按仓库既有流程）；
 3. 批量翻译的单位与限流（免费接口有每日额度；大插件建议用自填 key）。
-4. **资源型本地化（.resx / ResourceManager）的插件**：界面文字放在 `Resources` 里、代码只用 key 查表（27 个插件、14,479 key，半数自带官方 zh）。
-   资源级打补丁子代理 PoC 已证技术可行（改嵌入资源 + 卫星程序集），但工程量大，**先按「暂不支持」处理**：
-   抽取 / 一键汉化的结果行会提示「还有 N 处界面文字放在本地化资源文件里，暂不支持汉化」；
-   这些 key 本身按 hardKey 排除（翻了查不到资源）。盘点报告：`docs/top100-2026-10-02/sub-localization.md`。
-5. **属性字符串（SimpleTweaks 的名字/描述）**：它们不在 `ldstr` 里（在 CustomAttribute 参数里），抽不到也补不了。
+4. **属性字符串（SimpleTweaks 的名字/描述）**：它们不在 `ldstr` 里（在 CustomAttribute 参数里），抽不到也补不了。
    实测 SimpleTweaks 1.15.0.7：官方 zh-CN 只覆盖 122/181 个名字、约 136/181 个描述，其余会显示英文。
    两条路待定：
    · **A** 写进它自己的 `pluginConfigs/SimpleTweaksPlugin/loc/zh-CN/strings.json`——**会被官方更新覆盖**

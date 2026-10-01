@@ -1,0 +1,71 @@
+name: uit-packs
+
+# 公共译文包（uit-packs/）：插件界面文字的现成译文，玩家端「一键汉化」时按需下载。
+#   · 生成在云端跑（DeepSeek；密钥在仓库 secret，插件客户端不持有）；
+#   · 只翻新增/变化条目（增量），包与索引一起提交，--dry-run 可先看规模；
+#   · 合并规则在插件侧：玩家自己改过的译文永不被库顶掉。
+# 口径见 docs/uitrans.md「公共译文库」一节。
+
+on:
+  schedule:
+    # 每周一 05:30 UTC（北京时间 13:30）——避开简介词表（12:00）的窗口
+    - cron: '30 5 * * 1'
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: 只处理这些内部名（空格分隔；留空 = scripts/uit_targets.txt）
+        type: string
+        default: ''
+      max_new:
+        description: 每个插件本次最多翻多少条（0 = 不限；先小量试跑用）
+        type: string
+        default: '0'
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build probe
+        run: dotnet build tools/UITextProbe/UITextProbe.csproj -c Release
+
+      - name: Build packs
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          TARGETS: ${{ inputs.targets }}
+          MAX_NEW: ${{ inputs.max_new }}
+        run: |
+          EXTRA=""
+          if [ -n "$TARGETS" ]; then EXTRA="--targets $TARGETS"; fi
+          if [ -n "$MAX_NEW" ] && [ "$MAX_NEW" != "0" ]; then EXTRA="$EXTRA --max-new $MAX_NEW"; fi
+          python scripts/uit_library_build.py \
+            --probe tools/UITextProbe/bin/Release/net10.0/UITextProbe.dll \
+            --out uit-packs $EXTRA
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- uit-packs; then
+            echo "uit-packs 没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add uit-packs
+          git commit -m "chore(uit-packs): 更新公共译文包 [skip ci]"
+          git push
