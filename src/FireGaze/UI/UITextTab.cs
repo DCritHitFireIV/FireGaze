@@ -1,5 +1,6 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using Dalamud.Plugin;
 using FireGaze.RepoAudit;
 using FireGaze.UIText;
 
@@ -417,31 +418,32 @@ internal sealed class UITextTab
         }
         else
         {
-            // 还没汉化好的插件给主色按钮，已汉化的保持普通样式——198 行列表里要有「要做的事」的落点
-            var needsAction = info is null || !info.HasPack || info.Patch != UITextPatchStatus.Applied;
-            ImGui.BeginDisabled(busy || editorOpen);
-            if (needsAction)
+            // 还没汉化好的插件给主色「一键汉化」；汉化完成的变「打开」（2026-10-02 用户要求：
+            // 汉化完就想直接看效果，而不是台上一直摆着个「一键汉化」）。
+            var fullyLocalized = info is { HasPack: true }
+                                 && (info.Patch == UITextPatchStatus.Applied || info.Total == 0);
+            if (!fullyLocalized)
             {
+                ImGui.BeginDisabled(busy || editorOpen);
                 UiHelpers.PushPrimaryButton();
-            }
+                if (ImGui.Button("一键汉化"))
+                {
+                    this.StartOneClick(plugin);
+                }
 
-            if (ImGui.Button("一键汉化"))
-            {
-                this.StartOneClick(plugin);
-            }
-
-            if (needsAction)
-            {
                 UiHelpers.PopPrimaryButton();
+                ImGui.EndDisabled();
+                if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+                {
+                    ImGui.SetTooltip(
+                        (busy ? "有另一个插件正在汉化，等它跑完再点。\n" : string.Empty) +
+                        (editorOpen ? "这个插件正开着编辑窗口，先关掉它（避免两份修改互相覆盖）。\n" : string.Empty) +
+                        "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。");
+                }
             }
-
-            ImGui.EndDisabled();
-            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+            else
             {
-                ImGui.SetTooltip(
-                    (busy ? "有另一个插件正在汉化，等它跑完再点。\n" : string.Empty) +
-                    (editorOpen ? "这个插件正开着编辑窗口，先关掉它（避免两份修改互相覆盖）。\n" : string.Empty) +
-                    "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。");
+                this.DrawOpenPluginButton(plugin);
             }
 
             if (info is { HasBackup: true })
@@ -463,6 +465,52 @@ internal sealed class UITextTab
         if (ImGui.Button(isOpen ? "收起" : "详情"))
         {
             this.expanded = isOpen ? string.Empty : plugin.InternalName;
+        }
+    }
+
+    /// <summary>
+    ///     汉化完成的插件行：按钮变「打开」——有主界面开主界面，没有主界面就开设置界面，
+    ///     两者都没有就置灰（点了也不会有反应）。卫月的 <see cref="IExposedPlugin" /> 直接带这三个能力，不用反射。
+    /// </summary>
+    private void DrawOpenPluginButton(InstalledPluginEntry plugin)
+    {
+        var exposed = plugin.RawPlugin as IExposedPlugin;
+        var hasMain = exposed?.HasMainUi ?? false;
+        var hasConfig = exposed?.HasConfigUi ?? false;
+        var canOpen = plugin.IsLoaded && (hasMain || hasConfig);
+
+        // 有主界面就叫「打开」，只能开设置就叫「设置」；都没有就叫「打开」但置灰（点了不会有反应）
+        var label = hasMain || !hasConfig ? "打开" : "设置";
+        ImGui.BeginDisabled(!canOpen);
+        if (ImGui.Button(label))
+        {
+            try
+            {
+                if (hasMain)
+                {
+                    exposed!.OpenMainUi();
+                }
+                else if (hasConfig)
+                {
+                    exposed!.OpenConfigUi();
+                }
+            }
+            catch (Exception e)
+            {
+                this.notes[plugin.InternalName] = new RowNote { Kind = NoteKind.Bad, Text = "打开失败：" + e.Message };
+            }
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip(!plugin.IsLoaded
+                ? "插件当前没有加载，先启用它。"
+                : hasMain
+                    ? "打开插件的主界面（等同插件自己的打开命令）。"
+                    : hasConfig
+                        ? "这个插件没有主界面，打开它的设置界面。"
+                        : "这个插件既没有主界面也没有设置界面，打不开。");
         }
     }
 
