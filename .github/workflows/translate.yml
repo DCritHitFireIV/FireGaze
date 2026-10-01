@@ -57,16 +57,22 @@ jobs:
             python scripts/update_translations.py $EXTRA
           fi
 
+      - name: Update glossary
+        run: |
+          # FF14 官方译名术语表（「插件汉化」的大模型通道用）：从 datamining CSV 重建，随词表一起提交。
+          # 输出 mtime=0 的 gzip：数据没变就逐字节一致，不会产生空提交。
+          python scripts/ffxiv_glossary.py --export ffxiv-glossary.tsv --refresh
+
       - name: Commit changes
         run: |
           # docs/translation-review.md 是「原文改过、玩家译待复核」的报告：
           # 以前它写在 scripts/ 下、又没被提交，于是任何覆盖都留不下痕迹（审查 P0-1）。
-          if git diff --quiet -- translations.json docs/; then
+          if git diff --quiet -- translations.json docs/ ffxiv-glossary.tsv; then
             echo "词表无变化"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add translations.json docs/
+          git add translations.json docs/ ffxiv-glossary.tsv
           git commit -m "chore: update translations"
           git push

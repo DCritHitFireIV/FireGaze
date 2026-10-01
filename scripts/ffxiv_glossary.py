@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import csv
+import gzip
 import io
 import os
 import re
@@ -46,6 +47,11 @@ WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9'’\-]*")
 STOP_SINGLE = {
     "attack", "damage", "target", "player", "party", "enemy", "action", "ready", "start",
     "window", "option", "setting", "module", "function", "system", "button", "display",
+}
+
+# 多词短语里的功能词允许短于 3 个字母（Palace of the Dead / Heaven on High 这类）
+FUNCTION_WORDS = {
+    "the", "of", "on", "at", "in", "to", "for", "and", "a", "an", "by", "with", "from", "or",
 }
 
 
@@ -148,8 +154,8 @@ def build_glossary(refresh: bool = False, verbose: bool = True) -> dict[str, str
             words = english.split()
             if len(words) == 1 and (len(english) < 7 or english.lower() in STOP_SINGLE):
                 continue
-            # 多词术语里包含过短/泛词的（如 "on High"）直接丢掉
-            if any(len(word) < 3 for word in words):
+            # 多词术语：允许功能词，其余过短的词（如 "on High" 里的 High 不算，但 on 算功能词）直接丢掉
+            if any(len(word) < 3 and word.lower() not in FUNCTION_WORDS for word in words):
                 continue
 
             glossary.setdefault(english.lower(), chinese)
@@ -197,8 +203,76 @@ def find_terms(texts: list[str], glossary: dict[str, str], limit: int = 40) -> l
     return [(phrase, glossary[phrase]) for phrase in kept[:limit]]
 
 
+def export_plugin_table(glossary: dict[str, str], path: str) -> int:
+    """写出「插件汉化」用的紧凑术语表（TSV，.gz 结尾自动压缩）。
+
+    比描述翻译更严一层：插件匹配器只认由 [A-Za-z0-9'’\-.] 组成的词、最多 4 个词，
+    比它长或带其他符号的键永远匹配不上，直接不写进文件。
+    另外给「基名唯一」的括号名补一个无括号变体（the omega protocol (ultimate) → the omega protocol），
+    基名有冲突（如 copperbell mines 同时有普通/困难）时不加，避免指错。
+    返回写出的条数。
+    """
+    word_re = re.compile(r"^[A-Za-z0-9'\u2019\-.]{1,}$")
+
+    def normalize_word(word: str) -> str:
+        # 与插件匹配器的 Tokenize 同口径：弯引号换直引号，去掉首尾的 . - '
+        return word.replace("\u2019", "'").strip(".-'")
+
+    table: dict[str, str] = {}
+    for english, chinese in glossary.items():
+        words = english.split()
+        if not words or len(words) > 4:
+            continue
+        if any(not word_re.match(word) for word in words):
+            continue
+        normalized = [normalize_word(word) for word in words]
+        if any(not word for word in normalized):
+            continue
+        table.setdefault(" ".join(normalized), chinese)
+
+    bases: dict[str, str] = {}
+    conflicted: set[str] = set()
+    for english in table:
+        base = re.sub(r"\s*\([^)]*\)\s*$", "", english)
+        if base != english:
+            if base in table or base in bases:
+                conflicted.add(base)
+            bases.setdefault(base, english)
+    for base, full in bases.items():
+        if base not in conflicted and base not in table:
+            table[base] = table[full]
+
+    lines: list[str] = []
+    for english, chinese in sorted(table.items()):
+        one_line = re.sub(r"\s+", " ", chinese).strip()
+        if not one_line:
+            continue
+        lines.append(f"{english}\t{one_line}\n")
+    data = "".join(lines).encode("utf-8")
+    if path.endswith(".gz"):
+        # mtime=0：数据不变时产物逐字节一致，工作流不会产生空提交
+        with open(path, "wb") as handle:
+            handle.write(gzip.compress(data, compresslevel=9, mtime=0))
+    else:
+        with open(path, "wb") as handle:
+            handle.write(data)
+
+    return len(table)
+
+
 if __name__ == "__main__":
-    table = build_glossary(refresh=True)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="构建英文→国服官方中文术语表")
+    parser.add_argument("--export", metavar="PATH", help="写出插件用的紧凑 TSV（.gz 结尾自动压缩）")
+    parser.add_argument("--refresh", action="store_true", help="忽略缓存重新下载 datamining CSV")
+    args = parser.parse_args()
+
+    table = build_glossary(refresh=args.refresh)
+    if args.export:
+        count = export_plugin_table(table, args.export)
+        print(f"已导出插件术语表：{count} 条 → {args.export}")
+
     for sample in ("Palace of the Dead", "Heaven on High", "Eureka Orthos", "The Gold Saucer",
                    "Ultimate Raid", "Savage", "Black Mage", "Limsa Lominsa"):
         print(f"  {sample} -> {table.get(sample.lower(), '（未收录）')}")

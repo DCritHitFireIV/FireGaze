@@ -7,7 +7,7 @@
     <Platforms>x64</Platforms>
     <AssemblyName>FireGaze</AssemblyName>
     <Name>FireGaze</Name>
-    <Version>1.2.0.51</Version>
+    <Version>1.2.0.52</Version>
     <Authors>fire</Authors>
     <Author>fire</Author>
     <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
@@ -32,9 +32,10 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
     <InternalsVisibleTo Include="fgtest" />
   </ItemGroup>
 
-  <!-- 词表跟随插件一起打包（发布 zip 里会有 translations.json） -->
+  <!-- 词表与术语表跟随插件一起打包（发布 zip 里会有 translations.json / ffxiv-glossary.tsv） -->
   <ItemGroup>
     <None Include="..\..\translations.json" Link="translations.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\ffxiv-glossary.tsv" Link="ffxiv-glossary.tsv" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <!-- AtmoOmen 生态的代码规范分析器（DR0001/0002/0008/0009，MIT）：与 DailyRoutines / UntarnishedHeart / OmenTools 同一套 -->

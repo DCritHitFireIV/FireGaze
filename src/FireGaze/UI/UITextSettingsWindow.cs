@@ -71,6 +71,13 @@ internal sealed class UITextSettingsWindow : Window
                 "新用户送 100 万字（一个月），一次能提交 50 条、几百条几秒翻完。");
         }
 
+        if (config.UITextUseGlossary && !string.Equals(config.UITextChannel, "llm", StringComparison.Ordinal))
+        {
+            UiHelpers.ColoredWrapped(
+                UiHelpers.Warn,
+                "FF14 官方译名术语表只在大模型通道生效；当前通道不会用到它。");
+        }
+
         var translateGrey = config.UITextTranslateGreyList;
         if (ImGui.Checkbox("批量翻译时连灰名单一起翻", ref translateGrey))
         {
@@ -137,7 +144,7 @@ internal sealed class UITextSettingsWindow : Window
             this.DrawKeyRow("大模型 API key", config.UITextLLMKeyProtected, v => config.UITextLLMKeyProtected = v, ref changed);
 
             var glossary = config.UITextUseGlossary;
-            if (ImGui.Checkbox("用游戏数据里的 FF14 官方译名（术语表）", ref glossary))
+            if (ImGui.Checkbox("用 FF14 官方译名术语表", ref glossary))
             {
                 config.UITextUseGlossary = glossary;
                 changed = true;
@@ -147,8 +154,8 @@ internal sealed class UITextSettingsWindow : Window
             {
                 ImGui.SetTooltip(
                     "翻译时把命中的官方译名（地名 / 副本 / 技能 / 状态 / 坐骑…）喂给模型，专有名词前后一致。\n" +
-                    "只对大模型通道有效；免费接口没法带术语表。\n" +
-                    "术语表从当前客户端的数据里读，不联网、也不随插件打包。");
+                    "只在大模型通道生效；免费接口带不了术语表。\n" +
+                    "术语表随插件打包，不用联网，也不会读你的游戏客户端。");
             }
 
             if (config.UITextUseGlossary)
@@ -157,7 +164,7 @@ internal sealed class UITextSettingsWindow : Window
                 ImGui.SameLine();
                 if (FFXIVGlossary.Failed)
                 {
-                    ImGui.TextDisabled("构建失败");
+                    ImGui.TextDisabled("加载失败");
                     if (ImGui.IsItemHovered() && FFXIVGlossary.FailureReason is { Length: > 0 } reason)
                     {
                         ImGui.SetTooltip(reason);
@@ -173,8 +180,10 @@ internal sealed class UITextSettingsWindow : Window
                 }
                 else
                 {
-                    ImGui.TextDisabled(FFXIVGlossary.Ready ? $"已就绪 {FFXIVGlossary.Count} 条" : "准备中…");
+                    ImGui.TextDisabled(FFXIVGlossary.Ready ? $"已就绪 {FFXIVGlossary.Count} 条" : "加载中…");
                 }
+
+                ImGui.TextDisabled("只在大模型通道生效；免费接口带不了术语表。");
             }
         }
 

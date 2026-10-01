@@ -785,7 +785,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
         List<UITextTranslateItem> chunk,
         CancellationToken token)
     {
-        // FF14 术语表：从游戏数据里读的「英文 → 官方中文」，命中就塞进系统提示。
+        // FF14 术语表：随插件打包的「英文 → 官方中文」，命中就塞进系统提示。
         // 免费接口（Google / MyMemory）没法带上下文，所以这是大模型通道专属。
         var system = SystemPrompt;
         if (this.useGlossary)
@@ -797,7 +797,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
                 if (terms.Count > 0)
                 {
                     var glossary = new StringBuilder();
-                    glossary.Append("\n\n这次英文里出现的官方专有名词（来自游戏数据，必须使用这些译名）：");
+                    glossary.Append("\n\n这次英文里出现的官方专有名词（FF14 官方译名，必须采用）：");
                     foreach (var (english, chinese) in terms)
                     {
                         glossary.Append("\n- ").Append(english).Append(" → ").Append(chinese);
