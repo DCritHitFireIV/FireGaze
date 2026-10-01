@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 
@@ -30,8 +31,13 @@ public static class UIStringExtractor
     {
         try
         {
+            var loadWatch = Stopwatch.StartNew();
             using var module = ModuleDefMD.Load(assemblyPath);
-            return new Scanner(module, assemblyPath).Run();
+            Trace?.Invoke($"[load] {Path.GetFileName(assemblyPath)} {loadWatch.ElapsedMilliseconds} ms，类型 {module.Types.Count} 个");
+            loadWatch.Restart();
+            var result = new Scanner(module, assemblyPath).Run();
+            Trace?.Invoke($"[extract] 总计 {loadWatch.ElapsedMilliseconds} ms");
+            return result;
         }
         catch (Exception e)
         {
@@ -236,13 +242,32 @@ public static class UIStringExtractor
                 }
             }
 
+            var stopwatch = Stopwatch.StartNew();
+            void Stage(string name)
+            {
+                if (Trace is not null)
+                {
+                    Trace($"[stage] {name} {stopwatch.ElapsedMilliseconds} ms");
+                }
+
+                stopwatch.Restart();
+            }
+
             // 扫描时只记原始键（别名表还没建）；先把接口 / 虚方法展开到实现，再跑不动点
+            Stage("scan");
             this.BuildDispatchAliases();
+            Stage($"aliases={this.dispatchAliases.Count} passRefs={this.passRefs.Count} param={this.paramFlowRefs.Count} retParam={this.returnToParamRefs.Count} retRet={this.returnToReturnRefs.Count} fields={this.fieldValues.Count}");
             this.ExpandFlowRefs();
+            Stage($"expand passRefs={this.passRefs.Count} param={this.paramFlowRefs.Count} retParam={this.returnToParamRefs.Count}");
             this.ApplyReturnToUIRequests();
+            Stage("uiRequests");
             this.SolveFlow();
+            Stage($"solve methods={this.methods.Count} literals={this.literals.Count}");
             this.Classify();
-            return this.BuildResult();
+            Stage("classify");
+            var result = this.BuildResult();
+            Stage($"build entries={result.Entries.Count}");
+            return result;
         }
 
         // ── 扫描 ─────────────────────────────────────────────────────────────
@@ -274,7 +299,12 @@ public static class UIStringExtractor
 
             if (scan.Depths.Length != scan.Instructions.Count)
             {
+                var depthWatch = Stopwatch.StartNew();
                 scan.Depths = ComputeDepths(scan);
+                if (Trace is not null && depthWatch.ElapsedMilliseconds > 300)
+                {
+                    Trace($"[slow-depth] {scan.Key} 指令 {scan.Instructions.Count} 深度分析 {depthWatch.ElapsedMilliseconds} ms");
+                }
             }
 
             // 第二遍复用同一条目（标记只增不减），只是这次读得到字段值了
@@ -282,6 +312,7 @@ public static class UIStringExtractor
             var locals = new Dictionary<int, V>();
             var args = new Dictionary<int, V>();
 
+            var methodWatch = Trace is null ? null : Stopwatch.StartNew();
             for (var index = 0; index < scan.Instructions.Count; index++)
             {
                 var instr = scan.Instructions[index];
@@ -289,7 +320,7 @@ public static class UIStringExtractor
                 // 线性走 IL 时，分支汇合点会让模拟栈多出/少掉值——按 CFG 算出的真实栈深夹一下，
                 // 否则后面所有调用的参数位置都会错位（2026-10-01：ARSR 的 SelectableCombo 标签就丢在这）。
                 var wanted = scan.Depths[index];
-                if (wanted >= 0)
+                if (wanted != UnknownDepth)
                 {
                     while (stack.Count > wanted)
                     {
@@ -304,6 +335,12 @@ public static class UIStringExtractor
 
                 var before = stack.Count;
                 this.Execute(scan, instr, stack, locals, args);
+                if (methodWatch is not null && Trace is not null && methodWatch.ElapsedMilliseconds > 500)
+                {
+                    Trace($"[slow] {scan.Key} 指令 {scan.Instructions.Count} / 已跑到第 {index} 条 / {methodWatch.ElapsedMilliseconds} ms");
+                    methodWatch.Restart();
+                }
+
                 if (Trace is not null && TraceKey is { Length: > 0 } filterKey
                     && scan.Key.Contains(filterKey, StringComparison.Ordinal))
                 {
@@ -312,6 +349,9 @@ public static class UIStringExtractor
             }
         }
 
+        /// <summary>「还没算出来」的哨兵值。不能用 -1：ret 之类的指令在某些路径上会算出 -1，写成哨兵会让工作队列死循环。</summary>
+        private const int UnknownDepth = int.MinValue;
+
         /// <summary>
         ///     按 CFG 算每条指令进入时的栈深。可验证的 IL 在任意汇合点的栈深都一致，所以只算深度就够，
         ///     值仍然按线性走（近似，但不会再错位）。
@@ -319,7 +359,8 @@ public static class UIStringExtractor
         private static int[] ComputeDepths(MethodScan scan)
         {
             var depths = new int[scan.Instructions.Count];
-            Array.Fill(depths, -1);
+            Array.Fill(depths, UnknownDepth);
+            var returnsVoid = scan.Def is not null && scan.Def.ReturnType?.FullName == "System.Void";
             var indexByOffset = new Dictionary<uint, int>(scan.Instructions.Count);
             for (var i = 0; i < scan.Instructions.Count; i++)
             {
@@ -333,24 +374,26 @@ public static class UIStringExtractor
                 queue.Enqueue(0);
             }
 
+            var iterations = 0;
             while (queue.Count > 0)
             {
+                iterations++;
                 var index = queue.Dequeue();
                 var instr = scan.Instructions[index];
                 var depth = depths[index];
-                var (pops, pushes, exits, fallThrough) = StackEffect(instr);
+                var (pops, pushes, exits, fallThrough) = StackEffect(instr, returnsVoid);
 
                 // 汇合点上以先到的为准（可验证 IL 里各路径深度一致）
-                var after = depth - pops + pushes;
+                var after = Math.Max(0, depth - pops + pushes);
 
-                if (fallThrough && index + 1 < depths.Length && depths[index + 1] < 0)
+                if (fallThrough && index + 1 < depths.Length && depths[index + 1] == UnknownDepth)
                 {
                     depths[index + 1] = after;
                     queue.Enqueue(index + 1);
                 }
 
                 if (exits && instr.Operand is Instruction target && indexByOffset.TryGetValue(target.Offset, out var targetIndex)
-                    && depths[targetIndex] < 0)
+                    && depths[targetIndex] == UnknownDepth)
                 {
                     depths[targetIndex] = after;
                     queue.Enqueue(targetIndex);
@@ -360,12 +403,19 @@ public static class UIStringExtractor
                 {
                     foreach (var caseTarget in cases)
                     {
-                        if (indexByOffset.TryGetValue(caseTarget.Offset, out var caseIndex) && depths[caseIndex] < 0)
+                        if (indexByOffset.TryGetValue(caseTarget.Offset, out var caseIndex) && depths[caseIndex] == UnknownDepth)
                         {
                             depths[caseIndex] = after;
                             queue.Enqueue(caseIndex);
                         }
                     }
+                }
+
+                // 兜底：真出现意外（比如某个 opcode 的栈效果写错）也不至于把一次抽取卡死
+                if (iterations > scan.Instructions.Count * 4)
+                {
+                    Trace?.Invoke($"[depth-runaway] {scan.Key} 指令 {scan.Instructions.Count} 迭代 {iterations}");
+                    break;
                 }
             }
 
@@ -376,7 +426,7 @@ public static class UIStringExtractor
         ///     一条指令的栈效果：(弹几个, 压几个, 有没有跳转目标, 会不会往下走)。
         ///     漏了哪个 opcode 会让深度错位，所以这里尽量写全；不确定的用具名分组兜底。
         /// </summary>
-        private static (int Pops, int Pushes, bool Exits, bool FallThrough) StackEffect(Instruction instr)
+        private static (int Pops, int Pushes, bool Exits, bool FallThrough) StackEffect(Instruction instr, bool returnsVoid)
         {
             switch (instr.OpCode.Code)
             {
@@ -566,7 +616,7 @@ public static class UIStringExtractor
                     return (0, 1, false, true);
 
                 case Code.Ret:
-                    return (1, 0, false, false);
+                    return (returnsVoid ? 0 : 1, 0, false, false);
 
                 case Code.Call:
                 case Code.Callvirt:

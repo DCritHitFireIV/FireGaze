@@ -155,7 +155,26 @@ internal sealed class UITextSettingsWindow : Window
             {
                 this.EnsureGlossaryBuilding();
                 ImGui.SameLine();
-                ImGui.TextDisabled(FFXIVGlossary.Ready ? $"已就绪 {FFXIVGlossary.Count} 条" : "准备中…");
+                if (FFXIVGlossary.Failed)
+                {
+                    ImGui.TextDisabled("构建失败");
+                    if (ImGui.IsItemHovered() && FFXIVGlossary.FailureReason is { Length: > 0 } reason)
+                    {
+                        ImGui.SetTooltip(reason);
+                    }
+
+                    ImGui.SameLine();
+                    if (ImGui.SmallButton("重试###glossary-retry"))
+                    {
+                        FFXIVGlossary.ResetFailure();
+                        this.glossaryBuilding = false;
+                        this.EnsureGlossaryBuilding();
+                    }
+                }
+                else
+                {
+                    ImGui.TextDisabled(FFXIVGlossary.Ready ? $"已就绪 {FFXIVGlossary.Count} 条" : "准备中…");
+                }
             }
         }
 
@@ -250,7 +269,7 @@ internal sealed class UITextSettingsWindow : Window
     /// <summary>第一次需要时在后台把术语表建好（读游戏表要一两秒，不能占渲染线程）。</summary>
     private void EnsureGlossaryBuilding()
     {
-        if (this.glossaryBuilding || FFXIVGlossary.Ready)
+        if (this.glossaryBuilding || FFXIVGlossary.Ready || FFXIVGlossary.Failed)
         {
             return;
         }

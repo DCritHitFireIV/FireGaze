@@ -29,7 +29,8 @@
 | `src/FireGaze/UIText/UITextPatcher.cs` | 打补丁：dnlib 改写 `ldstr` 字面量（只动字符串，不动代码结构） |
 | `src/FireGaze/UIText/UITextPatchStore.cs` | 补丁状态 + 原始 DLL 备份（都在配置目录里） |
 | `src/FireGaze/UIText/UITextPatchManager.cs` | 打补丁/还原/重载/更新后重打的调度与安全网 |
-| `src/FireGaze/UIText/TranslationChannels.cs` | 翻译通道：Google 免 key / MyMemory / 大模型 / DeepL |
+| `src/FireGaze/UIText/TranslationChannels.cs` | 翻译通道：Google 免 key / MyMemory / 大模型 / DeepL / 彩云小译 |
+| `src/FireGaze/UIText/FFXIVGlossary.cs` | 从游戏 Lumina 表读「英文 → 国服官方中文」术语表（只喂大模型通道，可关） |
 | `src/FireGaze/UIText/DPAPI.cs` | 用户 API key 的本机加密存储 |
 | `tools/UITextProbe/` | 离线探针（与插件同一份源码）：`--all` / `--json` / `--trace` / `--types` |
 
@@ -165,3 +166,22 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - **同一个字面量既当控件标签又当普通文字 → 灰名单**（加 `###原文` 会在文字处漏出后缀，不加可能撞控件 ID，让用户自己定）。
 - 集合/字典的键名调用只把**第一个参数**当键（key 永远是第一个参数），后面的参数不能跟着算键。
 - 排查入口：探针 `--trace` 会打 `[danger] scan=<调用方> <目标> key=… params=… text=…` 与 `[keyparam] <方法> param=N`。
+
+## 血教训：深度哨兵不能是 -1（2026-10-01，I-Ching-GL / pvpauto 扫描挂死）
+
+- 现象：批量扫描里这两个加壳插件**每次超过 90 秒**只能掐掉（`超时 90 秒没跑完（已抽到一半）`）；
+  单独探针跑 28 条指令的方法要 28 秒。根因：`ComputeDepths` 用 `-1` 当「还没算出」的哨兵，
+  但 `ret` 这类指令在 void 方法上会合法地算出 `-1`（`depth 0 - pops 1`），与哨兵同值 → 工作队列反复重入。
+- 修法：哨兵改 `int.MinValue`（`UnknownDepth`）、深度下限夹到 0、`ret` 按方法返回类型决定弹几个（void 弹 0）、
+  再加 `iterations > 指令数 × 4` 的兜底。修后同一批 191 个插件 **失败 0 个**，两个卡死插件各 ~2.6 秒。
+- 教训：**「值域里可能出现的数」不能当哨兵**；这类挂起不会崩，只会让用户的一键汉化永远转圈。
+
+## 血教训：Equals / GetHashCode 的宽严（2026-10-01 独立评审 P1-1）
+
+- 修 record 文本时把 `Equals` / `GetHashCode` 从危险名单里摘了，副作用是「被比较的字符串」失去灰名单保护：
+  `mode.Equals("Auto")` 的 `"Auto"` 若同时也画在界面上，翻译后比较恒不相等 → 插件设置/分支静默失效。
+- 现在两者回名单，只对 `EqualityComparer` 窄豁免（record 自动生成的比较/哈希代码走的就是
+  `EqualityComparer<T>.Default.*`，那是机械比较）。fgtest 钉住：`String.Equals` 算危险、`EqualityComparer` 不算。
+- 术语表构建失败也不再谎报「已就绪 0 条」：失败状态独立（`Failed` / `FailureReason`），设置页显示「构建失败 · 重试」，
+  日志带每张表的条数便于定位是哪张表读不到。
+- 独立评审报告全文（含 P1-3 待办与三个实机确认点）：`docs/hci/review-2026-10-01-ui-extractor-independent.md`。

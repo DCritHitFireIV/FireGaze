@@ -114,9 +114,12 @@ internal static class UICallSemantics
     /// </summary>
     private static readonly HashSet<string> DangerousMethodNames = new(StringComparer.Ordinal)
     {
-        // 注意：Equals / GetHashCode 不在这里。记录（record）的自动生成代码会对每个字段调它们，
-        // 一放进来所有「存在 record 里再画出来」的文本都会被打成灰名单（2026-10-01 实测 ARSR 的教程文本）。
-        // 真正的「当键名」由字典调用（IsCollectionKeyCall）和 op_Equality / CompareTo / StartsWith 这些兜住。
+        // Equals / GetHashCode 在名单里，但 IsDangerousCall 对 EqualityComparer 有窄豁免：
+        // 记录（record）自动生成的比较/哈希代码会对每个字段调 EqualityComparer<T>.Default.*，
+        // 那是机械比较、不是「拿字符串当键」；不豁免的话 record 里存的界面文本全会被打成灰名单
+        //（2026-10-01 实测 ARSR 的教程文本）。字符串自己的 Equals / GetHashCode 仍然算危险。
+        "Equals",
+        "GetHashCode",
         "op_Equality",
         "op_Inequality",
         "CompareTo",
@@ -487,6 +490,13 @@ internal static class UICallSemantics
         if (methodName is "SendCommand" or "ProcessCommand")
         {
             return true;
+        }
+
+        // record 自动生成的 Equals / GetHashCode 走 EqualityComparer<T>.Default.*——机械比较，豁免；
+        // 其余 Equals / GetHashCode（System.String、System.Object…）仍是危险语境（2026-10-01 独立评审 P1-1）。
+        if (typeFullName.Contains("EqualityComparer", StringComparison.Ordinal))
+        {
+            return false;
         }
 
         // 字符串自身的比较与查找（扩展方法也会挂在 System.String 上）
