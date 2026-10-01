@@ -191,7 +191,7 @@ public sealed class Plugin : IDalamudPlugin
             Log.Information(
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {Table.Count} 条；" +
                 $"汉化 = {(Config.TranslateEnabled ? "开" : "关")}");
-            Log.Information("[FireGaze] 页签顺序：简介汉化 / 仓库体检 / 插件安装器 / 参与翻译");
+            Log.Information("[FireGaze] 页签顺序：插件汉化 / 简介汉化 / 仓库体检 / 插件安装器（参与翻译是独立窗口）");
 
             if (installerDefaultsNotice)
             {

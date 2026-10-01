@@ -8,7 +8,7 @@ using FireGaze.UIText;
 namespace FireGaze.UI;
 
 /// <summary>
-///     「界面汉化」编辑器：一个插件一个窗口，逐条改插件界面上的英文文本。
+///     「插件汉化」编辑器：一个插件一个窗口，逐条改插件界面上的英文文本。
 ///     抽取只认「会画到界面上的字符串」（<see cref="UIStringExtractor" />），灰名单默认不翻。
 /// </summary>
 internal sealed class UITextEditorWindow : Window
@@ -64,7 +64,7 @@ internal sealed class UITextEditorWindow : Window
     private int translateTotal;
 
     public UITextEditorWindow(Plugin plugin, UITextStore store, UITextPatchManager patches, UITextRunLock runs)
-        : base("界面汉化 — 编辑校对###FireGazeUITextEditor", ImGuiWindowFlags.None)
+        : base("插件汉化 — 编辑校对###FireGazeUITextEditor", ImGuiWindowFlags.None)
     {
         this.plugin = plugin;
         this.store = store;
