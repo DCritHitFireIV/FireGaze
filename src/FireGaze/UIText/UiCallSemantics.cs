@@ -114,7 +114,9 @@ internal static class UICallSemantics
     /// </summary>
     private static readonly HashSet<string> DangerousMethodNames = new(StringComparer.Ordinal)
     {
-        "Equals",
+        // 注意：Equals / GetHashCode 不在这里。记录（record）的自动生成代码会对每个字段调它们，
+        // 一放进来所有「存在 record 里再画出来」的文本都会被打成灰名单（2026-10-01 实测 ARSR 的教程文本）。
+        // 真正的「当键名」由字典调用（IsCollectionKeyCall）和 op_Equality / CompareTo / StartsWith 这些兜住。
         "op_Equality",
         "op_Inequality",
         "CompareTo",
@@ -139,7 +141,6 @@ internal static class UICallSemantics
         "Substring",
         "Parse",
         "TryParse",
-        "GetHashCode",
         "Add",
         "TryAdd",
         "ContainsKey",
@@ -197,12 +198,39 @@ internal static class UICallSemantics
         methodName == ".ctor" && typeFullName.EndsWith("Dalamud.Interface.Windowing.Window", StringComparison.Ordinal);
 
     /// <summary>
+    ///     插件自己写的 UI 包装方法（名字一看就是在画界面的）：类型不在上面几个前缀里，但第一个字符串参数
+    ///     肯定是给玩家看的标签，点了就拿去画（ARSR 的 `RotationSolver.UI.ImGuiHelper.SelectableCombo` 这样）。
+    /// </summary>
+    private static readonly HashSet<string> UIHelperMethodNames = new(StringComparer.Ordinal)
+    {
+        "SelectableCombo",
+        "SelectableButton",
+        "DrawSectionTitle",
+        "DrawHeader",
+        "DrawLabel",
+        "SectionTitle",
+        "DrawTooltip",
+    };
+
+    /// <summary>
+    ///     服务器信息栏（DTR）：`Get("名字")` 的那个名字会显示在服务器信息栏的悬停说明里。
+    /// </summary>
+    public static bool IsDtrCall(string typeFullName, string methodName) =>
+        methodName is "Get" or "TryGet" && typeFullName.EndsWith("IDtrBar", StringComparison.Ordinal);
+
+    /// <summary>
     ///     是不是「在画 UI」的调用。
     /// </summary>
     public static bool IsUICall(string typeFullName, string methodName)
     {
         // 窗口标题：即使类型名字里没有 ImGui，也是给玩家看的
         if (IsWindowTitleCall(typeFullName, methodName))
+        {
+            return true;
+        }
+
+        // 服务器信息栏的标题
+        if (IsDtrCall(typeFullName, methodName))
         {
             return true;
         }
@@ -227,6 +255,12 @@ internal static class UICallSemantics
             {
                 return true;
             }
+        }
+
+        // 插件自己写的 UI 包装方法（名字一看就是在画界面的）
+        if (UIHelperMethodNames.Contains(methodName))
+        {
+            return true;
         }
 
         return false;

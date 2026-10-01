@@ -265,4 +265,10 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("UITextFreeWarned")]
     public bool UITextFreeWarned { get; set; }
+
+    /// <summary>
+    ///     大模型翻译时带上传游戏数据里的 FF14 官方译名（术语表）。
+    /// </summary>
+    [JsonProperty("UITextUseGlossary")]
+    public bool UITextUseGlossary { get; set; } = true;
 }

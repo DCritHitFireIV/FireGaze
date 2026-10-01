@@ -20,6 +20,9 @@ public static class UIStringExtractor
     /// </summary>
     public static Action<string>? Trace { get; set; }
 
+    /// <summary>调试用：只给名字里含这个片段的方法打逐条 IL 栈深（临时排查用）。</summary>
+    public static string? TraceKey { get; set; }
+
     /// <summary>
     ///     抽取一个程序集；读不出来（加壳 / 加密 / 不是 .NET 程序集）时返回带 <see cref="UITextExtraction.Error" /> 的结果。
     /// </summary>
@@ -55,8 +58,32 @@ public static class UIStringExtractor
         bool IsArray,
         bool IsThis,
         int RefLocal = -1,
-        int RefArg = -1)
+        int RefArg = -1,
+        string? FieldKey = null)
     {
+        /// <summary>
+        ///     一个值里最多带多少项。字段是跨方法合并的，不封顶会组合爆炸
+        ///     （2026-10-01：全量扫 191 个插件时跑到半小时没完，就是字段值互相合并膨胀）。
+        /// </summary>
+        public const int MaxItems = 96;
+
+        /// <summary>带上限地并进来：满了就丢新的，宁少不炸。</summary>
+        public static void AppendCapped<T>(List<T> target, List<T> source)
+        {
+            foreach (var item in source)
+            {
+                if (target.Count >= MaxItems)
+                {
+                    return;
+                }
+
+                if (!target.Contains(item))
+                {
+                    target.Add(item);
+                }
+            }
+        }
+
         public static readonly V Unknown = new([], [], [], false, false);
 
         public static V FromLiteral(int id) => new([id], [], [], false, false);
@@ -65,7 +92,10 @@ public static class UIStringExtractor
 
         public static V This => new([], [], [], false, true);
 
-        public bool IsKnown => this.IDs.Count > 0 || this.Params.Count > 0 || this.CallKeys.Count > 0;
+        /// <summary>读的是某个字段的值（字段当「只有一个参数的伪方法」处理）。</summary>
+        public static V FromField(string fieldKey) => new([], [], [], false, false, -1, -1, fieldKey);
+
+        public bool IsKnown => this.IDs.Count > 0 || this.Params.Count > 0 || this.CallKeys.Count > 0 || this.FieldKey is not null;
 
         public static V Merge(V a, V b)
         {
@@ -80,20 +110,14 @@ public static class UIStringExtractor
             }
 
             var ids = new List<int>(a.IDs);
-            ids.AddRange(b.IDs);
+            AppendCapped(ids, b.IDs);
             var prms = new List<int>(a.Params);
-            prms.AddRange(b.Params);
+            AppendCapped(prms, b.Params);
             var keys = new List<string>(a.CallKeys);
-            foreach (var key in b.CallKeys)
-            {
-                if (!keys.Contains(key))
-                {
-                    keys.Add(key);
-                }
-            }
+            AppendCapped(keys, b.CallKeys);
 
             var isArray = a.IsArray || b.IsArray;
-            return new V(ids, prms, keys, isArray, false);
+            return new V(ids, prms, keys, isArray, false, -1, -1, a.FieldKey ?? b.FieldKey);
         }
     }
 
@@ -138,6 +162,9 @@ public static class UIStringExtractor
         public bool ReturnsToUI;
         public string ReturnsToUITarget = string.Empty;
         public bool ReturnsDangerous;
+
+        /// <summary>每条指令进入时的真实栈深（从 CFG 算出来；-1 = 到不了 / 未知）。</summary>
+        public int[] Depths = [];
     }
     private sealed class Scanner
     {
@@ -163,7 +190,15 @@ public static class UIStringExtractor
         /// <summary>调用点上「这个值进了 UI」但方法可能还没扫描到的记录，建完别名后统一落实成 ReturnsToUI。</summary>
         private readonly List<(string Key, string Target)> returnToUIRequests = [];
 
+        /// <summary>(字段, 方法)：这个方法把字段的内容返回给调用方。</summary>
+        private readonly List<(string Field, string Method)> fieldReturnRefs = [];
+
         private readonly Dictionary<string, TypeDef> typesByName = new(StringComparer.Ordinal);
+
+        /// <summary>字段键 → 存进去过的值（跨方法、跨两遍扫描累积）。</summary>
+        private readonly Dictionary<string, V> fieldValues = new(StringComparer.Ordinal);
+
+        private bool useFieldValues;
 
         public Scanner(ModuleDefMD module, string path)
         {
@@ -179,15 +214,25 @@ public static class UIStringExtractor
                 {
                     this.typesByName.TryAdd(fullName, type);
                 }
+            }
 
-                foreach (var method in type.Methods)
+            // 扫两遍：第一遍只收集「谁往字段里存了什么」，第二遍把字段当已知值用。
+            // 很多标题 / 说明是「构造对象 → 存进静态数组或字段 → 以后读出来画」的，只扫一遍会断在字段上
+            // （2026-10-01：ARSR 的新手教程 = 记录数组的字段；AnoMech 的场景表也有一半走静态字段）。
+            for (var pass = 0; pass < 2; pass++)
+            {
+                this.useFieldValues = pass > 0;
+                foreach (var type in this.module.GetTypes())
                 {
-                    if (!method.HasBody || method.Body.Instructions.Count == 0)
+                    foreach (var method in type.Methods)
                     {
-                        continue;
-                    }
+                        if (!method.HasBody || method.Body.Instructions.Count == 0)
+                        {
+                            continue;
+                        }
 
-                    this.ScanMethod(type, method);
+                        this.ScanMethod(type, method);
+                    }
                 }
             }
 
@@ -204,32 +249,343 @@ public static class UIStringExtractor
 
         private void ScanMethod(TypeDef type, MethodDef method)
         {
-            var scan = new MethodScan
+            var key = MethodKey(type.FullName, method.Name.String, method.MethodSig?.Params.Count ?? 0);
+            if (!this.methodByKey.TryGetValue(key, out var scan))
             {
-                Def = method,
-                Key = MethodKey(type.FullName, method.Name.String, method.MethodSig?.Params.Count ?? 0),
-                Context = MakeContext(type, method),
-                Instructions = [.. method.Body.Instructions],
-            };
+                scan = new MethodScan
+                {
+                    Def = method,
+                    Key = key,
+                    Context = MakeContext(type, method),
+                    Instructions = [.. method.Body.Instructions],
+                };
 
-            var paramCount = method.MethodSig?.Params.Count ?? 0;
-            scan.ParamsToUI = new bool[paramCount];
-            scan.ParamsToUITarget = EmptyStrings(paramCount);
-            scan.ParamsToUIPreserveID = new bool[paramCount];
-            scan.ParamsDangerous = new bool[paramCount];
-            scan.ParamsDangerousTarget = EmptyStrings(paramCount);
-            scan.ParamsKey = new bool[paramCount];
+                var paramCount = method.MethodSig?.Params.Count ?? 0;
+                scan.ParamsToUI = new bool[paramCount];
+                scan.ParamsToUITarget = EmptyStrings(paramCount);
+                scan.ParamsToUIPreserveID = new bool[paramCount];
+                scan.ParamsDangerous = new bool[paramCount];
+                scan.ParamsDangerousTarget = EmptyStrings(paramCount);
+                scan.ParamsKey = new bool[paramCount];
 
-            this.methods.Add(scan);
-            this.methodByKey.TryAdd(scan.Key, scan);
+                this.methods.Add(scan);
+                this.methodByKey[scan.Key] = scan;
+            }
 
+            if (scan.Depths.Length != scan.Instructions.Count)
+            {
+                scan.Depths = ComputeDepths(scan);
+            }
+
+            // 第二遍复用同一条目（标记只增不减），只是这次读得到字段值了
             var stack = new List<V>();
             var locals = new Dictionary<int, V>();
             var args = new Dictionary<int, V>();
 
-            foreach (var instr in scan.Instructions)
+            for (var index = 0; index < scan.Instructions.Count; index++)
             {
+                var instr = scan.Instructions[index];
+
+                // 线性走 IL 时，分支汇合点会让模拟栈多出/少掉值——按 CFG 算出的真实栈深夹一下，
+                // 否则后面所有调用的参数位置都会错位（2026-10-01：ARSR 的 SelectableCombo 标签就丢在这）。
+                var wanted = scan.Depths[index];
+                if (wanted >= 0)
+                {
+                    while (stack.Count > wanted)
+                    {
+                        stack.RemoveAt(stack.Count - 1);
+                    }
+
+                    while (stack.Count < wanted)
+                    {
+                        stack.Insert(0, V.Unknown);
+                    }
+                }
+
+                var before = stack.Count;
                 this.Execute(scan, instr, stack, locals, args);
+                if (Trace is not null && TraceKey is { Length: > 0 } filterKey
+                    && scan.Key.Contains(filterKey, StringComparison.Ordinal))
+                {
+                    Trace($"[il] {instr.Offset:X4} {instr.OpCode.Code} {before}->{stack.Count} {instr.Operand}");
+                }
+            }
+        }
+
+        /// <summary>
+        ///     按 CFG 算每条指令进入时的栈深。可验证的 IL 在任意汇合点的栈深都一致，所以只算深度就够，
+        ///     值仍然按线性走（近似，但不会再错位）。
+        /// </summary>
+        private static int[] ComputeDepths(MethodScan scan)
+        {
+            var depths = new int[scan.Instructions.Count];
+            Array.Fill(depths, -1);
+            var indexByOffset = new Dictionary<uint, int>(scan.Instructions.Count);
+            for (var i = 0; i < scan.Instructions.Count; i++)
+            {
+                indexByOffset[scan.Instructions[i].Offset] = i;
+            }
+
+            var queue = new Queue<int>();
+            if (depths.Length > 0)
+            {
+                depths[0] = 0;
+                queue.Enqueue(0);
+            }
+
+            while (queue.Count > 0)
+            {
+                var index = queue.Dequeue();
+                var instr = scan.Instructions[index];
+                var depth = depths[index];
+                var (pops, pushes, exits, fallThrough) = StackEffect(instr);
+
+                // 汇合点上以先到的为准（可验证 IL 里各路径深度一致）
+                var after = depth - pops + pushes;
+
+                if (fallThrough && index + 1 < depths.Length && depths[index + 1] < 0)
+                {
+                    depths[index + 1] = after;
+                    queue.Enqueue(index + 1);
+                }
+
+                if (exits && instr.Operand is Instruction target && indexByOffset.TryGetValue(target.Offset, out var targetIndex)
+                    && depths[targetIndex] < 0)
+                {
+                    depths[targetIndex] = after;
+                    queue.Enqueue(targetIndex);
+                }
+
+                if (exits && instr.Operand is IList<Instruction> cases)
+                {
+                    foreach (var caseTarget in cases)
+                    {
+                        if (indexByOffset.TryGetValue(caseTarget.Offset, out var caseIndex) && depths[caseIndex] < 0)
+                        {
+                            depths[caseIndex] = after;
+                            queue.Enqueue(caseIndex);
+                        }
+                    }
+                }
+            }
+
+            return depths;
+        }
+
+        /// <summary>
+        ///     一条指令的栈效果：(弹几个, 压几个, 有没有跳转目标, 会不会往下走)。
+        ///     漏了哪个 opcode 会让深度错位，所以这里尽量写全；不确定的用具名分组兜底。
+        /// </summary>
+        private static (int Pops, int Pushes, bool Exits, bool FallThrough) StackEffect(Instruction instr)
+        {
+            switch (instr.OpCode.Code)
+            {
+                case Code.Nop:
+                case Code.Break:
+                case Code.Readonly:
+                case Code.Volatile:
+                case Code.Unaligned:
+                case Code.No:
+                    return (0, 0, false, true);
+
+                case Code.Ldstr:
+                case Code.Ldloc:
+                case Code.Ldloc_S:
+                case Code.Ldloc_0:
+                case Code.Ldloc_1:
+                case Code.Ldloc_2:
+                case Code.Ldloc_3:
+                case Code.Ldarg:
+                case Code.Ldarg_S:
+                case Code.Ldarg_0:
+                case Code.Ldarg_1:
+                case Code.Ldarg_2:
+                case Code.Ldarg_3:
+                case Code.Ldarga:
+                case Code.Ldarga_S:
+                case Code.Ldloca:
+                case Code.Ldloca_S:
+                case Code.Ldc_I4:
+                case Code.Ldc_I4_S:
+                case Code.Ldc_I4_0:
+                case Code.Ldc_I4_1:
+                case Code.Ldc_I4_2:
+                case Code.Ldc_I4_3:
+                case Code.Ldc_I4_4:
+                case Code.Ldc_I4_5:
+                case Code.Ldc_I4_6:
+                case Code.Ldc_I4_7:
+                case Code.Ldc_I4_8:
+                case Code.Ldc_I4_M1:
+                case Code.Ldc_I8:
+                case Code.Ldc_R4:
+                case Code.Ldc_R8:
+                case Code.Ldnull:
+                case Code.Ldsfld:
+                case Code.Ldsflda:
+                case Code.Ldftn:
+                case Code.Ldvirtftn:
+                case Code.Ldtoken:
+                case Code.Ldlen:
+                case Code.Sizeof:
+                case Code.Arglist:
+                case Code.Localloc:
+                    return (0, 1, false, true);
+
+                case Code.Dup:
+                    return (0, 1, false, true);
+
+                case Code.Ldfld:
+                case Code.Ldflda:
+                case Code.Ldind_I:
+                case Code.Ldind_I4:
+                case Code.Ldind_I8:
+                case Code.Ldind_R4:
+                case Code.Ldind_R8:
+                case Code.Ldind_Ref:
+                case Code.Ldobj:
+                case Code.Neg:
+                case Code.Not:
+                case Code.Conv_I:
+                case Code.Conv_I1:
+                case Code.Conv_I2:
+                case Code.Conv_I4:
+                case Code.Conv_I8:
+                case Code.Conv_R4:
+                case Code.Conv_R8:
+                case Code.Conv_U:
+                case Code.Conv_U1:
+                case Code.Conv_U2:
+                case Code.Conv_U4:
+                case Code.Conv_U8:
+                case Code.Conv_R_Un:
+                case Code.Castclass:
+                case Code.Isinst:
+                case Code.Box:
+                case Code.Unbox:
+                case Code.Unbox_Any:
+                case Code.Ckfinite:
+                    return (1, 1, false, true);
+
+                case Code.Ldelem:
+                case Code.Ldelem_I4:
+                case Code.Ldelem_Ref:
+                case Code.Newarr:
+                    return (1, 1, false, true);
+
+                case Code.Initobj:
+                case Code.Pop:
+                    return (1, 0, false, true);
+
+                case Code.Stloc:
+                case Code.Stloc_S:
+                case Code.Stloc_0:
+                case Code.Stloc_1:
+                case Code.Stloc_2:
+                case Code.Stloc_3:
+                case Code.Starg:
+                case Code.Starg_S:
+                case Code.Stsfld:
+                    return (1, 0, false, true);
+
+                case Code.Stobj:
+                case Code.Cpobj:
+                    return (2, 0, false, true);
+
+                case Code.Stfld:
+                    return (2, 0, false, true);
+
+                case Code.Stelem:
+                case Code.Stelem_I4:
+                case Code.Stelem_Ref:
+                    return (3, 0, false, true);
+
+                case Code.Br:
+                case Code.Br_S:
+                case Code.Leave:
+                case Code.Leave_S:
+                    return (0, 0, true, false);
+
+                case Code.Brtrue:
+                case Code.Brtrue_S:
+                case Code.Brfalse:
+                case Code.Brfalse_S:
+                case Code.Switch:
+                    return (1, 0, true, true);
+
+                case Code.Beq:
+                case Code.Beq_S:
+                case Code.Bne_Un:
+                case Code.Bne_Un_S:
+                case Code.Bge:
+                case Code.Bge_S:
+                case Code.Bge_Un:
+                case Code.Bge_Un_S:
+                case Code.Bgt:
+                case Code.Bgt_S:
+                case Code.Bgt_Un:
+                case Code.Bgt_Un_S:
+                case Code.Ble:
+                case Code.Ble_S:
+                case Code.Ble_Un:
+                case Code.Ble_Un_S:
+                case Code.Blt:
+                case Code.Blt_S:
+                case Code.Blt_Un:
+                case Code.Blt_Un_S:
+                    return (2, 0, true, true);
+
+                case Code.Throw:
+                case Code.Endfilter:
+                    return (1, 0, false, false);
+
+                case Code.Endfinally:
+                case Code.Rethrow:
+                    return (0, 0, false, false);
+
+                case Code.Add:
+                case Code.Sub:
+                case Code.Mul:
+                case Code.Div:
+                case Code.Rem:
+                case Code.And:
+                case Code.Or:
+                case Code.Xor:
+                case Code.Shl:
+                case Code.Shr:
+                case Code.Shr_Un:
+                case Code.Ceq:
+                case Code.Cgt:
+                case Code.Cgt_Un:
+                case Code.Clt:
+                case Code.Clt_Un:
+                    return (2, 1, false, true);
+
+                case Code.Constrained:
+                    // 真实语义是弹掉托管指针；我们的模拟里 callvirt 还会弹 this，所以这里补一个占位值
+                    return (0, 1, false, true);
+
+                case Code.Ret:
+                    return (1, 0, false, false);
+
+                case Code.Call:
+                case Code.Callvirt:
+                case Code.Newobj:
+                {
+                    if (instr.Operand is not IMethod callee)
+                    {
+                        return (0, 0, false, true);
+                    }
+
+                    var isNewObj = instr.OpCode.Code == Code.Newobj;
+                    var pops = (callee.MethodSig?.Params.Count ?? 0) + (!isNewObj && IsInstance(callee) ? 1 : 0);
+                    var pushes = isNewObj || callee.MethodSig?.RetType.FullName != "System.Void" ? 1 : 0;
+                    return (pops, pushes, false, true);
+                }
+
+                default:
+                    // 没覆盖到的 opcode 当无栈效果：宁可稍微错位，也不要乱弹
+                    return (0, 0, false, true);
             }
         }
 
@@ -328,7 +684,21 @@ public static class UIStringExtractor
                 case Code.Ldc_R8:
                 case Code.Ldnull:
                 case Code.Ldsfld:
+                    // 静态字段：第二遍开始读得懂存进去的值（标题 / 说明常这样中转）
+                    if (this.useFieldValues && instr.Operand is IField staticField
+                        && this.fieldValues.ContainsKey(FieldKey(staticField)))
+                    {
+                        Push(stack, V.FromField(FieldKey(staticField)));
+                        return;
+                    }
+
+                    Push(stack, V.Unknown);
+                    return;
+
                 case Code.Ldsflda:
+                    Push(stack, V.Unknown);
+                    return;
+
                 case Code.Ldtoken:
                 case Code.Ldftn:
                 case Code.Arglist:
@@ -336,9 +706,27 @@ public static class UIStringExtractor
                     Push(stack, V.Unknown);
                     return;
 
-                // 这些也会消耗栈顶（取字段 / 取地址 / 间接读写 / 初始化），归到「弹一压一」组
                 case Code.Ldfld:
+                {
+                    // 实例字段：同样在第二遍读得懂（记录 / 配置对象里的字符串）
+                    Pop(stack);
+                    if (this.useFieldValues && instr.Operand is IField instanceField
+                        && this.fieldValues.ContainsKey(FieldKey(instanceField)))
+                    {
+                        Push(stack, V.FromField(FieldKey(instanceField)));
+                        return;
+                    }
+
+                    Push(stack, V.Unknown);
+                    return;
+                }
+
                 case Code.Ldflda:
+                    Pop(stack);
+                    Push(stack, V.Unknown);
+                    return;
+
+                // 这些也会消耗栈顶（取字段 / 取地址 / 间接读写 / 初始化），归到「弹一压一」组
                 case Code.Ldvirtftn:
                 case Code.Ldind_I:
                 case Code.Ldind_I4:
@@ -375,6 +763,15 @@ public static class UIStringExtractor
 
                     if (instr.Operand is IField field)
                     {
+                        if (value.IsKnown)
+                        {
+                            var fieldKey = FieldKey(field);
+                            this.fieldValues[fieldKey] = this.fieldValues.TryGetValue(fieldKey, out var stored)
+                                ? V.Merge(stored, value)
+                                : value;
+                            this.RecordFieldStore(scan, value, fieldKey);
+                        }
+
                         var label = UICallSemantics.DescribeUIField(field.DeclaringType?.FullName ?? string.Empty, field.Name.String);
                         if (label is not null)
                         {
@@ -414,10 +811,14 @@ public static class UIStringExtractor
                 case Code.Ldelem_Ref:
                 case Code.Ldelem_I4:
                 case Code.Ldelem:
+                {
+                    // 取数组元素：不知道取的是哪一个，就把整条数组的值往上带（over-approximation）。
+                    // 字符串数组按元素读出来画（`foreach (var s in hints) ImGui.Text(s)`）以前会断在这里。
                     Pop(stack);
-                    Pop(stack);
-                    Push(stack, V.Unknown);
+                    var array = Pop(stack);
+                    Push(stack, array);
                     return;
+                }
 
                 case Code.Stelem_Ref:
                 case Code.Stelem_I4:
@@ -438,6 +839,11 @@ public static class UIStringExtractor
                                 array.CallKeys.Add(key);
                             }
                         }
+
+                        if (value.FieldKey is { } elementField)
+                        {
+                            array = array with { FieldKey = array.FieldKey ?? elementField };
+                        }
                     }
 
                     Push(stack, array);
@@ -452,6 +858,59 @@ public static class UIStringExtractor
 
                 case Code.Ldlen:
                     Pop(stack);
+                    Push(stack, V.Unknown);
+                    return;
+
+                // 分支指令必须把条件弹掉，否则模拟栈会一路积累垃圾，
+                // 后面所有调用的参数位置都会错位——2026-10-01 实测这是「一堆界面文本没进候选」的根因
+                // （ARSR 的 SelectableCombo 标签就断在这里）。
+                case Code.Br:
+                case Code.Br_S:
+                case Code.Leave:
+                case Code.Leave_S:
+                case Code.Endfinally:
+                case Code.Rethrow:
+                    return;
+
+                case Code.Brtrue:
+                case Code.Brtrue_S:
+                case Code.Brfalse:
+                case Code.Brfalse_S:
+                case Code.Switch:
+                    Pop(stack);
+                    return;
+
+                case Code.Beq:
+                case Code.Beq_S:
+                case Code.Bne_Un:
+                case Code.Bne_Un_S:
+                case Code.Bge:
+                case Code.Bge_S:
+                case Code.Bge_Un:
+                case Code.Bge_Un_S:
+                case Code.Bgt:
+                case Code.Bgt_S:
+                case Code.Bgt_Un:
+                case Code.Bgt_Un_S:
+                case Code.Ble:
+                case Code.Ble_S:
+                case Code.Ble_Un:
+                case Code.Ble_Un_S:
+                case Code.Blt:
+                case Code.Blt_S:
+                case Code.Blt_Un:
+                case Code.Blt_Un_S:
+                    Pop(stack);
+                    Pop(stack);
+                    return;
+
+                case Code.Throw:
+                case Code.Endfilter:
+                    Pop(stack);
+                    return;
+
+                // constrained. 前缀自己会把托管指针弹掉，后面 callvirt 的 this 由我们补一个占位值
+                case Code.Constrained:
                     Push(stack, V.Unknown);
                     return;
 
@@ -516,6 +975,12 @@ public static class UIStringExtractor
                             // 返回了别的方法的返回值：那个方法的返回值也会进 UI（键在不动点阶段展开成实现）
                             this.returnToReturnRefs.Add((calleeKey, scan.Key));
                         }
+
+                        if (returned.FieldKey is { } returnedField)
+                        {
+                            // 返回的是某个字段的内容：调用方把它画出来时，字段的内容就是 UI 文本
+                            this.fieldReturnRefs.Add((returnedField, scan.Key));
+                        }
                     }
 
                     return;
@@ -572,9 +1037,9 @@ public static class UIStringExtractor
                 }
             }
 
-            // 构造函数：当作对象初始化，参数不直接进 UI
-            // 例外：Dalamud 窗口基类的标题（`call Window::.ctor(string)` 在子类构造函数里是 call，不在这条路上，
-            // 但插件直接 `new Window("标题")` 时是 newobj）。
+            // 构造函数：参数不直接进 UI，但对象带着这些字符串走
+            // （`new TutorialStep("标题", "说明")` 之后字段里就是它们；以前这里直接丢成 Unknown，
+            //  存进数组 / 字段后就再也追不回来了）。窗口标题是另一回事，见下。
             if (instr.OpCode.Code == Code.Newobj)
             {
                 if (UICallSemantics.IsWindowTitleCall(typeName, methodName) && argValues.Length > 0)
@@ -582,7 +1047,40 @@ public static class UIStringExtractor
                     this.MarkUI(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), preserveID: true);
                 }
 
-                Push(stack, V.Unknown);
+                // 构造函数也是方法：实参要登记成「流进了它的参数」，否则对象存进字段后再也追不回来
+                var ctorKey = MethodKey(typeName, methodName, argValues.Length);
+                if (this.methodByKey.ContainsKey(ctorKey) || DeclaredInModule(callee, this.module))
+                {
+                    for (var i = 0; i < argValues.Length; i++)
+                    {
+                        if (!IsStringLike(paramTypes[i]))
+                        {
+                            continue;
+                        }
+
+                        foreach (var id in argValues[i].IDs)
+                        {
+                            this.passRefs.Add((id, ctorKey, i));
+                        }
+
+                        foreach (var param in argValues[i].Params)
+                        {
+                            this.paramFlowRefs.Add((scan.Key, param, ctorKey, i));
+                        }
+
+                        foreach (var sub in argValues[i].CallKeys)
+                        {
+                            this.returnToParamRefs.Add((sub, ctorKey, i));
+                        }
+
+                        if (argValues[i].FieldKey is { } ctorField)
+                        {
+                            this.paramFlowRefs.Add((ctorField, 0, ctorKey, i));
+                        }
+                    }
+                }
+
+                Push(stack, MakeResult(callee, argValues, isInternal: false));
                 return;
             }
 
@@ -608,6 +1106,12 @@ public static class UIStringExtractor
             // ③ UI 调用
             if (UICallSemantics.IsUICall(typeName, methodName))
             {
+                if (Trace is not null)
+                {
+                    var texts = argValues.Select(a => string.Join("+", a.IDs.Select(id => UITextText.OneLine(this.literals[id].Text, 40))));
+                    Trace($"[ui] {scan.Key} -> {typeName}.{methodName} args=[{string.Join(" | ", texts)}]");
+                }
+
                 var preserveID = UICallSemantics.UsesStringAsID(typeName, methodName);
                 var target = UICallSemantics.ShortTarget(typeName, methodName);
                 for (var i = 0; i < argValues.Length; i++)
@@ -695,6 +1199,12 @@ public static class UIStringExtractor
                             this.returnToParamRefs.Add((sub, key, i));
                         }
                     }
+
+                    if (argValues[i].FieldKey is { } argField)
+                    {
+                        // 这个参数直接来自某个字段
+                        this.paramFlowRefs.Add((argField, 0, key, i));
+                    }
                 }
 
                 Leave(MakeResult(callee, argValues, isInternal));
@@ -769,6 +1279,22 @@ public static class UIStringExtractor
             {
                 this.returnToUIRequests.Add((key, target));
             }
+
+            // 这个值是某个字段的内容 ⇒ 那个字段是画给人看的
+            if (value.FieldKey is { } fieldKey)
+            {
+                var fieldScan = this.GetFieldScan(fieldKey);
+                fieldScan.ParamsToUI[0] = true;
+                if (fieldScan.ParamsToUITarget[0].Length == 0)
+                {
+                    fieldScan.ParamsToUITarget[0] = target;
+                }
+
+                if (preserveID && !isArray)
+                {
+                    fieldScan.ParamsToUIPreserveID[0] = true;
+                }
+            }
         }
 
         private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false)
@@ -797,6 +1323,17 @@ public static class UIStringExtractor
                 }
             }
 
+            if (value.FieldKey is { } dangerousField)
+            {
+                var fieldScan = this.GetFieldScan(dangerousField);
+                fieldScan.ParamsDangerous[0] = true;
+                fieldScan.ParamsKey[0] |= hardKey;
+                if (fieldScan.ParamsDangerousTarget[0].Length == 0)
+                {
+                    fieldScan.ParamsDangerousTarget[0] = target;
+                }
+            }
+
             foreach (var index in value.Params)
             {
                 if (index >= 0 && index < scan.ParamsDangerous.Length)
@@ -822,15 +1359,9 @@ public static class UIStringExtractor
             var keys = new List<string>();
             foreach (var arg in args)
             {
-                ids.AddRange(arg.IDs);
-                prms.AddRange(arg.Params);
-                foreach (var key in arg.CallKeys)
-                {
-                    if (!keys.Contains(key))
-                    {
-                        keys.Add(key);
-                    }
-                }
+                V.AppendCapped(ids, arg.IDs);
+                V.AppendCapped(prms, arg.Params);
+                V.AppendCapped(keys, arg.CallKeys);
             }
 
             var (typeName, methodName) = Describe(callee);
@@ -843,7 +1374,17 @@ public static class UIStringExtractor
                 }
             }
 
-            return new V(ids, prms, keys, false, false);
+            string? fieldKey = null;
+            foreach (var arg in args)
+            {
+                if (arg.FieldKey is { } candidate)
+                {
+                    fieldKey = candidate;
+                    break;
+                }
+            }
+
+            return new V(ids, prms, keys, false, false, -1, -1, fieldKey);
         }
 
         // ── 接口 / 虚方法展开 ─────────────────────────────────────────────
@@ -1205,6 +1746,30 @@ public static class UIStringExtractor
                     }
                 }
 
+                foreach (var (field, method) in this.fieldReturnRefs)
+                {
+                    if (!this.methodByKey.TryGetValue(field, out var fieldScan)
+                        || !this.methodByKey.TryGetValue(method, out var returner)
+                        || fieldScan.ParamsToUI.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    if (returner.ReturnsToUI && !fieldScan.ParamsToUI[0])
+                    {
+                        fieldScan.ParamsToUI[0] = true;
+                        fieldScan.ParamsToUITarget[0] = returner.ReturnsToUITarget;
+                        changed = true;
+                    }
+
+                    if (returner.ReturnsDangerous && !fieldScan.ParamsDangerous[0])
+                    {
+                        fieldScan.ParamsDangerous[0] = true;
+                        fieldScan.ParamsDangerousTarget[0] = "返回值";
+                        changed = true;
+                    }
+                }
+
                 foreach (var (callee, method, param) in this.returnToParamRefs)
                 {
                     if (!this.methodByKey.TryGetValue(callee, out var calleeScan)
@@ -1549,6 +2114,61 @@ public static class UIStringExtractor
 
             return result;
         }
+
+        /// <summary>
+        ///     把字段当成「只有一个参数的伪方法」：写入端当传参、读取端当用参数、字段之间还能互传。
+        ///     这样现有的不动点（passRefs / paramFlowRefs）不用改就能处理「构造 → 存字段 → 以后读出来画」。
+        /// </summary>
+        private MethodScan GetFieldScan(string fieldKey)
+        {
+            if (this.methodByKey.TryGetValue(fieldKey, out var existing))
+            {
+                return existing;
+            }
+
+            var scan = new MethodScan
+            {
+                Def = null!,
+                Key = fieldKey,
+                Context = fieldKey,
+                ParamsToUI = new bool[1],
+                ParamsToUITarget = [string.Empty],
+                ParamsToUIPreserveID = new bool[1],
+                ParamsDangerous = new bool[1],
+                ParamsDangerousTarget = [string.Empty],
+                ParamsKey = new bool[1],
+            };
+            this.methodByKey[scan.Key] = scan;
+            return scan;
+        }
+
+        /// <summary>写入端：值里带的东西都算「传给了这个字段」。</summary>
+        private void RecordFieldStore(MethodScan scan, V value, string fieldKey)
+        {
+            this.GetFieldScan(fieldKey);
+            foreach (var id in value.IDs)
+            {
+                this.passRefs.Add((id, fieldKey, 0));
+            }
+
+            foreach (var param in value.Params)
+            {
+                this.paramFlowRefs.Add((scan.Key, param, fieldKey, 0));
+            }
+
+            foreach (var call in value.CallKeys)
+            {
+                this.returnToParamRefs.Add((call, fieldKey, 0));
+            }
+
+            if (value.FieldKey is { } other)
+            {
+                this.paramFlowRefs.Add((other, 0, fieldKey, 0));
+            }
+        }
+
+        private static string FieldKey(IField field) =>
+            $"{field.DeclaringType?.FullName}::{field.Name.String}";
 
         private static string MethodKey(string typeFullName, string methodName, int paramCount) =>
             $"{typeFullName}::{methodName}/{paramCount}";

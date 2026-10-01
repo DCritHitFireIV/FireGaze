@@ -94,7 +94,8 @@ internal static class UITextChannelFactory
                     config.UITextLLMBaseURL,
                     config.UITextLLMModel,
                     key,
-                    deepSeek: string.Equals(config.UITextLLMProvider, "deepseek", StringComparison.OrdinalIgnoreCase));
+                    deepSeek: string.Equals(config.UITextLLMProvider, "deepseek", StringComparison.OrdinalIgnoreCase),
+                    useGlossary: config.UITextUseGlossary);
             }
 
             default:

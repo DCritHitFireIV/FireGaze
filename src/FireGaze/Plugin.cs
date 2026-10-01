@@ -38,6 +38,11 @@ public sealed class Plugin : IDalamudPlugin
     /// </summary>
     [PluginService] public static ITextureProvider Textures { get; private set; } = null!;
 
+    /// <summary>
+    ///     游戏数据（「插件汉化」的 FF14 术语表读 Lumina 表用；不联网）。
+    /// </summary>
+    [PluginService] public static IDataManager DataManager { get; private set; } = null!;
+
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;

@@ -135,6 +135,28 @@ internal sealed class UITextSettingsWindow : Window
             }
 
             this.DrawKeyRow("大模型 API key", config.UITextLLMKeyProtected, v => config.UITextLLMKeyProtected = v, ref changed);
+
+            var glossary = config.UITextUseGlossary;
+            if (ImGui.Checkbox("用游戏数据里的 FF14 官方译名（术语表）", ref glossary))
+            {
+                config.UITextUseGlossary = glossary;
+                changed = true;
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(
+                    "翻译时把命中的官方译名（地名 / 副本 / 技能 / 状态 / 坐骑…）喂给模型，专有名词前后一致。\n" +
+                    "只对大模型通道有效；免费接口没法带术语表。\n" +
+                    "术语表从当前客户端的数据里读，不联网、也不随插件打包。");
+            }
+
+            if (config.UITextUseGlossary)
+            {
+                this.EnsureGlossaryBuilding();
+                ImGui.SameLine();
+                ImGui.TextDisabled(FFXIVGlossary.Ready ? $"已就绪 {FFXIVGlossary.Count} 条" : "准备中…");
+            }
         }
 
         if (string.Equals(config.UITextChannel, "caiyun", StringComparison.Ordinal))
@@ -221,6 +243,20 @@ internal sealed class UITextSettingsWindow : Window
         {
             this.TestChannel();
         }
+    }
+
+    private bool glossaryBuilding;
+
+    /// <summary>第一次需要时在后台把术语表建好（读游戏表要一两秒，不能占渲染线程）。</summary>
+    private void EnsureGlossaryBuilding()
+    {
+        if (this.glossaryBuilding || FFXIVGlossary.Ready)
+        {
+            return;
+        }
+
+        this.glossaryBuilding = true;
+        _ = Task.Run(FFXIVGlossary.EnsureBuilt);
     }
 
     private void TestChannel()

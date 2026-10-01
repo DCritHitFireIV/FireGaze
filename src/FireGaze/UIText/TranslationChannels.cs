@@ -689,13 +689,15 @@ internal sealed class LLMTranslationChannel : IUITextChannel
     private readonly string model;
     private readonly string apiKey;
     private readonly bool deepSeek;
+    private readonly bool useGlossary;
 
-    public LLMTranslationChannel(string baseURL, string model, string apiKey, bool deepSeek)
+    public LLMTranslationChannel(string baseURL, string model, string apiKey, bool deepSeek, bool useGlossary = true)
     {
         this.baseURL = baseURL.TrimEnd('/');
         this.model = model;
         this.apiKey = apiKey;
         this.deepSeek = deepSeek;
+        this.useGlossary = useGlossary;
     }
 
     public string Name => this.deepSeek ? "deepseek" : "llm";
@@ -783,6 +785,33 @@ internal sealed class LLMTranslationChannel : IUITextChannel
         List<UITextTranslateItem> chunk,
         CancellationToken token)
     {
+        // FF14 术语表：从游戏数据里读的「英文 → 官方中文」，命中就塞进系统提示。
+        // 免费接口（Google / MyMemory）没法带上下文，所以这是大模型通道专属。
+        var system = SystemPrompt;
+        if (this.useGlossary)
+        {
+            try
+            {
+                FFXIVGlossary.EnsureBuilt();
+                var terms = FFXIVGlossary.FindTerms(chunk.Select(item => UITextText.ForTranslation(item.Text)).ToList());
+                if (terms.Count > 0)
+                {
+                    var glossary = new StringBuilder();
+                    glossary.Append("\n\n这次英文里出现的官方专有名词（来自游戏数据，必须使用这些译名）：");
+                    foreach (var (english, chinese) in terms)
+                    {
+                        glossary.Append("\n- ").Append(english).Append(" → ").Append(chinese);
+                    }
+
+                    system += glossary.ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                Plugin.Log?.Warning(e, "[内部文本] 术语表匹配出错（继续翻译）");
+            }
+        }
+
         var payload = new StringBuilder();
         payload.Append('[');
         for (var i = 0; i < chunk.Count; i++)
@@ -812,7 +841,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
             ["stream"] = false,
             ["messages"] = new object[]
             {
-                new Dictionary<string, string> { ["role"] = "system", ["content"] = SystemPrompt },
+                new Dictionary<string, string> { ["role"] = "system", ["content"] = system },
                 new Dictionary<string, string> { ["role"] = "user", ["content"] = payload.ToString() },
             },
         };
