@@ -218,6 +218,17 @@ internal static class UICallSemantics
     /// <summary>
     ///     这个 ImGui 调用会不会把字符串当控件 ID 用（决定补丁要不要保留 <c>###原文</c>）。
     /// </summary>
+    /// <summary>
+    ///     这个参数位置上的字符串会不会被当控件 ID 用（决定补丁要不要保留 ###原文 后缀）。
+    /// </summary>
+    /// <remarks>
+    ///     ImGui 的惯例：只有第 0 个字符串参数是控件标签（拿它算 ID），后面的字符串参数基本都是「只显示的」：
+    ///     InputTextWithHint 的 hint（输入框里的灰字占位）、BeginCombo 的 preview、MenuItem 的快捷键、
+    ///     InputFloat 的 format……这些字符串的绘制路径不处理 ##，所以绝不能给它们加 ###原文。
+    ///     2026-10-01 实测：FriendlyFire 的输入框灰字显示成「角色名称（例如苹果汽水）###Character Name (e.g., Apple Soda)」就是这个原因。
+    /// </remarks>
+    public static bool UsesStringAsIDForArgument(string typeFullName, string methodName, int argIndex) => argIndex == 0;
+
     public static bool UsesStringAsID(string typeFullName, string methodName)
     {
         // 字符串构造器从来不当控件 ID 用（真正的判定在接住它的 UI 调用上）

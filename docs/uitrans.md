@@ -129,6 +129,17 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
      （改语言 / 点更新会重新下载 strings.json），不推荐；
    · **B** 扩展抽取器 + 补丁器去改**属性字符串**（fallback 语义：官方有译文时官方优先，没有才显示我们的），待定。
 
+## 血教训：只有「标签」才当 ID 用（2026-10-01）
+
+- ImGui 里**只有第 0 个字符串参数是控件标签**（拿它算 ID），后面的字符串参数都是「只显示的」：
+  `InputTextWithHint` 的 hint（输入框灰字）、`BeginCombo` 的 preview、`MenuItem` 的快捷键、`InputFloat` 的 format……
+  这些字符串的**绘制路径不处理 `##`**，给它们加 `###原文` 会原样显示出来。
+  实测：FriendlyFire 的输入框灰字变成「角色名称（例如苹果汽水）###Character Name (e.g., Apple Soda)」。
+  修法：`UICallSemantics.UsesStringAsIDForArgument`（抽取器按参数位置决定要不要保 ID）。
+- **纯 ID 标签（`##xxx` 开头）不进候选**：界面上一个像素都不显示，翻了只会把 ID 弄坏。
+- `UITextFlow.MergeExtraction` 现在会返回 `ReapplyNeeded`（PreserveID 被改对 / 新增条目）——
+  「已是最新」的跳过判断必须带上它，否则**修好的写法永远打不上去**。
+
 ## 血教训：免费通道的 429（2026-10-01）
 
 - 用户实测「Google/MyMemory 一条要 10 秒」：根因是我们把 **429 当可重试错误**，原地重试 3 次（等 2s → 5s）再换通道；

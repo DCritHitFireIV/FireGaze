@@ -561,7 +561,10 @@ public static class UIStringExtractor
                         continue;
                     }
 
-                    this.MarkUI(scan, argValues[i], target, preserveID);
+                    // 只有标签（第 0 个字符串参数）当 ID 用；hint / preview / format 这些「只显示」的参数不加 ### 后缀
+                    var preserveThisArgument = preserveID
+                                               && UICallSemantics.UsesStringAsIDForArgument(typeName, methodName, i);
+                    this.MarkUI(scan, argValues[i], target, preserveThisArgument);
                     if (argValues[i].CallIsInternal && argValues[i].CallKey is { } called)
                     {
                         // 本程序集方法的返回值直接进了 UI 调用 ⇒ 那个方法的返回值会进 UI
@@ -1211,8 +1214,8 @@ public static class UIStringExtractor
                 return false;
             }
 
-            // ImGui 的「只当 ID」标签（###xxx）没有对玩家显示的内容
-            if (text.StartsWith("###", StringComparison.Ordinal))
+            // ImGui 的「只当 ID」标签（##xxx / ###xxx）——连显示部分都没有，玩家看不到任何东西
+            if (text.StartsWith("##", StringComparison.Ordinal))
             {
                 return false;
             }

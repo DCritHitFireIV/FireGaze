@@ -22,6 +22,12 @@ internal static class UITextFlow
         public int AmbiguousCount;
 
         public UITextPackPruneOutcome Prune { get; set; } = new(0, 0, 0);
+
+        /// <summary>
+        ///     这一轮抽取是不是改动了包（新增条目 / 某条的 PreserveID 被改对）。
+        ///     改过就说明盘上的补丁可能已经过时（例如 2026-10-01 的 hint 误加 ###），要重打一次。
+        /// </summary>
+        public bool ReapplyNeeded;
     }
 
     /// <summary>
@@ -46,7 +52,13 @@ internal static class UITextFlow
             }
 
             preserve[item.Original] = preserve.GetValueOrDefault(item.Original) || item.PreserveID;
+            var existed = pack.Find(item.Original) is not null;
             var entry = pack.GetOrAdd(item.Original, item.Context, item.PreserveID);
+            if (!existed)
+            {
+                result.ReapplyNeeded = true;
+            }
+
             if (entry.Context is null)
             {
                 entry.Context = item.Context;
@@ -66,8 +78,15 @@ internal static class UITextFlow
         foreach (var (original, keepID) in preserve)
         {
             var entry = pack.Find(original);
-            if (entry is not null)
+            if (entry is null)
             {
+                continue;
+            }
+
+            if (entry.PreserveID != keepID)
+            {
+                // PreserveID 变了 = 盘上的补丁写法（要不要 ###原文）已经不对，必须重打
+                result.ReapplyNeeded = true;
                 entry.PreserveID = keepID;
             }
         }

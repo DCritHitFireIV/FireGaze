@@ -104,6 +104,20 @@ internal sealed class UITextPatchManager
     }
 
     /// <summary>
+    ///     上次打补丁的时间（没有就 null）。用来判断「译文包是不是在那之后又改过」。
+    /// </summary>
+    public DateTime? PatchedAt(InstalledPluginEntry entry)
+    {
+        var state = this.store.Load(entry.InternalName);
+        if (state?.PatchedAt is not { Length: > 0 } text || !DateTime.TryParse(text, out var at))
+        {
+            return null;
+        }
+
+        return at;
+    }
+
+    /// <summary>
     ///     这个插件有没有可还原的备份。
     /// </summary>
     public bool HasBackup(InstalledPluginEntry entry) => this.store.Load(entry.InternalName)?.HasBackup == true;

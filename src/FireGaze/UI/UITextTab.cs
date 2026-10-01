@@ -645,6 +645,12 @@ internal sealed class UITextTab
         try
         {
             // ① 抽取（盘上是我们的补丁时自动改读原始备份）
+            // 先记两个时间点：「包」是不是在补丁之后又改过（改过就要重打，别被下面的“已是最新”跳过去）
+            var packPath = Path.Combine(this.store.DirectoryPath, entry.InternalName + ".json");
+            var packTimeBefore = File.Exists(packPath) ? File.GetLastWriteTime(packPath) : DateTime.MinValue;
+            var patchedAt = this.patches.PatchedAt(entry) ?? DateTime.MinValue;
+            var packTouchedSincePatch = packTimeBefore > patchedAt.AddSeconds(1);
+
             run.Stage = "正在读取插件界面文本…";
             var source = this.patches.ExtractionSourceOf(entry, out _);
             var extraction = await Task.Run(() => UIStringExtractor.Extract(source), token).ConfigureAwait(false);
@@ -694,7 +700,10 @@ internal sealed class UITextTab
             var targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
             var translatedCount = 0;
             var channelNote = string.Empty;
-            if (targets.Count == 0 && this.patches.StatusOf(entry, out _) == UITextPatchStatus.Applied)
+            if (targets.Count == 0
+                && !merge.ReapplyNeeded
+                && !packTouchedSincePatch
+                && this.patches.StatusOf(entry, out _) == UITextPatchStatus.Applied)
             {
                 // 已经是最新：不重复写文件、也不白白重载一次插件
                 this.FinishRun(run, new RowNote
@@ -779,6 +788,10 @@ internal sealed class UITextTab
             }
 
             var extra = translatedCount > 0 ? $"本次新翻 {translatedCount} 条。{channelNote}" : string.Empty;
+            if (translatedCount == 0 && merge.ReapplyNeeded)
+            {
+                extra = "抽取结果变了（有新增文本或控件 ID 标记被修正），已按新的写法重打。";
+            }
             this.FinishRun(run, new RowNote
             {
                 Kind = NoteKind.Good,
