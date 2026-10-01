@@ -44,6 +44,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly ContributeWindow contributeWindow;
     private readonly UI.UITextEditorWindow uiTextEditorWindow;
     private readonly UI.UITextSettingsWindow uiTextSettingsWindow;
+    private readonly UIText.UITextRunLock uiTextRunLock;
     private readonly UIText.UITextPatchManager uiTextPatchManager;
     private readonly Timer translateTimer;
 
@@ -93,11 +94,12 @@ public sealed class Plugin : IDalamudPlugin
         Patcher = new ManifestPatcher(() => Config, Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
 
-        uiTextEditorWindow = new UI.UITextEditorWindow(this, TextPacks, uiTextPatchManager);
+        uiTextRunLock = new UIText.UITextRunLock();
+        uiTextEditorWindow = new UI.UITextEditorWindow(this, TextPacks, uiTextPatchManager, uiTextRunLock);
         windowSystem.AddWindow(uiTextEditorWindow);
         uiTextSettingsWindow = new UI.UITextSettingsWindow(this);
         windowSystem.AddWindow(uiTextSettingsWindow);
-        window = new MainWindow(this, new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager));
+        window = new MainWindow(this, new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager, uiTextRunLock));
         windowSystem.AddWindow(window);
         contributeWindow = new ContributeWindow(this, Contributions);
         windowSystem.AddWindow(contributeWindow);

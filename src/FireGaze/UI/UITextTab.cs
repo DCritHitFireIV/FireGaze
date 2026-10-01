@@ -51,8 +51,8 @@ internal sealed class UITextTab
     {
         public string Text = string.Empty;
         public NoteKind Kind;
-        public bool CanRetry;
         public bool CanOpenSettings;
+        public DateTime CreatedAt = DateTime.Now;
     }
 
     private sealed class Run
@@ -72,6 +72,7 @@ internal sealed class UITextTab
     private readonly UITextSettingsWindow settings;
     private readonly UITextStore store;
     private readonly UITextPatchManager patches;
+    private readonly UITextRunLock runs;
 
     private InstalledPluginsIndex? index;
     private DateTime indexAt = DateTime.MinValue;
@@ -92,13 +93,15 @@ internal sealed class UITextTab
         UITextEditorWindow editor,
         UITextSettingsWindow settings,
         UITextStore store,
-        UITextPatchManager patches)
+        UITextPatchManager patches,
+        UITextRunLock runs)
     {
         this.plugin = plugin;
         this.editor = editor;
         this.settings = settings;
         this.store = store;
         this.patches = patches;
+        this.runs = runs;
     }
 
     public void Draw()
@@ -114,9 +117,9 @@ internal sealed class UITextTab
     private void DrawToolbar()
     {
         ImGui.TextWrapped(
-            "把插件窗口里的文字翻成中文：点「一键汉化」，翻译、写入插件、自动重载一次完成。会修改插件文件，原文件自动备份，随时可「还原原文」。");
+            "点「一键汉化」：翻译、写入插件、自动重载一次完成。会改插件文件，原文件自动备份，随时可「还原原文」。");
         ImGui.TextDisabled(
-            "这里只管插件自己的界面；插件简介 / 详情的翻译在「简介汉化」页。插件正在跑任务时，重载会打断它，先停一下再点。");
+            "这里只管插件自己的界面，插件简介在「简介汉化」页；插件在跑任务时先停一下，重载会打断它。");
 
         if (ImGui.Button("刷新"))
         {
@@ -138,6 +141,8 @@ internal sealed class UITextTab
             ImGui.SetTooltip("插件名和内部名都能搜（内部名就是插件目录名）。");
         }
 
+        ImGui.SameLine();
+        ImGui.TextDisabled("状态");
         ImGui.SameLine();
         ImGui.SetNextItemWidth(140);
         var filterLabels = new[] { "全部", "未汉化", "待应用", "已汉化", "失败" };
@@ -376,10 +381,24 @@ internal sealed class UITextTab
         }
         else
         {
+            // 还没汉化好的插件给主色按钮，已汉化的保持普通样式——198 行列表里要有「要做的事」的落点
+            var needsAction = info is null || !info.HasPack || info.Patch != UITextPatchStatus.Applied;
             ImGui.BeginDisabled(busy || editorOpen);
+            if (needsAction)
+            {
+                ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.23f, 0.37f, 0.55f, 1f));
+                ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.28f, 0.44f, 0.64f, 1f));
+                ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.20f, 0.33f, 0.50f, 1f));
+            }
+
             if (ImGui.Button("一键汉化"))
             {
                 this.StartOneClick(plugin);
+            }
+
+            if (needsAction)
+            {
+                ImGui.PopStyleColor(3);
             }
 
             ImGui.EndDisabled();
@@ -441,7 +460,7 @@ internal sealed class UITextTab
                 _ => "未应用" + (info.HasBackup ? "（原始文件已备份）" : string.Empty),
             };
             ImGui.TextDisabled(
-                $"候选 {candidates} 条 · 已翻 {info.Translated} 条 · 未翻 {candidates - info.Translated} 条 · 不翻 {info.Skipped} 条 ｜ 补丁：{patchText}");
+                $"候选 {candidates} 条 · 已翻译 {info.Translated} 条 · 未翻译 {candidates - info.Translated} 条 · 不翻 {info.Skipped} 条 ｜ 补丁：{patchText}");
 
             if (info.PatchDetail.Length > 0 && ImGui.IsItemHovered())
             {
@@ -472,6 +491,13 @@ internal sealed class UITextTab
 
     private void DrawNote(InstalledPluginEntry plugin, RowNote note)
     {
+        // 成功是一次性事件：十几秒后收起；失败 / 未加载是持久状态，留到下一次操作。
+        if (note.Kind == NoteKind.Good && (DateTime.Now - note.CreatedAt).TotalSeconds > 12)
+        {
+            this.notes.Remove(plugin.InternalName);
+            return;
+        }
+
         var color = note.Kind switch
         {
             NoteKind.Good => UiHelpers.Good,
@@ -480,20 +506,6 @@ internal sealed class UITextTab
         };
 
         UiHelpers.ColoredWrapped(color, note.Text);
-
-        if (note.CanRetry)
-        {
-            ImGui.SameLine();
-            if (ImGui.Button("重试###UITextRetry"))
-            {
-                this.StartOneClick(plugin);
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("沿用当前通道重试；已经翻好的条目不会丢。");
-            }
-        }
 
         if (note.CanOpenSettings)
         {
@@ -526,11 +538,11 @@ internal sealed class UITextTab
             case UITextPatchStatus.Applied:
                 return ($"已汉化 {info.Translated} 处", UiHelpers.Good);
             case UITextPatchStatus.PendingReload:
-                return ($"已应用 {info.Translated} 处 · 待重载", UiHelpers.Info);
+                return ($"已汉化 {info.Translated} 处 · 待重载", UiHelpers.Info);
             case UITextPatchStatus.NeedsRepatch:
                 return ($"已汉化 {info.Translated} 处 · 需要重打", UiHelpers.Warn);
             case UITextPatchStatus.Failed:
-                return ($"上次失败 · 已翻 {info.Translated} 条", UiHelpers.Bad);
+                return ($"上次失败 · 已翻译 {info.Translated} 条", UiHelpers.Bad);
         }
 
         if (info.Translated > 0)
@@ -547,6 +559,16 @@ internal sealed class UITextTab
     {
         if (this.run is not null)
         {
+            return;
+        }
+
+        if (!this.runs.TryEnter(entry.InternalName, "正在汉化 " + entry.DisplayName, out var reason))
+        {
+            this.notes[entry.InternalName] = new RowNote
+            {
+                Kind = NoteKind.Info,
+                Text = "另一个任务正在跑：" + reason + " 等它结束再点。",
+            };
             return;
         }
 
@@ -597,6 +619,18 @@ internal sealed class UITextTab
             var targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
             var translatedCount = 0;
             var channelNote = string.Empty;
+            if (targets.Count == 0 && this.patches.StatusOf(entry, out _) == UITextPatchStatus.Applied)
+            {
+                // 已经是最新：不重复写文件、也不白白重载一次插件
+                this.FinishRun(run, new RowNote
+                {
+                    Kind = NoteKind.Info,
+                    Text = "已是最新：没有要翻的条目，补丁也还在。想改某条译文，去行尾「详情 → 编辑校对」。",
+                });
+                this.rowsDirty = true;
+                return;
+            }
+
             if (targets.Count > 0)
             {
                 token.ThrowIfCancellationRequested();
@@ -639,8 +673,8 @@ internal sealed class UITextTab
                     this.FinishRun(run, new RowNote
                     {
                         Kind = NoteKind.Bad,
-                        Text = $"翻译失败：{reason}。已经翻好的 {pack.TranslatedCount} 条不会丢——等几分钟点「重试」可能就好；想稳定跑大批量，可以在「翻译设置」里填自己的大模型 key。",
-                        CanRetry = true,
+                        Text = $"翻译失败：{reason}。已经翻好的 {pack.TranslatedCount} 条不会丢，原来的补丁也还在（界面不会变回英文）——"
+                               + "等几分钟再点右侧「一键汉化」接着来；想稳定跑大批量，可以在「翻译设置」里填自己的大模型 key。",
                         CanOpenSettings = true,
                     });
                     this.rowsDirty = true;
@@ -664,8 +698,7 @@ internal sealed class UITextTab
                 this.FinishRun(run, new RowNote
                 {
                     Kind = NoteKind.Bad,
-                    Text = message,
-                    CanRetry = true,
+                    Text = message + "（点右侧「一键汉化」可以重来一次）",
                 });
                 return;
             }
@@ -689,7 +722,7 @@ internal sealed class UITextTab
         catch (Exception e)
         {
             Plugin.Log?.Warning(e, "[内部文本] 一键汉化出错");
-            this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = "出错：" + e.Message, CanRetry = true });
+            this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = "出错：" + e.Message + "（点右侧「一键汉化」可以重来一次）" });
         }
     }
 
@@ -697,6 +730,7 @@ internal sealed class UITextTab
     {
         Plugin.Log?.Information($"[内部文本] 一键汉化 {run.InternalName}：{note.Text}");
         this.notes[run.InternalName] = note;
+        this.runs.Exit(run.InternalName);
         run.CanCancel = false;
         run.Finished = true;
     }
@@ -724,13 +758,23 @@ internal sealed class UITextTab
             return;
         }
 
+        if (!this.runs.TryEnter(entry.InternalName, "正在还原 " + entry.DisplayName, out var reason))
+        {
+            this.notes[entry.InternalName] = new RowNote
+            {
+                Kind = NoteKind.Info,
+                Text = "另一个任务正在跑：" + reason + " 等它结束再点。",
+            };
+            return;
+        }
+
         var run = new Run { InternalName = entry.InternalName, Stage = "正在还原并重载…" };
         this.run = run;
         this.notes.Remove(entry.InternalName);
         run.Task = Task.Run(async () =>
         {
             var (ok, message) = await this.patches.RestoreAndReloadAsync(entry).ConfigureAwait(false);
-            this.FinishRun(run, new RowNote { Kind = ok ? NoteKind.Good : NoteKind.Bad, Text = message, CanRetry = !ok });
+            this.FinishRun(run, new RowNote { Kind = ok ? NoteKind.Good : NoteKind.Bad, Text = message });
         });
     }
 

@@ -77,7 +77,10 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - 编辑器窗口（编辑校对）：筛选带计数 + 状态列图例；工具栏 = 翻译未翻 (N) / 应用汉化 / 还原原文 / 更多…
   （重新抽取、导出未翻、导入译文、打开包目录）；应用与还原都自动重载，不再有「重载生效」这一步。
 - 编辑 1.5 秒后自动保存，关窗也保存。
-- 盲评报告：`docs/hci/review-2026-10-01-uitext-redesign-{heuristic,friction,visual}.md`（含定向复评）。
+- 盲评报告：`docs/hci/review-2026-10-01-uitext-redesign-{heuristic,friction,visual}.md`（第一轮）与 `...-{heuristic,friction,visual}-recheck.md`（v2 定向复评：0 个新增 P1）。
+  v2 之后落进实现的复评条目：成功提示 12 秒后自动收起（失败 / 未加载提示常驻）；没有要翻的条目时**跳过写入与重载**；
+  同一时刻只有一个写文件 / 写包的任务（`UITextRunLock`，列表与编辑器互相禁用）；行内不再另放「重试」（统一用「一键汉化」）；
+  筛选器有「状态」标签；主按钮在「还没汉化好」的行上给强调色；写失败按实际原因显示（备份失败 / 打补丁失败都会带原因）。
 
 ## 验证
 

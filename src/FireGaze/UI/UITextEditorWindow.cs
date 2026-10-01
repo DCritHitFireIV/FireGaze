@@ -37,6 +37,7 @@ internal sealed class UITextEditorWindow : Window
     private readonly Plugin plugin;
     private readonly UITextStore store;
     private readonly UITextPatchManager patches;
+    private readonly UITextRunLock runs;
     private readonly FileDialogManager fileDialog = new();
 
     private InstalledPluginEntry? entry;
@@ -62,12 +63,13 @@ internal sealed class UITextEditorWindow : Window
     private int translateDone;
     private int translateTotal;
 
-    public UITextEditorWindow(Plugin plugin, UITextStore store, UITextPatchManager patches)
+    public UITextEditorWindow(Plugin plugin, UITextStore store, UITextPatchManager patches, UITextRunLock runs)
         : base("界面汉化 — 编辑校对###FireGazeUITextEditor", ImGuiWindowFlags.None)
     {
         this.plugin = plugin;
         this.store = store;
         this.patches = patches;
+        this.runs = runs;
         this.Size = new System.Numerics.Vector2(980, 640);
         this.SizeCondition = ImGuiCond.FirstUseEver;
         this.SizeConstraints = new WindowSizeConstraints
@@ -441,7 +443,7 @@ internal sealed class UITextEditorWindow : Window
         var unapplied = this.rows.Count(r => r.Entry.HasTranslation && !r.Skipped);
         if (applied > 0 && unapplied > 0)
         {
-            summary += $" · 尚未应用——点「应用汉化」写入并重载（共 {unapplied} 条）";
+            summary += $" · 尚未应用——点「写入并重载」（共 {unapplied} 条）";
         }
 
         this.SetStatus(summary, applied == 0 && failed > 0);
@@ -516,14 +518,19 @@ internal sealed class UITextEditorWindow : Window
         ImGui.TextUnformatted(this.entry!.DisplayName);
         ImGui.PopStyleColor();
         ImGui.SameLine();
-        ImGui.TextDisabled($"({this.entry.InternalName}{(string.IsNullOrEmpty(this.entry.Version) ? string.Empty : " · v" + this.entry.Version)})");
+        var sameName = string.Equals(this.entry.DisplayName, this.entry.InternalName, StringComparison.Ordinal);
+        var version = string.IsNullOrEmpty(this.entry.Version) ? string.Empty : "v" + this.entry.Version;
+        var suffix = sameName
+            ? version
+            : this.entry.InternalName + (version.Length > 0 ? " · " + version : string.Empty);
+        ImGui.TextDisabled($"({suffix})");
 
         var candidate = this.rows.Count(r => r.Role == UITextRole.UI);
         var ambiguous = this.rows.Count(r => r.Role == UITextRole.Ambiguous);
         var translated = this.rows.Count(r => r.Entry.HasTranslation);
         var skipped = this.rows.Count(r => r.Skipped);
         ImGui.TextDisabled(
-            $"候选 {candidate} · 灰名单 {ambiguous} · 已翻 {translated} · 不翻 {skipped}" +
+            $"候选 {candidate} · 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
             (this.extractionTask is { IsCompleted: false } ? " · 抽取中…" : string.Empty));
     }
 
@@ -533,6 +540,13 @@ internal sealed class UITextEditorWindow : Window
         var busy = this.translateTask is { IsCompleted: false } || this.patchTask is { IsCompleted: false };
         var targets = this.TranslationTargets().Count;
         var hasBackup = this.patches.HasBackup(entry);
+
+        // 列表页正在对这个插件跑「一键汉化」时，这里别动同一份文件（谁先拿到锁谁干活）
+        var otherRun = this.runs.IsBusyWith(entry.InternalName);
+        if (otherRun)
+        {
+            busy = true;
+        }
 
         // 主操作：翻译未翻（翻完不自动应用——这一步是给人校对用的）
         ImGui.BeginDisabled(busy || targets == 0);
@@ -546,7 +560,7 @@ internal sealed class UITextEditorWindow : Window
         {
             var hint = $"用当前通道翻 {targets} 条（未翻的候选" +
                        (this.plugin.Config.UITextTranslateGreyList ? " + 灰名单" : "，灰名单不翻") + "）。" +
-                       "\n翻完不会自动写入插件——想先核对就留在这里改，想直接生效点「应用汉化」。";
+                       "\n翻完不会自动写入插件——想先核对就留在这里改，想直接生效点「写入并重载」。";
             if (targets > 100 && this.plugin.Config.UITextChannel is "auto" or "google" or "mymemory")
             {
                 hint += "\n注意：免费接口按 IP 限流（Google 会 429、MyMemory 额度只有几千字符/天），" +
@@ -570,7 +584,7 @@ internal sealed class UITextEditorWindow : Window
         // 写入插件 + 自动重载（重载是合并步骤，不单独给按钮）
         ImGui.SameLine();
         ImGui.BeginDisabled(busy || this.rows.Count(r => r.Entry.HasTranslation && !r.Skipped) == 0);
-        if (ImGui.Button("应用汉化"))
+        if (ImGui.Button("写入并重载"))
         {
             this.StartApply();
         }
@@ -785,7 +799,7 @@ internal sealed class UITextEditorWindow : Window
             ImGui.TextDisabled("·");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("还没翻");
+                ImGui.SetTooltip("还没翻译");
             }
         }
         else if (row.Entry.IsUserSource)
@@ -892,8 +906,8 @@ internal sealed class UITextEditorWindow : Window
         {
             (Filter.Candidates, "候选"),
             (Filter.Ambiguous, "灰名单"),
-            (Filter.Untranslated, "未翻"),
-            (Filter.Translated, "已翻"),
+            (Filter.Untranslated, "未翻译"),
+            (Filter.Translated, "已翻译"),
             (Filter.Skipped, "不翻"),
             (Filter.All, "全部"),
         };
@@ -932,7 +946,7 @@ internal sealed class UITextEditorWindow : Window
         ImGui.SetNextItemWidth(260);
         ImGui.InputTextWithHint("###UITextSearch", "搜索原文 / 译文 / 上下文…", ref this.search, 256);
 
-        ImGui.TextDisabled("状态列：✔ 已翻 · ⚠ 待复核（悬停看原因）· · 未翻 ｜ 编辑完点「应用汉化」写入并重载");
+        ImGui.TextDisabled("状态列：✔ 已翻译 ｜ ⚠ 待复核（悬停看原因）｜「·」未翻译 ｜ 编辑完点「写入并重载」");
     }
 
     private bool Matches(Row row, string filterText)
