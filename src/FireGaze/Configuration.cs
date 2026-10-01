@@ -271,4 +271,11 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("UITextUseGlossary")]
     public bool UITextUseGlossary { get; set; } = true;
+
+    /// <summary>
+    ///     从公共译文库（<c>uit-packs/</c>）下载现成译文：有现成的就不用再花自己的 key 翻。
+    ///     默认开；拉不到（墙 / 库里还没有这个插件）就照旧用自己的翻译通道。
+    /// </summary>
+    [JsonProperty("UITextLibraryEnabled")]
+    public bool UITextLibraryEnabled { get; set; } = true;
 }

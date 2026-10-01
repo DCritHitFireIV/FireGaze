@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Resources;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 
@@ -19,6 +21,14 @@ internal sealed class UITextPatchOutcome
     ///     在 DLL 里找到并且真的改掉的字面量个数（同一原文出现在多处会重复计）。
     /// </summary>
     public int PatchedLiterals { get; set; }
+
+    /// <summary>
+    ///     真的改掉的内嵌资源条目数（按 容器 + key 计）。
+    /// </summary>
+    public int PatchedResources { get; set; }
+
+    /// <summary>实际写进去的总条数（字面量 + 资源）。</summary>
+    public int PatchedTotal => this.PatchedLiterals + this.PatchedResources;
 
     /// <summary>
     ///     DLL 里没找回来的条目（可能是插件更新过、或原文已经变了）。
@@ -58,19 +68,40 @@ internal static class UITextPatcher
             map[entry.Original] = entry;
         }
 
-        outcome.Candidates = map.Count;
-        if (map.Count == 0)
+        var resourceMap = new Dictionary<(string Container, string Key), UITextResourceEntry>();
+        foreach (var entry in pack.Resources)
+        {
+            if (!entry.HasTranslation || pack.IsResourceSkipped(entry.Container, entry.Key))
+            {
+                continue;
+            }
+
+            resourceMap[(entry.Container, entry.Key)] = entry;
+        }
+
+        outcome.Candidates = map.Count + resourceMap.Count;
+        if (outcome.Candidates == 0)
         {
             outcome.Error = "包里还没有可应用的译文。";
             return outcome;
         }
 
         var seen = new HashSet<string>(StringComparer.Ordinal);
+        var seenResources = new HashSet<(string Container, string Key)>();
         var tempPath = targetPath + ".fguitext.tmp";
         try
         {
             using (var module = ModuleDefMD.Load(sourcePath))
             {
+                // ① 内嵌本地化资源（.resx / ResourceManager）：按「容器 + key」改值。
+                //    只动主程序集的内嵌容器：官方 zh 卫星优先（ResourceManager 的查找顺序），
+                //    我们只负责把它没覆盖的中性资源补上。
+                if (resourceMap.Count > 0)
+                {
+                    PatchResources(module, resourceMap, seenResources, outcome);
+                }
+
+                // ② 字面量
                 foreach (var type in module.GetTypes())
                 {
                     foreach (var method in type.Methods)
@@ -105,7 +136,7 @@ internal static class UITextPatcher
                     }
                 }
 
-                if (outcome.PatchedLiterals == 0)
+                if (outcome.PatchedTotal == 0)
                 {
                     outcome.Error = "DLL 里没有找到任何一条能替换的文本（可能版本对不上）。";
                     return outcome;
@@ -133,7 +164,104 @@ internal static class UITextPatcher
             }
         }
 
+        foreach (var (container, key) in resourceMap.Keys)
+        {
+            if (!seenResources.Contains((container, key)))
+            {
+                outcome.Missing.Add($"资源：{container} · {key}");
+            }
+        }
+
         return outcome;
+    }
+
+    /// <summary>
+    ///     把资源条目写进内嵌 <c>.resources</c> 容器：读出全部条目 → 换掉匹配 key 的值 → 重写容器。
+    ///     非字符串的值原样保留；重写失败（自定义序列化类型）只跳过该容器，不算整体失败。
+    /// </summary>
+    private static void PatchResources(
+        ModuleDefMD module,
+        Dictionary<(string Container, string Key), UITextResourceEntry> resourceMap,
+        HashSet<(string Container, string Key)> seen,
+        UITextPatchOutcome outcome)
+    {
+        var byContainer = new Dictionary<string, Dictionary<string, UITextResourceEntry>>(StringComparer.Ordinal);
+        foreach (var ((container, key), entry) in resourceMap)
+        {
+            if (!byContainer.TryGetValue(container, out var keys))
+            {
+                keys = new Dictionary<string, UITextResourceEntry>(StringComparer.Ordinal);
+                byContainer[container] = keys;
+            }
+
+            keys[key] = entry;
+        }
+
+        // module.Resources 是集合，替换时不能边遍历边改
+        foreach (var resource in module.Resources.ToList())
+        {
+            if (resource is not EmbeddedResource embedded)
+            {
+                continue;
+            }
+
+            var container = embedded.Name?.String ?? string.Empty;
+            if (!byContainer.TryGetValue(container, out var keys))
+            {
+                continue;
+            }
+
+            try
+            {
+                var data = embedded.CreateReader().ToArray();
+                var items = new List<(string Key, object? Value)>(keys.Count + 8);
+                using (var reader = new ResourceReader(new MemoryStream(data)))
+                {
+                    foreach (DictionaryEntry item in reader)
+                    {
+                        if (item.Key is not string resourceKey)
+                        {
+                            throw new NotSupportedException("容器里出现了非字符串的 key");
+                        }
+
+                        if (keys.TryGetValue(resourceKey, out var entry))
+                        {
+                            items.Add((resourceKey, entry.Translated));
+                            seen.Add((container, resourceKey));
+                            outcome.PatchedResources++;
+                        }
+                        else
+                        {
+                            items.Add((resourceKey, item.Value));
+                        }
+                    }
+                }
+
+                if (items.Count == 0)
+                {
+                    continue;
+                }
+
+                var stream = new MemoryStream();
+                using (var writer = new ResourceWriter(stream))
+                {
+                    foreach (var (key, value) in items)
+                    {
+                        writer.AddResource(key, value);
+                    }
+
+                    writer.Generate();
+                }
+
+                module.Resources.Remove(embedded);
+                module.Resources.Add(new EmbeddedResource(container, stream.ToArray(), embedded.Attributes));
+            }
+            catch (Exception e)
+            {
+                // 重写不了就整张容器跳过（key 会在收尾时进 Missing，让人知道没打成）
+                outcome.Missing.Add($"资源：{container}（重写失败：{e.Message}）");
+            }
+        }
     }
 
     private static void TryDelete(string path)

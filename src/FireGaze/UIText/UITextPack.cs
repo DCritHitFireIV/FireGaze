@@ -83,6 +83,45 @@ internal sealed class UITextPackMeta
 }
 
 /// <summary>
+///     资源型本地化（内嵌 <c>.resources</c> 容器）里的一条译文。
+/// </summary>
+/// <remarks>
+///     身份是「容器名 + key」，不是原文——同一个英文值可能落在多个 key 下，
+///     而且插件更新后 key 才是稳定的（值会改）。
+/// </remarks>
+internal sealed class UITextResourceEntry
+{
+    [JsonPropertyName("Container")]
+    public string Container { get; set; } = string.Empty;
+
+    [JsonPropertyName("Key")]
+    public string Key { get; set; } = string.Empty;
+
+    /// <summary>抽取时的英文值（插件更新后值会变，这里跟着更新并打 Review）。</summary>
+    [JsonPropertyName("Original")]
+    public string Original { get; set; } = string.Empty;
+
+    [JsonPropertyName("Translated")]
+    public string Translated { get; set; } = string.Empty;
+
+    /// <summary>译文来源：<c>user</c> / <c>ai</c> / <c>library</c>（与字面量条目同一套口径）。</summary>
+    [JsonPropertyName("Source")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Source { get; set; }
+
+    /// <summary>原文变过、译文待复核时的说明。</summary>
+    [JsonPropertyName("Review")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Review { get; set; }
+
+    [JsonIgnore]
+    public bool IsUserSource => string.Equals(this.Source, "user", StringComparison.OrdinalIgnoreCase);
+
+    [JsonIgnore]
+    public bool HasTranslation => !string.IsNullOrWhiteSpace(this.Translated);
+}
+
+/// <summary>
 ///     一次清账的结果：系统排掉多少条、恢复多少条、清掉多少条空壳。
 /// </summary>
 internal sealed record UITextPackPruneOutcome(int Pruned, int Restored, int Removed)
@@ -125,16 +164,106 @@ internal sealed class UITextPack
     public List<UITextPackEntry> Entries { get; set; } = [];
 
     /// <summary>
+    ///     资源型本地化（内嵌 <c>.resources</c>）的译文条目。
+    /// </summary>
+    [JsonPropertyName("resources")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public List<UITextResourceEntry> Resources { get; set; } = [];
+
+    /// <summary>
     ///     用户明确标记「不翻」的原文（留在包里，编辑器要记住，也不参与覆盖率统计的分母口径之外）。
     /// </summary>
     [JsonPropertyName("skipped")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public List<string> Skipped { get; set; } = [];
 
+    /// <summary>
+    ///     用户标记「不翻」的资源条目，格式 = <c>容器\u0001key</c>（容器名里不会出现这个字符）。
+    /// </summary>
+    [JsonPropertyName("skippedResources")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public List<string> SkippedResources { get; set; } = [];
+
     private Dictionary<string, UITextPackEntry>? index;
+    private Dictionary<(string Container, string Key), UITextResourceEntry>? resourceIndex;
 
     [JsonIgnore]
     public int TranslatedCount => this.Entries.Count(e => e.HasTranslation);
+
+    [JsonIgnore]
+    public int TranslatedResourceCount => this.Resources.Count(e => e.HasTranslation);
+
+    [JsonIgnore]
+    public int UntranslatedTotal =>
+        this.Entries.Count(e => !e.HasTranslation && !this.IsSkipped(e.Original))
+        + this.Resources.Count(e => !e.HasTranslation && !this.IsResourceSkipped(e.Container, e.Key));
+
+    /// <summary>
+    ///     按「容器 + key」取一条资源译文（没有就返回 null）。
+    /// </summary>
+    public UITextResourceEntry? FindResource(string container, string key)
+    {
+        this.EnsureResourceIndex();
+        return this.resourceIndex!.TryGetValue((container, key), out var entry) ? entry : null;
+    }
+
+    /// <summary>
+    ///     取一条资源译文、没有就建。原文变了时更新 <see cref="UITextResourceEntry.Original" /> 并打「待复核」；
+    ///     key 才是身份，所以译文保留（打补丁按 key 写，不会把旧译文写到别的文本上）。
+    /// </summary>
+    public UITextResourceEntry GetOrAddResource(string container, string key, string original)
+    {
+        var entry = this.FindResource(container, key);
+        if (entry is not null)
+        {
+            if (!string.Equals(entry.Original, original, StringComparison.Ordinal))
+            {
+                entry.Original = original;
+                if (entry.HasTranslation)
+                {
+                    entry.Review = "原文改过了，译文待复核";
+                }
+            }
+
+            return entry;
+        }
+
+        entry = new UITextResourceEntry { Container = container, Key = key, Original = original };
+        this.Resources.Add(entry);
+        this.resourceIndex![(container, key)] = entry;
+        return entry;
+    }
+
+    /// <summary>删掉一条资源译文（重新抽取后容器/key 没了、且本身是空壳时清账用）。</summary>
+    public bool RemoveResource(string container, string key)
+    {
+        this.EnsureResourceIndex();
+        if (!this.resourceIndex!.Remove((container, key)))
+        {
+            return false;
+        }
+
+        this.Resources.RemoveAll(e => e.Container == container && e.Key == key);
+        return true;
+    }
+
+    /// <summary>「不翻」名单里资源条目用的拼合键。</summary>
+    public static string ResourceSkipToken(string container, string key) => container + "\u0001" + key;
+
+    public bool IsResourceSkipped(string container, string key) =>
+        this.SkippedResources.Contains(ResourceSkipToken(container, key), StringComparer.Ordinal);
+
+    public void MarkResourceSkipped(string container, string key)
+    {
+        var token = ResourceSkipToken(container, key);
+        if (!this.SkippedResources.Contains(token, StringComparer.Ordinal))
+        {
+            this.SkippedResources.Add(token);
+        }
+    }
+
+    public void UnmarkResourceSkipped(string container, string key) =>
+        this.SkippedResources.RemoveAll(s => string.Equals(s, ResourceSkipToken(container, key), StringComparison.Ordinal));
 
     /// <summary>
     ///     按原文取一条（没有就返回 null）。索引失准时回退到线性查找，不问自愈。
@@ -203,10 +332,15 @@ internal sealed class UITextPack
     /// <summary>
     ///     这条「不翻」是不是系统自动排的（能自动恢复）。兼容 v1.2.0.37 用过的旧备注文案。
     /// </summary>
-    public static bool IsAutoSkipped(UITextPackEntry entry) =>
-        entry.Review is not null
-        && (entry.Review.StartsWith(AutoSkipNotePrefix, StringComparison.Ordinal)
-            || entry.Review.StartsWith("新一轮抽取已排除", StringComparison.Ordinal));
+    public static bool IsAutoSkipped(UITextPackEntry entry) => IsAutoSkipReview(entry.Review);
+
+    /// <summary>资源条目的同一判断（备注文案口径一致）。</summary>
+    public static bool IsResourceAutoSkipped(UITextResourceEntry entry) => IsAutoSkipReview(entry.Review);
+
+    private static bool IsAutoSkipReview(string? review) =>
+        review is not null
+        && (review.StartsWith(AutoSkipNotePrefix, StringComparison.Ordinal)
+            || review.StartsWith("新一轮抽取已排除", StringComparison.Ordinal));
 
     /// <summary>
     ///     标记「不翻」。
@@ -231,9 +365,11 @@ internal sealed class UITextPack
 
     /// <summary>
     ///     把公共配套库的包并进来：**本地人工改过的（user）永不被顶**；已有的 ai / library 可以被库里的更新覆盖。
+    ///     返回「真正写进去的条数」（含更新；供界面判断要不要重打补丁）。
     /// </summary>
-    public void MergeLibrary(UITextPack library)
+    public int MergeLibrary(UITextPack library)
     {
+        var changed = 0;
         this.EnsureIndex();
         foreach (var incoming in library.Entries)
         {
@@ -249,6 +385,11 @@ internal sealed class UITextPack
                     PreserveID = incoming.PreserveID,
                 });
                 this.index![incoming.Original] = this.Entries[^1];
+                if (incoming.HasTranslation)
+                {
+                    changed++;
+                }
+
                 continue;
             }
 
@@ -259,8 +400,14 @@ internal sealed class UITextPack
 
             if (incoming.HasTranslation)
             {
+                if (!string.Equals(existing.Translated, incoming.Translated, StringComparison.Ordinal))
+                {
+                    changed++;
+                }
+
                 existing.Translated = incoming.Translated;
                 existing.Source = incoming.Source ?? "library";
+                existing.Review = null;
             }
 
             if (incoming.Context is not null)
@@ -275,6 +422,62 @@ internal sealed class UITextPack
         {
             this.MarkSkipped(skipped);
         }
+
+        // 资源条目：同一套优先级——玩家自己改过的（user）永不被库顶掉；ai / library 可以被库更新覆盖。
+        foreach (var incoming in library.Resources)
+        {
+            var existing = this.FindResource(incoming.Container, incoming.Key);
+            if (existing is null)
+            {
+                this.Resources.Add(new UITextResourceEntry
+                {
+                    Container = incoming.Container,
+                    Key = incoming.Key,
+                    Original = incoming.Original,
+                    Translated = incoming.Translated,
+                    Source = incoming.Source ?? "library",
+                });
+                this.resourceIndex![(incoming.Container, incoming.Key)] = this.Resources[^1];
+                if (incoming.HasTranslation)
+                {
+                    changed++;
+                }
+
+                continue;
+            }
+
+            if (existing.IsUserSource)
+            {
+                continue;
+            }
+
+            if (incoming.HasTranslation)
+            {
+                if (!string.Equals(existing.Translated, incoming.Translated, StringComparison.Ordinal))
+                {
+                    changed++;
+                }
+
+                existing.Translated = incoming.Translated;
+                existing.Source = incoming.Source ?? "library";
+                existing.Review = null;
+            }
+
+            if (incoming.Original.Length > 0)
+            {
+                existing.Original = incoming.Original;
+            }
+        }
+
+        foreach (var skipped in library.SkippedResources)
+        {
+            if (!this.SkippedResources.Contains(skipped, StringComparer.Ordinal))
+            {
+                this.SkippedResources.Add(skipped);
+            }
+        }
+
+        return changed;
     }
 
     /// <summary>
@@ -296,6 +499,12 @@ internal sealed class UITextPack
             {
                 keep.Add(item.Original);
             }
+        }
+
+        var keepResources = new HashSet<(string Container, string Key)>();
+        foreach (var item in extraction.Resources)
+        {
+            keepResources.Add((item.Container, item.Key));
         }
 
         var pruned = 0;
@@ -339,7 +548,46 @@ internal sealed class UITextPack
             this.Remove(original);
         }
 
-        return new UITextPackPruneOutcome(pruned, restored, dropped.Count);
+        // 资源条目同一套清账：容器/key 不在了或值变成不可翻的（JSON 之类）→ 自动排掉；
+        // 又回来看见 → 恢复；空壳清掉。
+        var droppedResources = new List<(string Container, string Key)>();
+        foreach (var entry in this.Resources)
+        {
+            if (keepResources.Contains((entry.Container, entry.Key)))
+            {
+                if (this.IsResourceSkipped(entry.Container, entry.Key) && IsResourceAutoSkipped(entry))
+                {
+                    this.UnmarkResourceSkipped(entry.Container, entry.Key);
+                    entry.Review = null;
+                    restored++;
+                }
+
+                continue;
+            }
+
+            if (this.IsResourceSkipped(entry.Container, entry.Key) && !IsResourceAutoSkipped(entry))
+            {
+                continue;
+            }
+
+            if (!entry.HasTranslation && entry.Source is null)
+            {
+                droppedResources.Add((entry.Container, entry.Key));
+                continue;
+            }
+
+            this.MarkResourceSkipped(entry.Container, entry.Key);
+            entry.Review = AutoSkipNotePrefix + "已不在新一轮抽取的资源里（容器/key 变了，或值已不是界面文字）";
+            pruned++;
+        }
+
+        foreach (var (container, key) in droppedResources)
+        {
+            this.UnmarkResourceSkipped(container, key);
+            this.RemoveResource(container, key);
+        }
+
+        return new UITextPackPruneOutcome(pruned, restored, dropped.Count + droppedResources.Count);
     }
 
     /// <summary>
@@ -357,12 +605,21 @@ internal sealed class UITextPack
 
             this.GetOrAdd(item.Original, item.Context, item.PreserveID);
         }
+
+        foreach (var item in extraction.Resources)
+        {
+            this.GetOrAddResource(item.Container, item.Key, item.Value);
+        }
     }
 
     /// <summary>
     ///     清掉索引（从 JSON 反序列化后要重建）。
     /// </summary>
-    public void InvalidateIndex() => this.index = null;
+    public void InvalidateIndex()
+    {
+        this.index = null;
+        this.resourceIndex = null;
+    }
 
     private void EnsureIndex()
     {
@@ -375,6 +632,20 @@ internal sealed class UITextPack
         foreach (var entry in this.Entries)
         {
             this.index[entry.Original] = entry;
+        }
+    }
+
+    private void EnsureResourceIndex()
+    {
+        if (this.resourceIndex is not null)
+        {
+            return;
+        }
+
+        this.resourceIndex = new Dictionary<(string Container, string Key), UITextResourceEntry>(this.Resources.Count);
+        foreach (var entry in this.Resources)
+        {
+            this.resourceIndex[(entry.Container, entry.Key)] = entry;
         }
     }
 

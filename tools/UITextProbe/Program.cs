@@ -93,6 +93,17 @@ if (args.Length >= 2 && args[1] == "--strings")
     return 0;
 }
 
+if (args.Length >= 2 && args[1] == "--resources")
+{
+    // 资源型本地化（内嵌 .resources）的 key / 值，落 JSON 给库生成脚本用。
+    var resourceResult = UIStringExtractor.Extract(positional[0]);
+    var resourceJson = System.Text.Json.JsonSerializer.Serialize(
+        resourceResult.Resources.Select(r => new { r.Container, r.Key, r.Value }),
+        new System.Text.Json.JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+    Console.WriteLine(resourceJson);
+    return 0;
+}
+
 var result = UIStringExtractor.Extract(positional[0]);
 if (result.Error is not null)
 {
@@ -124,7 +135,7 @@ var rows = result.Entries
     .ToArray();
 
 Console.WriteLine($"文件：{result.AssemblyPath}");
-Console.WriteLine($"UI 候选 {result.UICount} · 灰名单 {result.AmbiguousCount} · 总字面量 {result.Entries.Count}");
+Console.WriteLine($"UI 候选 {result.UICount} · 灰名单 {result.AmbiguousCount} · 资源文本 {result.Resources.Count} · 总字面量 {result.Entries.Count}");
 Console.WriteLine(new string('-', 120));
 foreach (var e in rows)
 {

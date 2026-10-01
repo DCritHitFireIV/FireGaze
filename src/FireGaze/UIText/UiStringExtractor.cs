@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Diagnostics;
+using System.Resources;
 using System.Text.RegularExpressions;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
@@ -2282,8 +2284,139 @@ public static class UIStringExtractor
             {
                 AssemblyPath = this.path,
                 ResourceKeyCount = this.resourceKeyCount,
+                Resources = this.ScanResources(),
                 Entries = entries,
             };
+        }
+
+        // ── 资源型本地化（.resx / ResourceManager）───────────────────────────
+
+        /// <summary>
+        ///     扫描主 DLL 内嵌的 <c>.resources</c> 容器，把「key → 英文值」读出来。
+        /// </summary>
+        /// <remarks>
+        ///     口径（2026-10-02 用户定）：
+        ///       · 只扫主程序集的内嵌容器，**不碰卫星程序集**——官方 zh 卫星优先，ResourceManager 的
+        ///         查找顺序天然是「卫星 → 缺失才回退中性」，所以只需要把中性资源翻好：
+        ///         官中有的 key 继续用官方译文，官中没覆盖的 key 和没做 zh 的插件自动用我们的译文；
+        ///       · 只收「看起来像给人看的文字」的值：JSON / 网址 / 路径 / 标识符 / 纯格式串都不收
+        ///         （容器里偶尔塞的是预设数据，翻了会弄坏功能）；
+        ///       · 容器名按程序集名过滤，顺带排掉合并进来的第三方库自带资源。
+        /// </remarks>
+        private List<UITextResourceItem> ScanResources()
+        {
+            var list = new List<UITextResourceItem>();
+            var assemblyName = this.module.Assembly?.Name?.String;
+            if (string.IsNullOrEmpty(assemblyName))
+            {
+                assemblyName = Path.GetFileNameWithoutExtension(this.path);
+            }
+
+            foreach (var resource in this.module.Resources)
+            {
+                if (resource is not EmbeddedResource embedded)
+                {
+                    continue;
+                }
+
+                var container = embedded.Name?.String ?? string.Empty;
+                if (!container.EndsWith(".resources", StringComparison.OrdinalIgnoreCase)
+                    || !container.StartsWith(assemblyName + ".", StringComparison.Ordinal)
+                    || IsThirdPartyResourceContainer(container))
+                {
+                    continue;
+                }
+
+                try
+                {
+                    var bytes = embedded.CreateReader().ToArray();
+                    using var stream = new MemoryStream(bytes);
+                    using var reader = new ResourceReader(stream);
+                    foreach (DictionaryEntry entry in reader)
+                    {
+                        if (entry.Key is not string key || entry.Value is not string value)
+                        {
+                            continue;
+                        }
+
+                        if (LooksTranslatableResourceValue(value))
+                        {
+                            list.Add(new UITextResourceItem
+                            {
+                                Container = container,
+                                Key = key,
+                                Value = value,
+                            });
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    // 个别容器读不动（自定义序列化类型）就跳过，不影响其余容器
+                }
+            }
+
+            return list;
+        }
+
+        private static readonly string[] ThirdPartyResourcePrefixes =
+        [
+            "FxResources.",
+            "System.",
+            "Microsoft.",
+            "Humanizer.",
+            "Autofac.",
+            "Newtonsoft.",
+            "JetBrains.",
+            "Serilog.",
+            "CsvHelper.",
+            "Costura.",
+        ];
+
+        private static bool IsThirdPartyResourceContainer(string container)
+        {
+            foreach (var prefix in ThirdPartyResourcePrefixes)
+            {
+                if (container.StartsWith(prefix, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        ///     资源值算不算可翻的界面文字。比字面量的 <see cref="LooksTranslatable" /> 更谨慎：
+        ///     资源容器里可能有结构化数据（AutoDuty 的预设 JSON），翻了会弄坏功能。
+        /// </summary>
+        private static bool LooksTranslatableResourceValue(string value)
+        {
+            var trimmed = value.Trim();
+            if (trimmed.Length == 0)
+            {
+                return false;
+            }
+
+            // JSON / 数组 / 结构化数据
+            if (trimmed[0] is '{' or '[')
+            {
+                return false;
+            }
+
+            // 网址 / 路径 / 协议
+            if (trimmed.Contains("://", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            // 超长文本多半是文档/公告数据，不是一条界面文案（单条上限 4000，防打包膨胀）
+            if (value.Length > 4000)
+            {
+                return false;
+            }
+
+            return LooksTranslatable(value);
         }
 
         // ── 小工具 ───────────────────────────────────────────────────────────

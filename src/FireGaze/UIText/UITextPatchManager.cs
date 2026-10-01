@@ -200,7 +200,7 @@ internal sealed class UITextPatchManager
         }
 
         var pack = this.packs.Load(entry.InternalName);
-        if (pack.Entries.Count == 0)
+        if (pack.Entries.Count == 0 && pack.Resources.Count == 0)
         {
             return (false, "这个插件还没有本地译文包。");
         }
@@ -232,12 +232,12 @@ internal sealed class UITextPatchManager
             PatchedHash = UITextPatchStore.HashOf(dllPath),
             PatchedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
             BackupPath = backup,
-            AppliedEntries = outcome.PatchedLiterals,
+            AppliedEntries = outcome.PatchedTotal,
             PendingVerify = true,
             PendingSince = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
         });
 
-        var message = $"已写入 {outcome.PatchedLiterals} 处译文";
+        var message = $"已写入 {outcome.PatchedTotal} 处译文";
         if (outcome.Missing.Count > 0)
         {
             message += $"（{outcome.Missing.Count} 条在 DLL 里没找到，可能是插件版本变了）";

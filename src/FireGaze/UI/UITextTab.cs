@@ -746,7 +746,7 @@ internal sealed class UITextTab
                 return;
             }
 
-            if (merge.UICount + merge.AmbiguousCount == 0)
+            if (merge.UICount + merge.AmbiguousCount + merge.ResourceCount == 0)
             {
                 this.FinishRun(run, new RowNote
                 {
@@ -759,16 +759,17 @@ internal sealed class UITextTab
             if (run.Mode == RunMode.ExtractOnly)
             {
                 var summary = $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条 · 已翻译 {pack.TranslatedCount} 条";
+                if (merge.ResourceCount > 0)
+                {
+                    summary += $" · 资源文本 {merge.ResourceCount} 条（已译 {pack.TranslatedResourceCount} 条）";
+                }
+
                 if (merge.Prune.Any)
                 {
                     summary += " · " + merge.Prune.Describe();
                 }
 
                 summary += "。要翻译就点「一键汉化」，要逐条看就点「编辑校对…」。";
-                if (extraction.ResourceKeyCount > 0)
-                {
-                    summary += $"\n还有 {extraction.ResourceKeyCount} 处界面文字放在本地化资源文件里，暂不支持汉化。";
-                }
 
                 this.FinishRun(run, new RowNote { Kind = NoteKind.Good, Text = summary });
                 this.rowsDirty = true;
@@ -777,10 +778,26 @@ internal sealed class UITextTab
 
             // ② 翻译没翻的条目
             var targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
+
+            // ②a 先看公共译文库有没有现成的（有就不用花用户自己的 key；合并规则：玩家自己改过的永不被顶）
+            var libraryChanged = 0;
+            if (targets.Count > 0 && this.plugin.Config.UITextLibraryEnabled)
+            {
+                run.Stage = "正在查公共译文库…";
+                libraryChanged = await this.plugin.TextLibrary.MergeIntoAsync(pack, entry.InternalName, token).ConfigureAwait(false);
+                if (libraryChanged > 0)
+                {
+                    this.store.Save(entry.InternalName, pack, out _);
+                    targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
+                    Plugin.Log?.Information($"[内部文本] {entry.InternalName}：译文库补入 {libraryChanged} 条，还需翻译 {targets.Count} 条");
+                }
+            }
+
             var translatedCount = 0;
             var channelNote = string.Empty;
             if (targets.Count == 0
                 && !merge.ReapplyNeeded
+                && libraryChanged == 0
                 && !packTouchedSincePatch
                 && this.patches.StatusOf(entry, out _) == UITextPatchStatus.Applied)
             {
@@ -814,7 +831,7 @@ internal sealed class UITextTab
                 run.CanCancel = true;
                 run.Stage = $"翻译 0 / {targets.Count} 条（{channel.Name}）";
 
-                var items = targets.Select(t => new UITextTranslateItem(t.Original, t.Context)).ToList();
+                var items = UITextFlow.BuildTranslateItems(targets);
                 var result = await channel.TranslateAsync(
                     items,
                     (done, _) =>
@@ -867,15 +884,17 @@ internal sealed class UITextTab
             }
 
             var extra = translatedCount > 0 ? $"本次新翻 {translatedCount} 条。{channelNote}" : string.Empty;
-            if (translatedCount == 0 && merge.ReapplyNeeded)
+            if (libraryChanged > 0)
             {
-                extra = "抽取结果变了（有新增文本或控件 ID 标记被修正），已按新的写法重打。";
+                extra = $"从译文库补了 {libraryChanged} 条。" + extra;
             }
 
-            if (extraction.ResourceKeyCount > 0)
+            if (translatedCount == 0 && merge.ReapplyNeeded)
             {
-                extra += $"\n还有 {extraction.ResourceKeyCount} 处界面文字放在本地化资源文件里，暂不支持汉化，翻译不会动它们。";
+                var reapply = "抽取结果变了（有新增文本或控件 ID 标记被修正），已按新的写法重打。";
+                extra = libraryChanged > 0 ? $"从译文库补了 {libraryChanged} 条；" + reapply : reapply;
             }
+
             this.FinishRun(run, new RowNote
             {
                 Kind = NoteKind.Good,

@@ -54,6 +54,25 @@ public sealed class UITextEntry
 }
 
 /// <summary>
+///     从插件 DLL 内嵌的本地化资源容器（<c>.resources</c>）里读到的一条界面文字。
+/// </summary>
+/// <remarks>
+///     和 <see cref="UITextEntry" />（<c>ldstr</c> 字面量）不同：资源条目的身份是「容器名 + key」，
+///     原文是容器里的值。打补丁时按「容器 + key」把值改成译文，不去碰卫星程序集（官中优先）。
+/// </remarks>
+public sealed class UITextResourceItem
+{
+    /// <summary>资源容器名：<c>AutoHook.Resources.Localization.UIStrings.resources</c>。</summary>
+    public string Container { get; init; } = string.Empty;
+
+    /// <summary>容器里的 entry 名（查表 key）。</summary>
+    public string Key { get; init; } = string.Empty;
+
+    /// <summary>当前的英文值。</summary>
+    public string Value { get; init; } = string.Empty;
+}
+
+/// <summary>
 ///     一次抽取的结果。
 /// </summary>
 public sealed class UITextExtraction
@@ -74,8 +93,13 @@ public sealed class UITextExtraction
     public List<UITextEntry> Entries { get; init; } = [];
 
     /// <summary>
+    ///     从内嵌 <c>.resources</c> 容器里读到的界面文字（资源型本地化）。
+    /// </summary>
+    public List<UITextResourceItem> Resources { get; init; } = [];
+
+    /// <summary>
     ///     这个插件里「界面文字放在本地化资源（.resx / ResourceManager）」的字面量个数。
-    ///     这些是查表 key、不能翻（翻了查不到资源）；目前只能翻 DLL 里的字面量，这部分暂不支持。
+    ///     这些是查表 key、不能翻（翻了查不到资源）；它们的值是 <see cref="Resources" />，那条通道翻值、不翻 key。
     /// </summary>
     public int ResourceKeyCount { get; init; }
 

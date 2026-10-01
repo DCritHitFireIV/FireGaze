@@ -87,6 +87,20 @@ internal sealed class UITextSettingsWindow : Window
                 "FF14 官方译名术语表只在大模型通道生效；当前通道不会用到它。");
         }
 
+        var library = config.UITextLibraryEnabled;
+        if (ImGui.Checkbox("从公共译文库下载现成译文", ref library))
+        {
+            config.UITextLibraryEnabled = library;
+            changed = true;
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(
+                "有现成译文时直接下载，不用花你自己的 key；玩家自己改过的译文不会被覆盖。\n" +
+                "拉不到（网络 / 仓库里还没有这个插件）就照旧用自己的翻译通道。");
+        }
+
         var translateGrey = config.UITextTranslateGreyList;
         if (ImGui.Checkbox("批量翻译时连灰名单一起翻", ref translateGrey))
         {

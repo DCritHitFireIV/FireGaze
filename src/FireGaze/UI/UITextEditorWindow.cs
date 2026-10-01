@@ -24,14 +24,34 @@ internal sealed class UITextEditorWindow : Window
     }
 
     /// <summary>
-    ///     界面上一行：抽取结果里的一条字面量 + 包里的译文。
+    ///     界面上一行：抽取结果里的一条字面量 + 包里的译文；资源行（<see cref="Resource" />）是
+    ///     内嵌 <c>.resources</c> 容器里的一条（身份 = 容器 + key）。两种行二选一。
     /// </summary>
     private sealed class Row
     {
-        public UITextPackEntry Entry = null!;
+        public UITextPackEntry? Entry;
+        public UITextResourceEntry? Resource;
         public UITextRole Role;
         public string Reason = string.Empty;
         public bool Skipped;
+
+        public bool IsResource => this.Resource is not null;
+
+        public string Original => this.Resource?.Original ?? this.Entry!.Original;
+
+        public string? Context => this.Resource is not null
+            ? "资源：" + this.Resource.Container + " · " + this.Resource.Key
+            : this.Entry!.Context;
+
+        public bool HasTranslation => this.Resource?.HasTranslation ?? this.Entry!.HasTranslation;
+
+        public string Translated => this.Resource?.Translated ?? this.Entry!.Translated;
+
+        public string? Review => this.Resource?.Review ?? this.Entry!.Review;
+
+        public string? Source => this.Resource?.Source ?? this.Entry!.Source;
+
+        public bool IsUserSource => this.Resource?.IsUserSource ?? this.Entry!.IsUserSource;
     }
 
     private readonly Plugin plugin;
@@ -317,29 +337,39 @@ internal sealed class UITextEditorWindow : Window
                 Skipped = this.pack.IsSkipped(packEntry.Original),
             });
         }
+
+        foreach (var resource in this.pack.Resources)
+        {
+            this.rows.Add(new Row
+            {
+                Resource = resource,
+                Role = UITextRole.UI,
+                Reason = "资源型本地化（.resources）：打补丁改容器里的值，不动卫星程序集",
+                Skipped = this.pack.IsResourceSkipped(resource.Container, resource.Key),
+            });
+        }
     }
 
     // ── 翻译 ─────────────────────────────────────────────────────────────
 
-    private List<Row> TranslationTargets()
+    private List<UITextTarget> TranslationTargets()
     {
         var includeGrey = this.plugin.Config.UITextTranslateGreyList;
         return this.rows
-            .Where(r => !r.Skipped && !r.Entry.HasTranslation)
-            .Where(r => r.Role == UITextRole.UI || (includeGrey && r.Role == UITextRole.Ambiguous))
+            .Where(r => !r.Skipped && !r.HasTranslation)
+            .Where(r => r.IsResource || r.Role == UITextRole.UI || (includeGrey && r.Role == UITextRole.Ambiguous))
+            .Select(r => new UITextTarget(r.Original, r.Context, r.Entry, r.Resource))
             .ToList();
     }
 
-    private void StartTranslate(List<Row> targets)
+    private void StartTranslate(List<UITextTarget> targets)
     {
         if (this.translateTask is { IsCompleted: false })
         {
             return;
         }
 
-        var items = targets
-            .Select(r => new UITextTranslateItem(r.Entry.Original, r.Entry.Context))
-            .ToList();
+        var items = UITextFlow.BuildTranslateItems(targets);
         if (items.Count == 0)
         {
             this.SetStatus("没有需要翻译的条目。", false);
@@ -394,37 +424,9 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        var applied = 0;
-        var placeholderRejected = 0;
-        var unchanged = 0;
-        foreach (var (original, translated) in outcome.Result.Translated)
-        {
-            var row = this.rows.FirstOrDefault(r => string.Equals(r.Entry.Original, original, StringComparison.Ordinal));
-            if (row is null)
-            {
-                continue;
-            }
-
-            var clean = UITextText.CleanTranslated(translated);
-            if (string.IsNullOrWhiteSpace(clean) || string.Equals(clean, UITextText.ForTranslation(original), StringComparison.Ordinal))
-            {
-                unchanged++;
-                continue;
-            }
-
-            var problem = UITextText.CheckPlaceholders(original, clean);
-            if (problem is not null)
-            {
-                row.Entry.Review = problem;
-                placeholderRejected++;
-                continue;
-            }
-
-            row.Entry.Translated = clean;
-            row.Entry.Source = "ai:" + outcome.Channel;
-            row.Entry.Review = null;
-            applied++;
-        }
+        // 收译文：字面量与资源条目共用同一套清洗/占位符校验/来源标记
+        var (applied, placeholderRejected, unchanged) = UITextFlow.AcceptTranslations(this.pack, outcome.Result.Translated, outcome.Channel);
+        this.RebuildRows();
 
         this.MarkDirty();
         var failed = outcome.Result.Failed.Count;
@@ -446,7 +448,7 @@ internal sealed class UITextEditorWindow : Window
             $"[内部文本] {this.entry?.InternalName} 翻译通道 {outcome.Channel}：目标 {this.translateTotal}，写入 {applied}，失败 {failed}" +
             (outcome.Result.Notes.Count > 0 ? "；" + string.Join("；", outcome.Result.Notes) : string.Empty));
 
-        var unapplied = this.rows.Count(r => r.Entry.HasTranslation && !r.Skipped);
+        var unapplied = this.rows.Count(r => r.HasTranslation && !r.Skipped);
         if (applied > 0 && unapplied > 0)
         {
             summary += $" · 尚未应用——点「写入并重载」（共 {unapplied} 条）";
@@ -533,10 +535,11 @@ internal sealed class UITextEditorWindow : Window
 
         var candidate = this.rows.Count(r => r.Role == UITextRole.UI);
         var ambiguous = this.rows.Count(r => r.Role == UITextRole.Ambiguous);
-        var translated = this.rows.Count(r => r.Entry.HasTranslation);
+        var resources = this.pack.Resources.Count;
+        var translated = this.rows.Count(r => r.HasTranslation);
         var skipped = this.rows.Count(r => r.Skipped);
         ImGui.TextDisabled(
-            $"候选 {candidate} · 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
+            $"候选 {candidate}（含资源 {resources}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
             (this.extractionTask is { IsCompleted: false } ? " · 抽取中…" : string.Empty));
     }
 
@@ -589,7 +592,7 @@ internal sealed class UITextEditorWindow : Window
 
         // 写入插件 + 自动重载（重载是合并步骤，不单独给按钮）
         ImGui.SameLine();
-        ImGui.BeginDisabled(busy || this.rows.Count(r => r.Entry.HasTranslation && !r.Skipped) == 0);
+        ImGui.BeginDisabled(busy || this.rows.Count(r => r.HasTranslation && !r.Skipped) == 0);
         if (ImGui.Button("写入并重载"))
         {
             this.StartApply();
@@ -745,13 +748,13 @@ internal sealed class UITextEditorWindow : Window
             this.DrawStatusCell(row);
 
             ImGui.TableNextColumn();
-            ImGui.TextDisabled(row.Entry.Context ?? "—");
+            ImGui.TextDisabled(row.Context ?? "—");
 
             ImGui.TableNextColumn();
-            ImGui.TextUnformatted(Shorten(row.Entry.Original, 60));
+            ImGui.TextUnformatted(Shorten(row.Original, 60));
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip(row.Entry.Original);
+                ImGui.SetTooltip(row.Original);
             }
 
             this.DrawRowContextMenu(row);
@@ -789,7 +792,7 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        if (row.Entry.Review is { Length: > 0 } review)
+        if (row.Review is { Length: > 0 } review)
         {
             UiHelpers.ColoredText(UiHelpers.Warn, "⚠");
             if (ImGui.IsItemHovered())
@@ -800,7 +803,7 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        if (!row.Entry.HasTranslation)
+        if (!row.HasTranslation)
         {
             ImGui.TextDisabled("·");
             if (ImGui.IsItemHovered())
@@ -808,7 +811,7 @@ internal sealed class UITextEditorWindow : Window
                 ImGui.SetTooltip("还没翻译");
             }
         }
-        else if (row.Entry.IsUserSource)
+        else if (row.IsUserSource)
         {
             UiHelpers.ColoredText(UiHelpers.Good, "✔");
             if (ImGui.IsItemHovered())
@@ -821,20 +824,18 @@ internal sealed class UITextEditorWindow : Window
             UiHelpers.ColoredText(UiHelpers.Muted, "⚙");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("机器译文（" + (row.Entry.Source ?? "ai") + "），可以改");
+                ImGui.SetTooltip("机器译文（" + (row.Source ?? "ai") + "），可以改");
             }
         }
     }
 
     private void DrawTranslationCell(Row row)
     {
-        var value = row.Entry.Translated;
+        var value = row.Translated;
         ImGui.SetNextItemWidth(-1);
         if (ImGui.InputText("##translated", ref value, 2048))
         {
-            row.Entry.Translated = value;
-            row.Entry.Source = value.Length == 0 ? null : "user";
-            row.Entry.Review = null;
+            this.SetTranslationValue(row, value);
             this.MarkDirty();
         }
 
@@ -842,6 +843,69 @@ internal sealed class UITextEditorWindow : Window
         {
             ImGui.SetTooltip(value);
         }
+    }
+
+    /// <summary>写一行的译文（字面量 / 资源两种行都走这里，来源统一标 user）。</summary>
+    private void SetTranslationValue(Row row, string value)
+    {
+        if (row.Resource is not null)
+        {
+            row.Resource.Translated = value;
+            row.Resource.Source = value.Length == 0 ? null : "user";
+            row.Resource.Review = null;
+            return;
+        }
+
+        row.Entry!.Translated = value;
+        row.Entry.Source = value.Length == 0 ? null : "user";
+        row.Entry.Review = null;
+    }
+
+    /// <summary>清一行的译文。</summary>
+    private static void ClearTranslationValue(Row row)
+    {
+        if (row.Resource is not null)
+        {
+            row.Resource.Translated = string.Empty;
+            row.Resource.Source = null;
+            return;
+        }
+
+        row.Entry!.Translated = string.Empty;
+        row.Entry.Source = null;
+    }
+
+    /// <summary>标/取消「不翻」。</summary>
+    private void SetRowSkipped(Row row, bool skipped)
+    {
+        if (row.Resource is not null)
+        {
+            if (skipped)
+            {
+                this.pack.MarkResourceSkipped(row.Resource.Container, row.Resource.Key);
+            }
+            else
+            {
+                this.pack.UnmarkResourceSkipped(row.Resource.Container, row.Resource.Key);
+            }
+
+            row.Resource.Review = null;
+        }
+        else
+        {
+            if (skipped)
+            {
+                this.pack.MarkSkipped(row.Entry!.Original);
+            }
+            else
+            {
+                this.pack.UnmarkSkipped(row.Entry!.Original);
+            }
+
+            row.Entry!.Review = null;
+        }
+
+        row.Skipped = skipped;
     }
 
     private void DrawRowContextMenu(Row row)
@@ -853,43 +917,37 @@ internal sealed class UITextEditorWindow : Window
 
         if (ImGui.MenuItem("翻译这一条", enabled: !(this.translateTask is { IsCompleted: false })))
         {
-            this.StartTranslate([row]);
+            this.StartTranslate([new UITextTarget(row.Original, row.Context, row.Entry, row.Resource)]);
         }
 
         if (row.Skipped)
         {
             if (ImGui.MenuItem("取消「不翻」"))
             {
-                this.pack.UnmarkSkipped(row.Entry.Original);
-                row.Entry.Review = null;
-                row.Skipped = false;
+                this.SetRowSkipped(row, false);
                 this.MarkDirty();
             }
         }
         else if (ImGui.MenuItem("标记「不翻」"))
         {
-            this.pack.MarkSkipped(row.Entry.Original);
-            // 用户手动标的「不翻」要清掉自动备注：从此归用户管，重新抽取不会自动恢复
-            row.Entry.Review = null;
-            row.Skipped = true;
+            this.SetRowSkipped(row, true);
             this.MarkDirty();
         }
 
-        if (ImGui.MenuItem("清除译文", enabled: row.Entry.HasTranslation))
+        if (ImGui.MenuItem("清除译文", enabled: row.HasTranslation))
         {
-            row.Entry.Translated = string.Empty;
-            row.Entry.Source = null;
+            ClearTranslationValue(row);
             this.MarkDirty();
         }
 
         if (ImGui.MenuItem("复制原文"))
         {
-            ImGui.SetClipboardText(row.Entry.Original);
+            ImGui.SetClipboardText(row.Original);
         }
 
-        if (ImGui.MenuItem("复制译文", enabled: row.Entry.HasTranslation))
+        if (ImGui.MenuItem("复制译文", enabled: row.HasTranslation))
         {
-            ImGui.SetClipboardText(row.Entry.Translated);
+            ImGui.SetClipboardText(row.Translated);
         }
 
         ImGui.EndPopup();
@@ -902,8 +960,8 @@ internal sealed class UITextEditorWindow : Window
         {
             [Filter.Candidates] = this.rows.Count(r => r.Role == UITextRole.UI),
             [Filter.Ambiguous] = this.rows.Count(r => r.Role == UITextRole.Ambiguous),
-            [Filter.Untranslated] = this.rows.Count(r => !r.Entry.HasTranslation && !r.Skipped),
-            [Filter.Translated] = this.rows.Count(r => r.Entry.HasTranslation),
+            [Filter.Untranslated] = this.rows.Count(r => !r.HasTranslation && !r.Skipped),
+            [Filter.Translated] = this.rows.Count(r => r.HasTranslation),
             [Filter.Skipped] = this.rows.Count(r => r.Skipped),
             [Filter.All] = this.rows.Count,
         };
@@ -961,8 +1019,8 @@ internal sealed class UITextEditorWindow : Window
         {
             Filter.Candidates => row.Role == UITextRole.UI,
             Filter.Ambiguous => row.Role == UITextRole.Ambiguous,
-            Filter.Untranslated => !row.Entry.HasTranslation && !row.Skipped,
-            Filter.Translated => row.Entry.HasTranslation,
+            Filter.Untranslated => !row.HasTranslation && !row.Skipped,
+            Filter.Translated => row.HasTranslation,
             Filter.Skipped => row.Skipped,
             _ => true,
         };
@@ -976,9 +1034,9 @@ internal sealed class UITextEditorWindow : Window
             return true;
         }
 
-        return row.Entry.Original.Contains(filterText, StringComparison.OrdinalIgnoreCase)
-               || row.Entry.Translated.Contains(filterText, StringComparison.OrdinalIgnoreCase)
-               || (row.Entry.Context ?? string.Empty).Contains(filterText, StringComparison.OrdinalIgnoreCase);
+        return row.Original.Contains(filterText, StringComparison.OrdinalIgnoreCase)
+               || row.Translated.Contains(filterText, StringComparison.OrdinalIgnoreCase)
+               || (row.Context ?? string.Empty).Contains(filterText, StringComparison.OrdinalIgnoreCase);
     }
 
     // ── 导入导出 / 保存 ───────────────────────────────────────────────────
@@ -1000,7 +1058,7 @@ internal sealed class UITextEditorWindow : Window
 
                 try
                 {
-                    File.WriteAllText(path, UITextStore.BuildAIExport(this.pack.Entries, onlyUntranslated: true), new System.Text.UTF8Encoding(false));
+                    File.WriteAllText(path, UITextStore.BuildAIExport(BuildExportEntries(), onlyUntranslated: true), new System.Text.UTF8Encoding(false));
                     this.SetStatus($"已导出未翻条目：{path}", false);
                 }
                 catch (Exception e)
@@ -1008,6 +1066,33 @@ internal sealed class UITextEditorWindow : Window
                     this.SetStatus("导出失败：" + e.Message, true);
                 }
             });
+    }
+
+    /// <summary>
+    ///     导出/导入用的扁平列表：字面量 + 资源条目。资源用「资源：容器 · key」当上下文，
+    ///     同一英文值只出现一次（多个 key 共用一条导出，对得上任何一边都能写回）。
+    /// </summary>
+    private List<UITextPackEntry> BuildExportEntries()
+    {
+        var list = new List<UITextPackEntry>(this.pack.Entries);
+        var seen = new HashSet<string>(this.pack.Entries.Select(e => e.Original), StringComparer.Ordinal);
+        foreach (var resource in this.pack.Resources)
+        {
+            if (!seen.Add(resource.Original))
+            {
+                continue;
+            }
+
+            list.Add(new UITextPackEntry
+            {
+                Original = resource.Original,
+                Translated = resource.Translated,
+                Context = "资源：" + resource.Container + " · " + resource.Key,
+                Source = resource.Source,
+            });
+        }
+
+        return list;
     }
 
     private void ImportFromFile()
@@ -1036,18 +1121,45 @@ internal sealed class UITextEditorWindow : Window
                     foreach (var incoming in entries)
                     {
                         var existing = this.pack.Find(incoming.Original);
-                        if (existing is null)
+                        var appliedOne = false;
+                        if (existing is not null)
                         {
-                            unknown++;
-                            continue;
+                            if (!existing.IsUserSource || existing.Translated.Length == 0)
+                            {
+                                existing.Translated = incoming.Translated;
+                                existing.Source = incoming.Source ?? "user";
+                                existing.Review = null;
+                                appliedOne = true;
+                            }
                         }
 
-                        if (!existing.IsUserSource || existing.Translated.Length == 0)
+                        // 资源条目按原文匹配（同一值可能落在多个 key 下）
+                        foreach (var resource in this.pack.Resources)
                         {
-                            existing.Translated = incoming.Translated;
-                            existing.Source = incoming.Source ?? "user";
-                            existing.Review = null;
+                            if (!string.Equals(resource.Original, incoming.Original, StringComparison.Ordinal)
+                                || this.pack.IsResourceSkipped(resource.Container, resource.Key))
+                            {
+                                continue;
+                            }
+
+                            if (resource.IsUserSource && resource.Translated.Length > 0)
+                            {
+                                continue;
+                            }
+
+                            resource.Translated = incoming.Translated;
+                            resource.Source = incoming.Source ?? "user";
+                            resource.Review = null;
+                            appliedOne = true;
+                        }
+
+                        if (appliedOne)
+                        {
                             applied++;
+                        }
+                        else
+                        {
+                            unknown++;
                         }
                     }
 

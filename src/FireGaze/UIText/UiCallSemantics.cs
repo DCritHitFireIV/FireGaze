@@ -234,6 +234,18 @@ internal static class UICallSemantics
         methodName is "Get" or "TryGet" && typeFullName.EndsWith("IDtrBar", StringComparison.Ordinal);
 
     /// <summary>
+    ///     聊天窗口输出（<c>IChatGui.Print</c> / <c>PrintError</c>）：玩家在聊天栏里看得见，属于显示文本。
+    /// </summary>
+    /// <remarks>
+    ///     2026-10-02 用户拍板要翻（全量 401 条 / 52 插件）。以前它们撞上 <see cref="IsLogCall" /> 的方法名
+    ///     「Print」被当日志排掉，<c>PrintError</c> 则落在「去向不明」——两条规则口径不一致，现在统一按 UI 处理。
+    ///     方法重载里第 2 个字符串参数是聊天栏的信息标签（messageTag），一样是给人看的，一起翻。
+    /// </remarks>
+    public static bool IsChatCall(string typeFullName, string methodName) =>
+        typeFullName.EndsWith("IChatGui", StringComparison.Ordinal)
+        && methodName is "Print" or "PrintError";
+
+    /// <summary>
     ///     是不是「在画 UI」的调用。
     /// </summary>
     public static bool IsUICall(string typeFullName, string methodName)
@@ -246,6 +258,12 @@ internal static class UICallSemantics
 
         // 服务器信息栏的标题
         if (IsDtrCall(typeFullName, methodName))
+        {
+            return true;
+        }
+
+        // 聊天栏输出（IChatGui.Print / PrintError）——玩家看得见，按显示文本处理
+        if (IsChatCall(typeFullName, methodName))
         {
             return true;
         }
@@ -578,6 +596,12 @@ internal static class UICallSemantics
     /// </summary>
     public static bool IsLogCall(string typeFullName, string methodName)
     {
+        // 聊天栏输出不是日志（同一方法名，两处口径必须一致）
+        if (IsChatCall(typeFullName, methodName))
+        {
+            return false;
+        }
+
         if (typeFullName.Contains("Log", StringComparison.Ordinal))
         {
             return true;

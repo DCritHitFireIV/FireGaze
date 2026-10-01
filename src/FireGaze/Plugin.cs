@@ -96,6 +96,7 @@ public sealed class Plugin : IDalamudPlugin
         Table = new TranslationTable(ConfigDirectory, pluginDirectory);
         Contributions = new ContributionsStore(ConfigDirectory);
         TextPacks = new UIText.UITextStore(ConfigDirectory);
+        TextLibrary = new UIText.UITextLibrary(this);
         uiTextPatchManager = new UIText.UITextPatchManager(this);
         Patcher = new ManifestPatcher(() => Config, Table, m => Log.Warning("[FireGaze] " + m));
         PluginLogFallback.Sink = m => Log.Warning("[FireGaze] " + m);
@@ -291,6 +292,11 @@ public sealed class Plugin : IDalamudPlugin
     ///     插件内部文本的本地包存放（「插件汉化」页签用）。
     /// </summary>
     internal UIText.UITextStore TextPacks { get; }
+
+    /// <summary>
+    ///     公共译文库下载端（按需拉取现成译文；数据只作加速，补丁仍走本地）。
+    /// </summary>
+    internal UIText.UITextLibrary TextLibrary { get; }
 
     /// <summary>
     ///     插件内部文本的补丁调度（打补丁 / 还原 / 重载 / 更新后重打）。
