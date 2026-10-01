@@ -51,12 +51,13 @@ internal sealed class MainWindow : Window
     public void SelectTab(MainTab tab) => pendingSelect = tab;
 
     /// <summary>
-    ///     窗口每次打开都落在「简介汉化」页（ImGui 会记住上次的页签，这里显式改回）。
+    ///     窗口每次打开都落在「插件汉化」页（ImGui 会记住上次的页签，这里显式改回）。
     /// </summary>
+    /// <remarks>2026-10-01 用户改：默认页从「简介汉化」改成「插件汉化」（它也是第一个页签）。</remarks>
     public override void OnOpen()
     {
-        pendingSelect = MainTab.Translate;
-        Plugin.Log.Debug("[FireGaze] 窗口已打开（页签回到「简介汉化」）");
+        pendingSelect = MainTab.UIText;
+        Plugin.Log.Debug("[FireGaze] 窗口已打开（页签回到「插件汉化」）");
     }
 
     /// <summary>
