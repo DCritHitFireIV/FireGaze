@@ -188,6 +188,9 @@ public static class UIStringExtractor
 
         /// <summary>简单字段 getter（<c>get_X => _x;</c>）→ 它读的字段（2026-10-02，集合初始化器与返回值链靠它接通）。</summary>
         private readonly Dictionary<string, string> simpleFieldGetters = new(StringComparer.Ordinal);
+
+        /// <summary>界面文字放在本地化资源里的字面量个数（ResourceManager.GetString 的 key，不能翻）。</summary>
+        private int resourceKeyCount;
         private readonly List<(int Literal, string Method, int Param)> passRefs = [];
         private readonly List<(string FromMethod, int FromParam, string ToMethod, int ToParam)> paramFlowRefs = [];
         private readonly List<(string Callee, string Method, int Param)> returnToParamRefs = [];
@@ -1340,6 +1343,11 @@ public static class UIStringExtractor
                 if (argValues.Length > 0 && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
                 {
                     this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
+
+                    if (UICallSemantics.IsResourceKeyCall(typeName, methodName))
+                    {
+                        this.resourceKeyCount += argValues[0].IDs.Count;
+                    }
                 }
 
                 Leave(MakeResult(callee, argValues, isInternal: false));
@@ -2273,6 +2281,7 @@ public static class UIStringExtractor
             return new UITextExtraction
             {
                 AssemblyPath = this.path,
+                ResourceKeyCount = this.resourceKeyCount,
                 Entries = entries,
             };
         }

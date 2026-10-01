@@ -74,6 +74,12 @@ public sealed class UITextExtraction
     public List<UITextEntry> Entries { get; init; } = [];
 
     /// <summary>
+    ///     这个插件里「界面文字放在本地化资源（.resx / ResourceManager）」的字面量个数。
+    ///     这些是查表 key、不能翻（翻了查不到资源）；目前只能翻 DLL 里的字面量，这部分暂不支持。
+    /// </summary>
+    public int ResourceKeyCount { get; init; }
+
+    /// <summary>
     ///     UI 候选条数。
     /// </summary>
     public int UICount => Entries.Count(e => e.Role == UITextRole.UI);

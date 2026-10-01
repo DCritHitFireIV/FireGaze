@@ -765,6 +765,11 @@ internal sealed class UITextTab
                 }
 
                 summary += "。要翻译就点「一键汉化」，要逐条看就点「编辑校对…」。";
+                if (extraction.ResourceKeyCount > 0)
+                {
+                    summary += $"\n还有 {extraction.ResourceKeyCount} 处界面文字放在本地化资源文件里，暂不支持汉化。";
+                }
+
                 this.FinishRun(run, new RowNote { Kind = NoteKind.Good, Text = summary });
                 this.rowsDirty = true;
                 return;
@@ -865,6 +870,11 @@ internal sealed class UITextTab
             if (translatedCount == 0 && merge.ReapplyNeeded)
             {
                 extra = "抽取结果变了（有新增文本或控件 ID 标记被修正），已按新的写法重打。";
+            }
+
+            if (extraction.ResourceKeyCount > 0)
+            {
+                extra += $"\n还有 {extraction.ResourceKeyCount} 处界面文字放在本地化资源文件里，暂不支持汉化，翻译不会动它们。";
             }
             this.FinishRun(run, new RowNote
             {
