@@ -68,6 +68,7 @@ internal sealed class UITextLibrary
 
     private UITextLibraryIndex? index;
     private DateTime indexFetchedAt = DateTime.MinValue;
+    private DateTime unavailableUntil = DateTime.MinValue;
     private bool unavailableLogged;
 
     public UITextLibrary(Plugin plugin)
@@ -89,6 +90,12 @@ internal sealed class UITextLibrary
     /// </summary>
     public async Task<int> MergeIntoAsync(UITextPack pack, string internalName, CancellationToken token)
     {
+        // 刚失败过（或仓库里还没有包）：先别反复拉，给用户的一键汉化省时间
+        if (DateTime.Now < this.unavailableUntil)
+        {
+            return 0;
+        }
+
         try
         {
             var libraryPack = await this.FetchPackAsync(internalName, token).ConfigureAwait(false);
@@ -218,21 +225,27 @@ internal sealed class UITextLibrary
         };
         using var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
 
+        // 整体限时：库只是加速器，不能把一键汉化拖住；超时就当拉不到（下次再试）
+        using var timeout = CancellationTokenSource.CreateLinkedTokenSource(token);
+        timeout.CancelAfter(TimeSpan.FromSeconds(12));
+        var fetchToken = timeout.Token;
+
         var errors = new List<string>();
         foreach (var prefix in new[] { Base, MirrorAtmoomen, MirrorGhProxy })
         {
             var url = prefix + fileName;
             try
             {
-                var response = await client.GetAsync(url, token).ConfigureAwait(false);
+                var response = await client.GetAsync(url, fetchToken).ConfigureAwait(false);
                 if (response.StatusCode == HttpStatusCode.NotFound)
                 {
                     // 仓库里还没有这个包（或整个库还没上线）：不算错误，静默跳过
+                    this.unavailableUntil = DateTime.Now.AddMinutes(15);
                     return null;
                 }
 
                 response.EnsureSuccessStatusCode();
-                var text = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
+                var text = await response.Content.ReadAsStringAsync(fetchToken).ConfigureAwait(false);
                 if (text.Length > 0)
                 {
                     return text;
@@ -242,7 +255,13 @@ internal sealed class UITextLibrary
             }
             catch (OperationCanceledException)
             {
-                throw;
+                if (token.IsCancellationRequested)
+                {
+                    throw;
+                }
+
+                errors.Add($"{url}：超时");
+                break;
             }
             catch (Exception e)
             {
@@ -250,6 +269,7 @@ internal sealed class UITextLibrary
             }
         }
 
+        this.unavailableUntil = DateTime.Now.AddMinutes(15);
         this.LastError = string.Join("；", errors);
         if (!this.unavailableLogged)
         {

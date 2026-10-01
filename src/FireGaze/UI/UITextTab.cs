@@ -784,6 +784,7 @@ internal sealed class UITextTab
             if (targets.Count > 0 && this.plugin.Config.UITextLibraryEnabled)
             {
                 run.Stage = "正在查公共译文库…";
+                run.CanCancel = true; // 拉库也要能取消（限时 12 秒，拉不到就会直接跳过）
                 libraryChanged = await this.plugin.TextLibrary.MergeIntoAsync(pack, entry.InternalName, token).ConfigureAwait(false);
                 if (libraryChanged > 0)
                 {
