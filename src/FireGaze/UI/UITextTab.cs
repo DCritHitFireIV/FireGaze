@@ -944,7 +944,7 @@ internal sealed class UITextTab
         {
             ImGui.Indent(24f);
             this.DrawSecretRow(pending, "llm", config.UITextLLMKeyProtected, "粘贴大模型 API key（DeepSeek 就到 platform.deepseek.com → API keys 创建一个）");
-            ImGui.TextDisabled("翻译会带游戏里的 FF14 官方译名（地名 / 副本 / 技能 / 状态…）当术语表，专有名词更准。");
+            ImGui.TextDisabled("翻译会带上随插件打包的 FF14 官方译名（地名 / 副本 / 技能 / 状态…）当术语表，专有名词更准。");
             ImGui.Unindent(24f);
         }
 
@@ -962,6 +962,7 @@ internal sealed class UITextTab
             ImGui.Indent(24f);
             ImGui.TextDisabled("到「彩云科技开放平台」注册 → 应用管理里创建应用 → 页面右边「管理」→「访问控制」里复制 token 填这里。");
             this.DrawSecretRow(pending, "caiyun", config.UITextCaiyunKeyProtected, "粘贴彩云小译 token");
+            ImGui.TextDisabled("FF14 官方译名术语表只在「大模型」这一档生效，免费接口带不了。");
             ImGui.Unindent(24f);
         }
 
@@ -972,6 +973,13 @@ internal sealed class UITextTab
             pending.TestStatus = string.Empty;
             pending.TestGeneration++;
             this.firstRunError = string.Empty;
+        }
+
+        if (pending.Choice == 2)
+        {
+            ImGui.Indent(24f);
+            ImGui.TextDisabled("FF14 官方译名术语表只在「大模型」这一档生效，免费接口带不了。");
+            ImGui.Unindent(24f);
         }
 
         if (this.firstRunError.Length > 0)
