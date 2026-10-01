@@ -5,7 +5,7 @@ using Dalamud.Interface.Windowing;
 namespace FireGaze.UI;
 
 /// <summary>
-///     主窗口的页签（顺序就是界面上的顺序：简介汉化 → 仓库体检 → 插件安装器 → 参与翻译 → 插件汉化）。
+///     主窗口的页签（顺序就是界面上的顺序：简介汉化 → 仓库体检 → 插件安装器 → 参与翻译 → 界面汉化）。
 /// </summary>
 public enum MainTab
 {
@@ -97,7 +97,7 @@ internal sealed class MainWindow : Window
             }
 
             flags = pendingSelect == MainTab.UIText ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("插件汉化", flags))
+            if (ImGui.BeginTabItem("界面汉化", flags))
             {
                 this.uiTextTab.Draw();
                 ImGui.EndTabItem();

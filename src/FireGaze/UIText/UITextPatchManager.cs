@@ -267,6 +267,56 @@ internal sealed class UITextPatchManager
     }
 
     /// <summary>
+    ///     写补丁 + 自动重载：「应用汉化」就调它——重载是可合并的中间步骤，不单独给用户看。
+    /// </summary>
+    public async Task<(bool Ok, string Message)> ApplyAndReloadAsync(InstalledPluginEntry entry)
+    {
+        var (ok, message) = await Task.Run(() => this.Apply(entry)).ConfigureAwait(false);
+        if (!ok)
+        {
+            return (false, message);
+        }
+
+        // Apply 的提示里带着「重载插件后生效」；这里已经自动重载了，不要再说一遍
+        message = message.Replace("；重载插件后生效。", string.Empty, StringComparison.Ordinal);
+
+        if (!entry.IsLoaded)
+        {
+            return (true, message + "；插件当前未加载，下次加载自动生效。");
+        }
+
+        var (reloadOk, reloadMessage) = await this.ReloadAsync(entry).ConfigureAwait(false);
+        Plugin.Log?.Information($"[内部文本] {entry.InternalName}：应用汉化 + 自动重载 {(reloadOk ? "成功" : "失败")}");
+        return reloadOk
+            ? (true, message + "；插件已重新加载，界面即刻生效。")
+            : (false, message + "；但重载失败：" + reloadMessage);
+    }
+
+    /// <summary>
+    ///     还原 + 自动重载（「撤回汉化」也一步到位）。插件没加载时只还原文件。
+    /// </summary>
+    public async Task<(bool Ok, string Message)> RestoreAndReloadAsync(InstalledPluginEntry entry, string? reason = null)
+    {
+        var (ok, message) = await Task.Run(() => this.Restore(entry, reason)).ConfigureAwait(false);
+        if (!ok)
+        {
+            return (false, message);
+        }
+
+        message = message.Replace("；重载插件后恢复英文。", string.Empty, StringComparison.Ordinal);
+        if (!entry.IsLoaded)
+        {
+            return (true, message + "；插件当前未加载，下次加载自动恢复英文。");
+        }
+
+        var (reloadOk, reloadMessage) = await this.ReloadAsync(entry).ConfigureAwait(false);
+        Plugin.Log?.Information($"[内部文本] {entry.InternalName}：还原 + 自动重载 {(reloadOk ? "成功" : "失败")}");
+        return reloadOk
+            ? (true, message + "；插件已重新加载。")
+            : (false, message + "；但重载失败：" + reloadMessage);
+    }
+
+    /// <summary>
     ///     重载插件（反射调卫月的 <c>LocalPlugin.ReloadAsync</c>）。
     /// </summary>
     public async Task<(bool Ok, string Message)> ReloadAsync(InstalledPluginEntry entry)

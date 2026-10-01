@@ -43,6 +43,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly MainWindow window;
     private readonly ContributeWindow contributeWindow;
     private readonly UI.UITextEditorWindow uiTextEditorWindow;
+    private readonly UI.UITextSettingsWindow uiTextSettingsWindow;
     private readonly UIText.UITextPatchManager uiTextPatchManager;
     private readonly Timer translateTimer;
 
@@ -94,7 +95,9 @@ public sealed class Plugin : IDalamudPlugin
 
         uiTextEditorWindow = new UI.UITextEditorWindow(this, TextPacks, uiTextPatchManager);
         windowSystem.AddWindow(uiTextEditorWindow);
-        window = new MainWindow(this, new UI.UITextTab(uiTextEditorWindow, TextPacks, uiTextPatchManager));
+        uiTextSettingsWindow = new UI.UITextSettingsWindow(this);
+        windowSystem.AddWindow(uiTextSettingsWindow);
+        window = new MainWindow(this, new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager));
         windowSystem.AddWindow(window);
         contributeWindow = new ContributeWindow(this, Contributions);
         windowSystem.AddWindow(contributeWindow);

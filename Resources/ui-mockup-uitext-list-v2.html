@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>界面汉化 — 列表 + 一键汉化（v2 还原图，4 帧）</title>
+<style>
+  /* ImGui 深色界面还原图 v2（与 Resources/ui-mockup-*.html 同一套变量）。
+     相对 v1 的改动（按盲评 P1）：页签改名「界面汉化」；主操作只有一个名字「一键汉化」；
+     状态徽标挪到 meta 行行首（可竖扫）；还原原文降级为文字按钮；取消只在翻译阶段；失败给下一步按钮。 */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 800px; }
+  .window { width: 800px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .body { padding: 6px 16px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .brandrow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .brandrow .brand { color: var(--accent); font-weight: 600; }
+  .brandrow .sub { color: var(--muted); font-size: 13px; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .tabs .tab { padding: 3px 10px; font-size: 14px; color: var(--muted); border: 1px solid transparent; border-bottom: none; border-radius: 3px 3px 0 0; }
+  .tabs .tab.on { color: var(--text); background: #232323; border-color: var(--border); }
+  .hint { color: var(--muted); font-size: 13px; }
+  .sep { height: 1px; background: var(--border); margin: 2px 0; }
+  .btn { display: inline-block; padding: 3px 11px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; white-space: nowrap; }
+  .btn.primary { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.plain { background: #2a2a2a; border-color: #4a4a4a; color: #d8d8d8; }
+  .btn.text { background: transparent; border-color: transparent; color: #a6a6a6; }
+  .btn.disabled { opacity: .45; }
+  .chk { width: 15px; height: 15px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: #2a2a2a; font-size: 12px; flex: none; }
+  .chk.on::after { content: "✔"; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .search { width: 230px; border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  .combo { border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; background: #232323; font-size: 14px; color: #d8d8d8; }
+  .muted { color: var(--muted); } .good { color: var(--good); } .bad { color: var(--bad); } .info { color: var(--info); } .warn { color: var(--warn); }
+  .count { margin-left: auto; color: var(--muted); font-size: 13px; }
+  .statusbar { border: 1px solid #3d5473; background: #1e2630; border-radius: 3px; padding: 4px 8px; font-size: 13px; display: flex; gap: 10px; align-items: center; }
+
+  /* ── 插件列表行 ───────────────────────────── */
+  .plist { border: 1px solid var(--border); border-radius: 3px; background: #1c1c1c; }
+  .prow { display: flex; gap: 10px; padding: 8px 10px; border-bottom: 1px solid #262626; align-items: flex-start; }
+  .prow:last-child { border-bottom: none; }
+  .prow.open { background: #202020; }
+  .pic { width: 40px; height: 40px; border-radius: 5px; flex: none; background: linear-gradient(150deg,#3b4a63,#2a3242);
+         display: flex; align-items: center; justify-content: center; color: #cfe0ff; font-size: 17px; font-weight: 600; border: 1px solid #45536b; }
+  .pic.alt1 { background: linear-gradient(150deg,#5a4632,#3a2f22); color: #f0d9b6; border-color: #6b563c; }
+  .pic.alt2 { background: linear-gradient(150deg,#3f5240,#283429); color: #cbe8cb; border-color: #4c6350; }
+  .pic.alt3 { background: linear-gradient(150deg,#584050,#33262f); color: #e8cfe4; border-color: #6a4d5f; }
+  .pmain { flex: 1; min-width: 0; }
+  .ptitle { display: flex; align-items: baseline; gap: 6px; }
+  .ptitle .name { font-size: 15px; color: #f0f0f0; }
+  .tag { font-size: 12px; color: var(--muted); border: 1px solid #4a4a4a; border-radius: 3px; padding: 0 4px; }
+  .psum { color: var(--muted); font-size: 13px; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pmeta { font-size: 13px; margin-top: 2px; display: flex; gap: 8px; align-items: baseline; }
+  .pmeta .id { color: #8b8b8b; font-size: 12px; }
+  .badge { font-size: 13px; }
+  .badge.done { color: var(--good); }
+  .badge.part { color: var(--info); }
+  .badge.none { color: var(--muted); }
+  .badge.warn { color: var(--warn); }
+  .badge.badd { color: var(--bad); }
+  .pact { display: flex; gap: 12px; align-items: center; flex: none; padding-top: 2px; }
+  .chev { color: var(--muted); font-size: 13px; width: 16px; text-align: center; }
+  .pexpand { border-bottom: 1px solid #262626; background: #1f1f1f; padding: 6px 10px 10px 60px; }
+  .pexpand:last-child { border-bottom: none; }
+  .desc { color: #c9c9c9; font-size: 13px; line-height: 1.55; white-space: pre-line; }
+  .stats { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .actions { margin-top: 8px; display: flex; gap: 8px; align-items: center; }
+  .prog { height: 6px; background: #2b2b2b; border: 1px solid #3f3f3f; border-radius: 3px; margin-top: 7px; position: relative; overflow: hidden; }
+  .prog > i { position: absolute; inset: 0 42% 0 0; background: #3f6699; }
+  .note { font-size: 13px; margin-top: 5px; display: flex; gap: 8px; align-items: center; }
+  .note.good { color: var(--good); } .note.bad { color: var(--bad); } .note.muted { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ================= 帧 1：默认列表 ================= -->
+  <div>
+    <p class="caption">帧 1 —「界面汉化」页签默认态（v2）：徽标挪到 meta 行行首、可竖扫；主操作只有一个名字「一键汉化」；
+      还原原文降级为文字按钮；工具栏：搜索 + 状态筛选 + 只看第三方 + 翻译设置 + 计数。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="tabs">
+          <div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab">参与翻译</div><div class="tab on">界面汉化</div>
+        </div>
+        <div class="hint">把插件窗口里的文字翻成中文：点「一键汉化」，翻译、写入插件、自动重载一次完成。会修改插件文件，原文件自动备份，随时可「还原原文」。</div>
+        <div class="hint">这里只管插件自己的界面；插件简介 / 详情的翻译在「简介汉化」页。插件正在跑任务时，重载会打断它，先停一下再点。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名…</div>
+          <span class="combo">全部 ▾</span>
+          <span class="row"><span class="chk"></span>只看第三方</span>
+          <span class="btn plain">翻译设置…</span>
+          <span class="count">已装 198 · 已汉化 12</span>
+        </div>
+
+        <div class="plist">
+          <div class="prow">
+            <div class="pic">G</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Globetrotter</span><span class="tag">官方</span></div>
+              <div class="psum">Show treasure maps and decipher markers on the map.</div>
+              <div class="pmeta"><span class="badge done">已汉化 11 处</span><span class="id">Globetrotter · v1.2.17</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="btn text">还原原文</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic alt2">O</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Orbwalker</span></div>
+              <div class="psum">Total movement control with slidecasting.</div>
+              <div class="pmeta"><span class="badge part">已翻译 65 条 · 未应用</span><span class="id">Orbwalker · v1.0.1.10</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic alt3">B</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">BOCCHI</span></div>
+              <div class="psum">The Occult Crescent automation suite.</div>
+              <div class="pmeta"><span class="badge none">未汉化</span><span class="id">BOCCHI · v3.3.44</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic alt1">S</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Simple Tweaks Plugin</span><span class="tag">官方</span></div>
+              <div class="psum">A collection of small tweaks to improve the game.</div>
+              <div class="pmeta"><span class="badge warn">已汉化 786 处 · 有待更新</span><span class="id">SimpleTweaksPlugin · v1.15.0.8</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="btn text">还原原文</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic">M</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Moodles</span></div>
+              <div class="psum">Create and share status presets.</div>
+              <div class="pmeta"><span class="badge none">未汉化</span><span class="id">Moodles · v2.0.0.0</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="chev">▸</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 2：展开详情 ================= -->
+  <div>
+    <p class="caption">帧 2 — 点开一行：作者给的详情 + 汉化统计 + 「编辑校对…」。主操作仍在这一行右侧，不重复出现。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="tabs">
+          <div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab">参与翻译</div><div class="tab on">界面汉化</div>
+        </div>
+        <div class="hint">把插件窗口里的文字翻成中文：点「一键汉化」，翻译、写入插件、自动重载一次完成。会修改插件文件，原文件自动备份，随时可「还原原文」。</div>
+        <div class="hint">这里只管插件自己的界面；插件简介 / 详情的翻译在「简介汉化」页。插件正在跑任务时，重载会打断它，先停一下再点。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名…</div>
+          <span class="combo">全部 ▾</span>
+          <span class="row"><span class="chk"></span>只看第三方</span>
+          <span class="btn plain">翻译设置…</span>
+          <span class="count">已装 198 · 已汉化 12</span>
+        </div>
+
+        <div class="plist">
+          <div class="prow open">
+            <div class="pic alt2">O</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Orbwalker</span></div>
+              <div class="psum">Total movement control with slidecasting.</div>
+              <div class="pmeta"><span class="badge part">已翻译 65 条 · 未应用</span><span class="id">Orbwalker · v1.0.1.10</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="chev">▾</span></div>
+          </div>
+          <div class="pexpand">
+            <div class="desc">Orbwalker is a movement locking plugin for Final Fantasy XIV. It prevents your character from moving while casting and lets you move freely during the slidecast window.</div>
+            <div class="stats">候选 78 条 · 已翻 65 条 · 未翻 13 条 · 灰名单 7 条 · 不翻 0 条 ｜ 补丁：未应用（原始文件已备份）</div>
+            <div class="actions">
+              <span class="btn">编辑校对…</span>
+              <span class="hint">逐条改译文、标记「不翻」、重新抽取</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 3：一键汉化进行中 ================= -->
+  <div>
+    <p class="caption">帧 3 — 进行中：窗口顶部一条常驻状态（滚到哪都看得见）+ 行内进度。取消只在翻译阶段可用，
+      进入写入后写明「此步不能取消」。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="tabs">
+          <div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab">参与翻译</div><div class="tab on">界面汉化</div>
+        </div>
+        <div class="hint">把插件窗口里的文字翻成中文：点「一键汉化」，翻译、写入插件、自动重载一次完成。会修改插件文件，原文件自动备份，随时可「还原原文」。</div>
+        <div class="hint">这里只管插件自己的界面；插件简介 / 详情的翻译在「简介汉化」页。插件正在跑任务时，重载会打断它，先停一下再点。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名…</div>
+          <span class="combo">全部 ▾</span>
+          <span class="row"><span class="chk"></span>只看第三方</span>
+          <span class="btn plain">翻译设置…</span>
+          <span class="count">已装 198 · 已汉化 12</span>
+        </div>
+        <div class="statusbar"><span>正在汉化 BOCCHI：翻译 137 / 255 条</span><span class="btn text">取消</span><span class="muted">取消只停止翻译，已翻好的 137 条会保留，可稍后继续</span></div>
+
+        <div class="plist">
+          <div class="prow open">
+            <div class="pic alt3">B</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">BOCCHI</span></div>
+              <div class="psum">The Occult Crescent automation suite.</div>
+              <div class="pmeta"><span class="badge part">翻译中 137 / 255 条</span><span class="id">BOCCHI · v3.3.44</span></div>
+              <div class="prog"><i></i></div>
+              <div class="note muted">翻译完成后会自动写入补丁并重载插件，不用再点别的。</div>
+            </div>
+            <div class="pact"><span class="btn disabled">一键汉化</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic alt1">S</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Simple Tweaks Plugin</span><span class="tag">官方</span></div>
+              <div class="psum">A collection of small tweaks to improve the game.</div>
+              <div class="pmeta"><span class="badge warn">已汉化 786 处 · 有待更新</span><span class="id">SimpleTweaksPlugin · v1.15.0.8</span></div>
+            </div>
+            <div class="pact"><span class="btn plain disabled">一键汉化</span><span class="btn text">还原原文</span><span class="chev">▸</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 4：四种收尾 ================= -->
+  <div>
+    <p class="caption">帧 4 — 收尾四态：成功（自动重载）/ 插件没加载（下次生效）/ 重载失败（自动还原 + 重试）/ 翻译失败（去哪一步一按可达、并给出「等几分钟再试」的出路）。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新</span></div>
+        <div class="tabs">
+          <div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab">参与翻译</div><div class="tab on">界面汉化</div>
+        </div>
+        <div class="hint">把插件窗口里的文字翻成中文：点「一键汉化」，翻译、写入插件、自动重载一次完成。会修改插件文件，原文件自动备份，随时可「还原原文」。</div>
+        <div class="hint">这里只管插件自己的界面；插件简介 / 详情的翻译在「简介汉化」页。插件正在跑任务时，重载会打断它，先停一下再点。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <div class="search">搜索插件名…</div>
+          <span class="combo">全部 ▾</span>
+          <span class="row"><span class="chk"></span>只看第三方</span>
+          <span class="btn plain">翻译设置…</span>
+          <span class="count">已装 198 · 已汉化 12</span>
+        </div>
+
+        <div class="plist">
+          <div class="prow">
+            <div class="pic alt3">B</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">BOCCHI</span></div>
+              <div class="psum">The Occult Crescent automation suite.</div>
+              <div class="pmeta"><span class="badge done">已汉化 255 处</span><span class="id">BOCCHI · v3.3.44</span></div>
+              <div class="note good">已写入补丁并自动重载，界面即刻生效。</div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="btn text">还原原文</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic alt2">O</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Orbwalker</span></div>
+              <div class="psum">Total movement control with slidecasting.</div>
+              <div class="pmeta"><span class="badge done">已汉化 65 处</span><span class="id">Orbwalker · v1.0.1.10</span></div>
+              <div class="note muted">插件当前未加载，下次加载时自动生效。</div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="btn text">还原原文</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic">M</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Moodles</span></div>
+              <div class="psum">Create and share status presets.</div>
+              <div class="pmeta"><span class="badge badd">重载失败 · 已还原</span><span class="id">Moodles · v2.0.0.0</span></div>
+              <div class="note bad">重载后插件没有加载成功，已自动还原原始文件。<span class="btn plain">重试</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic alt1">S</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Simple Tweaks Plugin</span><span class="tag">官方</span></div>
+              <div class="psum">A collection of small tweaks to improve the game.</div>
+              <div class="pmeta"><span class="badge badd">翻译失败 · 已翻 12 条</span><span class="id">SimpleTweaksPlugin · v1.15.0.7</span></div>
+              <div class="note bad">免费通道暂时被限流（Google 返回 429）。等几分钟点「重试」可能就好；想稳定跑大批量，填自己的大模型 key。<span class="btn plain">重试</span><span class="btn text">打开翻译设置</span></div>
+            </div>
+            <div class="pact"><span class="btn plain">一键汉化</span><span class="chev">▸</span></div>
+          </div>
+
+          <div class="prow">
+            <div class="pic">O</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">OmniToolbox</span></div>
+              <div class="psum">多合一工具箱（作者未提供简介）。</div>
+              <div class="pmeta"><span class="badge none">无可译文本</span><span class="id">OmniToolbox · v1.0.0.0</span></div>
+              <div class="note muted">主程序集带壳 / 加密，读不出界面文本；不会崩，也不会误改。</div>
+            </div>
+            <div class="pact"><span class="chev">▸</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

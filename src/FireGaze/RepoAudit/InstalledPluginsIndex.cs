@@ -55,6 +55,16 @@ internal sealed class InstalledPluginEntry
     public string? Version { get; init; }
 
     /// <summary>
+    ///     作者给的一行简介（列表上直接显示；读不到就空）。
+    /// </summary>
+    public string? Punchline { get; init; }
+
+    /// <summary>
+    ///     作者给的详细介绍（展开时才显示；读不到就空）。
+    /// </summary>
+    public string? Description { get; init; }
+
+    /// <summary>
     ///     当前是否已加载。
     /// </summary>
     public bool IsLoaded { get; init; }
@@ -181,6 +191,8 @@ internal sealed class InstalledPluginsIndex
                     Manifest = manifest,
                     DLLPath = (type.GetProperty("DllFile", flags)?.GetValue(plugin) as FileInfo)?.FullName,
                     Version = manifest?.GetType().GetProperty("AssemblyVersion", flags)?.GetValue(manifest)?.ToString(),
+                    Punchline = manifest?.GetType().GetProperty("Punchline", flags)?.GetValue(manifest) as string,
+                    Description = manifest?.GetType().GetProperty("Description", flags)?.GetValue(manifest) as string,
                     IsLoaded = type.GetProperty("IsLoaded", flags)?.GetValue(plugin) as bool? ?? false,
                     IsThirdParty = isThirdParty,
                     IsDev = isDev,

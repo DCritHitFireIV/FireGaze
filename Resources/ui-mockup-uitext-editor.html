@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>插件汉化 — 编辑校对 + 翻译设置（mockup，3 帧）</title>
+<style>
+  /* ImGui 深色界面还原图（与 Resources/ui-mockup-*.html 同一套变量）。
+     帧 1 = 编辑校对（主窗口）；帧 2 = 设置入口（主窗口没开编辑器时的样子，只画页签工具栏）；帧 3 = 翻译设置独立窗口。 */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 780px; }
+  .window { width: 780px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .body { padding: 6px 16px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .brandrow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .brandrow .brand { color: var(--accent); font-weight: 600; }
+  .brandrow .sub { color: var(--muted); font-size: 13px; }
+  .hint { color: var(--muted); font-size: 13px; }
+  .sep { height: 1px; background: var(--border); margin: 3px 0; }
+  .btn { display: inline-block; padding: 3px 11px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; white-space: nowrap; }
+  .btn.primary { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.plain { background: #2a2a2a; border-color: #4a4a4a; }
+  .btn.disabled { opacity: .45; }
+  .chk { width: 15px; height: 15px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: #2a2a2a; font-size: 12px; flex: none; }
+  .chk.on::after { content: "✔"; }
+  .radio { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; flex: none; }
+  .radio.on::after { content: ""; position: absolute; inset: 3px; background: #d8d8d8; border-radius: 50%; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .search { width: 240px; border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  .muted { color: var(--muted); } .good { color: var(--good); } .bad { color: var(--bad); } .info { color: var(--info); } .warn { color: var(--warn); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); padding: 3px 6px; white-space: nowrap; background: #1d1d1d; }
+  td { padding: 3px 6px; border-bottom: 1px solid #262626; vertical-align: middle; }
+  .ctx { color: #9a9a9a; font-size: 12px; }
+  .orig { color: #d7d7d7; }
+  .trans { color: #cfe0ff; }
+  .edit { border-bottom: 1px dashed #5a5a5a; }
+  .mono { font-variant-numeric: tabular-nums; }
+  .field { width: 360px; border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  .field.wide { width: 420px; }
+  .field.narrow { width: 180px; }
+  .tip { color: var(--muted); font-size: 12px; }
+  .section { margin-top: 8px; }
+  .section .h { color: #d0d0d0; font-size: 14px; margin-bottom: 4px; }
+  .keyrow { display: flex; gap: 6px; align-items: center; }
+  .win2 { border: 1px solid #4d4d4d; border-radius: 3px; background: var(--win-bg); }
+  .titlebar { height: 26px; background: var(--title); display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #dcdcdc; border-bottom: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ================= 帧 1：编辑校对（简化后） ================= -->
+  <div>
+    <p class="caption">帧 1 — 编辑校对（v2）：工具栏 翻译未翻 (N) / 应用汉化（自动重载）/ 还原原文 / 更多…；筛选带计数；
+      状态列给图例。不再有 保存、重载生效、翻译通道。</p>
+    <div class="window">
+      <div class="osbar">插件汉化 — Orbwalker###FireGazeUITextEditor</div>
+      <div class="body">
+        <div class="row" style="gap:10px">
+          <span style="color:var(--accent);font-size:15px">Orbwalker</span>
+          <span class="hint">(Orbwalker · v1.0.1.10)</span>
+          <span class="hint" style="margin-left:auto">候选 78 · 灰名单 7 · 已翻 65 · 不翻 0</span>
+        </div>
+        <div class="row">
+          <span class="btn primary">翻译未翻 (13)</span>
+          <span class="btn">应用汉化</span>
+          <span class="btn disabled">还原原文</span>
+          <span class="btn plain">更多 ▾</span>
+          <span class="hint" style="margin-left:auto">通道：deepseek · 自动保存</span>
+        </div>
+        <div class="sep"></div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>候选 78</span>
+          <span class="row"><span class="radio"></span>灰名单 7</span>
+          <span class="row"><span class="radio"></span>未翻 13</span>
+          <span class="row"><span class="radio"></span>已翻 65</span>
+          <span class="row"><span class="radio"></span>不翻 0</span>
+          <span class="row"><span class="radio"></span>全部 78</span>
+          <div class="search" style="margin-left:auto">搜索原文 / 译文 / 上下文…</div>
+        </div>
+        <table>
+          <thead><tr><th style="width:34px"></th><th style="width:190px">上下文</th><th>原文</th><th>译文</th></tr></thead>
+          <tbody>
+            <tr><td class="good">✔</td><td class="ctx">UI.Settings</td><td class="orig">Enable Orbwalker</td><td class="trans edit">启用自动走位</td></tr>
+            <tr><td class="good">✔</td><td class="ctx">UI.Settings</td><td class="orig">Block All Movement</td><td class="trans edit">阻止所有移动</td></tr>
+            <tr><td class="warn">⚠</td><td class="ctx">UI.Jobs</td><td class="orig">Casters</td><td class="trans edit">法系</td></tr>
+            <tr><td class="muted">·</td><td class="ctx">UI.Settings</td><td class="orig">Display buttons vertically instead of horizontally.</td><td class="muted">（还没翻）</td></tr>
+            <tr><td class="muted">·</td><td class="ctx">UI.Extras</td><td class="orig">Flamethrower (MCH)</td><td class="muted">（还没翻）</td></tr>
+            <tr><td class="good">✔</td><td class="ctx">ImGuiOverlay.Draw</td><td class="orig">Slidecast Mode (Active)</td><td class="trans edit">滑步模式（激活）</td></tr>
+          </tbody>
+        </table>
+        <div class="sep"></div>
+        <div class="hint">状态列：<span class="good">✔ 已翻</span> · <span class="warn">⚠ 待复核（悬停看原因）</span> · <span class="muted">· 未翻</span> ｜ 「灰名单」= 既画在界面上、又被拿去做比较/当键名的字符串，默认不翻</div>
+        <div class="hint">上次操作：已翻译 13 条 · 尚未应用——点「应用汉化」写入并重载 · 15:42:10</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 3：翻译设置（独立窗口） ================= -->
+  <div>
+    <p class="caption">帧 3 —「翻译设置」独立窗口：从页签工具栏的「翻译设置…」进入，不在翻译流程里。通道、key、灰名单、自动重打都在这里。</p>
+    <div class="win2">
+      <div class="titlebar">翻译设置###FireGazeUITextSettings</div>
+      <div class="body">
+        <div class="hint">翻译通道决定了「一键汉化」用什么把英文翻成中文。免费接口按 IP 限流，条目多时建议用自己的大模型 key。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <span class="row"><span class="radio"></span>免费·自动</span>
+          <span class="row"><span class="radio"></span>Google 免 key</span>
+          <span class="row"><span class="radio"></span>MyMemory</span>
+          <span class="row"><span class="radio on"></span>大模型（自填 key）</span>
+          <span class="row"><span class="radio"></span>DeepL</span>
+        </div>
+        <div class="tip">（这一段只在选中免费通道时出现）免费通道：Google / MyMemory 按 IP 限流（遇到 429 会自动礼让、退避，连续被限就停下）；条目多时建议换大模型。</div>
+
+        <div class="section">
+          <div class="h">大模型</div>
+          <div class="row">
+            <span class="row"><span class="radio on"></span>DeepSeek 官方</span>
+            <span class="row"><span class="radio"></span>其它 OpenAI 兼容服务</span>
+          </div>
+          <div class="row" style="margin-top:6px"><span class="hint">接口地址</span><span class="field wide">https://api.deepseek.com/v1</span><span class="hint">模型</span><span class="field narrow">deepseek-flash</span></div>
+          <div class="keyrow" style="margin-top:6px">
+            <span class="hint" style="width:100px">大模型 API key</span>
+            <span class="field wide">粘贴新的 key 以更换</span>
+            <span class="btn">保存 key</span>
+            <span class="btn">清除</span>
+            <span class="btn">测试连接</span>
+          </div>
+          <div class="tip">当前：<span class="good">已保存 sk-…4f2a</span>（若为空则显示「未保存」）｜ key 只存在本机（DPAPI 加密），不会随任何提交上传；换机器后需要重填。</div>
+        </div>
+
+        <div class="section">
+          <div class="h">选项</div>
+          <div class="row"><span class="chk"></span>批量翻译时连灰名单一起翻</div>
+          <div class="tip">灰名单 = 既画在界面上、又被拿去做比较/当键名的字符串，默认不翻。</div>
+          <div class="row"><span class="chk on"></span>插件更新后自动重打汉化补丁</div>
+          <div class="tip">插件更新会覆盖 DLL：勾上后下次启动 / 打开插件时自动重打（静默，不主动重载）；不想让它动文件就取消勾选。</div>
+          <div class="row" style="margin-top:6px"><span class="hint">设置立即生效并自动保存；不需要点「确定」。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
