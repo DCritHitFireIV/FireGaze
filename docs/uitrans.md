@@ -167,6 +167,19 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - 集合/字典的键名调用只把**第一个参数**当键（key 永远是第一个参数），后面的参数不能跟着算键。
 - 排查入口：探针 `--trace` 会打 `[danger] scan=<调用方> <目标> key=… params=… text=…` 与 `[keyparam] <方法> param=N`。
 
+## 血教训：插值与三元表达式的漏抽（2026-10-02）
+
+- **字符串插值**（`$"..."`）编译成 `DefaultInterpolatedStringHandler`：`AppendLiteral / AppendFormatted` 把碎片
+  攼进处理器实例，`ToStringAndClear` 才交给最终消费者。以前不认这个模式，凡是插值拼出来的界面文案
+  整条都记成「去向不明：DefaultInterpolatedStringHandler.AppendLiteral」（全量 260 个插件里 9k+ 条）。
+  修法：`IsStringProducer` 收下 `*InterpolatedStringHandler` 的穿插/取出方法；`ToString` 系列的非 void 调用
+  把**实例自身**一起并进结果（写回靠结构体的 `ldloca` + `StoreLocal` 合并）。实测 Accountant 的
+  `'Last Visit: '` 等变成候选，260 个插件界面候选 +2.1k。
+- **三元 / if 分支**（`cond ? "A" : "B"`）：线性模拟两条路径都跑，栈深夹紧时直接把「多出来的」值丢掉——
+  被丢掉恰是另一条分支的取值。实测 AetherDraw 的 `Plan Name (Optional) / Search Keywords (Required)`
+  就丢在这里。修法：夹掉的值进 `carried`，并入下一条指令推上来的值（通常正是同一栈槽的另一分支）。
+- 探针：`--trace <方法名>` 可以只看一个方法的逐条 IL；stdout 强制 UTF-8（否则批量落盘 JSON 按系统码页写，不是合法 UTF-8）。
+
 ## 术语表的数据来源（2026-10-02 改正）
 
 - **不能从游戏数据读**：① 国服客户端的 exd 只有中文（`PlaceName.exh` 的 `Languages=[ChineseSimplified]`，压根没装英文原文）；

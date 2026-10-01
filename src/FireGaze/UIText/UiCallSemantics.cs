@@ -356,6 +356,16 @@ internal static class UICallSemantics
             return true;
         }
 
+        // 字符串插值（$"..."）与日志插值用的处理器：AppendLiteral / AppendFormatted 把字面量攒进
+        // 处理器实例，等 ToStringAndClear 时再交给最终消费者（UI / 日志）判定。
+        // 不认出它的话，凡是插值拼出来的界面文案整条都抽不到（2026-10-02：Accountant 的
+        //「Last Visit: 」这类碎片全被记成「去向不明：DefaultInterpolatedStringHandler.AppendLiteral」）。
+        if (typeFullName.Contains("InterpolatedStringHandler", StringComparison.Ordinal))
+        {
+            return methodName is "AppendLiteral" or "AppendFormatted" or "ToStringAndClear" or "ToString"
+                or "Clear" or "GetFormattedText";
+        }
+
         if (typeFullName is "System.String" or "System.Text.StringBuilder")
         {
             return StringProducerNames.Contains(methodName);

@@ -1,5 +1,8 @@
 using FireGaze.UIText;
 
+// 批量落盘时 stdout 可能被重定向：强制 UTF-8，否则中文按系统 ANSI 码页写出去就不是合法 JSON 了。
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
 // 离线看抽取器对某个插件 DLL 的判定：
 //   dotnet run --project tools/UITextProbe -- <插件.dll> [--all] [--json]
 // 默认只打印 UI 候选 + 灰名单；--all 连排除的一起看（调规则用）。
@@ -17,6 +20,13 @@ if (positional.Length == 0)
 if (args.Contains("--trace"))
 {
     UIStringExtractor.Trace = Console.Error.WriteLine;
+
+    // --trace <关键词>：只打这个方法的逐条 IL（[il]），其余方法只打 [ui]/[danger] 汇总
+    var traceIndex = Array.IndexOf(args, "--trace");
+    if (traceIndex + 1 < args.Length && !args[traceIndex + 1].StartsWith("--", StringComparison.Ordinal))
+    {
+        UIStringExtractor.TraceKey = args[traceIndex + 1];
+    }
 }
 
 if (args.Length >= 3 && args[1] == "--types")

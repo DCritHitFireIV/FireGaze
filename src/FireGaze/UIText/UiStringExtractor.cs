@@ -178,6 +178,9 @@ public static class UIStringExtractor
         private readonly string path;
         private readonly List<Literal> literals = [];
         private readonly Dictionary<string, int> literalIDs = new(StringComparer.Ordinal);
+
+        /// <summary>被栈深夹掉、等待并入下一个 push 值的分支值（见 ScanMethod 里的 clamp 注释）。</summary>
+        private readonly List<V> carried = [];
         private readonly List<MethodScan> methods = [];
         private readonly Dictionary<string, MethodScan> methodByKey = new(StringComparer.Ordinal);
         private readonly List<(int Literal, string Method, int Param)> passRefs = [];
@@ -311,6 +314,7 @@ public static class UIStringExtractor
             var stack = new List<V>();
             var locals = new Dictionary<int, V>();
             var args = new Dictionary<int, V>();
+            this.carried.Clear();
 
             var methodWatch = Trace is null ? null : Stopwatch.StartNew();
             for (var index = 0; index < scan.Instructions.Count; index++)
@@ -324,6 +328,11 @@ public static class UIStringExtractor
                 {
                     while (stack.Count > wanted)
                     {
+                        // 掉落的一般是「另一条分支留下的」值（三元表达式 / if 赋值）：不直接丢，
+                        // 交给下一条指令推上来的值——那通常正是同一个栈槽的另一种取值
+                        // （2026-10-02：AetherDraw 的 `cond ? "Plan Name (Optional)" : "Search Keywords"`
+                        //   就是在这里被夹掉的）。
+                        this.carried.Add(stack[^1]);
                         stack.RemoveAt(stack.Count - 1);
                     }
 
@@ -1137,7 +1146,18 @@ public static class UIStringExtractor
             // ① 字符串垫片 / 加工：结果继承入参
             if (UICallSemantics.IsStringProducer(typeName, methodName))
             {
-                Leave(MakeResult(callee, argValues, isInternal: false));
+                var produced = MakeResult(callee, argValues, isInternal: false);
+
+                // 插值处理器这类「先攒后取」的对象：ToStringAndClear / ToString 要连实例自身一起继承，
+                // 否则前面 AppendLiteral 攒下的字面量在最后一步被丢掉（2026-10-02，
+                // 实测 Accountant 的插值界面文本就是这么整条排掉的）。
+                if (!isVoid && IsInstance(callee) && thisValue is not null
+                    && IsStringLike(callee.MethodSig?.RetType.FullName ?? string.Empty))
+                {
+                    produced = V.Merge(produced, thisValue);
+                }
+
+                Leave(produced);
                 return;
             }
 
@@ -2066,7 +2086,21 @@ public static class UIStringExtractor
             return id;
         }
 
-        private static void Push(List<V> stack, V value) => stack.Add(value);
+        private void Push(List<V> stack, V value)
+        {
+            // 夹掉的分支值在下一个 push 处并回来（见上面 clamp 的注释）
+            if (this.carried.Count > 0)
+            {
+                foreach (var extra in this.carried)
+                {
+                    value = V.Merge(value, extra);
+                }
+
+                this.carried.Clear();
+            }
+
+            stack.Add(value);
+        }
 
         private static V Pop(List<V> stack)
         {
