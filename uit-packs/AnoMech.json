@@ -1,0 +1,1531 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-02",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Open AnoMech. Subcommands: config, start, reset, leave",
+      "Translated": "打开 AnoMech。子命令：config、start、reset、leave",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Alias for /anomech",
+      "Translated": "/anomech 的别名",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios can only be started from an inn.",
+      "Translated": "只能在旅馆中启动情景。",
+      "Context": "Plugin.StartSelectedScenario",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "AnoMech Settings###AnoMechConfig",
+      "Translated": "AnoMech 设置",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Sim Menu when entering Inn",
+      "Translated": "进入旅馆时打开模拟菜单",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Suppress scenario BGM",
+      "Translated": "屏蔽情景 BGM",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show mechanic success/failure marks",
+      "Translated": "显示机制成功/失败标记",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Resolve your own actions",
+      "Translated": "决意自己的行动",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Slidecast window (s)",
+      "Translated": "滑步窗口（秒）",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable event logging",
+      "Translated": "启用事件日志",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open logs folder",
+      "Translated": "打开日志文件夹",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios",
+      "Translated": "情景",
+      "Context": "MainWindow.DrawScenariosPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select a scenario",
+      "Translated": "选择情景",
+      "Context": "MainWindow.DrawMainContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Setup###scenario-setup-v3",
+      "Translated": "设置",
+      "Context": "MainWindow.DrawMainContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scenario settings###scenario-config-v3",
+      "Translated": "情景设置",
+      "Context": "MainWindow.DrawMainContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Paused",
+      "Translated": "已暂停",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Running",
+      "Translated": "运行中",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Idle",
+      "Translated": "空闲",
+      "Context": "MainWindow.DrawScenarioHeader",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Translated": "开始",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No strat available for this region yet.",
+      "Translated": "该区域暂无可用攻略。",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot start while you are busy (cutscene, NPC event, crafting, trading, zoning, etc.).",
+      "Translated": "忙碌时无法开始（过场动画、NPC 事件、制作、交易、切换区域等）。",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Leave",
+      "Translated": "离开",
+      "Context": "MainWindow.DrawPrimaryActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Solo",
+      "Translated": "单人",
+      "Context": "MainWindow.DrawSoloOption",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Run without simulated party members or party AI.",
+      "Translated": "不使用模拟队友或队友 AI 运行。",
+      "Context": "MainWindow.DrawSoloOption",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop the current scenario before changing the run mode.",
+      "Translated": "更改运行模式前请先停止当前情景。",
+      "Context": "MainWindow.DrawSoloOption",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "God mode",
+      "Translated": "无敌模式",
+      "Context": "MainWindow.DrawRunOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-restart",
+      "Translated": "自动重启",
+      "Context": "MainWindow.DrawRunOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Restart the same scenario immediately after a successful run. A death turns this back off.",
+      "Translated": "成功运行后立即重启同一情景。死亡会将其关闭。",
+      "Context": "MainWindow.DrawRunOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Streak: ",
+      "Translated": "连胜：",
+      "Context": "MainWindow.DrawRunOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Waymarks:",
+      "Translated": "标点：",
+      "Context": "MainWindow.DrawWaymarkSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Role:",
+      "Translated": "职能：",
+      "Context": "MainWindow.DrawRoleSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Strategy:",
+      "Translated": "攻略：",
+      "Context": "MainWindow.DrawStratSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Region:",
+      "Translated": "区域：",
+      "Context": "MainWindow.DrawGroupedStratSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(no strats for this region yet)",
+      "Translated": "（该区域暂无攻略）",
+      "Context": "MainWindow.DrawGroupedStratSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios only run in an inn",
+      "Translated": "情景只能在旅馆中运行",
+      "Context": "MainWindow.DrawLocationHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scenarios can only be started from an inn — return to one to run a scenario.",
+      "Translated": "情景只能从旅馆启动——返回旅馆即可运行情景。",
+      "Context": "MainWindow.DrawLocationHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-collapse while running: ",
+      "Translated": "运行时自动折叠：",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Off",
+      "Translated": "关闭",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "On",
+      "Translated": "开启",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Weapon's Refrain",
+      "Translated": "武器之诗",
+      "Context": "UwuZone.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "UwuZone..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ultimate Suppression",
+      "Translated": "乱击之究极幻想",
+      "Context": "UltimateSuppressionScenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Assignment (Non-Tank Only):",
+      "Translated": "开始测验（仅非坦克）：",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##assignment",
+      "Translated": "自动##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Light Pillar##assignment",
+      "Translated": "光柱##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mistral Song##assignment",
+      "Translated": "寒风之歌##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Eruption##assignment",
+      "Translated": "地火喷发##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Gaol##assignment",
+      "Translated": "监狱##assignment",
+      "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ultimate Predation",
+      "Translated": "追击之究极幻想",
+      "Context": "UltimatePredationScenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Boss Positions:",
+      "Translated": "Boss 位置：",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Random##centerdodge",
+      "Translated": "随机##centerdodge",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Center Dodge##centerdodge",
+      "Translated": "中央回避##centerdodge",
+      "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Forsaken Null",
+      "Translated": "遗弃虚无",
+      "Context": "UmadP5ForsakenNull.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Forsaken",
+      "Translated": "遗弃末世",
+      "Context": "UmadReplayData..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole",
+      "Translated": "アトモス：吸い込み",
+      "Context": "UmadReplayData..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Celestriad",
+      "Translated": "三星",
+      "Context": "UmadReplayData..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Kefka Says",
+      "Translated": "凯夫卡说",
+      "Context": "UmadReplayData..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dancing Mad",
+      "Translated": "魔发狂舞",
+      "Context": "UmadZone.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Diamond Waymarks",
+      "Translated": "菱形标点",
+      "Context": "UmadZone..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DN Zenith Waymarks",
+      "Translated": "DN 天顶标点",
+      "Context": "UmadZone..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[LPDU] Big Box",
+      "Translated": "[LPDU] 大盒子",
+      "Context": "UmadZone..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Spread",
+      "Translated": "分散",
+      "Context": "UmadP5ExaflaresAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exaflares",
+      "Translated": "地火喷发",
+      "Context": "UmadP5ExaflaresScenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Left order:",
+      "Translated": "左侧下令：",
+      "Context": "UmadP5ExaflaresSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right order:",
+      "Translated": "右侧下令：",
+      "Context": "UmadP5ExaflaresSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Random",
+      "Translated": "随机",
+      "Context": "UmadP5ExaflaresSettingsWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Standard",
+      "Translated": "标准",
+      "Context": "UmadP5CelestriadAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Your element:",
+      "Translated": "你的属性：",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set 1 variant:",
+      "Translated": "第 1 组变体：",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set 3 variant:",
+      "Translated": "第3组变体：",
+      "Context": "UmadP5CelestriadSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fire",
+      "Translated": "火",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ice",
+      "Translated": "冰",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Lightning",
+      "Translated": "雷光",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Free",
+      "Translated": "自由",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Aero (green)",
+      "Translated": "风（绿）",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Earth (brown)",
+      "Translated": "土（棕）",
+      "Context": "UmadP5CelestriadSettingsWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Kefka Says (WIP)",
+      "Translated": "凯夫卡说（开发中）",
+      "Context": "UmadP4KefkaSaysAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 1:",
+      "Translated": "艾克斯迪司 1：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 3:",
+      "Translated": "艾克斯迪司 3：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 4:",
+      "Translated": "艾克斯迪司 4：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Chaos 1:",
+      "Translated": "混沌 1：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Chaos 2:",
+      "Translated": "混沌 2：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##",
+      "Translated": "自动##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Real##",
+      "Translated": "真##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fake##",
+      "Translated": "假##",
+      "Context": "UmadP4KefkaSaysSettingsWindow.RealFakeRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exdeath 2:",
+      "Translated": "艾克斯迪司 2：",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##ex2",
+      "Translated": "自动##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Real##ex2",
+      "Translated": "真##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fake##ex2",
+      "Translated": "假##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Opposite to 1##ex2",
+      "Translated": "与1相反##ex2",
+      "Context": "UmadP4KefkaSaysSettingsWindow.DrawExdeath2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole: S>D>A",
+      "Translated": "アトモス：吸い込み：S>D>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Black Hole: D>S>A",
+      "Translated": "アトモス：吸い込み：D>S>A",
+      "Context": "UmadP3BlackHoleAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Line:",
+      "Translated": "防线：",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##line",
+      "Translated": "自动##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "First##line",
+      "Translated": "第一防线##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Second##line",
+      "Translated": "第二防线##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Third##line",
+      "Translated": "第三防线##line",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Accretion:",
+      "Translated": "混沌之泥土：",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##accretion",
+      "Translated": "自动##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##accretion",
+      "Translated": "是##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No##accretion",
+      "Translated": "否##accretion",
+      "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Supports:",
+      "Translated": "支援：",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##supportlockon",
+      "Translated": "自动##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Chariot##supportlockon",
+      "Translated": "人马战车##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cone##supportlockon",
+      "Translated": "锥形##supportlockon",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Support Stack:",
+      "Translated": "支援分摊：",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportStack",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##supportstack",
+      "Translated": "自动##supportstack",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawSupportStack",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dps Stack:",
+      "Translated": "DPS分摊：",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawDpsStack",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##dpsstack",
+      "Translated": "自动##dpsstack",
+      "Context": "UmadP2ForsakenSettingsWindow.DrawDpsStack",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Kroxy-Rinon 341 (melee flex)",
+      "Translated": "Kroxy-Rinon 341（近战灵活）",
+      "Context": "UmadP2ForsakenKroxyRinonAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[old positions] Kroxy-Rinon 341 (melee flex)",
+      "Translated": "[旧站位] Kroxy-Rinon 341（近战灵活）",
+      "Context": "UmadP2ForsakenKroxyRinonOldAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[LPDU] Buddies",
+      "Translated": "[LPDU] 搭档",
+      "Context": "UmadP2ForsakenLpduBuddiesAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[Old] p3Z Buddy Meow",
+      "Translated": "[旧] p3Z 搭档喵",
+      "Context": "UmadP2ForsakenP3ZBuddyMeowAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[old positions] South Flex 341",
+      "Translated": "[旧站位] 南灵活 341",
+      "Context": "UmadP2ForsakenSouthFlex341OldAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "South Flex 341",
+      "Translated": "南灵活 341",
+      "Context": "UmadP2ForsakenSouthFlexAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[Old] zP6 South adjust",
+      "Translated": "[旧] zP6 南调整",
+      "Context": "UmadP2ForsakenZP6SouthAdjustAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Unending Coil of Bahamut",
+      "Translated": "巴哈姆特绝境战",
+      "Context": "UcobZone.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Aether Markers",
+      "Translated": "以太标记",
+      "Context": "UcobZone..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dodge",
+      "Translated": "躲避",
+      "Context": "UcobP5ExaflaresAi.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rolls toward:",
+      "Translated": "滚动方向：",
+      "Context": "UcobP5ExaflaresSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##exadir",
+      "Translated": "自动##exadir",
+      "Context": "UcobP5ExaflaresSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Omega Protocol",
+      "Translated": "欧米茄绝境战",
+      "Context": "TopZone.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ring",
+      "Translated": "圆环",
+      "Context": "TopZone..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exasquares/WC2",
+      "Translated": "核爆方块/WC2",
+      "Context": "TopP6WaveCannon2Scenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cosmo Arrow:",
+      "Translated": "宇宙天箭：",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##cosmo",
+      "Translated": "自动##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "In##cosmo",
+      "Translated": "内##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Out##cosmo",
+      "Translated": "外##cosmo",
+      "Context": "TopP6WaveCannon2SettingsWindow.DrawCosmoArrow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sigma",
+      "Translated": "西格玛",
+      "Context": "TopP5SigmaScenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tether range:",
+      "Translated": "连线距离：",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##cf",
+      "Translated": "自动##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mid##cf",
+      "Translated": "中##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Far##cf",
+      "Translated": "远##cf",
+      "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tower-north flip:",
+      "Translated": "北塔翻转：",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##flip",
+      "Translated": "自动##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##flip",
+      "Translated": "是##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No##flip",
+      "Translated": "否##flip",
+      "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Spinner rotation:",
+      "Translated": "纺蛛转向：",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##spin",
+      "Translated": "自动##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CW##spin",
+      "Translated": "顺时针##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CCW##spin",
+      "Translated": "逆时针##spin",
+      "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Omega-F form:",
+      "Translated": "欧米茄F形态：",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##form",
+      "Translated": "自动##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Leg blades##form",
+      "Translated": "腿部刀刃##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Staff##form",
+      "Translated": "杖##form",
+      "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World:",
+      "Translated": "你好世界：",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hw",
+      "Translated": "自动##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Near##hw",
+      "Translated": "近##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Far##hw",
+      "Translated": "远##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "None##hw",
+      "Translated": "无##hw",
+      "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Start with Dynamis:",
+      "Translated": "以潜能量开始：",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##dyn",
+      "Translated": "自动##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##dyn",
+      "Translated": "是##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No##dyn",
+      "Translated": "否##dyn",
+      "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Omega",
+      "Translated": "欧米茄",
+      "Context": "TopP5OmegaScenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "First F attack:",
+      "Translated": "第一次F攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Legs",
+      "Translated": "腿",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Staff",
+      "Translated": "杖",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "First M attack:",
+      "Translated": "第一次M攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sword",
+      "Translated": "剑",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shield",
+      "Translated": "盾",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Second F attack:",
+      "Translated": "第二次F攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Second M attack:",
+      "Translated": "第二次M攻击：",
+      "Context": "TopP5OmegaSettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Diffuse Wave Cannon:",
+      "Translated": "扩散波动炮：",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##wc",
+      "Translated": "自动##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Horizontal##wc",
+      "Translated": "水平##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Vertical##wc",
+      "Translated": "垂直##wc",
+      "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Monitor side:",
+      "Translated": "监视器方向：",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##mon",
+      "Translated": "自动##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Left##mon",
+      "Translated": "左##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right##mon",
+      "Translated": "右##mon",
+      "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Beetle spawn:",
+      "Translated": "甲虫生成：",
+      "Context": "TopP5OmegaSettingsWindow.DrawBeetleSpawn",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##beetle",
+      "Translated": "自动##beetle",
+      "Context": "TopP5OmegaSettingsWindow.DrawBeetleSpawn",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Extra dynamis stack:",
+      "Translated": "额外潜能量层数：",
+      "Context": "TopP5OmegaSettingsWindow.DrawExtraDynamis",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World order:",
+      "Translated": "你好世界下令：",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hwo",
+      "Translated": "自动##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Any##hwo",
+      "Translated": "任意##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "First##hwo",
+      "Translated": "第一##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Second##hwo",
+      "Translated": "第二##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "None##hwo",
+      "Translated": "无##hwo",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hello World type:",
+      "Translated": "你好世界类型：",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##hwt",
+      "Translated": "自动##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Near##hwt",
+      "Translated": "近##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Far##hwt",
+      "Translated": "远##hwt",
+      "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Force take monitor",
+      "Translated": "强制接取监控",
+      "Context": "TopP5OmegaSettingsWindow.DrawForceButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Force take tether",
+      "Translated": "强制接取连线",
+      "Context": "TopP5OmegaSettingsWindow.DrawForceButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delta",
+      "Translated": "德尔塔",
+      "Context": "TopP5DeltaScenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tether:",
+      "Translated": "连线：",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##tether",
+      "Translated": "自动##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close any##tether",
+      "Translated": "任意近战##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close inner##tether",
+      "Translated": "内侧近战##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close outer##tether",
+      "Translated": "外侧近战##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Far any##tether",
+      "Translated": "任意远程##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Far inner##tether",
+      "Translated": "内侧远程##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Far outer##tether",
+      "Translated": "外侧远程##tether",
+      "Context": "TopP5DeltaSettingsWindow.DrawTetherAssignment",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Monitor:",
+      "Translated": "监控：",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##mon",
+      "Translated": "是##mon",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No##mon",
+      "Translated": "否##mon",
+      "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No##hw",
+      "Translated": "否##hw",
+      "Context": "TopP5DeltaSettingsWindow.DrawHelloWorld",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Beyond Defence:",
+      "Translated": "超越防御：",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##bd",
+      "Translated": "自动##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Yes##bd",
+      "Translated": "是##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No##bd",
+      "Translated": "否##bd",
+      "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party Synergy",
+      "Translated": "协作程序PT",
+      "Context": "TopP2PartySynergyScenario.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glitch:",
+      "Translated": "故障：",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##glitch",
+      "Translated": "自动##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mid##glitch",
+      "Translated": "故障：中##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Far##glitch",
+      "Translated": "故障：远##glitch",
+      "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Omega-M form:",
+      "Translated": "欧米茄M形态：",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##atkM",
+      "Translated": "自动##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sword##atkM",
+      "Translated": "剑##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shield##atkM",
+      "Translated": "盾##atkM",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto##atkF",
+      "Translated": "自动##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Staff##atkF",
+      "Translated": "杖##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Legs##atkF",
+      "Translated": "腿##atkF",
+      "Context": "TopP2PartySynergySettingsWindow.DrawAttackF",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
