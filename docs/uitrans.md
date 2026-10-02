@@ -116,6 +116,9 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   （`PruneAgainstExtraction` 对 `json:` 容器直接跳过，否则刚打完就被排掉翻不了第二次）。
 - 编辑器/翻译上下文里显示为「内嵌 JSON：<资源名> · <键>」。
 - fgtest ⑱ 钉住：抽取缺 zh 候选 / 只补 zh 空槽 / 上游 zh 不覆盖 / 反向还原 / 清账豁免（真实样本 HaselTweaks）。
+- 配套（2026-10-03）：`uit-rules.json` 给 HaselTweaks / LeveHelper 点名伴生 `HaselCommon.dll`
+  （库级 UI：Yes/No/True/False、表格提示、`Open on Garland Tools` 等；它自己的表 22 键里 14 键缺 zh）——
+  抽取与打补丁按多程序集流程一起处理。
 
 ## 聊天输出（IChatGui）（2026-10-02 用户拍板要翻）
 
