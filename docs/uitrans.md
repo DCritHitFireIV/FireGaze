@@ -314,6 +314,9 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 1. 配套库的**投稿通道**：relay（Cloudflare Worker）匿名投稿 + 撤回（私有 KV 存一次性凭据）；库下载已做，见「公共译文库」。
 2. 界面 HCI 评审（先出还原图，按仓库既有流程）；
 3. 批量翻译的单位与限流（免费接口有每日额度；大插件建议用自填 key）。
+4. **词典式汉化插件的「词典值预填」（2026-10-02 观察到，未做）**：像 Allagan Tools - CN 自带词典
+   （`d["Dungeon Chest"] = "副本宝箱"`）里已经有中文，但**显示点不走 Tr** 时仍需补丁；抽取器可以顺手
+   把「同 DLL 词典里该 key 的中文值」当默认译文预填——省 AI、且与作者译名一致。
 
 ## 插件适配：委托工厂与接口文本 getter（2026-10-02，1.2.0.76）
 
@@ -327,6 +330,9 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   本模块内追不到消费者——Allagan 的 ItemXxxRenderer 就是这样）；只认接口实现，不碰普通 Name / Title。
 - **Allagan Tools（InventoryTools）例外**：它的英文串是**自带汉化词典的 key**（`LocalizationService.Translations`，
   值是中文），翻了会破坏它自己的查表——这些 key 保持不翻；它显示英文的地方是词典缺条目，属上游维护范围。
+  **修订（2026-10-02，1.2.0.96）**：点分标识符（`no_matches.title`）仍保持不翻；**自然语言句子形态**的 key
+  （`Tr("These combine into a single list…")` 这类）改判**灰名单**——勾「连灰名单一起翻」后可翻，
+  翻了查表 miss 会退回显示译文本身。见「查表 key 的『词典式汉化』与库残留解锁」节。
 - fgtest 新增真实样本断言：AllaganItemSearch 的 `Can be HQ? / Is Unique? / Airship Exploration` 必须是 UI，
   `canBeHq` 必须是键名排除。
 
@@ -438,7 +444,8 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   所以 `GetExcelSheet<T>(ClientLanguage.English)` 拿到的其实是当前语言那份——国际服也组不出英文→中文。两种客户端实测都不行。
 - 现在的数据源 = `scripts/ffxiv_glossary.py`：xivapi 的英文 datamining CSV + thewakingsands 的国服 CSV 按行 key 对齐，
   筛成匹配器能吃的形态（词只含 `[A-Za-z0-9'’\-.]`、≤4 个词、去掉首尾标点、值单行化），生成 `ffxiv-glossary.tsv`
-  （31,701 条，约 0.9 MB，包内压缩后 ~433 KB）随插件打包；`translate.yml` 每周重建，产物确定（不写 mtime、不经有版本差异的压缩器）。
+  （31,768 条，约 0.9 MB，包内压缩后 ~433 KB）随插件打包；`translate.yml` 每周重建，产物确定（不写 mtime、不经有版本差异的压缩器）。
+  数据源后来加了系统名表与人工补充表（2026-10-02，见「术语表补齐」与「查表 key 的『词典式汉化』」两节）。
 - 为什么打包而不是运行时下载：与 translations.json 同一套（随插件更新）；运行时零网络依赖，也不去读玩家的客户端。
 
 ## 血教训：二级窗口被 ini 记住折叠，看起来像「点不开」（2026-10-02）
