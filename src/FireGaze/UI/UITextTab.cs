@@ -448,13 +448,21 @@ internal sealed class UITextTab
         }
 
         const ImGuiTableFlags flags = ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
+
+        // 按钮列按「最宽按钮组合」留宽，左列用固定宽（而不是让内容自撑）——
+        // 2026-10-03 用户要求：行尾按钮必须在同一行，不要换行。
+        // 左列固定宽 = 可用宽 − 按钮列 − 余量（滚动条/单元格边距）；左侧文案用 Fitted 按宽截断，
+        // 不会反过来把按钮列挤窄。窗口真的不够时才由 SameLineOrWrap 兜底换行。
+        var actionsWidth = ActionsColumnWidth();
+        var slack = ImGui.GetStyle().ScrollbarSize + 48f;
+        var pluginWidth = Math.Max(180f, ImGui.GetContentRegionAvail().X - actionsWidth - slack);
         if (!ImGui.BeginTable("###UITextPlugins", 2, flags, new Vector2(0, -1)))
         {
             return;
         }
 
-        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthStretch);
-        ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, 220);
+        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthFixed, pluginWidth);
+        ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
 
         foreach (var plugin in items)
         {
@@ -462,6 +470,22 @@ internal sealed class UITextTab
         }
 
         ImGui.EndTable();
+    }
+
+    /// <summary>
+    ///     按钮列要留多宽：按「一行里可能出现的最宽按钮组合」算（2026-10-03 用户要求按钮不要换行）。
+    ///     组合覆盖：主按钮（写入并重载）+ 打开/设置 + 启用插件 + 还原原文 + 一键上传。
+    /// </summary>
+    private static float ActionsColumnWidth()
+    {
+        string[] widest = ["写入并重载", "设置", "启用插件", "还原原文", "一键上传"];
+        var width = (ImGui.GetStyle().CellPadding.X * 2f) + 8f;
+        foreach (var label in widest)
+        {
+            width += UiHelpers.LabelWidth(label) + 12f;
+        }
+
+        return width;
     }
 
     private bool MatchesFilter(InstalledPluginEntry entry)
@@ -550,7 +574,8 @@ internal sealed class UITextTab
 
             if (!string.IsNullOrWhiteSpace(punchline))
             {
-                UiHelpers.Truncated(punchline.Replace('\n', ' '), 96, punchline);
+                // 按左列实际宽度截断（列已固定宽；固定 96 字会在窄列里溢出、把按钮列挤窄）
+                UiHelpers.Fitted(punchline.Replace('\n', ' '), punchline);
             }
 
             // meta 行：状态徽标在行首（固定 x，方便竖向扫） + 内部名 · 版本
