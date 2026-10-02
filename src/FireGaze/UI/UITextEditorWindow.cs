@@ -164,6 +164,8 @@ internal sealed class UITextEditorWindow : Window
         this.dirty = false;
         this.extraction = null;
         this.extractionTask = null;
+        // 灰名单勾选框默认跟随全局设置；同一插件重开窗口时不重置（保留本次选择）
+        this.includeGreyInTranslate = this.plugin.Config.UITextTranslateGreyList;
         this.SetStatus($"已载入 {target.DisplayName}：正在抽取界面文本…", false);
         this.StartExtraction();
     }
@@ -394,9 +396,15 @@ internal sealed class UITextEditorWindow : Window
 
     // ── 翻译 ─────────────────────────────────────────────────────────────
 
+    /// <summary>
+    ///     本次编辑的「连灰名单一起翻译」开关（勾选框，2026-10-03 用户要求：不用长按钮）。
+    ///     <see cref="OpenFor" /> 时从翻译设置里的全局开关初始化；这里改动只影响本次编辑。
+    /// </summary>
+    private bool includeGreyInTranslate;
+
     private List<UITextTarget> TranslationTargets(bool? includeGrey = null)
     {
-        var grey = includeGrey ?? this.plugin.Config.UITextTranslateGreyList;
+        var grey = includeGrey ?? this.includeGreyInTranslate;
         return this.rows
             .Where(r => !r.Skipped && !r.HasTranslation)
             .Where(r => r.IsResource || r.IsAttribute || r.Role == UITextRole.UI || (grey && r.Role == UITextRole.Ambiguous))
@@ -656,7 +664,7 @@ internal sealed class UITextEditorWindow : Window
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             var hint = $"用当前通道翻 {targets} 条（未翻的候选" +
-                       (this.plugin.Config.UITextTranslateGreyList ? " + 灰名单" : "，灰名单不翻") + "）。" +
+                       (this.includeGreyInTranslate ? " + 灰名单" : "，灰名单不翻") + "）。" +
                        "\n翻完不会自动写入插件——想先核对就留在这里改，想直接生效点「写入并重载」。";
             if (targets > 100 && this.plugin.Config.UITextChannel is "auto" or "google" or "mymemory")
             {
@@ -794,19 +802,24 @@ internal sealed class UITextEditorWindow : Window
             ImGui.EndPopup();
         }
 
-        // 连灰名单一起翻译（2026-10-03 用户要求）：单独入口，不靠设置里的全局开关；
-        // 按钮下方常驻一句风险提醒（灰名单多被当键名/查表用）。
+        // 连灰名单一起翻译：做成勾选框（2026-10-03 用户要求：长按钮只会让人更想按）。
+        // 勾上后，主按钮「翻译未翻」会把灰名单里未翻的条目一并翻译；默认跟随翻译设置里的全局开关。
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("连灰名单一起翻译"), 12);
         ImGui.BeginDisabled(busy || greyUntranslated == 0);
-        if (ImGui.Button($"连灰名单一起翻译 ({greyUntranslated})###uitranslate-grey"))
+        ImGui.Checkbox("连灰名单一起翻译###uitranslate-grey", ref this.includeGreyInTranslate);
+        var greyHovered = ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled);
+        ImGui.EndDisabled();
+        ImGui.SameLine(0, 4);
+        if (greyUntranslated == 0)
         {
-            this.StartTranslate(this.TranslationTargets(includeGrey: true));
+            ImGui.TextDisabled("（没有未翻的灰名单）");
         }
 
-        ImGui.EndDisabled();
-        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        if (greyHovered)
         {
-            ImGui.SetTooltip("把灰名单里还没翻的条目一起翻（默认翻译不带它们）。\n" +
+            ImGui.SetTooltip("勾上后，点「翻译未翻」会把灰名单里还没翻的条目一起翻" +
+                             (greyUntranslated > 0 ? $"（本插件还有 {greyUntranslated} 条）。」\n" : "。\n") +
+                             "默认跟随「翻译设置」里的全局开关；这一勾只影响本次编辑。\n" +
                              "⚠ 灰名单多被插件当作键名 / 查表用，翻错很可能影响正常功能——建议翻完逐条确认再写入。");
         }
 
@@ -844,9 +857,8 @@ internal sealed class UITextEditorWindow : Window
             UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.status);
         }
 
-        // 灰名单翻译的风险提醒（按钮的下面一行；2026-10-03 用户要求）——不翻的时候也常驻，
-        // 避免用户不知道这些条目的代价。
-        UiHelpers.ColoredText(UiHelpers.Warn, "⚠ 连灰名单一起翻译很可能影响插件正常功能（这些字符串多被当作键名 / 查表用）——建议在列表里逐条确认。");
+        // 灰名单翻译的风险提醒（勾选框的下面一行；2026-10-03 用户要求常驻，避免不知道这些条目的代价）
+        UiHelpers.ColoredText(UiHelpers.Warn, "⚠ 勾选「连灰名单一起翻译」后，翻译很可能影响插件正常功能（这些字符串多被当作键名 / 查表用）——建议在列表里逐条确认。");
     }
 
     /// <summary>
