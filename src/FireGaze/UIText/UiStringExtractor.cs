@@ -2614,12 +2614,19 @@ public static class UIStringExtractor
                 // 默认不翻（保护查表），确认没问题的用户在编辑器里可以单条翻（user 译文不受灰名单开关限制）。
                 if (literal.HardKey && !literal.DictionaryKey)
                 {
+                    // 「词典式汉化」的界面文本（Allagan Tools - CN 那种 Tr("英文句子")）：查表 miss 会把键本身
+                    // 显示出来，翻了能正常显示译文——放灰名单让用户自己确认，而不是直接丢掉
+                    // （2026-10-02 用户实测：设置页说明、提示文字「一堆英文」全是这类）。
+                    var sentenceKey = UITextText.LooksLikeSentenceKey(literal.Text);
                     entries.Add(new UITextEntry
                     {
                         Original = literal.Text,
                         Context = literal.Context,
-                        Role = UITextRole.Excluded,
-                        Reason = "本地化 / 资源查表 key（翻了会查不到译文）",
+                        Role = sentenceKey ? UITextRole.Ambiguous : UITextRole.Excluded,
+                        Reason = sentenceKey
+                            ? "查表 key，但形态像界面句子（词典式汉化；翻译后会直接显示译文本身），默认不翻"
+                            : "本地化 / 资源查表 key（翻了会查不到译文）",
+                        PreserveID = literal.PreserveID,
                     });
                     continue;
                 }

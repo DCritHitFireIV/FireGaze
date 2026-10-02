@@ -59,10 +59,25 @@ internal sealed class UITextPackEntry
     public bool IsAmbiguous => string.Equals(this.Role, "Ambiguous", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
-    ///     这一条能不能打进补丁：UI 永远能；灰名单只在「连灰名单一起翻」开着、或玩家自己译过时能。
+    ///     判定为「不该翻」（键名、本地化 / 资源查表 key、功能串）：不进翻译候选；补丁层也硬拦。
+    /// </summary>
+    [JsonIgnore]
+    public bool IsExcluded => string.Equals(this.Role, "Excluded", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    ///     这一条能不能打进补丁：UI 永远能；灰名单只在「连灰名单一起翻」开着、或玩家自己译过时能；
+    ///     Excluded 一律不（除玩家自己译过）——从源头上拦住「库里的噪声译文 / 盘上残留状态」把键名写坏。
     ///     没有判定（旧包 / 公共库）按 UI 对待。
     /// </summary>
-    public bool IsPatchable(bool includeAmbiguous) => !this.IsAmbiguous || includeAmbiguous || this.IsUserSource;
+    public bool IsPatchable(bool includeAmbiguous)
+    {
+        if (this.IsExcluded)
+        {
+            return this.IsUserSource;
+        }
+
+        return !this.IsAmbiguous || includeAmbiguous || this.IsUserSource;
+    }
 
     [JsonIgnore]
     public bool IsUserSource => string.Equals(Source, "user", StringComparison.OrdinalIgnoreCase);
@@ -476,6 +491,20 @@ internal sealed class UITextPack
     /// <summary>资源条目的同一判断（备注文案口径一致）。</summary>
     public static bool IsResourceAutoSkipped(UITextResourceEntry entry) => IsAutoSkipReview(entry.Review);
 
+    /// <summary>属性条目的同一判断（备注文案口径一致）。</summary>
+    public static bool IsAttributeAutoSkipped(UITextAttributeEntry entry) => IsAutoSkipReview(entry.Review);
+
+    /// <summary>
+    ///     「库合并留下的不翻残留」：库合并（v1.2.0.94 之前）清掉了自动排除的备注、却没把条目
+    ///     从「不翻」名单里撤掉——形态 = 备注为空 + 有译文 + 来源是公共库。
+    ///     这类条目重新成为候选时应当自动恢复，否则永久卡死：有译文、界面却一直英文
+    ///     （2026-10-02 Allagan Tools 实机 509 条）。
+    /// </summary>
+    public static bool IsLibraryLeftOver(UITextPackEntry entry) =>
+        entry.Review is null
+        && entry.HasTranslation
+        && string.Equals(entry.Source, "library", StringComparison.OrdinalIgnoreCase);
+
     private static bool IsAutoSkipReview(string? review) =>
         review is not null
         && (review.StartsWith(AutoSkipNotePrefix, StringComparison.Ordinal)
@@ -539,6 +568,11 @@ internal sealed class UITextPack
 
             if (incoming.HasTranslation)
             {
+                // 「自动排除」的条目拿到库译文：说明它确实是一条要翻的界面文本——
+                // 把「不翻」一起摘掉。v1.2.0.94 之前只清 Review、skipped 残留会把条目永久卡死：
+                // 有译文、界面却一直英文（2026-10-02 Allagan Tools 实机 509 条）。
+                var wasAutoSkipped = this.IsSkipped(existing.Original) && IsAutoSkipped(existing);
+
                 if (!string.Equals(existing.Translated, incoming.Translated, StringComparison.Ordinal))
                 {
                     changed++;
@@ -547,6 +581,10 @@ internal sealed class UITextPack
                 existing.Translated = incoming.Translated;
                 existing.Source = incoming.Source ?? "library";
                 existing.Review = null;
+                if (wasAutoSkipped)
+                {
+                    this.UnmarkSkipped(existing.Original);
+                }
             }
 
             if (incoming.Context is not null)
@@ -592,6 +630,10 @@ internal sealed class UITextPack
 
             if (incoming.HasTranslation)
             {
+                // 同 entries：库译文进来时，把「自动排除」残留的「不翻」一并摘掉。
+                var wasAutoSkipped = this.IsResourceSkipped(existing.Container, existing.Key)
+                                     && IsResourceAutoSkipped(existing);
+
                 if (!string.Equals(existing.Translated, incoming.Translated, StringComparison.Ordinal))
                 {
                     changed++;
@@ -600,6 +642,10 @@ internal sealed class UITextPack
                 existing.Translated = incoming.Translated;
                 existing.Source = incoming.Source ?? "library";
                 existing.Review = null;
+                if (wasAutoSkipped)
+                {
+                    this.UnmarkResourceSkipped(existing.Container, existing.Key);
+                }
             }
 
             if (incoming.Original.Length > 0)
@@ -645,6 +691,10 @@ internal sealed class UITextPack
 
             if (incoming.HasTranslation)
             {
+                // 同 entries：库译文进来时，把「自动排除」残留的「不翻」一并摘掉。
+                var wasAutoSkipped = this.IsAttributeSkipped(existing.Original)
+                                     && IsAttributeAutoSkipped(existing);
+
                 if (!string.Equals(existing.Translated, incoming.Translated, StringComparison.Ordinal))
                 {
                     changed++;
@@ -653,6 +703,10 @@ internal sealed class UITextPack
                 existing.Translated = incoming.Translated;
                 existing.Source = incoming.Source ?? "library";
                 existing.Review = null;
+                if (wasAutoSkipped)
+                {
+                    this.UnmarkAttributeSkipped(existing.Original);
+                }
             }
 
             if (incoming.Context is not null)
@@ -709,8 +763,9 @@ internal sealed class UITextPack
         {
             if (keep.Contains(entry.Original))
             {
-                // 又变回候选了：只把「上次是系统自动排除」的恢复；用户手动标的「不翻」保持不动
-                if (this.IsSkipped(entry.Original) && IsAutoSkipped(entry))
+                // 又变回候选了：恢复「系统自动排除」的；用户手动标的「不翻」保持不动。
+                // IsLibraryLeftOver：库合并清备注留下的残留（同属系统侧），一并恢复。
+                if (this.IsSkipped(entry.Original) && (IsAutoSkipped(entry) || IsLibraryLeftOver(entry)))
                 {
                     this.UnmarkSkipped(entry.Original);
                     entry.Review = null;

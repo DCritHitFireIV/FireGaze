@@ -672,3 +672,25 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   / `Free Company` 三个关键词，防止将来重新生成时丢条目。
 - **已有译文不会被自动重翻**（机器翻译永不覆盖已有译文）——要修正已打上去的错译名：编辑器里右键
   「清除译文」→「翻译未翻」重翻（此时会命中新术语表），或单条手填。
+
+## 查表 key 的「词典式汉化」与库残留解锁（2026-10-02，1.2.0.96）
+
+- **背景（用户实机）**：Allagan Tools 是 QianChangUwU 的**汉化分支**（`Allagan Tools - CN`），界面文本走它自己的
+  `LocalizationService.Tr()`：**词典命中显示中文、未命中把键本身显示出来**（实现：`TryGetValue(text) ? translated : text`）。
+  用户看到的「These combine into a single list…」等一堆英文 = **汉化作者词典里没收录的说明文字**。
+- **为什么 FireGaze 没翻**：这些文本经 `Paragraph(...)` → `text.Tr()`，被抽取器判成「本地化查表 key」而一律排除
+  （1.2.0.94 的保守口径，防的是 BOCCHI / SimpleTweaks 那类「key 查外部表」的插件）。
+  两者形态可区分：BOCCHI 的 key 是 `no_matches.title` 这类点分标识符；这里是自然语言句子。
+- **修法（三件套）**：
+  · `UITextText.LooksLikeSentenceKey`：≥3 词、≥20 字符、无 `_ { } % < > =`、至少一个小写字母。
+    命中时 `HardKey && !DictionaryKey` 分支从 Excluded 改判 **Ambiguous（灰名单）**——
+    默认不翻，勾「批量翻译时连灰名单一起翻」后才翻；翻了查表 miss 会退回显示译文本身（有效）。
+    实测 Allagan Tools：**209 条**从 Excluded 转入灰名单。
+  · `IsPatchable` 硬拦 `Excluded`（user 译文例外）：此前「Excluded 不打补丁」只靠清账的 skipped 兜底，
+    现在补丁层本身就是不变量（库里来的噪声译文不会再被写进 DLL）。
+  · 清账恢复加 `IsLibraryLeftOver`：库合并（v1.2.0.94 之前）只清 Review、没摘 skipped——
+    形态 = 无备注 + 有译文 + 来源 library；这类条目重新成为候选时自动解锁（**实测解锁 183 条**）。
+    `MergeLibrary` 同步修：库译文进来时若条目是 auto-skip，一并解除（不再产生新残留）。
+    用户手动标的「不翻」（ai 来源、无备注）仍绝不碰（fgtest 有断言）。
+- **用户操作**：勾上「连灰名单一起翻」→「一键汉化」→ 解锁 + 翻译 + 打补丁一次完成
+  （实测可打补丁条目 1235 → **1447**）。

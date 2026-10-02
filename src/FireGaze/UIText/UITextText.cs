@@ -211,6 +211,47 @@ internal static class UITextText
     }
 
     /// <summary>
+    ///     像「界面句子」的查表 key：插件把英文界面文本当键传给 <c>Tr()</c> / <c>Translate()</c>
+    ///     （「词典式汉化」：命中词典显中文，未命中就把键本身显出来）。这类 key 翻了以后查表 miss，
+    ///     会直接显示译文本身——**多半安全且有效**；但「翻了到底会不会影响别处」静态看不出来，
+    ///     调用方按**灰名单**处理（默认不翻、用户确认后翻），不放行也不丢弃。
+    /// </summary>
+    /// <remarks>
+    ///     判据保守（2026-10-02，Allagan Tools - CN 实测 165 条）：至少 3 个词、长度 ≥ 20、
+    ///     无下划线、无占位符/运算符（<c>{ } % &lt; &gt; =</c>）、至少含一个小写字母。
+    ///     反例：<c>no_matches.title</c>（点分标识符）、<c>Save</c>（单词）、<c>1st Person Camera</c>（太短）。
+    /// </remarks>
+    public static bool LooksLikeSentenceKey(string text)
+    {
+        if (text.Length < 20)
+        {
+            return false;
+        }
+
+        if (text.Contains('_') || text.Contains('{') || text.Contains('}') || text.Contains('%')
+            || text.Contains('<') || text.Contains('>') || text.Contains('='))
+        {
+            return false;
+        }
+
+        var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length < 3)
+        {
+            return false;
+        }
+
+        foreach (var ch in text)
+        {
+            if (char.IsAsciiLetterLower(ch))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
     ///     压一压模型输出里的常见噪声：整段包引号、多出来的换行。
     /// </summary>
     public static string CleanTranslated(string text)

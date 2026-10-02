@@ -121,7 +121,9 @@ internal sealed class UITextSettingsWindow : Window
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("灰名单 = 既画在界面上、又被拿去做比较/当键名的字符串，默认不翻（翻错可能影响功能）。");
+            ImGui.SetTooltip("灰名单 = 既画在界面上、又被拿去做比较或当键名的字符串；以及查表用的英文句子。\n" +
+                             "词典式汉化插件的设置页说明文字多是后一种，翻译后会直接显示译文本身。\n" +
+                             "默认不翻，翻错可能影响功能。");
         }
 
         var autoRepatch = config.UITextAutoRepatch;
