@@ -49,12 +49,14 @@ internal static class ContributeSender
         var relayNote = relayError.Length > 0
             ? $"上传没成功：{relayError}。"
             : $"正文很大（{body.Length:N0} 字符），超过了中继上限。";
+        // 只是「没法自动传」而不是出错：中继不可用才标红；只是正文太大走提交页用灰字（2026-10-03 复审 P3-a）
+        var fallbackSeverity = relayError.Length > 0 ? ContributeSendSeverity.Bad : ContributeSendSeverity.Info;
 
         // 回退 1：正文（转义后）塞得进 URL —— 打开填好内容的 GitHub 提交页，玩家按一下 Submit 就行
         var url = ContributeRelay.BuildIssueURL(title, body);
         if (url.Length <= MaxIssueURLLength)
         {
-            return OpenIssue(url, relayNote + "已替你打开提交页，按 Submit 即可提交。");
+            return OpenIssue(url, relayNote + "已替你打开提交页，按 Submit 即可提交。", fallbackSeverity);
         }
 
         // 回退 2：正文太长，URL 塞不下 —— 导出文件，让玩家把内容粘贴进提交页正文
@@ -70,7 +72,8 @@ internal static class ContributeSender
             ContributeRelay.BuildIssueURL(title, shortBody),
             relayNote + $"条目较多（{total} 条），正文放不进提交页链接。" + (file is null
                 ? "导出投稿文件也失败了——请先把译文留在本地，等中继恢复后再传。"
-                : $"\n投稿内容已导出：{file}\n请打开这个文件，把里面的内容整段粘贴到打开页面的正文框里，再按 Submit。"));
+                : $"\n投稿内容已导出：{file}\n请打开这个文件，把里面的内容整段粘贴到打开页面的正文框里，再按 Submit。"),
+            file is null ? ContributeSendSeverity.Bad : fallbackSeverity);
     }
 
     private static string? SavePayload(string internalName, string title, string body, string storeDirectory)
@@ -92,12 +95,12 @@ internal static class ContributeSender
     }
 
     /// <summary>打开提交页；打不开就把「怎么手动提交」说清楚（绝不谎报「已替你打开」）。</summary>
-    private static ContributeSendResult OpenIssue(string url, string message)
+    private static ContributeSendResult OpenIssue(string url, string message, ContributeSendSeverity severity)
     {
         try
         {
             Dalamud.Utility.Util.OpenLink(url);
-            return new ContributeSendResult(ContributeSendSeverity.Bad, message);
+            return new ContributeSendResult(severity, message);
         }
         catch (Exception e)
         {

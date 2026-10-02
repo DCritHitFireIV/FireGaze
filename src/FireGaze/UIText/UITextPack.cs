@@ -794,8 +794,10 @@ internal sealed class UITextPack
                 continue;
             }
 
-            if (this.IsSkipped(entry.Original) && !IsAutoSkipped(entry))
+            if (this.IsSkipped(entry.Original))
             {
+                // 用户手动标的「不翻」保持不动；已经是「自动排除」的说明上一轮就记过了、本轮没有新变化。
+                // 两类都不重复计数（2026-10-03：该计数会驱动 ReapplyNeeded，重复计会让「已经是最新」永久失效）
                 continue;
             }
 
@@ -849,8 +851,9 @@ internal sealed class UITextPack
                 continue;
             }
 
-            if (this.IsResourceSkipped(entry.Container, entry.Key) && !IsResourceAutoSkipped(entry))
+            if (this.IsResourceSkipped(entry.Container, entry.Key))
             {
+                // 同 entries：手动「不翻」与已经自动排除的都不再重复计数
                 continue;
             }
 
@@ -887,8 +890,9 @@ internal sealed class UITextPack
                 continue;
             }
 
-            if (this.IsAttributeSkipped(entry.Original) && !IsAutoSkipReview(entry.Review))
+            if (this.IsAttributeSkipped(entry.Original))
             {
+                // 同 entries：手动「不翻」与已经自动排除的都不再重复计数
                 continue;
             }
 

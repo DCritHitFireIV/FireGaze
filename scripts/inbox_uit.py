@@ -58,7 +58,7 @@ def valid_container(container: str) -> bool:
         return all(ch.isalnum() or ch in "._-/ " for ch in rel)
     if container.startswith("json:"):
         name = container[5:]
-        return bool(name) and len(name) <= 200 and name.endswith(".json") and all(
+        return bool(name) and len(name) <= 200 and name.lower().endswith(".json") and all(
             ch.isalnum() or ch in "._-" for ch in name
         )
     return False
@@ -116,7 +116,9 @@ def main(argv=None) -> int:
         return 0
 
     plugin = str(payload.get("plugin") or "").strip()
-    if not plugin or any(ch.isspace() for ch in plugin) or len(plugin) > 120:
+    # 内部名 = 插件目录名（字母数字、下划线、点、减号）：现在缺包会新建包、要拼路径写盘，
+    # 必须挡住 ../ 与子目录（2026-10-03 复审 P2）
+    if not re.fullmatch(r"[A-Za-z0-9_.\-]{1,120}", plugin):
         return fail(args, "插件内部名不合法。")
 
     pack_path = os.path.join(args.packs_dir, plugin + ".json")

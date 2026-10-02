@@ -455,6 +455,7 @@ internal sealed class UITextPatchManager
         // 全部先打进 .new，一个失败就整套放弃——不会留下「主程序集打了、伴生没打」的半套状态
         var staged = new List<(UITextPatchFile State, string NewPath)>();
         var patchedTotal = 0;
+        var pdbDropped = false;
         var perFileMissing = new List<IReadOnlyCollection<string>>();
         foreach (var fileState in fileStates)
         {
@@ -479,6 +480,8 @@ internal sealed class UITextPatchManager
 
                 return (false, $"打补丁出错（{Path.GetFileName(fileState.Path)}）：{e.Message}");
             }
+
+            pdbDropped |= outcome.PdbDropped;
 
             if (!outcome.Ok)
             {
@@ -672,6 +675,11 @@ internal sealed class UITextPatchManager
         this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, stateFiles, pluginDirectory);
 
         var message = $"已写入 {patchedTotal} 处译文";
+        if (pdbDropped)
+        {
+            // B-11：降级不能只写日志，界面上也要能看见（2026-10-03 复审 P3-b）
+            message += "（调试符号没保住，插件里读堆栈文件名的代码可能报错）";
+        }
         if (localizationWritten > 0)
         {
             message += $"，另补了本地化文件 {localizationWritten} 条";
