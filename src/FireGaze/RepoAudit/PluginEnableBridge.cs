@@ -24,16 +24,18 @@ internal static class PluginEnableBridge
     /// </summary>
     public static Task<(bool Ok, string Message)> EnableAsync(object? rawPlugin) => Task.Run(() =>
     {
+        // 日志带上插件名，排查「是谁在什么时候启用的」不用猜（2026-10-03）
+        var name = ReadProperty(ReadProperty(rawPlugin, "Manifest"), "InternalName") as string ?? "?";
         try
         {
             var result = Enable(rawPlugin);
             if (result.Ok)
             {
-                ActivityLog.Info("启用插件", result.Message);
+                ActivityLog.Info("启用插件", $"{name}：{result.Message}");
             }
             else
             {
-                ActivityLog.Error("启用插件", result.Message);
+                ActivityLog.Error("启用插件", $"{name}：{result.Message}");
             }
 
             return result;
@@ -49,7 +51,7 @@ internal static class PluginEnableBridge
                 return (true, "插件已经在运行，无需重复启用。");
             }
 
-            ActivityLog.Error("启用插件", "启用失败", e);
+            ActivityLog.Error("启用插件", $"{name}：启用失败", e);
             return (false, $"启用插件出错：{e.GetType().Name}: {inner.Message}");
         }
     });

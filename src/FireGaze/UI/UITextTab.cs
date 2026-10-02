@@ -497,9 +497,10 @@ internal sealed class UITextTab
     /// <summary>启用按钮（绿色）：未加载的插件显示；与「打开/设置」互斥，两名字共用一个固定槽宽。</summary>
     private void DrawEnableButton(InstalledPluginEntry plugin, bool busy, float width)
     {
-        ImGui.BeginDisabled(busy || this.enabling.ContainsKey(plugin.InternalName));
+        var enablingThis = this.enabling.ContainsKey(plugin.InternalName);
+        ImGui.BeginDisabled(busy || enablingThis);
         UiHelpers.PushEnableButton();
-        var clicked = ImGui.Button("启用插件###UITextEnablePlugin", new Vector2(width, 0));
+        var clicked = ImGui.Button(enablingThis ? "启用中…" : "启用插件###UITextEnablePlugin", new Vector2(width, 0));
         UiHelpers.PopEnableButton();
         ImGui.EndDisabled();
         if (clicked)
@@ -509,7 +510,9 @@ internal sealed class UITextTab
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("把这个插件启用起来（与插件安装器里的「启用」同一条路）；加载后就能看到汉化效果。");
+            ImGui.SetTooltip(enablingThis
+                ? "正在加载，加载完这里会变成打开/设置。"
+                : "启用这个插件，加载后就能看到汉化效果。");
         }
     }
 
@@ -828,6 +831,7 @@ internal sealed class UITextTab
             {
                 // 插件已加载：它读的就是打过补丁的文件（没打过就无所谓），待确认状态直接转正
                 this.patches.MarkVerified(entry.InternalName);
+                entry.IsLoaded = true;   // 行状态立刻变成「打开/设置」，不等索引重建
                 if (this.patches.HasBackup(entry))
                 {
                     message += " 补丁已生效。";
@@ -1046,10 +1050,10 @@ internal sealed class UITextTab
             ImGui.SetTooltip(!plugin.IsLoaded
                 ? "插件当前没有加载，先启用它。"
                 : hasMain
-                    ? "打开插件的主界面（等同插件自己的打开命令）。"
+                    ? "打开主界面。"
                     : hasConfig
-                        ? "这个插件没有主界面，打开它的设置界面。"
-                        : "这个插件既没有主界面也没有设置界面，打不开。");
+                        ? "打开设置页面。"
+                        : "这个插件没有可打开的窗口。");
         }
     }
 
@@ -2474,8 +2478,10 @@ internal sealed class UITextTab
         run.CanCancel = false;
         run.Finished = true;
 
-        // 跑完立刻重算行状态：还原 / 汉化后，筛选（如「已汉化」）要马上反映出来，不等下一个 5 秒刷新
+        // 跑完立刻重算行状态：还原 / 汉化后，筛选（如「已汉化」）要马上反映出来，不等下一个 5 秒刷新；
+        // 同时重建已装插件索引——一键汉化会重载插件，行上的「启用插件 / 打开」要立即跟上（2026-10-03 用户要求）
         this.rowsDirty = true;
+        this.installedPluginsDirty = true;
     }
 
     private void PollRun()

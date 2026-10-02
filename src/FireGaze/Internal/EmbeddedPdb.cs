@@ -4,7 +4,7 @@ using System.Reflection.PortableExecutable;
 namespace FireGaze.Internal;
 
 /// <summary>
-///     读取 PE 里内嵌的可移植 PDB（<c>EmbeddedPortablePdb</c>），解压成 dnlib 可用的字节流。
+///     给补丁器找调试符号（PDB）：优先 PE 里内嵌的，其次同目录的外挂便携 PDB。
 /// </summary>
 /// <remarks>
 ///     dnlib 的 PDB 读取只认磁盘上的 <c>.pdb</c>（CodeView 路径），不认 PE 里内嵌的 PDB；
@@ -12,13 +12,24 @@ namespace FireGaze.Internal;
 ///     <c>StackFrame.GetFileName()</c> 的代码都会拿到 <c>null</c>。
 ///     2026-10-03 实测：Collections 的 <c>Dev.Stop → Log → StripDirectoryPath(null)</c>
 ///     因此在「启用插件」时抛 NullReferenceException。
-///     这里把内嵌 PDB 解出来喂给 <c>ModuleCreationOptions.PdbFileOrData</c>，
-///     写出时再用 <c>WritePdb</c> 写回内嵌形态。
+///     <para>
+///     另一种常见形态是外挂 PDB（<c>DisPlacePlugin.pdb</c>）：写盘时同样会被丢掉。
+///     这里把可转的符号读出来喂给 <c>ModuleCreationOptions.PdbFileOrData</c>，
+///     写出时再用 <c>WritePdb</c> 以「内嵌可移植 PDB」写回（单文件，不用跟着搬外挂文件）。
+///     只有 Windows PDB（MSF 格式）我们转不了——那种只能保持原样丢弃。
+///     </para>
 /// </remarks>
 internal static class EmbeddedPdb
 {
-    /// <summary>没有内嵌 PDB 或读取失败时返回 null（不抛）。</summary>
+    /// <summary>找不到 / 读不出时返回 null（不抛）。</summary>
     public static byte[]? TryRead(string assemblyPath)
+    {
+        var embedded = TryReadEmbedded(assemblyPath);
+        return embedded ?? TryReadPortableSidecar(assemblyPath);
+    }
+
+    /// <summary>读 PE 里内嵌的可移植 PDB（<c>EmbeddedPortablePdb</c>）。</summary>
+    private static byte[]? TryReadEmbedded(string assemblyPath)
     {
         try
         {
@@ -61,6 +72,33 @@ internal static class EmbeddedPdb
 
     private static bool HasMagic(byte[] raw) =>
         raw.Length >= 8 && raw[0] == (byte)'M' && raw[1] == (byte)'P' && raw[2] == (byte)'D' && raw[3] == (byte)'B';
+
+    /// <summary>同目录的外挂便携 PDB（<c>&lt;程序集名&gt;.pdb</c>）；Windows PDB（MSF）读不了，返回 null。</summary>
+    private static byte[]? TryReadPortableSidecar(string assemblyPath)
+    {
+        try
+        {
+            var pdbPath = Path.ChangeExtension(assemblyPath, ".pdb");
+            if (!File.Exists(pdbPath))
+            {
+                return null;
+            }
+
+            var bytes = File.ReadAllBytes(pdbPath);
+            // 便携 PDB 以元数据签名 'BSJB' 开头；Windows PDB 是 MSF 容器，dnlib 没有 DiaSymReader 时读不了
+            if (bytes.Length < 4
+                || bytes[0] != (byte)'B' || bytes[1] != (byte)'S' || bytes[2] != (byte)'J' || bytes[3] != (byte)'B')
+            {
+                return null;
+            }
+
+            return bytes;
+        }
+        catch
+        {
+            return null;
+        }
+    }
 
     private static byte[]? ReadAtRva(PEReader pe, DebugDirectoryEntry entry)
     {

@@ -66,8 +66,12 @@ internal sealed class InstalledPluginEntry
 
     /// <summary>
     ///     当前是否已加载。
+    ///     <para>
+    ///     索引重建时从 RawPlugin 读一次；启用 / 重载插件成功后会就地更新这个值，
+    ///     让行状态立刻从「启用插件」变成「打开/设置」，不用等 30 秒兜底重建（2026-10-03 用户要求）。
+    ///     </para>
     /// </summary>
-    public bool IsLoaded { get; init; }
+    public bool IsLoaded { get; set; }
 
     public bool IsThirdParty { get; init; }
 

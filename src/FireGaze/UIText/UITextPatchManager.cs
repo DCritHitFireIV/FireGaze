@@ -1495,6 +1495,7 @@ internal sealed class UITextPatchManager
         }
 
         var loaded = entry.RawPlugin.GetType().GetProperty("IsLoaded", BindingFlags.Public | BindingFlags.Instance)?.GetValue(entry.RawPlugin) as bool? ?? false;
+        entry.IsLoaded = loaded;   // 行状态立刻跟上，不用等索引重建
         if (loaded)
         {
             this.MarkVerified(entry.InternalName);
