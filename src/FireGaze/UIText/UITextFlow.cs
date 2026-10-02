@@ -80,6 +80,25 @@ internal static class UITextFlow
                 entry.Context = item.Context;
             }
 
+            // 记下本轮的判定（UI / 灰名单）：打补丁时当闸门用。
+            // 首次把「已有译文的条目」记成灰名单时要重打——它可能在升级前已经写进过 DLL，得按新口径撤出来。
+            var newRole = item.Role == UITextRole.Ambiguous ? "Ambiguous" : "UI";
+            if (entry.Role is null)
+            {
+                entry.Role = newRole;
+                if (newRole == "Ambiguous" && entry.HasTranslation)
+                {
+                    result.ReapplyNeeded = true;
+                }
+            }
+            else if (!string.Equals(entry.Role, newRole, StringComparison.Ordinal))
+            {
+                entry.Role = newRole;
+                result.ReapplyNeeded = true;
+            }
+
+            entry.RoleReason = item.Reason;
+
             if (item.Role == UITextRole.UI)
             {
                 result.UICount++;

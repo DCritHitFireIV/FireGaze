@@ -33,6 +33,31 @@ internal static class UITextRules
     /// <summary>调试日志出口（同上）。</summary>
     public static Action<Exception, string>? DebugSink { get; set; }
 
+    /// <summary>
+    ///     「不汉化」名单（用户 2026-10-02 指定）：这些插件本身就是中文、由朋友维护，
+    ///     汉化只会增加维护负担；FireGaze 识别为中文插件直接跳过，不允许抽取 / 翻译 / 打补丁 / 上传。
+    ///     按内部名匹配，大小写不敏感。
+    /// </summary>
+    private static readonly HashSet<string> DoNotLocalize = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "AEAssistV3",
+        "AEAssist",
+        "DailyRoutines",
+        "OmniToolbox",
+        "XSZToolbox",
+        "KodakkuAssist",
+        "PromeRotation",
+        "NyaDraw",
+        "I-Ching-GL",
+        "MissFisher",
+        "LightlessSync",
+        "LightlessCN",
+    };
+
+    /// <summary>这个插件是不是「中文插件、不汉化」（名单见 <see cref="DoNotLocalize" />）。</summary>
+    public static bool IsDoNotLocalize(string? internalName) =>
+        !string.IsNullOrEmpty(internalName) && DoNotLocalize.Contains(internalName);
+
     private static Dictionary<string, string[]>? companions;
     private static HashSet<string>? uiAttributes;
     private static Dictionary<string, int>? commandAttributes;

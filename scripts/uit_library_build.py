@@ -48,6 +48,14 @@ AETHERFEED = ut.AETHERFEED
 DEFAULT_TARGETS = os.path.join(SCRIPT_DIR, "uit_targets.txt")
 DEFAULT_GLOSSARY = os.path.join(REPO_ROOT, "ffxiv-glossary.tsv")
 
+# 「不汉化」名单（与插件端 UITextRules.IsDoNotLocalize 同一份口径，2026-10-02 用户定）：
+# 中文插件、由朋友维护，汉化只会增加维护负担——云端库也不许给它们出包。
+DO_NOT_LOCALIZE = {
+    "aeassistv3", "aeassist", "dailyroutines", "omnitoolbox", "xsztoolbox",
+    "kodakkuassist", "promerotation", "nyadraw", "i-ching-gl", "missfisher",
+    "lightlesssync", "lightlesscn",
+}
+
 TRANSLATE_PROMPT = (
     "你是 FFXIV 插件界面的简体中文译者。输入 JSON 的每条 text 是插件界面上的英文文本"
     "（可能带 {0}、%s、\\n 之类的占位符或代码片段）。规则："
@@ -68,7 +76,7 @@ def load_targets(path: str) -> list[str]:
         return names
     for line in io.open(path, encoding="utf-8"):
         line = line.strip()
-        if line and not line.startswith("#"):
+        if line and not line.startswith("#") and line.lower() not in DO_NOT_LOCALIZE:
             names.append(line)
     return names
 
@@ -459,6 +467,7 @@ def main(argv: list[str] | None = None) -> int:
     targets = args.targets if args.targets else load_targets(args.targets_file)
     if args.only:
         targets = [t for t in targets if t in set(args.only)]
+    targets = [t for t in targets if t.lower() not in DO_NOT_LOCALIZE]
     if not targets:
         print("没有目标插件（--targets 或 scripts/uit_targets.txt）")
         return 1

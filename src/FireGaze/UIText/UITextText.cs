@@ -99,6 +99,28 @@ internal static class UITextText
     public static string ForTranslation(string original) => ForDisplay(original).Trim();
 
     /// <summary>
+    ///     修一修大模型偶发的 JSON 噪声：deepseek-flash 实测会吐 <c>"i":1"</c>（数字后多一个引号）这种坏法；
+    ///     再顺手去掉尾随逗号。修不动就原样返回，交给上层报错。
+    /// </summary>
+    public static string RepairJSON(string json)
+    {
+        var repaired = json;
+        try
+        {
+            // "i":1"  → "i":1（数字后面的多引号）
+            repaired = Regex.Replace(repaired, "(\"i\"\\s*:\\s*)(\\d+)\"", "$1$2", RegexOptions.CultureInvariant);
+            // 尾随逗号：,} / ,] → } / ]（可带空白）
+            repaired = Regex.Replace(repaired, ",\\s*([}\\]])", "$1", RegexOptions.CultureInvariant);
+        }
+        catch (ArgumentException)
+        {
+            // 正则出问题也不能让翻译挂掉：返回已经修过的部分
+        }
+
+        return repaired;
+    }
+
+    /// <summary>
     ///     从模型输出里抠出 JSON（容忍 ```json 围栏和前后废话），失败返回 null。
     /// </summary>
     public static string? ExtractJSON(string text)
@@ -162,25 +184,30 @@ internal static class UITextText
     }
 
     /// <summary>
-    ///     判断一段文本是不是「已经是中文」（有汉字、又不是假名为主）——已经是中文的不用再翻。
+    ///     判断一段文本是不是「已经是中文」——有汉字、又没有假名。
     /// </summary>
+    /// <remarks>
+    ///     与简介词表同一口径（2026-09-22 定）：日语要翻，所以带假名的不算「已是中文」。
+    ///     混在中文里的英文名字 / 命令（AutoHunt、Lifestream、/vnav）不改变判定——
+    ///     中文插件常见「中文句子 + 英文专名」，这类本来就不需要翻译（2026-10-02 修）。
+    /// </remarks>
     public static bool IsAlreadyChinese(string text)
     {
         var cjk = 0;
-        var latin = 0;
+        var kana = 0;
         foreach (var ch in text)
         {
             if (ch is >= '\u4e00' and <= '\u9fff')
             {
                 cjk++;
             }
-            else if (ch is >= 'A' and <= 'Z' or >= 'a' and <= 'z')
+            else if (ch is >= '\u3040' and <= '\u30ff' or >= '\u31f0' and <= '\u31ff' or >= '\uff66' and <= '\uff9d')
             {
-                latin++;
+                kana++;
             }
         }
 
-        return cjk > 0 && latin < 2;
+        return cjk > 0 && kana == 0;
     }
 
     /// <summary>

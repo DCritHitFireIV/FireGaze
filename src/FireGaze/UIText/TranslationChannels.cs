@@ -962,7 +962,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
             return (null, "大模型没有按 JSON 回答");
         }
 
-        var parsed = ParseTranslations(json);
+        var parsed = ParseTranslations(json) ?? ParseTranslations(UITextText.RepairJSON(json));
         if (parsed is null)
         {
             LogChunkFailure(chunk, "JSON 结构对不上", json, finishReason);

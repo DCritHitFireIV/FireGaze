@@ -51,6 +51,9 @@ internal sealed class UITextTab
         public bool HasMainUI;
 
         public bool HasConfigUI;
+
+        /// <summary>在「不汉化」名单里（中文插件，由朋友维护）：识别为中文插件，不抽取 / 不翻译 / 不打包 / 不上传。</summary>
+        public bool DoNotLocalize;
     }
 
     private sealed class RowNote
@@ -423,6 +426,26 @@ internal sealed class UITextTab
 
     private void DrawRowActions(InstalledPluginEntry plugin, RowInfo? info, bool running, bool busy, bool editorOpen, bool isOpen)
     {
+        if (info is { DoNotLocalize: true })
+        {
+            ImGui.TextDisabled("中文插件 · 不汉化");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("识别为中文插件（由朋友维护），FireGaze 不汉化它，避免增加维护负担。\n如果它身上还留着以前打的汉化补丁，可点「还原原文」恢复。");
+            }
+
+            if (info.HasBackup)
+            {
+                ImGui.SameLine(0, 12);
+                if (ImGui.Button("还原原文"))
+                {
+                    this.RestoreNow(plugin);
+                }
+            }
+
+            return;
+        }
+
         if (running)
         {
             ImGui.BeginDisabled();
@@ -510,6 +533,12 @@ internal sealed class UITextTab
             return;
         }
 
+        if (UITextRules.IsDoNotLocalize(entry.InternalName))
+        {
+            this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "识别为中文插件（由朋友维护），不上传它的译文。" };
+            return;
+        }
+
         var pack = this.store.Load(entry.InternalName);
         var entries = pack.Entries.Where(e => e.HasTranslation && !pack.IsSkipped(e.Original)).ToList();
         var resources = pack.Resources.Where(e => e.HasTranslation).ToList();
@@ -528,51 +557,89 @@ internal sealed class UITextTab
                 WriteIndented = true,
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             });
-        var header = $"### FireGaze 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{total}\n\n";
+        // 标题里带一个英文 "contributions"：兼容线上旧版 Worker 的关键词校验（2026-10-02 修 HTTP 400 的根因）
+        var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{total}\n\n";
         var body = header + "```json\n" + payload + "\n```\n";
         var title = $"[译文贡献] {entry.InternalName} · {total} 条";
 
         this.uploading.Add(entry.InternalName);
         _ = Task.Run(async () =>
         {
-            string text;
-            NoteKind kind;
-            if (body.Length <= ContributeRelay.MaxBody)
-            {
-                var (ok, message) = await ContributeRelay.TrySubmitAsync(title, body).ConfigureAwait(false);
-                if (ok)
-                {
-                    text = $"已上传 {total} 条译文到社区（issue：{message}），感谢！";
-                    kind = NoteKind.Good;
-                }
-                else
-                {
-                    text = $"上传没成功（{message}），已改为打开 GitHub 提交页：按 Submit 也一样。";
-                    kind = NoteKind.Bad;
-                    OpenIssue(ContributeRelay.BuildIssueURL(title, body));
-                }
-            }
-            else
-            {
-                text = $"译文较多（{total} 条），已打开 GitHub 提交页（内容已填好）。";
-                kind = NoteKind.Info;
-                OpenIssue(ContributeRelay.BuildIssueURL(title, body));
-            }
-
             try
             {
-                await Plugin.Framework.RunOnFrameworkThread(() =>
+                var relayError = string.Empty;
+                if (body.Length <= ContributeRelay.MaxBody)
                 {
-                    this.uploading.Remove(entry.InternalName);
-                    this.notes[entry.InternalName] = new RowNote { Kind = kind, Text = text };
-                    this.rowsDirty = true;
-                }).ConfigureAwait(false);
+                    var (ok, message) = await ContributeRelay.TrySubmitAsync(title, body).ConfigureAwait(false);
+                    if (ok)
+                    {
+                        await this.FinishUploadAsync(entry.InternalName, $"已上传 {total} 条译文到社区：{message}。感谢！", NoteKind.Good).ConfigureAwait(false);
+                        return;
+                    }
+
+                    relayError = message;
+                }
+
+                // 回退 1：正文放得进 URL —— 直接填好内容打开 GitHub 提交页
+                const int githubURLBodyLimit = 6000;
+                if (body.Length <= githubURLBodyLimit)
+                {
+                    var text = relayError.Length > 0
+                        ? $"上传没成功：{relayError}。已打开 GitHub 提交页，按 Submit 即可提交。"
+                        : $"译文较多，已打开 GitHub 提交页，按 Submit 即可提交。";
+                    OpenIssue(ContributeRelay.BuildIssueURL(title, body));
+                    await this.FinishUploadAsync(entry.InternalName, text, relayError.Length > 0 ? NoteKind.Bad : NoteKind.Info).ConfigureAwait(false);
+                    return;
+                }
+
+                // 回退 2：正文太长，URL 会被截断 —— 导出文件，让玩家拖进附件
+                var file = this.SaveUploadPayload(entry.InternalName, title, body);
+                var shortBody = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{total}\n\n条目较多，正文放不下；投稿文件见本 issue 的附件。\n";
+                var reason = relayError.Length > 0 ? $"上传没成功：{relayError}；" : string.Empty;
+                var longText = file is null
+                    ? $"{reason}条目较多（{total} 条），正文放不下 GitHub 的提交页，导出投稿文件也失败了。"
+                    : $"{reason}条目较多（{total} 条），正文放不下 GitHub 的提交页；已导出投稿文件：\n{file}\n请在打开的页面里把它拖进输入框作为附件，再按 Submit。";
+                OpenIssue(ContributeRelay.BuildIssueURL(title, shortBody));
+                await this.FinishUploadAsync(entry.InternalName, longText, NoteKind.Bad).ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 Plugin.Log?.Warning(e, "[内部文本] 上传结果回调调度失败");
             }
         });
+    }
+
+    /// <summary>上传任务的收尾：回主线程把行提示写上（上传是后台任务）。</summary>
+    private async Task FinishUploadAsync(string internalName, string text, NoteKind kind)
+    {
+        await Plugin.Framework.RunOnFrameworkThread(() =>
+        {
+            this.uploading.Remove(internalName);
+            this.notes[internalName] = new RowNote { Kind = kind, Text = text };
+            this.rowsDirty = true;
+        }).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    ///     正文太长（GitHub 提交页 URL 放不下）时把投稿存成本机文件，让玩家拖进 issue 附件。
+    ///     返回文件路径；写不出返回 null。
+    /// </summary>
+    private string? SaveUploadPayload(string internalName, string title, string body)
+    {
+        try
+        {
+            var parent = Path.GetDirectoryName(this.store.DirectoryPath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
+            var directory = Path.Combine(parent ?? this.store.DirectoryPath, "contributions");
+            Directory.CreateDirectory(directory);
+            var file = Path.Combine(directory, $"uit-{internalName}-{DateTime.Now:yyyyMMdd-HHmmss}.json");
+            File.WriteAllText(file, title + "\n\n" + body + "\n", new System.Text.UTF8Encoding(false));
+            return file;
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 导出投稿文件失败");
+            return null;
+        }
     }
 
     private static void OpenIssue(string url)
@@ -634,6 +701,21 @@ internal sealed class UITextTab
     private void DrawExpanded(InstalledPluginEntry plugin, RowInfo? info, bool busy, bool editorOpen)
     {
         ImGui.Indent(48f);
+
+        if (info is { DoNotLocalize: true })
+        {
+            ImGui.PushTextWrapPos(ImGui.GetCursorPosX() + ImGui.GetContentRegionAvail().X - 8);
+            ImGui.TextDisabled("识别为中文插件，不汉化。这个项目本身就是中文界面、由朋友维护，FireGaze 跳过它的抽取 / 翻译 / 打包 / 上传。");
+            ImGui.PopTextWrapPos();
+            if (info.HasBackup)
+            {
+                ImGui.Spacing();
+                ImGui.TextDisabled("检测到以前打过汉化补丁：可用行尾的「还原原文」恢复原版。");
+            }
+
+            ImGui.Unindent(48f);
+            return;
+        }
 
         var description = plugin.Description;
         if (string.IsNullOrWhiteSpace(description))
@@ -904,6 +986,11 @@ internal sealed class UITextTab
             return (active.Total > 0 ? $"翻译中 {active.Done} / {active.Total} 条" : active.Stage, UiHelpers.Info);
         }
 
+        if (info is { DoNotLocalize: true })
+        {
+            return ("中文插件 · 不汉化", UiHelpers.Muted);
+        }
+
         if (info is null || !info.HasPack)
         {
             return ("未汉化", UiHelpers.Muted);
@@ -1015,6 +1102,16 @@ internal sealed class UITextTab
             return;
         }
 
+        if (UITextRules.IsDoNotLocalize(entry.InternalName))
+        {
+            this.notes[entry.InternalName] = new RowNote
+            {
+                Kind = NoteKind.Info,
+                Text = "识别为中文插件（由朋友维护），FireGaze 不汉化它。",
+            };
+            return;
+        }
+
         if (!this.runs.TryEnter(entry.InternalName, "正在汉化 " + entry.DisplayName, out var reason))
         {
             this.notes[entry.InternalName] = new RowNote
@@ -1069,7 +1166,7 @@ internal sealed class UITextTab
                 this.FinishRun(run, new RowNote
                 {
                     Kind = NoteKind.Info,
-                    Text = "没找到可翻译的界面文本（插件可能带壳 / 加密，或界面本来就是中文）。",
+                    Text = DescribeNothingToTranslate(extraction),
                 });
                 return;
             }
@@ -1077,6 +1174,10 @@ internal sealed class UITextTab
             if (run.Mode == RunMode.ExtractOnly)
             {
                 var summary = $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条 · 已翻译 {pack.TranslatedTotal} 条";
+                if (extraction.ChineseExcludedCount > 0)
+                {
+                    summary += $" · 已是中文 {extraction.ChineseExcludedCount} 条";
+                }
                 if (merge.ResourceCount > 0 || merge.AttributeCount > 0)
                 {
                     summary += $" · 资源 {merge.ResourceCount}（已译 {pack.TranslatedResourceCount}）· 属性 {merge.AttributeCount}（已译 {pack.TranslatedAttributeCount}）";
@@ -1163,8 +1264,6 @@ internal sealed class UITextTab
                 var (applied, rejected, unchanged) = UITextFlow.AcceptTranslations(pack, result.Translated, channel.Name);
                 translatedCount = applied;
                 this.store.Save(entry.InternalName, pack, out _);
-                _ = rejected;
-                _ = unchanged;
 
                 if (result.Error is not null || applied == 0 && result.Failed.Count > 0)
                 {
@@ -1175,6 +1274,23 @@ internal sealed class UITextTab
                         Text = $"翻译失败：{reason}。已经翻好的 {pack.TranslatedCount} 条不会丢，原来的补丁也还在（界面不会变回英文）——"
                                + "等几分钟再点右侧「一键汉化」接着来；想稳定跑，去「翻译设置」里换成彩云小译（免费、有额度、一次 50 条）或自己的大模型 key。",
                         CanOpenSettings = true,
+                    });
+                    this.rowsDirty = true;
+                    return;
+                }
+
+                if (applied == 0 && pack.TranslatedTotal == 0)
+                {
+                    // 通道把候选原样返回（多是本来就无需翻译）——这不是「打补丁失败」，别按失败报
+                    var why = unchanged > 0
+                        ? $"{unchanged} 条候选的翻译结果与原文一致（多半本来就无需翻译）"
+                        : rejected > 0
+                            ? $"{rejected} 条没过占位符校验"
+                            : "翻译通道没有返回内容";
+                    this.FinishRun(run, new RowNote
+                    {
+                        Kind = NoteKind.Info,
+                        Text = $"没有可应用的译文：{why}。",
                     });
                     this.rowsDirty = true;
                     return;
@@ -1194,11 +1310,7 @@ internal sealed class UITextTab
             this.rowsDirty = true;
             if (!ok)
             {
-                this.FinishRun(run, new RowNote
-                {
-                    Kind = NoteKind.Bad,
-                    Text = message + "（点右侧「一键汉化」可以重来一次）",
-                });
+                this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = message });
                 return;
             }
 
@@ -1234,6 +1346,26 @@ internal sealed class UITextTab
             Plugin.Log?.Warning(e, "[内部文本] 一键汉化出错");
             this.FinishRun(run, new RowNote { Kind = NoteKind.Bad, Text = "出错：" + e.Message + "（点右侧「一键汉化」可以重来一次）" });
         }
+    }
+
+    /// <summary>
+    ///     什么都没得翻时把原因说清楚：是根本没抽到，还是抽到的都是中文，还是都进了命令/日志/键名这类不翻的桶。
+    ///     用户 2026-10-02 要求：「没有可以翻译的要直接和用户说，是未抽取到还是中文导致跳过的」。
+    /// </summary>
+    private static string DescribeNothingToTranslate(UITextExtraction extraction)
+    {
+        var chinese = extraction.ChineseExcludedCount;
+        if (chinese > 0)
+        {
+            var rest = extraction.Entries.Count - chinese;
+            return rest > 0
+                ? $"没有需要翻译的内容：抽到 {chinese} 条文本是中文（自动跳过），其余 {rest} 条是命令 / 日志 / 键名这类不翻的内容。"
+                : $"没有需要翻译的内容：抽到的 {chinese} 条文本全是中文，已经不需要翻译。";
+        }
+
+        return extraction.Entries.Count > 0
+            ? $"没有可翻译的界面文本：抽到 {extraction.Entries.Count} 条文本，但都是命令 / 日志 / 键名这类不翻的内容。"
+            : "没有抽取到可翻译的界面文本：这个 DLL 里没有找到界面文字。";
     }
 
     // ── 首次运行：选翻译方式 / 免费确认 ─────────────────────────────
@@ -1767,6 +1899,7 @@ internal sealed class UITextTab
                 var row = new RowInfo
                 {
                     EditorOpen = this.editor.IsOpen && string.Equals(this.editor.CurrentInternalName, entry.InternalName, StringComparison.Ordinal),
+                    DoNotLocalize = UITextRules.IsDoNotLocalize(entry.InternalName),
                 };
 
                 var pack = this.store.Load(entry.InternalName);

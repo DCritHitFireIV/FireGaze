@@ -70,13 +70,14 @@ internal static class UITextPatcher
         string targetPath,
         UITextPack pack,
         string? pluginVersion = null,
-        IReadOnlyList<string>? searchDirectories = null)
+        IReadOnlyList<string>? searchDirectories = null,
+        bool includeAmbiguous = false)
     {
         var outcome = new UITextPatchOutcome();
         var map = new Dictionary<string, UITextPackEntry>(StringComparer.Ordinal);
         foreach (var entry in pack.Entries)
         {
-            if (!entry.HasTranslation || pack.IsSkipped(entry.Original))
+            if (!entry.HasTranslation || pack.IsSkipped(entry.Original) || !entry.IsPatchable(includeAmbiguous))
             {
                 continue;
             }
@@ -109,7 +110,20 @@ internal static class UITextPatcher
         outcome.Candidates = map.Count + resourceMap.Count + attributeMap.Count;
         if (outcome.Candidates == 0)
         {
-            outcome.Error = "包里还没有可应用的译文。";
+            var total = pack.Entries.Count + pack.Resources.Count + pack.Attributes.Count;
+            if (total == 0)
+            {
+                outcome.Error = "译文包里还没有任何条目（先「一键汉化」或「抽取界面文本」）。";
+            }
+            else if (pack.TranslatedTotal == 0)
+            {
+                outcome.Error = "包里还没有译文（候选都还没翻，或都被标了「不翻」）。";
+            }
+            else
+            {
+                outcome.Error = "译文都有，但没有一条能写进 DLL（灰名单条目要打开「连灰名单一起翻」，或都被标了「不翻」）。";
+            }
+
             return outcome;
         }
 
@@ -172,7 +186,7 @@ internal static class UITextPatcher
 
                 if (outcome.PatchedTotal == 0)
                 {
-                    outcome.Error = "DLL 里没有找到任何一条能替换的文本（可能版本对不上）。";
+                    outcome.Error = $"译文有 {outcome.Candidates} 条，但在 DLL 里一条都没对上（可能插件版本变了，或盘上已经是打过补丁的文件）——先「还原原文」或重装插件再汉化。";
                     return outcome;
                 }
 
@@ -215,6 +229,240 @@ internal static class UITextPatcher
         }
 
         return outcome;
+    }
+
+    /// <summary>
+    ///     反向补丁（自救）：把 DLL 上我们自己打过的「译文」还原成原文，
+    ///     用来在丢了补丁记录 / 原始备份时重建一份可再打补丁的基线（2026-10-02 用户实测那批）。
+    /// </summary>
+    /// <remarks>
+    ///     匹配规则（按优先级）：<br />
+    ///     ① 字面量以 <c>###原文</c> 结尾（含原文自带 ### 的、以及历史上双层拼接过的形态）→ 整条换成原文；<br />
+    ///     ② 字面量正好等于某条译文，且这个译文只对应一条原文 → 换成原文（多对一就跳过，宁可不还原也不乱还原）；<br />
+    ///     ③ 内嵌资源：按「容器 + key + 当前值 = 译文」换回原文（逐 key 比，不跨 key 猜）。<br />
+    ///     只碰包里有译文的条目，其它字节不动；不是「打过补丁」的文件会回到 0 条。
+    /// </remarks>
+    public static UITextPatchOutcome Revert(
+        string sourcePath,
+        string targetPath,
+        UITextPack pack,
+        IReadOnlyList<string>? searchDirectories = null)
+    {
+        var outcome = new UITextPatchOutcome();
+        var suffixMap = new Dictionary<string, string>(StringComparer.Ordinal);
+        var exactMap = new Dictionary<string, string>(StringComparer.Ordinal);
+        var ambiguous = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var entry in pack.Entries)
+        {
+            if (!entry.HasTranslation || pack.IsSkipped(entry.Original))
+            {
+                continue;
+            }
+
+            var original = entry.Original;
+            var translated = entry.Translated.Trim();
+            if (string.Equals(original, translated, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            suffixMap.TryAdd("###" + original, original);
+            if (exactMap.TryGetValue(translated, out var existing) && !string.Equals(existing, original, StringComparison.Ordinal))
+            {
+                ambiguous.Add(translated);
+            }
+            else
+            {
+                exactMap[translated] = original;
+            }
+        }
+
+        foreach (var value in ambiguous)
+        {
+            exactMap.Remove(value);
+        }
+
+        if (suffixMap.Count == 0 && exactMap.Count == 0)
+        {
+            outcome.Error = "译文包里没有可反向还原的译文。";
+            return outcome;
+        }
+
+        var tempPath = targetPath + ".fguitext.tmp";
+        try
+        {
+            using (var module = UIStringExtractor.LoadModule(sourcePath, searchDirectories))
+            {
+                foreach (var type in module.GetTypes())
+                {
+                    foreach (var method in type.Methods)
+                    {
+                        if (!method.HasBody)
+                        {
+                            continue;
+                        }
+
+                        foreach (var instruction in method.Body.Instructions)
+                        {
+                            if (instruction.OpCode.Code != Code.Ldstr || instruction.Operand is not string literal)
+                            {
+                                continue;
+                            }
+
+                            var recovered = RecoverLiteral(literal, suffixMap, exactMap);
+                            if (recovered is null || string.Equals(recovered, literal, StringComparison.Ordinal))
+                            {
+                                continue;
+                            }
+
+                            instruction.Operand = recovered;
+                            outcome.PatchedLiterals++;
+                        }
+                    }
+                }
+
+                RevertResources(module, pack, outcome);
+
+                if (outcome.PatchedTotal == 0)
+                {
+                    outcome.Error = "这个 DLL 里没有找到我们打过的补丁痕迹。";
+                    return outcome;
+                }
+
+                module.Write(tempPath);
+            }
+
+            File.Move(tempPath, targetPath, overwrite: true);
+        }
+        catch (Exception e)
+        {
+            outcome.Error = $"{e.GetType().Name}: {e.Message}";
+            TryDelete(tempPath);
+            return outcome;
+        }
+
+        return outcome;
+    }
+
+    /// <summary>
+    ///     按「<c>###原文</c> 后缀 / 译文精确匹配」还原一条字面量；还原不了返回 null（纯函数，方便离线测）。
+    /// </summary>
+    public static string? RecoverLiteral(
+        string literal,
+        IReadOnlyDictionary<string, string> suffixMap,
+        IReadOnlyDictionary<string, string> exactMap)
+    {
+        var index = literal.IndexOf(UITextText.IDSeparator, StringComparison.Ordinal);
+        while (index >= 0)
+        {
+            if (suffixMap.TryGetValue(literal[index..], out var bySuffix)
+                && !string.Equals(bySuffix, literal, StringComparison.Ordinal))
+            {
+                return bySuffix;
+            }
+
+            index = literal.IndexOf(UITextText.IDSeparator, index + UITextText.IDSeparator.Length, StringComparison.Ordinal);
+        }
+
+        return exactMap.TryGetValue(literal, out var byExact) && !string.Equals(byExact, literal, StringComparison.Ordinal)
+            ? byExact
+            : null;
+    }
+
+    /// <summary>
+    ///     内嵌资源反向还原：逐 key 看「当前值 == 这条的译文」才换回原文（不跨 key 猜）。
+    /// </summary>
+    private static void RevertResources(ModuleDefMD module, UITextPack pack, UITextPatchOutcome outcome)
+    {
+        var byContainer = new Dictionary<string, Dictionary<string, UITextResourceEntry>>(StringComparer.Ordinal);
+        foreach (var entry in pack.Resources)
+        {
+            if (!entry.HasTranslation || pack.IsResourceSkipped(entry.Container, entry.Key))
+            {
+                continue;
+            }
+
+            if (!byContainer.TryGetValue(entry.Container, out var keys))
+            {
+                keys = new Dictionary<string, UITextResourceEntry>(StringComparer.Ordinal);
+                byContainer[entry.Container] = keys;
+            }
+
+            keys[entry.Key] = entry;
+        }
+
+        if (byContainer.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var resource in module.Resources.ToList())
+        {
+            if (resource is not EmbeddedResource embedded)
+            {
+                continue;
+            }
+
+            var container = embedded.Name?.String ?? string.Empty;
+            if (!byContainer.TryGetValue(container, out var keys))
+            {
+                continue;
+            }
+
+            try
+            {
+                var data = embedded.CreateReader().ToArray();
+                var items = new List<(string Key, object? Value)>();
+                var changed = false;
+                using (var reader = new ResourceReader(new MemoryStream(data)))
+                {
+                    foreach (DictionaryEntry item in reader)
+                    {
+                        if (item.Key is not string resourceKey)
+                        {
+                            throw new NotSupportedException("容器里出现了非字符串的 key");
+                        }
+
+                        if (item.Value is string value
+                            && keys.TryGetValue(resourceKey, out var entry)
+                            && string.Equals(value, entry.Translated.Trim(), StringComparison.Ordinal))
+                        {
+                            items.Add((resourceKey, entry.Original));
+                            changed = true;
+                        }
+                        else
+                        {
+                            items.Add((resourceKey, item.Value));
+                        }
+                    }
+                }
+
+                if (!changed)
+                {
+                    continue;
+                }
+
+                var stream = new MemoryStream();
+                using (var writer = new ResourceWriter(stream))
+                {
+                    foreach (var (key, value) in items)
+                    {
+                        writer.AddResource(key, value);
+                    }
+
+                    writer.Generate();
+                }
+
+                module.Resources.Remove(embedded);
+                module.Resources.Add(new EmbeddedResource(container, stream.ToArray(), embedded.Attributes));
+                outcome.PatchedResources++;
+            }
+            catch (Exception e)
+            {
+                outcome.Missing.Add($"资源：{container}（反向重写失败：{e.Message}）");
+            }
+        }
     }
 
     /// <summary>

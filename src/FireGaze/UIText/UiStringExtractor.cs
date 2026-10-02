@@ -2454,7 +2454,9 @@ public static class UIStringExtractor
                         Original = literal.Text,
                         Context = literal.Context,
                         Role = UITextRole.Excluded,
-                        Reason = "没有可翻译的英文内容",
+                        Reason = UITextText.IsAlreadyChinese(literal.Text)
+                            ? "已是中文，无需翻译"
+                            : "没有可翻译的英文内容",
                     });
                     continue;
                 }
@@ -3131,23 +3133,11 @@ public static class UIStringExtractor
             }
 
             var letters = 0;
-            var latin = 0;
-            var cjk = 0;
             foreach (var ch in text)
             {
                 if (char.IsLetter(ch))
                 {
                     letters++;
-                }
-
-                if (ch is >= 'A' and <= 'Z' or >= 'a' and <= 'z')
-                {
-                    latin++;
-                }
-
-                if (ch is >= '\u4e00' and <= '\u9fff')
-                {
-                    cjk++;
                 }
             }
 
@@ -3156,8 +3146,9 @@ public static class UIStringExtractor
                 return false;
             }
 
-            // 已经是中文的（有汉字、又没有英文单词）不需要再翻，也不该进贡献库
-            if (cjk > 0 && latin < 2)
+            // 已经是中文的（有汉字、没有假名）不需要再翻——与简介词表同一口径：
+            // 日语带假名要翻，所以带假名的不算「已是中文」；中文插件里夹的英文专名/命令也不改判定。
+            if (UITextText.IsAlreadyChinese(text))
             {
                 return false;
             }

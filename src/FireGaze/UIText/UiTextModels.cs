@@ -137,4 +137,10 @@ public sealed class UITextExtraction
     ///     灰名单条数（既像 UI 又像功能串）。
     /// </summary>
     public int AmbiguousCount => Entries.Count(e => e.Role == UITextRole.Ambiguous);
+
+    /// <summary>
+    ///     被判「已是中文」排除的条数（没东西可翻时用它把原因说清楚：不是没抽到，是本来就中文）。
+    /// </summary>
+    public int ChineseExcludedCount => Entries.Count(
+        e => e.Role == UITextRole.Excluded && e.Reason.StartsWith("已是中文", StringComparison.Ordinal));
 }

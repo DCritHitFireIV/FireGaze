@@ -36,6 +36,11 @@ function allow(ip) {
 
 export default {
   async fetch(request, env) {
+    // 健康检查：部署后用 GET 验证新版已生效（旧版会返回 405）
+    if (request.method === 'GET') {
+      return json({ ok: true, service: 'firegaze-relay', version: 2 });
+    }
+
     if (request.method !== 'POST') {
       return json({ ok: false, error: 'POST only' }, 405);
     }
@@ -60,7 +65,8 @@ export default {
     if (body.length > MAX_BODY) {
       return json({ ok: false, error: 'body too large' }, 413);
     }
-    if (!body.includes('```json') || !body.includes('contributions')) {
+    // 两类投稿都收：简介词表（contributions）、插件界面文字（uit-contribution）
+    if (!body.includes('```json') || (!body.includes('contributions') && !body.includes('uit-contribution'))) {
       return json({ ok: false, error: 'not a FireGaze contribution payload' }, 400);
     }
     if (!env.GITHUB_TOKEN) {

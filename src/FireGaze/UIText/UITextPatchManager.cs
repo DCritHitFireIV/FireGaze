@@ -223,8 +223,30 @@ internal sealed class UITextPatchManager
     /// <summary>
     ///     把包里的译文打进插件 DLL（不自动重载）。
     /// </summary>
+    /// <remarks>
+    ///     失败时把这次新建的备份清掉——不然会留下一堆「当前文件的快照」（既不是原始件，又会被后来者当成备份），
+    ///     2026-10-02 ActionTimelineReborn / DailyRoutines 实测就是这么被坑的。
+    /// </remarks>
     public (bool Ok, string Message) Apply(InstalledPluginEntry entry)
     {
+        var backupsBefore = this.SnapshotBackupFiles();
+        var (ok, message) = this.ApplyCore(entry);
+        if (!ok)
+        {
+            this.DeleteUnreferencedBackups(backupsBefore);
+        }
+
+        return (ok, message);
+    }
+
+    /// <summary>打补丁的主体（失败清理包在外面，见 <see cref="Apply" />）。</summary>
+    private (bool Ok, string Message) ApplyCore(InstalledPluginEntry entry)
+    {
+        if (UITextRules.IsDoNotLocalize(entry.InternalName))
+        {
+            return (false, "识别为中文插件（由朋友维护），FireGaze 不汉化它。");
+        }
+
         var dllPath = entry.DLLPath;
         if (string.IsNullOrEmpty(dllPath) || !File.Exists(dllPath))
         {
@@ -309,7 +331,12 @@ internal sealed class UITextPatchManager
             UITextPatchOutcome outcome;
             try
             {
-                outcome = UITextPatcher.Patch(fileState.Path, newPath, pack, entry.Version);
+                outcome = UITextPatcher.Patch(
+                    fileState.Path,
+                    newPath,
+                    pack,
+                    entry.Version,
+                    includeAmbiguous: this.plugin.Config.UITextTranslateGreyList);
             }
             catch (Exception e)
             {
@@ -438,6 +465,14 @@ internal sealed class UITextPatchManager
     /// </remarks>
     public (UITextExtraction Extraction, string Note) ExtractWithGuard(InstalledPluginEntry entry)
     {
+        if (UITextRules.IsDoNotLocalize(entry.InternalName))
+        {
+            return (new UITextExtraction
+            {
+                Error = "识别为中文插件（由朋友维护），FireGaze 不汉化它。",
+            }, string.Empty);
+        }
+
         var sources = this.ExtractionSourceOf(entry, out var note, out var searchDirectories);
         var extraction = UIStringExtractor.ExtractMany(sources, searchDirectories);
         if (extraction.Error is not null || !LooksLikePatchedDLL(extraction, entry.InternalName))
@@ -468,6 +503,18 @@ internal sealed class UITextPatchManager
                 return (retry, note);
             }
         }
+        else
+        {
+            // 没有补丁记录、备份也指望不上（历史上的失败退路会在盘上留下「当前文件的快照」）——
+            // 试试从已打的补丁反向还原出原文（2026-10-02 ActionTimelineReborn / DailyRoutines 实测）。
+            var recovered = this.TryRecoverPatchedDLL(entry, sources, searchDirectories, out var recoveryNote);
+            if (recovered is not null)
+            {
+                note = (note.Length > 0 ? note + "；" : string.Empty) + recoveryNote;
+                Plugin.Log?.Information($"[内部文本] {entry.InternalName}：{recoveryNote}");
+                return (recovered, note);
+            }
+        }
 
         Plugin.Log?.Warning($"[内部文本] {entry.InternalName}：抽取结果里有一批「译文###原文」形态的文本，且没有可用备份——已停下（避免污染译文包）");
         return (new UITextExtraction
@@ -478,6 +525,121 @@ internal sealed class UITextPatchManager
             Attributes = extraction.Attributes,
             Error = "这个 DLL 上已经有一批我们打过的汉化补丁，而且找不到可还原的原始备份（backups 目录为空或被清过）。先停下，避免把假原文灌进译文包。恢复办法：在插件安装器里把这个插件重新安装一次（回到原版），再点「一键汉化」——译文包与公共库里的译文都还在。",
         }, note);
+    }
+
+    /// <summary>
+    ///     盘上是我们打的补丁、但没有任何补丁记录时的自救：
+    ///     用译文包反向把补丁还原成原文（存成新备份 + 补一条状态），再从还原出的原文抽取。
+    /// </summary>
+    /// <remarks>
+    ///     还原量太少（&lt; 3 条，或不到包里译文数的一半）就认为不可信，返回 null，让调用方走「停下」的提示。
+    ///     宁可让用户重装插件，也不拿一份拼凑出来的「原文」去重打。
+    /// </remarks>
+    private UITextExtraction? TryRecoverPatchedDLL(
+        InstalledPluginEntry entry,
+        List<string> sources,
+        List<string> searchDirectories,
+        out string note)
+    {
+        note = string.Empty;
+        var pack = this.packs.Load(entry.InternalName);
+        if (pack is null || pack.TranslatedCount == 0)
+        {
+            return null;
+        }
+
+        var tempDirectory = Path.Combine(Path.GetTempPath(), "firegaze-recover-" + Guid.NewGuid().ToString("N")[..8]);
+        try
+        {
+            Directory.CreateDirectory(tempDirectory);
+            var recoveredPaths = new List<string>();
+            var fileStates = new List<UITextPatchFile>();
+            var totalReverted = 0;
+            foreach (var source in sources)
+            {
+                if (!File.Exists(source))
+                {
+                    continue;
+                }
+
+                var recovered = Path.Combine(tempDirectory, Path.GetFileName(source));
+                var outcome = UITextPatcher.Revert(source, recovered, pack, searchDirectories);
+                if (!outcome.Ok || outcome.PatchedTotal == 0)
+                {
+                    continue;
+                }
+
+                var recoveredHash = UITextPatchStore.HashOf(recovered);
+                var currentHash = UITextPatchStore.HashOf(source);
+                if (recoveredHash.Length == 0 || currentHash.Length == 0)
+                {
+                    continue;
+                }
+
+                var backup = this.store.Backup(entry.InternalName, recovered, recoveredHash);
+                if (backup is null)
+                {
+                    continue;
+                }
+
+                recoveredPaths.Add(recovered);
+                fileStates.Add(new UITextPatchFile
+                {
+                    Path = source,
+                    SourceHash = recoveredHash,
+                    PatchedHash = currentHash,
+                    BackupPath = backup,
+                });
+                totalReverted += outcome.PatchedTotal;
+            }
+
+            if (fileStates.Count == 0 || totalReverted < 3 || totalReverted < pack.TranslatedCount / 2)
+            {
+                return null;
+            }
+
+            var main = fileStates[0];
+            this.store.Save(new UITextPatchState
+            {
+                InternalName = entry.InternalName,
+                DLLPath = main.Path,
+                PluginVersion = entry.Version,
+                SourceHash = main.SourceHash,
+                PatchedHash = main.PatchedHash,
+                PatchedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                BackupPath = main.BackupPath,
+                AppliedEntries = totalReverted,
+                Files = fileStates,
+                PendingVerify = false,
+            });
+
+            note = $"盘上还留着我们打过的补丁但丢了记录，已从补丁反向还原出原文文件（{totalReverted} 处）并恢复了补丁记录";
+            return UIStringExtractor.ExtractMany(recoveredPaths, searchDirectories);
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, $"[内部文本] {entry.InternalName}：反向还原失败");
+            return null;
+        }
+        finally
+        {
+            TryDeleteDirectory(tempDirectory);
+        }
+    }
+
+    private static void TryDeleteDirectory(string path)
+    {
+        try
+        {
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, recursive: true);
+            }
+        }
+        catch (Exception)
+        {
+            // 临时目录删不掉无所谓
+        }
     }
 
     /// <summary>
@@ -496,8 +658,10 @@ internal sealed class UITextPatchManager
         }
 
         var translations = new HashSet<string>(StringComparer.Ordinal);
+        var originals = new HashSet<string>(StringComparer.Ordinal);
         foreach (var item in pack.Entries)
         {
+            originals.Add(item.Original.Trim());
             if (item.HasTranslation)
             {
                 translations.Add(item.Translated.Trim());
@@ -512,18 +676,33 @@ internal sealed class UITextPatchManager
         var patched = 0;
         foreach (var item in extraction.Entries)
         {
-            if (item.Role != UITextRole.UI)
-            {
-                continue;
-            }
-
-            var mark = item.Original.IndexOf("###", StringComparison.Ordinal);
+            // 不再只看 UI：中文判定会把「译文###原文」当成「已是中文」排掉，
+            // 那种条目恰恰是最硬的补丁证据（2026-10-02 修）。
+            var mark = item.Original.IndexOf(UITextText.IDSeparator, StringComparison.Ordinal);
             if (mark <= 0)
             {
                 continue;
             }
 
-            if (translations.Contains(item.Original[..mark].Trim()))
+            var prefix = item.Original[..mark].Trim();
+            if (translations.Contains(prefix))
+            {
+                patched++;
+                continue;
+            }
+
+            // 译文改过 / 包换过时再来一道保险：看「### 之后」是不是包里的原文。
+            // 覆盖 T###原文 与  译文##ID###原文（历史上双层拼接过的形态），不靠文案前缀猜。
+            var matched = false;
+            var index = mark;
+            while (index >= 0 && !matched)
+            {
+                var suffix = item.Original[(index + UITextText.IDSeparator.Length)..].Trim();
+                matched = originals.Contains(suffix);
+                index = item.Original.IndexOf(UITextText.IDSeparator, index + UITextText.IDSeparator.Length, StringComparison.Ordinal);
+            }
+
+            if (matched)
             {
                 patched++;
             }
@@ -544,6 +723,63 @@ internal sealed class UITextPatchManager
         catch (Exception)
         {
             // 临时文件删不掉无所谓
+        }
+    }
+
+    /// <summary>备份目录当前的全部备份文件（给「失败后清理新备份」用）。</summary>
+    private HashSet<string> SnapshotBackupFiles()
+    {
+        var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        try
+        {
+            var directory = Path.Combine(this.plugin.ConfigDirectory, "uitrans", "backups");
+            if (Directory.Exists(directory))
+            {
+                foreach (var file in Directory.GetFiles(directory, "*.dll"))
+                {
+                    result.Add(file);
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // 列不出来就不清理（宁可留垃圾也不误删）
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     删掉「这次新出现、又没有任何状态引用」的备份文件（打补丁失败后的退路清理）。
+    ///     已被某个状态引用的（可能是唯一的原始件）绝不碰。
+    /// </summary>
+    private void DeleteUnreferencedBackups(HashSet<string> before)
+    {
+        try
+        {
+            var referenced = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var state in this.store.ListAll())
+            {
+                foreach (var file in state.EffectiveFiles)
+                {
+                    if (!string.IsNullOrEmpty(file.BackupPath))
+                    {
+                        referenced.Add(file.BackupPath);
+                    }
+                }
+            }
+
+            foreach (var path in this.SnapshotBackupFiles())
+            {
+                if (!before.Contains(path) && !referenced.Contains(path))
+                {
+                    TryDelete(path);
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // 清理是尽力而为
         }
     }
 

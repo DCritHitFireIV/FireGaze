@@ -184,6 +184,34 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   · 没有译文、也没有来源的**空壳条目**直接删掉（多半是抽错产生的噪声）；
   · 用户手动标记「不翻」时要清掉自动备注，从此归用户管。
 
+## 「不汉化」名单（2026-10-02 用户定）
+
+- 名单（内部名）：`AEAssistV3` / `AEAssist` / `DailyRoutines` / `OmniToolbox` / `XSZToolbox` / `KodakkuAssist` /
+  `PromeRotation` / `NyaDraw` / `I-Ching-GL` / `MissFisher` / `LightlessSync` / `LightlessCN`。
+- 理由（用户原话口径）：这些是复杂项目、由朋友维护，汉化只会增加对方的维护负担；而且本来就是中文插件。
+- 行为：列表里显示「中文插件 · 不汉化」，不提供一键汉化 / 抽取 / 编辑 / 上传；
+  管理器层（`Apply` / `ExtractWithGuard`）另有一道拦截，绕过界面也打不进补丁；CI 的 `uit_library_build.py`
+  同样过滤，云端库不会给它们出包。有补丁记录的仍可点「还原原文」恢复。
+
+## 中文判定与「没东西可翻」的提示（2026-10-02 用户要求）
+
+- 「已是中文」的口径与简介词表统一：**有汉字、没有假名**（日语要翻）——中文插件里夹的英文专名 / 命令
+  （`AutoHunt 悬浮窗###AutoHuntFloat`、`使用 /vnav flyflag…`）不再被当成待翻文本。
+- 什么都没得翻时必须说清原因，而不是一句「没找到」：
+  · 抽到 0 条 →「没有抽取到可翻译的界面文本」；
+  · 抽到的都是中文 →「没有需要翻译的内容：抽到的 N 条文本全是中文」；
+  · 抽到但都是命令 / 日志 / 键名 → 第三种说法；
+  · 翻出来与原文一致（多半本来就无需翻译）→ 报 Info，不再按翻译失败报。
+
+## 投稿中继的 400（2026-10-02 修）
+
+- 症状：插件行「一键上传」全部 `HTTP 400`。根因：线上 Worker 的关键词校验只认 `contributions`，
+  而插件界面文字的投稿正文是 `uit-contribution`（单数）——两者都不包含校验词。
+- 修法：客户端标题行改成 `### FireGaze contributions · 插件界面文字译文贡献`（兼容线上旧 Worker，**不必等重新部署**）；
+  同时更新 `scripts/relay/worker.js`（两类投稿都收 + `GET` 健康检查 `version: 2`），部署后可直接 `curl` 验证。
+- 顺带：客户端不再只显示 `HTTP 400`——会读 Worker 返回的 `error/detail`；正文超过 6000 字符时
+  不再拼进 GitHub 提交页 URL（会被截断），改为导出 `contributions/uit-<插件>-<时间>.json` 并提示拖进附件。
+
 ## 打补丁的安全网（顺序即优先级）
 
 1. **先备份**：原始 DLL 复制到 `<配置目录>/uitrans/backups/<内部名>-<哈希前12位>.dll`，插件目录只留最终 DLL；

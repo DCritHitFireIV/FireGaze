@@ -42,6 +42,28 @@ internal sealed class UITextPackEntry
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public bool PreserveID { get; set; }
 
+    /// <summary>
+    ///     最近一次抽取的判定：<c>UI</c> / <c>Ambiguous</c>（灰名单）。空 = 按 UI（旧包 / 公共库）。
+    ///     打补丁时用它做闸门：灰名单只有在「连灰名单一起翻」或玩家自己译过时才会写进 DLL。
+    /// </summary>
+    [JsonPropertyName("Role")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Role { get; set; }
+
+    /// <summary>判定的依据（灰名单的原因，给编辑器/排查用）。</summary>
+    [JsonPropertyName("RoleReason")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? RoleReason { get; set; }
+
+    [JsonIgnore]
+    public bool IsAmbiguous => string.Equals(this.Role, "Ambiguous", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    ///     这一条能不能打进补丁：UI 永远能；灰名单只在「连灰名单一起翻」开着、或玩家自己译过时能。
+    ///     没有判定（旧包 / 公共库）按 UI 对待。
+    /// </summary>
+    public bool IsPatchable(bool includeAmbiguous) => !this.IsAmbiguous || includeAmbiguous || this.IsUserSource;
+
     [JsonIgnore]
     public bool IsUserSource => string.Equals(Source, "user", StringComparison.OrdinalIgnoreCase);
 
