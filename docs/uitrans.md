@@ -198,8 +198,11 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 ## 「不汉化」名单（2026-10-02 用户定）
 
 - 名单（内部名）：`AEAssistV3` / `AEAssist` / `DailyRoutines` / `OmniToolbox` / `XSZToolbox` / `KodakkuAssist` /
-  `PromeRotation` / `NyaDraw` / `I-Ching-GL` / `MissFisher` / `LightlessSync` / `LightlessCN`。
+  `PromeRotation` / `NyaDraw` / `I-Ching-GL` / `MissFisher` / `LightlessSync` / `LightlessCN` /
+  `SillyToolbox` / `pvpauto`。
 - 理由（用户原话口径）：这些是复杂项目、由朋友维护，汉化只会增加对方的维护负担；而且本来就是中文插件。
+  后两个是 2026-10-02 普查后按同一原则补进名单的——`SillyToolbox` 自述「给自己和亲友用的小功能」、
+  `pvpauto` 是中文作者的自动化工具，两者中文文件都完整，本来也翻不出东西。
 - 行为：列表里显示「中文插件 · 不汉化」，不提供一键汉化 / 抽取 / 编辑 / 上传；
   管理器层（`Apply` / `ExtractWithGuard`）另有一道拦截，绕过界面也打不进补丁；CI 的 `uit_library_build.py`
   同样过滤，云端库不会给它们出包。有补丁记录的仍可点「还原原文」恢复。
@@ -526,7 +529,7 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 | BOCCHI | `Translations/{en,zh}/*.json`（各 23 文件） | 727 | 0（完整） |
 | Henchman | `Localization/{de,en,fr,jp,ko,tw,zh}/*.json`（各 16 文件） | 202 | 0（完整） |
 | Aetherphone | `Localization/{en,zh,…}.json` | 6739 | **0（完整）**——早先一版人工普查误记成「没有 zh」，实际有完整 `zh.json` |
-| SillyToolbox | `Assets/Localization/{en,zh-Hans,zh-Hant}.json` | 323 | 0（完整；目录嵌套，当前扫描器到不了，见下） |
+| SillyToolbox | `Assets/Localization/{en,zh-Hans,zh-Hant}.json` | 323 | 0（完整；2026-10-02 起列入「不汉化」名单） |
 | pvpauto | `Assets/Langs/{English,Chinese}.json` | 631 | 0（完整；同上） |
 | DailyRoutines / NyaDraw / KodakkuAssist | `Assets/Langs` ×2 / `Module/Langs`（.resx） | — | 不参与（在「不汉化」名单里，朋友维护的中文插件） |
 
@@ -552,7 +555,7 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
     （当初以为 Aetherphone 没有 zh，实测它其实是完整的）。
   · **扫描器到不了的地方（已知边界）**：只认插件目录**下一层**的语言目录（`Localization/…`、`I18N/…` 等）
     与根目录的语言文件；`Assets/Langs`、`Assets/Localization`、`Module/Langs` 这类**嵌套**布局、以及
-    `English.json`/`Chinese.json` 这类**按语言全名命名**的文件不在范围内。受影响的两个插件（SillyToolbox、pvpauto）
-    目前中文完整、且是中文作者的小工具；真需要时再扩扫描器（别顺手把朋友维护的插件揽进来）。
+    `English.json`/`Chinese.json` 这类**按语言全名命名**的文件不在范围内。受影响的 SillyToolbox / pvpauto
+    现已列入「不汉化」名单（中文完整、中文作者维护），不需要为它们扩扫描器。
   · fgtest：`本地化文件：缺键候选 / JSON 指针 / 写入不覆盖上游译文 全过`（含 `.Raw` 排除、二次写入改译文、
     结构保护、同名文件备份不串）。

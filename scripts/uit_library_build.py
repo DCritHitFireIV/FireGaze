@@ -53,7 +53,7 @@ DEFAULT_GLOSSARY = os.path.join(REPO_ROOT, "ffxiv-glossary.tsv")
 DO_NOT_LOCALIZE = {
     "aeassistv3", "aeassist", "dailyroutines", "omnitoolbox", "xsztoolbox",
     "kodakkuassist", "promerotation", "nyadraw", "i-ching-gl", "missfisher",
-    "lightlesssync", "lightlesscn",
+    "lightlesssync", "lightlesscn", "sillytoolbox", "pvpauto",
 }
 
 TRANSLATE_PROMPT = (

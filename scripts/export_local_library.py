@@ -40,7 +40,7 @@ DEFAULT_OUT_DIR = os.path.join(
 DO_NOT_LOCALIZE = {
     "aeassistv3", "aeassist", "dailyroutines", "omnitoolbox", "xsztoolbox",
     "kodakkuassist", "promerotation", "nyadraw", "i-ching-gl", "missfisher",
-    "lightlesssync", "lightlesscn",
+    "lightlesssync", "lightlesscn", "sillytoolbox", "pvpauto",
 }
 
 
