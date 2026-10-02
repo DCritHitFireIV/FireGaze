@@ -1,4 +1,5 @@
 using System.Reflection;
+using FireGaze.Internal;
 using FireGaze.RepoAudit;
 
 namespace FireGaze.UIText;
@@ -395,11 +396,11 @@ internal sealed class UITextPatchManager
 
                 try
                 {
-                    File.Copy(old.BackupPath!, path, overwrite: true);
+                    AtomicFile.ReplaceFrom(old.BackupPath!, path);
                 }
                 catch (Exception e)
                 {
-                    return (false, $"还原旧补丁失败（{Path.GetFileName(path)}）：{e.Message}");
+                    return (false, $"还原旧补丁失败（{Path.GetFileName(path)}）：{e.GetBaseException().Message}");
                 }
             }
         }
@@ -514,7 +515,7 @@ internal sealed class UITextPatchManager
                 {
                     try
                     {
-                        File.Copy(fileState.BackupPath!, fileState.Path, overwrite: true);
+                        AtomicFile.ReplaceFrom(fileState.BackupPath!, fileState.Path);
                     }
                     catch (Exception)
                     {
@@ -1372,13 +1373,15 @@ internal sealed class UITextPatchManager
 
             try
             {
-                File.Copy(file.BackupPath!, target, overwrite: true);
+                // 已加载的插件 DLL 不能用 File.Copy 直接覆盖（共享冲突）——见 AtomicFile.ReplaceFrom 注释
+                AtomicFile.ReplaceFrom(file.BackupPath!, target);
                 restored++;
             }
             catch (Exception e)
             {
-                this.store.Save(state with { LastError = "还原失败：" + e.Message });
-                return (false, $"还原 {Path.GetFileName(target)} 失败：{e.Message}");
+                var why = e.GetBaseException().Message;
+                this.store.Save(state with { LastError = "还原失败：" + why });
+                return (false, $"还原 {Path.GetFileName(target)} 失败：{why}");
             }
         }
 

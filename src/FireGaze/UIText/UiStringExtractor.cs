@@ -3345,6 +3345,16 @@ public static class UIStringExtractor
                 return false;
             }
 
+            // 「 ###ID」这类（带前导空格 / 只有 ID 没有文字）：去掉 ### 后面的控件 ID 后，
+            // 显示部分是空白——玩家看不到任何文字，翻译也无处可写。
+            // 2026-10-03 实测：ChilledLeves 的 ` ###ChilledLevesMainWindow` 等 5 条被判成 UI，
+            // 翻译时必然失败，用户看到「翻译失败 5 条」。
+            if (text.Contains(UITextText.IDSeparator, StringComparison.Ordinal)
+                && UITextText.ForDisplay(text).Trim().Length == 0)
+            {
+                return false;
+            }
+
             // snake_case 小写标识符（base_search_popup 之类）基本是内部名
             if (text.Contains('_', StringComparison.Ordinal) && text.All(c => char.IsLower(c) || char.IsAsciiDigit(c) || c == '_'))
             {

@@ -27,6 +27,44 @@ internal static class AtomicFile
         File.Move(temp, path, overwrite: true);
     }
 
+    /// <summary>
+    ///     用 <paramref name="sourcePath" /> 覆盖 <paramref name="targetPath" />：先拷到同目录临时文件，再原子替换。
+    ///     <para>
+    ///     不要直接 <c>File.Copy(source, target, overwrite: true)</c> 覆盖插件 DLL：目标文件被进程占用时会被
+    ///     拒绝写入（共享冲突），而临时文件 + <c>File.Move</c> 替换不受影响——2026-10-03「还原原文」在已加载
+    ///     插件上报红的根因（写入补丁走的本来就是 Move，所以只有还原会失败）。
+    ///     </para>
+    /// </summary>
+    public static void ReplaceFrom(string sourcePath, string targetPath)
+    {
+        var temp = targetPath + ".fg-replace.tmp";
+        try
+        {
+            File.Copy(sourcePath, temp, overwrite: true);
+            File.Move(temp, targetPath, overwrite: true);
+        }
+        catch
+        {
+            TryDelete(temp);
+            throw;
+        }
+    }
+
+    private static void TryDelete(string path)
+    {
+        try
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+        catch
+        {
+            // 清理临时文件失败不影响调用方拿到的原始异常
+        }
+    }
+
     public static async Task WriteAllTextAsync(
         string path,
         string content,

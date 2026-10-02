@@ -29,9 +29,23 @@ internal static class PluginEnableBridge
         }
         catch (Exception e)
         {
-            return (false, $"启用插件出错：{e.GetType().Name}: {e.Message}");
+            var inner = e.GetBaseException();
+
+            // 「已经加载」不是错误：并发 / 状态滞后时卫月会抛 InvalidPluginOperationException。
+            // 2026-10-03 用户实测：ChilledLeves 明明在跑，点「启用插件」却报红。
+            if (IsAlreadyLoadedError(inner) && ReadProperty(rawPlugin, "IsLoaded") is true)
+            {
+                return (true, "插件已经在运行，无需重复启用。");
+            }
+
+            return (false, $"启用插件出错：{e.GetType().Name}: {inner.Message}");
         }
     });
+
+    private static bool IsAlreadyLoadedError(Exception e) =>
+        e.GetType().Name.Contains("InvalidPluginOperation", StringComparison.Ordinal)
+        || e.Message.Contains("已经加载", StringComparison.Ordinal)
+        || e.Message.Contains("already loaded", StringComparison.OrdinalIgnoreCase);
 
     private static (bool Ok, string Message) Enable(object? rawPlugin)
     {
@@ -46,6 +60,12 @@ internal static class PluginEnableBridge
         if (workingID == Guid.Empty || internalName.Length == 0)
         {
             return (false, "读不到插件的内部标识（卫月结构变了？）。");
+        }
+
+        // 已经在跑就别再 LoadAsync（卫月会抛「无法加载 X, 已经加载」，用户看到的就是这个红字）
+        if (ReadProperty(rawPlugin, "IsLoaded") is true)
+        {
+            return (true, "插件已经在运行，无需重复启用。");
         }
 
         // ① 记下「这个插件想要运行」——与安装器一致，不记的话重开游戏又会变回停用

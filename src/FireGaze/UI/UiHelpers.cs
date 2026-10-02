@@ -89,13 +89,19 @@ internal static class UiHelpers
     }
 
     /// <summary>
-    ///     行尾按钮的「放不下就换行」：先看剩余宽度够不够，不够就 NewLine。
-    ///     2026-10-02 用户实测：操作按钮一多（AutoRequeue：一键汉化 + 还原原文 + 详情 + 一键上传），
-    ///     纵向裁剪会把「一键上传」盖掉一截。
+    ///     行尾按钮的「放不下就换行」。
+    ///     <para>
+    ///     2026-10-03 血教训：不能用 <c>GetContentRegionAvail()</c> 判断——它在表格单元格里恒返回整列宽，
+    ///     不随已用宽度变化，于是所有按钮都排在同一行、超出列裁剪区被切掉且点不到
+    ///     （用户实测：插件行「一键上传」永远露不出来，改窗口大小也没用）。
+    ///     改用「上一项右边界 + 当前裁剪区右边界」判断，表格单元格与普通窗口都成立。
+    ///     </para>
     /// </summary>
     public static void SameLineOrWrap(float neededWidth, float spacing = 10f)
     {
-        if (ImGui.GetContentRegionAvail().X < neededWidth + spacing)
+        var clipRight = ImGui.GetWindowDrawList().GetClipRectMax().X;
+        var lastRight = ImGui.GetItemRectMax().X;
+        if (lastRight + spacing + neededWidth > clipRight)
         {
             ImGui.NewLine();
         }
