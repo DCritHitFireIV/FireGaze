@@ -7,9 +7,8 @@ name: uit-packs
 # 口径见 docs/uitrans.md「公共译文库」一节。
 
 on:
-  schedule:
-    # 每周一 05:30 UTC（北京时间 13:30）——避开简介词表（12:00）的窗口
-    - cron: '30 5 * * 1'
+  # 2026-10-02：公共译文库已清空、定时生成已停（用户要求不在云端保存汉化）。
+  # 需要时仍可手动触发；恢复定时前先确认是否还要这个库。
   workflow_dispatch:
     inputs:
       targets:
