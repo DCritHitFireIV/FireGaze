@@ -69,6 +69,7 @@ internal sealed class UITextEditorWindow : Window
 
     private InstalledPluginEntry? entry;
     private UITextPack pack = new();
+    private DateTime packLoadedMtime = DateTime.MinValue;
     private Task<UITextExtraction>? extractionTask;
     private UITextExtraction? extraction;
     private string extractionNote = string.Empty;
@@ -82,6 +83,7 @@ internal sealed class UITextEditorWindow : Window
     private bool dirty;
     private DateTime dirtySince = DateTime.MinValue;
     private DateTime lastSaveAt = DateTime.MinValue;
+    private DateTime nextDiskCheck = DateTime.MinValue;
 
     // 翻译通道
     private Task<(string Channel, UITextTranslateResult Result)>? translateTask;
@@ -111,20 +113,29 @@ internal sealed class UITextEditorWindow : Window
     public string? CurrentInternalName => this.entry?.InternalName;
 
     /// <summary>
-    ///     换一个插件（自动抽取；同一个插件再点一次只是把窗口带到前面）。
+    ///     打开（或重新打开）某个插件的编辑器。
     /// </summary>
+    /// <remarks>
+    ///     同一插件且窗口本来就开着：只带到前面（窗口开着时列表页不会跑任务，不会有外部写入）。
+    ///     窗口关过再开：**必须重新读盘 + 重新抽取**——关窗期间列表页的「重新抽取 / 一键汉化」
+    ///     会把新条目（比如属性文本）写进包，拿旧快照会看起来“少了条目”（2026-10-02 用户实测 1324 vs 2334）。
+    /// </remarks>
     public void OpenFor(InstalledPluginEntry target)
     {
+        var wasOpen = this.IsOpen;
         this.IsOpen = true;
         this.BringToFront();
 
-        if (this.entry is not null && string.Equals(this.entry.InternalName, target.InternalName, StringComparison.Ordinal))
+        if (wasOpen
+            && this.entry is not null
+            && string.Equals(this.entry.InternalName, target.InternalName, StringComparison.Ordinal))
         {
             return;
         }
 
         this.entry = target;
         this.pack = this.store.Load(target.InternalName);
+        this.packLoadedMtime = this.PackMtime(target.InternalName);
         this.rows = [];
         this.roles.Clear();
         this.search = string.Empty;
@@ -155,6 +166,13 @@ internal sealed class UITextEditorWindow : Window
         {
             ImGui.TextDisabled("还没有选插件。");
             return;
+        }
+
+        // 窗口开着时外部（某个刚开始的任务刚跑完）写了包：不自带刷新就会一直显示旧行数
+        if (DateTime.Now >= this.nextDiskCheck)
+        {
+            this.nextDiskCheck = DateTime.Now.AddSeconds(2);
+            this.SyncFromDiskIfChanged();
         }
 
         this.PollExtraction();
@@ -1376,15 +1394,128 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
+        // 盘上被外部更新过（例如编辑器开着时某个列表页任务刚跑完）：先把自己的「人工修改」并回磁盘那份，
+        // 否则会把新增条目（属性/新文本）整个覆盖掉。
+        if (this.PackMtime(this.entry.InternalName) > this.packLoadedMtime)
+        {
+            this.RebaseOnDiskPack();
+        }
+
         if (this.store.Save(this.entry.InternalName, this.pack, out var error))
         {
             this.dirty = false;
             this.lastSaveAt = DateTime.Now;
+            this.packLoadedMtime = this.PackMtime(this.entry.InternalName);
         }
         else
         {
             this.SetStatus("保存失败：" + error, true);
         }
+    }
+
+    private DateTime PackMtime(string internalName)
+    {
+        var path = Path.Combine(this.store.DirectoryPath, internalName + ".json");
+        return File.Exists(path) ? File.GetLastWriteTime(path) : DateTime.MinValue;
+    }
+
+    /// <summary>
+    ///     窗口开着时发现磁盘上的包被外部改过就重新载入 + 重抽（自带保护：本地有未保存改动时不动，
+    ///     等 SaveIfDirty 里的 rebase 处理）。
+    /// </summary>
+    private void SyncFromDiskIfChanged()
+    {
+        if (this.entry is null || this.dirty || this.extractionTask is { IsCompleted: false })
+        {
+            return;
+        }
+
+        if (this.PackMtime(this.entry.InternalName) <= this.packLoadedMtime)
+        {
+            return;
+        }
+
+        this.pack = this.store.Load(this.entry.InternalName);
+        this.packLoadedMtime = this.PackMtime(this.entry.InternalName);
+        this.rows = [];
+        this.roles.Clear();
+        this.extraction = null;
+        this.extractionTask = null;
+        this.SetStatus("检测到包被外部更新（列表页跑过任务）：已重新载入并抽取…", false);
+        this.StartExtraction();
+    }
+
+    /// <summary>
+    ///     把当前内存里的「人工修改」并回磁盘那份包（外部刚写过、我们又要落盘时用）：
+    ///     只带 user 来源的译文与不翻标记，磁盘上的新条目（属性文本等）原样保留。
+    /// </summary>
+    private void RebaseOnDiskPack()
+    {
+        if (this.entry is null)
+        {
+            return;
+        }
+
+        var disk = this.store.Load(this.entry.InternalName);
+        foreach (var entry in this.pack.Entries)
+        {
+            if (!entry.IsUserSource || !entry.HasTranslation)
+            {
+                continue;
+            }
+
+            var target = disk.Find(entry.Original) ?? disk.GetOrAdd(entry.Original, entry.Context, entry.PreserveID);
+            target.Translated = entry.Translated;
+            target.Source = "user";
+        }
+
+        foreach (var resource in this.pack.Resources)
+        {
+            if (!resource.IsUserSource || !resource.HasTranslation)
+            {
+                continue;
+            }
+
+            var target = disk.FindResource(resource.Container, resource.Key)
+                         ?? disk.GetOrAddResource(resource.Container, resource.Key, resource.Original);
+            target.Translated = resource.Translated;
+            target.Source = "user";
+        }
+
+        foreach (var attribute in this.pack.Attributes)
+        {
+            if (!attribute.IsUserSource || !attribute.HasTranslation)
+            {
+                continue;
+            }
+
+            var target = disk.FindAttribute(attribute.Original)
+                         ?? disk.GetOrAddAttribute(attribute.Original, attribute.Context);
+            target.Translated = attribute.Translated;
+            target.Source = "user";
+        }
+
+        foreach (var original in this.pack.Skipped)
+        {
+            disk.MarkSkipped(original);
+        }
+
+        foreach (var token in this.pack.SkippedResources)
+        {
+            if (!disk.SkippedResources.Contains(token, StringComparer.Ordinal))
+            {
+                disk.SkippedResources.Add(token);
+            }
+        }
+
+        foreach (var original in this.pack.SkippedAttributes)
+        {
+            disk.MarkAttributeSkipped(original);
+        }
+
+        this.pack = disk;
+        this.RebuildRows();
+        this.SetStatus("包被外部更新过：已把本地改动并到新的包上（新增条目保留）。", false);
     }
 
     private void SetStatus(string message, bool isError)
