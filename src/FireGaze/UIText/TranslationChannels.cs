@@ -833,11 +833,29 @@ internal sealed class LLMTranslationChannel : IUITextChannel
                 var terms = FFXIVGlossary.FindTerms(chunk.Select(item => UITextText.ForTranslation(item.Text)).ToList());
                 if (terms.Count > 0)
                 {
+                    var multi = terms.Where(t => t.English.Contains(' ')).ToList();
+                    var single = terms.Where(t => !t.English.Contains(' ')).ToList();
                     var glossary = new StringBuilder();
-                    glossary.Append("\n\n这次英文里出现的官方专有名词（FF14 官方译名，必须采用）：");
-                    foreach (var (english, chinese) in terms)
+                    if (multi.Count > 0)
                     {
-                        glossary.Append("\n- ").Append(english).Append(" → ").Append(chinese);
+                        glossary.Append("\n\n这次英文里出现的官方专有名词（FF14 官方译名，必须采用）：");
+                        foreach (var (english, chinese) in multi)
+                        {
+                            glossary.Append("\n- ").Append(english).Append(" → ").Append(chinese);
+                        }
+                    }
+
+                    if (single.Count > 0)
+                    {
+                        // 单词条不确定：同一个拼写常常既是游戏术语、又是普通词（refresh=醒神/刷新、
+                        // warning=倒计时/警告、source=始源湖/来源…），一律「必须采用」会把界面翻出笑话
+                        //（2026-10-03 实测：「PvP 中封技」「不明物体版本」「醒神列表」）。
+                        glossary.Append("\n\n以下单词如果**在原文里作为专有名词（技能 / 道具 / 地名）出现**，" +
+                                        "用给出的官方译名；如果只是普通动词 / 形容词，请按普通含义翻译：");
+                        foreach (var (english, chinese) in single)
+                        {
+                            glossary.Append("\n- ").Append(english).Append(" → ").Append(chinese);
+                        }
                     }
 
                     system += glossary.ToString();

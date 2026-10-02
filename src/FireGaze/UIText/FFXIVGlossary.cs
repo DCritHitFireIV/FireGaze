@@ -25,6 +25,12 @@ internal static class FFXIVGlossary
     public static string? PluginDirectory { get; set; }
 
     /// <summary>常见泛词不当专有名词匹配（单个词命中时过滤）。</summary>
+    /// <remarks>
+    ///     2026-10-03：单词条必须非常保守——游戏数据里大量「地名 / 表情 / 技能」撞上普通英语词，一律
+    ///     「必须采用」会把界面翻出笑话（实测：disable→封技、unknown→不明物体、refresh→醒神、
+    ///     warning→倒计时、source→始源湖、content→表情：幸福、threshold→回退预备、rotation→转向…）。
+    ///     与 <c>scripts/ffxiv_glossary.py</c> 的 STOP_SINGLE 保持同一份名单。
+    /// </remarks>
     private static readonly HashSet<string> StopSingle = new(StringComparer.OrdinalIgnoreCase)
     {
         "attack", "damage", "target", "player", "party", "enemy", "action", "ready", "start",
@@ -33,6 +39,10 @@ internal static class FFXIVGlossary
         "name", "type", "value", "count", "total", "second", "minute", "hour", "critical", "direct",
         // "general" 在成就分类里是「整体」，在插件界面里通常是「常规」——语境不一，不提示。
         "general",
+        // 2026-10-03 实测受损词（同一拼写既是游戏术语、又是界面高频普通词）
+        "disable", "disabled", "convert", "unknown", "refresh", "generate", "breaking", "warning",
+        "threshold", "resolve", "tankbuster", "rotation", "survival", "starburst", "lodestone",
+        "reverse", "content", "source", "minimum", "release", "protect", "destroy", "patience",
     };
 
     private static readonly object Gate = new();

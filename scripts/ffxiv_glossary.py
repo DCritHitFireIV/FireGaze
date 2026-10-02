@@ -52,11 +52,19 @@ CJK = re.compile(r"[\u4e00-\u9fff]")
 WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9'’\-]*")
 
 # 常见泛词不参与匹配（避免把普通句子里的词当成专有名词）
+# 2026-10-03：单词条必须非常保守——游戏数据里大量「地名 / 表情 / 技能」撞上普通英语词，
+# 一律「必须采用」会把界面翻出笑话（实测：disable→封技、unknown→不明物体、refresh→醒神、
+# warning→倒计时、source→始源湖、content→表情：幸福、threshold→回退预备、rotation→转向…）。
+# 这里列的是「同一个拼写既是游戏术语、又是界面高频普通词」的情况：不提供术语提示，让模型按常规翻。
 STOP_SINGLE = {
     "attack", "damage", "target", "player", "party", "enemy", "action", "ready", "start",
     "window", "option", "setting", "module", "function", "system", "button", "display",
     # "general" 在成就分类里是「整体」，但插件界面里通常是「常规」——语境不一，不提供提示。
     "general",
+    # 2026-10-03 实测受损词（见上）
+    "disable", "disabled", "convert", "unknown", "refresh", "generate", "breaking", "warning",
+    "threshold", "resolve", "tankbuster", "rotation", "survival", "starburst", "lodestone",
+    "reverse", "content", "source", "minimum", "release", "protect", "destroy", "patience",
 }
 
 # 多词短语里的功能词允许短于 3 个字母（Palace of the Dead / Heaven on High 这类）
@@ -198,9 +206,15 @@ def build_glossary(refresh: bool = False, verbose: bool = True) -> dict[str, str
                 continue
 
             glossary.setdefault(english.lower(), chinese)
-            # 游戏数据里常带冠词（the Palace of the Dead），简化掉一个变体供匹配
+            # 游戏数据里常带冠词（the Palace of the Dead），简化掉一个变体供匹配。
+            # 2026-10-03：这个变体也要过同一套「单词过滤」——"The Source"（地名）去掉冠词就成了
+            # 普通词 source，直接漏进表里（实测在 UI 文本上被套成「始源湖」）。
             if english.lower().startswith("the "):
-                glossary.setdefault(english[4:].lower(), chinese)
+                simplified = english[4:].strip().lower()
+                if simplified:
+                    simplified_words = simplified.split()
+                    if len(simplified_words) > 1 or (len(simplified) >= 7 and simplified not in STOP_SINGLE):
+                        glossary.setdefault(simplified, chinese)
             added += 1
 
         if verbose:

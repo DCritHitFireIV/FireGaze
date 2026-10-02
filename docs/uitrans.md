@@ -863,3 +863,14 @@ AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打
 - **PDB 里含「本地常量」时不再整份丢弃**（`UITextPatcher.WriteModule`）：dnlib 写 Portable PDB 撞上无法序列化的本地常量（如类类型非空常量）会抛 `Expected a null constant`；现在捕获后——**把常量条目整个移除再试**（只丢常量值，文件名 / 行号保留）。注意不能只把值清成 null：I4 常量会改报 `Expected an Int32 constant`（2026-10-03 实测定型）。HaselTweaks / Browsingway / Cammy / DalamudRepoBrowser 的 PDB 借此恢复。
 - **离线重打工具**（`fgtest-refactor/Repatch.cs`，`dotnet run -c Release -- repatch <内部名...>`）：从原始备份抽取 → 合并译文包 → 重打补丁 → 更新状态与清单；替换前另存临时安全副本，全程不写本地化文件、不自动重载（重打后需重启游戏 / 重载插件生效）。用途：批量应用抽取器规则修正。
 - **BossMod 候选集核对（排除「抽取回归」疑云）**：新旧抽取器对 BossModReborn 的候选差集只有 **14 条，全是 ID 串**（`FiltersPanel` / `party` / `uiobj` 等，NonTextCalls 的正确排除）；其余从包里淡出的条目在 1.3.20 抽取器里同样不存在——属于历史代抽取器的正常淡出，非本次回归。
+
+## 术语表单字条的误用事故与修复（2026-10-03，1.3.26）
+
+- **现象**：`disable→封技`、`unknown→不明物体`、`refresh→醒神`、`warning→倒计时`、`generate→魔力炼成`、`convert→转魔`、`breaking→霹雳舞`、`threshold→回退预备`、`rotation→转向`、`source→始源湖`、`content→表情：幸福`……（游戏数据里的地名 / 表情 / 技能名撞上界面高频普通词）。本机存量受损：**385 条、跨 27 个插件**（BossModReborn 最重，resolve/tankbuster/rotation 合计 240）。
+- **根因**：① 术语表把「单字专有名词」也喂给模型，提示还写着「必须采用」——模型对普通动词 / 形容词照用不误；② `The Source`（地名）这类带冠词条目的「去冠词变体」（→ `source`）绕过了单字门槛。
+- **修复（三处）**：
+  · 生成脚本 `ffxiv_glossary.py`：单字门槛 + 23 个实测受损词的泛词黑名单；**「去冠词变体」也过同一套过滤**；
+  · 运行时 `FFXIVGlossary.StopSingle`：同名单（更老版本插件读旧表时也能兜底）；
+  · 提示分级（`TranslationChannels`）：多词条仍「必须采用」；**单字条改成「仅在原文里作为专有名词时采用，普通含义按常规翻」**。
+  术语表已重新生成：31,768 → **31,582 条**。
+- **待办**：存量 385 条的修复（重翻或人工清理）与云库上传，见会话记录决定。
