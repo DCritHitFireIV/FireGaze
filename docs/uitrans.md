@@ -825,3 +825,8 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 **修复批次的独立复审（2026-10-03，针对 `d840e40` 的 diff）**：结论 OK with notes，无 P1。据复审补两处：
 ① 服务端 `plugin` 字段加字符集/长度校验（缺包建包让「未校验字段拼路径写盘」变得可达，P2）；
 ② 清账计数不再把「已经是自动排除」的条目重复计入（否则 `ReapplyNeeded` 恒真、「已经是最新」永久失效，P2——本条是本批次自己引入的回归）。
+
+**本机受影响插件（重打一次「一键汉化」即自动清掉 ###）**：LeveHelper（Sponsor）、HaselTweaks（Sponsor/Design/Ambient Lighting/Directional Lighting）、
+heliosphere-plugin（49 条：Help/Tooltip/TextUnformattedCentred/通知文本）、InventoryTools（8 条 tooltip + 3 条图标资源名）、Battlevest（5 条 tooltip + 8 条 LineCentered 缓存 id）、
+Browsingway（2 条居中错误文字）、Cammy（2 条通知）、CurrencySpender（2 条通知 + 7 条 LineCentered）、DalamudRepoBrowser（2 条通知）、BossModReborn（1 条通知标题）、Brio（1 条通知标题）。
+AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打的原理：`ExtractionSourceOf` 从原始备份重抽 → MergeExtraction 发现 PreserveID 变了 → `ReapplyNeeded` → 写入时自动先还原旧补丁再按新写法写入。
