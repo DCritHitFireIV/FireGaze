@@ -67,6 +67,17 @@ internal static class UiHelpers
 
     public static void PopPrimaryButton() => ImGui.PopStyleColor(3);
 
+    /// <summary>
+    ///     弹窗里按钮点完要收工时用：CloseCurrentPopup 只是「标记关闭」，EndPopup 才是真的结束这一帧的弹窗——
+    ///     少了它 ImGui 窗口栈失衡，下一帧会弹一串 assertion failed（2026-10-02 用户实测：“还原原文”点完报错）。
+    ///     <para>调完必须立即 return，不要再往下画这个弹窗。</para>
+    /// </summary>
+    public static void ClosePopupAndEnd()
+    {
+        ImGui.CloseCurrentPopup();
+        ImGui.EndPopup();
+    }
+
     public static void ColoredWrapped(Vector4 color, string text)
     {
         ImGui.PushStyleColor(ImGuiCol.Text, color);

@@ -441,8 +441,9 @@ internal sealed class UITextPatchManager
                 if (allowRecovery && outcome.NoMatch)
                 {
                     var carry = existing?.EffectiveFiles;
-                    if (this.TryRebuildPatchRecord(entry, files, pack, carry, null, out _, out var recoveryNote))
+                    if (this.TryRebuildPatchRecord(entry, files, pack, carry, null, out _, out var recoveryTmp, out var recoveryNote))
                     {
+                        TryDeleteDirectory(recoveryTmp); // 重试用的是持久备份，还原出来的临时文件用不上了
                         Plugin.Log?.Information($"[内部文本] {entry.InternalName}：打补丁一条都没对上，{recoveryNote}；已自动重试");
                         var (retryOk, retryMessage) = this.ApplyCore(entry, allowRecovery: false);
                         return retryOk ? (true, recoveryNote + "；" + retryMessage) : (false, retryMessage);
@@ -751,12 +752,21 @@ internal sealed class UITextPatchManager
             return null;
         }
 
-        if (!this.TryRebuildPatchRecord(entry, sources, pack, this.LoadStateOrAdopt(entry)?.EffectiveFiles, searchDirectories, out var recoveredPaths, out note))
+        if (!this.TryRebuildPatchRecord(entry, sources, pack, this.LoadStateOrAdopt(entry)?.EffectiveFiles, searchDirectories, out var recoveredPaths, out var tempDirectory, out note))
         {
             return null;
         }
 
-        return UIStringExtractor.ExtractMany(recoveredPaths, searchDirectories);
+        // 还原出来的原文在临时目录里，抽完才能删——TryRebuildPatchRecord 成功时把目录交出来由调用方清理
+        // （2026-10-02 血教训：在它内部 finally 删掉，返回后抽取就报「Could not open file」）。
+        try
+        {
+            return UIStringExtractor.ExtractMany(recoveredPaths, searchDirectories);
+        }
+        finally
+        {
+            TryDeleteDirectory(tempDirectory);
+        }
     }
 
     /// <summary>
@@ -776,19 +786,21 @@ internal sealed class UITextPatchManager
         IReadOnlyList<UITextPatchFile>? carry,
         IReadOnlyList<string>? searchDirectories,
         out List<string> recoveredPaths,
+        out string tempDirectory,
         out string note)
     {
         note = string.Empty;
         recoveredPaths = [];
+        tempDirectory = string.Empty;
         if (pack.TranslatedCount == 0)
         {
             return false;
         }
 
-        var tempDirectory = Path.Combine(Path.GetTempPath(), "firegaze-recover-" + Guid.NewGuid().ToString("N")[..8]);
+        var tempDir = Path.Combine(Path.GetTempPath(), "firegaze-recover-" + Guid.NewGuid().ToString("N")[..8]);
         try
         {
-            Directory.CreateDirectory(tempDirectory);
+            Directory.CreateDirectory(tempDir);
             var fileStates = new List<UITextPatchFile>();
             var totalReverted = 0;
             foreach (var source in sources)
@@ -798,7 +810,7 @@ internal sealed class UITextPatchManager
                     continue;
                 }
 
-                var recovered = Path.Combine(tempDirectory, Path.GetFileName(source));
+                var recovered = Path.Combine(tempDir, Path.GetFileName(source));
                 var outcome = UITextPatcher.Revert(source, recovered, pack, searchDirectories);
                 if (!outcome.Ok || outcome.PatchedTotal == 0)
                 {
@@ -871,6 +883,7 @@ internal sealed class UITextPatchManager
             this.store.PublishManifest(entry.InternalName, entry.Version, recoveredState.PatchedAt, totalReverted, fileStates, Path.GetDirectoryName(main.Path) ?? string.Empty);
 
             note = $"盘上还留着我们打过的补丁但丢了记录，已从补丁反向还原出原文文件（{totalReverted} 处）并恢复了补丁记录";
+            tempDirectory = tempDir; // 成功：交给调用方用完再删
             return true;
         }
         catch (Exception e)
@@ -880,7 +893,10 @@ internal sealed class UITextPatchManager
         }
         finally
         {
-            TryDeleteDirectory(tempDirectory);
+            if (tempDirectory.Length == 0)
+            {
+                TryDeleteDirectory(tempDir);
+            }
         }
     }
 

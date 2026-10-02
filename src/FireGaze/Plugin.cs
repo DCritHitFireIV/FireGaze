@@ -49,6 +49,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly ContributeWindow contributeWindow;
     private readonly UI.UITextEditorWindow uiTextEditorWindow;
     private readonly UI.UITextSettingsWindow uiTextSettingsWindow;
+    private readonly UI.UITextTab uiTextTab;
     private readonly UIText.UITextRunLock uiTextRunLock;
     private readonly UIText.UITextPatchManager uiTextPatchManager;
     private readonly Timer translateTimer;
@@ -110,7 +111,7 @@ public sealed class Plugin : IDalamudPlugin
         windowSystem.AddWindow(uiTextEditorWindow);
         uiTextSettingsWindow = new UI.UITextSettingsWindow(this);
         windowSystem.AddWindow(uiTextSettingsWindow);
-        window = new MainWindow(this, new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager, uiTextRunLock));
+        window = new MainWindow(this, uiTextTab = new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager, uiTextRunLock));
         windowSystem.AddWindow(window);
         contributeWindow = new ContributeWindow(this, Contributions);
         windowSystem.AddWindow(contributeWindow);
@@ -118,6 +119,10 @@ public sealed class Plugin : IDalamudPlugin
         pluginInterface.UiBuilder.Draw += TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi += ToggleWindow;
         pluginInterface.UiBuilder.OpenMainUi += OpenMainWindow;
+
+        // 插件装/卸/启/停（公开事件，无钩子）：让「插件汉化」页的行状态立即跟上——
+        // 用户在卫月安装器里手动启用后，不用等定期的 30 秒兜底
+        pluginInterface.ActivePluginsChanged += OnActivePluginsChanged;
 
         // 重活（词表、挂钩、定时器）一律延后到「所有插件加载完」之后：
         // 加壳插件的模块初始化器会在加载阶段扫描/改写进程内存，我们需要在那个窗口里保持安静。
@@ -376,6 +381,7 @@ public sealed class Plugin : IDalamudPlugin
         pluginInterface.UiBuilder.Draw -= TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi -= ToggleWindow;
         pluginInterface.UiBuilder.OpenMainUi -= OpenMainWindow;
+        pluginInterface.ActivePluginsChanged -= OnActivePluginsChanged;
         foreach (var command in registeredCommands)
         {
             try
@@ -416,6 +422,22 @@ public sealed class Plugin : IDalamudPlugin
     ///     切换主窗口。
     /// </summary>
     public void ToggleWindow() => window.Toggle();
+
+    /// <summary>
+    ///     卫月说插件列表变了（装/卸/启/停）：转给「插件汉化」页重建索引。
+    ///     事件可能在任意线程；页签只置一个标记，绘制线程下一帧处理。
+    /// </summary>
+    private void OnActivePluginsChanged(Dalamud.Plugin.IActivePluginsChangedEventArgs args)
+    {
+        try
+        {
+            uiTextTab.NotifyInstalledPluginsChanged();
+        }
+        catch (Exception e)
+        {
+            Log.Warning(e, "[FireGaze] 处理插件状态变化失败");
+        }
+    }
 
     /// <summary>
     ///     打开主窗口（供卫月插件安装器的「主界面」入口调用；不切换页签）。

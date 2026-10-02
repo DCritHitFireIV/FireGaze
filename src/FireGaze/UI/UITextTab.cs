@@ -108,6 +108,13 @@ internal sealed class UITextTab
 
     private InstalledPluginsIndex? index;
     private DateTime indexAt = DateTime.MinValue;
+
+    /// <summary>后台重建索引的任务（插件装/卸/启/停，或超过 30 秒）：好了再换上，不打断绘制。</summary>
+    private Task<InstalledPluginsIndex>? indexRebuild;
+
+    /// <summary>卫月的插件状态变化事件置位（可能是任意线程）：下一帧重建索引。</summary>
+    private volatile bool installedPluginsDirty;
+
     private string search = string.Empty;
     private bool onlyThirdParty;
 
@@ -123,6 +130,9 @@ internal sealed class UITextTab
 
     /// <summary>正在上传译文的插件（防重复点击）。</summary>
     private readonly HashSet<string> uploading = new(StringComparer.Ordinal);
+
+    /// <summary>正在启用插件的插件（防重复点击）。</summary>
+    private readonly HashSet<string> enabling = new(StringComparer.Ordinal);
 
     // 云端译文（详情里展示/下载）：索引拉取状态 + 每个包的下载结果提示
     private bool cloudIndexFetching;
@@ -171,6 +181,21 @@ internal sealed class UITextTab
         this.runs = runs;
     }
 
+    /// <summary>
+    ///     卫月说「插件列表变了」（装/卸/启/停：<c>IDalamudPluginInterface.ActivePluginsChanged</c>）。
+    ///     事件可能在任意线程：只置标记，重建留给绘制线程（下一帧）。——这样在安装器里手动启用后
+    ///     行状态立刻跟上，不用等定期的 30 秒兜底。
+    /// </summary>
+    public void NotifyInstalledPluginsChanged() => this.installedPluginsDirty = true;
+
+    private void KickIndexRebuild()
+    {
+        if (this.indexRebuild is null)
+        {
+            this.indexRebuild = Task.Run(InstalledPluginsIndex.Build);
+        }
+    }
+
     public void Draw()
     {
         this.PollRun();
@@ -193,6 +218,7 @@ internal sealed class UITextTab
         {
             this.index = InstalledPluginsIndex.Build();
             this.indexAt = DateTime.Now;
+            this.indexRebuild = null;
             this.rowsDirty = true;
         }
 
@@ -247,11 +273,35 @@ internal sealed class UITextTab
             ImGui.SetTooltip("翻译方式、API key、灰名单口径、插件更新后是否自动重打——都在这里改。");
         }
 
+        // 插件装/卸/启/停（卫月事件）→ 后台重建；平时 30 秒兜底刷一次（2026-10-02 用户要求：
+        // 监听变化立即刷新，把定期的 15 秒级检查放成 30 秒）
+        if (this.installedPluginsDirty)
+        {
+            this.installedPluginsDirty = false;
+            this.KickIndexRebuild();
+        }
+
         if (this.index is null)
         {
+            // 首次：直接建（一次性，不走后台任务）
             this.index = InstalledPluginsIndex.Build();
             this.indexAt = DateTime.Now;
             this.rowsDirty = true;
+        }
+        else if (this.indexRebuild is { IsCompleted: true } rebuild)
+        {
+            this.indexRebuild = null;
+            var built = rebuild.Status == TaskStatus.RanToCompletion ? rebuild.Result : null;
+            if (built is { Available: true })
+            {
+                this.index = built;
+                this.indexAt = DateTime.Now;
+                this.rowsDirty = true;
+            }
+        }
+        else if (this.indexRebuild is null && (DateTime.Now - this.indexAt).TotalSeconds > 30)
+        {
+            this.KickIndexRebuild();
         }
 
         if (!this.index.Available)
@@ -575,6 +625,23 @@ internal sealed class UITextTab
                 this.DrawOpenPluginButton(plugin, info!);
             }
 
+            // 已经打上补丁、但插件没在跑（停用 / 还没加载）：直接给一个启用的入口（2026-10-02 用户要求）
+            if (!plugin.IsLoaded && info is { Patch: UITextPatchStatus.Applied })
+            {
+                ImGui.SameLine(0, 12);
+                ImGui.BeginDisabled(busy || this.enabling.Contains(plugin.InternalName));
+                if (ImGui.Button("启用插件###UITextEnablePlugin"))
+                {
+                    this.StartEnable(plugin);
+                }
+
+                ImGui.EndDisabled();
+                if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+                {
+                    ImGui.SetTooltip("把这个插件启用起来（与插件安装器里的「启用」同一条路）；加载后就能看到汉化效果。");
+                }
+            }
+
             if (info is { HasBackup: true })
             {
                 ImGui.SameLine(0, 12);
@@ -614,6 +681,27 @@ internal sealed class UITextTab
                     "（只含原文、译文与代码位置，不带账号信息；维护者收录后所有人「一键汉化」时能直接下载。）");
             }
         }
+    }
+
+    /// <summary>
+    ///     启用未加载的插件（与插件安装器的「启用」同一条路）：写 Profile 的想要状态 + 加载。
+    ///     完成后置索引脏，下一帧重建——按钮 / 状态徽标立即跟上。
+    /// </summary>
+    private void StartEnable(InstalledPluginEntry entry)
+    {
+        if (!this.enabling.Add(entry.InternalName))
+        {
+            return;
+        }
+
+        this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "正在启用插件…" };
+        _ = Task.Run(async () =>
+        {
+            var (ok, message) = await PluginEnableBridge.EnableAsync(entry.RawPlugin).ConfigureAwait(false);
+            this.enabling.Remove(entry.InternalName);
+            this.notes[entry.InternalName] = new RowNote { Kind = ok ? NoteKind.Good : NoteKind.Bad, Text = message };
+            this.installedPluginsDirty = true;
+        });
     }
 
     /// <summary>
@@ -736,7 +824,7 @@ internal sealed class UITextTab
         {
             var confirmed = upload;
             this.pendingUpload = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             this.RunUpload(confirmed);
             return;
         }
@@ -745,7 +833,7 @@ internal sealed class UITextTab
         if (ImGui.Button("取消", new Vector2(90, 0)))
         {
             this.pendingUpload = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             return;
         }
 
@@ -1118,7 +1206,7 @@ internal sealed class UITextTab
         {
             var confirmed = pending;
             this.pendingCloudApply = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             this.ApplyCloudPack(confirmed);
             return;
         }
@@ -1128,7 +1216,7 @@ internal sealed class UITextTab
         {
             this.cloudNotes[pending.Key] = "已取消";
             this.pendingCloudApply = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             return;
         }
 
@@ -2001,7 +2089,7 @@ internal sealed class UITextTab
             this.plugin.Config.UITextFreeWarned = true;
             this.ApplyPendingChoice(pending);
             this.pendingStart = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             this.StartOneClickCore(pending.Entry);
             return;
         }
@@ -2015,7 +2103,7 @@ internal sealed class UITextTab
             pending.TestGeneration++;
             pending.AwaitingFreeConfirm = false;
             this.pendingNeedsOpen = true;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             return;
         }
 
@@ -2023,7 +2111,7 @@ internal sealed class UITextTab
         if (ImGui.Button("取消", new Vector2(90, 0)))
         {
             this.pendingStart = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             this.notes[pending.Entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已取消，没有开始翻译。" };
             return;
         }
@@ -2122,7 +2210,7 @@ internal sealed class UITextTab
         {
             var confirmed = restore.Entry;
             this.pendingRestore = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             this.RunRestore(confirmed);
             return;
         }
@@ -2131,7 +2219,7 @@ internal sealed class UITextTab
         if (ImGui.Button("取消", new Vector2(90, 0)))
         {
             this.pendingRestore = null;
-            ImGui.CloseCurrentPopup();
+            UiHelpers.ClosePopupAndEnd();
             return;
         }
 

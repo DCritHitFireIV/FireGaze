@@ -563,3 +563,21 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
     现已列入「不汉化」名单（中文完整、中文作者维护），不需要为它们扩扫描器。
   · fgtest：`本地化文件：缺键候选 / JSON 指针 / 写入不覆盖上游译文 全过`（含 `.Raw` 排除、二次写入改译文、
     结构保护、同名文件备份不串）。
+
+## 弹窗收尾 / 插件启用 / 状态监听（2026-10-02，1.2.0.89）
+
+- **血教训（弹窗收尾）**：ImGui 的 `CloseCurrentPopup()` 只是「标记关闭」，`EndPopup()` 才是真的结束这一帧的弹窗——
+  少了它窗口栈失衡，下一帧会弹一串 assertion failed（IDStack / PopStyleColor / Begin-End 全报，用户看到的「还原原文报错」）。
+  1.2.0.89 修掉了 UI 里 9 处「CloseCurrentPopup 后直接 return、漏 EndPopup」（上传确认 / 云端应用 / 免费通道警告 / 还原原文）。
+  现在统一走 `UiHelpers.ClosePopupAndEnd()`；fgtest 加了**方法级源码扫描**（只查自己画弹窗（含 EndPopup）的方法：
+  `CloseCurrentPopup` 之后同层先碰 `return` 再碰 `EndPopup` 就 FAIL——旧版本代码会被它拦下 9 处）。
+- **恢复链路的临时目录**：反向还原出来的原文写在 `%TEMP%iregaze-recover-*`，原来在重建记录的函数里 `finally` 删掉了，
+  返回后抽取就报 `Could not open file ...`（2026-10-02 用户实测 ActionTimelineReborn）。现在成功时把临时目录交给调用方，
+  抽完 / 重试用完再删。
+- **「启用插件」按钮**：打过补丁但插件没在跑的行，主按钮右侧出现「启用插件」——走卫月安装器同一条启用链路
+  （`Profile.AddOrUpdateAsync(state: true, apply: false)` + `LocalPlugin.LoadAsync(PluginLoadReason.Installer)`，
+  全反射，见 `PluginEnableBridge`）。成功后行状态立刻刷新。
+- **插件启停立即刷新**：订阅公开事件 `IDalamudPluginInterface.ActivePluginsChanged`（无钩子）→ 页签下一帧重建已装插件索引；
+  平时 30 秒兜底重建（原来只有手动「刷新」）。索引在后台任务里建、绘制线程换新，不打断帧。
+  fgtest 另加**卫月反射契约**：启用链路用到的类型 / 成员（ProfileManager、Profile.WantsPlugin、LocalPlugin.LoadAsync、
+  Service<T>.Get、ActivePluginsChanged）少一个就 FAIL——卫月改版当场报错，而不是玩家点按钮才发现。
