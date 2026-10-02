@@ -581,14 +581,14 @@ internal sealed class UITextTab
             ImGui.TextUnformatted(plugin.DisplayName);
             if (plugin.IsDev)
             {
-                // 开发/本地插件：卫月的 manifest.IsThirdParty 默认 false，不区分的话会显示成「[官方]」（用户实测反馈）
+                // 开发/本地插件：卫月的 manifest.IsThirdParty 默认 false，不区分的话会显示成「[官库]」（用户实测反馈）
                 ImGui.SameLine();
                 ImGui.TextDisabled("[本地]");
             }
             else if (!plugin.IsThirdParty)
             {
                 ImGui.SameLine();
-                ImGui.TextDisabled("[官方]");
+                ImGui.TextDisabled("[官库]");
             }
 
             var punchline = plugin.Punchline;
