@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using FireGaze.RepoAudit;
@@ -126,13 +127,19 @@ internal sealed class UITextTab
     private Dictionary<string, RowInfo> rows = new(StringComparer.Ordinal);
     private DateTime rowsAt = DateTime.MinValue;
 
-    private readonly Dictionary<string, RowNote> notes = new(StringComparer.Ordinal);
+    /// <summary>
+    ///     行内提示（成功 / 失败 / 进行中）。**后台任务线程会写它、界面线程会读它**，
+    ///     所以用 <see cref="ConcurrentDictionary{TKey,TValue}" />——普通 Dictionary 在这种跨线程
+    ///     读写下属于未定义行为（极端时序会抛 InvalidOperationException / 读到错条目，2026-10-02 审计）。
+    /// </summary>
+    private readonly ConcurrentDictionary<string, RowNote> notes = new(StringComparer.Ordinal);
 
-    /// <summary>正在上传译文的插件（防重复点击）。</summary>
-    private readonly HashSet<string> uploading = new(StringComparer.Ordinal);
+    /// <summary>正在上传译文的插件（防重复点击）。后台任务的收尾会删、界面线程会查，所以用并发字典。
+    /// 键存在 = 忙；值不用。</summary>
+    private readonly ConcurrentDictionary<string, bool> uploading = new(StringComparer.Ordinal);
 
-    /// <summary>正在启用插件的插件（防重复点击）。</summary>
-    private readonly HashSet<string> enabling = new(StringComparer.Ordinal);
+    /// <summary>正在启用插件的插件（防重复点击）。同 uploading：后台会删、界面线程会查。</summary>
+    private readonly ConcurrentDictionary<string, bool> enabling = new(StringComparer.Ordinal);
 
     // 云端译文（详情里展示/下载）：索引拉取状态 + 每个包的下载结果提示
     private bool cloudIndexFetching;
@@ -637,7 +644,7 @@ internal sealed class UITextTab
                 && info is { Patch: UITextPatchStatus.Applied or UITextPatchStatus.PendingReload })
             {
                 UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("启用插件"), 12);
-                ImGui.BeginDisabled(busy || this.enabling.Contains(plugin.InternalName));
+                ImGui.BeginDisabled(busy || this.enabling.ContainsKey(plugin.InternalName));
                 UiHelpers.PushEnableButton();
                 var enableClicked = ImGui.Button("启用插件###UITextEnablePlugin");
                 UiHelpers.PopEnableButton();
@@ -677,7 +684,7 @@ internal sealed class UITextTab
         if (info is { Translated: > 0 })
         {
             UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("一键上传"), 10);
-            ImGui.BeginDisabled(this.uploading.Contains(plugin.InternalName));
+            ImGui.BeginDisabled(this.uploading.ContainsKey(plugin.InternalName));
             if (ImGui.Button("一键上传"))
             {
                 this.StartUpload(plugin);
@@ -700,7 +707,7 @@ internal sealed class UITextTab
     /// </summary>
     private void StartEnable(InstalledPluginEntry entry)
     {
-        if (!this.enabling.Add(entry.InternalName))
+        if (!this.enabling.TryAdd(entry.InternalName, true))
         {
             return;
         }
@@ -709,7 +716,7 @@ internal sealed class UITextTab
         _ = Task.Run(async () =>
         {
             var (ok, message) = await PluginEnableBridge.EnableAsync(entry.RawPlugin).ConfigureAwait(false);
-            this.enabling.Remove(entry.InternalName);
+            this.enabling.TryRemove(entry.InternalName, out _);
             if (ok)
             {
                 // 插件已加载：它读的就是打过补丁的文件（没打过就无所谓），待确认状态直接转正
@@ -728,7 +735,7 @@ internal sealed class UITextTab
     /// </summary>
     private void StartUpload(InstalledPluginEntry entry)
     {
-        if (this.uploading.Contains(entry.InternalName))
+        if (this.uploading.ContainsKey(entry.InternalName))
         {
             return;
         }
@@ -795,7 +802,7 @@ internal sealed class UITextTab
         var title = upload.Title;
         var body = upload.Body;
         var storeDirectory = this.store.DirectoryPath;
-        this.uploading.Add(entry.InternalName);
+        this.uploading.TryAdd(entry.InternalName, true);
         _ = Task.Run(async () =>
         {
             try
@@ -866,7 +873,7 @@ internal sealed class UITextTab
     {
         await Plugin.Framework.RunOnFrameworkThread(() =>
         {
-            this.uploading.Remove(internalName);
+            this.uploading.TryRemove(internalName, out _);
             this.notes[internalName] = new RowNote { Kind = kind, Text = text };
             this.rowsDirty = true;
         }).ConfigureAwait(false);
@@ -1288,7 +1295,7 @@ internal sealed class UITextTab
         // 成功是一次性事件：十几秒后收起；失败 / 未加载是持久状态，留到下一次操作。
         if (note.Kind == NoteKind.Good && (DateTime.Now - note.CreatedAt).TotalSeconds > 12)
         {
-            this.notes.Remove(plugin.InternalName);
+            this.notes.TryRemove(plugin.InternalName, out _);
             return;
         }
 
@@ -1386,7 +1393,7 @@ internal sealed class UITextTab
 
         var run = new Run { InternalName = entry.InternalName, Mode = RunMode.ExtractOnly, Stage = "正在读取插件界面文本…" };
         this.run = run;
-        this.notes.Remove(entry.InternalName);
+        this.notes.TryRemove(entry.InternalName, out _);
         run.Task = Task.Run(() => this.RunPipelineAsync(entry, run));
     }
 
@@ -1470,7 +1477,7 @@ internal sealed class UITextTab
 
         var run = new Run { InternalName = entry.InternalName, Stage = "准备中…" };
         this.run = run;
-        this.notes.Remove(entry.InternalName);
+        this.notes.TryRemove(entry.InternalName, out _);
         run.Task = Task.Run(() => this.RunPipelineAsync(entry, run));
     }
 
@@ -2266,7 +2273,7 @@ internal sealed class UITextTab
 
         var run = new Run { InternalName = entry.InternalName, Stage = "正在还原并重载…" };
         this.run = run;
-        this.notes.Remove(entry.InternalName);
+        this.notes.TryRemove(entry.InternalName, out _);
         run.Task = Task.Run(async () =>
         {
             var (ok, message) = await this.patches.RestoreAndReloadAsync(entry).ConfigureAwait(false);
