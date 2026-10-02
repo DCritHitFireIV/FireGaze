@@ -60,6 +60,7 @@ DO_NOT_LOCALIZE = {
     "ocnfarmer", "pvplogscn", "priceinsight-cn", "pvpstatscn", "retainerrepricercn",
     "tidychatcn", "vfxeditorcn", "xivcomboexpandedcn", "visland_cn", "keitatoolbox",
     "pfclassifier", "pfradar", "pvpselector", "untarnishedheart", "autohook",
+    "dctravelerx", "proxyplugin",
 }
 
 TRANSLATE_PROMPT = (
