@@ -100,6 +100,36 @@ if (args.Length >= 2 && args[1] == "--strings")
     return 0;
 }
 
+if (args.Length >= 3 && args[1] == "--patch")
+{
+    // 诊断用：拿一个译文包给 DLL 打补丁（与 --revert 对称，可做还原→重打的往返验证）。
+    //   UITextProbe <插件.dll> --patch <译文包.json> [输出.dll]
+    var patchPackJson = File.ReadAllText(args[2], System.Text.Encoding.UTF8);
+    var patchPack = UITextPack.FromJSON(patchPackJson, out var patchPackError);
+    if (patchPack is null)
+    {
+        Console.WriteLine($"{{\"ok\":false,\"error\":\"读不动译文包：{patchPackError}\"}}");
+        return 1;
+    }
+
+    var patchOutput = args.Length >= 4 ? args[3] : Path.Combine(Path.GetTempPath(), "uit-patch-" + Guid.NewGuid().ToString("N")[..8] + ".dll");
+    var patchOutcome = UITextPatcher.Patch(positional[0], patchOutput, patchPack);
+    Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(
+        new
+        {
+            ok = patchOutcome.Ok,
+            noMatch = patchOutcome.NoMatch,
+            patchedTotal = patchOutcome.PatchedTotal,
+            patchedLiterals = patchOutcome.PatchedLiterals,
+            candidates = patchOutcome.Candidates,
+            missing = patchOutcome.Missing.Count,
+            error = patchOutcome.Error,
+            output = patchOutput,
+        },
+        new System.Text.Json.JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
+    return patchOutcome.Ok ? 0 : 1;
+}
+
 if (args.Length >= 3 && args[1] == "--revert")
 {
     // 诊断用：拿一个译文包去反向还原一个 DLL（补丁记录丢了时的自证/体检）。
