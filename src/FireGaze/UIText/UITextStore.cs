@@ -13,10 +13,12 @@ internal sealed class UITextStore
     private const string ExportFormatName = "FireGaze UIText";
 
     private readonly object gate = new();
+    private readonly string? mirrorDirectory;
 
-    public UITextStore(string configDirectory)
+    public UITextStore(string configDirectory, string? mirrorDirectory = null)
     {
         this.DirectoryPath = Path.Combine(configDirectory, "uitrans");
+        this.mirrorDirectory = mirrorDirectory;
     }
 
     /// <summary>
@@ -25,25 +27,36 @@ internal sealed class UITextStore
     public string DirectoryPath { get; }
 
     /// <summary>
-    ///     某个插件有没有本地包。
+    ///     某个插件有没有本地包（配置目录里没有、持久镜像里有的话会先恢复回来）。
     /// </summary>
-    public bool Exists(string internalName) => File.Exists(this.PathOf(internalName));
+    public bool Exists(string internalName)
+    {
+        this.EnsureRestored(internalName);
+        return File.Exists(this.PathOf(internalName));
+    }
 
     /// <summary>
-    ///     列出本地有包的插件内部名。
+    ///     列出本地有包的插件内部名（含只存在于持久镜像里的）。
     /// </summary>
     public IReadOnlyList<string> List()
     {
         try
         {
-            if (!Directory.Exists(this.DirectoryPath))
+            var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var directory in new string?[] { this.DirectoryPath, this.mirrorDirectory })
             {
-                return [];
+                if (string.IsNullOrEmpty(directory) || !Directory.Exists(directory))
+                {
+                    continue;
+                }
+
+                foreach (var file in Directory.GetFiles(directory, "*.json"))
+                {
+                    names.Add(Path.GetFileNameWithoutExtension(file));
+                }
             }
 
-            return Directory.GetFiles(this.DirectoryPath, "*.json")
-                .Select(Path.GetFileNameWithoutExtension)
-                .Where(name => !string.IsNullOrEmpty(name))
+            return names.Where(name => !string.IsNullOrEmpty(name))
                 .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
                 .ToArray()!;
         }
@@ -62,6 +75,7 @@ internal sealed class UITextStore
         var path = this.PathOf(internalName);
         try
         {
+            this.EnsureRestored(internalName);
             if (!File.Exists(path))
             {
                 return new UITextPack { Meta = { Source = "local" } };
@@ -101,8 +115,10 @@ internal sealed class UITextStore
                 pack.Meta.UpdatedAt = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
 
                 var temp = path + ".tmp";
-                File.WriteAllText(temp, pack.ToJSON(), new UTF8Encoding(false));
+                var json = pack.ToJSON();
+                File.WriteAllText(temp, json, new UTF8Encoding(false));
                 File.Move(temp, path, overwrite: true);
+                this.WriteMirror(internalName, json);
             }
 
             return true;
@@ -129,6 +145,15 @@ internal sealed class UITextStore
                 File.Delete(path);
             }
 
+            if (this.mirrorDirectory is not null)
+            {
+                var mirror = this.MirrorPathOf(internalName);
+                if (File.Exists(mirror))
+                {
+                    File.Delete(mirror);
+                }
+            }
+
             return true;
         }
         catch (Exception e)
@@ -139,6 +164,94 @@ internal sealed class UITextStore
     }
 
     private string PathOf(string internalName) => Path.Combine(this.DirectoryPath, SanitizeName(internalName) + ".json");
+
+    private string MirrorPathOf(string internalName) => Path.Combine(this.mirrorDirectory!, SanitizeName(internalName) + ".json");
+
+    /// <summary>
+    ///     配置目录里的包不见了（被重置 / 清理）时，从持久目录的镜像恢复回工作目录。
+    /// </summary>
+    public bool EnsureRestored(string internalName)
+    {
+        try
+        {
+            var path = this.PathOf(internalName);
+            if (File.Exists(path))
+            {
+                return true;
+            }
+
+            if (this.mirrorDirectory is null)
+            {
+                return false;
+            }
+
+            var mirror = this.MirrorPathOf(internalName);
+            if (!File.Exists(mirror))
+            {
+                return false;
+            }
+
+            lock (this.gate)
+            {
+                if (File.Exists(path))
+                {
+                    return true;
+                }
+
+                Directory.CreateDirectory(this.DirectoryPath);
+                var temp = path + ".tmp";
+                File.Copy(mirror, temp, overwrite: true);
+                File.Move(temp, path, overwrite: true);
+            }
+
+            Plugin.Log?.Information($"[内部文本] 本地包没了，已从持久镜像恢复：{internalName}");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 从镜像恢复包失败：{Name}", internalName);
+            return false;
+        }
+    }
+
+    /// <summary>包的写入时间（缺失时先从镜像恢复；没有包返回 <see cref="DateTime.MinValue" />）。</summary>
+    public DateTime LastWriteTime(string internalName)
+    {
+        this.EnsureRestored(internalName);
+        try
+        {
+            var path = this.PathOf(internalName);
+            return File.Exists(path) ? File.GetLastWriteTime(path) : DateTime.MinValue;
+        }
+        catch (Exception)
+        {
+            return DateTime.MinValue;
+        }
+    }
+
+    /// <summary>
+    ///     往持久目录里镜像一份（JSON 很小，但真丢了就没了；失败只记日志，绝不影响正常保存）。
+    /// </summary>
+    private void WriteMirror(string internalName, string json)
+    {
+        if (this.mirrorDirectory is null)
+        {
+            return;
+        }
+
+        try
+        {
+            Directory.CreateDirectory(this.mirrorDirectory);
+            var path = this.MirrorPathOf(internalName);
+            var temp = path + ".tmp";
+            File.WriteAllText(temp, json, new UTF8Encoding(false));
+            File.Move(temp, path, overwrite: true);
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 写译文包镜像失败：{Name}", internalName);
+        }
+    }
 
     /// <summary>
     ///     内部名一般只有字母数字，但仍然过一遍，避免奇怪的插件名把路径带出目录。

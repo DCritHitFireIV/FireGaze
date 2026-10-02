@@ -98,7 +98,8 @@ public sealed class Plugin : IDalamudPlugin
         UIText.UITextRules.DebugSink = (e, m) => Log.Debug(e, m);
         Table = new TranslationTable(ConfigDirectory, pluginDirectory);
         Contributions = new ContributionsStore(ConfigDirectory);
-        TextPacks = new UIText.UITextStore(ConfigDirectory);
+        DurableDataDirectory = UIText.UITextDataRoot.Resolve(ConfigDirectory);
+        TextPacks = new UIText.UITextStore(ConfigDirectory, UIText.UITextDataRoot.PackMirror(DurableDataDirectory));
         TextLibrary = new UIText.UITextLibrary(this);
         uiTextPatchManager = new UIText.UITextPatchManager(this);
         Patcher = new ManifestPatcher(() => Config, Table, m => Log.Warning("[FireGaze] " + m));
@@ -124,6 +125,14 @@ public sealed class Plugin : IDalamudPlugin
         Framework.Update += OnStartupTick;
 
         Log.Information($"[FireGaze] 已加载 v{typeof(Plugin).Assembly.GetName().Version}（初始化将等插件加载阶段结束后进行）");
+        if (UIText.UITextDataRoot.IsDedicated(DurableDataDirectory, ConfigDirectory))
+        {
+            Log.Information($"[FireGaze] 持久数据目录：{DurableDataDirectory}（补丁原始备份与译文包镜像；重置插件配置不会丢）");
+        }
+        else
+        {
+            Log.Warning($"[FireGaze] 解析不出启动器根目录，持久数据退回配置目录：{ConfigDirectory}");
+        }
 
         AddCommand(
             "/firegaze",
@@ -295,6 +304,12 @@ public sealed class Plugin : IDalamudPlugin
     ///     插件内部文本的本地包存放（「插件汉化」页签用）。
     /// </summary>
     internal UIText.UITextStore TextPacks { get; }
+
+    /// <summary>
+    ///     持久数据目录（默认 <c>&lt;启动器根&gt;\FireGazeData\</c>）：补丁原始备份与译文包镜像放这里，
+    ///     活过「重置插件配置」（2026-10-02 全量落地）。解析不出来时等于配置目录，退回旧行为。
+    /// </summary>
+    internal string DurableDataDirectory { get; }
 
     /// <summary>
     ///     公共译文库下载端（按需拉取现成译文；数据只作加速，补丁仍走本地）。

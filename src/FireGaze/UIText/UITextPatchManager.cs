@@ -49,12 +49,63 @@ internal sealed class UITextPatchManager
     private DateTime lastTick = DateTime.MinValue;
     private DateTime lastRepatchCheck = DateTime.MinValue;
     private InstalledPluginsIndex? index;
+    private bool migrationStarted;
+
+    /// <summary>认领失败的缓存：同一份 DLL（按写入时间）不重复算哈希——清单陈旧时列表每 5 秒刷一次，大 DLL 哈希很贵。</summary>
+    private readonly Dictionary<string, DateTime> adoptRejectedAt = new(StringComparer.OrdinalIgnoreCase);
+    private readonly object adoptGate = new();
 
     public UITextPatchManager(Plugin plugin)
     {
         this.plugin = plugin;
-        this.store = new UITextPatchStore(plugin.ConfigDirectory);
+        this.store = new UITextPatchStore(plugin.ConfigDirectory, UITextDataRoot.Originals(plugin.DurableDataDirectory));
         this.packs = plugin.TextPacks;
+    }
+
+    /// <summary>
+    ///     读补丁状态；配置被重置（记录没了）时再从持久目录认领一次——
+    ///     只有「盘上文件哈希 == 清单里的 patchedHash」才认（插件更新过就认不回来，绝不会把旧原文盖回去）。
+    /// </summary>
+    private UITextPatchState? LoadStateOrAdopt(InstalledPluginEntry entry)
+    {
+        var state = this.store.Load(entry.InternalName);
+        if (state is not null)
+        {
+            return state;
+        }
+
+        // 清单被否过一次就别每 5 秒重算（大 DLL 哈希很贵）；DLL 更新过（写入时间变了）再重新试
+        DateTime writeTime;
+        try
+        {
+            writeTime = string.IsNullOrEmpty(entry.DLLPath) ? DateTime.MinValue : File.GetLastWriteTime(entry.DLLPath);
+        }
+        catch (Exception)
+        {
+            writeTime = DateTime.MinValue;
+        }
+
+        lock (this.adoptGate)
+        {
+            if (this.adoptRejectedAt.TryGetValue(entry.InternalName, out var rejectedAt) && rejectedAt == writeTime)
+            {
+                return null;
+            }
+        }
+
+        var adopted = this.store.TryAdopt(entry.InternalName, entry.DLLPath ?? string.Empty, entry.Version);
+        if (adopted is not null)
+        {
+            Plugin.Log?.Information($"[内部文本] {entry.InternalName}：补丁记录丢了，已从持久备份目录认领（{adopted.EffectiveFiles.Count} 个文件）");
+            return adopted;
+        }
+
+        lock (this.adoptGate)
+        {
+            this.adoptRejectedAt[entry.InternalName] = writeTime;
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -63,7 +114,7 @@ internal sealed class UITextPatchManager
     public UITextPatchStatus StatusOf(InstalledPluginEntry entry, out string detail)
     {
         detail = string.Empty;
-        var state = this.store.Load(entry.InternalName);
+        var state = this.LoadStateOrAdopt(entry);
         if (state is null)
         {
             return UITextPatchStatus.NotPatched;
@@ -121,7 +172,7 @@ internal sealed class UITextPatchManager
     /// </summary>
     public DateTime? PatchedAt(InstalledPluginEntry entry)
     {
-        var state = this.store.Load(entry.InternalName);
+        var state = this.LoadStateOrAdopt(entry);
         if (state?.PatchedAt is not { Length: > 0 } text || !DateTime.TryParse(text, out var at))
         {
             return null;
@@ -144,8 +195,8 @@ internal sealed class UITextPatchManager
 
         try
         {
-            var packPath = Path.Combine(this.plugin.ConfigDirectory, "uitrans", entry.InternalName + ".json");
-            return File.Exists(packPath) && File.GetLastWriteTime(packPath) > patchedAt.Value.AddSeconds(1);
+            var packTime = this.packs.LastWriteTime(entry.InternalName);
+            return packTime > patchedAt.Value.AddSeconds(1);
         }
         catch (Exception)
         {
@@ -156,7 +207,7 @@ internal sealed class UITextPatchManager
     /// <summary>
     ///     这个插件有没有可还原的备份。
     /// </summary>
-    public bool HasBackup(InstalledPluginEntry entry) => this.store.Load(entry.InternalName)?.HasBackup == true;
+    public bool HasBackup(InstalledPluginEntry entry) => this.LoadStateOrAdopt(entry)?.HasBackup == true;
 
     /// <summary>
     ///     重新抽取该对哪几份 DLL：主程序集 + 伴生程序集；其中「盘上是我们自己的补丁」的改读它的原始备份。
@@ -188,7 +239,7 @@ internal sealed class UITextPatchManager
             return paths;
         }
 
-        var state = this.store.Load(entry.InternalName);
+        var state = this.LoadStateOrAdopt(entry);
         if (state is null || !state.HasBackup)
         {
             return paths;
@@ -253,10 +304,12 @@ internal sealed class UITextPatchManager
     public (bool Ok, string Message) Apply(InstalledPluginEntry entry)
     {
         var backupsBefore = this.SnapshotBackupFiles();
+        var originalsBefore = this.store.SnapshotOriginals();
         var (ok, message) = this.ApplyCore(entry);
         if (!ok)
         {
             this.DeleteUnreferencedBackups(backupsBefore);
+            this.DeleteUnreferencedOriginals(originalsBefore);
         }
 
         return (ok, message);
@@ -276,7 +329,7 @@ internal sealed class UITextPatchManager
             return (false, "读不到插件主程序集路径。");
         }
 
-        var existing = this.store.Load(entry.InternalName);
+        var existing = this.LoadStateOrAdopt(entry);
         var files = UITextRules.ResolveCompanions(dllPath, entry.InternalName);
         if (files.Count == 0)
         {
@@ -421,7 +474,7 @@ internal sealed class UITextPatchManager
         }
 
         var main = fileStates[0];
-        this.store.Save(new UITextPatchState
+        var newState = new UITextPatchState
         {
             InternalName = entry.InternalName,
             DLLPath = main.Path,
@@ -434,7 +487,10 @@ internal sealed class UITextPatchManager
             Files = fileStates,
             PendingVerify = true,
             PendingSince = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-        });
+        };
+        this.store.Save(newState);
+        // 持久目录里落一份自证清单：补丁记录被重置时靠它 + 文件哈希认领回原始备份
+        this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, fileStates);
 
         var message = $"已写入 {patchedTotal} 处译文";
         if (fileStates.Count > 1)
@@ -503,7 +559,7 @@ internal sealed class UITextPatchManager
             return (extraction, note);
         }
 
-        var state = this.store.Load(entry.InternalName);
+        var state = this.LoadStateOrAdopt(entry);
         var backups = new List<string>();
         if (state is not null)
         {
@@ -622,7 +678,7 @@ internal sealed class UITextPatchManager
             }
 
             var main = fileStates[0];
-            this.store.Save(new UITextPatchState
+            var recoveredState = new UITextPatchState
             {
                 InternalName = entry.InternalName,
                 DLLPath = main.Path,
@@ -634,7 +690,10 @@ internal sealed class UITextPatchManager
                 AppliedEntries = totalReverted,
                 Files = fileStates,
                 PendingVerify = false,
-            });
+            };
+            this.store.Save(recoveredState);
+            // 还原出来的基线也落一份清单：这根链路上配置再被重置一次也还能认领
+            this.store.PublishManifest(entry.InternalName, entry.Version, recoveredState.PatchedAt, totalReverted, fileStates);
 
             note = $"盘上还留着我们打过的补丁但丢了记录，已从补丁反向还原出原文文件（{totalReverted} 处）并恢复了补丁记录";
             return UIStringExtractor.ExtractMany(recoveredPaths, searchDirectories);
@@ -842,12 +901,125 @@ internal sealed class UITextPatchManager
         }
     }
 
+    /// <summary>打补丁失败时清掉这次新建、又没有状态引用的持久目录备份（原始件绝不误删）。</summary>
+    private void DeleteUnreferencedOriginals(HashSet<string> before)
+    {
+        try
+        {
+            var referenced = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var state in this.store.ListAll())
+            {
+                foreach (var file in state.EffectiveFiles)
+                {
+                    if (!string.IsNullOrEmpty(file.BackupPath))
+                    {
+                        referenced.Add(file.BackupPath);
+                    }
+                }
+            }
+
+            foreach (var path in this.store.SnapshotOriginals())
+            {
+                if (!before.Contains(path) && !referenced.Contains(path))
+                {
+                    TryDelete(path);
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // 清理是尽力而为
+        }
+    }
+
+    /// <summary>
+    ///     一次性迁移：把以前留在配置目录里的原始备份搬进持久目录（重置插件配置后不再丢）。
+    ///     后台跑；每个状态写回前再读一遍，发现被动过就跳过（避免盖掉正在进行的补丁）。
+    /// </summary>
+    private void MigrateLegacyBackups()
+    {
+        try
+        {
+            var moved = 0;
+            foreach (var state in this.store.ListAll())
+            {
+                if (state.PendingVerify || state.LastError is { Length: > 0 })
+                {
+                    continue;
+                }
+
+                var files = new List<UITextPatchFile>();
+                var pendingDeletes = new List<string>();
+                var updated = false;
+                foreach (var file in state.EffectiveFiles)
+                {
+                    if (!file.HasBackup
+                        || this.store.IsDurableBackup(file.BackupPath)
+                        || string.IsNullOrEmpty(file.Path))
+                    {
+                        files.Add(file);
+                        continue;
+                    }
+
+                    var durable = this.store.MoveBackupToOriginals(state.InternalName, file.Path, file.BackupPath!, file.SourceHash);
+                    if (durable is null)
+                    {
+                        files.Add(file);
+                        continue;
+                    }
+
+                    files.Add(file with { BackupPath = durable });
+                    pendingDeletes.Add(file.BackupPath!);
+                    updated = true;
+                }
+
+                if (!updated)
+                {
+                    continue;
+                }
+
+                // 写回前再读一遍：状态被动过（比如补丁任务刚好在跑）就放弃这一条
+                var current = this.store.Load(state.InternalName);
+                if (current is null
+                    || !string.Equals(current.PatchedHash, state.PatchedHash, StringComparison.OrdinalIgnoreCase)
+                    || !string.Equals(current.BackupPath, state.BackupPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                this.store.Save(current with
+                {
+                    Files = files,
+                    BackupPath = files.Count > 0 ? files[0].BackupPath : current.BackupPath,
+                });
+                this.store.PublishManifest(state.InternalName, state.PluginVersion, state.PatchedAt, state.AppliedEntries, files);
+
+                // 状态已经指向持久目录了，配置目录里的旧副本才能删
+                foreach (var path in pendingDeletes)
+                {
+                    TryDelete(path);
+                }
+
+                moved += files.Count(f => this.store.IsDurableBackup(f.BackupPath));
+            }
+
+            if (moved > 0)
+            {
+                Plugin.Log?.Information($"[内部文本] 已把 {moved} 份原始备份搬进持久目录（重置插件配置不再丢）");
+            }
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 迁移原始备份失败");
+        }
+    }
+
     /// <summary>
     ///     还原成原始 DLL。
     /// </summary>
     public (bool Ok, string Message) Restore(InstalledPluginEntry entry, string? reason = null)
     {
-        var state = this.store.Load(entry.InternalName);
+        var state = this.LoadStateOrAdopt(entry);
         if (state is null)
         {
             return (false, "这个插件没有打过补丁的记录。");
@@ -894,6 +1066,7 @@ internal sealed class UITextPatchManager
         }
 
         this.store.Delete(entry.InternalName);
+        this.store.RemoveOriginals(state);
         var suffix = reason is null ? string.Empty : $"（{reason}）";
         Plugin.Log?.Information($"[内部文本] {entry.InternalName}：已还原原始 DLL{suffix}（{restored} 个文件）");
         return (true, "已还原成原始文件" + suffix + "；重载插件后恢复英文。");
@@ -970,7 +1143,7 @@ internal sealed class UITextPatchManager
 
         try
         {
-            var state = this.store.Load(entry.InternalName);
+            var state = this.LoadStateOrAdopt(entry);
             if (state is not null)
             {
                 this.store.Save(state with { ReloadAttempts = state.ReloadAttempts + 1 });
@@ -1011,6 +1184,14 @@ internal sealed class UITextPatchManager
         }
 
         this.lastTick = DateTime.Now;
+
+        // 一次性迁移旧备份（后台跑，别占渲染线程）：以前备份在配置目录里，重置一把就没了
+        if (!this.migrationStarted && (DateTime.Now - this.processStartedAt).TotalSeconds > 20)
+        {
+            this.migrationStarted = true;
+            _ = Task.Run(this.MigrateLegacyBackups);
+        }
+
         this.CheckPending();
 
         if ((DateTime.Now - this.lastRepatchCheck).TotalSeconds < RepatchCheckSeconds)
@@ -1070,7 +1251,7 @@ internal sealed class UITextPatchManager
     /// </summary>
     public void RepatchIfNeeded(InstalledPluginEntry entry)
     {
-        var state = this.store.Load(entry.InternalName);
+        var state = this.LoadStateOrAdopt(entry);
         if (state is null || state.PendingVerify || string.IsNullOrEmpty(entry.DLLPath) || !File.Exists(entry.DLLPath))
         {
             return;

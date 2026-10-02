@@ -137,18 +137,64 @@ internal sealed record UITextPatchState
 }
 
 /// <summary>
-///     补丁状态的读写与备份管理（都在配置目录里，不动插件目录的其它文件）。
+///     持久目录里的原始备份清单（<c>&lt;持久目录&gt;/uit-originals/&lt;内部名&gt;/manifest.json</c>）。
+///     补丁记录丢了时靠它 + 文件哈希自证认领；绝不能只凭文件名就还原（插件更新过时会把旧原文盖回去）。
+/// </summary>
+internal sealed record UITextOriginalsManifest
+{
+    [JsonPropertyName("format")]
+    public int Format { get; set; } = 1;
+
+    [JsonPropertyName("internalName")]
+    public string InternalName { get; set; } = string.Empty;
+
+    [JsonPropertyName("pluginVersion")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? PluginVersion { get; set; }
+
+    [JsonPropertyName("patchedAt")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? PatchedAt { get; set; }
+
+    [JsonPropertyName("appliedEntries")]
+    public int AppliedEntries { get; set; }
+
+    [JsonPropertyName("files")]
+    public List<UITextOriginalsManifestFile> Files { get; set; } = [];
+}
+
+/// <summary>清单里的一份文件：当前盘上（打完补丁）的哈希 + 备份（原文）的哈希 + 备份文件名。</summary>
+internal sealed record UITextOriginalsManifestFile
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
+
+    [JsonPropertyName("sourceHash")]
+    public string SourceHash { get; set; } = string.Empty;
+
+    [JsonPropertyName("patchedHash")]
+    public string PatchedHash { get; set; } = string.Empty;
+
+    [JsonPropertyName("backup")]
+    public string Backup { get; set; } = string.Empty;
+}
+
+/// <summary>
+///     补丁状态的读写与备份管理。
+///     原始备份优先写进**持久目录**（活过插件配置重置）；写不进去才退回配置目录（老行为，保底）。
 /// </summary>
 internal sealed class UITextPatchStore
 {
     private readonly string stateDirectory;
     private readonly string backupDirectory;
+    private readonly string? originalsDirectory;
     private readonly object gate = new();
 
-    public UITextPatchStore(string configDirectory)
+    public UITextPatchStore(string configDirectory, string? durableOriginalsDirectory = null)
     {
         this.stateDirectory = Path.Combine(configDirectory, "uitrans", "state");
         this.backupDirectory = Path.Combine(configDirectory, "uitrans", "backups");
+        this.originalsDirectory = durableOriginalsDirectory;
     }
 
     /// <summary>
@@ -247,9 +293,16 @@ internal sealed class UITextPatchStore
 
     /// <summary>
     ///     备份原始 DLL（已经备份过同一份就复用），返回备份路径。
+    ///     优先写持久目录（重置插件配置也还在）；写不进去才退回配置目录。
     /// </summary>
     public string? Backup(string internalName, string dllPath, string sourceHash)
     {
+        var durable = this.BackupToOriginals(internalName, dllPath, sourceHash);
+        if (durable is not null)
+        {
+            return durable;
+        }
+
         try
         {
             lock (this.gate)
@@ -268,6 +321,352 @@ internal sealed class UITextPatchStore
         {
             Plugin.Log?.Warning(e, "[内部文本] 备份失败：{Path}", dllPath);
             return null;
+        }
+    }
+
+    /// <summary>
+    ///     这个备份路径是不是在持久目录里（迁移时只看配置目录里的旧备份；还原 / 清理也只清持久目录）。
+    /// </summary>
+    public bool IsDurableBackup(string? path)
+    {
+        if (this.originalsDirectory is null || string.IsNullOrEmpty(path))
+        {
+            return false;
+        }
+
+        try
+        {
+            var root = Path.GetFullPath(this.originalsDirectory);
+            var full = Path.GetFullPath(path);
+            return full.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    /// <summary>持久目录里现有的全部原始备份（打补丁前的快照，失败时用它清理本次新建的孤儿）。</summary>
+    public HashSet<string> SnapshotOriginals()
+    {
+        var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        if (this.originalsDirectory is null || !Directory.Exists(this.originalsDirectory))
+        {
+            return result;
+        }
+
+        try
+        {
+            foreach (var path in Directory.EnumerateFiles(this.originalsDirectory, "*.orig", SearchOption.AllDirectories))
+            {
+                result.Add(path);
+            }
+        }
+        catch (Exception)
+        {
+            // 列不出来就不清理（宁可留垃圾也不误删）
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     把「这次打进 DLL 的哈希」与「备份文件的哈希」落成持久目录里的清单，供丢了补丁记录时认领。
+    ///     只收录确实在持久目录里的备份；顺带清掉这一步不再引用的旧 *.orig。
+    /// </summary>
+    public void PublishManifest(string internalName, string? pluginVersion, string? patchedAt, int appliedEntries, IReadOnlyList<UITextPatchFile> files)
+    {
+        var directory = this.OriginalsDirectoryOf(internalName);
+        if (directory is null)
+        {
+            return;
+        }
+
+        try
+        {
+            lock (this.gate)
+            {
+                var manifest = new UITextOriginalsManifest
+                {
+                    InternalName = internalName,
+                    PluginVersion = pluginVersion,
+                    PatchedAt = patchedAt,
+                    AppliedEntries = appliedEntries,
+                };
+
+                var keep = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var file in files)
+                {
+                    if (file.PatchedHash is not { Length: > 0 } patchedHash || !this.IsDurableBackup(file.BackupPath))
+                    {
+                        // 有文件没能进持久目录：不发清单——认领时缺一份就不完整，宁可退回反向还原
+                        return;
+                    }
+
+                    var backupName = Path.GetFileName(file.BackupPath!);
+                    keep.Add(backupName);
+                    manifest.Files.Add(new UITextOriginalsManifestFile
+                    {
+                        Name = Path.GetFileName(file.Path),
+                        SourceHash = file.SourceHash,
+                        PatchedHash = patchedHash,
+                        Backup = backupName,
+                    });
+                }
+
+                if (manifest.Files.Count == 0)
+                {
+                    return;
+                }
+
+                Directory.CreateDirectory(directory);
+                foreach (var existing in Directory.GetFiles(directory, "*.orig"))
+                {
+                    if (!keep.Contains(Path.GetFileName(existing)))
+                    {
+                        TryDeleteFile(existing);
+                    }
+                }
+
+                var path = Path.Combine(directory, "manifest.json");
+                var temp = path + ".tmp";
+                File.WriteAllText(temp, JsonSerializer.Serialize(manifest, Options) + Environment.NewLine, new System.Text.UTF8Encoding(false));
+                File.Move(temp, path, overwrite: true);
+            }
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 写原始备份清单失败：{Name}", internalName);
+        }
+    }
+
+    /// <summary>
+    ///     补丁记录丢了时，从持久目录认领：只有当「盘上文件正好是打完补丁的那份」且「备份正好是当时那份原文」时
+    ///     才重建状态；任一哈希对不上就拒绝（插件更新过时，绝不能把旧原文盖回去）。
+    /// </summary>
+    public UITextPatchState? TryAdopt(string internalName, string dllPath, string? pluginVersion)
+    {
+        var directory = this.OriginalsDirectoryOf(internalName);
+        if (directory is null || string.IsNullOrEmpty(dllPath))
+        {
+            return null;
+        }
+
+        var manifestPath = Path.Combine(directory, "manifest.json");
+        if (!File.Exists(manifestPath))
+        {
+            return null;
+        }
+
+        var pluginDirectory = Path.GetDirectoryName(dllPath);
+        if (string.IsNullOrEmpty(pluginDirectory))
+        {
+            return null;
+        }
+
+        try
+        {
+            var manifest = JsonSerializer.Deserialize<UITextOriginalsManifest>(
+                File.ReadAllText(manifestPath, System.Text.Encoding.UTF8),
+                Options);
+            if (manifest?.Files is not { Count: > 0 })
+            {
+                return null;
+            }
+
+            var mainName = Path.GetFileName(dllPath);
+            var files = new List<UITextPatchFile>();
+            UITextPatchFile? main = null;
+            foreach (var item in manifest.Files)
+            {
+                var current = Path.Combine(pluginDirectory, item.Name);
+                var backup = Path.Combine(directory, item.Backup);
+                if (!File.Exists(current) || !File.Exists(backup))
+                {
+                    return null;
+                }
+
+                if (!string.Equals(HashOf(current), item.PatchedHash, StringComparison.OrdinalIgnoreCase)
+                    || !string.Equals(HashOf(backup), item.SourceHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    return null;
+                }
+
+                var file = new UITextPatchFile
+                {
+                    Path = current,
+                    SourceHash = item.SourceHash,
+                    PatchedHash = item.PatchedHash,
+                    BackupPath = backup,
+                };
+                files.Add(file);
+                if (string.Equals(item.Name, mainName, StringComparison.OrdinalIgnoreCase))
+                {
+                    main = file;
+                }
+            }
+
+            if (main is null)
+            {
+                return null;
+            }
+
+            // 主程序集排第一（界面与旧状态都按第一份当主程序集用）
+            files.Remove(main);
+            files.Insert(0, main);
+
+            var state = new UITextPatchState
+            {
+                InternalName = internalName,
+                DLLPath = main.Path,
+                PluginVersion = pluginVersion ?? manifest.PluginVersion,
+                SourceHash = main.SourceHash,
+                PatchedHash = main.PatchedHash,
+                PatchedAt = manifest.PatchedAt ?? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                BackupPath = main.BackupPath,
+                AppliedEntries = manifest.AppliedEntries,
+                Files = files,
+                PendingVerify = false,
+            };
+            this.Save(state);
+            return state;
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 认领持久备份失败：{Name}", internalName);
+            return null;
+        }
+    }
+
+    /// <summary>把配置目录里的旧备份搬进持久目录（一次性迁移）。返回新路径；失败返回 null。</summary>
+    public string? MoveBackupToOriginals(string internalName, string dllPath, string backupPath, string sourceHash)
+    {
+        var directory = this.OriginalsDirectoryOf(internalName);
+        if (directory is null)
+        {
+            return null;
+        }
+
+        try
+        {
+            lock (this.gate)
+            {
+                Directory.CreateDirectory(directory);
+                var target = Path.Combine(directory, Path.GetFileName(dllPath) + ".orig");
+                if (File.Exists(target)
+                    && string.Equals(HashOf(target), sourceHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    return target;
+                }
+
+                var temp = target + ".tmp";
+                File.Copy(backupPath, temp, overwrite: true);
+                if (!string.Equals(HashOf(temp), sourceHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    TryDeleteFile(temp);
+                    return null;
+                }
+
+                File.Move(temp, target, overwrite: true);
+                return target;
+            }
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 迁移备份到持久目录失败：{Name}", internalName);
+            return null;
+        }
+    }
+
+    /// <summary>还原干净后清掉持久目录里这份补丁的原始备份（DLL 已经回到原版，不需要它们了）。</summary>
+    public void RemoveOriginals(UITextPatchState state)
+    {
+        var directory = this.OriginalsDirectoryOf(state.InternalName);
+        if (directory is null)
+        {
+            return;
+        }
+
+        try
+        {
+            lock (this.gate)
+            {
+                foreach (var file in state.EffectiveFiles)
+                {
+                    if (this.IsDurableBackup(file.BackupPath))
+                    {
+                        TryDeleteFile(file.BackupPath!);
+                    }
+                }
+
+                TryDeleteFile(Path.Combine(directory, "manifest.json"));
+                if (Directory.Exists(directory) && Directory.GetFileSystemEntries(directory).Length == 0)
+                {
+                    Directory.Delete(directory);
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // 清理是尽力而为
+        }
+    }
+
+    private string? OriginalsDirectoryOf(string internalName) =>
+        this.originalsDirectory is null ? null : Path.Combine(this.originalsDirectory, Sanitize(internalName));
+
+    /// <summary>持久目录里的原始备份；写不进去（权限 / 路径）返回 null，由调用方退回配置目录。</summary>
+    private string? BackupToOriginals(string internalName, string dllPath, string sourceHash)
+    {
+        var directory = this.OriginalsDirectoryOf(internalName);
+        if (directory is null)
+        {
+            return null;
+        }
+
+        try
+        {
+            lock (this.gate)
+            {
+                Directory.CreateDirectory(directory);
+                var target = Path.Combine(directory, Path.GetFileName(dllPath) + ".orig");
+                if (File.Exists(target)
+                    && string.Equals(HashOf(target), sourceHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    return target;
+                }
+
+                var temp = target + ".tmp";
+                File.Copy(dllPath, temp, overwrite: true);
+                if (!string.Equals(HashOf(temp), sourceHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    TryDeleteFile(temp);
+                    return null;
+                }
+
+                File.Move(temp, target, overwrite: true);
+                return target;
+            }
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 持久目录备份失败（退回配置目录）：{Path}", dllPath);
+            return null;
+        }
+    }
+
+    private static void TryDeleteFile(string path)
+    {
+        try
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+        catch (Exception)
+        {
+            // 删不掉不影响
         }
     }
 

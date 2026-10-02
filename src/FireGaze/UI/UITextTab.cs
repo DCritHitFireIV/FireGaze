@@ -1422,8 +1422,7 @@ internal sealed class UITextTab
         {
             // ① 抽取（盘上是我们的补丁时自动改读原始备份）
             // 先记两个时间点：「包」是不是在补丁之后又改过（改过就要重打，别被下面的“已是最新”跳过去）
-            var packPath = Path.Combine(this.store.DirectoryPath, entry.InternalName + ".json");
-            var packTimeBefore = File.Exists(packPath) ? File.GetLastWriteTime(packPath) : DateTime.MinValue;
+            var packTimeBefore = this.store.LastWriteTime(entry.InternalName);
             var patchedAt = this.patches.PatchedAt(entry) ?? DateTime.MinValue;
             var packTouchedSincePatch = packTimeBefore > patchedAt.AddSeconds(1);
 

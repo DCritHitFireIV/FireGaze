@@ -1487,11 +1487,7 @@ internal sealed class UITextEditorWindow : Window
         }
     }
 
-    private DateTime PackMtime(string internalName)
-    {
-        var path = Path.Combine(this.store.DirectoryPath, internalName + ".json");
-        return File.Exists(path) ? File.GetLastWriteTime(path) : DateTime.MinValue;
-    }
+    private DateTime PackMtime(string internalName) => this.store.LastWriteTime(internalName);
 
     /// <summary>
     ///     窗口开着时发现磁盘上的包被外部改过就重新载入 + 重抽（自带保护：本地有未保存改动时不动，
