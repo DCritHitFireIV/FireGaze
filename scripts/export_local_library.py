@@ -41,6 +41,12 @@ DO_NOT_LOCALIZE = {
     "aeassistv3", "aeassist", "dailyroutines", "omnitoolbox", "xsztoolbox",
     "kodakkuassist", "promerotation", "nyadraw", "i-ching-gl", "missfisher",
     "lightlesssync", "lightlesscn", "sillytoolbox", "pvpauto", "bocchi",
+    "aetherphonecn", "avantgardecn", "bossmodreborncn", "brio-cn", "dalamudcnadapter",
+    "damagemeter-cn", "extrachat-cn", "fuckdalamudcn", "hyperboreacn", "icecn",
+    "inventorytoolscn", "itemvendorlocationcn", "mahjong.plugin.cn", "malmstonecn", "marketroutecn",
+    "ocnfarmer", "pvplogscn", "priceinsight-cn", "pvpstatscn", "retainerrepricercn",
+    "tidychatcn", "vfxeditorcn", "xivcomboexpandedcn", "visland_cn", "keitatoolbox",
+    "pfclassifier", "pfradar", "pvpselector", "untarnishedheart",
 }
 
 
