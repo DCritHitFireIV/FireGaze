@@ -101,6 +101,20 @@
 
 ---
 
+## 已排除：在不汉化名单里（灰名单也不少，但整包跳过）
+
+| 插件 | 灰名单 | UI | 备注 |
+|---|---:|---:|---|
+| LightlessSync | 239 | 954 | 不汉化名单内 |
+| MissFisher | 206 | 9 | 不汉化名单内 |
+| PvpStatsCN | 183 | 246 | 不汉化名单内 |
+| AutoHook | 92 | 620 | 不汉化名单内 |
+| BOCCHI | 32 | 128 | 不汉化名单内 |
+| KeitaToolbox | 23 | 18 | 不汉化名单内 |
+| UntarnishedHeart | 5 | 66 | 不汉化名单内 |
+
+---
+
 ## 备注（两条要留意的）
 
 1. **安装版汉化分支，但内部名不在不汉化名单**：ICE、BossModReborn、Artisan、InventoryTools、Lifestream、Phantom、ai02、Beastmaster、DalamudACT、lccTools、Pawprint、Yourcraft —— 名单里写的是 ICECN / BossModRebornCN / InventoryToolsCN 这种带 CN 的名字，运行时按内部名匹配不到，所以 FireGaze 目前不会跳过它们。要不要补名单（或改成看仓库/元数据判定）等你拍板；本轮清单已按「自带中文」标注给出建议。
