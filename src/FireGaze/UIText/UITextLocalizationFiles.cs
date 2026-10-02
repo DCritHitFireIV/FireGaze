@@ -67,15 +67,32 @@ internal static class UITextLocalizationFiles
 
     /// <summary>
     ///     把包里的本地化文件译文写回中文侧文件。返回要写的文件内容（还没落盘，备份与写入由补丁管理器统一做）。
+    ///     基线口径与 DLL 补丁一致：盘上是我们的补丁时从**原始备份**重新写一遍（改了译文再打一次才会真的更新，
+    ///     直接读当前文件会把自己的旧译文当成上游译文而永远不覆盖）；否则以当前文件为基线。
+    ///     <paramref name="previousFiles" /> 是上一次打补丁的记录（用来认出「盘上是我们的补丁」）。
     ///     <paramref name="error" /> 是第一个出错原因（尽力而为，能写的文件照样写）。
     /// </summary>
-    public static bool TryWrite(string pluginDirectory, UITextPack pack, out List<UITextFileWrite> writes, out string? error)
+    public static bool TryWrite(
+        string pluginDirectory,
+        UITextPack pack,
+        IReadOnlyList<UITextLocalizationPreviousFile>? previousFiles,
+        out List<UITextFileWrite> writes,
+        out string? error)
     {
         writes = [];
         error = null;
         if (string.IsNullOrEmpty(pluginDirectory) || !Directory.Exists(pluginDirectory))
         {
             return false;
+        }
+
+        var previousByPath = new Dictionary<string, UITextLocalizationPreviousFile>(StringComparer.OrdinalIgnoreCase);
+        foreach (var previous in previousFiles ?? [])
+        {
+            if (!string.IsNullOrEmpty(previous.Path))
+            {
+                previousByPath[previous.Path] = previous;
+            }
         }
 
         foreach (var group in pack.Resources
@@ -89,12 +106,45 @@ internal static class UITextLocalizationFiles
                 continue;
             }
 
+            if (!File.Exists(target))
+            {
+                error ??= $"找不到 {Path.GetFileName(target)}（扫描之后被删了？）";
+                continue;
+            }
+
+            string currentText;
+            try
+            {
+                currentText = File.ReadAllText(target, Encoding.UTF8);
+            }
+            catch (Exception e)
+            {
+                error ??= $"读不动 {Path.GetFileName(target)}：{e.Message}";
+                continue;
+            }
+
+            var currentHash = UITextHash.OfFile(target);
+            previousByPath.TryGetValue(target, out var previous);
+            var isOurs = IsOurPatchedFile(previous, currentHash);
+
+            string baselineText;
+            try
+            {
+                // 盘上是我们的补丁 → 回到原始内容再重新写；否则当前文件就是原始基线
+                baselineText = isOurs
+                    ? File.ReadAllText(previous!.BackupPath!, Encoding.UTF8)
+                    : currentText;
+            }
+            catch (Exception e)
+            {
+                error ??= $"读不动 {Path.GetFileName(target)} 的原始备份：{e.Message}";
+                continue;
+            }
+
             JsonNode root;
             try
             {
-                root = File.Exists(target)
-                    ? JsonNode.Parse(File.ReadAllText(target, Encoding.UTF8)) ?? new JsonObject()
-                    : new JsonObject();
+                root = JsonNode.Parse(baselineText) ?? new JsonObject();
             }
             catch (Exception e)
             {
@@ -105,9 +155,9 @@ internal static class UITextLocalizationFiles
             var changed = 0;
             foreach (var item in group)
             {
-                // 中文侧已有别的译文（多半是上游填的）→ 不覆盖，只跳过
-                if (ReadString(root, item.Key) is { Length: > 0 } current
-                    && !string.Equals(current, item.Translated, StringComparison.Ordinal))
+                // 基线上已有译文（上游填的，或是同一个译文）→ 不覆盖；
+                // 指针上不是字符串（中英文两边结构对不上）→ 也不动，别把结构改坏。
+                if (!CanWrite(root, item.Key))
                 {
                     continue;
                 }
@@ -123,15 +173,34 @@ internal static class UITextLocalizationFiles
                 continue;
             }
 
+            var content = root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine;
+            if (string.Equals(content, currentText, StringComparison.Ordinal))
+            {
+                continue; // 产出与盘上现有内容一致，不必重写
+            }
+
             writes.Add(new UITextFileWrite(
                 target,
                 group.Key,
                 changed,
-                root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine));
+                content,
+                isOurs ? previous!.SourceHash : currentHash,
+                NeedsBackup: !isOurs,
+                ReuseBackup: isOurs ? previous!.BackupPath : null));
         }
 
         return true;
     }
+
+    /// <summary>
+    ///     盘上的文件是不是我们自己打过的补丁：记录里有原始备份，且当前哈希 = 打完之后的哈希。
+    ///     有一条对不上就不能当「是我们的补丁」——绝不能拿旧备份去盖更新后的文件。
+    /// </summary>
+    public static bool IsOurPatchedFile(UITextLocalizationPreviousFile? previous, string currentHash) =>
+        previous is { HasBackup: true }
+        && previous.PatchedHash is { Length: > 0 }
+        && currentHash.Length > 0
+        && string.Equals(currentHash, previous.PatchedHash, StringComparison.OrdinalIgnoreCase);
 
     // ── 发现语言文件 ─────────────────────────────────────────────────────
 
@@ -279,9 +348,19 @@ internal static class UITextLocalizationFiles
                 continue;
             }
 
-            if (ReadString(chinese, pointer) is { Length: > 0 })
+            if (!CanWrite(chinese, pointer))
             {
-                continue; // 中文侧已有译文
+                continue; // 中文侧已有译文，或这个位置根本不是字符串（结构对不上）
+            }
+
+            // 「原生显示」类键（PetRenamer 的 Language.*.Raw）：插件用「以原生语言显示语言名」开关专门读它，
+            // 设计上就要显示各语言自己的名字（English / Deutsch / Nederlands…），翻成中文反而让开关失去意义。
+            // 两种写法都算：键名本身就是 Language.English.Raw（指针 /Language.English.Raw，以 .Raw 结尾），
+            // 或嵌成 {"Language":{"English":{"Raw":…}}}（指针 /Language/English/Raw）。
+            if (pointer.EndsWith("/Raw", StringComparison.Ordinal)
+                || pointer.EndsWith(".Raw", StringComparison.Ordinal))
+            {
+                continue;
             }
 
             result.Add(new UITextResourceItem
@@ -338,6 +417,22 @@ internal static class UITextLocalizationFiles
         return node is JsonValue value && value.GetValueKind() == JsonValueKind.String
             ? value.GetValue<string>()
             : null;
+    }
+
+    /// <summary>
+    ///     能不能在这个指针上写译文：位置上是空的或者空字符串（当缺）；
+    ///     已有非空字符串（别人的译文）或根本不是字符串（两边结构对不上）都不能写。
+    /// </summary>
+    private static bool CanWrite(JsonNode? root, string pointer)
+    {
+        var node = Resolve(root, pointer);
+        return node switch
+        {
+            null => true,
+            JsonValue value => value.GetValueKind() != JsonValueKind.String
+                               || value.GetValue<string>() is not { Length: > 0 },
+            _ => false,
+        };
     }
 
     private static JsonNode? Resolve(JsonNode? root, string pointer)
@@ -432,5 +527,25 @@ internal static class UITextLocalizationFiles
     }
 }
 
-/// <summary>一个待写入的本地化文件（内容已在内存里，备份/落盘由补丁管理器做）。</summary>
-internal sealed record UITextFileWrite(string Path, string Container, int Count, string Content);
+/// <summary>
+///     上一次打补丁时一个文件的记录（本地化文件写回只需要这四个字段）。
+///     单独一份：离线探针只编译本地化模块，不依赖补丁存储那一层。
+/// </summary>
+internal sealed record UITextLocalizationPreviousFile(string Path, string SourceHash, string? PatchedHash, string? BackupPath)
+{
+    public bool HasBackup => !string.IsNullOrEmpty(this.BackupPath) && File.Exists(this.BackupPath);
+}
+
+/// <summary>
+///     一个待写入的本地化文件（内容已在内存里，备份/落盘由补丁管理器做）。
+///     <paramref name="SourceHash" /> 是**原始基线**的哈希（不是当前文件的）；
+///     <paramref name="NeedsBackup" /> 为 false 时盘上已经是我们的补丁，<paramref name="ReuseBackup" /> 是要沿用的那份原始备份。
+/// </summary>
+internal sealed record UITextFileWrite(
+    string Path,
+    string Container,
+    int Count,
+    string Content,
+    string SourceHash,
+    bool NeedsBackup,
+    string? ReuseBackup);

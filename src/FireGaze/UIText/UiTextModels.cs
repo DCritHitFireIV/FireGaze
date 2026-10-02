@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+
 namespace FireGaze.UIText;
 
 /// <summary>
@@ -143,4 +145,23 @@ public sealed class UITextExtraction
     /// </summary>
     public int ChineseExcludedCount => Entries.Count(
         e => e.Role == UITextRole.Excluded && e.Reason.StartsWith("已是中文", StringComparison.Ordinal));
+}
+
+/// <summary>
+///     文件 SHA-256（算不出来返回空串）。补丁存储与本地化文件写回共用同一口径。
+/// </summary>
+internal static class UITextHash
+{
+    public static string OfFile(string path)
+    {
+        try
+        {
+            using var stream = File.OpenRead(path);
+            return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
+        }
+        catch (Exception)
+        {
+            return string.Empty;
+        }
+    }
 }

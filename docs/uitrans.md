@@ -510,27 +510,45 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - 文案：上传确认框与参与翻译窗口都写明「由 FireGaze 中继匿名提交、不需要 GitHub 账号；提交后成为一个 GitHub
   公开 issue」——「公开 issue」是结果（中继用服务端令牌建 issue），不是要求玩家自己去 GitHub 操作。
 
-## 插件自带本地化文件的普查与支持（2026-10-02，1.2.0.84 实现）
+## 插件自带本地化文件的普查与支持（2026-10-02，1.2.0.84 实现；1.2.0.85 修二次写入）
 
 用户报 AutoDuty 的 `Waits on the specified plugins…` / `Stop Looping @ Item Level` 没翻。定位：这些字符串**不在 DLL 里**，
-而在插件自带的本地化文件里（DLL 补丁碰不到）。全量普查本机已装插件后：
+而在插件自带的本地化文件里（DLL 补丁碰不到）。全量普查本机已装插件（含语言目录/语言文件两种布局；按键级比较）：
 
 | 插件 | 布局 | 英文键 | 中文缺 |
 |---|---|---|---|
 | AutoDuty | `Localization/en-US/*.json` + `zh-CN/*.json` | 654 | **171**（MainTab 90 / ConfigTab 57 / Overlay 11 / LoopActions 10…） |
-| PetRenamer | `I18N/en_UK.json` + `zh_CN.json` | 148 | **27** |
-| BOCCHI | `Translations/{en,zh}/*.json`（各 23 文件） | 709 | 0（完整） |
-| Henchman | `Localization/{de,en,fr,jp,ko,tw,zh}/*.json`（各 16 文件） | 237 | 0（完整） |
-| Aetherphone | `Localization/{de,en,…}.json` —— **没有 zh** | 6739 | 全部（等于没有中文本地化） |
+| PetRenamer | `I18N/en_UK.json` + `zh_CN.json` | 148 | **27**（进候选 21；4 个 `.Raw` 语言名 + 2 个已是中文的值被规则排除） |
+| BOCCHI | `Translations/{en,zh}/*.json`（各 23 文件） | 727 | 0（完整） |
+| Henchman | `Localization/{de,en,fr,jp,ko,tw,zh}/*.json`（各 16 文件） | 202 | 0（完整） |
+| Aetherphone | `Localization/{en,zh,…}.json` | 6739 | **0（完整）**——早先一版人工普查误记成「没有 zh」，实际有完整 `zh.json` |
+| SillyToolbox | `Assets/Localization/{en,zh-Hans,zh-Hant}.json` | 323 | 0（完整；目录嵌套，当前扫描器到不了，见下） |
+| pvpauto | `Assets/Langs/{English,Chinese}.json` | 631 | 0（完整；同上） |
+| DailyRoutines / NyaDraw / KodakkuAssist | `Assets/Langs` ×2 / `Module/Langs`（.resx） | — | 不参与（在「不汉化」名单里，朋友维护的中文插件） |
 
 - 形态不统一：**目录分语言**（`en-US/`、`en/`）与**单文件分语言**（`en.json`、`en_UK.json`）两种；
-  语言代码有 `en-US/zh-CN`、`en/zh`、`en_UK/zh_CN` 三种写法；中文文件可能**根本不存在**（Aetherphone）。
+  语言代码有 `en-US/zh-CN`、`en/zh`、`en_UK/zh_CN` 三种写法。
 - **已实现（`UITextLocalizationFiles.cs`）**：从英文侧读出**中文侧缺失的键**→走现有翻译通道→写回中文侧文件（临时文件替换）。
   · 复用包的 **`resources` 段**：容器名 = `file:<相对插件目录的路径>`、键 = JSON 指针（`/A/B/0`）——
     编辑器行、翻译通道、公共库合并、投稿、清账都不用新增概念；编辑器里显示为「文件：Localization/zh-CN/ConfigTab.json · /A/B」。
-  · **上游优先**：中文侧已有别的译文的键一律不覆盖（只跳过）；打过补丁后这些键不再缺，抽取自然不再报——
+  · **上游优先**：基线上已有译文的键一律不覆盖（只跳过）——基线的口径见下条；打过补丁后这些键不再缺，抽取自然不再报，
     因此 `PruneAgainstExtraction` 对 `file:` 条目**不做自动清账**，生命周期交给写入规则。
+  · **写入口径（1.2.0.85 修）**：与 DLL 补丁同构——盘上是我们的补丁时**从原始备份重新写一遍**再落盘；
+    不是我们的补丁时以当前文件为基线并先备份。这样「改了译文再打一次」真的会更新（旧实现直接读当前文件，
+    把自己的旧译文当成上游译文而永不覆盖），也**不会把补丁内容备份成原文**（旧实现二次写入会覆盖 `.orig`）。
+    产出与盘上内容一致时不写盘（避免无谓重写）；管理器把「还是我们的补丁」的旧记录原样留在状态里，
+    免得它从补丁记录/持久清单里消失、还原与更新后重打找不到它。
+  · **结构保护**：指针位置上不是字符串（中英文两边结构对不上）时既不进候选、也不写入，绝不把上游结构改坏。
+  · **`.Raw` 不翻**：`Language.*.Raw` 是「以原生语言显示语言名」开关专用（English / Deutsch / Nederlands…），
+    翻成中文会让这个开关失去意义——键名以 `/Raw` 或 `.Raw` 结尾的一律不进候选（PetRenamer 实测 4 条）。
   · **备份/还原/更新后重打**沿用补丁状态那套：中文文件与 DLL 一起进 `Files`（备份进持久目录 `uit-originals`，
-    清单里的文件名改成「相对插件目录的路径」——子目录里的文件只存文件名认领不回来）；还原时一起回去。
-  · 范围：只处理**已经自带中文变体**的插件（AutoDuty、PetRenamer）；没有中文文件的 Aetherphone 不做。
-  · fgtest：`本地化文件：缺键候选 / JSON 指针 / 写入不覆盖上游译文 全过`。
+    清单里的文件名是「相对插件目录的路径」）；持久备份名带源路径短哈希（`x.json.<hash>.orig`），
+    同名但不同目录的文件互不覆盖。还原时一起回去。
+  · 范围：只处理**已经自带中文变体**的插件，不替没有中文文件的插件发明语言
+    （当初以为 Aetherphone 没有 zh，实测它其实是完整的）。
+  · **扫描器到不了的地方（已知边界）**：只认插件目录**下一层**的语言目录（`Localization/…`、`I18N/…` 等）
+    与根目录的语言文件；`Assets/Langs`、`Assets/Localization`、`Module/Langs` 这类**嵌套**布局、以及
+    `English.json`/`Chinese.json` 这类**按语言全名命名**的文件不在范围内。受影响的两个插件（SillyToolbox、pvpauto）
+    目前中文完整、且是中文作者的小工具；真需要时再扩扫描器（别顺手把朋友维护的插件揽进来）。
+  · fgtest：`本地化文件：缺键候选 / JSON 指针 / 写入不覆盖上游译文 全过`（含 `.Raw` 排除、二次写入改译文、
+    结构保护、同名文件备份不串）。

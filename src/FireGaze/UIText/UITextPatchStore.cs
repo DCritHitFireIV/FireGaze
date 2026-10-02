@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -552,7 +553,7 @@ internal sealed class UITextPatchStore
             lock (this.gate)
             {
                 Directory.CreateDirectory(directory);
-                var target = Path.Combine(directory, Path.GetFileName(dllPath) + ".orig");
+                var target = Path.Combine(directory, DurableBackupName(dllPath));
                 if (File.Exists(target)
                     && string.Equals(HashOf(target), sourceHash, StringComparison.OrdinalIgnoreCase))
                 {
@@ -629,7 +630,7 @@ internal sealed class UITextPatchStore
             lock (this.gate)
             {
                 Directory.CreateDirectory(directory);
-                var target = Path.Combine(directory, Path.GetFileName(dllPath) + ".orig");
+                var target = Path.Combine(directory, DurableBackupName(dllPath));
                 if (File.Exists(target)
                     && string.Equals(HashOf(target), sourceHash, StringComparison.OrdinalIgnoreCase))
                 {
@@ -696,20 +697,29 @@ internal sealed class UITextPatchStore
     }
 
     /// <summary>
-    ///     文件 SHA-256（算不出来返回空串）。
+    ///     持久目录里备份文件的名字：源文件名 + 源路径的短哈希。
+    ///     同一插件可能有**同名但不同目录**的文件（<c>zh-CN/A/x.json</c> 与 <c>zh-CN/B/x.json</c>），
+    ///     只按文件名备份会让后写的顶掉先写的——还原时就会把 A 的内容写进 B。
+    ///     路径不变时名字稳定：同一版本重打会复用已备份的原文，不会反复复制。
     /// </summary>
-    public static string HashOf(string path)
+    private static string DurableBackupName(string sourcePath)
     {
         try
         {
-            using var stream = File.OpenRead(path);
-            return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
+            var full = Path.GetFullPath(sourcePath);
+            var hash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(full))).ToLowerInvariant();
+            return Path.GetFileName(sourcePath) + "." + hash[..10] + ".orig";
         }
         catch (Exception)
         {
-            return string.Empty;
+            return Path.GetFileName(sourcePath) + ".orig";
         }
     }
+
+    /// <summary>
+    ///     文件 SHA-256（算不出来返回空串）。
+    /// </summary>
+    public static string HashOf(string path) => UITextHash.OfFile(path);
 
     private string PathOf(string internalName) => Path.Combine(this.stateDirectory, Sanitize(internalName) + ".json");
 

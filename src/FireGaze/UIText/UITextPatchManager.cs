@@ -476,32 +476,38 @@ internal sealed class UITextPatchManager
         }
 
         // 插件自带的本地化文件（JSON）：中文侧缺的键写回中文文件——独立于 DLL，备份/状态/还原走同一套。
-        // 失败不影响 DLL 补丁（写不动不会弄坏插件），只在消息里说明。
+        // 与 DLL 同一套基线语义：盘上是我们的补丁时从原始备份重新写一遍（改了译文再打一次才会真的更新），
+        // 需要新基线时才备份。失败不影响 DLL 补丁（写不动不会弄坏插件），只在消息里说明。
         var localizationWritten = 0;
         var localizationNote = string.Empty;
         try
         {
-            if (UITextLocalizationFiles.TryWrite(pluginDirectory, pack, out var fileWrites, out var fileError))
+            var previousFiles = existing?.EffectiveFiles
+                .Select(f => new UITextLocalizationPreviousFile(f.Path, f.SourceHash, f.PatchedHash, f.BackupPath))
+                .ToList();
+            if (UITextLocalizationFiles.TryWrite(pluginDirectory, pack, previousFiles, out var fileWrites, out var fileError))
             {
-                if (fileError is { Length: > 0 })
-                {
-                    localizationNote = fileError;
-                }
-
                 foreach (var write in fileWrites)
                 {
-                    var sourceHash = UITextPatchStore.HashOf(write.Path);
-                    if (sourceHash.Length == 0)
+                    string? backup;
+                    if (write.NeedsBackup)
                     {
-                        localizationNote = $"算不出 {Path.GetFileName(write.Path)} 的哈希，跳过这个文件";
-                        continue;
+                        backup = this.store.Backup(entry.InternalName, write.Path, write.SourceHash);
+                        if (backup is null)
+                        {
+                            localizationNote = $"备份 {Path.GetFileName(write.Path)} 失败，跳过这个文件";
+                            continue;
+                        }
                     }
-
-                    var backup = this.store.Backup(entry.InternalName, write.Path, sourceHash);
-                    if (backup is null)
+                    else
                     {
-                        localizationNote = $"备份 {Path.GetFileName(write.Path)} 失败，跳过这个文件";
-                        continue;
+                        // 盘上已经是我们的补丁：沿用当初那份原始备份，绝不能把补丁内容当新基线备一份
+                        backup = write.ReuseBackup;
+                        if (backup is null || !File.Exists(backup))
+                        {
+                            localizationNote = $"找不到 {Path.GetFileName(write.Path)} 的原始备份，跳过这个文件";
+                            continue;
+                        }
                     }
 
                     try
@@ -519,11 +525,16 @@ internal sealed class UITextPatchManager
                     fileStates.Add(new UITextPatchFile
                     {
                         Path = write.Path,
-                        SourceHash = sourceHash,
+                        SourceHash = write.SourceHash,
                         PatchedHash = UITextPatchStore.HashOf(write.Path),
                         BackupPath = backup,
                     });
                     localizationWritten += write.Count;
+                }
+
+                if (localizationNote.Length == 0 && fileError is { Length: > 0 })
+                {
+                    localizationNote = fileError;
                 }
             }
             else if (fileError is { Length: > 0 })
@@ -535,6 +546,30 @@ internal sealed class UITextPatchManager
         {
             localizationNote = e.Message;
             Plugin.Log?.Warning(e, "[内部文本] 写本地化文件失败");
+        }
+
+        // 本轮没重写、但盘上还是我们补丁的文件（多半是译文没变化的本地化文件）也要继续留在记录里：
+        // 丢了它，还原 / 更新后重打 / 持久清单都会找不到这个文件。
+        if (existing is not null)
+        {
+            var known = new HashSet<string>(files, StringComparer.OrdinalIgnoreCase);
+            foreach (var fileState in fileStates)
+            {
+                known.Add(fileState.Path);
+            }
+
+            foreach (var previous in existing.EffectiveFiles)
+            {
+                if (string.IsNullOrEmpty(previous.Path)
+                    || known.Contains(previous.Path)
+                    || !File.Exists(previous.Path)
+                    || !string.Equals(UITextPatchStore.HashOf(previous.Path), previous.PatchedHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                fileStates.Add(previous);
+            }
         }
 
         var main = fileStates[0];
@@ -566,9 +601,10 @@ internal sealed class UITextPatchManager
         {
             message += $"（本地化文件部分失败：{localizationNote}）";
         }
-        if (fileStates.Count > 1)
+        var assembliesPatched = fileStates.Count(f => f.Path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase));
+        if (assembliesPatched > 1)
         {
-            message += $"（跨 {fileStates.Count} 个程序集）";
+            message += $"（跨 {assembliesPatched} 个程序集）";
         }
 
         if (missing.Count > 0)
