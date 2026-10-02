@@ -76,16 +76,25 @@ def display_part(literal: str) -> str:
     return literal.split("###", 1)[0]
 
 
-def export_pack(pack: dict) -> tuple[dict | None, int]:
-    """本机包 → 库包；返回 (库包或 None, 因已是中文而跳过的条数)。
+def export_pack(pack: dict) -> tuple[dict | None, int, int]:
+    """本机包 → 库包；返回 (库包或 None, 因已是中文而跳过的条数, 因本机标了不翻而跳过的条数)。
 
     已经是中文的（含原生「中文###ID」标签）不导出：它们不需要翻译，翻出来的也只是噪声
     （2026-10-02 扫出 AetherBlackbox / ARSR / ArmoireButler 一批）。
+    本机标了「不翻」的也不导出（2026-10-03）：那是对「这个字符串不该翻」的本地判定，
+    不该随库外溢——否则会把图标资源名 / 缓存 id 这类不该翻的条目教给别人。
     """
     skipped_chinese = 0
+    skipped_local = 0
+    skipped_set = set(pack.get("skipped") or [])
+    skipped_res_set = set(pack.get("skippedResources") or [])
+    skipped_attr_set = set(pack.get("skippedAttributes") or [])
     entries = []
     for item in pack.get("entries") or []:
         if not translated(item) or not (item.get("Original") or ""):
+            continue
+        if item["Original"] in skipped_set:
+            skipped_local += 1
             continue
         if is_already_chinese(display_part(item["Original"])):
             skipped_chinese += 1
@@ -104,6 +113,9 @@ def export_pack(pack: dict) -> tuple[dict | None, int]:
     for item in pack.get("resources") or []:
         if not translated(item):
             continue
+        if (item.get("Container") or "") + "\u0001" + (item.get("Key") or "") in skipped_res_set:
+            skipped_local += 1
+            continue
         if is_already_chinese(item.get("Original") or item.get("Translated") or ""):
             skipped_chinese += 1
             continue
@@ -121,6 +133,9 @@ def export_pack(pack: dict) -> tuple[dict | None, int]:
     for item in pack.get("attributes") or []:
         if not translated(item) or not (item.get("Original") or ""):
             continue
+        if item["Original"] in skipped_attr_set:
+            skipped_local += 1
+            continue
         if is_already_chinese(display_part(item["Original"])):
             skipped_chinese += 1
             continue
@@ -134,7 +149,7 @@ def export_pack(pack: dict) -> tuple[dict | None, int]:
         )
 
     if not entries and not resources and not attributes:
-        return None, skipped_chinese
+        return None, skipped_chinese, skipped_local
 
     meta = pack.get("_meta") or {}
     library_pack = {
@@ -148,7 +163,7 @@ def export_pack(pack: dict) -> tuple[dict | None, int]:
         "resources": resources,
         "attributes": attributes,
     }
-    return library_pack, skipped_chinese
+    return library_pack, skipped_chinese, skipped_local
 
 
 def _overlay(base: list[dict], local: list[dict], key) -> tuple[list[dict], int, int, int, int]:
@@ -219,6 +234,7 @@ def main(argv: list[str] | None = None) -> int:
     total_attributes = 0
     total_overridden = 0
     total_added = 0
+    total_skipped_local = 0
     for file_name in sorted(os.listdir(args.packs_dir)):
         if not file_name.endswith(".json"):
             continue
@@ -235,10 +251,11 @@ def main(argv: list[str] | None = None) -> int:
         if not isinstance(pack, dict) or "entries" not in pack:
             continue  # 不是译文包（如别的 json）
 
-        library_pack, skipped_chinese = export_pack(pack)
+        library_pack, skipped_chinese, skipped_local = export_pack(pack)
         if library_pack is None:
             print(f"  [{internal_name}] 没有可导出的译文，跳过")
             continue
+        total_skipped_local += skipped_local
 
         target = os.path.join(args.out, file_name)
         override_stats = ""
@@ -262,6 +279,7 @@ def main(argv: list[str] | None = None) -> int:
         total_attributes += attributes
         exported += 1
         cn_note = f" ｜ 已是中文跳过 {skipped_chinese}" if skipped_chinese else ""
+        cn_note += f" ｜ 不翻跳过 {skipped_local}" if skipped_local else ""
         print(f"  [{internal_name}] 条目 {entries} · 资源 {resources} · 属性 {attributes}{override_stats}{cn_note}")
 
         if not args.dry_run:
@@ -276,7 +294,7 @@ def main(argv: list[str] | None = None) -> int:
     print()
     print(
         f"共 {exported} 个插件：条目 {total_entries} · 资源 {total_resources} · 属性 {total_attributes}"
-        f"（相对库里已有：覆盖 {total_overridden} · 新增 {total_added}）"
+        f"（相对库里已有：覆盖 {total_overridden} · 新增 {total_added}；本机不翻跳过 {total_skipped_local}）"
     )
     if args.dry_run:
         print("（dry-run，没有写盘）")

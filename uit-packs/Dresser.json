@@ -1,0 +1,3820 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Dresser Mod List",
+      "Translated": "衣柜模组列表",
+      "Context": "Configuration..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open dresser.",
+      "Translated": "打开衣柜。",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "AddSortSorter",
+      "Translated": "添加排序规则",
+      "Context": "GearBrowser.DrawSort",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Restore default order sets",
+      "Translated": "恢复默认排序集",
+      "Context": "GearBrowser.DrawSort",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "RestoreDefaultSorters",
+      "Translated": "恢复默认排序",
+      "Context": "GearBrowser.DrawSort",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rename ",
+      "Translated": "重命名",
+      "Context": "GearBrowser.DrawSavedSortOrdersList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Ctrl + Shift and Click to delete this saved preset",
+      "Translated": "按住 Ctrl + Shift 并点击以删除此保存的预设",
+      "Context": "GearBrowser.DrawSavedSortOrdersList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No tags available",
+      "Translated": "无可用标签",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all tag filters",
+      "Translated": "清除所有标签筛选",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Include all tags",
+      "Translated": "包含所有标签",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude all tags",
+      "Translated": "排除所有标签",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OpenTagManager",
+      "Translated": "打开标签管理",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Tag Manager",
+      "Translated": "打开标签管理器",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tag Combine Mode determines how multiple include tags are combined:\n\nAny: Any item matching one or more tag\nAll: Only items matching all checked tags",
+      "Translated": "标签组合模式决定多个包含标签的组合方式：\n\n任意：匹配一个或多个标签的物品\n全部：仅匹配所有已勾选标签的物品",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Any",
+      "Translated": "任意",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Translated": "全部",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Include Mode",
+      "Translated": "包含模式",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Universal",
+      "Translated": "通用",
+      "Context": "GearBrowser.DrawTagFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No item found.\nThe filters may be too strong, or you may need to open various inventories(e.g. retainers, Glamour Dresser, Armoire) to populate the item memory with your belongings.",
+      "Translated": "未找到物品。\n筛选条件可能过于严格，或者你需要打开各种库存（如雇员、幻化衣柜、收藏柜）以将你的物品载入内存。",
+      "Context": "GearBrowser.DrawItems",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No slot selected.\nStart looking for items by selecting a slot (e.g. chest or legs) in Plate Creation window.",
+      "Translated": "未选择部位。\n在「Plate Creation」窗口中选择一个部位（如胸部或腿部）以开始查找物品。",
+      "Context": "GearBrowser.DrawItems",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Penumbra",
+      "Translated": "在 Penumbra 中打开",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Vendor Location",
+      "Translated": "商人位置",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Garland Tools",
+      "Translated": "在 Garland Tools 中打开",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Teamcraft",
+      "Translated": "在 Teamcraft 中打开",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Gamer Escape",
+      "Translated": "在 Gamer Escape 中打开",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Universalis",
+      "Translated": "在 Universalis 中打开",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Name",
+      "Translated": "复制名称",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Mod Name",
+      "Translated": "复制模组名称",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Go to mod site",
+      "Translated": "前往模组网站",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Link",
+      "Translated": "链接",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist this Mod",
+      "Translated": "将此模组加入黑名单",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist this item for this mod",
+      "Translated": "将此物品加入此模组的黑名单",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Try On",
+      "Translated": "试穿",
+      "Context": "GearBrowser.ContextMenuBrowser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add a new tag:",
+      "Translated": "添加新标签：",
+      "Context": "GearBrowser.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bind new tag [",
+      "Translated": "绑定新标签 [",
+      "Context": "GearBrowser.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "] to current slot (",
+      "Translated": "] 到当前槽位 (",
+      "Context": "GearBrowser.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Existing tags:",
+      "Translated": "现有标签：",
+      "Context": "GearBrowser.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(no tags with current filter)",
+      "Translated": "（当前筛选下无标签）",
+      "Context": "GearBrowser.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(no tags)",
+      "Translated": "（无标签）",
+      "Context": "GearBrowser.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Translated": "关闭",
+      "Context": "GearBrowser.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shared model:",
+      "Translated": "共享模型：",
+      "Context": "GearBrowser.DrawSameModels",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click on the Glamour Outfit name to apply all items",
+      "Translated": "点击幻化套装名称以应用所有物品",
+      "Context": "GearBrowser.DrawSets",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Owned##Source##GearBrowser",
+      "Translated": "已拥有##Source##GearBrowser",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No item available for this filter",
+      "Translated": "此筛选无可用物品",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unobtained##Source##GearBrowser",
+      "Translated": "未获得##Source##GearBrowser",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Cash Shop",
+      "Translated": "隐藏商城物品",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide cash shop (sq store) items.\nNote: This will also hide the items that can be obtained by other means than the cash shop (e.g. with event's currency). However, these are usually from past event so these currencies should now be unobtainable.",
+      "Translated": "隐藏商城（SE商店）物品。\n注意：这也会隐藏可通过商城以外途径获得的物品（例如活动货币）。不过这些通常来自过去的活动，因此这些货币现在应该已无法获得。",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide No Source",
+      "Translated": "隐藏无来源",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide unobtained items that have no known source.\nNote: This is not purely a \"hide unobtainable\" checkbox, as some unobtainable future event items have known sources, and in opposition, some sources are not known but this plugin.",
+      "Translated": "隐藏无已知来源的未获得物品。\n注意：这并非纯粹的“隐藏无法获得”复选框，因为一些无法获得的未来活动物品有已知来源，相反，有些来源本插件并不知晓。",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Owned",
+      "Translated": "隐藏已拥有",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide items already obtained.",
+      "Translated": "隐藏已获得的物品。",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filters##Source##GearBrowser",
+      "Translated": "筛选##Source##GearBrowser",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Job filter Type",
+      "Translated": "职业筛选类型",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current Race/Gender/GC##displayCategory",
+      "Translated": "当前种族/性别/大国防联军##displayCategory",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Outfits Only",
+      "Translated": "仅幻化套装",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Job Level##Filters##GearBrowser",
+      "Translated": "职业等级##Filters##GearBrowser",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level##Filters##GearBrowser",
+      "Translated": "物品等级##Filters##GearBrowser",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Item Rarity",
+      "Translated": "物品稀有度",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tags##Source##GearBrowser",
+      "Translated": "标签##Source##GearBrowser",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sort##Source##GearBrowser",
+      "Translated": "排序##Source##GearBrowser",
+      "Context": "GearBrowser.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Select to filter Job(s)",
+      "Translated": "选择以筛选职业",
+      "Context": "GearBrowser.JobCategoryFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear##JobCategoryPopup##JobCategory",
+      "Translated": "清除##JobCategoryPopup##JobCategory",
+      "Context": "GearBrowser.JobCategoryFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select All##JobCategoryPopup##JobCategory",
+      "Translated": "全选##JobCategoryPopup##JobCategory",
+      "Context": "GearBrowser.JobCategoryFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Current Job",
+      "Translated": "切换当前职业",
+      "Context": "GearBrowser.JobCategoryFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle Current Job##JobCategoryPopup##JobCategory",
+      "Translated": "切换当前职业##JobCategoryPopup##JobCategory",
+      "Context": "GearBrowser.JobCategoryFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Target Current Job",
+      "Translated": "定位当前职业",
+      "Context": "GearBrowser.JobCategoryFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Target Current Job##JobCategoryPopup##JobCategory",
+      "Translated": "定位当前职业##JobCategoryPopup##JobCategory",
+      "Context": "GearBrowser.JobCategoryFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nJob Index: ",
+      "Translated": "职业索引：",
+      "Context": "GearBrowser.DrawClassJob",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nBattleClassIndex: ",
+      "Translated": "战斗职业索引：",
+      "Context": "GearBrowser.DrawClassJob",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nDohDolJobIndex: ",
+      "Translated": "生产采集职业索引：",
+      "Context": "GearBrowser.DrawClassJob",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nRole: ",
+      "Translated": "职能：",
+      "Context": "GearBrowser.DrawClassJob",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nJobType: ",
+      "Translated": "职业类型：",
+      "Context": "GearBrowser.DrawClassJob",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nIsLimitedJob: ",
+      "Translated": "是否为限定职业：",
+      "Context": "GearBrowser.DrawClassJob",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Gear Browser",
+      "Translated": "装备浏览器",
+      "Context": "GearBrowser..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search",
+      "Translated": "搜索",
+      "Context": "GearBrowser.DrawSearchBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allow using keybinds when the window is not focused\nThis allows to keep using directionnal keys to browse items while moving the camera",
+      "Translated": "窗口未聚焦时允许使用快捷键\n这样在移动镜头时仍可使用方向键浏览物品",
+      "Context": "GearBrowser.DrawSearchBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All compatible\nShow any items including the selected job(s)",
+      "Translated": "全部兼容\n显示包含所选职业在内的所有物品",
+      "Context": "JobFilterTypeExtensions.Tooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Job Gear Only\nOnly show items of selected job(s)\nHandy to find job gear",
+      "Translated": "仅职业装备\n仅显示所选职业的物品\n便于查找职业装备",
+      "Context": "JobFilterTypeExtensions.Tooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Job Type\nOnly show items of job types the selected job is included in\nE.g. Selected PLD, the gear wearable by \"PLD WAR DRK GNB\" or \"Disciple of War\".",
+      "Translated": "职业类型\n仅显示所选职业所属职业类型的物品\n例如：选择 PLD，则显示可由“PLD WAR DRK GNB”或“战斗精英”装备的物品。",
+      "Context": "JobFilterTypeExtensions.Tooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All but Not Job Gear\nShow only gear that can be equiped by multiple jobs, hides job gear\nHandy to make a role compatible glam (became useless with 7.4)",
+      "Translated": "除职业装备外的全部\n仅显示可由多个职业装备的物品，隐藏职业装备\n便于制作通用职能幻化（7.4 后已无用）",
+      "Context": "JobFilterTypeExtensions.Tooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dresser Settings",
+      "Translated": "衣柜设置",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior on open##Behaviours##Behaviours##Config",
+      "Translated": "打开时的行为##Behaviours##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select plate linked to current gearset on open##Behaviours##Config",
+      "Translated": "打开时选择与当前套装关联的套装方案##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide empty owned item types##Behaviours##Config",
+      "Translated": "隐藏空的已拥有物品类型##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(Experimental) Hotkeys after loosing window focus##Behaviours##Config",
+      "Translated": "（实验性）失去窗口焦点后的快捷键##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "For example, when loosing Gear Browser focus, the directional hotkeys will continue working until another window is focused or dresser is closed",
+      "Translated": "例如，当装备浏览器失去焦点时，方向快捷键将继续生效，直到聚焦其他窗口或关闭衣柜",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(Experimental) Pass Hotkeys to the game through window##Behaviours##Config",
+      "Translated": "（实验性）通过窗口将快捷键传递给游戏##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Debug##Behaviours##Config",
+      "Translated": "启用调试##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Offer Apply All plates On Dresser Open##Behaviours##Config",
+      "Translated": "打开衣柜时提示应用全部套装方案##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Offer Overwrite Pending Plates After Apply All##Behaviours##Config",
+      "Translated": "应用全部后提示覆盖待处理的套装方案##Behaviours##Config",
+      "Context": "ConfigWindow.DrawBehaviourConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Always Remove Ornate items from Gear Browser##displayCategory##GearBrowserConfig",
+      "Translated": "始终从装备浏览器中移除华丽物品##displayCategory##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawItemFiltersConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open tag manager##ItemFilters##Config",
+      "Translated": "打开标签管理器##ItemFilters##Config",
+      "Context": "ConfigWindow.DrawItemFiltersConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rename tags, assign tags to a slot, delete tags, etc.",
+      "Translated": "重命名标签、为槽位分配标签、删除标签等。",
+      "Context": "ConfigWindow.DrawItemFiltersConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show item's sources##displayCategory##GearBrowserConfig",
+      "Translated": "显示物品来源##displayCategory##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawItemTooltipsConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only show item's sources when the item is not obtained##displayCategory##GearBrowserConfig",
+      "Translated": "仅在物品未获得时显示物品来源##displayCategory##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawItemTooltipsConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show items icons##displayCategory##GearBrowserConfig",
+      "Translated": "显示物品图标##displayCategory##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawIconsConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fade unavailable items when hidding tooltips (Hold Alt)##Images##GearBrowserConfig",
+      "Translated": "隐藏提示时淡化不可用物品（按住 Alt）##Images##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawIconsConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Size##IconSize##slider",
+      "Translated": "图标大小##IconSize##slider",
+      "Context": "ConfigWindow.DrawWindowsAndSizingConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dye size",
+      "Translated": "染色大小",
+      "Context": "ConfigWindow.DrawWindowsAndSizingConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display mode##GearBrowserConfig",
+      "Translated": "显示模式##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawWindowsAndSizingConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "size - Sidebar##GearBrowserConfig",
+      "Translated": "大小 - 侧边栏##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawWindowsAndSizingConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Col # - Source##GearBrowserConfig",
+      "Translated": "列 # - 来源##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawWindowsAndSizingConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Col # - Unobtained##GearBrowserConfig",
+      "Translated": "列 # - 未获得##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawWindowsAndSizingConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Number of free portable plates",
+      "Translated": "空闲便携套装方案数量",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These are plates detached to vanilla's plates.\nTheir purpose is to try and mess around with glamours, or be used as temporary store.",
+      "Translated": "这些是与原版套装方案分离的方案。\n其用途是尝试和摆弄幻化，或用作临时存储。",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plate selection column length",
+      "Translated": "套装方案选择列长度",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plate buttons column will break after this plate number",
+      "Translated": "套装方案按钮列将在此方案编号后换行",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show job icons on plate buttons",
+      "Translated": "在套装方案按钮上显示职业图标",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show job background colors on plate buttons",
+      "Translated": "在套装按钮上显示职业背景色",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Re-import Glamour Plates and erase pending plates",
+      "Translated": "重新导入幻化套装并清除待处理套装",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "reimportDisabledTooltim",
+      "Translated": "重新导入已禁用提示",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Glamour Dresser or Plate Selection must be opened to copy the plates",
+      "Translated": "必须打开幻化柜或套装选择才能复制套装",
+      "Context": "ConfigWindow.DrawPlatesConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools connected",
+      "Translated": "Allagan Tools 已连接",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools not found",
+      "Translated": "未找到 Allagan Tools",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allagan Tools plugin is required to get the record of items in other inventories.",
+      "Translated": "需要 Allagan Tools 插件才能获取其他背包中的物品记录。",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamourer API connected (Version ",
+      "Translated": "Glamourer API 已连接（版本",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamourer is not found",
+      "Translated": "未找到 Glamourer",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamourer is required to display glamours directly on your character.",
+      "Translated": "需要 Glamourer 才能直接在角色上显示幻化。",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reflect in Dresser the changes made in Glamourer##OptionalPlugins##ConfigWindow",
+      "Translated": "在幻化柜中反射 Glamourer 中所做的更改##OptionalPlugins##ConfigWindow",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items and/or dyes of the current plate will be overwritten when an item/dye change is executed in Glamourer.",
+      "Translated": "当在 Glamourer 中处决物品/染剂更改时，当前套装的物品和/或染剂将被覆盖。",
+      "Context": "ConfigWindow.RequiredPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra API connected (Version: Breaking ",
+      "Translated": "Penumbra API 已连接（版本：Breaking",
+      "Context": "ConfigWindow.OptionalPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ", Feature ",
+      "Translated": "，功能",
+      "Context": "ConfigWindow.OptionalPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable mod browsing with penumbra (experimental)##OptionalPlugins##ConfigWindow",
+      "Translated": "启用 Penumbra 模组浏览（实验性）##OptionalPlugins##ConfigWindow",
+      "Context": "ConfigWindow.OptionalPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open vendor location from items context menu.",
+      "Translated": "从物品右键菜单打开商人位置。",
+      "Context": "ConfigWindow.OptionalPlugins",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Info##DrawPenumbraConfigs",
+      "Translated": "信息##DrawPenumbraConfigs",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This mod browsing feature is experimental.",
+      "Translated": "此模组浏览功能为实验性。",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "There are a few quirks.",
+      "Translated": "存在一些怪异之处。",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dresser will scan through Penumbra for all the mods that change items, see below in \"Scan\". When the scan finds an item, it will add it to the Unobtained category of item \"Modded Items\"",
+      "Translated": "幻化柜将通过 Penumbra 扫描所有更改物品的模组，见下方“扫描”。当扫描找到物品时，会将其添加到物品“模组物品”的未获取分类中",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted mods or mod paths will be ignored during the scan. After modifying the blacklists, it is recommended to execute \"Reload modded items\" in \"Scan\"",
+      "Translated": "黑名单模组或模组路径将在扫描时被忽略。修改黑名单后，建议在“扫描”中处决“重新加载模组物品”",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The application of mods is made through temporary sate, similar to Glamourer's \"Use Temporary Mod Settings\".",
+      "Translated": "模组的应用通过临时状态进行，类似于 Glamourer 的“使用临时模组设置”。",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "When browsing items, changing from one to another will disable the previous and enable the next very quickly, these transitions may look odd.",
+      "Translated": "浏览物品时，从一个切换到另一个会快速禁用前一个并启用下一个，这些过渡可能看起来很奇怪。",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "It might synchronize with friends through penumbra/glamourer, but the transition speed may upset the sync.",
+      "Translated": "它可能会通过 Penumbra/Glamourer 与好友同步，但过渡速度可能会影响同步。",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mix and matching with 2 mods affecting the same items will result in conflict, one of the items will not be displayed correctly.",
+      "Translated": "混合搭配两个影响相同物品的模组会导致冲突，其中一个物品将无法正确显示。",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If a mod replaces the icon of the affected gear item, Dresser will try replace the icon even if the mod is disabled (Experimental)",
+      "Translated": "如果模组替换了受影响装备物品的图标，即使模组已禁用，Dresser 也会尝试替换图标（实验性）",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Collections & Behaviors##DrawPenumbraConfigs",
+      "Translated": "收藏与行为##DrawPenumbraConfigs",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use collection Mod List##PenumbraConfig##ConfigWindow",
+      "Translated": "使用收藏模组列表##PenumbraConfig##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If checked, only mods enabled on [",
+      "Translated": "如果勾选，仅扫描在 [",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "] will be scanned\nIf unchecked, ALL installed mods will be scanned for changed items",
+      "Translated": "] 中启用的模组\n如果未勾选，将扫描所有已安装模组以查找更改的物品",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mod List Penumbra collection##PenumbraConfig##ConfigWindow",
+      "Translated": "模组列表 Penumbra 收藏##PenumbraConfig##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Get the collection currently selected in Penumbra",
+      "Translated": "获取 Penumbra 中当前选中的收藏",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Load Mod List from Penumbra currentcollection##PenumbraConfig##ConfigWindow",
+      "Translated": "从 Penumbra 当前收藏加载模组列表##PenumbraConfig##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, the mods of this collection will be scanned.\nMods can be enabled regardless of conflicts, as mods sharing the same items can be displayed at the same time",
+      "Translated": "启用后，将扫描此收藏的模组。\n模组可以无视冲突启用，因为共享相同物品的模组可以同时显示",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scan##DrawPenumbraConfigs",
+      "Translated": "扫描##DrawPenumbraConfigs",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " modded items in Config, ",
+      "Translated": "配置中的模组物品，",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " in memory",
+      "Translated": "内存中",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reload modded items ",
+      "Translated": "重新加载模组物品",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear modded items##PenumbraConfig##ConfigWindow",
+      "Translated": "清除模组物品##PenumbraConfig##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Individual Mod Blacklist##DrawPenumbraConfigs",
+      "Translated": "单个模组黑名单##DrawPenumbraConfigs",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted mods",
+      "Translated": "黑名单模组",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mods listed here will be ignored when creating the list of modded items",
+      "Translated": "创建模组物品列表时，此处列出的模组将被忽略",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Export list to Clipboard as JSON",
+      "Translated": "导出列表到剪贴板（JSON）",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Import list from JSON Clipboard",
+      "Translated": "从剪贴板导入列表（JSON）",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Empty blacklist\nHold ctrl + Shift to to confirm",
+      "Translated": "清空黑名单\n按住 ctrl + Shift 确认",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from blacklist",
+      "Translated": "从黑名单移除",
+      "Context": "ConfigWindow.DrawPenumbraConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist by Path##DrawPenumbraConfigs",
+      "Translated": "按路径加入黑名单##DrawPenumbraConfigs",
+      "Context": "ConfigWindow.DrawModPathBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist mods by their folder path (case-insensitive). For example, \"main1\" will blacklist \"main1/sub1/mod1\", \"main1/sub2/mod2\", etc.",
+      "Translated": "按文件夹路径将模组加入黑名单（不区分大小写）。例如，“main1”会将“main1/sub1/mod1”、“main1/sub2/mod2”等加入黑名单。",
+      "Context": "ConfigWindow.DrawModPathBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted paths",
+      "Translated": "黑名单路径",
+      "Context": "ConfigWindow.DrawModPathBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mods whose path starts with any of these will be ignored when creating the list of modded items",
+      "Translated": "创建模组物品列表时，路径以其中任意一项开头的模组将被忽略",
+      "Context": "ConfigWindow.DrawModPathBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Empty blacklist\nHold ctrl + Shift to confirm",
+      "Translated": "清空黑名单\n按住 ctrl + Shift 确认",
+      "Context": "ConfigWindow.DrawModPathBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add new path to blacklist",
+      "Translated": "添加新路径到黑名单",
+      "Context": "ConfigWindow.DrawModPathBlacklistInput",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add##PathBlacklistAdd",
+      "Translated": "添加##PathBlacklistAdd",
+      "Context": "ConfigWindow.DrawModPathBlacklistInput",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted mods preview from input:",
+      "Translated": "根据输入预览黑名单模组：",
+      "Context": "ConfigWindow.DrawModPathBlacklistInput",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(no mods match this pattern)",
+      "Translated": "（没有模组匹配此模式）",
+      "Context": "ConfigWindow.DrawModPathBlacklistInput",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelist by Path##DrawPenumbraConfigs",
+      "Translated": "按路径加入白名单##DrawPenumbraConfigs",
+      "Context": "ConfigWindow.DrawModPathWhitelistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelist mods by their folder path (case-insensitive). When a whitelist is active, ONLY mods matching these patterns will be used. For example, \"main1\" will only allow \"main1/sub1/mod1\", \"main1/sub2/mod2\", etc.",
+      "Translated": "按文件夹路径将模组加入白名单（不区分大小写）。白名单启用时，仅会使用匹配这些模式的模组。例如，“main1”只会允许“main1/sub1/mod1”、“main1/sub2/mod2”等。",
+      "Context": "ConfigWindow.DrawModPathWhitelistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelisted paths",
+      "Translated": "白名单路径",
+      "Context": "ConfigWindow.DrawModPathWhitelistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only mods whose path starts with any of these will be used when creating the list of modded items. The blacklist is ignored when a whitelist is active.",
+      "Translated": "创建模组物品列表时，仅会使用路径以其中任意一项开头的模组。白名单启用时，黑名单将被忽略。",
+      "Context": "ConfigWindow.DrawModPathWhitelistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear whitelist\nHold ctrl + Shift to confirm",
+      "Translated": "清空白名单\n按住 ctrl + Shift 确认",
+      "Context": "ConfigWindow.DrawModPathWhitelistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from whitelist",
+      "Translated": "从白名单移除",
+      "Context": "ConfigWindow.DrawModPathWhitelistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add new path to whitelist",
+      "Translated": "添加新路径到白名单",
+      "Context": "ConfigWindow.DrawModPathWhitelistInput",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add##PathWhitelistAdd",
+      "Translated": "添加##PathWhitelistAdd",
+      "Context": "ConfigWindow.DrawModPathWhitelistInput",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Whitelisted mods preview from input:",
+      "Translated": "根据输入预览白名单模组：",
+      "Context": "ConfigWindow.DrawModPathWhitelistInput",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist by Mod+Item##DrawPenumbraConfigs",
+      "Translated": "按模组+物品加入黑名单##DrawPenumbraConfigs",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist specific items from specific mods. For example, if a mod changes both boots and gloves, you can blacklist just the gloves.",
+      "Translated": "将特定模组中的特定物品加入黑名单。例如，若某模组同时修改了靴子和手套，你可以只将手套加入黑名单。",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklisted mod items",
+      "Translated": "黑名单模组物品",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These mod+item combinations will be ignored when creating the list of modded items",
+      "Translated": "创建模组物品列表时，这些模组+物品组合将被忽略",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear all\nHold ctrl + Shift to confirm",
+      "Translated": "全部清空\n按住 ctrl + Shift 确认",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " - Item ",
+      "Translated": "- 物品",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mod: ",
+      "Translated": "模组：",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nItem ID: ",
+      "Translated": "物品 ID：",
+      "Context": "ConfigWindow.DrawModItemBlacklistSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dresser is a plugin to manage your glamours and inventories, with a special focus on portable glamours.\nFeel free to look for help or provide feedback on our Discord",
+      "Translated": "Dresser 是一款用于管理幻化和背包的插件，特别侧重于便携幻化。\n欢迎在我们的 Discord 上寻求帮助或提供反馈",
+      "Context": "ConfigWindow.DrawAboutConfigs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Blacklist Mod",
+      "Translated": "黑名单模组",
+      "Context": "ConfigWindow.DrawModBlacklistSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Translated": "搜索...",
+      "Context": "ConfigWindow.DrawModBlacklistSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle debug stuff",
+      "Translated": "切换调试内容",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display debug info##Debug##GearBrowserConfig",
+      "Translated": "显示调试信息##Debug##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable very verbose debug Logging for troubleshooting##Debug##GearBrowserConfig",
+      "Translated": "启用详细调试日志以排查问题##Debug##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Modded items debug",
+      "Translated": "模组物品调试",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display how many items applied in title bar##Debug##GearBrowserConfig",
+      "Translated": "在标题栏显示已应用物品数量##Debug##GearBrowserConfig",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Manual triggers",
+      "Translated": "手动触发",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Save config##Manual triggers##Debug##ConfigWindow",
+      "Translated": "保存配置##Manual triggers##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove EVERY (ALL) items from ALL plates for THIS character ",
+      "Translated": "移除此角色的所有模板中的全部物品",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Test Currencies",
+      "Translated": "测试货币",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Test Actions",
+      "Translated": "测试动作",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Test Item Sets",
+      "Translated": "测试物品套装",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour Plate Interop",
+      "Translated": "投影模板互操作",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "characters owned by player from AT IPC",
+      "Translated": "来自 AT IPC 的玩家角色",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Character ID",
+      "Translated": "角色 ID",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Character Type",
+      "Translated": "角色类型",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Translated": "未知",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Player Character",
+      "Translated": "玩家角色",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer",
+      "Translated": "雇员",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Initialized: ",
+      "Translated": "已初始化：",
+      "Context": "ConfigWindow.DrawDebugSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current plate Set ##DebugItemSets##Debug##ConfigWindow",
+      "Translated": "当前模板套装 ##DebugItemSets##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawTestItemSetsDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current Backup plate set ##DebugItemSets##Debug##ConfigWindow",
+      "Translated": "当前备份模板套装 ##DebugItemSets##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawTestItemSetsDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MiragePlateOverlayController is not initialized.",
+      "Translated": "MiragePlateOverlayController 未初始化。",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Overlay ",
+      "Translated": "悬浮窗",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " is ",
+      "Translated": "为",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "visible",
+      "Translated": "可见",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tab Index##KTKOverlay",
+      "Translated": "标签页索引##KTKOverlay",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Color##KTKOverlay",
+      "Translated": "颜色##KTKOverlay",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Apply Color to Tab##KTKOverlay",
+      "Translated": "将颜色应用到标签页##KTKOverlay",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to All Tabs##KTKOverlay",
+      "Translated": "应用到所有标签页##KTKOverlay",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset All Tabs##KTKOverlay",
+      "Translated": "重置所有标签页##KTKOverlay",
+      "Context": "ConfigWindow.DrawKtkOverlayDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Verbose log messages on each Ipc calls##Variables##Style##Config",
+      "Translated": "在每次 Ipc 调用时启用详细日志消息##Variables##Style##Config",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GetState##GlamourerIPC##Debug##ConfigWindow",
+      "Translated": "获取状态##GlamourerIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GetSet##GlamourerIPC##Debug##ConfigWindow",
+      "Translated": "获取设置##GlamourerIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Get First Design##GlamourerIPC##Debug##ConfigWindow",
+      "Translated": "获取第一世界设计##GlamourerIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SetMetaData Hat##GlamourerIPC##Debug##ConfigWindow",
+      "Translated": "设置元数据 帽子##GlamourerIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SetMetaData Visor##GlamourerIPC##Debug##ConfigWindow",
+      "Translated": "设置元数据 面罩##GlamourerIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SetMetaData Weapon##GlamourerIPC##Debug##ConfigWindow",
+      "Translated": "设置元数据 武器##GlamourerIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Create [",
+      "Translated": "创建 [",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "] design From Current Plate##GlamourerIPC##Debug##ConfigWindow",
+      "Translated": "] 从当前套装创建设计##GlamourerIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawGlamourerIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current item (",
+      "Translated": "当前物品 (",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name: ",
+      "Translated": "名称：",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mod Directory: ",
+      "Translated": "模组目录：",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Get Changed Item Adapter Dictionary Print To Log##PenumbraIPC##Debug##ConfigWindow",
+      "Translated": "获取已更改物品适配器字典并输出到日志##PenumbraIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Get Changed Item Adapter List Print To Log##PenumbraIPC##Debug##ConfigWindow",
+      "Translated": "获取已更改物品适配器列表并输出到日志##PenumbraIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra.SetTemporaryModSettings (Current item)##PenumbraIPC##Debug##ConfigWindow",
+      "Translated": "Penumbra.SetTemporaryModSettings（当前物品）##PenumbraIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamourer.SetItem (Current item)##PenumbraIPC##Debug##ConfigWindow",
+      "Translated": "Glamourer.SetItem（当前物品）##PenumbraIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GetAllModSettings##PenumbraIPC##Debug##ConfigWindow",
+      "Translated": "获取所有模组设置##PenumbraIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Print Meta To Log (Current item)##GetModMeta##PenumbraIPC##Debug##ConfigWindow",
+      "Translated": "输出元数据到日志（当前物品）##GetModMeta##PenumbraIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Print ModPath To Log (Current item)##GetModPath##PenumbraIPC##Debug##ConfigWindow",
+      "Translated": "输出模组路径到日志（当前物品）##GetModPath##PenumbraIPC##Debug##ConfigWindow",
+      "Context": "ConfigWindow.DrawPenumbraIpcDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Global (Plate Creation & Item Gear Browser)",
+      "Translated": "全局（套装创建与物品装备浏览器）",
+      "Context": "ConfigWindow.DrawVariablesStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Custom Theme##Variables##Style##Config",
+      "Translated": "启用自定义主题##Variables##Style##Config",
+      "Context": "ConfigWindow.DrawVariablesStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Spacing and Sizing",
+      "Translated": "间距与尺寸",
+      "Context": "ConfigWindow.DrawVariablesStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(Debug value after multiplier: ",
+      "Translated": "（乘数后的调试值：",
+      "Context": "ConfigWindow.DrawVariablesStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Frames",
+      "Translated": "边框",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Background color for the frames that contain items",
+      "Translated": "包含物品的边框背景色",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Border color for the frames that contain items",
+      "Translated": "包含物品的边框颜色",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scroll bar color for the frames that contain items (in Gear Browser)",
+      "Translated": "包含物品的边框滚动条颜色（装备浏览器中）",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tint of enabled icons (currencies)",
+      "Translated": "启用图标（货币）的色调",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tint of disabled icons (currencies)",
+      "Translated": "禁用图标的色调（货币）",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will show on various controls when filters are active",
+      "Translated": "过滤器激活时显示在各种控件上",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Text",
+      "Translated": "文本",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plate selector",
+      "Translated": "套装选择器",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Browser",
+      "Translated": "浏览器",
+      "Context": "ConfigWindow.DrawColorStyleConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "get emote state##actions##config",
+      "Translated": "获取表情状态##actions##config",
+      "Context": "ConfigWindow.DrawDebugActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "test action##actions##config",
+      "Translated": "试炼巨像动作##actions##config",
+      "Context": "ConfigWindow.DrawDebugActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "print emote list##actions##config",
+      "Translated": "输出表情列表##actions##config",
+      "Context": "ConfigWindow.DrawDebugActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites##print emote list##actions##config",
+      "Translated": "收藏##print emote list##actions##config",
+      "Context": "ConfigWindow.DrawDebugActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "History##print emote list##actions##config",
+      "Translated": "历史##print emote list##actions##config",
+      "Context": "ConfigWindow.DrawDebugActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "print action list##actions##config",
+      "Translated": "打印动作列表##actions##config",
+      "Context": "ConfigWindow.DrawDebugActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "execute change posture##actions##config",
+      "Translated": "处决 改变姿势##actions##config",
+      "Context": "ConfigWindow.DrawDebugActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current Gear",
+      "Translated": "当前装备",
+      "Context": "CurrentGear..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display Sheathed Arms",
+      "Translated": "显示收起武器",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display Headgear",
+      "Translated": "显示头部装备",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Manually adjust visor",
+      "Translated": "手动调整面罩",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display Gear",
+      "Translated": "显示装备",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click to Change posture\nHold shift + click to disable/enable auto change posture\n(Character Configuration > Control Settings > Character > Randomize idle animation)",
+      "Translated": "点击更改姿势\n按住 Shift + 点击可禁用/启用自动更改姿势\n（角色配置 > 控制设置 > 角色 > 随机待机动画）",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite portable plate ",
+      "Translated": "覆盖便携套装",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " with the plate you are currently viewing in Glamour Dresser or Plate Selection skill",
+      "Translated": "使用你当前在幻化柜或套装选择技能中查看的套装",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Apply current portable plate (",
+      "Translated": "应用当前便携套装 (",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ") to current glamour dresser plate",
+      "Translated": ") 到当前幻化柜套装",
+      "Context": "CurrentGear.DrawBottomButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plate: Referring to the ",
+      "Translated": "套装：指",
+      "Context": "CurrentGear.DrawPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " plates from the game.",
+      "Translated": "游戏开始中的套装。",
+      "Context": "CurrentGear.DrawPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nSandBox Plate: not saved",
+      "Translated": "沙盒套装：未保存",
+      "Context": "CurrentGear.DrawPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nFree Plate: independent plates, saved",
+      "Translated": "自由套装：独立套装，已保存",
+      "Context": "CurrentGear.DrawPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Item Image from Plate",
+      "Translated": "从套装中移除物品图像",
+      "Context": "CurrentGear.ContextMenuCurrent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye",
+      "Translated": "染色",
+      "Context": "CurrentGear.ContextMenuCurrent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Dye",
+      "Translated": "移除染色",
+      "Context": "CurrentGear.ContextMenuCurrent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plate Sandbox",
+      "Translated": "套装沙盒",
+      "Context": "CurrentGear.FormattedPlateName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Free plate",
+      "Translated": "自由套装",
+      "Context": "CurrentGear.FormattedPlateName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plate",
+      "Translated": "套装",
+      "Context": "CurrentGear.FormattedPlateName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove every items from this plate (",
+      "Translated": "从此套装中移除所有物品 (",
+      "Context": "CurrentGear.ContextMenuPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Swap contents of current [",
+      "Translated": "交换当前 [",
+      "Context": "CurrentGear.ContextMenuPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "] with contents of [",
+      "Translated": "] 的内容与 [",
+      "Context": "CurrentGear.ContextMenuPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Export Design to Glamourer",
+      "Translated": "导出设计到 Glamourer",
+      "Context": "CurrentGear.ContextMenuPlateSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "name",
+      "Translated": "名称",
+      "Context": "CurrentGear.MiniWindowContentsExportToGlamourer",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ok##NameDesignWindow##",
+      "Translated": "确定##NameDesignWindow##",
+      "Context": "CurrentGear.MiniWindowContentsExportToGlamourer",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Some items are neither in ",
+      "Translated": "部分物品既不在",
+      "Context": "CurrentGear.DrawTasksTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " or ",
+      "Translated": "也不在",
+      "Context": "CurrentGear.DrawTasksTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Item",
+      "Translated": "物品",
+      "Context": "CurrentGear.DrawTasksTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Location",
+      "Translated": "位置",
+      "Context": "CurrentGear.DrawTasksTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold shift to display the legend.",
+      "Translated": "按住 shift 显示图例。",
+      "Context": "CurrentGear.DrawTasksTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Columns",
+      "Translated": "列",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Item : An item that is not in the Glamour Dresser or the Armoire",
+      "Translated": "物品：不在幻化柜或兵装库中的物品",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "O : Owned quantity",
+      "Translated": "O：拥有数量",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "N : Needed quantity",
+      "Translated": "N：所需数量",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Location : Where to find it in your inventories if owned somewhere else",
+      "Translated": "位置：如果拥有在其他地方，可在你的背包中找到它的位置",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Row colors",
+      "Translated": "行颜色",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The dye is already in the inventory in good quantity",
+      "Translated": "该染剂已在库存中且数量充足",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The item is in the inventory and needs to be inserted in Glamour Dresser or Armoire",
+      "Translated": "该物品在库存中，需要放入幻化柜或衣柜",
+      "Context": "CurrentGear.DrawLegend",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dialogs",
+      "Translated": "对话框",
+      "Context": "Dialogs..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Confirm",
+      "Translated": "确认",
+      "Context": "Dialogs.GenericButtonConfirmCancel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "Dialogs.GenericButtonConfirmCancel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Swap dyes between dye 1 and dye 2",
+      "Translated": "交换染剂1和染剂2",
+      "Context": "DyePicker.DrawSideBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Swap dyes between dye 1 and dye 2 for all items in the plate",
+      "Translated": "交换套装中所有物品的染剂1和染剂2",
+      "Context": "DyePicker.DrawSideBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Keep dyeing when a new item is selected in the browser",
+      "Translated": "在浏览器中选择新物品时保持染色",
+      "Context": "DyePicker.DrawSideBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye all items in the plate with this item's dyes",
+      "Translated": "用此物品的染剂为套装中所有物品染色",
+      "Context": "DyePicker.DrawSideBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove all dyes from this item",
+      "Translated": "移除此物品的所有染剂",
+      "Context": "DyePicker.DrawSideBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove dyes from all items in the plate",
+      "Translated": "移除套装中所有物品的染剂",
+      "Context": "DyePicker.DrawSideBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "History##DyeHistory##DyePicker",
+      "Translated": "历史##DyeHistory##DyePicker",
+      "Context": "DyePicker.DrawDyeHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tag Manager",
+      "Translated": "标签管理",
+      "Context": "TagManager..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search:",
+      "Translated": "搜索：",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Slot:",
+      "Translated": "部位：",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All Slots",
+      "Translated": "所有部位",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No Slot Restriction",
+      "Translated": "无部位限制",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add new tag...",
+      "Translated": "添加新标签...",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Create new tag",
+      "Translated": "创建新标签",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Export tags to clipboard (Hold Ctrl for clear json export)",
+      "Translated": "导出标签到剪贴板（按住Ctrl导出纯json）",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Import tags from clipboard",
+      "Translated": "从剪贴板导入标签",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL+SHIFT to unlock the delete all button. This will delete all tags.",
+      "Translated": "按住CTRL+SHIFT解锁全部删除按钮。这将删除所有标签。",
+      "Context": "TagManager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tags (",
+      "Translated": "标签 (",
+      "Context": "TagManager.DrawTagList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exported ",
+      "Translated": "已导出",
+      "Context": "TagManager.ExportTagsToClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " tags to clipboard",
+      "Translated": "个标签到剪贴板",
+      "Context": "TagManager.ExportTagsToClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " (clear json)",
+      "Translated": "（纯json）",
+      "Context": "TagManager.ExportTagsToClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Export failed: ",
+      "Translated": "导出失败：",
+      "Context": "TagManager.ExportTagsToClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clipboard is empty",
+      "Translated": "剪贴板为空",
+      "Context": "TagManager.ImportTagsFromClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid or empty import data",
+      "Translated": "导入数据无效或为空",
+      "Context": "TagManager.ImportTagsFromClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Imported ",
+      "Translated": "已导入",
+      "Context": "TagManager.ImportTagsFromClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " new tags, merged ",
+      "Translated": "个新标签，已合并",
+      "Context": "TagManager.ImportTagsFromClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " existing tags, associated ",
+      "Translated": "个现有标签，已关联",
+      "Context": "TagManager.ImportTagsFromClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " items to tags",
+      "Translated": "个物品到标签",
+      "Context": "TagManager.ImportTagsFromClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Import failed: ",
+      "Translated": "导入失败：",
+      "Context": "TagManager.ImportTagsFromClipboard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete All Tags##Confirmation",
+      "Translated": "删除所有标签##Confirmation",
+      "Context": "TagManager.ShowDeleteAllConfirmation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tag Editor",
+      "Translated": "标签编辑器",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select a tag to edit",
+      "Translated": "选择要编辑的标签",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name:",
+      "Translated": "名称：",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Edit##EditTagName",
+      "Translated": "编辑##EditTagName",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Slot Restriction:",
+      "Translated": "部位限制：",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Universal (no slot restriction)",
+      "Translated": "通用（无部位限制）",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items with this tag: ",
+      "Translated": "带有此标签的物品：",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL+SHIFT to unlock the delete button. The deletion of this tag cannot be undone.",
+      "Translated": "按住 CTRL+SHIFT 解锁删除按钮。此标签的删除操作无法撤销。",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete Tag##TagManager",
+      "Translated": "删除标签##TagManager",
+      "Context": "TagManager.DrawTagEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(no items found)",
+      "Translated": "（未找到物品）",
+      "Context": "TagManager.DrawTagItemsBySlot",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Change this tag's slot for ",
+      "Translated": "更改此标签的部位为",
+      "Context": "TagManager.DrawTagItemsBySlot",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "WARNING: This action cannot be undone!",
+      "Translated": "警告：此操作无法撤销！",
+      "Context": "TagManager.DrawDeleteAllConfirmationModal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure you want to delete ALL ",
+      "Translated": "确定要删除全部",
+      "Context": "TagManager.DrawDeleteAllConfirmationModal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " tags?",
+      "Translated": "个标签吗？",
+      "Context": "TagManager.DrawDeleteAllConfirmationModal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This will also remove all tag associations from items.",
+      "Translated": "这也会移除物品上的所有标签关联。",
+      "Context": "TagManager.DrawDeleteAllConfirmationModal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete All",
+      "Translated": "全部删除",
+      "Context": "TagManager.DrawDeleteAllConfirmationModal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All tags deleted",
+      "Translated": "已删除全部标签",
+      "Context": "TagManager.DeleteAllTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to delete tags: ",
+      "Translated": "删除标签失败：",
+      "Context": "TagManager.DeleteAllTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset to default value",
+      "Translated": "重置为默认值",
+      "Context": "ConfigControls.ConfigColorVecot4",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "head size##GlamourPlate#Debug",
+      "Translated": "头部尺寸##GlamourPlate#Debug",
+      "Context": "GlamourPlateDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "head offset##GlamourPlate#Debug",
+      "Translated": "头部偏移##GlamourPlate#Debug",
+      "Context": "GlamourPlateDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "slot size##GlamourPlate#Debug",
+      "Translated": "部位尺寸##GlamourPlate#Debug",
+      "Context": "GlamourPlateDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One Slot",
+      "Translated": "单个部位",
+      "Context": "GlamourPlateDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show All",
+      "Translated": "显示全部",
+      "Context": "GlamourPlateDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Test Functions",
+      "Translated": "试炼巨像功能",
+      "Context": "GlamourPlateDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Test Dresser contents",
+      "Translated": "试炼巨像衣柜内容",
+      "Context": "GlamourPlateDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Agent Pointer: ",
+      "Translated": "代理指针：",
+      "Context": "GlamourPlateDebug.CheckAgent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "agent inactive",
+      "Translated": "代理未激活",
+      "Context": "GlamourPlateDebug.CheckAgent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "agent active",
+      "Translated": "代理已激活",
+      "Context": "GlamourPlateDebug.CheckAgent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "slot selected: ",
+      "Translated": "已选部位：",
+      "Context": "GlamourPlateDebug.CheckAgent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plate##GlamourPlate#Debug",
+      "Translated": "套装##GlamourPlate#Debug",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Slot##GlamourPlate#Debug",
+      "Translated": "部位##GlamourPlate#Debug",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "stainId: ",
+      "Translated": "染色ID：",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "stainId2: ",
+      "Translated": "染色ID2：",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "stainPreviewId: ",
+      "Translated": "染色预览ID：",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "stainPreviewId2: ",
+      "Translated": "染色预览ID2：",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "actualStainId: ",
+      "Translated": "实际染色ID：",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "actualStainId2: ",
+      "Translated": "实际染色ID2：",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "itemId: ",
+      "Translated": "物品ID：",
+      "Context": "GlamourPlateDebug.DrawSlotData",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set",
+      "Translated": "设置",
+      "Context": "GlamourPlateDebug.DrawTestFunctions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set dyed",
+      "Translated": "设置染色",
+      "Context": "GlamourPlateDebug.DrawTestFunctions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "get armoire dyed",
+      "Translated": "获取衣柜染色",
+      "Context": "GlamourPlateDebug.DrawTestFunctions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "index",
+      "Translated": "索引",
+      "Context": "GlamourPlateDebug.DrawDresserContentsChecks",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "id",
+      "Translated": "ID",
+      "Context": "GlamourPlateDebug.DrawDresserContentsChecks",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "stains",
+      "Translated": "染色",
+      "Context": "GlamourPlateDebug.DrawDresserContentsChecks",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Introduction & Disclaimer",
+      "Translated": "简介与免责声明",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Thank you for using Dresser Anywhere",
+      "Translated": "感谢您使用随身衣柜",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This plugin aims to:",
+      "Translated": "本插件旨在：",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Preview your glam in real conditions, with proper lightings",
+      "Translated": "在真实光照条件下预览您的幻化",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allow the use Glamour Dresser everywhere",
+      "Translated": "允许随处使用幻化衣柜",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Seamlessly show items stored in other inventories and/or bought easily",
+      "Translated": "无缝显示存储在其他背包中的物品和/或轻松购买的物品",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Make you tempted into acquiring extra items",
+      "Translated": "让您忍不住想获取更多物品",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This plugin is NOT made to:",
+      "Translated": "本插件并非用于：",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Avoid aquiring items by enjoying seeing them in the preview",
+      "Translated": "通过预览来避免获取物品",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Keep unobtained items appearance permanently",
+      "Translated": "永久保留未获得物品的外观",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This plugin is early alpha stage, expect bugs and missing features.",
+      "Translated": "本插件处于早期测试阶段，可能存在错误和缺失功能。",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Suggestions and bug reports are welcome on ",
+      "Translated": "欢迎在以下渠道提出建议和报告错误",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Starter Tips",
+      "Translated": "入门提示",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Before starting using the portable plates and gear browser, it is recommended to:",
+      "Translated": "在开始使用便携套装和装备浏览器之前，建议：",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "1. Gather the list of your owned item by opening all your inventories",
+      "Translated": "1. 打开所有背包以收集您拥有的物品列表",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "2. Get your current Plates into portable plates by opening the Plate Creation window (in Glamour Dresser)",
+      "Translated": "2. 打开套装创建窗口（在幻化衣柜中）将当前套装导入便携套装",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "General information",
+      "Translated": "常规信息",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All previews are client sided only, other players won't notice you are glaming",
+      "Translated": "所有预览仅在客户端显示，其他玩家不会注意到您在幻化",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The previewed appearance is removed when exiting DresserAnywhere",
+      "Translated": "退出随身衣柜时预览外观将被移除",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All changes done are saved ",
+      "Translated": "所有更改均已保存",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glossary",
+      "Translated": "术语表",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Portable Plates: The plates in DresserAnywhere that are used to overwrite vanilla plates",
+      "Translated": "便携套装：随身衣柜中用于覆盖原版套装的套装",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Other Tips",
+      "Translated": "其他提示",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Icon size can be changed to fit your screen size",
+      "Translated": "图标大小可调整以适配您的屏幕尺寸",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye picker size can be changed to fit your screen size",
+      "Translated": "染色选择器大小可调整以适配您的屏幕尺寸",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Changing plate will refresh its items locations",
+      "Translated": "切换套装将刷新其物品位置",
+      "Context": "Help.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Ctrl + Shift and Click to relive this tag from the item",
+      "Translated": "按住 Ctrl + Shift 并点击以从物品上移除该标签",
+      "Context": "ItemIcon.DrawTags",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sources:",
+      "Translated": "来源：",
+      "Context": "ItemIcon.DrawItemSource",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "by ",
+      "Translated": "作者",
+      "Context": "DrawIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " imported on [",
+      "Translated": "导入于 [",
+      "Context": "DrawIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locks: ",
+      "Translated": "锁定：",
+      "Context": "DrawIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fits: ",
+      "Translated": "适配：",
+      "Context": "DrawIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour plate changes detected, would you like to apply them?",
+      "Translated": "检测到投影模板变更，是否应用？",
+      "Context": "ApplyGearChange.Popup_AskApplyOnPlates",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Glamour plate affected",
+      "Translated": "投影模板已受影响",
+      "Context": "ApplyGearChange.Popup_AskApplyOnPlates",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Some change were not saved.",
+      "Translated": "部分更改未保存。",
+      "Context": "Popup_AllDone",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\"Forget\" will copy the contents of the plates into portable plates.",
+      "Translated": "“遗忘”会将模板内容复制到便携模板中。",
+      "Context": "Popup_AllDone",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CTRL + Shift to \"Forget\".\nIt will copy the contents of the plates into portable plates.",
+      "Translated": "CTRL + Shift 执行“遗忘”。\n它会将模板内容复制到便携模板中。",
+      "Context": "Popup_AllDone",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The following items could could not be applied to the plate.",
+      "Translated": "以下物品无法应用到模板。",
+      "Context": "Popup_FailedSomeAskWhatToDo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retry##Dialog##Dresser",
+      "Translated": "重试##Dialog##Dresser",
+      "Context": "Popup_FailedSomeAskWhatToDo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore##Dialog##Dresser",
+      "Translated": "忽略##Dialog##Dresser",
+      "Context": "Popup_FailedSomeAskWhatToDo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop All##Dialog##Dresser",
+      "Translated": "全部停止##Dialog##Dresser",
+      "Context": "Popup_FailedSomeAskWhatToDo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " path: ",
+      "Translated": "引导步廊：",
+      "Context": "ImageGuiCrop.TestParts",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "UldWrapper not found",
+      "Translated": "未找到 UldWrapper",
+      "Context": "ImageGuiCrop.TestParts",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Translated": "错误",
+      "Context": "ImageGuiCrop.TestParts",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ItemSlot",
+      "Translated": "物品栏位",
+      "Context": "UldBundle.get_ItemSlot",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SlotHighlightInner",
+      "Translated": "栏位高亮内部",
+      "Context": "UldBundle.get_SlotHighlightInner",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SlotHighlight",
+      "Translated": "栏位高亮",
+      "Context": "UldBundle.get_SlotHighlight",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Head",
+      "Translated": "头部",
+      "Context": "UldBundle.get_Head",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Body",
+      "Translated": "身体",
+      "Context": "UldBundle.get_Body",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hands",
+      "Translated": "手部",
+      "Context": "UldBundle.get_Hands",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Legs",
+      "Translated": "腿部",
+      "Context": "UldBundle.get_Legs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Feet",
+      "Translated": "脚部",
+      "Context": "UldBundle.get_Feet",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ears",
+      "Translated": "耳部",
+      "Context": "UldBundle.get_Ears",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Neck",
+      "Translated": "颈部",
+      "Context": "UldBundle.get_Neck",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Wrists",
+      "Translated": "腕部",
+      "Context": "UldBundle.get_Wrists",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "RightRing",
+      "Translated": "右戒指",
+      "Context": "UldBundle.get_RightRing",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "LeftRing",
+      "Translated": "左戒指",
+      "Context": "UldBundle.get_LeftRing",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Character_Person",
+      "Translated": "角色_人物",
+      "Context": "UldBundle.get_Character_Person",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_MainHand",
+      "Translated": "兵装库_主手",
+      "Context": "UldBundle.get_ArmouryBoard_MainHand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Head",
+      "Translated": "兵装库_头部",
+      "Context": "UldBundle.get_ArmouryBoard_Head",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Body",
+      "Translated": "兵装库_身体",
+      "Context": "UldBundle.get_ArmouryBoard_Body",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Hands",
+      "Translated": "兵装库_手部",
+      "Context": "UldBundle.get_ArmouryBoard_Hands",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Legs",
+      "Translated": "兵装库_腿部",
+      "Context": "UldBundle.get_ArmouryBoard_Legs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Feet",
+      "Translated": "兵装库_脚部",
+      "Context": "UldBundle.get_ArmouryBoard_Feet",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_OffHand",
+      "Translated": "兵装库_副手",
+      "Context": "UldBundle.get_ArmouryBoard_OffHand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Ears",
+      "Translated": "兵装库_耳部",
+      "Context": "UldBundle.get_ArmouryBoard_Ears",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Neck",
+      "Translated": "兵装库_颈部",
+      "Context": "UldBundle.get_ArmouryBoard_Neck",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_Wrists",
+      "Translated": "兵装库_手腕",
+      "Context": "UldBundle.get_ArmouryBoard_Wrists",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_RightRing",
+      "Translated": "兵装库_右戒指",
+      "Context": "UldBundle.get_ArmouryBoard_RightRing",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ArmouryBoard_LeftRing",
+      "Translated": "兵装库_左戒指",
+      "Context": "UldBundle.get_ArmouryBoard_LeftRing",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallMagnifyLense",
+      "Translated": "圆形小放大镜",
+      "Context": "UldBundle.get_CircleSmallMagnifyLense",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallEdit",
+      "Translated": "圆形小编辑",
+      "Context": "UldBundle.get_CircleSmallEdit",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallViewport",
+      "Translated": "圆形小视口",
+      "Context": "UldBundle.get_CircleSmallViewport",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallHat",
+      "Translated": "圆形小帽子",
+      "Context": "UldBundle.get_CircleSmallHat",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallWeapon",
+      "Translated": "圆形小武器",
+      "Context": "UldBundle.get_CircleSmallWeapon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallVisor",
+      "Translated": "圆形小面罩",
+      "Context": "UldBundle.get_CircleSmallVisor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallDisplayGear",
+      "Translated": "圆形小显示装备",
+      "Context": "UldBundle.get_CircleSmallDisplayGear",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallDyePot",
+      "Translated": "圆形小染剂罐",
+      "Context": "UldBundle.get_CircleSmallDyePot",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallEye",
+      "Translated": "圆形小眼睛",
+      "Context": "UldBundle.get_CircleSmallEye",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallRollback",
+      "Translated": "圆形小回滚",
+      "Context": "UldBundle.get_CircleSmallRollback",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleSmallSavePin",
+      "Translated": "圆形小保存图钉",
+      "Context": "UldBundle.get_CircleSmallSavePin",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeCog",
+      "Translated": "圆形大齿轮",
+      "Context": "UldBundle.get_CircleLargeCog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeFilter",
+      "Translated": "圆形大筛选",
+      "Context": "UldBundle.get_CircleLargeFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeSort",
+      "Translated": "圆形大排序",
+      "Context": "UldBundle.get_CircleLargeSort",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeQuestionMark",
+      "Translated": "圆形大问号",
+      "Context": "UldBundle.get_CircleLargeQuestionMark",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeRefresh",
+      "Translated": "圆形大刷新",
+      "Context": "UldBundle.get_CircleLargeRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeBubble",
+      "Translated": "圆形大气泡",
+      "Context": "UldBundle.get_CircleLargeBubble",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeNote",
+      "Translated": "圆形大笔记",
+      "Context": "UldBundle.get_CircleLargeNote",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeEdit",
+      "Translated": "圆形大编辑",
+      "Context": "UldBundle.get_CircleLargeEdit",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargePlus",
+      "Translated": "圆形大加号",
+      "Context": "UldBundle.get_CircleLargePlus",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeRight",
+      "Translated": "圆形大右箭头",
+      "Context": "UldBundle.get_CircleLargeRight",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeMusicNote",
+      "Translated": "圆形大音符",
+      "Context": "UldBundle.get_CircleLargeMusicNote",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeSprout",
+      "Translated": "圆形大豆芽",
+      "Context": "UldBundle.get_CircleLargeSprout",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeEye",
+      "Translated": "圆形大眼睛",
+      "Context": "UldBundle.get_CircleLargeEye",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeLetterReceived",
+      "Translated": "圆形大收到信件",
+      "Context": "UldBundle.get_CircleLargeLetterReceived",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeSoundOn",
+      "Translated": "圆形大声音开",
+      "Context": "UldBundle.get_CircleLargeSoundOn",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeSoundMute",
+      "Translated": "圆形大静音",
+      "Context": "UldBundle.get_CircleLargeSoundMute",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeHeartbeat",
+      "Translated": "圆形大心跳",
+      "Context": "UldBundle.get_CircleLargeHeartbeat",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeCheckbox",
+      "Translated": "圆形大复选框",
+      "Context": "UldBundle.get_CircleLargeCheckbox",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeHighlightedCog",
+      "Translated": "圆形大高亮齿轮",
+      "Context": "UldBundle.get_CircleLargeHighlightedCog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeHighlightedFilter",
+      "Translated": "圆形大高亮筛选",
+      "Context": "UldBundle.get_CircleLargeHighlightedFilter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeRefresh2",
+      "Translated": "圆形大刷新2",
+      "Context": "UldBundle.get_CircleLargeRefresh2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeHighlight",
+      "Translated": "圆形大高亮",
+      "Context": "UldBundle.get_CircleLargeHighlight",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeExclamationMark",
+      "Translated": "圆形大感叹号",
+      "Context": "UldBundle.get_CircleLargeExclamationMark",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleLargeHighlightedNote",
+      "Translated": "圆形大高亮笔记",
+      "Context": "UldBundle.get_CircleLargeHighlightedNote",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MirageSlotItemCrossBlue",
+      "Translated": "幻化槽物品叉蓝",
+      "Context": "UldBundle.get_MirageSlotItemCrossBlue",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MirageSlotItemCrossRed",
+      "Translated": "幻化槽物品叉红",
+      "Context": "UldBundle.get_MirageSlotItemCrossRed",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MirageSlotNormal",
+      "Translated": "幻化槽普通",
+      "Context": "UldBundle.get_MirageSlotNormal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MiragePlateRadio",
+      "Translated": "幻化模板单选",
+      "Context": "UldBundle.get_MiragePlateRadio",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MiragePlateRadioSelected",
+      "Translated": "幻化模板单选选中",
+      "Context": "UldBundle.get_MiragePlateRadioSelected",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "RecipeNoteBook_ObtainedCheckMark",
+      "Translated": "配方笔记_已获得勾选标记",
+      "Context": "UldBundle.get_RecipeNoteBook_ObtainedCheckMark",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_ShadeColor",
+      "Translated": "颜色选择器_阴影颜色",
+      "Context": "UldBundle.get_ColorChooser_ShadeColor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_ShadeOutline",
+      "Translated": "颜色选择器_阴影轮廓",
+      "Context": "UldBundle.get_ColorChooser_ShadeOutline",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_ShadeHover",
+      "Translated": "颜色选择器_阴影悬停",
+      "Context": "UldBundle.get_ColorChooser_ShadeHover",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_StainColor",
+      "Translated": "颜色选择器_染色颜色",
+      "Context": "UldBundle.get_ColorChooser_StainColor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_StainOutline",
+      "Translated": "颜色选择器_染色轮廓",
+      "Context": "UldBundle.get_ColorChooser_StainOutline",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_StainHover",
+      "Translated": "颜色选择器_染色悬停",
+      "Context": "UldBundle.get_ColorChooser_StainHover",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_NotOwned",
+      "Translated": "颜色选择器_未拥有",
+      "Context": "UldBundle.get_ColorChooser_NotOwned",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_Active",
+      "Translated": "颜色选择器_启用",
+      "Context": "UldBundle.get_ColorChooser_Active",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_ShadeMulticolor",
+      "Translated": "颜色选择器_阴影多色",
+      "Context": "UldBundle.get_ColorChooser_ShadeMulticolor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_StainMetallic",
+      "Translated": "颜色选择器_染色金属色",
+      "Context": "UldBundle.get_ColorChooser_StainMetallic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_StainActive",
+      "Translated": "颜色选择器_染色启用",
+      "Context": "UldBundle.get_ColorChooser_StainActive",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorChooser_StainNotStained",
+      "Translated": "颜色选择器_染色未染色",
+      "Context": "UldBundle.get_ColorChooser_StainNotStained",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantButton_Switch1",
+      "Translated": "染色按钮_切换1",
+      "Context": "UldBundle.get_ColorantButton_Switch1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantButton_Switch2",
+      "Translated": "染色按钮_切换2",
+      "Context": "UldBundle.get_ColorantButton_Switch2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantButton_Swap",
+      "Translated": "染色按钮_交换",
+      "Context": "UldBundle.get_ColorantButton_Swap",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantButton_Redo",
+      "Translated": "染色按钮_重做",
+      "Context": "UldBundle.get_ColorantButton_Redo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantButton_Undo",
+      "Translated": "染色按钮_撤销",
+      "Context": "UldBundle.get_ColorantButton_Undo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantToggleButton_DyeIndicatorInactive",
+      "Translated": "染色切换按钮_染色指示未激活",
+      "Context": "UldBundle.get_ColorantToggleButton_DyeIndicatorInactive",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantToggleButton_DyeIndicatorActive",
+      "Translated": "染色切换按钮_染色指示激活",
+      "Context": "UldBundle.get_ColorantToggleButton_DyeIndicatorActive",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantToggleButton_DyeIndicatorInto",
+      "Translated": "染色切换按钮_染色指示进入",
+      "Context": "UldBundle.get_ColorantToggleButton_DyeIndicatorInto",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColorantToggleButton_IntoDye",
+      "Translated": "染色切换按钮_进入染色",
+      "Context": "UldBundle.get_ColorantToggleButton_IntoDye",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MiragePrismBox_Heart",
+      "Translated": "幻化棱镜盒_灵心",
+      "Context": "UldBundle.get_MiragePrismBox_Heart",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Buddy_Highlight",
+      "Translated": "好友_高亮",
+      "Context": "UldBundle.get_Buddy_HighlightSmall",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Buddy_CapGloss",
+      "Translated": "好友_帽檐光泽",
+      "Context": "UldBundle.get_Buddy_CapGloss",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Buddy_Cap",
+      "Translated": "好友_帽子",
+      "Context": "UldBundle.get_Buddy_Cap",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Buddy_Slot",
+      "Translated": "好友_槽位",
+      "Context": "UldBundle.get_Buddy_Slot",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterClass_Tank",
+      "Translated": "角色职业_防护职业",
+      "Context": "UldBundle.get_CharacterClass_Tank",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterClass_Healer",
+      "Translated": "角色职业_治疗职业",
+      "Context": "UldBundle.get_CharacterClass_Healer",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterClass_DpsMelee",
+      "Translated": "角色职业_近战输出",
+      "Context": "UldBundle.get_CharacterClass_DpsMelee",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterClass_DpsPhysicalRanged",
+      "Translated": "角色职业_物理远程输出",
+      "Context": "UldBundle.get_CharacterClass_DpsPhysicalRanged",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterClass_DpsMagicalRanged",
+      "Translated": "角色职业_魔法远程输出",
+      "Context": "UldBundle.get_CharacterClass_DpsMagicalRanged",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterClass_DisciplesOfTheHand",
+      "Translated": "角色职业_能工巧匠",
+      "Context": "UldBundle.get_CharacterClass_DisciplesOfTheHand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterClass_DisciplesOfTheLand",
+      "Translated": "角色职业_大地使者",
+      "Context": "UldBundle.get_CharacterClass_DisciplesOfTheLand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MiragePrismBox_SetStored",
+      "Translated": "幻化棱镜盒_套装已存储",
+      "Context": "UldBundle.get_MiragePrismBox_SetStored",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MiragePrismBox_SetStorable",
+      "Translated": "幻化棱镜盒_套装可存储",
+      "Context": "UldBundle.get_MiragePrismBox_SetStorable",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MiragePrismBox_SetStored2",
+      "Translated": "幻化棱镜盒_套装已存储2",
+      "Context": "UldBundle.get_MiragePrismBox_SetStored2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ItemDetail_NotGlamour",
+      "Translated": "物品详情_非幻化",
+      "Context": "UldBundle.get_ItemDetail_NotGlamour",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ItemDetail_Glamour",
+      "Translated": "物品详情_幻化",
+      "Context": "UldBundle.get_ItemDetail_Glamour",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ItemDetail_GlamourSetItem",
+      "Translated": "物品详情_幻化套装物品",
+      "Context": "UldBundle.get_ItemDetail_GlamourSetItem",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Not Owned",
+      "Translated": "未拥有",
+      "Context": "InventoryItem.FormattedInventoryCategoryType",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Location Not Found",
+      "Translated": "未找到位置",
+      "Context": "InventoryItem.FormattedInventoryCategoryType",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Not linked to gearset",
+      "Translated": "未关联套装",
+      "Context": "GearSets.RelatedGearSetNamesImgui",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Gearsets",
+      "Translated": "套装",
+      "Context": "GearSets.RelatedGearSetNamesImgui",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [1]",
+      "Translated": "区块：[1]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [2]",
+      "Translated": "区块：[2]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [3]",
+      "Translated": "区块：[3]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [4]",
+      "Translated": "区块：[4]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Off Hand",
+      "Translated": "副手",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Waist",
+      "Translated": "腰部",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rings",
+      "Translated": "戒指",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Soul Crystal",
+      "Translated": "守护者的灵魂水晶",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Main Hand",
+      "Translated": "主手",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [5]",
+      "Translated": "区块：[5]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [6]",
+      "Translated": "区块：[6]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [7]",
+      "Translated": "区块：[7]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [8]",
+      "Translated": "区块：[8]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [9]",
+      "Translated": "区块：[9]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [10]",
+      "Translated": "区块：[10]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Block: [11]",
+      "Translated": "区块：[11]",
+      "Context": "SlotsEnumExtensions.ToFormattedName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory",
+      "Translated": "背包",
+      "Context": "SlotsEnumExtensions.ToFriendlyName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers Inventory",
+      "Translated": "雇员背包",
+      "Context": "SlotsEnumExtensions.ToFriendlyName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers Equipped",
+      "Translated": "雇员装备",
+      "Context": "SlotsEnumExtensions.ToFriendlyName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainers Market",
+      "Translated": "雇员市场",
+      "Context": "SlotsEnumExtensions.ToFriendlyName",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

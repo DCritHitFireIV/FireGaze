@@ -1,0 +1,2238 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Control ",
+      "Translated": "控制",
+      "Context": "CommandHandler..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " - try \"",
+      "Translated": "- 尝试 \"",
+      "Context": "CommandHandler..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fetching mod information...",
+      "Translated": "正在获取模组信息...",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Could not check vanity URL.",
+      "Translated": "无法检查自定义 URL。",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid URL or ID.",
+      "Translated": "无效的 URL 或 ID。",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Could not fetch mod information.",
+      "Translated": "无法获取模组信息。",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mod had no variants.",
+      "Translated": "模组没有变体。",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No such variant found.",
+      "Translated": "未找到该变体。",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mod had no versions.",
+      "Translated": "模组没有版本。",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No such version found.",
+      "Translated": "未找到该版本。",
+      "Context": "BuildInstallCommand.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No special behaviour",
+      "Translated": "无特殊行为",
+      "Context": "UpdateSettingExt.Description",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Never update",
+      "Translated": "从不更新",
+      "Context": "UpdateSettingExt.Description",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ", Part ",
+      "Translated": "，分卷",
+      "Context": "DownloadTask.SplitGroup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Adding mod",
+      "Translated": "正在添加模组",
+      "Context": "AddMod",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Install successful",
+      "Translated": "安装成功",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " was installed in Penumbra.",
+      "Translated": "已安装到 Penumbra。",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Install failed",
+      "Translated": "安装失败",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to install ",
+      "Translated": "安装失败",
+      "Context": "Run.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Not started",
+      "Translated": "未开始",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading package info",
+      "Translated": "正在下载包信息",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Checking existing files",
+      "Translated": "正在检查现有文件",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Setting up existing files",
+      "Translated": "正在设置现有文件",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Downloading files",
+      "Translated": "正在下载文件",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Constructing mod pack",
+      "Translated": "正在构建模组包",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Removing old files",
+      "Translated": "正在删除旧文件",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Finished",
+      "Translated": "已完成",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Errored",
+      "Translated": "出错",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cancelled",
+      "Translated": "已取消",
+      "Context": "StateExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Error starting download",
+      "Translated": "启动下载时出错",
+      "Context": "AddDownloadAsync.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Already downloading that mod!",
+      "Translated": "该模组已在下载中！",
+      "Context": "AddDownloadAsync.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cannot install mod: Penumbra is not set up.",
+      "Translated": "无法安装模组：Penumbra 未设置。",
+      "Context": "Server.HandleConnection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Installing a mod...",
+      "Translated": "正在安装模组...",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Error performing one-click install.",
+      "Translated": "一键安装时出错。",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Opening mod installer, please wait...",
+      "Translated": "正在打开模组安装器，请稍候...",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Error opening installer prompt.",
+      "Translated": "打开安装提示时出错。",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Installing a mod with ",
+      "Translated": "正在安装模组，使用",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " variant",
+      "Translated": "变体",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Installing ",
+      "Translated": "正在安装",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " mod",
+      "Translated": "模组",
+      "Context": "HandleConnection.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "<deleted>",
+      "Translated": "<已删除>",
+      "Context": "ImGuiHelper.CollectionChooser",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Manager",
+      "Translated": "管理器",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Latest update",
+      "Translated": "最新更新",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Downloads",
+      "Translated": "下载",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Support",
+      "Translated": "支持",
+      "Context": "ImGuiHelper.BeginTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Troubleshooting info copied to clipboard.",
+      "Translated": "故障排查信息已复制到剪贴板。",
+      "Context": "Support.CopyTroubleshootingInfo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Config copied to clipboard.",
+      "Translated": "配置已复制到剪贴板。",
+      "Context": "Support.CopyConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to copy file to clipboard",
+      "Translated": "复制文件到剪贴板失败",
+      "Context": "Support.CopyDalamudLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dalamud.log file copied to clipboard.",
+      "Translated": "dalamud.log 文件已复制到剪贴板。",
+      "Context": "Support.CopyDalamudLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Breaking changes after mod updates",
+      "Translated": "[HS] Mod 更新后的破坏性变更",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Check for breaking changes after mod updates",
+      "Translated": "检查 Mod 更新后的破坏性变更",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Recent mod updates have breaking changes that have resulted in your saved settings potentially being reset or changed. You can review these changes below, and affected mods have text files containing the same information in their folders.",
+      "Translated": "最近的 Mod 更新包含破坏性变更，可能导致你保存的设置被重置或更改。你可以在下方查看这些变更，受影响的 Mod 文件夹中也有包含相同信息的文本文件。",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Removed option groups",
+      "Translated": "已移除的选项组",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups are no longer available (but may be available under a different name), which means your settings for this group are no longer applied.",
+      "Translated": "这些选项组已不再可用（但可能以其他名称存在），这意味着你对此组的设置不再生效。",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Changed group type",
+      "Translated": "已更改的组类型",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have gone from single-select to multi-select or vice versa, which can change your selected options in unexpected ways.",
+      "Translated": "这些选项组已从单选变为多选或反之，这可能会以意外的方式改变你选中的选项。",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Removed options",
+      "Translated": "已移除的选项",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have had options removed from the end, which has unselected options you had enabled.",
+      "Translated": "这些选项组已从末尾移除选项，导致你已启用的选项被取消选中。",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Changed option names",
+      "Translated": "已更改的选项名称",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have had their option names changed, which may have unexpectedly changed what options you have selected.",
+      "Translated": "这些选项组的选项名称已更改，可能意外改变了你选中的选项。",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Changed option order",
+      "Translated": "已更改的选项顺序",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These option groups have had their options reordered, which may have unexpectedly changed what options you have selected.",
+      "Translated": "这些选项组的选项已重新排序，可能意外改变了你选中的选项。",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Your old settings by collection:",
+      "Translated": "你按收藏集的旧设置：",
+      "Context": "BreakingChangeWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " downloads",
+      "Translated": "下载",
+      "Context": "DownloadStatusWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Ctrl and click to cancel.",
+      "Translated": "按住 Ctrl 并点击以取消。",
+      "Context": "DownloadStatusWindow.DrawRealDownloads",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Example mod ",
+      "Translated": "示例模组",
+      "Context": "DownloadStatusWindow.DrawPreviewDownloads",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Import external mods",
+      "Translated": "[HS] 导入外部模组",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mods that have been installed without using the Heliosphere plugin may be imported into Heliosphere and benefit from automatic updates. You can choose which mods you would like to import below.",
+      "Translated": "未通过 Heliosphere 插件安装的模组可以导入 Heliosphere 并享受自动更新。你可以在下方选择要导入的模组。",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select all",
+      "Translated": "全选",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select none",
+      "Translated": "全不选",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Import",
+      "Translated": "导入",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Working...",
+      "Translated": "处理中...",
+      "Context": "ExternalImportWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Find your mods on Heliosphere",
+      "Translated": "[HS] 在 Heliosphere 上查找你的模组",
+      "Context": "FindMatchesWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere can scan your Penumbra mod library for non-Heliosphere mods and find matching mods that have been uploaded to Heliosphere. Mods found in this manner can be converted to Heliosphere mods, enabling automatic updates and images without manually reinstalling.",
+      "Translated": "Heliosphere 可以扫描你的 Penumbra 模组书库中的非 Heliosphere 模组，并查找已上传到 Heliosphere 的匹配模组。以此方式找到的模组可以转换为 Heliosphere 模组，无需手动重新安装即可启用自动更新和图片。",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The conversion process should keep all your settings and hierarchy, but if anything goes wrong, mods could be left in an invalid state. Please consider backing up any important mods and settings.",
+      "Translated": "转换过程应保留你所有的设置和层级，但如果出现问题，模组可能处于无效状态。请考虑备份任何重要的模组和设置。",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "I acknowledge that I must back up any mods I do not want to lose.",
+      "Translated": "我确认必须备份所有我不想丢失的模组。",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Continue",
+      "Translated": "继续",
+      "Context": "FindMatchesWindow.DrawStep0",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scanning your Penumbra library...",
+      "Translated": "正在扫描你的 Penumbra 书库...",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Searching for matches...",
+      "Translated": "正在搜索匹配项...",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Did not find any matches on Heliosphere.",
+      "Translated": "在 Heliosphere 上未找到任何匹配项。",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Did not find any exact matches on Heliosphere.",
+      "Translated": "在 Heliosphere 上未找到任何精确匹配项。",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search for non-exact matches",
+      "Translated": "搜索非精确匹配项",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Translated": "关闭",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Found these matches on Heliosphere. Please select which mods you would like to convert.",
+      "Translated": "在 Heliosphere 上找到这些匹配项。请选择你想要转换的 Mod。",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Found these exact matches on Heliosphere. Please select which mods you would like to convert, or, if you would like to search for non-exact matches, click the appropriate button.",
+      "Translated": "在 Heliosphere 上找到这些完全匹配项。请选择你想要转换的 Mod，或者，如果你想搜索非完全匹配项，请点击相应的按钮。",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Converting mods is a destructive action that will delete any files not referenced by the mod as uploaded to Heliosphere. If an error occurs at any point in the conversion process, mods may be left in an undefined, invalid state. Back up anything you can't afford to lose.",
+      "Translated": "转魔模组是一项破坏性操作，会删除上传到 Heliosphere 的模组未引用的任何文件。如果在转魔过程中的任何时刻发生错误，模组可能会处于未定义、无效的状态。请备份任何你无法承受丢失的内容。",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "I have made backups of any important mods listed above.",
+      "Translated": "我已备份上述任何重要模组。",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "I acknowledge clicking the below button may permanently corrupt any of the mods above.",
+      "Translated": "我确认点击下方按钮可能会永久损坏上述任何模组。",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Convert these mods",
+      "Translated": "转换这些 Mod",
+      "Context": "FindMatchesWindow.DrawStep1",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Converting mods...",
+      "Translated": "正在转魔模组...",
+      "Context": "FindMatchesWindow.DrawStep2",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Conversion finished! Downloads may still be ongoing.",
+      "Translated": "转魔完成！下载可能仍在进行中。",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Some conversions encountered errors:",
+      "Translated": "部分转魔遇到错误：",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "unknown error",
+      "Translated": "未知错误",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Dalamud log may have more information.",
+      "Translated": "Dalamud 日志可能有更多信息。",
+      "Context": "FindMatchesWindow.DrawStep3",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "% match)",
+      "Translated": "% 匹配）",
+      "Context": "FindMatchesWindow.GetMatchLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " first-time setup",
+      "Translated": "首次设置",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere update",
+      "Translated": "Heliosphere 更新",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to Heliosphere!",
+      "Translated": "欢迎来到 Heliosphere！",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "To get everything set up, open the first-time setup window by clicking the button below. It will open in your default web browser.",
+      "Translated": "要进行全部设置，请点击下方按钮打开首次设置窗口。它将在你的默认网络浏览器中打开。",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open first-time setup",
+      "Translated": "打开首次设置",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Skip (not recommended)",
+      "Translated": "跳过（不推荐）",
+      "Context": "FirstTimeSetupWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "?###multi-install-prompt-",
+      "Translated": "？",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Do you want to install these mods?",
+      "Translated": "你想要安装这些模组吗？",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Author",
+      "Translated": "作者",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Include tags in Penumbra",
+      "Translated": "在 Penumbra 中包含标签",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open first mod in Penumbra after install",
+      "Translated": "安装后在 Penumbra 中打开第一个模组",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically enable in collection",
+      "Translated": "在收藏中自动启用",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Install",
+      "Translated": "安装",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "MultiPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Do you want to install this mod?",
+      "Translated": "你想要安装这个模组吗？",
+      "Context": "MultiVariantPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Penumbra after install",
+      "Translated": "安装后在 Penumbra 中打开",
+      "Context": "MultiVariantPromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy error information",
+      "Translated": "复制错误信息",
+      "Context": "UpdateNotif",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copied!",
+      "Translated": "已复制！",
+      "Context": "UpdateNotif",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click to open this image. Hold right-click to zoom.",
+      "Translated": "点击打开此图片。按住右键缩放。",
+      "Context": "PenumbraWindowIntegration.PreSettingsTabBarDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Check for and download updates",
+      "Translated": "检查并下载更新",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open in Heliosphere",
+      "Translated": "在 Heliosphere 中打开",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Update settings",
+      "Translated": "更新设置",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Login update behaviour",
+      "Translated": "登录更新行为",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Controls if this mod should be checked for updates/have updates applied on login. Overrides the global setting.",
+      "Translated": "控制此模组在登录时是否检查更新/应用更新。覆盖全局设置。",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Manual update behaviour",
+      "Translated": "手动更新行为",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Controls what this mod will do when you manually run updates.",
+      "Translated": "控制此模组在手动运行更新时的行为。",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "context",
+      "Translated": "上下文",
+      "Context": "PenumbraWindowIntegration.PostEnabledDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra sort folder",
+      "Translated": "Penumbra 排序文件夹",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Edit",
+      "Translated": "编辑",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Translated": "重置",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "folder-options",
+      "Translated": "文件夹选项",
+      "Context": "PromptHelper.DrawSortFolderInputs",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Advanced options",
+      "Translated": "高级选项",
+      "Context": "PromptWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[HS] Set up Penumbra",
+      "Translated": "[HS] 设置 Penumbra",
+      "Context": "SetUpPenumbraWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere cannot function if Penumbra is not set up. Please set a root directory in Penumbra, then try again.",
+      "Translated": "如果未设置 Penumbra，Heliosphere 将无法运行。请在 Penumbra 中设置根目录，然后重试。",
+      "Context": "SetUpPenumbraWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Penumbra settings",
+      "Translated": "打开 Penumbra 设置",
+      "Context": "SetUpPenumbraWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click to remove from history.",
+      "Translated": "点击从历史记录中移除。",
+      "Context": "DownloadHistory.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click on errored downloads to copy error information.",
+      "Translated": "右键点击出错的下载以复制错误信息。",
+      "Context": "DownloadHistory.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Error information copied to clipboard.",
+      "Translated": "错误信息已复制到剪贴板。",
+      "Context": "DownloadHistory.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No mod updates yet.",
+      "Translated": "暂无模组更新。",
+      "Context": "LatestUpdate.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " mods",
+      "Translated": "个模组",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "one mod",
+      "Translated": "个模组",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Started: ",
+      "Translated": "开始：",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Finished: ",
+      "Translated": "完成：",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " variants",
+      "Translated": "个变体",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "one variant",
+      "Translated": "个变体",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Renamed from ",
+      "Translated": "重命名自",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " versions",
+      "Translated": "个版本",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "one version",
+      "Translated": "个版本",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No changelog",
+      "Translated": "无更新日志",
+      "Context": "LatestUpdate.DrawSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mods",
+      "Translated": "模组",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh list",
+      "Translated": "刷新列表",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Check for updates",
+      "Translated": "检查更新",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search Heliosphere for installed mods",
+      "Translated": "在 Heliosphere 中搜索已安装的模组",
+      "Context": "Manager.DrawMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "content",
+      "Translated": "幸福",
+      "Context": "Manager.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Translated": "筛选...",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Import ",
+      "Translated": "导入",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " new ",
+      "Translated": "新",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Detected Heliosphere mods installed without using the plugin. Click here for import options.",
+      "Translated": "检测到未通过插件安装的 Heliosphere 模组。点击此处查看导入选项。",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scanning - ",
+      "Translated": "扫描中 -",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " new updates are available",
+      "Translated": "有新的更新可用",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "A new update is available",
+      "Translated": "有新的更新可用",
+      "Context": "Manager.DrawPackageList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Translated": "操作",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Download updates",
+      "Translated": "下载更新",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete mod",
+      "Translated": "删除模组",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Ctrl + Shift to enable this button.",
+      "Translated": "按住 Ctrl + Shift 以启用此按钮。",
+      "Context": "Manager.DrawActionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Description",
+      "Translated": "描述",
+      "Context": "Manager.DrawDescriptionTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Versions",
+      "Translated": "版本",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " (installed)",
+      "Translated": "（已安装）",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "-variant-",
+      "Translated": "-变体-",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reinstall",
+      "Translated": "重新安装",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No changelog.",
+      "Translated": "无更新日志。",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh",
+      "Translated": "刷新",
+      "Context": "Manager.DrawVersionsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " mods have updates.",
+      "Translated": "个模组有更新。",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One mod has an update.",
+      "Translated": "一个模组有更新。",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " updates",
+      "Translated": "个更新",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One update",
+      "Translated": "一个更新",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " ignored based on your settings.",
+      "Translated": "已根据你的设置忽略。",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " updates are",
+      "Translated": "个更新已",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One update is",
+      "Translated": "一个更新已",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " being installed based on your settings.",
+      "Translated": "根据你的设置正在安装。",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No updates available.",
+      "Translated": "无可用更新。",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " ignored based on your settings.)",
+      "Translated": "已根据你的设置忽略。）",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "): failed - you may need to manually update",
+      "Translated": "）：失败 - 你可能需要手动更新",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " auto-updated successfully.",
+      "Translated": "自动更新成功。",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Update installer",
+      "Translated": "更新安装程序",
+      "Context": "DownloadUpdatesInner.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show mod image previews in Penumbra",
+      "Translated": "在 Penumbra 中显示模组图片预览",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Heliosphere buttons in Penumbra",
+      "Translated": "在 Penumbra 中显示 Heliosphere 按钮",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Expand Heliosphere mod settings by default",
+      "Translated": "默认展开 Heliosphere 模组设置",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Preview image size",
+      "Translated": "预览图片大小",
+      "Context": "Settings.DrawPenumbraIntegrationSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra mod title prefix",
+      "Translated": "Penumbra 模组标题前缀",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra folder",
+      "Translated": "Penumbra 文件夹",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The folder in Penumbra to install new mods into. This can be set to blank for no folder, as well.\n\nNote that this is just the initial folder for newly-installed mods; you can move mods out of this folder after install.",
+      "Translated": "在 Penumbra 中安装新模组的文件夹。也可以设为空白以不使用文件夹。\n\n注意，这只是新安装模组的初始文件夹；安装后你可以将模组移出此文件夹。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "User interface",
+      "Translated": "用户界面",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Preview download status window",
+      "Translated": "预览下载状态窗口",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shows fake mod downloads so you can position the status window where you like.",
+      "Translated": "显示模拟的模组下载，方便你调整状态窗口的位置。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use Dalamud notifications for download progress",
+      "Translated": "使用 Dalamud 通知显示下载进度",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Start progress notifications minimised",
+      "Translated": "进度通知以最小化启动",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show preview images in Heliosphere Manager tab",
+      "Translated": "在 Heliosphere 管理标签页中显示预览图",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Installs and updates",
+      "Translated": "安装与更新",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Controls if mods should be checked for updates/have updates applied on login.",
+      "Translated": "控制登录时是否检查模组更新/应用更新。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Include tags in Penumbra by default",
+      "Translated": "默认在 Penumbra 中包含标签",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open mods in Penumbra after fresh install",
+      "Translated": "全新安装后在 Penumbra 中打开模组",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display breaking change summaries after updates",
+      "Translated": "更新后显示破坏性变更摘要",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This option will cause a window to open with information about if an update to a mod caused Penumbra to reset your option choices.",
+      "Translated": "启用此选项后，当模组更新导致 Penumbra 重置你的选项时会弹出窗口显示相关信息。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite mod path name in Penumbra on updates",
+      "Translated": "更新时覆盖 Penumbra 中的模组引导步廊名称",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Uncheck this if you change the name in the mod path to re-order your mods. Most users should keep this checked.",
+      "Translated": "如果你通过修改模组引导步廊中的名称来重新排序模组，请取消勾选。大多数用户应保持勾选。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Overwrite mod name in Penumbra on updates",
+      "Translated": "更新时覆盖 Penumbra 中的模组名称",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Uncheck this if you change the names of mods and would like them to be left alone on updates.",
+      "Translated": "如果你修改了模组名称并希望在更新时保留，请取消勾选。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide variant names in Penumbra when they are \"Default\"",
+      "Translated": "当变体名称为“Default”时在 Penumbra 中隐藏",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This only affects mods installed after changing the setting.",
+      "Translated": "此设置仅影响更改后安装的模组。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Default install collection",
+      "Translated": "默认安装收藏夹",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This is the collection that will be selected by default in the installation prompt.",
+      "Translated": "这是安装提示中默认选中的收藏夹。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use Recycle Bin when deleting old files",
+      "Translated": "删除旧文件时使用回收站",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere permanently deletes unused files from the files folder inside all of the mods it manages. Check this box to make it send those files to your Recycle Bin instead.",
+      "Translated": "Heliosphere 会永久删除其管理的所有模组文件夹中未使用的文件。勾选此项可改为将这些文件移入回收站。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Commands",
+      "Translated": "命令",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allow installing mods with chat commands",
+      "Translated": "允许通过聊天命令安装模组",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allow installs without confirmation with chat commands",
+      "Translated": "允许通过聊天命令免确认安装",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This is disabled by default to prevent malicious plugins, scripts, or instructions from having an easy way to install mods automatically.",
+      "Translated": "默认禁用此项，以防止恶意插件、脚本或指令轻易自动安装 Mod。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Download speed limits",
+      "Translated": "下载速度限制",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Max download speed in KiB/s (0 for unlimited)",
+      "Translated": "最大下载速度（KiB/s，0 为超越极限）",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Alternate max download speed in KiB/s (0 for unlimited)",
+      "Translated": "备用最大下载速度（KiB/s，0 为超越极限）",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (default)",
+      "Translated": "速度限制（默认）",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (in instance)",
+      "Translated": "速度限制（副本中）",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (in combat)",
+      "Translated": "速度限制（战斗中）",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Speed limit (in party)",
+      "Translated": "速度限制（小队中）",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One-click install",
+      "Translated": "一键安装",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Translated": "启用",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You may hold Shift when clicking install on the Heliosphere website to temporarily turn off one-click installs.",
+      "Translated": "在 Heliosphere 网站点击安装时按住 Shift 可临时关闭一键安装。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One-click installs require you to generate a code in this window, then paste it into the Heliosphere website.",
+      "Translated": "一键安装需要你在本窗口生成一个代码，然后将其粘贴到 Heliosphere 网站。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Generate new code",
+      "Translated": "生成新代码",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Generate code",
+      "Translated": "生成代码",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Code copied to clipboard. Paste it on the Heliosphere website.",
+      "Translated": "代码已复制到剪贴板。请粘贴到 Heliosphere 网站。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Heliosphere website",
+      "Translated": "打开 Heliosphere 网站",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One-click default collection",
+      "Translated": "一键默认收藏集",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This is the collection that mods installed via one-click will be enabled in by default. This overrides the default collection setting above.",
+      "Translated": "通过一键安装的模组将默认启用到此收藏集。这会覆盖上方的默认收藏集设置。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Nerd info",
+      "Translated": "技术信息",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "One-click installs use a password system. The button above will generate a password, hash it, then copy the password to your clipboard. The plugin doesn't store the password. By pasting the password into the Heliosphere website, the website can provide it to the plugin during install requests. If the hash of the provided password is the same as the stored hash in the plugin, one-click installs will proceed. Otherwise, the normal download prompt will be shown. This is to prevent other, unauthorised programs from issuing install requests that will automatically go through.",
+      "Translated": "一键安装使用密码系统。上方按钮会生成密码、对其进行哈希处理，然后将密码复制到你的剪贴板。插件不会存储密码。将密码粘贴到 Heliosphere 网站后，网站可在安装请求期间将其提供给插件。如果提供的密码哈希与插件中存储的哈希一致，一键安装将继续进行。否则，将显示正常的下载提示。这是为了防止其他未经授权的程序发出会自动通过的安装请求。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Miscellaneous",
+      "Translated": "杂项",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset first-time setup",
+      "Translated": "重置首次设置",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Try starting server",
+      "Translated": "尝试启动服务器",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Could not start server",
+      "Translated": "无法启动服务器",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Could not start server. Heliosphere will not be able to work with the website.",
+      "Translated": "无法启动服务器。Heliosphere 将无法与网站配合使用。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unsupported options",
+      "Translated": "不受支持的选项",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hic svnt leones!",
+      "Translated": "此处有狮！",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The options here are not supported. No support will be provided to you if you choose to use any of these options. In order to receive support for Heliosphere, you must turn these options off and continue to reproduce any issue.",
+      "Translated": "此处选项不受支持。如果你选择使用其中任何选项，将不会为你提供任何支持。若要获得 Heliosphere 的支持，你必须关闭这些选项并继续生成分裂体任何问题。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allow installing mods in networked locations",
+      "Translated": "允许在网络位置安装模组",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This option is known to cause hard-to-diagnose filesystem issues, sync errors, and mod corruption. Expect access denied and other IO errors, unstable mods, and potentially crashes if you choose to install mods into a networked location.",
+      "Translated": "已知此选项会导致难以诊断的文件系统问题、同步错误和模组异端者隧道。如果你选择将模组安装到网络位置，可能会遇到访问被拒绝和其他 IO 错误、不稳定模组，甚至崩溃。",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " - unsupported options enabled",
+      "Translated": "- 已启用不受支持的选项",
+      "Context": "Settings.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Support is offered on our official forums. Click the button below to open them.",
+      "Translated": "我们在官方论坛提供支持。点击下方按钮打开论坛。",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Heliosphere Forums",
+      "Translated": "打开 Heliosphere 论坛",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "When getting support, you may be asked to click these buttons and send what they copy to your clipboard.",
+      "Translated": "获取支持时，可能会要求你点击这些按钮，并将复制到剪贴板的内容发送出去。",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy troubleshooting info",
+      "Translated": "复制故障排除信息",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy dalamud.log file",
+      "Translated": "复制 dalamud.log 文件",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reveal dalamud.log file",
+      "Translated": "显示 dalamud.log 文件",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy config",
+      "Translated": "复制配置",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable tracing",
+      "Translated": "启用追踪",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disable tracing",
+      "Translated": "禁用追踪",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Support location (changes what is copied to clipboard)",
+      "Translated": "支持位置（更改复制到剪贴板的内容）",
+      "Context": "Support.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Heliosphere migration##short-variant",
+      "Translated": "Heliosphere 迁移##short-variant",
+      "Context": "ShortVariantMigration..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " needs to change the naming scheme used for mods managed by it. This will not impact your mods. If you do not run this change, ",
+      "Translated": "需要更改其管理的模组所使用的命名方案。这不会影响你的模组。如果你不运行此更改，",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " will cease to work, disabling auto-updates and other features, though your mods will continue to load in Penumbra.",
+      "Translated": "将停止工作，禁用自动更新和其他功能，不过你的模组仍会在 Penumbra 中加载。",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Running this migration may take a few minutes depending on the amount of mods you have installed. If you need to, you can do this later by opening ",
+      "Translated": "运行此迁移可能需要几分钟，具体取决于你安装的模组数量。如有需要，你可以稍后通过打开",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " and navigating to the Manager tab. While running, the migration may slow your game down and make it difficult to play. It is recommended that you leave the game alone while the migration is running.",
+      "Translated": "并导航到管理标签页来执行此操作。运行期间，迁移可能会拖慢你的游戏速度并使其难以游玩。建议在迁移运行时不要操作游戏。",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Would you like to run the migration now?",
+      "Translated": "是否立即运行迁移？",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Yes",
+      "Translated": "是",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Translated": "否",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Migration successfully completed.",
+      "Translated": "迁移已成功完成。",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Migration failed.",
+      "Translated": "迁移失败。",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy exception info",
+      "Translated": "复制异常信息",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Translated": "重试",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close (try again later)",
+      "Translated": "关闭（稍后再试）",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Migrating - ",
+      "Translated": "迁移中 -",
+      "Context": "ShortVariantMigration.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Warning",
+      "Translated": "警告",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Your antivirus program is most likely interfering with Heliosphere's operation.",
+      "Translated": "您的杀毒软件很可能正在干扰 Heliosphere 的运行。",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Please allowlist or make an exception for Dalamud and Heliosphere.",
+      "Translated": "请将 Dalamud 和 Heliosphere 加入白名单或设置例外。",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open instructions",
+      "Translated": "打开说明",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "After following those instructions, please reinstall Heliosphere.",
+      "Translated": "按照说明操作后，请重新安装 Heliosphere。",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If you do not reinstall, Heliosphere will not work correctly.",
+      "Translated": "如果不重新安装，Heliosphere 将无法正常工作。",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If you have made exceptions and this warning still appears, please contact us on our forums.",
+      "Translated": "如果你已添加例外但此警告仍然出现，请在我们的论坛上联系我们。",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open forums",
+      "Translated": "打开论坛",
+      "Context": "AntiVirusDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "While installing ",
+      "Translated": "安装时",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ", Heliosphere encountered two or more directories already present for that mod. This is an indication that something has gone wrong.",
+      "Translated": "，Heliosphere 发现该模组已存在两个或更多目录。这表明出现了问题。",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "To fix this, you will need to delete all but one directory. Usually this means deleting directories for old versions.",
+      "Translated": "要修复此问题，您需要删除除一个以外的所有目录。通常这意味着删除旧版本的目录。",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open##",
+      "Translated": "打开##",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Permanently delete##",
+      "Translated": "永久删除##",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold Shift to enable this button.",
+      "Translated": "按住 Shift 以启用此按钮。",
+      "Context": "MultipleModDirectoriesDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "] Crash warning##v",
+      "Translated": "] 崩溃倒计时##v",
+      "Context": "PapCrashWarning..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Crash warning",
+      "Translated": "崩溃警告",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra cannot currently handle PAP files with paths that are longer than 260 characters. If any of the files below are loaded by the game, you will crash.",
+      "Translated": "Penumbra 目前无法处理路径超过 260 个字符的 PAP 文件。如果游戏加载了以下任何文件，您将会崩溃。",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Crashing paths (",
+      "Translated": "导致崩溃的路径 (",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This is likely caused because your Penumbra root is nested too deeply.",
+      "Translated": "这很可能是因为您的 Penumbra 根目录嵌套过深。",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Your Penumbra root at the time of this warning was ",
+      "Translated": "此警告出现时你的 Penumbra 根目录为",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "I understand",
+      "Translated": "我明白了",
+      "Context": "PapCrashWarning.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Version mismatch",
+      "Translated": "版本不匹配",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dalamud thinks you have version ",
+      "Translated": "Dalamud 认为您安装的版本是",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " installed, but this is actually version ",
+      "Translated": "但实际版本是",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "To fix this, open the plugin installer and disable, delete, and reinstall ",
+      "Translated": "要修复此问题，请打开插件安装器并禁用、删除，然后重新安装",
+      "Context": "VersionMismatchDialog.InnerDraw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Import from existing mod",
+      "Translated": "从现有模组导入",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "does not have",
+      "Translated": "没有",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "has",
+      "Translated": "有",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This mod needs one file, and the selected mod ",
+      "Translated": "此模组需要一个文件，而所选模组",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " it. Proceed?",
+      "Translated": "它。是否继续？",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Of the ",
+      "Translated": "在",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " files this mod needs, the selected mod has ",
+      "Translated": "此模组需要的文件中，所选模组有",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " of them. Proceed?",
+      "Translated": "个。是否继续？",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Proceed",
+      "Translated": "继续",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Warning! Clicking Proceed will permanently convert the selected mod to a Heliosphere mod, renaming all needed files and deleting all files inside of it that Heliosphere does not need.",
+      "Translated": "警告！点击“继续”将永久把所选 Mod 转换为 Heliosphere Mod，重命名所有需要的文件，并删除其中所有 Heliosphere 不需要的文件。",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If you already have this mod installed, you can use this to attempt to convert it to a Heliosphere mod, skipping most or all of the download.",
+      "Translated": "如果你已经安装了此 Mod，你可以用它尝试将其转换为 Heliosphere Mod，跳过大部分或全部下载。",
+      "Context": "Importer.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra is not installed or is not set up properly.",
+      "Translated": "Penumbra 未安装或未正确设置。",
+      "Context": "ModChooser.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Penumbra mod",
+      "Translated": "Penumbra 模组",
+      "Context": "ModChooser.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search...",
+      "Translated": "搜索...",
+      "Context": "ModChooser.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Checking ",
+      "Translated": "正在检查",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " for updates...",
+      "Translated": "更新...",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " is already up-to-date.",
+      "Translated": "已是最新版本。",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Update for ",
+      "Translated": "更新",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " found - starting download.",
+      "Translated": "已找到 - 开始下载。",
+      "Context": "DownloadUpdates.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Translated": "已禁用",
+      "Context": "LoginUpdateModeExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Check only",
+      "Translated": "仅检查",
+      "Context": "LoginUpdateModeExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically update",
+      "Translated": "自动更新",
+      "Context": "LoginUpdateModeExt.Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Do not check for or automatically apply mod updates on login",
+      "Translated": "登录时不检查也不自动应用模组更新",
+      "Context": "LoginUpdateModeExt.Help",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Check for but do not automatically apply mod updates on login",
+      "Translated": "登录时检查模组更新但不自动应用",
+      "Context": "LoginUpdateModeExt.Help",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Check for and automatically apply mod updates on login",
+      "Translated": "登录时检查并自动应用模组更新",
+      "Context": "LoginUpdateModeExt.Help",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

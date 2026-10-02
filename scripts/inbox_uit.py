@@ -71,15 +71,6 @@ def is_user_source(item: dict) -> bool:
     return str(item.get("Source") or "").strip().lower().startswith("user")
 
 
-def apply_preserve_id(target: dict, item: dict) -> None:
-    """投稿带 PreserveID=true 时记进库包（只用「有值」的一面，不用缺失去清旧值）。
-
-    库包下载方的补丁会据此决定要不要写成「译文###原文」；不带这条的话，标签类条目在
-    非目标插件（不被 CI 重建）的包里会丢掉 ### 保护（2026-10-03）。"""
-    if item.get("PreserveID"):
-        target["PreserveID"] = True
-
-
 def submission_fingerprint(plugin: str, payload: dict) -> str:
     """同一份投稿内容的指纹（插件 + 条目/资源/属性的原文→译文对，排序后哈希）。
 
@@ -219,14 +210,12 @@ def main(argv=None) -> int:
         if target is None:
             target = {"Original": original, "Translated": translated, "Context": str(item.get("Context") or "")}
             target["Source"] = "user" if user_source else "library"
-            apply_preserve_id(target, item)
             pack["entries"].append(target)
             entries_by_original[original] = target
             accepted += 1
             filled += 1
             continue
 
-        apply_preserve_id(target, item)
         existing = str(target.get("Translated") or "").strip()
         if user_source:
             target["Translated"] = translated
@@ -261,14 +250,12 @@ def main(argv=None) -> int:
         if target is None:
             target = {"Container": container, "Key": key, "Original": original, "Translated": translated}
             target["Source"] = "user" if user_source else "library"
-            apply_preserve_id(target, item)
             pack["resources"].append(target)
             resources_by_key[(container, key)] = target
             accepted += 1
             filled += 1
             continue
 
-        apply_preserve_id(target, item)
         existing = str(target.get("Translated") or "").strip()
         if user_source:
             target["Translated"] = translated
@@ -298,14 +285,12 @@ def main(argv=None) -> int:
         if target is None:
             target = {"Original": original, "Translated": translated, "Context": "[投稿]"}
             target["Source"] = "user" if user_source else "library"
-            apply_preserve_id(target, item)
             pack["attributes"].append(target)
             attributes_by_original[original] = target
             accepted += 1
             filled += 1
             continue
 
-        apply_preserve_id(target, item)
         existing = str(target.get("Translated") or "").strip()
         if user_source:
             target["Translated"] = translated

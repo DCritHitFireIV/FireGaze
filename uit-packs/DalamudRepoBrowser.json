@@ -1,0 +1,432 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Opens the repository browser.",
+      "Translated": "打开仓库浏览器。",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Repository cache updated.",
+      "Translated": "仓库缓存已更新。",
+      "Context": "FetchRepoMasters.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Repository Browser",
+      "Translated": "仓库浏览器",
+      "Context": "FetchRepoMasters.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Translated": "来源",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DO NOT INSTALL FROM REPOSITORIES YOU DO NOT TRUST.",
+      "Translated": "请勿安装来自您不信任的仓库的插件。",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search ",
+      "Translated": "搜索",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Repos",
+      "Translated": "仓库",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Link##",
+      "Translated": "复制链接##",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copied!##",
+      "Translated": "已复制!##",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Owner: ",
+      "Translated": "所有者：",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Branch: ",
+      "Translated": "分支：",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Updated: ",
+      "Translated": "更新时间：",
+      "Context": "RepoBrowserWindow.DrawClassic",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use new UI",
+      "Translated": "使用新界面",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Outdated Plugins",
+      "Translated": "显示过时插件",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide non-English plugins",
+      "Translated": "隐藏非英文插件",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide closed-source plugins",
+      "Translated": "隐藏闭源插件",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\tSort",
+      "Translated": "排序",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Owner",
+      "Translated": "所有者",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "# Plugins",
+      "Translated": "# 插件",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Last Updated",
+      "Translated": "最后更新",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Enabled Repos",
+      "Translated": "隐藏已启用的仓库",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum Plugins###MaxPlugins",
+      "Translated": "最大插件数",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "∞ Plugins###MaxPlugins",
+      "Translated": "∞ 插件",
+      "Context": "RepoBrowserWindow.DrawClassicSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Repos...",
+      "Translated": "仓库...",
+      "Context": "RepoBrowserWindow.DrawModernFilterBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " repositories shown",
+      "Translated": "个仓库已显示",
+      "Context": "RepoBrowserWindow.DrawModernFilterBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These plugin lists are dynamically generated and not vetted. They may contain malware or jeopardize your account. Proceed with caution. If you're installing plugins from custom repositories, DO NOT ask for help on the XIVLauncher discord. Please review the plugin's README for support.",
+      "Translated": "这些插件列表为动态生成，未经审核。它们可能包含恶意软件或危及您的账号。请谨慎操作。如果您要从自定义仓库安装插件，请勿在 XIVLauncher 的 Discord 上寻求帮助。请查阅插件的 README 以获取支持。",
+      "Context": "RepoBrowserWindow.DrawModernWarning",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Configuration",
+      "Translated": "配置",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Translated": "关闭",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Left",
+      "Translated": "左",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right",
+      "Translated": "右",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sort By",
+      "Translated": "排序方式",
+      "Context": "RepoBrowserWindow.DrawModernSettingsPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Aetherfeed Browser",
+      "Translated": "Aetherfeed 浏览器",
+      "Context": "RepoBrowserWindow.DrawModernHeaderAurora",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Discover repositories automatically scraped from GitHub",
+      "Translated": "自动从 GitHub 抓取并发现仓库",
+      "Context": "RepoBrowserWindow.DrawModernHeaderAurora",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "View on Aetherfeed",
+      "Translated": "在 Aetherfeed 上查看",
+      "Context": "RepoBrowserWindow.DrawModernHeaderButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Header",
+      "Translated": "标题",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Translated": "主要",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Translated": "操作",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NEW",
+      "Translated": "新",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "PRIORITY",
+      "Translated": "优先",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Priority repos are hand-picked by Aetherfeed for deduplication.\nThese are usually trusted devs, but third-party plugins always carry risk.",
+      "Translated": "优先仓库由 Aetherfeed 人工挑选以去重。\n这些通常是可信的开发者，但第三方插件始终存在风险。",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Repository",
+      "Translated": "启用仓库",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Repository",
+      "Translated": "禁用仓库",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Repo URL",
+      "Translated": "复制仓库 URL",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Website",
+      "Translated": "打开网站",
+      "Context": "RepoBrowserWindow.DrawModernRepoList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plugins: ",
+      "Translated": "插件：",
+      "Context": "RepoBrowserWindow.BuildRepoInfoText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Updated: Unknown",
+      "Translated": "更新时间：未知",
+      "Context": "RepoBrowserWindow.BuildRepoInfoText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Aetherfeed updated: unknown",
+      "Translated": "Aetherfeed 更新时间：未知",
+      "Context": "RepoBrowserWindow.GetRemoteUpdateStatusText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Aetherfeed updated ",
+      "Translated": "Aetherfeed 已更新",
+      "Context": "RepoBrowserWindow.GetRemoteUpdateStatusText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Next update soon",
+      "Translated": "即将更新",
+      "Context": "RepoBrowserWindow.GetApproximateNextUpdateText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Next update in ~",
+      "Translated": "下次更新约在",
+      "Context": "RepoBrowserWindow.GetApproximateNextUpdateText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "just now",
+      "Translated": "刚刚",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "m ago",
+      "Translated": "分钟前",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "h ago",
+      "Translated": "小时前",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "d ago",
+      "Translated": "天前",
+      "Context": "RepoBrowserWindow.GetRelativeTimeText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "RepoBrowserWindow.GetSortLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Closed Source",
+      "Translated": "闭源",
+      "Context": "RepoBrowserWindow.ShowPluginTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "API Level: ",
+      "Translated": "API 等级：",
+      "Context": "RepoBrowserWindow.ShowPluginTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copied to clipboard:\n",
+      "Translated": "已复制到剪贴板：",
+      "Context": "RepoBrowserWindow.CopyUrl",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh repositories",
+      "Translated": "刷新仓库",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,432 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Browsingway dependencies",
+      "Translated": "Browsingway 依赖项",
+      "Context": "[Browsingway] DependencyManager.Render",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Browsingway requires additional dependencies to function.\nThese are not shipped with the plugin due to their size.\n\nThe files are hosted on GitHub and are verified with SHA256 checksums:\nhttps://github.com/Styr1x/Browsingway/releases/tag/cef-binaries\n\nCefSharp: ",
+      "Translated": "Browsingway 需要额外的依赖项才能运行。\n由于体积原因，这些文件未随插件一同发布。\n\n这些文件托管在 GitHub 上，并通过 SHA256 校验和进行验证：\nhttps://github.com/Styr1x/Browsingway/releases/tag/cef-binaries\n\nCefSharp：",
+      "Context": "[Browsingway] DependencyManager.Render",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nSHA256: ",
+      "Translated": "SHA256：",
+      "Context": "[Browsingway] DependencyManager.Render",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Install missing dependencies",
+      "Translated": "安装缺失的依赖项",
+      "Context": "[Browsingway] DependencyManager.RenderConfirm",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Installing dependencies: ",
+      "Translated": "正在安装依赖项：",
+      "Context": "[Browsingway] DependencyManager.RenderInstalling",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Close",
+      "Translated": "关闭",
+      "Context": "[Browsingway] DependencyManager.RenderComplete",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retry",
+      "Translated": "重试",
+      "Context": "[Browsingway] DependencyManager.RenderFailed",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Extracting",
+      "Translated": "正在解压",
+      "Context": "[Browsingway] DependencyManager.RenderDownloadProgress",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Complete",
+      "Translated": "完成",
+      "Context": "[Browsingway] DependencyManager.RenderDownloadProgress",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Error",
+      "Translated": "错误",
+      "Context": "[Browsingway] DependencyManager.RenderDownloadProgress",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "An error occured while building the browser overlay texture:",
+      "Translated": "构建浏览器悬浮窗纹理时发生错误：",
+      "Context": "[Browsingway] Overlay.Render",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "An error occured while building the browser overlay texture. Check the log for more details.",
+      "Translated": "构建浏览器悬浮窗纹理时发生错误。请查看日志了解详情。",
+      "Context": "[Browsingway] Overlay.Render",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Control Browsingway from the chat line! Type '/bw config' or open the settings for more info.",
+      "Translated": "在聊天栏中控制 Browsingway！输入“/bw config”或打开设置以了解更多信息。",
+      "Context": "[Browsingway] Plugin.DependenciesReady",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No subcommand specified. Valid subcommands are: config,overlay.",
+      "Translated": "未指定子命令。有效的子命令为：config、overlay。",
+      "Context": "[Browsingway] Plugin.HandleCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown subcommand '",
+      "Translated": "未知子命令“",
+      "Context": "[Browsingway] Plugin.HandleCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "'. Valid subcommands are: config,overlay,inlay.",
+      "Translated": "”。有效的子命令为：config、overlay、inlay。",
+      "Context": "[Browsingway] Plugin.HandleCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid overlay command. Supported syntax: '[overlayCommandName] [setting] [value]'",
+      "Translated": "无效的悬浮窗命令。支持的语法：“[overlayCommandName] [setting] [value]”",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown overlay '",
+      "Translated": "未知悬浮窗“",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown setting '",
+      "Translated": "未知设置“",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ". Valid settings are: url,hidden,locked,fullscreen,clickthrough,typethrough,muted,disabled,act.",
+      "Translated": "”。有效的设置项为：url、hidden、locked、fullscreen、clickthrough、typethrough、muted、disabled、act。",
+      "Context": "[Browsingway] Settings.HandleOverlayCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown boolean value '",
+      "Translated": "未知布尔值“",
+      "Context": "[Browsingway] Settings.CommandSettingBoolean",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ". Valid values are: on,off,toggle.",
+      "Translated": "”。有效值为：on、off、toggle。",
+      "Context": "[Browsingway] Settings.CommandSettingBoolean",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Browsingway Settings",
+      "Translated": "Browsingway 设置",
+      "Context": "[Browsingway] Settings.Render",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Translated": "通用",
+      "Context": "[Browsingway] Settings.RenderPaneSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "- Overlays -",
+      "Translated": "- 悬浮窗 -",
+      "Context": "[Browsingway] Settings.RenderPaneSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select an overlay on the left to edit its settings.",
+      "Translated": "在左侧选择一个悬浮窗以编辑其设置。",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Command Help",
+      "Translated": "命令帮助",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open this configuration window.",
+      "Translated": "打开此配置窗口。",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Change a setting for an overlay.\n\toverlayCommandName: The overlay to edit. Use the 'Command Name' shown in its config.\n\tsetting: Value to change. Accepted settings are:\n\t\turl: string\n\t\tdisabled: boolean\n\t\tmuted: boolean\n\t\tact: boolean\n\t\tlocked: boolean\n\t\thidden: boolean\n\t\ttypethrough: boolean\n\t\tclickthrough: boolean\n\t\tfullscreen: boolean\n\t\treload: -\n\tvalue: Value to set for the setting. Accepted values are:\n\t\tstring: any string value\n\t\tboolean: on, off, toggle",
+      "Translated": "更改悬浮窗的设置。\n\toverlayCommandName：要编辑的悬浮窗。使用其配置中显示的“命令名称”。\n\tsetting：要更改的值。可接受的设置项为：\n\t\turl：字符串\n\t\tdisabled：布尔值\n\t\tmuted：布尔值\n\t\tact：布尔值\n\t\tlocked：布尔值\n\t\thidden：布尔值\n\t\ttypethrough：布尔值\n\t\tclickthrough：布尔值\n\t\tfullscreen：布尔值\n\t\treload：-\n\tvalue：要为该设置项设置的值。可接受的值为：\n\t\t字符串：任意字符串值\n\t\t布尔值：on、off、toggle",
+      "Context": "[Browsingway] Settings.RenderGeneralSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Command Name",
+      "Translated": "命令名称",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom",
+      "Translated": "缩放",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity",
+      "Translated": "不透明度",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Framerate",
+      "Translated": "帧率",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disabled",
+      "Translated": "已禁用",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disables the overlay. Contrary to just hiding it this setting will stop it from ever being created.",
+      "Translated": "封技该悬浮窗。与仅隐藏不同，此设置将使其永远不会被创建。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Muted",
+      "Translated": "静音",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enables or disables audio playback.",
+      "Translated": "启用或禁用音频播放。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ACT/IINACT optimizations",
+      "Translated": "ACT/IINACT 优化",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enables ACT/IINACT specific optimizations. This will automatically disable the overlay if ACT/IINACT is not running.\n\nNOTE: This does NOT disable the overlay if the websocket is not reporting data.",
+      "Translated": "启用 ACT/IINACT 专属优化。当 ACT/IINACT 未运行时，将自动禁用悬浮窗。\n\n注意：若 websocket 未上报数据，此选项不会禁用悬浮窗。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Translated": "锁定",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the overlay from being resized or moved. This is implicitly set by Click Through and Fullscreen.",
+      "Translated": "阻止悬浮窗被调整大小或移动。点击穿透与全屏会隐式启用此项。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide the overlay. This does not stop the overlay from executing, only from being displayed.",
+      "Translated": "隐藏悬浮窗。这不会停止悬浮窗运行，仅停止显示。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Type Through",
+      "Translated": "键盘穿透",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the overlay from intercepting any keyboard events. Implicitly set by Click Through.",
+      "Translated": "阻止悬浮窗拦截任何键盘事件。点击穿透会隐式启用此项。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click Through",
+      "Translated": "点击穿透",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the overlay from intercepting any mouse events. Implicitly sets Locked and Type Through.",
+      "Translated": "阻止悬浮窗拦截任何鼠标事件。会隐式启用锁定与键盘穿透。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide out of combat",
+      "Translated": "脱战时隐藏",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide this overlay when out-of-combat.",
+      "Translated": "脱战时隐藏此悬浮窗。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in PvP",
+      "Translated": "PvP 中隐藏",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide this overlay when in a PvP area.",
+      "Translated": "在 PvP 区域时隐藏此悬浮窗。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Delay",
+      "Translated": "隐藏延迟",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delay to hide overlay when out-of-combat in seconds.",
+      "Translated": "脱战后隐藏悬浮窗的延迟（秒）。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Experimental / Unsupported",
+      "Translated": "实验性 / 不受支持",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fullscreen",
+      "Translated": "全屏",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically makes this overlay cover the entire screen when enabled.",
+      "Translated": "启用后自动让此悬浮窗覆盖整个屏幕。",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Custom CSS code:",
+      "Translated": "自定义 CSS 代码：",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Custom CSS code",
+      "Translated": "自定义 CSS 代码",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reload",
+      "Translated": "重新加载",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Dev Tools",
+      "Translated": "打开开发者工具",
+      "Context": "[Browsingway] Settings.RenderOverlaySettings",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
