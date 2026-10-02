@@ -36,7 +36,9 @@ internal static class FFXIVGlossary
     };
 
     private static readonly object Gate = new();
-    private static Dictionary<string, string>? terms;
+    // volatile：EnsureBuilt 是双重检查锁，第一次检查在锁外读这个字段（CA1508 报「恒 false」是分析器
+    // 不理解多线程的双检锁，属误报）；加 volatile 保证发布可见性。
+    private static volatile Dictionary<string, string>? terms;
     private static string? failure;
 
     /// <summary>术语表是否已就绪。</summary>

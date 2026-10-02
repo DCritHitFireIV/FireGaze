@@ -221,7 +221,8 @@ public static class RepoScanner
         var notModified = 0;
         var gate = new object();
 
-        var semaphore = new SemaphoreSlim(Concurrency, Concurrency);
+        // using：下面 await Task.WhenAll 之后才离开作用域，闸门在整个扫描期间有效（CA2000）
+        using var semaphore = new SemaphoreSlim(Concurrency, Concurrency);
         var tasks = items.Select(async item =>
         {
             await semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);

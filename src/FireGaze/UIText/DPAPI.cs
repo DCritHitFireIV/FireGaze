@@ -18,12 +18,15 @@ internal static partial class DPAPI
         public nint Data;
     }
 
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [LibraryImport("crypt32.dll", EntryPoint = "CryptProtectData", SetLastError = true)]
     private static partial int CryptProtectData(ref DataBlob input, nint description, nint entropy, nint reserved, nint prompt, int flags, out DataBlob output);
 
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [LibraryImport("crypt32.dll", EntryPoint = "CryptUnprotectData", SetLastError = true)]
     private static partial int CryptUnprotectData(ref DataBlob input, nint description, nint entropy, nint reserved, nint prompt, int flags, out DataBlob output);
 
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [LibraryImport("kernel32.dll", EntryPoint = "LocalFree", SetLastError = true)]
     private static partial nint LocalFree(nint memory);
 
