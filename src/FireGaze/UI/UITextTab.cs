@@ -1617,7 +1617,7 @@ internal sealed class UITextTab
     }
 
     /// <summary>
-    ///     状态徽标：进行中 / 已汉化 / 已翻译待应用 / 未汉化 / 失败。
+    ///     状态徽标：进行中 / 已汉化 / 翻了还没写入 / 未汉化 / 失败。
     /// </summary>
     private (string Text, Vector4 Color) DescribeState(RowInfo? info, bool running)
     {
