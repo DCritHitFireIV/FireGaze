@@ -330,6 +330,8 @@ internal sealed class UITextTab
         if (!this.index.Available)
         {
             UiHelpers.ColoredWrapped(UiHelpers.Bad, "读不到卫月的插件列表（" + (this.index.FailureReason ?? "未知原因") + "）");
+            ImGui.NewLine();
+            this.DrawFeedbackButton();
             return;
         }
 
@@ -343,7 +345,13 @@ internal sealed class UITextTab
         ImGui.SameLine();
         ImGui.TextDisabled($"刷新于 {this.indexAt:HH:mm:ss} · 已装 {this.index.All.Count} · 已汉化 {patched} · 待处理 {attention}");
 
-        // 反馈入口：常驻在这一行的最右边（2026-10-03 用户要求）——右对齐用内容区右边界减按钮宽
+        // 反馈入口：常驻在这一行的最右边（2026-10-03 用户要求）
+        this.DrawFeedbackButton();
+    }
+
+    /// <summary>插件汉化页第一行最右的「反馈…」入口（列表读不到时也会画）。</summary>
+    private void DrawFeedbackButton()
+    {
         const string feedbackLabel = "反馈…";
         var feedbackLeft = ImGui.GetContentRegionMax().X - UiHelpers.LabelWidth(feedbackLabel);
         if (feedbackLeft > ImGui.GetCursorPosX() + 12f)
