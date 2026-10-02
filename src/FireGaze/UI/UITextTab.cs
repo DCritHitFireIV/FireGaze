@@ -134,6 +134,9 @@ internal sealed class UITextTab
     /// </summary>
     private readonly ConcurrentDictionary<string, RowNote> notes = new(StringComparer.Ordinal);
 
+    /// <summary>每行实测高度（整行点击的 Selectable 用；首帧用估算值）。</summary>
+    private readonly Dictionary<string, float> rowHeights = new(StringComparer.Ordinal);
+
     /// <summary>正在上传译文的插件（防重复点击）。后台任务的收尾会删、界面线程会查，所以用并发字典。
     /// 键存在 = 忙；值不用。</summary>
     private readonly ConcurrentDictionary<string, bool> uploading = new(StringComparer.Ordinal);
@@ -453,9 +456,22 @@ internal sealed class UITextTab
         ImGui.PushID(plugin.InternalName);
         ImGui.TableNextRow();
 
-        // ── 左列：图标 + 文本块 ──
-        ImGui.TableNextColumn();
+        // 整行点击展开（2026-10-03 用户要求）：Selectable 铺在行底层、跨所有列、允许被覆盖——
+        // 点行的任何地方（图标 / 文字 / 空白）都展开收起；按钮在自己区域优先接收点击。
         var rowStartY = ImGui.GetCursorPosY();
+        var rowHeight = this.rowHeights.TryGetValue(plugin.InternalName, out var knownHeight) ? knownHeight : 46f;
+        ImGui.TableSetColumnIndex(0);
+        if (ImGui.Selectable("##row", isOpen,
+                ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
+                new Vector2(0, rowHeight)))
+        {
+            this.expanded = isOpen ? string.Empty : plugin.InternalName;
+        }
+
+        ImGui.SameLine(0, 0);
+
+        // ── 左列：图标 + 文本块 ──
+        var rowTop = ImGui.GetCursorScreenPos().Y;
 
         const float iconSize = 40f;
         if (!this.TryDrawIcon(plugin, iconSize))
@@ -529,6 +545,8 @@ internal sealed class UITextTab
         }
 
         ImGui.EndGroup();
+        // 量一下这一行实际多高，下一帧 Selectable 用它（首帧先用估算值）。
+        this.rowHeights[plugin.InternalName] = Math.Max(20f, ImGui.GetItemRectMax().Y - rowTop);
 
         // ── 右列：操作 ──
         ImGui.TableNextColumn();
@@ -562,13 +580,6 @@ internal sealed class UITextTab
                 {
                     ImGui.SetTooltip("把插件 DLL 还原成打补丁之前的原始文件，然后自动重载插件（界面回到英文）。\n之后还可以再「一键汉化」。");
                 }
-
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("详情"), 10);
-            }
-
-            if (ImGui.Button(isOpen ? "收起" : "详情"))
-            {
-                this.expanded = isOpen ? string.Empty : plugin.InternalName;
             }
 
             return;
@@ -600,43 +611,48 @@ internal sealed class UITextTab
         }
         else
         {
-            // 还没汉化好的插件给主色按钮；汉化完成的变「打开」（2026-10-02 用户要求：
-            // 汉化完就想直接看效果，而不是台上一直摆着个「一键汉化」）。
-            // 按钮名跟着「这一步真正会做什么」走（v4 复评 N1/F3/N2/F4）：失败后接着翻叫「重试」；
-            // 只差把改动写进插件叫「写入并重载」（与编辑器同名）；其余才是「一键汉化」。
+            // 两个按钮都常驻（2026-10-03 用户要求）：未汉化时「一键汉化」主色；汉化完成后
+            // 「打开/设置」变主色、「一键汉化」退回普通白底。按钮名跟着「这一步真正会做什么」走
+            // （v4 复评 N1/F3/N2/F4）：失败后接着翻叫「重试」；只差写进插件叫「写入并重载」。
             var fullyLocalized = info is { HasPack: true }
                                  && (info.Patch == UITextPatchStatus.Applied || info.Total == 0)
                                  && !info.PackNewerThanPatch;
+
+            var retryable = this.notes.TryGetValue(plugin.InternalName, out var pendingNote) && pendingNote.CanRetry;
+            var writeOnly = info is { HasPack: true, PackNewerThanPatch: true, Patch: UITextPatchStatus.Applied };
+            var label = retryable ? "重试" : writeOnly ? "写入并重载" : "一键汉化";
+            ImGui.BeginDisabled(busy || editorOpen);
             if (!fullyLocalized)
             {
-                var retryable = this.notes.TryGetValue(plugin.InternalName, out var pendingNote) && pendingNote.CanRetry;
-                var writeOnly = info is { HasPack: true, PackNewerThanPatch: true, Patch: UITextPatchStatus.Applied };
-                var label = retryable ? "重试" : writeOnly ? "写入并重载" : "一键汉化";
-                ImGui.BeginDisabled(busy || editorOpen);
                 UiHelpers.PushPrimaryButton();
-                if (ImGui.Button(label))
-                {
-                    this.StartOneClick(plugin);
-                }
+            }
 
-                UiHelpers.PopPrimaryButton();
-                ImGui.EndDisabled();
-                if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-                {
-                    ImGui.SetTooltip(
-                        (busy ? "有另一个插件正在汉化，等它跑完再点。\n" : string.Empty) +
-                        (editorOpen ? "这个插件正开着编辑窗口，先关掉它（避免两份修改互相覆盖）。\n" : string.Empty) +
-                        (retryable
-                            ? "沿用当前通道，从没翻完的地方接着翻。\n已翻好的条目不会丢；原文件备份与「还原原文」照旧。"
-                            : writeOnly
-                                ? "把改动过的译文写进插件 DLL 并自动重载（不再重新翻译）。\n原文件会先备份，随时可以「还原原文」。"
-                                : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
-                }
-            }
-            else
+            if (ImGui.Button(label))
             {
-                this.DrawOpenPluginButton(plugin, info!);
+                this.StartOneClick(plugin);
             }
+
+            if (!fullyLocalized)
+            {
+                UiHelpers.PopPrimaryButton();
+            }
+
+            ImGui.EndDisabled();
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+            {
+                ImGui.SetTooltip(
+                    (busy ? "有另一个插件正在汉化，等它跑完再点。\n" : string.Empty) +
+                    (editorOpen ? "这个插件正开着编辑窗口，先关掉它（避免两份修改互相覆盖）。\n" : string.Empty) +
+                    (retryable
+                        ? "沿用当前通道，从没翻完的地方接着翻。\n已翻好的条目不会丢；原文件备份与「还原原文」照旧。"
+                        : writeOnly
+                            ? "把改动过的译文写进插件 DLL 并自动重载（不再重新翻译）。\n原文件会先备份，随时可以「还原原文」。"
+                            : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
+            }
+
+            // 打开/设置：始终显示；汉化完成后它接管主色（用户一眼知道接下来通常点这里）。
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("打开"), 12);
+            this.DrawOpenPluginButton(plugin, info, primary: fullyLocalized);
 
             // 已经打上补丁、但插件没在跑（停用 / 还没加载）：直接给一个启用的入口（2026-10-02 用户要求）。
             // 待确认（PendingReload）也算：插件没加载时打上的补丁一直是待确认，启用后 CheckPending 会转正。
@@ -674,11 +690,7 @@ internal sealed class UITextTab
             }
         }
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("详情"), 10);
-        if (ImGui.Button(isOpen ? "收起" : "详情"))
-        {
-            this.expanded = isOpen ? string.Empty : plugin.InternalName;
-        }
+        // 「详情」按钮已去掉（2026-10-03）：点整行任意处展开收起，见 DrawRow 里的 Selectable。
 
         // 一键上传：把这台机器上已经翻好的译文交给社区公共库（2026-10-02 用户要求）
         if (info is { Translated: > 0 })
@@ -885,15 +897,20 @@ internal sealed class UITextTab
     ///     和官方插件安装器的按钮同一套机制（反射 <c>LocalPlugin.DalamudInterface.LocalUiBuilder</c>；
     ///     不能强转 <c>IExposedPlugin</c>——那不是同一个对象）。
     /// </summary>
-    private void DrawOpenPluginButton(InstalledPluginEntry plugin, RowInfo info)
+    private void DrawOpenPluginButton(InstalledPluginEntry plugin, RowInfo? info, bool primary = false)
     {
-        var hasMain = info.HasMainUI;
-        var hasConfig = info.HasConfigUI;
+        var hasMain = info?.HasMainUI ?? false;
+        var hasConfig = info?.HasConfigUI ?? false;
         var canOpen = hasMain || hasConfig;
 
         // 有主界面就叫「打开」，只能开设置就叫「设置」；都没有就叫「打开」但置灰（点了不会有反应）
         var label = hasMain || !hasConfig ? "打开" : "设置";
         ImGui.BeginDisabled(!canOpen);
+        if (primary && canOpen)
+        {
+            UiHelpers.PushPrimaryButton();
+        }
+
         if (ImGui.Button(label))
         {
             try
@@ -908,6 +925,11 @@ internal sealed class UITextTab
             {
                 this.notes[plugin.InternalName] = new RowNote { Kind = NoteKind.Bad, Text = "打开失败：" + e.Message };
             }
+        }
+
+        if (primary && canOpen)
+        {
+            UiHelpers.PopPrimaryButton();
         }
 
         ImGui.EndDisabled();
