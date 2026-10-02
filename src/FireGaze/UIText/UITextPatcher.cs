@@ -23,6 +23,11 @@ internal sealed class UITextPatchOutcome
     public int PatchedLiterals { get; set; }
 
     /// <summary>
+    ///     为避免 ImGui 控件 ID 撞车、被强制写成「译文###原文」的条目数（同一译文被多个原文占用）。
+    /// </summary>
+    public int PreserveIDForced { get; set; }
+
+    /// <summary>
     ///     真的改掉的内嵌资源条目数（按 容器 + key 计）。
     /// </summary>
     public int PatchedResources { get; set; }
@@ -81,6 +86,10 @@ internal static class UITextPatcher
     {
         var outcome = new UITextPatchOutcome();
         var map = new Dictionary<string, UITextPackEntry>(StringComparer.Ordinal);
+        // 同一文件里两个不同原文翻成同一条译文时，ImGui 会用译文当控件 ID → 撞车 → 第二个点不动
+        // （2026-10-02 AutoHook 实测「刺鱼设置点不了」）。除第一个占用者外，其余强制走「译文###原文」保 ID。
+        var usedTranslation = new Dictionary<string, string>(StringComparer.Ordinal);
+        var forcePreserve = new HashSet<string>(StringComparer.Ordinal);
         foreach (var entry in pack.Entries)
         {
             if (!entry.HasTranslation || pack.IsSkipped(entry.Original) || !entry.IsPatchable(includeAmbiguous))
@@ -88,8 +97,23 @@ internal static class UITextPatcher
                 continue;
             }
 
+            if (!entry.PreserveID)
+            {
+                var effective = entry.Translated.Trim();
+                if (usedTranslation.ContainsKey(effective))
+                {
+                    forcePreserve.Add(entry.Original);
+                }
+                else
+                {
+                    usedTranslation[effective] = entry.Original;
+                }
+            }
+
             map[entry.Original] = entry;
         }
+
+        outcome.PreserveIDForced = forcePreserve.Count;
 
         var resourceMap = new Dictionary<(string Container, string Key), UITextResourceEntry>();
         foreach (var entry in pack.Resources)
@@ -178,7 +202,7 @@ internal static class UITextPatcher
                             }
 
                             seen.Add(literal);
-                            var replaced = UITextText.BuildPatched(literal, entry.Translated, entry.PreserveID);
+                            var replaced = UITextText.BuildPatched(literal, entry.Translated, entry.PreserveID || forcePreserve.Contains(entry.Original));
                             if (string.Equals(replaced, literal, StringComparison.Ordinal))
                             {
                                 continue;
