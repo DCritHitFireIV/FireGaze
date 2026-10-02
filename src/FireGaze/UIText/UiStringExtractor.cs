@@ -381,6 +381,14 @@ public static class UIStringExtractor
         /// </summary>
         public bool DictionaryKey;
 
+        /// <summary>
+        ///     字典/集合的**值位置**（<c>Add("key", "value")</c> / <c>d["key"] = "value"</c> 的第 1 参）。
+        ///     多语言插件的本地化词典（AcquisitionDate 的 EnglishTranslations 那种）把显示文本放在值里，
+        ///     翻它不动 key、查表照常命中（GetTranslation 落回英文侧，2026-10-02 实测）；
+        ///     但值也可能是逻辑数据（别名 / 映射表），所以只在「形态像显示文本」时进灰名单。
+        /// </summary>
+        public bool DictionaryValue;
+
         public bool UIViaReturn;
     }
 
@@ -1432,6 +1440,16 @@ public static class UIStringExtractor
                     foreach (var keyId in argValues[0].IDs)
                     {
                         this.literals[keyId].DictionaryKey = true;
+                    }
+
+                    // 值位置：本地化词典的显示文本（AcquisitionDate 的英文侧就是这样，GetTranslation
+                    // 查表命中的就是它）。翻了不动 key，安全；形态不像文本的按数据值排除。
+                    if (argValues.Length > 1 && UICallSemantics.IsStringLikeOrGeneric(paramTypes[1]))
+                    {
+                        foreach (var valueId in argValues[1].IDs)
+                        {
+                            this.literals[valueId].DictionaryValue = true;
+                        }
                     }
                 }
 
@@ -2651,6 +2669,25 @@ public static class UIStringExtractor
                         Context = literal.Context,
                         Role = UITextRole.Ambiguous,
                         Reason = $"既进 UI（{uiTarget}）又当字典键名用（翻了可能破坏查找，默认不翻）",
+                        PreserveID = literal.PreserveID,
+                    });
+                    continue;
+                }
+
+                // 字典/集合的值位置：多语言插件的本地化词典（AcquisitionDate 的 EnglishTranslations）
+                // 把显示文本放这里；翻了不动 key、查表落回英文侧、界面就显示译文（2026-10-02 实测）。
+                // 但值也可能是逻辑数据（别名 / 映射表），形态不像文本的按数据值排除。
+                if (literal.DictionaryValue && !hasUI)
+                {
+                    var looksLikeText = UITextText.LooksLikeDisplayValue(literal.Text);
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text,
+                        Context = literal.Context,
+                        Role = looksLikeText ? UITextRole.Ambiguous : UITextRole.Excluded,
+                        Reason = looksLikeText
+                            ? "集合/字典的值位置，形态像显示文本（多语言词典场景），默认不翻"
+                            : "当集合/字典的数据值用",
                         PreserveID = literal.PreserveID,
                     });
                     continue;

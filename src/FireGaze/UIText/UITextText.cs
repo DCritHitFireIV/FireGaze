@@ -211,6 +211,44 @@ internal static class UITextText
     }
 
     /// <summary>
+    ///     像「本地化词典的显示值」：句子或标签（<c>Draw Dates for Achievements</c>、<c>Acquired:</c>、
+    ///     <c>English</c>）；纯标识符 / 全大写常量 / 带下划线的键不算。调用方按灰名单处理。
+    /// </summary>
+    /// <remarks>
+    ///     用于「字典值位置」的候选判定（2026-10-02，AcquisitionDate 的 English/German/French/Japanese
+    ///     多语言词典）：多语言词典的值几乎必然是给人看的文字；数据表的值通常短、全大写、无空格。
+    /// </remarks>
+    public static bool LooksLikeDisplayValue(string text)
+    {
+        if (text.Length < 6 || text.Length > 200)
+        {
+            return false;
+        }
+
+        if (text.Contains('_') || text.Contains('\n') || text.Contains('\r'))
+        {
+            return false;
+        }
+
+        var hasLower = false;
+        foreach (var ch in text)
+        {
+            if (char.IsAsciiLetterLower(ch))
+            {
+                hasLower = true;
+                break;
+            }
+        }
+
+        if (!hasLower)
+        {
+            return false;
+        }
+
+        return text.Contains(' ') || char.IsUpper(text[0]);
+    }
+
+    /// <summary>
     ///     像「界面句子」的查表 key：插件把英文界面文本当键传给 <c>Tr()</c> / <c>Translate()</c>
     ///     （「词典式汉化」：命中词典显中文，未命中就把键本身显出来）。这类 key 翻了以后查表 miss，
     ///     会直接显示译文本身——**多半安全且有效**；但「翻了到底会不会影响别处」静态看不出来，
