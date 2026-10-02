@@ -301,11 +301,11 @@ internal sealed class UITextPatchManager
     ///     失败时把这次新建的备份清掉——不然会留下一堆「当前文件的快照」（既不是原始件，又会被后来者当成备份），
     ///     2026-10-02 ActionTimelineReborn / DailyRoutines 实测就是这么被坑的。
     /// </remarks>
-    public (bool Ok, string Message) Apply(InstalledPluginEntry entry)
+    public (bool Ok, string Message) Apply(InstalledPluginEntry entry, bool allowRecovery = true)
     {
         var backupsBefore = this.SnapshotBackupFiles();
         var originalsBefore = this.store.SnapshotOriginals();
-        var (ok, message) = this.ApplyCore(entry);
+        var (ok, message) = this.ApplyCore(entry, allowRecovery);
         if (!ok)
         {
             this.DeleteUnreferencedBackups(backupsBefore);
@@ -316,7 +316,7 @@ internal sealed class UITextPatchManager
     }
 
     /// <summary>打补丁的主体（失败清理包在外面，见 <see cref="Apply" />）。</summary>
-    private (bool Ok, string Message) ApplyCore(InstalledPluginEntry entry)
+    private (bool Ok, string Message) ApplyCore(InstalledPluginEntry entry, bool allowRecovery = true)
     {
         if (UITextRules.IsDoNotLocalize(entry.InternalName))
         {
@@ -434,6 +434,21 @@ internal sealed class UITextPatchManager
                 }
 
                 TryDelete(newPath);
+
+                // 一条都没对上：盘上可能还是我们的旧补丁、而记录丢了（第一次点击时包里还没译文，
+                // 抽取体检认不出「译文###原文」；用户看到的就是这条红字）。用现在的译文包反向还原出原文、
+                // 补回记录，然后整套重来一次——重来还失败才把错误给用户（不用用户自己重装插件）。
+                if (allowRecovery && outcome.NoMatch)
+                {
+                    var carry = existing?.EffectiveFiles;
+                    if (this.TryRebuildPatchRecord(entry, files, pack, carry, null, out _, out var recoveryNote))
+                    {
+                        Plugin.Log?.Information($"[内部文本] {entry.InternalName}：打补丁一条都没对上，{recoveryNote}；已自动重试");
+                        var (retryOk, retryMessage) = this.ApplyCore(entry, allowRecovery: false);
+                        return retryOk ? (true, recoveryNote + "；" + retryMessage) : (false, retryMessage);
+                    }
+                }
+
                 return (false, $"{Path.GetFileName(fileState.Path)}：{outcome.Error}");
             }
 
@@ -736,11 +751,44 @@ internal sealed class UITextPatchManager
             return null;
         }
 
+        if (!this.TryRebuildPatchRecord(entry, sources, pack, this.LoadStateOrAdopt(entry)?.EffectiveFiles, searchDirectories, out var recoveredPaths, out note))
+        {
+            return null;
+        }
+
+        return UIStringExtractor.ExtractMany(recoveredPaths, searchDirectories);
+    }
+
+    /// <summary>
+    ///     把「盘上是我们打的补丁、但记录丢了」的插件补回补丁记录：
+    ///     用译文包反向还原出原文（存备份 + 写状态 + 落持久清单）。成功时 
+    ///     <paramref name="recoveredPaths" /> 是还原出来的原文文件（临时目录，调用方用完即弃）。
+    ///     <paramref name="carry" /> 是本轮不重新还原、但要继续留在记录里的其它文件（如本地化文件）。
+    /// </summary>
+    /// <remarks>
+    ///     还原量太少（&lt; 3 条，或不到包里译文数的一半）就认为不可信，拒绝——
+    ///     宁可让用户重装插件，也不拿一份拼凑出来的「原文」去重打。
+    /// </remarks>
+    private bool TryRebuildPatchRecord(
+        InstalledPluginEntry entry,
+        IReadOnlyList<string> sources,
+        UITextPack pack,
+        IReadOnlyList<UITextPatchFile>? carry,
+        IReadOnlyList<string>? searchDirectories,
+        out List<string> recoveredPaths,
+        out string note)
+    {
+        note = string.Empty;
+        recoveredPaths = [];
+        if (pack.TranslatedCount == 0)
+        {
+            return false;
+        }
+
         var tempDirectory = Path.Combine(Path.GetTempPath(), "firegaze-recover-" + Guid.NewGuid().ToString("N")[..8]);
         try
         {
             Directory.CreateDirectory(tempDirectory);
-            var recoveredPaths = new List<string>();
             var fileStates = new List<UITextPatchFile>();
             var totalReverted = 0;
             foreach (var source in sources)
@@ -783,7 +831,25 @@ internal sealed class UITextPatchManager
 
             if (fileStates.Count == 0 || totalReverted < 3 || totalReverted < pack.TranslatedCount / 2)
             {
-                return null;
+                return false;
+            }
+
+            // 本轮不碰、但盘上还是我们补丁的其它文件（多半是本地化文件）继续留在记录里
+            if (carry is not null)
+            {
+                var known = new HashSet<string>(fileStates.Select(f => f.Path), StringComparer.OrdinalIgnoreCase);
+                foreach (var previous in carry)
+                {
+                    if (string.IsNullOrEmpty(previous.Path)
+                        || known.Contains(previous.Path)
+                        || !File.Exists(previous.Path)
+                        || !string.Equals(UITextPatchStore.HashOf(previous.Path), previous.PatchedHash, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    fileStates.Add(previous);
+                }
             }
 
             var main = fileStates[0];
@@ -805,12 +871,12 @@ internal sealed class UITextPatchManager
             this.store.PublishManifest(entry.InternalName, entry.Version, recoveredState.PatchedAt, totalReverted, fileStates, Path.GetDirectoryName(main.Path) ?? string.Empty);
 
             note = $"盘上还留着我们打过的补丁但丢了记录，已从补丁反向还原出原文文件（{totalReverted} 处）并恢复了补丁记录";
-            return UIStringExtractor.ExtractMany(recoveredPaths, searchDirectories);
+            return true;
         }
         catch (Exception e)
         {
             Plugin.Log?.Warning(e, $"[内部文本] {entry.InternalName}：反向还原失败");
-            return null;
+            return false;
         }
         finally
         {

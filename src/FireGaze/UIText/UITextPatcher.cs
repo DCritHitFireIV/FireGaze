@@ -40,6 +40,12 @@ internal sealed class UITextPatchOutcome
     /// </summary>
     public List<string> Missing { get; } = [];
 
+    /// <summary>
+    ///     一条都没对上：DLL 里找不到任何一条包里译文的原文。
+    ///     最常见的原因：盘上已经是我们的旧补丁、而补丁记录丢了（记录在时会在打之前先还原基线）。
+    /// </summary>
+    public bool NoMatch { get; set; }
+
     public bool Ok => this.Error is null;
 }
 
@@ -186,6 +192,8 @@ internal static class UITextPatcher
 
                 if (outcome.PatchedTotal == 0)
                 {
+                    // NoMatch：盘上可能已经是我们的旧补丁（记录丢了）——调用方据此做一次自愈重试，见 UITextPatchManager.Apply
+                    outcome.NoMatch = true;
                     outcome.Error = $"译文有 {outcome.Candidates} 条，但在 DLL 里一条都没对上。到插件安装器里把这个插件重装一次（回到原版）再点「一键汉化」；行尾有「还原原文」时也可以先点它。";
                     return outcome;
                 }

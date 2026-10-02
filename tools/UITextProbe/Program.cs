@@ -100,6 +100,35 @@ if (args.Length >= 2 && args[1] == "--strings")
     return 0;
 }
 
+if (args.Length >= 3 && args[1] == "--revert")
+{
+    // 诊断用：拿一个译文包去反向还原一个 DLL（补丁记录丢了时的自证/体检）。
+    //   UITextProbe <插件.dll> --revert <译文包.json> [输出.dll]
+    // 输出 JSON：{ ok, patchedTotal, patchedLiterals, candidates, error, output }
+    var packJson = File.ReadAllText(args[2], System.Text.Encoding.UTF8);
+    var revertPack = UITextPack.FromJSON(packJson, out var packError);
+    if (revertPack is null)
+    {
+        Console.WriteLine($"{{\"ok\":false,\"error\":\"读不动译文包：{packError}\"}}");
+        return 1;
+    }
+
+    var output = args.Length >= 4 ? args[3] : Path.Combine(Path.GetTempPath(), "uit-revert-" + Guid.NewGuid().ToString("N")[..8] + ".dll");
+    var revertOutcome = UITextPatcher.Revert(positional[0], output, revertPack);
+    Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(
+        new
+        {
+            ok = revertOutcome.Ok,
+            patchedTotal = revertOutcome.PatchedTotal,
+            patchedLiterals = revertOutcome.PatchedLiterals,
+            candidates = revertOutcome.Candidates,
+            error = revertOutcome.Error,
+            output,
+        },
+        new System.Text.Json.JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
+    return revertOutcome.Ok ? 0 : 1;
+}
+
 if (args.Length >= 2 && args[1] == "--resources")
 {
     // 资源型本地化（内嵌 .resources）的 key / 值，落 JSON 给库生成脚本用。
