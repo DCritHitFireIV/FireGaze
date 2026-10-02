@@ -35,6 +35,7 @@ internal static class UITextRules
 
     private static Dictionary<string, string[]>? companions;
     private static HashSet<string>? uiAttributes;
+    private static Dictionary<string, int>? commandAttributes;
     private static bool loaded;
 
     /// <summary>
@@ -136,7 +137,40 @@ internal static class UITextRules
         }
 
         EnsureLoaded();
-        return uiAttributes!.Contains(name);
+        if (uiAttributes!.Contains(name))
+        {
+            return true;
+        }
+
+        // 命令类特性（ECommons 的 Cmd/SubCmd、卫月的 Command）：特性本身算 UI（帮助文本要翻），
+        // 但第 0 个参数是命令名/子命令名，抽取与打补丁都要跳过——见 CommandHelpStartIndex。
+        return commandAttributes!.ContainsKey(name);
+    }
+
+    /// <summary>
+    ///     命令类特性的帮助文本从第几个构造参数开始（前面的是命令名 / 别名，绝不能翻）。
+    ///     不是命令类特性时返回 <c>null</c>。
+    /// </summary>
+    /// <remarks>
+    ///     例：<c>[SubCmd("unlock", "Unlock all windows")]</c> → 1（0 是子命令名）；
+    ///     ECommons 的 <c>CmdAttribute(command, helpMessage, ...)</c>、卫月的 <c>[Command("/x", "help")]</c> 同理。
+    /// </remarks>
+    public static int? CommandHelpStartIndex(string typeFullName)
+    {
+        if (string.IsNullOrEmpty(typeFullName))
+        {
+            return null;
+        }
+
+        var name = typeFullName;
+        var dot = name.LastIndexOf('.');
+        if (dot >= 0)
+        {
+            name = name[(dot + 1)..];
+        }
+
+        EnsureLoaded();
+        return commandAttributes!.TryGetValue(name, out var start) ? start : null;
     }
 
     /// <summary>
@@ -200,6 +234,16 @@ internal static class UITextRules
         }
     }
 
+    /// <summary>测试与诊断用：命令类特性 → 帮助文本起始参数下标。</summary>
+    public static IReadOnlyDictionary<string, int> LoadedCommandAttributes
+    {
+        get
+        {
+            EnsureLoaded();
+            return commandAttributes!;
+        }
+    }
+
     /// <summary>强制重新读一次规则文件（测试用）。</summary>
     public static void Reload()
     {
@@ -217,6 +261,7 @@ internal static class UITextRules
         loaded = true;
         companions = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
         uiAttributes = new HashSet<string>(StringComparer.Ordinal);
+        commandAttributes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
         var path = string.IsNullOrEmpty(PluginDirectory) ? null : Path.Combine(PluginDirectory, "uit-rules.json");
         if (path is null || !File.Exists(path))
@@ -252,6 +297,17 @@ internal static class UITextRules
                     }
                 }
             }
+
+            if (parsed?.CommandAttributes is { } commandMap)
+            {
+                foreach (var (key, value) in commandMap)
+                {
+                    if (!string.IsNullOrWhiteSpace(key) && value >= 0)
+                    {
+                        commandAttributes[key] = value;
+                    }
+                }
+            }
         }
         catch (Exception e)
         {
@@ -266,5 +322,8 @@ internal static class UITextRules
 
         [JsonPropertyName("uiAttributes")]
         public string[]? UIAttributes { get; set; }
+
+        [JsonPropertyName("commandAttributes")]
+        public Dictionary<string, int>? CommandAttributes { get; set; }
     }
 }

@@ -240,8 +240,10 @@ internal static class UITextPatcher
                     continue;
                 }
 
+                // 命令类特性（Cmd / SubCmd / Command）：第 0 个参数是命令名，跳过（与抽取端同一规则）
                 var arguments = attribute.ConstructorArguments;
-                for (var i = 0; i < arguments.Count; i++)
+                var startIndex = UITextRules.CommandHelpStartIndex(attribute.TypeFullName) ?? 0;
+                for (var i = startIndex; i < arguments.Count; i++)
                 {
                     arguments[i] = PatchAttributeArgument(arguments[i], attributeMap, seen, outcome);
                 }

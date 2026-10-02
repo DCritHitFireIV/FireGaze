@@ -2635,9 +2635,13 @@ public static class UIStringExtractor
                     var dot = fullName.LastIndexOf('.');
                     var shortName = dot >= 0 ? fullName[(dot + 1)..] : fullName;
 
-                    foreach (var argument in attr.ConstructorArguments)
+                    // 命令类特性（Cmd / SubCmd / Command）的第 0 个参数是命令名，不能翻——
+                    // 从帮助文本起始下标开始收（UITextRules.CommandHelpStartIndex）。
+                    var arguments = attr.ConstructorArguments;
+                    var startIndex = UITextRules.CommandHelpStartIndex(attr.TypeFullName) ?? 0;
+                    for (var argumentIndex = startIndex; argumentIndex < arguments.Count; argumentIndex++)
                     {
-                        foreach (var value in StringValues(argument))
+                        foreach (var value in StringValues(arguments[argumentIndex]))
                         {
                             if (LooksTranslatable(value))
                             {
