@@ -36,6 +36,7 @@ internal sealed partial class RepoAuditTab
     // ---------------- 「已安装」相关 ----------------
     private InstalledPluginsIndex? installedIndex;
     private bool installedIndexStale = true;
+    private readonly Dalamud.Plugin.IDalamudPluginInterface.ActivePluginsChangedDelegate activePluginsHandler;
     private Task<InstalledPluginsIndex>? installedIndexBuild;
     private DateTime installedIndexRetryAfter = DateTime.MinValue;
     private bool onlyUnused;
@@ -131,9 +132,14 @@ internal sealed partial class RepoAuditTab
     {
         this.plugin = plugin;
 
-        // 装 / 卸 / 启停插件后，已安装索引要重算（内存操作，不联网）
-        plugin.PluginInterface.ActivePluginsChanged += _ => installedIndexStale = true;
+        // 装 / 卸 / 启停插件后，已安装索引要重算（内存操作，不联网）。
+        // 存成字段再订：lambda 直接订就退不了（插件卸载时留下闭包引用，热重载回收不掉）。
+        this.activePluginsHandler = _ => this.installedIndexStale = true;
+        plugin.PluginInterface.ActivePluginsChanged += this.activePluginsHandler;
     }
+
+    /// <summary>退订事件（插件卸载时由 MainWindow 链式调用）。</summary>
+    public void Detach() => this.plugin.PluginInterface.ActivePluginsChanged -= this.activePluginsHandler;
 
     public void Draw()
     {

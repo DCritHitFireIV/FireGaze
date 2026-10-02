@@ -383,6 +383,14 @@ public sealed class Plugin : IDalamudPlugin
         pluginInterface.UiBuilder.OpenConfigUi -= ToggleWindow;
         pluginInterface.UiBuilder.OpenMainUi -= OpenMainWindow;
         pluginInterface.ActivePluginsChanged -= OnActivePluginsChanged;
+        try
+        {
+            window.Detach();
+        }
+        catch
+        {
+            // ignore
+        }
         foreach (var command in registeredCommands)
         {
             try

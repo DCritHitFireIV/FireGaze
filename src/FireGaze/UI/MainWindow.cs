@@ -50,6 +50,9 @@ internal sealed class MainWindow : Window
     /// </summary>
     public void SelectTab(MainTab tab) => pendingSelect = tab;
 
+    /// <summary>插件卸载时的退订链（转给需要退订的子页签）。</summary>
+    public void Detach() => this.repoAuditTab.Detach();
+
     /// <summary>
     ///     窗口每次打开都落在「插件汉化」页（ImGui 会记住上次的页签，这里显式改回）。
     /// </summary>
