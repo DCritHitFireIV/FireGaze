@@ -40,7 +40,8 @@ internal sealed partial class ContributeWindow : Window
     private int drawErrorCount;
 
     /// <summary>
-    ///     提交分两步：点「一键提交」只打开 GitHub 提交页；玩家在网页按过 Submit 回来点「确认已提交」才清空待提交。
+    ///     提交优先走中继（一步、匿名，成功才清空）；中继不可用时退回「打开 GitHub 提交页」的两步式，
+    ///     玩家在网页按过 Submit 回来点「确认已提交」才清空待提交。
     /// </summary>
     private bool awaitingConfirm;
 
@@ -239,8 +240,8 @@ internal sealed partial class ContributeWindow : Window
     {
         // ---------------- 顶部说明 ----------------
         ImGui.TextWrapped("对插件名、一行简介、插件详情的翻译做出贡献。");
-        ImGui.TextDisabled("提交的译文优先于机器翻译；点「一键提交」会把这一批填进 GitHub 的提交页，维护者收录后随词表更新。");
-        ImGui.TextDisabled("所有提交都是以匿名形式提交，不会带上你的账号信息。");
+        ImGui.TextDisabled("提交的译文优先于机器翻译；点「一键提交」会匿名上传给维护者审核，收录后随词表更新。");
+        ImGui.TextDisabled("提交不带账号信息、不需要 GitHub 账号；万一中继不可用，会改为打开填好的 GitHub 提交页（那一步需要 GitHub 账号）。");
         ImGui.TextDisabled("本地改动只在你这里生效；点「从 GitHub 更新词表」不会覆盖你还没提交的译文，你改过的版本始终优先。");
 
         ImGui.Separator();

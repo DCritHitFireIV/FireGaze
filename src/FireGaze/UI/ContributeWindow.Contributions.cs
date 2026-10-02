@@ -178,10 +178,10 @@ internal sealed partial class ContributeWindow : Window
     }
 
     /// <summary>
-    ///     一键提交（第一步）：把这一批填进 GitHub 的「新建 issue」页并打开。
+    ///     一键提交（第一步）：优先走中继一步提交；失败才回退到「填好内容打开 GitHub 新建 issue 页」。
     ///     插件**不直接给维护者手机发消息**（那需要把推送密钥内嵌进插件，等于发给所有人）；
     ///     提交进 GitHub 后由仓库的工作流用 secret 里的地址通知维护者（审查 P0-2）。
-    ///     两步式：玩家在网页按过 Submit，回来点「确认已提交」才归档 + 清空。
+    ///     回退是两步式：玩家在网页按过 Submit，回来点「确认已提交」才归档 + 清空。
     /// </summary>
     private void SubmitContributions()
     {

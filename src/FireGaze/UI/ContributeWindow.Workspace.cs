@@ -121,7 +121,7 @@ internal sealed partial class ContributeWindow : Window
                     ? "在刚打开的 GitHub 页面上按过 Submit 之后再点这里：会把待提交清空，并在这台机器的历史提交里留一份。"
                     : pending == 0
                         ? "先在下面攒几条译文（上面表格里点「补上… / 改进…」）"
-                        : "打开 GitHub 的提交页，内容已经替你填好（匿名，不含账号信息）；\n"
+                        : "打开 GitHub 的提交页，内容已经替你填好、不含账号信息（提交需要 GitHub 账号）；\n"
                           + "在网页上按 Submit，回来点「确认已提交」。");
         }
 
