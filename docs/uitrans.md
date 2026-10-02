@@ -199,7 +199,7 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 
 - 名单（内部名）：`AEAssistV3` / `AEAssist` / `DailyRoutines` / `OmniToolbox` / `XSZToolbox` / `KodakkuAssist` /
   `PromeRotation` / `NyaDraw` / `I-Ching-GL` / `MissFisher` / `LightlessSync` / `LightlessCN` /
-  `SillyToolbox` / `pvpauto`。
+  `SillyToolbox` / `pvpauto` / `BOCCHI`。
 - 理由（用户原话口径）：这些是复杂项目、由朋友维护，汉化只会增加对方的维护负担；而且本来就是中文插件。
   后两个是 2026-10-02 普查后按同一原则补进名单的——`SillyToolbox` 自述「给自己和亲友用的小功能」、
   `pvpauto` 是中文作者的自动化工具，两者中文文件都完整，本来也翻不出东西。
@@ -610,3 +610,20 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   命中就先 `TryRebuildPatchRecord` 还原出干净原文（还原量阈值兜底），再走正常的备份 + 打补丁——**绝不把打过的 DLL 当基线**。
 - 实测（AutoHook 真实数据）：杂种 DLL 反向还原 **676 处**（阈值 = 已译条目 604 的一半）→ 从还原后的基线重打成功 **1211 处**。
 - fgtest：`MayContainOurPatch` 三种形态（###原文 / 纯译文 / 干净文件）+ 接线源码断言。
+
+## UI 特性文本 / 翻译缩写 / BOCCHI（2026-10-02，1.2.0.93）
+
+- **BossModReborn 选项说明一直缺翻**：它的显示文本在**自定义特性参数**里（`[PropertyDisplay("标签", 0u, "说明", false, null)]`、
+  `[ConfigDisplay(Name = "…")]`、`[PropertyCombo("…", "…")]`），旧规则只认 System.ComponentModel 五件套 + `UI*` 前缀 + `uit-rules.json` 名单。
+  规则文件加这三种特性后，实测 BMR 抽出 **304 条**（PropertyDisplay 263 / Combo 32 / ConfigDisplay 9），
+  用户报的那批 DeepDungeon 选项（`Automatically navigate to Cairn of Passage`、`Open gold coffers`…）全进来了。
+  · 新增 `attributeSkipArgs`：`PropertyDisplay` 的第 5 个参数是**搜索标签**（`slidecast` 这类），翻了会让英文搜索失效——跳过。
+  · 反例记一下：BMR 的 `GroupPreset` 名字**不能翻**（代码里拿它做 `== "VBM Multibox"` 这类比较），没有加入名单。
+- **BOCCHI 的 key 不能翻**：它的查表方法是 `ConfigWindow::T("no_matches.title")`（单字母缩写），
+  不在旧的按名兜底名单里 → 整批 key 被当界面文本翻掉，界面变成 `Unknown translation key: [[windows.main.游戏状态]]`。
+  按名兜底名单加入 `T` / `Tr`；同时按用户要求把 **BOCCHI 加入「不汉化」名单**（它自带完整中文本地化，
+  实测干净 DLL 上也有 8 条与译文重合的原生中文——「自带中文界面」的插件不该走汉化）。
+- **旧补丁预检收紧**：`MayContainOurPatch` 改成「译文 ≥3 条 **且** 至少一条 `###原文`」——光看译文会在
+  自带中文界面的插件上误触发（BOCCHI 实测）；纯译文形式的旧补丁漏网由 NoMatch 自动重试兜底。
+- **启用插件按钮**：改绿色（与主按钮蓝区分）；启用成功后把「待确认」的补丁直接转正并重建索引——
+  主按钮立刻从「一键汉化」变「打开」，不用再等 15 秒确认。

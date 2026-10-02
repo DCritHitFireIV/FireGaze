@@ -54,6 +54,7 @@ internal static class UITextRules
         "LightlessCN",
         "SillyToolbox",
         "pvpauto",
+        "BOCCHI",
     };
 
     /// <summary>这个插件是不是「中文插件、不汉化」（名单见 <see cref="DoNotLocalize" />）。</summary>
@@ -62,6 +63,7 @@ internal static class UITextRules
 
     private static Dictionary<string, string[]>? companions;
     private static HashSet<string>? uiAttributes;
+    private static Dictionary<string, HashSet<int>>? attributeSkipArgs;
     private static Dictionary<string, int>? commandAttributes;
     private static bool loaded;
 
@@ -132,6 +134,29 @@ internal static class UITextRules
         }
 
         return result;
+    }
+
+    /// <summary>
+    ///     这个特性的第 N 个构造参数是不是「功能字符串」（搜索标签之类）——抽取时跳过。
+    ///     名单在 <c>uit-rules.json</c> 的 <c>attributeSkipArgs</c>（例：BossMod 的 PropertyDisplay
+    ///     第 5 个参数是搜索标签，翻了会让英文搜索失效）。
+    /// </summary>
+    public static bool IsAttributeArgumentSkipped(string typeFullName, int index)
+    {
+        if (string.IsNullOrEmpty(typeFullName))
+        {
+            return false;
+        }
+
+        var name = typeFullName;
+        var dot = name.LastIndexOf('.');
+        if (dot >= 0)
+        {
+            name = name[(dot + 1)..];
+        }
+
+        EnsureLoaded();
+        return attributeSkipArgs!.TryGetValue(name, out var skip) && skip.Contains(index);
     }
 
     /// <summary>
@@ -288,6 +313,7 @@ internal static class UITextRules
         loaded = true;
         companions = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
         uiAttributes = new HashSet<string>(StringComparer.Ordinal);
+        attributeSkipArgs = new Dictionary<string, HashSet<int>>(StringComparer.OrdinalIgnoreCase);
         commandAttributes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
         var path = string.IsNullOrEmpty(PluginDirectory) ? null : Path.Combine(PluginDirectory, "uit-rules.json");
@@ -325,6 +351,17 @@ internal static class UITextRules
                 }
             }
 
+            if (parsed?.AttributeSkipArgs is { } skipMap)
+            {
+                foreach (var (key, value) in skipMap)
+                {
+                    if (!string.IsNullOrWhiteSpace(key) && value is { Length: > 0 })
+                    {
+                        attributeSkipArgs[key] = [.. value];
+                    }
+                }
+            }
+
             if (parsed?.CommandAttributes is { } commandMap)
             {
                 foreach (var (key, value) in commandMap)
@@ -352,5 +389,8 @@ internal static class UITextRules
 
         [JsonPropertyName("commandAttributes")]
         public Dictionary<string, int>? CommandAttributes { get; set; }
+
+        [JsonPropertyName("attributeSkipArgs")]
+        public Dictionary<string, int[]>? AttributeSkipArgs { get; set; }
     }
 }

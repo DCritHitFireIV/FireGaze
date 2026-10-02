@@ -429,9 +429,11 @@ internal static class UICallSemantics
     ///     SimpleTweaks 的 Loc.Localize(key, fallback)），我们只扫主 DLL，看不见里面的字典查找，
     ///     key 就会被当成普通界面文本翻掉（2026-10-01 实测：HaselTweaks 包里 32 条译文其实是它的 key）。
     ///     这里按方法名兜底：Translate / Localize 这类名字 + 第 0 个参数是字符串 => 当 key 处理。
+    ///     T / Tr：中文插件里常见的 Translate 缩写（BOCCHI 的 ConfigWindow::T("no_matches.title")，
+    ///     2026-10-02 用户实测：不认它会把整批 key 当界面文本翻掉 → 界面变成 Unknown translation key）。
     /// </remarks>
     public static bool IsLocalizationKeyCall(string typeFullName, string methodName) => methodName is
-        "Translate" or "Localize" or "GetTranslation" or "TryGetTranslation" or "GetLocalized" or "Localized";
+        "Translate" or "Localize" or "GetTranslation" or "TryGetTranslation" or "GetLocalized" or "Localized" or "T" or "Tr";
 
     public static bool UsesStringAsIDForArgument(string typeFullName, string methodName, int argIndex) => argIndex == 0;
 

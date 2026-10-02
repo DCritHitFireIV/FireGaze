@@ -638,12 +638,14 @@ internal sealed class UITextTab
             {
                 UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("启用插件"), 12);
                 ImGui.BeginDisabled(busy || this.enabling.Contains(plugin.InternalName));
-                if (ImGui.Button("启用插件###UITextEnablePlugin"))
+                UiHelpers.PushEnableButton();
+                var enableClicked = ImGui.Button("启用插件###UITextEnablePlugin");
+                UiHelpers.PopEnableButton();
+                ImGui.EndDisabled();
+                if (enableClicked)
                 {
                     this.StartEnable(plugin);
                 }
-
-                ImGui.EndDisabled();
                 if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
                 {
                     ImGui.SetTooltip("把这个插件启用起来（与插件安装器里的「启用」同一条路）；加载后就能看到汉化效果。");
@@ -693,7 +695,8 @@ internal sealed class UITextTab
 
     /// <summary>
     ///     启用未加载的插件（与插件安装器的「启用」同一条路）：写 Profile 的想要状态 + 加载。
-    ///     完成后置索引脏，下一帧重建——按钮 / 状态徽标立即跟上。
+    ///     成功后：待确认的补丁立即转正（刚加载的就是打过补丁的文件）、置脏重建索引——
+    ///     主按钮应马上从「一键汉化」变成「打开」。
     /// </summary>
     private void StartEnable(InstalledPluginEntry entry)
     {
@@ -707,8 +710,16 @@ internal sealed class UITextTab
         {
             var (ok, message) = await PluginEnableBridge.EnableAsync(entry.RawPlugin).ConfigureAwait(false);
             this.enabling.Remove(entry.InternalName);
+            if (ok)
+            {
+                // 插件已加载：它读的就是打过补丁的文件（没打过就无所谓），待确认状态直接转正
+                this.patches.MarkVerified(entry.InternalName);
+                message += " 补丁已生效。";
+            }
+
             this.notes[entry.InternalName] = new RowNote { Kind = ok ? NoteKind.Good : NoteKind.Bad, Text = message };
             this.installedPluginsDirty = true;
+            this.rowsDirty = true;
         });
     }
 

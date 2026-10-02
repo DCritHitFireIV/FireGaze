@@ -2765,6 +2765,12 @@ public static class UIStringExtractor
                     var startIndex = UITextRules.CommandHelpStartIndex(attr.TypeFullName) ?? 0;
                     for (var argumentIndex = startIndex; argumentIndex < arguments.Count; argumentIndex++)
                     {
+                        // 个别特性的参数是功能字符串（如 BossMod PropertyDisplay 第 5 个参数 = 搜索标签），不碰
+                        if (UITextRules.IsAttributeArgumentSkipped(attr.TypeFullName, argumentIndex))
+                        {
+                            continue;
+                        }
+
                         foreach (var value in StringValues(arguments[argumentIndex]))
                         {
                             if (LooksTranslatable(value))

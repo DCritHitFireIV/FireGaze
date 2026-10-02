@@ -67,6 +67,19 @@ internal static class UiHelpers
 
     public static void PopPrimaryButton() => ImGui.PopStyleColor(3);
 
+    /// <summary>
+    ///     「启用插件」这类正向动作的按钮：偏绿，与主色（蓝）区分，用户能一眼看到。
+    ///     必须配套 <see cref="PopEnableButton" />。
+    /// </summary>
+    public static void PushEnableButton()
+    {
+        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.18f, 0.42f, 0.28f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.22f, 0.52f, 0.34f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.15f, 0.36f, 0.24f, 1f));
+    }
+
+    public static void PopEnableButton() => ImGui.PopStyleColor(3);
+
     /// <summary>按钮标签的可见宽度（去掉 <c>###ID</c> 后缀）：给 <see cref="SameLineOrWrap" /> 估位置用。</summary>
     public static float LabelWidth(string label)
     {

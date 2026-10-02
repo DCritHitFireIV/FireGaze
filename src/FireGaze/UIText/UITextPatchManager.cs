@@ -957,17 +957,18 @@ internal sealed class UITextPatchManager
 
     /// <summary>
     ///     便宜的预检：盘上的文件里有没有我们打过的补丁痕迹（只扫字节，不动 dnlib）。
-    ///     从包里抽最多 64 条有译文的条目，找**译文本身**的 UTF-16 字节，命中 ≥3 条才算。
+    ///     两个条件都要满足：① 至少 3 条**译文**命中；② 至少 1 条 <c>###原文</c> 命中。
     /// </summary>
     /// <remarks>
-    ///     只找译文、不找 <c>###原文</c>：后者是弱证据——插件原生的 ImGui 标签就可能长成
-    ///     <c>原文###原文</c> / <c>Label###原文</c>，拿它当依据会在从没打过的干净插件上误触发反向还原
-    ///     （还原会删掉原生 ###ID，比不救更糟）。译文是写进去的产物，干净插件不会有（还会有阀值兜底：
-    ///     调用方拿到 true 后要走 <see cref="TryRebuildPatchRecord" /> 的还原量校验）。
+    ///     只看译文会在「自带中文界面」的插件上误触发（它的原生中文文本可能正好等于我们的某条译文，
+    ///     2026-10-02 BOCCHI 实测：干净 DLL 上也有 8 条「可反向还原」）——所以要搭一条 <c>###原文</c>，
+    ///     那是补丁才有的产物。纯译文形式（不带 ###）的旧补丁漏网也没关系：打不上时还有 NoMatch 的自动重试兑底。
+    ///     调用方拿到 true 后还要走 <see cref="TryRebuildPatchRecord" /> 的还原量阀值校验。
     /// </remarks>
     internal static bool MayContainOurPatch(IReadOnlyList<string> paths, UITextPack pack)
     {
-        var probes = new List<byte[]>();
+        var translationProbes = new List<byte[]>();
+        var suffixProbes = new List<byte[]>();
         foreach (var entry in pack.Entries)
         {
             if (!entry.HasTranslation || pack.IsSkipped(entry.Original))
@@ -984,30 +985,57 @@ internal sealed class UITextPatchManager
                 continue;
             }
 
-            probes.Add(System.Text.Encoding.Unicode.GetBytes(translated));
-            if (probes.Count >= 64)
+            if (translationProbes.Count < 64)
+            {
+                translationProbes.Add(System.Text.Encoding.Unicode.GetBytes(translated));
+            }
+
+            if (suffixProbes.Count < 64)
+            {
+                suffixProbes.Add(System.Text.Encoding.Unicode.GetBytes(UITextText.IDSeparator + original));
+            }
+
+            if (translationProbes.Count >= 64 && suffixProbes.Count >= 64)
             {
                 break;
             }
         }
 
-        if (probes.Count == 0)
+        if (translationProbes.Count == 0 || suffixProbes.Count == 0)
         {
             return false;
         }
 
-        var hits = 0;
+        var translationHits = 0;
+        var suffixHit = false;
         foreach (var path in paths)
         {
             try
             {
                 var span = File.ReadAllBytes(path).AsSpan();
-                foreach (var probe in probes)
+                foreach (var probe in translationProbes)
                 {
-                    if (span.IndexOf(probe) >= 0 && ++hits >= 3)
+                    if (span.IndexOf(probe) >= 0)
                     {
-                        return true;
+                        translationHits++;
                     }
+                }
+
+                if (!suffixHit)
+                {
+                    foreach (var probe in suffixProbes)
+                    {
+                        if (span.IndexOf(probe) >= 0)
+                        {
+                            suffixHit = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (translationHits >= 3 && suffixHit)
+                {
+                    return true;
                 }
             }
             catch (Exception)
@@ -1667,7 +1695,10 @@ internal sealed class UITextPatchManager
         }
     }
 
-    private void MarkVerified(string internalName)
+    /// <summary>
+    ///     插件已加载：把「待确认」的补丁记录直接转正（启用按钮成功后就调它）。
+    /// </summary>
+    public void MarkVerified(string internalName)
     {
         var state = this.store.Load(internalName);
         if (state is null || !state.PendingVerify)
