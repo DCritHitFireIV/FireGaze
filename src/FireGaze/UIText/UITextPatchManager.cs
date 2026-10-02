@@ -696,14 +696,50 @@ internal sealed class UITextPatchManager
             return false;
         }
 
+        // 普通补丁（PreserveID=false，写进去的是纯译文、没有 ###）也要能认出来：
+        // 字面量正好等于某条唯一译文、而对应的原文已不在 DLL 里 → 打过的痕迹
+        // （2026-10-02 用户实测：重装/重置后丢了记录，纯译文补丁就看不出来了）。
+        var literals = new HashSet<string>(extraction.Entries.Select(e => e.Original), StringComparer.Ordinal);
+        var uniqueTranslations = new Dictionary<string, string>(StringComparer.Ordinal);
+        var conflicts = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var item in pack.Entries)
+        {
+            if (!item.HasTranslation)
+            {
+                continue;
+            }
+
+            var translated = item.Translated.Trim();
+            if (uniqueTranslations.TryGetValue(translated, out var existing))
+            {
+                if (!string.Equals(existing, item.Original, StringComparison.Ordinal))
+                {
+                    conflicts.Add(translated);
+                }
+            }
+            else
+            {
+                uniqueTranslations[translated] = item.Original;
+            }
+        }
+
         var patched = 0;
         foreach (var item in extraction.Entries)
         {
             // 不再只看 UI：中文判定会把「译文###原文」当成「已是中文」排掉，
             // 那种条目恰恰是最硬的补丁证据（2026-10-02 修）。
-            var mark = item.Original.IndexOf(UITextText.IDSeparator, StringComparison.Ordinal);
+            var literal = item.Original;
+            var mark = literal.IndexOf(UITextText.IDSeparator, StringComparison.Ordinal);
             if (mark <= 0)
             {
+                var trimmed = literal.Trim();
+                if (uniqueTranslations.TryGetValue(trimmed, out var source)
+                    && !conflicts.Contains(trimmed)
+                    && !literals.Contains(source))
+                {
+                    patched++;
+                }
+
                 continue;
             }
 

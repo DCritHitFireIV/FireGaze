@@ -186,7 +186,7 @@ internal static class UITextPatcher
 
                 if (outcome.PatchedTotal == 0)
                 {
-                    outcome.Error = $"译文有 {outcome.Candidates} 条，但在 DLL 里一条都没对上（可能插件版本变了，或盘上已经是打过补丁的文件）——先「还原原文」或重装插件再汉化。";
+                    outcome.Error = $"译文有 {outcome.Candidates} 条，但在 DLL 里一条都没对上。到插件安装器里把这个插件重装一次（回到原版）再点「一键汉化」；行尾有「还原原文」时也可以先点它。";
                     return outcome;
                 }
 
