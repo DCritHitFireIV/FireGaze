@@ -49,6 +49,42 @@ internal static class UICallSemantics
         "PushTextWrapPos",
         // Dalamud 的「(?) 悬停说明」：文本只画在 tooltip 里，不当控件 ID（ID 来自那个 "(?)" 前缀）
         "HelpMarker",
+        // 包装库里的「画文字」辅助方法：内部走 Text*/TextUnformatted/SetTooltip，标签没有 ID 语义。
+        // ImGui 的 Text 系列渲染时不剥 ##（只有 Button/Selectable 这类控件标签才剥），加了 ### 后缀会原样显示。
+        // 2026-10-03 用户实测（HaselCommon.ImGuiUtils.DrawLink 的 Sponsor →「赞助###Sponsor」），
+        // 下列名字全部由反编译逐个确认：
+        //   HaselCommon.Gui.ImGuiUtils.DrawLink / DrawSection（ImGui.Text / TextColored）
+        //   Heliosphere.Util.ImGuiHelper.Help / Tooltip / TextUnformatted*（tooltip / TextUnformatted）
+        //   clib.Extensions.ImGuiExtensions.TooltipOnHover（ImGui.SetTooltip）
+        //   OtterGui.ImGuiUtil.HoverTooltip（tooltip 里 TextUnformatted）
+        //   Dalamud ImGuiHelpers.CenteredText（居中文字）
+        //   Notification 的 set_Content / set_Title（纯数据 setter，永远不可能是 ID 来源）
+        "DrawLink",
+        "DrawSection",
+        "Help",
+        "Tooltip",
+        "TooltipOnHover",
+        "HoverTooltip",
+        "CenteredText",
+        "TextUnformattedCentred",
+        "TextUnformattedSize",
+        "TextUnformattedColour",
+        "set_Content",
+        "set_Title",
+        // 包装库里的「画文字」辅助方法：内部走 Text/TextUnformatted/Tooltip，标签没有 ID 语义。
+        // ImGui 的 Text* 系列渲染时不剥 ##（只有 Button/Selectable 这类控件标签才剥），
+        // 所以给它加 ### 后缀会原样显示出来（2026-10-03 用户实测：HaselCommon.ImGuiUtils.DrawLink
+        // 的 Sponsor 被打成「赞助###Sponsor」——反编译确认它内部就是 ImGui.Text(label)）。
+        // DrawSection 同文件（TextColored）；Help/Tooltip/TextUnformatted* 是 Heliosphere
+        // ImGuiHelper 的（tooltip / TextUnformatted）；CenteredText 是 Dalamud ImGuiHelpers 的。
+        "DrawLink",
+        "DrawSection",
+        "Help",
+        "Tooltip",
+        "CenteredText",
+        "TextUnformattedCentred",
+        "TextUnformattedSize",
+        "TextUnformattedColour",
     };
 
     /// <summary>
@@ -437,8 +473,21 @@ internal static class UICallSemantics
     ///     T / Tr：中文插件里常见的 Translate 缩写（BOCCHI 的 ConfigWindow::T("no_matches.title")，
     ///     2026-10-02 用户实测：不认它会把整批 key 当界面文本翻掉 → 界面变成 Unknown translation key）。
     /// </remarks>
+    /// <summary>
+    ///     第 0 个参数是「数据 key」（查表 / 资源路径 / 缓存 id）而不是界面文字的调用：翻了会让查表 miss。
+    /// </summary>
+    /// <remarks>
+    ///     · 本地化查表：Translate / Localize / T / Tr…（HaselTweaks 的 HaselCommon.TextService.Translate(key)、
+    ///       SimpleTweaks 的 Loc.Localize(key, fallback)）——这类方法常在别的程序集里，只扫主 DLL 看不见里面的
+    ///       字典查找，按方法名兜底（2026-10-01 实测：HaselTweaks 包里 32 条译文其实是它的 key）；
+    ///     · ECommons.ImGuiMethods.ImGuiEx.LineCentered(string id, Action)：这个 id 只是居中宽度缓存的键，
+    ///       根本不是要画出来的文字（2026-10-03 反编译确认）；
+    ///     · InventoryTools.Services.ImGuiService.GetImageTexture(string filePath)：参数是图片资源路径，
+    ///       翻了会让图标查找不到（2026-10-03 反编译确认；本机实测有 3 条译文正顶在资源名上）。
+    /// </remarks>
     public static bool IsLocalizationKeyCall(string typeFullName, string methodName) => methodName is
-        "Translate" or "Localize" or "GetTranslation" or "TryGetTranslation" or "GetLocalized" or "Localized" or "T" or "Tr";
+        "Translate" or "Localize" or "GetTranslation" or "TryGetTranslation" or "GetLocalized" or "Localized" or "T" or "Tr"
+        or "LineCentered" or "GetImageTexture";
 
     public static bool UsesStringAsIDForArgument(string typeFullName, string methodName, int argIndex) => argIndex == 0;
 
