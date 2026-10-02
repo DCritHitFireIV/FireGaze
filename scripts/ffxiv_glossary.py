@@ -26,6 +26,7 @@ EN_BASE = "https://raw.githubusercontent.com/xivapi/ffxiv-datamining/master/csv/
 CN_BASE = "https://raw.githubusercontent.com/thewakingsands/ffxiv-datamining-cn/master"
 
 # 表名 → 名称列（找不到该列时回退到第 2 列）
+# 前面是「专有名词」表，后面是「系统名」表；同名条目不覆盖，先到先得。
 SHEETS: dict[str, str] = {
     "PlaceName": "Name",
     "TerritoryType": "Name",
@@ -37,7 +38,14 @@ SHEETS: dict[str, str] = {
     "Emote": "Name",
     "BNpcName": "Singular",
     "Orchestrion": "Name",
+    # 系统名表（2026-10-02 加）：动作名与成就分类名是稳定的官方名词，
+    # 补上 Desynthesis→分解、Grand Company→大国防联军、Materia→魔晶石 这类基础术语。
+    "GeneralAction": "Name",
+    "AchievementCategory": "Name",
 }
+
+# 人工补充表（仓库里跟着脚本走的 TSV；自动表覆盖不到、但插件界面高频的官方译名）。
+EXTRA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ffxiv_glossary_extra.tsv")
 
 CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".cache")
 CJK = re.compile(r"[\u4e00-\u9fff]")
@@ -47,6 +55,8 @@ WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9'’\-]*")
 STOP_SINGLE = {
     "attack", "damage", "target", "player", "party", "enemy", "action", "ready", "start",
     "window", "option", "setting", "module", "function", "system", "button", "display",
+    # "general" 在成就分类里是「整体」，但插件界面里通常是「常规」——语境不一，不提供提示。
+    "general",
 }
 
 # 多词短语里的功能词允许短于 3 个字母（Palace of the Dead / Heaven on High 这类）
@@ -115,6 +125,35 @@ def _clean_english(text: str) -> str:
     return text
 
 
+def load_extra(path: str = EXTRA_FILE) -> dict[str, str]:
+    """读取人工补充表：英文 <TAB> 中文；# 开头为注释。中文里不要再带制表符。
+
+    用途：自动表（专有名词）覆盖不到、但插件界面高频且容易翻错的官方译名，
+    比如 Expert Delivery → 筹备稀有品（只在 Addon 里出现，而 Addon 整表语境噪声太大不能自动并入）。
+    """
+    extra: dict[str, str] = {}
+    if not os.path.exists(path):
+        return extra
+
+    with open(path, encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip("\n\r")
+            if not line or line.lstrip().startswith("#"):
+                continue
+            parts = line.split("\t")
+            if len(parts) < 2:
+                continue
+            english = _clean_english(parts[0])
+            chinese = parts[1].strip()
+            if not english or not chinese:
+                continue
+            extra[english.lower()] = chinese
+            if english.lower().startswith("the "):
+                extra.setdefault(english[4:].lower(), chinese)
+
+    return extra
+
+
 def build_glossary(refresh: bool = False, verbose: bool = True) -> dict[str, str]:
     """English(小写) → 简体中文。"""
     glossary: dict[str, str] = {}
@@ -167,6 +206,12 @@ def build_glossary(refresh: bool = False, verbose: bool = True) -> dict[str, str
         if verbose:
             print(f"  [术语表] {sheet}: {added} 条")
 
+    extra = load_extra()
+    if verbose and extra:
+        print(f"  [术语表] 人工补充：{len(extra)} 条")
+    # 人工条目优先级最高：它们是为「自动表覆盖不到、又确实翻错」的词条手工核过的官方译名。
+    glossary.update(extra)
+
     if verbose:
         print(f"术语表合计：{len(glossary)} 条")
 
@@ -206,7 +251,7 @@ def find_terms(texts: list[str], glossary: dict[str, str], limit: int = 40) -> l
 def export_plugin_table(glossary: dict[str, str], path: str) -> int:
     """写出「插件汉化」用的紧凑术语表（TSV，.gz 结尾自动压缩）。
 
-    比描述翻译更严一层：插件匹配器只认由 [A-Za-z0-9'’\-.] 组成的词、最多 4 个词，
+    比描述翻译更严一层：插件匹配器只认由 [A-Za-z0-9'’.-] 组成的词、最多 4 个词，
     比它长或带其他符号的键永远匹配不上，直接不写进文件。
     另外给「基名唯一」的括号名补一个无括号变体（the omega protocol (ultimate) → the omega protocol），
     基名有冲突（如 copperbell mines 同时有普通/困难）时不加，避免指错。

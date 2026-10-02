@@ -31,6 +31,8 @@ internal static class FFXIVGlossary
         "window", "option", "setting", "setting s", "module", "function", "system", "button", "display",
         "status", "effect", "skill", "spell", "item", "quest", "level", "time", "mode", "list",
         "name", "type", "value", "count", "total", "second", "minute", "hour", "critical", "direct",
+        // "general" 在成就分类里是「整体」，在插件界面里通常是「常规」——语境不一，不提示。
+        "general",
     };
 
     private static readonly object Gate = new();

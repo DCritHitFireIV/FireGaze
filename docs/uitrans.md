@@ -646,3 +646,29 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - **给用户的取用方式**：重新「一键汉化」后，`Grand Company Expert Delivery` / `Desynthesis` 会直接变中文；
   `Dungeon Chest` 在灰名单里——可以在「编辑校对」里单条填译（user 译文不受灰名单开关限制），
   或在「翻译设置」勾上「批量翻译时连灰名单一起翻」再跑。
+  （注：实测重新汉化后的译名不准——模型没有官方术语可依，见下一节 1.2.0.95。）
+
+## 术语表补齐：系统名表 + 人工补充（2026-10-02，1.2.0.95）
+
+- **现象（1.2.0.94 之后实测）**：用户重抽 + 一键汉化后，`Grand Company Expert Delivery` / `Desynthesis`
+  从英文变成了**错的中文**——「部队理符交付」/「精炼」。补丁链路本身没问题（探针在用户盘上的 DLL 里
+  能查到这两条译文），问题出在**翻译时没有官方术语可依**：随插件打包的术语表只覆盖地名/技能/状态/副本
+  这类专有名词，`Grand Company`（大国防联军）、`Desynthesis`（分解）、`Expert Delivery`（筹备稀有品）
+  不在表里，模型只能凭字面猜（Grand Company → 部队；Desynthesis → 精炼）。
+- **为什么不直接接 `Addon` 表**：这些词条其实都在 `Addon`（游戏 UI 文本表）里，但实测整表接入不可行——
+  同一英文在不同界面语境下译法不同（`Friends → 允许好友入场`、`Shattered Memory → 修复玻璃画`、
+  `Dungeon Clear! → 突破便宜迷宫！！`），自动筛选（多词 / 译法唯一 / 无标点）后仍有约一半噪声。
+  `Addon` 是「语境绑定文本」，不是「术语表」——不要因为它里有几个好词就整表并入。
+- **修法（两个小表 + 一份人工补充）**：
+  · `SHEETS` 加 `GeneralAction`（动作名）与 `AchievementCategory`（成就分类名）——小而准的官方名词表，
+    净增 62 条（`desynthesis → 分解`、`grand company → 大国防联军`、`materia → 魔晶石`、`limit break → 极限技`…）。
+  · 新增 `scripts/ffxiv_glossary_extra.tsv`（人工补充、最高优先级、覆盖自动表）：
+    `Expert Delivery → 筹备稀有品`、`Grand Company Expert Delivery → 筹备稀有品`、`Free Company → 部队`——
+    只放「自动表覆盖不到、又确实翻错」的，逐条可查证（FFCAFE 文本检索）。
+  · `STOP_SINGLE` 加 `general`：成就分类里是「整体」、插件界面里通常是「常规」，语境不一，不给提示
+    （Python 侧过滤 + C# `FFXIVGlossary.StopSingle` 双保险）。
+- **产物**：`ffxiv-glossary.tsv` 31,701 → **31,766 条**（纯增量、无覆盖）；`translate.yml` 云端每周重建时
+  自动带上（生成脚本会读 extra 文件）。fgtest 的真术语表断言补上 `Desynthesis` / `Grand Company Expert Delivery`
+  / `Free Company` 三个关键词，防止将来重新生成时丢条目。
+- **已有译文不会被自动重翻**（机器翻译永不覆盖已有译文）——要修正已打上去的错译名：编辑器里右键
+  「清除译文」→「翻译未翻」重翻（此时会命中新术语表），或单条手填。
