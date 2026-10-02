@@ -1399,47 +1399,27 @@ internal sealed class UITextEditorWindow : Window
             new { type = "uit-contribution", plugin = this.entry.InternalName, entries, resources, attributes },
             new JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
 
-        var header = $"### FireGaze 插件界面文字译文贡献\n\n- 插件：`{this.entry.InternalName}`\n- 条数：{total}\n\n";
+        // 标题行带英文 "contributions"：兼容线上旧版 Worker 的关键词校验（与列表行「一键上传」走同一条通道）
+        var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{this.entry.InternalName}`\n- 条数：{total}\n\n";
         var body = header + "```json\n" + payload + "\n```\n";
         var title = $"[译文贡献] {this.entry.InternalName} · {total} 条";
-        var url = $"{ContributionsStore.RepoURL}/issues/new"
-                  + $"?title={Uri.EscapeDataString(title)}"
-                  + $"&body={Uri.EscapeDataString(body)}";
+        var internalName = this.entry.InternalName;
+        var storeDirectory = this.store.DirectoryPath;
 
-        if (body.Length > 6000 || url.Length > 20000)
+        this.SetStatus($"正在提交 {total} 条译文…", false);
+        _ = Task.Run(async () =>
         {
-            // 太大：完整 JSON 落盘，issue 里只放摘要（玩家把它拖进附件）
-            var path = Path.Combine(this.store.DirectoryPath, $"{this.entry.InternalName}-贡献-{DateTime.Now:yyyyMMdd-HHmm}.json");
             try
             {
-                Directory.CreateDirectory(this.store.DirectoryPath);
-                File.WriteAllText(path, payload, new System.Text.UTF8Encoding(false));
+                var result = await ContributeSender.SubmitAsync(internalName, total, title, body, storeDirectory).ConfigureAwait(false);
+                await Plugin.Framework.RunOnFrameworkThread(
+                    () => this.SetStatus(result.Message, result.Severity == ContributeSendSeverity.Bad)).ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                this.SetStatus("导出贡献 JSON 失败：" + e.Message, true);
-                return;
+                Plugin.Log?.Warning(e, "[内部文本] 提交结果回调调度失败");
             }
-
-            body = header + $"- 条数较多，完整 JSON 已导出到：`{path}`\n\n请在网页上把它拖进附件后提交。\n";
-            url = $"{ContributionsStore.RepoURL}/issues/new"
-                  + $"?title={Uri.EscapeDataString(title)}"
-                  + $"&body={Uri.EscapeDataString(body)}";
-            this.SetStatus($"已在浏览器打开提交页；完整 JSON 在 {path}，拖进附件再 Submit。", false);
-        }
-        else
-        {
-            this.SetStatus("已在浏览器打开 GitHub 提交页：按绿色 Submit 即可（不带账号信息）。", false);
-        }
-
-        try
-        {
-            Dalamud.Utility.Util.OpenLink(url);
-        }
-        catch (Exception e)
-        {
-            this.SetStatus("打开浏览器失败：" + e.Message, true);
-        }
+        });
     }
 
     private void MarkDirty()

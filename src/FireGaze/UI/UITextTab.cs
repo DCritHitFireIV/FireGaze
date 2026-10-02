@@ -680,52 +680,27 @@ internal sealed class UITextTab
     private PendingUpload? pendingUpload;
     private bool uploadModalNeedsOpen;
 
-    /// <summary>确认后真正执行上传（中继 / GitHub 回退逻辑）。</summary>
+    /// <summary>确认后真正执行上传（中继优先、失败回退 GitHub 提交页——与编辑器同一条通道）。</summary>
     private void RunUpload(PendingUpload upload)
     {
         var entry = upload.Entry;
         var total = upload.Total;
         var title = upload.Title;
         var body = upload.Body;
+        var storeDirectory = this.store.DirectoryPath;
         this.uploading.Add(entry.InternalName);
         _ = Task.Run(async () =>
         {
             try
             {
-                var relayError = string.Empty;
-                if (body.Length <= ContributeRelay.MaxBody)
+                var result = await ContributeSender.SubmitAsync(entry.InternalName, total, title, body, storeDirectory).ConfigureAwait(false);
+                var kind = result.Severity switch
                 {
-                    var (ok, message) = await ContributeRelay.TrySubmitAsync(title, body).ConfigureAwait(false);
-                    if (ok)
-                    {
-                        await this.FinishUploadAsync(entry.InternalName, $"已上传 {total} 条译文到社区：{message}。感谢！", NoteKind.Good).ConfigureAwait(false);
-                        return;
-                    }
-
-                    relayError = message;
-                }
-
-                // 回退 1：正文放得进 URL —— 直接填好内容打开 GitHub 提交页
-                const int githubURLBodyLimit = 6000;
-                if (body.Length <= githubURLBodyLimit)
-                {
-                    var text = relayError.Length > 0
-                        ? $"上传没成功：{relayError}。已打开 GitHub 提交页，按 Submit 即可提交。"
-                        : $"译文较多，已打开 GitHub 提交页，按 Submit 即可提交。";
-                    OpenIssue(ContributeRelay.BuildIssueURL(title, body));
-                    await this.FinishUploadAsync(entry.InternalName, text, relayError.Length > 0 ? NoteKind.Bad : NoteKind.Info).ConfigureAwait(false);
-                    return;
-                }
-
-                // 回退 2：正文太长，URL 会被截断 —— 导出文件，让玩家拖进附件
-                var file = this.SaveUploadPayload(entry.InternalName, title, body);
-                var shortBody = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{total}\n\n条目较多，正文放不下；投稿文件见本 issue 的附件。\n";
-                var reason = relayError.Length > 0 ? $"上传没成功：{relayError}；" : string.Empty;
-                var longText = file is null
-                    ? $"{reason}条目较多（{total} 条），正文放不下 GitHub 的提交页，导出投稿文件也失败了。"
-                    : $"{reason}条目较多（{total} 条），正文放不下 GitHub 的提交页；已导出投稿文件：\n{file}\n请在打开的页面里把它拖进输入框作为附件，再按 Submit。";
-                OpenIssue(ContributeRelay.BuildIssueURL(title, shortBody));
-                await this.FinishUploadAsync(entry.InternalName, longText, NoteKind.Bad).ConfigureAwait(false);
+                    ContributeSendSeverity.Good => NoteKind.Good,
+                    ContributeSendSeverity.Bad => NoteKind.Bad,
+                    _ => NoteKind.Info,
+                };
+                await this.FinishUploadAsync(entry.InternalName, result.Message, kind).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -789,40 +764,6 @@ internal sealed class UITextTab
             this.notes[internalName] = new RowNote { Kind = kind, Text = text };
             this.rowsDirty = true;
         }).ConfigureAwait(false);
-    }
-
-    /// <summary>
-    ///     正文太长（GitHub 提交页 URL 放不下）时把投稿存成本机文件，让玩家拖进 issue 附件。
-    ///     返回文件路径；写不出返回 null。
-    /// </summary>
-    private string? SaveUploadPayload(string internalName, string title, string body)
-    {
-        try
-        {
-            var parent = Path.GetDirectoryName(this.store.DirectoryPath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
-            var directory = Path.Combine(parent ?? this.store.DirectoryPath, "contributions");
-            Directory.CreateDirectory(directory);
-            var file = Path.Combine(directory, $"uit-{internalName}-{DateTime.Now:yyyyMMdd-HHmmss}.json");
-            File.WriteAllText(file, title + "\n\n" + body + "\n", new System.Text.UTF8Encoding(false));
-            return file;
-        }
-        catch (Exception e)
-        {
-            Plugin.Log?.Warning(e, "[内部文本] 导出投稿文件失败");
-            return null;
-        }
-    }
-
-    private static void OpenIssue(string url)
-    {
-        try
-        {
-            Dalamud.Utility.Util.OpenLink(url);
-        }
-        catch (Exception e)
-        {
-            Plugin.Log?.Warning(e, "[内部文本] 打开 GitHub 提交页失败");
-        }
     }
 
     /// <summary>
