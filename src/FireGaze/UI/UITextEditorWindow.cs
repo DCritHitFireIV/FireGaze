@@ -282,54 +282,17 @@ internal sealed class UITextEditorWindow : Window
         }
 
         this.extraction = result;
+
+        // 并进包走 UITextFlow.MergeExtraction（与列表页「一键汉化」同一条路）：
+        // 字面量、资源、属性、PreserveID、清账一次做完——编辑器自己抄一遍就会漏（资源/属性条目就曾漏过：
+        // 首次在编辑器里打开一个还没跑过一键汉化的插件，本地化文件的候选根本不出现在行里）。
+        var merge = UITextFlow.MergeExtraction(this.pack, result);
         this.roles.Clear();
-        var preserve = new Dictionary<string, bool>(StringComparer.Ordinal);
-        var uiCount = 0;
-        var ambiguous = 0;
-        foreach (var item in result.Entries)
+        foreach (var (original, role) in merge.Roles)
         {
-            if (item.Role == UITextRole.Excluded)
-            {
-                continue;
-            }
-
-            // 同一原文出现在多处时，只要有「候选」就算候选
-            if (!this.roles.TryGetValue(item.Original, out var existing) || (existing.Role == UITextRole.Ambiguous && item.Role == UITextRole.UI))
-            {
-                this.roles[item.Original] = (item.Role, item.Reason);
-            }
-
-            preserve[item.Original] = preserve.GetValueOrDefault(item.Original) || item.PreserveID;
-            var packEntry = this.pack.GetOrAdd(item.Original, item.Context, item.PreserveID);
-            if (packEntry.Context is null)
-            {
-                packEntry.Context = item.Context;
-            }
-
-            if (item.Role == UITextRole.UI)
-            {
-                uiCount++;
-            }
-            else
-            {
-                ambiguous++;
-            }
+            this.roles[original] = (role, merge.Reasons.TryGetValue(original, out var reason) ? reason : string.Empty);
         }
 
-        // PreserveID 是抽取的推导值，重新抽取要以这一轮为准。不能只 |= ——
-        // 以前判错过就永远换不掉（2026-10-01 Orbwalker 的 Movement 就被困在「移动###Movement」里）。
-        foreach (var (original, keepID) in preserve)
-        {
-            var entry = this.pack.Find(original);
-            if (entry is not null)
-            {
-                entry.PreserveID = keepID;
-            }
-        }
-
-        // 清账：这一轮没被列为 候选/灰名单 的条目（键名、功能串、过期条目）标成「不翻」，不再打进补丁；
-        // 又变回候选的自动恢复；已是纯空壳的（没译文也没来源）直接清掉。
-        var prune = this.pack.PruneAgainstExtraction(result);
         this.SortEntries();
         this.RebuildRows();
         this.MarkDirty();
@@ -339,13 +302,13 @@ internal sealed class UITextEditorWindow : Window
             pieces.Add(this.extractionNote);
         }
 
-        if (prune.Any)
+        if (merge.Prune.Any)
         {
-            pieces.Add(prune.Describe() + "（键名/功能串、版本变了、或上一轮抽错）");
+            pieces.Add(merge.Prune.Describe() + "（键名/功能串、版本变了、或上一轮抽错）");
         }
 
         this.SetStatus(
-            $"抽取完成：候选 {uiCount} 条 · 灰名单 {ambiguous} 条（灰名单默认不翻）"
+            $"抽取完成：候选 {merge.UICount} 条 · 灰名单 {merge.AmbiguousCount} 条（灰名单默认不翻）"
             + (pieces.Count > 0 ? " · " + string.Join(" · ", pieces) : string.Empty),
             false);
     }

@@ -27,6 +27,9 @@ internal static class UITextFlow
         /// <summary>原文 → 这一轮抽出来的角色（UI / 灰名单）。</summary>
         public Dictionary<string, UITextRole> Roles { get; } = new(StringComparer.Ordinal);
 
+        /// <summary>原文 → 这一轮的角色依据（拿胜利那条的；编辑器行里显示用）。</summary>
+        public Dictionary<string, string> Reasons { get; } = new(StringComparer.Ordinal);
+
         public int UICount;
 
         public int AmbiguousCount;
@@ -65,6 +68,7 @@ internal static class UITextFlow
                 || (existing == UITextRole.Ambiguous && item.Role == UITextRole.UI))
             {
                 result.Roles[item.Original] = item.Role;
+                result.Reasons[item.Original] = item.Reason;
             }
 
             preserve[item.Original] = preserve.GetValueOrDefault(item.Original) || item.PreserveID;
