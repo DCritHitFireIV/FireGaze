@@ -100,6 +100,10 @@ internal sealed class UITextEditorWindow : Window
     private DateTime nextDiskCheck = DateTime.MinValue;
     private DateTime lastDrawErrorAt = DateTime.MinValue;
 
+    /// <summary>「还原原文」二次确认：第一次点只是把按钮变成「再点一次确认还原」，5 秒内不点就恢复。</summary>
+    private string restoreArmKey = string.Empty;
+    private DateTime restoreArmAt = DateTime.MinValue;
+
     // 翻译通道
     private Task<(string Channel, UITextTranslateResult Result)>? translateTask;
     private Task<(bool Ok, string Message)>? patchTask;
@@ -610,7 +614,7 @@ internal sealed class UITextEditorWindow : Window
         var translated = this.rows.Count(r => r.HasTranslation);
         var skipped = this.rows.Count(r => r.Skipped);
         ImGui.TextDisabled(
-            $"候选 {candidate}（含资源 {resources} / 属性 {attributes}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
+            $"候选 {candidate} 条（含资源 {resources} / 属性 {attributes}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
             (this.extractionTask is { IsCompleted: false } ? " · 抽取中…" : string.Empty));
     }
 
@@ -678,9 +682,25 @@ internal sealed class UITextEditorWindow : Window
 
         ImGui.SameLine();
         ImGui.BeginDisabled(busy || !hasBackup);
-        if (ImGui.Button("还原原文"))
+        if (this.restoreArmKey.Length > 0 && (DateTime.Now - this.restoreArmAt).TotalSeconds > 5)
         {
-            this.StartRestore();
+            this.restoreArmKey = string.Empty;
+        }
+
+        var armed = string.Equals(this.restoreArmKey, entry.InternalName, StringComparison.Ordinal);
+        if (ImGui.Button(armed ? "再点一次确认还原" : "还原原文"))
+        {
+            if (armed)
+            {
+                this.restoreArmKey = string.Empty;
+                this.StartRestore();
+            }
+            else
+            {
+                this.restoreArmKey = entry.InternalName;
+                this.restoreArmAt = DateTime.Now;
+                this.SetStatus("还原会把插件恢复成英文；5 秒内再点一次「再点一次确认还原」执行。", false);
+            }
         }
 
         ImGui.EndDisabled();
@@ -754,11 +774,22 @@ internal sealed class UITextEditorWindow : Window
 
         // 右上：通道 + 保存状态 + 补丁状态
         var patchStatus = this.patches.StatusOf(entry, out var patchDetailText);
+        var packNewer = this.patches.PackNewerThanPatch(entry);
         ImGui.SameLine();
-        var right = $"通道：{UITextChannelFactory.Describe(this.plugin.Config)} · " +
-                    (this.dirty ? "有未保存的改动…" : $"已保存 {this.lastSaveAt:HH:mm:ss}") +
-                    " · " + DescribePatchStatus(patchStatus);
-        ImGui.TextDisabled(right);
+        var stateText = this.dirty
+            ? "有未保存的改动…"
+            : packNewer
+                ? $"已保存 {this.lastSaveAt:HH:mm:ss} · 尚未写入插件（点「写入并重载」生效）"
+                : $"已保存 {this.lastSaveAt:HH:mm:ss}";
+        var right = $"通道：{UITextChannelFactory.Describe(this.plugin.Config)} · {stateText} · {DescribePatchStatus(patchStatus)}";
+        if (packNewer && !this.dirty)
+        {
+            UiHelpers.ColoredText(UiHelpers.Warn, right);
+        }
+        else
+        {
+            ImGui.TextDisabled(right);
+        }
         if (patchDetailText.Length > 0 && ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(patchDetailText);
@@ -834,6 +865,10 @@ internal sealed class UITextEditorWindow : Window
 
             ImGui.TableNextColumn();
             ImGui.TextDisabled(row.Context ?? "—");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(row.Context ?? "—");
+            }
 
             ImGui.TableNextColumn();
             ImGui.TextUnformatted(Shorten(row.Original, 60));
@@ -1123,7 +1158,8 @@ internal sealed class UITextEditorWindow : Window
         ImGui.SetNextItemWidth(260);
         ImGui.InputTextWithHint("###UITextSearch", "搜索原文 / 译文 / 上下文…", ref this.search, 256);
 
-        ImGui.TextDisabled("状态列：✔ 已翻译 ｜ ⚠ 待复核（悬停看原因）｜「·」未翻译 ｜ 编辑完点「写入并重载」");
+        ImGui.TextDisabled("状态列：✔ 人工译文 ｜ ⚙ 机器译文 ｜ ⚠ 待复核（悬停看原因）");
+        ImGui.TextDisabled("? 灰名单（默认不翻）｜ ⛔ 不翻 ｜ · 未翻译 ｜ 编辑完点「写入并重载」");
     }
 
     private bool Matches(Row row, string filterText)

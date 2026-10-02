@@ -70,6 +70,15 @@ internal sealed class UITextSettingsWindow : Window
                     changed = true;
                 }
             }
+
+            if (ImGui.IsItemHovered())
+            {
+                var hint = ChannelHint(channels[i].Key);
+                if (hint.Length > 0)
+                {
+                    ImGui.SetTooltip(hint);
+                }
+            }
         }
 
         if (config.UITextChannel is "auto" or "google" or "mymemory")
@@ -88,6 +97,8 @@ internal sealed class UITextSettingsWindow : Window
         }
 
         var library = config.UITextLibraryEnabled;
+        ImGui.Separator();
+        ImGui.TextDisabled("通用选项");
         if (ImGui.Checkbox("从公共译文库下载现成译文", ref library))
         {
             config.UITextLibraryEnabled = library;
@@ -224,7 +235,7 @@ internal sealed class UITextSettingsWindow : Window
         }
 
         ImGui.TextDisabled("key 只存在本机（DPAPI 加密），不会随任何提交上传；换机器/换 Windows 用户后需要重填。");
-        ImGui.TextDisabled("设置立即生效并自动保存，不需要点「确定」。");
+        ImGui.TextDisabled("除 key 外，设置立即生效并自动保存；key 要点「保存 key」才生效。");
         if (this.messageKey.Length > 0)
         {
             UiHelpers.ColoredWrapped(UiHelpers.Muted, this.messageKey);
@@ -235,6 +246,18 @@ internal sealed class UITextSettingsWindow : Window
             this.plugin.SaveConfig();
         }
     }
+
+    /// <summary>每个通道一句话：要不要 key、额度、快慢（盲评 CF-08：别让用户跨窗口背参数）。</summary>
+    private static string ChannelHint(string key) => key switch
+    {
+        "auto" => "免费·自动：按可用性依次尝试免 key 接口，失败会自动换下一个；按 IP 限流，条目多时慢。",
+        "caiyun" => "彩云小译：一次最多 50 条，新号送 100 万字 / 一个月；需要自填 token（免费注册）。",
+        "google" => "Google 免 key：不用 key，逐条翻译、随时可能被限流（429）。",
+        "mymemory" => "MyMemory：不用 key，每天约 5000 词，逐条翻译。",
+        "llm" => "大模型：速度最快、质量最好，需要自填 API key（只存本机）。",
+        "deepl" => "DeepL：需要自填 API key。",
+        _ => string.Empty,
+    };
 
     private void DrawKeyRow(string label, string currentProtected, Action<string> apply, ref bool changed)
     {
@@ -254,6 +277,13 @@ internal sealed class UITextSettingsWindow : Window
         else
         {
             UiHelpers.ColoredText(UiHelpers.Good, "当前：已保存 " + DPAPI.Mask(existing));
+        }
+
+        // 说清保存模型：底部写「自动保存」，但 key 是例外（盲评 CF-09/S1）
+        if (input.Trim().Length > 0)
+        {
+            ImGui.SameLine();
+            UiHelpers.ColoredText(UiHelpers.Warn, "输入还没保存");
         }
 
         ImGui.SameLine();
@@ -281,6 +311,7 @@ internal sealed class UITextSettingsWindow : Window
         }
 
         ImGui.SameLine();
+        ImGui.BeginDisabled(existing is null);
         if (ImGui.Button("清除###clear-" + label))
         {
             apply(string.Empty);
@@ -288,6 +319,8 @@ internal sealed class UITextSettingsWindow : Window
             this.keyInput = string.Empty;
             this.messageKey = "已清除。";
         }
+
+        ImGui.EndDisabled();
 
         ImGui.SameLine();
         if (ImGui.Button("测试连接###test-" + label))

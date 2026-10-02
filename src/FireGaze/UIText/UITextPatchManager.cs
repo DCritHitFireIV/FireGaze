@@ -131,6 +131,29 @@ internal sealed class UITextPatchManager
     }
 
     /// <summary>
+    ///     译文包比已应用的补丁更新（云端下载 / 编辑校对改过译文之后）——列表据此把按钮从「打开」换回「一键汉化」，
+    ///     并提示「有改动待写入」；编辑器据此提醒还没写入插件（盲评 CF-01 / CF-07）。
+    /// </summary>
+    public bool PackNewerThanPatch(InstalledPluginEntry entry)
+    {
+        var patchedAt = this.PatchedAt(entry);
+        if (patchedAt is null)
+        {
+            return false;
+        }
+
+        try
+        {
+            var packPath = Path.Combine(this.plugin.ConfigDirectory, "uitrans", entry.InternalName + ".json");
+            return File.Exists(packPath) && File.GetLastWriteTime(packPath) > patchedAt.Value.AddSeconds(1);
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
     ///     这个插件有没有可还原的备份。
     /// </summary>
     public bool HasBackup(InstalledPluginEntry entry) => this.store.Load(entry.InternalName)?.HasBackup == true;
