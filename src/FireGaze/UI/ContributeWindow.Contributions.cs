@@ -13,19 +13,6 @@ namespace FireGaze.UI;
 internal sealed partial class ContributeWindow : Window
 {
     /// <summary>
-    ///     投稿中继（Cloudflare Worker）：一键提交直接把这一批发出去，不用开浏览器、玩家不需要 GitHub 账号。
-    ///     只有中继确认建好 issue 才会归档清空；中继不可用时回退到 GitHub 提交页。
-    /// </summary>
-    private const string RelayURL = "https://firegaze-relay.yuoonmail.workers.dev/";
-
-    /// <summary>
-    ///     中继/issue 正文上限内的安全余量（GitHub issue 正文上限 65536）。
-    /// </summary>
-    private const int RelayMaxBody = 60000;
-
-    private static readonly HttpClient RelayClient = new() { Timeout = TimeSpan.FromSeconds(20) };
-
-    /// <summary>
     ///     中继提交在途中：拦住重复点击。
     /// </summary>
     private bool submitting;
@@ -208,14 +195,14 @@ internal sealed partial class ContributeWindow : Window
         var body = store.BuildMarkdown();
 
         // 优先走中继：一步提交（成功才归档清空）
-        if (body.Length <= RelayMaxBody)
+        if (body.Length <= ContributeRelay.MaxBody)
         {
             submitting = true;
             SetStatus($"正在提交 {count} 条…", isError: false);
 
             _ = Task.Run(async () =>
             {
-                var (ok, message) = await TryRelaySubmitAsync(title, body).ConfigureAwait(false);
+                var (ok, message) = await ContributeRelay.TrySubmitAsync(title, body).ConfigureAwait(false);
                 try
                 {
                     await Plugin.Framework.RunOnFrameworkThread(() => OnRelaySubmitDone(ok, message, title, count));
@@ -300,47 +287,6 @@ internal sealed partial class ContributeWindow : Window
 
         SetStatus($"中继没成功（{message}），已改为打开 GitHub 提交页", isError: true);
         OpenIssueSubmitPage(count, title, store.BuildMarkdown());
-    }
-
-    /// <summary>
-    ///     把投稿发给中继；返回 (是否成功, 失败原因或 issue 地址)。
-    /// </summary>
-    private static async Task<(bool Ok, string Message)> TryRelaySubmitAsync(string title, string body)
-    {
-        try
-        {
-            using var content = new StringContent(
-                JsonSerializer.Serialize(new { title, body }),
-                Encoding.UTF8,
-                "application/json");
-
-            using var response = await RelayClient.PostAsync(RelayURL, content).ConfigureAwait(false);
-            var text = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return (false, $"HTTP {(int)response.StatusCode}");
-            }
-
-            using var doc = JsonDocument.Parse(text);
-            var ok = doc.RootElement.TryGetProperty("ok", out var okProp) && okProp.ValueKind == JsonValueKind.True;
-            if (ok)
-            {
-                var issue = doc.RootElement.TryGetProperty("issue", out var issueProp)
-                    ? issueProp.GetString() ?? string.Empty
-                    : string.Empty;
-                return (true, issue);
-            }
-
-            var error = doc.RootElement.TryGetProperty("error", out var errProp)
-                ? errProp.GetString() ?? "unknown"
-                : "unknown";
-            return (false, error);
-        }
-        catch (Exception e)
-        {
-            return (false, e.GetType().Name);
-        }
     }
 
     /// <summary>

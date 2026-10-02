@@ -427,6 +427,91 @@ internal sealed class UITextPatchManager
         return result;
     }
 
+    /// <summary>
+    ///     抽取 + 「从补丁后 DLL 抽取」的兜底体检。返回（结果, 说明）。
+    /// </summary>
+    /// <remarks>
+    ///     抽出来的**字面量原文**里若有一批「中文###…」形态，盘上很可能已经是我们打过的补丁——
+    ///     正常原始 DLL 不会成批出现「译文###原文」。这种结果绝不能进包：假原文会把真原文挤成
+    ///     「不翻」（Prune 连锁）、打补丁又匹配不上（2026-10-02 AbilityAnts 实测 12 条中文原文进包 +
+    ///     14 条真原文被误标、报「包里还没有可应用的译文」）。
+    ///     体检不过时改用原始备份重抽；没有备份或仍不过就返回带 Error 的结果（流程会停下，不写包）。
+    /// </remarks>
+    public (UITextExtraction Extraction, string Note) ExtractWithGuard(InstalledPluginEntry entry)
+    {
+        var sources = this.ExtractionSourceOf(entry, out var note, out var searchDirectories);
+        var extraction = UIStringExtractor.ExtractMany(sources, searchDirectories);
+        if (extraction.Error is not null || !LooksLikePatchedDLL(extraction))
+        {
+            return (extraction, note);
+        }
+
+        var state = this.store.Load(entry.InternalName);
+        var backups = new List<string>();
+        if (state is not null)
+        {
+            foreach (var file in state.EffectiveFiles)
+            {
+                if (file.HasBackup)
+                {
+                    backups.Add(file.BackupPath!);
+                }
+            }
+        }
+
+        if (backups.Count > 0)
+        {
+            var retry = UIStringExtractor.ExtractMany(backups, searchDirectories);
+            if (retry.Error is null && !LooksLikePatchedDLL(retry))
+            {
+                note = (note.Length > 0 ? note + "；" : string.Empty) + "盘上像是汉化补丁，已改从原始备份抽取";
+                Plugin.Log?.Information($"[内部文本] {entry.InternalName}：抽取体检发现「译文###原文」形态，已改从原始备份抽取");
+                return (retry, note);
+            }
+        }
+
+        Plugin.Log?.Warning($"[内部文本] {entry.InternalName}：抽取结果里有一批「译文###原文」形态的文本，已停下（避免污染译文包）");
+        return (new UITextExtraction
+        {
+            AssemblyPath = extraction.AssemblyPath,
+            Entries = extraction.Entries,
+            Resources = extraction.Resources,
+            Attributes = extraction.Attributes,
+            Error = "抽取结果里有一批「译文###原文」形态的文本——盘上可能已是汉化补丁（换原始备份重试也不对）。先停下，避免把假原文灌进译文包；可以「还原原文」后再试。",
+        }, note);
+    }
+
+    /// <summary>抽出来的 UI 候选里是否成批出现「中文###…」——我们补丁形态的特征。</summary>
+    private static bool LooksLikePatchedDLL(UITextExtraction extraction)
+    {
+        var patched = 0;
+        foreach (var item in extraction.Entries)
+        {
+            if (item.Role != UITextRole.UI)
+            {
+                continue;
+            }
+
+            var mark = item.Original.IndexOf("###", StringComparison.Ordinal);
+            if (mark <= 0)
+            {
+                continue;
+            }
+
+            // 「译文###原文」：### 之前是中文；插件原生的「标签###ID」### 前是英文
+            foreach (var ch in item.Original[..mark])
+            {
+                if (ch is >= '\u4e00' and <= '\u9fff')
+                {
+                    patched++;
+                    break;
+                }
+            }
+        }
+
+        return patched >= 3;
+    }
+
     private static void TryDelete(string path)
     {
         try

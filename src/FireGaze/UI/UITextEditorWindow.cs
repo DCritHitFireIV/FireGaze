@@ -84,7 +84,7 @@ internal sealed class UITextEditorWindow : Window
     private InstalledPluginEntry? entry;
     private UITextPack pack = new();
     private DateTime packLoadedMtime = DateTime.MinValue;
-    private Task<UITextExtraction>? extractionTask;
+    private Task<(UITextExtraction Extraction, string Note)>? extractionTask;
     private UITextExtraction? extraction;
     private string extractionNote = string.Empty;
     private readonly Dictionary<string, (UITextRole Role, string Reason)> roles = new(StringComparer.Ordinal);
@@ -242,11 +242,9 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        // 盘上是我们自己的补丁时一定要改读原始备份：对着补丁后的 DLL 抽到的是「译文###原文」，
-        // 会把包里好好的条目当成「原文没了」整批清掉。
-        var sources = this.patches.ExtractionSourceOf(this.entry, out var note, out var searchDirectories);
-        this.extractionNote = note;
-        this.extractionTask = Task.Run(() => UIStringExtractor.ExtractMany(sources, searchDirectories));
+        // 抽取走 ExtractWithGuard：它会自动改读原始备份；万一还是抽到「译文###原文」形态，
+        // 会换备份重抽或停下报错，绝不把假原文并进包（2026-10-02 防污染）。
+        this.extractionTask = Task.Run(() => this.patches.ExtractWithGuard(this.entry));
     }
 
     private void PollExtraction()
@@ -261,7 +259,9 @@ internal sealed class UITextEditorWindow : Window
         UITextExtraction result;
         try
         {
-            result = task.Result;
+            var guard = task.Result;
+            this.extractionNote = guard.Note;
+            result = guard.Extraction;
         }
         catch (Exception e)
         {

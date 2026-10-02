@@ -1,6 +1,7 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using FireGaze.RepoAudit;
+using FireGaze.Translate;
 using FireGaze.UIText;
 
 namespace FireGaze.UI;
@@ -100,6 +101,9 @@ internal sealed class UITextTab
     private DateTime rowsAt = DateTime.MinValue;
 
     private readonly Dictionary<string, RowNote> notes = new(StringComparer.Ordinal);
+
+    /// <summary>正在上传译文的插件（防重复点击）。</summary>
+    private readonly HashSet<string> uploading = new(StringComparer.Ordinal);
     private Run? run;
     private bool rowsDirty = true;
 
@@ -470,6 +474,112 @@ internal sealed class UITextTab
         {
             this.expanded = isOpen ? string.Empty : plugin.InternalName;
         }
+
+        // 一键上传：把这台机器上已经翻好的译文交给社区公共库（2026-10-02 用户要求）
+        if (info is { Translated: > 0 })
+        {
+            ImGui.SameLine(0, 10);
+            ImGui.BeginDisabled(this.uploading.Contains(plugin.InternalName));
+            if (ImGui.Button("一键上传"))
+            {
+                this.StartUpload(plugin);
+            }
+
+            ImGui.EndDisabled();
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+            {
+                ImGui.SetTooltip(
+                    "把已经翻好的译文上传到社区公共库，让其他玩家直接用你的译文。\n" +
+                    "（只含原文、译文与代码位置，不带账号信息；维护者收录后所有人「一键汉化」时能直接下载。）");
+            }
+        }
+    }
+
+    /// <summary>
+    ///     一键上传：把该插件包里有译文的条目打成投稿，走中继（失败回退 GitHub 提交页）。
+    /// </summary>
+    private void StartUpload(InstalledPluginEntry entry)
+    {
+        if (this.uploading.Contains(entry.InternalName))
+        {
+            return;
+        }
+
+        var pack = this.store.Load(entry.InternalName);
+        var entries = pack.Entries.Where(e => e.HasTranslation && !pack.IsSkipped(e.Original)).ToList();
+        var resources = pack.Resources.Where(e => e.HasTranslation).ToList();
+        var attributes = pack.Attributes.Where(e => e.HasTranslation).ToList();
+        var total = entries.Count + resources.Count + attributes.Count;
+        if (total == 0)
+        {
+            this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "这个插件还没有可上传的译文。" };
+            return;
+        }
+
+        var payload = System.Text.Json.JsonSerializer.Serialize(
+            new { type = "uit-contribution", plugin = entry.InternalName, entries, resources, attributes },
+            new System.Text.Json.JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            });
+        var header = $"### FireGaze 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{total}\n\n";
+        var body = header + "```json\n" + payload + "\n```\n";
+        var title = $"[译文贡献] {entry.InternalName} · {total} 条";
+
+        this.uploading.Add(entry.InternalName);
+        _ = Task.Run(async () =>
+        {
+            string text;
+            NoteKind kind;
+            if (body.Length <= ContributeRelay.MaxBody)
+            {
+                var (ok, message) = await ContributeRelay.TrySubmitAsync(title, body).ConfigureAwait(false);
+                if (ok)
+                {
+                    text = $"已上传 {total} 条译文到社区（issue：{message}），感谢！";
+                    kind = NoteKind.Good;
+                }
+                else
+                {
+                    text = $"上传没成功（{message}），已改为打开 GitHub 提交页：按 Submit 也一样。";
+                    kind = NoteKind.Bad;
+                    OpenIssue(ContributeRelay.BuildIssueURL(title, body));
+                }
+            }
+            else
+            {
+                text = $"译文较多（{total} 条），已打开 GitHub 提交页（内容已填好）。";
+                kind = NoteKind.Info;
+                OpenIssue(ContributeRelay.BuildIssueURL(title, body));
+            }
+
+            try
+            {
+                await Plugin.Framework.RunOnFrameworkThread(() =>
+                {
+                    this.uploading.Remove(entry.InternalName);
+                    this.notes[entry.InternalName] = new RowNote { Kind = kind, Text = text };
+                    this.rowsDirty = true;
+                }).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Plugin.Log?.Warning(e, "[内部文本] 上传结果回调调度失败");
+            }
+        });
+    }
+
+    private static void OpenIssue(string url)
+    {
+        try
+        {
+            Dalamud.Utility.Util.OpenLink(url);
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Warning(e, "[内部文本] 打开 GitHub 提交页失败");
+        }
     }
 
     /// <summary>
@@ -776,8 +886,8 @@ internal sealed class UITextTab
             var packTouchedSincePatch = packTimeBefore > patchedAt.AddSeconds(1);
 
             run.Stage = "正在读取插件界面文本…";
-            var extractionSources = this.patches.ExtractionSourceOf(entry, out _, out var extractionSearchDirs);
-            var extraction = await Task.Run(() => UIStringExtractor.ExtractMany(extractionSources, extractionSearchDirs), token).ConfigureAwait(false);
+            var guard = await Task.Run(() => this.patches.ExtractWithGuard(entry), token).ConfigureAwait(false);
+            var extraction = guard.Extraction;
             if (extraction.Error is not null)
             {
                 this.FinishRun(run, new RowNote
