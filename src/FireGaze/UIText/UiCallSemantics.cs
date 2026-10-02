@@ -682,4 +682,21 @@ internal static class UICallSemantics
 
         return DangerousMethodNames.Contains(methodName) && typeFullName.StartsWith("System.", StringComparison.Ordinal);
     }
+
+    private static readonly HashSet<string> UITextParameterNames = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "name", "text", "label", "title", "caption", "heading", "description", "desc",
+        "tooltip", "hint", "helptext", "help", "displayname", "displaytext", "message", "msg", "summary",
+    };
+
+    private static readonly HashSet<string> KeyParameterNames = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "key", "id", "identifier", "command", "cmd", "path", "url", "uri", "version", "hash",
+    };
+
+    /// <summary>委托参数名像不像「给人看的文本」（与 <see cref="IsKeyParameterName" /> 互斥优先）。</summary>
+    public static bool IsUITextParameterName(string name) => UITextParameterNames.Contains(name);
+
+    /// <summary>委托参数名像不像「键名 / 标识符」（如 factory(key, name, helpText, …) 里的 key）。</summary>
+    public static bool IsKeyParameterName(string name) => KeyParameterNames.Contains(name);
 }

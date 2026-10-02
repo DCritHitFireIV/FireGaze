@@ -258,6 +258,21 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 2. 界面 HCI 评审（先出还原图，按仓库既有流程）；
 3. 批量翻译的单位与限流（免费接口有每日额度；大插件建议用自填 key）。
 
+## 插件适配：委托工厂与接口文本 getter（2026-10-02，1.2.0.76）
+
+- **自定义委托的 `Invoke`**：从委托定义读参数名，按名字分「给人看的文本」与「键名」——
+  Allagan 系的 `YesNoChoiceFilter.Factory(key, name, helpText, …)` 以前整批落在「去向不明：Invoke/4」，
+  `Can be HQ? / Is Unique?` 抽不到；现在 `name` / `helpText` 进 UI、`key` 进硬键排除。
+  名字表：UI = name/text/label/title/caption/heading/description/desc/tooltip/hint/helptext/help/
+  displayname/displaytext/message/msg/summary；键名 = key/id/identifier/command/cmd/path/url/uri/version/hash。
+- **接口文本 getter**：`get_SingularName` / `get_PluralName` / `get_HelpText` / `get_Description` / … 这类
+  「接口实现 + 强 UI 属性名」的简单 getter，返回值直接算 UI（值会被界面框架跨程序集取走，
+  本模块内追不到消费者——Allagan 的 ItemXxxRenderer 就是这样）；只认接口实现，不碰普通 Name / Title。
+- **Allagan Tools（InventoryTools）例外**：它的英文串是**自带汉化词典的 key**（`LocalizationService.Translations`，
+  值是中文），翻了会破坏它自己的查表——这些 key 保持不翻；它显示英文的地方是词典缺条目，属上游维护范围。
+- fgtest 新增真实样本断言：AllaganItemSearch 的 `Can be HQ? / Is Unique? / Airship Exploration` 必须是 UI，
+  `canBeHq` 必须是键名排除。
+
 ## 属性字符串（自定义特性参数）（2026-10-02 实现）
 
 - 不少插件把界面说明放在**自定义特性（Attribute）参数**里，这些字符串在 UTF-8 的 blob 里、不在 `ldstr` 里，普通抽取看不到：

@@ -1559,6 +1559,33 @@ public static class UIStringExtractor
                 return;
             }
 
+            // ③c 自定义委托的 Invoke：从委托定义读参数名，按名字把参数分成「给人看的文本」与「键名」
+            //     （Allagan 系插件用 factory(key, name, helpText, …) 建过滤器；以前整批落在「去向不明：Invoke/4」）
+            if (string.Equals(methodName, "Invoke", StringComparison.Ordinal)
+                && callee.DeclaringType?.ResolveTypeDef() is { IsDelegate: true })
+            {
+                var parameterNames = DelegateParameterNames(callee);
+                for (var i = 0; i < argValues.Length && i < parameterNames.Count; i++)
+                {
+                    if (!UICallSemantics.IsStringLikeOrGeneric(paramTypes[i]) || parameterNames[i].Length == 0)
+                    {
+                        continue;
+                    }
+
+                    if (UICallSemantics.IsKeyParameterName(parameterNames[i]))
+                    {
+                        this.MarkDangerous(scan, argValues[i], $"{UICallSemantics.ShortTarget(typeName, methodName)} 参数 {parameterNames[i]}", hardKey: true);
+                    }
+                    else if (UICallSemantics.IsUITextParameterName(parameterNames[i]))
+                    {
+                        this.MarkUI(scan, argValues[i], UICallSemantics.ShortTarget(typeName, methodName), preserveID: false);
+                    }
+                }
+
+                Leave(MakeResult(callee, argValues, isInternal: false));
+                return;
+            }
+
             // 日志文本可以安全翻译（翻了只是日志变中文），不该让同一字面量被拖进灰名单：
             // 不标危险，也不当 UI——只进日志的字符串自然落在「没有流向 UI 调用」里；
             // 同时出现在界面和日志里的，就应该按界面文本翻（2026-10-02，FrenRider 一批就是这样变灰的）。
@@ -2419,12 +2446,12 @@ public static class UIStringExtractor
                     continue;
                 }
 
-                if (scan.ReturnsToUI)
+                if (scan.ReturnsToUI || IsInterfaceUITextGetter(scan.Def))
                 {
                     literal.UIViaReturn = true;
                     if (literal.UIFlowTarget.Length == 0)
                     {
-                        literal.UIFlowTarget = scan.ReturnsToUITarget;
+                        literal.UIFlowTarget = scan.ReturnsToUI ? scan.ReturnsToUITarget : "接口文本属性";
                     }
                 }
 
@@ -2438,6 +2465,58 @@ public static class UIStringExtractor
                 }
             }
         }
+
+        /// <summary>
+        ///     接口上「明显是给人看的文本」的属性 getter（SingularName / PluralName / HelpText / Description…）。
+        ///     值会被界面框架跨程序集取走，本模块内追不到消费者（Allagan 系的 ItemXxxRenderer 就是这样，
+        ///     2026-10-02 用户实测 Airship Exploration 等漏翻）。只认接口实现 + 强 UI 属性名，
+        ///     不碰普通 Name / Title（那些可能是键名）。
+        /// </summary>
+        private static bool IsInterfaceUITextGetter(MethodDef method)
+        {
+            var methodName = method.Name?.String ?? string.Empty;
+            if (!methodName.StartsWith("get_", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            var propertyName = methodName[4..];
+            if (!UITextPropertyNames.Contains(propertyName))
+            {
+                return false;
+            }
+
+            var type = method.DeclaringType;
+            if (type is null)
+            {
+                return false;
+            }
+
+            foreach (var interfaceRef in type.Interfaces)
+            {
+                var interfaceDef = interfaceRef.Interface?.ResolveTypeDef();
+                if (interfaceDef is null)
+                {
+                    continue;
+                }
+
+                foreach (var property in interfaceDef.Properties)
+                {
+                    if (string.Equals(property.Name?.String, propertyName, StringComparison.Ordinal))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private static readonly HashSet<string> UITextPropertyNames = new(StringComparer.Ordinal)
+        {
+            "SingularName", "PluralName", "HelpText", "Description", "DisplayName", "DisplayText",
+            "Tooltip", "Hint", "Caption", "Heading", "Title", "Label",
+        };
 
         // ── 产出 ─────────────────────────────────────────────────────────────
 
@@ -2975,6 +3054,24 @@ public static class UIStringExtractor
 
         private static string MethodKey(string typeFullName, string methodName, int paramCount) =>
             $"{StripGenericArgs(typeFullName)}::{methodName}/{paramCount}";
+
+        /// <summary>委托 <c>Invoke</c> 的参数名（定义解析不到就返回空表）。</summary>
+        private static List<string> DelegateParameterNames(IMethod callee)
+        {
+            var result = new List<string>();
+            var def = callee.ResolveMethodDef();
+            if (def is null)
+            {
+                return result;
+            }
+
+            foreach (var parameter in def.ParamDefs)
+            {
+                result.Add(parameter.Name ?? string.Empty);
+            }
+
+            return result;
+        }
 
         /// <summary>
         ///     去掉泛型实参：调用点上读到的类型可能带实例实参（<c>ConfigRef`1&lt;MovementStrategy&gt;</c>），
