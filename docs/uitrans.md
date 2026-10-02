@@ -343,3 +343,10 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   `EqualityComparer<T>.Default.*`，那是机械比较）。fgtest 钉住：`String.Equals` 算危险、`EqualityComparer` 不算。
 - 术语表加载失败也不再谎报「已就绪 0 条」：失败状态独立（`Failed` / `FailureReason`），设置页显示「加载失败 · 重试」。
 - 独立评审报告全文（含 P1-3 待办与三个实机确认点）：`docs/hci/review-2026-10-01-ui-extractor-independent.md`。
+
+- **血教训（2026-10-02，翻译通道）：请求先直连、连接层失败再走系统代理。**
+  系统代理开着（v2rayN 等）时 HttpClient 默认走代理——代理链路可能把响应弄坏：
+  用户那儿「大模型没有按 JSON 回答 / JSON 结构不对」连败两轮，而本地用**同样的内容、模型、参数、术语表**
+  直连全部成功（9 次）。现在 LLM 通道有两个客户端（`ClientDirect` / `ClientViaProxy`），
+  直连抛连接层异常才换代理；批两次尝试失败还会**拆成两半重试**（只拆一层，防请求数爆炸）；
+  失败现场（`finish_reason` / content 长度与开头）写进日志，下次不用猜。

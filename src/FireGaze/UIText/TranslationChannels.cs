@@ -683,7 +683,10 @@ internal sealed class LLMTranslationChannel : IUITextChannel
         "4. 术语用国服常见译名（如 Treasure Map=藏宝图、Duty=任务、FATE 保留原文）。\n" +
         "5. 已经是中文的原样返回；纯符号、版本号、命令名也原样返回。";
 
-    private static readonly HttpClient Client = CreateClient();
+    // 直连 / 系统代理两个客户端：先直连，连接层失败再走代理（2026-10-02 ARSR：
+    // 系统代理开着时响应可能被代理链路弄坏，而直连全部成功）
+    private static readonly HttpClient ClientDirect = CreateClient(useProxy: false);
+    private static readonly HttpClient ClientViaProxy = CreateClient(useProxy: true);
 
     private readonly string baseURL;
     private readonly string model;
@@ -760,11 +763,17 @@ internal sealed class LLMTranslationChannel : IUITextChannel
     }
 
     /// <summary>
-    ///     单块重试一次（模型偶尔会吐坏 JSON）；失败时把原因带回来。
+    ///     单块重试一次（模型偶尔会吐坏 JSON）；两次都不行就把批对半拆开再来。
     /// </summary>
+    /// <remarks>
+    ///     拆批是 2026-10-02 加的：用户那边每一批都吐不出 JSON，两次重试都不成；
+    ///     同内容本地用同一模型/参数却全部成功——先拆小批保成功率，失败现场写日志（LogChunkFailure）待查。
+    ///     只拆一层（40 → 20 + 20），避免全坏时请求数爆炸。
+    /// </remarks>
     private async Task<(Dictionary<int, string>? Result, string? Failure)> TranslateChunkAsync(
         List<UITextTranslateItem> chunk,
-        CancellationToken token)
+        CancellationToken token,
+        bool splitted = false)
     {
         string? lastFailure = null;
         for (var attempt = 0; attempt < 2; attempt++)
@@ -776,6 +785,34 @@ internal sealed class LLMTranslationChannel : IUITextChannel
             }
 
             lastFailure = failure;
+        }
+
+        if (chunk.Count > 1 && !splitted)
+        {
+            var half = chunk.Count / 2;
+            var left = chunk.Take(half).ToList();
+            var right = chunk.Skip(half).ToList();
+            var (leftResult, leftFailure) = await this.TranslateChunkAsync(left, token, splitted: true).ConfigureAwait(false);
+            var (rightResult, rightFailure) = await this.TranslateChunkAsync(right, token, splitted: true).ConfigureAwait(false);
+            if (leftResult is not null && rightResult is not null)
+            {
+                // 右半批的 i 是子列表内的编号，合并时加回偏移
+                var merged = new Dictionary<int, string>();
+                foreach (var (key, value) in leftResult)
+                {
+                    merged[key] = value;
+                }
+
+                foreach (var (key, value) in rightResult)
+                {
+                    merged[key + half] = value;
+                }
+
+                Plugin.Log?.Information($"[内部文本] 大模型这一批拆成两半后翻好了（{chunk.Count} 条，原失败：{lastFailure ?? "?"}）");
+                return (merged, null);
+            }
+
+            return (null, leftFailure ?? rightFailure ?? lastFailure);
         }
 
         return (null, lastFailure);
@@ -852,16 +889,37 @@ internal sealed class LLMTranslationChannel : IUITextChannel
             body["max_tokens"] = 4096;
         }
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, this.baseURL + "/chat/completions")
+        var bodyJSON = JsonSerializer.Serialize(body);
+
+        HttpRequestMessage BuildRequest()
         {
-            Content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json"),
-        };
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.apiKey);
+            var request = new HttpRequestMessage(HttpMethod.Post, this.baseURL + "/chat/completions")
+            {
+                Content = new StringContent(bodyJSON, Encoding.UTF8, "application/json"),
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.apiKey);
+            return request;
+        }
 
         string text;
+        HttpResponseMessage? response = null;
         try
         {
-            using var response = await Client.SendAsync(request, HttpCompletionOption.ResponseContentRead, token).ConfigureAwait(false);
+            try
+            {
+                // 先直连：系统代理开着时（v2rayN 等）代理链路可能把响应弄坏——
+                // 同内容本地直连全部成功、用户那儿走代理全失败已实测过（2026-10-02 ARSR）。
+                using var direct = BuildRequest();
+                response = await ClientDirect.SendAsync(direct, HttpCompletionOption.ResponseContentRead, token).ConfigureAwait(false);
+            }
+            catch (Exception e) when (!token.IsCancellationRequested && e is HttpRequestException or TaskCanceledException)
+            {
+                // 直连不通（有些网络必须走代理）→ 换系统代理再试一次
+                Plugin.Log?.Information($"[内部文本] 大模型直连失败（{e.GetType().Name}），换系统代理重试");
+                using var viaProxy = BuildRequest();
+                response = await ClientViaProxy.SendAsync(viaProxy, HttpCompletionOption.ResponseContentRead, token).ConfigureAwait(false);
+            }
+
             text = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
@@ -885,24 +943,44 @@ internal sealed class LLMTranslationChannel : IUITextChannel
         {
             return (null, "大模型连不上：" + e.Message);
         }
+        finally
+        {
+            response?.Dispose();
+        }
 
-        var content = ExtractContent(text);
+        var (content, finishReason) = ExtractContent(text);
         if (content is null)
         {
+            Plugin.Log?.Warning($"[内部文本] 大模型响应里没有 content（finish={finishReason ?? "?"}）：{UITextText.OneLine(text, 200)}");
             return (null, "大模型返回里没有 content（可能被截断）");
         }
 
         var json = UITextText.ExtractJSON(content);
         if (json is null)
         {
+            LogChunkFailure(chunk, "content 里没有 JSON", content, finishReason);
             return (null, "大模型没有按 JSON 回答");
         }
 
         var parsed = ParseTranslations(json);
-        return parsed is null ? (null, "大模型返回的 JSON 结构不对") : (parsed, null);
+        if (parsed is null)
+        {
+            LogChunkFailure(chunk, "JSON 结构对不上", json, finishReason);
+            return (null, "大模型返回的 JSON 结构不对");
+        }
+
+        return (parsed, null);
     }
 
-    private static string? ExtractContent(string responseText)
+    /// <summary>失败现场写日志：只记长度与开头片段（日志过大会拖慢游戏，2026-09-18 血教训）。</summary>
+    private static void LogChunkFailure(List<UITextTranslateItem> chunk, string reason, string content, string? finishReason)
+    {
+        var head = UITextText.OneLine(content, 300);
+        Plugin.Log?.Warning(
+            $"[内部文本] 大模型这一批失败（{reason}）：共 {chunk.Count} 条 · finish_reason={finishReason ?? "?"} · content {content.Length} 字符 · 开头：{head}");
+    }
+
+    private static (string? Content, string? FinishReason) ExtractContent(string responseText)
     {
         try
         {
@@ -914,7 +992,14 @@ internal sealed class LLMTranslationChannel : IUITextChannel
                 && message.TryGetProperty("content", out var content)
                 && content.ValueKind == JsonValueKind.String)
             {
-                return content.GetString();
+                string? finish = null;
+                if (choices[0].TryGetProperty("finish_reason", out var finishElement)
+                    && finishElement.ValueKind == JsonValueKind.String)
+                {
+                    finish = finishElement.GetString();
+                }
+
+                return (content.GetString(), finish);
             }
         }
         catch (JsonException)
@@ -922,7 +1007,7 @@ internal sealed class LLMTranslationChannel : IUITextChannel
             // 下面统一返回 null
         }
 
-        return null;
+        return (null, null);
     }
 
     private static Dictionary<int, string>? ParseTranslations(string json)
@@ -976,9 +1061,10 @@ internal sealed class LLMTranslationChannel : IUITextChannel
     private static string? GetString(JsonElement element, string property)
         => element.TryGetProperty(property, out var value) && value.ValueKind == JsonValueKind.String ? value.GetString() : null;
 
-    private static HttpClient CreateClient()
+    private static HttpClient CreateClient(bool useProxy)
     {
-        var client = new HttpClient { Timeout = TimeSpan.FromSeconds(90) };
+        var handler = new HttpClientHandler { UseProxy = useProxy };
+        var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(90) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FireGaze/1.0");
         return client;
     }
