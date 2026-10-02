@@ -957,11 +957,13 @@ internal sealed class UITextPatchManager
 
     /// <summary>
     ///     便宜的预检：盘上的文件里有没有我们打过的补丁痕迹（只扫字节，不动 dnlib）。
-    ///     从包里抽最多 64 条有译文的条目，找 <c>###原文</c>（保留 ID 的写法）或译文本身（纯译文写法）的 UTF-16 字节。
+    ///     从包里抽最多 64 条有译文的条目，找**译文本身**的 UTF-16 字节，命中 ≥3 条才算。
     /// </summary>
     /// <remarks>
-    ///     命中不一定真是补丁（译文碰巧本来就是界面文本）——调用方拿到 true 后还要走
-    ///     <see cref="TryRebuildPatchRecord" /> 的还原量阀值校验。宁可多跑一次反向还原，不能把打过补丁的 DLL 当原文。
+    ///     只找译文、不找 <c>###原文</c>：后者是弱证据——插件原生的 ImGui 标签就可能长成
+    ///     <c>原文###原文</c> / <c>Label###原文</c>，拿它当依据会在从没打过的干净插件上误触发反向还原
+    ///     （还原会删掉原生 ###ID，比不救更糟）。译文是写进去的产物，干净插件不会有（还会有阀值兜底：
+    ///     调用方拿到 true 后要走 <see cref="TryRebuildPatchRecord" /> 的还原量校验）。
     /// </remarks>
     internal static bool MayContainOurPatch(IReadOnlyList<string> paths, UITextPack pack)
     {
@@ -982,9 +984,8 @@ internal sealed class UITextPatchManager
                 continue;
             }
 
-            probes.Add(System.Text.Encoding.Unicode.GetBytes(UITextText.IDSeparator + original));
             probes.Add(System.Text.Encoding.Unicode.GetBytes(translated));
-            if (probes.Count >= 128)
+            if (probes.Count >= 64)
             {
                 break;
             }
@@ -995,15 +996,15 @@ internal sealed class UITextPatchManager
             return false;
         }
 
+        var hits = 0;
         foreach (var path in paths)
         {
             try
             {
-                var bytes = File.ReadAllBytes(path);
-                var span = bytes.AsSpan();
+                var span = File.ReadAllBytes(path).AsSpan();
                 foreach (var probe in probes)
                 {
-                    if (span.IndexOf(probe) >= 0)
+                    if (span.IndexOf(probe) >= 0 && ++hits >= 3)
                     {
                         return true;
                     }
