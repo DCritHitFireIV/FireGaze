@@ -497,3 +497,35 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   在插件管理器里禁用 / 还没加载的不列）。「已汉化」本来就在状态下拉里，两者可叠加。
 - `FinishRun` 现在置 `rowsDirty`：一键汉化 / 还原**跑完立刻重算行状态**，不再等下一个 5 秒刷新——
   在「已汉化」筛选下点了「还原原文」，那一行会马上消失（逻辑上它已经不是已汉化）。
+
+## 投稿通道的统一（2026-10-02，1.2.0.82）
+
+- 三条投稿入口——列表行「一键上传」、编辑器「提交人工译文到公共库…」、参与翻译「一键提交」——**统一为同一条通道**：
+  **中继优先**（Cloudflare Worker，匿名、不需要 GitHub 账号，一步提交）→ 失败才回退「填好内容打开 GitHub 提交页」
+  （参与翻译是两步式：网页按过 Submit 回来点「确认已提交」；行上传没有待提交清单，不走第二步）。
+- 修前的不一致：编辑器那条**直接开 GitHub 页**（和列表行不一样），而且标题缺 Worker 校验用的关键词 `contributions`
+   ——就算以后接中继也会被线上旧版 Worker 判 400。现在抽成 `ContributeSender.SubmitAsync`，两条入口共用；
+  标题统一成 `### FireGaze contributions · 插件界面文字译文贡献`；正文 >6000 时统一导出
+  `contributions/uit-<插件>-<时间>.json` 并提示拖进附件。
+- 文案：上传确认框与参与翻译窗口都写明「由 FireGaze 中继匿名提交、不需要 GitHub 账号；提交后成为一个 GitHub
+  公开 issue」——「公开 issue」是结果（中继用服务端令牌建 issue），不是要求玩家自己去 GitHub 操作。
+
+## 插件自带本地化文件的普查（2026-10-02，功能待做）
+
+用户报 AutoDuty 的 `Waits on the specified plugins…` / `Stop Looping @ Item Level` 没翻。定位：这些字符串**不在 DLL 里**，
+而在插件自带的本地化文件里（DLL 补丁碰不到）。全量普查本机已装插件后：
+
+| 插件 | 布局 | 英文键 | 中文缺 |
+|---|---|---|---|
+| AutoDuty | `Localization/en-US/*.json` + `zh-CN/*.json` | 654 | **171**（MainTab 90 / ConfigTab 57 / Overlay 11 / LoopActions 10…） |
+| PetRenamer | `I18N/en_UK.json` + `zh_CN.json` | 148 | **27** |
+| BOCCHI | `Translations/{en,zh}/*.json`（各 23 文件） | 709 | 0（完整） |
+| Henchman | `Localization/{de,en,fr,jp,ko,tw,zh}/*.json`（各 16 文件） | 237 | 0（完整） |
+| Aetherphone | `Localization/{de,en,…}.json` —— **没有 zh** | 6739 | 全部（等于没有中文本地化） |
+
+- 形态不统一：**目录分语言**（`en-US/`、`en/`）与**单文件分语言**（`en.json`、`en_UK.json`）两种；
+  语言代码有 `en-US/zh-CN`、`en/zh`、`en_UK/zh_CN` 三种写法；中文文件可能**根本不存在**（Aetherphone）。
+- 待做的方案（A）：新增「插件自带本地化文件」补丁目标——从英文侧读出**中文侧缺失的键**→走现有翻译通道→
+  合并写回中文侧文件（备份 / 还原 / 更新后重打都沿用补丁状态那套；用备份里的「原始中文」判断缺失，避免打过之后
+  把自己写进去的键当成上游译文而不再补）。范围建议：**只补「已经自带中文变体」的插件**（AutoDuty、PetRenamer），
+  没有中文文件的（Aetherphone）先不动——那是替插件发明一种它可能不支持的语言。
