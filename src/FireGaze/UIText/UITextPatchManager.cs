@@ -140,10 +140,20 @@ internal sealed class UITextPatchManager
     ///     否则抽到的是 <c>译文###原文</c> 或中文资源值，会把包里好好的条目当成「原文没了」整批清掉。
     ///     <paramref name="note" /> 非空时是一句给人看的说明。
     /// </summary>
-    public List<string> ExtractionSourceOf(InstalledPluginEntry entry, out string note)
+    public List<string> ExtractionSourceOf(InstalledPluginEntry entry, out string note, out List<string> searchDirectories)
     {
         note = string.Empty;
+        searchDirectories = [];
         var dllPath = entry.DLLPath ?? string.Empty;
+
+        // 原插件目录要进 resolver 搜索路径：抽取源可能是 uitrans/backups 里的备份，
+        // 跨程序集的特性参数类型（如 Basic 里的枚举）得去插件目录找（2026-10-02 ARSR 实测）。
+        var pluginDirectory = string.IsNullOrEmpty(dllPath) ? null : Path.GetDirectoryName(dllPath);
+        if (!string.IsNullOrEmpty(pluginDirectory) && Directory.Exists(pluginDirectory))
+        {
+            searchDirectories.Add(pluginDirectory);
+        }
+
         var paths = UITextRules.ResolveCompanions(dllPath, entry.InternalName);
         if (paths.Count == 0)
         {

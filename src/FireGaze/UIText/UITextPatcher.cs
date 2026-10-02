@@ -59,7 +59,18 @@ internal static class UITextPatcher
     ///     把 <paramref name="sourcePath" /> 打上补丁写到 <paramref name="targetPath" />（可以是同一个文件，
     ///     调用方负责先备份；这里只保证「先写临时文件再替换」不会留半截 DLL）。
     /// </summary>
-    public static UITextPatchOutcome Patch(string sourcePath, string targetPath, UITextPack pack, string? pluginVersion = null)
+    /// <remarks>
+    ///     <paramref name="searchDirectories" /> 是给程序集解析器的补充搜索目录：
+    ///     源文件是 <c>uitrans/backups</c> 里的备份时要传**原插件目录**，
+    ///     否则特性的跨程序集参数类型（ARSR 的 <c>CombatType</c> 在 <c>RotationSolver.Basic.dll</c>）解析不了，
+    ///     命名参数改不动（2026-10-02）。
+    /// </remarks>
+    public static UITextPatchOutcome Patch(
+        string sourcePath,
+        string targetPath,
+        UITextPack pack,
+        string? pluginVersion = null,
+        IReadOnlyList<string>? searchDirectories = null)
     {
         var outcome = new UITextPatchOutcome();
         var map = new Dictionary<string, UITextPackEntry>(StringComparer.Ordinal);
@@ -108,7 +119,7 @@ internal static class UITextPatcher
         var tempPath = targetPath + ".fguitext.tmp";
         try
         {
-            using (var module = ModuleDefMD.Load(sourcePath))
+            using (var module = UIStringExtractor.LoadModule(sourcePath, searchDirectories))
             {
                 // ① 内嵌本地化资源（.resx / ResourceManager）：按「容器 + key」改值。
                 //    只动主程序集的内嵌容器：官方 zh 卫星优先（ResourceManager 的查找顺序），
@@ -233,6 +244,18 @@ internal static class UITextPatcher
                 for (var i = 0; i < arguments.Count; i++)
                 {
                     arguments[i] = PatchAttributeArgument(arguments[i], attributeMap, seen, outcome);
+                }
+
+                // 命名参数：与抽取端同一份白名单（ARSR 的 [RotationConfig(…, Name = "…")] 这类）。
+                // CANamedArgument 是引用类型，直接改它的 Argument 属性即可（CAArgument 是结构体，返回值得写回）。
+                foreach (var named in attribute.NamedArguments)
+                {
+                    if (!UITextRules.IsUINamedArgument(named.Name?.String))
+                    {
+                        continue;
+                    }
+
+                    named.Argument = PatchAttributeArgument(named.Argument, attributeMap, seen, outcome);
                 }
             }
         }

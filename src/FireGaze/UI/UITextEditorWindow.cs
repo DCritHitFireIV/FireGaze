@@ -244,9 +244,9 @@ internal sealed class UITextEditorWindow : Window
 
         // 盘上是我们自己的补丁时一定要改读原始备份：对着补丁后的 DLL 抽到的是「译文###原文」，
         // 会把包里好好的条目当成「原文没了」整批清掉。
-        var sources = this.patches.ExtractionSourceOf(this.entry, out var note);
+        var sources = this.patches.ExtractionSourceOf(this.entry, out var note, out var searchDirectories);
         this.extractionNote = note;
-        this.extractionTask = Task.Run(() => UIStringExtractor.ExtractMany(sources));
+        this.extractionTask = Task.Run(() => UIStringExtractor.ExtractMany(sources, searchDirectories));
     }
 
     private void PollExtraction()

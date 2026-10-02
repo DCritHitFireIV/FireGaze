@@ -139,6 +139,47 @@ internal static class UITextRules
         return uiAttributes!.Contains(name);
     }
 
+    /// <summary>
+    ///     自定义特性的**命名参数**（Property / Field）里哪些名字算界面文本。
+    /// </summary>
+    /// <remarks>
+    ///     ARSR 的 <c>[RotationConfig(CombatType.PvE, Name = "…")]</c> 就是这种形态（2026-10-02 用户实测漏翻）。
+    ///     其余名字（Path / Id / Command / Version…）多是键与标识，一律不碰。
+    /// </remarks>
+    private static readonly string[] UINamedArgumentNames =
+    [
+        "Name",
+        "Text",
+        "Label",
+        "Title",
+        "Caption",
+        "Heading",
+        "Description",
+        "Tooltip",
+        "Hint",
+        "DisplayName",
+        "DisplayText",
+    ];
+
+    /// <summary>命名参数名是否算界面文本（大小写不敏感）。</summary>
+    public static bool IsUINamedArgument(string? name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            return false;
+        }
+
+        foreach (var candidate in UINamedArgumentNames)
+        {
+            if (string.Equals(candidate, name, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /// <summary>测试与诊断用：当前加载进来的伴生名单。</summary>
     public static IReadOnlyDictionary<string, string[]> LoadedCompanions
     {

@@ -30,12 +30,12 @@ public static class UIStringExtractor
     /// <summary>
     ///     抽取一个程序集；读不出来（加壳 / 加密 / 不是 .NET 程序集）时返回带 <see cref="UITextExtraction.Error" /> 的结果。
     /// </summary>
-    public static UITextExtraction Extract(string assemblyPath)
+    public static UITextExtraction Extract(string assemblyPath, IReadOnlyList<string>? searchDirectories = null)
     {
         try
         {
             var loadWatch = Stopwatch.StartNew();
-            using var module = ModuleDefMD.Load(assemblyPath);
+            using var module = LoadModule(assemblyPath, searchDirectories);
             Trace?.Invoke($"[load] {Path.GetFileName(assemblyPath)} {loadWatch.ElapsedMilliseconds} ms，类型 {module.Types.Count} 个");
             loadWatch.Restart();
             var result = new Scanner(module, assemblyPath).Run();
@@ -53,6 +53,48 @@ public static class UIStringExtractor
     }
 
     /// <summary>
+    ///     加载程序集。**必须**用带程序集解析器的 <see cref="ModuleContext" />（探针 / 插件共用这一份）。
+    /// </summary>
+    /// <remarks>
+    ///     dnlib 无参构造的 <c>ModuleContext.Resolver</c> 是 NullResolver，读取自定义特性时
+    ///     跨程序集的参数类型（ARSR 的 <c>CombatType</c> 枚举定义在 <c>RotationSolver.Basic.dll</c>）
+    ///     解析不出来 → 整个特性 blob 弃读（fixed / named 全丢、<c>IsRawBlob=true</c>），
+    ///     界面文本就抽不到（2026-10-02 用户实测「Use the balance Opener…」一直英文）。
+    ///     把 DLL 所在目录加进搜索路径后，枚举底层类型 / 构造函数签名都能按需解析（实测 16/16 读出）。
+    ///     打补丁侧（<see cref="UITextPatcher" />）也走这里——否则重新序列化特性时同样解析不了。
+    /// </remarks>
+    public static ModuleDefMD LoadModule(string assemblyPath, IReadOnlyList<string>? searchDirectories = null)
+    {
+        var resolver = new AssemblyResolver();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        AddSearchPath(resolver, seen, Path.GetDirectoryName(Path.GetFullPath(assemblyPath)));
+        if (searchDirectories is not null)
+        {
+            foreach (var directory in searchDirectories)
+            {
+                AddSearchPath(resolver, seen, directory);
+            }
+        }
+
+        var context = new ModuleContext(resolver);
+        return ModuleDefMD.Load(assemblyPath, new ModuleCreationOptions(context) { TryToLoadPdbFromDisk = false });
+    }
+
+    private static void AddSearchPath(AssemblyResolver resolver, HashSet<string> seen, string? directory)
+    {
+        if (string.IsNullOrEmpty(directory) || !Directory.Exists(directory))
+        {
+            return;
+        }
+
+        var full = Path.GetFullPath(directory);
+        if (seen.Add(full))
+        {
+            resolver.PreSearchPaths.Add(full);
+        }
+    }
+
+    /// <summary>
     ///     从多个程序集（主程序集 + 伴生程序集）抽取并合并。
     /// </summary>
     /// <remarks>
@@ -60,16 +102,34 @@ public static class UIStringExtractor
     ///     多文件时给 Context 加 <c>[文件名]</c> 前缀，编辑器里能看出这句在哪个程序集。
     ///     单个文件读不出来（加壳等）只跳过它；全部读不出来才算失败。
     /// </remarks>
-    public static UITextExtraction ExtractMany(IReadOnlyList<string> assemblyPaths)
+    public static UITextExtraction ExtractMany(IReadOnlyList<string> assemblyPaths, IReadOnlyList<string>? searchDirectories = null)
     {
         if (assemblyPaths.Count == 0)
         {
             return new UITextExtraction();
         }
 
+        // 搜索目录 = 各文件所在目录 + 调用方补充的目录。
+        // 备份抽取（盘上是我们的补丁，读 uitrans/backups）必须把**原插件目录**也带进来，
+        // 否则跨程序集的特性参数类型（ARSR 的 CombatType 在 RotationSolver.Basic.dll）解析不了。
+        var search = new List<string>();
+        foreach (var path in assemblyPaths)
+        {
+            var directory = Path.GetDirectoryName(Path.GetFullPath(path));
+            if (!string.IsNullOrEmpty(directory))
+            {
+                search.Add(directory);
+            }
+        }
+
+        if (searchDirectories is not null)
+        {
+            search.AddRange(searchDirectories);
+        }
+
         if (assemblyPaths.Count == 1)
         {
-            return Extract(assemblyPaths[0]);
+            return Extract(assemblyPaths[0], search);
         }
 
         var entries = new List<UITextEntry>();
@@ -84,7 +144,7 @@ public static class UIStringExtractor
 
         foreach (var path in assemblyPaths)
         {
-            var single = Extract(path);
+            var single = Extract(path, search);
             if (single.Error is not null)
             {
                 errors.Add($"{Path.GetFileName(path)}：{single.Error}");
@@ -2524,6 +2584,30 @@ public static class UIStringExtractor
                                 {
                                     Owner = owner,
                                     Attribute = shortName,
+                                    Value = value,
+                                });
+                            }
+                        }
+                    }
+
+                    // 命名参数（Property / Field）：只收名字明确是界面文本的（UITextRules.IsUINamedArgument）。
+                    // ARSR 的 [RotationConfig(CombatType.PvE, Name = "…")] 就靠这条（2026-10-02 用户实测漏翻）；
+                    // Path / Id / Command / Version 这类名字一律不碰。
+                    foreach (var named in attr.NamedArguments)
+                    {
+                        if (!UITextRules.IsUINamedArgument(named.Name?.String))
+                        {
+                            continue;
+                        }
+
+                        foreach (var value in StringValues(named.Argument))
+                        {
+                            if (LooksTranslatable(value))
+                            {
+                                list.Add(new UITextAttributeItem
+                                {
+                                    Owner = owner,
+                                    Attribute = shortName + "." + named.Name?.String,
                                     Value = value,
                                 });
                             }

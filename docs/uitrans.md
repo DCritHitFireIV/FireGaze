@@ -212,7 +212,17 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   SimpleTweaks 的 `[TweakName/TweakDescription/TweakConfigOption]`（466 条）。
 - 识别规则（`UITextRules.IsUIAttribute`）：`System.ComponentModel` 的 Description / Category / Display / Tooltip / Label；
   短名以 `UI`/`Ui` 开头且以 `Attribute` 结尾（UIAttribute / UiTextAttribute…）；以及 `uit-rules.json` 的
-  `uiAttributes` 名单（SimpleTweaks 那套）。**只翻构造函数参数**，命名参数常是键/ID，一概不碰。
+  `uiAttributes` 名单（SimpleTweaks 那套 + ARSR 的 `RotationConfigAttribute`）。
+- **构造函数参数**全收（值过 `LooksTranslatable`）；**命名参数**按名字白名单收
+  （`UITextRules.IsUINamedArgument`：Name / Text / Label / Title / Caption / Heading / Description / Tooltip / Hint /
+  DisplayName / DisplayText）——`[RotationConfig(CombatType.PvE, Name = "…")]` 这种界面标题靠它（2026-10-02 用户实测漏翻）；
+  Path / Id / Command / Version 这类名字是键与标识，一律不碰。
+- **解析器坑（血教训，勿回退）**：dnlib 无参构造的 `ModuleContext.Resolver` 是 NullResolver——
+  跨程序集的参数类型解析不出来，**整个特性 blob 弃读**（`IsRawBlob=true`，fixed / named 全丢）。
+  ARSR 主 DLL 的 `CombatType`（定义在 `RotationSolver.Basic.dll`）就是这种：它名下 500+ 条配置名一直没进包。
+  修法：`UIStringExtractor.LoadModule` 一律用 `new ModuleContext(new AssemblyResolver())` + `PreSearchPaths` 指向 DLL 目录；
+  **备份抽取时**（源在 `uitrans/backups`）还要把原插件目录一起带进来
+  （`ExtractionSourceOf` 的 out `searchDirectories` → `ExtractMany` / `UITextPatcher.Patch` 都有这个可选参数）。
 - 包格式新增 `attributes` 段（身份 = 字符串值），编辑器里显示为「属性」行；
   打补丁用 dnlib 改特性参数（`CAArgument` 是**结构体**，必须把返回值写回列表——只改参数副本会「打成但文件没变」）。
 - SimpleTweaks 的 fallback 语义天然成立：官方 zh 按「类名 / Name」做 key，属性值只是 fallback，

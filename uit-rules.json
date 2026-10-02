@@ -1,7 +1,7 @@
 {
   "_comment": "插件侧静态抽取/打补丁的规则文件（随插件打包；插件端与 CI 共用同一份）。",
   "_companions": "多程序集插件：内部名 → 同目录里属于这个插件自己的 DLL 文件名（大小写不敏感）。通用规则：与本插件主 DLL 同名前缀的（Main.Something.dll）自动算伴生。",
-  "_uiAttributes": "自定义特性里的界面文本：特性短名名单（如 SimpleTweaks 的 TweakName/TweakDescription/TweakConfigOption）。ARSR 那类以 UI/Ui 开头的特性是内建规则认的，不用写在这里。",
+  "_uiAttributes": "自定义特性里的界面文本：特性短名名单（如 SimpleTweaks 的 TweakName/TweakDescription/TweakConfigOption）。ARSR 那类以 UI/Ui 开头的特性是内建规则认的，不用写在这里；名字不在内建规则里的（如 RotationConfigAttribute）写这里。特性文本可以是构造函数参数，也可以是命名参数（Name / Text / Description… 见 UITextRules.IsUINamedArgument）。",
   "companions": {
     "ascended-rotationsolverreborn": ["RotationSolver.Basic.dll"]
   },
@@ -9,6 +9,7 @@
     "TweakNameAttribute",
     "TweakDescriptionAttribute",
     "TweakConfigOptionAttribute",
-    "ChangelogAttribute"
+    "ChangelogAttribute",
+    "RotationConfigAttribute"
   ]
 }
