@@ -2,6 +2,8 @@ using System.Collections;
 using System.Resources;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
+using dnlib.DotNet.Pdb;
+using dnlib.DotNet.Writer;
 
 namespace FireGaze.UIText;
 
@@ -224,7 +226,7 @@ internal static class UITextPatcher
 
                 // 版本号顺手写进注释？不需要——但保留参数是为了将来做「版本戳」用
                 _ = pluginVersion;
-                module.Write(tempPath);
+                WriteModule(module, tempPath);
             }
 
             File.Move(tempPath, targetPath, overwrite: true);
@@ -362,7 +364,7 @@ internal static class UITextPatcher
                     return outcome;
                 }
 
-                module.Write(tempPath);
+                WriteModule(module, tempPath);
             }
 
             File.Move(tempPath, targetPath, overwrite: true);
@@ -678,6 +680,31 @@ internal static class UITextPatcher
                 // 重写不了就整张容器跳过（key 会在收尾时进 Missing，让人知道没打成）
                 outcome.Missing.Add($"资源：{container}（重写失败：{e.Message}）");
             }
+        }
+    }
+
+    /// <summary>
+    ///     写回模块：有 PDB 状态时按「内嵌可移植 PDB」写（保持调试目录）——
+    ///     插件里用 <c>StackFrame.GetFileName()</c> 的代码靠它，丢了会 NRE（Collections 实测）。
+    ///     写 PDB 失败就退回不带 PDB 写，保证补丁能打上。
+    /// </summary>
+    private static void WriteModule(ModuleDefMD module, string tempPath)
+    {
+        var options = new ModuleWriterOptions(module);
+        if (module.PdbState is { } pdb)
+        {
+            pdb.PdbFileKind = PdbFileKind.EmbeddedPortablePDB;
+            options.WritePdb = true;
+        }
+
+        try
+        {
+            module.Write(tempPath, options);
+        }
+        catch when (options.WritePdb)
+        {
+            TryDelete(tempPath);
+            module.Write(tempPath, new ModuleWriterOptions(module));
         }
     }
 

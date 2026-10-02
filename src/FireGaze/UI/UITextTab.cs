@@ -374,7 +374,7 @@ internal sealed class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("遇到问题、想提建议，或某个插件汉化不对——直接在这里反馈。\n可以附带诊断日志（已脱敏），无需 GitHub 账号。");
+            ImGui.SetTooltip("遇到问题、想提建议——直接在这里反馈。\n可以附带诊断日志（已脱敏），无需 GitHub 账号。");
         }
     }
 
@@ -473,19 +473,44 @@ internal sealed class UITextTab
     }
 
     /// <summary>
-    ///     按钮列要留多宽：按「一行里可能出现的最宽按钮组合」算（2026-10-03 用户要求按钮不要换行）。
-    ///     组合覆盖：主按钮（写入并重载）+ 打开/设置 + 启用插件 + 还原原文 + 一键上传。
+    ///     按钮列要留多宽：互斥后最多 4 个按钮（主按钮 / 打开或启用 / 还原原文 / 一键上传），
+    ///     前两个是固定槽宽（保证各行按钮对齐），后两个标签固定。
     /// </summary>
     private static float ActionsColumnWidth()
     {
-        string[] widest = ["写入并重载", "设置", "启用插件", "还原原文", "一键上传"];
         var width = (ImGui.GetStyle().CellPadding.X * 2f) + 8f;
-        foreach (var label in widest)
+        width += MainActionSlotWidth() + 12f;
+        width += OpenOrEnableSlotWidth() + 12f;
+        width += UiHelpers.LabelWidth("还原原文") + 12f;
+        width += UiHelpers.LabelWidth("一键上传") + 10f;
+        return width;
+    }
+
+    /// <summary>主按钮槽宽（写入并重载 / 一键汉化 / 重试三个名字里最宽的）。</summary>
+    private static float MainActionSlotWidth() => MaxLabelWidth("写入并重载", "一键汉化", "重试");
+
+    /// <summary>第二槽宽：「启用插件」与「打开/设置」互斥，取最宽的一个，后面的按钮才能对齐。</summary>
+    private static float OpenOrEnableSlotWidth() => MaxLabelWidth("启用插件", "设置", "打开");
+
+    private static float MaxLabelWidth(params string[] labels) => labels.Max(UiHelpers.LabelWidth);
+
+    /// <summary>启用按钮（绿色）：未加载的插件显示；与「打开/设置」互斥，两名字共用一个固定槽宽。</summary>
+    private void DrawEnableButton(InstalledPluginEntry plugin, bool busy, float width)
+    {
+        ImGui.BeginDisabled(busy || this.enabling.ContainsKey(plugin.InternalName));
+        UiHelpers.PushEnableButton();
+        var clicked = ImGui.Button("启用插件###UITextEnablePlugin", new Vector2(width, 0));
+        UiHelpers.PopEnableButton();
+        ImGui.EndDisabled();
+        if (clicked)
         {
-            width += UiHelpers.LabelWidth(label) + 12f;
+            this.StartEnable(plugin);
         }
 
-        return width;
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip("把这个插件启用起来（与插件安装器里的「启用」同一条路）；加载后就能看到汉化效果。");
+        }
     }
 
     private bool MatchesFilter(InstalledPluginEntry entry)
@@ -641,8 +666,19 @@ internal sealed class UITextTab
     {
         if (info is { DoNotLocalize: true })
         {
+            // 不汉化 ≠ 不能启用：未加载的也给它一个启用入口（与已加载插件互斥的同一槽位）
+            if (!plugin.IsLoaded)
+            {
+                this.DrawEnableButton(plugin, busy, OpenOrEnableSlotWidth());
+            }
+
             if (info.HasBackup)
             {
+                if (!plugin.IsLoaded)
+                {
+                    UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("还原原文"), 12);
+                }
+
                 if (ImGui.Button("还原原文"))
                 {
                     this.RestoreNow(plugin);
@@ -660,7 +696,7 @@ internal sealed class UITextTab
         if (running)
         {
             ImGui.BeginDisabled();
-            ImGui.Button("一键汉化");
+            ImGui.Button("一键汉化", new Vector2(MainActionSlotWidth(), 0));
             ImGui.EndDisabled();
             if (this.run is { CanCancel: true } active)
             {
@@ -699,7 +735,7 @@ internal sealed class UITextTab
                 UiHelpers.PushPrimaryButton();
             }
 
-            if (ImGui.Button(label))
+            if (ImGui.Button(label, new Vector2(MainActionSlotWidth(), 0)))
             {
                 this.StartOneClick(plugin);
             }
@@ -722,29 +758,16 @@ internal sealed class UITextTab
                             : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
             }
 
-            // 打开/设置：始终显示；汉化完成后它接管主色（用户一眼知道接下来通常点这里）。
-            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("打开"), 12);
-            this.DrawOpenPluginButton(plugin, info, primary: fullyLocalized);
-
-            // 已经打上补丁、但插件没在跑（停用 / 还没加载）：直接给一个启用的入口（2026-10-02 用户要求）。
-            // 待确认（PendingReload）也算：插件没加载时打上的补丁一直是待确认，启用后 CheckPending 会转正。
-            if (!plugin.IsLoaded
-                && info is { Patch: UITextPatchStatus.Applied or UITextPatchStatus.PendingReload })
+            // 第二槽位：**未加载 → 启用插件；已加载 → 打开/设置**，两者互斥（用户要求：不允许两个同时亮），
+            // 且用同一个固定宽度——不管哪个按钮，后面的「还原原文 / 一键上传」都能对齐。
+            UiHelpers.SameLineOrWrap(OpenOrEnableSlotWidth(), 12);
+            if (!plugin.IsLoaded)
             {
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("启用插件"), 12);
-                ImGui.BeginDisabled(busy || this.enabling.ContainsKey(plugin.InternalName));
-                UiHelpers.PushEnableButton();
-                var enableClicked = ImGui.Button("启用插件###UITextEnablePlugin");
-                UiHelpers.PopEnableButton();
-                ImGui.EndDisabled();
-                if (enableClicked)
-                {
-                    this.StartEnable(plugin);
-                }
-                if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-                {
-                    ImGui.SetTooltip("把这个插件启用起来（与插件安装器里的「启用」同一条路）；加载后就能看到汉化效果。");
-                }
+                this.DrawEnableButton(plugin, busy, OpenOrEnableSlotWidth());
+            }
+            else
+            {
+                this.DrawOpenPluginButton(plugin, info, primary: fullyLocalized, width: OpenOrEnableSlotWidth());
             }
 
             if (info is { HasBackup: true })
@@ -805,7 +828,10 @@ internal sealed class UITextTab
             {
                 // 插件已加载：它读的就是打过补丁的文件（没打过就无所谓），待确认状态直接转正
                 this.patches.MarkVerified(entry.InternalName);
-                message += " 补丁已生效。";
+                if (this.patches.HasBackup(entry))
+                {
+                    message += " 补丁已生效。";
+                }
             }
 
             this.notes[entry.InternalName] = new RowNote { Kind = ok ? NoteKind.Good : NoteKind.Bad, Text = message };
@@ -979,7 +1005,7 @@ internal sealed class UITextTab
     ///     和官方插件安装器的按钮同一套机制（反射 <c>LocalPlugin.DalamudInterface.LocalUiBuilder</c>；
     ///     不能强转 <c>IExposedPlugin</c>——那不是同一个对象）。
     /// </summary>
-    private void DrawOpenPluginButton(InstalledPluginEntry plugin, RowInfo? info, bool primary = false)
+    private void DrawOpenPluginButton(InstalledPluginEntry plugin, RowInfo? info, bool primary = false, float width = 0f)
     {
         var hasMain = info?.HasMainUI ?? false;
         var hasConfig = info?.HasConfigUI ?? false;
@@ -993,7 +1019,7 @@ internal sealed class UITextTab
             UiHelpers.PushPrimaryButton();
         }
 
-        if (ImGui.Button(label))
+        if (ImGui.Button(label, width > 0f ? new Vector2(width, 0) : default))
         {
             try
             {
@@ -1859,13 +1885,18 @@ internal sealed class UITextTab
             return;
         }
 
-        ImGui.TextWrapped("遇到问题、想提建议，或某个插件汉化不对——写在这里直接提交（匿名，不需要 GitHub 账号）。");
+        ImGui.TextWrapped("遇到问题或想提建议——写在这里直接提交（匿名，不需要 GitHub 账号）。");
         ImGui.TextDisabled("会带上 FireGaze / 卫月版本与时间；勾选「附带诊断日志」能帮我们定位（路径与密钥已脱敏）。");
         ImGui.Spacing();
 
-        var categories = new[] { "问题", "建议", "汉化不对", "其他" };
+        var categories = new[] { "问题", "建议", "其他" };
         ImGui.SetNextItemWidth(150);
         ImGui.Combo("分类###UITextFeedbackCategory", ref this.feedbackCategory, categories, categories.Length);
+
+        // 引导贡献翻译（2026-10-03 用户要求：反馈里不再单列「汉化不对」）
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "想修正或补充某个插件的译文？到「插件汉化 → 该插件 → 编辑校对」改好后，用「更多 → 提交人工译文到公共库」直接贡献——比反馈更快被收录。");
 
         ImGui.SetNextItemWidth(-1);
         ImGui.InputTextMultiline("###UITextFeedbackText", ref this.feedbackText, 4000, new Vector2(-1, 130));
@@ -1950,7 +1981,7 @@ internal sealed class UITextTab
         this.feedbackSending = true;
         this.feedbackStatus = "正在发送…";
         this.feedbackStatusError = false;
-        var categories = new[] { "问题", "建议", "汉化不对", "其他" };
+        var categories = new[] { "问题", "建议", "其他" };
         var category = categories[Math.Clamp(this.feedbackCategory, 0, categories.Length - 1)];
         var text = this.feedbackText.Trim();
         var attachLog = this.feedbackAttachLog;

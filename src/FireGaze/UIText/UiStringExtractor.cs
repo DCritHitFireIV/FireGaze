@@ -91,7 +91,17 @@ public static class UIStringExtractor
         }
 
         var context = new ModuleContext(resolver);
-        return ModuleDefMD.Load(assemblyPath, new ModuleCreationOptions(context) { TryToLoadPdbFromDisk = false });
+        var creation = new ModuleCreationOptions(context) { TryToLoadPdbFromDisk = false };
+
+        // dnlib 不认 PE 里内嵌的 PDB；先把它解出来喂进去，否则写出时会把调试目录丢掉
+        // （插件里 StackFrame.GetFileName() 会拿到 null——Collections 2026-10-03 实测崩在 Dev.Log）。
+        var embeddedPdb = Internal.EmbeddedPdb.TryRead(assemblyPath);
+        if (embeddedPdb is not null)
+        {
+            creation.PdbFileOrData = embeddedPdb;
+        }
+
+        return ModuleDefMD.Load(assemblyPath, creation);
     }
 
     private static void AddSearchPath(AssemblyResolver resolver, HashSet<string> seen, string? directory)
