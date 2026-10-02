@@ -871,31 +871,80 @@ internal sealed class UITextTab
             return;
         }
 
-        var payload = System.Text.Json.JsonSerializer.Serialize(
-            new { type = "uit-contribution", plugin = entry.InternalName, entries, resources, attributes },
-            new System.Text.Json.JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            });
-        // 标题里带一个英文 "contributions"：兼容线上旧版 Worker 的关键词校验（2026-10-02 修 HTTP 400 的根因）
-        var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{total}\n\n";
-        var body = header + "```json\n" + payload + "\n```\n";
-        var title = $"[译文贡献] {entry.InternalName} · {total} 条";
+        // 本地体检（2026-10-03 用户要求）：不健康的条目不上传、列在确认框里让用户先修。
+        var problems = new List<UITextQuality.Problem>();
+        var healthyEntries = FilterHealthy(entries, e => e.Original, e => e.Translated, e => UITextQuality.Label(e.Original), problems);
+        var healthyResources = FilterHealthy(resources, e => e.Original, e => e.Translated, e => "资源 · " + UITextQuality.Label(e.Original), problems);
+        var healthyAttributes = FilterHealthy(attributes, e => e.Original, e => e.Translated, e => "属性 · " + UITextQuality.Label(e.Original), problems);
+        var uploadable = healthyEntries.Count + healthyResources.Count + healthyAttributes.Count;
+
+        string title;
+        string body;
+        if (uploadable == 0)
+        {
+            title = string.Empty;
+            body = string.Empty;
+            this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Bad, Text = $"本地检测：{problems.Count} 条都有问题，没有上传（看弹窗）。" };
+        }
+        else
+        {
+            var payload = System.Text.Json.JsonSerializer.Serialize(
+                new { type = "uit-contribution", plugin = entry.InternalName, entries = healthyEntries, resources = healthyResources, attributes = healthyAttributes },
+                new System.Text.Json.JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                });
+            // 标题里带一个英文 "contributions"：兼容线上旧版 Worker 的关键词校验（2026-10-02 修 HTTP 400 的根因）
+            var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{uploadable}\n\n";
+            body = header + "```json\n" + payload + "\n```\n";
+            title = $"[译文贡献] {entry.InternalName} · {uploadable} 条";
+        }
+
+        if (problems.Count > 0)
+        {
+            ActivityLog.Warning("上传检测", $"{entry.InternalName}：{problems.Count} 条没过本地检测，不上传（首个：{problems[0].Label}：{problems[0].Reason}）");
+        }
 
         // 出站内容要有知情与确认（盲评 CF-04/L1）：先把「发什么、去哪、公开性」摊开，再由用户点确认。
         this.pendingUpload = new PendingUpload
         {
             Entry = entry,
-            Total = total,
-            Human = entries.Count(e => e.IsUserSource) + resources.Count(e => e.IsUserSource) + attributes.Count(e => e.IsUserSource),
+            Total = uploadable,
+            Human = healthyEntries.Count(e => e.IsUserSource) + healthyResources.Count(e => e.IsUserSource) + healthyAttributes.Count(e => e.IsUserSource),
             Title = title,
             Body = body,
+            Problems = problems,
         };
         this.uploadModalNeedsOpen = true;
     }
 
-    /// <summary>待确认的上传（确认框用）：条数、人工/机器占比、标题与正文。</summary>
+    /// <summary>把一组条目里健康的挑出来，不健康的记进 <paramref name="problems" />（顺序保持）。</summary>
+    private static List<T> FilterHealthy<T>(
+        List<T> items,
+        Func<T, string> original,
+        Func<T, string> translated,
+        Func<T, string> label,
+        List<UITextQuality.Problem> problems)
+    {
+        var healthy = new List<T>(items.Count);
+        foreach (var item in items)
+        {
+            var reason = UITextQuality.Check(original(item), translated(item));
+            if (reason is null)
+            {
+                healthy.Add(item);
+            }
+            else
+            {
+                problems.Add(new UITextQuality.Problem(label(item), original(item), reason));
+            }
+        }
+
+        return healthy;
+    }
+
+    /// <summary>待确认的上传（确认框用）：条数、人工/机器占比、标题与正文、没过体检的清单。</summary>
     private sealed class PendingUpload
     {
         public InstalledPluginEntry Entry = null!;
@@ -903,6 +952,7 @@ internal sealed class UITextTab
         public int Human;
         public string Title = string.Empty;
         public string Body = string.Empty;
+        public List<UITextQuality.Problem> Problems = [];
     }
 
     private PendingUpload? pendingUpload;
@@ -965,30 +1015,72 @@ internal sealed class UITextTab
             return;
         }
 
-        ImGui.TextWrapped($"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库，之后其他玩家「一键汉化」时能直接用到。");
-        ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只上传原文、译文与代码位置，不带账号信息与 key。");
+        ImGui.TextWrapped(upload.Total > 0
+            ? $"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库，之后其他玩家「一键汉化」时能直接用到。"
+            : $"「{upload.Entry.DisplayName}」的译文都没过本地检测，这次不上传。");
+        if (upload.Total > 0)
+        {
+            ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只上传原文、译文与代码位置，不带账号信息与 key。");
+        }
+
+        // 本地检测结果（2026-10-03）：健康才上传，不健康的列出来让用户先修
+        if (upload.Problems.Count == 0)
+        {
+            ImGui.TextDisabled("本地检测：译文全部通过。");
+        }
+        else
+        {
+            UiHelpers.ColoredText(UiHelpers.Warn, $"本地检测：{upload.Problems.Count} 条没过，不会上传——");
+            var listHeight = (Math.Min(upload.Problems.Count, 8) * ImGui.GetTextLineHeightWithSpacing()) + 10f;
+            if (ImGui.BeginChild("###UITextUploadProblems", new Vector2(0, listHeight)))
+            {
+                foreach (var problem in upload.Problems.Take(60))
+                {
+                    ImGui.TextWrapped($"{problem.Label}：{problem.Reason}");
+                }
+
+                if (upload.Problems.Count > 60)
+                {
+                    ImGui.TextDisabled($"…还有 {upload.Problems.Count - 60} 条（去「编辑校对」里按原文搜）");
+                }
+            }
+
+            ImGui.EndChild();
+            ImGui.TextDisabled("修好后（或在编辑器里标「不翻」）再点一次「一键上传」。");
+        }
+
         ImGui.Spacing();
         ImGui.TextWrapped("不想分享的条目，可以先到「编辑校对」里改写或标「不翻」。");
         ImGui.Separator();
-        if (ImGui.Button("上传", new Vector2(110, 0)))
+        if (upload.Total > 0)
         {
-            var confirmed = upload;
+            if (ImGui.Button($"上传 {upload.Total} 条", new Vector2(110, 0)))
+            {
+                var confirmed = upload;
+                this.pendingUpload = null;
+                UiHelpers.ClosePopupAndEnd();
+                this.RunUpload(confirmed);
+                return;
+            }
+
+            ImGui.SameLine();
+            if (ImGui.Button("取消", new Vector2(90, 0)))
+            {
+                this.pendingUpload = null;
+                UiHelpers.ClosePopupAndEnd();
+                return;
+            }
+
+            // 出站内容默认焦点在「取消」
+            ImGui.SetItemDefaultFocus();
+        }
+        else if (ImGui.Button("关闭", new Vector2(90, 0)))
+        {
             this.pendingUpload = null;
             UiHelpers.ClosePopupAndEnd();
-            this.RunUpload(confirmed);
             return;
         }
 
-        ImGui.SameLine();
-        if (ImGui.Button("取消", new Vector2(90, 0)))
-        {
-            this.pendingUpload = null;
-            UiHelpers.ClosePopupAndEnd();
-            return;
-        }
-
-        // 出站内容默认焦点在「取消」
-        ImGui.SetItemDefaultFocus();
         ImGui.EndPopup();
     }
 

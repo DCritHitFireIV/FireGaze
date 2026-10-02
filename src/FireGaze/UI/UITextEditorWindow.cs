@@ -1436,22 +1436,39 @@ internal sealed class UITextEditorWindow : Window
 
         this.SaveIfDirty(force: true);
 
+        // 本地体检（2026-10-03 用户要求）：不过的条目不提交、在状态行点名。
+        var problems = new List<UITextQuality.Problem>();
+        bool Healthy(string kind, string original, string translated)
+        {
+            var reason = UITextQuality.Check(original, translated);
+            if (reason is null)
+            {
+                return true;
+            }
+
+            problems.Add(new UITextQuality.Problem(kind + " · " + UITextQuality.Label(original), original, reason));
+            return false;
+        }
+
         var entries = this.pack.Entries
-            .Where(e => e.IsUserSource && e.HasTranslation)
+            .Where(e => e.IsUserSource && e.HasTranslation && Healthy("条目", e.Original, e.Translated))
             .Select(e => new { e.Original, e.Translated, Context = e.Context ?? string.Empty })
             .ToList();
         var resources = this.pack.Resources
-            .Where(r => r.IsUserSource && r.HasTranslation)
+            .Where(r => r.IsUserSource && r.HasTranslation && Healthy("资源", r.Original, r.Translated))
             .Select(r => new { r.Container, r.Key, r.Original, r.Translated })
             .ToList();
         var attributes = this.pack.Attributes
-            .Where(a => a.IsUserSource && a.HasTranslation)
+            .Where(a => a.IsUserSource && a.HasTranslation && Healthy("属性", a.Original, a.Translated))
             .Select(a => new { a.Original, a.Translated })
             .ToList();
         var total = entries.Count + resources.Count + attributes.Count;
         if (total == 0)
         {
-            this.SetStatus("还没有人工译文可提交：先在列表里改几条（改过的会标成人工）再来。", false);
+            this.SetStatus(problems.Count == 0
+                ? "还没有人工译文可提交：先在列表里改几条（改过的会标成人工）再来。"
+                : $"本地检测：{problems.Count} 条都没过，先修好或标「不翻」再提交（首条：{problems[0].Label}：{problems[0].Reason}）",
+                problems.Count > 0);
             return;
         }
 
@@ -1465,6 +1482,9 @@ internal sealed class UITextEditorWindow : Window
         var title = $"[译文贡献] {this.entry.InternalName} · {total} 条";
         var internalName = this.entry.InternalName;
         var storeDirectory = this.store.DirectoryPath;
+        var problemNote = problems.Count == 0
+            ? string.Empty
+            : $"（另有 {problems.Count} 条没过本地检测、未提交：{problems[0].Label}：{problems[0].Reason}）";
 
         this.SetStatus($"正在提交 {total} 条译文…", false);
         _ = Task.Run(async () =>
@@ -1473,7 +1493,7 @@ internal sealed class UITextEditorWindow : Window
             {
                 var result = await ContributeSender.SubmitAsync(internalName, total, title, body, storeDirectory).ConfigureAwait(false);
                 await Plugin.Framework.RunOnFrameworkThread(
-                    () => this.SetStatus(result.Message, result.Severity == ContributeSendSeverity.Bad)).ConfigureAwait(false);
+                    () => this.SetStatus(result.Message + problemNote, result.Severity == ContributeSendSeverity.Bad)).ConfigureAwait(false);
             }
             catch (Exception e)
             {
