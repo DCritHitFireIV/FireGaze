@@ -464,3 +464,36 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   直连全部成功（9 次）。现在 LLM 通道有两个客户端（`ClientDirect` / `ClientViaProxy`），
   直连抛连接层异常才换代理；批两次尝试失败还会**拆成两半重试**（只拆一层，防请求数爆炸）；
   失败现场（`finish_reason` / content 长度与开头）写进日志，下次不用猜。
+
+## 抽取器：继承链上的 UI 属性 getter + 字典键守卫（2026-10-02，1.2.0.80）
+
+用户报 Allagan Tools（InventoryTools）「Can the item be sourced via botany?」等一批没翻。反编译定位到两处抽取器缺口：
+
+- **① 基类 / 继承链上的属性 getter 没被认可**：`ItemInfoRenderer<T>` 声明 `public abstract string SingularName/HelpText`，
+  `GenericHasSourceCategoryFilter : BooleanFilter` 覆写 `HelpText`（基类抽象属性），`ItemXxxRenderer` 覆写基类属性——
+  旧规则只查**自己直接实现**的接口，于是 `Can the item be sourced via `、`Logging (Hidden)`、
+  `Can the item be gathered from a hidden logging node?` 整批落在「没有流向 UI 调用」。
+  修法：`IsInterfaceUITextGetter` 改为 ① 沿**继承链**找声明该属性的接口（含基类）；② 覆写的是基类上的**同名抽象 / 虚属性**也算
+  （名字白名单不变：SingularName / PluralName / HelpText / Description / …）。
+  实测 InventoryTools UI 候选 **65 → 318**。
+
+- **② 字典键的硬键守卫对泛型参数失效**（顺带查出的真 bug）：`dictionary["Dye"] = "染料"` 走
+  `Dictionary<string,string>::set_Item`，其参数在 dnlib 里读出来是裸泛型名 **`TKey`/`TValue`**，
+  而 `IsStringLikeOrGeneric` 只认 `String` / `!0` 记号 → 「第 0 参是键」的判定整条落空。
+  于是插件自带汉化词典的 key（`Dye`/`Stack Size`…）会随着「同文本也出现在某个 UI getter 里」被升成 UI，
+  打上补丁就破坏查表。修法：`ParamTypeNames` 把 `GenericSig` 归一成 `"!" + Number`（`!0`）。
+  实测：`Dye`/`Stack Size` 回到「当集合/字典的键名用…（翻了会破坏查找）」；UI 候选里的词典键清零。
+  fgtest 新增 **Allagan 抽取实证**（本机装着该插件时跑：基类 getter 必须是 UI、`Dye` 必须是硬键；样本找不到自动跳过）。
+
+- **挂账**：`ItemInfoRenderService.GetCategoryName` 的 switch 字面量（`Botany`/`Mining`…）目前仍抽不到——
+  它的返回值经**外部** `String.Concat` 拼进 UI getter 的返回，跨外部拼接调用的 UI 传播还没有实现；
+  同文本若同时被别的 getter 返回（如 `Mining`）会顺带抽到，纯靠 `GetCategoryName` 的（`Botany`）暂缺。
+
+## 列表筛选：只看已启用 + 还原后立即消失（2026-10-02，1.2.0.80）
+
+用户要求：能只看**已启用**、**已汉化**的插件；在「已汉化」视图里一个个「还原原文」时，行要一个个消失。
+
+- 工具栏新增复选框 **「只看已启用」**（按 `IsLoaded` 过滤，session 级、与「只看第三方」并列；悬停说明：
+  在插件管理器里禁用 / 还没加载的不列）。「已汉化」本来就在状态下拉里，两者可叠加。
+- `FinishRun` 现在置 `rowsDirty`：一键汉化 / 还原**跑完立刻重算行状态**，不再等下一个 5 秒刷新——
+  在「已汉化」筛选下点了「还原原文」，那一行会马上消失（逻辑上它已经不是已汉化）。

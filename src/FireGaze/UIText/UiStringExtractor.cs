@@ -2467,10 +2467,12 @@ public static class UIStringExtractor
         }
 
         /// <summary>
-        ///     接口上「明显是给人看的文本」的属性 getter（SingularName / PluralName / HelpText / Description…）。
-        ///     值会被界面框架跨程序集取走，本模块内追不到消费者（Allagan 系的 ItemXxxRenderer 就是这样，
-        ///     2026-10-02 用户实测 Airship Exploration 等漏翻）。只认接口实现 + 强 UI 属性名，
-        ///     不碰普通 Name / Title（那些可能是键名）。
+        ///     「明显是给人看的文本」的属性 getter（SingularName / PluralName / HelpText / Description…）。
+        ///     值会被界面框架跨程序集取走，本模块内追不到消费者（Allagan 系的 ItemXxxRenderer / Filter 就是这样，
+        ///     2026-10-02 用户实测「Can the item be sourced via botany?」「Logging (Hidden)」等漏翻）。
+        ///     认可两种形态：① 自己或**继承链上任意一层**实现了声明这个属性的接口；
+        ///     ② 覆写的是基类上的同名抽象 / 虚属性（抽象属性就是设计给子类提供显示文本的）。
+        ///     名字白名单之外的一律不碰（普通 Name / Key 可能是键名）。
         /// </summary>
         private static bool IsInterfaceUITextGetter(MethodDef method)
         {
@@ -2492,17 +2494,39 @@ public static class UIStringExtractor
                 return false;
             }
 
-            foreach (var interfaceRef in type.Interfaces)
+            // ① 自己或继承链上任意一层实现的接口里声明了这个属性
+            for (var current = type; current is not null; current = current.BaseType?.ResolveTypeDef())
             {
-                var interfaceDef = interfaceRef.Interface?.ResolveTypeDef();
-                if (interfaceDef is null)
+                foreach (var interfaceRef in current.Interfaces)
                 {
-                    continue;
-                }
+                    var interfaceDef = interfaceRef.Interface?.ResolveTypeDef();
+                    if (interfaceDef is null)
+                    {
+                        continue;
+                    }
 
-                foreach (var property in interfaceDef.Properties)
+                    foreach (var property in interfaceDef.Properties)
+                    {
+                        if (string.Equals(property.Name?.String, propertyName, StringComparison.Ordinal))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            // ② 覆写的是基类上的同名抽象 / 虚属性
+            for (var current = type.BaseType?.ResolveTypeDef(); current is not null; current = current.BaseType?.ResolveTypeDef())
+            {
+                foreach (var property in current.Properties)
                 {
-                    if (string.Equals(property.Name?.String, propertyName, StringComparison.Ordinal))
+                    if (!string.Equals(property.Name?.String, propertyName, StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
+                    var getter = property.GetMethod;
+                    if (getter is not null && (getter.IsAbstract || getter.IsVirtual))
                     {
                         return true;
                     }
@@ -2991,7 +3015,10 @@ public static class UIStringExtractor
 
             foreach (var p in sig.Params)
             {
-                result.Add(p.FullName);
+                // 泛型参数（泛型类型的 TKey / TValue、泛型方法的 !!0）在 dnlib 里 FullName 可能只剩裸名字，
+                // 归一成 "!0" 记号——IsStringLikeOrGeneric 认它，否则字典 set_Item 的键判定整条失效
+                //（2026-10-02 实测：Allagan 的词典键因此绕过硬键保护，被当成普通文本升成 UI）。
+                result.Add(p is GenericSig generic ? "!" + generic.Number : p.FullName);
             }
 
             return result;

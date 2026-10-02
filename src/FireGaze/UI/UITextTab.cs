@@ -110,6 +110,9 @@ internal sealed class UITextTab
     private DateTime indexAt = DateTime.MinValue;
     private string search = string.Empty;
     private bool onlyThirdParty;
+
+    /// <summary>只看当前已加载运行的插件（在插件管理器里禁用 / 还没加载的不列）。</summary>
+    private bool onlyEnabled;
     private string expanded = string.Empty;
     private RowFilter filter = RowFilter.All;
 
@@ -226,6 +229,13 @@ internal sealed class UITextTab
         ImGui.Checkbox("只看第三方", ref this.onlyThirdParty);
 
         ImGui.SameLine();
+        ImGui.Checkbox("只看已启用", ref this.onlyEnabled);
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("只列当前已加载运行的插件；在插件管理器里禁用、或还没加载起来的不列。\n（已装但停用的插件不用汉化；想给它打补丁时先启用。）");
+        }
+
+        ImGui.SameLine();
         if (ImGui.Button("翻译设置…"))
         {
             this.settings.IsOpen = true;
@@ -317,6 +327,7 @@ internal sealed class UITextTab
         var filterText = this.search.Trim();
         var items = this.index.All
             .Where(e => !this.onlyThirdParty || e.IsThirdParty)
+            .Where(e => !this.onlyEnabled || e.IsLoaded)
             .Where(e => filterText.Length == 0
                         || e.DisplayName.Contains(filterText, StringComparison.OrdinalIgnoreCase)
                         || e.InternalName.Contains(filterText, StringComparison.OrdinalIgnoreCase))
@@ -2104,6 +2115,9 @@ internal sealed class UITextTab
         this.runs.Exit(run.InternalName);
         run.CanCancel = false;
         run.Finished = true;
+
+        // 跑完立刻重算行状态：还原 / 汉化后，筛选（如「已汉化」）要马上反映出来，不等下一个 5 秒刷新
+        this.rowsDirty = true;
     }
 
     private void PollRun()
