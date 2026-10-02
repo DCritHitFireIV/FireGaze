@@ -241,7 +241,7 @@ internal sealed partial class ContributeWindow : Window
         // ---------------- 顶部说明 ----------------
         ImGui.TextWrapped("对插件名、一行简介、插件详情的翻译做出贡献。");
         ImGui.TextDisabled("提交的译文优先于机器翻译；点「一键提交」会匿名上传给维护者审核，收录后随词表更新。");
-        ImGui.TextDisabled("提交不带账号信息、不需要 GitHub 账号；万一中继不可用，会改为打开填好的 GitHub 提交页（那一步需要 GitHub 账号）。");
+        ImGui.TextDisabled("提交不带账号信息；网络不好时会改为打开网页提交。");
         ImGui.TextDisabled("本地改动只在你这里生效；点「从 GitHub 更新词表」不会覆盖你还没提交的译文，你改过的版本始终优先。");
 
         ImGui.Separator();

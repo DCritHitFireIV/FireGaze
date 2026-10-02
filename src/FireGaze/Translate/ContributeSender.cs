@@ -49,8 +49,8 @@ internal static class ContributeSender
         {
             OpenIssue(ContributeRelay.BuildIssueURL(title, body));
             return relayError.Length > 0
-                ? new ContributeSendResult(ContributeSendSeverity.Bad, $"上传没成功：{relayError}。已打开 GitHub 提交页，按 Submit 即可提交。")
-                : new ContributeSendResult(ContributeSendSeverity.Info, "译文较多，已打开 GitHub 提交页，按 Submit 即可提交。");
+                ? new ContributeSendResult(ContributeSendSeverity.Bad, $"上传没成功：{relayError}。已替你打开提交页，按 Submit 即可提交。")
+                : new ContributeSendResult(ContributeSendSeverity.Info, "译文较多，已替你打开提交页，按 Submit 即可提交。");
         }
 
         // 回退 2：正文太长，URL 会被截断 —— 导出文件，让玩家拖进附件
@@ -58,8 +58,8 @@ internal static class ContributeSender
         var shortBody = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{internalName}`\n- 条数：{total}\n\n条目较多，正文放不下；投稿文件见本 issue 的附件。\n";
         var reason = relayError.Length > 0 ? $"上传没成功：{relayError}；" : string.Empty;
         var text = file is null
-            ? $"{reason}条目较多（{total} 条），正文放不下 GitHub 的提交页，导出投稿文件也失败了。"
-            : $"{reason}条目较多（{total} 条），正文放不下 GitHub 的提交页；已导出投稿文件：\n{file}\n请在打开的页面里把它拖进输入框作为附件，再按 Submit。";
+            ? $"{reason}条目较多（{total} 条），正文放不下提交页，导出投稿文件也失败了。"
+            : $"{reason}条目较多（{total} 条），正文放不下提交页；已导出投稿文件：\n{file}\n请在打开的页面里把它拖进输入框作为附件，再按 Submit。";
         OpenIssue(ContributeRelay.BuildIssueURL(title, shortBody));
         return new ContributeSendResult(ContributeSendSeverity.Bad, text);
     }

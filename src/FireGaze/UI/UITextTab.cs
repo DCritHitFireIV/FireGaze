@@ -611,7 +611,7 @@ internal sealed class UITextTab
             {
                 ImGui.SetTooltip(
                     "把已经翻好的译文上传到社区公共库，让其他玩家直接用你的译文。\n" +
-                    "（只含原文、译文与代码位置，不带账号信息、不需要 GitHub 账号；维护者收录后所有人「一键汉化」时能直接下载。）");
+                    "（只含原文、译文与代码位置，不带账号信息；维护者收录后所有人「一键汉化」时能直接下载。）");
             }
         }
     }
@@ -727,11 +727,10 @@ internal sealed class UITextTab
             return;
         }
 
-        ImGui.TextWrapped($"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库。");
-        ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只含原文、译文与代码位置，不含账号信息与 key。");
-        ImGui.TextDisabled("由 FireGaze 中继匿名提交（不需要 GitHub 账号）；提交后成为一个 GitHub 公开 issue，所有玩家都能看到并下载。");
+        ImGui.TextWrapped($"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库，之后其他玩家「一键汉化」时能直接用到。");
+        ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只上传原文、译文与代码位置，不带账号信息与 key。");
         ImGui.Spacing();
-        ImGui.TextWrapped("不想公开的条目，可以先到「编辑校对」里改写或标「不翻」。");
+        ImGui.TextWrapped("不想分享的条目，可以先到「编辑校对」里改写或标「不翻」。");
         ImGui.Separator();
         if (ImGui.Button("上传", new Vector2(110, 0)))
         {
