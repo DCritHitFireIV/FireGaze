@@ -23,7 +23,8 @@ namespace FireGaze;
 /// </summary>
 public sealed class Plugin : IDalamudPlugin
 {
-    private static Plugin instance = null!;
+    // 卸载时置空（Dispose 末段）：热重载时旧实例不再被静态字段钉住。读取方一律走可空。
+    private static Plugin? instance;
 
     [PluginService] public static IPluginLog Log { get; private set; } = null!;
 
@@ -288,7 +289,7 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>
     ///     诊断用：与 <see cref="ConfigDirectory"/> 相同（dalamudUI.ini 就在它上两级）。
     /// </summary>
-    public static string ConfigDirectoryForDiagnostics => instance.ConfigDirectory;
+    public static string ConfigDirectoryForDiagnostics => instance?.ConfigDirectory ?? "(插件已卸载)";
 
     /// <summary>
     ///     翻译词表。
@@ -392,6 +393,12 @@ public sealed class Plugin : IDalamudPlugin
             {
                 // ignore
             }
+        }
+
+        // 卸载后别把旧实例留在静态字段上（热重载时旧实例与它的程序集因此可以被回收）
+        if (ReferenceEquals(instance, this))
+        {
+            instance = null;
         }
     }
 
