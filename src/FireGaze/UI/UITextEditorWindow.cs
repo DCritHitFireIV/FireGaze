@@ -787,7 +787,7 @@ internal sealed class UITextEditorWindow : Window
             var hasHuman = this.pack.Entries.Any(e => e.IsUserSource && e.HasTranslation)
                            || this.pack.Resources.Any(r => r.IsUserSource && r.HasTranslation)
                            || this.pack.Attributes.Any(a => a.IsUserSource && a.HasTranslation);
-            if (ImGui.MenuItem("提交人工译文到公共库…", enabled: hasHuman))
+            if (ImGui.MenuItem("提交人工译文到公共译文库…", enabled: hasHuman))
             {
                 this.SubmitContributions();
             }
@@ -1463,12 +1463,18 @@ internal sealed class UITextEditorWindow : Window
             .Select(a => new { a.Original, a.Translated })
             .ToList();
         var total = entries.Count + resources.Count + attributes.Count;
+        // 「与原文相同」单拎出来（品牌名等无需翻译，C-06）
+        var blocking = problems.Where(p => !UITextQuality.IsCopyOfSource(p.Reason)).ToList();
+        var copies = problems.Count - blocking.Count;
         if (total == 0)
         {
-            this.SetStatus(problems.Count == 0
-                ? "还没有人工译文可提交：先在列表里改几条（改过的会标成人工）再来。"
-                : $"本地检测：{problems.Count} 条都没过，先修好或标「不翻」再提交（首条：{problems[0].Label}：{problems[0].Reason}）",
-                problems.Count > 0);
+            this.SetStatus(
+                blocking.Count > 0
+                    ? $"本地检测：{blocking.Count} 条都没过，先修好或标「不翻」再提交（首条：{blocking[0].Label}：{blocking[0].Reason}）"
+                    : copies > 0
+                        ? $"没有要提交的内容：{copies} 条与原文相同（品牌名等无需翻译），不用处理。"
+                        : "还没有人工译文可提交：先在列表里改几条（改过的会标成人工）再来。",
+                blocking.Count > 0);
             return;
         }
 
@@ -1482,9 +1488,11 @@ internal sealed class UITextEditorWindow : Window
         var title = $"[译文贡献] {this.entry.InternalName} · {total} 条";
         var internalName = this.entry.InternalName;
         var storeDirectory = this.store.DirectoryPath;
-        var problemNote = problems.Count == 0
-            ? string.Empty
-            : $"（另有 {problems.Count} 条没过本地检测、未提交：{problems[0].Label}：{problems[0].Reason}）";
+        var problemNote = blocking.Count > 0
+            ? $"（另有 {blocking.Count} 条没过本地检测、未提交：{blocking[0].Label}：{blocking[0].Reason}）"
+            : copies > 0
+                ? $"（另有 {copies} 条与原文相同、未提交，不用处理）"
+                : string.Empty;
 
         this.SetStatus($"正在提交 {total} 条译文…", false);
         _ = Task.Run(async () =>

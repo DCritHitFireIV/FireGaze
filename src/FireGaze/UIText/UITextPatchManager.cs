@@ -456,6 +456,7 @@ internal sealed class UITextPatchManager
         var staged = new List<(UITextPatchFile State, string NewPath)>();
         var patchedTotal = 0;
         var pdbDropped = false;
+        var placeholderSkipped = 0;
         var perFileMissing = new List<IReadOnlyCollection<string>>();
         foreach (var fileState in fileStates)
         {
@@ -482,6 +483,7 @@ internal sealed class UITextPatchManager
             }
 
             pdbDropped |= outcome.PdbDropped;
+            placeholderSkipped += outcome.PlaceholderSkipped;
 
             if (!outcome.Ok)
             {
@@ -679,6 +681,12 @@ internal sealed class UITextPatchManager
         {
             // B-11：降级不能只写日志，界面上也要能看见（2026-10-03 复审 P3-b）
             message += "（调试符号没保住，插件里读堆栈文件名的代码可能报错）";
+        }
+
+        if (placeholderSkipped > 0)
+        {
+            // B-10：占位符闸门拦下的条数要说清楚（手工改 / 导入的译文也不会静默写进去）
+            message += $"（{placeholderSkipped} 条占位符对不上，没写进去）";
         }
         if (localizationWritten > 0)
         {

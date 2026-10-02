@@ -152,7 +152,23 @@ internal static class UITextLocalizationFiles
                 continue;
             }
 
+            // 英文侧（配对规则找得到才用）：陈旧指针闸门用（2026-10-03 评审 B-13）
+            JsonNode? englishRoot = null;
+            var englishFile = FindEnglishCounterpart(pluginDirectory, target);
+            if (englishFile is not null)
+            {
+                try
+                {
+                    englishRoot = JsonNode.Parse(File.ReadAllText(englishFile, Encoding.UTF8));
+                }
+                catch (Exception)
+                {
+                    englishRoot = null; // 读不动英文侧 → 回退旧行为（宁可多写，也别漏写）
+                }
+            }
+
             var changed = 0;
+            var stale = 0;
             foreach (var item in group)
             {
                 // 基线上已有译文（上游填的，或是同一个译文）→ 不覆盖；
@@ -162,10 +178,23 @@ internal static class UITextLocalizationFiles
                     continue;
                 }
 
+                // 陈旧指针闸门：英文侧已经没有这个 key（上游把文案删了）→ 不往中文文件里补孤儿键。
+                // 定位不到英文侧（配对规则没覆盖）时保持旧行为。
+                if (englishRoot is not null && !EnglishHasKey(englishRoot, item.Key))
+                {
+                    stale++;
+                    continue;
+                }
+
                 if (SetString(root, item.Key, item.Translated))
                 {
                     changed++;
                 }
+            }
+
+            if (stale > 0)
+            {
+                Plugin.Log?.Information($"[内部文本] {Path.GetFileName(target)}：{stale} 条指针在英文侧已不存在，跳过（陈旧条目，不补孤儿键）");
             }
 
             if (changed == 0)
@@ -423,6 +452,41 @@ internal static class UITextLocalizationFiles
     ///     能不能在这个指针上写译文：位置上是空的或者空字符串（当缺）；
     ///     已有非空字符串（别人的译文）或根本不是字符串（两边结构对不上）都不能写。
     /// </summary>
+    /// <summary>英文侧是否还留着这个指针（非空字符串）。B-13 的陈旧指针闸门用。</summary>
+    private static bool EnglishHasKey(JsonNode? englishRoot, string pointer) =>
+        Resolve(englishRoot, pointer) is JsonValue value
+        && value.GetValueKind() == JsonValueKind.String
+        && value.GetValue<string>() is { Length: > 0 };
+
+    /// <summary>
+    ///     找中文文件对应的英文文件（复用扫描时的配对规则）；找不到返回 null。
+    /// </summary>
+    private static string? FindEnglishCounterpart(string pluginDirectory, string chineseFile)
+    {
+        try
+        {
+            foreach (var root in FindRoots(pluginDirectory))
+            {
+                foreach (var (english, chinese) in FindLanguagePairs(root))
+                {
+                    foreach (var (englishFile, candidate) in PairFiles(english, chinese))
+                    {
+                        if (string.Equals(candidate, chineseFile, StringComparison.OrdinalIgnoreCase))
+                        {
+                            return englishFile;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // 扫不动就当作找不到：调用方回退到旧行为
+        }
+
+        return null;
+    }
+
     private static bool CanWrite(JsonNode? root, string pointer)
     {
         var node = Resolve(root, pointer);

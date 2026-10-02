@@ -37,12 +37,10 @@ internal sealed partial class RepoAuditTab
             ImGui.EndDisabled();
         }
 
-        // 危险动作：与「停用」拉开间距 + 红色 + 独立分组
+        // 危险动作：与「停用」拉开间距 + 红色 + 独立分组（统一样式见 UiHelpers.PushDangerButton）
         ImGui.SameLine();
         ImGui.SameLine();
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.55f, 0.18f, 0.18f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.68f, 0.24f, 0.24f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.76f, 0.28f, 0.28f, 1f));
+        UiHelpers.PushDangerButton();
 
         if (!canAct)
         {
@@ -65,7 +63,7 @@ internal sealed partial class RepoAuditTab
             ImGui.EndDisabled();
         }
 
-        ImGui.PopStyleColor(3);
+        UiHelpers.PopDangerButton();
 
         ImGui.SameLine();
         ImGui.TextDisabled("│");
@@ -376,11 +374,15 @@ internal sealed partial class RepoAuditTab
         ImGui.TextWrapped("想保留链接、只是不想加载的话，建议改用「停用」。");
         ImGui.Spacing();
 
+        // 破坏性提交：红系实底，与旁边蓝色的「取消」拉开（跨页规则）
+        UiHelpers.PushDangerButton();
         if (ImGui.Button("确认删除", new Vector2(120, 0)))
         {
             ImGui.CloseCurrentPopup();
             DeleteSelected();
         }
+
+        UiHelpers.PopDangerButton();
 
         ImGui.SameLine();
         if (ImGui.Button("取消", new Vector2(120, 0)))

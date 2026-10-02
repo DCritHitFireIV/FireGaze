@@ -346,6 +346,12 @@ internal static class UICallSemantics
     }
 
     /// <summary>
+    ///     方法名算不算「纯文字绘制」（Text* / tooltip / 包装库的画文字辅助方法）。
+    ///     打补丁时用它判断「给这条加 ### 会不会被原样画出来」（2026-10-03，取 B-08 的口径）。
+    /// </summary>
+    public static bool IsPlainTextCallName(string methodName) => PlainTextCalls.Contains(methodName);
+
+    /// <summary>
     ///     这个 ImGui 调用会不会把字符串当控件 ID 用（决定补丁要不要保留 <c>###原文</c>）。
     /// </summary>
     /// <summary>
@@ -658,17 +664,31 @@ internal static class UICallSemantics
             return false;
         }
 
-        if (typeFullName.Contains("Log", StringComparison.Ordinal))
-        {
-            return true;
-        }
-
-        if (typeFullName.StartsWith("Serilog", StringComparison.Ordinal))
+        if (LooksLikeLoggerType(typeFullName))
         {
             return true;
         }
 
         return methodName is "WriteLine" or "Print" or "Information" or "Debug" or "Warning" or "Error" or "Verbose" or "Fatal";
+    }
+
+    /// <summary>
+    ///     类型名看着像日志器：Serilog / *Logger / 命名空间段 .Log / 以 Log 收尾的类型名（PluginLog、DalamudLog）。
+    ///     2026-10-03 评审 A4：以前是粗暴的 <c>Contains("Log")</c>，把 Login / LogHeader 这类也整片当成日志——
+    ///     后果是它们的 UI 包装调用整条断流、参数流不登记（漏翻）；Dialog/Catalog 因小写 l 本就不命中。
+    ///     （“以 Log 收尾”是大小写敏感的：Dialog / Catalog 的结尾是小写 log，不会命中。）
+    /// </summary>
+    private static bool LooksLikeLoggerType(string typeFullName)
+    {
+        if (typeFullName.Contains("Serilog", StringComparison.Ordinal)
+            || typeFullName.Contains("Logger", StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return typeFullName.Contains(".Log.", StringComparison.Ordinal)
+               || typeFullName.EndsWith(".Log", StringComparison.Ordinal)
+               || typeFullName.EndsWith("Log", StringComparison.Ordinal);
     }
 
     /// <summary>

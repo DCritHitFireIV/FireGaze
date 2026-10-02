@@ -28,6 +28,8 @@ payload（只有 type==uit-contribution 才处理）：
 from __future__ import annotations
 
 import argparse
+import glob
+import hashlib
 import json
 import os
 import re
@@ -67,6 +69,54 @@ def valid_container(container: str) -> bool:
 def is_user_source(item: dict) -> bool:
     """投稿条目是不是人工译（客户端会把每条自己的 Source 带上来）。"""
     return str(item.get("Source") or "").strip().lower().startswith("user")
+
+
+def apply_preserve_id(target: dict, item: dict) -> None:
+    """投稿带 PreserveID=true 时记进库包（只用「有值」的一面，不用缺失去清旧值）。
+
+    库包下载方的补丁会据此决定要不要写成「译文###原文」；不带这条的话，标签类条目在
+    非目标插件（不被 CI 重建）的包里会丢掉 ### 保护（2026-10-03）。"""
+    if item.get("PreserveID"):
+        target["PreserveID"] = True
+
+
+def submission_fingerprint(plugin: str, payload: dict) -> str:
+    """同一份投稿内容的指纹（插件 + 条目/资源/属性的原文→译文对，排序后哈希）。
+
+    用途：中继超时但 issue 已建、玩家又交一次（或同一条 issue 被 edit 重新触发）
+    → 第二次识别为重复，不再重复并入/重复通知（2026-10-03 评审 C-10）。"""
+    parts = ["p\x01" + plugin]
+    for item in payload.get("entries") or []:
+        parts.append("e\x01" + str(item.get("Original") or "") + "\x02" + str(item.get("Translated") or ""))
+    for item in payload.get("resources") or []:
+        parts.append(
+            "r\x01" + str(item.get("Container") or "") + "\x02" + str(item.get("Key") or "")
+            + "\x02" + str(item.get("Translated") or "")
+        )
+    for item in payload.get("attributes") or []:
+        parts.append("a\x01" + str(item.get("Original") or "") + "\x02" + str(item.get("Translated") or ""))
+    return hashlib.sha256("\x00".join(sorted(parts)).encode("utf-8")).hexdigest()[:16]
+
+
+def find_previous_submission(out_dir: str, fingerprint: str) -> str | None:
+    """这份内容是不是已经收过（扫最近的存档，最多 400 个；兼容没 fingerprint 字段的旧存档）。"""
+    try:
+        files = sorted(glob.glob(os.path.join(out_dir, "uit-*.json")), reverse=True)[:400]
+    except Exception:  # noqa: BLE001
+        return None
+    for path in files:
+        data = load_json(path)
+        if not isinstance(data, dict):
+            continue
+        found = data.get("fingerprint")
+        if not found:
+            payload = data.get("payload")
+            if isinstance(payload, dict):
+                found = submission_fingerprint(str(payload.get("plugin") or ""), payload)
+        if found == fingerprint:
+            issue = data.get("issue")
+            return f"issue #{issue}" if issue else os.path.basename(path)
+    return None
 
 
 def load_json(path: str):
@@ -121,6 +171,12 @@ def main(argv=None) -> int:
     if not re.fullmatch(r"[A-Za-z0-9_.\-]{1,120}", plugin):
         return fail(args, "插件内部名不合法。")
 
+    # 幂等：同一份内容已经收过就不再重复并入 / 重复通知（中继超时重交、issue edit 重跑都会撞上）
+    fingerprint = submission_fingerprint(plugin, payload)
+    previous = find_previous_submission(args.out_dir, fingerprint)
+    if previous:
+        return fail(args, f"同一份投稿内容之前已经收到过了（{previous}），这次跳过（没有重复并入）。")
+
     pack_path = os.path.join(args.packs_dir, plugin + ".json")
     pack = load_json(pack_path)
     if pack is None:
@@ -163,12 +219,14 @@ def main(argv=None) -> int:
         if target is None:
             target = {"Original": original, "Translated": translated, "Context": str(item.get("Context") or "")}
             target["Source"] = "user" if user_source else "library"
+            apply_preserve_id(target, item)
             pack["entries"].append(target)
             entries_by_original[original] = target
             accepted += 1
             filled += 1
             continue
 
+        apply_preserve_id(target, item)
         existing = str(target.get("Translated") or "").strip()
         if user_source:
             target["Translated"] = translated
@@ -203,12 +261,14 @@ def main(argv=None) -> int:
         if target is None:
             target = {"Container": container, "Key": key, "Original": original, "Translated": translated}
             target["Source"] = "user" if user_source else "library"
+            apply_preserve_id(target, item)
             pack["resources"].append(target)
             resources_by_key[(container, key)] = target
             accepted += 1
             filled += 1
             continue
 
+        apply_preserve_id(target, item)
         existing = str(target.get("Translated") or "").strip()
         if user_source:
             target["Translated"] = translated
@@ -238,12 +298,14 @@ def main(argv=None) -> int:
         if target is None:
             target = {"Original": original, "Translated": translated, "Context": "[投稿]"}
             target["Source"] = "user" if user_source else "library"
+            apply_preserve_id(target, item)
             pack["attributes"].append(target)
             attributes_by_original[original] = target
             accepted += 1
             filled += 1
             continue
 
+        apply_preserve_id(target, item)
         existing = str(target.get("Translated") or "").strip()
         if user_source:
             target["Translated"] = translated
@@ -266,6 +328,7 @@ def main(argv=None) -> int:
         "receivedAt": time.strftime("%Y-%m-%d %H:%M:%S"),
         "author": args.author,
         "plugin": plugin,
+        "fingerprint": fingerprint,
         "accepted": accepted,
         "filled": filled,
         "overwritten": overwritten,

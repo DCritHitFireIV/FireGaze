@@ -99,6 +99,9 @@ internal sealed class UITextTab
         public CancellationTokenSource Cancel = new();
         public Task Task = Task.CompletedTask;
         public bool Finished;
+
+        /// <summary>翻译阶段的起点（ticks）——进度条据此算「已用 / 约剩」（2026-10-03 P2-4）。</summary>
+        public long TranslateStartedTicks;
     }
 
     private readonly Plugin plugin;
@@ -384,6 +387,13 @@ internal sealed class UITextTab
     /// <summary>
     ///     有任务在跑时，窗口顶部一条常驻状态——滚到列表别处也看得见，还带取消。
     /// </summary>
+    /// <summary>把时长写成「N 分 M 秒」/「N 秒」（进度条已用 / 约剩用，2026-10-03 P2-4）。</summary>
+    private static string FormatDuration(TimeSpan span)
+    {
+        var total = Math.Max(0, (int)span.TotalSeconds);
+        return total >= 60 ? $"{total / 60} 分 {total % 60:00} 秒" : $"{total} 秒";
+    }
+
     private void DrawRunningBar()
     {
         var run = this.run;
@@ -399,7 +409,23 @@ internal sealed class UITextTab
         if (ImGui.BeginChild("###UITextRunning", new Vector2(0, ImGui.GetFrameHeight() + 8)))
         {
             var verb = run.Mode == RunMode.ExtractOnly ? "正在抽取" : "正在汉化";
-            UiHelpers.ColoredText(run.CanCancel ? UiHelpers.Info : UiHelpers.Warn, $"{verb} {name}：{run.Stage}");
+            var stage = run.Stage;
+            if (run.CanCancel && run.TranslateStartedTicks > 0)
+            {
+                // 已用 / 约剩：964 条的长任务里，用户决定「继续等还是取消」就靠这个（2026-10-03 P2-4）
+                var elapsed = TimeSpan.FromTicks(Math.Max(0, DateTime.Now.Ticks - run.TranslateStartedTicks));
+                stage += " · 已用 " + FormatDuration(elapsed);
+                if (run.Total > 0 && run.Done >= 10 && elapsed.TotalSeconds > 2)
+                {
+                    var rate = run.Done / elapsed.TotalSeconds;
+                    if (rate > 0.05)
+                    {
+                        stage += " · 约剩 " + FormatDuration(TimeSpan.FromSeconds((run.Total - run.Done) / rate));
+                    }
+                }
+            }
+
+            UiHelpers.ColoredText(run.CanCancel ? UiHelpers.Info : UiHelpers.Warn, $"{verb} {name}：{stage}");
 
             if (run.CanCancel)
             {
@@ -413,6 +439,9 @@ internal sealed class UITextTab
                 {
                     ImGui.SetTooltip("取消只停止翻译：已经翻好的条目会保留，之后点「一键汉化」可以接着来。");
                 }
+
+                ImGui.SameLine();
+                ImGui.TextDisabled("（取消只停翻译，已翻的会保留）");
             }
             else
             {
@@ -489,8 +518,8 @@ internal sealed class UITextTab
         return width;
     }
 
-    /// <summary>主按钮槽宽（写入并重载 / 一键汉化 / 重试三个名字里最宽的）。</summary>
-    private static float MainActionSlotWidth() => MaxLabelWidth("写入并重载", "一键汉化", "重试");
+    /// <summary>主按钮槽宽（写入并重载 / 一键汉化 / 重新汉化 / 重试四个名字里最宽的）。</summary>
+    private static float MainActionSlotWidth() => MaxLabelWidth("写入并重载", "一键汉化", "重新汉化", "重试");
 
     /// <summary>第二槽宽：「启用插件」与「打开/设置」互斥，取最宽的一个，后面的按钮才能对齐。</summary>
     private static float OpenOrEnableSlotWidth() => MaxLabelWidth("启用插件", "设置", "打开");
@@ -697,10 +726,14 @@ internal sealed class UITextTab
                     UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("还原原文"), 12);
                 }
 
+                // 破坏性动作：红系实底（跨页规则，与仓库体检的「删除所选」一致；2026-10-03 P2-8）
+                UiHelpers.PushDangerButton();
                 if (ImGui.Button("还原原文"))
                 {
                     this.RestoreNow(plugin);
                 }
+
+                UiHelpers.PopDangerButton();
 
                 if (ImGui.IsItemHovered())
                 {
@@ -746,7 +779,7 @@ internal sealed class UITextTab
 
             var retryable = this.notes.TryGetValue(plugin.InternalName, out var pendingNote) && pendingNote.CanRetry;
             var writeOnly = info is { HasPack: true, PackNewerThanPatch: true, Patch: UITextPatchStatus.Applied };
-            var label = retryable ? "重试" : writeOnly ? "写入并重载" : "一键汉化";
+            var label = retryable ? "重试" : writeOnly ? "写入并重载" : fullyLocalized ? "重新汉化" : "一键汉化";
             ImGui.BeginDisabled(busy || editorOpen);
             if (!fullyLocalized)
             {
@@ -773,7 +806,9 @@ internal sealed class UITextTab
                         ? "沿用当前通道，从没翻完的地方接着翻。\n已翻好的条目不会丢；原文件备份与「还原原文」照旧。"
                         : writeOnly
                             ? "把改动过的译文写进插件 DLL 并自动重载（不再重新翻译）。\n原文件会先备份，随时可以「还原原文」。"
-                            : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
+                            : fullyLocalized
+                                ? "重新抽取一遍：有新文本或写法变了会重打补丁；都没有就只报「已是最新」。\n原文件备份与「还原原文」照旧。"
+                                : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
             }
 
             // 第二槽位：**未加载 → 启用插件；已加载 → 打开/设置**，两者互斥（用户要求：不允许两个同时亮），
@@ -819,7 +854,7 @@ internal sealed class UITextTab
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip(
-                    "把已经翻好的译文上传到社区公共库，让其他玩家直接用你的译文。\n" +
+                    "把已经翻好的译文上传到公共译文库，让其他玩家直接用你的译文。\n" +
                     "（只含原文、译文与代码位置，不带账号信息；维护者收录后所有人「一键汉化」时能直接下载。）");
             }
         }
@@ -942,7 +977,17 @@ internal sealed class UITextTab
         var noteKind = NoteKind.Bad;
         if (uploadable == 0)
         {
-            noteText = $"本地检测：{problems.Count} 条都有问题，没有上传（看弹窗）。";
+            var blockingCount = problems.Count(p => !UITextQuality.IsCopyOfSource(p.Reason));
+            if (blockingCount == 0)
+            {
+                // 全部是「照抄原文」：不是用户能修的问题（品牌名等），语气放平（2026-10-03 C-06）
+                noteText = $"本地检测：{problems.Count} 条与原文相同（品牌名等无需翻译），没有要上传的内容。";
+                noteKind = NoteKind.Info;
+            }
+            else
+            {
+                noteText = $"本地检测：{blockingCount} 条有问题，没有上传（看弹窗）。";
+            }
         }
         else
         {
@@ -1059,7 +1104,7 @@ internal sealed class UITextTab
     /// <summary>上传确认框：说清发什么、去哪、公开性，默认焦点在「取消」。</summary>
     private void DrawUploadConfirmModal(PendingUpload upload)
     {
-        const string Name = "上传译文到公共库###UITextUploadConfirm";
+        const string Name = "上传译文到公共译文库###UITextUploadConfirm";
         if (this.uploadModalNeedsOpen)
         {
             ImGui.OpenPopup(Name);
@@ -1076,8 +1121,8 @@ internal sealed class UITextTab
 
         ImGui.TextWrapped(upload.Total > 0
             ? upload.Problems.Count > 0
-                ? $"把「{upload.Entry.DisplayName}」的译文上传到社区公共库：这次上传 {upload.Total} 条（另有 {upload.Problems.Count} 条没过本地检测，不会上传）。"
-                : $"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库，之后其他玩家「一键汉化」时能直接用到。"
+                ? $"把「{upload.Entry.DisplayName}」的译文上传到公共译文库：这次上传 {upload.Total} 条（另有 {upload.Problems.Count} 条没过本地检测，不会上传）。"
+                : $"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到公共译文库，之后其他玩家「一键汉化」时能直接用到。"
             : $"「{upload.Entry.DisplayName}」的译文都没过本地检测，这次不上传。");
         if (upload.Total > 0)
         {
@@ -1086,29 +1131,41 @@ internal sealed class UITextTab
             ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只上传原文、译文与代码位置，不带账号信息与 key。");
         }
 
-        // 本地检测结果（2026-10-03）：健康才上传，不健康的列出来让用户先修
+        // 本地检测结果（2026-10-03）：健康才上传，不健康的列出来让用户先修。
+        // 「与原文相同」单独归类（品牌名 / 缩写无需翻译，不该让用户去找一个不存在的修法，C-06）。
+        var blocking = upload.Problems.Where(p => !UITextQuality.IsCopyOfSource(p.Reason)).ToList();
+        var copies = upload.Problems.Count - blocking.Count;
         if (upload.Problems.Count == 0)
         {
             ImGui.TextDisabled("本地检测：译文全部通过。");
         }
+        else if (blocking.Count == 0)
+        {
+            ImGui.TextDisabled($"本地检测：{copies} 条与原文相同（品牌名等无需翻译），不会上传；不用处理。");
+        }
         else
         {
-            UiHelpers.ColoredText(UiHelpers.Warn, $"本地检测：{upload.Problems.Count} 条没过，不会上传——");
-            var listHeight = (Math.Min(upload.Problems.Count, 8) * ImGui.GetTextLineHeightWithSpacing()) + 10f;
+            UiHelpers.ColoredText(UiHelpers.Warn, $"本地检测：{blocking.Count} 条没过，不会上传——");
+            var listHeight = (Math.Min(blocking.Count, 8) * ImGui.GetTextLineHeightWithSpacing()) + 10f;
             if (ImGui.BeginChild("###UITextUploadProblems", new Vector2(0, listHeight)))
             {
-                foreach (var problem in upload.Problems.Take(60))
+                foreach (var problem in blocking.Take(60))
                 {
                     ImGui.TextWrapped($"{problem.Label}：{problem.Reason}");
                 }
 
-                if (upload.Problems.Count > 60)
+                if (blocking.Count > 60)
                 {
-                    ImGui.TextDisabled($"…还有 {upload.Problems.Count - 60} 条（去「编辑校对」里按原文搜）");
+                    ImGui.TextDisabled($"…还有 {blocking.Count - 60} 条（去「编辑校对」里按原文搜）");
                 }
             }
 
             ImGui.EndChild();
+            if (copies > 0)
+            {
+                ImGui.TextDisabled($"另有 {copies} 条与原文相同（品牌名等无需翻译），也不会传；不用处理。");
+            }
+
             ImGui.TextDisabled("修好后（或在编辑器里标「不翻」）再点一次「一键上传」。");
         }
 
@@ -1319,11 +1376,11 @@ internal sealed class UITextTab
     {
         ImGui.Spacing();
         ImGui.Separator();
-        ImGui.TextUnformatted("云端译文（公共库）");
+        ImGui.TextUnformatted("公共译文库");
 
         if (!this.plugin.Config.UITextLibraryEnabled)
         {
-            ImGui.TextDisabled("译文库已关闭（翻译设置里可以打开）。");
+            ImGui.TextDisabled("公共译文库已关闭（翻译设置里可以打开）。");
             return;
         }
 
@@ -1358,7 +1415,7 @@ internal sealed class UITextTab
                 });
             }
 
-            ImGui.TextDisabled(this.cloudIndexFetching ? "正在查云端译文库…" : "云端译文库暂时拉不到（收起这一行再展开可以重试）。");
+            ImGui.TextDisabled(this.cloudIndexFetching ? "正在查公共译文库…" : "公共译文库暂时拉不到（收起这一行再展开可以重试）。");
             return;
         }
 
@@ -1374,7 +1431,7 @@ internal sealed class UITextTab
             var source = pack.Source switch
             {
                 "user" => "玩家投稿",
-                null or "" or "library" => "公共库",
+                null or "" or "library" => "公共译文库",
                 var other => other,
             };
             var count = pack.Entries + pack.Resources + pack.Attributes;
@@ -1426,7 +1483,7 @@ internal sealed class UITextTab
         var source = pack.Source switch
         {
             "user" => "玩家投稿",
-            null or "" or "library" => "公共库",
+            null or "" or "library" => "公共译文库",
             var other => other,
         };
         _ = Task.Run(async () =>
@@ -1496,7 +1553,7 @@ internal sealed class UITextTab
     /// <summary>云端译文的差异确认框：新增 / 覆盖机器译 / 保留玩家译 / 无变化，默认焦点在「取消」。</summary>
     private void DrawCloudApplyModal(PendingCloudApply pending)
     {
-        const string Name = "应用云端译文###UITextCloudApply";
+        const string Name = "应用公共译文库译文###UITextCloudApply";
         if (this.cloudModalNeedsOpen)
         {
             ImGui.OpenPopup(Name);
@@ -1512,7 +1569,7 @@ internal sealed class UITextTab
         }
 
         var preview = pending.Preview;
-        ImGui.TextWrapped($"应用云端译文：{pending.Label}（{pending.Source}）");
+        ImGui.TextWrapped($"应用公共译文库的译文：{pending.Label}（{pending.Source}）");
         ImGui.TextDisabled($"新增 {preview.Added} 条 · 更新机器译文 {preview.Overwritten} 条 · 你的 {preview.Protected} 条人工译文保留不动 · 其余 {preview.Same} 条无变化");
         ImGui.Spacing();
         ImGui.TextWrapped("本机人工改过的译文不会被覆盖；应用后还要点这一行的主按钮（此时会显示「写入并重载」）才会写进插件。");
@@ -1636,23 +1693,29 @@ internal sealed class UITextTab
             return ("未汉化", UiHelpers.Muted);
         }
 
+        // 带分母的进度口径（2026-10-03 V1-07）：981/1083 这类「汉化了但没全」的行不能只写条数
+        var available = Math.Max(0, info.Total - info.Skipped);
+        string Done(string verb) => available > 0 && info.Translated < available
+            ? $"{verb} {info.Translated}/{available} 条"
+            : $"{verb} {info.Translated} 条";
+
         switch (info.Patch)
         {
             case UITextPatchStatus.Applied:
                 return info.PackNewerThanPatch
-                    ? ($"已汉化 {info.Translated} 条 · 有改动待写入", UiHelpers.Warn)
-                    : ($"已汉化 {info.Translated} 条", UiHelpers.Good);
+                    ? ($"{Done("已汉化")} · 有改动待写入", UiHelpers.Warn)
+                    : (Done("已汉化"), UiHelpers.Good);
             case UITextPatchStatus.PendingReload:
-                return ($"已汉化 {info.Translated} 条 · 待重载", UiHelpers.Info);
+                return ($"{Done("已汉化")} · 待重载", UiHelpers.Info);
             case UITextPatchStatus.NeedsRepatch:
-                return ($"已汉化 {info.Translated} 条 · 需要重打", UiHelpers.Warn);
+                return ($"{Done("已汉化")} · 需要重打", UiHelpers.Warn);
             case UITextPatchStatus.Failed:
-                return ($"上次失败 · 已翻译 {info.Translated} 条", UiHelpers.Bad);
+                return ($"上次失败 · {Done("已翻译")}", UiHelpers.Bad);
         }
 
         if (info.Translated > 0)
         {
-            return ($"已翻译 {info.Translated} 条 · 未应用", UiHelpers.Info);
+            return ($"{Done("已翻译")} · 未应用", UiHelpers.Info);
         }
 
         return ($"未汉化 · 候选 {Math.Max(0, info.Total - info.Skipped)} 条", UiHelpers.Muted);
@@ -1891,6 +1954,7 @@ internal sealed class UITextTab
                 run.Total = targets.Count;
                 run.Done = 0;
                 run.CanCancel = true;
+                run.TranslateStartedTicks = DateTime.Now.Ticks;
                 run.Stage = $"翻译 0 / {targets.Count} 条（{channel.Name}）";
 
                 var items = UITextFlow.BuildTranslateItems(targets);
@@ -1972,13 +2036,13 @@ internal sealed class UITextTab
             var extra = translatedCount > 0 ? $"本次新翻 {translatedCount} 条。{channelNote}" : string.Empty;
             if (libraryChanged > 0)
             {
-                extra = $"从译文库补了 {libraryChanged} 条。" + extra;
+                extra = $"从公共译文库补了 {libraryChanged} 条。" + extra;
             }
 
             if (translatedCount == 0 && merge.ReapplyNeeded)
             {
                 var reapply = "抽取结果变了（有新增文本或控件 ID 标记被修正），已按新的写法重打。";
-                extra = libraryChanged > 0 ? $"从译文库补了 {libraryChanged} 条；" + reapply : reapply;
+                extra = libraryChanged > 0 ? $"从公共译文库补了 {libraryChanged} 条；" + reapply : reapply;
             }
 
             this.FinishRun(run, new RowNote
@@ -2055,7 +2119,7 @@ internal sealed class UITextTab
         // 引导贡献翻译（2026-10-03 用户要求：反馈里不再单列「汉化不对」）
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
-            "想修正或补充某个插件的译文？到「插件汉化 → 该插件 → 编辑校对」改好后，用「更多 → 提交人工译文到公共库」直接贡献——比反馈更快被收录。");
+            "想修正或补充某个插件的译文？到「插件汉化 → 该插件 → 编辑校对」改好后，用「更多 → 提交人工译文到公共译文库」直接贡献——比反馈更快被收录。");
 
         ImGui.SetNextItemWidth(-1);
         ImGui.InputTextMultiline("###UITextFeedbackText", ref this.feedbackText, 4000, new Vector2(-1, 130));
@@ -2718,6 +2782,7 @@ internal sealed class UITextTab
         ImGui.TextWrapped($"把「{restore.Entry.DisplayName}」还原成打补丁之前的原始文件？");
         ImGui.TextDisabled("会写入插件目录并自动重载插件，界面回到英文；之后还可以再「一键汉化」。");
         ImGui.Separator();
+        UiHelpers.PushDangerButton();
         if (ImGui.Button("还原", new Vector2(100, 0)))
         {
             var confirmed = restore.Entry;
@@ -2726,6 +2791,8 @@ internal sealed class UITextTab
             this.RunRestore(confirmed);
             return;
         }
+
+        UiHelpers.PopDangerButton();
 
         ImGui.SameLine();
         if (ImGui.Button("取消", new Vector2(90, 0)))

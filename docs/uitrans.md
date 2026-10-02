@@ -830,3 +830,29 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 heliosphere-plugin（49 条：Help/Tooltip/TextUnformattedCentred/通知文本）、InventoryTools（8 条 tooltip + 3 条图标资源名）、Battlevest（5 条 tooltip + 8 条 LineCentered 缓存 id）、
 Browsingway（2 条居中错误文字）、Cammy（2 条通知）、CurrencySpender（2 条通知 + 7 条 LineCentered）、DalamudRepoBrowser（2 条通知）、BossModReborn（1 条通知标题）、Brio（1 条通知标题）。
 AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打的原理：`ExtractionSourceOf` 从原始备份重抽 → MergeExtraction 发现 PreserveID 变了 → `ReapplyNeeded` → 写入时自动先还原旧补丁再按新写法写入。
+
+## 未修项清零（2026-10-03，1.3.24）——复审遗留全做掉
+
+**抽取器**：
+- **B-08**：去重强制的 `###` 只作用于「可能被当控件标签」的条目（`UITextPatcher.MightBeLabel`）：判据是抽取时记的调用目标（RoleReason）——Text* / tooltip / 包装库画文字方法不加 ###（加了会被原样画出来），其它或没有信息时保守保留。
+- **A1**：查表路径（get_Item / TryGetValue / ContainsKey）的键名现在也标记为「字典键」（新增 `ParamsDictionaryKey`，随参数流 / 字段流一起传播）：短键不会再被当成「外部表 key」直接丢掉，长键的理由也不再写成「词典式汉化」。
+- **A3**：跨程序集「同文异角色」（一份 UI、一份 Excluded）在合并时降为灰名单，不再按「更强判定」直接翻（否则会在功能语境那份 DLL 里也改字面量）。
+- **A4**：日志类型判定收窄（Serilog / *Logger / `.Log` 命名空间段 / 以 Log 收尾；Login、LogHeader 不再误伤）；本程序集内的日志包装方法改走 ⑤ 登记参数流（外部日志照旧快速放行）。
+- **A5**：`ResourceKeyCount` 改为按字面量 ID 去重（以前两遍扫描 + 一条多处出现会虚高）。
+
+**管线**：
+- **B-10**：补丁层加占位符闸门（entries / resources / attributes 三处都拦），拦下的条数写进完成消息；除库合并那道闸门外，手工编辑 / 导入的译文现在也进不去 DLL。
+- **B-13**：本地化文件写入加「陈旧指针」闸门——英文侧已没有的 key 不再往中文文件补孤儿键（英文侧定位不到时回退旧行为）。
+- **P3-c**：反向还原遇歧义（补丁产物同时被别的条目的 `###` 后缀认领）时放弃（返回 null），不再把错的原文写回。
+
+**投稿 / 云库**：
+- **C-06**：「与原文相同」从「需要修的问题」里拆出来单独归类（品牌名等无需翻译；上传弹窗与编辑器状态分开说，不再让用户去找不存在的修法）。
+- **C-10**：`inbox_uit.py` 加内容指纹幂等——同一份内容重复到达（中继超时重交、issue edit 重跑）会被识别并跳过，不再重复并入 / 重复通知。
+- **云库不受 `###` 泄漏影响（结论）**：库里存的是干净译文，`###` 是打补丁时按 `PreserveID` 即时拼的；`uit_library_build.py` 的 `PreserveID` **每轮都从当轮 probe 重算**（不沿用旧包），所以只要发布用修好的版本，云库不会带错标记。非目标插件（投稿自动建包）的 `PreserveID` 现在由投稿携带（只置 true、不用缺失值清旧值）。
+
+**界面**：
+- **P2-3**：完全汉化的行主按钮由「一键汉化」改「重新汉化」（悬停说明：会重抽，有变化才重打）。
+- **P2-4**：翻译进行中显示「已用 X 分 X 秒 · 约剩 Y」（完成 10 条以上才估）；「取消只停翻译」从 tooltip 提到状态条常显。
+- **P2-8 + 跨页规则**：新增 `UiHelpers.PushDangerButton`（红系）——插件汉化行内 / 弹窗的「还原原文」、仓库体检的工具条与「确认删除」统一用它；规则：主操作=蓝、启用=绿、破坏=红，橙色只做警示色。
+- **V1-07**：徽标带分母（`已汉化 981/1083 条`，全齐时才只写条数）。
+- **术语**：本页的共享译文来源统一叫「公共译文库」（上传弹窗、按钮、状态行、来源标签、编辑器菜单同一口径）。

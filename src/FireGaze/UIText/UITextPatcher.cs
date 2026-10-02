@@ -60,6 +60,9 @@ internal sealed class UITextPatchOutcome
     /// </summary>
     public bool PdbDropped { get; set; }
 
+    /// <summary>占位符对不上、被拦下没写进 DLL 的条数（手工改 / 导入的译文也走这道闸，2026-10-03 评审 B-10）。</summary>
+    public int PlaceholderSkipped { get; set; }
+
     public bool Ok => this.Error is null;
 }
 
@@ -106,12 +109,25 @@ internal static class UITextPatcher
                 continue;
             }
 
+            // 占位符对不上的绝不写进 DLL（打进去会让插件运行时抛 FormatException；库合并之外，
+            // 手工编辑 / 导入的译文也走这道闸，2026-10-03 评审 B-10）
+            if (UITextText.CheckPlaceholders(entry.Original, entry.Translated.Trim()) is not null)
+            {
+                outcome.PlaceholderSkipped++;
+                continue;
+            }
+
             if (!entry.PreserveID)
             {
                 var effective = entry.Translated.Trim();
                 if (usedTranslation.ContainsKey(effective))
                 {
-                    forcePreserve.Add(entry.Original);
+                    // 撞译文时只有「可能被当控件标签」的条目才强制保 ID：纯文字绘制（Text* / tooltip /
+                    // 包装库的画文字辅助方法）根本不用 ID，加 ### 只会把后缀画到界面上（2026-10-03 评审 B-08）。
+                    if (MightBeLabel(entry))
+                    {
+                        forcePreserve.Add(entry.Original);
+                    }
                 }
                 else
                 {
@@ -132,6 +148,12 @@ internal static class UITextPatcher
                 continue;
             }
 
+            if (UITextText.CheckPlaceholders(entry.Original, entry.Translated.Trim()) is not null)
+            {
+                outcome.PlaceholderSkipped++;
+                continue;
+            }
+
             resourceMap[(entry.Container, entry.Key)] = entry;
         }
 
@@ -140,6 +162,12 @@ internal static class UITextPatcher
         {
             if (!entry.HasTranslation || pack.IsAttributeSkipped(entry.Original))
             {
+                continue;
+            }
+
+            if (UITextText.CheckPlaceholders(entry.Original, entry.Translated.Trim()) is not null)
+            {
+                outcome.PlaceholderSkipped++;
                 continue;
             }
 
@@ -299,6 +327,8 @@ internal static class UITextPatcher
         var suffixMap = new Dictionary<string, string>(StringComparer.Ordinal);
         var exactMap = new Dictionary<string, string>(StringComparer.Ordinal);
         var ambiguous = new HashSet<string>(StringComparer.Ordinal);
+        var ambiguousLiterals = new HashSet<string>(StringComparer.Ordinal);
+        var patchedProducts = new List<(string Literal, string Original)>();
 
         foreach (var entry in pack.Entries)
         {
@@ -316,10 +346,11 @@ internal static class UITextPatcher
 
             suffixMap.TryAdd("###" + original, original);
             // 原文自带 ### 的：补丁写出来是「译文 + 原文的 ID 段」，suffixMap 的「###全原文」对不上，
-            // 额外登记一条「补丁产物 → 原文」的精确映射，否则这类字面量永远还原不回来（2026-10-03 评审 B-09）
+            // 额外登记一条「补丁产物 → 原文」的精确映射，否则这类字面量永远还原不回来（2026-10-03 评审 B-09）；
+            // 产物是否与别的条目的 ### 后缀撞车放到建完 suffixMap 后再判（P3-c）。
             if (UITextText.IDPart(original).Length > 0)
             {
-                exactMap.TryAdd(UITextText.BuildPatched(original, translated, preserveID: false), original);
+                patchedProducts.Add((UITextText.BuildPatched(original, translated, preserveID: false), original));
             }
 
             if (exactMap.TryGetValue(translated, out var existing) && !string.Equals(existing, original, StringComparison.Ordinal))
@@ -329,6 +360,20 @@ internal static class UITextPatcher
             else
             {
                 exactMap[translated] = original;
+            }
+        }
+
+        // 补丁产物与「### 后缀」撞车时（同一条译文既是普通条目的产物、又遇上自带 ### 的条目），
+        // 这次还原本质上有歧义：宁可返回 null 让用户看到「还原不了」，也不要把错的原文写回去（评审 P3-c）。
+        foreach (var (literal, original) in patchedProducts)
+        {
+            if (SuffixClaimable(literal, suffixMap))
+            {
+                ambiguousLiterals.Add(literal);
+            }
+            else
+            {
+                exactMap.TryAdd(literal, original);
             }
         }
 
@@ -367,7 +412,7 @@ internal static class UITextPatcher
                                 continue;
                             }
 
-                            var recovered = RecoverLiteral(literal, suffixMap, exactMap);
+                            var recovered = RecoverLiteral(literal, suffixMap, exactMap, ambiguousLiterals);
                             if (recovered is null || string.Equals(recovered, literal, StringComparison.Ordinal))
                             {
                                 continue;
@@ -405,13 +450,20 @@ internal static class UITextPatcher
 
     /// <summary>
     ///     按「译文精确匹配 / <c>###原文</c> 后缀」还原一条字面量；还原不了返回 null（纯函数，方便离线测）。
-    ///     先试精确映射（能处理「原文自带 ###」这类只有补丁产物才对得上的情况），再走 ### 后缀。
+    ///     先试精确映射（能处理「原文自带 ###」这类只有补丁产物才对得上的情况），再走 ### 后缀；
+    ///     <paramref name="ambiguous" /> 里的字面量直接放弃（两种解释都说得通，不猜）。
     /// </summary>
     public static string? RecoverLiteral(
         string literal,
         IReadOnlyDictionary<string, string> suffixMap,
-        IReadOnlyDictionary<string, string> exactMap)
+        IReadOnlyDictionary<string, string> exactMap,
+        IReadOnlySet<string>? ambiguous = null)
     {
+        if (ambiguous is not null && ambiguous.Contains(literal))
+        {
+            return null;
+        }
+
         if (exactMap.TryGetValue(literal, out var byExact) && !string.Equals(byExact, literal, StringComparison.Ordinal))
         {
             return byExact;
@@ -430,6 +482,23 @@ internal static class UITextPatcher
         }
 
         return null;
+    }
+
+    /// <summary>字面量会不会被某个条目的「###原文」后缀半路认领（还原歧义的判据，2026-10-03 评审 P3-c）。</summary>
+    private static bool SuffixClaimable(string literal, Dictionary<string, string> suffixMap)
+    {
+        var index = literal.IndexOf(UITextText.IDSeparator, StringComparison.Ordinal);
+        while (index >= 0)
+        {
+            if (suffixMap.ContainsKey(literal[index..]))
+            {
+                return true;
+            }
+
+            index = literal.IndexOf(UITextText.IDSeparator, index + UITextText.IDSeparator.Length, StringComparison.Ordinal);
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -880,6 +949,51 @@ internal static class UITextPatcher
             Plugin.Log?.Warning(e, "[内部文本] 保留调试符号失败：本次补丁不带 PDB 写出（插件里用 StackFrame 读文件名的代码可能报错）");
             module.Write(tempPath, new ModuleWriterOptions(module));
         }
+    }
+
+    /// <summary>
+    ///     这条译文在 ImGui 上「可能被当控件标签（### 会被剥掉）」还是「确定是纯文字绘制（### 会原样显示）」。
+    ///     判据是抽取时记下的调用目标（RoleReason）：目标是 Text* / tooltip / 包装库画文字方法时不算标签；
+    ///     没信息 / 其它目标保守当作标签（宁多一个后缀，也别让按钮因撞 ID 点不动；2026-10-03 评审 B-08）。
+    /// </summary>
+    public static bool MightBeLabel(UITextPackEntry entry)
+    {
+        var reason = entry.RoleReason ?? string.Empty;
+        if (reason.Length == 0)
+        {
+            return true;
+        }
+
+        string? target = null;
+        var arrow = reason.LastIndexOf('→');
+        if (arrow >= 0)
+        {
+            target = reason[(arrow + 1)..].Trim();
+        }
+        else
+        {
+            var open = reason.IndexOf("UI（", StringComparison.Ordinal);
+            var close = open >= 0 ? reason.IndexOf('）', open) : -1;
+            if (open >= 0 && close > open)
+            {
+                target = reason[(open + 3)..close].Trim();
+            }
+        }
+
+        if (string.IsNullOrEmpty(target))
+        {
+            return true;
+        }
+
+        var dot = target.LastIndexOf('.');
+        var method = dot >= 0 ? target[(dot + 1)..] : target;
+        var cut = method.IndexOfAny(['(', ' ', '>', ',']);
+        if (cut > 0)
+        {
+            method = method[..cut];
+        }
+
+        return !UICallSemantics.IsPlainTextCallName(method);
     }
 
     private static void TryDelete(string path)

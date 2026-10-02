@@ -194,13 +194,19 @@ public static class UIStringExtractor
                 if (indexByOriginal.TryGetValue(item.Original, out var index))
                 {
                     var existing = entries[index];
+                    // 跨程序集「同文异角色」冲突：一边当界面文本、另一边当功能语境/查表 key → 降为灰名单。
+                    // 不能按「更强判定」直接翻——那会在用了功能语境的那份 DLL 里也改字面量（2026-10-03 评审 A3）。
+                    var conflict = (existing.Role == UITextRole.UI && tagged.Role == UITextRole.Excluded)
+                                   || (existing.Role == UITextRole.Excluded && tagged.Role == UITextRole.UI);
                     var keep = RoleRank(tagged.Role) < RoleRank(existing.Role) ? tagged : existing;
                     entries[index] = new UITextEntry
                     {
                         Original = existing.Original,
                         Context = keep.Context,
-                        Role = keep.Role,
-                        Reason = keep.Reason,
+                        Role = conflict ? UITextRole.Ambiguous : keep.Role,
+                        Reason = conflict
+                            ? "同一原文在不同程序集里角色冲突（一份当界面文本、一份当功能语境），默认不翻；确认安全可在编辑器里单条翻"
+                            : keep.Reason,
                         PreserveID = existing.PreserveID || tagged.PreserveID,
                     };
                 }
@@ -415,6 +421,9 @@ public static class UIStringExtractor
         public bool[] ParamsDangerous = [];
         public string[] ParamsDangerousTarget = [];
         public bool[] ParamsKey = [];
+
+        /// <summary>参数是否被当「字典/集合键名」用（与 ParamsKey 区分：那个还含外部表 key）。2026-10-03 评审 A1。</summary>
+        public bool[] ParamsDictionaryKey = [];
         public bool ReturnsToUI;
         public string ReturnsToUITarget = string.Empty;
         public bool ReturnsDangerous;
@@ -442,8 +451,9 @@ public static class UIStringExtractor
         /// <summary>简单字段 getter（<c>get_X => _x;</c>）→ 它读的字段（2026-10-02，集合初始化器与返回值链靠它接通）。</summary>
         private readonly Dictionary<string, string> simpleFieldGetters = new(StringComparer.Ordinal);
 
-        /// <summary>界面文字放在本地化资源里的字面量个数（ResourceManager.GetString 的 key，不能翻）。</summary>
-        private int resourceKeyCount;
+        /// <summary>界面文字放在本地化资源里的字面量 ID 集合（ResourceManager.GetString 的 key，不能翻）。
+        /// 用集合去重：扫两遍 + 同一条字面量多处出现，直接计数会虚高（2026-10-03 评审 A5）。</summary>
+        private readonly HashSet<int> resourceKeyIds = [];
         private readonly List<(int Literal, string Method, int Param)> passRefs = [];
         private readonly List<(string FromMethod, int FromParam, string ToMethod, int ToParam)> paramFlowRefs = [];
         private readonly List<(string Callee, string Method, int Param)> returnToParamRefs = [];
@@ -556,6 +566,7 @@ public static class UIStringExtractor
                 scan.ParamsDangerous = new bool[paramCount];
                 scan.ParamsDangerousTarget = EmptyStrings(paramCount);
                 scan.ParamsKey = new bool[paramCount];
+                scan.ParamsDictionaryKey = new bool[paramCount];
 
                 this.methods.Add(scan);
                 this.methodByKey[scan.Key] = scan;
@@ -1445,13 +1456,8 @@ public static class UIStringExtractor
                 if (UICallSemantics.IsCollectionKeyCall(typeName, methodName) && argValues.Length > 0
                     && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
                 {
-                    this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
-
                     // 记成「字典键」：两边都沾时给灰名单而不是直接丢掉（见 Literal.DictionaryKey 注释）
-                    foreach (var keyId in argValues[0].IDs)
-                    {
-                        this.literals[keyId].DictionaryKey = true;
-                    }
+                    this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true, dictionaryKey: true);
 
                     // 值位置：本地化词典的显示文本（AcquisitionDate 的英文侧就是这样，GetTranslation
                     // 查表命中的就是它）。翻了不动 key，安全；形态不像文本的按数据值排除。
@@ -1615,7 +1621,10 @@ public static class UIStringExtractor
 
                     if (UICallSemantics.IsResourceKeyCall(typeName, methodName))
                     {
-                        this.resourceKeyCount += argValues[0].IDs.Count;
+                        foreach (var keyId in argValues[0].IDs)
+                        {
+                            this.resourceKeyIds.Add(keyId);
+                        }
                     }
                 }
 
@@ -1653,14 +1662,19 @@ public static class UIStringExtractor
             // 日志文本可以安全翻译（翻了只是日志变中文），不该让同一字面量被拖进灰名单：
             // 不标危险，也不当 UI——只进日志的字符串自然落在「没有流向 UI 调用」里；
             // 同时出现在界面和日志里的，就应该按界面文本翻（2026-10-02，FrenRider 一批就是这样变灰的）。
-            if (UICallSemantics.IsLogCall(typeName, methodName))
+            // 2026-10-03 评审 A4：本程序集内的「日志包装方法」不走这条快速返回——要走 ⑤ 登记参数流，
+            // 否则参数里真正画到界面的文本会整条断流（漏翻）。
+            var logCall = UICallSemantics.IsLogCall(typeName, methodName);
+            var key = MethodKey(typeName, methodName, paramTypes.Count);
+            var isInternal = this.methodByKey.ContainsKey(key) || DeclaredInModule(callee, this.module);
+            if (logCall && !isInternal)
             {
                 Leave(MakeResult(callee, argValues, isInternal: false));
                 return;
             }
 
-            // ④ 危险语境
-            if (UICallSemantics.IsDangerousCall(typeName, methodName))
+            // ④ 危险语境（日志调用跳过：外部日志上面处理了；内部日志包装要落到 ⑤ 去登记参数流）
+            if (!logCall && UICallSemantics.IsDangerousCall(typeName, methodName))
             {
                 var target = UICallSemantics.ShortTarget(typeName, methodName);
                 var isKey = UICallSemantics.IsCollectionKeyCall(typeName, methodName);
@@ -1679,15 +1693,13 @@ public static class UIStringExtractor
                         continue;
                     }
 
-                    this.MarkDangerous(scan, argValues[i], target, isKey);
+                    this.MarkDangerous(scan, argValues[i], target, hardKey: isKey, dictionaryKey: isKey);
                 }
                 Leave(MakeResult(callee, argValues, isInternal: false));
                 return;
             }
 
-            // ⑤ 本程序集内的方法：记参数流 / 返回值流
-            var key = MethodKey(typeName, methodName, paramTypes.Count);
-            var isInternal = this.methodByKey.ContainsKey(key) || DeclaredInModule(callee, this.module);
+            // ⑤ 本程序集内的方法：记参数流 / 返回值流（key / isInternal 在上面算好了）
             if (isInternal)
             {
                 for (var i = 0; i < argValues.Length; i++)
@@ -1877,7 +1889,7 @@ public static class UIStringExtractor
             this.fieldValues.TryAdd(fieldKey, V.FromField(fieldKey));
         }
 
-        private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false)
+        private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false, bool dictionaryKey = false)
         {
             if (Trace is not null)
             {
@@ -1897,6 +1909,7 @@ public static class UIStringExtractor
                 var literal = this.literals[id];
                 literal.Dangerous = true;
                 literal.HardKey |= hardKey;
+                literal.DictionaryKey |= dictionaryKey;
                 if (literal.DangerousTarget.Length == 0)
                 {
                     literal.DangerousTarget = target;
@@ -1908,6 +1921,7 @@ public static class UIStringExtractor
                 var fieldScan = this.GetFieldScan(dangerousField);
                 fieldScan.ParamsDangerous[0] = true;
                 fieldScan.ParamsKey[0] |= hardKey;
+                fieldScan.ParamsDictionaryKey[0] |= dictionaryKey;
                 if (fieldScan.ParamsDangerousTarget[0].Length == 0)
                 {
                     fieldScan.ParamsDangerousTarget[0] = target;
@@ -1927,6 +1941,11 @@ public static class UIStringExtractor
                     if (hardKey)
                     {
                         scan.ParamsKey[index] = true;
+                    }
+
+                    if (dictionaryKey)
+                    {
+                        scan.ParamsDictionaryKey[index] = true;
                     }
                 }
             }
@@ -2347,6 +2366,7 @@ public static class UIStringExtractor
                             from.ParamsDangerous[fromParam] = true;
                             from.ParamsDangerousTarget[fromParam] = to.ParamsDangerousTarget[toParam];
                             from.ParamsKey[fromParam] = to.ParamsKey[toParam];
+                            from.ParamsDictionaryKey[fromParam] = to.ParamsDictionaryKey[toParam];
                             changed = true;
                         }
                     }
@@ -2492,6 +2512,7 @@ public static class UIStringExtractor
                 {
                     literal.DangerousViaFlow = true;
                     literal.HardKey |= scan.ParamsKey[param];
+                    literal.DictionaryKey |= scan.ParamsDictionaryKey[param];
                     if (literal.DangerousFlowTarget.Length == 0)
                     {
                         literal.DangerousFlowTarget = scan.ParamsDangerousTarget[param];
@@ -2757,7 +2778,7 @@ public static class UIStringExtractor
             return new UITextExtraction
             {
                 AssemblyPath = this.path,
-                ResourceKeyCount = this.resourceKeyCount,
+                ResourceKeyCount = this.resourceKeyIds.Count,
                 Resources = this.ScanResources(),
                 Attributes = this.ScanAttributes(),
                 Entries = entries,
@@ -3217,6 +3238,7 @@ public static class UIStringExtractor
                 ParamsDangerous = new bool[1],
                 ParamsDangerousTarget = [string.Empty],
                 ParamsKey = new bool[1],
+                ParamsDictionaryKey = new bool[1],
             };
             this.methodByKey[scan.Key] = scan;
             return scan;

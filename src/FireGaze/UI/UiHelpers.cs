@@ -80,6 +80,20 @@ internal static class UiHelpers
 
     public static void PopEnableButton() => ImGui.PopStyleColor(3);
 
+    /// <summary>
+    ///     破坏性动作的按钮（还原原文 / 删除）：红系实底，与主色（蓝）、启用（绿）一眼区分。
+    ///     跨页规则（2026-10-03 HCI 评审）：主操作=蓝（<see cref="PushPrimaryButton" />）、正向启用=绿、
+    ///     破坏动作=红；橙色只用于警示文字/徽标，不做按钮底色。必须配套 <see cref="PopDangerButton" />。
+    /// </summary>
+    public static void PushDangerButton()
+    {
+        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.55f, 0.20f, 0.20f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.66f, 0.25f, 0.25f, 1f));
+        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.48f, 0.17f, 0.17f, 1f));
+    }
+
+    public static void PopDangerButton() => ImGui.PopStyleColor(3);
+
     /// <summary>按钮标签的可见宽度（去掉 <c>###ID</c> 后缀）：给 <see cref="SameLineOrWrap" /> 估位置用。</summary>
     public static float LabelWidth(string label)
     {

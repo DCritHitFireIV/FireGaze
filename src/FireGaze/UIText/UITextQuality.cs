@@ -33,6 +33,16 @@ internal static class UITextQuality
     /// <param name="Reason">问题描述。</param>
     public sealed record Problem(string Label, string Original, string Reason);
 
+    /// <summary>「与原文相同」的判定文案（单独拿出来：它属于「不用传」而不是「需要修」那类）。</summary>
+    public const string CopyOfSourceReason = "与原文相同，等于没翻";
+
+    /// <summary>
+    ///     这条问题是不是「照抄原文」（品牌名 / 缩写这类根本无需翻译的条目）——
+    ///     界面上要把它们与真正需要修的问题分开说（2026-10-03 评审 C-06）。
+    /// </summary>
+    public static bool IsCopyOfSource(string reason) =>
+        string.Equals(reason, CopyOfSourceReason, StringComparison.Ordinal);
+
     /// <summary>
     ///     体检一条译文：返回问题描述；<c>null</c> = 健康、可以上传。
     /// </summary>
@@ -68,7 +78,7 @@ internal static class UITextQuality
 
         if (string.Equals(translated.Trim(), original.Trim(), StringComparison.Ordinal))
         {
-            return "与原文相同，等于没翻";
+            return CopyOfSourceReason;
         }
 
         return UITextText.CheckPlaceholders(original, translated);
