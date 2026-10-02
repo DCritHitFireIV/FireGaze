@@ -59,7 +59,7 @@ internal sealed class UITextTab
 
         public bool HasConfigUI;
 
-        /// <summary>在「不汉化」名单里（中文插件，由朋友维护）：识别为中文插件，不抽取 / 不翻译 / 不打包 / 不上传。</summary>
+        /// <summary>在「中文插件」名单里：识别为中文插件，不抽取 / 不翻译 / 不打包 / 不上传。</summary>
         public bool DoNotLocalize;
 
         /// <summary>译文包比已应用的补丁更新（云端下载 / 编辑校对之后）：需要再写入一次才生效。</summary>
@@ -262,7 +262,7 @@ internal sealed class UITextTab
         ImGui.TextDisabled("状态");
         ImGui.SameLine();
         ImGui.SetNextItemWidth(140);
-        var filterLabels = new[] { "全部", "未汉化", "待应用", "已汉化", "失败", "不汉化" };
+        var filterLabels = new[] { "全部", "未汉化", "待应用", "已汉化", "失败", "中文插件" };
         var filterIndex = (int)this.filter;
         if (ImGui.Combo("###UITextFilter", ref filterIndex, filterLabels, filterLabels.Length))
         {
@@ -626,7 +626,7 @@ internal sealed class UITextTab
             }
             if (info is { DoNotLocalize: true } && ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("中文插件 · 不汉化：这个插件由朋友维护、本身就是中文界面，FireGaze 不抽取 / 不翻译 / 不打包 / 不上传。\n有旧补丁记录时可以点「还原原文」恢复原版。");
+                ImGui.SetTooltip("中文插件：本身就是中文界面，FireGaze 不抽取 / 不翻译 / 不打包 / 不上传。\n有旧补丁记录时可以点「还原原文」恢复原版。");
             }
 
             ImGui.SameLine();
@@ -856,7 +856,7 @@ internal sealed class UITextTab
 
         if (UITextRules.IsDoNotLocalize(entry.InternalName))
         {
-            this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "识别为中文插件（由朋友维护），不上传它的译文。" };
+            this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "识别为中文插件。" };
             return;
         }
 
@@ -1064,7 +1064,7 @@ internal sealed class UITextTab
         if (info is { DoNotLocalize: true })
         {
             ImGui.PushTextWrapPos(ImGui.GetCursorPosX() + ImGui.GetContentRegionAvail().X - 8);
-            ImGui.TextDisabled("识别为中文插件，不汉化。这个项目本身就是中文界面、由朋友维护，FireGaze 跳过它的抽取 / 翻译 / 打包 / 上传。");
+            ImGui.TextDisabled("识别为中文插件。这个项目本身就是中文界面，FireGaze 跳过它的抽取 / 翻译 / 打包 / 上传。");
             ImGui.PopTextWrapPos();
             if (info.HasBackup)
             {
@@ -1473,7 +1473,7 @@ internal sealed class UITextTab
 
         if (info is { DoNotLocalize: true })
         {
-            return ("中文插件 · 不汉化", UiHelpers.Skip);
+            return ("中文插件", UiHelpers.Skip);
         }
 
         if (info is null || !info.HasPack)
@@ -1594,7 +1594,7 @@ internal sealed class UITextTab
             this.notes[entry.InternalName] = new RowNote
             {
                 Kind = NoteKind.Info,
-                Text = "识别为中文插件（由朋友维护），FireGaze 不汉化它。",
+                Text = "识别为中文插件。",
             };
             return;
         }

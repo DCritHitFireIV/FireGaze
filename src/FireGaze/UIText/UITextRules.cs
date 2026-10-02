@@ -34,7 +34,7 @@ internal static class UITextRules
     public static Action<Exception, string>? DebugSink { get; set; }
 
     /// <summary>
-    ///     「不汉化」名单（用户 2026-10-02 指定）：这些插件本身就是中文、由朋友维护，
+    ///     「中文插件」名单（用户 2026-10-02 指定）：这些插件本身就是中文，
     ///     汉化只会增加维护负担；FireGaze 识别为中文插件直接跳过，不允许抽取 / 翻译 / 打补丁 / 上传。
     ///     按内部名匹配，大小写不敏感。
     /// </summary>
@@ -95,9 +95,19 @@ internal static class UITextRules
         "AutoTriadC",
         "TTC_Siren",
         "CoordImporter",
+        // 2026-10-03 用户要求：XTeleport / 琉璃的宝石 / Anmi 的插件 / VanillaPlus / Inverse Kinematics
+        "Teleport",        // XTeleport（XTeleportOnline）
+        "ruri",            // 琉璃的宝石（kano）
+        "ArenaPilot",      // 斗兽塔助手（Anmi）
+        "Beastmaster",     // 驯兽师助手（Anmi）
+        "Chronicler",      // 新月岛史官（Anmi）
+        "Phantom",         // 肝武助手（Anmi）
+        "DalamudACT",      // DPS统计（Shiyuvi、Anmi 合作）
+        "VanillaPlus",     // 自带 de/fr/ja/zh 本地化目录
+        "FootIk",          // Inverse Kinematics（BSoD38）
     };
 
-    /// <summary>这个插件是不是「中文插件、不汉化」（名单见 <see cref="DoNotLocalize" />）。</summary>
+    /// <summary>这个插件是不是中文插件（名单见 <see cref="DoNotLocalize" />）。</summary>
     public static bool IsDoNotLocalize(string? internalName) =>
         !string.IsNullOrEmpty(internalName) && DoNotLocalize.Contains(internalName);
 

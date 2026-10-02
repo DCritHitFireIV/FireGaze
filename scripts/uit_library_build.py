@@ -48,8 +48,8 @@ AETHERFEED = ut.AETHERFEED
 DEFAULT_TARGETS = os.path.join(SCRIPT_DIR, "uit_targets.txt")
 DEFAULT_GLOSSARY = os.path.join(REPO_ROOT, "ffxiv-glossary.tsv")
 
-# 「不汉化」名单（与插件端 UITextRules.IsDoNotLocalize 同一份口径，2026-10-02 用户定）：
-# 中文插件、由朋友维护，汉化只会增加维护负担——云端库也不许给它们出包。
+# 「中文插件」名单（与插件端 UITextRules.IsDoNotLocalize 同一份口径，2026-10-02 用户定）：
+# 这些插件本身就是中文，汉化只会增加维护负担——云端库也不许给它们出包。
 DO_NOT_LOCALIZE = {
     "aeassistv3", "aeassist", "dailyroutines", "omnitoolbox", "xsztoolbox",
     "kodakkuassist", "promerotation", "nyadraw", "i-ching-gl", "missfisher",
@@ -63,6 +63,9 @@ DO_NOT_LOCALIZE = {
     "dctravelerx", "proxyplugin",
     "coyote-ffxiv", "ffxivnetworkpacketanalysistool", "gposeresizer",
     "cleanwindow", "autotriadc", "ttc_siren", "coordimporter",
+    # 2026-10-03：XTeleport / 琉璃的宝石 / Anmi 的插件 / VanillaPlus / Inverse Kinematics
+    "teleport", "ruri", "arenapilot", "beastmaster", "chronicler", "phantom",
+    "dalamudact", "vanillaplus", "footik",
 }
 
 TRANSLATE_PROMPT = (

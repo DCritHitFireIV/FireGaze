@@ -323,7 +323,7 @@ internal sealed class UITextPatchManager
     {
         if (UITextRules.IsDoNotLocalize(entry.InternalName))
         {
-            return (false, "识别为中文插件（由朋友维护），FireGaze 不汉化它。");
+            return (false, "识别为中文插件。");
         }
 
         var dllPath = entry.DLLPath;
@@ -709,7 +709,7 @@ internal sealed class UITextPatchManager
         {
             return (new UITextExtraction
             {
-                Error = "识别为中文插件（由朋友维护），FireGaze 不汉化它。",
+                Error = "识别为中文插件。",
             }, string.Empty);
         }
 

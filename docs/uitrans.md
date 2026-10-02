@@ -145,7 +145,7 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   · **其余保留/补齐**：库里已有但本机没有的原样保留，本机独有的追加（`--replace` 才整包覆盖）；
   · **已是中文的不导出**（与插件端 `IsAlreadyChinese` 同口径，含原生「中文###ID」标签）——
     2026-10-02 扫出 AetherBlackbox / ARSR / ArmoireButler 一批「把中文再翻一遍」的噪声，已拦下；
-  · 「不汉化」名单（AEAssistV3 / DailyRoutines 等）跳过且不碰库里已有包；
+  · 「中文插件」名单（AEAssistV3 / DailyRoutines 等）跳过且不碰库里已有包；
   · 导出时 `PreserveID=false`、`Source=library`、不导出 Review / Skipped（本地决定不外溢）。
 - 授权口径（用户定）：默认公开，README 注明「机器/社区翻译，不代表原作者」；作者要求即从库中移除。
 - **投稿（玩家把人工译文交回库）**：编辑器「更多… → 提交人工译文到公共库…」把当前包里 `Source=user` 的条目打成
@@ -217,15 +217,15 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   首次在编辑器里打开一个还没跑过一键汉化的插件（如 AutoDuty），本地化文件的候选根本不出现在行里。
   现在编辑器与列表页共用同一个合并入口，两边口径一致；`MergeResult` 顺带带上「角色依据」（`Reasons`）供行里显示。
 
-## 「不汉化」名单（2026-10-02 用户定）
+## 「中文插件」名单（2026-10-02 用户定）
 
 - 名单（内部名）：`AEAssistV3` / `AEAssist` / `DailyRoutines` / `OmniToolbox` / `XSZToolbox` / `KodakkuAssist` /
   `PromeRotation` / `NyaDraw` / `I-Ching-GL` / `MissFisher` / `LightlessSync` / `LightlessCN` /
   `SillyToolbox` / `pvpauto` / `BOCCHI`。
-- 理由（用户原话口径）：这些是复杂项目、由朋友维护，汉化只会增加对方的维护负担；而且本来就是中文插件。
+- 理由：这些是复杂项目，汉化只会增加对方的维护负担；而且本来就是中文插件。
   后两个是 2026-10-02 普查后按同一原则补进名单的——`SillyToolbox` 自述「给自己和亲友用的小功能」、
   `pvpauto` 是中文作者的自动化工具，两者中文文件都完整，本来也翻不出东西。
-- 行为：列表里显示「中文插件 · 不汉化」，不提供一键汉化 / 抽取 / 编辑 / 上传；
+- 行为：列表里显示「中文插件」，不提供一键汉化 / 抽取 / 编辑 / 上传；
   管理器层（`Apply` / `ExtractWithGuard`）另有一道拦截，绕过界面也打不进补丁；CI 的 `uit_library_build.py`
   同样过滤，云端库不会给它们出包。有补丁记录的仍可点「还原原文」恢复。
 
@@ -562,9 +562,9 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 | BOCCHI | `Translations/{en,zh}/*.json`（各 23 文件） | 727 | 0（完整） |
 | Henchman | `Localization/{de,en,fr,jp,ko,tw,zh}/*.json`（各 16 文件） | 202 | 0（完整） |
 | Aetherphone | `Localization/{en,zh,…}.json` | 6739 | **0（完整）**——早先一版人工普查误记成「没有 zh」，实际有完整 `zh.json` |
-| SillyToolbox | `Assets/Localization/{en,zh-Hans,zh-Hant}.json` | 323 | 0（完整；2026-10-02 起列入「不汉化」名单） |
+| SillyToolbox | `Assets/Localization/{en,zh-Hans,zh-Hant}.json` | 323 | 0（完整；2026-10-02 起列入「中文插件」名单） |
 | pvpauto | `Assets/Langs/{English,Chinese}.json` | 631 | 0（完整；同上） |
-| DailyRoutines / NyaDraw / KodakkuAssist | `Assets/Langs` ×2 / `Module/Langs`（.resx） | — | 不参与（在「不汉化」名单里，朋友维护的中文插件） |
+| DailyRoutines / NyaDraw / KodakkuAssist | `Assets/Langs` ×2 / `Module/Langs`（.resx） | — | 不参与（在「中文插件」名单里） |
 
 - 形态不统一：**目录分语言**（`en-US/`、`en/`）与**单文件分语言**（`en.json`、`en_UK.json`）两种；
   语言代码有 `en-US/zh-CN`、`en/zh`、`en_UK/zh_CN` 三种写法。

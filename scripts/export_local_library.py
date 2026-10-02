@@ -12,7 +12,7 @@
   （2026-10-02：拼接片段被加 ###原文、ImGui 控件全联动的教训）。
 - Source 一律写 library：下载者看到的是「公共配套库」，不冒充别人手翻。
 - Review / Skipped（本机复核与不翻标记）不导出——那是本地决定，不该外溢。
-- 「不汉化」名单（中文插件、由朋友维护）一律跳过、也不碰库里已有的包。
+- 「中文插件」名单一律跳过、也不碰库里已有的包。
 
 用法：
     python scripts/export_local_library.py --dry-run      # 只看统计
@@ -50,6 +50,9 @@ DO_NOT_LOCALIZE = {
     "dctravelerx", "proxyplugin",
     "coyote-ffxiv", "ffxivnetworkpacketanalysistool", "gposeresizer",
     "cleanwindow", "autotriadc", "ttc_siren", "coordimporter",
+    # 2026-10-03：XTeleport / 琉璃的宝石 / Anmi 的插件 / VanillaPlus / Inverse Kinematics
+    "teleport", "ruri", "arenapilot", "beastmaster", "chronicler", "phantom",
+    "dalamudact", "vanillaplus", "footik",
 }
 
 
@@ -221,7 +224,7 @@ def main(argv: list[str] | None = None) -> int:
             continue
         internal_name = file_name[:-5]
         if internal_name.lower() in DO_NOT_LOCALIZE:
-            print(f"  [{internal_name}] 不汉化名单，跳过")
+            print(f"  [{internal_name}] 中文插件，跳过")
             continue
         path = os.path.join(args.packs_dir, file_name)
         try:
