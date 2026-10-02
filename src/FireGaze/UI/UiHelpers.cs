@@ -16,6 +16,12 @@ internal static class UiHelpers
     public static readonly Vector4 Info = new(0.62f, 0.76f, 0.94f, 1f);
     public static readonly Vector4 Accent = new(0.55f, 0.75f, 1f, 1f);
 
+    /// <summary>
+    ///     「跳过」的终态色（中文插件 · 不汉化等）：特意不用 Info 蓝——蓝在本页签表示「有进度/待处理」，
+    ///     复用会让「不汉化」被读成「正在处理」（2026-10-02 v4 定向复评 F8）。
+    /// </summary>
+    public static readonly Vector4 Skip = new(0.78f, 0.70f, 0.95f, 1f);
+
     public static Vector4 StatusColor(RepoStatus status) => status switch
     {
         RepoStatus.Ok => Good,

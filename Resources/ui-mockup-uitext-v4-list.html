@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>插件汉化 — 列表 + 详情 + 确认框（v4 还原图，2026-10-02）</title>
+<style>
+  /* ImGui 深色界面还原图 v4（与 v3 同一套变量；忠实复刻实现，不做另行设计）。
+     v4 相对 v3 的改动：上传/还原/云端应用三处确认框；失败行「重试」；行内「取消」；
+     名单行「还原原文」；「有改动待写入」徽标；工具栏计数口径；「下载译文」按钮名。 */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0; --skip: #c8b4f5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 800px; }
+  .caption b { color: #d8d8d8; }
+  .window { width: 800px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .body { padding: 6px 16px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .brandrow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .brandrow .brand { color: var(--accent); font-weight: 600; }
+  .brandrow .sub { color: var(--muted); font-size: 13px; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .tabs .tab { padding: 3px 10px; font-size: 14px; color: var(--muted); border: 1px solid transparent; border-bottom: none; border-radius: 3px 3px 0 0; }
+  .tabs .tab.on { color: var(--text); background: #232323; border-color: var(--border); }
+  .hint { color: var(--muted); font-size: 13px; }
+  .sep { height: 1px; background: var(--border); margin: 2px 0; }
+  .btn { display: inline-block; padding: 3px 11px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; white-space: nowrap; }
+  .btn.primary { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.plain { background: #2a2a2a; border-color: #4a4a4a; color: #d8d8d8; }
+  .btn.text { background: transparent; border-color: transparent; color: #a6a6a6; }
+  .btn.disabled { opacity: .45; }
+  .btn.focus { border-color: #9ec2f0; box-shadow: 0 0 0 1px #9ec2f0 inset; }
+  .chk { width: 15px; height: 15px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: #2a2a2a; font-size: 12px; flex: none; }
+  .chk.on::after { content: "✔"; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .search { width: 230px; border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  .combo { border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; background: #232323; font-size: 14px; color: #d8d8d8; }
+  .muted { color: var(--muted); } .good { color: var(--good); } .bad { color: var(--bad); } .info { color: var(--info); } .warn { color: var(--warn); }
+  .count { margin-left: auto; color: var(--muted); font-size: 13px; }
+  .statusbar { border: 1px solid #3d5473; background: #1e2630; border-radius: 3px; padding: 4px 8px; font-size: 13px; display: flex; gap: 10px; align-items: center; }
+
+  /* ── 插件列表行 ── */
+  .plist { border: 1px solid var(--border); border-radius: 3px; background: #1c1c1c; }
+  .prow { display: flex; gap: 10px; padding: 8px 10px; border-bottom: 1px solid #262626; align-items: flex-start; }
+  .prow:last-child { border-bottom: none; }
+  .prow.open { background: #202020; }
+  .pic { width: 40px; height: 40px; border-radius: 5px; flex: none; background: linear-gradient(150deg,#3b4a63,#2a3242);
+         display: flex; align-items: center; justify-content: center; color: #cfe0ff; font-size: 17px; font-weight: 600; border: 1px solid #45536b; }
+  .pic.alt1 { background: linear-gradient(150deg,#5a4632,#3a2f22); color: #f0d9b6; border-color: #6b563c; }
+  .pic.alt2 { background: linear-gradient(150deg,#3f5240,#283429); color: #cbe8cb; border-color: #4c6350; }
+  .pic.alt3 { background: linear-gradient(150deg,#584050,#33262f); color: #e8cfe4; border-color: #6a4d5f; }
+  .pic.alt4 { background: linear-gradient(150deg,#3a4a55,#26313a); color: #cfe4ee; border-color: #47606e; }
+  .pmain { flex: 1; min-width: 0; }
+  .ptitle { display: flex; align-items: baseline; gap: 6px; }
+  .ptitle .name { font-size: 15px; color: #f0f0f0; }
+  .tag { font-size: 12px; color: var(--muted); border: 1px solid #4a4a4a; border-radius: 3px; padding: 0 4px; }
+  .psum { color: var(--muted); font-size: 13px; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pmeta { font-size: 13px; margin-top: 2px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .pmeta .id { color: #8b8b8b; font-size: 12px; }
+  .badge { font-size: 13px; }
+  .badge.done { color: var(--good); }
+  .badge.part { color: var(--info); }
+  .badge.none { color: var(--muted); }
+  .badge.skip { color: var(--skip); }
+  .badge.warn { color: var(--warn); }
+  .badge.badd { color: var(--bad); }
+  .pact { display: flex; gap: 8px; align-items: center; flex: none; padding-top: 2px; flex-wrap: wrap; justify-content: flex-end; max-width: 340px; }
+  .chev { color: var(--muted); font-size: 13px; width: 16px; text-align: center; }
+  .prog { height: 6px; background: #2b2b2b; border: 1px solid #3f3f3f; border-radius: 3px; margin-top: 7px; position: relative; overflow: hidden; width: 420px; }
+  .prog > i { position: absolute; inset: 0 68% 0 0; background: #3f6699; }
+  .note { font-size: 13px; margin-top: 5px; display: flex; gap: 8px; align-items: baseline; }
+  .note .txt { flex: 1; }
+  .note .detail { display: block; color: var(--muted); }
+  .pexpand { border-bottom: 1px solid #262626; background: #1f1f1f; padding: 6px 10px 10px 60px; }
+  .pexpand:last-child { border-bottom: none; }
+  .desc { color: #c9c9c9; font-size: 13px; line-height: 1.55; white-space: pre-line; }
+  .stats { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .actions { margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .cloud { margin-top: 8px; border-top: 1px solid #2c2c2c; padding-top: 7px; }
+  .cloud .title { font-size: 13px; color: #d8d8d8; }
+  .cloud .pack { display: flex; gap: 8px; align-items: baseline; margin-top: 5px; font-size: 13px; }
+  .cloud .disclaimer { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+  /* ── 弹窗帧 ── */
+  .backdrop { position: relative; width: 800px; min-height: 430px; background: rgba(10,10,10,.55);
+              border: 1px solid #4d4d4d; border-radius: 3px; display: flex; align-items: flex-start; justify-content: center; padding-top: 26px; }
+  .modal { width: 560px; background: #1c1c1c; border: 1px solid #5a5a5a; border-radius: 4px; box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+  .modal .mtitle { padding: 5px 12px; background: #262626; border-bottom: 1px solid #3a3a3a; font-size: 14px; color: #e8e8e8; border-radius: 3px 3px 0 0; }
+  .modal .mbody { padding: 10px 14px 12px; font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .modal .mbody .dim { color: var(--muted); font-size: 13px; }
+  .modal .mbtns { padding: 4px 14px 12px; display: flex; gap: 8px; }
+  .modal .mbtns .btn { min-width: 64px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ================= 帧 1：列表（多状态） ================= -->
+  <div>
+    <p class="caption"><b>帧 1 —「插件汉化」列表（v4：1.2.0.78 实现）</b>：六种行并列——已汉化（AutoHook）/ 翻译失败 + 主按钮变「重试」（Aetherphone）/ 未汉化（AutoHunt）/ 中文插件不汉化 + 还原原文（DailyRoutines，终态用独立色）/ 已汉化·有改动待写入 + 主按钮变「写入并重载」（AetherDraw）/ 进行中 + 行内取消（AetherBlackbox）。
+      工具栏计数口径 =「刷新于 · 已装 · 已汉化 · 待处理」；名单行悬停解释「由朋友维护、本身就是中文界面」。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 安装器</span></div>
+        <div class="tabs">
+          <div class="tab on">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div>
+        </div>
+        <div class="hint">点「一键汉化」：翻译、写入插件、自动重载一次完成。会改插件文件，原文件自动备份，随时可「还原原文」。</div>
+        <div class="hint">这里只管插件自己的界面，插件简介在「简介汉化」页；插件在跑任务时先停一下，重载会打断它。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <span class="btn plain">刷新</span>
+          <div class="search">搜索插件名…</div>
+          <span class="muted" style="font-size:13px">状态</span>
+          <span class="combo">全部 ▾</span>
+          <span class="row"><span class="chk"></span><span style="font-size:14px">只看第三方</span></span>
+          <span class="btn plain">翻译设置…</span>
+          <span class="count">刷新于 18:42:10 · 已装 198 · 已汉化 15 · 待处理 2</span>
+        </div>
+
+        <div class="statusbar"><span class="info">正在汉化 AetherBlackbox：翻译 302 / 964 条</span><span class="btn plain" style="padding:1px 8px">取消</span></div>
+
+        <div class="plist">
+          <!-- 已汉化 -->
+          <div class="prow">
+            <div class="pic alt1">A</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">AutoHook</span></div>
+              <div class="psum">自动钓鱼辅助：自动抛竿、提钩、换饵、切换拟饵。</div>
+              <div class="pmeta"><span class="badge done">已汉化 981 条</span><span class="id">AutoHook · v6.0.2.4</span></div>
+            </div>
+            <div class="pact">
+              <span class="btn plain">打开</span><span class="btn text">还原原文</span><span class="btn plain">详情</span><span class="btn plain">一键上传</span>
+            </div>
+          </div>
+
+          <!-- 翻译失败 + 重试 -->
+          <div class="prow">
+            <div class="pic alt3">A</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">Aetherphone</span></div>
+              <div class="psum">A smartphone, built for you.</div>
+              <div class="pmeta"><span class="badge part">已翻译 1641 条 · 未应用</span><span class="id">Aetherphone · v1.0.3.9</span></div>
+              <div class="note"><span class="txt bad">翻译失败：大模型没有按 JSON 回答<span class="detail">已翻好的 1641 条不会丢；点「重试」接着翻，或到「翻译设置」换一条通道。</span></span><span class="btn plain">翻译设置…</span></div>
+            </div>
+            <div class="pact">
+              <span class="btn primary">重试</span><span class="btn plain">详情</span><span class="btn plain">一键上传</span>
+            </div>
+          </div>
+
+          <!-- 未汉化 -->
+          <div class="prow">
+            <div class="pic alt2">A</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">AutoHunt</span></div>
+              <div class="psum">自动狩猎车助手</div>
+              <div class="pmeta"><span class="badge none">未汉化 · 候选 21 条</span><span class="id">AutoHunt · v2.4.0.19</span></div>
+            </div>
+            <div class="pact">
+              <span class="btn primary">一键汉化</span><span class="btn plain">详情</span>
+            </div>
+          </div>
+
+          <!-- 中文插件不汉化（终态样式 = Info 色；悬停解释） -->
+          <div class="prow">
+            <div class="pic alt4">D</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">DailyRoutines</span></div>
+              <div class="psum">一站式日常任务辅助。</div>
+              <div class="pmeta"><span class="badge skip" title="中文插件 · 不汉化：这个插件由朋友维护、本身就是中文界面，FireGaze 不抽取 / 不翻译 / 不打包 / 不上传。有旧补丁记录时可以点「还原原文」恢复原版。">中文插件 · 不汉化</span><span class="id">DailyRoutines · v2.2.1.0</span></div>
+            </div>
+            <div class="pact">
+              <span class="btn plain">还原原文</span><span class="btn plain">详情</span>
+            </div>
+          </div>
+
+          <!-- 已汉化 · 有改动待写入 -->
+          <div class="prow">
+            <div class="pic">A</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">AetherDraw</span></div>
+              <div class="psum">A realtime multi-user whiteboard raid planner and strat viewer.</div>
+              <div class="pmeta"><span class="badge done">已汉化 252 条</span><span class="badge warn">· 有改动待写入</span><span class="id">AetherDraw · v7.5.0.1</span></div>
+            </div>
+            <div class="pact">
+              <span class="btn primary">写入并重载</span><span class="btn text">还原原文</span><span class="btn plain">详情</span><span class="btn plain">一键上传</span>
+            </div>
+          </div>
+
+          <!-- 进行中 + 行内取消 -->
+          <div class="prow">
+            <div class="pic">A</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">AetherBlackbox</span></div>
+              <div class="psum">Live recording and playback for your fights.</div>
+              <div class="pmeta"><span class="badge part">翻译中 302 / 964 条</span><span class="id">AetherBlackbox · v2.0.0.3</span></div>
+              <div class="prog"><i></i></div>
+            </div>
+            <div class="pact">
+              <span class="btn plain disabled">一键汉化</span><span class="btn plain">取消</span><span class="btn plain">详情</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 2：展开详情（已汉化 + 中文插件） ================= -->
+  <div>
+    <p class="caption"><b>帧 2 — 展开详情</b>：上=已汉化行（统计、抽取/编辑、云端译文、下载入口）；下=中文插件行（只写一句为什么，指引到行上的「还原原文」）。</p>
+    <div class="window">
+      <div class="osbar">FireGaze</div>
+      <div class="body">
+        <div class="brandrow"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 安装器</span></div>
+        <div class="tabs">
+          <div class="tab on">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div>
+        </div>
+        <div class="sep"></div>
+
+        <div class="plist">
+          <!-- 已汉化行的展开 -->
+          <div class="prow open">
+            <div class="pic alt1">A</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">AutoHook</span></div>
+              <div class="psum">自动钓鱼辅助：自动抛竿、提钩、换饵、切换拟饵。</div>
+              <div class="pmeta"><span class="badge done">已汉化 981 条</span><span class="id">AutoHook · v6.0.2.4</span></div>
+            </div>
+            <div class="pact">
+              <span class="btn plain">打开</span><span class="btn text">还原原文</span><span class="btn plain">收起</span><span class="btn plain">一键上传</span>
+            </div>
+          </div>
+          <div class="pexpand">
+            <div class="desc">AutoHook 是一个自动钓鱼插件：自动抛竿、提钩、换饵、切换拟饵，支持自定义预设与回放记录。</div>
+            <div class="stats">共 1083 条 · 已翻译 981 条 · 未翻译 102 条 · 不翻 0 条 ｜ 补丁：已应用（原始文件已备份）</div>
+            <div class="actions">
+              <span class="btn plain">重新抽取</span><span class="btn plain">编辑校对…</span>
+              <span class="muted" style="font-size:13px;margin-left:6px">译文来源：大模型：deepseek-flash @ https://api.deepseek.com/v1</span>
+            </div>
+            <div class="cloud">
+              <div class="title">云端译文（公共库）</div>
+              <div class="pack"><span>基础包（公共库）</span><span class="muted">981 条 · 2026-10-02 · 下载 —</span><span class="btn plain">下载译文</span></div>
+              <div class="disclaimer">（本机改过的译文不会被覆盖；下载后点这一行的主按钮写入插件）</div>
+            </div>
+          </div>
+
+          <!-- 中文插件行的展开 -->
+          <div class="prow open">
+            <div class="pic alt4">D</div>
+            <div class="pmain">
+              <div class="ptitle"><span class="name">DailyRoutines</span></div>
+              <div class="psum">一站式日常任务辅助。</div>
+              <div class="pmeta"><span class="badge skip">中文插件 · 不汉化</span><span class="id">DailyRoutines · v2.2.1.0</span></div>
+            </div>
+            <div class="pact">
+              <span class="btn plain">还原原文</span><span class="btn plain">收起</span>
+            </div>
+          </div>
+          <div class="pexpand">
+            <div class="desc">DailyRoutines 是一个一站式日常任务辅助插件。</div>
+            <div class="stats">识别为中文插件，不汉化。这个项目本身就是中文界面、由朋友维护，FireGaze 跳过它的抽取 / 翻译 / 打包 / 上传。</div>
+            <div class="stats muted">检测到以前打过汉化补丁：点这个插件的「还原原文」即可恢复原版。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 3：上传确认框（新增） ================= -->
+  <div>
+    <p class="caption"><b>帧 3 — 上传确认框（v4 新增）</b>：说清发什么（条数、人工/机器）、去哪（GitHub 公开 issue）、公开性；默认焦点停在「取消」。点「上传」才真正发出去。</p>
+    <div class="backdrop">
+      <div class="modal">
+        <div class="mtitle">上传译文到公共库</div>
+        <div class="mbody">
+          <div>把「AutoHook」已经翻好的 981 条译文上传到社区公共库——会成为一个 GitHub 公开 issue，所有玩家都能看到并下载。</div>
+          <div class="dim">人工 12 条 · 机器 969 条；只含原文、译文与代码位置，不含账号信息与 key。</div>
+          <div style="height:4px"></div>
+          <div>不想公开的条目，可以先到「编辑校对」里改写或标「不翻」。</div>
+          <div class="sep"></div>
+        </div>
+        <div class="mbtns">
+          <span class="btn plain">上传</span><span class="btn focus">取消</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 4：应用云端译文（差异预检，新增） ================= -->
+  <div>
+    <p class="caption"><b>帧 4 — 应用云端译文（v4 新增）</b>：点「下载译文」后先给差异（新增 / 覆盖机器译 / 保留玩家译 / 无变化），再让用户点「应用」；默认焦点在「取消」。<br>小字说明「人工改过的不会被覆盖」「应用后还要点一键汉化才写进插件」。</p>
+    <div class="backdrop">
+      <div class="modal">
+        <div class="mtitle">应用云端译文</div>
+        <div class="mbody">
+          <div>应用云端译文：基础包（公共库）</div>
+          <div class="dim">新增 23 条 · 更新机器译文 18 条 · 你的 12 条人工译文保留不动 · 其余 928 条无变化</div>
+          <div style="height:4px"></div>
+          <div>本机人工改过的译文不会被覆盖；应用后还要点这一行的「一键汉化」才会写进插件。</div>
+          <div class="sep"></div>
+        </div>
+        <div class="mbtns">
+          <span class="btn">应用</span><span class="btn focus">取消</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

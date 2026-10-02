@@ -612,10 +612,13 @@ internal sealed class UITextEditorWindow : Window
         var resources = this.pack.Resources.Count;
         var attributes = this.pack.Attributes.Count;
         var translated = this.rows.Count(r => r.HasTranslation);
+        var untranslated = this.rows.Count(r => !r.HasTranslation && !r.Skipped);
         var skipped = this.rows.Count(r => r.Skipped);
         var literalCandidates = Math.Max(0, candidate - resources - attributes);
+        // 「｜」分开两个维度：抽取判定（候选/灰名单）与翻译状态（已翻译/未翻译/不翻）——
+        // 直接把两组数字接在一起会让人试图相加（v4 复评 N6）。
         ImGui.TextDisabled(
-            $"共 {this.rows.Count} 条：候选 {candidate}（文字 {literalCandidates} + 资源 {resources} + 属性 {attributes}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
+            $"共 {this.rows.Count} 条 ｜ 候选 {candidate}（文字 {literalCandidates} + 资源 {resources} + 属性 {attributes}）· 灰名单 {ambiguous} ｜ 已翻译 {translated} · 未翻译 {untranslated} · 不翻 {skipped}" +
             (this.extractionTask is { IsCompleted: false } ? " · 抽取中…" : string.Empty));
     }
 
@@ -773,24 +776,24 @@ internal sealed class UITextEditorWindow : Window
             ImGui.TextDisabled("处理中…");
         }
 
-        // 右上：通道 + 保存状态 + 补丁状态
+        // 右上：通道 + 保存状态 + 补丁状态。
+        // 只把「有改动尚未写入」着橙（v4 复评 N4：整串变色会让橙不再是「要动手」的可靠信号）；
+        // 补丁那段加「补丁：」前缀，与「本次改动」区分开（N3/F2：两段并排不再像互相矛盾）。
         var patchStatus = this.patches.StatusOf(entry, out var patchDetailText);
         var packNewer = this.patches.PackNewerThanPatch(entry);
         ImGui.SameLine();
         var stateText = this.dirty
             ? "有未保存的改动…"
-            : packNewer
-                ? $"已保存 {this.lastSaveAt:HH:mm:ss} · 尚未写入插件（点「写入并重载」生效）"
-                : $"已保存 {this.lastSaveAt:HH:mm:ss}";
-        var right = $"通道：{UITextChannelFactory.Describe(this.plugin.Config)} · {stateText} · {DescribePatchStatus(patchStatus)}";
+            : $"已保存 {this.lastSaveAt:HH:mm:ss}";
+        ImGui.TextDisabled($"通道：{UITextChannelFactory.Describe(this.plugin.Config)} · {stateText}");
         if (packNewer && !this.dirty)
         {
-            UiHelpers.ColoredText(UiHelpers.Warn, right);
+            ImGui.SameLine(0, 0);
+            UiHelpers.ColoredText(UiHelpers.Warn, " · 有改动尚未写入（点「写入并重载」生效）");
         }
-        else
-        {
-            ImGui.TextDisabled(right);
-        }
+
+        ImGui.SameLine(0, 0);
+        ImGui.TextDisabled(" · 补丁：" + DescribePatchStatus(patchStatus));
         if (patchDetailText.Length > 0 && ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(patchDetailText);
@@ -1159,9 +1162,8 @@ internal sealed class UITextEditorWindow : Window
         ImGui.SetNextItemWidth(260);
         ImGui.InputTextWithHint("###UITextSearch", "搜索原文 / 译文 / 上下文…", ref this.search, 256);
 
-        ImGui.TextDisabled("状态列：✔ 人工译文 ｜ ⚙ 机器译文 ｜ ⚠ 待复核（悬停看原因）");
-        ImGui.TextDisabled("? 灰名单（默认不翻）｜ ⛔ 不翻 ｜ · 未翻译 ｜ 编辑完点「写入并重载」");
-        ImGui.TextDisabled("右键行：翻译这一条 / 标记不翻 / 清除译文 / 复制");
+        ImGui.TextDisabled("状态列：✔ 人工译文 ｜ ⚙ 机器译文 ｜ ⚠ 待复核（这条不会写入，悬停看原因）");
+        ImGui.TextDisabled("? 灰名单（默认不翻）｜ ⛔ 不翻 ｜ · 未翻译 ｜ 右键行：翻译这一条 / 标记不翻 / 清除译文 / 复制");
     }
 
     private bool Matches(Row row, string filterText)

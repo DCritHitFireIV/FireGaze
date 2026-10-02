@@ -272,21 +272,21 @@ internal sealed class UITextSettingsWindow : Window
             this.keyInput = input;
         }
 
+        // 输入框里有内容时只说「输入还没保存」（v4 复评 F11/N8：与「当前：未保存」同屏是三重同义信号）；
+        // 输入框空着时才报「当前」状态——这时它是唯一的状态信息。
         ImGui.SameLine();
-        if (existing is null)
+        var typing = input.Trim().Length > 0;
+        if (typing)
+        {
+            UiHelpers.ColoredText(UiHelpers.Warn, "输入还没保存");
+        }
+        else if (existing is null)
         {
             UiHelpers.ColoredText(UiHelpers.Muted, "当前：未保存");
         }
         else
         {
             UiHelpers.ColoredText(UiHelpers.Good, "当前：已保存 " + DPAPI.Mask(existing));
-        }
-
-        // 说清保存模型：底部写「自动保存」，但 key 是例外（盲评 CF-09/S1）
-        if (input.Trim().Length > 0)
-        {
-            ImGui.SameLine();
-            UiHelpers.ColoredText(UiHelpers.Warn, "输入还没保存");
         }
 
         ImGui.SameLine();
@@ -324,6 +324,10 @@ internal sealed class UITextSettingsWindow : Window
         }
 
         ImGui.EndDisabled();
+        if (existing is null && ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip("没有已保存的 key，不用清除。");
+        }
 
         ImGui.SameLine();
         if (ImGui.Button("测试连接###test-" + label))

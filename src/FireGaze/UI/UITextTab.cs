@@ -42,6 +42,10 @@ internal sealed class UITextTab
         public bool HasPack;
         public int Total;
         public int Translated;
+
+        /// <summary>没译文、也没标「不翻」的条数（与编辑器筛选「未翻译」同口径）。</summary>
+        public int Untranslated;
+
         public int Skipped;
         public UITextPatchStatus Patch;
         public string PatchDetail = string.Empty;
@@ -413,8 +417,23 @@ internal sealed class UITextTab
             }
 
             // meta 行：状态徽标在行首（固定 x，方便竖向扫） + 内部名 · 版本
-            var (badge, color) = this.DescribeState(info, running);
-            UiHelpers.ColoredText(color, badge);
+            if (info is { PackNewerThanPatch: true, Patch: UITextPatchStatus.Applied })
+            {
+                // 「已汉化」本身是绿色终态，只有「有改动待写入」是橙色警告
+                // （v4 复评 N16：整条变色会让绿=完成失效）
+                UiHelpers.ColoredText(UiHelpers.Good, $"已汉化 {info.Translated} 条");
+                ImGui.SameLine(0, 4);
+                UiHelpers.ColoredText(UiHelpers.Warn, "· 有改动待写入");
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip("译文包比已写入的补丁新（下载 / 编辑过），点这一行的主按钮写入插件生效。");
+                }
+            }
+            else
+            {
+                var (badge, color) = this.DescribeState(info, running);
+                UiHelpers.ColoredText(color, badge);
+            }
             if (info is { DoNotLocalize: true } && ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip("中文插件 · 不汉化：这个插件由朋友维护、本身就是中文界面，FireGaze 不抽取 / 不翻译 / 不打包 / 不上传。\n有旧补丁记录时可以点「还原原文」恢复原版。");
@@ -507,16 +526,21 @@ internal sealed class UITextTab
         }
         else
         {
-            // 还没汉化好的插件给主色「一键汉化」；汉化完成的变「打开」（2026-10-02 用户要求：
+            // 还没汉化好的插件给主色按钮；汉化完成的变「打开」（2026-10-02 用户要求：
             // 汉化完就想直接看效果，而不是台上一直摆着个「一键汉化」）。
+            // 按钮名跟着「这一步真正会做什么」走（v4 复评 N1/F3/N2/F4）：失败后接着翻叫「重试」；
+            // 只差把改动写进插件叫「写入并重载」（与编辑器同名）；其余才是「一键汉化」。
             var fullyLocalized = info is { HasPack: true }
                                  && (info.Patch == UITextPatchStatus.Applied || info.Total == 0)
                                  && !info.PackNewerThanPatch;
             if (!fullyLocalized)
             {
+                var retryable = this.notes.TryGetValue(plugin.InternalName, out var pendingNote) && pendingNote.CanRetry;
+                var writeOnly = info is { HasPack: true, PackNewerThanPatch: true, Patch: UITextPatchStatus.Applied };
+                var label = retryable ? "重试" : writeOnly ? "写入并重载" : "一键汉化";
                 ImGui.BeginDisabled(busy || editorOpen);
                 UiHelpers.PushPrimaryButton();
-                if (ImGui.Button("一键汉化"))
+                if (ImGui.Button(label))
                 {
                     this.StartOneClick(plugin);
                 }
@@ -528,7 +552,11 @@ internal sealed class UITextTab
                     ImGui.SetTooltip(
                         (busy ? "有另一个插件正在汉化，等它跑完再点。\n" : string.Empty) +
                         (editorOpen ? "这个插件正开着编辑窗口，先关掉它（避免两份修改互相覆盖）。\n" : string.Empty) +
-                        "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。");
+                        (retryable
+                            ? "沿用当前通道，从没翻完的地方接着翻。\n已翻好的条目不会丢；原文件备份与「还原原文」照旧。"
+                            : writeOnly
+                                ? "把改动过的译文写进插件 DLL 并自动重载（不再重新翻译）。\n原文件会先备份，随时可以「还原原文」。"
+                                : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
                 }
             }
             else
@@ -713,10 +741,10 @@ internal sealed class UITextTab
             return;
         }
 
-        ImGui.TextWrapped($"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库。");
+        ImGui.TextWrapped($"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库——会成为一个 GitHub 公开 issue，所有玩家都能看到并下载。");
         ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只含原文、译文与代码位置，不含账号信息与 key。");
         ImGui.Spacing();
-        ImGui.TextWrapped("上传后会成为一个 GitHub 公开 issue，维护者收录后所有玩家都能直接下载。不想公开的条目，可以先到「编辑校对」里改写或标「不翻」。");
+        ImGui.TextWrapped("不想公开的条目，可以先到「编辑校对」里改写或标「不翻」。");
         ImGui.Separator();
         if (ImGui.Button("上传", new Vector2(110, 0)))
         {
@@ -862,7 +890,6 @@ internal sealed class UITextTab
 
         if (info is { HasPack: true })
         {
-            var candidates = info.Total - info.Skipped;
             var patchText = info.Patch switch
             {
                 UITextPatchStatus.Applied => "已应用（原始文件已备份）",
@@ -872,7 +899,7 @@ internal sealed class UITextTab
                 _ => "未应用" + (info.HasBackup ? "（原始文件已备份）" : string.Empty),
             };
             ImGui.TextDisabled(
-                $"候选 {candidates} 条 · 已翻译 {info.Translated} 条 · 未翻译 {candidates - info.Translated} 条 · 不翻 {info.Skipped} 条 ｜ 补丁：{patchText}");
+                $"共 {info.Total} 条 · 已翻译 {info.Translated} 条 · 未翻译 {info.Untranslated} 条 · 不翻 {info.Skipped} 条 ｜ 补丁：{patchText}");
 
             if (info.PatchDetail.Length > 0 && ImGui.IsItemHovered())
             {
@@ -1024,7 +1051,7 @@ internal sealed class UITextTab
         }
 
         ImGui.SameLine();
-        ImGui.TextDisabled("（本机改过的译文不会被覆盖；下载后点「一键汉化」重打补丁生效）");
+        ImGui.TextDisabled("（本机改过的译文不会被覆盖；下载后点这一行的主按钮写入插件）");
     }
 
     /// <summary>把云端指定的译文包并进本机包（不自动打补丁——由「一键汉化」统一写盘 + 重载）。</summary>
@@ -1131,7 +1158,7 @@ internal sealed class UITextTab
 
         var preview = pending.Preview;
         ImGui.TextWrapped($"应用云端译文：{pending.Label}（{pending.Source}）");
-        ImGui.TextDisabled($"新增 {preview.Added} 条 · 覆盖机器译文 {preview.Overwritten} 条 · 保留玩家译文 {preview.Protected} 条 · 无变化 {preview.Same} 条");
+        ImGui.TextDisabled($"新增 {preview.Added} 条 · 更新机器译文 {preview.Overwritten} 条 · 你的 {preview.Protected} 条人工译文保留不动 · 其余 {preview.Same} 条无变化");
         ImGui.Spacing();
         ImGui.TextWrapped("本机人工改过的译文不会被覆盖；应用后还要点这一行的「一键汉化」才会写进插件。");
         ImGui.Separator();
@@ -1223,20 +1250,6 @@ internal sealed class UITextTab
             UiHelpers.ColoredWrapped(color, note.Text);
         }
 
-        if (note.CanRetry)
-        {
-            ImGui.SameLine();
-            if (ImGui.Button("重试###UITextRetry"))
-            {
-                this.StartOneClick(plugin);
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("沿用当前翻译通道，从没翻完的地方接着来。");
-            }
-        }
-
         if (note.CanOpenSettings)
         {
             ImGui.SameLine();
@@ -1260,7 +1273,7 @@ internal sealed class UITextTab
 
         if (info is { DoNotLocalize: true })
         {
-            return ("中文插件 · 不汉化", UiHelpers.Info);
+            return ("中文插件 · 不汉化", UiHelpers.Skip);
         }
 
         if (info is null || !info.HasPack)
@@ -1275,9 +1288,9 @@ internal sealed class UITextTab
                     ? ($"已汉化 {info.Translated} 条 · 有改动待写入", UiHelpers.Warn)
                     : ($"已汉化 {info.Translated} 条", UiHelpers.Good);
             case UITextPatchStatus.PendingReload:
-                return ($"已汉化 {info.Translated} 处 · 待重载", UiHelpers.Info);
+                return ($"已汉化 {info.Translated} 条 · 待重载", UiHelpers.Info);
             case UITextPatchStatus.NeedsRepatch:
-                return ($"已汉化 {info.Translated} 处 · 需要重打", UiHelpers.Warn);
+                return ($"已汉化 {info.Translated} 条 · 需要重打", UiHelpers.Warn);
             case UITextPatchStatus.Failed:
                 return ($"上次失败 · 已翻译 {info.Translated} 条", UiHelpers.Bad);
         }
@@ -2262,6 +2275,9 @@ internal sealed class UITextTab
                     row.HasPack = true;
                     row.Total = pack.Entries.Count + pack.Resources.Count + pack.Attributes.Count;
                     row.Translated = pack.TranslatedTotal;
+                    row.Untranslated = pack.Entries.Count(e => !e.HasTranslation && !pack.IsSkipped(e.Original))
+                                       + pack.Resources.Count(r => !r.HasTranslation && !pack.IsResourceSkipped(r.Container, r.Key))
+                                       + pack.Attributes.Count(a => !a.HasTranslation && !pack.IsAttributeSkipped(a.Original));
                     row.Skipped = pack.Skipped.Count + pack.SkippedResources.Count + pack.SkippedAttributes.Count;
                 }
 

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>插件汉化 — 编辑校对 + 翻译设置（v4 还原图，2026-10-02）</title>
+<style>
+  /* ImGui 深色界面还原图 v4（编辑器 / 翻译设置两帧；忠实复刻实现，不做另行设计）。 */
+  :root {
+    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
+    --text: #e4e4e4; --muted: #a6a6a6; --accent: #8cbfff;
+    --good: #73d973; --bad: #f27373; --warn: #f2bf59; --info: #9ec2f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #0e0e0e; color: var(--text);
+    font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; font-size: 16px; line-height: 1.4; }
+  .stage { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+  .caption { color: var(--muted); font-size: 13px; margin: 0 0 6px 2px; width: 800px; }
+  .caption b { color: #d8d8d8; }
+  .window { width: 800px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; }
+  .osbar { height: 28px; background: var(--title); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .body { padding: 6px 16px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .hint { color: var(--muted); font-size: 13px; }
+  .sep { height: 1px; background: var(--border); margin: 2px 0; }
+  .btn { display: inline-block; padding: 3px 11px; background: #3c3c3c; border: 1px solid #565656; border-radius: 3px; font-size: 14px; white-space: nowrap; }
+  .btn.primary { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.plain { background: #2a2a2a; border-color: #4a4a4a; color: #d8d8d8; }
+  .btn.text { background: transparent; border-color: transparent; color: #a6a6a6; }
+  .btn.small { padding: 1px 8px; font-size: 13px; }
+  .btn.disabled { opacity: .45; }
+  .btn.sel { background: #2f4a6d; border-color: #4b6f9c; }
+  .btn.focus { border-color: #9ec2f0; box-shadow: 0 0 0 1px #9ec2f0 inset; }
+  .chk { width: 15px; height: 15px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: #2a2a2a; font-size: 12px; flex: none; }
+  .chk.on::after { content: "✔"; }
+  .radio { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 50%; display: inline-block; position: relative; flex: none; }
+  .radio.on::after { content: ""; position: absolute; inset: 3px; background: #d8d8d8; border-radius: 50%; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .search { width: 230px; border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; color: var(--muted); background: #232323; font-size: 14px; }
+  .input { border: 1px solid #565656; border-radius: 3px; padding: 3px 8px; background: #232323; font-size: 14px; color: #d8d8d8; }
+  .input.warn { border-color: #8a7233; }
+  .muted { color: var(--muted); } .good { color: var(--good); } .bad { color: var(--bad); } .info { color: var(--info); } .warn { color: var(--warn); }
+  .grid { width: 100%; border-collapse: collapse; font-size: 14px; table-layout: fixed; }
+  .grid th { text-align: left; color: var(--muted); font-weight: 400; border: 1px solid var(--border); padding: 3px 6px; white-space: nowrap; background: #1d1d1d; }
+  .grid td { padding: 3px 6px; border: 1px solid #262626; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .grid .c-state { width: 54px; text-align: center; }
+  .grid .c-ctx { width: 180px; color: var(--muted); font-size: 13px; }
+  .grid .cell-input { display: block; border: 1px solid #3f3f3f; background: #202020; border-radius: 2px; padding: 2px 6px; color: #e4e4e4; font-size: 14px; }
+  .grid .cell-input.empty { color: #6f6f6f; }
+  .legend { color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- ================= 帧 5：编辑校对 ================= -->
+  <div>
+    <p class="caption"><b>帧 5 —「编辑校对」窗口（v4：1.2.0.78 实现）</b>：统计用「｜」分开两个维度（抽取判定 / 翻译状态）并补上「未翻译」；图例并成两行、⚠ 写明「这条不会写入」；右侧只把「有改动尚未写入」着一小段橙色、补丁状态带「补丁：」前缀；「还原原文」为 5 秒内二次点击确认。</p>
+    <div class="window">
+      <div class="osbar">编辑校对 — FireGaze</div>
+      <div class="body">
+        <div class="row" style="align-items:baseline">
+          <span style="color:var(--accent);font-size:15px">AutoHook</span>
+          <span class="muted" style="font-size:13px">(AutoHook · v6.0.2.4)</span>
+        </div>
+        <div class="hint">共 1083 条 ｜ 候选 1049（文字 466 + 资源 540 + 属性 43）· 灰名单 34 ｜ 已翻译 981 · 未翻译 102 · 不翻 0</div>
+        <div class="sep"></div>
+        <div class="row">
+          <span class="btn primary">翻译未翻 (102)</span>
+          <span class="btn plain">写入并重载</span>
+          <span class="btn plain">还原原文</span>
+          <span class="btn plain">更多…</span>
+          <span class="muted" style="font-size:12px;margin-left:auto">通道：大模型：deepseek-flash @ https://api.deepseek.com/v1 · 已保存 18:20:31</span>
+          <span class="warn" style="font-size:12px"> · 有改动尚未写入（点「写入并重载」生效）</span>
+          <span class="muted" style="font-size:12px"> · 补丁：已应用（原始文件已备份）</span>
+        </div>
+        <div class="sep"></div>
+        <div class="row">
+          <span class="btn small plain">候选 1049</span>
+          <span class="btn small plain">灰名单 34</span>
+          <span class="btn small plain">未翻译 102</span>
+          <span class="btn small plain">已翻译 981</span>
+          <span class="btn small plain">不翻 0</span>
+          <span class="btn small sel">全部 1083</span>
+          <div class="search" style="width:260px">搜索原文 / 译文 / 上下文…</div>
+        </div>
+        <div class="legend">状态列：✔ 人工译文 ｜ ⚙ 机器译文 ｜ ⚠ 待复核（这条不会写入，悬停看原因）</div>
+        <div class="legend">? 灰名单（默认不翻）｜ ⛔ 不翻 ｜ · 未翻译 ｜ 右键行：翻译这一条 / 标记不翻 / 清除译文 / 复制</div>
+        <div class="hint">显示 1083 / 共 1083 条</div>
+
+        <table class="grid">
+          <colgroup><col class="c-state"><col class="c-ctx"><col style="width:45%"><col style="width:55%"></colgroup>
+          <thead><tr><th>状态</th><th>上下文</th><th>原文</th><th>译文</th></tr></thead>
+          <tbody>
+            <tr><td class="c-state"><span class="muted" title="机器译文（ai:deepseek），可以改">⚙</span></td>
+                <td class="c-ctx" title="[AutoHook] DrawStatus">[AutoHook] DrawStatus</td>
+                <td>- Preset</td>
+                <td><span class="cell-input">预设</span></td></tr>
+            <tr><td class="c-state"><span class="good" title="人工译文（不会被机器翻译覆盖）">✔</span></td>
+                <td class="c-ctx" title="[AutoHook] TabAutoGig.DrawCatchEverythingOptions">[AutoHook] TabAutoGig.DrawCatchEverythingOptions</td>
+                <td>Cordials</td>
+                <td><span class="cell-input">强心剂</span></td></tr>
+            <tr><td class="c-state"><span class="info" title="灰名单：既进 UI 又进功能语境，默认不翻">?</span></td>
+                <td class="c-ctx" title="[AutoHook] WorldState.Decide">[AutoHook] WorldState.Decide</td>
+                <td>Global Preset</td>
+                <td><span class="cell-input">全局预设</span></td></tr>
+            <tr><td class="c-state"><span class="warn" title="待复核：占位符对不上（{0}）。这条没有可写入的译文，不会进补丁；悬停见原因。">⚠</span></td>
+                <td class="c-ctx" title="[AutoHook] DrawUtil.DrawComboSelector">[AutoHook] DrawUtil.DrawComboSelector</td>
+                <td>Failed to rename {0}</td>
+                <td><span class="cell-input"></span></td></tr>
+            <tr><td class="c-state"><span class="warn" title="已标记「不翻」">⛔</span></td>
+                <td class="c-ctx" title="[AutoHook] SubTabBaitMooch.DrawBody">[AutoHook] SubTabBaitMooch.DrawBody</td>
+                <td>base_search_popup</td>
+                <td><span class="cell-input"></span></td></tr>
+            <tr><td class="c-state"><span class="muted" title="还没翻译">·</span></td>
+                <td class="c-ctx" title="[AutoHook] PresetCreator.DrawHeader">[AutoHook] PresetCreator.DrawHeader</td>
+                <td>Name</td>
+                <td><span class="cell-input"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 帧 6：翻译设置 ================= -->
+  <div>
+    <p class="caption"><b>帧 6 —「翻译设置」独立窗口（v4：1.2.0.74–75 实现）</b>：通道行每个选项配悬停说明（是否要 key / 额度 / 场景）；「通用选项」「大模型设置」分组标题；key 行在输入未保存时亮黄「输入还没保存」、无已存 key 时「清除」置灰；底部改「除 key 外自动保存；key 要点「保存 key」才生效」。</p>
+    <div class="window">
+      <div class="osbar">翻译设置 — FireGaze</div>
+      <div class="body">
+        <div class="hint">这里决定「一键汉化」用什么方式把英文翻成中文。免费接口按 IP 限流，条目多时建议用自己的大模型 key。</div>
+        <div class="sep"></div>
+        <div class="row">
+          <span class="row" title="免费·自动：按可用性依次尝试免 key 接口，失败会自动换下一个；按 IP 限流，条目多时慢。"><span class="radio"></span>免费·自动</span>
+          <span class="row" title="彩云小译：一次最多 50 条，新号送 100 万字 / 一个月；需要自填 token（免费注册）。"><span class="radio"></span>彩云小译</span>
+          <span class="row" title="Google 免 key：不用 key，逐条翻译、随时可能被限流（429）。"><span class="radio"></span>Google 免 key</span>
+          <span class="row" title="MyMemory：不用 key，每天约 5000 词，逐条翻译。"><span class="radio"></span>MyMemory</span>
+          <span class="row" title="大模型：速度最快、质量最好，需要自填 API key（只存本机）。"><span class="radio on"></span>大模型（自填 key）</span>
+          <span class="row" title="DeepL：需要自填 API key。"><span class="radio"></span>DeepL</span>
+        </div>
+        <div class="sep"></div>
+        <div class="hint">通用选项</div>
+        <div class="row"><span class="row"><span class="chk on"></span>从公共译文库下载现成译文</span></div>
+        <div class="row"><span class="row"><span class="chk"></span>批量翻译时连灰名单一起翻</span></div>
+        <div class="row"><span class="row"><span class="chk on"></span>插件更新后自动重打汉化补丁</span></div>
+        <div class="sep"></div>
+        <div class="hint">大模型设置</div>
+        <div class="row">
+          <span class="row"><span class="radio on"></span>DeepSeek 官方</span>
+          <span class="row"><span class="radio"></span>其它 OpenAI 兼容服务</span>
+        </div>
+        <div class="row">
+          <span class="input" style="width:420px">https://api.deepseek.com/v1</span>
+          <span class="input" style="width:180px">deepseek-flash</span>
+        </div>
+        <div class="row">
+          <span class="input warn" style="width:360px">••••••••••••••••</span>
+          <span class="warn" style="font-size:13px">输入还没保存</span>
+          <span class="btn plain">保存 key</span><span class="btn plain disabled">清除</span><span class="btn plain">测试连接</span>
+        </div>
+        <div class="row">
+          <span class="row"><span class="chk on"></span>用 FF14 官方译名术语表</span>
+          <span class="muted" style="font-size:13px">已就绪 31701 条</span>
+        </div>
+        <div class="hint">只在大模型通道生效；免费接口带不了术语表。</div>
+        <div class="sep"></div>
+        <div class="hint">key 只存在本机（DPAPI 加密），不会随任何提交上传；换机器/换 Windows 用户后需要重填。</div>
+        <div class="hint">除 key 外，设置立即生效并自动保存；key 要点「保存 key」才生效。</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
