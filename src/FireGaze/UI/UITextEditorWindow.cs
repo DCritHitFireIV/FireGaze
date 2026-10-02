@@ -42,7 +42,9 @@ internal sealed class UITextEditorWindow : Window
 
         public bool IsAttribute => this.Attribute is not null;
 
-        public string Original => this.Resource?.Original ?? this.Attribute?.Original ?? this.Entry!.Original;
+        public string Original => this.Resource is not null ? this.Resource.Original
+            : this.Attribute is not null ? this.Attribute.Original
+            : this.Entry!.Original;
 
         public string? Context => this.Resource is not null
             ? "资源：" + this.Resource.Container + " · " + this.Resource.Key
@@ -50,15 +52,27 @@ internal sealed class UITextEditorWindow : Window
                 ? this.Attribute.Context
                 : this.Entry!.Context;
 
-        public bool HasTranslation => this.Resource?.HasTranslation ?? this.Attribute?.HasTranslation ?? this.Entry!.HasTranslation;
+        public bool HasTranslation => this.Resource is not null ? this.Resource.HasTranslation
+            : this.Attribute is not null ? this.Attribute.HasTranslation
+            : this.Entry!.HasTranslation;
 
-        public string Translated => this.Resource?.Translated ?? this.Attribute?.Translated ?? this.Entry!.Translated;
+        public string Translated => this.Resource is not null ? this.Resource.Translated
+            : this.Attribute is not null ? this.Attribute.Translated
+            : this.Entry!.Translated;
 
-        public string? Review => this.Resource?.Review ?? this.Attribute?.Review ?? this.Entry!.Review;
+        // 注意：Review / Source 本身可以是 null，不能用 `Resource?.X ?? Entry!.X` 这种链——
+        // 中间返回 null 会继续往下走到 `Entry!`，属性行/资源行就是空引用（2026-10-02 用户实测）。
+        public string? Review => this.Resource is not null ? this.Resource.Review
+            : this.Attribute is not null ? this.Attribute.Review
+            : this.Entry!.Review;
 
-        public string? Source => this.Resource?.Source ?? this.Attribute?.Source ?? this.Entry!.Source;
+        public string? Source => this.Resource is not null ? this.Resource.Source
+            : this.Attribute is not null ? this.Attribute.Source
+            : this.Entry!.Source;
 
-        public bool IsUserSource => this.Resource?.IsUserSource ?? this.Attribute?.IsUserSource ?? this.Entry!.IsUserSource;
+        public bool IsUserSource => this.Resource is not null ? this.Resource.IsUserSource
+            : this.Attribute is not null ? this.Attribute.IsUserSource
+            : this.Entry!.IsUserSource;
     }
 
     private readonly Plugin plugin;
@@ -84,6 +98,7 @@ internal sealed class UITextEditorWindow : Window
     private DateTime dirtySince = DateTime.MinValue;
     private DateTime lastSaveAt = DateTime.MinValue;
     private DateTime nextDiskCheck = DateTime.MinValue;
+    private DateTime lastDrawErrorAt = DateTime.MinValue;
 
     // 翻译通道
     private Task<(string Channel, UITextTranslateResult Result)>? translateTask;
@@ -158,6 +173,25 @@ internal sealed class UITextEditorWindow : Window
     }
 
     public override void Draw()
+    {
+        try
+        {
+            this.DrawCore();
+        }
+        catch (Exception e)
+        {
+            // 绘制路径上任何异常都不该让整张窗口（乃至游戏）失能——行属性的空引用已实测过一次（2026-10-02）
+            if ((DateTime.Now - this.lastDrawErrorAt).TotalSeconds > 5)
+            {
+                this.lastDrawErrorAt = DateTime.Now;
+                Plugin.Log?.Error(e, "[内部文本] 编辑器窗口绘制出错");
+            }
+
+            ImGui.TextWrapped("编辑器绘制出错（已写日志）：" + e.Message);
+        }
+    }
+
+    private void DrawCore()
     {
         // ImGuiFileDialog 要求每帧画一次，否则弹不出来
         this.fileDialog.Draw();
