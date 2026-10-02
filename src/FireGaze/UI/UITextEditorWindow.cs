@@ -613,8 +613,9 @@ internal sealed class UITextEditorWindow : Window
         var attributes = this.pack.Attributes.Count;
         var translated = this.rows.Count(r => r.HasTranslation);
         var skipped = this.rows.Count(r => r.Skipped);
+        var literalCandidates = Math.Max(0, candidate - resources - attributes);
         ImGui.TextDisabled(
-            $"候选 {candidate} 条（含资源 {resources} / 属性 {attributes}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
+            $"共 {this.rows.Count} 条：候选 {candidate}（文字 {literalCandidates} + 资源 {resources} + 属性 {attributes}）· 灰名单 {ambiguous} · 已翻译 {translated} · 不翻 {skipped}" +
             (this.extractionTask is { IsCompleted: false } ? " · 抽取中…" : string.Empty));
     }
 
@@ -1160,6 +1161,7 @@ internal sealed class UITextEditorWindow : Window
 
         ImGui.TextDisabled("状态列：✔ 人工译文 ｜ ⚙ 机器译文 ｜ ⚠ 待复核（悬停看原因）");
         ImGui.TextDisabled("? 灰名单（默认不翻）｜ ⛔ 不翻 ｜ · 未翻译 ｜ 编辑完点「写入并重载」");
+        ImGui.TextDisabled("右键行：翻译这一条 / 标记不翻 / 清除译文 / 复制");
     }
 
     private bool Matches(Row row, string filterText)

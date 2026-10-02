@@ -63,6 +63,10 @@ internal sealed class UITextTab
     private sealed class RowNote
     {
         public string Text = string.Empty;
+
+        /// <summary>第二行：补充说明（比如“已翻的不会丢”），空则只画一行。</summary>
+        public string? Detail;
+
         public NoteKind Kind;
         public bool CanOpenSettings;
         public bool CanRetry;
@@ -482,6 +486,24 @@ internal sealed class UITextTab
             ImGui.BeginDisabled();
             ImGui.Button("一键汉化");
             ImGui.EndDisabled();
+            if (this.run is { CanCancel: true } active)
+            {
+                ImGui.SameLine(0, 8);
+                if (ImGui.Button("取消###UITextRowCancel"))
+                {
+                    active.Cancel.Cancel();
+                }
+
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip("取消只停止翻译：已经翻好的条目会保留，之后点「一键汉化」可以接着来。");
+                }
+            }
+            else if (this.run is not null)
+            {
+                ImGui.SameLine(0, 8);
+                ImGui.TextDisabled("写入中…");
+            }
         }
         else
         {
@@ -879,7 +901,8 @@ internal sealed class UITextTab
                 : busy || editorOpen
                     ? "先把当前任务跑完再抽取。"
                     : "只读一遍插件 DLL，列出能翻的界面文本（不翻译、不写补丁）。\n"
-                      + "插件更新过、或想先看看有多少文本，就点它；结果会记进本地包，编辑器里也能接着改。");
+                      + "插件更新过、或想先看看有多少文本，就点它；结果会记进本地包，编辑器里也能接着改。\n"
+                      + "不会丢已翻好的译文；原文没了的条目会自动标成「不翻」，可在编辑器里恢复。");
         }
 
         ImGui.SameLine();
@@ -1017,27 +1040,29 @@ internal sealed class UITextTab
         var packStore = this.store;
         var library = this.plugin.TextLibrary;
         var internalName = plugin.InternalName;
+        var label = string.IsNullOrWhiteSpace(pack.Label) ? pack.ID ?? "译文包" : pack.Label!;
+        var source = pack.Source switch
+        {
+            "user" => "玩家投稿",
+            null or "" or "library" => "公共库",
+            var other => other,
+        };
         _ = Task.Run(async () =>
         {
-            string text;
+            UITextPack? fetched = null;
+            UITextFlow.MergePreview preview = default;
+            string? error = null;
             try
             {
-                var local = packStore.Load(internalName);
-                var changed = await library.MergePackFileAsync(local, fileName, CancellationToken.None).ConfigureAwait(false);
-                if (changed > 0)
+                fetched = await library.FetchPackFileAsync(fileName, CancellationToken.None).ConfigureAwait(false);
+                if (fetched is not null)
                 {
-                    text = packStore.Save(internalName, local, out var saveError)
-                        ? $"已下载 {changed} 条，点「一键汉化」重打补丁生效"
-                        : "下载到了，但写盘失败：" + saveError;
-                }
-                else
-                {
-                    text = "没有新增（本机已有相同或更好的译文）";
+                    preview = UITextFlow.PreviewMerge(packStore.Load(internalName), fetched);
                 }
             }
             catch (Exception e)
             {
-                text = "下载失败：" + e.Message;
+                error = e.Message;
             }
 
             try
@@ -1045,6 +1070,122 @@ internal sealed class UITextTab
                 await Plugin.Framework.RunOnFrameworkThread(() =>
                 {
                     this.cloudDownloading.Remove(key);
+                    if (fetched is null)
+                    {
+                        this.cloudNotes[key] = error is null ? "云端包拉不到" : "下载失败：" + error;
+                        this.rowsDirty = true;
+                        return;
+                    }
+
+                    this.pendingCloudApply = new PendingCloudApply
+                    {
+                        Entry = plugin,
+                        Key = key,
+                        Label = label,
+                        Source = source,
+                        Fetched = fetched,
+                        Preview = preview,
+                    };
+                    this.cloudModalNeedsOpen = true;
+                    this.rowsDirty = true;
+                }).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                // 忽略
+            }
+        });
+    }
+
+    /// <summary>待确认的云端译文应用（先看差异再点「应用」）。</summary>
+    private sealed class PendingCloudApply
+    {
+        public InstalledPluginEntry Entry = null!;
+        public string Key = string.Empty;
+        public string Label = string.Empty;
+        public string Source = string.Empty;
+        public UITextPack Fetched = new();
+        public UITextFlow.MergePreview Preview;
+    }
+
+    private PendingCloudApply? pendingCloudApply;
+    private bool cloudModalNeedsOpen;
+
+    /// <summary>云端译文的差异确认框：新增 / 覆盖机器译 / 保留玩家译 / 无变化，默认焦点在「取消」。</summary>
+    private void DrawCloudApplyModal(PendingCloudApply pending)
+    {
+        const string Name = "应用云端译文###UITextCloudApply";
+        if (this.cloudModalNeedsOpen)
+        {
+            ImGui.OpenPopup(Name);
+            this.cloudModalNeedsOpen = false;
+        }
+
+        ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(660, float.MaxValue));
+        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
+        {
+            this.pendingCloudApply = null;
+            return;
+        }
+
+        var preview = pending.Preview;
+        ImGui.TextWrapped($"应用云端译文：{pending.Label}（{pending.Source}）");
+        ImGui.TextDisabled($"新增 {preview.Added} 条 · 覆盖机器译文 {preview.Overwritten} 条 · 保留玩家译文 {preview.Protected} 条 · 无变化 {preview.Same} 条");
+        ImGui.Spacing();
+        ImGui.TextWrapped("本机人工改过的译文不会被覆盖；应用后还要点这一行的「一键汉化」才会写进插件。");
+        ImGui.Separator();
+        if (ImGui.Button("应用", new Vector2(100, 0)))
+        {
+            var confirmed = pending;
+            this.pendingCloudApply = null;
+            ImGui.CloseCurrentPopup();
+            this.ApplyCloudPack(confirmed);
+            return;
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("取消", new Vector2(90, 0)))
+        {
+            this.cloudNotes[pending.Key] = "已取消";
+            this.pendingCloudApply = null;
+            ImGui.CloseCurrentPopup();
+            return;
+        }
+
+        ImGui.SetItemDefaultFocus();
+        ImGui.EndPopup();
+    }
+
+    /// <summary>确认后真正把云端包并进本机（走 MergeLibrary 的优先级：玩家译永不被顶）。</summary>
+    private void ApplyCloudPack(PendingCloudApply pending)
+    {
+        var key = pending.Key;
+        var internalName = pending.Entry.InternalName;
+        var fetched = pending.Fetched;
+        var packStore = this.store;
+        _ = Task.Run(async () =>
+        {
+            string text;
+            try
+            {
+                var local = packStore.Load(internalName);
+                var changed = local.MergeLibrary(fetched);
+                text = changed > 0
+                    ? packStore.Save(internalName, local, out var saveError)
+                        ? $"已应用 {changed} 条，点「一键汉化」重打补丁生效"
+                        : "写盘失败：" + saveError
+                    : "没有变化（本机已有相同或更好的译文）";
+            }
+            catch (Exception e)
+            {
+                text = "应用失败：" + e.Message;
+            }
+
+            try
+            {
+                await Plugin.Framework.RunOnFrameworkThread(() =>
+                {
                     this.cloudNotes[key] = text;
                     this.rowsDirty = true;
                 }).ConfigureAwait(false);
@@ -1072,7 +1213,15 @@ internal sealed class UITextTab
             _ => UiHelpers.Muted,
         };
 
-        UiHelpers.ColoredWrapped(color, note.Text);
+        if (note.Detail is { Length: > 0 } detail)
+        {
+            UiHelpers.ColoredText(color, note.Text);
+            ImGui.TextDisabled(detail);
+        }
+        else
+        {
+            UiHelpers.ColoredWrapped(color, note.Text);
+        }
 
         if (note.CanRetry)
         {
@@ -1396,7 +1545,8 @@ internal sealed class UITextTab
                     this.FinishRun(run, new RowNote
                     {
                         Kind = NoteKind.Bad,
-                        Text = $"翻译失败：{reason}。已经翻好的 {pack.TranslatedCount} 条不会丢，补丁也还在；点「重试」接着翻，或换一条通道再试。",
+                        Text = $"翻译失败：{reason}",
+                        Detail = $"已翻好的 {pack.TranslatedCount} 条不会丢；点「重试」接着翻，或到「翻译设置」换一条通道。",
                         CanRetry = true,
                         CanOpenSettings = true,
                     });
@@ -1497,6 +1647,11 @@ internal sealed class UITextTab
 
     private void DrawPendingModals()
     {
+        if (this.pendingCloudApply is { } cloud)
+        {
+            this.DrawCloudApplyModal(cloud);
+        }
+
         if (this.pendingUpload is { } upload)
         {
             this.DrawUploadConfirmModal(upload);

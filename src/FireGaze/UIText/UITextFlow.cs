@@ -201,6 +201,78 @@ internal static class UITextFlow
     }
 
     /// <summary>
+    ///     一次云端包合并的预检结果（给「先看差异再应用」用）：新增 / 覆盖机器译 / 保留玩家译 / 无变化。
+    /// </summary>
+    public readonly record struct MergePreview(int Added, int Overwritten, int Protected, int Same);
+
+    /// <summary>
+    ///     先算一遍「云端包并进本机会发生什么」，不改任何东西。
+    ///     人工译永不被覆盖（算 Protected）；相同译文算 Same；其余机器/库译文会被新值覆盖（算 Overwritten）。
+    /// </summary>
+    public static MergePreview PreviewMerge(UITextPack local, UITextPack incoming)
+    {
+        var added = 0;
+        var overwritten = 0;
+        var protect = 0;
+        var same = 0;
+
+        void Count(bool hasTarget, bool hasTranslation, bool isUser, string current, string next)
+        {
+            if (!hasTarget || !hasTranslation)
+            {
+                added++;
+            }
+            else if (isUser)
+            {
+                protect++;
+            }
+            else if (string.Equals(current, next, StringComparison.Ordinal))
+            {
+                same++;
+            }
+            else
+            {
+                overwritten++;
+            }
+        }
+
+        foreach (var entry in incoming.Entries)
+        {
+            if (!entry.HasTranslation)
+            {
+                continue;
+            }
+
+            var target = local.Find(entry.Original);
+            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true, target?.Translated ?? string.Empty, entry.Translated);
+        }
+
+        foreach (var entry in incoming.Resources)
+        {
+            if (!entry.HasTranslation)
+            {
+                continue;
+            }
+
+            var target = local.FindResource(entry.Container, entry.Key);
+            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true, target?.Translated ?? string.Empty, entry.Translated);
+        }
+
+        foreach (var entry in incoming.Attributes)
+        {
+            if (!entry.HasTranslation)
+            {
+                continue;
+            }
+
+            var target = local.FindAttribute(entry.Original);
+            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true, target?.Translated ?? string.Empty, entry.Translated);
+        }
+
+        return new MergePreview(added, overwritten, protect, same);
+    }
+
+    /// <summary>
     ///     把目标列表转成发给翻译通道的条目：**按原文去重**（多个 key 共用同一英文值时只翻一次）。
     /// </summary>
     public static List<UITextTranslateItem> BuildTranslateItems(IReadOnlyList<UITextTarget> targets)

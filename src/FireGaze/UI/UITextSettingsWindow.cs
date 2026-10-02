@@ -142,6 +142,7 @@ internal sealed class UITextSettingsWindow : Window
         if (string.Equals(config.UITextChannel, "llm", StringComparison.Ordinal))
         {
             ImGui.Separator();
+            ImGui.TextDisabled("大模型设置");
             var isDeepSeek = string.Equals(config.UITextLLMProvider, "deepseek", StringComparison.OrdinalIgnoreCase);
             if (ImGui.RadioButton("DeepSeek 官方", isDeepSeek) && !isDeepSeek)
             {
@@ -224,6 +225,7 @@ internal sealed class UITextSettingsWindow : Window
         if (string.Equals(config.UITextChannel, "caiyun", StringComparison.Ordinal))
         {
             ImGui.Separator();
+            ImGui.TextDisabled("彩云小译设置");
             ImGui.TextDisabled("彩云小译：到「彩云科技开放平台」注册 → 应用管理里创建应用 → 页面右边「管理」→「访问控制」里复制 token 填这里。");
             this.DrawKeyRow("彩云小译 token", config.UITextCaiyunKeyProtected, v => config.UITextCaiyunKeyProtected = v, ref changed);
         }
@@ -231,6 +233,7 @@ internal sealed class UITextSettingsWindow : Window
         if (string.Equals(config.UITextChannel, "deepl", StringComparison.Ordinal))
         {
             ImGui.Separator();
+            ImGui.TextDisabled("DeepL 设置");
             this.DrawKeyRow("DeepL API key", config.UITextDeepLKeyProtected, v => config.UITextDeepLKeyProtected = v, ref changed);
         }
 
