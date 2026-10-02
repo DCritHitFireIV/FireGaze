@@ -67,6 +67,31 @@ internal static class UiHelpers
 
     public static void PopPrimaryButton() => ImGui.PopStyleColor(3);
 
+    /// <summary>按钮标签的可见宽度（去掉 <c>###ID</c> 后缀）：给 <see cref="SameLineOrWrap" /> 估位置用。</summary>
+    public static float LabelWidth(string label)
+    {
+        var index = label.IndexOf("###", StringComparison.Ordinal);
+        var visible = index >= 0 ? label[..index] : label;
+        return ImGui.CalcTextSize(visible).X + (ImGui.GetStyle().FramePadding.X * 2);
+    }
+
+    /// <summary>
+    ///     行尾按钮的「放不下就换行」：先看剩余宽度够不够，不够就 NewLine。
+    ///     2026-10-02 用户实测：操作按钮一多（AutoRequeue：一键汉化 + 还原原文 + 详情 + 一键上传），
+    ///     纵向裁剪会把「一键上传」盖掉一截。
+    /// </summary>
+    public static void SameLineOrWrap(float neededWidth, float spacing = 10f)
+    {
+        if (ImGui.GetContentRegionAvail().X < neededWidth + spacing)
+        {
+            ImGui.NewLine();
+        }
+        else
+        {
+            ImGui.SameLine(0, spacing);
+        }
+    }
+
     /// <summary>
     ///     弹窗里按钮点完要收工时用：CloseCurrentPopup 只是「标记关闭」，EndPopup 才是真的结束这一帧的弹窗——
     ///     少了它 ImGui 窗口栈失衡，下一帧会弹一串 assertion failed（2026-10-02 用户实测：“还原原文”点完报错）。

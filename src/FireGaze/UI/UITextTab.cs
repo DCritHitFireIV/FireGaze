@@ -460,7 +460,13 @@ internal sealed class UITextTab
         ImGui.BeginGroup();
         {
             ImGui.TextUnformatted(plugin.DisplayName);
-            if (!plugin.IsThirdParty)
+            if (plugin.IsDev)
+            {
+                // 开发/本地插件：卫月的 manifest.IsThirdParty 默认 false，不区分的话会显示成「[官方]」（用户实测反馈）
+                ImGui.SameLine();
+                ImGui.TextDisabled("[本地]");
+            }
+            else if (!plugin.IsThirdParty)
             {
                 ImGui.SameLine();
                 ImGui.TextDisabled("[官方]");
@@ -550,7 +556,7 @@ internal sealed class UITextTab
                     ImGui.SetTooltip("把插件 DLL 还原成打补丁之前的原始文件，然后自动重载插件（界面回到英文）。\n之后还可以再「一键汉化」。");
                 }
 
-                ImGui.SameLine(0, 10);
+                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("详情"), 10);
             }
 
             if (ImGui.Button(isOpen ? "收起" : "详情"))
@@ -568,7 +574,7 @@ internal sealed class UITextTab
             ImGui.EndDisabled();
             if (this.run is { CanCancel: true } active)
             {
-                ImGui.SameLine(0, 8);
+                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("取消"), 8);
                 if (ImGui.Button("取消###UITextRowCancel"))
                 {
                     active.Cancel.Cancel();
@@ -581,7 +587,7 @@ internal sealed class UITextTab
             }
             else if (this.run is not null)
             {
-                ImGui.SameLine(0, 8);
+                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("写入中…"), 8);
                 ImGui.TextDisabled("写入中…");
             }
         }
@@ -625,10 +631,12 @@ internal sealed class UITextTab
                 this.DrawOpenPluginButton(plugin, info!);
             }
 
-            // 已经打上补丁、但插件没在跑（停用 / 还没加载）：直接给一个启用的入口（2026-10-02 用户要求）
-            if (!plugin.IsLoaded && info is { Patch: UITextPatchStatus.Applied })
+            // 已经打上补丁、但插件没在跑（停用 / 还没加载）：直接给一个启用的入口（2026-10-02 用户要求）。
+            // 待确认（PendingReload）也算：插件没加载时打上的补丁一直是待确认，启用后 CheckPending 会转正。
+            if (!plugin.IsLoaded
+                && info is { Patch: UITextPatchStatus.Applied or UITextPatchStatus.PendingReload })
             {
-                ImGui.SameLine(0, 12);
+                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("启用插件"), 12);
                 ImGui.BeginDisabled(busy || this.enabling.Contains(plugin.InternalName));
                 if (ImGui.Button("启用插件###UITextEnablePlugin"))
                 {
@@ -644,7 +652,7 @@ internal sealed class UITextTab
 
             if (info is { HasBackup: true })
             {
-                ImGui.SameLine(0, 12);
+                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("还原原文"), 12);
                 if (ImGui.Button("还原原文"))
                 {
                     this.RestoreNow(plugin);
@@ -657,7 +665,7 @@ internal sealed class UITextTab
             }
         }
 
-        ImGui.SameLine(0, 10);
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("详情"), 10);
         if (ImGui.Button(isOpen ? "收起" : "详情"))
         {
             this.expanded = isOpen ? string.Empty : plugin.InternalName;
@@ -666,7 +674,7 @@ internal sealed class UITextTab
         // 一键上传：把这台机器上已经翻好的译文交给社区公共库（2026-10-02 用户要求）
         if (info is { Translated: > 0 })
         {
-            ImGui.SameLine(0, 10);
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("一键上传"), 10);
             ImGui.BeginDisabled(this.uploading.Contains(plugin.InternalName));
             if (ImGui.Button("一键上传"))
             {

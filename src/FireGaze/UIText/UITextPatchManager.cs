@@ -306,11 +306,12 @@ internal sealed class UITextPatchManager
         var backupsBefore = this.SnapshotBackupFiles();
         var originalsBefore = this.store.SnapshotOriginals();
         var (ok, message) = this.ApplyCore(entry, allowRecovery);
-        if (!ok)
-        {
-            this.DeleteUnreferencedBackups(backupsBefore);
-            this.DeleteUnreferencedOriginals(originalsBefore);
-        }
+
+        // 清理本次新建、又没人引用的备份：失败时要清（不然留一堆「当前文件的快照」）；
+        // 成功时也要清——被跳过的伴生程序集（一条都对不上）同样在备份阶段留了一份，
+        // 但它不是补丁记录的一部分（2026-10-02 AutoHook.FishSolver 实测）。
+        this.DeleteUnreferencedBackups(backupsBefore);
+        this.DeleteUnreferencedOriginals(originalsBefore);
 
         return (ok, message);
     }
@@ -405,6 +406,7 @@ internal sealed class UITextPatchManager
         var perFileMissing = new List<IReadOnlyCollection<string>>();
         foreach (var fileState in fileStates)
         {
+            var isMain = ReferenceEquals(fileState, fileStates[0]);
             var newPath = fileState.Path + ".fguitext.new";
             UITextPatchOutcome outcome;
             try
@@ -428,6 +430,16 @@ internal sealed class UITextPatchManager
 
             if (!outcome.Ok)
             {
+                // 伴生程序集一条都对不上很正常：包里根本没有它的条目（2026-10-02 用户实测：
+                // AutoHook.FishSolver / Browsingway.Common 全落在“一条都没对上”上）——这个文件跳过，
+                // 不把整个插件判失败。只有主程序集对不上才是异常（盘上是旧补丁 / 版本全变了）。
+                if (outcome.NoMatch && !isMain)
+                {
+                    TryDelete(newPath);
+                    Plugin.Log?.Information($"[内部文本] {entry.InternalName}：{Path.GetFileName(fileState.Path)} 没有可写的译文（包未收录伴生程序集的条目），跳过这个文件");
+                    continue;
+                }
+
                 foreach (var (_, pending) in staged)
                 {
                     TryDelete(pending);
@@ -435,7 +447,7 @@ internal sealed class UITextPatchManager
 
                 TryDelete(newPath);
 
-                // 一条都没对上：盘上可能还是我们的旧补丁、而记录丢了（第一次点击时包里还没译文，
+                // 主程序集一条都没对上：盘上可能还是我们的旧补丁、而记录丢了（第一次点击时包里还没译文，
                 // 抽取体检认不出「译文###原文」；用户看到的就是这条红字）。用现在的译文包反向还原出原文、
                 // 补回记录，然后整套重来一次——重来还失败才把错误给用户（不用用户自己重装插件）。
                 if (allowRecovery && outcome.NoMatch)
@@ -491,6 +503,10 @@ internal sealed class UITextPatchManager
             return (false, "写入补丁失败，已尝试还原：" + e.Message);
         }
 
+        // 真正写进去的文件才进补丁记录：被跳过的伴生程序集（一条都对不上）不记——
+        // 记了会让「盘上是原始文件」被当成待重打（StatusOf 会一直催重打），持久清单也发不出去。
+        var stateFiles = staged.Select(s => s.State).ToList();
+
         // 插件自带的本地化文件（JSON）：中文侧缺的键写回中文文件——独立于 DLL，备份/状态/还原走同一套。
         // 与 DLL 同一套基线语义：盘上是我们的补丁时从原始备份重新写一遍（改了译文再打一次才会真的更新），
         // 需要新基线时才备份。失败不影响 DLL 补丁（写不动不会弄坏插件），只在消息里说明。
@@ -538,7 +554,7 @@ internal sealed class UITextPatchManager
                         continue;
                     }
 
-                    fileStates.Add(new UITextPatchFile
+                    stateFiles.Add(new UITextPatchFile
                     {
                         Path = write.Path,
                         SourceHash = write.SourceHash,
@@ -568,12 +584,7 @@ internal sealed class UITextPatchManager
         // 丢了它，还原 / 更新后重打 / 持久清单都会找不到这个文件。
         if (existing is not null)
         {
-            var known = new HashSet<string>(files, StringComparer.OrdinalIgnoreCase);
-            foreach (var fileState in fileStates)
-            {
-                known.Add(fileState.Path);
-            }
-
+            var known = new HashSet<string>(stateFiles.Select(f => f.Path), StringComparer.OrdinalIgnoreCase);
             foreach (var previous in existing.EffectiveFiles)
             {
                 if (string.IsNullOrEmpty(previous.Path)
@@ -584,11 +595,11 @@ internal sealed class UITextPatchManager
                     continue;
                 }
 
-                fileStates.Add(previous);
+                stateFiles.Add(previous);
             }
         }
 
-        var main = fileStates[0];
+        var main = stateFiles[0];
         var newState = new UITextPatchState
         {
             InternalName = entry.InternalName,
@@ -599,13 +610,13 @@ internal sealed class UITextPatchManager
             PatchedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
             BackupPath = main.BackupPath,
             AppliedEntries = patchedTotal,
-            Files = fileStates,
+            Files = stateFiles,
             PendingVerify = true,
             PendingSince = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
         };
         this.store.Save(newState);
         // 持久目录里落一份自证清单：补丁记录被重置时靠它 + 文件哈希认领回原始备份
-        this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, fileStates, pluginDirectory);
+        this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, stateFiles, pluginDirectory);
 
         var message = $"已写入 {patchedTotal} 处译文";
         if (localizationWritten > 0)
@@ -617,7 +628,7 @@ internal sealed class UITextPatchManager
         {
             message += $"（本地化文件部分失败：{localizationNote}）";
         }
-        var assembliesPatched = fileStates.Count(f => f.Path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase));
+        var assembliesPatched = stateFiles.Count(f => f.Path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase));
         if (assembliesPatched > 1)
         {
             message += $"（跨 {assembliesPatched} 个程序集）";

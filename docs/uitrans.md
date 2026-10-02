@@ -581,3 +581,18 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   平时 30 秒兜底重建（原来只有手动「刷新」）。索引在后台任务里建、绘制线程换新，不打断帧。
   fgtest 另加**卫月反射契约**：启用链路用到的类型 / 成员（ProfileManager、Profile.WantsPlugin、LocalPlugin.LoadAsync、
   Service<T>.Get、ActivePluginsChanged）少一个就 FAIL——卫月改版当场报错，而不是玩家点按钮才发现。
+
+## 多程序集：0 条对得上的伴生程序集要跳过（2026-10-02，1.2.0.90）
+
+- **现象（用户实测）**：AutoHook / Browsingway 点「一键汉化」报「译文有 202 条，但在 DLL 里一条都没对上」——
+  其实主程序集已经全写进去了（探针实测：AutoHook.dll 207 处、Browsingway.dll 62 处），**失败的是伴生程序集**：
+  `AutoHook.FishSolver.dll` / `Browsingway.Common.dll` 的字符串没被包收录，逐文件打补丁时它们的匹配数是 0。
+- **旧逻辑把「某一个文件 0 条」当成整插件失败**；现在：伴生程序集 0 条 → 跳过这个文件（日志记一笔），
+  只有**主程序集**对不上才走「反向还原 → 重试 / 报错」那条链路。
+- **被跳过的文件不进补丁记录**（`stateFiles` 只收真正写进去的）：否则 `StatusOf` 会把它当「盘上是原始文件」一直催重打，
+  持久清单也发不出去。备份阶段顺手给它备的那份，在收尾清理里删掉（成功也做一次清理）。
+- 列表行：**开发/本地插件改标「[本地]」**（卫月的 `manifest.IsThirdParty` 对本地插件默认 false，原来会显示成「[官方]」）。
+- 行尾按钮**放不下就换行**（`UiHelpers.SameLineOrWrap`）：按钮一多（一键汉化 + 还原原文 + 详情 + 一键上传）
+  会顶出单元格，AutoRequeue 的「一键上传」曾被裁掉一截。
+- 「启用插件」按钮的显示条件放宽到 **Applied 或 PendingReload**：插件没加载时打上的补丁会一直是「待确认」，
+  原来只认 Applied，所以像 Burning Down the House 这种打了补丁但停用的插件看不到启用入口。
