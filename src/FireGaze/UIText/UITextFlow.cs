@@ -183,7 +183,9 @@ internal static class UITextFlow
                 continue;
             }
 
-            var context = "资源：" + entry.Container + " · " + entry.Key;
+            var context = UITextLocalizationFiles.IsFileContainer(entry.Container)
+                ? "本地化文件：" + UITextLocalizationFiles.RelativeOf(entry.Container) + " · " + entry.Key
+                : "资源：" + entry.Container + " · " + entry.Key;
             list.Add(new UITextTarget(entry.Original, context, null, entry));
         }
 

@@ -760,6 +760,14 @@ internal sealed class UITextPack
                 continue;
             }
 
+            // 插件自带的本地化文件：候选由「中文侧缺的键」决定，打过补丁之后那些键就不缺了——
+            // 绝不能按「不在本轮候选里」自动排掉（否则刚打完立刻被标「不翻」）。
+            // 它的生命周期交给写入规则：中文侧已有别的译文的键不覆盖。
+            if (UITextLocalizationFiles.IsFileContainer(entry.Container))
+            {
+                continue;
+            }
+
             if (this.IsResourceSkipped(entry.Container, entry.Key) && !IsResourceAutoSkipped(entry))
             {
                 continue;

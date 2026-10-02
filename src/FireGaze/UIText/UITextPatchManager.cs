@@ -329,6 +329,8 @@ internal sealed class UITextPatchManager
             return (false, "读不到插件主程序集路径。");
         }
 
+        var pluginDirectory = Path.GetDirectoryName(dllPath) ?? string.Empty;
+
         var existing = this.LoadStateOrAdopt(entry);
         var files = UITextRules.ResolveCompanions(dllPath, entry.InternalName);
         if (files.Count == 0)
@@ -473,6 +475,68 @@ internal sealed class UITextPatchManager
             return (false, "写入补丁失败，已尝试还原：" + e.Message);
         }
 
+        // 插件自带的本地化文件（JSON）：中文侧缺的键写回中文文件——独立于 DLL，备份/状态/还原走同一套。
+        // 失败不影响 DLL 补丁（写不动不会弄坏插件），只在消息里说明。
+        var localizationWritten = 0;
+        var localizationNote = string.Empty;
+        try
+        {
+            if (UITextLocalizationFiles.TryWrite(pluginDirectory, pack, out var fileWrites, out var fileError))
+            {
+                if (fileError is { Length: > 0 })
+                {
+                    localizationNote = fileError;
+                }
+
+                foreach (var write in fileWrites)
+                {
+                    var sourceHash = UITextPatchStore.HashOf(write.Path);
+                    if (sourceHash.Length == 0)
+                    {
+                        localizationNote = $"算不出 {Path.GetFileName(write.Path)} 的哈希，跳过这个文件";
+                        continue;
+                    }
+
+                    var backup = this.store.Backup(entry.InternalName, write.Path, sourceHash);
+                    if (backup is null)
+                    {
+                        localizationNote = $"备份 {Path.GetFileName(write.Path)} 失败，跳过这个文件";
+                        continue;
+                    }
+
+                    try
+                    {
+                        var temp = write.Path + ".fguitext.tmp";
+                        File.WriteAllText(temp, write.Content, new System.Text.UTF8Encoding(false));
+                        File.Move(temp, write.Path, overwrite: true);
+                    }
+                    catch (Exception e)
+                    {
+                        localizationNote = $"写 {Path.GetFileName(write.Path)} 失败：{e.Message}";
+                        continue;
+                    }
+
+                    fileStates.Add(new UITextPatchFile
+                    {
+                        Path = write.Path,
+                        SourceHash = sourceHash,
+                        PatchedHash = UITextPatchStore.HashOf(write.Path),
+                        BackupPath = backup,
+                    });
+                    localizationWritten += write.Count;
+                }
+            }
+            else if (fileError is { Length: > 0 })
+            {
+                localizationNote = fileError;
+            }
+        }
+        catch (Exception e)
+        {
+            localizationNote = e.Message;
+            Plugin.Log?.Warning(e, "[内部文本] 写本地化文件失败");
+        }
+
         var main = fileStates[0];
         var newState = new UITextPatchState
         {
@@ -490,9 +554,18 @@ internal sealed class UITextPatchManager
         };
         this.store.Save(newState);
         // 持久目录里落一份自证清单：补丁记录被重置时靠它 + 文件哈希认领回原始备份
-        this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, fileStates);
+        this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, fileStates, pluginDirectory);
 
         var message = $"已写入 {patchedTotal} 处译文";
+        if (localizationWritten > 0)
+        {
+            message += $"，另补了本地化文件 {localizationWritten} 条";
+        }
+
+        if (localizationNote.Length > 0)
+        {
+            message += $"（本地化文件部分失败：{localizationNote}）";
+        }
         if (fileStates.Count > 1)
         {
             message += $"（跨 {fileStates.Count} 个程序集）";
@@ -693,7 +766,7 @@ internal sealed class UITextPatchManager
             };
             this.store.Save(recoveredState);
             // 还原出来的基线也落一份清单：这根链路上配置再被重置一次也还能认领
-            this.store.PublishManifest(entry.InternalName, entry.Version, recoveredState.PatchedAt, totalReverted, fileStates);
+            this.store.PublishManifest(entry.InternalName, entry.Version, recoveredState.PatchedAt, totalReverted, fileStates, Path.GetDirectoryName(main.Path) ?? string.Empty);
 
             note = $"盘上还留着我们打过的补丁但丢了记录，已从补丁反向还原出原文文件（{totalReverted} 处）并恢复了补丁记录";
             return UIStringExtractor.ExtractMany(recoveredPaths, searchDirectories);
@@ -992,7 +1065,7 @@ internal sealed class UITextPatchManager
                     Files = files,
                     BackupPath = files.Count > 0 ? files[0].BackupPath : current.BackupPath,
                 });
-                this.store.PublishManifest(state.InternalName, state.PluginVersion, state.PatchedAt, state.AppliedEntries, files);
+                this.store.PublishManifest(state.InternalName, state.PluginVersion, state.PatchedAt, state.AppliedEntries, files, Path.GetDirectoryName(state.DLLPath) ?? string.Empty);
 
                 // 状态已经指向持久目录了，配置目录里的旧副本才能删
                 foreach (var path in pendingDeletes)

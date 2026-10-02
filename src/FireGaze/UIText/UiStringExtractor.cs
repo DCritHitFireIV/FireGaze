@@ -40,6 +40,20 @@ public static class UIStringExtractor
             loadWatch.Restart();
             var result = new Scanner(module, assemblyPath).Run();
             Trace?.Invoke($"[extract] 总计 {loadWatch.ElapsedMilliseconds} ms");
+
+            // 插件自带的本地化文件（JSON）：不在 DLL 里，DLL 补丁碰不到——当成资源条目拼进来。
+            // ExtractMany 会按 (容器, key) 去重，所以主程序集 + 伴生程序集重复扫也安全。
+            var pluginDirectory = Path.GetDirectoryName(Path.GetFullPath(assemblyPath));
+            if (!string.IsNullOrEmpty(pluginDirectory))
+            {
+                var files = UITextLocalizationFiles.Scan(pluginDirectory);
+                if (files.Count > 0)
+                {
+                    result.Resources.AddRange(files);
+                    Trace?.Invoke($"[extract] 本地化文件候选 {files.Count} 条（{pluginDirectory}）");
+                }
+            }
+
             return result;
         }
         catch (Exception e)
@@ -379,6 +393,11 @@ public static class UIStringExtractor
         /// <summary>每条指令进入时的真实栈深（从 CFG 算出来；-1 = 到不了 / 未知）。</summary>
         public int[] Depths = [];
     }
+    /// <summary>
+    ///     资源 / 本地化文件的值像不像「给人看的界面文字」（本地化文件扫描共用，避免两套口径）。
+    /// </summary>
+    internal static bool LooksTranslatableResourceValue(string value) => Scanner.LooksTranslatableResourceValue(value);
+
     private sealed class Scanner
     {
         private readonly ModuleDefMD module;
@@ -2864,7 +2883,7 @@ public static class UIStringExtractor
         ///     资源值算不算可翻的界面文字。比字面量的 <see cref="LooksTranslatable" /> 更谨慎：
         ///     资源容器里可能有结构化数据（AutoDuty 的预设 JSON），翻了会弄坏功能。
         /// </summary>
-        private static bool LooksTranslatableResourceValue(string value)
+        internal static bool LooksTranslatableResourceValue(string value)
         {
             var trimmed = value.Trim();
             if (trimmed.Length == 0)

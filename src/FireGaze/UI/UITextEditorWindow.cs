@@ -47,7 +47,9 @@ internal sealed class UITextEditorWindow : Window
             : this.Entry!.Original;
 
         public string? Context => this.Resource is not null
-            ? "资源：" + this.Resource.Container + " · " + this.Resource.Key
+            ? UITextLocalizationFiles.IsFileContainer(this.Resource.Container)
+                ? "文件：" + UITextLocalizationFiles.RelativeOf(this.Resource.Container) + " · " + this.Resource.Key
+                : "资源：" + this.Resource.Container + " · " + this.Resource.Key
             : this.Attribute is not null
                 ? this.Attribute.Context
                 : this.Entry!.Context;
@@ -407,7 +409,9 @@ internal sealed class UITextEditorWindow : Window
             {
                 Resource = resource,
                 Role = UITextRole.UI,
-                Reason = "资源型本地化（.resources）：打补丁改容器里的值，不动卫星程序集",
+                Reason = UITextLocalizationFiles.IsFileContainer(resource.Container)
+                    ? "插件自带的本地化文件（JSON）：只补中文侧缺的键；上游已有的译文不会覆盖"
+                    : "资源型本地化（.resources）：打补丁改容器里的值，不动卫星程序集",
                 Skipped = this.pack.IsResourceSkipped(resource.Container, resource.Key),
             });
         }

@@ -374,7 +374,7 @@ internal sealed class UITextPatchStore
     ///     把「这次打进 DLL 的哈希」与「备份文件的哈希」落成持久目录里的清单，供丢了补丁记录时认领。
     ///     只收录确实在持久目录里的备份；顺带清掉这一步不再引用的旧 *.orig。
     /// </summary>
-    public void PublishManifest(string internalName, string? pluginVersion, string? patchedAt, int appliedEntries, IReadOnlyList<UITextPatchFile> files)
+    public void PublishManifest(string internalName, string? pluginVersion, string? patchedAt, int appliedEntries, IReadOnlyList<UITextPatchFile> files, string pluginDirectory)
     {
         var directory = this.OriginalsDirectoryOf(internalName);
         if (directory is null)
@@ -407,7 +407,7 @@ internal sealed class UITextPatchStore
                     keep.Add(backupName);
                     manifest.Files.Add(new UITextOriginalsManifestFile
                     {
-                        Name = Path.GetFileName(file.Path),
+                        Name = RelativeName(pluginDirectory, file.Path),
                         SourceHash = file.SourceHash,
                         PatchedHash = patchedHash,
                         Backup = backupName,
@@ -668,6 +668,31 @@ internal sealed class UITextPatchStore
         {
             // 删不掉不影响
         }
+    }
+
+    /// <summary>
+    ///     清单里的文件名用「相对插件目录的路径」（本地化文件在子目录里，只存文件名认领不回来）；
+    ///     跑出插件目录就退回文件名（旧清单里就是文件名，行为不变）。
+    /// </summary>
+    private static string RelativeName(string pluginDirectory, string path)
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(pluginDirectory))
+            {
+                var relative = Path.GetRelativePath(pluginDirectory, path);
+                if (!relative.StartsWith("..", StringComparison.Ordinal))
+                {
+                    return relative.Replace('\\', '/');
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // 退回文件名
+        }
+
+        return Path.GetFileName(path);
     }
 
     /// <summary>
