@@ -127,13 +127,16 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 
 - 有些插件把界面代码拆在伴生程序集里（ARSR：主 DLL 是壳，配置窗口文字在 `RotationSolver.Basic.dll`），
   只扫主 DLL 会漏一大半（实测：ARSR 纯净主 DLL 884 条 UI 候选 + Basic 443 条；装过补丁的主 DLL 只剩 357 条可见英文）。
-- 收录规则（`PluginAssemblies`）：同目录 + （文件名为 `<主DLL名>.*.dll` 或 `uit-companions.json` 里点名）
+- 收录规则（`UITextRules`）：同目录 + （文件名为 `<主DLL名>.*.dll` 或 `uit-rules.json` 的 `companions` 里点名）
   且文件存在；主程序集永远排第一。**不能按「主程序集引用了的」来筛**——实测会把
   SixLabors / NAudio / SharpDX / MessagePack 这类第三方库全捞进来。
 - 抽取：`UIStringExtractor.ExtractMany` 合并多文件（同原文取更强判定，PreserveID 取或，Context 加 `[文件名]` 前缀）。
 - 打补丁：`UITextPatchManager` 一次备份/补丁/还原**全部文件**；先全部打进 `.new`、全成功才替换（不会半套）；
   状态里记 `Files[]`（每文件的哈希 + 备份），老状态（单文件）自动退化兼容。
-- 名单文件 `uit-companions.json` 随插件打包，CI 生成脚本读同一份（`scripts/uit_library_build.py`）。
+- 名单文件 `uit-rules.json` 随插件打包（插件端 `UITextRules` 与 CI `scripts/uit_library_build.py` 读同一份）。
+- 「没找到」的口径（2026-10-02）：多文件时取**所有文件的交集**才算真缺失——同一个字符串不会同时出现在
+  每个 DLL 里，逐文件拼接会把「只属于伴生程序集的条目」也算成主程序集缺（ARSR 实测虚报 2211 条，修后回落；
+  纯函数 `UITextPatchManager.IntersectMissing`，fgtest 有断言）。
 
 ## 界面（2026-10-01 两路盲评后的 v2；页签名与顺序按用户 2026-10-01 决定：插件汉化排第一）
 

@@ -292,7 +292,7 @@ internal sealed class UITextPatchManager
         // 全部先打进 .new，一个失败就整套放弃——不会留下「主程序集打了、伴生没打」的半套状态
         var staged = new List<(UITextPatchFile State, string NewPath)>();
         var patchedTotal = 0;
-        var missing = new List<string>();
+        var perFileMissing = new List<IReadOnlyCollection<string>>();
         foreach (var fileState in fileStates)
         {
             var newPath = fileState.Path + ".fguitext.new";
@@ -324,8 +324,12 @@ internal sealed class UITextPatchManager
 
             staged.Add((fileState, newPath));
             patchedTotal += outcome.PatchedTotal;
-            missing.AddRange(outcome.Missing);
+            perFileMissing.Add(outcome.Missing);
         }
+
+        // 「没找到」取所有文件的交集：同一个字符串不会同时出现在每个 DLL 里，
+        // 逐文件拼接会把「只属于伴生程序集的条目」也算成主程序集缺（2026-10-02 ARSR 实测虚报 2211 条）。
+        var missing = IntersectMissing(perFileMissing);
 
         // 全部成功才替换（出错则把已替换的从备份还原）
         try
@@ -386,6 +390,31 @@ internal sealed class UITextPatchManager
         message += "；重载插件后生效。";
         Plugin.Log?.Information($"[内部文本] {entry.InternalName}：{message}");
         return (true, message);
+    }
+
+    /// <summary>
+    ///     多程序集插件的「真缺失」= 每个文件都没见到的条目（逐文件 Missing 的**交集**）。
+    ///     <para>
+    ///         不能把各文件的 Missing 直接拼起来：同一个字符串不会同时出现在每个 DLL 里，
+    ///         拼接会把「只属于伴生程序集的条目」也算成主程序集缺（2026-10-02 ARSR 实测虚报 2211 条，
+    ///         修复后应回落到几百条以内）。
+    ///     </para>
+    /// </summary>
+    public static List<string> IntersectMissing(IReadOnlyList<IReadOnlyCollection<string>> perFileMissing)
+    {
+        if (perFileMissing.Count == 0)
+        {
+            return [];
+        }
+
+        var result = new List<string>(perFileMissing[0]);
+        for (var i = 1; i < perFileMissing.Count && result.Count > 0; i++)
+        {
+            var here = new HashSet<string>(perFileMissing[i], StringComparer.Ordinal);
+            result.RemoveAll(item => !here.Contains(item));
+        }
+
+        return result;
     }
 
     private static void TryDelete(string path)
