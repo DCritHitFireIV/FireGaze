@@ -717,3 +717,22 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - **待定（未修）**：配置文件类非原子写（可统一原子写助手）、`Plugin.instance` 卸载不置空、
   `RepoAuditTab` 的 lambda 订阅、`LastTableUpdateUTC` 命名误导（本地时间）。
 - **流程发现**：增量构建会跳过未变更文件、可能掩盖警告——**交付前用 `dotnet build -t:Rebuild` 全量确认 0 警告**。
+
+## 补丁必须保留内嵌 PDB（2026-10-03 血教训，1.3.12）
+
+- **现象**：Collections「一键汉化」后点「启用插件」，抛
+  `NullReferenceException at Collections.Dev.StripDirectoryPath(null)` → `DataGenerator..ctor` 崩。
+- **根因**：`dnlib` 重写 DLL 时默认不写 PDB；原程序集的调试目录（`EmbeddedPortablePdb`，现代构建常见）
+  被整个丢掉 → 运行时 `StackFrame.GetFileName()` 返回 `null` → 插件自己的 `Dev.Log`
+  在 `file.LastIndexOf` 上空引用。
+- **取证**：`PEReader.ReadDebugDirectory()` 对比——原件 4 个 entry（CodeView/PdbChecksum/Reproducible/**EmbeddedPortablePdb**），
+  补丁后 **0 个**。
+- **修复**：
+  · `Internal/EmbeddedPdb.TryRead`：从 PE 解出内嵌可移植 PDB（`MPDB` + Int32 长度 + deflate）——
+    dnlib 的 PDB 读取只认磁盘 `.pdb`（CodeView 路径），**不认内嵌**，所以要自己解；
+  · `UIStringExtractor.LoadModule` 把解出的字节喂给 `ModuleCreationOptions.PdbFileOrData`；
+  · `UITextPatcher.WriteModule`：有 `PdbState` 时 `PdbFileKind = EmbeddedPortablePDB` + `WritePdb = true`
+    （单文件、不用管旁挂 .pdb 的搬移/还原）；写 PDB 失败退回不带 PDB 写，保证补丁能打上。
+- **fgtest 回归**（第 ⑰ 项）：拿 Collections 原件真打一遍补丁，断言输出仍有可解析的 `EmbeddedPortablePdb`。
+- **对已坏的插件**：当前盘上那份是「无 PDB 的补丁」，要**先「还原原文」→ 再「一键汉化/写入并重载」**
+  才会带上 PDB。
