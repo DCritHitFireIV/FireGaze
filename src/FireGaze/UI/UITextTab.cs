@@ -104,6 +104,11 @@ internal sealed class UITextTab
 
     /// <summary>正在上传译文的插件（防重复点击）。</summary>
     private readonly HashSet<string> uploading = new(StringComparer.Ordinal);
+
+    // 云端译文（详情里展示/下载）：索引拉取状态 + 每个包的下载结果提示
+    private bool cloudIndexFetching;
+    private readonly Dictionary<string, string> cloudNotes = new(StringComparer.Ordinal);
+    private readonly HashSet<string> cloudDownloading = new(StringComparer.Ordinal);
     private Run? run;
     private bool rowsDirty = true;
 
@@ -704,7 +709,160 @@ internal sealed class UITextTab
         ImGui.SameLine();
         ImGui.TextDisabled("译文来源：" + UITextChannelFactory.Describe(this.plugin.Config));
 
+        this.DrawCloudPacks(plugin);
+
         ImGui.Unindent(48f);
+    }
+
+    /// <summary>
+    ///     详情里的「云端译文」：列出公共库该插件的可下载译文包（多来源时可自行选择），
+    ///     点「下载并应用」把那一包并进本机（本机人工改过的永不被顶）——2026-10-02 用户要求：
+    ///     给用户选择权，不让单一来源（含被污染的投稿）决定所有人看到什么。
+    /// </summary>
+    private void DrawCloudPacks(InstalledPluginEntry plugin)
+    {
+        ImGui.Spacing();
+        ImGui.Separator();
+        ImGui.TextUnformatted("云端译文（公共库）");
+
+        if (!this.plugin.Config.UITextLibraryEnabled)
+        {
+            ImGui.TextDisabled("译文库已关闭（翻译设置里可以打开）。");
+            return;
+        }
+
+        var library = this.plugin.TextLibrary;
+        var index = library.CachedIndex;
+        if (index is null)
+        {
+            if (!this.cloudIndexFetching)
+            {
+                this.cloudIndexFetching = true;
+                _ = Task.Run(async () =>
+                {
+                    try
+                    {
+                        await library.FetchIndexAsync(CancellationToken.None).ConfigureAwait(false);
+                    }
+                    catch (Exception)
+                    {
+                        // 拉不到就显示提示；不影响其它功能
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            await Plugin.Framework.RunOnFrameworkThread(() => this.cloudIndexFetching = false).ConfigureAwait(false);
+                        }
+                        catch (Exception)
+                        {
+                            // 忽略
+                        }
+                    }
+                });
+            }
+
+            ImGui.TextDisabled(this.cloudIndexFetching ? "正在查云端译文库…" : "云端译文库暂时拉不到（关掉详情再开一次可以重试）。");
+            return;
+        }
+
+        if (!index.Plugins.TryGetValue(plugin.InternalName, out var entry))
+        {
+            ImGui.TextDisabled("云端还没有这个插件的译文包。");
+            return;
+        }
+
+        foreach (var pack in entry.EffectivePacks())
+        {
+            var label = string.IsNullOrWhiteSpace(pack.Label) ? pack.ID ?? "译文包" : pack.Label!;
+            var source = pack.Source switch
+            {
+                "user" => "玩家投稿",
+                null or "" or "library" => "公共库",
+                var other => other,
+            };
+            var count = pack.Entries + pack.Resources + pack.Attributes;
+            var downloads = pack.Downloads > 0 ? $"下载 {pack.Downloads}" : "下载 —";
+            var key = plugin.InternalName + "|" + (pack.File ?? pack.ID ?? "library");
+
+            ImGui.TextUnformatted($"{label}（{source}）");
+            ImGui.SameLine();
+            ImGui.TextDisabled($"{count} 条 · {pack.UpdatedAt ?? "—"} · {downloads}");
+
+            ImGui.SameLine();
+            ImGui.BeginDisabled(this.cloudDownloading.Contains(key));
+            if (ImGui.Button($"下载并应用###cloud-{pack.ID ?? pack.File ?? "library"}"))
+            {
+                this.StartCloudDownload(plugin, pack);
+            }
+
+            ImGui.EndDisabled();
+            if (this.cloudDownloading.Contains(key))
+            {
+                ImGui.SameLine();
+                ImGui.TextDisabled("下载中…");
+            }
+            else if (this.cloudNotes.TryGetValue(key, out var note))
+            {
+                ImGui.SameLine();
+                ImGui.TextDisabled(note);
+            }
+        }
+
+        ImGui.SameLine();
+        ImGui.TextDisabled("（本机改过的译文不会被覆盖；下载后点「一键汉化」重打补丁生效）");
+    }
+
+    /// <summary>把云端指定的译文包并进本机包（不自动打补丁——由「一键汉化」统一写盘 + 重载）。</summary>
+    private void StartCloudDownload(InstalledPluginEntry plugin, UITextLibraryPack pack)
+    {
+        var fileName = string.IsNullOrWhiteSpace(pack.File) ? plugin.InternalName + ".json" : pack.File!;
+        var key = plugin.InternalName + "|" + fileName;
+        if (!this.cloudDownloading.Add(key))
+        {
+            return;
+        }
+
+        var packStore = this.store;
+        var library = this.plugin.TextLibrary;
+        var internalName = plugin.InternalName;
+        _ = Task.Run(async () =>
+        {
+            string text;
+            try
+            {
+                var local = packStore.Load(internalName);
+                var changed = await library.MergePackFileAsync(local, fileName, CancellationToken.None).ConfigureAwait(false);
+                if (changed > 0)
+                {
+                    text = packStore.Save(internalName, local, out var saveError)
+                        ? $"已下载 {changed} 条，点「一键汉化」重打补丁生效"
+                        : "下载到了，但写盘失败：" + saveError;
+                }
+                else
+                {
+                    text = "没有新增（本机已有相同或更好的译文）";
+                }
+            }
+            catch (Exception e)
+            {
+                text = "下载失败：" + e.Message;
+            }
+
+            try
+            {
+                await Plugin.Framework.RunOnFrameworkThread(() =>
+                {
+                    this.cloudDownloading.Remove(key);
+                    this.cloudNotes[key] = text;
+                    this.rowsDirty = true;
+                }).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                // 忽略
+            }
+        });
     }
 
     private void DrawNote(InstalledPluginEntry plugin, RowNote note)

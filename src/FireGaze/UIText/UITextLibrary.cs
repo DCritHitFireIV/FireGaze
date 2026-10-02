@@ -42,6 +42,78 @@ internal sealed class UITextLibraryIndexEntry
     [JsonPropertyName("hasOfficialZh")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public bool HasOfficialZh { get; set; }
+
+    /// <summary>这个插件的全部可下载译文包（多来源）；空时按上面的单包字段回退。</summary>
+    [JsonPropertyName("packs")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<UITextLibraryPack>? Packs { get; set; }
+
+    /// <summary>归一化：旧索引（单包字段）当「一个包」用。</summary>
+    public List<UITextLibraryPack> EffectivePacks()
+    {
+        if (this.Packs is { Count: > 0 })
+        {
+            return this.Packs;
+        }
+
+        return
+        [
+            new UITextLibraryPack
+            {
+                ID = "library",
+                File = this.File,
+                Label = "基础包",
+                Source = "library",
+                Entries = this.Entries,
+                Resources = this.Resources,
+                Attributes = this.Attributes,
+                UpdatedAt = this.UpdatedAt,
+            },
+        ];
+    }
+}
+
+/// <summary>
+///     一个可下载的译文包（一个插件可以有多个来源，由索引列出——详情里让用户自选）。
+/// </summary>
+internal sealed class UITextLibraryPack
+{
+    /// <summary>稳定标识（如 <c>library</c> / <c>user-xxx</c>）。</summary>
+    [JsonPropertyName("id")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? ID { get; set; }
+
+    /// <summary>包文件名（相对 <c>uit-packs/</c>）。</summary>
+    [JsonPropertyName("file")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? File { get; set; }
+
+    /// <summary>展示名（如「基础包」「社区包」）。</summary>
+    [JsonPropertyName("label")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Label { get; set; }
+
+    /// <summary>来源：<c>library</c>（自动构建）/ <c>user</c>（玩家投稿）等。</summary>
+    [JsonPropertyName("source")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Source { get; set; }
+
+    [JsonPropertyName("entries")]
+    public int Entries { get; set; }
+
+    [JsonPropertyName("resources")]
+    public int Resources { get; set; }
+
+    [JsonPropertyName("attributes")]
+    public int Attributes { get; set; }
+
+    [JsonPropertyName("updatedAt")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? UpdatedAt { get; set; }
+
+    /// <summary>下载量（中继统计；还没有统计时是 0，界面会显示「—」）。</summary>
+    [JsonPropertyName("downloads")]
+    public int Downloads { get; set; }
 }
 
 /// <summary>
@@ -164,6 +236,81 @@ internal sealed class UITextLibrary
             this.LastError = $"索引里的 {file} 读不出来：{error}";
             Plugin.Log?.Warning("[内部文本] 译文库包解析失败：" + this.LastError);
             return stale;
+        }
+
+        try
+        {
+            Directory.CreateDirectory(this.cacheDirectory);
+            await File.WriteAllTextAsync(cached, text, token).ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            Plugin.Log?.Debug(e, "[内部文本] 译文库缓存写盘失败（不影响本次使用）");
+        }
+
+        return pack;
+    }
+
+    /// <summary>索引（本会话内缓存 6 小时）；详情里展示「云端译文」用这个只读快照。</summary>
+    public UITextLibraryIndex? CachedIndex => this.index;
+
+    /// <summary>
+    ///     拉取指定文件的译文包并并进本机包（详情里「云端译文」的选择下载用）；返回补入条数。
+    /// </summary>
+    public async Task<int> MergePackFileAsync(UITextPack pack, string fileName, CancellationToken token)
+    {
+        try
+        {
+            var libraryPack = await this.FetchPackFileAsync(fileName, token).ConfigureAwait(false);
+            if (libraryPack is null)
+            {
+                return 0;
+            }
+
+            return pack.MergeLibrary(libraryPack);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch (Exception e)
+        {
+            this.LastError = e.Message;
+            Plugin.Log?.Debug(e, "[内部文本] 指定译文包合并出错（已忽略）");
+            return 0;
+        }
+    }
+
+    /// <summary>拉取（或从缓存读）<c>uit-packs/</c> 下的一个具体文件。</summary>
+    public async Task<UITextPack?> FetchPackFileAsync(string fileName, CancellationToken token)
+    {
+        var safe = new string(fileName.Where(c => char.IsLetterOrDigit(c) || c is '_' or '-' or '.').ToArray());
+        if (safe.Length == 0 || !safe.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        var cached = Path.Combine(this.cacheDirectory, safe);
+        if (File.Exists(cached) && (DateTime.Now - File.GetLastWriteTime(cached)) < PackTTL)
+        {
+            var local = LoadPackFile(cached);
+            if (local is not null)
+            {
+                return local;
+            }
+        }
+
+        var text = await FetchTextAsync(safe, token).ConfigureAwait(false);
+        if (text is null)
+        {
+            return File.Exists(cached) ? LoadPackFile(cached) : null;
+        }
+
+        var pack = UITextPack.FromJSON(text, out var error);
+        if (pack is null)
+        {
+            this.LastError = $"{safe} 读不出来：{error}";
+            return null;
         }
 
         try
