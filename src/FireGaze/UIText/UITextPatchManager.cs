@@ -431,17 +431,16 @@ internal sealed class UITextPatchManager
     ///     抽取 + 「从补丁后 DLL 抽取」的兜底体检。返回（结果, 说明）。
     /// </summary>
     /// <remarks>
-    ///     抽出来的**字面量原文**里若有一批「中文###…」形态，盘上很可能已经是我们打过的补丁——
-    ///     正常原始 DLL 不会成批出现「译文###原文」。这种结果绝不能进包：假原文会把真原文挤成
-    ///     「不翻」（Prune 连锁）、打补丁又匹配不上（2026-10-02 AbilityAnts 实测 12 条中文原文进包 +
-    ///     14 条真原文被误标、报「包里还没有可应用的译文」）。
-    ///     体检不过时改用原始备份重抽；没有备份或仍不过就返回带 Error 的结果（流程会停下，不写包）。
+    ///     抽出来的**字面量原文**里若有一批「译文###原文」（且译文能在当前包里找到——说明是我们翻的），
+    ///     盘上很可能已经是打过的补丁：这种结果绝不能进包（假原文会把真原文挤成「不翻」、
+    ///     打补丁又匹配不上；2026-10-02 AbilityAnts 实测）。
+    ///     体检不过时改用原始备份重抽；没有备份或仍不过就返回带 Error 的结果（流程停下，不写包）。
     /// </remarks>
     public (UITextExtraction Extraction, string Note) ExtractWithGuard(InstalledPluginEntry entry)
     {
         var sources = this.ExtractionSourceOf(entry, out var note, out var searchDirectories);
         var extraction = UIStringExtractor.ExtractMany(sources, searchDirectories);
-        if (extraction.Error is not null || !LooksLikePatchedDLL(extraction))
+        if (extraction.Error is not null || !LooksLikePatchedDLL(extraction, entry.InternalName))
         {
             return (extraction, note);
         }
@@ -462,7 +461,7 @@ internal sealed class UITextPatchManager
         if (backups.Count > 0)
         {
             var retry = UIStringExtractor.ExtractMany(backups, searchDirectories);
-            if (retry.Error is null && !LooksLikePatchedDLL(retry))
+            if (retry.Error is null && !LooksLikePatchedDLL(retry, entry.InternalName))
             {
                 note = (note.Length > 0 ? note + "；" : string.Empty) + "盘上像是汉化补丁，已改从原始备份抽取";
                 Plugin.Log?.Information($"[内部文本] {entry.InternalName}：抽取体检发现「译文###原文」形态，已改从原始备份抽取");
@@ -470,20 +469,46 @@ internal sealed class UITextPatchManager
             }
         }
 
-        Plugin.Log?.Warning($"[内部文本] {entry.InternalName}：抽取结果里有一批「译文###原文」形态的文本，已停下（避免污染译文包）");
+        Plugin.Log?.Warning($"[内部文本] {entry.InternalName}：抽取结果里有一批「译文###原文」形态的文本，且没有可用备份——已停下（避免污染译文包）");
         return (new UITextExtraction
         {
             AssemblyPath = extraction.AssemblyPath,
             Entries = extraction.Entries,
             Resources = extraction.Resources,
             Attributes = extraction.Attributes,
-            Error = "抽取结果里有一批「译文###原文」形态的文本——盘上可能已是汉化补丁（换原始备份重试也不对）。先停下，避免把假原文灌进译文包；可以「还原原文」后再试。",
+            Error = "这个 DLL 上已经有一批我们打过的汉化补丁，而且找不到可还原的原始备份（backups 目录为空或被清过）。先停下，避免把假原文灌进译文包。恢复办法：在插件安装器里把这个插件重新安装一次（回到原版），再点「一键汉化」——译文包与公共库里的译文都还在。",
         }, note);
     }
 
-    /// <summary>抽出来的 UI 候选里是否成批出现「中文###…」——我们补丁形态的特征。</summary>
-    private static bool LooksLikePatchedDLL(UITextExtraction extraction)
+    /// <summary>
+    ///     抽出来的 UI 候选里是否成批出现**我们打过的补丁**形态。
+    /// </summary>
+    /// <remarks>
+    ///     不能只看「中文###」——有些插件原生就用中文标签 + ###ID（那样会误报，2026-10-02 踩过）。
+    ///     真判据：### 前的显示段能在**当前包**里找到对应的译文（说明这段是我们翻的）。
+    /// </remarks>
+    private bool LooksLikePatchedDLL(UITextExtraction extraction, string internalName)
     {
+        var pack = this.packs.Load(internalName);
+        if (pack is null || pack.Entries.Count == 0)
+        {
+            return false; // 没有包，不可能是「我们打的补丁」
+        }
+
+        var translations = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var item in pack.Entries)
+        {
+            if (item.HasTranslation)
+            {
+                translations.Add(item.Translated.Trim());
+            }
+        }
+
+        if (translations.Count == 0)
+        {
+            return false;
+        }
+
         var patched = 0;
         foreach (var item in extraction.Entries)
         {
@@ -498,14 +523,9 @@ internal sealed class UITextPatchManager
                 continue;
             }
 
-            // 「译文###原文」：### 之前是中文；插件原生的「标签###ID」### 前是英文
-            foreach (var ch in item.Original[..mark])
+            if (translations.Contains(item.Original[..mark].Trim()))
             {
-                if (ch is >= '\u4e00' and <= '\u9fff')
-                {
-                    patched++;
-                    break;
-                }
+                patched++;
             }
         }
 
