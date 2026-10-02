@@ -61,6 +61,8 @@ DO_NOT_LOCALIZE = {
     "tidychatcn", "vfxeditorcn", "xivcomboexpandedcn", "visland_cn", "keitatoolbox",
     "pfclassifier", "pfradar", "pvpselector", "untarnishedheart", "autohook",
     "dctravelerx", "proxyplugin",
+    "zhouyi", "coyote-ffxiv", "ffxivnetworkpacketanalysistool", "gposeresizer",
+    "cleanwindow", "autotriadc", "ttc_siren", "coordimporter",
 }
 
 TRANSLATE_PROMPT = (
