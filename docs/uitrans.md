@@ -701,3 +701,19 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
     用户手动标的「不翻」（ai 来源、无备注）仍绝不碰（fgtest 有断言）。
 - **用户操作**：勾上「连灰名单一起翻」→「一键汉化」→ 解锁 + 翻译 + 打补丁一次完成
   （实测可打补丁条目 1235 → **1447**）。
+
+## 架构审计与修复（2026-10-02，1.2.0.97）
+
+- **背景**：对全仓库做一次「bug 隐患」审计。方法 = 8 类静态模式扫描（空 catch / async void / 同步阻塞 /
+  Math.Clamp / 反射命名查找 / 事件订阅 / 静态状态 / 文件写入与并发）+ 命中点逐一核实；UIText 链路深审。
+- **干净项**（扫过没问题）：空 catch 0、async void 0、事件订阅退订成对、同步等待都在线程池、
+  界面侧全是「完成才取 Result」的轮询、补丁状态机（崩溃还原 / 自动重打 / 杂种自愈）与持久化
+  （临时文件 + 原子替换）设计完备、包实例并发有 RunLock + Rebase 防护。
+- **已修**：
+  · `notes` / `enabling` / `uploading` 被后台任务线程与界面线程并发读写（普通 Dictionary/HashSet
+    在这种读写下属于未定义行为）→ 改 `ConcurrentDictionary` + `TryAdd` / `TryRemove`；
+  · `InstalledPluginsIndex` 索引构建改为**逐条容错**（单个插件反射失败只跳过它，不再让整张表「不可用」）；
+    顺带修了 `Plugin.Log` 空解引用警告。
+- **待定（未修）**：配置文件类非原子写（可统一原子写助手）、`Plugin.instance` 卸载不置空、
+  `RepoAuditTab` 的 lambda 订阅、`LastTableUpdateUTC` 命名误导（本地时间）。
+- **流程发现**：增量构建会跳过未变更文件、可能掩盖警告——**交付前用 `dotnet build -t:Rebuild` 全量确认 0 警告**。
