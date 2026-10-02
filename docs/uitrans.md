@@ -734,5 +734,17 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   · `UITextPatcher.WriteModule`：有 `PdbState` 时 `PdbFileKind = EmbeddedPortablePDB` + `WritePdb = true`
     （单文件、不用管旁挂 .pdb 的搬移/还原）；写 PDB 失败退回不带 PDB 写，保证补丁能打上。
 - **fgtest 回归**（第 ⑰ 项）：拿 Collections 原件真打一遍补丁，断言输出仍有可解析的 `EmbeddedPortablePdb`。
-- **对已坏的插件**：当前盘上那份是「无 PDB 的补丁」，要**先「还原原文」→ 再「一键汉化/写入并重载」**
-  才会带上 PDB。
+- **外挂便携 PDB 同样要保**（1.3.17）：很多插件把 PDB 放在 DLL 旁（`XxxPlugin.pdb`，CodeView 指过去）。
+  `EmbeddedPdb.TryRead` 在没内嵌时读同目录外挂 PDB，写出时统一转成**内嵌可移植 PDB**
+  （单文件，不用管旁挂文件的搬移/还原）；fgtest 双样本（内嵌 Collections / 外挂 TeleporterPlugin）回归。
+  只有 Windows PDB（MSF，老 `Xxx.pdb`）转不了——那种保持原样丢弃。
+- **对已坏的旧补丁（2026-10-03 实测盘点）**：修复前打过补丁的 DLL 都丢了调试目录。全量扫 37 个状态：
+  **15 个原件本来有符号、补丁后丢了**（Aetherphone / AutoHunt / AutoRequeue / BDTHPlugin / Battlevest /
+  BigPlayerDebuffs / BlueMageHelper / Browsingway / Cammy / CharacterPanelRefined / ContactsTracker /
+  CurrencySpender / DalamudRepoBrowser / Deliveroo / FootIk）。逐个查过：**这 15 个都不引用
+  `System.Diagnostics.StackFrame`**（只有 `Path.GetFileName`，不需要 PDB），所以没有实际故障；
+  Collections（唯一出事的）在修复后重打过，已带符号。
+- **怎么修**：**直接再点一次「一键汉化」或「写入并重载」即可**——补丁器会先按 `PatchedHash`
+  把盘上的旧补丁还原成原件（原件连带符号），再在原件基线重打，输出就是带 PDB 的。
+  （早期文档写「先还原原文再打」是保守说法；两条路都行，原生重打不需要手动还原。）
+  插件将来更新/重打时也会自动带上符号——不必专门处理。
