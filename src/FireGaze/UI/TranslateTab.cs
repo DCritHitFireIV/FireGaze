@@ -146,9 +146,9 @@ internal sealed class TranslateTab
         }
 
         // ② 老词表没有维护日期：只本机取用过的时间，不能冒充「维护日期」
-        if (plugin.Config.LastTableUpdateUTC != default)
+        if (plugin.Config.LastTableUpdateLocal != default)
         {
-            return $"词表维护：未标注（本机 {plugin.Config.LastTableUpdateUTC:MM-dd} 取到）";
+            return $"词表维护：未标注（本机 {plugin.Config.LastTableUpdateLocal:MM-dd} 取到）";
         }
 
         // ③ 随插件装上的那份（同样是未标注）

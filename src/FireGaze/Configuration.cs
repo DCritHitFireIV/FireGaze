@@ -123,9 +123,10 @@ public sealed class Configuration : IPluginConfiguration
 
     /// <summary>
     ///     上次真的把词表换成新版的本地时间（自动检查或手动都算）。
+    ///     字段名带 UTC 是历史命名，存的其实是本地时间；JSON 键保持 "LastTableUpdateUtc" 不变。
     /// </summary>
     [JsonProperty("LastTableUpdateUtc")]
-    public DateTime LastTableUpdateUTC { get; set; }
+    public DateTime LastTableUpdateLocal { get; set; }
 
     [JsonProperty("NameMode")]
     public DisplayMode NameMode { get; set; } = DisplayMode.Original;

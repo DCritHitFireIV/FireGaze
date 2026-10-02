@@ -785,7 +785,7 @@ public sealed class Plugin : IDalamudPlugin
         {
             // 下载下来的那份不能盖掉本地还没交出去的译文（用户 2026-09-22 定：要保留，而且要优先）
             var kept = ReapplyPendingContributions();
-            Config.LastTableUpdateUTC = DateTime.Now;
+            Config.LastTableUpdateLocal = DateTime.Now;
             SaveConfig();
             Patcher.ApplyAll();
             if (kept > 0)
