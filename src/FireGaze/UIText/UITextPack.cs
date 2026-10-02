@@ -188,6 +188,17 @@ internal sealed record UITextPackPruneOutcome(int Pruned, int Restored, int Remo
 /// </summary>
 internal sealed class UITextPack
 {
+    /// <summary>
+    ///     当前包格式版本。
+    /// </summary>
+    /// <remarks>
+    ///     v2（2026-10-02）：v1 的 <c>PreserveID</c> 把**拼接片段**也标了（ARSR 的 <c>".Name"</c> 经
+    ///     <c>string.Concat</c> 拼进 ImGui label），打补丁写成 <c>.名称###.Name</c>——<c>###</c> 之后才算 ID，
+    ///     整个窗口控件同 ID、拉一个滑块全部动。v1 → v2 迁移把旧包的 PreserveID 全部清零，
+    ///     后续任何重打（含自动重打）都不会再写错；原文自带 <c>###</c> 的条目不受影响（打补丁走保留原 ID 那条路）。
+    /// </remarks>
+    public const int CurrentFormat = 2;
+
     [JsonPropertyName("_meta")]
     public UITextPackMeta Meta { get; set; } = new();
 
@@ -879,7 +890,12 @@ internal sealed class UITextPack
     /// <summary>
     ///     序列化成 UTF-8 JSON 文本（带末尾换行，与仓库里其它 JSON 一致）。
     /// </summary>
-    public string ToJSON() => JsonSerializer.Serialize(this, JSONOptions) + Environment.NewLine;
+    public string ToJSON()
+    {
+        // 写盘总是落到当前格式（v1 包只要被保存过一次就完成迁移）
+        this.Meta.Format = CurrentFormat;
+        return JsonSerializer.Serialize(this, JSONOptions) + Environment.NewLine;
+    }
 
     /// <summary>
     ///     从 JSON 读一个包；读不出来时返回 null 并把原因写进 <paramref name="error" />。
@@ -890,6 +906,7 @@ internal sealed class UITextPack
         try
         {
             var pack = JsonSerializer.Deserialize<UITextPack>(json, JSONOptions);
+            pack?.MigrateIfNeeded();
             pack?.InvalidateIndex();
             return pack;
         }
@@ -897,6 +914,20 @@ internal sealed class UITextPack
         {
             error = e.Message;
             return null;
+        }
+    }
+
+    /// <summary>旧格式迁移（<c>Meta.Format</c> 缺失 = v1）。</summary>
+    private void MigrateIfNeeded()
+    {
+        if (this.Meta.Format >= CurrentFormat)
+        {
+            return;
+        }
+
+        foreach (var entry in this.Entries)
+        {
+            entry.PreserveID = false;
         }
     }
 }

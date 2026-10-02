@@ -223,6 +223,14 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   修法：`UIStringExtractor.LoadModule` 一律用 `new ModuleContext(new AssemblyResolver())` + `PreSearchPaths` 指向 DLL 目录；
   **备份抽取时**（源在 `uitrans/backups`）还要把原插件目录一起带进来
   （`ExtractionSourceOf` 的 out `searchDirectories` → `ExtractMany` / `UITextPatcher.Patch` 都有这个可选参数）。
+- **血教训（2026-10-02，勿回退）：拼接片段不能追加 `###原文`。** ImGui 的 `###` **之后**才是 ID。
+  ARSR 的 `text2 = $"##{hash}_{text}.Name"` 里 `.Name` 只是 `string.Concat` 的一个参数（不是完整 label），
+  补成 `.名称###.Name` 后 ImGui 只拿 `.Name` 当 ID——**整个窗口所有滑块/按钮同 ID，拉一个滑块全部一起动**。
+  修法：抽取器给「参与过拼接 / 格式化」的字符串打 `Joined` 标记（`V.Joined` + `Literal.Joined`，
+  `MakeResult` 里识别 `String.Concat / Join / Format`、`DefaultInterpolatedStringHandler`、`StringBuilder.Append/Insert`），
+  `MarkUI` / `ClassifyFlow` / `MergeExtraction` 都不给它们 PreserveID；
+  **包格式升 v2**，v1 旧包加载时把 PreserveID 全部清零（自动重打路径同样安全；
+  原文自带 `###` 的条目不受影响——打补丁走「保留原 ID」那条路）。fgtest 有抽取 + 补丁产物（搜 DLL 字节）两道断言。
 - 包格式新增 `attributes` 段（身份 = 字符串值），编辑器里显示为「属性」行；
   打补丁用 dnlib 改特性参数（`CAArgument` 是**结构体**，必须把返回值写回列表——只改参数副本会「打成但文件没变」）。
 - SimpleTweaks 的 fallback 语义天然成立：官方 zh 按「类名 / Name」做 key，属性值只是 fallback，

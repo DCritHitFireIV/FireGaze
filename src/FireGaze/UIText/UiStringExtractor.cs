@@ -259,7 +259,8 @@ public static class UIStringExtractor
         int RefLocal = -1,
         int RefArg = -1,
         string? FieldKey = null,
-        int FromLocal = -1)
+        int FromLocal = -1,
+        bool Joined = false)
     {
         /// <summary>
         ///     一个值里最多带多少项。字段是跨方法合并的，不封顶会组合爆炸
@@ -317,7 +318,7 @@ public static class UIStringExtractor
             AppendCapped(keys, b.CallKeys);
 
             var isArray = a.IsArray || b.IsArray;
-            return new V(ids, prms, keys, isArray, false, -1, -1, a.FieldKey ?? b.FieldKey, a.FromLocal >= 0 ? a.FromLocal : b.FromLocal);
+            return new V(ids, prms, keys, isArray, false, -1, -1, a.FieldKey ?? b.FieldKey, a.FromLocal >= 0 ? a.FromLocal : b.FromLocal, a.Joined || b.Joined);
         }
     }
 
@@ -327,6 +328,18 @@ public static class UIStringExtractor
         public string Text = string.Empty;
         public string Context = string.Empty;
         public bool PreserveID;
+
+        /// <summary>
+        ///     这个字面量参与过**字符串拼接 / 格式化**（是最终字符串的片段，不是完整 label）。
+        /// </summary>
+        /// <remarks>
+        ///     拼接片段不能追加 <c>###原文</c>：ImGui 的 <c>###</c> 之后才是 ID，
+        ///     而片段前面还有别的拼接内容——追加后 ID 会剩一个常量（如 ARSR 的
+        ///     <c>$"##{hash}_{text}.Name"</c> 补成 <c>…名称###.Name</c> 后全部控件同 ID，
+        ///     拉一个滑块全动，2026-10-02 用户实测）。
+        /// </remarks>
+        public bool Joined;
+
         public bool Dangerous;
         public string DangerousTarget = string.Empty;
         public string UnknownTarget = string.Empty;
@@ -1657,7 +1670,7 @@ public static class UIStringExtractor
                     literal.UITarget = target;
                 }
 
-                if (preserveID && !isArray)
+                if (preserveID && !isArray && !value.Joined)
                 {
                     literal.PreserveID = true;
                     literal.IDMarked = true;
@@ -1678,7 +1691,7 @@ public static class UIStringExtractor
                         scan.ParamsToUITarget[index] = target;
                     }
 
-                    if (preserveID && !isArray)
+                    if (preserveID && !isArray && !value.Joined)
                     {
                         scan.ParamsToUIPreserveID[index] = true;
                     }
@@ -1702,7 +1715,7 @@ public static class UIStringExtractor
                     fieldScan.ParamsToUITarget[0] = target;
                 }
 
-                if (preserveID && !isArray)
+                if (preserveID && !isArray && !value.Joined)
                 {
                     fieldScan.ParamsToUIPreserveID[0] = true;
                 }
@@ -1828,7 +1841,7 @@ public static class UIStringExtractor
             }
         }
 
-        private static V MakeResult(IMethod callee, V[] args, bool isInternal)
+        private V MakeResult(IMethod callee, V[] args, bool isInternal)
         {
             var ids = new List<int>();
             var prms = new List<int>();
@@ -1841,6 +1854,35 @@ public static class UIStringExtractor
             }
 
             var (typeName, methodName) = Describe(callee);
+
+            // 拼接 / 格式化：参与的字符串都是**片段**（不是完整 label），标记起来——
+            // 后续不能追加 ###原文（### 之后才算 ID，片段前面还有别的内容，
+            // 追加会把 ID 截成常量：ARSR 的 $"##{hash}_{text}.Name" 补成 …名称###.Name 后全窗口控件同 ID，
+            // 拉一个滑块全部滑块一起动，2026-10-02 用户实测）。
+            var joined = IsStringJoinCall(typeName, methodName);
+            if (!joined)
+            {
+                foreach (var arg in args)
+                {
+                    if (arg.Joined)
+                    {
+                        joined = true;
+                        break;
+                    }
+                }
+            }
+
+            if (joined)
+            {
+                foreach (var arg in args)
+                {
+                    foreach (var id in arg.IDs)
+                    {
+                        this.literals[id].Joined = true;
+                    }
+                }
+            }
+
             if (isInternal)
             {
                 var key = MethodKey(typeName, methodName, args.Length);
@@ -1860,7 +1902,26 @@ public static class UIStringExtractor
                 }
             }
 
-            return new V(ids, prms, keys, false, false, -1, -1, fieldKey);
+            return new V(ids, prms, keys, false, false, -1, -1, fieldKey, -1, joined);
+        }
+
+        /// <summary>这个调用是不是「字符串拼接 / 格式化」（结果字符串由多段拼出来）。</summary>
+        private static bool IsStringJoinCall(string typeName, string methodName)
+        {
+            if (typeName.EndsWith("String", StringComparison.Ordinal)
+                && methodName is "Concat" or "Join" or "Format")
+            {
+                return true;
+            }
+
+            if (typeName.Contains("DefaultInterpolatedStringHandler", StringComparison.Ordinal))
+            {
+                return true;
+            }
+
+            return typeName.EndsWith("StringBuilder", StringComparison.Ordinal)
+                && (methodName.StartsWith("Append", StringComparison.Ordinal)
+                    || methodName.StartsWith("Insert", StringComparison.Ordinal));
         }
 
         // ── 接口 / 虚方法展开 ─────────────────────────────────────────────
@@ -2321,7 +2382,7 @@ public static class UIStringExtractor
                             literal.UIFlowTarget = scan.ParamsToUITarget[param];
                         }
 
-                        if (scan.ParamsToUIPreserveID[param])
+                        if (scan.ParamsToUIPreserveID[param] && !literal.Joined)
                         {
                             literal.PreserveID = true;
                             literal.IDMarked = true;
