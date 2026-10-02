@@ -856,3 +856,10 @@ AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打
 - **P2-8 + 跨页规则**：新增 `UiHelpers.PushDangerButton`（红系）——插件汉化行内 / 弹窗的「还原原文」、仓库体检的工具条与「确认删除」统一用它；规则：主操作=蓝、启用=绿、破坏=红，橙色只做警示色。
 - **V1-07**：徽标带分母（`已汉化 981/1083 条`，全齐时才只写条数）。
 - **术语**：本页的共享译文来源统一叫「公共译文库」（上传弹窗、按钮、状态行、来源标签、编辑器菜单同一口径）。
+
+## 离线批量重打 + 两处新修复（2026-10-03，1.3.25）
+
+- **查表 key 分支必须排在 UI 分支之前**（`UiStringExtractor` ③b→③ 前移）：`ImGuiService.GetImageTexture`、`ImGuiEx.LineCentered` 这类长着 ImGui 名字的查表包装器，原来会被 UI 分支先吃掉；InventoryTools 的 3 条图标资源名、Battlevest / CurrencySpender 的居中宽度缓存 id 都是这么被翻掉的。现在按 key 排除；存量条目重打时自动淡出。
+- **PDB 里含「本地常量」时不再整份丢弃**（`UITextPatcher.WriteModule`）：dnlib 写 Portable PDB 撞上无法序列化的本地常量（如类类型非空常量）会抛 `Expected a null constant`；现在捕获后——**把常量条目整个移除再试**（只丢常量值，文件名 / 行号保留）。注意不能只把值清成 null：I4 常量会改报 `Expected an Int32 constant`（2026-10-03 实测定型）。HaselTweaks / Browsingway / Cammy / DalamudRepoBrowser 的 PDB 借此恢复。
+- **离线重打工具**（`fgtest-refactor/Repatch.cs`，`dotnet run -c Release -- repatch <内部名...>`）：从原始备份抽取 → 合并译文包 → 重打补丁 → 更新状态与清单；替换前另存临时安全副本，全程不写本地化文件、不自动重载（重打后需重启游戏 / 重载插件生效）。用途：批量应用抽取器规则修正。
+- **BossMod 候选集核对（排除「抽取回归」疑云）**：新旧抽取器对 BossModReborn 的候选差集只有 **14 条，全是 ID 串**（`FiltersPanel` / `party` / `uiobj` 等，NonTextCalls 的正确排除）；其余从包里淡出的条目在 1.3.20 抽取器里同样不存在——属于历史代抽取器的正常淡出，非本次回归。

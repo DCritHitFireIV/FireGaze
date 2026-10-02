@@ -1583,6 +1583,30 @@ public static class UIStringExtractor
                 return;
             }
 
+            // ③b 本地化 / 资源查表调用：第 0 个参数是 key（可能在别的程序集里查表，数据流看不见）。
+            //     必须排在 UI 分支**之前**：查表包装器常常长着 ImGui 名字
+            //     （ImGuiService.GetImageTexture / ImGuiEx.LineCentered），先过 UI 分支就会被整批当界面文本翻掉
+            //     （2026-10-03 实测：InventoryTools 的图标资源名、Battlevest 的居中宽度缓存 id 都是这么被翻的）。
+            if (UICallSemantics.IsLocalizationKeyCall(typeName, methodName)
+                || UICallSemantics.IsResourceKeyCall(typeName, methodName))
+            {
+                if (argValues.Length > 0 && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
+                {
+                    this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
+
+                    if (UICallSemantics.IsResourceKeyCall(typeName, methodName))
+                    {
+                        foreach (var keyId in argValues[0].IDs)
+                        {
+                            this.resourceKeyIds.Add(keyId);
+                        }
+                    }
+                }
+
+                Leave(MakeResult(callee, argValues, isInternal: false));
+                return;
+            }
+
             // ③ UI 调用
             if (UICallSemantics.IsUICall(typeName, methodName))
             {
@@ -1605,27 +1629,6 @@ public static class UIStringExtractor
                     var preserveThisArgument = preserveID
                                                && UICallSemantics.UsesStringAsIDForArgument(typeName, methodName, i);
                     this.MarkUI(scan, argValues[i], target, preserveThisArgument);
-                }
-
-                Leave(MakeResult(callee, argValues, isInternal: false));
-                return;
-            }
-
-            // ③b 本地化 / 资源查表调用：第 0 个参数是 key（可能在别的程序集里查表，数据流看不见）
-            if (UICallSemantics.IsLocalizationKeyCall(typeName, methodName)
-                || UICallSemantics.IsResourceKeyCall(typeName, methodName))
-            {
-                if (argValues.Length > 0 && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
-                {
-                    this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
-
-                    if (UICallSemantics.IsResourceKeyCall(typeName, methodName))
-                    {
-                        foreach (var keyId in argValues[0].IDs)
-                        {
-                            this.resourceKeyIds.Add(keyId);
-                        }
-                    }
                 }
 
                 Leave(MakeResult(callee, argValues, isInternal: false));

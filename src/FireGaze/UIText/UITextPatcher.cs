@@ -927,7 +927,7 @@ internal static class UITextPatcher
     /// <summary>
     ///     写回模块：有 PDB 状态时按「内嵌可移植 PDB」写（保持调试目录）——
     ///     插件里用 <c>StackFrame.GetFileName()</c> 的代码靠它，丢了会 NRE（Collections 实测）。
-    ///     写 PDB 失败就退回不带 PDB 写，保证补丁能打上（会记日志 + 在 outcome 上留标记）。
+    ///     写 PDB 失败先清掉无法序列化的本地常量再试一次；仍失败才退回不带 PDB 写（会记日志 + 留标记）。
     /// </summary>
     private static void WriteModule(ModuleDefMD module, string tempPath, UITextPatchOutcome outcome)
     {
@@ -941,14 +941,71 @@ internal static class UITextPatcher
         try
         {
             module.Write(tempPath, options);
+            return;
         }
         catch (Exception e) when (options.WritePdb)
         {
+            // dnlib 写 Portable PDB 的已知硬伤：本地常量（const 局部）里出现它序列化不了的值时直接抛
+            // （如 “Expected a null constant”——类类型非空常量，HaselTweaks 实测）。
+            // 整份 PDB 抛弃太亏（文件名/行号才是关键），先把本地常量的值清成 null 再试一次。
             TryDelete(tempPath);
+            // 关键：必须把常量「条目」整个移除，不能只把值清成 null——I4 常量的值是 null 时
+            // 写入器同样拒绝（"Expected an Int32 constant"，2026-10-03 实测定型）。
+            var dropped = DropPdbLocalConstants(module);
+            if (dropped > 0)
+            {
+                try
+                {
+                    module.Write(tempPath, options);
+                    Plugin.Log?.Information($"[内部文本] 调试符号已保留（丢掉了 {dropped} 个无法序列化的本地常量，文件名 / 行号不受影响）");
+                    return;
+                }
+                catch (Exception retryError) when (options.WritePdb)
+                {
+                    Plugin.Log?.Warning(retryError, "[内部文本] 丢掉本地常量后仍写不出 PDB，退回不带 PDB 写");
+                    TryDelete(tempPath);
+                }
+            }
+            else
+            {
+                Plugin.Log?.Warning(e, "[内部文本] 保留调试符号失败，退回不带 PDB 写");
+            }
+
             outcome.PdbDropped = true;
-            Plugin.Log?.Warning(e, "[内部文本] 保留调试符号失败：本次补丁不带 PDB 写出（插件里用 StackFrame 读文件名的代码可能报错）");
             module.Write(tempPath, new ModuleWriterOptions(module));
         }
+    }
+
+    /// <summary>把 PDB 里所有「本地常量」的条目整个移除（只影响调试器的常量显示，不影响文件名 / 行号）。返回移除条数。</summary>
+    private static int DropPdbLocalConstants(ModuleDefMD module)
+    {
+        var count = 0;
+        foreach (var type in module.GetTypes())
+        {
+            foreach (var method in type.Methods)
+            {
+                if (!method.HasBody || method.Body?.PdbMethod?.Scope is not { } scope)
+                {
+                    continue;
+                }
+
+                count += DropScopeConstants(scope);
+            }
+        }
+
+        return count;
+    }
+
+    private static int DropScopeConstants(PdbScope scope)
+    {
+        var count = scope.Constants.Count;
+        scope.Constants.Clear();
+        foreach (var child in scope.Scopes)
+        {
+            count += DropScopeConstants(child);
+        }
+
+        return count;
     }
 
     /// <summary>
