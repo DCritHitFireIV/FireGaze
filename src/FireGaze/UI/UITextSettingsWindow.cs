@@ -1,3 +1,4 @@
+using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
 using FireGaze.UIText;
@@ -115,8 +116,16 @@ internal sealed class UITextSettingsWindow : Window
         var translateGrey = config.UITextTranslateGreyList;
         if (ImGui.Checkbox("批量翻译时连灰名单一起翻", ref translateGrey))
         {
-            config.UITextTranslateGreyList = translateGrey;
-            changed = true;
+            if (translateGrey)
+            {
+                // 开启前先确认一次：灰名单翻错可能破坏插件功能（2026-10-03 用户要求）
+                this.greyConfirmPending = true;
+            }
+            else
+            {
+                config.UITextTranslateGreyList = false;
+                changed = true;
+            }
         }
 
         if (ImGui.IsItemHovered())
@@ -124,6 +133,40 @@ internal sealed class UITextSettingsWindow : Window
             ImGui.SetTooltip("灰名单 = 既画在界面上、又被拿去做比较或当键名的字符串；以及查表用的英文句子。\n" +
                              "词典式汉化插件的设置页说明文字多是后一种，翻译后会直接显示译文本身。\n" +
                              "默认不翻，翻错可能影响功能。");
+        }
+
+        // 开启灰名单的确认框（默认焦点在「取消」；Esc / 点外关闭会经 ref 自动复位）
+        if (this.greyConfirmPending && !ImGui.IsPopupOpen("连灰名单一起翻###ConfirmGrey"))
+        {
+            ImGui.OpenPopup("连灰名单一起翻###ConfirmGrey");
+        }
+
+        if (ImGui.BeginPopupModal("连灰名单一起翻###ConfirmGrey", ref this.greyConfirmPending, ImGuiWindowFlags.AlwaysAutoResize))
+        {
+            ImGui.TextWrapped("灰名单里的字符串多被插件当作键名或查表用，翻译它们很可能影响插件的正常功能。");
+            ImGui.TextWrapped("建议保持关闭；确实需要时，到「编辑校对」里对具体条目逐条确认后再翻。");
+            ImGui.Separator();
+            if (ImGui.Button("取消", new Vector2(120, 0)))
+            {
+                this.greyConfirmPending = false;
+                ImGui.CloseCurrentPopup();
+            }
+
+            if (ImGui.IsWindowAppearing())
+            {
+                ImGui.SetItemDefaultFocus();
+            }
+
+            ImGui.SameLine();
+            if (ImGui.Button("仍然开启", new Vector2(120, 0)))
+            {
+                config.UITextTranslateGreyList = true;
+                changed = true;
+                this.greyConfirmPending = false;
+                ImGui.CloseCurrentPopup();
+            }
+
+            ImGui.EndPopup();
         }
 
         var autoRepatch = config.UITextAutoRepatch;
@@ -339,6 +382,9 @@ internal sealed class UITextSettingsWindow : Window
     }
 
     private bool glossaryBuilding;
+
+    /// <summary>勾上「连灰名单一起翻」后先弹确认——确认前不写配置（默认焦点在「取消」，2026-10-03）。</summary>
+    private bool greyConfirmPending;
 
     /// <summary>第一次需要时在后台把术语表建好（读游戏表要一两秒，不能占渲染线程）。</summary>
     private void EnsureGlossaryBuilding()

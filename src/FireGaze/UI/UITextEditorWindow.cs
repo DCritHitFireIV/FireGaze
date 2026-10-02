@@ -394,12 +394,12 @@ internal sealed class UITextEditorWindow : Window
 
     // ── 翻译 ─────────────────────────────────────────────────────────────
 
-    private List<UITextTarget> TranslationTargets()
+    private List<UITextTarget> TranslationTargets(bool? includeGrey = null)
     {
-        var includeGrey = this.plugin.Config.UITextTranslateGreyList;
+        var grey = includeGrey ?? this.plugin.Config.UITextTranslateGreyList;
         return this.rows
             .Where(r => !r.Skipped && !r.HasTranslation)
-            .Where(r => r.IsResource || r.IsAttribute || r.Role == UITextRole.UI || (includeGrey && r.Role == UITextRole.Ambiguous))
+            .Where(r => r.IsResource || r.IsAttribute || r.Role == UITextRole.UI || (grey && r.Role == UITextRole.Ambiguous))
             .Select(r => new UITextTarget(r.Original, r.Context, r.Entry, r.Resource, r.Attribute))
             .ToList();
     }
@@ -635,6 +635,7 @@ internal sealed class UITextEditorWindow : Window
         var entry = this.entry!;
         var busy = this.translateTask is { IsCompleted: false } || this.patchTask is { IsCompleted: false };
         var targets = this.TranslationTargets().Count;
+        var greyUntranslated = this.rows.Count(r => !r.HasTranslation && !r.Skipped && r.Role == UITextRole.Ambiguous);
         var hasBackup = this.patches.HasBackup(entry);
 
         // 列表页正在对这个插件跑「一键汉化」时，这里别动同一份文件（谁先拿到锁谁干活）
@@ -793,6 +794,22 @@ internal sealed class UITextEditorWindow : Window
             ImGui.EndPopup();
         }
 
+        // 连灰名单一起翻译（2026-10-03 用户要求）：单独入口，不靠设置里的全局开关；
+        // 按钮下方常驻一句风险提醒（灰名单多被当键名/查表用）。
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("连灰名单一起翻译"), 12);
+        ImGui.BeginDisabled(busy || greyUntranslated == 0);
+        if (ImGui.Button($"连灰名单一起翻译 ({greyUntranslated})###uitranslate-grey"))
+        {
+            this.StartTranslate(this.TranslationTargets(includeGrey: true));
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip("把灰名单里还没翻的条目一起翻（默认翻译不带它们）。\n" +
+                             "⚠ 灰名单多被插件当作键名 / 查表用，翻错很可能影响正常功能——建议翻完逐条确认再写入。");
+        }
+
         if (this.patchTask is { IsCompleted: false })
         {
             ImGui.SameLine();
@@ -826,6 +843,10 @@ internal sealed class UITextEditorWindow : Window
         {
             UiHelpers.ColoredWrapped(this.statusIsError ? UiHelpers.Bad : UiHelpers.Muted, this.status);
         }
+
+        // 灰名单翻译的风险提醒（按钮的下面一行；2026-10-03 用户要求）——不翻的时候也常驻，
+        // 避免用户不知道这些条目的代价。
+        UiHelpers.ColoredText(UiHelpers.Warn, "⚠ 连灰名单一起翻译很可能影响插件正常功能（这些字符串多被当作键名 / 查表用）——建议在列表里逐条确认。");
     }
 
     /// <summary>

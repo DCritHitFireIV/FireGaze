@@ -59,7 +59,7 @@ DO_NOT_LOCALIZE = {
     "inventorytoolscn", "itemvendorlocationcn", "mahjong.plugin.cn", "malmstonecn", "marketroutecn",
     "ocnfarmer", "pvplogscn", "priceinsight-cn", "pvpstatscn", "retainerrepricercn",
     "tidychatcn", "vfxeditorcn", "xivcomboexpandedcn", "visland_cn", "keitatoolbox",
-    "pfclassifier", "pfradar", "pvpselector", "untarnishedheart",
+    "pfclassifier", "pfradar", "pvpselector", "untarnishedheart", "autohook",
 }
 
 TRANSLATE_PROMPT = (

@@ -84,6 +84,7 @@ internal static class UITextRules
         "PFRadar",
         "PvPSelector",
         "UntarnishedHeart",
+        "AutoHook",
     };
 
     /// <summary>这个插件是不是「中文插件、不汉化」（名单见 <see cref="DoNotLocalize" />）。</summary>
