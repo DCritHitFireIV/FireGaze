@@ -1,0 +1,39 @@
+name: feedback-triage
+
+# 用户反馈（插件里「反馈…」→ Cloudflare Worker 用机器人身份建 issue）的二次复核：
+# 垃圾内容 → 关闭 + spam 标；正常反馈 → feedback 标 + 回话 +（可选）Server酱通知。
+# Worker 侧已做过一轮规则过滤（长度/链接/垃圾词/重复行/频率），这里是发布后的兜底。
+#
+# 只用仓库自带的 GITHUB_TOKEN（Actions 机密），不使用任何个人 token。
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  triage:
+    if: contains(github.event.issue.body, '### FireGaze 反馈')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 复核并打标
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SERVER3_PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
+        run: python scripts/feedback_triage.py

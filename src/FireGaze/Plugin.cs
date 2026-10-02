@@ -87,6 +87,33 @@ public sealed class Plugin : IDalamudPlugin
         ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
         Directory.CreateDirectory(ConfigDirectory);
 
+        // 诊断日志：内存环形缓冲 + 后台落盘（绝不在渲染线程写文件）；同步一份到卫月日志
+        Diagnostics.ActivityLog.Initialize(ConfigDirectory, (level, line) =>
+        {
+            switch (level)
+            {
+                case Diagnostics.ActivityLevel.Trace:
+                    Log?.Verbose(line);
+                    break;
+                case Diagnostics.ActivityLevel.Debug:
+                    Log?.Debug(line);
+                    break;
+                case Diagnostics.ActivityLevel.Warning:
+                    Log?.Warning(line);
+                    break;
+                case Diagnostics.ActivityLevel.Error:
+                    Log?.Error(line);
+                    break;
+                case Diagnostics.ActivityLevel.Critical:
+                    Log?.Fatal(line);
+                    break;
+                default:
+                    Log?.Information(line);
+                    break;
+            }
+        });
+        Diagnostics.ActivityLog.Info("启动", $"FireGaze v{typeof(Plugin).Assembly.GetName().Version} 已加载；配置目录 {ConfigDirectory}");
+
         Icons = new UI.IconStore(ConfigDirectory, () => Config.IconCacheEnabled);
 
         Repos = new DalamudRepos(Path.Combine(ConfigDirectory, "backups"));

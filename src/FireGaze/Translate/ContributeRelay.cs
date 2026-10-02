@@ -25,13 +25,17 @@ internal static class ContributeRelay
 
     /// <summary>
     ///     把投稿发给中继；返回 (是否成功, 失败原因或 issue 地址)。
+    ///     <paramref name="type" />：稿子类型（<c>feedback</c> = 用户反馈；留空 = 译文投稿，兼容旧版 Worker）。
     /// </summary>
-    public static async Task<(bool Ok, string Message)> TrySubmitAsync(string title, string body)
+    public static async Task<(bool Ok, string Message)> TrySubmitAsync(string title, string body, string? type = null)
     {
         try
         {
+            var payload = type is null
+                ? (object)new { title, body }
+                : new { title, body, type };
             using var content = new StringContent(
-                JsonSerializer.Serialize(new { title, body }),
+                JsonSerializer.Serialize(payload),
                 Encoding.UTF8,
                 "application/json");
 

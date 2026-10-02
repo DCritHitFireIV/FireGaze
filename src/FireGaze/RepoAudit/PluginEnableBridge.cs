@@ -1,4 +1,5 @@
 using System.Reflection;
+using FireGaze.Diagnostics;
 
 namespace FireGaze.RepoAudit;
 
@@ -25,7 +26,17 @@ internal static class PluginEnableBridge
     {
         try
         {
-            return Enable(rawPlugin);
+            var result = Enable(rawPlugin);
+            if (result.Ok)
+            {
+                ActivityLog.Info("启用插件", result.Message);
+            }
+            else
+            {
+                ActivityLog.Error("启用插件", result.Message);
+            }
+
+            return result;
         }
         catch (Exception e)
         {
@@ -38,6 +49,7 @@ internal static class PluginEnableBridge
                 return (true, "插件已经在运行，无需重复启用。");
             }
 
+            ActivityLog.Error("启用插件", "启用失败", e);
             return (false, $"启用插件出错：{e.GetType().Name}: {inner.Message}");
         }
     });

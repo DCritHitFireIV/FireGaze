@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using FireGaze.Diagnostics;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 using FireGaze.UIText;
@@ -148,6 +149,18 @@ internal sealed class UITextTab
     private bool cloudIndexFetching;
     private readonly Dictionary<string, string> cloudNotes = new(StringComparer.Ordinal);
     private readonly HashSet<string> cloudDownloading = new(StringComparer.Ordinal);
+
+    // 反馈弹窗（2026-10-03 用户要求：第一行右侧常驻入口）
+    private bool feedbackOpen;
+    private bool feedbackNeedsOpen;
+    private string feedbackText = string.Empty;
+    private int feedbackCategory;
+    private bool feedbackAttachLog = true;
+    private bool feedbackSending;
+    private string feedbackStatus = string.Empty;
+    private bool feedbackStatusError;
+    private string feedbackSentURL = string.Empty;
+
     private Run? run;
     private bool rowsDirty = true;
 
@@ -329,6 +342,32 @@ internal sealed class UITextTab
         var attention = this.rows.Values.Count(NeedsAttention);
         ImGui.SameLine();
         ImGui.TextDisabled($"刷新于 {this.indexAt:HH:mm:ss} · 已装 {this.index.All.Count} · 已汉化 {patched} · 待处理 {attention}");
+
+        // 反馈入口：常驻在这一行的最右边（2026-10-03 用户要求）——右对齐用内容区右边界减按钮宽
+        const string feedbackLabel = "反馈…";
+        var feedbackLeft = ImGui.GetContentRegionMax().X - UiHelpers.LabelWidth(feedbackLabel);
+        if (feedbackLeft > ImGui.GetCursorPosX() + 12f)
+        {
+            ImGui.SameLine(feedbackLeft);
+        }
+        else
+        {
+            ImGui.NewLine();
+        }
+
+        if (ImGui.Button(feedbackLabel))
+        {
+            this.feedbackOpen = true;
+            this.feedbackNeedsOpen = true;
+            this.feedbackStatus = string.Empty;
+            this.feedbackStatusError = false;
+            this.feedbackSentURL = string.Empty;
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("遇到问题、想提建议，或某个插件汉化不对——直接在这里反馈。\n可以附带诊断日志（已脱敏），无需 GitHub 账号。");
+        }
     }
 
     /// <summary>
@@ -826,10 +865,20 @@ internal sealed class UITextTab
                     ContributeSendSeverity.Bad => NoteKind.Bad,
                     _ => NoteKind.Info,
                 };
+                if (kind == NoteKind.Bad)
+                {
+                    ActivityLog.Error("上传译文", $"{entry.InternalName}：{result.Message}");
+                }
+                else
+                {
+                    ActivityLog.Info("上传译文", $"{entry.InternalName}：{result.Message}");
+                }
+
                 await this.FinishUploadAsync(entry.InternalName, result.Message, kind).ConfigureAwait(false);
             }
             catch (Exception e)
             {
+                ActivityLog.Error("上传译文", $"{entry.InternalName}：上传回调失败", e);
                 Plugin.Log?.Warning(e, "[内部文本] 上传结果回调调度失败");
             }
         });
@@ -1611,6 +1660,7 @@ internal sealed class UITextTab
                 var channel = UITextChannelFactory.Create(this.plugin.Config, out var channelError);
                 if (channel is null)
                 {
+                    ActivityLog.Error("翻译", $"{entry.InternalName}：翻译通道不可用：{channelError}");
                     this.FinishRun(run, new RowNote
                     {
                         Kind = NoteKind.Bad,
@@ -1639,9 +1689,21 @@ internal sealed class UITextTab
                 translatedCount = applied;
                 this.store.Save(entry.InternalName, pack, out _);
 
+                ActivityLog.Info(
+                    "翻译",
+                    $"{entry.InternalName}：请求 {targets.Count} 条，成功 {result.Translated.Count}、失败 {result.Failed.Count}；写入 {applied}、占位符拒绝 {rejected}、原样 {unchanged}（{channel.Name}）");
+                if (result.Failed.Count > 0)
+                {
+                    ActivityLog.Warning(
+                        "翻译",
+                        $"{entry.InternalName}：{result.Failed.Count} 条失败：" +
+                        string.Join(" | ", result.Failed.Take(10).Select(s => UITextText.OneLine(s, 80))));
+                }
+
                 if (result.Error is not null || applied == 0 && result.Failed.Count > 0)
                 {
                     var reason = result.Error ?? $"失败 {result.Failed.Count} 条";
+                    ActivityLog.Error("翻译", $"{entry.InternalName}：翻译失败：{reason}");
                     this.FinishRun(run, new RowNote
                     {
                         Kind = NoteKind.Bad,
@@ -1745,8 +1807,159 @@ internal sealed class UITextTab
 
     // ── 首次运行：选翻译方式 / 免费确认 ─────────────────────────────
 
+    // ── 反馈（2026-10-03 用户要求：插件汉化第一行右侧常驻入口） ────────────
+
+    private void DrawFeedbackModal()
+    {
+        const string Name = "反馈###UITextFeedback";
+        if (this.feedbackNeedsOpen)
+        {
+            ImGui.OpenPopup(Name);
+            this.feedbackNeedsOpen = false;
+        }
+
+        ImGui.SetNextWindowSizeConstraints(new Vector2(600, 0), new Vector2(780, float.MaxValue));
+        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
+        {
+            this.feedbackOpen = false;
+            return;
+        }
+
+        ImGui.TextWrapped("遇到问题、想提建议，或某个插件汉化不对——写在这里直接提交（匿名，不需要 GitHub 账号）。");
+        ImGui.TextDisabled("会带上 FireGaze / 卫月版本与时间；勾选「附带诊断日志」能帮我们定位（路径与密钥已脱敏）。");
+        ImGui.Spacing();
+
+        var categories = new[] { "问题", "建议", "汉化不对", "其他" };
+        ImGui.SetNextItemWidth(150);
+        ImGui.Combo("分类###UITextFeedbackCategory", ref this.feedbackCategory, categories, categories.Length);
+
+        ImGui.SetNextItemWidth(-1);
+        ImGui.InputTextMultiline("###UITextFeedbackText", ref this.feedbackText, 4000, new Vector2(-1, 130));
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("写清楚：哪个插件 / 点了什么 / 期望什么 / 实际什么。出错的原文也可以贴进来。");
+        }
+
+        ImGui.Checkbox("附带诊断日志（推荐）", ref this.feedbackAttachLog);
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip($"最近 {FeedbackSender.LogEntries} 条 FireGaze 日志（Info 及以上），已脱敏。");
+        }
+
+        if (this.feedbackAttachLog)
+        {
+            ImGui.SameLine();
+            if (ImGui.TreeNode("查看将发送的内容…###UITextFeedbackPreview"))
+            {
+                var preview = FeedbackSender.BuildBody(
+                    categories[this.feedbackCategory],
+                    this.feedbackText.Length > 0 ? this.feedbackText : "（还没写内容）",
+                    attachLog: true);
+                ImGui.InputTextMultiline("###UITextFeedbackPreviewText", ref preview, preview.Length + 1, new Vector2(-1, 160), ImGuiInputTextFlags.ReadOnly);
+                ImGui.TreePop();
+            }
+        }
+
+        ImGui.Separator();
+        var canSend = !this.feedbackSending && this.feedbackText.Trim().Length >= 5;
+        ImGui.BeginDisabled(!canSend);
+        if (ImGui.Button(this.feedbackSending ? "发送中…" : "发送", new Vector2(96, 0)))
+        {
+            this.StartFeedbackSend();
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) && !canSend)
+        {
+            ImGui.SetTooltip("至少写 5 个字，让维护者能看懂发生了什么。");
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("取消", new Vector2(80, 0)))
+        {
+            this.feedbackOpen = false;
+            UiHelpers.ClosePopupAndEnd();
+            return;
+        }
+
+        if (this.feedbackStatus.Length > 0)
+        {
+            ImGui.Spacing();
+            UiHelpers.ColoredWrapped(this.feedbackStatusError ? UiHelpers.Bad : UiHelpers.Good, this.feedbackStatus);
+        }
+
+        if (this.feedbackSentURL.Length > 0)
+        {
+            ImGui.Spacing();
+            ImGui.TextDisabled("进度可以在这里跟踪（不登录也能看）：");
+            ImGui.PushTextWrapPos(0f);
+            ImGui.TextUnformatted(this.feedbackSentURL);
+            ImGui.PopTextWrapPos();
+            ImGui.SameLine();
+            if (ImGui.SmallButton("复制链接###UITextFeedbackCopy"))
+            {
+                ImGui.SetClipboardText(this.feedbackSentURL);
+            }
+        }
+
+        ImGui.SetItemDefaultFocus();
+        ImGui.EndPopup();
+    }
+
+    private void StartFeedbackSend()
+    {
+        if (this.feedbackSending)
+        {
+            return;
+        }
+
+        this.feedbackSending = true;
+        this.feedbackStatus = "正在发送…";
+        this.feedbackStatusError = false;
+        var categories = new[] { "问题", "建议", "汉化不对", "其他" };
+        var category = categories[Math.Clamp(this.feedbackCategory, 0, categories.Length - 1)];
+        var text = this.feedbackText.Trim();
+        var attachLog = this.feedbackAttachLog;
+
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                ActivityLog.Info("反馈", $"提交反馈（{category}，{text.Length} 字，附带日志={attachLog}）");
+                var (ok, message) = await FeedbackSender.SendAsync(category, text, attachLog).ConfigureAwait(false);
+                this.feedbackSending = false;
+                if (ok)
+                {
+                    this.feedbackStatus = "已提交，感谢反馈！";
+                    this.feedbackStatusError = false;
+                    this.feedbackSentURL = message;
+                    this.feedbackText = string.Empty;
+                    ActivityLog.Info("反馈", "提交成功：" + message);
+                }
+                else
+                {
+                    this.feedbackStatus = "发送失败：" + message + "（内容还在，可以稍后重试）";
+                    this.feedbackStatusError = true;
+                    ActivityLog.Warning("反馈", "提交失败：" + message);
+                }
+            }
+            catch (Exception e)
+            {
+                this.feedbackSending = false;
+                this.feedbackStatus = "发送失败：" + e.GetBaseException().Message + "（内容还在，可以稍后重试）";
+                this.feedbackStatusError = true;
+                ActivityLog.Error("反馈", "提交异常", e);
+            }
+        });
+    }
+
     private void DrawPendingModals()
     {
+        if (this.feedbackOpen)
+        {
+            this.DrawFeedbackModal();
+        }
         if (this.pendingCloudApply is { } cloud)
         {
             this.DrawCloudApplyModal(cloud);
@@ -2188,6 +2401,10 @@ internal sealed class UITextTab
     private void FinishRun(Run run, RowNote note)
     {
         Plugin.Log?.Information($"[内部文本] 一键汉化 {run.InternalName}：{note.Text}");
+        ActivityLog.Write(
+            note.Kind == NoteKind.Bad ? ActivityLevel.Error : ActivityLevel.Info,
+            "任务",
+            $"{run.InternalName}：{note.Text}");
         this.notes[run.InternalName] = note;
         this.runs.Exit(run.InternalName);
         run.CanCancel = false;

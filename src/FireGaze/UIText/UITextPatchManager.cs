@@ -1,4 +1,5 @@
 using System.Reflection;
+using FireGaze.Diagnostics;
 using FireGaze.Internal;
 using FireGaze.RepoAudit;
 
@@ -1406,8 +1407,11 @@ internal sealed class UITextPatchManager
         var (ok, message) = await Task.Run(() => this.Apply(entry)).ConfigureAwait(false);
         if (!ok)
         {
+            ActivityLog.Error("应用汉化", $"{entry.InternalName}：{message}");
             return (false, message);
         }
+
+        ActivityLog.Info("应用汉化", $"{entry.InternalName}：{message}");
 
         // Apply 的提示里带着「重载插件后生效」；这里已经自动重载了，不要再说一遍
         message = message.Replace("；重载插件后生效。", string.Empty, StringComparison.Ordinal);
@@ -1432,8 +1436,11 @@ internal sealed class UITextPatchManager
         var (ok, message) = await Task.Run(() => this.Restore(entry, reason)).ConfigureAwait(false);
         if (!ok)
         {
+            ActivityLog.Error("还原原文", $"{entry.InternalName}：{message}");
             return (false, message);
         }
+
+        ActivityLog.Info("还原原文", $"{entry.InternalName}：{message}");
 
         message = message.Replace("；重载插件后恢复英文。", string.Empty, StringComparison.Ordinal);
         if (!entry.IsLoaded)
@@ -1483,6 +1490,7 @@ internal sealed class UITextPatchManager
         catch (Exception e)
         {
             var inner = e.InnerException ?? e;
+            ActivityLog.Error("重载插件", $"{entry.InternalName}：重载调用失败", e);
             return (false, "重载失败：" + inner.Message);
         }
 
@@ -1494,6 +1502,7 @@ internal sealed class UITextPatchManager
         }
 
         // 重载后没起来：多半是补丁把插件搞坏了 → 自动还原
+        ActivityLog.Warning("重载插件", $"{entry.InternalName}：重载后插件没有加载成功，自动还原补丁");
         var (ok, message) = this.Restore(entry, "重载后插件没有加载成功，已自动还原");
         return (false, ok ? message : "插件重载失败，而且自动还原也失败了：" + message);
     }
