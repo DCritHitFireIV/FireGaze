@@ -87,8 +87,7 @@ internal static class UITextRules
         "AutoHook",
         "DCTravelerX",
         "ProxyPlugin",
-        // Siren（extrant）的插件（2026-10-03 用户要求：Siren 做的插件都是中文插件）
-        "Zhouyi",
+        // Siren（extrant）的插件（2026-10-03 用户要求：Siren 做的插件都是中文插件；Zhouyi 是 I-Ching 曾用名，不单列）
         "Coyote-FFXiv",
         "FFXIVNetworkPacketAnalysisTool",
         "GposeResizer",
