@@ -627,3 +627,22 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   自带中文界面的插件上误触发（BOCCHI 实测）；纯译文形式的旧补丁漏网由 NoMatch 自动重试兜底。
 - **启用插件按钮**：改绿色（与主按钮蓝区分）；启用成功后把「待确认」的补丁直接转正并重建索引——
   主按钮立刻从「一键汉化」变「打开」，不用再等 15 秒确认。
+
+## 字典键的灰名单回归（2026-10-02，1.2.0.94）—— Allagan Tools 物品悬浮窗的「Dungeon Chest」
+
+- **现象（用户实测）**：物品悬浮窗里 `来源: Dungeon Chest`、`用途: 套装, Grand Company Expert Delivery, Desynthesis`
+  ——后半截是英文，而「原来界面是中文的」。实测当前抽取器对这三个字符串的判定：
+  `Grand Company Expert Delivery` / `Desynthesis` = **UI**（纯 getter，1.2.0.80 的规则能抽到，重新抽取就会翻），
+  `Dungeon Chest` = **Excluded**（字典键守卫拦下）→ 悬浮窗永远英文。
+- **根因**：`Dungeon Chest` 在 InventoryTools 里**两边都沾**——既是 `LocalizationService.BuildTranslations()`
+  里 `dictionary["Dungeon Chest"] = "副本宝箱"` 的**键**，又是 `ItemDungeonChestSourceRenderer.SingularName`
+  的显示文本。1.2.0.80 的守卫把「字典键」一律排除，于是这类**双身份文本**被整体丢掉。
+- **修法（两条清晰的边界）**：
+  · **本地化 / 资源查表 key**（`Translate` / `Localize` / `T` / `Tr` / 资源 key）：查的是 **DLL 外面的表**（JSON / 资源），
+    翻了必查不到 —— **一律排除**（HaselTweaks、SimpleTweaks 那类）。
+  · **字典 / 集合键名**：和键名使用点在**同一份 DLL**里，dnlib 会把所有同字面量一起改，DLL 内部查表自洽；
+    但为了防「键被拿去和外部数据比」的隐患：**没有界面用途**的照旧排除；**两边都沾**的 ⇒ **灰名单**
+    （默认不翻，编辑器里能看到原因）。这类文本现在会出现在编辑器里，不再无声丢弃。
+- **给用户的取用方式**：重新「一键汉化」后，`Grand Company Expert Delivery` / `Desynthesis` 会直接变中文；
+  `Dungeon Chest` 在灰名单里——可以在「编辑校对」里单条填译（user 译文不受灰名单开关限制），
+  或在「翻译设置」勾上「批量翻译时连灰名单一起翻」再跑。

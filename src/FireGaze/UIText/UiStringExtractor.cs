@@ -371,6 +371,16 @@ public static class UIStringExtractor
         public bool DangerousViaFlow;
         public string DangerousFlowTarget = string.Empty;
         public bool HardKey;
+
+        /// <summary>
+        ///     硬键里**字典/集合键名**这一类（区别于查外部表的本地化 key）。
+        ///     两者都默认不翻；但字典键与 DLL 里的键名使用点是同一份字面量，
+        ///     翻了对“同一份 DLL 内部”的查表自洽（Allagan Tools 的 dictionary["Dungeon Chest"]=…
+        ///     同时被 getter 当显示文本返回），所以两边都沾时给灰名单；
+        ///     本地化 key 查的是 DLL 外面的表（JSON / 资源），翻了必坏 —— 一律排除。
+        /// </summary>
+        public bool DictionaryKey;
+
         public bool UIViaReturn;
     }
 
@@ -1417,6 +1427,12 @@ public static class UIStringExtractor
                     && UICallSemantics.IsStringLikeOrGeneric(paramTypes[0]))
                 {
                     this.MarkDangerous(scan, argValues[0], UICallSemantics.ShortTarget(typeName, methodName), hardKey: true);
+
+                    // 记成「字典键」：两边都沾时给灰名单而不是直接丢掉（见 Literal.DictionaryKey 注释）
+                    foreach (var keyId in argValues[0].IDs)
+                    {
+                        this.literals[keyId].DictionaryKey = true;
+                    }
                 }
 
                 var collectionField = thisValue?.FieldKey;
@@ -2592,15 +2608,43 @@ public static class UIStringExtractor
                 var hasUI = literal.UIDirect || literal.UIViaFlow || literal.UIViaReturn;
                 var hasDanger = literal.Dangerous || literal.DangerousViaFlow;
 
-                // 当键名用过：一律排除（翻它 = 破坏查找，灰名单也不该碰）
-                if (literal.HardKey)
+                // 当键名用过：本地化/资源查表 key（查的是 DLL 外面的表）一律排除；
+                // 字典/集合键名只有在**没有界面用途**时排除——两边都沾的（插件自带汉化词典的 key，
+                // 又同时被 getter 当显示文本返回，如 Allagan Tools 的「Dungeon Chest」）→ 灰名单：
+                // 默认不翻（保护查表），确认没问题的用户在编辑器里可以单条翻（user 译文不受灰名单开关限制）。
+                if (literal.HardKey && !literal.DictionaryKey)
                 {
                     entries.Add(new UITextEntry
                     {
                         Original = literal.Text,
                         Context = literal.Context,
                         Role = UITextRole.Excluded,
-                        Reason = "当集合/字典的键名用或本地化 key（翻了会破坏查找）",
+                        Reason = "本地化 / 资源查表 key（翻了会查不到译文）",
+                    });
+                    continue;
+                }
+
+                if (literal.HardKey && !hasUI)
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text,
+                        Context = literal.Context,
+                        Role = UITextRole.Excluded,
+                        Reason = "当集合/字典的键名用（翻了会破坏查找）",
+                    });
+                    continue;
+                }
+
+                if (literal.HardKey)
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text,
+                        Context = literal.Context,
+                        Role = UITextRole.Ambiguous,
+                        Reason = $"既进 UI（{uiTarget}）又当字典键名用（翻了可能破坏查找，默认不翻）",
+                        PreserveID = literal.PreserveID,
                     });
                     continue;
                 }
