@@ -162,63 +162,71 @@ internal sealed class InstalledPluginsIndex
                     continue;
                 }
 
-                var type = plugin.GetType();
-                var manifest = type.GetProperty("Manifest", flags)?.GetValue(plugin);
-
-                var internalName = type.GetProperty("InternalName", flags)?.GetValue(plugin) as string
-                                   ?? manifest?.GetType().GetProperty("InternalName", flags)?.GetValue(manifest) as string
-                                   ?? string.Empty;
-                var displayName = type.GetProperty("Name", flags)?.GetValue(plugin) as string
-                                  ?? manifest?.GetType().GetProperty("Name", flags)?.GetValue(manifest) as string
-                                  ?? internalName;
-
-                var repositoryURL = type.GetProperty("InstalledFromUrl", flags)?.GetValue(plugin) as string
-                                    ?? manifest?.GetType().GetProperty("InstalledFromUrl", flags)?.GetValue(manifest) as string;
-
-                var isDev = type.GetProperty("IsDev", flags)?.GetValue(plugin) as bool? ?? false;
-                var isThirdParty = type.GetProperty("IsThirdParty", flags)?.GetValue(plugin) as bool?
-                                   ?? manifest?.GetType().GetProperty("IsThirdParty", flags)?.GetValue(manifest) as bool?
-                                   ?? false;
-
-                var entry = new InstalledPluginEntry
+                try
                 {
-                    InternalName = internalName,
-                    DisplayName = displayName,
-                    RepositoryURL = repositoryURL,
-                    IconURL = manifest?.GetType().GetProperty("IconUrl", flags)?.GetValue(manifest) as string,
-                    Dip17Channel = manifest?.GetType().GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string,
-                    RawPlugin = plugin,
-                    Manifest = manifest,
-                    DLLPath = (type.GetProperty("DllFile", flags)?.GetValue(plugin) as FileInfo)?.FullName,
-                    Version = manifest?.GetType().GetProperty("AssemblyVersion", flags)?.GetValue(manifest)?.ToString(),
-                    Punchline = manifest?.GetType().GetProperty("Punchline", flags)?.GetValue(manifest) as string,
-                    Description = manifest?.GetType().GetProperty("Description", flags)?.GetValue(manifest) as string,
-                    IsLoaded = type.GetProperty("IsLoaded", flags)?.GetValue(plugin) as bool? ?? false,
-                    IsThirdParty = isThirdParty,
-                    IsDev = isDev,
-                };
+                    var type = plugin.GetType();
+                    var manifest = type.GetProperty("Manifest", flags)?.GetValue(plugin);
 
-                all.Add(entry);
+                    var internalName = type.GetProperty("InternalName", flags)?.GetValue(plugin) as string
+                                       ?? manifest?.GetType().GetProperty("InternalName", flags)?.GetValue(manifest) as string
+                                       ?? string.Empty;
+                    var displayName = type.GetProperty("Name", flags)?.GetValue(plugin) as string
+                                      ?? manifest?.GetType().GetProperty("Name", flags)?.GetValue(manifest) as string
+                                      ?? internalName;
 
-                // 手动装 / 开发版没有来源地址，不参与"来自哪条库链"的统计
-                if (string.IsNullOrWhiteSpace(repositoryURL))
-                {
-                    continue;
+                    var repositoryURL = type.GetProperty("InstalledFromUrl", flags)?.GetValue(plugin) as string
+                                        ?? manifest?.GetType().GetProperty("InstalledFromUrl", flags)?.GetValue(manifest) as string;
+
+                    var isDev = type.GetProperty("IsDev", flags)?.GetValue(plugin) as bool? ?? false;
+                    var isThirdParty = type.GetProperty("IsThirdParty", flags)?.GetValue(plugin) as bool?
+                                       ?? manifest?.GetType().GetProperty("IsThirdParty", flags)?.GetValue(manifest) as bool?
+                                       ?? false;
+
+                    var entry = new InstalledPluginEntry
+                    {
+                        InternalName = internalName,
+                        DisplayName = displayName,
+                        RepositoryURL = repositoryURL,
+                        IconURL = manifest?.GetType().GetProperty("IconUrl", flags)?.GetValue(manifest) as string,
+                        Dip17Channel = manifest?.GetType().GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string,
+                        RawPlugin = plugin,
+                        Manifest = manifest,
+                        DLLPath = (type.GetProperty("DllFile", flags)?.GetValue(plugin) as FileInfo)?.FullName,
+                        Version = manifest?.GetType().GetProperty("AssemblyVersion", flags)?.GetValue(manifest)?.ToString(),
+                        Punchline = manifest?.GetType().GetProperty("Punchline", flags)?.GetValue(manifest) as string,
+                        Description = manifest?.GetType().GetProperty("Description", flags)?.GetValue(manifest) as string,
+                        IsLoaded = type.GetProperty("IsLoaded", flags)?.GetValue(plugin) as bool? ?? false,
+                        IsThirdParty = isThirdParty,
+                        IsDev = isDev,
+                    };
+
+                    all.Add(entry);
+
+                    // 手动装 / 开发版没有来源地址，不参与"来自哪条库链"的统计
+                    if (string.IsNullOrWhiteSpace(repositoryURL))
+                    {
+                        continue;
+                    }
+
+                    var key = NormalizeRepositoryURL(repositoryURL);
+                    if (key.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    if (!byRepository.TryGetValue(key, out var bucket))
+                    {
+                        bucket = [];
+                        byRepository[key] = bucket;
+                    }
+
+                    bucket.Add(entry);
                 }
-
-                var key = NormalizeRepositoryURL(repositoryURL);
-                if (key.Length == 0)
+                catch (Exception e)
                 {
-                    continue;
+                    // 单个插件读取失败（卫月结构变化 / 反射歧义）只跳过它，不让整张表变「不可用」
+                    Plugin.Log?.Warning(e, "[仓库体检] 读一个插件的元数据失败，跳过它");
                 }
-
-                if (!byRepository.TryGetValue(key, out var bucket))
-                {
-                    bucket = [];
-                    byRepository[key] = bucket;
-                }
-
-                bucket.Add(entry);
             }
 
             foreach (var bucket in byRepository.Values)
@@ -234,7 +242,7 @@ internal sealed class InstalledPluginsIndex
                 return Unavailable("已装插件都读不到来源地址（InstalledFromUrl 可能改名了）");
             }
 
-            Plugin.Log.Debug($"[FireGaze] 已装插件索引：{all.Count} 个插件，{byRepository.Count} 条库链在用");
+            Plugin.Log?.Debug($"[FireGaze] 已装插件索引：{all.Count} 个插件，{byRepository.Count} 条库链在用");
 
             return new InstalledPluginsIndex
             {
