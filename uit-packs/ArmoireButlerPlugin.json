@@ -1,0 +1,3813 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-02",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Open the Armoire Butler exporter window.",
+      "Translated": "打开衣柜管家导出窗口。",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Butler###ArmoireButlerMainWindow",
+      "Translated": "衣柜管家",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status",
+      "Translated": "状态",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "no",
+      "Translated": "否",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "yes",
+      "Translated": "是",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "tab.cleanup",
+      "Translated": "清理",
+      "Context": "MainWindow.DrawNavigation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "tab.collection",
+      "Translated": "收藏",
+      "Context": "MainWindow.DrawNavigation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "tab.character",
+      "Translated": "角色",
+      "Context": "MainWindow.DrawNavigation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "tab.debug",
+      "Translated": "调试",
+      "Context": "MainWindow.DrawNavigation",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "section.summary",
+      "Translated": "概要",
+      "Context": "MainWindow.DrawCleanupSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "distribution",
+      "Translated": "分布",
+      "Context": "MainWindow.DrawCleanupSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "section.detail",
+      "Translated": "详情",
+      "Context": "MainWindow.DrawRecommendationDetails",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeMissing",
+      "Translated": "收藏品.商店缺失",
+      "Context": "MainWindow.DrawStoreControls",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeNeedsMapping",
+      "Translated": "收藏品.商店需要映射",
+      "Context": "MainWindow.DrawStoreControls",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "store-category-",
+      "Translated": "商店-分类-",
+      "Context": "MainWindow.DrawStoreOutfitCategoryGroup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.bonusCostume",
+      "Translated": "收藏品.商店分类.特典服装",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.fanFestivalCostume",
+      "Translated": "收藏品.商店分类.粉丝节服装",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.npcCostume",
+      "Translated": "收藏品.商店分类.NPC服装",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.seasonal",
+      "Translated": "收藏品.商店分类.季节活动",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.collectorEditionBonus",
+      "Translated": "收藏品.商店分类.收藏版特典",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.crossoverCostume",
+      "Translated": "收藏品.商店分类.联动服装",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.replicaCostume",
+      "Translated": "收藏品.商店分类.复刻服装",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeCategory.other",
+      "Translated": "收藏品.商店分类.其他",
+      "Context": "MainWindow.GetStoreCategoryDefinitions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeRightClickHint",
+      "Translated": "收藏品.商店右键提示",
+      "Context": "MainWindow.DrawStoreOutfitCard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.notOwned",
+      "Translated": "收藏品.未拥有",
+      "Context": "MainWindow.DrawStoreOutfitPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "none",
+      "Translated": "无",
+      "Context": "MainWindow.DrawStoreOutfitPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.storeLinkOpened",
+      "Translated": "状态.商店链接已打开",
+      "Context": "MainWindow.OpenStoreOutfitLink",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to open store link.",
+      "Translated": "无法打开商店链接。",
+      "Context": "MainWindow.OpenStoreOutfitLink",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.storeLinkFailed",
+      "Translated": "状态.商店链接失败",
+      "Context": "MainWindow.OpenStoreOutfitLink",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetStoredPieceStatus",
+      "Translated": "收藏品.幻化套装存放部件状态",
+      "Context": "MainWindow.GetStorePieceLocationSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "unknownItem",
+      "Translated": "未知物品",
+      "Context": "MainWindow.GetStoreOutfitName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "cabinetTransferable",
+      "Translated": "可存入收藏柜",
+      "Context": "MainWindow.DrawCabinetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "cabinet-transferable",
+      "Translated": "收藏柜-可存入",
+      "Context": "MainWindow.DrawCabinetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "missingCabinet",
+      "Translated": "缺少收藏柜",
+      "Context": "MainWindow.DrawCabinetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.missingCabinet",
+      "Translated": "收藏品.缺少收藏柜",
+      "Context": "MainWindow.DrawCabinetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "cabinet-missing",
+      "Translated": "收藏柜-缺失",
+      "Context": "MainWindow.DrawCabinetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.noItems",
+      "Translated": "收藏品.无物品",
+      "Context": "MainWindow.DrawCabinetCategoryGroups",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.noMissing",
+      "Translated": "收藏品.无缺失",
+      "Context": "MainWindow.DrawCabinetCategoryGroups",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.cabinetUncategorized",
+      "Translated": "收藏品.收藏柜未分类",
+      "Context": "MainWindow.DrawCabinetCategoryGroups",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "-category-",
+      "Translated": "-分类-",
+      "Context": "MainWindow.DrawCabinetCategoryGroups",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "-sub-",
+      "Translated": "-子类-",
+      "Context": "MainWindow.DrawCabinetCategoryGroups",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "-uncategorized",
+      "Translated": "-未分类",
+      "Context": "MainWindow.DrawCabinetCategoryGroups",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.status.transferable",
+      "Translated": "收藏品.状态.可存入",
+      "Context": "MainWindow.DrawCabinetGroupItems",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetNeedsCatalog",
+      "Translated": "收藏品.幻化套装需要目录",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetSummary",
+      "Translated": "收藏品.幻化套装汇总",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "glamourSetLoosePiecesToStore",
+      "Translated": "幻化套装散件可存放",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetLoosePiecesToStore",
+      "Translated": "收藏品.幻化套装散件可存放",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "glamourSetCanCreateSet",
+      "Translated": "幻化套装可创建套装",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetCanCreateSet",
+      "Translated": "收藏品.幻化套装可创建套装",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "glamourSetMissingPieces",
+      "Translated": "幻化套装缺失部件",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetMissingPieces",
+      "Translated": "收藏品.幻化套装缺失部件",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "glamourSetUnowned",
+      "Translated": "幻化套装未拥有",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.general",
+      "Translated": "染色偏好.通用",
+      "Context": "MainWindow.DrawValuableDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.extra1",
+      "Translated": "染色偏好.额外1",
+      "Context": "MainWindow.DrawValuableDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.extra2",
+      "Translated": "染色偏好.额外2",
+      "Context": "MainWindow.DrawValuableDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.storeTitle",
+      "Translated": "染色偏好.商店标题",
+      "Context": "MainWindow.DrawValuableDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "duplicateHighlight.title",
+      "Translated": "重复高亮.标题",
+      "Context": "MainWindow.DrawDuplicateHighlightPreference",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "duplicateHighlight.toggle",
+      "Translated": "重复高亮.开关",
+      "Context": "MainWindow.DrawDuplicateHighlightPreference",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "duplicateHighlight.session",
+      "Translated": "重复高亮.会话",
+      "Context": "MainWindow.DrawDuplicateHighlightPreference",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "storeLinks.title",
+      "Translated": "商店链接.标题",
+      "Context": "MainWindow.DrawStoreLinkPreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "storeLinks.description",
+      "Translated": "商店链接.说明",
+      "Context": "MainWindow.DrawStoreLinkPreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "storeLinks.hiddenFormat",
+      "Translated": "商店链接.隐藏格式",
+      "Context": "MainWindow.DrawStoreLinkRegionToggle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "store-link-region-",
+      "Translated": "商店链接区域-",
+      "Context": "MainWindow.DrawStoreLinkRegionToggle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "valuable-category-",
+      "Translated": "贵重染色分类-",
+      "Context": "MainWindow.DrawValuableDyeCategoryToggle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.noStoreSpecialDyes",
+      "Translated": "染色偏好.无商店特殊染色",
+      "Context": "MainWindow.DrawStoreSpecialDyeToggles",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.dyePreferencesSaved",
+      "Translated": "状态.染色偏好已保存",
+      "Context": "MainWindow.SaveDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.storeLinkPreferencesSaved",
+      "Translated": "状态.商店链接偏好已保存",
+      "Context": "MainWindow.SaveStoreLinkPreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "exportJson",
+      "Translated": "导出JSON",
+      "Context": "MainWindow.DrawDebugTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "section.debug",
+      "Translated": "分区.调试",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.generated",
+      "Translated": "调试.生成时间",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.items",
+      "Translated": "调试.物品",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.cacheFile",
+      "Translated": "调试.缓存文件",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.catalog",
+      "Translated": "调试.目录",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "catalog.debug",
+      "Translated": "目录.调试",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.containers",
+      "Translated": "调试.容器",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.inventoryScan",
+      "Translated": "调试.背包扫描",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.scanValue",
+      "Translated": "调试.扫描值",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.loadedSlots",
+      "Translated": "调试.已加载槽位",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.retainerScan",
+      "Translated": "调试.雇员扫描",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.retainerManager",
+      "Translated": "调试.雇员管理器",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.retainerManagerValue",
+      "Translated": "调试.雇员管理器值",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.inventoryContainers",
+      "Translated": "调试.背包容器",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.retainerContainers",
+      "Translated": "调试.雇员容器",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.cachedRetainers",
+      "Translated": "调试.已缓存雇员",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.retainerSummary",
+      "Translated": "调试.雇员摘要",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "debug.retainerLine",
+      "Translated": "调试.雇员行",
+      "Context": "MainWindow.DrawReadDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.retainerProbeNoUpdate",
+      "Translated": "状态.雇员探测无更新",
+      "Context": "MainWindow.RefreshCurrentRetainer",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.retainerProbed",
+      "Translated": "状态.雇员已探测",
+      "Context": "MainWindow.RefreshCurrentRetainer",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.retainerProbeFailed",
+      "Translated": "状态.雇员探测失败",
+      "Context": "MainWindow.RefreshCurrentRetainer",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.retainerCleared",
+      "Translated": "状态.雇员缓存已清除",
+      "Context": "MainWindow.ClearRetainerCacheAndRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.itemIgnored",
+      "Translated": "状态.物品已忽略",
+      "Context": "MainWindow.IgnoreCleanupItem",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.itemUnignored",
+      "Translated": "状态.物品已取消忽略",
+      "Context": "MainWindow.UnignoreCleanupItem",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.ignoredCleared",
+      "Translated": "已清除忽略项",
+      "Context": "MainWindow.ClearIgnoredItems",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.copied",
+      "Translated": "已复制",
+      "Context": "MainWindow.CopyJson",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.saved",
+      "Translated": "已保存",
+      "Context": "MainWindow.SaveJson",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.cleanupRightClickHint",
+      "Translated": "右键清理提示",
+      "Context": "MainWindow.DrawActionCard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "button.copyItemName",
+      "Translated": "复制物品名称",
+      "Context": "MainWindow.DrawCopyItemNameAction",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "button.linkItem",
+      "Translated": "链接物品",
+      "Context": "MainWindow.DrawLinkItemAction",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.itemNameCopied",
+      "Translated": "已复制物品名称",
+      "Context": "MainWindow.CopyItemName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.itemLinkSent",
+      "Translated": "已发送物品链接",
+      "Context": "MainWindow.LinkItem",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.valuableDye",
+      "Translated": "贵重染剂",
+      "Context": "MainWindow.DrawSelectedItemHeader",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.locationValue",
+      "Translated": "位置值",
+      "Context": "MainWindow.DrawLocationCards",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.dyeSlot",
+      "Translated": "染剂槽位",
+      "Context": "MainWindow.DrawDyeRows",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.unknownDye",
+      "Translated": "未知染剂",
+      "Context": "MainWindow.GetDyeLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "row.dyes",
+      "Translated": "染剂",
+      "Context": "MainWindow.GetDyeSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.action",
+      "Translated": "忽略",
+      "Context": "MainWindow.DrawRecommendationTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.rightClickHint",
+      "Translated": "右键忽略提示",
+      "Context": "MainWindow.DrawRecommendationTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.unignore",
+      "Translated": "取消忽略",
+      "Context": "MainWindow.DrawIgnoredItemTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "item-",
+      "Translated": "物品-",
+      "Context": "MainWindow.DrawItemCardGrid",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "distribution.value",
+      "Translated": "价值",
+      "Context": "MainWindow.DrawDistributionRows",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.inventory",
+      "Translated": "背包",
+      "Context": "MainWindow.GetContainerFallbackLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury",
+      "Translated": "兵装库",
+      "Context": "MainWindow.GetContainerFallbackLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.saddlebag",
+      "Translated": "鞍囊",
+      "Context": "MainWindow.GetContainerFallbackLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.retainer",
+      "Translated": "雇员",
+      "Context": "MainWindow.GetContainerFallbackLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.equipped",
+      "Translated": "已装备",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.inventoryPage",
+      "Translated": "背包第{0}页",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.mainHand",
+      "Translated": "兵装库·主手",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.offHand",
+      "Translated": "兵装库·副手",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.head",
+      "Translated": "兵装库·头部",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.body",
+      "Translated": "兵装库·身体",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.hands",
+      "Translated": "兵装库·手部",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.waist",
+      "Translated": "兵装库·腰部",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.legs",
+      "Translated": "兵装库·腿部",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.feet",
+      "Translated": "兵装库·脚部",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.earrings",
+      "Translated": "兵装库·耳饰",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.necklace",
+      "Translated": "兵装库·项链",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.bracelet",
+      "Translated": "兵装库·手镯",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.rings",
+      "Translated": "兵装库·戒指",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.armoury.soulCrystal",
+      "Translated": "兵装库·灵魂水晶",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.saddlebagPage",
+      "Translated": "鞍囊第{0}页",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.premiumSaddlebagPage",
+      "Translated": "高级鞍囊第{0}页",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.retainerInventory",
+      "Translated": "雇员背包",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.retainerEquipped",
+      "Translated": "雇员已装备",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "container.retainerMarket",
+      "Translated": "雇员市场",
+      "Context": "MainWindow.GetSingleContainerLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory",
+      "Translated": "背包",
+      "Context": "InventoryHighlightOverlayService.DrawInventoryGrids",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "InventoryBuddy",
+      "Translated": "陆行鸟鞍囊",
+      "Context": "InventoryHighlightOverlayService.DrawSaddlebag",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "InventoryBuddy2",
+      "Translated": "陆行鸟鞍囊2",
+      "Context": "InventoryHighlightOverlayService.DrawSaddlebag",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer grid nodes tab=",
+      "Translated": "雇员网格节点 tab=",
+      "Context": "InventoryHighlightOverlayService.DrawMappedSlotDebugOverlayInternal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer icon slots ",
+      "Translated": "雇员图标槽位",
+      "Context": "InventoryHighlightOverlayService.DrawMappedSlotDebugOverlayInternal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer large slots ",
+      "Translated": "雇员大槽位",
+      "Context": "InventoryHighlightOverlayService.DrawMappedSlotDebugOverlayInternal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer slots ",
+      "Translated": "雇员槽位",
+      "Context": "InventoryHighlightOverlayService.DrawMappedSlotDebugOverlayInternal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "armoury slots ",
+      "Translated": "兵装库槽位",
+      "Context": "InventoryHighlightOverlayService.DrawMappedArmouryDebugOverlay",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " all inventory pages",
+      "Translated": "所有背包页",
+      "Context": "InventoryHighlightOverlayService.DrawInventoryGridAnyPageDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer estimated ",
+      "Translated": "雇员估算",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerLargeEstimatedDebugSlots",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer hits ",
+      "Translated": "雇员命中",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerHitDebugList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dump retainer probe",
+      "Translated": "导出雇员探测",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Butler probe: ",
+      "Translated": "衣橱管家探测：",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Butler probe failed. Check plugin log.",
+      "Translated": "衣橱管家探测失败。请检查插件日志。",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "offset x",
+      "Translated": "偏移 x",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "offset y",
+      "Translated": "偏移 y",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "step",
+      "Translated": "步长",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "gap",
+      "Translated": "间距",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "size",
+      "Translated": "尺寸",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset offset",
+      "Translated": "重置偏移",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " ArmouryBoard",
+      "Translated": "兵装库",
+      "Context": "InventoryHighlightOverlayService.DrawSlotDebugCandidateOverlay",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " tree ",
+      "Translated": "树",
+      "Context": "InventoryHighlightOverlayService.DrawSlotDebugCandidateOverlay",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Player: not logged in",
+      "Translated": "玩家：未登录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Player: {0} @ {1}",
+      "Translated": "玩家：{0} @ {1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status: {0}",
+      "Translated": "状态：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No data read.",
+      "Translated": "未读取到数据。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "아직 읽지 않음.",
+      "Translated": "尚未读取。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshed.",
+      "Translated": "已刷新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "새로고침 완료.",
+      "Translated": "刷新完成。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto updated.",
+      "Translated": "已自动更新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "자동 갱신 완료.",
+      "Translated": "自动更新完成。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Snapshot JSON copied.",
+      "Translated": "快照 JSON 已复制。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON をコピーしました。",
+      "Translated": "JSON 已复制。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON 복사 완료.",
+      "Translated": "JSON 复制完成。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Item name copied: {0}",
+      "Translated": "已复制物品名称：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Item link sent: {0}",
+      "Translated": "已发送物品链接：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Snapshot saved: {0}",
+      "Translated": "快照已保存：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON を保存しました：{0}",
+      "Translated": "JSON 已保存：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON 저장됨: {0}",
+      "Translated": "JSON 已保存：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer cache cleared.",
+      "Translated": "雇员缓存已清除。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 캐시 삭제됨.",
+      "Translated": "雇员缓存已删除。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current retainer updated.",
+      "Translated": "当前雇员已更新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "현재 집사를 갱신했습니다.",
+      "Translated": "当前雇员已更新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No current retainer data was updated.",
+      "Translated": "未更新当前雇员数据。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "갱신할 현재 집사 데이터를 읽지 못했습니다.",
+      "Translated": "无法读取要更新的当前雇员数据。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current retainer read failed.",
+      "Translated": "当前雇员读取失败。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "현재 집사 읽기에 실패했습니다.",
+      "Translated": "当前雇员读取失败。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Valuable dye settings updated.",
+      "Translated": "高价染料设置已更新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "고가 염료 설정이 갱신되었습니다.",
+      "Translated": "高价染料设置已更新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Store link settings updated.",
+      "Translated": "商店链接设置已更新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "상점 링크 설정이 갱신되었습니다.",
+      "Translated": "商店链接设置已更新。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored: {0}",
+      "Translated": "已忽略：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No longer ignored: {0}",
+      "Translated": "已取消忽略：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored items cleared.",
+      "Translated": "已清除忽略物品。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "무시 목록이 삭제되었습니다.",
+      "Translated": "忽略列表已删除。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Store link opened: {0} / {1}",
+      "Translated": "已打开商店链接：{0} / {1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "상점 링크를 열지 못했습니다.",
+      "Translated": "无法打开商店链接。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto retainer probe: waiting for login",
+      "Translated": "自动雇员探测：等待登录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto retainer probe: {0}, cache update {1}",
+      "Translated": "自动雇员探测：{0}，缓存更新 {1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "はい",
+      "Translated": "是",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "いいえ",
+      "Translated": "否",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "아니요",
+      "Translated": "否",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "なし",
+      "Translated": "无",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "없음",
+      "Translated": "无",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Active retainer: {0}",
+      "Translated": "当前雇员：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Active retainer: none",
+      "Translated": "当前雇员：无",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Active Retainer",
+      "Translated": "当前雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "현재 집사",
+      "Translated": "当前雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cached retainers: {0}",
+      "Translated": "已缓存雇员：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Details",
+      "Translated": "雇员详情",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 상세",
+      "Translated": "雇员详情",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "{0} glamour items / {1}",
+      "Translated": "{0} 件幻化装备 / {1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Analysis",
+      "Translated": "醒神分析",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "분석 새로고침",
+      "Translated": "醒神分析",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy JSON",
+      "Translated": "复制 JSON",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON コピー",
+      "Translated": "复制 JSON",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON 복사",
+      "Translated": "复制 JSON",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy item name",
+      "Translated": "复制物品名称",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "아이템 이름 복사",
+      "Translated": "复制物品名称",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Link item",
+      "Translated": "物品链接",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "アイテムリンク",
+      "Translated": "物品链接",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "아이템 링크",
+      "Translated": "物品链接",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Save JSON",
+      "Translated": "保存 JSON",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON 저장",
+      "Translated": "保存 JSON",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Retainers",
+      "Translated": "清除雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 삭제",
+      "Translated": "清除雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Current Retainer",
+      "Translated": "醒神当前雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "현재 집사 새로고침",
+      "Translated": "醒神当前雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cleanup",
+      "Translated": "清理",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "정리 추천",
+      "Translated": "清理",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Collection",
+      "Translated": "收藏",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "수집 진행",
+      "Translated": "收藏进度",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Character",
+      "Translated": "角色",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "캐릭터 설정",
+      "Translated": "角色设置",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "デバッグ",
+      "Translated": "调试",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "디버그",
+      "Translated": "调试",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Wardrobe Cleanup",
+      "Translated": "衣柜清理",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "옷장 정리",
+      "Translated": "衣柜整理",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Summary",
+      "Translated": "摘要",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "요약",
+      "Translated": "摘要",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Collection Checks",
+      "Translated": "收藏检查",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "수집 점검",
+      "Translated": "收集检查",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Character Profile",
+      "Translated": "角色档案",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Read Debug",
+      "Translated": "读取调试",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "읽기 디버그",
+      "Translated": "读取调试",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Details",
+      "Translated": "详情",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "상세",
+      "Translated": "详情",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Entries",
+      "Translated": "条目",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "항목",
+      "Translated": "条目",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unique Items",
+      "Translated": "独特物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "고유 아이템",
+      "Translated": "独有物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Total Quantity",
+      "Translated": "总数量",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "총 수량",
+      "Translated": "总数量",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dyed Entries",
+      "Translated": "染色条目",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "염색 항목",
+      "Translated": "染色条目",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ミラージュドレッサー",
+      "Translated": "幻影衣柜",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "환영 화장대",
+      "Translated": "幻影衣柜",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "애장품 보관함",
+      "Translated": "爱藏品保管库",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Progress",
+      "Translated": "爱藏品库进度",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보관함 진행",
+      "Translated": "保管库进度",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Can Move To Armoire",
+      "Translated": "可移至爱藏品库",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보관 가능",
+      "Translated": "可保管",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Can Move To Glamour Set",
+      "Translated": "可移至幻影套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "환영 세트 후보",
+      "Translated": "幻影套装候选",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tradable Items",
+      "Translated": "可交易物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "거래 가능 아이템",
+      "Translated": "交易可能物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Crafter/Gatherer Replicas",
+      "Translated": "制作/采集复制品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "クラフター/ギャザラーレプリカ",
+      "Translated": "制作/采集复制品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "제작/채집 복제품",
+      "Translated": "制作/采集复制品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate Items",
+      "Translated": "复制物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "중복 아이템",
+      "Translated": "重复物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Identical Models",
+      "Translated": "相同模型",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Container Distribution",
+      "Translated": "容器分布",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보관 위치 분포",
+      "Translated": "保管位置分布",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "{0} entries / {1} unique / {2} dyed",
+      "Translated": "{0} 条目 / {1} 唯一 / {2} 已染色",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Translated": "全部",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No items to show.",
+      "Translated": "没有可显示的项目。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select an item to view locations, quantity, and risk.",
+      "Translated": "选择项目以查看位置、数量和风险。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Type",
+      "Translated": "类型",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Quantity",
+      "Translated": "数量",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Storage",
+      "Translated": "衣柜收纳",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locations",
+      "Translated": "位置",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dyed",
+      "Translated": "染色",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dyed Slots",
+      "Translated": "染色槽",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Slots",
+      "Translated": "染色槽",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Not dyeable",
+      "Translated": "不可染色",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye: {0}",
+      "Translated": "染色：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye 1: {0} / Dye 2: {1}",
+      "Translated": "染色 1：{0} / 染色 2：{1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clears Dye On Storage",
+      "Translated": "收纳时清除染色",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Valuable Dye",
+      "Translated": "贵重染料",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye {0}",
+      "Translated": "染色 {0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown dye",
+      "Translated": "不明染料",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Undyed",
+      "Translated": "未染色",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Owned details",
+      "Translated": "持有详情",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Owned Entries",
+      "Translated": "持有条目",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보유 항목",
+      "Translated": "持有物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Owned Items",
+      "Translated": "持有物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보유 아이템",
+      "Translated": "持有物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "{0} entries / {1} total",
+      "Translated": "{0} 条记录 / 共 {1} 条",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Location: not cached",
+      "Translated": "位置：未缓存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Location: {0}",
+      "Translated": "位置：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Location: {0} + {1} places",
+      "Translated": "位置：{0} + {1} 处",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dyes: {0}",
+      "Translated": "染色：{0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "소지품",
+      "Translated": "消耗品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory {0}",
+      "Translated": "背包 {0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury Chest",
+      "Translated": "兵装库",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "アーマリーチェスト",
+      "Translated": "兵装库",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "장비함",
+      "Translated": "装备中",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "장착 중",
+      "Translated": "装备中",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ミラージュドレッサーセット",
+      "Translated": "幻化套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "환영 화장대 세트",
+      "Translated": "幻化套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Saddlebag",
+      "Translated": "坐骑鞍囊",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "チョコボかばん",
+      "Translated": "坐骑鞍囊",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "초코보 가방",
+      "Translated": "坐骑鞍囊",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Saddlebag {0}",
+      "Translated": "坐骑鞍囊 {0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Premium Saddlebag {0}",
+      "Translated": "高级坐骑鞍囊 {0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer",
+      "Translated": "雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "リテイナー",
+      "Translated": "雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사",
+      "Translated": "雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Inventory",
+      "Translated": "雇员背包",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 가방",
+      "Translated": "雇员背包",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Page {0}",
+      "Translated": "雇员第 {0} 页",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 장비",
+      "Translated": "雇员装备",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 판매품",
+      "Translated": "雇员出售品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Main Hand",
+      "Translated": "兵装库：主手",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "アーマリー：メインアーム",
+      "Translated": "兵装库：主手",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Off Hand",
+      "Translated": "兵装库：副手",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "アーマリー：サブアーム",
+      "Translated": "兵装库：副手",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Head",
+      "Translated": "兵装库：头部",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Body",
+      "Translated": "兵装库：身体",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Hands",
+      "Translated": "兵装库：大手",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Waist",
+      "Translated": "兵装库：腰部",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Legs",
+      "Translated": "兵装库：腿部",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Feet",
+      "Translated": "兵装库：脚部",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Earrings",
+      "Translated": "兵装库：耳饰",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Necklace",
+      "Translated": "兵装库：项链",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Bracelet",
+      "Translated": "兵装库：手镯",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Rings",
+      "Translated": "兵装库：戒指",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoury: Soul Crystal",
+      "Translated": "兵装库：守护者的灵魂水晶",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "アーマリー：ソウルクリスタル",
+      "Translated": "兵装库：守护者的灵魂水晶",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Missing",
+      "Translated": "缺失",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "누락",
+      "Translated": "缺失",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Store",
+      "Translated": "商店",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ストア",
+      "Translated": "商店",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "상점",
+      "Translated": "商店",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour sets",
+      "Translated": "幻化套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ミラージュセット",
+      "Translated": "幻化套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "투영 세트",
+      "Translated": "幻化套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Wardrobe",
+      "Translated": "衣柜",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ワードローブ",
+      "Translated": "衣柜",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "옷장",
+      "Translated": "衣柜",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Store catalog was not read. Make sure the data file is included with the plugin.",
+      "Translated": "未能读取商店目录。请确认数据文件已随插件一同包含。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "상점 목록을 읽지 못했습니다. 데이터 파일이 플러그인에 포함되어 있는지 확인하세요.",
+      "Translated": "未能读取商店目录。请确认数据文件已随插件一同包含。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No glamour set catalog was read from the client.",
+      "Translated": "未能从客户端读取幻化套装目录。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "클라이언트에서 투영 세트 목록을 읽지 못했습니다.",
+      "Translated": "未能从客户端读取幻化套装目录。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "{0}/{1} sets stored, {2} incomplete.",
+      "Translated": "已保存 {0}/{1} 套，{2} 套不完整。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Loose pieces from stored sets",
+      "Translated": "已保存套装中的散件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보관된 세트의 흩어진 파츠",
+      "Translated": "已保存套装中的散件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Incomplete sets",
+      "Translated": "不完整套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "누락 세트",
+      "Translated": "不完整套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sets not stored",
+      "Translated": "未保存套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "미보관 세트",
+      "Translated": "未保存套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Complete sets",
+      "Translated": "完整套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "완료 세트",
+      "Translated": "完整套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Incomplete",
+      "Translated": "不完整",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Not stored",
+      "Translated": "未保存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "미보관",
+      "Translated": "未保存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Complete",
+      "Translated": "完整",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "완료",
+      "Translated": "完整",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fully stored",
+      "Translated": "已完全保存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "완전 수납",
+      "Translated": "已完全保存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pieces to store",
+      "Translated": "待保存部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "수납 대기 부위",
+      "Translated": "待保存部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Missing pieces",
+      "Translated": "缺失部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "미보유 부위",
+      "Translated": "缺失部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set to create",
+      "Translated": "待创建",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "세트 생성 대기",
+      "Translated": "待创建",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set not owned",
+      "Translated": "未拥有套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "세트 미보유",
+      "Translated": "未拥有套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stored",
+      "Translated": "已收藏",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보관됨",
+      "Translated": "已收藏",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glamour set",
+      "Translated": "幻化套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set containing {0}",
+      "Translated": "包含 {0} 的套装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "수납됨",
+      "Translated": "已收藏",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Transferable",
+      "Translated": "可移动",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "이동 가능",
+      "Translated": "可移动",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "To store",
+      "Translated": "待收藏",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "수납 대기",
+      "Translated": "待收藏",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show {0} more",
+      "Translated": "再显示 {0} 个",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Partial",
+      "Translated": "部分拥有",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "부분 보유",
+      "Translated": "部分拥有",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "미보유",
+      "Translated": "未拥有",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Needs mapping",
+      "Translated": "需要映射",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "매핑 필요",
+      "Translated": "需要映射",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search outfits or pieces",
+      "Translated": "搜索套装或部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "의상 또는 파츠 검색",
+      "Translated": "搜索套装或部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No store outfits match the filters.",
+      "Translated": "没有符合筛选条件的商城套装。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "필터와 일치하는 상점 의상이 없습니다.",
+      "Translated": "没有符合筛选条件的商城套装。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pieces",
+      "Translated": "部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "パーツ",
+      "Translated": "部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "파츠",
+      "Translated": "部件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Price",
+      "Translated": "死亡诱惑",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "가격",
+      "Translated": "价格",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Store link",
+      "Translated": "商城链接",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ストアリンク",
+      "Translated": "商城链接",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "상점 링크",
+      "Translated": "商城链接",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click to choose",
+      "Translated": "右键选择",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "우클릭으로 선택",
+      "Translated": "右键选择",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click",
+      "Translated": "右键",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "우클릭",
+      "Translated": "右键",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Store links",
+      "Translated": "商城链接",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Selected domains are hidden.",
+      "Translated": "已隐藏所选域名。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "선택한 도메인 링크를 숨깁니다.",
+      "Translated": "已隐藏所选域名。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide {0}",
+      "Translated": "隐藏 {0}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NPC costume",
+      "Translated": "NPC服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NPC 의상",
+      "Translated": "NPC服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bonus costume",
+      "Translated": "特典服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "특전 의상",
+      "Translated": "特典服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Collector's edition",
+      "Translated": "典藏版",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "コレクターズエディション",
+      "Translated": "典藏版",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "컬렉터스 에디션",
+      "Translated": "典藏版",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Replica costume",
+      "Translated": "复刻服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "복제품 의상",
+      "Translated": "复刻服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Promotional costume",
+      "Translated": "促销服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "프로모션 의상",
+      "Translated": "促销服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Crossover costume",
+      "Translated": "联动服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "콜라보 의상",
+      "Translated": "联动服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Seasonal outfits",
+      "Translated": "季节服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "시즌 의상",
+      "Translated": "季节服装",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Other store outfits",
+      "Translated": "其他商城外观",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "기타 상점 외형",
+      "Translated": "其他商城外观",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Catalog",
+      "Translated": "衣柜目录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "애장품 보관함 도감",
+      "Translated": "衣柜目录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Other",
+      "Translated": "其他",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "기타",
+      "Translated": "其他",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Not owned",
+      "Translated": "未拥有",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "표시할 아이템이 없습니다.",
+      "Translated": "没有可显示的项目。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No missing armoire items.",
+      "Translated": "没有遗漏的衣柜物品。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "누락된 보관함 항목이 없습니다.",
+      "Translated": "没有遗漏的衣柜物品。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current Data",
+      "Translated": "当前数据",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "현재 데이터",
+      "Translated": "当前数据",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "주요 설정",
+      "Translated": "主要设置",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Data Actions",
+      "Translated": "数据操作",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "데이터 작업",
+      "Translated": "数据操作",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "World",
+      "Translated": "服务器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ワールド",
+      "Translated": "服务器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "월드",
+      "Translated": "服务器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Data Center",
+      "Translated": "数据中心",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "データセンター",
+      "Translated": "数据中心",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "데이터 센터",
+      "Translated": "数据中心",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Storage Overview",
+      "Translated": "保管概览",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보관 개요",
+      "Translated": "保管概览",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Data State",
+      "Translated": "数据状态",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "데이터 상태",
+      "Translated": "数据状态",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Carried Storage",
+      "Translated": "随身仓库",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "휴대 보관",
+      "Translated": "随身仓库",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Read now: {0} entries",
+      "Translated": "已读取：{0} 条",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Using cache: {0} entries",
+      "Translated": "使用缓存：{0} 条",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Not read",
+      "Translated": "未读取",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "읽지 않음",
+      "Translated": "未读取",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "{0} cached / {1} glamour items",
+      "Translated": "{0} 条缓存 / {1} 件幻化装备",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored Items",
+      "Translated": "已忽略物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "무시한 장비",
+      "Translated": "已忽略物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No ignored items for this character.",
+      "Translated": "该角色没有已忽略的物品。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "이 캐릭터에는 무시한 장비가 없습니다.",
+      "Translated": "该角色没有已忽略的物品。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore Settings",
+      "Translated": "忽略设置",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "무시 설정",
+      "Translated": "忽略设置",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore cleanup item",
+      "Translated": "忽略清理物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "정리 항목 무시",
+      "Translated": "忽略清理物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop ignoring",
+      "Translated": "取消忽略",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "무시 해제",
+      "Translated": "取消忽略",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear Ignored",
+      "Translated": "清除忽略",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "무시 목록 삭제",
+      "Translated": "清除忽略",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click the item card",
+      "Translated": "右键点击物品卡片",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "아이템 카드를 우클릭",
+      "Translated": "右键点击物品卡片",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right-click for details and ignore options",
+      "Translated": "右键查看详情和忽略选项",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "우클릭으로 상세와 무시 옵션 보기",
+      "Translated": "右键查看详情和忽略选项",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The item is ignored only after choosing the action below.",
+      "Translated": "选择以下操作后才会忽略该物品。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "아래 항목을 선택해야 정리 추천에서 무시됩니다.",
+      "Translated": "选择以下操作后才会忽略该物品。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click to restore",
+      "Translated": "点击恢复",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "클릭하여 복원",
+      "Translated": "点击恢复",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Valuable dyes",
+      "Translated": "贵重染剂",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Selected dyes are muted and sorted lower in cleanup, collection, and tooltips.",
+      "Translated": "选中的染剂将变暗，并在清理、收藏和提示中排到后面。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "선택한 염료는 정리, 수집, 툴팁에서 흐리게 표시되고 뒤로 정렬됩니다.",
+      "Translated": "选中的染剂将变暗，并在清理、收藏和提示中排到后面。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Value categories",
+      "Translated": "价值分类",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "가치 분류",
+      "Translated": "价值分类",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Store special dyes",
+      "Translated": "商店特殊染剂",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "상점 특수 염료",
+      "Translated": "商店特殊染剂",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No store special dyes were read from the current client catalog.",
+      "Translated": "未能从当前客户端目录读取商店特殊染剂。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "현재 클라이언트 목록에서 상점 특수 염료를 읽지 못했습니다.",
+      "Translated": "未能从当前客户端目录读取商店特殊染剂。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "General dyes",
+      "Translated": "普通染剂",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "일반 염료",
+      "Translated": "普通染剂",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Wide Spectrum #1 Dye",
+      "Translated": "广谱染料 #1",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "アディショナルカラー1",
+      "Translated": "追加颜色1",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "추가 색상 1",
+      "Translated": "追加颜色 1",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Wide Spectrum #2 Dye",
+      "Translated": "广谱染料 #2",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "アディショナルカラー2",
+      "Translated": "追加颜色2",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "추가 색상 2",
+      "Translated": "追加颜色 2",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate item highlight (unstable feature)",
+      "Translated": "复制物品高亮（不稳定功能）",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "중복 아이템 표시(불안정한 기능)",
+      "Translated": "复制物品显示（不稳定功能）",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show duplicate item glow",
+      "Translated": "显示复制物品发光",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "중복 아이템 발광 표시",
+      "Translated": "复制物品发光显示",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled for this login session only; disabled on the next login.",
+      "Translated": "仅本次登录会话启用；下次登录时封技。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "현재 로그인 세션에서만 사용되며 다음 로그인 시 자동으로 꺼집니다.",
+      "Translated": "仅在当前登录会话中使用，下次登录时自动封技。",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Updated",
+      "Translated": "更新时间",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "갱신 시간",
+      "Translated": "更新时间",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Catalog",
+      "Translated": "目录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "カタログ",
+      "Translated": "目录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "목록",
+      "Translated": "目录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Cache",
+      "Translated": "雇员缓存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "リテイナーキャッシュ",
+      "Translated": "雇员缓存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 캐시",
+      "Translated": "雇员缓存",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Export JSON",
+      "Translated": "导出 JSON",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON エクスポート",
+      "Translated": "JSON 导出",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "JSON 내보내기",
+      "Translated": "JSON 导出",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire catalog: {0} effective, {1} raw rows",
+      "Translated": "衣柜目录：{0} 条有效，{1} 条原始记录",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Generated",
+      "Translated": "生成时间",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "생성 시간",
+      "Translated": "生成时间",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Translated": "物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "아이템 항목",
+      "Translated": "物品条目",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Character Cache File",
+      "Translated": "角色缓存文件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "キャラクターキャッシュファイル",
+      "Translated": "角色缓存文件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "캐릭터 캐시 파일",
+      "Translated": "角色缓存文件",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Containers",
+      "Translated": "容器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "コンテナ",
+      "Translated": "容器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "보관 위치",
+      "Translated": "保管位置",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory Scan",
+      "Translated": "背包扫描",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "소지품 스캔",
+      "Translated": "背包扫描",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Scan",
+      "Translated": "雇员扫描",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "リテイナースキャン",
+      "Translated": "雇员扫描",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 스캔",
+      "Translated": "雇员扫描",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "{0} scanned / {1} exported",
+      "Translated": "已扫描 {0} / 已导出 {1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "loaded, {0}/{1} exported",
+      "Translated": "已加载，已导出 {0}/{1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "not loaded ({0})",
+      "Translated": "未加载（{0}）",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Manager",
+      "Translated": "雇员管理",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 관리자",
+      "Translated": "雇员管理",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ready: {0} / last selected: {1}",
+      "Translated": "就绪：{0} / 上次选择：{1}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Inventory Containers",
+      "Translated": "背包容器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "소지품 컨테이너",
+      "Translated": "背包容器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Retainer Containers",
+      "Translated": "雇员容器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "リテイナーコンテナ",
+      "Translated": "雇员容器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "집사 컨테이너",
+      "Translated": "雇员容器",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cached Retainers",
+      "Translated": "已缓存雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "캐시된 집사",
+      "Translated": "已缓存雇员",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ready: {0} / count: {1} / last selected: {2}",
+      "Translated": "就绪：{0} / 数量：{1} / 上次选择：{2}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "available={0} / items={1} / market={2}",
+      "Translated": "可用={0} / 物品={1} / 市场={2}",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unrecognized item",
+      "Translated": "未识别的物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "인식되지 않은 아이템",
+      "Translated": "未识别的物品",
+      "Context": "LocalizationService..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

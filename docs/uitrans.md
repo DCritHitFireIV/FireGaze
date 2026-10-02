@@ -118,6 +118,13 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - 下载线路：raw.githubusercontent + `gh.atmoomen.top` + `gh-proxy.org`（与简介词表同一套）；
   本地缓存 `<配置目录>/uitrans/library/<内部名>.json`（24h TTL，拉不到就用旧缓存 / 直接跳过）。
 - 目标插件清单：`scripts/uit_targets.txt`（首批 = 官方库下载量前 40）。
+- **本机导出上传**（`scripts/export_local_library.py`，2026-10-02 用户定，默认合并）：
+  · **本机为准**：同一键（条目/属性按原文，资源按容器+key）译文不同 → 用本机的；
+  · **其余保留/补齐**：库里已有但本机没有的原样保留，本机独有的追加（`--replace` 才整包覆盖）；
+  · **已是中文的不导出**（与插件端 `IsAlreadyChinese` 同口径，含原生「中文###ID」标签）——
+    2026-10-02 扫出 AetherBlackbox / ARSR / ArmoireButler 一批「把中文再翻一遍」的噪声，已拦下；
+  · 「不汉化」名单（AEAssistV3 / DailyRoutines 等）跳过且不碰库里已有包；
+  · 导出时 `PreserveID=false`、`Source=library`、不导出 Review / Skipped（本地决定不外溢）。
 - 授权口径（用户定）：默认公开，README 注明「机器/社区翻译，不代表原作者」；作者要求即从库中移除。
 - **投稿（玩家把人工译文交回库）**：编辑器「更多… → 提交人工译文到公共库…」把当前包里 `Source=user` 的条目打成
   `type=uit-contribution` 的 JSON、打开填好的 issue 页（匿名，不带账号）；`inbox.yml` 里 `inbox_uit.py` 体检后
