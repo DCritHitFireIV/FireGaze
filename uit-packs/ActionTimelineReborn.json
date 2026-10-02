@@ -1,0 +1,682 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-02",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Support the developer on Ko-fi",
+      "Translated": "在 Ko-fi 上支持开发者",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Translated": "常规",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Help",
+      "Translated": "帮助",
+      "Context": "SettingsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Animation Lock Color",
+      "Translated": "动画锁颜色",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bar Background Color",
+      "Translated": "进度条背景颜色",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Canceled Color",
+      "Translated": "咏唱取消颜色",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Finished Color",
+      "Translated": "咏唱完成颜色",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cast In Progress Color",
+      "Translated": "咏唱中颜色",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Bar Height",
+      "Translated": "GCD进度条高度",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Border Color",
+      "Translated": "GCD边框颜色",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Border Round",
+      "Translated": "GCD边框圆角",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Border Thickness",
+      "Translated": "GCD边框粗细",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Animation Lock Time",
+      "Translated": "显示动画锁时间",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Status Line",
+      "Translated": "显示状态线",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status Line Height",
+      "Translated": "状态线高度",
+      "Context": "SettingsWindow.DrawBarTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Any GCD clip longer than this will be capped",
+      "Translated": "任何长于此值的 GCD 卡顿都将被截断",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Translated": "颜色",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Max Time (seconds)",
+      "Translated": "最大时间 (秒)",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Translated": "文字颜色",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This can be used filter out \"false positives\" due to latency or other factors. Any GCD clipping detected that is shorter than this value will be ignored.\nIt is strongly recommended that you test out different values and find out what works best for your setup.",
+      "Translated": "可用于过滤因延迟或其他因素导致的“误报”。任何检测到的短于此值的 GCD 卡顿都将被忽略。\n强烈建议你尝试不同的数值，找出最适合你配置的设置。",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This only shown when timeline is not rotation.",
+      "Translated": "仅当时间轴不是转向时显示。",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Threshold (ms)",
+      "Translated": "回退预备 (ms)",
+      "Context": "SettingsWindow.DrawGCDClippingTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add One Timeline",
+      "Translated": "添加一个时间轴",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All Timeline Data",
+      "Translated": "清除所有时间轴数据",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clears all recorded timeline data and caches. This will free memory and reset the timeline.",
+      "Translated": "清除所有已记录的时间轴数据和缓存。这将释放内存并重置时间轴。",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clipping Range",
+      "Translated": "截断范围",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Don't record these statuses.",
+      "Translated": "不记录这些状态。",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide In Cutscene",
+      "Translated": "过场动画中隐藏",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide In Quest Event",
+      "Translated": "任务事件中隐藏",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Print Clipping Time On Chat",
+      "Translated": "在聊天中输出截断时间",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Record Data",
+      "Translated": "记录数据",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Record Target Status",
+      "Translated": "记录目标状态",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Only In Combat",
+      "Translated": "仅在战斗中显示",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Only In Duty",
+      "Translated": "仅在任务中显示",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Showed Statuses",
+      "Translated": "已显示的状态",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[ActionTimelineReborn] All timeline data cleared.",
+      "Translated": "[ActionTimelineReborn] 已清除所有时间轴数据。",
+      "Context": "SettingsWindow.DrawGeneralSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Drawing Center offset",
+      "Translated": "绘制中心偏移",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable",
+      "Translated": "启用",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Is Horizonal",
+      "Translated": "是水平",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Is Reverse",
+      "Translated": "是逆转",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Is Rotation",
+      "Translated": "是转向",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Translated": "锁定",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locked Color",
+      "Translated": "锁定颜色",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Offset Time (seconds)",
+      "Translated": "偏移时间（秒）",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Size per second",
+      "Translated": "每秒尺寸",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Offset time of rotation.",
+      "Translated": "转向的偏移时间。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This is the advanced time about action using",
+      "Translated": "这是关于技能使用的高级时间",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This is the width of every second drawn on the window.",
+      "Translated": "这是窗口中每一秒绘制的宽度。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unlocked Color",
+      "Translated": "未锁定颜色",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Center Line Color",
+      "Translated": "中心线颜色",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Center Line Width",
+      "Translated": "中心线宽度",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Divide By Seconds",
+      "Translated": "按秒分割",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled",
+      "Translated": "启用",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Line Color",
+      "Translated": "线条颜色",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Line Width",
+      "Translated": "线宽",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Center Line",
+      "Translated": "显示中心线",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Text",
+      "Translated": "显示文本",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Start Line Color",
+      "Translated": "起始线颜色",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Start Line Width",
+      "Translated": "起始线宽度",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Divide By Seconds",
+      "Translated": "按秒细分",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Division Count",
+      "Translated": "子分区数量",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Division Line Color",
+      "Translated": "子分区线条颜色",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sub-Division Line Width",
+      "Translated": "子分区线宽",
+      "Context": "SettingsWindow.DrawGridTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Attack Icon Size",
+      "Translated": "自动攻击图标大小",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Attack Vertical Offset",
+      "Translated": "自动攻击垂直偏移",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Color",
+      "Translated": "暴击颜色",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Critical Direct Color",
+      "Translated": "暴击直击颜色",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Direct Color",
+      "Translated": "直击颜色",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Icon Size",
+      "Translated": "图标大小",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Iff GCD Vertical Offset",
+      "Translated": "非GCD垂直偏移",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Off GCD Icon Size",
+      "Translated": "非GCD图标大小",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Auto Attacks",
+      "Translated": "显示自动攻击",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Damage Type",
+      "Translated": "显示伤害类型",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Off GCD",
+      "Translated": "显示非GCD",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Status Gain Lose",
+      "Translated": "显示状态获得/失去",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status Gain Color",
+      "Translated": "状态获得颜色",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status Icon Alpha",
+      "Translated": "状态图标透明度",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status Icon Size",
+      "Translated": "状态图标大小",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status Lose Color",
+      "Translated": "状态失去颜色",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status Offset",
+      "Translated": "状态偏移",
+      "Context": "SettingsWindow.DrawIconsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bar##Timeline_Bar",
+      "Translated": "条##Timeline_Bar",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GCD Clipping##Timeline_GCD",
+      "Translated": "GCD 截断##Timeline_GCD",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "General##Timeline_General",
+      "Translated": "常规##Timeline_General",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Grid##Timeline_Grid",
+      "Translated": "网格##Timeline_Grid",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Icons##Timeline_Icons",
+      "Translated": "图标##Timeline_Icons",
+      "Context": "SettingsWindow.DrawTimelineSetting",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Are you sure to remove this timeline?",
+      "Translated": "确定要移除此时间轴吗？",
+      "Context": "SettingsWindow.RemoveValue",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click to remove this timeline.",
+      "Translated": "点击移除此时间轴。",
+      "Context": "SettingsWindow.RemoveValue",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Please wait for a second.",
+      "Translated": "请稍等一秒。",
+      "Context": "SettingsWindow.RemoveValue",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clipping: ",
+      "Translated": "卡顿：",
+      "Context": "TimelineManager.ActionFromSelf",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ms (",
+      "Translated": "毫秒 (",
+      "Context": "TimelineManager.ActionFromSelf",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Timeline: ",
+      "Translated": "时间轴：",
+      "Context": "TimelineWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ms",
+      "Translated": "毫秒",
+      "Context": "TimelineWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Opens the ActionTimelineReborn configuration window.",
+      "Context": "[属性] CmdAttribute ActionTimelineReborn.Plugin::PluginCommand",
+      "Translated": "打开 ActionTimelineReborn 配置窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock all windows",
+      "Context": "[属性] SubCmdAttribute ActionTimelineReborn.Plugin::PluginCommand",
+      "Translated": "守卫驻所所有窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock all windows",
+      "Context": "[属性] SubCmdAttribute ActionTimelineReborn.Plugin::PluginCommand",
+      "Translated": "解锁所有窗口",
+      "Source": "library"
+    }
+  ]
+}

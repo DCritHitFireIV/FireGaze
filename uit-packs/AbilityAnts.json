@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-02",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Draw ants border around specific abilities. /pants to configure.",
+      "Translated": "在特定技能周围绘制蚂蚁边框。/pants 进行配置。",
+      "Context": "AbilityAnts..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ability Ants Config",
+      "Translated": "技能蚂蚁边框配置",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Charged abilities only get ants for the final charge",
+      "Translated": "充能技能仅在最后一层充能时显示蚂蚁边框",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Don't hide ants while you're casting",
+      "Translated": "施法期间不隐藏蚂蚁边框",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only show custom ants for actions your character can use (job level restriction).",
+      "Translated": "仅对角色可使用的技能显示自定义蚂蚁边框（职业等级限制）。",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only show custom ants while in combat",
+      "Translated": "仅在战斗中显示自定义蚂蚁边框",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Role Actions",
+      "Translated": "职能技能",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set default pre-ant time, in ms",
+      "Translated": "设置默认蚂蚁边框提前时间，单位毫秒",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set saved pre-ant times to this, in ms",
+      "Translated": "将所有已保存的蚂蚁边框提前时间设为此值，单位毫秒",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "While you're casting, the game normally reports every action as unusable, which hides all ants.\nEnable this to keep ants reflecting each ability's cooldown during a cast, instead of blinking off until the cast ends.",
+      "Translated": "施法期间，游戏通常会将所有技能报告为无法使用，从而隐藏所有蚂蚁边框。\n启用此项可在施法期间保持蚂蚁边框反映各技能的冷却状态，而不是闪烁消失直到施法结束。",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "actions",
+      "Translated": "技能",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "sidebar",
+      "Translated": "侧边栏",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Active",
+      "Translated": "启用",
+      "Context": "ConfigWindow.DrawActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ms pre-ant",
+      "Translated": "毫秒提前",
+      "Context": "ConfigWindow.DrawActions",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

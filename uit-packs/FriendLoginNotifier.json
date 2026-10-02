@@ -1,0 +1,425 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-02",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Opens the settings window.\n/friends help — Shows the complete command list.\n/friends time — Shows the time until the next automatic poll.\n/friends changes — Opens the changelog.\n/friends test — Sends a test notification.\n/friends sync — Synchronizes all friends.\n/friends syncworld — Synchronizes same-world friends.\n/friends syncother — Checks friends who may be on other worlds.\n/friends debug on — Enables debug chat messages.\n/friends debug off — Disables debug chat messages.",
+      "Translated": "打开设置窗口。\n/friends help — 显示完整命令列表。\n/friends time — 显示距离下次自动轮询的时间。\n/friends changes — 打开更新日志。\n/friends test — 发送测试通知。\n/friends sync — 同步所有好友。\n/friends syncworld — 同步同服好友。\n/friends syncother — 检查可能在其他服务器上的好友。\n/friends debug on — 启用调试聊天消息。\n/friends debug off — 禁用调试聊天消息。",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown command: /friends ",
+      "Translated": "未知命令：/friends",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend Login",
+      "Translated": "好友登录",
+      "Context": "Plugin.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend Login Notifier commands:",
+      "Translated": "Friend Login Notifier 命令：",
+      "Context": "Plugin.PrintCommandHelp",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto polling is not enabled. Please go to /friends and enable if you wish to use this feature.",
+      "Translated": "自动轮询未启用。如需使用此功能，请前往 /friends 启用。",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto polling is enabled, but it will begin after you log in.",
+      "Translated": "自动轮询已启用，但将在你登录后开始。",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "A friend polling cycle is currently in progress. The next randomized 4–9 minute timer will begin after it finishes.",
+      "Translated": "好友轮询周期正在进行中。下一次随机 4–9 分钟计时将在其完成后开始。",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto polling is enabled and waiting for its next timer to be scheduled.",
+      "Translated": "自动轮询已启用，正在等待安排下一次计时。",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world",
+      "Translated": "同服",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All-world",
+      "Translated": "全服",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " auto polling is enabled. Next automatic poll in ",
+      "Translated": "自动轮询已启用。下次自动轮询于",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "approximately ",
+      "Translated": "大约",
+      "Context": "Plugin.PrintAutomaticPollingTime",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend Login Notifier Settings###FriendLoginNotifierSettings",
+      "Translated": "Friend Login Notifier 设置",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Version ",
+      "Translated": "版本",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Passive monitoring reads the friend-list information already stored by the game.",
+      "Translated": "被动监控会读取游戏已存储的好友列表信息。",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Chat diagnostics",
+      "Translated": "聊天诊断",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show debug messages in chat",
+      "Translated": "在聊天中显示调试消息",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shows polling activity, timers, cross-world requests, completed cycles, and errors.",
+      "Translated": "显示轮询活动、计时器、跨服请求、完成的周期以及错误。",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic polling modes",
+      "Translated": "自动轮询模式",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Leave both options unchecked to use passive monitoring without automatic server requests. Only one automatic polling mode can be enabled at a time.",
+      "Translated": "两个选项都不勾选则使用被动监控，不发送自动服务器请求。同一时间只能启用一种自动轮询模式。",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world mode refreshes the game's general Friend List after each randomized 4–9 minute timer. It does not send individual cross-world status requests.",
+      "Translated": "同服模式会在每次随机 4–9 分钟计时后刷新游戏的通用好友列表。它不会发送单独的跨服状态请求。",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All-world mode performs the same general refresh, then checks friends on other Home Worlds and same-Home-World friends who may be visiting elsewhere. Individual requests use a new randomized 3–5 second gap. Its next 4–9 minute timer starts after the final friend is checked.",
+      "Translated": "全服模式会执行相同的通用刷新，然后检查其他原始服务器上的好友以及可能正在其他地方访问的同原始服务器好友。单独请求之间使用新的随机 3–5 秒间隔。其下一次 4–9 分钟计时在最后一位好友检查完成后开始。",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable automatic polling for same-world friends",
+      "Translated": "启用同服好友自动轮询",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshes the general Friend List without individual cross-world checks.",
+      "Translated": "刷新通用好友列表，不进行单独的跨服检查。",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable automatic polling for all worlds",
+      "Translated": "启用全服自动轮询",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refreshes the general Friend List and individually checks friends who are on or may be on other worlds.",
+      "Translated": "刷新通用好友列表，并单独检查位于或可能位于其他服务器上的好友。",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Warning: Automatic polling sends friend-list refresh requests to the FFXIV servers without manually opening the Friend List. These requests may be visible to SE ",
+      "Translated": "倒计时：自动轮询会在未手动打开好友列表的情况下向 FFXIV 服务器发送好友列表刷新请求。这些请求可能对 SE 可见",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current status",
+      "Translated": "当前状态",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Send test chat message",
+      "Translated": "发送测试聊天消息",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Changelog",
+      "Translated": "显示更新日志",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sync All Friends",
+      "Translated": "同步所有好友",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Friends on Same World",
+      "Translated": "同步同服好友",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Friends on Other Worlds",
+      "Translated": "同步其他服务器好友",
+      "Context": "Plugin.DrawSettingsWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic polling warning###FriendLoginPollingWarning",
+      "Translated": "自动轮询倒计时",
+      "Context": "Plugin.DrawPollingWarningPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatic polling periodically asks the FFXIV servers for updated Friend List information without requiring you to manually open the Friend List.",
+      "Translated": "自动轮询会定期向 FFXIV 服务器请求更新的好友列表信息，无需你手动打开好友列表。",
+      "Context": "Plugin.DrawPollingWarningPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world polling refreshes the general Friend List. All-world polling also checks eligible friends who are on or may be visiting other worlds, with a newly randomized delay of three, four, or five seconds between each request.",
+      "Translated": "同服轮询会刷新通用好友列表。全服轮询还会检查位于或可能正在访问其他服务器的符合条件的好友，每次请求之间使用新的随机三、四或五秒延迟。",
+      "Context": "Plugin.DrawPollingWarningPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "These requests may be visible in Square Enix's server logs. No one can guarantee whether automated requests will be detected or acted upon. Enabling this feature is at your own risk. Also, Ima says you are gay as fuck.",
+      "Translated": "这些请求可能在 Square Enix 的服务器日志中可见。无人能保证自动请求是否会被检测或处理。启用此功能风险自负。另外，Ima 说你是个死基佬。",
+      "Context": "Plugin.DrawPollingWarningPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, requests will occur at a newly randomized interval between 4 and 9 minutes.",
+      "Translated": "启用后，请求将以新的随机间隔在 4 到 9 分钟之间发生。",
+      "Context": "Plugin.DrawPollingWarningPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "I understand — enable polling",
+      "Translated": "我明白 — 启用轮询",
+      "Context": "Plugin.DrawPollingWarningPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "Plugin.DrawPollingWarningPopup",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend Login Notifier — What's New###FriendLoginChangelog",
+      "Translated": "好友登录通知 — 更新内容",
+      "Context": "Plugin.DrawChangelogWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "---------- Hotfix — Version 1.1.1.0 ----------\n\n• Fixed all-world tracking so same-Home-World friends who move to or log in on another world can also be checked.\n\n• A friend moving from your current world to another world is now reported as a new login, including when the change is detected during the same polling cycle.\n\n• Login notifications now include the friend's current world whenever FFXIV provides a valid current-world value.\n\n---------- Major Update — Version 1.1.0.0 ----------\n\n• Added separate automatic polling modes for same-world friends and all worlds. Automatic polling remains disabled by default.\n\n• Same-world polling refreshes the general Friend List after a newly randomized delay between 4 and 9 minutes.\n\n• All-world polling also checks cross-world friends individually, using a newly randomized delay of 3, 4, or 5 seconds between requests. The next 4–9 minute timer begins after the final check finishes.\n\n• Added an initial cross-world baseline to prevent false login notifications when the plugin first loads.\n\n• Added separate buttons and commands for syncing all friends, only same-world friends, or only friends on other worlds. Command-driven cross-world syncs report progress every 10 friends.\n\n• Replaced the old command with /friends and added help, time, changes, test, sync, syncworld, syncother, debug on, and debug off subcommands.\n\n• Added /friends time to show the remaining time until the next automatic poll in either polling mode.\n\n• Added optional debug messages in chat for polling activity, timers, individual requests, completed cycles, and errors.\n\n• Expanded the settings window with polling-mode explanations, status information, synchronized checkboxes, and risk confirmation.\n\n• Opening the Friend List manually now restarts the randomized automatic polling timer.\n\n• Added a per-version changelog window with a Don't show again for this version option.\n\n• Improved plugin icon support after installation.",
+      "Translated": "---------- 热修复 — 版本 1.1.1.0 ----------\n\n• 修复了全大区追踪，使同服好友转移到其他大区或登录其他大区时也能被检测到。\n\n• 好友从你当前所在大区转移到其他大区时，现在会报告为新登录，包括在同一轮询周期内检测到该变化的情况。\n\n• 只要 FFXIV 提供有效的当前大区值，登录通知现在会包含好友当前所在的大区。\n\n---------- 重大更新 — 版本 1.1.0.0 ----------\n\n• 为同服好友和全大区分别添加了独立的自动轮询模式。自动轮询默认仍为禁用。\n\n• 同服轮询会在 4 到 9 分钟之间新随机生成的延迟后刷新通用好友列表。\n\n• 全大区轮询还会逐个检查跨大区好友，请求之间使用新随机生成的 3、4 或 5 秒延迟。下一次 4–9 分钟计时在最后一次检查完成后开始。\n\n• 添加了初始跨大区基准，以防止插件首次加载时出现错误的登录通知。\n\n• 为同步所有好友、仅同服好友或仅其他大区好友添加了独立的按钮和命令。命令驱动的跨大区同步每 10 个好友报告一次进度。\n\n• 用 /friends 替换了旧命令，并添加了 help、time、changes、test、sync、syncworld、syncother、debug on 和 debug off 子命令。\n\n• 添加了 /friends time，用于显示任一轮询模式下距离下一次自动轮询的剩余时间。\n\n• 添加了可选的调试聊天消息，用于显示轮询活动、计时器、单个请求、完成的周期和错误。\n\n• 扩展了设置窗口，包含轮询模式说明、状态信息、同步复选框和风险确认。\n\n• 手动打开好友列表现在会重新开始随机自动轮询计时器。\n\n• 添加了按版本显示的更新日志窗口，并带有“此版本不再显示”选项。\n\n• 改进了安装后的插件图标支持。",
+      "Context": "Plugin.DrawChangelogWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Don't show again for this version",
+      "Translated": "此版本不再显示",
+      "Context": "Plugin.DrawChangelogWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Got it",
+      "Translated": "知道了",
+      "Context": "Plugin.DrawChangelogWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Debug chat messages disabled.",
+      "Translated": "调试聊天消息已禁用。",
+      "Context": "Plugin.SetDebugChatEnabled",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Debug chat messages enabled.",
+      "Translated": "调试聊天消息已启用。",
+      "Context": "Plugin.SetDebugChatEnabled",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[Debug] ",
+      "Translated": "[调试]",
+      "Context": "Plugin.PrintDebugChat",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You must be logged in before refreshing friends.",
+      "Translated": "刷新好友前必须先登录。",
+      "Context": "Plugin.StartManualRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "A friend refresh is already in progress.",
+      "Translated": "好友刷新已在进行中。",
+      "Context": "Plugin.StartManualRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Syncing all friends. Refreshing the general Friend List before checking friends who may be on other worlds.",
+      "Translated": "正在同步所有好友。先刷新通用好友列表，再检查可能在其他大区的好友。",
+      "Context": "Plugin.StartManualRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Syncing friends who are on or may be on other worlds.",
+      "Translated": "正在同步在其他大区或可能在其他大区的好友。",
+      "Context": "Plugin.StartManualRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Syncing friends on the same world.",
+      "Translated": "正在同步同服好友。",
+      "Context": "Plugin.StartSameWorldManualRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The game did not send the same-world friend sync request.",
+      "Translated": "游戏未发送同服好友同步请求。",
+      "Context": "Plugin.StartSameWorldManualRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Same-world friend sync request sent.",
+      "Translated": "同服好友同步请求已发送。",
+      "Context": "Plugin.StartSameWorldManualRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend sync complete. No eligible cross-world friends were found.",
+      "Translated": "好友同步完成。未找到符合条件的跨大区好友。",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend sync could not read the Friend List.",
+      "Translated": "好友同步无法读取好友列表。",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend sync stopped before all cross-world friends were processed.",
+      "Translated": "好友同步在处理完所有跨大区好友之前已停止。",
+      "Context": "Plugin.FinishCrossWorldCheckCycle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Friend sync progress: ",
+      "Translated": "好友同步进度：",
+      "Context": "Plugin.ReportSyncProgress",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " processed.",
+      "Translated": "已处理。",
+      "Context": "Plugin.ReportSyncProgress",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
