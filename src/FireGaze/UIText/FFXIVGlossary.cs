@@ -160,6 +160,39 @@ internal static class FFXIVGlossary
     }
 
     /// <summary>
+    ///     这条机器译文要不要「按术语表重译」：原文命中术语表、且译文里找不到该术语的官方译名。
+    /// </summary>
+    /// <remarks>
+    ///     用途（2026-10-02）：术语表后来补齐了，但机器翻译不会覆盖已有译文（「Grand Company Expert
+    ///     Delivery → 部队理符交付」这种历史译名会永远留着）——编辑器拿这个判定挑出需要重译的条目，
+    ///     玩家的手改（user）永不被动（调用方自己先过滤）。
+    /// </remarks>
+    public static bool NeedsGlossaryRepair(string original, string translated)
+    {
+        if (!Ready)
+        {
+            return false;
+        }
+
+        var terms = FindTerms([original]);
+        if (terms.Count == 0)
+        {
+            return false;
+        }
+
+        var value = translated ?? string.Empty;
+        foreach (var (_, chinese) in terms)
+        {
+            if (!value.Contains(chinese, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
     ///     从一批文本里找出命中的术语（最多 <paramref name="max" /> 条），给模型当「必须采用」的译名表。
     /// </summary>
     public static List<(string English, string Chinese)> FindTerms(IReadOnlyList<string> texts, int max = 30)

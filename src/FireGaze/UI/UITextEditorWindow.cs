@@ -404,6 +404,46 @@ internal sealed class UITextEditorWindow : Window
             .ToList();
     }
 
+    private int? glossaryRepairCache;
+
+    /// <summary>
+    ///     术语表命中、但当前机器译文里没有该术语译名的条目（只挑这些重译；
+    ///     玩家手改过的（user）永远不动）。术语表没就绪就返回 0。
+    /// </summary>
+    private int GlossaryRepairCount()
+    {
+        if (!FFXIVGlossary.Ready)
+        {
+            return 0;
+        }
+
+        return this.glossaryRepairCache ??= this.GlossaryRepairTargets().Count;
+    }
+
+    private List<UITextTarget> GlossaryRepairTargets()
+    {
+        var list = new List<UITextTarget>();
+        if (!FFXIVGlossary.Ready)
+        {
+            return list;
+        }
+
+        foreach (var row in this.rows)
+        {
+            if (row.Skipped || !row.HasTranslation || row.Entry is null || row.Entry.IsUserSource)
+            {
+                continue;
+            }
+
+            if (FFXIVGlossary.NeedsGlossaryRepair(row.Original, row.Entry.Translated))
+            {
+                list.Add(new UITextTarget(row.Original, row.Context, row.Entry, null, null));
+            }
+        }
+
+        return list;
+    }
+
     private void StartTranslate(List<UITextTarget> targets)
     {
         if (this.translateTask is { IsCompleted: false })
@@ -702,6 +742,21 @@ internal sealed class UITextEditorWindow : Window
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip("插件更新过、或想拾取新出现的文本时点它；会以原始文件为准重算候选。");
+            }
+
+            // 术语表更新后，旧的机器译不会自动升级（机器翻译不覆盖已有译文）——
+            // 这里把「术语对不上」的机器译条目挑出来重翻（玩家的手改不动）。
+            var glossaryRepair = this.GlossaryRepairCount();
+            if (ImGui.MenuItem($"按术语表重译（{glossaryRepair} 条）", enabled: !busy && glossaryRepair > 0))
+            {
+                var repairTargets = this.GlossaryRepairTargets();
+                this.StartTranslate(repairTargets);
+                this.SetStatus($"正在按术语表重译 {repairTargets.Count} 条…", false);
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("术语表更新后，旧的机器翻译不会自己升级；这一项把「术语对不上」的条目挑出来重翻。\n玩家自己改过的译文不会被动。");
             }
 
             ImGui.Separator();
@@ -1392,6 +1447,7 @@ internal sealed class UITextEditorWindow : Window
 
     private void MarkDirty()
     {
+        this.glossaryRepairCache = null;
         if (!this.dirty)
         {
             this.dirty = true;
