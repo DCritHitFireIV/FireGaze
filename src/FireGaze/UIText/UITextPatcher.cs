@@ -54,6 +54,12 @@ internal sealed class UITextPatchOutcome
     /// </summary>
     public bool NoMatch { get; set; }
 
+    /// <summary>
+    ///     调试符号（PDB）没能保进新文件，退回了「不带 PDB 写」——插件里用 StackFrame 的地方可能报 null
+    /// （Collections 实测过 NRE）。写盘前会记一条警告日志（2026-10-03 评审 B-11）。
+    /// </summary>
+    public bool PdbDropped { get; set; }
+
     public bool Ok => this.Error is null;
 }
 
@@ -233,7 +239,7 @@ internal static class UITextPatcher
 
                 // 版本号顺手写进注释？不需要——但保留参数是为了将来做「版本戳」用
                 _ = pluginVersion;
-                WriteModule(module, tempPath);
+                WriteModule(module, tempPath, outcome);
             }
 
             File.Move(tempPath, targetPath, overwrite: true);
@@ -309,6 +315,13 @@ internal static class UITextPatcher
             }
 
             suffixMap.TryAdd("###" + original, original);
+            // 原文自带 ### 的：补丁写出来是「译文 + 原文的 ID 段」，suffixMap 的「###全原文」对不上，
+            // 额外登记一条「补丁产物 → 原文」的精确映射，否则这类字面量永远还原不回来（2026-10-03 评审 B-09）
+            if (UITextText.IDPart(original).Length > 0)
+            {
+                exactMap.TryAdd(UITextText.BuildPatched(original, translated, preserveID: false), original);
+            }
+
             if (exactMap.TryGetValue(translated, out var existing) && !string.Equals(existing, original, StringComparison.Ordinal))
             {
                 ambiguous.Add(translated);
@@ -375,7 +388,7 @@ internal static class UITextPatcher
                     return outcome;
                 }
 
-                WriteModule(module, tempPath);
+                WriteModule(module, tempPath, outcome);
             }
 
             File.Move(tempPath, targetPath, overwrite: true);
@@ -391,13 +404,19 @@ internal static class UITextPatcher
     }
 
     /// <summary>
-    ///     按「<c>###原文</c> 后缀 / 译文精确匹配」还原一条字面量；还原不了返回 null（纯函数，方便离线测）。
+    ///     按「译文精确匹配 / <c>###原文</c> 后缀」还原一条字面量；还原不了返回 null（纯函数，方便离线测）。
+    ///     先试精确映射（能处理「原文自带 ###」这类只有补丁产物才对得上的情况），再走 ### 后缀。
     /// </summary>
     public static string? RecoverLiteral(
         string literal,
         IReadOnlyDictionary<string, string> suffixMap,
         IReadOnlyDictionary<string, string> exactMap)
     {
+        if (exactMap.TryGetValue(literal, out var byExact) && !string.Equals(byExact, literal, StringComparison.Ordinal))
+        {
+            return byExact;
+        }
+
         var index = literal.IndexOf(UITextText.IDSeparator, StringComparison.Ordinal);
         while (index >= 0)
         {
@@ -410,9 +429,7 @@ internal static class UITextPatcher
             index = literal.IndexOf(UITextText.IDSeparator, index + UITextText.IDSeparator.Length, StringComparison.Ordinal);
         }
 
-        return exactMap.TryGetValue(literal, out var byExact) && !string.Equals(byExact, literal, StringComparison.Ordinal)
-            ? byExact
-            : null;
+        return null;
     }
 
     /// <summary>
@@ -656,7 +673,8 @@ internal static class UITextPatcher
 
                         if (keys.TryGetValue(resourceKey, out var entry))
                         {
-                            items.Add((resourceKey, entry.Translated));
+                            // 写回用 Trim 后的值：反向还原是按 Trim 比较的（不统一会还原不回来，2026-10-03 评审 B-12）
+                            items.Add((resourceKey, entry.Translated.Trim()));
                             seen.Add((container, resourceKey));
                             outcome.PatchedResources++;
                         }
@@ -840,9 +858,9 @@ internal static class UITextPatcher
     /// <summary>
     ///     写回模块：有 PDB 状态时按「内嵌可移植 PDB」写（保持调试目录）——
     ///     插件里用 <c>StackFrame.GetFileName()</c> 的代码靠它，丢了会 NRE（Collections 实测）。
-    ///     写 PDB 失败就退回不带 PDB 写，保证补丁能打上。
+    ///     写 PDB 失败就退回不带 PDB 写，保证补丁能打上（会记日志 + 在 outcome 上留标记）。
     /// </summary>
-    private static void WriteModule(ModuleDefMD module, string tempPath)
+    private static void WriteModule(ModuleDefMD module, string tempPath, UITextPatchOutcome outcome)
     {
         var options = new ModuleWriterOptions(module);
         if (module.PdbState is { } pdb)
@@ -855,9 +873,11 @@ internal static class UITextPatcher
         {
             module.Write(tempPath, options);
         }
-        catch when (options.WritePdb)
+        catch (Exception e) when (options.WritePdb)
         {
             TryDelete(tempPath);
+            outcome.PdbDropped = true;
+            Plugin.Log?.Warning(e, "[内部文本] 保留调试符号失败：本次补丁不带 PDB 写出（插件里用 StackFrame 读文件名的代码可能报错）");
             module.Write(tempPath, new ModuleWriterOptions(module));
         }
     }

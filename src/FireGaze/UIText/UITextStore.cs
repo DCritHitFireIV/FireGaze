@@ -15,6 +15,9 @@ internal sealed class UITextStore
     private readonly object gate = new();
     private readonly string? mirrorDirectory;
 
+    /// <summary>包内容的缓存（按文件写入时间 + 长度失效）：列表每 5 秒、投稿前都会读，不能每次都读盘解析（2026-10-03 B-03/C-08）。</summary>
+    private readonly Dictionary<string, (DateTime WriteUtc, long Length, UITextPack Pack)> packCache = new(StringComparer.OrdinalIgnoreCase);
+
     public UITextStore(string configDirectory, string? mirrorDirectory = null)
     {
         this.DirectoryPath = Path.Combine(configDirectory, "uitrans");
@@ -96,6 +99,46 @@ internal sealed class UITextStore
         {
             Plugin.Log?.Warning($"[内部文本] 读包失败：{path}");
             return new UITextPack { Meta = { Source = "local" } };
+        }
+    }
+
+    /// <summary>
+    ///     读一个包；文件没变时直接复用上次解析出的对象（只给只读用途：列表行摘要 / 投稿体检）。
+    ///     要改包（编辑器、翻译流程）一律走 <see cref="Load" /> 拿独立副本，避免共享实例被改。
+    /// </summary>
+    public UITextPack LoadCached(string internalName)
+    {
+        var path = this.PathOf(internalName);
+        try
+        {
+            this.EnsureRestored(internalName);
+            var info = new FileInfo(path);
+            if (!info.Exists)
+            {
+                return new UITextPack { Meta = { Source = "local" } };
+            }
+
+            lock (this.packCache)
+            {
+                if (this.packCache.TryGetValue(internalName, out var cached)
+                    && cached.WriteUtc == info.LastWriteTimeUtc
+                    && cached.Length == info.Length)
+                {
+                    return cached.Pack;
+                }
+            }
+
+            var pack = this.Load(internalName);
+            lock (this.packCache)
+            {
+                this.packCache[internalName] = (info.LastWriteTimeUtc, info.Length, pack);
+            }
+
+            return pack;
+        }
+        catch (Exception)
+        {
+            return this.Load(internalName);
         }
     }
 

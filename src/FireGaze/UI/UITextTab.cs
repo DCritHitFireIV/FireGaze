@@ -14,7 +14,7 @@ namespace FireGaze.UI;
 /// </summary>
 /// <remarks>
 ///     设计口径（2026-10-01 两路盲评后的 v2）：
-///     · 主操作只有一个名字「一键汉化」（所有状态同名，避免「该点哪个」变成阅读题）；
+///     · 主操作的名字跟着「这一步真正会做什么」走（一键汉化 / 写入并重载 / 重试），避免点了没反应；
 ///     · 状态徽标放在 meta 行行首、固定 x，方便竖向扫；
 ///     · 「还原原文」是次级文字按钮，不抢主操作；
 ///     · 取消只在翻译阶段可用；写入 / 重载阶段写明「此步不能取消」；
@@ -142,6 +142,9 @@ internal sealed class UITextTab
     /// 键存在 = 忙；值不用。</summary>
     private readonly ConcurrentDictionary<string, bool> uploading = new(StringComparer.Ordinal);
 
+    /// <summary>正在后台「整理投稿」（读包 + 体检 + 序列化）的插件，防重复点击。2026-10-03 C-08 起这些活不再在渲染线程做。</summary>
+    private readonly ConcurrentDictionary<string, bool> uploadBuilds = new(StringComparer.Ordinal);
+
     /// <summary>正在启用插件的插件（防重复点击）。同 uploading：后台会删、界面线程会查。</summary>
     private readonly ConcurrentDictionary<string, bool> enabling = new(StringComparer.Ordinal);
 
@@ -252,7 +255,7 @@ internal sealed class UITextTab
 
         ImGui.SameLine();
         ImGui.SetNextItemWidth(230);
-        ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名…", ref this.search, 128);
+        ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名 / 目录名…", ref this.search, 128);
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("插件名和内部名都能搜（内部名就是插件目录名）。");
@@ -262,7 +265,7 @@ internal sealed class UITextTab
         ImGui.TextDisabled("状态");
         ImGui.SameLine();
         ImGui.SetNextItemWidth(140);
-        var filterLabels = new[] { "全部", "未汉化", "待应用", "已汉化", "失败", "中文插件" };
+        var filterLabels = new[] { "全部", "未汉化", "待写入", "已汉化", "失败", "中文插件" };
         var filterIndex = (int)this.filter;
         if (ImGui.Combo("###UITextFilter", ref filterIndex, filterLabels, filterLabels.Length))
         {
@@ -271,7 +274,7 @@ internal sealed class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("按汉化状态筛选：未汉化 / 已翻译还没写入 / 已汉化 / 上次失败。");
+            ImGui.SetTooltip("按汉化状态筛选：未汉化 / 待写入（翻了还没写进插件）/ 已汉化 / 补丁失败 / 中文插件。");
         }
 
         ImGui.SameLine();
@@ -523,9 +526,12 @@ internal sealed class UITextTab
         {
             // 「不汉化」是终态，不算「未汉化」（避免两个词又被混在一起）
             RowFilter.Untranslated => info?.DoNotLocalize != true && (info is null || !info.HasPack || info.Translated == 0),
-            RowFilter.Pending => info is { HasPack: true, Translated: > 0 } && info.Patch != UITextPatchStatus.Applied,
+            // 「有改动待写入」也是待写入：包比补丁新时补丁状态还是 Applied，以前会从「待应用」里漏掉（2026-10-03 UI 评审 P2-1）
+            RowFilter.Pending => info is { HasPack: true, Translated: > 0 }
+                                 && (info.Patch != UITextPatchStatus.Applied || info.PackNewerThanPatch),
             RowFilter.Done => info is { Patch: UITextPatchStatus.Applied },
-            RowFilter.Failed => info is { Patch: UITextPatchStatus.Failed } || this.notes.TryGetValue(entry.InternalName, out var n) && n.Kind == NoteKind.Bad,
+            // 「失败」= 补丁失败；行内提示类的失败不混进来（以前会筛出一排看着正常的绿徽标，2026-10-03 P2-2）
+            RowFilter.Failed => info is { Patch: UITextPatchStatus.Failed },
             RowFilter.SkipList => info is { DoNotLocalize: true },
             _ => true,
         };
@@ -571,6 +577,15 @@ internal sealed class UITextTab
 
         // ── 左列：图标 + 文本块 ──
         var rowTop = ImGui.GetCursorScreenPos().Y;
+
+        // 展开指示（2026-10-03 UI 评审 P1-1）：编辑校对 / 云端译文只在展开区里，得让人看得见
+        ImGui.TextDisabled(isOpen ? "▾" : "▸");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(isOpen ? "点这一行收起。" : "点这一行展开：重新抽取 / 编辑校对 / 云端译文。");
+        }
+
+        ImGui.SameLine(0, 6);
 
         const float iconSize = 40f;
         if (!this.TryDrawIcon(plugin, iconSize))
@@ -846,6 +861,7 @@ internal sealed class UITextTab
 
     /// <summary>
     ///     一键上传：把该插件包里有译文的条目打成投稿，走中继（失败回退 GitHub 提交页）。
+    ///     读包 / 体检 / 序列化都在后台做（2026-10-03 评审 C-08：几千条时不能挂在渲染线程上）。
     /// </summary>
     private void StartUpload(InstalledPluginEntry entry)
     {
@@ -860,15 +876,57 @@ internal sealed class UITextTab
             return;
         }
 
-        var pack = this.store.Load(entry.InternalName);
+        if (!this.uploadBuilds.TryAdd(entry.InternalName, true))
+        {
+            return; // 这个插件已经有一次「整理投稿」在跑，等它弹确认框
+        }
+
+        var framework = Plugin.Framework;
+        _ = Task.Run(() =>
+        {
+            UploadBuildResult outcome;
+            try
+            {
+                outcome = this.BuildUpload(entry);
+            }
+            catch (Exception e)
+            {
+                Plugin.Log?.Warning(e, "[内部文本] 整理投稿失败");
+                outcome = new UploadBuildResult(null, "整理投稿失败：" + e.GetBaseException().Message, NoteKind.Bad);
+            }
+
+            _ = framework.RunOnFrameworkThread(() =>
+            {
+                this.uploadBuilds.TryRemove(entry.InternalName, out _);
+                if (outcome.NoteText is { Length: > 0 })
+                {
+                    this.notes[entry.InternalName] = new RowNote { Kind = outcome.NoteKind, Text = outcome.NoteText };
+                }
+
+                if (outcome.Upload is not null)
+                {
+                    this.pendingUpload = outcome.Upload;
+                    this.uploadModalNeedsOpen = true;
+                }
+            });
+        });
+    }
+
+    /// <summary>后台「整理投稿」的产物：要么给弹窗数据，要么给一条行内说明。</summary>
+    private sealed record UploadBuildResult(PendingUpload? Upload, string? NoteText, NoteKind NoteKind);
+
+    /// <summary>后台做：读包 → 滤掉不翻的 → 本地体检 → 拼 payload（不碰任何界面状态）。</summary>
+    private UploadBuildResult BuildUpload(InstalledPluginEntry entry)
+    {
+        var pack = this.store.LoadCached(entry.InternalName);
         var entries = pack.Entries.Where(e => e.HasTranslation && !pack.IsSkipped(e.Original)).ToList();
-        var resources = pack.Resources.Where(e => e.HasTranslation).ToList();
-        var attributes = pack.Attributes.Where(e => e.HasTranslation).ToList();
+        // 显式标过「不翻」的资源 / 属性也不上传（2026-10-03 评审 C-05：确认框答应过「不想分享就标不翻」）
+        var resources = pack.Resources.Where(e => e.HasTranslation && !pack.IsResourceSkipped(e.Container, e.Key)).ToList();
+        var attributes = pack.Attributes.Where(e => e.HasTranslation && !pack.IsAttributeSkipped(e.Original)).ToList();
         var total = entries.Count + resources.Count + attributes.Count;
         if (total == 0)
         {
-            this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "这个插件还没有可上传的译文。" };
-            return;
+            return new UploadBuildResult(null, "这个插件还没有可上传的译文。", NoteKind.Info);
         }
 
         // 本地体检（2026-10-03 用户要求）：不健康的条目不上传、列在确认框里让用户先修。
@@ -878,13 +936,13 @@ internal sealed class UITextTab
         var healthyAttributes = FilterHealthy(attributes, e => e.Original, e => e.Translated, e => "属性 · " + UITextQuality.Label(e.Original), problems);
         var uploadable = healthyEntries.Count + healthyResources.Count + healthyAttributes.Count;
 
-        string title;
-        string body;
+        string title = string.Empty;
+        string body = string.Empty;
+        string? noteText = null;
+        var noteKind = NoteKind.Bad;
         if (uploadable == 0)
         {
-            title = string.Empty;
-            body = string.Empty;
-            this.notes[entry.InternalName] = new RowNote { Kind = NoteKind.Bad, Text = $"本地检测：{problems.Count} 条都有问题，没有上传（看弹窗）。" };
+            noteText = $"本地检测：{problems.Count} 条都有问题，没有上传（看弹窗）。";
         }
         else
         {
@@ -892,7 +950,8 @@ internal sealed class UITextTab
                 new { type = "uit-contribution", plugin = entry.InternalName, entries = healthyEntries, resources = healthyResources, attributes = healthyAttributes },
                 new System.Text.Json.JsonSerializerOptions
                 {
-                    WriteIndented = true,
+                    // 不缩进：中继上限 60000，压掉缩进能多装不少条目（内容可读性由 issue 正文的头部说明兼顾）
+                    WriteIndented = false,
                     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 });
             // 标题里带一个英文 "contributions"：兼容线上旧版 Worker 的关键词校验（2026-10-02 修 HTTP 400 的根因）
@@ -907,7 +966,7 @@ internal sealed class UITextTab
         }
 
         // 出站内容要有知情与确认（盲评 CF-04/L1）：先把「发什么、去哪、公开性」摊开，再由用户点确认。
-        this.pendingUpload = new PendingUpload
+        var upload = new PendingUpload
         {
             Entry = entry,
             Total = uploadable,
@@ -916,7 +975,7 @@ internal sealed class UITextTab
             Body = body,
             Problems = problems,
         };
-        this.uploadModalNeedsOpen = true;
+        return new UploadBuildResult(upload, noteText, noteKind);
     }
 
     /// <summary>把一组条目里健康的挑出来，不健康的记进 <paramref name="problems" />（顺序保持）。</summary>
@@ -1016,10 +1075,14 @@ internal sealed class UITextTab
         }
 
         ImGui.TextWrapped(upload.Total > 0
-            ? $"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库，之后其他玩家「一键汉化」时能直接用到。"
+            ? upload.Problems.Count > 0
+                ? $"把「{upload.Entry.DisplayName}」的译文上传到社区公共库：这次上传 {upload.Total} 条（另有 {upload.Problems.Count} 条没过本地检测，不会上传）。"
+                : $"把「{upload.Entry.DisplayName}」已经翻好的 {upload.Total} 条译文上传到社区公共库，之后其他玩家「一键汉化」时能直接用到。"
             : $"「{upload.Entry.DisplayName}」的译文都没过本地检测，这次不上传。");
         if (upload.Total > 0)
         {
+            // 去向与公开性要说清（2026-10-03 UI 评审 P1-3：v4 已修过、本轮改装时丢了）
+            ImGui.TextWrapped("上传后会变成仓库里的一个公开 issue（所有玩家都能看到内容）；中继不可用时会改成打开填好的 GitHub 提交页，需要你在网页上按 Submit。");
             ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只上传原文、译文与代码位置，不带账号信息与 key。");
         }
 
@@ -1151,7 +1214,7 @@ internal sealed class UITextTab
 
     private void DrawExpanded(InstalledPluginEntry plugin, RowInfo? info, bool busy, bool editorOpen)
     {
-        ImGui.Indent(48f);
+        ImGui.Indent(64f);
 
         if (info is { DoNotLocalize: true })
         {
@@ -1164,7 +1227,7 @@ internal sealed class UITextTab
                 ImGui.TextDisabled("检测到以前打过汉化补丁：点这个插件的「还原原文」即可恢复原版。");
             }
 
-            ImGui.Unindent(48f);
+            ImGui.Unindent(64f);
             return;
         }
 
@@ -1244,7 +1307,7 @@ internal sealed class UITextTab
 
         this.DrawCloudPacks(plugin);
 
-        ImGui.Unindent(48f);
+        ImGui.Unindent(64f);
     }
 
     /// <summary>
@@ -1295,7 +1358,7 @@ internal sealed class UITextTab
                 });
             }
 
-            ImGui.TextDisabled(this.cloudIndexFetching ? "正在查云端译文库…" : "云端译文库暂时拉不到（关掉详情再开一次可以重试）。");
+            ImGui.TextDisabled(this.cloudIndexFetching ? "正在查云端译文库…" : "云端译文库暂时拉不到（收起这一行再展开可以重试）。");
             return;
         }
 
@@ -1315,7 +1378,7 @@ internal sealed class UITextTab
                 var other => other,
             };
             var count = pack.Entries + pack.Resources + pack.Attributes;
-            var downloads = pack.Downloads > 0 ? $"下载 {pack.Downloads}" : "下载 —";
+            var downloads = pack.Downloads > 0 ? $"下载数 {pack.Downloads}" : "下载数 —";
             var key = plugin.InternalName + "|" + (pack.File ?? pack.ID ?? "library");
 
             ImGui.TextUnformatted($"{label}（{source}）");
@@ -1452,7 +1515,7 @@ internal sealed class UITextTab
         ImGui.TextWrapped($"应用云端译文：{pending.Label}（{pending.Source}）");
         ImGui.TextDisabled($"新增 {preview.Added} 条 · 更新机器译文 {preview.Overwritten} 条 · 你的 {preview.Protected} 条人工译文保留不动 · 其余 {preview.Same} 条无变化");
         ImGui.Spacing();
-        ImGui.TextWrapped("本机人工改过的译文不会被覆盖；应用后还要点这一行的「一键汉化」才会写进插件。");
+        ImGui.TextWrapped("本机人工改过的译文不会被覆盖；应用后还要点这一行的主按钮（此时会显示「写入并重载」）才会写进插件。");
         ImGui.Separator();
         if (ImGui.Button("应用", new Vector2(100, 0)))
         {
@@ -1492,7 +1555,7 @@ internal sealed class UITextTab
                 var changed = local.MergeLibrary(fetched);
                 text = changed > 0
                     ? packStore.Save(internalName, local, out var saveError)
-                        ? $"已应用 {changed} 条，点「一键汉化」重打补丁生效"
+                        ? $"已应用 {changed} 条，点主按钮（写入并重载）重打补丁生效"
                         : "写盘失败：" + saveError
                     : "没有变化（本机已有相同或更好的译文）";
             }
@@ -1803,7 +1866,7 @@ internal sealed class UITextTab
                 this.FinishRun(run, new RowNote
                 {
                     Kind = NoteKind.Info,
-                    Text = "已是最新：没有要翻的条目，补丁也还在。想改某条译文，去行尾「详情 → 编辑校对」。",
+                    Text = "已是最新：没有要翻的条目，补丁也还在。想改某条译文，点这一行展开 → 「编辑校对…」。",
                 });
                 this.rowsDirty = true;
                 return;
@@ -2088,27 +2151,49 @@ internal sealed class UITextTab
             {
                 ActivityLog.Info("反馈", $"提交反馈（{category}，{text.Length} 字，附带日志={attachLog}）");
                 var (ok, message) = await FeedbackSender.SendAsync(category, text, attachLog).ConfigureAwait(false);
-                this.feedbackSending = false;
+                // 这些字段是绘制线程读的，必须回主体线程写（2026-10-03 评审 C-11）
+                await Plugin.Framework.RunOnFrameworkThread(() =>
+                {
+                    this.feedbackSending = false;
+                    if (ok)
+                    {
+                        this.feedbackStatus = "已提交，感谢反馈！";
+                        this.feedbackStatusError = false;
+                        this.feedbackSentURL = message;
+                        this.feedbackText = string.Empty;
+                    }
+                    else
+                    {
+                        this.feedbackStatus = "发送失败：" + message + "（内容还在，可以稍后重试）";
+                        this.feedbackStatusError = true;
+                    }
+                }).ConfigureAwait(false);
+
                 if (ok)
                 {
-                    this.feedbackStatus = "已提交，感谢反馈！";
-                    this.feedbackStatusError = false;
-                    this.feedbackSentURL = message;
-                    this.feedbackText = string.Empty;
                     ActivityLog.Info("反馈", "提交成功：" + message);
                 }
                 else
                 {
-                    this.feedbackStatus = "发送失败：" + message + "（内容还在，可以稍后重试）";
-                    this.feedbackStatusError = true;
                     ActivityLog.Warning("反馈", "提交失败：" + message);
                 }
             }
             catch (Exception e)
             {
-                this.feedbackSending = false;
-                this.feedbackStatus = "发送失败：" + e.GetBaseException().Message + "（内容还在，可以稍后重试）";
-                this.feedbackStatusError = true;
+                try
+                {
+                    await Plugin.Framework.RunOnFrameworkThread(() =>
+                    {
+                        this.feedbackSending = false;
+                        this.feedbackStatus = "发送失败：" + e.GetBaseException().Message + "（内容还在，可以稍后重试）";
+                        this.feedbackStatusError = true;
+                    }).ConfigureAwait(false);
+                }
+                catch (Exception)
+                {
+                    // 忽略
+                }
+
                 ActivityLog.Error("反馈", "提交异常", e);
             }
         });
@@ -2738,7 +2823,8 @@ internal sealed class UITextTab
                     PackNewerThanPatch = this.patches.PackNewerThanPatch(entry),
                 };
 
-                var pack = this.store.Load(entry.InternalName);
+                // 行摘要只看不写：用带缓存的读（文件没变就不重复读盘解析，2026-10-03 B-03）
+                var pack = this.store.LoadCached(entry.InternalName);
                 if (File.Exists(Path.Combine(this.store.DirectoryPath, entry.InternalName + ".json")))
                 {
                     row.HasPack = true;

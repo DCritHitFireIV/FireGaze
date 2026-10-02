@@ -1451,15 +1451,15 @@ internal sealed class UITextEditorWindow : Window
         }
 
         var entries = this.pack.Entries
-            .Where(e => e.IsUserSource && e.HasTranslation && Healthy("条目", e.Original, e.Translated))
+            .Where(e => e.IsUserSource && e.HasTranslation && !this.pack.IsSkipped(e.Original) && Healthy("条目", e.Original, e.Translated))
             .Select(e => new { e.Original, e.Translated, Context = e.Context ?? string.Empty })
             .ToList();
         var resources = this.pack.Resources
-            .Where(r => r.IsUserSource && r.HasTranslation && Healthy("资源", r.Original, r.Translated))
+            .Where(r => r.IsUserSource && r.HasTranslation && !this.pack.IsResourceSkipped(r.Container, r.Key) && Healthy("资源", r.Original, r.Translated))
             .Select(r => new { r.Container, r.Key, r.Original, r.Translated })
             .ToList();
         var attributes = this.pack.Attributes
-            .Where(a => a.IsUserSource && a.HasTranslation && Healthy("属性", a.Original, a.Translated))
+            .Where(a => a.IsUserSource && a.HasTranslation && !this.pack.IsAttributeSkipped(a.Original) && Healthy("属性", a.Original, a.Translated))
             .Select(a => new { a.Original, a.Translated })
             .ToList();
         var total = entries.Count + resources.Count + attributes.Count;

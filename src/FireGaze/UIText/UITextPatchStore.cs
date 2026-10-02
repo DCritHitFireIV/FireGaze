@@ -191,6 +191,9 @@ internal sealed class UITextPatchStore
     private readonly string? originalsDirectory;
     private readonly object gate = new();
 
+    /// <summary>状态文件按「写入时间 + 长度」缓存的读结果：列表每 5 秒、编辑器每帧都会问一遍，不能每次都读盘解析。</summary>
+    private readonly Dictionary<string, (DateTime WriteUtc, long Length, UITextPatchState? State)> loadCache = new(StringComparer.OrdinalIgnoreCase);
+
     public UITextPatchStore(string configDirectory, string? durableOriginalsDirectory = null)
     {
         this.stateDirectory = Path.Combine(configDirectory, "uitrans", "state");
@@ -222,9 +225,53 @@ internal sealed class UITextPatchStore
     }
 
     /// <summary>
-    ///     写状态。
+    ///     读补丁状态：文件没变（写入时间 + 长度一致）时复用上次读出来的结果，不重复读盘解析。
+    ///     界面每帧 / 每 5 秒都会问状态，走这条路（2026-10-03 B-01/B-03）。
     /// </summary>
-    public void Save(UITextPatchState state)
+    public UITextPatchState? LoadCached(string internalName)
+    {
+        var path = this.PathOf(internalName);
+        try
+        {
+            var info = new FileInfo(path);
+            if (!info.Exists)
+            {
+                lock (this.loadCache)
+                {
+                    this.loadCache.Remove(internalName);
+                }
+
+                return null;
+            }
+
+            lock (this.loadCache)
+            {
+                if (this.loadCache.TryGetValue(internalName, out var cached)
+                    && cached.WriteUtc == info.LastWriteTimeUtc
+                    && cached.Length == info.Length)
+                {
+                    return cached.State;
+                }
+            }
+
+            var state = this.Load(internalName);
+            lock (this.loadCache)
+            {
+                this.loadCache[internalName] = (info.LastWriteTimeUtc, info.Length, state);
+            }
+
+            return state;
+        }
+        catch (Exception)
+        {
+            return this.Load(internalName);
+        }
+    }
+
+    /// <summary>
+    ///     写状态；返回是否真的写成功了（写失败时调用方不能再把这次新建的备份当孤儿清掉——那是唯一能还原的原始件）。
+    /// </summary>
+    public bool Save(UITextPatchState state)
     {
         var path = this.PathOf(state.InternalName);
         try
@@ -236,10 +283,26 @@ internal sealed class UITextPatchStore
                 File.WriteAllText(temp, JsonSerializer.Serialize(state, Options) + Environment.NewLine, new System.Text.UTF8Encoding(false));
                 File.Move(temp, path, overwrite: true);
             }
+
+            try
+            {
+                var info = new FileInfo(path);
+                lock (this.loadCache)
+                {
+                    this.loadCache[state.InternalName] = (info.LastWriteTimeUtc, info.Length, state);
+                }
+            }
+            catch (Exception)
+            {
+                // 缓存更新失败不影响写盘结果
+            }
+
+            return true;
         }
         catch (Exception e)
         {
             Plugin.Log?.Warning(e, "[内部文本] 写补丁状态失败：{Path}", path);
+            return false;
         }
     }
 
@@ -259,6 +322,11 @@ internal sealed class UITextPatchStore
         catch (Exception)
         {
             // 删不掉不影响使用
+        }
+
+        lock (this.loadCache)
+        {
+            this.loadCache.Remove(internalName);
         }
     }
 

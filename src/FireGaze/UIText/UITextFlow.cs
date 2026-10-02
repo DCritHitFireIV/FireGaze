@@ -156,6 +156,14 @@ internal static class UITextFlow
         }
 
         result.Prune = pack.PruneAgainstExtraction(extraction);
+
+        // 清账把条目改成「不翻」= 盘上的旧译文也得撤掉：不置 ReapplyNeeded 的话，
+        // 列表页会以「已经是最新」短路，补丁里的旧译文永远留着（2026-10-03 评审 B-05）
+        if (result.Prune.Any)
+        {
+            result.ReapplyNeeded = true;
+        }
+
         return result;
     }
 
@@ -364,6 +372,14 @@ internal static class UITextFlow
                 continue;
             }
 
+            // 同值的其它 key 已有译文（可能是人工改过的）就不动它：本批只补缺
+            //（2026-10-03 评审 B-04：资源按「原文值」匹配，一值多 key，旧行为会顶掉人工译文）
+            if (entry.HasTranslation)
+            {
+                unchanged++;
+                continue;
+            }
+
             var clean = UITextText.CleanTranslated(value);
             if (string.IsNullOrWhiteSpace(clean)
                 || string.Equals(clean, UITextText.ForTranslation(entry.Original), StringComparison.Ordinal))
@@ -396,6 +412,13 @@ internal static class UITextFlow
 
             if (pack.IsAttributeSkipped(entry.Original))
             {
+                continue;
+            }
+
+            // 同属性已有译文就不动（同上）
+            if (entry.HasTranslation)
+            {
+                unchanged++;
                 continue;
             }
 

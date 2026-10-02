@@ -541,6 +541,13 @@ internal sealed class UITextPack
         this.EnsureIndex();
         foreach (var incoming in library.Entries)
         {
+            // 占位符对不上的库译文绝不写进包（打进去会让插件运行时 FormatException，2026-10-03 评审 B-10）
+            if (incoming.HasTranslation && UITextText.CheckPlaceholders(incoming.Original, incoming.Translated) is { } placeholderProblem)
+            {
+                Plugin.Log?.Warning($"[内部文本] 库译文没通过占位符校验，跳过：{UITextText.OneLine(incoming.Original, 40)}（{placeholderProblem}）");
+                continue;
+            }
+
             var existing = this.Find(incoming.Original);
             if (existing is null)
             {
@@ -603,6 +610,12 @@ internal sealed class UITextPack
         // 资源条目：同一套优先级——玩家自己改过的（user）永不被库顶掉；ai / library 可以被库更新覆盖。
         foreach (var incoming in library.Resources)
         {
+            if (incoming.HasTranslation && UITextText.CheckPlaceholders(incoming.Original, incoming.Translated) is { } placeholderProblem)
+            {
+                Plugin.Log?.Warning($"[内部文本] 库译文（资源）没通过占位符校验，跳过：{UITextText.OneLine(incoming.Original, 40)}（{placeholderProblem}）");
+                continue;
+            }
+
             var existing = this.FindResource(incoming.Container, incoming.Key);
             if (existing is null)
             {
@@ -665,6 +678,12 @@ internal sealed class UITextPack
         // 属性条目：同一套优先级
         foreach (var incoming in library.Attributes)
         {
+            if (incoming.HasTranslation && UITextText.CheckPlaceholders(incoming.Original, incoming.Translated) is { } placeholderProblem)
+            {
+                Plugin.Log?.Warning($"[内部文本] 库译文（属性）没通过占位符校验，跳过：{UITextText.OneLine(incoming.Original, 40)}（{placeholderProblem}）");
+                continue;
+            }
+
             var existing = this.FindAttribute(incoming.Original);
             if (existing is null)
             {

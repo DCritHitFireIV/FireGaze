@@ -8,14 +8,21 @@
 payload（只有 type==uit-contribution 才处理）：
 {
   "type": "uit-contribution", "plugin": "AutoHook",
-  "entries":   [{"Original": "...", "Translated": "...", "Context": "..."}],
+  "entries":   [{"Original": "...", "Translated": "...", "Context": "...", "Source": "user"}],
   "resources": [{"Container": "...resources", "Key": "...", "Original": "...", "Translated": "..."}]
 }
 
+容器名支持三类（2026-10-03 与服务端对齐）：
+  · `<程序集名>.resources`（DLL 内嵌资源）
+  · `file:<相对路径>`（插件目录里的本地化文件，如 file:Localization/zh-CN.json）
+  · `json:<资源名>.json`（DLL 内嵌 JSON 语言表，如 json:HaselTweaks.Translations.json）
+
 口径：
-  · 只改译文与 Source，不删条目；玩家译在库包里标 user（插件侧合并时 user 永不被顶）；
+  · 只改译文与 Source，不删条目；**人工译（Source=user）才允许覆盖**，机器译只补空槽——
+    否则一份来自旧模型的机器译会把人写的译文永久顶掉（2026-10-03 评审 C-01）；
   · 硬问题（空译文 / 超长 / 控制字符 / 容器名不合法）直接跳过并在回话里点名；
-  · 容器名必须在库包或索引里能找到对应插件，防误投。
+  · 库里没有该插件的包时**新建一个空包**再收（2026-10-03 评审 C-04：客户端只会在中继返回成功时
+    报「已上传」，若服务端直接退回就会变成谎报）；未收录插件的包会随下一次库更新进索引。
 """
 
 from __future__ import annotations
@@ -37,7 +44,29 @@ INBOX_DIR = os.path.join(REPO_ROOT, "docs", "contributions", "inbox")
 MAX_ENTRIES = 3000
 MAX_TRANSLATED = 2000
 MAX_ORIGINAL = 4000
-CONTAINER = re.compile(r"^[A-Za-z0-9_.\-]+\.resources$")
+CONTAINER_RESOURCES = re.compile(r"^[A-Za-z0-9_.\-]+\.resources$")
+
+
+def valid_container(container: str) -> bool:
+    """容器名合法性（与插件端三类容器对齐：程序集资源 / file: / json:）。"""
+    if CONTAINER_RESOURCES.match(container):
+        return True
+    if container.startswith("file:"):
+        rel = container[5:]
+        if not rel or len(rel) > 200 or rel.startswith("/") or "\\" in rel or ".." in rel:
+            return False
+        return all(ch.isalnum() or ch in "._-/ " for ch in rel)
+    if container.startswith("json:"):
+        name = container[5:]
+        return bool(name) and len(name) <= 200 and name.endswith(".json") and all(
+            ch.isalnum() or ch in "._-" for ch in name
+        )
+    return False
+
+
+def is_user_source(item: dict) -> bool:
+    """投稿条目是不是人工译（客户端会把每条自己的 Source 带上来）。"""
+    return str(item.get("Source") or "").strip().lower().startswith("user")
 
 
 def load_json(path: str):
@@ -93,7 +122,20 @@ def main(argv=None) -> int:
     pack_path = os.path.join(args.packs_dir, plugin + ".json")
     pack = load_json(pack_path)
     if pack is None:
-        return fail(args, f"库里还没有 `{plugin}` 的包（必须先有生成的包才能收译文）。")
+        # 未收录插件的投稿：新建空包再收（2026-10-03 C-04：客户端只会在中继成功时报成功，
+        # 服务端直接退回就等于谎报；新包会随下一次库更新进索引，可直接被其他玩家下载）
+        os.makedirs(args.packs_dir, exist_ok=True)
+        pack = {
+            "_meta": {"source": "contribution", "updatedAt": time.strftime("%Y-%m-%d")},
+            "entries": [],
+            "resources": [],
+            "attributes": [],
+        }
+        print(f"库里还没有 {plugin} 的包：新建一个空包再收。")
+
+    pack.setdefault("entries", [])
+    pack.setdefault("resources", [])
+    pack.setdefault("attributes", [])
 
     entries_by_original = {e.get("Original", ""): e for e in pack.get("entries") or []}
     resources_by_key = {
@@ -101,6 +143,9 @@ def main(argv=None) -> int:
     }
 
     accepted = 0
+    filled = 0
+    overwritten = 0
+    kept = 0
     rejected: list[str] = []
     for item in (payload.get("entries") or [])[:MAX_ENTRIES]:
         if not isinstance(item, dict):
@@ -111,14 +156,31 @@ def main(argv=None) -> int:
         if reason:
             rejected.append(f"`{original[:40]}`：{reason}")
             continue
+        user_source = is_user_source(item)
         target = entries_by_original.get(original)
         if target is None:
-            target = {"Original": original, "Translated": "", "Context": str(item.get("Context") or "")}
+            target = {"Original": original, "Translated": translated, "Context": str(item.get("Context") or "")}
+            target["Source"] = "user" if user_source else "library"
             pack["entries"].append(target)
             entries_by_original[original] = target
-        target["Translated"] = translated
-        target["Source"] = "user"
-        accepted += 1
+            accepted += 1
+            filled += 1
+            continue
+
+        existing = str(target.get("Translated") or "").strip()
+        if user_source:
+            target["Translated"] = translated
+            target["Source"] = "user"
+            accepted += 1
+            overwritten += 1
+        elif not existing:
+            target["Translated"] = translated
+            target.setdefault("Source", "library")
+            accepted += 1
+            filled += 1
+        else:
+            # 机器译不覆盖已有内容（保护人工译不被旧模型永久顶掉）
+            kept += 1
 
     for item in (payload.get("resources") or [])[:MAX_ENTRIES]:
         if not isinstance(item, dict):
@@ -127,21 +189,37 @@ def main(argv=None) -> int:
         key = str(item.get("Key") or "")
         original = str(item.get("Original") or "")
         translated = str(item.get("Translated") or "")
-        if not CONTAINER.match(container) or not key or len(key) > 200:
+        if not valid_container(container) or not key or len(key) > 200:
             rejected.append(f"`{container} / {key[:40]}`：容器名或 key 不合法")
             continue
         reason = check_text(original, translated)
         if reason:
             rejected.append(f"`{key[:40]}`：{reason}")
             continue
+        user_source = is_user_source(item)
         target = resources_by_key.get((container, key))
         if target is None:
-            target = {"Container": container, "Key": key, "Original": original, "Translated": ""}
+            target = {"Container": container, "Key": key, "Original": original, "Translated": translated}
+            target["Source"] = "user" if user_source else "library"
             pack["resources"].append(target)
             resources_by_key[(container, key)] = target
-        target["Translated"] = translated
-        target["Source"] = "user"
-        accepted += 1
+            accepted += 1
+            filled += 1
+            continue
+
+        existing = str(target.get("Translated") or "").strip()
+        if user_source:
+            target["Translated"] = translated
+            target["Source"] = "user"
+            accepted += 1
+            overwritten += 1
+        elif not existing:
+            target["Translated"] = translated
+            target.setdefault("Source", "library")
+            accepted += 1
+            filled += 1
+        else:
+            kept += 1
 
     attributes_by_original = {a.get("Original", ""): a for a in pack.get("attributes") or []}
     for item in (payload.get("attributes") or [])[:MAX_ENTRIES]:
@@ -153,24 +231,32 @@ def main(argv=None) -> int:
         if reason:
             rejected.append(f"`{original[:40]}`：{reason}")
             continue
+        user_source = is_user_source(item)
         target = attributes_by_original.get(original)
         if target is None:
-            target = {"Original": original, "Translated": "", "Context": "[投稿]"}
-            pack.setdefault("attributes", []).append(target)
+            target = {"Original": original, "Translated": translated, "Context": "[投稿]"}
+            target["Source"] = "user" if user_source else "library"
+            pack["attributes"].append(target)
             attributes_by_original[original] = target
-        target["Translated"] = translated
-        target["Source"] = "user"
-        accepted += 1
+            accepted += 1
+            filled += 1
+            continue
 
-    if accepted == 0:
-        return fail(args, "这条 issue 里没有可收录的译文。")
+        existing = str(target.get("Translated") or "").strip()
+        if user_source:
+            target["Translated"] = translated
+            target["Source"] = "user"
+            accepted += 1
+            overwritten += 1
+        elif not existing:
+            target["Translated"] = translated
+            target.setdefault("Source", "library")
+            accepted += 1
+            filled += 1
+        else:
+            kept += 1
 
-    meta = pack.setdefault("_meta", {})
-    meta["updatedAt"] = time.strftime("%Y-%m-%d")
-    meta.setdefault("source", "library")
-    save_json(pack_path, pack)
-    refresh_index(args.packs_dir)
-
+    # 无论收录多少都留档：被退回的投稿也要能查（2026-10-03 评审 C-04）
     os.makedirs(args.out_dir, exist_ok=True)
     archive = os.path.join(args.out_dir, f"uit-{args.issue}-{time.strftime('%Y-%m-%dT%H%M%S')}.json")
     save_json(archive, {
@@ -179,16 +265,43 @@ def main(argv=None) -> int:
         "author": args.author,
         "plugin": plugin,
         "accepted": accepted,
+        "filled": filled,
+        "overwritten": overwritten,
+        "kept": kept,
         "rejected": rejected[:50],
         "payload": payload,
     })
 
-    print(f"收录 {accepted} 条（{plugin}），留档 {os.path.relpath(archive, REPO_ROOT)}")
+    if accepted == 0:
+        if kept:
+            return fail(args, f"这条 issue 里没有可收录的新译文：{kept} 条已有内容，而机器译不会覆盖已有译文（人工改过的译文才会；译文都还在插件本地）。")
+        return fail(args, "这条 issue 里没有可收录的译文。")
+
+    meta = pack.setdefault("_meta", {})
+    meta["updatedAt"] = time.strftime("%Y-%m-%d")
+    meta.setdefault("source", "library")
+    save_json(pack_path, pack)
+    refresh_index(args.packs_dir)
+
+    detail = f"收录 {accepted} 条（{plugin}）"
+    if filled:
+        detail += f"，其中补缺 {filled} 条"
+    if overwritten:
+        detail += f"，覆盖（人工译）{overwritten} 条"
+    if kept:
+        detail += f"，跳过 {kept} 条机器译（已有内容不覆盖）"
+    print(detail + f"，留档 {os.path.relpath(archive, REPO_ROOT)}")
     if args.summary_out:
         with open(args.summary_out, "w", encoding="utf-8", newline="\n") as handle:
             handle.write(f"issue #{args.issue}：{accepted} 条 {plugin} 界面文字译文（已并入 uit-packs）")
     if args.comment_out:
         lines = [f"收到 {accepted} 条 `{plugin}` 的界面文字译文，已并入 `uit-packs/{plugin}.json`（下次库更新时对玩家生效）。", ""]
+        if filled or overwritten:
+            lines.append(f"其中补缺 {filled} 条、覆盖人工译 {overwritten} 条。")
+            lines.append("")
+        if kept:
+            lines.append(f"另有 {kept} 条机器译因为库里已有内容而没有覆盖（人工改过的译文才会覆盖已有值）。")
+            lines.append("")
         if rejected:
             lines.append(f"其中 {len(rejected)} 条没能收录：")
             lines.append("")

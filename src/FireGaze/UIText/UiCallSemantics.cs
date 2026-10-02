@@ -294,7 +294,9 @@ internal static class UICallSemantics
         {
             if (typeFullName.StartsWith(prefix, StringComparison.Ordinal))
             {
-                return true;
+                // 包装类一样会转手调 ImGui 的纯 ID 接口（ImRaii.Child / PushId / BeginTable…），
+                // 参数是标识串、不会画出来，不能当界面文本（2026-10-03 评审 A2）
+                return !NonTextCalls.Contains(methodName);
             }
         }
 
@@ -410,12 +412,15 @@ internal static class UICallSemantics
     private static readonly HashSet<string> NonTextCalls = new(StringComparer.Ordinal)
     {
         "PushID",
+        "PushId",
         "PopID",
         "GetID",
         "SetDragDropPayload",
         "AcceptDragDropPayload",
         "SetClipboardText",
         "BeginChild",
+        "Child",
+        "BeginTable",
         "BeginTabBar",
         "SetNextWindowClass",
         "GetProcAddress",

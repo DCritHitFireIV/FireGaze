@@ -57,6 +57,18 @@ internal sealed class UITextPatchManager
     private readonly Dictionary<string, DateTime> adoptRejectedAt = new(StringComparer.OrdinalIgnoreCase);
     private readonly object adoptGate = new();
 
+    /// <summary>文件哈希缓存（按写入时间 + 长度失效）：编辑器每帧 / 列表每 5 秒问状态，不能每次都全量 SHA-256（2026-10-03 B-01/B-03）。</summary>
+    private readonly Dictionary<string, (long Length, DateTime WriteUtc, string Hash)> hashCache = new(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>写盘（打补丁 / 还原）的互斥：后台自动重打与界面发起的操作可能撞在一起，备份清理必须串行（2026-10-03 B-07）。</summary>
+    private readonly object applyGate = new();
+
+    /// <summary>后台补丁巡检是否在跑（Tick 每 5 秒只派一次）。</summary>
+    private volatile bool tickWorkActive;
+
+    /// <summary>已装插件索引的重建锁（后台巡检与界面可能同时问）。</summary>
+    private readonly object indexGate = new();
+
     public UITextPatchManager(Plugin plugin)
     {
         this.plugin = plugin;
@@ -70,7 +82,7 @@ internal sealed class UITextPatchManager
     /// </summary>
     private UITextPatchState? LoadStateOrAdopt(InstalledPluginEntry entry)
     {
-        var state = this.store.Load(entry.InternalName);
+        var state = this.store.LoadCached(entry.InternalName);
         if (state is not null)
         {
             return state;
@@ -99,6 +111,8 @@ internal sealed class UITextPatchManager
         if (adopted is not null)
         {
             Plugin.Log?.Information($"[内部文本] {entry.InternalName}：补丁记录丢了，已从持久备份目录认领（{adopted.EffectiveFiles.Count} 个文件）");
+            // 认领完把状态落回配置目录：否则每次问状态都要重新读清单 + 全量哈希（编辑器每帧会问）
+            this.store.Save(adopted);
             return adopted;
         }
 
@@ -143,7 +157,7 @@ internal sealed class UITextPatchManager
                 return UITextPatchStatus.NeedsRepatch;
             }
 
-            var hash = UITextPatchStore.HashOf(file.Path);
+            var hash = this.CachedHash(file.Path);
             if (hash.Length == 0)
             {
                 detail = "算不出文件哈希";
@@ -305,22 +319,35 @@ internal sealed class UITextPatchManager
     /// </remarks>
     public (bool Ok, string Message) Apply(InstalledPluginEntry entry, bool allowRecovery = true)
     {
-        var backupsBefore = this.SnapshotBackupFiles();
-        var originalsBefore = this.store.SnapshotOriginals();
-        var (ok, message) = this.ApplyCore(entry, allowRecovery);
+        lock (this.applyGate)
+        {
+            var backupsBefore = this.SnapshotBackupFiles();
+            var originalsBefore = this.store.SnapshotOriginals();
+            var (ok, message) = this.ApplyCore(entry, allowRecovery, out var statePersisted);
 
-        // 清理本次新建、又没人引用的备份：失败时要清（不然留一堆「当前文件的快照」）；
-        // 成功时也要清——被跳过的伴生程序集（一条都对不上）同样在备份阶段留了一份，
-        // 但它不是补丁记录的一部分（2026-10-02 AutoHook.FishSolver 实测）。
-        this.DeleteUnreferencedBackups(backupsBefore);
-        this.DeleteUnreferencedOriginals(originalsBefore);
+            // 清理本次新建、又没人引用的备份：失败时要清（不然留一堆「当前文件的快照」）；
+            // 成功时也要清——被跳过的伴生程序集（一条都对不上）同样在备份阶段留了一份，
+            // 但它不是补丁记录的一部分（2026-10-02 AutoHook.FishSolver 实测）。
+            // 唯一的例外：补丁写进去了、状态却没保存成功——这份备份是唯一的还原凭据，必须留下（2026-10-03 B-06）。
+            if (!ok || statePersisted)
+            {
+                this.DeleteUnreferencedBackups(backupsBefore);
+                this.DeleteUnreferencedOriginals(originalsBefore);
+            }
+            else
+            {
+                Plugin.Log?.Warning($"[内部文本] {entry.InternalName}：补丁已写入但状态保存失败，保留本次备份以防万一");
+            }
 
-        return (ok, message);
+            this.ClearHashCache();
+            return (ok, message);
+        }
     }
 
-    /// <summary>打补丁的主体（失败清理包在外面，见 <see cref="Apply" />）。</summary>
-    private (bool Ok, string Message) ApplyCore(InstalledPluginEntry entry, bool allowRecovery = true)
+    /// <summary>打补丁的主体（失败清理包在外面，见 <see cref="Apply" />）。<paramref name="statePersisted" /> = 补丁状态是否写盘成功。</summary>
+    private (bool Ok, string Message) ApplyCore(InstalledPluginEntry entry, bool allowRecovery, out bool statePersisted)
     {
+        statePersisted = false;
         if (UITextRules.IsDoNotLocalize(entry.InternalName))
         {
             return (false, "识别为中文插件。");
@@ -482,7 +509,8 @@ internal sealed class UITextPatchManager
                     {
                         TryDeleteDirectory(recoveryTmp); // 重试用的是持久备份，还原出来的临时文件用不上了
                         Plugin.Log?.Information($"[内部文本] {entry.InternalName}：打补丁一条都没对上，{recoveryNote}；已自动重试");
-                        var (retryOk, retryMessage) = this.ApplyCore(entry, allowRecovery: false);
+                        var (retryOk, retryMessage) = this.ApplyCore(entry, allowRecovery: false, out var retryPersisted);
+                        statePersisted = retryPersisted;
                         return retryOk ? (true, recoveryNote + "；" + retryMessage) : (false, retryMessage);
                     }
                 }
@@ -639,7 +667,7 @@ internal sealed class UITextPatchManager
             PendingVerify = true,
             PendingSince = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
         };
-        this.store.Save(newState);
+        statePersisted = this.store.Save(newState);
         // 持久目录里落一份自证清单：补丁记录被重置时靠它 + 文件哈希认领回原始备份
         this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, stateFiles, pluginDirectory);
 
@@ -1340,9 +1368,17 @@ internal sealed class UITextPatchManager
     }
 
     /// <summary>
-    ///     还原成原始 DLL。
+    ///     还原成原始 DLL（与打补丁互斥：后台自动重打可能同时改同一个插件）。
     /// </summary>
     public (bool Ok, string Message) Restore(InstalledPluginEntry entry, string? reason = null)
+    {
+        lock (this.applyGate)
+        {
+            return this.RestoreCore(entry, reason);
+        }
+    }
+
+    private (bool Ok, string Message) RestoreCore(InstalledPluginEntry entry, string? reason)
     {
         var state = this.LoadStateOrAdopt(entry);
         if (state is null)
@@ -1394,6 +1430,7 @@ internal sealed class UITextPatchManager
 
         this.store.Delete(entry.InternalName);
         this.store.RemoveOriginals(state);
+        this.ClearHashCache();
         var suffix = reason is null ? string.Empty : $"（{reason}）";
         Plugin.Log?.Information($"[内部文本] {entry.InternalName}：已还原原始 DLL{suffix}（{restored} 个文件）");
         return (true, "已还原成原始文件" + suffix + "；重载插件后恢复英文。");
@@ -1528,15 +1565,39 @@ internal sealed class UITextPatchManager
             _ = Task.Run(this.MigrateLegacyBackups);
         }
 
-        this.CheckPending();
+        var checkRepatch = (DateTime.Now - this.lastRepatchCheck).TotalSeconds >= RepatchCheckSeconds;
+        if (checkRepatch)
+        {
+            this.lastRepatchCheck = DateTime.Now;
+        }
 
-        if ((DateTime.Now - this.lastRepatchCheck).TotalSeconds < RepatchCheckSeconds)
+        // 状态复核与「更新后自动重打」都含读盘 / 全量哈希 / dnlib 读改写（自动重打甚至会写盘 + 重载）——
+        // 一律放后台，绝不能占渲染线程（2026-10-03 B-02）。同一时刻只跑一轮。
+        if (this.tickWorkActive)
         {
             return;
         }
 
-        this.lastRepatchCheck = DateTime.Now;
-        this.RepatchUpdated();
+        this.tickWorkActive = true;
+        _ = Task.Run(() =>
+        {
+            try
+            {
+                this.CheckPending();
+                if (checkRepatch)
+                {
+                    this.RepatchUpdated();
+                }
+            }
+            catch (Exception e)
+            {
+                Plugin.Log?.Warning(e, "[内部文本] 后台补丁巡检失败");
+            }
+            finally
+            {
+                this.tickWorkActive = false;
+            }
+        });
     }
 
     /// <summary>
@@ -1603,7 +1664,7 @@ internal sealed class UITextPatchManager
                 break;
             }
 
-            var hash = UITextPatchStore.HashOf(file.Path);
+            var hash = this.CachedHash(file.Path);
             if (hash.Length == 0)
             {
                 continue;
@@ -1727,11 +1788,57 @@ internal sealed class UITextPatchManager
 
     private InstalledPluginsIndex? EnsureIndex()
     {
-        if (this.index is null || (DateTime.Now - this.index.CapturedLocal).TotalSeconds > 30)
+        lock (this.indexGate)
         {
-            this.index = InstalledPluginsIndex.Build();
-        }
+            if (this.index is null || (DateTime.Now - this.index.CapturedLocal).TotalSeconds > 30)
+            {
+                this.index = InstalledPluginsIndex.Build();
+            }
 
-        return this.index.Available ? this.index : null;
+            return this.index.Available ? this.index : null;
+        }
+    }
+
+    /// <summary>按「写入时间 + 长度」缓存的 SHA-256：文件没变就不重算（编辑器每帧 / 列表每 5 秒都会问到）。</summary>
+    private string CachedHash(string path)
+    {
+        try
+        {
+            var info = new FileInfo(path);
+            if (!info.Exists)
+            {
+                return string.Empty;
+            }
+
+            lock (this.hashCache)
+            {
+                if (this.hashCache.TryGetValue(path, out var cached)
+                    && cached.Length == info.Length
+                    && cached.WriteUtc == info.LastWriteTimeUtc)
+                {
+                    return cached.Hash;
+                }
+            }
+
+            var hash = UITextPatchStore.HashOf(path);
+            lock (this.hashCache)
+            {
+                this.hashCache[path] = (info.Length, info.LastWriteTimeUtc, hash);
+            }
+
+            return hash;
+        }
+        catch (Exception)
+        {
+            return string.Empty;
+        }
+    }
+
+    private void ClearHashCache()
+    {
+        lock (this.hashCache)
+        {
+            this.hashCache.Clear();
+        }
     }
 }
