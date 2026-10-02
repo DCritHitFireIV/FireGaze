@@ -771,6 +771,16 @@ internal sealed class UITextPatchManager
                 continue;
             }
 
+            // 补丁是「插件未加载」时打上的（ReloadAttempts 没增过）：插件现在加载了，
+            // 读的就是打好的补丁文件——已经生效，直接确认。不能干等「下次启动」：
+            // 2026-10-02 用户实测（ActionTimelineReborn 先禁用后启用，打补丁时索引还没刷新到已加载）
+            // 会卡在 PendingReload，行按钮永远不变「打开」。
+            if (state.ReloadAttempts == 0 && entry.IsLoaded)
+            {
+                this.MarkVerified(state.InternalName);
+                continue;
+            }
+
             // 本会话刚打上、又还没重载过：盘上换了文件不等于「验证通过」——等重载（或下次启动）再说
             if (since > this.processStartedAt && state.ReloadAttempts == 0)
             {
