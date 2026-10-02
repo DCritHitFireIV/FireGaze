@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using System.Resources;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
@@ -175,6 +176,12 @@ internal static class UITextPatcher
                     PatchResources(module, resourceMap, seenResources, outcome);
                 }
 
+                // ①a2 内嵌 JSON 本地化表（json: 容器，HaselTweaks 这类）：只补 zh 空的槽。
+                if (resourceMap.Count > 0)
+                {
+                    PatchJSONResources(module, resourceMap, seenResources, outcome);
+                }
+
                 // ①b 自定义特性参数里的界面文字（UIAttribute / TweakName…）：改 UTF-8 blob 里的字符串
                 if (attributeMap.Count > 0)
                 {
@@ -317,8 +324,11 @@ internal static class UITextPatcher
             exactMap.Remove(value);
         }
 
-        if (suffixMap.Count == 0 && exactMap.Count == 0)
+        if (suffixMap.Count == 0 && exactMap.Count == 0
+            && !pack.Resources.Any(r => r.HasTranslation && !pack.IsResourceSkipped(r.Container, r.Key)))
         {
+            // 资源条目（.resources / 内嵌 JSON）也能反向还原——不能只看字面量条目，
+            // 否则只有资源译文的包会被挡在门外（2026-10-03 fgtest 实测）。
             outcome.Error = "译文包里没有可反向还原的译文。";
             return outcome;
         }
@@ -357,6 +367,7 @@ internal static class UITextPatcher
                 }
 
                 RevertResources(module, pack, outcome);
+                RevertJSONResources(module, pack, outcome);
 
                 if (outcome.PatchedTotal == 0)
                 {
@@ -679,6 +690,149 @@ internal static class UITextPatcher
             {
                 // 重写不了就整张容器跳过（key 会在收尾时进 Missing，让人知道没打成）
                 outcome.Missing.Add($"资源：{container}（重写失败：{e.Message}）");
+            }
+        }
+    }
+
+    /// <summary>
+    ///     把译文写进内嵌 JSON 本地化表（<c>json:</c> 容器）：只补 zh 还是空的槽，
+    ///     上游已有 zh 的键原样保留；整表重写（JsonNode 会保留其余结构与语言）。
+    /// </summary>
+    private static void PatchJSONResources(
+        ModuleDefMD module,
+        Dictionary<(string Container, string Key), UITextResourceEntry> resourceMap,
+        HashSet<(string Container, string Key)> seen,
+        UITextPatchOutcome outcome)
+    {
+        var byResource = new Dictionary<string, Dictionary<string, UITextResourceEntry>>(StringComparer.Ordinal);
+        foreach (var ((container, key), entry) in resourceMap)
+        {
+            if (!UITextJSONResources.IsJSONContainer(container))
+            {
+                continue;
+            }
+
+            var resourceName = UITextJSONResources.ResourceNameOf(container);
+            if (!byResource.TryGetValue(resourceName, out var keys))
+            {
+                keys = new Dictionary<string, UITextResourceEntry>(StringComparer.Ordinal);
+                byResource[resourceName] = keys;
+            }
+
+            keys[key] = entry;
+        }
+
+        if (byResource.Count == 0)
+        {
+            return;
+        }
+
+        // module.Resources 是集合，替换时不能边遍历边改
+        foreach (var resource in module.Resources.ToList())
+        {
+            if (resource is not EmbeddedResource embedded)
+            {
+                continue;
+            }
+
+            var name = embedded.Name?.String ?? string.Empty;
+            if (!byResource.TryGetValue(name, out var keys))
+            {
+                continue;
+            }
+
+            try
+            {
+                var text = Encoding.UTF8.GetString(embedded.CreateReader().ToArray());
+                if (!UITextJSONResources.TryParse(text, out _))
+                {
+                    outcome.Missing.Add($"内嵌 JSON：{name}（形状不像语言表，没写成）");
+                    continue;
+                }
+
+                var translations = keys.ToDictionary(pair => pair.Key, pair => pair.Value.Translated, StringComparer.Ordinal);
+                var updated = UITextJSONResources.Apply(text, translations, out var changed);
+                foreach (var key in keys.Keys)
+                {
+                    // 没改动也可能是「上游已经有 zh」——都算处理过，不再报「没对上」
+                    seen.Add((UITextJSONResources.Prefix + name, key));
+                }
+
+                if (updated is null)
+                {
+                    continue;
+                }
+
+                module.Resources.Remove(embedded);
+                module.Resources.Add(new EmbeddedResource(name, new UTF8Encoding(false).GetBytes(updated), embedded.Attributes));
+                outcome.PatchedResources += changed;
+            }
+            catch (Exception e)
+            {
+                outcome.Missing.Add($"内嵌 JSON：{name}（重写失败：{e.Message}）");
+            }
+        }
+    }
+
+    /// <summary>
+    ///     内嵌 JSON 本地化表反向还原：当前 zh == 我们打过的译文才摘掉 zh 槽（不跨 key 猜）。
+    /// </summary>
+    private static void RevertJSONResources(ModuleDefMD module, UITextPack pack, UITextPatchOutcome outcome)
+    {
+        var byResource = new Dictionary<string, Dictionary<string, UITextResourceEntry>>(StringComparer.Ordinal);
+        foreach (var entry in pack.Resources)
+        {
+            if (!entry.HasTranslation || pack.IsResourceSkipped(entry.Container, entry.Key)
+                || !UITextJSONResources.IsJSONContainer(entry.Container))
+            {
+                continue;
+            }
+
+            var resourceName = UITextJSONResources.ResourceNameOf(entry.Container);
+            if (!byResource.TryGetValue(resourceName, out var keys))
+            {
+                keys = new Dictionary<string, UITextResourceEntry>(StringComparer.Ordinal);
+                byResource[resourceName] = keys;
+            }
+
+            keys[entry.Key] = entry;
+        }
+
+        if (byResource.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var resource in module.Resources.ToList())
+        {
+            if (resource is not EmbeddedResource embedded)
+            {
+                continue;
+            }
+
+            var name = embedded.Name?.String ?? string.Empty;
+            if (!byResource.TryGetValue(name, out var keys))
+            {
+                continue;
+            }
+
+            try
+            {
+                var text = Encoding.UTF8.GetString(embedded.CreateReader().ToArray());
+                var translations = keys.ToDictionary(pair => pair.Key, pair => pair.Value.Translated, StringComparer.Ordinal);
+                var updated = UITextJSONResources.Revert(text, translations, out var changed);
+                if (updated is null)
+                {
+                    continue;
+                }
+
+                module.Resources.Remove(embedded);
+                module.Resources.Add(new EmbeddedResource(name, new UTF8Encoding(false).GetBytes(updated), embedded.Attributes));
+                outcome.PatchedResources += changed;
+            }
+            catch (Exception e)
+            {
+                outcome.Missing.Add($"内嵌 JSON：{name}（反向重写失败：{e.Message}）");
             }
         }
     }

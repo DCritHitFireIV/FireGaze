@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using System.Diagnostics;
 using System.Resources;
 using System.Text.RegularExpressions;
@@ -2794,9 +2795,21 @@ public static class UIStringExtractor
                 }
 
                 var container = embedded.Name?.String ?? string.Empty;
-                if (!container.EndsWith(".resources", StringComparison.OrdinalIgnoreCase)
-                    || !container.StartsWith(assemblyName + ".", StringComparison.Ordinal)
+                if (!container.StartsWith(assemblyName + ".", StringComparison.Ordinal)
                     || IsThirdPartyResourceContainer(container))
+                {
+                    continue;
+                }
+
+                // 内嵌 JSON 本地化表（HaselTweaks 这类）：{键: {en, ja, zh…}}——只收「有 en、缺 zh」的键。
+                // 这类字符串既不在 ldstr、也不在 .resources 里，不走这个分支就永远抽不到（2026-10-03 用户报）。
+                if (container.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                {
+                    this.ScanJSONResource(embedded, container, list);
+                    continue;
+                }
+
+                if (!container.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
@@ -2831,6 +2844,41 @@ public static class UIStringExtractor
             }
 
             return list;
+        }
+
+        /// <summary>
+        ///     内嵌 JSON 本地化表：值套资源值过滤（JSON / 网址 / 长文档不收），只收「有 en、缺 zh」的键。
+        ///     容器名加 <c>json:</c> 前缀与 <c>.resources</c> 区分；key 就是表里的键。
+        /// </summary>
+        private void ScanJSONResource(EmbeddedResource embedded, string container, List<UITextResourceItem> list)
+        {
+            try
+            {
+                var text = Encoding.UTF8.GetString(embedded.CreateReader().ToArray());
+                if (!UITextJSONResources.TryParse(text, out var table))
+                {
+                    return;
+                }
+
+                foreach (var (key, value) in UITextJSONResources.CollectMissing(table))
+                {
+                    if (!LooksTranslatableResourceValue(value))
+                    {
+                        continue;
+                    }
+
+                    list.Add(new UITextResourceItem
+                    {
+                        Container = UITextJSONResources.Prefix + container,
+                        Key = key,
+                        Value = value,
+                    });
+                }
+            }
+            catch (Exception)
+            {
+                // 读不动 / 解析不动就跳过（尽力而为）
+            }
         }
 
         /// <summary>

@@ -823,6 +823,13 @@ internal sealed class UITextPack
                 continue;
             }
 
+            // 内嵌 JSON 本地化表（HaselTweaks 这类）同理：打过补丁后 zh 侧不再缺，
+            // 但不能按「不在本轮候选里」自动清账（否则刚打完立刻被标「不翻」）。
+            if (UITextJSONResources.IsJSONContainer(entry.Container))
+            {
+                continue;
+            }
+
             if (this.IsResourceSkipped(entry.Container, entry.Key) && !IsResourceAutoSkipped(entry))
             {
                 continue;

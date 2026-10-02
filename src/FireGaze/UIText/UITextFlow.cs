@@ -189,7 +189,9 @@ internal static class UITextFlow
 
             var context = UITextLocalizationFiles.IsFileContainer(entry.Container)
                 ? "本地化文件：" + UITextLocalizationFiles.RelativeOf(entry.Container) + " · " + entry.Key
-                : "资源：" + entry.Container + " · " + entry.Key;
+                : UITextJSONResources.IsJSONContainer(entry.Container)
+                    ? "内嵌 JSON：" + UITextJSONResources.ResourceNameOf(entry.Container) + " · " + entry.Key
+                    : "资源：" + entry.Container + " · " + entry.Key;
             list.Add(new UITextTarget(entry.Original, context, null, entry));
         }
 

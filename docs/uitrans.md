@@ -19,14 +19,14 @@
 
 | 文件 | 作用 |
 |---|---|
-| `src/FireGaze/UIText/UIStringExtractor.cs` | IL 静态抽取：判 UI 候选 / 灰名单 / 排除；另扫内嵌 `.resources`（资源型本地化） |
+| `src/FireGaze/UIText/UIStringExtractor.cs` | IL 静态抽取：判 UI 候选 / 灰名单 / 排除；另扫内嵌 `.resources`（资源型本地化）与内嵌 `.json` 本地化表 |
 | `src/FireGaze/UIText/UICallSemantics.cs` | 调用语义：谁是 UI 调用、谁拿字符串当 ID、哪些是危险语境（含聊天输出） |
 | `src/FireGaze/UIText/UITextModels.cs` | 抽取结果模型（原文 / 上下文 / 判定 / 依据 / 是否保留 ID） |
 | `src/FireGaze/UIText/UITextPack.cs` | 配套包模型（原文→译文 + 资源容器/key、来源、不翻名单、库合并优先级） |
 | `src/FireGaze/UIText/UITextStore.cs` | 本地包读写（`<配置目录>/uitrans/<内部名>.json`）+ 桌面工具 JSON 兼容 |
 | `src/FireGaze/UI/UITextTab.cs` | 「插件汉化」页签：插件列表 + 包状态 + 打开编辑器 |
 | `src/FireGaze/UI/UITextEditorWindow.cs` | 编辑器窗口：逐条翻译、筛选、导入导出、打补丁/还原/重载 |
-| `src/FireGaze/UIText/UITextPatcher.cs` | 打补丁：dnlib 改写 `ldstr` 字面量 + 重写内嵌 `.resources` 容器 |
+| `src/FireGaze/UIText/UITextPatcher.cs` | 打补丁：dnlib 改写 `ldstr` 字面量 + 重写内嵌 `.resources` 容器 / 内嵌 JSON 本地化表 |
 | `src/FireGaze/UIText/UITextPatchStore.cs` | 补丁状态 + 原始 DLL 备份（都在配置目录里） |
 | `src/FireGaze/UIText/UITextPatchManager.cs` | 打补丁/还原/重载/更新后重打的调度与安全网 |
 | `src/FireGaze/UIText/TranslationChannels.cs` | 翻译通道：Google 免 key / MyMemory / 大模型 / DeepL / 彩云小译 |
@@ -97,6 +97,25 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   自动用我们的补丁——天然互补，也不顶掉官方翻译。（推翻了早期子代理报告里「改卫星」的建议：
   实测 Dalamud 不按游戏语言设 UI culture，只有 `CultureFixes` 修法语数字分隔符，实际用的是 Windows 用户语言。）
 - 探针：`UITextProbe <dll> --resources` 输出 key→值的 JSON（库生成脚本用）。
+
+## DLL 内嵌 JSON 本地化表（HaselTweaks 这类）（2026-10-03 实现）
+
+- 现象：HaselTweaks / LeveHelper（HaselCommon 系）把全部界面文字放在 **DLL 内嵌资源 `<插件名>.Translations.json`** 里，
+  格式 `{ "键": { "en": "…", "ja": "…", "zh": "…" } }`，运行时按键取当前语言、**缺了就回退 `en`**。
+  这些字符串既不在 `ldstr`、也不在 `.resources` 里 → 以前整批抽不到（用户报：tweak 名一直英文；
+  实测该表 514 键里 **383 键已有社区中文、131 键缺 zh**——缺的就是游戏里看到英文的那些）。
+- 现在：
+  · 抽取 `ScanJsonResource`：把「有 `en`、缺 `zh`」的键收进 `resources` 段（容器 = `json:<资源名>`、key = JSON 键）；
+    值过 `LooksTranslatableResourceValue`；只扫主程序集前缀、排掉第三方库前缀；
+  · 打补丁 `PatchJSONResources`：整表重写（JsonNode 保留其余结构语言）、**只补 zh 空的槽，
+    上游已有 zh 一律不覆盖**（与磁盘本地化文件同一口径）；同一文件里没改动的键也算「处理过」，不报「没对上」；
+  · 反向还原 `RevertJSONResources`：按「当前 zh == 我们的译文」把槽摘掉（不跨 key 猜）。
+- **形状嗅探**（`UITextJsonResources.TryParse`）：根是对象 + 每个值都是「语言 → 文本」的对象 + 至少一半条目有 `en`，
+  不满足就不认——避免把插件里任意一份数据 JSON 当成翻译表。
+- **清账豁免**：同 `file:` 容器——打过补丁后 zh 侧不再缺，但这批条目**不许**按「不在本轮候选里」自动清账
+  （`PruneAgainstExtraction` 对 `json:` 容器直接跳过，否则刚打完就被排掉翻不了第二次）。
+- 编辑器/翻译上下文里显示为「内嵌 JSON：<资源名> · <键>」。
+- fgtest ⑱ 钉住：抽取缺 zh 候选 / 只补 zh 空槽 / 上游 zh 不覆盖 / 反向还原 / 清账豁免（真实样本 HaselTweaks）。
 
 ## 聊天输出（IChatGui）（2026-10-02 用户拍板要翻）
 
