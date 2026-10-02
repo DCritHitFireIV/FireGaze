@@ -339,6 +339,35 @@ internal sealed class UITextPatchManager
             files.Add(dllPath);
         }
 
+        var pack = this.packs.Load(entry.InternalName);
+        if (pack.Entries.Count == 0 && pack.Resources.Count == 0 && pack.Attributes.Count == 0)
+        {
+            return (false, "这个插件还没有本地译文包。");
+        }
+
+        // 记录丢了、或记录里的「原始备份」本身就带着我们的补丁痕迹（记录丢失时把打过的 DLL 当成了原文）：
+        // 先把「原文」反向还原出来再备份 / 打补丁。不先做的话，会把已经打过的 DLL 当成基线（真原文就彻底没了），
+        // 而新补丁只盖住没打过的另一半——变成「旧补丁 + 新补丁」的杂种 DLL（2026-10-02 AutoHook 实测）。
+        var backupLooksPatched = false;
+        if (existing is not null && pack.TranslatedCount > 0)
+        {
+            var backupPaths = existing.EffectiveFiles
+                .Where(f => f.HasBackup)
+                .Select(f => f.BackupPath!)
+                .ToList();
+            backupLooksPatched = backupPaths.Count > 0 && MayContainOurPatch(backupPaths, pack);
+        }
+
+        if (pack.TranslatedCount > 0
+            && (existing is null || backupLooksPatched)
+            && MayContainOurPatch(files, pack)
+            && this.TryRebuildPatchRecord(entry, files, pack, existing?.EffectiveFiles, null, out _, out var preRecoveryTmp, out var preRecoveryNote))
+        {
+            TryDeleteDirectory(preRecoveryTmp);
+            Plugin.Log?.Information($"[内部文本] {entry.InternalName}：盘上像是旧补丁但没（可用的）记录，{preRecoveryNote}；先还原再打");
+            existing = this.LoadStateOrAdopt(entry);
+        }
+
         // 基线判定：盘上是「我们自己的旧补丁」的文件先还原回原始内容，避免在译文上叠译文。
         // 按**文件名**匹配（插件更新会换版本目录）；哈希对得上才还原，绝不拿旧备份顶掉新版本。
         if (existing is not null)
@@ -373,12 +402,6 @@ internal sealed class UITextPatchManager
                     return (false, $"还原旧补丁失败（{Path.GetFileName(path)}）：{e.Message}");
                 }
             }
-        }
-
-        var pack = this.packs.Load(entry.InternalName);
-        if (pack.Entries.Count == 0 && pack.Resources.Count == 0 && pack.Attributes.Count == 0)
-        {
-            return (false, "这个插件还没有本地译文包。");
         }
 
         // 先备份全部要动的文件
@@ -718,20 +741,26 @@ internal sealed class UITextPatchManager
                 return (retry, note);
             }
         }
-        else
+
+        // 最后一条自救：拿**当前盘上**的文件（不是备份）反向还原出原文——
+        // 没有记录时（或备份本身也是打过的 DLL：记录丢失时把补丁后的文件当成了原文存下来）这条路都能走。
+        // 2026-10-02 AutoHook 实测：旧补丁 + 丢记录 → 备份里也是打了补丁的文件，
+        // 只靠「改读备份」会一直卡在「找不到可还原的原始备份」，只能让用户重装。
+        var diskPaths = UITextRules.ResolveCompanions(entry.DLLPath ?? string.Empty, entry.InternalName);
+        if (diskPaths.Count == 0 && !string.IsNullOrEmpty(entry.DLLPath))
         {
-            // 没有补丁记录、备份也指望不上（历史上的失败退路会在盘上留下「当前文件的快照」）——
-            // 试试从已打的补丁反向还原出原文（2026-10-02 ActionTimelineReborn / DailyRoutines 实测）。
-            var recovered = this.TryRecoverPatchedDLL(entry, sources, searchDirectories, out var recoveryNote);
-            if (recovered is not null)
-            {
-                note = (note.Length > 0 ? note + "；" : string.Empty) + recoveryNote;
-                Plugin.Log?.Information($"[内部文本] {entry.InternalName}：{recoveryNote}");
-                return (recovered, note);
-            }
+            diskPaths.Add(entry.DLLPath);
         }
 
-        Plugin.Log?.Warning($"[内部文本] {entry.InternalName}：抽取结果里有一批「译文###原文」形态的文本，且没有可用备份——已停下（避免污染译文包）");
+        var recovered = this.TryRecoverPatchedDLL(entry, diskPaths, searchDirectories, out var recoveryNote);
+        if (recovered is not null)
+        {
+            note = (note.Length > 0 ? note + "；" : string.Empty) + recoveryNote;
+            Plugin.Log?.Information($"[内部文本] {entry.InternalName}：{recoveryNote}");
+            return (recovered, note);
+        }
+
+        Plugin.Log?.Warning($"[内部文本] {entry.InternalName}：抽取结果里有一批「译文###原文」形态的文本，反向还原也救不回来——已停下（避免污染译文包）");
         return (new UITextExtraction
         {
             AssemblyPath = extraction.AssemblyPath,
@@ -924,6 +953,69 @@ internal sealed class UITextPatchManager
         {
             // 临时目录删不掉无所谓
         }
+    }
+
+    /// <summary>
+    ///     便宜的预检：盘上的文件里有没有我们打过的补丁痕迹（只扫字节，不动 dnlib）。
+    ///     从包里抽最多 64 条有译文的条目，找 <c>###原文</c>（保留 ID 的写法）或译文本身（纯译文写法）的 UTF-16 字节。
+    /// </summary>
+    /// <remarks>
+    ///     命中不一定真是补丁（译文碰巧本来就是界面文本）——调用方拿到 true 后还要走
+    ///     <see cref="TryRebuildPatchRecord" /> 的还原量阀值校验。宁可多跑一次反向还原，不能把打过补丁的 DLL 当原文。
+    /// </remarks>
+    internal static bool MayContainOurPatch(IReadOnlyList<string> paths, UITextPack pack)
+    {
+        var probes = new List<byte[]>();
+        foreach (var entry in pack.Entries)
+        {
+            if (!entry.HasTranslation || pack.IsSkipped(entry.Original))
+            {
+                continue;
+            }
+
+            var original = entry.Original.Trim();
+            var translated = entry.Translated.Trim();
+            if (original.Length == 0
+                || translated.Length == 0
+                || string.Equals(original, translated, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            probes.Add(System.Text.Encoding.Unicode.GetBytes(UITextText.IDSeparator + original));
+            probes.Add(System.Text.Encoding.Unicode.GetBytes(translated));
+            if (probes.Count >= 128)
+            {
+                break;
+            }
+        }
+
+        if (probes.Count == 0)
+        {
+            return false;
+        }
+
+        foreach (var path in paths)
+        {
+            try
+            {
+                var bytes = File.ReadAllBytes(path);
+                var span = bytes.AsSpan();
+                foreach (var probe in probes)
+                {
+                    if (span.IndexOf(probe) >= 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // 读不动当没命中（后面还会按正常流程报错）
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
