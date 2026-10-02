@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Dalamud.Plugin;
+using FireGaze.Internal;
 
 namespace FireGaze.RepoAudit;
 
@@ -350,7 +351,7 @@ public sealed class DalamudRepos
                     WriteIndented = true,
                     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 });
-            File.WriteAllText(file, json, System.Text.Encoding.UTF8);
+            AtomicFile.WriteAllText(file, json, System.Text.Encoding.UTF8);
 
             var configPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

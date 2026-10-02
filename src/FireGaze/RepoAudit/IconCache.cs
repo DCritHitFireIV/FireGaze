@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FireGaze.Internal;
 
 namespace FireGaze.RepoAudit;
 
@@ -103,7 +104,7 @@ internal sealed class IconCache
                 System.IO.Directory.CreateDirectory(dir);
 
                 var name = Hash(url) + extension;
-                File.WriteAllBytes(Path.Combine(dir, name), bytes);
+                AtomicFile.WriteAllBytes(Path.Combine(dir, name), bytes);
                 index[internalName] = new Entry
                 {
                     URL = url,

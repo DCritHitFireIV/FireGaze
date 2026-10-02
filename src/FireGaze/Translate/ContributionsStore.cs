@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FireGaze.Internal;
 using FireGaze.RepoAudit;
 
 namespace FireGaze.Translate;
@@ -456,7 +457,7 @@ internal sealed class ContributionsStore
             Directory.CreateDirectory(ExportDirectory);
             var name = $"contributions-{DateTime.Now:yyyyMMdd-HHmmss}.json";
             var path = Path.Combine(ExportDirectory, name);
-            File.WriteAllText(path, BuildJSON() + Environment.NewLine, Encoding.UTF8);
+            AtomicFile.WriteAllText(path, BuildJSON() + Environment.NewLine, Encoding.UTF8);
             Changed?.Invoke();
             return path;
         }
@@ -562,7 +563,7 @@ internal sealed class ContributionsStore
                 contributions = records,
             };
 
-            File.WriteAllText(FilePath, JsonSerializer.Serialize(payload, JSONOptions), Encoding.UTF8);
+            AtomicFile.WriteAllText(FilePath, JsonSerializer.Serialize(payload, JSONOptions), Encoding.UTF8);
         }
         catch (Exception e)
         {
@@ -582,7 +583,7 @@ internal sealed class ContributionsStore
                 batches = history,
             };
 
-            File.WriteAllText(HistoryFilePath, JsonSerializer.Serialize(payload, JSONOptions), Encoding.UTF8);
+            AtomicFile.WriteAllText(HistoryFilePath, JsonSerializer.Serialize(payload, JSONOptions), Encoding.UTF8);
         }
         catch (Exception e)
         {

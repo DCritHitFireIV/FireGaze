@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FireGaze.Internal;
 namespace FireGaze.Translate;
 
 /// <summary>
@@ -426,7 +427,7 @@ public sealed class TranslationTable
                     });
             }
 
-            File.WriteAllText(target, json + Environment.NewLine, System.Text.Encoding.UTF8);
+            AtomicFile.WriteAllText(target, json + Environment.NewLine, System.Text.Encoding.UTF8);
             LoadedFrom = target;
             LoadedAt = DateTime.Now;
             BumpRevision();
@@ -513,7 +514,7 @@ public sealed class TranslationTable
 
                 Directory.CreateDirectory(configDirectory);
                 var target = Path.Combine(configDirectory, "translations.json");
-                await File.WriteAllTextAsync(target, text, cancellationToken).ConfigureAwait(false);
+                await AtomicFile.WriteAllTextAsync(target, text, cancellationToken).ConfigureAwait(false);
 
                 table = dict;
                 MaintainedAt = maintainedAt;

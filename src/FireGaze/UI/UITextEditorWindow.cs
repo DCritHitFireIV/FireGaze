@@ -3,6 +3,7 @@ using System.Text.Json;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.ImGuiFileDialog;
 using Dalamud.Interface.Windowing;
+using FireGaze.Internal;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 using FireGaze.UIText;
@@ -1178,7 +1179,7 @@ internal sealed class UITextEditorWindow : Window
 
                 try
                 {
-                    File.WriteAllText(path, UITextStore.BuildAIExport(BuildExportEntries(), onlyUntranslated: true), new System.Text.UTF8Encoding(false));
+                    AtomicFile.WriteAllText(path, UITextStore.BuildAIExport(BuildExportEntries(), onlyUntranslated: true), new System.Text.UTF8Encoding(false));
                     this.SetStatus($"已导出未翻条目：{path}", false);
                 }
                 catch (Exception e)

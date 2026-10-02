@@ -1,3 +1,5 @@
+using FireGaze.Internal;
+
 namespace FireGaze.Translate;
 
 /// <summary>投稿发送的结果严重度（界面据此上色）。</summary>
@@ -72,7 +74,7 @@ internal static class ContributeSender
             var directory = Path.Combine(parent ?? storeDirectory, "contributions");
             Directory.CreateDirectory(directory);
             var file = Path.Combine(directory, $"uit-{internalName}-{DateTime.Now:yyyyMMdd-HHmmss}.json");
-            File.WriteAllText(file, title + "\n\n" + body + "\n", new System.Text.UTF8Encoding(false));
+            AtomicFile.WriteAllText(file, title + "\n\n" + body + "\n", new System.Text.UTF8Encoding(false));
             return file;
         }
         catch (Exception e)

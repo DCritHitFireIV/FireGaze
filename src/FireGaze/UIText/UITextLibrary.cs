@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FireGaze.Internal;
 
 namespace FireGaze.UIText;
 
@@ -241,7 +242,7 @@ internal sealed class UITextLibrary
         try
         {
             Directory.CreateDirectory(this.cacheDirectory);
-            await File.WriteAllTextAsync(cached, text, token).ConfigureAwait(false);
+            await AtomicFile.WriteAllTextAsync(cached, text, token).ConfigureAwait(false);
         }
         catch (Exception e)
         {
@@ -316,7 +317,7 @@ internal sealed class UITextLibrary
         try
         {
             Directory.CreateDirectory(this.cacheDirectory);
-            await File.WriteAllTextAsync(cached, text, token).ConfigureAwait(false);
+            await AtomicFile.WriteAllTextAsync(cached, text, token).ConfigureAwait(false);
         }
         catch (Exception e)
         {
