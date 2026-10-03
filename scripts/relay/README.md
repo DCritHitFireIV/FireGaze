@@ -101,15 +101,20 @@ POST /uit-submit          正文就是投稿 JSON（与 issue 里的 ```json 块
 - 幂等：同一份内容重复投递由内容指纹拦住；payload 文件带 `importedAt` 后不再重复并入
 - 限流：每 IP 每分钟 6 次
 
-### 公共库下载量（`/library-download`、`/library-counts`，2026-10-04 新增）
+### 公共库下载量 / 点赞（`/library-download`、`/library-like`、`/library-counts`，2026-10-04 新增；v6 起按包）
 
-译文包本体仍从 raw/镜像下载（CDN 不计下载量）：插件下载成功后向本端点报一条计数，Worker 写进 **KV**，
-定时工作流 `library-counts.yml`（每 6 小时 + 手动）把计数写回 `uit-packs/index.json`，插件界面显示「下载数 N」。
+译文包本体仍从 raw/镜像下载（CDN 不计下载量）：插件下载/点赞后向本端点报一条，Worker 写进 **KV**，
+定时工作流 `library-counts.yml`（每 6 小时 + 手动）把计数写回 `uit-packs/index.json`。
+**键都是 `<插件>@<包ID>`**（基础包的包 ID 是 `library`；玩家包是 `user-<内容指纹前6位>`）——每个包独立计数。
 
 ```
-POST /library-download {"plugin":"RotationSolver"}   → 200 {"ok":true,"plugin":"...","downloads":N}
-GET  /library-counts                                 → 200 {"ok":true,"counts":{"RotationSolver":123}}
+POST /library-download {"plugin":"AnoMech","pack":"user-3f2a91"} → 200 {"ok":true,"downloads":N}
+POST /library-like     {"plugin":"AnoMech","pack":"user-3f2a91"} → 200 {"ok":true,"likes":N}
+GET  /library-counts   → 200 {"ok":true,"counts":{"AnoMech@library":12},"likes":{"AnoMech@user-3f2a91":9}}
 ```
+
+- 点赞**没做去重**（客户端本机记“已赞”防连点）：限流 30 次/分/IP；下载计数 60 次/分/IP。
+- 没绑 KV 时两个端点都回 `{"ok":false,"error":"counting disabled"}`，客户端静默忽略。
 
 启用步骤（Cloudflare 后台，一次）：
 1. **Workers & Pages → KV → Create namespace**（名字随意，如 `firegaze-library-counts`）；

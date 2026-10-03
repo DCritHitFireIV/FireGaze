@@ -1,4 +1,4 @@
-// FireGaze 中继（Cloudflare Worker）v5
+// FireGaze 中继（Cloudflare Worker）v6
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
@@ -13,8 +13,9 @@
 //       几千条的投稿不再走 issue 粘贴；Worker 直接把它提交成
 //       docs/contributions/inbox/uit-direct-<时间>-<随机>.json，仓库工作流接手并入公共库。
 //       需要 GitHub App 有 Contents: Read and write。
-//   · 公共库下载量（POST /library-download 计数，GET /library-counts 读取）——2026-10-04 新增：
+//   · 公共库下载量 / 点赞（POST /library-download、POST /library-like 计数，GET /library-counts 读取）——2026-10-04 新增：
 //       包本体仍从 raw/镜像下载（CDN 不计下载），由客户端上报一条计数；存 KV（绑定名 LIBRARY_COUNTS）。
+//       v6 起按**包**计数（键 `<插件>@<包ID>`，基础包包ID=library）——每个玩家投稿包有独立的下载数与👍。
 //
 // 鉴权（二选一，客户端不持有任何凭据）：
 //   ① GitHub App（推荐，「机器人」身份，不用任何个人 token）：
@@ -46,8 +47,10 @@ const charUsage = new Map(); // `${ip}|${yyyy-mm-dd}` -> 已用字符数
 const UIT_SUBMIT_MAX_CHARS = 4_000_000; // 投稿 JSON 上限（几千条约几百 KB，留足余量）
 const UIT_SUBMIT_PER_IP_LIMIT = 6; // 每分钟每 IP（正常玩家一次「一键提交」= 1 次）
 
-// 公共库下载量（/library-download、/library-counts）
+// 公共库下载量 / 点赞（/library-download、/library-like、/library-counts）
 const LIBRARY_DOWNLOAD_PER_IP_LIMIT = 60; // 每分钟每 IP（正常一次下载 = 1 次）
+const LIBRARY_LIKE_PER_IP_LIMIT = 30; // 每分钟每 IP（点赞；没做去重，先靠限流）
+const PACK_ID_PATTERN = /^[A-Za-z0-9_.\-]+$/;
 
 const hits = new Map();
 
@@ -209,7 +212,29 @@ async function commitInboxFile(env, repo, token, path, content, attempt = 0) {
   }
 }
 
-/// 公共库下载计数：客户端下载完一个包后发一条（发完即忘）→ KV 自增。
+/// 公共库计数：客户端下载/点赞后各发一条（发完即忘）→ KV 自增。
+/// 键：`dl:<插件>@<包ID>` / `like:<插件>@<包ID>`；基础包的包 ID 是 `library`。
+function parsePackTarget(data) {
+  const plugin = String(data.plugin ?? '').trim().slice(0, 64);
+  if (!PACK_ID_PATTERN.test(plugin)) {
+    return null;
+  }
+
+  const rawPack = String(data.pack ?? 'library').trim().slice(0, 64) || 'library';
+  if (!PACK_ID_PATTERN.test(rawPack)) {
+    return null;
+  }
+
+  return { plugin, pack: rawPack };
+}
+
+async function bumpCounter(store, prefix, target) {
+  const key = `${prefix}:${target.plugin}@${target.pack}`;
+  const current = Number.parseInt((await store.get(key)) ?? '0', 10) || 0;
+  await store.put(key, String(current + 1));
+  return current + 1;
+}
+
 async function handleLibraryDownload(data, env, ip) {
   if (!allow(ip, LIBRARY_DOWNLOAD_PER_IP_LIMIT, 'libdl')) {
     return json({ ok: false, error: 'too many requests' }, 429);
@@ -220,31 +245,54 @@ async function handleLibraryDownload(data, env, ip) {
     return json({ ok: false, error: 'counting disabled' }, 503);
   }
 
-  const plugin = String(data.plugin ?? '').trim().slice(0, 64);
-  if (!/^[A-Za-z0-9_.\-]+$/.test(plugin)) {
-    return json({ ok: false, error: 'bad plugin' }, 400);
+  const target = parsePackTarget(data);
+  if (!target) {
+    return json({ ok: false, error: 'bad plugin/pack' }, 400);
   }
 
-  const key = `dl:${plugin}`;
-  const current = Number.parseInt((await store.get(key)) ?? '0', 10) || 0;
-  await store.put(key, String(current + 1));
-  return json({ ok: true, plugin, downloads: current + 1 });
+  const downloads = await bumpCounter(store, 'dl', target);
+  return json({ ok: true, plugin: target.plugin, pack: target.pack, downloads });
 }
 
-/// 读取全部计数（定时工作流写回 uit-packs/index.json 用）。
+async function handleLibraryLike(data, env, ip) {
+  if (!allow(ip, LIBRARY_LIKE_PER_IP_LIMIT, 'liblike')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  const store = env.LIBRARY_COUNTS;
+  if (!store) {
+    return json({ ok: false, error: 'counting disabled' }, 503);
+  }
+
+  const target = parsePackTarget(data);
+  if (!target) {
+    return json({ ok: false, error: 'bad plugin/pack' }, 400);
+  }
+
+  const likes = await bumpCounter(store, 'like', target);
+  return json({ ok: true, plugin: target.plugin, pack: target.pack, likes });
+}
+
+/// 读取全部计数（定时工作流写回 uit-packs/index.json 用）：下载数与👍分开返回，键都是 `<插件>@<包ID>`。
 async function handleLibraryCounts(env) {
   const store = env.LIBRARY_COUNTS;
   if (!store) {
     return json({ ok: false, error: 'counting disabled' }, 503);
   }
 
-  const listed = await store.list({ prefix: 'dl:', limit: 1000 });
-  const counts = {};
-  for (const entry of listed.keys) {
-    const name = entry.name.slice(3);
-    counts[name] = Number.parseInt((await store.get(entry.name)) ?? '0', 10) || 0;
-  }
-  return json({ ok: true, updatedAt: new Date().toISOString(), counts });
+  const readAll = async (prefix) => {
+    const listed = await store.list({ prefix: `${prefix}:`, limit: 1000 });
+    const values = {};
+    for (const entry of listed.keys) {
+      const name = entry.name.slice(prefix.length + 1);
+      values[name] = Number.parseInt((await store.get(entry.name)) ?? '0', 10) || 0;
+    }
+    return values;
+  };
+
+  const counts = await readAll('dl');
+  const likes = await readAll('like');
+  return json({ ok: true, updatedAt: new Date().toISOString(), counts, likes });
 }
 
 /// 公共彩云代理：插件把原文送过来，本 Worker 用服务端 token 转发给彩云，原样回 target。
@@ -393,7 +441,7 @@ export default {
         return handleLibraryCounts(env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 5 });
+      return json({ ok: true, service: 'firegaze-relay', version: 6 });
     }
 
     if (request.method !== 'POST') {
@@ -419,9 +467,13 @@ export default {
       return handleTranslate(data, env, ip);
     }
 
-    // ── 公共库下载计数 ──
+    // ── 公共库下载计数 / 点赞 ──
     if (url.pathname === '/library-download') {
       return handleLibraryDownload(data, env, ip);
+    }
+
+    if (url.pathname === '/library-like') {
+      return handleLibraryLike(data, env, ip);
     }
 
     if (!allow(ip)) {
