@@ -7,9 +7,8 @@ name: uit-packs
 # 口径见 docs/uitrans.md「公共译文库」一节。
 
 on:
-  schedule:
-    # 每周一 05:30 UTC（北京时间 13:30）——避开简介词表（12:00）的窗口
-    - cron: '30 5 * * 1'
+  # 2026-10-03 用户定：只保留手动触发——库的增量不跑每周自动 DeepSeek 翻译，
+  # 等玩家投稿（「参与翻译」→ GitHub issue）或维护者手动补。
   workflow_dispatch:
     inputs:
       targets:
