@@ -61,7 +61,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/contributions/inbox uit-packs
+          # 收件箱目录可能不存在（测试数据清理后再没有任何投稿落过盘；feedback/普通 issue 也会触发本工作流）——
+          # 直接 git add 一个不存在的路径会 fatal: pathspec did not match，把整条工作流卡死在存档一步。
+          if [ -d docs/contributions/inbox ]; then
+            git add docs/contributions/inbox
+          fi
+          git add uit-packs
           if git diff --quiet --cached; then
             echo "存档没有变化（同一条 issue 又编辑了？）"
           else
