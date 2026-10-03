@@ -973,6 +973,7 @@ internal sealed class UITextTab
 
         string title = string.Empty;
         string body = string.Empty;
+        string payload = string.Empty;
         string? noteText = null;
         var noteKind = NoteKind.Bad;
         if (uploadable == 0)
@@ -991,17 +992,19 @@ internal sealed class UITextTab
         }
         else
         {
-            var payload = System.Text.Json.JsonSerializer.Serialize(
+            var payloadJSON = System.Text.Json.JsonSerializer.Serialize(
                 new { type = "uit-contribution", plugin = entry.InternalName, entries = healthyEntries, resources = healthyResources, attributes = healthyAttributes },
                 new System.Text.Json.JsonSerializerOptions
                 {
-                    // 不缩进：中继上限 60000，压掉缩进能多装不少条目（内容可读性由 issue 正文的头部说明兼顾）
+                    // 不缩进：中继上限 60000，压掉缩进能多装不少条目（内容可读性由 issue 正文的头部说明兼顾）；
+                    // 直传通道不走正文，但保持同一份 payload。
                     WriteIndented = false,
                     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 });
+            payload = payloadJSON;
             // 标题里带一个英文 "contributions"：兼容线上旧版 Worker 的关键词校验（2026-10-02 修 HTTP 400 的根因）
             var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{uploadable}\n\n";
-            body = header + "```json\n" + payload + "\n```\n";
+            body = header + "```json\n" + payloadJSON + "\n```\n";
             title = $"[译文贡献] {entry.InternalName} · {uploadable} 条";
         }
 
@@ -1018,6 +1021,7 @@ internal sealed class UITextTab
             Human = healthyEntries.Count(e => e.IsUserSource) + healthyResources.Count(e => e.IsUserSource) + healthyAttributes.Count(e => e.IsUserSource),
             Title = title,
             Body = body,
+            Payload = payload,
             Problems = problems,
         };
         return new UploadBuildResult(upload, noteText, noteKind);
@@ -1056,6 +1060,10 @@ internal sealed class UITextTab
         public int Human;
         public string Title = string.Empty;
         public string Body = string.Empty;
+
+        /// <summary>投稿 payload（与正文里的 ```json 块同一份）：直传通道用。</summary>
+        public string Payload = string.Empty;
+
         public List<UITextQuality.Problem> Problems = [];
     }
 
@@ -1069,13 +1077,14 @@ internal sealed class UITextTab
         var total = upload.Total;
         var title = upload.Title;
         var body = upload.Body;
+        var payload = upload.Payload;
         var storeDirectory = this.store.DirectoryPath;
         this.uploading.TryAdd(entry.InternalName, true);
         _ = Task.Run(async () =>
         {
             try
             {
-                var result = await ContributeSender.SubmitAsync(entry.InternalName, total, title, body, storeDirectory).ConfigureAwait(false);
+                var result = await ContributeSender.SubmitAsync(entry.InternalName, total, title, body, payload, storeDirectory).ConfigureAwait(false);
                 var kind = result.Severity switch
                 {
                     ContributeSendSeverity.Good => NoteKind.Good,

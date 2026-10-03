@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FireGaze.Internal;
+using FireGaze.Translate;
 
 namespace FireGaze.UIText;
 
@@ -249,6 +250,8 @@ internal sealed class UITextLibrary
             Plugin.Log?.Debug(e, "[内部文本] 译文库缓存写盘失败（不影响本次使用）");
         }
 
+        // 下载量统计（2026-10-04）：包本体仍从 raw/镜像下，这里只多报一条计数；失败静默。
+        ContributeRelay.ReportLibraryDownload(internalName);
         return pack;
     }
 
@@ -308,6 +311,11 @@ internal sealed class UITextLibrary
         }
 
         var pack = UITextPack.FromJSON(text, out var error);
+        if (pack is not null)
+        {
+            // 下载量统计（2026-10-04）：手动拉单包也计入（文件名即插件内部名）。
+            ContributeRelay.ReportLibraryDownload(Path.GetFileNameWithoutExtension(safe));
+        }
         if (pack is null)
         {
             this.LastError = $"{safe} 读不出来：{error}";

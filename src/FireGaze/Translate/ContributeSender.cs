@@ -26,15 +26,41 @@ internal static class ContributeSender
     /// <summary>拼好的提交页 URL 上限：再长会被浏览器/平台截断（简介投稿通道同款上限，2026-10-03 C-07 修正：以前按未转义长度估，中文正文转义后会膨胀到 9 倍）。</summary>
     private const int MaxIssueURLLength = 20000;
 
+    /// <summary>直传 payload 上限：与中继的 4,000,000 字符上限留出安全余量。</summary>
+    private const int MaxDirectPayload = 3_500_000;
+
     /// <param name="storeDirectory">译文包目录（<c>uitrans</c>）：导出的大包放它的同级 <c>contributions/</c>。</param>
+    /// <param name="payloadJSON">投稿 payload（与 issue 里 ```json 块同一份）：直传通道用；为空时跳过直传。</param>
     public static async Task<ContributeSendResult> SubmitAsync(
         string internalName,
         int total,
         string title,
         string body,
+        string payloadJSON,
         string storeDirectory)
     {
         var relayError = string.Empty;
+
+        // 新流程（2026-10-04 用户定）：几千条也能一步到位——payload 直传中继，云端自动并入公共译文库，
+        // 玩家立刻拿到云端文件链接；不再需要粘贴文件，也没有人工审核中转。
+        if (payloadJSON.Length > 0 && payloadJSON.Length <= MaxDirectPayload)
+        {
+            var (directOk, directMessage) = await ContributeRelay.TrySubmitPayloadAsync(payloadJSON).ConfigureAwait(false);
+            if (directOk)
+            {
+                return new ContributeSendResult(
+                    ContributeSendSeverity.Good,
+                    $"已上传 {total} 条译文到公共译文库：{directMessage}\n云端通常一两分钟内自动并入；列表里会随下一次库更新显示。感谢！");
+            }
+
+            relayError = $"直传没成功：{directMessage}";
+        }
+        else if (payloadJSON.Length > MaxDirectPayload)
+        {
+            relayError = $"投稿太大（{payloadJSON.Length:N0} 字符），超过直传上限";
+        }
+
+        // 回退 1：旧中继通道（中继建 issue）——正文塞得下就试
         if (body.Length <= ContributeRelay.MaxBody)
         {
             var (ok, message) = await ContributeRelay.TrySubmitAsync(title, body).ConfigureAwait(false);
@@ -43,7 +69,7 @@ internal static class ContributeSender
                 return new ContributeSendResult(ContributeSendSeverity.Good, $"已上传 {total} 条译文到社区：{message}。感谢！");
             }
 
-            relayError = message;
+            relayError = relayError.Length > 0 ? relayError + "；" + message : message;
         }
 
         var relayNote = relayError.Length > 0

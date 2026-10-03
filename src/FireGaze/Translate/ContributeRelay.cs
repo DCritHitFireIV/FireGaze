@@ -18,6 +18,12 @@ internal static class ContributeRelay
     /// <summary>中继地址（Cloudflare Worker，部署说明见 scripts/relay/README.md）。</summary>
     public const string URL = "https://firegaze-relay.yuoonmail.workers.dev/";
 
+    /// <summary>直传端点：界面文字投稿整个 payload 直接上传，不再走 issue 粘贴（2026-10-04 新流程）。</summary>
+    public const string SubmitEndpoint = URL + "uit-submit";
+
+    /// <summary>公共库下载计数端点（发完即忘）。</summary>
+    private const string LibraryDownloadEndpoint = URL + "library-download";
+
     /// <summary>正文上限（GitHub issue 上限 65536 的安全余量）。</summary>
     public const int MaxBody = 60000;
 
@@ -74,6 +80,73 @@ internal static class ContributeRelay
         return $"{ContributionsStore.RepoURL}/issues/new"
                + $"?title={Uri.EscapeDataString(title)}"
                + $"&body={Uri.EscapeDataString(body)}";
+    }
+
+    /// <summary>
+    ///     直传界面文字投稿：整个 payload 交给中继提交进仓库（docs/contributions/inbox/uit-direct-…），
+    ///     仓库工作流接手并入 uit-packs。返回（是否成功，云端文件链接或失败原因）；
+    ///     失败时调用方回退到现有「中继建 issue」流程——绝不谎报成功。
+    /// </summary>
+    public static async Task<(bool Ok, string Message)> TrySubmitPayloadAsync(string payloadJSON)
+    {
+        try
+        {
+            using var content = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
+            using var response = await Client.PostAsync(SubmitEndpoint, content).ConfigureAwait(false);
+            var text = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                return (false, DescribeError(text, (int)response.StatusCode));
+            }
+
+            using var doc = JsonDocument.Parse(text);
+            if (doc.RootElement.TryGetProperty("ok", out var ok) && ok.ValueKind == JsonValueKind.True)
+            {
+                var file = doc.RootElement.TryGetProperty("file", out var fileProp)
+                    ? fileProp.GetString() ?? string.Empty
+                    : string.Empty;
+                return (true, file);
+            }
+
+            var error = doc.RootElement.TryGetProperty("error", out var errProp)
+                ? errProp.GetString() ?? "unknown"
+                : "unknown";
+            return (false, error);
+        }
+        catch (Exception e)
+        {
+            return (false, e.GetType().Name);
+        }
+    }
+
+    /// <summary>
+    ///     上报一次公共库下载（发完即忘）：包本体仍从 raw/镜像下载，这里只多报一条计数，
+    ///     由中继写进 KV，定时工作流再写回 uit-packs/index.json（玩家能看到「下载数」）。
+    ///     中继没配计数 / 网络不通一律静默——计数绝不能影响玩家。
+    /// </summary>
+    public static void ReportLibraryDownload(string internalName)
+    {
+        if (string.IsNullOrWhiteSpace(internalName))
+        {
+            return;
+        }
+
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                using var content = new StringContent(
+                    JsonSerializer.Serialize(new { plugin = internalName }),
+                    Encoding.UTF8,
+                    "application/json");
+                using var response = await Client.PostAsync(LibraryDownloadEndpoint, content).ConfigureAwait(false);
+                Plugin.Log?.Verbose($"[内部文本] 下载计数上报：{internalName} → HTTP {(int)response.StatusCode}");
+            }
+            catch (Exception)
+            {
+                // 计数是尽力而为，绝不打扰玩家
+            }
+        });
     }
 
     /// <summary>把 Worker 的错误 JSON 变成一句人话（拿不到就用 HTTP 码）——旧版只回 HTTP 400，看不出原因。</summary>

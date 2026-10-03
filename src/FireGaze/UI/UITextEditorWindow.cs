@@ -1452,15 +1452,15 @@ internal sealed class UITextEditorWindow : Window
 
         var entries = this.pack.Entries
             .Where(e => e.IsUserSource && e.HasTranslation && !this.pack.IsSkipped(e.Original) && Healthy("条目", e.Original, e.Translated))
-            .Select(e => new { e.Original, e.Translated, Context = e.Context ?? string.Empty })
+            .Select(e => new { e.Original, e.Translated, Context = e.Context ?? string.Empty, Source = "user" })
             .ToList();
         var resources = this.pack.Resources
             .Where(r => r.IsUserSource && r.HasTranslation && !this.pack.IsResourceSkipped(r.Container, r.Key) && Healthy("资源", r.Original, r.Translated))
-            .Select(r => new { r.Container, r.Key, r.Original, r.Translated })
+            .Select(r => new { r.Container, r.Key, r.Original, r.Translated, Source = "user" })
             .ToList();
         var attributes = this.pack.Attributes
             .Where(a => a.IsUserSource && a.HasTranslation && !this.pack.IsAttributeSkipped(a.Original) && Healthy("属性", a.Original, a.Translated))
-            .Select(a => new { a.Original, a.Translated })
+            .Select(a => new { a.Original, a.Translated, Source = "user" })
             .ToList();
         var total = entries.Count + resources.Count + attributes.Count;
         // 「与原文相同」单拎出来（品牌名等无需翻译，C-06）
@@ -1499,7 +1499,7 @@ internal sealed class UITextEditorWindow : Window
         {
             try
             {
-                var result = await ContributeSender.SubmitAsync(internalName, total, title, body, storeDirectory).ConfigureAwait(false);
+                var result = await ContributeSender.SubmitAsync(internalName, total, title, body, payload, storeDirectory).ConfigureAwait(false);
                 await Plugin.Framework.RunOnFrameworkThread(
                     () => this.SetStatus(result.Message + problemNote, result.Severity == ContributeSendSeverity.Bad)).ConfigureAwait(false);
             }
