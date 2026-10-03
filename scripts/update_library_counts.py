@@ -60,6 +60,7 @@ def main(argv=None) -> int:
         return 0
 
     counts = payload.get("counts") or {}
+    likes = payload.get("likes") or {}
     index = json.load(io.open(args.index, encoding="utf-8"))
     plugins = index.setdefault("plugins", {})
 
@@ -67,10 +68,33 @@ def main(argv=None) -> int:
     for name, entry in plugins.items():
         if not isinstance(entry, dict):
             continue
-        value = int(counts.get(name) or 0)
-        if entry.get("downloads") != value:
-            entry["downloads"] = value
-            changed += 1
+
+        packs = entry.get("packs") or [{"id": "library"}]
+        base = None
+        for pack in packs:
+            if not isinstance(pack, dict):
+                continue
+            pack_id = str(pack.get("id") or "library")
+            key = f"{name}@{pack_id}"
+            downloads = int(counts.get(key) or 0)
+            like_count = int(likes.get(key) or 0)
+            if pack.get("downloads") != downloads:
+                pack["downloads"] = downloads
+                changed += 1
+            if pack.get("likes") != like_count:
+                pack["likes"] = like_count
+                changed += 1
+            if pack_id == "library":
+                base = pack
+
+        # 插件级旧字段（旧客户端只看这些）= 基础包的计数
+        if base is not None:
+            if entry.get("downloads") != base.get("downloads"):
+                entry["downloads"] = base.get("downloads")
+                changed += 1
+            if entry.get("likes") != base.get("likes"):
+                entry["likes"] = base.get("likes")
+                changed += 1
 
     if changed:
         io.open(args.index, "w", encoding="utf-8", newline="\n").write(

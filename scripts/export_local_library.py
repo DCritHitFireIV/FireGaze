@@ -31,6 +31,9 @@ import re
 import sys
 import time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import uit_index  # noqa: E402 索引口径（基础包 + 玩家包）
+
 DEFAULT_PACKS_DIR = os.path.expandvars(
     r"%APPDATA%\XIVLauncherCN\pluginConfigs\FireGaze\uitrans"
 )
@@ -336,43 +339,20 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def write_index(out_dir: str) -> None:
-    """汇总 out/ 下所有包成索引（保留以前构建过、这次没导出的）。"""
-    plugins: dict[str, dict] = {}
-    # 下载量由中继统计（scripts/update_library_counts.py 定时写回）：重建索引必须原样保留。
-    existing: dict[str, dict] = {}
+    """汇总 out/ 下所有包成索引（保留以前构建过、这次没导出的；基础包 + 玩家包）。"""
     index_path = os.path.join(out_dir, "index.json")
+    existing: dict = {}
     if os.path.exists(index_path):
         try:
             existing = json.loads(io.open(index_path, encoding="utf-8").read()).get("plugins") or {}
         except Exception:  # noqa: BLE001
             existing = {}
-    for file_name in sorted(os.listdir(out_dir)):
-        if not file_name.endswith(".json") or file_name == "index.json":
-            continue
-        path = os.path.join(out_dir, file_name)
-        try:
-            pack = json.loads(io.open(path, encoding="utf-8").read())
-        except Exception:  # noqa: BLE001
-            continue
-        meta = pack.get("_meta") or {}
-        name = file_name[:-5]
-        entry = {
-            "file": file_name,
-            "updatedAt": meta.get("updatedAt"),
-            "entries": len(pack.get("entries") or []),
-            "resources": len(pack.get("resources") or []),
-            "attributes": len(pack.get("attributes") or []),
-        }
-        old = existing.get(name)
-        if isinstance(old, dict) and "downloads" in old:
-            entry["downloads"] = old["downloads"]
-        plugins[name] = entry
-
+    plugins = uit_index.collect(out_dir, existing)
     index = {"updatedAt": time.strftime("%Y-%m-%d"), "plugins": plugins}
-    io.open(os.path.join(out_dir, "index.json"), "w", encoding="utf-8", newline="\n").write(
+    io.open(index_path, "w", encoding="utf-8", newline="\n").write(
         json.dumps(index, ensure_ascii=False, indent=2) + "\n"
     )
-    print(f"索引：{len(plugins)} 个插件 -> {os.path.join(out_dir, 'index.json')}")
+    print(f"索引：{len(plugins)} 个插件 -> {index_path}")
 
 
 if __name__ == "__main__":

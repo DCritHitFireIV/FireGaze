@@ -37,6 +37,7 @@ import sys
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import uit_index  # noqa: E402
 import validate_contribution as rules  # noqa: E402
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -168,28 +169,30 @@ def main(argv=None) -> int:
     if previous:
         return fail(args, f"同一份投稿内容之前已经收到过了（{previous}），这次跳过（没有重复并入）。")
 
-    pack_path = os.path.join(args.packs_dir, plugin + ".json")
-    pack = load_json(pack_path)
-    if pack is None:
-        # 未收录插件的投稿：新建空包再收（2026-10-03 C-04：客户端只会在中继成功时报成功，
-        # 服务端直接退回就等于谎报；新包会随下一次库更新进索引，可直接被其他玩家下载）
-        os.makedirs(args.packs_dir, exist_ok=True)
-        pack = {
-            "_meta": {"source": "contribution", "updatedAt": time.strftime("%Y-%m-%d")},
-            "entries": [],
-            "resources": [],
-            "attributes": [],
-        }
-        print(f"库里还没有 {plugin} 的包：新建一个空包再收。")
+    # 2026-10-04 多包模型（用户定）：每次收录的投稿**新建一个独立包**
+    # `<插件>@<包ID>.json`（包ID = user-<内容指纹前6位>，匿名且稳定）；
+    # 基础包 `<插件>.json` 是维护者自己的译文，收稿不再碰它。
+    pack_id = "user-" + fingerprint[:6]
+    pack_file = f"{plugin}@{pack_id}.json"
+    pack_path = os.path.join(args.packs_dir, pack_file)
+    if os.path.exists(pack_path):
+        return fail(args, f"同一份投稿已经收过（{pack_file} 已存在），这次跳过。")
 
-    pack.setdefault("entries", [])
-    pack.setdefault("resources", [])
-    pack.setdefault("attributes", [])
-
-    entries_by_original = {e.get("Original", ""): e for e in pack.get("entries") or []}
-    resources_by_key = {
-        (r.get("Container", ""), r.get("Key", "")): r for r in pack.get("resources") or []
+    os.makedirs(args.packs_dir, exist_ok=True)
+    pack = {
+        "_meta": {
+            "format": 2,
+            "updatedAt": time.strftime("%Y-%m-%d"),
+            "source": "user",
+            "label": f"玩家包 · {pack_id[5:]}",
+        },
+        "entries": [],
+        "resources": [],
+        "attributes": [],
     }
+
+    entries_by_original: dict = {}
+    resources_by_key: dict = {}
 
     accepted = 0
     filled = 0
@@ -314,6 +317,7 @@ def main(argv=None) -> int:
         "author": args.author,
         "plugin": plugin,
         "fingerprint": fingerprint,
+        "packFile": pack_file,
         "accepted": accepted,
         "filled": filled,
         "overwritten": overwritten,
@@ -324,33 +328,32 @@ def main(argv=None) -> int:
 
     if accepted == 0:
         if kept:
-            return fail(args, f"这条 issue 里没有可收录的新译文：{kept} 条已有内容，而机器译不会覆盖已有译文（人工改过的译文才会；译文都还在插件本地）。")
-        return fail(args, "这条 issue 里没有可收录的译文。")
+            return fail(args, f"这条投稿里没有可收录的新译文：{kept} 条已有内容，而且机器译不会覆盖已有译文（人工改过的译文才会；译文都还在插件本地）。")
+        return fail(args, "这条投稿里没有可收录的译文。")
 
-    meta = pack.setdefault("_meta", {})
-    meta["updatedAt"] = time.strftime("%Y-%m-%d")
-    meta.setdefault("source", "library")
     save_json(pack_path, pack)
     refresh_index(args.packs_dir)
 
-    detail = f"收录 {accepted} 条（{plugin}）"
-    if filled:
-        detail += f"，其中补缺 {filled} 条"
-    if overwritten:
-        detail += f"，覆盖（人工译）{overwritten} 条"
-    if kept:
-        detail += f"，跳过 {kept} 条机器译（已有内容不覆盖）"
+    detail = (
+        f"收录 {accepted} 条（{plugin}）→ 独立译文包 {pack_file}"
+        f"（条目 {len(pack['entries'])} · 资源 {len(pack['resources'])} · 属性 {len(pack['attributes'])}）"
+    )
     print(detail + f"，留档 {os.path.relpath(archive, REPO_ROOT)}")
     if args.summary_out:
         with open(args.summary_out, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(f"issue #{args.issue}：{accepted} 条 {plugin} 界面文字译文（已并入 uit-packs）")
+            handle.write(f"issue #{args.issue}：{accepted} 条 {plugin} 界面文字译文（已收为独立包 {pack_file}）")
     if args.comment_out:
-        lines = [f"收到 {accepted} 条 `{plugin}` 的界面文字译文，已并入 `uit-packs/{plugin}.json`（下次库更新时对玩家生效）。", ""]
+        lines = [
+            f"收到 {accepted} 条 `{plugin}` 的界面文字译文，已收为**独立译文包** `uit-packs/{pack_file}`。",
+            "",
+            "大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。",
+            "",
+        ]
         if filled or overwritten:
-            lines.append(f"其中补缺 {filled} 条、覆盖人工译 {overwritten} 条。")
+            lines.append(f"其中配套资源/属性 {filled + overwritten} 条。")
             lines.append("")
         if kept:
-            lines.append(f"另有 {kept} 条机器译因为库里已有内容而没有覆盖（人工改过的译文才会覆盖已有值）。")
+            lines.append(f"另有 {kept} 条机器译因为库里已有内容而没有收录（人工改过的译文才会覆盖已有值）。")
             lines.append("")
         if rejected:
             lines.append(f"其中 {len(rejected)} 条没能收录：")
@@ -358,7 +361,7 @@ def main(argv=None) -> int:
             for row in rejected[:10]:
                 lines.append(f"- {row}")
             lines.append("")
-        lines.append("维护者会抽查；这一条 issue 与仓库里的存档都是长期凭证。")
+        lines.append("维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。")
         with open(args.comment_out, "w", encoding="utf-8", newline="\n") as handle:
             handle.write("\n".join(lines) + "\n")
     return 0
@@ -373,29 +376,10 @@ def fail(args, message: str) -> int:
 
 
 def refresh_index(packs_dir: str) -> None:
-    """按 uit-packs/ 下所有包重算 index.json（条数/日期）。"""
+    """按 uit-packs/ 下所有包重算 index.json（基础包 + 各玩家包；保留下载量与👍）。"""
     index_path = os.path.join(packs_dir, "index.json")
     index = load_json(index_path) or {"plugins": {}}
-    plugins = index.setdefault("plugins", {})
-    for name in sorted(os.listdir(packs_dir)):
-        if not name.endswith(".json") or name == "index.json":
-            continue
-        pack = load_json(os.path.join(packs_dir, name))
-        if pack is None:
-            continue
-        meta = pack.get("_meta") or {}
-        # 下载量由中继统计（scripts/update_library_counts.py 定时写回）：重算索引必须保留。
-        old = plugins.get(name[:-5])
-        entry = {
-            "file": name,
-            "updatedAt": meta.get("updatedAt"),
-            "entries": len(pack.get("entries") or []),
-            "resources": len(pack.get("resources") or []),
-            "attributes": len(pack.get("attributes") or []),
-        }
-        if isinstance(old, dict) and "downloads" in old:
-            entry["downloads"] = old["downloads"]
-        plugins[name[:-5]] = entry
+    index["plugins"] = uit_index.collect(packs_dir, index.get("plugins") or {})
     index["updatedAt"] = time.strftime("%Y-%m-%d")
     save_json(index_path, index)
 

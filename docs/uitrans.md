@@ -127,12 +127,20 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
 - 现在 `UICallSemantics.IsChatCall` 把它们按 UI 处理（`IsLogCall` 里先短路排除），聊天栏里玩家看得见；
   已实测 BazookaLens 的 `IChatGui.PrintError` 文案进候选（fgtest 钉住）。
 
-## 公共译文库（uit-packs/）（2026-10-02 实现）
+## 公共译文库（uit-packs/）（2026-10-02 实现；2026-10-04 多包模型）
 
 - 形态（用户定）：**纯数据包、按插件按需下载**——插件本体不带译文；`一键汉化` 先查库，有现成的就下载合并，
-  没有或没覆盖全才用自己的翻译通道；用不到的插件永远不下载。包 = `uit-packs/<内部名>.json`，
-  索引 = `uit-packs/index.json`（插件 → 文件 / 条数 / 日期）。设置页有「从公共译文库下载现成译文」开关（默认开）。
-- 生成（云端）：`scripts/uit_library_build.py`（工作流 `uit-packs.yml`，每周一 13:30 北京；手动触发可指定插件）：
+  没有或没覆盖全才用自己的翻译通道；用不到的插件永远不下载。设置页有「从公共译文库下载现成译文」开关（默认开）。
+- **多包模型（2026-10-04 用户定）**：
+  · **基础包** `uit-packs/<内部名>.json`：**维护者自己翻译/导出的**，云端管线生成、本机 export 更新；
+  · **玩家包** `uit-packs/<内部名>@<包ID>.json`：**每次收录的投稿新建一个**（包 ID = `user-<内容指纹前6位>`，匿名）；
+    投稿**不再合并进基础包**，也互不覆盖——每个人传的在云端各自留档、各算下载数与 👍；
+  · 索引 `index.json` 里每插件带 `packs` 列表（id/file/label/source/条数/日期/downloads/likes）；
+    插件详情「云端译文」逐包一行：`下载译文` + `👍`（本机赞过变灰，每台机器记一次）。
+  · 自动合并顺序：基础包先合 → 玩家包按更新时间**从新到旧**（新投稿在冲突时获胜）；
+    唯一实现 = `scripts/uit_index.py`（三处索引生成器共用，重建时保留下载数与 👍）。
+  · 计数：中继 KV，键 `<插件>@<包ID>`（基础包包 ID = `library`）；`library-counts.yml` 每 6 小时写回索引。
+- 生成（云端）：`scripts/uit_library_build.py`（工作流 `uit-packs.yml`；**定时已停**，只手动触发）：
   Aetherfeed 找仓库 → 拉仓库文件取 `DownloadLinkInstall` → 下载 zip 取主 DLL → 探针抽取 →
   按「原文 / 容器+key」增量、只翻新增（可带 FF14 术语表）→ 写包 + 索引。
   **不在维护者本机跑**（与简介词表同一条纪律）；本机只允许 `--dry-run` 盘点。
