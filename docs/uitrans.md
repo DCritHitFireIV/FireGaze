@@ -873,4 +873,6 @@ AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打
   · 运行时 `FFXIVGlossary.StopSingle`：同名单（更老版本插件读旧表时也能兜底）；
   · 提示分级（`TranslationChannels`）：多词条仍「必须采用」；**单字条改成「仅在原文里作为专有名词时采用，普通含义按常规翻」**。
   术语表已重新生成：31,768 → **31,582 条**。
-- **待办**：存量 385 条的修复（重翻或人工清理）与云库上传，见会话记录决定。
+- **修复与上云（2026-10-03 完成）**：三轮重翻共 **557 条**（430 + 33 + 94，含属性 / 资源段；0 拒绝），随后重打受影响插件（SimpleTweaks 属性段 617 条复原、AutoHook 45 条等）。
+  公共译文库已重新上线：**44 插件 · 10410 条目 · 326 资源 · 666 属性**（`uit-packs/*.json` + `index.json`，PreserveID 一律 false、Source=library、排除本机「不翻」）；同步修复版管线（inbox_uit.py 容器/Source 分级/幂等、export 排除本机不翻、ffxiv_glossary.py 单字过滤 + 去冠词过滤、ffxiv-glossary.tsv 31582 条、uit-rules.json）。
+  公开仓推送提交 `de6e9fc`（main，未发版；CI 自动生成仍按 10-02 决定暂停，手动 dispatch 重建前需先同步插件源码）。
