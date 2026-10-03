@@ -9,6 +9,12 @@ name: inbox
 on:
   issues:
     types: [opened, edited]
+  # 中继直传的界面文字投稿（/uit-submit 提交的文件）——2026-10-04 新增：
+  # 几千条的投稿不再走 issue 粘贴，提交后由本工作流自动并入 uit-packs/。
+  push:
+    branches: [main]
+    paths:
+      - 'docs/contributions/inbox/uit-direct-*.json'
 
 permissions:
   contents: write
@@ -16,6 +22,7 @@ permissions:
 
 jobs:
   inbox:
+    if: github.event_name == 'issues'
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -119,6 +126,59 @@ jobs:
 
           https://github.com/${GITHUB_REPOSITORY}/issues/${{ github.event.issue.number }}
           $HOWTO"
+          curl -sS -X POST "$PUSH_URL" \
+            --data-urlencode "title=$TITLE" \
+            --data-urlencode "desp=$BODY" || echo "通知发送失败（不影响收录）"
+
+  direct:
+    # 中继直传的界面文字投稿：校验 + 并入 uit-packs + 留档 + 通知。
+    # 没有 issue 可回——投稿者在插件里直接拿到云端文件/提交链接。
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 并入直传投稿
+        run: |
+          python scripts/ingest_uit_direct.py --summary-out "$RUNNER_TEMP/summary.txt"
+
+      - name: 提交存档与译文包
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/contributions/inbox uit-packs
+          if git diff --quiet --cached; then
+            echo "没有变化（这一批直传已经并入过）"
+            exit 0
+          fi
+          git commit -m "chore: 并入玩家直传的界面文字投稿"
+          git push || { git pull --rebase && git push; }
+
+      - name: 通知维护者（配了 secret 才发）
+        env:
+          PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
+        run: |
+          if [ -z "$PUSH_URL" ]; then
+            echo "没有配置 SERVER3_PUSH_URL，跳过手机通知（仓库里已经存下这次投稿）"
+            exit 0
+          fi
+          if [ ! -s "$RUNNER_TEMP/summary.txt" ]; then
+            echo "这次没有新并入的投稿，不通知"
+            exit 0
+          fi
+          TITLE="FireGaze 直传投稿 $(head -1 "$RUNNER_TEMP/summary.txt" | cut -c1-60)"
+          BODY="$(cat "$RUNNER_TEMP/summary.txt")
+
+          界面文字投稿已自动并入 uit-packs/，无需手动收录；抽查后随下次库更新对玩家生效
+          https://github.com/${GITHUB_REPOSITORY}/commits/main"
           curl -sS -X POST "$PUSH_URL" \
             --data-urlencode "title=$TITLE" \
             --data-urlencode "desp=$BODY" || echo "通知发送失败（不影响收录）"

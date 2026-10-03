@@ -384,13 +384,18 @@ def refresh_index(packs_dir: str) -> None:
         if pack is None:
             continue
         meta = pack.get("_meta") or {}
-        plugins[name[:-5]] = {
+        # 下载量由中继统计（scripts/update_library_counts.py 定时写回）：重算索引必须保留。
+        old = plugins.get(name[:-5])
+        entry = {
             "file": name,
             "updatedAt": meta.get("updatedAt"),
             "entries": len(pack.get("entries") or []),
             "resources": len(pack.get("resources") or []),
             "attributes": len(pack.get("attributes") or []),
         }
+        if isinstance(old, dict) and "downloads" in old:
+            entry["downloads"] = old["downloads"]
+        plugins[name[:-5]] = entry
     index["updatedAt"] = time.strftime("%Y-%m-%d")
     save_json(index_path, index)
 

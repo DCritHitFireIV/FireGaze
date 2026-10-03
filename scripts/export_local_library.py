@@ -338,6 +338,14 @@ def main(argv: list[str] | None = None) -> int:
 def write_index(out_dir: str) -> None:
     """汇总 out/ 下所有包成索引（保留以前构建过、这次没导出的）。"""
     plugins: dict[str, dict] = {}
+    # 下载量由中继统计（scripts/update_library_counts.py 定时写回）：重建索引必须原样保留。
+    existing: dict[str, dict] = {}
+    index_path = os.path.join(out_dir, "index.json")
+    if os.path.exists(index_path):
+        try:
+            existing = json.loads(io.open(index_path, encoding="utf-8").read()).get("plugins") or {}
+        except Exception:  # noqa: BLE001
+            existing = {}
     for file_name in sorted(os.listdir(out_dir)):
         if not file_name.endswith(".json") or file_name == "index.json":
             continue
@@ -347,13 +355,18 @@ def write_index(out_dir: str) -> None:
         except Exception:  # noqa: BLE001
             continue
         meta = pack.get("_meta") or {}
-        plugins[file_name[:-5]] = {
+        name = file_name[:-5]
+        entry = {
             "file": file_name,
             "updatedAt": meta.get("updatedAt"),
             "entries": len(pack.get("entries") or []),
             "resources": len(pack.get("resources") or []),
             "attributes": len(pack.get("attributes") or []),
         }
+        old = existing.get(name)
+        if isinstance(old, dict) and "downloads" in old:
+            entry["downloads"] = old["downloads"]
+        plugins[name] = entry
 
     index = {"updatedAt": time.strftime("%Y-%m-%d"), "plugins": plugins}
     io.open(os.path.join(out_dir, "index.json"), "w", encoding="utf-8", newline="\n").write(

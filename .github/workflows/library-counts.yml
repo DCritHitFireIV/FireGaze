@@ -1,0 +1,38 @@
+name: update-library-counts
+
+# 公共译文库的分包下载量（2026-10-04 新增）：
+#   包本体从 raw/镜像下载（CDN 不计下载量）→ 插件下载成功后上报中继（/library-download，KV 计数）
+#   → 本工作流把计数写回 uit-packs/index.json → 插件界面显示「下载数 N」。
+# 中继还没绑定 KV（LIBRARY_COUNTS）时脚本会安静跳过，不会把定时任务刷红。
+
+on:
+  schedule:
+    # 每 6 小时一次，错开整点的插件下载数更新（download-count.yml）
+    - cron: '30 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 写回下载量
+        run: python3 scripts/update_library_counts.py
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- uit-packs/index.json; then
+            echo "下载量没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add uit-packs/index.json
+          git commit -m "chore: update library download counts"
+          git push || { git pull --rebase && git push; }
