@@ -5,6 +5,12 @@
   "companions": {
     "ascended-rotationsolverreborn": [
       "RotationSolver.Basic.dll"
+    ],
+    "HaselTweaks": [
+      "HaselCommon.dll"
+    ],
+    "LeveHelper": [
+      "HaselCommon.dll"
     ]
   },
   "uiAttributes": [
@@ -12,8 +18,15 @@
     "TweakDescriptionAttribute",
     "TweakConfigOptionAttribute",
     "ChangelogAttribute",
-    "RotationConfigAttribute"
+    "RotationConfigAttribute",
+    "PropertyDisplayAttribute",
+    "ConfigDisplayAttribute",
+    "PropertyComboAttribute"
   ],
+  "_attributeSkipArgs": "个别特性的某一个参数是功能字符串（不是给人看的文本），抽取时跳过。例：BossMod 的 PropertyDisplay 第 5 个参数是搜索标签，翻了会让英文搜索失效。键 = 特性短名，值 = 要跳过的构造参数下标。",
+  "attributeSkipArgs": {
+    "PropertyDisplayAttribute": [ 4 ]
+  },
   "_commandAttributes": "命令类特性：第 0 个构造参数是命令名 / 子命令名（绝不能翻），帮助文本从下标 N 开始。值 = 帮助文本的起始参数下标。",
   "commandAttributes": {
     "CmdAttribute": 1,

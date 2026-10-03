@@ -1,0 +1,4613 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": " Errors Detected",
+      "Translated": "检测到错误",
+      "Context": "SimpleTweaksPluginConfig.DrawConfigUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SimpleTweaksPlugin - Debug",
+      "Translated": "SimpleTweaksPlugin - 调试",
+      "Context": "DebugWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\" is not a valid tweak id.",
+      "Translated": "\" 不是有效的调整项 ID。",
+      "Context": "SimpleTweaksPlugin.OnConfigCommandHandler",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' is not enabled.",
+      "Translated": "' 未启用。",
+      "Context": "BaseTweak.HandleBasicCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' is not a valid value for a boolean.",
+      "Translated": "' 不是有效的布尔值。",
+      "Context": "BaseTweak.HandleBasicCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' is not a valid integer between ",
+      "Translated": "' 不是介于以下范围的有效整数",
+      "Context": "BaseTweak.HandleBasicCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " and ",
+      "Translated": "和",
+      "Context": "BaseTweak.HandleBasicCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' Command Config:",
+      "Translated": "' 命令配置：",
+      "Context": "BaseTweak.HandleBasicCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' does not support command usage.",
+      "Translated": "' 不支持命令用法。",
+      "Context": "BaseTweak.HandleBasicCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Invalid Bait",
+      "Translated": "无效鱼饵",
+      "Context": "BaitCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You have none of that bait.",
+      "Translated": "你没有该鱼饵。",
+      "Context": "BaitCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You cannot currently change bait.",
+      "Translated": "当前无法更换鱼饵。",
+      "Context": "BaitCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " is not a player.",
+      "Translated": "不是玩家。",
+      "Context": "CharaCardCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No saved gearset for ",
+      "Translated": "没有已保存的套装：",
+      "Context": "CharacterClassSwitcher.EventHandle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[Simple Tweaks] Something went wrong... You seem to have a command loop",
+      "Translated": "[Simple Tweaks] 出错了…… 你似乎遇到了命令循环",
+      "Context": "CommandAlias.ProcessChatInputDetour",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Command alias result is longer than the maximum of 500 characters. The command could not be executed.",
+      "Translated": "命令别名结果超过 500 个字符的上限。命令无法执行。",
+      "Context": "CommandAlias.ProcessChatInputDetour",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Error: Command is too long",
+      "Translated": "错误：命令过长",
+      "Context": "CommandAlias.ProcessChatInputDetour",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You have no gearset for ",
+      "Translated": "你没有以下职业的套装：",
+      "Context": "ContentsFinderConfirmClassSwitch.OnIconClicked",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Duty Completed in: ",
+      "Translated": "任务完成用时：",
+      "Context": "DutyTimer.OnDutyCompleted",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " (priority list of job abbreviations...)",
+      "Translated": "（职业缩写优先级列表……）",
+      "Context": "EquipJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " (job abbreviation / name)",
+      "Translated": "（职业缩写 / 名称）",
+      "Context": "EquipJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bad job/class abbreviation: \"",
+      "Translated": "无效的职业/特职缩写：",
+      "Context": "EquipJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "An error occurred.",
+      "Translated": "发生错误。",
+      "Context": "EquipJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No suitable gearset found",
+      "Translated": "未找到合适的套装",
+      "Context": "EquipJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to find job ",
+      "Translated": "无法找到职业",
+      "Context": "EquipJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Equipping gearset #",
+      "Translated": "正在装备套装 #",
+      "Context": "EquipJobCommand.SwitchClassJobId",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No friend with name \"",
+      "Translated": "当前服务器上没有名为“",
+      "Context": "EstateListCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\" on your current world.",
+      "Translated": "”的好友。",
+      "Context": "EstateListCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No gearset is active.",
+      "Translated": "没有启用的套装。",
+      "Context": "GearsetSaveCurrent.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Active gearset class does not match current class.",
+      "Translated": "启用的套装职业与当前职业不符。",
+      "Context": "GearsetSaveCurrent.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You must be inside a house or apartment to use that command.",
+      "Translated": "必须在房屋或公寓内才能使用该命令。",
+      "Context": "HouseLightCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You don't have permission to adjust the lights in this house/apartment.",
+      "Translated": "你没有权限调整此房屋/公寓的灯光。",
+      "Context": "HouseLightCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Lighting has been changed on your client. Use ",
+      "Translated": "灯光已在你的客户端上更改。使用",
+      "Context": "HouseLightCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " to make it permanent.",
+      "Translated": "使其永久生效。",
+      "Context": "HouseLightCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You cannot leave during a cutscene.",
+      "Translated": "过场动画中无法离开。",
+      "Context": "LeaveDutyCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You are not in a duty.",
+      "Translated": "你不在任务中。",
+      "Context": "LeaveDutyCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You cannot leave your current duty.",
+      "Translated": "你无法离开当前任务。",
+      "Context": "LeaveDutyCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You cannot open the Duty Finder during a cutscene.",
+      "Translated": "过场动画中无法打开任务搜索器。",
+      "Context": "LevelingDungeonCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You cannot open the Duty Finder while in a duty.",
+      "Translated": "任务中无法打开任务搜索器。",
+      "Context": "LevelingDungeonCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to find a valid leveling dungeon.",
+      "Translated": "未能找到有效的练级迷宫。",
+      "Context": "LevelingDungeonCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' is not a valid 'Main Command'.",
+      "Translated": "' 不是有效的 '主命令'。",
+      "Context": "MainCommandCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You are not inside your own estate.",
+      "Translated": "你不在自己的房屋内。",
+      "Context": "OpenEstateAccess.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unrecognised Estate Type",
+      "Translated": "无法识别的房屋类型",
+      "Context": "OpenEstateAccess.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You can only use this command in Occult Crescent",
+      "Translated": "该命令只能在新月岛使用",
+      "Context": "PhantomJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' is not a valid phantom job.",
+      "Translated": "' 不是有效的幻境职业。",
+      "Context": "PhantomJobCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Screenshot Already Exists: ",
+      "Translated": "截图已存在：",
+      "Context": "ScreenshotFileName.GetPathDetour",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Options:\n",
+      "Translated": "选项：",
+      "Context": "SetOptionCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Option",
+      "Translated": "未知选项",
+      "Context": "SetOptionCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " set to ",
+      "Translated": "设置为",
+      "Context": "SetOptionCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "LegacyMovement",
+      "Translated": "传统移动",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "HideUnassignedHotbarSlots",
+      "Translated": "隐藏未分配热键栏",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "HotbarEmptyVisible",
+      "Translated": "热键栏空位可见",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "LimitMouseToGameWindow",
+      "Translated": "鼠标限制在游戏窗口内",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MouseOpeLimit",
+      "Translated": "鼠标操作限制",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OwnDisplayName",
+      "Translated": "自己的显示名",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateDispTypeSelf",
+      "Translated": "名牌显示类型：自己",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "PartyDisplayName",
+      "Translated": "小队显示名",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateDispTypeParty",
+      "Translated": "名牌显示类型：小队",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "AllianceDisplayName",
+      "Translated": "团队显示名",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateDispTypeAlliance",
+      "Translated": "名牌显示类型：团队",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OtherPlayerDisplayName",
+      "Translated": "其他玩家显示名",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateDispTypeOther",
+      "Translated": "名牌显示类型：其他",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "FriendDisplayName",
+      "Translated": "好友显示名",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateDispTypeFriend",
+      "Translated": "名牌显示类型：好友",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SelfNameTitle",
+      "Translated": "自己称号",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateNameTitleTypeSelf",
+      "Translated": "名牌称号类型：自己",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "PartyNameTitle",
+      "Translated": "小队称号",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateNameTitleTypeParty",
+      "Translated": "名牌称号类型：小队",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "AllianceNameTitle",
+      "Translated": "团队称号",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateNameTitleTypeAlliance",
+      "Translated": "名牌称号类型：团队",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OtherNameTitle",
+      "Translated": "其他称号",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateNameTitleTypeOther",
+      "Translated": "名牌称号类型：其他",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "FriendNameTitle",
+      "Translated": "好友称号",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateNameTitleTypeFriend",
+      "Translated": "名牌称号类型：好友",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CutsceneAudioLanguage",
+      "Translated": "过场动画语音语言",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CutsceneMovieVoice",
+      "Translated": "过场动画语音",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SkipTransportCutscenes",
+      "Translated": "跳过交通过场动画",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CutsceneSkipIsShip",
+      "Translated": "过场动画跳过：坐船",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SkipScenarioCutscenes",
+      "Translated": "跳过剧情过场动画",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CutsceneSkipIsContents",
+      "Translated": "过场动画跳过：任务",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SkipHousingCutscenes",
+      "Translated": "跳过房屋过场动画",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CutsceneSkipIsHousing",
+      "Translated": "过场动画跳过：房屋",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DisplayNameSize",
+      "Translated": "显示名大小",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NamePlateDispSize",
+      "Translated": "名牌显示大小",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CharacterDisplayLimit",
+      "Translated": "角色显示上限",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DisplayObjectLimitType",
+      "Translated": "显示对象上限类型",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DirectChat",
+      "Translated": "直接聊天",
+      "Context": "SetOptionCommand..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SpecialCharacterInput",
+      "Translated": "特殊字符输入",
+      "Context": "SpecialCharacterInput.DrawWindow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "hotbarColumns",
+      "Translated": "快捷栏列数",
+      "Context": "SyncCrafterBars.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "crosshotbarColumns",
+      "Translated": "交叉快捷栏列数",
+      "Context": "SyncCrafterBars.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "tryOnCorrectItemSettings",
+      "Translated": "试穿正确物品设置",
+      "Context": "TryOnCorrectItem.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Available Collection items:",
+      "Translated": "可用收藏品：",
+      "Context": "UseCollectionCommand.OnCommand",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "configTable",
+      "Translated": "配置表",
+      "Context": "ChangeMapAreaColors.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "personalCustomizations",
+      "Translated": "个人自定义",
+      "Context": "CustomFreeCompanyTags.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "iconViewer",
+      "Translated": "图标查看器",
+      "Context": "CustomFreeCompanyTags.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "placeholdersTable",
+      "Translated": "占位符表",
+      "Context": "CustomFreeCompanyTags.TagCustomizationEditor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "removeColumnSpacing",
+      "Translated": "移除列间距",
+      "Context": "ExpandedCurrencyDisplay.DrawGridConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "addGridSpacing",
+      "Translated": "添加网格间距",
+      "Context": "ExpandedCurrencyDisplay.DrawGridConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "AddCurrencyButton",
+      "Translated": "添加货币按钮",
+      "Context": "ExpandedCurrencyDisplay.DrawAddCurrency",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "RemoveCurrencyButton",
+      "Translated": "移除货币按钮",
+      "Context": "ExpandedCurrencyDisplay.DrawCurrencies",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CurrencyUpButton",
+      "Translated": "货币上移按钮",
+      "Context": "ExpandedCurrencyDisplay.DrawCurrencies",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CurrencyDownButton",
+      "Translated": "货币下移按钮",
+      "Context": "ExpandedCurrencyDisplay.DrawCurrencies",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CurrencyPositionButton",
+      "Translated": "货币位置按钮",
+      "Context": "ExpandedCurrencyDisplay.DrawCurrencies",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "bannerList",
+      "Translated": "横幅列表",
+      "Context": "HideUnwantedBanner.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You have no saved gearset for ",
+      "Translated": "你没有已保存的套装用于",
+      "Context": "ImprovedCraftingLog.ClickSynthesisButtonDetour",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You can't use that command right now.",
+      "Translated": "你现在无法使用该命令。",
+      "Context": "ImprovedCraftingLog.Enable",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tweak was implemented into the base game as of 7.4",
+      "Translated": "该调整已在 7.4 版本中并入游戏本体",
+      "Context": "SubmarineDestinationLetters.get_DisabledMessage",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ColourValue",
+      "Translated": "颜色值",
+      "Context": "DesynthesisSkill.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "hotkeyDisplay",
+      "Translated": "热键显示",
+      "Context": "ItemHotkeys.DrawHotkeyConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "forcedPlayerNames",
+      "Translated": "强制玩家名称",
+      "Context": "ChatNameColours.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "chatChannelConfig",
+      "Translated": "聊天频道配置",
+      "Context": "ChatNameColours.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "presetList",
+      "Translated": "预设列表",
+      "Context": "CustomTimestampFormat.DrawConfig",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unk#",
+      "Translated": "未知#",
+      "Context": "ActionBarDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed",
+      "Translated": "失败",
+      "Context": "ActionBarDebug.DrawHotbar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Translated": "清除",
+      "Context": "AddonDebug.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[TYPE",
+      "Translated": "[类型",
+      "Context": "ConfigDebug.DrawConfigBase",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "friends",
+      "Translated": "好友",
+      "Context": "FriendListDebugging.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainers",
+      "Translated": "雇员",
+      "Context": "RetainersDebugging.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Logos Tooltips",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.LogosTooltip",
+      "Translated": "文理技能提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds which kind of Logos Mnenes you can obtain from a Logogram in its tooltip.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.LogosTooltip",
+      "Translated": "在文理技能提示中显示可从文理技能中获得的文理技能类型。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Lock Action Bars",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.AutoLockHotbar",
+      "Translated": "自动锁定技能栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically locks action bars when certain conditions are met.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.AutoLockHotbar",
+      "Translated": "满足特定条件时自动锁定技能栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to automatically unlock after combat ends.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.AutoLockHotbar",
+      "Translated": "新增战斗结束后自动解锁的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock at beginning of combat.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.AutoLockHotbar/Configs::CombatStart",
+      "Translated": "战斗开始时锁定。",
+      "Source": "library"
+    },
+    {
+      "Original": "Unlock when combat ends.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.AutoLockHotbar/Configs::CombatEnd",
+      "Translated": "战斗结束时解锁。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock when changing zone.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.AutoLockHotbar/Configs::ZoneChange",
+      "Translated": "切换区域时锁定。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Cross Hotbar",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.AutoLockHotbar/Configs::CrossHotbar",
+      "Translated": "锁定十字技能栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Commendation Window Automatically",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.AutoOpenCommendWindow",
+      "Translated": "自动打开评价窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the commendation window upon completion of a duty.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.AutoOpenCommendWindow",
+      "Translated": "完成任务时自动打开评价窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open loot window when items are added",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.AutoOpenLootWindow",
+      "Translated": "物品加入时打开拾取窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the loot rolling window when new items are added to be rolled on.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.AutoOpenLootWindow",
+      "Translated": "有新物品可投掷时自动打开拾取投掷窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Bait Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.BaitCommand",
+      "Translated": "鱼饵命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds /$[CustomOrDefaultCommand] to switch fishing baits.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.BaitCommand",
+      "Translated": "添加 /$[CustomOrDefaultCommand] 用于切换钓鱼鱼饵。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not enabling when starting the game.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.BaitCommand",
+      "Translated": "修复了启动游戏时插件未启用的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Adventurer Plate Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.CharaCardCommand",
+      "Translated": "打开冒险者铭牌命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to open adventurer plates.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.CharaCardCommand",
+      "Translated": "添加打开冒险者铭牌的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Window Job Switcher",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.CharacterClassSwitcher",
+      "Translated": "角色窗口职业切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow clicking on classes to switch to gearsets.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.CharacterClassSwitcher",
+      "Translated": "允许点击职业以切换到套装。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not working on DoH without desynthesis unlocked.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.CharacterClassSwitcher",
+      "Translated": "修复了未解锁分解时生产职业无法使用的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed issue causing a loop of trying to apply a gearset that is missing its weapon when using gamepad.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.CharacterClassSwitcher",
+      "Translated": "修复了使用手柄时尝试应用缺少武器的套装导致循环的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Increased zoom on character previews",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.CharaViewIncreasedZoom",
+      "Translated": "增强角色预览缩放",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows zooming in near infinitely on character preview views, such as Try On and Examine.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.CharaViewIncreasedZoom",
+      "Translated": "允许在角色预览视图（如试穿和查看）中近乎无限地放大。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Tweaks",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.ChatTweaks",
+      "Translated": "聊天增强",
+      "Source": "library"
+    },
+    {
+      "Original": "Character Directory Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.ChrDirCommand",
+      "Translated": "角色目录命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to open the directory where client side character data is stored.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.ChrDirCommand",
+      "Translated": "添加打开客户端角色数据存储目录的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clickable Alarm Icon",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.ClickableAlarm",
+      "Translated": "可点击的闹钟图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows clicking the alarm icon in the server bar to open the alarm window.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.ClickableAlarm",
+      "Translated": "允许点击服务器栏中的闹钟图标以打开闹钟窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Combat Movement Type Control",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.CombatMovementControl",
+      "Translated": "战斗移动类型控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Set movement type between Standard and Legacy when in/out of combat or when weapon is drawn/sheathed.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.CombatMovementControl",
+      "Translated": "在进入/离开战斗或拔出/收起武器时，在标准和传统移动类型之间切换。",
+      "Source": "library"
+    },
+    {
+      "Original": "Command Alias",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.CommandAlias",
+      "Translated": "命令别名",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows replacing commands typed into chat box with other commands.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.CommandAlias",
+      "Translated": "允许将聊天框中输入的命令替换为其他命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty Ready Class Switching",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.ContentsFinderConfirmClassSwitch",
+      "Translated": "任务就绪职业切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Click 'Previous' class icon in Duty Ready window to switch class.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.ContentsFinderConfirmClassSwitch",
+      "Translated": "在任务就绪窗口中点击“上一个”职业图标以切换职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Customize Group Pose Camera Control",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.CustomizeGroupPoseCameraControl",
+      "Translated": "自定义集体动作相机控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows you to customize the camera control in group pose",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.CustomizeGroupPoseCameraControl",
+      "Translated": "允许自定义集体动作中的相机控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to show the selected service account.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.DataCentreOnTitleScreen",
+      "Translated": "新增显示所选服务账号的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Data Centre on Title Screen",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DataCentreOnTitleScreen",
+      "Translated": "标题画面显示大区",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the current Data Centre on the Title Screen",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DataCentreOnTitleScreen",
+      "Translated": "在标题画面显示当前大区",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Service Account Number",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.DataCentreOnTitleScreen/Configs::ShowServiceAccountIndex",
+      "Translated": "显示服务账号编号",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Camera Culling",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling",
+      "Translated": "禁用相机剔除",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable the hiding of characters when the camera gets too close.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling",
+      "Translated": "当相机过于靠近时，禁用角色隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable culling in Group Pose",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling/Configs::DisableInGroupPose",
+      "Translated": "在集体动作中禁用剔除",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable culling outside Group Pose",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling/Configs::DisableOutsideGroupPose",
+      "Translated": "在集体动作外禁用剔除",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Click Targeting",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableClickTargeting",
+      "Translated": "禁用点击选定目标",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows disabling of the target function on left and right mouse clicks.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DisableClickTargeting",
+      "Translated": "允许封技鼠标左右键的选定目标功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to only disable targeting players.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.DisableClickTargeting",
+      "Translated": "新增仅禁用选定玩家目标的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Mount Music Volume Change",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableMountVolumeChange",
+      "Translated": "禁用坐骑音乐音量变化",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents mount music from going quiet when not moving.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DisableMountVolumeChange",
+      "Translated": "防止坐骑音乐在静止时音量降低。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Mouse Camera Control",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableMouseCameraControl",
+      "Translated": "禁用鼠标控制相机",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables all control of the camera using the mouse.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DisableMouseCameraControl",
+      "Translated": "禁用所有使用鼠标控制相机的操作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow control while holding Shift",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.DisableMouseCameraControl/Configs::AllowWithShift",
+      "Translated": "按住 Shift 时允许控制",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Title Screen Movie",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableTitleScreenMovie",
+      "Translated": "禁用标题画面影片",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents the title screen from playing the introduction movie after 60 seconds.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DisableTitleScreenMovie",
+      "Translated": "防止标题画面在 60 秒后播放开场影片。",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty Timer",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DutyTimer",
+      "Translated": "任务计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "When completing a duty, tells you how much time the duty took.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DutyTimer",
+      "Translated": "完成任务时，显示该任务所花费的时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote Log Status in Server Bar",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.EmoteLogServerBarEntry",
+      "Translated": "服务器栏中的情感动作日志状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the emote log status in the server bar.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.EmoteLogServerBarEntry",
+      "Translated": "在服务器栏中显示情感动作日志状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Emote Log Subcommand",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.EmoteLogSubcommand",
+      "Translated": "情感动作日志子命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a 'text' subcommand for emotes when emotelog is disabled.  /yes text",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.EmoteLogSubcommand",
+      "Translated": "当表情记录禁用时，为表情添加 'text' 子命令。 /yes text",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip items from Hotbars",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.EquipFromHotbar",
+      "Translated": "从热键栏装备物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables the ability to equip items assigned to hotbars.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.EquipFromHotbar",
+      "Translated": "启用装备已分配至热键栏物品的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Job Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.EquipJobCommand",
+      "Translated": "装备职业命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to switch to a class or job's gearset.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.EquipJobCommand",
+      "Translated": "添加切换至某职业或特职装备方案的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Estate List Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.EstateListCommand",
+      "Translated": "房屋列表命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to open the estate list of one of your friends.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.EstateListCommand",
+      "Translated": "添加打开好友房屋列表的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Now allows partial matching of friend names.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.EstateListCommand",
+      "Translated": "现在允许部分匹配好友名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not working in 6.4",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.EstateListCommand",
+      "Translated": "修复了 6.4 版本中调整项无法工作的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Alt + F4 Exit Game",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.ExitGame",
+      "Translated": "Alt + F4 退出游戏开始",
+      "Source": "library"
+    },
+    {
+      "Original": "Pressing Alt + F4 will cause the game to close safely.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.ExitGame",
+      "Translated": "按下 Alt + F4 将使游戏开始安全关闭。",
+      "Source": "library"
+    },
+    {
+      "Original": "Extended Macro Icons",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.ExtendedMacroIcon",
+      "Translated": "扩展宏图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow using specific Icon IDs when using '/macroicon # id' inside of a macro.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.ExtendedMacroIcon",
+      "Translated": "允许在宏中使用 '/macroicon # id' 时指定图标 ID。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fix '/target' command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.FixTarget",
+      "Translated": "修复 '/target' 命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows using the default '/target' command for targeting players or NPCs by their names.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.FixTarget",
+      "Translated": "允许使用默认的 '/target' 命令按名称选定目标玩家或 NPC。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not working in french.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.FixTarget",
+      "Translated": "修复了调整项在法语环境下无法工作的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add ability to clear target by providing no name.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.FixTarget",
+      "Translated": "新增通过不提供名称来清除选定目标的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Custom Time for Furniture Clocks",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.FurnitureClocksCustomTime",
+      "Translated": "为家具时钟使用自定义时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes the time displayed on chronometer furniture.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.FurnitureClocksCustomTime",
+      "Translated": "更改计时家具上显示的时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Local Time",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.FurnitureClocksCustomTime/TimeMode::Local",
+      "Translated": "本地时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Server Time",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.FurnitureClocksCustomTime/TimeMode::Server",
+      "Translated": "服务器时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Timezone",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.FurnitureClocksCustomTime/TimeMode::Custom",
+      "Translated": "自定义时区",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed Time",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.FurnitureClocksCustomTime/TimeMode::Fixed",
+      "Translated": "固定时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Mode",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.FurnitureClocksCustomTime/Configs::Mode",
+      "Translated": "模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Squadron Chemistry Available Icon",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.GcArmyChemistryAvailable",
+      "Translated": "中队战术可用图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Show an icon over squadron members who have a new chemistry available.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.GcArmyChemistryAvailable",
+      "Translated": "在中队成员有新战术可用时显示图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearset Update Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.GearsetSaveCurrent",
+      "Translated": "套装更新命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Updates the active gearset with your current equipment.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.GearsetSaveCurrent",
+      "Translated": "用当前装备更新当前套装。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Mouse Cursor After Inactivity",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.HideMouseAfterInactivity",
+      "Translated": "闲置后隐藏鼠标指针",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the mouse cursor after a period of inactivity like video players do.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.HideMouseAfterInactivity",
+      "Translated": "像视频播放器一样在闲置一段时间后隐藏鼠标指针。",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't hide in cutscenes",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.HideMouseAfterInactivity/Config::NoHideInCutscenes",
+      "Translated": "过场动画中不隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't hide in combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.HideMouseAfterInactivity/Config::NoHideInCombat",
+      "Translated": "战斗中不隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't hide in instances",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.HideMouseAfterInactivity/Config::NoHideInInstance",
+      "Translated": "副本中不隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Don't hide while on interactable",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.HideMouseAfterInactivity/Config::NoHideWhileHovering",
+      "Translated": "悬停可交互对象时不隐藏",
+      "Source": "library"
+    },
+    {
+      "Original": "Screenshot Improvements",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "截图改进",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows taking higher resolution screenshots, Hiding Dalamud & Game UIs and removing the copyright notice from screenshots.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "允许拍摄更高分辨率的截图，隐藏 Dalamud 与游戏界面，并移除截图中的版权信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to hide dalamud UI for screenshot.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "新增截图时隐藏 Dalamud 界面的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to hide game UI for screenshots.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "新增截图时隐藏游戏界面的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to remove the FFXIV Copyright from screenshots.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "新增移除截图中 FFXIV 版权信息的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Renamed from 'High Resolution Screenshots' to 'Screenshot Improvements'",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "由“高分辨率截图”重命名为“截图改进”",
+      "Source": "library"
+    },
+    {
+      "Original": "Added experimental option to use ReShade for screenshots.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "新增使用 ReShade 截图的实验性选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-added 'Use ReShade' option",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "重新加入“使用 ReShade”选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed 'Remove Copyright Text' option.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HighResScreenshots",
+      "Translated": "修复“移除版权文本”选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "House Lights Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.HouseLightCommand",
+      "Translated": "房屋灯光命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to control lighting in your own housing areas.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.HouseLightCommand",
+      "Translated": "添加用于控制自己房屋区域灯光的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not working.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HouseLightCommand",
+      "Translated": "修复功能不生效的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added ability to toggle SSAO with 'ssao-on' and 'ssao-off' parameters",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.HouseLightCommand",
+      "Translated": "新增通过 'ssao-on' 和 'ssao-off' 参数切换 SSAO 的功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Keyboard Gaming Mode",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.KeyInterrupt",
+      "Translated": "键盘游戏模式",
+      "Source": "library"
+    },
+    {
+      "Original": "Block Alt-Tab and other keys to keep you in the game.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.KeyInterrupt",
+      "Translated": "屏蔽 Alt-Tab 等按键，让你保持在游戏中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to block Caps Lock key",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.KeyInterrupt",
+      "Translated": "新增屏蔽 Caps Lock 键的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Leave Duty Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.LeaveDutyCommand",
+      "Translated": "离开任务命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to leave the current duty.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.LeaveDutyCommand",
+      "Translated": "添加离开当前任务的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Leveling Dungeon Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.LevelingDungeonCommand",
+      "Translated": "练级迷宫命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to open the highest level leveling dungeon available for your level.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.LevelingDungeonCommand",
+      "Translated": "添加打开当前等级可用的最高等级练级迷宫的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Limit Break Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.LimitBreakAdjustments",
+      "Translated": "极限技调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Simple customization of the limit break bars.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.LimitBreakAdjustments",
+      "Translated": "简单自定义极限技槽。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added preview for when not in a party",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.LimitBreakAdjustments",
+      "Translated": "新增不在小队中时的预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed limit break text appearing when it isn't supposed to",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.LimitBreakAdjustments",
+      "Translated": "修复极限技文本在不该出现时出现的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Long Veil",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.LongVeil",
+      "Translated": "长头纱",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces the wedding veils with their long variants that are usually only shown in the sanctum of the twelve.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.LongVeil",
+      "Translated": "将婚礼头纱替换为通常只在十二神大圣堂中显示的长款头纱。",
+      "Source": "library"
+    },
+    {
+      "Original": "Main Command Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.MainCommandCommand",
+      "Translated": "主指令命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to allow using any Main Command from chat or macro.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.MainCommandCommand",
+      "Translated": "添加一个命令，允许从聊天或宏中使用任意主指令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Dismiss Minion Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.MinionAway",
+      "Translated": "解散宠物命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to dismiss your current minion.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.MinionAway",
+      "Translated": "添加一个命令，用于解散当前宠物。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide 'Character not found' Message",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.NoCharacterNotFoundWarning",
+      "Translated": "隐藏“未找到角色”消息",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the game from displaying the \"The character you last logged out with could not be found on the current data center.\" message.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.NoCharacterNotFoundWarning",
+      "Translated": "阻止游戏显示“在当前大区中未找到上次登出的角色。”消息。",
+      "Source": "library"
+    },
+    {
+      "Original": "No Sell List",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.NoSellList",
+      "Translated": "禁止出售列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows you to define a list of items that can not be sold to a vendor.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.NoSellList",
+      "Translated": "允许你定义一个无法出售给商人的物品列表。",
+      "Source": "library"
+    },
+    {
+      "Original": "Estate Access Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.OpenEstateAccess",
+      "Translated": "房屋权限命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to open the estate access configuration for the current estate.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.OpenEstateAccess",
+      "Translated": "添加一个命令，用于打开当前房屋的房屋权限设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Phantom Job Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.PhantomJobCommand",
+      "Translated": "幻境职业命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to switch phantom jobs within Occult Crescent",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.PhantomJobCommand",
+      "Translated": "添加一个命令，用于在新月岛中切换幻境职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Show process id Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.PidCommand",
+      "Translated": "显示进程 ID 命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to show the current process id.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.PidCommand",
+      "Translated": "添加一个命令，用于显示当前进程 ID。",
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Sell Items at Vendors",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.QuickSellItems",
+      "Translated": "在商人处快速出售物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Hold a modifier key to sell items from your inventory in one click.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.QuickSellItems",
+      "Translated": "按住修饰键即可一键出售背包中的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to allow quick selling items from player inventory while using a retainer.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.QuickSellItems",
+      "Translated": "新增选项，允许在使用雇员时从玩家背包快速出售物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Allowed selling from player inventory while accessing retainer's market inventory.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.QuickSellItems",
+      "Translated": "允许在访问雇员市场背包时从玩家背包出售物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Recommended Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.RecommendEquipCommand",
+      "Translated": "装备推荐命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to equip recommended gear.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.RecommendEquipCommand",
+      "Translated": "添加一个命令，用于装备推荐装备。",
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Market Prices",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.RefreshMarketPrices",
+      "Translated": "刷新市场价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Retries to get prices upon receiving the 'Please wait and try your search again' message",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.RefreshMarketPrices",
+      "Translated": "收到“请稍候再试”消息时重试获取价格",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Quick Gathering",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.RememberQuickGathering",
+      "Translated": "记住快速采集",
+      "Source": "library"
+    },
+    {
+      "Original": "Remembers quick gathering status even after gathering at unspoiled nodes.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.RememberQuickGathering",
+      "Translated": "在未开发节点采集后仍记住快速采集状态。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Selected World",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.RememberSelectedWorld",
+      "Translated": "记住所选服务器",
+      "Source": "library"
+    },
+    {
+      "Original": "Remembers which world was selected for each datacentre.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.RememberSelectedWorld",
+      "Translated": "记住每个大区所选的服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Now uses a more reliable method for selecting worlds.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.RememberSelectedWorld",
+      "Translated": "现在使用更可靠的方法选择服务器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Client Limit",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.RemoveClientLimit",
+      "Translated": "移除客户端限制",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows opening more than the standard two FFXIV clients.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.RemoveClientLimit",
+      "Translated": "允许打开超过标准两个的 FFXIV 客户端。",
+      "Source": "library"
+    },
+    {
+      "Original": "Island Sanctuary Sprint Replacer",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SanctuarySprintReplacer",
+      "Translated": "开拓无人岛冲刺替换",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces the normal Sprint action with Isle Sprint while in the Island Sanctuary.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SanctuarySprintReplacer",
+      "Translated": "在开拓无人岛中，将普通冲刺动作替换为海岛冲刺。",
+      "Source": "library"
+    },
+    {
+      "Original": "Screenshot File Name",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.ScreenshotFileName",
+      "Translated": "截图文件名",
+      "Source": "library"
+    },
+    {
+      "Original": "Change the file name format for screenshots.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.ScreenshotFileName",
+      "Translated": "更改截图的文件名格式。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added ability to use folders in screenshot path.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.ScreenshotFileName",
+      "Translated": "新增在截图路径中使用文件夹的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added ability to use character name and location in screenshot path.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.ScreenshotFileName",
+      "Translated": "新增在截图路径中使用角色名和位置的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to use milliseconds in name template.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.ScreenshotFileName",
+      "Translated": "新增在名称模板中使用毫秒的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Searchable Friend List",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SearchableFriendList",
+      "Translated": "可搜索好友列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a search bar to the friend list.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SearchableFriendList",
+      "Translated": "为好友列表添加搜索栏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore selected filter group",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.SearchableFriendList/Configs::IgnoreSelectedGroup",
+      "Translated": "忽略所选筛选组",
+      "Source": "library"
+    },
+    {
+      "Original": "CTRL-F to focus search",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.SearchableFriendList/Configs::SearchHotkey",
+      "Translated": "CTRL-F 聚焦搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved reliability through patches",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "通过补丁提升稳定性",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed issues when using gamepad mode",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "修复使用手柄模式时的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Re-added accidentally remove gamepad mode option",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "重新添加被误删的手柄模式选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Added 'LimitMouseToGameWindow' and 'CharacterDisplayLimit'",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "新增“LimitMouseToGameWindow”和“CharacterDisplayLimit”",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed 'DisplayNameSize' using incorrect values",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "修复“DisplayNameSize”使用错误数值的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed toggle options not working.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "修复开关选项无效的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for changing the cutscene audio language.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "新增支持更改过场动画语音语言。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for changing title display options.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "新增支持更改称号显示选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for 'Small' and 'Smallest' for nameplate size options.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "名牌大小选项新增支持“小”和“最小”。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for cutscene skipping options.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "新增支持跳过过场动画选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Set Option Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "设置选项命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds commands to change various settings.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SetOptionCommand",
+      "Translated": "添加用于更改各种设置的命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Smart Strafe",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SmartStrafe",
+      "Translated": "智能平移",
+      "Source": "library"
+    },
+    {
+      "Original": "Intelligently switches keyboard controls between strafing and turning.\n(Legacy type movement only)",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SmartStrafe",
+      "Translated": "在平移和转向之间智能切换键盘操作。\n（仅限传统移动模式）",
+      "Source": "library"
+    },
+    {
+      "Original": "Special Character Input",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SpecialCharacterInput",
+      "Translated": "特殊字符输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a window for adding special characters to text inputs.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SpecialCharacterInput",
+      "Translated": "添加一个窗口，用于向文本输入框添加特殊字符。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Steam Floating Keyboard",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SteamDeckInput",
+      "Translated": "使用 Steam 浮动键盘",
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces the default Steam Virtual Keyboard with one that doesn't take over the screen.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SteamDeckInput",
+      "Translated": "将默认的 Steam 虚拟键盘替换为不会占满屏幕的键盘。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Crafter Bars",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SyncCrafterBars",
+      "Translated": "同步制作职业快捷栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Keeps DoH job bars in sync",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SyncCrafterBars",
+      "Translated": "保持制作职业快捷栏同步",
+      "Source": "library"
+    },
+    {
+      "Original": "Sync Gatherer Bars",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SyncGathererBars",
+      "Translated": "同步采集职业快捷栏",
+      "Source": "library"
+    },
+    {
+      "Original": "Keeps miner and botanist hotbars in sync.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SyncGathererBars",
+      "Translated": "保持采矿工和园艺工快捷栏同步。",
+      "Source": "library"
+    },
+    {
+      "Original": "SystemConfig in Group Pose",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.SystemConfigInGroupPose",
+      "Translated": "集体动作中的系统设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows the use of the /systemconfig command while in gpose.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.SystemConfigInGroupPose",
+      "Translated": "允许在集体动作中使用 /systemconfig 命令。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added additional protections to attempt to reduce crashing. Please report any crashes you believe may be related to tooltips.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.TooltipTweaks",
+      "Translated": "新增额外保护以尝试减少崩溃。如您认为有与提示框相关的崩溃，请反馈。",
+      "Source": "library"
+    },
+    {
+      "Original": "Yet another attempt at fixing crashes.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.TooltipTweaks",
+      "Translated": "又一次尝试修复崩溃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Block Targeting Treasure Hunt Enemies",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.TreasureHuntTargets",
+      "Translated": "阻止选定寻宝敌人",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable targeting for enemies that are part of another players Treasure Hunt duty.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.TreasureHuntTargets",
+      "Translated": "禁止选定属于其他玩家寻宝任务的敌人。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed incorrect blocking targeting of Alexandrite Map targets.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.TreasureHuntTargets",
+      "Translated": "修复错误阻止选定亚历山大石藏宝图目标的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Try On Correct Item",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.TryOnCorrectItem",
+      "Translated": "试穿正确物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the correct item when trying on a glamoured item.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.TryOnCorrectItem",
+      "Translated": "试穿幻化物品时显示正确的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "UI Tweaks",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustments",
+      "Translated": "界面调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Collection Command",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UseCollectionCommand",
+      "Translated": "使用收藏品命令",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a command to use Collection items. /usecollection",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UseCollectionCommand",
+      "Translated": "添加使用收藏品的命令。/usecollection",
+      "Source": "library"
+    },
+    {
+      "Original": "Accurate Venture Times",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AccurateVentureTimes",
+      "Translated": "准确的探险时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Show live countdowns to venture completion on the retainer list.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AccurateVentureTimes",
+      "Translated": "在雇员列表中显示探险完成的实时倒计时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduced the size of the timer when not using simple display.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AccurateVentureTimes",
+      "Translated": "缩小了未使用简洁显示时的计时器大小。",
+      "Source": "library"
+    },
+    {
+      "Original": "Simple Display",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AccurateVentureTimes/Configs::SimpleDisplay",
+      "Translated": "简洁显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate Action Presses Between Hotbars",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ActionPressMirroring",
+      "Translated": "快捷栏间复制技能按键",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the pulse effect when activating actions, even if they are duplicated between hotbars.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ActionPressMirroring",
+      "Translated": "激活技能时显示脉冲效果，即使该技能在快捷栏间重复。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed crashes and re-enabled tweak.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ActionPressMirroring",
+      "Translated": "修复崩溃并重新启用调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add Number Separators",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AddNumberSeparators",
+      "Translated": "添加数字分隔符",
+      "Source": "library"
+    },
+    {
+      "Original": "Add separators for various numbers shown in the UI",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AddNumberSeparators",
+      "Translated": "为界面中显示的各类数字添加分隔符",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed issue causing custom separators to be lost when logging in.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AddNumberSeparators",
+      "Translated": "修复登录时自定义分隔符丢失的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed flytext number separator not working.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AddNumberSeparators",
+      "Translated": "修复浮动文字数字分隔符不生效的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Yes",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "始终选择是",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets the default action in dialog boxes to yes when using confirm (num 0).",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "使用确认（数字 0）时，将对话框中的默认操作设为是。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed desynthesis not working and an issue resetting the selection the the incorrect action when moving some windows. The tweak will now ignore the checkbox setting if the yes button is enabled.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "修复分解不生效的问题，以及移动部分窗口时选择重置为错误操作的问题。当启用“是”按钮时，该调整将忽略复选框设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for dyes.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "添加对染色的支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added a setting to ignore checkbox if it is ticked and fixed the tweak not working with desynthesis.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "添加在复选框已勾选时忽略它的设置，并修复该调整无法用于分解的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for automatic aetherial reduction.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "添加对自动精选的支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for Blunderville exit dialog.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "添加对金碟巨豆中心退出对话框的支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added an option to default cursor to the checkbox when one exists.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AlwaysYes",
+      "Translated": "添加存在复选框时将光标默认定位到复选框的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Focus Market Board Item Search",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoFocusMarketboardSearch",
+      "Translated": "自动聚焦市场布告板物品搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically focus the item search when opening the market board.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoFocusMarketboardSearch",
+      "Translated": "打开市场布告板时自动聚焦物品搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Focus Recipe Search",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoFocusRecipeSearch",
+      "Translated": "自动聚焦配方搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically focus the recipe search when opening the crafting log.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoFocusRecipeSearch",
+      "Translated": "打开制作笔记时自动聚焦配方搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Auto Refresh Material List",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoRefreshMaterialList",
+      "Translated": "自动刷新材料列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically refreshes the raw material list and recipe tree windows.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoRefreshMaterialList",
+      "Translated": "自动刷新原材料列表和配方树窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Battle Talk Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BattleTalkAdjustments",
+      "Translated": "战斗对话调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows moving of the dialogue box that appears in the middle of battles.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BattleTalkAdjustments",
+      "Translated": "允许移动战斗中出现在屏幕中央的对话框。",
+      "Source": "library"
+    },
+    {
+      "Original": "Grow Buff List Vertically",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BuffListVerticalGrowth",
+      "Translated": "增益列表向上增长",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows you to change the buff/debuff vertical justification, enabling the list to grow from bottom to top.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BuffListVerticalGrowth",
+      "Translated": "允许更改增益/减益的垂直对齐方式，使列表从下往上增长。",
+      "Source": "library"
+    },
+    {
+      "Original": "Buff List",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BuffListVerticalGrowth/Configs::BuffListBool",
+      "Translated": "增益列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Debuff List",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BuffListVerticalGrowth/Configs::DebuffListBool",
+      "Translated": "减益列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Food/FC Buffs List",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BuffListVerticalGrowth/Configs::AurasListBool",
+      "Translated": "食物/部队增益列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Conditional Buff List",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.BuffListVerticalGrowth/Configs::ConditionalBuffListBool",
+      "Translated": "条件增益列表",
+      "Source": "library"
+    },
+    {
+      "Original": "Cast Bar Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CastBarAdjustments",
+      "Translated": "咏唱条调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow hiding or moving specific parts of the castbar.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CastBarAdjustments",
+      "Translated": "允许隐藏或移动咏唱条的特定部分。",
+      "Source": "library"
+    },
+    {
+      "Original": "Casting Text Visibility",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CastingTextVisibility",
+      "Translated": "咏唱文字可见性",
+      "Source": "library"
+    },
+    {
+      "Original": "Change the font size, color, and background of the casting text.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CastingTextVisibility",
+      "Translated": "更改咏唱文字的字体大小、颜色和背景。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not working with a split primary target window",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CastingTextVisibility",
+      "Translated": "修复该调整无法用于分离的攻击目标窗口的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Change Map Area Colours",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ChangeMapAreaColors",
+      "Translated": "更改地图区域颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows players to change the color of map areas like quest targets and FATEs.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ChangeMapAreaColors",
+      "Translated": "允许玩家更改任务目标和 FATE 等地图区域的颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added reset button to return option to default colour.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ChangeMapAreaColors",
+      "Translated": "添加重置按钮，将选项恢复为默认颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Color Duty Roulette Names",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ColoredDutyRoulette",
+      "Translated": "为死亡轮盘名称着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Colors Duty Roulette names to indicate their completion status",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ColoredDutyRoulette",
+      "Translated": "为死亡轮盘名称着色以指示其完成状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds ability to select individual roulettes for recoloring.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ColoredDutyRoulette",
+      "Translated": "添加为单个轮盘选择重新着色的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Combo Timer",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer",
+      "Translated": "连击计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows a countdown for combo actions.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer",
+      "Translated": "显示连击技能的倒计时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed Dragoon's [Wheeling Thrust -> Drakesbane] combo not being correctly timed.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer",
+      "Translated": "修复了龙骑士的[龙尾大回旋 -> 云蒸龙变]连击计时不正确的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Always Visible",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::AlwaysVisible",
+      "Translated": "始终显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide 'COMBO' Text",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::NoComboText",
+      "Translated": "隐藏“COMBO”文本",
+      "Source": "library"
+    },
+    {
+      "Original": "Font Size",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::FontSize",
+      "Translated": "字体大小",
+      "Source": "library"
+    },
+    {
+      "Original": "X Position Offset",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::OffsetX",
+      "Translated": "X 坐标偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Y Position Offset",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::OffsetY",
+      "Translated": "Y 坐标偏移",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Color",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::Color",
+      "Translated": "文本颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Color",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::Color",
+      "Translated": "颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Text Outline Color",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::EdgeColor",
+      "Translated": "文本描边颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Leading Zero",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::LeadingZero",
+      "Translated": "前导零",
+      "Source": "library"
+    },
+    {
+      "Original": "Decimal Places",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::DecimalPlaces",
+      "Translated": "小数位数",
+      "Source": "library"
+    },
+    {
+      "Original": "Alternative UI Attachment",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ComboTimer/Configs::UseScreenText",
+      "Translated": "配件更换 UI",
+      "Source": "library"
+    },
+    {
+      "Original": "Duplicate Keybind Hints Between Hotbars",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ControlHintMirroring",
+      "Translated": "在热键栏之间复制键位提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Will display the keybind hint for any hotbar slot onto unbound slots with the same action.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ControlHintMirroring",
+      "Translated": "将任意热键栏格子的键位提示显示到具有相同技能且未绑定键位的格子上。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewritten & re-enabled",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ControlHintMirroring",
+      "Translated": "重写并重新启用",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed flickering while cooldown is active.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ControlHintMirroring",
+      "Translated": "修复了冷却激活期间的闪烁问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Customize default deposit and withdraw quantity",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomDefaultQuantity",
+      "Translated": "自定义默认存入与吸引数量",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows setting a custom amount to deposit or withdraw when using the 'Retrieve Quantity' and 'Entrust Quantity' options.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomDefaultQuantity",
+      "Translated": "允许在使用“取出数量”和“存入数量”选项时设置自定义的存入或吸引数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Free Company Tags",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "自定义部队标签",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows hiding or customizing Free Company and Wanderer tags.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "允许隐藏或自定义部队和彷徨之物标签。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to display FC tags on a separate line to character name.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "新增选项，可将部队标签显示在角色名下方单独一行。",
+      "Source": "library"
+    },
+    {
+      "Original": "Removed 'Hide in Duty' option from Wanderer. This is now a vanilla game option.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "从彷徨之物中移除了“任务中隐藏”选项。现在这是游戏开始自带的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for full RGB colours.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "新增对完整 RGB 颜色的支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added an icon viewer for supported icons.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "新增受支持图标的图标查看器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fix some issues with glow colours.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "修复了一些发光颜色相关的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed icon-only tags not displaying.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "修复了仅图标标签不显示的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added ability to give individual characters a custom FC tag.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomFreeCompanyTags",
+      "Translated": "新增为单个角色设置自定义部队标签的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Time Formats",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomTimeFormat",
+      "Translated": "自定义时间格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows setting custom time formats for the in game clock. Uses C# formatting strings.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomTimeFormat",
+      "Translated": "允许为游戏内时钟设置自定义时间格式。使用 C# 格式字符串。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tooltip when hovering clocks",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomTimeFormat",
+      "Translated": "修复了悬停时钟时的提示框",
+      "Source": "library"
+    },
+    {
+      "Original": "Returned 'click to change clock' feature from base game.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.CustomTimeFormat",
+      "Translated": "恢复了游戏开始自带的“点击切换时钟”功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Duty List Background",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.DutyListBackground",
+      "Translated": "任务列表背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds a configurable background to the Duty List",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.DutyListBackground",
+      "Translated": "为任务列表添加可配置的背景",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved tweak stability.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.DutyListBackground",
+      "Translated": "提升了调整项的稳定性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent crash when using Aestetician.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.DutyListBackground",
+      "Translated": "修复了使用美容师时崩溃的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reimplemented with a new method to avoid crashes.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.DutyListBackground",
+      "Translated": "使用新方法重新实现以避免崩溃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Level in Examine",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExamineItemLevel",
+      "Translated": "查看角色时的物品品级",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculates the item level of other players when examining them.\nRed value means the player is wearing an item that scales to their level and it is showing the max level.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExamineItemLevel",
+      "Translated": "在查看其他玩家时计算其物品品级。\n红色数值表示该玩家穿着随等级同步的物品，且显示的是最高等级。",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweak now uses item level provided by the game, improving accuracy.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExamineItemLevel",
+      "Translated": "调整项现在使用游戏提供的物品品级，提高了准确性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Item Level Icon",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExamineItemLevel/Config::ShowItemLevelIcon",
+      "Translated": "显示物品品级图标",
+      "Source": "library"
+    },
+    {
+      "Original": "Expanded Currency Display",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "扩展货币显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows you to display extra currencies.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "允许你显示额外的货币。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use configured format culture for number display, should fix French issue",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "使用配置的格式文化进行数字显示，应能修复法语问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for Collectibles",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "添加了对收藏品的支持",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option for adjustable spacing in horizontal layouts.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "添加了水平布局中可调整间距的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to display in a grid.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "添加了以网格显示的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to set the position of a currency individually.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "添加了单独设置货币位置的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added tooltips when mouse is over the currency icons.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "添加了鼠标悬停在货币图标上时的提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Attempting to avoid gil addon getting thrown around when layout changes.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "尝试避免布局变化时金币插件被甩来甩去。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed positioning of gil display moving when scale is anything other than 100%",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "修复了缩放不为100%时金币显示位置移动的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Added an option to disable tooltips.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "添加了禁用提示的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed currency window positioning breaking when resizing game window.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "修复了调整游戏窗口大小时货币窗口定位损坏的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to Grand Company seals to display current grand company.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpandedCurrencyDisplay",
+      "Translated": "添加了大国防联军军票显示当前大国防联军的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Experience Percentage",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage",
+      "Translated": "显示经验百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculate and display the current EXP percentage on the EXP bar.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage",
+      "Translated": "计算并在经验条上显示当前经验百分比。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added the ability to show rested experience without showing experience percentage.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage",
+      "Translated": "添加了在不显示经验百分比的情况下显示休息经验的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to move EXP or Chain Bonus above the EXP bar.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage",
+      "Translated": "添加了将经验或环链之间奖励移到经验条上方的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Decimals",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage/Configs::Decimals",
+      "Translated": "小数位",
+      "Source": "library"
+    },
+    {
+      "Original": "Only show percentage",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage/Configs::PercentageOnly",
+      "Translated": "仅显示百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Rested Experience",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage/Configs::ShowRestedExperience",
+      "Translated": "显示休息经验",
+      "Source": "library"
+    },
+    {
+      "Original": "Show only Rested Experience as percentage",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage/Configs::NoExpPercentage",
+      "Translated": "仅以百分比显示休息经验",
+      "Source": "library"
+    },
+    {
+      "Original": "Move EXP text above bar",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage/Configs::MoveExp",
+      "Translated": "将经验文本移到条上方",
+      "Source": "library"
+    },
+    {
+      "Original": "Move chain bonus text above bar",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExpPercentage/Configs::MoveChainBonus",
+      "Translated": "将环链之间奖励文本移到条上方",
+      "Source": "library"
+    },
+    {
+      "Original": "Extended Desynthesis Window",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExtendedDesynthesisWindow",
+      "Translated": "扩展分解窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows your current desynthesis level and the item's optimal level on the desynthesis item selection window.\nAlso indicates if an item is part of a gear set, optionally preventing selection of gearset items.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ExtendedDesynthesisWindow",
+      "Translated": "在分解物品选择窗口显示你当前的分解等级和物品的最佳等级。\n还会指示物品是否属于套装，并可选阻止选择套装物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fade Unavailable Actions",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "淡化不可用技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Instead of darkening icons, makes them transparent when unavailable.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "不可用时使图标透明，而不是变暗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweak now only applies to the icon image itself and not the entire button",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "调整现在仅应用于图标图像本身，而非整个按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Add option to apply transparency to the slot frame of the icon",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "添加了将透明应用于图标槽位边框的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Add option to apply to sync'd skills only",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "添加了仅应用于同步技能的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweak now only applies to combat actions",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "调整现在仅应用于战斗技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Properly resets hotbar state on unload/disable",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "在卸载/禁用时正确重置热键栏状态",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to make skills that are out of range red",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "添加了将超出范围的技能变为红色的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweak has been removed. An alternative may be found in the VanillaPlus Plugin",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
+      "Translated": "该调整已被移除。可在 VanillaPlus 插件中找到替代方案",
+      "Source": "library"
+    },
+    {
+      "Original": "Fast Item Search",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FastSearch",
+      "Translated": "快速物品搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable superfast searches for the market board & crafting log.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FastSearch",
+      "Translated": "为市场布告板和制作笔记启用超快速搜索。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fix random ordering (results are now always in the same order)",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FastSearch",
+      "Translated": "修复随机排序（结果现在始终按相同顺序排列）",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Fuzzy Search",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FastSearch/FastSearchConfig::UseFuzzySearch",
+      "Translated": "使用模糊搜索",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed widget display when using standard UI quality.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.GearPositions",
+      "Translated": "修复了使用标准界面质量时小组件的显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved gamepad navigation on Character window.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.GearPositions",
+      "Translated": "改进了角色窗口上的手柄导航。",
+      "Source": "library"
+    },
+    {
+      "Original": "Further improved gamepad navigation on Character window.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.GearPositions",
+      "Translated": "进一步改进了角色窗口的手柄导航。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed incorrect ordering of equipment.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.GearPositions",
+      "Translated": "修复了装备顺序错误的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Adjust Equipment Positions",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.GearPositions",
+      "Translated": "调整装备位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Repositions equipment positions in character menu and inspect to improve appearance.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.GearPositions",
+      "Translated": "重新调整角色菜单和查看中的装备位置以改善外观。",
+      "Source": "library"
+    },
+    {
+      "Original": "Soulstone Above Offhand",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.GearPositions/Configs::SoulstoneAboveOffhand",
+      "Translated": "灵魂水晶显示在副手之上",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Achievements Nearing Completion Notifications",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideAchievementsNotifications",
+      "Translated": "隐藏即将完成的成就通知",
+      "Source": "library"
+    },
+    {
+      "Original": "Completely hides the login/zone-in notification for achievements nearing completion.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideAchievementsNotifications",
+      "Translated": "完全隐藏即将完成的成就的登录/进入区域通知。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed notification window appearing for a couple frames before being hidden.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideAchievementsNotifications",
+      "Translated": "修复了通知窗口在被隐藏前会短暂显示几帧的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Experience Bar at Max Level",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideExperienceBar",
+      "Translated": "满级时隐藏经验条",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the experience bar when at max level.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideExperienceBar",
+      "Translated": "满级时隐藏经验条。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Guildhest Objective Popup",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideGuildhestObjectivePopup",
+      "Translated": "隐藏行会令目标弹窗",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the objective popup when starting a guildhest.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideGuildhestObjectivePopup",
+      "Translated": "开始行会令时隐藏目标弹窗。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added an option to change which keys show the lock",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideHotbarLock",
+      "Translated": "新增选项可更改显示守卫驻所的按键",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Hotbar Lock",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideHotbarLock",
+      "Translated": "隐藏热键栏锁定",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the hotbar lock button, with an option to make it visible while holding a modifier combo.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideHotbarLock",
+      "Translated": "隐藏热键栏锁定按钮，可选择在按住组合键时显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Job Gauge",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge",
+      "Translated": "隐藏职业量谱",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow hiding the job gauge while not in combat or dungeons.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge",
+      "Translated": "允许在非战斗或非次元城地下牢狱中隐藏职业量谱。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed 'Show while weapon is drawn' option not working.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge",
+      "Translated": "修复了“拔出武器时显示”选项无效的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed 'Show In Duty' option not working in some duties.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge",
+      "Translated": "修复了“任务中显示”选项在某些任务中无效的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show In Duty",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge/Configs::ShowInDuty",
+      "Translated": "任务中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show In Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge/Configs::ShowInCombat",
+      "Translated": "战斗中显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Out of Combat Time (Seconds)",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge/Configs::CombatBuffer",
+      "Translated": "脱战时间（秒）",
+      "Source": "library"
+    },
+    {
+      "Original": "Show While Weapon Is Drawn",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideJobGauge/Configs::ShowWhileWeaponDrawn",
+      "Translated": "拔出武器时显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide quality bar while crafting NO-HQ item.",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideQualityWhenNoHQ",
+      "Translated": "制作非HQ物品时隐藏品质条。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides the quality bar in the Synthesis window while crafting an item that can not be HQ or Collectable.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideQualityWhenNoHQ",
+      "Translated": "制作无法HQ或收藏品的物品时，在制作窗口中隐藏品质条。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show quality bar for expert recipes.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideQualityWhenNoHQ",
+      "Translated": "为专家配方显示品质条。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Target Circle",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideTargetCircle",
+      "Translated": "隐藏目标圈",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow hiding the target circle while not in combat or dungeons.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideTargetCircle",
+      "Translated": "允许在非战斗或非次元城地下牢狱中隐藏目标圈。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Unwanted Banners",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideUnwantedBanner",
+      "Translated": "隐藏不需要的横幅",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide information banners such as 'Venture Complete', or 'Levequest Accepted'.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideUnwantedBanner",
+      "Translated": "隐藏诸如“探险完成”或“接受理符任务”等信息横幅。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added banners for Stellar Missions",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideUnwantedBanner",
+      "Translated": "新增星芒任务横幅",
+      "Source": "library"
+    },
+    {
+      "Original": "Added ability to add other banners after being seen",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideUnwantedBanner",
+      "Translated": "新增在查看后添加其他横幅的功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Added image previews for banners",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HideUnwantedBanner",
+      "Translated": "新增横幅图片预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Housing Lottery Timer",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HouseLotteryTimer",
+      "Translated": "房屋抽签计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the time remaining until the current lottery period ends in the timers window.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.HouseLotteryTimer",
+      "Translated": "在计时器窗口中显示当前抽签期结束的剩余时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved Crafting Log",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedCraftingLog",
+      "Translated": "改进的制作笔记",
+      "Source": "library"
+    },
+    {
+      "Original": "Modifies the Synthesize button in the Crafting Log to switch job or stand up from the crafting position, allowing you to stop crafting without closing the crafting log.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedCraftingLog",
+      "Translated": "修改制作笔记中的制作按钮，使其切换职业或从制作位置站起，让你无需关闭制作笔记即可停止制作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed a potential crash in specific circumstances.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedCraftingLog",
+      "Translated": "修复了特定情况下可能发生的崩溃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Made attempt to fix some issues",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedCraftingLog",
+      "Translated": "尝试修复一些问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Tweak has been disabled for everyone and marked as experimental.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedCraftingLog",
+      "Translated": "该调整已对所有人禁用，并标记为实验性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved Duty Finder Settings",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedDutyFinderSettings",
+      "Translated": "改进的任务搜索器设置",
+      "Source": "library"
+    },
+    {
+      "Original": "Turn the duty finder settings into buttons.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedDutyFinderSettings",
+      "Translated": "将任务搜索器设置变为按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed UI displaying on wrong monitor in specific circumstances.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedDutyFinderSettings",
+      "Translated": "修复了特定情况下 UI 显示在错误显示器上的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewritten to use native UI",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedDutyFinderSettings",
+      "Translated": "重写为使用原生 UI",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved Interruptable Castbars",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedInterruptableCastbars",
+      "Translated": "改进的可打断施法条",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays an icon next to interruptable castbars.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedInterruptableCastbars",
+      "Translated": "在可打断的施法条旁显示图标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleaner World Visit Menu",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedWorldVisit",
+      "Translated": "清洁机 世界访问菜单",
+      "Source": "library"
+    },
+    {
+      "Original": "Cleans up the world visit menu and shows your current location in order on the list.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedWorldVisit",
+      "Translated": "清理世界访问菜单，并按顺序在列表中显示你的当前位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Windows Open",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.KeepOpen",
+      "Translated": "保持窗口开启",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents certain windows from hiding under specific circumstances.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.KeepOpen",
+      "Translated": "防止特定窗口在特定情况下隐藏。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option for 'Raw Material List'",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.KeepOpen",
+      "Translated": "为“原材料列表”添加了选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Adjust Large Cooldown Counter",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LargeCooldownCounter",
+      "Translated": "调整大型冷却计数器",
+      "Source": "library"
+    },
+    {
+      "Original": "Make adjustments to the cooldown counter when using the large option.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LargeCooldownCounter",
+      "Translated": "使用大型选项时调整冷却计数器。",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Status Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LimitTargetStatusEffects",
+      "Translated": "目标状态调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows the filtering of specific status effects on your target as well as limiting the number of them.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LimitTargetStatusEffects",
+      "Translated": "允许过滤目标身上的特定状态效果，并限制其显示数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Lock Window Positions",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LockWindowPosition",
+      "Translated": "守卫驻所 窗口位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows locking the position of almost any UI window.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LockWindowPosition",
+      "Translated": "允许锁定几乎所有 UI 窗口的位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enhanced Loot Window",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator",
+      "Translated": "增强的拾取窗口",
+      "Source": "library"
+    },
+    {
+      "Original": "Marks unobtainable and already unlocked items in the loot window.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator",
+      "Translated": "在拾取窗口中标记无法获得和已解锁的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rebuilt tweak to use images.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator",
+      "Translated": "重建调整以使用图像。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not checking armory and equipped items.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator",
+      "Translated": "修复了调整未检查兵装库和已装备物品的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added 'Lock Loot Window' feature.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator",
+      "Translated": "添加了“锁定拾取窗口”功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Removed Window Lock Feature, 'Lock Window Position' tweak has returned.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator",
+      "Translated": "移除了窗口锁定功能，“锁定窗口位置”调整已回归。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark Un-obtainable Items",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator/Config::MarkUnobtainable",
+      "Translated": "标记无法获得的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark Already Unlocked Items",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowDuplicateUniqueItemIndicator/Config::MarkAlreadyObtained",
+      "Translated": "标记已解锁的物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Loot Window Select Next Item",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowSelectNext",
+      "Translated": "拾取窗口选择下一件物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Upon pressing 'Need', 'Greed', or 'Pass' automatically select the next loot item.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.LootWindowSelectNext",
+      "Translated": "按下“需求”、“贪婪”或“放弃”后，自动选择下一件拾取物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Market Enhancements",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MarketEnhancements",
+      "Translated": "市场增强",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight items that could be bought from, or sold to, an NPC for a better price.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MarketEnhancements",
+      "Translated": "高亮显示可以从 NPC 以更优价格购买或出售的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Return of the Lazy Tax/Profitable highlighting",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MarketEnhancements",
+      "Translated": "死亡诱惑/盈利高亮回归",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight items that can be sold to NPC for more.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MarketEnhancements/MarketEnhancementsConfig::NpcSellProfitColour",
+      "Translated": "高亮显示可以更高价格出售给 NPC 的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight items that can be purchased from an NPC for cheaper.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MarketEnhancements/MarketEnhancementsConfig::LazyTaxColour",
+      "Translated": "高亮显示可以从 NPC 以更低价格购买的物品。",
+      "Source": "library"
+    },
+    {
+      "Original": "Minimap Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MinimapAdjustments",
+      "Translated": "小地图调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows hiding elements of the minimap display.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MinimapAdjustments",
+      "Translated": "允许隐藏小地图显示的元素。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reposition Cutscene Dialogue Box",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MoveCutsceneTalk",
+      "Translated": "重新定位过场动画对话框",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows setting a custom position for dialogue boxes used in cutscenes.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.MoveCutsceneTalk",
+      "Translated": "允许为过场动画中使用的对话框设置自定义位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Name Plate Icon Spacing",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.NamePlateIconSpacing",
+      "Translated": "名牌图标间距",
+      "Source": "library"
+    },
+    {
+      "Original": "Increases the distance between status icons and character names on name plates.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.NamePlateIconSpacing",
+      "Translated": "增加名牌上状态图标与角色名称之间的距离。",
+      "Source": "library"
+    },
+    {
+      "Original": "Notification Toast Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.NotificationToastAdjustments",
+      "Translated": "通知提示调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows moving or hiding of the notifications that appears in the middle of the screen at various times.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.NotificationToastAdjustments",
+      "Translated": "允许移动或隐藏游戏中各种时候出现在屏幕中央的通知。",
+      "Source": "library"
+    },
+    {
+      "Original": "Old Nameplates",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.OldNameplatesTweak",
+      "Translated": "旧版名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Use the old font for nameplates.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.OldNameplatesTweak",
+      "Translated": "为名牌使用旧版字体。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open Glamour Dresser to Current Job",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.OpenGlamourDresserToCurrentJob",
+      "Translated": "打开投影台时切换到当前职业",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets the job selection dropdown to your current job when opening the Glamour Dresser.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.OpenGlamourDresserToCurrentJob",
+      "Translated": "打开投影台时将职业选择下拉框设置为你的当前职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Parameter Bar Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ParameterBarAdjustments",
+      "Translated": "参数栏调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows hiding or moving specific parts of the parameter bar (HP and mana bars).",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ParameterBarAdjustments",
+      "Translated": "允许隐藏或移动参数栏（HP 和魔力条）的特定部分。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed positioning of HP bar.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ParameterBarAdjustments",
+      "Translated": "修正了 HP 条的位置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to center HP bar when MP bar is hidden.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ParameterBarAdjustments",
+      "Translated": "新增在隐藏魔力条时将 HP 条居中的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide MP bar on Viper",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ParameterBarAdjustments",
+      "Translated": "在蝰蛇剑士上隐藏魔力条",
+      "Source": "library"
+    },
+    {
+      "Original": "Recolor Own Status Timers",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RecolorOwnStatusTimers",
+      "Translated": "重新着色自身状态计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows the recoloring of the personal status timers color.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RecolorOwnStatusTimers",
+      "Translated": "允许重新着色个人状态计时器的颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reduced Deep Dungeon Info",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ReducedDeepDungeonInfo",
+      "Translated": "精简地下深层信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Removes redundant information from the deep dungeon character info.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ReducedDeepDungeonInfo",
+      "Translated": "从地下深层角色信息中移除冗余信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed crash.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ReducedDeepDungeonInfo",
+      "Translated": "修复了崩溃问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember Title Sorting",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RememberTitleSorting",
+      "Translated": "记住称号排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Remember the selected sorting option in the title selection menu.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RememberTitleSorting",
+      "Translated": "记住称号选择菜单中所选的排序选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Community Finder",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RemoveCommunityFinder",
+      "Translated": "移除社群查找器",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide the community finder buttons from social windows.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RemoveCommunityFinder",
+      "Translated": "从社交窗口中隐藏社群查找器按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Remove Quest Marker Limit",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RemoveQuestMarkerLimit",
+      "Translated": "移除任务标记上限",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow the map and minimap to display markers for more than 5 active quests.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RemoveQuestMarkerLimit",
+      "Translated": "允许地图和小地图显示超过 5 个进行中任务的标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fix tweak not working since API 9",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RemoveQuestMarkerLimit",
+      "Translated": "修复自 API 9 起调整失效的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename Free Company Chest Tabs",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RenameFreeCompanyChestTabs",
+      "Translated": "重命名部队储物柜标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows renaming of each tab in the Free Company chest.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.RenameFreeCompanyChestTabs",
+      "Translated": "允许重命名部队储物柜中的每个标签页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Change Size Experience Bar",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ResizeExperienceBar",
+      "Translated": "更改经验条大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Changes the horizontal scale of the experience bar without affecting the text scale.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ResizeExperienceBar",
+      "Translated": "更改经验条的水平缩放，不影响文字缩放。",
+      "Source": "library"
+    },
+    {
+      "Original": "Scale %",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ResizeExperienceBar/Configs::Scale",
+      "Translated": "缩放 %",
+      "Source": "library"
+    },
+    {
+      "Original": "Left align icons",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ResizeExperienceBar/Configs::LeftAlignIcons",
+      "Translated": "图标左对齐",
+      "Source": "library"
+    },
+    {
+      "Original": "Scenario Progression Display",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ScenarioProgressionDisplay",
+      "Translated": "主线进度显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the percentage of completion of the main scenario.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ScenarioProgressionDisplay",
+      "Translated": "显示主线任务的完成百分比。",
+      "Source": "library"
+    },
+    {
+      "Original": "Once again fixed logic.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ScenarioProgressionDisplay",
+      "Translated": "再次修复了逻辑。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed percentage not being displayed in some circumstances.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ScenarioProgressionDisplay",
+      "Translated": "修复了某些情况下百分比不显示的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show for current expansion",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ScenarioProgressionDisplay/Config::UseCurrentExpansion",
+      "Translated": "仅显示当前版本",
+      "Source": "library"
+    },
+    {
+      "Original": "Show percentage before quest",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ScenarioProgressionDisplay/Config::ShowBeforeQuest",
+      "Translated": "在任务前显示百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Percentage Accuracy",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ScenarioProgressionDisplay/Config::Accuracy",
+      "Translated": "百分比精度",
+      "Source": "library"
+    },
+    {
+      "Original": "Reposition Target Castbar Text",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ShiftTargetCastBarText",
+      "Translated": "调整目标咏唱栏文字位置",
+      "Source": "library"
+    },
+    {
+      "Original": "Moves the text on target castbars to make it easier to read",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ShiftTargetCastBarText",
+      "Translated": "移动目标咏唱栏上的文字，使其更易阅读",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield on HP Bar",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ShowShieldOnHPBar",
+      "Translated": "HP 条上的护盾",
+      "Source": "library"
+    },
+    {
+      "Original": "Show approximate shield on the HP Bar.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ShowShieldOnHPBar",
+      "Translated": "在 HP 条上显示大致护盾值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Shield Colour",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ShowShieldOnHPBar/Configs::ShieldColour",
+      "Translated": "护盾颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Smart Nameplates",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.SmartNameplates",
+      "Translated": "智能名牌",
+      "Source": "library"
+    },
+    {
+      "Original": "Provides options to hide other player's nameplates in combat under certain conditions.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.SmartNameplates",
+      "Translated": "提供在特定条件下隐藏其他玩家名牌的选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sort World Visit List",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.SortWorldList",
+      "Translated": "世界访问列表排序",
+      "Source": "library"
+    },
+    {
+      "Original": "Removes the randomization from the data center visit world list.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.SortWorldList",
+      "Translated": "移除数据中心访问世界列表的随机排序。",
+      "Source": "library"
+    },
+    {
+      "Original": "Label Submarine Destinations with Letters",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.SubmarineDestinationLetters",
+      "Translated": "用字母标记潜水艇目的地",
+      "Source": "library"
+    },
+    {
+      "Original": "Uses the standard A-Z lettering to identify submarine destinations for easier use with other tools.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.SubmarineDestinationLetters",
+      "Translated": "使用标准 A-Z 字母标识潜水艇目的地，便于与其他工具配合使用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewritten to fix issues, re-enabled tweak.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.SubmarineDestinationLetters",
+      "Translated": "重写以修复问题，重新启用调整。",
+      "Source": "library"
+    },
+    {
+      "Original": "Talk Adjustments",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TalkAdjustments",
+      "Translated": "对话调整",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows further customisation to the Talk addon.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TalkAdjustments",
+      "Translated": "允许进一步自定义对话窗口。",
+      "Source": "library"
+    },
+    {
+      "Original": "Style",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TalkAdjustments/Config::Style",
+      "Translated": "样式",
+      "Source": "library"
+    },
+    {
+      "Original": "Only Override Normal",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TalkAdjustments/Config::OnlyOverrideNormal",
+      "Translated": "仅覆盖普通",
+      "Source": "library"
+    },
+    {
+      "Original": "Log Channel",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TalkAdjustments/Config::LogChannel",
+      "Translated": "日志频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Target Castbar Countdown",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "目标咏唱条倒计时",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays time remaining on targets ability cast.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "显示目标技能咏唱的剩余时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Add TopRight option for displaying countdown",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "添加右上角显示倒计时选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Add option to disable on primary target",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "新增在攻击目标上禁用的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Fix updating slowly for really slow castbars",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "修复极慢咏唱条更新缓慢的问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to change font size",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "添加更改字体大小的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to adjust position",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "添加调整位置的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed disable on primary and focus target",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
+      "Translated": "修复在攻击目标和焦点目标上的禁用",
+      "Source": "library"
+    },
+    {
+      "Original": "Target HP",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP",
+      "Translated": "目标 HP",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays the exact (or optionally rounded) value of target's hitpoints.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP",
+      "Translated": "显示目标生命值的精确（或可选四舍五入）数值。",
+      "Source": "library"
+    },
+    {
+      "Original": "Full Number",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::FullNumber",
+      "Translated": "完整数字",
+      "Source": "library"
+    },
+    {
+      "Original": "Full Number, with Separators",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::FullNumberSeparators",
+      "Translated": "完整数字，带分隔符",
+      "Source": "library"
+    },
+    {
+      "Original": "Short Number",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::ZeroDecimalPrecision",
+      "Translated": "简短数字",
+      "Source": "library"
+    },
+    {
+      "Original": "1 Decimal",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::OneDecimalPrecision",
+      "Translated": "1 位小数",
+      "Source": "library"
+    },
+    {
+      "Original": "2 Decimal",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::TwoDecimalPrecision",
+      "Translated": "2 位小数",
+      "Source": "library"
+    },
+    {
+      "Original": "Percent, no decimal",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::Percent0Decimal",
+      "Translated": "百分比，无小数",
+      "Source": "library"
+    },
+    {
+      "Original": "Percent, 1 decimal",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::Percent1Decimal",
+      "Translated": "百分比，1 位小数",
+      "Source": "library"
+    },
+    {
+      "Original": "Percent, 2 decimal",
+      "Context": "[属性] DescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetHP/DisplayFormat::Percent2Decimal",
+      "Translated": "百分比，2 位小数",
+      "Source": "library"
+    },
+    {
+      "Original": "Timer on Duty Waiting",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TimerOnDutyWaiting",
+      "Translated": "任务等待计时器",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows the 45 second countdown after readying for a duty.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TimerOnDutyWaiting",
+      "Translated": "在准备任务后显示 45 秒倒计时。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed display of text in french clients.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TimerOnDutyWaiting",
+      "Translated": "修复法语客户端中的文本显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed display on all clients...",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TimerOnDutyWaiting",
+      "Translated": "修复所有客户端的显示...",
+      "Source": "library"
+    },
+    {
+      "Original": "Time Until GP Max",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TimeUntilGpMax",
+      "Translated": "GP 满值时间",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows a countdown when playing Gathering classes to estimate the time until their GP is capped.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TimeUntilGpMax",
+      "Translated": "游玩群狼大厅职业时显示倒计时，估算 GP 达到上限的时间。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added an option to display time in Eorzean Hours",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TimeUntilGpMax",
+      "Translated": "添加以艾欧泽亚时间显示时间的选项",
+      "Source": "library"
+    },
+    {
+      "Original": "Extra Information for Tooltips",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.AdditionalItemInfo",
+      "Translated": "提示框额外信息",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds extra information to item tooltips.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.AdditionalItemInfo",
+      "Translated": "为物品提示框添加额外信息。",
+      "Source": "library"
+    },
+    {
+      "Original": "Craftable",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.AdditionalItemInfo/Configs::Craftable",
+      "Translated": "可制作",
+      "Source": "library"
+    },
+    {
+      "Original": "Grand Company Seal Value",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.AdditionalItemInfo/Configs::GrandCompanySealValue",
+      "Translated": "大国防联军军票价值",
+      "Source": "library"
+    },
+    {
+      "Original": "Gearsets",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.AdditionalItemInfo/Configs::Gearsets",
+      "Translated": "套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Additional Data",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.AdditionalItemInfo/Configs::AdditionalData",
+      "Translated": "附加数据",
+      "Source": "library"
+    },
+    {
+      "Original": "Armoire Tooltip for Glamour Dresser",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ArmoireTooltipForGlamourDresser",
+      "Translated": "幻化柜的收藏柜提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Show a hint on the tooltip of items stored in the glamour dresser when they could be stored in armoire.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ArmoireTooltipForGlamourDresser",
+      "Translated": "当幻化柜中的物品可存入收藏柜时，在其提示中显示提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved Blue Mage Action Tooltips",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.BlueActionInfo",
+      "Translated": "改进的青魔法师技能提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds Damage Type, Aspect and Rank to blue mage actions.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.BlueActionInfo",
+      "Translated": "为青魔法师技能添加伤害类型、属性和等级。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak incorrectly applying to some pseudo-actions.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.BlueActionInfo",
+      "Translated": "修复了调整错误应用于某些伪技能的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Collectable Rewards",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CollectableRewards",
+      "Translated": "显示收藏品奖励",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows rewards when viewing a collectable delivery item.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CollectableRewards",
+      "Translated": "查看收藏品交付物品时显示奖励。",
+      "Source": "library"
+    },
+    {
+      "Original": "Colour scrip values",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CollectableRewards/Configs::ColourScripValues",
+      "Translated": "票据价值着色",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved Crafting Action Tooltips",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CraftingActionInfo",
+      "Translated": "改进的制作技能提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds calculated efficiency of crafting actions to tooltips.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CraftingActionInfo",
+      "Translated": "在提示中添加制作技能的计算效率。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not disabling correctly.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CraftingActionInfo",
+      "Translated": "修复了调整无法正确禁用的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed results preview not resetting.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CraftingActionInfo",
+      "Translated": "修复了结果预览无法重置的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Results Preview",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.CraftingActionInfo/Configs::ShowResultsPreview",
+      "Translated": "显示结果预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Desynthesis Skill",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.DesynthesisSkill",
+      "Translated": "显示分解技能",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows your current desynthesis level when viewing a desynthesizable item.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.DesynthesisSkill",
+      "Translated": "查看可分解物品时显示当前分解等级。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not working on french clients.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.DesynthesisSkill",
+      "Translated": "修复了调整在法语客户端无法工作的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Ensure tooltips remain on screen",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.EnsureTooltipRemainsOnScreen",
+      "Translated": "确保提示保持在屏幕内",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents tooltips from extending below the bottom of the screen. Useful when using tweaks that make the tooltips longer.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.EnsureTooltipRemainsOnScreen",
+      "Translated": "防止提示延伸到屏幕底部之外。当使用使提示变长的调整时很有用。",
+      "Source": "library"
+    },
+    {
+      "Original": "Padding",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.EnsureTooltipRemainsOnScreen/Configs::Padding",
+      "Translated": "边距",
+      "Source": "library"
+    },
+    {
+      "Original": "Show expected food and potion stats",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.FoodStats",
+      "Translated": "显示预期的食物和药水属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Calculates the stat results a consumable will have based on your current stats.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.FoodStats",
+      "Translated": "根据当前属性计算消耗品将获得的属性结果。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Glamour in Item Name",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.GlamItemNames",
+      "Translated": "在物品名称中显示幻化",
+      "Source": "library"
+    },
+    {
+      "Original": "Displays the glamoured item name underneath the real item name.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.GlamItemNames",
+      "Translated": "在真实物品名称下方显示幻化物品名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Tooltips in Combat",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat",
+      "Translated": "战斗中隐藏提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow hiding action and/or Item tooltips while in combat. ",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat",
+      "Translated": "允许在战斗中隐藏技能和/或物品提示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for crossbar hints.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat",
+      "Translated": "添加了对十字热键栏提示的支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved logic to attempt to reduce settings getting stuck in incorrect state.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat",
+      "Translated": "改进逻辑以尝试减少设置卡在错误状态的情况。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Action Tooltips in Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HideAction",
+      "Translated": "战斗中隐藏技能提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Action Tooltips out of Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HideActionOoc",
+      "Translated": "战斗外隐藏技能提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Item Tooltips in Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HideItem",
+      "Translated": "战斗中隐藏物品提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Item Tooltips out of Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HideItemOoc",
+      "Translated": "战斗外隐藏物品提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Pop-up Help in Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HidePopUp",
+      "Translated": "战斗中隐藏弹出帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Pop-up Help out of Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HidePopUpOoc",
+      "Translated": "战斗外隐藏弹出帮助",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Cross Bar Hints in Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HideCrossbarHints",
+      "Translated": "战斗中隐藏十字热键栏提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Cross Bar Hints out of Combat",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.HideTooltipsInCombat/Configs::HideCrossbarHintsOoc",
+      "Translated": "战斗外隐藏十字热键栏提示",
+      "Source": "library"
+    },
+    {
+      "Original": "Item Hotkeys",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ItemHotkeys",
+      "Translated": "物品快捷键",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds hotkeys for various actions when the item detail window is visible.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ItemHotkeys",
+      "Translated": "当物品详情窗口可见时，为各种操作添加快捷键。",
+      "Source": "library"
+    },
+    {
+      "Original": "Materia Stats",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.MateriaStats",
+      "Translated": "魔晶石属性",
+      "Source": "library"
+    },
+    {
+      "Original": "Includes an item's attached materia when displaying the stats.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.MateriaStats",
+      "Translated": "显示属性时包含物品镶嵌的魔晶石。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Painting Preview",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.PaintingPreview",
+      "Translated": "显示画作预览",
+      "Source": "library"
+    },
+    {
+      "Original": "Add an image preview for paintings to item tooltips.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.PaintingPreview",
+      "Translated": "在物品提示框中添加画作的图像预览。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed extra spacing being added above the preview image.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.PaintingPreview",
+      "Translated": "修复了预览图像上方出现多余间距的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Precise Durability",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.PrecisionDurability",
+      "Translated": "精确耐久度",
+      "Source": "library"
+    },
+    {
+      "Original": "Show partial percentages for durability.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.PrecisionDurability",
+      "Translated": "显示耐久度的精确百分比。",
+      "Source": "library"
+    },
+    {
+      "Original": "Precise Spiritbond",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.PrecisionSpiritbond",
+      "Translated": "精确灵魂绑定",
+      "Source": "library"
+    },
+    {
+      "Original": "Show partial percentages for Spiritbond.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.PrecisionSpiritbond",
+      "Translated": "显示灵魂绑定的精确百分比。",
+      "Source": "library"
+    },
+    {
+      "Original": "Show ID",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID",
+      "Translated": "显示 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Show the ID of actions and items on their tooltips.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID",
+      "Translated": "在技能和物品的提示框中显示其 ID。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to show original action ID alongside resolved.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID",
+      "Translated": "新增选项，可在解析后的 ID 旁显示原始技能 ID。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed ID being cut off on items with long category names, like BLM weapons.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID",
+      "Translated": "修复了在类别名称较长的物品（如黑魔法师武器）上 ID 被截断的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Use Hexadecimal ID",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID/Configs::Hex",
+      "Translated": "使用十六进制 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Both HEX and Decimal",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID/Configs::Both",
+      "Translated": "同时显示十六进制和十进制",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Resolved Action ID",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID/Configs::ShowResolvedActionId",
+      "Translated": "显示解析后的技能 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Show Original Action ID",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.ShowItemID/Configs::ShowOriginalActionId",
+      "Translated": "显示原始技能 ID",
+      "Source": "library"
+    },
+    {
+      "Original": "Simplified Equipment Job Display",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.SimplifiedClassJobDisplay",
+      "Translated": "简化装备职业显示",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides classes from equipment tooltips when their jobs are unlocked.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.SimplifiedClassJobDisplay",
+      "Translated": "当职业已解锁时，在装备提示框中隐藏其基础职业。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak for Japanese clients.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.SimplifiedClassJobDisplay",
+      "Translated": "修复了日文客户端下的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Track Faded Orchestrion Rolls",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackFadedRolls",
+      "Translated": "追踪褪色乐谱",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds the collectable checkmark to Faded Orchestrion Rolls.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackFadedRolls",
+      "Translated": "为褪色乐谱添加收藏品勾选标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tweak not functioning at all.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackFadedRolls",
+      "Translated": "修复了功能完全无法使用的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added tracking for faded rolls with multiple crafts.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackFadedRolls",
+      "Translated": "新增对多种制作褪色乐谱的追踪。",
+      "Source": "library"
+    },
+    {
+      "Original": "Track Gacha Items",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackGachaItems",
+      "Translated": "追踪抽奖物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds the collectable checkmark to gacha items, such as Triple Triad card packs, when all potential items have been obtained.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackGachaItems",
+      "Translated": "当所有可能物品均已获得时，为抽奖物品（如九宫幻卡卡包）添加收藏品勾选标记。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added 'Platinum Triad Card'",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackGachaItems",
+      "Translated": "新增“白金幻卡”",
+      "Source": "library"
+    },
+    {
+      "Original": "Track Outfits",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackOutfits",
+      "Translated": "追踪套装",
+      "Source": "library"
+    },
+    {
+      "Original": "Shows whether or not you've made an outfit out of the hovered item.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackOutfits",
+      "Translated": "显示悬停物品是否已用于制作套装。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed HQ outfits not working.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackOutfits",
+      "Translated": "修复了 HQ 套装无法使用的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to ignore quality when checking if an item exists as part of an outfit.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackOutfits",
+      "Translated": "新增选项，在检查物品是否属于套装时忽略品质。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed some key items incorrectly indicating they belong to an outfit.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackOutfits",
+      "Translated": "修复了部分关键物品错误地显示属于套装的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Mark HQ items as obtained if their NQ variant is obtained, or vice versa",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.TrackOutfits/Configs::IgnoreQuality",
+      "Translated": "当 NQ 物品已获得时，将对应的 HQ 物品标记为已获得，反之亦然",
+      "Source": "library"
+    },
+    {
+      "Original": "Preview Unlockable Items",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Tooltips.UnlockablePreviews",
+      "Translated": "预览可解锁物品",
+      "Source": "library"
+    },
+    {
+      "Original": "Show a preview image for mounts, minions and hairstyles.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Tooltips.UnlockablePreviews",
+      "Translated": "显示坐骑、宠物和发型的预览图像。",
+      "Source": "library"
+    },
+    {
+      "Original": "Case Insensitive Text Commands",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.CaseInsensitiveCommands",
+      "Translated": "文本命令不区分大小写",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows text commands to be entered without caring about case.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.CaseInsensitiveCommands",
+      "Translated": "允许输入文本命令时无需区分大小写。",
+      "Source": "library"
+    },
+    {
+      "Original": "Resolve Dalamud-provided commands)",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.CaseInsensitiveCommands/Configs::ResolveDalamudCommands",
+      "Translated": "解析 Dalamud 提供的命令）",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Name Colours",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "聊天名称颜色",
+      "Source": "library"
+    },
+    {
+      "Original": "Gives players a random colour in chat, or set the name manually.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "为玩家在聊天中随机分配颜色，或手动设置名称。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed Chat2 exploding with new colour system. Tweak will still not work in Chat2, but it will not explode.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "修复了 Chat2 在新颜色系统下崩溃的问题。调整功能在 Chat2 中仍无法使用，但不会再崩溃。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed colour display when in party.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "修复了组队时的颜色显示。",
+      "Source": "library"
+    },
+    {
+      "Original": "Extended range of possible colours.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "扩展了可用颜色的范围。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to give all undefined characters the same colour.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "新增选项，可为所有未定义角色设置相同颜色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added per channel configuration for colouring sender name and/or names in messages.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "新增按频道配置发送者名称和/或消息中名称的着色。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to reduce saturation of random names to improve readability.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatNameColours",
+      "Translated": "新增选项，可降低随机名称的饱和度以提升可读性。",
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Sounds Everywhere",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatSoundsEverywhere",
+      "Translated": "全频道聊天音效",
+      "Source": "library"
+    },
+    {
+      "Original": "Enables <se.#> chat sounds everywhere, regardless of channel.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ChatSoundsEverywhere",
+      "Translated": "在所有频道启用 <se.#> 聊天音效。",
+      "Source": "library"
+    },
+    {
+      "Original": "Clickable Links in Chat",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ClickableLinks",
+      "Translated": "聊天可点击链接",
+      "Source": "library"
+    },
+    {
+      "Original": "Parses links posted in chat and allows them to be clicked.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ClickableLinks",
+      "Translated": "解析聊天中发布的链接并允许点击。",
+      "Source": "library"
+    },
+    {
+      "Original": "Enable chat bubbles in combat",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.CombatChatBubbles",
+      "Translated": "战斗中启用聊天气泡",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow chat bubbles to be displayed while in combat.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.CombatChatBubbles",
+      "Translated": "允许在战斗中显示聊天气泡。",
+      "Source": "library"
+    },
+    {
+      "Original": "Custom Timestamp Format",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.CustomTimestampFormat",
+      "Translated": "自定义时间戳格式",
+      "Source": "library"
+    },
+    {
+      "Original": "Customize the timestamps displayed on chat messages.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.CustomTimestampFormat",
+      "Translated": "自定义聊天消息上显示的时间戳。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Auto Chat Inputs",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs",
+      "Translated": "禁用自动聊天输入",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevent the game from inserting <flag> or other parameters into chat box.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs",
+      "Translated": "阻止游戏开始向聊天框插入 <flag> 或其他参数。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed game crash in 6.4",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs",
+      "Translated": "修复了 6.4 版本的游戏开始崩溃问题",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable <item> when linking items.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs/Configs::DisableItem",
+      "Translated": "链接物品时禁用 <item>。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable <status> when linking a status.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs/Configs::DisableStatus",
+      "Translated": "链接状态时禁用 <status>。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable <flag> when setting map flags.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs/Configs::DisableFlag",
+      "Translated": "设置地图标记时禁用 <flag>。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable <quest> when linking quests.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs/Configs::DisableQuest",
+      "Translated": "链接任务时禁用 <quest>。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable <pfinder> when linking party finder.",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableAutoChatInputs/Configs::DisablePartyFinder",
+      "Translated": "链接招募时禁用 <pfinder>。",
+      "Source": "library"
+    },
+    {
+      "Original": "Smart AutoScroll",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableChatAutoscroll",
+      "Translated": "智能自动滚动",
+      "Source": "library"
+    },
+    {
+      "Original": "Attempts to prevent autoscrolling when receiving new chat messages while scrolled up.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableChatAutoscroll",
+      "Translated": "在向上滚动时收到新聊天消息时尝试阻止自动滚动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Chat Movement",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableChatMovement",
+      "Translated": "禁用聊天窗口移动",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents movement of the chat window.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableChatMovement",
+      "Translated": "阻止聊天窗口移动。",
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Novice Network Auto-Switch",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableNoviceNetworkAutoSwitch",
+      "Translated": "禁用新人频道自动切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Disables automatically selecting novice network when logging in or transferring to another server.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.DisableNoviceNetworkAutoSwitch",
+      "Translated": "登录或转移到其他服务器时禁用自动选择新人频道。",
+      "Source": "library"
+    },
+    {
+      "Original": "Echo Party Finder",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoPartyFinder",
+      "Translated": "超越之力招募",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints Party Finder description to chat when joining a group and entering a duty.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoPartyFinder",
+      "Translated": "加入队伍并进入任务时，将招募描述输出到聊天。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rewrote Tweak for Patch 6.5",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoPartyFinder",
+      "Translated": "为 6.5 版本重写了调整功能",
+      "Source": "library"
+    },
+    {
+      "Original": "Show PF description when joining party",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoPartyFinder/Config::ShowOnJoin",
+      "Translated": "加入队伍时显示招募描述",
+      "Source": "library"
+    },
+    {
+      "Original": "Show PF description when entering duty",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoPartyFinder/Config::ShowUponEnteringInstance",
+      "Translated": "进入任务时显示招募描述",
+      "Source": "library"
+    },
+    {
+      "Original": "Echo Story Selection",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoStorySelection",
+      "Translated": "超越之力剧情选择",
+      "Source": "library"
+    },
+    {
+      "Original": "When given multiple choices during quests, print the selected option to chat.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoStorySelection",
+      "Translated": "任务中出现多个选项时，将所选选项输出到聊天。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added option to hide some choices.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoStorySelection",
+      "Translated": "新增选项，可隐藏部分选项。",
+      "Source": "library"
+    },
+    {
+      "Original": "Display Character Name",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.EchoStorySelection/Config::DisplayCharacterName",
+      "Translated": "显示角色名称",
+      "Source": "library"
+    },
+    {
+      "Original": "Display EXP Gain Percentage of Level",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ExpGainLevelPercent",
+      "Translated": "显示经验获取占等级百分比",
+      "Source": "library"
+    },
+    {
+      "Original": "Adds the percentage of your next level to exp gains in chat.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ExpGainLevelPercent",
+      "Translated": "在聊天中的经验获取后添加下一等级所需经验的百分比。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for Occult Crescent's phantom jobs.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ExpGainLevelPercent",
+      "Translated": "新增对神秘新月幻影职业的支持。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added support for earning experience on jobs other than current job.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ExpGainLevelPercent",
+      "Translated": "新增支持在当前职业以外的职业上获取经验。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed log message being hidden after Dalamud update.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.ExpGainLevelPercent",
+      "Translated": "修复了 Dalamud 更新后日志消息被隐藏的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Chat",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.HideChat",
+      "Translated": "隐藏聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Provides commands to hide the chat. (/$[CustomOrDefaultCommand] show|hide|toggle)",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.HideChat",
+      "Translated": "提供隐藏聊天的命令。(/$[CustomOrDefaultCommand] show|hide|toggle)",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Chat Automatically",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.HideChatAuto",
+      "Translated": "自动隐藏聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Hides chat automatically except when typing.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.HideChatAuto",
+      "Translated": "除输入时外自动隐藏聊天。",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Chat Panel Buttons",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.HideChatPanelButtons",
+      "Translated": "隐藏聊天面板按钮",
+      "Source": "library"
+    },
+    {
+      "Original": "Hide the chat log name and close button on panels that have been split from the main window.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.HideChatPanelButtons",
+      "Translated": "隐藏从主窗口分离出的面板上的聊天记录名称和关闭按钮。",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved Chat Font Sizes",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ImprovedFontSizes",
+      "Translated": "改进聊天字体大小",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows you to change the font size for the chat windows beyond the default limits, and allows docked chat tabs to keep their font size separate from the main tab.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ImprovedFontSizes",
+      "Translated": "允许你超出默认限制更改聊天窗口的字体大小，并允许停靠的聊天标签页保持与主标签页不同的字体大小。",
+      "Source": "library"
+    },
+    {
+      "Original": "Improved Sent Message History",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ImprovedSentMessageHistory",
+      "Translated": "改进已发送消息历史",
+      "Source": "library"
+    },
+    {
+      "Original": "Recover messages after accidentally pressing up in the chat, and increase the amount of history retained.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ImprovedSentMessageHistory",
+      "Translated": "在聊天中误按上方向键后恢复消息，并增加保留的历史记录数量。",
+      "Source": "library"
+    },
+    {
+      "Original": "Increase max line count in chat bubbles",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.IncreaseChatBubbleLines",
+      "Translated": "增加聊天气泡中的最大行数",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow upto 7 lines of text to be displayed in chat bubbles.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.IncreaseChatBubbleLines",
+      "Translated": "允许聊天气泡中最多显示 7 行文本。",
+      "Source": "library"
+    },
+    {
+      "Original": "Added ability to adjust the duration of chat bubbles.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.IncreaseChatBubbleLines",
+      "Translated": "新增调整聊天气泡持续时间的功能。",
+      "Source": "library"
+    },
+    {
+      "Original": "Max Lines",
+      "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.Chat.IncreaseChatBubbleLines/Configs::MaxLines",
+      "Translated": "最大行数",
+      "Source": "library"
+    },
+    {
+      "Original": "Print Search Comment",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.PrintSearchComment",
+      "Translated": "输出搜索留言",
+      "Source": "library"
+    },
+    {
+      "Original": "Prints the Search Comment of people, that get inspected, into the chat.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.PrintSearchComment",
+      "Translated": "将被查看对象的搜索留言输出到聊天中。",
+      "Source": "library"
+    },
+    {
+      "Original": "Rename Chat Tabs",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.RenameChatTabs",
+      "Translated": "重命名聊天标签页",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows renaming the General and Battle tabs in the chat window.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.RenameChatTabs",
+      "Translated": "允许重命名聊天窗口中的综合和战斗标签页。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed issue causing tabs to become incorrectly sized.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.RenameChatTabs",
+      "Translated": "修复了导致标签页尺寸错误的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Fixed tabs not being named on login.",
+      "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.Chat.RenameChatTabs",
+      "Translated": "修复了登录时标签页未命名的问题。",
+      "Source": "library"
+    },
+    {
+      "Original": "Reply Channel Switch",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ReplyChannelSwitch",
+      "Translated": "回复频道切换",
+      "Source": "library"
+    },
+    {
+      "Original": "Allow typing /r to set active chat channel to Tell.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ReplyChannelSwitch",
+      "Translated": "允许输入 /r 将当前聊天频道设为悄悄话。",
+      "Source": "library"
+    },
+    {
+      "Original": "Sticky Chat",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.StickyChat",
+      "Translated": "固定聊天频道",
+      "Source": "library"
+    },
+    {
+      "Original": "Sets the chat channel when you use temporary chat messages.\nExample: \"/p hello!\" will set the chat channel to Party",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.StickyChat",
+      "Translated": "使用临时聊天消息时设置聊天频道。\n例如：\"/p hello!\" 会将聊天频道设为小队",
+      "Source": "library"
+    },
+    {
+      "Original": "Sticky Shout Chat",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.StickyShoutChat",
+      "Translated": "固定喊话聊天",
+      "Source": "library"
+    },
+    {
+      "Original": "Prevents the game from automatically switching out of shout chat.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.StickyShoutChat",
+      "Translated": "阻止游戏自动退出喊话聊天。",
+      "Source": "library"
+    },
+    {
+      "Original": "Zoomed Chat Customization",
+      "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.Chat.ZoomedChatCustomization",
+      "Translated": "放大聊天自定义",
+      "Source": "library"
+    },
+    {
+      "Original": "Allows customization of the size and position of the zoomed chat view.",
+      "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.Chat.ZoomedChatCustomization",
+      "Translated": "允许自定义放大聊天视图的大小和位置。",
+      "Source": "library"
+    }
+  ]
+}

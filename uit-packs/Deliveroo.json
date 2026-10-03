@@ -1,0 +1,495 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Open the configuration",
+      "Translated": "打开设置",
+      "Context": "DeliverooPlugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Deliveroo - Configuration###DeliverooConfig",
+      "Translated": "Deliveroo - 设置",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items for Auto-Buy",
+      "Translated": "自动购买物品",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " (Limit: ",
+      "Translated": "(上限:",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use same quantity for global and character-specific lists",
+      "Translated": "全局列表与角色专属列表使用相同数量",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove ",
+      "Translated": "移除",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add Item...",
+      "Translated": "添加物品...",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Translated": "筛选...",
+      "Context": "ConfigWindow.DrawBuyList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Character Settings",
+      "Translated": "角色设置",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current Character: ",
+      "Translated": "当前角色:",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disable plugin for this character",
+      "Translated": "为该角色禁用插件",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use custom purchase list for this character",
+      "Translated": "为此角色使用自定义购买列表",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear",
+      "Translated": "清空",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use 'Hide Armoury Chest Items' filter",
+      "Translated": "使用“隐藏兵装库物品”筛选",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The default filter for all characters is 'Hide Gear Set Items', but you may want to override this to hide all Armoury Chest items (regardless of whether they're part of a gear set) e.g. for your main character.",
+      "Translated": "所有角色的默认筛选为“隐藏套装物品”，但你可能希望覆盖此设置以隐藏所有兵装库物品（无论它们是否属于套装），例如为你的主角色。",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore 'Minimum Seals to keep' setting",
+      "Translated": "忽略“保留最少军票”设置",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "When enabled, all GC seals will be spent. This is effectively the same as setting 'Minimum Seals to keep' to 0.",
+      "Translated": "启用后，所有军票都会被消耗。这实际上等同于将“保留最少军票”设为 0。",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove character-specific settings",
+      "Translated": "移除角色专属设置",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL to remove the configuration for ",
+      "Translated": "按住 CTRL 以移除以下角色的设置",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " (non-reversible).",
+      "Translated": "（不可撤销）。",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable character-specific settings",
+      "Translated": "启用角色专属设置",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You are not currently logged in.",
+      "Translated": "你当前未登录。",
+      "Context": "ConfigWindow.DrawCharacterSpecificSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Additional Settings",
+      "Translated": "附加设置",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum Seals to keep (e.g. for Squadron Missions)",
+      "Translated": "保留最少军票（例如用于中队任务）",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use a different amount at max rank",
+      "Translated": "满级时使用不同数量",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum seals to keep at max rank",
+      "Translated": "满级时保留最少军票",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Turn-In Key",
+      "Translated": "快速交纳快捷键",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Chat channel for status updates",
+      "Translated": "状态更新聊天频道",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pause when reaching selected FC Rank",
+      "Translated": "达到所选部队等级时暂停",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Warning",
+      "Translated": "显示警告",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disable Turn-In",
+      "Translated": "禁用交纳",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Behavior when not on Home World",
+      "Translated": "不在本服时的行为",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disable the game setting 'Limit frame rate when client is inactive'",
+      "Translated": "禁用游戏设置“客户端非活动时限制帧率”",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Set frame rate to uncapped",
+      "Translated": "将帧率设为无上限",
+      "Context": "ConfigWindow.DrawAdditionalSettings",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GC Delivery###DeliverooTurnIn",
+      "Translated": "部队交纳",
+      "Context": "TurnInWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You do not have the required rank for Expert Delivery.",
+      "Translated": "你没有专家交纳所需的军衔。",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Turn-in disabled, you are not on your home world.",
+      "Translated": "已禁用交纳，你不在自己的主世界。",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Handle GC turn ins/exchange automatically",
+      "Translated": "自动处理军队交纳/兑换",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You are not on your home world and will not earn FC points.",
+      "Translated": "你不在自己的主世界，无法获得部队点数。",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You do not have an active seal buff.",
+      "Translated": "你没有生效的军票提高增益。",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current Buff: ",
+      "Translated": "当前增益：",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use Priority Seal Allowance (15%)",
+      "Translated": "使用军票提高（15%）",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Click an item to turn it in without confirmation",
+      "Translated": "点击物品即可直接交纳，无需确认",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold '",
+      "Translated": "按住“",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "' when clicking an item to turn it in without confirmation.",
+      "Translated": "”并点击物品即可直接交纳，无需确认。",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Debug (State): ",
+      "Translated": "调试（状态）：",
+      "Context": "TurnInWindow.DrawContent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You meet all requirements to rank up to ",
+      "Translated": "你已满足所有晋升条件，可晋升至",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ranking up to ",
+      "Translated": "晋升至",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " requires:",
+      "Translated": "需要：",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " GC seals",
+      "Translated": "军票",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Complete Hunting Log #",
+      "Translated": "完成讨伐笔记 #",
+      "Context": "TurnInWindow.DrawNextRankPrequesites",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items to buy (",
+      "Translated": "要购买的物品（",
+      "Context": "TurnInWindow.DrawItemsToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add Item",
+      "Translated": "添加物品",
+      "Context": "TurnInWindow.DrawItemsToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Configure available Items",
+      "Translated": "配置可用物品",
+      "Context": "TurnInWindow.DrawItemsToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Configure",
+      "Translated": "配置",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enabled##Enabled",
+      "Translated": "启用##Enabled",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Check Retainer Inventory for items (requires AllaganTools)",
+      "Translated": "检查雇员背包中的物品（需要 AllaganTools）",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remaining items to buy",
+      "Translated": "剩余要购买的物品",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Maximum items to buy",
+      "Translated": "最多购买数量",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This item will be skipped, as you are in the wrong Grand Company.",
+      "Translated": "该物品将被跳过，因为你属于错误的军队。",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This item will be skipped, your rank isn't high enough to buy it.",
+      "Translated": "该物品将被跳过，你的军衔不足以购买它。",
+      "Context": "TurnInWindow.DrawItemToBuy",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Purchase Once",
+      "Translated": "购买一次",
+      "Context": "TurnInWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Keep in Stock",
+      "Translated": "保持库存",
+      "Context": "TurnInWindow..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "all characters",
+      "Translated": "所有角色",
+      "Context": "GlobalItemsToPurchase.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Configuration",
+      "Translated": "打开配置",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Wrong tab selected",
+      "Translated": "选择了错误的标签页",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Wrong filter selected (expected ",
+      "Translated": "选择了错误的筛选条件（应为",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ", but is ",
+      "Translated": "，但实际为",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to refresh item list",
+      "Translated": "无法刷新物品列表",
+      "Context": "SupplyHandler.SelectItemToTurnIn",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

@@ -1,0 +1,530 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "status.empty",
+      "Translated": "状态为空",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.autoRefreshed",
+      "Translated": "状态已自动刷新",
+      "Context": "MainWindow.ProcessQueuedAutoRefresh",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "player.notLoggedIn",
+      "Translated": "玩家未登录",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "probe.checked",
+      "Translated": "已检查",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer.active",
+      "Translated": "雇员使用中",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer.cached",
+      "Translated": "雇员已缓存",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "status.refreshed",
+      "Translated": "状态已刷新",
+      "Context": "MainWindow.DrawStatusBar",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.cabinetProgress",
+      "Translated": "收藏柜进度",
+      "Context": "MainWindow.DrawCleanupOverview",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.dresser",
+      "Translated": "衣柜",
+      "Context": "MainWindow.DrawCleanupSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.armoire",
+      "Translated": "收藏柜",
+      "Context": "MainWindow.DrawCleanupSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "empty.action",
+      "Translated": "无操作",
+      "Context": "MainWindow.DrawRecommendationList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.transferable",
+      "Translated": "可转移",
+      "Context": "MainWindow.DrawRecommendationFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.glamourSet",
+      "Translated": "幻化套装",
+      "Context": "MainWindow.DrawRecommendationFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.tradableItems",
+      "Translated": "可交易物品",
+      "Context": "MainWindow.DrawRecommendationFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.replicaItems",
+      "Translated": "复刻物品",
+      "Context": "MainWindow.DrawRecommendationFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.duplicateItems",
+      "Translated": "重复物品",
+      "Context": "MainWindow.DrawRecommendationFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "metric.identicalModels",
+      "Translated": "相同模型",
+      "Context": "MainWindow.DrawRecommendationFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "card-",
+      "Translated": "卡片-",
+      "Context": "MainWindow.DrawActionCardGrid",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.select",
+      "Translated": "选择",
+      "Context": "MainWindow.DrawRecommendationDetails",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.locations",
+      "Translated": "位置",
+      "Context": "MainWindow.DrawRecommendationDetails",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "row.locationUnknown",
+      "Translated": "位置未知",
+      "Context": "MainWindow.GetItemLocationSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "row.locationOne",
+      "Translated": "1 个位置",
+      "Context": "MainWindow.GetItemLocationSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "row.locationMany",
+      "Translated": "{0} 个位置",
+      "Context": "MainWindow.GetItemLocationSummary",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storePending",
+      "Translated": "待存入",
+      "Context": "MainWindow.DrawStoreStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeNoMatches",
+      "Translated": "无匹配结果",
+      "Context": "MainWindow.DrawStoreStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeSearchPlaceholder",
+      "Translated": "搜索...",
+      "Context": "MainWindow.DrawStoreControls",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storeComplete",
+      "Translated": "已完成",
+      "Context": "MainWindow.DrawStoreControls",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.storePartial",
+      "Translated": "部分完成",
+      "Context": "MainWindow.DrawStoreControls",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetUnowned",
+      "Translated": "未拥有",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "glamourSetCompleteStored",
+      "Translated": "套装已完整存入",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetCompleteStored",
+      "Translated": "套装已完整存入",
+      "Context": "MainWindow.DrawGlamourSetStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.dyed",
+      "Translated": "已染色",
+      "Context": "MainWindow.GetCabinetMissingDetail",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "glamour-set-piece-",
+      "Translated": "幻化套装部件-",
+      "Context": "MainWindow.DrawGlamourSetRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetDerivedName",
+      "Translated": "衍生名称",
+      "Context": "MainWindow.GetGlamourSetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.glamourSetFallback",
+      "Translated": "备用名称",
+      "Context": "MainWindow.GetGlamourSetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.loadMore",
+      "Translated": "加载更多",
+      "Context": "MainWindow.DrawCollectionLoadMore",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.status.stored",
+      "Translated": "已存入",
+      "Context": "MainWindow.GetGlamourSetPieceStatusLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "collection.status.toStore",
+      "Translated": "待存入",
+      "Context": "MainWindow.GetGlamourSetPieceStatusLabel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "detail.ownedInstances",
+      "Translated": "已拥有实例",
+      "Context": "MainWindow.DrawGlamourSetPieceTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "wardrobe-",
+      "Translated": "衣柜-",
+      "Context": "MainWindow.DrawWardrobeStatsTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "section.character",
+      "Translated": "角色",
+      "Context": "MainWindow.DrawCharacterTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.settings",
+      "Translated": "角色设置",
+      "Context": "MainWindow.DrawCharacterTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.storage",
+      "Translated": "角色存储",
+      "Context": "MainWindow.DrawCharacterTab",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.actions",
+      "Translated": "角色操作",
+      "Context": "MainWindow.DrawCharacterSnapshotActions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.current",
+      "Translated": "当前角色",
+      "Context": "MainWindow.DrawCharacterOverview",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.world",
+      "Translated": "服务器",
+      "Context": "MainWindow.DrawCharacterOverview",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.dataCenter",
+      "Translated": "大区",
+      "Context": "MainWindow.DrawCharacterOverview",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "field.generatedAt",
+      "Translated": "生成时间",
+      "Context": "MainWindow.DrawCharacterOverview",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "field.catalog",
+      "Translated": "目录",
+      "Context": "MainWindow.DrawCharacterOverview",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer.cacheDetails",
+      "Translated": "雇员缓存详情",
+      "Context": "MainWindow.DrawRetainerCacheSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer.active.short",
+      "Translated": "已激活",
+      "Context": "MainWindow.DrawRetainerCacheSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer.none.short",
+      "Translated": "无",
+      "Context": "MainWindow.DrawRetainerCacheSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "button.refreshCurrentRetainer",
+      "Translated": "刷新当前雇员",
+      "Context": "MainWindow.DrawRetainerCacheSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "retainer.cacheLine",
+      "Translated": "雇员缓存信息",
+      "Context": "MainWindow.DrawRetainerCacheSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.dataState",
+      "Translated": "角色数据状态",
+      "Context": "MainWindow.DrawCharacterDataState",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.carriedStorage",
+      "Translated": "角色携带存储",
+      "Context": "MainWindow.DrawCharacterDataState",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.source.empty",
+      "Translated": "无数据源",
+      "Context": "MainWindow.DrawCharacterDataState",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.source.live",
+      "Translated": "实时数据源",
+      "Context": "MainWindow.DrawCharacterDataState",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "field.cachedRetainers",
+      "Translated": "已缓存雇员",
+      "Context": "MainWindow.DrawCharacterDataState",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.source.retainerCache",
+      "Translated": "雇员缓存数据源",
+      "Context": "MainWindow.DrawCharacterDataState",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "character.source.cached",
+      "Translated": "缓存数据源",
+      "Context": "MainWindow.GetPartitionStateText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.title",
+      "Translated": "已忽略物品",
+      "Context": "MainWindow.DrawIgnoredItemsSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.empty",
+      "Translated": "无已忽略物品",
+      "Context": "MainWindow.DrawIgnoredItemsSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.clear",
+      "Translated": "清除",
+      "Context": "MainWindow.DrawIgnoredItemsSection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignored.unignoreHint",
+      "Translated": "取消忽略提示",
+      "Context": "MainWindow.DrawIgnoredItemCard",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.title",
+      "Translated": "贵重染剂偏好",
+      "Context": "MainWindow.DrawValuableDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.description",
+      "Translated": "描述",
+      "Context": "MainWindow.DrawValuableDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "dyePreferences.categoryTitle",
+      "Translated": "分类标题",
+      "Context": "MainWindow.DrawValuableDyePreferences",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " tab=",
+      "Translated": "标签=",
+      "Context": "InventoryHighlightOverlayService.DrawMappedSlotDebugOverlayInternal",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " pages tab=",
+      "Translated": "页标签=",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerLargeEstimatedDebugSlots",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " dup=",
+      "Translated": "重复=",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerHitDebugList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " raw=",
+      "Translated": "原始=",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerHitDebugList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " ign=",
+      "Translated": "忽略=",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerHitDebugList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "probe tab=",
+      "Translated": "探测标签=",
+      "Context": "InventoryHighlightOverlayService.DrawRetainerProbeWindow",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

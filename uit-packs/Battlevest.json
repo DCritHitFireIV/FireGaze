@@ -1,0 +1,729 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Options",
+      "Translated": "选项",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plans",
+      "Translated": "方案",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop plugin",
+      "Translated": "停止插件",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mark as favorite. Favorite leves will be prioritized for picking. Usually you'd want to make shortest leves favorite.",
+      "Translated": "标记为收藏。收藏的行会理符将被优先选取。通常你会想把最短的行会理符设为收藏。",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Lv. ",
+      "Translated": "等级",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop upon reaching required seals amount to unlock Expert Delivery",
+      "Translated": "达到解锁专家配送所需的军票数量后停止",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Preferred mobs (",
+      "Translated": "优先怪物（",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " mobs)###forced",
+      "Translated": "只怪物）",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignored mobs (",
+      "Translated": "忽略怪物（",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " mobs)###ignored",
+      "Translated": "只怪物）",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remains leves: ",
+      "Translated": "剩余行会理符：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Initial markers:",
+      "Translated": "初始标记：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Coord: ",
+      "Translated": "坐标：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "; radius: ",
+      "Translated": "；半径：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All markers:",
+      "Translated": "所有标记：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "IconID: ",
+      "Translated": "图标ID：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ", Coord: ",
+      "Translated": "，坐标：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Force melee on target",
+      "Translated": "强制对目标近战",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore target",
+      "Translated": "忽略目标",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Debug leves",
+      "Translated": "调试行会理符",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select##",
+      "Translated": "选择##",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Leve",
+      "Translated": "行会理符",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "id",
+      "Translated": "ID",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Callback",
+      "Translated": "回调",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Initiate",
+      "Translated": "发起",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Accepted leve: ",
+      "Translated": "已接受行会理符：",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Initiate##",
+      "Translated": "发起##",
+      "Context": "MainWindow.DrawDebug",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No plan selected",
+      "Translated": "未选择方案",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add from target",
+      "Translated": "从目标添加",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "To create plan, target levemete and press this button.",
+      "Translated": "要创建方案，请选中行会理符发布人并按此按钮。",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Paste",
+      "Translated": "粘贴",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hold CTRL and click to delete",
+      "Translated": "按住 CTRL 并点击以删除",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "NPC: ",
+      "Translated": "NPC：",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " | Zone: ",
+      "Translated": "| 区域：",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current zone is inappropriate for this plan",
+      "Translated": "当前区域不适用于此方案",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Begin",
+      "Translated": "开始",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Approach NPC to begin this leve plan",
+      "Translated": "接近 NPC 以开始此理符方案",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add target as forced mob",
+      "Translated": "将目标添加为强制怪物",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add target as ignored mob",
+      "Translated": "将目标添加为忽略怪物",
+      "Context": "MainWindow.DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Beta version",
+      "Translated": "测试版",
+      "Context": "Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "- TextAdvance installed, enabled and \"Navigation\" enabled it it's options",
+      "Translated": "- 已安装并启用 TextAdvance，且在其选项中启用了“Navigation”",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "- Vnavmesh installed and enabled",
+      "Translated": "- 已安装并启用 Vnavmesh",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "- Wrath Combo or any other combo that can put significant part of your rotation to one button. If you are overlevelled, you can skip combo and just spam single GCD. Note that unspecified autorotation plugins will likely not work with Battlevest, so do not enable them. ",
+      "Translated": "- Wrath Combo 或任何其他能将大部分循环整合到一个按键的连击插件。如果你等级过高，可以跳过连击，直接连打单个 GCD。注意，未指定的自动循环插件很可能无法与 Battlevest 配合使用，因此请勿启用它们。",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Additionally:",
+      "Translated": "此外：",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "- Best results are achieved on ranged jobs",
+      "Translated": "- 远程职业效果最佳",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "- BossMod's AI can be used to avoid AOE",
+      "Translated": "- 可使用 BossMod 的 AI 来躲避 AOE",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use BossMod for attacking mobs",
+      "Translated": "使用 BossMod 攻击怪物",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use RotationSolverReborn for attacking mobs",
+      "Translated": "使用 RotationSolverReborn 攻击怪物",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use single key press to attack mobs",
+      "Translated": "使用单次按键攻击怪物",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select mode:",
+      "Translated": "选择模式：",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Press the key",
+      "Translated": "按下按键",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Execute hotbar slot",
+      "Translated": "处决热键栏槽位",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Key to spam for attack",
+      "Translated": "用于攻击的连按按键",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hotbar index",
+      "Translated": "热键栏索引",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Slot index",
+      "Translated": "槽位索引",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select...",
+      "Translated": "选择...",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hotbar ",
+      "Translated": "热键栏",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Slot ",
+      "Translated": "槽位",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop upon reaching this amount of allowances",
+      "Translated": "达到此理符限额时停止",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allow accepting multiple levequests",
+      "Translated": "允许接受多个理符任务",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Allow flight",
+      "Translated": "允许飞行",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Also must be enabled in TextAdvance's settings.\nIn general, less reliable than walking.",
+      "Translated": "还必须在 TextAdvance 的设置中启用。\n通常不如步行可靠。",
+      "Context": "DrawOptions",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "City leves are unsupported.",
+      "Translated": "不支持城市理符。",
+      "Context": "DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Made a well working plan? Share it!",
+      "Translated": "做出了好用的方案？分享它！",
+      "Context": "DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Predefined plans can not be edited.",
+      "Translated": "预设方案无法编辑。",
+      "Context": "DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select levequests you want to do.",
+      "Translated": "选择你想完成的理符任务。",
+      "Context": "DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only \"kill enemies\" leve types are supported",
+      "Translated": "仅支持“击杀敌人”类型的理符",
+      "Context": "DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete##f",
+      "Translated": "删除##f",
+      "Context": "DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete##i",
+      "Translated": "删除##i",
+      "Context": "DrawPlans",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Battlevest Active",
+      "Translated": "战斗背心已启用",
+      "Context": "StatusWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "StatusWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Config",
+      "Translated": "设置",
+      "Context": "StatusWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Finish at next return",
+      "Translated": "下次返回时结束",
+      "Context": "StatusWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Processing tasks: ",
+      "Translated": "正在处理任务：",
+      "Context": "StatusWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Seals Remaining: ",
+      "Translated": "剩余印章：",
+      "Context": "StatusWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No quests selected",
+      "Translated": "未选择任务",
+      "Context": "LevePlan.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " and ",
+      "Translated": "和",
+      "Context": "LevePlan.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " more",
+      "Translated": "更多",
+      "Context": "LevePlan.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unk",
+      "Translated": "未知",
+      "Context": "LevePlan.GetNPCName",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Stop the addon. Always remember to turn it off when it is not in use!",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::Off",
+      "Translated": "停止插件。不使用时请务必关闭！",
+      "Source": "library"
+    },
+    {
+      "Original": "Start the addon in Auto mode. When out of combat or when combat starts, switches the target according to the set condition. \r\n Optionally: You can add the target type to the end of the command you want RSR to do. For example: /rotation Auto Big",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::Auto",
+      "Translated": "以自动模式启动插件。脱战或进入战斗时，根据设定条件切换目标。\n 可选：你可以在想让 RSR 执行的命令末尾添加目标类型。例如：/rotation Auto Big",
+      "Source": "library"
+    },
+    {
+      "Original": "Start in Target-Only mode. RSR will auto-select targets per normal logic but will not perform any actions.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::TargetOnly",
+      "Translated": "以仅选目标模式启动。RSR 会按常规逻辑自动选择目标，但不会执行任何动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Start the addon in Manual mode. You need to choose the target manually. This will bypass any engage settings that you have set up and will start attacking immediately once something is targeted.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::Manual",
+      "Translated": "以手动模式启动插件。你需要手动选择目标。这会绕过你设置的所有接战设置，一旦选定目标就会立即开始攻击。",
+      "Source": "library"
+    },
+    {
+      "Original": "This mode is managed by the AutoDuty plugin",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::AutoDuty",
+      "Translated": "此模式由 AutoDuty 插件管理",
+      "Source": "library"
+    },
+    {
+      "Original": "This mode is managed by the Henchman plugin, or any other plugin that requires RSR just do rotation and not targetting.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/StateCommandType::Henched",
+      "Translated": "此模式由 Henchman 插件管理，或任何其他需要 RSR 仅执行循环而不进行目标选择的插件。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the settings.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/OtherCommandType::Settings",
+      "Translated": "打开设置。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the rotations.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/OtherCommandType::Rotations",
+      "Translated": "打开循环。",
+      "Source": "library"
+    },
+    {
+      "Original": "Open the duty rotations.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/OtherCommandType::DutyRotations",
+      "Translated": "打开任务循环。",
+      "Source": "library"
+    },
+    {
+      "Original": "Perform the actions.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/OtherCommandType::DoActions",
+      "Translated": "执行动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Toggle the actions.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/OtherCommandType::ToggleActions",
+      "Translated": "切换动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "Do the next action.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/OtherCommandType::NextAction",
+      "Translated": "执行下一个动作。",
+      "Source": "library"
+    },
+    {
+      "Original": "All targets that are in range for any abilities (Tanks/Autoduty)",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetHostileType::AllTargetsCanAttack",
+      "Translated": "所有处于任意技能范围内的目标（坦克/自动任务）",
+      "Source": "library"
+    },
+    {
+      "Original": "Previously engaged targets (Non-Tanks)",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetHostileType::TargetsHaveTarget",
+      "Translated": "先前已接战的目标（非坦克）",
+      "Source": "library"
+    },
+    {
+      "Original": "All targets when solo in duty (includes Occult Crescent), or previously engaged.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetHostileType::AllTargetsWhenSoloInDuty",
+      "Translated": "任务中单人时的所有目标（包括新月岛），或先前已接战的目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "All targets when solo, or previously engaged.",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetHostileType::AllTargetsWhenSolo",
+      "Translated": "单人时的所有目标，或先前已接战的目标。",
+      "Source": "library"
+    },
+    {
+      "Original": "Big",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::Big",
+      "Translated": "大",
+      "Source": "library"
+    },
+    {
+      "Original": "Small",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::Small",
+      "Translated": "小",
+      "Source": "library"
+    },
+    {
+      "Original": "High HP",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::HighHP",
+      "Translated": "高血量",
+      "Source": "library"
+    },
+    {
+      "Original": "Low HP",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::LowHP",
+      "Translated": "低血量",
+      "Source": "library"
+    },
+    {
+      "Original": "High HP%",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::HighHPPercent",
+      "Translated": "高血量%",
+      "Source": "library"
+    },
+    {
+      "Original": "Low HP%",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::LowHPPercent",
+      "Translated": "低血量%",
+      "Source": "library"
+    },
+    {
+      "Original": "High Max HP",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::HighMaxHP",
+      "Translated": "高最大血量",
+      "Source": "library"
+    },
+    {
+      "Original": "Low Max HP",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::LowMaxHP",
+      "Translated": "低最大血量",
+      "Source": "library"
+    },
+    {
+      "Original": "Nearest",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::Nearest",
+      "Translated": "最近",
+      "Source": "library"
+    },
+    {
+      "Original": "Farthest",
+      "Context": "[属性] DescriptionAttribute Battlevest.Services.RSR_IPCSubscriber/TargetingType::Farthest",
+      "Translated": "最远",
+      "Source": "library"
+    }
+  ]
+}

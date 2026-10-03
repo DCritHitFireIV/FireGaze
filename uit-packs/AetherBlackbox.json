@@ -1,0 +1,2252 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Aether Blackbox v",
+      "Translated": "以太黑匣子 v",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Self",
+      "Translated": "自身",
+      "Context": "EnumCaptureConfigs.MoveNext",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Aether Blackbox",
+      "Translated": "打开 Aether Blackbox",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Version: ",
+      "Translated": "版本：",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Created by: rail",
+      "Translated": "作者：rail",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Credits & Acknowledgements:",
+      "Translated": "鸣谢与致谢：",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DeathRecap by Kouzukii",
+      "Translated": "DeathRecap 作者 Kouzukii",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(Core logic, event capturing, and data structures)",
+      "Translated": "（伊甸内核逻辑、事件捕获与数据结构）",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "AetherDraw by rail",
+      "Translated": "AetherDraw 作者 rail",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(Canvas engine, drawing tools, network, and rendering)",
+      "Translated": "（画布引擎、绘图工具、网络与渲染）",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the GitHub Issues page in your browser.",
+      "Translated": "在浏览器中打开 GitHub Issues 页面。",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Donate & Support replay & planning features.",
+      "Translated": "捐赠并支持回放与规划功能。",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Buy me a coffee!",
+      "Translated": "请我喝杯咖啡！",
+      "Context": "AboutWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right click and drag to move this overlay. Moves full snapped group if top-left is dragged.",
+      "Translated": "右键拖动可移动此悬浮窗。拖动左上角时会移动整个吸附组。",
+      "Context": "MainWindow.HandleAllianceSnappingAndDrag",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " - Powered by Death Recap by Kouzukii and AetherDraw by rail",
+      "Translated": "- 由 Kouzukii 的 Death Recap 与 rail 的 AetherDraw 提供支持",
+      "Context": "MainWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Draw >>",
+      "Translated": "绘图 >>",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "<< Close",
+      "Translated": "<< 关闭",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Capture current state as a slide",
+      "Translated": "将当前状态捕获为幻灯片",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Export Plan (",
+      "Translated": "导出方案（",
+      "Context": "MainWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Live: HOST",
+      "Translated": "直播：主机",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Live: VIEWER",
+      "Translated": "直播：观众",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Play",
+      "Translated": "播放",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pause",
+      "Translated": "暂停",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ping View",
+      "Translated": "Ping 视图",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Share your timeline position",
+      "Translated": "分享你的时间轴位置",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom Out",
+      "Translated": "缩小",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Zoom In",
+      "Translated": "放大",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset View",
+      "Translated": "重置视图",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OpenAbout",
+      "Translated": "打开关于",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OpenConfig",
+      "Translated": "打开设置",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Aether Blackbox Settings",
+      "Translated": "打开 Aether Blackbox 设置",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ReplaySettings",
+      "Translated": "回放设置",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Replay Visibility Settings",
+      "Translated": "回放可见性设置",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OpenMechanicLibrary",
+      "Translated": "打开机制库",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OpenSessionMechanics",
+      "Translated": "打开副本机制",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Active Session Mechanics",
+      "Translated": "打开当前副本机制",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party/Alliance Preview",
+      "Translated": "小队/团队预览",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Preview and adjust the Party/Alliance overlay layout",
+      "Translated": "预览并调整小队/团队悬浮窗布局",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Replay Visualization",
+      "Translated": "回放可视化",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show NPCs/Objects",
+      "Translated": "显示NPC/物体",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show HP Bars",
+      "Translated": "显示血条",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Statuses",
+      "Translated": "显示状态",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show AoEs",
+      "Translated": "显示AoE",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-Loop on Select",
+      "Translated": "选中时自动循环",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Nudge Left (-0.1s)",
+      "Translated": "左移 (-0.1秒)",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Nudge Right (+0.1s)",
+      "Translated": "右移 (+0.1秒)",
+      "Context": "MainWindow.DrawOriginalRightPane",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No slides staged. Open a replay and click the Camera icon to capture a slide.",
+      "Translated": "暂无幻灯片。打开回放并点击相机图标以捕获幻灯片。",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "LOADING...",
+      "Translated": "加载中...",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Slide #",
+      "Translated": "幻灯片 #",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " objs",
+      "Translated": "物体",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All",
+      "Translated": "全部清除",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Send to AetherDraw",
+      "Translated": "发送至AetherDraw",
+      "Context": "MainWindow.DrawExportPreviewUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "INTERACTIVE LOG",
+      "Translated": "交互日志",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(Click time to seek)",
+      "Translated": "(点击时间跳转)",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Search..",
+      "Translated": "搜索..",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Columns/Filters",
+      "Translated": "列/筛选",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "InteractiveLogOptionsPopup",
+      "Translated": "交互日志选项弹窗",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Survival Calculator",
+      "Translated": "生存计算器",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Test if different mitigations could have prevented a death.",
+      "Translated": "测试不同的减伤是否能避免死亡。",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Time",
+      "Translated": "显示时间",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show HP",
+      "Translated": "显示HP",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Source",
+      "Translated": "显示来源",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Event",
+      "Translated": "显示事件",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only Damaging Events",
+      "Translated": "仅伤害事件",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use Absolute Pull Time",
+      "Translated": "使用绝对落潮密道时间",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select an incident.",
+      "Translated": "选择一个事件。",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Time",
+      "Translated": "时间",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Translated": "来源",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Event",
+      "Translated": "事件",
+      "Context": "MainWindow.DrawInteractiveLog",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(Crit)",
+      "Translated": "(暴击)",
+      "Context": "MainWindow.DrawEventCell",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "(DH)",
+      "Translated": "(直击)",
+      "Context": "MainWindow.DrawEventCell",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Arena Calibration:",
+      "Translated": "场地校准：",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Lock",
+      "Translated": "守卫驻所",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scale",
+      "Translated": "缩放",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select",
+      "Translated": "选择",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Laser",
+      "Translated": "激光",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disconnect",
+      "Translated": "断开连接",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Leave the Live Session",
+      "Translated": "离开实时会话",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Live",
+      "Translated": "实时",
+      "Context": "MainWindow.DrawMapCalibrationPanel",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Target",
+      "Translated": "目标",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Next:",
+      "Translated": "下一个：",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Used:",
+      "Translated": "已使用：",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Targeting:",
+      "Translated": "选定目标：",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Entity",
+      "Translated": "未知实体",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No Target",
+      "Translated": "无目标",
+      "Context": "MainWindow.DrawSelectionInfo",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SESSION HISTORY",
+      "Translated": "会话历史",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Saved Replays (Disk)",
+      "Translated": "已保存回放（磁盘）",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh List",
+      "Translated": "刷新列表",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Clear All History",
+      "Translated": "清空全部历史",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Queued...",
+      "Translated": "排队中...",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Created: ",
+      "Translated": "创建时间：",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No sessions recorded.",
+      "Translated": "暂无会话记录。",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed: ",
+      "Translated": "失败：",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pull #",
+      "Translated": "落潮密道 #",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " [TRUNC]",
+      "Translated": "[截断]",
+      "Context": "MainWindow.DrawSessionHistory",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " [Synced]",
+      "Translated": "[已同步]",
+      "Context": "MainWindow.DrawTimeline",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Left click and drag corner to scale overlay",
+      "Translated": "左键拖动角落以缩放悬浮窗",
+      "Context": "MainWindow.HandlePartyPanelResizeHandle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right click and drag to move this overlay",
+      "Translated": "右键拖动以移动此悬浮窗",
+      "Context": "MainWindow.HandlePartyPanelDrag",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "AetherBlackbox Configuration",
+      "Translated": "AetherBlackbox 配置",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Main Window Movable",
+      "Translated": "主窗口可移动",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Default Brush Color:",
+      "Translated": "默认画笔颜色：",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Default Brush Thickness",
+      "Translated": "默认画笔粗细",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Grid Settings",
+      "Translated": "网格设置",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Grid Visible",
+      "Translated": "显示网格",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Grid Spacing",
+      "Translated": "网格间距",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Snap to Grid (Default On)",
+      "Translated": "对齐网格（默认开启）",
+      "Context": "CanvasConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Live Session Setup",
+      "Translated": "实时会话设置",
+      "Context": "LiveSessionWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Please wait, may take up to a minute as server boots from inactivity. 24/7 uptime servers aren't free sadly.",
+      "Translated": "请稍候，服务器因闲置而启动，可能需要长达一分钟。很遗憾，24/7 全天候服务器并非免费。",
+      "Context": "LiveSessionWindow.DrawLoadingView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "LiveSessionWindow.DrawLoadingView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Choose Connection Method",
+      "Translated": "选择连接方式",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Sync (Party)",
+      "Translated": "快速同步（小队）",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Creates a secure room for your current party using a hash of your Party ID. All party members must click this to be in the same quick sync room.",
+      "Translated": "使用小队 ID 的哈希值为当前小队创建安全房间。所有小队成员都必须点击此项才能进入同一个快速同步房间。",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Quick Sync##QuickSyncButton",
+      "Translated": "快速同步##QuickSyncButton",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You must be in a party to use this option.",
+      "Translated": "你必须处于小队中才能使用此选项。",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Passphrase Connect",
+      "Translated": "口令连接",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Create or join a session using a shared passphrase. For cross-world/alliance groups. The generated passphrase should give you plausible deniability if accidentaly typed in open chat. Or make up your own code/phrase.",
+      "Translated": "使用共享口令创建或加入会话。适用于跨服/团队编组。生成的口令即使不小心在公开聊天中打出也能让你有合理的推脱理由。或者自己编一个代码/短语。",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use Passphrase##PassphraseButton",
+      "Translated": "使用口令##PassphraseButton",
+      "Context": "LiveSessionWindow.DrawChoiceView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Connect with Passphrase",
+      "Translated": "使用口令连接",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Server Address",
+      "Translated": "服务器地址",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Create new & copy:",
+      "Translated": "创建新的并复制：",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Generate",
+      "Translated": "生成",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Join existing:",
+      "Translated": "加入现有的：",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enter Passphrase",
+      "Translated": "输入口令",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Connect",
+      "Translated": "连接",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Translated": "返回",
+      "Context": "LiveSessionWindow.DrawPassphraseEntryView",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Manage Permanent Files",
+      "Translated": "管理永久文件",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Refresh Folder",
+      "Translated": "刷新文件夹",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filter by Tag",
+      "Translated": "按标签筛选",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "File Name",
+      "Translated": "文件名",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Load File",
+      "Translated": "加载文件",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete File",
+      "Translated": "删除文件",
+      "Context": "MechanicLibraryWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No objects selected.",
+      "Translated": "未选择任何对象。",
+      "Context": "PropertiesWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Import from Clipboard",
+      "Translated": "从剪贴板导入",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Active Memory:",
+      "Translated": "活动内存：",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " (Action ID: ",
+      "Translated": "（技能 ID：",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Currently Editing: ",
+      "Translated": "当前编辑：",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Modify the shape using the Main Canvas and Properties Window. When finished, save the changes below.",
+      "Translated": "使用主画布和属性窗口修改形状。完成后，在下方保存更改。",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Save Canvas Modifications to Mechanic",
+      "Translated": "将画布修改保存到机制",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Save File Name",
+      "Translated": "保存文件名",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Commit to Disk",
+      "Translated": "提交到磁盘",
+      "Context": "SessionMechanicsWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "WOULD SURVIVE BY ",
+      "Translated": "可存活余量",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "STILL LETHAL BY ",
+      "Translated": "仍致命余量",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Effective HP: ",
+      "Translated": "有效 HP：",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unmitigated:  ",
+      "Translated": "未减伤：",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mitigated:    ",
+      "Translated": "已减伤：",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "TANKS",
+      "Translated": "坦克",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "HEALERS",
+      "Translated": "治疗",
+      "Context": "SurvivalCalculatorOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "On cooldown at time of death.",
+      "Translated": "死亡时处于冷却中。",
+      "Context": "SurvivalCalculatorOverlay.RenderAbilityList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Active at time of death.",
+      "Translated": "死亡时处于激活状态。",
+      "Context": "SurvivalCalculatorOverlay.RenderAbilityList",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pen Tools",
+      "Translated": "画笔工具",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shape Tools",
+      "Translated": "形状工具",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Placeable Shapes",
+      "Translated": "可放置形状",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Role Icons",
+      "Translated": "职能图标",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party Number Icons",
+      "Translated": "小队编号图标",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Colored Dots",
+      "Translated": "彩色圆点",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mechanic Icons",
+      "Translated": "机制图标",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Text Tool",
+      "Translated": "文本工具",
+      "Context": "ToolbarWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "IMG",
+      "Translated": "图片",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "TEXT",
+      "Translated": "文本",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Eraser",
+      "Translated": "橡皮擦",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Undo",
+      "Translated": "撤销",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Props",
+      "Translated": "道具",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Grid",
+      "Translated": "网格",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "size",
+      "Translated": "大小",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Snap to Grid",
+      "Translated": "对齐网格",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fill Shape",
+      "Translated": "填充形状",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Thickness:",
+      "Translated": "粗细：",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bugs",
+      "Translated": "问题反馈",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Buy me a coffee if this plugin helped your prog!",
+      "Translated": "如果这个插件对你的开荒有帮助，请我喝杯咖啡吧！",
+      "Context": "ToolbarWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locked",
+      "Translated": "已锁定",
+      "Context": "CommonProperties.DrawLock",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locked objects cannot be selected or moved on the canvas.",
+      "Translated": "已锁定的对象无法在画布上选中或移动。",
+      "Context": "CommonProperties.DrawLock",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Opacity: %.2f",
+      "Translated": "不透明度：%.2f",
+      "Context": "CommonProperties.DrawOpacity",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filled",
+      "Translated": "已填充",
+      "Context": "CommonProperties.DrawFill",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Donut Properties",
+      "Translated": "圆环属性",
+      "Context": "ContextProperties.DrawDonut",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hole Size: %.1f",
+      "Translated": "处罚室大小：%.1f",
+      "Context": "ContextProperties.DrawDonut",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Text Properties",
+      "Translated": "文本属性",
+      "Context": "ContextProperties.DrawText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Size: %.1f",
+      "Translated": "大小：%.1f",
+      "Context": "ContextProperties.DrawText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Circle Properties",
+      "Translated": "圆形属性",
+      "Context": "ContextProperties.DrawCircle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Radius: %.1f",
+      "Translated": "半径：%.1f",
+      "Context": "ContextProperties.DrawCircle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pie Properties",
+      "Translated": "扇形属性",
+      "Context": "ContextProperties.DrawPie",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rotation: %.1f deg",
+      "Translated": "旋转：%.1f 度",
+      "Context": "ContextProperties.DrawPie",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Angle: %.1f deg",
+      "Translated": "角度：%.1f 度",
+      "Context": "ContextProperties.DrawPie",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Starburst Properties",
+      "Translated": "星爆属性",
+      "Context": "ContextProperties.DrawStarburst",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Width: %.1f",
+      "Translated": "宽度: %.1f",
+      "Context": "ContextProperties.DrawStarburst",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rectangle Properties",
+      "Translated": "矩形属性",
+      "Context": "ContextProperties.DrawRectangle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Height: %.1f",
+      "Translated": "高度: %.1f",
+      "Context": "ContextProperties.DrawRectangle",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cone Properties",
+      "Translated": "锥形属性",
+      "Context": "ContextProperties.DrawCone",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Length: %.1f",
+      "Translated": "长度: %.1f",
+      "Context": "ContextProperties.DrawCone",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Swap Job Icon",
+      "Translated": "交换职业图标",
+      "Context": "JobSwapProperties.DrawJobSwap",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Layers",
+      "Translated": "图层",
+      "Context": "LayerList.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mechanic Definition",
+      "Translated": "机制定义",
+      "Context": "MechanicDefinition.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "MechanicDefinition.DrawFields",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Action ID",
+      "Translated": "技能 ID",
+      "Context": "MechanicDefinition.DrawFields",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Source Type",
+      "Translated": "来源类型",
+      "Context": "MechanicDefinition.DrawFields",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Scan Last 5 Seconds",
+      "Translated": "扫描最近 5 秒",
+      "Context": "MechanicDefinition.DrawScanner",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Recent Actions",
+      "Translated": "最近技能",
+      "Context": "MechanicDefinition.DrawRecent",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Save Definition",
+      "Translated": "保存定义",
+      "Context": "MechanicDefinition.DrawSave",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Player",
+      "Translated": "玩家",
+      "Context": "MechanicDefinition..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Environment",
+      "Translated": "环境",
+      "Context": "MechanicDefinition..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Aether Blackbox (",
+      "Translated": "显示 Aether Blackbox (",
+      "Context": "NotificationHandler.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Aether Blackbox Config",
+      "Translated": "Aether Blackbox 设置",
+      "Context": "RecapConfigWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Capture Settings",
+      "Translated": "捕获设置",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Capture ",
+      "Translated": "捕获",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "On Death",
+      "Translated": "死亡时",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only in instances",
+      "Translated": "仅副本内",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disable in PvP",
+      "Translated": "PvP 中禁用",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "General Settings",
+      "Translated": "常规设置",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Streamer Mode (Anonymize Names)",
+      "Translated": "主播模式 (匿名化名称)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Replaces player names with their Job Abbreviation (e.g., 'WAR', 'WHM') in replays.",
+      "Translated": "在回放中将玩家名称替换为其职业缩写 (例如 'WAR'、'WHM')。",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Party Member List",
+      "Translated": "显示队员列表",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shows or hides the draggable party member overlay in the main replay view.",
+      "Translated": "在主回放视图中显示或隐藏可拖动的队员悬浮窗。",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Chat Message Type",
+      "Translated": "聊天消息类型",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show chat tip",
+      "Translated": "显示聊天提示",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Events for (sec)",
+      "Translated": "保留事件 (秒)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Replays for (days)",
+      "Translated": "保留回放 (天)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically deletes replay files older than this (in days) upon plugin startup.\nSet to 0 to disable auto-cleanup.\nReplays are located in AppData-Roaming-XIVLauncher-pluginconfigs-AetherBlackbox",
+      "Translated": "插件启动时自动删除早于该天数的回放文件。\n设为 0 以禁用自动清理。\n回放位于 AppData-Roaming-XIVLauncher-pluginconfigs-AetherBlackbox",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Keep Deaths for (min)",
+      "Translated": "保留死亡记录 (分钟)",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Interactive Log Settings",
+      "Translated": "交互日志设置",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Time Column",
+      "Translated": "显示时间列",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show HP Column",
+      "Translated": "显示 HP 列",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Source Column",
+      "Translated": "显示来源列",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Event Column",
+      "Translated": "显示事件列",
+      "Context": "RecapConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filter category of the \"Chat Message\" death notification.\n\"Debug\" will show up in all chat tabs regardless of configuration.\nNote that this will only affect the way the notification is displayed to you. They will never be visible to others.",
+      "Translated": "“聊天消息”死亡通知的过滤类别。\n无论配置如何，“调试”都会显示在所有聊天标签页中。\n注意，这只会影响通知向你显示的方式。其他人永远看不到它们。",
+      "Context": "RecapConfigWindow.ChatMessageTypeTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Prints the command in the chat to reopen the window the first time you close.",
+      "Translated": "首次关闭窗口时，在聊天中输出可重新打开该窗口的命令。",
+      "Context": "RecapConfigWindow.ChatTipTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will only show a death notification when in an instance (e.g. a Dungeon)",
+      "Translated": "仅在副本中（例如迷宫）显示死亡通知",
+      "Context": "RecapConfigWindow.OnlyInInstancesTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "[AetherBlackbox] Buffs/debuffs are currently not being tracked due to patch updates, but positions and actions should work.",
+      "Translated": "[AetherBlackbox] 由于版本更新，增益/减益目前无法追踪，但位置和动作应该可以正常工作。",
+      "Context": "CombatEventCapture.InitializeHooks",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto-attack",
+      "Translated": "自动攻击",
+      "Context": "CombatEventFactory.CreateDamage",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "OK",
+      "Translated": "确定",
+      "Context": "InPlaceTextEditor.DrawEditorUI",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rampart",
+      "Translated": "铁壁",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reprisal",
+      "Translated": "雪仇剑",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Guardian",
+      "Translated": "卫护",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Damnation",
+      "Translated": "戮罪",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dark Mind",
+      "Translated": "弃明投暗",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shadowed Vigil",
+      "Translated": "暗影卫",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Camouflage",
+      "Translated": "伪装",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Great Nebula",
+      "Translated": "大星云",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bloodwhetting",
+      "Translated": "原初的血气",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Nascent Flash",
+      "Translated": "原初的勇猛",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Oblation",
+      "Translated": "献奉",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Heart of Corundum",
+      "Translated": "刚玉之心",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Holy Sheltron",
+      "Translated": "圣盾阵",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Intervention",
+      "Translated": "干预",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Blackest Night",
+      "Translated": "至黑之夜",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dark Missionary",
+      "Translated": "暗黑布道",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Heart of Light",
+      "Translated": "光之心",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shake It Off",
+      "Translated": "摆脱",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Divine Veil",
+      "Translated": "圣光幕帘",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Passage of Arms",
+      "Translated": "武装戍卫",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bulwark",
+      "Translated": "壁垒",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Thrill of Battle",
+      "Translated": "战栗",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Aquaveil",
+      "Translated": "水幕帘",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Temperance",
+      "Translated": "节制",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sacred Soil",
+      "Translated": "野战治疗阵",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Expedient",
+      "Translated": "疾风怒涛之计",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exaltation",
+      "Translated": "星极超流",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Collective Unconscious",
+      "Translated": "同调",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Taurochole",
+      "Translated": "牛胆",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Kerachole",
+      "Translated": "坚角清汁",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Holos",
+      "Translated": "整体论",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Divine Benison",
+      "Translated": "神祝祷",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Divine Caress",
+      "Translated": "神爱抚",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Concitation",
+      "Translated": "意气轩昂之策",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Seraphic Veil",
+      "Translated": "炽天的幕帘",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The Spire",
+      "Translated": "建筑神之塔",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Eukrasian Prognosis II",
+      "Translated": "均衡预后II",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Feint",
+      "Translated": "牵制",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Riddle of Earth",
+      "Translated": "金刚极意",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tengentsu",
+      "Translated": "天眼通",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shade Shift",
+      "Translated": "残影",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Arcane Crest",
+      "Translated": "神秘纹",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Improvised Finish",
+      "Translated": "即兴表演结束",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Troubadour",
+      "Translated": "行吟",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tactician",
+      "Translated": "策动",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dismantle",
+      "Translated": "武装解除",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shield Samba",
+      "Translated": "防守之桑巴",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Magick Barrier",
+      "Translated": "抗死",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Manaward",
+      "Translated": "魔罩",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Radiant Aegis",
+      "Translated": "守护之光",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tempera Coat",
+      "Translated": "坦培拉涂层",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Tempera Grassa",
+      "Translated": "油性坦培拉涂层",
+      "Context": "DefensiveAbilityDatabase..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reading and decompressing file...",
+      "Translated": "正在读取并解压文件...",
+      "Context": "PullManager.ProcessLoadQueueLoop",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Failed to parse replay file.",
+      "Translated": "解析回放文件失败。",
+      "Context": "PullManager.ProcessLoadQueueLoop",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exception occurred during load.",
+      "Translated": "加载过程中发生异常。",
+      "Context": "PullManager.ProcessLoadQueueLoop",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pen",
+      "Translated": "画笔",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Line",
+      "Translated": "直线",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dash",
+      "Translated": "冲刺",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Rect",
+      "Translated": "矩形",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Circle",
+      "Translated": "圆形",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Donut",
+      "Translated": "圆环",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Arrow",
+      "Translated": "放浪神之箭",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cone",
+      "Translated": "扇形",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Triangle",
+      "Translated": "三角形",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Pie",
+      "Translated": "饼形",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Star",
+      "Translated": "星形",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Square",
+      "Translated": "方形",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CircleMark",
+      "Translated": "圆形标记",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Plus",
+      "Translated": "十字",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Melee",
+      "Translated": "近战",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Caster",
+      "Translated": "施法者",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 1",
+      "Translated": "小队 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 2",
+      "Translated": "小队 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 3",
+      "Translated": "小队 3",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 4",
+      "Translated": "小队 4",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 5",
+      "Translated": "小队 5",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 6",
+      "Translated": "小队 6",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 7",
+      "Translated": "小队 7",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Party 8",
+      "Translated": "小队 8",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bind 1",
+      "Translated": "绑定 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bind 2",
+      "Translated": "绑定 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Bind 3",
+      "Translated": "绑定 3",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore 1",
+      "Translated": "忽略 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Ignore 2",
+      "Translated": "忽略 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 1",
+      "Translated": "持续伤害 1",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 2",
+      "Translated": "持续伤害 2",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 3",
+      "Translated": "持续伤害 3",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 4",
+      "Translated": "持续伤害 4",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 5",
+      "Translated": "持续伤害 5",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 6",
+      "Translated": "持续伤害 6",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 7",
+      "Translated": "持续伤害 7",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dot 8",
+      "Translated": "持续伤害 8",
+      "Context": "ToolRegistry..cctor",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

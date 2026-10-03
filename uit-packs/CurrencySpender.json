@@ -1,0 +1,1398 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Currency Spender",
+      "Translated": "货币消费助手",
+      "Context": "Plugin.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Short command. Also pairable with all arguments. Arguments: config, c, settings, s",
+      "Translated": "短命令。可与所有参数搭配使用。参数：config、c、settings、s",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open plugin interface. Also pairable with all arguments. Arguments: config, c, settings, s",
+      "Translated": "打开插件界面。可与所有参数搭配使用。参数：config、c、settings、s",
+      "Context": "Plugin..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Settings ",
+      "Translated": "设置",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "General",
+      "Translated": "通用",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Currencies",
+      "Translated": "货币",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Societies",
+      "Translated": "友好部族",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items",
+      "Translated": "物品",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Display",
+      "Translated": "显示",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ThirdParty",
+      "Translated": "第三方",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Changelog",
+      "Translated": "更新日志",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "ConfigWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " - Configuration Wizard###",
+      "Translated": "- 配置向导",
+      "Context": "ConfigWizardWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Changed in Version ",
+      "Translated": "版本变更",
+      "Context": "ConfigWizardWindow.DrawStep",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Welcome to the Configuration Wizard!",
+      "Translated": "欢迎使用配置向导！",
+      "Context": "ConfigWizardWindow.DrawWelcome",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "This wizard will help you configure new options added since the latest patch. You can skip this setup and modify the settings later.",
+      "Translated": "本向导将帮助你配置自最新补丁以来新增的选项。你可以跳过此设置，之后再修改。",
+      "Context": "ConfigWizardWindow.DrawWelcome",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Review the new options or skip ahead if you're ready.",
+      "Translated": "查看新选项，如果已准备好也可以直接跳过。",
+      "Context": "ConfigWizardWindow.DrawWelcome",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "There are no new options to configure.",
+      "Translated": "没有需要配置的新选项。",
+      "Context": "ConfigWizardWindow.DrawNothingNew",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You are already up to date with the latest plugin version. You can close this window.",
+      "Translated": "你已是最新版本的插件。可以关闭此窗口。",
+      "Context": "ConfigWizardWindow.DrawNothingNew",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Step ",
+      "Translated": "步骤",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Skip",
+      "Translated": "跳过",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Back",
+      "Translated": "上一步",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Finish",
+      "Translated": "完成",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Next",
+      "Translated": "下一步",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Start",
+      "Translated": "开始",
+      "Context": "ConfigWizardWindow.DrawFooter",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select if you want to see the following currencies:",
+      "Translated": "选择你想要查看的以下货币：",
+      "Context": "ConfigWizardWindow.DrawCurrencySelection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select if you consider the following as collectable:",
+      "Translated": "选择你认为属于收藏品的以下内容：",
+      "Context": "ConfigWizardWindow.DrawCollectableTypeSelection",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shows you if you can buy collectables with it.",
+      "Translated": "显示你是否可以用它购买收藏品。",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show collectables",
+      "Translated": "显示收藏品",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You can have a little info in the main window when you are still missing collectables from that currency.",
+      "Translated": "当该货币仍有未收集的收藏品时，你可以在主窗口中看到一些提示信息。",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show missing collectables in the main window",
+      "Translated": "在主窗口中显示未收集的收藏品",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If you don't want to see specific item you can deselect them here and they won't show up.",
+      "Translated": "如果你不想看到特定物品，可以在此取消选择，它们将不再显示。",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select if you want to see sellable items:",
+      "Translated": "选择你想要查看的可出售物品：",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_2Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show items eligible for sale",
+      "Translated": "显示可出售的物品",
+      "Context": "ConfigWizardWindow.DrawVersion1_1_2Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Currency Spender automatically when you open the ingame Currency window:",
+      "Translated": "打开游戏内货币窗口时自动打开货币消费助手：",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_3Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open automatically with the Currency window",
+      "Translated": "随货币窗口自动打开",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_3Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum sales for the sellable table (0 = disable)",
+      "Translated": "可出售表格的最低销售额（0 = 禁用）",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_4Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Minimum sales",
+      "Translated": "最低销售额",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_4Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in a loading screen.",
+      "Translated": "加载界面时会隐藏所有窗口。",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in loading screens",
+      "Translated": "加载界面时隐藏",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in a duty.",
+      "Translated": "任务中时会隐藏所有窗口。",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in duties",
+      "Translated": "任务中隐藏",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in combat.",
+      "Translated": "战斗中时会隐藏所有窗口。",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in combat",
+      "Translated": "战斗中隐藏",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide all windows when in a cutscene.",
+      "Translated": "过场动画时会隐藏所有窗口。",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide in cutscenes",
+      "Translated": "过场动画时隐藏",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_6Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will highlight the NPC when marking the flag or teleporting.",
+      "Translated": "标记旗帜或传送时会高亮 NPC。",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight NPC",
+      "Translated": "高亮 NPC",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will highlight the menus where to find the item when marking the flag or teleporting.",
+      "Translated": "标记旗帜或传送时会高亮可找到该物品的菜单。",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Highlight Menus",
+      "Translated": "高亮菜单",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically add newest upgrade items and remove old ones to the \"Items of Interest\"",
+      "Translated": "自动将最新的升级物品添加到“关注物品”并移除旧物品",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically add/remove upgrade items",
+      "Translated": "自动添加/移除升级物品",
+      "Context": "ConfigWizardWindow.DrawVersion1_2_7Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Third party plugins detected. You can enable them here, to make use of them.",
+      "Translated": "检测到第三方插件。你可以在此启用它们以使用其功能。",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable Lifestream to teleport closer to your target.",
+      "Translated": "启用 Lifestream 以传送到更靠近目标的位置。",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable vnavmesh to path you to your target.",
+      "Translated": "启用 vnavmesh 以引导步廊至你的目标。",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Societal currencies now have their own dedicated tab.",
+      "Translated": "社会货币现在拥有独立的标签页。",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show Societies tab",
+      "Translated": "显示社会标签页",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_0Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will hide items that require an achievement or quest you have not completed yet.",
+      "Translated": "将隐藏需要你尚未完成的成就或任务的物品。",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_1Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide unobtainable items",
+      "Translated": "隐藏无法获得的物品",
+      "Context": "ConfigWizardWindow.DrawVersion1_3_1Steps",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Please login before using this Plugin!",
+      "Translated": "使用此插件前请先登录！",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cur.",
+      "Translated": "货币",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Currency",
+      "Translated": "货币",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Amount",
+      "Translated": "数量",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Missing Collectables",
+      "Translated": "缺少收藏品",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Actions",
+      "Translated": "操作",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "% full",
+      "Translated": "% 满",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Spend it!##",
+      "Translated": "花掉它！##",
+      "Context": "CurrencyListTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Currency overlay",
+      "Translated": "货币悬浮窗",
+      "Context": "CurrencyOverlay..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Currency Spender",
+      "Translated": "打开货币消费",
+      "Context": "CurrencyOverlay.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Generate",
+      "Translated": "生成",
+      "Context": "DebugMainTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "DebugMainTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " - Debug###",
+      "Translated": "- 调试",
+      "Context": "DebugWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DebugTabs",
+      "Translated": "调试标签页",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Main Debug Tab",
+      "Translated": "主调试标签页",
+      "Context": "DebugWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "1. Select the desired currency and click the button to open the spending window.",
+      "Translated": "1. 选择所需的货币，然后点击按钮打开消费窗口。",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "2. Collectables, ventures, and sellable items will be displayed.",
+      "Translated": "2. 将显示收藏品、探险和可出售物品。",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "3. Ventures and collectables can be toggled in the settings.",
+      "Translated": "3. 探险和收藏品可在设置中切换。",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "4. Button 'Flag' will open your map with a map marker to the vendor. Button 'TP' will teleport you to the nearest aetheryte and also places a flag marker on your map",
+      "Translated": "4. 按钮“标记”将打开你的地图并在地图上标记商人位置。按钮“传送”将把你传送到最近的以太之光，并在地图上放置标记",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If your current Shared FATE rank cannot be retrieved, a warning will appear in the main tab. Simply click the button to open the shared FATE rank screen to allow the plugin to gather the necessary information.",
+      "Translated": "如果无法获取您当前的共享 FATE 等级，主标签页中会出现警告。只需点击按钮打开共享 FATE 等级界面，即可让插件收集所需信息。",
+      "Context": "InstructionsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The current shared FATE ranks could not be fetched. Please click the button below:",
+      "Translated": "无法获取当前的共享FATE等级。请点击下方按钮：",
+      "Context": "MainTab.DrawPreamble",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open shared FATE window",
+      "Translated": "打开共享FATE窗口",
+      "Context": "MainTab.DrawPreamble",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MainTabWindow",
+      "Translated": "主标签窗口",
+      "Context": "MainTabWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Instructions",
+      "Translated": "说明",
+      "Context": "MainTabWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "MainTabs",
+      "Translated": "主标签页",
+      "Context": "MainTabWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open settings window",
+      "Translated": "打开设置窗口",
+      "Context": ".ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "SpendingWindow",
+      "Translated": "消费窗口",
+      "Context": "SpendingWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Status: ",
+      "Translated": "状态：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: CurrencyId: ",
+      "Translated": "调试：货币ID：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: CollectableItems: ",
+      "Translated": "调试：收藏品：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " | SellableItems: ",
+      "Translated": "| 可出售物品：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ItemsOfInterest: ",
+      "Translated": "关注物品：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: Storm: ",
+      "Translated": "调试：混沌波动：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Serpent: ",
+      "Translated": "双蛇党：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Flame: ",
+      "Translated": "恒辉队：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "DEBUG: GlueToMainWindow: ",
+      "Translated": "调试：吸附到主窗口：",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Some items cannot be purchased yet due to GC rankings... So they will not be displayed here.",
+      "Translated": "部分物品因军队军衔无法购买……因此不会在此显示。",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Some items cannot be purchased yet due to shared FATE rankings... So they will not be displayed here.",
+      "Translated": "部分物品因共享FATE等级无法购买……因此不会在此显示。",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Nothing can be displayed. Please check your settings. Especially the minimum sales.",
+      "Translated": "无法显示任何内容。请检查你的设置。尤其是最低销售额。",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement data not loaded yet. Some items may be hidden incorrectly.",
+      "Translated": "成就数据尚未加载。部分物品可能会被错误隐藏。",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Achievement Window",
+      "Translated": "打开成就窗口",
+      "Context": "SpendingWindow.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Price",
+      "Translated": "死亡诱惑",
+      "Context": "SpendingWindow.BeginItemTable",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Zone",
+      "Translated": "区域",
+      "Context": "SpendingWindow.BeginItemTable",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy item name",
+      "Translated": "复制物品名称",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copied item name to clipboard",
+      "Translated": "已复制物品名称到剪贴板",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Create item link",
+      "Translated": "创建物品链接",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Item link created",
+      "Translated": "已创建物品链接",
+      "Context": "SpendingWindow.ItemContextMenu",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nCat: ",
+      "Translated": "类别：",
+      "Context": "SpendingWindow.DrawSimpleRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopId: ",
+      "Translated": "商店ID：",
+      "Context": "SpendingWindow.DrawSimpleRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nNPCName: ",
+      "Translated": "NPC名称：",
+      "Context": "SpendingWindow.DrawSimpleRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nNPCID: ",
+      "Translated": "NPC ID：",
+      "Context": "SpendingWindow.DrawSimpleRow",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Can buy items of interest:",
+      "Translated": "可购买的相关物品：",
+      "Context": "SpendingWindow.DrawItemsOfInterest",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Can buy ventures:",
+      "Translated": "可购买的探险币：",
+      "Context": "SpendingWindow.DrawVentures",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Selected collectables not yet registered:",
+      "Translated": "已选收藏品尚未登记：",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nCollectableType: ",
+      "Translated": "收藏品类型：",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nIsUnlocked: ",
+      "Translated": "是否解锁：",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopType: ",
+      "Translated": "商店类型：",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopName: ",
+      "Translated": "商店名称：",
+      "Context": "SpendingWindow.DrawCollectables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No sellable items found. Please also check your minimum sales setting.",
+      "Translated": "未找到可出售的物品。请同时检查你的最低出售设置。",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items eligible for sale on the marketboard:",
+      "Translated": "可在市场板出售的物品：",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sales",
+      "Translated": "出售",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Qty",
+      "Translated": "数量",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sells for",
+      "Translated": "售价",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Total",
+      "Translated": "总计",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nName: ",
+      "Translated": "名称：",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nNPC:",
+      "Translated": "NPC：",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nShop:",
+      "Translated": "商店：",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nShopType:",
+      "Translated": "商店类型：",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nNpcName: ",
+      "Translated": "NPC名称：",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nNpcId: ",
+      "Translated": "NPC ID：",
+      "Context": "SpendingWindow.DrawSellables",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Force refresh Universalis",
+      "Translated": "强制刷新 Universalis",
+      "Context": "UpdateTitleBarButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glue to the main window",
+      "Translated": "吸附到主窗口",
+      "Context": "UpdateTitleBarButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unglue from the main window",
+      "Translated": "从主窗口取消吸附",
+      "Context": "UpdateTitleBarButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If you have suggestions or feature requests, feel free to open an issue on the repository.",
+      "Translated": "如果你有建议或功能需求，欢迎在仓库中提交 issue。",
+      "Context": "AboutTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Developed with",
+      "Translated": "开发者",
+      "Context": "Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "by Blackcatz1911/catz/Ayaya",
+      "Translated": "Blackcatz1911/catz/Ayaya",
+      "Context": "Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Special thanks to:",
+      "Translated": "特别鸣谢：",
+      "Context": "Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GitHub repository",
+      "Translated": "GitHub 仓库",
+      "Context": "Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If you don't want to see specific currencies you can deselect them here and they won't show up.",
+      "Translated": "如果你不想看到特定货币，可以在此取消勾选，它们将不再显示。",
+      "Context": "CurrenciesTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide currencies you currently don't own",
+      "Translated": "隐藏你当前未持有的货币",
+      "Context": "CurrenciesTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select which currencies you want to see:",
+      "Translated": "选择你想看到的货币：",
+      "Context": "CurrenciesTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CurrentMapId: ",
+      "Translated": "当前地图 ID：",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "CurrentTerritoryId: ",
+      "Translated": "当前区域ID：",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "GCRankings:",
+      "Translated": "军衔排名：",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Fate Rank:",
+      "Translated": "FATE 等级：",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Debug Window",
+      "Translated": "打开调试窗口",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current NpcId: ",
+      "Translated": "当前 NPC ID：",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy NpcId",
+      "Translated": "复制 NPC ID",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy Target",
+      "Translated": "复制目标",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Locations without a target: ",
+      "Translated": "无目标的位置：",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "TP##",
+      "Translated": "传送##",
+      "Context": "DebugTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will show a 'Open Currency Spender' button when the in-game currency window is opened.",
+      "Translated": "当游戏内货币窗口打开时，显示“打开货币消费”按钮。",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show button",
+      "Translated": "显示按钮",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will open Currency Spender when the in-game currency window is opened.",
+      "Translated": "当游戏内货币窗口打开时，自动打开货币消费。",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open automatically",
+      "Translated": "自动打开",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hightlight NPC",
+      "Translated": "高亮 NPC",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hightlight Menus",
+      "Translated": "高亮菜单",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will glue the spending window to the main window.",
+      "Translated": "将消费窗口吸附到主窗口。",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glue to main window",
+      "Translated": "吸附到主窗口",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Will glue the spending window to the left or right side of the main window.",
+      "Translated": "将消费窗口吸附到主窗口的左侧或右侧。",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Glue spending window to the side",
+      "Translated": "吸附消费窗口到侧边",
+      "Context": "DisplayTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Opens the config wizard again for the last version.",
+      "Translated": "重新打开上一版本的配置向导。",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open config wizard",
+      "Translated": "打开配置向导",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Shows you if you can buy ventures with it.",
+      "Translated": "显示是否可以用它购买探险币。",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show ventures",
+      "Translated": "显示探险币",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select which items you see as collectables:",
+      "Translated": "选择你视为收藏品的物品：",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select the thousand separator",
+      "Translated": "选择千位分隔符",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select an Option",
+      "Translated": "选择一个选项",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dont turn it on, unless you know what you are doing...",
+      "Translated": "除非你知道自己在做什么，否则不要开启……",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Debug Mode",
+      "Translated": "调试模式",
+      "Context": "GeneralTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Displays table if you can buy items of interest with current currency:",
+      "Translated": "显示是否可以用当前货币购买关注的物品：",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show items of interest",
+      "Translated": "显示关注的物品",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Automatically add newest upgrade items and remove old ones.",
+      "Translated": "自动添加最新的升级物品并移除旧的。",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Items to add to the list:",
+      "Translated": "要添加到列表的物品：",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current items of interest:",
+      "Translated": "当前关注的物品：",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove##",
+      "Translated": "移除##",
+      "Context": "ItemsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show societal currencies",
+      "Translated": "显示社会货币",
+      "Context": "SocietiesConfigTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select which societal currencies you want to see:",
+      "Translated": "选择你想查看的社会货币：",
+      "Context": "SocietiesConfigTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use Lifestream when possible.",
+      "Translated": "尽可能使用 Lifestream。",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use Lifestream",
+      "Translated": "使用 Lifestream",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use vnavmesh when possible.",
+      "Translated": "尽可能使用 vnavmesh。",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Use vnavmesh",
+      "Translated": "使用 vnavmesh",
+      "Context": "ThirdPartyTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Quest \"",
+      "Translated": "任务“",
+      "Context": "ItemHelper.GetPrereqText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " and ",
+      "Translated": "和",
+      "Context": "ItemHelper.GetPrereqText",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You need to spin the wheel to get the items.",
+      "Translated": "你需要转动轮盘来获取物品。",
+      "Context": "UiHelper.RightAlignWithIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement data not loaded yet. Open the Achievement window to check status.",
+      "Translated": "成就数据尚未加载。请打开成就窗口查看状态。",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Requirement already fulfilled:",
+      "Translated": "已满足条件：",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Achievement not yet completed:",
+      "Translated": "成就尚未完成：",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Quest not yet completed:",
+      "Translated": "任务尚未完成：",
+      "Context": "UiHelper.PrereqIcon",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Flag##sellable-",
+      "Translated": "标记##sellable-",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "The flag will only show up, if you are here: ",
+      "Translated": "仅当你位于此处时才会显示标记：",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "\nShowing teleport point instead: ",
+      "Translated": "改为显示传送点：",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "TP##sellable-",
+      "Translated": "传送##sellable-",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "You need to travel there first manually.\nWill teleport to nearest Aetheryte instead.",
+      "Translated": "你需要先手动前往那里。\n将改为传送至最近的以太之光。",
+      "Context": "UiHelper.BuildMapButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "If you like ",
+      "Translated": "如果你喜欢",
+      "Context": "KofiBanner.get_SmallPatreonButtonTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ",\nplease consider supporting its developer via Ko-fi.",
+      "Translated": "，\n请考虑通过 Ko-fi 支持其开发者。",
+      "Context": "KofiBanner.get_SmallPatreonButtonTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unable to read name",
+      "Translated": "无法读取名称",
+      "Context": "ShopItem.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

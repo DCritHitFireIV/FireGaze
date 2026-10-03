@@ -1,0 +1,649 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Subaquatic Voyages - ",
+      "Translated": "水下航行 -",
+      "Context": "SubmarineSource.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open the Collections window",
+      "Translated": "打开收藏窗口",
+      "Context": "CommandsInitializer.get_mainWindowCmdMessage",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Could not find description",
+      "Translated": "找不到描述",
+      "Context": "BlueMageCollectible.GetDescription",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Cast: ",
+      "Translated": "咏唱：",
+      "Context": "BlueMageCollectible.GetPrimaryHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Recast: ",
+      "Translated": "复唱：",
+      "Context": "BlueMageCollectible.GetSecondaryHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Patch",
+      "Translated": "版本",
+      "Context": "Collectible`1..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "Collectible`1..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Events",
+      "Translated": "排除活动",
+      "Context": "Collectible`1..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Mog Station",
+      "Translated": "排除莫古站",
+      "Context": "Collectible`1..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude Unknown",
+      "Translated": "排除未知",
+      "Context": "Collectible`1..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Patch ",
+      "Translated": "版本",
+      "Context": "Collectible`1.GetPrimaryHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown",
+      "Translated": "未知",
+      "Context": "Collectible`1.GetDisplayPatch",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Dye Channels",
+      "Translated": "染色通道",
+      "Context": "GlamourCollectible..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Level",
+      "Translated": "等级",
+      "Context": "GlamourCollectible..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Model",
+      "Translated": "模型",
+      "Context": "GlamourCollectible..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": ", Lv. ",
+      "Translated": "，Lv.",
+      "Context": "GlamourCollectible.GetSecondaryHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Identical to: ",
+      "Translated": "同款：",
+      "Context": "GlamourCollectible.DrawAdditionalTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " dye slots)",
+      "Translated": "个染色槽）",
+      "Context": "GlamourCollectible.DrawAdditionalTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Eternal Bonding",
+      "Translated": "永结同心",
+      "Context": "HairstyleCollectible.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Seats",
+      "Translated": "座位",
+      "Context": "MountCollectible..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Card ",
+      "Translated": "卡牌",
+      "Context": "TripleTriadCollectible.GetSecondaryHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No",
+      "Translated": "否",
+      "Context": "TripleTriadCollectible.GetSecondaryHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Craftable",
+      "Translated": "可制作",
+      "Context": "CraftingSource.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Mog Station Item",
+      "Translated": "莫古站物品",
+      "Context": "MogStationSource.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "PvP Series ",
+      "Translated": "PvP 系列",
+      "Context": "PvPSeriesSource.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " - Level ",
+      "Translated": "- 等级",
+      "Context": "PvPSeriesSource.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Unknown Shop",
+      "Translated": "不明商店",
+      "Context": "ShopSource.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "at ",
+      "Translated": "于",
+      "Context": "ShopSource.GetName",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Preview",
+      "Translated": "预览",
+      "Context": "PreviewExecutor.Preview",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Collections",
+      "Translated": "收藏",
+      "Context": "Plugin.get_Name",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Content Filters",
+      "Translated": "内容筛选",
+      "Context": "CollectionTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Select Patch",
+      "Translated": "选择版本",
+      "Context": "FullCollectionTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "View All Items",
+      "Translated": "查看所有物品",
+      "Context": "FullCollectionTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Equip Slots",
+      "Translated": "装备栏位",
+      "Context": "GlamourTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Source",
+      "Translated": "来源",
+      "Context": "GlamourTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset",
+      "Translated": "重置",
+      "Context": "GlamourTab.DrawTimer",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sets",
+      "Translated": "套装",
+      "Context": "GlamourTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filters",
+      "Translated": "筛选",
+      "Context": "GlamourTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Can only be viewed in an Instance",
+      "Translated": "仅可在副本内查看",
+      "Context": "InstanceTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Hide Obtained",
+      "Translated": "隐藏已获得",
+      "Context": "InstanceTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "outfits preview",
+      "Translated": "外观预览",
+      "Context": "OutfitsTab..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Equipped By",
+      "Translated": "装备者",
+      "Context": "OutfitsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Separate Preview and Add to Equip Slot",
+      "Translated": "分离预览与添加到装备栏",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto open Instance tab when entering an instance",
+      "Translated": "进入副本时自动打开副本标签页",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "padding",
+      "Translated": "间距",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only open Instance tab if there are uncollected items ",
+      "Translated": "仅当有未收集物品时打开副本标签页",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Auto hide obtained items from Instance tab",
+      "Translated": "在副本标签页中自动隐藏已获得物品",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show additional item information for these collections",
+      "Translated": "为这些收藏显示额外物品信息",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Exclude these collections from the Instance tab",
+      "Translated": "从副本标签页中排除这些收藏",
+      "Context": "SettingsTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "No items in Wish List",
+      "Translated": "愿望单中没有物品",
+      "Context": "WishlistTab.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sort By",
+      "Translated": "排序方式",
+      "Context": "CollectionWidget..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Filter...",
+      "Translated": "筛选...",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Show:",
+      "Translated": "显示：",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All",
+      "Translated": "全部",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Favorites",
+      "Translated": "收藏",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Preview items on your character. Resets on window closing.\nDisabled for Mog Station items.",
+      "Translated": "在角色上预览物品。关闭窗口时重置。\n对莫古力站物品禁用。",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Try On",
+      "Translated": "试穿",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reset Preview",
+      "Translated": "重置预览",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Reapply Preview",
+      "Translated": "重新应用预览",
+      "Context": "CollectionWidget.DrawFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "More Filters",
+      "Translated": "更多筛选",
+      "Context": "CollectionWidget.DrawAdvancedFilters",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right Click To Interact",
+      "Translated": "右键点击交互",
+      "Context": "CollectionWidget.DrawItem",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Apply to Glamour Slot",
+      "Translated": "应用到投影栏位",
+      "Context": "CollectionWidget.DrawItem",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Right Click to interact...",
+      "Translated": "右键点击交互...",
+      "Context": "EquipSlotsWidget.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Remove from Slot",
+      "Translated": "从栏位移除",
+      "Context": "EquipSlotsWidget.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Main",
+      "Translated": "主",
+      "Context": "GlamourTreeWidget..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "GlamourTreeWidget..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add Directory",
+      "Translated": "添加目录",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add Set",
+      "Translated": "添加套装",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Add to Glamour Plate",
+      "Translated": "添加到投影模板",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only usable in Plate Creation window.",
+      "Translated": "仅可在投影模板创建窗口中使用。",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Copy from Examine window",
+      "Translated": "从查看窗口复制",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Only usable in Examine window.",
+      "Translated": "仅可在查看窗口中使用。",
+      "Context": "GlamourTreeWidget.DrawIconButtons",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete##directory-delete",
+      "Translated": "删除##directory-delete",
+      "Context": "GlamourTreeWidget.DrawGlamourTree",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Delete##",
+      "Translated": "删除##",
+      "Context": "GlamourTreeWidget.DrawGlamourTree",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enable All",
+      "Translated": "全部启用",
+      "Context": "JobSelectorWidget.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Disable All",
+      "Translated": "全部禁用",
+      "Context": "JobSelectorWidget.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Current Job",
+      "Translated": "当前职业",
+      "Context": "JobSelectorWidget.Draw",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "All Classes",
+      "Translated": "所有职业",
+      "Context": "JobSelectorWidget.JobSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Artifact Gear",
+      "Translated": "神器装备",
+      "Context": "JobSelectorWidget.JobSelector",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Left click for Dye 1 | Right click for Dye 2",
+      "Translated": "左键选择染剂 1 | 右键选择染剂 2",
+      "Context": "PaletteWidget.DrawPalette",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Color Picker:\nLeft click to select the closest Dye to the highlighted color\nHold shift and left click to do the above for Dye 2",
+      "Translated": "颜色选择器：\n左键选择最接近高亮颜色的染剂\n按住 Shift 并左键可为染剂 2 执行上述操作",
+      "Context": "PaletteWidget.DrawPalette",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Swap Dyes",
+      "Translated": "交换染剂",
+      "Context": "PaletteWidget.DrawPalette",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "one",
+      "Translated": "一",
+      "Context": "TooltipWidget.DrawItemTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "two",
+      "Translated": "二",
+      "Context": "TooltipWidget.DrawItemTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": " Copy Name ",
+      "Translated": "复制名称",
+      "Context": "TooltipWidget.DrawItemTooltip",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Sources",
+      "Translated": "来源",
+      "Context": "TooltipWidget.DrawSources",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Open Link",
+      "Translated": "打开链接",
+      "Context": "TooltipWidget.DrawSources",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Marketboard price",
+      "Translated": "市场板价格",
+      "Context": "TooltipWidget.DrawTradeableHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Untradeable",
+      "Translated": "不可交易",
+      "Context": "TooltipWidget.DrawTradeableHint",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "ignore",
+      "Translated": "忽略",
+      "Context": "UiHelper.GroupWithMinWidth",
+      "PreserveID": false,
+      "Source": "library"
+    },
+    {
+      "Original": "Enter New Name...",
+      "Translated": "输入新名称...",
+      "Context": "UiHelper.InputText",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

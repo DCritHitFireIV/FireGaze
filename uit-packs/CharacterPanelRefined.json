@@ -1,0 +1,377 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-03",
+    "pluginVersion": null,
+    "source": "library"
+  },
+  "entries": [
+    {
+      "Original": "Open the Character Panel Refined configuration.",
+      "Translated": "打开角色面板增强配置。",
+      "Context": "ConfigWindow..ctor",
+      "PreserveID": false,
+      "Source": "library"
+    }
+  ],
+  "resources": [
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Show_synced_stats",
+      "Original": "Show synced stats in item tooltips",
+      "Translated": "在物品提示中显示同步后的属性",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_ArmysPaeon",
+      "Original": "Army's Paeon",
+      "Translated": "军神的赞美歌",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Character_Panel_Refined_Config",
+      "Original": "Character Panel Refined Config",
+      "Translated": "角色面板增强配置",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Help_Apply_Changes",
+      "Original": "To apply any config changes you must reopen the character panel.",
+      "Translated": "要应用任何配置更改，你必须重新打开角色面板。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Speed_Properties",
+      "Original": "Speed Properties",
+      "Translated": "速度属性",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Skill_Spell_Speed_DoT_Increase",
+      "Original": "DoT damage increases by 0.1% every {PointsPerTier} points.",
+      "Translated": "每 {PointsPerTier} 点，持续伤害提高 0.1%。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Expected_Heal",
+      "Original": "Average HP restored by a 100 potency healing action, including critical hits as well as passive traits such as Maim and Mend.\n\nA normal heal will restore {@Highlight}{NormalValue}{@Clear} HP.\nA critical hit will restore {@Highlight}{CritValue}{@Clear} HP.\n\nHP restored will always vary by ±3%.",
+      "Translated": "100 威力治疗技能的平均恢复 HP，包含暴击以及被动特性（如 Maim and Mend）。\n\n普通治疗将恢复 {@Highlight}{NormalValue}{@Clear} HP。\n暴击将恢复 {@Highlight}{CritValue}{@Clear} HP。\n\n恢复的 HP 始终会有 ±3% 的浮动。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Window_Use_Game_Language_Tooltip",
+      "Original": "Use the internal game language for this plugin if available.\n Currently Available: English, German, French",
+      "Translated": "如果可用，为此插件使用游戏内置语言。\n 当前可用：英语、德语、法语",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_GCD",
+      "Original": "Recast",
+      "Translated": "复唱",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_BlizzardInCyan_GCD",
+      "Original": "Blizzard i.C. Recast",
+      "Translated": "冰结 i.C. 复唱",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Direct_Hit_Chance",
+      "Original": "Direct Hit Chance",
+      "Translated": "直击几率",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_Huton",
+      "Original": "Huton",
+      "Translated": "风遁",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_Shifu",
+      "Original": "Shifu",
+      "Translated": "士风",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltip_Show_synced_stats",
+      "Original": "When item level synced, show synced stats in item tooltips.\nCan be disabled by pressing Ctrl.\n(Due to the game's rounding method these may be off by 1 point)",
+      "Translated": "物品等级同步时，在物品提示中显示同步后的属性。\n可按 Ctrl 禁用。\n（由于游戏的取整方式，这些数值可能会有 1 点偏差）",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Override_default_tooltips_tooltip",
+      "Original": "Override the default tooltips for all stats.",
+      "Translated": "覆盖所有属性的默认提示。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Magic_Mitigation",
+      "Original": "Magic Mitigation",
+      "Translated": "魔法减伤",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Wasting",
+      "Original": "You are currently wasting {@Wasting}{Wasting}{@Clear} {Points}.",
+      "Translated": "你当前浪费了 {@Wasting}{Wasting}{@Clear} {Points}。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Show_direct_hit_damage_increase",
+      "Original": "Show direct hit damage increase",
+      "Translated": "显示直击伤害提升",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_FireIII_GCD",
+      "Original": "Fire III Cast",
+      "Translated": "爆炎咏唱",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Show_item_level_information",
+      "Original": "Show item level information",
+      "Translated": "显示物品等级信息",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Show_crit_damage_increase",
+      "Original": "Show crit damage increase",
+      "Translated": "显示暴击伤害提升",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Skill_Spell_Speed_GCD",
+      "Original": "A {GCD}s GCD is sped up by 0.01s on average every {PointsPerTier} points.",
+      "Translated": "每 {PointsPerTier} 点，{GCD}s 的 GCD 平均缩短 0.01s。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Heal_per_100_Potency",
+      "Original": "Avg. Healing",
+      "Translated": "平均治疗",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Damage_Mitigation",
+      "Original": "Damage Mitigation",
+      "Translated": "伤害减免",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_Hyperphantasia",
+      "Original": "Hyperphantasia",
+      "Translated": "绘灵幻景",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_RubyRite_GCD",
+      "Original": "Ruby Rite Recast",
+      "Translated": "红宝石之仪复唱",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_Swiftscaled",
+      "Original": "Swiftscaled",
+      "Translated": "疾速",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Wasting_Points_Singular",
+      "Original": "point",
+      "Translated": "点",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Damage_per_100_Potency",
+      "Original": "Avg. Damage",
+      "Translated": "平均伤害",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Skill_Speed_Increase",
+      "Original": "Recast Time Reduction",
+      "Translated": "复唱时间缩短",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Physical_Mitigation",
+      "Original": "Physical Mitigation",
+      "Translated": "物理减伤",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_PresenceOfMind",
+      "Original": "Presence of Mind",
+      "Translated": "神速咏唱",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Show_stats_without_consumables",
+      "Original": "Show DoH/DoL stats without consumables",
+      "Translated": "显示不含消耗品的 DoH/DoL 属性",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Item_level_Sync",
+      "Original": "Item Level Sync",
+      "Translated": "物品等级同步",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_excluding_Consumables",
+      "Original": "excl. Consumables",
+      "Translated": "不含消耗品",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_GreasedLightning",
+      "Original": "Greased Lightning",
+      "Translated": "疾风迅雷",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Use_Game_Language_if_available",
+      "Original": "Use Game Language if available",
+      "Translated": "可用时使用游戏语言",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Crit_Chance",
+      "Original": "Crit Chance",
+      "Translated": "暴击几率",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Damage_Increase",
+      "Original": "Damage Increase",
+      "Translated": "伤害提升",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Crit_Damage",
+      "Original": "Crit Damage",
+      "Translated": "暴击伤害",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_Hyperphantasia_Abbrev",
+      "Original": "Hp",
+      "Translated": "体力",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Panel_Mana_per_Tick",
+      "Original": "Mana per Tick",
+      "Translated": "每跳魔力",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_GreasedLightning_Abbrev",
+      "Original": "GL",
+      "Translated": "疾风",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Buff_LeyLines",
+      "Original": "Ley Lines",
+      "Translated": "黑魔纹",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Wasting_Points_Plural",
+      "Original": "points",
+      "Translated": "点",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Expected_Damage",
+      "Original": "Average damage of a 100 potency skill, including critical and direct hits as well as passive traits such as Maim and Mend.\n\nA normal attack will do {@Highlight}{NormalValue}{@Clear} damage.\nA critical hit will do {@Highlight}{CritValue}{@Clear} damage.\n\nDamage always has a variance of ±5%.",
+      "Translated": "100威力的技能的平均伤害，包含暴击、直击以及被动特性（如攻击与治疗）。\n\n普通攻击将造成 {@Highlight}{NormalValue}{@Clear} 伤害。\n暴击将造成 {@Highlight}{CritValue}{@Clear} 伤害。\n\n伤害始终有 ±5% 的浮动。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Show_average_healing",
+      "Original": "Show average healing",
+      "Translated": "显示平均治疗量",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Tenacity_Damage_Increase",
+      "Original": "Damage and healing increases by 0.1% every {PointsPerTier} points.",
+      "Translated": "每 {PointsPerTier} 点提升 0.1% 的伤害与治疗量。",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Override_default_tooltips",
+      "Original": "Replace the Character Panel's built-in tooltips with more detailed ones",
+      "Translated": "用更详细的提示替换角色面板自带的提示",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Config_Show_average_damage",
+      "Original": "Show average damage",
+      "Translated": "显示平均伤害",
+      "Source": "library"
+    },
+    {
+      "Container": "CharacterPanelRefined.Localization.resources",
+      "Key": "Tooltips_Next_Tier",
+      "Original": "To reach the next tier you need {@Highlight}{NextTier}{@Clear} {Points}.",
+      "Translated": "距离下一档还需 {@Highlight}{NextTier}{@Clear} {Points}。",
+      "Source": "library"
+    }
+  ],
+  "attributes": []
+}
