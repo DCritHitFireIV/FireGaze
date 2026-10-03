@@ -279,4 +279,10 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("UITextLibraryEnabled")]
     public bool UITextLibraryEnabled { get; set; } = true;
+
+    /// <summary>
+    ///     是否已经播报过「插件汉化上线」的更新公告：只在更新后首次加载时显示一次（1.3.27 起的玩家更新提示）。
+    /// </summary>
+    [JsonProperty("UITextFeatureAnnounced")]
+    public bool UITextFeatureAnnounced { get; set; }
 }

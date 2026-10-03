@@ -251,9 +251,12 @@ public sealed class Plugin : IDalamudPlugin
                 Chat.Print("[FireGaze] 安装器增强的两项功能已改为默认关闭，可在 /firegaze → 插件安装器 里打开。");
             }
 
-            if (HasReviewPending())
+            // 一次性更新公告（1.3.27）：只在玩家更新后第一次加载时播报，之后不再出现
+            if (!Config.UITextFeatureAnnounced)
             {
-                Chat.Print("[FireGaze] 有新词表：部分条目的原文改过了，可以到「参与翻译」里筛「待复核」看一眼。");
+                Config.UITextFeatureAnnounced = true;
+                Chat.Print("FireGaze: 上线了插件汉化的功能，现在可以对插件界面进行汉化了");
+                SaveConfig();
             }
         }
         catch (Exception e)
@@ -695,21 +698,6 @@ public sealed class Plugin : IDalamudPlugin
     {
         Table.ClearReview(internalName, field);
         ApplyTranslations();
-    }
-
-    /// <summary>
-    ///     有没有译文需要复核（上游原文改过）。
-    /// </summary>
-    public bool HasReviewPending()
-    {
-        try
-        {
-            return Table.ReviewCount > 0;
-        }
-        catch
-        {
-            return false;
-        }
     }
 
     /// <summary>

@@ -12,7 +12,6 @@ internal sealed class TranslateTab
     private string? updateMessage;
     private string? statusMessage;
     private volatile bool updateInFlight;
-    private bool noticeReview;
 
     public TranslateTab(Plugin plugin)
     {
@@ -39,7 +38,6 @@ internal sealed class TranslateTab
                 var (_, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
                 updateMessage = message;
                 updateInFlight = false;
-                noticeReview = true;
             });
         }
 
@@ -121,17 +119,6 @@ internal sealed class TranslateTab
             "上游更新了简介后会跳过该段的翻译，词表维护后重新更新即可。");
         ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
 
-        // ---------------- 复核提醒（不再从这里进「参与翻译」，那个是独立页签） ----------------
-        if (noticeReview)
-        {
-            noticeReview = false;
-            if (plugin.HasReviewPending())
-            {
-                UiHelpers.ColoredWrapped(
-                    UiHelpers.Warn,
-                    "有新词表：部分条目的原文改过了，旧译文可能对不上，可以到「参与翻译」里筛「待复核」看一眼。");
-            }
-        }
     }
 
     /// <summary>
