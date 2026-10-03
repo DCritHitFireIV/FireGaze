@@ -70,6 +70,11 @@ def _pack_entry(pack: dict, file_name: str, pack_id: str, old_pack: dict | None)
             item["downloads"] = old_pack["downloads"]
         if "likes" in old_pack:
             item["likes"] = old_pack["likes"]
+
+    # 翻译类型（2026-10-04 用户定）：投稿时勾的 free / llm / human，界面会翻成中文标注
+    kinds = meta.get("kinds")
+    if isinstance(kinds, list) and kinds:
+        item["kinds"] = [str(kind) for kind in kinds]
     return item
 
 

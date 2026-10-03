@@ -101,12 +101,28 @@ def sanitize_pack_name(raw: str) -> str:
     return text[:24]
 
 
+KINDS = ("free", "llm", "human")
+KIND_LABELS = {"free": "免费翻译", "llm": "大模型翻译", "human": "人工翻译"}
+
+
+def sanitize_kinds(raw) -> list:
+    """投稿声明的翻译类型（2026-10-04 用户定）：free / llm / human，别的丢掉、去重、固定顺序。"""
+    if not isinstance(raw, list):
+        return []
+    values = {str(item).strip().lower() for item in raw}
+    return [kind for kind in KINDS if kind in values]
+
+
+def describe_kinds(kinds: list) -> str:
+    return "、".join(KIND_LABELS.get(kind, kind) for kind in kinds)
+
+
 def _one_line(text: str, limit: int = 120) -> str:
     flat = " ".join(str(text or "").split())
     return flat[:limit] + ("…" if len(flat) > limit else "")
 
 
-def build_review(plugin: str, pack_name: str, pack_file: str, pack: dict, repo: str, when: str) -> dict:
+def build_review(plugin: str, pack_name: str, pack_file: str, pack: dict, repo: str, when: str, kinds: list | None = None) -> dict:
     """机器人整理给维护者抽查的 issue 内容（标题 + 正文）。
 
     2026-10-04 用户要求：投稿除了入库，还要在 issue 里留一份可检查的样本——
@@ -146,6 +162,7 @@ def build_review(plugin: str, pack_name: str, pack_file: str, pack: dict, repo: 
         "",
         f"- 插件：`{plugin}`",
         f"- 包名：{pack_name or '匿名'}",
+        f"- 翻译类型：{describe_kinds(kinds or []) or '未标注'}",
         f"- 收录：{total} 条（条目 {len(entries)} · 资源 {len(resources)} · 属性 {len(attributes)}）",
         f"- 译文包：[{pack_file}]({link})",
         f"- 投稿时间：{when}",
@@ -253,12 +270,14 @@ def main(argv=None) -> int:
 
     os.makedirs(args.packs_dir, exist_ok=True)
     pack_name = sanitize_pack_name(str(payload.get("packName") or ""))
+    kinds = sanitize_kinds(payload.get("kinds"))
     pack = {
         "_meta": {
             "format": 2,
             "updatedAt": time.strftime("%Y-%m-%d"),
             "source": "user",
             "label": pack_name or f"玩家包 · {pack_id[5:]}",
+            **({"kinds": kinds} if kinds else {}),
         },
         "entries": [],
         "resources": [],
@@ -418,7 +437,7 @@ def main(argv=None) -> int:
     if args.review_out:
         # 抽查 issue（2026-10-04）：入库之外再给维护者一份可检查的样本（含包名）
         repo = os.environ.get("GITHUB_REPOSITORY") or "DCritHitFireIV/FireGaze"
-        review = build_review(plugin, pack_name, pack_file, pack, repo, time.strftime("%Y-%m-%d %H:%M"))
+        review = build_review(plugin, pack_name, pack_file, pack, repo, time.strftime("%Y-%m-%d %H:%M"), kinds)
         save_json(args.review_out, review)
         print(f"抽查 issue 内容已写出：{args.review_out}（{review['title']}）")
     if args.summary_out:

@@ -1478,10 +1478,11 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        // 包名（2026-10-04 用户定）：复用「一键上传」确认框里填的署名（留空 = 匿名）。
+        // 包名（2026-10-04 用户定）：复用「一键上传」确认框里填的署名（留空 = 匿名）；
+        // 翻译类型：编辑器只收人工改过的条目（IsUserSource 过滤），所以固定是「人工翻译」。
         var author = (this.plugin.Config.UITextPackAuthor ?? string.Empty).Trim();
         var payload = JsonSerializer.Serialize(
-            new { type = "uit-contribution", plugin = this.entry.InternalName, packName = author.Length > 0 ? author : null, entries, resources, attributes },
+            new { type = "uit-contribution", plugin = this.entry.InternalName, packName = author.Length > 0 ? author : null, kinds = new[] { UITextKinds.Human }, entries, resources, attributes },
             new JsonSerializerOptions
             {
                 WriteIndented = true,

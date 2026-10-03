@@ -120,6 +120,11 @@ internal sealed class UITextLibraryPack
     /// <summary>👍 数（中继统计；还没有统计时是 0，界面会显示「—」）。</summary>
     [JsonPropertyName("likes")]
     public int Likes { get; set; }
+
+    /// <summary>翻译类型（free / llm / human；玩家投稿时自己勾的，界面用中文标注）。</summary>
+    [JsonPropertyName("kinds")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<string>? Kinds { get; set; }
 }
 
 /// <summary>

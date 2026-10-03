@@ -971,6 +971,32 @@ internal sealed class UITextTab
         var healthyAttributes = FilterHealthy(attributes, e => e.Original, e => e.Translated, e => "属性 · " + UITextQuality.Label(e.Original), problems);
         var uploadable = healthyEntries.Count + healthyResources.Count + healthyAttributes.Count;
 
+        // 翻译类型（2026-10-04 用户要求）：按条目来源给默认勾选，玩家可改
+        var detectedKinds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var item in healthyEntries)
+        {
+            if (UITextKinds.FromSource(item.Source) is { } kind)
+            {
+                detectedKinds.Add(kind);
+            }
+        }
+
+        foreach (var item in healthyResources)
+        {
+            if (UITextKinds.FromSource(item.Source) is { } kind)
+            {
+                detectedKinds.Add(kind);
+            }
+        }
+
+        foreach (var item in healthyAttributes)
+        {
+            if (UITextKinds.FromSource(item.Source) is { } kind)
+            {
+                detectedKinds.Add(kind);
+            }
+        }
+
         string? noteText = null;
         var noteKind = NoteKind.Bad;
         if (uploadable == 0)
@@ -1007,6 +1033,9 @@ internal sealed class UITextTab
             Resources = healthyResources,
             Attributes = healthyAttributes,
             Author = this.plugin.Config.UITextPackAuthor,
+            KindFree = detectedKinds.Contains(UITextKinds.Free),
+            KindLlm = detectedKinds.Contains(UITextKinds.Llm),
+            KindHuman = detectedKinds.Contains(UITextKinds.Human),
             Problems = problems,
         };
         return new UploadBuildResult(upload, noteText, noteKind);
@@ -1052,6 +1081,11 @@ internal sealed class UITextTab
         /// <summary>包名（提交时可改；留空 = 匿名，库里显示为「玩家包 · 短ID」）。</summary>
         public string Author = string.Empty;
 
+        /// <summary>翻译类型（默认按条目 Source 推、玩家可在确认框里改）。</summary>
+        public bool KindFree;
+        public bool KindLlm;
+        public bool KindHuman;
+
         public List<UITextQuality.Problem> Problems = [];
     }
 
@@ -1071,13 +1105,30 @@ internal sealed class UITextTab
 
         this.plugin.SaveConfig();
 
-        // payload / 正文 / 标题在这里才拼（包名是确认框里现填的，2026-10-04 用户定）。
+        // payload / 正文 / 标题在这里才拼（包名与翻译类型都是确认框里现填的，2026-10-04 用户定）。
+        var kinds = new List<string>(3);
+        if (upload.KindFree)
+        {
+            kinds.Add(UITextKinds.Free);
+        }
+
+        if (upload.KindLlm)
+        {
+            kinds.Add(UITextKinds.Llm);
+        }
+
+        if (upload.KindHuman)
+        {
+            kinds.Add(UITextKinds.Human);
+        }
+
         var payload = System.Text.Json.JsonSerializer.Serialize(
             new
             {
                 type = "uit-contribution",
                 plugin = entry.InternalName,
                 packName = author.Length > 0 ? author : null,
+                kinds = kinds.Count > 0 ? kinds : null,
                 entries = upload.Entries,
                 resources = upload.Resources,
                 attributes = upload.Attributes,
@@ -1167,6 +1218,34 @@ internal sealed class UITextTab
             ImGui.TextDisabled(author.Trim().Length > 0
                 ? $"库里会显示为「{author.Trim()}」"
                 : "留空时显示为「玩家包 · 短ID」");
+
+            // 翻译类型（2026-10-04 用户要求）：勾选后会标在公共译文库里，方便别人挑
+            ImGui.Spacing();
+            ImGui.TextDisabled("翻译类型（可多选，会标在公共译文库里）：");
+            var kindFree = upload.KindFree;
+            if (ImGui.Checkbox("免费翻译###uit-kind-free", ref kindFree))
+            {
+                upload.KindFree = kindFree;
+            }
+
+            ImGui.SameLine();
+            var kindLlm = upload.KindLlm;
+            if (ImGui.Checkbox("大模型翻译###uit-kind-llm", ref kindLlm))
+            {
+                upload.KindLlm = kindLlm;
+            }
+
+            ImGui.SameLine();
+            var kindHuman = upload.KindHuman;
+            if (ImGui.Checkbox("人工翻译###uit-kind-human", ref kindHuman))
+            {
+                upload.KindHuman = kindHuman;
+            }
+
+            if (!upload.KindFree && !upload.KindLlm && !upload.KindHuman)
+            {
+                ImGui.TextDisabled("不勾选时库里不标类型。");
+            }
         }
 
         // 本地检测结果（2026-10-03）：健康才上传，不健康的列出来让用户先修。
@@ -1482,12 +1561,13 @@ internal sealed class UITextTab
             var count = pack.Entries + pack.Resources + pack.Attributes;
             var downloads = pack.Downloads > 0 ? $"下载数 {pack.Downloads}" : "下载数 —";
             var likes = pack.Likes > 0 ? $"喜欢 {pack.Likes}" : "喜欢 —";
+            var kinds = UITextKinds.Describe(pack.Kinds);
             var key = plugin.InternalName + "|" + (pack.File ?? pack.ID ?? "library");
             var packID = string.IsNullOrWhiteSpace(pack.ID) ? "library" : pack.ID!;
             var likedKey = plugin.InternalName + "|" + packID;
             var liked = this.plugin.Config.UITextLikedPacks.Contains(likedKey);
 
-            ImGui.TextUnformatted($"{label}（{source}）");
+            ImGui.TextUnformatted($"{label}（{source}{(kinds.Length > 0 ? " · " + kinds : string.Empty)}）");
             ImGui.SameLine();
             ImGui.TextDisabled($"{count} 条 · {pack.UpdatedAt ?? "—"} · {downloads} · {likes}");
 
