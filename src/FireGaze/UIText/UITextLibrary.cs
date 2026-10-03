@@ -144,6 +144,9 @@ internal sealed class UITextLibrary
     /// <summary>本地包缓存的有效期：过期就重拉，拉不到继续用旧的。</summary>
     private static readonly TimeSpan PackTTL = TimeSpan.FromHours(24);
 
+    /// <summary>「下载数 / 喜欢数」实时计数的刷新节流（中继那个端点很便宜，5 分钟够用）。</summary>
+    private static readonly TimeSpan CountsTTL = TimeSpan.FromMinutes(5);
+
     private readonly Plugin plugin;
     private readonly string cacheDirectory;
 
@@ -151,6 +154,8 @@ internal sealed class UITextLibrary
     private DateTime indexFetchedAt = DateTime.MinValue;
     private DateTime unavailableUntil = DateTime.MinValue;
     private bool unavailableLogged;
+    private DateTime countsFetchedAt = DateTime.MinValue;
+    private bool countsFetching;
 
     public UITextLibrary(Plugin plugin)
     {
@@ -223,6 +228,76 @@ internal sealed class UITextLibrary
 
     /// <summary>索引（本会话内缓存 6 小时）；详情里展示「云端译文」用这个只读快照。</summary>
     public UITextLibraryIndex? CachedIndex => this.index;
+
+    /// <summary>现在该去刷一次实时计数吗（5 分钟节流；详情面板每次绘制都问）。</summary>
+    public bool ShouldRefreshCounts => !this.countsFetching && DateTime.Now - this.countsFetchedAt >= CountsTTL;
+
+    /// <summary>
+    ///     从我们的中继拉**实时**下载数 / 喜欢数（2026-10-04）：index.json 里那份要等定时工作流（每 6 小时）
+    ///     才写回，喜欢完别人可能要等半天才看得到；这个端点直接读 KV（约 1 分钟内的值），把数字盖到索引对象上。
+    ///     取 max：喜欢只在增长，别把刚点完的乐观 +1 又盖回旧值。
+    ///     中继不可达 / 没开计数一律静默——显示回退到索引里的值，绝不报错。
+    /// </summary>
+    public async Task RefreshCountsAsync(CancellationToken token)
+    {
+        if (!this.ShouldRefreshCounts)
+        {
+            return;
+        }
+
+        this.countsFetching = true;
+        try
+        {
+            using var handler = new SocketsHttpHandler { ConnectTimeout = TimeSpan.FromSeconds(6) };
+            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(10) };
+            var text = await client.GetStringAsync(ContributeRelay.URL + "library-counts", token).ConfigureAwait(false);
+            using var document = JsonDocument.Parse(text);
+            var root = document.RootElement;
+            if (!root.TryGetProperty("ok", out var ok) || ok.ValueKind != JsonValueKind.True || this.index is null)
+            {
+                return;
+            }
+
+            var counts = root.TryGetProperty("counts", out var countsElement) && countsElement.ValueKind == JsonValueKind.Object
+                ? countsElement
+                : default;
+            var likes = root.TryGetProperty("likes", out var likesElement) && likesElement.ValueKind == JsonValueKind.Object
+                ? likesElement
+                : default;
+
+            foreach (var (name, entry) in this.index.Plugins)
+            {
+                foreach (var pack in entry.EffectivePacks())
+                {
+                    var packID = string.IsNullOrWhiteSpace(pack.ID) ? "library" : pack.ID!;
+                    var key = name + "@" + packID;
+                    if (counts.ValueKind == JsonValueKind.Object
+                        && counts.TryGetProperty(key, out var downloads)
+                        && downloads.TryGetInt32(out var value))
+                    {
+                        pack.Downloads = Math.Max(pack.Downloads, value);
+                    }
+
+                    if (likes.ValueKind == JsonValueKind.Object
+                        && likes.TryGetProperty(key, out var likeCount)
+                        && likeCount.TryGetInt32(out var likeValue))
+                    {
+                        pack.Likes = Math.Max(pack.Likes, likeValue);
+                    }
+                }
+            }
+
+            this.countsFetchedAt = DateTime.Now;
+        }
+        catch (Exception)
+        {
+            // 实时计数拉不到就继续显示索引里的值；不打扰玩家
+        }
+        finally
+        {
+            this.countsFetching = false;
+        }
+    }
 
     /// <summary>拉取（或从缓存读）<c>uit-packs/</c> 下的一个具体文件；成功时上报一次「按包」下载量。</summary>
     public async Task<UITextPack?> FetchPackFileAsync(string fileName, string pluginName, string packID, CancellationToken token)
