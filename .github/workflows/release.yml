@@ -25,10 +25,13 @@ jobs:
       - name: Download Dalamud (API 15)
         shell: pwsh
         run: |
+          # upstream 已于 2026-09-22 删除 api15 目录（提交信息「api15 bye bye」，现在的分发只有 api16/latest）——
+          # 钉到最后仍含 api15 的提交（4359d8e，54MB），与本机 XIVLauncherCN 的 15.0.3.6 对齐；
+          # 清单里的 DalamudApiLevel 另行固定为 15，保证国服/旧版卫月也能加载。
           $ErrorActionPreference = 'Stop'
           $dest = "$env:APPDATA\XIVLauncher\addon\Hooks\dev"
           New-Item -ItemType Directory -Force -Path $dest | Out-Null
-          Invoke-WebRequest -Uri "https://goatcorp.github.io/dalamud-distrib/api15/latest.zip" -OutFile "$env:TEMP\dalamud.zip"
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/goatcorp/dalamud-distrib/4359d8e3af11e7521e67ebbad80fba06100dc3a3/api15/latest.zip" -OutFile "$env:TEMP\dalamud.zip"
           Expand-Archive -Path "$env:TEMP\dalamud.zip" -DestinationPath $dest -Force
 
       - name: Build
