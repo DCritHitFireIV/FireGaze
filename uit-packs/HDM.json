@@ -1,2258 +1,1654 @@
 {
-  "type": "uit-contribution",
-  "plugin": "HDM",
+  "_meta": {
+    "source": "contribution",
+    "updatedAt": "2026-10-03"
+  },
   "entries": [
     {
       "Original": "Ex",
       "Translated": "前",
       "Context": "ContentInfo.get_ExShort",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Expansion ",
       "Translated": "扩展",
       "Context": "ContentInfo.get_ExLong",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": " (Lv",
       "Translated": "(Lv)",
       "Context": "ContentInfo.get_Summary",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "A Realm Reborn",
       "Translated": "一个王国的重生",
       "Context": "ContentIndex..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "Heavensward",
       "Translated": "向天",
       "Context": "ContentIndex..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "Stormblood",
       "Translated": "风暴之血",
       "Context": "ContentIndex..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "Shadowbringers",
       "Translated": "暗影使者",
       "Context": "ContentIndex..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "Endwalker",
       "Translated": "终结者",
       "Context": "ContentIndex..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "Dawntrail",
       "Translated": "《曙光之路》",
       "Context": "ContentIndex..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "Catalog",
       "Translated": "目录",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Animations",
       "Translated": "动画",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Config",
       "Translated": "配置",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Category",
       "Translated": "类别",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Narrow the catalog to one content family, the way the in-game Duty Finder tabs do:\nWorld / City / Housing / Dungeon / Trial / Raid / … resolved from each mob's home\nterritory. \"Unknown\" = no home territory yet (the instanced/uncovered tail); \"All\"\nclears the filter. The catalog body groups every match under its home zone.",
       "Translated": "将目录缩小到一个内容系列，就像游戏内的 Duty Finder 选项卡所做的那样：\n世界/城市/房屋/地下城/审判/突袭/...从每个小混混的家中解决\n领土。“未知”=尚无主领土 (实例化/未被覆盖的尾部);“所有”\n清除过滤器。目录主体将每个匹配项分组到其主区域。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Type",
       "Translated": "类型",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Filter the catalog by model family (the Skel-prefix):\n  Monster (m) · Demihuman (d) · Human (c).\nHuman rows are painted on the player skeleton via Glamourer, so player\nemotes like /sit work on them natively. Monster/Demihuman skeletons don't\ncarry the player emote set, so /sit won't render on them. \"All\" clears it.",
       "Translated": "按模型族 (骨架前缀) 筛选目录：\n怪物 (m)·半人 (d)·人 (c)。\n通过 Glamourer 在玩家骨架上绘制人类行列，因此玩家\n像/sit 这样的情绪会自然而然地影响他们。怪物/半人类的骨骼不会\n携带玩家表情包，所以/sit 不会渲染到他们身上。“所有” 清除了这一点。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Become a small territorial wisp (x0.50, raised off the floor).\nAn unobtrusive marker for a DM who isn't physically in the scene.",
       "Translated": "变成一个小小的领地纤维 (x0.50，从地板上举起)。\n对于不在现场的 DM 来说，这是一个不引人注目的标记。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Hide",
       "Translated": "隐藏",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Unhide",
       "Translated": "揭露",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Pull your character out of the render entirely: a DM 'here but not\nphysically present' switch. Click again to reappear.",
       "Translated": "将你的角色完全从渲染中移除：这里是 DM，但不是\n物理存在开关。再次点击以重新出现。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Rename nameplate to disguise",
       "Translated": "重命名名牌以进行伪装",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Requires the Moniker (HMoniker) plugin, v2.1 or newer, installed and enabled.\nIf you have it and this is still disabled, its IPC version may be older than 2.1.",
       "Translated": "需要 Moniker(HMoniker) 插件，v2.1 或更高版本，已安装并启用。\n如果你拥有它，但它仍然处于禁用状态，那么它的 IPC 版本可能早于 2.1。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Also set your nameplate to the disguise's name via Moniker,\nsynced to nearby players through HMS. Revert clears it.",
       "Translated": "另外，通过名牌将你的名牌设置为伪装的名称。\n通过 HMS 与附近玩家同步。Revert 清除。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Log in to disguise yourself.",
       "Translated": "登录以伪装自己。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Scale",
       "Translated": "规模",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Sizes the active disguise, applied immediately.\nNative = the selected mob's authored scale (per-mob; tracks the model, e.g. x2.0 for Galatea Magna).\nx0.5 / x1 = quick multipliers; the box and slider set any custom size (0.1 … 10).",
       "Translated": "测量活跃伪装的尺寸，立即应用。\nNative = 所选 Mob 的授权规模 (每个 Mob;追踪模型，例如，对于 Galatea Magna 的 x2.0)。\nx0.5 / x1 = 快速乘数;方框和滑块设置任意自定义尺寸 (0.1...10)。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Custom",
       "Translated": "自定义",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "x%.2f",
       "Translated": "x%2f",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "library"
     },
     {
       "Original": "Type an exact scale (0.1 to 10). Anything above 10 clamps to 10.",
       "Translated": "输入一个精确的刻度 (0.1 至 10)。任何大于 10 的刻度都可以缩小到 10。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "selfdisguise",
       "Translated": "自我伪装",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Pick a catalog row first (a plain click selects it), then Disguise wears it.",
       "Translated": "先选择目录行 (简单点击选择)，然后 Disguise 会穿上它。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Wear ",
       "Translated": "穿戴",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": " yourself. Revert (below) drops it.",
       "Translated": "你自己。Return(下文) 把它扔掉。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "spawnpuppet",
       "Translated": "spawn Puppet",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Pick a catalog row first (a plain click selects it), then Spawn drops a puppet wearing it.",
       "Translated": "首先选择一个目录行 (简单点击即可选择)，然后 Spawn 将一个穿着它的玩偶放下。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Spawn a set-piece puppet a step ahead of you, disguised as ",
       "Translated": "在你之前一步制作一个定型人偶，伪装成",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": ".\nNon-targetable: the party can't click or attack it. Despawn it below.",
       "Translated": ".\n无法定位：玩家无法点击或攻击它。在下方消除它。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Restore your real model + size and un-stick any animation.",
       "Translated": "恢复你的真实模型 + 尺寸，并去除所有动画。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Despawn all (",
       "Translated": "全部消除 (",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": ")##puppets",
       "Translated": ")##玩偶",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "No live puppets to despawn. Spawn one first.",
       "Translated": "没有活生生的傀儡可以消灭。先消灭一个。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Despawn every live puppet. A zone change clears them too.",
       "Translated": "每个活生生的木偶都会消失。区域变化也会清除它们。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Disguise focused puppet",
       "Translated": "伪装聚焦木偶",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "disguisepup",
       "Translated": "伪装娃娃",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": " on ",
       "Translated": "在",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": " — no possession needed.\n",
       "Translated": "——不需要附身。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "That's the Spawn tab's focused puppet; select a different roster row there to retarget.\nSpawned puppets are non-targetable, so this is how you re-skin one in place.",
       "Translated": "这是 “生成” 选项卡中聚焦的木偶;在那里选择不同的名单行以重新定位。\n生成的玩偶是无法定位的，所以这就是你如何在原位重新塑造它的方法。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Clear",
       "Translated": "清除",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Search catalog…",
       "Translated": "搜索目录......",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "library"
     },
     {
       "Original": "Search by name, home location, BaseId, ModelChara id, or m-code.",
       "Translated": "按名称、家庭位置、BaseId、ModelChara id 或 m-code 进行搜索。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Clear the search.",
       "Translated": "清除搜索。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Hide the rows with no name at all: the model-ID-only entries that read\n\"(unnamed) <skel> #<BaseId>\". They're shown by default (searchable by\n#id or m-code). Boss bases and instanced roster names (shown in slate) are\nkept; they count as named.",
       "Translated": "隐藏无名行：只读取型号 ID 的条目\n“(未命名)<skel> #<BaseId>”。它们默认显示 (可通过以下方式搜索)\n#id 或 m-code。Boss 基数和实例化的名单名称 (显示在石板中) 是\n它们被视为已命名。",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "matches",
       "Translated": "匹配",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "zones",
       "Translated": "Zones",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "mobs",
       "Translated": "黑帮 (Mobs)",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "minions",
       "Translated": "小喽啰",
       "Context": "MainWindow.DrawHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Identity: Base ",
       "Translated": "身份：基础",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "  (hidden by filter)",
       "Translated": "(被过滤器隐藏)",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Apply##ident",
       "Translated": "应用##ident",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Select##ident",
       "Translated": "选择##ident",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Resident of: ",
       "Translated": "居住地：",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Minion: ",
       "Translated": "小喽啰：",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "NPC · humanoid character (apply, or spawn a copy)",
       "Translated": "NPC·人形角色 (应用或生成副本)",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": ", not in catalog (NPC, or newer than the data drop)",
       "Translated": "，不在目录中 (NPC，或比数据丢弃更新)",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "  ·  minion",
       "Translated": "· 米尼翁",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "  ·  NPC",
       "Translated": "· NPC",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Active: ",
       "Translated": "活跃：",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Human guise needs Glamourer, not detected; Apply will no-op.",
       "Translated": "人类伪装需要魅力者，但未被发现;申请将无效。",
       "Context": "MainWindow.DrawDetailStrip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": " as ",
       "Translated": "作为",
       "Context": "MainWindow.SpawnSelected",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " (Base ",
       "Translated": "(基础",
       "Context": "MainWindow.SpawnSelected",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Spawn blank dummy",
       "Translated": "生成空白虚拟",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Drop a plain, non-targetable puppet a step ahead of you,\nthen disguise, move, rotate, freeze and animate it from its row below.",
       "Translated": "在你前面一步扔下一个普通的、无法瞄准的木偶，\n然后从下面一行开始伪装、移动、旋转、静止和动画化。",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Spawn as ",
       "Translated": "作为",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "spawnassel",
       "Translated": "spawnassessel",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Spawn a puppet already wearing ",
       "Translated": "生成一个已经穿着",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "All puppets · timeline:",
       "Translated": "所有木偶·时间线：",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Play all",
       "Translated": "播放所有",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Loop all",
       "Translated": "全部循环",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Stop all",
       "Translated": "停止所有",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "All puppets · scale:",
       "Translated": "所有木偶·尺度：",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "1.0x##allscale",
       "Translated": "1.0x##全尺度",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Pick a puppet from the roster to edit its transform and animation here.",
       "Translated": "从名单中选择一个木偶，在这里编辑它的变形和动画。",
       "Context": "MainWindow.DrawSpawnTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Roster · ",
       "Translated": "名单。",
       "Context": "MainWindow.DrawRoster",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "  ·  obj#",
       "Translated": "· obj#",
       "Context": "MainWindow.DrawRoster",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "puppet  ·  obj#",
       "Translated": "木偶 · obj#",
       "Context": "MainWindow.DrawRoster",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "   (driving)",
       "Translated": "(驾驶)",
       "Context": "MainWindow.DrawRoster",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "Show possess dots",
       "Translated": "显示拥有点",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Float a blue dot over each puppet's head. Click a dot to possess that puppet:\nthe camera orbits onto it and WASD drives it. The dot hides while you drive it;\npress Esc, or hit Release (here or on the puppet's surface), to let go.",
       "Translated": "在每个木偶的头顶悬浮一个蓝点。点击一个点即可拥有该木偶：\n摄像头围绕它旋转，WASD 驱动它。当你驱动它时，光点会隐藏起来;\n按下 Esc 键，或点击 Release(此处或木偶表面) 以释放。",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Hide me while driving",
       "Translated": "开车时把我藏起来",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "While driving, fade your own frozen body to invisible — on YOUR screen only — so you\ndon't see yourself running in place. Your body reappears the instant you release.\nThe puppet moves either way; this is purely what you see locally.",
       "Translated": "开车时，将自己冻结的身体隐形——只在你的屏幕上——这样你\n不要看到自己在原地奔跑。你的身体在你释放的瞬间就会重新出现。\n木偶朝任何方向移动;这纯粹是你在当地看到的景象。",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Allow possessing others' puppets",
       "Translated": "允许拥有他人的玩偶",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Off by default: you can only possess puppets YOU spawned. A puppet another player\nspawned appears in your world as a mirror, and its control stays with them.\nTurn this on to drive someone else's puppet too — useful when helping run their event.",
       "Translated": "默认关闭：只能拥有你生成的玩偶。一个玩偶属于另一个玩家\n在你的世界中，孵化物以镜子的形式出现，其控制权始终与他们同在。\n打开这个也可以驱动其他人的木偶——在帮助运行他们的活动时很有用。",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Release##possess",
       "Translated": "发布##拥有",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Driving ",
       "Translated": "驾驶",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": ".  WASD move · Space up · Ctrl down · Esc release.",
       "Translated": "WASD 移动·空格向上·Ctrl 向下·Esc 释放。",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "not possessing",
       "Translated": "不拥有·向上空格·向下 Control·Esc 释放",
       "Context": "MainWindow.DrawPossessionControls",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Spawn a mob (favourites + search)",
       "Translated": "生成暴民 (收藏夹 + 搜索)",
       "Context": "MainWindow.DrawSpawnList",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "search name or BaseId…",
       "Translated": "搜索名称或 BaseId...",
       "Context": "MainWindow.DrawSpawnList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "library"
     },
     {
       "Original": "Favourites · ",
       "Translated": "收藏夹·",
       "Context": "MainWindow.DrawSpawnList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Type to search the catalog.",
       "Translated": "输入以搜索目录。",
       "Context": "MainWindow.DrawSpawnList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Type to search the rest of the catalog.",
       "Translated": "键入搜索目录的其余部分。",
       "Context": "MainWindow.DrawSpawnList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "…more than ",
       "Translated": "......不只是",
       "Context": "MainWindow.DrawSpawnList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": " matches. Refine the search.",
       "Translated": "匹配。完善搜索。",
       "Context": "MainWindow.DrawSpawnList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Pin to favourites",
       "Translated": "将图钉固定到收藏夹",
       "Context": "MainWindow.DrawSpawnRow",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Unpin from favourites",
       "Translated": "从收藏夹中取消固定",
       "Context": "MainWindow.DrawSpawnRow",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "\nClick to select for the per-puppet Apply.",
       "Translated": "点击选择为每个玩偶应用。",
       "Context": "MainWindow.DrawFavouriteChip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": " yourself. Revert (Catalog tab) drops it.",
       "Translated": "你自己。撤销 (目录标签)。",
       "Context": "MainWindow.DrawFavouriteChip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Be present in the world to disguise.",
       "Translated": "在世界上存在以伪装自己。",
       "Context": "MainWindow.DrawFavouriteChip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Spawn a non-targetable puppet wearing ",
       "Translated": "生成一个穿着无法瞄准的玩偶",
       "Context": "MainWindow.DrawFavouriteChip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": ", a step ahead of you.",
       "Translated": "领先你一步。",
       "Context": "MainWindow.DrawFavouriteChip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Be present in the world to spawn.",
       "Translated": "存在于这个世界上，孕育后代。",
       "Context": "MainWindow.DrawFavouriteChip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "puppet obj#",
       "Translated": "木偶 obj#",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Release",
       "Translated": "发布",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Drive this puppet with WASD from an orbit camera.\nSpace up · Ctrl down · Esc release.",
       "Translated": "将这个 WASD 玩偶从轨道摄像机中驱逐出去。\n向上空格键、向下控制键、Esc 释放键。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "A mirror of another player's puppet — only its originator can possess it.\nEnable \"Allow possessing others' puppets\" in the Spawn tab to override.",
       "Translated": "另一个玩家玩偶的镜像——只有它的原创者才能拥有它。\n在 “生成” 选项卡中启用 “允许拥有他人的玩偶” 以进行覆盖。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Despawn",
       "Translated": "生成",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Wearing: ",
       "Translated": "穿着：",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "(blank)",
       "Translated": "(空白)",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Apply (pick a row)",
       "Translated": "应用 (选择一行)",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Apply ",
       "Translated": "应用",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Search above (or Ctrl+click a Catalog row / Favourite) to select a mob, then Apply it here.",
       "Translated": "搜索上方 (或按住 Ctrl 键点击目录行/收藏夹) 选择一个 Mob，然后在此应用它。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Drag each axis to slide the puppet (X / Y-height / Z). Ctrl+click to type exact world coords.",
       "Translated": "拖动每个轴来滑动木偶 (X/Y-高度/Z)。Ctrl+ 点击键入精确的世界坐标。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Bring to me",
       "Translated": "带到我这里",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "yaw %.2f",
       "Translated": "Yaw %.2f",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderFloat"
+      "Source": "library"
     },
     {
       "Original": "Face me",
       "Translated": "面对我",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Driving — WASD moves & steers this puppet. Release to place it by hand.",
       "Translated": "驾驶——WASD 移动并操控这个木偶。松开手，用手放置它。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Freeze",
       "Translated": "冻结",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Hold the puppet on a still frame (pins animation speed 0 every frame). Toggle off to resume.",
       "Translated": "将木偶固定在静止帧上 (每帧固定动画速度为 0)。切换回继续。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "speed %.2f",
       "Translated": "速度%.2f",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderFloat"
+      "Source": "library"
     },
     {
       "Original": "elevation %.2f",
       "Translated": "高度%.2f",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderFloat"
+      "Source": "library"
     },
     {
       "Original": "Raise/lower where the model is DRAWN (a draw offset; the actor doesn't move).\nSink a hovering flyer to the floor, or lift a mob that spawned in the ground.",
       "Translated": "当模型为 DRAWN(绘制偏移量;Actor 不移动) 时，调高/调低。\n将悬浮的飞行器沉入地面，或者举起地面上产生的暴徒。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "scale x%.2f",
       "Translated": "比例 x%2f",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderFloat"
+      "Source": "library"
     },
     {
       "Original": "Resize this puppet (0.1x–10x). Non-monster puppets resize live;\na monster's size bakes on the next Apply (redraw).",
       "Translated": "调整这个玩偶的尺寸 (0.1 倍-10 倍)。非怪物玩偶实时调整尺寸;\n一个怪物的大小将在下一个应用中烘焙 (重绘)。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "1.0x##pupscale",
       "Translated": "1.0x##弹出缩放",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Timeline:",
       "Translated": "时间线：",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Play",
       "Translated": "播放",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Stop",
       "Translated": "停止",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Set piece:",
       "Translated": "设置零件：",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Draw weapon",
       "Translated": "拔出武器",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Sheathe weapon",
       "Translated": "剑鞘武器",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Toggle a weapon-drawn battle idle stance — press again to sheathe and return to\nthe neutral idle. (Stop clears it too.)",
       "Translated": "切换武器拔出的战斗闲置姿势——再次按下剑鞘并返回\n中立的闲置状态。(停止也会清除它)",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Die",
       "Translated": "死亡",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Play the death fall, then hold the lying dead pose. Press Stop to clear.",
       "Translated": "演奏死亡坠落，然后保持躺着的死亡姿势。按下停止键清除。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Cycle pose",
       "Translated": "自行车姿势",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Step this puppet through the standing idle-pose variants (normal idle + the three\nidle_inactive clips) and hold it. Clears a held stance first, so a drawn weapon\nreturns to the neutral idle.",
       "Translated": "穿过这个木偶的站立空闲姿势变体 (正常空闲 + 三个\nidle_inactive 夹子) 并持有。首先清除持有姿势，这样就可以拔出武器。\n返回中性空闲状态。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Show weapon",
       "Translated": "显示武器",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Show or hide this puppet's weapon (sheathed-on-body visibility, the /displayarms\naxis). On by default. Distinct from \"Draw weapon\", which holds a weapon-drawn stance.",
       "Translated": "显示或隐藏这个木偶的武器 (身体可见性、/显示武器)\n轴。默认打开。不同于 “抽取武器”，后者保持抽取武器的姿势。",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "(no character handle this frame, try again next frame)",
       "Translated": "(没有字符处理这一帧，再试下一帧)",
       "Context": "MainWindow.DrawLiveSurface",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "No puppets yet",
       "Translated": "还没有木偶",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Spawn a disguised set-piece and it gets its own control row here.",
       "Translated": "产生一个经过伪装的装置，它就会在这里获得自己的控制行。",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Search a mob above",
       "Translated": "搜索上方的暴徒",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Type a name or family in the search box, then press Spawn.",
       "Translated": "在搜索框中键入姓名，然后按下 Spawn 键。",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Or drop a blank dummy",
       "Translated": "或者扔一个空白的假人",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "'Spawn blank dummy' places a plain, non-targetable puppet a step ahead of you.",
       "Translated": "“生出空白假人” 让一个普通的、无法瞄准的木偶先你一步出现。",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Disguise, pose & animate",
       "Translated": "伪装、摆姿势和制作动画",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Pick the puppet in the roster below to move, rotate, resize, freeze and animate it.",
       "Translated": "从下面的名单中选择一个木偶，移动、旋转、调整大小、定格和赋予它动画效果。",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "◆  Puppets are non-targetable set-pieces — a zone change clears them all.",
       "Translated": "◆ 玩偶是无法定位的组件——区域变化就能清除所有玩偶。",
       "Context": "MainWindow.DrawSpawnEmptyState",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "no local player.",
       "Translated": "没有本地玩家。",
       "Context": "MainWindow.CommandRevert",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "reverted to your real model.",
       "Translated": "返回到你的真实模型。",
       "Context": "MainWindow.CommandRevert",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "shown.",
       "Translated": "显示。",
       "Context": "MainWindow.CommandHide",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "hidden, you're invisible now. '/hdm hide' again to show.",
       "Translated": "藏起来，你现在是隐形的。“/hdm hide” 再次展示。",
       "Context": "MainWindow.CommandHide",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "wisp base ",
       "Translated": "微型基础",
       "Context": "MainWindow.CommandWisp",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " isn't in this data drop.",
       "Translated": "不在这个数据丢弃中。",
       "Context": "MainWindow.CommandWisp",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "applied the territorial wisp.",
       "Translated": "应用了领地分支。",
       "Context": "MainWindow.CommandWisp",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "usage: /hdm apply <name or BaseId>",
       "Translated": "使用:/hdm apply <name or BaseId>",
       "Context": "MainWindow.CommandApply",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "no renderable match for '",
       "Translated": "没有可渲染的匹配",
       "Context": "MainWindow.CommandApply",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "applied: ",
       "Translated": "apply:",
       "Context": "MainWindow.CommandApply",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "' to spawn.",
       "Translated": "' 用于生成。",
       "Context": "MainWindow.CommandSpawn",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "select a mob first, or '/hdm spawn <name|BaseId>'.",
       "Translated": "先选择一个小怪，或者 “/hdm spawn <name|BaseId>”。",
       "Context": "MainWindow.CommandSpawn",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "spawn failed (no local player, or the object table is full).",
       "Translated": "spawn 失败 (没有本地玩家，或对象表已满)。",
       "Context": "MainWindow.CommandSpawn",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " puppet (obj#",
       "Translated": "Puppet(obj#",
       "Context": "MainWindow.CommandSpawn",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "). Total puppets: ",
       "Translated": "总共有多个木偶：",
       "Context": "MainWindow.CommandSpawn",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "no puppets spawned.",
       "Translated": "没有木偶诞生。",
       "Context": "MainWindow.CommandDespawnAll",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "despawned ",
       "Translated": "被淘汰的",
       "Context": "MainWindow.CommandDespawnAll",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " puppet(s).",
       "Translated": "puppet(s)。",
       "Context": "MainWindow.CommandDespawnAll",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc dev (LOCAL mirror path, no outbound sync; use /hdm apply to disguise+sync): ver · snap · apply <name|BaseId> · revert · play <timelineId> · spawn <name|BaseId> · despawn <objIndex>. Subject = your own puppet if targeted, else you.",
       "Translated": "ipc dev(LOCAL 镜像路径，无出站同步;使用/hdm app to disguise+sync):ver·snap·app <name|BaseId>·revert·play <timelineId>·spawn <name|BaseId>·despawn <objIndex>。Subject=你自己的傀儡，如果被盯上的话，否则就是你。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "snapshot (own disguise + puppets JSON) written to /xllog.",
       "Translated": "快照 (自己的伪装 +JSON 木偶) 发送至/xllog。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc apply: no local player.",
       "Translated": "ipc apply:无本地玩家。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc apply: no renderable match for '",
       "Translated": "ipc apply:无可渲染匹配",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc revert: no local player.",
       "Translated": "ipc revert:无本地玩家。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc play: no local player.",
       "Translated": "ipc play:无本地玩家。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc play: usage /hdm ipc play <timelineId>",
       "Translated": "ipc play:使用/hdm ipc play <timelineId>",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " timeline ",
       "Translated": "timelineId",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc spawn: no renderable match for '",
       "Translated": "ipc spawn:无可渲染匹配",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc spawn → mirror puppet obj#",
       "Translated": "ipc spawn → 镜像木偶 obj#",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc spawn: native spawn failed.",
       "Translated": "ipc spawn:原生 spawn 失败。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc despawn: usage /hdm ipc despawn <objIndex>",
       "Translated": "ipc despawn:使用/hdm ipc despawn <objIndex>",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc despawn: obj#",
       "Translated": "ipc despawn:obj#",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " isn't a live HDM puppet.",
       "Translated": "不是活生生的 HDM 木偶。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ipc: unknown subcommand '",
       "Translated": "ipc:未知子命令",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "'. Try ",
       "Translated": "‘。尝试",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " ipc help.",
       "Translated": "ipc 帮助。",
       "Context": "MainWindow.CommandIpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "dumped animation + move-intent state to the log (/xllog → 'Anim[…]' lines).",
       "Translated": "将动画 + 移动意图状态转移到日志 (/xllog→“Anim[...]” 行)。",
       "Context": "MainWindow.CommandDiag",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Name",
       "Translated": "名称",
       "Context": "MainWindow.SetupMobColumns",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "library"
     },
     {
       "Original": "Base",
       "Translated": "基础",
       "Context": "MainWindow.SetupMobColumns",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "library"
     },
     {
       "Original": "Model",
       "Translated": "模型",
       "Context": "MainWindow.SetupMobColumns",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "library"
     },
     {
       "Original": "Skel",
       "Translated": "骨架",
       "Context": "MainWindow.SetupMobColumns",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "library"
     },
     {
       "Original": "Add to Favourites",
       "Translated": "添加到收藏夹",
       "Context": "MainWindow.DrawMobRow",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Unfavourite",
       "Translated": "不喜欢的",
       "Context": "MainWindow.DrawMobRow",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Name inferred from the instanced encounter roster (BossMod); this base is\nunnamed in the crowdsourced catalog; its home instance names its boss.",
       "Translated": "从实例化的相遇名单 (BossMod) 中推断出的名称;此基数为\n众包目录中未提及;其家用实例提及其老板。",
       "Context": "MainWindow.DrawMobRow",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "All minions",
       "Translated": "所有手下",
       "Context": "MainWindow.RebuildLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": " (estimated from id range)",
       "Translated": "(根据 id 范围估计)",
       "Context": "MainWindow.RebuildLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": " zones",
       "Translated": "区域",
       "Context": "MainWindow.DrawLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": " NPCs",
       "Translated": "NPC",
       "Context": "MainWindow.DrawLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Minions & summons",
       "Translated": "米尼翁和召唤",
       "Context": "MainWindow.DrawLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": " minions",
       "Translated": "米尼翁",
       "Context": "MainWindow.DrawLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Unknown location",
       "Translated": "地点未知",
       "Context": "MainWindow.DrawLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": " mobs",
       "Translated": "小怪 (Mobs)",
       "Context": "MainWindow.DrawLocationTree",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "(no local player)",
       "Translated": "(无本地玩家)",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "You · ",
       "Translated": "你......",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Restore your real model + size and un-stick any animation, the same Revert as the\nCatalog tab. (\"Reset to Normal\" below only clears a stuck animation; Revert\nalso drops the disguise.)",
       "Translated": "恢复你的真实模型 + 尺寸，并去除所有动画，与 Revert 相同。\n目录选项卡。(“下方重置为正常” 仅清除卡住的动画;Return\n也会去除伪装。)",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Log a one-shot snapshot of the animation + movement-intent state to /xllog\n(BaseOverride, active timeline slots, MoveController forward-speed/heading).\nFire it while a guise is sliding or stuck-walking, then read the 'Anim[…]' lines.",
       "Translated": "将动画 + 运动意图状态的一次性快照记录到/xllog\n(BaseOverride、活动时间线槽、MoveController 正向速度/头部)\n在伪装滑行或僵直行走时发射它，然后阅读 “Anim[...]” 这几行。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Drive",
       "Translated": "驱动",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "You",
       "Translated": "你",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Play animations on yourself.",
       "Translated": "给自己播放动画。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Focused puppet",
       "Translated": "聚焦的木偶",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Play animations on the puppet selected in the Spawn tab's roster.\nIts specials/emotes and the Common list below follow the puppet's own guise.",
       "Translated": "在 “生成” 选项卡中选择的木偶上播放动画。\n它的特色/情感和下面的常见列表都遵循木偶自身的伪装。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Reset to Normal",
       "Translated": "恢复正常",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Unstick: clears a frozen or stuck timeline",
       "Translated": "不粘贴：清除冻结或卡住的时间线",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "unstick",
       "Translated": "解除粘滞",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "Force the character back to a normal, unlocked idle.\nUse this if an animation left it stuck ('operating a siege machine').\nSafe to press anytime.",
       "Translated": "强迫角色回到正常的、未解锁的闲置状态。\n如果动画卡住了 (“操作攻城机器”)，可以使用这个。\n随时可以安全按下。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "PLAYBACK",
       "Translated": "Playback",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Speed",
       "Translated": "速度",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Reset",
       "Translated": "Reset(重置)",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Reset playback speed to 1.00×.",
       "Translated": "将播放速度重置为 1.00 倍。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Elevation",
       "Translated": "高度",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Raise/lower where the model is DRAWN; your character doesn't move.\nNegative = down (sink a hovering gunship/boss to the ground);\npositive = up (lift a mob that spawned in the floor, or stage a flyer).\nRange ±20. Ctrl+click a slider to type an exact value.",
       "Translated": "当模型为 DRAWN 时上移/下移;您的角色不会移动。\n负面=向下 (将悬浮的炮艇/boss 击落地面);\n阳性=向上 (举起在地板上产生的暴民，或者展示一张传单)。\n范围±20。按住 Control 键点击滑块以输入精确值。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Reset elevation to 0 (draw at the character's real height).",
       "Translated": "将仰角重置为 0(按字符的实际高度绘制)。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Hold the animation on a still frame (pins speed 0 every frame).\nUse it to make a boss 'stand perfectly still'. Toggle off to resume.",
       "Translated": "将动画保持在静止帧 (每帧引脚速度为 0)。\n用它让老板 “完全静止不动”。切换回继续。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Advanced · raw timeline id",
       "Translated": "高级·原始时间线 ID",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Play once##raw",
       "Translated": "播放一次##raw",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Stop any looping/one-shot animation and blend back to a normal idle.",
       "Translated": "停止任何循环/单镜头动画，混合回正常的空闲状态。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "filter animations / emotes by name or /command…",
       "Translated": "按名称或/命令过滤动画/表情......",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "library"
     },
     {
       "Original": "Checked: clicking a timeline HOLDS it as a looping base pose (until you press Stop).\nUnchecked: clicking plays it once, then the game blends back to idle.",
       "Translated": "确认：点击时间线并将其保持为循环基线姿势 (直到您按下停止键)。\n未检查：点击播放一次，然后游戏就会恢复到空闲状态。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Emotes",
       "Translated": "表情符号",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "human · ",
       "Translated": "人类·",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "No emotes loaded.",
       "Translated": "没有加载表情符号。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "This mob · ",
       "Translated": "这群暴徒·",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "No catalogued specials for ",
       "Translated": "目录中没有特别优惠",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": ". Try the Common set below.",
       "Translated": "尝试下面的常见设置。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Play the '",
       "Translated": "播放 “",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "' sequence: the intro animation once, then hold its final pose.\nPress \"Reset to Normal\" above to release the hold.",
       "Translated": "序列：开场动画一次，然后保持最后的姿势。\n按下上方的 “重置为正常” 以松开握持。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Disguise yourself from the Catalog to list the mob's animations here.",
       "Translated": "在目录中伪装自己，在这里列出黑帮的动画。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Common · playable by ",
       "Translated": "常见·可通过",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": " of ",
       "Translated": "的",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Common · playables",
       "Translated": "Common · 可玩",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "commonhdr",
       "Translated": "Commonhdr",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "Show all timelines",
       "Translated": "显示所有时间线",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Off: hide pure locomotion & hit-reaction rows (walk/run/swim/knockback)\nthat no skill triggers and your guise already animates itself.\nOn: show every Common timeline, including those, grouped by the chips.",
       "Translated": "关闭：隐藏纯粹的运动和碰撞反应行 (步行/跑步/游泳/击退)\n没有技能触发，你的伪装就已经自动生效了。\nOn:显示所有公共时间线，包括那些按芯片分组的时间线。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Off: show only the base-lane timelines THIS skeleton's animation files\nactually define (idle/attack/dead/turn); the rest are player-body\ndummies that do nothing on a monster.\nOn: show every Common timeline (grouped by the chips) to experiment.",
       "Translated": "关闭：仅显示基线时间线 THIS 骨架的动画文件\n实际定义 (空闲/攻击/死亡/转身);其余部分是玩家身体\n对怪物无能为力的傀儡。\nOn:显示每个通用时间线 (按芯片分组) 进行实验。",
       "Context": "MainWindow.DrawAnimTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Click: play once, then blend back to idle.",
       "Translated": "点击：播放一次，然后混合回空闲状态。",
       "Context": "MainWindow.DrawTimelineButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Click: loop the full animation start→end (Stop to end).",
       "Translated": "点击：循环整个动画 start→end(停止到结束)。",
       "Context": "MainWindow.DrawTimelineButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Click: hold this looping pose (Stop to end). This special only renders while held.",
       "Translated": "点击：保持这个循环姿势 (停止到结束)。这个特殊功能仅在保持时进行渲染。",
       "Context": "MainWindow.DrawTimelineButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "(no matches)",
       "Translated": "(无匹配)",
       "Context": "MainWindow.DrawTimelineButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Theme · accent",
       "Translated": "主题·重音",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Sync accent with HM-Sync",
       "Translated": "使用 HM-Sync 同步重音",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Synced from HM-Sync",
       "Translated": "从 HM-Sync 同步",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "HM-Sync is installed but this version doesn't expose its accent yet. Update HM-Sync. Using HDM's own accent.",
       "Translated": "HM-Sync 已安装，但此版本尚未暴露其口音。更新 HM-Sync。使用 HDM 自己的口音。",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "HM-Sync not detected. Using HDM's own accent. Install HM-Sync to share its accent.",
       "Translated": "未检测到 HM-Sync。使用 HDM 自己的口音。安装 HM-Sync 以共享其口音。",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Using HDM's own accent.",
       "Translated": "使用 HDM 自己的口音。",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "HDM accent (used when not syncing)",
       "Translated": "HDM 重音 (未同步时使用)",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "HDM accent",
       "Translated": "HDM 口音",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Reset to gold",
       "Translated": "重置为金色",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Data · monster catalog",
       "Translated": "数据·怪物目录",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Update monster names from game spawns",
       "Translated": "更新游戏衍生品中的怪物名称",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Off by default. When on, HDM passively samples live enemies while you're in a duty\nand records their names and home instance to fill the catalog's instanced tail.",
       "Translated": "默认关闭。当开启时，HDM 会在您执勤时被动地对活生生的敌人进行采样。\n并记录他们的姓名和家庭实例，以填充目录的实例化尾部。",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Disguise · session",
       "Translated": "伪装·会话",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Clear disguises on map change",
       "Translated": "地图变更上的明显伪装",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Off by default, so a disguise stays on across a zone line (walk between areas in character).\nWhen on, your own look, scale, and elevation revert at every map change, to re-apply by hand.\nLogging out always reverts either way.",
       "Translated": "默认情况下是关闭的，所以伪装会跨越一条区域线 (在角色的区域之间行走) 保持开启状态。\n当开启时，你自己的外观、比例尺和海拔会随着地图的每次变化而恢复，以便手动重新应用。\n注销总是以两种方式恢复。",
       "Context": "MainWindow.DrawConfigTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Open the catalog (no arg). Subcommands: apply <name|BaseId> · spawn <name|BaseId> · despawn · revert · hide · wisp · help.",
       "Translated": "打开目录 (无参数)。子命令:app <name|BaseId>· spawn <name|BaseId>· despawn· revert· hide· wisp· help。",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "library"
     },
     {
       "Original": "commands: apply <name|BaseId> · spawn <name|BaseId> · despawn · revert · hide · wisp · open · (no argument opens the window).",
       "Translated": "命令:app <name|BaseId> · spawn <name|BaseId> · despawn · revert · hide · wisp · open ·(没有参数打开窗口)",
       "Context": "Plugin.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "(timeline)",
       "Translated": "(时间线)",
       "Context": "TimelineIndex.Prettify",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Special ",
       "Translated": "特别",
       "Context": "TimelineIndex.Prettify",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": " (intro)",
       "Translated": "(引言)",
       "Context": "TimelineIndex.Prettify",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-03T19:45:54",
-  "imported": {
-    "archive": "uit-direct-2026-10-03T19-45-43-902Z-7e3ea202-2026-10-03T194554.json",
-    "accepted": 274,
-    "filled": 274,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 274 条 `HDM` 的界面文字译文，已并入 `uit-packs/HDM.json`（下次库更新时对玩家生效）。\n\n其中补缺 274 条、覆盖人工译 0 条。\n\n维护者会抽查；这一条 issue 与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
