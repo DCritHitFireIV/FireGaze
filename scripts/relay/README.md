@@ -14,6 +14,8 @@
 1. GitHub → **Settings → Developer settings → GitHub Apps → New GitHub App**
    - Homepage 随意；**Webhook 取消勾选**（不需要）
    - Permissions → Repository permissions → **Issues: Read and write**（其余全部 No access）
+     · 要用「界面译文直传」（`/uit-submit`，2026-10-04 新增）再加 **Contents: Read and write**；
+       不加也能跑——直传会回 `commit failed`，插件自动回退到旧通道（建 issue）。
    - Where can this app be installed? → **Only on this account**
 2. 创建后：
    - 记下 **App ID**（General 页）
@@ -79,10 +81,46 @@ POST /translate
 - 单次最多 `50` 条 / `20000` 字符（与插件端分批一致）；每 IP 每分钟 120 次、每天 40 万字符——服务端再卡两道，保护额度
 - 关掉这个通道不用改插件：Cloudflare 里删掉 / 改名 `CAIYUN_TOKEN` 即可（端点随即回 `unavailable`）
 
+### 界面译文直传（`/uit-submit`，2026-10-04 新增）
+
+几千条的投稿不再走 issue 粘贴：客户端「一键提交」把**整个 payload** POST 到这里，Worker 直接把它
+提交成 `docs/contributions/inbox/uit-direct-<时间>-<随机>.json`（Git Data API，不需要 base64），
+仓库工作流 `inbox.yml` 的 `direct` 作业接手：校验 → 并入 `uit-packs/<插件>.json`（Source=user）→ 留档 → 通知。
+
+```
+POST /uit-submit          正文就是投稿 JSON（与 issue 里的 ```json 块同一份）
+
+200 {"ok":true, "file":"https://github.com/.../blob/main/docs/...json", "commit":"https://github.com/.../commit/<sha>"}
+400 {"ok":false, "error":"not a uit-contribution payload"}   # 不是界面文字投稿
+413 {"ok":false, "error":"too large"}                          # 超过 4,000,000 字符
+502 {"ok":false, "error":"commit failed"}                     # App 缺 Contents 权限 / 仓库不可写
+```
+
+- 投稿者立刻拿到云端文件/提交链接；**没有人工审核中转**，并入失败也能用 git revert 精确回滚
+  （硬规则仍在 CI：空译文/超长/控制字符/违规词/容器名非法会被跳过并点名）
+- 幂等：同一份内容重复投递由内容指纹拦住；payload 文件带 `importedAt` 后不再重复并入
+- 限流：每 IP 每分钟 6 次
+
+### 公共库下载量（`/library-download`、`/library-counts`，2026-10-04 新增）
+
+译文包本体仍从 raw/镜像下载（CDN 不计下载量）：插件下载成功后向本端点报一条计数，Worker 写进 **KV**，
+定时工作流 `library-counts.yml`（每 6 小时 + 手动）把计数写回 `uit-packs/index.json`，插件界面显示「下载数 N」。
+
+```
+POST /library-download {"plugin":"RotationSolver"}   → 200 {"ok":true,"plugin":"...","downloads":N}
+GET  /library-counts                                 → 200 {"ok":true,"counts":{"RotationSolver":123}}
+```
+
+启用步骤（Cloudflare 后台，一次）：
+1. **Workers & Pages → KV → Create namespace**（名字随意，如 `firegaze-library-counts`）；
+2. 回到 worker → **Settings → Bindings → Add → KV Namespace**，Variable name 填 **`LIBRARY_COUNTS`**，选刚建的命名空间 → Save；
+3. 没绑定也不影响其他功能：计数端点回 `{"ok":false,"error":"counting disabled"}`，插件静默忽略。
+
 ## 防滥用（现状）
 
 - 只收 POST + JSON；正文上限 60KB
 - 每 IP 每分钟 5 次投稿/反馈（实例内存计数，近似限流）；`/translate` 单独计，每分钟 120 次 + 每天 40 万字符
+- `/uit-submit` 每 IP 每分钟 6 次，正文（投稿 JSON）上限 4,000,000 字符；`/library-download` 每 IP 每分钟 60 次
 - 反馈额外检查：长度、链接数、垃圾词、几乎只有链接、重复刷屏；**不过关不建 issue**
 - 发布后 `scripts/feedback_triage.py`（`feedback.yml`）二次复核：垃圾 → 关 issue +`spam` 标；正常 → `feedback` 标 + 回话 +（可选）Server酱
 - 被刷时的处理：吊销 App 私钥（重新生成）或换 PAT、重新部署换个 URL（旧客户端会回退到「打开 issue 页」）
