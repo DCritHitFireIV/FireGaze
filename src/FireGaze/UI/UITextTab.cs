@@ -971,9 +971,6 @@ internal sealed class UITextTab
         var healthyAttributes = FilterHealthy(attributes, e => e.Original, e => e.Translated, e => "属性 · " + UITextQuality.Label(e.Original), problems);
         var uploadable = healthyEntries.Count + healthyResources.Count + healthyAttributes.Count;
 
-        string title = string.Empty;
-        string body = string.Empty;
-        string payload = string.Empty;
         string? noteText = null;
         var noteKind = NoteKind.Bad;
         if (uploadable == 0)
@@ -992,20 +989,7 @@ internal sealed class UITextTab
         }
         else
         {
-            var payloadJSON = System.Text.Json.JsonSerializer.Serialize(
-                new { type = "uit-contribution", plugin = entry.InternalName, entries = healthyEntries, resources = healthyResources, attributes = healthyAttributes },
-                new System.Text.Json.JsonSerializerOptions
-                {
-                    // 不缩进：中继上限 60000，压掉缩进能多装不少条目（内容可读性由 issue 正文的头部说明兼顾）；
-                    // 直传通道不走正文，但保持同一份 payload。
-                    WriteIndented = false,
-                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                });
-            payload = payloadJSON;
-            // 标题里带一个英文 "contributions"：兼容线上旧版 Worker 的关键词校验（2026-10-02 修 HTTP 400 的根因）
-            var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{uploadable}\n\n";
-            body = header + "```json\n" + payloadJSON + "\n```\n";
-            title = $"[译文贡献] {entry.InternalName} · {uploadable} 条";
+            // payload / 正文 / 标题在点「上传」时才拼（RunUpload）——包名是确认框里现填的。
         }
 
         if (problems.Count > 0)
@@ -1019,9 +1003,10 @@ internal sealed class UITextTab
             Entry = entry,
             Total = uploadable,
             Human = healthyEntries.Count(e => e.IsUserSource) + healthyResources.Count(e => e.IsUserSource) + healthyAttributes.Count(e => e.IsUserSource),
-            Title = title,
-            Body = body,
-            Payload = payload,
+            Entries = healthyEntries,
+            Resources = healthyResources,
+            Attributes = healthyAttributes,
+            Author = this.plugin.Config.UITextPackAuthor,
             Problems = problems,
         };
         return new UploadBuildResult(upload, noteText, noteKind);
@@ -1052,17 +1037,20 @@ internal sealed class UITextTab
         return healthy;
     }
 
-    /// <summary>待确认的上传（确认框用）：条数、人工/机器占比、标题与正文、没过体检的清单。</summary>
+    /// <summary>待确认的上传（确认框用）：条数、人工/机器占比、待上传条目、包名、没过体检的清单。</summary>
     private sealed class PendingUpload
     {
         public InstalledPluginEntry Entry = null!;
         public int Total;
         public int Human;
-        public string Title = string.Empty;
-        public string Body = string.Empty;
 
-        /// <summary>投稿 payload（与正文里的 ```json 块同一份）：直传通道用。</summary>
-        public string Payload = string.Empty;
+        /// <summary>待上传的条目（payload 在点「上传」时才拼，因为包名可以现改）。</summary>
+        public List<UITextPackEntry> Entries = [];
+        public List<UITextResourceEntry> Resources = [];
+        public List<UITextAttributeEntry> Attributes = [];
+
+        /// <summary>包名（提交时可改；留空 = 匿名，库里显示为「玩家包 · 短ID」）。</summary>
+        public string Author = string.Empty;
 
         public List<UITextQuality.Problem> Problems = [];
     }
@@ -1075,9 +1063,36 @@ internal sealed class UITextTab
     {
         var entry = upload.Entry;
         var total = upload.Total;
-        var title = upload.Title;
-        var body = upload.Body;
-        var payload = upload.Payload;
+        var author = upload.Author.Trim();
+        if (author.Length > 0)
+        {
+            this.plugin.Config.UITextPackAuthor = author;
+        }
+
+        this.plugin.SaveConfig();
+
+        // payload / 正文 / 标题在这里才拼（包名是确认框里现填的，2026-10-04 用户定）。
+        var payload = System.Text.Json.JsonSerializer.Serialize(
+            new
+            {
+                type = "uit-contribution",
+                plugin = entry.InternalName,
+                packName = author.Length > 0 ? author : null,
+                entries = upload.Entries,
+                resources = upload.Resources,
+                attributes = upload.Attributes,
+            },
+            new System.Text.Json.JsonSerializerOptions
+            {
+                // 不缩进：中继上限 60000，压掉缩进能多装不少条目；直传通道不走正文，但保持同一份 payload。
+                WriteIndented = false,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+            });
+        // 标题里带一个英文 "contributions"：兼容线上旧版 Worker 的关键词校验（2026-10-02 修 HTTP 400 的根因）
+        var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{entry.InternalName}`\n- 条数：{total}\n\n";
+        var body = header + "```json\n" + payload + "\n```\n";
+        var title = $"[译文贡献] {entry.InternalName} · {total} 条";
         var storeDirectory = this.store.DirectoryPath;
         this.uploading.TryAdd(entry.InternalName, true);
         _ = Task.Run(async () =>
@@ -1136,8 +1151,22 @@ internal sealed class UITextTab
         if (upload.Total > 0)
         {
             // 去向与公开性要说清（2026-10-03 UI 评审 P1-3：v4 已修过、本轮改装时丢了）
-            ImGui.TextWrapped("上传后会变成仓库里的一个公开 issue（所有玩家都能看到内容）；中继不可用时会改成打开填好的 GitHub 提交页，需要你在网页上按 Submit。");
+            ImGui.TextWrapped("上传后会在公共译文库里新增一个独立的译文包，所有玩家都能看到内容；中继不可用时回退到打开填好的 GitHub 提交页。");
             ImGui.TextDisabled($"人工 {upload.Human} 条 · 机器 {upload.Total - upload.Human} 条；只上传原文、译文与代码位置，不带账号信息与 key。");
+
+            // 包名（2026-10-04 用户定）：提交时可自取昵称/包名，公共译文库里就以它命名；留空 = 匿名。
+            ImGui.Spacing();
+            ImGui.SetNextItemWidth(280);
+            var author = upload.Author;
+            if (ImGui.InputTextWithHint("###uit-upload-author", "包名，留空就是匿名", ref author, 24))
+            {
+                upload.Author = author;
+            }
+
+            ImGui.SameLine();
+            ImGui.TextDisabled(author.Trim().Length > 0
+                ? $"库里会显示为「{author.Trim()}」"
+                : "留空时显示为「玩家包 · 短ID」");
         }
 
         // 本地检测结果（2026-10-03）：健康才上传，不健康的列出来让用户先修。

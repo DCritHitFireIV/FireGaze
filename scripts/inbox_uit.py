@@ -90,6 +90,17 @@ def submission_fingerprint(plugin: str, payload: dict) -> str:
     return hashlib.sha256("\x00".join(sorted(parts)).encode("utf-8")).hexdigest()[:16]
 
 
+def sanitize_pack_name(raw: str) -> str:
+    """投稿包的显示名（2026-10-04 用户定：提交时可自取昵称/包名，留空 = 匿名）。
+
+    清洗：去控制字符、去会干扰 ImGui 标签的 `###`、压空白、限 24 字；洗不出来就是空（匿名）。
+    """
+    text = re.sub(r"[\x00-\x1f\x7f]+", " ", raw or "")
+    text = text.replace("###", "")
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:24]
+
+
 def find_previous_submission(out_dir: str, fingerprint: str) -> str | None:
     """这份内容是不是已经收过（扫最近的存档，最多 400 个；兼容没 fingerprint 字段的旧存档）。"""
     try:
@@ -179,12 +190,13 @@ def main(argv=None) -> int:
         return fail(args, f"同一份投稿已经收过（{pack_file} 已存在），这次跳过。")
 
     os.makedirs(args.packs_dir, exist_ok=True)
+    pack_name = sanitize_pack_name(str(payload.get("packName") or ""))
     pack = {
         "_meta": {
             "format": 2,
             "updatedAt": time.strftime("%Y-%m-%d"),
             "source": "user",
-            "label": f"玩家包 · {pack_id[5:]}",
+            "label": pack_name or f"玩家包 · {pack_id[5:]}",
         },
         "entries": [],
         "resources": [],
@@ -336,15 +348,20 @@ def main(argv=None) -> int:
 
     detail = (
         f"收录 {accepted} 条（{plugin}）→ 独立译文包 {pack_file}"
-        f"（条目 {len(pack['entries'])} · 资源 {len(pack['resources'])} · 属性 {len(pack['attributes'])}）"
+        + (f"「{pack_name}」" if pack_name else "")
+        + f"（条目 {len(pack['entries'])} · 资源 {len(pack['resources'])} · 属性 {len(pack['attributes'])}）"
     )
     print(detail + f"，留档 {os.path.relpath(archive, REPO_ROOT)}")
     if args.summary_out:
         with open(args.summary_out, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(f"issue #{args.issue}：{accepted} 条 {plugin} 界面文字译文（已收为独立包 {pack_file}）")
+            handle.write(
+                f"issue #{args.issue}：{accepted} 条 {plugin} 界面文字译文"
+                + (f"（玩家包「{pack_name}」）" if pack_name else "（已收为独立包）")
+            )
     if args.comment_out:
         lines = [
-            f"收到 {accepted} 条 `{plugin}` 的界面文字译文，已收为**独立译文包** `uit-packs/{pack_file}`。",
+            f"收到 {accepted} 条 `{plugin}` 的界面文字译文，已收为**独立译文包** `uit-packs/{pack_file}`"
+            + (f"，包名「{pack_name}」。" if pack_name else "。"),
             "",
             "大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。",
             "",

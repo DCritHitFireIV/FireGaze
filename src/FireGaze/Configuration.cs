@@ -274,6 +274,12 @@ public sealed class Configuration : IPluginConfiguration
     public List<string> UITextLikedPacks { get; set; } = [];
 
     /// <summary>
+    ///     投稿署名（包名，2026-10-04 用户定）：提交时可在确认框里改；留空 = 匿名（库里显示为「玩家包 · 短ID」）。
+    /// </summary>
+    [JsonProperty("UITextPackAuthor")]
+    public string UITextPackAuthor { get; set; } = string.Empty;
+
+    /// <summary>
     ///     大模型翻译时带上随插件打包的 FF14 官方译名（术语表）。
     /// </summary>
     [JsonProperty("UITextUseGlossary")]
