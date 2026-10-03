@@ -8,13 +8,14 @@ namespace FireGaze.Internal.Configuration;
 /// </summary>
 internal static class ConfigurationMigrator
 {
-    internal const int LatestVersion = 3;
+    internal const int LatestVersion = 4;
 
     private static readonly FrozenDictionary<int, ConfigMigratorBase> Migrators =
         new ConfigMigratorBase[]
         {
             new V1ToV2ConfigurationMigrator(),
             new V2ToV3ConfigurationMigrator(),
+            new V3ToV4ConfigurationMigrator(),
         }.ToFrozenDictionary(migrator => migrator.FromVersion);
 
     /// <summary>

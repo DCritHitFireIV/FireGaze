@@ -673,7 +673,7 @@ internal sealed class UITextEditorWindow : Window
             if (targets > 100 && this.plugin.Config.UITextChannel is "auto" or "google" or "mymemory")
             {
                 hint += "\n注意：这两条免 key 通道按 IP 限流（Google 会 429、MyMemory 额度只有几千字符/天），而且是一条一条翻。" +
-                        "\n上百条建议改用「彩云小译」（免费额度、一次 50 条）或「大模型（自填 key）」。";
+                        "\n上百条建议改用「FireGaze 公共彩云」（不用 key）、「彩云小译」或「大模型（自填 key）」。";
             }
 
             ImGui.SetTooltip(hint);

@@ -31,6 +31,7 @@ internal static class UITextChannelFactory
     /// </summary>
     public static string Describe(Configuration config) => config.UITextChannel switch
     {
+        "public-caiyun" => "FireGaze 公共彩云小译（维护者提供；额度用完前免费）",
         "caiyun" => "彩云小译（免费额度：新号 100 万字 / 一个月）",
         "google" => "免费：Google 免 key 端点（需要代理）",
         "mymemory" => "免费：MyMemory（免 key，质量一般）",
@@ -47,6 +48,9 @@ internal static class UITextChannelFactory
         error = null;
         switch (config.UITextChannel)
         {
+            case "public-caiyun":
+                return new PublicCaiyunChannel();
+
             case "caiyun":
             {
                 var token = DPAPI.UnprotectFromBase64(config.UITextCaiyunKeyProtected);

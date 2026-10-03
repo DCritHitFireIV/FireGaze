@@ -210,7 +210,7 @@ public sealed class Configuration : IPluginConfiguration
     ///     <c>llm</c>（自填 key 的大模型）/ <c>deepl</c>。
     /// </summary>
     [JsonProperty("UITextChannel")]
-    public string UITextChannel { get; set; } = "auto";
+    public string UITextChannel { get; set; } = "public-caiyun";
 
     /// <summary>
     ///     大模型预设：<c>deepseek</c>（带关思考开关）/ <c>custom</c>（任何 OpenAI 兼容服务）。

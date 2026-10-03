@@ -1768,7 +1768,7 @@ internal sealed class UITextTab
         // 选了免费：先确认过一次「知道它慢」
         if (IsFreeChannel(config.UITextChannel) && !config.UITextFreeWarned)
         {
-            this.pendingStart = new PendingStart { Entry = entry, AwaitingFreeConfirm = true, Choice = 2 };
+            this.pendingStart = new PendingStart { Entry = entry, AwaitingFreeConfirm = true, Choice = 3 };
             this.pendingNeedsOpen = true;
             return;
         }
@@ -1784,16 +1784,16 @@ internal sealed class UITextTab
         var hasLlmKey = DPAPI.UnprotectFromBase64(config.UITextLLMKeyProtected) is not null;
         var hasCaiyunKey = DPAPI.UnprotectFromBase64(config.UITextCaiyunKeyProtected) is not null;
 
-        // 默认选一个「现在就能用」的：存了 key 才预选大模型，否则预选免费（新手没有 key，预选大模型必然卡住）
+        // 默认选「现在就能用」的：公共彩云不用 key、不花钱，直接预选；用户自己的通道选择优先。
         this.pendingStart = new PendingStart
         {
             Entry = entry,
             Choice = config.UITextChannel switch
             {
-                "caiyun" => 1,
-                "google" or "mymemory" => 2,
-                "llm" => 0,
-                _ => hasLlmKey ? 0 : hasCaiyunKey ? 1 : 2,
+                "llm" => 1,
+                "caiyun" => 2,
+                "google" or "mymemory" => 3,
+                _ => 0,
             },
         };
         this.firstRunError = string.Empty;
@@ -2323,7 +2323,7 @@ internal sealed class UITextTab
         ImGui.Spacing();
 
         var config = this.plugin.Config;
-        if (ImGui.RadioButton("大模型（推荐）：速度最快、质量最好，用你自己的 API key", pending.Choice == 0) && pending.Choice != 0)
+        if (ImGui.RadioButton("FireGaze 公共彩云（推荐）：维护者提供的免费额度，不用填 key，一次能翻 50 条", pending.Choice == 0) && pending.Choice != 0)
         {
             pending.Choice = 0;
             pending.SecretInput = string.Empty;
@@ -2335,12 +2335,12 @@ internal sealed class UITextTab
         if (pending.Choice == 0)
         {
             ImGui.Indent(24f);
-            this.DrawSecretRow(pending, "llm", config.UITextLLMKeyProtected, "粘贴大模型 API key（DeepSeek 就到 platform.deepseek.com → API keys 创建一个）");
-            ImGui.TextDisabled("翻译会带上随插件打包的 FF14 官方译名（地名 / 副本 / 技能 / 状态…）当术语表，专有名词更准。");
+            ImGui.TextDisabled("由 FireGaze 维护者自费提供，密钥只存服务端；在额度用完 / 密钥失效前放给大家用。");
+            ImGui.TextDisabled("公共额度不可用时会自动改用免费通道并在结果里说明；也可以随时在下面选别的通道。");
             ImGui.Unindent(24f);
         }
 
-        if (ImGui.RadioButton("彩云小译：免费额度（新号 100 万字 / 一个月），一次能翻 50 条", pending.Choice == 1) && pending.Choice != 1)
+        if (ImGui.RadioButton("大模型：速度最快、质量最好，用你自己的 API key", pending.Choice == 1) && pending.Choice != 1)
         {
             pending.Choice = 1;
             pending.SecretInput = string.Empty;
@@ -2352,13 +2352,12 @@ internal sealed class UITextTab
         if (pending.Choice == 1)
         {
             ImGui.Indent(24f);
-            ImGui.TextDisabled("到「彩云科技开放平台」注册 → 应用管理里创建应用 → 页面右边「管理」→「访问控制」里复制 token 填这里。");
-            this.DrawSecretRow(pending, "caiyun", config.UITextCaiyunKeyProtected, "粘贴彩云小译 token");
-            ImGui.TextDisabled("FF14 官方译名术语表只在「大模型」这一档生效，免费接口带不了。");
+            this.DrawSecretRow(pending, "llm", config.UITextLLMKeyProtected, "粘贴大模型 API key（DeepSeek 就到 platform.deepseek.com → API keys 创建一个）");
+            ImGui.TextDisabled("翻译会带上随插件打包的 FF14 官方译名（地名 / 副本 / 技能 / 状态…）当术语表，专有名词更准。");
             ImGui.Unindent(24f);
         }
 
-        if (ImGui.RadioButton("免费 Google / MyMemory：不用 key，但很慢、随时可能被限流", pending.Choice == 2) && pending.Choice != 2)
+        if (ImGui.RadioButton("彩云小译：免费额度（新号 100 万字 / 一个月），一次能翻 50 条", pending.Choice == 2) && pending.Choice != 2)
         {
             pending.Choice = 2;
             pending.SecretInput = string.Empty;
@@ -2368,6 +2367,24 @@ internal sealed class UITextTab
         }
 
         if (pending.Choice == 2)
+        {
+            ImGui.Indent(24f);
+            ImGui.TextDisabled("到「彩云科技开放平台」注册 → 应用管理里创建应用 → 页面右边「管理」→「访问控制」里复制 token 填这里。");
+            this.DrawSecretRow(pending, "caiyun", config.UITextCaiyunKeyProtected, "粘贴彩云小译 token");
+            ImGui.TextDisabled("FF14 官方译名术语表只在「大模型」这一档生效，免费接口带不了。");
+            ImGui.Unindent(24f);
+        }
+
+        if (ImGui.RadioButton("免费 Google / MyMemory：不用 key，但很慢、随时可能被限流", pending.Choice == 3) && pending.Choice != 3)
+        {
+            pending.Choice = 3;
+            pending.SecretInput = string.Empty;
+            pending.TestStatus = string.Empty;
+            pending.TestGeneration++;
+            this.firstRunError = string.Empty;
+        }
+
+        if (pending.Choice == 3)
         {
             ImGui.Indent(24f);
             ImGui.TextDisabled("FF14 官方译名术语表只在「大模型」这一档生效，免费接口带不了。");
@@ -2385,8 +2402,8 @@ internal sealed class UITextTab
 
         var ready = pending.Choice switch
         {
-            0 => DPAPI.UnprotectFromBase64(config.UITextLLMKeyProtected) is not null || pending.SecretInput.Trim().Length > 0,
-            1 => DPAPI.UnprotectFromBase64(config.UITextCaiyunKeyProtected) is not null || pending.SecretInput.Trim().Length > 0,
+            1 => DPAPI.UnprotectFromBase64(config.UITextLLMKeyProtected) is not null || pending.SecretInput.Trim().Length > 0,
+            2 => DPAPI.UnprotectFromBase64(config.UITextCaiyunKeyProtected) is not null || pending.SecretInput.Trim().Length > 0,
             _ => true,
         };
 
@@ -2474,7 +2491,12 @@ internal sealed class UITextTab
         var config = this.plugin.Config;
         var probe = new Configuration
         {
-            UITextChannel = pending.Choice == 0 ? "llm" : "caiyun",
+            UITextChannel = pending.Choice switch
+            {
+                1 => "llm",
+                2 => "caiyun",
+                _ => "public-caiyun",
+            },
             UITextLLMProvider = config.UITextLLMProvider,
             UITextLLMBaseURL = config.UITextLLMBaseURL,
             UITextLLMModel = config.UITextLLMModel,
@@ -2483,10 +2505,10 @@ internal sealed class UITextTab
         };
 
         var input = pending.SecretInput.Trim();
-        if (input.Length > 0)
+        if (input.Length > 0 && pending.Choice is 1 or 2)
         {
             var protectedValue = DPAPI.ProtectToBase64(input);
-            if (pending.Choice == 0)
+            if (pending.Choice == 1)
             {
                 probe.UITextLLMKeyProtected = protectedValue;
             }
@@ -2546,24 +2568,24 @@ internal sealed class UITextTab
     private void ConfirmFirstRun(PendingStart pending)
     {
         // 只校验，不写盘：真正写配置推到「确认过免费很慢」或直接开始时（取消不能静默改通道）
-        if (pending.Choice == 0
+        if (pending.Choice == 1
             && DPAPI.UnprotectFromBase64(this.plugin.Config.UITextLLMKeyProtected) is null
             && pending.SecretInput.Trim().Length == 0)
         {
-            this.firstRunError = "还没填大模型 API key：把 key 粘到上面，或改选「免费 Google / MyMemory」。";
+            this.firstRunError = "还没填大模型 API key：把 key 粘到上面，或改选「FireGaze 公共彩云」。";
             return;
         }
 
-        if (pending.Choice == 1
+        if (pending.Choice == 2
             && DPAPI.UnprotectFromBase64(this.plugin.Config.UITextCaiyunKeyProtected) is null
             && pending.SecretInput.Trim().Length == 0)
         {
-            this.firstRunError = "还没填彩云小译 token：把 token 粘到上面，或改选「免费 Google / MyMemory」。";
+            this.firstRunError = "还没填彩云小译 token：把 token 粘到上面，或改选「FireGaze 公共彩云」。";
             return;
         }
 
         this.firstRunError = string.Empty;
-        if (pending.Choice == 2 && !this.plugin.Config.UITextFreeWarned)
+        if (pending.Choice == 3 && !this.plugin.Config.UITextFreeWarned)
         {
             pending.AwaitingFreeConfirm = true;
             this.pendingNeedsOpen = true;
@@ -2582,7 +2604,7 @@ internal sealed class UITextTab
     {
         var config = this.plugin.Config;
         var input = pending.SecretInput.Trim();
-        if (pending.Choice == 0)
+        if (pending.Choice == 1)
         {
             if (input.Length > 0)
             {
@@ -2604,7 +2626,7 @@ internal sealed class UITextTab
                 config.UITextLLMModel = "deepseek-flash";
             }
         }
-        else if (pending.Choice == 1)
+        else if (pending.Choice == 2)
         {
             if (input.Length > 0)
             {
@@ -2617,9 +2639,13 @@ internal sealed class UITextTab
 
             config.UITextChannel = "caiyun";
         }
-        else
+        else if (pending.Choice == 3)
         {
             config.UITextChannel = "google";
+        }
+        else
+        {
+            config.UITextChannel = "public-caiyun";
         }
 
         config.UITextChannelChosen = true;
@@ -2651,7 +2677,7 @@ internal sealed class UITextTab
             : "免费接口是一条一条翻的，每个词条约 0.8 秒。");
         ImGui.TextWrapped("Google 免 key 端点随时可能限流（429），MyMemory 每天只有约 5000 词。");
         ImGui.Spacing();
-        ImGui.TextDisabled("大模型（几秒翻完）和彩云小译（免费额度）都快得多；「翻译设置…」里随时能改。");
+        ImGui.TextDisabled("「FireGaze 公共彩云」（不用 key）「彩云小译」和「大模型」都快得多；「翻译设置…」里随时能改。");
         ImGui.TextDisabled("点下去就会开始翻译、改写插件 DLL、并自动重载这个插件；原文件会先备份，随时能「还原原文」。");
         ImGui.Separator();
         if (ImGui.Button("仍要使用免费接口", new Vector2(170, 0)))
@@ -2665,9 +2691,22 @@ internal sealed class UITextTab
         }
 
         ImGui.SameLine();
-        if (ImGui.Button("改用大模型…", new Vector2(130, 0)))
+        if (ImGui.Button("改用公共彩云…", new Vector2(130, 0)))
         {
             pending.Choice = 0;
+            pending.SecretInput = string.Empty;
+            pending.TestStatus = string.Empty;
+            pending.TestGeneration++;
+            pending.AwaitingFreeConfirm = false;
+            this.pendingNeedsOpen = true;
+            UiHelpers.ClosePopupAndEnd();
+            return;
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Button("改用大模型…", new Vector2(120, 0)))
+        {
+            pending.Choice = 1;
             pending.SecretInput = string.Empty;
             pending.TestStatus = string.Empty;
             pending.TestGeneration++;

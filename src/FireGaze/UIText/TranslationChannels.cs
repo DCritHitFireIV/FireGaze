@@ -359,6 +359,259 @@ internal sealed class CaiyunTranslationChannel : IUITextChannel
 }
 
 /// <summary>
+///     FireGaze 公共彩云小译：请求走中继（<c>/translate</c>），彩云 token 只存服务端——插件不持有密钥。
+/// </summary>
+/// <remarks>
+///     维护者自费提供的免费额度；额度用完 / 密钥失效 / 中继到不了 时自动回退到免费通道，
+///     并在结果里留一条说明——默认通道不能因为公共额度过期就把用户的「一键汉化」卡死。
+///     通道本身不读任何配置：开关只在服务端（Cloudflare 删掉 CAIYUN_TOKEN 即停用）。
+/// </remarks>
+internal sealed class PublicCaiyunChannel : IUITextChannel
+{
+    /// <summary>中继地址（与「一键提交」同一个 Worker）。</summary>
+    public const string RelayEndpoint = "https://firegaze-relay.yuoonmail.workers.dev/translate";
+
+    private static readonly HttpClient Client = CreateClient();
+
+    public string Name => "public-caiyun";
+
+    public string Description => "FireGaze 公共彩云小译（维护者提供；额度用完前免费）";
+
+    public async Task<UITextTranslateResult> TranslateAsync(
+        IReadOnlyList<UITextTranslateItem> items,
+        Action<int, int>? progress,
+        CancellationToken token)
+    {
+        var result = new UITextTranslateResult();
+        var batches = CaiyunTranslationChannel.SplitBatches(items);
+        var done = 0;
+        for (var b = 0; b < batches.Count; b++)
+        {
+            if (token.IsCancellationRequested)
+            {
+                result.Error = "已取消";
+                return result;
+            }
+
+            var batch = batches[b];
+            var fallbackReason = await this.ProcessBatchAsync(batch, result, token).ConfigureAwait(false);
+            if (fallbackReason is not null)
+            {
+                if (fallbackReason == "已取消")
+                {
+                    result.Error = "已取消";
+                    return result;
+                }
+
+                // 公共通道不可用：从本批开头开始的条目交给免费通道兜底，别把默认通道卡死。
+                var remaining = items.Skip(done).ToList();
+                await FallbackToFreeAsync(remaining, fallbackReason, result, token).ConfigureAwait(false);
+                progress?.Invoke(items.Count, items.Count);
+                return result;
+            }
+
+            done += batch.Count;
+            progress?.Invoke(done, items.Count);
+            if (b < batches.Count - 1)
+            {
+                try
+                {
+                    // 中继端限流是每分钟 120 批：这里 0.6s 一批（约 100 批/分），刚好在额度内。
+                    await Task.Delay(600, token).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException)
+                {
+                    result.Error = "已取消";
+                    return result;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>单批：返回 null = 继续；返回字符串 = 不可用原因（交给免费通道兜底）。</summary>
+    private async Task<string?> ProcessBatchAsync(
+        List<UITextTranslateItem> batch,
+        UITextTranslateResult result,
+        CancellationToken token)
+    {
+        var texts = batch.Select(item => UITextText.ForTranslation(item.Text)).ToList();
+        for (var attempt = 0; ; attempt++)
+        {
+            string body;
+            try
+            {
+                body = await this.PostAsync(texts, token).ConfigureAwait(false);
+            }
+            catch (TaskCanceledException) when (token.IsCancellationRequested)
+            {
+                return "已取消";
+            }
+            catch (TaskCanceledException)
+            {
+                return "中继请求超时";
+            }
+            catch (HttpRequestException e)
+            {
+                return "网络到不了中继（" + e.Message + "）";
+            }
+
+            var (targets, problem) = ParseRelayResponse(body, batch.Count);
+            if (problem is not null)
+            {
+                // 限流 / 上游抖动：稍等重试一次；其余（额度用完、网络、请求被拒）直接走兜底。
+                if ((problem is "请求太频繁" or "彩云服务端出错") && attempt < 1)
+                {
+                    try
+                    {
+                        await Task.Delay(1000, token).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        return "已取消";
+                    }
+
+                    continue;
+                }
+
+                return problem;
+            }
+
+            for (var i = 0; i < batch.Count; i++)
+            {
+                var value = targets![i];
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    result.Failed.Add(batch[i].Text);
+                }
+                else
+                {
+                    result.Translated[batch[i].Text] = value!;
+                }
+            }
+
+            return null;
+        }
+    }
+
+    /// <summary>把剩下的条目交给免费通道（Google → MyMemory），把结果并回同一份 result。</summary>
+    private static async Task FallbackToFreeAsync(
+        IReadOnlyList<UITextTranslateItem> remaining,
+        string reason,
+        UITextTranslateResult result,
+        CancellationToken token)
+    {
+        if (remaining.Count == 0)
+        {
+            return;
+        }
+
+        result.Note($"公共彩云不可用（{reason}），已自动改用免费通道；公共额度恢复前可在「翻译设置」里换回别的通道");
+        try
+        {
+            var free = new FreeTranslationChannel(googleFirst: UITextChannelFactory.GoogleReachable);
+            var fallback = await free.TranslateAsync(remaining, null, token).ConfigureAwait(false);
+            foreach (var (key, value) in fallback.Translated)
+            {
+                result.Translated[key] = value;
+            }
+
+            foreach (var failed in fallback.Failed)
+            {
+                result.Failed.Add(failed);
+            }
+
+            if (fallback.Error is not null)
+            {
+                result.Note("免费通道：" + fallback.Error);
+            }
+        }
+        catch (Exception e) when (e is not OperationCanceledException)
+        {
+            result.Error = $"公共彩云不可用（{reason}），免费通道也失败：{e.Message}";
+        }
+    }
+
+    /// <summary>解析中继返回：成功拿 <c>target</c>；失败拿 <c>error</c> 翻成人话。</summary>
+    private static (List<string?>? Targets, string? Problem) ParseRelayResponse(string json, int expected)
+    {
+        try
+        {
+            using var document = JsonDocument.Parse(json);
+            var root = document.RootElement;
+            if (root.TryGetProperty("target", out var target) && target.ValueKind == JsonValueKind.Array)
+            {
+                var values = new List<string?>();
+                foreach (var item in target.EnumerateArray())
+                {
+                    values.Add(item.ValueKind == JsonValueKind.String ? item.GetString() : null);
+                }
+
+                while (values.Count < expected)
+                {
+                    values.Add(null);
+                }
+
+                return (values, null);
+            }
+
+            var error = root.TryGetProperty("error", out var err) && err.ValueKind == JsonValueKind.String ? err.GetString() : null;
+            var detail = root.TryGetProperty("detail", out var det) && det.ValueKind == JsonValueKind.String ? det.GetString() : null;
+            return (null, DescribeRelayError(error, detail));
+        }
+        catch (JsonException)
+        {
+            return (null, "中继返回不是合法 JSON（可能被网关拦了）");
+        }
+    }
+
+    private static string DescribeRelayError(string? error, string? detail) => error switch
+    {
+        "unavailable" => "公共额度已用完 / 已停用",
+        "daily-limit" => "这台机器今天的公共额度用完了（明天再试，或在「翻译设置」里换通道）",
+        "too many requests" => "请求太频繁",
+        "too large" or "bad source" => "请求被拒绝",
+        "upstream" or "upstream-unreachable" => "彩云服务端出错",
+        _ => detail is { Length: > 0 } ? $"中继错误：{error ?? "未知"}（{detail}）" : $"中继错误：{error ?? "未知"}",
+    };
+
+    private async Task<string> PostAsync(IReadOnlyList<string> texts, CancellationToken token)
+    {
+        var payload = JsonSerializer.Serialize(new
+        {
+            source = texts,
+            trans_type = "auto2zh",
+            detect = true,
+            media = "text",
+            request_id = "firegaze",
+        });
+
+        using var request = new HttpRequestMessage(HttpMethod.Post, RelayEndpoint)
+        {
+            Content = new StringContent(payload, Encoding.UTF8, "application/json"),
+        };
+
+        using var response = await Client.SendAsync(request, token).ConfigureAwait(false);
+        var body = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode && string.IsNullOrWhiteSpace(body))
+        {
+            // 空返回体（比如网关直接 5xx）也要给个能看懂的原因
+            return $"{{\"error\":\"upstream\",\"detail\":\"HTTP {(int)response.StatusCode}\"}}";
+        }
+
+        return body;
+    }
+
+    private static HttpClient CreateClient()
+    {
+        var client = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("FireGaze/1.0 (+https://github.com/DCritHitFireIV/FireGaze)");
+        return client;
+    }
+}
+
+/// <summary>
 ///     免费、免 key 通道：优先 Google 免 key 端点（需要能连上 Google，通常是挂了代理），
 ///     连不上或**被限流**就换 MyMemory。
 /// </summary>

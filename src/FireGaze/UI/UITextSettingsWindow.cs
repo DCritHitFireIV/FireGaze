@@ -47,6 +47,7 @@ internal sealed class UITextSettingsWindow : Window
 
         var channels = new (string Key, string Label)[]
         {
+            ("public-caiyun", "FireGaze 公共彩云"),
             ("auto", "免费·自动"),
             ("caiyun", "彩云小译"),
             ("google", "Google 免 key"),
@@ -58,7 +59,8 @@ internal sealed class UITextSettingsWindow : Window
         {
             if (i > 0)
             {
-                ImGui.SameLine();
+                // 通道多了以后一行放不下（窗口最小 520 宽）：放不下就换行，不要溢出裁剪区。
+                UiHelpers.SameLineOrWrap(ImGui.GetFrameHeight() + ImGui.CalcTextSize(channels[i].Label).X, 8f);
             }
 
             if (ImGui.RadioButton(channels[i].Label, string.Equals(config.UITextChannel, channels[i].Key, StringComparison.Ordinal)))
@@ -82,12 +84,19 @@ internal sealed class UITextSettingsWindow : Window
             }
         }
 
+        if (string.Equals(config.UITextChannel, "public-caiyun", StringComparison.Ordinal))
+        {
+            ImGui.TextDisabled(
+                "由 FireGaze 维护者自费提供的公共彩云小译额度：免费、不用填 key，一次最多 50 条、几百条几秒翻完。\n" +
+                "在额度用完 / 密钥失效前放给大家用；不可用时会自动改用免费通道并在结果里说明，也可以随时换成下面的其他通道。");
+        }
+
         if (config.UITextChannel is "auto" or "google" or "mymemory")
         {
             ImGui.TextDisabled(
                 "免费通道按 IP 限流：Google 会返回 429、MyMemory 每天只有约 5000 词，而且是一条一条翻（每个词条约 0.8 秒）。\n" +
-                "想免费又要快，用「彩云小译」：注册后到「应用管理」创建应用，页面右边「管理」→「访问控制」里复制 token 填进来，" +
-                "新用户送 100 万字（一个月），一次能提交 50 条、几百条几秒翻完。");
+                "想免费又要快，用「FireGaze 公共彩云」（不用 key）或「彩云小译」（注册后到「应用管理」创建应用，页面右边「管理」→「访问控制」里复制 token 填进来，" +
+                "新用户送 100 万字（一个月），一次能提交 50 条、几百条几秒翻完）。");
         }
 
         if (config.UITextUseGlossary && !string.Equals(config.UITextChannel, "llm", StringComparison.Ordinal))
@@ -298,6 +307,7 @@ internal sealed class UITextSettingsWindow : Window
     /// <summary>每个通道一句话：要不要 key、额度、快慢（盲评 CF-08：别让用户跨窗口背参数）。</summary>
     private static string ChannelHint(string key) => key switch
     {
+        "public-caiyun" => "FireGaze 公共彩云：维护者自费提供的免费额度，不用填 key；额度用完 / 密钥失效或网络到不了时会自动回退免费通道。",
         "auto" => "免费·自动：按可用性依次尝试免 key 接口，失败会自动换下一个；按 IP 限流，条目多时慢。",
         "caiyun" => "彩云小译：一次最多 50 条，新号送 100 万字 / 一个月；需要自填 token（免费注册）。",
         "google" => "Google 免 key：不用 key，逐条翻译、随时可能被限流（429）。",
