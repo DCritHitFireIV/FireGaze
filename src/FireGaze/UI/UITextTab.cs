@@ -1428,6 +1428,13 @@ internal sealed class UITextTab
             return;
         }
 
+        // 实时计数（2026-10-04）：索引里的下载数/喜欢数最多 6 小时才被定时工作流写一次；
+        // 直接问中继拿现数（约 1 分钟内的值），5 分钟节流、失败静默。
+        if (library.ShouldRefreshCounts)
+        {
+            _ = Task.Run(() => library.RefreshCountsAsync(CancellationToken.None));
+        }
+
         if (!index.Plugins.TryGetValue(plugin.InternalName, out var entry))
         {
             ImGui.TextDisabled("云端还没有这个插件的译文包。");
@@ -1445,7 +1452,7 @@ internal sealed class UITextTab
             };
             var count = pack.Entries + pack.Resources + pack.Attributes;
             var downloads = pack.Downloads > 0 ? $"下载数 {pack.Downloads}" : "下载数 —";
-            var likes = pack.Likes > 0 ? $"👍 {pack.Likes}" : "👍 —";
+            var likes = pack.Likes > 0 ? $"喜欢 {pack.Likes}" : "喜欢 —";
             var key = plugin.InternalName + "|" + (pack.File ?? pack.ID ?? "library");
             var packID = string.IsNullOrWhiteSpace(pack.ID) ? "library" : pack.ID!;
             var likedKey = plugin.InternalName + "|" + packID;
@@ -1464,16 +1471,16 @@ internal sealed class UITextTab
 
             ImGui.EndDisabled();
 
-            // 👍：每个包独立计数（中继 KV → 定时写回索引）；本机赞过就变灰，不重复计。
+            // 「喜欢」：每个包独立计数（中继 KV → 定时写回索引）；本机赞过就变灰，不重复计。
             ImGui.SameLine();
             ImGui.BeginDisabled(liked);
-            if (ImGui.Button($"👍###like-{packID}") && !liked)
+            if (ImGui.Button($"喜欢###like-{packID}") && !liked)
             {
                 this.plugin.Config.UITextLikedPacks.Add(likedKey);
                 this.plugin.SaveConfig();
                 ContributeRelay.ReportLibraryLike(plugin.InternalName, packID);
                 pack.Likes += 1; // 乐观 +1；下次索引刷新会拿到真值
-                this.cloudNotes[key] = "已点 👍";
+                this.cloudNotes[key] = "已喜欢";
                 this.rowsDirty = true;
             }
 
@@ -1481,8 +1488,8 @@ internal sealed class UITextTab
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip(liked
-                    ? "你已经赞过这个包了（每台机器记一次）"
-                    : "喜欢这个译文包？点一下，👍 数会计进云端统计，大家都看得到。");
+                    ? "你已经喜欢过这个包了"
+                    : "喜欢这个译文包？点一下，喜欢数会计进云端统计，大家都看得到。");
             }
             if (this.cloudDownloading.Contains(key))
             {
