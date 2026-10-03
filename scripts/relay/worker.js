@@ -1,11 +1,14 @@
-// FireGaze 中继（Cloudflare Worker）v3
+// FireGaze 中继（Cloudflare Worker）v4
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
 //
-// 三类投稿：
+// 通道：
 //   · 译文投稿（正文带 ```json + contributions / uit-contribution）——原有通道
 //   · 用户反馈（type=feedback，正文带「### FireGaze 反馈」）——2026-10-03 新增
+//   · 公共彩云小译代理（POST /translate）——2026-10-03 新增：
+//       插件不持有彩云 token；token 只存服务端（机密 CAIYUN_TOKEN）。
+//       额度用完 / 密钥失效 / 未配置时回 { ok:false, error:'unavailable' }，插件端自动回退免费通道。
 //
 // 鉴权（二选一，客户端不持有任何凭据）：
 //   ① GitHub App（推荐，「机器人」身份，不用任何个人 token）：
@@ -14,12 +17,22 @@
 //   ② GITHUB_TOKEN（机密）：fine-grained PAT，仅本仓库、仅 Issues: Read and write（兼容旧部署）
 //
 // 环境变量：REPO（可选，默认 DCritHitFireIV/FireGaze）
+// 机密（/translate 用）：CAIYUN_TOKEN——彩云小译访问令牌；不配就只关闭这个端点，其他功能照常。
 
 const REPO_DEFAULT = 'DCritHitFireIV/FireGaze';
 const MAX_BODY = 60000; // GitHub issue 正文上限 65536，留点余量
-const PER_IP_LIMIT = 5; // 每个 IP 每分钟最多 5 次（实例内存计数，近似限流）
+const PER_IP_LIMIT = 5; // 每个 IP 每分钟最多 5 次投稿/反馈（实例内存计数，近似限流）
 const WINDOW_MS = 60_000;
 const FEEDBACK_MARKER = '### FireGaze 反馈';
+
+// 公共彩云代理（/translate）
+const CAIYUN_URL = 'https://api.interpreter.caiyunai.com/v1/translator';
+const TRANSLATE_MAX_ITEMS = 50; // 与插件端同一批上限（实测 52 就 413）
+const TRANSLATE_MAX_CHARS = 20000; // 单次请求原文总长上限
+const TRANSLATE_PER_IP_LIMIT = 120; // 每分钟每 IP 的翻译请求上限（插件端 0.6s 一批，刚好在上限内）
+const TRANSLATE_DAILY_CHARS = 400000; // 每 IP 每天最多翻多少字符（实例内存计数，近似限流，防止单机刷完额度）
+
+const charUsage = new Map(); // `${ip}|${yyyy-mm-dd}` -> 已用字符数
 
 const hits = new Map();
 
@@ -36,15 +49,81 @@ function json(obj, status = 200) {
   });
 }
 
-function allow(ip) {
+function allow(ip, limit = PER_IP_LIMIT, bucket = 'inbox') {
   const now = Date.now();
-  const rec = hits.get(ip);
+  const key = `${bucket}|${ip}`;
+  const rec = hits.get(key);
   if (!rec || now - rec.start > WINDOW_MS) {
-    hits.set(ip, { start: now, n: 1 });
+    hits.set(key, { start: now, n: 1 });
     return true;
   }
   rec.n += 1;
-  return rec.n <= PER_IP_LIMIT;
+  return rec.n <= limit;
+}
+
+/// 每 IP 每日字符预算（实例内存计数，只在单个 isolate 内准确——够挡「一台机器刷完额度」）。
+function chargeChars(ip, chars) {
+  const day = new Date().toISOString().slice(0, 10);
+  const key = `${ip}|${day}`;
+  const used = charUsage.get(key) ?? 0;
+  if (used + chars > TRANSLATE_DAILY_CHARS) {
+    return false;
+  }
+  charUsage.set(key, used + chars);
+  return true;
+}
+
+/// 公共彩云代理：插件把原文送过来，本 Worker 用服务端 token 转发给彩云，原样回 target。
+/// 只有「额度用完 / 密钥失效 / 未配置」才回 unavailable——插件据此回退到免费通道。
+async function handleTranslate(data, env, ip) {
+  if (!allow(ip, TRANSLATE_PER_IP_LIMIT, 'translate')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  const token = env.CAIYUN_TOKEN;
+  if (!token) {
+    return json({ ok: false, error: 'unavailable', detail: 'service disabled' }, 503);
+  }
+
+  const source = Array.isArray(data.source) ? data.source.map((s) => String(s ?? '')) : [];
+  if (source.length === 0 || source.length > TRANSLATE_MAX_ITEMS) {
+    return json({ ok: false, error: 'bad source', detail: `1..${TRANSLATE_MAX_ITEMS}` }, 400);
+  }
+
+  const total = source.reduce((sum, s) => sum + s.length, 0);
+  if (total > TRANSLATE_MAX_CHARS) {
+    return json({ ok: false, error: 'too large', detail: `${total} chars` }, 413);
+  }
+
+  if (!chargeChars(ip, total)) {
+    return json({ ok: false, error: 'daily-limit', detail: `over ${TRANSLATE_DAILY_CHARS} chars today` }, 429);
+  }
+
+  const transType = data.trans_type === 'zh2en' ? 'zh2en' : 'auto2zh';
+  let res;
+  try {
+    res = await fetch(CAIYUN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-authorization': `token ${token}`,
+      },
+      body: JSON.stringify({ source, trans_type: transType, detect: true, media: 'text', request_id: 'firegaze' }),
+    });
+  } catch {
+    return json({ ok: false, error: 'upstream-unreachable' }, 502);
+  }
+
+  const text = await res.text();
+  if (!res.ok) {
+    // 401/403 = token 失效或额度用完；429/5xx = 限流 / 上游抖动
+    if (res.status === 401 || res.status === 403) {
+      return json({ ok: false, error: 'unavailable', detail: `caiyun ${res.status}` }, 503);
+    }
+    return json({ ok: false, error: 'upstream', detail: `caiyun ${res.status}` }, 502);
+  }
+
+  return new Response(text, { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 }
 
 /// 反馈正文的垃圾检测：命中则返回原因，否则 null。
@@ -133,8 +212,9 @@ async function githubToken(env, repo) {
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
     if (request.method === 'GET') {
-      return json({ ok: true, service: 'firegaze-relay', version: 3 });
+      return json({ ok: true, service: 'firegaze-relay', version: 4 });
     }
 
     if (request.method !== 'POST') {
@@ -142,15 +222,21 @@ export default {
     }
 
     const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
-    if (!allow(ip)) {
-      return json({ ok: false, error: 'too many requests' }, 429);
-    }
 
     let data;
     try {
       data = await request.json();
     } catch {
       return json({ ok: false, error: 'invalid json' }, 400);
+    }
+
+    // ── 公共彩云小译代理 ──
+    if (url.pathname === '/translate' || url.pathname === '/v1/translate') {
+      return handleTranslate(data, env, ip);
+    }
+
+    if (!allow(ip)) {
+      return json({ ok: false, error: 'too many requests' }, 429);
     }
 
     const title = String(data.title ?? '').trim().slice(0, 160);

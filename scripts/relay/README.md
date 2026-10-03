@@ -58,10 +58,31 @@ POST /
 422 {"ok":false,"error":"spam-blocked","detail":"too many links"}
 ```
 
+### 公共彩云小译代理（2026-10-03 新增）
+
+插件「翻译设置」里的「FireGaze 公共彩云」通道走这里：**彩云 token 只存服务端**（Cloudflare 机密 `CAIYUN_TOKEN`），
+插件不持有密钥，用户抓不到。额度用完 / 密钥失效 / 未配置时回 `unavailable`，插件端自动回退到免费通道。
+
+```
+POST /translate
+{"source": ["Enable the plugin", "Open settings"], "trans_type": "auto2zh"}
+```
+
+```
+200 彩云原样返回：{"rc":0, "target": ["启用插件", "打开设置"]}
+503 {"ok":false, "error":"unavailable", "detail":"caiyun 401"}    # 额度用完 / 密钥失效 / 未配置 → 插件回退免费通道
+502 {"ok":false, "error":"upstream", "detail":"caiyun 500"}       # 彩云抖动 / 网关错误
+429 {"ok":false, "error":"too many requests"}                       # 每 IP 每分钟 120 次
+429 {"ok":false, "error":"daily-limit"}                             # 这台机器今天超过 40 万字符（实例内存计数，近似）
+```
+
+- 单次最多 `50` 条 / `20000` 字符（与插件端分批一致）；每 IP 每分钟 120 次、每天 40 万字符——服务端再卡两道，保护额度
+- 关掉这个通道不用改插件：Cloudflare 里删掉 / 改名 `CAIYUN_TOKEN` 即可（端点随即回 `unavailable`）
+
 ## 防滥用（现状）
 
 - 只收 POST + JSON；正文上限 60KB
-- 每 IP 每分钟 5 次（实例内存计数，近似限流）
+- 每 IP 每分钟 5 次投稿/反馈（实例内存计数，近似限流）；`/translate` 单独计，每分钟 120 次 + 每天 40 万字符
 - 反馈额外检查：长度、链接数、垃圾词、几乎只有链接、重复刷屏；**不过关不建 issue**
 - 发布后 `scripts/feedback_triage.py`（`feedback.yml`）二次复核：垃圾 → 关 issue +`spam` 标；正常 → `feedback` 标 + 回话 +（可选）Server酱
 - 被刷时的处理：吊销 App 私钥（重新生成）或换 PAT、重新部署换个 URL（旧客户端会回退到「打开 issue 页」）
