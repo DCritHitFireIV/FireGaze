@@ -101,6 +101,67 @@ def sanitize_pack_name(raw: str) -> str:
     return text[:24]
 
 
+def _one_line(text: str, limit: int = 120) -> str:
+    flat = " ".join(str(text or "").split())
+    return flat[:limit] + ("…" if len(flat) > limit else "")
+
+
+def build_review(plugin: str, pack_name: str, pack_file: str, pack: dict, repo: str, when: str) -> dict:
+    """机器人整理给维护者抽查的 issue 内容（标题 + 正文）。
+
+    2026-10-04 用户要求：投稿除了入库，还要在 issue 里留一份可检查的样本——
+    issue 正文有长度上限（65536），所以只列**一部分**原文→译文（均匀抽样，带包名）。
+    """
+
+    def spread(items: list, render) -> list[str]:
+        if not items:
+            return []
+        count = min(len(items), 120)
+        step = max(1, len(items) // count)
+        picked = [items[i] for i in range(0, len(items), step)][:count]
+        return [render(item) for item in picked]
+
+    rows: list[str] = []
+    rows += spread(pack.get("entries") or [], lambda e: f"{_one_line(e.get('Original'))} → {_one_line(e.get('Translated'))}")
+    rows += spread(pack.get("resources") or [], lambda r: f"[资源] {_one_line(r.get('Key'))} → {_one_line(r.get('Translated'))}")
+    rows += spread(pack.get("attributes") or [], lambda a: f"[属性] {_one_line(a.get('Original'))} → {_one_line(a.get('Translated'))}")
+
+    # 长度预算：issue 正文上限 65536，给头部/说明留足余量
+    kept: list[str] = []
+    used = 0
+    for row in rows:
+        if used + len(row) + 1 > 40000:
+            break
+        kept.append(row)
+        used += len(row) + 1
+
+    entries = pack.get("entries") or []
+    resources = pack.get("resources") or []
+    attributes = pack.get("attributes") or []
+    total = len(entries) + len(resources) + len(attributes)
+    title = f"[收稿] {plugin} · {pack_name or '匿名'} · {total} 条"
+    link = f"https://github.com/{repo}/blob/main/uit-packs/{pack_file}"
+    body = "\n".join([
+        "### FireGaze 收稿（机器人整理，供抽查）",
+        "",
+        f"- 插件：`{plugin}`",
+        f"- 包名：{pack_name or '匿名'}",
+        f"- 收录：{total} 条（条目 {len(entries)} · 资源 {len(resources)} · 属性 {len(attributes)}）",
+        f"- 译文包：[{pack_file}]({link})",
+        f"- 投稿时间：{when}",
+        "",
+        "**已经自动并入公共译文库**，玩家「一键汉化」时能直接用到；下面只是均匀抽出的样本，完整内容见上面的包文件。",
+        "",
+        f"样本 {len(kept)} 行 / 共 {total} 条：",
+        "",
+        "```",
+        *(kept or ["（没有可展示的条目）"]),
+        "```",
+        "",
+    ])
+    return {"title": title, "body": body}
+
+
 def find_previous_submission(out_dir: str, fingerprint: str) -> str | None:
     """这份内容是不是已经收过（扫最近的存档，最多 400 个；兼容没 fingerprint 字段的旧存档）。"""
     try:
@@ -160,6 +221,7 @@ def main(argv=None) -> int:
     parser.add_argument("--out-dir", default=INBOX_DIR)
     parser.add_argument("--comment-out", default="", help="回在 issue 上的话写到这里")
     parser.add_argument("--summary-out", default="", help="一行摘要（手机通知用）")
+    parser.add_argument("--review-out", default="", help="抽查 issue 内容（{title, body}）写到这里；直传通道用")
     args = parser.parse_args(argv)
 
     body = open(args.body, encoding="utf-8", errors="replace").read()
@@ -352,6 +414,13 @@ def main(argv=None) -> int:
         + f"（条目 {len(pack['entries'])} · 资源 {len(pack['resources'])} · 属性 {len(pack['attributes'])}）"
     )
     print(detail + f"，留档 {os.path.relpath(archive, REPO_ROOT)}")
+
+    if args.review_out:
+        # 抽查 issue（2026-10-04）：入库之外再给维护者一份可检查的样本（含包名）
+        repo = os.environ.get("GITHUB_REPOSITORY") or "DCritHitFireIV/FireGaze"
+        review = build_review(plugin, pack_name, pack_file, pack, repo, time.strftime("%Y-%m-%d %H:%M"))
+        save_json(args.review_out, review)
+        print(f"抽查 issue 内容已写出：{args.review_out}（{review['title']}）")
     if args.summary_out:
         with open(args.summary_out, "w", encoding="utf-8", newline="\n") as handle:
             handle.write(

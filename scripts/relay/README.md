@@ -85,7 +85,8 @@ POST /translate
 
 几千条的投稿不再走 issue 粘贴：客户端「一键提交」把**整个 payload** POST 到这里，Worker 直接把它
 提交成 `docs/contributions/inbox/uit-direct-<时间>-<随机>.json`（Git Data API，不需要 base64），
-仓库工作流 `inbox.yml` 的 `direct` 作业接手：校验 → 并入 `uit-packs/<插件>.json`（Source=user）→ 留档 → 通知。
+仓库工作流 `inbox.yml` 的 `direct` 作业接手：校验 → 并入 `uit-packs/<插件>@user-<指纹>.json`（Source=user）→
+留档 → **另开一条 `[收稿]` issue 供维护者抽查**（机器人整理：包名 + 原文→译文样本，均匀抽样 ≤120 行）→ 通知。
 
 ```
 POST /uit-submit          正文就是投稿 JSON（与 issue 里的 ```json 块同一份）

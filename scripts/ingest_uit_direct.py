@@ -54,6 +54,7 @@ def main(argv=None) -> int:
     parser.add_argument("--inbox-dir", default=os.path.join(REPO_ROOT, "docs", "contributions", "inbox"))
     parser.add_argument("--packs-dir", default=os.path.join(REPO_ROOT, "uit-packs"))
     parser.add_argument("--summary-out", default="")
+    parser.add_argument("--reviews-dir", default="", help="抽查 issue 内容（每份投稿一个 {title, body} JSON）写到这里；配了才写")
     args = parser.parse_args(argv)
 
     if not os.path.isdir(args.inbox_dir):
@@ -101,7 +102,12 @@ def main(argv=None) -> int:
             with open(body_path, "w", encoding="utf-8", newline="\n") as handle:
                 handle.write(wrap_payload(raw, plugin, total))
 
-            inbox_uit.main([
+            review_path = ""
+            if args.reviews_dir:
+                os.makedirs(args.reviews_dir, exist_ok=True)
+                review_path = os.path.join(args.reviews_dir, tag + ".json")
+
+            inbox_args = [
                 "--issue", issue_tag,
                 "--body", body_path,
                 "--author", "匿名直传",
@@ -109,7 +115,10 @@ def main(argv=None) -> int:
                 "--out-dir", args.inbox_dir,
                 "--comment-out", comment_path,
                 "--summary-out", summary_path,
-            ])
+            ]
+            if review_path:
+                inbox_args += ["--review-out", review_path]
+            inbox_uit.main(inbox_args)
 
             summary = ""
             if os.path.exists(summary_path):

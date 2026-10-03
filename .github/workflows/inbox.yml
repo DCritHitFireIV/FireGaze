@@ -148,7 +148,7 @@ jobs:
 
       - name: 并入直传投稿
         run: |
-          python scripts/ingest_uit_direct.py --summary-out "$RUNNER_TEMP/summary.txt"
+          python scripts/ingest_uit_direct.py --summary-out "$RUNNER_TEMP/summary.txt" --reviews-dir "$RUNNER_TEMP/reviews"
 
       - name: 提交存档与译文包
         run: |
@@ -161,6 +161,17 @@ jobs:
           fi
           git commit -m "chore: 并入玩家直传的界面文字投稿"
           git push || { git pull --rebase && git push; }
+
+      - name: 把抽查内容发成 issue（机器人）
+        # 2026-10-04 用户要求：入库之外，再开一条 issue 供抽查（含包名 + 原文→译文样本）
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -d "$RUNNER_TEMP/reviews" ]; then
+            echo "这次没有新收稿（没有抽查内容）"
+            exit 0
+          fi
+          python scripts/post_review_issues.py --reviews-dir "$RUNNER_TEMP/reviews" || echo "发 issue 失败（不影响已并入的译文）"
 
       - name: 通知维护者（配了 secret 才发）
         env:
