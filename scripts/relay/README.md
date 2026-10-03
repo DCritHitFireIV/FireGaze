@@ -22,6 +22,8 @@
 3. Cloudflare Worker → Settings → Variables and Secrets：
    - 变量：`APP_ID`、`INSTALLATION_ID`（可选，不填则每次按仓库查）、`REPO`
    - 机密：`APP_PRIVATE_KEY` = 整个 `.pem` 内容（含 `-----BEGIN/END-----`）
+     · ⚠️ GitHub 下载的私钥是 **PKCS#1**（`BEGIN RSA PRIVATE KEY`），而 Workers 的 WebCrypto 只认 **PKCS#8**（`BEGIN PRIVATE KEY`）——粘贴前先转换，否则 worker 会回 `server auth failed`：
+       `openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in 原始.pem -out 转换后.pem`（值里的空格/换行代码会自动清理，换行符 CRLF/LF 都不影响）
 
 这样 issue 的作者是 `<app 名>[bot]`，轮换/离职都不涉及个人账号。
 
