@@ -63,7 +63,6 @@ public sealed class Plugin : IDalamudPlugin
     private Task<RepoAudit.InstalledPluginsIndex>? iconWarmUpIndexTask;
     private DateTime iconWarmUpRetryAfter = DateTime.MinValue;
     private bool iconWarmUpRequested;
-    private bool installerDefaultsNotice;
     private bool startupInitDone;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
@@ -80,9 +79,6 @@ public sealed class Plugin : IDalamudPlugin
         {
             pluginInterface.SavePluginConfig(Config);
         }
-
-        // 迁移前版本 < 3 的用户提示一次「安装器的两项功能已改为默认关」
-        installerDefaultsNotice = previousConfigVersion < 3;
 
         ConfigDirectory = pluginInterface.GetPluginConfigDirectory();
         Directory.CreateDirectory(ConfigDirectory);
@@ -244,12 +240,6 @@ public sealed class Plugin : IDalamudPlugin
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {Table.Count} 条；" +
                 $"汉化 = {(Config.TranslateEnabled ? "开" : "关")}");
             Log.Information("[FireGaze] 页签顺序：插件汉化 / 简介汉化 / 仓库体检 / 插件安装器（参与翻译是独立窗口）");
-
-            if (installerDefaultsNotice)
-            {
-                installerDefaultsNotice = false;
-                Chat.Print("[FireGaze] 安装器增强的两项功能已改为默认关闭，可在 /firegaze → 插件安装器 里打开。");
-            }
 
             // 一次性更新公告（1.3.27）：只在玩家更新后第一次加载时播报，之后不再出现
             if (!Config.UITextFeatureAnnounced)

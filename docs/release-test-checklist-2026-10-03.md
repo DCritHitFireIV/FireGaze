@@ -1,4 +1,4 @@
-# FireGaze 发布测试清单（1.3.0.27 候选）
+# FireGaze 发布测试清单（1.3.0.28 候选）
 
 > 2026-10-03 起草。测试方式：`[ ]` 逐条打勾；发现异常请连同时间点告诉我（日志：`pluginConfigs\FireGaze\logs\firegaze-YYYYMMDD.log`）。
 > 本轮含三个新功能：**DLL 内嵌 JSON 本地化**（HaselTweaks/LeveHelper）、**一键上传本地体检**、**中文插件名单扩充与措辞**。
@@ -8,7 +8,7 @@
 
 > 三条都是「补丁已经生效、等你确认效果」的项；任何一条有问题请先停下告诉我，其余可以慢慢测。
 
-- [ ] **① 确认版本**：重启游戏（或热重载）后，插件列表里 FireGaze 显示 **1.3.0.27**；`/firegaze` 能打开主窗口。
+- [ ] **① 确认版本**：重启游戏（或热重载）后，插件列表里 FireGaze 显示 **1.3.0.28**；`/firegaze` 能打开主窗口。
 - [ ] **② HaselTweaks / LeveHelper（新功能：内嵌 JSON 本地化）**——已在 05:18 / 05:19 打过补丁：
   - [ ] 打开 HaselTweaks 设置窗口：标题/按钮是中文（标题栏按钮悬停「打开设置 / 关闭设置」）；
   - [ ] 随便挑个 tweak（如 Always Face Camera）：名字显示「始终面向镜头」，说明栏是中文；
@@ -18,10 +18,10 @@
 
 ## 0. 启动与加载
 
-- [ ] 重启游戏（或热重载）后，插件列表里 FireGaze 版本显示 **1.3.0.27**，无加载报错
+- [ ] 重启游戏（或热重载）后，插件列表里 FireGaze 版本显示 **1.3.0.28**，无加载报错
 - [ ] `/firegaze` 打开主窗口；页签顺序：插件汉化 → 简介汉化 → 仓库体检 → 插件安装器
 - [ ] 默认页签是「插件汉化」
-- [ ] 日志文件 `pluginConfigs\FireGaze\logs\` 有本次启动记录（`[启动] FireGaze v1.3.0.27 已加载`）
+- [ ] 日志文件 `pluginConfigs\FireGaze\logs\` 有本次启动记录（`[启动] FireGaze v1.3.0.28 已加载`）
 
 ## 1. 插件汉化 · 列表与筛选
 
@@ -143,4 +143,4 @@
 - [ ] 版本号、`pluginmaster.json`、README/简介三处一致（动简介需你点头）
 - [ ] `check_manifest.py` 通过；产物无 Harmony/MonoMod 字样
 - [ ] 公开仓需要同步：`feedback.yml`、`scripts/feedback_triage.py`、relay worker v3（部署到 Cloudflare）
-- [ ] tag `v1.3.0.27` 由你确认后再推
+- [ ] tag `v1.3.0.28` 由你确认后再推
