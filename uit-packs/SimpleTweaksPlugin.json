@@ -1084,31 +1084,31 @@
     {
       "Original": "Disable Camera Culling",
       "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling",
-      "Translated": "封技相机剔除",
+      "Translated": "禁用相机剔除",
       "Source": "library"
     },
     {
       "Original": "Disable the hiding of characters when the camera gets too close.",
       "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling",
-      "Translated": "当相机过于靠近时，封技隐藏角色。",
+      "Translated": "当相机过于靠近时，禁用角色隐藏。",
       "Source": "library"
     },
     {
       "Original": "Disable culling in Group Pose",
       "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling/Configs::DisableInGroupPose",
-      "Translated": "在集体动作中封技剔除",
+      "Translated": "在集体动作中禁用剔除",
       "Source": "library"
     },
     {
       "Original": "Disable culling outside Group Pose",
       "Context": "[属性] TweakConfigOptionAttribute SimpleTweaksPlugin.Tweaks.DisableCameraCulling/Configs::DisableOutsideGroupPose",
-      "Translated": "在集体动作外封技剔除",
+      "Translated": "在集体动作外禁用剔除",
       "Source": "library"
     },
     {
       "Original": "Disable Click Targeting",
       "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableClickTargeting",
-      "Translated": "封技点击选定目标",
+      "Translated": "禁用点击选定目标",
       "Source": "library"
     },
     {
@@ -1120,13 +1120,13 @@
     {
       "Original": "Added option to only disable targeting players.",
       "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.DisableClickTargeting",
-      "Translated": "新增选项，仅封技对玩家的选定目标。",
+      "Translated": "新增仅禁用选定玩家目标的选项。",
       "Source": "library"
     },
     {
       "Original": "Disable Mount Music Volume Change",
       "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableMountVolumeChange",
-      "Translated": "封技坐骑音乐音量变化",
+      "Translated": "禁用坐骑音乐音量变化",
       "Source": "library"
     },
     {
@@ -1138,13 +1138,13 @@
     {
       "Original": "Disable Mouse Camera Control",
       "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableMouseCameraControl",
-      "Translated": "封技鼠标控制相机",
+      "Translated": "禁用鼠标控制相机",
       "Source": "library"
     },
     {
       "Original": "Disables all control of the camera using the mouse.",
       "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.DisableMouseCameraControl",
-      "Translated": "封技所有使用鼠标控制相机的功能。",
+      "Translated": "禁用所有使用鼠标控制相机的操作。",
       "Source": "library"
     },
     {
@@ -1156,7 +1156,7 @@
     {
       "Original": "Disable Title Screen Movie",
       "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.DisableTitleScreenMovie",
-      "Translated": "封技标题画面影片",
+      "Translated": "禁用标题画面影片",
       "Source": "library"
     },
     {
@@ -1198,7 +1198,7 @@
     {
       "Original": "Adds a 'text' subcommand for emotes when emotelog is disabled.  /yes text",
       "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.EmoteLogSubcommand",
-      "Translated": "当情感动作日志封技时，为情感动作添加 'text' 子命令。 /yes text",
+      "Translated": "当表情记录禁用时，为表情添加 'text' 子命令。 /yes text",
       "Source": "library"
     },
     {
@@ -2140,13 +2140,13 @@
     {
       "Original": "Auto Refresh Material List",
       "Context": "[属性] TweakNameAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoRefreshMaterialList",
-      "Translated": "自动醒神材料列表",
+      "Translated": "自动刷新材料列表",
       "Source": "library"
     },
     {
       "Original": "Automatically refreshes the raw material list and recipe tree windows.",
       "Context": "[属性] TweakDescriptionAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.AutoRefreshMaterialList",
-      "Translated": "自动醒神原材料列表和配方树窗口。",
+      "Translated": "自动刷新原材料列表和配方树窗口。",
       "Source": "library"
     },
     {
@@ -2704,7 +2704,7 @@
     {
       "Original": "Properly resets hotbar state on unload/disable",
       "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.FadeUnavailableActions",
-      "Translated": "在卸载/封技时正确重置热键栏状态",
+      "Translated": "在卸载/禁用时正确重置热键栏状态",
       "Source": "library"
     },
     {
@@ -2992,7 +2992,7 @@
     {
       "Original": "Tweak has been disabled for everyone and marked as experimental.",
       "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.ImprovedCraftingLog",
-      "Translated": "该调整已对所有人封技并标记为实验性。",
+      "Translated": "该调整已对所有人禁用，并标记为实验性。",
       "Source": "library"
     },
     {
@@ -3562,7 +3562,7 @@
     {
       "Original": "Add option to disable on primary target",
       "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
-      "Translated": "添加在攻击目标上封技的选项",
+      "Translated": "新增在攻击目标上禁用的选项",
       "Source": "library"
     },
     {
@@ -3586,7 +3586,7 @@
     {
       "Original": "Fixed disable on primary and focus target",
       "Context": "[属性] ChangelogAttribute SimpleTweaksPlugin.Tweaks.UiAdjustment.TargetCastbarCountdown",
-      "Translated": "修复在攻击目标和焦点目标上封技的问题",
+      "Translated": "修复在攻击目标和焦点目标上的禁用",
       "Source": "library"
     },
     {
