@@ -1445,11 +1445,15 @@ internal sealed class UITextTab
             };
             var count = pack.Entries + pack.Resources + pack.Attributes;
             var downloads = pack.Downloads > 0 ? $"下载数 {pack.Downloads}" : "下载数 —";
+            var likes = pack.Likes > 0 ? $"👍 {pack.Likes}" : "👍 —";
             var key = plugin.InternalName + "|" + (pack.File ?? pack.ID ?? "library");
+            var packID = string.IsNullOrWhiteSpace(pack.ID) ? "library" : pack.ID!;
+            var likedKey = plugin.InternalName + "|" + packID;
+            var liked = this.plugin.Config.UITextLikedPacks.Contains(likedKey);
 
             ImGui.TextUnformatted($"{label}（{source}）");
             ImGui.SameLine();
-            ImGui.TextDisabled($"{count} 条 · {pack.UpdatedAt ?? "—"} · {downloads}");
+            ImGui.TextDisabled($"{count} 条 · {pack.UpdatedAt ?? "—"} · {downloads} · {likes}");
 
             ImGui.SameLine();
             ImGui.BeginDisabled(this.cloudDownloading.Contains(key));
@@ -1459,6 +1463,27 @@ internal sealed class UITextTab
             }
 
             ImGui.EndDisabled();
+
+            // 👍：每个包独立计数（中继 KV → 定时写回索引）；本机赞过就变灰，不重复计。
+            ImGui.SameLine();
+            ImGui.BeginDisabled(liked);
+            if (ImGui.Button($"👍###like-{packID}") && !liked)
+            {
+                this.plugin.Config.UITextLikedPacks.Add(likedKey);
+                this.plugin.SaveConfig();
+                ContributeRelay.ReportLibraryLike(plugin.InternalName, packID);
+                pack.Likes += 1; // 乐观 +1；下次索引刷新会拿到真值
+                this.cloudNotes[key] = "已点 👍";
+                this.rowsDirty = true;
+            }
+
+            ImGui.EndDisabled();
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+            {
+                ImGui.SetTooltip(liked
+                    ? "你已经赞过这个包了（每台机器记一次）"
+                    : "喜欢这个译文包？点一下，👍 数会计进云端统计，大家都看得到。");
+            }
             if (this.cloudDownloading.Contains(key))
             {
                 ImGui.SameLine();
@@ -1488,6 +1513,7 @@ internal sealed class UITextTab
         var packStore = this.store;
         var library = this.plugin.TextLibrary;
         var internalName = plugin.InternalName;
+        var packID = string.IsNullOrWhiteSpace(pack.ID) ? "library" : pack.ID!;
         var label = string.IsNullOrWhiteSpace(pack.Label) ? pack.ID ?? "译文包" : pack.Label!;
         var source = pack.Source switch
         {
@@ -1502,7 +1528,7 @@ internal sealed class UITextTab
             string? error = null;
             try
             {
-                fetched = await library.FetchPackFileAsync(fileName, CancellationToken.None).ConfigureAwait(false);
+                fetched = await library.FetchPackFileAsync(fileName, internalName, packID, CancellationToken.None).ConfigureAwait(false);
                 if (fetched is not null)
                 {
                     preview = UITextFlow.PreviewMerge(packStore.Load(internalName), fetched);

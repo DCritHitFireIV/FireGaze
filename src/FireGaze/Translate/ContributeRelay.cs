@@ -24,6 +24,9 @@ internal static class ContributeRelay
     /// <summary>公共库下载计数端点（发完即忘）。</summary>
     private const string LibraryDownloadEndpoint = URL + "library-download";
 
+    /// <summary>公共库点👍端点（按包计数）。</summary>
+    private const string LibraryLikeEndpoint = URL + "library-like";
+
     /// <summary>正文上限（GitHub issue 上限 65536 的安全余量）。</summary>
     public const int MaxBody = 60000;
 
@@ -124,27 +127,35 @@ internal static class ContributeRelay
     ///     由中继写进 KV，定时工作流再写回 uit-packs/index.json（玩家能看到「下载数」）。
     ///     中继没配计数 / 网络不通一律静默——计数绝不能影响玩家。
     /// </summary>
-    public static void ReportLibraryDownload(string internalName)
+    public static void ReportLibraryDownload(string internalName, string packID = "library") =>
+        PostLibraryCounter(LibraryDownloadEndpoint, "下载计数", internalName, packID);
+
+    /// <summary>给一个译文包点👍（发完即忘；与下载数一样按包统计，写回索引后人人可见）。</summary>
+    public static void ReportLibraryLike(string internalName, string packID = "library") =>
+        PostLibraryCounter(LibraryLikeEndpoint, "点赞", internalName, packID);
+
+    private static void PostLibraryCounter(string endpoint, string what, string internalName, string packID)
     {
         if (string.IsNullOrWhiteSpace(internalName))
         {
             return;
         }
 
+        var pack = string.IsNullOrWhiteSpace(packID) ? "library" : packID;
         _ = Task.Run(async () =>
         {
             try
             {
                 using var content = new StringContent(
-                    JsonSerializer.Serialize(new { plugin = internalName }),
+                    JsonSerializer.Serialize(new { plugin = internalName, pack }),
                     Encoding.UTF8,
                     "application/json");
-                using var response = await Client.PostAsync(LibraryDownloadEndpoint, content).ConfigureAwait(false);
-                Plugin.Log?.Verbose($"[内部文本] 下载计数上报：{internalName} → HTTP {(int)response.StatusCode}");
+                using var response = await Client.PostAsync(endpoint, content).ConfigureAwait(false);
+                Plugin.Log?.Verbose($"[内部文本] {what}上报：{internalName}@{pack} → HTTP {(int)response.StatusCode}");
             }
             catch (Exception)
             {
-                // 计数是尽力而为，绝不打扰玩家
+                // 计数/点赞都是尽力而为，绝不打扰玩家
             }
         });
     }

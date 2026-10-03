@@ -116,6 +116,10 @@ internal sealed class UITextLibraryPack
     /// <summary>下载量（中继统计；还没有统计时是 0，界面会显示「—」）。</summary>
     [JsonPropertyName("downloads")]
     public int Downloads { get; set; }
+
+    /// <summary>👍 数（中继统计；还没有统计时是 0，界面会显示「—」）。</summary>
+    [JsonPropertyName("likes")]
+    public int Likes { get; set; }
 }
 
 /// <summary>
@@ -175,13 +179,31 @@ internal sealed class UITextLibrary
 
         try
         {
-            var libraryPack = await this.FetchPackAsync(internalName, token).ConfigureAwait(false);
-            if (libraryPack is null)
+            var index = await this.FetchIndexAsync(token).ConfigureAwait(false);
+            if (index is null || !index.Plugins.TryGetValue(internalName, out var entry))
             {
                 return 0;
             }
 
-            return pack.MergeLibrary(libraryPack);
+            // 2026-10-04 多包模型：基础包先合，玩家包按更新时间**从新到旧**合——
+            // MergeLibrary 的「玩家译不被顶掉」规则让先合入者获胜，正好等价于「后传的覆盖前面传的」。
+            var packs = entry.EffectivePacks();
+            var ordered = packs.Where(item => !IsUserPack(item)).ToList();
+            ordered.AddRange(packs.Where(IsUserPack).OrderByDescending(item => item.UpdatedAt ?? string.Empty));
+
+            var merged = 0;
+            foreach (var item in ordered)
+            {
+                var file = string.IsNullOrWhiteSpace(item.File) ? internalName + ".json" : item.File!;
+                var packID = string.IsNullOrWhiteSpace(item.ID) ? "library" : item.ID!;
+                var libraryPack = await this.FetchPackFileAsync(file, internalName, packID, token).ConfigureAwait(false);
+                if (libraryPack is not null)
+                {
+                    merged += pack.MergeLibrary(libraryPack);
+                }
+            }
+
+            return merged;
         }
         catch (OperationCanceledException)
         {
@@ -195,100 +217,17 @@ internal sealed class UITextLibrary
         }
     }
 
-    /// <summary>
-    ///     拉取（或从缓存读）一个插件的译文包；仓库里没有这个包时返回 null。
-    /// </summary>
-    public async Task<UITextPack?> FetchPackAsync(string internalName, CancellationToken token)
-    {
-        var safeName = new string(internalName.Where(c => char.IsLetterOrDigit(c) || c is '_' or '-' or '.').ToArray());
-        if (safeName.Length == 0)
-        {
-            return null;
-        }
-
-        var cached = Path.Combine(this.cacheDirectory, safeName + ".json");
-        var useCache = File.Exists(cached) && (DateTime.Now - File.GetLastWriteTime(cached)) < PackTTL;
-        if (useCache)
-        {
-            var localPack = LoadPackFile(cached);
-            if (localPack is not null)
-            {
-                return localPack;
-            }
-        }
-
-        var index = await this.FetchIndexAsync(token).ConfigureAwait(false);
-        if (index is null || !index.Plugins.TryGetValue(internalName, out var info))
-        {
-            return null;
-        }
-
-        // 有缓存但过期：先留着做兜底——网络上没有新包时继续用旧的
-        UITextPack? stale = File.Exists(cached) ? LoadPackFile(cached) : null;
-        var file = string.IsNullOrWhiteSpace(info.File) ? safeName + ".json" : info.File!;
-        var text = await FetchTextAsync(file, token).ConfigureAwait(false);
-        if (text is null)
-        {
-            return stale;
-        }
-
-        var pack = UITextPack.FromJSON(text, out var error);
-        if (pack is null)
-        {
-            this.LastError = $"索引里的 {file} 读不出来：{error}";
-            Plugin.Log?.Warning("[内部文本] 译文库包解析失败：" + this.LastError);
-            return stale;
-        }
-
-        try
-        {
-            Directory.CreateDirectory(this.cacheDirectory);
-            await AtomicFile.WriteAllTextAsync(cached, text, token).ConfigureAwait(false);
-        }
-        catch (Exception e)
-        {
-            Plugin.Log?.Debug(e, "[内部文本] 译文库缓存写盘失败（不影响本次使用）");
-        }
-
-        // 下载量统计（2026-10-04）：包本体仍从 raw/镜像下，这里只多报一条计数；失败静默。
-        ContributeRelay.ReportLibraryDownload(internalName);
-        return pack;
-    }
+    /// <summary>玩家投稿包（Source=user）——自动合并时排在基础包后面、按更新时间从新到旧。</summary>
+    private static bool IsUserPack(UITextLibraryPack pack) =>
+        string.Equals(pack.Source, "user", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>索引（本会话内缓存 6 小时）；详情里展示「云端译文」用这个只读快照。</summary>
     public UITextLibraryIndex? CachedIndex => this.index;
 
-    /// <summary>
-    ///     拉取指定文件的译文包并并进本机包（详情里「云端译文」的选择下载用）；返回补入条数。
-    /// </summary>
-    public async Task<int> MergePackFileAsync(UITextPack pack, string fileName, CancellationToken token)
+    /// <summary>拉取（或从缓存读）<c>uit-packs/</c> 下的一个具体文件；成功时上报一次「按包」下载量。</summary>
+    public async Task<UITextPack?> FetchPackFileAsync(string fileName, string pluginName, string packID, CancellationToken token)
     {
-        try
-        {
-            var libraryPack = await this.FetchPackFileAsync(fileName, token).ConfigureAwait(false);
-            if (libraryPack is null)
-            {
-                return 0;
-            }
-
-            return pack.MergeLibrary(libraryPack);
-        }
-        catch (OperationCanceledException)
-        {
-            throw;
-        }
-        catch (Exception e)
-        {
-            this.LastError = e.Message;
-            Plugin.Log?.Debug(e, "[内部文本] 指定译文包合并出错（已忽略）");
-            return 0;
-        }
-    }
-
-    /// <summary>拉取（或从缓存读）<c>uit-packs/</c> 下的一个具体文件。</summary>
-    public async Task<UITextPack?> FetchPackFileAsync(string fileName, CancellationToken token)
-    {
-        var safe = new string(fileName.Where(c => char.IsLetterOrDigit(c) || c is '_' or '-' or '.').ToArray());
+        var safe = new string(fileName.Where(c => char.IsLetterOrDigit(c) || c is '_' or '-' or '.' or '@').ToArray());
         if (safe.Length == 0 || !safe.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
         {
             return null;
@@ -313,8 +252,8 @@ internal sealed class UITextLibrary
         var pack = UITextPack.FromJSON(text, out var error);
         if (pack is not null)
         {
-            // 下载量统计（2026-10-04）：手动拉单包也计入（文件名即插件内部名）。
-            ContributeRelay.ReportLibraryDownload(Path.GetFileNameWithoutExtension(safe));
+            // 下载量按包统计（2026-10-04）：键 `<插件>@<包ID>`，基础包的包ID 是 library。
+            ContributeRelay.ReportLibraryDownload(pluginName, packID);
         }
         if (pack is null)
         {

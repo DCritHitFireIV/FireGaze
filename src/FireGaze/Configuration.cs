@@ -268,6 +268,12 @@ public sealed class Configuration : IPluginConfiguration
     public bool UITextFreeWarned { get; set; }
 
     /// <summary>
+    ///     点过 👍 的译文包（`&lt;插件&gt;|&lt;包ID&gt;`）——每台机器对一个包只赞一次，按钮变灰。
+    /// </summary>
+    [JsonProperty("UITextLikedPacks")]
+    public List<string> UITextLikedPacks { get; set; } = [];
+
+    /// <summary>
     ///     大模型翻译时带上随插件打包的 FF14 官方译名（术语表）。
     /// </summary>
     [JsonProperty("UITextUseGlossary")]
