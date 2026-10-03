@@ -49,6 +49,10 @@ EXTRA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ffxiv_glo
 
 CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".cache")
 CJK = re.compile(r"[\u4e00-\u9fff]")
+# 日文假名（含长音符、半角片假名、片假名中点）。国服客户端里尚未本地化的新内容会保留日文原文，
+# 只查「有没有汉字」会把日文名当成中文放进来——而插件侧口径是术语表「必须采用」，实测把
+# Black Hole 翻成了「アトモス：吸い込み」（2026-10-03 排查 AnoMech 时发现）。
+KANA = re.compile(r"[\u3040-\u30ff\u31f0-\u31ff\uff66-\uff9d]")
 WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9'’\-]*")
 
 # 常见泛词不参与匹配（避免把普通句子里的词当成专有名词）
@@ -184,6 +188,7 @@ def build_glossary(refresh: bool = False, verbose: bool = True) -> dict[str, str
             continue
 
         added = 0
+        rejected_kana = 0
         for key, english in en_map.items():
             chinese = cn_map.get(key)
             if not chinese:
@@ -194,6 +199,10 @@ def build_glossary(refresh: bool = False, verbose: bool = True) -> dict[str, str
             if not english or not chinese or english.lower() == chinese.lower():
                 continue
             if not CJK.search(chinese):
+                continue
+            # 日文残留（未本地化内容）不进表：宁可让模型自己翻，也别强迫它输出日文名。
+            if KANA.search(chinese):
+                rejected_kana += 1
                 continue
             if not (4 <= len(english) <= 48) or not (1 <= len(chinese) <= 24):
                 continue
@@ -218,7 +227,8 @@ def build_glossary(refresh: bool = False, verbose: bool = True) -> dict[str, str
             added += 1
 
         if verbose:
-            print(f"  [术语表] {sheet}: {added} 条")
+            suffix = f"（日文名跳过 {rejected_kana}）" if rejected_kana else ""
+            print(f"  [术语表] {sheet}: {added} 条{suffix}")
 
     extra = load_extra()
     if verbose and extra:
