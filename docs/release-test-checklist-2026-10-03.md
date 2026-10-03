@@ -143,4 +143,4 @@
 - [ ] 版本号、`pluginmaster.json`、README/简介三处一致（动简介需你点头）
 - [ ] `check_manifest.py` 通过；产物无 Harmony/MonoMod 字样
 - [ ] 公开仓需要同步：`feedback.yml`、`scripts/feedback_triage.py`、relay worker v3（部署到 Cloudflare）
-- [ ] tag `v1.3.20` 由你确认后再推
+- [ ] tag `v1.3.26` 由你确认后再推
