@@ -7,11 +7,13 @@
 合并口径（2026-10-02 用户定）：
 - **默认合并**（--replace 才整包覆盖）：以已上传的库包为底，本机有译文的条目**以本机为准**
   （同键译文不同 → 覆盖；相同 → 保留），本机没有的库条目**原样保留**，本机独有的**追加**。
-- 只导出**有译文**的条目；未译条目留给 CI 的增量翻译去补。
+- 只导出**有译文**的条目；未译条目等云端管线手动触发或玩家投稿去补。
 - PreserveID 一律写 false：库合并到别人包里是 `|=`，带 true 会把本地修正过的判定重新带坏
   （2026-10-02：拼接片段被加 ###原文、ImGui 控件全联动的教训）。
 - Source 一律写 library：下载者看到的是「公共配套库」，不冒充别人手翻。
 - Review / Skipped（本机复核与不翻标记）不导出——那是本地决定，不该外溢。
+  例外（2026-10-03）：系统「自动排除」的带译文条目要导出——它标的是「已不在新一轮抽取的候选里」，
+  最常见成因是「这条已经翻好并打进了 DLL」，不收就会出现「本机翻得越全、库里反而越少」。
 - 「中文插件」名单一律跳过、也不碰库里已有的包。
 
 用法：
@@ -60,6 +62,23 @@ def translated(item: dict) -> bool:
     return bool((item.get("Translated") or "").strip())
 
 
+# 与插件侧 UITextPack.AutoSkipNotePrefix 同一份口径（包含 v1.2.0.37 用过的旧文案）。
+AUTO_SKIP_MARKERS = ("\u81ea\u52a8\u6392\u9664\uff1a", "\u65b0\u4e00\u8f6e\u62bd\u53d6\u5df2\u6392\u9664")
+
+
+def is_auto_skipped(item: dict) -> bool:
+    """这条「不翻」是不是系统自动排的——不是人的判定。
+
+    自动排除的含义是「已不在新一轮抽取的候选里」，最常见的成因就是**它已经被翻好、
+    打进了 DLL**（字面量变成 `译文###原文`，抽取器判「已是中文」不再当候选）。
+    这类条目恰恰是库最该收的译文：不收就会出现「本机翻得越全、库里反而越少」
+    （2026-10-03 实测：漏掉 1,188 条，BossMod 一家 883 条）。
+    人工标的「不翻」没有这个备注，仍然排除。
+    """
+    review = item.get("Review") or ""
+    return any(review.startswith(marker) for marker in AUTO_SKIP_MARKERS)
+
+
 KANA_RE = re.compile(r"[\u3040-\u30ff\u31f0-\u31ff\uff66-\uff9d]")
 HAN_RE = re.compile(r"[\u4e00-\u9fff]")
 
@@ -83,9 +102,12 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
     （2026-10-02 扫出 AetherBlackbox / ARSR / ArmoireButler 一批）。
     本机标了「不翻」的也不导出（2026-10-03）：那是对「这个字符串不该翻」的本地判定，
     不该随库外溢——否则会把图标资源名 / 缓存 id 这类不该翻的条目教给别人。
+    **例外（同日追加）**：系统「自动排除」的条目照常导出——它标的是「已不在新一轮抽取的候选里」，
+    最常见成因是「这条已经翻好并打进了 DLL」，正是库最该收的译文。
     """
     skipped_chinese = 0
     skipped_local = 0
+    recovered_auto = 0
     skipped_set = set(pack.get("skipped") or [])
     skipped_res_set = set(pack.get("skippedResources") or [])
     skipped_attr_set = set(pack.get("skippedAttributes") or [])
@@ -94,8 +116,11 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
         if not translated(item) or not (item.get("Original") or ""):
             continue
         if item["Original"] in skipped_set:
-            skipped_local += 1
-            continue
+            if is_auto_skipped(item):
+                recovered_auto += 1
+            else:
+                skipped_local += 1
+                continue
         if is_already_chinese(display_part(item["Original"])):
             skipped_chinese += 1
             continue
@@ -114,8 +139,11 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
         if not translated(item):
             continue
         if (item.get("Container") or "") + "\u0001" + (item.get("Key") or "") in skipped_res_set:
-            skipped_local += 1
-            continue
+            if is_auto_skipped(item):
+                recovered_auto += 1
+            else:
+                skipped_local += 1
+                continue
         if is_already_chinese(item.get("Original") or item.get("Translated") or ""):
             skipped_chinese += 1
             continue
@@ -134,8 +162,11 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
         if not translated(item) or not (item.get("Original") or ""):
             continue
         if item["Original"] in skipped_attr_set:
-            skipped_local += 1
-            continue
+            if is_auto_skipped(item):
+                recovered_auto += 1
+            else:
+                skipped_local += 1
+                continue
         if is_already_chinese(display_part(item["Original"])):
             skipped_chinese += 1
             continue
@@ -149,7 +180,7 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
         )
 
     if not entries and not resources and not attributes:
-        return None, skipped_chinese, skipped_local
+        return None, skipped_chinese, skipped_local, recovered_auto
 
     meta = pack.get("_meta") or {}
     library_pack = {
@@ -163,7 +194,7 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
         "resources": resources,
         "attributes": attributes,
     }
-    return library_pack, skipped_chinese, skipped_local
+    return library_pack, skipped_chinese, skipped_local, recovered_auto
 
 
 def _overlay(base: list[dict], local: list[dict], key) -> tuple[list[dict], int, int, int, int]:
@@ -251,7 +282,7 @@ def main(argv: list[str] | None = None) -> int:
         if not isinstance(pack, dict) or "entries" not in pack:
             continue  # 不是译文包（如别的 json）
 
-        library_pack, skipped_chinese, skipped_local = export_pack(pack)
+        library_pack, skipped_chinese, skipped_local, recovered_auto = export_pack(pack)
         if library_pack is None:
             print(f"  [{internal_name}] 没有可导出的译文，跳过")
             continue
@@ -280,6 +311,7 @@ def main(argv: list[str] | None = None) -> int:
         exported += 1
         cn_note = f" ｜ 已是中文跳过 {skipped_chinese}" if skipped_chinese else ""
         cn_note += f" ｜ 不翻跳过 {skipped_local}" if skipped_local else ""
+        cn_note += f" ｜ 自动排除收回 {recovered_auto}" if recovered_auto else ""
         print(f"  [{internal_name}] 条目 {entries} · 资源 {resources} · 属性 {attributes}{override_stats}{cn_note}")
 
         if not args.dry_run:
