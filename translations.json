@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "updatedAt": "2026-09-28"
+  "updatedAt": "2026-10-05"
  },
  "DalamudRepoBrowser": {
   "Punchline": {
@@ -53,13 +53,14 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Unofficial BossMod Reborn integration build with RotationSolverReborn movement request and feedback support.\n\nThis build keeps the original BossModReborn plugin identity so it replaces the original plugin in Dalamud. It includes RSR positional movement handling, movement feedback, melee-range-aware avoidance options, diagnostics, configuration import/export helpers, and kill-time statistics.",
-   "Translated": "非官方 BossMod Reborn 集成构建，支持 RotationSolverReborn 的移动请求与反馈。\n\n此构建保留原 BossModReborn 插件标识，因此会在 Dalamud 中替换原插件。它包含 RSR 身位移动处理、移动反馈、近战距离感知回避选项、诊断、配置导入/导出辅助工具以及击杀时间统计。",
+   "Original": "An unofficial fork of BossMod Reborn by The Combat Reborn Team: https://github.com/FFXIV-CombatReborn/BossmodReborn\nAll credit for the plugin goes to the original authors.\n\nWhy this fork exists: the official plugin only runs the boss modules built into it. This fork adds a single feature: it also loads boss module DLLs from the CustomModules folder in the plugin's config directory, which can add modules or replace built-in ones. That way custom versions of encounters can be maintained separately instead of in a full fork of the plugin.\n\nEverything else is unchanged. It is rebuilt automatically from every official release.\n\nNot affiliated with or supported by The Combat Reborn Team. Please don't report issues with this fork to them.",
+   "Translated": "The Combat Reborn Team 的 BossMod Reborn 的非官方分支：https://github.com/FFXIV-CombatReborn/BossmodReborn\n该插件的所有功劳归原作者所有。\n\n此分支存在的原因：官方插件只运行内置的 Boss 模块。此分支增加了一个功能：它还会从插件配置目录中的 CustomModules 文件夹加载 Boss 模块 DLL，从而可以添加模块或替换内置模块。这样，遭遇战的自定义版本就可以单独维护，而不必对整个插件进行分支。\n\n其他一切均未更改。它会根据每个官方版本自动重新构建。\n\n与 The Combat Reborn Team 无关联，也不受其支持。请不要向他们报告此分支的问题。",
    "Source": "ai"
   },
   "Name": {
-   "Original": "BossMod Reborn (RSR Integration)",
-   "Translated": "BossMod Reborn (RSR Integration)"
+   "Original": "BossModRebornButBetter",
+   "Translated": "BossModRebornButBetter",
+   "Source": "ai"
   }
  },
  "Inviter": {
@@ -277,8 +278,8 @@
  "Orbwalker": {
   "Punchline": {
    "Original": "S P A C E G L I D I N G",
-   "Source": "ai",
-   "Review": "原文已更新，译文还停在旧版"
+   "Translated": "太 空 滑 步",
+   "Source": "ai"
   },
   "Description": {
    "Original": "Locks player movement while casting and allows for maximum caster uptime during the course of a fight.",
@@ -711,15 +712,18 @@
  "RotationSolver": {
   "Punchline": {
    "Original": "Analyses combat information every frame and finds the best action.",
-   "Translated": "逐帧分析战斗信息并找出最佳行动。"
+   "Translated": "逐帧分析战斗信息并找出最佳行动。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "Analyses combat information every frame and finds the best action.\n\nThis means almost all the information available in one frame in combat, including the status of all players in the party, the status of any hostile targets, skill cooldowns, the MP and HP of characters, the location of characters, casting status of the hostile target, combo, combat duration, player level, etc.\nThen, it will highlight the best action on the hot bar, or help you to click on it.\nIt is designed for `general combat`, not for savage or ultimate. Use it carefully.",
-   "Translated": "每帧分析战斗信息并找出最佳动作。\n\n这意味着战斗中单帧内几乎所有可用信息，包括队伍中所有玩家的状态、任何敌对目标的状态、技能冷却、角色的 MP 和 HP、角色位置、敌对目标的咏唱状态、连击、战斗时长、玩家等级等。\n然后，它会在热键栏上高亮最佳动作，或帮助你点击它。\n它专为`常规战斗`设计，不适用于零式或绝境战。请谨慎使用。"
+   "Original": "An unofficial fork of Rotation Solver Reborn by The Combat Reborn Team: https://github.com/FFXIV-CombatReborn/RotationSolverReborn\nAll credit for the plugin goes to the original authors.\n\nWhy this fork exists: the official plugin only runs the rotations built into it. This fork adds a single feature: it also loads rotation DLLs from the CustomRotations folder in the plugin's config directory, so custom rotations can be maintained separately instead of in a full fork of the plugin.\n\nEverything else is unchanged. It is rebuilt automatically from every official release, with a teal theme to tell it apart.\n\nNot affiliated with or supported by The Combat Reborn Team. Please don't report issues with this fork to them.",
+   "Translated": "The Combat Reborn Team 的 Rotation Solver Reborn 的非官方分支：https://github.com/FFXIV-CombatReborn/RotationSolverReborn\n该插件的所有功劳归原作者所有。\n\n此分支存在的原因：官方插件只运行其内置的循环。此分支增加了一个功能：它还会从插件配置目录中的 CustomRotations 文件夹加载循环 DLL，因此自定义循环可以单独维护，而不必对插件进行完整分支。\n\n其他一切均未更改。它会在每次官方发布时自动重新构建，并采用青色主题以便区分。\n\n与 The Combat Reborn Team 无关联，也不受其支持。请不要向它们报告此分支的问题。",
+   "Source": "ai"
   },
   "Name": {
-   "Original": "Rotation Solver Reborn",
-   "Translated": "循环求解器 Reborn"
+   "Original": "RotationSolverRebornButBetter",
+   "Translated": "RotationSolverRebornButBetter",
+   "Source": "ai"
   }
  },
  "ActionTimelineReborn": {
@@ -4549,12 +4553,14 @@
  },
  "FfxivVR": {
   "Punchline": {
-   "Original": "A VR plugin for FFXIV.",
-   "Translated": "FFXIV 的 VR 插件。"
+   "Original": "A VR mod for FFXIV",
+   "Translated": "FFXIV 的 VR 模组",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "A VR plugin for FFXIV.",
-   "Translated": "FFXIV 的 VR 插件。"
+   "Original": "A VR mod for FFXIV. Run /vr to open settings",
+   "Translated": "FFXIV 的 VR 模组。运行 /vr 打开设置",
+   "Source": "ai"
   },
   "Name": {
    "Original": "FFXIV VR",
@@ -11219,12 +11225,14 @@
  },
  "HOutfits": {
   "Punchline": {
-   "Original": "Apply full sets to your character in Glamourer with a single click.",
-   "Translated": "在 Glamourer 中一键为你的角色应用整套套装。"
+   "Original": "Apply full sets, loose pieces and facewear to your character in Glamourer with a single click.",
+   "Translated": "在 Glamourer 中一键将整套套装、单件和面部饰品应用到你的角色。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "Lists the game's complete named sets and applies a whole set or any single piece to your character through Glamourer, instead of picking each item from a dropdown.",
-   "Translated": "列出游戏内所有完整的命名套装，并通过 Glamourer 将整套或任意单件应用到你的角色上，无需从下拉菜单中逐件挑选。"
+   "Original": "Browse the game's named sets, sets recovered by item name, every other wearable piece and facewear, with large icon previews on hover, and apply a whole set or any single piece to your character through Glamourer, instead of picking each item from a dropdown.",
+   "Translated": "浏览游戏中的命名套装、按物品名称恢复的套装、所有其他可穿戴单件和面部饰品，悬停时显示大图标预览，并通过 Glamourer 将整套或任意单件应用到你的角色，而不必从下拉菜单中逐个选择物品。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "HOutfits",
@@ -14786,8 +14794,8 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Phu de tieng Viet cho thoai FFXIV. Overlay chu co dau chuan (font BeVietnam Pro), giu nguyen ten rieng tieng Anh. A Realm Reborn, Heavensward, Stormblood, Shadowbringers va Endwalker: MSQ day du cung nhiem vu Nghe/Job, Role, Duty va mo khoa tinh nang; nhiem vu bo toc (beast tribe) ARR-Stormblood: day du 12 bo toc. Them thoai boss trong dungeon/trial/raid tu ARR toi Endwalker. Khong bao gom side quest va Dawntrail. Ban dich ngoai tuyen, khong sua du lieu game.",
-   "Translated": "为 FFXIV 对话提供越南语字幕。标准带音调字符覆盖层（BeVietnam Pro 字体），保留英文专有名词。A Realm Reborn、苍穹、Stormblood　-血雨狂潮-、Shadowbringers　-暗影使者- 和晓月之终途：完整 MSQ 以及听/Job、Role、Duty 和功能解锁任务；ARR-Stormblood 的支线任务（蛮族）：全部 12 个蛮族。添加从 ARR 到晓月之终途的地下城/讨伐战/大型任务中的首领对话。不包含支线任务和 Dawntrail　-曦光旅路-。离线翻译，不修改游戏数据。",
+   "Original": "Phu de tieng Viet cho thoai FFXIV. Overlay chu co dau chuan (font BeVietnam Pro), giu nguyen ten rieng tieng Anh. A Realm Reborn, Heavensward, Stormblood, Shadowbringers, Endwalker va Dawntrail (toi 7.5): MSQ day du cung nhiem vu Nghe/Job, Role, Duty va mo khoa tinh nang; nhiem vu bo toc (beast tribe) ARR-Stormblood: day du 12 bo toc. Them thoai boss trong dungeon/trial/raid tu ARR toi Dawntrail, va cac su kien mua 7.x. Khong bao gom side quest. Ban dich ngoai tuyen, khong sua du lieu game.",
+   "Translated": "为 FFXIV 对话提供越南语字幕。标准带音调字符覆盖层（BeVietnam Pro 字体），保留英文专有名词。重生之境、苍穹、Stormblood　-血雨狂潮-、Shadowbringers　-暗影使者-、晓月之终途和 Dawntrail　-曦光旅路-（至 7.5）：完整主线剧情以及职能/职业、角色、副本和功能解锁任务；重生之境至Stormblood　-血雨狂潮-的支线任务（蛮族）：完整 12 个蛮族。添加从重生之境到 Dawntrail　-曦光旅路-的副本/讨伐战/大型任务中的首领对话，以及 7.x 版本活动。不包含支线任务。离线翻译，不修改游戏数据。",
    "Source": "ai"
   },
   "Name": {
@@ -16304,12 +16312,14 @@
  },
  "AetherPress": {
   "Punchline": {
-   "Original": "Automatically compress textures in newly installed Penumbra mods.",
-   "Translated": "自动压缩新安装的 Penumbra 模组中的纹理。"
+   "Original": "Automatically compress textures in installed and equipped Penumbra mods.",
+   "Translated": "自动压缩已安装和已装备的 Penumbra 模组中的纹理。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "Detects completed Penumbra mod installations and offers configurable Base, Normal, and Mask texture compression. Use /aetherpress to open settings.",
-   "Translated": "检测已完成的 Penumbra 模组安装，并提供可配置的 Base、Normal 和 Mask 纹理压缩。使用 /aetherpress 打开设置。"
+   "Original": "Detects completed Penumbra mod installations and can optimize the mods supplying your equipped glamour textures. Offers configurable Base, Normal, and Mask texture compression with optional skin protection. Use /aetherpress to open settings.",
+   "Translated": "检测已完成的 Penumbra 模组安装，并可优化为已装备幻化纹理提供支持的模组。提供可配置的基础、法线和遮罩纹理压缩，并可选皮肤保护。使用 /aetherpress 打开设置。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "AetherPress",
@@ -16932,11 +16942,13 @@
  "BLUnion": {
   "Punchline": {
    "Original": "Unite. Learn. Mimic.",
-   "Translated": "联合。学习。模仿。"
+   "Translated": "联合。学习。模仿。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "Compares learned Blue Mage spells across a party, shows where to find missing ones, and helps plan what to learn next together - multilingual (DE/EN/FR/JA), syncs via export/import codes, no gameplay automation.",
-   "Translated": "对比队伍中已学会的 Blue Mage 法术，显示缺失法术的获取位置，并帮助一起规划接下来要学习的内容 - 支持多语言（DE/EN/FR/JA），通过导出/导入代码同步，无游戏自动化。"
+   "Original": "Compares learned Blue Mage spells across a party, shows where to find missing ones, and helps plan what to learn next together - multilingual (DE/EN/FR/JA), syncs via export/import codes or opt-in Live-Sync (optionally shares your online status with listed Group Finder entries). Clicking a location opens the Duty Finder (never queues) or teleports you once to the nearest aetheryte (one action per click, can be turned off) - no other gameplay automation.",
+   "Translated": "对比队伍中已学会的青魔法师法术，显示缺失法术的获取位置，并帮助规划接下来一起学习的内容 - 支持多语言（DE/EN/FR/JA），可通过导出/导入代码或选择性加入的实时同步进行同步（可选择将你的在线状态分享给已列出的招募板条目）。点击位置会打开任务搜索器（绝不排队）或传送你一次至最近的以太之光（每次点击一个操作，可关闭） - 无其他游戏自动化。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "BLUnion",
@@ -17943,11 +17955,13 @@
  "DungeonMasterXIV": {
   "Punchline": {
    "Original": "Dice, initiative and encounter tracking for in-game tabletop sessions.",
-   "Translated": "用于游戏内跑团会话的骰子、先攻与遭遇追踪。"
+   "Translated": "用于游戏内跑团会话的骰子、先攻与遭遇追踪。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "Dice, initiative and encounter tracking for tabletop roleplay sessions run inside FFXIV.\n\nThis does nothing on its own. Everyone playing needs this plugin installed, and it needs a connection to a relay — one person hosts a session and admits the others individually with a code. There is nothing to try alone, and anyone without the plugin cannot take part.\n\nRolls are made in the plugin rather than by the game, so 4d6+2 works where /dice cannot. Campaign history is stored on the host's machine.",
-   "Translated": "用于在 FFXIV 内进行的桌面角色扮演聚会的骰子、先攻与遭遇追踪。\n\n该插件本身不执行任何功能。所有参与玩家都需要安装此插件，并且需要连接到中继——由一人主持聚会，并通过代码逐个允许其他人加入。无法独自试用，未安装该插件的人也无法参与。\n\n掷骰由插件而非游戏执行，因此 /dice 无法处理的 4d6+2 也能使用。战役历史存储在主持人的机器上。"
+   "Original": "Dice, initiative and encounter tracking for tabletop roleplay sessions run inside FFXIV.\n\nThis does nothing on its own. Everyone playing needs this plugin installed, and it needs a connection to a relay — one person hosts a session and admits the others individually with a code. There is nothing to try alone, and anyone without the plugin cannot take part.\n\nRolls are made in the plugin rather than by the game, so 4d6+2 works where /dice cannot. Campaign history is stored on the host's machine.\n\nWhat the relay can see and what it stores: https://github.com/ruminabottle/dungeonmasterxiv/blob/main/RELAY-SERVICE-POLICY.md",
+   "Translated": "用于在 FFXIV 内进行的桌面角色扮演会话的骰子、先攻和遭遇追踪。\n\n这本身不会做任何事。每个参与的玩家都需要安装此插件，并且需要连接到中继——由一人主持会话，并用代码逐个允许其他人加入。单独一人没有什么可尝试的，任何没有此插件的人都无法参与。\n\n掷骰由插件而非游戏进行，因此 4d6+2 可以工作，而 /dice 不能。战役历史存储在主持人的机器上。\n\n中继可以看到什么以及存储什么：https://github.com/ruminabottle/dungeonmasterxiv/blob/main/RELAY-SERVICE-POLICY.md",
+   "Source": "ai"
   },
   "Name": {
    "Original": "Dungeon Master XIV",
@@ -18147,11 +18161,13 @@
  "umadp4helper": {
   "Punchline": {
    "Original": "DMU P4 assignment helper.",
-   "Translated": "DMU P4 分配助手。"
+   "Translated": "DMU P4 分配助手。",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "DMU P4 assignment helper with manual and experimental automatic mechanic detection.",
-   "Translated": "DMU P4 分配助手，含手动与实验性的自动机制检测。"
+   "Original": "DMU P4 assignment helper with manual and automatic mechanic detection.",
+   "Translated": "DMU P4 分配助手，支持手动和自动机制检测。",
+   "Source": "ai"
   },
   "Name": {
    "Original": "Helpfulp4",
@@ -18281,8 +18297,8 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Automatic friendly casting through native unit frames, with no spell lists or macros. Includes strict invalid-recipient protection, self-cast and bypass modifiers, useful cast history, checked recovery, and optional ground placement at hovered allies. Keeps your selected target and native action queue.",
-   "Translated": "通过原生单位框体自动对友方施法，无需法术列表或宏。包含严格的无效目标保护、自我施法和绕过修饰键、实用的施法历史、已勾选的恢复，以及可选的在悬停友方处放置地面技能。保留你选定的目标和原生动作队列。",
+   "Original": "Automatic friendly casting through native unit frames, with no spell lists or macros. Forwards friendly mouseover casts to the game without additional cast-permission checks. Includes modifier overrides, cast history and optional ground placement. Keeps your selected target and native action queue.",
+   "Translated": "通过原生单位框架自动进行友方施法，无需法术列表或宏。将友方鼠标指向施法转发给游戏，无需额外的施法许可检查。包含修饰键覆盖、施法历史和可选的地面放置。保留你选定的目标和原生动作队列。",
    "Source": "ai"
   },
   "Name": {
@@ -18970,8 +18986,8 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Testing-exclusive Frontline development plugin with fail-closed player classification, friendly-force clustering, stable target and group commitment, vnavmesh navigation integration, an opt-in MCH combat controller, and detailed diagnostics.",
-   "Translated": "仅用于测试的战场开发插件，具有故障关闭式玩家分类、友方部队聚类、稳定的目标和队伍承诺、vnavmesh 导航集成、可选的 MCH 战斗控制器以及详细诊断。",
+   "Original": "Five-map Frontline objective-first navigation and stable allied-group following. Group-follow stays mounted through arrival and dismounts for combat; supported objective approaches retain their safety policy. Classic and opt-in Sentinel Modern UI with left-side navigation.",
+   "Translated": "五地图纷争前线目标优先导航和稳定的友方队伍跟随。队伍跟随在抵达时保持骑乘状态，并在战斗时下坐骑；支持的目标接近方式保留其安全策略。经典和选择性加入的护花守墓屋现代 UI，带左侧导航。",
    "Source": "ai"
   },
   "Name": {
@@ -21229,14 +21245,19 @@
  },
  "OCNFarmer": {
   "Name": {
-   "Original": "OCNFarmer",
-   "Translated": "OCNFarmer"
+   "Original": "OCBFR",
+   "Translated": "OCBFR",
+   "Source": "ai"
   },
   "Punchline": {
-   "Original": "自动管理蜃景幻界新月岛南征/北征之章寻宝与钱币购买。"
+   "Original": "新月島尋寶自動化與戰利品記錄 / Occult Crescent treasure automation and loot tracking.",
+   "Translated": "新月岛寻宝自动化与战利品记录 / Occult Crescent treasure automation and loot tracking.",
+   "Source": "ai"
   },
   "Description": {
-   "Original": "蜃景幻界新月岛 南征之章&北征之章全自动寻宝流程。Gugu对南岛流程以及钱币购买做出了贡献。启动命令：/ocnstart；停止命令：/ocnstop。"
+   "Original": "OCBFR 是新月島尋寶自動化插件，提供寶箱掃描、內外環尋寶、錢幣兌換、退本重入及戰利品記錄。支援繁體中文／English 介面。需要 Daily Routines、vnavmesh 與 BOCCHI。\n\nOCBFR automates Occult Crescent coffer scanning, treasure routes, currency purchases and re-entry, with loot tracking and a Traditional Chinese / English interface. Requires Daily Routines, vnavmesh and BOCCHI.",
+   "Translated": "OCBFR 是新月岛寻宝自动化插件，提供宝箱扫描、内外环寻宝、钱币兑换、退本重入及战利品记录。支援繁体中文／English 界面。需要 Daily Routines、vnavmesh 与 BOCCHI。\n\nOCBFR automates Occult Crescent coffer scanning, treasure routes, currency purchases and re-entry, with loot tracking and a Traditional Chinese / English interface. Requires Daily Routines, vnavmesh and BOCCHI.",
+   "Source": "ai"
   }
  },
  "MagicBulletFullEffects": {
@@ -21260,7 +21281,7 @@
    "Original": "提醒尚未完成的国服季节活动"
   },
   "Description": {
-   "Original": "国服 Final Fantasy XIV 游戏内季节活动提醒。支持每日提醒、任务与成就完成判断、任务地图旗标、定时刷新、离线缓存和脱敏诊断信息。",
+   "Original": "国服 Final Fantasy XIV 季节及游戏内限时联动活动提醒。支持每日提醒、完成状态判断、自动更新活动数据、地图旗标、离线缓存和采集告警；未核验坐标时禁用地图按钮。",
    "Source": "ai",
    "Review": "原文已更新，译文还停在旧版"
   }
@@ -21653,7 +21674,7 @@
  },
  "CrescentCompass": {
   "Name": {
-   "Original": "新月罗盘"
+   "Original": "CrescentCompass｜新月島尋寶羅盤"
   },
   "Punchline": {
    "Original": "新月岛寻宝、事件关注与地图导航助手。",
@@ -24244,8 +24265,8 @@
    "Source": "ai"
   },
   "Description": {
-   "Original": "Convert gear, facewear, hair, face, tail, Viera-ear and skin assets in Penumbra mods to other items, slots and races, swap idle and emote animations (optionally as an option group of idle slots), retarget animations to other races, and merge two modpacks into one. Supports the Penumbra 1.7+ mod format, retargets game paths, model/material references and metadata, previews every change, and can revert conversions.",
-   "Translated": "将 Penumbra 模组中的装备、面部饰品、发型、面部、尾巴、维埃拉族耳朵和皮肤资源转换到其他物品、槽位和种族，交换待机动作和情感动作动画（可选作为待机槽位的选项组），将动画重定向到其他种族，并将两个模组包合并为一个。支持 Penumbra 1.7+ 模组格式，重定向游戏路径、模型/材质引用和元数据，预览每项更改，并可还原转换。",
+   "Original": "Convert gear, facewear, hair, face, tail, Viera ear and skin assets in Penumbra mods to other items, slots and races, swap idle and emote animations (optionally as an option group of idle slots), retarget animations to other races, and merge two modpacks into one. Supports the Penumbra 1.7+ mod format, retargets game paths, model/material references and metadata, previews every change, and can revert conversions.",
+   "Translated": "将 Penumbra 模组中的装备、面部饰品、发型、面部、尾巴、维埃拉耳部和皮肤资源转换到其他物品、槽位和种族，交换待机和情感动作动画（可选作为待机槽位的选项组），将动画重定向到其他种族，并将两个模组包合并为一个。支持 Penumbra 1.7+ 模组格式，重定向游戏路径、模型/材质引用和元数据，预览每项更改，并可还原转换。",
    "Source": "ai"
   }
  },
@@ -25014,13 +25035,13 @@
    "Source": "ai"
   },
   "Punchline": {
-   "Original": "Shares public Shout and Yell invites across worlds you choose.",
-   "Translated": "在你选择的服务器之间共享公开的呼喊和喊话邀请。",
+   "Original": "Optional sharing companion. Requires Shout Calendar.",
+   "Translated": "可选的共享伴侣插件。需要 Shout Calendar。",
    "Source": "ai"
   },
   "Description": {
-   "Original": "Shout Calendar Sync attaches to Shout Calendar and shares public Shout and Yell invites. Say, tells, party, alliance, free company, linkshells, and novice network are not shared.\n\nThe list at the top right starts on your current world. Check another world to fetch it in the background, then select it to see that world's events.\n\nSync runs on its own. You can limit connections, speed, stored size, items per tick, and memory. Removing this plugin removes shared events and leaves the invites you heard yourself.",
-   "Translated": "Shout Calendar Sync 依附于 Shout Calendar，并共享公开的呼喊和喊话邀请。说话、悄悄话、小队、团队、部队、通讯贝和新手频道不会共享。\n\n右上角列表从你当前所在服务器开始。勾选另一个服务器可在后台获取，然后选择它以查看该服务器的活动。\n\n同步会自行运行。你可以限制连接数、速度、存储大小、每 tick 项目数和内存。移除此插件会移除共享活动，并保留你自己听到的邀请。",
+   "Original": "Requires Shout Calendar to be installed and enabled. Shout Calendar Sync is an optional companion and does not provide a standalone calendar. It adds sharing of public Shout and Yell invites to Shout Calendar. Say, tells, party, alliance, free company, linkshells, and novice network are not shared.\n\nInstall Shout Calendar first, then this plugin. Open Shout Calendar to view shared invites and Sync settings.\n\nWhen Sync is attached, the world you are on replaces Local Calendar. Check another world to fetch it, then select it. The public relay is the default. Public relay is also the default backup. Matching primary and backup endpoints use one connection. Choose Backup > Off to keep a custom private group on its primary only.\n\nDownload and upload are capped separately, in megabits per second. Upload starts at 1 Mb/s. Removing this plugin removes shared events and leaves the invites you heard yourself.",
+   "Translated": "需要安装并启用 Shout Calendar。Shout Calendar Sync 是一个可选的伴侣插件，不提供独立的日历。它为 Shout Calendar 添加公开 Shout 和 Yell 邀请的共享功能。说话、悄悄话、小队、团队、部队、通讯贝和新手频道不会被共享。\n\n请先安装 Shout Calendar，再安装此插件。打开 Shout Calendar 查看共享邀请和 Sync 设置。\n\n当 Sync 附加后，你所在的世界会替换本地日历。勾选另一个世界以获取它，然后选择它。公共中继是默认选项。公共中继也是默认备份。主端点和备份端点匹配时使用一个连接。选择 Backup > Off 可将自定义私人组仅保留在其主端点上。\n\n下载和上传分别限速，单位为兆比特每秒。上传从 1 Mb/s 开始。移除此插件会移除共享事件，并保留你自己听到的邀请。",
    "Source": "ai"
   }
  },
@@ -25424,13 +25445,13 @@
    "Source": "ai"
   },
   "Punchline": {
-   "Original": "Modular HUD panels, integrated bars, awareness, and camera controls.",
-   "Translated": "模块化 HUD 面板、集成状态条、感知和相机控制。",
+   "Original": "Modular HUD panels, PvP threat awareness, and camera controls.",
+   "Translated": "模块化 HUD 面板、PvP 威胁感知与相机控制。",
    "Source": "ai"
   },
   "Description": {
-   "Original": "Adds independently configurable actor panels and bars, native target/context interactions, a full drag/resize editor, resilient configuration migration, exact-position encounter danger awareness, optional Splatoon IPC, extended camera zoom, and opt-in Anti-AFK.",
-   "Translated": "添加可独立配置的角色面板和状态条、原生目标/上下文交互、完整的拖拽/调整大小编辑器、稳健的配置迁移、精确位置的遭遇危险感知、可选的 Splatoon IPC、扩展相机缩放以及可选的防挂机。",
+   "Original": "Adds independently configurable actor panels and bars, a Sentinel Modern configuration theme preview, an independent PvP Targeting Me Counter, native target/context interactions, a full drag/resize editor, resilient configuration migration, exact-position encounter danger awareness, optional Splatoon IPC, extended camera zoom, Anti-AFK, and opt-in quest convenience automation.",
+   "Translated": "添加可独立配置的角色面板与状态条、护花守墓屋 Modern 配置主题预览、独立的 PvP 选定目标我的闪身拳计数器、原生目标/上下文交互、完整的拖拽/缩放编辑器、稳健的配置迁移、精确位置的副本危险感知、可选的 Splatoon IPC、扩展相机缩放、防挂机，以及可选的便捷任务自动化。",
    "Source": "ai"
   }
  },
@@ -25875,6 +25896,996 @@
   "Description": {
    "Original": "Changes loaded Hrothgar player and human NPC appearances locally. Supports a fixed target race or per-actor random race selection.",
    "Translated": "在本地更改已加载的硌狮族玩家和人类 NPC 的外观。支持固定目标种族或按角色随机选择种族。",
+   "Source": "ai"
+  }
+ },
+ "XMapper": {
+  "Name": {
+   "Original": "XMapper",
+   "Translated": "XMapper",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Fill your cross hotbars for any job in one click, following a layout bias you choose.",
+   "Translated": "一键为任意职业填满你的交叉热键栏，遵循你选择的布局偏好。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "XMapper maps the current class's actions onto Cross Hotbar sets according to a \"bias\": a preset that says which kind of action lands on which pad.\n\nâ€¢ Single-target attacks on the right face buttons, AoE on the left, abilities on the d-pads.\nâ€¢ Role actions on set 2's right half, rare long-cooldown actions on set 2's left half.\nâ€¢ Overflow continues onto later sets with the same layout.\nâ€¢ Works for combat jobs, crafters and gatherers. Ships with editable biases; make your own.\nâ€¢ Preview the whole layout before writing a single slot.",
+   "Translated": "XMapper 根据“偏好”将当前职业的技能映射到交叉热键栏组上：一种预设，规定哪类技能落在哪个手柄按键上。\n\n• 单体目标攻击在右侧面键，AoE 在左侧，能力技在方向键。\n• 职能技能在第 2 组的右半部分，稀有的长冷却技能在第 2 组的左半部分。\n• 洪水继续以相同布局延伸到后续组。\n• 适用于战斗职业、能工巧匠和大地使者。附带可编辑的偏好；制作你自己的。\n• 在写入任何一个槽位之前预览整个布局。",
+   "Source": "ai"
+  }
+ },
+ "ExtraChatReborn": {
+  "Name": {
+   "Original": "ExtraChat Reborn",
+   "Translated": "ExtraChat Reborn",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Cross-data-centre linkshells with unlimited members.",
+   "Translated": "跨大区通讯贝，成员数量无上限。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "ExtraChat adds end-to-end encrypted, cross-data-centre, unlimited linkshells to the game. This is a patched fork of Anna's ExtraChat for current Dalamud. On first run it copies your settings from the original ExtraChat; disable the original while using this one.",
+   "Translated": "ExtraChat 为游戏添加端到端加密、跨大区、无上限的通讯贝。这是 Anna 的 ExtraChat 针对当前 Dalamud 的修补分支。首次运行时它会从原版 ExtraChat 复制你的设置；使用此版本时请禁用原版。",
+   "Source": "ai"
+  }
+ },
+ "Marketeer": {
+  "Name": {
+   "Original": "Marketeer",
+   "Translated": "Marketeer",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Help yourself and your retainers !",
+   "Translated": "帮助你自己和你的雇员！",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "An all-in-one market board, inventory, and retainer management plugin. Features market watch, automated competitor undercutting, comprehensive sales history, cross-character inventory management, and a crafting profit evaluator.",
+   "Translated": "一个集市场布告板、背包和雇员管理于一体的插件。功能包括市场监视、自动压价竞争对手、全面的销售历史、跨角色背包管理，以及制作利润评估器。",
+   "Source": "ai"
+  }
+ },
+ "PetService": {
+  "Name": {
+   "Original": "Pet Service",
+   "Translated": "宠物服务",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Consensual pet/master roleplay, messages, and shared routines.",
+   "Translated": "双方同意的宠物/主人角色扮演、消息和共享日常。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A private FFXIV tool for consensual pet/master roleplay and power dynamics. Masters manage messages and reminders through Discord or a private portal, while pets receive interactive prompts in game. Includes replies, snoozing, shared status and location, and a local kill switch controlled by the pet.",
+   "Translated": "一个私人的 FFXIV 工具，用于双方同意的宠物/主人角色扮演和权力动态。主人通过 Discord 或私人门户管理消息和提醒，而宠物在游戏中接收互动提示。包括回复、稍后提醒、共享状态和位置，以及由宠物控制的本地紧急停止开关。",
+   "Source": "ai"
+  }
+ },
+ "AutoStanceXIV": {
+  "Name": {
+   "Original": "AutoStanceXIV",
+   "Translated": "AutoStanceXIV",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Automatically turns your tank stance on or off.",
+   "Translated": "自动开启或关闭你的坦克姿态。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Keeps your tank stance in the state you choose (on or off) on every tank: Paladin/Gladiator, Warrior/Marauder, Dark Knight and Gunbreaker.\nApply it always, or only at specific moments: zone or job change, countdown, pull (bosses only), duty recommence after a wipe.\nAvailable in English and French. Command: /autostance",
+   "Translated": "让你的坦克姿态保持在你选择的状态（开启或关闭），适用于所有坦克：骑士/剑术师、战士/斧术师、暗黑骑士和绝枪战士。\n始终应用，或仅在特定时刻应用：区域或职业变更、倒计时、开怪（仅首领）、团灭后重新挑战副本。\n提供英语和法语。命令：/autostance",
+   "Source": "ai"
+  }
+ },
+ "LootFinderXIV": {
+  "Name": {
+   "Original": "LootFinderXIV",
+   "Translated": "LootFinderXIV",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "The loot sheet of every duty: rare rewards, tomestones and coffers.",
+   "Translated": "每个任务的战利品表：稀有奖励、神典石和宝箱。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Shows a database-style loot sheet for each duty: rare rewards (minions, mounts, orchestrion rolls) obtained or not, tomestones and gil per boss, and the content of every coffer with what you already own. Opens next to the Duty Finder or from the server info bar. Interface in English and French.",
+   "Translated": "为每个任务显示数据库风格的战利品表：已获得或未获得的稀有奖励（宠物、坐骑、管弦乐琴乐谱）、每个首领的神典石和金币，以及每个宝箱的内容和你已拥有的物品。在任务搜索器旁边或从服务器信息栏打开。界面为英语和法语。",
+   "Source": "ai"
+  }
+ },
+ "EquinoxCompanion": {
+  "Name": {
+   "Original": "Equinox Companion",
+   "Translated": "Equinox Companion",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Your shared characters, estates, collections and timers.",
+   "Translated": "你的共享角色、房屋、收藏和计时器。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Records house entries and confirmed tending locally, with optional paired sync to Equinox Journal. English garden menus supported.",
+   "Translated": "在本地记录房屋进入记录和已确认的打理，并可选配对同步到昼夜二分日志。支持英文庭具菜单。",
+   "Source": "ai"
+  }
+ },
+ "ChocoboRadio": {
+  "Name": {
+   "Original": "Chocobo Radio",
+   "Translated": "Chocobo Radio",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Your mount's internet radio.",
+   "Translated": "你的坐骑网络电台。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Open a radio panel on mounting and listen to saved internet stations inside the plugin, following game music settings.",
+   "Translated": "骑乘时打开电台面板，在插件内收听已保存的网络电台，并遵循游戏音乐设置。",
+   "Source": "ai"
+  }
+ },
+ "JpEnChat": {
+  "Name": {
+   "Original": "JP/EN Chat",
+   "Translated": "JP/EN Chat",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Two-pane JP/EN chat translation for English players on Japanese data centers.",
+   "Translated": "面向日服英语玩家的双栏日英聊天翻译。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Shows chat in a two-pane window with the original Japanese on the left and a streamed English translation on the right, aligned row by row.\nType English into the input box to get a Japanese translation with a word-by-word breakdown and back-translation, confirm, and send.\nTranslation uses your own OpenRouter API key (chat lines in the channels you enable are sent to OpenRouter). Early release.",
+   "Translated": "在双栏窗口中显示聊天，左侧为日文原文，右侧为流式英文翻译，逐行对齐。\n在输入框中输入英文即可获得日文翻译，并附带逐词解析和回译，确认后发送。\n翻译使用你自己的 OpenRouter API 密钥（你启用频道中的聊天行会发送到 OpenRouter）。早期版本。",
+   "Source": "ai"
+  }
+ },
+ "AnimationNumber": {
+  "Name": {
+   "Original": "Zetrom Utilities",
+   "Translated": "Zetrom Utilities",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Elige número, variante y reproduce la animación.",
+   "Translated": "选择编号、变体和播放动画。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Lee los números de las opciones de tus mods de Penumbra, permite elegir el emote o pose en un desplegable y activa ajustes temporales. /animnum abre la ventana; /animnum 064 busca ese número; /animnum stop restaura los ajustes.",
+   "Translated": "读取你 Penumbra 模组的选项编号，允许在下拉菜单中选择表情或姿势，并激活临时设置。/animnum 打开窗口；/animnum 064 搜索该编号；/animnum stop 恢复设置。",
+   "Source": "ai"
+  }
+ },
+ "Chat3": {
+  "Name": {
+   "Original": "Chat 3.0",
+   "Translated": "Chat 3.0",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "WoW-style chat window.",
+   "Translated": "WoW风格聊天窗口。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Replaces the chat log with a themeable window: tabs, filters, whisper tabs. Works like WoW chat with Prat. KittyUI and Naowh looks included.",
+   "Translated": "用可自定义主题的窗口替换聊天记录：标签页、过滤器、密语标签。像WoW中配合Prat一样工作。包含KittyUI和Naowh外观。",
+   "Source": "ai"
+  }
+ },
+ "KittyUICompanion": {
+  "Name": {
+   "Original": "KittyUI Companion",
+   "Translated": "KittyUI Companion",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "KittyUI inside the game: a live layout studio, plugin settings, themes, profiles, backups, macros and a plugin browser.",
+   "Translated": "游戏内的KittyUI：实时布局工作室、插件设置、主题、配置文件、备份、宏和插件浏览器。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "The in-game half of KittyUI. Move and resize the plugins' elements and the game's own HUD over the real HUD, edit every plugin's settings in one place, recolour them with one palette, install UI themes, switch and save kitty collections, write macros, browse and update plugins by reading their repositories directly, and keep backups. Changes reach the plugins without a restart; the desktop app shares the same data. Does nothing on its own: KittyUI asks, the companion does, never in combat.",
+   "Translated": "KittyUI的游戏内部分。在真实HUD上移动和调整插件元素及游戏自带HUD的大小，在一处编辑每个插件的设置，用一个调色板重新着色，安装UI主题，切换和保存kitty收藏，编写宏，通过直接读取插件仓库来浏览和更新插件，并保留备份。更改无需重启即可到达插件；桌面应用共享相同数据。自身不执行任何操作：KittyUI发出请求，配套程序执行，绝不在战斗中。",
+   "Source": "ai"
+  }
+ },
+ "StatsDamageMeter": {
+  "Name": {
+   "Original": "Stats Damage Meter",
+   "Translated": "Stats Damage Meter",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Details!-style damage meter.",
+   "Translated": "Details!风格伤害统计。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Bars, breakdowns, deaths, interrupts, a timeline and a replay from IINACT's log lines. Naowh look after NaowhUI.",
+   "Translated": "基于IINACT日志行的条形图、分解、死亡、打断、时间轴和回放。NaowhUI之后的Naowh外观。",
+   "Source": "ai"
+  }
+ },
+ "BeastKeeper": {
+  "Name": {
+   "Original": "Beast Keeper",
+   "Translated": "Beast Keeper",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Stop re-picking your Beastmaster familiars before every Crucible battle.",
+   "Translated": "不再在每场天佑女王战斗前重新选择驯兽师宠物。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "picks the first 3 beasts / remembers your beast selection and sets it by default, as it should have been",
+   "Translated": "选择前3只野兽/记住你的野兽选择并默认设置，本该如此",
+   "Source": "ai"
+  }
+ },
+ "EurekaAggro": {
+  "Name": {
+   "Original": "Eureka Aggro",
+   "Translated": "Eureka Aggro",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Aggro and danger radius visualizer for Eureka (Anemos, Pagos, Pyros, Hydatos). Vision cones, sleeping dragon sound aggro detection (walk!), low HP blood aggro, sprite magic aggro, and cast alerts.",
+   "Translated": "优雷卡（优雷卡常风之地、优雷卡恒冰之地、优雷卡涌火之地、优雷卡丰水之地）的仇恨和危险半径可视化工具。视野锥、沉睡巨龙声音仇恨检测（走路！）、低血量血仇、精灵魔法仇恨和施法警报。",
+   "Source": "ai"
+  }
+ },
+ "aetherradar": {
+  "Name": {
+   "Original": "Aether Radar",
+   "Translated": "Aether Radar",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Never miss an aether current again!",
+   "Translated": "再也不会错过风脉泉！",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Simple overlay showing nearby aether currents with distance and direction",
+   "Translated": "简单叠加层显示附近风脉泉的距离和方向",
+   "Source": "ai"
+  }
+ },
+ "dutychecklist": {
+  "Name": {
+   "Original": "DutyChecklist",
+   "Translated": "任务清单",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Track your duty unlock progress!",
+   "Translated": "追踪你的任务解锁进度！",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Shows a checklist of all duties and which ones you have unlocked",
+   "Translated": "显示所有任务的清单以及你已解锁的任务",
+   "Source": "ai"
+  }
+ },
+ "Eloi": {
+  "Name": {
+   "Original": "Eloi",
+   "Translated": "Eloi",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Tells the king his prices are on backwards",
+   "Translated": "告诉国王他的价格标反了",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Automates market board penny pinching. Fork of Dagobert by SHOEGAZEssb with extra options; imports your existing Dagobert settings on first run.",
+   "Translated": "自动化市场板讨价还价。SHOEGAZEssb的Dagobert分支，带有额外选项；首次运行时导入你现有的Dagobert设置。",
+   "Source": "ai"
+  }
+ },
+ "LoyalCompanion": {
+  "Name": {
+   "Original": "LoyalCompanion",
+   "Translated": "LoyalCompanion",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Your loyal companions, always by your side",
+   "Translated": "你忠实的伙伴，始终伴你左右",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Associates minion lists with gearsets and auto-summons a random minion",
+   "Translated": "将宠物列表与套装关联，并自动召唤随机宠物",
+   "Source": "ai"
+  }
+ },
+ "yabot": {
+  "Name": {
+   "Original": "YABOT",
+   "Translated": "YABOT",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Separately we are tweaks, but together we form a mighty YABOT!",
+   "Translated": "分开时我们只是些微调，合在一起便组成了强大的 YABOT！",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "YABOT - Yet Another Bundle of Tweaks. A collection of small quality-of-life tweaks.",
+   "Translated": "YABOT - Yet Another Bundle of Tweaks。一系列小型便利性微调的合集。",
+   "Source": "ai"
+  }
+ },
+ "ChatFade": {
+  "Name": {
+   "Original": "Chat Fade",
+   "Translated": "聊天淡出",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Fades the chat log out when nobody has said anything for a while.",
+   "Translated": "当一段时间无人发言时，将聊天记录淡出。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "The chat log sits there whether or not it has anything to show. Chat Fade dims it away after a quiet stretch and brings it back the moment someone talks, you start typing, or a situation you chose to keep it up for begins. Combat spam does not count as conversation unless you say it does.",
+   "Translated": "无论聊天记录是否有内容可显示，它都一直待在那里。Chat Fade 会在安静一段时间后将其淡出，并在有人说话、你开始输入或你选择保持其显示的某种情况开始时立即恢复。战斗刷屏不算作对话，除非你设定它算。",
+   "Source": "ai"
+  }
+ },
+ "GearsetRefresher": {
+  "Name": {
+   "Original": "Gearset Refresher",
+   "Translated": "套装刷新",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Equips recommended gear and saves it back to your gear sets.",
+   "Translated": "装备推荐装备并将其保存回你的套装。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Refresh the current job or one gear set per unlocked job with the game's recommended equipment.",
+   "Translated": "使用游戏的推荐装备刷新当前职业或每个已解锁职业的一个套装。",
+   "Source": "ai"
+  }
+ },
+ "SquareMap": {
+  "Name": {
+   "Original": "Square Map",
+   "Translated": "Square Map",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Makes the minimap square and strips away unwanted decoration.",
+   "Translated": "使小地图变为方形并去除不需要的装饰。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Reframes the native minimap as a clean square and provides controls for its border, ornaments, compass, coordinates, weather, and zoom controls.",
+   "Translated": "将原生小地图重新框定为干净的方形，并提供对其边框、装饰、罗盘、坐标、天气和缩放控件的控制。",
+   "Source": "ai"
+  }
+ },
+ "GearGuide": {
+  "Name": {
+   "Original": "Gear Guide",
+   "Translated": "装备指南",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "The best gear for your level, at a glance",
+   "Translated": "一眼看清适合你等级的最佳装备",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A native character-window-style panel showing the best gear for your current class and level, filtered by what you own, what's on the market board, vendor gear, crafted gear and more. Every slot has the game's own item tooltip and context menu, and the Recommended Gear button equips the picks you own.",
+   "Translated": "一个原生角色窗口风格的面板，显示当前职业和等级的最佳装备，并按你拥有的、市场板上的、商人出售的、制作的等进行筛选。每个部位都有游戏自带的物品提示和上下文菜单，推荐装备按钮会装备你拥有的推荐装备。",
+   "Source": "ai"
+  }
+ },
+ "GlamourZones": {
+  "Name": {
+   "Original": "Glamour Zones",
+   "Translated": "幻化区域",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "The right outfit for every job and every place",
+   "Translated": "为每个职业和每个地点准备合适的幻化",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Applies your glamour plates automatically. Make rules like \"Red Mage in Ishgard wears plate 4\": pick jobs, then places sorted by expansion (whole regions, cities, single zones or the exact area you're standing in), your house or FC house, Eorzea time and weather. The first matching rule wins, each job can have its own fallback, and if you're outside a resting area the plate goes on as soon as you reach one.",
+   "Translated": "自动应用你的幻化模板。制定规则如“伊修加德的赤魔法师穿戴模板 4”：选择职业，然后按资料片排序地点（整个区域、城市、单个地图或你所在的精确区域）、你的房屋或部队房屋、艾欧泽亚时间和天气。第一条匹配的规则生效，每个职业可有各自的回退，若你在休息区外，到达休息区后立即穿上模板。",
+   "Source": "ai"
+  }
+ },
+ "TellMessenger": {
+  "Name": {
+   "Original": "Tell Messenger",
+   "Translated": "私聊信使",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Never lose a tell again",
+   "Translated": "再也不会错过悄悄话",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Puts every tell in one messenger window. Each person gets their own conversation with saved history, unread badges, online status and location, replies and drafts. Linkshell chat (and optionally party, alliance and Free Company chat) goes in a Linkshells tab, and tells from strangers can wait in a Requests tab. Based on the WoW addon WhisperMessenger.",
+   "Translated": "将所有悄悄话集中到一个信使窗口。每个人拥有各自的对话及保存的历史记录、未读标记、在线状态和位置、回复和草稿。通讯贝聊天（以及可选的队伍、团队和部队聊天）位于通讯贝标签页，陌生人的悄悄话可在请求标签页中等待。基于 WoW 插件 WhisperMessenger。",
+   "Source": "ai"
+  }
+ },
+ "Wares": {
+  "Name": {
+   "Original": "Wares",
+   "Translated": "Wares",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Mark it, sell it",
+   "Translated": "标记它，卖掉它",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Mark inventory items as vendor wares or market listings with native badges, multi-select with Ctrl+click, and sell every marked ware in one click at vendors and retainers.",
+   "Translated": "用原生标记将物品栏物品标记为商人出售品或市场挂售品，按住 Ctrl 点击可多选，在商人和雇员处一键出售所有已标记物品。",
+   "Source": "ai"
+  }
+ },
+ "AsMobPlate": {
+  "Name": {
+   "Original": "AS Mob Plate",
+   "Translated": "AS Mob Plate",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Compact nameplates for A/S rank hunt marks.",
+   "Translated": "紧凑的 A/S 级狩猎怪名牌。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Compact NameId-based A/S and SS hunt nameplates, SS minion tracking, detection alerts and announced ET countdowns.",
+   "Translated": "基于 NameId 的紧凑 A/S 和 SS 狩猎怪名牌、SS 宠物追踪、检测警报和已公告的艾欧泽亚时间倒计时。",
+   "Source": "ai"
+  }
+ },
+ "ChatTerror": {
+  "Name": {
+   "Original": "ChatTerror",
+   "Translated": "ChatTerror",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Read and send FFXIV chat from your phone, end-to-end encrypted.",
+   "Translated": "在手机上端到端加密地阅读和发送 FFXIV 聊天。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Relays chat to paired phones through an end-to-end encrypted relay and lets you reply from the phone.\n\nDM @mtvirux on discord for assistance or bug reports.",
+   "Translated": "通过端到端加密中继将聊天转发到已配对的手机，并允许从手机回复。\n\n如需帮助或报告 bug，请在 Discord 上私信 @mtvirux。",
+   "Source": "ai"
+  }
+ },
+ "Parley": {
+  "Name": {
+   "Original": "Parley",
+   "Translated": "Parley",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "A tabbed messenger for tells, your free company, linkshells and cross-world linkshells.",
+   "Translated": "用于悄悄话、部队、通讯贝和跨服通讯贝的标签式信使。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Keeps every tell, your free company, and each linkshell and cross-world linkshell in its own conversation, grouped under tabs with a sidebar to switch between them. Remembers history per character, counts what you have not read, shows which tells are with friends and whether they are online, busy or in a duty, and plays a sound of your choosing for each kind of chat. Clickable links, item tooltips, search, symbols and pop-out windows included. Can follow Dalamud's style, the game's UI theme or your Umbra colour profile, and an optional Umbra companion adds a toolbar widget that shows unread messages.",
+   "Translated": "将每条悄悄话、你的部队以及每个通讯贝和跨服通讯贝分别保存在各自的对话中，分组在标签下，并带有侧边栏用于切换。按角色记录历史，统计未读消息，显示哪些悄悄话来自好友以及他们是在线、忙碌还是任务中，并可为每种聊天播放你选择的声音。包含可点击链接、物品提示、搜索、符号和弹出窗口。可跟随 Dalamud 的风格、游戏 UI 主题或你的 Umbra 颜色配置，可选的 Umbra 配套组件会添加一个显示未读消息的工具栏小部件。",
+   "Source": "ai"
+  }
+ },
+ "StatusTextEditor": {
+  "Name": {
+   "Original": "StatusTextEditor",
+   "Translated": "StatusTextEditor",
+   "Source": "ai"
+  }
+ },
+ "ChocoboTrainer": {
+  "Name": {
+   "Original": "Chocobo Trainer",
+   "Translated": "Chocobo Trainer",
+   "Source": "ai"
+  }
+ },
+ "FullCopyHudLayout": {
+  "Name": {
+   "Original": "FullCopyHudLayout",
+   "Translated": "FullCopyHudLayout",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "マクロとかUIとかいろいろコピーします。",
+   "Translated": "复制宏、UI 等各种内容。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "マクロとかUIとかいろいろコピーします。",
+   "Translated": "复制宏、UI 等各种内容。",
+   "Source": "ai"
+  }
+ },
+ "AetherRadio": {
+  "Name": {
+   "Original": "BGMPlayer",
+   "Translated": "BGMPlayer",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "ゲーム内のBGMを選んで再生できます。",
+   "Translated": "可以在游戏内选择并播放BGM。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "拡張・ジャンルのタブとコンテンツ名で曲を探せるBGMプレイヤーです。お気に入り、マイリスト、ランダム再生に対応しています。ミニプレイヤーは上部をドラッグして移動できます。\n\n/bgmplayer で開く\n/bgmplayer stop で通常のBGMに戻す",
+   "Translated": "这是一个BGM播放器，可通过资料片、分类标签和内容名称查找曲目。支持收藏、我的列表和随机播放。迷你播放器可通过拖动顶部移动。\n\n/bgmplayer 打开\n/bgmplayer stop 恢复为通常的BGM",
+   "Source": "ai"
+  }
+ },
+ "CharacterSpawn": {
+  "Name": {
+   "Original": "Character Spawn",
+   "Translated": "Character Spawn",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Spawn and place custom characters, NPCs, and monsters locally on the map with customizable animations, expressions, gizmos, and presets.",
+   "Translated": "在本地地图上生成并放置自定义角色、NPC 和怪物，支持可自定义的动画、表情、小工具和预设。",
+   "Source": "ai"
+  }
+ },
+ "MahjongSensei": {
+  "Name": {
+   "Original": "Doman Mahjong Sensei",
+   "Translated": "Doman Mahjong Sensei",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Doman Mahjong, solved for you.",
+   "Translated": "为你解决多玛方城战。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Reads your Doman Mahjong hand and tells you the best discard, or plays the match for you. Fork of XeldarAlz/FFXIV-AutoMahjongSolver adding Korean-client support.",
+   "Translated": "读取你的多玛方城战手牌并告诉你最佳弃牌，或替你打完对局。基于 XeldarAlz/FFXIV-AutoMahjongSolver 的分支，新增韩服客户端支持。",
+   "Source": "ai"
+  }
+ },
+ "BardPerformanceHelper": {
+  "Name": {
+   "Original": "Bard Performance Helper",
+   "Translated": "Bard Performance Helper",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "MIDI player and band manager for FFXIV bards: play, sync your party, and keep the ensemble in time.",
+   "Translated": "面向 FFXIV 吟游诗人的 MIDI 播放器和乐队管理器：播放、同步你的队伍，并让合奏保持节拍。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Play MIDI files on any instrument with a playlist, per-track controls and auto instrument switching. Host your party as a band: the leader plays songs for everyone, swaps instruments, assigns tracks, and starts the ensemble in sync. The leader can also send songs straight to members, so they don't need any MIDI files of their own. The song is held in memory only, never saved to their disk. Includes formations with a follow mode, a compact overlay, emotes, and optional member extras (camera and render tweaks, auto-accept for listed friends, restart or close clients). Everything is encrypted and direct, with no outside server, and members opt in to anything that controls their character or game.\n\nUse /bph to open it. Formations need vnavmesh.",
+   "Translated": "在任何乐器上播放 MIDI 文件，支持播放列表、逐音轨控制和自动切换乐器。作为乐队主持你的队伍：队长为所有人播放歌曲、切换乐器、分配音轨，并同步启动合奏。队长还可以直接将歌曲发送给成员，因此他们无需自己拥有任何 MIDI 文件。歌曲仅保存在内存中，绝不会保存到他们的磁盘。包含带跟随模式的队形、紧凑悬浮窗、表情动作，以及可选的成员附加功能（相机和渲染调整、自动接受指定好友、重启或关闭客户端）。所有内容均加密且直连，没有外部服务器，成员需主动选择启用任何控制其角色或游戏的功能。\n\n使用 /bph 打开。队形需要 vnavmesh。",
+   "Source": "ai"
+  }
+ },
+ "RomEmulator": {
+  "Name": {
+   "Original": "Memoria",
+   "Translated": "Memoria",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Old consoles in a window inside FFXIV. Named for the place made of memories.",
+   "Translated": "在 FFXIV 窗口内运行旧主机游戏。以记忆构成之地命名。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A place built from memories: plays NES, Game Boy, Game Boy Advance and Super Nintendo games in a window styled after a Final Fantasy menu. Master System, PlayStation and PlayStation 2 are in progress. Rebindable controls, gamepad support, battery saves and save states. Bring your own games.",
+   "Translated": "一个由记忆构成的地方：在仿《最终幻想》菜单风格的窗口中游玩 NES、Game Boy、Game Boy Advance 和 Super Nintendo 游戏。Master System、PlayStation 和 PlayStation 2 正在开发中。可重新绑定按键、支持手柄、电池存档和即时存档。请自备游戏。",
+   "Source": "ai"
+  }
+ },
+ "TavernGames": {
+  "Name": {
+   "Original": "Tavern Games",
+   "Translated": "酒馆游戏",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Dice and bluffing games to play with other players in-game.",
+   "Translated": "可在游戏内与其他玩家一起玩的骰子和吹牛游戏。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A collection of tavern games (Liar's Dice, Pig, Mia, Blackjack, Hold'em, Roulette and more). Create or join a room with a short code, fill seats with bots, and let onlookers spectate. Open with /tavern.",
+   "Translated": "一系列酒馆游戏（骗子骰、Pig、Mia、黑杰克号、德州扑克、死亡轮盘等）。使用短代码创建或加入房间，用机器人填满座位，并让旁观者观战。使用 /tavern 打开。",
+   "Source": "ai"
+  }
+ },
+ "Drakos": {
+  "Name": {
+   "Original": "Drakos",
+   "Translated": "Drakos",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Crafting, gathering, and market automation",
+   "Translated": "制作、采集和市场自动化",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A plugin to automate crafting, gathering, and market board functions. Drakos allows you to construct orders and automate gathering, crafting, and undercutting on the market board.",
+   "Translated": "一个用于自动化制作、采集和市场板功能的插件。Drakos 允许你构建订单，并自动化采集、制作以及市场板压价。",
+   "Source": "ai"
+  }
+ },
+ "GoblinTweaks": {
+  "Name": {
+   "Original": "GoblinTweaks",
+   "Translated": "GoblinTweaks",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Small quality of life tweaks, one toggle at a time.",
+   "Translated": "一次一个开关的小型生活质量调整。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "A growing collection of small quality of life tweaks.\nOpen /goblintweaks to turn them on and configure them.",
+   "Translated": "不断增长的小型生活质量调整集合。\n打开 /goblintweaks 以启用和配置它们。",
+   "Source": "ai"
+  }
+ },
+ "EnhancedContextMenu": {
+  "Name": {
+   "Original": "Enhanced Context Menu",
+   "Translated": "增强右键菜单",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Plugin context menu entries, off the game menu.",
+   "Translated": "插件上下文菜单项，脱离游戏菜单。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Moves context menu entries added through Dalamud into a panel beside the game menu.",
+   "Translated": "将通过 Dalamud 添加的上下文菜单项移动到游戏菜单旁的面板中。",
+   "Source": "ai"
+  }
+ },
+ "FollowMe": {
+  "Name": {
+   "Original": "Follow Me",
+   "Translated": "跟随我",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Target an NPC and follow them around.",
+   "Translated": "选中一个 NPC 并跟随其移动。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Target an overworld NPC and automatically follow it using vnavmesh.",
+   "Translated": "选中一个野外 NPC，并使用 vnavmesh 自动跟随它。",
+   "Source": "ai"
+  }
+ },
+ "PortraitAtelier": {
+  "Name": {
+   "Original": "Portrait Atelier",
+   "Translated": "肖像工坊",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Make and apply a portrait in one click.",
+   "Translated": "一键制作并应用肖像。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Find curated portrait looks, generate variations from your own portrait, and preview them in the game's editor.",
+   "Translated": "查找精选肖像外观，根据你自己的肖像生成变体，并在游戏编辑器中预览它们。",
+   "Source": "ai"
+  }
+ },
+ "RetainerPricer": {
+  "Name": {
+   "Original": "Retainer Pricer",
+   "Translated": "雇员定价",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Automatically price new and existing retainer listings.",
+   "Translated": "自动为新的和现有的雇员出售列表定价。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Automatically price eligible inventory and reprice existing listings one gil below matching competition using live local marketboard data. Persistent item exclusions remain user controlled.",
+   "Translated": "使用实时本地市场板数据，自动为符合条件的物品定价，并将现有列表重新定价为比匹配的竞争对手低一吉尔。持久物品排除项仍由用户控制。",
+   "Source": "ai"
+  }
+ },
+ "AutoJobQuest": {
+  "Name": {
+   "Original": "AutoJobQuest",
+   "Translated": "自动职业任务",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "製作・採集のジョブクエ（Lv1〜70）を素材集めから報告まで自動で進める",
+   "Translated": "自动推进制作·采集职业任务（Lv1〜70），从收集素材到报告全程自动",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "木工〜調理の8職と採掘・園芸・漁師のジョブクエ（Lv1〜70）を自動で進めます。足りない素材をリテイナー・マーケットボード・NPC 購入・戦闘・採集・精選・釣りで集め、未読の秘伝書は収集品の納品で得た紫貨で交換し、グリダニアの宿屋で製作・マテリア装着をして、Questionable でクエストを受注・報告します。\n\n選んだ職が Lv70 以上、製作職の装備が Lv68 以上であることなどが開始の条件です。マーケットボードの自動購入でギルを使います。\n\nArtisan・GatherBuddyReborn・vnavmesh・AutoHook・Lifestream・Questionable・RotationSolverReborn・TextAdvance・BossModReborn・Allagan Tools（または Allagan Item Search）が必要です。",
+   "Translated": "自动推进木工〜烹调8个职业以及采矿·园艺·捕鱼的职业任务（Lv1〜70）。通过雇员·市场布告板·NPC购买·战斗·采集·精选·钓鱼来收集不足的素材，未读的秘传书用收集品交纳获得的紫货交换，在格里达尼亚的旅馆进行制作·镶嵌魔晶石，并通过 Questionable 接取·报告任务。\n\n开始条件为所选职业达到 Lv70 以上、制作职业装备达到 Lv68 以上等。市场布告板自动购买会消耗金币。\n\n需要 Artisan·GatherBuddyReborn·vnavmesh·AutoHook·Lifestream·Questionable·RotationSolverReborn·TextAdvance·BossModReborn·Allagan Tools（或 Allagan Item Search）。",
+   "Source": "ai"
+  }
+ },
+ "XivPlanner.Plugin": {
+  "Name": {
+   "Original": "XIV Planner",
+   "Translated": "XIV Planner",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Levels a crafter to a target level by itself: plans, fetches, buys, crafts and does the class quests.",
+   "Translated": "自动将制作职业练到目标等级：规划、获取、购买、制作并完成职业任务。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Pick a crafter and a target level and press Go. It plans from your bags, retainers and the game data, then fetches from retainers (Artisan), buys vendor items (GatherBuddy Reborn) and, only if you tick it, market board items within your price caps, crafts each step with Artisan, does the class quests with Questionable, sells what it crafts (AutoRetainer) and re-plans at every checkpoint. A Quests tab plans and runs quest chains. Needs Artisan, vnavmesh, Lifestream and Allagan Tools; the window lists the rest. English client only for market board buying.",
+   "Translated": "选择制作职业和目标等级，然后按 Go。它会根据你的背包、雇员和游戏数据制定计划，然后从雇员处获取（Artisan）、购买商人物品（GatherBuddy Reborn），并且仅在你勾选时，在你的价格上限内购买市场板物品，使用 Artisan 制作每一步，使用 Questionable 完成职业任务，出售其制作物品（AutoRetainer），并在每个检查点重新规划。Quests 标签页可规划和运行任务链。需要 Artisan、vnavmesh、Lifestream 和 Allagan Tools；窗口会列出其余内容。市场板购买仅支持英文客户端。",
+   "Source": "ai"
+  }
+ },
+ "CameraControl": {
+  "Name": {
+   "Original": "Cam Control",
+   "Translated": "镜头控制",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Camera controls for house interiors only.",
+   "Translated": "仅限房屋内部的相机控制。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Adjust zoom distance, field of view, camera height and collision strictly inside houses. Automatically restores the camera outside housing, during combat and in duties. Open with /cam.",
+   "Translated": "严格在房屋内部调整缩放距离、视野、相机高度和碰撞。在房屋外、战斗中及任务中自动恢复相机。使用 /cam 打开。",
+   "Source": "ai"
+  }
+ },
+ "CharacterSettingsCopy": {
+  "Name": {
+   "Original": "Character Copy",
+   "Translated": "角色复制",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Back up and copy complete character settings.",
+   "Translated": "备份并复制完整的角色设置。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Copy complete character settings to other characters, import from another local character, undo the last transfer, or restore a full backup.",
+   "Translated": "将完整的角色设置复制到其他角色，从另一个本地角色导入，撤销上一次转移，或恢复完整备份。",
+   "Source": "ai"
+  }
+ },
+ "HouseHeightLock": {
+  "Name": {
+   "Original": "Z-Lock",
+   "Translated": "Z-Lock",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Adjust your lift and stay still inside a house.",
+   "Translated": "调整你的抬升高度并在房屋内保持静止。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Choose a 1–10 cm lift and lock inside player housing. Optional movement, player-presence killswitch and activation on placement-mode entry. Use at your own risk.",
+   "Translated": "选择 1–10 厘米的抬升高度并在玩家房屋内锁定。可选移动、玩家在场终止开关以及进入放置模式时激活。使用风险自负。",
+   "Source": "ai"
+  }
+ },
+ "SyncFix": {
+  "Name": {
+   "Original": "SyncFix",
+   "Translated": "SyncFix",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Troubleshoot and manually reload plugins.",
+   "Translated": "排查并手动重新加载插件。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "General plugin diagnostics and owner-controlled support. Open /syncfix.",
+   "Translated": "通用插件诊断和所有者控制的支持。打开 /syncfix。",
+   "Source": "ai"
+  }
+ },
+ "BestGearAll": {
+  "Name": {
+   "Original": "Best Gear All",
+   "Translated": "最佳装备全选",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Update gearsets with Recommended Gear and organize the Armoury Chest.",
+   "Translated": "使用推荐装备更新套装并整理兵装库。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Updates saved gearsets using FFXIV's Recommended Gear calculation. Includes background and traditional updaters, Armoury Chest organization, displaced-gear cleanup, and a clickable server-info-bar status shortcut for starting Background Update.",
+   "Translated": "使用 FFXIV 的推荐装备计算更新已保存的套装。包含后台和传统更新器、兵装库整理、被替换装备清理，以及可点击的服务器信息栏状态快捷方式以启动后台更新。",
+   "Source": "ai"
+  }
+ },
+ "InNeedQueue": {
+  "Name": {
+   "Original": "InNeedQueue",
+   "Translated": "InNeedQueue",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Queue selected roulettes when your role is in need.",
+   "Translated": "当你的职能有需求时排队选定的随机任务。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Role-based roulette monitoring with priorities, random queue delay, daily reward filtering, and five-minute presence checks.",
+   "Translated": "基于职能的随机任务监控，包含优先级、随机排队延迟、每日奖励筛选和五分钟在场检查。",
+   "Source": "ai"
+  }
+ },
+ "RetainerGearOptimizer": {
+  "Name": {
+   "Original": "Retainer Gear Optimizer",
+   "Translated": "雇员装备优化器",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Distribute the gear in your inventory across all your retainers: highest item level for combat, best Gathering and Perception for gatherers.",
+   "Translated": "将你背包中的装备分配给所有雇员：战斗职业追求最高品级，采集职业追求最佳获得力和鉴别力。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Cycles through every retainer at a summoning bell and distributes gear from your main inventory (Inventory 1-4) across all combat (DoW/DoM) retainers to maximize their total item level. Gear a retainer drops when it's upgraded can be passed down to another retainer in the same run, and no retainer ever loses item level in any slot. The armoury chest is ignored and gathering retainers are skipped for now.\n\nOpen a summoning bell, then use /rgo start or the Start button in /rgo. Enable Dry run in /rgo to preview the plan without moving anything.",
+   "Translated": "在召唤铃处循环召唤每个雇员，并将你主背包（背包 1-4）中的装备分配给所有战斗（战斗精英/魔法导师）雇员，以最大化其总品级。雇员升级时掉落的装备可在同一次运行中传递给另一个雇员，且任何雇员在任何部位都不会损失品级。兵装库会被忽略，采集雇员目前会被跳过。\n\n打开召唤铃，然后使用 /rgo start 或 /rgo 中的开始按钮。在 /rgo 中启用试运行以预览计划而不移动任何物品。",
+   "Source": "ai"
+  }
+ },
+ "KRWardrobeCleaner": {
+  "Name": {
+   "Original": "히메짱 옷장 정리기",
+   "Translated": "히메짱 옷장 정리기",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "만사가 귀찮은 공주님들을 위한 자동 정리 집사님!",
+   "Translated": "为万事都嫌麻烦的公主们准备的自动整理管家！",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "1단계에서 장비칸의 추억의 보관함 가능 장비를 안전 검사 후 보관하고, 2단계에서 Dungeon Drip 기반 환상의 옷장 후보를 순차 복원합니다. 제작직 전용 장비 포함 여부와 AutoRetainer 연동을 설정할 수 있습니다.",
+   "Translated": "第一阶段在安全检测后，将装备栏中可存入回忆仓库的装备存入；第二阶段基于 Dungeon Drip 依次恢复幻化柜候选。可以设置是否包含制作职业专用装备以及与 AutoRetainer 的联动。",
+   "Source": "ai"
+  }
+ },
+ "Blackout": {
+  "Name": {
+   "Original": "Blackout",
+   "Translated": "Blackout",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Turns the screen black while you're away.",
+   "Translated": "离开时将屏幕变黑。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Fades the screen to black when the game is in the background or when you are away. You can change the behavior for duties, crafting, and other situations. A timer shows that the game is still running. This plugin helps to prevent burn-in on OLED monitors.",
+   "Translated": "当游戏处于后台或你离开时，将屏幕渐变为黑色。你可以更改副本、制作和其他情况下的行为。计时器会显示游戏仍在运行。此插件有助于防止 OLED 显示器烧屏。",
+   "Source": "ai"
+  }
+ },
+ "PNXOdyssey": {
+  "Name": {
+   "Original": "PNX Odyssey",
+   "Translated": "PNX Odyssey",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Live Odyssey Trials table for fates and gods.",
+   "Translated": "用于命运和神明的实时 Odyssey Trials 表格。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Use /odyssey to open. Shares trial sessions, registration, threads, and god dice boards.",
+   "Translated": "使用 /odyssey 打开。共享试炼会话、报名、线程和神骰面板。",
+   "Source": "ai"
+  }
+ },
+ "DynamicPortrait": {
+  "Name": {
+   "Original": "Dynamic Portrait",
+   "Translated": "动态肖像",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "A live portrait camera following your character's bones.",
+   "Translated": "跟随角色骨骼的实时肖像相机。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Experimental second-view portrait window. Select a character and bone, adjust the camera, and resize the portrait. Uses an additional game tick for each portrait update. Run /dportrait to configure; rendering starts disabled.",
+   "Translated": "实验性第二视角肖像窗口。选择角色和骨骼，调整相机，并调整肖像大小。每次肖像更新使用额外的游戏 tick。运行 /dportrait 进行配置；渲染默认禁用。",
+   "Source": "ai"
+  }
+ },
+ "Culprit": {
+  "Name": {
+   "Original": "Culprit",
+   "Translated": "Culprit",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "Finds the plugin behind your stutter.",
+   "Translated": "找出导致你卡顿的插件。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "Watches every other plugin's draw and update time and error output. When one of them stalls a frame, eats frame time steadily, or throws repeatedly, Culprit names it in a notification so you know which plugin to look at.",
+   "Translated": "监视其他所有插件的绘制和更新时间以及错误输出。当其中一个插件导致帧停顿、持续占用帧时间或反复抛出错误时，Culprit 会在通知中指明它，让你知道该查看哪个插件。",
+   "Source": "ai"
+  }
+ },
+ "LazyHub": {
+  "Name": {
+   "Original": "Lazy Hub",
+   "Translated": "Lazy Hub",
+   "Source": "ai"
+  },
+  "Punchline": {
+   "Original": "One window for every lalalazy plugin.",
+   "Translated": "所有 lalalazy 插件的一个窗口。",
+   "Source": "ai"
+  },
+  "Description": {
+   "Original": "One in-game window for the whole lalalazy suite. Turn plugins on and off, change their common settings and open their windows from one place, with Gluttony Combo's Auto-Rotation switch and drag-to-hotbar action buttons up front, plus a server info bar entry. Open it with /lazy.",
+   "Translated": "整个 lalalazy 套件的一个游戏内窗口。在一个地方开启和关闭插件、更改它们的通用设置并打开它们的窗口，前方有暴食 Combo 的自动循环开关和拖到热键栏的动作按钮，外加一个服务器信息栏条目。使用 /lazy 打开。",
    "Source": "ai"
   }
  }
