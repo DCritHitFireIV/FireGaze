@@ -6,6 +6,7 @@
 - **客户端不持有任何凭据**（历史上密钥进过 DLL，现已全部移除）
 - 玩家**不需要 GitHub 账号**、不需要开浏览器
 - 反馈的垃圾内容在**发布前**就会被 Worker 规则拦下；发布后 `feedback.yml` 再复核一遍
+- 同时是译文流水线的**准点闹钟**：Cloudflare Cron 发 `repository_dispatch`（见「定时唤醒译文工作流」）
 
 ## 鉴权：用 GitHub App（推荐，机器人身份）或 PAT
 
@@ -121,6 +122,21 @@ GET  /library-counts   → 200 {"ok":true,"counts":{"AnoMech@library":12},"likes
 1. **Workers & Pages → KV → Create namespace**（名字随意，如 `firegaze-library-counts`）；
 2. 回到 worker → **Settings → Bindings → Add → KV Namespace**，Variable name 填 **`LIBRARY_COUNTS`**，选刚建的命名空间 → Save；
 3. 没绑定也不影响其他功能：计数端点回 `{"ok":false,"error":"counting disabled"}`，插件静默忽略。
+
+## 定时唤醒译文工作流（2026-10-05 新增，v7）
+
+GitHub 自带的 `schedule` 实测不可靠：`translate.yml` 的周一自动跑，9/21 晚到北京 17:49、9/28 晚到 18:46（都应在 12:00），
+其余定时工作流也普遍晚 2.5–6 小时，有时整个事件不触发。所以**准点触发改由本 worker 负责**：
+
+- **Cloudflare Cron Trigger** `0 0 * * 1,5`（UTC，= 北京时间周一/周五 08:00）
+- → worker `scheduled()` → GitHub `repository_dispatch`（`translate-now`）→ 立即起一轮 `translate.yml`
+- 用 `repository_dispatch` 而不是 `workflow_dispatch`：前者只需要 App 已具备的 **Contents: Read and write**（界面译文直传在用），后者要额外开 Actions 权限
+- `translate.yml` 里的两个 `schedule` 保留作为兜底；重复跑到时是增量，不会重翻
+
+启用步骤（Cloudflare 后台，一次）：
+1. worker → **Edit code** → 粘贴本仓库最新的 `scripts/relay/worker.js` → Deploy（v7 起才有 `scheduled` 处理器）
+2. worker → **Settings → Triggers → Cron Triggers → Add**：`0 0 * * 1,5` → Save
+3. 验证：临时再加一条 `*/10 * * * *`，10 分钟内 GitHub Actions 应出现一条 `repository_dispatch` 的 `update-translations` 运行；验证完删掉临时条目
 
 ## 防滥用（现状）
 

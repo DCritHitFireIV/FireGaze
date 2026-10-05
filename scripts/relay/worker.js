@@ -1,4 +1,4 @@
-// FireGaze 中继（Cloudflare Worker）v6
+// FireGaze 中继（Cloudflare Worker）v7
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
@@ -16,6 +16,9 @@
 //   · 公共库下载量 / 点赞（POST /library-download、POST /library-like 计数，GET /library-counts 读取）——2026-10-04 新增：
 //       包本体仍从 raw/镜像下载（CDN 不计下载），由客户端上报一条计数；存 KV（绑定名 LIBRARY_COUNTS）。
 //       v6 起按**包**计数（键 `<插件>@<包ID>`，基础包包ID=library）——每个玩家投稿包有独立的下载数与👍。
+//   · 准点唤醒译文工作流（Cloudflare Cron Trigger）——2026-10-05 新增（v7）：
+//       GitHub 自带 schedule 实测延迟数小时（9/21、9/28 的周一跑晚了 5.8/6.8 小时），
+//       所以周一/周五 00:00 UTC（北京 08:00）由本 worker 发 repository_dispatch(translate-now)。
 //
 // 鉴权（二选一，客户端不持有任何凭据）：
 //   ① GitHub App（推荐，「机器人」身份，不用任何个人 token）：
@@ -432,6 +435,27 @@ async function githubToken(env, repo) {
   return env.GITHUB_TOKEN ?? null; // 兼容旧部署
 }
 
+// ── 准点唤醒译文工作流（Cloudflare Cron Trigger：0 0 * * 1,5）──
+// 用 repository_dispatch 而不是 workflow_dispatch：前者只要 App 已具备的 Contents: R/W，
+// 后者要额外开 Actions: R/W。
+async function dispatchTranslate(env) {
+  const repo = env.REPO || REPO_DEFAULT;
+  const token = await githubToken(env, repo);
+  if (!token) throw new Error('no server credentials');
+  const res = await fetch(`https://api.github.com/repos/${repo}/dispatches`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'User-Agent': 'firegaze-relay',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ event_type: 'translate-now' }),
+  });
+  if (!res.ok) throw new Error(`dispatch ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  return res.status; // 204
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -441,7 +465,7 @@ export default {
         return handleLibraryCounts(env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 6 });
+      return json({ ok: true, service: 'firegaze-relay', version: 7 });
     }
 
     if (request.method !== 'POST') {
@@ -540,5 +564,16 @@ export default {
 
     const issue = await res.json();
     return json({ ok: true, issue: issue.html_url, number: issue.number });
+  },
+
+  // Cloudflare Cron Trigger（0 0 * * 1,5 = 北京周一/周五 08:00）：准点唤醒译文工作流。
+  // 失败只记日志：工作流里的 schedule 兜底，且 cron 下一轮还会再来。
+  async scheduled(controller, env, ctx) {
+    try {
+      await dispatchTranslate(env);
+      console.log(`translate dispatched (cron=${controller.cron})`);
+    } catch (error) {
+      console.error(`translate dispatch failed (cron=${controller.cron}): ${error}`);
+    }
   },
 };

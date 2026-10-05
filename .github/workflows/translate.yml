@@ -3,6 +3,8 @@ name: update-translations
 # 节奏（三处对齐，可单独改）：
 #   · 下载数：download-count.yml 每 6 小时回写一次下载数（数据统计，与译文无关）
 #   · 全量译文：周一与周五 08:00（北京时间）跑本工作流，只翻译新增或原文改过的条目
+#     （准点由 scripts/relay 的中继 Worker Cron 发 repository_dispatch 触发；
+#      GitHub 自带 schedule 不可靠——实测延迟 5–7 小时、偶发整次丢掉，只留作兜底）
 #   · 一行简介与冷门仓库：Aetherfeed 不含 Punchline、也不收录国服/小众库，
 #     所以工作流会先看 `scripts/repos.txt`（维护者用 scripts/export-repo-list.py 从本机导出的仓库清单），
 #     拿真实仓库文件当语料；没有这份清单时退回只用 Aetherfeed。
@@ -13,9 +15,12 @@ name: update-translations
 
 on:
   schedule:
-    # 每周一、周五 00:00 UTC（北京时间 08:00）
+    # 每周一、周五 00:00 UTC（北京时间 08:00）——兜底；GitHub 的 schedule 实测会延迟数小时
     - cron: '0 0 * * 1'
     - cron: '0 0 * * 5'
+  repository_dispatch:
+    # 中继 Worker（scripts/relay）的 Cloudflare Cron Trigger 准点唤醒：0 0 * * 1,5
+    types: [translate-now]
   workflow_dispatch:
     inputs:
       recheck:
