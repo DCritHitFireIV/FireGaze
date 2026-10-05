@@ -1,1346 +1,945 @@
 {
-  "type": "uit-contribution",
-  "plugin": "YesAlready",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-05",
+    "source": "user",
+    "label": "玩家包 · 144a3d",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Off",
       "Translated": "关闭",
       "Context": ".ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "On",
       "Translated": "开",
       "Context": ".ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": " badge on game windows that have a bother. Hover for details, click to configure.",
       "Translated": "有麻烦的游戏窗口上的徽章。悬停以获取详细信息，单击以配置。",
       "Context": "BotherBadges.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Hide when already enabled",
       "Translated": "已启用时隐藏",
       "Context": "BotherBadges.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Only show the badge on windows where none of its bothers are turned on.",
       "Translated": "仅在没有打开任何烦恼的窗口上显示徽章。",
       "Context": "BotherBadges.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Show a ",
       "Translated": "显示",
       "Context": "BotherBadges.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Window badges",
       "Translated": "窗口徽章",
       "Context": "BotherBadges.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": " can automate this window",
       "Translated": "可以自动设置此窗口",
       "Context": "BotherBadges.DrawTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Click to configure",
       "Translated": "单击可开始配置。",
       "Context": "BotherBadges.DrawTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Plugin is currently off or paused",
       "Translated": "插件当前已关闭或暂停",
       "Context": "BotherBadges.DrawTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Bothers",
       "Translated": "烦恼",
       "Context": "Bothers.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Auto confirm##GardeningConfirm",
       "Translated": "自动确认# # GardeningConfirm",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Auto-select fertilizer",
       "Translated": "自动选择肥料",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Fallback to first available",
       "Translated": "回退到第一个可用",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Fertilizer",
       "Translated": "化肥案",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "library"
     },
     {
       "Original": "If the preferred soil/seed is missing, use the first matching item in inventory.",
       "Translated": "如果缺少首选的土壤/种子，请使用库存中的第一个匹配项目。",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Plant the seeds after selecting them.",
       "Translated": "选择种子后种植。",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Seed",
       "Translated": "种子轮",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "library"
     },
     {
       "Original": "Show only inventory items##GardeningOnlyInv",
       "Translated": "仅显示库存项目# # GardeningOnlyInv",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Soil",
       "Translated": "土壤",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "library"
     },
     {
       "Original": "When the fertilize inventory opens, select the preferred fertilizer.",
       "Translated": "当肥料库存打开时，选择首选肥料。",
       "Context": "Bothers.DrawAutoSelectGardeningSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Rate limiter (pause after N items, 0 to disable).",
       "Translated": "速率限制器（在N项后暂停， 0表示禁用）。",
       "Context": "Bothers.DrawBother",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "(none)",
       "Translated": "（无）",
       "Context": "Bothers.DrawGardeningItemCombo",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": ")##TransmuteBlacklistOpen",
       "Translated": ") # # TransmuteBlacklistOpen",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "All Different",
       "Translated": "全部不同",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "All Same",
       "Translated": "全部相同",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Blacklist materia (",
       "Translated": "黑名单材料（",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "If enabled, stop instead of padding with duplicate types when fewer than five unique materia are available.",
       "Translated": "如果启用，当可用的唯一材料少于五个时，停止而不是使用重复类型填充。",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Mode##TransmuteMode",
       "Translated": "模式# # TransmuteMode",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Require all different",
       "Translated": "要求所有不同的",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Whether to submit all of the same materia at once or try to use all different.",
       "Translated": "是否一次提交所有相同的材料或尝试使用所有不同的材料。",
       "Context": "Bothers.DrawTradeMultipleSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": " Conditions List",
       "Translated": "条件列表",
       "Context": "ConditionsListWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "Current Conditions: ",
       "Translated": "现状",
       "Context": "ConditionsListWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "ID",
       "Translated": "CN",
       "Context": "ConditionsListWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Name",
       "Translated": "姓名",
       "Context": "ConditionsListWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "List Dialogs",
       "Translated": "列表对话框",
       "Context": "CoreTab.DrawAddLastSeenPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Numeric Dialogs",
       "Translated": "数字对话框",
       "Context": "CoreTab.DrawAddLastSeenPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "OK Dialogs",
       "Translated": "确定对话框",
       "Context": "CoreTab.DrawAddLastSeenPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Select type and preview:",
       "Translated": "选择类型和预览：",
       "Context": "CoreTab.DrawAddLastSeenPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Talk Dialogs",
       "Translated": "对话",
       "Context": "CoreTab.DrawAddLastSeenPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Yes/No Dialogs",
       "Translated": "是/否对话框",
       "Context": "CoreTab.DrawAddLastSeenPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "List Selection",
       "Translated": "CWS清单选择",
       "Context": "CoreTab.DrawAddNewEntryPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "Numeric Input",
       "Translated": "数字输入",
       "Context": "CoreTab.DrawAddNewEntryPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "OK Dialog",
       "Translated": "确定对话框",
       "Context": "CoreTab.DrawAddNewEntryPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "Talk Dialog",
       "Translated": "对话",
       "Context": "CoreTab.DrawAddNewEntryPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "Yes/No Dialog",
       "Translated": "是/否对话框",
       "Context": "CoreTab.DrawAddNewEntryPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "library"
     },
     {
       "Original": "Add Folder",
       "Translated": "添加文件夹",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Add Last Seen",
       "Translated": "添加最后上线时间",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Add New",
       "Translated": "添加新项目",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "AddLastSeen",
       "Translated": "添加上次看到的内容",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.OpenPopup"
+      "Source": "library"
     },
     {
       "Original": "AddNewEntry",
       "Translated": "添加新条目",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.OpenPopup"
+      "Source": "library"
     },
     {
       "Original": "Show Disabled",
       "Translated": "显示失效轨迹",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Show Enabled",
       "Translated": "显示已启用",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Show Invalid",
       "Translated": "显示无效",
       "Context": "CoreTab.DrawToolbar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Core",
       "Translated": "核",
       "Context": "CoreTab.get_TabName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Add new entry",
       "Translated": "添加新条目",
       "Context": "Custom.DrawButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "AddonName",
       "Translated": "插件名称",
       "Context": "Custom.DrawButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "Addon Name:",
       "Translated": "插件名称：",
       "Context": "Custom.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Note:",
       "Translated": "注意：",
       "Context": "Custom.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Parameters:",
       "Translated": "参数:",
       "Context": "Custom.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "This is not used for anything, it's just a note to help remember what this bother does.",
       "Translated": "这不是用来做什么的，它只是一个说明，以帮助记住这个烦恼做了什么。",
       "Context": "Custom.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "library"
     },
     {
       "Original": "addonName",
       "Translated": "插件名称",
       "Context": "Custom.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "callbackParams",
       "Translated": "回调参数",
       "Context": "Custom.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "noteText",
       "Translated": "注释文本",
       "Context": "Custom.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "Invalid Target Regex",
       "Translated": "目标正则表达式无效",
       "Context": "Lists.DisplayListEntryNode",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.TextTooltip"
+      "Source": "library"
     },
     {
       "Original": "Invalid Text and Target Regex",
       "Translated": "无效的文本和目标正则表达式",
       "Context": "Lists.DisplayListEntryNode",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.TextTooltip"
+      "Source": "library"
     },
     {
       "Original": "Add last selected as new entry",
       "Translated": "将最后选定的条目添加为新条目",
       "Context": "Lists.DrawButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "-matchText",
       "Translated": "-匹配文本",
       "Context": "Lists.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "-targetText",
       "Translated": "-目标文本",
       "Context": "Lists.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "Fill with current target",
       "Translated": "用当前目标填充",
       "Context": "Lists.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Target Restricted",
       "Translated": "目标受限",
       "Context": "Lists.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Auto Select Quests",
       "Translated": "自动选择Quest挑战奖励",
       "Context": "Lists.DrawSelectStringBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Automatically select the first string that's a quest name",
       "Translated": "自动选择任务名称的第一个字符串",
       "Context": "Lists.DrawSelectStringBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Alt",
       "Translated": "Alt键",
       "Context": "MainWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Control",
       "Translated": "制高",
       "Context": "MainWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Shift",
       "Translated": "Shift键",
       "Context": "MainWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Equal",
       "Translated": "平等",
       "Context": "MainWindow.ComparisonTypeToText",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Greater than",
       "Translated": "大于",
       "Context": "MainWindow.ComparisonTypeToText",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Greater than or equal",
       "Translated": "大于或等于",
       "Context": "MainWindow.ComparisonTypeToText",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Less than",
       "Translated": "小于",
       "Context": "MainWindow.ComparisonTypeToText",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Less than or equal",
       "Translated": "请输入小于或等于{0}的值。",
       "Context": "MainWindow.ComparisonTypeToText",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "-popup",
       "Translated": "弹出",
       "Context": "MainWindow.DisplayEntryNode",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.OpenPopup"
+      "Source": "library"
     },
     {
       "Original": "-tree",
       "Translated": "树",
       "Context": "MainWindow.DisplayEntryNode",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TreeNodeEx"
+      "Source": "library"
     },
     {
       "Original": "Invalid Text Regex",
       "Translated": "无效的文本正则表达式",
       "Context": "MainWindow.DisplayEntryNode",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.TextTooltip"
+      "Source": "library"
     },
     {
       "Original": " in the Server Info Bar (DTR Bar). Clicking toggles the plugin.",
       "Translated": "在服务器信息栏（ DTR栏）中。单击切换插件。",
       "Context": "MainWindow.DisplayMiscOptions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": " messages to output to.",
       "Translated": "要输出的消息。",
       "Context": "MainWindow.DisplayMiscOptions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "DTR",
       "Translated": "数字TR",
       "Context": "MainWindow.DisplayMiscOptions",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Display the status of the ",
       "Translated": "显示",
       "Context": "MainWindow.DisplayMiscOptions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Select the chat channel for ",
       "Translated": "选择聊天频道",
       "Context": "MainWindow.DisplayMiscOptions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Settings",
       "Translated": "设置",
       "Context": "MainWindow.DisplayMiscOptions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Custom",
       "Translated": "自定义",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Enabled",
       "Translated": "已启用",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Force unlock",
       "Translated": "强制解锁",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "List",
       "Translated": "家具列表",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Log",
       "Translated": "轮盘日志",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Numerics",
       "Translated": "数字",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Ok",
       "Translated": "确定",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Tabs",
       "Translated": "标签",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabBar"
+      "Source": "library"
     },
     {
       "Original": "Yes Already function is paused because following plugins have requested it: ",
       "Translated": "是已暂停函数，因为以下插件已请求它：",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "YesNo",
       "Translated": "是或否",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "library"
     },
     {
       "Original": "Disable Hotkey",
       "Translated": "禁用热键",
       "Context": "MainWindow.DrawHotkeySettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Forced Talk Hotkey",
       "Translated": "强制通话热键",
       "Context": "MainWindow.DrawHotkeySettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Forced Yes Hotkey",
       "Translated": "强制是热键",
       "Context": "MainWindow.DrawHotkeySettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "library"
     },
     {
       "Original": "Separate Yes/Talk",
       "Translated": "单独的是/谈话",
       "Context": "MainWindow.DrawHotkeySettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "While this key is held, any Yes/No prompt will always default to yes, and all talk dialogue will be skipped. Be careful.",
       "Translated": "按住此键时，任何“是”/“否”提示将始终默认为“是” ，并且将跳过所有对话对话。小心。",
       "Context": "MainWindow.DrawHotkeySettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "While this key is held, the plugin is disabled.",
       "Translated": "按住此键时，插件将被禁用。",
       "Context": "MainWindow.DrawHotkeySettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "-rename",
       "Translated": "改名",
       "Context": "MainWindow.TextNodePopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "Add entry",
       "Translated": "添加条目...",
       "Context": "MainWindow.TextNodePopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Add folder",
       "Translated": "添加文件夹",
       "Context": "MainWindow.TextNodePopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Add last seen as new entry",
       "Translated": "添加上次显示为新条目",
       "Context": "MainWindow.TextNodePopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Delete",
       "Translated": "删除",
       "Context": "MainWindow.TextNodePopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Untitled folder",
       "Translated": "未命名文件夹",
       "Context": "MainWindow.TextNodePopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TreeNodeEx"
+      "Source": "library"
     },
     {
       "Original": " Materia Blacklist",
       "Translated": "Materia黑名单",
       "Context": "MateriaBlacklistWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "All",
       "Translated": "所有食谱",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Blacklisted: ",
       "Translated": "被拉黑",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Category",
       "Translated": "类别",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Clear",
       "Translated": "清空",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Clear All",
       "Translated": "全部清除",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "DoH",
       "Translated": "英国卫生部（DoH）。",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "DoL",
       "Translated": "道尔",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Filter by name",
       "Translated": "按名称过滤",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "library"
     },
     {
       "Original": "Grade",
       "Translated": "等级：",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Outdated/not shown materia are automatically blacklisted",
       "Translated": "过期/未显示的材料将自动列入黑名单",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "library"
     },
     {
       "Original": "Select",
       "Translated": "选择大奖",
       "Context": "MateriaBlacklistWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Unknown",
       "Translated": "未知",
       "Context": "NodeTypeExtensions.GetDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Invalid Text and Zone Regex",
       "Translated": "无效的文本和区域正则表达式",
       "Context": "Numerics.DisplayEntryNode",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.TextTooltip"
+      "Source": "library"
     },
     {
       "Original": "Invalid Zone Regex",
       "Translated": "区域正则表达式无效",
       "Context": "Numerics.DisplayEntryNode",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.TextTooltip"
+      "Source": "library"
     },
     {
       "Original": "Could not find name",
       "Translated": "未找到",
       "Context": "Numerics.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "Default Quantity##",
       "Translated": "默认数量",
       "Context": "Numerics.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputInt"
+      "Source": "library"
     },
     {
       "Original": "Fill with current zone",
       "Translated": "用当前区域填充",
       "Context": "Numerics.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Percent of Max##",
       "Translated": "最大值的百分比# #",
       "Context": "Numerics.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "library"
     },
     {
       "Original": "Percentage",
       "Translated": "百分比",
       "Context": "Numerics.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Zone List",
       "Translated": "区域列表",
       "Context": "Numerics.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Zone Restricted",
       "Translated": "区域受限",
       "Context": "Numerics.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Add current target as a new entry",
       "Translated": "将当前目标添加为新条目",
       "Context": "Talk.DrawButtons",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "YesAlready",
       "Translated": "是的已经",
       "Context": "YesAlready.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "-comparisonType",
       "Translated": "-比较类型",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "-conditionalNumber",
       "Translated": "-条件编号",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputInt"
+      "Source": "library"
     },
     {
       "Original": "-conditionalText",
       "Translated": "-条件文本",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "Click No",
       "Translated": "点按“否”。",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Click Yes",
       "Translated": "点击Yes",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Condition Restricted",
       "Translated": "条件受限",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Conditions List",
       "Translated": "条件列表",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IconButton"
+      "Source": "library"
     },
     {
       "Original": "Conditions can either be their name (case sensitive) or ID. They must be comma separated if there are multiple. Condition restricted only allows the match to go through if all conditions are met. If you would like to invert a condition, put a \"!\" in front of it.",
       "Translated": "条件可以是其名称（区分大小写）或ID。如果有多个，则必须用逗号分隔。条件限制仅允许匹配在所有条件都满足的情况下进行。如果您想反转条件，请在其前面加上“!”。",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "library"
     },
     {
       "Original": "Currently only supports number extraction",
       "Translated": "目前仅支持数字提取",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Is Conditional",
       "Translated": "是条件流",
       "Context": "YesNo.DrawPopup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Auto Collectables",
       "Translated": "自动收藏品",
       "Context": "YesNo.DrawYesnoBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Auto GimmickYesNo",
       "Translated": "自动噱头是否",
       "Context": "YesNo.DrawYesnoBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Automatically accept collectables that are worth turning in and decline insufficient ones.",
       "Translated": "自动接受值得上交但数量不足的收藏品。",
       "Context": "YesNo.DrawYesnoBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Automatically confirm any Yesno dialogs that are part of the GimmickYesNo sheet.\nThese are mostly the dungeon Yesnos like \"Unlock this door?\" or \"Pickup this item?\"",
       "Translated": "自动确认属于GimmickYesNo工作表的任何Yesno对话框。\n这些大多是地下城是的，比如“打开这扇门？”或“拿起这个物品？”",
       "Context": "YesNo.DrawYesnoBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "Automatically confirm when joining a party finder group.",
       "Translated": "加入派对查找器组时自动确认。",
       "Context": "YesNo.DrawYesnoBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiX.IndentedTextColored"
+      "Source": "library"
     },
     {
       "Original": "LookingForGroup x SelectYesno",
       "Translated": "LookForGroup x 选择是否",
       "Context": "YesNo.DrawYesnoBothers",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": " Zone List",
       "Translated": "区域列表",
       "Context": "ZoneListWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "Current ID: ",
       "Translated": "当前标识",
       "Context": "ZoneListWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "Sort by Name",
       "Translated": "按名称排序",
       "Context": "ZoneListWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-05T03:55:38",
-  "imported": {
-    "archive": "uit-direct-2026-10-05T03-55-25-932Z-498b7c60-2026-10-05T035537.json",
-    "accepted": 155,
-    "filled": 155,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 155 条 `YesAlready` 的界面文字译文，已收为**独立译文包** `uit-packs/YesAlready@user-144a3d.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 155 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
