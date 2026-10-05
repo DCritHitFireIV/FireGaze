@@ -1,1 +1,73 @@
-{"type":"uit-contribution","plugin":"MarketBoardPlugin","kinds":["free","human"],"entries":[{"Original":"Market Board Config","Translated":"市场板配置","Context":"MarketBoardConfigWindow..ctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Market Board Shopping List","Translated":"市场板购物清单","Context":"MarketBoardShoppingListWindow..ctor","Source":"user","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"recentHistoryColumns","Translated":"recent History Columns","Context":"MarketBoardShoppingListWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Columns"},{"Original":"Market Board","Translated":"市场板","Context":"MarketBoardWindow..ctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"HQ","Translated":"高质量","Context":"MarketBoardWindow.Draw","Source":"user","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"currentListingsColumns","Translated":"currentListings Columns","Context":"MarketBoardWindow.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Columns"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "MarketBoardPlugin",
+  "kinds": [
+    "free",
+    "human"
+  ],
+  "entries": [
+    {
+      "Original": "Market Board Config",
+      "Translated": "市场板配置",
+      "Context": "MarketBoardConfigWindow..ctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Market Board Shopping List",
+      "Translated": "市场板购物清单",
+      "Context": "MarketBoardShoppingListWindow..ctor",
+      "Source": "user",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "recentHistoryColumns",
+      "Translated": "recent History Columns",
+      "Context": "MarketBoardShoppingListWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Columns"
+    },
+    {
+      "Original": "Market Board",
+      "Translated": "市场板",
+      "Context": "MarketBoardWindow..ctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "HQ",
+      "Translated": "高质量",
+      "Context": "MarketBoardWindow.Draw",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "currentListingsColumns",
+      "Translated": "currentListings Columns",
+      "Context": "MarketBoardWindow.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Columns"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-05T03:57:12",
+  "imported": {
+    "archive": "uit-direct-2026-10-05T03-57-01-171Z-8318cc32-2026-10-05T035712.json",
+    "accepted": 6,
+    "filled": 6,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 6 条 `MarketBoardPlugin` 的界面文字译文，已收为**独立译文包** `uit-packs/MarketBoardPlugin@user-92deb3.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 6 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}

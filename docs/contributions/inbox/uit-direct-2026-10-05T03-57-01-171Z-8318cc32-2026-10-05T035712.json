@@ -1,0 +1,76 @@
+{
+  "issue": "direct-2026-10-05T03-57-01-171Z-8318cc32",
+  "receivedAt": "2026-10-05 03:57:12",
+  "author": "匿名直传",
+  "plugin": "MarketBoardPlugin",
+  "fingerprint": "92deb3a3dadf5ac1",
+  "packFile": "MarketBoardPlugin@user-92deb3.json",
+  "accepted": 6,
+  "filled": 6,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "MarketBoardPlugin",
+    "kinds": [
+      "free",
+      "human"
+    ],
+    "entries": [
+      {
+        "Original": "Market Board Config",
+        "Translated": "市场板配置",
+        "Context": "MarketBoardConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Market Board Shopping List",
+        "Translated": "市场板购物清单",
+        "Context": "MarketBoardShoppingListWindow..ctor",
+        "Source": "user",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "recentHistoryColumns",
+        "Translated": "recent History Columns",
+        "Context": "MarketBoardShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Columns"
+      },
+      {
+        "Original": "Market Board",
+        "Translated": "市场板",
+        "Context": "MarketBoardWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "HQ",
+        "Translated": "高质量",
+        "Context": "MarketBoardWindow.Draw",
+        "Source": "user",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "currentListingsColumns",
+        "Translated": "currentListings Columns",
+        "Context": "MarketBoardWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Columns"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
