@@ -21,6 +21,7 @@ public enum MainTab
 /// </summary>
 internal sealed class MainWindow : Window
 {
+    private readonly Plugin plugin;
     private readonly RepoAuditTab repoAuditTab;
     private readonly InstallerTab installerTab;
     private readonly TranslateTab translateTab;
@@ -40,8 +41,9 @@ internal sealed class MainWindow : Window
         };
 
         this.uiTextTab = uiTextTab;
+        this.plugin = plugin;
         repoAuditTab = new RepoAuditTab(plugin);
-        installerTab = new InstallerTab(plugin);
+        installerTab = new InstallerTab(plugin, repoAuditTab);
         translateTab = new TranslateTab(plugin);
         discoveryTab = new DiscoveryTab(plugin);
     }
@@ -62,6 +64,13 @@ internal sealed class MainWindow : Window
     {
         pendingSelect = MainTab.UIText;
         Plugin.Log.Debug("[FireGaze] 窗口已打开（页签回到「插件汉化」）");
+
+        // 首次打开：弹一次「公共彩云翻译额度」公告（点过「知道了」就不再弹；
+        // 确认时立刻落盘，DTR 即刻登出也不会重复弹）
+        if (!plugin.Config.TranslateQuotaNoticeConfirmed)
+        {
+            plugin.QuotaNotice.IsOpen = true;
+        }
     }
 
     /// <summary>
@@ -83,35 +92,35 @@ internal sealed class MainWindow : Window
         if (ImGui.BeginTabBar("###FireGazeTabs"))
         {
             var flags = pendingSelect == MainTab.UIText ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("1·插件汉化", flags))
+            if (ImGui.BeginTabItem("插件汉化", flags))
             {
                 this.uiTextTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.Discovery ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("2·插件发现", flags))
+            if (ImGui.BeginTabItem("插件发现", flags))
             {
                 discoveryTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("3·仓库体检", flags))
+            if (ImGui.BeginTabItem("仓库体检", flags))
             {
                 repoAuditTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("4·简介汉化", flags))
+            if (ImGui.BeginTabItem("简介汉化", flags))
             {
                 translateTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("5·插件安装器", flags))
+            if (ImGui.BeginTabItem("插件安装器", flags))
             {
                 installerTab.Draw();
                 ImGui.EndTabItem();

@@ -28,6 +28,8 @@
 //   ② GITHUB_TOKEN（机密）：fine-grained PAT，仅本仓库；投稿要 Issues: R/W，直传要 Contents: R/W
 //
 // 环境变量：REPO（可选，默认 DCritHitFireIV/FireGaze）
+//          FEEDBACK_REPO（可选，默认 = REPO）：玩家反馈的 issue 建到这个仓库；
+//          指向私有仓时只有维护者能看（GitHub 公开仓不支持私密 issue）。
 // 机密（/translate 用）：CAIYUN_TOKEN——彩云小译访问令牌；不配就只关闭这个端点，其他功能照常。
 // 绑定（下载量用）：LIBRARY_COUNTS（KV 命名空间）；不配则计数端点回 counting disabled，其余照常。
 
@@ -678,9 +680,14 @@ export default {
       }
     }
 
+    // 反馈可以单独指定一个仓库（用户 2026-10-07：反馈进私有仓，只有维护者能看）；不配就还是主仓
+    const repo = isFeedback
+      ? (env.FEEDBACK_REPO || env.REPO || REPO_DEFAULT)
+      : (env.REPO || REPO_DEFAULT);
+
     let token;
     try {
-      token = await githubToken(env, env.REPO || REPO_DEFAULT);
+      token = await githubToken(env, repo);
     } catch (e) {
       return json({ ok: false, error: 'server auth failed', detail: String(e).slice(0, 200) }, 500);
     }
@@ -689,7 +696,6 @@ export default {
       return json({ ok: false, error: 'server not configured' }, 500);
     }
 
-    const repo = env.REPO || REPO_DEFAULT;
     const res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
       method: 'POST',
       headers: {

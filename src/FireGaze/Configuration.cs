@@ -303,4 +303,11 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("DiscoveryFeatureAnnounced")]
     public bool DiscoveryFeatureAnnounced { get; set; }
+
+    /// <summary>
+    ///     是否已确认「公共彩云翻译额度」的一次性公告（点过「知道了」）。
+    ///     确认时立即落盘——用户可能用 DTR 即刻登出，等不到正常退出保存。
+    /// </summary>
+    [JsonProperty("TranslateQuotaNoticeConfirmed")]
+    public bool TranslateQuotaNoticeConfirmed { get; set; }
 }

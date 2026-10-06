@@ -49,6 +49,7 @@ public sealed class Plugin : IDalamudPlugin
     private readonly MainWindow window;
     private readonly UI.UITextEditorWindow uiTextEditorWindow;
     private readonly UI.UITextSettingsWindow uiTextSettingsWindow;
+    private readonly UI.QuotaNoticeWindow quotaNoticeWindow;
     private readonly UI.UITextTab uiTextTab;
     private readonly UIText.UITextRunLock uiTextRunLock;
     private readonly UIText.UITextPatchManager uiTextPatchManager;
@@ -134,6 +135,8 @@ public sealed class Plugin : IDalamudPlugin
         windowSystem.AddWindow(uiTextEditorWindow);
         uiTextSettingsWindow = new UI.UITextSettingsWindow(this);
         windowSystem.AddWindow(uiTextSettingsWindow);
+        quotaNoticeWindow = new UI.QuotaNoticeWindow(this);
+        windowSystem.AddWindow(quotaNoticeWindow);
         window = new MainWindow(this, uiTextTab = new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager, uiTextRunLock));
         windowSystem.AddWindow(window);
         pluginInterface.UiBuilder.Draw += windowSystem.Draw;
@@ -558,6 +561,19 @@ public sealed class Plugin : IDalamudPlugin
     ///     设置页要用的安装器功能状态（只读）。
     /// </summary>
     internal UI.InstallerListScroll InstallerFeatures => installerListScroll;
+
+    /// <summary>一次性额度公告窗（首次打开主窗口且未确认时弹出）。</summary>
+    internal UI.QuotaNoticeWindow QuotaNotice => quotaNoticeWindow;
+
+    /// <summary>
+    ///     用户点了额度公告的「知道了」：立即落盘——
+    ///     用户可能开着 DailyRoutines 的即刻登出，等不到游戏正常退出时保存。
+    /// </summary>
+    public void ConfirmTranslateQuotaNotice()
+    {
+        Config.TranslateQuotaNoticeConfirmed = true;
+        SaveConfig(force: true);
+    }
 
     /// <summary>
     ///     卫月插件接口（仓库体检页订阅「插件列表变化」用）。

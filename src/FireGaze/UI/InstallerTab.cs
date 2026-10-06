@@ -8,14 +8,19 @@ namespace FireGaze.UI;
 internal sealed class InstallerTab
 {
     private readonly Plugin plugin;
+    private readonly RepoAuditTab repoAudit;
 
-    public InstallerTab(Plugin plugin)
+    public InstallerTab(Plugin plugin, RepoAuditTab repoAudit)
     {
         this.plugin = plugin;
+        this.repoAudit = repoAudit;
     }
 
     public void Draw()
     {
+        // 图标检查 / 下载的推进：面板搬到了这一页，下载期间每帧都要推进
+        repoAudit.TickIconMaintenance();
+
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
             "以下开关会将仓库刷新限制在后台，阻止插件安装器在使用时自动更新插件仓库，将列表重置回顶部。"
@@ -69,5 +74,12 @@ internal sealed class InstallerTab
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
             "改动立即保存：拦截即刻生效，位置记忆在下次打开插件安装器时生效。");
+
+        ImGui.Spacing();
+        ImGui.Separator();
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "图标缓存：检查哪些已装插件缺图标并批量下载；下过的图标存在本地，重开游戏不用重下。");
+        repoAudit.DrawIconMaintenance();
     }
 }

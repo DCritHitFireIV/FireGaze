@@ -77,7 +77,7 @@ internal sealed partial class RepoAuditTab
                           : string.Empty)
                       + "。下好的图标会存在本地，重开游戏不用重下。";
 
-        SetStatus(summary, false);
+        SetIconPanelStatus(summary, false);
         iconMissingNames = iconMissing.Select(x => x.DisplayName).ToList();
     }
 
@@ -88,7 +88,7 @@ internal sealed partial class RepoAuditTab
     {
         if (iconMissing.Count == 0)
         {
-            SetStatus("图标检查：没有需要下载的图标。", false);
+            SetIconPanelStatus("图标检查：没有需要下载的图标。", false);
             return;
         }
 
@@ -116,7 +116,7 @@ internal sealed partial class RepoAuditTab
         nextIconKick = DateTime.MinValue;
         iconDownloadRunning = true;
         iconDownloadLine = $"图标下载：已请求 0/{iconDownloadTotal} · 拿到 0";
-        SetStatus(null, false);
+        SetIconPanelStatus(null, false);
     }
 
     /// <summary>
@@ -317,11 +317,11 @@ internal sealed partial class RepoAuditTab
 
         if (checkable.Count == 0)
         {
-            SetStatus(head, false);
+            SetIconPanelStatus(head, false);
             return;
         }
 
-        SetStatus(head + " 正在确认那几个的图标地址…", false);
+        SetIconPanelStatus(head + " 正在确认那几个的图标地址…", false);
 
         var urls = checkable
             .Where(x => x.IsThirdParty && !string.IsNullOrWhiteSpace(x.IconURL))
@@ -388,7 +388,7 @@ internal sealed partial class RepoAuditTab
             }
 
             iconDeadReport = deadNames;
-            SetStatus(head + (parts.Count > 0 ? " " + string.Join("；", parts) + "。" : string.Empty), false);
+            SetIconPanelStatus(head + (parts.Count > 0 ? " " + string.Join("；", parts) + "。" : string.Empty), false);
         });
     }
 

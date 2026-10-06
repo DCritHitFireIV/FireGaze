@@ -260,11 +260,10 @@ internal sealed partial class RepoAuditTab
 
         // ---------------- 筛选 + 搜索 ----------------
         ImGui.Text("显示");
-        FilterRadio("problems", "有问题的");
         FilterRadio("all", "全部");
-        FilterRadio("unreachable", "连接失败");
+        FilterRadio("problems", "有问题的");
+        FilterRadio("unreachable", "链接失败");
         FilterRadio("disabled", "已停用");
-        FilterRadio("ok", "可用");
 
         // 第二行：与健康度正交的两个开关（使用情况 / 图标展开）
         var indexReady = installedIndex is { Available: true };
@@ -319,88 +318,6 @@ internal sealed partial class RepoAuditTab
             ImGui.SetTooltip("勾选后每条库链下面展开已安装插件的图标；列表每行会变高，可视的库链会变少；悬停图标条可一次看到全部名字");
         }
 
-        ImGui.SameLine();
-        var iconCacheEnabled = plugin.Config.IconCacheEnabled;
-        if (ImGui.Checkbox("启用图标缓存###IconCache", ref iconCacheEnabled))
-        {
-            plugin.Config.IconCacheEnabled = iconCacheEnabled;
-            plugin.SaveConfig();
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip(
-                "把下到的图标存到本地（配置目录 /icons），重开游戏不用重下；\n"
-                + "并分批挂回卫月的图标缓存，插件安装器里也能直接用本地图。\n"
-                + "关掉后回到旧行为：只借卫月内存缓存，每次重启都要重新下载。");
-        }
-
-        ImGui.SameLine();
-        ImGui.TextDisabled("│");
-        ImGui.SameLine();
-
-        var canCheck = indexReady && !scanning && !iconDownloadRunning;
-        if (!canCheck)
-        {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.Button(iconCheckDone ? "重新检查缺图标###IconCheck" : "检查缺图标###IconCheck"))
-        {
-            RunIconCheck();
-        }
-
-        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-        {
-            ImGui.SetTooltip(
-                (indexReady ? string.Empty : "插件数据不可用，暂时不能检查。\n")
-                + "哪些已装插件声明了图标、但本地（含落盘缓存）还没有。\n"
-                + "范围是已安装的插件，与上面的筛选和勾选无关；这一步不下载任何东西。");
-        }
-
-        if (!canCheck)
-        {
-            ImGui.EndDisabled();
-        }
-
-        ImGui.SameLine();
-
-        // 第二步：看过清单后由用户决定下不下
-        var canDownload = indexReady && !scanning && iconCheckDone;
-        if (!canDownload)
-        {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.Button(iconDownloadRunning
-                ? "停止下载###IconDownload"
-                : $"下载图标（{iconMissing.Count}）###IconDownload"))
-        {
-            if (iconDownloadRunning)
-            {
-                FinishIconDownload();
-            }
-            else
-            {
-                StartIconDownload();
-            }
-        }
-
-        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-        {
-            ImGui.SetTooltip(
-                (indexReady ? string.Empty : "插件数据不可用，暂时不能下载。\n")
-                + (iconCheckDone ? string.Empty : "先点「检查缺图标」，拿到清单再决定。\n")
-                + "把上一步查出来缺的那些图标下下来（直连 + 镜像竞速，同时最多 8 个）。\n"
-                + "下到的图标会存到本地（配置目录 /icons），重开游戏不用重下，\n"
-                + "插件安装器里也能直接用本地图。\n"
-                + "最多等 120 秒；只剩最后几个时会收尾（再等 4 秒就报结果）。中途可点「停止下载」。");
-        }
-
-        if (!canDownload)
-        {
-            ImGui.EndDisabled();
-        }
 
         if (installedIndex is { Available: false })
         {
@@ -437,24 +354,10 @@ internal sealed partial class RepoAuditTab
         // ---------------- 操作工具条 ----------------
         DrawActionBar(selectedCount, selectedHidden, snapshot);
 
-        // ---------------- 状态行（只在有事件结果时出现；图标检查进行中带进度条） ----------------
-        if (iconDownloadRunning && iconDownloadTotal > 0)
-        {
-            ImGui.ProgressBar(
-                (float)iconDownloadGot / iconDownloadTotal,
-                new Vector2(120, 0));
-            ImGui.SameLine();
-            UiHelpers.ColoredWrapped(UiHelpers.Muted, iconDownloadLine ?? string.Empty);
-        }
-        else if (!string.IsNullOrEmpty(statusMessage))
+        // ---------------- 状态行（只在有事件结果时出现；图标相关的状态在「插件安装器」页看） ----------------
+        if (!string.IsNullOrEmpty(statusMessage))
         {
             UiHelpers.ColoredWrapped(statusIsError ? UiHelpers.Bad : UiHelpers.Muted, statusMessage);
-
-            // 缺图标名单在状态行里只能给前几个，悬停看全部（IC2-06）
-            if (iconMissingNames is { Count: > 0 } names && ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip($"缺图标 {names.Count} 个：\n" + string.Join("、", names));
-            }
         }
 
         // ---------------- 结果表 ----------------

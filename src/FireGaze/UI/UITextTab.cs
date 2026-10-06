@@ -165,7 +165,6 @@ internal sealed class UITextTab
     private bool feedbackSending;
     private string feedbackStatus = string.Empty;
     private bool feedbackStatusError;
-    private string feedbackSentURL = string.Empty;
 
     private Run? run;
     private bool rowsDirty = true;
@@ -375,7 +374,6 @@ internal sealed class UITextTab
             this.feedbackNeedsOpen = true;
             this.feedbackStatus = string.Empty;
             this.feedbackStatusError = false;
-            this.feedbackSentURL = string.Empty;
         }
 
         if (ImGui.IsItemHovered())
@@ -612,15 +610,7 @@ internal sealed class UITextTab
         // ── 左列：图标 + 文本块 ──
         var rowTop = ImGui.GetCursorScreenPos().Y;
 
-        // 展开指示（2026-10-03 UI 评审 P1-1）：编辑校对 / 云端译文只在展开区里，得让人看得见
-        ImGui.TextDisabled(isOpen ? "▾" : "▸");
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip(isOpen ? "点这一行收起。" : "点这一行展开：重新抽取 / 编辑校对 / 云端译文。");
-        }
-
-        ImGui.SameLine(0, 6);
-
+        // 展开指示已去掉（用户 2026-10-07：与「插件发现」保持一致，不要行首的 ▸/▾）
         const float iconSize = 40f;
         if (!this.TryDrawIcon(plugin, iconSize))
         {
@@ -2272,11 +2262,6 @@ internal sealed class UITextTab
         ImGui.SetNextItemWidth(150);
         ImGui.Combo("分类###UITextFeedbackCategory", ref this.feedbackCategory, categories, categories.Length);
 
-        // 引导贡献翻译（2026-10-03 用户要求：反馈里不再单列「汉化不对」）
-        UiHelpers.ColoredWrapped(
-            UiHelpers.Muted,
-            "想修正或补充某个插件的译文？到「插件汉化 → 该插件 → 编辑校对」改好后，用「更多 → 提交人工译文到公共译文库」直接贡献——比反馈更快被收录。");
-
         ImGui.SetNextItemWidth(-1);
         ImGui.InputTextMultiline("###UITextFeedbackText", ref this.feedbackText, 4000, new Vector2(-1, 130));
         if (ImGui.IsItemHovered())
@@ -2332,20 +2317,6 @@ internal sealed class UITextTab
             UiHelpers.ColoredWrapped(this.feedbackStatusError ? UiHelpers.Bad : UiHelpers.Good, this.feedbackStatus);
         }
 
-        if (this.feedbackSentURL.Length > 0)
-        {
-            ImGui.Spacing();
-            ImGui.TextDisabled("进度可以在这里跟踪（不登录也能看）：");
-            ImGui.PushTextWrapPos(0f);
-            ImGui.TextUnformatted(this.feedbackSentURL);
-            ImGui.PopTextWrapPos();
-            ImGui.SameLine();
-            if (ImGui.SmallButton("复制链接###UITextFeedbackCopy"))
-            {
-                ImGui.SetClipboardText(this.feedbackSentURL);
-            }
-        }
-
         ImGui.SetItemDefaultFocus();
         ImGui.EndPopup();
     }
@@ -2379,7 +2350,6 @@ internal sealed class UITextTab
                     {
                         this.feedbackStatus = "已提交，感谢反馈！";
                         this.feedbackStatusError = false;
-                        this.feedbackSentURL = message;
                         this.feedbackText = string.Empty;
                     }
                     else
