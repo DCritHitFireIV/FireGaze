@@ -1,5 +1,6 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using FireGaze.Diagnostics;
 using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
@@ -338,10 +339,12 @@ internal sealed partial class DiscoveryTab
         var name = entry.InternalName;
         _ = Task.Run(async () =>
         {
-            var (ok, total, weekly, _) = await DiscoveryRelay.LikeAsync(name, CancellationToken.None).ConfigureAwait(false);
+            var (ok, total, weekly, error) = await DiscoveryRelay.LikeAsync(name, CancellationToken.None).ConfigureAwait(false);
             if (!ok)
             {
-                return;   // 留在待重试里，不谎报成功
+                // 留在待重试里，不谎报成功；补报成功时会另记一条 Info
+                ActivityLog.Warning("插件发现", $"{name}：点赞上报失败（{error ?? "unknown"}）；已排队自动重试");
+                return;
             }
 
             discoveryState.CompleteLike(name);

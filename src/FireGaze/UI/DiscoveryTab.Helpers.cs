@@ -1,3 +1,4 @@
+using FireGaze.Diagnostics;
 using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 
@@ -51,6 +52,7 @@ internal sealed partial class DiscoveryTab
             {
                 statsFetchFailed = true;
                 discoveryStats ??= discoveryState.CachedStats;
+                ActivityLog.Debug("插件发现", "统计拉取失败（中继不可达或未部署 /plugin-stats）；用缓存兜底");
             }
 
             statsFetchedAt = DateTime.UtcNow;
@@ -107,6 +109,7 @@ internal sealed partial class DiscoveryTab
             if (ok)
             {
                 discoveryState.CompletePending(action);
+                ActivityLog.Info("插件发现", $"补报成功（{action.Type}：{action.Plugin}）");
             }
         });
     }
@@ -255,6 +258,10 @@ internal sealed partial class DiscoveryTab
             if (await DiscoveryRelay.ReportAddsAsync(names, CancellationToken.None).ConfigureAwait(false))
             {
                 discoveryState.CompleteAdds(names);
+            }
+            else
+            {
+                ActivityLog.Warning("插件发现", $"推荐上报失败（{names.Count} 个插件）；已排队自动重试");
             }
         });
     }

@@ -38,6 +38,9 @@ internal sealed class DiscoveryStateStore
     private List<DiscoveryPendingAction> pending = [];
     private Dictionary<string, long> submittedRepos = new(StringComparer.Ordinal);
 
+    /// <summary>本机状态文件读/写出过问题（界面给一次性提示，不让失败一直静默）。</summary>
+    private bool persistFailed;
+
     public DiscoveryStateStore(string configDirectory)
     {
         path = Path.Combine(configDirectory, "discovery-state.json");
@@ -213,6 +216,20 @@ internal sealed class DiscoveryStateStore
         }
     }
 
+    /// <summary>
+    ///     本机状态文件读写出过问题？取一次就清零——界面上给一次性提示，不让失败一直静默
+    ///     （failure-path 审计的唯一未处理项）。
+    /// </summary>
+    public bool TakePersistFailure()
+    {
+        lock (gate)
+        {
+            var failed = persistFailed;
+            persistFailed = false;
+            return failed;
+        }
+    }
+
     private void PruneLocked()
     {
         // 超过 30 天的陈旧上报没有重试意义（周榜早就翻篇了），直接丢
@@ -249,7 +266,8 @@ internal sealed class DiscoveryStateStore
         }
         catch
         {
-            // 坏文件当没有：不因此让页签不可用
+            // 坏文件当没有：不因此让页签不可用（但要让界面提示一次，不静默）
+            persistFailed = true;
             likedWeeks = new Dictionary<string, string>(StringComparer.Ordinal);
             pending = [];
             submittedRepos = new Dictionary<string, long>(StringComparer.Ordinal);
@@ -270,10 +288,12 @@ internal sealed class DiscoveryStateStore
             var json = JsonSerializer.Serialize(doc, JSONOptions);
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             AtomicFile.WriteAllText(path, json + Environment.NewLine, System.Text.Encoding.UTF8);
+            persistFailed = false;
         }
         catch
         {
-            // 存不下不影响本次使用；下次再试
+            // 存不下不影响本次使用；下次再试；由界面取 TakePersistFailure 提示一次
+            persistFailed = true;
         }
     }
 

@@ -1,4 +1,5 @@
 using Dalamud.Bindings.ImGui;
+using FireGaze.Diagnostics;
 using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 
@@ -84,6 +85,7 @@ internal sealed partial class DiscoveryTab
                 {
                     submitMessage = "打回：" + check.Message;
                     submitIsError = true;
+                    ActivityLog.Info("插件发现", $"投稿被本地检测打回：{url} → {check.Message}");
                     return;
                 }
 
@@ -91,6 +93,7 @@ internal sealed partial class DiscoveryTab
                 {
                     submitMessage = "这条库链已经在云库里了";
                     submitIsError = false;
+                    ActivityLog.Debug("插件发现", $"投稿跳过（云库已有）：{check.NormalizedURL}");
                     return;
                 }
 
@@ -99,6 +102,7 @@ internal sealed partial class DiscoveryTab
                 {
                     submitMessage = "投稿失败：" + message + "（地址没丢，网络好了再点一次）";
                     submitIsError = true;
+                    ActivityLog.Warning("插件发现", $"投稿提交失败（{url}）：{message}");
                     return;
                 }
 
@@ -106,11 +110,13 @@ internal sealed partial class DiscoveryTab
                 submitMessage = "已投稿（" + check.Message + "），等云端收录；收录后会触发一次增量翻译";
                 submitIsError = false;
                 submitInput = string.Empty;
+                ActivityLog.Info("插件发现", $"投稿已受理：{check.NormalizedURL ?? url}");
             }
             catch (Exception e)
             {
                 submitMessage = "投稿出错：" + e.GetType().Name;
                 submitIsError = true;
+                ActivityLog.Error("插件发现", $"投稿出错：{url}", e);
             }
             finally
             {

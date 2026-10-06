@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using Dalamud.Bindings.ImGui;
+using FireGaze.Diagnostics;
 using FireGaze.Discovery;
 using FireGaze.Translate;
 
@@ -167,6 +168,13 @@ internal sealed partial class DiscoveryTab
         EnsureDiscoveryStats();
         RetryPendingReport();
         DrainLikeResults();
+
+        // 本机状态文件读写出过问题就给一次提示（failure-path 审计留的唯一未处理项）
+        if (discoveryState.TakePersistFailure())
+        {
+            SetStatus("本机记录读写出错，点赞与推荐的重试队列可能会丢", isError: true);
+            ActivityLog.Warning("插件发现", "discovery-state.json 读/写失败：点赞与推荐的重试队列可能丢失");
+        }
 
         if (index is null)
         {
