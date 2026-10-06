@@ -131,12 +131,7 @@ internal sealed partial class DiscoveryTab
                 ImGui.TextDisabled("[已在库]");
             }
 
-            // 中文优先：有译文就显示译文，没有才回落到原文（用户 2026-10-07：发现页很多简介还是英语）
-            var punchline = FirstNonEmpty(
-                entry.Entry?.Punchline?.Translated,
-                entry.OriginalPunchline,
-                entry.Entry?.Description?.Translated,
-                entry.OriginalDescription);
+            var punchline = DisplayPunchline(entry);
             if (!string.IsNullOrWhiteSpace(punchline))
             {
                 UiHelpers.Fitted(punchline.Replace('\n', ' '), punchline);
@@ -219,8 +214,7 @@ internal sealed partial class DiscoveryTab
         // 缩进对齐到图标右侧的文字列（40px 图标 + 间距），详情和名字同一视线
         ImGui.Indent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
 
-        // 描述同样中文优先（没有译文才显示原文）
-        var description = FirstNonEmpty(entry.Entry?.Description?.Translated, entry.OriginalDescription);
+        var description = DisplayDescription(entry);
         if (!string.IsNullOrWhiteSpace(description))
         {
             ImGui.TextWrapped(description);

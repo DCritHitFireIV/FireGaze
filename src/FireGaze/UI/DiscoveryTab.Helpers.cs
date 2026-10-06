@@ -1,6 +1,7 @@
 using FireGaze.Diagnostics;
 using FireGaze.Discovery;
 using FireGaze.RepoAudit;
+using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
@@ -53,6 +54,49 @@ internal sealed partial class DiscoveryTab
 
     private static string FirstNonEmpty(params string?[] values)
         => values.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? string.Empty;
+
+    /// <summary>
+    ///     发现页显示的「一句简介」（用户 2026-10-07 定死的口径）：原文非中文且有译文 → 译文；
+    ///     否则显示原文（未翻译 / 原文本来就是中文都保持原样）。连简介都没有时退回详情。
+    /// </summary>
+    private static string DisplayPunchline(TranslationIndexEntry entry)
+    {
+        var original = entry.OriginalPunchline;
+        var translated = entry.Entry?.Punchline?.Translated;
+        if (!string.IsNullOrWhiteSpace(translated) && !TranslationIndex.IsChinese(original))
+        {
+            return translated;
+        }
+
+        if (!string.IsNullOrWhiteSpace(original))
+        {
+            return original;
+        }
+
+        var originalDesc = entry.OriginalDescription;
+        var translatedDesc = entry.Entry?.Description?.Translated;
+        return !string.IsNullOrWhiteSpace(translatedDesc) && !TranslationIndex.IsChinese(originalDesc)
+            ? translatedDesc
+            : FirstNonEmpty(originalDesc, translatedDesc);
+    }
+
+    /// <summary>
+    ///     发现页详情（用户 2026-10-07 定死的口径）：原文非中文且有译文 → 双语（译文 + 原文）；
+    ///     未翻译或原文本来就是中文 → 显示原文。
+    /// </summary>
+    private static string DisplayDescription(TranslationIndexEntry entry)
+    {
+        var original = entry.OriginalDescription;
+        var translated = entry.Entry?.Description?.Translated;
+        if (!string.IsNullOrWhiteSpace(translated)
+            && !string.IsNullOrWhiteSpace(original)
+            && !TranslationIndex.IsChinese(original))
+        {
+            return translated + "\n\n" + original;
+        }
+
+        return FirstNonEmpty(original, translated);
+    }
 
     /// <summary>
     ///     拉一次中继统计（打开页签时 / 每 10 分钟）：成功就更新排序与赞数；失败退到上次缓存。
