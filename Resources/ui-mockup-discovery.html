@@ -2,12 +2,14 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>FireGaze 插件发现页 — 3 状态帧 mockup（2026-10-06 v2）</title>
+<title>FireGaze 插件发现页 — ins 风 mockup（2026-10-06 v3）</title>
 <style>
-  /* 视觉语言沿用本仓库其它还原图；本图与实现同序同数（v1.3.0.41：无箭头、无元信息行、♥ 不带数字、详情精简、投稿无勾选）。 */
+  /* ins 风移植：卡片面色差分层、圆角、圆形头像、一处渐变（展开行左条）、已赞红心、粉 CTA。
+     与实现同序同数（v1.3.0.44，按 xiaohongshu 设计系统重构）。游戏内不刷浅色底，只搬结构。 */
   :root {
-    --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
-    --text: #e4e4e4; --muted: #909090; --accent: #ffb35c; --btn: #3c3c3c;
+    --win-bg: #191919; --card: #1a1a20; --card-hover: #1f1f26; --card-active: #23232b;
+    --text: #e4e4e4; --muted: #a8a8a8; --accent: #ffb35c;
+    --pink: #ff2e4d; --pink-hover: #ff4762; --liked: #ff2e4d;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -18,59 +20,62 @@
   .stage { padding: 20px; display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; align-items: flex-start; }
   .caption { color: var(--muted); font-size: 13px; margin: 0 0 8px 2px; width: 780px; }
   .window {
-    width: 780px; height: 620px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 4px;
+    width: 780px; height: 620px; background: var(--win-bg); border: 1px solid #4d4d4d; border-radius: 6px;
     display: flex; flex-direction: column; overflow: hidden;
   }
-  .titlebar { height: 32px; background: var(--title); display: flex; align-items: center; padding: 0 16px; font-weight: 600; border-bottom: 1px solid var(--border); }
+  .titlebar { height: 32px; background: #2b2b2b; display: flex; align-items: center; padding: 0 16px; font-weight: 600; border-bottom: 1px solid #3a3a3a; }
   .titlebar .brand { color: var(--accent); }
   .titlebar .sub { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 12px; }
-  .body { padding: 8px 16px 14px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
-  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .body { padding: 8px 14px 14px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid #3a3a3a; margin-bottom: 4px; }
   .tab { padding: 4px 10px; color: var(--muted); font-size: 14px; }
-  .tab.active { color: var(--text); background: var(--panel); border: 1px solid var(--border); border-bottom-color: transparent; border-radius: 3px 3px 0 0; margin-bottom: -1px; }
+  .tab.active { color: var(--text); background: var(--card); border: 1px solid #3a3a3a; border-bottom-color: transparent; border-radius: 6px 6px 0 0; margin-bottom: -1px; }
   .hint { color: var(--muted); font-size: 13px; }
-  .sep { height: 1px; background: var(--border); margin: 4px 0; }
-  .row { display: flex; align-items: stretch; border-bottom: 1px solid #262626; }
-  .row:nth-child(odd) { background: #1c1c1c; }
-  .row.open { background: #232a33; }
-  .rowmain { flex: 1; display: flex; gap: 10px; padding: 6px 4px; min-width: 0; }
-  .icon { width: 40px; height: 40px; border-radius: 5px; background: #383e4c; color: #ccdbee; display: flex; align-items: center; justify-content: center; font-weight: 700; flex: none; }
+  .sep { height: 1px; background: #2a2a2a; margin: 4px 0; }
+  .list { display: flex; flex-direction: column; gap: 6px; }
+  .card { background: var(--card); border-radius: 14px; display: flex; align-items: stretch; position: relative; }
+  .card.hover { background: var(--card-hover); }
+  .card.open { background: var(--card-active); }
+  /* 小红书规范：卡片不加左侧彩色描边（SaaS 味）；展开态只用更亮的卡面 */
+  .rowmain { flex: 1; display: flex; gap: 10px; padding: 8px 6px 8px 12px; min-width: 0; }
+  .icon { width: 40px; height: 40px; border-radius: 50%; background: #383e4c; color: #ccdbee; display: flex; align-items: center; justify-content: center; font-weight: 700; flex: none; }
   .icon.img { background: linear-gradient(135deg, #42506a, #263246); }
   .col { min-width: 0; flex: 1; }
-  .name { color: var(--text); }
-  .tag { color: var(--muted); font-size: 13px; }
-  .punch { color: #b9b9b9; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 520px; }
-  .actions { flex: none; width: 190px; display: flex; align-items: flex-start; gap: 6px; padding: 6px 2px 0 0; justify-content: flex-start; }
-  .btn { background: var(--btn); border: 1px solid #555; border-radius: 3px; color: var(--text); font-size: 13px; padding: 2px 8px; white-space: nowrap; }
-  .btn.blue { background: #3b5e8c; border-color: #4f79ad; }
-  .btn.green { background: #2e6b47; border-color: #3d8559; }
-  .btn.dim { opacity: .55; }
-  .btn.small { font-size: 12px; padding: 1px 6px; }
+  .name { color: var(--text); font-weight: 600; }
+  .tag { color: var(--muted); font-size: 12px; font-weight: 400; }
+  .punch { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 520px; }
+  .actions { flex: none; width: 186px; display: flex; align-items: center; gap: 10px; padding: 0 10px 0 0; justify-content: flex-start; }
+  .heart { color: var(--muted); font-size: 17px; width: 40px; text-align: center; }
+  .heart.liked { color: var(--liked); }
+  .btn { border: 0; border-radius: 9999px; font-size: 13px; padding: 4px 12px; white-space: nowrap; }
+  .btn.pink { background: var(--pink); color: #fff; }
+  .btn.green { background: #2e6b47; color: var(--text); border: 1px solid #3d8559; }
+  .btn.small { font-size: 12px; padding: 2px 10px; border-radius: 8px; }
+  .btn.ghost { background: #2a2a2a; color: var(--text); border: 1px solid #444; }
   .toolbar { display: flex; align-items: center; gap: 10px; }
-  .toolbar + .toolbar { margin-top: 2px; }
-  .field { background: #111; border: 1px solid #555; border-radius: 3px; color: var(--muted); padding: 2px 8px; font-size: 13px; }
-  .check { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-block; position: relative; background: #2a2a2a; flex: none; vertical-align: -2px; }
-  .check.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 1px; }
-  .expanded { background: #202020; border-bottom: 1px solid #262626; padding: 6px 8px 10px 60px; font-size: 13px; color: #c9c9c9; }
+  .field { background: #111; border: 1px solid #555; border-radius: 9999px; color: var(--muted); padding: 3px 10px; font-size: 13px; }
+  .check { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 3px; display: inline-block; position: relative; background: #2a2a2a; flex: none; vertical-align: -2px; }
+  .check.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 2px; }
+  .expanded { padding: 2px 12px 10px 62px; font-size: 13px; color: #c9c9c9; }
   .expanded .k { color: var(--muted); display: inline-block; width: 84px; }
   .expanded .kv { margin: 2px 0; }
   .expanded .desc { color: #cfcfcf; margin: 4px 0 8px; white-space: pre-wrap; }
   .statusbar { color: var(--muted); font-size: 13px; margin-top: 4px; }
-  .submitbox { border: 1px solid #303030; background: #1d1d1d; border-radius: 3px; padding: 6px 10px; font-size: 13px; }
+  .submitbox { background: var(--card); border-radius: 12px; padding: 8px 12px; font-size: 13px; }
 </style>
 </head>
 <body>
 <div class="stage">
 
   <div>
-    <p class="caption">帧 1 — 默认态：无箭头、无元信息行，行内只留 图标 + 名字 + 一行简介 + 右栏 ♥ 与库操作</p>
+    <p class="caption">帧 1 — xiaohongshu 设计系统（深色）默认态：紫调圆角卡片、圆形头像、品牌红红心与 CTA</p>
     <div class="window">
       <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 发现</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab active">插件发现</div></div>
 
-        <div>整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。</div>
-        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。</div>
+        <div>找插件：云端插件库全在这里（含官方主库），没加过的库可以加入自己的库。</div>
+        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行看详情。</div>
         <div class="sep"></div>
 
         <div class="toolbar">
@@ -85,59 +90,61 @@
 
         <div class="submitbox" style="margin:6px 0">▸ <b style="font-weight:600">投稿插件库</b><span class="hint">（收录后所有人可搜）</span></div>
 
-        <div class="row">
-          <div class="rowmain">
-            <div class="icon img">P</div>
-            <div class="col">
-              <div><span class="name">Penumbra</span> <span class="tag">[已在库]</span></div>
-              <div class="punch">Runtime mod loader and manager.</div>
+        <div class="list">
+          <div class="card">
+            <div class="rowmain">
+              <div class="icon img">P</div>
+              <div class="col">
+                <div><span class="name">Penumbra</span> <span class="tag">[已在库]</span></div>
+                <div class="punch">Runtime mod loader and manager.</div>
+              </div>
             </div>
+            <div class="actions"><span class="heart liked">♥</span></div>
           </div>
-          <div class="actions"><span class="btn">♥</span></div>
-        </div>
 
-        <div class="row">
-          <div class="rowmain">
-            <div class="icon">A</div>
-            <div class="col">
-              <div><span class="name">Ability Ants</span> <span class="tag">[官方]</span></div>
-              <div class="punch">Draw ants when things are off cooldown.</div>
+          <div class="card">
+            <div class="rowmain">
+              <div class="icon">A</div>
+              <div class="col">
+                <div><span class="name">Ability Ants</span> <span class="tag">[官方]</span></div>
+                <div class="punch">Draw ants when things are off cooldown.</div>
+              </div>
             </div>
+            <div class="actions"><span class="heart">♥</span></div>
           </div>
-          <div class="actions"><span class="btn">♥</span></div>
-        </div>
 
-        <div class="row">
-          <div class="rowmain">
-            <div class="icon">M</div>
-            <div class="col">
-              <div><span class="name">MapFocus</span></div>
-              <div class="punch">Automatically focus the map on your target's location with a hotkey.</div>
+          <div class="card">
+            <div class="rowmain">
+              <div class="icon">M</div>
+              <div class="col">
+                <div><span class="name">MapFocus</span></div>
+                <div class="punch">Automatically focus the map on your target's location with a hotkey.</div>
+              </div>
             </div>
+            <div class="actions"><span class="heart">♥</span><span class="btn pink">加入自己的库</span></div>
           </div>
-          <div class="actions"><span class="btn">♥</span><span class="btn blue">加入自己的库</span></div>
-        </div>
 
-        <div class="row">
-          <div class="rowmain">
-            <div class="icon">L</div>
-            <div class="col">
-              <div><span class="name">LightlessSync</span> <span class="tag">[已在库]</span></div>
-              <div class="punch">让大家的游戏里马上出现你的外貌与幻化改动（不会显示你的真实 ID）。</div>
+          <div class="card">
+            <div class="rowmain">
+              <div class="icon">L</div>
+              <div class="col">
+                <div><span class="name">LightlessSync</span> <span class="tag">[已在库]</span></div>
+                <div class="punch">让大家的游戏里马上出现你的外貌与幻化改动（不会显示你的真实 ID）。</div>
+              </div>
             </div>
+            <div class="actions"><span class="heart">♥</span><span class="btn green">启用</span></div>
           </div>
-          <div class="actions"><span class="btn">♥</span><span class="btn green">启用</span></div>
-        </div>
 
-        <div class="row">
-          <div class="rowmain">
-            <div class="icon">Q</div>
-            <div class="col">
-              <div><span class="name">QToolKit</span></div>
-              <div class="punch">一套集成式工具栏，支持自定义按钮与面板布局，可热键呼出，附带常用的小工具集合与主题切换。</div>
+          <div class="card">
+            <div class="rowmain">
+              <div class="icon">Q</div>
+              <div class="col">
+                <div><span class="name">QToolKit</span></div>
+                <div class="punch">一套集成式工具栏，支持自定义按钮与面板布局，可热键呼出，附带常用的小工具集合与主题切换。</div>
+              </div>
             </div>
+            <div class="actions"><span class="heart">♥</span><span class="btn pink">加入自己的库</span></div>
           </div>
-          <div class="actions"><span class="btn">♥</span><span class="btn blue">加入自己的库</span></div>
         </div>
 
         <div class="statusbar">已把这条库链加进你的插件列表</div>
@@ -146,55 +153,52 @@
   </div>
 
   <div>
-    <p class="caption">帧 2 — 点开一行（整行点击；展开态靠选中底色）：描述正文 + 作者/更新/推荐/点赞（只写总数）+ 库链两个按钮</p>
+    <p class="caption">帧 2 — 展开态：卡面更亮（不加彩色描边）；详情已按上轮精简</p>
     <div class="window">
       <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 发现</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab active">插件发现</div></div>
-        <div>整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。</div>
-        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。</div>
+        <div>找插件：云端插件库全在这里（含官方主库），没加过的库可以加入自己的库。</div>
+        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行看详情。</div>
         <div class="sep"></div>
         <div class="toolbar">
           <span class="field" style="width:220px">搜索插件名、作者、一行简介、详情…</span>
           <span>排序</span><span class="field" style="width:120px">最新更新 ▾</span>
         </div>
-        <div class="toolbar">
-          <span><span class="check on"></span> 隐藏主库</span>
-          <span class="hint">2306 个插件</span>
-        </div>
-        <div class="submitbox" style="margin:6px 0">▸ <b style="font-weight:600">投稿插件库</b><span class="hint">（收录后所有人可搜）</span></div>
+        <div class="toolbar"><span><span class="check on"></span> 隐藏主库</span><span class="hint">2306 个插件</span></div>
 
-        <div class="row open">
-          <div class="rowmain">
-            <div class="icon">M</div>
-            <div class="col">
-              <div><span class="name">MapFocus</span></div>
-              <div class="punch">Automatically focus the map on your target's location with a hotkey.</div>
+        <div class="list" style="margin-top:6px">
+          <div class="card open">
+            <div class="rowmain">
+              <div class="icon">M</div>
+              <div class="col">
+                <div><span class="name">MapFocus</span></div>
+                <div class="punch">Automatically focus the map on your target's location with a hotkey.</div>
+              </div>
+            </div>
+            <div class="actions"><span class="heart">♥</span><span class="btn pink">加入自己的库</span></div>
+            <div class="expanded" style="position:absolute; left:0; right:0; top:56px;">
+              <div class="desc">Press the configured hotkey to open the map centered on your current target. Works in duties and overworld; can be limited to certain content types in the settings.</div>
+              <div class="kv"><span class="k">作者</span>tigurand</div>
+              <div class="kv"><span class="k">最后更新</span>2026-08-12 21:04</div>
+              <div class="kv"><span class="k">推荐</span>17 次（从云端加进自己库）</div>
+              <div class="kv"><span class="k">点赞</span>9</div>
+              <div class="kv"><span class="k">库链</span><span class="btn pink small">加入自己的库</span> <span class="btn ghost small">复制</span></div>
+              <div class="hint">https://raw.githubusercontent.com/tigurand/MapFocus/refs/heads/main/pluginmaster.json</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥</span><span class="btn blue">加入自己的库</span></div>
-        </div>
-        <div class="expanded">
-          <div class="desc">Press the configured hotkey to open the map centered on your current target. Works in duties and overworld; can be limited to certain content types in the settings.</div>
-          <div class="kv"><span class="k">作者</span>tigurand</div>
-          <div class="kv"><span class="k">最后更新</span>2026-08-12 21:04</div>
-          <div class="kv"><span class="k">推荐</span>17 次（从云端加进自己库）</div>
-          <div class="kv"><span class="k">点赞</span>9</div>
-          <div class="kv"><span class="k">库链</span>
-            <span class="btn small blue">加入自己的库</span> <span class="btn small">复制</span>
-          </div>
-          <div class="hint">https://raw.githubusercontent.com/tigurand/MapFocus/refs/heads/main/pluginmaster.json</div>
-        </div>
+          <div style="height:150px"></div>
 
-        <div class="row">
-          <div class="rowmain">
-            <div class="icon">M</div>
-            <div class="col">
-              <div><span class="name">MissFisher</span></div>
-              <div class="punch">Fishing tracker with bite timers and statistics.</div>
+          <div class="card">
+            <div class="rowmain">
+              <div class="icon">M</div>
+              <div class="col">
+                <div><span class="name">MissFisher</span></div>
+                <div class="punch">Fishing tracker with bite timers and statistics.</div>
+              </div>
             </div>
+            <div class="actions"><span class="heart">♥</span></div>
           </div>
-          <div class="actions"><span class="btn">♥</span></div>
         </div>
 
         <div class="statusbar">已复制库链地址</div>
@@ -203,22 +207,21 @@
   </div>
 
   <div>
-    <p class="caption">帧 3 — 投稿区（无「顺手加到我的库」勾选）+ 统计不可用 + 未同步点赞（♥ 带 *）</p>
+    <p class="caption">帧 3 — 投稿区（无勾选）+ 统计不可用 + 未同步红心（♥ *）</p>
     <div class="window">
       <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 发现</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab active">插件发现</div></div>
-        <div>整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。</div>
-        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。</div>
+        <div>找插件：云端插件库全在这里（含官方主库），没加过的库可以加入自己的库。</div>
+        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行看详情。</div>
         <div class="sep"></div>
         <div class="toolbar">
           <span class="field" style="width:220px"></span>
           <span>排序</span><span class="field" style="width:120px">随机 ▾</span>
-          <span class="btn small">换一批</span>
+          <span class="btn ghost small">换一批</span>
         </div>
         <div class="toolbar">
-          <span><span class="check"></span> 隐藏主库</span>
-          <span class="hint">2306 个插件</span>
+          <span><span class="check"></span> 隐藏主库</span><span class="hint">2306 个插件</span>
           <span class="hint" style="color:#f2bf59">· 统计暂不可用</span>
         </div>
 
@@ -228,20 +231,22 @@
           <div class="hint" style="margin-bottom:4px">需要公开可读的仓库文件（pluginmaster.json / repo.json）；官方主库不用投。</div>
           <div class="toolbar" style="margin-top:2px">
             <span class="field" style="width:320px">https://raw.githubusercontent.com/…/repo.json</span>
-            <span class="btn">投稿</span>
+            <span class="btn ghost">投稿</span>
           </div>
           <div style="color:#9a9a9a; margin-top:4px">已投稿、等收录：1 条</div>
         </div>
 
-        <div class="row">
-          <div class="rowmain">
-            <div class="icon">S</div>
-            <div class="col">
-              <div><span class="name">SomethingNeedDoing</span> <span class="tag">[已在库]</span></div>
-              <div class="punch">A lightweight macro framework for automation.</div>
+        <div class="list">
+          <div class="card">
+            <div class="rowmain">
+              <div class="icon">S</div>
+              <div class="col">
+                <div><span class="name">SomethingNeedDoing</span> <span class="tag">[已在库]</span></div>
+                <div class="punch">A lightweight macro framework for automation.</div>
+              </div>
             </div>
+            <div class="actions"><span class="heart liked">♥ *</span></div>
           </div>
-          <div class="actions"><span class="btn dim">♥ *</span></div>
         </div>
 
         <div class="statusbar">已投稿（检测通过：12 条插件），等云端收录；收录后会触发一次增量翻译</div>

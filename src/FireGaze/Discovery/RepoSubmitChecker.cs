@@ -43,18 +43,23 @@ internal static class RepoSubmitChecker
         var body = await FetchAsync(text, cancellationToken).ConfigureAwait(false);
         if (body is null)
         {
-            return new RepoSubmitCheck(false, "取不到这个地址：可能网络不通、404、或者它需要登录", normalized, 0, 0);
+            return new RepoSubmitCheck(false, "取不到这个地址：可能网络不通、404、或者它需要登录；确认地址能在浏览器打开后重试", normalized, 0, 0);
         }
 
         var check = ManifestCheck.Check(body);
         if (!check.Ok)
         {
-            return new RepoSubmitCheck(false, "不是卫月能读的仓库文件：" + (check.Error ?? "内容格式不对"), normalized, 0, 0);
+            return new RepoSubmitCheck(
+                false,
+                "不是卫月能读的仓库文件：" + (check.Error ?? "内容格式不对") + "；需要的是 pluginmaster.json / repo.json 这类仓库文件",
+                normalized,
+                0,
+                0);
         }
 
         if (check.Count == 0)
         {
-            return new RepoSubmitCheck(false, "这个文件是空数组，一条插件都没有", normalized, 0, 0);
+            return new RepoSubmitCheck(false, "这个文件是空数组，一条插件都没有；换一条包含插件的仓库文件", normalized, 0, 0);
         }
 
         var valid = check.Count - check.Dropped;

@@ -145,8 +145,8 @@ internal sealed partial class DiscoveryTab
     private void DrawCore()
     {
         // ---------------- 顶部说明 ----------------
-        ImGui.TextWrapped("整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。");
-        ImGui.TextDisabled("和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。");
+        ImGui.TextWrapped("找插件：云端插件库全在这里（含官方主库），没加过的库可以加入自己的库。");
+        ImGui.TextDisabled("和本机装了哪些插件无关；每个插件每周可点赞一次，点一行看详情。");
 
         ImGui.Separator();
 

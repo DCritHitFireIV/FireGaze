@@ -36,7 +36,9 @@ internal sealed partial class DiscoveryTab
 
         if (filtered.Count == 0)
         {
-            ImGui.TextDisabled(index is { Available: true } ? "当前筛选下没有插件。" : "没有插件。");
+            ImGui.TextDisabled(index is { Available: true }
+                ? "没有匹配的插件 —— 换个关键词，或清掉筛选试试。"
+                : "云端插件库暂时是空的。");
             return;
         }
 

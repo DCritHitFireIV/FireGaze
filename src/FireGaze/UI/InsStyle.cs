@@ -10,27 +10,23 @@ namespace FireGaze.UI;
 /// </summary>
 internal static class InsStyle
 {
-    public static readonly Vector4 Card = new(0.12f, 0.12f, 0.12f, 1f);          // #1F1F1F 卡片面
-    public static readonly Vector4 CardHover = new(0.145f, 0.145f, 0.15f, 1f);
-    public static readonly Vector4 CardActive = new(0.16f, 0.16f, 0.17f, 1f);
-    public static readonly Vector4 LikedRed = new(0.929f, 0.286f, 0.337f, 1f);    // #ED4956 已赞红心
-    public static readonly Vector4 Neutral = new(0.66f, 0.66f, 0.66f, 1f);
-    public static readonly Vector4 Bright = new(0.95f, 0.95f, 0.95f, 1f);
-    public static readonly Vector4 Pink = new(0.757f, 0.208f, 0.518f, 1f);        // #C13584（白字对比 ≈5.2:1）
-    public static readonly Vector4 PinkHover = new(0.882f, 0.188f, 0.424f, 1f);   // #E1306C
+    // 取自 xiaohongshu 设计系统（深色模式）的 token：
+    //   Surface #19191E（紫调近黑）/ 品牌红 #FF2E4D / 标题白 84% / 段落白 56%
+    //   卡片圆角 12–16、按钮全胶囊、零阴影（层级靠间距与圆角）
+    public static readonly Vector4 Card = new(0.102f, 0.102f, 0.125f, 1f);        // #1A1A20 卡片面（紫调）
+    public static readonly Vector4 CardHover = new(0.122f, 0.122f, 0.149f, 1f);   // #1F1F26
+    public static readonly Vector4 CardActive = new(0.137f, 0.137f, 0.169f, 1f);  // #23232B 展开态
+    public static readonly Vector4 LikedRed = new(0.999f, 0.180f, 0.302f, 1f);    // #FF2E4D 已赞红心
+    public static readonly Vector4 Neutral = new(1f, 1f, 1f, 0.56f);              // 段落文字（半透明白）
+    public static readonly Vector4 Bright = new(1f, 1f, 1f, 0.84f);               // 标题文字
+    public static readonly Vector4 Pink = new(0.999f, 0.180f, 0.302f, 1f);        // #FF2E4D 主 CTA
+    public static readonly Vector4 PinkHover = new(1f, 0.278f, 0.384f, 1f);       // #FF4762 悬停提亮
     public static readonly Vector4 White = new(1f, 1f, 1f, 1f);
 
-    private static readonly Vector4[] Gradient =
-    [
-        new(0.514f, 0.227f, 0.706f, 1f),   // #833AB4
-        new(0.882f, 0.188f, 0.424f, 1f),   // #E1306C
-        new(0.992f, 0.604f, 0.235f, 1f),   // #FD9A3C
-    ];
-
-    /// <summary>整页圆角基调（成对调用）。</summary>
+    /// <summary>整页圆角基调（成对调用）：卡片 12、按钮胶囊。</summary>
     public static void PushRounded()
     {
-        ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 10f);
+        ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 12f);
         ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 12f);
         ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarRounding, 8f);
     }
@@ -45,30 +41,8 @@ internal static class InsStyle
     {
         var draw = ImGui.GetWindowDrawList();
         var color = active ? CardActive : hovered ? CardHover : Card;
-        draw.AddRectFilled(min, max, ImGui.GetColorU32(color), 12f);
-
-        if (!active)
-        {
-            return;
-        }
-
-        var stripMin = new Vector2(min.X + 2f, min.Y + 8f);
-        var stripMax = new Vector2(min.X + 5f, max.Y - 8f);
-        if (stripMax.Y - stripMin.Y < 6f)
-        {
-            return;
-        }
-
-        var third = (stripMax.Y - stripMin.Y) / 3f;
-        var top = stripMin.Y;
-        var c0 = ImGui.GetColorU32(Gradient[0]);
-        var c1 = ImGui.GetColorU32(Gradient[1]);
-        var c2 = ImGui.GetColorU32(Gradient[2]);
-        draw.AddRectFilledMultiColor(stripMin, new Vector2(stripMax.X, top + third), c0, c0, c1, c1);
-        draw.AddRectFilledMultiColor(
-            new Vector2(stripMin.X, top + third), new Vector2(stripMax.X, top + (third * 2f)), c1, c1, c1, c1);
-        draw.AddRectFilledMultiColor(
-            new Vector2(stripMin.X, top + (third * 2f)), stripMax, c1, c1, c2, c2);
+        draw.AddRectFilled(min, max, ImGui.GetColorU32(color), 14f);
+        // xiaohongshu 规范：卡片不加左侧彩色描边（SaaS/dashboard 味）——展开态只用更亮的卡面区分
     }
 
     /// <summary>IG 粉 CTA（圆角胶囊、白字）；返回是否点击。宽度按标签 + 内边距实算。</summary>
@@ -81,7 +55,7 @@ internal static class InsStyle
         var hovered = ImGui.IsItemHovered();
         var actual = new Vector2(width, ImGui.GetFrameHeight());
         var draw = ImGui.GetWindowDrawList();
-        draw.AddRectFilled(pos, pos + actual, ImGui.GetColorU32(hovered ? PinkHover : Pink), 10f);
+        draw.AddRectFilled(pos, pos + actual, ImGui.GetColorU32(hovered ? PinkHover : Pink), actual.Y * 0.5f);
         var textSize = ImGui.CalcTextSize(visible);
         draw.AddText(pos + ((actual - textSize) * 0.5f), ImGui.GetColorU32(White), visible);
         return clicked;
