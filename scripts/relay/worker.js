@@ -598,7 +598,7 @@ export default {
         return handlePluginStats(env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 8 });
+      return json({ ok: true, service: 'firegaze-relay', version: 9 });
     }
 
     if (request.method !== 'POST') {
