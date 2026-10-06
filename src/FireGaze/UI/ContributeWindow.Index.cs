@@ -10,8 +10,19 @@ namespace FireGaze.UI;
 
 internal sealed partial class ContributeWindow : Window
 {
+    /// <summary>
+    ///     索引的生命周期：建一次 / 收结果 / 卫月刷新插件库后自动重建。
+    ///
+    ///     为什么要盯着「卫月刷新完了没」：卫月重载插件库时会把每个仓库的清单先清空、再逐个填回，
+    ///     刷新中途抓到的快照会大量漏插件（2026-10-06 实例：一次刷新刚开始 0.7 秒时抓到快照，
+    ///     1743 条词表只对上 98 个插件；当时这份快照还不会自动更新，整个会话都停在 98 个）。
+    /// </summary>
     private void EnsureIndex()
     {
+        // null = 反射读不到，按「已完成」处理，别让窗口永远停在等待上
+        var reposReady = TranslationIndex.IsReposReady() ?? true;
+
+        // ---- 上一次建索引跑完了：收结果 ----
         if (buildTask is not null)
         {
             if (!buildTask.IsCompleted)
@@ -28,13 +39,28 @@ internal sealed partial class ContributeWindow : Window
             {
                 retryAfter = DateTime.UtcNow.AddSeconds(10);
             }
+            else if (index is { Available: true })
+            {
+                // 建的时候卫月正在刷新（或到现在还没刷完）→ 这份快照可能不全，刷新完重建
+                indexMayBePartial = buildStartedWhileReposBusy || !reposReady;
+            }
 
             return;
         }
 
         if (index is { Available: true })
         {
-            return;
+            if (!indexMayBePartial || !reposReady)
+            {
+                return;
+            }
+
+            // 刷新完了：丢掉可能不完整的快照，重建一份
+            Plugin.Log.Debug("[FireGaze] 卫月插件库刷新完成：重建参与翻译索引");
+            indexMayBePartial = false;
+            index = null;
+            rebuildPending = true;
+            rebuildRepoPending = true;
         }
 
         if (DateTime.UtcNow < retryAfter)
@@ -42,6 +68,22 @@ internal sealed partial class ContributeWindow : Window
             return;
         }
 
+        // ---- 卫月正在刷新插件库：先等它读完，别把「清空再填回」的中间态拍下来；
+        //      等太久（网络慢、刷新一直不结束）就照建，反正刷新完会再重建 ----
+        if (!reposReady)
+        {
+            waitingForReposSince ??= DateTime.UtcNow;
+            if (DateTime.UtcNow - waitingForReposSince.Value < TimeSpan.FromSeconds(5))
+            {
+                return;
+            }
+        }
+        else
+        {
+            waitingForReposSince = null;
+        }
+
+        buildStartedWhileReposBusy = !reposReady;
         var table = plugin.SnapshotTable();
         buildTask = Task.Run(() => TranslationIndex.Build(table));
     }

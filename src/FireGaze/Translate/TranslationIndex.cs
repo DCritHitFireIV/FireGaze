@@ -461,6 +461,41 @@ internal sealed class TranslationIndex
         return builder.ToString().ToLowerInvariant();
     }
 
+    private static object? reposReadyManager;
+    private static PropertyInfo? reposReadyProperty;
+
+    /// <summary>
+    ///     卫月的插件库是不是都读完了（<c>PluginManager.ReposReady</c>：仓库刷新任务已完成）。
+    ///     刷新期间每个仓库的清单会被先清空再逐个填回 —— 此刻抓的索引会大量漏插件
+    ///     （2026-10-06 实例：一次刷新刚开始 0.7 秒时抓快照，1743 条词表只对上 98 个插件）。
+    ///     拿不到这个信息时返回 null，调用方按「已完成」处理（保持旧行为）。
+    /// </summary>
+    internal static bool? IsReposReady()
+    {
+        try
+        {
+            if (reposReadyProperty is null)
+            {
+                var manager = ResolvePluginManager();
+                if (manager is null)
+                {
+                    return null;
+                }
+
+                reposReadyProperty = manager.GetType().GetProperty(
+                    "ReposReady",
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                reposReadyManager = manager;
+            }
+
+            return reposReadyProperty?.GetValue(reposReadyManager) as bool?;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     private static object? ResolvePluginManager()
     {
         try

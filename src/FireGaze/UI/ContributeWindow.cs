@@ -123,6 +123,21 @@ internal sealed partial class ContributeWindow : Window
     private TranslationIndex? index;
     private Task<TranslationIndex>? buildTask;
     private DateTime retryAfter = DateTime.MinValue;
+
+    /// <summary>
+    ///     这份索引是不是在卫月刷新插件库期间抓的（可能漏插件）。刷新完会自动重建。
+    /// </summary>
+    private bool indexMayBePartial;
+
+    /// <summary>
+    ///     当前这次建索引开始时，卫月是不是正在刷新插件库。
+    /// </summary>
+    private bool buildStartedWhileReposBusy;
+
+    /// <summary>
+    ///     因为卫月在刷新插件库而推迟建索引的起始时刻（等太久就照建，见 Index.cs）。
+    /// </summary>
+    private DateTime? waitingForReposSince;
     private string search = string.Empty;
     private bool rebuildPending = true;
     private bool rebuildRepoPending = true;
@@ -263,6 +278,11 @@ internal sealed partial class ContributeWindow : Window
         if (index is null)
         {
             ImGui.TextDisabled("正在读取插件库…");
+            if (waitingForReposSince is not null)
+            {
+                ImGui.TextDisabled("卫月正在刷新插件库，等它读完再统计（通常几秒）。");
+            }
+
             return;
         }
 
@@ -340,6 +360,12 @@ internal sealed partial class ContributeWindow : Window
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("当前列出来的插件数，以及其中还缺译文的个数（跟着筛选变）。");
+        }
+
+        if (indexMayBePartial)
+        {
+            ImGui.SameLine();
+            UiHelpers.ColoredText(UiHelpers.Muted, "· 卫月刷新插件库时抓的快照，读完会自动重读");
         }
 
         // ---------------- 操作条（勾选 / 加库） ----------------
