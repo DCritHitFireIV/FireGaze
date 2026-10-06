@@ -3005,17 +3005,27 @@ internal sealed class UITextTab
     {
         if (this.plugin.Icons.TryGetHandle(entry, out var handle) && !handle.IsNull)
         {
-            ImGui.Image(handle, new Vector2(size, size));
-            return true;
+            return DrawRoundIcon(handle, size);
         }
 
         if (PluginIconLookup.TryPeekHandle(entry, out handle) && !handle.IsNull)
         {
-            ImGui.Image(handle, new Vector2(size, size));
-            return true;
+            return DrawRoundIcon(handle, size);
         }
 
         return false;
+    }
+
+    /// <summary>圆形图标：与「插件发现」共用同一份实现（用户 2026-10-07：汉化页不要方图，要同款圆形遮罩）。</summary>
+    private static bool DrawRoundIcon(ImTextureID texture, float size)
+    {
+        if (!InsStyle.DrawRoundIcon(texture, ImGui.GetCursorScreenPos(), size))
+        {
+            return false;
+        }
+
+        ImGui.Dummy(new Vector2(size, size));
+        return true;
     }
 
     /// <summary>没有图标时的字母占位：正圆，与「插件发现」共用同一份实现（2026-10-07 风格对齐）。</summary>
