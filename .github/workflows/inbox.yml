@@ -22,7 +22,9 @@ permissions:
 
 jobs:
   inbox:
-    if: github.event_name == 'issues'
+    # 反馈 issue 不归这里管（归 feedback.yml）；以前不筛，反馈 issue 也会跑本工作流，
+    # 而反馈没有 summary.txt，通知步骤 cat 失败 + set -e 直接把整条工作流弄红（2026-10-07 实测）
+    if: github.event_name == 'issues' && !startsWith(github.event.issue.title, '[反馈]')
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -106,6 +108,10 @@ jobs:
         run: |
           if [ -z "$PUSH_URL" ]; then
             echo "没有配置 SERVER3_PUSH_URL，跳过手机通知（仓库里已经存下这次投稿）"
+            exit 0
+          fi
+          if [ ! -s "$RUNNER_TEMP/summary.txt" ]; then
+            echo "这条 issue 没有可收录的投稿（比如链接投稿 / 反馈），跳过通知"
             exit 0
           fi
           TITLE="FireGaze 译文投稿 $(cat "$RUNNER_TEMP/summary.txt")"
