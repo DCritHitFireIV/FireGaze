@@ -261,6 +261,27 @@ def _bool_of(value) -> bool:
     return bool(value)
 
 
+def unix_seconds(value) -> int:
+    """把仓库清单里的 LastUpdate 统一成 unix 秒。
+
+    实测（2026-10-06）：有的仓库写秒、有的写**毫秒**（差 1000 倍，直接进表会
+    让客户端日期转换抛 ArgumentOutOfRangeException / 排序整个错乱），还有 0 与
+    1970 附近的垃圾值。规则：> 2286 年当毫秒除 1000；不在 2000-2100 年之间当无效。
+    """
+    try:
+        stamp = int(value)
+    except (TypeError, ValueError):
+        return 0
+
+    if stamp <= 0:
+        return 0
+    if stamp > 10_000_000_000:   # 毫秒
+        stamp //= 1000
+    if stamp < 946684800 or stamp > 4102444800:   # 2000 年前 / 2100 年后
+        return 0
+    return stamp
+
+
 def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
     """把一条插件并进语料；被采纳返回 True。
 
@@ -283,7 +304,7 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
         "testing": _bool_of(plugin.get("IsTestingExclusive")),
         "author": (plugin.get("Author") or "").strip(),
         "icon": (plugin.get("IconUrl") or "").strip(),
-        "updated": int(plugin.get("LastUpdate") or 0),
+        "updated": unix_seconds(plugin.get("LastUpdate")),
         "official": False,
     }
 
@@ -337,7 +358,7 @@ def add_official_corpus(corpus: dict[str, dict]) -> int:
             "testing": _bool_of(plugin.get("IsTestingExclusive")),
             "author": (plugin.get("Author") or "").strip(),
             "icon": (plugin.get("IconUrl") or "").strip(),
-            "updated": int(plugin.get("LastUpdate") or 0),
+            "updated": unix_seconds(plugin.get("LastUpdate")),
             "official": True,
         }
         added += 1
