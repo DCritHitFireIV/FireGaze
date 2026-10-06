@@ -83,35 +83,35 @@ internal sealed class MainWindow : Window
         if (ImGui.BeginTabBar("###FireGazeTabs"))
         {
             var flags = pendingSelect == MainTab.UIText ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("插件汉化", flags))
+            if (ImGui.BeginTabItem("1·插件汉化", flags))
             {
                 this.uiTextTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.Discovery ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("插件发现", flags))
+            if (ImGui.BeginTabItem("2·插件发现", flags))
             {
                 discoveryTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("仓库体检", flags))
+            if (ImGui.BeginTabItem("3·仓库体检", flags))
             {
                 repoAuditTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("简介汉化", flags))
+            if (ImGui.BeginTabItem("4·简介汉化", flags))
             {
                 translateTab.Draw();
                 ImGui.EndTabItem();
             }
 
             flags = pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("插件安装器", flags))
+            if (ImGui.BeginTabItem("5·插件安装器", flags))
             {
                 installerTab.Draw();
                 ImGui.EndTabItem();
