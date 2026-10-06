@@ -11,7 +11,16 @@ namespace FireGaze.UI;
 /// </summary>
 internal sealed partial class DiscoveryTab
 {
-    private const float ActionsWidth = 176f;
+    /// <summary>右栏按钮列宽：按当前字体 / UI 缩放实算（写死 176 在缩放 >1 时会把按钮切掉）。</summary>
+    private static float ActionsColumnWidth()
+    {
+        var width = (ImGui.GetStyle().CellPadding.X * 2f) + 8f;
+        width += MaxLabelWidth("♥ 999+/999+", "♥ 0/0") + 12f;
+        width += MaxLabelWidth("加库", "启用") + 8f;
+        return width;
+    }
+
+    private static float MaxLabelWidth(params string[] labels) => labels.Max(UiHelpers.LabelWidth);
 
     /// <summary>列表：两栏（左内容 / 右操作），卡片式行，整行点击展开。</summary>
     private void DrawList(float height)
@@ -25,16 +34,16 @@ internal sealed partial class DiscoveryTab
         }
 
         const ImGuiTableFlags flags = ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
-        var slack = ImGui.GetStyle().ScrollbarSize + 48f;
-        var contentWidth = Math.Max(240f, ImGui.GetContentRegionAvail().X - ActionsWidth - slack);
+        var actionsWidth = ActionsColumnWidth();
 
         if (!ImGui.BeginTable("###DiscoveryList", 2, flags, new Vector2(0, height)))
         {
             return;
         }
 
-        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthFixed, contentWidth);
-        ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, ActionsWidth);
+        // 左列自适应、右列按按钮实宽固定：列宽贴合窗口，右侧不会留一条空缝
+        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthStretch);
+        ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
 
         var clipper = new ImGuiListClipper();
         clipper.Begin(filtered.Count);
@@ -59,6 +68,7 @@ internal sealed partial class DiscoveryTab
         ImGui.TableNextRow();
 
         // 整行点击展开详情：Selectable 铺底、跨两栏、允许被按钮覆盖（和「插件汉化」同一做法）
+        var rowStartY = ImGui.GetCursorPosY();
         var rowHeight = rowHeights.TryGetValue(entry.InternalName, out var knownHeight) ? knownHeight : 52f;
         ImGui.TableSetColumnIndex(0);
         if (ImGui.Selectable("##row", isOpen,
@@ -136,7 +146,8 @@ internal sealed partial class DiscoveryTab
 
             if (meta.Count > 0)
             {
-                ImGui.TextDisabled(string.Join(" · ", meta));
+                var metaText = string.Join(" · ", meta);
+                UiHelpers.Fitted(metaText);
             }
         }
 
@@ -145,9 +156,9 @@ internal sealed partial class DiscoveryTab
         // 量一下这一行实际多高，下一帧整行点击的 Selectable 用它（首帧用估算值）
         rowHeights[entry.InternalName] = Math.Max(20f, ImGui.GetItemRectMax().Y - rowTop);
 
-        // 右栏：♥ + 库操作
+        // 右栏：♥ + 库操作（SetCursorPosY 用窗口局部坐标——用屏幕坐标会把按钮画到下一行去）
         ImGui.TableNextColumn();
-        ImGui.SetCursorPosY(rowTop + 4f);
+        ImGui.SetCursorPosY(rowStartY + 4f);
         DrawLikeButton(entry, "row");
 
         if (!entry.IsOfficial && entry.RepositoryURL is { Length: > 0 } url)
@@ -250,7 +261,7 @@ internal sealed partial class DiscoveryTab
             SetStatus("已复制库链地址", isError: false);
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("在浏览器打开"));
         if (ImGui.SmallButton("在浏览器打开###open"))
         {
             OpenInBrowser(url);
@@ -258,7 +269,7 @@ internal sealed partial class DiscoveryTab
 
         if (!entry.RepositoryKnown)
         {
-            ImGui.SameLine();
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("加库"));
             if (ImGui.SmallButton("加库###add-expanded"))
             {
                 AddRepoFromRow(url);
@@ -266,7 +277,7 @@ internal sealed partial class DiscoveryTab
         }
         else if (!entry.RepositoryEnabled)
         {
-            ImGui.SameLine();
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("启用"));
             if (ImGui.SmallButton("启用###enable-expanded"))
             {
                 EnableRepoFromRow(url);
@@ -280,7 +291,7 @@ internal sealed partial class DiscoveryTab
     private static void DrawKeyValue(string label, string value)
     {
         ImGui.TextDisabled(label);
-        ImGui.SameLine(96f);
+        ImGui.SameLine(ImGui.GetFontSize() * 5.2f);
         ImGui.TextWrapped(value);
     }
 
