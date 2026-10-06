@@ -53,6 +53,9 @@ const UIT_SUBMIT_PER_IP_LIMIT = 6; // 每分钟每 IP（正常玩家一次「一
 // 公共库下载量 / 点赞（/library-download、/library-like、/library-counts）
 const LIBRARY_DOWNLOAD_PER_IP_LIMIT = 60; // 每分钟每 IP（正常一次下载 = 1 次）
 const LIBRARY_LIKE_PER_IP_LIMIT = 30; // 每分钟每 IP（点赞；没做去重，先靠限流）
+const PLUGIN_LIKE_PER_IP_LIMIT = 60; // 每分钟每 IP（插件发现：给插件点赞）
+const PLUGIN_ADD_PER_IP_LIMIT = 120; // 每分钟每 IP（插件发现：加库推荐上报）
+const REPO_SUBMIT_PER_IP_LIMIT = 10; // 每分钟每 IP（插件发现：库链投稿）
 const PACK_ID_PATTERN = /^[A-Za-z0-9_.\-]+$/;
 
 const hits = new Map();
@@ -238,6 +241,140 @@ async function bumpCounter(store, prefix, target) {
   return current + 1;
 }
 
+/// 北京时间（UTC+8）的 ISO 周标签，如 2026-W41；周界 = 周一 00:00。
+/// 周赞不清零：每周单独一把键（plike_w:<周>:<插件>），旧周留在 KV、也会被工作流归档进 git。
+function beijingISOWeek(date = new Date()) {
+  const shifted = new Date(date.getTime() + 8 * 3600 * 1000);
+  const target = new Date(Date.UTC(shifted.getUTCFullYear(), shifted.getUTCMonth(), shifted.getUTCDate()));
+  const dayNum = target.getUTCDay() || 7;
+  target.setUTCDate(target.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(target.getUTCFullYear(), 0, 1));
+  const week = Math.ceil(((target - yearStart) / 86400000 + 1) / 7);
+  return `${target.getUTCFullYear()}-W${String(week).padStart(2, '0')}`;
+}
+
+/// 自增一把独立键（插件级计数用）。
+async function bumpKey(store, key) {
+  const current = Number.parseInt((await store.get(key)) ?? '0', 10) || 0;
+  await store.put(key, String(current + 1));
+  return current + 1;
+}
+
+/// 按前缀读全部计数（KV list 单次最多 1000 把键，必须分页——插件 2000 条时会静默截断）。
+async function readAllByPrefix(store, prefix) {
+  const values = {};
+  let cursor;
+  for (;;) {
+    const listed = await store.list({ prefix, limit: 1000, cursor });
+    for (const entry of listed.keys) {
+      values[entry.name.slice(prefix.length)] = Number.parseInt((await store.get(entry.name)) ?? '0', 10) || 0;
+    }
+    if (listed.list_complete) break;
+    cursor = listed.cursor;
+  }
+  return values;
+}
+
+/// 插件发现：点赞（按插件、按周）。总赞累加；周赞落在当周键上，下周可以再点。
+async function handlePluginLike(data, env, ip) {
+  if (!allow(ip, PLUGIN_LIKE_PER_IP_LIMIT, 'plike')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  const store = env.LIBRARY_COUNTS;
+  if (!store) {
+    return json({ ok: false, error: 'counting disabled' }, 503);
+  }
+
+  const plugin = String(data.plugin ?? '').trim().slice(0, 64);
+  if (!PACK_ID_PATTERN.test(plugin)) {
+    return json({ ok: false, error: 'bad plugin' }, 400);
+  }
+
+  const week = beijingISOWeek();
+  const total = await bumpKey(store, `plike_total:${plugin}`);
+  const weekly = await bumpKey(store, `plike_w:${week}:${plugin}`);
+  return json({ ok: true, plugin, week, total, weekly });
+}
+
+/// 插件发现：加库推荐上报（按插件；一次最多 200 条）。
+async function handlePluginAdd(data, env, ip) {
+  if (!allow(ip, PLUGIN_ADD_PER_IP_LIMIT, 'padd')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  const store = env.LIBRARY_COUNTS;
+  if (!store) {
+    return json({ ok: false, error: 'counting disabled' }, 503);
+  }
+
+  const list = Array.isArray(data.plugins) ? data.plugins.slice(0, 200) : [];
+  const names = list
+    .map((x) => String(x ?? '').trim().slice(0, 64))
+    .filter((x) => PACK_ID_PATTERN.test(x));
+  if (names.length === 0) {
+    return json({ ok: false, error: 'bad plugins' }, 400);
+  }
+
+  for (const name of names) {
+    await bumpKey(store, `padd:${name}`);
+  }
+
+  return json({ ok: true, count: names.length });
+}
+
+/// 插件发现：统计（周赞 / 总赞 / 加库推荐）。工作流定时拉这个写进仓库归档。
+async function handlePluginStats(env) {
+  const store = env.LIBRARY_COUNTS;
+  if (!store) {
+    return json({ ok: false, error: 'counting disabled' }, 503);
+  }
+
+  const week = beijingISOWeek();
+  const total = await readAllByPrefix(store, 'plike_total:');
+  const weekly = await readAllByPrefix(store, `plike_w:${week}:`);
+  const adds = await readAllByPrefix(store, 'padd:');
+  return json({ ok: true, week, total, weekly, adds, updatedAt: new Date().toISOString() });
+}
+
+/// 插件发现：库链投稿（客户端已做过卫月契约检测；这里只做形状检查，真正的收录由仓库工作流定）。
+async function handleRepoSubmit(data, env, ip) {
+  if (!allow(ip, REPO_SUBMIT_PER_IP_LIMIT, 'reposubmit')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  const target = String(data.url ?? '').trim().slice(0, 512);
+  if (!/^https?:\/\//i.test(target)) {
+    return json({ ok: false, error: 'bad url' }, 400);
+  }
+
+  const repo = env.REPO || REPO_DEFAULT;
+  let token;
+  try {
+    token = await githubToken(env, repo);
+  } catch (e) {
+    return json({ ok: false, error: 'server auth failed', detail: String(e).slice(0, 200) }, 500);
+  }
+
+  if (!token) {
+    return json({ ok: false, error: 'server not configured' }, 500);
+  }
+
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const path = `docs/contributions/inbox/repo-${stamp}-${randomTag()}.json`;
+  const payload = JSON.stringify({ type: 'repo-submission', url: target, submittedAt: new Date().toISOString() });
+  try {
+    const result = await commitInboxFile(env, repo, token, path, payload);
+    return json({
+      ok: true,
+      file: `https://github.com/${repo}/blob/main/${path}`,
+      commit: `https://github.com/${repo}/commit/${result}`,
+    });
+  } catch (e) {
+    return json({ ok: false, error: 'commit failed', detail: String(e).slice(0, 200) }, 502);
+  }
+}
+
 async function handleLibraryDownload(data, env, ip) {
   if (!allow(ip, LIBRARY_DOWNLOAD_PER_IP_LIMIT, 'libdl')) {
     return json({ ok: false, error: 'too many requests' }, 429);
@@ -283,18 +420,8 @@ async function handleLibraryCounts(env) {
     return json({ ok: false, error: 'counting disabled' }, 503);
   }
 
-  const readAll = async (prefix) => {
-    const listed = await store.list({ prefix: `${prefix}:`, limit: 1000 });
-    const values = {};
-    for (const entry of listed.keys) {
-      const name = entry.name.slice(prefix.length + 1);
-      values[name] = Number.parseInt((await store.get(entry.name)) ?? '0', 10) || 0;
-    }
-    return values;
-  };
-
-  const counts = await readAll('dl');
-  const likes = await readAll('like');
+  const counts = await readAllByPrefix(store, 'dl:');
+  const likes = await readAllByPrefix(store, 'like:');
   return json({ ok: true, updatedAt: new Date().toISOString(), counts, likes });
 }
 
@@ -465,7 +592,11 @@ export default {
         return handleLibraryCounts(env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 7 });
+      if (url.pathname === '/plugin-stats') {
+        return handlePluginStats(env);
+      }
+
+      return json({ ok: true, service: 'firegaze-relay', version: 8 });
     }
 
     if (request.method !== 'POST') {
@@ -498,6 +629,19 @@ export default {
 
     if (url.pathname === '/library-like') {
       return handleLibraryLike(data, env, ip);
+    }
+
+    // ── 插件发现：点赞 / 加库推荐 / 库链投稿 ──
+    if (url.pathname === '/plugin-like') {
+      return handlePluginLike(data, env, ip);
+    }
+
+    if (url.pathname === '/plugin-add') {
+      return handlePluginAdd(data, env, ip);
+    }
+
+    if (url.pathname === '/repo-submit') {
+      return handleRepoSubmit(data, env, ip);
     }
 
     if (!allow(ip)) {

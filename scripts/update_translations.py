@@ -281,6 +281,10 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
         "description": (plugin.get("Description") or "").strip(),
         "repo_url": repo_url,
         "testing": _bool_of(plugin.get("IsTestingExclusive")),
+        "author": (plugin.get("Author") or "").strip(),
+        "icon": (plugin.get("IconUrl") or "").strip(),
+        "updated": int(plugin.get("LastUpdate") or 0),
+        "official": False,
     }
 
     previous = corpus.get(key)
@@ -305,6 +309,41 @@ def fetch_repo_plugins_safe(url: str) -> tuple[str, list[dict]]:
         return url, fetch_repo_plugins(url)
     except Exception:  # noqa: BLE001
         return url, []
+
+
+# 卫月官方主库（CN 分发的 D17 频道）。官方插件也进发现页 / 简介汉化（用户 2026-10-06 定），
+# 但只补第三方没有的条目——同名插件以第三方（带库链、可加库）为准。
+OFFICIAL_REPO_URL = (
+    "https://raw.githubusercontent.com/Dalamud-DailyRoutines/PluginDistD17/main/pluginmaster.json"
+)
+
+
+def add_official_corpus(corpus: dict[str, dict]) -> int:
+    """把官方主库并进语料（official=True），返回新增条数。"""
+    plugins = fetch_repo_plugins(OFFICIAL_REPO_URL)
+    added = 0
+    for plugin in plugins:
+        key = (plugin.get("InternalName") or "").strip()
+        if not key or key in corpus:
+            continue
+        text = " ".join((plugin.get(k) or "").strip() for k in CORPUS_FIELDS)
+        if not text:
+            continue
+        corpus[key] = {
+            "name": (plugin.get("Name") or "").strip(),
+            "punchline": (plugin.get("Punchline") or "").strip(),
+            "description": (plugin.get("Description") or "").strip(),
+            "repo_url": "",
+            "testing": _bool_of(plugin.get("IsTestingExclusive")),
+            "author": (plugin.get("Author") or "").strip(),
+            "icon": (plugin.get("IconUrl") or "").strip(),
+            "updated": int(plugin.get("LastUpdate") or 0),
+            "official": True,
+        }
+        added += 1
+
+    print(f"官方主库：{len(plugins)} 条 / 新增 {added} 条")
+    return added
 
 
 def add_repo_corpus(corpus: dict[str, dict], urls: list[str]) -> int:
@@ -332,7 +371,22 @@ def add_repo_corpus(corpus: dict[str, dict], urls: list[str]) -> int:
 
 
 def load_repo_urls(path: str) -> list[str]:
-    """从 Dalamud 配置（dalamudConfig.json）或纯文本清单里读出第三方仓库地址。"""
+    """从 Dalamud 配置（dalamudConfig.json）或纯文本清单里读出第三方仓库地址。
+
+    path 支持逗号分隔的多个文件：社区清单（scripts/community-repos.txt）与维护者清单分开维护，
+    不能混写（repos.txt 会被 export-repo-list.py 整份重导出）。
+    """
+    parts = [part.strip() for part in str(path).split(",") if part.strip()]
+    if len(parts) > 1:
+        merged: list[str] = []
+        seen: set[str] = set()
+        for part in parts:
+            for url in load_repo_urls(part):
+                if url not in seen:
+                    seen.add(url)
+                    merged.append(url)
+        return merged
+
     with open(path, encoding="utf-8-sig") as handle:
         raw = handle.read()
 
@@ -444,6 +498,12 @@ def main(argv=None) -> int:
             print(f"合并后语料：{len(corpus)} 个插件")
         except Exception as error:  # noqa: BLE001
             print(f"补充语料失败（继续用 Aetherfeed）：{error}")
+
+    # 官方主库（Dip17）也入语料：玩家在主库更新了新插件但不知道，发现页要能搜到
+    try:
+        add_official_corpus(corpus)
+    except Exception as error:  # noqa: BLE001
+        print(f"官方主库语料失败（继续）：{error}")
 
     table: dict[str, dict] = {}
     saved_stamp: str | None = None
@@ -569,6 +629,23 @@ def main(argv=None) -> int:
         · `Repo` = 插件所在的仓库链 —— 「参与翻译」靠它把插件归到库里、未加入的库才能加；
         · `Testing` = 测试版专用插件（卫月 `IsTestingExclusive`）—— 不列进参与翻译、不计缺译。
         """
+        # 语料里有、表里还没有的插件（新仓库 / 官方主库）：先把三个字段的原文落进表，
+        # 「插件发现」立刻能列出来、缺译统计也算得上；译文等下一次翻译工作流。
+        materialized = 0
+        for key, info in corpus.items():
+            if key in table or not isinstance(info, dict):
+                continue
+            entry: dict = {}
+            for field, source_key in (("Name", "name"), ("Punchline", "punchline"), ("Description", "description")):
+                original = str(info.get(source_key) or "").strip()
+                if original:
+                    entry[field] = {"Original": original}
+            if entry:
+                table[key] = entry
+                materialized += 1
+        if materialized:
+            print(f"语料补进词表（只有原文，等翻译）：{materialized} 条")
+
         ordered: dict = {"_meta": {"updatedAt": stamp or time.strftime("%Y-%m-%d")}}
         for key, value in table.items():
             if key.startswith("_"):
@@ -622,8 +699,21 @@ def main(argv=None) -> int:
                 # 语料里有这插件：按本轮结论重新定（以前误标的 Testing 也能被洗掉）
                 if info.get("testing"):
                     cleaned["Testing"] = True
-            elif value.get("Testing"):
-                cleaned["Testing"] = True
+                if info.get("official"):
+                    cleaned["Official"] = True
+                author = str(info.get("author") or "").strip()
+                if author:
+                    cleaned["Author"] = author
+                icon = str(info.get("icon") or "").strip()
+                if icon:
+                    cleaned["Icon"] = icon
+                updated = int(info.get("updated") or 0)
+                if updated > 0:
+                    cleaned["Updated"] = updated
+            else:
+                for field in ("Testing", "Official", "Author", "Icon", "Updated"):
+                    if value.get(field):
+                        cleaned[field] = value[field]
 
             ordered[key] = cleaned
 

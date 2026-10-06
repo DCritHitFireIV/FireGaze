@@ -1,0 +1,39 @@
+name: update-plugin-stats
+
+# 插件发现的统计（周赞 / 总赞 / 加库推荐）：
+#   玩家在「插件发现」点赞 / 加库 → 中继 KV 计数 → 本工作流把 /plugin-stats 快照写进仓库
+#   → discovery/stats.json（最新）+ discovery/archive/<ISO周>.json（每周留档，周赞不清零）。
+# 中继不可用时脚本安静跳过，不会把定时任务刷红。
+
+on:
+  schedule:
+    # 每 6 小时一次，错开整点的下载数（:30）与库计数（:30）任务
+    - cron: '15 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 写回统计
+        run: python3 scripts/update_plugin_stats.py
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- discovery/; then
+            echo "统计没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discovery/
+          git commit -m "chore: update plugin discovery stats"
+          git push || { git pull --rebase && git push; }

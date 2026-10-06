@@ -1,0 +1,83 @@
+name: repo-inbox
+
+# 玩家在「插件发现 → 投稿插件库」投稿 → 中继把 docs/contributions/inbox/repo-*.json 提交进仓库 →
+# 本工作流复核（卫月同款仓库契约）并收录进 scripts/community-repos.txt → 触发一次增量翻译 →
+# 通知维护者手机（配了 secret 才发）。
+#
+# 与 inbox.yml 分开：那边处理译文投稿与 issue，这边只处理库链投稿；脚本自己做了归一化去重，
+# 重复推送同一文件不会重复收录。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/contributions/inbox/repo-*.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inbox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 复核并收录
+        id: collect
+        run: |
+          python scripts/inbox_repo.py --notify-out "$RUNNER_TEMP/repo-notify.md" | tee "$RUNNER_TEMP/repo-inbox.log"
+          if grep -q "RESULT accepted=0 rejected=0" "$RUNNER_TEMP/repo-inbox.log"; then
+            echo "nothing=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "nothing=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 提交收录结果
+        if: steps.collect.outputs.nothing != '1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/community-repos.txt docs/contributions
+          if git diff --quiet --cached; then
+            echo "收录结果没有变化（重复推送？）"
+            exit 0
+          fi
+          git commit -m "chore(repo-inbox): 收录玩家投稿的插件仓库"
+          git push || { git pull --rebase && git push; }
+
+      - name: 触发一次增量翻译（新插件几分钟后进词表）
+        if: steps.collect.outputs.nothing != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # GITHUB_TOKEN 触发的 repository_dispatch 会正常起新的工作流（与普通事件不同，见 GitHub 文档）
+          curl -sS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/dispatches" \
+            -d '{"event_type":"translate-now"}' \
+            -o /dev/null -w "translate dispatch HTTP %{http_code}\n"
+
+      - name: 通知维护者（配了 secret 才发）
+        if: steps.collect.outputs.nothing != '1'
+        env:
+          PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
+        run: |
+          if [ -z "$PUSH_URL" ]; then
+            echo "没有配置 SERVER3_PUSH_URL，跳过手机通知（仓库里已经存下收录结果）"
+            exit 0
+          fi
+          BODY="$(cat "$RUNNER_TEMP/repo-notify.md" 2>/dev/null || true)"
+          SUMMARY="$(grep -o 'RESULT.*' "$RUNNER_TEMP/repo-inbox.log" | tail -1)"
+          curl -sS -X POST "$PUSH_URL" \
+            --data-urlencode "title=FireGaze 库链投稿（$SUMMARY）" \
+            --data-urlencode "desp=$BODY" || echo "通知发送失败（不影响收录）"

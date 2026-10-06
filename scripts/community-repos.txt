@@ -1,0 +1,6 @@
+# FireGaze 社区投稿的仓库清单（由 .github/workflows/repo-inbox.yml 调用 scripts/inbox_repo.py 追加）
+#
+# 与 scripts/repos.txt 分开维护：repos.txt 是维护者用 export-repo-list.py 从本机 Dalamud 配置
+# 整份重导出的，不能混写；这份只装玩家在「插件发现 → 投稿插件库」里投来的、过了检测的地址。
+#
+# 用法：python scripts/update_translations.py --repos scripts/repos.txt,scripts/community-repos.txt
