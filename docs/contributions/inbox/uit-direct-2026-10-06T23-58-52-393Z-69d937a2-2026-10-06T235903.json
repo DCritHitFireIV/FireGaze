@@ -1,0 +1,3116 @@
+{
+  "issue": "direct-2026-10-06T23-58-52-393Z-69d937a2",
+  "receivedAt": "2026-10-06 23:59:03",
+  "author": "匿名直传",
+  "plugin": "AutoDuty",
+  "fingerprint": "a2ea97131be04d0d",
+  "packFile": "AutoDuty@user-a2ea97.json",
+  "accepted": 400,
+  "filled": 400,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "AutoDuty",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "opens config window / modifies config",
+        "Translated": "打开配置窗口/修改配置",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "start",
+        "Translated": "开始",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "starts autoduty when in a Duty",
+        "Translated": "在执行任务时启动自动化",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "stop",
+        "Translated": "停止",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "stops everything",
+        "Translated": "停止一切",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "pause",
+        "Translated": "暂停",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "pause route",
+        "Translated": "暂停路线",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "resume",
+        "Translated": "摘要",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "resume route",
+        "Translated": "恢复路线",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "queue",
+        "Translated": "队列",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "queues duty",
+        "Translated": "队列职责",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "overlay",
+        "Translated": "覆盖",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "opens overlay",
+        "Translated": "打开覆盖",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "skipstep",
+        "Translated": "跳过步骤",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "skips the current step",
+        "Translated": "跳过当前步骤",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "movetoflag",
+        "Translated": "move to flag(移动到 flag)",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "moves to the flag map marker",
+        "Translated": "移动到 flag 地图标记",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "opens packs, registers cards and sells the rest",
+        "Translated": "打开包裹，登记卡片，然后卖掉剩下的。",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "run",
+        "Translated": "跑",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "starts auto duty in territory type specified",
+        "Translated": "在指定领土类型开始汽车服务",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Logs and copies your target's dataid to clipboard",
+        "Translated": "将目标数据记录并复制到剪贴板",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Enables leveling mode (0 = disabled)",
+        "Translated": "启用等级模式 (0 = 禁用)",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Error",
+        "Translated": "错误",
+        "Context": "AutoDuty.StartNavigation",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.IsPopupOpen"
+      },
+      {
+        "Original": "Unable to load content for Territory",
+        "Translated": "无法加载领地内容",
+        "Context": "AutoDuty.StartNavigation",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " of ",
+        "Translated": "的",
+        "Context": "AutoDuty.ClientState_TerritoryChanged",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Add/Edit Action###AddActionUI",
+        "Translated": "添加/编辑操作",
+        "Context": "ActionEditWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "OverlayActions",
+        "Translated": "覆盖动作",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginListBox"
+      },
+      {
+        "Original": "Dev###DevHeader",
+        "Translated": "开发",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Update Paths On Startup##DevUpdatePathsOnStartup",
+        "Translated": "在启动时更新路径##DevUpdatePathsOnStartup",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Print Mod List##DevPrintModList",
+        "Translated": "打印调制列表##DevPrintModList",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Rotation On##DevRotationOn",
+        "Translated": "旋转 On##DevRotationOn",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Rotation Off##DevRotationOff",
+        "Translated": "旋转关闭##DevRotationOff",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Between Loop Actions##DevBetweenLoops",
+        "Translated": "循环操作之间 ##DevBet 循环之间",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Boss Loot Test##DevBossLootTest",
+        "Translated": "boss Loot 测试##DevBossLoot 测试",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "In Area: ",
+        "Translated": "在区域中：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Indoors: ",
+        "Translated": "室内：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Collider present: ",
+        "Translated": "对撞机存在：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "ToDo Director",
+        "Translated": "ToDo 主管",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": " - Complete: ",
+        "Translated": "完成：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Page: ",
+        "Translated": "页面：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "XBMShop",
+        "Translated": "XBMMShop",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Coins: ",
+        "Translated": "代币：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Stock:",
+        "Translated": "存货：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Shop: ",
+        "Translated": "商店：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sheet Check",
+        "Translated": "工作表检查",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "PositionalPopup",
+        "Translated": "位置弹出",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "TerminationActions",
+        "Translated": "终止行动",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginListBox"
+      },
+      {
+        "Original": "s ago",
+        "Translated": "前天",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Slider",
+        "Translated": "滑块",
+        "Context": "ConfigTab.MakeSliderOrInput",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Input",
+        "Translated": "输入",
+        "Context": "ConfigTab.MakeSliderOrInput",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "PluginInstallerRequired",
+        "Translated": "PluginInstaller 必需",
+        "Context": "InfoTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Columns"
+      },
+      {
+        "Original": "PluginInstallerRecommended",
+        "Translated": "PluginInstaller 推荐",
+        "Context": "InfoTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Columns"
+      },
+      {
+        "Original": "Submit Issue",
+        "Translated": "提交问题",
+        "Context": "LogTab.DrawIssuePopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "MainTab.LevelingModes.",
+        "Translated": "MainTab.LevelingModes。",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Include Testing/Unstable Dungeons",
+        "Translated": "包括测试/不稳定地下城",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Adds more dungeons into the leveling list\nThese dungeons are currently in testing for reliability\nPlease report if you have issues with them",
+        "Translated": "将更多地下城添加到等级列表\n这些地牢目前正在进行可靠性测试。\n如果您对他们有任何问题，请向我们报告。",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "PlaylistSelectable",
+        "Translated": "可选播放列表",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "This dungeon is currently in testing for reliability.\nDo report any issues with it",
+        "Translated": "这个地牢目前正在进行可靠性测试。\n请报告任何问题",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": ":##Playlist",
+        "Translated": ":##播放列表",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Entry",
+        "Translated": "输入",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Count",
+        "Translated": "计数",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "DutyModeEnum",
+        "Translated": "工作模式枚举",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Unsynced###Unsync",
+        "Translated": "未同步",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.CheckboxWrapped"
+      },
+      {
+        "Original": "Playlist",
+        "Translated": "列表",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Up",
+        "Translated": "向上",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Down",
+        "Translated": "向下",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Trash",
+        "Translated": "垃圾",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "PlaylistAdd",
+        "Translated": "ListAdd",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "No.",
+        "Translated": "没有。",
+        "Context": "MainTab.DrawCrucibleFamiliarTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "No. ",
+        "Translated": "没有。",
+        "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rank",
+        "Translated": "等级",
+        "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Strength",
+        "Translated": "力量",
+        "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Intelligence",
+        "Translated": "智力",
+        "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Constitution",
+        "Translated": "宪法",
+        "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Phys. Resistance",
+        "Translated": "物理。抵抗力",
+        "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Mag. Resistance",
+        "Translated": "磁性。抵抗力",
+        "Context": "MainTab.DrawCrucibleFamiliarTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "AutoDuty v0.0.0.",
+        "Translated": "AutoDuty v0.0.0。",
+        "Context": "MainWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Times",
+        "Translated": "时间",
+        "Context": "MainWindow.LoopsConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Stop###Stop2",
+        "Translated": "停止",
+        "Context": "MainWindow.StopResumePause",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Resume",
+        "Translated": "摘要",
+        "Context": "MainWindow.StopResumePause",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Pause",
+        "Translated": "暂停",
+        "Context": "MainWindow.StopResumePause",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Stop###Stop1",
+        "Translated": "停止",
+        "Context": "MainWindow.GotoAndActions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "OK",
+        "Translated": "好的",
+        "Context": "MainWindow.DrawPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiHelper.CenteredButton"
+      },
+      {
+        "Original": "You need to do the basic setup below. Enjoy",
+        "Translated": "您需要完成以下基本设置。尽情享受吧。",
+        "Context": "MainWindow.EzTabBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Support erdelf on Ko-fi",
+        "Translated": "在 Ko-Fi 上支持 erdelf",
+        "Context": ".ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "AutoDuty Overlay",
+        "Translated": "AutoDuty 覆盖",
+        "Context": "Overlay..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "##Config",
+        "Translated": "##Config",
+        "Context": "Overlay.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": " Loops",
+        "Translated": "循环",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "DurationFilterMinPlus",
+        "Translated": "DurationFilterMinMinPlus",
+        "Context": "StatsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "Wait",
+        "Translated": "等等",
+        "Context": "ActionsManager..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "ContextMenu",
+        "Translated": "上下文菜单",
+        "Context": "CrucibleMenus.UpdateItems",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "None",
+        "Translated": "无",
+        "Context": "BossMod_IPCSubscriber.StayCloseToTank",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Stylist",
+        "Translated": "造型师",
+        "Context": "Stylist_IPCSubscriber.get_IsEnabled",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "All Targets Can Attack aka Tank/Autoduty Mode",
+        "Translated": "所有目标都可以在坦克/自动驾驶模式下攻击",
+        "Context": "RSR_IPCSubscriber.GetHostileTypeDescription",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Targets Have A Target",
+        "Translated": "目标有目标",
+        "Context": "RSR_IPCSubscriber.GetHostileTypeDescription",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "All Targets When Solo In Duty",
+        "Translated": "独自执行任务时的所有目标",
+        "Context": "RSR_IPCSubscriber.GetHostileTypeDescription",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "All Targets When Solo",
+        "Translated": "独自执行任务时的所有目标",
+        "Context": "RSR_IPCSubscriber.GetHostileTypeDescription",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Unknown Target Type",
+        "Translated": "未知目标类型",
+        "Context": "RSR_IPCSubscriber.GetHostileTypeDescription",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Lifestream",
+        "Translated": "生命流",
+        "Context": "Lifestream_IPCSubscriber.get_IsEnabled",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Armoire",
+        "Translated": "衣柜",
+        "Context": "ArmoireHelper.HelperUpdate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Equip Recommended Gear",
+        "Translated": "推荐装备",
+        "Context": "AutoEquipHelper.get_DisplayName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "AutoRetainerMultiMode",
+        "Translated": "AutoRetainer MultiMode",
+        "Context": "AutoRetainerMultiModeHelper..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Opening Coffers",
+        "Translated": "打开保险箱",
+        "Context": "CofferHelper..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Desynthing",
+        "Translated": "去辛丁",
+        "Context": "DesynthHelper.get_DisplayName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Discarding Items",
+        "Translated": "丢弃物品",
+        "Context": "DiscardHelper..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Exiting Duty",
+        "Translated": "下班",
+        "Context": "ExitDutyHelper.get_DisplayName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Extracting Materia",
+        "Translated": "提取物质",
+        "Context": "ExtractHelper.get_DisplayName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Glamour Chest",
+        "Translated": "魅力胸部",
+        "Context": "GlamourChestHelper.HelperUpdate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Plugin Installer",
+        "Translated": "插件安装程序",
+        "Context": "PluginInstaller..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Updating Portrait",
+        "Translated": "更新肖像",
+        "Context": "PortraitHelper..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Queueing ",
+        "Translated": "队列",
+        "Context": "QueueHelper.Invoke",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Repair Gear",
+        "Translated": "维修设备",
+        "Context": "RepairHelper..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Selling TTT Cards",
+        "Translated": "销售 TTT 卡",
+        "Context": "TripleTriadCardSellHelper..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Registering Cards",
+        "Translated": "注册卡",
+        "Context": "TripleTriadCardUseHelper..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "powered by ",
+        "Translated": "由",
+        "Context": "RequiresPlugin",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Install##InstallExternalPlugin_",
+        "Translated": "安装##安装外部插件_",
+        "Context": "RequiresPlugin",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Mon",
+        "Translated": "我的",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Wed",
+        "Translated": "婚礼",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Thu",
+        "Translated": "秋天",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Fri",
+        "Translated": "星期六",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sat",
+        "Translated": "萨特",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sun",
+        "Translated": "太阳",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "January",
+        "Translated": "一月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "February",
+        "Translated": "二月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "March",
+        "Translated": "三月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "April",
+        "Translated": "四月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "May",
+        "Translated": "五月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "June",
+        "Translated": "六月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "July",
+        "Translated": "七月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "August",
+        "Translated": "八月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "September",
+        "Translated": "九月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "October",
+        "Translated": "十月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "November",
+        "Translated": "十一月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "December",
+        "Translated": "十二月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Avarice",
+        "Translated": "贪婪",
+        "Context": "Avarice_Reflection..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Action Type",
+        "Translated": "动作类型",
+        "Context": "PathActionConditionActionStatus.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Action ID",
+        "Translated": "行动 ID",
+        "Context": "PathActionConditionActionStatus.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputUInt"
+      },
+      {
+        "Original": "Status Code",
+        "Translated": "状态码",
+        "Context": "PathActionConditionActionStatus.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputUInt"
+      },
+      {
+        "Original": "Instance Type",
+        "Translated": "实例类型",
+        "Context": "PathActionConditionCollision.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Layout Instance ID",
+        "Translated": "布局实例 ID",
+        "Context": "PathActionConditionCollision.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Operation",
+        "Translated": "操作",
+        "Context": "PathActionConditionItemCount.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Combo"
+      },
+      {
+        "Original": "Quantity",
+        "Translated": "数量",
+        "Context": "PathActionConditionItemCount.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputUint"
+      },
+      {
+        "Original": "BaseId",
+        "Translated": "基础 ID",
+        "Context": "PathActionConditionObjectData.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputUint"
+      },
+      {
+        "Original": "Property",
+        "Translated": "属性",
+        "Context": "PathActionConditionObjectData.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Value",
+        "Translated": "价值",
+        "Context": "PathActionConditionObjectData.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "origin",
+        "Translated": "起源",
+        "Context": "PathActionConditionDistance.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Z##origin_Z",
+        "Translated": "Z##origin_Y ID##target_baseID",
+        "Context": "PathActionConditionDistance.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputFloat"
+      },
+      {
+        "Original": "target",
+        "Translated": "目标",
+        "Context": "PathActionConditionDistance.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "ID##target_baseID",
+        "Translated": "ID##目标基础 ID",
+        "Context": "PathActionConditionDistance.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputUint"
+      },
+      {
+        "Original": "Distance",
+        "Translated": "距离",
+        "Context": "PathActionConditionDistance.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputFloat"
+      },
+      {
+        "Original": "Objective",
+        "Translated": "目的",
+        "Context": "PathActionConditionToDo.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 1",
+        "Translated": "声音效果 1",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 2",
+        "Translated": "声音效果 2",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 3",
+        "Translated": "声音效果 3",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 4",
+        "Translated": "声音效果 4",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 5",
+        "Translated": "声音效果 5",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 6",
+        "Translated": "声音效果 6",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 7",
+        "Translated": "声音效果 7",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 8",
+        "Translated": "声音效果 8",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 9",
+        "Translated": "声音效果 9",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 10",
+        "Translated": "声音效果 10",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 11",
+        "Translated": "声音效果 11",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 12",
+        "Translated": "声音效果 12",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 13",
+        "Translated": "声音效果 13",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 14",
+        "Translated": "声音效果 14",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 15",
+        "Translated": "声音效果 15",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Sound Effect 16",
+        "Translated": "声音效果 16",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Unknown",
+        "Translated": "未知",
+        "Context": "Extensions.ToName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Boss Mod",
+        "Translated": "老板模式",
+        "Context": "Extensions.GetExternalPluginName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Rotation Solver Reborn",
+        "Translated": "旋转求解器重生",
+        "Context": "Extensions.GetExternalPluginName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Wrath Combo",
+        "Translated": "愤怒组合",
+        "Context": "Extensions.GetExternalPluginName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Anti-AfkKick",
+        "Translated": "反 AfkKick",
+        "Context": "Extensions.GetExternalPluginName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Pandora's Box",
+        "Translated": "潘多拉的盒子",
+        "Context": "Extensions.GetExternalPluginName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Glamour Log",
+        "Translated": "魅力日志",
+        "Context": "Extensions.GetExternalPluginName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Order",
+        "Translated": "顺序",
+        "Context": "LoopActions.OnGui",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "ProtectGearsetterUpgrades",
+        "Translated": "ProtectGearsterUpgrades",
+        "Context": "DesynthLoopActionConfig.OnGuiSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Retire",
+        "Translated": "退役",
+        "Context": "RetireLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Squadron Enlistment Manual",
+        "Translated": "飞行队登记手册",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Squadron Battle Manual",
+        "Translated": "战队战斗手册",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Squadron Survival Manual",
+        "Translated": "中队生存手册",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Squadron Engineering Manual",
+        "Translated": "战队工程手册",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Squadron Spiritbonding Manual",
+        "Translated": "飞行队精神纽带手册",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Squadron Rationing Manual",
+        "Translated": "飞行队配给手册",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Squadron Gear Maintenance Manual",
+        "Translated": "中队齿轮维护手册",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Consume Items",
+        "Translated": "消费物品",
+        "Context": "ConsumeItemsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Execute Commands",
+        "Translated": "执行命令",
+        "Context": "ExecuteCommandsLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Commands",
+        "Translated": "命令",
+        "Context": "ExecuteCommandsLoopActionConfig.OnGuiSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "enter command starting with /",
+        "Translated": "输入以 / 开头的命令",
+        "Context": "ExecuteCommandsLoopActionConfig.MakeCommands",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Add Command##CommandButton",
+        "Translated": "添加 Command##CommandButton",
+        "Context": "ExecuteCommandsLoopActionConfig.MakeCommands",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Playlist Pre Loop",
+        "Translated": "循环前播放列表",
+        "Context": "PlaylistPreLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Playlist Duty Switch",
+        "Translated": "任务切换播放列表",
+        "Context": "PlaylistSwitchLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Play Sound",
+        "Translated": "播放声音",
+        "Context": "PlaySoundLoopActionConfig..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "board",
+        "Translated": "板",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "opens the Crucible board map",
+        "Translated": "打开 Crucible 主板地图",
+        "Context": "AutoDuty..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Pet: ",
+        "Translated": "宠物：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Feed Item: ",
+        "Translated": "动态物品：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " | gear: ",
+        "Translated": "装备：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " | item: ",
+        "Translated": "物品：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Item:",
+        "Translated": "项目：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Item: ",
+        "Translated": "项目：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Results:",
+        "Translated": "结果：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Performance: ",
+        "Translated": "性能：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Moves: ",
+        "Translated": "动作：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Enemy: ",
+        "Translated": "敌人：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Elite Enemy: ",
+        "Translated": "精英敌人：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Remaining HP: ",
+        "Translated": "剩余 HP:",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "| Score: ",
+        "Translated": "| 得分：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Bonus Score: ",
+        "Translated": "奖励评分：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Bonus Boost: ",
+        "Translated": "奖励提升：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Beasts",
+        "Translated": "野兽",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Beast: ",
+        "Translated": "野兽：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " | Rank: ",
+        "Translated": "等级：",
+        "Context": "ConfigTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "CutsceneSkip detected. Please keep it actually on.",
+        "Translated": "检测到 CutsceneSkip。请务必保持开启状态。",
+        "Context": "MainTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Crucible Shop Order Table",
+        "Translated": "坩埚店订单表",
+        "Context": "MainTab.CrucibleShopOrderTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Table"
+      },
+      {
+        "Original": "NOT SUPPORTED ON STAGING.",
+        "Translated": "不支持转会。",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Please type in \"/xlbranch\" and pick Release, then restart the game.",
+        "Translated": "请输入 “/xlbranch” 并选择 “Release”，然后重启游戏。",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Use despite staging. Support will not be given##stagingHeader",
+        "Translated": "尽管已经注册但仍然使用。不会提供支持##stageingHeader",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Start",
+        "Translated": "开始",
+        "Context": "Overlay.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Crucible Board###AutoDutyCrucibleBoard",
+        "Translated": "坩埚板",
+        "Context": "CrucibleBoardWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "  (board ",
+        "Translated": "(板)",
+        "Context": "CrucibleBoardWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "You are off the board (fight arena?)",
+        "Translated": "你被淘汰了 (格斗场？",
+        "Context": "CrucibleBoardWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "You are on: ",
+        "Translated": "你在：",
+        "Context": "CrucibleBoardWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "There is a camp before the next fight",
+        "Translated": "在下一场战斗之前有一个营地",
+        "Context": "CrucibleBoardWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Path: ",
+        "Translated": "路径：",
+        "Context": "CrucibleBoardWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "There is no camp before the next fight",
+        "Translated": "在下一场战斗之前没有营地",
+        "Context": "CrucibleBoardWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "item ",
+        "Translated": "项目",
+        "Context": "CrucibleItemData.NameOf",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      }
+    ],
+    "resources": [
+      {
+        "Container": "file:Localization/zh-CN/BuildTab.json",
+        "Key": "/BuildTab/NoPartyCoherency",
+        "Original": "Disable Party Coherency",
+        "Translated": "失去党派凝聚力",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Profile/ConfigOverridesActiveNote",
+        "Original": "Config is locked while IPC config overrides are active. Stop AutoDuty to edit again.",
+        "Translated": "当 IPC 配置覆盖处于活动状态时，配置处于锁定状态。停止 AutoDuty 再次编辑。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Overlay/ButtonsHeader",
+        "Original": "The following are buttons available in Overlay/Maintab",
+        "Translated": "以下是覆盖/Maintab 中可用的按钮。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Overlay/LoopActionsOpenByDefault",
+        "Original": "Open enabled Loop Actions by default",
+        "Translated": "默认打开已启用循环操作",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Duty/BMAI/PositionalAvarice",
+        "Original": "Set Positional Based on Avarice",
+        "Translated": "基于贪婪的位置设置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Duty/WaitBeforeLeaving",
+        "Original": "Wait x milliseconds before leaving a duty",
+        "Translated": "等待 x 毫秒后离开岗位",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Duty/WaitBeforeLeavingHelp",
+        "Original": "Can in most cases be kept to 0",
+        "Translated": "在大多数情况下可以保持为 0",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Duty/DisableRenderWhileActive",
+        "Original": "Disable rendering",
+        "Translated": "禁用渲染",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Duty/DisableRenderWhileActiveHelp",
+        "Original": "Disables rendering the 3D world while AutoDuty is active",
+        "Translated": "在 AutoDuty 处于活跃状态时禁止渲染 3D 世界",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/PreLoop/Header",
+        "Original": "Pre-Loop Initialization Settings",
+        "Translated": "预循环初始化设置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/PreLoop/Enable",
+        "Original": "Enable",
+        "Translated": "启用",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/PreLoop/ExecuteCommands",
+        "Original": "Execute commands on start of all loops",
+        "Translated": "在所有循环开始时执行命令",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/PreLoop/ExecuteCommandsHelp",
+        "Original": "Execute commands on start of all loops\nFor example {0}",
+        "Translated": "在所有循环开始时执行命令\n例如{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/PreLoop/BetweenLoopNote",
+        "Original": "The following are also done between loop, if Between Loop is enabled (currently {0})",
+        "Translated": "如果启用了 Between Loop(当前为{0})，循环之间也会执行以下操作。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/PreLoop/RetireTo",
+        "Original": "Retire To ",
+        "Translated": "退出到",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/PreLoop/ActionsCopyFromBetweenLoop",
+        "Original": "Copy Actions from Between Loop",
+        "Translated": "从 Between Loop 复制操作",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/Header",
+        "Original": "Between Loop Settings",
+        "Translated": "在循环设置之间",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/Enable",
+        "Original": "Enable",
+        "Translated": "启用",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/RunOnLastLoop",
+        "Original": "Run on last Loop",
+        "Translated": "在最后一个循环上运行",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/ArmoireEntrustHelp",
+        "Original": "Will entrust items to the armoire between loops.",
+        "Translated": "将在循环间隙将物品托付给衣柜。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/GlamourEntrust",
+        "Original": "Entrust to Glamour Chest",
+        "Translated": "委托给魅力之箱",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/GlamourEntrustHelp",
+        "Original": "Will entrust items to the glamour chest between loops.",
+        "Translated": "将把物品托付给那个魅力四射的箱子，在两次循环之间。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/RegisterTripleTriadCards",
+        "Original": "Register Triple Triad Cards",
+        "Translated": "注册三联卡",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/SellTripleTriadCards",
+        "Original": "Sell Triple Triad Cards",
+        "Translated": "出售三联卡",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/EnableAutoRetainerMultiMode",
+        "Original": "Enable AutoRetainer MultiMode",
+        "Translated": "启用 AutoRetainer MultiMode",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/EnableAutoRetainerMultiModeHelp",
+        "Original": "Will cycle through all your characters in ARs MultiMode once and then return to running the duty",
+        "Translated": "将在 ARs MultiMode 中循环一次您的所有角色，然后返回执行任务。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/BetweenLoop/EnableAutoRetainer",
+        "Original": "Enable AutoRetainer Integration",
+        "Translated": "启用 AutoRetainer 集成",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/Help",
+        "Original": "Looping will stop when these conditions are reached, so long as an adequate number of loops have been allocated.",
+        "Translated": "当达到这些条件时，只要分配了足够数量的循环，循环就会停止。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/StopAtILevel",
+        "Original": "Stop Looping @ Item Level",
+        "Translated": "停止循环 @ 项目级别",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/StopWhenDutyGathered",
+        "Original": "Stop Looping when all Glam is Gathered",
+        "Translated": "当所有魅力都聚集在一起时停止循环",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/StopWhenDutyGatheredHelp",
+        "Original": "Looping will stop when the glam of the current duty is gathered.",
+        "Translated": "循环将在当前职责的魅力聚集时停止。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/StopWhenDutyGatheredSetsOnly",
+        "Original": "Sets only",
+        "Translated": "仅设置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/StopWhenInventoryFull",
+        "Original": "Stop Looping when Inventory is full",
+        "Translated": "清单已满时停止循环",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/StopWhenInventoryFullSlots",
+        "Original": "Free Slots left: ",
+        "Translated": "剩余空格：",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Termination/ExecuteCommandsOnTerminationHelp",
+        "Original": "Execute commands on termination of all loops\nFor example {0}",
+        "Translated": "在所有循环结束时执行命令\n例如{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/Positional/Any",
+        "Original": "Any",
+        "Translated": "任何",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/Positional/Flank",
+        "Original": "Flank",
+        "Translated": "侧翼",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/Positional/Rear",
+        "Original": "Rear",
+        "Translated": "后方",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/Positional/Front",
+        "Original": "Front",
+        "Translated": "前方",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/MultiModeType/Retainers",
+        "Original": "Retainers",
+        "Translated": "留任者",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/MultiModeType/Submersibles",
+        "Original": "Submersibles",
+        "Translated": "潜艇",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/MultiModeType/Everything",
+        "Original": "Everything",
+        "Translated": "一切",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/VariantPath",
+        "Original": "Path",
+        "Translated": "路径",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/Distance",
+        "Original": "Distance",
+        "Translated": "距离",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/ObjectData",
+        "Original": "Object",
+        "Translated": "对象",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/ItemCount",
+        "Original": "Item",
+        "Translated": "项目",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/Job",
+        "Original": "Job",
+        "Translated": "工作",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/ConditionFlag",
+        "Original": "Condition Flag",
+        "Translated": "条件标志",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/Collision",
+        "Original": "Collision",
+        "Translated": "碰撞",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/Not",
+        "Original": "Not",
+        "Translated": "不",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/Or",
+        "Original": "Or",
+        "Translated": "或者",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ConditionType/And",
+        "Original": "And",
+        "Translated": "而且",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/ObjectDataProperty/IsTargetable",
+        "Original": "Targetable",
+        "Translated": "可靶向",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/DistanceLocationTypes/Player",
+        "Original": "Player",
+        "Translated": "玩家",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/DistanceLocationTypes/Object",
+        "Original": "Object",
+        "Translated": "对象",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/ConfigTab.json",
+        "Key": "/ConfigTab/Enums/DistanceLocationTypes/Location",
+        "Original": "Location",
+        "Translated": "位置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/InfoTab.json",
+        "Key": "/InfoTab/PluginDesc/GlamourLog",
+        "Original": "Manage Glamour Dresser and Armoire",
+        "Translated": "管理魅力服装和衣柜",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Hint",
+        "Original": "Hold CTRL to delete an entry",
+        "Translated": "按住 CTRL 删除条目",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Repair/NPCSearchHint",
+        "Original": "Start typing NPC or zone name to search",
+        "Translated": "开始键入 NPC 或区域名称进行搜索",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/PlaylistPreLoop/Help",
+        "Original": "If in playlist mode, changes gear set to the first entry's specified gearset",
+        "Translated": "如果在播放列表模式下，将齿轮设置更改为第一个项目的指定齿轮设置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/PlaylistSwitchLoop/Help",
+        "Original": "If in playlist mode, changes gear set to the next entry's specified gearset, and switches the active loop to the next playlist entry, if applicable",
+        "Translated": "如果在播放列表模式下，将齿轮设置更改为下一个条目的指定齿轮设置，并将活跃循环切换到下一个播放列表条目 (如果适用)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Armoire/Help",
+        "Original": "Will entrust items to the armoire",
+        "Translated": "将物品托付给衣柜",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Glamour/Help",
+        "Original": "Will entrust items to the glamour chest",
+        "Translated": "将物品托付给魅力之箱",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Desynth/ProtectGearsetterUpgrades",
+        "Original": "Protect Gearsetter upgrades from Auto Desynth",
+        "Translated": "保护 Gearsetter 升级免受 Auto Deynth 的影响",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Desynth/ProtectGearsetterUpgradesHelp",
+        "Original": "Also protects items that Gearsetter recommends as an upgrade for any of your gearsets, even if they aren't equipped in one yet. Requires the Gearsetter plugin.",
+        "Translated": "此外，它还能保护 Gearsetter 推荐用于升级任何齿轮组的项目，即使这些项目尚未安装在齿轮组中。需要 Gearsetter 插件。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Coffers/Help",
+        "Original": "AutoDuty will open gear coffers (like paladin arms)",
+        "Translated": "AutoDuty 将打开装备箱 (如同圣骑士的武器)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Retire/LifestreamNotRegistered",
+        "Original": "Lifestream not installed",
+        "Translated": "未安装的直播",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Retire/AdjustForDutyModes",
+        "Original": "Adjust for active Duty Mode",
+        "Translated": "调整为主动任务模式",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Retire/AdjustForDutyModesHelp",
+        "Original": "Squadron will retire to barracks.\nCrucible will do absolutely nothing",
+        "Translated": "中队将退回营房。\nCrucible 绝对不会采取任何行动",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/LoopActions.json",
+        "Key": "/LoopActions/Wait/WaitOnPlugins",
+        "Original": "Waits on the specified plugins to be done with their actions",
+        "Translated": "在指定插件上等待其操作完成",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/LimitedJobRestriction",
+        "Original": "Limited Jobs cannot run Trust, Duty Support, Squadron or Variant dungeons. Please switch jobs or select a different category.",
+        "Translated": "有限任务无法运行信任、职责支持、飞行队或变体地牢。请切换任务或选择其他类别。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/CrucibleRestriction",
+        "Original": "Crucible can only be run by Beastmaster",
+        "Translated": "坩埚只能由兽主运行",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/DungeonsRemaining",
+        "Original": "Dungeons Remaining: {0}",
+        "Translated": "剩余地下城:{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/DungeonsRemainingExplanation",
+        "Original": "An estimate of how many more dungeons you can still run before reaching the daily limit of 100 duties.",
+        "Translated": "估算一下，在达到每日 100 个任务的上限之前，你还能跑多少个地下城。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/CurrentVariantPath",
+        "Original": "Current variant path",
+        "Translated": "当前变异路径",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/DutyModes/Crucible",
+        "Original": "Crucible",
+        "Translated": "坩埚",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Team",
+        "Original": "Crucible Team",
+        "Translated": "Crucible 团队",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Familiars",
+        "Original": "Familiars {0}/{1}",
+        "Translated": "家人 {0}/{1}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Familiar",
+        "Original": "Familiar",
+        "Translated": "熟悉",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Rank",
+        "Original": "Rank",
+        "Translated": "等级",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Classification",
+        "Original": "Classification",
+        "Translated": "分类",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/CustomFull",
+        "Original": "Team is full ({0} max)\nUntick one to pick another",
+        "Translated": "团队满员 ({0} max)\n取消选择一个来选择另一个",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ClearRanks",
+        "Original": "Clear saved ranks",
+        "Translated": "清除保存的队列",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ClearRanksHelp",
+        "Original": "Forget saved ranks\nHold Ctrl and click",
+        "Translated": "忘记保存的等级\n按住 Ctrl 并单击",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ClearCustoms",
+        "Original": "Clear custom familiars",
+        "Translated": "清除自定义熟悉程序",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/NoFamiliars",
+        "Original": "No familiars known yet. Open the team or bestiary at Lauda so AutoDuty can read them.",
+        "Translated": "目前尚未发现家族成员。在 Lauda 打开团队或动物图鉴，让 AutoDuty 阅读。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Menus",
+        "Original": "Board Menus",
+        "Translated": "主板菜单",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ShopSettings",
+        "Original": "Shop Settings",
+        "Translated": "商店设置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ShopOrderHelp",
+        "Original": "Top is bought first · Drag the handle or type a new # to move an item · Hover a name for details",
+        "Translated": "首先购买顶部 · 拖动手柄或键入新的 # 来移动物品 · 悬停名称以查看详细信息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ShopItem",
+        "Original": "Item",
+        "Translated": "项目",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ShopItemType",
+        "Original": "Type",
+        "Translated": "输入",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ShopItemBlocked",
+        "Original": "Block",
+        "Translated": "块",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ShopItemBlockedHelp",
+        "Original": "Won't be bought or used.\nHold Ctrl to set everything in the category",
+        "Translated": "不会购买或使用。\n按住 Ctrl 键设置类别中的所有内容",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/HealingItem",
+        "Original": "Healing",
+        "Translated": "治愈",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/GearItem",
+        "Original": "Gear",
+        "Translated": "齿轮",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/FeedItem",
+        "Original": "Feed",
+        "Translated": "饲料",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ItemItem",
+        "Original": "Item",
+        "Translated": "项目",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/DamageItem",
+        "Original": "Damage",
+        "Translated": "损坏",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ShopListHelp",
+        "Original": "The shop list AutoDuty buys from",
+        "Translated": "AutoDuty 从哪里购买商店列表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/RenameShopListHelp",
+        "Original": "Rename this shop list",
+        "Translated": "重新命名这个商店列表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/NewShopList",
+        "Original": "New",
+        "Translated": "新增",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/NewShopListHelp",
+        "Original": "Add a shop list with the default order",
+        "Translated": "添加具有默认顺序的商店列表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/CopyShopList",
+        "Original": "Copy",
+        "Translated": "复制",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/CopyShopListHelp",
+        "Original": "Add a copy of this shop list",
+        "Translated": "添加此商店列表的副本",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/DeleteShopList",
+        "Original": "Delete",
+        "Translated": "删除",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/DeleteShopListHelp",
+        "Original": "Delete this shop list\nHold Ctrl and click\nThe last list can't be deleted",
+        "Translated": "删除此商店列表\n按住 Ctrl 并单击\n无法删除最后一个列表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ClearShopOrder",
+        "Original": "Clear order",
+        "Translated": "清除顺序",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ClearShopOrderHelp",
+        "Original": "Put this list back in the default order\nHold Ctrl and click",
+        "Translated": "将此列表恢复为默认顺序\n按住 Ctrl 并单击",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ExportShopOrder",
+        "Original": "Export",
+        "Translated": "导出",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ExportShopOrderHelp",
+        "Original": "Copy this shop list to the clipboard",
+        "Translated": "将此商店列表复制到剪贴板",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ExportShopOrderDone",
+        "Original": "Shop list copied to clipboard.",
+        "Translated": "商店列表复制到剪贴板。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ImportShopOrder",
+        "Original": "Import",
+        "Translated": "导入",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ImportShopOrderHelp",
+        "Original": "Add a new shop list from the clipboard\nTakes an exported list or plain item IDs\nItems it leaves out are added at the end",
+        "Translated": "从剪贴板添加新的商店列表\n获取导出的列表或普通项目 ID\n它遗漏的项目会在末尾添加。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ImportShopOrderDone",
+        "Original": "Shop list \"{0}\" imported.",
+        "Translated": "导入的购物清单 “{0}”。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ImportShopOrderFailed",
+        "Original": "Unable to import the shop order from the clipboard.",
+        "Translated": "无法从剪贴板导入商店订单。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TableLegend",
+        "Original": "Shaded: the team this mode takes · Hover a name for stats",
+        "Translated": "阴影：这个模式带来的团队 · 为统计数据保留一个名称",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TableLegendCustom",
+        "Original": "Ticked: the team you take · Hover a name for stats",
+        "Translated": "标记：你带的团队 · 为统计数据保留一个名称",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/NotSeen",
+        "Original": "Rank not read yet\nRead from the bestiary at the next team setup",
+        "Translated": "排名尚未读取\n在下一个团队设置中阅读动物寓言",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/MinimumTeamCount",
+        "Original": "Crucible requires at least 3 beasts selected",
+        "Translated": "坩埚需要至少 3 只选定的野兽",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/RecommendedTeamCap",
+        "Original": "Team size",
+        "Translated": "团队规模",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/RecommendedTeamCapClear",
+        "Original": "Uncap",
+        "Translated": "摘下帽子",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/NoClassificationLock",
+        "Original": "All kins",
+        "Translated": "所有亲属",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Degrees/Standard",
+        "Original": "Standard",
+        "Translated": "标准",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Degrees/First",
+        "Original": "First Degree",
+        "Translated": "一级",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Degrees/Second",
+        "Original": "Second Degree",
+        "Translated": "二级",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Degrees/Third",
+        "Original": "Third Degree",
+        "Translated": "第三级",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Modes/Recommended",
+        "Original": "Recommended",
+        "Translated": "推荐",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Modes/Leveling",
+        "Original": "Leveling",
+        "Translated": "水平化",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Modes/Custom",
+        "Original": "Custom",
+        "Translated": "自定义",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ModesHelp/Recommended",
+        "Original": "Takes your highest rank familiars\nTies go to the best stats",
+        "Translated": "带走您最高级别的亲属\n连接到最佳统计数据",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ModesHelp/Leveling",
+        "Original": "Takes your lowest rank familiars, least EXP first\nThe same order picks who fights each battle",
+        "Translated": "先挑选最低等级的亲随，经验最少的优先。\n同一个命令选择谁在每场战斗中战斗",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ModesHelp/Custom",
+        "Original": "Takes the familiars you tick below\nUp to 10",
+        "Translated": "带走你在下面勾选的熟悉的人\n最多 10 个",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModes/Full",
+        "Original": "Full team",
+        "Translated": "全体团队",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModes/Minus_3",
+        "Original": "-3 Cap",
+        "Translated": "-3 帽",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModes/Only_3",
+        "Original": "Only 3",
+        "Translated": "只有 3 个",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModes/Carry_Minus_2",
+        "Original": "Carry -2 Cap",
+        "Translated": "携带 -2 大写",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModesHelp/Full",
+        "Original": "Uses the entire team size",
+        "Translated": "使用整个团队规模",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModesHelp/Minus_3",
+        "Original": "Uses 3 less than the maximum amount",
+        "Translated": "使用少于最大数量 3",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModesHelp/Carry_Minus_2",
+        "Original": "Uses your 3 highest familiars, then fills the rest with your lowest.\nUses 2 less than maximum amount.",
+        "Translated": "使用你最高的 3 个亲和力，然后用你最低的亲和力填充剩下的。\n使用量小于最大值 2。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/LevelingModesHelp/Only_3",
+        "Original": "Only uses 3 familiars at a time",
+        "Translated": "一次仅使用 3 名家庭成员",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/FightPicks",
+        "Original": "Fight picks",
+        "Translated": "战斗选择",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/Loot",
+        "Original": "Loot",
+        "Translated": "掠夺",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/Treasure",
+        "Original": "Treasure",
+        "Translated": "《宝藏》",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/Shop",
+        "Original": "Shop",
+        "Translated": "商店",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/Rest",
+        "Original": "Rest at camps",
+        "Translated": "在营地休息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/Items",
+        "Original": "Heal items",
+        "Translated": "治愈物品",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/RespectGearRequirements",
+        "Original": "Prevent items with detrimental effect without immunity to said effect",
+        "Translated": "防止具有不利影响的物品，但不免疫该影响",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/Toggles/MenusWithoutRun",
+        "Original": "Run menus without AutoDuty (testing)",
+        "Translated": "不使用 AutoDuty 运行菜单 (测试)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/FightPicks",
+        "Original": "Picks up to 3 familiars for each battle and commences it\nKnocked out familiars are skipped",
+        "Translated": "每场战斗最多挑选 3 个亲随，然后开始\n被击昏的家人被跳过",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/Loot",
+        "Original": "Takes all loot after a battle",
+        "Translated": "在战斗结束后取走所有战利品",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/Treasure",
+        "Original": "Takes one treasure: healing first, then defense, then damage",
+        "Translated": "拿走一件宝贝：先治疗，然后防御，最后造成伤害",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/Shop",
+        "Original": "Spends coins on healing items, then Beast Gear, then one feed\nLeaves the shop when done",
+        "Translated": "花钱购买治疗道具，然后是兽装，最后是一次喂食。\n完成后离开店铺",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/Rest",
+        "Original": "Rests with up to 2 familiars under 60% HP\nWith none picked you get the 90% self heal instead",
+        "Translated": "与多达 2 名家族成员一起休息，HP 低于 60%\n没有任何选择，你反而能获得 90% 的自愈",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/Items",
+        "Original": "Uses healing items when your HP is low\nIn battle: under 40%  ·  On the board: under 60%",
+        "Translated": "在 HP 低时使用治疗道具\n在战斗中：低于 40% ·在战场上：低于 60%",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/RespectGearRequirements",
+        "Original": "Doesn't buy gear with a detrimental effect until you have gear that grants immunity to it:\nDemonic Helm needs Soulreaper's Armor\nThunder Axe needs Umbral Wristlet",
+        "Translated": "不要购买具有不利影响的装备，除非你拥有能够免疫它的装备：\n恶魔头盔需要灵魂收割者的盔甲\n雷神斧 (Thunder Axe) 需要 Umbreal 手镯",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/TogglesHelp/MenusWithoutRun",
+        "Original": "For testing without paths\nTalking to Lauda sets up the team, challenges the board and commences\nOn a board, the menus above run while you walk it yourself",
+        "Translated": "用于无路径测试\n与劳达交谈组建团队，挑战董事会，然后开始\n在看板上，上面的菜单在你自己走动时运行。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ItemCategory/Gear",
+        "Original": "Gear",
+        "Translated": "齿轮",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ItemCategory/HealItem",
+        "Original": "Heal Item",
+        "Translated": "治愈物品",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ItemCategory/CombatItem",
+        "Original": "Combat Item",
+        "Translated": "战斗物品",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ItemCategory/BoardItem",
+        "Original": "Board Item",
+        "Translated": "板块物品",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ItemCategory/Item",
+        "Original": "Item",
+        "Translated": "项目",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Crucible/ItemCategory/Feed",
+        "Original": "Feed Item",
+        "Translated": "输入项目",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Playlist/DeleteHelp",
+        "Original": "Deletes the saved Playlist\nHold ctrl to enable",
+        "Translated": "删除保存的播放列表\n按住 ctrl 键以启用",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainTab.json",
+        "Key": "/MainTab/Playlist/SaveHelp",
+        "Original": "Saves the current Playlist with the name written\nHold ctrl to enable",
+        "Translated": "将当前播放列表存储为已写名称\n按住 ctrl 以启用",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/MainWindow.json",
+        "Key": "/MainWindow/Goto/Crucible",
+        "Original": "Crucible",
+        "Translated": "坩埚",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/Armoire",
+        "Original": "Armoire",
+        "Translated": "衣柜",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/Glamour",
+        "Original": "Glamour",
+        "Translated": "魅力",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/AutoRetainer",
+        "Original": "Retainers",
+        "Translated": "留任者",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/Discard",
+        "Original": "Discard",
+        "Translated": "放弃",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/TripleTriadUse",
+        "Original": "TT Use",
+        "Translated": "TT 使用",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/ConsumeItems",
+        "Original": "Consume",
+        "Translated": "消费",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/ExecuteCommands",
+        "Original": "Commands",
+        "Translated": "命令",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/Wait",
+        "Original": "Wait(?)",
+        "Translated": "等待 (?)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "file:Localization/zh-CN/Overlay.json",
+        "Key": "/Overlay/Button/PlaySound",
+        "Original": "Sound",
+        "Translated": "声音",
+        "Source": "ai:public-caiyun"
+      }
+    ],
+    "attributes": []
+  }
+}
