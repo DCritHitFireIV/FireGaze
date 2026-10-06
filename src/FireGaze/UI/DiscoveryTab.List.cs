@@ -137,44 +137,62 @@ internal sealed partial class DiscoveryTab
 
         ImGui.EndGroup();
 
-        // 右栏：♥ + 库操作（SetCursorPosY 用窗口局部坐标——用屏幕坐标会把按钮画到下一行去）
+        // 右栏：♥ + 库操作——与「插件汉化」一样贴着行尾右对齐；♥ 固定在最右、按钮排在它左边，
+        // 这样无论这一行有没有按钮，♥ 都在同一条竖直线上（用户 2026-10-07：♥ 太靠前了）。
         ImGui.TableNextColumn();
         ImGui.SetCursorPosY(rowStartY + ((rowHeight - ImGui.GetFrameHeight()) * 0.5f));
-        DrawLikeButton(entry, "row");
 
-        if (!entry.IsOfficial && entry.RepositoryURL is { Length: > 0 } url)
+        var url = entry.RepositoryURL is { Length: > 0 } candidate ? candidate : null;
+        var addAction = !entry.IsOfficial && url is not null && !entry.RepositoryKnown;
+        var enableAction = !entry.IsOfficial && url is not null && entry.RepositoryKnown && !entry.RepositoryEnabled;
+
+        var actionWidth = MathF.Max(40f, ImGui.GetFontSize() * 2.6f);
+        if (addAction)
         {
-            if (!entry.RepositoryKnown)
-            {
-                ImGui.SameLine();
-                var cta = "加入自己的库";
-                if (InsStyle.PinkButton(cta + "###add", InsStyle.PinkButtonWidth(cta)))
-                {
-                    AddRepoFromRow(url);
-                }
-
-                if (ImGui.IsItemHovered())
-                {
-                    ImGui.SetTooltip("把这条库加进你的第三方插件列表（会先自动备份）");
-                }
-            }
-            else if (!entry.RepositoryEnabled)
-            {
-                ImGui.SameLine();
-                UiHelpers.PushEnableButton();
-                if (ImGui.Button("启用###enable"))
-                {
-                    EnableRepoFromRow(url);
-                }
-
-                UiHelpers.PopEnableButton();
-
-                if (ImGui.IsItemHovered())
-                {
-                    ImGui.SetTooltip("保留链接、把它重新启用；启用后卫月会去抓它的插件");
-                }
-            }
+            actionWidth += ImGui.GetStyle().ItemSpacing.X + InsStyle.PinkButtonWidth("加入自己的库");
         }
+        else if (enableAction)
+        {
+            actionWidth += ImGui.GetStyle().ItemSpacing.X + UiHelpers.LabelWidth("启用");
+        }
+
+        // 单元格里 GetContentRegionAvail 就是列可用宽（不会随已画内容变），拿它把整组推到行尾
+        ImGui.SetCursorPosX(ImGui.GetCursorPosX() + MathF.Max(0f, ImGui.GetContentRegionAvail().X - actionWidth));
+
+        if (addAction)
+        {
+            const string cta = "加入自己的库";
+            if (InsStyle.PinkButton(cta + "###add", InsStyle.PinkButtonWidth(cta)))
+            {
+                AddRepoFromRow(url!);
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("把这条库加进你的第三方插件列表（会先自动备份）");
+            }
+
+            ImGui.SameLine();
+        }
+        else if (enableAction)
+        {
+            UiHelpers.PushEnableButton();
+            if (ImGui.Button("启用###enable"))
+            {
+                EnableRepoFromRow(url!);
+            }
+
+            UiHelpers.PopEnableButton();
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("保留链接、把它重新启用；启用后卫月会去抓它的插件");
+            }
+
+            ImGui.SameLine();
+        }
+
+        DrawLikeButton(entry, "row");
 
         if (isOpen)
         {
