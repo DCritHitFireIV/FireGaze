@@ -93,7 +93,7 @@ internal sealed partial class DiscoveryTab
     }
 
     /// <summary>
-    ///     筛选出当前要显示的行：隐藏主库 / 已停用库 / 关键词，然后按排序档位重排。
+    ///     筛选出当前要显示的行：隐藏主库 / 隐藏已在库 / 关键词，然后按排序档位重排。
     /// </summary>
     private void RebuildFiltered()
     {
@@ -104,6 +104,7 @@ internal sealed partial class DiscoveryTab
 
         rebuildPending = false;
         filtered.Clear();
+        incompatibleHidden = 0;
 
         if (index is not { Available: true })
         {
@@ -119,21 +120,22 @@ internal sealed partial class DiscoveryTab
                 continue;
             }
 
+            // 兼容性预筛（用户 2026-10-07）：卫月自己就不会加载的旧 API 插件不显示
+            // （与 PluginManager.IsManifestEligible 同口径；等级未知的不拦）
+            if (!PluginCompatibility.IsAPICompatible(entry.APILevel))
+            {
+                incompatibleHidden++;
+                continue;
+            }
+
             // 「隐藏已在库」：仓库已经在自己列表里且启用（含官方主库）→ 不用再看到了
             if (hideInLibrary && entry.RepositoryKnown && entry.RepositoryEnabled)
             {
                 continue;
             }
 
-            if (!plugin.Config.ContributeShowDisabled)
-            {
-                // 只看已启用的库；「还没加进来」的库属于云端语料，一直都在
-                if (entry.RepositoryKnown && !entry.RepositoryEnabled)
-                {
-                    continue;
-                }
-            }
-
+            // 已停用库不再过滤（用户 2026-10-07：去掉「连着已停用的库」开关）——
+            // 这类插件要能看见、并从行尾的「启用」一键回库
             // 全字段搜索（插件名/作者/简介/详情，原文+译文；SearchBlob 里都拼好了）
             if (query.Length > 0 && !entry.SearchBlob.Contains(query, StringComparison.Ordinal))
             {
@@ -175,6 +177,14 @@ internal sealed partial class DiscoveryTab
     {
         // 译文/词表变了：重建搜索结果（不重建反射索引，够快）
         rebuildPending = true;
+    }
+
+    /// <summary>词表整份被换过（云端刷新）：丢掉索引，下一帧走 EnsureIndex 全量重建。</summary>
+    private void InvalidateIndexFully()
+    {
+        index = null;
+        rebuildPending = true;
+        ResetIconQueue();
     }
 
     /// <summary>

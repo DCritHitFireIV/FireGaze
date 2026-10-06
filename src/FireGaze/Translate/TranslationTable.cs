@@ -100,6 +100,14 @@ public sealed class TransEntry
     [JsonPropertyName("Official")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Official { get; set; }
+
+    /// <summary>
+    ///     仓库清单里声明的卫月 API 等级（DalamudApiLevel）；老词表没有这个字段（null = 不知道）。
+    ///     插件发现靠它把卫月不会加载的旧插件先筛掉（与 PluginManager.IsManifestEligible 同口径）。
+    /// </summary>
+    [JsonPropertyName("ApiLevel")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? APILevel { get; set; }
 }
 
 /// <summary>

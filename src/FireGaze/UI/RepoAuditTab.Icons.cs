@@ -35,12 +35,22 @@ internal sealed partial class RepoAuditTab
                 continue;
             }
 
-            // 先看我们自己的落盘缓存（重开游戏后也能命中），再看卫月内存里的
+            // ① 已经有句柄：直接用；
+            // ② 没句柄但本地有货（盘上有文件、纹理还在异步解码）：算「已有」，不能算缺——
+            //    否则重开游戏后第一次检查会把刚下载过的全报成缺图标（用户 2026-10-07：
+            //    「好几次我下载好了 重新上游戏还要我下载」；纹理解码是异步的，检查不能等它）
             if (plugin.Icons.TryGetHandle(entry, out var cachedHandle) && !cachedHandle.IsNull)
             {
                 iconHandles[entry.InternalName] = cachedHandle;
                 fromDisk++;
                 cached++;
+                continue;
+            }
+
+            if (plugin.Icons.Has(entry))
+            {
+                cached++;
+                fromDisk++;
                 continue;
             }
 

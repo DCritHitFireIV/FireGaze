@@ -66,6 +66,9 @@ internal sealed partial class DiscoveryTab
         clipper.Begin(filtered.Count, FoldedRowHeight());
         while (clipper.Step())
         {
+            // 可见行 + 预载余量进图标下载队列（限流并行，见 DiscoveryTab.Icons.cs）
+            NoteVisibleForIcons(clipper.DisplayStart, clipper.DisplayEnd);
+
             for (var i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
             {
                 if (i >= 0 && i < filtered.Count)
@@ -109,7 +112,7 @@ internal sealed partial class DiscoveryTab
 
         if (!TryDrawIcon(entry, iconSize))
         {
-            DrawLetterIcon(entry.DisplayName, iconSize);
+            InsStyle.DrawLetterAvatar(entry.DisplayName, iconSize);
         }
 
         ImGui.SameLine(0, 12f);
@@ -264,21 +267,9 @@ internal sealed partial class DiscoveryTab
             ImGui.SetTooltip(url);
         }
 
-        if (!entry.RepositoryKnown)
+        if (entry.RepositoryKnown && !entry.RepositoryEnabled)
         {
-            UiHelpers.SameLineOrWrap(InsStyle.PinkButtonWidth("加入自己的库"));
-            if (InsStyle.PinkButton("加入自己的库###add-expanded", InsStyle.PinkButtonWidth("加入自己的库")))
-            {
-                AddRepoFromRow(url);
-            }
-
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip(url);
-            }
-        }
-        else if (!entry.RepositoryEnabled)
-        {
+            // 已加库但停用：详情里给一个启用入口（未加库的加库动作只在行尾，详情不重复）
             UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("启用"));
             UiHelpers.PushEnableButton();
             if (ImGui.SmallButton("启用###enable-expanded"))
@@ -293,7 +284,7 @@ internal sealed partial class DiscoveryTab
                 ImGui.SetTooltip(url);
             }
         }
-        else
+        else if (entry.RepositoryKnown)
         {
             // 已在库：给出状态，不再给「加库」（加了也是重复）——用户 2026-10-07 点名要看得到这个状态
             ImGui.SameLine();
@@ -386,21 +377,14 @@ internal sealed partial class DiscoveryTab
             return !cached.IsNull && DrawRoundIcon(cached, size);
         }
 
-        if (!entry.DeclaresIcon || iconMisses.Contains(entry.InternalName))
+        if (!entry.DeclaresIcon)
         {
             return false;
         }
 
-        var installed = new InstalledPluginEntry
-        {
-            InternalName = entry.InternalName,
-            DisplayName = entry.DisplayName,
-            IconURL = entry.IconURL,
-            RawPlugin = entry.RawPlugin!,
-            Manifest = entry.Manifest,
-            IsThirdParty = true,
-        };
+        var installed = ToIconEntry(entry);
 
+        // 本地缓存（盘上 / 已建纹理）或卫月内存缓存里有就画；纹理还在解码时这一帧先画字母块
         if (plugin.Icons.TryGetHandle(installed, out var handle) && !handle.IsNull)
         {
             iconHandles[entry.InternalName] = handle;
@@ -413,7 +397,12 @@ internal sealed partial class DiscoveryTab
             return DrawRoundIcon(peeked, size);
         }
 
-        iconMisses.Add(entry.InternalName);
+        // 还没拿到：交给视口队列去下（下过 / 失败过的不重复排）
+        if (!iconMisses.Contains(entry.InternalName) && iconQueued.Add(entry.InternalName))
+        {
+            iconWaitQueue.Enqueue(entry);
+        }
+
         return false;
     }
 
@@ -427,26 +416,5 @@ internal sealed partial class DiscoveryTab
 
         ImGui.Dummy(new Vector2(size, size));
         return true;
-    }
-
-    /// <summary>没有图标时的字母占位（ins 风：也是正圆）。</summary>
-    private static void DrawLetterIcon(string name, float size)
-    {
-        var start = ImGui.GetCursorScreenPos();
-        var drawList = ImGui.GetWindowDrawList();
-        drawList.AddRectFilled(
-            start,
-            start + new Vector2(size, size),
-            ImGui.GetColorU32(new Vector4(0.22f, 0.25f, 0.31f, 1f)),
-            size / 2f);
-
-        var initial = string.IsNullOrEmpty(name) ? "?" : name[..1].ToUpperInvariant();
-        var textSize = ImGui.CalcTextSize(initial);
-        drawList.AddText(
-            start + ((new Vector2(size, size) - textSize) * 0.5f),
-            ImGui.GetColorU32(new Vector4(0.80f, 0.86f, 0.96f, 1f)),
-            initial);
-
-        ImGui.Dummy(new Vector2(size, size));
     }
 }

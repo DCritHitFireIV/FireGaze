@@ -236,13 +236,15 @@ public sealed class Plugin : IDalamudPlugin
             Log.Information(
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {Table.Count} 条；" +
                 $"汉化 = {(Config.TranslateEnabled ? "开" : "关")}");
-            Log.Information("[FireGaze] 页签顺序：插件汉化 / 简介汉化 / 仓库体检 / 插件安装器（参与翻译是独立窗口）");
+            Log.Information("[FireGaze] 页签顺序：插件汉化 / 插件发现 / 仓库体检 / 简介汉化 / 插件安装器");
 
-            // 一次性更新公告（1.3.27）：只在玩家更新后第一次加载时播报，之后不再出现
-            if (!Config.UITextFeatureAnnounced)
+            // 一次性更新公告：更新后第一次加载时播报一次（插件汉化 / 插件发现各对应一个标记，
+            // 老玩家已经看过旧的汉化公告，但插件发现的消息还会补一次）
+            if (!Config.UITextFeatureAnnounced || !Config.DiscoveryFeatureAnnounced)
             {
                 Config.UITextFeatureAnnounced = true;
-                Chat.Print("FireGaze: 上线了插件汉化的功能，现在可以对插件界面进行汉化了");
+                Config.DiscoveryFeatureAnnounced = true;
+                Chat.Print("FireGaze: 上线了插件汉化和插件发现的功能，现在可以汉化插件界面、浏览云端插件库了");
                 SaveConfig();
             }
         }

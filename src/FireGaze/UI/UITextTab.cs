@@ -488,8 +488,12 @@ internal sealed class UITextTab
         var actionsWidth = ActionsColumnWidth();
         var slack = ImGui.GetStyle().ScrollbarSize + 48f;
         var pluginWidth = Math.Max(180f, ImGui.GetContentRegionAvail().X - actionsWidth - slack);
+
+        // 与「插件发现」同一套圆角基调（按钮/滚动条圆角；2026-10-07 用户：两个页签风格对齐）
+        InsStyle.PushRounded();
         if (!ImGui.BeginTable("###UITextPlugins", 2, flags, new Vector2(0, -1)))
         {
+            InsStyle.PopRounded();
             return;
         }
 
@@ -502,6 +506,7 @@ internal sealed class UITextTab
         }
 
         ImGui.EndTable();
+        InsStyle.PopRounded();
     }
 
     /// <summary>
@@ -3043,25 +3048,8 @@ internal sealed class UITextTab
         return false;
     }
 
-    private static void DrawLetterIcon(string name, float size)
-    {
-        var start = ImGui.GetCursorScreenPos();
-        var drawList = ImGui.GetWindowDrawList();
-        drawList.AddRectFilled(
-            start,
-            start + new Vector2(size, size),
-            ImGui.GetColorU32(new Vector4(0.22f, 0.25f, 0.31f, 1f)),
-            5f);
-
-        var initial = string.IsNullOrEmpty(name) ? "?" : name[..1].ToUpperInvariant();
-        var textSize = ImGui.CalcTextSize(initial);
-        drawList.AddText(
-            start + ((new Vector2(size, size) - textSize) * 0.5f),
-            ImGui.GetColorU32(new Vector4(0.80f, 0.86f, 0.96f, 1f)),
-            initial);
-
-        ImGui.Dummy(new Vector2(size, size));
-    }
+    /// <summary>没有图标时的字母占位：正圆，与「插件发现」共用同一份实现（2026-10-07 风格对齐）。</summary>
+    private static void DrawLetterIcon(string name, float size) => InsStyle.DrawLetterAvatar(name, size);
 
     /// <summary>
     ///     读一遍每个插件的包摘要 + 补丁状态（每 5 秒 / 动作后刷新；不要每帧读盘）。

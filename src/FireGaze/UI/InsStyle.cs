@@ -104,4 +104,28 @@ internal static class InsStyle
             size / 2f);
         return true;
     }
+
+    /// <summary>
+    ///     字母头像（无图插件的占位，正圆）：「插件汉化」与「插件发现」共用同一个形状与配色，
+    ///     两个页签的头像列看起来是同一套东西。
+    /// </summary>
+    public static void DrawLetterAvatar(string name, float size)
+    {
+        var start = ImGui.GetCursorScreenPos();
+        var drawList = ImGui.GetWindowDrawList();
+        drawList.AddRectFilled(
+            start,
+            start + new Vector2(size, size),
+            ImGui.GetColorU32(new Vector4(0.22f, 0.25f, 0.31f, 1f)),
+            size / 2f);
+
+        var initial = string.IsNullOrEmpty(name) ? "?" : name[..1].ToUpperInvariant();
+        var textSize = ImGui.CalcTextSize(initial);
+        drawList.AddText(
+            start + ((new Vector2(size, size) - textSize) * 0.5f),
+            ImGui.GetColorU32(new Vector4(0.80f, 0.86f, 0.96f, 1f)),
+            initial);
+
+        ImGui.Dummy(new Vector2(size, size));
+    }
 }

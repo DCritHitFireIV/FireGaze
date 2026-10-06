@@ -13,6 +13,33 @@ internal sealed partial class DiscoveryTab
         statusIsError = isError;
     }
 
+    /// <summary>
+    ///     刷新云库：从 GitHub 重拉词表（带防倒退），成功后由 DrawCore 全量重建列表。
+    ///     用户 2026-10-07：投稿的库链有没有上云，点一下就能确认。
+    /// </summary>
+    private void StartCloudRefresh()
+    {
+        if (refreshInFlight)
+        {
+            return;
+        }
+
+        refreshInFlight = true;
+        SetStatus("正在从 GitHub 拉取最新云库…", isError: false);
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var (ok, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
+                refreshResult = (ok, message);
+            }
+            catch (Exception e)
+            {
+                refreshResult = (false, e.GetType().Name);
+            }
+        });
+    }
+
     /// <summary>排序档位的中文名（下拉框用）。</summary>
     internal static string SortLabel(DiscoverySortMode mode) => mode switch
     {

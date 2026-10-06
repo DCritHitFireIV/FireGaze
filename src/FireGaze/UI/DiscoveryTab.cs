@@ -87,6 +87,16 @@ internal sealed partial class DiscoveryTab
     /// <summary>筛选：隐掉仓库已经在自己列表里的插件，只看还能加进库的（用户 2026-10-07 定）。</summary>
     private bool hideInLibrary;
 
+    /// <summary>上一次筛选时按兼容性隐掉了多少条（卫月 API 太老、装了也不会加载），只用于提示。</summary>
+    private int incompatibleHidden;
+
+    /// <summary>云端刷新：正在从 GitHub 拉词表；结果由 UI 线程取走处理。</summary>
+    private bool refreshInFlight;
+    private (bool Ok, string Message)? refreshResult;
+
+    /// <summary>刷新完、索引重建完之后核对一次「我投稿的库链显示了吗」。</summary>
+    private bool checkSubmissionsAfterRebuild;
+
     /// <summary>投稿区状态。</summary>
     private string submitInput = string.Empty;
     private string? submitMessage;
@@ -165,6 +175,7 @@ internal sealed partial class DiscoveryTab
         EnsureDiscoveryStats();
         RetryPendingReport();
         DrainLikeResults();
+        TickDiscoveryIcons();   // 图标下载推进（视口队列在 DrawList 里填）
 
         // 本机状态文件读写出过问题就给一次提示（failure-path 审计留的唯一未处理项）
         if (discoveryState.TakePersistFailure())
@@ -200,6 +211,53 @@ internal sealed partial class DiscoveryTab
         }
 
         // ---------------- 搜索 + 排序（第一行） ----------------
+        // 刷新云库（用户 2026-10-07）：从 GitHub 重拉一次词表——刚投稿的库链收录后，点它就能在列表里看到
+        ImGui.BeginDisabled(refreshInFlight);
+        if (ImGui.Button(refreshInFlight ? "刷新中…###DiscoveryRefresh" : "刷新###DiscoveryRefresh"))
+        {
+            StartCloudRefresh();
+        }
+
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            ImGui.SetTooltip("从 GitHub 重拉一次云库并重建列表。\n投稿的库链收录后，点它就能确认是否已经上云。");
+        }
+
+        if (refreshResult is { } finished)
+        {
+            refreshResult = null;
+            refreshInFlight = false;
+            if (finished.Ok)
+            {
+                // 词表换了一整份：不能只刷状态，要全量重建（新收录的库/插件才会出现）
+                checkSubmissionsAfterRebuild = true;
+                InvalidateIndexFully();
+                ActivityLog.Info("插件发现", $"云库刷新成功：{finished.Message}");
+                SetStatus("云库已更新：" + finished.Message, isError: false);
+            }
+            else
+            {
+                ActivityLog.Warning("插件发现", $"云库刷新失败：{finished.Message}");
+                SetStatus("刷新失败：" + finished.Message, isError: true);
+            }
+        }
+
+        if (checkSubmissionsAfterRebuild && index is { Available: true } && buildTask is null)
+        {
+            checkSubmissionsAfterRebuild = false;
+            var submitted = discoveryState.SubmittedRepos.Count;
+            if (submitted > 0)
+            {
+                var pending = SubmittedButNotInCloud();
+                SetStatus(pending.Count == 0
+                        ? $"已刷新：你投稿的 {submitted} 条库链都已在云端显示"
+                        : $"已刷新：投稿的 {submitted} 条里还有 {pending.Count} 条没在云端显示；云端收录并翻译后才会出现在列表里",
+                    isError: false);
+            }
+        }
+
+        ImGui.SameLine();
         ImGui.SetNextItemWidth(300);
         if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、一行简介、详情…", ref search, 256))
         {
@@ -272,25 +330,23 @@ internal sealed partial class DiscoveryTab
         }
 
         ImGui.SameLine();
-        var showDisabled = plugin.Config.ContributeShowDisabled;
-        if (ImGui.Checkbox("连着已停用的库###DiscoveryDisabled", ref showDisabled))
-        {
-            plugin.Config.ContributeShowDisabled = showDisabled;
-            plugin.SaveConfig();
-            rebuildPending = true;
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("勾上后连已停用仓库里的插件也列出来；这类插件当前不会出现在安装器里。\n"
-                             + "还没加进你库里的仓库不受这个开关影响 —— 那是整座云库。");
-        }
-
-        ImGui.SameLine();
         ImGui.TextDisabled($"{index.All.Count} 个插件");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("云端词表里的插件总数（含官方主库；筛选只影响显示）。");
+            ImGui.SetTooltip("云端词表里的插件总数（含官方主库；筛选只影响显示）。"
+                             + (incompatibleHidden > 0
+                                 ? $"\n已按兼容性隐藏 {incompatibleHidden} 个：它们的卫月 API 等级太旧，装了也不会加载。"
+                                 : string.Empty));
+        }
+
+        if (iconInFlight > 0 || iconWaitQueue.Count > 0)
+        {
+            ImGui.SameLine();
+            UiHelpers.ColoredText(UiHelpers.Muted, $"· 图标加载中，还剩 {iconInFlight + iconWaitQueue.Count}");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("图标按你看到的范围后台下载，下过的存在本地，重开游戏不重下。");
+            }
         }
 
         if (indexMayBePartial)

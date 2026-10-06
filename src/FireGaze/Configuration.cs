@@ -297,4 +297,10 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("UITextFeatureAnnounced")]
     public bool UITextFeatureAnnounced { get; set; }
+
+    /// <summary>
+    ///     是否已经播报过「插件发现上线」的更新公告；与上一条分开记，老玩家也能收到这一条。
+    /// </summary>
+    [JsonProperty("DiscoveryFeatureAnnounced")]
+    public bool DiscoveryFeatureAnnounced { get; set; }
 }

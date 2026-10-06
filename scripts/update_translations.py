@@ -282,6 +282,17 @@ def unix_seconds(value) -> int:
     return stamp
 
 
+def api_level_of(value):
+    """仓库清单里的 DalamudApiLevel：正常是数字，偶尔写成字符串；缺失 / 越界当不知道。"""
+    if value is None:
+        return None
+    try:
+        level = int(str(value).strip())
+    except (TypeError, ValueError):
+        return None
+    return level if 0 < level < 1000 else None
+
+
 def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
     """把一条插件并进语料；被采纳返回 True。
 
@@ -305,6 +316,7 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
         "author": (plugin.get("Author") or "").strip(),
         "icon": (plugin.get("IconUrl") or "").strip(),
         "updated": unix_seconds(plugin.get("LastUpdate")),
+        "api_level": api_level_of(plugin.get("DalamudApiLevel")),
         "official": False,
     }
 
@@ -321,6 +333,10 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
     if not previous["punchline"] and candidate["punchline"] and not upstream_is_localized(candidate["punchline"]):
         previous["punchline"] = candidate["punchline"]
         return True
+
+    # 新元数据只补不换：这一轮没胜出的条目也别把已有的 API 等级丢掉
+    if candidate.get("api_level") and not previous.get("api_level"):
+        previous["api_level"] = candidate["api_level"]
 
     return False
 
@@ -359,6 +375,7 @@ def add_official_corpus(corpus: dict[str, dict]) -> int:
             "author": (plugin.get("Author") or "").strip(),
             "icon": (plugin.get("IconUrl") or "").strip(),
             "updated": unix_seconds(plugin.get("LastUpdate")),
+            "api_level": api_level_of(plugin.get("DalamudApiLevel")),
             "official": True,
         }
         added += 1
@@ -731,8 +748,11 @@ def main(argv=None) -> int:
                 updated = int(info.get("updated") or 0)
                 if updated > 0:
                     cleaned["Updated"] = updated
+                level = info.get("api_level")
+                if isinstance(level, int) and level > 0:
+                    cleaned["ApiLevel"] = level
             else:
-                for field in ("Testing", "Official", "Author", "Icon", "Updated"):
+                for field in ("Testing", "Official", "Author", "Icon", "Updated", "ApiLevel"):
                     if value.get(field):
                         cleaned[field] = value[field]
 

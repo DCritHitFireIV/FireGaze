@@ -44,6 +44,12 @@ internal sealed class TranslationIndexEntry
     public long? Updated { get; set; }
 
     /// <summary>
+    ///     仓库清单声明的卫月 API 等级；null = 不知道（老词表 / 云端还没带）。
+    ///     插件发现用它预筛卫月不会加载的旧插件（PluginCompatibility）。
+    /// </summary>
+    public int? APILevel { get; set; }
+
+    /// <summary>
     ///     词表里对这个插件的现有记录（没有 = null）。
     /// </summary>
     public TransEntry? Entry { get; private set; }
@@ -395,6 +401,7 @@ internal sealed class TranslationIndex
             OriginalDescription = transEntry.Description?.Original ?? string.Empty,
             Author = transEntry.Author,
             Updated = NormalizeUpdated(transEntry.Updated),
+            APILevel = transEntry.APILevel,
             DeclaresIcon = !string.IsNullOrWhiteSpace(transEntry.Icon),
             IconURL = transEntry.Icon,
             IsThirdParty = true,
@@ -491,6 +498,7 @@ internal sealed class TranslationIndex
                     var cloud = index.all[at];
                     entry.Author ??= cloud.Author;
                     entry.Updated ??= cloud.Updated;
+                    entry.APILevel ??= cloud.APILevel;
                     entry.IconURL ??= cloud.IconURL;
                     entry.DeclaresIcon |= cloud.DeclaresIcon;
                     index.all[at] = entry;
@@ -535,6 +543,7 @@ internal sealed class TranslationIndex
         var iconURL = type.GetProperty("IconUrl", flags)?.GetValue(manifest) as string;
         var dip17 = type.GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string;
         var author = type.GetProperty("Author", flags)?.GetValue(manifest) as string;
+        var level = type.GetProperty("DalamudApiLevel", flags)?.GetValue(manifest) as int?;
         var lastUpdateRaw = type.GetProperty("LastUpdate", flags)?.GetValue(manifest);
         var lastUpdate = lastUpdateRaw is long stamp && stamp > 0 ? stamp : (long?)null;
 
@@ -552,6 +561,7 @@ internal sealed class TranslationIndex
             OriginalDescription = description,
             Author = string.IsNullOrWhiteSpace(author) ? null : author,
             Updated = NormalizeUpdated(lastUpdate),
+            APILevel = level,
             DeclaresIcon = !string.IsNullOrWhiteSpace(iconURL) || !string.IsNullOrWhiteSpace(dip17),
             IconURL = iconURL,
             IsThirdParty = true,
