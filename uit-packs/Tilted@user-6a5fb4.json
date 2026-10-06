@@ -1,379 +1,261 @@
 {
-  "type": "uit-contribution",
-  "plugin": "Tilted",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-06",
+    "source": "user",
+    "label": "玩家包 · 6a5fb4",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Force Enabled",
       "Translated": "强制启用",
       "Context": "CameraTilter.GetEnabledStateAndTrigger",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "opens the configuration window",
       "Translated": "打开配置窗口",
       "Context": "TiltedPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "library"
     },
     {
       "Original": "Tilted##ConfigWindow",
       "Translated": "倾斜##ConfigWindow",
       "Context": "TiltedUI..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "Enable in Gpose",
       "Translated": "在 Gpose 中启用",
       "Context": "TiltedUI.DrawSectionMasterEnable",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Triggers",
       "Translated": "触发器",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Duties",
       "Translated": "任务",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Enables when entering a Duty such as Dungeons and Trials.\nDisables after leaving the Duty.",
       "Translated": "进入任务时使用，例如地下城和试炼。\n离职后残疾。",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Trigger##EnabledInDuties",
       "Translated": "触发器##EnabledInDuties",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Combat",
       "Translated": "战斗",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Enables when entering combat.\nWaits \"Timeout\" seconds after leaving combat before disabling.\nClick \"Set\" to copy Auto-sheathe timer.",
       "Translated": "进入战斗时启用。\n在退出战斗后几秒钟等待 “超时”，然后再禁用。\n点击 “设置” 以复制自动套筒计时器。",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Trigger##EnabledInCombat",
       "Translated": "触发器##EnabledInCombat",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Timeout##CombatTmeout",
       "Translated": "超时##CombatTmeout",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "library"
     },
     {
       "Original": "Weapon Sheathed",
       "Translated": "武器鞘",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Enables when un-sheathing weapons.\nDisables when sheathing weapons.",
       "Translated": "在拔出武器时启用。\n武器入鞘时无法使用。",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Trigger##EnabledUnsheathed",
       "Translated": "触发器##已启用 未入鞘",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Mounted",
       "Translated": "骑乘",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Enables when riding a Mount.\nDisables when dismounting.",
       "Translated": "在骑马时启用。\n下山时禁用。",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Flying",
       "Translated": "飞行",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Enables when flying on a Mount.\nDisables when landed.",
       "Translated": "在山上飞行时启用。\n着陆时使其失效。",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Trigger##EnabledWhileFlying",
       "Translated": "触发器##EnabledWhileFlying",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Zoomed",
       "Translated": "缩放",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Enables when zooming in past certain amount.\nDisables when zooming out.",
       "Translated": "当缩放超过特定尺寸时启用。\n缩小时禁用。",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Trigger##EnabledZoomed",
       "Translated": "触发器##EnabledZoomed",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Set##TriggerDistance",
       "Translated": "设置##Trigger 距离",
       "Context": "TiltedUI.DrawTriggersSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Tweaks",
       "Translated": "调整",
       "Context": "TiltedUI.DrawTweaksSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Tilt Angle",
       "Translated": "倾斜角度",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "These values alter the Character Configuration value:\n  \"3rd Person Camera Angle\".\nClick \"Set\" to copy the current camera tilt angle",
       "Translated": "这些值改变了字符配置值：\n“第三人称相机角度”。\n点击 “设置” 以复制当前相机倾斜角度",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Enabled##TweakCameraTilt",
       "Translated": "已启用##TweakCameraTilt",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Smoothing##SmoothingTilt",
       "Translated": "Smoothing ##Smoothing Tilt",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Interpolate by Distance##MappingTilt",
       "Translated": "由 Distance##MappingTilt 插值",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Set##MaximumDistance",
       "Translated": "设置最大 MappingTill",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Maximum##MaximumDistance",
       "Translated": "最大最大距离",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "library"
     },
     {
       "Original": "Set##MinimumDistance",
       "Translated": "设置最小距离",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Minimum##MinimumDistance",
       "Translated": "最小最小距离",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "library"
     },
     {
       "Original": "When this setting is enabled the Camera Tilt will be set to a value in-between the \"Enabled\" and \"Disabled\" values based on the camera's distance from your character.\nTriggers and Smoothing will have no effect while this setting is enabled.",
       "Translated": "启用此设置后，相机倾斜将根据相机与角色的距离，设置为 “已启用” 和 “已禁用” 值之间的值。\n当此设置处于启用状态时，触发器和平滑操作将不会产生任何效果。",
       "Context": "TiltedUI.DrawTiltAngleSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Camera Distance",
       "Translated": "相机距离",
       "Context": "TiltedUI.DrawCameraDistanceSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Tweaks the camera distance (Zoom).\nOnly happens when transitioning between states\nSmoothing is always applied.\nClick \"Set\" to copy the current camera distance.\n(Disabled when using Zoomed trigger.",
       "Translated": "调整相机距离 (Zoom)。\n只有在状态之间过渡时才会发生\n平滑总是被应用。\n点击 “设置” 以复制当前相机距离。\n(使用缩放触发器时禁用。",
       "Context": "TiltedUI.DrawCameraDistanceSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Enabled##TweakCameraDistance",
       "Translated": "已启用##TweakCameraDistance",
       "Context": "TiltedUI.DrawCameraDistanceSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Set##InDistance",
       "Translated": "设置##InDistance",
       "Context": "TiltedUI.DrawCameraDistanceSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Debug Options",
       "Translated": "调试选项",
       "Context": "TiltedUI.DrawDebugSection",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "library"
     },
     {
       "Original": "Debug Options\nUse these to test your settings.",
       "Translated": "调试选项\n使用这些来测试您的设置。",
       "Context": "TiltedUI.DrawDebugSection",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-06T23:51:32",
-  "imported": {
-    "archive": "uit-direct-2026-10-06T23-47-39-201Z-8b5805cb-2026-10-06T235132.json",
-    "accepted": 41,
-    "filled": 41,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 41 条 `Tilted` 的界面文字译文，已收为**独立译文包** `uit-packs/Tilted@user-6a5fb4.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 41 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
