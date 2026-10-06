@@ -72,6 +72,34 @@ public sealed class TransEntry
     [JsonPropertyName("Testing")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Testing { get; set; }
+
+    /// <summary>
+    ///     作者名（云端语料爬虫从仓库清单里带出来）；老词表没有这个字段。
+    /// </summary>
+    [JsonPropertyName("Author")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Author { get; set; }
+
+    /// <summary>
+    ///     图标地址（云端语料自带；官方主库大多没有这个字段）。
+    /// </summary>
+    [JsonPropertyName("Icon")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Icon { get; set; }
+
+    /// <summary>
+    ///     上游最后一次更新的时间（unix 秒，来源 = 仓库清单里的 LastUpdate）；老词表没有这个字段。
+    /// </summary>
+    [JsonPropertyName("Updated")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public long? Updated { get; set; }
+
+    /// <summary>
+    ///     是不是卫月官方主库（Dip17）里的插件（云端语料标出来；老词表没有这个字段）。
+    /// </summary>
+    [JsonPropertyName("Official")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Official { get; set; }
 }
 
 /// <summary>

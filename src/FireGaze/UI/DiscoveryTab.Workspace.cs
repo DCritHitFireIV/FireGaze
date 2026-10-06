@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
-internal sealed partial class ContributeWindow : Window
+internal sealed partial class DiscoveryTab
 {
     /// <summary>
     ///     下半栏（像编辑器下方的工作区）：页签 = 待提交 + 每一批历史提交（命名用日期，悬停看具体时间）。

@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
-internal sealed partial class ContributeWindow : Window
+internal sealed partial class DiscoveryTab
 {
     private void BeginEdit(TranslationIndexEntry entry)
     {

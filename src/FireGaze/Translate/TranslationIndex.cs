@@ -33,6 +33,16 @@ internal sealed class TranslationIndexEntry
     public string OriginalDescription { get; init; } = string.Empty;
 
     /// <summary>
+    ///     作者名（云端词表带的；本机清单更新它）。null / 空 = 不知道，排序时排后面。
+    /// </summary>
+    public string? Author { get; set; }
+
+    /// <summary>
+    ///     上游最后更新时间（unix 秒）；null = 不知道，排序时排后面。
+    /// </summary>
+    public long? Updated { get; set; }
+
+    /// <summary>
     ///     词表里对这个插件的现有记录（没有 = null）。
     /// </summary>
     public TransEntry? Entry { get; private set; }
@@ -85,12 +95,12 @@ internal sealed class TranslationIndexEntry
     /// <summary>
     ///     可以显示图标（作者声明了图标地址 / 官方库通道）。
     /// </summary>
-    public bool DeclaresIcon { get; init; }
+    public bool DeclaresIcon { get; set; }
 
     /// <summary>
     ///     IconURL（给卫月的图标服务用）。
     /// </summary>
-    public string? IconURL { get; init; }
+    public string? IconURL { get; set; }
 
     /// <summary>
     ///     是否第三方库插件。
@@ -339,6 +349,13 @@ internal sealed class TranslationIndex
             }
         }
 
+        // 搜索结果靠 SearchBlob（全字段拼好的小写串）；FromTable 自己就带上，
+        // 这样离线（fgtest）与 Build 合并后的结果一致。
+        foreach (var entry in index.all)
+        {
+            entry.SearchBlob = BuildBlob(entry);
+        }
+
         return index;
     }
 
@@ -368,8 +385,12 @@ internal sealed class TranslationIndex
             OriginalName = name,
             OriginalPunchline = transEntry.Punchline?.Original ?? string.Empty,
             OriginalDescription = transEntry.Description?.Original ?? string.Empty,
+            Author = transEntry.Author,
+            Updated = transEntry.Updated,
+            DeclaresIcon = !string.IsNullOrWhiteSpace(transEntry.Icon),
+            IconURL = transEntry.Icon,
             IsThirdParty = true,
-            IsOfficial = false,
+            IsOfficial = transEntry.Official == true,
         };
 
         // 三个字段的现状由 Evaluate() 统一判定（与保存后的就地刷新共用一套逻辑）
@@ -457,7 +478,13 @@ internal sealed class TranslationIndex
 
                 if (byName.TryGetValue(entry.InternalName, out var at))
                 {
-                    // 本机原文更新鲜、还带着图标引用：整条替换云端那条
+                    // 本机原文更新鲜、还带着图标引用：整条替换云端那条；
+                    // 云端才有的作者/更新时间/官方标记不能被换掉。
+                    var cloud = index.all[at];
+                    entry.Author ??= cloud.Author;
+                    entry.Updated ??= cloud.Updated;
+                    entry.IconURL ??= cloud.IconURL;
+                    entry.DeclaresIcon |= cloud.DeclaresIcon;
                     index.all[at] = entry;
                 }
                 else
@@ -499,6 +526,9 @@ internal sealed class TranslationIndex
         var description = TextOf(type.GetProperty("Description", flags)?.GetValue(manifest));
         var iconURL = type.GetProperty("IconUrl", flags)?.GetValue(manifest) as string;
         var dip17 = type.GetProperty("Dip17Channel", flags)?.GetValue(manifest) as string;
+        var author = type.GetProperty("Author", flags)?.GetValue(manifest) as string;
+        var lastUpdateRaw = type.GetProperty("LastUpdate", flags)?.GetValue(manifest);
+        var lastUpdate = lastUpdateRaw is long stamp && stamp > 0 ? stamp : (long?)null;
 
         table.TryGetValue(internalName, out var entry);
 
@@ -512,6 +542,8 @@ internal sealed class TranslationIndex
             OriginalName = name,
             OriginalPunchline = punchline,
             OriginalDescription = description,
+            Author = string.IsNullOrWhiteSpace(author) ? null : author,
+            Updated = lastUpdate,
             DeclaresIcon = !string.IsNullOrWhiteSpace(iconURL) || !string.IsNullOrWhiteSpace(dip17),
             IconURL = iconURL,
             IsThirdParty = true,
@@ -592,6 +624,7 @@ internal sealed class TranslationIndex
         builder.Append(entry.InternalName).Append('\n');
         builder.Append(entry.DisplayName).Append('\n');
         builder.Append(entry.OriginalName).Append('\n');
+        builder.Append(entry.Author).Append('\n');
         builder.Append(entry.OriginalPunchline).Append('\n');
         builder.Append(entry.OriginalDescription).Append('\n');
         builder.Append(entry.Entry?.Name?.Translated).Append('\n');

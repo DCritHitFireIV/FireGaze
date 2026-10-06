@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
-internal sealed partial class ContributeWindow : Window
+internal sealed partial class DiscoveryTab
 {
     /// <summary>
     ///     勾选的插件里，有哪些库链是本机还没有的（可以一次加进来）。
@@ -65,6 +66,11 @@ internal sealed partial class ContributeWindow : Window
 
         var ok = plugin.AddThirdPartyRepositories(urls, out var message);
         SetStatus(message, !ok);
+        if (ok)
+        {
+            ReportRepoAdds(urls);
+        }
+
         rebuildPending = true;
         rebuildRepoPending = true;
     }
@@ -94,7 +100,41 @@ internal sealed partial class ContributeWindow : Window
         if (added)
         {
             repoInput = string.Empty;
+            ReportRepoAdds([url]);
         }
+    }
+
+    /// <summary>
+    ///     把「刚从云端加进自己库」的库链按插件上报推荐数（用户 2026-10-06 定：按插件不按库）。
+    ///     先排队后发送：发送失败会留在待重试里，成功后清掉。
+    /// </summary>
+    private void ReportRepoAdds(IReadOnlyCollection<string> urls)
+    {
+        if (urls.Count == 0 || index is not { Available: true })
+        {
+            return;
+        }
+
+        var wanted = new HashSet<string>(urls.Select(InstalledPluginsIndex.NormalizeRepositoryURL), StringComparer.Ordinal);
+        var names = index.All
+            .Where(x => x.RepositoryURL is { Length: > 0 } url
+                        && wanted.Contains(InstalledPluginsIndex.NormalizeRepositoryURL(url)))
+            .Select(x => x.InternalName)
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
+        if (names.Count == 0)
+        {
+            return;
+        }
+
+        discoveryState.MarkAdds(names);
+        _ = Task.Run(async () =>
+        {
+            if (await DiscoveryRelay.ReportAddsAsync(names, CancellationToken.None).ConfigureAwait(false))
+            {
+                discoveryState.CompleteAdds(names);
+            }
+        });
     }
 
     private void PeekIcon(TranslationIndexEntry entry)

@@ -3,17 +3,18 @@ using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
 /// <summary>
-///     「参与翻译」独立窗口：搜索全部第三方插件的原文与译文，可以逐条改进、也可以给还没有译文的插件补上；
-///     改动先存在本地（配置目录），攒够了点「一键提交」直接推给维护者审核。
-///     入口：「简介汉化」页「从 GitHub 更新词表」右边的小按钮。
+///     「插件发现」页签（主窗口第五个页签）：整座云端词表的插件列表，可搜索、排序、点赞、投稿库链，
+///     也可以逐条改进译文；改动先存在本地，攒够了点「一键提交」直接推给维护者审核。
+///     用户 2026-10-06 定：原「参与翻译」独立窗口整体搬进来，不再单独开窗。
 /// </summary>
-internal sealed partial class ContributeWindow : Window
+internal sealed partial class DiscoveryTab
 {
     /// <summary>
     ///     一条搜索结果的现状筛选。
@@ -144,13 +145,47 @@ internal sealed partial class ContributeWindow : Window
     private StateFilter stateFilter = StateFilter.All;
     private string view = "plugins";
 
+    // ---------------- 插件发现（2026-10-06 新增） ----------------
+
+    /// <summary>本机点赞/待重试/投稿记录（独立文件，不存在配置里）。</summary>
+    private readonly DiscoveryStateStore discoveryState;
+
+    /// <summary>中继拉到的赞/推荐统计（可能为 null，界面会退到缓存）。</summary>
+    private DiscoveryStats? discoveryStats;
+
+    private DateTime statsFetchedAt = DateTime.MinValue;
+    private Task<DiscoveryStats?>? statsTask;
+
+    /// <summary>上次拉统计失败（角标显示“统计暂不可用”，不打断使用）。</summary>
+    private bool statsFetchFailed;
+
+    private DiscoverySortMode sortMode = DiscoverySortMode.WeeklyLikes;
+    private DiscoverySortContext sortContext = new();
+    private readonly Dictionary<string, int> shuffleOrder = new(StringComparer.Ordinal);
+    private int shuffleSeed;
+    private DateTime lastPendingRetry = DateTime.MinValue;
+
+    /// <summary>后台点赞成功后的云端真值（UI 线程取用，避免后台改字典）。</summary>
+    private readonly ConcurrentQueue<(string Plugin, int Total, int Weekly)> likeResults = new();
+
+    /// <summary>当前展开详情的那一行（内部名）；空 = 没展开。</summary>
+    private string? expandedEntry;
+
+    /// <summary>每行实测高度（整行点击的 Selectable 用；首帧用估算值）。</summary>
+    private readonly Dictionary<string, float> rowHeights = new(StringComparer.Ordinal);
+
+    /// <summary>筛选：隐藏官方主库插件（用户 2026-10-06 定：允许隐藏）。</summary>
+    private bool hideOfficial;
+
+    /// <summary>投稿区状态。</summary>
+    private string submitInput = string.Empty;
+    private bool submitAddToLibrary = true;
+    private string? submitMessage;
+    private bool submitIsError;
+    private bool submitBusy;
+
     // 仓库视图：当前展示的分组
     private readonly List<RepoGroup> repoGroups = [];
-
-    // 搜索范围：名称 / 一行简介 / 详情
-    private bool scopeName = true;
-    private bool scopePunchline = true;
-    private bool scopeDescription = true;
 
     // 编辑弹窗
     private TranslationIndexEntry? editing;
@@ -177,6 +212,9 @@ internal sealed partial class ContributeWindow : Window
     /// </summary>
     private sealed class RepoGroup
     {
+        /// <summary>分组键（官方库用哨兵；同一库链的插件共用）。</summary>
+        public required string Key { get; init; }
+
         public required string URL { get; init; }
 
         public required string Short { get; init; }
@@ -188,6 +226,11 @@ internal sealed partial class ContributeWindow : Window
 
         public bool Enabled { get; init; }
 
+        /// <summary>
+        ///     是不是卫月官方主库（Dip17）——官方插件单独一组，没有可加的库链。
+        /// </summary>
+        public bool IsOfficial { get; init; }
+
         public List<TranslationIndexEntry> Plugins { get; } = [];
 
         public int MissingCount => Plugins.Count(x => x.State == "missing");
@@ -195,18 +238,11 @@ internal sealed partial class ContributeWindow : Window
         public int UserCount => Plugins.Count(x => x.HasUserTranslation);
     }
 
-    public ContributeWindow(Plugin plugin, ContributionsStore store)
-        : base("参与翻译###FireGazeContribute")
+    public DiscoveryTab(Plugin plugin, ContributionsStore store)
     {
         this.plugin = plugin;
         this.store = store;
-
-        Size = new Vector2(880, 680);
-        SizeCondition = ImGuiCond.FirstUseEver;
-        SizeConstraints = new WindowSizeConstraints
-        {
-            MinimumSize = new Vector2(620, 460),
-        };
+        discoveryState = new DiscoveryStateStore(plugin.ConfigDirectory);
 
         this.store.Changed += () =>
         {
@@ -215,18 +251,12 @@ internal sealed partial class ContributeWindow : Window
         };
     }
 
-    /// <summary>点开时总是展开（折叠状态会被 ImGui 的 ini 记住，2026-10-02 实测）。</summary>
-    public override void OnOpen()
-    {
-        ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
-    }
-
     /// <summary>
-    ///     绘制入口只做一件事：兜住异常。绘制路径上任何一处抛异常都不该把整张窗口（乃至游戏）带下去
-    ///     —— 2026-09-22 就因为 UiHelpers 里一处 Math.Clamp 抛了 ArgumentException，一开这个窗口就报错。
-    ///     现在最多每 5 秒写一次日志，并在窗口里留一行提示。
+    ///     绘制入口只做一件事：兜住异常。绘制路径上任何一处抛异常都不该把整张页签（乃至游戏）带下去
+    ///     —— 2026-09-22 就因为 UiHelpers 里一处 Math.Clamp 抛了 ArgumentException，一开这个界面就报错。
+    ///     现在最多每 5 秒写一次日志，并在页签里留一行提示。
     /// </summary>
-    public override void Draw()
+    public void Draw()
     {
         try
         {
@@ -278,6 +308,12 @@ internal sealed partial class ContributeWindow : Window
         RefreshEntryStates();
         EnsureIndex();
 
+        // 点赞/推荐统计（中继）与本机失败重试：不阻塞绘制，成功/失败都在后台。
+        EnsureDiscoveryStats();
+        RetryPendingReport();
+        DrainLikeResults();
+        FlushSubmitAdd();
+
         if (index is null)
         {
             ImGui.TextDisabled("正在读取插件库…");
@@ -304,36 +340,57 @@ internal sealed partial class ContributeWindow : Window
             return;
         }
 
-        // ---------------- 搜索 + 范围 + 筛选 ----------------
-        ImGui.SetNextItemWidth(280);
-        if (ImGui.InputTextWithHint("###ContributeSearch", "搜索插件名、原文、译文…", ref search, 256))
+        // ---------------- 搜索 + 排序 + 筛选 ----------------
+        ImGui.SetNextItemWidth(300);
+        if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、原文、译文…", ref search, 256))
         {
             rebuildPending = true;
             rebuildRepoPending = true;
         }
 
-        ImGui.SameLine();
-        ImGui.TextDisabled("搜索范围");
-        foreach (var (label, value, set) in new (string, bool, Action<bool>)[]
-                 {
-                     ("插件名", scopeName, v => scopeName = v),
-                     ("一行简介", scopePunchline, v => scopePunchline = v),
-                     ("插件详情", scopeDescription, v => scopeDescription = v),
-                 })
+        if (ImGui.IsItemHovered())
         {
-            ImGui.SameLine();
-            var check = value;
-            if (ImGui.Checkbox(label + "###Scope" + label, ref check))
+            ImGui.SetTooltip("全字段搜索：插件名（原文+译文）、作者、一行简介、详情；大小写不敏感。");
+        }
+
+        ImGui.SameLine();
+        ImGui.Text("排序");
+        ImGui.SameLine();
+        ImGui.SetNextItemWidth(160);
+        if (ImGui.BeginCombo("###DiscoverySort", SortLabel(sortMode)))
+        {
+            foreach (var mode in Enum.GetValues<DiscoverySortMode>())
             {
-                set(check);
-                rebuildPending = true;
-                rebuildRepoPending = true;
+                if (ImGui.Selectable(SortLabel(mode), mode == sortMode))
+                {
+                    sortMode = mode;
+                    rebuildPending = true;
+                    rebuildRepoPending = true;
+                }
             }
+
+            ImGui.EndCombo();
         }
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("至少勾一项；三项全不勾 = 按插件名搜。");
+            ImGui.SetTooltip("默认：本周点赞降序，同赞按插件名。\n推荐排行 = 从云端把库加进自己库的次数。");
+        }
+
+        if (sortMode == DiscoverySortMode.Random)
+        {
+            ImGui.SameLine();
+            if (ImGui.Button("换一批###DiscoveryShuffle"))
+            {
+                shuffleOrder.Clear();
+                rebuildPending = true;
+                rebuildRepoPending = true;
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("重新洗牌；滚动时顺序不会变，想看新的再点一次。");
+            }
         }
 
         DrawFilterRow();
@@ -370,6 +427,15 @@ internal sealed partial class ContributeWindow : Window
             ImGui.SameLine();
             UiHelpers.ColoredText(UiHelpers.Muted, "· 卫月刷新插件库时抓的快照，读完会自动重读");
         }
+
+        if (discoveryStats is null && statsFetchFailed)
+        {
+            ImGui.SameLine();
+            UiHelpers.ColoredText(UiHelpers.Warn, "· 点赞/推荐统计暂时拉不到，先按插件名排");
+        }
+
+        // ---------------- 投稿插件库（进云端语料） ----------------
+        DrawSubmitSection();
 
         // ---------------- 操作条（勾选 / 加库） ----------------
         DrawActionBar();

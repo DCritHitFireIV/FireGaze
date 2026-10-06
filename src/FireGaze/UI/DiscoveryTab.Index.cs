@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
-internal sealed partial class ContributeWindow : Window
+internal sealed partial class DiscoveryTab
 {
     /// <summary>
     ///     索引的生命周期：建一次 / 收结果 / 卫月刷新插件库后自动重建。
@@ -109,11 +110,13 @@ internal sealed partial class ContributeWindow : Window
 
         var query = search.Trim().ToLowerInvariant();
 
-        // 三个范围全不勾 = 按插件名搜
-        var anyScope = scopeName || scopePunchline || scopeDescription;
-
         foreach (var entry in index.All)
         {
+            if (hideOfficial && entry.IsOfficial)
+            {
+                continue;
+            }
+
             if (!plugin.Config.ContributeShowDisabled)
             {
                 // 只看已启用的库；「还没加进来」的库属于云端语料，一直都在
@@ -138,13 +141,40 @@ internal sealed partial class ContributeWindow : Window
                 continue;
             }
 
-            if (query.Length > 0 && !Match(entry, query, anyScope))
+            // 全字段搜索（插件名/作者/简介/详情，原文+译文；SearchBlob 里都拼好了）
+            if (query.Length > 0 && !entry.SearchBlob.Contains(query, StringComparison.Ordinal))
             {
                 continue;
             }
 
             filtered.Add(entry);
         }
+
+        ApplyDiscoverySort();
+    }
+
+    /// <summary>
+    ///     按当前排序档位重排筛选结果；随机档用本机生成的乱序快照（一次打开/换一批内稳定）。
+    /// </summary>
+    private void ApplyDiscoverySort()
+    {
+        if (sortMode == DiscoverySortMode.Random)
+        {
+            foreach (var entry in filtered)
+            {
+                if (!shuffleOrder.ContainsKey(entry.InternalName))
+                {
+                    shuffleOrder[entry.InternalName] = shuffleSeed++;
+                }
+            }
+        }
+
+        sortContext ??= new DiscoverySortContext();
+        sortContext.Mode = sortMode;
+        sortContext.WeeklyLikes = discoveryStats?.WeeklyLikes ?? [];
+        sortContext.Recommends = discoveryStats?.Recommends ?? [];
+        sortContext.Shuffle = shuffleOrder;
+        DiscoverySort.Apply(filtered, sortContext);
     }
 
     /// <summary>
@@ -163,16 +193,18 @@ internal sealed partial class ContributeWindow : Window
         RebuildFiltered();
         foreach (var plugin in filtered)
         {
-            var key = plugin.RepositoryURL ?? string.Empty;
-            var group = repoGroups.FirstOrDefault(x => string.Equals(x.URL, key, StringComparison.Ordinal));
+            var key = plugin.IsOfficial ? "\u0000official" : plugin.RepositoryURL ?? string.Empty;
+            var group = repoGroups.FirstOrDefault(x => string.Equals(x.Key, key, StringComparison.Ordinal));
             if (group is null)
             {
                 group = new RepoGroup
                 {
-                    URL = key,
-                    Short = key.Length == 0 ? "来源未知" : RepoShort(key),
-                    Known = plugin.RepositoryKnown,
-                    Enabled = plugin.RepositoryEnabled,
+                    Key = key,
+                    URL = plugin.IsOfficial ? string.Empty : key,
+                    Short = plugin.IsOfficial ? "官方主库" : key.Length == 0 ? "来源未知" : RepoShort(key),
+                    Known = plugin.IsOfficial || plugin.RepositoryKnown,
+                    Enabled = plugin.IsOfficial || plugin.RepositoryEnabled,
+                    IsOfficial = plugin.IsOfficial,
                 };
                 repoGroups.Add(group);
             }
@@ -189,33 +221,8 @@ internal sealed partial class ContributeWindow : Window
     }
 
     /// <summary>
-    ///     按勾选的搜索范围匹配关键词（三个范围全不勾时只看插件名）。
+    ///     关键词匹配已改为全字段（SearchBlob），旧的范围匹配已删。
     /// </summary>
-    private bool Match(TranslationIndexEntry entry, string query, bool anyScope)
-    {
-        if (anyScope)
-        {
-            if (scopeName && entry.DisplayName.ToLowerInvariant().Contains(query, StringComparison.Ordinal))
-            {
-                return true;
-            }
-
-            if (scopePunchline && entry.OriginalPunchline.ToLowerInvariant().Contains(query, StringComparison.Ordinal))
-            {
-                return true;
-            }
-
-            if (scopeDescription && entry.OriginalDescription.ToLowerInvariant().Contains(query, StringComparison.Ordinal))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        return entry.DisplayName.ToLowerInvariant().Contains(query, StringComparison.Ordinal);
-    }
-
     private void InvalidateIndex()
     {
         // 译文变了：重建搜索结果（不重建反射索引，够快）

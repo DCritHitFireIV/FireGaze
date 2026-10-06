@@ -1,4 +1,5 @@
 using Dalamud.Bindings.ImGui;
+using FireGaze.RepoAudit;
 
 namespace FireGaze.UI;
 
@@ -13,14 +14,66 @@ internal sealed class TranslateTab
     private string? statusMessage;
     private volatile bool updateInFlight;
 
+    // FastDalamudCN 也在翻译插件简介，两者会打架——检测到就在页面上挂一行提示（用户 2026-10-06 定）
+    private DateTime fastDalamudCheckedAt = DateTime.MinValue;
+    private bool fastDalamudInstalled;
+    private Task<bool>? fastDalamudCheckTask;
+
     public TranslateTab(Plugin plugin)
     {
         this.plugin = plugin;
     }
 
+    /// <summary>
+    ///     检测本机装没装 FastDalamudCN（内部名 FuckDalamudCN）：装了就在页面上挂冲突提示。
+    ///     索引在后台线程建（反射卫月内部，别卡绘制），结果缓存 5 分钟。
+    /// </summary>
+    private void EnsureFastDalamudHint()
+    {
+        if (fastDalamudCheckTask is not null)
+        {
+            if (!fastDalamudCheckTask.IsCompleted)
+            {
+                return;
+            }
+
+            var finished = fastDalamudCheckTask;
+            fastDalamudCheckTask = null;
+            if (finished.Status == TaskStatus.RanToCompletion)
+            {
+                fastDalamudInstalled = finished.Result;
+            }
+
+            fastDalamudCheckedAt = DateTime.UtcNow;
+            return;
+        }
+
+        if (DateTime.UtcNow - fastDalamudCheckedAt < TimeSpan.FromMinutes(5))
+        {
+            return;
+        }
+
+        fastDalamudCheckedAt = DateTime.UtcNow;
+        fastDalamudCheckTask = Task.Run(() =>
+        {
+            try
+            {
+                var index = InstalledPluginsIndex.Build();
+                return index.Available
+                       && index.All.Any(x => string.Equals(x.InternalName, "FuckDalamudCN", StringComparison.Ordinal));
+            }
+            catch
+            {
+                return false;
+            }
+        });
+    }
+
     public void Draw()
     {
         var config = plugin.Config;
+
+        EnsureFastDalamudHint();
 
         // ---------------- 顶部：更新词表（最显眼） ----------------
         if (updateInFlight)
@@ -42,20 +95,17 @@ internal sealed class TranslateTab
         }
 
         ImGui.SameLine();
-        if (ImGui.SmallButton("参与翻译…###OpenContribute"))
-        {
-            plugin.OpenContributeWindow();
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("打开「参与翻译」：搜插件、改译文、攒够了一批直接提交给维护者审核。");
-        }
-
-        ImGui.SameLine();
         ImGui.TextDisabled(updateInFlight ? "正在更新…" : updateMessage ?? string.Empty);
 
         ImGui.Separator();
+
+        // FastDalamudCN 冲突提示：常驻灰字（冲突是持续存在的，不该只提醒一次）
+        if (fastDalamudInstalled)
+        {
+            UiHelpers.ColoredWrapped(
+                UiHelpers.Muted,
+                "检测到 FastDalamudCN：它也在翻译插件简介，和本插件会重复/打架。建议在它的设置里关掉简介翻译（关闭后本插件继续负责简介汉化）。");
+        }
 
         // ---------------- 开关 ----------------
         var enabled = config.TranslateEnabled;

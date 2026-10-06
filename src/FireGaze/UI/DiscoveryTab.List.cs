@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
-internal sealed partial class ContributeWindow : Window
+internal sealed partial class DiscoveryTab
 {
     /// <summary>
     ///     筛选行 + 几个显示开关。
@@ -58,6 +59,18 @@ internal sealed partial class ContributeWindow : Window
             ImGui.SetTooltip("勾上后连已停用仓库里的插件也列出来；这类插件当前不会出现在安装器里。\n"
                              + "还没加进你库里的仓库不受这个开关影响 —— 那是整座云端语料，都能参与翻译。");
         }
+
+        ImGui.SameLine();
+        if (ImGui.Checkbox("隐藏主库###DiscoveryHideOfficial", ref hideOfficial))
+        {
+            rebuildPending = true;
+            rebuildRepoPending = true;
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("隐掉卫月官方主库（Dip17）里的插件，只看第三方；官方库本来就在安装器里，不用从这里加。");
+        }
     }
 
     /// <summary>
@@ -68,10 +81,10 @@ internal sealed partial class ContributeWindow : Window
         RebuildFiltered();
 
         var showIconColumn = plugin.Config.ShowIconsInContribute;
-        var columns = showIconColumn ? 8 : 7;   // ##sel + 状态 + [图标] + 插件名 + 来源库 + 原文 + 译文 + 操作
+        var columns = showIconColumn ? 10 : 9;   // ##sel + 状态 + [图标] + 插件名 + 作者 + 来源库 + 简介 + ♥ + 更新 + 操作
 
         if (!ImGui.BeginTable(
-                "###ContributeRows",
+                "###DiscoveryRows",
                 columns,
                 ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |
                 ImGuiTableFlags.Resizable | ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.NoSavedSettings,
@@ -81,18 +94,21 @@ internal sealed partial class ContributeWindow : Window
         }
 
         ImGui.TableSetupScrollFreeze(0, 1);
-        ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize | ImGuiTableColumnFlags.NoSort, 26, 0);
-        ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed, 72, 1);
+        var column = 0u;
+        ImGui.TableSetupColumn("##sel", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize | ImGuiTableColumnFlags.NoSort, 26, column++);
+        ImGui.TableSetupColumn("状态", ImGuiTableColumnFlags.WidthFixed, 72, column++);
         if (showIconColumn)
         {
-            ImGui.TableSetupColumn("##icon", ImGuiTableColumnFlags.WidthFixed, 26, 2);
+            ImGui.TableSetupColumn("##icon", ImGuiTableColumnFlags.WidthFixed, 26, column++);
         }
 
-        ImGui.TableSetupColumn("插件名", ImGuiTableColumnFlags.WidthFixed, 186, 3);
-        ImGui.TableSetupColumn("来源库", ImGuiTableColumnFlags.WidthFixed, 118, 4);
-        ImGui.TableSetupColumn("原文", ImGuiTableColumnFlags.WidthStretch, 0, 5);
-        ImGui.TableSetupColumn("译文", ImGuiTableColumnFlags.WidthFixed, 118, 6);
-        ImGui.TableSetupColumn("##action", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 58, 7);
+        ImGui.TableSetupColumn("插件名", ImGuiTableColumnFlags.WidthFixed, 180, column++);
+        ImGui.TableSetupColumn("作者", ImGuiTableColumnFlags.WidthFixed, 110, column++);
+        ImGui.TableSetupColumn("来源库", ImGuiTableColumnFlags.WidthFixed, 120, column++);
+        ImGui.TableSetupColumn("简介", ImGuiTableColumnFlags.WidthStretch, 0, column++);
+        ImGui.TableSetupColumn("♥", ImGuiTableColumnFlags.WidthFixed, 86, column++);
+        ImGui.TableSetupColumn("更新", ImGuiTableColumnFlags.WidthFixed, 80, column++);
+        ImGui.TableSetupColumn("##action", ImGuiTableColumnFlags.WidthFixed | ImGuiTableColumnFlags.NoResize, 58, column);
 
         ImGui.TableNextRow(ImGuiTableRowFlags.Headers);
         ImGui.TableNextColumn();
@@ -117,28 +133,42 @@ internal sealed partial class ContributeWindow : Window
         ImGui.TableHeader("插件名");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("点插件名打开详情：三个字段的原文与你当前的译文。");
+            ImGui.SetTooltip("点这一行展开详情：三个字段的原文与译文、点赞、编辑校对。）");
+        }
+
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("作者");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("仓库清单里的作者名；可用来排序。");
         }
 
         ImGui.TableNextColumn();
         ImGui.TableHeader("来源库");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("插件所在的库链；点一下复制地址，右键可在浏览器打开。\n「官方库」= 卫月官方主库（Dip17）。");
+            ImGui.SetTooltip("插件所在的库链；点一下复制地址，右键可在浏览器打开。\n「官方主库」= 卫月官方主库（Dip17）。");
         }
 
         ImGui.TableNextColumn();
-        ImGui.TableHeader("原文");
+        ImGui.TableHeader("简介");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("悬停看全文；点插件名可在弹窗里看完整原文。");
+            ImGui.SetTooltip("一行简介（上游原文）；详情与译文在点开的行里看。");
         }
 
         ImGui.TableNextColumn();
-        ImGui.TableHeader("译文");
+        ImGui.TableHeader("♥");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("你当前的译文完成度；上游本来没提供的字段不算缺译，但你可以自己补。");
+            ImGui.SetTooltip("本周点赞数（后面是总数）。一个插件一周只能点一次，下周可以再点。\n默认排序就是按本周点赞降序。");
+        }
+
+        ImGui.TableNextColumn();
+        ImGui.TableHeader("更新");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("上游清单里这个插件最后更新的日期。");
         }
 
         ImGui.TableNextColumn();
@@ -247,7 +277,7 @@ internal sealed partial class ContributeWindow : Window
 
     private void DrawRepoGroupRow(RepoGroup group, bool showIconColumn)
     {
-        var id = group.URL.Length == 0 ? "unknown" : group.URL;
+        var id = group.IsOfficial ? "official" : group.URL.Length == 0 ? "unknown" : group.URL;
         var expanded = expandedRepos.Contains(id);
 
         ImGui.TableNextRow();
@@ -275,7 +305,11 @@ internal sealed partial class ContributeWindow : Window
         }
 
         ImGui.TableNextColumn();
-        if (group.URL.Length == 0)
+        if (group.IsOfficial)
+        {
+            UiHelpers.ColoredText(UiHelpers.Info, "官方库");
+        }
+        else if (group.URL.Length == 0)
         {
             UiHelpers.ColoredText(UiHelpers.Muted, "来源未知");
         }
@@ -314,13 +348,13 @@ internal sealed partial class ContributeWindow : Window
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(
-                (group.URL.Length == 0 ? "词表里没有记它的来源库（旧词表）" : group.URL)
+                (group.IsOfficial ? "卫月官方主库（Dip17）" : group.URL.Length == 0 ? "词表里没有记它的来源库（旧词表）" : group.URL)
                 + "\n点一下展开它提供的插件；右键可复制 / 加库");
         }
 
         if (ImGui.BeginPopupContextItem("##ctxrepo-" + id))
         {
-            if (group.URL.Length > 0)
+            if (group.URL.Length > 0 && !group.IsOfficial)
             {
                 if (ImGui.MenuItem("复制链接"))
                 {
@@ -363,17 +397,19 @@ internal sealed partial class ContributeWindow : Window
 
         ImGui.TableNextColumn();
         ImGui.TextDisabled(
-            group.URL.Length == 0
-                ? "词表里没有记它的来源库"
-                : !group.Known
-                    ? "还没加进你的库"
-                    : group.Enabled
-                        ? "已经在你的库里"
-                        : "这条库已停用");
+            group.IsOfficial
+                ? "卫月官方主库"
+                : group.URL.Length == 0
+                    ? "词表里没有记它的来源库"
+                    : !group.Known
+                        ? "还没加进你的库"
+                        : group.Enabled
+                            ? "已经在你的库里"
+                            : "这条库已停用");
 
         // 启用 / 加库按钮独占最后一列：列宽拖窄也不会把按钮挤到下一行、把行高顶起来
         ImGui.TableNextColumn();
-        if (group.URL.Length > 0 && !group.Enabled)
+        if (!group.IsOfficial && group.URL.Length > 0 && !group.Enabled)
         {
             if (group.Known)
             {
@@ -613,12 +649,26 @@ internal sealed partial class ContributeWindow : Window
 
     private void DrawRow(TranslationIndexEntry entry, bool showIconColumn)
     {
+        var isOpen = string.Equals(expandedEntry, entry.InternalName, StringComparison.Ordinal);
+        ImGui.PushID(entry.InternalName);
         ImGui.TableNextRow();
 
+        // 整行点击展开详情（和「插件汉化」同一个做法）：Selectable 铺在行底层、跨所有列、允许被按钮覆盖
+        var rowHeight = rowHeights.TryGetValue(entry.InternalName, out var knownHeight) ? knownHeight : 42f;
+        ImGui.TableSetColumnIndex(0);
+        if (ImGui.Selectable("##row", isOpen,
+                ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
+                new Vector2(0, rowHeight)))
+        {
+            expandedEntry = isOpen ? null : entry.InternalName;
+        }
+
+        var rowTop = ImGui.GetCursorScreenPos().Y;
+        ImGui.SameLine(0, 0);
+
         // 勾选
-        ImGui.TableNextColumn();
         var picked = selected.Contains(entry.InternalName);
-        if (ImGui.Checkbox("##sel-" + entry.InternalName, ref picked))
+        if (ImGui.Checkbox("##sel", ref picked))
         {
             if (picked)
             {
@@ -675,26 +725,37 @@ internal sealed partial class ContributeWindow : Window
             }
         }
 
-        // 插件名（小按钮，点开详情）
+        // 插件名（纯文本；点整行展开详情）
         ImGui.TableNextColumn();
-        if (ImGui.SmallButton(entry.DisplayName + "###name-" + entry.InternalName))
-        {
-            BeginEdit(entry);
-        }
-
+        ImGui.TextUnformatted(entry.DisplayName);
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip(entry.DisplayName + "\n" + entry.InternalName + "\n点开详情，改三个字段");
+            ImGui.SetTooltip(entry.DisplayName + "\n" + entry.InternalName + "\n点这一行展开详情");
+        }
+
+        // 作者
+        ImGui.TableNextColumn();
+        if (string.IsNullOrWhiteSpace(entry.Author))
+        {
+            ImGui.TextDisabled("—");
+        }
+        else
+        {
+            UiHelpers.Fitted(entry.Author, entry.Author);
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(entry.Author);
+            }
         }
 
         // 来源库
         ImGui.TableNextColumn();
         if (entry.IsOfficial)
         {
-            UiHelpers.ColoredText(UiHelpers.Info, "官方库");
+            UiHelpers.ColoredText(UiHelpers.Info, "官方主库");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("卫月官方主库（Dip17）里的插件");
+                ImGui.SetTooltip("卫月官方主库（Dip17）里的插件；官方库不能从这里加。");
             }
         }
         else if (entry.RepositoryURL is null)
@@ -702,12 +763,12 @@ internal sealed partial class ContributeWindow : Window
             ImGui.TextDisabled("—");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("读不到来源地址");
+                ImGui.SetTooltip("读不到来源地址（旧词表没记库链）");
             }
         }
         else
         {
-            if (ImGui.SmallButton(RepoShort(entry.RepositoryURL) + "###repo-" + entry.InternalName))
+            if (ImGui.SmallButton(RepoShort(entry.RepositoryURL) + "###repo"))
             {
                 ImGui.SetClipboardText(entry.RepositoryURL);
                 SetStatus("已复制库链地址", isError: false);
@@ -718,7 +779,7 @@ internal sealed partial class ContributeWindow : Window
                 ImGui.SetTooltip(entry.RepositoryURL + "\n点一下复制；右键可加入我的库");
             }
 
-            if (ImGui.BeginPopupContextItem("##ctxrepo-" + entry.InternalName))
+            if (ImGui.BeginPopupContextItem("##ctxrepo"))
             {
                 if (ImGui.MenuItem("复制链接"))
                 {
@@ -730,47 +791,240 @@ internal sealed partial class ContributeWindow : Window
                     OpenInBrowser(entry.RepositoryURL);
                 }
 
-                if (ImGui.MenuItem("加到我的库（待确认）"))
+                if (!entry.RepositoryKnown && ImGui.MenuItem("加到我的库（待确认）"))
                 {
                     repoInput = entry.RepositoryURL;
-                    SetStatus("地址已填到操作条的输入框，点「添加」确认", isError: false);
+                    SetStatus("地址已填到操作条的输入框，点「添加这条」确认", isError: false);
                 }
 
                 ImGui.EndPopup();
             }
         }
 
-        // 原文
+        // 简介（上游原文；详情与译文在展开行里看）
         ImGui.TableNextColumn();
         var preview = FirstNonEmpty(entry.OriginalPunchline, entry.OriginalDescription);
         UiHelpers.Fitted(preview, entry.OriginalPunchline + "\n\n" + entry.OriginalDescription);
 
-        // 译文
+        // ♥ 本周/总共
         ImGui.TableNextColumn();
-        var current = entry.Entry?.Punchline is { HasTranslation: true } p
-            ? p.Translated
-            : entry.Entry?.Name is { HasTranslation: true } n ? n.Translated : string.Empty;
-        if (string.IsNullOrWhiteSpace(current))
+        DrawLikeButton(entry, "row");
+
+        // 更新
+        ImGui.TableNextColumn();
+        if (entry.Updated is { } timestamp)
         {
-            ImGui.TextDisabled("—");
+            var updated = DateTimeOffset.FromUnixTimeSeconds(timestamp).ToLocalTime();
+            ImGui.TextDisabled(updated.ToString("yyyy-MM-dd"));
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("最后更新：" + updated.ToString("yyyy-MM-dd HH:mm"));
+            }
         }
         else
         {
-            UiHelpers.Fitted(current, current);
-        }
-
-        if (ImGui.IsItemHovered())
-        {
-            var total = entry.TotalFields + entry.TemplateFields;
-            ImGui.SetTooltip($"完成度 {entry.TranslatedFields}/{total}（{entry.Completion * 100:0}%）");
+            ImGui.TextDisabled("—");
         }
 
         // 操作
         ImGui.TableNextColumn();
-        if (ImGui.SmallButton((entry.State == "missing" ? "补上…" : "改进…") + "###edit-" + entry.InternalName))
+        if (ImGui.SmallButton((entry.State == "missing" ? "补上…" : "改进…") + "###edit"))
         {
             BeginEdit(entry);
         }
+
+        // 量一下这一行实际多高，下一帧整行点击的 Selectable 用它（首帧用估算值）
+        rowHeights[entry.InternalName] = Math.Max(20f, ImGui.GetItemRectMax().Y - rowTop);
+
+        if (isOpen)
+        {
+            DrawExpandedRow(entry, showIconColumn);
+        }
+
+        ImGui.PopID();
+    }
+
+    /// <summary>展开行：三个字段的原文/译文 + 点赞 + 推荐数 + 编辑入口（列顺序与主行一致）。</summary>
+    private void DrawExpandedRow(TranslationIndexEntry entry, bool showIconColumn)
+    {
+        ImGui.TableNextRow();
+
+        ImGui.TableNextColumn();   // ##sel
+        ImGui.TableNextColumn();   // 状态
+        if (showIconColumn)
+        {
+            ImGui.TableNextColumn();
+        }
+
+        // 插件名列：内部名
+        ImGui.TableNextColumn();
+        ImGui.TextDisabled(entry.InternalName);
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(entry.InternalName);
+        }
+
+        // 作者列：推荐数
+        ImGui.TableNextColumn();
+        var recommends = discoveryStats?.RecommendsOf(entry.InternalName) ?? 0;
+        ImGui.TextDisabled($"推荐 {recommends}");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("从云端把这条库链加进自己库的次数（按插件计）。");
+        }
+
+        // 来源库列：完整地址 / 加库入口
+        ImGui.TableNextColumn();
+        if (entry.IsOfficial)
+        {
+            UiHelpers.ColoredText(UiHelpers.Info, "官方主库");
+        }
+        else if (entry.RepositoryURL is { Length: > 0 } repo)
+        {
+            ImGui.TextDisabled(RepoShort(repo));
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(repo);
+            }
+
+            if (!entry.RepositoryKnown)
+            {
+                ImGui.SameLine();
+                if (ImGui.SmallButton("加库###expand-add"))
+                {
+                    repoInput = repo;
+                    SetStatus("地址已填到操作条的输入框，点「添加这条」确认", isError: false);
+                }
+
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip("把这条库加进你的第三方插件列表（会先自动备份）");
+                }
+            }
+        }
+        else
+        {
+            ImGui.TextDisabled("来源未知");
+        }
+
+        // 简介列：三个字段的原文 / 译文
+        ImGui.TableNextColumn();
+        DrawFieldLine("插件名", entry.OriginalName, entry.Entry?.Name);
+        DrawFieldLine("一行简介", entry.OriginalPunchline, entry.Entry?.Punchline);
+        DrawFieldLine("详情", entry.OriginalDescription, entry.Entry?.Description);
+
+        // ♥ 列：大按钮
+        ImGui.TableNextColumn();
+        DrawLikeButton(entry, "detail");
+
+        // 更新列
+        ImGui.TableNextColumn();
+        if (entry.Updated is { } timestamp)
+        {
+            ImGui.TextDisabled(DateTimeOffset.FromUnixTimeSeconds(timestamp).ToLocalTime().ToString("yyyy-MM-dd"));
+        }
+        else
+        {
+            ImGui.TextDisabled("—");
+        }
+
+        // 操作列
+        ImGui.TableNextColumn();
+        if (ImGui.SmallButton("编辑校对…###edit-expanded"))
+        {
+            BeginEdit(entry);
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("打开三个字段的编辑弹窗，改完先存本地。");
+        }
+    }
+
+    /// <summary>展开行里一行字段：标签 + 译文（悬停看完整原文/译文）。</summary>
+    private static void DrawFieldLine(string label, string original, TransPair? pair)
+    {
+        var translated = pair is { HasTranslation: true } ? pair.Translated : string.Empty;
+        if (string.IsNullOrWhiteSpace(original) && translated.Length == 0)
+        {
+            ImGui.TextDisabled(label + "：上游没提供，可以自己补");
+            return;
+        }
+
+        ImGui.TextDisabled(label + "：");
+        ImGui.SameLine(0, 4);
+        ImGui.TextWrapped(string.IsNullOrWhiteSpace(translated) ? "（还没译文）" : translated.Replace('\n', ' '));
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip($"原文：{(string.IsNullOrWhiteSpace(original) ? "（无）" : original)}\n\n译文：{(translated.Length == 0 ? "（无）" : translated)}");
+        }
+    }
+
+    /// <summary>行尾的 ♥：本周/总共；本机清过的一周内变灰，下周可以再点。</summary>
+    private void DrawLikeButton(TranslationIndexEntry entry, string suffix)
+    {
+        var week = discoveryStats?.Week ?? string.Empty;
+        var liked = week.Length > 0 && discoveryState.LikedThisWeek(entry.InternalName, week);
+        var unsynced = discoveryState.HasPending(entry.InternalName);
+        var weekly = discoveryStats?.WeeklyOf(entry.InternalName) ?? 0;
+        var total = discoveryStats?.TotalOf(entry.InternalName) ?? 0;
+
+        if (liked)
+        {
+            ImGui.BeginDisabled();
+        }
+
+        if (ImGui.Button($"♥ {weekly}/{total}###like-{suffix}"))
+        {
+            MarkLike(entry);
+        }
+
+        if (liked)
+        {
+            ImGui.EndDisabled();
+        }
+
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        {
+            var lines = new List<string>
+            {
+                $"本周 {weekly} 赞 · 总共 {total} 赞",
+                liked ? "这周你已经点过赞了（下周可以再点）" : "点一下为这个插件点赞（一周一次，匿名上报）",
+            };
+            if (unsynced)
+            {
+                lines.Add("有点赞还没同步到云端，会自动重试");
+            }
+
+            ImGui.SetTooltip(string.Join("\n", lines));
+        }
+    }
+
+    /// <summary>本机点赞：先记下来（支持离线/失败重试），再后台上报；成功用云端真值回填。</summary>
+    private void MarkLike(TranslationIndexEntry entry)
+    {
+        var week = discoveryStats?.Week ?? string.Empty;
+        discoveryState.MarkLiked(entry.InternalName, week);
+        if (discoveryStats is not null)
+        {
+            discoveryStats.WeeklyLikes[entry.InternalName] = discoveryStats.WeeklyOf(entry.InternalName) + 1;
+            discoveryStats.TotalLikes[entry.InternalName] = discoveryStats.TotalOf(entry.InternalName) + 1;
+        }
+
+        SetStatus("已点赞，正在同步到云端…", isError: false);
+        rebuildPending = true;
+        var name = entry.InternalName;
+        _ = Task.Run(async () =>
+        {
+            var (ok, total, weekly, _) = await DiscoveryRelay.LikeAsync(name, CancellationToken.None).ConfigureAwait(false);
+            if (!ok)
+            {
+                return;   // 留在待重试里，不谎报成功
+            }
+
+            discoveryState.CompleteLike(name);
+            likeResults.Enqueue((name, total, weekly));
+        });
     }
 
     /// <summary>

@@ -47,7 +47,6 @@ public sealed class Plugin : IDalamudPlugin
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
-    private readonly ContributeWindow contributeWindow;
     private readonly UI.UITextEditorWindow uiTextEditorWindow;
     private readonly UI.UITextSettingsWindow uiTextSettingsWindow;
     private readonly UI.UITextTab uiTextTab;
@@ -137,8 +136,6 @@ public sealed class Plugin : IDalamudPlugin
         windowSystem.AddWindow(uiTextSettingsWindow);
         window = new MainWindow(this, uiTextTab = new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager, uiTextRunLock));
         windowSystem.AddWindow(window);
-        contributeWindow = new ContributeWindow(this, Contributions);
-        windowSystem.AddWindow(contributeWindow);
         pluginInterface.UiBuilder.Draw += windowSystem.Draw;
         pluginInterface.UiBuilder.Draw += TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi += ToggleWindow;
@@ -494,12 +491,13 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    ///     打开「参与翻译」窗口（独立窗口，入口在「简介汉化」页更新词表旁边的小按钮）。
+    ///     打开「插件发现」页签（原「参与翻译」独立窗口已并入主窗口第五页签）。
     /// </summary>
     public void OpenContributeWindow()
     {
-        contributeWindow.IsOpen = true;
-        contributeWindow.BringToFront();
+        window.SelectTab(UI.MainTab.Discovery);
+        window.IsOpen = true;
+        window.BringToFront();
     }
 
     private void OnCommand(string command, string args)

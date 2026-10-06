@@ -5,15 +5,14 @@ using Dalamud.Interface.Windowing;
 namespace FireGaze.UI;
 
 /// <summary>
-///     主窗口的页签（顺序就是界面上的顺序：插件汉化 → 简介汉化 → 仓库体检 → 插件安装器；
-     ///     「参与翻译」是独立窗口，入口在「简介汉化」页）。
+///     主窗口的页签（顺序就是界面上的顺序：插件汉化 → 简介汉化 → 仓库体检 → 插件安装器 → 插件发现）。
 /// </summary>
 public enum MainTab
 {
     Translate = 0,
     RepoAudit = 1,
     Installer = 2,
-    Contribute = 3,
+    Discovery = 3,
     UIText = 4,
 }
 
@@ -26,6 +25,7 @@ internal sealed class MainWindow : Window
     private readonly InstallerTab installerTab;
     private readonly TranslateTab translateTab;
     private readonly UITextTab uiTextTab;
+    private readonly DiscoveryTab discoveryTab;
 
     private MainTab? pendingSelect;
 
@@ -43,6 +43,7 @@ internal sealed class MainWindow : Window
         repoAuditTab = new RepoAuditTab(plugin);
         installerTab = new InstallerTab(plugin);
         translateTab = new TranslateTab(plugin);
+        discoveryTab = new DiscoveryTab(plugin, plugin.Contributions);
     }
 
     /// <summary>
@@ -105,6 +106,13 @@ internal sealed class MainWindow : Window
             if (ImGui.BeginTabItem("插件安装器", flags))
             {
                 installerTab.Draw();
+                ImGui.EndTabItem();
+            }
+
+            flags = pendingSelect == MainTab.Discovery ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            if (ImGui.BeginTabItem("插件发现", flags))
+            {
+                discoveryTab.Draw();
                 ImGui.EndTabItem();
             }
 
