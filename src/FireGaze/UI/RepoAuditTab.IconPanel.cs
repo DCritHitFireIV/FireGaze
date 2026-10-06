@@ -24,7 +24,12 @@ internal sealed partial class RepoAuditTab
     }
 
     /// <summary>安装器页每帧调它推进下载（体检页也保留自己的推进，切回去能接着下）。</summary>
-    internal void TickIconMaintenance() => TickIconDownload();
+    internal void TickIconMaintenance()
+    {
+        // 面板可能先于体检页开：已装索引在这里也要能建（否则按钮会一直显示「插件数据不可用」）
+        EnsureInstalledIndex();
+        TickIconDownload();
+    }
 
     /// <summary>画整个图标缓存维护区（由「插件安装器」页调用）。</summary>
     internal void DrawIconMaintenance()
