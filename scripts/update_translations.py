@@ -250,6 +250,17 @@ def _score(item: dict) -> tuple[int, int]:
     return (0 if CJK.search(text) else 1, len(text))
 
 
+def _bool_of(value) -> bool:
+    """仓库文件里的布尔字段经常是字符串（实测 SeaOfStars 写的是 `"IsTestingExclusive": "False"`）。
+    直接 `bool("False")` 在 Python 里是 True —— 会把整批正常插件标成测试版。
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in ("true", "1", "yes")
+    return bool(value)
+
+
 def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
     """把一条插件并进语料；被采纳返回 True。
 
@@ -269,6 +280,7 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
         "punchline": (plugin.get("Punchline") or "").strip(),
         "description": (plugin.get("Description") or "").strip(),
         "repo_url": repo_url,
+        "testing": _bool_of(plugin.get("IsTestingExclusive")),
     }
 
     previous = corpus.get(key)
@@ -413,6 +425,11 @@ def main(argv=None) -> int:
         action="store_true",
         help="全量重做：把所有非玩家译的简介/详情再送一遍模型（默认只处理新增/缺译/译文=原文的）",
     )
+    parser.add_argument(
+        "--annotate-only",
+        action="store_true",
+        help="只把仓库链（Repo）/测试版（Testing）标记补进词表，不调模型、不翻译；本机也能跑",
+    )
     args = parser.parse_args(argv)
 
     api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip() or None
@@ -429,10 +446,12 @@ def main(argv=None) -> int:
             print(f"补充语料失败（继续用 Aetherfeed）：{error}")
 
     table: dict[str, dict] = {}
+    saved_stamp: str | None = None
     if os.path.exists(args.table):
-        table = json.load(open(args.table, encoding="utf-8"))
+        raw_table = json.load(open(args.table, encoding="utf-8"))
+        saved_stamp = str((raw_table.get("_meta") or {}).get("updatedAt") or "") or None
         # 以下划线开口的键是元数据（_meta.updatedAt = 词表维护日期），不当插件条目
-        table = {key: value for key, value in table.items() if not key.startswith("_")}
+        table = {key: value for key, value in raw_table.items() if not key.startswith("_")}
     print(f"现有词表：{len(table)} 条")
 
     # 找出需要处理的部分：缺条目，或三个字段里任意一个的原文变了 / 还没有译文
@@ -526,7 +545,8 @@ def main(argv=None) -> int:
 
     # 新条目的仓库可能还没取到 Punchline；Aetherfeed 永远不给 Punchline，
     # 所以「表里没有一行简介」的条目也要回抓源仓库。
-    if not args.stats_only:
+    # （--annotate-only 不翻译，也不做这一步回抓。）
+    if not args.stats_only and not args.annotate_only:
         missing_punch = {k for k, p, d in desc_todo if not p and d}
         if missing_punch:
             enrich_punchlines(corpus, missing_punch)
@@ -537,21 +557,29 @@ def main(argv=None) -> int:
     print(f"待翻译：插件名 {len(name_todo)} 条 / 简介+详情 {len(desc_todo)} 条（新增 {stats['new']} 条）")
     print(f"上游没给（不计入待翻译、也不算缺译）：{stats['upstream_absent']} 处字段")
 
-    def write_table(path: str) -> None:
+    def write_table(path: str, stamp: str | None = None) -> None:
         """写回词表：头部记上维护日期（插件界面显示「词表更新：YYYY-MM-DD（周X）」，离线可读）。
 
         写之前做两道清理：
         · 丢掉「原文和译文都空」的字段（以前会留下 `"Punchline": {"Original": "", "Translated": ""}` 空壳）；
         · **上游原文本来就是中文的字段，不保留 Translated 副本** —— 以前会把中文原文原样写成译文，
           表里就多出一份「译文 = 原文」，看着像没翻译（实测 320 处；用户 2026-09-22 要求自动跳过）。
+
+        同时补上**条目级元数据**（云端语料爬虫本来就有的）：
+        · `Repo` = 插件所在的仓库链 —— 「参与翻译」靠它把插件归到库里、未加入的库才能加；
+        · `Testing` = 测试版专用插件（卫月 `IsTestingExclusive`）—— 不列进参与翻译、不计缺译。
         """
-        ordered: dict = {"_meta": {"updatedAt": time.strftime("%Y-%m-%d")}}
+        ordered: dict = {"_meta": {"updatedAt": stamp or time.strftime("%Y-%m-%d")}}
         for key, value in table.items():
             if key.startswith("_"):
                 continue
 
+            value = value or {}
             cleaned: dict = {}
-            for field, pair in (value or {}).items():
+            for field, pair in value.items():
+                if field not in ("Name", "Punchline", "Description"):
+                    continue   # 条目级元数据在下面统一补，不能当字段解析
+
                 pair = pair or {}
                 original = str(pair.get("Original") or "").strip()
                 translated = str(pair.get("Translated") or "").strip()
@@ -579,11 +607,33 @@ def main(argv=None) -> int:
 
                 cleaned[field] = pair
 
-            if cleaned:
-                ordered[key] = cleaned
+            if not cleaned:
+                continue
+
+            # 条目级元数据：本轮语料里有就用新的，否则保住表里已有的（比如本轮某仓库抓失败）
+            info = corpus.get(key)
+            repo_url = str((info or {}).get("repo_url") or "").strip()
+            if repo_url:
+                cleaned["Repo"] = repo_url
+            elif value.get("Repo"):
+                cleaned["Repo"] = value["Repo"]
+
+            if info is not None:
+                # 语料里有这插件：按本轮结论重新定（以前误标的 Testing 也能被洗掉）
+                if info.get("testing"):
+                    cleaned["Testing"] = True
+            elif value.get("Testing"):
+                cleaned["Testing"] = True
+
+            ordered[key] = cleaned
 
         with open(path, "w", encoding="utf-8") as handle:
             json.dump(ordered, handle, ensure_ascii=False, indent=1)
+
+    if args.annotate_only:
+        write_table(args.table, stamp=saved_stamp)
+        print(f"只补仓库链/测试版标记，不翻译 -> {args.table}")
+        return 0
 
     if args.stats_only:
         print("无需翻译（--stats-only 不写文件）。")
