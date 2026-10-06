@@ -1,0 +1,3321 @@
+{
+  "issue": "direct-2026-10-06T18-33-59-555Z-1748d919",
+  "receivedAt": "2026-10-06 18:34:17",
+  "author": "匿名直传",
+  "plugin": "Splatoon",
+  "fingerprint": "1150304d530f3039",
+  "packFile": "Splatoon@user-115030.json",
+  "accepted": 393,
+  "filled": 393,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Splatoon",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Scene",
+        "Translated": "幕",
+        "Context": "CGui.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Layouts",
+        "Translated": "布局",
+        "Context": "CGui.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "General",
+        "Translated": "一般税率",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Render",
+        "Translated": "渲染",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Configurations",
+        "Translated": "配置",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Projection",
+        "Translated": "投影",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Contribute",
+        "Translated": "上交",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Error: ",
+        "Translated": "錯誤： {0}",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Convert clipboard content from github to wiki",
+        "Translated": "将剪贴板内容从github转换为wiki",
+        "Context": "CGui.DisplayConversion",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "You may archive layouts that you are no longer using. Archived layouts:\r\n- Are not processed and do not consume any resources;\r\n- Are included into backups;\r\n- Can not be edited, viewed, reordered;\r\n- Can be exported to clipboard or restored at any time.",
+        "Translated": "您可以存档不再使用的布局。已存档的布局：\n-未处理且不消耗任何资源；\n-包含在备份中；\n-无法编辑、查看、重新排序；\n-可以随时导出到剪贴板或还原。",
+        "Context": "CGui.DrawArchive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Copy group",
+        "Translated": "复制组",
+        "Context": "CGui.DrawArchive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Restore group",
+        "Translated": "还原组",
+        "Context": "CGui.DrawArchive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Delete group",
+        "Translated": "删除组",
+        "Context": "CGui.DrawArchive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Info",
+        "Translated": "飞艇信息",
+        "Context": "CGui.DrawArchiveEntries",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Control",
+        "Translated": "制高",
+        "Context": "CGui.DrawArchiveEntries",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": " elements",
+        "Translated": "对象",
+        "Context": "CGui.DrawArchiveEntries",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Copy",
+        "Translated": "复制",
+        "Context": "CGui.DrawArchiveEntries",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Restore",
+        "Translated": "恢复",
+        "Context": "CGui.DrawArchiveEntries",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "CGui.DrawArchiveEntries",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Scripts w/prio list",
+        "Translated": "带prio列表的脚本",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": " : enabled=",
+        "Translated": "启用",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Copy config",
+        "Translated": "复制配置",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Generate donut",
+        "Translated": "生成甜甜圈",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Inst: ",
+        "Translated": "INST.",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextCopy"
+      },
+      {
+        "Original": "CFC debug",
+        "Translated": "CFC调试",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Message concurrency",
+        "Translated": "消息并发",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragInt"
+      },
+      {
+        "Original": "My pos XYZ: \n",
+        "Translated": "我的位置XYZ ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Rotation: ",
+        "Translated": "旋转:",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Target pos XYZ: \n",
+        "Translated": "目标位置XYZ ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Query WorldToScreen",
+        "Translated": "查询WorldToScreen",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "To my pos",
+        "Translated": "到我的POS",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Query",
+        "Translated": "查询",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Player+1 distance: ",
+        "Translated": "玩家+1距离：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Player+1+1 distance: ",
+        "Translated": "玩家+1 +1距离：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Screen distance: ",
+        "Translated": "屏幕距离：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Camera angle X:",
+        "Translated": "相机角度X ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Camera angle Y:",
+        "Translated": "相机角度Y ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Camera zoom:",
+        "Translated": "摄像机缩小",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Object table",
+        "Translated": "对象表",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Object table:",
+        "Translated": "对象表：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Targetable",
+        "Translated": "可定位",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Visible",
+        "Translated": "可见",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Placeholders",
+        "Translated": "占位符",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "null",
+        "Translated": "空列",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Distance",
+        "Translated": "距离",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Distance c2c 3d: ",
+        "Translated": "距离c2c 3d ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Distance c2c 2d: ",
+        "Translated": "距离c2c 2d ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Distance h2h 3d: ",
+        "Translated": "距离h2h 3d ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Distance h2h 2d: ",
+        "Translated": "距离h2h 2d ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Distance c2h 3d: ",
+        "Translated": "距离c2h 3d ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Distance c2h 2d: ",
+        "Translated": "距离c2h 2d ：",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Object Effects",
+        "Translated": "对象效果",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Object 1",
+        "Translated": "对象1",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputUint"
+      },
+      {
+        "Original": "offset",
+        "Translated": "百萬港元",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "value",
+        "Translated": "价值",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputUint"
+      },
+      {
+        "Original": "Do (dangerous)",
+        "Translated": "做（危险）",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Object 2",
+        "Translated": "对象2",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputUint"
+      },
+      {
+        "Original": "Copy difference",
+        "Translated": "复制差异",
+        "Context": "CGui.DisplayDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Destroy all",
+        "Translated": "消灭所有...",
+        "Context": "CGui.DisplayDynamicElements",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "]\n(Elements: ",
+        "Translated": "关键能力要素",
+        "Context": "CGui.DisplayDynamicElements",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Destroy##",
+        "Translated": "击毁",
+        "Context": "CGui.DisplayDynamicElements",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Destroy namespace",
+        "Translated": "销毁命名空间",
+        "Context": "CGui.DisplayDynamicElements",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Game version: ",
+        "Translated": "游戏版本：",
+        "Context": "CGui.DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Information",
+        "Translated": "信息",
+        "Context": "CGui.DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.EnumCombo"
+      },
+      {
+        "Original": "Language",
+        "Translated": "语言",
+        "Context": "CGui.DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Enable logger",
+        "Translated": "启用记录器",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Viewer mode",
+        "Translated": "查看器模式",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "When enabled, only currently present objects are displayed",
+        "Translated": "启用后，仅显示当前存在的对象",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Clear list",
+        "Translated": "清除列表",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Filter:",
+        "Translated": "过滤：",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Object name",
+        "Translated": "对象名称",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "OID Long",
+        "Translated": "OID长",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Name ID",
+        "Translated": "名称 ID",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Tar. %",
+        "Translated": "Tar",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Exist",
+        "Translated": "存在",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Life",
+        "Translated": "生命",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Find",
+        "Translated": "寻找",
+        "Context": "CGui.DisplayLogger",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Round coordinates to an integer",
+        "Translated": "将坐标舍入为整数",
+        "Context": "CGui.DrawRounding",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Name can't contain reserved characters: ~",
+        "Translated": "名称不能包含保留字符： ~",
+        "Context": "CGui.AddEmptyLayout",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Error"
+      },
+      {
+        "Original": "Name can't contain reserved characters: ,",
+        "Translated": "名称不能包含保留字符：、",
+        "Context": "CGui.AddEmptyLayout",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Error"
+      },
+      {
+        "Original": "Add angle:",
+        "Translated": "添加角....（&A）",
+        "Context": "CGui.DrawRotationSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Hold shift for faster changing;\ndouble-click to enter manually.",
+        "Translated": "按住SHIFT可更快更换；\n双击手动输入。",
+        "Context": "CGui.DrawRotationSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Face##",
+        "Translated": "面部",
+        "Context": "CGui.DrawRotationSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Face chara##",
+        "Translated": "人脸字符# #",
+        "Context": "CGui.DrawRotationSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Instead of this element facing placeholder, placeholder will face this element",
+        "Translated": "代替此元素面向占位符，占位符将面向此元素",
+        "Context": "CGui.DrawRotationSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Filter by Zone",
+        "Translated": "筛选依据",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Search...",
+        "Translated": "搜索...",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.FilteringInputTextWithHint"
+      },
+      {
+        "Original": "- Show All -",
+        "Translated": "顯示全部",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Layout list",
+        "Translated": "布局列表",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Search layouts",
+        "Translated": "搜索布局",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputWithRightButtonsArea"
+      },
+      {
+        "Original": "Import from clipboard",
+        "Translated": "从剪切板导入",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Add layout",
+        "Translated": "添加布局",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopup"
+      },
+      {
+        "Original": "Layout name",
+        "Translated": "布局名称",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Layout created: ??",
+        "Translated": "布局已创建",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Success"
+      },
+      {
+        "Original": "UI Help:\n- Left panel contains groups, layouts and elements.\n- You can drag and drop layouts, elements and groups to reorder them.\n- Right click on a group to rename or delete it.\n- Right click on a layout/element to delete it.\n- Middle click on layout/element for quick enable/disable",
+        "Translated": "UI帮助：\n-左侧面板包含组、布局和元素。\n-您可以拖放布局、元素和组以重新排序。\n-右键单击组以重命名或删除它。\n-右键单击布局/元素将其删除。\n-中键单击布局/元素以快速启用/禁用",
+        "Context": "CGui.DislayLayouts",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Moving group\n[??]",
+        "Translated": "移动星群",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Enter new name...",
+        "Translated": "输入新名字...",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "OK",
+        "Translated": "确认",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Error: this name is already exists",
+        "Translated": "错误：此名称已存在",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Error"
+      },
+      {
+        "Original": "Error: empty names are not allowed",
+        "Translated": "错误：不允许使用空名称",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Error"
+      },
+      {
+        "Original": "Archive group",
+        "Translated": "存档组",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Hold CTRL+click",
+        "Translated": "按住CTRL并单击",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Remove group and disband layouts",
+        "Translated": "删除组并解散布局",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Hold CTRL+SHIFT+click",
+        "Translated": "按住CTRL + SHIFT +单击",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Remove group and it's layouts",
+        "Translated": "删除组及其布局",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Export Group",
+        "Translated": "出口组",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Group Enabled",
+        "Translated": "组已启用",
+        "Context": "CGui.DrawOldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.CollectionCheckbox"
+      },
+      {
+        "Original": "This element is currently being rendered",
+        "Translated": "此元素当前正在呈现",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "This element is currently not being rendered",
+        "Translated": "此元素当前未呈现",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Copy as HTTP param. Hold ALT to copy raw JSON (for usage with post body or you'll have to urlencode it yourself)\nHold CTRL and click to copy urlencoded raw",
+        "Translated": "复制为HTTP参数。 按住ALT复制原始JSON （用于POST正文，否则您必须自己进行URL编码）\n按住CTRL并单击以复制URL编码的RAW文件",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Copied to clipboard",
+        "Translated": "复制到剪贴板",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Success"
+      },
+      {
+        "Original": "Copy style",
+        "Translated": "复制样式",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Paste style",
+        "Translated": "粘帖样式",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Copied style:",
+        "Translated": "已复制样式：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Color: 0x",
+        "Translated": "颜色： 0x",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Thickness: ",
+        "Translated": "厚度 ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Origin Fill Color: 0x",
+        "Translated": "原点填充颜色： 0x",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "End Fill Color: 0x",
+        "Translated": "结束填充颜色： 0x",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Fill Intensity: ",
+        "Translated": "填充强度：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Animation: ",
+        "Translated": "动画：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Animation Color: 0x",
+        "Translated": "动画色彩",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Pulse Size: ",
+        "Translated": "脉搏大小：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Pulse Frequency: ",
+        "Translated": "脉冲频率",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Overlay BG color: 0x",
+        "Translated": "叠加背景颜色",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Overlay text color: 0x",
+        "Translated": "叠加文本颜色",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Overlay vertical offset: ",
+        "Translated": "叠加垂直偏移：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Tether: ",
+        "Translated": "Tether",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Holding CTRL when clicking will also paste:",
+        "Translated": "单击时按住CTRL键也会粘贴：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Radius: ",
+        "Translated": "半径：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Include target hitbox: ",
+        "Translated": "包括目标命中框：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Include own hitbox: ",
+        "Translated": "包括自己的hitbox ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Include rotation: ",
+        "Translated": "包括旋转：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Only targetable: ",
+        "Translated": "仅可定位：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Holding SHIFT when clicking will also paste:",
+        "Translated": "单击时按住Shift键也将粘贴：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "X offset: ",
+        "Translated": "& X 偏移 ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Y offset: ",
+        "Translated": "& Y 偏移 ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Z offset: ",
+        "Translated": "Z 偏移",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Select on screen",
+        "Translated": "在屏幕上选择",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Rotate ",
+        "Translated": "旋轉",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": " degrees clockwise",
+        "Translated": "顺时针度",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": " degrees counter-clockwise",
+        "Translated": "逆时针度",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Mirror horizontally",
+        "Translated": "水平镜像",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Mirror vertically",
+        "Translated": "垂直镜像",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Conditional:",
+        "Translated": "有条件",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Conditional element will serve as conditional trigger for any elements lower than this in current layout. \r\nIf this element is visible, elements below will also be shown. If there are multiple sequential conditional elements, they will be merged using rules defined in the layout. This is advanced feature that allows displaying elements, for example, when a certain buff is present on a player, boss, allows drawing elements around players when boss is casting something, etc.\r\n\r\nIf another conditional element is encountered after normal element, it will be processed together with the rules defined in the layout. For example:\r\n- if element structure is A1B2, where A and B - conditional elements, 1 and 2 - normal elements:\r\n- - in OR mode if A is shown but B is hidden, both 1 and 2 will be shown; \r\n- - in AND mode - only 1 will be shown. \r\n- If A is hidden but B is shown:\r\n- - OR mode will display only 2;\r\n- - AND mode will display nothing at all. \r\n\r\nConditional elements may serve as normal elements and display information on their own, or simply be hidden service elements.",
+        "Translated": "QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Invert condition",
+        "Translated": "反转条件",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reset condition",
+        "Translated": "原始状态",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Upon reaching this element, previous conditions will be reset",
+        "Translated": "到达此元素后，以前的条件将被重置",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Attributes:",
+        "Translated": "参战属性：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Capturing",
+        "Translated": "抓取",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "No Draw",
+        "Translated": "无抽奖",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Element type:",
+        "Translated": "元素类型",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Account for rotation:",
+        "Translated": "轮换帐户：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Override rotation:",
+        "Translated": "覆盖旋转：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Fixed angle mode. Face fixed angle.",
+        "Translated": "固定角度模式。面固定角度。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Rotate towards:",
+        "Translated": "旋转方向：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Fixed Angle",
+        "Translated": "固定角度",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Targeted object: ",
+        "Translated": "目标对象：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Copy settarget command",
+        "Translated": "复制settarget命令",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "This command allows you to quickly change\nsearch attributes to your active target's name.\nYou can use it with macro.",
+        "Translated": "此命令允许您快速更改\n搜索活动目标名称的属性。\n您可以将其与模板一起使用。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Single attribute",
+        "Translated": "单属性",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Multiple attributes",
+        "Translated": "多种属性",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Match one attribute",
+        "Translated": "匹配一个属性",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Match multiple attributes (AND logic)",
+        "Translated": "匹配多个属性（和逻辑）",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Name ID: ??, convert?",
+        "Translated": "姓名ID ： ？ ？ ，转换？",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Name ID has been found for this string. If you will convert comparison to Name ID, it will make element work with any languare. In addition, such conversion will provide a performance boost.\n\nSelection by Name ID will target only Characters (usually it's fine). If you're targeting GameObject, EventObj or EventNpc, do not convert.",
+        "Translated": "已找到此字符串的名称ID。 如果您将比较转换为名称ID ，它将使元素适用于任何语言。 此外，这种转换将提高性能。\n\n按名称ID选择的内容将仅针对字符（通常可以）。 如果您的目标是游戏对象、EventObj或EventNpc ，请不要转换。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Placeholder like you'd type in macro <1>, <2>, <mo> etc. You can add multiple.\nAdditional placeholders are supported:\n<d1>, <d2>, <d3> etc - DPS player in a party\n<h1>, <h2> etc - Healer player in a party\n<t1>, <t2> etc - Tank player in a party\nNumber corresponds to the party list.",
+        "Translated": "像您输入宏&lt; 1 &gt;、&lt; 2 &gt;<mo>等占位符。 您可以添加多个。\n支持其他占位符：\n<d1><d2>、<d3>等-派对中的DPS玩家\n<h1><h2> 等-聚会中的治疗师玩家\n<t1><t2> 等-派对中的坦克玩家\n编号对应于参与方列表。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Age:",
+        "Translated": "年龄：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Last only",
+        "Translated": "仅最后",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Decimal input",
+        "Translated": "十进制输入",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Target alteration:",
+        "Translated": "目标变更：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Enumeration:",
+        "Translated": "枚举",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Center:",
+        "Translated": "中心:",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Starting Position:",
+        "Translated": "起始位置：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Enumeration Positions:",
+        "Translated": "枚举位置：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Enter Enumeration Positions",
+        "Translated": "输入枚举位置",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Add Position",
+        "Translated": "职位的添加",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Enumeration starts with 1 or -1",
+        "Translated": "枚举以1或-1开头",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Error"
+      },
+      {
+        "Original": "This value is already added",
+        "Translated": "此值已添加",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Error"
+      },
+      {
+        "Original": "Point",
+        "Translated": "注意",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Del",
+        "Translated": "删除",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SmallIconButton"
+      },
+      {
+        "Original": "Targetability: ",
+        "Translated": "目标性：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Untargetable",
+        "Translated": "不可定位",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Targetable only",
+        "Translated": "仅可定位",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Untargetable only",
+        "Translated": "仅不可定位",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Visible characters only",
+        "Translated": "可见字符",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Setting this checkbox will also restrict search to characters ONLY. \n(character - is a player, companion or friendly/hostile NPC that can fight and have HP)",
+        "Translated": "设置此复选框也会将搜索限制为仅限字符。 \n（角色-是玩家、同伴或友方/敌方NPC ，可以战斗并拥有生命）",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Alive",
+        "Translated": "幸存",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Checkbox"
+      },
+      {
+        "Original": "Dot - any status\nChecked - only alive\nUnchecked - only dead",
+        "Translated": "点-任何状态\n已选中-仅活着\n未选中-仅死亡",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Object Kind:",
+        "Translated": "对象种类：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Select All",
+        "Translated": "全选",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Deselect All",
+        "Translated": "全部取消",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Paste from clipboard##castinfo",
+        "Translated": "从剪贴板粘贴# # castinfo",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "From Casting Entity...",
+        "Translated": "来自铸造实体...",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Left click - toggle; shift+click - replace",
+        "Translated": "左键单击-切换； Shift +单击-替换",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": " - from ",
+        "Translated": "从",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Add all by name:",
+        "Translated": "按名称添加所有内容：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Limit by cast time",
+        "Translated": "按施法时间限制",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable use of cast values that exceed cast time, effectively behaving like cast bar would continue to be displayed after cast already happened",
+        "Translated": "启用超出施法时间的施法值，有效地表现得像施法条一样，将在施法发生后继续显示",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Derive rotation from cast info",
+        "Translated": "从演员阵容信息中导出旋转",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Status requirement:",
+        "Translated": "状态要求：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Select from entity...",
+        "Translated": "从实体中选择...",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Debuffs",
+        "Translated": "减益类型",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Other",
+        "Translated": "其他地区",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Add from target",
+        "Translated": "从目标添加",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Limit by remaining time",
+        "Translated": "以剩余时间为限",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Check for status param",
+        "Translated": "检查状态参数",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Require ALL listed statuses to be present",
+        "Translated": "要求所有列出的状态都存在",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Require ANY status to be missing",
+        "Translated": "要求缺少任何状态",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Invert behavior",
+        "Translated": "反转行为",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Distance limit",
+        "Translated": "限差",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Rotation limit",
+        "Translated": "旋转极限",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Object life time:",
+        "Translated": "对象生命周期：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "(in seconds)",
+        "Translated": "（以秒为单位）",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Transformation ID:",
+        "Translated": "转换ID ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Head markings:",
+        "Translated": "头部标记：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Targeting you:",
+        "Translated": "锁定您：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "No",
+        "Translated": "否",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Yes",
+        "Translated": "是",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Tether info:",
+        "Translated": "Tether信息：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Instead of historical tether, checks for tether that is present in real time. Only param 2 (tether id) is available; additionally, no time limits can be set.",
+        "Translated": "代替历史系绳，检查实时存在的系绳。只有参数2 （ tether id ）可用；此外，无法设置时间限制。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Params:",
+        "Translated": "参数",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Source",
+        "Translated": "人员来源",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Checkbox"
+      },
+      {
+        "Original": "Checked - only check if object is tether source; unchecked - only check if object is tether target; dot - check if object is either tether source or target.",
+        "Translated": "选中-仅检查对象是否是系绳源；未选中-仅检查对象是否是系绳目标；点-检查对象是系绳源还是目标。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Invert condition##tether",
+        "Translated": "反转条件# #系绳",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Connected with:",
+        "Translated": "已连接到：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Empty = with any",
+        "Translated": "空=与任何",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Animation IDs:",
+        "Translated": "动画ID ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Comma-separated list",
+        "Translated": "以逗号分隔的列表",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Only EventObj can have AnimationId. Use $ANIMATIONID to display in overlay.",
+        "Translated": "只有EventObj可以有AnimationId。使用$ ANIMATIONID在叠加层中显示。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Reference position: ",
+        "Translated": "参考位置",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Point A",
+        "Translated": "a点",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Point A equals Point B. Nothing will be drawn. ",
+        "Translated": "点A等于点B。不会绘制任何内容。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Angle: ",
+        "Translated": "角度：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "+my hitbox (XYZ):",
+        "Translated": "+我的HITBOX (XYZ) ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "+target hitbox (XYZ):",
+        "Translated": "+目标命中盒（ XYZ ） ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Offset: ",
+        "Translated": "偏移:",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Point B",
+        "Translated": "b点",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Swap A and B",
+        "Translated": "57/270 A和B",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Pairing Mode:",
+        "Translated": "配对模式",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Minimum cone angle is higher than maximum cone angle; nothing will be drawn. Please correct this issue",
+        "Translated": "最小锥角大于最大锥角；不会绘制任何内容。请更正此问题",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Style",
+        "Translated": "风格",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.StyleEdit"
+      },
+      {
+        "Original": "Cast Animation:",
+        "Translated": "演员表动画：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Choose a cast animation for this element. Requires 'While Casting' checked.\nUnsupported in ImGui Legacy renderer",
+        "Translated": "为此元素选择一个投射动画。 需要选中“施法时”。\nImGui Legacy渲染器中不支持",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Color:",
+        "Translated": "颜色:",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Copy Stroke Color",
+        "Translated": "描边颜色",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Pulse:",
+        "Translated": "脉搏",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Size:",
+        "Translated": "尺寸",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Frequency (s):",
+        "Translated": "频率：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Radius:",
+        "Translated": "半径：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Radius is not changed; is this intended?",
+        "Translated": "RADIUS没有改变；这是有意的吗？",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Leave at 0 to draw single dot",
+        "Translated": "保留在0以绘制单点",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "+target hitbox",
+        "Translated": "+目标命中盒",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "+your hitbox",
+        "Translated": "+您的HITBOX",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "When the game tells you that ability A has distance D,\nin fact it means that you are allowed to execute\nability A if distance between edge of your hitbox\nand enemy's hitbox is less or equal than distance D,\nthat is for targeted abilities.\nIf an ability is AoE, such check is performed between\nmiddle point of your character and edge of enemy's hitbox.\n\nSummary: if you are trying to make targeted ability indicator -\nenable both \"+your hitbox\" and \"+target hitbox\".\nIf you are trying to make AoE ability indicator - \nenable only \"+target hitbox\" to make indicators valid.",
+        "Translated": "QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Donut:",
+        "Translated": "环形",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Leave at 0 to not draw a donut.\nIf greater than 0, the radius is the donut hole radius\n",
+        "Translated": "保留为0则不绘制甜甜圈。\n如果大于0 ，则半径为圆环孔半径",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "and this is the thickness of the donut.",
+        "Translated": "这是甜甜圈的厚度",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Tether:",
+        "Translated": "Tether",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Enable##TetherEnable",
+        "Translated": "启用# # TetherEnable",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Extra Length:",
+        "Translated": "额外长度：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Add extra length to the tether to visualize knockbacks.",
+        "Translated": "在系绳上添加额外的长度，以可视化击退。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Line End Style:",
+        "Translated": "行尾风格 ：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Overlay text:",
+        "Translated": "叠加文字",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Text to display as overlay",
+        "Translated": "要显示为叠加层的文本",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Vertical offset:",
+        "Translated": "垂直偏移：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Font scale:",
+        "Translated": "字体比例(%)",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "BG color:",
+        "Translated": "背景颜色：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Text color:",
+        "Translated": "文本颜色",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Enable placeholders",
+        "Translated": "启用占位符",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Pointer Line:",
+        "Translated": "指针行：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Renderer:",
+        "Translated": "渲染器：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Mechanic type:",
+        "Translated": "机械师类型：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Choose a mechanic type that best represents this element.\nThis is used for automatically setting default colors.\nOnly for DirectX11 renderer.",
+        "Translated": "选择最能代表此元素的机械类型。\n用于自动设置默认颜色。\n仅适用于DirectX11呈现器。",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Fill step:",
+        "Translated": "填充步骤：",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Only for ImGui Legacy renderer",
+        "Translated": "仅适用于ImGui Legacy渲染器",
+        "Context": "CGui.LayoutDrawElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Use placeholder instead of fixed coordinates.",
+        "Translated": "使用占位符而不是固定坐标。",
+        "Context": "CGui.DrawVector3OrPlaceholder",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "0 0 0##dist",
+        "Translated": "0 0 0 # # dist",
+        "Context": "CGui.DrawVector3OrPlaceholder",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "My position",
+        "Translated": "我的職位",
+        "Context": "CGui.DrawVector3OrPlaceholder",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "Screen2World##dist",
+        "Translated": "Screen2World # # dist",
+        "Context": "CGui.DrawVector3OrPlaceholder",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "Group:",
+        "Translated": "组：",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Export:",
+        "Translated": "导出：",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Copy Elements",
+        "Translated": "复制元素",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Hold Shift + Click = export only enabled",
+        "Translated": "按住Shift +单击=仅启用导出",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Share:",
+        "Translated": "分享:",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "GitHub",
+        "Translated": "GitHub 代码库",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copy for Web API",
+        "Translated": "用于Web API的复制",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hold ALT to copy raw JSON (for usage with post body or you'll have to urlencode it yourself)\nHold CTRL and click to copy urlencoded raw",
+        "Translated": "按住ALT复制原始JSON （用于POST正文，否则您必须自己进行URL编码）\n按住CTRL并单击以复制URL编码的RAW文件",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "This layout is currently being rendered",
+        "Translated": "当前正在呈现此布局",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "This layout is currently not being rendered",
+        "Translated": "此布局当前未呈现",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Phase ??",
+        "Translated": "相位",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Phase 2 (post-doorboss)",
+        "Translated": "第2阶段（后门老板）",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Manual phase selection:",
+        "Translated": "手动相位选择：",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Disable in duty",
+        "Translated": "值班禁用",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "No draw:",
+        "Translated": "不抽签：",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Layout won't be rendered. It will still be processed.",
+        "Translated": "布局将不会呈现。它仍将被处理。",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Display conditions:",
+        "Translated": "显示条件",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Zone Whitelist",
+        "Translated": "区域白名单",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Zone Blacklist",
+        "Translated": "区域黑名单",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Whitelist mode",
+        "Translated": "白名单模式",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Blacklist mode",
+        "Translated": "黑名单模式",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Job lock",
+        "Translated": "作业锁定",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Configuration Name",
+        "Translated": "配置名称",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Multiple Conditions",
+        "Translated": "多个条件",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "AND##mcc",
+        "Translated": "和# # mcc",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.RadioButtonBool"
+      },
+      {
+        "Original": "OR##mcc",
+        "Translated": "或# # mcc",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.RadioButtonBool"
+      },
+      {
+        "Original": "Projection Whitelist",
+        "Translated": "投影白名单",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "You can add actions into Projection Whitelist. They will be always drawn by Projection, regardless if it's enabled or not or regardless of any other condition. If action is in both blacklist and whitelist, it will be blacklisted. If action is in whitelist and blacklist of different layouts, it will be processed according to layout that is placed more down. ",
+        "Translated": "您可以将操作添加到投影白名单中。它们将始终由投影绘制，无论是否启用或是否存在任何其他条件。如果操作同时在黑名单和白名单中，它将被列入黑名单。如果操作在不同布局的白名单和黑名单中，则将根据放置得更低的布局进行处理。",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Whitelist",
+        "Translated": "白名单",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.FilteringInputTextWithHint"
+      },
+      {
+        "Original": "Projection Blacklist",
+        "Translated": "投影黑名单",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "You can add actions into Projection Blacklist. They will never be drawn by Projection, regardless if it's enabled or not. If action is in both blacklist and whitelist, it will be blacklisted. If action is in whitelist and blacklist of different layouts, it will be processed according to layout that is placed more down. ",
+        "Translated": "您可以将操作添加到投影黑名单中。无论是否启用，都不会通过投影绘制它们。如果操作同时在黑名单和白名单中，它将被列入黑名单。如果操作在不同布局的白名单和黑名单中，则将根据放置得更低的布局进行处理。",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Blacklist",
+        "Translated": "黑名单",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.FilteringInputTextWithHint"
+      },
+      {
+        "Original": "Freeze",
+        "Translated": "冰冻",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Freeze is an advanced setting that can have negative side effects.\r\n                When the requirements to display an element are met,\r\n                a new element is created and frozen in place and displayed for a duration.\r\n                New frozen elements are created every refreeze interval.",
+        "Translated": "冻结是一种高级设置，可能会产生负面副作用。\n                当满足显示元素的要求时，\n                新元素被创建并在适当位置冻结并显示一段时间。\n                每个重新冻结间隔都会创建新的冻结元素。",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Enable triggers",
+        "Translated": "启用用户触发",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Paste Replace",
+        "Translated": "粘贴替换",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Hold CTRL and click. Existing triggers will be overwritten.",
+        "Translated": "按住CTRL并单击。现有触发器将被覆盖。",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Paste Add",
+        "Translated": "粘贴添加",
+        "Context": "CGui.LayoutDrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "No actions",
+        "Translated": "没有采取行动",
+        "Context": "CGui.DrawActionListSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": " (and ",
+        "Translated": "和",
+        "Context": "CGui.DrawActionListSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": " more)",
+        "Translated": "更多",
+        "Context": "CGui.DrawActionListSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Show currently projecting##",
+        "Translated": "显示当前正在投影的# #",
+        "Context": "CGui.DrawActionListSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.FilteringCheckbox"
+      },
+      {
+        "Original": "Show only selected##",
+        "Translated": "只显示选定的",
+        "Context": "CGui.DrawActionListSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.FilteringCheckbox"
+      },
+      {
+        "Original": "Mass Import",
+        "Translated": "批量导入",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Translator",
+        "Translated": "翻译",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Logger",
+        "Translated": "记录器",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Explorer",
+        "Translated": "资源管理器",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Map Effect",
+        "Translated": "地图效果",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Archive",
+        "Translated": "存档",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Debug",
+        "Translated": "调试",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Log",
+        "Translated": "轮盘日志",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Dynamic",
+        "Translated": "动态",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Trusted Repos",
+        "Translated": "受信任的Repos",
+        "Context": "CGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Mac OS or Linux operating system detected.",
+        "Translated": "检测到Mac OS或Linux操作系统。",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Disable DirectX11 renderer on Mac OS/Linux",
+        "Translated": "在Mac OS/Linux上禁用DirectX11渲染器",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Due to issues unrelated to Splatoon or Dalamud, DirectX11 renderer often causes crashes on these systems. Please press the following button to test whether you have this issue or not:",
+        "Translated": "由于与Splatoon或Dalamud无关的问题， DirectX11渲染器通常会导致这些系统崩溃。请按以下按钮测试您是否遇到此问题：",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Reload DirectX11 render engine",
+        "Translated": "重新加载DirectX11渲染引擎",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "If your game hasn't crashed and you see red circle around you, you should be safe to enable DirectX11 render engine.",
+        "Translated": "如果您的游戏没有崩溃，并且您看到周围有红色圆圈，您应该可以安全地启用DirectX11渲染引擎。",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Enable DirectX11 renderer on Mac OS/Linux",
+        "Translated": "在Mac OS/Linux上启用DirectX11渲染器",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Attention window is a way for script to display an useful message during a mechanic. Here you can configure it's size. ",
+        "Translated": "注意窗口是脚本在机械师期间显示有用消息的一种方式。在这里，您可以配置它的大小。",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Show attention window preview",
+        "Translated": "显示注意窗口预览",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Num rows",
+        "Translated": "行数",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SliderInt"
+      },
+      {
+        "Original": "Attention window",
+        "Translated": "注意窗口",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Window screen position:",
+        "Translated": "窗口屏幕位置：",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Offset",
+        "Translated": "偏移",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat2"
+      },
+      {
+        "Original": "Font size",
+        "Translated": "字体大小",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.DragFloat"
+      },
+      {
+        "Original": "Apply",
+        "Translated": "确认",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Disable appearance blinking",
+        "Translated": "禁用外观闪烁",
+        "Context": "CGui.DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hide rendered elements. Processing won't be stopped. Some elements may remain on screen. ",
+        "Translated": "隐藏渲染的元素。处理不会停止。某些元素可能保留在屏幕上。",
+        "Context": ".ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Reset Splatoon state.",
+        "Translated": "重置Splatoon状态。",
+        "Context": ".ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Click to switch between phase 1 and 2.",
+        "Translated": "单击以在第1阶段和第2阶段之间切换。",
+        "Context": ".ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Use web API",
+        "Translated": "使用Web API",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Port: ",
+        "Translated": "端口:",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Please only change if you have really good reason",
+        "Translated": "请仅在有充分理由的情况下更改",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Open web API guide",
+        "Translated": "打开Web API指南",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Enable logging",
+        "Translated": "启用日志",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable logging, which will log chat messages, casts and VFX info into log files. ",
+        "Translated": "启用日志记录，将聊天消息、转换和VFX信息记录到日志文件中。",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Log position",
+        "Translated": "日志位置",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Log object position in casting information log lines",
+        "Translated": "铸造信息日志行中的日志对象位置",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Disallow scripts from queueing commands and message sending",
+        "Translated": "禁止脚本排队命令和消息发送",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Looking to watch expired Duty Recorder replays?",
+        "Translated": "想观看过期的Duty Recorder重播吗？",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Become supporter of NightmareXIV with \"Nightmare\" tier or higher get access to replay upgrade tool. Replays are processed locally on your own PC, without sending data across the Internet. ",
+        "Translated": "成为拥有“噩梦”档次或更高档次的噩梦XIV的支持者，可以使用重播升级工具。回放会在您自己的电脑上进行本地处理，而无需通过互联网发送数据。",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Join Now",
+        "Translated": "立即加入",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Join \"Nightmare\" tier or higher to gain access to the tool. ",
+        "Translated": "加入“噩梦”层级或更高层级即可获得该工具的使用权限。",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Ask a question or See Details in Discord",
+        "Translated": "在Discord中提出问题或查看详情",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "After joining Discord, head to \"Early Access Program\" channel. If you have a question, head to \"General\" channel and create a ticket. ",
+        "Translated": "加入Discord后，请前往「抢先试用计划」频道。如果您有任何疑问，请前往「一般」频道并创建工单。",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "You can define alias for /splatoon command here. Leave empty to remove alias.",
+        "Translated": "您可以在此处定义/splatoon命令的别名。留空以删除别名。",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Alias must start with slash /",
+        "Translated": "别名必须以斜杠/开头",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Splatoon language: ",
+        "Translated": "Splatoon语言：",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Localization logging",
+        "Translated": "本地化日志记录",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Save entries: ??",
+        "Translated": "保存条目( V)",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Rescan language files",
+        "Translated": "重新扫描语言文件",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Use hexadecimal numbers",
+        "Translated": "使用十六进制数字",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable tether on Splatoon find command",
+        "Translated": "在Splatoon查找命令上启用系绳",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Force show Splatoon's UI when game UI is hidden",
+        "Translated": "隐藏游戏UI时强制显示Splatoon的UI",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disable script cache",
+        "Translated": "禁用脚本缓存",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable info bar priority indicator",
+        "Translated": "启用信息栏优先级指示器",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Priority assignment auto-loading notification",
+        "Translated": "优先分配自动加载通知",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Preferred Role Assignments",
+        "Translated": "首选角色分配",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader"
+      },
+      {
+        "Original": "Edit saved priority lists",
+        "Translated": "编辑已保存的优先级列表",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader"
+      },
+      {
+        "Original": "Select role assignments that you would like to assigned to yourself via autofill function",
+        "Translated": "选择您希望通过自动填充功能分配给自己的角色分配",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": " assignments###edit",
+        "Translated": "作业",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader"
+      },
+      {
+        "Original": "Open backup directory",
+        "Translated": "备份目录",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Contact developer:",
+        "Translated": "如果您遇到此问题，请联系主题开发人员解决此问题",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "[Splatoon] Server invite link: ",
+        "Translated": "[Splatoon]服务器邀请链接：",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Disable stream notice (effective only after restart)",
+        "Translated": "禁用流通知（仅在重新启动后生效）",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Add New",
+        "Translated": "添加新项目",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Apply settings",
+        "Translated": "保存",
+        "Context": "DisplayGeneralSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Splatoon supports few renderers. On this page, you can select which ones you want to use, configure them and set one of them as default.\r\nRender engine can be set globally and per-element. When set render engine is not available, either due to load error or because user has disabled it, other available render engine will be used automatically.\r\nSettings present in this section affect all available renderes.",
+        "Translated": "Splatoon支持很少的渲染器。 在此页面上，您可以选择要使用的内容，对其进行配置并将其中一个设置为默认值。\n渲染引擎可以全局设置并按元素设置。 当设置的渲染引擎不可用时，由于加载错误或用户已禁用它，将自动使用其他可用的渲染引擎。\n本节中的设置会影响所有可用的渲染。",
+        "Context": "DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Drawing distance:",
+        "Translated": "绘图距离：",
+        "Context": "DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiUtils.SizedText"
+      },
+      {
+        "Original": "Only try to draw objects that are not further away from you than this value",
+        "Translated": "仅尝试绘制离您不远于此值的对象",
+        "Context": "DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Edit Draw Zones",
+        "Translated": "编辑绘制区域",
+        "Context": "DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Configure screen zones where Splatoon will draw its elements",
+        "Translated": "配置屏幕区域， Splatoon将在其中绘制其元素",
+        "Context": "DisplayRenderers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
