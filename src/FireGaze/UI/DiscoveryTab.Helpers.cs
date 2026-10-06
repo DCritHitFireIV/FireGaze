@@ -193,14 +193,40 @@ internal sealed partial class DiscoveryTab
         return result;
     }
 
-    /// <summary>把一条库直接加进本机列表（先自动备份），成功后上报推荐数。</summary>
+    /// <summary>把一条库直接加进本机列表（先自动备份），成功后上报推荐数、并就地翻新行的库状态。</summary>
     private void AddRepoFromRow(string url)
     {
         var added = plugin.AddThirdPartyRepository(url, out var message);
         SetStatus(added ? "已把这条库链加进你的插件列表" : message, !added);
         if (added)
         {
+            MarkRepoState(url, enabled: true);
             ReportRepoAdds([url]);
+        }
+
+        rebuildPending = true;
+    }
+
+    /// <summary>
+    ///     加库/启用成功后就地翻新该库链所有行的「已知/启用」状态：
+    ///     不等一轮卫月仓库重载，按钮立即变成 `[已在库]`（二轮测评：短窗口内不反馈）。
+    /// </summary>
+    private void MarkRepoState(string url, bool enabled)
+    {
+        if (index is not { Available: true })
+        {
+            return;
+        }
+
+        var normalized = InstalledPluginsIndex.NormalizeRepositoryURL(url);
+        foreach (var entry in index.All)
+        {
+            if (entry.RepositoryURL is { Length: > 0 } repo
+                && string.Equals(InstalledPluginsIndex.NormalizeRepositoryURL(repo), normalized, StringComparison.Ordinal))
+            {
+                entry.RepositoryKnown = true;
+                entry.RepositoryEnabled = enabled;
+            }
         }
 
         rebuildPending = true;
@@ -233,6 +259,7 @@ internal sealed partial class DiscoveryTab
         plugin.Repos.Save(out _);
         plugin.Repos.TriggerReload(out _);
         plugin.TrackFirstSeen();
+        MarkRepoState(url, enabled: true);
         SetStatus("已启用这条库；卫月会重新抓取它的插件", isError: false);
         rebuildPending = true;
     }

@@ -257,7 +257,7 @@ internal sealed partial class DiscoveryTab
         }
 
         DrawKeyValue("推荐", $"{recommends} 次（从云端加进自己库）");
-        DrawKeyValue("点赞", $"本周 {weekly} · 总共 {total}");
+        DrawKeyValue("点赞", discoveryStats is null ? "统计暂不可用（点赞会先记在本机）" : $"本周 {weekly} · 总共 {total}");
 
         if (entry.IsOfficial)
         {
@@ -330,6 +330,7 @@ internal sealed partial class DiscoveryTab
         var liked = discoveryState.LikedThisWeek(entry.InternalName, localWeek)
                     || (serverWeek.Length > 0 && discoveryState.LikedThisWeek(entry.InternalName, serverWeek));
         var unsynced = discoveryState.HasPending(entry.InternalName);
+        var hasStats = discoveryStats is not null;
         var weekly = discoveryStats?.WeeklyOf(entry.InternalName) ?? 0;
         var total = discoveryStats?.TotalOf(entry.InternalName) ?? 0;
 
@@ -340,7 +341,9 @@ internal sealed partial class DiscoveryTab
             ImGui.BeginDisabled();
         }
 
-        var label = $"♥ {ShortCount(weekly)}/{ShortCount(total)}{(unsynced ? " *" : string.Empty)}###like-{suffix}";
+        // 统计拉不到时不要谎报 0——显示「—」，否则玩家以为真的没人赞
+        var counts = hasStats ? $"{ShortCount(weekly)}/{ShortCount(total)}" : "—/—";
+        var label = $"♥ {counts}{(unsynced ? " *" : string.Empty)}###like-{suffix}";
         if (ImGui.Button(label))
         {
             MarkLike(entry);
@@ -356,7 +359,7 @@ internal sealed partial class DiscoveryTab
         {
             var lines = new List<string>
             {
-                $"本周 {weekly} 赞 · 总共 {total} 赞",
+                hasStats ? $"本周 {weekly} 赞 · 总共 {total} 赞" : "统计暂不可用（点赞会先记在本机，恢复后显示计数）",
                 liked ? "这周你已经点过赞了（下周可以再点）" : "点一下为这个插件点赞（一周一次，匿名上报）",
             };
             if (unsynced)

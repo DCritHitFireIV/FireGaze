@@ -88,7 +88,7 @@ internal sealed partial class DiscoveryTab
 
     /// <summary>投稿区状态。</summary>
     private string submitInput = string.Empty;
-    private bool submitAddToLibrary = true;
+    private bool submitAddToLibrary;   // 默认不自动加（用户 2026-10-06 定：默认不自动加，给勾选项）
     private string? submitMessage;
     private bool submitIsError;
     private bool submitBusy;

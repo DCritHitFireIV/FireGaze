@@ -21,10 +21,11 @@ internal sealed class TranslationIndexEntry
 
     /// <summary>
     ///     这条库链在不在本机的插件库里（false = 还没加过）。本机配置读不到时也按 false 处理。
+    ///     加库/启用成功后由界面就地翻新，不等一轮仓库重载。
     /// </summary>
-    public bool RepositoryKnown { get; init; }
+    public bool RepositoryKnown { get; set; }
 
-    public bool RepositoryEnabled { get; init; }
+    public bool RepositoryEnabled { get; set; }
 
     public string OriginalName { get; init; } = string.Empty;
 
@@ -282,7 +283,7 @@ internal sealed class TranslationIndex
             index.all.Sort((a, b) => string.Compare(a.DisplayName, b.DisplayName, StringComparison.OrdinalIgnoreCase));
             foreach (var entry in index.all)
             {
-                entry.SearchBlob = BuildBlob(entry);
+                RefreshSearchBlob(entry);
             }
 
             Plugin.Log.Debug(
@@ -353,11 +354,18 @@ internal sealed class TranslationIndex
         // 这样离线（fgtest）与 Build 合并后的结果一致。
         foreach (var entry in index.all)
         {
-            entry.SearchBlob = BuildBlob(entry);
+            RefreshSearchBlob(entry);
         }
 
         return index;
     }
+
+    /// <summary>
+    ///     重算一条的搜索串：词表/译文变了之后必须重算，否则搜新译文搜不到
+    ///     （2026-10-06 二轮测评发现：RefreshEntryStates 只刷新状态，不刷新 SearchBlob）。
+    /// </summary>
+    internal static void RefreshSearchBlob(TranslationIndexEntry entry)
+        => entry.SearchBlob = BuildBlob(entry);
 
     private static TranslationIndexEntry? FromTableEntry(
         string internalName,

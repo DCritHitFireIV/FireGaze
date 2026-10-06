@@ -204,6 +204,7 @@ internal sealed partial class DiscoveryTab
         {
             plugin.Table.TryGet(entry.InternalName, out var current);
             entry.RefreshFrom(current);
+            TranslationIndex.RefreshSearchBlob(entry);
         }
     }
 }
