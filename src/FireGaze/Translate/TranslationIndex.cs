@@ -19,6 +19,11 @@ internal sealed class TranslationIndexEntry
     /// </summary>
     public string? RepositoryURL { get; init; }
 
+    /// <summary>
+    ///     这条库链在不在本机的插件库里（false = 还没加过）。本机配置读不到时也按 false 处理。
+    /// </summary>
+    public bool RepositoryKnown { get; init; }
+
     public bool RepositoryEnabled { get; init; }
 
     public string OriginalName { get; init; } = string.Empty;
@@ -204,8 +209,8 @@ internal sealed class TranslationIndexEntry
 }
 
 /// <summary>
-///     「参与翻译」的搜索索引：遍历卫月当前认得的所有插件库（含已停用的），
-///     取每个插件的原文，再与词表对照 —— 全程读内存，不联网。
+///     「参与翻译」的搜索索引：以云端词表（整座语料）为准，本机卫月的清单用来更新原文、补新插件、标库链状态
+///     —— 全程读内存，不联网。
 /// </summary>
 internal sealed class TranslationIndex
 {
@@ -216,13 +221,13 @@ internal sealed class TranslationIndex
     }
 
     /// <summary>
-    ///     数据是否可信（读得到卫月的插件库列表）。
+    ///     数据是否可信（至少从词表或卫月拿到了一份插件清单）。
     /// </summary>
-    public bool Available { get; private init; }
+    public bool Available { get; private set; }
 
-    public string? FailureReason { get; private init; }
+    public string? FailureReason { get; private set; }
 
-    public DateTime CapturedLocal { get; private init; }
+    public DateTime CapturedLocal { get; private set; }
 
     public IReadOnlyList<TranslationIndexEntry> All => all;
 
@@ -238,92 +243,41 @@ internal sealed class TranslationIndex
     public int ReviewCount => all.Count(x => x.HasReview);
 
     /// <summary>
-    ///     建一次索引（读卫月内存，不联网；可以放后台线程）。
+    ///     建一次索引（云端词表 + 卫月内存，不联网；可以放后台线程）。
+    ///
+    ///     列表以**云端词表**为准：词表里每个插件都进列表（本机没加的库也能看到、能补译文），
+    ///     本机卫月的清单只用来取「更新的原文 + 图标」并补词表还没收录的新插件。
+    ///     2026-10-06 用户指出：参与翻译要覆盖整个云端语料，不能只看本机已加载的仓库。
     /// </summary>
-    public static TranslationIndex Build(Dictionary<string, TransEntry> table)
+    public static TranslationIndex Build(
+        Dictionary<string, TransEntry> table,
+        IReadOnlyList<RepoEntry>? localRepositories)
     {
         try
         {
-            var manager = ResolvePluginManager();
-            if (manager is null)
+            var repoState = BuildRepoState(localRepositories);
+
+            var index = FromTable(table, repoState);
+            var cloudCount = index.all.Count;
+
+            var localAvailable = AddLocalManifests(index, table, out var localOnly, out var skipped);
+
+            if (!localAvailable && cloudCount == 0)
             {
-                return Unavailable("拿不到卫月的插件管理器");
+                return Unavailable("拿不到卫月的插件管理器，云端词表里也没有可列出的插件");
             }
 
-            var managerType = manager.GetType();
-            const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-
-            if (managerType.GetProperty("Repos", flags)?.GetValue(manager) is not IEnumerable repos)
-            {
-                return Unavailable("读不到卫月的插件库列表");
-            }
-
-            var map = new Dictionary<string, TranslationIndexEntry>(StringComparer.Ordinal);
-            var skippedOrUnusable = 0;
-
-            foreach (var repo in repos)
-            {
-                if (repo is null)
-                {
-                    continue;
-                }
-
-                var repoType = repo.GetType();
-                var repoURL = repoType.GetProperty("PluginMasterUrl", flags)?.GetValue(repo) as string;
-                var repoEnabled = repoType.GetProperty("IsEnabled", flags)?.GetValue(repo) as bool? ?? false;
-                var isThirdParty = repoType.GetProperty("IsThirdParty", flags)?.GetValue(repo) as bool? ?? false;
-
-                // 官方主库（Dip17）不进参与翻译列表：那不是本词表的范围，
-                // 而且官库插件的简介由官方发布方维护，玩家改这里的意义不大。
-                if (!isThirdParty)
-                {
-                    continue;
-                }
-
-                if (repoType.GetProperty("PluginMaster", flags)?.GetValue(repo) is not IEnumerable manifests)
-                {
-                    continue;
-                }
-
-                foreach (var manifest in manifests)
-                {
-                    if (manifest is null)
-                    {
-                        continue;
-                    }
-
-                    var entry = Create(manifest, repoURL, repoEnabled, isThirdParty, table);
-                    if (entry is null)
-                    {
-                        skippedOrUnusable++;
-                        continue;
-                    }
-
-                    // 同一个内部名可能同时出现在主库与第三方库：留信息更全的那条
-                    if (map.TryGetValue(entry.InternalName, out var existing) &&
-                        !(existing.RepositoryURL is null && entry.RepositoryURL is not null))
-                    {
-                        continue;
-                    }
-
-                    map[entry.InternalName] = entry;
-                }
-            }
-
-            var index = new TranslationIndex
-            {
-                Available = true,
-                CapturedLocal = DateTime.Now,
-            };
-
-            index.all.AddRange(map.Values.OrderBy(x => x.DisplayName, StringComparer.OrdinalIgnoreCase));
+            index.Available = true;
+            index.CapturedLocal = DateTime.Now;
+            index.all.Sort((a, b) => string.Compare(a.DisplayName, b.DisplayName, StringComparison.OrdinalIgnoreCase));
             foreach (var entry in index.all)
             {
                 entry.SearchBlob = BuildBlob(entry);
             }
 
             Plugin.Log.Debug(
-                $"[FireGaze] 参与翻译索引：{index.all.Count} 个插件（缺译 {index.MissingCount} · 玩家译 {index.UserCount}；跳过测试版/无内容 {skippedOrUnusable} 个）");
+                $"[FireGaze] 参与翻译索引：{index.all.Count} 个插件（云端 {cloudCount} · 本机补充 {localOnly}；"
+                + $"缺译 {index.MissingCount} · 玩家译 {index.UserCount}；跳过测试版/无内容 {skipped} 个）");
             return index;
         }
         catch (Exception e)
@@ -333,11 +287,195 @@ internal sealed class TranslationIndex
         }
     }
 
+    /// <summary>
+    ///     把本机已配置的库链折成「归一化地址 → 是否启用」（参与翻译靠它标 启用/停用/未加入）。
+    ///     传 null = 读不到本机配置（界面就只画地址、不提供启用/加库判断）。
+    /// </summary>
+    internal static Dictionary<string, bool>? BuildRepoState(IReadOnlyList<RepoEntry>? localRepositories)
+    {
+        if (localRepositories is null)
+        {
+            return null;
+        }
+
+        var map = new Dictionary<string, bool>(StringComparer.Ordinal);
+        foreach (var repo in localRepositories)
+        {
+            if (!string.IsNullOrWhiteSpace(repo.URL))
+            {
+                map[InstalledPluginsIndex.NormalizeRepositoryURL(repo.URL)] = repo.IsEnabled;
+            }
+        }
+
+        return map;
+    }
+
+    /// <summary>
+    ///     只用云端词表建索引（不碰卫月，fgtest 可以离线跑）。
+    ///     <paramref name="localRepos" /> = 归一化后的库链 → 是否启用；null = 本机配置不可用。
+    /// </summary>
+    internal static TranslationIndex FromTable(
+        Dictionary<string, TransEntry> table,
+        IReadOnlyDictionary<string, bool>? localRepos)
+    {
+        var index = new TranslationIndex();
+        foreach (var (internalName, transEntry) in table)
+        {
+            if (string.IsNullOrWhiteSpace(internalName) || transEntry is null)
+            {
+                continue;
+            }
+
+            // 测试版专用插件不进列表（用户 2026-09-22 定；云端词表用 Testing 标记）
+            if (transEntry.Testing == true)
+            {
+                continue;
+            }
+
+            var entry = FromTableEntry(internalName, transEntry, localRepos);
+            if (entry is not null)
+            {
+                index.all.Add(entry);
+            }
+        }
+
+        return index;
+    }
+
+    private static TranslationIndexEntry? FromTableEntry(
+        string internalName,
+        TransEntry transEntry,
+        IReadOnlyDictionary<string, bool>? localRepos)
+    {
+        var name = transEntry.Name?.Original ?? string.Empty;
+        var repoURL = (transEntry.Repo ?? string.Empty).Trim();
+
+        var known = false;
+        var enabled = false;
+        if (repoURL.Length > 0 && localRepos is not null)
+        {
+            known = localRepos.TryGetValue(InstalledPluginsIndex.NormalizeRepositoryURL(repoURL), out var value);
+            enabled = known && value;
+        }
+
+        var result = new TranslationIndexEntry
+        {
+            InternalName = internalName,
+            DisplayName = string.IsNullOrWhiteSpace(name) ? internalName : name,
+            RepositoryURL = repoURL.Length == 0 ? null : repoURL,
+            RepositoryKnown = known,
+            RepositoryEnabled = enabled,
+            OriginalName = name,
+            OriginalPunchline = transEntry.Punchline?.Original ?? string.Empty,
+            OriginalDescription = transEntry.Description?.Original ?? string.Empty,
+            IsThirdParty = true,
+            IsOfficial = false,
+        };
+
+        // 三个字段的现状由 Evaluate() 统一判定（与保存后的就地刷新共用一套逻辑）
+        result.RefreshFrom(transEntry);
+
+        // 三个字段都没有原文、词表里也没有玩家译：没什么可翻的，直接不进列表
+        if (result.TotalFields + result.TemplateFields == 0 && !result.HasUserTranslation)
+        {
+            return null;
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    ///     用本机卫月的清单补齐/更新索引：同一内部名用本机的原文（更新鲜）整条替换云端那条；
+    ///     词表还没有的新插件也补进来。返回 false = 读不到卫月（不影响云端列表可用）。
+    /// </summary>
+    private static bool AddLocalManifests(
+        TranslationIndex index,
+        Dictionary<string, TransEntry> table,
+        out int localOnly,
+        out int skipped)
+    {
+        localOnly = 0;
+        skipped = 0;
+
+        var manager = ResolvePluginManager();
+        if (manager is null)
+        {
+            return false;
+        }
+
+        var managerType = manager.GetType();
+        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+
+        if (managerType.GetProperty("Repos", flags)?.GetValue(manager) is not IEnumerable repos)
+        {
+            return false;
+        }
+
+        var byName = new Dictionary<string, int>(StringComparer.Ordinal);
+        for (var i = 0; i < index.all.Count; i++)
+        {
+            byName[index.all[i].InternalName] = i;
+        }
+
+        foreach (var repo in repos)
+        {
+            if (repo is null)
+            {
+                continue;
+            }
+
+            var repoType = repo.GetType();
+            var repoURL = repoType.GetProperty("PluginMasterUrl", flags)?.GetValue(repo) as string;
+            var repoEnabled = repoType.GetProperty("IsEnabled", flags)?.GetValue(repo) as bool? ?? false;
+            var isThirdParty = repoType.GetProperty("IsThirdParty", flags)?.GetValue(repo) as bool? ?? false;
+
+            // 官方主库（Dip17）不进参与翻译列表：那不是本词表的范围，
+            // 而且官库插件的简介由官方发布方维护，玩家改这里的意义不大。
+            if (!isThirdParty)
+            {
+                continue;
+            }
+
+            if (repoType.GetProperty("PluginMaster", flags)?.GetValue(repo) is not IEnumerable manifests)
+            {
+                continue;
+            }
+
+            foreach (var manifest in manifests)
+            {
+                if (manifest is null)
+                {
+                    continue;
+                }
+
+                var entry = Create(manifest, repoURL, repoEnabled, table);
+                if (entry is null)
+                {
+                    skipped++;
+                    continue;
+                }
+
+                if (byName.TryGetValue(entry.InternalName, out var at))
+                {
+                    // 本机原文更新鲜、还带着图标引用：整条替换云端那条
+                    index.all[at] = entry;
+                }
+                else
+                {
+                    byName[entry.InternalName] = index.all.Count;
+                    index.all.Add(entry);
+                    localOnly++;
+                }
+            }
+        }
+
+        return true;
+    }
+
     private static TranslationIndexEntry? Create(
         object manifest,
         string? repoURL,
         bool repoEnabled,
-        bool isThirdParty,
         Dictionary<string, TransEntry> table)
     {
         var type = manifest.GetType();
@@ -369,15 +507,16 @@ internal sealed class TranslationIndex
             InternalName = internalName,
             DisplayName = string.IsNullOrWhiteSpace(name) ? internalName : name,
             RepositoryURL = string.IsNullOrWhiteSpace(repoURL) ? null : repoURL,
+            RepositoryKnown = true,
             RepositoryEnabled = repoEnabled,
             OriginalName = name,
             OriginalPunchline = punchline,
             OriginalDescription = description,
             DeclaresIcon = !string.IsNullOrWhiteSpace(iconURL) || !string.IsNullOrWhiteSpace(dip17),
             IconURL = iconURL,
-            IsThirdParty = isThirdParty,
+            IsThirdParty = true,
             Manifest = manifest,
-            IsOfficial = !isThirdParty,
+            IsOfficial = false,
         };
 
         // 三个字段的现状由 Evaluate() 统一判定（与保存后的就地刷新共用一套逻辑）

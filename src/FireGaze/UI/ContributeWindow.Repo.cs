@@ -21,28 +21,21 @@ internal sealed partial class ContributeWindow : Window
             return result;
         }
 
-        var existing = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var repo in plugin.Repos.ReadAll(out _))
-        {
-            if (!string.IsNullOrWhiteSpace(repo.URL))
-            {
-                existing.Add(repo.URL);
-            }
-        }
-
+        // 本机库里没有的库链（云端词表里标着、但还没加进来的）；按归一化地址去重
+        var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var entry in index.All)
         {
-            if (!selected.Contains(entry.InternalName) || string.IsNullOrWhiteSpace(entry.RepositoryURL))
+            if (!selected.Contains(entry.InternalName) ||
+                string.IsNullOrWhiteSpace(entry.RepositoryURL) ||
+                entry.RepositoryKnown)
             {
                 continue;
             }
 
-            if (existing.Contains(entry.RepositoryURL) || result.Contains(entry.RepositoryURL))
+            if (seen.Add(InstalledPluginsIndex.NormalizeRepositoryURL(entry.RepositoryURL)))
             {
-                continue;
+                result.Add(entry.RepositoryURL);
             }
-
-            result.Add(entry.RepositoryURL);
         }
 
         return result;

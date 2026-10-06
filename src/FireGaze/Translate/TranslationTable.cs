@@ -56,6 +56,22 @@ public sealed class TransEntry
 
     [JsonPropertyName("Description")]
     public TransPair? Description { get; set; }
+
+    /// <summary>
+    ///     插件所在的仓库链（云端语料爬虫写进来的）。老词表没有这个字段（null）。
+    ///     参与翻译靠它把插件归到库里、并在「加库」时找到目标地址。
+    /// </summary>
+    [JsonPropertyName("Repo")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? Repo { get; set; }
+
+    /// <summary>
+    ///     测试版专用插件（卫月标记 IsTestingExclusive）：不进参与翻译列表、不计缺译。
+    ///     云端语料里为 true；老词表没有这个字段（null = 不是）。
+    /// </summary>
+    [JsonPropertyName("Testing")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Testing { get; set; }
 }
 
 /// <summary>

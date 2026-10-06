@@ -85,7 +85,11 @@ internal sealed partial class ContributeWindow : Window
 
         buildStartedWhileReposBusy = !reposReady;
         var table = plugin.SnapshotTable();
-        buildTask = Task.Run(() => TranslationIndex.Build(table));
+
+        // 本机已配置的库链（含停用）：用来给云端词表里的插件标「已启用 / 已停用 / 未加入」，
+        // 「加库」也靠它知道哪些库还没加过。读不到就传 null（界面不提供加库判断）。
+        var localRepositories = plugin.Repos.ReadAll(out var repoError);
+        buildTask = Task.Run(() => TranslationIndex.Build(table, repoError is null ? localRepositories : null));
     }
 
     private void RebuildFiltered()
@@ -112,8 +116,9 @@ internal sealed partial class ContributeWindow : Window
         {
             if (!plugin.Config.ContributeShowDisabled)
             {
-                // 只看已启用的库（官方主库没有 RepositoryURL，永远算启用）
-                if (entry.RepositoryURL is not null && !entry.RepositoryEnabled)
+                // 只看已启用的库；「还没加进来」的库属于云端语料，一直都在
+                // （不然发现不了、也没法加）
+                if (entry.RepositoryKnown && !entry.RepositoryEnabled)
                 {
                     continue;
                 }
@@ -165,9 +170,9 @@ internal sealed partial class ContributeWindow : Window
                 group = new RepoGroup
                 {
                     URL = key,
-                    Short = key.Length == 0 ? "官方主库" : RepoShort(key),
+                    Short = key.Length == 0 ? "来源未知" : RepoShort(key),
+                    Known = plugin.RepositoryKnown,
                     Enabled = plugin.RepositoryEnabled,
-                    IsOfficial = plugin.IsOfficial,
                 };
                 repoGroups.Add(group);
             }

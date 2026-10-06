@@ -181,9 +181,12 @@ internal sealed partial class ContributeWindow : Window
 
         public required string Short { get; init; }
 
-        public bool Enabled { get; init; }
+        /// <summary>
+        ///     这条库在不在本机的插件列表里（false = 还没加过）。
+        /// </summary>
+        public bool Known { get; init; }
 
-        public bool IsOfficial { get; init; }
+        public bool Enabled { get; init; }
 
         public List<TranslationIndexEntry> Plugins { get; } = [];
 

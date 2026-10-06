@@ -55,7 +55,8 @@ internal sealed partial class ContributeWindow : Window
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("勾上后连已停用仓库里的插件也列出来；这类插件当前不会出现在安装器里。");
+            ImGui.SetTooltip("勾上后连已停用仓库里的插件也列出来；这类插件当前不会出现在安装器里。\n"
+                             + "还没加进你库里的仓库不受这个开关影响 —— 那是整座云端语料，都能参与翻译。");
         }
     }
 
@@ -204,7 +205,7 @@ internal sealed partial class ContributeWindow : Window
         ImGui.TableHeader("状态");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("这条库是启用还是停用；官方主库单独标出。");
+            ImGui.SetTooltip("这条库已经在你的列表里（启用 / 停用），还是还没加进来；\n「来源未知」= 词表里没记这条插件的库链（旧词表）。");
         }
 
         if (showIconColumn)
@@ -231,7 +232,7 @@ internal sealed partial class ContributeWindow : Window
         ImGui.TableHeader("说明");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("已启用 / 已停用 / 官方主库；停用的库可以就地点「启用」。");
+            ImGui.SetTooltip("已启用 / 已停用 / 未加入 / 来源未知；停用的可以就地点「启用」，没加的可以「加库」。");
         }
 
         ImGui.TableNextColumn();
@@ -246,7 +247,7 @@ internal sealed partial class ContributeWindow : Window
 
     private void DrawRepoGroupRow(RepoGroup group, bool showIconColumn)
     {
-        var id = group.URL.Length == 0 ? "official" : group.URL;
+        var id = group.URL.Length == 0 ? "unknown" : group.URL;
         var expanded = expandedRepos.Contains(id);
 
         ImGui.TableNextRow();
@@ -274,9 +275,13 @@ internal sealed partial class ContributeWindow : Window
         }
 
         ImGui.TableNextColumn();
-        if (group.IsOfficial)
+        if (group.URL.Length == 0)
         {
-            UiHelpers.ColoredText(UiHelpers.Info, "官方库");
+            UiHelpers.ColoredText(UiHelpers.Muted, "来源未知");
+        }
+        else if (!group.Known)
+        {
+            UiHelpers.ColoredText(UiHelpers.Muted, "未加入");
         }
         else if (group.Enabled)
         {
@@ -309,7 +314,7 @@ internal sealed partial class ContributeWindow : Window
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(
-                (group.URL.Length == 0 ? "卫月官方主库（Dip17）" : group.URL)
+                (group.URL.Length == 0 ? "词表里没有记它的来源库（旧词表）" : group.URL)
                 + "\n点一下展开它提供的插件；右键可复制 / 加库");
         }
 
@@ -328,7 +333,7 @@ internal sealed partial class ContributeWindow : Window
                     OpenInBrowser(group.URL);
                 }
 
-                if (ImGui.MenuItem("加到我的库（待确认）"))
+                if (!group.Known && ImGui.MenuItem("加到我的库（待确认）"))
                 {
                     repoInput = group.URL;
                     SetStatus("地址已填到操作条的输入框，点「添加到我的库」确认", isError: false);
@@ -358,42 +363,48 @@ internal sealed partial class ContributeWindow : Window
 
         ImGui.TableNextColumn();
         ImGui.TextDisabled(
-            group.IsOfficial
-                ? "卫月官方主库"
-                : group.Enabled
-                    ? "已经在你的库里"
-                    : "这条库已停用");
+            group.URL.Length == 0
+                ? "词表里没有记它的来源库"
+                : !group.Known
+                    ? "还没加进你的库"
+                    : group.Enabled
+                        ? "已经在你的库里"
+                        : "这条库已停用");
 
         // 启用 / 加库按钮独占最后一列：列宽拖窄也不会把按钮挤到下一行、把行高顶起来
         ImGui.TableNextColumn();
-        if (!group.IsOfficial && !group.Enabled && !string.IsNullOrWhiteSpace(group.URL))
+        if (group.URL.Length > 0 && !group.Enabled)
         {
-            if (ImGui.SmallButton("启用###en-" + id))
+            if (group.Known)
             {
-                plugin.Repos.SetEnabled([group.URL], true, out _);
-                plugin.Repos.Save(out _);
-                plugin.Repos.TriggerReload(out _);
-                plugin.TrackFirstSeen();
-                rebuildPending = true;
-                rebuildRepoPending = true;
-                SetStatus("已启用这条库；卫月会重新抓取它的插件", isError: false);
-            }
+                if (ImGui.SmallButton("启用###en-" + id))
+                {
+                    plugin.Repos.SetEnabled([group.URL], true, out _);
+                    plugin.Repos.Save(out _);
+                    plugin.Repos.TriggerReload(out _);
+                    plugin.TrackFirstSeen();
+                    rebuildPending = true;
+                    rebuildRepoPending = true;
+                    SetStatus("已启用这条库；卫月会重新抓取它的插件", isError: false);
+                }
 
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("保留链接、把它重新启用；启用后卫月会去抓它的插件");
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip("保留链接、把它重新启用；启用后卫月会去抓它的插件");
+                }
             }
-
-            ImGui.SameLine();
-            if (ImGui.SmallButton("加库###add-" + id))
+            else
             {
-                repoInput = group.URL;
-                SetStatus("地址已填到操作条的输入框，点「添加到我的库」确认", isError: false);
-            }
+                if (ImGui.SmallButton("加库###add-" + id))
+                {
+                    repoInput = group.URL;
+                    SetStatus("地址已填到操作条的输入框，点「添加到我的库」确认", isError: false);
+                }
 
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("把这条库加进你的第三方插件列表（会先自动备份）");
+                if (ImGui.IsItemHovered())
+                {
+                    ImGui.SetTooltip("把这条库加进你的第三方插件列表（会先自动备份）");
+                }
             }
         }
 
