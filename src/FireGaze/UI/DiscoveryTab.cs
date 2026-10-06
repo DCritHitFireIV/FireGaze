@@ -72,7 +72,6 @@ internal sealed partial class DiscoveryTab
     private DiscoverySortMode sortMode = DiscoverySortMode.WeeklyLikes;
     private readonly DiscoverySortContext sortContext = new();
     private readonly Dictionary<string, int> shuffleOrder = new(StringComparer.Ordinal);
-    private int shuffleSeed;
     private DateTime lastPendingRetry = DateTime.MinValue;
 
     /// <summary>后台点赞成功后的云端真值（UI 线程取用，避免后台改字典）。</summary>
@@ -147,8 +146,8 @@ internal sealed partial class DiscoveryTab
     private void DrawCore()
     {
         // ---------------- 顶部说明 ----------------
-        ImGui.TextWrapped("整座云端插件库（含官方主库）：搜索、排序、点赞、把没加过的库加进来。");
-        ImGui.TextDisabled("列表和本机装了哪些插件无关；点一行展开详情，♥ 一周一个插件一次。");
+        ImGui.TextWrapped("整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。");
+        ImGui.TextDisabled("和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。");
 
         ImGui.Separator();
 
@@ -197,9 +196,9 @@ internal sealed partial class DiscoveryTab
             return;
         }
 
-        // ---------------- 搜索 + 排序 + 筛选 ----------------
+        // ---------------- 搜索 + 排序（第一行） ----------------
         ImGui.SetNextItemWidth(300);
-        if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、简介、详情…", ref search, 256))
+        if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、一行简介、详情…", ref search, 256))
         {
             rebuildPending = true;
         }
@@ -247,7 +246,7 @@ internal sealed partial class DiscoveryTab
             }
         }
 
-        ImGui.SameLine();
+        // ---------------- 筛选 + 计数（第二行，避免挤成一团） ----------------
         if (ImGui.Checkbox("隐藏主库###DiscoveryHideOfficial", ref hideOfficial))
         {
             rebuildPending = true;
@@ -270,7 +269,7 @@ internal sealed partial class DiscoveryTab
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("勾上后连已停用仓库里的插件也列出来；这类插件当前不会出现在安装器里。\n"
-                             + "还没加进你库里的仓库不受这个开关影响 —— 那是整座云端语料。");
+                             + "还没加进你库里的仓库不受这个开关影响 —— 那是整座云库。");
         }
 
         ImGui.SameLine();
@@ -283,13 +282,32 @@ internal sealed partial class DiscoveryTab
         if (indexMayBePartial)
         {
             ImGui.SameLine();
-            UiHelpers.ColoredText(UiHelpers.Muted, "· 卫月刷新插件库时抓的快照，读完会自动重读");
+            UiHelpers.ColoredText(UiHelpers.Muted, "· 正在等卫月读完插件库");
         }
 
         if (discoveryStats is null && statsFetchFailed)
         {
             ImGui.SameLine();
-            UiHelpers.ColoredText(UiHelpers.Warn, "· 点赞/推荐统计暂时拉不到，先按插件名排");
+            UiHelpers.ColoredText(UiHelpers.Warn, "· 统计暂不可用");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("点赞/推荐统计暂时拉不到（中继不可用），先按插件名排；\n点过的赞会先记在本机，稍后自动同步。");
+            }
+        }
+
+        var lastAdd = LastAddRecord();
+        if (lastAdd is not null)
+        {
+            ImGui.SameLine();
+            if (ImGui.SmallButton($"撤回添加（{lastAdd.Count}）###DiscoveryUndoAdd"))
+            {
+                UndoLastAdd();
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip($"把刚加进来的 {lastAdd.Count} 条库从列表里移除（{lastAdd.TimeUTC.ToLocalTime():HH:mm} 那次添加）");
+            }
         }
 
         // ---------------- 投稿插件库（进云端语料） ----------------

@@ -151,7 +151,9 @@ internal sealed partial class DiscoveryTab
             {
                 if (!shuffleOrder.ContainsKey(entry.InternalName))
                 {
-                    shuffleOrder[entry.InternalName] = shuffleSeed++;
+                    // 键值必须是真随机——按当前列表顺序发号的话，「换一批」/从别的档切过来时
+                    // 顺序原样不变（2026-10-06 用户实测：随机跟没按一样）。
+                    shuffleOrder[entry.InternalName] = Random.Shared.Next();
                 }
             }
         }

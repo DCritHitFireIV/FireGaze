@@ -75,7 +75,7 @@ internal sealed class MainWindow : Window
         ImGui.TextUnformatted("FireGaze");
         ImGui.PopStyleColor();
         ImGui.SameLine();
-        ImGui.TextDisabled("卫月插件库工具箱 · 汉化 / 体检 / 拦住自动刷新");
+        ImGui.TextDisabled("卫月插件库工具箱 · 汉化 / 体检 / 发现");
 
         ImGui.Separator();
 

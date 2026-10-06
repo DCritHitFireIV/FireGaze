@@ -12,12 +12,20 @@ internal sealed partial class DiscoveryTab
     /// </summary>
     private void DrawSubmitSection()
     {
-        if (!ImGui.CollapsingHeader("投稿插件库###DiscoverySubmit", ImGuiTreeNodeFlags.DefaultOpen))
+        // 默认收起（把内容让给列表）；有投稿消息 / 进行中 / 待收录时自动展开
+        var hasPendingSubmit = false;
+        if (discoveryState.SubmittedRepos.Count > 0)
+        {
+            hasPendingSubmit = SubmittedButNotInCloud().Count > 0;
+        }
+
+        var autoOpen = submitMessage is not null || submitBusy || hasPendingSubmit;
+        if (!ImGui.CollapsingHeader("投稿插件库###DiscoverySubmit", autoOpen ? ImGuiTreeNodeFlags.DefaultOpen : ImGuiTreeNodeFlags.None))
         {
             return;
         }
 
-        ImGui.TextWrapped("知道别的插件库？把地址发到云端语料 —— 收录后所有人能在发现页搜到，并跟着词表增量翻译。");
+        ImGui.TextWrapped("知道别的插件库？把地址发到云库 —— 收录后所有人能在发现页搜到，并跟着词表增量翻译。");
         ImGui.TextDisabled("需要公开可读的仓库文件（pluginmaster.json / repo.json）；官方主库不用投。");
 
         ImGui.SetNextItemWidth(430);
@@ -59,7 +67,7 @@ internal sealed partial class DiscoveryTab
         var pending = SubmittedButNotInCloud();
         if (pending.Count > 0)
         {
-            ImGui.TextDisabled($"已投稿、等云端收录：{pending.Count} 条");
+            ImGui.TextDisabled($"已投稿、等收录：{pending.Count} 条");
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip(string.Join("\n", pending.Take(8)));

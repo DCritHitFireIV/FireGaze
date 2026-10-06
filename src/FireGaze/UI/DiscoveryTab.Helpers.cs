@@ -197,12 +197,32 @@ internal sealed partial class DiscoveryTab
     private void AddRepoFromRow(string url)
     {
         var added = plugin.AddThirdPartyRepository(url, out var message);
-        SetStatus(added ? "已把这条件库加到你的列表" : message, !added);
+        SetStatus(added ? "已把这条库链加进你的插件列表" : message, !added);
         if (added)
         {
             ReportRepoAdds([url]);
         }
 
+        rebuildPending = true;
+    }
+
+    /// <summary>最近一次「加库」的撤回记录（不是加库就不给撤）——行内加库也要能反悔。</summary>
+    private UndoRecord? LastAddRecord()
+    {
+        var history = plugin.Config.UndoHistory;
+        if (history.Count == 0)
+        {
+            return null;
+        }
+
+        var last = history[^1];
+        return last.Action == "add" ? last : null;
+    }
+
+    private void UndoLastAdd()
+    {
+        var ok = plugin.TryUndoLast(out var message);
+        SetStatus(message, !ok);
         rebuildPending = true;
     }
 

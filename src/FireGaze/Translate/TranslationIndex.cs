@@ -386,7 +386,7 @@ internal sealed class TranslationIndex
             OriginalPunchline = transEntry.Punchline?.Original ?? string.Empty,
             OriginalDescription = transEntry.Description?.Original ?? string.Empty,
             Author = transEntry.Author,
-            Updated = transEntry.Updated,
+            Updated = NormalizeUpdated(transEntry.Updated),
             DeclaresIcon = !string.IsNullOrWhiteSpace(transEntry.Icon),
             IconURL = transEntry.Icon,
             IsThirdParty = true,
@@ -543,7 +543,7 @@ internal sealed class TranslationIndex
             OriginalPunchline = punchline,
             OriginalDescription = description,
             Author = string.IsNullOrWhiteSpace(author) ? null : author,
-            Updated = lastUpdate,
+            Updated = NormalizeUpdated(lastUpdate),
             DeclaresIcon = !string.IsNullOrWhiteSpace(iconURL) || !string.IsNullOrWhiteSpace(dip17),
             IconURL = iconURL,
             IsThirdParty = true,
@@ -561,6 +561,26 @@ internal sealed class TranslationIndex
         }
 
         return result;
+    }
+
+    /// <summary>
+    ///     把上游写来的 LastUpdate 收敛成「能用的 unix 秒」（2000–2100 年）：
+    ///     实测有的仓库写秒、有的写毫秒、还有 1970 附近的垃圾值——不收敛的话
+    ///     `FromUnixTimeSeconds` 会抛 ArgumentOutOfRangeException、排序也会整个错（2026-10-06 用户报障）。
+    /// </summary>
+    internal static long? NormalizeUpdated(long? value)
+    {
+        if (value is not { } stamp || stamp <= 0)
+        {
+            return null;
+        }
+
+        if (stamp > 10_000_000_000L)
+        {
+            stamp /= 1000;   // 毫秒 → 秒
+        }
+
+        return stamp is >= 946684800L and <= 4102444800L ? stamp : null;
     }
 
     private static string TextOf(object? value) => value switch

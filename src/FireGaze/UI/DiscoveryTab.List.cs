@@ -45,8 +45,22 @@ internal sealed partial class DiscoveryTab
         ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthStretch);
         ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
 
+        // 卡片行比一个文本行高得多（~52px）：不给 clipper 正确行高，滚动范围与可见区估算会偏好几倍
+        // （老表格是单行数据行，默认行高刚好；换成卡片后必须传入实测行高——2026-10-06 评审发现）。
+        var rowPitch = 52f;
+        if (rowHeights.Count > 0)
+        {
+            var sum = 0f;
+            foreach (var value in rowHeights.Values)
+            {
+                sum += value;
+            }
+
+            rowPitch = Math.Clamp(sum / rowHeights.Count, 24f, 240f);
+        }
+
         var clipper = new ImGuiListClipper();
-        clipper.Begin(filtered.Count);
+        clipper.Begin(filtered.Count, rowPitch);
         while (clipper.Step())
         {
             for (var i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
@@ -166,10 +180,13 @@ internal sealed partial class DiscoveryTab
             if (!entry.RepositoryKnown)
             {
                 ImGui.SameLine();
+                UiHelpers.PushPrimaryButton();
                 if (ImGui.Button("加库###add"))
                 {
                     AddRepoFromRow(url);
                 }
+
+                UiHelpers.PopPrimaryButton();
 
                 if (ImGui.IsItemHovered())
                 {
@@ -179,10 +196,13 @@ internal sealed partial class DiscoveryTab
             else if (!entry.RepositoryEnabled)
             {
                 ImGui.SameLine();
+                UiHelpers.PushEnableButton();
                 if (ImGui.Button("启用###enable"))
                 {
                     EnableRepoFromRow(url);
                 }
+
+                UiHelpers.PopEnableButton();
 
                 if (ImGui.IsItemHovered())
                 {
@@ -270,18 +290,24 @@ internal sealed partial class DiscoveryTab
         if (!entry.RepositoryKnown)
         {
             UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("加库"));
+            UiHelpers.PushPrimaryButton();
             if (ImGui.SmallButton("加库###add-expanded"))
             {
                 AddRepoFromRow(url);
             }
+
+            UiHelpers.PopPrimaryButton();
         }
         else if (!entry.RepositoryEnabled)
         {
             UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("启用"));
+            UiHelpers.PushEnableButton();
             if (ImGui.SmallButton("启用###enable-expanded"))
             {
                 EnableRepoFromRow(url);
             }
+
+            UiHelpers.PopEnableButton();
         }
 
         ImGui.TextWrapped(url);
@@ -298,18 +324,24 @@ internal sealed partial class DiscoveryTab
     /// <summary>行尾的 ♥：本周/总共；本机清过的一周内变灰，下周可以再点。</summary>
     private void DrawLikeButton(TranslationIndexEntry entry, string suffix)
     {
-        var week = discoveryStats?.Week ?? string.Empty;
-        var liked = week.Length > 0 && discoveryState.LikedThisWeek(entry.InternalName, week);
+        // 本地算北京时间的 ISO 周：统计拉不到时也能正确变灰（中继还没部署 v8 的时段）
+        var localWeek = DiscoveryWeek.Current();
+        var serverWeek = discoveryStats?.Week ?? string.Empty;
+        var liked = discoveryState.LikedThisWeek(entry.InternalName, localWeek)
+                    || (serverWeek.Length > 0 && discoveryState.LikedThisWeek(entry.InternalName, serverWeek));
         var unsynced = discoveryState.HasPending(entry.InternalName);
         var weekly = discoveryStats?.WeeklyOf(entry.InternalName) ?? 0;
         var total = discoveryStats?.TotalOf(entry.InternalName) ?? 0;
 
         if (liked)
         {
+            // 禁用态默认太淡，这里抬一点透明度，已赞也要看得清（可读性）
+            ImGui.PushStyleVar(ImGuiStyleVar.DisabledAlpha, 0.75f);
             ImGui.BeginDisabled();
         }
 
-        if (ImGui.Button($"♥ {ShortCount(weekly)}/{ShortCount(total)}###like-{suffix}"))
+        var label = $"♥ {ShortCount(weekly)}/{ShortCount(total)}{(unsynced ? " *" : string.Empty)}###like-{suffix}";
+        if (ImGui.Button(label))
         {
             MarkLike(entry);
         }
@@ -317,6 +349,7 @@ internal sealed partial class DiscoveryTab
         if (liked)
         {
             ImGui.EndDisabled();
+            ImGui.PopStyleVar();
         }
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
@@ -328,7 +361,7 @@ internal sealed partial class DiscoveryTab
             };
             if (unsynced)
             {
-                lines.Add("有点赞还没同步到云端，会自动重试");
+                lines.Add("* 有点赞还没同步到云端，会自动重试");
             }
 
             ImGui.SetTooltip(string.Join("\n", lines));
@@ -338,8 +371,7 @@ internal sealed partial class DiscoveryTab
     /// <summary>本机点赞：先记下来（支持离线/失败重试），再后台上报；成功用云端真值回填。</summary>
     private void MarkLike(TranslationIndexEntry entry)
     {
-        var week = discoveryStats?.Week ?? string.Empty;
-        discoveryState.MarkLiked(entry.InternalName, week);
+        discoveryState.MarkLiked(entry.InternalName, DiscoveryWeek.Current());
         if (discoveryStats is not null)
         {
             discoveryStats.WeeklyLikes[entry.InternalName] = discoveryStats.WeeklyOf(entry.InternalName) + 1;
