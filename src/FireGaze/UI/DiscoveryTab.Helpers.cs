@@ -51,7 +51,7 @@ internal sealed partial class DiscoveryTab
         _ => "插件名称",
     };
 
-    private static string FirstNonEmpty(params string[] values)
+    private static string FirstNonEmpty(params string?[] values)
         => values.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? string.Empty;
 
     /// <summary>

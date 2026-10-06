@@ -18,7 +18,9 @@ internal sealed class TranslateTab
     // FastDalamudCN 也在翻译插件简介，两者会打架——检测到就在页面上挂一行提示（用户 2026-10-06 定）
     private DateTime fastDalamudCheckedAt = DateTime.MinValue;
     private bool fastDalamudInstalled;
-    private Task<bool>? fastDalamudCheckTask;
+    private InstalledPluginEntry? fastDalamudEntry;
+    private string? fastDalamudOpenMessage;
+    private Task<InstalledPluginEntry?>? fastDalamudCheckTask;
 
     public TranslateTab(Plugin plugin)
     {
@@ -42,7 +44,8 @@ internal sealed class TranslateTab
             fastDalamudCheckTask = null;
             if (finished.Status == TaskStatus.RanToCompletion)
             {
-                fastDalamudInstalled = finished.Result;
+                fastDalamudEntry = finished.Result;
+                fastDalamudInstalled = fastDalamudEntry is not null;
             }
 
             fastDalamudCheckedAt = DateTime.UtcNow;
@@ -61,11 +64,12 @@ internal sealed class TranslateTab
             {
                 var index = InstalledPluginsIndex.Build();
                 return index.Available
-                       && index.All.Any(x => string.Equals(x.InternalName, "FuckDalamudCN", StringComparison.Ordinal));
+                    ? index.All.FirstOrDefault(x => string.Equals(x.InternalName, "FuckDalamudCN", StringComparison.Ordinal))
+                    : null;
             }
             catch
             {
-                return false;
+                return null;
             }
         });
     }
@@ -120,12 +124,22 @@ internal sealed class TranslateTab
 
         ImGui.Separator();
 
-        // FastDalamudCN 冲突提示：常驻灰字（冲突是持续存在的，不该只提醒一次）
+        // FastDalamudCN 冲突提示：常驻灰字（冲突是持续存在的，不该只提醒一次），并把它的设置窗口直接开出来
         if (fastDalamudInstalled)
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Muted,
-                "检测到 FastDalamudCN：它也在翻译插件简介，和本插件会重复或打架。建议在它的设置里关掉简介翻译；关掉后本插件继续负责简介汉化。");
+                "检测到 FastDalamudCN：它也在翻译插件简介，而且译文会更优先显示。建议在 Fast 里关掉简介翻译，或关掉本插件的简介汉化。");
+
+            if (ImGui.SmallButton("打开 FastDalamudCN 设置###OpenFastDalamudCN"))
+            {
+                fastDalamudOpenMessage = TryOpenFastDalamudConfig(fastDalamudEntry);
+            }
+
+            if (!string.IsNullOrEmpty(fastDalamudOpenMessage))
+            {
+                UiHelpers.ColoredWrapped(UiHelpers.Muted, fastDalamudOpenMessage);
+            }
         }
 
         // ---------------- 开关 ----------------
@@ -222,6 +236,46 @@ internal sealed class TranslateTab
         return loaded == default
             ? "词表维护：未标注"
             : $"词表维护：未标注，随插件版本 {loaded:yyyy-MM-dd}";
+    }
+
+    /// <summary>
+    ///     打开 FastDalamudCN 的设置窗口。与插件安装器的齿轮按钮同一条路：
+    ///     <c>plugin.DalamudInterface.LocalUiBuilder.OpenConfig()</c>（都是 internal，只能反射）。
+    /// </summary>
+    private static string TryOpenFastDalamudConfig(InstalledPluginEntry? entry)
+    {
+        if (entry?.RawPlugin is null)
+        {
+            return "没找到 FastDalamudCN 实例（可能已被停用）。";
+        }
+
+        if (!entry.IsLoaded)
+        {
+            return "FastDalamudCN 没在运行；先在插件安装器里启用它。";
+        }
+
+        try
+        {
+            const System.Reflection.BindingFlags flags =
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic;
+
+            var dalamudInterface = entry.RawPlugin.GetType().GetProperty("DalamudInterface", flags)?.GetValue(entry.RawPlugin);
+            var uiBuilder = dalamudInterface?.GetType().GetProperty("LocalUiBuilder", flags)?.GetValue(dalamudInterface);
+            var open = uiBuilder?.GetType().GetMethod("OpenConfig", flags);
+            if (open is null)
+            {
+                return "打不开：卫月没有这个入口（版本变化？）。";
+            }
+
+            open.Invoke(uiBuilder, null);
+            ActivityLog.Info("简介汉化", "已从本页打开 FastDalamudCN 的设置窗口");
+            return "已打开 FastDalamudCN 的设置窗口。";
+        }
+        catch (Exception e)
+        {
+            ActivityLog.Warning("简介汉化", "打开 FastDalamudCN 设置失败：" + e.GetType().Name);
+            return "打开失败：" + e.GetType().Name;
+        }
     }
 
     private static string WeekdayLabel(DayOfWeek day) => day switch
