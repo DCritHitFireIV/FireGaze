@@ -51,9 +51,14 @@ internal sealed partial class RepoAuditTab
                 + "关掉后回到旧行为：只借卫月内存缓存，每次重启都要重新下载。");
         }
 
-        ImGui.SameLine();
-        ImGui.TextDisabled("│");
-        ImGui.SameLine();
+        // 灰字与上面几组保持一致：缩进一行，跟在对应开关下面
+        ImGui.Indent();
+        UiHelpers.ColoredWrapped(
+            UiHelpers.Muted,
+            "检查哪些已装插件缺图标并批量下载；下过的图标存在本地，重开游戏不用重下。");
+        ImGui.Unindent();
+
+        ImGui.Spacing();
 
         var canCheck = indexReady && !scanning && !iconDownloadRunning;
         if (!canCheck)

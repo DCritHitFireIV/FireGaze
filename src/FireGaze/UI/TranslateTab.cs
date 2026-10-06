@@ -1,4 +1,5 @@
 using Dalamud.Bindings.ImGui;
+using FireGaze.Diagnostics;
 using FireGaze.RepoAudit;
 
 namespace FireGaze.UI;
@@ -88,9 +89,29 @@ internal sealed class TranslateTab
             updateMessage = "正在更新…";
             _ = Task.Run(async () =>
             {
-                var (_, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
-                updateMessage = message;
-                updateInFlight = false;
+                try
+                {
+                    var (ok, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
+                    updateMessage = message;
+                    if (ok)
+                    {
+                        ActivityLog.Info("简介汉化", "更新词表：" + message);
+                    }
+                    else
+                    {
+                        ActivityLog.Warning("简介汉化", "更新词表失败：" + message);
+                    }
+                }
+                catch (Exception e)
+                {
+                    // 原来没有 catch：一抛异常 updateInFlight 永远为 true，按钮就永远禁用了
+                    updateMessage = "更新出错：" + e.GetType().Name;
+                    ActivityLog.Warning("简介汉化", "更新词表异常：" + e.GetType().Name);
+                }
+                finally
+                {
+                    updateInFlight = false;
+                }
             });
         }
 
@@ -104,7 +125,7 @@ internal sealed class TranslateTab
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Muted,
-                "检测到 FastDalamudCN：它也在翻译插件简介，和本插件会重复/打架。建议在它的设置里关掉简介翻译（关闭后本插件继续负责简介汉化）。");
+                "检测到 FastDalamudCN：它也在翻译插件简介，和本插件会重复或打架。建议在它的设置里关掉简介翻译；关掉后本插件继续负责简介汉化。");
         }
 
         // ---------------- 开关 ----------------
@@ -113,9 +134,18 @@ internal sealed class TranslateTab
         {
             config.TranslateEnabled = enabled;
             plugin.SaveConfig();
-            statusMessage = enabled
-                ? $"已启用：本次改写 {plugin.ApplyTranslations()} 条清单"
-                : $"已关闭：已把 {plugin.RestoreTranslations()} 条还原成原文";
+            if (enabled)
+            {
+                var applied = plugin.ApplyTranslations();
+                statusMessage = $"已启用：本次改写 {applied} 条清单";
+                ActivityLog.Info("简介汉化", $"已启用，改写 {applied} 条清单");
+            }
+            else
+            {
+                var restored = plugin.RestoreTranslations();
+                statusMessage = $"已关闭：已把 {restored} 条还原成原文";
+                ActivityLog.Info("简介汉化", $"已关闭，还原 {restored} 条");
+            }
         }
 
         var autoUpdate = config.AutoUpdateTable;
@@ -166,8 +196,7 @@ internal sealed class TranslateTab
 
         ImGui.Spacing();
         ImGui.TextDisabled(
-            "上游更新了简介后会跳过该段的翻译，词表维护后重新更新即可。");
-        ImGui.TextDisabled("提示：主库插件的简介汉化请使用 FastDalamudCN（本插件的词表只覆盖第三方插件库）。");
+            "上游更新了简介后会跳过该段的翻译；等下一次词表更新后再生效。");
 
     }
 
@@ -179,20 +208,20 @@ internal sealed class TranslateTab
         // ① 词表文件里自带的 _meta.updatedAt —— 这就是「GitHub 上那份词表是哪天维护的」
         if (DateTime.TryParse(plugin.Table.MaintainedAt, out var maintained))
         {
-            return $"词表维护：{maintained:yyyy-MM-dd}（{WeekdayLabel(maintained.DayOfWeek)}）";
+            return $"词表维护：{maintained:yyyy-MM-dd} {WeekdayLabel(maintained.DayOfWeek)}";
         }
 
         // ② 老词表没有维护日期：只本机取用过的时间，不能冒充「维护日期」
         if (plugin.Config.LastTableUpdateLocal != default)
         {
-            return $"词表维护：未标注（本机 {plugin.Config.LastTableUpdateLocal:MM-dd} 取到）";
+            return $"词表维护：未标注，本机 {plugin.Config.LastTableUpdateLocal:MM-dd} 取到";
         }
 
         // ③ 随插件装上的那份（同样是未标注）
         var loaded = plugin.Table.LoadedAt ?? default;
         return loaded == default
             ? "词表维护：未标注"
-            : $"词表维护：未标注（随插件版本 {loaded:yyyy-MM-dd}）";
+            : $"词表维护：未标注，随插件版本 {loaded:yyyy-MM-dd}";
     }
 
     private static string WeekdayLabel(DayOfWeek day) => day switch

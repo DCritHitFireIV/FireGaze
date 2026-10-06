@@ -152,7 +152,7 @@ internal sealed partial class RepoAuditTab
         var tSetup = drawWatch.ElapsedMilliseconds;
 
         // ---------------- 说明（压到两行以内） ----------------
-        ImGui.TextWrapped("扫描全部第三方仓库，检查链接是否失效、链接是否合规（与卫月同款校验）");
+        ImGui.TextWrapped("扫描全部第三方仓库，检查链接是否失效、链接是否合规，校验口径与卫月一致。");
         ImGui.TextDisabled("链接不合规表示安装器无法识别该仓库，可能导致插件列表残缺或排版错乱。");
 
         // ---------------- 扫描控制 ----------------
@@ -163,6 +163,8 @@ internal sealed partial class RepoAuditTab
             ImGui.BeginDisabled();
         }
 
+        // 体检过之后按钮改叫「重新体检」（行状态提示里也是这个词）
+        var scanLabel = plugin.Config.LastScanUTC != default ? "重新体检" : "开始体检";
         if (scanning)
         {
             if (ImGui.Button("取消扫描###CancelScan"))
@@ -177,7 +179,7 @@ internal sealed partial class RepoAuditTab
                 }
             }
         }
-        else if (ImGui.Button("开始体检###StartScan"))
+        else if (ImGui.Button(scanLabel + "###StartScan"))
         {
             StartScan();
         }
@@ -187,7 +189,7 @@ internal sealed partial class RepoAuditTab
             ImGui.EndDisabled();
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
-                ImGui.SetTooltip("图标下载进行中，先等它跑完或点「停止下载」");
+                ImGui.SetTooltip("图标正在「插件安装器」页下载；先等它跑完，或去那页点「停止下载」。");
             }
         }
 
@@ -262,7 +264,7 @@ internal sealed partial class RepoAuditTab
         ImGui.Text("显示");
         FilterRadio("all", "全部");
         FilterRadio("problems", "有问题的");
-        FilterRadio("unreachable", "链接失败");
+        FilterRadio("unreachable", "连接失败");
         FilterRadio("disabled", "已停用");
 
         // 第二行：与健康度正交的两个开关（使用情况 / 图标展开）
@@ -362,6 +364,11 @@ internal sealed partial class RepoAuditTab
 
         // ---------------- 结果表 ----------------
         TickIconDownload();
+
+        if (snapshot.Count == 0)
+        {
+            ImGui.TextDisabled("当前筛选下没有库；换个筛选、或清掉搜索和勾选试试。");
+        }
 
         var tableHeight = MathF.Max(120f, ImGui.GetContentRegionAvail().Y - 6f);
         var tableFlags = ImGuiTableFlags.BordersInnerV | ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY |

@@ -63,7 +63,7 @@ internal sealed partial class RepoAuditTab
 
         if (list.Count == 0)
         {
-            SetStatus("仓库列表是空的（或者都被排除了）。", true);
+            SetStatus("仓库列表是空的，或者都被排除了。", true);
             return;
         }
 
@@ -150,8 +150,8 @@ internal sealed partial class RepoAuditTab
                 if (statusMessage?.StartsWith("开始体检") == true)
                 {
                     statusMessage =
-                        $"体检完成（用时 {lastScanDuration.TotalSeconds:0}s）：已自动勾选 {dead + invalid} 个死链/不合规项"
-                        + (unreachable > 0 ? $"；另有 {unreachable} 个「连接失败」需人工确认（可能是网络问题，未勾选）。" : "。");
+                        $"体检完成，用时 {lastScanDuration.TotalSeconds:0}s：已自动勾选 {dead + invalid} 个死链/不合规项"
+                        + (unreachable > 0 ? $"；另有 {unreachable} 个「连接失败」需人工确认，可能是网络问题，未勾选。" : "。");
                     statusIsError = false;
                 }
 

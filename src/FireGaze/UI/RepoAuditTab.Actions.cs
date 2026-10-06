@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using FireGaze.Diagnostics;
 using FireGaze.RepoAudit;
 
 namespace FireGaze.UI;
@@ -159,6 +160,15 @@ internal sealed partial class RepoAuditTab
             {
                 var ok = plugin.TryUndoLast(out var message);
                 SetStatus(ok ? message : "撤回失败：" + message, !ok);
+                if (ok)
+                {
+                    ActivityLog.Info("仓库体检", "撤回上次操作：" + message);
+                }
+                else
+                {
+                    ActivityLog.Warning("仓库体检", "撤回失败：" + message);
+                }
+
                 RefreshFromLive();
             }
 
@@ -216,6 +226,7 @@ internal sealed partial class RepoAuditTab
         if (error is not null)
         {
             SetStatus("停用失败：" + error, true);
+            ActivityLog.Warning("仓库体检", $"停用 {targets.Count} 个库失败：{error}");
             return;
         }
 
@@ -224,6 +235,7 @@ internal sealed partial class RepoAuditTab
         plugin.Repos.TriggerReload(out _);
 
         SetStatus($"已停用 {changed} 个仓库（{DateTime.Now:HH:mm}）—— 链接保留、不再加载；可点「撤回」恢复。", false);
+        ActivityLog.Info("仓库体检", $"已停用 {changed} 个仓库：{string.Join("、", targets.Take(3))}{(targets.Count > 3 ? " 等" : string.Empty)}");
         RefreshFromLive();
     }
 
@@ -233,6 +245,7 @@ internal sealed partial class RepoAuditTab
         if (string.IsNullOrEmpty(backup))
         {
             SetStatus("备份失败，已取消删除：" + error, true);
+            ActivityLog.Warning("仓库体检", "删除前备份失败，已取消：" + error);
             return;
         }
 
@@ -269,6 +282,7 @@ internal sealed partial class RepoAuditTab
         if (error is not null)
         {
             SetStatus("删除失败：" + error, true);
+            ActivityLog.Warning("仓库体检", $"删除 {record.Entries.Count} 个库失败：{error}");
             return;
         }
 
@@ -280,6 +294,7 @@ internal sealed partial class RepoAuditTab
             $"已删除 {removed} 个链接（{DateTime.Now:HH:mm}），备份：{Path.GetFileName(backup)}；" +
             "可点「撤回」把链接放回原位置。";
         statusIsError = false;
+        ActivityLog.Info("仓库体检", $"已删除 {removed} 个库链接，备份 {Path.GetFileName(backup)}");
         RefreshFromLive();
     }
 

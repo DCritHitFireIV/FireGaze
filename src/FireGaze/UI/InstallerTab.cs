@@ -23,8 +23,7 @@ internal sealed class InstallerTab
 
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
-            "以下开关会将仓库刷新限制在后台，阻止插件安装器在使用时自动更新插件仓库，将列表重置回顶部。"
-            + "此功能不影响获取新的插件列表，只影响列表显示。");
+            "下面两项都只影响插件安装器的列表显示，不影响插件仓库的获取与刷新。");
 
         ImGui.Separator();
 
@@ -77,9 +76,6 @@ internal sealed class InstallerTab
 
         ImGui.Spacing();
         ImGui.Separator();
-        UiHelpers.ColoredWrapped(
-            UiHelpers.Muted,
-            "图标缓存：检查哪些已装插件缺图标并批量下载；下过的图标存在本地，重开游戏不用重下。");
         repoAudit.DrawIconMaintenance();
     }
 }
