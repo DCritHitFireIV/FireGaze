@@ -34,6 +34,54 @@ DEFAULT_TABLE = os.path.join(REPO_ROOT, "translations.json")
 AETHERFEED = "https://raw.githubusercontent.com/Aetherfeed/aetherfeed.github.io/refs/heads/main/public/data/plugins.json"
 CJK = re.compile(r"[\u4e00-\u9fff]")
 
+# 乱码修复（2026-10-07）：上游存在「把 UTF-8 中文按 GBK 写坏」的仓库
+# （实测 anmili2022/MyDalamudRepo、raine01/AuraCanAI，后者甚至坏了两遍）。
+# 用回译法：把文本按 GBK 编回字节、再按 UTF-8 解码，能还原出正常汉字就是乱码。
+MOJI_BAD = re.compile(r"[\ue000-\uf8ff\ufffd]")
+
+
+def _moji_round_trip(text: str) -> str:
+    return text.encode("gbk", errors="ignore").decode("utf-8", errors="ignore")
+
+
+def looks_mojibake(text: str) -> bool:
+    """文本像不像「UTF-8 被按 GBK 写坏」的乱码（私用区/替换符先切段，逐段回译判断）。"""
+    if not text:
+        return False
+    for part in re.split(r"[\ue000-\uf8ff\ufffd]+", text):
+        if len(part) < 4:
+            continue
+        decoded = _moji_round_trip(part)
+        if not decoded or decoded == part:
+            continue
+        cjk = sum(1 for ch in decoded if "\u4e00" <= ch <= "\u9fff")
+        bad = len(MOJI_BAD.findall(decoded))
+        if cjk >= 3 and bad <= 2 and bad * 4 <= cjk:
+            return True
+    return False
+
+
+def repair_mojibake(text: str, max_rounds: int = 2) -> str:
+    """尽力把乱码回译成原文（可能坏了两遍）；修不动就原样返回。"""
+    current = text
+    for _ in range(max_rounds):
+        if not looks_mojibake(current):
+            break
+        fixed = _moji_round_trip(current)
+        if not fixed or fixed == current:
+            break
+        current = fixed
+    return current
+
+
+def _losses(text: str) -> int:
+    """文本的「残点」数：私用区/替换符，以及紧跟在汉字后面的 '?'（乱码修复留下的洞）。"""
+    count = len(MOJI_BAD.findall(text))
+    for index, ch in enumerate(text):
+        if ch == "?" and index > 0 and "\u4e00" <= text[index - 1] <= "\u9fff":
+            count += 1
+    return count
+
 # 日语假名（含半角片假名与片假名扩展）：用来区分「中文原文」与「日文原文」。
 # 日文夹着汉字，光看 CJK 会把它当成中文 —— 但玩家要的是中文译文（2026-09-22 用户定）。
 KANA = re.compile(r"[\u3040-\u30ff\u31f0-\u31ff\uff66-\uff9d]")
@@ -308,9 +356,9 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
         return False
 
     candidate = {
-        "name": (plugin.get("Name") or "").strip(),
-        "punchline": (plugin.get("Punchline") or "").strip(),
-        "description": (plugin.get("Description") or "").strip(),
+        "name": repair_mojibake((plugin.get("Name") or "").strip()),
+        "punchline": repair_mojibake((plugin.get("Punchline") or "").strip()),
+        "description": repair_mojibake((plugin.get("Description") or "").strip()),
         "repo_url": repo_url,
         "testing": _bool_of(plugin.get("IsTestingExclusive")),
         "author": (plugin.get("Author") or "").strip(),
@@ -483,14 +531,14 @@ def enrich_punchlines(corpus: dict[str, dict], needed: set[str]) -> int:
             plugin = by_key.get(key)
             if plugin:
                 entry = corpus[key]
-                punchline = (plugin.get("Punchline") or "").strip()
+                punchline = repair_mojibake((plugin.get("Punchline") or "").strip())
                 # 源仓库里的简介也可能是中文（国服汉化版）：不拿它覆盖英文原版；日语简介是真原文，可以用
                 if punchline and not (upstream_is_localized(punchline) and not upstream_is_localized(entry["punchline"])):
                     entry["punchline"] = punchline
                 if not entry["name"]:
-                    entry["name"] = (plugin.get("Name") or "").strip()
+                    entry["name"] = repair_mojibake((plugin.get("Name") or "").strip())
                 if not entry["description"]:
-                    entry["description"] = (plugin.get("Description") or "").strip()
+                    entry["description"] = repair_mojibake((plugin.get("Description") or "").strip())
                 hit += 1
         return hit
 
@@ -810,6 +858,16 @@ def main(argv=None) -> int:
         is_user = str(saved.get("Source") or "").lower() == "user"
         source_changed = bool(old_original) and old_original != original
 
+        # 上游乱码保护：新原文比表里这份更「残」→ 保留表里的干净文本（2026-10-07 实测：
+        # anmili2022/MyDalamudRepo 的乱码会把我们刚修好的名字盖回去）。
+        # 等上游自己把数据修好后，新原文的残点变少，更新会自然放行。
+        if source_changed and _losses(original) > _losses(old_original):
+            if old_translated:
+                saved.setdefault("Translated", old_translated)
+                saved.setdefault("Source", "user" if is_user else "ai")
+            entry["Name"] = saved
+            return
+
         if old_translated and not source_changed:
             # 上游原文没变 → 现有译文永远优先（用户译或机器译都是）
             if old_original != original:
@@ -866,6 +924,14 @@ def main(argv=None) -> int:
         old_translated = saved.get("Translated") or ""
         is_user = str(saved.get("Source") or "").lower() == "user"
         source_changed = bool(old_original) and old_original != original
+
+        # 上游乱码保护：同 set_name——新原文更残就保留表里的（详情/简介同理）
+        if source_changed and _losses(original) > _losses(old_original):
+            if old_translated:
+                saved.setdefault("Translated", old_translated)
+                saved.setdefault("Source", "user" if is_user else "ai")
+            entry[field] = saved
+            return
 
         # 旧译文是「外文原文原样当译文」（例如日文简介）→ 不当已有译文，重翻；
         # 但**玩家译例外**：那可能是玩家故意的（保留原样），不能当成没译。
