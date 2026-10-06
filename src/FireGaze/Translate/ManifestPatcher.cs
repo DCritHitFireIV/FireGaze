@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace FireGaze.Translate;
 
@@ -13,6 +14,20 @@ namespace FireGaze.Translate;
 /// </summary>
 public sealed class ManifestPatcher
 {
+    static ManifestPatcher()
+    {
+        // .NET 默认不带 GBK 代码页（系统运行时里其实有）：注册一次，
+        // 上游乱码识别（LooksLikeMojibake 的 GBK→UTF-8 回译）靠它；失败只影响识别。
+        try
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+        catch
+        {
+            // ignore
+        }
+    }
+
     private readonly Func<Configuration> config;
     private readonly TranslationTable table;
     private readonly Action<string> log;
@@ -260,7 +275,88 @@ public sealed class ManifestPatcher
             }
         }
 
+        // 上游乱码（UTF-8 被按 GBK 写坏）：当前值是乱码、我们手里有干净原文 → 允许替换修回去。
+        // 实例：anmili2022/MyDalamudRepo 的「天书概率助手」、raine01/AuraCanAI 等（2026-10-07 用户实测）
+        if (LooksLikeMojibake(current) && !LooksLikeMojibake(original))
+        {
+            return true;
+        }
+
         return false;
+    }
+
+    /// <summary>
+    ///     当前文本像不像「UTF-8 被按 GBK 写坏」的乱码。做法是把它回译试试：
+    ///     把文本按 GBK 编回字节、再按 UTF-8 解码；能还原出正常汉字的就是乱码。
+    ///     私用区/替换符代表「已经丢掉的那个字节」，先切段再逐段判，避免整串失配。
+    /// </summary>
+    internal static bool LooksLikeMojibake(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            return false;
+        }
+
+        try
+        {
+            var gbk = Encoding.GetEncoding(936);
+            var segments = new List<string>();
+            var current = new StringBuilder();
+            foreach (var ch in text)
+            {
+                if ((ch >= '\ue000' && ch <= '\uf8ff') || ch == '\ufffd')
+                {
+                    if (current.Length > 0)
+                    {
+                        segments.Add(current.ToString());
+                        current.Clear();
+                    }
+                }
+                else
+                {
+                    current.Append(ch);
+                }
+            }
+
+            if (current.Length > 0)
+            {
+                segments.Add(current.ToString());
+            }
+
+            foreach (var segment in segments)
+            {
+                if (segment.Length < 4)
+                {
+                    continue;
+                }
+
+                var decoded = Encoding.UTF8.GetString(gbk.GetBytes(segment));
+                var cjk = 0;
+                var bad = 0;
+                foreach (var ch in decoded)
+                {
+                    if (ch >= '\u4e00' && ch <= '\u9fff')
+                    {
+                        cjk++;
+                    }
+                    else if (ch == '\ufffd' || (ch >= '\ue000' && ch <= '\uf8ff'))
+                    {
+                        bad++;
+                    }
+                }
+
+                if (cjk >= 3 && bad <= 2 && bad * 4 <= cjk)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private static FieldInfo? FindField(Type type, string name)

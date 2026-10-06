@@ -49,11 +49,12 @@ internal static class InsStyle
     public static bool PinkButton(string label, float width)
     {
         var visible = VisibleLabel(label);
-        var size = new Vector2(width, 0f);
-        var pos = ImGui.GetCursorScreenPos();
-        var clicked = ImGui.InvisibleButton(label, size);
-        var hovered = ImGui.IsItemHovered();
+        // 命中区必须给真实高度：以前传 (width, 0f)，InvisibleButton 是 0 高的矩形，
+        // 悬停/点击永远命中不了——按钮画得出来但点不着（2026-10-07 用户实测「加入自己的库没反应」）
         var actual = new Vector2(width, ImGui.GetFrameHeight());
+        var pos = ImGui.GetCursorScreenPos();
+        var clicked = ImGui.InvisibleButton(label, actual);
+        var hovered = ImGui.IsItemHovered();
         var draw = ImGui.GetWindowDrawList();
         draw.AddRectFilled(pos, pos + actual, ImGui.GetColorU32(hovered ? PinkHover : Pink), actual.Y * 0.5f);
         var textSize = ImGui.CalcTextSize(visible);
