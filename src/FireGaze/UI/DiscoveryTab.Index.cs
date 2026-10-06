@@ -119,6 +119,12 @@ internal sealed partial class DiscoveryTab
                 continue;
             }
 
+            // 「隐藏已在库」：仓库已经在自己列表里且启用（含官方主库）→ 不用再看到了
+            if (hideInLibrary && entry.RepositoryKnown && entry.RepositoryEnabled)
+            {
+                continue;
+            }
+
             if (!plugin.Config.ContributeShowDisabled)
             {
                 // 只看已启用的库；「还没加进来」的库属于云端语料，一直都在

@@ -81,14 +81,11 @@ internal sealed partial class DiscoveryTab
     /// <summary>当前展开详情的那一行（内部名）；空 = 没展开。</summary>
     private string? expandedEntry;
 
-    /// <summary>当前鼠标悬停的行（card 底色用；每帧更新）。</summary>
-    private readonly HashSet<string> rowHovered = new(StringComparer.Ordinal);
-
-    /// <summary>展开区实测高度（卡片底要把展开区一起盖住；首帧先按 0 算）。</summary>
-    private readonly Dictionary<string, float> detailHeights = new(StringComparer.Ordinal);
-
     /// <summary>筛选：隐藏官方主库插件（用户 2026-10-06 定：允许隐藏）。</summary>
     private bool hideOfficial;
+
+    /// <summary>筛选：隐掉仓库已经在自己列表里的插件，只看还能加进库的（用户 2026-10-07 定）。</summary>
+    private bool hideInLibrary;
 
     /// <summary>投稿区状态。</summary>
     private string submitInput = string.Empty;
@@ -261,6 +258,17 @@ internal sealed partial class DiscoveryTab
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("隐掉卫月官方主库（Dip17）里的插件，只看第三方；官方库本来就在安装器里，不用从这里加。");
+        }
+
+        ImGui.SameLine();
+        if (ImGui.Checkbox("隐藏已在库###DiscoveryHideInLibrary", ref hideInLibrary))
+        {
+            rebuildPending = true;
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("隐掉仓库已经在你的列表里的插件（含官方主库），剩下的都是还能加进库的。");
         }
 
         ImGui.SameLine();

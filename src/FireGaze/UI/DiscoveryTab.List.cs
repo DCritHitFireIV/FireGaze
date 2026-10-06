@@ -43,10 +43,13 @@ internal sealed partial class DiscoveryTab
             return;
         }
 
-        // 卡片之间靠色差与间距分开，不用行条纹（ins 风：层级靠留白与明度，不靠线）
-        const ImGuiTableFlags flags = ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
+        // 与「插件汉化」同一套表结构：行条纹 + 左列固定宽 + 右列按钮实宽。
+        // 2026-10-07 用户点名要和插件汉化同列宽；此前自绘卡片一旦取错坐标会画到窗口外（点赞旁的黑条）。
+        const ImGuiTableFlags flags = ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
+
         var actionsWidth = ActionsColumnWidth();
-        var listWidth = MathF.Max(240f, ImGui.GetContentRegionAvail().X - 2f);
+        var slack = ImGui.GetStyle().ScrollbarSize + 48f;
+        var pluginWidth = MathF.Max(180f, ImGui.GetContentRegionAvail().X - actionsWidth - slack);
 
         InsStyle.PushRounded();
         if (!ImGui.BeginTable("###DiscoveryList", 2, flags, new Vector2(0, height)))
@@ -55,8 +58,7 @@ internal sealed partial class DiscoveryTab
             return;
         }
 
-        // 左列自适应、右列按按钮实宽固定：列宽贴合窗口，右侧不会留一条空缝
-        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthStretch);
+        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthFixed, pluginWidth);
         ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
 
         // 卡片行比一个文本行高得多（~54px）：不给 clipper 正确行高，滚动范围与可见区估算会偏好几倍
@@ -68,7 +70,7 @@ internal sealed partial class DiscoveryTab
             {
                 if (i >= 0 && i < filtered.Count)
                 {
-                    DrawRow(filtered[i], listWidth);
+                    DrawRow(filtered[i]);
                 }
             }
         }
@@ -77,42 +79,21 @@ internal sealed partial class DiscoveryTab
         InsStyle.PopRounded();
     }
 
-    private void DrawRow(TranslationIndexEntry entry, float listWidth)
+    private void DrawRow(TranslationIndexEntry entry)
     {
         var isOpen = string.Equals(expandedEntry, entry.InternalName, StringComparison.Ordinal);
         ImGui.PushID(entry.InternalName);
         ImGui.TableNextRow();
 
-        // ins 风：先铺圆角卡片底（行与行靠色差 + 空隙分开），再画内容。
-        // 跨列绘制必须用 PushClipRect(..., intersect: false) 顶掉单元格裁剪，否则右半被裁掉。
+        // 整行点击展开详情（与「插件汉化」同一写法）：Selectable 铺在行底层、跨所有列、允许按钮覆盖。
+        // 必须先切到列 0 再取行内坐标——TableNextRow 之后光标还停在上一行结束的位置，
+        // 拿它当行起点会把后面画的东西整条画到窗口外（2026-10-07 用户看到的 "点赞旁黑条"）。
+        ImGui.TableSetColumnIndex(0);
         var rowStartY = ImGui.GetCursorPosY();
         var rowHeight = FoldedRowHeight();
-        var detailExtra = isOpen && detailHeights.TryGetValue(entry.InternalName, out var knownDetail) ? knownDetail : 0f;
-        var cardMin = ImGui.GetCursorScreenPos();
-        var cardMax = new Vector2(cardMin.X + listWidth, cardMin.Y + rowHeight + detailExtra - 5f);
-        ImGui.GetWindowDrawList().PushClipRect(cardMin, cardMax, false);
-        InsStyle.DrawCard(cardMin, cardMax, isOpen, rowHovered.Contains(entry.InternalName));
-        ImGui.GetWindowDrawList().PopClipRect();
-
-        // 整行点击展开详情：Selectable 只当命中区用，视觉全交给卡片（Header 色推成透明）
-        ImGui.TableSetColumnIndex(0);
-        ImGui.PushStyleColor(ImGuiCol.Header, new Vector4(0f, 0f, 0f, 0f));
-        ImGui.PushStyleColor(ImGuiCol.HeaderHovered, new Vector4(0f, 0f, 0f, 0f));
-        ImGui.PushStyleColor(ImGuiCol.HeaderActive, new Vector4(0f, 0f, 0f, 0f));
-        var clicked = ImGui.Selectable("##row", isOpen,
-            ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
-            new Vector2(0, rowHeight));
-        ImGui.PopStyleColor(3);
-        if (ImGui.IsItemHovered())
-        {
-            rowHovered.Add(entry.InternalName);
-        }
-        else
-        {
-            rowHovered.Remove(entry.InternalName);
-        }
-
-        if (clicked)
+        if (ImGui.Selectable("##row", isOpen,
+                ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
+                new Vector2(0, rowHeight)))
         {
             expandedEntry = isOpen ? null : entry.InternalName;
         }
@@ -198,11 +179,9 @@ internal sealed partial class DiscoveryTab
         if (isOpen)
         {
             ImGui.TableNextRow();
-            ImGui.TableNextColumn();
+            ImGui.TableSetColumnIndex(0);
             DrawExpanded(entry);
-
-            // 量展开区高度：下一帧卡片底把它一起盖住（首帧先按 0 算）
-            detailHeights[entry.InternalName] = Math.Max(0f, ImGui.GetItemRectMax().Y - (cardMin.Y + rowHeight));
+            ImGui.TableNextColumn();
         }
 
         ImGui.PopID();
@@ -250,11 +229,21 @@ internal sealed partial class DiscoveryTab
         }
 
         ImGui.TextDisabled("库链");
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(url);
+        }
+
         ImGui.SameLine();
         if (ImGui.SmallButton("复制###copy"))
         {
             ImGui.SetClipboardText(url);
             SetStatus("已复制库链地址", isError: false);
+        }
+
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip(url);
         }
 
         if (!entry.RepositoryKnown)
@@ -263,6 +252,11 @@ internal sealed partial class DiscoveryTab
             if (InsStyle.PinkButton("加入自己的库###add-expanded", InsStyle.PinkButtonWidth("加入自己的库")))
             {
                 AddRepoFromRow(url);
+            }
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(url);
             }
         }
         else if (!entry.RepositoryEnabled)
@@ -275,9 +269,23 @@ internal sealed partial class DiscoveryTab
             }
 
             UiHelpers.PopEnableButton();
+
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(url);
+            }
+        }
+        else
+        {
+            // 已在库：给出状态，不再给「加库」（加了也是重复）——用户 2026-10-07 点名要看得到这个状态
+            ImGui.SameLine();
+            ImGui.TextDisabled("已在库");
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip(url);
+            }
         }
 
-        ImGui.TextWrapped(url);
         ImGui.Unindent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
     }
 
