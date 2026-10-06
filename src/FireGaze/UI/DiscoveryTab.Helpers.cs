@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 
@@ -26,43 +25,6 @@ internal sealed partial class DiscoveryTab
 
     private static string FirstNonEmpty(params string[] values)
         => values.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? string.Empty;
-
-    /// <summary>
-    ///     库链地址的短名（GitHub raw 地址显示成 owner/repo）。
-    /// </summary>
-    private static string RepoShort(string url)
-    {
-        try
-        {
-            var uri = new Uri(url);
-            var path = uri.AbsolutePath.Trim('/');
-            var segments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
-            if (segments.Length >= 2 && uri.Host.Contains("githubusercontent", StringComparison.OrdinalIgnoreCase))
-            {
-                var take = Math.Min(2, segments.Length);
-                var start = Math.Max(0, segments.Length - take - 1);
-                return string.Join("/", segments.Skip(start).Take(take));
-            }
-
-            return uri.Host;
-        }
-        catch
-        {
-            return UiHelpers.Shorten(url, 24);
-        }
-    }
-
-    private static void OpenInBrowser(string url)
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
-        }
-        catch
-        {
-            // ignore
-        }
-    }
 
     /// <summary>
     ///     拉一次中继统计（打开页签时 / 每 10 分钟）：成功就更新排序与赞数；失败退到上次缓存。

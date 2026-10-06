@@ -2,11 +2,9 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>FireGaze 插件发现页 — 3 状态帧 mockup（2026-10-06）</title>
+<title>FireGaze 插件发现页 — 3 状态帧 mockup（2026-10-06 v2）</title>
 <style>
-  /* 视觉语言沿用本仓库其它还原图：ImGui 深色主题（中性色打底 + 单一强调色 --accent），
-     字体栈三层降级，间距走 8pt 网格，层级靠颜色明度而非边框。
-     注意：本图与实现同序同数（列宽按 ActionsColumnWidth 实算 ≈ 150px；左列自适应）。 */
+  /* 视觉语言沿用本仓库其它还原图；本图与实现同序同数（v1.3.0.41：无箭头、无元信息行、♥ 不带数字、详情精简、投稿无勾选）。 */
   :root {
     --win-bg: #191919; --panel: #1f1f1f; --title: #2b2b2b; --border: #3a3a3a;
     --text: #e4e4e4; --muted: #909090; --accent: #ffb35c; --btn: #3c3c3c;
@@ -34,28 +32,29 @@
   .sep { height: 1px; background: var(--border); margin: 4px 0; }
   .row { display: flex; align-items: stretch; border-bottom: 1px solid #262626; }
   .row:nth-child(odd) { background: #1c1c1c; }
-  .rowmain { flex: 1; display: flex; gap: 8px; padding: 6px 4px; min-width: 0; }
-  .arrow { color: var(--muted); width: 14px; flex: none; padding-top: 8px; }
+  .row.open { background: #232a33; }
+  .rowmain { flex: 1; display: flex; gap: 10px; padding: 6px 4px; min-width: 0; }
   .icon { width: 40px; height: 40px; border-radius: 5px; background: #383e4c; color: #ccdbee; display: flex; align-items: center; justify-content: center; font-weight: 700; flex: none; }
   .icon.img { background: linear-gradient(135deg, #42506a, #263246); }
   .col { min-width: 0; flex: 1; }
   .name { color: var(--text); }
   .tag { color: var(--muted); font-size: 13px; }
-  .punch { color: #b9b9b9; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 470px; }
-  .meta { color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 470px; }
-  .actions { flex: none; width: 150px; display: flex; align-items: flex-start; gap: 6px; padding: 6px 2px 0 0; justify-content: flex-start; }
+  .punch { color: #b9b9b9; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 520px; }
+  .actions { flex: none; width: 190px; display: flex; align-items: flex-start; gap: 6px; padding: 6px 2px 0 0; justify-content: flex-start; }
   .btn { background: var(--btn); border: 1px solid #555; border-radius: 3px; color: var(--text); font-size: 13px; padding: 2px 8px; white-space: nowrap; }
+  .btn.blue { background: #3b5e8c; border-color: #4f79ad; }
+  .btn.green { background: #2e6b47; border-color: #3d8559; }
   .btn.dim { opacity: .55; }
   .btn.small { font-size: 12px; padding: 1px 6px; }
-  .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
+  .toolbar { display: flex; align-items: center; gap: 10px; }
+  .toolbar + .toolbar { margin-top: 2px; }
   .field { background: #111; border: 1px solid #555; border-radius: 3px; color: var(--muted); padding: 2px 8px; font-size: 13px; }
   .check { width: 14px; height: 14px; border: 1px solid #7a7a7a; border-radius: 2px; display: inline-block; position: relative; background: #2a2a2a; flex: none; vertical-align: -2px; }
   .check.on::after { content: ""; position: absolute; inset: 2px; background: #d8d8d8; border-radius: 1px; }
-  .expanded { background: #202020; border-bottom: 1px solid #262626; padding: 6px 8px 10px 54px; font-size: 13px; color: #c9c9c9; }
+  .expanded { background: #202020; border-bottom: 1px solid #262626; padding: 6px 8px 10px 60px; font-size: 13px; color: #c9c9c9; }
   .expanded .k { color: var(--muted); display: inline-block; width: 84px; }
   .expanded .kv { margin: 2px 0; }
-  .expanded .desc { color: #cfcfcf; margin: 4px 0 6px; white-space: pre-wrap; }
-  .expanded .desc b { color: var(--muted); font-weight: 400; margin-right: 6px; }
+  .expanded .desc { color: #cfcfcf; margin: 4px 0 8px; white-space: pre-wrap; }
   .statusbar { color: var(--muted); font-size: 13px; margin-top: 4px; }
   .submitbox { border: 1px solid #303030; background: #1d1d1d; border-radius: 3px; padding: 6px 10px; font-size: 13px; }
 </style>
@@ -64,19 +63,21 @@
 <div class="stage">
 
   <div>
-    <p class="caption">帧 1 — 默认态：按本周点赞排序（官方/已在库/未加入三种行 + 右侧 ♥ 与库操作）</p>
+    <p class="caption">帧 1 — 默认态：无箭头、无元信息行，行内只留 图标 + 名字 + 一行简介 + 右栏 ♥ 与库操作</p>
     <div class="window">
-      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 发现</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab active">插件发现</div></div>
 
-        <div>整座云端插件库（含官方主库）：搜索、排序、点赞、把没加过的库加进来。</div>
-        <div class="hint">列表和本机装了哪些插件无关；点一行展开详情，♥ 一周一个插件一次。</div>
+        <div>整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。</div>
+        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。</div>
         <div class="sep"></div>
 
         <div class="toolbar">
-          <span class="field" style="width:220px">搜索插件名、作者、简介、详情…</span>
+          <span class="field" style="width:220px">搜索插件名、作者、一行简介、详情…</span>
           <span>排序</span><span class="field" style="width:120px">每周点赞排行 ▾</span>
+        </div>
+        <div class="toolbar">
           <span><span class="check on"></span> 隐藏主库</span>
           <span><span class="check"></span> 连着已停用的库</span>
           <span class="hint">2306 个插件</span>
@@ -86,129 +87,114 @@
 
         <div class="row">
           <div class="rowmain">
-            <div class="arrow">▸</div>
             <div class="icon img">P</div>
             <div class="col">
               <div><span class="name">Penumbra</span> <span class="tag">[已在库]</span></div>
               <div class="punch">Runtime mod loader and manager.</div>
-              <div class="meta">Ottermandias · SeaOfStars · 2026-09-30 · 推荐 42</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥ 3/128</span></div>
+          <div class="actions"><span class="btn">♥</span></div>
         </div>
 
         <div class="row">
           <div class="rowmain">
-            <div class="arrow">▸</div>
             <div class="icon">A</div>
             <div class="col">
               <div><span class="name">Ability Ants</span> <span class="tag">[官方]</span></div>
               <div class="punch">Draw ants when things are off cooldown.</div>
-              <div class="meta">attickdoor · 官方主库 · 2026-09-28 · 推荐 5</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥ 1/12</span></div>
+          <div class="actions"><span class="btn">♥</span></div>
         </div>
 
         <div class="row">
           <div class="rowmain">
-            <div class="arrow">▸</div>
             <div class="icon">M</div>
             <div class="col">
               <div><span class="name">MapFocus</span></div>
               <div class="punch">Automatically focus the map on your target's location with a hotkey.</div>
-              <div class="meta">tigurand · tigurand/MapFocus · 2026-08-12 · 推荐 17</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥ 0/9</span><span class="btn">加库</span></div>
+          <div class="actions"><span class="btn">♥</span><span class="btn blue">加入自己的库</span></div>
         </div>
 
         <div class="row">
           <div class="rowmain">
-            <div class="arrow">▸</div>
             <div class="icon">L</div>
             <div class="col">
               <div><span class="name">LightlessSync</span> <span class="tag">[已在库]</span></div>
               <div class="punch">让大家的游戏里马上出现你的外貌与幻化改动（不会显示你的真实 ID）。</div>
-              <div class="meta">KaraRemy · TomokPlugins · 2025-11-04 · 推荐 8</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥ 0/3</span><span class="btn">启用</span></div>
+          <div class="actions"><span class="btn">♥</span><span class="btn green">启用</span></div>
         </div>
 
         <div class="row">
           <div class="rowmain">
-            <div class="arrow">▸</div>
             <div class="icon">Q</div>
             <div class="col">
               <div><span class="name">QToolKit</span></div>
               <div class="punch">一套集成式工具栏，支持自定义按钮与面板布局，可热键呼出，附带常用的小工具集合与主题切换。</div>
-              <div class="meta">QY-SR · QY-SR/DalamudPlugins · 2026-10-01 · 推荐 23</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥ 2/31</span><span class="btn">加库</span></div>
+          <div class="actions"><span class="btn">♥</span><span class="btn blue">加入自己的库</span></div>
         </div>
 
-        <div class="statusbar">已把这条件库加到你的列表</div>
+        <div class="statusbar">已把这条库链加进你的插件列表</div>
       </div>
     </div>
   </div>
 
   <div>
-    <p class="caption">帧 2 — 点开一行：详情展开（一行简介/详情/内部名/作者/更新/推荐/点赞/库链操作）</p>
+    <p class="caption">帧 2 — 点开一行（整行点击；展开态靠选中底色）：描述正文 + 作者/更新/推荐/点赞（只写总数）+ 库链两个按钮</p>
     <div class="window">
-      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 发现</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab active">插件发现</div></div>
-        <div>整座云端插件库（含官方主库）：搜索、排序、点赞、把没加过的库加进来。</div>
-        <div class="hint">列表和本机装了哪些插件无关；点一行展开详情，♥ 一周一个插件一次。</div>
+        <div>整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。</div>
+        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。</div>
         <div class="sep"></div>
         <div class="toolbar">
-          <span class="field" style="width:220px">搜索插件名、作者、简介、详情…</span>
+          <span class="field" style="width:220px">搜索插件名、作者、一行简介、详情…</span>
           <span>排序</span><span class="field" style="width:120px">最新更新 ▾</span>
+        </div>
+        <div class="toolbar">
           <span><span class="check on"></span> 隐藏主库</span>
           <span class="hint">2306 个插件</span>
         </div>
         <div class="submitbox" style="margin:6px 0">▸ <b style="font-weight:600">投稿插件库</b><span class="hint">（收录后所有人可搜）</span></div>
 
-        <div class="row">
+        <div class="row open">
           <div class="rowmain">
-            <div class="arrow">▾</div>
             <div class="icon">M</div>
             <div class="col">
               <div><span class="name">MapFocus</span></div>
               <div class="punch">Automatically focus the map on your target's location with a hotkey.</div>
-              <div class="meta">tigurand · tigurand/MapFocus · 2026-08-12 · 推荐 17</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥ 0/9</span><span class="btn">加库</span></div>
+          <div class="actions"><span class="btn">♥</span><span class="btn blue">加入自己的库</span></div>
         </div>
         <div class="expanded">
-          <div class="kv"><span class="k">一行简介</span>Automatically focus the map on your target's location with a hotkey.</div>
-          <div class="kv"><span class="k">详情</span></div>
           <div class="desc">Press the configured hotkey to open the map centered on your current target. Works in duties and overworld; can be limited to certain content types in the settings.</div>
-          <div class="kv"><span class="k">内部名</span>MapFocus</div>
           <div class="kv"><span class="k">作者</span>tigurand</div>
           <div class="kv"><span class="k">最后更新</span>2026-08-12 21:04</div>
           <div class="kv"><span class="k">推荐</span>17 次（从云端加进自己库）</div>
-          <div class="kv"><span class="k">点赞</span>本周 0 · 总共 9</div>
+          <div class="kv"><span class="k">点赞</span>9</div>
           <div class="kv"><span class="k">库链</span>
-            <span class="btn small">复制</span> <span class="btn small">在浏览器打开</span> <span class="btn small">加库</span>
+            <span class="btn small blue">加入自己的库</span> <span class="btn small">复制</span>
           </div>
           <div class="hint">https://raw.githubusercontent.com/tigurand/MapFocus/refs/heads/main/pluginmaster.json</div>
         </div>
 
         <div class="row">
           <div class="rowmain">
-            <div class="arrow">▸</div>
             <div class="icon">M</div>
             <div class="col">
               <div><span class="name">MissFisher</span></div>
               <div class="punch">Fishing tracker with bite timers and statistics.</div>
-              <div class="meta">BlackCleaverLoli · MissFisher · 2026-02-18</div>
             </div>
           </div>
-          <div class="actions"><span class="btn">♥ 0/2</span></div>
+          <div class="actions"><span class="btn">♥</span></div>
         </div>
 
         <div class="statusbar">已复制库链地址</div>
@@ -217,46 +203,45 @@
   </div>
 
   <div>
-    <p class="caption">帧 3 — 投稿区展开 + 统计暂不可用 + 待同步点赞（失败/离线状态）</p>
+    <p class="caption">帧 3 — 投稿区（无「顺手加到我的库」勾选）+ 统计不可用 + 未同步点赞（♥ 带 *）</p>
     <div class="window">
-      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱</span></div>
+      <div class="titlebar"><span class="brand">FireGaze</span><span class="sub">卫月插件库工具箱 · 汉化 / 体检 / 发现</span></div>
       <div class="body">
         <div class="tabs"><div class="tab">插件汉化</div><div class="tab">简介汉化</div><div class="tab">仓库体检</div><div class="tab">插件安装器</div><div class="tab active">插件发现</div></div>
-        <div>整座云端插件库（含官方主库）：搜索、排序、点赞、把没加过的库加进来。</div>
-        <div class="hint">列表和本机装了哪些插件无关；点一行展开详情，♥ 一周一个插件一次。</div>
+        <div>整座云端插件库（含官方主库）：搜索、排序、点赞，把没加过的库加进来。</div>
+        <div class="hint">和本机装了哪些插件无关；每个插件每周可点赞一次，点一行展开详情。</div>
         <div class="sep"></div>
         <div class="toolbar">
           <span class="field" style="width:220px"></span>
           <span>排序</span><span class="field" style="width:120px">随机 ▾</span>
           <span class="btn small">换一批</span>
+        </div>
+        <div class="toolbar">
           <span><span class="check"></span> 隐藏主库</span>
           <span class="hint">2306 个插件</span>
-          <span class="hint" style="color:#f2bf59">· 点赞/推荐统计暂时拉不到，先按插件名排</span>
+          <span class="hint" style="color:#f2bf59">· 统计暂不可用</span>
         </div>
 
         <div class="submitbox" style="margin:6px 0">
           <div>▾ <b style="font-weight:600">投稿插件库</b><span class="hint">（收录后所有人可搜）</span></div>
-          <div style="color:#b9b9b9; margin:4px 0">知道别的插件库？把地址发到云端语料 —— 收录后所有人能在发现页搜到，并跟着词表增量翻译。</div>
+          <div style="color:#b9b9b9; margin:4px 0">知道别的插件库？把地址发到云库 —— 收录后所有人能在发现页搜到，并跟着词表增量翻译。</div>
           <div class="hint" style="margin-bottom:4px">需要公开可读的仓库文件（pluginmaster.json / repo.json）；官方主库不用投。</div>
           <div class="toolbar" style="margin-top:2px">
-            <span class="field" style="width:300px">https://raw.githubusercontent.com/…/repo.json</span>
+            <span class="field" style="width:320px">https://raw.githubusercontent.com/…/repo.json</span>
             <span class="btn">投稿</span>
-            <span><span class="check"></span> 顺手加到我的库</span>
           </div>
-          <div style="color:#9a9a9a; margin-top:4px">已投稿、等云端收录：1 条</div>
+          <div style="color:#9a9a9a; margin-top:4px">已投稿、等收录：1 条</div>
         </div>
 
         <div class="row">
           <div class="rowmain">
-            <div class="arrow">▸</div>
             <div class="icon">S</div>
             <div class="col">
               <div><span class="name">SomethingNeedDoing</span> <span class="tag">[已在库]</span></div>
               <div class="punch">A lightweight macro framework for automation.</div>
-              <div class="meta">daemitus · Nighreign/plugins · 2026-07-03 · 推荐 11</div>
             </div>
           </div>
-          <div class="actions"><span class="btn dim">♥ 0/6</span></div>
+          <div class="actions"><span class="btn dim">♥ *</span></div>
         </div>
 
         <div class="statusbar">已投稿（检测通过：12 条插件），等云端收录；收录后会触发一次增量翻译</div>

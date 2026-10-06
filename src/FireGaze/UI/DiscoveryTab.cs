@@ -88,13 +88,9 @@ internal sealed partial class DiscoveryTab
 
     /// <summary>投稿区状态。</summary>
     private string submitInput = string.Empty;
-    private bool submitAddToLibrary;   // 默认不自动加（用户 2026-10-06 定：默认不自动加，给勾选项）
     private string? submitMessage;
     private bool submitIsError;
     private bool submitBusy;
-
-    /// <summary>待「顺手加到我的库」的地址（后台检测完回到 UI 线程再加）。</summary>
-    private string? submitAddPending;
 
     // 状态行
     private string? statusMessage;
@@ -168,7 +164,6 @@ internal sealed partial class DiscoveryTab
         EnsureDiscoveryStats();
         RetryPendingReport();
         DrainLikeResults();
-        FlushSubmitAdd();
 
         if (index is null)
         {

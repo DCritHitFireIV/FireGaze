@@ -15,8 +15,8 @@ internal sealed partial class DiscoveryTab
     private static float ActionsColumnWidth()
     {
         var width = (ImGui.GetStyle().CellPadding.X * 2f) + 8f;
-        width += MaxLabelWidth("♥ 999+/999+", "♥ 0/0") + 12f;
-        width += MaxLabelWidth("加库", "启用") + 8f;
+        width += MaxLabelWidth("♥") + 12f;
+        width += MaxLabelWidth("加入自己的库", "启用") + 8f;
         return width;
     }
 
@@ -81,9 +81,10 @@ internal sealed partial class DiscoveryTab
         ImGui.PushID(entry.InternalName);
         ImGui.TableNextRow();
 
-        // 整行点击展开详情：Selectable 铺底、跨两栏、允许被按钮覆盖（和「插件汉化」同一做法）
+        // 整行点击展开详情：Selectable 铺底、跨两栏、允许被按钮覆盖（和「插件汉化」同一做法）；
+        // 展开态靠 Selectable 的选中底色表示——不再画 ▸/▾（用户 2026-10-06：左边一直有个「=」占位，丑）。
         var rowStartY = ImGui.GetCursorPosY();
-        var rowHeight = rowHeights.TryGetValue(entry.InternalName, out var knownHeight) ? knownHeight : 52f;
+        var rowHeight = rowHeights.TryGetValue(entry.InternalName, out var knownHeight) ? knownHeight : 46f;
         ImGui.TableSetColumnIndex(0);
         if (ImGui.Selectable("##row", isOpen,
                 ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
@@ -94,14 +95,6 @@ internal sealed partial class DiscoveryTab
 
         ImGui.SameLine(0, 0);
         var rowTop = ImGui.GetCursorScreenPos().Y;
-
-        ImGui.TextDisabled(isOpen ? "▾" : "▸");
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip(isOpen ? "点这一行收起。" : "点这一行展开详情。");
-        }
-
-        ImGui.SameLine(0, 6);
 
         const float iconSize = 40f;
         if (!TryDrawIcon(entry, iconSize))
@@ -130,39 +123,6 @@ internal sealed partial class DiscoveryTab
             {
                 UiHelpers.Fitted(punchline.Replace('\n', ' '), punchline);
             }
-
-            // meta 行：作者 · 来源库 · 更新 · 推荐
-            var meta = new List<string>(4);
-            if (!string.IsNullOrWhiteSpace(entry.Author))
-            {
-                meta.Add(entry.Author);
-            }
-
-            if (entry.IsOfficial)
-            {
-                meta.Add("官方主库");
-            }
-            else if (entry.RepositoryURL is { Length: > 0 } repo)
-            {
-                meta.Add(RepoShort(repo));
-            }
-
-            if (entry.Updated is { } stamp)
-            {
-                meta.Add(DateTimeOffset.FromUnixTimeSeconds(stamp).ToLocalTime().ToString("yyyy-MM-dd"));
-            }
-
-            var recommends = discoveryStats?.RecommendsOf(entry.InternalName) ?? 0;
-            if (recommends > 0)
-            {
-                meta.Add("推荐 " + recommends);
-            }
-
-            if (meta.Count > 0)
-            {
-                var metaText = string.Join(" · ", meta);
-                UiHelpers.Fitted(metaText);
-            }
         }
 
         ImGui.EndGroup();
@@ -181,7 +141,7 @@ internal sealed partial class DiscoveryTab
             {
                 ImGui.SameLine();
                 UiHelpers.PushPrimaryButton();
-                if (ImGui.Button("加库###add"))
+                if (ImGui.Button("加入自己的库###add"))
                 {
                     AddRepoFromRow(url);
                 }
@@ -221,31 +181,20 @@ internal sealed partial class DiscoveryTab
         ImGui.PopID();
     }
 
-    /// <summary>展开区：完整简介/详情 + 作者/更新/推荐/点赞 + 库链操作。</summary>
+    /// <summary>展开区：描述 + 作者/更新/推荐/点赞 + 库链操作（不再重复一行简介与内部名，标签也不写灰色小字）。</summary>
     private void DrawExpanded(TranslationIndexEntry entry)
     {
-        ImGui.Indent(ImGui.GetFontSize() + 8f);
-
-        if (!string.IsNullOrWhiteSpace(entry.OriginalPunchline))
-        {
-            ImGui.TextDisabled("一行简介");
-            ImGui.SameLine();
-            ImGui.TextWrapped(entry.OriginalPunchline.Replace('\n', ' '));
-        }
+        // 缩进对齐到图标右侧的文字列（40px 图标 + 间距），详情和名字同一视线
+        ImGui.Indent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
 
         if (!string.IsNullOrWhiteSpace(entry.OriginalDescription))
         {
-            ImGui.TextDisabled("详情");
-            ImGui.Spacing();
             ImGui.TextWrapped(entry.OriginalDescription);
+            ImGui.Spacing();
         }
 
-        ImGui.Spacing();
-
-        var weekly = discoveryStats?.WeeklyOf(entry.InternalName) ?? 0;
         var total = discoveryStats?.TotalOf(entry.InternalName) ?? 0;
         var recommends = discoveryStats?.RecommendsOf(entry.InternalName) ?? 0;
-        DrawKeyValue("内部名", entry.InternalName);
         if (!string.IsNullOrWhiteSpace(entry.Author))
         {
             DrawKeyValue("作者", entry.Author);
@@ -257,19 +206,19 @@ internal sealed partial class DiscoveryTab
         }
 
         DrawKeyValue("推荐", $"{recommends} 次（从云端加进自己库）");
-        DrawKeyValue("点赞", discoveryStats is null ? "统计暂不可用（点赞会先记在本机）" : $"本周 {weekly} · 总共 {total}");
+        DrawKeyValue("点赞", discoveryStats is null ? "统计暂不可用（点赞会先记在本机）" : total.ToString());
 
         if (entry.IsOfficial)
         {
             ImGui.TextDisabled("来自卫月官方主库（Dip17）：本来就在你的库里，不用加库。");
-            ImGui.Unindent(ImGui.GetFontSize() + 8f);
+            ImGui.Unindent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
             return;
         }
 
         if (entry.RepositoryURL is not { Length: > 0 } url)
         {
             ImGui.TextDisabled("来源未知：旧词表没有记这条插件的库链。");
-            ImGui.Unindent(ImGui.GetFontSize() + 8f);
+            ImGui.Unindent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
             return;
         }
 
@@ -281,17 +230,11 @@ internal sealed partial class DiscoveryTab
             SetStatus("已复制库链地址", isError: false);
         }
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("在浏览器打开"));
-        if (ImGui.SmallButton("在浏览器打开###open"))
-        {
-            OpenInBrowser(url);
-        }
-
         if (!entry.RepositoryKnown)
         {
-            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("加库"));
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("加入自己的库"));
             UiHelpers.PushPrimaryButton();
-            if (ImGui.SmallButton("加库###add-expanded"))
+            if (ImGui.SmallButton("加入自己的库###add-expanded"))
             {
                 AddRepoFromRow(url);
             }
@@ -311,7 +254,7 @@ internal sealed partial class DiscoveryTab
         }
 
         ImGui.TextWrapped(url);
-        ImGui.Unindent(ImGui.GetFontSize() + 8f);
+        ImGui.Unindent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
     }
 
     private static void DrawKeyValue(string label, string value)
@@ -321,7 +264,7 @@ internal sealed partial class DiscoveryTab
         ImGui.TextWrapped(value);
     }
 
-    /// <summary>行尾的 ♥：本周/总共；本机清过的一周内变灰，下周可以再点。</summary>
+    /// <summary>行尾的 ♥：不显示数字（用户 2026-10-06 定），计数在 tooltip 里；本机清过的一周内变灰。</summary>
     private void DrawLikeButton(TranslationIndexEntry entry, string suffix)
     {
         // 本地算北京时间的 ISO 周：统计拉不到时也能正确变灰（中继还没部署 v8 的时段）
@@ -341,10 +284,10 @@ internal sealed partial class DiscoveryTab
             ImGui.BeginDisabled();
         }
 
-        // 统计拉不到时不要谎报 0——显示「—」，否则玩家以为真的没人赞
-        var counts = hasStats ? $"{ShortCount(weekly)}/{ShortCount(total)}" : "—/—";
-        var label = $"♥ {counts}{(unsynced ? " *" : string.Empty)}###like-{suffix}";
-        if (ImGui.Button(label))
+        var label = $"♥{(unsynced ? " *" : string.Empty)}###like-{suffix}";
+        // ♥ 没有数字后按钮变得很窄——给个最小宽度，命中区不至于只有字符宽（无障碍）
+        var likeWidth = MathF.Max(40f, ImGui.GetFontSize() * 2.6f);
+        if (ImGui.Button(label, new Vector2(likeWidth, 0)))
         {
             MarkLike(entry);
         }
@@ -359,7 +302,7 @@ internal sealed partial class DiscoveryTab
         {
             var lines = new List<string>
             {
-                hasStats ? $"本周 {weekly} 赞 · 总共 {total} 赞" : "统计暂不可用（点赞会先记在本机，恢复后显示计数）",
+                hasStats ? $"总共 {total} 赞 · 本周 {weekly} 赞" : "统计暂不可用（点赞会先记在本机，恢复后显示计数）",
                 liked ? "这周你已经点过赞了（下周可以再点）" : "点一下为这个插件点赞（一周一次，匿名上报）",
             };
             if (unsynced)
@@ -396,8 +339,6 @@ internal sealed partial class DiscoveryTab
             likeResults.Enqueue((name, total, weekly));
         });
     }
-
-    private static string ShortCount(int value) => value > 999 ? "999+" : value.ToString();
 
     /// <summary>尝试画缓存里的图标；没有就返回 false（由调用方画首字母占位）。</summary>
     private bool TryDrawIcon(TranslationIndexEntry entry, float size)

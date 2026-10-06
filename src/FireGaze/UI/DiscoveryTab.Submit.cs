@@ -52,13 +52,6 @@ internal sealed partial class DiscoveryTab
             ImGui.SetTooltip("先在本机把这个地址抓下来、用卫月的仓库契约检测一遍；不合格会告诉你原因。\n检测通过才发往云端，之后由云端工作流复核收录。");
         }
 
-        ImGui.SameLine();
-        ImGui.Checkbox("顺手加到我的库###DiscoverySubmitAdd", ref submitAddToLibrary);
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("收录后把这条库也加进你自己的第三方插件列表（会先自动备份）。");
-        }
-
         if (submitMessage is { Length: > 0 })
         {
             UiHelpers.ColoredWrapped(submitIsError ? UiHelpers.Bad : UiHelpers.Muted, submitMessage);
@@ -82,7 +75,6 @@ internal sealed partial class DiscoveryTab
         submitBusy = true;
         submitMessage = "正在检测这条地址…";
         submitIsError = false;
-        var addToLibrary = submitAddToLibrary;
         _ = Task.Run(async () =>
         {
             try
@@ -97,13 +89,7 @@ internal sealed partial class DiscoveryTab
 
                 if (RepoExistsInIndex(check.NormalizedURL, onlyKnown: false))
                 {
-                    var canAdd = addToLibrary && !RepoExistsInIndex(check.NormalizedURL, onlyKnown: true);
-                    if (canAdd)
-                    {
-                        submitAddPending = url;
-                    }
-
-                    submitMessage = "这条库链已经在云库里了" + (canAdd ? "；顺手加到你的库…" : string.Empty);
+                    submitMessage = "这条库链已经在云库里了";
                     submitIsError = false;
                     return;
                 }
@@ -120,10 +106,6 @@ internal sealed partial class DiscoveryTab
                 submitMessage = "已投稿（" + check.Message + "），等云端收录；收录后会触发一次增量翻译";
                 submitIsError = false;
                 submitInput = string.Empty;
-                if (addToLibrary && !RepoExistsInIndex(check.NormalizedURL, onlyKnown: true))
-                {
-                    submitAddPending = url;
-                }
             }
             catch (Exception e)
             {
@@ -135,23 +117,5 @@ internal sealed partial class DiscoveryTab
                 submitBusy = false;
             }
         });
-    }
-
-    /// <summary>UI 线程把「顺手加到我的库」执行掉（反射/config 操作不在后台做）。</summary>
-    private void FlushSubmitAdd()
-    {
-        var url = submitAddPending;
-        if (string.IsNullOrEmpty(url))
-        {
-            return;
-        }
-
-        submitAddPending = null;
-        var added = plugin.AddThirdPartyRepository(url, out var message);
-        SetStatus(added ? "已把这条件库加到你的列表" : message, !added);
-        if (added)
-        {
-            ReportRepoAdds([url]);
-        }
     }
 }
