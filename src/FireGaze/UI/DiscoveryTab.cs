@@ -80,8 +80,11 @@ internal sealed partial class DiscoveryTab
     /// <summary>当前展开详情的那一行（内部名）；空 = 没展开。</summary>
     private string? expandedEntry;
 
-    /// <summary>每行实测高度（整行点击的 Selectable 用；首帧用估算值）。</summary>
-    private readonly Dictionary<string, float> rowHeights = new(StringComparer.Ordinal);
+    /// <summary>当前鼠标悬停的行（card 底色用；每帧更新）。</summary>
+    private readonly HashSet<string> rowHovered = new(StringComparer.Ordinal);
+
+    /// <summary>展开区实测高度（卡片底要把展开区一起盖住；首帧先按 0 算）。</summary>
+    private readonly Dictionary<string, float> detailHeights = new(StringComparer.Ordinal);
 
     /// <summary>筛选：隐藏官方主库插件（用户 2026-10-06 定：允许隐藏）。</summary>
     private bool hideOfficial;

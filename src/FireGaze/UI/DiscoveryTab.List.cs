@@ -11,18 +11,25 @@ namespace FireGaze.UI;
 /// </summary>
 internal sealed partial class DiscoveryTab
 {
+    /// <summary>
+    ///     折叠行的固定行高：删掉元信息行（第三行）后仍保留原来三行的节奏与列距，
+    ///     不够高的话两行会显得又扁又挤（用户 2026-10-06：「列距还要保持类似原来三行那样的宽度」）。
+    /// </summary>
+    private static float FoldedRowHeight()
+        => MathF.Max(ImGui.GetFrameHeight() + 16f, ImGui.GetFontSize() * 3.2f);
+
     /// <summary>右栏按钮列宽：按当前字体 / UI 缩放实算（写死 176 在缩放 >1 时会把按钮切掉）。</summary>
     private static float ActionsColumnWidth()
     {
         var width = (ImGui.GetStyle().CellPadding.X * 2f) + 8f;
-        width += MaxLabelWidth("♥") + 12f;
-        width += MaxLabelWidth("加入自己的库", "启用") + 8f;
+        width += MathF.Max(40f, ImGui.GetFontSize() * 2.6f) + 12f;   // ♥ 自绘最小命中区
+        width += MaxLabelWidth("加入自己的库", "启用") + 10f;
         return width;
     }
 
     private static float MaxLabelWidth(params string[] labels) => labels.Max(UiHelpers.LabelWidth);
 
-    /// <summary>列表：两栏（左内容 / 右操作），卡片式行，整行点击展开。</summary>
+    /// <summary>列表：两栏（左内容 / 右操作），ins 风卡片行，整行点击展开。</summary>
     private void DrawList(float height)
     {
         RebuildFiltered();
@@ -33,11 +40,15 @@ internal sealed partial class DiscoveryTab
             return;
         }
 
-        const ImGuiTableFlags flags = ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
+        // 卡片之间靠色差与间距分开，不用行条纹（ins 风：层级靠留白与明度，不靠线）
+        const ImGuiTableFlags flags = ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
         var actionsWidth = ActionsColumnWidth();
+        var listWidth = MathF.Max(240f, ImGui.GetContentRegionAvail().X - 2f);
 
+        InsStyle.PushRounded();
         if (!ImGui.BeginTable("###DiscoveryList", 2, flags, new Vector2(0, height)))
         {
+            InsStyle.PopRounded();
             return;
         }
 
@@ -45,64 +56,79 @@ internal sealed partial class DiscoveryTab
         ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthStretch);
         ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
 
-        // 卡片行比一个文本行高得多（~52px）：不给 clipper 正确行高，滚动范围与可见区估算会偏好几倍
-        // （老表格是单行数据行，默认行高刚好；换成卡片后必须传入实测行高——2026-10-06 评审发现）。
-        var rowPitch = 52f;
-        if (rowHeights.Count > 0)
-        {
-            var sum = 0f;
-            foreach (var value in rowHeights.Values)
-            {
-                sum += value;
-            }
-
-            rowPitch = Math.Clamp(sum / rowHeights.Count, 24f, 240f);
-        }
-
+        // 卡片行比一个文本行高得多（~54px）：不给 clipper 正确行高，滚动范围与可见区估算会偏好几倍
         var clipper = new ImGuiListClipper();
-        clipper.Begin(filtered.Count, rowPitch);
+        clipper.Begin(filtered.Count, FoldedRowHeight());
         while (clipper.Step())
         {
             for (var i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
             {
                 if (i >= 0 && i < filtered.Count)
                 {
-                    DrawRow(filtered[i]);
+                    DrawRow(filtered[i], listWidth);
                 }
             }
         }
 
         ImGui.EndTable();
+        InsStyle.PopRounded();
     }
 
-    private void DrawRow(TranslationIndexEntry entry)
+    private void DrawRow(TranslationIndexEntry entry, float listWidth)
     {
         var isOpen = string.Equals(expandedEntry, entry.InternalName, StringComparison.Ordinal);
         ImGui.PushID(entry.InternalName);
         ImGui.TableNextRow();
 
-        // 整行点击展开详情：Selectable 铺底、跨两栏、允许被按钮覆盖（和「插件汉化」同一做法）；
-        // 展开态靠 Selectable 的选中底色表示——不再画 ▸/▾（用户 2026-10-06：左边一直有个「=」占位，丑）。
+        // ins 风：先铺圆角卡片底（行与行靠色差 + 空隙分开），再画内容。
+        // 跨列绘制必须用 PushClipRect(..., intersect: false) 顶掉单元格裁剪，否则右半被裁掉。
         var rowStartY = ImGui.GetCursorPosY();
-        var rowHeight = rowHeights.TryGetValue(entry.InternalName, out var knownHeight) ? knownHeight : 46f;
+        var rowHeight = FoldedRowHeight();
+        var detailExtra = isOpen && detailHeights.TryGetValue(entry.InternalName, out var knownDetail) ? knownDetail : 0f;
+        var cardMin = ImGui.GetCursorScreenPos();
+        var cardMax = new Vector2(cardMin.X + listWidth, cardMin.Y + rowHeight + detailExtra - 5f);
+        ImGui.GetWindowDrawList().PushClipRect(cardMin, cardMax, false);
+        InsStyle.DrawCard(cardMin, cardMax, isOpen, rowHovered.Contains(entry.InternalName));
+        ImGui.GetWindowDrawList().PopClipRect();
+
+        // 整行点击展开详情：Selectable 只当命中区用，视觉全交给卡片（Header 色推成透明）
         ImGui.TableSetColumnIndex(0);
-        if (ImGui.Selectable("##row", isOpen,
-                ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
-                new Vector2(0, rowHeight)))
+        ImGui.PushStyleColor(ImGuiCol.Header, new Vector4(0f, 0f, 0f, 0f));
+        ImGui.PushStyleColor(ImGuiCol.HeaderHovered, new Vector4(0f, 0f, 0f, 0f));
+        ImGui.PushStyleColor(ImGuiCol.HeaderActive, new Vector4(0f, 0f, 0f, 0f));
+        var clicked = ImGui.Selectable("##row", isOpen,
+            ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
+            new Vector2(0, rowHeight));
+        ImGui.PopStyleColor(3);
+        if (ImGui.IsItemHovered())
+        {
+            rowHovered.Add(entry.InternalName);
+        }
+        else
+        {
+            rowHovered.Remove(entry.InternalName);
+        }
+
+        if (clicked)
         {
             expandedEntry = isOpen ? null : entry.InternalName;
         }
 
         ImGui.SameLine(0, 0);
-        var rowTop = ImGui.GetCursorScreenPos().Y;
 
+        // 删掉元信息行后仍是两行文字：行高保持原来三行的节奏，内容在行内垂直居中
         const float iconSize = 40f;
+        var textHeight = (ImGui.GetTextLineHeight() * 2f) + ImGui.GetStyle().ItemSpacing.Y;
+        var contentHeight = MathF.Max(iconSize, textHeight);
+        var padY = MathF.Max(2f, (rowHeight - contentHeight) * 0.5f);
+        ImGui.SetCursorPosY(rowStartY + padY);
+
         if (!TryDrawIcon(entry, iconSize))
         {
             DrawLetterIcon(entry.DisplayName, iconSize);
         }
 
-        ImGui.SameLine();
+        ImGui.SameLine(0, 12f);
         ImGui.BeginGroup();
         {
             ImGui.TextUnformatted(entry.DisplayName);
@@ -127,12 +153,9 @@ internal sealed partial class DiscoveryTab
 
         ImGui.EndGroup();
 
-        // 量一下这一行实际多高，下一帧整行点击的 Selectable 用它（首帧用估算值）
-        rowHeights[entry.InternalName] = Math.Max(20f, ImGui.GetItemRectMax().Y - rowTop);
-
         // 右栏：♥ + 库操作（SetCursorPosY 用窗口局部坐标——用屏幕坐标会把按钮画到下一行去）
         ImGui.TableNextColumn();
-        ImGui.SetCursorPosY(rowStartY + 4f);
+        ImGui.SetCursorPosY(rowStartY + ((rowHeight - ImGui.GetFrameHeight()) * 0.5f));
         DrawLikeButton(entry, "row");
 
         if (!entry.IsOfficial && entry.RepositoryURL is { Length: > 0 } url)
@@ -140,13 +163,11 @@ internal sealed partial class DiscoveryTab
             if (!entry.RepositoryKnown)
             {
                 ImGui.SameLine();
-                UiHelpers.PushPrimaryButton();
-                if (ImGui.Button("加入自己的库###add"))
+                var cta = "加入自己的库";
+                if (InsStyle.PinkButton(cta + "###add", InsStyle.PinkButtonWidth(cta)))
                 {
                     AddRepoFromRow(url);
                 }
-
-                UiHelpers.PopPrimaryButton();
 
                 if (ImGui.IsItemHovered())
                 {
@@ -176,6 +197,9 @@ internal sealed partial class DiscoveryTab
             ImGui.TableNextRow();
             ImGui.TableNextColumn();
             DrawExpanded(entry);
+
+            // 量展开区高度：下一帧卡片底把它一起盖住（首帧先按 0 算）
+            detailHeights[entry.InternalName] = Math.Max(0f, ImGui.GetItemRectMax().Y - (cardMin.Y + rowHeight));
         }
 
         ImGui.PopID();
@@ -232,14 +256,11 @@ internal sealed partial class DiscoveryTab
 
         if (!entry.RepositoryKnown)
         {
-            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("加入自己的库"));
-            UiHelpers.PushPrimaryButton();
-            if (ImGui.SmallButton("加入自己的库###add-expanded"))
+            UiHelpers.SameLineOrWrap(InsStyle.PinkButtonWidth("加入自己的库"));
+            if (InsStyle.PinkButton("加入自己的库###add-expanded", InsStyle.PinkButtonWidth("加入自己的库")))
             {
                 AddRepoFromRow(url);
             }
-
-            UiHelpers.PopPrimaryButton();
         }
         else if (!entry.RepositoryEnabled)
         {
@@ -277,28 +298,14 @@ internal sealed partial class DiscoveryTab
         var weekly = discoveryStats?.WeeklyOf(entry.InternalName) ?? 0;
         var total = discoveryStats?.TotalOf(entry.InternalName) ?? 0;
 
-        if (liked)
-        {
-            // 禁用态默认太淡，这里抬一点透明度，已赞也要看得清（可读性）
-            ImGui.PushStyleVar(ImGuiStyleVar.DisabledAlpha, 0.75f);
-            ImGui.BeginDisabled();
-        }
-
-        var label = $"♥{(unsynced ? " *" : string.Empty)}###like-{suffix}";
-        // ♥ 没有数字后按钮变得很窄——给个最小宽度，命中区不至于只有字符宽（无障碍）
+        // ins 风红心：已赞 #ED4956、未赞中性、悬停提亮；命中区不小于 40px（自绘，不走 ImGui 默认按钮底）
         var likeWidth = MathF.Max(40f, ImGui.GetFontSize() * 2.6f);
-        if (ImGui.Button(label, new Vector2(likeWidth, 0)))
+        if (InsStyle.HeartButton($"like-{suffix}", liked, unsynced, likeWidth))
         {
             MarkLike(entry);
         }
 
-        if (liked)
-        {
-            ImGui.EndDisabled();
-            ImGui.PopStyleVar();
-        }
-
-        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+        if (ImGui.IsItemHovered())
         {
             var lines = new List<string>
             {
@@ -345,13 +352,7 @@ internal sealed partial class DiscoveryTab
     {
         if (iconHandles.TryGetValue(entry.InternalName, out var cached))
         {
-            if (cached.IsNull)
-            {
-                return false;
-            }
-
-            ImGui.Image(cached, new Vector2(size, size));
-            return true;
+            return !cached.IsNull && DrawRoundIcon(cached, size);
         }
 
         if (!entry.DeclaresIcon || iconMisses.Contains(entry.InternalName))
@@ -372,22 +373,32 @@ internal sealed partial class DiscoveryTab
         if (plugin.Icons.TryGetHandle(installed, out var handle) && !handle.IsNull)
         {
             iconHandles[entry.InternalName] = handle;
-            ImGui.Image(handle, new Vector2(size, size));
-            return true;
+            return DrawRoundIcon(handle, size);
         }
 
         if (PluginIconLookup.TryPeekHandle(installed, out var peeked) && !peeked.IsNull)
         {
             iconHandles[entry.InternalName] = peeked;
-            ImGui.Image(peeked, new Vector2(size, size));
-            return true;
+            return DrawRoundIcon(peeked, size);
         }
 
         iconMisses.Add(entry.InternalName);
         return false;
     }
 
-    /// <summary>没有图标时的首字母占位块（和「插件汉化」一致）。</summary>
+    /// <summary>圆形头像（ins 风：头像是完整的圆）；纹理为空返回 false 交字母占位。</summary>
+    private static bool DrawRoundIcon(ImTextureID texture, float size)
+    {
+        if (!InsStyle.DrawRoundIcon(texture, ImGui.GetCursorScreenPos(), size))
+        {
+            return false;
+        }
+
+        ImGui.Dummy(new Vector2(size, size));
+        return true;
+    }
+
+    /// <summary>没有图标时的字母占位（ins 风：也是正圆）。</summary>
     private static void DrawLetterIcon(string name, float size)
     {
         var start = ImGui.GetCursorScreenPos();
@@ -396,7 +407,7 @@ internal sealed partial class DiscoveryTab
             start,
             start + new Vector2(size, size),
             ImGui.GetColorU32(new Vector4(0.22f, 0.25f, 0.31f, 1f)),
-            5f);
+            size / 2f);
 
         var initial = string.IsNullOrEmpty(name) ? "?" : name[..1].ToUpperInvariant();
         var textSize = ImGui.CalcTextSize(initial);
