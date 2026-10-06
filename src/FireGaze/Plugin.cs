@@ -397,11 +397,20 @@ public sealed class Plugin : IDalamudPlugin
             // ignore
         }
 
-        pluginInterface.UiBuilder.Draw -= windowSystem.Draw;
-        pluginInterface.UiBuilder.Draw -= TickInstallerListScroll;
-        pluginInterface.UiBuilder.OpenConfigUi -= ToggleWindow;
-        pluginInterface.UiBuilder.OpenMainUi -= OpenMainWindow;
-        pluginInterface.ActivePluginsChanged -= OnActivePluginsChanged;
+        // 退订全部包在 try 里：卸载路径上任何一步抛异常都可能把旧窗口留在卫月的绘制链上，
+        // 变成“幽灵窗口”（2026-10-07 实机遇到：旧实例的页签顺序一直留在屏幕上）
+        try
+        {
+            pluginInterface.UiBuilder.Draw -= windowSystem.Draw;
+            pluginInterface.UiBuilder.Draw -= TickInstallerListScroll;
+            pluginInterface.UiBuilder.OpenConfigUi -= ToggleWindow;
+            pluginInterface.UiBuilder.OpenMainUi -= OpenMainWindow;
+            pluginInterface.ActivePluginsChanged -= OnActivePluginsChanged;
+        }
+        catch (Exception e)
+        {
+            Log.Warning(e, "[FireGaze] 卸载时退订 UI 事件失败（已忽略）");
+        }
         try
         {
             window.Detach();

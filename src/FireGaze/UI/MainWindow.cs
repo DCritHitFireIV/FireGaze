@@ -75,7 +75,8 @@ internal sealed class MainWindow : Window
         ImGui.TextUnformatted("FireGaze");
         ImGui.PopStyleColor();
         ImGui.SameLine();
-        ImGui.TextDisabled("卫月插件库工具箱 · 汉化 / 体检 / 发现");
+        // 带上版本号：开发版热重载频繁，出问题时一眼就能分辨屏幕上的窗口是不是旧实例的幽灵
+        ImGui.TextDisabled($"卫月插件库工具箱 · 汉化 / 体检 / 发现 · v{typeof(MainWindow).Assembly.GetName().Version}");
 
         ImGui.Separator();
 
