@@ -43,7 +43,7 @@ internal sealed class MainWindow : Window
         repoAuditTab = new RepoAuditTab(plugin);
         installerTab = new InstallerTab(plugin);
         translateTab = new TranslateTab(plugin);
-        discoveryTab = new DiscoveryTab(plugin, plugin.Contributions);
+        discoveryTab = new DiscoveryTab(plugin);
     }
 
     /// <summary>

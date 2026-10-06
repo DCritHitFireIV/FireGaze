@@ -6,9 +6,6 @@ namespace FireGaze.UI;
 
 internal sealed partial class DiscoveryTab
 {
-    /// <summary>待「顺手加到我的库」的地址（后台检测完回到 UI 线程再加）。</summary>
-    private string? submitAddPending;
-
     /// <summary>
     ///     投稿插件库：把一条仓库地址送进云端语料（收录后所有人能在发现页搜到）。
     ///     本机先做库链检测（卫月同款契约），不合格当场给理由；合格才发中继。
@@ -148,49 +145,5 @@ internal sealed partial class DiscoveryTab
         {
             ReportRepoAdds([url]);
         }
-    }
-
-    /// <summary>云端语料里有没有这条库链（onlyKnown = 只看「已经在你本机库里」的那些）。</summary>
-    private bool RepoExistsInIndex(string? normalizedURL, bool onlyKnown)
-    {
-        if (string.IsNullOrEmpty(normalizedURL) || index is not { Available: true })
-        {
-            return false;
-        }
-
-        foreach (var entry in index.All)
-        {
-            if (entry.RepositoryURL is not { Length: > 0 } url)
-            {
-                continue;
-            }
-
-            if (onlyKnown && !entry.RepositoryKnown)
-            {
-                continue;
-            }
-
-            if (string.Equals(InstalledPluginsIndex.NormalizeRepositoryURL(url), normalizedURL, StringComparison.Ordinal))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /// <summary>本机投过、但云端词表还没带上这条库链的地址（界面上显示「等收录」）。</summary>
-    private List<string> SubmittedButNotInCloud()
-    {
-        var result = new List<string>();
-        foreach (var url in discoveryState.SubmittedRepos.Keys)
-        {
-            if (!RepoExistsInIndex(url, onlyKnown: false))
-            {
-                result.Add(url);
-            }
-        }
-
-        return result;
     }
 }

@@ -1,14 +1,15 @@
-using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.Numerics;
+using System.Collections;
+using System.Reflection;
 using Dalamud.Bindings.ImGui;
-using Dalamud.Interface.Windowing;
 using FireGaze.Discovery;
 using FireGaze.RepoAudit;
 using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
+/// <summary>
+///     插件发现：索引生命周期（云端词表为准，本机卫月清单补原文/图标）与筛选、排序。
+/// </summary>
 internal sealed partial class DiscoveryTab
 {
     /// <summary>
@@ -20,7 +21,7 @@ internal sealed partial class DiscoveryTab
     /// </summary>
     private void EnsureIndex()
     {
-        // null = 反射读不到，按「已完成」处理，别让窗口永远停在等待上
+        // null = 反射读不到，按「已完成」处理，别让页面永远停在等待上
         var reposReady = TranslationIndex.IsReposReady() ?? true;
 
         // ---- 上一次建索引跑完了：收结果 ----
@@ -35,7 +36,6 @@ internal sealed partial class DiscoveryTab
             buildTask = null;
             index = finished.Status == TaskStatus.RanToCompletion ? finished.Result : null;
             rebuildPending = true;
-            rebuildRepoPending = true;
             if (index is { Available: false })
             {
                 retryAfter = DateTime.UtcNow.AddSeconds(10);
@@ -57,11 +57,10 @@ internal sealed partial class DiscoveryTab
             }
 
             // 刷新完了：丢掉可能不完整的快照，重建一份
-            Plugin.Log.Debug("[FireGaze] 卫月插件库刷新完成：重建参与翻译索引");
+            Plugin.Log.Debug("[FireGaze] 卫月插件库刷新完成：重建插件发现索引");
             indexMayBePartial = false;
             index = null;
             rebuildPending = true;
-            rebuildRepoPending = true;
         }
 
         if (DateTime.UtcNow < retryAfter)
@@ -93,6 +92,9 @@ internal sealed partial class DiscoveryTab
         buildTask = Task.Run(() => TranslationIndex.Build(table, repoError is null ? localRepositories : null));
     }
 
+    /// <summary>
+    ///     筛选出当前要显示的行：隐藏主库 / 已停用库 / 关键词，然后按排序档位重排。
+    /// </summary>
     private void RebuildFiltered()
     {
         if (!rebuildPending)
@@ -120,25 +122,10 @@ internal sealed partial class DiscoveryTab
             if (!plugin.Config.ContributeShowDisabled)
             {
                 // 只看已启用的库；「还没加进来」的库属于云端语料，一直都在
-                // （不然发现不了、也没法加）
                 if (entry.RepositoryKnown && !entry.RepositoryEnabled)
                 {
                     continue;
                 }
-            }
-
-            var pass = stateFilter switch
-            {
-                StateFilter.Missing => entry.State == "missing",
-                StateFilter.Machine => entry.State == "machine",
-                StateFilter.User => entry.HasUserTranslation,
-                StateFilter.Review => entry.HasReview,
-                _ => true,
-            };
-
-            if (!pass)
-            {
-                continue;
             }
 
             // 全字段搜索（插件名/作者/简介/详情，原文+译文；SearchBlob 里都拼好了）
@@ -169,7 +156,6 @@ internal sealed partial class DiscoveryTab
             }
         }
 
-        sortContext ??= new DiscoverySortContext();
         sortContext.Mode = sortMode;
         sortContext.WeeklyLikes = discoveryStats?.WeeklyLikes ?? [];
         sortContext.Recommends = discoveryStats?.Recommends ?? [];
@@ -177,63 +163,16 @@ internal sealed partial class DiscoveryTab
         DiscoverySort.Apply(filtered, sortContext);
     }
 
-    /// <summary>
-    ///     仓库视图的分组：按库链把筛选后的插件归类（官方主库单独一组）。
-    /// </summary>
-    private void RebuildRepoGroups()
-    {
-        if (!rebuildRepoPending)
-        {
-            return;
-        }
-
-        rebuildRepoPending = false;
-        repoGroups.Clear();
-
-        RebuildFiltered();
-        foreach (var plugin in filtered)
-        {
-            var key = plugin.IsOfficial ? "\u0000official" : plugin.RepositoryURL ?? string.Empty;
-            var group = repoGroups.FirstOrDefault(x => string.Equals(x.Key, key, StringComparison.Ordinal));
-            if (group is null)
-            {
-                group = new RepoGroup
-                {
-                    Key = key,
-                    URL = plugin.IsOfficial ? string.Empty : key,
-                    Short = plugin.IsOfficial ? "官方主库" : key.Length == 0 ? "来源未知" : RepoShort(key),
-                    Known = plugin.IsOfficial || plugin.RepositoryKnown,
-                    Enabled = plugin.IsOfficial || plugin.RepositoryEnabled,
-                    IsOfficial = plugin.IsOfficial,
-                };
-                repoGroups.Add(group);
-            }
-
-            group.Plugins.Add(plugin);
-        }
-
-        // 缺译多的排前面
-        repoGroups.Sort((a, b) =>
-        {
-            var byMissing = b.MissingCount.CompareTo(a.MissingCount);
-            return byMissing != 0 ? byMissing : string.Compare(a.Short, b.Short, StringComparison.OrdinalIgnoreCase);
-        });
-    }
-
-    /// <summary>
-    ///     关键词匹配已改为全字段（SearchBlob），旧的范围匹配已删。
-    /// </summary>
     private void InvalidateIndex()
     {
-        // 译文变了：重建搜索结果（不重建反射索引，够快）
+        // 译文/词表变了：重建搜索结果（不重建反射索引，够快）
         rebuildPending = true;
-        rebuildRepoPending = true;
     }
 
     /// <summary>
-    ///     改过译文后刷新受影响的条目状态（缺译 / 机器译 / 你译、完成度）。
+    ///     改过词表后刷新受影响的条目状态。
     ///
-    ///     早先的做法是在后台重新跑一遍 <see cref="TranslationIndex.Build"/>：那会从**后台线程**反射遍历
+    ///     早先的做法是在后台重新跑一遍 <see cref="TranslationIndex.Build" />：那会从**后台线程**反射遍历
     ///     卫月的仓库/清单列表，而卫月自己的仓库重载（<c>ReloadAllReposAsync</c>）也会在别的线程动同一批集合，
     ///     撞上就会读到正在被改动的集合。改成就地重算：只动我们自己的缓存，不再碰卫月的内部结构。
     /// </summary>

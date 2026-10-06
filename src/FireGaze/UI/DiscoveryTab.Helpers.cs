@@ -1,14 +1,10 @@
-using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Numerics;
-using Dalamud.Bindings.ImGui;
-using Dalamud.Interface.Windowing;
 using FireGaze.Discovery;
 using FireGaze.RepoAudit;
-using FireGaze.Translate;
 
 namespace FireGaze.UI;
 
+/// <summary>插件发现：状态行、统计拉取/重试、库链辅助操作。</summary>
 internal sealed partial class DiscoveryTab
 {
     private void SetStatus(string message, bool isError)
@@ -16,13 +12,6 @@ internal sealed partial class DiscoveryTab
         statusMessage = message;
         statusIsError = isError;
     }
-
-    private static string FieldLabel(string field) => field switch
-    {
-        "Name" => "插件名",
-        "Punchline" => "一行简介",
-        _ => "插件详情",
-    };
 
     /// <summary>排序档位的中文名（下拉框用）。</summary>
     internal static string SortLabel(DiscoverySortMode mode) => mode switch
@@ -34,6 +23,46 @@ internal sealed partial class DiscoveryTab
         DiscoverySortMode.Author => "作者名称",
         _ => "插件名称",
     };
+
+    private static string FirstNonEmpty(params string[] values)
+        => values.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? string.Empty;
+
+    /// <summary>
+    ///     库链地址的短名（GitHub raw 地址显示成 owner/repo）。
+    /// </summary>
+    private static string RepoShort(string url)
+    {
+        try
+        {
+            var uri = new Uri(url);
+            var path = uri.AbsolutePath.Trim('/');
+            var segments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
+            if (segments.Length >= 2 && uri.Host.Contains("githubusercontent", StringComparison.OrdinalIgnoreCase))
+            {
+                var take = Math.Min(2, segments.Length);
+                var start = Math.Max(0, segments.Length - take - 1);
+                return string.Join("/", segments.Skip(start).Take(take));
+            }
+
+            return uri.Host;
+        }
+        catch
+        {
+            return UiHelpers.Shorten(url, 24);
+        }
+    }
+
+    private static void OpenInBrowser(string url)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+        }
+        catch
+        {
+            // ignore
+        }
+    }
 
     /// <summary>
     ///     拉一次中继统计（打开页签时 / 每 10 分钟）：成功就更新排序与赞数；失败退到上次缓存。
@@ -64,7 +93,6 @@ internal sealed partial class DiscoveryTab
 
             statsFetchedAt = DateTime.UtcNow;
             rebuildPending = true;
-            rebuildRepoPending = true;
             return;
         }
 
@@ -121,43 +149,104 @@ internal sealed partial class DiscoveryTab
         });
     }
 
-    private static string FirstNonEmpty(params string[] values)
-        => values.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? string.Empty;
-
-    /// <summary>
-    ///     库链地址的短名（GitHub raw 地址显示成 owner/repo）。
-    /// </summary>
-    private static string RepoShort(string url)
+    /// <summary>云端语料里有没有这条库链（onlyKnown = 只看「已经在你本机库里」的那些）。</summary>
+    private bool RepoExistsInIndex(string? normalizedURL, bool onlyKnown)
     {
-        try
+        if (string.IsNullOrEmpty(normalizedURL) || index is not { Available: true })
         {
-            var uri = new Uri(url);
-            var path = uri.AbsolutePath.Trim('/');
-            var segments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
-            if (segments.Length >= 2 && uri.Host.Contains("githubusercontent", StringComparison.OrdinalIgnoreCase))
+            return false;
+        }
+
+        foreach (var entry in index.All)
+        {
+            if (entry.RepositoryURL is not { Length: > 0 } url)
             {
-                var take = Math.Min(2, segments.Length);
-                var start = Math.Max(0, segments.Length - take - 1);
-                return string.Join("/", segments.Skip(start).Take(take));
+                continue;
             }
 
-            return uri.Host;
+            if (onlyKnown && !entry.RepositoryKnown)
+            {
+                continue;
+            }
+
+            if (string.Equals(InstalledPluginsIndex.NormalizeRepositoryURL(url), normalizedURL, StringComparison.Ordinal))
+            {
+                return true;
+            }
         }
-        catch
-        {
-            return UiHelpers.Shorten(url, 24);
-        }
+
+        return false;
     }
 
-    private static void OpenInBrowser(string url)
+    /// <summary>本机投过、但云端词表还没带上这条库链的地址（界面上显示「等收录」）。</summary>
+    private List<string> SubmittedButNotInCloud()
     {
-        try
+        var result = new List<string>();
+        foreach (var url in discoveryState.SubmittedRepos.Keys)
         {
-            Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+            if (!RepoExistsInIndex(url, onlyKnown: false))
+            {
+                result.Add(url);
+            }
         }
-        catch
+
+        return result;
+    }
+
+    /// <summary>把一条库直接加进本机列表（先自动备份），成功后上报推荐数。</summary>
+    private void AddRepoFromRow(string url)
+    {
+        var added = plugin.AddThirdPartyRepository(url, out var message);
+        SetStatus(added ? "已把这条件库加到你的列表" : message, !added);
+        if (added)
         {
-            // ignore
+            ReportRepoAdds([url]);
         }
+
+        rebuildPending = true;
+    }
+
+    /// <summary>重新启用一条已停用的库（保留链接，让卫月重新抓它的插件）。</summary>
+    private void EnableRepoFromRow(string url)
+    {
+        plugin.Repos.SetEnabled([url], true, out _);
+        plugin.Repos.Save(out _);
+        plugin.Repos.TriggerReload(out _);
+        plugin.TrackFirstSeen();
+        SetStatus("已启用这条库；卫月会重新抓取它的插件", isError: false);
+        rebuildPending = true;
+    }
+
+    /// <summary>
+    ///     把「刚从云端加进自己库」的库链按插件上报推荐数（用户 2026-10-06 定：按插件不按库）。
+    ///     先排队后发送：发送失败会留在待重试里，成功后清掉。
+    /// </summary>
+    private void ReportRepoAdds(IReadOnlyCollection<string> urls)
+    {
+        if (urls.Count == 0 || index is not { Available: true })
+        {
+            return;
+        }
+
+        var wanted = new HashSet<string>(urls.Select(InstalledPluginsIndex.NormalizeRepositoryURL), StringComparer.Ordinal);
+        var names = index.All
+            .Where(x => x.RepositoryURL is { Length: > 0 } url
+                        && wanted.Contains(InstalledPluginsIndex.NormalizeRepositoryURL(url)))
+            .Select(x => x.InternalName)
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
+        if (names.Count == 0)
+        {
+            return;
+        }
+
+        discoveryState.MarkAdds(names);
+        _ = Task.Run(async () =>
+        {
+            if (await DiscoveryRelay.ReportAddsAsync(names, CancellationToken.None).ConfigureAwait(false))
+            {
+                discoveryState.CompleteAdds(names);
+            }
+        });
     }
 }
