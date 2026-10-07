@@ -1,1 +1,112 @@
-{"type":"uit-contribution","plugin":"Aetherment","kinds":["free"],"entries":[{"Original":"Open Aetherment menu","Translated":"打开以太网菜单","Context":"Aetherment..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Open the Texture Finder tool","Translated":"打开纹理访达工具","Context":"Aetherment..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Aetherment has encountered an unrecoverable error","Translated":"以太网遇到了一个无法修复的错误","Context":"Aetherment.DrawNative","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"No Error","Translated":"无错误","Context":"Aetherment.DrawNative","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Aetherment","Translated":"以太","Context":"Aetherment.get_Name","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":" (Shift + Ctrl to toggle)","Translated":"(Shift + Ctrl 键切换)","Context":"TexFinder.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Copy to clipboard","Translated":"复制到剪贴板","Context":"TexFinder.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"High res","Translated":"高共振","Context":"TexFinder.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Locked","Translated":"锁定","Context":"TexFinder.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Texture Finder","Translated":"纹理查找器","Context":"TexFinder.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Unlocked","Translated":"解锁","Context":"TexFinder.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Aetherment",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Open Aetherment menu",
+      "Translated": "打开以太网菜单",
+      "Context": "Aetherment..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Open the Texture Finder tool",
+      "Translated": "打开纹理访达工具",
+      "Context": "Aetherment..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Aetherment has encountered an unrecoverable error",
+      "Translated": "以太网遇到了一个无法修复的错误",
+      "Context": "Aetherment.DrawNative",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "No Error",
+      "Translated": "无错误",
+      "Context": "Aetherment.DrawNative",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Aetherment",
+      "Translated": "以太",
+      "Context": "Aetherment.get_Name",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": " (Shift + Ctrl to toggle)",
+      "Translated": "(Shift + Ctrl 键切换)",
+      "Context": "TexFinder.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Copy to clipboard",
+      "Translated": "复制到剪贴板",
+      "Context": "TexFinder.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "High res",
+      "Translated": "高共振",
+      "Context": "TexFinder.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Locked",
+      "Translated": "锁定",
+      "Context": "TexFinder.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Texture Finder",
+      "Translated": "纹理查找器",
+      "Context": "TexFinder.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Unlocked",
+      "Translated": "解锁",
+      "Context": "TexFinder.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-07T03:40:25",
+  "imported": {
+    "archive": "uit-direct-2026-10-07T03-40-12-670Z-8b1baf09-2026-10-07T034024.json",
+    "accepted": 11,
+    "filled": 11,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 11 条 `Aetherment` 的界面文字译文，已收为**独立译文包** `uit-packs/Aetherment@user-0237c4.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 11 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
