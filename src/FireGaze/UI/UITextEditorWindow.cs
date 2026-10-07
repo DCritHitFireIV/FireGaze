@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Numerics;
-using System.Text.Json;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.ImGuiFileDialog;
 using Dalamud.Interface.Windowing;
@@ -422,11 +421,14 @@ internal sealed class UITextEditorWindow : Window
     {
         var grey = includeGrey ?? this.includeGreyInTranslate;
         return this.rows
-            .Where(r => !r.Skipped && !r.HasTranslation)
-            .Where(r => r.IsResource || r.IsAttribute || r.Role == UITextRole.UI || (grey && r.Role == UITextRole.Ambiguous))
+            .Where(r => !r.Skipped && !r.HasTranslation && IsTranslatableRow(r, grey))
             .Select(r => new UITextTarget(r.Original, r.Context, r.Entry, r.Resource, r.Attribute))
             .ToList();
     }
+
+    /// <summary>行是不是默认的翻译候选（UI / 资源 / 属性；灰名单按开关）。</summary>
+    private static bool IsTranslatableRow(Row row, bool grey) =>
+        row.IsResource || row.IsAttribute || row.Role == UITextRole.UI || (grey && row.Role == UITextRole.Ambiguous);
 
     /// <summary>
     ///     「全量重翻」的目标：把已经有译文的也算进来（下载到质量不行的公共库 / 玩家包时，
@@ -436,11 +438,16 @@ internal sealed class UITextEditorWindow : Window
     {
         var grey = this.includeGreyInTranslate;
         return this.rows
-            .Where(r => !r.Skipped)
-            .Where(r => includeUser || !r.IsUserSource)
-            .Where(r => r.IsResource || r.IsAttribute || r.Role == UITextRole.UI || (grey && r.Role == UITextRole.Ambiguous))
+            .Where(r => !r.Skipped && (includeUser || !r.IsUserSource) && IsTranslatableRow(r, grey))
             .Select(r => new UITextTarget(r.Original, r.Context, r.Entry, r.Resource, r.Attribute))
             .ToList();
+    }
+
+    /// <summary>全量重翻会覆盖多少条（工具栏计数用；不建列表，避免每帧白分配）。</summary>
+    private int RetranslateTargetCount(bool includeUser)
+    {
+        var grey = this.includeGreyInTranslate;
+        return this.rows.Count(r => !r.Skipped && (includeUser || !r.IsUserSource) && IsTranslatableRow(r, grey));
     }
 
     private int? glossaryRepairCache;
@@ -736,34 +743,19 @@ internal sealed class UITextEditorWindow : Window
         }
 
         ImGui.SameLine();
-        ImGui.BeginDisabled(busy || !hasBackup);
-        if (this.restoreArmKey.Length > 0 && (DateTime.Now - this.restoreArmAt).TotalSeconds > 5)
+        var retranslateCount = this.RetranslateTargetCount(includeUser: true);
+        ImGui.BeginDisabled(busy || retranslateCount == 0);
+        if (ImGui.Button($"全量重翻 ({retranslateCount})…"))
         {
-            this.restoreArmKey = string.Empty;
-        }
-
-        var armed = string.Equals(this.restoreArmKey, entry.InternalName, StringComparison.Ordinal);
-        if (ImGui.Button(armed ? "再点一次确认还原" : "还原原文"))
-        {
-            if (armed)
-            {
-                this.restoreArmKey = string.Empty;
-                this.StartRestore();
-            }
-            else
-            {
-                this.restoreArmKey = entry.InternalName;
-                this.restoreArmAt = DateTime.Now;
-                this.SetStatus("还原会把插件恢复成英文；5 秒内再点一次「再点一次确认还原」执行。", false);
-            }
+            this.retranslateIncludeUser = false;
+            this.retranslateConfirmPending = true;
         }
 
         ImGui.EndDisabled();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip(hasBackup
-                ? "把插件 DLL 还原成打补丁之前的原始文件，然后自动重载插件（界面恢复英文）。"
-                : "还没有打过补丁，没有可还原的文件。");
+            ImGui.SetTooltip("把当前所有译文（含已经翻过的，比如公共库 / 玩家包带来的）重新用当前通道翻一遍。\n" +
+                             "适合下载到的包质量不行、想换成自己通道的译文时用；翻完要点「写入并重载」才生效。");
         }
 
         ImGui.SameLine();
@@ -802,21 +794,6 @@ internal sealed class UITextEditorWindow : Window
                 ImGui.SetTooltip("术语表更新后，旧的机器翻译不会自己升级；这一项把「术语对不上」的条目挑出来重翻。\n玩家自己改过的译文不会被动。");
             }
 
-            // 全量重翻：下载到质量不行的公共库 / 玩家包时，用当前通道把它们整个换掉
-            //（2026-10-07 用户定：已下载的译文不算例外，全量重翻不再被「已有译文」挡住）。
-            var retranslate = this.RetranslateTargets(includeUser: true);
-            if (ImGui.MenuItem($"全量重翻（{retranslate.Count} 条）…", enabled: !busy && retranslate.Count > 0))
-            {
-                this.retranslateIncludeUser = false;
-                this.retranslateConfirmPending = true;
-            }
-
-            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-            {
-                ImGui.SetTooltip("把当前所有译文（含已经翻过的，比如公共库 / 玩家包带来的）重新用当前通道翻一遍。\n" +
-                                 "适合下载到的包质量不行、想换成自己通道的译文时用；翻完要点「写入并重载」才生效。");
-            }
-
             ImGui.Separator();
             if (ImGui.MenuItem("导出未翻（给 AI）"))
             {
@@ -829,17 +806,32 @@ internal sealed class UITextEditorWindow : Window
             }
 
             ImGui.Separator();
-            var hasHuman = this.pack.Entries.Any(e => e.IsUserSource && e.HasTranslation)
-                           || this.pack.Resources.Any(r => r.IsUserSource && r.HasTranslation)
-                           || this.pack.Attributes.Any(a => a.IsUserSource && a.HasTranslation);
-            if (ImGui.MenuItem("提交人工译文到公共译文库…", enabled: hasHuman))
+            if (this.restoreArmKey.Length > 0 && (DateTime.Now - this.restoreArmAt).TotalSeconds > 5)
             {
-                this.SubmitContributions();
+                this.restoreArmKey = string.Empty;
+            }
+
+            var restoreArmed = string.Equals(this.restoreArmKey, entry.InternalName, StringComparison.Ordinal);
+            if (ImGui.MenuItem(restoreArmed ? "再点一次确认还原" : "还原原文", enabled: !busy && hasBackup))
+            {
+                if (restoreArmed)
+                {
+                    this.restoreArmKey = string.Empty;
+                    this.StartRestore();
+                }
+                else
+                {
+                    this.restoreArmKey = entry.InternalName;
+                    this.restoreArmAt = DateTime.Now;
+                    this.SetStatus("还原会把插件恢复成英文；5 秒内再点一次「再点一次确认还原」执行。", false);
+                }
             }
 
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
-                ImGui.SetTooltip("把你手工改过的译文整理成一份贡献，打开 GitHub 提交页（不带任何账号信息）。\n提交后随每周更新进入公共译文库。");
+                ImGui.SetTooltip(hasBackup
+                    ? "把插件 DLL 还原成打补丁之前的原始文件，然后自动重载插件（界面恢复英文）。"
+                    : "还没有打过补丁，没有可还原的文件。");
             }
 
             ImGui.Separator();
@@ -1530,101 +1522,6 @@ internal sealed class UITextEditorWindow : Window
                     this.SetStatus("导入失败：" + e.Message, true);
                 }
             });
-    }
-
-    /// <summary>
-    ///     把「人工改过的译文」整理成一份贡献，打开 GitHub 新建 issue 页（匿名，不带账号信息）。
-    ///     与「参与翻译」的简介投稿同一套：玩家在网页上按 Submit；内容太大时先导出 JSON 让玩家拖附件。
-    /// </summary>
-    private void SubmitContributions()
-    {
-        if (this.entry is null)
-        {
-            return;
-        }
-
-        this.SaveIfDirty(force: true);
-
-        // 本地体检（2026-10-03 用户要求）：不过的条目不提交、在状态行点名。
-        var problems = new List<UITextQuality.Problem>();
-        bool Healthy(string kind, string original, string translated)
-        {
-            var reason = UITextQuality.Check(original, translated);
-            if (reason is null)
-            {
-                return true;
-            }
-
-            problems.Add(new UITextQuality.Problem(kind + " · " + UITextQuality.Label(original), original, reason));
-            return false;
-        }
-
-        var entries = this.pack.Entries
-            .Where(e => e.IsUserSource && e.HasTranslation && !this.pack.IsSkipped(e.Original) && Healthy("条目", e.Original, e.Translated))
-            .Select(e => new { e.Original, e.Translated, Context = e.Context ?? string.Empty, Source = "user" })
-            .ToList();
-        var resources = this.pack.Resources
-            .Where(r => r.IsUserSource && r.HasTranslation && !this.pack.IsResourceSkipped(r.Container, r.Key) && Healthy("资源", r.Original, r.Translated))
-            .Select(r => new { r.Container, r.Key, r.Original, r.Translated, Source = "user" })
-            .ToList();
-        var attributes = this.pack.Attributes
-            .Where(a => a.IsUserSource && a.HasTranslation && !this.pack.IsAttributeSkipped(a.Original) && Healthy("属性", a.Original, a.Translated))
-            .Select(a => new { a.Original, a.Translated, Source = "user" })
-            .ToList();
-        var total = entries.Count + resources.Count + attributes.Count;
-        // 「与原文相同」单拎出来（品牌名等无需翻译，C-06）
-        var blocking = problems.Where(p => !UITextQuality.IsCopyOfSource(p.Reason)).ToList();
-        var copies = problems.Count - blocking.Count;
-        if (total == 0)
-        {
-            this.SetStatus(
-                blocking.Count > 0
-                    ? $"本地检测：{blocking.Count} 条都没过，先修好或标「不翻」再提交（首条：{blocking[0].Label}：{blocking[0].Reason}）"
-                    : copies > 0
-                        ? $"没有要提交的内容：{copies} 条与原文相同（品牌名等无需翻译），不用处理。"
-                        : "还没有人工译文可提交：先在列表里改几条（改过的会标成人工）再来。",
-                blocking.Count > 0);
-            return;
-        }
-
-        // 包名（2026-10-04 用户定）：复用「一键上传」确认框里填的署名（留空 = 匿名）；
-        // 翻译类型：编辑器只收人工改过的条目（IsUserSource 过滤），所以固定是「人工翻译」。
-        var author = (this.plugin.Config.UITextPackAuthor ?? string.Empty).Trim();
-        var payload = JsonSerializer.Serialize(
-            new { type = "uit-contribution", plugin = this.entry.InternalName, packName = author.Length > 0 ? author : null, kinds = new[] { UITextKinds.Human }, entries, resources, attributes },
-            new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-            });
-
-        // 标题行带英文 "contributions"：兼容线上旧版 Worker 的关键词校验（与列表行「一键上传」走同一条通道）
-        var header = $"### FireGaze contributions · 插件界面文字译文贡献\n\n- 插件：`{this.entry.InternalName}`\n- 条数：{total}\n\n";
-        var body = header + "```json\n" + payload + "\n```\n";
-        var title = $"[译文贡献] {this.entry.InternalName} · {total} 条";
-        var internalName = this.entry.InternalName;
-        var storeDirectory = this.store.DirectoryPath;
-        var problemNote = blocking.Count > 0
-            ? $"（另有 {blocking.Count} 条没过本地检测、未提交：{blocking[0].Label}：{blocking[0].Reason}）"
-            : copies > 0
-                ? $"（另有 {copies} 条与原文相同、未提交，不用处理）"
-                : string.Empty;
-
-        this.SetStatus($"正在提交 {total} 条译文…", false);
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                var result = await ContributeSender.SubmitAsync(internalName, total, title, body, payload, storeDirectory).ConfigureAwait(false);
-                await Plugin.Framework.RunOnFrameworkThread(
-                    () => this.SetStatus(result.Message + problemNote, result.Severity == ContributeSendSeverity.Bad)).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                Plugin.Log?.Warning(e, "[内部文本] 提交结果回调调度失败");
-            }
-        });
     }
 
     private void MarkDirty()
