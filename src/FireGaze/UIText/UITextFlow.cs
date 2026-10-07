@@ -176,7 +176,10 @@ internal static class UITextFlow
         var list = new List<UITextTarget>();
         foreach (var entry in pack.Entries)
         {
-            if (entry.HasTranslation || pack.IsSkipped(entry.Original))
+            // 格式串 / 内部 ID 不选进候选（2026-10-07：送翻必然「原样返回」，白耗额度）
+            if (entry.HasTranslation
+                || pack.IsSkipped(entry.Original)
+                || UITextText.LooksUntranslatable(entry.Original))
             {
                 continue;
             }
@@ -190,7 +193,9 @@ internal static class UITextFlow
 
         foreach (var entry in pack.Resources)
         {
-            if (entry.HasTranslation || pack.IsResourceSkipped(entry.Container, entry.Key))
+            if (entry.HasTranslation
+                || pack.IsResourceSkipped(entry.Container, entry.Key)
+                || UITextText.LooksUntranslatable(entry.Original))
             {
                 continue;
             }
@@ -205,7 +210,9 @@ internal static class UITextFlow
 
         foreach (var entry in pack.Attributes)
         {
-            if (entry.HasTranslation || pack.IsAttributeSkipped(entry.Original))
+            if (entry.HasTranslation
+                || pack.IsAttributeSkipped(entry.Original)
+                || UITextText.LooksUntranslatable(entry.Original))
             {
                 continue;
             }
@@ -297,6 +304,12 @@ internal static class UITextFlow
         var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var target in targets)
         {
+            // 最后一道闸：格式串 / 内部 ID 不进通道（编辑窗口不走 TranslationTargets，靠这里兜住）
+            if (UITextText.LooksUntranslatable(target.Original))
+            {
+                continue;
+            }
+
             if (!seen.Add(target.Original))
             {
                 continue;

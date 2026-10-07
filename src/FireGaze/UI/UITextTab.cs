@@ -2065,6 +2065,9 @@ internal sealed class UITextTab
 
             var translatedCount = 0;
             var channelNote = string.Empty;
+
+            // 个别条目没回来时的如实说明（正常写补丁，但这几条给「重试」）
+            string? leftoverDetail = null;
             if (targets.Count == 0
                 && !merge.ReapplyNeeded
                 && libraryChanged == 0
@@ -2128,7 +2131,11 @@ internal sealed class UITextTab
                         string.Join(" | ", result.Failed.Take(10).Select(s => UITextText.OneLine(s, 80))));
                 }
 
-                if (result.Error is not null || applied == 0 && result.Failed.Count > 0)
+                // 通道整条不可用、或回来的比没回来的少 → 真失败；只有个别没回来、其余「原样返回」
+                // （多是格式串 / 内部名）的，不算失败——继续把已翻好的写进插件，那几条用状态行如实提示并给「重试」。
+                var leftoverFailure = applied == 0 && result.Failed.Count > 0;
+                var mostlyDelivered = unchanged + rejected > result.Failed.Count;
+                if (result.Error is not null || (leftoverFailure && !mostlyDelivered))
                 {
                     var reason = result.Error ?? $"失败 {result.Failed.Count} 条";
                     ActivityLog.Error("翻译", $"{entry.InternalName}：翻译失败：{reason}");
@@ -2144,6 +2151,28 @@ internal sealed class UITextTab
                     return;
                 }
 
+                if (leftoverFailure)
+                {
+                    var bits = new List<string>();
+                    if (unchanged > 0)
+                    {
+                        bits.Add($"{unchanged} 条与原文一致（多为格式串或内部名，无需翻译）");
+                    }
+
+                    if (rejected > 0)
+                    {
+                        bits.Add($"{rejected} 条没过占位符校验");
+                    }
+
+                    if (bits.Count == 0)
+                    {
+                        bits.Add("通道只回了一部分");
+                    }
+
+                    leftoverDetail = string.Join("；", bits)
+                                     + $"；{result.Failed.Count} 条未返回，点「重试」可再试一次。已翻好的译文不会丢。";
+                }
+
                 if (applied == 0 && pack.TranslatedTotal == 0)
                 {
                     // 通道把候选原样返回（多是本来就无需翻译）——这不是「打补丁失败」，别按失败报
@@ -2152,10 +2181,16 @@ internal sealed class UITextTab
                         : rejected > 0
                             ? $"{rejected} 条没过占位符校验"
                             : "翻译通道没有返回内容";
+                    if (result.Failed.Count > 0)
+                    {
+                        why += $"；另有 {result.Failed.Count} 条未返回";
+                    }
+
                     this.FinishRun(run, new RowNote
                     {
                         Kind = NoteKind.Info,
                         Text = $"没有可应用的译文：{why}。",
+                        CanRetry = result.Failed.Count > 0,
                     });
                     this.rowsDirty = true;
                     return;
@@ -2193,8 +2228,10 @@ internal sealed class UITextTab
 
             this.FinishRun(run, new RowNote
             {
-                Kind = NoteKind.Good,
+                Kind = leftoverDetail is null ? NoteKind.Good : NoteKind.Info,
                 Text = message + extra,
+                Detail = leftoverDetail,
+                CanRetry = leftoverDetail is not null,
             });
         }
         catch (OperationCanceledException)

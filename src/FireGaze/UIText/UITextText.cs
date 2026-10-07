@@ -53,6 +53,18 @@ internal static class UITextText
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     /// <summary>
+    ///     百分号占位符（<c>%d</c> / <c>%.2f</c> / <c>%0.0f</c>）与游戏占位符（<c>%Zone%</c>）。
+    /// </summary>
+    private static readonly Regex PercentTokenPattern = new(
+        @"%[A-Za-z_]+%|%[-+0-9.*#']*[A-Za-z]",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    /// <summary>点分内部名（<c>Ktisis.ApiVersion</c> / <c>config.json</c> / <c>v1.2.3</c>）。</summary>
+    private static readonly Regex QualifiedNamePattern = new(
+        @"^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z0-9_]+)+$",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    /// <summary>
     ///     抽出原文里的占位符（<c>{0}</c> / <c>{name}</c> / <c>%s</c> / <c>\n</c>）。
     /// </summary>
     public static List<string> Placeholders(string text)
@@ -284,6 +296,55 @@ internal static class UITextText
             {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    ///     送翻译没有意义的「非自然语言」文本：格式串（<c>%d s</c> / <c>%.2f</c> / <c>%Zone%</c>）、
+    ///     内部 ID（<c>GET##ApiVersion</c>）、点分内部名（<c>Ktisis.ApiVersion</c>）。
+    ///     这类送进去必然「原样返回」，白耗公共额度，还会让整条任务看起来像失败。
+    /// </summary>
+    /// <remarks>
+    ///     2026-10-07 Ktisis 实测：26 条候选里 25 条是这类技术串，通道原样退回之后任务却报
+    ///     「翻译失败：失败 1 条」。判据保持保守——拆掉占位符后还剩 3 个以上字母的照常送翻
+    ///     （<c>%d days</c> 仍然要翻），只拦一眼不是人话的形态。
+    /// </remarks>
+    public static bool LooksUntranslatable(string text)
+    {
+        var display = ForDisplay(text).Trim();
+        if (display.Length == 0)
+        {
+            return false;
+        }
+
+        // 内部 ID 分隔（GET##ApiVersion / APPLY##RefreshActors）
+        if (display.Contains("##", StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        // 点分内部名（Ktisis.ApiVersion / config.json / v1.2.3）
+        if (QualifiedNamePattern.IsMatch(display))
+        {
+            return true;
+        }
+
+        // 格式串：把 %占位符 全拆掉后，剩下的字母少到不构成词（%d s / %.3f L / %0.0f deg / %Zone%）
+        if (display.IndexOf('%') >= 0)
+        {
+            var residual = PercentTokenPattern.Replace(display, " ");
+            var letters = 0;
+            foreach (var ch in residual)
+            {
+                if (char.IsLetter(ch))
+                {
+                    letters++;
+                }
+            }
+
+            return letters <= 3;
         }
 
         return false;

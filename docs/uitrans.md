@@ -890,3 +890,10 @@ AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打
 - **修复与上云（2026-10-03 完成）**：三轮重翻共 **557 条**（430 + 33 + 94，含属性 / 资源段；0 拒绝），随后重打受影响插件（SimpleTweaks 属性段 617 条复原、AutoHook 45 条等）。
   公共译文库已重新上线：**44 插件 · 10410 条目 · 326 资源 · 666 属性**（`uit-packs/*.json` + `index.json`，PreserveID 一律 false、Source=library、排除本机「不翻」）；同步修复版管线（inbox_uit.py 容器/Source 分级/幂等、export 排除本机不翻、ffxiv_glossary.py 单字过滤 + 去冠词过滤、ffxiv-glossary.tsv 31582 条、uit-rules.json）。
   公开仓推送提交 `de6e9fc`（main，未发版；CI 自动生成仍按 10-02 决定暂停，手动 dispatch 重建前需先同步插件源码）。
+
+## 格式串 / 内部 ID 不进翻译候选 + 部分失败不再报红（2026-10-07，1.4.0.3）
+
+- **起因**：Ktisis 一键汉化从公共译文库补入 133 条后，剩 26 条送机器翻译；其中 25 条被通道「原样退回」（`%Zone%` / `%d s` / `%.3f L` / `Ktisis.ApiVersion` / `GET##ApiVersion` 这类技术串），1 条未返回；旧判定「写入 0 + 失败 > 0」直接标红「翻译失败：失败 1 条」，连 133 条译文也没写进插件——看起来像「下载坏了」。实际是**任务判定**问题，下载与补入都正常。
+- **候选过滤**（`UITextText.LooksUntranslatable`，`TranslationTargets` + `BuildTranslateItems` 双闸）：格式串（百分号占位符拆掉后剩 ≤3 个字母）、含 `##` 的内部 ID、点分内部名（`Ktisis.ApiVersion` / `config.json` / `v1.2.3`）不再选进候选、也不进通道；`%d days` 这类拆完还剩真实单词的照常送翻。
+- **状态判定**：只有「通道整条不可用」或「回来的比没回来的少」才报红；绝大多数候选只是「原样退回」、个别没回来时——照常把已翻好的写进插件，状态行改用中性提示（`N 条与原文一致（多为格式串或内部名，无需翻译）；M 条未返回，点「重试」可再试一次`）。
+- fgtest 断言：`%d s` / `%.2fy` / `%0.0f deg` / `%.3f L` / `%Zone%` / `GET##ApiVersion` / `Ktisis.ApiVersion` 过滤；`%d days` / `Gaze Gizmo?:` / `Save###save_button` 不误伤；`BuildTranslateItems` 去重 + 过滤。
