@@ -1,0 +1,1211 @@
+{
+  "issue": "direct-2026-10-07T09-28-20-295Z-5011b713",
+  "receivedAt": "2026-10-07 09:28:31",
+  "author": "匿名直传",
+  "plugin": "EurekaAggro",
+  "fingerprint": "123579fadcfad436",
+  "packFile": "EurekaAggro@user-123579.json",
+  "accepted": 139,
+  "filled": 139,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "EurekaAggro",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Opens the Eureka Aggro configuration and radar window.",
+        "Translated": "打开 Eureka Agro 配置和雷达窗口。",
+        "Context": "EurekaAggroPlugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Short command to open the Eureka Aggro radar.",
+        "Translated": "快速命令打开 Eureka Aggro 雷达。",
+        "Context": "EurekaAggroPlugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Gawper (Preview)",
+        "Translated": "Gawper(预览版)",
+        "Context": "CastAlertWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Eyes on Me",
+        "Translated": "眼睛盯着我",
+        "Context": "CastAlertWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "INTERRUPT / SILENCE AVAILABLE!",
+        "Translated": "中断/静音可用！",
+        "Context": "CastAlertWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "[!] ENEMY ACTION ALERT",
+        "Translated": "[!] 敌人行动警报",
+        "Context": "CastAlertWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "[!] ENEMY ACTION ALERT (Drag to move)",
+        "Translated": "[!] 敌人行动警报 (拖曳移动)",
+        "Context": "CastAlertWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "STUN REQUIRED!",
+        "Translated": "需要眩晕！",
+        "Context": "CastAlertWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "BREAK LINE OF SIGHT (HIDE)!",
+        "Translated": "突破视线 (隐藏)!",
+        "Context": "CastAlertWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " is casting: ",
+        "Translated": "正在进行选角：",
+        "Context": "CastAlertWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Eureka Aggro Radar",
+        "Translated": "尤里卡聚焦雷达",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Configuration",
+        "Translated": "配置",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Eureka Monsters",
+        "Translated": "尤里卡怪物",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Enemy Actions & Counters",
+        "Translated": "敌人的行动与反击",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Location: ",
+        "Translated": "地点：",
+        "Context": "MainWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Manual",
+        "Translated": "手动",
+        "Context": "MainWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Auto-synced",
+        "Translated": "自动同步",
+        "Context": "MainWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Day",
+        "Translated": "第一天",
+        "Context": "MainWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "[Active in Eureka | Elemental Lv. ",
+        "Translated": "【在 Eureka 中活跃 | 元素 LV。",
+        "Context": "MainWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "| Weather: ",
+        "Translated": "天气：",
+        "Context": "MainWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Enable Eureka Aggro Radar",
+        "Translated": "启用 Eureka 聚焦雷达",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Activate only inside Eureka expedition zones",
+        "Translated": "仅在 Eureka 探险区域内激活",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Detection range",
+        "Translated": "探测范围",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Latency / Safety margin buffer",
+        "Translated": "延迟/安全边际缓冲区",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "+%.2f m",
+        "Translated": "+%2f m",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Adds an extra safety buffer to aggro circles to account for network ping and server tick latency.",
+        "Translated": "添加额外的安全缓冲区来聚合循环，以解决网络 ping 和服务器滴答延迟的问题。",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Filter out monsters on cliffs / ledges / caves (different elevation)",
+        "Translated": "过滤悬崖、岩架和洞穴上的怪物 (不同海拔)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "In Eureka Pagos/Pyros, monsters cannot aggro across vertical drop-offs. Filters false alarms.",
+        "Translated": "在 Eureka Pagos/Pyros 中，怪物无法跨越垂直落差聚集。过滤虚假警报。",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Vertical elevation tolerance",
+        "Translated": "垂直高度容忍度",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Elemental Level & Safe Mob Filtering (Anti-Clutter):",
+        "Translated": "元素级别和安全群众过滤 (抗杂波)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Filter out lower-level monsters that cannot aggro you",
+        "Translated": "过滤掉那些无法激怒你的低级怪物",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hides cones and circles for monsters whose level is too low to attack you. Perfect for avoiding clutter when hunting bunny chests or traveling through lower level areas.",
+        "Translated": "为那些等级太低无法攻击你的怪物隐藏圆锥体和圆圈。非常适合在狩猎兔宝箱或穿越低等级区域时避免混乱。",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Auto-detect & sync Elemental Level (Memory & Zone cap)",
+        "Translated": "自动检测和同步元素级 (内存和区域盖)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reads your active Elemental Level in real time from game memory, automatically syncing to zone caps (e.g. 20 in Anemos, 35 in Pagos, 50 in Pyros, 60 in Hydatos).",
+        "Translated": "实时从游戏内存读取您的活跃元素等级，自动同步区域上限 (例如，Anemos 20,Pagos 35,Pyros 50,Hydatos 60)。",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Active Elemental Level: ",
+        "Translated": "活动元素级别：",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "[Manual override]",
+        "Translated": "[手动覆盖]",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "[Auto-synced from Eureka]",
+        "Translated": "[自动同步来自 Eureka]",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Manual Elemental Level",
+        "Translated": "手动元素等级",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Quick Level Presets:",
+        "Translated": "快速关卡预设：",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Anemos (20)",
+        "Translated": "阿涅莫斯 (20)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Pagos (35)",
+        "Translated": "帕戈斯 (35)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Pyros (50)",
+        "Translated": "派洛斯 (50)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Hydatos (60)",
+        "Translated": "海达斯 (60)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Safe level difference threshold",
+        "Translated": "安全级别差异阈值",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "%d levels below",
+        "Translated": "低于%d 级别",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "In FFXIV Eureka, standard sight/proximity monsters 2 or more levels below you will never aggro. (Default: 2)",
+        "Translated": "在 FFXIV 尤里卡中，标准视野/距离比你低 2 级或以上的怪物永远不会产生仇恨。(默认值:2)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Always show Sleeping Dragons (regardless of level)",
+        "Translated": "始终显示睡龙 (无论等级如何)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Always show Undead / Ashkin (Blood aggro)",
+        "Translated": "总是展示不死族/阿什金 (血仇)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Always show Sprites / Elementals (Magic aggro)",
+        "Translated": "始终显示精灵/元素 (魔法聚集)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Eureka Aggro Mechanics & Distances:",
+        "Translated": "尤里卡阿格罗机械与距离：",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Sound Aggro (Dragons, Crabs, Amphibians - Walk to avoid)",
+        "Translated": "声音聚集 (龙、螃蟹、两栖动物——步行避开)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Sound running aggro distance",
+        "Translated": "声音运行仇恨距离",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Walk vs run speed threshold",
+        "Translated": "步行与跑步的速度阈值",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Auto-walk near Sleeping Dragons (prevents accidental running aggro)",
+        "Translated": "在沉睡的龙附近自驾游 (防止意外跑步产生敌意)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Auto-walk activation range",
+        "Translated": "自动步行激活范围",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "(Auto-adds +4.0m buffer when mounted. Auto-disengages instantly if combat begins.)",
+        "Translated": "(安装时自动添加 +4.0m 缓冲区。如果战斗开始，自动断开连接。)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Print Auto-Walk notifications to chat log",
+        "Translated": "打印自动步行通知以获取聊天记录",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Test Walk Mode Toggle Now",
+        "Translated": "立即切换测试步行模式",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "(Toggles Keypad / in-game Walk state & writes to Dalamud log)",
+        "Translated": "(切换键盘/游戏内行走状态并写入 Daramud 日志)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Undead / Ashkin: Blood detection (Flashes red if player HP < 80%)",
+        "Translated": "亡灵/阿什金：血液检测 (玩家生命值低于 80% 时闪红光)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Undead blood aggro distance",
+        "Translated": "亡灵血仇恨距离",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Sprites / Elementals: Magic aggro (Displays \"DO NOT CAST MAGIC\" warning)",
+        "Translated": "精灵/元素：魔法仇恨 (显示 “请勿施展魔法” 警告)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Sprite magic detection distance",
+        "Translated": "精灵魔法探测距离",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Standard Monsters: Frontal vision cone",
+        "Translated": "标准怪物：正面视锥",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Standard Monsters: 360-degree proximity aggro",
+        "Translated": "标准怪物:360 度近距离攻击",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Visual Guides & Overlays:",
+        "Translated": "可视化指南和叠加：",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Distance guide line (< 10m red, >= 10m green for precision walking)",
+        "Translated": "距离引导线 (<10 米红线，>=10 米绿线，用于精确步行)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show floating name, aggro type, and distance labels above monsters",
+        "Translated": "在怪物上方显示浮动名称、仇恨类型和距离标签",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show Mutation / Adaptation tracker above eligible mobs (weather/time based)",
+        "Translated": "在合格小怪上方显示突变/适应跟踪器 (基于天气/时间)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Fill cones and circles (unchecked = clean hollow outlines)",
+        "Translated": "填充圆锥体和圆形 (未检查 = 清晰的空心轮廓)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Fill opacity",
+        "Translated": "填充不透明度",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Enemy Action & Cast Alerts (HUD):",
+        "Translated": "敌人行动和角色预警 (HUD):",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Enable floating HUD alert for dangerous casts (Interrupt, Stun, LOS)",
+        "Translated": "为危险角色启用浮动 HUD 警报 (中断、眩晕、LOS)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Only show cast alerts for current target (ignore background enemies)",
+        "Translated": "仅显示当前目标的投射警报 (忽略背景敌人)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Lock alert window position (uncheck to drag anywhere with mouse)",
+        "Translated": "锁定警告窗口位置 (取消选中以使用鼠标随处拖动)",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Preview & drag alert window position now",
+        "Translated": "立即预览并拖动警告窗口位置",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reset Window Position",
+        "Translated": "重置窗口位置",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Print dangerous enemy casts to in-game chat log",
+        "Translated": "将危险的敌方角色打印到游戏内聊天记录",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Color Palette & Customization:",
+        "Translated": "调色板和自定义：",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Aggro Circles & Vision Cones",
+        "Translated": "仇恨圆圈和视觉锥",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Sleeping Dragons (Sound)##colDragon",
+        "Translated": "沉睡的龙 (声音)##colDragon",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Undead / Ashkin (Blood)##colBlood",
+        "Translated": "亡灵/阿什金 (血)##colBlood",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Sprites / Elementals (Magic)##colMagic",
+        "Translated": "精灵/元素 (魔法)##colMagic",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "High Danger Monsters##colDanger",
+        "Translated": "高危险怪物##colDanger",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Caution Monsters##colCaution",
+        "Translated": "警告怪物##colCaution",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Easy / Safe Monsters##colEasy",
+        "Translated": "轻松/安全的怪物##colEasy",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Standard / Other Monsters##colUnknown",
+        "Translated": "标准/其他怪物##colUnknown",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Text Labels & Warning Overlays",
+        "Translated": "文本标签和警告覆盖",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Override floating monster name label color",
+        "Translated": "覆盖浮动怪物名称标签颜色",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Custom Monster Label Color##colText",
+        "Translated": "自定义怪物标签颜色##colText",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Dragon Safe / Auto-Walk Engaged Text##colSafeText",
+        "Translated": "龙安全/自动行走参与文本##colSafe 文本",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Dragon Running Danger Alert Text##colWarnText",
+        "Translated": "龙奔危险警报文本##colWarn 文本",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Mutation Available Now (Active)##colMutActive",
+        "Translated": "突变现在可用 (活动)##colMutActive",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Mutation Upcoming (Inactive)##colMutInactive",
+        "Translated": "变异即将发生 (非活跃)##colMutInactive",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Distance Guide Line (< 10m Danger)##colLineNear",
+        "Translated": "距离引导线 (<10 米危险)##colLineNear",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Distance Guide Line (>= 10m Safe)##colLineFar",
+        "Translated": "距离引导线 (>= 10 米安全)##colLineFar",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Reset All Colors to Default",
+        "Translated": "将所有颜色重置为默认",
+        "Context": "MainWindow.DrawConfigurationTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Search monster by name...",
+        "Translated": "按名字搜索怪物......",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Save Changes##Mobs",
+        "Translated": "保存更改##Mobs",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Aggro Type",
+        "Translated": "聚合类型",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Distance (m)",
+        "Translated": "距离 (m)",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Cone Angle (°)",
+        "Translated": "锥角 (°)",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Unknown",
+        "Translated": "未知",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Proximity",
+        "Translated": "接近度",
+        "Context": "MainWindow.DrawMonstersTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Search action or mob name...",
+        "Translated": "搜索行动或黑帮名称......",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Save Changes##Actions",
+        "Translated": "保存更改##操作",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Monster",
+        "Translated": "怪物",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Action",
+        "Translated": "行动",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Stun",
+        "Translated": "眩晕",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Silence",
+        "Translated": "沉默",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Regen",
+        "Translated": "雨",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Alert Message",
+        "Translated": "警报消息",
+        "Context": "MainWindow.DrawActionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "SILENCE / INTERRUPT NOW!",
+        "Translated": "静音/中断！",
+        "Context": "CastMonitor.ProcessEnemyCast",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "STUN NOW!",
+        "Translated": "立即停止！",
+        "Context": "CastMonitor.ProcessEnemyCast",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "BREAK LINE OF SIGHT (LOS)!",
+        "Translated": "突破视线 (LOS)!",
+        "Context": "CastMonitor.ProcessEnemyCast",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "HEALING / REGEN NEEDED!",
+        "Translated": "需要治愈/治疗！",
+        "Context": "CastMonitor.ProcessEnemyCast",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[EurekaAggro] Alert: ",
+        "Translated": "【EurekaAggro】警告：",
+        "Context": "CastMonitor.ProcessEnemyCast",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " is casting ",
+        "Translated": "正在施放",
+        "Context": "CastMonitor.ProcessEnemyCast",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "On Foot",
+        "Translated": "徒步",
+        "Context": "DragonWalkService.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Mounted",
+        "Translated": "骑行 ✔ 自动步行",
+        "Context": "DragonWalkService.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[EurekaAggro] ✔ Auto-Walk engaged near '",
+        "Translated": "[EurekaAggro]✔ 在附近进行自驾游",
+        "Context": "DragonWalkService.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[EurekaAggro] ⚠ In combat / Aggroed! Auto-Walk disengaged, RUN mode restored!",
+        "Translated": "[EurekaAggro]⚠ 战斗中/被激怒！自动行走解除连接，RUN 模式恢复！",
+        "Context": "DragonWalkService.RestoreRunMode",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[EurekaAggro] ✔ Safely left dragon zone. Run mode restored.",
+        "Translated": "[EurekaAggro]✔ 安全离开龙区。运行恢复模式。",
+        "Context": "DragonWalkService.RestoreRunMode",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Requires Night (18:00 ET)",
+        "Translated": "需求之夜 (东部标准时间 18:00)",
+        "Context": "EurekaEnvironmentService.CheckMutation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "Night (Active)",
+        "Translated": "夜晚 (活跃)",
+        "Context": "EurekaEnvironmentService.CheckMutation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": " (Active)",
+        "Translated": "(活动)",
+        "Context": "EurekaEnvironmentService.CheckMutation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "✔ AUTO-WALK ENGAGED (SAFE)",
+        "Translated": "✔ 自动步行 (安全)",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "⚠ RUNNING NEAR DRAGON! WALK NOW (KEYPAD /)",
+        "Translated": "⚠ 奔跑的近龙！现在就走 (KEYPAD /)",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "✔ SLEEPING DRAGON (SAFE)",
+        "Translated": "✔ 沉睡的龙 (安全)",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "⚠ SOUND AGGRO! WALK TO AVOID (KEYPAD /)",
+        "Translated": "⃠ 声音仇恨！走向避免 (KEYPAD /)",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "☠ HP < 80%: BLOOD AGGRO ACTIVE (HEAL TO SAFE)",
+        "Translated": "☠ HP < 80%:血液聚集活跃 (Heal to Safe)",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "⚡ CASTING DETECTED! SPRITE WILL AGGRO!",
+        "Translated": "⚚ 选角检测到！Sprite Will Aggro!",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "⚡ Sprite [DO NOT CAST SPELLS]",
+        "Translated": "⚄ Sprite [DO NOT Cast Spells]",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "[Blood / Undead]",
+        "Translated": "[血/亡灵]",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "[Magic / Sprite]",
+        "Translated": "【魔法/精灵】",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "🧬 CAN MUTATE NOW: ",
+        "Translated": "🧧现在可以 Mutates 了：",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImDrawListPtr.AddText"
+      },
+      {
+        "Original": "✔ EUREKA AUTO-WALK ENGAGED (",
+        "Translated": "✔ Eureka 已经开始自驾游 (",
+        "Context": "OverlayRenderer.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Unknown Zone",
+        "Translated": "未知区域",
+        "Context": "ValidZones.GetZoneName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
