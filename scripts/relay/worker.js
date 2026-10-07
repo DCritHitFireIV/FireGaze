@@ -1,4 +1,4 @@
-// FireGaze 中继（Cloudflare Worker）v11
+// FireGaze 中继（Cloudflare Worker）v12
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
@@ -16,10 +16,12 @@
 //       存储复用 LIBRARY_COUNTS（v11 起整个池子存在单键 `pool:index`，热路径不再 list；旧 tok:* 键自动迁移）；
 //       管理端点要机密 ADMIN_KEY（不配 = 管理面关闭）。
 //       池子为空时仍用 CAIYUN_TOKEN 兜底（旧配置零改动）；池子用完可推手机提醒（可选，见下）。
-//   · KV 免费额度纪律（v11）——免费版每天只有 1,000 次 list / 1,000 次写，必须省着用：
-//       聚合计数（/library-counts、/plugin-stats）走 30 分钟内存缓存，且两个端点共用一份
-//       「全键列表」缓存（每 30 分钟最多 1 次 list/实例）；计数写入时把数值也放进 KV metadata，
-//       聚合读取靠 list 的 metadata 直读（不再逐键 get）；token 池用单键，不再 list。
+//   · KV 免费额度纪律（v11/v12）——免费版每天只有 1,000 次 list / 1,000 次写，必须省着用：
+//       聚合计数（/library-counts、/plugin-stats）三层缓存：本实例内存（30 分钟）
+//       → Cloudflare Cache API（6 小时，按数据中心共享、跨实例、不占 KV 额度）→ KV 构建。
+//       构建时两个端点共用一份「全键列表」缓存（每次构建最多 1 次 list）；计数写入时把数值
+//       也放进 KV metadata，读取靠 list 的 metadata 直读，只有旧键（没 metadata）才逐键 get
+//       ——并发上限 16，不再串行。token 池用单键，不再 list。
 //   · 界面译文直传（POST /uit-submit）——2026-10-04 新增：
 //       几千条的投稿不再走 issue 粘贴；Worker 直接把它提交成
 //       docs/contributions/inbox/uit-direct-<时间>-<随机>.json，仓库工作流接手并入公共库。
@@ -72,8 +74,10 @@ const POOL_EMPTY_NOTIFY_MS = 6 * 3600 * 1000; // 池子空的提醒节流
 const POOL_ADMIN_PER_IP_LIMIT = 30; // 管理端点每分钟每 IP
 
 // 聚合读（/library-counts、/plugin-stats）的缓存：免费版每天只有 1,000 次 list，
-// 客户端本来就自带 5–10 分钟节流，服务端再挡一层；两个端点共用一份全键列表。
-const AGG_CACHE_MS = 30 * 60_000;
+// 客户端本来就自带 5–10 分钟节流，服务端再挡两层；两个端点共用一份全键列表。
+const AGG_CACHE_MS = 30 * 60_000; // L1：本实例内存
+const AGG_SHARED_TTL_MS = 6 * 3600_000; // L2：Cache API，按数据中心共享、跨实例、不占 KV
+const AGG_READ_CONCURRENCY = 16; // 旧键逐条 get 的并发上限
 const KEY_LIST_CACHE_MS = 30 * 60_000;
 let libraryCountsCache = { at: 0, body: null };
 let pluginStatsCache = { at: 0, body: null };
@@ -321,18 +325,67 @@ async function listKeysCached(store) {
 
 /// 按前缀读全部计数（KV list 单次最多 1000 把键，必须分页——插件 2000 条时会静默截断）。
 /// v11：优先读 list 返回的 metadata.v（一次 list 带出计数），只有旧键（没 metadata）才逐键 get。
+/// v12：旧键 get 改为并发（上限 AGG_READ_CONCURRENCY）——实测 241 把旧键串行要 55 秒，
+///       超出客户端 20 秒超时；并发后 2–3 秒。
 async function readAllByPrefix(store, prefix) {
   const values = {};
+  const legacy = [];
   for (const entry of await listKeysCached(store)) {
     if (!entry.name.startsWith(prefix)) {
       continue;
     }
 
     const fromMeta = entry.metadata && typeof entry.metadata.v === 'number' ? entry.metadata.v : null;
-    values[entry.name.slice(prefix.length)] = fromMeta
-      ?? (Number.parseInt((await store.get(entry.name)) ?? '0', 10) || 0);
+    if (fromMeta !== null) {
+      values[entry.name.slice(prefix.length)] = fromMeta;
+    } else {
+      legacy.push(entry.name);
+    }
+  }
+
+  for (let i = 0; i < legacy.length; i += AGG_READ_CONCURRENCY) {
+    const batch = legacy.slice(i, i + AGG_READ_CONCURRENCY);
+    const got = await Promise.all(
+      batch.map(async (name) => [name, Number.parseInt((await store.get(name)) ?? '0', 10) || 0]),
+    );
+    for (const [name, value] of got) {
+      values[name.slice(prefix.length)] = value;
+    }
   }
   return values;
+}
+
+/// 聚合结果的共享缓存（L2，Cloudflare Cache API）：按数据中心共享、跨实例、不占 KV 额度。
+/// 条目自带 builtAt，超过 AGG_SHARED_TTL_MS 就重建；Cache 不可用时静默直连。
+async function readAggregationCache(key, producer) {
+  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null;
+  if (cache) {
+    try {
+      const hit = await cache.match(key);
+      if (hit) {
+        const entry = await hit.json();
+        const fresh = entry && entry.body && typeof entry.builtAt === 'number'
+          && Date.now() - entry.builtAt < AGG_SHARED_TTL_MS;
+        if (fresh) {
+          return entry.body;
+        }
+      }
+    } catch {
+      // 缓存读失败：直接重建
+    }
+  }
+
+  const body = await producer();
+  if (cache) {
+    try {
+      await cache.put(key, new Response(JSON.stringify({ builtAt: Date.now(), body }), {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      }));
+    } catch {
+      // 缓存写失败不影响本次响应
+    }
+  }
+  return body;
 }
 
 /// 插件发现：点赞（按插件、按周）。总赞累加；周赞落在当周键上，下周可以再点。
@@ -391,16 +444,19 @@ async function handlePluginStats(env) {
   }
 
   const now = Date.now();
-  if (pluginStatsCache.body && now - pluginStatsCache.at < AGG_CACHE_MS) {
+  const week = beijingISOWeek();
+  if (pluginStatsCache.body && pluginStatsCache.week === week && now - pluginStatsCache.at < AGG_CACHE_MS) {
     return json(pluginStatsCache.body);
   }
 
-  const week = beijingISOWeek();
-  const total = await readAllByPrefix(store, 'plike_total:');
-  const weekly = await readAllByPrefix(store, `plike_w:${week}:`);
-  const adds = await readAllByPrefix(store, 'padd:');
-  const body = { ok: true, week, total, weekly, adds, updatedAt: new Date().toISOString() };
-  pluginStatsCache = { at: now, body };
+  // 缓存键带周号：跨周时不拿旧周的周赞
+  const body = await readAggregationCache(`https://firegaze-relay.invalid/agg/plugin?week=${week}`, async () => {
+    const total = await readAllByPrefix(store, 'plike_total:');
+    const weekly = await readAllByPrefix(store, `plike_w:${week}:`);
+    const adds = await readAllByPrefix(store, 'padd:');
+    return { ok: true, week, total, weekly, adds, updatedAt: new Date().toISOString() };
+  });
+  pluginStatsCache = { at: now, week, body };
   return json(body);
 }
 
@@ -492,9 +548,11 @@ async function handleLibraryCounts(env) {
     return json(libraryCountsCache.body);
   }
 
-  const counts = await readAllByPrefix(store, 'dl:');
-  const likes = await readAllByPrefix(store, 'like:');
-  const body = { ok: true, updatedAt: new Date().toISOString(), counts, likes };
+  const body = await readAggregationCache('https://firegaze-relay.invalid/agg/library', async () => {
+    const counts = await readAllByPrefix(store, 'dl:');
+    const likes = await readAllByPrefix(store, 'like:');
+    return { ok: true, updatedAt: new Date().toISOString(), counts, likes };
+  });
   libraryCountsCache = { at: now, body };
   return json(body);
 }
@@ -1047,7 +1105,7 @@ export default {
         return handlePoolStatus(request, env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 11 });
+      return json({ ok: true, service: 'firegaze-relay', version: 12 });
     }
 
     if (request.method !== 'POST') {
