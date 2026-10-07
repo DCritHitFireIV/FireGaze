@@ -1,0 +1,432 @@
+{
+  "issue": "direct-2026-10-07T09-44-11-421Z-c28487e6",
+  "receivedAt": "2026-10-07 09:44:27",
+  "author": "匿名直传",
+  "plugin": "PixelPerfect",
+  "fingerprint": "a9bf232c906e5569",
+  "packFile": "PixelPerfect@user-a9bf23.json",
+  "accepted": 49,
+  "filled": 49,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "PixelPerfect",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Welcome to Pixel Perfect!",
+        "Translated": "欢迎来到 Pixel Perfect!",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Hey, and thanks for installing my plugin!",
+        "Translated": "嘿，谢谢你安装了我的插件！",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Use the config menu, and add a doodle to get started.",
+        "Translated": "使用配置菜单，添加一个涂鸦来开始。",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Open Config",
+        "Translated": "打开配置",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Pixel Perfect Config",
+        "Translated": "像素完美配置",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Hide Updates",
+        "Translated": "隐藏更新",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Never show any messages.",
+        "Translated": "永远不要显示任何消息。",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Turn the doodle on/off entirely",
+        "Translated": "完全打开/关闭涂鸦",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Only show when engaged in combat",
+        "Translated": "只有在战斗中才会显示",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Only show when in an instance (a dungeon/raid etc)",
+        "Translated": "仅在实例中显示 (地下城/突袭等)",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Only show when your weapon is unsheathed",
+        "Translated": "仅在武器出鞘时显示",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Name the doodle!",
+        "Translated": "说出涂鸦的名字！",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Delete the doodle",
+        "Translated": "删除涂鸦",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Add Doodle",
+        "Translated": "添加涂鸦",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Show Editor",
+        "Translated": "显示编辑器",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "You can export and import your doodles to share, by using the buttons below.",
+        "Translated": "您可以使用下面的按钮导出和导入您的涂鸦以进行共享。",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Either export your current doodles to your clipboard, and then share the string with your friends, or import a currently copied exported string into your own doodles, by using the import button!",
+        "Translated": "要么将当前的涂鸦导出到剪贴板，然后与朋友分享字符串，要么使用导入按钮将当前复制的导出字符串导入到自己的涂鸦中！",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Export",
+        "Translated": "导出",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copied to clipboard",
+        "Translated": "复制到剪贴板",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Exports your current Doodles to your clipboard for sharing!",
+        "Translated": "将您当前的涂鸦导出到剪贴板进行分享！",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Import from Clipboard",
+        "Translated": "从剪贴板导入",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Imported successfully",
+        "Translated": "成功导入",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Could not import",
+        "Translated": "无法导入",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Imports your current clipboard to your Doodles!",
+        "Translated": "将当前的剪贴板导入涂鸦中！",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Otherwise, player relative",
+        "Translated": "否则，玩家相对",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Close",
+        "Translated": "关闭",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Buy Haplo a Hot Chocolate",
+        "Translated": "买 Haplo 热巧克力",
+        "Context": "PixelPerfect.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Canvas",
+        "Translated": "画布",
+        "Context": "PixelPerfect.DrawDoodles",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Pixel Perfect Editor",
+        "Translated": "像素完美编辑器",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Scale",
+        "Translated": "缩放",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputFloat"
+      },
+      {
+        "Original": "Each box is 1 Yalm by 1 Yalm",
+        "Translated": "每个盒子都是 1Yllm×1Yllm",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Help",
+        "Translated": "帮助",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Pixel Perfect Editor Help",
+        "Translated": "像素完美编辑器帮助",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Here you can see and edit your overlay in real time.",
+        "Translated": "在这里，您可以实时查看和编辑您的叠加效果。",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Select the Doodle tab in the config, and the selected doodle will highlight in the editor.",
+        "Translated": "在配置中选择 “涂鸦” 选项卡，所选涂鸦将在编辑器中突出显示。",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "If you have a `line` doodle, you can also <Left Click> the ends to move them, and <Left Click> again to place them down.",
+        "Translated": "如果你有一个<line>涂鸦，你还可以<Left Click>两端移动它们，然后<Left Click>再次放下它们。",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The dot in the centre is your player character.",
+        "Translated": "中间的点代表你的玩家角色。",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pixel Perfect Update",
+        "Translated": "像素完美更新",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Updated for 7.0!",
+        "Translated": "7.0 版本更新！",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "- Added VPR and PCT.",
+        "Translated": "添加 VPR 和 PCT。",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "- Added Cones for object drawing",
+        "Translated": "- 添加用于物体绘制的锥体",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "- Added Z Editing",
+        "Translated": "添加了 Z 编辑",
+        "Context": "PixelPerfect.DrawEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ring",
+        "Translated": "戒指",
+        "Context": "PixelPerfect..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Line",
+        "Translated": "行",
+        "Context": "PixelPerfect..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Dot",
+        "Translated": "点",
+        "Context": "PixelPerfect..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Dashed Ring",
+        "Translated": "破折号环",
+        "Context": "PixelPerfect..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Cone",
+        "Translated": "锥形",
+        "Context": "PixelPerfect..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Pixel Perfect config.",
+        "Translated": "Pixel Perfect 配置。",
+        "Context": "PixelPerfect..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Doodle",
+        "Translated": "涂鸦",
+        "Context": "Drawing..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
