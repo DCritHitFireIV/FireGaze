@@ -1,0 +1,1456 @@
+{
+  "issue": "direct-2026-10-07T01-12-45-259Z-8036bb38",
+  "receivedAt": "2026-10-07 01:12:57",
+  "author": "匿名直传",
+  "plugin": "SentinelHunts",
+  "fingerprint": "ce622e9f008b2879",
+  "packFile": "SentinelHunts@user-ce622e.json",
+  "accepted": 177,
+  "filled": 177,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "SentinelHunts",
+    "packName": "灰灰",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Open Sentinel Hunts. Subcommands: test, stop, retry, skip.",
+        "Translated": "打开 Sentinel Hunts。子命令：test、stop、retry、skip。",
+        "Context": "[SentinelHunts] Plugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "CLEAN S-RANK TEST BUILD",
+        "Translated": "CLEAN S-RANK 测试版",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sentinel Hunts has its own assembly, command, configuration, queue, and internal name. It can be installed beside S Rank Sentinel without replacing it.",
+        "Translated": "Sentinel Hunts 拥有独立的程序集、命令、配置、队列和内部名称。它可以与 S Rank Sentinel 并存安装，而不会将其替换。",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "State: ",
+        "Translated": "状态：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Status: ",
+        "Translated": "状态：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "vnavmesh: ",
+        "Translated": "vnavmesh：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "not ready",
+        "Translated": "未就绪",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "ready",
+        "Translated": "就绪",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Lifestream: ",
+        "Translated": "Lifestream：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Active: ",
+        "Translated": "已启用：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " | territory ",
+        "Translated": "| 区域",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " | instance ",
+        "Translated": "| 副本",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Queued hunts: ",
+        "Translated": "已排队狩猎：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enable live travel, movement, and combat",
+        "Translated": "启用实时移动、行进和战斗",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Off by default. Observation mode still receives, filters, deduplicates, and displays reports without controlling the character.",
+        "Translated": "默认关闭。观察模式仍会接收、筛选、去重并显示报告，但不控制角色。",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "STOP NOW",
+        "Translated": "立即停止",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Retry current",
+        "Translated": "重试当前",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Skip current",
+        "Translated": "跳过当前",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "ALERT SOURCES",
+        "Translated": "警报来源",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sonar structured map links",
+        "Translated": "Sonar 结构化地图链接",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Sonar: ",
+        "Translated": "Sonar：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "HuntAlerts: ",
+        "Translated": "HuntAlerts：",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Faloop direct feed: held offline in this first build while its undocumented private-feed contract and authentication are isolated and tested.",
+        "Translated": "Faloop 直连源：在此首个版本中保持离线，待其未公开的私有源协议和身份验证被隔离并测试后再启用。",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "EXPANSIONS",
+        "Translated": "资料片",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "A Realm Reborn",
+        "Translated": "重生之境",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Heavensward",
+        "Translated": "苍穹",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Stormblood",
+        "Translated": "Stormblood -血雨狂潮-",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Shadowbringers",
+        "Translated": "Shadowbringers -暗影使者-",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Endwalker",
+        "Translated": "晓月之终途",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Dawntrail",
+        "Translated": "Dawntrail -曦光旅路-",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "SAFETY",
+        "Translated": "安全",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hitbox clearance",
+        "Translated": "碰撞箱间距",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "%.0f yalms",
+        "Translated": "%.0f 星码",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Tomahawk HP threshold",
+        "Translated": "飞斧 HP 阈值",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "The clearance is measured from the S rank's hitbox. Sentinel Hunts approaches only after the mark is in combat and at/below the threshold, requests one WAR Tomahawk, then retreats.",
+        "Translated": "间距从 S 级怪的碰撞箱开始测量。Sentinel Hunts 仅在目标进入战斗且 HP 达到/低于阈值后接近，请求一次战士飞斧，然后撤退。",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Add observation-mode Tyger test report",
+        "Translated": "添加观察模式 Tyger 测试报告",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Clear queued reports",
+        "Translated": "清除已排队报告",
+        "Context": "[SentinelHunts] Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Subscribed to HuntAlerts IPC",
+        "Translated": "已订阅 HuntAlerts IPC",
+        "Context": "[SentinelHunts] HuntAlertsSource..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "HuntAlerts IPC unavailable",
+        "Translated": "HuntAlerts IPC 不可用",
+        "Context": "[SentinelHunts] HuntAlertsSource..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ignored ",
+        "Translated": "已忽略",
+        "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": HuntAlerts world was invalid",
+        "Translated": "：HuntAlerts 服务器无效",
+        "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Last event: ",
+        "Translated": "最后事件：",
+        "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " on ",
+        "Translated": "于",
+        "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "HuntAlerts schema mismatch; adapter paused",
+        "Translated": "HuntAlerts 架构不匹配；适配器已暂停",
+        "Context": "[SentinelHunts] HuntAlertsSource.OnMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Listening for structured Sonar map links",
+        "Translated": "正在监听结构化 Sonar 地图链接",
+        "Context": "[SentinelHunts] SonarSource..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": no valid world in Sonar message",
+        "Translated": "：Sonar 消息中没有有效服务器",
+        "Context": "[SentinelHunts] SonarSource.OnChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Last Sonar message could not be parsed",
+        "Translated": "无法解析最后一条 Sonar 消息",
+        "Context": "[SentinelHunts] SonarSource.OnChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "ready (idle)",
+        "Translated": "就绪（空闲）",
+        "Context": "[SentinelHunts] LifestreamService.get_Activity",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "busy",
+        "Translated": "忙碌",
+        "Context": "[SentinelHunts] LifestreamService.get_Activity",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "unavailable",
+        "Translated": "不可用",
+        "Context": "[SentinelHunts] LifestreamService.get_Activity",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Observation mode; waiting for reports",
+        "Translated": "观察模式；等待报告",
+        "Context": "[SentinelHunts] HuntCoordinator..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Filtered ",
+        "Translated": "已过滤",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is disabled",
+        "Translated": "已禁用",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " death confirmed by ",
+        "Translated": "死亡确认者",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Updated active ",
+        "Translated": "已更新活动",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " report from ",
+        "Translated": "报告来自",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Queued ",
+        "Translated": "已排队",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Merged ",
+        "Translated": "已合并",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " report for ",
+        "Translated": "报告目标",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Removed killed ",
+        "Translated": "已移除已击杀",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " from the queue",
+        "Translated": "从队列中",
+        "Context": "[SentinelHunts] HuntCoordinator.Observe",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for the player to log in",
+        "Translated": "等待玩家登录",
+        "Context": "[SentinelHunts] HuntCoordinator.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Observation mode; ",
+        "Translated": "观察模式；",
+        "Context": "[SentinelHunts] HuntCoordinator.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " hunt(s) queued",
+        "Translated": "个狩猎已排队",
+        "Context": "[SentinelHunts] HuntCoordinator.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " was disabled; abandoning the active hunt safely",
+        "Translated": "已禁用；正在安全放弃当前狩猎",
+        "Context": "[SentinelHunts] HuntCoordinator.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Player died; all movement and combat stopped",
+        "Translated": "玩家死亡；所有移动和战斗已停止",
+        "Context": "[SentinelHunts] HuntCoordinator.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Clearing incidental aggro: ",
+        "Translated": "正在清除附带仇恨：",
+        "Context": "[SentinelHunts] HuntCoordinator.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automation stopped; reports continue to queue",
+        "Translated": "自动化已停止；报告继续排队",
+        "Context": "[SentinelHunts] HuntCoordinator.StopAutomation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retry requested; waiting for the next hunt",
+        "Translated": "已请求重试；等待下一次狩猎",
+        "Context": "[SentinelHunts] HuntCoordinator.RetryCurrent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retrying the active hunt from the current territory",
+        "Translated": "正在从当前区域重试当前狩猎",
+        "Context": "[SentinelHunts] HuntCoordinator.RetryCurrent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retrying the active hunt through Ul'dah",
+        "Translated": "正在通过乌尔达哈重试当前狩猎",
+        "Context": "[SentinelHunts] HuntCoordinator.RetryCurrent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Active hunt skipped by user",
+        "Translated": "当前狩猎已被用户跳过",
+        "Context": "[SentinelHunts] HuntCoordinator.SkipCurrent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Queued hunts cleared; active hunt was not changed",
+        "Translated": "已清空排队狩猎；当前狩猎未更改",
+        "Context": "[SentinelHunts] HuntCoordinator.ClearQueue",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Selected ",
+        "Translated": "已选择",
+        "Context": "[SentinelHunts] HuntCoordinator.TickIdle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; routing through Ul'dah",
+        "Translated": "；正在通过乌尔达哈规划路线",
+        "Context": "[SentinelHunts] HuntCoordinator.TickIdle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No hunt is active; returning to the Ul'dah waiting hub",
+        "Translated": "没有活动狩猎；正在返回乌尔达哈等待中心",
+        "Context": "[SentinelHunts] HuntCoordinator.TickIdle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting at Ul'dah for an eligible S-rank report",
+        "Translated": "正在乌尔达哈等待符合条件的 S 级报告",
+        "Context": "[SentinelHunts] HuntCoordinator.TickIdle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for current travel to finish",
+        "Translated": "等待当前移动完成",
+        "Context": "[SentinelHunts] HuntCoordinator.TickEnsureUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ul'dah ready for World Visit",
+        "Translated": "乌尔达哈已就绪，可进行跨界传送",
+        "Context": "[SentinelHunts] HuntCoordinator.TickEnsureUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Arrived at the Ul'dah waiting hub",
+        "Translated": "已抵达乌尔达哈等待枢纽",
+        "Context": "[SentinelHunts] HuntCoordinator.TickEnsureUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for Lifestream to accept the Ul'dah teleport",
+        "Translated": "等待 Lifestream 接受乌尔达哈传送",
+        "Context": "[SentinelHunts] HuntCoordinator.TickEnsureUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No active hunt remains",
+        "Translated": "没有仍在进行的怪物狩猎",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "World verified: ",
+        "Translated": "服务器已验证：",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; resolving territory teleport",
+        "Translated": "；正在解析区域传送",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is not on the current data center; cross-DC travel is disabled",
+        "Translated": "不在当前大区；跨大区传送已禁用",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "World Visit requires the Ul'dah hub",
+        "Translated": "跨界传送需要乌尔达哈枢纽",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "World Visit to ",
+        "Translated": "跨界传送至",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is in progress",
+        "Translated": "正在进行中",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for Lifestream to accept World Visit to ",
+        "Translated": "等待 Lifestream 接受跨界传送至",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Active hunt disappeared before teleport",
+        "Translated": "传送前怪物狩猎已消失",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Hunt territory reached",
+        "Translated": "已抵达怪物狩猎区域",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Teleporting toward ",
+        "Translated": "正在传送至",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The active hunt no longer resolves in the catalog",
+        "Translated": "该怪物狩猎已无法在目录中解析",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The Dravanian Hinterlands gateway route is not enabled in the first test build",
+        "Translated": "龙堡内陆低地通路路线在首个测试版本中未启用",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for Lifestream to accept teleport for ",
+        "Translated": "等待 Lifestream 接受传送至",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Territory and instance verified",
+        "Translated": "区域与副本已验证",
+        "Context": "[SentinelHunts] HuntCoordinator.TickChangeInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Changing to instance ",
+        "Translated": "正在切换至副本",
+        "Context": "[SentinelHunts] HuntCoordinator.TickChangeInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for Lifestream to accept instance ",
+        "Translated": "等待 Lifestream 接受副本",
+        "Context": "[SentinelHunts] HuntCoordinator.TickChangeInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for the player and zone to become ready",
+        "Translated": "等待玩家与区域就绪",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounting immediately while the hunt territory finishes preparing",
+        "Translated": "怪物狩猎区域准备完成前立即上坐骑",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for vnavmesh to build/load the current territory mesh",
+        "Translated": "等待 vnavmesh 构建/加载当前区域网格",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The alert did not contain usable map coordinates",
+        "Translated": "警报中不包含可用的地图坐标",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for vnavmesh to project ",
+        "Translated": "等待 vnavmesh 将",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s report onto the ground",
+        "Translated": "的报告投影到地面",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Approaching the reported area for ",
+        "Translated": "正在接近报告区域：",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "S rank positively identified before reaching the report point",
+        "Translated": "抵达报告点前已确认 S 级怪物",
+        "Context": "[SentinelHunts] HuntCoordinator.TickApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reached actor-loading range; resolving the S rank before protected landing",
+        "Translated": "已进入角色加载范围；在安全搭乘点前解析 S 级怪物",
+        "Context": "[SentinelHunts] HuntCoordinator.TickApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounting before vnavmesh flight approach",
+        "Translated": "在 vnavmesh 飞行接近前上坐骑",
+        "Context": "[SentinelHunts] HuntCoordinator.TickApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for vnavmesh to accept the flight path",
+        "Translated": "等待 vnavmesh 接受突击机动",
+        "Context": "[SentinelHunts] HuntCoordinator.TickApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flying toward ",
+        "Translated": "正在飞往",
+        "Context": "[SentinelHunts] HuntCoordinator.TickApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms from the report point",
+        "Translated": "亚尔姆，距报告点",
+        "Context": "[SentinelHunts] HuntCoordinator.TickApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The active S rank was confirmed dead while locating it",
+        "Translated": "定位过程中确认该 S 级怪物已死亡",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Located ",
+        "Translated": "已定位",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; calculating protected parking",
+        "Translated": "；正在计算安全停靠点",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Remounting to finish the reported-area scan",
+        "Translated": "重新上坐骑以完成报告区域扫描",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for vnavmesh to accept the close-range scan path",
+        "Translated": "等待 vnavmesh 接受近距离扫描路径",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Closing carefully on ",
+        "Translated": "正在小心接近",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms from the report",
+        "Translated": "亚尔姆，距报告点",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The S rank was not visible within 90 seconds of reaching the report area",
+        "Translated": "到达报告区域后90秒内未发现S级",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Scanning loaded actors for ",
+        "Translated": "正在扫描已加载的角色以查找",
+        "Context": "[SentinelHunts] HuntCoordinator.TickLocate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The active S rank died during parking",
+        "Translated": "当前S级在停靠期间死亡",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The S rank left the object table; waiting to reacquire it",
+        "Translated": "S级已离开对象表；等待重新获取",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " moved inside the protected radius during landing; re-planning",
+        "Translated": "在搭乘点期间移动到了保护半径内；重新规划",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Descending to protected ground parking; ",
+        "Translated": "正在下降至受保护的地面停靠点；",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms clear",
+        "Translated": "亚尔范围内无障碍",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Landed safely; dismounting ",
+        "Translated": "已安全着陆；正在下坐骑",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms clear of the hitbox",
+        "Translated": "亚尔范围内无碰撞体积",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Grounded and unmounted with ",
+        "Translated": "已固定低位并下坐骑，距离",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms of hitbox clearance",
+        "Translated": "亚尔碰撞体积余量",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tagged; waiting safely on the ground for positive death confirmation",
+        "Translated": "已标记；安全在地面等待确认死亡",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Moving to protected parking; current clearance ",
+        "Translated": "正在移动至受保护停靠点；当前余量",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms",
+        "Translated": "亚尔",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Protected parking route accepted; waiting for movement to begin",
+        "Translated": "受保护停靠路线已接受；等待开始移动",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Finishing the protected route at ground level",
+        "Translated": "正在基层完成受保护路线",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Checking a protected route to the parking point",
+        "Translated": "正在检查通往停靠点的受保护路线",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Following a route that respects the protected hitbox radius",
+        "Translated": "正在沿遵守受保护碰撞半径的路线前进",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No reachable parking point preserved the configured hitbox clearance",
+        "Translated": "没有可达的停靠点能保持配置的碰撞体积余量",
+        "Context": "[SentinelHunts] HuntCoordinator.TickPark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The active S rank died before a tag was needed",
+        "Translated": "当前S级在需要标记前已死亡",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The S rank is not currently visible; reacquiring it",
+        "Translated": "当前无法看到S级；正在重新获取",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Grounded, unmounted waiting is required before the Tomahawk gate opens",
+        "Translated": "飞斧条件开启前需要固定低位、下坐骑等待",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " moved inside the protected radius; re-parking",
+        "Translated": "移动到了保护半径内；重新停靠",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tomahawk tagging requires Marauder or Warrior",
+        "Translated": "飞斧标记需要斧术师或战士",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is at ",
+        "Translated": "当前为",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "% HP; approaching for one Tomahawk",
+        "Translated": "% HP；正在接近以使用一次飞斧",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting safely: ",
+        "Translated": "安全等待中：",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "% HP, ",
+        "Translated": "% HP，",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms hitbox clearance",
+        "Translated": "亚尔碰撞体积余量",
+        "Context": "[SentinelHunts] HuntCoordinator.TickWaitForPull",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The active S rank died before the tag attempt",
+        "Translated": "当前S级在标记尝试前已死亡",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Lost the S rank before Tomahawk; reacquiring without attacking",
+        "Translated": "飞斧前丢失S级；正在不攻击的情况下重新获取",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tomahawk was attempted once; retreating without retry spam",
+        "Translated": "已尝试一次飞斧；正在撤退，不重复尝试",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tomahawk accepted; retreating to protected clearance",
+        "Translated": "飞斧已接受；正在撤退至受保护余量",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pull reset detected before Tomahawk; attack gate closed",
+        "Translated": "飞斧前检测到仇恨重置；攻击条件关闭",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Entering Tomahawk range; ",
+        "Translated": "正在进入飞斧范围；距离目标中心",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " yalms from target center",
+        "Translated": "亚尔",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "In range; waiting for Tomahawk to become usable",
+        "Translated": "已进入范围；等待飞斧可用",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "One Tomahawk request was rejected; retreating without a second attempt",
+        "Translated": "一次飞斧请求被拒绝；正在撤退，不进行第二次尝试",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "One Tomahawk was accepted; retreating immediately",
+        "Translated": "一次飞斧已被接受；立即撤退",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTag",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tagged S rank death confirmed; returning to Ul'dah",
+        "Translated": "已标记S级死亡确认；正在返回乌尔达哈",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTaggedWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The tagged S rank moved inside the protected radius; re-parking",
+        "Translated": "已标记的S级怪移动到了保护半径内；重新停靠",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTaggedWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag complete; waiting for positive S-rank death confirmation",
+        "Translated": "标记完成；等待S级怪死亡的确认",
+        "Context": "[SentinelHunts] HuntCoordinator.TickTaggedWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental enemy killed the player; waiting for recovery",
+        "Translated": "意外敌人击杀了玩家；等待复活",
+        "Context": "[SentinelHunts] HuntCoordinator.TickClearAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental aggro cleared; resuming the interrupted hunt state",
+        "Translated": "意外仇恨已清除；恢复被中断的狩猎状态",
+        "Context": "[SentinelHunts] HuntCoordinator.TickClearAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Confirming incidental aggro is clear",
+        "Translated": "确认意外仇恨已清除",
+        "Context": "[SentinelHunts] HuntCoordinator.TickClearAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Using bounded single-target WAR rotation on ",
+        "Translated": "对目标使用有限单体战士循环",
+        "Context": "[SentinelHunts] HuntCoordinator.TickClearAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Raised; resuming the interrupted hunt state",
+        "Translated": "已复活；恢复被中断的狩猎状态",
+        "Context": "[SentinelHunts] HuntCoordinator.TickRecoverDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Raised; resuming tagged wait without attacking again",
+        "Translated": "已复活；恢复标记等待，不再攻击",
+        "Context": "[SentinelHunts] HuntCoordinator.TickRecoverDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Accepted Raise; waiting for revival while retaining the active hunt",
+        "Translated": "已接受复活；等待复活，同时保留当前狩猎",
+        "Context": "[SentinelHunts] HuntCoordinator.TickRecoverDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Active S rank is confirmed dead; using Return to the configured Ul'dah home point",
+        "Translated": "当前S级怪已确认死亡；使用返回传送至配置的乌尔达哈返回点",
+        "Context": "[SentinelHunts] HuntCoordinator.TickRecoverDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dead before tagging; waiting for a Raise and retaining the active report",
+        "Translated": "标记前死亡；等待复活并保留当前报告",
+        "Context": "[SentinelHunts] HuntCoordinator.TickRecoverDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dead after tagging; Return is locked until the S rank's death is confirmed",
+        "Translated": "标记后死亡；在确认S级怪死亡前返回被锁定",
+        "Context": "[SentinelHunts] HuntCoordinator.TickRecoverDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return locked because the active mark is not confirmed dead",
+        "Translated": "返回已锁定，因为当前标记未确认死亡",
+        "Context": "[SentinelHunts] HuntCoordinator.TickReturnToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Finished ",
+        "Translated": "完成",
+        "Context": "[SentinelHunts] HuntCoordinator.TickReturnToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting at Ul'dah",
+        "Translated": "；在乌尔达哈等待",
+        "Context": "[SentinelHunts] HuntCoordinator.TickReturnToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting at Ul'dah",
+        "Translated": "在乌尔达哈等待",
+        "Context": "[SentinelHunts] HuntCoordinator.TickReturnToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for Lifestream to accept the post-hunt Ul'dah teleport",
+        "Translated": "等待Lifestream接受狩猎后的乌尔达哈传送",
+        "Context": "[SentinelHunts] HuntCoordinator.TickReturnToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " timed out after ",
+        "Translated": "超时于",
+        "Context": "[SentinelHunts] HuntCoordinator.CheckStateTimeout",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " seconds; no death was inferred",
+        "Translated": "秒后；未推断出死亡",
+        "Context": "[SentinelHunts] HuntCoordinator.CheckStateTimeout",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
