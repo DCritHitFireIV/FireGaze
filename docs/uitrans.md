@@ -715,6 +715,8 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
   / `Free Company` 三个关键词，防止将来重新生成时丢条目。
 - **已有译文不会被自动重翻**（机器翻译永不覆盖已有译文）——要修正已打上去的错译名：编辑器里右键
   「清除译文」→「翻译未翻」重翻（此时会命中新术语表），或单条手填。
+  批量换掉整个译文包（比如下载到的玩家包质量不行）用编辑器的「更多… → 全量重翻」：
+  把已有译文的条目也算进候选，用当前通道整个重翻（2026-10-07，1.4.0.4 见下文）。
 
 ## 查表 key 的「词典式汉化」与库残留解锁（2026-10-02，1.2.0.96）
 
@@ -896,4 +898,21 @@ AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打
 - **起因**：Ktisis 一键汉化从公共译文库补入 133 条后，剩 26 条送机器翻译；其中 25 条被通道「原样退回」（`%Zone%` / `%d s` / `%.3f L` / `Ktisis.ApiVersion` / `GET##ApiVersion` 这类技术串），1 条未返回；旧判定「写入 0 + 失败 > 0」直接标红「翻译失败：失败 1 条」，连 133 条译文也没写进插件——看起来像「下载坏了」。实际是**任务判定**问题，下载与补入都正常。
 - **候选过滤**（`UITextText.LooksUntranslatable`，`TranslationTargets` + `BuildTranslateItems` 双闸）：格式串（百分号占位符拆掉后剩 ≤3 个字母）、含 `##` 的内部 ID、点分内部名（`Ktisis.ApiVersion` / `config.json` / `v1.2.3`）不再选进候选、也不进通道；`%d days` 这类拆完还剩真实单词的照常送翻。
 - **状态判定**：只有「通道整条不可用」或「回来的比没回来的少」才报红；绝大多数候选只是「原样退回」、个别没回来时——照常把已翻好的写进插件，状态行改用中性提示（`N 条与原文一致（多为格式串或内部名，无需翻译）；M 条未返回，点「重试」可再试一次`）。
-- fgtest 断言：`%d s` / `%.2fy` / `%0.0f deg` / `%.3f L` / `%Zone%` / `GET##ApiVersion` / `Ktisis.ApiVersion` 过滤；`%d days` / `Gaze Gizmo?:` / `Save###save_button` 不误伤；`BuildTranslateItems` 去重 + 过滤。
+- fgtest 断言：`%d s` / `%.2fy` / `%0.0f deg` / `%.3f L` / `%Zone%` / `GET##ApiVersion` / `Ktisis.ApiVersion` 过滤；`%d days` / `Gaze Gizmo?` / `Save###save_button` 不误伤；`BuildTranslateItems` 去重 + 过滤。
+
+## 编辑器「全量重翻」（2026-10-07，1.4.0.4）
+
+- **场景（用户定）**：下载了质量不行的公共库 / 玩家包后，想用自己的大模型通道把它们整个换掉——但旧行为「机器翻不覆盖已有译文」把这些条目挡在候选外。
+- **入口**：编辑器「更多… → 全量重翻（N 条）…」→ 确认框（默认焦点在「取消」，说明覆盖范围）。
+- **目标集合** `UITextEditorWindow.RetranslateTargets(includeUser)`：不再要求「没译文」，与「翻译未翻」同一套角色规则（UI + 勾选时的灰名单 + 资源 + 属性），`Skipped`（不翻）的除外。
+- **覆盖范围**：`AcceptTranslations` 新增 `overwriteExisting` / `overwriteUser`（默认 false，旧调用一切不变）——
+  资源 / 属性条目原来「已有译文就不动」，全量重翻传 `overwriteExisting: true` 才覆盖；
+  `user` 源（本机手改 + 下载包里带的手改）默认仍保护，确认框勾选「连手动改过的 N 条一起覆盖」才传 `overwriteUser: true`。
+  字面量条目由目标选择控制（旧行为不变：字面量按目标选定后直接写入）。
+- **流程**：与普通翻译共用 `StartTranslate` 管线（同一通道 / 进度 / 取消 / 失败汇总），状态行与日志带「全量重翻」标记；
+  翻完只改本机译文包，仍要点「写入并重载」才生效。
+- fgtest：资源/属性的「默认只补槽 → overwriteExisting 覆盖 → overwriteUser 才盖手改」三层断言。
+- **下载计数核实（同日）**：基础包与玩家包的下载量都按包上报（`FetchPackFileAsync` 成功联网拉取时 `ReportLibraryDownload(插件, 包ID)`，
+  基础包 ID=library、玩家包 ID=user-xxxxxx），【列表详情 — 下载译文】与【一键汉化的自动合并】两条路径都走它；
+  实时值由中继 `/library-counts` 提供（详情面板 5 分钟节流刷新），索引里的数字由 `library-counts.yml` 每 6 小时写回（因此仓库里的 index.json 最多滞后 6 小时）。
+  本机 24 小时缓存命中不会重复计数（那不是一次新下载）。

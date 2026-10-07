@@ -323,12 +323,17 @@ internal static class UITextFlow
 
     /// <summary>
     ///     把翻译通道的结果写回包里：清洗、占位符校验、来源标记。<br />
-    ///     返回（写入条数、占位符对不上跳过的条数、原样返回的条数）。
+    ///     返回（写入条数、占位符对不上跳过的条数、原样返回的条数）。<br />
+    ///     默认只补空槽（字面量按目标选定，资源/属性已有译文就不动）；
+    ///     「全量重翻」传 <paramref name="overwriteExisting" /> 连已有译文一起覆盖，
+    ///     再开 <paramref name="overwriteUser" /> 才放手改过的（默认永不被顶）。
     /// </summary>
     public static (int Applied, int PlaceholderRejected, int Unchanged) AcceptTranslations(
         UITextPack pack,
         IEnumerable<KeyValuePair<string, string>> translated,
-        string channelName)
+        string channelName,
+        bool overwriteExisting = false,
+        bool overwriteUser = false)
     {
         var applied = 0;
         var placeholderRejected = 0;
@@ -385,9 +390,16 @@ internal static class UITextFlow
                 continue;
             }
 
+            // 「全量重翻」才允许覆盖已有译文；手改过的（user）默认永不被顶
+            if (entry.IsUserSource && !overwriteUser)
+            {
+                unchanged++;
+                continue;
+            }
+
             // 同值的其它 key 已有译文（可能是人工改过的）就不动它：本批只补缺
             //（2026-10-03 评审 B-04：资源按「原文值」匹配，一值多 key，旧行为会顶掉人工译文）
-            if (entry.HasTranslation)
+            if (entry.HasTranslation && !overwriteExisting)
             {
                 unchanged++;
                 continue;
@@ -428,8 +440,15 @@ internal static class UITextFlow
                 continue;
             }
 
+            // 同资源条目：全量重翻才盖已有译文，手改的默认不动
+            if (entry.IsUserSource && !overwriteUser)
+            {
+                unchanged++;
+                continue;
+            }
+
             // 同属性已有译文就不动（同上）
-            if (entry.HasTranslation)
+            if (entry.HasTranslation && !overwriteExisting)
             {
                 unchanged++;
                 continue;

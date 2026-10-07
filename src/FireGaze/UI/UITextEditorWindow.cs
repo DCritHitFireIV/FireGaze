@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Numerics;
 using System.Text.Json;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.ImGuiFileDialog;
@@ -116,6 +117,16 @@ internal sealed class UITextEditorWindow : Window
     private int translateDone;
     private int translateTotal;
 
+    /// <summary>本次翻译是否覆盖已有译文（「全量重翻」）；默认只补空槽。</summary>
+    private bool translateOverwriteExisting;
+
+    /// <summary>「全量重翻」是否连手改过的一起覆盖；默认保护。</summary>
+    private bool translateOverwriteUser;
+
+    /// <summary>「全量重翻」确认框（默认焦点在「取消」）。</summary>
+    private bool retranslateConfirmPending;
+    private bool retranslateIncludeUser;
+
     public UITextEditorWindow(Plugin plugin, UITextStore store, UITextPatchManager patches, UITextRunLock runs)
         : base("插件汉化 — 编辑校对###FireGazeUITextEditor", ImGuiWindowFlags.None)
     {
@@ -228,6 +239,7 @@ internal sealed class UITextEditorWindow : Window
         this.DrawToolbar();
         ImGui.Separator();
         this.DrawTable();
+        this.DrawRetranslateConfirm();
         this.SaveIfDirty(force: false);
     }
 
@@ -416,6 +428,21 @@ internal sealed class UITextEditorWindow : Window
             .ToList();
     }
 
+    /// <summary>
+    ///     「全量重翻」的目标：把已经有译文的也算进来（下载到质量不行的公共库 / 玩家包时，
+    ///     用自己通道的译文把它们整个换掉）。<paramref name="includeUser" /> = 连手动改过的也一起覆盖。
+    /// </summary>
+    private List<UITextTarget> RetranslateTargets(bool includeUser)
+    {
+        var grey = this.includeGreyInTranslate;
+        return this.rows
+            .Where(r => !r.Skipped)
+            .Where(r => includeUser || !r.IsUserSource)
+            .Where(r => r.IsResource || r.IsAttribute || r.Role == UITextRole.UI || (grey && r.Role == UITextRole.Ambiguous))
+            .Select(r => new UITextTarget(r.Original, r.Context, r.Entry, r.Resource, r.Attribute))
+            .ToList();
+    }
+
     private int? glossaryRepairCache;
 
     /// <summary>
@@ -456,7 +483,7 @@ internal sealed class UITextEditorWindow : Window
         return list;
     }
 
-    private void StartTranslate(List<UITextTarget> targets)
+    private void StartTranslate(List<UITextTarget> targets, bool overwriteExisting = false, bool overwriteUser = false)
     {
         if (this.translateTask is { IsCompleted: false })
         {
@@ -477,6 +504,8 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
+        this.translateOverwriteExisting = overwriteExisting;
+        this.translateOverwriteUser = overwriteUser;
         this.translateCancel = new CancellationTokenSource();
         this.translateDone = 0;
         this.translateTotal = items.Count;
@@ -492,7 +521,7 @@ internal sealed class UITextEditorWindow : Window
                 token).ConfigureAwait(false);
             return (channel.Name, result);
         });
-        this.SetStatus($"正在用 {channel.Name} 翻译 {items.Count} 条…", false);
+        this.SetStatus($"正在用 {channel.Name} 翻译 {items.Count} 条{(overwriteExisting ? "（全量重翻）" : string.Empty)}…", false);
     }
 
     private void PollTranslate()
@@ -519,12 +548,13 @@ internal sealed class UITextEditorWindow : Window
         }
 
         // 收译文：字面量与资源条目共用同一套清洗/占位符校验/来源标记
-        var (applied, placeholderRejected, unchanged) = UITextFlow.AcceptTranslations(this.pack, outcome.Result.Translated, outcome.Channel);
+        var (applied, placeholderRejected, unchanged) = UITextFlow.AcceptTranslations(
+            this.pack, outcome.Result.Translated, outcome.Channel, this.translateOverwriteExisting, this.translateOverwriteUser);
         this.RebuildRows();
 
         this.MarkDirty();
         var failed = outcome.Result.Failed.Count;
-        var summary = $"翻译完成（{outcome.Channel}）：写入 {applied} 条" +
+        var summary = (this.translateOverwriteExisting ? "全量重翻完成" : "翻译完成") + $"（{outcome.Channel}）：写入 {applied} 条" +
                       (failed > 0 ? $" · 失败 {failed} 条" : string.Empty) +
                       (placeholderRejected > 0 ? $" · 占位符对不上跳过 {placeholderRejected} 条" : string.Empty) +
                       (unchanged > 0 ? $" · 原样返回 {unchanged} 条" : string.Empty);
@@ -539,7 +569,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         Plugin.Log?.Information(
-            $"[内部文本] {this.entry?.InternalName} 翻译通道 {outcome.Channel}：目标 {this.translateTotal}，写入 {applied}，失败 {failed}" +
+            $"[内部文本] {this.entry?.InternalName} 翻译通道 {outcome.Channel}{(this.translateOverwriteExisting ? "（全量重翻）" : string.Empty)}：目标 {this.translateTotal}，写入 {applied}，失败 {failed}" +
             (outcome.Result.Notes.Count > 0 ? "；" + string.Join("；", outcome.Result.Notes) : string.Empty));
 
         var unapplied = this.rows.Count(r => r.HasTranslation && !r.Skipped);
@@ -772,6 +802,21 @@ internal sealed class UITextEditorWindow : Window
                 ImGui.SetTooltip("术语表更新后，旧的机器翻译不会自己升级；这一项把「术语对不上」的条目挑出来重翻。\n玩家自己改过的译文不会被动。");
             }
 
+            // 全量重翻：下载到质量不行的公共库 / 玩家包时，用当前通道把它们整个换掉
+            //（2026-10-07 用户定：已下载的译文不算例外，全量重翻不再被「已有译文」挡住）。
+            var retranslate = this.RetranslateTargets(includeUser: true);
+            if (ImGui.MenuItem($"全量重翻（{retranslate.Count} 条）…", enabled: !busy && retranslate.Count > 0))
+            {
+                this.retranslateIncludeUser = false;
+                this.retranslateConfirmPending = true;
+            }
+
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+            {
+                ImGui.SetTooltip("把当前所有译文（含已经翻过的，比如公共库 / 玩家包带来的）重新用当前通道翻一遍。\n" +
+                                 "适合下载到的包质量不行、想换成自己通道的译文时用；翻完要点「写入并重载」才生效。");
+            }
+
             ImGui.Separator();
             if (ImGui.MenuItem("导出未翻（给 AI）"))
             {
@@ -863,6 +908,70 @@ internal sealed class UITextEditorWindow : Window
 
         // 灰名单翻译的风险提醒（勾选框的下面一行；2026-10-03 用户要求常驻，避免不知道这些条目的代价）
         UiHelpers.ColoredText(UiHelpers.Warn, "⚠ 勾选「连灰名单一起翻译」后，翻译很可能影响插件正常功能（这些字符串多被当作键名 / 查表用）——建议在列表里逐条确认。");
+    }
+
+    /// <summary>
+    ///     「全量重翻」确认框：说清会覆盖多少条、其中手改过的有多少条（默认焦点在「取消」）。
+    /// </summary>
+    private void DrawRetranslateConfirm()
+    {
+        const string name = "全量重翻###uitrans-retranslate";
+        if (this.retranslateConfirmPending && !ImGui.IsPopupOpen(name))
+        {
+            ImGui.OpenPopup(name);
+        }
+
+        ImGui.SetNextWindowSizeConstraints(new Vector2(560, 0), new Vector2(720, float.MaxValue));
+        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        if (!ImGui.BeginPopupModal(name, ref this.retranslateConfirmPending, ImGuiWindowFlags.AlwaysAutoResize))
+        {
+            return;
+        }
+
+        var all = this.RetranslateTargets(includeUser: true);
+        var keep = this.RetranslateTargets(includeUser: false);
+        var handEdited = all.Count - keep.Count;
+        ImGui.TextWrapped($"会用当前翻译通道把 {all.Count} 条全部重新翻译一遍，已经有的译文（包括公共库 / 玩家包带来的）会被覆盖。");
+        ImGui.TextDisabled("翻完要点「写入并重载」才生效；原始文件会先备份。");
+        if (handEdited > 0)
+        {
+            ImGui.Spacing();
+            ImGui.Checkbox($"连手动改过的 {handEdited} 条一起覆盖", ref this.retranslateIncludeUser);
+            if (ImGui.IsItemHovered())
+            {
+                ImGui.SetTooltip("不勾选：这些保持原样（本机自己改的、以及下载的玩家包里带的手改译文都算）。\n" +
+                                 "想把下载包整个换掉就勾上。");
+            }
+        }
+        else
+        {
+            this.retranslateIncludeUser = false;
+        }
+
+        ImGui.Separator();
+        if (ImGui.Button("取消", new Vector2(120, 0)))
+        {
+            this.retranslateConfirmPending = false;
+            ImGui.CloseCurrentPopup();
+        }
+
+        if (ImGui.IsWindowAppearing())
+        {
+            ImGui.SetItemDefaultFocus();
+        }
+
+        ImGui.SameLine();
+        var targets = this.retranslateIncludeUser ? all : keep;
+        ImGui.BeginDisabled(targets.Count == 0 || this.translateTask is { IsCompleted: false });
+        if (ImGui.Button($"开始重翻（{targets.Count} 条）", new Vector2(180, 0)))
+        {
+            this.retranslateConfirmPending = false;
+            ImGui.CloseCurrentPopup();
+            this.StartTranslate(targets, overwriteExisting: true, overwriteUser: this.retranslateIncludeUser);
+        }
+
+        ImGui.EndDisabled();
+        ImGui.EndPopup();
     }
 
     /// <summary>
