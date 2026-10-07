@@ -1,0 +1,698 @@
+{
+  "issue": "direct-2026-10-07T09-49-27-321Z-8f15eca8",
+  "receivedAt": "2026-10-07 09:49:37",
+  "author": "匿名直传",
+  "plugin": "Palantir",
+  "fingerprint": "b5e864cfca16b659",
+  "packFile": "Palantir@user-b5e864.json",
+  "accepted": 83,
+  "filled": 83,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Palantir",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Landmarks",
+        "Translated": "地标",
+        "Context": "[Palantir] Landmarks.ToString",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Header"
+      },
+      {
+        "Original": "ActionEffectHandler hook initialized.",
+        "Translated": "ActionEffectHandler 钩子被初始化。",
+        "Context": "[Palantir] DeepDungeon.InstallHook",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Opens the Palantir window",
+        "Translated": "打开 Palantir 窗口",
+        "Context": "[Palantir] Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Mimic",
+        "Translated": "模仿",
+        "Context": "[Palantir] Renderer.Settings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Accursed Hoard",
+        "Translated": "被诅咒的囤积",
+        "Context": "[Palantir] Renderer.DrawLabels",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Rendering",
+        "Translated": "渲染",
+        "Context": "[Palantir] ConfigWindow.DrawRendering",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Traps / Accursed Hoard",
+        "Translated": "陷阱/诅咒性囤积",
+        "Context": "[Palantir] ConfigWindow.DrawRendering",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Header"
+      },
+      {
+        "Original": "Treasure Coffers",
+        "Translated": "宝箱",
+        "Context": "[Palantir] ConfigWindow.DrawRendering",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Header"
+      },
+      {
+        "Original": "Mob Aggro",
+        "Translated": "黑帮仇恨",
+        "Context": "[Palantir] ConfigWindow.DrawRendering",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Header"
+      },
+      {
+        "Original": "Draw Additional Debug Information",
+        "Translated": "绘制其他调试信息",
+        "Context": "[Palantir] ConfigWindow.DrawRendering",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Draws verbose debug information below trap markers etc. Used to report obviously fake or incorrect trap submissions to the server administrator for investigation.",
+        "Translated": "在陷阱标记等下方绘制详细的调试信息。用于向服务器管理员报告明显虚假或不正确的陷阱提交以进行调查。",
+        "Context": "[Palantir] ConfigWindow.DrawRendering",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Fills the marker with a faded version of its colour. Off leaves the outer ring only, so you can still see the ground underneath.\n\nDirectX render mode only. VFX omens are the game's own filled effects.",
+        "Translated": "用褪色版的颜色填充标记。关闭后只留下外圈，这样你仍然可以看到下面的地面。\n\n仅限 DirectX 渲染模式。视觉特效预兆是游戏自身的内置效果。",
+        "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "How many players have to confirm the same spot before Palantir shows it to you.\n\nTraps and hoards you find yourself always show up, however low the number.\n\n0 shows everything, even a spot only one person has ever reported, mistakes included.\n\nHigher numbers are more trustworthy, but markers take longer to appear and rarely discovered ones may never show up at all.\n\nRecommended: 4 for traps, 2 for the Accursed Hoard. Traps are in nearly every room, so they reach 4 confirmations quickly. There is only one potential hoard per floor, so these accumulate confirmations much less quickly.",
+        "Translated": "多少玩家需要确认同一个位置才能让帕兰提尔向你展示？\n\n你发现自己身上的陷阱和储备总是会出现，无论数量多么少。\n\n0 显示了一切，甚至包括一个只有一个人报告过的地点，包括错误。\n\n数字越大越可靠，但标记物需要更长时间才能出现，而那些很少被发现的标记物可能永远不会出现。\n\n推荐:4 个用于陷阱，2 个用于恶性囤积。几乎每个房间都有陷阱，所以他们很快就能确认 4 个。每层只有一个潜在的囤积，所以这些确认的积累速度要慢得多。",
+        "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "How far from you markers are drawn. Large values cost frame time.",
+        "Translated": "标记被绘制的距离有多远？大值的成本是帧时间。",
+        "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "DirectX is the default. Markers are drawn over the game, so they stay visible through walls, enemies and other players.\n\nVFX uses the game's own omen effects. They look native and sit on the ground, but anything in front of them hides them, and they are easy to mistake for an enemy's attack telegraph.",
+        "Translated": "DirectX 是默认设置。标记是在游戏中绘制的，因此它们可以透过墙壁、敌人和其他玩家保持可见。\n\nVFX 使用了游戏自身的预兆效果。它们看起来像是本地人，坐在地上，但前方的一切都会将它们隐藏起来，很容易被误认为是敌人的攻击电报。",
+        "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Traps",
+        "Translated": "陷阱",
+        "Context": "[Palantir] ConfigWindow.DrawMarkerSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Only applies to the DirectX render mode. VFX omens are the game's own filled effects.",
+        "Translated": "仅适用于 DirectX 渲染模式。VFX 预兆是游戏自身的填充效果。",
+        "Context": "[Palantir] ConfigWindow.DrawRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Enable both traps and the Accursed Hoard to merge them.",
+        "Translated": "使两个陷阱和诅咒储备能够合并。",
+        "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Both categories must use the DirectX render mode. VFX omens are separate game objects and cannot be blended into one marker.",
+        "Translated": "两个类别都必须使用 DirectX 渲染模式。VFX 元素是独立的游戏对象，不能混合成一个标记。",
+        "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Traps must be filled to merge. The merged marker uses the trap colour as its body and the hoard colour as its outline.",
+        "Translated": "陷阱必须被填充才能合并。合并的标记使用陷阱颜色作为其主体，而储藏颜色作为其轮廓。",
+        "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Merge Trap / Accursed Hoard Markers",
+        "Translated": "合并陷阱/诅咒储蓄标记",
+        "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "A trap and a hoard can share the same spot. Rather than draw two rings fighting over the same ground, draw one with the trap's body colour and the hoard's outline.",
+        "Translated": "一个陷阱和一个宝藏可以共享同一个位置。与其画两个在同一地点争斗的圆圈，不如画一个带有陷阱体色和宝藏轮廓的圆圈。",
+        "Context": "[Palantir] ConfigWindow.DrawMergeToggle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Bronze",
+        "Translated": "青铜",
+        "Context": "[Palantir] ConfigWindow.DrawCofferSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Silver",
+        "Translated": "银",
+        "Context": "[Palantir] ConfigWindow.DrawCofferSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Gold",
+        "Translated": "黄金",
+        "Context": "[Palantir] ConfigWindow.DrawCofferSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Only can be detected as bronze chest in\nPOTD: <= Floor 49HoH/EO/PT: <= Floor 29 the trap colour and distance above, and always drawn in DirectX mode.",
+        "Translated": "只有在青铜箱中才能被检测到\nPOTD:<= Floor 49HoH/EO/PT:<= Floor 29 上述捕捉器颜色和距离，始终在 DirectX 模式下绘制。",
+        "Context": "[Palantir] ConfigWindow.DrawMimicRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "uses display settings of traps",
+        "Translated": "使用陷阱的显示设置",
+        "Context": "[Palantir] ConfigWindow.DrawMimicRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Vfx Type",
+        "Translated": "Vfx 类型",
+        "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "DirectX is the default, will show the kind of agro around that mob\nPatrol mobs will use both the facing arrow, and the aggro type that it is if enabled.\n\nVFX uses the game's own omen effects. They look more native and sit to the ground, but anything in front of them hids them. Easy to mistake for an enemies attack telegraph.",
+        "Translated": "DirectX 是默认设置，将显示那个暴徒周围的仇恨类型。\n巡逻小队将同时使用面向箭头和其所属的仇恨类型 (如果启用)。\n\nVFX 使用了游戏自身的预兆效果。它们看起来更加原生态，而且坐在地上，但它们面前的任何东西都会将其隐藏。很容易被误认为是敌人的攻击电报。",
+        "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Which type of vfx would you like to see (when mode is VFX)\nPulse is default, offers a standard color but can easily see the pulse\nLight_Pulse is a different variation of it, has a ring that floats above it slightly and the pulse is also less noticible\nStatic is just a pure circle\nUnfort, there is no options for fan pulse due to there being no static fan pulse",
+        "Translated": "你想看到哪种类型的 vfx(当模式为 VFX 时)\n脉冲是默认设置，提供标准颜色，但可以轻松看到脉冲。\nLight_Pulse 是它的另一种变体，有一个环稍微漂浮在它上方，而且脉冲也不那么明显。\n静态只是一个纯圆\n不强调，由于没有静态风机脉冲，所以没有风机脉冲的选项。",
+        "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Sight",
+        "Translated": "视觉",
+        "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Proximity",
+        "Translated": "邻近度",
+        "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Sound",
+        "Translated": "声音",
+        "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Patrol",
+        "Translated": "巡逻",
+        "Context": "[Palantir] ConfigWindow.DrawMobSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Passage",
+        "Translated": "通道",
+        "Context": "[Palantir] ConfigWindow.DrawLandMarkSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Return",
+        "Translated": "返回",
+        "Context": "[Palantir] ConfigWindow.DrawLandMarkSection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Servers",
+        "Translated": "服务器",
+        "Context": "[Palantir] ConfigWindow.DrawServers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Server",
+        "Translated": "服务器",
+        "Context": "[Palantir] ConfigWindow.DrawServers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Remove selected",
+        "Translated": "删除选定",
+        "Context": "[Palantir] ConfigWindow.DrawServers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Built-in servers cannot be removed.",
+        "Translated": "无法移除内置服务器。",
+        "Context": "[Palantir] ConfigWindow.DrawServers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Connect on startup",
+        "Translated": "在启动时连接",
+        "Context": "[Palantir] ConfigWindow.DrawServers",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disconnect to change servers.",
+        "Translated": "断开连接以更改服务器。",
+        "Context": "[Palantir] ConfigWindow.DrawServers",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Data",
+        "Translated": "数据",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "No local cache. Palantir could not open its database.",
+        "Translated": "没有本地缓存。帕兰提尔无法打开数据库。",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You can export your local cache to share them with another player. An export is a JSON file with a .orb extension, so you can open it and see exactly what you are sending. Useful for periods of server downtime or in the case your chosen server is shut down permanently.",
+        "Translated": "您可以导出本地缓存以与另一个玩家共享。导出是一个以. orb 扩展名命名的 JSON 文件，因此您可以打开它并准确查看正在发送的内容。这对于服务器宕机或您选择的服务器永久关闭的情况下非常有用。",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Imported markers are never uploaded to a Palantir server.",
+        "Translated": "进口的标记从不上传到帕兰提尔服务器。",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Export",
+        "Translated": "导出",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Export...",
+        "Translated": "出口......",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import",
+        "Translated": "进口",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Trust imported markers as my own discoveries",
+        "Translated": "相信进口标记是我自己的发现",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Imported markers arrive with only a single confirmation, so they stay hidden until other players confirm them or you lower your integrity threshold. Tick this to show them straight away, as though you had found them yourself.\n\nImported markers are never uploaded to a Palantir server either way.",
+        "Translated": "进口的标记只有一次确认，所以它们会一直隐藏，直到其他玩家确认或你降低完整性阈值。点击这个即可立即显示它们，就像是你自己发现的一样。\n\n无论如何，进口的标记永远不会上传到帕兰提尔服务器。",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Must not be already in a deep dungeon to import. Imported markers only load when you enter a floorset.",
+        "Translated": "必须已经在深层地牢中才能进口。进口的标记只有在进入地下室时才能加载。",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Import...",
+        "Translated": "导入...",
+        "Context": "[Palantir] ConfigWindow.DrawData",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Palace of the Dead",
+        "Translated": "死者的宫殿",
+        "Context": "[Palantir] ConfigWindow.GroupName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Heaven-on-High",
+        "Translated": "天堂在高处",
+        "Context": "[Palantir] ConfigWindow.GroupName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Eureka Orthos",
+        "Translated": "尤里卡·奥索斯",
+        "Context": "[Palantir] ConfigWindow.GroupName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Pilgrim's Traverse",
+        "Translated": "朝圣者之路",
+        "Context": "[Palantir] ConfigWindow.GroupName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Everything",
+        "Translated": "一切",
+        "Context": "[Palantir] ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Traps only",
+        "Translated": "只有陷阱",
+        "Context": "[Palantir] ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Accursed Hoard only",
+        "Translated": "只有被诅咒的囤积",
+        "Context": "[Palantir] ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Exported ",
+        "Translated": "导出",
+        "Context": "[Palantir] ExportAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " marker(s).",
+        "Translated": "Marker(s)。",
+        "Context": "[Palantir] ExportAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " imported, ",
+        "Translated": "导入的，",
+        "Context": "[Palantir] ImportAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " already known, ",
+        "Translated": "已知，",
+        "Context": "[Palantir] ImportAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " rejected.",
+        "Translated": "被拒绝。",
+        "Context": "[Palantir] ImportAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Connect",
+        "Translated": "连接",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Disconnect",
+        "Translated": "断开连接",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": " online, ",
+        "Translated": "在线，",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " in a deep dungeon",
+        "Translated": "在一个深邃的地牢里",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Floor ",
+        "Translated": "地板",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " markers known",
+        "Translated": "已知标记",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Discoveries upload only if you reconnect before leaving this floorset.",
+        "Translated": "只有在离开这个楼层之前重新连接才能上传发现。",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Discoveries are saved locally and upload when you reconnect.",
+        "Translated": "发现会在本地保存，并在重新连接时上传。",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "[Palantir] MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Not connected. Only markers already in your local cache will be displayed.",
+        "Translated": "未连接。只会显示已在本地缓存中的标记。",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Connecting...",
+        "Translated": "连接...",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Reconnecting...",
+        "Translated": "重新连接...",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Connected to ",
+        "Translated": "已连接到",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "No local cache and no server. Discoveries are lost when you leave this floorset.",
+        "Translated": "没有本地缓存，也没有服务器。当您离开这个地板场景时，发现就会丢失。",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "No local cache. Discoveries upload as you find them, but are lost if the connection drops and you leave the floorset.",
+        "Translated": "无本地缓存。发现后会立即上传，但如果连接断开且离开地板，就会丢失。",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Local cache active.",
+        "Translated": "本地缓存已激活。",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "ActionEffectHandler hook failed, with no local cache and no server to fall back on.",
+        "Translated": "ActionEffectHandler 钩子失败，没有本地缓存，也没有可以依赖的服务器。",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "ActionEffectHandler hook failed. Markers revealed by a Pomander of Sight, the Accursed Hoard and markers already in your local cache still function.",
+        "Translated": "ActionEffectHandler 钩子失败。由视觉 Pomander 显示的标记、诅咒存储以及本地缓存中已有的标记仍在工作。",
+        "Context": "[Palantir] MainWindow.DrawStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
