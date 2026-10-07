@@ -1,1 +1,1130 @@
-{"type":"uit-contribution","plugin":"SonarPlugin","entries":[{"Original":"testing","Translated":"测试","Context":"FlavorUtils.DetermineFlavor","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"negative","Translated":"否定","Context":"FlavorUtils.DetermineFlavorCore","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Unknown","Translated":"未知","Context":"VersionUtils.GetSonarPluginVersion","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"all","Translated":"所有","Context":"RelayTrackerViews..ctor","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Audiences##","Translated":"受众##","Context":"IndexSelectionWidget.DrawBreadcrumb","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Regions##","Translated":"区域##","Context":"IndexSelectionWidget.DrawBreadcrumb","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Datacenters##","Translated":"数据中心","Context":"IndexSelectionWidget.DrawBreadcrumb","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Worlds##","Translated":"世界","Context":"IndexSelectionWidget.DrawBreadcrumb","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Zones##","Translated":"区域","Context":"IndexSelectionWidget.DrawBreadcrumb","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Instances##","Translated":"实例","Context":"IndexSelectionWidget.DrawBreadcrumb","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Sonar Lodestone Verification","Translated":"声纳磁石验证","Context":"LodestoneVerifyWindow..ctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Lodestone Verification is needed for your currently logged in character:","Translated":"您当前登录的角色需要进行磁石验证：","Context":"LodestoneVerifyWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"You can suppress this dialog at /sonarconfig General tab, Lodestone Settings.","Translated":"您可以在/sonarconfig General 选项卡的 Lodestone Settings 中禁用此对话框。","Context":"LodestoneVerifyWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Unspecified Reason.","Translated":"未说明原因。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Please contact Sonar support for assistance.","Translated":"请联系声纳支持寻求帮助。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your character is currently not verified.","Translated":"您的角色目前未经验证。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your character lodestone profile is not found.","Translated":"您的角色磁石档案未找到。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Make your character's Lodestone profile searchable and public. You can set it back to private after verification is done.","Translated":"使您角色的 Lodestone 资料可搜索和公开。验证完成后，您可以将其恢复为私有。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your character lodestone profile is private.","Translated":"您的角色磁石档案是私密的。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Make your Lodestone profile public to be able to verify. You can set it back to private after verification is done.","Translated":"将您的 Lodestone 配置文件公开，以便进行验证。验证完成后，您可以将其恢复为私有。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your character has been renamed and your character's lodestone profile is private.","Translated":"您的角色已经被重新命名，并且您角色的磁石档案是私密的。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your character hash mismatch and your character's lodestone profile is private.","Translated":"你的角色哈希不匹配，而且你的角色磁石档案是私密的。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Your character lodestone information stored at Sonar is stale.","Translated":"你存储在 Sonar 中的角色磁石信息已经过时了。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Unable to provide reason.","Translated":"无法提供理由。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Update your Sonar plugin or contact support for assistance.","Translated":"更新 Sonar 插件或联系支持以获取帮助。","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Add the following code into your chracter's lodestone profile bio:","Translated":"将以下代码添加到角色的磁石档案生物信息中：","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Copy","Translated":"复制","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Open Lodestone Profile","Translated":"打开磁石档案","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Open Lodestone Website","Translated":"打开 Lodestone 网站","Context":"LodestoneVerifyWindow.DrawReason","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"This verification is a requirement.","Translated":"这种验证是必要的。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"This verification will become a requirement in ","Translated":"这项验证将成为一项要求。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" days.","Translated":"天数。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" hours.","Translated":"小时。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" minutes.","Translated":"分钟。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"This verification will become a requirement in less than 5 minutes.","Translated":"这项验证将在不到 5 分钟内成为要求。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"This verification is not a requirement at this time.","Translated":"这种验证目前不是必需的。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Verify","Translated":"验证","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Verification timeout","Translated":"验证超时","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Verification in progress","Translated":"正在进行验证","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Verification failed","Translated":"验证失败","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"You'll only be able to use Sonar in local mode if not verified by the time this becomes a requirement.","Translated":"只有在未经验证的情况下，才能在本地模式下使用 Sonar。","Context":"LodestoneVerifyWindow.DrawVerification","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Zone","Translated":"区域","Context":"SonarConfigWindow..ctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Sonar Configuration","Translated":"Sonar 配置","Context":"SonarConfigWindow..ctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Localization is still in development!","Translated":"本地化仍在开发中！","Context":"SonarConfigWindow.DrawGeneralTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"- Lots of strings are still not covered","Translated":"- 许多弦仍未被覆盖","Context":"SonarConfigWindow.DrawGeneralTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"- Strings may change between releases","Translated":"字符串可能在不同版本之间发生变化","Context":"SonarConfigWindow.DrawGeneralTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Use localization at your own risk!","Translated":"使用本地化自担风险！","Context":"SonarConfigWindow.DrawGeneralTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Hunt Report Notifications","Translated":"狩猎报告通知","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Separate Rank SS and Minions from Rank S","Translated":"将 SS 级别和小兵与 S 级别分开","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ SonarImGui.Checkbox"},{"Original":"Granular Hunt Reporting Settings","Translated":"粒度狩猎报告设置","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ SonarImGui.Checkbox"},{"Original":"Hunt Display Timers","Translated":"狩猎显示计时器","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"All timers are in seconds. CTRL+Click to input directly.","Translated":"所有定时器都以秒为单位。CTRL+ 单击直接输入。","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Time since death (S and A)","Translated":"死亡时间 (S 和 A)","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ SonarImGui.SliderInt"},{"Original":"Time since last update (S and A)","Translated":"自上次更新以来的时间 (S 和 A)","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ SonarImGui.SliderInt"},{"Original":"Time since last update (B)","Translated":"自上次更新以来的时间 (B)","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ SonarImGui.SliderInt"},{"Original":"Hunts Display Limit","Translated":"Hunts 显示限制","Context":"SonarConfigWindow.DrawHuntTab","Source":"library","Role":"UI","RoleReason":"→ SonarImGui.SliderInt"},{"Original":"Fate Display Timers","Translated":"命运显示计时器","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Time since completion or failure","Translated":"自完成或失败以来的时间","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Time since last update","Translated":"自上次更新以来的时间","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Fates Display Limit","Translated":"命运显示限制","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Fate Selection","Translated":"命运选择","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Default Report Jurisdiction","Translated":"默认报告管辖权","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Search","Translated":"搜索","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"{0} fate(s) selected to chat","Translated":"{0} 选择聊天的宿命","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"{0} fate(s) selected to sound","Translated":"{0} 选择发声的宿命 (s)","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"{0} fate(s) not set to default jurisdiction","Translated":"{0} 未设置默认管辖权","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Chat","Translated":"聊天","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Sounds","Translated":"声音","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Jurisdiction","Translated":"管辖权","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Level","Translated":"等级","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Name","Translated":"名称","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Expansion","Translated":"扩展","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Achievement","Translated":"成就","Context":"SonarConfigWindow.DrawFateTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Send to chat","Translated":"发送到聊天室","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Play Sounds","Translated":"播放声音","Context":"SonarConfigWindow.DrawFateTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Brought to you by the Sonar Team","Translated":"声纳团队为您带来的","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Sonar Support Discord##SonarDiscord","Translated":"声纳支持 Discord##声纳 Discord","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Ask questions and report bugs at the Sonar Support Discord Server.\nNote that Sonar Support is not provided in the goat place's discord.","Translated":"在声纳支持失谐服务器上提问和报告错误。\n请注意，在山羊栖息地的不谐波中没有提供声纳支持。","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Sonar Patreon##SonarPatreon","Translated":"Sonar Patreon ##SonarPatreon","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Support Sonar on Patreon.\nEarnings will be used for the hosting costs of the Sonar Server and Discord Bots.","Translated":"Patreon 上的声纳支持。\n收益将用于支付 Sonar Server 和 Discord Bots 的托管费用。","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Sonar Status","Translated":"Sonar 状态","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Connected","Translated":"已连接","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Disconnected","Translated":"断开连接","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Sonar will keep trying to reconnect automatically","Translated":"声纳将继续尝试自动重新连接。","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Reconnect","Translated":"重新连接","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Signal Sonar to attempt reconnecting to server","Translated":"发出信号让声纳尝试重新连接到服务器","Context":"SonarConfigWindow.DrawAboutTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Version Information","Translated":"版本信息","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Dalamud ","Translated":"在 Damud","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"FFXIV ","Translated":"最终幻想 14","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Client Hash: ","Translated":"客户端哈希：","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Show","Translated":"显示","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Hide","Translated":"隐藏","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Player Tracker","Translated":"玩家追踪器","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Zone: ","Translated":"区域：","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Hunts Tracker","Translated":"狩猎追踪器","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Count: ","Translated":"计数：","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" | Index: ","Translated":"索引：","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Clear","Translated":"清晰","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Check","Translated":"检查","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Perform a consistency check of the index\nOutput will be at /xllog","Translated":"对索引进行一致性检查\n输出将位于/xllog","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Rebuild","Translated":"重建","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Rebuild index\nOutput will be at /xllog\n\nWarning: You may experience stuttering","Translated":"Rebuild 索引\n输出将显示在/xllog\n\n警告：你可能会遇到口吃的情况","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Busy","Translated":"忙碌","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Fates Tracker","Translated":"命运追踪器","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Request Relay Data","Translated":"请求中继数据","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Request all relay information to be received.\nTrack All options will automatically be enabled for both Hunts and Fates.\nThis can only be done once.\n\nWarning: You'll receive everything the Sonar server knows!\nThis is currently under testing.","Translated":"请求接收所有中继信息。\n追踪所有选项将自动为狩猎和命运开启。\n这只能做一次。\n\n警告：你将接收到声纳服务器所知的一切！\n这个目前正在测试中。","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Log Level","Translated":"日志级别","Context":"SonarConfigWindow.DrawDebugTab","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"<rank>: <name> <hpp> <flag> <<world>> <instance> [<players>]","Translated":"<rank>: <name> <hpp> <flag> <world> <instance> [<players>]","Context":"SonarMainWindow.DrawHunt","Source":"library","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"[B] <name>: <flag> <<world>> <instance> <tap> [<players>]","Translated":"[B] <name>: <flag> <world> <instance> <tap> [<players>]","Context":"SonarMainWindow.DrawFate","Source":"library","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Sonar Tracker (UNDER DEVELOPMENT!!!)","Translated":"声纳追踪器 (未开发！!!)","Context":"SonarTrackerWindow..ctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Index key: ","Translated":"索引键：","Context":"SonarTrackerWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Hunts: ","Translated":"狩猎：","Context":"SonarTrackerWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" | Fates: ","Translated":"命运：","Context":"SonarTrackerWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Congratulations finding this!","Translated":"恭喜您找到这个！","Context":"SonarTrackerWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Right now there's nothing useful in this window but I'll be working on this next release. In the meantime enjoy the filtering selector and hunt/fates counts","Translated":"目前这个窗口中没有什么有用的内容，但我会继续开发下一个版本。与此同时，请尽情享受过滤选择器和搜索/命运计数。","Context":"SonarTrackerWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Sonar Support##","Translated":"声纳支持","Context":"SupportWindow..ctor","Source":"library","Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Sonar Support Result##","Translated":"声纳支持结果","Context":"SupportWindow..ctor","Source":"library","Role":"UI","RoleReason":"→ ImGui.BeginPopupModal"},{"Original":"* = required","Translated":"* = 必需","Context":"SupportWindow.DrawForm","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Type","Translated":"类型","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Contact","Translated":"联系方式","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"We cannot contact you in-game.\nProvide an external method of contact.","Translated":"我们无法在游戏中联系您。\n提供外部联系方式。","Context":"SupportWindow.DrawForm","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Title","Translated":"标题","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Body*","Translated":"身体 *","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputTextMultiline"},{"Original":"Player Name","Translated":"玩家名称","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"(Required) ","Translated":"(必填)","Context":"SupportWindow.DrawForm","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Provide character and world name","Translated":"提供角色和世界名称","Context":"SupportWindow.DrawForm","Source":"library","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Send","Translated":"发送","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Cancel","Translated":"取消","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Add Logs or Additional Text","Translated":"添加日志或其他文本","Context":"SupportWindow.DrawForm","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Logs","Translated":"日志","Context":"SupportWindow.DrawLogs","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputTextMultiline"},{"Original":"Exception details","Translated":"例外详情","Context":"SupportWindow.DrawResponseWindow","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Close","Translated":"关闭","Context":"SupportWindow.DrawResponseWindow","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"__Meta.Author","Translated":"__Meta.作者","Context":"LocalizationWidgetHelper.ShowTooltip","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"__Meta.Notes","Translated":"__Meta.注释","Context":"LocalizationWidgetHelper.ShowTooltip","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "SonarPlugin",
+  "entries": [
+    {
+      "Original": "testing",
+      "Translated": "测试",
+      "Context": "FlavorUtils.DetermineFlavor",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "negative",
+      "Translated": "否定",
+      "Context": "FlavorUtils.DetermineFlavorCore",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Unknown",
+      "Translated": "未知",
+      "Context": "VersionUtils.GetSonarPluginVersion",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "all",
+      "Translated": "所有",
+      "Context": "RelayTrackerViews..ctor",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Audiences##",
+      "Translated": "受众##",
+      "Context": "IndexSelectionWidget.DrawBreadcrumb",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Regions##",
+      "Translated": "区域##",
+      "Context": "IndexSelectionWidget.DrawBreadcrumb",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Datacenters##",
+      "Translated": "数据中心",
+      "Context": "IndexSelectionWidget.DrawBreadcrumb",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Worlds##",
+      "Translated": "世界",
+      "Context": "IndexSelectionWidget.DrawBreadcrumb",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Zones##",
+      "Translated": "区域",
+      "Context": "IndexSelectionWidget.DrawBreadcrumb",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Instances##",
+      "Translated": "实例",
+      "Context": "IndexSelectionWidget.DrawBreadcrumb",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Sonar Lodestone Verification",
+      "Translated": "声纳磁石验证",
+      "Context": "LodestoneVerifyWindow..ctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Lodestone Verification is needed for your currently logged in character:",
+      "Translated": "您当前登录的角色需要进行磁石验证：",
+      "Context": "LodestoneVerifyWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "You can suppress this dialog at /sonarconfig General tab, Lodestone Settings.",
+      "Translated": "您可以在/sonarconfig General 选项卡的 Lodestone Settings 中禁用此对话框。",
+      "Context": "LodestoneVerifyWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Unspecified Reason.",
+      "Translated": "未说明原因。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Please contact Sonar support for assistance.",
+      "Translated": "请联系声纳支持寻求帮助。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your character is currently not verified.",
+      "Translated": "您的角色目前未经验证。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your character lodestone profile is not found.",
+      "Translated": "您的角色磁石档案未找到。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Make your character's Lodestone profile searchable and public. You can set it back to private after verification is done.",
+      "Translated": "使您角色的 Lodestone 资料可搜索和公开。验证完成后，您可以将其恢复为私有。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your character lodestone profile is private.",
+      "Translated": "您的角色磁石档案是私密的。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Make your Lodestone profile public to be able to verify. You can set it back to private after verification is done.",
+      "Translated": "将您的 Lodestone 配置文件公开，以便进行验证。验证完成后，您可以将其恢复为私有。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your character has been renamed and your character's lodestone profile is private.",
+      "Translated": "您的角色已经被重新命名，并且您角色的磁石档案是私密的。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your character hash mismatch and your character's lodestone profile is private.",
+      "Translated": "你的角色哈希不匹配，而且你的角色磁石档案是私密的。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Your character lodestone information stored at Sonar is stale.",
+      "Translated": "你存储在 Sonar 中的角色磁石信息已经过时了。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Unable to provide reason.",
+      "Translated": "无法提供理由。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Update your Sonar plugin or contact support for assistance.",
+      "Translated": "更新 Sonar 插件或联系支持以获取帮助。",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Add the following code into your chracter's lodestone profile bio:",
+      "Translated": "将以下代码添加到角色的磁石档案生物信息中：",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Open Lodestone Profile",
+      "Translated": "打开磁石档案",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Open Lodestone Website",
+      "Translated": "打开 Lodestone 网站",
+      "Context": "LodestoneVerifyWindow.DrawReason",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "This verification is a requirement.",
+      "Translated": "这种验证是必要的。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "This verification will become a requirement in ",
+      "Translated": "这项验证将成为一项要求。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " days.",
+      "Translated": "天数。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " hours.",
+      "Translated": "小时。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " minutes.",
+      "Translated": "分钟。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "This verification will become a requirement in less than 5 minutes.",
+      "Translated": "这项验证将在不到 5 分钟内成为要求。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "This verification is not a requirement at this time.",
+      "Translated": "这种验证目前不是必需的。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Verify",
+      "Translated": "验证",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Verification timeout",
+      "Translated": "验证超时",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Verification in progress",
+      "Translated": "正在进行验证",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Verification failed",
+      "Translated": "验证失败",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "You'll only be able to use Sonar in local mode if not verified by the time this becomes a requirement.",
+      "Translated": "只有在未经验证的情况下，才能在本地模式下使用 Sonar。",
+      "Context": "LodestoneVerifyWindow.DrawVerification",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Zone",
+      "Translated": "区域",
+      "Context": "SonarConfigWindow..ctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Sonar Configuration",
+      "Translated": "Sonar 配置",
+      "Context": "SonarConfigWindow..ctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Localization is still in development!",
+      "Translated": "本地化仍在开发中！",
+      "Context": "SonarConfigWindow.DrawGeneralTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "- Lots of strings are still not covered",
+      "Translated": "- 许多弦仍未被覆盖",
+      "Context": "SonarConfigWindow.DrawGeneralTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "- Strings may change between releases",
+      "Translated": "字符串可能在不同版本之间发生变化",
+      "Context": "SonarConfigWindow.DrawGeneralTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Use localization at your own risk!",
+      "Translated": "使用本地化自担风险！",
+      "Context": "SonarConfigWindow.DrawGeneralTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Hunt Report Notifications",
+      "Translated": "狩猎报告通知",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Separate Rank SS and Minions from Rank S",
+      "Translated": "将 SS 级别和小兵与 S 级别分开",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.Checkbox"
+    },
+    {
+      "Original": "Granular Hunt Reporting Settings",
+      "Translated": "粒度狩猎报告设置",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.Checkbox"
+    },
+    {
+      "Original": "Hunt Display Timers",
+      "Translated": "狩猎显示计时器",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "All timers are in seconds. CTRL+Click to input directly.",
+      "Translated": "所有定时器都以秒为单位。CTRL+ 单击直接输入。",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Time since death (S and A)",
+      "Translated": "死亡时间 (S 和 A)",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt"
+    },
+    {
+      "Original": "Time since last update (S and A)",
+      "Translated": "自上次更新以来的时间 (S 和 A)",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt"
+    },
+    {
+      "Original": "Time since last update (B)",
+      "Translated": "自上次更新以来的时间 (B)",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt"
+    },
+    {
+      "Original": "Hunts Display Limit",
+      "Translated": "Hunts 显示限制",
+      "Context": "SonarConfigWindow.DrawHuntTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ SonarImGui.SliderInt"
+    },
+    {
+      "Original": "Fate Display Timers",
+      "Translated": "命运显示计时器",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Time since completion or failure",
+      "Translated": "自完成或失败以来的时间",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Time since last update",
+      "Translated": "自上次更新以来的时间",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Fates Display Limit",
+      "Translated": "命运显示限制",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Fate Selection",
+      "Translated": "命运选择",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Default Report Jurisdiction",
+      "Translated": "默认报告管辖权",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Search",
+      "Translated": "搜索",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "{0} fate(s) selected to chat",
+      "Translated": "{0} 选择聊天的宿命",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "{0} fate(s) selected to sound",
+      "Translated": "{0} 选择发声的宿命 (s)",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "{0} fate(s) not set to default jurisdiction",
+      "Translated": "{0} 未设置默认管辖权",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Chat",
+      "Translated": "聊天",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Sounds",
+      "Translated": "声音",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Jurisdiction",
+      "Translated": "管辖权",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Level",
+      "Translated": "等级",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Expansion",
+      "Translated": "扩展",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Achievement",
+      "Translated": "成就",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Send to chat",
+      "Translated": "发送到聊天室",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Play Sounds",
+      "Translated": "播放声音",
+      "Context": "SonarConfigWindow.DrawFateTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Brought to you by the Sonar Team",
+      "Translated": "声纳团队为您带来的",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Sonar Support Discord##SonarDiscord",
+      "Translated": "声纳支持 Discord##声纳 Discord",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Ask questions and report bugs at the Sonar Support Discord Server.\nNote that Sonar Support is not provided in the goat place's discord.",
+      "Translated": "在声纳支持失谐服务器上提问和报告错误。\n请注意，在山羊栖息地的不谐波中没有提供声纳支持。",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Sonar Patreon##SonarPatreon",
+      "Translated": "Sonar Patreon ##SonarPatreon",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Support Sonar on Patreon.\nEarnings will be used for the hosting costs of the Sonar Server and Discord Bots.",
+      "Translated": "Patreon 上的声纳支持。\n收益将用于支付 Sonar Server 和 Discord Bots 的托管费用。",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Sonar Status",
+      "Translated": "Sonar 状态",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Connected",
+      "Translated": "已连接",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Disconnected",
+      "Translated": "断开连接",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Sonar will keep trying to reconnect automatically",
+      "Translated": "声纳将继续尝试自动重新连接。",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Reconnect",
+      "Translated": "重新连接",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Signal Sonar to attempt reconnecting to server",
+      "Translated": "发出信号让声纳尝试重新连接到服务器",
+      "Context": "SonarConfigWindow.DrawAboutTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Version Information",
+      "Translated": "版本信息",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Dalamud ",
+      "Translated": "在 Damud",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "FFXIV ",
+      "Translated": "最终幻想 14",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Client Hash: ",
+      "Translated": "客户端哈希：",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Show",
+      "Translated": "显示",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Hide",
+      "Translated": "隐藏",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Player Tracker",
+      "Translated": "玩家追踪器",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Zone: ",
+      "Translated": "区域：",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Hunts Tracker",
+      "Translated": "狩猎追踪器",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Count: ",
+      "Translated": "计数：",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " | Index: ",
+      "Translated": "索引：",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Clear",
+      "Translated": "清晰",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Check",
+      "Translated": "检查",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Perform a consistency check of the index\nOutput will be at /xllog",
+      "Translated": "对索引进行一致性检查\n输出将位于/xllog",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Rebuild",
+      "Translated": "重建",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Rebuild index\nOutput will be at /xllog\n\nWarning: You may experience stuttering",
+      "Translated": "Rebuild 索引\n输出将显示在/xllog\n\n警告：你可能会遇到口吃的情况",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Busy",
+      "Translated": "忙碌",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Fates Tracker",
+      "Translated": "命运追踪器",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Request Relay Data",
+      "Translated": "请求中继数据",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Request all relay information to be received.\nTrack All options will automatically be enabled for both Hunts and Fates.\nThis can only be done once.\n\nWarning: You'll receive everything the Sonar server knows!\nThis is currently under testing.",
+      "Translated": "请求接收所有中继信息。\n追踪所有选项将自动为狩猎和命运开启。\n这只能做一次。\n\n警告：你将接收到声纳服务器所知的一切！\n这个目前正在测试中。",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Log Level",
+      "Translated": "日志级别",
+      "Context": "SonarConfigWindow.DrawDebugTab",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "<rank>: <name> <hpp> <flag> <<world>> <instance> [<players>]",
+      "Translated": "<rank>: <name> <hpp> <flag> <world> <instance> [<players>]",
+      "Context": "SonarMainWindow.DrawHunt",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "[B] <name>: <flag> <<world>> <instance> <tap> [<players>]",
+      "Translated": "[B] <name>: <flag> <world> <instance> <tap> [<players>]",
+      "Context": "SonarMainWindow.DrawFate",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Sonar Tracker (UNDER DEVELOPMENT!!!)",
+      "Translated": "声纳追踪器 (未开发！!!)",
+      "Context": "SonarTrackerWindow..ctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Index key: ",
+      "Translated": "索引键：",
+      "Context": "SonarTrackerWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Hunts: ",
+      "Translated": "狩猎：",
+      "Context": "SonarTrackerWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " | Fates: ",
+      "Translated": "命运：",
+      "Context": "SonarTrackerWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Congratulations finding this!",
+      "Translated": "恭喜您找到这个！",
+      "Context": "SonarTrackerWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Right now there's nothing useful in this window but I'll be working on this next release. In the meantime enjoy the filtering selector and hunt/fates counts",
+      "Translated": "目前这个窗口中没有什么有用的内容，但我会继续开发下一个版本。与此同时，请尽情享受过滤选择器和搜索/命运计数。",
+      "Context": "SonarTrackerWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Sonar Support##",
+      "Translated": "声纳支持",
+      "Context": "SupportWindow..ctor",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Sonar Support Result##",
+      "Translated": "声纳支持结果",
+      "Context": "SupportWindow..ctor",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopupModal"
+    },
+    {
+      "Original": "* = required",
+      "Translated": "* = 必需",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Type",
+      "Translated": "类型",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Contact",
+      "Translated": "联系方式",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "We cannot contact you in-game.\nProvide an external method of contact.",
+      "Translated": "我们无法在游戏中联系您。\n提供外部联系方式。",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Title",
+      "Translated": "标题",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Body*",
+      "Translated": "身体 *",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextMultiline"
+    },
+    {
+      "Original": "Player Name",
+      "Translated": "玩家名称",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "(Required) ",
+      "Translated": "(必填)",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Provide character and world name",
+      "Translated": "提供角色和世界名称",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Send",
+      "Translated": "发送",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Add Logs or Additional Text",
+      "Translated": "添加日志或其他文本",
+      "Context": "SupportWindow.DrawForm",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Logs",
+      "Translated": "日志",
+      "Context": "SupportWindow.DrawLogs",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextMultiline"
+    },
+    {
+      "Original": "Exception details",
+      "Translated": "例外详情",
+      "Context": "SupportWindow.DrawResponseWindow",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Close",
+      "Translated": "关闭",
+      "Context": "SupportWindow.DrawResponseWindow",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "__Meta.Author",
+      "Translated": "__Meta.作者",
+      "Context": "LocalizationWidgetHelper.ShowTooltip",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "__Meta.Notes",
+      "Translated": "__Meta.注释",
+      "Context": "LocalizationWidgetHelper.ShowTooltip",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-07T08:55:21",
+  "imported": {
+    "archive": ""
+  },
+  "importedNote": "同一份投稿内容之前已经收到过了（issue #direct-2026-10-06T23-47-35-209Z-5927a766），这次跳过（没有重复并入）。"
+}
