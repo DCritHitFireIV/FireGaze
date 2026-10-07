@@ -1,4 +1,4 @@
-// FireGaze 中继（Cloudflare Worker）v7
+// FireGaze 中继（Cloudflare Worker）v10
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
@@ -9,6 +9,12 @@
 //   · 公共彩云小译代理（POST /translate）——2026-10-03 新增：
 //       插件不持有彩云 token；token 只存服务端（机密 CAIYUN_TOKEN）。
 //       额度用完 / 密钥失效 / 未配置时回 { ok:false, error:'unavailable' }，插件端自动回退免费通道。
+//   · 彩云 token 池（管理：POST /translate/token、POST /translate/token/remove、GET /translate/pool）
+//       ——2026-10-07 新增（v10）：
+//       多个彩云 token 轮换：某个额度用完（401/403）自动换下一个，冷却到期自动重试
+//       （充值 / 月额度重置后自动回归），新 token 加进来即生效；全部逻辑都在本文件里。
+//       存储复用 LIBRARY_COUNTS（前缀 tok:，不新建绑定）；管理端点要机密 ADMIN_KEY（不配 = 管理面关闭）。
+//       池子为空时仍用 CAIYUN_TOKEN 兜底（旧配置零改动）；池子用完可推手机提醒（可选，见下）。
 //   · 界面译文直传（POST /uit-submit）——2026-10-04 新增：
 //       几千条的投稿不再走 issue 粘贴；Worker 直接把它提交成
 //       docs/contributions/inbox/uit-direct-<时间>-<随机>.json，仓库工作流接手并入公共库。
@@ -30,7 +36,8 @@
 // 环境变量：REPO（可选，默认 DCritHitFireIV/FireGaze）
 //          FEEDBACK_REPO（可选，默认 = REPO）：玩家反馈的 issue 建到这个仓库；
 //          指向私有仓时只有维护者能看（GitHub 公开仓不支持私密 issue）。
-// 机密（/translate 用）：CAIYUN_TOKEN——彩云小译访问令牌；不配就只关闭这个端点，其他功能照常。
+// 机密（/translate 用）：CAIYUN_TOKEN——彩云小译访问令牌（池子为空时的兜底）；不配且池子空就只关闭这个端点。
+// 机密（token 池管理，可选）：ADMIN_KEY——管理端点鉴权；SERVER3_PUSH_URL——池子用完的手机提醒（可选）。
 // 绑定（下载量用）：LIBRARY_COUNTS（KV 命名空间）；不配则计数端点回 counting disabled，其余照常。
 
 const REPO_DEFAULT = 'DCritHitFireIV/FireGaze';
@@ -47,6 +54,19 @@ const TRANSLATE_PER_IP_LIMIT = 120; // 每分钟每 IP 的翻译请求上限（�
 const TRANSLATE_DAILY_CHARS = 400000; // 每 IP 每天最多翻多少字符（实例内存计数，近似限流，防止单机刷完额度）
 
 const charUsage = new Map(); // `${ip}|${yyyy-mm-dd}` -> 已用字符数
+
+// 彩云 token 池（v10）：多个 token 轮换，额度用完自动换下一个；冷却到期自动回归。
+const POOL_PREFIX = 'tok:'; // 复用 LIBRARY_COUNTS 的键前缀（tok:<sha256 前 12 位>）
+const POOL_CACHE_MS = 60_000; // token 列表内存缓存
+const POOL_MAX_ATTEMPTS = 3; // 单次请求最多试几个 token（控制玩家侧延迟）
+const POOL_COOLDOWN_HOURS = 24; // 冷却基准，失败次数递增：24h → 48h → 72h 封顶
+const POOL_COOLDOWN_CAP = 3;
+const POOL_USAGE_FLUSH_MS = 30_000; // 月用量写回 KV 的节流（KV 每键 1 写/秒）
+const POOL_EMPTY_NOTIFY_MS = 6 * 3600 * 1000; // 池子空的提醒节流
+const POOL_ADMIN_PER_IP_LIMIT = 30; // 管理端点每分钟每 IP
+
+let poolCache = { at: 0, entries: [] };
+let poolEmptyNotifiedAt = 0;
 
 // 界面译文直传（/uit-submit）
 const UIT_SUBMIT_MAX_CHARS = 4_000_000; // 投稿 JSON 上限（几千条约几百 KB，留足余量）
@@ -427,16 +447,319 @@ async function handleLibraryCounts(env) {
   return json({ ok: true, updatedAt: new Date().toISOString(), counts, likes });
 }
 
-/// 公共彩云代理：插件把原文送过来，本 Worker 用服务端 token 转发给彩云，原样回 target。
-/// 只有「额度用完 / 密钥失效 / 未配置」才回 unavailable——插件据此回退到免费通道。
-async function handleTranslate(data, env, ip) {
-  if (!allow(ip, TRANSLATE_PER_IP_LIMIT, 'translate')) {
+// ── 彩云 token 池（v10）─────────────────────────────────────────────
+// 目标：一个 token 额度用完就自动用下一个；充值 / 月额度重置后自动回归；新 token 加进来即生效。
+// 存储：LIBRARY_COUNTS（前缀 tok:），不需要新绑定；热路径只碰内存，冷事件（冷却 / 新增）才写 KV。
+
+function currentMonth() {
+  return new Date().toISOString().slice(0, 7);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function poolTokenId(token) {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));
+  return Array.from(new Uint8Array(digest, 0, 6), (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function maskToken(token) {
+  const value = String(token ?? '');
+  return value.length <= 10 ? '****' : `${value.slice(0, 4)}****${value.slice(-4)}`;
+}
+
+async function listPoolKeys(store) {
+  const keys = [];
+  let cursor;
+  for (;;) {
+    const listed = await store.list({ prefix: POOL_PREFIX, limit: 1000, cursor });
+    keys.push(...listed.keys.map((k) => k.name));
+    if (listed.list_complete) break;
+    cursor = listed.cursor;
+  }
+  return keys;
+}
+
+async function persistPoolEntry(env, entry) {
+  const store = env.LIBRARY_COUNTS;
+  if (!store || !entry.id || entry.id === 'env') return;
+  try {
+    await store.put(POOL_PREFIX + entry.id, JSON.stringify(entry));
+  } catch {
+    // 写失败只影响统计，不影响翻译
+  }
+}
+
+/// 读池子（内存缓存 60 秒）：KV 记录 + 旧的单 token（兼容）；月份翻页 = 额度可能重置 → 自动复活。
+async function loadPool(env) {
+  const now = Date.now();
+  if (poolCache.at > 0 && now - poolCache.at < POOL_CACHE_MS) {
+    return poolCache.entries;
+  }
+
+  const previous = poolCache.entries;
+  const entries = [];
+  const store = env.LIBRARY_COUNTS;
+  if (store) {
+    try {
+      for (const key of await listPoolKeys(store)) {
+        try {
+          const raw = await store.get(key);
+          const entry = raw ? JSON.parse(raw) : null;
+          if (entry && typeof entry.token === 'string' && entry.token.length > 0) {
+            entry.id = key.slice(POOL_PREFIX.length);
+            entries.push(entry);
+          }
+        } catch {
+          // 坏记录跳过，不影响整池
+        }
+      }
+    } catch {
+      // KV 故障：先按空池跑（下面的 env 兜底），下一轮再试
+    }
+  }
+
+  // 兼容：旧的单 token 也进池子（不落 KV，冷却只在内存里）
+  if (env.CAIYUN_TOKEN && !entries.some((e) => e.token === env.CAIYUN_TOKEN)) {
+    entries.push({
+      id: 'env', token: env.CAIYUN_TOKEN, label: 'CAIYUN_TOKEN（兼容）', addedAt: 0,
+      month: currentMonth(), monthChars: 0, fails: 0, cooldownUntil: 0, lastUsedAt: 0, lastError: null,
+    });
+  }
+
+  // 刷新时把内存里还没落盘的月用量并回来（KV 里的可能是 30 秒前的快照）
+  for (const entry of entries) {
+    const old = previous.find((e) => e.id === entry.id);
+    if (old && old.month === entry.month) {
+      entry.monthChars = Math.max(entry.monthChars ?? 0, old.monthChars ?? 0);
+    }
+  }
+
+  // 月份翻页 = 额度可能重置：清冷却、清计数，自动回归
+  const month = currentMonth();
+  for (const entry of entries) {
+    if (entry.month !== month) {
+      entry.month = month;
+      entry.monthChars = 0;
+      entry.fails = 0;
+      entry.cooldownUntil = 0;
+      await persistPoolEntry(env, entry);
+    }
+  }
+
+  poolCache = { at: now, entries };
+  return entries;
+}
+
+/// 可用 token：不在冷却期内的，按「本月用量最少」优先（摊平额度，新 token 先用）。
+function usablePool(entries, now) {
+  return entries
+    .filter((entry) => !(entry.cooldownUntil > now))
+    .sort((a, b) => (a.monthChars ?? 0) - (b.monthChars ?? 0) || (a.addedAt ?? 0) - (b.addedAt ?? 0));
+}
+
+function recordPoolSuccess(env, entry, chars) {
+  entry.monthChars = (entry.monthChars ?? 0) + chars;
+  entry.lastUsedAt = Date.now();
+  entry.fails = 0;
+  entry.cooldownUntil = 0;
+  entry.lastError = null;
+  const now = Date.now();
+  if (now - (entry.flushedAt ?? 0) >= POOL_USAGE_FLUSH_MS) {
+    entry.flushedAt = now;
+    void persistPoolEntry(env, entry);
+  }
+}
+
+async function markPoolCooling(env, entry, detail) {
+  entry.fails = (entry.fails ?? 0) + 1;
+  const hours = POOL_COOLDOWN_HOURS * Math.min(entry.fails, POOL_COOLDOWN_CAP);
+  entry.cooldownUntil = Date.now() + hours * 3600 * 1000;
+  entry.lastError = String(detail ?? '').slice(0, 200);
+  await persistPoolEntry(env, entry);
+}
+
+/// 调一次彩云；结果分四类：ok / quota（401·403，额度用完或 token 失效）/ jitter（429·5xx）/ unreachable（网络）。
+async function callCaiyun(token, payload) {
+  let res;
+  try {
+    res = await fetch(CAIYUN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-authorization': `token ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    return { kind: 'unreachable' };
+  }
+
+  const text = await res.text();
+  if (res.ok) {
+    return { kind: 'ok', text };
+  }
+
+  if (res.status === 401 || res.status === 403) {
+    return { kind: 'quota', detail: `caiyun ${res.status}: ${text.slice(0, 120)}` };
+  }
+
+  return { kind: 'jitter', detail: `caiyun ${res.status}: ${text.slice(0, 120)}` };
+}
+
+/// 池子用完时的手机提醒（可选；配了 SERVER3_PUSH_URL 才发，6 小时最多一条）。
+async function notifyPoolEmpty(env, total) {
+  if (!env.SERVER3_PUSH_URL) return;
+  const now = Date.now();
+  if (now - poolEmptyNotifiedAt < POOL_EMPTY_NOTIFY_MS) return;
+  poolEmptyNotifiedAt = now;
+  try {
+    await fetch(env.SERVER3_PUSH_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        title: 'FireGaze 公共彩云额度池用完',
+        desp: `池子里 ${total} 个 token 都不可用（冷却中）。加新 token：POST /translate/token（需要 ADMIN_KEY）。`,
+      }),
+    });
+  } catch {
+    // 提醒失败不影响请求
+  }
+}
+
+// ── token 池管理端点（要机密 ADMIN_KEY；不配则管理面关闭）──
+
+function poolAdminAuthorized(request, env) {
+  const key = env.ADMIN_KEY;
+  return typeof key === 'string' && key.length >= 8 && (request.headers.get('x-admin-key') ?? '') === key;
+}
+
+function poolRequestIp(request) {
+  return request.headers.get('CF-Connecting-IP') ?? 'unknown';
+}
+
+/// 加 / 更新一个 token；同一个 token 重复加 = 重置冷却（充值后立刻复活）。
+/// 注意：body 已由路由解析过（request 流只能读一次），这里用 data。
+async function handlePoolToken(data, request, env, ip) {
+  if (!env.ADMIN_KEY) {
+    return json({ ok: false, error: 'admin disabled', detail: 'set ADMIN_KEY secret' }, 503);
+  }
+
+  if (!allow(ip, POOL_ADMIN_PER_IP_LIMIT, 'pooladm')) {
     return json({ ok: false, error: 'too many requests' }, 429);
   }
 
-  const token = env.CAIYUN_TOKEN;
-  if (!token) {
-    return json({ ok: false, error: 'unavailable', detail: 'service disabled' }, 503);
+  if (!poolAdminAuthorized(request, env)) {
+    return json({ ok: false, error: 'forbidden' }, 403);
+  }
+
+  const token = String(data.token ?? '').trim();
+  if (token.length < 8 || token.length > 256) {
+    return json({ ok: false, error: 'bad token' }, 400);
+  }
+
+  const store = env.LIBRARY_COUNTS;
+  if (!store) {
+    return json({ ok: false, error: 'no kv binding', detail: 'LIBRARY_COUNTS' }, 503);
+  }
+
+  const id = await poolTokenId(token);
+  let record = { addedAt: Date.now(), month: currentMonth(), monthChars: 0 };
+  try {
+    const raw = await store.get(POOL_PREFIX + id);
+    if (raw) record = JSON.parse(raw);
+  } catch {
+    // 读不出来就当新记录
+  }
+
+  record.token = token;
+  const label = String(data.label ?? '').trim().slice(0, 40);
+  if (label) record.label = label;
+  if (!record.label) record.label = `token-${id.slice(0, 4)}`;
+  record.fails = 0;
+  record.cooldownUntil = 0;
+  record.lastError = null;
+  await store.put(POOL_PREFIX + id, JSON.stringify(record));
+
+  // 直接进内存缓存（不依赖 KV 的最终一致；缓存未加载时不碰，下次读取会带上）
+  poolEmptyNotifiedAt = 0;
+  const now = Date.now();
+  if (poolCache.at > 0 && now - poolCache.at < POOL_CACHE_MS) {
+    const fresh = { ...record, id, flushedAt: now };
+    const index = poolCache.entries.findIndex((e) => e.id === id);
+    if (index >= 0) poolCache.entries[index] = fresh; else poolCache.entries.push(fresh);
+  }
+
+  return json({ ok: true, id, label: record.label, masked: maskToken(token), note: '下一次翻译请求就会用上' });
+}
+
+/// 移除一个 token（按 /translate/pool 里的 id；body 已由路由解析）。
+async function handlePoolRemove(data, request, env, ip) {
+  if (!env.ADMIN_KEY) {
+    return json({ ok: false, error: 'admin disabled', detail: 'set ADMIN_KEY secret' }, 503);
+  }
+
+  if (!allow(ip, POOL_ADMIN_PER_IP_LIMIT, 'pooladm')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  if (!poolAdminAuthorized(request, env)) {
+    return json({ ok: false, error: 'forbidden' }, 403);
+  }
+
+  const id = String(data.id ?? '').trim();
+  if (!/^[0-9a-f]{12}$/.test(id)) {
+    return json({ ok: false, error: 'bad id' }, 400);
+  }
+
+  const store = env.LIBRARY_COUNTS;
+  if (!store) {
+    return json({ ok: false, error: 'no kv binding', detail: 'LIBRARY_COUNTS' }, 503);
+  }
+
+  await store.delete(POOL_PREFIX + id);
+  poolCache = { at: 0, entries: [] };
+  return json({ ok: true, removed: id });
+}
+
+/// 池子状态（token 一律打码，不返回明文）。
+async function handlePoolStatus(request, env) {
+  if (!env.ADMIN_KEY) {
+    return json({ ok: false, error: 'admin disabled', detail: 'set ADMIN_KEY secret' }, 503);
+  }
+
+  const ip = poolRequestIp(request);
+  if (!allow(ip, POOL_ADMIN_PER_IP_LIMIT, 'pooladm')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  if (!poolAdminAuthorized(request, env)) {
+    return json({ ok: false, error: 'forbidden' }, 403);
+  }
+
+  const pool = await loadPool(env);
+  const now = Date.now();
+  const tokens = pool.map((entry) => ({
+    id: entry.id,
+    label: entry.label ?? '',
+    status: entry.cooldownUntil > now ? 'cooling' : 'active',
+    cooldownUntil: entry.cooldownUntil > now ? new Date(entry.cooldownUntil).toISOString() : null,
+    month: entry.month ?? '',
+    monthChars: entry.monthChars ?? 0,
+    fails: entry.fails ?? 0,
+    lastUsedAt: entry.lastUsedAt ? new Date(entry.lastUsedAt).toISOString() : null,
+    lastError: entry.lastError ?? null,
+    masked: maskToken(entry.token),
+  }));
+  return json({ ok: true, total: pool.length, active: tokens.filter((t) => t.status === 'active').length, tokens });
+}
+
+/// 公共彩云代理：插件把原文送过来，本 Worker 用服务端 token 池转发给彩云，原样回 target。
+/// 池子里按「本月用量最少」挑，额度用完（401/403）自动换下一个；全池冷却时回 unavailable（插件端回退免费通道）。
+async function handleTranslate(data, env, ip) {
+  if (!allow(ip, TRANSLATE_PER_IP_LIMIT, 'translate')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
   }
 
   const source = Array.isArray(data.source) ? data.source.map((s) => String(s ?? '')) : [];
@@ -454,30 +777,52 @@ async function handleTranslate(data, env, ip) {
   }
 
   const transType = data.trans_type === 'zh2en' ? 'zh2en' : 'auto2zh';
-  let res;
-  try {
-    res = await fetch(CAIYUN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-authorization': `token ${token}`,
-      },
-      body: JSON.stringify({ source, trans_type: transType, detect: true, media: 'text', request_id: 'firegaze' }),
-    });
-  } catch {
-    return json({ ok: false, error: 'upstream-unreachable' }, 502);
-  }
+  const payload = { source, trans_type: transType, detect: true, media: 'text', request_id: 'firegaze' };
 
-  const text = await res.text();
-  if (!res.ok) {
-    // 401/403 = token 失效或额度用完；429/5xx = 限流 / 上游抖动
-    if (res.status === 401 || res.status === 403) {
-      return json({ ok: false, error: 'unavailable', detail: `caiyun ${res.status}` }, 503);
+  const pool = await loadPool(env);
+  const candidates = usablePool(pool, Date.now()).slice(0, POOL_MAX_ATTEMPTS);
+  if (candidates.length === 0) {
+    if (pool.length === 0) {
+      return json({ ok: false, error: 'unavailable', detail: 'service disabled' }, 503);
     }
-    return json({ ok: false, error: 'upstream', detail: `caiyun ${res.status}` }, 502);
+
+    void notifyPoolEmpty(env, pool.length);
+    return json({ ok: false, error: 'unavailable', detail: `pool exhausted (${pool.length})` }, 503);
   }
 
-  return new Response(text, { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  let lastKind = 'quota';
+  for (const entry of candidates) {
+    let outcome = await callCaiyun(entry.token, payload);
+    if (outcome.kind === 'jitter') {
+      // 429/5xx：同一个 token 挣扎一次，再不行就换下一个
+      await sleep(400);
+      outcome = await callCaiyun(entry.token, payload);
+    }
+
+    if (outcome.kind === 'ok') {
+      recordPoolSuccess(env, entry, total);
+      return new Response(outcome.text, { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+    }
+
+    if (outcome.kind === 'unreachable') {
+      return json({ ok: false, error: 'upstream-unreachable' }, 502);
+    }
+
+    if (outcome.kind === 'quota') {
+      await markPoolCooling(env, entry, outcome.detail);
+      lastKind = 'quota';
+      continue;
+    }
+
+    lastKind = 'jitter';
+  }
+
+  if (lastKind === 'quota') {
+    void notifyPoolEmpty(env, pool.length);
+    return json({ ok: false, error: 'unavailable', detail: 'all tokens exhausted' }, 503);
+  }
+
+  return json({ ok: false, error: 'upstream', detail: 'caiyun error' }, 502);
 }
 
 /// 反馈正文的垃圾检测：命中则返回原因，否则 null。
@@ -598,7 +943,11 @@ export default {
         return handlePluginStats(env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 9 });
+      if (url.pathname === '/translate/pool') {
+        return handlePoolStatus(request, env);
+      }
+
+      return json({ ok: true, service: 'firegaze-relay', version: 10 });
     }
 
     if (request.method !== 'POST') {
@@ -622,6 +971,15 @@ export default {
     // ── 公共彩云小译代理 ──
     if (url.pathname === '/translate' || url.pathname === '/v1/translate') {
       return handleTranslate(data, env, ip);
+    }
+
+    // ── 彩云 token 池管理（要 ADMIN_KEY；body 已由本函数解析）──
+    if (url.pathname === '/translate/token') {
+      return handlePoolToken(data, request, env, ip);
+    }
+
+    if (url.pathname === '/translate/token/remove') {
+      return handlePoolRemove(data, request, env, ip);
     }
 
     // ── 公共库下载计数 / 点赞 ──
