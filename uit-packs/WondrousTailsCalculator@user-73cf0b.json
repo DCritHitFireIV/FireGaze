@@ -1,186 +1,135 @@
 {
-  "type": "uit-contribution",
-  "plugin": "WondrousTailsCalculator",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-07",
+    "source": "user",
+    "label": "玩家包 · 73cf0b",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Wondrous Tails Calculator",
       "Translated": "神奇尾巴计算器",
       "Context": "Plugin.get_Name",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "Opens or closes the Wondrous Tails Calculator.",
       "Translated": "打开或关闭神奇尾巴计算器。",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "library"
     },
     {
       "Original": "Toggle the stickers currently on your journal:",
       "Translated": "切换当前日志中的贴纸：",
       "Context": "CalculatorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Reset Grid",
       "Translated": "重置网格",
       "Context": "CalculatorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Second Chance Points:",
       "Translated": "第二个机会点：",
       "Context": "CalculatorWindow.DrawShuffleTracker",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Your Target Goal:",
       "Translated": "你的目标目标：",
       "Context": "CalculatorWindow.DrawShuffleTracker",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "1 Line",
       "Translated": "1 行",
       "Context": "CalculatorWindow.DrawShuffleTracker",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "library"
     },
     {
       "Original": "2 Lines",
       "Translated": "2 行",
       "Context": "CalculatorWindow.DrawShuffleTracker",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "library"
     },
     {
       "Original": "3 Lines",
       "Translated": "3 行",
       "Context": "CalculatorWindow.DrawShuffleTracker",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "library"
     },
     {
       "Original": "Stickers Placed: ",
       "Translated": "贴纸放置：",
       "Context": "CalculatorWindow.DrawStatistics",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "1 Line Chance:",
       "Translated": "1 行机会：",
       "Context": "CalculatorWindow.DrawStatistics",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "2 Lines Chance:",
       "Translated": "2 行几率：",
       "Context": "CalculatorWindow.DrawStatistics",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "3 Lines Chance:",
       "Translated": "3 行机会：",
       "Context": "CalculatorWindow.DrawStatistics",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Shuffle advice is only available at exactly 7 stickers.",
       "Translated": "洗牌建议仅适用于 7 个贴纸。",
       "Context": "CalculatorWindow.DrawShuffleRecommendation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Out of Second Chance Points! Cannot shuffle.",
       "Translated": "没有第二次机会点数！不能随机。",
       "Context": "CalculatorWindow.DrawShuffleRecommendation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Recommendation: SHUFFLE!",
       "Translated": "建议：洗牌！",
       "Context": "CalculatorWindow.DrawShuffleRecommendation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Your current layout is below average for ",
       "Translated": "您当前的布局低于平均水平",
       "Context": "CalculatorWindow.DrawShuffleRecommendation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " Line(s). Spending 1 point to shuffle is statistically worth it.",
       "Translated": "线 (s)。花 1 个点洗牌在统计学上是值得的。",
       "Context": "CalculatorWindow.DrawShuffleRecommendation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Recommendation: KEEP",
       "Translated": "建议:KEEP",
       "Context": "CalculatorWindow.DrawShuffleRecommendation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Your current sticker placement layout is above average. Keep placing stickers!",
       "Translated": "您当前的贴纸放置布局高于平均水平。请继续放置贴纸！",
       "Context": "CalculatorWindow.DrawShuffleRecommendation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-07T07:41:45",
-  "imported": {
-    "archive": "uit-direct-2026-10-07T07-41-31-872Z-eca3e9e4-2026-10-07T074145.json",
-    "accepted": 20,
-    "filled": 20,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 20 条 `WondrousTailsCalculator` 的界面文字译文，已收为**独立译文包** `uit-packs/WondrousTailsCalculator@user-73cf0b.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 20 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
