@@ -1,0 +1,3080 @@
+{
+  "issue": "direct-2026-10-07T05-23-28-355Z-fb6fefdc",
+  "receivedAt": "2026-10-07 05:23:41",
+  "author": "匿名直传",
+  "plugin": "Mahjong.Plugin.Dalamud",
+  "fingerprint": "cbb60294d4965dd8",
+  "packFile": "Mahjong.Plugin.Dalamud@user-cbb602.json",
+  "accepted": 376,
+  "filled": 376,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Mahjong.Plugin.Dalamud",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Doman Mahjong Solver: About###domanmahjong-about",
+        "Translated": "麻将求解器领域：关于",
+        "Context": "AboutWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Author",
+        "Translated": "作者",
+        "Context": "AboutWindow.DrawDetailsTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Report a bug",
+        "Translated": "报告 bug",
+        "Context": "AboutWindow.DrawDetailsTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Discussions",
+        "Translated": "讨论",
+        "Context": "AboutWindow.DrawDetailsTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Security disclosure",
+        "Translated": "安全披露",
+        "Context": "AboutWindow.DrawDetailsTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Click to open · right-click to copy",
+        "Translated": "点击打开·右键点击复制",
+        "Context": "AboutWindow.DrawLinkRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hello there! I'm a solo developer building FFXIV automation plugins in my free time.",
+        "Translated": "你好！我是一名独立开发人员，利用空闲时间构建 FFXIV 自动化插件。",
+        "Context": "AboutWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "If this one made your day a little easier, the best way to support the project is to share it with other players.",
+        "Translated": "如果这个项目让你的日子变得稍微轻松一些，那么支持这个项目的最好方式就是与其他玩家分享。",
+        "Context": "AboutWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "I'd love to hear from you too: bug reports, feature requests, and general feedback are all welcome on GitHub Discussions.",
+        "Translated": "我也很想听到你的消息:bug 报告、功能请求和一般反馈都欢迎在 GitHub 讨论区提供。",
+        "Context": "AboutWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Thanks for trying it out, and have fun out there!",
+        "Translated": "谢谢你尝试这个，祝你玩得开心！",
+        "Context": "AboutWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Doman Mahjong · Developer###domanmahjong-debug",
+        "Translated": "Doman Mahajong 开发人员",
+        "Context": "DebugOverlay..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Status",
+        "Translated": "状态",
+        "Context": "DebugOverlay.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Actions",
+        "Translated": "行动",
+        "Context": "DebugOverlay.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Bug report",
+        "Translated": "Bug 报告",
+        "Context": "DebugOverlay.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Reverse Engineering",
+        "Translated": "逆向工程",
+        "Context": "DebugOverlay.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Diagnostics",
+        "Translated": "诊断",
+        "Context": "DebugOverlay.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Automation is disabled until the ToS notice is acknowledged in the main window.",
+        "Translated": "自动化将被禁用，直到主窗口确认 ToS 通知。",
+        "Context": "DebugOverlay.DrawHeaderCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Acknowledge and enable",
+        "Translated": "确认并启用",
+        "Context": "DebugOverlay.DrawHeaderCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Doman Mahjong Solver###domanmahjong-main",
+        "Translated": "Doman Majong Solver",
+        "Context": "MainWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Welcome to Doman Mahjong Solver",
+        "Translated": "欢迎来到 Domain Majong Solver",
+        "Context": "MainWindow.DrawTosGate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "This plugin can play Doman Mahjong for you by reading the game and clicking on your behalf. Before turning that on, please read:",
+        "Translated": "这个插件可以通过阅读游戏并代表您点击来为您玩 Doman Majong。在开启之前，请阅读：",
+        "Context": "MainWindow.DrawTosGate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Third-party automation is against the FFXIV Terms of Service.",
+        "Translated": "第三方自动化违反 FFXIV 服务条款。",
+        "Context": "MainWindow.DrawTosGate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Use at your own risk — your account may be sanctioned.",
+        "Translated": "使用风险自负——您的账户可能会受到制裁。",
+        "Context": "MainWindow.DrawTosGate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "\"Hints\" mode only shows advice — never clicks for you.",
+        "Translated": "“提示” 模式只显示建议——从不为你点击。",
+        "Context": "MainWindow.DrawTosGate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "  • This build uploads anonymous gameplay logs, error reports, and memory diagnostics from the Mahjong addon to support cross-client reverse-engineering. No character names, Content IDs, or other PII are included — uploads are keyed only by a random per-install ID.",
+        "Translated": "该构建从麻将插件上传匿名游戏日志、错误报告和内存诊断，以支持跨客户端逆向工程。不包括角色名称、内容 ID 或其他 PII——上传仅由每次安装的随机 ID 进行键控。",
+        "Context": "MainWindow.DrawTosGate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "I understand — continue",
+        "Translated": "我明白了——继续",
+        "Context": "MainWindow.DrawTosGate",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Mode",
+        "Translated": "模式",
+        "Context": "MainWindow.DrawModeCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Off",
+        "Translated": "关闭",
+        "Context": "MainWindow.DrawModeCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InvisibleButton"
+      },
+      {
+        "Original": "Do nothing",
+        "Translated": "什么都不做",
+        "Context": "MainWindow.DrawModeCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Hints",
+        "Translated": "提示",
+        "Context": "MainWindow.DrawModeCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InvisibleButton"
+      },
+      {
+        "Original": "Highlight best move",
+        "Translated": "突出显示最佳行动",
+        "Context": "MainWindow.DrawModeCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Click for you",
+        "Translated": "为您点击",
+        "Context": "MainWindow.DrawModeCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Developer console",
+        "Translated": "开发人员控制台",
+        "Context": "MainWindow.DrawHeaderIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "About",
+        "Translated": "关于",
+        "Context": "MainWindow.DrawHeaderIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "MainWindow.DrawHeaderIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Enable Auto-play?##autoplay-confirm",
+        "Translated": "启用自动游戏？##自动游戏确认",
+        "Context": "MainWindow.DrawAutoPlayConfirmModal",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Auto-play will click for you with humanized timing.",
+        "Translated": "自动游戏将以人性化的时机为您点击。",
+        "Context": "MainWindow.DrawAutoPlayConfirmModal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Switch Mode to Off or Hints any time to stop. Third-party automation is against the FFXIV Terms of Service — use at your own risk.",
+        "Translated": "随时切换模式、关闭或提示停止。第三方自动化违反 FFXIV 服务条款——自行承担使用风险。",
+        "Context": "MainWindow.DrawAutoPlayConfirmModal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enable Auto-play",
+        "Translated": "启用自动播放",
+        "Context": "MainWindow.DrawAutoPlayConfirmModal",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "MainWindow.DrawAutoPlayConfirmModal",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Live game",
+        "Translated": "实时游戏",
+        "Context": "MainWindow.DrawLiveCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Waiting for a Doman Mahjong table.",
+        "Translated": "等待多曼麻将桌。",
+        "Context": "MainWindow.DrawEmptyLive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "When a match starts, the plugin will:",
+        "Translated": "当匹配开始时，插件将：",
+        "Context": "MainWindow.DrawEmptyLive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Hints — outline the best discard in the mahjong window.",
+        "Translated": "提示——在麻将窗口中勾勒出最佳弃牌方案。",
+        "Context": "MainWindow.DrawEmptyLive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Auto-play — click the best discard for you with humanized timing.",
+        "Translated": "自动播放——点击最适合您的选择，以人性化的时机播放。",
+        "Context": "MainWindow.DrawEmptyLive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Auto-play is active — open a match and the plugin will take over.",
+        "Translated": "Autoplay 处于活动状态——打开一个匹配，插件就会接管。",
+        "Context": "MainWindow.DrawEmptyLive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Hints mode is active — open a match and watch for the outline.",
+        "Translated": "提示模式处于活跃状态——打开匹配并观察轮廓。",
+        "Context": "MainWindow.DrawEmptyLive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mode is currently Off. Pick Hints or Auto-play above to arm the plugin.",
+        "Translated": "模式当前处于关闭状态。点击上方的提示或自动播放来武装插件。",
+        "Context": "MainWindow.DrawEmptyLive",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You",
+        "Translated": "你",
+        "Context": "MainWindow.DrawSeatRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Right",
+        "Translated": "右",
+        "Context": "MainWindow.DrawSeatRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Across",
+        "Translated": "横向",
+        "Context": "MainWindow.DrawSeatRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Left",
+        "Translated": "左",
+        "Context": "MainWindow.DrawSeatRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Hand · ",
+        "Translated": "手·",
+        "Context": "MainWindow.DrawHandRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " tiles",
+        "Translated": "瓦片",
+        "Context": "MainWindow.DrawHandRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Best move",
+        "Translated": "最佳走法",
+        "Context": "MainWindow.DrawSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Waiting for your turn (",
+        "Translated": "等待轮到你 (",
+        "Context": "MainWindow.DrawSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " tiles in hand).",
+        "Translated": "手持瓦片。",
+        "Context": "MainWindow.DrawSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "scorer error: ",
+        "Translated": "计分员错误：",
+        "Context": "MainWindow.DrawSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The tile is outlined in the mahjong window.",
+        "Translated": "瓷砖在麻将窗口中勾勒出轮廓。",
+        "Context": "MainWindow.DrawSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "shanten = turns away from ready.  ukeire = tiles that complete your wait — counted as distinct kinds and total copies remaining in the live wall.",
+        "Translated": "Shanten = 离开准备状态。ukeire = 完成等待的瓷砖——计为实时墙上剩余的不同种类和总副本。",
+        "Context": "MainWindow.DrawSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Last action: ",
+        "Translated": "最后行动：",
+        "Context": "MainWindow.DrawSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " kinds · ",
+        "Translated": "种类·",
+        "Context": "MainWindow.DrawScoredPickRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Discard",
+        "Translated": "放弃",
+        "Context": "MainWindow.FriendlyActionVerb",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Win (tsumo)",
+        "Translated": "赢 (tsumo)",
+        "Context": "MainWindow.FriendlyActionVerb",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Win (ron)",
+        "Translated": "赢 (RON)",
+        "Context": "MainWindow.FriendlyActionVerb",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Winning hand — close it out.",
+        "Translated": "赢牌——关掉它。",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "One tile from winning — declare riichi.",
+        "Translated": "还差一块就赢了——宣布 Riichi。",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Calling completes a set faster than drawing for it.",
+        "Translated": "呼叫比绘制更快地完成一个集合。",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "kinds",
+        "Translated": "种类",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "tiles",
+        "Translated": "瓦片",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Discarding this still leaves a winning hand.",
+        "Translated": "抛开这一点，仍然留有一手制胜的牌。",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Keeps you ready — ",
+        "Translated": "让你做好准备——",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " live) complete the hand.",
+        "Translated": "现场) 完成这手牌。",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "One step from ready, with ",
+        "Translated": "距离准备就绪只有一步之遥，",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " useful ",
+        "Translated": "有用",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " steps from ready — keeps the most useful draws available.",
+        "Translated": "准备步骤——保持最有用的绘图可用。",
+        "Context": "MainWindow.ExplainChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Big arrow + label",
+        "Translated": "大箭头 + 标签",
+        "Context": "SettingsWindow.StyleLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Neon glow + corner brackets",
+        "Translated": "霓虹灯 + 角括号",
+        "Context": "SettingsWindow.StyleLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Preview: Discard",
+        "Translated": "预览：弃用",
+        "Context": "SettingsWindow.DrawHighlightPreview",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Click speed",
+        "Translated": "点击速度",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Average delay before each auto-play click.",
+        "Translated": "每次自动播放点击前的平均延迟。",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-advance after each hand",
+        "Translated": "每手牌后的自动前进",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Click \"Next\" on the win/draw results screen so the next hand starts automatically.",
+        "Translated": "点击胜利/平局结果屏幕上的 “下一步”，下一手牌将自动开始。",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Appearance",
+        "Translated": "外观",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Highlight suggested tile in the mahjong window",
+        "Translated": "亮点建议在麻将窗口贴瓷砖",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "A pulsing outline on the discard to make. Shown in Hints mode.",
+        "Translated": "一个脉动的轮廓出现在即将丢弃的物品上。在提示模式中显示。",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Highlight style",
+        "Translated": "突出显示风格",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Large arrow with a DISCARD / TSUMOGIRI label. Keeps the tile art uncovered.",
+        "Translated": "带有 DISCARD / TSUMOGIRI 标签的大箭头。保持瓷砖艺术的裸露。",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Neon glow halo, L-shaped corner brackets, and a bouncing arrow above the tile.",
+        "Translated": "霓虹灯光晕，L 形角支架，瓷砖上方还有一个跳动的箭头。",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Discard color",
+        "Translated": "丢弃颜色",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit3"
+      },
+      {
+        "Original": "Tsumogiri color",
+        "Translated": "Tsumogiri 颜色",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit3"
+      },
+      {
+        "Original": "Intensity",
+        "Translated": "强度",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Reset overlay colors & intensity",
+        "Translated": "还原叠层颜色和强度",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Show analysis details under best move",
+        "Translated": "显示最佳移动下的分析详情",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Adds a shanten / ukeire breakdown of the top discards in the main window.",
+        "Translated": "添加主窗口中顶部废弃物的 Shanten/ukeire 分类。",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Developer",
+        "Translated": "开发人员",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enable developer tools",
+        "Translated": "启用开发者工具",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Adds a debug button to the main window toolbar.",
+        "Translated": "将调试按钮添加到主窗口工具栏。",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " Character",
+        "Translated": "角色",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " Dot",
+        "Translated": "点号",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " Bamboo",
+        "Translated": "竹子",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "East Wind",
+        "Translated": "东风",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "South Wind",
+        "Translated": "南风",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "West Wind",
+        "Translated": "西风",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "North Wind",
+        "Translated": "北风",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "White Dragon",
+        "Translated": "白龙",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Green Dragon",
+        "Translated": "绿龙",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Red Dragon",
+        "Translated": "红龙",
+        "Context": "Theme.TileFriendlyName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Auto-discard",
+        "Translated": "自动丢弃",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Asks the policy what to discard and dispatches the click. Only works on your turn.",
+        "Translated": "询问策略要丢弃什么，然后发送点击。只有轮到你时才有效。",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Run policy pick",
+        "Translated": "运行策略选择",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "No snapshot — open a match first.",
+        "Translated": "没有快照——先打开匹配。",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Not our turn.",
+        "Translated": "轮不到我们。",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Test discard slot",
+        "Translated": "测试丢弃槽",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Discards the tile at a specific hand slot regardless of policy. 0 = leftmost, 13 = just-drawn.",
+        "Translated": "无论策略如何，都要在特定手插槽处丢弃瓷砖。0 = 最左侧，13 = 刚刚绘制。",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dispatch slot ",
+        "Translated": "调度槽",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "drawn (13)",
+        "Translated": "已摸到（13）",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "leftmost (0)",
+        "Translated": "最左边 (0)",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Test call option",
+        "Translated": "测试呼叫选项",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Send a raw call-prompt button index. Enable event-logger in Diagnostics to see which button each index hits.",
+        "Translated": "发送原始呼叫提示按钮索引。在诊断中启用事件记录器，以查看每个索引命中的按钮。",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dispatch opt ",
+        "Translated": "调度选项",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "pon/pass: 0=Pass, 1=Pon.  chi/pass: likely 0=Chi, 1=Pass.  Verify by logging.",
+        "Translated": "pon/pass:0=Pass,1=Pont。chi/pass:可能 0=Chi,1=Pass。通过日志记录进行验证。",
+        "Context": "ActionsTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "auto-discard: not our turn",
+        "Translated": "自动丢弃：轮不到我们",
+        "Context": "ActionsTab.TriggerAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "auto-discard: policy returned ",
+        "Translated": "自动丢弃：策略返回",
+        "Context": "ActionsTab.TriggerAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "auto-discard: tile ",
+        "Translated": "auto-discard:tile",
+        "Context": "ActionsTab.TriggerAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " not found in hand",
+        "Translated": "未在手中找到",
+        "Context": "ActionsTab.TriggerAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "auto-discarding ",
+        "Translated": "自动丢弃",
+        "Context": "ActionsTab.TriggerAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " slot ",
+        "Translated": "插槽",
+        "Context": "ActionsTab.TriggerAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "discard slot=",
+        "Translated": "drop slot=",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "auto-discarded ",
+        "Translated": "自动丢弃",
+        "Context": "TriggerAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "In-memory address and visibility of the mahjong UI. Empty until you seat at a table.",
+        "Translated": "麻将用户界面的内存地址和可见性。空白，直到你坐到桌前。",
+        "Context": "AddonTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "\" or \"",
+        "Translated": "「或」",
+        "Context": "AddonTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "\" not found. Open a Doman Mahjong match in-game.",
+        "Translated": "未找到。在游戏中开启多曼麻将对决。",
+        "Context": "AddonTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Last event",
+        "Translated": "最后一个事件",
+        "Context": "AddonTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Visible",
+        "Translated": "可见",
+        "Context": "AddonTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Variant probes",
+        "Translated": "变体探测",
+        "Context": "AddonTab.DrawVariantCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Which variant strategy matched on the current addon. Miss on all = run Bug report → Dump variant.",
+        "Translated": "哪个变体策略与当前附加组件匹配？全部失败=运行 Bug 报告→转储变体。",
+        "Context": "AddonTab.DrawVariantCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "(no variants registered)",
+        "Translated": "(未注册变体)",
+        "Context": "AddonTab.DrawVariantCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "threw: ",
+        "Translated": "投掷：",
+        "Context": "AddonTab.ProbeStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Active layout profile",
+        "Translated": "活动布局配置文件",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Read-offsets the variant uses to extract your hand, scores, and dora from addon memory.",
+        "Translated": "读取偏移变体用于从附加记忆中提取你的手牌、分数和 dora。",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "(no profile active — addon hasn't been parsed yet)",
+        "Translated": "(无活动配置文件——插件尚未解析)",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Addon name",
+        "Translated": "addon 名称",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Tile tex base",
+        "Translated": "Tile Text Base",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hand array start",
+        "Translated": "手阵列开始",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Self score",
+        "Translated": "自我评分",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Dora indicator",
+        "Translated": "朵拉指示器",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hand size limit",
+        "Translated": "手部尺寸限制",
+        "Context": "AddonTab.DrawLayoutCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "report",
+        "Translated": "报告",
+        "Context": "BugReportTab..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "click",
+        "Translated": "点击",
+        "Context": "BugReportTab..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Snap (one-shot memory dump)",
+        "Translated": "快照 (一次性内存转储)",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Saves the addon + agent memory to a labeled file. Use this when an issue asks for a one-off snapshot. Label = letters, digits, dash, underscore.",
+        "Translated": "将插件 + 代理内存保存到标记文件中。当问题需要一次性快照时使用此功能。Label =字母、数字、破折号、下划线。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Label must be [a-zA-Z0-9_-] only.",
+        "Translated": "标签必须仅为 [a-zA-Z0-9_-]。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Snap",
+        "Translated": "快照",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "snap '",
+        "Translated": "Snap’",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "' queued → see chat for path",
+        "Translated": "“排队”→查看路径聊天",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Writes snap-LABEL-ts.txt to plugin config dir.",
+        "Translated": "将 snap-LABEL-ts.txt 写入插件 config dir。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Autosnap (continuous capture)",
+        "Translated": "自动捕获 (连续捕获)",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Saves a fresh dump every time the game state changes. Use when you can't predict when the bug will trigger. Caps at 500 files; identical states are dropped.",
+        "Translated": "每次游戏状态改变时都会保存一个新的转储。当无法预测错误何时触发时使用。上限为 500 个文件;相同的状态会被丢弃。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "State",
+        "Translated": "状态",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Count",
+        "Translated": "计数",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Stop autosnap",
+        "Translated": "停止自动捕捉",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Start autosnap",
+        "Translated": "开始 autosnap",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "autosnap ON — files: snap-auto-NNN-<ts>.txt",
+        "Translated": "autosnap ON——文件:snap-auto-NNN-<ts>.txt",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Capture (arm-and-click)",
+        "Translated": "捕获 (手动点击)",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Records the very next click you make in the mahjong UI with a label. Type a name, press Arm, then click in-game. Auto-disarms after one click or 60s.",
+        "Translated": "用标签记录你在麻将界面中的下一次点击。输入名字，按下手臂键，然后点击游戏内键。一次点击或 60 秒后自动解除武器。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "ARMED: '",
+        "Translated": "武装:‘",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "' — click the action in-game",
+        "Translated": "——点击游戏内动作",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Disarm",
+        "Translated": "解除武装",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "capture disarmed (was: ",
+        "Translated": "被缴械捕获 (曾经是：",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Arm",
+        "Translated": "手臂",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "capture armed: '",
+        "Translated": "武装逮捕:‘",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "' — auto-disarms after one click or 60s",
+        "Translated": "——点击一下或 60 秒后自动解除武装",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Auto-play is ON — disarm automation first or its dispatch will race your click.",
+        "Translated": "自动播放已打开——请先解除自动化，否则它的调度将与您的点击竞争。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Variant dump (new-client report)",
+        "Translated": "变体转储 (新客户端报告)",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Run this when the plugin can't read your hand or board after a game patch. Writes one file to attach when reporting a new client variant.",
+        "Translated": "当插件在游戏补丁后无法读取您的手牌或棋盘时，运行此操作。在报告新的客户端变体时，编写一个文件以附加。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dump variant",
+        "Translated": "转储变体",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "variant dump queued → emj-variant-dump.txt",
+        "Translated": "变体 dump queued → emj-variant-dump.txt",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Attach emj-variant-dump.txt when reporting a new client variant.",
+        "Translated": "在报告新客户端变体时附加 emj-variant-dump.txt。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Files",
+        "Translated": "文件",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open the folder containing every dump file. Drag-and-drop into a GitHub issue to attach.",
+        "Translated": "打开包含每个转储文件的文件夹。将其拖放到要附加的 GitHub 问题中。",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Plugin config",
+        "Translated": "插件配置",
+        "Context": "BugReportTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open folder:\n",
+        "Translated": "打开文件夹：",
+        "Context": "BugReportTab.DrawDirRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Recent dumps",
+        "Translated": "最近的转储",
+        "Context": "BugReportTab.DrawRecentDumpsCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Most recently produced dump files. Open reveals the file's folder; Copy puts the full path on your clipboard.",
+        "Translated": "最近生成的转储文件。打开显示文件的文件夹;复制将完整路径放在剪贴板上。",
+        "Context": "BugReportTab.DrawRecentDumpsCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "(no dumps yet)",
+        "Translated": "(还没有转储)",
+        "Context": "BugReportTab.DrawRecentDumpsCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " ago",
+        "Translated": "前",
+        "Context": "BugReportTab.DrawRecentDumpsCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Copy to clipboard:\n",
+        "Translated": "复制到剪贴板：",
+        "Context": "DevHelpers.CopyButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Event logger",
+        "Translated": "事件记录器",
+        "Context": "DiagnosticsTab.DrawEventLoggerCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Logs every UI callback the mahjong addon receives. Useful for reverse-engineering button indices; heavy when on — turn off when done.",
+        "Translated": "记录麻将插件接收到的每个 UI 回调。对逆向工程按钮索引很有用;开启时很重——完成后关闭。",
+        "Context": "DiagnosticsTab.DrawEventLoggerCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Record clicks to emj-events.log",
+        "Translated": "记录到 emj-events.log 的点击",
+        "Context": "DiagnosticsTab.DrawEventLoggerCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "event logger OFF",
+        "Translated": "事件记录器 OFF",
+        "Context": "DiagnosticsTab.DrawEventLoggerCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "event logger ON",
+        "Translated": "事件日志记录器 ON",
+        "Context": "DiagnosticsTab.DrawEventLoggerCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Discard capture",
+        "Translated": "丢弃捕获",
+        "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Tracks every discard the moment it commits. Strategy is auto-picked at startup: native asm hook preferred, addon-poll as fallback.",
+        "Translated": "追踪每次丢弃的时刻。策略在启动时自动选择：原生 asm hook 优先，addon-poll 作为备用策略。",
+        "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Strategy",
+        "Translated": "策略",
+        "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Total captured",
+        "Translated": "捕获总数",
+        "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Last tile id",
+        "Translated": "最后一块 id",
+        "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Log",
+        "Translated": "日志",
+        "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Telemetry",
+        "Translated": "遥测",
+        "Context": "DiagnosticsTab.DrawTelemetryCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Anonymous upload of error/finding/memdump files to the project's research endpoint. URL resolves from GitHub at startup.",
+        "Translated": "将错误/查找/memdump 文件匿名上传到项目的研究终端节点。启动时从 GitHub 解析 URL。",
+        "Context": "DiagnosticsTab.DrawTelemetryCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Endpoint",
+        "Translated": "端点",
+        "Context": "DiagnosticsTab.DrawTelemetryCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enabled",
+        "Translated": "已启用",
+        "Context": "DiagnosticsTab.DrawTelemetryCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Min plugin ver",
+        "Translated": "Min 插件 ver",
+        "Context": "DiagnosticsTab.DrawTelemetryCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Pending files",
+        "Translated": "待处理文件",
+        "Context": "DiagnosticsTab.DrawTelemetryCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Errors & findings (tail)",
+        "Translated": "错误和发现 (尾部)",
+        "Context": "DiagnosticsTab.DrawStreamsCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Last ",
+        "Translated": "最后",
+        "Context": "DiagnosticsTab.DrawStreamsCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " lines of today's errors and findings NDJSON. Click Open to inspect the full file.",
+        "Translated": "NDJSON 今天的错误和发现。单击 “打开” 以查看完整文件。",
+        "Context": "DiagnosticsTab.DrawStreamsCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Hand overlay debug",
+        "Translated": "手动覆盖调试",
+        "Context": "DiagnosticsTab.DrawHandOverlayDebugCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Outlines every visible node whose dimensions match a tile, in NodeList order — before the row-finder picks the closed-hand subset. Use to spot tiles the size filter missed or extras the Y-cluster heuristic drops.",
+        "Translated": "列出每个尺寸与瓦片匹配的可见节点，按 NodeList 顺序排列——在行查找器选择闭合子集之前。用于发现大小过滤器遗漏的瓦片或额外的 Y-cluster 启发式丢弃。",
+        "Context": "DiagnosticsTab.DrawHandOverlayDebugCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Outline all detected tile rects",
+        "Translated": "概述所有检测到的瓦片直线",
+        "Context": "DiagnosticsTab.DrawHandOverlayDebugCard",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "(no file yet)",
+        "Translated": "(还没有文件)",
+        "Context": "DiagnosticsTab.DrawTail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "  (empty)",
+        "Translated": "(空)",
+        "Context": "DiagnosticsTab.DrawTail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Addon tree & memory scan",
+        "Translated": "addon 树和内存扫描",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "walknodes: every UI node in the addon. findtiles: scan memory for tile-encoded values. atkvalues: the addon's parameter array.",
+        "Translated": "walknodes:插件中的每个 UI 节点。findtiles:扫描内存中的磁贴编码值。atkvalues:插件的参数数组。",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Walk Nodes",
+        "Translated": "行走节点",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "walknodes queued → emj-nodes.txt",
+        "Translated": "walknodes 排队 → emj-nodes.txt",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Find Tiles",
+        "Translated": "查找磁贴",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "findtiles queued → emj-findtiles.txt",
+        "Translated": "findtiles 队列 → emj-findtiles.txt",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Atk Values",
+        "Translated": "Atk 值",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Discard-pool slot diff",
+        "Translated": "丢弃池插槽差异",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Finds which byte inside each pool-tile slot encodes the tile id, by comparing slots with different tiles. Used to locate fields when a client patch moves them.",
+        "Translated": "通过比较不同磁贴的磁贴槽，找出每个池磁贴槽中哪个字节对磁贴标识进行编码。用于在客户端补丁移动字段时定位它们。",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pool Slots",
+        "Translated": "池槽",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "poolslots queued → emj-poolslots.txt",
+        "Translated": "poolslots 已排队 → emj-poolslots.txt",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Pool Icons",
+        "Translated": "池图标",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "poolicons queued → emj-poolicons.txt",
+        "Translated": "poolicons 已排队 → emj-poolicons.txt",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Walks types 1021..1024 and diffs candidate tile bytes across visible slots.",
+        "Translated": "行走类型 1021..1024，并在可见插槽之间移动候选磁贴字节。",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Hex dump",
+        "Translated": "十六进制转储",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Raw bytes of the addon (or AgentEmj) over a chosen range. Defaults target the current best-guess region.",
+        "Translated": "在选定范围内的 addon(或 AgentEmj) 的原始字节。默认值针对当前最佳猜测区域。",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Agent (vs addon)",
+        "Translated": "Agent(与 addon)",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hex Dump",
+        "Translated": "Hexdump",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Use hex with optional 0x prefix.",
+        "Translated": "使用带可选 0x 前缀的十六进制。",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Addon memory (offset + length)",
+        "Translated": "附加内存 (偏移量 + 长度)",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Same idea as Hex dump but addon-only and written to emj-dump.txt. Convenient for fixed-offset structures.",
+        "Translated": "与 Hex 转储的想法相同，但只有附加功能，并写入 emj-dump.txt。适用于固定偏移量结构。",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dump Memory",
+        "Translated": "转储内存",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "List loaded addons",
+        "Translated": "列出已加载的插件",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Print every game UI addon currently loaded. Substring filter; empty = all. Used to confirm the mahjong addon name on your client.",
+        "Translated": "打印当前加载的每个游戏 UI 插件。子串过滤器;空 = 所有。用于确认客户端上的麻将插件名称。",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "List Addons",
+        "Translated": "列出插件",
+        "Context": "ReProbesTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Auto-play loop",
+        "Translated": "自动游戏循环",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "What the auto-play loop saw last tick. Updates live during a match.",
+        "Translated": "自动游戏循环在最后一刻看到了什么？比赛中的实时更新。",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Hand",
+        "Translated": "手",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Last",
+        "Translated": "最后一个",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hooks & telemetry",
+        "Translated": "钩子和遥测",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Health of the discard-capture hook and ongoing data-collection counters.",
+        "Translated": "丢弃 - 捕获钩子和持续数据收集计数器的健康状况。",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "  lastTile=",
+        "Translated": "上一块瓷砖=",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Autosnap",
+        "Translated": "汽车小憩",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "ON  (",
+        "Translated": "ON (",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Event log",
+        "Translated": "事件日志",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Findings (today)",
+        "Translated": "发现 (今天)",
+        "Context": "StatusTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Call-prompt analysis",
+        "Translated": "呼叫提示符分析",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Lights up during a chi/pon/kan offer. opt= is the button index the plugin would click.",
+        "Translated": "在 chi/pon/kan 优惠期间亮起。opt=是插件将点击的按钮索引。",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No snapshot.",
+        "Translated": "没有快照。",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pon / Chi / Kan candidates",
+        "Translated": "Pon/Chi/Kan 候选",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "AkaDora total",
+        "Translated": "AkaDora 总计",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "No accept-side action on offer — not a call prompt.",
+        "Translated": "没有提供接受方行动——没有呼叫提示。",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dispatch indices",
+        "Translated": "调度索引",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Chi (×",
+        "Translated": "Chi(×)",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " variants)",
+        "Translated": "变体)",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Policy → ",
+        "Translated": "政策 →",
+        "Context": "StatusTab.DrawCallPromptCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "(addon not found)",
+        "Translated": "(未找到附加值)",
+        "Context": "StatusTab.DrawAtkValuesRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Suggestions (discard-only)",
+        "Translated": "建议 (仅丢弃)",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Top 5 discard candidates ranked by shanten / ukeire / dora. Highlighted tile is the policy pick.",
+        "Translated": "前五名弃用候选人由 shanten / ukeire / Dora 排名。突出显示的是政策选择。",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No snapshot — not in a match, or the addon struct is not readable.",
+        "Translated": "没有快照——在匹配中没有，或者插件结构无法读取。",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Scores   you: ",
+        "Translated": "给你打分：",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "    right: ",
+        "Translated": "右：",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "across: ",
+        "Translated": "跨越：",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "    left: ",
+        "Translated": "左边：",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Waiting for our turn (",
+        "Translated": "等待轮到我们 (",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " tiles).",
+        "Translated": "瓷砖。",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Top picks",
+        "Translated": "顶级选择",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Policy pick:  ",
+        "Translated": "策略选择：",
+        "Context": "StatusTab.DrawPolicyPickCard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "   ukeire=",
+        "Translated": "听牌=",
+        "Context": "StatusTab.DrawPickRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "dora=",
+        "Translated": "Dora=",
+        "Context": "StatusTab.DrawPickRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "(poll)",
+        "Translated": "(调查)",
+        "Context": "AddonEmjReader.Poll",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open the Doman Mahjong Solver window. Type /mjauto help for the full command list.",
+        "Translated": "打开 Doman Majong Solver 窗口。键入/mjauto 帮助以获取完整的命令列表。",
+        "Context": "MjAutoCommand..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "[MjAuto] Automation armed.",
+        "Translated": "[MjAuto] 自动化已武装。",
+        "Context": "MjAutoCommand.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Automation disarmed.",
+        "Translated": "[MjAuto] 自动化解除武装。",
+        "Context": "MjAutoCommand.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] DiscardCapture  strategy=",
+        "Translated": "[MjAuto] DiscardCapture Strategy=",
+        "Context": "MjAutoCommand.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "→ logging to ",
+        "Translated": "→日志记录到",
+        "Context": "MjAutoCommand.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Unknown subcommand: '",
+        "Translated": "[MjAuto] 未知子命令:‘",
+        "Context": "MjAutoCommand.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "'. Type /mjauto help for the command list.",
+        "Translated": "输入/mjauto 帮助命令列表。",
+        "Context": "MjAutoCommand.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Doman Mahjong Solver — /mjauto commands",
+        "Translated": "麻将求解域—/mjauto 命令",
+        "Context": "MjAutoCommand.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "  (enable \"Developer tools\" in Settings for debug commands)",
+        "Translated": "(在调试命令的 “设置” 中启用 “开发者工具”)",
+        "Context": "MjAutoCommand.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Developer console:",
+        "Translated": "开发者控制台：",
+        "Context": "MjAutoCommand.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Manual override:",
+        "Translated": "手动覆盖：",
+        "Context": "MjAutoCommand.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Capture for bug reports:",
+        "Translated": "捕获 bug 报告：",
+        "Context": "MjAutoCommand.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Reverse-engineering dumps:",
+        "Translated": "逆向工程转储：",
+        "Context": "MjAutoCommand.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Usage: /mjauto pass <0..5>  (0=leftmost, higher=rightward; rightmost = pass)",
+        "Translated": "[MjAuto] 用法:/mjauto pass <0..5>(0=leftmost,higher=rightward;rightmost=pass)",
+        "Context": "MjAutoCommand.HandlePass",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] Usage: /mjauto testdiscard <0..13>",
+        "Translated": "[MjAuto] 用途:/mjauto testdiscard <0..13>",
+        "Context": "MjAutoCommand.HandleTestDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] capture disarmed (was: ",
+        "Translated": "[MjAuto] 非武装捕获 (曾经：",
+        "Context": "MjAutoCommand.HandleCapture",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Usage: /mjauto capture <label>. Run again with no label to disarm. File: ",
+        "Translated": "[MjAuto] 使用/mjauto capture <label>。再次运行，没有要解除的 label。文件：",
+        "Context": "MjAutoCommand.HandleCapture",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] capture label must be [a-zA-Z0-9_-] only — got '",
+        "Translated": "[MjAuto] 捕获标签必须是 [a-zA-Z0-9_-] 只能——明白了 “",
+        "Context": "MjAutoCommand.HandleCapture",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] auto-play is ON — its dispatches would race your manual click. Run `/mjauto off` first, then re-arm capture.",
+        "Translated": "[MjAuto] 自动游戏开启——它的调度会与你的手动点击竞争。先运行/mjauto off，然后重新捕获。",
+        "Context": "MjAutoCommand.HandleCapture",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] capture armed: '",
+        "Translated": "【MjAuto】武装捕获:‘",
+        "Context": "MjAutoCommand.HandleCapture",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "'. Click the action in-game once. ",
+        "Translated": "点击游戏中的动作一次。",
+        "Context": "MjAutoCommand.HandleCapture",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Auto-disarms after one click or 60s. File: ",
+        "Translated": "一键或 60 秒后自动解除武装。文件：",
+        "Context": "MjAutoCommand.HandleCapture",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Usage: /mjauto variant dump",
+        "Translated": "[MjAuto] 用法:/mjauto 变体 dump",
+        "Context": "MjAutoCommand.HandleVariant",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Unknown variant subcommand: '",
+        "Translated": "[MjAuto] 未知变体子命令:‘",
+        "Context": "MjAutoCommand.HandleVariant",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "'. Known: dump.",
+        "Translated": "已知：转储。",
+        "Context": "MjAutoCommand.HandleVariant",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] Usage: /mjauto snap <label>  (label: [a-zA-Z0-9_-] only)",
+        "Translated": "[MjAuto] 用途/mjauto snap <label>(label:[a-zA-Z0-9_-] only)",
+        "Context": "MjAutoCommand.HandleSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] snap label must be [a-zA-Z0-9_-] only — got '",
+        "Translated": "[MjAuto] 快捷标签必须是 [a-zA-Z0-9_-] 只有——搞定了 “",
+        "Context": "MjAutoCommand.HandleSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] autosnap already ON.",
+        "Translated": "【MjAuto】自动快照已打开。",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] autosnap ON. Hash-deduped, min gap ",
+        "Translated": "[MjAuto] 自动快照 ON。哈希去伪，min 缺口",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "ms, cap ",
+        "Translated": "ms，大写",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Files: snap-auto-NNN-<ts>.txt in plugin config dir.",
+        "Translated": "文件:snap-auto-NNN-<ts>.txt 在插件 config dir 中。",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] autosnap already OFF.",
+        "Translated": "[MjAuto] auto-auto-NNN-<ts>.txt 已关闭。",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] autosnap OFF. Wrote ",
+        "Translated": "[MjAuto] auto-autosnap OFF。",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " file(s).",
+        "Translated": "file(s)。",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] autosnap is ",
+        "Translated": "[MjAuto] autosnap 是",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "(wrote ",
+        "Translated": "(写入",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Usage: /mjauto autosnap <on|off>",
+        "Translated": "[MjAuto] 用途:/mjauto autosnap <on|off>",
+        "Context": "MjAutoCommand.HandleAutoSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] autosnap hit cap (",
+        "Translated": "[MjAuto] autosnap 命中率 (",
+        "Context": "MjAutoCommand.OnAutoSnapObservation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": ") — auto-disarmed. ",
+        "Translated": ")——自动解除武装。",
+        "Context": "MjAutoCommand.OnAutoSnapObservation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Toggle off then on to reset.",
+        "Translated": "然后关闭并重置。",
+        "Context": "MjAutoCommand.OnAutoSnapObservation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Emj addon not found — open a table first.",
+        "Translated": "[MjAuto] 未找到 Emj 插件——先打开一个表。",
+        "Context": "MjAutoCommand.WriteSnapFile",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] event logger ON. Writing to ",
+        "Translated": "[MjAuto] 事件记录器 ON。写信给",
+        "Context": "MjAutoCommand.HandleLog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] event logger OFF.",
+        "Translated": "[MjAuto] 事件记录器关闭。",
+        "Context": "MjAutoCommand.HandleLog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] event logger is ",
+        "Translated": "[MjAuto] 事件记录器是",
+        "Context": "MjAutoCommand.HandleLog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Path: ",
+        "Translated": "路径：",
+        "Context": "MjAutoCommand.HandleLog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Usage: /mjauto log <on|off>",
+        "Translated": "[MjAuto] 用法:/mjauto log <on|off>",
+        "Context": "MjAutoCommand.HandleLog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] Emj addon not found.",
+        "Translated": "[MjAuto] 未找到 Emj 插件。",
+        "Context": "MjAutoCommand.DumpAtkValues",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] AtkValues is null or empty.",
+        "Translated": "[MjAuto] AtkValues 为 null 或空。",
+        "Context": "MjAutoCommand.DumpAtkValues",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] wrote ",
+        "Translated": "[MjAuto] 写道",
+        "Context": "MjAutoCommand.DumpAtkValues",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] bad offset '",
+        "Translated": "[MjAuto] 不良偏移",
+        "Context": "MjAutoCommand.DumpMemory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "'. Use hex, optional 0x prefix.",
+        "Translated": "使用十六进制，可选 0x 前缀。",
+        "Context": "MjAutoCommand.DumpMemory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] bad length '",
+        "Translated": "[MjAuto] bad length",
+        "Context": "MjAutoCommand.DumpMemory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] wrote 0x",
+        "Translated": "[MjAuto] 输入 0x",
+        "Context": "MjAutoCommand.DumpMemory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] AtkStage not available (not in game?)",
+        "Translated": "[MjAuto] AtkStage 无法使用 (游戏中没有？",
+        "Context": "MjAutoCommand.DumpAddons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "matching \"",
+        "Translated": "匹配 “",
+        "Context": "MjAutoCommand.DumpAddons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "total",
+        "Translated": "总计",
+        "Context": "MjAutoCommand.DumpAddons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] no snapshot — not in a match.",
+        "Translated": "[MjAuto] 没有快照——不在匹配中。",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] hand has ",
+        "Translated": "[MjAuto] 的手有",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " tiles — not a discard state. Wait for your turn.",
+        "Translated": "瓷砖——不是丢弃状态。等待轮到你。",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] policy returned ",
+        "Translated": "[MjAuto] 策略返回",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " — autodiscard only handles Discard. ",
+        "Translated": "自动删除只处理删除。",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] tile ",
+        "Translated": "[MjAuto] 磁贴",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " not found in hand — internal error.",
+        "Translated": "未在手中发现——内部错误。",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] auto-discarding ",
+        "Translated": "[MjAuto] 自动丢弃",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " (slot ",
+        "Translated": "(插槽)",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": ") in ",
+        "Translated": ") 在",
+        "Context": "MjAutoCommand.HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] Mahjong addon not found — seat at a table first, then retry.",
+        "Translated": "[MjAuto] 麻将加号未找到——先找张桌子坐下，然后再试。",
+        "Context": "MjAutoCommand.DumpVariant",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] variant dump → ",
+        "Translated": "[MjAuto] 变体转储→",
+        "Context": "MjAutoCommand.DumpVariant",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Open a new issue at ",
+        "Translated": "打开一个新问题",
+        "Context": "MjAutoCommand.DumpVariant",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " and attach this file when reporting a new client variant.",
+        "Translated": "并在报告新的客户端变体时附加此文件。",
+        "Context": "MjAutoCommand.DumpVariant",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " decoded)",
+        "Translated": "已解码)",
+        "Context": "MjAutoCommand.HandlePoolIcons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " visible slots)",
+        "Translated": "可见池槽)",
+        "Context": "MjAutoCommand.HandlePoolSlots",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " nodes)",
+        "Translated": "(节点)",
+        "Context": "MjAutoCommand.HandleWalkNodes",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] dispatch result: ",
+        "Translated": "[MjAuto] 调度结果：",
+        "Context": "HandleAutoDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] snap '",
+        "Translated": "[MjAuto] 快速",
+        "Context": "HandleSnap",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "[MjAuto] AgentModule unavailable.",
+        "Translated": "[MjAuto] AgentModule 不可用。",
+        "Context": "HandleHexDump",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "[MjAuto] AgentEmj unavailable.",
+        "Translated": "[MjAuto] AgentEmj 不可用。",
+        "Context": "HandleHexDump",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " rows)",
+        "Translated": "行）",
+        "Context": "HandleHexDump",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "call",
+        "Translated": "调用",
+        "Context": "AutoPlayLoop.ScheduleCallDecision",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "policy returned ",
+        "Translated": "策略返回",
+        "Context": "AutoPlayLoop.DispatchPolicyChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " — not dispatching",
+        "Translated": "——不调度",
+        "Context": "AutoPlayLoop.DispatchPolicyChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " missing tile",
+        "Translated": "缺少磁贴",
+        "Context": "AutoPlayLoop.DispatchPolicyChoice",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "oos-tsumogiri aborted: empty hand",
+        "Translated": "Oos-tsumogiri 流产：空手",
+        "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "oos-tsumogiri aborted: drawn tile ",
+        "Translated": "Oos-tsumogiri 终止：画出的图案",
+        "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " not in addon hand",
+        "Translated": "不在手中",
+        "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "oos-tsumogiri recovery ",
+        "Translated": "oos-tsumogiri 恢复",
+        "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "auto-ankan ",
+        "Translated": "自动安装",
+        "Context": "AutoPlayLoop.DispatchAnkan",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "tile ",
+        "Translated": "Tile",
+        "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " not in hand",
+        "Translated": "不在手边",
+        "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "auto-riichi[opt=",
+        "Translated": "auto-rich[opt=]",
+        "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "] (tile=",
+        "Translated": "](tile=",
+        "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "auto-pass[opt=",
+        "Translated": "auto-pass[opt=]",
+        "Context": "AutoPlayLoop.DispatchPass",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "hand-result-next aborted: state moved ",
+        "Translated": "手动结果 - 下一步终止：状态已移动",
+        "Context": "AutoPlayLoop.ScheduleHandResultAdvance",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "variant aborted: state moved ",
+        "Translated": "aborted 变体:state moved",
+        "Context": "AutoPlayLoop.ScheduleVariantAccept",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "auto-variant[opt=",
+        "Translated": "auto-variant[opt=]",
+        "Context": "AutoPlayLoop.ScheduleVariantAccept",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "riichi-tsumogiri aborted: hand=",
+        "Translated": "Richi-tsumogiri 终止:hand=",
+        "Context": "AutoPlayLoop.ScheduleRiichiTsumogiri",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "riichi-tsumogiri aborted: latched tile ",
+        "Translated": "Richi-tsumogiri 终止：锁死的瓷砖",
+        "Context": "AutoPlayLoop.ScheduleRiichiTsumogiri",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " exception: ",
+        "Translated": "异常：",
+        "Context": "ScheduleAction",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "discard aborted: not a discard state (state=",
+        "Translated": "弃用终止：非弃用状态 (state=)",
+        "Context": "ScheduleDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " flags=",
+        "Translated": "标志=",
+        "Context": "ScheduleDiscard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "call: no snapshot (state=",
+        "Translated": "call:无快照 (state=)",
+        "Context": "ScheduleCallDecision",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
