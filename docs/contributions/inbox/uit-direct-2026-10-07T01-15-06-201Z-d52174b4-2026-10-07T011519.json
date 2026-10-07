@@ -1,0 +1,4749 @@
+{
+  "issue": "direct-2026-10-07T01-15-06-201Z-d52174b4",
+  "receivedAt": "2026-10-07 01:15:19",
+  "author": "匿名直传",
+  "plugin": "SRankSentinel",
+  "fingerprint": "27cc57d7d8b2df0f",
+  "packFile": "SRankSentinel@user-27cc57.json",
+  "accepted": 589,
+  "filled": 589,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "SRankSentinel",
+    "packName": "灰灰",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Enable vnavmesh. SRankSentinel requests navigation when needed.",
+        "Translated": "启用 vnavmesh。SRankSentinel 会在需要时请求导航。",
+        "Context": "CompanionPlugins..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Enable if you use it. SRankSentinel currently uses native World Visit and teleport.",
+        "Translated": "如果你使用它就启用。SRankSentinel 目前使用原生跨服传送和传送。",
+        "Context": "CompanionPlugins..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Enable S-rank announcements for your data center. Keep at least one alert provider enabled.",
+        "Translated": "为你的大区启用 S 级公告。至少保留一个警报提供者启用。",
+        "Context": "CompanionPlugins..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Enable S-rank chat announcements and map links for your data center.",
+        "Translated": "为你的大区启用 S 级聊天公告和地图链接。",
+        "Context": "CompanionPlugins..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Centurio (ARR / HW / SB)",
+        "Translated": "百人队（ARR / HW / SB）",
+        "Context": "HuntCatalog.ExpansionName",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Evercold",
+        "Translated": "永寒",
+        "Context": "HuntCatalog.ExpansionName",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Unknown expansion",
+        "Translated": "未知版本",
+        "Context": "HuntCatalog.ExpansionName",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Untagged",
+        "Translated": "未标记",
+        "Context": "HuntHistoryActivity.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Tagged",
+        "Translated": "已标记",
+        "Context": "HuntHistoryActivity.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " spawned / ",
+        "Translated": "已刷新 /",
+        "Context": "HuntHistoryActivity.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " tagged\n",
+        "Translated": "已标记",
+        "Context": "HuntHistoryActivity.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " untagged; tags grouped by report date.",
+        "Translated": "未标记；标记按报告日期分组。",
+        "Context": "HuntHistoryActivity.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " enabled.",
+        "Translated": "已启用。",
+        "Context": "Plugin.DrawPluginsPage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Enable HuntAlerts or Sonar for S-rank alerts.",
+        "Translated": "启用 HuntAlerts 或 Sonar 以获取 S 级警报。",
+        "Context": "Plugin.DrawPluginsPage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Enable vnavmesh for automatic movement.",
+        "Translated": "启用 vnavmesh 以自动移动。",
+        "Context": "Plugin.DrawPluginsPage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Movement and S-rank alerts are ready.",
+        "Translated": "移动和 S 级警报已就绪。",
+        "Context": "Plugin.DrawPluginsPage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Lifestream is optional. HuntAlerts and Sonar are alternative alert sources.",
+        "Translated": "Lifestream 为可选。HuntAlerts 和 Sonar 是替代警报来源。",
+        "Context": "Plugin.DrawPluginsPage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Use Installer to install or update a companion. Enable S-rank announcements and map links for your data center.",
+        "Translated": "使用安装器安装或更新组件。为你的大区启用 S 级公告和地图链接。",
+        "Context": "Plugin.DrawPluginsPage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Plugin",
+        "Translated": "插件",
+        "Context": "Plugin.DrawCompanionCard",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Status",
+        "Translated": "状态",
+        "Context": "Plugin.DrawCompanionCard",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Actions",
+        "Translated": "操作",
+        "Context": "Plugin.DrawCompanionCard",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Could not open ",
+        "Translated": "无法打开",
+        "Context": "Plugin.DrawCompanionActions",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " settings: ",
+        "Translated": "设置：",
+        "Context": "Plugin.DrawCompanionActions",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Enabling ",
+        "Translated": "正在启用",
+        "Context": "Plugin.DrawCompanionActions",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Enable this installed plugin.",
+        "Translated": "启用此已安装的插件。",
+        "Context": "Plugin.DrawCompanionActions",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Only enabled hunt expansions are shown and new reports recorded. Totals cover up to 500 saved reports; no earlier hunts are backfilled.",
+        "Translated": "仅显示已启用的狩猎版本并记录新报告。总计涵盖最多 500 条已保存报告；不会回填更早的狩猎。",
+        "Context": "Plugin.DrawHistoryPage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Spawned / tagged · last 7 days",
+        "Translated": "已刷新 / 已标记 · 最近 7 天",
+        "Context": "Plugin.DrawSpawnActivity",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "No reports in this period for your enabled hunt expansions.",
+        "Translated": "此期间内你已启用的狩猎版本没有报告。",
+        "Context": "Plugin.DrawSpawnActivity",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Idle",
+        "Translated": "空闲",
+        "Context": "Plugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Open S Rank Sentinel settings/status.",
+        "Translated": "打开 S Rank Sentinel 设置/状态。",
+        "Context": "Plugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Faloop reported a ",
+        "Translated": "Faloop 报告了",
+        "Context": "Plugin.HandleFaloopEvent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " precursor",
+        "Translated": "前兆",
+        "Context": "Plugin.HandleFaloopEvent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for Faloop location enrichment: ",
+        "Translated": "等待 Faloop 位置补充：",
+        "Context": "Plugin.HandleFaloopEvent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Rejected: unknown POI ",
+        "Translated": "已拒绝：未知 POI",
+        "Context": "Plugin.TickFaloopLocationEnrichment",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " for ",
+        "Translated": "用于",
+        "Context": "Plugin.TickFaloopLocationEnrichment",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " after enrichment timeout",
+        "Translated": "在补充超时后",
+        "Context": "Plugin.TickFaloopLocationEnrichment",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "HuntAlerts reported a ",
+        "Translated": "HuntAlerts 报告了",
+        "Context": "Plugin.OnHuntAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Game hunt message confirmed ",
+        "Translated": "狩猎游戏消息已确认",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " was killed",
+        "Translated": "已被击杀",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The ",
+        "Translated": "该",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " SS precursor chain started",
+        "Translated": "SS 前置连锁已开始",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " chain withdrew before ",
+        "Translated": "连锁在",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " spawned",
+        "Translated": "刷新前已撤回",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " spawn confirmed; continuing the reserved SS hunt",
+        "Translated": "刷新已确认；继续预留的 SS 狩猎",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " spawn message arrived during post-kill Return",
+        "Translated": "击杀后返回期间收到刷新消息",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " chain withdrew; SS opportunity ended",
+        "Translated": "连锁已撤回；SS 机会结束",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " spawn message detected",
+        "Translated": "检测到刷新消息",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " announced; waiting for its alert or game object location",
+        "Translated": "已播报；等待其警报或游戏对象位置",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " observed; continuing fixed-location staging without targeting it",
+        "Translated": "已观测；继续定点模仿细胞而不选定目标",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "game hunt message",
+        "Translated": "狩猎游戏消息",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sonar confirmed ",
+        "Translated": "Sonar 已确认",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sonar S-rank alert did not contain a readable creature/map link",
+        "Translated": "Sonar S 级警报未包含可读的生物/地图链接",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sonar alert could not be parsed; no travel was started",
+        "Translated": "无法解析 Sonar 警报；未开始移动",
+        "Context": "Plugin.OnSonarChatMessage",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " alert was missing the S-rank name or territory",
+        "Translated": "警报缺少 S 级名称或区域",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ignored ",
+        "Translated": "已忽略",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " alert for Chernobog: U'Ghamaro Mines navigation is intentionally unsupported",
+        "Translated": "牛头黑神警报：武伽玛罗武装矿山导航有意不支持",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " alert for ",
+        "Translated": "警报：",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": territory does not match its expansion",
+        "Translated": "：区域与其资料片不匹配",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": its expansion is not supported",
+        "Translated": "：其资料片不受支持",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " hunting is disabled",
+        "Translated": "狩猎已禁用",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": normal World Visit cannot cross data centers",
+        "Translated": "：普通跨服访问无法跨数据中心",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ignored coordinate-less ",
+        "Translated": "已忽略无坐标的",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " report for ",
+        "Translated": "报告：",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting for a location-bearing report",
+        "Translated": "；等待带位置的报告",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ignored stale ",
+        "Translated": "已忽略过期的",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " confirmed ",
+        "Translated": "已确认",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; continuing toward its documented spawn location",
+        "Translated": "；继续前往其记录的刷新位置",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " supplied the missing destination for ",
+        "Translated": "补充了缺失的目的地：",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; resuming the active hunt",
+        "Translated": "；恢复进行中的狩猎",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " while the completed S-rank player is dead",
+        "Translated": "而已完成的 S 级玩家已死亡",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " reported ",
+        "Translated": "报告",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; staging at its documented spawn until the entity is detectable",
+        "Translated": "；在其记录的刷新点模仿细胞，直到实体可被检测",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " reported; navigating to its documented spawn location before entity tracking",
+        "Translated": "已报告；在实体追踪前导航至其记录的刷新位置",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Queued ",
+        "Translated": "已排队",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " S rank(s) waiting",
+        "Translated": "个 S 级等待中",
+        "Context": "Plugin.AcceptSRankAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": resetting through Ul'dah before ",
+        "Translated": "：在",
+        "Context": "Plugin.StartAlert",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is already visible; switching to dynamic safe parking",
+        "Translated": "前经乌尔达哈重置",
+        "Context": "Plugin.StartSsAlertDirect",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": prioritizing ",
+        "Translated": "：优先处理",
+        "Context": "Plugin.StartSsAlertDirect",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " directly without an Ul'dah reset",
+        "Translated": "直接执行，无需乌尔达哈重置",
+        "Context": "Plugin.StartSsAlertDirect",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " directly from its alert coordinates",
+        "Translated": "直接从其警报坐标出发",
+        "Context": "Plugin.StartSsAlertDirect",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Internal error while idle; no hunt was active",
+        "Translated": "空闲时发生内部错误；没有活动的狩猎",
+        "Context": "Plugin.OnFrameworkUpdate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Internal error while handling ",
+        "Translated": "处理时发生内部错误",
+        "Context": "Plugin.OnFrameworkUpdate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; active hunt retained and retrying through Ul'dah",
+        "Translated": "；保留活动狩猎并通过乌尔达哈重试",
+        "Context": "Plugin.OnFrameworkUpdate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "restored persistent queue on the main framework thread",
+        "Translated": "已在主框架线程上恢复持久队列",
+        "Context": "Plugin.RestorePersistentQueueOnFrameworkThread",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Persistent hunt queue restore failed; see the plugin log",
+        "Translated": "持久狩猎队列恢复失败；请查看插件日志",
+        "Context": "Plugin.RestorePersistentQueueOnFrameworkThread",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The reserved ",
+        "Translated": "已预留的",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " opportunity expired before the SS was confirmed",
+        "Translated": "机会在 SS 确认前已过期",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Previously identified ",
+        "Translated": "先前已识别的",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is visibly dead",
+        "Translated": "已明显死亡",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dead while ",
+        "Translated": "死亡时",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is alive; waiting for Raise (Return is locked)",
+        "Translated": "仍存活；等待复活（返回已锁定）",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dead before the mark's death was confirmed; waiting for Raise (Return is locked)",
+        "Translated": "在确认标记死亡前已死亡；等待复活（返回已锁定）",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " crossed the engage threshold before a tag was confirmed",
+        "Translated": "在确认标记前已越过交战阈值",
+        "Context": "Plugin.Tick",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adopting the existing post-kill Return confirmation",
+        "Translated": "采用现有的击杀后返回确认",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return confirmation detected",
+        "Translated": "检测到返回确认",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return confirmed; waiting for zone transition",
+        "Translated": "返回已确认；等待区域切换",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return recovery failure: confirmation remains open after ",
+        "Translated": "返回恢复失败：确认在多次尝试后仍处于打开状态",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " attempts; retrying",
+        "Translated": "次尝试；正在重试",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return confirmation is visible but confirmation attempt ",
+        "Translated": "返回确认可见，但确认尝试",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " failed; retrying",
+        "Translated": "失败；正在重试",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return reached Ul'dah on ",
+        "Translated": "返回已抵达乌尔达哈，时间",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", but recovery must remain on ",
+        "Translated": "，但恢复必须保持在",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Arrived in Ul'dah on ",
+        "Translated": "已抵达乌尔达哈，时间",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "alert",
+        "Translated": "警报",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " cleared; next queued alert",
+        "Translated": "已清除；下一个排队警报",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " cleared; standing by in Ul'dah on ",
+        "Translated": "已清除；在乌尔达哈待命，时间",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "unspecified failure",
+        "Translated": "未指定的失败",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " abandoned without a confirmed kill (",
+        "Translated": "在未确认击杀的情况下放弃（",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "); next queued alert",
+        "Translated": "）；下一个排队警报",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "); standing by in Ul'dah on ",
+        "Translated": "）；在乌尔达哈待命，时间",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ul'dah reset complete; next queued alert",
+        "Translated": "乌尔达哈重置完成；下一个排队警报",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reset complete; standing by in Ul'dah on ",
+        "Translated": "重置完成；在乌尔达哈待命，时间",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Skipped stale/killed ",
+        "Translated": "已跳过过期/已击杀的",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; next queued alert",
+        "Translated": "；下一个排队警报",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; standing by in Ul'dah on ",
+        "Translated": "；在乌尔达哈待命，时间",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Starting normal World Visit to ",
+        "Translated": "开始正常世界访问前往",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "World ready; preparing normal teleport toward ",
+        "Translated": "世界已就绪；准备正常传送前往",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return locked until the S rank's death is confirmed",
+        "Translated": "在确认S级怪物死亡前无法返回",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return confirmation did not appear; retrying recovery without clearing the hunt",
+        "Translated": "返回确认未出现；在不清除怪物狩猎的情况下重试恢复",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return was confirmed but no Ul'dah transition completed; falling back to normal same-world teleport",
+        "Translated": "返回已确认但未完成乌尔达哈切换；回退到普通同服传送",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Teleporting normally to Ul'dah for the mandatory reset",
+        "Translated": "正常传送至乌尔达哈以执行强制重置",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Direct Ul'dah teleport is not available yet; retrying before any landing fallback",
+        "Translated": "尚无法直接传送至乌尔达哈；在任何登陆回退前重试",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Preparing a direct normal Teleport to Ul'dah",
+        "Translated": "准备直接正常传送至乌尔达哈",
+        "Context": "Plugin.TickResetToUldah",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dismounting before returning to Ul'dah",
+        "Translated": "返回乌尔达哈前下坐骑",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Landing before returning to Ul'dah",
+        "Translated": "返回乌尔达哈前降落",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flight obstructed; moving to alternate landing point ",
+        "Translated": "飞行受阻；移动至备用登陆点",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " before Ul'dah",
+        "Translated": "在乌尔达哈前",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No alternate landing point is projected yet; retrying before Ul'dah",
+        "Translated": "尚未规划出备用登陆点；在乌尔达哈前重试",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Alternate landing point reached; landing before Ul'dah",
+        "Translated": "已到达备用登陆点；在乌尔达哈前降落",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Alternate landing route was obstructed; trying another before Ul'dah",
+        "Translated": "备用登陆路线受阻；在乌尔达哈前尝试另一条",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Moving to alternate landing point ",
+        "Translated": "移动至备用登陆点",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " before returning to Ul'dah",
+        "Translated": "在返回乌尔达哈前",
+        "Context": "Plugin.TickReturnLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "an out-of-range overworld enemy",
+        "Translated": "一个超出范围的野外敌人",
+        "Context": "Plugin.BeginIncidentalAggroAvoidance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental aggro from ",
+        "Translated": "意外仇恨来自",
+        "Context": "Plugin.BeginIncidentalAggroAvoidance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; escaping without attacking while preserving the active hunt",
+        "Translated": "；不攻击并逃离，同时保留当前怪物狩猎",
+        "Context": "Plugin.BeginIncidentalAggroAvoidance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental aggro recovery retained no active hunt; resetting through Ul'dah",
+        "Translated": "意外仇恨恢复未保留任何活动怪物狩猎；通过乌尔达哈重置",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Died to incidental aggro after ",
+        "Translated": "死于意外仇恨，在",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " was confirmed dead; starting normal Return recovery",
+        "Translated": "已确认死亡；开始正常返回恢复",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Died to incidental aggro while ",
+        "Translated": "死于意外仇恨，同时",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " remains active; waiting for Raise and refusing Return",
+        "Translated": "仍处于活动状态；等待复活并拒绝返回",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental aggro ended; confirming combat is clear before resuming",
+        "Translated": "意外仇恨结束；确认战斗已清除后再继续",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental aggro cleared; resuming same-world Ul'dah recovery for ",
+        "Translated": "意外仇恨已清除；恢复同服乌尔达哈恢复，针对",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental aggro cleared; holding the active ",
+        "Translated": "意外仇恨已清除；保持活动",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " hunt and resuming entity scans",
+        "Translated": "怪物狩猎并恢复实体扫描",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Escaping incidental aggro without attacking; preserving ",
+        "Translated": "不攻击并逃离意外仇恨；保留",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " and ",
+        "Translated": "和",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " queued hunt(s)",
+        "Translated": "个排队的怪物狩猎",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental combat blocks travel and vnavmesh is not ready; holding the hunt and retrying safely",
+        "Translated": "意外战斗阻止移动且vnavmesh未就绪；保持怪物狩猎并安全重试",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental combat blocks travel; no safe escape route resolved yet, retaining the hunt and retrying",
+        "Translated": "意外战斗阻止移动；尚未找到安全逃离路线，保留怪物狩猎并重试",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental combat blocks travel; escape attempt ",
+        "Translated": "意外战斗阻止移动；逃离尝试",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " underway without attacking",
+        "Translated": "进行中，不攻击",
+        "Context": "Plugin.TickAvoidIncidentalAggro",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental attacker is no longer positively identified; confirming combat has cleared",
+        "Translated": "意外攻击者已无法确认；确认战斗已清除",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental escape exhausted; dismounting to clear only ",
+        "Translated": "意外逃离已耗尽；下坐骑仅用于清除",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental attacker ",
+        "Translated": "意外攻击者",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is across the S-rank safety radius; holding and retrying ranged clearance only",
+        "Translated": "位于S级安全半径之外；保持并仅重试远程清除",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Incidental escape exhausted, but controlled combat fallback is limited to WAR/MRD; retaining safe recovery diagnostics",
+        "Translated": "意外逃离已耗尽，但受控战斗回退仅限WAR/MRD；保留安全恢复诊断",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Clearing incidental attacker ",
+        "Translated": "清除意外攻击者",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " with WAR/MRD action ",
+        "Translated": "使用战士/斧术师技能",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; hunt state is preserved",
+        "Translated": "；狩猎状态已保留",
+        "Context": "Plugin.TickIncidentalCombatFallback",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return confirmation was accepted but the zone transition timed out; retrying Return",
+        "Translated": "返回确认已接受，但区域切换超时；正在重试返回",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Initiating Return to Ul'dah; waiting for its confirmation dialog",
+        "Translated": "正在发起返回乌尔达哈；等待其确认对话框",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return confirmation did not appear; retrying Return",
+        "Translated": "返回确认未出现；正在重试返回",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return recovery has not completed after repeated attempts; retrying in ",
+        "Translated": "多次尝试后返回恢复仍未完成；将在稍后重试",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return is unavailable or on cooldown (game status ",
+        "Translated": "返回不可用或正在冷却（游戏状态",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "); retrying later",
+        "Translated": "）；稍后重试",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return is unavailable because the game action manager is not ready; retrying later",
+        "Translated": "返回不可用，因为游戏动作管理器未就绪；稍后重试",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Initiating Return to Ul'dah",
+        "Translated": "正在发起返回乌尔达哈",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The game rejected the Return action; retrying later",
+        "Translated": "游戏拒绝了返回动作；稍后重试",
+        "Context": "Plugin.TickDeadReturnRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Current hunt confirmed dead — waiting ",
+        "Translated": "当前狩猎已确认死亡 — 等待",
+        "Context": "Plugin.TickDeadPostKillRewardGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s for reward/credit processing before Return",
+        "Translated": "秒以处理奖励/结算，然后返回",
+        "Context": "Plugin.TickDeadPostKillRewardGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Post-kill reward grace complete — Returning to Ul'dah",
+        "Translated": "击杀后奖励等待完成 — 正在返回乌尔达哈",
+        "Context": "Plugin.TickDeadPostKillRewardGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Raise acceptance submitted; waiting for the dialog to close or revival to begin",
+        "Translated": "已提交接受复活；等待对话框关闭或复活开始",
+        "Context": "Plugin.TickRaiseAcceptance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Raise acceptance callback submitted; waiting for revival",
+        "Translated": "已提交接受复活回调；等待复活",
+        "Context": "Plugin.TickRaiseAcceptance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Raise dialog recognized; waiting for the affirmative control to become available",
+        "Translated": "已识别复活对话框；等待确认控件可用",
+        "Context": "Plugin.TickRaiseAcceptance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Raise dialog closed; waiting for revival to begin",
+        "Translated": "复活对话框已关闭；等待复活开始",
+        "Context": "Plugin.TickRaiseAcceptance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Hunt complete; checking for a remaining Raise dialog before Return",
+        "Translated": "狩猎完成；返回前检查是否有残留的复活对话框",
+        "Context": "Plugin.TickCompletedRaiseResolution",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Completed-hunt Raise dialog remained stuck; closing it before Return",
+        "Translated": "已完成狩猎的复活对话框卡住；返回前将其关闭",
+        "Context": "Plugin.TickCompletedRaiseResolution",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Return recovery failure: ",
+        "Translated": "返回恢复失败：",
+        "Context": "Plugin.ReportReturnRecoveryFailure",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "World Visit had no valid destination",
+        "Translated": "跨服传送没有有效目的地",
+        "Context": "Plugin.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "World Visit to ",
+        "Translated": "跨服传送至",
+        "Context": "Plugin.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " timed out",
+        "Translated": "超时",
+        "Context": "Plugin.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Selecting ",
+        "Translated": "正在选择",
+        "Context": "Plugin.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " from World Visit",
+        "Translated": "从跨服传送",
+        "Context": "Plugin.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Walking normally to the Ul'dah World Visit aetheryte",
+        "Translated": "正常步行前往乌尔达哈跨服传送以太之光",
+        "Context": "Plugin.TickWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Could not select ",
+        "Translated": "无法选择",
+        "Context": "Plugin.TickSelectWorld",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " in World Visit",
+        "Translated": "在跨服传送中",
+        "Context": "Plugin.TickSelectWorld",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Confirming normal World Visit to ",
+        "Translated": "正在确认正常跨服传送至",
+        "Context": "Plugin.TickSelectWorld",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Arriving on ",
+        "Translated": "正在抵达",
+        "Context": "Plugin.TickConfirmWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "World Visit confirmation for ",
+        "Translated": "跨服传送确认至",
+        "Context": "Plugin.TickConfirmWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Queued for World Visit to ",
+        "Translated": "已排队跨服传送至",
+        "Context": "Plugin.TickConfirmWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Arrival on ",
+        "Translated": "抵达",
+        "Context": "Plugin.TickWaitForWorld",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Arrived on ",
+        "Translated": "已抵达",
+        "Context": "Plugin.CompleteWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; preparing territory teleport",
+        "Translated": "；正在准备区域传送",
+        "Context": "Plugin.CompleteWorldVisit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No attuned aetheryte is currently resolvable for territory ",
+        "Translated": "当前无法为区域解析出已调谐的以太之光",
+        "Context": "Plugin.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "retaining ",
+        "Translated": "保留",
+        "Context": "Plugin.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " and retrying",
+        "Translated": "并重试",
+        "Context": "Plugin.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Teleporting normally toward ",
+        "Translated": "正在正常传送至",
+        "Context": "Plugin.TickTeleportToTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Teleport arrival in territory ",
+        "Translated": "传送抵达区域",
+        "Context": "Plugin.TickWaitForTerritory",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Using Idyllshire's normal Prologue Gate aethernet route to the Dravanian Hinterlands",
+        "Translated": "使用田园郡的常规开场动画之门以太网络路线前往龙堡内陆低地",
+        "Context": "Plugin.BeginHinterlandsGateway",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Re-establishing the normal territory route",
+        "Translated": "正在重新建立常规区域路线",
+        "Context": "Plugin.TickOpenHinterlandsGateway",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Could not open the Idyllshire aethernet for the western gate",
+        "Translated": "无法打开田园郡以太网络前往西门",
+        "Context": "Plugin.TickOpenHinterlandsGateway",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Selecting Prologue Gate (Western Hinterlands)",
+        "Translated": "正在选择开场动画之门（龙堡内陆低地西部）",
+        "Context": "Plugin.TickOpenHinterlandsGateway",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Prologue Gate was not available from the Idyllshire aethernet",
+        "Translated": "田园郡以太网络中无法找到开场动画之门",
+        "Context": "Plugin.TickSelectHinterlandsGateway",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Traveling normally through Prologue Gate to the Dravanian Hinterlands",
+        "Translated": "正在正常通过开场动画之门前往龙堡内陆低地",
+        "Context": "Plugin.TickSelectHinterlandsGateway",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Choosing Prologue Gate (Western Hinterlands) from the aethernet",
+        "Translated": "正在从以太网络中选择开场动画之门（龙堡内陆低地西部）",
+        "Context": "Plugin.TickSelectHinterlandsGateway",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Prologue Gate was not available in the Idyllshire aethernet",
+        "Translated": "田园郡以太网络中无法找到开场动画之门",
+        "Context": "Plugin.TickSelectHinterlandsDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Arrival in the Dravanian Hinterlands timed out",
+        "Translated": "抵达龙堡内陆低地超时",
+        "Context": "Plugin.TickWaitForHinterlands",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Territory and instance selected",
+        "Translated": "已选择区域和副本",
+        "Context": "Plugin.BeginInstanceCheck",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Changing normally to instance ",
+        "Translated": "正在正常切换到副本",
+        "Context": "Plugin.BeginInstanceCheck",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Correct instance reached",
+        "Translated": "已到达正确的副本",
+        "Context": "Plugin.TickChangeInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Could not change to instance ",
+        "Translated": "无法切换到副本",
+        "Context": "Plugin.TickChangeInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Selecting instance ",
+        "Translated": "正在选择副本",
+        "Context": "Plugin.TickChangeInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Repositioning normally at the territory aetheryte to change instance",
+        "Translated": "正在区域以太之光处正常重新定位以切换副本",
+        "Context": "Plugin.TickChangeInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Instance ",
+        "Translated": "副本",
+        "Context": "Plugin.TickSelectInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " was not available",
+        "Translated": "不可用",
+        "Context": "Plugin.TickSelectInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Traveling to instance ",
+        "Translated": "正在前往副本",
+        "Context": "Plugin.TickSelectInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Arrival in instance ",
+        "Translated": "抵达副本",
+        "Context": "Plugin.TickWaitForInstance",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting at the aetheryte for zoning and player readiness",
+        "Translated": "；正在以太之光处等待区域加载和玩家就绪",
+        "Context": "Plugin.BeginPlayerReadyWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting at the aetheryte for zoning, the player object, and the requested instance to become ready",
+        "Translated": "正在以太之光处等待区域加载、玩家对象以及所请求的副本就绪",
+        "Context": "Plugin.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Zoning complete; allowing the local player state to settle at the aetheryte",
+        "Translated": "区域加载完成；正在以太之光处等待本地玩家状态稳定",
+        "Context": "Plugin.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Zoning and player readiness confirmed",
+        "Translated": "区域加载和玩家就绪已确认",
+        "Context": "Plugin.TickWaitForPlayerReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; holding at the aetheryte until vnavmesh finishes preparing this territory",
+        "Translated": "；正在以太之光处等待 vnavmesh 完成此区域的准备",
+        "Context": "Plugin.BeginMeshWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting at the aetheryte for vnavmesh mesh readiness; ",
+        "Translated": "正在以太之光处等待 vnavmesh 网格就绪；",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " newer hunt(s) queued without replacing ",
+        "Translated": "已排队更新的怪物狩猎，未替换",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "vnavmesh mesh is fully ready; resuming entity resolution for the previously identified mark",
+        "Translated": "vnavmesh 网格已完全就绪；正在恢复先前已识别标记的实体解答所",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Could not resolve the SS profile for ",
+        "Translated": "无法解答 SS 配置",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; retaining the hunt at the aetheryte",
+        "Translated": "；正在以太之光处保留怪物狩猎",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "vnavmesh is ready; staging about ",
+        "Translated": "vnavmesh 已就绪；正在模仿细胞",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y from the documented ",
+        "Translated": "y 从记录的",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " spawn until the entity is detectable",
+        "Translated": "生成点直到实体可被检测",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "vnavmesh mesh is fully ready; resolving the active hunt's stored alert coordinates",
+        "Translated": "vnavmesh 网格已完全就绪；正在解答当前怪物狩猎存储的警报坐标",
+        "Context": "Plugin.TickWaitForMesh",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "vnavmesh mesh readiness was lost",
+        "Translated": "vnavmesh 网格就绪状态已丢失",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "local coordinate projection/path recovery was exhausted after ",
+        "Translated": "本地坐标被投影/路径恢复已耗尽，经过",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s; the hunt is unresolved, not dead",
+        "Translated": "秒；怪物狩猎未解答，并非死亡",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for current game map data to convert ",
+        "Translated": "正在等待当前游戏地图数据转换",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s X",
+        "Translated": "的 X",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " destination; retrying",
+        "Translated": "目的地；正在重试",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "mapped destination remained unprojectable after ",
+        "Translated": "映射目标在多次有界尝试和近似恢复后仍无法投影",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " bounded passes and approximate recovery",
+        "Translated": "有界尝试与近似恢复",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Projection recovery: beginning approximate flight toward ",
+        "Translated": "投影恢复：开始近似飞行前往",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s reported X/Z",
+        "Translated": "报告的 X/Z",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Could not project ",
+        "Translated": "无法投影",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s mapped destination; bounded pass ",
+        "Translated": "的映射目标；有界尝试",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " will retry, then use approximate flight",
+        "Translated": "将重试，然后使用近似飞行",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Trying approach candidate ",
+        "Translated": "尝试接近候选",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "for ",
+        "Translated": "前往",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ground-routing because flight is unavailable",
+        "Translated": "因飞行不可用而采用地面寻路",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flying",
+        "Translated": "飞行",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " toward ",
+        "Translated": "前往",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s reported coordinates; ",
+        "Translated": "报告的坐标；",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "entity resolution waits until within about ",
+        "Translated": "实体解析等待至约",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mapped ",
+        "Translated": "已映射",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " destination was unreachable; trying another nearby projection",
+        "Translated": "目标不可达；尝试附近另一个投影",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No route to ",
+        "Translated": "无路线前往",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s next approach waypoint is available yet; holding the active hunt and retrying after a short backoff",
+        "Translated": "的下一个接近路径点尚不可用；保持当前狩猎并在短暂退避后重试",
+        "Context": "Plugin.TickPrepareApproachDestination",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "vnavmesh readiness was lost during the coordinate approach",
+        "Translated": "坐标接近过程中 vnavmesh 就绪状态丢失",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "local approach made no usable progress within ",
+        "Translated": "本地接近在以下时间内未取得有效进展",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Direct alert-coordinate projection was lost; rebuilding it without abandoning the active hunt",
+        "Translated": "直接警报坐标投影丢失；在不放弃当前狩猎的情况下重建",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "InFlight was lost before or during the long-distance flying route",
+        "Translated": "在长距离飞行路线之前或期间 InFlight 丢失",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reached ",
+        "Translated": "已到达",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s reported area; beginning positive entity resolution",
+        "Translated": "的报告区域；开始正向实体解析",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pathfinding to ",
+        "Translated": "寻路前往",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s approach waypoint ",
+        "Translated": "的接近路径点",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y remaining); waiting for vnavmesh without cancelling the request",
+        "Translated": "y 剩余）；等待 vnavmesh 而不取消请求",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Route submitted for ",
+        "Translated": "已提交路线前往",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " waypoints); ",
+        "Translated": "路径点）；",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "waiting for vnavmesh movement to begin",
+        "Translated": "等待 vnavmesh 移动开始",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " via a recovery waypoint ",
+        "Translated": "经由恢复路径点",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y away",
+        "Translated": "y 距离",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Approaching ",
+        "Translated": "接近",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s reported coordinates (",
+        "Translated": "的报告坐标（",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y remaining); ",
+        "Translated": "y 剩余）；",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "not scanning for the entity until nearby",
+        "Translated": "在接近前不扫描实体",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting for movement to start ",
+        "Translated": "；等待移动开始",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s grace, ",
+        "Translated": "s 宽限，",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "pathfinding=",
+        "Translated": "寻路=",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "mounted=",
+        "Translated": "搭乘=",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Approach resumed for ",
+        "Translated": "已恢复接近",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y remain to the reported area",
+        "Translated": "y 剩余至报告区域",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Approach waypoint was unavailable; trying another after a short backoff while keeping ",
+        "Translated": "接近路径点不可用；短暂退避后尝试另一个，同时保持",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " active",
+        "Translated": "激活",
+        "Context": "Plugin.TickApproachAlertCoordinates",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " became visibly dead during local approach recovery",
+        "Translated": "在本地接近恢复期间明显死亡",
+        "Context": "Plugin.TrySwitchToVisibleMarkDuringApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " became visible with the tag gate already open",
+        "Translated": "已可见，标签门已开启",
+        "Context": "Plugin.TrySwitchToVisibleMarkDuringApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is now detectable; switching to dynamic entity tracking",
+        "Translated": "现在可检测到；切换到动态实体追踪",
+        "Context": "Plugin.TrySwitchToVisibleMarkDuringApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Route stopped after ",
+        "Translated": "路线在之后停止",
+        "Context": "Plugin.HandleStoppedApproachRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y progress; resuming ",
+        "Translated": "y 进度；正在恢复",
+        "Context": "Plugin.HandleStoppedApproachRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s continuous approach ",
+        "Translated": "的持续接近",
+        "Context": "Plugin.HandleStoppedApproachRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "after a short backoff",
+        "Translated": "短暂退避后",
+        "Context": "Plugin.HandleStoppedApproachRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Coordinate route made no progress; sampling a reachable point away from the starting area",
+        "Translated": "坐标路线无进展；正在采样远离起始区域的可达点",
+        "Context": "Plugin.HandleStoppedApproachRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y progress; trying another starting-area candidate ",
+        "Translated": "y 进度；正在尝试另一个起始区域候选",
+        "Context": "Plugin.HandleStoppedApproachRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "All current projections stopped early; resampling near ",
+        "Translated": "所有当前投影提前停止；正在重新采样附近",
+        "Context": "Plugin.RejectCurrentApproachCandidate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s reported coordinates",
+        "Translated": "的报告坐标",
+        "Context": "Plugin.RejectCurrentApproachCandidate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Candidate rejected after repeated early stops; trying another projection for ",
+        "Translated": "候选因反复提前停止被拒绝；正在尝试另一个投影",
+        "Context": "Plugin.RejectCurrentApproachCandidate",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; stopping movement and restoring confirmed flight before continuing toward ",
+        "Translated": "；停止移动并恢复确认飞行后再继续前往",
+        "Context": "Plugin.PauseLongApproachForFlightRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Positively identified ",
+        "Translated": "已确认识别",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " positively identified; waiting briefly before retrying safe parking",
+        "Translated": "已确认识别；稍等片刻后重试安全停靠",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reacquired the live mark; resuming the latched tag operation before parking",
+        "Translated": "已重新获取活动标记；在停靠前恢复锁定的标签操作",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Search budget reached after ",
+        "Translated": "搜索预算已用尽，经过",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s; returning once to the reported area for a final scan",
+        "Translated": "秒；返回报告区域一次进行最终扫描",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " remained unresolved—not confirmed dead—after ",
+        "Translated": "仍未解决——未确认死亡——经过",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " scan window(s), and the final reported-area scan",
+        "Translated": "个扫描窗口，以及最终报告区域扫描",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " was not visible in scan window ",
+        "Translated": "在扫描窗口中不可见",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "continuing within the cumulative ",
+        "Translated": "在累计",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s search budget—no kill is inferred",
+        "Translated": "秒搜索预算内继续——未推断击杀",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Final positive scan for ",
+        "Translated": "最终阳性扫描",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " at the original reported area ",
+        "Translated": "在原始报告区域",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s remaining). Failure will be unresolved, not dead",
+        "Translated": "秒剩余）。失败将视为未解决，而非死亡",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Near ",
+        "Translated": "附近",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "'s alert coordinates; scan window ",
+        "Translated": "的警报坐标；扫描窗口",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s remaining (",
+        "Translated": "秒剩余（",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s cumulative). Missing does not mean dead",
+        "Translated": "秒累计）。未找到不代表死亡",
+        "Context": "Plugin.TickLocateMark",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The previously identified mark temporarily left object range while parking; holding and rescanning",
+        "Translated": "先前识别的标记在停靠时暂时离开对象范围；保持并重新扫描",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Aligned over the safe point (",
+        "Translated": "已对准安全点上方（",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y horizontal); landing normally",
+        "Translated": "y 水平）；正常降落",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Aligning over the selected safe point before landing: ",
+        "Translated": "在降落前对准所选安全点上方：",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y horizontal, ",
+        "Translated": "y 水平，",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y vertical, ",
+        "Translated": "y 垂直，",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y clear",
+        "Translated": "y 已清空",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "the active parking route stalled and no alternate remained",
+        "Translated": "当前停靠路线停滞且无备选路线",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Safe parking was obstructed; keeping the hunt active and resampling another route",
+        "Translated": "安全停靠受阻；保持怪物狩猎激活并重新采样另一条路线",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Safe parking route was obstructed; trying another (",
+        "Translated": "安全停靠路线受阻；尝试另一条（",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " alternatives remain)",
+        "Translated": "剩余备选）",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "all sampled parking routes stopped before arrival",
+        "Translated": "所有采样的停靠路线均在抵达前停止",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "All sampled parking routes were temporarily unavailable; keeping the hunt active and retrying",
+        "Translated": "所有采样的停靠路线暂时不可用；保持怪物狩猎激活并重试",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Trying another safe parking route (",
+        "Translated": "尝试另一条安全停靠路线（",
+        "Context": "Plugin.TickMoveToSafePoint",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mark temporarily left object range before landing; remaining mounted and rescanning",
+        "Translated": "标记在搭乘前暂时离开对象范围；保持搭乘并重新扫描",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Landing was obstructed; trying another safe point (",
+        "Translated": "搭乘受阻；尝试另一个安全点（",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "landing timed out and no alternate parking candidate remained",
+        "Translated": "搭乘超时且无备选停靠候选",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Landing was obstructed and no alternate remains; keeping the hunt active and resampling",
+        "Translated": "搭乘受阻且无备选；保持怪物狩猎激活并重新采样",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The engage gate opened as landing completed; skipping the cosmetic settle for the required tag",
+        "Translated": "搭乘完成时交战门已开启；跳过装饰性稳定以获取所需标记",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parked ",
+        "Translated": "已停靠",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y clear (preferred ",
+        "Translated": "y 已清空（首选",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "emergency floor ",
+        "Translated": "紧急下限",
+        "Context": "Plugin.TickLanding",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Validating a ",
+        "Translated": "正在验证",
+        "Context": "Plugin.TryBeginParkingFacingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y natural facing settle at the parked position",
+        "Translated": "y 在停靠位置的自然朝向稳定",
+        "Context": "Plugin.TryBeginParkingFacingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The engage gate opened during the cosmetic parking settle; cancelling it immediately for the required tag",
+        "Translated": "装饰性停靠稳定期间交战门已开启；立即取消以获取所需标记",
+        "Context": "Plugin.TickParkingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Validating the ",
+        "Translated": "正在验证",
+        "Context": "Plugin.PollParkingFacingSettleOutwardPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y outward natural-facing step",
+        "Translated": "y 向外自然朝向步骤",
+        "Context": "Plugin.PollParkingFacingSettleOutwardPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Outward step is safe; validating the return to the exact parked position",
+        "Translated": "向外步骤安全；正在验证返回精确停靠位置",
+        "Context": "Plugin.PollParkingFacingSettleOutwardPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Validating the return leg to the exact parked position",
+        "Translated": "正在验证返回精确停靠位置的路径",
+        "Context": "Plugin.PollParkingFacingSettleReturnPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Natural facing settle: moving ",
+        "Translated": "自然朝向稳定：移动",
+        "Context": "Plugin.PollParkingFacingSettleReturnPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y outward before returning",
+        "Translated": "y 向外后返回",
+        "Context": "Plugin.PollParkingFacingSettleReturnPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Natural facing settle: returning to the original parked position",
+        "Translated": "自然朝向稳定：返回原始停靠位置",
+        "Context": "Plugin.TickParkingFacingSettleMovement",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y clearance",
+        "Translated": "y 间隙",
+        "Context": "Plugin.FinishParkingFacingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "original safe parking clearance",
+        "Translated": "原始安全停靠间隙",
+        "Context": "Plugin.FinishParkingFacingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parked at ",
+        "Translated": "停靠于",
+        "Context": "Plugin.FinishParkingFacingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "facing settle skipped safely",
+        "Translated": "朝向稳定已安全跳过",
+        "Context": "Plugin.FinishParkingFacingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "natural facing settle complete",
+        "Translated": "自然朝向稳定完成",
+        "Context": "Plugin.FinishParkingFacingSettle",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mark temporarily not visible from safe wait; beginning bounded reacquisition without inferring death",
+        "Translated": "标记从安全等待中暂时不可见；开始有界重新获取，不推断死亡",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Safe wait: ",
+        "Translated": "安全等待：",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y clear, ",
+        "Translated": "y 已清空，",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "% HP, ",
+        "Translated": "% HP，",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "not in combat",
+        "Translated": "未进入战斗",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "in combat",
+        "Translated": "进入战斗",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag required for pull cycle ",
+        "Translated": "拉怪循环需要标记",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; parking is suspended until one ranged tag is confirmed",
+        "Translated": "；在确认一个远程标记前暂停停靠",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mark moved to ",
+        "Translated": "标记移动至",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y clearance; returning toward the configured ",
+        "Translated": "y 清除；返回配置的",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y preference",
+        "Translated": "y 偏好",
+        "Context": "Plugin.TickSafeWait",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag is still required, but the entity left object range; beginning bounded reacquisition without clearing the tag latch",
+        "Translated": "仍需要标记，但实体已离开对象范围；开始有界重新获取，不清除标记锁存",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag remains required; briefly reacquiring the current entity without returning to ordinary waiting",
+        "Translated": "仍需要标记；短暂重新获取当前实体，不返回普通等待",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is visibly dead during tag approach",
+        "Translated": "在标记接近期间明显已死亡",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag confirmed (action ",
+        "Translated": "标记已确认（动作",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "); holding briefly before retreat",
+        "Translated": "）；短暂保持后撤退",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The pull reset before a tag was required; returning to safe wait",
+        "Translated": "在需要标记前落潮密道已重置；返回安全等待",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "tag preparation remained unresolved for ",
+        "Translated": "标记筹备持续未解决达",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s while the mark stayed alive",
+        "Translated": "秒，而标记仍存活",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag confirmed for ",
+        "Translated": "标记已确认，持续",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", pull cycle ",
+        "Translated": "，落潮密道循环",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "(action ",
+        "Translated": "（动作",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", sequence ",
+        "Translated": "，序列",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "); attack cutoff is active",
+        "Translated": "）；攻击截止已激活",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ranged tag was submitted to ",
+        "Translated": "远程标记已提交至",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting for server handling",
+        "Translated": "；等待服务器处理",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ranged tag is queued for ",
+        "Translated": "远程标记已排队等待",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag requirement remains latched for pull cycle ",
+        "Translated": "标记需求仍为落潮密道循环锁存",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting for the full-HP/out-of-combat reset confirmation",
+        "Translated": "；等待满血/脱战重置确认",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag is required, but the current job has no supported ranged tag; bounded recovery remains active",
+        "Translated": "需要标记，但当前职业没有支持的远程标记；有界恢复仍激活",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Acquiring ",
+        "Translated": "正在获取",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " as the confirmed tag target",
+        "Translated": "作为已确认的标记目标",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ranged tag submitted to ",
+        "Translated": "远程标记已提交至",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting for server handling before closing the tag gate",
+        "Translated": "；等待服务器处理后再关闭标记门",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag remains required for pull cycle ",
+        "Translated": "落潮密道循环仍需要标记",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; retrying the same ranged action until server handling is confirmed",
+        "Translated": "；重试同一远程动作，直到服务器处理确认",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag-required approach could not start; retry ",
+        "Translated": "需要标记的接近无法开始；重试",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " remains latched while the mark is alive",
+        "Translated": "在标记存活期间保持锁存",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag required: approaching ",
+        "Translated": "需要标记：正在接近",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " for one confirmed ranged action (",
+        "Translated": "以执行一次已确认的远程动作（",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y clear)",
+        "Translated": "y 清除）",
+        "Context": "Plugin.TickTagApproach",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mark left object range during retreat; stopped safely and beginning bounded reacquisition",
+        "Translated": "标记在撤退期间离开对象范围；已安全停止并开始有界重新获取",
+        "Context": "Plugin.TickGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retreat complete; holding position ",
+        "Translated": "撤退完成；保持位置",
+        "Context": "Plugin.TickGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y from mark",
+        "Translated": "y 距标记",
+        "Context": "Plugin.TickGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Safe radius restored",
+        "Translated": "安全半径已恢复",
+        "Context": "Plugin.TickGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Confirmed tag completed; safe radius restored",
+        "Translated": "已确认标记完成；安全半径已恢复",
+        "Context": "Plugin.TickGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No ground-retreat route was reachable; holding position",
+        "Translated": "无法到达任何地面撤退路线；保持位置",
+        "Context": "Plugin.TickGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Trying another ground-retreat route (",
+        "Translated": "尝试另一条地面撤退路线（",
+        "Context": "Plugin.TickGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "post-kill SS check",
+        "Translated": "击杀后 SS 检查",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is queued after the completed S rank",
+        "Translated": "已排在完成的S级之后",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " became visible after the completed S rank",
+        "Translated": "在完成的S级之后变为可见",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No ",
+        "Translated": "否",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " SS evidence within ",
+        "Translated": "SS证据在",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "returning to Ul'dah on the current world",
+        "Translated": "在当前世界返回乌尔达哈",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Dead during the ",
+        "Translated": "死亡于",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " SS grace; waiting briefly for SS evidence",
+        "Translated": "SS宽限期；短暂等待SS证据",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Post-kill SS check: ",
+        "Translated": "击杀后SS检查：",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s remaining",
+        "Translated": "秒剩余",
+        "Context": "Plugin.TickPostKillSsGrace",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS watch",
+        "Translated": "SS监视",
+        "Context": "Plugin.TickSsWatch",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is spawning after the completed S rank",
+        "Translated": "在完成的S级之后正在生成",
+        "Context": "Plugin.TickSsWatch",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " opportunity expired; returning to Ul'dah on the current world",
+        "Translated": "机会已过期；在当前世界返回乌尔达哈",
+        "Context": "Plugin.TickSsWatch",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " lost its completed S-rank context",
+        "Translated": "失去了其完成的S级上下文",
+        "Context": "Plugin.ValidateSsWatchContext",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Left the completed S-rank territory during ",
+        "Translated": "在期间离开了完成的S级区域",
+        "Context": "Plugin.ValidateSsWatchContext",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; returning to Ul'dah on the current world",
+        "Translated": "；在当前世界返回乌尔达哈",
+        "Context": "Plugin.ValidateSsWatchContext",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "game object scan",
+        "Translated": "游戏对象扫描",
+        "Context": "Plugin.ScanForSsEvidence",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " was reported; holding its reservation and staging at the documented spawn until the entity is detectable",
+        "Translated": "已被报告；保留其预约并在记录的生成点模仿细胞，直到实体可被检测到",
+        "Context": "Plugin.ScanForSsEvidence",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " precursor(s) visible; ignoring them safely",
+        "Translated": "前兆可见；安全地忽略它们",
+        "Context": "Plugin.ScanForSsEvidence",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No fixed ",
+        "Translated": "无固定",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " staging coordinate is configured for territory ",
+        "Translated": "为区域配置了模仿细胞坐标",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; holding the SS watch without abandoning it",
+        "Translated": "；保持SS监视而不放弃它",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for vnavmesh readiness before staging for ",
+        "Translated": "等待vnavmesh就绪后再为以下目标模仿细胞",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; the SS watch remains active",
+        "Translated": "；SS监视保持激活",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS staging landing was obstructed; trying another connected-ground point",
+        "Translated": "SS模仿细胞搭乘点被阻挡；尝试另一个连通地面点",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "At the ",
+        "Translated": "在",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " staging point; landing normally",
+        "Translated": "模仿细胞点；正常搭乘",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " announced; holding at its staging point until the entity is detectable",
+        "Translated": "已宣布；在其模仿细胞点等待直到实体可被检测到",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Navigating to SS staging area for ",
+        "Translated": "导航至SS模仿细胞区域，目标为",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y remaining)",
+        "Translated": "秒剩余）",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Fixed SS coordinate projection failed; trying nearby candidate for ",
+        "Translated": "固定SS坐标被投影失败；尝试附近的候选点，目标为",
+        "Context": "Plugin.TickSsStaging",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Validating an SS staging route near a ",
+        "Translated": "验证附近的SS模仿细胞路线，靠近",
+        "Context": "Plugin.TryStartNextSsStagingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "-player crowd",
+        "Translated": "-玩家人群",
+        "Context": "Plugin.TryStartNextSsStagingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Checking that the SS staging ground is connected to the documented spawn side",
+        "Translated": "检查SS模仿细胞地面是否连接到记录的生成侧",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS staging candidate rejected: ground-connectivity query timed out",
+        "Translated": "SS模仿细胞候选被拒绝：地面连通性查询超时",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS staging candidate rejected: ",
+        "Translated": "SS模仿细胞候选被拒绝：",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS staging candidate rejected: validated flight route became unavailable",
+        "Translated": "SS模仿细胞候选被拒绝：已验证的飞行路线变为不可用",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Navigating to connected-ground SS staging near ",
+        "Translated": "导航至连通地面的SS模仿细胞，靠近",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " players",
+        "Translated": "玩家",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Validating a protected vnavmesh route to the fixed SS staging area",
+        "Translated": "验证通往固定SS模仿细胞区域的受保护vnavmesh路线",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS staging candidate rejected: protected flight-path query timed out",
+        "Translated": "SS模仿细胞候选被拒绝：受保护的飞行路径查询超时",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS staging candidate rejected: no protected flight route to the documented spawn envelope",
+        "Translated": "SS 模仿细胞候选被拒绝：没有通往已记录生成范围的安全飞行路线",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "SS staging candidate rejected: could not start a ground-connectivity query toward the spawn side",
+        "Translated": "SS 模仿细胞候选被拒绝：无法向生成侧发起地面连通性查询",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Protected flight route found; validating connected landing ground before moving",
+        "Translated": "已找到安全飞行路线；移动前正在验证连通搭乘点地面",
+        "Context": "Plugin.PollSsStagingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag gate is open; suspending safe parking until the ranged tag is confirmed",
+        "Translated": "标记门已开启；在确认远程标记前暂停安全停靠",
+        "Context": "Plugin.BeginSafeParking",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "vnavmesh readiness was lost before dynamic safe parking",
+        "Translated": "动态安全停靠前 vnavmesh 就绪状态丢失",
+        "Context": "Plugin.BeginSafeParking",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "no sampled safe parking route was available",
+        "Translated": "没有可用的采样安全停靠路线",
+        "Context": "Plugin.BeginSafeParking",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No sampled safe parking route is available yet; keeping the hunt active and retrying near the alert area",
+        "Translated": "暂无采样安全停靠路线可用；保持怪物狩猎激活并在警戒区域附近重试",
+        "Context": "Plugin.BeginSafeParking",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking dynamically ",
+        "Translated": "动态停靠中",
+        "Context": "Plugin.BeginSafeParking",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "y clear of the S rank ",
+        "Translated": "y 远离 S 级",
+        "Context": "Plugin.BeginSafeParking",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " alternatives ready)",
+        "Translated": "备选已就绪)",
+        "Context": "Plugin.BeginSafeParking",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag remains required; ordinary retreat cannot replace the pending ranged tag",
+        "Translated": "仍需标记；普通撤退无法替代待处理的远程标记",
+        "Context": "Plugin.BeginGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "no sampled ground-retreat route was available",
+        "Translated": "没有可用的采样地面撤退路线",
+        "Context": "Plugin.BeginGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No sampled ground-retreat route was reachable; holding position",
+        "Translated": "没有可达的采样地面撤退路线；保持原位",
+        "Context": "Plugin.BeginGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No protected randomized retreat route was reachable; holding position safely",
+        "Translated": "没有可达的安全随机撤退路线；安全保持原位",
+        "Context": "Plugin.BeginGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retreating to ",
+        "Translated": "撤退至",
+        "Context": "Plugin.BeginGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Post-tag randomized retreat",
+        "Translated": "标记后随机撤退",
+        "Context": "Plugin.BeginGroundRetreat",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Rejected ",
+        "Translated": "已拒绝",
+        "Context": "Plugin.TryStartNextParkingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "geometric",
+        "Translated": "几何",
+        "Context": "Plugin.TryStartNextParkingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "crowd",
+        "Translated": "人群",
+        "Context": "Plugin.TryStartNextParkingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " parking candidate: route crosses mark safety radius",
+        "Translated": "停靠候选：路线穿过标记安全半径",
+        "Context": "Plugin.TryStartNextParkingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retreat candidate rejected: crosses safety radius",
+        "Translated": "撤退候选被拒绝：穿过安全半径",
+        "Context": "Plugin.TryStartNextParkingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Validating a protected route toward a ",
+        "Translated": "正在验证通往",
+        "Context": "Plugin.TryStartNextParkingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Validating randomized post-tag retreat route",
+        "Translated": "正在验证随机标记后撤退路线",
+        "Context": "Plugin.TryStartNextParkingRoute",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Checking that the parking ground connects to the hunt side without a long detour",
+        "Translated": "正在检查停靠地面是否无需绕远路即可连通怪物狩猎侧",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking candidate rejected: ground-connectivity query timed out",
+        "Translated": "停靠候选被拒绝：地面连通性查询超时",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking candidate rejected: ",
+        "Translated": "停靠候选被拒绝：",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking candidate rejected: validated flight route was lost",
+        "Translated": "停靠候选被拒绝：已验证的飞行路线丢失",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " parking candidate: protected vnavmesh path query timed out",
+        "Translated": "停靠候选：安全 vnavmesh 路径查询超时",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retreat candidate rejected: protected vnavmesh path query timed out",
+        "Translated": "撤退候选被拒绝：安全 vnavmesh 路径查询超时",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " parking candidate: vnavmesh found no protected route",
+        "Translated": "停靠候选：vnavmesh 未找到安全路线",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retreat candidate rejected: vnavmesh found no protected route",
+        "Translated": "撤退候选被拒绝：vnavmesh 未找到安全路线",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " parking candidate: destination or protected route became unavailable",
+        "Translated": "停靠候选：目的地或安全路线变得不可用",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Retreat candidate rejected: destination or protected route became unavailable",
+        "Translated": "撤退候选被拒绝：目的地或安全路线变得不可用",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking candidate rejected: could not validate connected ground on the hunt side",
+        "Translated": "停靠候选被拒绝：无法验证怪物狩猎侧的连通地面",
+        "Context": "Plugin.PollCrowdParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking candidate rejected: validated route became unavailable before movement",
+        "Translated": "停靠候选被拒绝：已验证路线在移动前变得不可用",
+        "Context": "Plugin.AcceptParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Post-tag retreat target: ",
+        "Translated": "标记后撤退目标：",
+        "Context": "Plugin.AcceptParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Selected crowd parking candidate: ",
+        "Translated": "已选择人群停靠候选：",
+        "Context": "Plugin.AcceptParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " players, ",
+        "Translated": "名玩家，",
+        "Context": "Plugin.AcceptParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Selected protected geometric parking candidate: ",
+        "Translated": "已选择安全几何停靠候选：",
+        "Context": "Plugin.AcceptParkingPath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No protected randomized retreat route is currently reachable; holding position safely",
+        "Translated": "当前没有可达的安全随机撤退路线；安全保持原位",
+        "Context": "Plugin.ContinueParkingAfterCrowdRejection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "all protected parking candidates failed route or ground-connectivity validation",
+        "Translated": "所有受保护的停车候选点均未通过路线或地面连通性验证",
+        "Context": "Plugin.ContinueParkingAfterCrowdRejection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No crowd or standard parking route is currently reachable; keeping the hunt active and retrying",
+        "Translated": "当前无法到达人群停车或标准停车路线；保持怪物狩猎激活并重试",
+        "Context": "Plugin.ContinueParkingAfterCrowdRejection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking/landing recovery failed while a tag is required: ",
+        "Translated": "需要标记时停车/登陆恢复失败：",
+        "Context": "Plugin.RegisterParkingRecoveryFailure",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "parking/landing remained unresolved after ",
+        "Translated": "停车/登陆在以下情况后仍未解决",
+        "Context": "Plugin.RegisterParkingRecoveryFailure",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " failures and ",
+        "Translated": "次失败以及",
+        "Context": "Plugin.RegisterParkingRecoveryFailure",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Parking/landing recovery budget expired while the tag latch was active",
+        "Translated": "标记锁存激活期间停车/登陆恢复预算已耗尽",
+        "Context": "Plugin.CheckParkingRecoveryBudget",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "parking/landing made no terminal progress within ",
+        "Translated": "停车/登陆在以下时间内未取得最终进展",
+        "Context": "Plugin.CheckParkingRecoveryBudget",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; reserving this SS follow-up until the S-rank kill is confirmed",
+        "Translated": "；保留此 SS 后续处理，直到确认 S 级击杀",
+        "Context": "Plugin.ObserveOrLatchSsChain",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; staging at the fixed ",
+        "Translated": "；在固定",
+        "Context": "Plugin.ObserveSsChain",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " spawn location",
+        "Translated": "刷新点模仿细胞",
+        "Context": "Plugin.ObserveSsChain",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; navigating to ",
+        "Translated": "；导航至",
+        "Context": "Plugin.ObserveSsChain",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " staging without targeting ",
+        "Translated": "模仿细胞，不选定目标",
+        "Context": "Plugin.ObserveSsChain",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; returning after the completed S rank while waiting for an SS alert",
+        "Translated": "；完成 S 级后返回，同时等待 SS 警报",
+        "Context": "Plugin.QueueSsAfterCompletedHunt",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is reserved next, returning to Ul'dah before traveling back",
+        "Translated": "已预约下一个，返回乌尔达哈后再出发",
+        "Context": "Plugin.QueueSsAfterCompletedHunt",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ignored conflicting death evidence for ",
+        "Translated": "已忽略冲突的死亡证据：",
+        "Context": "Plugin.ConfirmKill",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ": the exact current entity is still alive",
+        "Translated": "：当前确切实体仍然存活",
+        "Context": "Plugin.ConfirmKill",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; the S rank was confirmed dead before local combat observation",
+        "Translated": "；在本地战斗观察前已确认 S 级死亡",
+        "Context": "Plugin.ConfirmKill",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; confirmed dead before arrival/combat, returning to Ul'dah now",
+        "Translated": "；在抵达/战斗前已确认死亡，现在返回乌尔达哈",
+        "Context": "Plugin.ConfirmKill",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; checking for ",
+        "Translated": "；正在检查",
+        "Context": "Plugin.ConfirmKill",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " evidence for ",
+        "Translated": "的证据：",
+        "Context": "Plugin.ConfirmKill",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; returning to Ul'dah on the current visited world",
+        "Translated": "；在当前访问的服务器上返回乌尔达哈",
+        "Context": "Plugin.ConfirmKill",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; discarding this alert after the Ul'dah reset",
+        "Translated": "；乌尔达哈重置后丢弃此警报",
+        "Context": "Plugin.FailCurrent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag required: dismounting on safe ground before targeting ",
+        "Translated": "需要标记：在选定目标前于安全地面下坐骑",
+        "Context": "Plugin.TickTagLandingAndDismount",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag required: moving to a safe landing point before dismounting for ",
+        "Translated": "需要标记：下坐骑前移动至安全登陆点以",
+        "Context": "Plugin.TickTagLandingAndDismount",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Tag required: landing before the one ranged tag on ",
+        "Translated": "需要标记：在以下目标上使用远程标记前登陆",
+        "Context": "Plugin.TickTagLandingAndDismount",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; remounting is suppressed",
+        "Translated": "；已禁止重新上坐骑",
+        "Context": "Plugin.TickTagLandingAndDismount",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Normal landing did not finish; moving to an alternate protected landing point for the required tag",
+        "Translated": "普通登陆未完成；移动至备用受保护登陆点以使用所需标记",
+        "Context": "Plugin.TryStartTagLandingRecovery",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reset detected: HP restored and combat ended; tag gate re-armed for pull cycle ",
+        "Translated": "检测到重置：HP 已恢复且战斗结束；标记门已重新准备以进行拉怪循环",
+        "Context": "Plugin.ObservePullCycleReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " and returning to safe parking",
+        "Translated": "并返回安全停车点",
+        "Context": "Plugin.ObservePullCycleReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Removed ",
+        "Translated": "已移除",
+        "Context": "Plugin.RemoveKilledQueuedAlerts",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " queued/pending hunt(s) already reported killed",
+        "Translated": "个已报告击杀的排队/待处理怪物狩猎",
+        "Context": "Plugin.RemoveKilledQueuedAlerts",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " removed ",
+        "Translated": "已移除",
+        "Context": "Plugin.InvalidateExternalDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " killed queued/pending hunt(s)",
+        "Translated": "个已击杀的排队/待处理怪物狩猎",
+        "Context": "Plugin.InvalidateExternalDeath",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Skipped ",
+        "Translated": "已跳过",
+        "Context": "Plugin.TryDequeueNextValid",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " killed, stale, or no-longer-eligible queued alert(s)",
+        "Translated": "个已击杀、过期或不再符合条件的排队警报",
+        "Context": "Plugin.TryDequeueNextValid",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " queued hunt(s) from disabled expansions",
+        "Translated": "个来自已禁用资料片的排队怪物狩猎",
+        "Context": "Plugin.RemoveDisabledQueuedAlerts",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mount request was not accepted (",
+        "Translated": "上坐骑请求未被接受（",
+        "Context": "Plugin.EnsureMounted",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "); retrying without starting movement",
+        "Translated": "）；在不开始移动的情况下重试",
+        "Context": "Plugin.EnsureMounted",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mount requested: ",
+        "Translated": "已请求上坐骑：",
+        "Context": "Plugin.EnsureMounted",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting for mounted confirmation",
+        "Translated": "；等待上坐骑确认",
+        "Context": "Plugin.EnsureMounted",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flight is unavailable in this loaded territory; beginning an explicitly logged mounted ground approach to ",
+        "Translated": "当前加载区域内无法飞行；开始显式记录的搭乘地面金字塔陆桥至",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Waiting for the loaded territory's flight capability to become readable; movement remains stopped",
+        "Translated": "等待当前加载区域的飞行能力变为可读；移动保持停止",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounting ",
+        "Translated": "搭乘中",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; waiting for mounted confirmation before takeoff",
+        "Translated": "；等待搭乘确认后飞翔",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "); long-distance movement remains stopped",
+        "Translated": "）；长距离移动保持停止",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounted on ",
+        "Translated": "已搭乘",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "; takeoff requested, waiting for InFlight confirmation ",
+        "Translated": "；已请求飞翔，等待飞行中确认",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "(cycle ",
+        "Translated": "（循环",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "long-distance flight startup cycle ",
+        "Translated": "长距离飞行启动循环",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "did not confirm within ",
+        "Translated": "未在",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s; both cycles failed; ",
+        "Translated": "秒内确认；两次循环均失败；",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", inFlight=",
+        "Translated": "，inFlight=",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", mountRequests=",
+        "Translated": "，mountRequests=",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", flightAvailabilityKnown=",
+        "Translated": "，flightAvailabilityKnown=",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", flightStatus=",
+        "Translated": "，flightStatus=",
+        "Context": "Plugin.EnsureLongApproachMovementReady",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flight-startup cycle 1/",
+        "Translated": "飞行启动循环 1/",
+        "Context": "Plugin.BeginLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " timed out; ",
+        "Translated": "超时；",
+        "Context": "Plugin.BeginLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "movement stopped and mount/takeoff state is being reset before cycle 2",
+        "Translated": "移动已停止，循环 2 前正在重置搭乘/飞翔状态",
+        "Context": "Plugin.BeginLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "flight-startup recovery could not confirm a clean unmounted reset within ",
+        "Translated": "飞行启动恢复无法在",
+        "Context": "Plugin.TickLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "s before cycle 2; mounted=",
+        "Translated": "秒内于循环 2 前确认干净的未搭乘重置；mounted=",
+        "Context": "Plugin.TickLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", mounting=",
+        "Translated": "，mounting=",
+        "Context": "Plugin.TickLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", resetRequests=",
+        "Translated": "，resetRequests=",
+        "Context": "Plugin.TickLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flight-startup reset: waiting for the previous mount transition to settle ",
+        "Translated": "飞行启动重置：等待上一次搭乘过渡稳定",
+        "Context": "Plugin.TickLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flight-startup reset: stopping flight and landing (",
+        "Translated": "飞行启动重置：停止飞行并搭乘点（",
+        "Context": "Plugin.TickLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Flight-startup reset complete; beginning cycle 2/2 with a fresh 10.0s budget",
+        "Translated": "飞行启动重置完成；以全新的 10.0 秒预算开始循环 2/2",
+        "Context": "Plugin.TickLongApproachFlightStartupReset",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "the current mount",
+        "Translated": "当前坐骑",
+        "Context": "Plugin.DescribeConfirmedMount",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "unavailable",
+        "Translated": "不可用",
+        "Context": "Plugin.GetFlightAllowedStatusDiagnostic",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Blocked automatic exit from ",
+        "Translated": "已阻止自动退出",
+        "Context": "Plugin.TryBlockAutomaticHuntExit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " is visibly alive at ",
+        "Translated": "在",
+        "Context": "Plugin.TryBlockAutomaticHuntExit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "% HP",
+        "Translated": "% HP 时明显存活",
+        "Context": "Plugin.TryBlockAutomaticHuntExit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatic exit blocked: exact live ",
+        "Translated": "自动退出已阻止：确切的实时",
+        "Context": "Plugin.TryBlockAutomaticHuntExit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " still requires one confirmed ranged tag",
+        "Translated": "仍需一次确认的远程标记",
+        "Context": "Plugin.TryBlockAutomaticHuntExit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " retained locally at ",
+        "Translated": "本地保留于",
+        "Context": "Plugin.TryBlockAutomaticHuntExit",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "S Rank Sentinel###SRankSentinel",
+        "Translated": "S 级 护花守墓屋",
+        "Context": "Plugin.DrawUi",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "EXPANSION HUNTING",
+        "Translated": "扩展狩猎",
+        "Context": "Plugin.DrawClassicUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "DISTANCE PROFILES",
+        "Translated": "距离配置",
+        "Context": "Plugin.DrawClassicUi",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Main",
+        "Translated": "主界面",
+        "Context": "Plugin.CreateModernNavigation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Distance Profiles",
+        "Translated": "距离配置",
+        "Context": "Plugin.CreateModernNavigation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Plugins",
+        "Translated": "插件",
+        "Context": "Plugin.CreateModernNavigation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "History",
+        "Translated": "历史",
+        "Context": "Plugin.CreateModernNavigation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Theme",
+        "Translated": "主题",
+        "Context": "Plugin.CreateModernNavigation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Use the button below to switch to Classic Theme.",
+        "Translated": "使用下方按钮切换到经典主题。",
+        "Context": "Plugin.DrawModernContent",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Save settings",
+        "Translated": "保存设置",
+        "Context": "Plugin.DrawModernContent",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Enabled",
+        "Translated": "已启用",
+        "Context": "Plugin.DrawEnabledControl",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "State: ",
+        "Translated": "状态：",
+        "Context": "Plugin.DrawHuntStatus",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Status: ",
+        "Translated": "状态：",
+        "Context": "Plugin.DrawHuntStatus",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Current: ",
+        "Translated": "当前：",
+        "Context": "Plugin.DrawHuntStatus",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " | territory ",
+        "Translated": "| 区域",
+        "Context": "Plugin.DrawHuntStatus",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " | instance ",
+        "Translated": "| 副本",
+        "Context": "Plugin.DrawHuntStatus",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Queued: ",
+        "Translated": "已排队：",
+        "Context": "Plugin.DrawHuntStatus",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " | Next: ",
+        "Translated": "| 下一个：",
+        "Context": "Plugin.DrawHuntStatus",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Future placeholder — hunt data not available",
+        "Translated": "未来占位符 — 狩猎数据不可用",
+        "Context": "Plugin.DrawExpansionControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Behavior profiles are independent from the expansion hunting checkboxes.",
+        "Translated": "行为配置与资料片狩猎复选框相互独立。",
+        "Context": "Plugin.DrawDistanceControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Close-safe profile — Centurio + Shadowbringers",
+        "Translated": "安全关闭配置 — 百兽纲 + Shadowbringers -暗影使者-",
+        "Context": "Plugin.DrawDistanceControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "close-safe",
+        "Translated": "安全关闭",
+        "Context": "Plugin.DrawDistanceControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Proximity-sensitive profile — Endwalker + Dawntrail (Evercold future)",
+        "Translated": "近距离敏感配置 — 晓月之终途 + Dawntrail -曦光旅路-（永寒未来）",
+        "Context": "Plugin.DrawDistanceControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "proximity-sensitive",
+        "Translated": "近距离敏感",
+        "Context": "Plugin.DrawDistanceControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Queued-alert freshness (minutes)",
+        "Translated": "排队提醒新鲜度（分钟）",
+        "Context": "Plugin.DrawRecoveryControls",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "SKIP CURRENT + KEEP QUEUE",
+        "Translated": "跳过当前 + 保留队列",
+        "Context": "Plugin.DrawRecoveryControls",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Current hunt skipped manually",
+        "Translated": "已手动跳过当前狩猎",
+        "Context": "Plugin.DrawRecoveryControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "STOP + RESET THROUGH UL'DAH",
+        "Translated": "停止 + 重置至乌尔达哈",
+        "Context": "Plugin.DrawRecoveryControls",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Manual reset requested",
+        "Translated": "已请求手动重置",
+        "Context": "Plugin.DrawRecoveryControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Stopped manually",
+        "Translated": "已手动停止",
+        "Context": "Plugin.DrawRecoveryControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Window theme",
+        "Translated": "窗口主题",
+        "Context": "Plugin.DrawAppearanceControls",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Classic uses the compact one-page layout. Sentinel Modern groups the same settings into pages.",
+        "Translated": "经典使用紧凑的单页布局。护花守墓屋现代版将相同设置分组到多个页面。",
+        "Context": "Plugin.DrawAppearanceControls",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "-profile",
+        "Translated": "-配置",
+        "Context": "Plugin.DrawDistanceProfile",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Initial coordinate stop##",
+        "Translated": "初始坐标停止##",
+        "Context": "Plugin.DrawDistanceProfileValues",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Safe parking clearance##",
+        "Translated": "安全停靠间距##",
+        "Context": "Plugin.DrawDistanceProfileValues",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Emergency clearance##",
+        "Translated": "紧急间距##",
+        "Context": "Plugin.DrawDistanceProfileValues",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Engage only at/below HP %##",
+        "Translated": "仅在 HP 百分比达到/低于时交战##",
+        "Context": "Plugin.DrawDistanceProfileValues",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Classic",
+        "Translated": "经典",
+        "Context": "Plugin..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Sentinel Modern",
+        "Translated": "护花守墓屋现代版",
+        "Context": "Plugin..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
