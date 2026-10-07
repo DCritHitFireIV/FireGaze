@@ -1,1005 +1,753 @@
 {
-  "type": "uit-contribution",
-  "plugin": "AutoTripleTriadGrind",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-07",
+    "source": "user",
+    "label": "玩家包 · 9d9ec5",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "VERB",
       "Translated": "动词",
       "Context": "LogPage..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "INFO",
       "Translated": "信息",
       "Context": "LogPage..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "WARN",
       "Translated": "警告",
       "Context": "LogPage..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "ERR",
       "Translated": "错误",
       "Context": "LogPage..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "HH:mm:ss.fff",
       "Translated": "HH:mm:ss.ffff",
       "Context": "RunLog.Time",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": " of ",
       "Translated": "的",
       "Context": "RunLogReport.AppendScope",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Your bags are nearly full, so the run stops. Free a few slots and start again.",
       "Translated": "[ATTG] 你的包几乎满了，所以跑步停止。腾出几个位置，然后重新开始。",
       "Context": "PlayNpc.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " You need ",
       "Translated": "你需要",
       "Context": "PlayNpc.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " MGP to challenge ",
       "Translated": "挑战 MGP",
       "Context": "PlayNpc.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": ", so the run stops.",
       "Translated": "这样运行就会停止。",
       "Context": "PlayNpc.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] The character keeps moving on its own, so paths are dropped as soon as they start. Turn off the pathfinder's 'cancel path on movement input' setting, and check that no key or auto-run is held.",
       "Translated": "[ATTG] 角色会继续自主移动，因此路径一旦开始就会被丢弃。关闭寻路器的 “在移动输入时取消路径” 设置，并检查是否存在钥匙或自动运行。",
       "Context": "RecoverFromFalseStart.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] None of the picked NPCs can be played right now.",
       "Translated": "[ATTG] 现在没有一个被选中的 NPC 可以玩。",
       "Context": "Farm.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] No goto is running.",
       "Translated": "[ATTG] 没有后藤在运行。",
       "Context": "AutoGoto.HandleCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Goto stopped.",
       "Translated": "[ATTG] 后藤停了下来。",
       "Context": "AutoGoto.HandleCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Usage: /attg goto <territoryId> <x> <y> <z>, or /attg goto stop.",
       "Translated": "[ATTG] 用途:/attg goto <territoryId> <x> <y> <z>或/attg goto stop。",
       "Context": "AutoGoto.HandleCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] A goto is already running. /attg goto stop cancels it.",
       "Translated": "[ATTG] 一个 goto 已经在运行了。/attg goto stop 取消它。",
       "Context": "AutoGoto.HandleCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Stop the run before using goto.",
       "Translated": "[ATTG] 在使用 goto 之前停止运行。",
       "Context": "AutoGoto.HandleCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Goto needs the pathfinding plugin listed on the Plugins page.",
       "Translated": "[ATTG] Goto 需要插件页面上列出的路径发现插件。",
       "Context": "AutoGoto.HandleCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " Goto: heading to ",
       "Translated": "Goto:前往",
       "Context": "AutoGoto.HandleCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Goto: could not reach the spot in ",
       "Translated": "[ATTG] 后藤：无法到达",
       "Context": "Execute.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": ". The log has the details.",
       "Translated": "日志中有详细信息。",
       "Context": "Execute.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Goto: arrived in ",
       "Translated": "[ATTG] 后藤：到达",
       "Context": "Execute.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Run complete. Retiring to the inn in ",
       "Translated": "[ATTG] 运行完成。退休回到旅馆",
       "Context": "Execute.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Paused while you are in content",
       "Translated": "在内容中暂停",
       "Context": "AutoTriadController.get_Status",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Cannot start: install all required plugins first (",
       "Translated": "[ATTG] 无法启动：先安装所有必要的插件 (",
       "Context": "AutoTriadController.RequiredPluginsReady",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Nothing to pause.",
       "Translated": "[ATTG] 没什么可暂停的。",
       "Context": "AutoTriadController.Pause",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Paused. Your run and session stats are kept until you resume or stop.",
       "Translated": "[ATTG] 暂停。您的运行和会话数据将保持，直到您恢复或停止。",
       "Context": "AutoTriadController.Pause",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Paused: you are in instanced content. The run resumes once you are back outside.",
       "Translated": "[ATTG] 暂停：您正处于实例化内容中。一旦您回到外部，运行就会继续。",
       "Context": "AutoTriadController.Pause",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Resuming the run.",
       "Translated": "[ATTG] 恢复运行。",
       "Context": "AutoTriadController.Resume",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] The run stopped on an unexpected error. The log has the details.",
       "Translated": "[ATTG] 运行因意外错误而停止。日志中有详细信息。",
       "Context": "AutoTriadController.OnRunEnded",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " The run stopped on an unexpected error; restarting it (",
       "Translated": "运行因意外错误而停止;重新启动 (",
       "Context": "AutoTriadController.TryAutoResumeAfterFault",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Changelog",
       "Translated": "变更日志",
       "Context": "Shell..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "About",
       "Translated": "关于",
       "Context": "Shell..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "{0} card",
       "Translated": "{0}卡",
       "Context": "Triad..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "{0} cards",
       "Translated": "{0} 卡",
       "Context": "Triad..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "{0} NPCs",
       "Translated": "{0} NPC",
       "Context": "Triad..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Each NPC is played {0} time.",
       "Translated": "每个 NPC 被玩{0}次。",
       "Context": "Triad..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Each NPC is played {0} times.",
       "Translated": "每个 NPC 被玩{0}次。",
       "Context": "Triad..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "last {0} run  ·  oldest to newest",
       "Translated": "最后一次 {0} 运行 · 从最老到最新",
       "Context": "History..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "last {0} runs  ·  oldest to newest",
       "Translated": "最后一次 {0} 运行 · 从最旧到最新",
       "Context": "History..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "{0} line in the buffer",
       "Translated": "{0} 缓冲区中的行",
       "Context": "Log..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "{0} lines in the buffer",
       "Translated": "{0} 缓冲区中的行",
       "Context": "Log..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Copied {0} line to the clipboard",
       "Translated": "将{0}行复制到剪贴板",
       "Context": "Log..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "Copied {0} lines to the clipboard",
       "Translated": "将{0}行复制到剪贴板",
       "Context": "Log..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImDrawListPtr.AddText"
+      "Source": "library"
     },
     {
       "Original": "{0} line selected",
       "Translated": "{0} 选定行",
       "Context": "Log..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "{0} lines selected",
       "Translated": "{0} 选定行",
       "Context": "Log..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Support on Patreon",
       "Translated": "Patreon 支持",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Open Patreon · right-click to copy",
       "Translated": "打开 Patreon ·右键点击以复制",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Buy me a coffee",
       "Translated": "给我买杯咖啡",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Open Buy Me a Coffee · right-click to copy",
       "Translated": "打开 “给我买杯咖啡”·右键点击以复制",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Join the Discord",
       "Translated": "加入不和谐",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Get help, report bugs, share ideas and hear about updates first.",
       "Translated": "获取帮助，报告 bug，分享想法，并先听取更新。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "View on GitHub",
       "Translated": "在 GitHub 上查看",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Browse the source code and every release.",
       "Translated": "浏览源代码和每个版本。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "A little reminder",
       "Translated": "一个小提醒",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Did you know?",
       "Translated": "你知道吗？",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Words to live by",
       "Translated": "活下去的话语",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Just for fun",
       "Translated": "只是为了好玩",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Been at it a while? Roll your shoulders and take one slow breath.",
       "Translated": "做了一会儿了吗？转动肩膀，慢慢地深呼吸。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Hydration check. When did you last drink some water?",
       "Translated": "水分检查。你最后一次喝水是什么时候？",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Blink a few times and let your eyes rest for a moment.",
       "Translated": "眨几下眼睛，让眼睛休息一会儿。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Stand up, stretch, and shake out your hands. Future you says thanks.",
       "Translated": "站起来，伸个懒腰，然后挥挥手。未来，你要说声谢谢。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Sit up and settle in comfortably. Your back will thank you later.",
       "Translated": "坐起来，舒服点。你的背待会儿会感谢你的。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Remember to eat something today. You matter more than any score.",
       "Translated": "记得今天吃点东西。你比任何分数都重要。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Eyes feel tired? Look at something far away for twenty seconds.",
       "Translated": "眼睛累了吗？看着远处的某个东西二十秒。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Whatever you're chasing, you're allowed to take a break whenever.",
       "Translated": "无论你在追求什么，你都可以随时休息。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "You're doing great. Be a little kinder to yourself today.",
       "Translated": "你做得很好。今天对自己好一点。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "A glass of water and a quick stretch can reset a long session.",
       "Translated": "一杯水和一个快速的伸展可以重置一个长时间的会话。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Unclench your jaw and drop your shoulders. There you go.",
       "Translated": "松开下巴，放松肩膀。就是这样。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Rest is part of the journey too. Step away whenever you need to.",
       "Translated": "休息也是旅程的一部分。需要的时候随时可以离开。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Honey never spoils. Jars over 3,000 years old have been found still edible.",
       "Translated": "蜂蜜永远不会腐烂。已经发现了超过 3000 年历史的罐子仍然可以食用。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Octopuses have three hearts and blue blood.",
       "Translated": "章鱼有三颗心脏和蓝色的血液。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "A day on Venus is longer than a whole year on Venus.",
       "Translated": "金星上的一天比金星上的一整年还要长。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Bananas are berries, but strawberries aren't.",
       "Translated": "香蕉是浆果，但草莓不是。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "There are more possible chess games than atoms in the observable universe.",
       "Translated": "在可观测宇宙中，可能的棋局比原子还要多。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Sharks have been around longer than trees have.",
       "Translated": "鲨鱼存在的时间比树木还要长。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "A group of flamingos is called a flamboyance.",
       "Translated": "一群火烈鸟被称为火焰鸟。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Honeybees can recognize individual human faces.",
       "Translated": "蜜蜂能够识别单个人脸。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Wombat droppings are cube shaped.",
       "Translated": "袋熊粪便呈立方体形状。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "The Eiffel Tower can grow over 15 cm taller on a hot day.",
       "Translated": "在炎热的天气里，艾菲尔铁塔可以长高超过 15 厘米。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Hot water can sometimes freeze faster than cold water.",
       "Translated": "热水有时比冷水结冰更快。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "A bolt of lightning is roughly five times hotter than the surface of the Sun.",
       "Translated": "闪电的温度大约是太阳表面温度的五倍。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Done is better than perfect. You can always polish later.",
       "Translated": "完成比完美更重要。你可以以后再润色。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Small steps every day add up to surprising distances.",
       "Translated": "每天小小的步伐累积起来，会形成惊人的距离。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Comparison is the thief of joy. Run your own race.",
       "Translated": "比较是偷走快乐的小偷。自己去赛跑吧。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Progress, not perfection.",
       "Translated": "进步，而非完美。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "You don't have to be great to start, but you have to start to be great.",
       "Translated": "你不必一开始就很出色，但你必须开始变得出色。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Be patient with yourself. Growth takes time.",
       "Translated": "对自己要有耐心。成长需要时间。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "The best time to begin was yesterday. The second best is right now.",
       "Translated": "最好的开始时机是昨天。第二好的是现在。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Celebrate the small wins. They count too.",
       "Translated": "庆祝那些小小的胜利吧。它们也很重要。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Slow progress is still progress.",
       "Translated": "缓慢的进步仍然是进步。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Your only real competition is who you were yesterday.",
       "Translated": "你唯一真正的竞争对手是昨天的你。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Why don't scientists trust atoms? Because they make up everything.",
       "Translated": "为什么科学家不相信原子？因为它们构成了一切。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "I would tell you a chemistry joke, but I know I wouldn't get a reaction.",
       "Translated": "我想给你讲个化学笑话，但我知道你不会有什么反应。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Why did the scarecrow win an award? He was outstanding in his field.",
       "Translated": "稻草人为什么会获奖？他在自己的领域很出色。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "I'm reading a book about anti-gravity. It's impossible to put down.",
       "Translated": "我正在读一本关于反重力的书。简直无法放下。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Why don't skeletons fight each other? They don't have the guts.",
       "Translated": "为什么骷髅不互相残杀？他们没有那个胆量。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "What do you call fake spaghetti? An impasta.",
       "Translated": "你说假意大利面是什么？面团。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Why did the bicycle fall over? It was two tired.",
       "Translated": "为什么自行车倒下了？两个人累了。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "What do you call cheese that isn't yours? Nacho cheese.",
       "Translated": "你管不属于自己的奶酪叫什么？纳乔奶酪。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "I'm on a seafood diet. I see food, and I eat it.",
       "Translated": "我正在进行海鲜饮食。我看到食物就吃。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "I only know 25 letters of the alphabet. I don't know y.",
       "Translated": "我只认识 25 个字母。我不认识你。",
       "Context": "About..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "General",
       "Translated": "一般",
       "Context": "Settings..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "Window and behavior preferences.",
       "Translated": "窗口与行为偏好。",
       "Context": "Settings..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Which deck each match is played with.",
       "Translated": "每场比赛使用哪副牌进行？",
       "Context": "Deck..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Build the strongest deck against each NPC from your collection.",
       "Translated": "为收藏中的每个 NPC 制作最强的牌组。",
       "Context": "Deck..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Always play one of your saved decks.",
       "Translated": "始终玩你保存的一副牌。",
       "Context": "Deck..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Play",
       "Translated": "玩游戏",
       "Context": "Play..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "How long to stay with an NPC and when to move on.",
       "Translated": "和 NPC 在一起待多久，什么时候离开。",
       "Context": "Play..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Party invites",
       "Translated": "派对邀请",
       "Context": "Safety..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "Auto-decline incoming party invites during a run, after a human-like delay, with an optional reply.",
       "Translated": "自动拒绝来访方在跑步过程中发出的邀请，经过类似人类的延迟后，可以选择性回复。",
       "Context": "Safety..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "GM alert",
       "Translated": "GM 警报",
       "Context": "Safety..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "Detects nearby Game Masters and reacts: stop the bot, ping you, or take more drastic action.",
       "Translated": "检测到附近的游戏大师并做出反应：停止机器人，给你发信号，或采取更激烈的行动。",
       "Context": "Safety..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Whisper the person who invited you.",
       "Translated": "悄悄告诉那个邀请你的人。",
       "Context": "Safety..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Local /say, heard by players near you.",
       "Translated": "当地/说，附近玩家能听到。",
       "Context": "Safety..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Zone-wide /yell.",
       "Translated": "区域范围内的/喊叫。",
       "Context": "Safety..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": " is nearby!",
       "Translated": "就在附近！",
       "Context": "FireAlerts",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] No Triple Triad board is open.",
       "Translated": "[ATTG] 没有开放三合一面板。",
       "Context": "TriadBoardDumper.DumpBoard",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] No Triple Triad challenge window is open, or its layout was not recognised.",
       "Translated": "[ATTG] 没有打开三重挑战窗口，或者其布局未被识别。",
       "Context": "TriadBoardDumper.DumpRequest",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " Regional rules: ",
       "Translated": "区域规则：",
       "Context": "TriadBoardDumper.DumpRequest",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[ATTG] Triple Triad data is not loaded: ",
       "Translated": "[ATTG] 三联体数据未加载：",
       "Context": "TriadNpcDumper.Dump",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " Wrote ",
       "Translated": "写入",
       "Context": "TriadNpcDumper.Dump",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " Triple Triad NPCs to the plugin log; you own ",
       "Translated": "插件日志中的三重三角 NPC;你拥有",
       "Context": "TriadNpcDumper.Dump",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-07T03:33:05",
-  "imported": {
-    "archive": "uit-direct-2026-10-07T03-32-44-639Z-f485fa95-2026-10-07T033305.json",
-    "accepted": 123,
-    "filled": 123,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 123 条 `AutoTripleTriadGrind` 的界面文字译文，已收为**独立译文包** `uit-packs/AutoTripleTriadGrind@user-9d9ec5.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 123 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
