@@ -1,0 +1,1350 @@
+{
+  "issue": "direct-2026-10-07T09-42-48-226Z-9c8a885f",
+  "receivedAt": "2026-10-07 09:43:06",
+  "author": "匿名直传",
+  "plugin": "EngageTimer",
+  "fingerprint": "889deb4ed62e3937",
+  "packFile": "EngageTimer@user-889deb.json",
+  "accepted": 185,
+  "filled": 185,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "EngageTimer",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "!!property is null!!",
+        "Translated": "!！属性为 null!!",
+        "Context": "Components.AutoField",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "!!cannot find attribute on ",
+        "Translated": "!！无法在",
+        "Context": "Components.AutoField",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "!!no string!!",
+        "Translated": "!！没有字符串！!",
+        "Context": "Components.AutoField",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "!!cannot find ColorPicker attribute!!",
+        "Translated": "!!！找不到 ColorPicker 属性！!",
+        "Context": "Components.ShowField",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "!!unknown field type ",
+        "Translated": "!！未知字段类型",
+        "Context": "Components.ShowField",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "left",
+        "Translated": "左",
+        "Context": "Components.LeftRight",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "right",
+        "Translated": "右",
+        "Context": "Components.LeftRight",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "EngageTimer Countdown",
+        "Translated": "EngageTimer 倒计时",
+        "Context": "CountDown.FirstDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "EngageTimer stopwatch (",
+        "Translated": "EngageTimer 秒表 (",
+        "Context": "DtrBarUi.GetEntry",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IDtrBar.Get"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "Settings..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Sound effect finder",
+        "Translated": "声音效果查找器",
+        "Context": "SfxDebug..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Play",
+        "Translated": "播放",
+        "Context": "SfxDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Hi there! I'm Xorus.",
+        "Translated": "你好！我是 Xorus。",
+        "Context": "AboutTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "If you have any suggestions or bugs to report, the best way is to leave it in theissues section of my GitHub repository.",
+        "Translated": "如果你有任何建议或 bug 需要报告，最好的方法是将它们留在我的 GitHub 仓库的主题部分。",
+        "Context": "AboutTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "If you don't want to/can't use GitHub, just use the feedback button in the pluginlist. I don't get notifications for those, but I try to keep up with them as much as I can.",
+        "Translated": "如果你不想/不能使用 GitHub，只需使用插件列表中的反馈按钮即可。我不会收到这些通知，但我会尽可能地跟进它们。",
+        "Context": "AboutTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Please note that if you leave a discord username as contact info, I may not be able to DM you back if you are not on the Dalamud Discord server because of discord privacy settings.I might try to DM you / add you as a friend in those cases.",
+        "Translated": "请注意，如果您留下了一个不和谐的用户名作为联系信息，但由于不和谐隐私设置，您可能没有登录 Daramud Discord 服务器，我可能无法为您提供支持。在这种情况下，我可能会尝试为您提供支持/将您添加为好友。",
+        "Context": "AboutTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Not a big red ko-fi button",
+        "Translated": "不要使用大的红色 ko-fi 按钮",
+        "Context": "AboutTab.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "delete",
+        "Translated": "删除",
+        "Context": "AlarmsTab.AlarmElement",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Type",
+        "Translated": "类型",
+        "Context": "AlarmsTab.AlarmElement",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Display",
+        "Translated": "显示",
+        "Context": "CountdownTab.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "Ambiguous",
+        "RoleReason": "既进 UI（ImGui.Text）又进功能语境（Type.GetProperty）"
+      },
+      {
+        "Original": "lum",
+        "Translated": "Lum",
+        "Context": "CountdownTab.CountdownNumberColor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "hue",
+        "Translated": "色调",
+        "Context": "CountdownTab.CountdownNumberColor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Scale",
+        "Translated": "规模",
+        "Context": "FloatingWindowTab.FwStyling",
+        "Source": "ai:public-caiyun",
+        "Role": "Ambiguous",
+        "RoleReason": "既进 UI（ImGui.Text）又进功能语境（Type.GetProperty）"
+      }
+    ],
+    "resources": [
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_IgnoreOriginalCountDown",
+        "Original": "Draw even if original countdown is visible",
+        "Translated": "即使原始倒计时可见，也要绘制",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_MultiMonitorWarning",
+        "Original": "When using the multi monitor windows option, positioning the countdown outside of the game (even a little bit) will create a background. As rendering transparent windows is impossible outside of the game, this cannot be fixed for now. Please use the border as a guide.",
+        "Translated": "当使用多显示器窗口选项时，将倒计时设置在游戏外 (即使只是一点点) 也会创建一个背景。由于在游戏外不可能渲染透明窗口，因此目前无法修复这个问题。请使用边框作为参考。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text_Test",
+        "Original": "Test",
+        "Translated": "测试",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text_Text",
+        "Original": "Text",
+        "Translated": "文本",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text_Type",
+        "Original": "Type",
+        "Translated": "类型",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_AccurateCountdown",
+        "Original": "Enable accurate countdown in floating window",
+        "Translated": "在浮动窗口中启用精确倒计时",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Texture",
+        "Original": "Number style",
+        "Translated": "数字样式",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Web_HelpSize",
+        "Original": "Recommended window size is 300x100.",
+        "Translated": "建议窗口大小为 300x100。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Modal_Cancel",
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_PrePullOffset_Help",
+        "Original": "Leave at 0 unless you have very consistent lag or some specific reason.",
+        "Translated": "除非有非常一致的滞后或某些特定原因，否则保持零状态。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_Prefix",
+        "Original": "Prefix",
+        "Translated": "前缀",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Export_Tooltip",
+        "Original": "Exports the active alarms to a file",
+        "Translated": "将活跃警报导出到文件",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Test_Start",
+        "Original": "Enable test mode",
+        "Translated": "启用测试模式",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_CountdownDisplayThreshold_Help",
+        "Original": "This setting determines at what point during the countdown the timer will become visible. For example, if the value is set to 7, the countdown timer will not be shown until 7 seconds have passed, and will then be displayed until the end of the countdown.",
+        "Translated": "这个设置决定了倒计时期间计时器变得可见的时间点。例如，如果值设置为 7，倒计时计时器将在经过 7 秒后才显示，然后将显示到倒计时结束。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_Styling",
+        "Original": "Styling",
+        "Translated": "样式化",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_Display",
+        "Original": "Enable floating window",
+        "Translated": "启用浮动窗口",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Active_Tooltip",
+        "Original": "Enables / disables this alarm",
+        "Translated": "启用/禁用此警报",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_AboutTab_Title",
+        "Original": "About",
+        "Translated": "关于",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Animate",
+        "Original": "Enable animation",
+        "Translated": "启用动画",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberHue",
+        "Original": "hue",
+        "Translated": "色调",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_Title",
+        "Original": "Floating window",
+        "Translated": "浮动窗口",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_BackgroundColor",
+        "Original": "Background color and opacity",
+        "Translated": "背景颜色和不透明度",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Export",
+        "Original": "Export",
+        "Translated": "导出",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_StopwatchPrecision_Left",
+        "Original": "Display combat timer",
+        "Translated": "显示战斗计时器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_StopwatchPrecision_Help",
+        "Original": "Shows the current combat duration",
+        "Translated": "显示当前战斗持续时间",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_DecimalPrecision",
+        "Original": "Milliseconds to show",
+        "Translated": "要展示的毫秒",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Type_ChatLog",
+        "Original": "Chat log",
+        "Translated": "聊天记录",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_AnimateOpacity",
+        "Original": "Light effect",
+        "Translated": "光效",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Active",
+        "Original": "Active",
+        "Translated": "活动",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_Enable",
+        "Original": "Enable Server Info Bar integration",
+        "Translated": "启用服务器信息栏集成",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text",
+        "Original": "Text",
+        "Translated": "文本",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Texture_default",
+        "Original": "FFXIV",
+        "Translated": "最终幻想 14",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_AccurateMode",
+        "Original": "Enable accurate countdown mode (countdown - 1)",
+        "Translated": "启用精确倒计时模式 (倒计时-1)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberSaturation",
+        "Original": "saturation",
+        "Translated": "饱和度",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_StartTime",
+        "Original": "Start time",
+        "Translated": "开始时间",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Import",
+        "Original": "Import",
+        "Translated": "导入",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_TickFrom_Help",
+        "Original": "This setting will make it so the sound plays from numbers 5 to the selected value. Note: this plugin cannot remove the tick sound for numbers 1-5.",
+        "Translated": "此设置将使声音从数字 5 播放到所选值。注意：此插件不能移除数字 1-5 的滴答声。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "CombatAlarm_ReadGeneric",
+        "Original": "An error occured while trying to read the alarms in {0}: {1}.",
+        "Translated": "尝试读取{0}中的警报时出现了错误:{1}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberStyleTitle",
+        "Original": "Color",
+        "Translated": "颜色",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "CombatAlarm_ImportedEmpty",
+        "Original": "An empty or invalid alarm list was imported",
+        "Translated": "导入了空白或无效的警报列表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Audio_LegacyVolume",
+        "Original": "Sound volume",
+        "Translated": "声音音量",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_HideAfter",
+        "Original": "Hide",
+        "Translated": "隐藏",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberStyle_CustomNegativeMargin",
+        "Original": "pixels",
+        "Translated": "像素",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text_Clear",
+        "Original": "Clear",
+        "Translated": "清除",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_AutoHide_Right",
+        "Original": "seconds after combat end",
+        "Translated": "战斗结束后几秒钟",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Monospaced",
+        "Original": "Fixed width",
+        "Translated": "固定宽度",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_CountdownScale",
+        "Original": "Scale",
+        "Translated": "规模",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_DefaultOriginalCountDown",
+        "Original": "Don't overlap with game countdown (default)",
+        "Translated": "不要与游戏倒计时重叠 (默认)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_CountdownAlign",
+        "Original": "Alignment",
+        "Translated": "对齐",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Web_Title",
+        "Original": "Web Server (OBS)",
+        "Translated": "Web 服务器 (OBS)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Web_Hide_Right",
+        "Original": "seconds after combat ends",
+        "Translated": "战斗结束后几秒钟",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_Lock_Help",
+        "Original": "Disables clicking and moving the window.",
+        "Translated": "禁用点击和移动窗口。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_IgnoreOriginalCountDown_Help",
+        "Original": "Allows you to have the vanilla countdown showing on your game but still use the custom one in a corner or overlaping if you like chaos. Useful if you setup your OBS to not capture addons and want to look unmodified.",
+        "Translated": "允许你在游戏中显示香草倒计时，但如果你喜欢混乱，仍然可以在角落或重叠处使用自定义倒计时。如果你设置了 OBS 以避免捕获附加元素，并希望看起来未经修改，这将非常有用。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Test_Stop",
+        "Original": "Disable test mode",
+        "Translated": "禁用测试模式",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_Lock",
+        "Original": "Lock floating window",
+        "Translated": "锁定浮动窗口",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_Help",
+        "Original": "The floating window is a movable window that can display the countdown and the current combat duration.",
+        "Translated": "浮动窗口是一个可移动的窗口，可以显示倒计时和当前战斗持续时间。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Add",
+        "Original": "Create new",
+        "Translated": "创建新的",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberStyle_Advanced",
+        "Original": "More options",
+        "Translated": "更多选项",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Sound_Tooltip",
+        "Original": "Plays a game sound effect at the alarm time",
+        "Translated": "在闹钟时间播放游戏音效",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Audio_Enable",
+        "Original": "Play a ticking sound for all numbers",
+        "Translated": "为所有数字播放滴答声",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Help_Dtr",
+        "Original": "enable or disable the server info bar (toggles by default)",
+        "Translated": "启用或禁用服务器信息栏 (默认开关)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Title",
+        "Original": "EngageTimer settings",
+        "Translated": "EngageTimer 设置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Info1",
+        "Original": "The \"big countdown\" feature adds the missing numbers to the in-game timer !",
+        "Translated": "“大倒计时” 功能会将缺失的数字添加到游戏内定时器中！",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Title",
+        "Original": "Big countdown",
+        "Translated": "大倒计时",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Sound_None",
+        "Original": "None",
+        "Translated": "无",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Close",
+        "Original": "Close",
+        "Translated": "关闭",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Audio_LegacyAudio",
+        "Original": "Use legacy audio (breaks linux)",
+        "Translated": "使用旧音频 (Linux 中断)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Texture_custom",
+        "Original": "Custom",
+        "Translated": "自定义",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_CountdownPrecision_Left",
+        "Original": "Display countdown",
+        "Translated": "显示倒计时",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_CountdownPrecision_Help",
+        "Original": "Shows the current countdown value (e.g. -13)",
+        "Translated": "显示当前倒计时值 (例如-13)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberStyle_LeadingZero",
+        "Original": "Add a leading 0",
+        "Translated": "添加前导 0",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Duration_Tooltip",
+        "Original": "Stops the color/blink after this amount of time",
+        "Translated": "在此时间段后停止颜色/闪烁",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "CombatAlarm_SaveGeneric",
+        "Original": "An error occured while trying to save the alarms to {0}: {1}.",
+        "Translated": "在尝试将警报保存到{0}时发生了错误:{1}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_TextAlign_Left",
+        "Original": "Left",
+        "Translated": "左",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_ShowPrePulling_Help",
+        "Original": "Changes the countdown color when casting a spell that would result in a pre-pull.",
+        "Translated": "当施展会导致预拉的咒语时，更改倒计时颜色。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_HideAfterRight",
+        "Original": "seconds after combat end",
+        "Translated": "战斗结束后几秒钟",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_DisplayStopwatchOnlyInDuty",
+        "Original": "Hide combat time when not bound by duty",
+        "Translated": "在不受职责约束时隐藏战斗时间",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Help_Countdown_Success",
+        "Original": "Countdown is now {0}",
+        "Translated": "倒计时现在是{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Duration",
+        "Original": "Duration",
+        "Translated": "时长",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Help_Settings",
+        "Original": "open the settings menu",
+        "Translated": "打开设置菜单",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Blink_Tooltip",
+        "Original": "Makes the floating window stopwatch blink during the alarm",
+        "Translated": "使浮动窗口秒表在闹钟期间闪烁",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_DisplayStopwatchOnlyInDuty_Help",
+        "Original": "Basically hides the stopwatch when you are in the overworld",
+        "Translated": "基本上是在地球上隐藏秒表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_PositionWarning",
+        "Original": "Warning : when not hiding the original countdown, changing values in this section might create incoherent results",
+        "Translated": "警告：如果不隐藏原始倒计时，更改本节中的值可能会导致不一致的结果。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_CountdownDecimals_Left",
+        "Original": "Display",
+        "Translated": "显示",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Enable",
+        "Original": "Enable big countdown",
+        "Translated": "启用大型倒计时",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Type_GameToast",
+        "Original": "Game toast",
+        "Translated": "吐司游戏",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_OffsetText",
+        "Original": "Countdown offset",
+        "Translated": "倒计时偏移",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_HideOriginalCountDown",
+        "Original": "Hide original countdown",
+        "Translated": "隐藏原始倒计时",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_CountdownPrecision_Right",
+        "Original": "decimals",
+        "Translated": "十进制",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Help_Dtr_Success",
+        "Original": "Server info bar is now {0}",
+        "Translated": "服务器信息栏现在为{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text_Tooltip",
+        "Original": "Allows you to display a text notification at the alarm time",
+        "Translated": "允许您在闹钟时间显示文本通知",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_FontSize",
+        "Original": "Font size",
+        "Translated": "字体大小",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_AlarmsTab_Title",
+        "Original": "Alarms",
+        "Translated": "闹钟",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_AlarmsTab_Line1",
+        "Original": "This page allows you to set alarms based on elapsed combat time.",
+        "Translated": "这个页面允许您根据已经过去的战斗时间设置闹钟。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_AlarmsTab_Line2",
+        "Original": "A common use is to notify you of the potion window.",
+        "Translated": "一个常见的用途是通知你药剂窗口的存在。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_StartTime_Tooltip",
+        "Original": "The alarm will start at this specified combat time",
+        "Translated": "警报将在这个指定的战斗时间开始。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Status_On",
+        "Original": "enabled",
+        "Translated": "已启用",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "CombatAlarm_IncorrectFormat",
+        "Original": "The alarms file format is incompatible or incorrect",
+        "Translated": "警报文件格式不兼容或不正确",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_HideWhileOccupiedInCombat_Help",
+        "Original": "Hides the floating window during transition cutscenes that occur mid-combat (\"Occupied38\" flag)",
+        "Translated": "在战斗中发生的过渡切换场景中隐藏浮动窗口 (“占领 38” 标志)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_TextColor",
+        "Original": "Text color",
+        "Translated": "文本颜色",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_CountdownPrecision_With_Left",
+        "Original": "Display countdown with",
+        "Translated": "显示倒计时",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "CombatAlarm_AccessDenied",
+        "Original": "Could not save the file in this directory (access denied). Please try again with another directory.",
+        "Translated": "无法将文件保存在这个目录中 (访问被拒绝)。请在其他目录中再试一次。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_TextAlign",
+        "Original": "Text align",
+        "Translated": "文本对齐",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_CountdownNegativeSign",
+        "Original": "Display the \"-\" sign",
+        "Translated": "显示 “-” 符号",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_HideInCutscenes",
+        "Original": "Hide in cutscenes",
+        "Translated": "躲在过场动画中",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_AccurateCountdown_Help",
+        "Original": "See the Big countdown tab for an explanation",
+        "Translated": "请参阅 “大倒计时” 标签以获取解释。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Export_File",
+        "Original": "Select file to export",
+        "Translated": "选择要导出的文件",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Sound",
+        "Original": "Sound",
+        "Translated": "声音",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Blink",
+        "Original": "Blink",
+        "Translated": "眨眼",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Color",
+        "Original": "Color",
+        "Translated": "颜色",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Clear",
+        "Original": "Clear all",
+        "Translated": "清除所有",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Color_Tooltip",
+        "Original": "Applies the color to the floating window stopwatch during the alarm",
+        "Translated": "在闹钟期间将颜色应用于浮动窗口秒表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Import_File",
+        "Original": "Select file to import",
+        "Translated": "选择要导入的文件",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberStyle_EnableCustomNegativeMargin",
+        "Original": "Enable custom negative margin",
+        "Translated": "启用自定义负边距",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text_NoText",
+        "Original": "No text",
+        "Translated": "无文本",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_CountdownDecimals_Right",
+        "Original": "decimals in countdown",
+        "Translated": "倒计时中的小数",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Error_InvalidSubcommand",
+        "Original": "Unrecognized subcommand: {0}",
+        "Translated": "无法识别的子命令:{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Texture_yellow",
+        "Original": "Readable",
+        "Translated": "可读",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Help_Countdown",
+        "Original": "enable or disable the big countdown (toggles by default)",
+        "Translated": "启用或禁用大倒计时 (默认切换)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberRecolor",
+        "Original": "Recolor instead of shifting hue",
+        "Translated": "重新着色而不是改变色调",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Audio_UseAlternativeSound",
+        "Original": "Use duty pop timer sound",
+        "Translated": "使用任务定时器声音",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_AccurateMode_Help",
+        "Original": "Uses the actual and precise countdown value instead of the rounded-up value the game originally shows.\nI strongly recommend enabling this option when using decimals as they would not make sense otherwise.\nHowever, I recommend disabling this if you don't use decimals so that the numbers will match what is displayed for your party members.\n        \nNote: this setting only works when the original countdown is hidden (otherwise it would display 6 - 5 - 5 - 4...)",
+        "Translated": "使用实际和精确的倒计时值，而不是游戏最初显示的舍入值。\n我强烈建议在使用小数时启用此选项，否则它们将毫无意义。\n然而，建议在不使用小数的情况下禁用此功能，以确保数字与显示给您的党员的内容相匹配。\n\n注意：此设置仅在原始倒计时被隐藏时有效 (否则它会显示 6-5-5-4...)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Text_Type_Colon",
+        "Original": "Type:",
+        "Translated": "类型：",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Status_Off",
+        "Original": "disabled",
+        "Translated": "禁用",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_PrePullOffset",
+        "Original": "Offset in seconds",
+        "Translated": "以秒为单位的偏移",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Web_Hide_Left",
+        "Original": "Hide overlay",
+        "Translated": "隐藏覆盖",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Web_Help",
+        "Original": "This feature allows you to add a countdown and stopwatch overlay into your OBS (or other software) streams and recordings via a browser source.",
+        "Translated": "此功能允许您通过浏览器源为 OBS(或其他软件) 流和记录添加倒计时和秒表覆盖。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Error_InvalidArgument",
+        "Original": "Unrecognized argument for {0}: {1}",
+        "Translated": "{0}的未识别参数:{1}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_HideWhileOccupiedInCombat",
+        "Original": "Hide in combat cutscenes",
+        "Translated": "躲在战斗场景中",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_AlwaysDisableOutsideDuty",
+        "Original": "Always hide when not bound by duty",
+        "Translated": "不受职责约束时总是躲藏",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_PositioningTitle",
+        "Original": "Position and size",
+        "Translated": "位置和尺寸",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Clear_Confirm",
+        "Original": "Do you really want to remove all the alarms?",
+        "Translated": "你真的想移除所有闹钟吗？",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_NumberLuminance",
+        "Original": "brightness",
+        "Translated": "亮度",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_AnimateScale",
+        "Original": "Scaling effect",
+        "Translated": "缩放效应",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Texture_wow",
+        "Original": "WoW",
+        "Translated": "魔兽世界",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Web_HelpAdd",
+        "Original": "To add it to your scene, enable the webserver then create a browser source in your scene and add the following URL : ",
+        "Translated": "要将其添加到场景中，请启用网络服务器，然后在场景中创建浏览器源并添加以下 URL:",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_TextAlign_Center",
+        "Original": "Center",
+        "Translated": "中心",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_CountdownWindowCentered",
+        "Original": "Center countdown window",
+        "Translated": "中心倒计时窗口",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_StopwatchAsSeconds",
+        "Original": "Display combat time in seconds instead of time format",
+        "Translated": "以秒为单位显示战斗时间，而不是时间格式",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_Web_EnablePort",
+        "Original": "Enable webserver on port",
+        "Translated": "在端口上启用 Web 服务器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_FloatingWindowScale",
+        "Original": "Scale",
+        "Translated": "规模",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_AutoHide_Left",
+        "Original": "Hide",
+        "Translated": "隐藏",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Help_FW_Success",
+        "Original": "Floating window is now {0}",
+        "Translated": "浮动窗口现在为{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Texture_Custom_Load",
+        "Original": "Load",
+        "Translated": "加载",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Texture_Custom_Path",
+        "Original": "Texture Folder",
+        "Translated": "纹理文件夹",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_ShowPrePulling",
+        "Original": "Enable pre-pull warning",
+        "Translated": "启用拉取前警告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_Audio_LegacyAudio_Help",
+        "Original": "Will be removed, please contact me if you use it. Crashes on non-Windows systems.",
+        "Translated": "将被删除，如果您使用它，请联系我。非 Windows 系统崩溃。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_CountdownDisplayThreshold",
+        "Original": "Display threshold",
+        "Translated": "显示阈值",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_DefaultOriginalCountDown_Help",
+        "Original": "Hides the custom countdown under 5 to prevent overlapping with the vanilla one.",
+        "Translated": "将自定义倒计时隐藏在 5 以下，以防止与香草味倒计时重叠。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_Defaults",
+        "Original": "Reset to default",
+        "Translated": "重置为默认",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "AlarmEdit_Type_DalamudNotification",
+        "Original": "Dalamud Notification",
+        "Translated": "Damud 通知",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrTab_Info",
+        "Original": "This option will display the current combat time in the Server Info Bar (right next to the world & time). Please note that you can reorder all integrations in Dalamud Settings.",
+        "Translated": "此选项将在服务器信息栏 (紧挨着世界和时间) 中显示当前战斗时间。请注意，您可以在 Dalamud 设置中重新排列所有集成。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "MainCommand_Help_FW",
+        "Original": "enable or disable the floating window (toggles by default)",
+        "Translated": "启用或禁用浮动窗口 (默认切换)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_StopwatchPrecision_Right",
+        "Original": "decimals",
+        "Translated": "十进制",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_StopwatchPrecision_With_Left",
+        "Original": "Display combat timer with",
+        "Translated": "显示战斗计时器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_TickFrom",
+        "Original": "Start playing from",
+        "Translated": "从以下位置开始播放",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_CountdownTab_HideOriginalCountDown_Help",
+        "Original": "Also replace numbers before 5",
+        "Translated": "还要替换 5 之前的数字",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_TextAlign_Right",
+        "Original": "Right",
+        "Translated": "正确",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_FWTab_ForceHideWindowBorder",
+        "Original": "Hide window border",
+        "Translated": "隐藏窗口边框",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrTab_Title",
+        "Original": "Server Info Bar",
+        "Translated": "服务器信息栏",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Modal_Confirm",
+        "Original": "Confirm",
+        "Translated": "确认",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "EngageTimer.Properties.Strings.resources",
+        "Key": "Settings_DtrCombatTimer_Suffix",
+        "Original": "Suffix",
+        "Translated": "后缀",
+        "Source": "ai:public-caiyun"
+      }
+    ],
+    "attributes": []
+  }
+}

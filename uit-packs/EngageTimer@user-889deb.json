@@ -1,200 +1,151 @@
 {
-  "type": "uit-contribution",
-  "plugin": "EngageTimer",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-07",
+    "source": "user",
+    "label": "玩家包 · 889deb",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "!!property is null!!",
       "Translated": "!！属性为 null!!",
       "Context": "Components.AutoField",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "!!cannot find attribute on ",
       "Translated": "!！无法在",
       "Context": "Components.AutoField",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "!!no string!!",
       "Translated": "!！没有字符串！!",
       "Context": "Components.AutoField",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "!!cannot find ColorPicker attribute!!",
       "Translated": "!!！找不到 ColorPicker 属性！!",
       "Context": "Components.ShowField",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "!!unknown field type ",
       "Translated": "!！未知字段类型",
       "Context": "Components.ShowField",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "left",
       "Translated": "左",
       "Context": "Components.LeftRight",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "right",
       "Translated": "右",
       "Context": "Components.LeftRight",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "EngageTimer Countdown",
       "Translated": "EngageTimer 倒计时",
       "Context": "CountDown.FirstDraw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Begin"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "EngageTimer stopwatch (",
       "Translated": "EngageTimer 秒表 (",
       "Context": "DtrBarUi.GetEntry",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IDtrBar.Get"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Settings",
       "Translated": "设置",
       "Context": "Settings..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sound effect finder",
       "Translated": "声音效果查找器",
       "Context": "SfxDebug..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Play",
       "Translated": "播放",
       "Context": "SfxDebug.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hi there! I'm Xorus.",
       "Translated": "你好！我是 Xorus。",
       "Context": "AboutTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "If you have any suggestions or bugs to report, the best way is to leave it in theissues section of my GitHub repository.",
       "Translated": "如果你有任何建议或 bug 需要报告，最好的方法是将它们留在我的 GitHub 仓库的主题部分。",
       "Context": "AboutTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "If you don't want to/can't use GitHub, just use the feedback button in the pluginlist. I don't get notifications for those, but I try to keep up with them as much as I can.",
       "Translated": "如果你不想/不能使用 GitHub，只需使用插件列表中的反馈按钮即可。我不会收到这些通知，但我会尽可能地跟进它们。",
       "Context": "AboutTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Please note that if you leave a discord username as contact info, I may not be able to DM you back if you are not on the Dalamud Discord server because of discord privacy settings.I might try to DM you / add you as a friend in those cases.",
       "Translated": "请注意，如果您留下了一个不和谐的用户名作为联系信息，但由于不和谐隐私设置，您可能没有登录 Daramud Discord 服务器，我可能无法为您提供支持。在这种情况下，我可能会尝试为您提供支持/将您添加为好友。",
       "Context": "AboutTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Not a big red ko-fi button",
       "Translated": "不要使用大的红色 ko-fi 按钮",
       "Context": "AboutTab.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "delete",
       "Translated": "删除",
       "Context": "AlarmsTab.AlarmElement",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Type",
       "Translated": "类型",
       "Context": "AlarmsTab.AlarmElement",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Display",
       "Translated": "显示",
       "Context": "CountdownTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "Ambiguous",
-      "RoleReason": "既进 UI（ImGui.Text）又进功能语境（Type.GetProperty）"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "lum",
       "Translated": "Lum",
       "Context": "CountdownTab.CountdownNumberColor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "hue",
       "Translated": "色调",
       "Context": "CountdownTab.CountdownNumberColor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Scale",
       "Translated": "规模",
       "Context": "FloatingWindowTab.FwStyling",
-      "Source": "ai:public-caiyun",
-      "Role": "Ambiguous",
-      "RoleReason": "既进 UI（ImGui.Text）又进功能语境（Type.GetProperty）"
+      "Source": "ai:public-caiyun"
     }
   ],
   "resources": [
@@ -1333,15 +1284,5 @@
       "Source": "ai:public-caiyun"
     }
   ],
-  "attributes": [],
-  "importedAt": "2026-10-07T09:43:06",
-  "imported": {
-    "archive": "uit-direct-2026-10-07T09-42-48-226Z-9c8a885f-2026-10-07T094306.json",
-    "accepted": 185,
-    "filled": 185,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 185 条 `EngageTimer` 的界面文字译文，已收为**独立译文包** `uit-packs/EngageTimer@user-889deb.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 185 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
