@@ -3,7 +3,7 @@
 """inbox_uit.py — 收 GitHub issue 里的「插件界面文字」译文投稿（由 .github/workflows/inbox.yml 调用）。
 
 流程与简介词表同源：编辑器 →「提交人工译文到公共库…」→ 打开填好的新建 issue 页 → 玩家按 Submit
-→ 本脚本把投稿并进 `uit-packs/<内部名>.json`（Source=user）+ 留档 + 回话。
+→ 本脚本把每次投稿收成独立玩家包 `uit-packs/<内部名>@user-<指纹>.json`（2026-10-04 多包模型）+ 留档 + 回话。
 
 payload（只有 type==uit-contribution 才处理）：
 {
@@ -70,6 +70,27 @@ def valid_container(container: str) -> bool:
 def is_user_source(item: dict) -> bool:
     """投稿条目是不是人工译（客户端会把每条自己的 Source 带上来）。"""
     return str(item.get("Source") or "").strip().lower().startswith("user")
+
+
+# 收稿时保留分级的机器译来源（2026-10-07）：插件端合并按 人工 3 > 大模型 2 > 基础包 1 > 免费 0 比大小，
+# 所以包里不能再把机器译一律写成 library——大模型/免费要能认出来，否则「基础包 > 免费」「大模型 > 基础包」没法生效。
+MACHINE_SOURCES = {
+    "ai:llm",
+    "ai:deepseek",
+    "ai:google",
+    "ai:mymemory",
+    "ai:caiyun",
+    "ai:public-caiyun",
+    "ai:deepl",
+}
+
+
+def normalize_source(item: dict) -> str:
+    """条目的来源：user / 白名单里的 ai:<通道>；其余（含本来就从公共库合并来的 library）写成 library。"""
+    raw = str(item.get("Source") or "").strip().lower()
+    if raw.startswith("user"):
+        return "user"
+    return raw if raw in MACHINE_SOURCES else "library"
 
 
 def submission_fingerprint(plugin: str, payload: dict) -> str:
@@ -305,7 +326,7 @@ def main(argv=None) -> int:
         target = entries_by_original.get(original)
         if target is None:
             target = {"Original": original, "Translated": translated, "Context": str(item.get("Context") or "")}
-            target["Source"] = "user" if user_source else "library"
+            target["Source"] = normalize_source(item)
             pack["entries"].append(target)
             entries_by_original[original] = target
             accepted += 1
@@ -320,7 +341,7 @@ def main(argv=None) -> int:
             overwritten += 1
         elif not existing:
             target["Translated"] = translated
-            target.setdefault("Source", "library")
+            target.setdefault("Source", normalize_source(item))
             accepted += 1
             filled += 1
         else:
@@ -345,7 +366,7 @@ def main(argv=None) -> int:
         target = resources_by_key.get((container, key))
         if target is None:
             target = {"Container": container, "Key": key, "Original": original, "Translated": translated}
-            target["Source"] = "user" if user_source else "library"
+            target["Source"] = normalize_source(item)
             pack["resources"].append(target)
             resources_by_key[(container, key)] = target
             accepted += 1
@@ -360,7 +381,7 @@ def main(argv=None) -> int:
             overwritten += 1
         elif not existing:
             target["Translated"] = translated
-            target.setdefault("Source", "library")
+            target.setdefault("Source", normalize_source(item))
             accepted += 1
             filled += 1
         else:
@@ -380,7 +401,7 @@ def main(argv=None) -> int:
         target = attributes_by_original.get(original)
         if target is None:
             target = {"Original": original, "Translated": translated, "Context": "[投稿]"}
-            target["Source"] = "user" if user_source else "library"
+            target["Source"] = normalize_source(item)
             pack["attributes"].append(target)
             attributes_by_original[original] = target
             accepted += 1
@@ -395,7 +416,7 @@ def main(argv=None) -> int:
             overwritten += 1
         elif not existing:
             target["Translated"] = translated
-            target.setdefault("Source", "library")
+            target.setdefault("Source", normalize_source(item))
             accepted += 1
             filled += 1
         else:

@@ -532,10 +532,15 @@ internal sealed class UITextPack
     public bool IsSkipped(string original) => this.Skipped.Contains(original, StringComparer.Ordinal);
 
     /// <summary>
-    ///     把公共配套库的包并进来：**本地人工改过的（user）永不被顶**；已有的 ai / library 可以被库里的更新覆盖。
-    ///     返回「真正写进去的条数」（含更新；供界面判断要不要重打补丁）。
+    ///     把公共配套库的包并进来：**本机手改过的（user）永不被顶**；其余按合并等级比大小
+    ///     （人工 3 &gt; 大模型 2 &gt; 基础包 1 &gt; 免费 0，同级别回来才覆盖——自动合并按「旧包先合」走，
+    ///     所以同级是更新的包赢）。返回「真正写进去的条数」（含更新；供界面判断要不要重打补丁）。
     /// </summary>
-    public int MergeLibrary(UITextPack library)
+    /// <param name="guard">
+    ///     自动合并多个云端包时的保护名单（开始合并前从本机快照，见 <see cref="UITextMergeGuard" />）；
+    ///     传 null = 单包合并，按当前状态保护手改条目。
+    /// </param>
+    public int MergeLibrary(UITextPack library, UITextMergeGuard? guard = null)
     {
         var changed = 0;
         this.EnsureIndex();
@@ -568,13 +573,21 @@ internal sealed class UITextPack
                 continue;
             }
 
-            if (existing.IsUserSource)
+            // 手改过的本机译文永不被顶（自动合并看开始前拍的快照名单；单包合并看当前状态）
+            if (guard is null ? existing.IsUserSource : guard.Entries.Contains(incoming.Original))
             {
                 continue;
             }
 
             if (incoming.HasTranslation)
             {
+                // 按合并等级比大小（人工 > 大模型 > 基础包 > 免费）；比本机低的就不动
+                if (existing.HasTranslation
+                    && UITextKinds.Rank(incoming.Source) < UITextKinds.Rank(existing.Source))
+                {
+                    continue;
+                }
+
                 // 「自动排除」的条目拿到库译文：说明它确实是一条要翻的界面文本——
                 // 把「不翻」一起摘掉。v1.2.0.94 之前只清 Review、skipped 残留会把条目永久卡死：
                 // 有译文、界面却一直英文（2026-10-02 Allagan Tools 实机 509 条）。
@@ -636,13 +649,21 @@ internal sealed class UITextPack
                 continue;
             }
 
-            if (existing.IsUserSource)
+            // 手改过的本机资源译文永不被顶（同上）
+            if (guard is null ? existing.IsUserSource : guard.Resources.Contains((incoming.Container, incoming.Key)))
             {
                 continue;
             }
 
             if (incoming.HasTranslation)
             {
+                // 按合并等级比大小（同上）
+                if (existing.HasTranslation
+                    && UITextKinds.Rank(incoming.Source) < UITextKinds.Rank(existing.Source))
+                {
+                    continue;
+                }
+
                 // 同 entries：库译文进来时，把「自动排除」残留的「不翻」一并摘掉。
                 var wasAutoSkipped = this.IsResourceSkipped(existing.Container, existing.Key)
                                      && IsResourceAutoSkipped(existing);
@@ -703,13 +724,21 @@ internal sealed class UITextPack
                 continue;
             }
 
-            if (existing.IsUserSource)
+            // 手改过的本机属性译文永不被顶（同上）
+            if (guard is null ? existing.IsUserSource : guard.Attributes.Contains(incoming.Original))
             {
                 continue;
             }
 
             if (incoming.HasTranslation)
             {
+                // 按合并等级比大小（同上）
+                if (existing.HasTranslation
+                    && UITextKinds.Rank(incoming.Source) < UITextKinds.Rank(existing.Source))
+                {
+                    continue;
+                }
+
                 // 同 entries：库译文进来时，把「自动排除」残留的「不翻」一并摘掉。
                 var wasAutoSkipped = this.IsAttributeSkipped(existing.Original)
                                      && IsAttributeAutoSkipped(existing);
@@ -1044,5 +1073,49 @@ internal sealed class UITextPack
         {
             entry.PreserveID = false;
         }
+    }
+}
+
+/// <summary>
+///     自动合并多个云端包时的保护名单：**开始合并前**本机就手改过的译文（快照）。
+///     合并过程中新写进来的「玩家包手译」不在名单里——同级（都是手译）谁新谁赢（2026-10-07 用户定）。
+/// </summary>
+internal sealed class UITextMergeGuard
+{
+    public HashSet<string> Entries { get; } = new(StringComparer.Ordinal);
+
+    public HashSet<(string Container, string Key)> Resources { get; } = [];
+
+    public HashSet<string> Attributes { get; } = new(StringComparer.Ordinal);
+
+    /// <summary>把一份包里所有手改过且已翻的条目登记为「合并期间不许被顶」。</summary>
+    public static UITextMergeGuard FromUserContent(UITextPack pack)
+    {
+        var guard = new UITextMergeGuard();
+        foreach (var entry in pack.Entries)
+        {
+            if (entry.IsUserSource && entry.HasTranslation)
+            {
+                guard.Entries.Add(entry.Original);
+            }
+        }
+
+        foreach (var resource in pack.Resources)
+        {
+            if (resource.IsUserSource && resource.HasTranslation)
+            {
+                guard.Resources.Add((resource.Container, resource.Key));
+            }
+        }
+
+        foreach (var attribute in pack.Attributes)
+        {
+            if (attribute.IsUserSource && attribute.HasTranslation)
+            {
+                guard.Attributes.Add(attribute.Original);
+            }
+        }
+
+        return guard;
     }
 }

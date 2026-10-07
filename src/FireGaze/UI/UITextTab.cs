@@ -1716,7 +1716,7 @@ internal sealed class UITextTab
 
         var preview = pending.Preview;
         ImGui.TextWrapped($"应用公共译文库的译文：{pending.Label}（{pending.Source}）");
-        ImGui.TextDisabled($"新增 {preview.Added} 条 · 更新机器译文 {preview.Overwritten} 条 · 你的 {preview.Protected} 条人工译文保留不动 · 其余 {preview.Same} 条无变化");
+        ImGui.TextDisabled($"新增 {preview.Added} 条 · 更新 {preview.Overwritten} 条 · 保留 {preview.Protected} 条（手改过的、或本机更好的译文不动）· 其余 {preview.Same} 条无变化");
         ImGui.Spacing();
         ImGui.TextWrapped("本机人工改过的译文不会被覆盖；应用后还要点这一行的主按钮（此时会显示「写入并重载」）才会写进插件。");
         ImGui.Separator();
@@ -1742,7 +1742,7 @@ internal sealed class UITextTab
         ImGui.EndPopup();
     }
 
-    /// <summary>确认后真正把云端包并进本机（走 MergeLibrary 的优先级：玩家译永不被顶）。</summary>
+    /// <summary>确认后真正把云端包并进本机（走 MergeLibrary 的等级优先级：手改的永不被顶，其余人工>大模型>基础包>免费）。</summary>
     private void ApplyCloudPack(PendingCloudApply pending)
     {
         var key = pending.Key;

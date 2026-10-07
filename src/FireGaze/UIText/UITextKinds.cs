@@ -28,6 +28,26 @@ internal static class UITextKinds
         };
     }
 
+    /// <summary>
+    ///     合并优先级（2026-10-07 用户定）：<b>人工 3 &gt; 大模型 2 &gt; 基础包 1 &gt; 免费 0</b>。
+    ///     多个云端包/本机包合并时按它比大小；同级别另按「旧的先合、新的后合」决出（同级新包赢）。
+    /// </summary>
+    /// <remarks>
+    ///     <c>library</c>（基础包与从库合并进来的条目）算基础包级；认不出的来源也按基础包级处理
+    ///     （保守：不主动压低别人的包）。具体通道归到哪一级见 <see cref="FromSource" /> 的分组。
+    /// </remarks>
+    public static int Rank(string? source)
+    {
+        var value = (source ?? string.Empty).Trim().ToLowerInvariant();
+        return value switch
+        {
+            "user" => 3,
+            "ai:llm" or "ai:deepseek" => 2,
+            "library" or "" => 1,
+            _ => value.StartsWith("ai:", StringComparison.Ordinal) ? 0 : 1,
+        };
+    }
+
     /// <summary>把一串类型变成人话（给界面用）；空列表返回空串。</summary>
     public static string Describe(IEnumerable<string>? kinds)
     {

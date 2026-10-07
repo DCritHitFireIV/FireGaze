@@ -143,15 +143,19 @@ UI 调用识别：类型名含 `ImGui`（`Dalamud.Bindings.ImGui.*` / 旧 `ImGui
     **原文→译文样本**（均匀抽样，最多 120 行 / 40k 字符——issue 正文有 65536 上限）。入库已自动完成，issue 只供抽查。
   · 索引 `index.json` 里每插件带 `packs` 列表（id/file/label/source/条数/日期/downloads/likes）；
     插件详情「云端译文」逐包一行：`下载译文` + `👍`（本机赞过变灰，每台机器记一次）。
-  · 自动合并顺序：基础包先合 → 玩家包按更新时间**从新到旧**（新投稿在冲突时获胜）；
+  · 自动合并顺序（2026-10-07 改）：基础包先合 → 玩家包按更新时间**从旧到新**（同级后合 = 更新的包赢）；
     唯一实现 = `scripts/uit_index.py`（三处索引生成器共用，重建时保留下载数与 👍）。
   · 计数：中继 KV，键 `<插件>@<包ID>`（基础包包 ID = `library`）；`library-counts.yml` 每 6 小时写回索引。
 - 生成（云端）：`scripts/uit_library_build.py`（工作流 `uit-packs.yml`；**定时已停**，只手动触发）：
   Aetherfeed 找仓库 → 拉仓库文件取 `DownloadLinkInstall` → 下载 zip 取主 DLL → 探针抽取 →
   按「原文 / 容器+key」增量、只翻新增（可带 FF14 术语表）→ 写包 + 索引。
   **不在维护者本机跑**（与简介词表同一条纪律）；本机只允许 `--dry-run` 盘点。
-- 合并（插件侧 `UITextPack.MergeLibrary`）：**玩家自己改过的（user）永不被顶**；ai / library 条目可被库更新覆盖。
+- 合并（插件侧 `UITextPack.MergeLibrary`，2026-10-07 改）：**本机手改过的（user）永不被顶**；其余按
+  **人工 3 > 大模型 2 > 基础包 1 > 免费 0** 比大小，同级别覆盖（自动合并从旧到新合，所以同级是更新的包赢）。
+  自动合并多个包时用「合并开始前拍的本机手改快照」（`UITextMergeGuard`）当保护名单——
+  合并中写进来的玩家手译不在名单里，同级才会按新旧决出。
 - 下载线路：raw.githubusercontent + `gh.atmoomen.top` + `gh-proxy.org`（与简介词表同一套）；
+  **每个地址的内容先过 JSON 解析校验**（2026-10-07：实测镜像偶尔吐截断的文件），坏了就换下一个地址；
   本地缓存 `<配置目录>/uitrans/library/<内部名>.json`（24h TTL，拉不到就用旧缓存 / 直接跳过）。
 - 目标插件清单：`scripts/uit_targets.txt`（首批 = 官方库下载量前 40）。
 - **本机导出上传**（`scripts/export_local_library.py`，2026-10-02 用户定，默认合并）：
@@ -917,3 +921,21 @@ AutoHook 有 10 条 TooltipOnHover 候选但未打补丁，无需处理。重打
   基础包 ID=library、玩家包 ID=user-xxxxxx），【列表详情 — 下载译文】与【一键汉化的自动合并】两条路径都走它；
   实时值由中继 `/library-counts` 提供（详情面板 5 分钟节流刷新），索引里的数字由 `library-counts.yml` 每 6 小时写回（因此仓库里的 index.json 最多滞后 6 小时）。
   本机 24 小时缓存命中不会重复计数（那不是一次新下载）。
+
+## 合并分级 + 下载健壮性（2026-10-07，1.4.0.6）
+
+- **合并分级（用户定）**：**人工 3 > 大模型 2 > 基础包 1 > 免费 0**；同级别再比新旧（自动合并按「基础包 →
+  玩家包从旧到新」，同级后合的赢，即同级新包赢）。实现：`UITextKinds.Rank` + `UITextPack.MergeLibrary`
+  （入口 / 资源 / 属性三套一致）；`PreviewMerge` 同步按等级算「更新 / 保留」。效果：
+  · 本机用大模型翻过的条目，不会再被下载来的「基础包 / 免费」包顶掉（以前会被顶）；
+  · 免费译盖不动基础包；大模型译能盖基础包；人工译依旧最大。
+- **保护名单** `UITextMergeGuard`：自动合并开始前把本机「手改过且已翻」的条目拍成快照；合并期间新写入的
+  玩家手译不在名单里——否则「同级新包赢」会被旧包的玩家手译挡住（`existing.IsUserSource` 一刀切的问题）。
+- **inbox 保留机器分级**：`scripts/inbox_uit.py` 收稿时不再把非 user 一律压成 `library`——白名单保留
+  `ai:llm` / `ai:deepseek` / `ai:google` / `ai:mymemory` / `ai:caiyun` / `ai:public-caiyun` / `ai:deepl`
+  （其余含本来的 `library` 一律写 `library`）。**已有的包维持粗等级**（机器译 = 基础包级），新投稿才带分级。
+- **下载解析校验**：`UITextLibrary.FetchTextAsync` 加 `accept` 回调，索引与包都在换地址前先验证能不能解析出来
+  （实测 `gh.atmoomen.top` 对 `RotationSolver@user-ce073e.json` 返回过 473KB 的截断文件，重取才恢复完整 629KB）；
+  全部地址都过不了才按「拉不到」处理（15 分钟冷却）。
+- fgtest：等级合并（大模型盖免费、基础包盖不动大模型、同级可刷新、人工最大、免费盖不动基础包）、
+  保护名单（本机手改被快照挡住、同级按合入顺序判新旧）、预检按等级计数；另做过变异测试验证断言会红。

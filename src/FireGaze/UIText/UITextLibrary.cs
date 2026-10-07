@@ -195,11 +195,13 @@ internal sealed class UITextLibrary
                 return 0;
             }
 
-            // 2026-10-04 多包模型：基础包先合，玩家包按更新时间**从新到旧**合——
-            // MergeLibrary 的「玩家译不被顶掉」规则让先合入者获胜，正好等价于「后传的覆盖前面传的」。
+            // 2026-10-07 用户定：合并按等级比大小（人工 3 > 大模型 2 > 基础包 1 > 免费 0；同级新包赢）。
+            // 所以基础包先合、玩家包按更新时间**从旧到新**合（同级后合 = 更新的包赢），并在开始前
+            // 把本机原本手改过的条目拍一份保护名单——合并中写进来的玩家手译不在名单里，同级才能按新旧决出。
+            var guard = UITextMergeGuard.FromUserContent(pack);
             var packs = entry.EffectivePacks();
             var ordered = packs.Where(item => !IsUserPack(item)).ToList();
-            ordered.AddRange(packs.Where(IsUserPack).OrderByDescending(item => item.UpdatedAt ?? string.Empty));
+            ordered.AddRange(packs.Where(IsUserPack).OrderBy(item => item.UpdatedAt ?? string.Empty));
 
             var merged = 0;
             foreach (var item in ordered)
@@ -209,7 +211,7 @@ internal sealed class UITextLibrary
                 var libraryPack = await this.FetchPackFileAsync(file, internalName, packID, token).ConfigureAwait(false);
                 if (libraryPack is not null)
                 {
-                    merged += pack.MergeLibrary(libraryPack);
+                    merged += pack.MergeLibrary(libraryPack, guard);
                 }
             }
 
@@ -323,7 +325,8 @@ internal sealed class UITextLibrary
             }
         }
 
-        var text = await FetchTextAsync(safe, token).ConfigureAwait(false);
+        // 2026-10-07：镜像偶尔吐截断的 JSON——第一个能连上的地址先过解析校验，坏了换下一个
+        var text = await FetchTextAsync(safe, token, static candidate => UITextPack.FromJSON(candidate, out _) is not null).ConfigureAwait(false);
         if (text is null)
         {
             return File.Exists(cached) ? LoadPackFile(cached) : null;
@@ -354,6 +357,21 @@ internal sealed class UITextLibrary
         return pack;
     }
 
+    private static readonly JsonSerializerOptions IndexJSONOptions = new() { PropertyNameCaseInsensitive = true };
+
+    /// <summary>解析索引；坏内容（截断 / 不是 JSON）返回 null。</summary>
+    private static UITextLibraryIndex? ParseIndex(string text)
+    {
+        try
+        {
+            return JsonSerializer.Deserialize<UITextLibraryIndex>(text, IndexJSONOptions);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
+
     /// <summary>索引（本会话内缓存 6 小时）。</summary>
     public async Task<UITextLibraryIndex?> FetchIndexAsync(CancellationToken token)
     {
@@ -362,30 +380,20 @@ internal sealed class UITextLibrary
             return this.index;
         }
 
-        var text = await FetchTextAsync("index.json", token).ConfigureAwait(false);
+        // 2026-10-07：镜像偶尔吐截断的 JSON——内容先过解析校验，过不了就换下一个地址
+        var text = await FetchTextAsync("index.json", token, static candidate => ParseIndex(candidate) is not null).ConfigureAwait(false);
         if (text is null)
         {
             return this.index; // 之前拉过就用旧的；没有就 null
         }
 
-        try
+        var parsed = ParseIndex(text);
+        if (parsed is not null)
         {
-            var parsed = JsonSerializer.Deserialize<UITextLibraryIndex>(text, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            });
-            if (parsed is not null)
-            {
-                this.index = parsed;
-                this.indexFetchedAt = DateTime.Now;
-                this.LastError = null;
-                return parsed;
-            }
-        }
-        catch (Exception e)
-        {
-            this.LastError = "索引解析失败：" + e.Message;
-            Plugin.Log?.Warning("[内部文本] 译文库索引解析失败：" + e.Message);
+            this.index = parsed;
+            this.indexFetchedAt = DateTime.Now;
+            this.LastError = null;
+            return parsed;
         }
 
         return this.index;
@@ -393,8 +401,10 @@ internal sealed class UITextLibrary
 
     /// <summary>
     ///     依次尝试 raw + 两个镜像取一个文件；全部失败返回 null（只记一次日志，不刷屏）。
+    ///     2026-10-07 加内容校验：某个地址返回的内容过不了 <paramref name="accept" />
+    ///     （实测镜像偶尔吐截断的 JSON）就换下一个地址，不再「第一个能连上的就信」。
     /// </summary>
-    private async Task<string?> FetchTextAsync(string fileName, CancellationToken token)
+    private async Task<string?> FetchTextAsync(string fileName, CancellationToken token, Func<string, bool>? accept = null)
     {
         using var handler = new SocketsHttpHandler
         {
@@ -424,12 +434,18 @@ internal sealed class UITextLibrary
 
                 response.EnsureSuccessStatusCode();
                 var text = await response.Content.ReadAsStringAsync(fetchToken).ConfigureAwait(false);
-                if (text.Length > 0)
+                if (text.Length == 0)
+                {
+                    errors.Add($"{url}：内容为空");
+                    continue;
+                }
+
+                if (accept is null || accept(text))
                 {
                     return text;
                 }
 
-                errors.Add($"{url}：内容为空");
+                errors.Add($"{url}：内容不完整（解析失败，已换下一个地址）");
             }
             catch (OperationCanceledException)
             {

@@ -224,13 +224,14 @@ internal static class UITextFlow
     }
 
     /// <summary>
-    ///     一次云端包合并的预检结果（给「先看差异再应用」用）：新增 / 覆盖机器译 / 保留玩家译 / 无变化。
+    ///     一次云端包合并的预检结果（给「先看差异再应用」用）：新增 / 更新 / 保留（手改的或比这包更好的）/ 无变化。
     /// </summary>
     public readonly record struct MergePreview(int Added, int Overwritten, int Protected, int Same);
 
     /// <summary>
     ///     先算一遍「云端包并进本机会发生什么」，不改任何东西。
-    ///     人工译永不被覆盖（算 Protected）；相同译文算 Same；其余机器/库译文会被新值覆盖（算 Overwritten）。
+    ///     手改的永不被覆盖、比这包等级高的译文也不动（都算 Protected）；相同译文算 Same；
+    ///     等级 ≥ 本机且值不同才算会被更新（Overwritten）。
     /// </summary>
     public static MergePreview PreviewMerge(UITextPack local, UITextPack incoming)
     {
@@ -239,23 +240,23 @@ internal static class UITextFlow
         var protect = 0;
         var same = 0;
 
-        void Count(bool hasTarget, bool hasTranslation, bool isUser, string current, string next)
+        void Count(bool hasTarget, bool hasTranslation, bool isUser, string current, string next, int existingRank, int incomingRank)
         {
             if (!hasTarget || !hasTranslation)
             {
                 added++;
             }
-            else if (isUser)
-            {
-                protect++;
-            }
             else if (string.Equals(current, next, StringComparison.Ordinal))
             {
                 same++;
             }
-            else
+            else if (!isUser && incomingRank >= existingRank)
             {
                 overwritten++;
+            }
+            else
+            {
+                protect++;
             }
         }
 
@@ -267,7 +268,9 @@ internal static class UITextFlow
             }
 
             var target = local.Find(entry.Original);
-            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true, target?.Translated ?? string.Empty, entry.Translated);
+            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true,
+                  target?.Translated ?? string.Empty, entry.Translated,
+                  UITextKinds.Rank(target?.Source), UITextKinds.Rank(entry.Source));
         }
 
         foreach (var entry in incoming.Resources)
@@ -278,7 +281,9 @@ internal static class UITextFlow
             }
 
             var target = local.FindResource(entry.Container, entry.Key);
-            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true, target?.Translated ?? string.Empty, entry.Translated);
+            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true,
+                  target?.Translated ?? string.Empty, entry.Translated,
+                  UITextKinds.Rank(target?.Source), UITextKinds.Rank(entry.Source));
         }
 
         foreach (var entry in incoming.Attributes)
@@ -289,7 +294,9 @@ internal static class UITextFlow
             }
 
             var target = local.FindAttribute(entry.Original);
-            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true, target?.Translated ?? string.Empty, entry.Translated);
+            Count(target is not null, target?.HasTranslation == true, target?.IsUserSource == true,
+                  target?.Translated ?? string.Empty, entry.Translated,
+                  UITextKinds.Rank(target?.Source), UITextKinds.Rank(entry.Source));
         }
 
         return new MergePreview(added, overwritten, protect, same);
