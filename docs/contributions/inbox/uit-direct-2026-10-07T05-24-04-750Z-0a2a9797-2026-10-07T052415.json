@@ -1,0 +1,1130 @@
+{
+  "issue": "direct-2026-10-07T05-24-04-750Z-0a2a9797",
+  "receivedAt": "2026-10-07 05:24:15",
+  "author": "匿名直传",
+  "plugin": "Ktisis",
+  "fingerprint": "c6902dbfcac51b49",
+  "packFile": "Ktisis@user-c6902d.json",
+  "accepted": 133,
+  "filled": 133,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Ktisis",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "[Warning] Ktisis",
+        "Translated": "[警告] Ktisis",
+        "Context": "Ktisis.WarningNotification",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Title"
+      },
+      {
+        "Original": "Cannot open Ktisis workspace outside of GPose.",
+        "Translated": "无法在 GPose 之外打开 Ktisis 工作空间。",
+        "Context": "CommandService.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Debug info copied to clipboard",
+        "Translated": "将调试信息复制到剪贴板",
+        "Context": "CommandService.OnMainCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Enter GPose to complete legacy config setup.",
+        "Translated": "输入 GPose 以完成遗留配置设置。",
+        "Context": "CommandService.OnMainCommandLegacy",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " (Aliases: ",
+        "Translated": "(别名：",
+        "Context": "CommandFactory.BuildCommandInfo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Weather #",
+        "Translated": "天气 #",
+        "Context": "WeatherInfo..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Couldn't find the MCDF linked to the actor ",
+        "Translated": "找不到与演员关联的 MCDF",
+        "Context": "SceneDataService.SetupActor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": ", please try and load it manually.",
+        "Translated": "请尝试手动加载它。",
+        "Context": "SceneDataService.SetupActor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "World Light",
+        "Translated": "《世界之光》",
+        "Context": "LightModule.AddFromOverworld",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Camera Light ",
+        "Translated": "摄像头光",
+        "Context": "LightModule.AddLight",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Light",
+        "Translated": "灯光",
+        "Context": "LightModule.CreateLight",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Actor #",
+        "Translated": "演员#",
+        "Context": "Spawn.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Dialog ",
+        "Translated": "对话",
+        "Context": "OverlayBuilder.BuildTalk",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Balloon ",
+        "Translated": "气球",
+        "Context": "OverlayBuilder.BuildBalloon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Status ",
+        "Translated": "状态",
+        "Context": "OverlayBuilder.BuildStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Pose",
+        "Translated": "姿势",
+        "Context": "PoseBuilder..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "New dialog...",
+        "Translated": "新对话......",
+        "Context": "BalloonOverlay..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "New Status",
+        "Translated": "新状态",
+        "Context": "StatusOverlay..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Speaker",
+        "Translated": "扬声器",
+        "Context": "TalkOverlay..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Default: ",
+        "Translated": "默认值：",
+        "Context": "DialogHelpers.BuildDialog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Off",
+        "Translated": "关闭",
+        "Context": "DialogHelpers.BuildDialog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "On",
+        "Translated": "在",
+        "Context": "DialogHelpers.BuildDialog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Overlay",
+        "Translated": "覆盖",
+        "Context": "V2MigratorWindow.DrawOverlay",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Ktisis.SelectedBones",
+        "Translated": "Ktisis.Selected Bones",
+        "Context": "IpcProvider..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Ktisis.PosingChanged",
+        "Translated": "Ktisis.姿势改变",
+        "Context": "IpcProvider..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Orbiting: ",
+        "Translated": "轨道：",
+        "Context": "CameraWindow.DrawOrbitTarget",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tracking mode: ",
+        "Translated": "跟踪模式：",
+        "Context": "CameraWindow.DrawOrbitTarget",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " on ",
+        "Translated": "在",
+        "Context": "CameraWindow.DrawTracking",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Example folder name: ",
+        "Translated": "示例文件夹名称：",
+        "Context": "ConfigWindow.DrawAutoSaveTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Formatter",
+        "Translated": "格式器",
+        "Context": "ConfigWindow.DrawAutoSaveFormatting",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Example Value",
+        "Translated": "示例值",
+        "Context": "ConfigWindow.DrawAutoSaveFormatting",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "IPC Provider",
+        "Translated": "IPC 提供程序",
+        "Context": "DebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "IPC Manager",
+        "Translated": "IPC 管理器",
+        "Context": "DebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Diagnostics",
+        "Translated": "诊断",
+        "Context": "DebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Expressions",
+        "Translated": "表达式",
+        "Context": "DebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Target: ",
+        "Translated": "目标：",
+        "Context": "DebugWindow.DrawTransform",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Position:\n\tX: ",
+        "Translated": "位置：\nX:",
+        "Context": "DebugWindow.DrawTransform",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Rotation:\n\tX: ",
+        "Translated": "旋转：\nX:",
+        "Context": "DebugWindow.DrawTransform",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Scale:\n\tX: ",
+        "Translated": "比例尺：\nX:",
+        "Context": "DebugWindow.DrawTransform",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Havok (Matrix Decompose / Raw Transform)",
+        "Translated": "Havok(矩阵分解/原始变换)",
+        "Context": "DebugWindow.DrawTransform",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Generate expressions",
+        "Translated": "生成表达式",
+        "Context": "DebugWindow.DrawExpressionsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Generating: ",
+        "Translated": "生成：",
+        "Context": "DebugWindow.DrawExpressionsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "GameObject Index",
+        "Translated": "GameObject 索引",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Clipboard Pose Data: ",
+        "Translated": "剪贴板姿势数据：",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Version: ",
+        "Translated": "版本：",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Posing: ",
+        "Translated": "姿势：",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Last Published: ",
+        "Translated": "最后发布：",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Last Value: ",
+        "Translated": "最后一个值：",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "APPLY (Clipboard)##LoadPose",
+        "Translated": "APPLY(剪贴板)##LoadPose",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "GET (Clipboard)##SavePose",
+        "Translated": "GET(Clipboard)##SavePose",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "GET##SelectedBones",
+        "Translated": "GET#SelectedBones",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Bone Transform Get/Set",
+        "Translated": "骨骼变换获取/设置",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Use World Space",
+        "Translated": "使用世界空间",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "(Parent-Relative)",
+        "Translated": "(父母 - 亲属)",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "(World → Default)",
+        "Translated": "(世界→默认值)",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Bone Name",
+        "Translated": "骨骼名称",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Transform Matrix:",
+        "Translated": "Transform Matrix(变换矩阵):",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Batch Operations",
+        "Translated": "批处理操作",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Batch Names",
+        "Translated": "批次名称",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Batch GET",
+        "Translated": "批处理 GET",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Batch SET (Current Transform)",
+        "Translated": "批处理 SET(当前变换)",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Get All Matrices",
+        "Translated": "获取所有矩阵",
+        "Context": "DrawProviderTab.MoveNext",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Editing Light: ",
+        "Translated": "编辑灯光：",
+        "Context": "LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Shadows",
+        "Translated": "阴影",
+        "Context": "LightWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "From: ",
+        "Translated": "来自：",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Actors ",
+        "Translated": "Actor",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Load actors",
+        "Translated": "加载 Actor",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Keep existing actors",
+        "Translated": "保留现有 Actor",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "MCDF wasnt found for this character\nPlease try applying manually after loading the scene",
+        "Translated": "这个角色没有找到 MCDF\n请在加载场景后尝试手动应用",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Save actors",
+        "Translated": "拯救演员",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Cameras ",
+        "Translated": "摄像机",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Load cameras",
+        "Translated": "加载摄像头",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Save cameras",
+        "Translated": "保存摄像头",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Lights ",
+        "Translated": "灯",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Load lights",
+        "Translated": "加载灯",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Save lights",
+        "Translated": "保存灯",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Overlays ",
+        "Translated": "覆盖",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Load Overlays",
+        "Translated": "加载覆盖",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Save Overlays",
+        "Translated": "保存覆盖",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Objects ",
+        "Translated": "对象",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Load Objects",
+        "Translated": "加载对象",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Save Objects",
+        "Translated": "保存对象",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Environment",
+        "Translated": "环境",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Load Environment",
+        "Translated": "加载环境",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Sky",
+        "Translated": "天空",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Particles",
+        "Translated": "粒子",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Save Environment",
+        "Translated": "保存环境",
+        "Context": "SceneWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Context: ",
+        "Translated": "上下文：",
+        "Context": "OverlayWindow.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Scene: ",
+        "Translated": "场景：",
+        "Context": "OverlayWindow.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Overlay: ",
+        "Translated": "叠加：",
+        "Context": "OverlayWindow.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "History: ",
+        "Translated": "历史：",
+        "Context": "OverlayWindow.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Object Details...",
+        "Translated": "物品详情......",
+        "Context": "SceneDraw.DrawWorldObjects",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Add Actor ",
+        "Translated": "添加 Actor",
+        "Context": "SceneDraw.DrawWorldActors",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Add World Light",
+        "Translated": "添加 World Light",
+        "Context": "SceneDraw.DrawWorldLights",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "General",
+        "Translated": "一般",
+        "Context": "BasePropertyList.Invoke",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Assigning collection for ",
+        "Translated": "将集合分配给",
+        "Context": "ActorCollectionPopup.OnDraw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Currently set to: ",
+        "Translated": "当前设置为：",
+        "Context": "ActorCollectionPopup.OnDraw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Apply design for ",
+        "Translated": "应用设计",
+        "Context": "ActorDesignPopup.OnDraw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Rename '",
+        "Translated": "重新命名",
+        "Context": "EntityRenameModal.OnDraw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Confirm",
+        "Translated": "确认",
+        "Context": "EntityRenameModal.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "EntityRenameModal.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "The MCDF linked to the actor ",
+        "Translated": "MCDF 链接到 Actor",
+        "Context": "SceneMCDFModal.OnDraw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " wasn't found, do you want select a file to load for them?",
+        "Translated": "如果没有找到，你是否要选择一个文件来加载它们？",
+        "Context": "SceneMCDFModal.OnDraw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Pick File",
+        "Translated": "选择文件",
+        "Context": "SceneMCDFModal.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Ignore",
+        "Translated": "忽略",
+        "Context": "SceneMCDFModal.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Could not create object with path: ",
+        "Translated": "无法创建具有路径的对象：",
+        "Context": "SpawnObjectPopup.Confirm",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Object ",
+        "Translated": "对象",
+        "Context": "WorldObjectPopup.Confirm",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Could not duplicate object with null transform",
+        "Translated": "无法使用空变换复制对象",
+        "Context": "SceneEntityMenuBuilder.DuplicateObject",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Could not duplicate object with path: ",
+        "Translated": "无法使用路径复制对象：",
+        "Context": "SceneEntityMenuBuilder.DuplicateObject",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": " (Copy)",
+        "Translated": "(复制)",
+        "Context": "SceneEntityMenuBuilder.DuplicateObject",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " Root",
+        "Translated": "根",
+        "Context": "SceneTree.DrawVisibilityButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Skeleton",
+        "Translated": "骨架",
+        "Context": "SceneTree.DrawVisibilityButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Encountered a UI error!\nPlease submit a bug report.",
+        "Translated": "遇到 UI 错误！\n请提交 bug 报告。",
+        "Context": "PropertyEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Texture",
+        "Translated": "纹理",
+        "Context": "ParticlesEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Keys",
+        "Translated": "钥匙",
+        "Context": "ActionKeybindEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Action",
+        "Translated": "动作",
+        "Context": "ActionKeybindEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Skeleton: ",
+        "Translated": "骨架：",
+        "Context": "OffsetEditor.DrawSkeletonCombo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Warning: This will replace ALL current offsets for ",
+        "Translated": "警告：这将替换 ALL 当前偏移量",
+        "Context": "OffsetEditor.DrawSkeletonCombo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": ".\nThis function is only usable with a valid set of v0.2 offsets.\nHold CTRL+Shift to confirm.",
+        "Translated": "。\n此函数仅适用于一组有效的 v0.2 偏移量。\n按住 CTRL+Shift 进行确认。",
+        "Context": "OffsetEditor.DrawSkeletonCombo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "PresetList",
+        "Translated": "预设列表",
+        "Context": "PresetEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "PresetOptions",
+        "Translated": "预设选项",
+        "Context": "PresetEditor.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Empty",
+        "Translated": "空",
+        "Context": "EquipmentEditorTab.PrepareItemLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "No dye set.",
+        "Translated": "没有染发剂。",
+        "Context": "EquipmentEditorTab.DrawDyeTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Loading NPCs...",
+        "Translated": "加载 NPC......",
+        "Context": "NpcSelect.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Failed to load NPCs.\nCheck your error log for more information.",
+        "Translated": "未能加载 NPC。\n查看错误日志了解更多信息。",
+        "Context": "NpcSelect.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Model #",
+        "Translated": "型号#",
+        "Context": "NpcSelect.DrawItem",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Transparency",
+        "Translated": "透明度",
+        "Context": "ParamColorSelectPopup.DrawAlphaToggle",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "MCDF has Customize+ data, but no IPC was found!\nCheck to make sure all plugins are enabled.",
+        "Translated": "MCDF 有 Customize+ 数据，但没有发现 IPC!\n检查确保所有插件都已启用。",
+        "Context": "McdfManager.ApplyCustomizeData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "MCDF has Glamourer data, but no IPC was found!\nCheck to make sure all plugins are enabled.",
+        "Translated": "MCDF 有 Glamourer 数据，但没有发现 IPC!\n检查确保所有插件都已启用。",
+        "Context": "McdfManager.ApplyGlamourerData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "MCDF has Penumbra data, but no IPC was found!\nCheck to make sure all plugins are enabled.",
+        "Translated": "MCDF 有 Penumbra 数据，但没有发现 IPC!\n检查确保所有插件都已启用。",
+        "Context": "McdfManager.ApplyPenumbraMods",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Unable to fully clear Glamourer IPC data for Actor ",
+        "Translated": "无法完全清除 Actor 的 Glamourer IPC 数据",
+        "Context": "McdfManager.DeleteGlamourerData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "!\nCheck /xllog for further details.",
+        "Translated": "!\n查看/xllog 了解更多详情。",
+        "Context": "McdfManager.DeleteGlamourerData",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Failed to load Ktisis configuration. A backup of the old file was saved.",
+        "Translated": "无法加载 Ktisis 配置。保存了旧文件的备份。",
+        "Context": "ConfigManager.Load",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
