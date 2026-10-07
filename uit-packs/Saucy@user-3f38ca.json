@@ -1,346 +1,249 @@
 {
-  "type": "uit-contribution",
-  "plugin": "Saucy",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-07",
+    "source": "user",
+    "label": "玩家包 · 3f38ca",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Moogle",
       "Translated": "莫格尔",
       "Context": "Configuration..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Opens the Saucy menu.",
       "Translated": "打开 Saucy 菜单。",
       "Context": "Saucy..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "library"
     },
     {
       "Original": "[Saucy] Triad Module Enabled!",
       "Translated": "[Saucy] Triad 模块已启用！",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[Saucy] Triad Module Disabled!",
       "Translated": "[Saucy] Triad 模块已禁用！",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[Saucy] Play X Amount of Times Enabled!",
       "Translated": "[Saucy] 游戏 X 次数已启用！",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[Saucy] Incorrect value specified: ",
       "Translated": "[Saucy] 指定的值不正确：",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[Saucy] Play Until Any Cards Drop Enabled!",
       "Translated": "[Saucy] 玩到所有卡片掉落都被激活为止！",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[Saucy] Play Until All Cards Drop from NPC at Least X Times Enabled!",
       "Translated": "[Saucy] 玩到 NPC 掉光所有卡片，至少十次！",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Walk up to the Out on a Limb machine in Gold Saucer, set the number of games, and the module plays them. Set 0 to start games manually from the machine.",
       "Translated": "在 Gold Saucer 游戏中，使用 Limb 机器走到 Out，设置游戏数量，然后模块会播放这些游戏。将 0 设置为从机器手动启动游戏。",
       "Context": "LimbManager.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "library"
     },
     {
       "Original": "TidyChat warning: ensure \"You sense something...\" system messages are NOT hidden (Advanced → System messages) or this will not work.",
       "Translated": "TidyChat 警告：确保 “你感觉到了什么......” 系统消息未被隐藏 (高级→系统消息)，否则这将无法工作。",
       "Context": "LimbManager.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Run",
       "Translated": "运行",
       "Context": "LimbManager.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Tuning",
       "Translated": "调优",
       "Context": "LimbManager.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Yes",
       "Translated": "是的",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Reference: ",
       "Translated": "参考文献：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Cursor: ",
       "Translated": "游标：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Only request",
       "Translated": "仅请求",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Request input",
       "Translated": "请求输入",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputInt"
+      "Source": "library"
     },
     {
       "Original": "Request",
       "Translated": "请求",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Reset",
       "Translated": "重置",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Button enabled: ",
       "Translated": "按钮已启用：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Seconds remaining: ",
       "Translated": "剩余秒数：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Click",
       "Translated": "单击",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Next: ",
       "Translated": "接下来：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": ", MinIndex: ",
       "Translated": "MinIndex:",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": ", rec=",
       "Translated": "rec=",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Starting points:\n",
       "Translated": "起点：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Results:\n",
       "Translated": "结果：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Games to play",
       "Translated": "要玩的游戏",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputInt"
+      "Source": "library"
     },
     {
       "Original": "Stop at next double down",
       "Translated": "在下一个双下停止",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Difficulty",
       "Translated": "难度",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.EnumCombo"
+      "Source": "library"
     },
     {
       "Original": "Step",
       "Translated": "第一步",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragInt"
+      "Source": "library"
     },
     {
       "Original": "Default##step",
       "Translated": "默认步骤",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Stop with big win (remaining time)",
       "Translated": "止步于大胜 (剩余时间)",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragInt"
+      "Source": "library"
     },
     {
       "Original": "Stop with little win (remaining time)",
       "Translated": "止步于小胜 (剩余时间)",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragInt"
+      "Source": "library"
     },
     {
       "Original": "Pointer",
       "Translated": "指针",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Begin"
+      "Source": "library"
     },
     {
       "Original": "move left",
       "Translated": "向左移动",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "move right",
       "Translated": "向右移动",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "move down",
       "Translated": "下移",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "move up",
       "Translated": "向上移动",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-07T01:17:13",
-  "imported": {
-    "archive": "uit-direct-2026-10-07T01-16-57-912Z-d1acde31-2026-10-07T011713.json",
-    "accepted": 39,
-    "filled": 39,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 39 条 `Saucy` 的界面文字译文，已收为**独立译文包** `uit-packs/Saucy@user-3f38ca.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 39 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
