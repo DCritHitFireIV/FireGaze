@@ -1,4 +1,4 @@
-// FireGaze 中继（Cloudflare Worker）v10
+// FireGaze 中继（Cloudflare Worker）v11
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
@@ -13,8 +13,13 @@
 //       ——2026-10-07 新增（v10）：
 //       多个彩云 token 轮换：某个额度用完（401/403）自动换下一个，冷却到期自动重试
 //       （充值 / 月额度重置后自动回归），新 token 加进来即生效；全部逻辑都在本文件里。
-//       存储复用 LIBRARY_COUNTS（前缀 tok:，不新建绑定）；管理端点要机密 ADMIN_KEY（不配 = 管理面关闭）。
+//       存储复用 LIBRARY_COUNTS（v11 起整个池子存在单键 `pool:index`，热路径不再 list；旧 tok:* 键自动迁移）；
+//       管理端点要机密 ADMIN_KEY（不配 = 管理面关闭）。
 //       池子为空时仍用 CAIYUN_TOKEN 兜底（旧配置零改动）；池子用完可推手机提醒（可选，见下）。
+//   · KV 免费额度纪律（v11）——免费版每天只有 1,000 次 list / 1,000 次写，必须省着用：
+//       聚合计数（/library-counts、/plugin-stats）走 30 分钟内存缓存，且两个端点共用一份
+//       「全键列表」缓存（每 30 分钟最多 1 次 list/实例）；计数写入时把数值也放进 KV metadata，
+//       聚合读取靠 list 的 metadata 直读（不再逐键 get）；token 池用单键，不再 list。
 //   · 界面译文直传（POST /uit-submit）——2026-10-04 新增：
 //       几千条的投稿不再走 issue 粘贴；Worker 直接把它提交成
 //       docs/contributions/inbox/uit-direct-<时间>-<随机>.json，仓库工作流接手并入公共库。
@@ -56,14 +61,23 @@ const TRANSLATE_DAILY_CHARS = 400000; // 每 IP 每天最多翻多少字符（�
 const charUsage = new Map(); // `${ip}|${yyyy-mm-dd}` -> 已用字符数
 
 // 彩云 token 池（v10）：多个 token 轮换，额度用完自动换下一个；冷却到期自动回归。
-const POOL_PREFIX = 'tok:'; // 复用 LIBRARY_COUNTS 的键前缀（tok:<sha256 前 12 位>）
-const POOL_CACHE_MS = 60_000; // token 列表内存缓存
+const POOL_PREFIX = 'tok:'; // v10 的旧键前缀（v11 起只用于自动迁移）
+const POOL_INDEX_KEY = 'pool:index'; // v11：整个池子存在一把键里（不再 list，省免费额度）
+const POOL_CACHE_MS = 60_000; // token 列表内存缓存（每次过期只读 1 把键）
 const POOL_MAX_ATTEMPTS = 3; // 单次请求最多试几个 token（控制玩家侧延迟）
 const POOL_COOLDOWN_HOURS = 24; // 冷却基准，失败次数递增：24h → 48h → 72h 封顶
 const POOL_COOLDOWN_CAP = 3;
-const POOL_USAGE_FLUSH_MS = 30_000; // 月用量写回 KV 的节流（KV 每键 1 写/秒）
+const POOL_USAGE_FLUSH_MS = 3600_000; // 月用量写回 KV 的节流（免费版每天只有 1,000 次写）
 const POOL_EMPTY_NOTIFY_MS = 6 * 3600 * 1000; // 池子空的提醒节流
 const POOL_ADMIN_PER_IP_LIMIT = 30; // 管理端点每分钟每 IP
+
+// 聚合读（/library-counts、/plugin-stats）的缓存：免费版每天只有 1,000 次 list，
+// 客户端本来就自带 5–10 分钟节流，服务端再挡一层；两个端点共用一份全键列表。
+const AGG_CACHE_MS = 30 * 60_000;
+const KEY_LIST_CACHE_MS = 30 * 60_000;
+let libraryCountsCache = { at: 0, body: null };
+let pluginStatsCache = { at: 0, body: null };
+let keyListCache = { at: 0, keys: [] };
 
 let poolCache = { at: 0, entries: [] };
 let poolEmptyNotifiedAt = 0;
@@ -259,8 +273,10 @@ function parsePackTarget(data) {
 async function bumpCounter(store, prefix, target) {
   const key = `${prefix}:${target.plugin}@${target.pack}`;
   const current = Number.parseInt((await store.get(key)) ?? '0', 10) || 0;
-  await store.put(key, String(current + 1));
-  return current + 1;
+  const next = current + 1;
+  // v11：数值也放进 metadata——聚合端点靠 list 的 metadata 直读，省掉逐键 get
+  await store.put(key, String(next), { metadata: { v: next } });
+  return next;
 }
 
 /// 北京时间（UTC+8）的 ISO 周标签，如 2026-W41；周界 = 周一 00:00。
@@ -278,21 +294,43 @@ function beijingISOWeek(date = new Date()) {
 /// 自增一把独立键（插件级计数用）。
 async function bumpKey(store, key) {
   const current = Number.parseInt((await store.get(key)) ?? '0', 10) || 0;
-  await store.put(key, String(current + 1));
-  return current + 1;
+  const next = current + 1;
+  await store.put(key, String(next), { metadata: { v: next } });
+  return next;
+}
+
+/// 列全部键（带 metadata）+ 内存缓存（30 分钟）：聚合端点们共用，每个窗口最多 1 次 list。
+async function listKeysCached(store) {
+  const now = Date.now();
+  if (keyListCache.at > 0 && now - keyListCache.at < KEY_LIST_CACHE_MS) {
+    return keyListCache.keys;
+  }
+
+  const keys = [];
+  let cursor;
+  for (;;) {
+    const listed = await store.list({ limit: 1000, cursor });
+    keys.push(...listed.keys.map((k) => ({ name: k.name, metadata: k.metadata ?? null })));
+    if (listed.list_complete) break;
+    cursor = listed.cursor;
+  }
+
+  keyListCache = { at: now, keys };
+  return keys;
 }
 
 /// 按前缀读全部计数（KV list 单次最多 1000 把键，必须分页——插件 2000 条时会静默截断）。
+/// v11：优先读 list 返回的 metadata.v（一次 list 带出计数），只有旧键（没 metadata）才逐键 get。
 async function readAllByPrefix(store, prefix) {
   const values = {};
-  let cursor;
-  for (;;) {
-    const listed = await store.list({ prefix, limit: 1000, cursor });
-    for (const entry of listed.keys) {
-      values[entry.name.slice(prefix.length)] = Number.parseInt((await store.get(entry.name)) ?? '0', 10) || 0;
+  for (const entry of await listKeysCached(store)) {
+    if (!entry.name.startsWith(prefix)) {
+      continue;
     }
-    if (listed.list_complete) break;
-    cursor = listed.cursor;
+
+    const fromMeta = entry.metadata && typeof entry.metadata.v === 'number' ? entry.metadata.v : null;
+    values[entry.name.slice(prefix.length)] = fromMeta
+      ?? (Number.parseInt((await store.get(entry.name)) ?? '0', 10) || 0);
   }
   return values;
 }
@@ -352,11 +390,18 @@ async function handlePluginStats(env) {
     return json({ ok: false, error: 'counting disabled' }, 503);
   }
 
+  const now = Date.now();
+  if (pluginStatsCache.body && now - pluginStatsCache.at < AGG_CACHE_MS) {
+    return json(pluginStatsCache.body);
+  }
+
   const week = beijingISOWeek();
   const total = await readAllByPrefix(store, 'plike_total:');
   const weekly = await readAllByPrefix(store, `plike_w:${week}:`);
   const adds = await readAllByPrefix(store, 'padd:');
-  return json({ ok: true, week, total, weekly, adds, updatedAt: new Date().toISOString() });
+  const body = { ok: true, week, total, weekly, adds, updatedAt: new Date().toISOString() };
+  pluginStatsCache = { at: now, body };
+  return json(body);
 }
 
 /// 插件发现：库链投稿（客户端已做过卫月契约检测；这里只做形状检查，真正的收录由仓库工作流定）。
@@ -442,9 +487,16 @@ async function handleLibraryCounts(env) {
     return json({ ok: false, error: 'counting disabled' }, 503);
   }
 
+  const now = Date.now();
+  if (libraryCountsCache.body && now - libraryCountsCache.at < AGG_CACHE_MS) {
+    return json(libraryCountsCache.body);
+  }
+
   const counts = await readAllByPrefix(store, 'dl:');
   const likes = await readAllByPrefix(store, 'like:');
-  return json({ ok: true, updatedAt: new Date().toISOString(), counts, likes });
+  const body = { ok: true, updatedAt: new Date().toISOString(), counts, likes };
+  libraryCountsCache = { at: now, body };
+  return json(body);
 }
 
 // ── 彩云 token 池（v10）─────────────────────────────────────────────
@@ -481,17 +533,39 @@ async function listPoolKeys(store) {
   return keys;
 }
 
-async function persistPoolEntry(env, entry) {
-  const store = env.LIBRARY_COUNTS;
-  if (!store || !entry.id || entry.id === 'env') return;
+/// 读池子索引（单键 pool:index；返回 tokens 数组，KV 不可用时返回空数组）。
+async function readPoolIndex(store) {
+  if (!store) return [];
   try {
-    await store.put(POOL_PREFIX + entry.id, JSON.stringify(entry));
+    const raw = await store.get(POOL_INDEX_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.tokens)) return [];
+    return parsed.tokens.filter((e) => e && typeof e.token === 'string' && e.token.length > 0);
   } catch {
-    // 写失败只影响统计，不影响翻译
+    return [];
   }
 }
 
-/// 读池子（内存缓存 60 秒）：KV 记录 + 旧的单 token（兼容）；月份翻页 = 额度可能重置 → 自动复活。
+/// 写回池子索引：先读一遍再按 id 合并（不同实例并发改池子时尽量不丢对方的改动）。
+async function persistPool(env, changedEntries) {
+  const store = env.LIBRARY_COUNTS;
+  if (!store) return;
+  try {
+    const tokens = await readPoolIndex(store);
+    const byId = new Map(tokens.filter((e) => e && e.id).map((e) => [e.id, e]));
+    for (const entry of changedEntries) {
+      if (!entry || !entry.id || entry.id === 'env') continue;
+      byId.set(entry.id, entry);
+    }
+    await store.put(POOL_INDEX_KEY, JSON.stringify({ tokens: [...byId.values()], updatedAt: new Date().toISOString() }));
+  } catch {
+    // 写失败只影响统计/冷却持久化，不影响翻译
+  }
+}
+
+/// 读池子（内存缓存 60 秒）：单键索引 + 旧的单 token（兼容）；月份翻页 = 额度可能重置 → 自动复活。
+/// v11：从 v10 的 tok:<id> 多键自动迁到单键（只迁一次，之后热路径不再 list）。
 async function loadPool(env) {
   const now = Date.now();
   if (poolCache.at > 0 && now - poolCache.at < POOL_CACHE_MS) {
@@ -499,24 +573,42 @@ async function loadPool(env) {
   }
 
   const previous = poolCache.entries;
-  const entries = [];
   const store = env.LIBRARY_COUNTS;
-  if (store) {
+  let entries = await readPoolIndex(store);
+
+  // v10 → v11 迁移：索引不存在时扫一次旧 tok:* 键，并进索引后清掉旧键
+  if (store && entries.length === 0) {
     try {
-      for (const key of await listPoolKeys(store)) {
-        try {
-          const raw = await store.get(key);
-          const entry = raw ? JSON.parse(raw) : null;
-          if (entry && typeof entry.token === 'string' && entry.token.length > 0) {
-            entry.id = key.slice(POOL_PREFIX.length);
-            entries.push(entry);
+      const rawIndex = await store.get(POOL_INDEX_KEY);
+      if (!rawIndex) {
+        const keys = await listPoolKeys(store);
+        const migrated = [];
+        for (const key of keys) {
+          try {
+            const raw = await store.get(key);
+            const entry = raw ? JSON.parse(raw) : null;
+            if (entry && typeof entry.token === 'string' && entry.token.length > 0) {
+              entry.id = entry.id || key.slice(POOL_PREFIX.length);
+              migrated.push(entry);
+            }
+          } catch {
+            // 坏记录跳过
           }
-        } catch {
-          // 坏记录跳过，不影响整池
         }
+        if (migrated.length > 0) {
+          await persistPool(env, migrated);
+          for (const key of keys) {
+            try {
+              await store.delete(key);
+            } catch {
+              // 删不掉就留着（索引在就不会再读它）
+            }
+          }
+        }
+        entries = migrated;
       }
     } catch {
-      // KV 故障：先按空池跑（下面的 env 兜底），下一轮再试
+      // 迁移失败：按空池跑，下次再试
     }
   }
 
@@ -528,7 +620,7 @@ async function loadPool(env) {
     });
   }
 
-  // 刷新时把内存里还没落盘的月用量并回来（KV 里的可能是 30 秒前的快照）
+  // 刷新时把内存里还没落盘的月用量并回来（KV 里的可能是上一次定时写回的快照）
   for (const entry of entries) {
     const old = previous.find((e) => e.id === entry.id);
     if (old && old.month === entry.month) {
@@ -536,16 +628,28 @@ async function loadPool(env) {
     }
   }
 
+  // 坏条目（缺 id）补一个稳定 id，免得每次都被当成新条目
+  for (const entry of entries) {
+    if (!entry.id && entry.token) {
+      entry.id = await poolTokenId(entry.token);
+    }
+  }
+
   // 月份翻页 = 额度可能重置：清冷却、清计数，自动回归
   const month = currentMonth();
+  const revived = [];
   for (const entry of entries) {
     if (entry.month !== month) {
       entry.month = month;
       entry.monthChars = 0;
       entry.fails = 0;
       entry.cooldownUntil = 0;
-      await persistPoolEntry(env, entry);
+      revived.push(entry);
     }
+  }
+
+  if (revived.length > 0) {
+    await persistPool(env, revived);
   }
 
   poolCache = { at: now, entries };
@@ -568,7 +672,7 @@ function recordPoolSuccess(env, entry, chars) {
   const now = Date.now();
   if (now - (entry.flushedAt ?? 0) >= POOL_USAGE_FLUSH_MS) {
     entry.flushedAt = now;
-    void persistPoolEntry(env, entry);
+    void persistPool(env, [entry]);
   }
 }
 
@@ -577,7 +681,7 @@ async function markPoolCooling(env, entry, detail) {
   const hours = POOL_COOLDOWN_HOURS * Math.min(entry.fails, POOL_COOLDOWN_CAP);
   entry.cooldownUntil = Date.now() + hours * 3600 * 1000;
   entry.lastError = String(detail ?? '').slice(0, 200);
-  await persistPoolEntry(env, entry);
+  await persistPool(env, [entry]);
 }
 
 /// 调一次彩云；结果分四类：ok / quota（401·403，额度用完或 token 失效）/ jitter（429·5xx）/ unreachable（网络）。
@@ -665,14 +769,9 @@ async function handlePoolToken(data, request, env, ip) {
   }
 
   const id = await poolTokenId(token);
-  let record = { addedAt: Date.now(), month: currentMonth(), monthChars: 0 };
-  try {
-    const raw = await store.get(POOL_PREFIX + id);
-    if (raw) record = JSON.parse(raw);
-  } catch {
-    // 读不出来就当新记录
-  }
-
+  const existing = (await readPoolIndex(store)).find((e) => e.id === id);
+  let record = existing ?? { addedAt: Date.now(), month: currentMonth(), monthChars: 0 };
+  record.id = id;
   record.token = token;
   const label = String(data.label ?? '').trim().slice(0, 40);
   if (label) record.label = label;
@@ -680,7 +779,7 @@ async function handlePoolToken(data, request, env, ip) {
   record.fails = 0;
   record.cooldownUntil = 0;
   record.lastError = null;
-  await store.put(POOL_PREFIX + id, JSON.stringify(record));
+  await persistPool(env, [record]);
 
   // 直接进内存缓存（不依赖 KV 的最终一致；缓存未加载时不碰，下次读取会带上）
   poolEmptyNotifiedAt = 0;
@@ -718,7 +817,8 @@ async function handlePoolRemove(data, request, env, ip) {
     return json({ ok: false, error: 'no kv binding', detail: 'LIBRARY_COUNTS' }, 503);
   }
 
-  await store.delete(POOL_PREFIX + id);
+  const tokens = (await readPoolIndex(store)).filter((e) => e && e.id !== id);
+  await store.put(POOL_INDEX_KEY, JSON.stringify({ tokens, updatedAt: new Date().toISOString() }));
   poolCache = { at: 0, entries: [] };
   return json({ ok: true, removed: id });
 }
@@ -947,7 +1047,7 @@ export default {
         return handlePoolStatus(request, env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 10 });
+      return json({ ok: true, service: 'firegaze-relay', version: 11 });
     }
 
     if (request.method !== 'POST') {
