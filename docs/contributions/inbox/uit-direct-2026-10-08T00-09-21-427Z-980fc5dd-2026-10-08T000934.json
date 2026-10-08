@@ -1,0 +1,2520 @@
+{
+  "issue": "direct-2026-10-08T00-09-21-427Z-980fc5dd",
+  "receivedAt": "2026-10-08 00:09:34",
+  "author": "匿名直传",
+  "plugin": "QoLBar",
+  "fingerprint": "4ad7e82079bacadf",
+  "packFile": "QoLBar@user-4ad7e8.json",
+  "accepted": 301,
+  "filled": 301,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "QoLBar",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Error saving config, is something else writing to it?",
+        "Translated": "保存错误配置，还有其他内容要写入吗？",
+        "Context": "Configuration.Save",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "QoL Bar Updated!",
+        "Translated": "QoL 条更新！",
+        "Context": "Configuration.DrawUpdateWindow",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "QoL Bar has a new feature where categories may now run commands like a normal shortcut, this may cause problems for people who were using the plugin BEFORE JANUARY 4TH, due to the command setting being used for tooltips. Please verify that you understand the risks and that YOU MAY ACCIDENTALLY SEND CHAT MESSAGES WHEN CLICKING CATEGORIES. Additionally, YOU MAY DELETE ALL COMMANDS FROM ALL CATEGORIES AFTERWARDS if you are worried. Selecting YES will remove EVERY command from EVERY category in your config, note that this has no real downside if you have not started to utilize this feature. Selecting NO will close this popup permanently, you may also change your mind after selecting YES if you restore the version backup from the config, please be aware that old configs will possibly contain commands again if you do reload one of them.",
+        "Translated": "QoL Bar 新增了一个功能，其中类别现在可以像普通快捷方式一样运行命令，这可能会给在 1 月 4 日之前使用插件的人带来问题，因为命令设置被用于工具提示。请确认您理解其中的风险，并且您可能会在点击类别时意外发送聊天消息。此外，如果您担心，可以在之后从所有类别中删除所有命令。选择 “是” 将从您的配置中的 “所有” 类别中删除 “所有” 命令，请注意，如果您还没有开始使用这个功能，这并没有真正的负面影响。选择 NO 将永久关闭此弹出窗口，如果您从配置恢复版本备份，在选择 YES 后也可能会改变主意。请注意，如果您重新加载其中一个旧配置，它们可能会再次包含命令。",
+        "Context": "Configuration.DrawUpdateWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "I UNDERSTAND",
+        "Translated": "我理解",
+        "Context": "Configuration.DrawUpdateWindow",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "YES, DELETE THEM",
+        "Translated": "是，删除他们",
+        "Context": "Configuration.DrawUpdateWindow",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "NO, I AM FINE",
+        "Translated": "不，我没事",
+        "Context": "Configuration.DrawUpdateWindow",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Invalid macro. Usage: \"//m0\" for individual macro #0, \"//m100\" for shared macro #0, valid up to 199.",
+        "Translated": "无效宏。用法：单个宏 #0 使用 “//m0”，共享宏 #0 使用 “//m100”，最高有效为 199。",
+        "Context": "Game.RunCommandQueue",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed running macro",
+        "Translated": "运行宏失败",
+        "Context": "Game.RunCommandQueue",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Macros do not support item usage.",
+        "Translated": "宏不支持项目使用。",
+        "Context": "Game.RunCommandQueue",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed to add command to macro, capacity reached. Please close off the macro with another \"//m\" if you didn't intend to do this.",
+        "Translated": "未能向宏添加命令，容量已达到。如果您不打算这样做，请使用另一个 “//m” 关闭宏。",
+        "Context": "Game.RunCommandQueue",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed injecting command",
+        "Translated": "注入命令失败",
+        "Context": "Game.ExecuteCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Macros using more than 15 lines do not support chat message commands!",
+        "Translated": "使用超过 15 行的宏不支持聊天消息命令！",
+        "Context": "Game.CreateAndExecuteMacro",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed injecting macro",
+        "Translated": "注入宏失败",
+        "Context": "Game.CreateAndExecuteMacro",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed to import from clipboard! Import string is invalid or incomplete.",
+        "Translated": "从剪贴板导入失败！导入字符串无效或不完整。",
+        "Context": "Importing.TryImport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed to import from clipboard! Import string does not contain an importable object.",
+        "Translated": "从剪贴板导入失败！导入字符串不包含可导入的对象。",
+        "Context": "Importing.TryImport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed to import from clipboard!\n",
+        "Translated": "从剪贴板导入失败！",
+        "Context": "Importing.TryImport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "This import contained {0} automatically removed, please enable \"{1}\" inside the \"Settings\" tab on the plugin config and then try importing again if you did not intend to do this.",
+        "Translated": "此导入包含{0}自动删除，请在插件配置的 “设置” 选项卡中启用 “{1}”，然后如果您不打算这样做，请再次尝试导入。",
+        "Context": "Importing.TryImport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "a condition set that was",
+        "Translated": "一个条件设置是",
+        "Context": "Importing.TryImport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "one or more hotkeys that were",
+        "Translated": "一个或多个热键",
+        "Context": "Importing.TryImport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "It appears that this bar was meant to be used as a pie. You should add a hotkey to it by right clicking on the bar and clicking the \"Pie Hotkey\" input box.",
+        "Translated": "看来这个栏目是用作馅饼的。您应该通过右键点击栏目并点击 “馅饼热键” 输入框来添加热键。",
+        "Context": "Importing.TryImport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Press escape to clear the hotkey.",
+        "Translated": "按下退出键清除热键。",
+        "Context": "Keybind.KeybindInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Pass Input to Game",
+        "Translated": "将输入传递给游戏",
+        "Context": "Keybind.KeybindInput",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disables the hotkey from blocking the game input.",
+        "Translated": "禁用热键阻止游戏输入。",
+        "Context": "Keybind.KeybindInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Active Hotkeys - ",
+        "Translated": "活动热键——",
+        "Context": "Keybind.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "Keybind.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "blocks",
+        "Translated": "阻止",
+        "Context": "Keybind.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "doesn't block",
+        "Translated": "不阻止",
+        "Context": "Keybind.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " game input.",
+        "Translated": "游戏输入。",
+        "Context": "Keybind.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Subcategory",
+        "Translated": "子类别",
+        "Context": "Keybind.DrawDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Invalid subcommand.",
+        "Translated": "无效子命令。",
+        "Context": "QoLBar.OnQoLVisible",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Usage: /qolvisible [on|off|toggle] <bar>",
+        "Translated": "使用:/qolvisible [on|off|toggle] <bar>",
+        "Context": "QoLBar.OnQoLVisible",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Invalid instrument.",
+        "Translated": "无效工具。",
+        "Context": "QoLBar.OnPerformance",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "addShortcut",
+        "Translated": "add 快捷键",
+        "Context": "BarUI.DrawAdd",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Add a new shortcut.\nRight click this (or the bar background) for options.\nRight click other shortcuts to edit them.",
+        "Translated": "添加新的快捷方式。\n右键点击此 (或条形背景) 查看选项。\n右键点击其他快捷键以编辑它们。",
+        "Context": "BarUI.DrawAdd",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Style",
+        "Translated": "风格",
+        "Context": "BarUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Export",
+        "Translated": "导出",
+        "Context": "BarUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Export to clipboard with minimal settings (May change with updates).\nRight click to export with every setting (Longer string, doesn't change).",
+        "Translated": "导出至剪贴板，设置最小 (可能随更新而变化)。\n右键单击导出每个设置 (较长字符串，不变)。",
+        "Context": "BarUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "QoL Bar Config",
+        "Translated": "QoL 条形图配置",
+        "Context": "BarUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "New Set",
+        "Translated": "新集",
+        "Context": "ConditionSetUI.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Please enable the \"Allow exporting sensitive condition sets\" setting to export this set.",
+        "Translated": "请启用 “允许导出敏感条件集” 设置以导出此集。",
+        "Context": "ConditionSetUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Export condition set to clipboard.",
+        "Translated": "导出条件设置为剪贴板。",
+        "Context": "ConditionSetUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Failed to import condition set from clipboard!\n",
+        "Translated": "未能从剪贴板导入条件设置！",
+        "Context": "ConditionSetUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Import condition set from clipboard.",
+        "Translated": "从剪贴板设定导入条件。",
+        "Context": "ConditionSetUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Double click on a set to edit its name.\n\nAdditionally, you can click this to open Dalamud's debug menu\nto see current Condition Flags.",
+        "Translated": "双击集合以编辑其名称。\n\n此外，您可以点击此按钮打开 Dalamud 的调试菜单。\n查看当前条件标志。",
+        "Context": "ConditionSetUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "\t\tDynamic Presets",
+        "Translated": "动态预设",
+        "Context": "ConditionSetUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Right click this button to delete this condition!",
+        "Translated": "右键点击此按钮删除此条件！",
+        "Context": "ConditionSetUI.DrawConditionSetEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "\nSet (Up to this condition): ",
+        "Translated": "设置 (直到这个条件):",
+        "Context": "ConditionSetUI.DrawConditionSetEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "False",
+        "Translated": "错误",
+        "Context": "ConditionSetUI.DrawConditionSetEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "NOT",
+        "Translated": "不",
+        "Context": "ConditionSetUI.DrawConditionSetEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "\nCondition: ",
+        "Translated": "条件：",
+        "Context": "ConditionSetUI.DrawConditionSetEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "\n\nIcons accept arguments between \"::\" and their ID. I.e. \"::f21\".\n\t' f ' - Applies the hotbar frame.\n\t' n ' - Removes the hotbar frame.\n\t' l ' - Uses the low resolution icon.\n\t' h ' - Uses the high resolution icon if it exists.\n\t' g ' - Changes the icon to grayscale.\n\t' r ' - Reverses the icon.",
+        "Translated": "图标接受 “::” 和其 ID 之间的参数。即 “::f21”。\nf - 应用热条框架。\nn - 移除热条框架。\nL——使用低分辨率图标。\nh - 如果存在高分辨率图标，请使用它。\ng——将图标更改为灰度。\n“r”——反转图标。",
+        "Context": "ConfigEditorUI.EditShortcutConfigBase",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Type",
+        "Translated": "输入",
+        "Context": "ConfigEditorUI.EditShortcutConfigBase",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Command",
+        "Translated": "命令",
+        "Context": "ConfigEditorUI.EditShortcutConfigBase",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Spacer",
+        "Translated": "空格键",
+        "Context": "ConfigEditorUI.EditShortcutConfigBase",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "You can use right click to add special game symbols, additionally,\nthere are custom commands that only work from shortcuts.\n\t' //m0 ' - Executes individual macro #0 (up to //m99).\n\t' //m100 ' - Executes shared macro #0 (up to //m199).\n\t' //m ' - Begins or ends a custom macro. The following lines\nwill execute as a macro instead of a shortcut (allowing for\n/wait, /macrolock, etc), until //m is used again, up to 30 lines.\n\t' //i <ID/Name> ' - Uses an item, cannot be used with //m.\n\t' // <Comment> ' - Adds a comment.",
+        "Translated": "您还可以使用右键添加特殊的游戏符号。\n有些自定义命令只能从快捷方式运行。\n//m0 - 执行单个宏 #0(最高到 //m99)。\n' //m100 - 执行共享宏 #0(最高到 //m199)。\n//m - 开始或结束自定义宏。以下几行\n将作为宏而非快捷方式执行 (允许\n/wait、/macrolock 等，直到//m 再次使用，最多 30 行。\n//i <ID/Name> - 使用一个项目，不能与 //m 一起使用。\n// <Comment> - 添加注释。",
+        "Context": "ConfigEditorUI.EditShortcutConfigBase",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "ConfigEditorUI.EditShortcutName",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Mode",
+        "Translated": "模式",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Changes the behavior when pressed.\nNote: Not intended to be used with categories containing subcategories.",
+        "Translated": "更改按下时的行为。\n注：不适用于包含子类别的类别。",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Default",
+        "Translated": "默认值",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Default behavior, categories must be set to this to edit their shortcuts!",
+        "Translated": "默认行为，类别必须设置为这个才能编辑其快捷方式！",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Incremental",
+        "Translated": "渐进式",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Executes each line/shortcut in order over multiple presses.",
+        "Translated": "在多个按键上按顺序执行每一行/快捷键。",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Random",
+        "Translated": "随机",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Executes a random line/shortcut when pressed.",
+        "Translated": "按下时执行随机行/快捷键。",
+        "Context": "ConfigEditorUI.EditShortcutMode",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Color",
+        "Translated": "颜色",
+        "Context": "ConfigEditorUI.EditShortcutColor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Button Width",
+        "Translated": "按钮宽度",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Set to 0 to use text width.",
+        "Translated": "设置为 0 以使用文本宽度。",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Columns",
+        "Translated": "列",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Number of shortcuts in each row before starting another.\nSet to 0 to specify infinite.",
+        "Translated": "在开始另一行之前，每行的快捷方式数量。\n设置为 0 以指定无限。",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Scale",
+        "Translated": "缩放",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Font Scale",
+        "Translated": "字体比例",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Spacing",
+        "Translated": "间距",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat2"
+      },
+      {
+        "Original": "Open on Hover",
+        "Translated": "在 Hover 上打开",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Close When Not Hovered",
+        "Translated": "未悬停时关闭",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Stay Open on Selection",
+        "Translated": "保持选择开放",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Keeps the category open when pressing shortcuts within it.\nMay not work if the shortcut interacts with other plugins.",
+        "Translated": "在其中按下快捷键时保持类别打开。\n如果快捷方式与其他插件交互，可能无法正常工作。",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "No Background",
+        "Translated": "无背景",
+        "Context": "ConfigEditorUI.EditShortcutCategoryOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Zoom",
+        "Translated": "缩放",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Offset",
+        "Translated": "偏移",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat2"
+      },
+      {
+        "Original": "Rotation",
+        "Translated": "旋转",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Cooldown Action ID",
+        "Translated": "冷却操作 ID",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.ExcelSheetCombo"
+      },
+      {
+        "Original": "Number",
+        "Translated": "编号",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Darken (Forces the icon frame)",
+        "Translated": "变暗 (强制图标帧)",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Default Spinner (Forces the icon frame)",
+        "Translated": "默认纺锤 (强制图标帧)",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Orange GCD Spinner",
+        "Translated": "橙色 GCD 旋转器",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Charge Spinner",
+        "Translated": "给 Spinner 充电",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Side",
+        "Translated": "侧面",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Alignment",
+        "Translated": "对齐",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Top",
+        "Translated": "顶部",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Left",
+        "Translated": "左",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Center",
+        "Translated": "中心",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Right",
+        "Translated": "右",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Animation",
+        "Translated": "动画",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Slide",
+        "Translated": "幻灯片",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Immediate",
+        "Translated": "立即",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Always Visible",
+        "Translated": "始终可见",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Reveal Area Scale",
+        "Translated": "显示区域比例",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Edit Mode",
+        "Translated": "编辑模式",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Click Through",
+        "Translated": "点击通过",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "WARNING: This will prevent you from interacting with this bar.\nTo edit the settings again, you will need to use the \"O\" button\nnext to the bar's name inside the general config.",
+        "Translated": "警告：这将阻止你与这个条形图进行互动。\n要再次编辑设置，您需要使用 “O” 按钮。\n在通用配置中的条形码名称旁边。",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Lock Position",
+        "Translated": "锁定位置",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hint",
+        "Translated": "提示",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Will prevent the bar from sleeping, increasing CPU load.",
+        "Translated": "这将防止酒吧睡眠，增加 CPU 负载。",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Position",
+        "Translated": "位置",
+        "Context": "ConfigEditorUI.EditBarGeneralOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat2"
+      },
+      {
+        "Original": "None",
+        "Translated": "无",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "[847] Item",
+        "Translated": "[847] 项目",
+        "Context": "ConfigEditorUI.EditShortcutIconOptions",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Icon Browser",
+        "Translated": "Icon 浏览器",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "nhg",
+        "Translated": "Ngng",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.AddHeaderIconButton"
+      },
+      {
+        "Original": "System",
+        "Translated": "系统",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Classes/Jobs",
+        "Translated": "课程/工作",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Macros",
+        "Translated": "宏",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "FC Crests/Symbols",
+        "Translated": "FC 徽章/符号",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "New Game+",
+        "Translated": "新 Game+",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Classes/Jobs (GPose)",
+        "Translated": "课程/工作 (GPose)",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Extra",
+        "Translated": "额外",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Place images inside \"%AppData%\\XIVLauncher\\pluginConfigs\\QoLBar\\icons\"\nto load them as usable icons, the file names must be in the format \"#.img\" (# > 0).\nI.e. \"1.jpg\" \"2.png\" \"3.png\" \"732487.jpg\" and so on.",
+        "Translated": "将图像放入 “%AppData%\\XIVLauncher\\pluginConfigs\\QoLBar\\icons” 中\n要将它们加载为可用图标，文件名必须采用 “#.img” 格式 (# > 0)。\n即 “1.jpg”“2.png”“3.png”“732487.jpg” 等。",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Refresh Custom Icons",
+        "Translated": "更新自定义图标",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Open Icon Folder",
+        "Translated": "打开图标文件夹",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Markers",
+        "Translated": "标记",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Markers 2",
+        "Translated": "标记 2",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "HQ FC Banners",
+        "Translated": "总部 FC 旗帜",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Map Markers",
+        "Translated": "地图标记",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Stamps",
+        "Translated": "邮票",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Currencies",
+        "Translated": "货币",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Chocobo Racing",
+        "Translated": "巧克力牛仔赛",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Achievements/Hunting Log",
+        "Translated": "成就/狩猎日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Cosmic Exploration",
+        "Translated": "宇宙探索",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Fishing",
+        "Translated": "钓鱼",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Tags",
+        "Translated": "标签",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Fashion Log",
+        "Translated": "时尚日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Animals",
+        "Translated": "动物",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Cosmic Exploration 2",
+        "Translated": "宇宙探索 2",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Quests",
+        "Translated": "任务",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "BLU UI",
+        "Translated": "蓝色 UI",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Bozja UI",
+        "Translated": "博兹贾界面",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Mahjong",
+        "Translated": "麻将",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Quest Log",
+        "Translated": "任务日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Relic Log",
+        "Translated": "遗迹日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Misc UI",
+        "Translated": "Mix UI",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Occult Crescent UI",
+        "Translated": "隐藏新月 UI",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "FC Ranks",
+        "Translated": "FC 排名",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "UI Text",
+        "Translated": "UI 文本",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Strategy Board",
+        "Translated": "战略委员会",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Traits",
+        "Translated": "特征",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Fashion",
+        "Translated": "时尚",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Event",
+        "Translated": "活动",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Mount",
+        "Translated": "装载",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Duties/Trials",
+        "Translated": "职责/试炼",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Occult Crescent",
+        "Translated": "神秘新月",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Eureka",
+        "Translated": "尤里卡",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Occult Crescent 2",
+        "Translated": "神秘新月 2",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Emotes",
+        "Translated": "表情符号",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Mounts",
+        "Translated": "坐骑",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Minions",
+        "Translated": "小喽啰",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Mounts... again?",
+        "Translated": "再次......登录？",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Minion Items",
+        "Translated": "米尼翁物品",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Mounts Log",
+        "Translated": "骑士日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Minions Log",
+        "Translated": "米尼翁日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Housing",
+        "Translated": "住房",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Belts",
+        "Translated": "腰带",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Flowers",
+        "Translated": "鲜花",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Special Equipment",
+        "Translated": "特殊装备",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Glasses",
+        "Translated": "眼镜",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Splash Logos",
+        "Translated": "喷涂标志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "World Map",
+        "Translated": "世界地图",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Zone Maps",
+        "Translated": "分区地图",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Gardening Log",
+        "Translated": "园艺日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Mount/Minion Footprints",
+        "Translated": "山地/工作人员足迹",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "DoH/DoL Logs",
+        "Translated": "DoH/DoL 日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Credits",
+        "Translated": "学分",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Fishing Log",
+        "Translated": "钓鱼日志",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Notebooks",
+        "Translated": "笔记本",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Notebooks 2",
+        "Translated": "笔记本 2",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Hunts",
+        "Translated": "狩猎",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Large UI",
+        "Translated": "大型用户界面",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Tutorials",
+        "Translated": "教程",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Adventurer Plates",
+        "Translated": "冒险者之牌",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Cosmic Exploration Zones",
+        "Translated": "宇宙探索区域",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Triple Triad",
+        "Translated": "三个三元组",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Duty Support",
+        "Translated": "责任支持",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Popup Texts",
+        "Translated": "弹出式文本",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Japanese Popup Texts",
+        "Translated": "日语弹出式文本",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Boss Titles",
+        "Translated": "老板头衔",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Quest Images",
+        "Translated": "任务图像",
+        "Context": "IconBrowserUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Contains:",
+        "Translated": "包含：",
+        "Context": "IconBrowserUI.BeginIconList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "QoL Bar Configuration",
+        "Translated": "QoL Bar 配置",
+        "Context": "PluginUI.DrawPluginConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Bar Manager",
+        "Translated": "条管理器",
+        "Context": "PluginUI.DrawPluginConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Condition Sets",
+        "Translated": "条件集",
+        "Context": "PluginUI.DrawPluginConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Backups",
+        "Translated": "备份",
+        "Context": "PluginUI.DrawPluginConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "PluginUI.DrawPluginConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Debug",
+        "Translated": "调试",
+        "Context": "PluginUI.DrawPluginConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Options",
+        "Translated": "选项",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Hide",
+        "Translated": "隐藏",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Reveal",
+        "Translated": "显示",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Condition Set",
+        "Translated": "条件设置",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Applies a condition set to the bar that will control when it is shown.\nUseful for making groups of bars that all display at the same time.\nYou can make these on the \"Condition Sets\" tab at the top of this window.",
+        "Translated": "将设定的条件应用于条形，以控制其何时显示。\n用于创建同时显示所有条形图的组合。\n您可以在此窗口顶部的 “条件设置” 选项卡中执行这些操作。",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Cut",
+        "Translated": "切换",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Right click to delete!",
+        "Translated": "右键点击删除！",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Right click this button to delete bar #",
+        "Translated": "右键点击此按钮以删除 # 栏",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "\nThe bar will be exported to clipboard first.",
+        "Translated": "条将首先导出到剪贴板。",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Import",
+        "Translated": "导入",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import a bar from the clipboard, or import a single shortcut as a new bar.\nRight click will add a demo bar that showcases various features.",
+        "Translated": "从剪贴板导入一个条形图，或者将单个快捷键作为新条形图导入。\n右键点击将添加一个展示各种功能的演示栏。",
+        "Context": "PluginUI.DrawBarManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Export on Delete",
+        "Translated": "使用 Delete 导出",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Always Display Bars",
+        "Translated": "始终显示条",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Bars will remain visible even when logged out.",
+        "Translated": "即使退出登录，条形图仍然可见。",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Use Hotbar Frames on Icons",
+        "Translated": "在图标上使用热条框",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Use HR Icons",
+        "Translated": "使用 HR 图标",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Loads the high resolution icons instead. Be aware that the Icon Browser will use\nup to 5GB of memory until closed if you open the \"Spoilers\" tabs!",
+        "Translated": "加载高分辨率图标。请注意，图标浏览器将使用\n如果您打开 “剧透” 选项卡，最多可达 5GB 内存，直到关闭！",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Disable Condition Caching",
+        "Translated": "禁用状态缓存",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disables the 100ms delay between checking conditions, increasing CPU load.",
+        "Translated": "禁用检查条件之间的 100 毫秒延迟，增加 CPU 负载。",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Bar Font Size",
+        "Translated": "条形字体大小",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputFloat"
+      },
+      {
+        "Original": "Default: ",
+        "Translated": "默认值：",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Backup Timer",
+        "Translated": "备份计时器",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Number of minutes since the last save to perform a backup. Set to 0 to disable.",
+        "Translated": "自上次保存备份以来的分钟数。将其设置为 0 以禁用。",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Pie Settings",
+        "Translated": "馅饼设置",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Opacity",
+        "Translated": "不透明度",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragInt"
+      },
+      {
+        "Original": "Alternate Angle",
+        "Translated": "替代角度",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Appear in Center",
+        "Translated": "在中心显示",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Center Mouse on Open",
+        "Translated": "打开中心鼠标",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Return Mouse on Close",
+        "Translated": "关闭时返回鼠标",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Recorrect Old Mouse Position",
+        "Translated": "纠正旧鼠标位置",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Opt out of Dalamud settings for hiding UI",
+        "Translated": "选择退出 Dalamud 设置以隐藏 UI",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Game UI Toggled",
+        "Translated": "游戏 UI 被切换",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "In /gpose",
+        "Translated": "在/gpose",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Temporary settings, ENABLE AT OWN RISK",
+        "Translated": "临时设置，在自有风险下启用",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Allow exporting sensitive condition sets",
+        "Translated": "允许导出敏感条件集",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Allows exporting condition sets that contain personal information, such as your character ID.",
+        "Translated": "允许导出包含个人信息的条件集，例如您的角色 ID。",
+        "Context": "PluginUI.DrawSettingsMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Open Folder",
+        "Translated": "打开文件夹",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Create Backup",
+        "Translated": "创建备份",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "QoLBarBackups",
+        "Translated": "QoLBar 备份",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Columns"
+      },
+      {
+        "Original": "Load",
+        "Translated": "加载",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Double click this button to overwrite and\n",
+        "Translated": "双击此按钮以覆盖并",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "reload the current config with ",
+        "Translated": "重新加载当前配置",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Double right click to delete!",
+        "Translated": "双击右键删除！",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Double right click this button to delete ",
+        "Translated": "双击此按钮以删除",
+        "Context": "PluginUI.DrawBackupManager",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Game Data Pointers",
+        "Translated": "游戏数据指针",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "DebugPointers",
+        "Translated": "调试指针",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Columns"
+      },
+      {
+        "Original": "UI Module (Text Input Active)",
+        "Translated": "UI 模块 (活动文本输入)",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rapture Shell Module",
+        "Translated": "Rapture Shell 模块",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rapture Macro Module",
+        "Translated": "Rapture 宏模块",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Addon Config (HUD Layout #)",
+        "Translated": "Addon Config(HUD 布局 #)",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Item Context Menu Agent",
+        "Translated": "上下文菜单项 代理",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Export Editor",
+        "Translated": "导出编辑器",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Serialized String",
+        "Translated": "序列化字符串",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Deserialized String",
+        "Translated": "反序列化字符串",
+        "Context": "PluginUI.DrawDebugMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Bar #",
+        "Translated": "小节 #",
+        "Context": "PluginUI.SetBarHidden",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " does not exist.",
+        "Translated": "不存在。",
+        "Context": "PluginUI.SetBarHidden",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed to save: ",
+        "Translated": "未能保存：",
+        "Context": "PluginUI.BackupFile",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Failed to delete: ",
+        "Translated": "未能删除：",
+        "Context": "PluginUI.DeleteFile",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "ShortcutCategory",
+        "Translated": "Shortcut 类别",
+        "Context": "ShortcutUI.OnClick",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "editShortcut",
+        "Translated": "edit Shortcut",
+        "Context": "ShortcutUI.DrawShortcut",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopupOnItemClick"
+      },
+      {
+        "Original": "Add a new shortcut.",
+        "Translated": "添加新的快捷方式。",
+        "Context": "ShortcutUI.DrawCategory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Shortcut",
+        "Translated": "快捷键",
+        "Context": "ShortcutUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Icon",
+        "Translated": "图标",
+        "Context": "ShortcutUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Drag to move the shortcut.",
+        "Translated": "拖动以移动快捷方式。",
+        "Context": "ShortcutUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Right click this button to delete the shortcut!",
+        "Translated": "右键点击此按钮删除快捷方式！",
+        "Context": "ShortcutUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "\nThe shortcut will be exported to clipboard first.",
+        "Translated": "快捷方式将首先导出到剪贴板。",
+        "Context": "ShortcutUI.DrawConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Opens up a list of all icons you can use instead of text.\nWarning: The last 3 tabs contain very large images and will use several GB of memory.\nClicking on one will copy text to be pasted into the \"Name\" field of a shortcut.\nAdditionally, while the browser is open it will autofill the \"Name\" of shortcuts.",
+        "Translated": "打开所有可以用来代替文本的图标列表。\n警告：最后 3 个选项卡包含非常大的图像，将占用数 GB 的内存。\n点击其中一个将拷贝文本并粘贴到快捷指令的 “名称” 栏中。\n此外，当浏览器打开时，它会自动填充快捷方式的 “名称”。",
+        "Context": "ShortcutUI.DrawIconBrowserButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Create",
+        "Translated": "创建",
+        "Context": "ShortcutUI.DrawAddShortcut",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import a shortcut from the clipboard,\nor import all of another bar's shortcuts.",
+        "Translated": "从剪贴板导入快捷指令\n或者导入另一个条形码的所有快捷方式。",
+        "Context": "ShortcutUI.DrawAddShortcut",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "icon",
+        "Translated": "图标",
+        "Context": "ShortcutUI.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "Condition Flag",
+        "Translated": "条件标志",
+        "Context": "ConditionFlagCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Job",
+        "Translated": "工作",
+        "Context": "JobCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Advanced condition.",
+        "Translated": "高级状态。",
+        "Context": "JobCondition.GetSelectableTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Failed regex!",
+        "Translated": "正则表达失败！",
+        "Context": "MiscConditionHelpers.DrawTimespanInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Minimum: ",
+        "Translated": "最小值：",
+        "Context": "MiscConditionHelpers.DrawTimespanInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "\nMaximum: ",
+        "Translated": "最大值：",
+        "Context": "MiscConditionHelpers.DrawTimespanInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "\nWarning: this will always be true!",
+        "Translated": "警告：这将永远是真的！",
+        "Context": "MiscConditionHelpers.DrawTimespanInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Timespan should be formatted as \"XX:XX-XX:XX\" (24h) and may contain \"X\" wildcards.\nI.e \"XX:30-XX:10\" will return true for times such as 01:30, 13:54, and 21:09.\nThe minimum time is inclusive, but the maximum is not.\n\n",
+        "Translated": "时间跨度应格式化为 “XX:XX-XX:XX”(24 小时)，并可能包含 “X” 通配符。\n即 “XX:30-XX:10” 将在 01:30、13:54 和 21:09 等时间返回真值。\n最小时间是包含的，但最大时间不是。",
+        "Context": "MiscConditionHelpers.DrawTimespanInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "See \"/xldata ai\" to find the names of various windows.\nRight click to set this to the currently focused UI addon's name.",
+        "Translated": "请参阅 “/xldata ai” 以查找各种窗口的名称。\n右键单击将此设置为当前聚焦的 UI 插件名称。",
+        "Context": "MiscConditionHelpers.DrawAddonInput",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Is Logged In",
+        "Translated": "已登录",
+        "Context": "LoggedInCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Character ID",
+        "Translated": "角色 ID",
+        "Context": "CharacterCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Selecting this will assign the current character's ID to this condition.",
+        "Translated": "选择此选项将为此条件分配当前字符的 ID。",
+        "Context": "CharacterCondition.GetSelectableTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Clear Data",
+        "Translated": "清除数据",
+        "Context": "CharacterCondition.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Assign Data",
+        "Translated": "分配数据",
+        "Context": "CharacterCondition.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "If this condition has no data when imported,\nit will automatically be assigned.",
+        "Translated": "如果这个条件在导入时没有数据，\n它将自动被分配。",
+        "Context": "CharacterCondition.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Target Exists",
+        "Translated": "目标存在",
+        "Context": "TargetCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Weapon Drawn",
+        "Translated": "武器抽取",
+        "Context": "WeaponDrawnCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Eorzea Timespan",
+        "Translated": "Eorzea 时间跨度",
+        "Context": "EorzeaTimespanCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Local Timespan",
+        "Translated": "局部时间跨度",
+        "Context": "LocalTimespanCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Current HUD Layout",
+        "Translated": "当前 HUD 布局",
+        "Context": "HUDLayoutCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Key Held",
+        "Translated": "密钥持有",
+        "Context": "KeyHeldCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "# Party Member Exists",
+        "Translated": "# 党员存在",
+        "Context": "PartyCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "This will only return true if the party member exists in the current area.",
+        "Translated": "这只有在当前区域存在党员时才会返回 true。",
+        "Context": "PartyCondition.GetTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "Pet Exists",
+        "Translated": "Pet Exists 宠物存在",
+        "Context": "PetCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Chocobo Exists",
+        "Translated": "Chocobo 存在",
+        "Context": "ChocoboCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "In Sanctuary",
+        "Translated": "在庇护所中",
+        "Context": "SanctuaryCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "This refers to areas that accumulate rested experience.",
+        "Translated": "这指的是积累休息经验的区域。",
+        "Context": "SanctuaryCondition.GetSelectableTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SetItemTooltip"
+      },
+      {
+        "Original": "In Explorer Mode",
+        "Translated": "在探索者模式中",
+        "Context": "ExplorerModeCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Addon Exists",
+        "Translated": "Addon 的存在",
+        "Context": "AddonExistsCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Addon Visible",
+        "Translated": "可见的 Addon",
+        "Context": "AddonVisibleCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Plugin Enabled",
+        "Translated": "插件已启用",
+        "Context": "PluginCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Current Job",
+        "Translated": "当前工作",
+        "Context": "CurrentJobPreset.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Current Role",
+        "Translated": "当前角色",
+        "Context": "CurrentRolePreset.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "All currently active condition flags",
+        "Translated": "所有当前活跃状态标志",
+        "Context": "AllCurrentConditionFlagsPreset.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Condition Flags Active",
+        "Translated": "条件标志处于活动状态",
+        "Context": "AllCurrentConditionFlagsPreset.Generate",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Out of Combat",
+        "Translated": "退出战斗",
+        "Context": "OutOfCombatPreset.get_Name",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Not in most content, cutscenes, or loading",
+        "Translated": "不在大多数内容、过场动画或加载中",
+        "Context": "OutofTheWayPreset.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Out of the Way",
+        "Translated": "偏离轨道",
+        "Context": "OutofTheWayPreset.Generate",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Role",
+        "Translated": "角色",
+        "Context": "RoleCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Zone",
+        "Translated": "Zone 区域",
+        "Context": "ZoneCondition.get_ConditionName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
