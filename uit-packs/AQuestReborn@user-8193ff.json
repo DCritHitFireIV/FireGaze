@@ -1,3142 +1,2259 @@
 {
-  "type": "uit-contribution",
-  "plugin": "AQuestReborn",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-08",
+    "source": "user",
+    "label": "玩家包 · 8193ff",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Search",
       "Translated": "搜索",
       "Context": "ImGuiEx.ExcelSheetSearchInput",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " Right click to go to ",
       "Translated": "右键点击前往",
       "Context": "ImGuiEx.AddDonationHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx/HeaderIconOptions.set_Tooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "One or more modules failed to load,\nplease check /xllog for more info",
       "Translated": "一个或多个模块无法加载，\n请查看/xllog 了解更多信息",
       "Context": "DalamudPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Failed loading ",
       "Translated": "加载失败",
       "Context": "DalamudPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Error loading config! Renaming old file and resetting...",
       "Translated": "错误加载配置！重命名旧文件并重置...",
       "Context": "PluginConfiguration.LoadConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "kayra-v2",
       "Translated": "Kayra-v2",
       "Context": "Configuration..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Opens settings.",
       "Translated": "打开设置。",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "For chat objectives",
       "Translated": "对于聊天目标",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Chat with a custom NPC",
       "Translated": "与自定义 NPC 聊天",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Summon or dismiss a custom NPC",
       "Translated": "召唤或解除自定义 NPC",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Eorzea",
       "Translated": "厄尔齐亚",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Current Location: ",
       "Translated": "当前位置：",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Weather: ",
       "Translated": "天气：",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Movement: Diving underwater",
       "Translated": "动作：水下潜水",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Movement: Swimming",
       "Translated": "动作：游泳",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (Near: ",
       "Translated": "(接近：",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (Sub-Area: ",
       "Translated": "(子区域：",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Current Location: Eorzea",
       "Translated": "当前位置:Eorzea",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Nearby Objects: ",
       "Translated": "附近物体：",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Female",
       "Translated": "女性",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Male",
       "Translated": "男性",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Player Appearance: ",
       "Translated": "玩家外观：",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The NPC",
       "Translated": "NPC",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " Appearance: ",
       "Translated": "外观：",
       "Context": "Plugin.GetEnvironmentContext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[A Quest Reborn] Migrated ",
       "Translated": "【任务重生】迁移",
       "Context": "Plugin.MigrateArtemisNpcData",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " Custom NPC(s) from Artemis Roleplaying Kit.",
       "Translated": "来自阿尔忒弥斯角色扮演工具包的自定义 NPC。",
       "Context": "Plugin.MigrateArtemisNpcData",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Could not find custom NPC with the name \"",
       "Translated": "找不到叫这个名字的自定义 NPC......",
       "Context": "Plugin.OnCommandNpcSummon",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "A Wonderful Configuration Window###With a constant ID",
       "Translated": "一个美妙的配置窗口",
       "Context": "ConfigWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show Custom NPC Nameplates",
       "Translated": "显示自定义 NPC 名牌",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Normal",
       "Translated": "正常",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Style2",
       "Translated": "风格 2",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Telepathic",
       "Translated": "心灵感应",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Omicron/Machine",
       "Translated": "Omicron/机器",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Shout",
       "Translated": "喊叫",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Written Lore",
       "Translated": "书面传说",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Monster/Creature",
       "Translated": "怪物/生物",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Dragon/Linkpearl",
       "Translated": "龙/林克珀尔",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "System/Ascian",
       "Translated": "系统/阿西安",
       "Context": "EditorWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Save Quest",
       "Translated": "保存任务",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "New Quest",
       "Translated": "新任务",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tutorial",
       "Translated": "教程",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Info 1",
       "Translated": "信息 1",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Info 2",
       "Translated": "信息 2",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Language",
       "Translated": "语言",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Has Quest Acceptance Popup",
       "Translated": "已接受任务弹出",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Reward (Secret Message)",
       "Translated": "任务奖励 (秘密消息)",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Reward (Download Link)",
       "Translated": "任务奖励 (下载链接)",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Reward (Media File Path)",
       "Translated": "任务奖励 (媒体文件路径)",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Export for re-use",
       "Translated": "导出用于再次使用",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Objective List",
       "Translated": "目标清单",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Objective Editor",
       "Translated": "客观编辑器",
       "Context": "EditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Objective Id: ",
       "Translated": "Objective ID:",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Copy Id To Clipboard",
       "Translated": "将编辑 ID 复制到剪贴板",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set Quest Objective Coordinates",
       "Translated": "设置任务目标坐标",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Coordinates:",
       "Translated": "坐标：",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Territory Id:",
       "Translated": "领地 ID:",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Discriminator: ",
       "Translated": "鉴别器：",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enemy Id:",
       "Translated": "敌人 ID:",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set Min",
       "Translated": "设置 Min",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set Max",
       "Translated": "设置 Max",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "-- Tail Objective Path Recording --",
       "Translated": "——尾部目标路径记录——",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "RECORDING... Walk the path!",
       "Translated": "记录......走这条路！",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Time: ",
       "Translated": "时间：",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "s  |  Waypoints: ",
       "Translated": "s | 路标：",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Recorded Waypoints: ",
       "Translated": "记录的航点：",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "-- Detection Settings --",
       "Translated": "检测设置",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "-- Dialogue & Reactions --",
       "Translated": "对话与反应——",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Look Around Blurbs",
       "Translated": "环顾四周的 Blurbs",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TreeNode"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add Look Around Blurb",
       "Translated": "添加 Look Around Blurb",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Spotted / Caught Blurbs",
       "Translated": "发现/捕获 Blurbs",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TreeNode"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add Caught Blurb",
       "Translated": "添加 Caught Blurb",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Player Position Is Locked During Events",
       "Translated": "事件期间玩家位置被锁定",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Objective Triggers Cutscene",
       "Translated": "目的触发切换场景",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Event List",
       "Translated": "事件列表",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Event Editor",
       "Translated": "事件编辑器",
       "Context": "EditorWindow.DrawQuestNodeEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Narrative",
       "Translated": "叙事",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Music And Sounds",
       "Translated": "音乐与声音",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sound Effect ",
       "Translated": "声音效果",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add Sound Effect Slot",
       "Translated": "添加声音效果槽",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Creating Appearance Please Wait",
       "Translated": "创建外观请稍等",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Player Appearance Swap Type",
       "Translated": "玩家外观交换类型",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Looks At Player During Event",
       "Translated": "活动期间查看玩家",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Event Sets New NPC Position",
       "Translated": "事件设置新 NPC 位置",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Npc Movement Position",
       "Translated": "NPC 移动位置",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Npc Movement Rotation",
       "Translated": "NPC 移动旋转",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Event Sets New Cutscene Player Position",
       "Translated": "事件设置新的过场动画玩家位置",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cutscene Player Movement Position",
       "Translated": "过场动画玩家移动位置",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cutscene Player Movement Rotation",
       "Translated": "过场动画玩家动作旋转",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Is Not Affected During Event",
       "Translated": "摄像头在活动期间不受影响",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Uses Dolly",
       "Translated": "摄像机使用多莉",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Free Camera (WASD + Q/E, Shift = Fast, Right-Click = Rotate)",
       "Translated": "免费相机 (WASD + Q/E,Shift = Fast,Right-Click = Rotation)",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Start Position",
       "Translated": "摄像机起始位置",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Start Rotation",
       "Translated": "摄像机开始旋转",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Starting Field Of View",
       "Translated": "摄像头开始视野",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Starting Zoom",
       "Translated": "相机开始缩放",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set Camera Position From Current Camera",
       "Translated": "从当前摄像机设置摄像机位置",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera End Position",
       "Translated": "Camera End 位置",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera End Rotation#2",
       "Translated": "摄像机端旋转#2",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat3"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Ending Field Of View#2",
       "Translated": "摄像机端视野#2",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Ending Zoom#2",
       "Translated": "Camera End Zoom #2",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Camera Movement Speed (In Milliseconds)#2",
       "Translated": "相机运动速度 (以毫秒为单位)#2",
       "Context": "EditorWindow.DrawQuestEventEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Branching Choices List",
       "Translated": "分支选项列表",
       "Context": "EditorWindow.DrawBranchingChoicesMenu",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Branching Choices Editor",
       "Translated": "分支选择编辑器",
       "Context": "EditorWindow.DrawBranchingChoicesMenu",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Minimum Roll For Success",
       "Translated": "成功的最低要求",
       "Context": "EditorWindow.DrawBranchingChoicesEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Configure Branching Questline",
       "Translated": "配置分支任务",
       "Context": "EditorWindow.DrawBranchingChoicesEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Import Branching Questline",
       "Translated": "导入分支任务",
       "Context": "EditorWindow.DrawBranchingChoicesEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remove",
       "Translated": "删除",
       "Context": "EditorWindow.DrawBranchingChoices",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Up",
       "Translated": "向上",
       "Context": "EditorWindow.DrawQuestEvents",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Down",
       "Translated": "向下",
       "Context": "EditorWindow.DrawQuestEvents",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add Clipboard",
       "Translated": "添加剪贴板",
       "Context": "EditorWindow.DrawQuestEvents",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "To Clipboard",
       "Translated": "转到剪贴板",
       "Context": "EditorWindow.DrawQuestEvents",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hold Shift To Delete Objectives",
       "Translated": "按住 Shift 键删除目标",
       "Context": "EditorWindow.DrawQuestObjectives",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add Dominant Objective",
       "Translated": "添加主要目标",
       "Context": "EditorWindow.DrawQuestObjectives",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Unknown Quest",
       "Translated": "未知任务",
       "Context": "EventWindow.ValidateJumpTarget",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Quest Error] \"",
       "Translated": "[任务错误]“",
       "Context": "EventWindow.ValidateJumpTarget",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " references dialogue #",
       "Translated": "对话引用 #",
       "Context": "EventWindow.ValidateJumpTarget",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ", but only ",
       "Translated": "，但只有",
       "Context": "EventWindow.ValidateJumpTarget",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " dialogue entries exist (valid range: 0–",
       "Translated": "对话条目存在 (有效范围:0–)",
       "Context": "EventWindow.ValidateJumpTarget",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "). Ending dialogue to prevent soft-lock.",
       "Translated": "结束对话以防止软锁定。",
       "Context": "EventWindow.ValidateJumpTarget",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Branching Choice \"",
       "Translated": "分支选择 “",
       "Context": "EventWindow.ChoiceWindow_OnChoiceMade",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\" (dialogue #",
       "Translated": "(对话#)",
       "Context": "EventWindow.ChoiceWindow_OnChoiceMade",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ", choice #",
       "Translated": "，选择 #",
       "Context": "EventWindow.ChoiceWindow_OnChoiceMade",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (success)",
       "Translated": "(成功)",
       "Context": "EventWindow.ChoiceWindow_OnChoiceMade",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (failure)",
       "Translated": "(失败)",
       "Context": "EventWindow.ChoiceWindow_OnChoiceMade",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (randomized)",
       "Translated": "(随机化)",
       "Context": "EventWindow.ChoiceWindow_OnChoiceMade",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " uses randomized skip but has no target entries configured. Ending dialogue.",
       "Translated": "使用随机跳过但未配置目标条目。结束对话。",
       "Context": "EventWindow.ChoiceWindow_OnChoiceMade",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Padding 1",
       "Translated": "填充 1",
       "Context": "EventWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Center",
       "Translated": "中心",
       "Context": "EventWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Padding 2",
       "Translated": "填充 2",
       "Context": "EventWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hyur",
       "Translated": "海乌尔",
       "Context": "EventWindow.Race",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Lalafell",
       "Translated": "拉拉费尔",
       "Context": "EventWindow.Race",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Miqo'te",
       "Translated": "米科特",
       "Context": "EventWindow.Race",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Roegadyn",
       "Translated": "罗格迪恩",
       "Context": "EventWindow.Race",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hrothgar",
       "Translated": "罗特加",
       "Context": "EventWindow.Race",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Event End Behaviour \"Skip To Dialogue\" (dialogue #",
       "Translated": "事件结束行为 “跳到对话”(对话 #)",
       "Context": "SetEvent.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Installed Quests",
       "Translated": "安装的任务",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Objectives",
       "Translated": "任务目标",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Custom NPCs",
       "Translated": "自定义 NPC",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Settings",
       "Translated": "设置",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Donate To Further Development",
       "Translated": "捐赠用于进一步开发",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Please pick a character before configuring settings.",
       "Translated": "请在配置设置前选择一个角色。",
       "Context": "MainWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pick Empty Folder For A Quest Reborn Cache (Cannot Require Admin Rights)",
       "Translated": "为任务重生缓存选择空文件夹 (无法要求管理员权限)",
       "Context": "MainWindow.DrawInitialSetup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show NPC Clickable Hitboxes (Debug)",
       "Translated": "显示 NPC 可点击 Hitbox(调试)",
       "Context": "MainWindow.DrawInitialSetup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enable NPC Ambient Chatter",
       "Translated": "启用 NPC 环境聊天",
       "Context": "MainWindow.DrawInitialSetup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enable Controller Interaction (Turn off if false triggers)",
       "Translated": "启用控制器交互 (如果触发器不正确则关闭)",
       "Context": "MainWindow.DrawInitialSetup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enable Click-to-Chat with Custom NPCs",
       "Translated": "使用自定义 NPC 启用点击即聊功能",
       "Context": "MainWindow.DrawInitialSetup",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (Hidden Location)",
       "Translated": "(隐藏位置)",
       "Context": "MainWindow.DrawQuestObjectives",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Installed Quest Selector",
       "Translated": "安装任务选择器",
       "Context": "MainWindow.InstalledQuestsTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Installed Quest Information",
       "Translated": "安装的任务信息",
       "Context": "MainWindow.InstalledQuestsTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Author",
       "Translated": "作者",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Name",
       "Translated": "任务名称",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Description",
       "Translated": "描述",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Starting Location",
       "Translated": "起始位置",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reset Quest Progress",
       "Translated": "重置任务进度",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Edit Quest",
       "Translated": "编辑任务",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Export Quest",
       "Translated": "导出任务",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Recover Quest",
       "Translated": "恢复任务",
       "Context": "MainWindow.DrawInstalledQuestInformation",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Creator",
       "Translated": "任务创建者",
       "Context": "MainWindow.DrawInstalledQuestSelector",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Install Quest",
       "Translated": "安装任务",
       "Context": "MainWindow.DrawInstalledQuestSelector",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Re-scan Quests",
       "Translated": "重新扫描任务",
       "Context": "MainWindow.DrawInstalledQuestSelector",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Send",
       "Translated": "发送",
       "Context": "NpcChatWindow.DrawDialogueContent",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Exit",
       "Translated": "退场",
       "Context": "NpcChatWindow.DrawDialogueContent",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "*turns away and refuses to speak*",
       "Translated": "* 转过身去，拒绝说话 *",
       "Context": "NpcChatWindow.SendMessage",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "(No response)",
       "Translated": "(无回应)",
       "Context": "SendMessage.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Failed to get response.",
       "Translated": "未能得到回应。",
       "Context": "SendMessage.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Creation List",
       "Translated": "NPC 创建列表",
       "Context": "NPCEditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Creation Editor",
       "Translated": "NPC 创建编辑器",
       "Context": "NPCEditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Transform List",
       "Translated": "NPC 变换列表",
       "Context": "NPCTransformEditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Transform Editor",
       "Translated": "NPC 转换编辑器",
       "Context": "NPCTransformEditorWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Default Animation Id: ",
       "Translated": "默认动画 ID:",
       "Context": "NPCTransformEditorWindow.DrawTransformEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Position: ",
       "Translated": "位置：",
       "Context": "NPCTransformEditorWindow.DrawTransformEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Rotation: ",
       "Translated": "旋转：",
       "Context": "NPCTransformEditorWindow.DrawTransformEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Scale: ",
       "Translated": "比例尺：",
       "Context": "NPCTransformEditorWindow.DrawTransformEditor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set Transform Coordinates From Standing Position",
       "Translated": "设置站立位置的变换坐标",
       "Context": "NPCTransformEditorWindow.DrawTransformEditor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Details###With a constant ID",
       "Translated": "任务详情",
       "Context": "QuestAcceptanceWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Content Rating:",
       "Translated": "内容评分：",
       "Context": "QuestAcceptanceWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reward:",
       "Translated": "奖励：",
       "Context": "QuestAcceptanceWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Description:",
       "Translated": "描述：",
       "Context": "QuestAcceptanceWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Accept",
       "Translated": "接受",
       "Context": "QuestAcceptanceWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Decline",
       "Translated": "拒绝",
       "Context": "QuestAcceptanceWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest Reward###With a constant ID",
       "Translated": "任务奖励",
       "Context": "RewardWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "You were rewarded with a journey of finishing this quest!",
       "Translated": "你获得了完成这个任务的旅程作为奖励！",
       "Context": "RewardWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "You have been awarded this message:",
       "Translated": "您已获得以下信息：",
       "Context": "RewardWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Check URL",
       "Translated": "检查 URL",
       "Context": "RewardWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Awarded A Link",
       "Translated": "获得一个链接",
       "Context": "RewardWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Awarded A Media File",
       "Translated": "获奖媒体文件",
       "Context": "RewardWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Emote Id: ",
       "Translated": "表情 ID:",
       "Context": "AQuestReborn.OnEmote",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Body Animation Id: ",
       "Translated": "身体动画 ID:",
       "Context": "AQuestReborn.OnEmote",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[A Quest Reborn] ",
       "Translated": "【任务重生】",
       "Context": "AQuestReborn.CheckForCustomNpcCreationLoad",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " has been summoned!",
       "Translated": "已经被召唤了！",
       "Context": "AQuestReborn.CheckForCustomNpcCreationLoad",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " is waiting where you left them!",
       "Translated": "在你离开的地方等着呢！",
       "Context": "AQuestReborn.CheckForCustomNpcCreationLoad",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[A Quest Reborn] No custom NPCs are currently summoned.",
       "Translated": "【任务重生】目前尚未召唤定制 NPC。",
       "Context": "AQuestReborn.HandleCustomNpcChat",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " has been dismissed.",
       "Translated": "已被解雇。",
       "Context": "DismissCustomNpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Of course!",
       "Translated": "当然了！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sure, let's do it!",
       "Translated": "当然，让我们开始吧！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "I'd love to!",
       "Translated": "我很乐意！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Right away!",
       "Translated": "马上！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "With pleasure!",
       "Translated": "乐意之至！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "You got it!",
       "Translated": "你做到了！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Let's go!",
       "Translated": "我们走吧！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Gladly!",
       "Translated": "乐意之至！",
       "Context": "PairedAnimationManager.GetApproachBubble",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Penumbra] Mod directory not found: ",
       "Translated": "[Penumbra] 调制目录未找到：",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Penumbra] No mod folder matching: ",
       "Translated": "[Penumbra] 无匹配模块文件夹：",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Penumbra] Found mod: ",
       "Translated": "[Penumbra] 找到的模式：",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Penumbra] Target mod affects ",
       "Translated": "[Penumbra] 目标 mod 会影响",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " items",
       "Translated": "项目",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Penumbra] Disabling conflicting: ",
       "Translated": "禁用冲突：",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " on collection ",
       "Translated": "在集合中",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Penumbra] Enabled: ",
       "Translated": "[Penumbra] 已启用：",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (disabled ",
       "Translated": "(禁用)",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " conflicting)",
       "Translated": "冲突)",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Penumbra] Error: ",
       "Translated": "[Penumbra] 错误：",
       "Context": "PairedAnimationManager.EnablePenumbraMod",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Custom NPC Configuration",
       "Translated": "自定义 NPC 配置",
       "Context": "CustomNpcWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Monster Base ",
       "Translated": "怪物基地",
       "Context": "CustomNpcWindow.RefreshMonsterList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Default (From Class)",
       "Translated": "默认 (来自类别)",
       "Context": "CustomNpcWindow.RefreshWeaponList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Conversational Provider Settings",
       "Translated": "对话提供商设置",
       "Context": "CustomNpcWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Custom NPC",
       "Translated": "自定义 NPC",
       "Context": "CustomNpcWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hold Shift to delete this NPC.",
       "Translated": "按住 Shift 键删除这个 NPC。",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "⚠  WARNING: This will permanently delete \"",
       "Translated": "⚠ 警告：这将永久删除",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\" and ALL their data.",
       "Translated": "和他们的所有数据。",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This includes:\n• All configuration and appearance settings\n• Relationships, memories, and conversation history\n• Travel history, sentiment, and mood data",
       "Translated": "这包括：\n• 所有配置和外观设置\n• 关系、回忆和对话历史\n• 旅行历史、情绪和心境数据",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This action cannot be undone.",
       "Translated": "这个行动无法撤销。",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Type \"",
       "Translated": "类型 “",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\" to confirm:",
       "Translated": "要确认：",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Yes, Delete NPC",
       "Translated": "是的，删除 NPC",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cancel",
       "Translated": "取消",
       "Context": "CustomNpcWindow.DrawListBox",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "General & Appearance",
       "Translated": "总体与外观",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Name",
       "Translated": "NPC 名称",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "MCDF File",
       "Translated": "MCDF 文件",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Monster Model",
       "Translated": "怪物模型",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Glamourer / Penumbra",
       "Translated": "魅力/魅力",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Appearance Method",
       "Translated": "外观方法",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Creating Appearance...",
       "Translated": "创造外观......",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "MCDF File Path",
       "Translated": "MCDF 文件路径",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Browse",
       "Translated": "浏览",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Current",
       "Translated": "当前",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Search monsters...",
       "Translated": "搜索怪物......",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Glamourer Design Appearance",
       "Translated": "魅力设计外观",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Penumbra Collection Name",
       "Translated": "五彩缤纷 系列名称",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Search collections...",
       "Translated": "搜索系列...",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Penumbra is not installed or available.",
       "Translated": "佩纳姆拉尚未安装或提供。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Lore & Personality",
       "Translated": "知识与人格",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Personality",
       "Translated": "人格",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Greeting",
       "Translated": "NPC 问候",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Personality",
       "Translated": "NPC 人格",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hobbies",
       "Translated": "爱好",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Re-Roll Brain",
       "Translated": "Re-Roll 大脑",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Randomly assigns a new default AI brain for this NPC.\nDoes not affect memories or relationships.",
       "Translated": "随机为这个 NPC 分配一个新的默认 AI 大脑。\n不影响记忆或人际关系。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Lore",
       "Translated": "传说",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Birth Date (Lore)",
       "Translated": "出生日期 (Lore)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Birth Location (Lore)",
       "Translated": "出生地 (Lore)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Search locations...",
       "Translated": "搜索位置...",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Behavior & Animation",
       "Translated": "行为与动画",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Idle Pose",
       "Translated": "空闲姿势",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Multiple (Random)",
       "Translated": "多个 (随机)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Search emotes...",
       "Translated": "搜索表情符号...",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Victory Pose",
       "Translated": "胜利姿势",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Paired Animations",
       "Translated": "配对动画",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Instantly switch to this animation",
       "Translated": "立即切换到此动画",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop Animation",
       "Translated": "停止动画",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Trigger Phrase",
       "Translated": "触发短语",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. lets dance",
       "Translated": "例如，让我们跳舞",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The phrase the player says via /npcchat to trigger this animation.\nMatched case-insensitively.",
       "Translated": "玩家通过/npcchat 说出的短语触发这个动画。\n匹配的情况——不敏感。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Emote",
       "Translated": "NPC 表情符号",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Partner Emote",
       "Translated": "合作伙伴 Emote",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Partner NPC Name (optional)",
       "Translated": "伙伴 NPC 名称 (可选)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Leave empty = player is partner",
       "Translated": "留空 = 玩家是搭档",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Name of another Custom NPC to pair with.\nLeave empty to pair with the player instead.",
       "Translated": "另一个要配对的定制 NPC 的名字。\n留空以便与玩家配对。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Timing & Behavior",
       "Translated": "时机与行为",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "If checked, the animation will loop via BaseOverride.\nOtherwise it plays once via PlayTimeline.",
       "Translated": "如果检查，动画将通过 BaseOverride 循环播放。\n否则，它将通过 PlayTimeline 播放一次。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "If checked, the animation will automatically stop after the set duration.\nIf unchecked, the animation plays indefinitely.",
       "Translated": "如果检查，动画将在设定的持续时间后自动停止。\n如果未检查，动画将无限期播放。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "How long the animation plays before the NPC returns to normal.",
       "Translated": "动画播放多长时间 NPC 才会恢复正常？",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "How long the NPC waits after turning and speaking\nbefore walking to the partner. 0 = walk immediately.",
       "Translated": "NPC 转身说话后等待多久\n在走向伴侣之前。0=立即行动。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Automatically open the one-on-one NPC chat window\nwhen this paired animation starts.\nOnly works when the partner is the player.",
       "Translated": "自动打开 NPC 一对一聊天窗口\n当这个配对动画开始时。\n只有当搭档是玩家时才有效。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Chat Greeting",
       "Translated": "聊天问候",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. *holds you close*",
       "Translated": "例如:* 让你靠近 *",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Custom greeting sent when the chat window opens.\nFor example: \"*holds you close*\" or \"*dances with you*\".\nIf empty, falls back to Animation Context or the default greeting.",
       "Translated": "当聊天窗口打开时发送自定义问候。\n例如:“* 拥抱你 *” 或 “* 与你共舞 *”。\n如果为空，则返回动画上下文或默认问候语。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Emotion Override (optional)",
       "Translated": "情绪覆盖 (可选)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. happy or sad",
       "Translated": "例如，快乐或悲伤",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "An emotion/mood injected into the NPC's AI context\nwhile this paired animation is active.\nFor example: \"romantic and affectionate\" or \"playful\".\nLeave empty for no mood override.",
       "Translated": "将情感/情绪注入 NPC 的 AI 语境\n当这个配对动画处于活跃状态时。\n例如:“浪漫而深情” 或 “调皮”。\n保持空白，不要进行情绪覆盖。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Animation Context (optional)",
       "Translated": "动画上下文 (可选)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. hugging, dancing together, sitting on a lap",
       "Translated": "例如：拥抱、一起跳舞、坐在对方腿上",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Describes what the animation is doing to/with the NPC.\nInjected into the AI prompt so the NPC understands the situation.\nFor example: \"hugging\", \"dancing together\", \"sitting on a lap\".\nLeave empty for no animation context.",
       "Translated": "描述动画正在对 NPC 做什么。\n注入 AI 提示符，让 NPC 了解情况。\n例如:“拥抱”、“一起跳舞”、“坐在大腿上”。\n留空则无动画背景。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Glamourer Designs (optional)",
       "Translated": "魅力设计 (可选)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC Design Name",
       "Translated": "NPC 设计名称",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. Dance Outfit",
       "Translated": "例如：舞蹈服装",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Name of a Glamourer design to apply to the NPC during the animation.\nLeave empty for no change. Reverted when animation ends.",
       "Translated": "一款 Glamourer 设计的名称，用于在动画中应用于 NPC。\n保持空白，不进行任何更改。动画结束时恢复。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Partner Design Name",
       "Translated": "合作伙伴设计名称",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Name of a Glamourer design to apply to the partner (player or NPC) during the animation.\nLeave empty for no change. Reverted when animation ends.",
       "Translated": "魅力设计的名称，用于在动画中应用于伴侣 (玩家或 NPC)。\n保持空白，不进行任何更改。动画结束时恢复。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Penumbra Mod (optional)",
       "Translated": "Penumbra Mod(可选)",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Mod Name Filter",
       "Translated": "调制名称过滤器",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. Super Epic Group Dance Mod",
       "Translated": "例如，超级史诗群舞模式",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Partial name of a Penumbra mod to enable during this animation.\nConflicting mods (same file paths) are disabled automatically.\nAll changes are reverted when the animation ends.\nLeave empty to skip.",
       "Translated": "在这个动画中要启用的 Penumbra 模式的部分名称。\n冲突模式 (相同的文件路径) 会自动禁用。\n所有更改在动画结束时都会恢复。\n留空以便跳过。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Select an animation from the list,\nor click '+ Add' to create one.",
       "Translated": "从列表中选择一个动画，\n或者点击 “+ 添加” 来创建一个。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Job & Weapon",
       "Translated": "工作与武器",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Profession/Job",
       "Translated": "职业/工作",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Search jobs...",
       "Translated": "搜索工作......",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Equipped Weapon",
       "Translated": "装备武器",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.LabelText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Search weapons...",
       "Translated": "搜索武器......",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputTextWithHint"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Memory",
       "Translated": "记忆",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Conversation Summaries",
       "Translated": "对话摘要",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No conversation summaries yet.",
       "Translated": "还没有对话摘要。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Keyword Memories",
       "Translated": "关键词记忆",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No keyword memories yet.",
       "Translated": "还没有关键词记忆。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Keyword",
       "Translated": "关键词",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Relationships",
       "Translated": "关系",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No relationships formed yet.",
       "Translated": "还没有建立任何关系。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Person",
       "Translated": "个人",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Bond",
       "Translated": "邦德",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Meetings",
       "Translated": "会议",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Last Seen",
       "Translated": "最后一次看到",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Just now",
       "Translated": "就在刚才",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "m ago",
       "Translated": "m 前",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "h ago",
       "Translated": "H 前",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "d ago",
       "Translated": "dago",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Places Visited",
       "Translated": "游览地点",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No travel history yet.",
       "Translated": "还没有旅行记录。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Refresh",
       "Translated": "更新",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Clear All Memory",
       "Translated": "清除所有内存",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hold Shift to enable this button.",
       "Translated": "按住 Shift 键启用此按钮。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "⚠  WARNING: This will permanently erase ALL memory data for ",
       "Translated": "⚠ 警告：这将永久抹去所有内存数据",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This includes:\n• All relationships and encounter history\n• Conversation summaries\n• Visited locations\n• Sentiment and mood data",
       "Translated": "这包括：\n• 所有关系和历史相遇\n● 对话总结\n• 游览地点\n• 情感和情绪数据",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Yes, Erase Everything",
       "Translated": "是的，擦除一切",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Debug Context",
       "Translated": "调试上下文",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Full AI Context Preview",
       "Translated": "完整的 AI 上下文预览",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This is what the AI sees when responding to you.",
       "Translated": "这就是人工智能在回应你时所看到的。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Copy to Clipboard",
       "Translated": "复制到剪贴板",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Standing nearby in",
       "Translated": "站在附近",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Left at",
       "Translated": "从左到右",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Index: ",
       "Translated": "索引：",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " | Memory: ",
       "Translated": "| 记忆：",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Copy Mem",
       "Translated": "复制 Mem",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Copy GameObject Memory Address",
       "Translated": "复制游戏对象内存地址",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Copy DrawObject Memory Address",
       "Translated": "复制绘图对象内存地址",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Skeleton: ",
       "Translated": "骨架：",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " | PartialSkeletons: ",
       "Translated": "局部骨架：",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:caiyun"
     },
     {
       "Original": "Copy Skel",
       "Translated": "复制骨架",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Copy Skeleton Memory Address",
       "Translated": "拷贝骨架内存地址",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Summon NPC",
       "Translated": "召唤 NPC",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Dismiss NPC",
       "Translated": "解雇 NPC",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stay",
       "Translated": "留下",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Follow",
       "Translated": "关注",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Debug: Environmental Context",
       "Translated": "调试：环境背景",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CollapsingHeader"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC is not spawned.",
       "Translated": "NPC 没有诞生。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Glamourer plugin was not detected! This is required to make Custom NPCs",
       "Translated": "魅力插件未被检测到！这是制作自定义 NPC 所必需的。",
       "Context": "CustomNpcWindow.DrawNPCConfigurator",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Choose which conversational service powers your NPC conversations. The default server is free but uses smaller models. External providers may produce higher quality responses.",
       "Translated": "选择为你的 NPC 对话提供支持的对话服务。默认服务器是免费的，但使用较小的型号。外部提供商可能会产生更高质量的响应。",
       "Context": "CustomNpcWindow.DrawAiProviderSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Using the built-in conversational server. No configuration needed.",
       "Translated": "使用内置会话服务器。无需配置。",
       "Context": "CustomNpcWindow.DrawAiProviderSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This is a free service using 6B parameter models. For higher quality conversations, try one of the other providers.",
       "Translated": "这是一项使用 6B 参数模型的免费服务。对于更高质量的对话，请尝试其他提供商。",
       "Context": "CustomNpcWindow.DrawAiProviderSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Testing connection...",
       "Translated": "测试连接......",
       "Context": "CustomNpcWindow.DrawAiProviderSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Test Connection",
       "Translated": "测试连接",
       "Context": "CustomNpcWindow.DrawAiProviderSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "OpenAI-Compatible Endpoint",
       "Translated": "OpenAI 兼容端点",
       "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Works with CosmoRP, OpenRouter, LM Studio, Oobabooga, Ollama, or any service that implements the OpenAI chat completion API.",
       "Translated": "可与 CosmoRP、OpenRouter、LM Studio、Oobabooga、Ollama 或任何实现 OpenAI 聊天完成 API 的服务配合使用。",
       "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "API Base URL:",
       "Translated": "API 库 URL:",
       "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. https://api.pawan.krd/cosmosrp/v1 or http://localhost:1234/v1",
       "Translated": "例如，https://api.pawan.krd/cosmosrp/v1 或 http://localhost:1234/v1",
       "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "API Key (optional for local servers):",
       "Translated": "API 密钥 (对于本地服务器可选):",
       "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Model Name (optional):",
       "Translated": "型号名称 (可选):",
       "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "e.g. cosmosrp, gpt-4o-mini, local-model",
       "Translated": "例如 cosrp、GPT-4o-mini、本地模型",
       "Context": "CustomNpcWindow.DrawOpenAiCompatibleSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Uses NovelAI's high-quality text generation models (Kayra, Erato). Requires an active NovelAI subscription.",
       "Translated": "使用 NovelAI 的高质量文本生成模型 (Kayra、Erato)。需要有效的 NovelAI 订阅。",
       "Context": "CustomNpcWindow.DrawNovelAiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Persistent API Token:",
       "Translated": "持久 API 令牌：",
       "Context": "CustomNpcWindow.DrawNovelAiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Found in NovelAI Account Settings > Get Persistent API Token",
       "Translated": "在 NovelAI 帐户设置>获取持久 API 令牌中找到",
       "Context": "CustomNpcWindow.DrawNovelAiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Model:",
       "Translated": "型号：",
       "Context": "CustomNpcWindow.DrawNovelAiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Google Gemini",
       "Translated": "谷歌双子星",
       "Context": "CustomNpcWindow.DrawGeminiSettings",
-      "Source": "ai:caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:caiyun"
     },
     {
       "Original": "Uses Google's Gemini models for high-quality conversations. Requires a Google AI Studio API key.",
       "Translated": "使用 Google 的 Gemini 模型进行高质量对话。需要 Google AI Studio API 密钥。",
       "Context": "CustomNpcWindow.DrawGeminiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "API Key:",
       "Translated": "API 密钥：",
       "Context": "CustomNpcWindow.DrawGeminiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Get your key at aistudio.google.com/apikey",
       "Translated": "在 aistudio.google.com/apikey 上获取您的钥匙",
       "Context": "CustomNpcWindow.DrawGeminiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Gemini 2.0 Flash (Fast, Free Tier)",
       "Translated": "双子星 2.0 闪存 (快速、免费套餐)",
       "Context": "CustomNpcWindow.DrawGeminiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Gemini 2.5 Flash (Balanced)",
       "Translated": "双子座 2.5 闪存 (平衡)",
       "Context": "CustomNpcWindow.DrawGeminiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Gemini 2.5 Pro (Highest Quality)",
       "Translated": "Gemini 2.5 Pro(最高质量)",
       "Context": "CustomNpcWindow.DrawGeminiSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Default (Built-in)",
       "Translated": "默认 (内置)",
       "Context": "CustomNpcWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "OpenAI Compatible (CosmoRP, LM Studio, etc.)",
       "Translated": "OpenAI 兼容 (CosmoRP、LM Studio 等)",
       "Context": "CustomNpcWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Success! Response: ",
       "Translated": "成功！响应：",
       "Context": "TestAiConnection.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Failed: Empty response received. The model may have generated nothing or timed out.",
       "Translated": "失败：收到空响应。模型可能没有生成任何内容或超时。",
       "Context": "TestAiConnection.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Failed: ",
       "Translated": "失败：",
       "Context": "TestAiConnection.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "OpenAI Compatible",
       "Translated": "兼容 OpenAI",
       "Context": "OpenAICompatibleProvider.get_DisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ 接口文本属性"
+      "Source": "ai:public-caiyun"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-08T03:55:08",
-  "imported": {
-    "archive": "uit-direct-2026-10-08T03-54-55-330Z-7e6d8be7-2026-10-08T035508.json",
-    "accepted": 374,
-    "filled": 374,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 374 条 `AQuestReborn` 的界面文字译文，已收为**独立译文包** `uit-packs/AQuestReborn@user-8193ff.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 374 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
