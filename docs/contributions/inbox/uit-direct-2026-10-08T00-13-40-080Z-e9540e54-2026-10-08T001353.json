@@ -1,0 +1,1941 @@
+{
+  "issue": "direct-2026-10-08T00-13-40-080Z-e9540e54",
+  "receivedAt": "2026-10-08 00:13:53",
+  "author": "匿名直传",
+  "plugin": "PandorasBox",
+  "fingerprint": "a41baec84ecc1f08",
+  "packFile": "PandorasBox@user-a41bae.json",
+  "accepted": 230,
+  "filled": 230,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "PandorasBox",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Pandora's Box",
+        "Translated": "潘多拉的盒子",
+        "Context": "PandorasBox.get_Name",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ AboutTab.Draw"
+      },
+      {
+        "Original": "Opens the Pandora menu.",
+        "Translated": "打开 Pandora 菜单。",
+        "Context": "PandorasBox.Initialize",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Enable Theme",
+        "Translated": "启用主题",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Disable Theme",
+        "Translated": "禁用主题",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "MainWindow.DrawCommands",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Command",
+        "Translated": "命令",
+        "Context": "MainWindow.DrawCommands",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Parameters",
+        "Translated": "参数",
+        "Context": "MainWindow.DrawCommands",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Description",
+        "Translated": "描述",
+        "Context": "MainWindow.DrawCommands",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Aliases",
+        "Translated": "别名",
+        "Context": "MainWindow.DrawCommands",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Disabled Reason: ",
+        "Translated": "禁用原因：",
+        "Context": "MainWindow.DrawFeatures",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Search",
+        "Translated": "搜索",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Searches feature names and descriptions for a given word or phrase.",
+        "Translated": "搜索给定单词或短语的功能名称和描述。",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Search Results",
+        "Translated": "搜索结果",
+        "Context": "DrawFeatures",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Zone Whitelist (",
+        "Translated": "白名单区域 (",
+        "Context": "FeatureConfigEditor.TerritorySelectionEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " territories selected)",
+        "Translated": "选定的区域",
+        "Context": "FeatureConfigEditor.TerritorySelectionEditor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Invalid Auto Field Type: ",
+        "Translated": "无效自动字段类型：",
+        "Context": "BaseFeature.DrawAutoConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Currently Disabled",
+        "Translated": "当前已禁用",
+        "Context": "BaseFeature.DrawAutoConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Error with AutoConfig: ",
+        "Translated": "AutoConfig 错误：",
+        "Context": "BaseFeature.DrawAutoConfig",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Uses Peloton automatically outside of combat. (Physical Ranged only)",
+        "Translated": "在战斗外自动使用 Peloton。(仅限物理范围)",
+        "Context": "AutoPeloton.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Set Delay (seconds)",
+        "Translated": "设置延迟 (秒)",
+        "Context": "AutoPeloton.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Function only in a duty",
+        "Translated": "仅在执行任务时有效",
+        "Context": "AutoPeloton.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Use whilst walk status is toggled",
+        "Translated": "在步行状态切换时使用",
+        "Context": "AutoPeloton.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Exclude Housing Zones",
+        "Translated": "排除住宅区",
+        "Context": "AutoPeloton.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Abort pending Peloton use during countdown",
+        "Translated": "在倒计时期间暂停使用 Peloton",
+        "Context": "AutoPeloton.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Auto-Sprint on Island Sanctuary",
+        "Translated": "岛屿保护区的自动冲刺",
+        "Context": "SanctuarySprint.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically uses Isle Sprint.",
+        "Translated": "自动使用 Isle Sprint。",
+        "Context": "SanctuarySprint.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Preserve Map Links in Clipboard",
+        "Translated": "在剪贴板中保存地图链接",
+        "Context": "CoordsToMapLink.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Preserves the formatting for map links so they can be interacted with after pasting.",
+        "Translated": "保留地图链接的格式，以便在粘贴后可以与之交互。",
+        "Context": "CoordsToMapLink.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Join Party Finder Groups",
+        "Translated": "自动加入派对查找器群组",
+        "Context": "AutoJoinPF.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Whenever you click a Party Finder listing, this will bypass the description window and auto click the join button.",
+        "Translated": "每当你点击 Part Finder 列表时，它都会绕过描述窗口并自动点击加入按钮。",
+        "Context": "AutoJoinPF.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-select Gardening Soil/Seeds",
+        "Translated": "自动选择园艺土壤/种子",
+        "Context": "AutoSelectGardening.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically fill in gardening windows with seeds and soil.",
+        "Translated": "自动用种子和土壤填充花园窗户。",
+        "Context": "AutoSelectGardening.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Moved to YesAlready",
+        "Translated": "已移至 YesAlready",
+        "Context": "AutoSelectGardening.get_DisabledReason",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Show Only Inventory Items",
+        "Translated": "仅显示库存项目",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Soil",
+        "Translated": "土壤",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Seed",
+        "Translated": "种子",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Include Fertilizing",
+        "Translated": "包括施肥",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Fertilizer",
+        "Translated": "肥料",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Soil/Seed Fallback",
+        "Translated": "土壤/种子退化",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "When enabled, this will select the first soil/seed found in your inventory if the\nprimary ones chosen are not found.",
+        "Translated": "当启用时，这将选择您清单中的第一个土壤/种子，如果\n未找到所选的主要选项。",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Auto Confirm",
+        "Translated": "自动确认",
+        "Context": "AutoSelectGardening.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Auto-select Turn-ins",
+        "Translated": "自动选择转入",
+        "Context": "AutoSelectTurnin.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Whenever you have to select an item to turn in, it will automatically fill in the interface.",
+        "Translated": "每当你需要选择一个项目来输入时，它都会自动填充界面。",
+        "Context": "AutoSelectTurnin.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Commendation after Duty",
+        "Translated": "值班后的自动称赞",
+        "Context": "AutoVoteMvp.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically give a commendation to a random player in your party at the end of a duty.",
+        "Translated": "在任务结束时，自动对队伍中的随机玩家进行表扬。",
+        "Context": "AutoVoteMvp.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " [Auto-Commendation] Please note as this feature was enabled mid-duty, it may not operate correctly if you have queued into the duty with other players in your party before joining.",
+        "Translated": "请注意，由于这个功能是在值班期间启用的，如果您在加入之前已经与队伍中的其他玩家一起排队值班，它可能无法正常工作。",
+        "Context": "AutoVoteMvp.Enable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Prioritize Tank Vote",
+        "Translated": "优先考虑坦克投票",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Prioritize Healer Vote",
+        "Translated": "优先考虑治疗师投票",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Prioritize DPS Vote",
+        "Translated": "优先处理 DPS 投票",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "No Priority",
+        "Translated": "无优先级",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Hide Chat Message",
+        "Translated": "隐藏聊天消息",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Exclude Party Members That Die",
+        "Translated": "排除死亡的党员",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "How Many Times?",
+        "Translated": "多少次？",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragInt"
+      },
+      {
+        "Original": "Reset Death Tracker on Wipe",
+        "Translated": "重置死亡追踪器",
+        "Context": "AutoVoteMvp.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Crashing.",
+        "Translated": "崩溃。",
+        "Context": "DefaultVendorValue.get_DisabledReason",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Default Vendor Buy Amount",
+        "Translated": "默认供应商购买金额",
+        "Context": "DefaultVendorValue..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sets the default amount for items to buy from vendors",
+        "Translated": "设定从供应商处购买项目的默认金额",
+        "Context": "DefaultVendorValue..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adds a button to the desynthesis window to desynth all from the current dropdown. (Disclaimer: Pandora takes no responsibility for the loss of any Ultimate weapons or other rare items. Please use responsibly.)",
+        "Translated": "在解合成窗口中添加一个按钮，以解合成当前下载的所有内容。(免责声明：潘多拉对任何终极武器或其他稀有物品的损失不承担责任。请负责任地使用。)",
+        "Context": "Desynth.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You are mounted, please dismount",
+        "Translated": "您已上车，请下车",
+        "Context": "Desynth.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Desynthing. Click to Abort.",
+        "Translated": "去合成。点击 “中止”。",
+        "Context": "Desynth.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Disable Known Glamours in Glamour Creation",
+        "Translated": "在魅力创作中禁用已知魅力",
+        "Context": "DisableKnownGlam.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Disables items from being transferred to the glamour dresser if it already exists in it",
+        "Translated": "禁止物品转移到魅力梳妆台，如果它们已经存在于其中",
+        "Context": "DisableKnownGlam.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically Enabled Yes Buttons",
+        "Translated": "自动启用 “是” 按钮",
+        "Context": "EnableYesButtons.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sets the Yes button on Yes/No prompts to automatically be enabled if normally a checkbox needed checked.",
+        "Translated": "将 “是” 按钮设置为 “是”/“否” 提示，以在正常情况下需要勾选复选框时自动启用。",
+        "Context": "EnableYesButtons.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Saddlebag Entrust Duplicates",
+        "Translated": "鞍囊托管复制品",
+        "Context": "EntrustChocoboDuplicates.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adds a button to the bottom of the saddlebag to entrust duplicates.",
+        "Translated": "在鞍囊底部添加一个按钮以委托复制品。",
+        "Context": "EntrustChocoboDuplicates.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Entrust Duplicates",
+        "Translated": "委托重复项",
+        "Context": "EntrustChocoboDuplicates.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Extract All Materia",
+        "Translated": "提取所有物质",
+        "Context": "ExtractAll.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adds a button to the extract materia window to start extracting all.",
+        "Translated": "在提取材料窗口中添加一个按钮以开始提取所有内容。",
+        "Context": "ExtractAll.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Extract All###StartExtract",
+        "Translated": "提取所有",
+        "Context": "ExtractAll.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Extracting. Click to abort.###AbortExtract",
+        "Translated": "提取。点击中止。",
+        "Context": "ExtractAll.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "FC Chest Quick Deposit",
+        "Translated": "FC 胸部快速存款",
+        "Context": "FCChestQuickDeposit.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Issues with crashing",
+        "Translated": "崩溃的问题",
+        "Context": "FCChestQuickDeposit.get_DisabledReason",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Adds a context menu to items whilst the FC chest is open to quickly deposit them.",
+        "Translated": "在 FC 箱打开时为物品添加上下文菜单，以便快速存放。",
+        "Context": "FCChestQuickDeposit.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Default Grand Company Shop Menu",
+        "Translated": "默认 Grand Company 商店菜单",
+        "Context": "GCVendorDefault.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sets the default tab in the grand company menu when you open it.",
+        "Translated": "打开主菜单时设定默认选项卡。",
+        "Context": "GCVendorDefault.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Select Rank",
+        "Translated": "选择排名",
+        "Context": "GCVendorDefault.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Select Category",
+        "Translated": "选择类别",
+        "Context": "GCVendorDefault.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Automatically merge stacks of same items",
+        "Translated": "自动合并相同项目的堆栈",
+        "Context": "MergeStacks.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "When you open your inventory, the plugin will try and pull all stacks of the same item together.",
+        "Translated": "当你打开库存时，插件会尝试将所有相同物品的堆栈拉到一起。",
+        "Context": "MergeStacks.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Moved to CBT",
+        "Translated": "移动到 CBT",
+        "Context": "MergeStacks.get_DisabledReason",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Add \"Open All\" to Coffers",
+        "Translated": "将 “打开所有” 添加到库存",
+        "Context": "OpenAllCoffers.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adds an \"Open All\" option to the right click menu of various items that stack and can be opened from the inventory.",
+        "Translated": "在堆叠的各种项目的右键菜单中添加 “全部打开” 选项，这些项目可以从清单中打开。",
+        "Context": "OpenAllCoffers.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Party Finder Show More",
+        "Translated": "派对查找器显示更多内容",
+        "Context": "PartyFinderShowMore.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Raise the display limit from 50 to the 100 limit actually allowed by the game.",
+        "Translated": "将显示限制从 50 提高到游戏实际允许的 100。",
+        "Context": "PartyFinderShowMore.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Quick Lower Quality",
+        "Translated": "快速降低质量",
+        "Context": "QuickLowerQuality.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically confirms the lower quality popup menu.",
+        "Translated": "自动确认低质量弹出式菜单。",
+        "Context": "QuickLowerQuality.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reduce All Items",
+        "Translated": "减少所有项目",
+        "Context": "ReduceAll.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adds a button to Aetherial Reduction to process all items.",
+        "Translated": "为以太压缩添加按钮以处理所有项目。",
+        "Context": "ReduceAll.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reduce All###StartReduce",
+        "Translated": "减少所有项",
+        "Context": "ReduceAll.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reducing. Click to abort.###AbortReduce",
+        "Translated": "还原。点击取消。",
+        "Context": "ReduceAll.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Automatically Refresh Party Finder",
+        "Translated": "自动刷新当事人查询器",
+        "Context": "RefreshPF..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Refreshes the Party Finder at set intervals",
+        "Translated": "按固定间隔刷新 Part Finder",
+        "Context": "RefreshPF..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No longer being supported. Someone please PR further updates ty.",
+        "Translated": "不再支持。请有人进一步更新我们的公关信息。",
+        "Context": "SimplifyRelicQuest.get_DisabledReason",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Simplify Relic Quest Pickup",
+        "Translated": "简化文物任务拾取",
+        "Context": "SimplifyRelicQuest..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Adds a description of what stage a quest is for when talking to the NPC.",
+        "Translated": "添加了与 NPC 交谈时任务所处阶段的描述。",
+        "Context": "SimplifyRelicQuest..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Sticky Command Panel",
+        "Translated": "粘性命令面板",
+        "Context": "StickyQuickPanel..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Prevents the Command Panel from closing during load screens.",
+        "Translated": "防止命令面板在加载屏幕期间关闭。",
+        "Context": "StickyQuickPanel..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Trade All Collectables",
+        "Translated": "交易所有收藏品",
+        "Context": "TradeAllCollectibles.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Replaces the Trade button on the collectables interface with a Trade All button for the selected collectable.",
+        "Translated": "将收藏夹界面上的 “交易” 按钮替换为所选收藏夹的 “全部交易” 按钮。",
+        "Context": "TradeAllCollectibles.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Trade All###StartTrade",
+        "Translated": "全部交易",
+        "Context": "TradeAllCollectibles.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Trading. Click to abort.###AbortTrade",
+        "Translated": "交易。点击中止。",
+        "Context": "TradeAllCollectibles.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Action Combat Targeting",
+        "Translated": "行动战斗目标定位",
+        "Context": "ActionTargeting.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically targets and switches your target to the nearest within your line of sight.",
+        "Translated": "自动瞄准并将目标切换到视线范围内最近的位置。",
+        "Context": "ActionTargeting.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Max Distance (yalms)",
+        "Translated": "最大距离 (yallms)",
+        "Context": "ActionTargeting.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Don't Unset Target",
+        "Translated": "不要取消设定目标",
+        "Context": "ActionTargeting.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Unset Target if not in cone range (all times, use with caution)",
+        "Translated": "如果目标不在圆锥范围内，则取消设置 (始终谨慎使用)",
+        "Context": "ActionTargeting.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Unset Target if not in cone range (only in combat)",
+        "Translated": "如果目标不在锥形范围内则不设置 (仅在战斗中)",
+        "Context": "ActionTargeting.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Auto-interact with Objects in Instances",
+        "Translated": "自动与实例中的对象交互",
+        "Context": "AutoInteractDungeons.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically try to pick all the keys, levers, and other thingymabobs. Also works to try and open doors and stuff. (VERY EXPERIMENTAL)",
+        "Translated": "自动尝试挑选所有钥匙、操纵杆和其他零件。也可以尝试打开门和其他东西。(非常实验性)",
+        "Context": "AutoInteractDungeons.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Set delay (seconds)",
+        "Translated": "设置延迟 (秒)",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Cooldown after interacting (seconds)",
+        "Translated": "互动后冷却 (秒)",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Max Height Difference (yalms)",
+        "Translated": "最大身高差 (yallms)",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Exclude Combat",
+        "Translated": "排除战斗",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Exclude Exits",
+        "Translated": "排除退出",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Only Attempt Whilst Not Moving",
+        "Translated": "只尝试而不移动",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Try Interact Method 1 (interacts with most things)",
+        "Translated": "尝试互动方法 1(与大多数事物互动)",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Try Interact Method 2 (interacts with things method 1 doesn't)",
+        "Translated": "尝试互动方法 2(方法 1 不与事物互动)",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Try Interact with Both Methods (buggy on many things, use with caution)",
+        "Translated": "尝试使用两种方法互动 (在许多方面存在缺陷，使用时要谨慎)",
+        "Context": "AutoInteractDungeons.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Auto-interact with Gathering Nodes",
+        "Translated": "与收集节点的自动互动",
+        "Context": "AutoInteractGathering.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Interacts with gathering nodes when close enough and on the correct job.",
+        "Translated": "当距离足够近且工作正确时，与聚集节点进行交互。",
+        "Context": "AutoInteractGathering.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically Open Chests",
+        "Translated": "自动打开胸膛",
+        "Context": "AutoOpenChests.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Walk up to a chest to automatically open it. (Does not work with Deep Dungeon chests)",
+        "Translated": "走到一个箱子前，自动打开它。(对深渊地下城的箱子无效)",
+        "Context": "AutoOpenChests.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "FATE Targeting Mode",
+        "Translated": "命中目标模式",
+        "Context": "FATETargeting..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "When in a FATE and able to participate (synced), automatically targets FATE associated enemies.",
+        "Translated": "当进入 FATE 并能够参与 (同步) 时，会自动瞄准与 FATE 相关的敌人。",
+        "Context": "FATETargeting..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Inactivity Dummy Reset",
+        "Translated": "非活动虚拟重置",
+        "Context": "AfkDummyReset.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically reset enmity on target dummies if you do not perform an action after a specified amount of time.",
+        "Translated": "如果在指定时间后未执行操作，将自动重置目标虚拟角色的敌意。",
+        "Context": "AfkDummyReset.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto Active Time Maneuver",
+        "Translated": "自动活动时间机制",
+        "Context": "ATMSolver..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically hits a button or mashes for you when the ATM is on screen.",
+        "Translated": "当 ATM 机出现在屏幕上时，会自动为您点击按钮或进行混合操作。",
+        "Context": "ATMSolver..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Equip Recommended Gear",
+        "Translated": "自动装备推荐装备",
+        "Context": "AutoRecommended.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically equip recommended gear upon job changing.",
+        "Translated": "工作变更时自动装备推荐装备。",
+        "Context": "AutoRecommended.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Switch Gatherers Automatically",
+        "Translated": "自动切换收集器",
+        "Context": "AutoSwitchGatherer.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Switches to the appropriate gathering job when approaching a gathering spot and you have both Triangulate & Prospect active. Must have a gearset for the job to switch to.",
+        "Translated": "当接近集合地点时，切换到合适的集合任务，并且你的 Triangulate 和 Prospect 都处于活跃状态。必须有一个切换到任务的齿轮组。",
+        "Context": "AutoSwitchGatherer.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Sync FATEs",
+        "Translated": "自动同步事件",
+        "Context": "AutoSyncFate.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Syncs when entering a FATE if you're overlevelled.",
+        "Translated": "如果过高，在输入 FATE 时会同步。",
+        "Context": "AutoSyncFate.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pandora Quick Gather",
+        "Translated": "Pandora 快速收集",
+        "Context": "PandoraGathering.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Replaces the Quick Gather checkbox with a new one that enables better quick gathering. Works on all nodes and can be interrupted at any point by disabling the checkbox. Also remembers your settings between sessions.",
+        "Translated": "用一个新的快速收集复选框替换快速收集复选框，以实现更好的快速收集。它适用于所有节点，并且可以在任何时候通过禁用复选框来中断。同时还能记住你在会话之间的设置。",
+        "Context": "PandoraGathering.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Enable P. Gathering",
+        "Translated": "启用 P. 收集",
+        "Context": "PandoraGathering.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Remember Item",
+        "Translated": "记住项目",
+        "Context": "PandoraGathering.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "In the Diadem, this will remember the last slot selected and not the last item due to the varying nature of the nodes.",
+        "Translated": "在 Diadem 中，由于节点的性质不同，这将记住最后选择的槽而不是最后的项目。",
+        "Context": "PandoraGathering.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Use ",
+        "Translated": "使用",
+        "Context": "PandoraGathering.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reveal Hidden Items",
+        "Translated": "揭示隐藏的物品",
+        "Context": "PandoraGathering.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "This node contains quest nodes which can result in soft-locking the quest. Pandora Gathering has been disabled.",
+        "Translated": "该节点包含可能导致任务软锁定的任务节点。Pandora Gathering 已被禁用。",
+        "Context": "PandoraGathering.CheckNodeAndClick",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Hold Shift / ",
+        "Translated": "按住 Shift 键/",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": " to Temporarily Disable on Starting a Node",
+        "Translated": "在启动节点时暂时禁用",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disable Starting Buffs on Nodes with Collectibles",
+        "Translated": "禁用使用集合物在节点上启动缓冲区",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "This will stop Pandora from using any actions when you start a node with a collectible on it. This is intended to prevent wasting GP on buffs that don't apply to collectibles.",
+        "Translated": "这将阻止 Pandora 在启动包含可收藏品的节点时使用任何操作。这旨在防止将 GP 浪费在不适用于可收藏品的 buff 上。",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Enable Pandora Gathering",
+        "Translated": "启用潘多拉收集",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Remember Item Between Nodes",
+        "Translated": "记住节点间的物品",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Don't Buff if Item Not Present",
+        "Translated": "如果项目不存在，请勿缓冲",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Min. GP###MinGP1",
+        "Translated": "最小 GP",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Min. GP###MinGP2",
+        "Translated": "Min.GP",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Min. Gatherer's Boon% For Tidings",
+        "Translated": "Min.Gatherer’s Boon % for News",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Min. GP###MinGP5",
+        "Translated": "Min.GP",
+        "Context": "PandoraGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Skip '/mount' In Macros If Mounted",
+        "Translated": "在宏中跳过 “/mount”(如果已安装)",
+        "Context": "SkipMount.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Using a macro with /mount in it will skip that line if you're already mounted",
+        "Translated": "如果已经安装，使用包含/mount 的宏将跳过该行。",
+        "Context": "SkipMount.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Turbo Controller",
+        "Translated": "涡轮控制器",
+        "Context": "TurboController..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Enable rapid fire button presses on controller by holding down a button.",
+        "Translated": "通过按住按钮来启用快速射击按钮按下控制器。",
+        "Context": "TurboController..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Interval (ms)",
+        "Translated": "间隔 (毫秒)",
+        "Context": "TurboController.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "In Combat Only",
+        "Translated": "仅在战斗中",
+        "Context": "TurboController.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Excluded Buttons",
+        "Translated": "排除按钮",
+        "Context": "TurboController.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Callback",
+        "Translated": "回调",
+        "Context": "CallbackCommand.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Fires arbitrary callbacks to any addon of your choosing. Play with responsibly.",
+        "Translated": "向您选择的任何附加组件发送任意回调。负责任地使用。",
+        "Context": "CallbackCommand.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Interact with Target",
+        "Translated": "与目标互动",
+        "Context": "InteractCommand.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Interacts with your current target.",
+        "Translated": "与当前目标互动。",
+        "Context": "InteractCommand.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Item Link",
+        "Translated": "项目链接",
+        "Context": "ItemLinkCommand.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "It's like the other item link commands, but allows searching.",
+        "Translated": "这就像其他项目的链接命令，但可以进行搜索。",
+        "Context": "ItemLinkCommand.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Leave Duty",
+        "Translated": "离开职责",
+        "Context": "LeaveDuty.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Quickly leaves a duty.",
+        "Translated": "快速完成任务。",
+        "Context": "LeaveDuty.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You are not in a duty to leave.",
+        "Translated": "你没有义务离开。",
+        "Context": "LeaveDuty.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Cannot leave during combat.",
+        "Translated": "在战斗中不能离开。",
+        "Context": "LeaveDuty.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "MSQ Countdown",
+        "Translated": "MSQ 倒计时",
+        "Context": "MSQCountdown.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Prints a message in chat with how many main scenario quests left in the current expansion you have to complete.",
+        "Translated": "在聊天中打印一条消息，显示当前扩展中还剩多少主要场景任务需要完成。",
+        "Context": "MSQCountdown.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You are currently in ",
+        "Translated": "您目前处于",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " with ",
+        "Translated": "使用",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " quests until completion.",
+        "Translated": "任务直到完成。",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " quests until ",
+        "Translated": "任务直到",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Congratulations! You have no more MSQ quests to complete.... for now!",
+        "Translated": "恭喜你！你暂时不用再完成 MSQ 任务了！",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Congratulations on beating ",
+        "Translated": "恭喜击败",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "! Onwards to ",
+        "Translated": "！继续向",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Something is wrong, you apparently have ",
+        "Translated": "有什么地方不对劲，你显然......",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " quests left? Surely not. Please contact the developer.",
+        "Translated": "任务完成了吗？当然没有。请联系开发者。",
+        "Context": "MSQCountdown.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Glamour Plate Link",
+        "Translated": "魅力板链接",
+        "Context": "QuickPlateLink.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "For quickly linking multiple gearsets to a glamour plate.",
+        "Translated": "快速将多个齿轮组连接到一个迷人的板材上。",
+        "Context": "QuickPlateLink.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Reset Enmity",
+        "Translated": "重置敌意",
+        "Context": "ResetEnmity.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Resets combat with target dummies. Accepts arguments for t(arget) or a(ll). Defaults to all.",
+        "Translated": "重置与目标虚拟角色的战斗。接受 t(arget) 或 a(ll) 的参数。默认为所有。",
+        "Context": "ResetEnmity.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Test Command",
+        "Translated": "测试命令",
+        "Context": "TestCommand.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "This is a test command.",
+        "Translated": "这是一个测试命令。",
+        "Context": "TestCommand.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Test command executed with argument ",
+        "Translated": "使用参数执行测试命令",
+        "Context": "TestCommand.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Use Item",
+        "Translated": "使用项目",
+        "Context": "UseItem.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Uses an Item from your inventory.",
+        "Translated": "使用库存中的物品。",
+        "Context": "UseItem.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Open Map Coords",
+        "Translated": "自动打开地图编码",
+        "Context": "AutoOpenCoords.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically opens the map to coordinates posted in chat.",
+        "Translated": "自动打开地图查看聊天中发布的坐标。",
+        "Context": "AutoOpenCoords.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Include Sonar links",
+        "Translated": "包括声纳链接",
+        "Context": "AutoOpenCoords.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Ignore <pos> flags",
+        "Translated": "忽略<pos>标志",
+        "Context": "AutoOpenCoords.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Set <flag> without opening the map",
+        "Translated": "设置 <flag> 而不打开地图",
+        "Context": "AutoOpenCoords.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disable while in combat",
+        "Translated": "在战斗中禁用",
+        "Context": "AutoOpenCoords.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Channel Filters (Whitelist)",
+        "Translated": "通道过滤器 (白名单)",
+        "Context": "AutoOpenCoords.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Auto-Teleport to Map Coords",
+        "Translated": "自动远程传输到地图协议",
+        "Context": "AutoTPCoords.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically teleports to the nearest aetheryte to a map link posted in chat. Requires \"Teleporter\" plugin installed.",
+        "Translated": "自动传送到最接近聊天中发布的地图链接的以太网。需要安装 “Teleporter” 插件。",
+        "Context": "AutoTPCoords.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically consumes a Gysahl Green in the overworld if you don't have your chocobo out.",
+        "Translated": "如果你没有把巧克力棒拿出来，就会在地球上自动消耗 Gyshal Green。",
+        "Context": "AutoChocobo.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Collect",
+        "Translated": "自动收集",
+        "Context": "AutoCollect.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "When switching to FSH, ensures Collector's Glove will always be on.",
+        "Translated": "切换到 FSH 时，确保收集者的手套始终处于开启状态。",
+        "Context": "AutoCollect.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Cordial",
+        "Translated": "自动友好",
+        "Context": "AutoCordial.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically use a cordial when below a given threshold.",
+        "Translated": "当低于给定阈值时，自动使用甜味剂。",
+        "Context": "AutoCordial.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Summon Fairy/Carbuncle",
+        "Translated": "自动召唤精灵/Carbuncle",
+        "Context": "AutoFairy.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically summons your Fairy or Carbuncle upon switching to SCH or SMN respectively.",
+        "Translated": "当分别切换到 SCH 或 SMN 时，会自动召唤你的 Fairy 或 Carbuncle。",
+        "Context": "AutoFairy.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Meditation",
+        "Translated": "自动冥想",
+        "Context": "AutoMeditation.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically use Meditation when out of combat.",
+        "Translated": "退出战斗后自动使用冥想。",
+        "Context": "AutoMeditation.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Motif (Out of Combat)",
+        "Translated": "自动模式 (非战斗状态)",
+        "Context": "AutoMotif.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically draws motifs when outside of combat and not in a sanctuary.",
+        "Translated": "当在战斗之外而非避难所中时，会自动绘制图案。",
+        "Context": "AutoMotif.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Mount After Combat",
+        "Translated": "战斗后的自动安装",
+        "Context": "AutoMountCombat.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounts upon ending combat.",
+        "Translated": "战斗结束后上马。",
+        "Context": "AutoMountCombat.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Select Mount",
+        "Translated": "选择坐骑",
+        "Context": "AutoMountCombat.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Disable in fates",
+        "Translated": "命运中的残疾",
+        "Context": "AutoMountCombat.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Jump after mounting",
+        "Translated": "登山后跳下",
+        "Context": "AutoMountCombat.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Auto-Mount after Gathering",
+        "Translated": "收集后的自动安装",
+        "Context": "AutoMountGathering.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounts upon finishing gathering from a node. Will try to execute for up to 3 seconds after the delay if moving.",
+        "Translated": "从节点完成收集后安装。如果移动，将在延迟后尝试执行最多 3 秒。",
+        "Context": "AutoMountGathering.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Use on Island Sanctuary",
+        "Translated": "在岛屿庇护所中使用",
+        "Context": "AutoMountGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Start moving after mounting",
+        "Translated": "安装后开始移动",
+        "Context": "AutoMountGathering.get_DrawConfigTree",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Auto-Mount on Zone Change",
+        "Translated": "区域变更时的自动安装",
+        "Context": "AutoMountZoneChange.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Mounts on zone change if not already mounted.",
+        "Translated": "区域内的安装位置如果尚未安装，则会发生变化。",
+        "Context": "AutoMountZoneChange.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Prospect/Triangulate",
+        "Translated": "自动前景/三角测量",
+        "Context": "AutoProspectTriangulate.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "When switching to MIN or BTN, automatically activate the other jobs searching ability.",
+        "Translated": "当切换到 MIN 或 BTN 时，会自动激活其他职位搜索功能。",
+        "Context": "AutoProspectTriangulate.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Sprint in Sanctuaries",
+        "Translated": "庇护所中的自动冲刺",
+        "Context": "AutoSprint.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Automatically uses sprint when in an area you are gaining rested experience, such as cities.",
+        "Translated": "当你在某个地区 (如城市) 获得休息经验时，会自动使用冲刺计划。",
+        "Context": "AutoSprint.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Auto-Tank Stance",
+        "Translated": "自动坦克姿势",
+        "Context": "AutoTankStance.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Activates your tank stance automatically upon job switching or entering a dungeon.",
+        "Translated": "当您切换工作或进入地下城时，自动激活坦克站姿。",
+        "Context": "AutoTankStance.get_Description",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Map Hotbar Decipher",
+        "Translated": "地图热条解密",
+        "Context": "HotbarMapDecipher..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Allows deciphering treaure maps from hotbar.",
+        "Translated": "允许从 Hotbar 解密悲伤地图。",
+        "Context": "HotbarMapDecipher..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
