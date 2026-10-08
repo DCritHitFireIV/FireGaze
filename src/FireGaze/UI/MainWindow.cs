@@ -65,9 +65,9 @@ internal sealed class MainWindow : Window
         pendingSelect = MainTab.UIText;
         Plugin.Log.Debug("[FireGaze] 窗口已打开（页签回到「插件汉化」）");
 
-        // 首次打开：弹一次「公共彩云翻译额度」公告（点过「知道了」就不再弹；
-        // 确认时立刻落盘，DTR 即刻登出也不会重复弹）
-        if (!plugin.Config.TranslateQuotaNoticeConfirmed)
+        // 公共彩云额度公告：只给「全新安装」的新用户第一次打开时看一次（点过「知道了」立即落盘）。
+        // 升级上来的用户配置里没有 QuotaNoticeForNewUser，永远不看。
+        if (plugin.Config.QuotaNoticeForNewUser && !plugin.Config.TranslateQuotaNoticeConfirmed)
         {
             plugin.QuotaNotice.IsOpen = true;
         }

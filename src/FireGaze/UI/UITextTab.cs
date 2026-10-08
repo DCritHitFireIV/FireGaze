@@ -2138,6 +2138,12 @@ internal sealed class UITextTab
                 if (result.Error is not null || (leftoverFailure && !mostlyDelivered))
                 {
                     var reason = result.Error ?? $"失败 {result.Failed.Count} 条";
+                    if (result.Error is null && result.Notes.Count > 0)
+                    {
+                        // 把通道给的原因（公共额度用完、免费通道被限流…）一起带上，别让用户只看到「失败 N 条」
+                        reason += "；" + string.Join("；", result.Notes);
+                    }
+
                     ActivityLog.Error("翻译", $"{entry.InternalName}：翻译失败：{reason}");
                     this.FinishRun(run, new RowNote
                     {

@@ -71,11 +71,18 @@ public sealed class Plugin : IDalamudPlugin
     {
         instance = this;
         this.pluginInterface = pluginInterface;
+
+        // 全新安装（配置文件还不存在）才标记额度公告资格；升级上来的用户不看新用户公告
+        var freshInstall = pluginInterface.ConfigFile?.Exists != true;
         Config = pluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+        if (freshInstall)
+        {
+            Config.QuotaNoticeForNewUser = true;
+        }
 
         // 配置迁移走单步迁移器（Internal/Configuration），缺台阶直接抛错；只在真的迁移过时保存一次
         var previousConfigVersion = ConfigurationMigrator.Migrate(Config);
-        if (previousConfigVersion < ConfigurationMigrator.LatestVersion)
+        if (previousConfigVersion < ConfigurationMigrator.LatestVersion || freshInstall)
         {
             pluginInterface.SavePluginConfig(Config);
         }
@@ -240,16 +247,6 @@ public sealed class Plugin : IDalamudPlugin
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {Table.Count} 条；" +
                 $"汉化 = {(Config.TranslateEnabled ? "开" : "关")}");
             Log.Information("[FireGaze] 页签顺序：插件汉化 / 插件发现 / 仓库体检 / 简介汉化 / 插件安装器");
-
-            // 一次性更新公告：更新后第一次加载时播报一次（插件汉化 / 插件发现各对应一个标记，
-            // 老玩家已经看过旧的汉化公告，但插件发现的消息还会补一次）
-            if (!Config.UITextFeatureAnnounced || !Config.DiscoveryFeatureAnnounced)
-            {
-                Config.UITextFeatureAnnounced = true;
-                Config.DiscoveryFeatureAnnounced = true;
-                Chat.Print("FireGaze: 上线了插件汉化和插件发现的功能，现在可以汉化插件界面、浏览云端插件库了");
-                SaveConfig();
-            }
         }
         catch (Exception e)
         {

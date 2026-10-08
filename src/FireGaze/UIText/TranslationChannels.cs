@@ -373,6 +373,9 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
 
     private static readonly HttpClient Client = CreateClient();
 
+    /// <summary>一批失败时的原因；<c>ServiceExhausted</c> = 中继确认公共额度用完 / 已停用，不是临时网络问题。</summary>
+    private readonly record struct BatchFallback(string Reason, bool ServiceExhausted);
+
     public string Name => "public-caiyun";
 
     public string Description => "FireGaze 公共彩云小译（维护者提供；额度用完前免费）";
@@ -394,18 +397,19 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
             }
 
             var batch = batches[b];
-            var fallbackReason = await this.ProcessBatchAsync(batch, result, token).ConfigureAwait(false);
-            if (fallbackReason is not null)
+            var fallback = await this.ProcessBatchAsync(batch, result, token).ConfigureAwait(false);
+            if (fallback is { } info)
             {
-                if (fallbackReason == "已取消")
+                if (info.Reason == "已取消")
                 {
                     result.Error = "已取消";
                     return result;
                 }
 
                 // 公共通道不可用：从本批开头开始的条目交给免费通道兜底，别把默认通道卡死。
+                // 通道选择保持不动——维护者补充额度后，下一次运行会自动走回公共彩云。
                 var remaining = items.Skip(done).ToList();
-                await FallbackToFreeAsync(remaining, fallbackReason, result, token).ConfigureAwait(false);
+                await FallbackToFreeAsync(remaining, info.Reason, info.ServiceExhausted, result, token).ConfigureAwait(false);
                 progress?.Invoke(items.Count, items.Count);
                 return result;
             }
@@ -430,8 +434,8 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
         return result;
     }
 
-    /// <summary>单批：返回 null = 继续；返回字符串 = 不可用原因（交给免费通道兜底）。</summary>
-    private async Task<string?> ProcessBatchAsync(
+    /// <summary>单批：返回 null = 继续；否则给原因（交给免费通道兜底）。</summary>
+    private async Task<BatchFallback?> ProcessBatchAsync(
         List<UITextTranslateItem> batch,
         UITextTranslateResult result,
         CancellationToken token)
@@ -446,22 +450,22 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
             }
             catch (TaskCanceledException) when (token.IsCancellationRequested)
             {
-                return "已取消";
+                return new BatchFallback("已取消", false);
             }
             catch (TaskCanceledException)
             {
-                return "中继请求超时";
+                return new BatchFallback("中继请求超时", false);
             }
             catch (HttpRequestException e)
             {
-                return "网络到不了中继（" + e.Message + "）";
+                return new BatchFallback("网络到不了中继（" + e.Message + "）", false);
             }
 
             var (targets, problem) = ParseRelayResponse(body, batch.Count);
             if (problem is not null)
             {
                 // 限流 / 上游抖动：稍等重试一次；其余（额度用完、网络、请求被拒）直接走兜底。
-                if ((problem is "请求太频繁" or "彩云服务端出错") && attempt < 1)
+                if ((problem.Value.Reason is "请求太频繁" or "彩云服务端出错") && attempt < 1)
                 {
                     try
                     {
@@ -469,7 +473,7 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
                     }
                     catch (OperationCanceledException)
                     {
-                        return "已取消";
+                        return new BatchFallback("已取消", false);
                     }
 
                     continue;
@@ -499,6 +503,7 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
     private static async Task FallbackToFreeAsync(
         IReadOnlyList<UITextTranslateItem> remaining,
         string reason,
+        bool serviceExhausted,
         UITextTranslateResult result,
         CancellationToken token)
     {
@@ -507,7 +512,9 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
             return;
         }
 
-        result.Note($"公共彩云不可用（{reason}），已自动改用免费通道；公共额度恢复前可在「翻译设置」里换回别的通道");
+        result.Note(serviceExhausted
+            ? "公共彩云的额度已用完，本次已自动改用免费通道，如果你有用不完的彩云免费额度，可以到 DailyRoutines 的 Discord「插件讨论」的 FireGaze 里私聊我 API key"
+            : $"公共彩云暂时不可用（{reason}），本次已自动改用免费通道");
         try
         {
             var free = new FreeTranslationChannel(googleFirst: UITextChannelFactory.GoogleReachable);
@@ -522,6 +529,12 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
                 result.Failed.Add(failed);
             }
 
+            // 免费通道为什么没扛住，也要带到结果里——否则用户只看到「失败 N 条」
+            foreach (var note in fallback.Notes)
+            {
+                result.Note(note);
+            }
+
             if (fallback.Error is not null)
             {
                 result.Note("免费通道：" + fallback.Error);
@@ -534,7 +547,7 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
     }
 
     /// <summary>解析中继返回：成功拿 <c>target</c>；失败拿 <c>error</c> 翻成人话。</summary>
-    private static (List<string?>? Targets, string? Problem) ParseRelayResponse(string json, int expected)
+    private static (List<string?>? Targets, BatchFallback? Problem) ParseRelayResponse(string json, int expected)
     {
         try
         {
@@ -558,11 +571,12 @@ internal sealed class PublicCaiyunChannel : IUITextChannel
 
             var error = root.TryGetProperty("error", out var err) && err.ValueKind == JsonValueKind.String ? err.GetString() : null;
             var detail = root.TryGetProperty("detail", out var det) && det.ValueKind == JsonValueKind.String ? det.GetString() : null;
-            return (null, DescribeRelayError(error, detail));
+            var exhausted = string.Equals(error, "unavailable", StringComparison.Ordinal);
+            return (null, new BatchFallback(DescribeRelayError(error, detail), exhausted));
         }
         catch (JsonException)
         {
-            return (null, "中继返回不是合法 JSON（可能被网关拦了）");
+            return (null, new BatchFallback("中继返回不是合法 JSON（可能被网关拦了）", false));
         }
     }
 

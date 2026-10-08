@@ -293,16 +293,11 @@ public sealed class Configuration : IPluginConfiguration
     public bool UITextLibraryEnabled { get; set; } = true;
 
     /// <summary>
-    ///     是否已经播报过「插件汉化上线」的更新公告：只在更新后首次加载时显示一次（1.3.27 起的玩家更新提示）。
+    ///     这份配置是不是「全新安装」建出来的（升级用户的配置里没有这个键，读出来是 false）。
+    ///     公共彩云额度公告只给新用户第一次打开主窗口时看一次；升级上来的用户不看。
     /// </summary>
-    [JsonProperty("UITextFeatureAnnounced")]
-    public bool UITextFeatureAnnounced { get; set; }
-
-    /// <summary>
-    ///     是否已经播报过「插件发现上线」的更新公告；与上一条分开记，老玩家也能收到这一条。
-    /// </summary>
-    [JsonProperty("DiscoveryFeatureAnnounced")]
-    public bool DiscoveryFeatureAnnounced { get; set; }
+    [JsonProperty("QuotaNoticeForNewUser")]
+    public bool QuotaNoticeForNewUser { get; set; }
 
     /// <summary>
     ///     是否已确认「公共彩云翻译额度」的一次性公告（点过「知道了」）。
