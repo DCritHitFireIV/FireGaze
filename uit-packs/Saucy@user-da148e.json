@@ -1,3456 +1,2557 @@
 {
-  "type": "uit-contribution",
-  "plugin": "Saucy",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-08",
+    "source": "user",
+    "label": "玩家包 · da148e",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "[Saucy] Pausing arcade automation — retainers ready at nearby bell.",
       "Translated": "【Saucy】暂停游戏厅自动化——随时待命。",
       "Context": "AutoRetainerPause.BeginHandling",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] AutoRetainer pause timed out; resuming automation.",
       "Translated": "[Saucy] AutoRetainer 暂停超时;恢复自动化。",
       "Context": "AutoRetainerPause.TickHandling",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] AutoRetainer finished; resuming automation.",
       "Translated": "[Saucy] AutoRetainer 完成;恢复自动化。",
       "Context": "AutoRetainerPause.TickClosingUi",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Moogle",
       "Translated": "莫格尔",
       "Context": "Configuration..ctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "library"
     },
     {
       "Original": "Opens the Saucy menu.\n/saucy stop → stop all navigation and automation\n/saucy tt go → enable Triple Triad automation\n/saucy tt stop → stop Triple Triad automation\n/saucy tt play <n> → fixed match count\n/saucy tt cards any → stop after first card drop\n/saucy tt cards all → farm all NPC cards once\n/saucy d → toggle debug panels",
       "Translated": "打开 Saucy 菜单。\n/saucy stop →停止所有导航和自动化\n/saucy ttgo →启用三重自动化\n/saucy tt stop → Stop 三重自动化\n/saucy tt play <n> → 固定匹配计数\n/saucy tt 任何卡片 → 第一次掉卡后停止\n/saucy tt 卡全部→一次性刷完所有 NPC 卡\n/saucy d → 切换调试面板",
       "Context": "Saucy.Initialize",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Triple Triad automation enabled.",
       "Translated": "[Saucy] 已启用三重自动化。",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Fixed match count enabled: ",
       "Translated": "[Saucy] 启用固定匹配计数：",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " matches.",
       "Translated": "匹配。",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Usage: /saucy tt play <number of matches>",
       "Translated": "[Saucy] 用法:/Saucy tt play <number of matches>",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Stopping after the first card drop.",
       "Translated": "【Saucy】第一次掉卡后停止。",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Farming all NPC cards once.",
       "Translated": "[Saucy] 一次性刷爆所有 NPC 卡。",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Unknown command. Available: /saucy, /saucy stop, /saucy d, /saucy tt go | stop | play <n> | cards any | cards all",
       "Translated": "[Saucy] 未知命令。可用:/saucy、/saucy stop、/saucy d、/saucy tt go | stop | play <n> | Card any | 所有牌",
       "Context": "Saucy.OnCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Fixed match count",
       "Translated": "固定匹配次数",
       "Context": "GoldSaucerRunSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No stop condition — runs until automation is disabled.",
       "Translated": "没有停止条件——一直运行，直到自动化被禁用。",
       "Context": "GoldSaucerRunSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stops queuing new games while Duty Finder is ready.",
       "Translated": "在 Duty Finder 准备就绪时停止排队等待新游戏。",
       "Context": "GoldSaucerRunSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "How many times:",
       "Translated": "多少次：",
       "Context": "GoldSaucerRunSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Matches left this session: ",
       "Translated": "Matches 离开了本会话：",
       "Context": "GoldSaucerRunSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Placed bell must be in range",
       "Translated": "放置的铃铛必须在范围内",
       "Context": "GoldSaucerRunSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pause when retainers are ready (bell nearby)",
       "Translated": "准备就绪时暂停 (附近的铃声)",
       "Context": "GoldSaucerRunSettingsUi.DrawAutoRetainerIntegration",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cuff-a-Cur and Out on a Limb only. When a placed summoning bell is in range and AutoRetainer reports retainers ready, Saucy finishes the current game, opens the bell, runs waits for Autoretainer to finish, then resumes.",
       "Translated": "只有一个肢体受伤。当放置的召唤铃进入范围并且 AutoRetainer 报告剩余人员准备就绪时，Saucy 就会结束当前游戏，打开铃铛，跑步等待 AutoRetainer 完成，然后继续。",
       "Context": "GoldSaucerRunSettingsUi.DrawAutoRetainerIntegration",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Waiting for AutoRetainer…",
       "Translated": "等待 AutoRetainer......",
       "Context": "GoldSaucerRunSettingsUi.DrawAutoRetainerIntegration",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Retainers ready — finishing current game…",
       "Translated": "预付款准备就绪——结束当前游戏......",
       "Context": "GoldSaucerRunSettingsUi.DrawAutoRetainerIntegration",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No placed summoning bell in range.",
       "Translated": "未在范围内放置召唤铃。",
       "Context": "GoldSaucerRunSettingsUi.DrawAutoRetainerIntegration",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optional plugin for retainer venture automation.",
       "Translated": "用于保留风险自动化的可选插件。",
       "Context": "GoldSaucerRunSettingsUi.DrawAutoRetainerIntegration",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Collects and reassigns retainer ventures. Saucy enables it at the bell automatically.",
       "Translated": "收集和重新分配保留企业。Saucy 自动按铃启用这项功能。",
       "Context": "GoldSaucerRunSettingsUi.AutoRetainerDependency",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Take a break",
       "Translated": "休息一下",
       "Context": "GoldSaucerRunSettingsUi.DrawFakeBreakSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "After playing for a while, pause starting new games for a short break. Current games can still finish.",
       "Translated": "玩了一会儿后，暂停开始新游戏，休息一下。当前游戏仍然可以完成。",
       "Context": "GoldSaucerRunSettingsUi.DrawFakeBreakSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Play time before break (minutes)",
       "Translated": "中场休息前的游戏时间 (分钟)",
       "Context": "GoldSaucerRunSettingsUi.DrawFakeBreakSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Break length (minutes)",
       "Translated": "休息时间 (分钟)",
       "Context": "GoldSaucerRunSettingsUi.DrawFakeBreakSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Boss Mod",
       "Translated": "老板模式",
       "Context": "PluginDependenciesUi.BossModPlugin",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add repository",
       "Translated": "添加存储库",
       "Context": "PluginDependenciesUi.DrawDependency",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " to Custom Plugin Repositories.",
       "Translated": "到自定义插件仓库。",
       "Context": "PluginDependenciesUi.DrawDependency",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Install plugin",
       "Translated": "安装插件",
       "Context": "PluginDependenciesUi.DrawDependency",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Install ",
       "Translated": "安装",
       "Context": "PluginDependenciesUi.DrawDependency",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " from its plugin repository.",
       "Translated": "来自其 Saucy 仓库。",
       "Context": "PluginDependenciesUi.DrawDependency",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " repository is already added.",
       "Translated": "已经添加了 repository。",
       "Context": "PluginDependenciesUi.TryAddRepository",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Added ",
       "Translated": "[Saucy] 已添加",
       "Context": "PluginDependenciesUi.TryAddRepository",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " repository.",
       "Translated": "仓库。",
       "Context": "PluginDependenciesUi.TryAddRepository",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Installed",
       "Translated": "已安装",
       "Context": "PluginDependenciesUi.DrawStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawStatusIconText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Installed but not loaded",
       "Translated": "已安装但未加载",
       "Context": "PluginDependenciesUi.DrawStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawStatusIconText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Open installer",
       "Translated": "打开安装程序",
       "Context": "PluginDependenciesUi.DrawStatus",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Not installed",
       "Translated": "尚未安装",
       "Context": "PluginDependenciesUi.DrawStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawStatusIconText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Installed ",
       "Translated": "[Saucy] 已安装",
       "Context": "InstallPluginAsync.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not install ",
       "Translated": "[Saucy] 无法安装",
       "Context": "InstallPluginAsync.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Check the plugin installer for details.",
       "Translated": "检查插件安装程序以了解详细信息。",
       "Context": "InstallPluginAsync.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "MACHINES",
       "Translated": "机器",
       "Context": "PluginUI.DrawSidebar",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "GATES",
       "Translated": "门",
       "Context": "PluginUI.DrawSidebar",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "OTHER GAMES",
       "Translated": "其他游戏",
       "Context": "PluginUI.DrawSidebar",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Designed by Wah",
       "Translated": "由 Wah 设计",
       "Context": "PluginUI.DrawSidebar",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Main",
       "Translated": "主要",
       "Context": "PluginUI.DrawTriadPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.EzTabBar"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cache",
       "Translated": "缓存",
       "Context": "PluginUI.DrawTriadPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.EzTabBar"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Gold Saucer gate",
       "Translated": "金碟门",
       "Context": "PluginUI.DrawDebugTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawCollapsingSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Triple Triad NPC menu",
       "Translated": "三重三角 NPC 菜单",
       "Context": "PluginUI.DrawDebugTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawCollapsingSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "punch the cactuar",
       "Translated": "击打仙人掌",
       "Context": "PluginUI.DrawCuffPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "swing the hatchet",
       "Translated": "挥舞斧头",
       "Context": "PluginUI.DrawLimbPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "dodge the falling slices",
       "Translated": "躲避落下的刀片",
       "Context": "PluginUI.DrawSliceIsRightPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Draws slice and AoE markers during the GATE.",
       "Translated": "在 GATE 过程中绘制切片和 AoE 标记。",
       "Context": "PluginUI.DrawSliceIsRightPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Activates the VBM AI preset so Boss Mod's Slice is Right module can path you out of hazards.",
       "Translated": "激活 VBM AI 预设，这样 Boss Mod‘s Slice is Right 模块就能引导您避开危险。",
       "Context": "PluginUI.DrawSliceIsRightPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Dependencies",
       "Translated": "依赖性",
       "Context": "PluginUI.DrawSliceIsRightPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optional integrations",
       "Translated": "可选集成",
       "Context": "PluginUI.DrawSliceIsRightPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "statistical safe spot",
       "Translated": "统计安全点",
       "Context": "PluginUI.DrawWindBlowsPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Shows the statistical safe spot during the GATE.",
       "Translated": "显示 GATE 期间的统计安全点。",
       "Context": "PluginUI.DrawWindBlowsPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pathfinds you onto the safe spot while you are off it.",
       "Translated": "当你偏离路径时，路径会将你带到安全地点。",
       "Context": "PluginUI.DrawWindBlowsPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "ride shooting minigame",
       "Translated": "骑车射击迷你游戏",
       "Context": "PluginUI.DrawAirForcePanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Runs automatically when enabled. Plays the Air Force One ride-shooting minigame for you.",
       "Translated": "启用后自动运行。为您畅玩空军一号骑射迷你游戏。",
       "Context": "PluginUI.DrawAirForceMain",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "daily 3×3 scratcher",
       "Translated": "每日 3×3 刮板",
       "Context": "PluginUI.DrawMiniCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Plays Mini Cactpot automatically when you open the daily scratcher at the Gold Saucer.",
       "Translated": "当您在 Gold Saucer 打开每日刮擦器时，Mini Cacpot 会自动播放。",
       "Context": "PluginUI.DrawMiniCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "weekly 4-digit raffle",
       "Translated": "每周 4 位数抽奖",
       "Context": "PluginUI.DrawJumboCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Collect prizes at the Cactpot cashier yourself. Saucy then paths you to the Jumbo broker and handles ticket purchase dialogue and confirms.",
       "Translated": "自己去猫罐头收银台领奖吧。然后 Saucy 会把你送到巨无霸经纪人那里，处理购票对话并确认。",
       "Context": "PluginUI.DrawJumboCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Number selection",
       "Translated": "号码选择",
       "Context": "PluginUI.DrawJumboCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ticket 1 (100 MGP)",
       "Translated": "彩票 1(100 MGP)",
       "Context": "PluginUI.DrawJumboCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ticket 2 (150 MGP)",
       "Translated": "票 2(150 MGP)",
       "Context": "PluginUI.DrawJumboCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ticket 3 (200 MGP)",
       "Translated": "票 3(200 MGP)",
       "Context": "PluginUI.DrawJumboCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Leave a ticket blank to randomize that purchase.",
       "Translated": "将票留空以随机化购买。",
       "Context": "PluginUI.DrawJumboCactpotPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optional plugin for automatic dodging during the GATE. Overlays still work without it.",
       "Translated": "GATE 期间用于自动闪避的可选插件。即使没有它，叠层也能正常工作。",
       "Context": "PluginUI.DrawSliceIsRightDependencies",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Provides the Slice is Right boss module (hazard zones) and the VBM AI preset Saucy activates during the GATE. Keep the Gold Saucer Slice is Right module enabled in Boss Mod settings.",
       "Translated": "提供 “切片是正确的” Boss 模块 (危险区域)，并在 GATE 期间激活 VBM AI 预设 Saucy。在 Boss Mod 设置中保持 “金色碟子切片是正确的” 模块处于启用状态。",
       "Context": "PluginUI.DrawSliceIsRightDependencies",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optional plugin for automatic movement to the safe spot. Overlays still work without it.",
       "Translated": "可选插件，用于自动移动到安全位置。即使没有它，叠层也能正常工作。",
       "Context": "PluginUI.DrawWindBlowsDependencies",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pathfinds you onto the statistical safe spot during the GATE.",
       "Translated": "在 GATE 期间找到你进入统计安全地带的路径。",
       "Context": "PluginUI.DrawWindBlowsDependencies",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hold Ctrl to reset stats.",
       "Translated": "按住 Ctrl 键重置统计数据。",
       "Context": "PluginUI.DrawStatsToolbar",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "no games played",
       "Translated": "没有玩游戏",
       "Context": "PluginUI.TriadHeadline",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " games · ",
       "Translated": "游戏·",
       "Context": "PluginUI.TriadHeadline",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " games",
       "Translated": "游戏",
       "Context": "PluginUI.CuffHeadline",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Games",
       "Translated": "游戏",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Wins",
       "Translated": "获胜",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Draws",
       "Translated": "抽牌",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cards won",
       "Translated": "卡牌获胜",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Card resale value",
       "Translated": "卡片转售价值",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "MGP won",
       "Translated": "MGP 获胜",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Most played NPC",
       "Translated": "玩 NPC 最多",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Most won card",
       "Translated": "最常赢的卡牌",
       "Context": "PluginUI.DrawTriadRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Bruisings",
       "Translated": "瘀伤",
       "Context": "PluginUI.DrawCuffRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Punishings",
       "Translated": "惩罚",
       "Context": "PluginUI.DrawCuffRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Brutals",
       "Translated": "残酷",
       "Context": "PluginUI.DrawCuffRows",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Card #",
       "Translated": "卡片#",
       "Context": "PluginUI.TopCardCell",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Metric",
       "Translated": "指标",
       "Context": "PluginUI.StatsHeader",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Session rate since the first counted game of this minigame.",
       "Translated": "自这款迷你游戏首次计费游戏以来的会话率。",
       "Context": "PluginUI.StatsHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "♥ Ko-fi (to support my gacha addiction)",
       "Translated": "♥Kofi(为了支持我的粥瘾)",
       "Context": ".ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No active gate director.",
       "Translated": "没有活动门主管。",
       "Context": "DrawDebugTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Navigation active: ",
       "Translated": "活动导航：",
       "Context": "DrawDebugTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Awaiting triad start: ",
       "Translated": "等待三重启动：",
       "Context": "DrawDebugTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No select string menu open.",
       "Translated": "未打开选择字符串菜单。",
       "Context": "DrawDebugTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Open the Jumbo ticket purchase window to inspect addon nodes.",
       "Translated": "打开巨无霸门票购买窗口，查看附加节点。",
       "Context": "DrawJumboCactpotDebugPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not find deck ",
       "Translated": "[Saucy] 找不到牌组",
       "Context": "TriadDeckSelectAutomation.Tick",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " in the selection list.",
       "Translated": "在选择列表中。",
       "Context": "TriadDeckSelectAutomation.Tick",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not use game recommended deck. Pick a deck manually or try another option.",
       "Translated": "[Saucy] 无法使用游戏推荐的副牌。手动选择副牌或尝试其他选项。",
       "Context": "TriadDeckSelectAutomation.TickGameRecommendedDeck",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Using game recommended deck...",
       "Translated": "[Saucy] 使用游戏推荐牌......",
       "Context": "TriadDeckSelectAutomation.TryClickGameRecommendedButton",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Selecting first deck...",
       "Translated": "【Saucy】选择第一副牌......",
       "Context": "TriadDeckSelectAutomation.TryBlindDeckSelect",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Selecting \"",
       "Translated": "[Saucy] 选择",
       "Context": "TriadDeckSelectAutomation.TrySelectVisibleSaucyDeck",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Retrying with deck ",
       "Translated": "[Saucy] 使用牌组重试",
       "Context": "TriadDeckSelectAutomation.PrintAttemptMessage",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\" (slot ",
       "Translated": "(槽)",
       "Context": "TriadDeckSelectAutomation.PrintAttemptMessage",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Selecting deck ",
       "Translated": "[Saucy] 选择牌组",
       "Context": "TriadDeckSelectAutomation.PrintAttemptMessage",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] You already have every card from ",
       "Translated": "[Saucy] 你已经拥有了所有来自",
       "Context": "TriadRunSession.PrepareNavigationRunMode",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Farming MGP instead.",
       "Translated": "转而开发 MGP。",
       "Context": "TriadRunSession.PrepareNavigationRunMode",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Stopped navigation, travel, and triad automation.",
       "Translated": "【Saucy】停止导航、旅行和三维自动化。",
       "Context": "TriadRunSession.StopAllAutomation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] The Battlehall is a Duty Finder instance.\nSaucy cannot path there — enter via Duty Finder.",
       "Translated": "[Saucy] Battlehall 是一个 Duty Finder 实例。\nSaucy 无法通过那里——请通过 Duty Finder 进入。",
       "Context": "TriadBattleHall.PrintNavigationBlocked",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Navigation timed out.",
       "Translated": "【Saucy】导航超时。",
       "Context": "TriadMapNavigation.Tick",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not reach the Triple Triad NPC.",
       "Translated": "【Saucy】联系不上三方 NPC。",
       "Context": "TriadMapNavigation.TickMovingToNpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Arrived at ",
       "Translated": "[Saucy] 到达",
       "Context": "TriadMapNavigation.TickMovingToNpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Starting Triple Triad...",
       "Translated": "启动三合会......",
       "Context": "TriadMapNavigation.TickMovingToNpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not open Triple Triad with this NPC.",
       "Translated": "[Saucy] 无法用这个 NPC 开启三重唱。",
       "Context": "TriadMapNavigation.TickStartingTriadMatch",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Install vnavmesh to path to NPCs from Saucy.",
       "Translated": "[Saucy] 安装 vnavmesh 以获取来自 Saucy 的 NPC 路径。",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not resolve NPC map coordinates.",
       "Translated": "[Saucy] 无法解析 NPC 地图坐标。",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " is in another zone. Install Lifestream to teleport there.",
       "Translated": "在另一个区域。安装生命流，传送到那里。",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Lifestream is busy. Try again in a moment.",
       "Translated": "[Saucy] 生命直播正忙着呢。稍后再试。",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Lifestream could not start teleport.",
       "Translated": "【Saucy】Lifestream 无法开始传送。",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Teleporting to ",
       "Translated": "[Saucy] 传送到",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] No unlocked aetheryte found for ",
       "Translated": "[Saucy] 未发现未解锁的以太石",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Opening map.",
       "Translated": "打开地图。",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Walking: ",
       "Translated": "[Saucy] 行走：",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ", then Lifestream aethernet to ",
       "Translated": "然后进入生命流以太网",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Lifestream aethernet to ",
       "Translated": "[Saucy] 将直播以太网",
       "Context": "TriadMapNavigation.TryBeginNavigation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Arrived in ",
       "Translated": "[Saucy] 到达",
       "Context": "TriadMapNavigation.ContinueAfterZoneArrival",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Waiting for vnavmesh...",
       "Translated": "等待 vnavmesh......",
       "Context": "TriadMapNavigation.ContinueAfterZoneArrival",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Walking to aethernet hub, then Lifestream to ",
       "Translated": "[Saucy] 步行前往以太网中心，然后前往 Lifestream",
       "Context": "TriadMapNavigation.TryStartWalkToAethernetHub",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Aethernet hub is in another zone. Walking to NPC instead.",
       "Translated": "[Saucy] 以太网枢纽在另一个区域。不如步行去 NPC。",
       "Context": "TriadMapNavigation.TickApproachingAethernetHub",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not resolve aethernet hub position. Walking to NPC instead.",
       "Translated": "[Saucy] 无法解析以太网枢纽位置。转而步行前往 NPC。",
       "Context": "TriadMapNavigation.TickApproachingAethernetHub",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not reach the aethernet hub. Walking to NPC instead.",
       "Translated": "[Saucy] 无法到达以太网中心，只能步行前往 NPC。",
       "Context": "TriadMapNavigation.TickApproachingAethernetHub",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Lifestream could not start aethernet to ",
       "Translated": "[Saucy] Livestream 无法启动以太网",
       "Context": "TriadMapNavigation.TryStartAethernetTravel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Walking instead.",
       "Translated": "取而代之地步行。",
       "Context": "TriadMapNavigation.TryStartAethernetTravel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Waiting for Lifestream aethernet to ",
       "Translated": "[Saucy] 等待 Lifestream 以太网",
       "Context": "TriadMapNavigation.TryBeginPendingAethernet",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Lifestream could not take aethernet to ",
       "Translated": "[Saucy] Livestream 无法使用以太网",
       "Context": "TriadMapNavigation.TryBeginPendingAethernet",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ". Walking from here instead.",
       "Translated": "从这里开始走吧。",
       "Context": "TriadMapNavigation.TryBeginPendingAethernet",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Aethernet travel did not start. Walking instead.",
       "Translated": "[Saucy] 以太网旅行并未开始，而是改为步行。",
       "Context": "TriadMapNavigation.IsAethernetTravelComplete",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] vnavmesh is not ready for this zone yet. Waiting...",
       "Translated": "[Saucy] vnavmesh 还没准备好进入这个区域。等等......",
       "Context": "TriadMapNavigation.AnnounceNavMeshWait",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] vnavmesh is not ready for this zone yet.",
       "Translated": "[Saucy] vnavmesh 还没有准备好进入这个区域。",
       "Context": "TriadMapNavigation.TickWaitingForNavReady",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] vnavmesh could not start movement.",
       "Translated": "[Saucy] vnavmesh 无法启动动作。",
       "Context": "TriadMapNavigation.TickWaitingForNavReady",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] navmesh building...",
       "Translated": "Saucy vnavmesh 建设......",
       "Context": "TriadMapNavigation.AnnounceNavMeshBuildProgress",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Moving to ",
       "Translated": "[Saucy] 移动到",
       "Context": "TriadMapNavigation.BeginPostVnavPhase",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Lifestream could not teleport for ",
       "Translated": "[Saucy] 生命流无法传送",
       "Context": "MultiAreaRouteExecutor.TryBeginRoute",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Could not resolve aethernet shard \"",
       "Translated": "[Saucy] 无法解析以太网分片",
       "Context": "MultiAreaRouteExecutor.TickAethernet",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Lifestream could not aethernet for ",
       "Translated": "[Saucy] 生命流无法通过以太网",
       "Context": "MultiAreaRouteExecutor.TickAethernet",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] vnavmesh could not start movement for this route step.",
       "Translated": "[Saucy] vnavmesh 无法启动这一步的路线。",
       "Context": "MultiAreaRouteExecutor.TickMoveTo",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Did not arrive in ",
       "Translated": "[Saucy] 没有到达",
       "Context": "MultiAreaRouteExecutor.TickWaitForZone",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " after zone transition.",
       "Translated": "区域转移后。",
       "Context": "MultiAreaRouteExecutor.TickWaitForZone",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The Doman Enclave",
       "Translated": "域安全区",
       "Context": "DomanEnclaveRoute..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Uses the Doman Enclave aetheryte when unlocked, otherwise Yanxia Namai and the enclave entrance.",
       "Translated": "解锁时使用域安全区以太网，否则将使用延夏纳迈和飞地入口。",
       "Context": "DomanEnclaveRoute..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Fortemps Manor",
       "Translated": "福坦斯庄园",
       "Context": "FortempsManservantRoute..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Foundation aetheryte, aethernet to The Last Vigil, then enter the manor.",
       "Translated": "基础以太网，以太网到达最后守夜，然后进入庄园。",
       "Context": "FortempsManservantRoute..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Jeuno: The First Walk",
       "Translated": "《饥饿：第一次散步》",
       "Context": "JeunoFirstWalkRoute..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Lower Jeuno routes via Mamook and the Yak T'el portal.",
       "Translated": "下杰诺路线途经马穆克和雅克特尔门户。",
       "Context": "JeunoFirstWalkRoute..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "destination",
       "Translated": "目的地",
       "Context": "AetheryteHelper.FormatTeleportDestination",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nThe Battlehall is a Duty Finder instance.\nSaucy cannot path there.",
       "Translated": "Battlehall 是一个 Duty Finder 实例。\nSaucy 无法通过那里。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nInstall vnavmesh to walk to this NPC.",
       "Translated": "安装 vnavmesh，走向这个 NPC。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nLeft-click: path there and farm missing cards.",
       "Translated": "左键点击：路径到那里并显示缺失的卡片。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nRight-click: path there and farm MGP.",
       "Translated": "右键点击：那里的路径和 MGP。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nEnables Triple Triad automation on arrival.",
       "Translated": "在到达时启用三重自动化。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nLeft-click uses MGP farm if you already have every card from this NPC.",
       "Translated": "如果您已经拥有这个 NPC 的所有卡片，请左键使用 MGP 场。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nLeft-click with missing cards builds an optimized deck even if that option is off.",
       "Translated": "即使关闭了该选项，左键点击缺少卡片也能构建一副优化的牌。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nClick to path with vnavmesh.",
       "Translated": "点击使用 vnavmesh 的路径。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nUses Lifestream for travel (aetheryte or aethernet shard).",
       "Translated": "使用 Lifestream 进行旅行 (以太网或以太网分片)。",
       "Context": "TriadNpcMapUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest #",
       "Translated": "任务#",
       "Context": "TriadNpcQuestUi.DrawUnlockQuestIconRow",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Install Questionable (/qst) to start quests from Saucy.",
       "Translated": "[Saucy] 安装 Questionable(/qst) 从 Saucy 开始任务。",
       "Context": "TriadNpcQuestUi.HandleUnlockQuestClick",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Sent \"",
       "Translated": "[Saucy] 发送 “",
       "Context": "TriadNpcQuestUi.HandleUnlockQuestClick",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\" to Questionable.",
       "Translated": "“到 Questionable。",
       "Context": "TriadNpcQuestUi.HandleUnlockQuestClick",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Questionable could not start \"",
       "Translated": "[Saucy] 可疑人物无法启动",
       "Context": "TriadNpcQuestUi.HandleUnlockQuestClick",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Install Questionable (/qst) to start this quest.",
       "Translated": "安装 Questionable(/qst) 来开始这个任务。",
       "Context": "TriadNpcQuestUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawIconTextRow"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Not supported in Questionable yet.",
       "Translated": "尚未在《可疑》中获得支持。",
       "Context": "TriadNpcQuestUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawIconTextRow"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Start \"",
       "Translated": "开始 “",
       "Context": "TriadNpcQuestUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawIconTextRow"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\" with Questionable",
       "Translated": "使用 Questionable",
       "Context": "TriadNpcQuestUi.BuildTooltip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.DrawIconTextRow"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest already accepted.",
       "Translated": "任务已接受。",
       "Context": "TriadNpcQuestUi.BuildSnapshot",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Quest unavailable in Questionable.",
       "Translated": "这在 Questionable 中不可用。",
       "Context": "TriadNpcQuestUi.BuildSnapshot",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Prerequisites not met yet (check Questionable /qst).",
       "Translated": "尚未满足先决条件 (检查可疑/qst)。",
       "Context": "TriadNpcQuestUi.BuildSnapshot",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No cached decks yet.",
       "Translated": "还没有缓存的牌。",
       "Context": "TriadCacheSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Log in to view cached decks.",
       "Translated": "登录查看缓存的控制面板。",
       "Context": "TriadCacheSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "no cached decks",
       "Translated": "没有缓存的操作系统",
       "Context": "TriadCacheSettingsUi.DrawCharacterCache",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Header"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "1 cached deck",
       "Translated": "1 个缓存的控制面板",
       "Context": "TriadCacheSettingsUi.DrawCharacterCache",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Header"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " cached decks",
       "Translated": "缓存的牌组",
       "Context": "TriadCacheSettingsUi.DrawCharacterCache",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Header"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No optimized decks saved for this character yet.",
       "Translated": "目前还没有为这个角色保存优化版本。",
       "Context": "TriadCacheSettingsUi.DrawCharacterEntries",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "% opening",
       "Translated": "% 开场",
       "Context": "TriadCacheSettingsUi.FormatCacheEntryLine",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BulletText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Clear deck cache for this character",
       "Translated": "清除此角色的甲板缓存",
       "Context": "TriadCacheSettingsUi.DrawClearButton",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hold Ctrl while clicking to clear the cache for this character.",
       "Translated": "按住 Ctrl 键并单击以清除此字符的缓存。",
       "Context": "TriadCacheSettingsUi.DrawClearButton",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Deletes OptimizedDeckCache.json for the logged-in character.",
       "Translated": "删除登录字符的 OptimizedDeckCache.json。",
       "Context": "TriadCacheSettingsUi.DrawClearButton",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enable",
       "Translated": "启用",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Accepts match invites, selects a deck, and plays through rematches. Turn on before or during match prep.",
       "Translated": "接受对局邀请，选择一副牌，然后进行重新对局。在对局准备之前或期间开启。",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Open window when challenging an NPC",
       "Translated": "挑战 NPC 时打开窗口",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Gold Saucer card search panels",
       "Translated": "金碟卡搜索面板",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Shows a searchable card list beside the Gold Saucer card UI, including Edit Deck (TriadBuddy-style [No.1] ordering). Also shows NPC search on the main card collection screen.",
       "Translated": "显示金碟卡 UI 旁边的可搜索卡片列表，包括 Edit Deck(TriadBuddy 风格 [No.1] 订单)。同时还显示 NPC 在主卡收集界面的搜索。",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Register won cards automatically",
       "Translated": "自动登记中奖卡",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Uses Triple Triad card items in your inventory that aren't in your collection yet, once triad automation is idle.",
       "Translated": "一旦 Triad 自动化处于空闲状态，就可以使用库存中尚未包含在收藏中的 Triad 卡片项目。",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Deck",
       "Translated": "甲板",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Run mode",
       "Translated": "运行模式",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Travel",
       "Translated": "旅行",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Map navigation",
       "Translated": "地图导航",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Notifications",
       "Translated": "通知",
       "Context": "TriadSettingsUi.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show deck automation messages in chat",
       "Translated": "在聊天中显示甲板自动化信息",
       "Context": "TriadSettingsUi.DrawDeckOptimizerSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Shows [Saucy] deck optimizer, deck selection, and profile-write messages in chat. Does not hide the game's own lines (e.g. \"in play for the next match\").",
       "Translated": "在聊天中显示 [Saucy] 牌组优化器、牌组选择和配置文件写入消息。不隐藏游戏自身的内容 (例如 “正在为下一场比赛而战”)。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Skip beaten or completed NPCs",
       "Translated": "跳过击败或完成的 NPC",
       "Context": "TriadSettingsUi.DrawDeckOptimizerSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Don't start a background deck build when you target an NPC you've already beaten or whose cards you already own. Still builds at match prep if you challenge them.",
       "Translated": "当你瞄准一个你已经击败的 NPC 或者你已经拥有其卡牌的 NPC 时，不要开始构建背景。如果你挑战他们，仍然要在比赛准备阶段进行构建。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pause while Questionable is running",
       "Translated": "当 “问题” 运行时暂停",
       "Context": "TriadSettingsUi.DrawDeckOptimizerSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pauses background deck builds while Questionable (/qst) is questing. Match prep still builds if you challenge an NPC.",
       "Translated": "暂停背景板构建，同时质疑者 (/qst) 正在进行任务。如果你挑战 NPC，匹配准备工作仍在进行。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optimizer threads (0 = all)",
       "Translated": "优化器线程 (0 = all)",
       "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "All",
       "Translated": "所有",
       "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Uses ",
       "Translated": "使用",
       "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " of ",
       "Translated": "的",
       "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " logical cores for parallel deck tests.",
       "Translated": "并行甲板测试的逻辑核心。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Parallel threads while building an optimized deck (0 = all cores).",
       "Translated": "并行线程同时构建优化的游戏板 (0 = 所有核心)。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\n\nLinux / Wine (XLCore, Steam Deck): deck builds are capped to half your logical cores no matter what you pick here. Using every core for parallel deck builds can hard-crash the game under Wine.",
       "Translated": "Linux/葡萄酒 (XLCore, Steam Deck):无论你在这里选择什么，游戏板构建都限制在你的逻辑核心的一半范围内。将每个核心都用于并行游戏板构建可能会严重影响葡萄酒下的游戏。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerMaxThreadsSlider",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optimizer timeout (min)",
       "Translated": "优化器超时 (最小值)",
       "Context": "TriadSettingsUi.DrawDeckOptimizerTimeoutSlider",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cancels a background deck build after this long. If the build is not finished by deck select, Saucy falls back to your best profile deck. Map navigation waits until a deck is ready.",
       "Translated": "经过这么长时间后，取消背景甲板的构建。如果甲板选择没有完成构建，Saucy 将退回到您最佳的配置甲板。地图导航等待，直到甲板准备就绪。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerTimeoutSlider",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Challenge an NPC once to load your profile decks here.",
       "Translated": "挑战 NPC 一次，在这里加载个人资料。",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Auto-pick best deck",
       "Translated": "自动选择最佳甲板",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Picks a deck at deck select. Default: highest opening win % among your profile decks. If none of those decks have 5 cards, Saucy uses the game's Recommended button.",
       "Translated": "在选择牌时选择一副牌。默认值：在您的档案牌中开局胜率最高。如果这些牌都没有 5 张牌，Saucy 将使用游戏的推荐按钮。",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Use cached deck if available",
       "Translated": "使用缓存的牌 (如果可用)",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "At match prep, loads a matching cached deck into profile slot 5 when one exists for this NPC and rules. Auto-pick still sims your profile decks and picks the highest opening win %. Cannot be combined with Build optimized deck.",
       "Translated": "在匹配准备阶段，如果该 NPC 存在匹配的缓存牌，请将其加载到配置文件插槽 5 中并制定规则。自动选择仍然会模拟您的配置文件牌，并选择最高的开局胜率。不能与构建优化牌组合使用。",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Build optimized deck",
       "Translated": "构建优化的牌组",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "At match prep, builds a deck from your owned cards when no valid cache or existing \"NPC (Saucy)\" profile deck fits this NPC and rules. ",
       "Translated": "在匹配准备阶段，如果没有有效缓存或现有的 “NPC(Saucy)” 配置文件副本适合这个 NPC 和规则，请使用您拥有的卡片构建一副副本。",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Rebuilds if you have gained ",
       "Translated": "如果您已获得，则重建",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " or more new cards since the last build for that NPC. ",
       "Translated": "或者是自上次为那个 NPC 制作卡片以来的更多新卡片。",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Saves to profile slot 5 and selects it. Cannot be combined with Use cached deck.",
       "Translated": "保存到配置文件插槽 5 并选择它。无法与 “使用缓存牌” 组合。",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Target NPC: ",
       "Translated": "目标 NPC:",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (calculating win %…)",
       "Translated": "(计算赢率......)",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "(none)",
       "Translated": "(无)",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Game recommended",
       "Translated": "推荐游戏",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Select deck",
       "Translated": "选择牌组",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Game recommended uses FFXIV's built-in deck suggestion for the current match (not Saucy sims).",
       "Translated": "推荐游戏使用 FFXIV 的内置牌组建议进行当前对局 (而非 Saucy Sims)。",
       "Context": "TriadSettingsUi.DrawDeckBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Choose when Saucy stops playing. On plugin load no option is selected and Saucy rematches until automation is disabled.",
       "Translated": "选择 Saucy 何时停止播放。在插件加载时，不会选择任何选项，Saucy 会重新匹配，直到自动化被禁用。",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop after first card drop",
       "Translated": "第一次卡片掉落后停止",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Farm all NPC cards once",
       "Translated": "一次操作所有 NPC 卡",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stops rematching while Duty Finder is ready.",
       "Translated": "当 Duty Finder 准备就绪时，停止重新匹配。",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "(match registration open)",
       "Translated": "(匹配注册已开启)",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC: reading match registration…",
       "Translated": "NPC:阅读比赛注册......",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC: open match registration to list missing cards.",
       "Translated": "NPC:公开匹配登记以列出缺失卡片。",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Missing cards only",
       "Translated": "仅缺少卡片",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "You already have every card from this NPC. Uncheck \"Missing cards only\" or choose a different NPC.",
       "Translated": "您已经拥有这个 NPC 的所有卡片。取消勾选 “仅缺少卡片” 或选择其他 NPC。",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Start a match with an NPC to see which cards are still missing.",
       "Translated": "与 NPC 开始对战，查看哪些卡片仍然缺失。",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Log out when run completes",
       "Translated": "运行完成后注销",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Logs out of the game when a run finishes: fixed match count reaches zero, card drop mode triggers, or card farm completes.",
       "Translated": "游戏结束时退出游戏：固定匹配次数达到零，触发卡片掉落模式，或者卡片集中完成。",
       "Context": "TriadSettingsUi.DrawRunModeBody",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Play sound when run completes",
       "Translated": "运行完成时播放声音",
       "Context": "TriadSettingsUi.DrawNotificationsBody",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Open sound folder — drop MP3s here to add your own.",
       "Translated": "打开声音文件夹——在此添加你自己的 MP3。",
       "Context": "TriadSettingsUi.DrawSoundPicker",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Walk to Triple Triad NPCs from Saucy map links after you arrive in the zone.",
       "Translated": "到达区域后，从 Saucy 地图链接步行至三个三合会 NPC。",
       "Context": "TriadSettingsUi.DrawDependencies",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Teleport to the nearest aetheryte before pathing when the NPC is far away or in another zone.",
       "Translated": "当 NPC 在远处或其他区域时，在传送前传送到最近的以太行星。",
       "Context": "TriadSettingsUi.DrawDependencies",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Start Triple Triad unlock quests from Saucy card and NPC search.",
       "Translated": "从 Saucy 卡片和 NPC 搜索中解锁三重任务。",
       "Context": "TriadSettingsUi.DrawDependencies",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Mount used before vnavmesh pathing to Triple Triad NPCs.",
       "Translated": "骑乘在 vnvmesh 通往三方 NPC 之前使用。",
       "Context": "TriadSettingsUi.DrawTravelMount",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Mount roulette",
       "Translated": "安装轮盘赌",
       "Context": "TriadSettingsUi.DrawTravelMount",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Default uses the game's Mount Roulette general action. Pick a mount to always summon that one before map navigation.",
       "Translated": "默认使用游戏的 Mount Roulette 通用操作。选择一个 Mount，总是在地图导航前召唤该 Mount。",
       "Context": "TriadSettingsUi.DrawTravelMount",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (unavailable)",
       "Translated": "(不可用)",
       "Context": "TriadSettingsUi.GetTravelMountPreviewLabel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Building deck for ",
       "Translated": "建造甲板",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Opening win chance: ",
       "Translated": "开局获胜机会：",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "(updating…)",
       "Translated": "(更新......)",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Opening win chance: calculating…",
       "Translated": "开启胜算：计算......",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cards owned: ",
       "Translated": "拥有的牌：",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Possible decks: ",
       "Translated": "可能的牌型：",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tested: ",
       "Translated": "经过测试：",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Progress: ",
       "Translated": "进度：",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Time left: ",
       "Translated": "剩余时间：",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cancel build",
       "Translated": "取消构建",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stops the current background deck build.",
       "Translated": "停止当前背景板构建。",
       "Context": "TriadSettingsUi.DrawDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Card Info",
       "Translated": "卡片信息",
       "Context": "TriadCardInfoWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reward from:",
       "Translated": "奖励来自：",
       "Context": "TriadCardInfoWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show on map",
       "Translated": "在地图上显示",
       "Context": "TriadCardInfoWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Not available",
       "Translated": "不可用",
       "Context": "TriadCardInfoWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show in NPC tab",
       "Translated": "在 NPC 选项卡中显示",
       "Context": "TriadCardInfoWindow.DrawNpcNameLink",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Card Search",
       "Translated": "卡片搜索",
       "Context": "TriadCardSearchWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Loading card data…",
       "Translated": "加载卡片数据......",
       "Context": "TriadCardSearchWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "NPC reward cards only",
       "Translated": "仅限 NPC 奖励卡",
       "Context": "TriadCardSearchWindow.DrawCardsTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Unowned only",
       "Translated": "只有无主的",
       "Context": "TriadCardSearchWindow.DrawCardsTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "(Collection filtering is active)",
       "Translated": "(集合过滤处于活动状态)",
       "Context": "TriadCardSearchWindow.DrawCardsTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Loading NPC data…",
       "Translated": "加载 NPC 数据......",
       "Context": "TriadCardSearchWindow.DrawNpcTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No NPCs available.",
       "Translated": "无 NPC 可用。",
       "Context": "TriadCardSearchWindow.DrawNpcTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No NPC data loaded.",
       "Translated": "未载入 NPC 数据。",
       "Context": "TriadCardSearchWindow.DrawNpcTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No NPCs match the current filters.",
       "Translated": "没有 NPC 与当前过滤器匹配。",
       "Context": "TriadCardSearchWindow.DrawNpcTab",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hide beaten NPCs",
       "Translated": "隐藏被打败的 NPC",
       "Context": "TriadCardSearchWindow.DrawNpcTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hide completed NPCs",
       "Translated": "隐藏已完成的 NPC",
       "Context": "TriadCardSearchWindow.DrawNpcTab",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Unowned rewards: ",
       "Translated": "无主奖励：",
       "Context": "TriadCardSearchWindow.DrawNpcDetails",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optimized deck",
       "Translated": "优化的游戏板",
       "Context": "TriadCardSearchWindow.DrawPremadeDeckForNpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Builds a deck from your owned cards and saves it to profile slot 5. Run this before travel so it is ready at match prep.",
       "Translated": "用您拥有的卡片构建一副牌，并将其保存到个人资料槽 5。在出发前运行这个，以便在匹配准备阶段就绪。",
       "Context": "TriadCardSearchWindow.DrawPremadeDeckForNpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Build deck",
       "Translated": "构建牌组",
       "Context": "TriadCardSearchWindow.DrawPremadeDeckForNpc",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Rebuild deck",
       "Translated": "重新构建牌组",
       "Context": "TriadCardSearchWindow.DrawPremadeDeckForNpc",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Runs a fresh build and overwrites the deck in profile slot 5.",
       "Translated": "运行一个新的构建，并在配置文件插槽 5 中覆盖整副牌。",
       "Context": "TriadCardSearchWindow.DrawPremadeDeckForNpc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "MGP per match:",
       "Translated": "每次匹配使用 MGP:",
       "Context": "DrawNpcDetails",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Matches tracked: ",
       "Translated": "已跟踪的匹配项：",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Game stats:",
       "Translated": "游戏数据：",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " wins,",
       "Translated": "赢了，",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " draws,",
       "Translated": "抽奖，",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " wins",
       "Translated": "赢",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reward stats:",
       "Translated": "奖励数据：",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " card: ",
       "Translated": "卡片：",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Includes MGP from selling cards",
       "Translated": "包括销售信用卡的 MGP",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Copy",
       "Translated": "复制",
       "Context": "TriadNpcStatsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reset",
       "Translated": "重置",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Ex. ",
       "Translated": "例如：",
       "Context": "CardUtils.GetOrderDesc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No. ",
       "Translated": "不。",
       "Context": "CardUtils.GetOrderDesc",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Deck optimization interrupted for ",
       "Translated": "[Saucy] 甲板优化暂停",
       "Context": "TriadSession.TryRestartNavigationDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "; retry ",
       "Translated": "重试",
       "Context": "TriadSession.TryRestartNavigationDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Deck optimizer timed out after ",
       "Translated": "[Saucy] 后台优化器超时",
       "Context": "TriadSession.FormatOptimizerTimedOutFallbackMessage",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " min; using best deck found so far.",
       "Translated": "min;使用目前为止发现的最好的甲板。",
       "Context": "TriadSession.FormatOptimizerTimedOutFallbackMessage",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Deck optimizer aborted; using best deck found so far.",
       "Translated": "[Saucy] 甲板优化器中止;使用迄今为止发现的最佳甲板。",
       "Context": "TriadSession.FormatOptimizerAbortedFallbackMessage",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Still optimizing deck for ",
       "Translated": "[Saucy] 仍在优化甲板",
       "Context": "TriadSession.StartDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Profile reader unavailable; optimizing deck for ",
       "Translated": "[Saucy] 个人资料阅读器不可用;优化游戏机",
       "Context": "TriadSession.StartDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (cannot save to profile).",
       "Translated": "(无法保存档案)。",
       "Context": "TriadSession.StartDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Deck optimizer skipped: no owned cards in collection cache.",
       "Translated": "[Saucy] 跳过 Deck 优化器：集合缓存中无自有卡。",
       "Context": "TriadSession.StartDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Waiting for vnavmesh before building deck…",
       "Translated": "[Saucy] 在建造甲板前等待 vnavmesh...",
       "Context": "TriadSession.StartDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Waiting for zone route before building deck…",
       "Translated": "【Saucy】在建筑甲板前等待区域航线......",
       "Context": "TriadSession.StartDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Optimizing deck for ",
       "Translated": "[Saucy] 优化甲板",
       "Context": "TriadSession.StartDeckOptimizer",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Deck optimization cancelled for ",
       "Translated": "[Saucy] 取消甲板优化",
       "Context": "TriadSession.OnDeckOptimizerJobFinished",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Rebuilding deck for ",
       "Translated": "[Saucy] 重建甲板",
       "Context": "TriadSession.TrySkipOptimizedDeckRebuildLocked",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " new cards since last build).",
       "Translated": "自上次制作以来的新卡。",
       "Context": "TriadSession.TrySkipOptimizedDeckRebuildLocked",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Using existing optimized deck for ",
       "Translated": "[Saucy] 使用现有优化的甲板",
       "Context": "TriadSession.TrySkipOptimizedDeckRebuildLocked",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " in profile slot ",
       "Translated": "在配置文件槽中",
       "Context": "TriadSession.TrySkipOptimizedDeckRebuildLocked",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Failed to write optimized deck to profile.",
       "Translated": "[Saucy] 未能写出优化后的配置文件。",
       "Context": "TriadSession.ApplyOptimizedDeckToProfileLocked",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Optimized deck written to slot ",
       "Translated": "[Saucy] 写入槽的优化牌",
       "Context": "TriadSession.ApplyOptimizedDeckToProfileLocked",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Saucy] Deck optimizer deck has invalid card at slot ",
       "Translated": "[Saucy] 甲板优化器在插槽中具有无效卡",
       "Context": "TriadSession.TryExtractOptimizedCardIds",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enable Auto-pick best deck in Triad settings.",
       "Translated": "在 Triad 设置中启用自动选择最佳牌组。",
       "Context": "TriadSession.DescribePremadeDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Building deck… ",
       "Translated": "建造甲板......",
       "Context": "TriadSession.DescribePremadeDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ready in profile slot ",
       "Translated": "已在配置文件槽中准备就绪",
       "Context": "TriadSession.DescribePremadeDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Last build timed out; try again.",
       "Translated": "最后一次构建超时;再试一次。",
       "Context": "TriadSession.DescribePremadeDeckOptimizerStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No usable decks",
       "Translated": "无可用操作面板",
       "Context": "TriadSession.DescribeMissingSimmableDecks",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "In match…",
       "Translated": "在比赛中......",
       "Context": "TriadSession.GetAutoPickDeckSummary",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Calculating…",
       "Translated": "正在计算......",
       "Context": "TriadSession.GetAutoPickDeckSummary",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " — using game recommended",
       "Translated": "——建议使用游戏",
       "Context": "TriadSession.GetAutoPickDeckSummary",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Paused — Questionable is running",
       "Translated": "暂停——可疑人物正在运行",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Skipped — NPC beaten or all cards owned",
       "Translated": "跳过——NPC 被打败或拥有所有卡片",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " · rebuilding after new cards",
       "Translated": "·在新卡片后重建",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " · generating new (cached deck exists)",
       "Translated": "· 生成新内容 (存在缓存副本)",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Waiting for vnavmesh…",
       "Translated": "等待 vnavmesh...",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Optimizer cooling down · still generating new",
       "Translated": "优化器冷却 · 仍在生成新产品",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cached deck outdated · generating new…",
       "Translated": "缓存甲板过时·生成新的...",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cached deck exists · still generating new…",
       "Translated": "缓存的甲板存在，仍在生成新的......",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Profile deck in slot ",
       "Translated": "插槽中的配置面板",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " · still generating new…",
       "Translated": "仍在生成新的......",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Waiting for optimized deck…",
       "Translated": "等待优化的配对......",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Last build timed out · still generating new…",
       "Translated": "最后一次构建超时·仍在生成新的......",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " · cached deck exists",
       "Translated": "·缓存甲板存在",
       "Context": "TriadSession.DescribeOptimizedDeckBuildStatus",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Character ",
       "Translated": "角色",
       "Context": "TriadOptimizedDeckCacheStore.ResolveCharacterDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Header"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "None",
       "Translated": "无",
       "Context": "TriadGameModifierNone..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Roulette",
       "Translated": "轮盘赌",
       "Context": "TriadGameModifierRoulette..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "All Open",
       "Translated": "全部开放",
       "Context": "TriadGameModifierAllOpen..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Three Open",
       "Translated": "三个开局",
       "Context": "TriadGameModifierThreeOpen..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sudden Death",
       "Translated": "猝死",
       "Context": "TriadGameModifierSuddenDeath..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Random",
       "Translated": "随机",
       "Context": "TriadGameModifierRandom..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Order",
       "Translated": "顺序",
       "Context": "TriadGameModifierOrder..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Chaos",
       "Translated": "混沌",
       "Context": "TriadGameModifierChaos..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reverse",
       "Translated": "逆转",
       "Context": "TriadGameModifierReverse..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Fallen Ace",
       "Translated": "坠落的 Ace",
       "Context": "TriadGameModifierFallenAce..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Same",
       "Translated": "同上",
       "Context": "TriadGameModifierSame..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Plus",
       "Translated": "此外",
       "Context": "TriadGameModifierPlus..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ascension",
       "Translated": "上升",
       "Context": "TriadGameModifierAscension..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Descension",
       "Translated": "下降",
       "Context": "TriadGameModifierDescension..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Swap",
       "Translated": "交换",
       "Context": "TriadGameModifierSwap..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Draft",
       "Translated": "草案",
       "Context": "TriadGameModifierDraft..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Walk up to the Out on a Limb machine, set how many games to play, and Saucy runs them.",
       "Translated": "骑着 Limb 机器走到 Out，设置要玩的游戏数量，然后由 Saucy 来运行它们。",
       "Context": "LimbManager.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Runs automatically when enabled at the Out on a Limb machine.",
       "Translated": "当在 Limb 机器的 Out 中启用时，会自动运行。",
       "Context": "LimbManager.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Options",
       "Translated": "选项",
       "Context": "LimbManager.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tuning",
       "Translated": "调优",
       "Context": "LimbManager.DrawSettings",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "library"
     },
     {
       "Original": "Cursor in target zone",
       "Translated": "目标区域中的光标",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reference: ",
       "Translated": "参考文献：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Cursor: ",
       "Translated": "游标：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Only request",
       "Translated": "仅请求",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Request input",
       "Translated": "请求输入",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputInt"
+      "Source": "library"
     },
     {
       "Original": "Request",
       "Translated": "请求",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Button enabled: ",
       "Translated": "按钮已启用：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Seconds remaining: ",
       "Translated": "剩余秒数：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Health: ",
       "Translated": "健康：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hit pending: ",
       "Translated": "命中待定：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pending: ",
       "Translated": "待处理：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ", previous health: ",
       "Translated": "，先前健康状况：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Click",
       "Translated": "单击",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Next: ",
       "Translated": "接下来：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": ", MinIndex: ",
       "Translated": "MinIndex:",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": ", rec=",
       "Translated": "rec=",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Starting points:\n",
       "Translated": "起点：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "Results:\n",
       "Translated": "结果：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "library"
     },
     {
       "Original": "SelectString arcade yes/no=",
       "Translated": "SelectString 街机是/否=",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Play X: ",
       "Translated": "游戏 X:",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Interact pending: ",
       "Translated": "待处理互动：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Interact pending age: ",
       "Translated": "年龄待定互动：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pending shutdown: ",
       "Translated": "待关闭：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Playing final round: ",
       "Translated": "进行最后一轮游戏：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remaining: ",
       "Translated": "剩余：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop at double down (Exit): ",
       "Translated": "在加倍下注时停止 (退出):",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Can automate yesno: ",
       "Translated": "可以自动执行 yesno:",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Duty finder defer: ",
       "Translated": "责任发现延迟：",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "SelectYesno visible — double-down=",
       "Translated": "Select Yes 不可见——double-down=",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "SelectYesno: not visible",
       "Translated": "SelectYesno:不可见",
       "Context": "LimbManager.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop at next double-down",
       "Translated": "停在下一个 double-down",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cashes out at the next double-down and disables automation after the reward.",
       "Translated": "在下一次双重下注时兑现现金，并在奖励后禁用自动化。",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Duty Finder ready also cashes out but leaves automation enabled.",
       "Translated": "值班 Finder 准备就绪后也会退出，但保持自动化功能处于启用状态。",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Difficulty",
       "Translated": "难度",
       "Context": "DrawSettings",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.EnumCombo"
+      "Source": "library"
     },
     {
       "Original": "Step",
       "Translated": "第一步",
       "Context": "DrawSettings",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragInt"
+      "Source": "library"
     },
     {
       "Original": "Default##step",
       "Translated": "默认步骤",
       "Context": "DrawSettings",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Spacing between probed cursor positions when searching for the sweet spot. Smaller = more precise but slower; the default works for most setups.",
       "Translated": "在搜索最佳位置时，探测到的光标位置之间的间距。更小=更精确但更慢;默认设置适用于大多数设置。",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Min seconds for another round",
       "Translated": "下一轮的最短时间",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.DragInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Always double down while the minigame timer is above this. Cash out when there is not enough time left for another round.",
       "Translated": "总是在迷你游戏计时器高于这个时候加倍下注。当剩余时间不足以进行下一轮时，立即兑现现金。",
       "Context": "DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Pointer",
       "Translated": "指针",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout.Window"
+      "Source": "library"
     },
     {
       "Original": "move left",
       "Translated": "向左移动",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "move right",
       "Translated": "向右移动",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "move down",
       "Translated": "下移",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "move up",
       "Translated": "向上移动",
       "Context": "AnyWayTheWindBlows.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "library"
     },
     {
       "Original": "slice",
       "Translated": "切片",
       "Context": "SliceIsRight.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiLayout/FullscreenOverlayScope..ctor"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Use \"Fixed match count\" below to stop after a set number of games.",
       "Translated": "使用下面的 “固定匹配计数” 在玩完一定数量的游戏后停止。",
       "Context": "CuffACurAutomation.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Runs automatically when enabled. Start the minigame at the Gold Saucer punching machine.",
       "Translated": "启用后自动运行。在 Gold Saucer 打孔机上启动迷你游戏。",
       "Context": "CuffACurAutomation.DrawSettings",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Module enabled: ",
       "Translated": "模块已启用：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "In quest event: ",
       "Translated": "在任务事件中：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Results UI: ",
       "Translated": "结果 UI:",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "SelectString visible (not arcade agent) entries=",
       "Translated": "SelectString 可见 (不是街机代理) entries=",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Nearest machine: ",
       "Translated": "最近的机器：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Targeting cuff machine: ",
       "Translated": "瞄准袖口机器：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cuff flow active: ",
       "Translated": "袖扣流处于活动状态：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Nearest machine: none",
       "Translated": "最近的机器：无",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "PunchingMachine: not loaded",
       "Translated": "PunchingMachine:未加载",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "PunchingMachine visible: ",
       "Translated": "PunchingMachine 可见：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ", nodes: ",
       "Translated": "，节点：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sliding node width: ",
       "Translated": "滑动节点宽度：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " (punch window: ",
       "Translated": "(插入窗口：",
       "Context": "CuffACurAutomation.DrawDebug",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiEx.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Opens the Saucy menu.",
@@ -3544,15 +2645,5 @@
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-08T00:00:25",
-  "imported": {
-    "archive": "uit-direct-2026-10-08T00-00-11-561Z-f56fa936-2026-10-08T000025.json",
-    "accepted": 439,
-    "filled": 439,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 439 条 `Saucy` 的界面文字译文，已收为**独立译文包** `uit-packs/Saucy@user-da148e.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 439 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
