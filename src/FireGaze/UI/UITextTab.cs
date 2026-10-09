@@ -232,9 +232,11 @@ internal sealed partial class UITextTab
     public void Draw()
     {
         this.PollRun();
+        var headerOrigin = ImGui.GetCursorPosY();
         this.DrawToolbar();
         this.TickQueue();
         this.DrawQueueToolbar();
+        PluginListLayout.FinishHeader(headerOrigin);
         this.DrawRunningBar();
         this.DrawList();
         this.DrawPendingModals();
@@ -244,12 +246,7 @@ internal sealed partial class UITextTab
 
     private void DrawToolbar()
     {
-        ImGui.TextWrapped(
-            "点「一键汉化」：翻译、写入插件、自动重载一次完成。会改插件文件，原文件自动备份，随时可「还原原文」。");
-        ImGui.TextDisabled(
-            "这里只管插件自己的界面，插件简介在「简介汉化」页；插件在跑任务时先停一下，重载会打断它。");
-
-        if (ImGui.Button("刷新"))
+        if (ImGui.Button("刷新###UITextRefresh", new Vector2(PluginListLayout.RefreshSlotWidth(), 0)))
         {
             this.index = InstalledPluginsIndex.Build();
             this.indexAt = DateTime.Now;
@@ -262,19 +259,19 @@ internal sealed partial class UITextTab
             ImGui.SetTooltip("重新读一遍已装插件列表（刚装 / 刚更新过插件时点它）。");
         }
 
-        UiHelpers.SameLineOrWrap(230);
-        ImGui.SetNextItemWidth(230);
+        UiHelpers.SameLineOrWrap(PluginListLayout.SearchWidth);
+        ImGui.SetNextItemWidth(PluginListLayout.SearchWidth);
         ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名 / 目录名…", ref this.search, 128);
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("插件名和内部名都能搜（内部名就是插件目录名）。");
         }
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("状态") + 140f + ImGui.GetStyle().ItemSpacing.X);
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("状态") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
         ImGui.BeginGroup();
         ImGui.TextDisabled("状态");
         ImGui.SameLine();
-        ImGui.SetNextItemWidth(140);
+        ImGui.SetNextItemWidth(PluginListLayout.FilterWidth);
         var filterLabels = new[] { "全部", "未汉化", "待写入", "已汉化", "失败", "中文插件" };
         var filterIndex = (int)this.filter;
         if (ImGui.Combo("###UITextFilter", ref filterIndex, filterLabels, filterLabels.Length))
@@ -288,16 +285,6 @@ internal sealed partial class UITextTab
         }
         ImGui.EndGroup();
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("只看第三方") + ImGui.GetFrameHeight());
-        ImGui.Checkbox("只看第三方", ref this.onlyThirdParty);
-
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("只看已启用") + ImGui.GetFrameHeight());
-        ImGui.Checkbox("只看已启用", ref this.onlyEnabled);
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("只列当前已加载运行的插件；在插件管理器里禁用、或还没加载起来的不列。\n（已装但停用的插件不用汉化；想给它打补丁时先启用。）");
-        }
-
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("翻译设置…"));
         if (ImGui.Button("翻译设置…"))
         {
@@ -307,7 +294,17 @@ internal sealed partial class UITextTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("翻译方式、API key、灰名单口径、插件更新后是否自动重打——都在这里改。");
+            ImGui.SetTooltip("翻译方式、API key、灰名单口径、插件更新后是否自动重打——都在这里改。\n这里只汉化插件自己的界面，简介在「简介汉化」页。汉化会备份原文件并重载插件，请先停下插件任务。");
+        }
+
+        this.DrawFeedbackButton();
+
+        ImGui.Checkbox("只看第三方", ref this.onlyThirdParty);
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("只看已启用") + ImGui.GetFrameHeight());
+        ImGui.Checkbox("只看已启用", ref this.onlyEnabled);
+        if (ImGui.IsItemHovered())
+        {
+            ImGui.SetTooltip("只列当前已加载运行的插件；在插件管理器里禁用、或还没加载起来的不列。\n（已装但停用的插件不用汉化；想给它打补丁时先启用。）");
         }
 
         // 插件装/卸/启/停（卫月事件）→ 后台重建；平时 30 秒兜底刷一次（2026-10-02 用户要求：
@@ -345,7 +342,6 @@ internal sealed partial class UITextTab
         {
             UiHelpers.ColoredWrapped(UiHelpers.Bad, "读不到卫月的插件列表（" + (this.index.FailureReason ?? "未知原因") + "）");
             ImGui.NewLine();
-            this.DrawFeedbackButton();
             return;
         }
 
@@ -357,25 +353,24 @@ internal sealed partial class UITextTab
         var patched = this.rows.Values.Count(r => r.Patch == UITextPatchStatus.Applied && !r.DoNotLocalize);
         var attention = this.rows.Values.Count(NeedsAttention);
         var summary = $"刷新于 {this.indexAt:HH:mm:ss} · 已装 {this.index.All.Count} · 已汉化 {patched} · 待处理 {attention}";
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth(summary));
-        ImGui.TextDisabled(summary);
-
-        // 反馈入口：常驻在这一行的最右边（2026-10-03 用户要求）
-        this.DrawFeedbackButton();
+        ImGui.SameLine(0, 8f);
+        ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
+        UiHelpers.Fitted(summary, summary);
+        ImGui.PopStyleColor();
     }
 
     /// <summary>插件汉化页第一行最右的「反馈…」入口（列表读不到时也会画）。</summary>
     private void DrawFeedbackButton()
     {
         const string feedbackLabel = "反馈…";
-        var feedbackLeft = ImGui.GetContentRegionMax().X - UiHelpers.LabelWidth(feedbackLabel);
-        if (feedbackLeft > ImGui.GetCursorPosX() + 12f)
+        var feedbackLeft = ImGui.GetWindowPos().X + ImGui.GetContentRegionMax().X - UiHelpers.LabelWidth(feedbackLabel);
+        if (feedbackLeft > ImGui.GetItemRectMax().X + 12f)
         {
-            ImGui.SameLine(feedbackLeft);
+            ImGui.SameLine(feedbackLeft - ImGui.GetWindowPos().X);
         }
         else
         {
-            ImGui.NewLine();
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth(feedbackLabel));
         }
 
         if (ImGui.Button(feedbackLabel))
@@ -537,8 +532,7 @@ internal sealed partial class UITextTab
     ///     前两个是固定槽宽（保证各行按钮对齐），后两个标签固定。
     /// </summary>
     private static float ActionsColumnWidth()
-        => ImGui.GetStyle().CellPadding.X * 2f + 8f + MainActionSlotWidth() + OpenOrEnableSlotWidth()
-            + UiHelpers.LabelWidth("还原原文") + UiHelpers.LabelWidth("一键上传") + 46f;
+        => PluginListLayout.ActionsColumnWidth();
 
     /// <summary>主按钮槽宽（写入并重载 / 一键汉化 / 重新汉化 / 重试四个名字里最宽的）。</summary>
     private static float MainActionSlotWidth() => PluginListLayout.MainSlotWidth();
@@ -614,7 +608,9 @@ internal sealed partial class UITextTab
 
         // 整行点击展开（2026-10-03 用户要求）：Selectable 铺在行底层、跨所有列、允许被覆盖——
         // 点行的任何地方（图标 / 文字 / 空白）都展开收起；按钮在自己区域优先接收点击。
-        var rowHeight = this.rowHeights.TryGetValue(plugin.InternalName, out var knownHeight) ? knownHeight : 46f;
+        var foldedHeight = PluginListLayout.FoldedRowHeight();
+        var rowHeight = MathF.Max(foldedHeight,
+            this.rowHeights.TryGetValue(plugin.InternalName, out var knownHeight) ? knownHeight : foldedHeight);
         ImGui.TableSetColumnIndex(0);
         var rowStartY = ImGui.GetCursorPosY();
         if (ImGui.Selectable("##row", isOpen,
@@ -631,12 +627,15 @@ internal sealed partial class UITextTab
 
         // 展开指示已去掉（用户 2026-10-07：与「插件发现」保持一致，不要行首的 ▸/▾）
         const float iconSize = PluginListLayout.IconSize;
+        ImGui.SetCursorPosY(rowStartY + MathF.Max(2f, (foldedHeight - iconSize) * 0.5f));
         if (!this.TryDrawIcon(plugin, iconSize))
         {
             DrawLetterIcon(plugin.DisplayName, iconSize);
         }
 
-        ImGui.SameLine();
+        ImGui.SameLine(0, PluginListLayout.IconTextGap);
+        var textHeight = ImGui.GetTextLineHeight() * 3f + ImGui.GetStyle().ItemSpacing.Y * 2f;
+        ImGui.SetCursorPosY(rowStartY + MathF.Max(2f, (foldedHeight - textHeight) * 0.5f));
         ImGui.BeginGroup();
         {
             UiHelpers.Fitted(plugin.DisplayName, plugin.DisplayName);
@@ -688,8 +687,10 @@ internal sealed partial class UITextTab
             }
 
             var identity = $"{plugin.InternalName}{(string.IsNullOrEmpty(plugin.Version) ? string.Empty : " · v" + plugin.Version)}";
-            UiHelpers.SameLineOrWrap(ImGui.CalcTextSize(identity).X);
-            UiHelpers.ColoredWrapped(UiHelpers.Muted, identity);
+            ImGui.SameLine(0, 8f);
+            ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
+            UiHelpers.Fitted(identity, identity);
+            ImGui.PopStyleColor();
 
             if (running && this.run is { Total: > 0 } active)
             {
@@ -705,11 +706,11 @@ internal sealed partial class UITextTab
 
         ImGui.EndGroup();
         // 量一下这一行实际多高，下一帧 Selectable 用它（首帧先用估算值）。
-        this.rowHeights[plugin.InternalName] = Math.Max(20f, ImGui.GetItemRectMax().Y - rowTop);
+        this.rowHeights[plugin.InternalName] = Math.Max(foldedHeight, ImGui.GetItemRectMax().Y - rowTop);
 
         // ── 右列：操作 ──
         ImGui.TableNextColumn();
-        ImGui.SetCursorPosY(rowStartY + 2);
+        ImGui.SetCursorPosY(rowStartY + (foldedHeight - ImGui.GetFrameHeight()) * 0.5f);
         this.DrawRowActions(plugin, info, running, busy, editorOpen, isOpen);
         this.rowHeights[plugin.InternalName] = Math.Max(this.rowHeights[plugin.InternalName], ImGui.GetItemRectMax().Y - rowTop);
 
@@ -1426,10 +1427,10 @@ internal sealed partial class UITextTab
         }
         else
         {
-            ImGui.PushTextWrapPos(ImGui.GetCursorPosX() + ImGui.GetContentRegionAvail().X - 8);
-            ImGui.TextUnformatted(description);
-            ImGui.PopTextWrapPos();
+            ImGui.TextWrapped(description);
         }
+
+        ImGui.Spacing();
 
         if (info is { HasPack: true })
         {
@@ -1441,8 +1442,11 @@ internal sealed partial class UITextTab
                 UITextPatchStatus.Failed => "上次失败，已还原",
                 _ => "未应用" + (info.HasBackup ? "（原始文件已备份）" : string.Empty),
             };
-            UiHelpers.ColoredWrapped(UiHelpers.Muted,
-                $"共 {info.Total} 条 · 已翻译 {info.Translated} 条 · 未翻译 {info.Untranslated} 条 · 不翻 {info.Skipped} 条 ｜ 补丁：{patchText}");
+            PluginListLayout.DrawDetailValue("文本总数", $"{info.Total} 条");
+            PluginListLayout.DrawDetailValue("已翻译", $"{info.Translated} 条");
+            PluginListLayout.DrawDetailValue("未翻译", $"{info.Untranslated} 条");
+            PluginListLayout.DrawDetailValue("不翻", $"{info.Skipped} 条");
+            PluginListLayout.DrawDetailValue("补丁", patchText);
 
             if (info.PatchDetail.Length > 0 && ImGui.IsItemHovered())
             {

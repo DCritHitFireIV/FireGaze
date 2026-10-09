@@ -38,6 +38,44 @@ internal static class DiscoveryUiTests
 
         var layout = typeof(TranslationIndexEntry).Assembly.GetType("FireGaze.UI.PluginListLayout");
         check(layout is not null, "list geometry is measured independently from workflow behavior");
+        var foldedHeight = layout!.GetMethod("MeasureFoldedRowHeight");
+        check(foldedHeight is not null, "both plugin tabs reserve the same three-text-line folded row height");
+        if (foldedHeight is not null)
+        {
+            foreach (var scale in new[] { 1f, 1.5f, 2f })
+            {
+                var height = (float)foldedHeight.Invoke(null, [16f * scale, 24f * scale, 4f * scale])!;
+                check(height == MathF.Max(24f * scale + 16f, MathF.Max(40f, 56f * scale) + 4f),
+                    "the common folded row fits icon and three text lines, scale " + scale);
+            }
+        }
+        var headerEnd = layout!.GetMethod("MeasureHeaderEnd");
+        check(headerEnd is not null, "both plugin tabs use a shared three-row toolbar baseline");
+        if (headerEnd is not null)
+        {
+            foreach (var scale in new[] { 1f, 1.5f, 2f })
+            {
+                var end = 50f + 3f * (24f + 4f) * scale;
+                check((float)headerEnd.Invoke(null, [50f, end - 12f, 24f * scale, 4f * scale])! == end
+                    && (float)headerEnd.Invoke(null, [50f, end + 80f, 24f * scale, 4f * scale])! == end + 80f,
+                    "toolbar minimum aligns lists without clipping wrapped controls, scale " + scale);
+            }
+        }
+        check(layout!.GetField("IconTextGap")?.GetRawConstantValue() is float gap && gap == 12f,
+            "translation and discovery share the discovery 12px icon-to-text gap");
+        check(layout.GetField("DetailInset")?.GetRawConstantValue() is float inset && inset == 52f,
+            "expanded details start at the same 40px icon plus 12px text origin");
+        var detailValue = layout.GetMethod("MeasureDetailValueX");
+        check(detailValue is not null, "detail value columns use one shared origin-relative measurement");
+        foreach (var font in new[] { 16f, 24f, 32f })
+        {
+            check((float)detailValue!.Invoke(null, [120f, font])! == 120f + font * 5.2f,
+                "detail numbers keep the discovery value-column offset at font " + font);
+        }
+        var sharedActions = layout.GetMethod("MeasureSharedActionsWidth");
+        check(sharedActions is not null && (float)sharedActions.Invoke(null, [250f, 340f])! == 340f
+            && (float)sharedActions.Invoke(null, [380f, 340f])! == 380f,
+            "both lists reserve the same column without squeezing either set of actions");
         var tab = typeof(TranslationIndexEntry).Assembly.GetType("FireGaze.UI.UITextTab")!;
         check(tab.GetField("selectedPlugins", BindingFlags.Instance | BindingFlags.NonPublic) is null,
             "translation rows no longer keep checkbox selection state");

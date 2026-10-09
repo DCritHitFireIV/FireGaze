@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using FireGaze.Diagnostics;
 using FireGaze.Discovery;
@@ -152,12 +153,8 @@ internal sealed partial class DiscoveryTab
 
     private void DrawCore()
     {
+        var headerOrigin = ImGui.GetCursorPosY();
         this.PollInstallation();
-        // ---------------- 顶部说明 ----------------
-        ImGui.TextWrapped("找插件：云端插件库全在这里（含官方主库），没加过的库可以加入自己的库。");
-        ImGui.TextDisabled("和本机装了哪些插件无关；每个插件每周可点赞一次，点一行看详情。");
-
-        ImGui.Separator();
 
         // ---------------- 索引 ----------------
         // 词表被换过（比如刚点过「从 GitHub 更新词表」）就重算每行：插件清单是一次性快照。
@@ -214,7 +211,8 @@ internal sealed partial class DiscoveryTab
         // ---------------- 搜索 + 排序（第一行） ----------------
         // 刷新云库（用户 2026-10-07）：从 GitHub 重拉一次词表——刚投稿的库链收录后，点它就能在列表里看到
         ImGui.BeginDisabled(refreshInFlight);
-        if (ImGui.Button(refreshInFlight ? "刷新中…###DiscoveryRefresh" : "刷新###DiscoveryRefresh"))
+        if (ImGui.Button(refreshInFlight ? "刷新中…###DiscoveryRefresh" : "刷新###DiscoveryRefresh",
+                new Vector2(PluginListLayout.RefreshSlotWidth(), 0)))
         {
             StartCloudRefresh();
         }
@@ -258,8 +256,8 @@ internal sealed partial class DiscoveryTab
             }
         }
 
-        UiHelpers.SameLineOrWrap(300);
-        ImGui.SetNextItemWidth(300);
+        UiHelpers.SameLineOrWrap(PluginListLayout.SearchWidth);
+        ImGui.SetNextItemWidth(PluginListLayout.SearchWidth);
         if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、一行简介、详情…", ref search, 256))
         {
             rebuildPending = true;
@@ -270,11 +268,11 @@ internal sealed partial class DiscoveryTab
             ImGui.SetTooltip("全字段搜索：插件名（原文+译文）、作者、一行简介、详情；大小写不敏感。");
         }
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("排序") + 160f + ImGui.GetStyle().ItemSpacing.X);
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("排序") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
         ImGui.BeginGroup();
-        ImGui.Text("排序");
+        ImGui.TextDisabled("排序");
         ImGui.SameLine();
-        ImGui.SetNextItemWidth(160);
+        ImGui.SetNextItemWidth(PluginListLayout.FilterWidth);
         if (ImGui.BeginCombo("###DiscoverySort", SortLabel(sortMode)))
         {
             foreach (var mode in Enum.GetValues<DiscoverySortMode>())
@@ -291,7 +289,7 @@ internal sealed partial class DiscoveryTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("默认：本周点赞降序，同赞按插件名。\n推荐排行按在插件发现选择并成功安装的次数排序；旧统计包含历史加库记录。");
+            ImGui.SetTooltip("默认：本周点赞降序，同赞按插件名。\n推荐排行按在插件发现选择并成功安装的次数排序。");
         }
         ImGui.EndGroup();
 
@@ -374,6 +372,7 @@ internal sealed partial class DiscoveryTab
 
         // ---------------- 投稿插件库（进云端语料） ----------------
         DrawSubmitSection();
+        PluginListLayout.FinishHeader(headerOrigin);
 
         // ---------------- 列表（吃满剩余高度） ----------------
         var statusReserve = string.IsNullOrEmpty(statusMessage) ? 0f : ImGui.GetTextLineHeightWithSpacing() + 6f;

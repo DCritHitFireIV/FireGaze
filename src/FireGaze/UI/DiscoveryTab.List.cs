@@ -17,13 +17,11 @@ internal sealed partial class DiscoveryTab
     ///     不够高的话两行会显得又扁又挤（用户 2026-10-06：「列距还要保持类似原来三行那样的宽度」）。
     /// </summary>
     private static float FoldedRowHeight()
-        => MathF.Max(ImGui.GetFrameHeight() + 16f, ImGui.GetFontSize() * 3.2f);
+        => PluginListLayout.FoldedRowHeight();
 
     /// <summary>右栏按钮列宽：按当前字体 / UI 缩放实算（写死 176 在缩放 >1 时会把按钮切掉）。</summary>
     private static float ActionsColumnWidth()
-        => ImGui.GetStyle().CellPadding.X * 2f + 8f + MathF.Max(40f, ImGui.GetFontSize() * 2.6f) + 12f
-            + MaxLabelWidth("加入自己的库", "启用") + 10f
-            + MaxLabelWidth("一键安装", "安装中…", "去汉化", "安装器") + ImGui.GetStyle().ItemSpacing.X;
+        => PluginListLayout.ActionsColumnWidth();
 
     private static float MaxLabelWidth(params string[] labels) => labels.Max(UiHelpers.LabelWidth);
 
@@ -122,7 +120,7 @@ internal sealed partial class DiscoveryTab
             InsStyle.DrawLetterAvatar(entry.DisplayName, iconSize);
         }
 
-        ImGui.SameLine(0, 12f);
+        ImGui.SameLine(0, PluginListLayout.IconTextGap);
         ImGui.BeginGroup();
         {
             UiHelpers.Fitted(entry.DisplayName, entry.DisplayName);
@@ -237,7 +235,7 @@ internal sealed partial class DiscoveryTab
     private void DrawExpanded(TranslationIndexEntry entry)
     {
         // 缩进对齐到图标右侧的文字列（40px 图标 + 间距），详情和名字同一视线
-        var detailInset = 40f + ImGui.GetStyle().ItemSpacing.X + 4f;
+        var detailInset = PluginListLayout.DetailInset;
         ImGui.Indent(detailInset);
 
         if (this.installFallbackName == entry.InternalName)
@@ -267,7 +265,7 @@ internal sealed partial class DiscoveryTab
         }
 
         DrawKeyValue("推荐", $"{recommends} 次");
-        if (ImGui.IsItemHovered()) ImGui.SetTooltip("从插件发现选择并成功安装这个插件的次数。旧统计包含历史加库记录，不代表完整的下载量。");
+        if (ImGui.IsItemHovered()) ImGui.SetTooltip("从插件发现选择并成功安装这个插件的次数，不代表完整的下载量。");
         DrawKeyValue("点赞", discoveryStats is null ? "统计暂不可用（点赞会先记在本机）" : total.ToString());
 
         if (entry.IsOfficial)
@@ -334,12 +332,7 @@ internal sealed partial class DiscoveryTab
     }
 
     private static void DrawKeyValue(string label, string value)
-    {
-        var startX = ImGui.GetCursorPosX();
-        ImGui.TextDisabled(label);
-        ImGui.SameLine(startX + ImGui.GetFontSize() * 5.2f);
-        ImGui.TextWrapped(value);
-    }
+        => PluginListLayout.DrawDetailValue(label, value);
 
     /// <summary>行尾的 ♥：不显示数字（用户 2026-10-06 定），计数在 tooltip 里；本机清过的一周内变灰。</summary>
     private void DrawLikeButton(TranslationIndexEntry entry, string suffix)

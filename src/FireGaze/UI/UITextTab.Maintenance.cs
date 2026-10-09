@@ -26,7 +26,7 @@ internal sealed partial class UITextTab
     }
     private sealed record DiagnosticResult(string Query, List<UITextDiagnostic> Matches, string? Error);
 
-    private static float RowDetailInset() => 64f;
+    private static float RowDetailInset() => PluginListLayout.DetailInset;
 
     private static string MaintenanceSignature(InstalledPluginEntry entry, UITextPack pack)
     {
