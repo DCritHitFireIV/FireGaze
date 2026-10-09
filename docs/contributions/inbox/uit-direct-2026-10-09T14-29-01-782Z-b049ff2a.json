@@ -1,1 +1,901 @@
-{"type":"uit-contribution","plugin":"DamageInfoPlugin","kinds":["free"],"entries":[{"Original":"Damage Info","Translated":"损坏信息","Context":"DamageInfoPlugin.get_Name","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.OpenPopup"},{"Original":"Display the Damage Info configuration interface.","Translated":"显示损坏信息配置界面。","Context":"DamageInfoPlugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Bunny","Translated":"邦尼","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Carrot","Translated":"胡萝卜","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Karakul","Translated":"卡拉库尔","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"XIV","Translated":"十四","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Musical","Translated":"音乐","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Shiba","Translated":"柴田","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"House","Translated":"房子","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Indifferent","Translated":"冷漠","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Omni-class","Translated":"全能级","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Sprout","Translated":"斯普劳特","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Miner","Translated":"矿工","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Penguin","Translated":"企鹅","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Grebuloff","Translated":"格雷布洛夫","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"BUDDY","Translated":"巴迪","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Chest Coffer","Translated":"胸部保险箱","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Ragnarok","Translated":"诸神黄昏","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Bedge","Translated":"贝吉","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"90k'd","Translated":"9 万分","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Crab","Translated":"螃蟹","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Cleric Stance","Translated":"牧师立场","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Ultimate","Translated":"终极","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Namazu","Translated":"沼津","Context":"Fools2023Config.LoadDefaultRareDamageTypes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"April Fools 2023 (Rare Damage Types)","Translated":"2023 年 4 月愚人节 (稀有伤害类型)","Context":"Fools2023.DrawConfigDisabled","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Unlock this feature by using the command '/dmginfo fools2023' in chat.","Translated":"在聊天中使用命令 “/dmginfo fools2023” 解锁此功能。","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Enable vanilla damage icons under the Flytext category to use this feature.","Translated":"在 Flytext 类别下启用香草味损坏图标以使用此功能。","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Enable new rare damage types","Translated":"启用新的罕见损坏类型","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Rare damage type occurrence chance:","Translated":"罕见损伤类型的发生概率：","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"A rare damage type will occur for 1 in every ","Translated":"每 1 人中将有 1 人遭受罕见的伤害类型。","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" named attacks.","Translated":"命名攻击。","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Icon ID","Translated":"图标 ID","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Icon","Translated":"图标","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Name","Translated":"名称","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Delete","Translated":"删除","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"-##fools2023delete","Translated":"--##fools2023delete","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Invalid Icon ID","Translated":"无效图标 ID","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"+##fools2023add","Translated":"+##fools2023 添加","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"QoLBar's Icon Browser (/qolicons) is recommended for finding icon IDs.","Translated":"建议使用 QoLbar 的图标浏览器 (/qolicons) 来查找图标 ID。","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Please note this 'feature' is in maintenance mode and will not have anything new added, but will be fixed in case of bugs.","Translated":"请注意，这个 “功能” 目前处于维护模式，不会添加任何新内容，但如果出现错误，将会进行修复。","Context":"Fools2023.DrawConfig","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Damage Info Config","Translated":"损坏信息配置","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Damage type information","Translated":"损坏类型信息","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Each attack in the game has a specific damage type, such as blunt, piercing, magic, limit break, \"breath\", and more. The only important damage types for mitigation are physical (encompassing slashing, blunt, and piercing), magic, and unique (sometimes referred to by the community as \"darkness\" damage).","Translated":"游戏中的每种攻击都有特定的伤害类型，如钝器、穿刺、魔法、极限突破、“呼吸” 等。用于缓解的唯一重要伤害类型是物理伤害 (包括斩击、钝器和穿刺)、魔法伤害和独特伤害 (有时被社区称为 “黑暗” 伤害)。","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Physical damage can be mitigated by reducing an enemy's strength stat, or with moves that specifically mention physical damage reduction. Magic damage can be mitigated by reducing an enemy's intelligence stat, or with moves that specifically mention magic damage reduction. Unique damage cannot be mitigated by reducing an enemy's stats or mitigating against physical or magic damage - only moves that \"reduce a target's damage dealt\" will affect unique damage.","Translated":"物理伤害可以通过降低敌人的力量属性或使用特别提及物理伤害减少的动作来减轻。魔法伤害可以通过降低敌人的智力属性或使用特别提及魔法伤害减少的动作来减轻。独特伤害不能通过降低敌人的属性或减轻物理或魔法伤害来减轻——只有 “减少对目标造成的伤害” 的动作才会影响独特伤害。","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Flytext Options","Translated":"Flytext 选项","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Color","Translated":"颜色","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Source Text","Translated":"源文本","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Action Text","Translated":"动作文本","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"All","Translated":"全部","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Incoming Damage","Translated":"传入伤害","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Outgoing Damage","Translated":"外部伤害","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Pet","Translated":"宠物","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Heals","Translated":"治愈","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"FT Options","Translated":"FT 选项","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Columns"},{"Original":"Disable vanilla damage type icons","Translated":"禁用香草味损坏类型图标","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Flytext Colors","Translated":"飞行文本颜色","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Physical##flytext","Translated":"物理##飞文本","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Magical##flytext","Translated":"魔法##flytext","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Unique##flytext","Translated":"独一无二##flytext","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Set colors to match vanilla damage type icons","Translated":"设置颜色以匹配香草味损坏类型图标","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"This will wipe your existing flytext colors for physical, magical,\nand unique damage, and replace them with pre-set colors\nthat match the vanilla flytext damage type icons.\nThis is meant to complement the vanilla damage icons\nrather than improve damage type visibility.\n\nThis cannot be undone automatically.\nAre you sure you want to continue?","Translated":"这将抹去你现有的飞行文本颜色，变成物理、魔法、\n和独特的损坏，并用预设颜色替换\n这与香草飞行文本损坏类型的图标相匹配。\n这是为了补充香草味的损坏图标\n而不是提高损坏类型的可见度。\n\n这不能自动解除。\n你确定要继续吗？","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Continue","Translated":"继续","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Cancel","Translated":"取消","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Positionals","Translated":"位置","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Enable positional hit color","Translated":"启用位置命中颜色","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Enable positional miss color","Translated":"启用位置缺失颜色","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Positional Color options","Translated":"位置颜色选项","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Positional Hit##flytext","Translated":"位置命中##flytext","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Positional Miss##flytext","Translated":"位置错误##flytext","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Copy Hit to Miss","Translated":"将 Hit 复制到 Miss","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Copy Miss to Hit","Translated":"将 Miss 复制到 Hit","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Positional Attack Text options","Translated":"位置攻击文本选项","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"dmginfopositionaltextoptions","Translated":"dmginfopositional 文本选项","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Columns"},{"Original":"Prefix","Translated":"前缀","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Suffix","Translated":"后缀","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Hit","Translated":"命中","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Positional Text overrides Attack Text options","Translated":"位置文本覆盖攻击文本选项","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"The Positional Action Text options will override the Action Text options for Positional Attacks. For example, if Action Text is disabled for outgoing damage, Positional Text will still show if you have any prefixes or suffixes enabled.","Translated":"位置动作文本选项将覆盖位置攻击的动作文本选项。例如，如果因外部伤害而禁用了动作文本，位置文本仍将显示是否启用了任何前缀或后缀。","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"The Positional Action Text options will not override the Action Text options for Positional Attacks. For example, if Action Text is disabled for outgoing damage, Positional Text will not show, even if you have any prefixes or suffixes enabled.","Translated":"位置动作文本选项不会覆盖位置攻击的动作文本选项。例如，如果因外部伤害而禁用了动作文本，即使您启用了任何前缀或后缀，位置文本也不会显示。","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Positional hit:","Translated":"位置命中：","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Prefix##positionalhittext","Translated":"前缀##位置命中文本","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Suffix##positionalhittext","Translated":"后缀##positionalhittext","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Positional miss:","Translated":"位置错误：","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Prefix##positionalmisstext","Translated":"前缀##positionalmiss 文本","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Suffix##positionalmisstext","Translated":"后缀##positionalmiss text","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Positional Sound options","Translated":"定位声音选项","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Note that sounds are the same as chat <se.X> sound effects.","Translated":"请注意，声音与聊天<se.X>声音效果相同。","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Enabled##hitSound","Translated":"已启用##hitSound","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Sound ID:","Translated":"声音 ID:","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Enabled##missSound","Translated":"Enabled ##missSound","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Print Positional Report to Chat","Translated":"打印位置报告到聊天","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Castbars","Translated":"投射条","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Main target","Translated":"主要目标","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Focus target","Translated":"聚焦目标","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Castbar Gauge Colors:","Translated":"施工条尺寸颜色：","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Physical##gauge","Translated":"物理尺寸","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Magical##gauge","Translated":"魔法##规格","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Unique##gauge","Translated":"独一无二##gaauge","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Castbar Gauge Border Colors:","Translated":"Castbar 校准边框颜色：","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Due to the castbar border texture being yellow, the blue channel does not appear properly on the castbar border.","Translated":"由于投影条边缘纹理为黄色，蓝色通道在投影条边缘上未能正确显示。","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Physical##bg","Translated":"物理","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Magical##bg","Translated":"Magic ##bg","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Unique##bg","Translated":"独一无二##bg","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Debug","Translated":"调试","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Debug Log Enabled","Translated":"已启用调试日志","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Positional Log Enabled","Translated":"位置日志已启用","Context":"PluginUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "DamageInfoPlugin",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Damage Info",
+      "Translated": "损坏信息",
+      "Context": "DamageInfoPlugin.get_Name",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup"
+    },
+    {
+      "Original": "Display the Damage Info configuration interface.",
+      "Translated": "显示损坏信息配置界面。",
+      "Context": "DamageInfoPlugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Bunny",
+      "Translated": "邦尼",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Carrot",
+      "Translated": "胡萝卜",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Karakul",
+      "Translated": "卡拉库尔",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "XIV",
+      "Translated": "十四",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Musical",
+      "Translated": "音乐",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Shiba",
+      "Translated": "柴田",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "House",
+      "Translated": "房子",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Indifferent",
+      "Translated": "冷漠",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Omni-class",
+      "Translated": "全能级",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Sprout",
+      "Translated": "斯普劳特",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Miner",
+      "Translated": "矿工",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Penguin",
+      "Translated": "企鹅",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Grebuloff",
+      "Translated": "格雷布洛夫",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "BUDDY",
+      "Translated": "巴迪",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Chest Coffer",
+      "Translated": "胸部保险箱",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Ragnarok",
+      "Translated": "诸神黄昏",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Bedge",
+      "Translated": "贝吉",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "90k'd",
+      "Translated": "9 万分",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Crab",
+      "Translated": "螃蟹",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Cleric Stance",
+      "Translated": "牧师立场",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Ultimate",
+      "Translated": "终极",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Namazu",
+      "Translated": "沼津",
+      "Context": "Fools2023Config.LoadDefaultRareDamageTypes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "April Fools 2023 (Rare Damage Types)",
+      "Translated": "2023 年 4 月愚人节 (稀有伤害类型)",
+      "Context": "Fools2023.DrawConfigDisabled",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Unlock this feature by using the command '/dmginfo fools2023' in chat.",
+      "Translated": "在聊天中使用命令 “/dmginfo fools2023” 解锁此功能。",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Enable vanilla damage icons under the Flytext category to use this feature.",
+      "Translated": "在 Flytext 类别下启用香草味损坏图标以使用此功能。",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Enable new rare damage types",
+      "Translated": "启用新的罕见损坏类型",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Rare damage type occurrence chance:",
+      "Translated": "罕见损伤类型的发生概率：",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "A rare damage type will occur for 1 in every ",
+      "Translated": "每 1 人中将有 1 人遭受罕见的伤害类型。",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " named attacks.",
+      "Translated": "命名攻击。",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Icon ID",
+      "Translated": "图标 ID",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Icon",
+      "Translated": "图标",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "-##fools2023delete",
+      "Translated": "--##fools2023delete",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Invalid Icon ID",
+      "Translated": "无效图标 ID",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "+##fools2023add",
+      "Translated": "+##fools2023 添加",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "QoLBar's Icon Browser (/qolicons) is recommended for finding icon IDs.",
+      "Translated": "建议使用 QoLbar 的图标浏览器 (/qolicons) 来查找图标 ID。",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Please note this 'feature' is in maintenance mode and will not have anything new added, but will be fixed in case of bugs.",
+      "Translated": "请注意，这个 “功能” 目前处于维护模式，不会添加任何新内容，但如果出现错误，将会进行修复。",
+      "Context": "Fools2023.DrawConfig",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Damage Info Config",
+      "Translated": "损坏信息配置",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Damage type information",
+      "Translated": "损坏类型信息",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Each attack in the game has a specific damage type, such as blunt, piercing, magic, limit break, \"breath\", and more. The only important damage types for mitigation are physical (encompassing slashing, blunt, and piercing), magic, and unique (sometimes referred to by the community as \"darkness\" damage).",
+      "Translated": "游戏中的每种攻击都有特定的伤害类型，如钝器、穿刺、魔法、极限突破、“呼吸” 等。用于缓解的唯一重要伤害类型是物理伤害 (包括斩击、钝器和穿刺)、魔法伤害和独特伤害 (有时被社区称为 “黑暗” 伤害)。",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Physical damage can be mitigated by reducing an enemy's strength stat, or with moves that specifically mention physical damage reduction. Magic damage can be mitigated by reducing an enemy's intelligence stat, or with moves that specifically mention magic damage reduction. Unique damage cannot be mitigated by reducing an enemy's stats or mitigating against physical or magic damage - only moves that \"reduce a target's damage dealt\" will affect unique damage.",
+      "Translated": "物理伤害可以通过降低敌人的力量属性或使用特别提及物理伤害减少的动作来减轻。魔法伤害可以通过降低敌人的智力属性或使用特别提及魔法伤害减少的动作来减轻。独特伤害不能通过降低敌人的属性或减轻物理或魔法伤害来减轻——只有 “减少对目标造成的伤害” 的动作才会影响独特伤害。",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Flytext Options",
+      "Translated": "Flytext 选项",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Color",
+      "Translated": "颜色",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Source Text",
+      "Translated": "源文本",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Action Text",
+      "Translated": "动作文本",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "All",
+      "Translated": "全部",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Incoming Damage",
+      "Translated": "传入伤害",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Outgoing Damage",
+      "Translated": "外部伤害",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Pet",
+      "Translated": "宠物",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Heals",
+      "Translated": "治愈",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "FT Options",
+      "Translated": "FT 选项",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Columns"
+    },
+    {
+      "Original": "Disable vanilla damage type icons",
+      "Translated": "禁用香草味损坏类型图标",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Flytext Colors",
+      "Translated": "飞行文本颜色",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Physical##flytext",
+      "Translated": "物理##飞文本",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Magical##flytext",
+      "Translated": "魔法##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Unique##flytext",
+      "Translated": "独一无二##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Set colors to match vanilla damage type icons",
+      "Translated": "设置颜色以匹配香草味损坏类型图标",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "This will wipe your existing flytext colors for physical, magical,\nand unique damage, and replace them with pre-set colors\nthat match the vanilla flytext damage type icons.\nThis is meant to complement the vanilla damage icons\nrather than improve damage type visibility.\n\nThis cannot be undone automatically.\nAre you sure you want to continue?",
+      "Translated": "这将抹去你现有的飞行文本颜色，变成物理、魔法、\n和独特的损坏，并用预设颜色替换\n这与香草飞行文本损坏类型的图标相匹配。\n这是为了补充香草味的损坏图标\n而不是提高损坏类型的可见度。\n\n这不能自动解除。\n你确定要继续吗？",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Continue",
+      "Translated": "继续",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Positionals",
+      "Translated": "位置",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Enable positional hit color",
+      "Translated": "启用位置命中颜色",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Enable positional miss color",
+      "Translated": "启用位置缺失颜色",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Positional Color options",
+      "Translated": "位置颜色选项",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Positional Hit##flytext",
+      "Translated": "位置命中##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Positional Miss##flytext",
+      "Translated": "位置错误##flytext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Copy Hit to Miss",
+      "Translated": "将 Hit 复制到 Miss",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Copy Miss to Hit",
+      "Translated": "将 Miss 复制到 Hit",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Positional Attack Text options",
+      "Translated": "位置攻击文本选项",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "dmginfopositionaltextoptions",
+      "Translated": "dmginfopositional 文本选项",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Columns"
+    },
+    {
+      "Original": "Prefix",
+      "Translated": "前缀",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Suffix",
+      "Translated": "后缀",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Hit",
+      "Translated": "命中",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Positional Text overrides Attack Text options",
+      "Translated": "位置文本覆盖攻击文本选项",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "The Positional Action Text options will override the Action Text options for Positional Attacks. For example, if Action Text is disabled for outgoing damage, Positional Text will still show if you have any prefixes or suffixes enabled.",
+      "Translated": "位置动作文本选项将覆盖位置攻击的动作文本选项。例如，如果因外部伤害而禁用了动作文本，位置文本仍将显示是否启用了任何前缀或后缀。",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "The Positional Action Text options will not override the Action Text options for Positional Attacks. For example, if Action Text is disabled for outgoing damage, Positional Text will not show, even if you have any prefixes or suffixes enabled.",
+      "Translated": "位置动作文本选项不会覆盖位置攻击的动作文本选项。例如，如果因外部伤害而禁用了动作文本，即使您启用了任何前缀或后缀，位置文本也不会显示。",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Positional hit:",
+      "Translated": "位置命中：",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Prefix##positionalhittext",
+      "Translated": "前缀##位置命中文本",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Suffix##positionalhittext",
+      "Translated": "后缀##positionalhittext",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Positional miss:",
+      "Translated": "位置错误：",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Prefix##positionalmisstext",
+      "Translated": "前缀##positionalmiss 文本",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Suffix##positionalmisstext",
+      "Translated": "后缀##positionalmiss text",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Positional Sound options",
+      "Translated": "定位声音选项",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Note that sounds are the same as chat <se.X> sound effects.",
+      "Translated": "请注意，声音与聊天<se.X>声音效果相同。",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Enabled##hitSound",
+      "Translated": "已启用##hitSound",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Sound ID:",
+      "Translated": "声音 ID:",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Enabled##missSound",
+      "Translated": "Enabled ##missSound",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Print Positional Report to Chat",
+      "Translated": "打印位置报告到聊天",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Castbars",
+      "Translated": "投射条",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Main target",
+      "Translated": "主要目标",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Focus target",
+      "Translated": "聚焦目标",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Castbar Gauge Colors:",
+      "Translated": "施工条尺寸颜色：",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Physical##gauge",
+      "Translated": "物理尺寸",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Magical##gauge",
+      "Translated": "魔法##规格",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Unique##gauge",
+      "Translated": "独一无二##gaauge",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Castbar Gauge Border Colors:",
+      "Translated": "Castbar 校准边框颜色：",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Due to the castbar border texture being yellow, the blue channel does not appear properly on the castbar border.",
+      "Translated": "由于投影条边缘纹理为黄色，蓝色通道在投影条边缘上未能正确显示。",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Physical##bg",
+      "Translated": "物理",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Magical##bg",
+      "Translated": "Magic ##bg",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Unique##bg",
+      "Translated": "独一无二##bg",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Debug Log Enabled",
+      "Translated": "已启用调试日志",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Positional Log Enabled",
+      "Translated": "位置日志已启用",
+      "Context": "PluginUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-09T14:29:15",
+  "imported": {
+    "archive": ""
+  },
+  "importedNote": "同一份投稿内容之前已经收到过了（issue #direct-2026-10-09T12-33-39-424Z-3b8c7d81），这次跳过（没有重复并入）。"
+}
