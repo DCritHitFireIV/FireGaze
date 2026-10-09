@@ -80,7 +80,8 @@ jobs:
             echo "存档没有变化（同一条 issue 又编辑了？）"
           else
             git commit -m "chore: 收下 issue #${{ github.event.issue.number }} 的译文投稿"
-            git push
+            # 并发推送兜底：收稿期间别的机器人工作流也在往 main 推，裸 push 会被 fetch first 拒绝
+            git push || { git pull --rebase && git push; }
           fi
 
       - name: 回话给提交者

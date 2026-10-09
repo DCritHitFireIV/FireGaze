@@ -83,4 +83,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pluginmaster.json
           git commit -m "chore: update download count"
-          git push
+          # 并发推送兜底：定时回写期间别的机器人工作流也在往 main 推，裸 push 会被 fetch first 拒绝
+          git push || { git pull --rebase && git push; }
