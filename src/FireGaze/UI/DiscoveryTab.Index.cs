@@ -146,6 +146,7 @@ internal sealed partial class DiscoveryTab
         }
 
         ApplyDiscoverySort();
+        this.iconQueue.RetainWaiting(filtered.Select(e => e.InternalName).ToArray());
     }
 
     /// <summary>

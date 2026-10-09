@@ -179,19 +179,21 @@ internal sealed class UITextLibrary
     ///     给一个插件合并库里的译文。返回「写进去多少条」（0 = 没有更新 / 拉不到）。
     ///     失败不抛：库是加速器，不是依赖。
     /// </summary>
-    public async Task<int> MergeIntoAsync(UITextPack pack, string internalName, CancellationToken token)
+    public async Task<int> MergeIntoAsync(UITextPack pack, string internalName, CancellationToken token, bool forceRefresh = false)
     {
         // 刚失败过（或仓库里还没有包）：先别反复拉，给用户的一键汉化省时间
-        if (DateTime.Now < this.unavailableUntil)
+        if (!forceRefresh && DateTime.Now < this.unavailableUntil)
         {
             return 0;
         }
 
         try
         {
-            var index = await this.FetchIndexAsync(token).ConfigureAwait(false);
+            this.LastError = null;
+            var index = await this.FetchIndexAsync(token, forceRefresh).ConfigureAwait(false);
             if (index is null || !index.Plugins.TryGetValue(internalName, out var entry))
             {
+                if (forceRefresh && index is null) this.LastError ??= "没有拿到最新版译文库索引，请稍后重试。";
                 return 0;
             }
 
@@ -208,10 +210,14 @@ internal sealed class UITextLibrary
             {
                 var file = string.IsNullOrWhiteSpace(item.File) ? internalName + ".json" : item.File!;
                 var packID = string.IsNullOrWhiteSpace(item.ID) ? "library" : item.ID!;
-                var libraryPack = await this.FetchPackFileAsync(file, internalName, packID, token).ConfigureAwait(false);
+                var libraryPack = await this.FetchPackFileCoreAsync(file, internalName, packID, token, forceRefresh).ConfigureAwait(false);
                 if (libraryPack is not null)
                 {
                     merged += pack.MergeLibrary(libraryPack, guard);
+                }
+                else if (forceRefresh)
+                {
+                    this.LastError ??= "有译文包暂时无法下载，检查未完成，请稍后重试。";
                 }
             }
 
@@ -307,7 +313,10 @@ internal sealed class UITextLibrary
     }
 
     /// <summary>拉取（或从缓存读）<c>uit-packs/</c> 下的一个具体文件；成功时上报一次「按包」下载量。</summary>
-    public async Task<UITextPack?> FetchPackFileAsync(string fileName, string pluginName, string packID, CancellationToken token)
+    public Task<UITextPack?> FetchPackFileAsync(string fileName, string pluginName, string packID, CancellationToken token)
+        => this.FetchPackFileCoreAsync(fileName, pluginName, packID, token, false);
+
+    private async Task<UITextPack?> FetchPackFileCoreAsync(string fileName, string pluginName, string packID, CancellationToken token, bool forceRefresh)
     {
         var safe = new string(fileName.Where(c => char.IsLetterOrDigit(c) || c is '_' or '-' or '.' or '@').ToArray());
         if (safe.Length == 0 || !safe.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
@@ -316,7 +325,7 @@ internal sealed class UITextLibrary
         }
 
         var cached = Path.Combine(this.cacheDirectory, safe);
-        if (File.Exists(cached) && (DateTime.Now - File.GetLastWriteTime(cached)) < PackTTL)
+        if (!forceRefresh && File.Exists(cached) && (DateTime.Now - File.GetLastWriteTime(cached)) < PackTTL)
         {
             var local = LoadPackFile(cached);
             if (local is not null)
@@ -329,7 +338,7 @@ internal sealed class UITextLibrary
         var text = await FetchTextAsync(safe, token, static candidate => UITextPack.FromJSON(candidate, out _) is not null).ConfigureAwait(false);
         if (text is null)
         {
-            return File.Exists(cached) ? LoadPackFile(cached) : null;
+            return !forceRefresh && File.Exists(cached) ? LoadPackFile(cached) : null;
         }
 
         var pack = UITextPack.FromJSON(text, out var error);
@@ -373,9 +382,9 @@ internal sealed class UITextLibrary
     }
 
     /// <summary>索引（本会话内缓存 6 小时）。</summary>
-    public async Task<UITextLibraryIndex?> FetchIndexAsync(CancellationToken token)
+    public async Task<UITextLibraryIndex?> FetchIndexAsync(CancellationToken token, bool forceRefresh = false)
     {
-        if (this.index is not null && (DateTime.Now - this.indexFetchedAt) < IndexTTL)
+        if (!forceRefresh && this.index is not null && (DateTime.Now - this.indexFetchedAt) < IndexTTL)
         {
             return this.index;
         }
@@ -384,7 +393,7 @@ internal sealed class UITextLibrary
         var text = await FetchTextAsync("index.json", token, static candidate => ParseIndex(candidate) is not null).ConfigureAwait(false);
         if (text is null)
         {
-            return this.index; // 之前拉过就用旧的；没有就 null
+            return forceRefresh ? null : this.index;
         }
 
         var parsed = ParseIndex(text);

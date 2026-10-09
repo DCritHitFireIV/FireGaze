@@ -490,6 +490,13 @@ internal sealed class UITextEditorWindow : Window
         return list;
     }
 
+    public void OpenForText(InstalledPluginEntry target, string original)
+    {
+        this.OpenFor(target);
+        this.search = original;
+        this.filter = Filter.All;
+    }
+
     private void StartTranslate(List<UITextTarget> targets, bool overwriteExisting = false, bool overwriteUser = false)
     {
         if (this.translateTask is { IsCompleted: false })
@@ -517,13 +524,21 @@ internal sealed class UITextEditorWindow : Window
         this.translateDone = 0;
         this.translateTotal = items.Count;
         var token = this.translateCancel.Token;
+        var checkpointPack = UITextPack.FromJSON(this.pack.ToJSON(), out _)!;
+        var checkpointName = this.entry!.InternalName;
         this.translateTask = Task.Run(async () =>
         {
-            var result = await channel.TranslateAsync(
+            var result = await UITextTranslationSession.TranslateAsync(channel,
                 items,
                 (done, _) =>
                 {
                     this.translateDone = done;
+                },
+                batch =>
+                {
+                    UITextFlow.AcceptTranslations(checkpointPack, batch.Translated, channel.Name, overwriteExisting, overwriteUser);
+                    if (!this.store.Save(checkpointName, checkpointPack, out var checkpointError))
+                        throw new IOException("保存译文失败：" + checkpointError);
                 },
                 token).ConfigureAwait(false);
             return (channel.Name, result);

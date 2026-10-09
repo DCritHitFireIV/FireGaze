@@ -152,6 +152,7 @@ internal sealed partial class DiscoveryTab
 
     private void DrawCore()
     {
+        this.PollInstallation();
         // ---------------- 顶部说明 ----------------
         ImGui.TextWrapped("找插件：云端插件库全在这里（含官方主库），没加过的库可以加入自己的库。");
         ImGui.TextDisabled("和本机装了哪些插件无关；每个插件每周可点赞一次，点一行看详情。");
@@ -257,7 +258,7 @@ internal sealed partial class DiscoveryTab
             }
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(300);
         ImGui.SetNextItemWidth(300);
         if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、一行简介、详情…", ref search, 256))
         {
@@ -269,7 +270,8 @@ internal sealed partial class DiscoveryTab
             ImGui.SetTooltip("全字段搜索：插件名（原文+译文）、作者、一行简介、详情；大小写不敏感。");
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("排序") + 160f + ImGui.GetStyle().ItemSpacing.X);
+        ImGui.BeginGroup();
         ImGui.Text("排序");
         ImGui.SameLine();
         ImGui.SetNextItemWidth(160);
@@ -289,12 +291,13 @@ internal sealed partial class DiscoveryTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("默认：本周点赞降序，同赞按插件名。\n推荐排行 = 从云端把库加进自己库的次数。");
+            ImGui.SetTooltip("默认：本周点赞降序，同赞按插件名。\n推荐排行按在插件发现选择并成功安装的次数排序；旧统计包含历史加库记录。");
         }
+        ImGui.EndGroup();
 
         if (sortMode == DiscoverySortMode.Random)
         {
-            ImGui.SameLine();
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("换一批"));
             if (ImGui.Button("换一批###DiscoveryShuffle"))
             {
                 shuffleOrder.Clear();
@@ -318,7 +321,7 @@ internal sealed partial class DiscoveryTab
             ImGui.SetTooltip("隐掉卫月官方主库（Dip17）里的插件，只看第三方；官方库本来就在安装器里，不用从这里加。");
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("隐藏已在库") + ImGui.GetFrameHeight());
         if (ImGui.Checkbox("隐藏已在库###DiscoveryHideInLibrary", ref hideInLibrary))
         {
             rebuildPending = true;
@@ -329,7 +332,7 @@ internal sealed partial class DiscoveryTab
             ImGui.SetTooltip("隐掉仓库已经在你的列表里的插件（含官方主库），剩下的都是还能加进库的。");
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth($"{index.All.Count} 个插件"));
         ImGui.TextDisabled($"{index.All.Count} 个插件");
         if (ImGui.IsItemHovered())
         {
@@ -339,36 +342,10 @@ internal sealed partial class DiscoveryTab
                                  : string.Empty));
         }
 
-        if (iconInFlight > 0 || iconWaitQueue.Count > 0)
-        {
-            ImGui.SameLine();
-            UiHelpers.ColoredText(UiHelpers.Muted, $"· 图标加载中，还剩 {iconInFlight + iconWaitQueue.Count}");
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("图标按你看到的范围后台下载，下过的存在本地，重开游戏不重下。");
-            }
-        }
-
-        if (indexMayBePartial)
-        {
-            ImGui.SameLine();
-            UiHelpers.ColoredText(UiHelpers.Muted, "· 正在等卫月读完插件库");
-        }
-
-        if (discoveryStats is null && statsFetchFailed)
-        {
-            ImGui.SameLine();
-            UiHelpers.ColoredText(UiHelpers.Warn, "· 统计暂不可用");
-            if (ImGui.IsItemHovered())
-            {
-                ImGui.SetTooltip("点赞/推荐统计暂时拉不到（中继不可用），先按插件名排；\n点过的赞会先记在本机，稍后自动同步。");
-            }
-        }
-
         var lastAdd = LastAddRecord();
         if (lastAdd is not null)
         {
-            ImGui.SameLine();
+            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth($"撤回添加（{lastAdd.Count}）"));
             if (ImGui.SmallButton($"撤回添加（{lastAdd.Count}）###DiscoveryUndoAdd"))
             {
                 UndoLastAdd();
@@ -378,6 +355,21 @@ internal sealed partial class DiscoveryTab
             {
                 ImGui.SetTooltip($"把刚加进来的 {lastAdd.Count} 条库从列表里移除（{lastAdd.TimeUTC.ToLocalTime():HH:mm} 那次添加）");
             }
+        }
+
+        // Status is last on the filter row, so loading cannot move preceding controls.
+        var messages = new List<string>();
+        var remaining = iconInFlight + this.iconQueue.Count;
+        if (remaining > 0) messages.Add($"图标加载中，还剩 {remaining}");
+        else if (this.iconQueue.CoolingCount(DateTime.UtcNow) > 0) messages.Add("部分图标暂不可用，稍后重试");
+        if (indexMayBePartial) messages.Add("正在等卫月读完插件库");
+        if (discoveryStats is null && statsFetchFailed) messages.Add("统计暂不可用");
+        if (messages.Count > 0)
+        {
+            ImGui.SameLine(0, 8f);
+            ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
+            UiHelpers.Fitted(string.Join(" · ", messages), "图标按可见范围下载并缓存；失败后等两分钟再重试，不影响搜索和安装。");
+            ImGui.PopStyleColor();
         }
 
         // ---------------- 投稿插件库（进云端语料） ----------------

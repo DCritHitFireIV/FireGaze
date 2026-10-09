@@ -37,6 +37,7 @@ internal sealed class DiscoveryStateStore
     private Dictionary<string, string> likedWeeks = new(StringComparer.Ordinal);
     private List<DiscoveryPendingAction> pending = [];
     private Dictionary<string, long> submittedRepos = new(StringComparer.Ordinal);
+    private HashSet<string> installationTargets = new(StringComparer.Ordinal);
 
     /// <summary>本机状态文件读/写出过问题（界面给一次性提示，不让失败一直静默）。</summary>
     private bool persistFailed;
@@ -131,6 +132,41 @@ internal sealed class DiscoveryStateStore
             {
                 SaveLocked();
             }
+        }
+    }
+
+    public void WatchInstallation(string internalName)
+    {
+        if (string.IsNullOrWhiteSpace(internalName)) return;
+        lock (gate)
+        {
+            if (installationTargets.Add(internalName)) SaveLocked();
+        }
+    }
+
+    public void WatchMissingInstallation(string internalName, IEnumerable<string> installedNames)
+    {
+        if (!installedNames.Contains(internalName, StringComparer.Ordinal)) WatchInstallation(internalName);
+    }
+
+    public void ForgetInstallation(string internalName)
+    {
+        lock (gate)
+        {
+            if (installationTargets.Remove(internalName)) SaveLocked();
+        }
+    }
+
+    public IReadOnlyList<string> CompleteInstallations(IEnumerable<string> installedNames)
+    {
+        lock (gate)
+        {
+            var completed = installedNames.Distinct(StringComparer.Ordinal).Where(installationTargets.Contains).ToList();
+            if (completed.Count == 0) return completed;
+            foreach (var name in completed) installationTargets.Remove(name);
+            MarkAdds(completed);
+            SaveLocked();
+            return completed;
         }
     }
 
@@ -256,6 +292,7 @@ internal sealed class DiscoveryStateStore
                 ? new Dictionary<string, string>(StringComparer.Ordinal)
                 : new Dictionary<string, string>(doc.LikedWeeks, StringComparer.Ordinal);
             pending = doc.Pending ?? [];
+            installationTargets = new HashSet<string>(doc.InstallationTargets ?? [], StringComparer.Ordinal);
             submittedRepos = doc.SubmittedRepos is null
                 ? new Dictionary<string, long>(StringComparer.Ordinal)
                 : new Dictionary<string, long>(doc.SubmittedRepos, StringComparer.Ordinal);
@@ -270,6 +307,7 @@ internal sealed class DiscoveryStateStore
             persistFailed = true;
             likedWeeks = new Dictionary<string, string>(StringComparer.Ordinal);
             pending = [];
+            installationTargets = new(StringComparer.Ordinal);
             submittedRepos = new Dictionary<string, long>(StringComparer.Ordinal);
         }
     }
@@ -282,6 +320,7 @@ internal sealed class DiscoveryStateStore
             {
                 LikedWeeks = likedWeeks,
                 Pending = pending,
+                InstallationTargets = installationTargets.ToList(),
                 SubmittedRepos = submittedRepos,
                 Stats = CachedStats,
             };
@@ -310,6 +349,8 @@ internal sealed class DiscoveryStateStore
 
         [JsonPropertyName("Pending")]
         public List<DiscoveryPendingAction>? Pending { get; set; }
+
+        public List<string>? InstallationTargets { get; set; }
 
         [JsonPropertyName("SubmittedRepos")]
         public Dictionary<string, long>? SubmittedRepos { get; set; }

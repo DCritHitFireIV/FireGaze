@@ -94,7 +94,7 @@ internal static class IconDownloader
                 return new Result(null, null, (int)response.StatusCode, null);
             }
 
-            var bytes = await response.Content.ReadAsByteArrayAsync(CancellationToken.None).ConfigureAwait(false);
+            var bytes = await response.Content.ReadAsByteArrayAsync(timeout.Token).ConfigureAwait(false);
             var contentType = response.Content.Headers.ContentType?.MediaType;
             return new Result(bytes, contentType, (int)response.StatusCode, null);
         }

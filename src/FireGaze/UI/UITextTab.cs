@@ -20,7 +20,7 @@ namespace FireGaze.UI;
 ///     · 取消只在翻译阶段可用；写入 / 重载阶段写明「此步不能取消」；
 ///     · 失败给下一步（重试 / 打开翻译设置），不是一句「失败了」。
 /// </remarks>
-internal sealed class UITextTab
+internal sealed partial class UITextTab
 {
     private enum RowFilter
     {
@@ -86,6 +86,8 @@ internal sealed class UITextTab
 
         /// <summary>只抽取：列出候选与统计，不翻译、不写补丁。</summary>
         ExtractOnly,
+        CheckUpdates,
+        ApplyUpdates,
     }
 
     private sealed class Run
@@ -99,6 +101,7 @@ internal sealed class UITextTab
         public CancellationTokenSource Cancel = new();
         public Task Task = Task.CompletedTask;
         public bool Finished;
+        public HashSet<string>? NewOnly;
 
         /// <summary>翻译阶段的起点（ticks）——进度条据此算「已用 / 约剩」（2026-10-03 P2-4）。</summary>
         public long TranslateStartedTicks;
@@ -174,6 +177,7 @@ internal sealed class UITextTab
     {
         public InstalledPluginEntry Entry = null!;
         public bool AwaitingFreeConfirm;
+        public HashSet<string>? NewOnly;
 
         /// <summary>0 = 大模型，1 = 彩云小译，2 = 免费 Google / MyMemory。</summary>
         public int Choice;
@@ -207,6 +211,7 @@ internal sealed class UITextTab
         this.store = store;
         this.patches = patches;
         this.runs = runs;
+        this.workQueue = new UITextJobQueue(Path.Combine(plugin.ConfigDirectory, "uitrans", "queue.json"));
     }
 
     /// <summary>
@@ -228,6 +233,8 @@ internal sealed class UITextTab
     {
         this.PollRun();
         this.DrawToolbar();
+        this.TickQueue();
+        this.DrawQueueToolbar();
         this.DrawRunningBar();
         this.DrawList();
         this.DrawPendingModals();
@@ -255,7 +262,7 @@ internal sealed class UITextTab
             ImGui.SetTooltip("重新读一遍已装插件列表（刚装 / 刚更新过插件时点它）。");
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(230);
         ImGui.SetNextItemWidth(230);
         ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名 / 目录名…", ref this.search, 128);
         if (ImGui.IsItemHovered())
@@ -263,7 +270,8 @@ internal sealed class UITextTab
             ImGui.SetTooltip("插件名和内部名都能搜（内部名就是插件目录名）。");
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("状态") + 140f + ImGui.GetStyle().ItemSpacing.X);
+        ImGui.BeginGroup();
         ImGui.TextDisabled("状态");
         ImGui.SameLine();
         ImGui.SetNextItemWidth(140);
@@ -278,18 +286,19 @@ internal sealed class UITextTab
         {
             ImGui.SetTooltip("按汉化状态筛选：未汉化 / 待写入（翻了还没写进插件）/ 已汉化 / 补丁失败 / 中文插件。");
         }
+        ImGui.EndGroup();
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("只看第三方") + ImGui.GetFrameHeight());
         ImGui.Checkbox("只看第三方", ref this.onlyThirdParty);
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("只看已启用") + ImGui.GetFrameHeight());
         ImGui.Checkbox("只看已启用", ref this.onlyEnabled);
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip("只列当前已加载运行的插件；在插件管理器里禁用、或还没加载起来的不列。\n（已装但停用的插件不用汉化；想给它打补丁时先启用。）");
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("翻译设置…"));
         if (ImGui.Button("翻译设置…"))
         {
             this.settings.IsOpen = true;
@@ -347,8 +356,9 @@ internal sealed class UITextTab
 
         var patched = this.rows.Values.Count(r => r.Patch == UITextPatchStatus.Applied && !r.DoNotLocalize);
         var attention = this.rows.Values.Count(NeedsAttention);
-        ImGui.SameLine();
-        ImGui.TextDisabled($"刷新于 {this.indexAt:HH:mm:ss} · 已装 {this.index.All.Count} · 已汉化 {patched} · 待处理 {attention}");
+        var summary = $"刷新于 {this.indexAt:HH:mm:ss} · 已装 {this.index.All.Count} · 已汉化 {patched} · 待处理 {attention}";
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth(summary));
+        ImGui.TextDisabled(summary);
 
         // 反馈入口：常驻在这一行的最右边（2026-10-03 用户要求）
         this.DrawFeedbackButton();
@@ -406,7 +416,7 @@ internal sealed class UITextTab
         ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0.12f, 0.15f, 0.19f, 1f));
         if (ImGui.BeginChild("###UITextRunning", new Vector2(0, ImGui.GetFrameHeight() + 8)))
         {
-            var verb = run.Mode == RunMode.ExtractOnly ? "正在抽取" : "正在汉化";
+            var verb = run.Mode switch { RunMode.ExtractOnly => "正在抽取", RunMode.CheckUpdates => "正在检查更新", RunMode.ApplyUpdates => "正在更新汉化", _ => "正在汉化" };
             var stage = run.Stage;
             if (run.CanCancel && run.TranslateStartedTicks > 0)
             {
@@ -425,7 +435,7 @@ internal sealed class UITextTab
 
             UiHelpers.ColoredText(run.CanCancel ? UiHelpers.Info : UiHelpers.Warn, $"{verb} {name}：{stage}");
 
-            if (run.CanCancel)
+            if (run.CanCancel && this.workQueue.Active is null)
             {
                 ImGui.SameLine();
                 if (ImGui.Button("取消###UITextRunCancel"))
@@ -435,13 +445,15 @@ internal sealed class UITextTab
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("取消只停止翻译：已经翻好的条目会保留，之后点「一键汉化」可以接着来。");
+                    ImGui.SetTooltip(run.Mode == RunMode.CheckUpdates
+                        ? "取消检查，不会修改译文或插件。"
+                        : "取消只停止翻译：已经翻好的条目会保留，之后点「一键汉化」可以接着来。");
                 }
 
                 ImGui.SameLine();
-                ImGui.TextDisabled("（取消只停翻译，已翻的会保留）");
+                ImGui.TextDisabled(run.Mode == RunMode.CheckUpdates ? "取消检查不会修改插件" : "（取消只停翻译，已翻的会保留）");
             }
-            else
+            else if (!run.CanCancel)
             {
                 ImGui.SameLine();
                 ImGui.TextDisabled("这一步不能取消，等它写完。");
@@ -469,6 +481,7 @@ internal sealed class UITextTab
                         || e.DisplayName.Contains(filterText, StringComparison.OrdinalIgnoreCase)
                         || e.InternalName.Contains(filterText, StringComparison.OrdinalIgnoreCase))
             .Where(e => this.MatchesFilter(e))
+            .OrderByDescending(e => e.InternalName == this.focusedPlugin)
             .ToList();
 
         if (items.Count == 0)
@@ -483,26 +496,38 @@ internal sealed class UITextTab
         // 2026-10-03 用户要求：行尾按钮必须在同一行，不要换行。
         // 左列固定宽 = 可用宽 − 按钮列 − 余量（滚动条/单元格边距）；左侧文案用 Fitted 按宽截断，
         // 不会反过来把按钮列挤窄。窗口真的不够时才由 SameLineOrWrap 兜底换行。
-        var actionsWidth = ActionsColumnWidth();
-        var slack = ImGui.GetStyle().ScrollbarSize + 48f;
-        var pluginWidth = Math.Max(180f, ImGui.GetContentRegionAvail().X - actionsWidth - slack);
-
-        // 与「插件发现」同一套圆角基调（按钮/滚动条圆角；2026-10-07 用户：两个页签风格对齐）
+        var columns = PluginListLayout.MeasureLegacyColumns(ImGui.GetContentRegionAvail().X,
+            ImGui.GetStyle().ScrollbarSize, ActionsColumnWidth());
+        var pluginWidth = columns.Content;
+        var actionsWidth = columns.Actions;
         InsStyle.PushRounded();
         if (!ImGui.BeginTable("###UITextPlugins", 2, flags, new Vector2(0, -1)))
         {
             InsStyle.PopRounded();
             return;
         }
-
+        if (this.focusScrollPending)
+        {
+            ImGui.SetScrollY(0);
+            this.focusScrollPending = false;
+        }
         ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthFixed, pluginWidth);
         ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
-
         foreach (var plugin in items)
         {
             this.DrawPluginRow(plugin);
+            if (this.expanded == plugin.InternalName)
+            {
+                ImGui.TableNextRow();
+                ImGui.TableSetColumnIndex(0);
+                var info = this.rows.GetValueOrDefault(plugin.InternalName);
+                ImGui.PushID(plugin.InternalName);
+                this.DrawExpanded(plugin, info, this.run is not null || this.diagnosticBusy.Count > 0,
+                    this.editor.IsOpen && this.editor.CurrentInternalName == plugin.InternalName);
+                ImGui.PopID();
+                ImGui.TableNextColumn();
+            }
         }
-
         ImGui.EndTable();
         InsStyle.PopRounded();
     }
@@ -512,20 +537,14 @@ internal sealed class UITextTab
     ///     前两个是固定槽宽（保证各行按钮对齐），后两个标签固定。
     /// </summary>
     private static float ActionsColumnWidth()
-    {
-        var width = (ImGui.GetStyle().CellPadding.X * 2f) + 8f;
-        width += MainActionSlotWidth() + 12f;
-        width += OpenOrEnableSlotWidth() + 12f;
-        width += UiHelpers.LabelWidth("还原原文") + 12f;
-        width += UiHelpers.LabelWidth("一键上传") + 10f;
-        return width;
-    }
+        => ImGui.GetStyle().CellPadding.X * 2f + 8f + MainActionSlotWidth() + OpenOrEnableSlotWidth()
+            + UiHelpers.LabelWidth("还原原文") + UiHelpers.LabelWidth("一键上传") + 46f;
 
     /// <summary>主按钮槽宽（写入并重载 / 一键汉化 / 重新汉化 / 重试四个名字里最宽的）。</summary>
-    private static float MainActionSlotWidth() => MaxLabelWidth("写入并重载", "一键汉化", "重新汉化", "重试");
+    private static float MainActionSlotWidth() => PluginListLayout.MainSlotWidth();
 
     /// <summary>第二槽宽：「启用插件」与「打开/设置」互斥，取最宽的一个，后面的按钮才能对齐。</summary>
-    private static float OpenOrEnableSlotWidth() => MaxLabelWidth("启用插件", "设置", "打开");
+    private static float OpenOrEnableSlotWidth() => PluginListLayout.OpenSlotWidth();
 
     private static float MaxLabelWidth(params string[] labels) => labels.Max(UiHelpers.LabelWidth);
 
@@ -586,7 +605,7 @@ internal sealed class UITextTab
     {
         this.rows.TryGetValue(plugin.InternalName, out var info);
         var running = this.run is { } r && string.Equals(r.InternalName, plugin.InternalName, StringComparison.Ordinal);
-        var busy = this.run is not null;
+        var busy = this.run is not null || this.diagnosticBusy.Count > 0;
         var isOpen = string.Equals(this.expanded, plugin.InternalName, StringComparison.Ordinal);
         var editorOpen = this.editor.IsOpen && string.Equals(this.editor.CurrentInternalName, plugin.InternalName, StringComparison.Ordinal);
 
@@ -595,9 +614,9 @@ internal sealed class UITextTab
 
         // 整行点击展开（2026-10-03 用户要求）：Selectable 铺在行底层、跨所有列、允许被覆盖——
         // 点行的任何地方（图标 / 文字 / 空白）都展开收起；按钮在自己区域优先接收点击。
-        var rowStartY = ImGui.GetCursorPosY();
         var rowHeight = this.rowHeights.TryGetValue(plugin.InternalName, out var knownHeight) ? knownHeight : 46f;
         ImGui.TableSetColumnIndex(0);
+        var rowStartY = ImGui.GetCursorPosY();
         if (ImGui.Selectable("##row", isOpen,
                 ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
                 new Vector2(0, rowHeight)))
@@ -611,7 +630,7 @@ internal sealed class UITextTab
         var rowTop = ImGui.GetCursorScreenPos().Y;
 
         // 展开指示已去掉（用户 2026-10-07：与「插件发现」保持一致，不要行首的 ▸/▾）
-        const float iconSize = 40f;
+        const float iconSize = PluginListLayout.IconSize;
         if (!this.TryDrawIcon(plugin, iconSize))
         {
             DrawLetterIcon(plugin.DisplayName, iconSize);
@@ -620,7 +639,7 @@ internal sealed class UITextTab
         ImGui.SameLine();
         ImGui.BeginGroup();
         {
-            ImGui.TextUnformatted(plugin.DisplayName);
+            UiHelpers.Fitted(plugin.DisplayName, plugin.DisplayName);
             if (plugin.IsDev)
             {
                 // 开发/本地插件：卫月的 manifest.IsThirdParty 默认 false，不区分的话会显示成「[官库]」（用户实测反馈）
@@ -650,7 +669,7 @@ internal sealed class UITextTab
             {
                 // 「已汉化」本身是绿色终态，只有「有改动待写入」是橙色警告
                 // （v4 复评 N16：整条变色会让绿=完成失效）
-                UiHelpers.ColoredText(UiHelpers.Good, $"已汉化 {info.Translated} 条");
+                UiHelpers.ColoredText(UiHelpers.Good, UITextMaintenance.AppliedLabel(info.Translated, Math.Max(0, info.Total - info.Skipped), isOpen));
                 ImGui.SameLine(0, 4);
                 UiHelpers.ColoredText(UiHelpers.Warn, "· 有改动待写入");
                 if (ImGui.IsItemHovered())
@@ -660,7 +679,7 @@ internal sealed class UITextTab
             }
             else
             {
-                var (badge, color) = this.DescribeState(info, running);
+                var (badge, color) = this.DescribeState(info, running, isOpen);
                 UiHelpers.ColoredText(color, badge);
             }
             if (info is { DoNotLocalize: true } && ImGui.IsItemHovered())
@@ -668,8 +687,9 @@ internal sealed class UITextTab
                 ImGui.SetTooltip("中文插件：本身就是中文界面，FireGaze 不抽取 / 不翻译 / 不打包 / 不上传。\n有旧补丁记录时可以点「还原原文」恢复原版。");
             }
 
-            ImGui.SameLine();
-            ImGui.TextDisabled($"{plugin.InternalName}{(string.IsNullOrEmpty(plugin.Version) ? string.Empty : " · v" + plugin.Version)}");
+            var identity = $"{plugin.InternalName}{(string.IsNullOrEmpty(plugin.Version) ? string.Empty : " · v" + plugin.Version)}";
+            UiHelpers.SameLineOrWrap(ImGui.CalcTextSize(identity).X);
+            UiHelpers.ColoredWrapped(UiHelpers.Muted, identity);
 
             if (running && this.run is { Total: > 0 } active)
             {
@@ -691,15 +711,7 @@ internal sealed class UITextTab
         ImGui.TableNextColumn();
         ImGui.SetCursorPosY(rowStartY + 2);
         this.DrawRowActions(plugin, info, running, busy, editorOpen, isOpen);
-
-        // ── 展开区（另起一行，左列整幅） ──
-        if (isOpen)
-        {
-            ImGui.TableNextRow();
-            ImGui.TableNextColumn();
-            this.DrawExpanded(plugin, info, busy, editorOpen);
-            ImGui.TableNextColumn();
-        }
+        this.rowHeights[plugin.InternalName] = Math.Max(this.rowHeights[plugin.InternalName], ImGui.GetItemRectMax().Y - rowTop);
 
         ImGui.PopID();
     }
@@ -744,7 +756,7 @@ internal sealed class UITextTab
             ImGui.BeginDisabled();
             ImGui.Button("一键汉化", new Vector2(MainActionSlotWidth(), 0));
             ImGui.EndDisabled();
-            if (this.run is { CanCancel: true } active)
+            if (this.run is { CanCancel: true } active && this.workQueue.Active is null)
             {
                 UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("取消"), 8);
                 if (ImGui.Button("取消###UITextRowCancel"))
@@ -754,10 +766,12 @@ internal sealed class UITextTab
 
                 if (ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("取消只停止翻译：已经翻好的条目会保留，之后点「一键汉化」可以接着来。");
+                    ImGui.SetTooltip(active.Mode == RunMode.CheckUpdates
+                        ? "取消检查，不会修改译文或插件。"
+                        : "取消只停止翻译：已经翻好的条目会保留，之后点「一键汉化」可以接着来。");
                 }
             }
-            else if (this.run is not null)
+            else if (this.run is { CanCancel: false })
             {
                 UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("写入中…"), 8);
                 ImGui.TextDisabled("写入中…");
@@ -765,28 +779,31 @@ internal sealed class UITextTab
         }
         else
         {
-            // 两个按钮都常驻（2026-10-03 用户要求）：未汉化时「一键汉化」主色；汉化完成后
-            // 「打开/设置」变主色、「一键汉化」退回普通白底。按钮名跟着「这一步真正会做什么」走
-            // （v4 复评 N1/F3/N2/F4）：失败后接着翻叫「重试」；只差写进插件叫「写入并重载」。
+            // Blue belongs to translation/update actions, not the settings shortcut.
             var fullyLocalized = info is { HasPack: true }
                                  && (info.Patch == UITextPatchStatus.Applied || info.Total == 0)
                                  && !info.PackNewerThanPatch;
 
             var retryable = this.notes.TryGetValue(plugin.InternalName, out var pendingNote) && pendingNote.CanRetry;
             var writeOnly = info is { HasPack: true, PackNewerThanPatch: true, Patch: UITextPatchStatus.Applied };
-            var label = retryable ? "重试" : writeOnly ? "写入并重载" : fullyLocalized ? "重新汉化" : "一键汉化";
-            ImGui.BeginDisabled(busy || editorOpen);
-            if (!fullyLocalized)
+            var update = this.maintenance.GetValueOrDefault(plugin.InternalName);
+            var canUpdate = update?.CanApply == true;
+            var queued = this.workQueue.Items.Any(j => j.InternalName == plugin.InternalName
+                && j.Mode is UITextJobMode.Translate or UITextJobMode.ApplyUpdates && j.State == UITextJobState.Pending);
+            var label = queued ? "已排队" : canUpdate ? "点击更新" : retryable ? "重试" : writeOnly ? "写入并重载" : fullyLocalized ? "重新汉化" : "一键汉化";
+            ImGui.BeginDisabled(editorOpen || queued);
+            if (canUpdate || !fullyLocalized)
             {
                 UiHelpers.PushPrimaryButton();
             }
 
             if (ImGui.Button(label, new Vector2(MainActionSlotWidth(), 0)))
             {
-                this.StartOneClick(plugin);
+                if (this.workQueue.Request(plugin.InternalName, plugin.DisplayName, canUpdate ? UITextJobMode.ApplyUpdates : UITextJobMode.Translate))
+                    this.notes[plugin.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已加入队列。" };
             }
 
-            if (!fullyLocalized)
+            if (canUpdate || !fullyLocalized)
             {
                 UiHelpers.PopPrimaryButton();
             }
@@ -795,9 +812,10 @@ internal sealed class UITextTab
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
                 ImGui.SetTooltip(
-                    (busy ? "有另一个插件正在汉化，等它跑完再点。\n" : string.Empty) +
+                    (queued ? "这个插件已在队列中，前面的任务结束后自动开始。\n" : busy ? "点击后加入队列，当前任务结束后自动开始。\n" : string.Empty) +
                     (editorOpen ? "这个插件正开着编辑窗口，先关掉它（避免两份修改互相覆盖）。\n" : string.Empty) +
-                    (retryable
+                    (canUpdate ? "写入检查到的译文更新并重载插件。保留人工译文，不做全量机器重翻。"
+                        : retryable
                         ? "沿用当前通道，从没翻完的地方接着翻。\n已翻好的条目不会丢；原文件备份与「还原原文」照旧。"
                         : writeOnly
                             ? "把改动过的译文写进插件 DLL 并自动重载（不再重新翻译）。\n原文件会先备份，随时可以「还原原文」。"
@@ -815,7 +833,7 @@ internal sealed class UITextTab
             }
             else
             {
-                this.DrawOpenPluginButton(plugin, info, primary: fullyLocalized, width: OpenOrEnableSlotWidth());
+                this.DrawOpenPluginButton(plugin, info, primary: false, width: OpenOrEnableSlotWidth());
             }
 
             if (info is { HasBackup: true })
@@ -1381,9 +1399,10 @@ internal sealed class UITextTab
         }
     }
 
-    private void DrawExpanded(InstalledPluginEntry plugin, RowInfo? info, bool busy, bool editorOpen)
+    private void DrawExpanded(InstalledPluginEntry plugin, RowInfo? info, bool busy, bool editorOpen, float? alignedInset = null)
     {
-        ImGui.Indent(64f);
+        var detailInset = alignedInset ?? RowDetailInset();
+        ImGui.Indent(detailInset);
 
         if (info is { DoNotLocalize: true })
         {
@@ -1396,7 +1415,7 @@ internal sealed class UITextTab
                 ImGui.TextDisabled("检测到以前打过汉化补丁：点这个插件的「还原原文」即可恢复原版。");
             }
 
-            ImGui.Unindent(64f);
+            ImGui.Unindent(detailInset);
             return;
         }
 
@@ -1422,7 +1441,7 @@ internal sealed class UITextTab
                 UITextPatchStatus.Failed => "上次失败，已还原",
                 _ => "未应用" + (info.HasBackup ? "（原始文件已备份）" : string.Empty),
             };
-            ImGui.TextDisabled(
+            UiHelpers.ColoredWrapped(UiHelpers.Muted,
                 $"共 {info.Total} 条 · 已翻译 {info.Translated} 条 · 未翻译 {info.Untranslated} 条 · 不翻 {info.Skipped} 条 ｜ 补丁：{patchText}");
 
             if (info.PatchDetail.Length > 0 && ImGui.IsItemHovered())
@@ -1439,7 +1458,7 @@ internal sealed class UITextTab
         var extracting = this.run is { Mode: RunMode.ExtractOnly } only
                          && string.Equals(only.InternalName, plugin.InternalName, StringComparison.Ordinal);
         ImGui.BeginDisabled(busy || editorOpen || extracting);
-        if (ImGui.Button(info is { HasPack: true } ? "重新抽取###UITextExtract" : "抽取界面文本###UITextExtract"))
+        if (ImGui.Button("抽取界面文本###UITextExtract"))
         {
             this.StartExtract(plugin);
         }
@@ -1456,9 +1475,20 @@ internal sealed class UITextTab
                       + "不会丢已翻好的译文；原文没了的条目会自动标成「不翻」，可在编辑器里恢复。");
         }
 
-        ImGui.SameLine();
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("检查汉化更新"));
+        ImGui.BeginDisabled(busy || editorOpen);
+        if (ImGui.Button("检查汉化更新###uit-check-one")) this.StartMaintenance(plugin);
+        ImGui.EndDisabled();
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("只检查这个插件的新增文本和公共译文更新，不修改插件。");
+
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("这句怎么还是英文"));
+        if (ImGui.Button("这句怎么还是英文###uit-english")) ImGui.OpenPopup("###uit-english-popup");
+        var diagnosisAnchorMin = ImGui.GetItemRectMin();
+        var diagnosisAnchorMax = ImGui.GetItemRectMax();
+
+        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("编辑校对"));
         ImGui.BeginDisabled(busy);
-        if (ImGui.Button("编辑校对…###UITextOpenEditor"))
+        if (ImGui.Button("编辑校对###UITextOpenEditor"))
         {
             this.editor.OpenFor(plugin);
         }
@@ -1471,12 +1501,18 @@ internal sealed class UITextTab
                 : "逐条改译文、标记「不翻」、重新抽取。适合想自己核对的插件。");
         }
 
-        ImGui.SameLine();
-        ImGui.TextDisabled("译文来源：" + UITextChannelFactory.Describe(this.plugin.Config));
+        this.DrawDiagnosisPopup(plugin, busy || editorOpen, diagnosisAnchorMin, diagnosisAnchorMax);
+        ImGui.Spacing();
+        UiHelpers.ColoredWrapped(UiHelpers.Muted, "译文来源：" + UITextChannelFactory.Describe(this.plugin.Config));
 
-        this.DrawCloudPacks(plugin);
+        this.DrawMaintenance(plugin);
+        if (ImGui.TreeNode("公共译文库###uit-public-packs"))
+        {
+            this.DrawCloudPacks(plugin);
+            ImGui.TreePop();
+        }
 
-        ImGui.Unindent(64f);
+        ImGui.Unindent(detailInset);
     }
 
     /// <summary>
@@ -1822,7 +1858,7 @@ internal sealed class UITextTab
     /// <summary>
     ///     状态徽标：进行中 / 已汉化 / 翻了还没写入 / 未汉化 / 失败。
     /// </summary>
-    private (string Text, Vector4 Color) DescribeState(RowInfo? info, bool running)
+    private (string Text, Vector4 Color) DescribeState(RowInfo? info, bool running, bool expanded = false)
     {
         if (running && this.run is { } active)
         {
@@ -1841,7 +1877,7 @@ internal sealed class UITextTab
 
         // 带分母的进度口径（2026-10-03 V1-07）：981/1083 这类「汉化了但没全」的行不能只写条数
         var available = Math.Max(0, info.Total - info.Skipped);
-        string Done(string verb) => available > 0 && info.Translated < available
+        string Done(string verb) => !expanded ? verb : available > 0 && info.Translated < available
             ? $"{verb} {info.Translated}/{available} 条"
             : $"{verb} {info.Translated} 条";
 
@@ -1895,7 +1931,7 @@ internal sealed class UITextTab
         run.Task = Task.Run(() => this.RunPipelineAsync(entry, run));
     }
 
-    private void StartOneClick(InstalledPluginEntry entry)
+    private void StartOneClick(InstalledPluginEntry entry, HashSet<string>? newOnly = null)
     {
         if (this.run is not null)
         {
@@ -1908,18 +1944,19 @@ internal sealed class UITextTab
         if (!config.UITextChannelChosen)
         {
             this.OpenFirstRun(entry);
+            this.pendingStart!.NewOnly = newOnly;
             return;
         }
 
         // 选了免费：先确认过一次「知道它慢」
         if (IsFreeChannel(config.UITextChannel) && !config.UITextFreeWarned)
         {
-            this.pendingStart = new PendingStart { Entry = entry, AwaitingFreeConfirm = true, Choice = 3 };
+            this.pendingStart = new PendingStart { Entry = entry, AwaitingFreeConfirm = true, Choice = 3, NewOnly = newOnly };
             this.pendingNeedsOpen = true;
             return;
         }
 
-        this.StartOneClickCore(entry);
+        this.StartOneClickCore(entry, newOnly);
     }
 
     private static bool IsFreeChannel(string channel) => channel is "auto" or "google" or "mymemory";
@@ -1946,7 +1983,7 @@ internal sealed class UITextTab
         this.pendingNeedsOpen = true;
     }
 
-    private void StartOneClickCore(InstalledPluginEntry entry)
+    private void StartOneClickCore(InstalledPluginEntry entry, HashSet<string>? newOnly = null)
     {
         if (this.run is not null)
         {
@@ -1973,7 +2010,7 @@ internal sealed class UITextTab
             return;
         }
 
-        var run = new Run { InternalName = entry.InternalName, Stage = "准备中…" };
+        var run = new Run { InternalName = entry.InternalName, Stage = "准备中…", NewOnly = newOnly };
         this.run = run;
         this.notes.TryRemove(entry.InternalName, out _);
         run.Task = Task.Run(() => this.RunPipelineAsync(entry, run));
@@ -2047,6 +2084,7 @@ internal sealed class UITextTab
 
             // ② 翻译没翻的条目
             var targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
+            if (run.NewOnly is not null) targets = targets.Where(t => run.NewOnly.Contains(t.Original)).ToList();
 
             // ②a 先看公共译文库有没有现成的（有就不用花用户自己的 key；合并规则：玩家自己改过的永不被顶）
             var libraryChanged = 0;
@@ -2057,8 +2095,10 @@ internal sealed class UITextTab
                 libraryChanged = await this.plugin.TextLibrary.MergeIntoAsync(pack, entry.InternalName, token).ConfigureAwait(false);
                 if (libraryChanged > 0)
                 {
-                    this.store.Save(entry.InternalName, pack, out _);
+                    if (!this.store.Save(entry.InternalName, pack, out var librarySaveError))
+                        throw new IOException("保存公共译文失败：" + librarySaveError);
                     targets = UITextFlow.TranslationTargets(pack, merge.Roles, this.plugin.Config.UITextTranslateGreyList);
+                    if (run.NewOnly is not null) targets = targets.Where(t => run.NewOnly.Contains(t.Original)).ToList();
                     Plugin.Log?.Information($"[内部文本] {entry.InternalName}：译文库补入 {libraryChanged} 条，还需翻译 {targets.Count} 条");
                 }
             }
@@ -2107,18 +2147,29 @@ internal sealed class UITextTab
                 run.Stage = $"翻译 0 / {targets.Count} 条（{channel.Name}）";
 
                 var items = UITextFlow.BuildTranslateItems(targets);
-                var result = await channel.TranslateAsync(
+                var savedApplied = 0;
+                var savedRejected = 0;
+                var savedUnchanged = 0;
+                var result = await UITextTranslationSession.TranslateAsync(channel,
                     items,
                     (done, _) =>
                     {
                         run.Done = done;
                         run.Stage = $"翻译 {done} / {targets.Count} 条（{channel.Name}）";
                     },
+                    batch =>
+                    {
+                        var accepted = UITextFlow.AcceptTranslations(pack, batch.Translated, channel.Name);
+                        savedApplied += accepted.Applied;
+                        savedRejected += accepted.PlaceholderRejected;
+                        savedUnchanged += accepted.Unchanged;
+                        if (!this.store.Save(entry.InternalName, pack, out var checkpointError))
+                            throw new IOException("保存译文失败：" + checkpointError);
+                    },
                     token).ConfigureAwait(false);
 
-                var (applied, rejected, unchanged) = UITextFlow.AcceptTranslations(pack, result.Translated, channel.Name);
+                var (applied, rejected, unchanged) = (savedApplied, savedRejected, savedUnchanged);
                 translatedCount = applied;
-                this.store.Save(entry.InternalName, pack, out _);
 
                 ActivityLog.Info(
                     "翻译",
@@ -2137,6 +2188,8 @@ internal sealed class UITextTab
                 var mostlyDelivered = unchanged + rejected > result.Failed.Count;
                 if (result.Error is not null || (leftoverFailure && !mostlyDelivered))
                 {
+                    if (token.IsCancellationRequested)
+                        throw new OperationCanceledException(token);
                     var reason = result.Error ?? $"失败 {result.Failed.Count} 条";
                     if (result.Error is null && result.Notes.Count > 0)
                     {
@@ -2765,7 +2818,7 @@ internal sealed class UITextTab
         this.ApplyPendingChoice(pending);
         this.pendingStart = null;
         ImGui.CloseCurrentPopup();
-        this.StartOneClickCore(pending.Entry);
+        this.StartOneClickCore(pending.Entry, pending.NewOnly);
     }
 
     /// <summary>把弹窗里选好的通道写进配置（只在真正要开始时调）。</summary>
@@ -2855,7 +2908,7 @@ internal sealed class UITextTab
             this.ApplyPendingChoice(pending);
             this.pendingStart = null;
             UiHelpers.ClosePopupAndEnd();
-            this.StartOneClickCore(pending.Entry);
+            this.StartOneClickCore(pending.Entry, pending.NewOnly);
             return;
         }
 
@@ -2941,6 +2994,20 @@ internal sealed class UITextTab
             return;
         }
 
+        if (this.workQueue.Active?.InternalName == run.InternalName)
+        {
+            if (this.skipQueueItem)
+            {
+                this.workQueue.SkipActive(run.InternalName);
+                this.skipQueueItem = false;
+            }
+            else
+            {
+                var note = this.notes.GetValueOrDefault(run.InternalName);
+                this.workQueue.Complete(run.InternalName, note?.Kind != NoteKind.Bad && !run.Cancel.IsCancellationRequested,
+                    note?.Text ?? "任务已结束");
+            }
+        }
         run.Cancel.Dispose();
         this.run = null;
         this.rowsDirty = true;

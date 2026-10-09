@@ -28,7 +28,7 @@ internal sealed class MainWindow : Window
     private readonly UITextTab uiTextTab;
     private readonly DiscoveryTab discoveryTab;
 
-    private MainTab? pendingSelect;
+    private readonly MainTabSelection tabSelection = new();
 
     public MainWindow(Plugin plugin, UITextTab uiTextTab)
         : base("FireGaze###FireGaze", ImGuiWindowFlags.None)
@@ -51,7 +51,7 @@ internal sealed class MainWindow : Window
     /// <summary>
     ///     请求下一帧选中某个页签（由 Plugin.OpenWindow 调用）。
     /// </summary>
-    public void SelectTab(MainTab tab) => pendingSelect = tab;
+    public void SelectTab(MainTab tab) => tabSelection.Request(tab);
 
     /// <summary>插件卸载时的退订链（转给需要退订的子页签）。</summary>
     public void Detach() => this.repoAuditTab.Detach();
@@ -62,7 +62,7 @@ internal sealed class MainWindow : Window
     /// <remarks>2026-10-01 用户改：默认页从「简介汉化」改成「插件汉化」（它也是第一个页签）。</remarks>
     public override void OnOpen()
     {
-        pendingSelect = MainTab.UIText;
+        tabSelection.RequestDefault(MainTab.UIText);
         Plugin.Log.Debug("[FireGaze] 窗口已打开（页签回到「插件汉化」）");
 
         // 公共彩云额度公告：只给「全新安装」的新用户第一次打开时看一次（点过「知道了」立即落盘）。
@@ -91,6 +91,8 @@ internal sealed class MainWindow : Window
 
         if (ImGui.BeginTabBar("###FireGazeTabs"))
         {
+            // Consume before drawing: navigation requested by a tab survives until the next frame.
+            var pendingSelect = tabSelection.Take();
             var flags = pendingSelect == MainTab.UIText ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("插件汉化", flags))
             {
@@ -129,6 +131,5 @@ internal sealed class MainWindow : Window
             ImGui.EndTabBar();
         }
 
-        pendingSelect = null;
     }
 }

@@ -357,6 +357,7 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
+        uiTextTab.StopWorkflows();
         try
         {
             // 干净退出 = 补丁没把游戏搞死：把「待确认」全部转正，下次启动就不会误还原
@@ -501,6 +502,12 @@ public sealed class Plugin : IDalamudPlugin
         window.BringToFront();
     }
 
+    internal void OpenTranslationFor(string internalName)
+    {
+        uiTextTab.FocusPlugin(internalName);
+        OpenWindow(MainTab.UIText);
+    }
+
     /// <summary>
     ///     打开「插件发现」页签（原「参与翻译」独立窗口已并入主窗口第五页签）。
     /// </summary>
@@ -595,6 +602,7 @@ public sealed class Plugin : IDalamudPlugin
         {
             installerListScroll.Tick(Config, () => SaveConfig(force: false));
             uiTextPatchManager.Tick();
+            uiTextTab.TickWorkflows();
 
             // 安装器开着 → 把本地缓存的图标分批挂回卫月的图标缓存（安装器直接用本地图，不重新下载）
             if (installerListScroll.IsOpen)

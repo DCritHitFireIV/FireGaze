@@ -575,7 +575,7 @@ internal static class UITextLocalizationFiles
     private static string Unescape(string key) => key.Replace("~1", "/").Replace("~0", "~");
 
     /// <summary>把 <c>file:相对路径</c> 解析成插件目录内的绝对路径（越界一律拒绝）。</summary>
-    private static string? ResolveTarget(string pluginDirectory, string container)
+    internal static string? ResolveTarget(string pluginDirectory, string container)
     {
         try
         {

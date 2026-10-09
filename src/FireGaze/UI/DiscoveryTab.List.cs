@@ -21,18 +21,16 @@ internal sealed partial class DiscoveryTab
 
     /// <summary>右栏按钮列宽：按当前字体 / UI 缩放实算（写死 176 在缩放 >1 时会把按钮切掉）。</summary>
     private static float ActionsColumnWidth()
-    {
-        var width = (ImGui.GetStyle().CellPadding.X * 2f) + 8f;
-        width += MathF.Max(40f, ImGui.GetFontSize() * 2.6f) + 12f;   // ♥ 自绘最小命中区
-        width += MaxLabelWidth("加入自己的库", "启用") + 10f;
-        return width;
-    }
+        => ImGui.GetStyle().CellPadding.X * 2f + 8f + MathF.Max(40f, ImGui.GetFontSize() * 2.6f) + 12f
+            + MaxLabelWidth("加入自己的库", "启用") + 10f
+            + MaxLabelWidth("一键安装", "安装中…", "去汉化", "安装器") + ImGui.GetStyle().ItemSpacing.X;
 
     private static float MaxLabelWidth(params string[] labels) => labels.Max(UiHelpers.LabelWidth);
 
     /// <summary>列表：两栏（左内容 / 右操作），ins 风卡片行，整行点击展开。</summary>
     private void DrawList(float height)
     {
+        this.RefreshInstalledActions();
         RebuildFiltered();
 
         if (filtered.Count == 0)
@@ -43,13 +41,11 @@ internal sealed partial class DiscoveryTab
             return;
         }
 
-        // 与「插件汉化」同一套表结构：行条纹 + 左列固定宽 + 右列按钮实宽。
-        // 2026-10-07 用户点名要和插件汉化同列宽；此前自绘卡片一旦取错坐标会画到窗口外（点赞旁的黑条）。
         const ImGuiTableFlags flags = ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
 
-        var actionsWidth = ActionsColumnWidth();
-        var slack = ImGui.GetStyle().ScrollbarSize + 48f;
-        var pluginWidth = MathF.Max(180f, ImGui.GetContentRegionAvail().X - actionsWidth - slack);
+        var columns = PluginListLayout.MeasureLegacyColumns(ImGui.GetContentRegionAvail().X,
+            ImGui.GetStyle().ScrollbarSize, ActionsColumnWidth());
+        var rowHeight = FoldedRowHeight();
 
         InsStyle.PushRounded();
         if (!ImGui.BeginTable("###DiscoveryList", 2, flags, new Vector2(0, height)))
@@ -57,32 +53,44 @@ internal sealed partial class DiscoveryTab
             InsStyle.PopRounded();
             return;
         }
-
-        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthFixed, pluginWidth);
-        ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
-
-        // 卡片行比一个文本行高得多（~54px）：不给 clipper 正确行高，滚动范围与可见区估算会偏好几倍
-        var clipper = new ImGuiListClipper();
-        clipper.Begin(filtered.Count, FoldedRowHeight());
-        while (clipper.Step())
+        ImGui.TableSetupColumn("plugin", ImGuiTableColumnFlags.WidthFixed, columns.Content);
+        ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, columns.Actions);
+        void DrawClosedRows(int start, int count)
         {
-            // 可见行 + 预载余量进图标下载队列（限流并行，见 DiscoveryTab.Icons.cs）
-            NoteVisibleForIcons(clipper.DisplayStart, clipper.DisplayEnd);
-
-            for (var i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
+            if (count == 0) return;
+            var clipper = new ImGuiListClipper();
+            clipper.Begin(count, rowHeight + ImGui.GetStyle().CellPadding.Y * 2f);
+            while (clipper.Step())
             {
-                if (i >= 0 && i < filtered.Count)
-                {
-                    DrawRow(filtered[i]);
-                }
+                NoteVisibleForIcons(start + clipper.DisplayStart, start + clipper.DisplayEnd);
+                for (var i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
+                    DrawRow(filtered[start + i], rowHeight);
             }
         }
-
+        // Variable-height details must not participate in the folded-row clipper.
+        var ranges = PluginListLayout.SplitRows(filtered.Count,
+            filtered.FindIndex(e => e.InternalName == expandedEntry));
+        DrawClosedRows(0, ranges.BeforeCount);
+        if (ranges.ExpandedIndex >= 0)
+        {
+            var entry = filtered[ranges.ExpandedIndex];
+            DrawRow(entry, rowHeight);
+            if (expandedEntry == entry.InternalName)
+            {
+                ImGui.TableNextRow();
+                ImGui.TableSetColumnIndex(0);
+                ImGui.PushID(entry.InternalName);
+                DrawExpanded(entry);
+                ImGui.PopID();
+                ImGui.TableNextColumn();
+            }
+        }
+        DrawClosedRows(ranges.AfterStart, ranges.AfterCount);
         ImGui.EndTable();
         InsStyle.PopRounded();
     }
 
-    private void DrawRow(TranslationIndexEntry entry)
+    private void DrawRow(TranslationIndexEntry entry, float rowHeight)
     {
         var isOpen = string.Equals(expandedEntry, entry.InternalName, StringComparison.Ordinal);
         ImGui.PushID(entry.InternalName);
@@ -93,7 +101,6 @@ internal sealed partial class DiscoveryTab
         // 拿它当行起点会把后面画的东西整条画到窗口外（2026-10-07 用户看到的 "点赞旁黑条"）。
         ImGui.TableSetColumnIndex(0);
         var rowStartY = ImGui.GetCursorPosY();
-        var rowHeight = FoldedRowHeight();
         if (ImGui.Selectable("##row", isOpen,
                 ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
                 new Vector2(0, rowHeight)))
@@ -104,7 +111,7 @@ internal sealed partial class DiscoveryTab
         ImGui.SameLine(0, 0);
 
         // 删掉元信息行后仍是两行文字：行高保持原来三行的节奏，内容在行内垂直居中
-        const float iconSize = 40f;
+        const float iconSize = PluginListLayout.IconSize;
         var textHeight = (ImGui.GetTextLineHeight() * 2f) + ImGui.GetStyle().ItemSpacing.Y;
         var contentHeight = MathF.Max(iconSize, textHeight);
         var padY = MathF.Max(2f, (rowHeight - contentHeight) * 0.5f);
@@ -118,7 +125,7 @@ internal sealed partial class DiscoveryTab
         ImGui.SameLine(0, 12f);
         ImGui.BeginGroup();
         {
-            ImGui.TextUnformatted(entry.DisplayName);
+            UiHelpers.Fitted(entry.DisplayName, entry.DisplayName);
             if (entry.IsOfficial)
             {
                 ImGui.SameLine();
@@ -130,6 +137,11 @@ internal sealed partial class DiscoveryTab
                 ImGui.SameLine();
                 ImGui.TextDisabled("[已在库]");
             }
+            if (entry.InternalName != this.installingName && this.discoveryInstalled?.All.Any(e => e.InternalName == entry.InternalName) == true)
+            {
+                ImGui.SameLine();
+                ImGui.TextDisabled("[已安装]");
+            }
 
             var punchline = DisplayPunchline(entry);
             if (!string.IsNullOrWhiteSpace(punchline))
@@ -140,8 +152,7 @@ internal sealed partial class DiscoveryTab
 
         ImGui.EndGroup();
 
-        // 右栏：♥ + 库操作——与「插件汉化」一样贴着行尾右对齐；♥ 固定在最右、按钮排在它左边，
-        // 这样无论这一行有没有按钮，♥ 都在同一条竖直线上（用户 2026-10-07：♥ 太靠前了）。
+        // 按原格式让操作组贴右、垂直居中，保留新增安装与汉化入口。
         ImGui.TableNextColumn();
         ImGui.SetCursorPosY(rowStartY + ((rowHeight - ImGui.GetFrameHeight()) * 0.5f));
 
@@ -149,36 +160,37 @@ internal sealed partial class DiscoveryTab
         var addAction = !entry.IsOfficial && url is not null && !entry.RepositoryKnown;
         var enableAction = !entry.IsOfficial && url is not null && entry.RepositoryKnown && !entry.RepositoryEnabled;
 
-        var actionWidth = MathF.Max(40f, ImGui.GetFontSize() * 2.6f);
+        var installedKnown = this.discoveryInstalled is { Available: true };
+        var installing = entry.InternalName == this.installingName;
+        var installed = installedKnown && !installing && this.discoveryInstalled!.All.Any(e => e.InternalName == entry.InternalName);
+        var navigate = installed || entry.IsOfficial || (entry.RepositoryKnown && entry.RepositoryEnabled);
+        var navigateLabel = installed ? "去汉化" : installing ? "安装中…" : installedKnown ? "一键安装" : "安装器";
+        var navigateWidth = MaxLabelWidth("一键安装", "安装中…", "去汉化", "安装器");
+        var libraryWidth = addAction ? InsStyle.PinkButtonWidth("加入自己的库") : enableAction ? UiHelpers.LabelWidth("启用") : 0f;
+        var actionOrigin = ImGui.GetCursorScreenPos();
+        var right = MathF.Min(actionOrigin.X + ImGui.GetContentRegionAvail().X,
+            ImGui.GetWindowDrawList().GetClipRectMax().X) - ImGui.GetStyle().CellPadding.X;
+        var positions = PluginListLayout.MeasureDiscoveryActions(right,
+            MathF.Max(40f, ImGui.GetFontSize() * 2.6f), navigate ? navigateWidth : 0f, libraryWidth,
+            ImGui.GetStyle().ItemSpacing.X);
+
         if (addAction)
         {
-            actionWidth += ImGui.GetStyle().ItemSpacing.X + InsStyle.PinkButtonWidth("加入自己的库");
-        }
-        else if (enableAction)
-        {
-            actionWidth += ImGui.GetStyle().ItemSpacing.X + UiHelpers.LabelWidth("启用");
-        }
-
-        // 单元格里 GetContentRegionAvail 就是列可用宽（不会随已画内容变），拿它把整组推到行尾
-        ImGui.SetCursorPosX(ImGui.GetCursorPosX() + MathF.Max(0f, ImGui.GetContentRegionAvail().X - actionWidth));
-
-        if (addAction)
-        {
+            ImGui.SetCursorScreenPos(new Vector2(positions.LibraryX, actionOrigin.Y));
             const string cta = "加入自己的库";
             if (InsStyle.PinkButton(cta + "###add", InsStyle.PinkButtonWidth(cta)))
             {
-                AddRepoFromRow(url!);
+                AddRepoFromRow(url!, entry.InternalName);
             }
 
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip("把这条库加进你的第三方插件列表（会先自动备份）");
             }
-
-            ImGui.SameLine();
         }
         else if (enableAction)
         {
+            ImGui.SetCursorScreenPos(new Vector2(positions.LibraryX, actionOrigin.Y));
             UiHelpers.PushEnableButton();
             if (ImGui.Button("启用###enable"))
             {
@@ -191,19 +203,32 @@ internal sealed partial class DiscoveryTab
             {
                 ImGui.SetTooltip("保留链接、把它重新启用；启用后卫月会去抓它的插件");
             }
-
-            ImGui.SameLine();
         }
 
-        DrawLikeButton(entry, "row");
-
-        if (isOpen)
+        if (navigate)
         {
-            ImGui.TableNextRow();
-            ImGui.TableSetColumnIndex(0);
-            DrawExpanded(entry);
-            ImGui.TableNextColumn();
+            ImGui.SetCursorScreenPos(new Vector2(positions.NavigateX, actionOrigin.Y));
+            ImGui.PushStyleColor(ImGuiCol.Button, installed ? new Vector4(0.23f, 0.29f, 0.28f, 1f) : new Vector4(0.27f, 0.27f, 0.32f, 1f));
+            ImGui.PushStyleColor(ImGuiCol.ButtonHovered, installed ? new Vector4(0.30f, 0.37f, 0.34f, 1f) : new Vector4(0.34f, 0.34f, 0.41f, 1f));
+            ImGui.PushStyleColor(ImGuiCol.ButtonActive, installed ? new Vector4(0.19f, 0.25f, 0.23f, 1f) : new Vector4(0.23f, 0.23f, 0.28f, 1f));
+            ImGui.BeginDisabled(!installed && this.installTask is not null);
+            if (ImGui.Button(navigateLabel + "###discovery-next", new Vector2(navigateWidth, 0)))
+            {
+                if (installed) this.plugin.OpenTranslationFor(entry.InternalName);
+                else if (installedKnown) this.StartInstallation(entry);
+                else this.OpenInstallationFallback(entry.InternalName);
+            }
+            ImGui.EndDisabled();
+            ImGui.PopStyleColor(3);
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+                ImGui.SetTooltip(installed ? "进入插件汉化，把这个插件放到列表第一行。"
+                    : this.installTask is not null ? "卫月正在安装插件，请完成后再安装另一个。"
+                    : installedKnown ? "直接用卫月安装这个插件；成功后可以去汉化，安装成功才计入推荐次数。"
+                    : "暂时读不到已安装插件，请在卫月安装器确认。");
         }
+        // Explicit slots keep all actions on the same baseline without wrap-dependent row heights.
+        ImGui.SetCursorScreenPos(new Vector2(positions.LikeX, actionOrigin.Y));
+        DrawLikeButton(entry, "row");
 
         ImGui.PopID();
     }
@@ -212,7 +237,15 @@ internal sealed partial class DiscoveryTab
     private void DrawExpanded(TranslationIndexEntry entry)
     {
         // 缩进对齐到图标右侧的文字列（40px 图标 + 间距），详情和名字同一视线
-        ImGui.Indent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
+        var detailInset = 40f + ImGui.GetStyle().ItemSpacing.X + 4f;
+        ImGui.Indent(detailInset);
+
+        if (this.installFallbackName == entry.InternalName)
+        {
+            if (ImGui.SmallButton("打开安装器###installation-fallback"))
+                this.OpenInstallationFallback(entry.InternalName);
+            ImGui.Spacing();
+        }
 
         var description = DisplayDescription(entry);
         if (!string.IsNullOrWhiteSpace(description))
@@ -233,20 +266,21 @@ internal sealed partial class DiscoveryTab
             DrawKeyValue("最后更新", DateTimeOffset.FromUnixTimeSeconds(stamp).ToLocalTime().ToString("yyyy-MM-dd HH:mm"));
         }
 
-        DrawKeyValue("推荐", $"{recommends} 次（从云端加进自己库）");
+        DrawKeyValue("推荐", $"{recommends} 次");
+        if (ImGui.IsItemHovered()) ImGui.SetTooltip("从插件发现选择并成功安装这个插件的次数。旧统计包含历史加库记录，不代表完整的下载量。");
         DrawKeyValue("点赞", discoveryStats is null ? "统计暂不可用（点赞会先记在本机）" : total.ToString());
 
         if (entry.IsOfficial)
         {
             ImGui.TextDisabled("来自卫月官方主库（Dip17）：本来就在你的库里，不用加库。");
-            ImGui.Unindent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
+            ImGui.Unindent(detailInset);
             return;
         }
 
         if (entry.RepositoryURL is not { Length: > 0 } url)
         {
             ImGui.TextDisabled("来源未知：旧词表没有记这条插件的库链。");
-            ImGui.Unindent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
+            ImGui.Unindent(detailInset);
             return;
         }
 
@@ -296,13 +330,14 @@ internal sealed partial class DiscoveryTab
             }
         }
 
-        ImGui.Unindent(40f + ImGui.GetStyle().ItemSpacing.X + 4f);
+        ImGui.Unindent(detailInset);
     }
 
     private static void DrawKeyValue(string label, string value)
     {
+        var startX = ImGui.GetCursorPosX();
         ImGui.TextDisabled(label);
-        ImGui.SameLine(ImGui.GetFontSize() * 5.2f);
+        ImGui.SameLine(startX + ImGui.GetFontSize() * 5.2f);
         ImGui.TextWrapped(value);
     }
 
@@ -399,10 +434,7 @@ internal sealed partial class DiscoveryTab
         }
 
         // 还没拿到：交给视口队列去下（下过 / 失败过的不重复排）
-        if (!iconMisses.Contains(entry.InternalName) && iconQueued.Add(entry.InternalName))
-        {
-            iconWaitQueue.Enqueue(entry);
-        }
+        this.QueueDiscoveryIcon(entry);
 
         return false;
     }

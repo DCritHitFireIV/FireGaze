@@ -229,18 +229,25 @@ internal sealed partial class DiscoveryTab
         return result;
     }
 
-    /// <summary>把一条库直接加进本机列表（先自动备份），成功后上报推荐数、并就地翻新行的库状态。</summary>
-    private void AddRepoFromRow(string url)
+    /// <summary>加库只记录玩家选择的插件；安装成功后才上报推荐。</summary>
+    private void AddRepoFromRow(string url, string internalName)
     {
         var added = plugin.AddThirdPartyRepository(url, out var message);
         SetStatus(added ? "已把这条库链加进你的插件列表" : message, !added);
         if (added)
         {
             MarkRepoState(url, enabled: true);
-            ReportRepoAdds([url]);
+            this.WatchDiscoveryInstallation(internalName);
         }
 
         rebuildPending = true;
+    }
+
+    private void WatchDiscoveryInstallation(string internalName)
+    {
+        var installed = InstalledPluginsIndex.Build();
+        if (installed.Available)
+            this.discoveryState.WatchMissingInstallation(internalName, installed.All.Select(e => e.InternalName));
     }
 
     /// <summary>
@@ -291,39 +298,35 @@ internal sealed partial class DiscoveryTab
     /// <summary>重新启用一条已停用的库（保留链接，让卫月重新抓它的插件）。</summary>
     private void EnableRepoFromRow(string url)
     {
-        plugin.Repos.SetEnabled([url], true, out _);
-        plugin.Repos.Save(out _);
-        plugin.Repos.TriggerReload(out _);
+        var changed = plugin.Repos.SetEnabled([url], true, out var enableError);
+        if (enableError is not null || changed == 0)
+        {
+            SetStatus("启用失败：" + (enableError ?? "没有找到这条库，请刷新后重试"), isError: true);
+            return;
+        }
+        if (!plugin.Repos.Save(out var saveError))
+        {
+            SetStatus("库已在本次运行中启用，但保存失败：" + saveError + "；请稍后重试", isError: true);
+            return;
+        }
         plugin.TrackFirstSeen();
         MarkRepoState(url, enabled: true);
-        SetStatus("已启用这条库；卫月会重新抓取它的插件", isError: false);
+        var reloading = plugin.Repos.TriggerReload(out var reloadError);
+        SetStatus(reloading ? "已启用这条库；卫月正在抓取它的插件" : "库已启用，但刷新失败：" + reloadError + "；请在卫月安装器重试刷新", isError: !reloading);
         rebuildPending = true;
     }
 
     /// <summary>
-    ///     把「刚从云端加进自己库」的库链按插件上报推荐数（用户 2026-10-06 定：按插件不按库）。
+    ///     只上报在发现页选择并成功安装的插件，不扩散到同库其他插件。
     ///     先排队后发送：发送失败会留在待重试里，成功后清掉。
     /// </summary>
-    private void ReportRepoAdds(IReadOnlyCollection<string> urls)
+    private void ReportPluginInstalls(IReadOnlyList<string> names)
     {
-        if (urls.Count == 0 || index is not { Available: true })
-        {
-            return;
-        }
-
-        var wanted = new HashSet<string>(urls.Select(InstalledPluginsIndex.NormalizeRepositoryURL), StringComparer.Ordinal);
-        var names = index.All
-            .Where(x => x.RepositoryURL is { Length: > 0 } url
-                        && wanted.Contains(InstalledPluginsIndex.NormalizeRepositoryURL(url)))
-            .Select(x => x.InternalName)
-            .Distinct(StringComparer.Ordinal)
-            .ToList();
         if (names.Count == 0)
         {
             return;
         }
 
-        discoveryState.MarkAdds(names);
         _ = Task.Run(async () =>
         {
             if (await DiscoveryRelay.ReportAddsAsync(names, CancellationToken.None).ConfigureAwait(false))

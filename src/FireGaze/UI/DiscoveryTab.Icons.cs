@@ -23,14 +23,7 @@ internal sealed partial class DiscoveryTab
     private const int DiscoverIconMarginAbove = 3;
     private const int DiscoverIconMarginBelow = 8;
 
-    /// <summary>等着下的图标（去重靠 <see cref="iconQueued" />）。</summary>
-    private readonly Queue<TranslationIndexEntry> iconWaitQueue = new();
-
-    /// <summary>已经进过队列 / 在飞 / 已失败不再试的条目。</summary>
-    private readonly HashSet<string> iconQueued = new(StringComparer.Ordinal);
-
-    /// <summary>下载失败后过几分钟才重排（网络瞬断不把图标钉死在字母块上）。</summary>
-    private readonly Dictionary<string, DateTime> iconRetryAt = new(StringComparer.Ordinal);
+    private readonly DiscoveryIconQueue iconQueue = new();
 
     /// <summary>后台下载完成的回调（后台 → UI 线程）。</summary>
     private readonly ConcurrentQueue<(TranslationIndexEntry Entry, bool Ok)> iconDownloadResults = new();
@@ -45,33 +38,19 @@ internal sealed partial class DiscoveryTab
         var to = Math.Min(filtered.Count, displayEnd + DiscoverIconMarginBelow);
         for (var i = from; i < to; i++)
         {
-            var entry = filtered[i];
-            if (iconHandles.ContainsKey(entry.InternalName)
-                || iconMisses.Contains(entry.InternalName)
-                || iconQueued.Contains(entry.InternalName))
-            {
-                continue;
-            }
-
-            if (iconRetryAt.TryGetValue(entry.InternalName, out var retryAt))
-            {
-                if (DateTime.UtcNow < retryAt)
-                {
-                    continue;
-                }
-
-                iconRetryAt.Remove(entry.InternalName);
-            }
-
-            if (!entry.DeclaresIcon || string.IsNullOrWhiteSpace(entry.IconURL))
-            {
-                iconMisses.Add(entry.InternalName);
-                continue;
-            }
-
-            iconQueued.Add(entry.InternalName);
-            iconWaitQueue.Enqueue(entry);
+            this.QueueDiscoveryIcon(filtered[i]);
         }
+    }
+
+    private void QueueDiscoveryIcon(TranslationIndexEntry entry)
+    {
+        if (iconHandles.ContainsKey(entry.InternalName) || iconMisses.Contains(entry.InternalName)) return;
+        if (!entry.DeclaresIcon || string.IsNullOrWhiteSpace(entry.IconURL))
+        {
+            iconMisses.Add(entry.InternalName);
+            return;
+        }
+        this.iconQueue.TryEnqueue(entry, DateTime.UtcNow);
     }
 
     /// <summary>每帧推进：收获完成的下载 → 建纹理；然后按节奏发动新的下载。</summary>
@@ -81,6 +60,7 @@ internal sealed partial class DiscoveryTab
         while (iconDownloadResults.TryDequeue(out var result))
         {
             iconInFlight = Math.Max(0, iconInFlight - 1);
+            this.iconQueue.Complete(result.Entry, result.Ok, DateTime.UtcNow);
             if (result.Ok)
             {
                 plugin.Icons.EnsureTexture(ToIconEntry(result.Entry));
@@ -88,21 +68,19 @@ internal sealed partial class DiscoveryTab
             else
             {
                 // 失败不钉死：两分钟后可视时再排一次（不重试次数无限堆，只有看得见的才会重排）
-                iconQueued.Remove(result.Entry.InternalName);
-                iconRetryAt[result.Entry.InternalName] = DateTime.UtcNow.AddMinutes(2);
                 ActivityLog.Debug("插件发现", $"图标下载失败，稍后重试：{result.Entry.InternalName}");
             }
         }
 
         // 2) 发动：每 100ms 最多一个，在飞受限
-        if (iconWaitQueue.Count == 0
+        if (this.iconQueue.Count == 0
             || iconInFlight >= DiscoverIconConcurrency
             || DateTime.UtcNow < nextIconKick)
         {
             return;
         }
 
-        var entry = iconWaitQueue.Dequeue();
+        var entry = this.iconQueue.Dequeue();
         nextIconKick = DateTime.UtcNow.AddMilliseconds(DiscoverIconKickMs);
 
         var target = ToIconEntry(entry);
@@ -117,20 +95,23 @@ internal sealed partial class DiscoveryTab
         var url = entry.IconURL!;
         _ = Task.Run(async () =>
         {
-            var result = await IconDownloader.FetchAsync(url, CancellationToken.None).ConfigureAwait(false);
-            var ok = result.Bytes is { Length: > 0 } bytes
-                     && IconCache.LooksLikeImage(bytes, result.ContentType)
-                     && plugin.Icons.SaveDownloaded(target, bytes, result.ContentType);
-            iconDownloadResults.Enqueue((entry, ok));
+            var ok = false;
+            try
+            {
+                var result = await IconDownloader.FetchAsync(url, CancellationToken.None).ConfigureAwait(false);
+                ok = result.Bytes is { Length: > 0 } bytes
+                    && IconCache.LooksLikeImage(bytes, result.ContentType)
+                    && plugin.Icons.SaveDownloaded(target, bytes, result.ContentType);
+            }
+            catch (Exception e) { ActivityLog.Debug("插件发现", $"图标下载异常：{entry.InternalName}（{e.GetBaseException().Message}）"); }
+            finally { iconDownloadResults.Enqueue((entry, ok)); }
         });
     }
 
     /// <summary>刷新云库/词表后：图标状态一并重置（失败过的也再给一次机会）。</summary>
     private void ResetIconQueue()
     {
-        iconWaitQueue.Clear();
-        iconQueued.Clear();
-        iconRetryAt.Clear();
+        this.iconQueue.Reset();
         iconMisses.Clear();
     }
 
