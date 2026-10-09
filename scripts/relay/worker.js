@@ -1,4 +1,4 @@
-// FireGaze 中继（Cloudflare Worker）v12
+// FireGaze 中继（Cloudflare Worker）v13
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
@@ -29,6 +29,10 @@
 //   · 公共库下载量 / 点赞（POST /library-download、POST /library-like 计数，GET /library-counts 读取）——2026-10-04 新增：
 //       包本体仍从 raw/镜像下载（CDN 不计下载），由客户端上报一条计数；存 KV（绑定名 LIBRARY_COUNTS）。
 //       v6 起按**包**计数（键 `<插件>@<包ID>`，基础包包ID=library）——每个玩家投稿包有独立的下载数与👍。
+//   · 插件发现推荐计数（POST /plugin-add 上报、GET /plugin-stats 读取）——v13（2026-10-09）改口径：
+//       推荐 = 玩家在发现页选中并安装成功的插件（不再是旧版「加库时把整库插件广播一遍」）。
+//       存储键前缀 `padd:<名>` → `padd:v2:<名>`：旧键不再读写，计数从 0 重新开始；L2 聚合缓存键同步带 v2。
+//       管理端点 POST /plugin-add/reset（要 ADMIN_KEY）：物理删掉全部 `padd:*` 键（新旧口径一起清）并清聚合缓存。
 //   · 准点唤醒译文工作流（Cloudflare Cron Trigger）——2026-10-05 新增（v7）：
 //       GitHub 自带 schedule 实测延迟数小时（9/21、9/28 的周一跑晚了 5.8/6.8 小时），
 //       所以周一/周五 00:00 UTC（北京 08:00）由本 worker 发 repository_dispatch(translate-now)。
@@ -95,6 +99,7 @@ const LIBRARY_DOWNLOAD_PER_IP_LIMIT = 60; // 每分钟每 IP（正常一次下�
 const LIBRARY_LIKE_PER_IP_LIMIT = 30; // 每分钟每 IP（点赞；没做去重，先靠限流）
 const PLUGIN_LIKE_PER_IP_LIMIT = 60; // 每分钟每 IP（插件发现：给插件点赞）
 const PLUGIN_ADD_PER_IP_LIMIT = 120; // 每分钟每 IP（插件发现：加库推荐上报）
+const PLUGIN_ADD_PREFIX = 'padd:v2:'; // v13：旧 `padd:<名>` 键不再读写（重置推荐数）；reset 端点按 'padd:' 前缀清全部版本
 const REPO_SUBMIT_PER_IP_LIMIT = 10; // 每分钟每 IP（插件发现：库链投稿）
 const PACK_ID_PATTERN = /^[A-Za-z0-9_.\-]+$/;
 
@@ -430,10 +435,72 @@ async function handlePluginAdd(data, env, ip) {
   }
 
   for (const name of names) {
-    await bumpKey(store, `padd:${name}`);
+    await bumpKey(store, `${PLUGIN_ADD_PREFIX}${name}`);
   }
 
   return json({ ok: true, count: names.length });
+}
+
+/// 插件发现：重置推荐计数——删掉全部 `padd:*` 键（含旧 `padd:<名>` 与 `padd:v2:<名>`），并清聚合缓存。
+/// 要 ADMIN_KEY；计数从 0 开始由 PLUGIN_ADD_PREFIX 保证，这里负责把旧数据物理清干净。
+async function handlePluginAddReset(data, request, env, ip) {
+  if (!env.ADMIN_KEY) {
+    return json({ ok: false, error: 'admin disabled', detail: 'set ADMIN_KEY secret' }, 503);
+  }
+
+  if (!allow(ip, POOL_ADMIN_PER_IP_LIMIT, 'pooladm')) {
+    return json({ ok: false, error: 'too many requests' }, 429);
+  }
+
+  if (!poolAdminAuthorized(request, env)) {
+    return json({ ok: false, error: 'forbidden' }, 403);
+  }
+
+  const store = env.LIBRARY_COUNTS;
+  if (!store) {
+    return json({ ok: false, error: 'no kv binding', detail: 'LIBRARY_COUNTS' }, 503);
+  }
+
+  // 先把键收齐再删（边列边删会让 KV 游标错位、漏键）
+  const names = [];
+  let deleted = 0;
+  try {
+    let cursor;
+    do {
+      const page = await store.list({ prefix: 'padd:', limit: 1000, cursor });
+      for (const entry of page.keys) {
+        names.push(entry.name);
+      }
+      cursor = page.list_complete ? undefined : page.cursor;
+    } while (cursor);
+
+    for (let i = 0; i < names.length; i += AGG_READ_CONCURRENCY) {
+      await Promise.all(names.slice(i, i + AGG_READ_CONCURRENCY).map((name) => store.delete(name)));
+      deleted += Math.min(AGG_READ_CONCURRENCY, names.length - i);
+    }
+  } catch (error) {
+    return json({ ok: false, error: 'reset failed', deleted, detail: String(error).slice(0, 160) }, 500);
+  }
+
+  // 旧数字别再从缓存里被读出来：本实例内存 + 当周两个 L2 键（新/旧格式）
+  keyListCache = { at: 0, keys: [] };
+  pluginStatsCache = { at: 0, body: null };
+  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null;
+  if (cache) {
+    const week = beijingISOWeek();
+    for (const key of [
+      `https://firegaze-relay.invalid/agg/plugin?week=${week}&v=2`,
+      `https://firegaze-relay.invalid/agg/plugin?week=${week}`,
+    ]) {
+      try {
+        await cache.delete(key);
+      } catch {
+        // 删不掉不阻塞
+      }
+    }
+  }
+
+  return json({ ok: true, deleted });
 }
 
 /// 插件发现：统计（周赞 / 总赞 / 加库推荐）。工作流定时拉这个写进仓库归档。
@@ -450,10 +517,10 @@ async function handlePluginStats(env) {
   }
 
   // 缓存键带周号：跨周时不拿旧周的周赞
-  const body = await readAggregationCache(`https://firegaze-relay.invalid/agg/plugin?week=${week}`, async () => {
+  const body = await readAggregationCache(`https://firegaze-relay.invalid/agg/plugin?week=${week}&v=2`, async () => {
     const total = await readAllByPrefix(store, 'plike_total:');
     const weekly = await readAllByPrefix(store, `plike_w:${week}:`);
-    const adds = await readAllByPrefix(store, 'padd:');
+    const adds = await readAllByPrefix(store, PLUGIN_ADD_PREFIX);
     return { ok: true, week, total, weekly, adds, updatedAt: new Date().toISOString() };
   });
   pluginStatsCache = { at: now, week, body };
@@ -1105,7 +1172,7 @@ export default {
         return handlePoolStatus(request, env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 12 });
+      return json({ ok: true, service: 'firegaze-relay', version: 13 });
     }
 
     if (request.method !== 'POST') {
@@ -1156,6 +1223,10 @@ export default {
 
     if (url.pathname === '/plugin-add') {
       return handlePluginAdd(data, env, ip);
+    }
+
+    if (url.pathname === '/plugin-add/reset') {
+      return handlePluginAddReset(data, request, env, ip);
     }
 
     if (url.pathname === '/repo-submit') {
