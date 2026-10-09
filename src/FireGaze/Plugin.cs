@@ -857,17 +857,12 @@ public sealed class Plugin : IDalamudPlugin
     }
 
     /// <summary>
-    ///     每两周自动检查一次词表更新（汉化启用时才生效）。
+    ///     每天自动检查一次词表更新（不可关闭；词表同时供插件发现用）。
     /// </summary>
     private void MaybeAutoUpdateTable()
     {
-        if (!Config.TranslateEnabled || !Config.AutoUpdateTable)
-        {
-            return;
-        }
-
         if (Config.LastTableUpdateCheckUTC != default &&
-            DateTime.UtcNow - Config.LastTableUpdateCheckUTC < TimeSpan.FromDays(14))
+            DateTime.UtcNow - Config.LastTableUpdateCheckUTC < TimeSpan.FromHours(24))
         {
             return;
         }
@@ -892,8 +887,8 @@ public sealed class Plugin : IDalamudPlugin
             }
             finally
             {
-                // 失败时 1 天后重试，成功则 14 天后再查
-                Config.LastTableUpdateCheckUTC = success ? DateTime.UtcNow : DateTime.UtcNow.AddDays(-13);
+                // 成功 -> 24 小时后再查；失败 -> 1 小时后重试
+                Config.LastTableUpdateCheckUTC = success ? DateTime.UtcNow : DateTime.UtcNow.AddHours(-23);
                 SaveConfig();
                 Interlocked.Exchange(ref tableUpdateBusy, 0);
             }

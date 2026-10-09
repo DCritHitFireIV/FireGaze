@@ -162,15 +162,7 @@ internal sealed class TranslateTab
             }
         }
 
-        var autoUpdate = config.AutoUpdateTable;
-        if (ImGui.Checkbox("每两周自动检查词表更新###AutoUpdateTable", ref autoUpdate))
-        {
-            config.AutoUpdateTable = autoUpdate;
-            plugin.SaveConfig();
-        }
-
-        ImGui.SameLine();
-        ImGui.TextDisabled($"下次自动检查：{DescribeNextCheck()}");
+        ImGui.TextDisabled($"词表每天自动更新 · 下次检查：{DescribeNextCheck()}");
 
         if (!string.IsNullOrEmpty(statusMessage))
         {
@@ -292,17 +284,12 @@ internal sealed class TranslateTab
     private string DescribeNextCheck()
     {
         var config = plugin.Config;
-        if (!config.TranslateEnabled || !config.AutoUpdateTable)
-        {
-            return "未启用";
-        }
-
         if (config.LastTableUpdateCheckUTC == default)
         {
             return "游戏启动后";
         }
 
-        var next = config.LastTableUpdateCheckUTC.AddDays(14);
+        var next = config.LastTableUpdateCheckUTC.AddHours(24);
         return next <= DateTime.UtcNow ? "即将检查" : next.ToLocalTime().ToString("yyyy-MM-dd HH:mm");
     }
 
