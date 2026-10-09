@@ -32,6 +32,20 @@ import urllib.request
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_TABLE = os.path.join(REPO_ROOT, "translations.json")
 AETHERFEED = "https://raw.githubusercontent.com/Aetherfeed/aetherfeed.github.io/refs/heads/main/public/data/plugins.json"
+# 语料黑名单（维护者维护）：聚合成千插件的大库常顺手带进模板/成人向条目，按 InternalName 排除。
+SKIP_FILE = os.path.join(REPO_ROOT, "scripts", "corpus-skip.txt")
+
+
+def _load_corpus_skip() -> set[str]:
+    try:
+        with open(SKIP_FILE, encoding="utf-8-sig") as handle:
+            return {line.strip().lower() for line in handle
+                    if line.strip() and not line.strip().startswith("#")}
+    except FileNotFoundError:
+        return set()
+
+
+CORPUS_SKIP = _load_corpus_skip()
 CJK = re.compile(r"[\u4e00-\u9fff]")
 
 # 乱码修复（2026-10-07）：上游存在「把 UTF-8 中文按 GBK 写坏」的仓库
@@ -354,6 +368,8 @@ def merge_plugin(corpus: dict[str, dict], plugin: dict, repo_url: str) -> bool:
     key = (plugin.get("InternalName") or "").strip()
     if not key:
         return False
+    if key.lower() in CORPUS_SKIP:
+        return False
 
     candidate = {
         "name": repair_mojibake((plugin.get("Name") or "").strip()),
@@ -573,6 +589,9 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
 
     api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip() or None
+
+    if CORPUS_SKIP:
+        print(f"语料黑名单：按 InternalName 排除 {len(CORPUS_SKIP)} 条（scripts/corpus-skip.txt）")
 
     corpus = build_corpus(api_key, args.limit)
 

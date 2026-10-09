@@ -1,0 +1,16 @@
+# FireGaze 语料黑名单：这些 InternalName 不进云端语料（插件发现 / 简介汉化都不会出现）。
+# 只用于挡掉「聚合成千插件的大库顺手带进来」的少量内容；按 InternalName 匹配（不区分大小写）。
+# 由 scripts/update_translations.py 读取；本文件只由维护者维护。
+#
+# 2026-10-09 首批（加 Akurosia 来源时清理）：
+#   成人向/擦边：GagSpeak / AetherSense / AethersenseReduxReborn / FFXIV_Vibe_Plugin / Buttplugin / OopsAllNaked / TyniaPVPRadar
+#   模板/测试残留：Divination.Template / Divination.PerfectComplex
+GagSpeak
+AetherSense
+AethersenseReduxReborn
+FFXIV_Vibe_Plugin
+Buttplugin
+OopsAllNaked
+TyniaPVPRadar
+Divination.Template
+Divination.PerfectComplex

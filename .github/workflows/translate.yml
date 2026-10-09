@@ -57,14 +57,19 @@ jobs:
           if [ "$RECHECK" = "true" ]; then
             EXTRA="--recheck"
           fi
-          # 两份清单：repos.txt（维护者用 export-repo-list.py 整份重导出的）
-          # + community-repos.txt（repo-inbox 工作流追加的玩家投稿），分开维护、逗号拼给脚本。
+          # 三份清单：repos.txt（维护者用 export-repo-list.py 整份重导出的）
+          # + community-repos.txt（repo-inbox 工作流追加的玩家投稿）
+          # + curated-repos.txt（维护者策展的第三方来源，如 Akurosia 索引清理后收录的），
+          # 分开维护、逗号拼给脚本。
           LISTS=""
           if [ -s scripts/repos.txt ]; then
             LISTS="scripts/repos.txt"
           fi
           if [ -f scripts/community-repos.txt ]; then
             LISTS="${LISTS:+$LISTS,}scripts/community-repos.txt"
+          fi
+          if [ -f scripts/curated-repos.txt ]; then
+            LISTS="${LISTS:+$LISTS,}scripts/curated-repos.txt"
           fi
           if [ -n "$LISTS" ]; then
             python scripts/update_translations.py --repos "$LISTS" $EXTRA
