@@ -1,3409 +1,2517 @@
 {
-  "type": "uit-contribution",
-  "plugin": "Mahjong.Plugin.Dalamud",
-  "packName": "小糸",
-  "kinds": [
-    "llm"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-09",
+    "source": "user",
+    "label": "小糸",
+    "kinds": [
+      "llm"
+    ]
+  },
   "entries": [
     {
       "Original": "Doman Mahjong Solver: About###domanmahjong-about",
       "Translated": "麻将求解器领域：关于",
       "Context": "AboutWindow..ctor",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "Author",
       "Translated": "作者",
       "Context": "AboutWindow.DrawDetailsTable",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Report a bug",
       "Translated": "报告 bug",
       "Context": "AboutWindow.DrawDetailsTable",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Discussions",
       "Translated": "讨论",
       "Context": "AboutWindow.DrawDetailsTable",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Security disclosure",
       "Translated": "安全披露",
       "Context": "AboutWindow.DrawDetailsTable",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Click to open · right-click to copy",
       "Translated": "点击打开·右键点击复制",
       "Context": "AboutWindow.DrawLinkRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Hello there! I'm a solo developer building FFXIV automation plugins in my free time.",
       "Translated": "你好！我是一名独立开发人员，利用空闲时间构建 FFXIV 自动化插件。",
       "Context": "AboutWindow..cctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "If this one made your day a little easier, the best way to support the project is to share it with other players.",
       "Translated": "如果这个项目让你的日子变得稍微轻松一些，那么支持这个项目的最好方式就是与其他玩家分享。",
       "Context": "AboutWindow..cctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "I'd love to hear from you too: bug reports, feature requests, and general feedback are all welcome on GitHub Discussions.",
       "Translated": "我也很想听到你的消息:bug 报告、功能请求和一般反馈都欢迎在 GitHub 讨论区提供。",
       "Context": "AboutWindow..cctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Thanks for trying it out, and have fun out there!",
       "Translated": "谢谢你尝试这个，祝你玩得开心！",
       "Context": "AboutWindow..cctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Doman Mahjong · Developer###domanmahjong-debug",
       "Translated": "Doman Mahajong 开发人员",
       "Context": "DebugOverlay..ctor",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "Status",
       "Translated": "状态",
       "Context": "DebugOverlay.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Actions",
       "Translated": "行动",
       "Context": "DebugOverlay.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Bug report",
       "Translated": "Bug 报告",
       "Context": "DebugOverlay.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Reverse Engineering",
       "Translated": "逆向工程",
       "Context": "DebugOverlay.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Diagnostics",
       "Translated": "诊断",
       "Context": "DebugOverlay.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginTabItem"
+      "Source": "library"
     },
     {
       "Original": "Automation is disabled until the ToS notice is acknowledged in the main window.",
       "Translated": "自动化将被禁用，直到主窗口确认 ToS 通知。",
       "Context": "DebugOverlay.DrawHeaderCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Acknowledge and enable",
       "Translated": "确认并启用",
       "Context": "DebugOverlay.DrawHeaderCard",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "DISCARD",
       "Translated": "丢弃",
       "Context": "HandOverlay.DrawHighlightArrow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "TSUMOGIRI",
       "Translated": "自摸切",
       "Context": "HandOverlay.DrawHighlightArrow",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:llm"
     },
     {
       "Original": "Doman Mahjong Solver###domanmahjong-main",
       "Translated": "Doman Majong Solver",
       "Context": "MainWindow..ctor",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "library"
     },
     {
       "Original": "Welcome to Doman Mahjong Solver",
       "Translated": "欢迎来到 Domain Majong Solver",
       "Context": "MainWindow.DrawTosGate",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "This plugin can play Doman Mahjong for you by reading the game and clicking on your behalf. Before turning that on, please read:",
       "Translated": "这个插件可以通过阅读游戏并代表您点击来为您玩 Doman Majong。在开启之前，请阅读：",
       "Context": "MainWindow.DrawTosGate",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Third-party automation is against the FFXIV Terms of Service.",
       "Translated": "第三方自动化违反 FFXIV 服务条款。",
       "Context": "MainWindow.DrawTosGate",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BulletText"
+      "Source": "library"
     },
     {
       "Original": "Use at your own risk — your account may be sanctioned.",
       "Translated": "使用风险自负——您的账户可能会受到制裁。",
       "Context": "MainWindow.DrawTosGate",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BulletText"
+      "Source": "library"
     },
     {
       "Original": "\"Hints\" mode only shows advice — never clicks for you.",
       "Translated": "“提示” 模式只显示建议——从不为你点击。",
       "Context": "MainWindow.DrawTosGate",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BulletText"
+      "Source": "library"
     },
     {
       "Original": "  • This build uploads anonymous gameplay logs, error reports, and memory diagnostics from the Mahjong addon to support cross-client reverse-engineering. No character names, Content IDs, or other PII are included — uploads are keyed only by a random per-install ID.",
       "Translated": "该构建从麻将插件上传匿名游戏日志、错误报告和内存诊断，以支持跨客户端逆向工程。不包括角色名称、内容 ID 或其他 PII——上传仅由每次安装的随机 ID 进行键控。",
       "Context": "MainWindow.DrawTosGate",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "I understand — continue",
       "Translated": "我明白了——继续",
       "Context": "MainWindow.DrawTosGate",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Mode",
       "Translated": "模式",
       "Context": "MainWindow.DrawModeCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Off",
       "Translated": "关闭",
       "Context": "MainWindow.DrawModeCard",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "Do nothing",
       "Translated": "什么都不做",
       "Context": "MainWindow.DrawModeCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Hints",
       "Translated": "提示",
       "Context": "MainWindow.DrawModeCard",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InvisibleButton"
+      "Source": "library"
     },
     {
       "Original": "Highlight best move",
       "Translated": "突出显示最佳行动",
       "Context": "MainWindow.DrawModeCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Click for you",
       "Translated": "为您点击",
       "Context": "MainWindow.DrawModeCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Developer console",
       "Translated": "开发人员控制台",
       "Context": "MainWindow.DrawHeaderIcons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "About",
       "Translated": "关于",
       "Context": "MainWindow.DrawHeaderIcons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Settings",
       "Translated": "设置",
       "Context": "MainWindow.DrawHeaderIcons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Enable Auto-play?##autoplay-confirm",
       "Translated": "启用自动游戏？##自动游戏确认",
       "Context": "MainWindow.DrawAutoPlayConfirmModal",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.OpenPopup"
+      "Source": "library"
     },
     {
       "Original": "Auto-play will click for you with humanized timing.",
       "Translated": "自动游戏将以人性化的时机为您点击。",
       "Context": "MainWindow.DrawAutoPlayConfirmModal",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Switch Mode to Off or Hints any time to stop. Third-party automation is against the FFXIV Terms of Service — use at your own risk.",
       "Translated": "随时切换模式、关闭或提示停止。第三方自动化违反 FFXIV 服务条款——自行承担使用风险。",
       "Context": "MainWindow.DrawAutoPlayConfirmModal",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Enable Auto-play",
       "Translated": "启用自动播放",
       "Context": "MainWindow.DrawAutoPlayConfirmModal",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Cancel",
       "Translated": "取消",
       "Context": "MainWindow.DrawAutoPlayConfirmModal",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Live game",
       "Translated": "实时游戏",
       "Context": "MainWindow.DrawLiveCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Waiting for a Doman Mahjong table.",
       "Translated": "等待多曼麻将桌。",
       "Context": "MainWindow.DrawEmptyLive",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "When a match starts, the plugin will:",
       "Translated": "当匹配开始时，插件将：",
       "Context": "MainWindow.DrawEmptyLive",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Hints — outline the best discard in the mahjong window.",
       "Translated": "提示——在麻将窗口中勾勒出最佳弃牌方案。",
       "Context": "MainWindow.DrawEmptyLive",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BulletText"
+      "Source": "library"
     },
     {
       "Original": "Auto-play — click the best discard for you with humanized timing.",
       "Translated": "自动播放——点击最适合您的选择，以人性化的时机播放。",
       "Context": "MainWindow.DrawEmptyLive",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BulletText"
+      "Source": "library"
     },
     {
       "Original": "Auto-play is active — open a match and the plugin will take over.",
       "Translated": "Autoplay 处于活动状态——打开一个匹配，插件就会接管。",
       "Context": "MainWindow.DrawEmptyLive",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Hints mode is active — open a match and watch for the outline.",
       "Translated": "提示模式处于活跃状态——打开匹配并观察轮廓。",
       "Context": "MainWindow.DrawEmptyLive",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Mode is currently Off. Pick Hints or Auto-play above to arm the plugin.",
       "Translated": "模式当前处于关闭状态。点击上方的提示或自动播放来武装插件。",
       "Context": "MainWindow.DrawEmptyLive",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "You",
       "Translated": "你",
       "Context": "MainWindow.DrawSeatRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Right",
       "Translated": "右",
       "Context": "MainWindow.DrawSeatRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Across",
       "Translated": "横向",
       "Context": "MainWindow.DrawSeatRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Left",
       "Translated": "左",
       "Context": "MainWindow.DrawSeatRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Hand · ",
       "Translated": "手·",
       "Context": "MainWindow.DrawHandRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": " tiles",
       "Translated": "瓦片",
       "Context": "MainWindow.DrawHandRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Best move",
       "Translated": "最佳走法",
       "Context": "MainWindow.DrawSuggestion",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Waiting for your turn (",
       "Translated": "等待轮到你 (",
       "Context": "MainWindow.DrawSuggestion",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " tiles in hand).",
       "Translated": "手持瓦片。",
       "Context": "MainWindow.DrawSuggestion",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "scorer error: ",
       "Translated": "计分员错误：",
       "Context": "MainWindow.DrawSuggestion",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "The tile is outlined in the mahjong window.",
       "Translated": "瓷砖在麻将窗口中勾勒出轮廓。",
       "Context": "MainWindow.DrawSuggestion",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "shanten = turns away from ready.  ukeire = tiles that complete your wait — counted as distinct kinds and total copies remaining in the live wall.",
       "Translated": "Shanten = 离开准备状态。ukeire = 完成等待的瓷砖——计为实时墙上剩余的不同种类和总副本。",
       "Context": "MainWindow.DrawSuggestion",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Last action: ",
       "Translated": "最后行动：",
       "Context": "MainWindow.DrawSuggestion",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "shanten ",
       "Translated": "Shanten",
       "Context": "MainWindow.DrawScoredPickRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "    ukeire ",
       "Translated": "进张",
       "Context": "MainWindow.DrawScoredPickRow",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": " kinds · ",
       "Translated": "种类·",
       "Context": "MainWindow.DrawScoredPickRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Discard",
       "Translated": "放弃",
       "Context": "MainWindow.FriendlyActionVerb",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Riichi on",
       "Translated": "立直",
       "Context": "MainWindow.FriendlyActionVerb",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "Win (tsumo)",
       "Translated": "赢 (tsumo)",
       "Context": "MainWindow.FriendlyActionVerb",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Win (ron)",
       "Translated": "赢 (RON)",
       "Context": "MainWindow.FriendlyActionVerb",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Winning hand — close it out.",
       "Translated": "赢牌——关掉它。",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "One tile from winning — declare riichi.",
       "Translated": "还差一块就赢了——宣布 Riichi。",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Calling completes a set faster than drawing for it.",
       "Translated": "呼叫比绘制更快地完成一个集合。",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "kinds",
       "Translated": "种类",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "tiles",
       "Translated": "瓦片",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Discarding this still leaves a winning hand.",
       "Translated": "抛开这一点，仍然留有一手制胜的牌。",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Keeps you ready — ",
       "Translated": "让你做好准备——",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " live) complete the hand.",
       "Translated": "现场) 完成这手牌。",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "One step from ready, with ",
       "Translated": "距离准备就绪只有一步之遥，",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " useful ",
       "Translated": "有用",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " to draw.",
       "Translated": "摸牌。",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " steps from ready — keeps the most useful draws available.",
       "Translated": "准备步骤——保持最有用的绘图可用。",
       "Context": "MainWindow.ExplainChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Doman Mahjong Solver — Settings###domanmahjong-settings",
       "Translated": "多玛麻将求解器 — 设置",
       "Context": "SettingsWindow..ctor",
-      "Source": "ai:llm",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:llm"
     },
     {
       "Original": "Big arrow + label",
       "Translated": "大箭头 + 标签",
       "Context": "SettingsWindow.StyleLabel",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Neon glow + corner brackets",
       "Translated": "霓虹灯 + 角括号",
       "Context": "SettingsWindow.StyleLabel",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Preview: Discard",
       "Translated": "预览：弃用",
       "Context": "SettingsWindow.DrawHighlightPreview",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "library"
     },
     {
       "Original": "Tsumogiri",
       "Translated": "自摸切",
       "Context": "SettingsWindow.DrawHighlightPreview",
-      "Source": "ai:llm",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:llm"
     },
     {
       "Original": "Click speed",
       "Translated": "点击速度",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "library"
     },
     {
       "Original": "Average delay before each auto-play click.",
       "Translated": "每次自动播放点击前的平均延迟。",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Auto-advance after each hand",
       "Translated": "每手牌后的自动前进",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Click \"Next\" on the win/draw results screen so the next hand starts automatically.",
       "Translated": "点击胜利/平局结果屏幕上的 “下一步”，下一手牌将自动开始。",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Appearance",
       "Translated": "外观",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Highlight suggested tile in the mahjong window",
       "Translated": "亮点建议在麻将窗口贴瓷砖",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "A pulsing outline on the discard to make. Shown in Hints mode.",
       "Translated": "一个脉动的轮廓出现在即将丢弃的物品上。在提示模式中显示。",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Highlight style",
       "Translated": "突出显示风格",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.BeginCombo"
+      "Source": "library"
     },
     {
       "Original": "Large arrow with a DISCARD / TSUMOGIRI label. Keeps the tile art uncovered.",
       "Translated": "带有 DISCARD / TSUMOGIRI 标签的大箭头。保持瓷砖艺术的裸露。",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Neon glow halo, L-shaped corner brackets, and a bouncing arrow above the tile.",
       "Translated": "霓虹灯光晕，L 形角支架，瓷砖上方还有一个跳动的箭头。",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Discard color",
       "Translated": "丢弃颜色",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.ColorEdit3"
+      "Source": "library"
     },
     {
       "Original": "Tsumogiri color",
       "Translated": "Tsumogiri 颜色",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.ColorEdit3"
+      "Source": "library"
     },
     {
       "Original": "Intensity",
       "Translated": "强度",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderFloat"
+      "Source": "library"
     },
     {
       "Original": "Reset overlay colors & intensity",
       "Translated": "还原叠层颜色和强度",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Show analysis details under best move",
       "Translated": "显示最佳移动下的分析详情",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Adds a shanten / ukeire breakdown of the top discards in the main window.",
       "Translated": "添加主窗口中顶部废弃物的 Shanten/ukeire 分类。",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Developer",
       "Translated": "开发人员",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Enable developer tools",
       "Translated": "启用开发者工具",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Adds a debug button to the main window toolbar.",
       "Translated": "将调试按钮添加到主窗口工具栏。",
       "Context": "SettingsWindow.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " Character",
       "Translated": "角色",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": " Dot",
       "Translated": "点号",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": " Bamboo",
       "Translated": "竹子",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "East Wind",
       "Translated": "东风",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "South Wind",
       "Translated": "南风",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "West Wind",
       "Translated": "西风",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "North Wind",
       "Translated": "北风",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "White Dragon",
       "Translated": "白龙",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Green Dragon",
       "Translated": "绿龙",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Red Dragon",
       "Translated": "红龙",
       "Context": "Theme.TileFriendlyName",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Auto-discard",
       "Translated": "自动丢弃",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Asks the policy what to discard and dispatches the click. Only works on your turn.",
       "Translated": "询问策略要丢弃什么，然后发送点击。只有轮到你时才有效。",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Run policy pick",
       "Translated": "运行策略选择",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "No snapshot — open a match first.",
       "Translated": "没有快照——先打开匹配。",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Not our turn.",
       "Translated": "轮不到我们。",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Test discard slot",
       "Translated": "测试丢弃槽",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Discards the tile at a specific hand slot regardless of policy. 0 = leftmost, 13 = just-drawn.",
       "Translated": "无论策略如何，都要在特定手插槽处丢弃瓷砖。0 = 最左侧，13 = 刚刚绘制。",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Dispatch slot ",
       "Translated": "调度槽",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "drawn (13)",
       "Translated": "已摸到（13）",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "leftmost (0)",
       "Translated": "最左边 (0)",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SmallButton"
+      "Source": "library"
     },
     {
       "Original": "Test call option",
       "Translated": "测试呼叫选项",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Send a raw call-prompt button index. Enable event-logger in Diagnostics to see which button each index hits.",
       "Translated": "发送原始呼叫提示按钮索引。在诊断中启用事件记录器，以查看每个索引命中的按钮。",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Dispatch opt ",
       "Translated": "调度选项",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "pon/pass: 0=Pass, 1=Pon.  chi/pass: likely 0=Chi, 1=Pass.  Verify by logging.",
       "Translated": "pon/pass:0=Pass,1=Pont。chi/pass:可能 0=Chi,1=Pass。通过日志记录进行验证。",
       "Context": "ActionsTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "auto-discard: not our turn",
       "Translated": "自动丢弃：轮不到我们",
       "Context": "ActionsTab.TriggerAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "auto-discard: policy returned ",
       "Translated": "自动丢弃：策略返回",
       "Context": "ActionsTab.TriggerAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "auto-discard: tile ",
       "Translated": "auto-discard:tile",
       "Context": "ActionsTab.TriggerAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": " not found in hand",
       "Translated": "未在手中找到",
       "Context": "ActionsTab.TriggerAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "auto-discarding ",
       "Translated": "自动丢弃",
       "Context": "ActionsTab.TriggerAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": " slot ",
       "Translated": "插槽",
       "Context": "ActionsTab.TriggerAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": " in ",
       "Translated": "在",
       "Context": "ActionsTab.TriggerAutoDiscard",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:llm"
     },
     {
       "Original": "discard slot=",
       "Translated": "drop slot=",
       "Context": "Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "auto-discarded ",
       "Translated": "自动丢弃",
       "Context": "TriggerAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "In-memory address and visibility of the mahjong UI. Empty until you seat at a table.",
       "Translated": "麻将用户界面的内存地址和可见性。空白，直到你坐到桌前。",
       "Context": "AddonTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "\" or \"",
       "Translated": "「或」",
       "Context": "AddonTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "\" not found. Open a Doman Mahjong match in-game.",
       "Translated": "未找到。在游戏中开启多曼麻将对决。",
       "Context": "AddonTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Last event",
       "Translated": "最后一个事件",
       "Context": "AddonTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Visible",
       "Translated": "可见",
       "Context": "AddonTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Variant probes",
       "Translated": "变体探测",
       "Context": "AddonTab.DrawVariantCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Which variant strategy matched on the current addon. Miss on all = run Bug report → Dump variant.",
       "Translated": "哪个变体策略与当前附加组件匹配？全部失败=运行 Bug 报告→转储变体。",
       "Context": "AddonTab.DrawVariantCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "(no variants registered)",
       "Translated": "(未注册变体)",
       "Context": "AddonTab.DrawVariantCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "MATCH",
       "Translated": "匹配",
       "Context": "AddonTab.ProbeStatus",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "threw: ",
       "Translated": "投掷：",
       "Context": "AddonTab.ProbeStatus",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Active layout profile",
       "Translated": "活动布局配置文件",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Read-offsets the variant uses to extract your hand, scores, and dora from addon memory.",
       "Translated": "读取偏移变体用于从附加记忆中提取你的手牌、分数和 dora。",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "(no profile active — addon hasn't been parsed yet)",
       "Translated": "(无活动配置文件——插件尚未解析)",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Name",
       "Translated": "名称",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Addon name",
       "Translated": "addon 名称",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Tile tex base",
       "Translated": "Tile Text Base",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Hand array start",
       "Translated": "手阵列开始",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Self score",
       "Translated": "自我评分",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Dora indicator",
       "Translated": "朵拉指示器",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Hand size limit",
       "Translated": "手部尺寸限制",
       "Context": "AddonTab.DrawLayoutCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "report",
       "Translated": "报告",
       "Context": "BugReportTab..ctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "click",
       "Translated": "点击",
       "Context": "BugReportTab..ctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Snap (one-shot memory dump)",
       "Translated": "快照 (一次性内存转储)",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Saves the addon + agent memory to a labeled file. Use this when an issue asks for a one-off snapshot. Label = letters, digits, dash, underscore.",
       "Translated": "将插件 + 代理内存保存到标记文件中。当问题需要一次性快照时使用此功能。Label =字母、数字、破折号、下划线。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Label must be [a-zA-Z0-9_-] only.",
       "Translated": "标签必须仅为 [a-zA-Z0-9_-]。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Snap",
       "Translated": "快照",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "snap '",
       "Translated": "Snap’",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "' queued → see chat for path",
       "Translated": "“排队”→查看路径聊天",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Writes snap-LABEL-ts.txt to plugin config dir.",
       "Translated": "将 snap-LABEL-ts.txt 写入插件 config dir。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Autosnap (continuous capture)",
       "Translated": "自动捕获 (连续捕获)",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Saves a fresh dump every time the game state changes. Use when you can't predict when the bug will trigger. Caps at 500 files; identical states are dropped.",
       "Translated": "每次游戏状态改变时都会保存一个新的转储。当无法预测错误何时触发时使用。上限为 500 个文件;相同的状态会被丢弃。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "State",
       "Translated": "状态",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "OFF",
       "Translated": "关闭",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ON",
       "Translated": "开",
       "Context": "BugReportTab.Draw",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": "Count",
       "Translated": "计数",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Stop autosnap",
       "Translated": "停止自动捕捉",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "autosnap OFF",
       "Translated": "自动触发 关闭",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Start autosnap",
       "Translated": "开始 autosnap",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "autosnap ON — files: snap-auto-NNN-<ts>.txt",
       "Translated": "autosnap ON——文件:snap-auto-NNN-<ts>.txt",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Capture (arm-and-click)",
       "Translated": "捕获 (手动点击)",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Records the very next click you make in the mahjong UI with a label. Type a name, press Arm, then click in-game. Auto-disarms after one click or 60s.",
       "Translated": "用标签记录你在麻将界面中的下一次点击。输入名字，按下手臂键，然后点击游戏内键。一次点击或 60 秒后自动解除武器。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "ARMED: '",
       "Translated": "武装:‘",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "' — click the action in-game",
       "Translated": "——点击游戏内动作",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Disarm",
       "Translated": "解除武装",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "capture disarmed (was: ",
       "Translated": "被缴械捕获 (曾经是：",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Arm",
       "Translated": "手臂",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "capture armed: '",
       "Translated": "武装逮捕:‘",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "' — auto-disarms after one click or 60s",
       "Translated": "——点击一下或 60 秒后自动解除武装",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Auto-play is ON — disarm automation first or its dispatch will race your click.",
       "Translated": "自动播放已打开——请先解除自动化，否则它的调度将与您的点击竞争。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Variant dump (new-client report)",
       "Translated": "变体转储 (新客户端报告)",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Run this when the plugin can't read your hand or board after a game patch. Writes one file to attach when reporting a new client variant.",
       "Translated": "当插件在游戏补丁后无法读取您的手牌或棋盘时，运行此操作。在报告新的客户端变体时，编写一个文件以附加。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Dump variant",
       "Translated": "转储变体",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "variant dump queued → emj-variant-dump.txt",
       "Translated": "变体 dump queued → emj-variant-dump.txt",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Attach emj-variant-dump.txt when reporting a new client variant.",
       "Translated": "在报告新客户端变体时附加 emj-variant-dump.txt。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Files",
       "Translated": "文件",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Open the folder containing every dump file. Drag-and-drop into a GitHub issue to attach.",
       "Translated": "打开包含每个转储文件的文件夹。将其拖放到要附加的 GitHub 问题中。",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Plugin config",
       "Translated": "插件配置",
       "Context": "BugReportTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Open folder:\n",
       "Translated": "打开文件夹：",
       "Context": "BugReportTab.DrawDirRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Recent dumps",
       "Translated": "最近的转储",
       "Context": "BugReportTab.DrawRecentDumpsCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Most recently produced dump files. Open reveals the file's folder; Copy puts the full path on your clipboard.",
       "Translated": "最近生成的转储文件。打开显示文件的文件夹;复制将完整路径放在剪贴板上。",
       "Context": "BugReportTab.DrawRecentDumpsCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "(no dumps yet)",
       "Translated": "(还没有转储)",
       "Context": "BugReportTab.DrawRecentDumpsCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " ago",
       "Translated": "前",
       "Context": "BugReportTab.DrawRecentDumpsCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Copy to clipboard:\n",
       "Translated": "复制到剪贴板：",
       "Context": "DevHelpers.CopyButton",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "library"
     },
     {
       "Original": "Event logger",
       "Translated": "事件记录器",
       "Context": "DiagnosticsTab.DrawEventLoggerCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Logs every UI callback the mahjong addon receives. Useful for reverse-engineering button indices; heavy when on — turn off when done.",
       "Translated": "记录麻将插件接收到的每个 UI 回调。对逆向工程按钮索引很有用;开启时很重——完成后关闭。",
       "Context": "DiagnosticsTab.DrawEventLoggerCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Record clicks to emj-events.log",
       "Translated": "记录到 emj-events.log 的点击",
       "Context": "DiagnosticsTab.DrawEventLoggerCard",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "event logger OFF",
       "Translated": "事件记录器 OFF",
       "Context": "DiagnosticsTab.DrawEventLoggerCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "event logger ON",
       "Translated": "事件日志记录器 ON",
       "Context": "DiagnosticsTab.DrawEventLoggerCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Discard capture",
       "Translated": "丢弃捕获",
       "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Tracks every discard the moment it commits. Strategy is auto-picked at startup: native asm hook preferred, addon-poll as fallback.",
       "Translated": "追踪每次丢弃的时刻。策略在启动时自动选择：原生 asm hook 优先，addon-poll 作为备用策略。",
       "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Strategy",
       "Translated": "策略",
       "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Total captured",
       "Translated": "捕获总数",
       "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Last tile id",
       "Translated": "最后一块 id",
       "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Log",
       "Translated": "日志",
       "Context": "DiagnosticsTab.DrawDiscardCaptureCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Telemetry",
       "Translated": "遥测",
       "Context": "DiagnosticsTab.DrawTelemetryCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Anonymous upload of error/finding/memdump files to the project's research endpoint. URL resolves from GitHub at startup.",
       "Translated": "将错误/查找/memdump 文件匿名上传到项目的研究终端节点。启动时从 GitHub 解析 URL。",
       "Context": "DiagnosticsTab.DrawTelemetryCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Endpoint",
       "Translated": "端点",
       "Context": "DiagnosticsTab.DrawTelemetryCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Enabled",
       "Translated": "已启用",
       "Context": "DiagnosticsTab.DrawTelemetryCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Min plugin ver",
       "Translated": "Min 插件 ver",
       "Context": "DiagnosticsTab.DrawTelemetryCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Pending files",
       "Translated": "待处理文件",
       "Context": "DiagnosticsTab.DrawTelemetryCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Errors & findings (tail)",
       "Translated": "错误和发现 (尾部)",
       "Context": "DiagnosticsTab.DrawStreamsCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Last ",
       "Translated": "最后",
       "Context": "DiagnosticsTab.DrawStreamsCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " lines of today's errors and findings NDJSON. Click Open to inspect the full file.",
       "Translated": "NDJSON 今天的错误和发现。单击 “打开” 以查看完整文件。",
       "Context": "DiagnosticsTab.DrawStreamsCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Hand overlay debug",
       "Translated": "手动覆盖调试",
       "Context": "DiagnosticsTab.DrawHandOverlayDebugCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Outlines every visible node whose dimensions match a tile, in NodeList order — before the row-finder picks the closed-hand subset. Use to spot tiles the size filter missed or extras the Y-cluster heuristic drops.",
       "Translated": "列出每个尺寸与瓦片匹配的可见节点，按 NodeList 顺序排列——在行查找器选择闭合子集之前。用于发现大小过滤器遗漏的瓦片或额外的 Y-cluster 启发式丢弃。",
       "Context": "DiagnosticsTab.DrawHandOverlayDebugCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Outline all detected tile rects",
       "Translated": "概述所有检测到的瓦片直线",
       "Context": "DiagnosticsTab.DrawHandOverlayDebugCard",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "(no file yet)",
       "Translated": "(还没有文件)",
       "Context": "DiagnosticsTab.DrawTail",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "  (empty)",
       "Translated": "(空)",
       "Context": "DiagnosticsTab.DrawTail",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Addon tree & memory scan",
       "Translated": "addon 树和内存扫描",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "walknodes: every UI node in the addon. findtiles: scan memory for tile-encoded values. atkvalues: the addon's parameter array.",
       "Translated": "walknodes:插件中的每个 UI 节点。findtiles:扫描内存中的磁贴编码值。atkvalues:插件的参数数组。",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Walk Nodes",
       "Translated": "行走节点",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "walknodes queued → emj-nodes.txt",
       "Translated": "walknodes 排队 → emj-nodes.txt",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Find Tiles",
       "Translated": "查找磁贴",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "findtiles queued → emj-findtiles.txt",
       "Translated": "findtiles 队列 → emj-findtiles.txt",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Atk Values",
       "Translated": "Atk 值",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Discard-pool slot diff",
       "Translated": "丢弃池插槽差异",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Finds which byte inside each pool-tile slot encodes the tile id, by comparing slots with different tiles. Used to locate fields when a client patch moves them.",
       "Translated": "通过比较不同磁贴的磁贴槽，找出每个池磁贴槽中哪个字节对磁贴标识进行编码。用于在客户端补丁移动字段时定位它们。",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Pool Slots",
       "Translated": "池槽",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "poolslots queued → emj-poolslots.txt",
       "Translated": "poolslots 已排队 → emj-poolslots.txt",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Pool Icons",
       "Translated": "池图标",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "poolicons queued → emj-poolicons.txt",
       "Translated": "poolicons 已排队 → emj-poolicons.txt",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Walks types 1021..1024 and diffs candidate tile bytes across visible slots.",
       "Translated": "行走类型 1021..1024，并在可见插槽之间移动候选磁贴字节。",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Hex dump",
       "Translated": "十六进制转储",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Raw bytes of the addon (or AgentEmj) over a chosen range. Defaults target the current best-guess region.",
       "Translated": "在选定范围内的 addon(或 AgentEmj) 的原始字节。默认值针对当前最佳猜测区域。",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Agent (vs addon)",
       "Translated": "Agent(与 addon)",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "library"
     },
     {
       "Original": "Hex Dump",
       "Translated": "Hexdump",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "Use hex with optional 0x prefix.",
       "Translated": "使用带可选 0x 前缀的十六进制。",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Addon memory (offset + length)",
       "Translated": "附加内存 (偏移量 + 长度)",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Same idea as Hex dump but addon-only and written to emj-dump.txt. Convenient for fixed-offset structures.",
       "Translated": "与 Hex 转储的想法相同，但只有附加功能，并写入 emj-dump.txt。适用于固定偏移量结构。",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "length##mem",
       "Translated": "length ##mem",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "library"
     },
     {
       "Original": "Dump Memory",
       "Translated": "转储内存",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "List loaded addons",
       "Translated": "列出已加载的插件",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Print every game UI addon currently loaded. Substring filter; empty = all. Used to confirm the mahjong addon name on your client.",
       "Translated": "打印当前加载的每个游戏 UI 插件。子串过滤器;空 = 所有。用于确认客户端上的麻将插件名称。",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "List Addons",
       "Translated": "列出插件",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "library"
     },
     {
       "Original": "addons → chat",
       "Translated": "addons → Chat",
       "Context": "ReProbesTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "library"
     },
     {
       "Original": "Auto-play loop",
       "Translated": "自动游戏循环",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "What the auto-play loop saw last tick. Updates live during a match.",
       "Translated": "自动游戏循环在最后一刻看到了什么？比赛中的实时更新。",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Hand",
       "Translated": "手",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Last",
       "Translated": "最后一个",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Hooks & telemetry",
       "Translated": "钩子和遥测",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Health of the discard-capture hook and ongoing data-collection counters.",
       "Translated": "丢弃 - 捕获钩子和持续数据收集计数器的健康状况。",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "DiscardCapture",
       "Translated": "弃牌捕获",
       "Context": "StatusTab.Draw",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "  health=",
       "Translated": "生命=",
       "Context": "StatusTab.Draw",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "total=",
       "Translated": "总计=",
       "Context": "StatusTab.Draw",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "  lastTile=",
       "Translated": "上一块瓷砖=",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Autosnap",
       "Translated": "汽车小憩",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "ON  (",
       "Translated": "ON (",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Event log",
       "Translated": "事件日志",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Findings (today)",
       "Translated": "发现 (今天)",
       "Context": "StatusTab.Draw",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Call-prompt analysis",
       "Translated": "呼叫提示符分析",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Lights up during a chi/pon/kan offer. opt= is the button index the plugin would click.",
       "Translated": "在 chi/pon/kan 优惠期间亮起。opt=是插件将点击的按钮索引。",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "No snapshot.",
       "Translated": "没有快照。",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Pon / Chi / Kan candidates",
       "Translated": "Pon/Chi/Kan 候选",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "AkaDora total",
       "Translated": "AkaDora 总计",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "No accept-side action on offer — not a call prompt.",
       "Translated": "没有提供接受方行动——没有呼叫提示。",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Dispatch indices",
       "Translated": "调度索引",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Chi (×",
       "Translated": "Chi(×)",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": " variants)",
       "Translated": "变体)",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "MinKan",
       "Translated": "明杠",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "ShouMinKan",
       "Translated": "小明杠",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "opt=",
       "Translated": "选项=",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "Policy → ",
       "Translated": "政策 →",
       "Context": "StatusTab.DrawCallPromptCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "(addon not found)",
       "Translated": "(未找到附加值)",
       "Context": "StatusTab.DrawAtkValuesRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Suggestions (discard-only)",
       "Translated": "建议 (仅丢弃)",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Top 5 discard candidates ranked by shanten / ukeire / dora. Highlighted tile is the policy pick.",
       "Translated": "前五名弃用候选人由 shanten / ukeire / Dora 排名。突出显示的是政策选择。",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "No snapshot — not in a match, or the addon struct is not readable.",
       "Translated": "没有快照——在匹配中没有，或者插件结构无法读取。",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Scores   you: ",
       "Translated": "给你打分：",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "    right: ",
       "Translated": "右：",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "across: ",
       "Translated": "跨越：",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "    left: ",
       "Translated": "左边：",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Waiting for our turn (",
       "Translated": "等待轮到我们 (",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " tiles).",
       "Translated": "瓷砖。",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "Top picks",
       "Translated": "顶级选择",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Policy pick:  ",
       "Translated": "策略选择：",
       "Context": "StatusTab.DrawPolicyPickCard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "shanten=",
       "Translated": "向听=",
       "Context": "StatusTab.DrawPickRow",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "   ukeire=",
       "Translated": "听牌=",
       "Context": "StatusTab.DrawPickRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "dora=",
       "Translated": "Dora=",
       "Context": "StatusTab.DrawPickRow",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "   yaku=",
       "Translated": "役=",
       "Context": "StatusTab.DrawPickRow",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "   score=",
       "Translated": "分数=",
       "Context": "StatusTab.DrawPickRow",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:llm"
     },
     {
       "Original": "(poll)",
       "Translated": "(调查)",
       "Context": "AddonEmjReader.Poll",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "library"
     },
     {
       "Original": "Open the Doman Mahjong Solver window. Type /mjauto help for the full command list.",
       "Translated": "打开 Doman Majong Solver 窗口。键入/mjauto 帮助以获取完整的命令列表。",
       "Context": "MjAutoCommand..ctor",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Automation armed.",
       "Translated": "[MjAuto] 自动化已武装。",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Automation disarmed.",
       "Translated": "[MjAuto] 自动化解除武装。",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] DiscardCapture  strategy=",
       "Translated": "[MjAuto] DiscardCapture Strategy=",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "health=",
       "Translated": "生命=",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": "totalCaptured=",
       "Translated": "捕获总数=",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": "lastTileId=",
       "Translated": "最后牌ID=",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": "→ logging to ",
       "Translated": "→日志记录到",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Unknown subcommand: '",
       "Translated": "[MjAuto] 未知子命令:‘",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "'. Type /mjauto help for the command list.",
       "Translated": "输入/mjauto 帮助命令列表。",
       "Context": "MjAutoCommand.OnCommand",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "Doman Mahjong Solver — /mjauto commands",
       "Translated": "麻将求解域—/mjauto 命令",
       "Context": "MjAutoCommand.PrintHelp",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "  (enable \"Developer tools\" in Settings for debug commands)",
       "Translated": "(在调试命令的 “设置” 中启用 “开发者工具”)",
       "Context": "MjAutoCommand.PrintHelp",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Developer console:",
       "Translated": "开发者控制台：",
       "Context": "MjAutoCommand.PrintHelp",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Manual override:",
       "Translated": "手动覆盖：",
       "Context": "MjAutoCommand.PrintHelp",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Capture for bug reports:",
       "Translated": "捕获 bug 报告：",
       "Context": "MjAutoCommand.PrintHelp",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Reverse-engineering dumps:",
       "Translated": "逆向工程转储：",
       "Context": "MjAutoCommand.PrintHelp",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Usage: /mjauto pass <0..5>  (0=leftmost, higher=rightward; rightmost = pass)",
       "Translated": "[MjAuto] 用法:/mjauto pass <0..5>(0=leftmost,higher=rightward;rightmost=pass)",
       "Context": "MjAutoCommand.HandlePass",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Usage: /mjauto testdiscard <0..13>",
       "Translated": "[MjAuto] 用途:/mjauto testdiscard <0..13>",
       "Context": "MjAutoCommand.HandleTestDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] capture disarmed (was: ",
       "Translated": "[MjAuto] 非武装捕获 (曾经：",
       "Context": "MjAutoCommand.HandleCapture",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Usage: /mjauto capture <label>. Run again with no label to disarm. File: ",
       "Translated": "[MjAuto] 使用/mjauto capture <label>。再次运行，没有要解除的 label。文件：",
       "Context": "MjAutoCommand.HandleCapture",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] capture label must be [a-zA-Z0-9_-] only — got '",
       "Translated": "[MjAuto] 捕获标签必须是 [a-zA-Z0-9_-] 只能——明白了 “",
       "Context": "MjAutoCommand.HandleCapture",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] auto-play is ON — its dispatches would race your manual click. Run `/mjauto off` first, then re-arm capture.",
       "Translated": "[MjAuto] 自动游戏开启——它的调度会与你的手动点击竞争。先运行/mjauto off，然后重新捕获。",
       "Context": "MjAutoCommand.HandleCapture",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] capture armed: '",
       "Translated": "【MjAuto】武装捕获:‘",
       "Context": "MjAutoCommand.HandleCapture",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "'. Click the action in-game once. ",
       "Translated": "点击游戏中的动作一次。",
       "Context": "MjAutoCommand.HandleCapture",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Auto-disarms after one click or 60s. File: ",
       "Translated": "一键或 60 秒后自动解除武装。文件：",
       "Context": "MjAutoCommand.HandleCapture",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Usage: /mjauto variant dump",
       "Translated": "[MjAuto] 用法:/mjauto 变体 dump",
       "Context": "MjAutoCommand.HandleVariant",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Unknown variant subcommand: '",
       "Translated": "[MjAuto] 未知变体子命令:‘",
       "Context": "MjAutoCommand.HandleVariant",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "'. Known: dump.",
       "Translated": "已知：转储。",
       "Context": "MjAutoCommand.HandleVariant",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Usage: /mjauto snap <label>  (label: [a-zA-Z0-9_-] only)",
       "Translated": "[MjAuto] 用途/mjauto snap <label>(label:[a-zA-Z0-9_-] only)",
       "Context": "MjAutoCommand.HandleSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] snap label must be [a-zA-Z0-9_-] only — got '",
       "Translated": "[MjAuto] 快捷标签必须是 [a-zA-Z0-9_-] 只有——搞定了 “",
       "Context": "MjAutoCommand.HandleSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] autosnap already ON.",
       "Translated": "【MjAuto】自动快照已打开。",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] autosnap ON. Hash-deduped, min gap ",
       "Translated": "[MjAuto] 自动快照 ON。哈希去伪，min 缺口",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "ms, cap ",
       "Translated": "ms，大写",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Files: snap-auto-NNN-<ts>.txt in plugin config dir.",
       "Translated": "文件:snap-auto-NNN-<ts>.txt 在插件 config dir 中。",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] autosnap already OFF.",
       "Translated": "[MjAuto] auto-auto-NNN-<ts>.txt 已关闭。",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] autosnap OFF. Wrote ",
       "Translated": "[MjAuto] auto-autosnap OFF。",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " file(s).",
       "Translated": "file(s)。",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] autosnap is ",
       "Translated": "[MjAuto] autosnap 是",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "(wrote ",
       "Translated": "(写入",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Usage: /mjauto autosnap <on|off>",
       "Translated": "[MjAuto] 用途:/mjauto autosnap <on|off>",
       "Context": "MjAutoCommand.HandleAutoSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] autosnap hit cap (",
       "Translated": "[MjAuto] autosnap 命中率 (",
       "Context": "MjAutoCommand.OnAutoSnapObservation",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": ") — auto-disarmed. ",
       "Translated": ")——自动解除武装。",
       "Context": "MjAutoCommand.OnAutoSnapObservation",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Toggle off then on to reset.",
       "Translated": "然后关闭并重置。",
       "Context": "MjAutoCommand.OnAutoSnapObservation",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Emj addon not found — open a table first.",
       "Translated": "[MjAuto] 未找到 Emj 插件——先打开一个表。",
       "Context": "MjAutoCommand.WriteSnapFile",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] event logger ON. Writing to ",
       "Translated": "[MjAuto] 事件记录器 ON。写信给",
       "Context": "MjAutoCommand.HandleLog",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] event logger OFF.",
       "Translated": "[MjAuto] 事件记录器关闭。",
       "Context": "MjAutoCommand.HandleLog",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] event logger is ",
       "Translated": "[MjAuto] 事件记录器是",
       "Context": "MjAutoCommand.HandleLog",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Path: ",
       "Translated": "路径：",
       "Context": "MjAutoCommand.HandleLog",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Usage: /mjauto log <on|off>",
       "Translated": "[MjAuto] 用法:/mjauto log <on|off>",
       "Context": "MjAutoCommand.HandleLog",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Emj addon not found.",
       "Translated": "[MjAuto] 未找到 Emj 插件。",
       "Context": "MjAutoCommand.DumpAtkValues",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] AtkValues is null or empty.",
       "Translated": "[MjAuto] AtkValues 为 null 或空。",
       "Context": "MjAutoCommand.DumpAtkValues",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] wrote ",
       "Translated": "[MjAuto] 写道",
       "Context": "MjAutoCommand.DumpAtkValues",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] bad offset '",
       "Translated": "[MjAuto] 不良偏移",
       "Context": "MjAutoCommand.DumpMemory",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "'. Use hex, optional 0x prefix.",
       "Translated": "使用十六进制，可选 0x 前缀。",
       "Context": "MjAutoCommand.DumpMemory",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] bad length '",
       "Translated": "[MjAuto] bad length",
       "Context": "MjAutoCommand.DumpMemory",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] wrote 0x",
       "Translated": "[MjAuto] 输入 0x",
       "Context": "MjAutoCommand.DumpMemory",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " to ",
       "Translated": "到",
       "Context": "MjAutoCommand.DumpMemory",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] AtkStage not available (not in game?)",
       "Translated": "[MjAuto] AtkStage 无法使用 (游戏中没有？",
       "Context": "MjAutoCommand.DumpAddons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "  vis=",
       "Translated": "显示=",
       "Context": "MjAutoCommand.DumpAddons",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": "matching \"",
       "Translated": "匹配 “",
       "Context": "MjAutoCommand.DumpAddons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "total",
       "Translated": "总计",
       "Context": "MjAutoCommand.DumpAddons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] no snapshot — not in a match.",
       "Translated": "[MjAuto] 没有快照——不在匹配中。",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] hand has ",
       "Translated": "[MjAuto] 的手有",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " tiles — not a discard state. Wait for your turn.",
       "Translated": "瓷砖——不是丢弃状态。等待轮到你。",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] policy returned ",
       "Translated": "[MjAuto] 策略返回",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " — autodiscard only handles Discard. ",
       "Translated": "自动删除只处理删除。",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] tile ",
       "Translated": "[MjAuto] 磁贴",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " not found in hand — internal error.",
       "Translated": "未在手中发现——内部错误。",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] auto-discarding ",
       "Translated": "[MjAuto] 自动丢弃",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " (slot ",
       "Translated": "(插槽)",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": ") in ",
       "Translated": ") 在",
       "Context": "MjAutoCommand.HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] Mahjong addon not found — seat at a table first, then retry.",
       "Translated": "[MjAuto] 麻将加号未找到——先找张桌子坐下，然后再试。",
       "Context": "MjAutoCommand.DumpVariant",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] variant dump → ",
       "Translated": "[MjAuto] 变体转储→",
       "Context": "MjAutoCommand.DumpVariant",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "Open a new issue at ",
       "Translated": "打开一个新问题",
       "Context": "MjAutoCommand.DumpVariant",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " and attach this file when reporting a new client variant.",
       "Translated": "并在报告新的客户端变体时附加此文件。",
       "Context": "MjAutoCommand.DumpVariant",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] poolicons → ",
       "Translated": "[MjAuto] poolslots →",
       "Context": "MjAutoCommand.HandlePoolIcons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " decoded)",
       "Translated": "已解码)",
       "Context": "MjAutoCommand.HandlePoolIcons",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " visible slots)",
       "Translated": "可见池槽)",
       "Context": "MjAutoCommand.HandlePoolSlots",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": " matches)",
       "Translated": "匹配)",
       "Context": "MjAutoCommand.HandleFindTiles",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": " nodes)",
       "Translated": "(节点)",
       "Context": "MjAutoCommand.HandleWalkNodes",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] dispatch result: ",
       "Translated": "[MjAuto] 调度结果：",
       "Context": "HandleAutoDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] pass opt=",
       "Translated": "[MjAuto] pass 选项=",
       "Context": "HandlePass",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": "[MjAuto] testdiscard slot=",
       "Translated": "[MjAuto] testdiscard 槽=",
       "Context": "HandleTestDiscard",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": " result=",
       "Translated": "结果=",
       "Context": "HandleTestDiscard",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "ai:llm"
     },
     {
       "Original": "[MjAuto] snap '",
       "Translated": "[MjAuto] 快速",
       "Context": "HandleSnap",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] AgentModule unavailable.",
       "Translated": "[MjAuto] AgentModule 不可用。",
       "Context": "HandleHexDump",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": "[MjAuto] AgentEmj unavailable.",
       "Translated": "[MjAuto] AgentEmj 不可用。",
       "Context": "HandleHexDump",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.PrintError"
+      "Source": "library"
     },
     {
       "Original": " rows)",
       "Translated": "行）",
       "Context": "HandleHexDump",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ IChatGui.Print"
+      "Source": "library"
     },
     {
       "Original": "call",
       "Translated": "调用",
       "Context": "AutoPlayLoop.ScheduleCallDecision",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "policy returned ",
       "Translated": "策略返回",
       "Context": "AutoPlayLoop.DispatchPolicyChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " — not dispatching",
       "Translated": "——不调度",
       "Context": "AutoPlayLoop.DispatchPolicyChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "policy ",
       "Translated": "策略",
       "Context": "AutoPlayLoop.DispatchPolicyChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " missing tile",
       "Translated": "缺少磁贴",
       "Context": "AutoPlayLoop.DispatchPolicyChoice",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "oos-tsumogiri aborted: empty hand",
       "Translated": "Oos-tsumogiri 流产：空手",
       "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "oos-tsumogiri aborted: drawn tile ",
       "Translated": "Oos-tsumogiri 终止：画出的图案",
       "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " not in addon hand",
       "Translated": "不在手中",
       "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "oos-tsumogiri recovery ",
       "Translated": "oos-tsumogiri 恢复",
       "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " slot=",
       "Translated": "槽=",
       "Context": "AutoPlayLoop.DispatchOutOfSyncTsumogiri",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:llm"
     },
     {
       "Original": "auto-ankan ",
       "Translated": "自动安装",
       "Context": "AutoPlayLoop.DispatchAnkan",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " opt=",
       "Translated": "auto-hand-result-next →",
       "Context": "AutoPlayLoop.DispatchAnkan",
-      "Source": "ai:llm",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "ai:llm"
     },
     {
       "Original": "tile ",
       "Translated": "Tile",
       "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " not in hand",
       "Translated": "不在手边",
       "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "auto-riichi[opt=",
       "Translated": "auto-rich[opt=]",
       "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "] (tile=",
       "Translated": "](tile=",
       "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "auto-discard ",
       "Translated": "自动丢弃",
       "Context": "AutoPlayLoop.DispatchDiscardOrRiichi",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "[opt=",
       "Translated": "[opt=auto-discard auto-hand-result-next",
       "Context": "AutoPlayLoop.DispatchAccept",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "auto-pass[opt=",
       "Translated": "auto-pass[opt=]",
       "Context": "AutoPlayLoop.DispatchPass",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "hand-result-next aborted: state moved ",
       "Translated": "手动结果 - 下一步终止：状态已移动",
       "Context": "AutoPlayLoop.ScheduleHandResultAdvance",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "variant aborted: state moved ",
       "Translated": "aborted 变体:state moved",
       "Context": "AutoPlayLoop.ScheduleVariantAccept",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "auto-variant[opt=",
       "Translated": "auto-variant[opt=]",
       "Context": "AutoPlayLoop.ScheduleVariantAccept",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "riichi-tsumogiri aborted: hand=",
       "Translated": "Richi-tsumogiri 终止:hand=",
       "Context": "AutoPlayLoop.ScheduleRiichiTsumogiri",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "riichi-tsumogiri aborted: latched tile ",
       "Translated": "Richi-tsumogiri 终止：锁死的瓷砖",
       "Context": "AutoPlayLoop.ScheduleRiichiTsumogiri",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "auto-riichi-tsumogiri ",
       "Translated": "auto-rich-tsumogiri",
       "Context": "AutoPlayLoop.ScheduleRiichiTsumogiri",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " exception: ",
       "Translated": "异常：",
       "Context": "ScheduleAction",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "discard aborted: not a discard state (state=",
       "Translated": "弃用终止：非弃用状态 (state=)",
       "Context": "ScheduleDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": " flags=",
       "Translated": "标志=",
       "Context": "ScheduleDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "null",
       "Translated": "零",
       "Context": "ScheduleDiscard",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     },
     {
       "Original": "call: no snapshot (state=",
       "Translated": "call:无快照 (state=)",
       "Context": "ScheduleCallDecision",
-      "Source": "library",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextWrapped"
+      "Source": "library"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-09T00:19:57",
-  "imported": {
-    "archive": "uit-direct-2026-10-09T00-19-42-973Z-0e20d293-2026-10-09T001957.json",
-    "accepted": 417,
-    "filled": 417,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 417 条 `Mahjong.Plugin.Dalamud` 的界面文字译文，已收为**独立译文包** `uit-packs/Mahjong.Plugin.Dalamud@user-597941.json`，包名「小糸」。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 417 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
