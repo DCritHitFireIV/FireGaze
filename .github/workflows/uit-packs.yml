@@ -59,7 +59,9 @@ jobs:
 
       - name: Commit changes
         run: |
-          if git diff --quiet -- uit-packs; then
+          # 同 plugin-stats.yml：git diff 只看已跟踪文件，新建的包文件会被漏掉；
+          # git status 能看到未跟踪的新文件（uit-packs/ 在仓库里，目录不会缺失）。
+          if [ -z "$(git status --porcelain -- uit-packs)" ]; then
             echo "uit-packs 没有变化"
             exit 0
           fi

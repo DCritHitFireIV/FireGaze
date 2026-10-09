@@ -28,7 +28,10 @@ jobs:
 
       - name: Commit changes
         run: |
-          if git diff --quiet -- discovery/; then
+          # 不能用 git diff 判断：它只看已跟踪文件，而 discovery/ 是脚本新写的未跟踪目录，
+          # 第一次提交前 git diff 恒为空 → 每次「统计没有变化」静默跳过（2026-10-09 修）。
+          # git status 才看得到未跟踪的新文件；目录不存在时输出同样是空，不会 fatal。
+          if [ -z "$(git status --porcelain -- discovery/)" ]; then
             echo "统计没有变化"
             exit 0
           fi
