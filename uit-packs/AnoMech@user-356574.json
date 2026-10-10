@@ -1,1005 +1,735 @@
 {
-  "type": "uit-contribution",
-  "plugin": "AnoMech",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-10",
+    "source": "user",
+    "label": "玩家包 · 356574",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Open AnoMech. Subcommands: config, start, reset, leave",
       "Translated": "打开 AnoMech。子命令:config、start、reset、leave",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Alias for /anomech",
       "Translated": "/anoMech 的别名",
       "Context": "Plugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Scenarios can only be started from an inn.",
       "Translated": "场景只能从旅馆开始。",
       "Context": "Plugin.StartSelectedScenario",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "AnoMech Settings###AnoMechConfig",
       "Translated": "AnoMech 设置",
       "Context": "ConfigWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Open Sim Menu when entering Inn",
       "Translated": "进入酒店时打开 Sim 菜单",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Suppress scenario BGM",
       "Translated": "抑制场景 BGM",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show mechanic success/failure marks",
       "Translated": "显示机械成功/失败标记",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Resolve your own actions",
       "Translated": "解决你自己的行动",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Slidecast window (s)",
       "Translated": "幻灯片放映窗口 (s)",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputFloat"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enable event logging",
       "Translated": "启用事件日志记录",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Open logs folder",
       "Translated": "打开日志文件夹",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Scenarios",
       "Translated": "场景",
       "Context": "MainWindow.DrawScenariosPanel",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Select a scenario",
       "Translated": "选择一个场景",
       "Context": "MainWindow.DrawMainContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Setup###scenario-setup-v3",
       "Translated": "设置",
       "Context": "MainWindow.DrawMainContent",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TreeNodeEx"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Scenario settings###scenario-config-v3",
       "Translated": "场景设置",
       "Context": "MainWindow.DrawMainContent",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TreeNodeEx"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Paused",
       "Translated": "暂停",
       "Context": "MainWindow.DrawScenarioHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Running",
       "Translated": "奔跑",
       "Context": "MainWindow.DrawScenarioHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Idle",
       "Translated": "空闲",
       "Context": "MainWindow.DrawScenarioHeader",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "scenario-panel-toggle",
       "Translated": "场景 - 面板 - 切换",
       "Context": "MainWindow.DrawScenarioPanelToggle",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop",
       "Translated": "停止",
       "Context": "MainWindow.DrawPrimaryActions",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Start",
       "Translated": "开始",
       "Context": "MainWindow.DrawPrimaryActions",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No strat available for this region yet.",
       "Translated": "这个地区还没有可用的地层。",
       "Context": "MainWindow.DrawPrimaryActions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Cannot start while you are busy (cutscene, NPC event, crafting, trading, zoning, etc.).",
       "Translated": "无法在忙碌中开始 (剪辑场景、NPC 活动、制作、交易、分区等)。",
       "Context": "MainWindow.DrawPrimaryActions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Leave",
       "Translated": "离开",
       "Context": "MainWindow.DrawPrimaryActions",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Solo",
       "Translated": "独奏",
       "Context": "MainWindow.DrawSoloOption",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Run without simulated party members or party AI.",
       "Translated": "在没有模拟党员或党派 AI 的情况下运行。",
       "Context": "MainWindow.DrawSoloOption",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop the current scenario before changing the run mode.",
       "Translated": "在更改运行模式之前停止当前场景。",
       "Context": "MainWindow.DrawSoloOption",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "God mode",
       "Translated": "上帝模式",
       "Context": "MainWindow.DrawRunOptions",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Auto-restart",
       "Translated": "自动重启",
       "Context": "MainWindow.DrawRunOptions",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Restart the same scenario immediately after a successful run. A death turns this back off.",
       "Translated": "在成功跑完后立即重新启动同样的场景。死亡会关闭这个反馈。",
       "Context": "MainWindow.DrawRunOptions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Streak: ",
       "Translated": "条纹：",
       "Context": "MainWindow.DrawRunOptions",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Role:",
       "Translated": "角色：",
       "Context": "MainWindow.DrawRoleSelector",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Strategy:",
       "Translated": "策略：",
       "Context": "MainWindow.DrawStratSelector",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Region:",
       "Translated": "地区：",
       "Context": "MainWindow.DrawGroupedStratSelector",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "(no strats for this region yet)",
       "Translated": "(这个地区还没有确定地层)",
       "Context": "MainWindow.DrawGroupedStratSelector",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Scenarios only run in an inn",
       "Translated": "场景只在旅馆里运行",
       "Context": "MainWindow.DrawLocationHint",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextDisabled"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Scenarios can only be started from an inn — return to one to run a scenario.",
       "Translated": "场景只能从旅馆开始——回到旅馆运行场景。",
       "Context": "MainWindow.DrawLocationHint",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Auto-collapse while running: ",
       "Translated": "运行时自动崩溃：",
       "Context": ".ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Off",
       "Translated": "关闭",
       "Context": ".ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "On",
       "Translated": "开启",
       "Context": ".ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Settings",
       "Translated": "设置",
       "Context": ".ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The Weapon's Refrain",
       "Translated": "武器的副歌",
       "Context": "UwuZone.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Default",
       "Translated": "默认",
       "Context": "UwuZone..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ultimate Suppression",
       "Translated": "终极抑制",
       "Context": "UltimateSuppressionScenario.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Assignment (Non-Tank Only):",
       "Translated": "任务 (仅限非坦克):",
       "Context": "UltimateSuppressionSettingsWindow.DrawAssignment",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ultimate Predation",
       "Translated": "终极猎杀",
       "Context": "UltimatePredationScenario.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Boss Positions:",
       "Translated": "老板职位：",
       "Context": "UltimatePredationSettingsWindow.DrawCenterDodge",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Forsaken Null",
       "Translated": "被遗弃的空值",
       "Context": "UmadP5ForsakenNull.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Forsaken",
       "Translated": "被遗弃",
       "Context": "UmadReplayData..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Black Hole",
       "Translated": "黑洞",
       "Context": "UmadReplayData..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Celestriad",
       "Translated": "塞莱斯特里亚德",
       "Context": "UmadReplayData..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Kefka Says",
       "Translated": "卡夫卡说",
       "Context": "UmadReplayData..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Dancing Mad",
       "Translated": "《狂舞》",
       "Context": "UmadZone.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Diamond Waymarks",
       "Translated": "钻石路标",
       "Context": "UmadZone..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Spread",
       "Translated": "传播",
       "Context": "UmadP5ExaflaresAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Exaflares",
       "Translated": "额外",
       "Context": "UmadP5ExaflaresScenario.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Left order:",
       "Translated": "左顺序：",
       "Context": "UmadP5ExaflaresSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Right order:",
       "Translated": "右顺序：",
       "Context": "UmadP5ExaflaresSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Random",
       "Translated": "随机",
       "Context": "UmadP5ExaflaresSettingsWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Standard",
       "Translated": "标准",
       "Context": "UmadP5CelestriadAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Your element:",
       "Translated": "你的元素：",
       "Context": "UmadP5CelestriadSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set 1 variant:",
       "Translated": "设置 1 个变体：",
       "Context": "UmadP5CelestriadSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set 3 variant:",
       "Translated": "设置 3 个变体：",
       "Context": "UmadP5CelestriadSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Fire",
       "Translated": "火",
       "Context": "UmadP5CelestriadSettingsWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ice",
       "Translated": "冰",
       "Context": "UmadP5CelestriadSettingsWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Lightning",
       "Translated": "闪电",
       "Context": "UmadP5CelestriadSettingsWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Free",
       "Translated": "免费",
       "Context": "UmadP5CelestriadSettingsWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Aero (green)",
       "Translated": "Aero(绿色)",
       "Context": "UmadP5CelestriadSettingsWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Earth (brown)",
       "Translated": "地球 (棕色)",
       "Context": "UmadP5CelestriadSettingsWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Kefka Says (WIP)",
       "Translated": "卡夫卡说 (WIP)",
       "Context": "UmadP4KefkaSaysAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Exdeath 1:",
       "Translated": "exdeath 1:",
       "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Exdeath 3:",
       "Translated": "exdeath 3:",
       "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Exdeath 4:",
       "Translated": "exdeath 4:",
       "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "chaos1",
       "Translated": "Chaos1",
       "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "chaos2",
       "Translated": "Chaos2",
       "Context": "UmadP4KefkaSaysSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Black Hole: S>D>A",
       "Translated": "黑洞:S>D>A",
       "Context": "UmadP3BlackHoleAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Black Hole: D>S>A",
       "Translated": "黑洞:D>S>A",
       "Context": "UmadP3BlackHoleAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Line:",
       "Translated": "行：",
       "Context": "UmadP3BlackHoleSettingsWindow.DrawLineNumber",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Accretion:",
       "Translated": "累加：",
       "Context": "UmadP3BlackHoleSettingsWindow.DrawAccretion",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Supports:",
       "Translated": "支持：",
       "Context": "UmadP2ForsakenSettingsWindow.DrawSupportLockon",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Support Stack:",
       "Translated": "支持堆栈：",
       "Context": "UmadP2ForsakenSettingsWindow.DrawSupportStack",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Kroxy-Rinon 341 (melee flex)",
       "Translated": "Kroxy-Rinon 341(melee flex)",
       "Context": "UmadP2ForsakenKroxyRinonAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[old positions] Kroxy-Rinon 341 (melee flex)",
       "Translated": "【old positions】Kroxy-Rinon 341(近战柔道)",
       "Context": "UmadP2ForsakenKroxyRinonOldAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[LPDU] Buddies",
       "Translated": "[LPDU] 伙伴们",
       "Context": "UmadP2ForsakenLpduBuddiesAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Old] p3Z Buddy Meow",
       "Translated": "[old] p3Z Buddy Meow",
       "Context": "UmadP2ForsakenP3ZBuddyMeowAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[old positions] South Flex 341",
       "Translated": "【old positions】South Flex 341",
       "Context": "UmadP2ForsakenSouthFlex341OldAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "[Old] zP6 South adjust",
       "Translated": "[old] zP6 South 调整",
       "Context": "UmadP2ForsakenZP6SouthAdjustAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The Unending Coil of Bahamut",
       "Translated": "巴哈穆特的无尽线圈",
       "Context": "UcobZone.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Aether Markers",
       "Translated": "以太标记",
       "Context": "UcobZone..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Dodge",
       "Translated": "道奇",
       "Context": "UcobP5ExaflaresAi.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Rolls toward:",
       "Translated": "滚向：",
       "Context": "UcobP5ExaflaresSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The Omega Protocol",
       "Translated": "欧米茄协议",
       "Context": "TopZone.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ring",
       "Translated": "戒指",
       "Context": "TopZone..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tether range:",
       "Translated": "系绳范围：",
       "Context": "TopP5SigmaSettingsWindow.DrawCloseFar",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tower-north flip:",
       "Translated": "北塔翻转：",
       "Context": "TopP5SigmaSettingsWindow.DrawTowerNorthFlip",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Spinner rotation:",
       "Translated": "纺锤旋转：",
       "Context": "TopP5SigmaSettingsWindow.DrawSpinnerRotation",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Omega-F form:",
       "Translated": "Omega-F 形式：",
       "Context": "TopP5SigmaSettingsWindow.DrawOmegaFForm",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hello World:",
       "Translated": "你好世界：",
       "Context": "TopP5SigmaSettingsWindow.DrawHelloWorld",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Start with Dynamis:",
       "Translated": "从 Dynamis 开始：",
       "Context": "TopP5SigmaSettingsWindow.DrawDynamis",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "First F attack:",
       "Translated": "第一次 F 攻击：",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Legs",
       "Translated": "双腿",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Staff",
       "Translated": "法杖",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "First M attack:",
       "Translated": "第一次 M 攻击：",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sword",
       "Translated": "剑",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Shield",
       "Translated": "盾牌",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.RadioButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Second F attack:",
       "Translated": "第二次 F 攻击：",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Second M attack:",
       "Translated": "第二次 M 攻击：",
       "Context": "TopP5OmegaSettingsWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Diffuse Wave Cannon:",
       "Translated": "扩散波炮：",
       "Context": "TopP5OmegaSettingsWindow.DrawWaveCannon",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Monitor side:",
       "Translated": "监视器端：",
       "Context": "TopP5OmegaSettingsWindow.DrawMonitorSide",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Beetle spawn:",
       "Translated": "甲虫幼虫：",
       "Context": "TopP5OmegaSettingsWindow.DrawBeetleSpawn",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Extra dynamis stack:",
       "Translated": "额外动力堆栈：",
       "Context": "TopP5OmegaSettingsWindow.DrawExtraDynamis",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hello World order:",
       "Translated": "你好，世界订单：",
       "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldOrder",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hello World type:",
       "Translated": "Hello World 类型：",
       "Context": "TopP5OmegaSettingsWindow.DrawHelloWorldType",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Force take monitor",
       "Translated": "强制接管显示器",
       "Context": "TopP5OmegaSettingsWindow.DrawForceButtons",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Delta",
       "Translated": "Delta 德尔塔",
       "Context": "TopP5DeltaScenario.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Monitor:",
       "Translated": "监视器：",
       "Context": "TopP5DeltaSettingsWindow.DrawMonitor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Beyond Defence:",
       "Translated": "超越防御：",
       "Context": "TopP5DeltaSettingsWindow.DrawBeyondDefence",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Party Synergy",
       "Translated": "党派协同",
       "Context": "TopP2PartySynergyScenario.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Glitch:",
       "Translated": "故障：",
       "Context": "TopP2PartySynergySettingsWindow.DrawGlitch",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Omega-M form:",
       "Translated": "Omega-M 形式：",
       "Context": "TopP2PartySynergySettingsWindow.DrawAttackM",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextUnformatted"
+      "Source": "ai:public-caiyun"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-10T08:16:37",
-  "imported": {
-    "archive": "uit-direct-2026-10-10T08-16-21-972Z-bcee46a8-2026-10-10T081637.json",
-    "accepted": 120,
-    "filled": 120,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 120 条 `AnoMech` 的界面文字译文，已收为**独立译文包** `uit-packs/AnoMech@user-356574.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 120 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
