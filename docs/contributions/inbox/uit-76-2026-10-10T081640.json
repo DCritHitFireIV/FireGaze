@@ -1,0 +1,1078 @@
+{
+  "issue": "76",
+  "receivedAt": "2026-10-10 08:16:40",
+  "author": "firegaze-relay[bot]",
+  "plugin": "SamplePlugin",
+  "fingerprint": "9a6fb41659eb0d2e",
+  "packFile": "SamplePlugin@user-9a6fb4.json",
+  "accepted": 128,
+  "filled": 128,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "SamplePlugin",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Ouvre la fenêtre de configuration de la réparation automatique.",
+        "Translated": "打开自动修复配置窗口。",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Auto-Repair###AutoRepairConfig",
+        "Translated": "自动修复",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Réparation automatique",
+        "Translated": "自动修复",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Jauge",
+        "Translated": "仪表",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "PNJ réparateurs",
+        "Translated": "PNJ 修理工",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Extraction Matéria",
+        "Translated": "提取物质",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Divers",
+        "Translated": "多样性",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Debug",
+        "Translated": "调试",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Activer la réparation automatique",
+        "Translated": "启用自动修复",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Méthode de réparation",
+        "Translated": "修复方法",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Matière sombre (sur soi)",
+        "Translated": "暗物质 (sur soi)",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "PNJ réparateur (déplacement automatique via vnavmesh)",
+        "Translated": "PNJ 修理工 (通过 vnavmesh 自动移动)",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Si plus de matière sombre, se replier sur le PNJ réparateur",
+        "Translated": "如果有更多暗物质，就撤退到修复 PNJ",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Ne fait rien si aucun PNJ n'est enregistré pour la zone actuelle (voir l'onglet \"PNJ réparateurs\").",
+        "Translated": "如果当前区域未注册任何 PNJ，请不要采取任何行动 (请参阅 “维修 PNJ” 选项卡)。",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Seuil de déclenchement (%)",
+        "Translated": "触发阈值 (%)",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "La réparation ne se déclenche que si au moins une pièce d'équipement\npasse sous ce seuil. Rien n'est réparé (ni consommé) au-dessus.",
+        "Translated": "维修只有在至少一个设备部件时才会触发。\n通过这个阈值以下。在此之上不得修理 (或使用) 任何东西。",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Ne jamais réparer automatiquement...",
+        "Translated": "永远不要自动修复......",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "...en combat",
+        "Translated": "......在战斗中",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "...en craft / récolte / pêche",
+        "Translated": "......在工艺/收获/捕鱼",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "...pendant une cinématique",
+        "Translated": "......在电影院里",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "...en instance/donjon",
+        "Translated": "......实例/主城",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Réparer maintenant",
+        "Translated": "现在修复",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Annuler",
+        "Translated": "取消",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Historique récent",
+        "Translated": "近期历史",
+        "Context": "ConfigWindow.DrawRepairTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Afficher la jauge de durabilité",
+        "Translated": "显示耐用性指标",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Verrouiller la position de la jauge",
+        "Translated": "锁定刻度盘位置",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Style (comme RepairMe)",
+        "Translated": "样式 (例如 RepairMe)",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Barre (globale + détail par pièce)",
+        "Translated": "条形码 (全局 + 每件详细信息)",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Icônes (une rangée par pièce d'équipement)",
+        "Translated": "圣像 (每件装备一行)",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Barre d'XP (fine, façon barre d'expérience)",
+        "Translated": "XP 棒 (细长，实验棒形式)",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Seuil orange (%)",
+        "Translated": "橙色阈值 (%)",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Seuil rouge (%)",
+        "Translated": "红色阈值 (%)",
+        "Context": "ConfigWindow.DrawGaugeTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Ciblez un PNJ capable de réparer votre équipement (généralement un vendeur de la Guilde des artisans/marchands ambulants), puis cliquez sur le bouton ci-dessous pour l'enregistrer comme réparateur pour la zone actuelle.",
+        "Translated": "锁定能够修理您设备的 PNJ(通常是工匠公会/流动商贩公会的卖家)，然后点击下面的按钮，将他们注册为当前区域的修理工。",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Zone actuelle : ",
+        "Translated": "当前区域：",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Enregistrer la cible actuelle comme PNJ réparateur",
+        "Translated": "将当前目标注册为修复 PNJ",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Cible: ",
+        "Translated": "目标：",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "PNJ à utiliser dans cette zone",
+        "Translated": "在此区域中使用的 PNJ",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Aucun PNJ enregistré pour cette zone",
+        "Translated": "此区域未注册 PNJ",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "PNJ enregistrés",
+        "Translated": "已注册的 PNJ",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Nom",
+        "Translated": "名称",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Zone",
+        "Translated": "区域",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Position",
+        "Translated": "位置",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Actif",
+        "Translated": "活动",
+        "Context": "ConfigWindow.DrawNpcTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Extrait automatiquement la matéria de chaque pièce équipée qui atteint 100% de lien (avec matéria sertie). Confirmé sans risque pour l'équipement : la pièce n'est pas détruite, seul le lien redescend et vous gagnez la matéria.",
+        "Translated": "自动从每个装备零件中提取材料，达到 100% 的连接度 (使用填充材料)。对装备无风险确认：零件未被破坏，只是连接度降低，您获得了材料。",
+        "Context": "ConfigWindow.DrawMateriaTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Activer l'extraction automatique de matéria",
+        "Translated": "启用自动物质提取",
+        "Context": "ConfigWindow.DrawMateriaTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Pas de seuil à régler : c'est une règle fixe du jeu (100% de lien). Traite les pièces\nune par une, quelques secondes d'écart entre chacune.",
+        "Translated": "无需设置阈值：这是游戏的固定规则 (100% 链接)。处理硬币\n一个接一个，每次间隔几秒钟。",
+        "Context": "ConfigWindow.DrawMateriaTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Extraire maintenant",
+        "Translated": "现在提取",
+        "Context": "ConfigWindow.DrawMateriaTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Fermer la fenêtre",
+        "Translated": "关闭窗口",
+        "Context": "ConfigWindow.DrawMateriaTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Fenêtre de configuration déplaçable",
+        "Translated": "可移动配置窗口",
+        "Context": "ConfigWindow.DrawMiscTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Version du plugin : ",
+        "Translated": "插件版本：",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "DalamudApiLevel : ",
+        "Translated": "在 MaudFireLevel 中：",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "vnavmesh détecté : ",
+        "Translated": "检测到 vnavmesh:",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "non",
+        "Translated": "非",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "oui",
+        "Translated": "是的",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Mode configuré : ",
+        "Translated": "配置模式：",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": ", seuil : ",
+        "Translated": "，阈值：",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Copier les informations de debug",
+        "Translated": "复制调试信息",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Vider les journaux",
+        "Translated": "清除日志",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Journal réparation (",
+        "Translated": "修复日志 (",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " entrées, le plus récent en bas)",
+        "Translated": "条目，最新内容位于下方)",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Journal extraction matéria (",
+        "Translated": "日记摘要 (",
+        "Context": "ConfigWindow.DrawDebugTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Zone ",
+        "Translated": "区域",
+        "Context": "ConfigWindow.GetTerritoryName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Équipement ",
+        "Translated": "设备",
+        "Context": "RepairGaugeWindow.DrawBarStyle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ProgressBar"
+      },
+      {
+        "Original": "Lien: ",
+        "Translated": "链接：",
+        "Context": "RepairGaugeWindow.DrawBarStyle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "\nDurabilité: ",
+        "Translated": "耐用性：",
+        "Context": "RepairGaugeWindow.DrawIconsStyle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "%\nLien matéria: ",
+        "Translated": "%\n主题链接：",
+        "Context": "RepairGaugeWindow.DrawIconsStyle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Aucun équipement.",
+        "Translated": "没有设备。",
+        "Context": "RepairGaugeWindow.DrawIconsStyle",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Repair",
+        "Translated": "修理",
+        "Context": "AutoRepairManager..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "AutoRepairManager initialisé.",
+        "Translated": "Auto-RepairManager 初始化。",
+        "Context": "AutoRepairManager..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "HH:mm:ss.fff",
+        "Translated": "HH:mm:ss.ffff",
+        "Context": "AutoRepairManager.LogDebug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Annulé.",
+        "Translated": "取消。",
+        "Context": "AutoRepairManager.Cancel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Le PNJ n'a pas proposé de réparation dans le délai imparti, réparation manuelle nécessaire cette fois-ci.",
+        "Translated": "PNJ 没有在规定期限内提供维修服务，这次需要手动维修。",
+        "Context": "AutoRepairManager.OnFrameworkUpdate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "La fenêtre de réparation ne s'est pas ouverte, réessai plus tard.",
+        "Translated": "修复窗口没有打开，稍后再次尝试。",
+        "Context": "AutoRepairManager.OnFrameworkUpdate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Réparation en cours...",
+        "Translated": "正在进行维修......",
+        "Context": "AutoRepairManager.StartRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "StartRepair: mode=",
+        "Translated": "StartRepair:mode=",
+        "Context": "AutoRepairManager.StartRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Aucune matière sombre trouvée dans l'inventaire.",
+        "Translated": "清单中未发现任何暗物质。",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Matière sombre trouvée: itemId=",
+        "Translated": "发现的深色材料:itemId=",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "RepairManager.Instance() a retourné null.",
+        "Translated": "RepairManager.Instance() 返回 null。",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Impossible d'accéder au module de réparation.",
+        "Translated": "无法访问维修模块。",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "RepairManager.RepairEquipped(false) -> ",
+        "Translated": "RepairManager.RepairEquipped(false)->",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Équipement réparé automatiquement.",
+        "Translated": "设备自动修理。",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Équipement réparé.",
+        "Translated": "设备已修复。",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "La réparation directe a échoué (matière sombre incompatible avec l'ilvl de l'équipement ?).",
+        "Translated": "直接修复失败 (暗物质与设备的 ILV 不兼容？)。",
+        "Context": "AutoRepairManager.StartDarkMatterRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Repli sur le PNJ réparateur (matière sombre indisponible/incompatible).",
+        "Translated": "返回修复 PNJ(暗物质不可用/不兼容)。",
+        "Context": "AutoRepairManager.TryFallBackToNpc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Aucun PNJ réparateur enregistré pour cette zone. Ciblez-en un et utilisez \"Enregistrer la cible\" dans la config.",
+        "Translated": "没有为该区域注册的修复 PNJ。瞄准其中一个，然后在配置中使用 “注册目标”。",
+        "Context": "AutoRepairManager.StartNpcRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "vnavmesh est introuvable ou non chargé, impossible de se déplacer automatiquement.",
+        "Translated": "vnavmesh 无法找到或未充电，无法自动移动。",
+        "Context": "AutoRepairManager.StartNpcRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "PNJ choisi: ",
+        "Translated": "选择的 PNJ:",
+        "Context": "AutoRepairManager.StartNpcRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", territoire=",
+        "Translated": "，领土=",
+        "Context": "AutoRepairManager.StartNpcRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", pos=",
+        "Translated": ",pos=",
+        "Context": "AutoRepairManager.StartNpcRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Déplacement vers ",
+        "Translated": "移动到",
+        "Context": "AutoRepairManager.StartNpcRepair",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Trajet vers le PNJ réparateur trop long, abandon.",
+        "Translated": "去 PNJ 修理站的路程太长，放弃。",
+        "Context": "AutoRepairManager.TickMovingToNpc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "PNJ réparateur introuvable à l'endroit enregistré.",
+        "Translated": "在注册地点未找到 PNJ 修理工。",
+        "Context": "AutoRepairManager.TickMovingToNpc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Interaction avec ",
+        "Translated": "与",
+        "Context": "AutoRepairManager.TickMovingToNpc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Impossible d'atteindre le PNJ réparateur (chemin bloqué ?).",
+        "Translated": "无法到达维修 PNJ(路径被阻？)",
+        "Context": "AutoRepairManager.TickMovingToNpc",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "' PostSetup reçu (state=",
+        "Translated": "‘PostSetup 已收到 (state=)",
+        "Context": "AutoRepairManager.OnRepairAddonSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", activeMode=",
+        "Translated": ",activeMode=",
+        "Context": "AutoRepairManager.OnRepairAddonSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Ignoré: pas dans un état d'attente de la fenêtre de réparation.",
+        "Translated": "忽略：未处于维修窗口的待处理状态。",
+        "Context": "AutoRepairManager.OnRepairAddonSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Fenêtre de réparation fermée.",
+        "Translated": "修复窗口关闭。",
+        "Context": "AutoRepairManager.OnRepairAddonSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Addon 'SelectString' PostSetup reçu (state=",
+        "Translated": "添加 “SelectString” PostSetup 接收 (state=)",
+        "Context": "AutoRepairManager.OnSelectStringSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Entrée 'réparation' trouvée et cliquée dans SelectString.",
+        "Translated": "在 SelectString 中找到并单击 “修复” 条目。",
+        "Context": "AutoRepairManager.OnSelectStringSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Aucune entrée correspondant à un mot-clé de réparation dans ce SelectString.",
+        "Translated": "此 SelectString 中没有与修复关键字对应的条目。",
+        "Context": "AutoRepairManager.OnSelectStringSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Addon 'SelectIconString' PostSetup reçu (state=",
+        "Translated": "添加 “SelectIconString” PostSetup 收到 (state=",
+        "Context": "AutoRepairManager.OnSelectIconStringSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Entrée 'réparation' trouvée et cliquée dans SelectIconString.",
+        "Translated": "在 SelectIconString 中找到并单击 “修复” 条目。",
+        "Context": "AutoRepairManager.OnSelectIconStringSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Aucune entrée correspondant à un mot-clé de réparation dans ce SelectIconString.",
+        "Translated": "此 SelectIconString 中没有与修复关键字对应的条目。",
+        "Context": "AutoRepairManager.OnSelectIconStringSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Materialize",
+        "Translated": "物质化",
+        "Context": "AutoMateriaExtractionManager..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Aucune pièce à 100% de lien avec matéria mélangée.",
+        "Translated": "没有 100% 与混合物质相关的元素。",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "ActionManager.Instance() a retourné null.",
+        "Translated": "ActionManager.Instance() 返回空值。",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Erreur interne.",
+        "Translated": "内部错误。",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Ouverture de la liste d'extraction pour itemId=",
+        "Translated": "打开 itemId=的提取列表",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "), index=",
+        "Translated": "index=",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Impossible d'ouvrir la fenêtre d'extraction de matéria (action générale refusée).",
+        "Translated": "无法打开物质提取窗口 (一般操作被拒绝)。",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Échec de l'ouverture.",
+        "Translated": "开场失败。",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Extraction en cours sur ",
+        "Translated": "正在进行提取",
+        "Context": "AutoMateriaExtractionManager.OpenExtractionWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "' ouvert (expectingListClick=",
+        "Translated": "已打开 (expetingListClick=)",
+        "Context": "AutoMateriaExtractionManager.OnListSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Attente ~500ms avant le clic (le temps que la liste se charge).",
+        "Translated": "在点击前等待约 500 毫秒 (列表加载所需时间)。",
+        "Context": "AutoMateriaExtractionManager.OnListSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Addon 'Materialize' introuvable au moment du clic (fermé entre-temps ?).",
+        "Translated": "点击时找不到 “Materialize” 插件 (在此期间关闭了吗？)",
+        "Context": "AutoMateriaExtractionManager.PerformClick",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "FireCallback(1, [Int=2, UInt=0]) envoyé sur 'Materialize' (méthode Artisan).",
+        "Translated": "FireCallback(1,[Int=2,UInt=0]) 发送到 “Materialize”(工匠方法)。",
+        "Context": "AutoMateriaExtractionManager.PerformClick",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Addon 'MaterializeDialog' ouvert.",
+        "Translated": "附加 “MaterializeDialog” 已打开。",
+        "Context": "AutoMateriaExtractionManager.OnDialogSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Confirmation 'Oui' envoyée sur MaterializeDialog.",
+        "Translated": "确认 “是” 已发送至 MaterializeDialog。",
+        "Context": "AutoMateriaExtractionManager.OnDialogSetup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Pièces éligibles avant=",
+        "Translated": "先前符合条件的部件=",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ", après=",
+        "Translated": ",after=",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Matéria extraite (",
+        "Translated": "提取的材料 (",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " ou une autre pièce prête - ",
+        "Translated": "或者另一个准备好的部分——",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " restante(s)).",
+        "Translated": "剩余部分)。",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Matéria extraite.",
+        "Translated": "提取的材料。",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Aucun changement, nouvelle tentative sur la même fenêtre (",
+        "Translated": "没有变化，重新尝试同一窗口 (",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Le clic n'a extrait aucune matéria (aucun changement détecté).",
+        "Translated": "点击未提取任何物质 (未检测到任何变化)。",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Échec du clic.",
+        "Translated": "点击失败。",
+        "Context": "AutoMateriaExtractionManager.VerifyAndReport",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
