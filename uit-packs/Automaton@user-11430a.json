@@ -1,1857 +1,1353 @@
 {
-  "type": "uit-contribution",
-  "plugin": "Automaton",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-10",
+    "source": "user",
+    "label": "玩家包 · 11430a",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Opens the ",
       "Translated": "打开",
       "Context": "LoadAsync.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " menu",
       "Translated": "菜单",
       "Context": "LoadAsync.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reset To Default: ",
       "Translated": "重置为默认值：",
       "Context": "ImGuiExtensions.ResetButton",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "{0:P} Complete ({1} / {2})",
       "Translated": "{0:P} 完成 ({1} / {2})",
       "Context": "ImGuiExtensions.DrawProgressBar",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Loading icon…",
       "Translated": "正在加载图标......",
       "Context": "AsciiSplash.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Failed to build ASCII splash.",
       "Translated": "未能构建 ASCII 溅射。",
       "Context": "BuildAsync.MoveNext",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " - Debug v",
       "Translated": "调试 v",
       "Context": "DebugWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tab Name",
       "Translated": "选项卡名称",
       "Context": "DebugWindow.DrawSidebar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Checkbox",
       "Translated": "复选框",
       "Context": "HaselWindow.DrawSidebar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tweak Name",
       "Translated": "调整名称",
       "Context": "HaselWindow.DrawSidebar",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Required Dependencies",
       "Translated": "所需依赖项",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Missing ",
       "Translated": "缺失",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " of the required plugins for this feature to work:",
       "Translated": "这个功能工作所需的插件：",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Invalid ClientStructs version",
       "Translated": "无效的 ClientStructs 版本",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "] not in tweak bounds [",
       "Translated": "] 不在调整范围内 [",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "]. Wait for a Dalamud update.",
       "Translated": "等待 Daumud 更新。",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Incompatibility Warning",
       "Translated": "不兼容警告",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "In order for this tweak to work properly, please make sure ",
       "Translated": "为了使这个调整能够正常工作，请确保",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " is disabled.",
       "Translated": "已禁用。",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " is disabled in ",
       "Translated": "在",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "In order for this tweak to work properly, please make sure",
       "Translated": "为了使这个调整能够正常工作，请确保",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " is disabled",
       "Translated": "已禁用",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "HaselTweaks.Config.IncompatibilityWarning.Plugin.",
       "Translated": "HaselTweaks.Config.Incompatibility Warning.Plugin.",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ".Config.",
       "Translated": ".Config。",
       "Context": "HaselWindow.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Some animals were harmed in the making of this plugin.",
       "Translated": "一些动物在制作这个插件时受到了伤害。",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "100% vegan",
       "Translated": "100% 纯素食",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Welcome to croizat's bundled tweaks",
       "Translated": "欢迎来到克鲁扎特的捆绑调整",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Thanks for using complex bundled tweaks",
       "Translated": "感谢使用复杂的捆绑调整",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "My favourite feature is the hunt relayer",
       "Translated": "我最喜欢的功能是狩猎中继器。",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Does anyone actually know what CBT stands for?",
       "Translated": "有人真的知道 CBT 是什么吗？",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Also try Silksong!",
       "Translated": "也可以试试 Silksong!",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "I can just put any message in here",
       "Translated": "我可以在这里发布任何消息。",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "It's like those other tweak plugins, but worse!",
       "Translated": "这就像其他那些调整插件一样，但更糟糕！",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Made with love. Love is an alternative name for MSG",
       "Translated": "用爱制作。爱是 MSG 的另一个名字。",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Now in Technicolor!",
       "Translated": "现在是 Technicolor!",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "~~Blue text~~",
       "Translated": "~～蓝色文字～~",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Interrobang!",
       "Translated": "质询！",
       "Context": "HaselWindow..cctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Hyperborea Overlay",
       "Translated": "Hyperborea 覆盖",
       "Context": "MousePositionOverlay..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Click to copy IconId",
       "Translated": "点击复制 IconId",
       "Context": "DebugTab.DrawIcon",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " – Size: ",
       "Translated": "大小：",
       "Context": "DebugTab.DrawIcon",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "simpleExec",
       "Translated": "simpleExece",
       "Context": "ExecuteCommandTab.DrawSimpleExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Table"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "label",
       "Translated": "label(标签)",
       "Context": "ExecuteCommandTab.DrawSimpleExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "value",
       "Translated": "值",
       "Context": "ExecuteCommandTab.DrawSimpleExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TableSetupColumn"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Use raw ID",
       "Translated": "使用原始 ID",
       "Context": "ExecuteCommandTab.DrawSimpleExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Execute",
       "Translated": "执行",
       "Context": "ExecuteCommandTab.DrawSimpleExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "locationExec",
       "Translated": "locationExece",
       "Context": "ExecuteCommandTab.DrawLocationExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Table"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Location source",
       "Translated": "位置源",
       "Context": "ExecuteCommandTab.DrawLocationExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Custom XYZ",
       "Translated": "自定义 XYZ",
       "Context": "ExecuteCommandTab.DrawLocationExecuteCommand",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Territory: ",
       "Translated": "领地：",
       "Context": "FlagTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "] Size: ",
       "Translated": "大小：",
       "Context": "FlagTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": ", Offset: ",
       "Translated": "，偏移量：",
       "Context": "FlagTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " Territory: ",
       "Translated": "领地：",
       "Context": "FlagTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Map Position: ",
       "Translated": "地图位置：",
       "Context": "FlagTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "World Position: ",
       "Translated": "世界位置：",
       "Context": "FlagTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Position: ",
       "Translated": "位置：",
       "Context": "FlagTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Loaded",
       "Translated": "已加载",
       "Context": "InstalledPluginsTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop current task",
       "Translated": "停止当前任务",
       "Context": "TasksTab.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "void all weeaboos",
       "Translated": "void 所有 weaboos",
       "Context": "TasksTab.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "compress",
       "Translated": "压缩",
       "Context": "TestTab.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "decompress",
       "Translated": "解压缩",
       "Context": "TestTab.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "logout",
       "Translated": "注销",
       "Context": "TestTab.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "meld",
       "Translated": "Meld",
       "Context": "TestTab.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "In Interact Range: ",
       "Translated": "在互动范围内：",
       "Context": "TestTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Target LoS: ",
       "Translated": "目标 LoS:",
       "Context": "TestTab.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Configuration",
       "Translated": "配置",
       "Context": "Tweak.DrawGeneratedConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Available Commands",
       "Translated": "可用命令",
       "Context": "Tweak.DrawCommands",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Disabled",
       "Translated": "已禁用",
       "Context": "TweakStatusExtensions.GetName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enabled",
       "Translated": "已启用",
       "Context": "TweakStatusExtensions.GetName",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Initialization Failed",
       "Translated": "初始化失败",
       "Context": "TweakStatusExtensions.GetName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Outdated",
       "Translated": "过时",
       "Context": "TweakStatusExtensions.GetName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Disposed",
       "Translated": "已处理",
       "Context": "TweakStatusExtensions.GetName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Adds an achievement tracker",
       "Translated": "添加成就跟踪器",
       "Context": "AchievementTracker.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add an achievement",
       "Translated": "添加成就",
       "Context": "AchievementTrackerWindow.DrawSearch",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Combo"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Search",
       "Translated": "搜索",
       "Context": "AchievementTrackerWindow.DrawSearch",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "(None)",
       "Translated": "(无)",
       "Context": "AchievementTrackerWindow.DrawSearch",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "AchievementCategories",
       "Translated": "成就类别",
       "Context": "AchievementTrackerWindow.DrawAchievements",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabBar"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Misc",
       "Translated": "混淆",
       "Context": "AchievementTrackerWindow.DrawAchievements",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.TabItem"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nDrag to reorder\nRight-click for options",
       "Translated": "拖动以重新排序\n右键单击选项",
       "Context": "AchievementTrackerWindow.DrawAchievementsList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remove",
       "Translated": "移除",
       "Context": "AchievementTrackerWindow.DrawContextMenu",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Category",
       "Translated": "类别",
       "Context": "AchievementTrackerWindow.DrawContextMenu",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Existing categories",
       "Translated": "现有类别",
       "Context": "AchievementTrackerWindow.DrawContextMenu",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Clear category",
       "Translated": "清晰类别",
       "Context": "AchievementTrackerWindow.DrawContextMenu",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Selectable"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Prevents being kicked for being AFK.",
       "Translated": "防止因为是 AFK 而被踢。",
       "Context": "AntiAFK.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "On CharacterPostProcess, do any seasonal quests that are available.",
       "Translated": "在 CharacterPostProcess 上完成任何季节性任务。",
       "Context": "ARQuesting.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Adds a DTR element and commands to switch to the prev/next character in AutoRetainer.",
       "Translated": "添加 DTR 元素和命令以切换到 AutoRetainer 中的 prev/下一个字符。",
       "Context": "ARSwitcher.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Character Index",
       "Translated": "角色索引",
       "Context": "ARSwitcher.OnEnable",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IDtrBar.Get"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Unknown Character Index",
       "Translated": "未知字符索引",
       "Context": "ARSwitcher.OnEnable",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ IDtrBar.Get"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Can't switch characters (bound by duty or occupied)",
       "Translated": "无法切换角色 (受职责限制或被占用)",
       "Context": "ARSwitcher.SwitchCharacter",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Switch to ",
       "Translated": "切换到",
       "Context": "ARSwitcher.SwitchCharacter",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Toggles busy while you're teleporting.",
       "Translated": "在传送过程中切换忙碌状态。",
       "Context": "AutoBusy.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Automatically equips any exp boosting item on level change.",
       "Translated": "在等级变化时自动装备任何经验值提升道具。",
       "Context": "AutoEquipXPBoosts.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "True Auto Follow. Trigger with command while targeting someone. Use it with no target to wipe the current master.\nIf multiboxing, you can send \"autofollow\" to chat and anyone in the party with this feature enabled will follow.\nYou can also add a number argument to specify the distance to keep, or add the off argument to clear the current master.",
       "Translated": "真实自动跟随。用命令触发，同时瞄准某人。在没有目标的情况下使用它来清除当前主控。\n如果使用多人聊天功能，您可以发送 “自动跟随” 来聊天，团队中任何启用此功能的人都会跟随。\n您还可以添加 number 参数来指定要保持的距离，或者添加 off 参数来清除当前 master。",
       "Context": "AutoFollow.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Auto invite people to your party based on a chat message.",
       "Translated": "自动根据聊天信息邀请人们参加你的派对。",
       "Context": "AutoInvite.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Merge incomplete stacks upon opening your inventory.",
       "Translated": "打开库存后合并未完成的堆栈。",
       "Context": "AutoMerge.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Automatically hop in to other peoples' mounts when you are near them.",
       "Translated": "当你靠近他人时，会自动跳上他们的坐骑。",
       "Context": "AutoPillion.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Auto queue into a pre-checked duty (on zone change).\nIf in a party, waits for all players to be in the overworld, and either targetable or in another zone from you.",
       "Translated": "汽车排队等候预检值班 (区域变更时)。\n如果在一个派对上，等待所有玩家都进入超世界状态，并且要么处于目标区域，要么在离你不远的另一个区域。",
       "Context": "AutoQueue.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Automatically completes snipe quests.",
       "Translated": "自动完成狙击任务。",
       "Context": "AutoSnipeQuests.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Like those other games. Supports clicking on the map.",
       "Translated": "就像其他游戏一样。支持点击地图。",
       "Context": "ClickToMove.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Shows the scrip rewards next to the collectability rating on item tooltips.",
       "Translated": "显示项目工具提示中可收藏性评分旁边的脚本奖励。",
       "Context": "CollectableRewardTooltip.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Miscellanous commands",
       "Translated": "杂项命令",
       "Context": "Commands.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Item ",
       "Translated": "项目",
       "Context": "Commands.OnCommmandDesynth",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Automatically execute certain actions when the duty starts or ends.",
       "Translated": "当任务开始或结束时，自动执行某些操作。",
       "Context": "EnhancedDutyStartEnd.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Duty Start Options",
       "Translated": "任务开始选项",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sends a party chat message when the duty starts.",
       "Translated": "当值班开始时发送派对聊天消息。",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Leave if specific players are not present.",
       "Translated": "如果特定玩家不在场，请离开。",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Players to Check For",
       "Translated": "需要检查的玩家",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Check for All",
       "Translated": "检查所有",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Check for Any",
       "Translated": "检查任何",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Duty End Options",
       "Translated": "职责结束选项",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sends a party chat message when the duty ends.",
       "Translated": "当任务结束时发送派对聊天消息。",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Leave after (s)",
       "Translated": "(s) 之后离开",
       "Context": "EnhancedDutyStartEnd.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Additional options when logging in.",
       "Translated": "登录时的额外选项。",
       "Context": "EnhancedLoginLogout.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Login Commands",
       "Translated": "登录命令",
       "Context": "EnhancedLoginLogout.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Run Commands if AutoRetainer is active",
       "Translated": "如果 AutoRetainer 处于活跃状态，请运行命令",
       "Context": "EnhancedLoginLogout.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Instantly repair all inventories when repairing at an npc.",
       "Translated": "在 NPC 修理时立即修复所有库存。",
       "Context": "FasterRepairAll.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " fates",
       "Translated": "命运",
       "Context": "NoneGrindMode.GetRemainingDisplay",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " left",
       "Translated": "左",
       "Context": "GemstoneGrindMode.GetRemainingDisplay",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Unavailable",
       "Translated": "不可用",
       "Context": "ZoneItemGrindMode.GetRemainingDisplay",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " medals left",
       "Translated": "奖牌留下",
       "Context": "YokaiGrindMode.GetRemainingDisplay",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Fate tracker with additional fate automations.",
       "Translated": "具有额外命运自动化功能的命运跟踪器。",
       "Context": "FateToolKit.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Blacklisted Rules",
       "Translated": "黑名单规则",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Priority Order",
       "Translated": "优先级顺序",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Order used when selecting the next FATE to complete.",
       "Translated": "选择下一个要完成的 FATE 时使用的顺序。",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Drag to change priority order",
       "Translated": "拖动以更改优先顺序",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Ascending (lowest first)",
       "Translated": "上升 (最低优先)",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Descending (highest first)",
       "Translated": "下降 (最高优先)",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remove this sort criteria",
       "Translated": "移除此排序标准",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add Sort Criteria",
       "Translated": "添加排序标准",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Reset to Default",
       "Translated": "重置为默认值",
       "Context": "FateToolKit.DrawCustomConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop",
       "Translated": "停止",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stopping",
       "Translated": "停止",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Stop. Ctrl+",
       "Translated": "停止。Ctrl+",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " soft stop",
       "Translated": "软停止",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Automation: ",
       "Translated": "自动化：",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "State: ",
       "Translated": "状态：",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Completed: ",
       "Translated": "已完成：",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remaining: ",
       "Translated": "剩余：",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Zone list is defined by the current grind mode. Switch to None to select zones manually.",
       "Translated": "区域列表由当前研磨模式定义。切换到 None 以手动选择区域。",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Swap Zones: ",
       "Translated": "交换区域：",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Swap Zones (uses default swap behaviour if none selected)",
       "Translated": "交换区 (如果未选择任何区域，则使用默认交换行为)",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No fates match the current filters.",
       "Translated": "没有命运与当前过滤器匹配。",
       "Context": "FateToolKitWindow.DrawContent",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Grind mode: ",
       "Translated": "研磨模式：",
       "Context": "FateToolKitWindow.DrawModeButton",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "\nEXPERIMENTAL (didn't get to test non-gemstones)",
       "Translated": "实验性 (未能测试非宝石)",
       "Context": "FateToolKitWindow.DrawModeButton",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Adds a context menu to items to loop through attaching and removing materia for the Getting Too Attached achievement",
       "Translated": "将上下文菜单添加到项目中，循环添加和移除材料，以实现 “过度附着” 的成就",
       "Context": "GettingTooAttached.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Various alerts for when a GM is nearby.",
       "Translated": "GM 在附近时的各种警报。",
       "Context": "GMAlert.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Upon GM Appearance",
       "Translated": "关于 GM 外观",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Send Toast Alert",
       "Translated": "发送 Toast 警报",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Send Chat Alert",
       "Translated": "发送聊天提醒",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Send Sound Alert",
       "Translated": "发送声音提醒",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Preview Beeps",
       "Translated": "预览哔哔声",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Beep Count",
       "Translated": "哔哔声计数",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Beep Duration",
       "Translated": "哔声持续时间",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Beep Frequency",
       "Translated": "哔哔声频率",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SliderInt"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Kill Game",
       "Translated": "杀死游戏",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Execute Commands",
       "Translated": "执行命令",
       "Context": "GMAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Appends a clickable icon to messages with a MapLinkPayload to relay them to other channels.",
       "Translated": "将可点击图标附加到具有 MapLinkPayload 的消息，以将其中继到其他通道。",
       "Context": "HuntRelayHelper.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Chat Channels",
       "Translated": "聊天频道",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Channels",
       "Translated": "通道",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Table"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Enable sending to this channel",
       "Translated": "启用发送至此频道",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Mark channel as \"local\"",
       "Translated": "将通道标记为 “本地”",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Don't repeat relays",
       "Translated": "不要重复继电器",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Don't send relays to the channel in which you clicked the relay payload.",
       "Translated": "请勿将继电器发送到您点击继电器负载的通道。",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Allow partial world matching",
       "Translated": "允许部分世界匹配",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This will allow matching shorthands of worlds (e.g. \"behe\" -> Behemoth) but may result in false positives.",
       "Translated": "这将允许匹配世界的缩写 (例如 “behe”-> Behemoth)，但可能会导致误报。",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remove <world> tags for Novice Network relays",
       "Translated": "移除新手网络中继的<world>标签",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Removes the <world> tag from your relays and any non-whitespace characters surrounding it, then trims any excess whitespace before sending to Novice Network.",
       "Translated": "从继电器中移除<world>标签及其周围的任何非空白字符，然后在发送到新手网络之前修剪任何多余的空白字符。",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Only send local hunts to local channels",
       "Translated": "仅将本地猎物发送至本地频道",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "If a hunt is detected as being off your home world, it will only be relayed to non-local channels.",
       "Translated": "如果一次狩猎被检测到离开你的家乡世界，它只会被转发到非本地频道。",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Assume blank worlds are local",
       "Translated": "假设空白世界是本地的",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "If the world is failed to be detected, assume it's meant for the local world.",
       "Translated": "如果世界未能被探测到，假设它是针对当地世界的。",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Chat Message Pattern",
       "Translated": "聊天消息模式",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Available tags: <world>, <type>, <flag>",
       "Translated": "可用标签:<world>、<type>、<lag>",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Relay Type Configuration",
       "Translated": "中继类型配置",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Format: ",
       "Translated": "格式：",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This is what will be sent in chat to replace the <type> tag.",
       "Translated": "这是将在聊天中发送的内容，用于替换<type>标签。",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Heuristics: ",
       "Translated": "启发法：",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "TypeHeuristics",
       "Translated": "类型启发法",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.InputText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "These are the comma separated heuristics to check against in the message to match to a type.\nThis supports regex if you surrouned the heuristic with \"/\"\nAll special text icons are converted to normal text automatically.",
       "Translated": "这些是在消息中要检查以匹配类型的逗号分隔启发式。\n如果你用 “/” 环绕启发式，这支持正则表达式。\n所有特殊文本图标都会自动转换为普通文本。",
       "Context": "HuntRelayHelper.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiComponents.HelpMarker"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Debug tools for use in hyperborea/firewall",
       "Translated": "用于 Hyperborea/防火墙的调试工具",
       "Context": "DebugTools.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Skips the 20 second countdown when logging out outside of a sanctuary. Skips inside duties.",
       "Translated": "在避难所外登出时跳过 20 秒倒计时。跳过内部职责。",
       "Context": "InstantLogout.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Calls the return function directly",
       "Translated": "直接调用返回函数",
       "Context": "InstantReturn.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Prevents tooltips from closing when you stop hovering the item if you hold ctrl.",
       "Translated": "防止工具提示在你按住 Ctrl 键停止悬停项目时关闭。",
       "Context": "KeepTooltipsAlive.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Adds a context menu entry to lookup a character on lalachievements",
       "Translated": "添加上下文菜单条目以在放屁上查找字符",
       "Context": "LalaLookup.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Forces the expert delivery window to show regardless of rank. Only in effect if you do not have expert delivery unlocked.",
       "Translated": "强制显示专家配送窗口，无论等级如何。只有在专家配送未解锁的情况下才有效。",
       "Context": "MaxGCRank.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Prevents being seen during follow quests (you can still be too far away).",
       "Translated": "防止在跟随任务过程中被发现 (可能仍然离得太远)。",
       "Context": "NoFailFollowQuests.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "If the confirm keybind would target the chat window, prevent it.",
       "Translated": "如果确认密钥绑定将针对聊天窗口，请阻止它。",
       "Context": "PreventConfirmTargetingChat.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Requeues for Crystalline Conflict when your registration was cancelled due to a map change.",
       "Translated": "当您的注册因地图变更而被取消时，水晶冲突的队列。",
       "Context": "ReQueueCC.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Adds a context menu item that will retrieve all materia from an item.",
       "Translated": "添加上下文菜单项，该项将从项中检索所有材质。",
       "Context": "RetrieveMateria.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Probably won't reset your config every update. Triggers on zone change.",
       "Translated": "可能不会每次更新都重置您的配置。区域更改的触发器。",
       "Context": "SimpleCurrencyAlert.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "CurrencyAlerts",
       "Translated": "货币警报",
       "Context": "SimpleCurrencyAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImRaii.Table"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Add Currency",
       "Translated": "添加货币",
       "Context": "SimpleCurrencyAlert.DrawConfig",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.AddCustomItemPopupButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Unlimited Tomestone",
       "Translated": "无限宝石",
       "Context": "SimpleCurrencyAlert.GetTomestoneDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Limited Tomestone",
       "Translated": "有限托姆斯通",
       "Context": "SimpleCurrencyAlert.GetTomestoneDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Discontinued Tomestone",
       "Translated": "不连续的 Tomestone",
       "Context": "SimpleCurrencyAlert.GetTomestoneDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Discontinued Crafters' Scrip",
       "Translated": "非连续工匠的手稿",
       "Context": "SimpleCurrencyAlert.GetSpecialBucketDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Levelling Crafters' Scrip",
       "Translated": "平衡工匠的剧本",
       "Context": "SimpleCurrencyAlert.GetSpecialBucketDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Discontinued Gatherers' Scrip",
       "Translated": "非连续的采集者脚本",
       "Context": "SimpleCurrencyAlert.GetSpecialBucketDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Levelling Gatherers' Scrip",
       "Translated": "调整收集者的手稿",
       "Context": "SimpleCurrencyAlert.GetSpecialBucketDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Capstone Crafters' Scrip",
       "Translated": "顶石工匠的手稿",
       "Context": "SimpleCurrencyAlert.GetSpecialBucketDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Capstone Gatherers' Scrip",
       "Translated": "顶石收集者的手稿",
       "Context": "SimpleCurrencyAlert.GetSpecialBucketDisplayName",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.CalcTextSize"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No alerts configured",
       "Translated": "未配置警报",
       "Context": "SimpleCurrencyAlert.DrawAlertList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColored"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Alert when under threshold",
       "Translated": "阈值以下时的警报",
       "Context": "SimpleCurrencyAlert.DrawAlertList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Alert when above threshold",
       "Translated": "超过阈值时发出警报",
       "Context": "SimpleCurrencyAlert.DrawAlertList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remove Alert",
       "Translated": "移除警报",
       "Context": "SimpleCurrencyAlert.DrawAlertList",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TooltipOnHover"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Translates system message timestamps in chat to your time zone",
       "Translated": "将聊天中的系统消息时间戳翻译到您的时区",
       "Context": "TimezoneTranslator.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Adds CharacterName@World to the window title.",
       "Translated": "将 CharacterName@World 添加到窗口标题中。",
       "Context": "WindowCharacterName.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Click on a WT duty to open the duty finder to it. Ctrl+click to queue into the duty semi-smartly.",
       "Translated": "单击一个 WT 任务以打开任务查找器。Ctrl+ 单击以半智能地排队完成任务。",
       "Context": "WondrousTailsClickToOpen.get_Description",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Lifestream",
       "Translated": "生命流",
       "Context": "LifestreamIPC.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Questionable",
       "Translated": "可疑",
       "Context": "QuestionableIPC.get_Name",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.TextColoredWrapped"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " of the required plugins for this option to work:",
       "Translated": "这个选项工作所需的插件：",
       "Context": "BaseConfigAttribute.DrawMissingIpcs",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.TextV"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Character Blacklist (",
       "Translated": "角色黑名单 (",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " excluded)",
       "Translated": "被排除)",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "minus",
       "Translated": "减号",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Exclude Current Character",
       "Translated": "排除当前字符",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "plus",
       "Translated": "+",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Remove Character Exclusion",
       "Translated": "删除角色排除",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "trash",
       "Translated": "垃圾",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Clear All",
       "Translated": "清除所有",
       "Context": "CharacterBlacklistConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.IconButton"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Requires: ",
       "Translated": "要求：",
       "Context": "EnumConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This option sends network/server requests. Use at your own risk.",
       "Translated": "此选项发送网络/服务器请求。自行承担使用风险。",
       "Context": "NetworkWarningAttribute..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Valid regex pattern",
       "Translated": "有效正则表达式模式",
       "Context": "StringConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.Icon"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Invalid regex pattern",
       "Translated": "无效正则表达式模式",
       "Context": "StringConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.Icon"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Items",
       "Translated": "项目",
       "Context": "StringListConfigAttribute.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGuiExtensions.DrawSection"
+      "Source": "ai:public-caiyun"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-10T05:48:56",
-  "imported": {
-    "archive": "uit-direct-2026-10-10T05-48-42-770Z-cc355e6d-2026-10-10T054856.json",
-    "accepted": 223,
-    "filled": 223,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 223 条 `Automaton` 的界面文字译文，已收为**独立译文包** `uit-packs/Automaton@user-11430a.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 223 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
