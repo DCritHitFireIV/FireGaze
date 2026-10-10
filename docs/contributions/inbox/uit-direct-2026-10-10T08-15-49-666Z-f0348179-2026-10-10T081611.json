@@ -1,0 +1,523 @@
+{
+  "issue": "direct-2026-10-10T08-15-49-666Z-f0348179",
+  "receivedAt": "2026-10-10 08:16:11",
+  "author": "匿名直传",
+  "plugin": "DeathRecap",
+  "fingerprint": "de6b7238f4716413",
+  "packFile": "DeathRecap@user-de6b72.json",
+  "accepted": 60,
+  "filled": 60,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "DeathRecap",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Open the death recap window",
+        "Translated": "打开死亡概述窗口",
+        "Context": "DeathRecapPlugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Death Recap Config",
+        "Translated": "死亡重现配置",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Capture Settings",
+        "Translated": "捕获设置",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Capture ",
+        "Translated": "捕获",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "On Death",
+        "Translated": "关于死亡",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Only in instances",
+        "Translated": "仅在实例中",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Disable in PvP",
+        "Translated": "在 PvP 中被禁用",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "General Settings",
+        "Translated": "一般设置",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Chat Message Type",
+        "Translated": "聊天消息类型",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Show chat tip",
+        "Translated": "显示聊天小贴士",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Keep Events for (sec)",
+        "Translated": "将事件保留 (秒)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Filter category of the \"Chat Message\" death notification.\n\"Debug\" will show up in all chat tabs regardless of configuration.\nNote that this will only affect the way the notification is displayed to you. They will never be visible to others.",
+        "Translated": "“聊天消息” 死亡通知的过滤类别。\n无论配置如何，“Debug” 都会出现在所有聊天选项卡中。\n请注意，这只会影响通知向您显示的方式。其他人永远不会看到它们。",
+        "Context": "ConfigWindow.ChatMessageTypeTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Prints the command in the chat to reopen the window the first time you close the Death Recap.",
+        "Translated": "在聊天中打印命令，以便在首次关闭死亡回顾时重新打开窗口。",
+        "Context": "ConfigWindow.ChatTipTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Will only show a death notification when in an instance (e.g. a Dungeon)",
+        "Translated": "只有在副本 (例如地下城) 中才会显示死亡通知",
+        "Context": "ConfigWindow.OnlyInInstancesTooltip",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Death Recap",
+        "Translated": "死亡回顾",
+        "Context": "DeathRecapWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Filter events",
+        "Translated": "过滤事件",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Row filters",
+        "Translated": "行过滤器",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Show damage",
+        "Translated": "显示损坏",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show healing",
+        "Translated": "显示愈合",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show debuffs",
+        "Translated": "显示 debuff",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show buffs",
+        "Translated": "显示 buffs",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Histogram Button",
+        "Translated": "直方图按钮",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Switch to histogram (experimental)",
+        "Translated": "切换到直方图 (实验)",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Switch to detailed view",
+        "Translated": "切换到详细视图",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Clear All Button",
+        "Translated": "清除所有按钮",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButton"
+      },
+      {
+        "Original": "Clear all events",
+        "Translated": "清除所有事件",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Are you sure?",
+        "Translated": "你确定吗？",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Yes",
+        "Translated": "是的",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "No",
+        "Translated": "不",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Configuration",
+        "Translated": "配置",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Deaths",
+        "Translated": "死亡",
+        "Context": "DeathRecapWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "[DeathRecap] Tip: You can reopen this window using /dr or /deathrecap",
+        "Translated": "【DeathRecap】提示：您可以使用/dr 或/deathRecap 重新打开此窗口。",
+        "Context": "DeathRecapWindow.OnClose",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Player",
+        "Translated": "玩家",
+        "Context": "DeathRecapWindow.DrawPlayerSelection",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Time",
+        "Translated": "时间",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Amount",
+        "Translated": "数量",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Ability",
+        "Translated": "能力",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Source",
+        "Translated": "来源",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "HP Before",
+        "Translated": "惠普之前",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Regen",
+        "Translated": "雨",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "DoT damage",
+        "Translated": "DoT 损害",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " Damage",
+        "Translated": "损害",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Critical Hit",
+        "Translated": "暴击",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Direct Hit (+25%)",
+        "Translated": "直接命中 +25%",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Parried (-20%)",
+        "Translated": "被格挡 (-20%)",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Blocked (-15%)",
+        "Translated": "被挡住 (-15%)",
+        "Context": "DeathRecapWindow.DrawCombatEventTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Healed for",
+        "Translated": "治愈了",
+        "Context": "DeathRecapWindow.DrawCombatHistogram",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "from",
+        "Translated": "来自",
+        "Context": "DeathRecapWindow.DrawCombatHistogram",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "by ",
+        "Translated": "作者",
+        "Context": "DeathRecapWindow.DrawCombatHistogram",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Took",
+        "Translated": "接受",
+        "Context": "DeathRecapWindow.DrawCombatHistogram",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "from damage over time effect.",
+        "Translated": "从时间效应的伤害中恢复。",
+        "Context": "DeathRecapWindow.DrawCombatHistogram",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Recovered",
+        "Translated": "恢复",
+        "Context": "DeathRecapWindow.DrawCombatHistogram",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "HP from healing over time effect.",
+        "Translated": "随着时间的推移，HP 的愈合效果。",
+        "Context": "DeathRecapWindow.DrawCombatHistogram",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Overkill by ",
+        "Translated": "过度杀伤",
+        "Context": "DeathRecapWindow.DrawHpColumn",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Show Death Recap (",
+        "Translated": "显示死亡概述 (",
+        "Context": "NotificationHandler.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Auto-attack",
+        "Translated": "自动攻击",
+        "Context": "CombatEventCapture.ProcessPacketActionEffectDetour",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " seconds ago",
+        "Translated": "几秒钟前",
+        "Context": "Death.get_Title",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "about a minute ago",
+        "Translated": "大约一分钟前",
+        "Context": "Death.get_Title",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": " minutes ago",
+        "Translated": "几分钟前",
+        "Context": "Death.get_Title",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "about an hour ago",
+        "Translated": "大约一小时前",
+        "Context": "Death.get_Title",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": " hours ago",
+        "Translated": "几小时前",
+        "Context": "Death.get_Title",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}

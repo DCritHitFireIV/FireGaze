@@ -1,0 +1,1094 @@
+{
+  "issue": "direct-2026-10-10T08-15-56-121Z-4582c9c7",
+  "receivedAt": "2026-10-10 08:16:11",
+  "author": "匿名直传",
+  "plugin": "Glamaholic",
+  "fingerprint": "111d8ab1a528ada8",
+  "packFile": "Glamaholic@user-111d8a.json",
+  "accepted": 128,
+  "filled": 128,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Glamaholic",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Folders can now be renamed through the right-click context menu.",
+        "Translated": "现在可以通过右键单击上下文菜单重新命名文件夹。",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Plates and folders can now be dragged and reordered manually, and automatic sorting has been removed.",
+        "Translated": "现在可以手动拖动盘子和文件夹并重新排序，自动排序已被移除。",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Improved third-party plugin support.",
+        "Translated": "改进的第三方插件支持。",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Valuable dyes are now factored into the item selection process when applying plates",
+        "Translated": "现在，在应用板材时，有价值的染料将被考虑进项目选择过程中。",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "-Previously, the selection process was all or nothing. It will now attempt to find a match with a valuable dye, or an item with any matching dye first",
+        "Translated": "以前，选择过程要么全部要么全无。现在，它将首先尝试寻找与有价值染料匹配的物品，或与任何匹配染料匹配的物品。",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Dyes on items already in the current plate will no longer be ovewritten and waste a dye",
+        "Translated": "已经在当前板上的物品上的染料将不再被覆盖，并且会浪费一种染料。",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Plates should now always fully apply and refresh on first try",
+        "Translated": "盘子现在应该始终完全应用，并在首次尝试时进行刷新",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "The '(Dye)' suffix is now present in clipboard exports for better interop with other plugins (thanks @SubaruYashiro)",
+        "Translated": "“(Dye)” 后缀现已出现在剪贴板导出中，以更好地与其他插件互操作 (感谢 @SubaruYashiro)",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Added folder selection to plate creation (thanks @firstmagic)",
+        "Translated": "为板创建添加了文件夹选择 (感谢 @firstmagic)",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "-'New Plate' button now allows picking a folder to create the plate in",
+        "Translated": "-‘New Plate’ 按钮现在允许选择一个文件夹来创建在",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "-Clipboard and EC imports now allow picking a folder to create the plate in",
+        "Translated": "-Clipboard 和 EC 导入现在允许选择一个文件夹来创建在",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "-TryOn/Examine dropdowns now allow picking a folder to create the plate in",
+        "Translated": "-TryOn/Examine 下拉列表现在允许选择一个文件夹来创建在",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "-You can now move plates into folders via the right-click context menu in the list",
+        "Translated": "您现在可以通过右键单击列表中的上下文菜单将磁盘移动到文件夹中。",
+        "Context": "Changelog..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Toggle visibility of the ",
+        "Translated": "切换可见性",
+        "Context": "Commands..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": " window",
+        "Translated": "窗口",
+        "Context": "Commands..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Unnamed Folder",
+        "Translated": "未命名文件夹",
+        "Context": "FolderNode..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Unnamed Plate",
+        "Translated": "未命名的板",
+        "Context": "PlateNode.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Main Hand",
+        "Translated": "主手",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Off Hand",
+        "Translated": "随手",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Head",
+        "Translated": "头部",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Body",
+        "Translated": "身体",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hands",
+        "Translated": "手",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Legs",
+        "Translated": "腿",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Feet",
+        "Translated": "脚",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Ears",
+        "Translated": "耳朵",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Neck",
+        "Translated": "脖子",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Wrists",
+        "Translated": "手腕",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Right Ring",
+        "Translated": "右戒指",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Left Ring",
+        "Translated": "左环",
+        "Context": "PlateSlotExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Glamaholic",
+        "Translated": "格拉玛霍利克",
+        "Context": "Plugin.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Alternative Finder: ",
+        "Translated": "替代访问器：",
+        "Context": "AlternativeFinder.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Click: link to chat",
+        "Translated": "点击：链接到聊天",
+        "Context": "AlternativeFinder.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Right-click: try on",
+        "Translated": "右键点击：继续尝试",
+        "Context": "AlternativeFinder.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "New",
+        "Translated": "新增",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Untitled Plate",
+        "Translated": "无标题板",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Import from Clipboard",
+        "Translated": "从剪贴板导入",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "No valid plate data in clipboard.",
+        "Translated": "剪贴板上无有效车牌数据。",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "To Root",
+        "Translated": "致 Root",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "To ",
+        "Translated": "致：",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Eorzea Collection",
+        "Translated": "Eorzea 系列",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Import from URL",
+        "Translated": "从 URL 导入",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Try On (Glamourer)",
+        "Translated": "Try On(Glamourer)",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Mass Import",
+        "Translated": "大规模导入",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Waiting for URL to be copied...",
+        "Translated": "等待 URL 被复制......",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Show plate editor menu",
+        "Translated": "显示板编辑器菜单",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Show examine window menu",
+        "Translated": "显示检查窗口菜单",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Show try on menu",
+        "Translated": "在菜单中显示尝试",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Show Ko-fi button",
+        "Translated": "显示 Ko-fi 按钮",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Troubleshooting mode",
+        "Translated": "故障排除模式",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Help",
+        "Translated": "帮助",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "View Changelog",
+        "Translated": "查看变更日志",
+        "Context": "MainInterface.DrawMenuBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Search...",
+        "Translated": "搜索...",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "New Folder",
+        "Translated": "新文件夹",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Folder Name:",
+        "Translated": "文件夹名称：",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Create",
+        "Translated": "创建",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Folder:",
+        "Translated": "文件夹：",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Primary Dye",
+        "Translated": "初级染料",
+        "Context": "MainInterface.DrawDyePopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "None",
+        "Translated": "无",
+        "Context": "MainInterface.DrawDyePopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Secondary Dye",
+        "Translated": "次级染料",
+        "Context": "MainInterface.DrawDyePopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Only show items in the armoire/dresser",
+        "Translated": "仅显示衣柜/梳妆台中的物品",
+        "Context": "MainInterface.DrawItemPopup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "None (keep existing)",
+        "Translated": "无 (保持存在)",
+        "Context": "MainInterface.DrawItemPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "None (remove existing)",
+        "Translated": "无 (移除现有物品)",
+        "Context": "MainInterface.DrawItemPopup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "preview ",
+        "Translated": "预览",
+        "Context": "MainInterface.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InvisibleButton"
+      },
+      {
+        "Original": "\n(no primary dye)",
+        "Translated": "(无原色染料)",
+        "Context": "MainInterface.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "\n\n* Left click to copy name to clipboard",
+        "Translated": "* 左键点击将名称复制到剪贴板",
+        "Context": "MainInterface.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Copied '",
+        "Translated": "已复制",
+        "Context": "MainInterface.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "' to clipboard.",
+        "Translated": "'到剪贴板。",
+        "Context": "MainInterface.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "plate item edit ",
+        "Translated": "板件编辑",
+        "Context": "MainInterface.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "plate item dye ",
+        "Translated": "板件染色",
+        "Context": "MainInterface.DrawIcon",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Apply",
+        "Translated": "应用",
+        "Context": "MainInterface.DrawPlateButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Edit",
+        "Translated": "编辑",
+        "Context": "MainInterface.DrawPlateButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Share",
+        "Translated": "共享",
+        "Context": "MainInterface.DrawPlateButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Export as Text",
+        "Translated": "导出为文本",
+        "Context": "MainInterface.DrawPlateButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "move-to-folder-popup",
+        "Translated": "移动到文件夹弹出窗口",
+        "Context": "MainInterface.DrawPlateButtons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Tags (",
+        "Translated": "标签 (",
+        "Context": "MainInterface.DrawPlateTags",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Input a tag and press Enter",
+        "Translated": "输入一个标签，然后按回车键",
+        "Context": "MainInterface.DrawPlateTags",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "plate-rename",
+        "Translated": "板重新命名",
+        "Context": "MainInterface.DrawPlateDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Press Enter to save.",
+        "Translated": "按回车键保存。",
+        "Context": "MainInterface.DrawPlateDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Click an item to edit it. Right-click to dye.",
+        "Translated": "点击一个项目进行编辑。右键点击染色。",
+        "Context": "MainInterface.DrawPlateDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Save",
+        "Translated": "保存",
+        "Context": "MainInterface.DrawPlateDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Customize",
+        "Translated": "自定义",
+        "Context": "MainInterface.DrawRightPanel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Fill Empty Slots with New Emperor",
+        "Translated": "用新皇帝填补空白",
+        "Context": "MainInterface.DrawRightPanel",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Fills empty slots with the New Emperor set.",
+        "Translated": "用新皇帝套装填满空格。",
+        "Context": "MainInterface.DrawRightPanel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Revert",
+        "Translated": "逆转",
+        "Context": "MainInterface.DrawRightPanel",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Fill empty slots with New Emperor for Try on & Apply",
+        "Translated": "使用 “新皇帝” 填补空白插槽，试用和应用",
+        "Context": "MainInterface.DrawRightPanel",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Does not modify the glamour itself!\n\nIf enabled, empty slots will be filled with the New Emperor set when tried on or applied to plates.",
+        "Translated": "这并不会改变魅力本身！\n\n如果启用，在尝试使用或应用于盘片时，空白槽位将被新皇设置填充。",
+        "Context": "MainInterface.DrawRightPanel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Hover to view dyes (click to copy)",
+        "Translated": "悬停查看染料 (点击复制)",
+        "Context": "MainInterface.DrawDyeListLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Copied to clipboard!",
+        "Translated": "复制到剪贴板！",
+        "Context": "MainInterface.DrawDyeListLabel",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Warnings (",
+        "Translated": "警告 (",
+        "Context": "MainInterface.DrawWarnings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Eorzea Collection Mass Import",
+        "Translated": "鄂尔茨亚集团大规模进口",
+        "Context": "MainInterface.DrawMassImportWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Target:",
+        "Translated": "目标：",
+        "Context": "MainInterface.DrawMassImportWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Revert Glamourer",
+        "Translated": "恢复魅力",
+        "Context": "MainInterface.DrawMassImportWindow",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Importing...",
+        "Translated": "进口...",
+        "Context": "MainInterface.DrawMassImportWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Copy an Eorzea Collection URL to import it.",
+        "Translated": "复制 Eorzea Collection URL 以导入它。",
+        "Context": "MainInterface.DrawMassImportWindow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Close",
+        "Translated": "关闭",
+        "Context": "MainInterface.DrawMassImportWindow",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "What's New in Glamaholic",
+        "Translated": "Glamholic 的新功能",
+        "Context": "MainInterface.DrawChangelog",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "No new changes.",
+        "Translated": "没有新变化。",
+        "Context": "MainInterface.DrawChangelog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Recent changes since you last opened Glamaholic",
+        "Translated": "自从上次打开 Glamaholic 以来的最新变化",
+        "Context": "MainInterface.DrawChangelog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Version ",
+        "Translated": "版本",
+        "Context": "MainInterface.DrawChangelog",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Moving '",
+        "Translated": "移动",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "confirm-delete-plate-",
+        "Translated": "确认 - 删除 - 板-",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Delete this plate? This cannot be undone.",
+        "Translated": "删除这个板？这是无法撤销的。",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Moving folder '",
+        "Translated": "移动文件夹",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Delete Folder (and all contents)",
+        "Translated": "删除文件夹 (和所有内容)",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Delete Folder (move contents out)",
+        "Translated": "删除文件夹 (将内容移出)",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "confirm-delete-folder-",
+        "Translated": "确认 - 删除 - 文件夹-",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Delete this folder and ALL its contents? This cannot be undone.",
+        "Translated": "删除此文件夹及其所有内容？这是无法撤销的。",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Delete this folder and move all contents out?",
+        "Translated": "删除此文件夹并移除所有内容？",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "rename-folder-",
+        "Translated": "重命名文件夹",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Rename Folder:",
+        "Translated": "重新命名文件夹：",
+        "Context": "MainInterface.DrawPlateList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Import failed.. copy a new link to try again",
+        "Translated": "导入失败...复制新链接再试",
+        "Context": "ImportEorzeaCollection.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Imported ",
+        "Translated": "导入",
+        "Context": "ImportEorzeaCollection.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "glamaholic-editor-helper",
+        "Translated": "魅力全能编辑助手",
+        "Context": "EditorHelper.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Open ",
+        "Translated": "打开",
+        "Context": "EditorHelper.DrawDropdown",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "glamaholic-helper-examine",
+        "Translated": "Glamaholic-helper-检查",
+        "Context": "ExamineHelper.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "No folders created yet.",
+        "Translated": "尚未创建文件夹。",
+        "Context": "HelperUtil.DrawFolderMenuItems",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Create glamour plate",
+        "Translated": "创建魅力板",
+        "Context": "HelperUtil.DrawCreatePlateMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "current-name",
+        "Translated": "当前名称",
+        "Context": "HelperUtil.DrawCreatePlateMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Select a folder, enter a name and then press then <Enter> to create a new plate, or choose a plate below to overwrite.",
+        "Translated": "选择一个文件夹，输入名称，然后按<Enter>创建一个新的板，或者选择下面的一个板进行覆盖。",
+        "Context": "HelperUtil.DrawCreatePlateMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Hold Control and click to overwrite.",
+        "Translated": "按住 Control 键点击以覆盖。",
+        "Context": "HelperUtil.DrawCreatePlateMenu",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "glamaholic-helper-try-on",
+        "Translated": "魅力 - 帮助 - 尝试 - 继续",
+        "Context": "TryOnHelper.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Try on Glamourer",
+        "Translated": "试试 Glamourer",
+        "Context": "TryOnHelper.DrawDropdown",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Try on Glamourer - New Emperor",
+        "Translated": "试试 Glamourer——新皇帝",
+        "Context": "TryOnHelper.DrawDropdown",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "[Glamaholic] No valid Eorzea Collection URL provided or found in clipboard",
+        "Translated": "[Glamaholic] 剪贴板中未提供或找到有效的 Eorzea Collection URL",
+        "Context": "Glamourer.TryOnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Try on an EC glamour using Glamourer, link can be provided in the command or in the clipboard",
+        "Translated": "尝试使用 Glamourer 的 EC 魅力，链接可以在命令或剪贴板中提供。",
+        "Context": "Glamourer.RefreshStatus",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "[Glamaholic] Failed to import glamour from Eorzea Collection URL, check /xllog for more information.",
+        "Translated": "[Glamaholic] 无法从 Eorzea Collection URL 导入魅力，请查看/xllog 了解更多信息。",
+        "Context": "TryOnCommand.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
