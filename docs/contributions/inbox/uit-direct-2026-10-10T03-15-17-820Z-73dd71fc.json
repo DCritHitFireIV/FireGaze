@@ -1,1 +1,56 @@
-{"type":"uit-contribution","plugin":"AutoPillion","kinds":["free"],"entries":[{"Original":"AutoPillion Config","Translated":"AutoPillion 配置","Context":"PluginUI.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Seconds to wait before trying to\nauto-pillion after dismounting:","Translated":"在尝试之前需要等待几秒钟\n下车后的自动炮塔：","Context":"PluginUI.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Save","Translated":"存储","Context":"PluginUI.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Only mount friends","Translated":"只骑朋友","Context":"PluginUI.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "AutoPillion",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "AutoPillion Config",
+      "Translated": "AutoPillion 配置",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Seconds to wait before trying to\nauto-pillion after dismounting:",
+      "Translated": "在尝试之前需要等待几秒钟\n下车后的自动炮塔：",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Save",
+      "Translated": "存储",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Only mount friends",
+      "Translated": "只骑朋友",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-10T03:15:29",
+  "imported": {
+    "archive": "uit-direct-2026-10-10T03-15-17-820Z-73dd71fc-2026-10-10T031529.json",
+    "accepted": 4,
+    "filled": 4,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 4 条 `AutoPillion` 的界面文字译文，已收为**独立译文包** `uit-packs/AutoPillion@user-030c41.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 4 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}

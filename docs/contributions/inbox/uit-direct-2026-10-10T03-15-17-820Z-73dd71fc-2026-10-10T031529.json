@@ -1,0 +1,59 @@
+{
+  "issue": "direct-2026-10-10T03-15-17-820Z-73dd71fc",
+  "receivedAt": "2026-10-10 03:15:29",
+  "author": "匿名直传",
+  "plugin": "AutoPillion",
+  "fingerprint": "030c41427b0ccc82",
+  "packFile": "AutoPillion@user-030c41.json",
+  "accepted": 4,
+  "filled": 4,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "AutoPillion",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "AutoPillion Config",
+        "Translated": "AutoPillion 配置",
+        "Context": "PluginUI.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Seconds to wait before trying to\nauto-pillion after dismounting:",
+        "Translated": "在尝试之前需要等待几秒钟\n下车后的自动炮塔：",
+        "Context": "PluginUI.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Save",
+        "Translated": "存储",
+        "Context": "PluginUI.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Only mount friends",
+        "Translated": "只骑朋友",
+        "Context": "PluginUI.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
