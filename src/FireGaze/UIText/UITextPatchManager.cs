@@ -225,6 +225,57 @@ internal sealed class UITextPatchManager
     /// </summary>
     public bool HasBackup(InstalledPluginEntry entry) => this.LoadStateOrAdopt(entry)?.HasBackup == true;
 
+    public int FunctionalRepairCount(InstalledPluginEntry entry)
+    {
+        var state = this.LoadStateOrAdopt(entry);
+        if (state is null) return 0;
+        var files = UITextRules.ResolveCompanions(entry.DLLPath, entry.InternalName);
+        var count = 0;
+        foreach (var path in files)
+        {
+            var previous = state.EffectiveFiles.FirstOrDefault(f => f.HasBackup
+                && Path.GetFileName(f.Path).Equals(Path.GetFileName(path), StringComparison.OrdinalIgnoreCase)
+                && !string.IsNullOrEmpty(f.PatchedHash)
+                && UITextPatchStore.HashOf(path).Equals(f.PatchedHash, StringComparison.OrdinalIgnoreCase));
+            if (previous is null) continue;
+            count += UITextMaintenance.FunctionalRepairs(previous.BackupPath!, path, previous.SourceHash, previous.PatchedHash!);
+        }
+        return count;
+    }
+
+    public string MaintenanceSourceSignature(InstalledPluginEntry entry) => UITextMaintenance.FileSignature(
+        this.ExtractionSourceOf(entry, out _, out _));
+
+    /// <summary>Checks can acquire a verified original baseline, but never rewrite installed plugin files.</summary>
+    public async Task<(UITextExtraction Extraction, string Note)> ExtractWithRecoveryAsync(InstalledPluginEntry entry, CancellationToken cancel = default)
+    {
+        cancel.ThrowIfCancellationRequested();
+        var pack = this.packs.Load(entry.InternalName);
+        var state = this.LoadStateOrAdopt(entry);
+        var invalidBackup = state?.EffectiveFiles.Any(f => File.Exists(f.Path)
+            && string.Equals(UITextPatchStore.HashOf(f.Path), f.PatchedHash, StringComparison.OrdinalIgnoreCase)
+            && (!f.HasBackup || !string.Equals(UITextPatchStore.HashOf(f.BackupPath!), f.SourceHash, StringComparison.OrdinalIgnoreCase))) == true;
+        var guard = invalidBackup ? (new UITextExtraction { Error = "需要恢复原始包" }, string.Empty)
+            : this.ExtractWithGuard(entry, allowRecovery: false);
+        if (UITextRules.IsDoNotLocalize(entry.InternalName)) return guard;
+        if (!invalidBackup && guard.Item1.Error is null && !UITextMaintenance.SuspectFunctionalTranslations(pack, guard.Item1))
+        {
+            try { _ = this.FunctionalRepairCount(entry); return guard; }
+            catch (IOException) { /* Reacquire originals when an old record cannot be trusted. */ }
+        }
+        if (string.IsNullOrEmpty(entry.DLLPath) || !File.Exists(entry.DLLPath)) return guard;
+        Plugin.Log?.Information("[内部文本] {Name}：正在自动补齐原始包并核对构建", entry.InternalName);
+        var recovery = new UITextOriginalRecovery(Path.Combine(this.plugin.DurableDataDirectory, "uit-recovery"), gate: this.applyGate);
+        await recovery.RecoverAsync(entry, this.store, cancel).ConfigureAwait(false);
+        cancel.ThrowIfCancellationRequested();
+        var sources = this.ExtractionSourceOf(entry, out _, out var searchDirectories);
+        var recovered = UIStringExtractor.ExtractMany(sources, searchDirectories);
+        if (recovered.Error is not null)
+            throw new UITextRecoveryPendingException();
+        _ = this.FunctionalRepairCount(entry);
+        return (recovered, "已自动补齐对应版本的原始包，安全修复已准备好");
+    }
+
     /// <summary>
     ///     重新抽取该对哪几份 DLL：主程序集 + 伴生程序集；其中「盘上是我们自己的补丁」的改读它的原始备份。
     ///     否则抽到的是 <c>译文###原文</c> 或中文资源值，会把包里好好的条目当成「原文没了」整批清掉。
@@ -317,13 +368,13 @@ internal sealed class UITextPatchManager
     ///     失败时把这次新建的备份清掉——不然会留下一堆「当前文件的快照」（既不是原始件，又会被后来者当成备份），
     ///     2026-10-02 ActionTimelineReborn / DailyRoutines 实测就是这么被坑的。
     /// </remarks>
-    public (bool Ok, string Message) Apply(InstalledPluginEntry entry, bool allowRecovery = true)
+    public (bool Ok, string Message) Apply(InstalledPluginEntry entry, bool allowRecovery = true, bool safetyRepair = false)
     {
         lock (this.applyGate)
         {
             var backupsBefore = this.SnapshotBackupFiles();
             var originalsBefore = this.store.SnapshotOriginals();
-            var (ok, message) = this.ApplyCore(entry, allowRecovery, out var statePersisted);
+            var (ok, message) = this.ApplyCore(entry, allowRecovery, out var statePersisted, safetyRepair);
 
             // 清理本次新建、又没人引用的备份：失败时要清（不然留一堆「当前文件的快照」）；
             // 成功时也要清——被跳过的伴生程序集（一条都对不上）同样在备份阶段留了一份，
@@ -345,7 +396,7 @@ internal sealed class UITextPatchManager
     }
 
     /// <summary>打补丁的主体（失败清理包在外面，见 <see cref="Apply" />）。<paramref name="statePersisted" /> = 补丁状态是否写盘成功。</summary>
-    private (bool Ok, string Message) ApplyCore(InstalledPluginEntry entry, bool allowRecovery, out bool statePersisted)
+    private (bool Ok, string Message) ApplyCore(InstalledPluginEntry entry, bool allowRecovery, out bool statePersisted, bool safetyRepair = false)
     {
         statePersisted = false;
         if (UITextRules.IsDoNotLocalize(entry.InternalName))
@@ -362,6 +413,11 @@ internal sealed class UITextPatchManager
         var pluginDirectory = Path.GetDirectoryName(dllPath) ?? string.Empty;
 
         var existing = this.LoadStateOrAdopt(entry);
+        if (safetyRepair)
+        {
+            try { _ = this.FunctionalRepairCount(entry); }
+            catch (Exception e) { return (false, e.GetBaseException().Message); }
+        }
         var files = UITextRules.ResolveCompanions(dllPath, entry.InternalName);
         if (files.Count == 0)
         {
@@ -387,7 +443,7 @@ internal sealed class UITextPatchManager
             backupLooksPatched = backupPaths.Count > 0 && MayContainOurPatch(backupPaths, pack);
         }
 
-        if (pack.TranslatedCount > 0
+        if (!safetyRepair && pack.TranslatedCount > 0
             && (existing is null || backupLooksPatched)
             && MayContainOurPatch(files, pack)
             && this.TryRebuildPatchRecord(entry, files, pack, existing?.EffectiveFiles, null, out _, out var preRecoveryTmp, out var preRecoveryNote))
@@ -457,6 +513,7 @@ internal sealed class UITextPatchManager
         var patchedTotal = 0;
         var pdbDropped = false;
         var placeholderSkipped = 0;
+        var functionalIdentifierSkipped = 0;
         var perFileMissing = new List<IReadOnlyCollection<string>>();
         foreach (var fileState in fileStates)
         {
@@ -470,7 +527,8 @@ internal sealed class UITextPatchManager
                     newPath,
                     pack,
                     entry.Version,
-                    includeAmbiguous: this.plugin.Config.UITextTranslateGreyList);
+                    includeAmbiguous: this.plugin.Config.UITextTranslateGreyList,
+                    allowEmptyPatch: safetyRepair);
             }
             catch (Exception e)
             {
@@ -525,6 +583,7 @@ internal sealed class UITextPatchManager
 
             staged.Add((fileState, newPath));
             patchedTotal += outcome.PatchedTotal;
+            functionalIdentifierSkipped += outcome.FunctionalIdentifierSkipped;
             perFileMissing.Add(outcome.Missing);
         }
 
@@ -677,6 +736,10 @@ internal sealed class UITextPatchManager
         this.store.PublishManifest(entry.InternalName, entry.Version, newState.PatchedAt, patchedTotal, stateFiles, pluginDirectory);
 
         var message = $"已写入 {patchedTotal} 处译文";
+        if (functionalIdentifierSkipped > 0)
+        {
+            message += $"（保留了 {functionalIdentifierSkipped} 条插件 / IPC 标识符）";
+        }
         if (pdbDropped)
         {
             // B-11：降级不能只写日志，界面上也要能看见（2026-10-03 复审 P3-b）
@@ -747,7 +810,7 @@ internal sealed class UITextPatchManager
     ///     打补丁又匹配不上；2026-10-02 AbilityAnts 实测）。
     ///     体检不过时改用原始备份重抽；没有备份或仍不过就返回带 Error 的结果（流程停下，不写包）。
     /// </remarks>
-    public (UITextExtraction Extraction, string Note) ExtractWithGuard(InstalledPluginEntry entry)
+    public (UITextExtraction Extraction, string Note) ExtractWithGuard(InstalledPluginEntry entry, bool allowRecovery = true)
     {
         if (UITextRules.IsDoNotLocalize(entry.InternalName))
         {
@@ -763,6 +826,9 @@ internal sealed class UITextPatchManager
         {
             return (extraction, note);
         }
+
+        if (!allowRecovery)
+            return (new UITextExtraction { Error = "需要自动补齐原始插件包" }, note);
 
         var state = this.LoadStateOrAdopt(entry);
         var backups = new List<string>();
@@ -1455,9 +1521,15 @@ internal sealed class UITextPatchManager
     /// <summary>
     ///     写补丁 + 自动重载：「应用汉化」就调它——重载是可合并的中间步骤，不单独给用户看。
     /// </summary>
-    public async Task<(bool Ok, string Message)> ApplyAndReloadAsync(InstalledPluginEntry entry)
+    public async Task<(bool Ok, string Message)> ApplyAndReloadAsync(InstalledPluginEntry entry, bool safetyRepair = false)
     {
-        var (ok, message) = await Task.Run(() => this.Apply(entry)).ConfigureAwait(false);
+        try
+        {
+            var guard = await Task.Run(() => this.ExtractWithRecoveryAsync(entry)).ConfigureAwait(false);
+            if (guard.Extraction.Error is { } error) return (false, error);
+        }
+        catch (UITextRecoveryPendingException e) { return (false, e.Message); }
+        var (ok, message) = await Task.Run(() => this.Apply(entry, allowRecovery: !safetyRepair, safetyRepair: safetyRepair)).ConfigureAwait(false);
         if (!ok)
         {
             ActivityLog.Error("应用汉化", $"{entry.InternalName}：{message}");

@@ -257,8 +257,13 @@ ROLE_RANK = {"UI": 0, "Ambiguous": 1, "Excluded": 2}
 
 
 def merge_probe_entries(lists: list[list[dict]], file_names: list[str]) -> list[dict]:
-    """与插件端 ExtractMany 同口径：同原文取更强判定，PreserveID 取或，多文件给 Context 加文件名前缀。"""
+    """与插件端 ExtractMany 同口径：同原文取更强判定，PreserveID 取或，多文件给 Context 加文件名前缀。
+
+    插件 / IPC 标识符（IsFunctionalIdentifier）一旦出现即取胜：同一原文在另一个文件里只是
+    界面文字时也不得进候选——与插件端 ExtractMany 的「标识优先」一致（2026-10-10 补）。
+    """
     merged: dict[str, dict] = {}
+    identity: set[str] = set()
     multi = len(lists) > 1
     for index, items in enumerate(lists):
         tag = f"[{os.path.splitext(file_names[index])[0]}] "
@@ -266,6 +271,8 @@ def merge_probe_entries(lists: list[list[dict]], file_names: list[str]) -> list[
             original = raw.get("Original") or ""
             if not original:
                 continue
+            if raw.get("IsFunctionalIdentifier"):
+                identity.add(original)
             item = dict(raw)
             if multi and not (item.get("Context") or "").startswith(tag):
                 item["Context"] = tag + (item.get("Context") or "")
@@ -278,6 +285,11 @@ def merge_probe_entries(lists: list[list[dict]], file_names: list[str]) -> list[
             if ROLE_RANK.get(item.get("Role"), 9) < ROLE_RANK.get(old.get("Role"), 9):
                 item["PreserveID"] = bool(item.get("PreserveID") or old.get("PreserveID"))
                 merged[original] = item
+    for original in identity:
+        if original in merged:
+            merged[original]["Role"] = "Excluded"
+            merged[original]["Reason"] = "插件 / IPC 标识符（翻译或反向还原会破坏插件识别）"
+            merged[original]["IsFunctionalIdentifier"] = True
     return list(merged.values())
 
 

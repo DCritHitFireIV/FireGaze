@@ -15,13 +15,16 @@
   </ItemGroup>
 
   <!-- 抽取器只有一份实现：插件里那份，这里直接源码编译进来，保证探针和插件行为一致。
-       只收「不依赖 Dalamud / 插件本体」的纯逻辑文件；带 Plugin.Log 的那些靠 fgtest 覆盖。 -->
+       只收「不依赖 Dalamud / 插件本体」的纯逻辑文件；Plugin.Log 由 ProbeStubs.cs 提供空实现。 -->
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/Internal/EmbeddedPdb.cs" LinkBase="Internal" />
     <Compile Include="../../src/FireGaze/UIText/UIStringExtractor.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UICallSemantics.cs" LinkBase="UIText" />
-    <Compile Include="../../src/FireGaze/UIText/UITextModels.cs" LinkBase="UIText" />
+    <Compile Include="../../src/FireGaze/UIText/UiTextModels.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UITextRules.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UITextLocalizationFiles.cs" LinkBase="UIText" />
+    <Compile Include="../../src/FireGaze/UIText/UITextJSONResources.cs" LinkBase="UIText" />
+    <Compile Include="../../src/FireGaze/UIText/UITextKinds.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UITextText.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UITextPack.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UITextPatcher.cs" LinkBase="UIText" />

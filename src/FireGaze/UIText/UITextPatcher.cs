@@ -63,6 +63,9 @@ internal sealed class UITextPatchOutcome
     /// <summary>占位符对不上、被拦下没写进 DLL 的条数（手工改 / 导入的译文也走这道闸，2026-10-03 评审 B-10）。</summary>
     public int PlaceholderSkipped { get; set; }
 
+    /// <summary>Pack entries blocked because current IL uses them as plugin/IPC identities.</summary>
+    public int FunctionalIdentifierSkipped { get; set; }
+
     public bool Ok => this.Error is null;
 }
 
@@ -94,7 +97,8 @@ internal static class UITextPatcher
         UITextPack pack,
         string? pluginVersion = null,
         IReadOnlyList<string>? searchDirectories = null,
-        bool includeAmbiguous = false)
+        bool includeAmbiguous = false,
+        bool allowEmptyPatch = false)
     {
         var outcome = new UITextPatchOutcome();
         var map = new Dictionary<string, UITextPackEntry>(StringComparer.Ordinal);
@@ -175,7 +179,7 @@ internal static class UITextPatcher
         }
 
         outcome.Candidates = map.Count + resourceMap.Count + attributeMap.Count;
-        if (outcome.Candidates == 0)
+        if (outcome.Candidates == 0 && !allowEmptyPatch)
         {
             var total = pack.Entries.Count + pack.Resources.Count + pack.Attributes.Count;
             if (total == 0)
@@ -202,6 +206,23 @@ internal static class UITextPatcher
         {
             using (var module = UIStringExtractor.LoadModule(sourcePath, searchDirectories))
             {
+                // Pack roles can be stale or come from another localized fork. Current IL is authoritative.
+                var identities = UIStringExtractor.FunctionalIdentifiers(module);
+                foreach (var identity in identities)
+                {
+                    if (map.Remove(identity))
+                    {
+                        seen.Add(identity);
+                        outcome.FunctionalIdentifierSkipped++;
+                    }
+                }
+
+                if (map.Count + resourceMap.Count + attributeMap.Count == 0 && !allowEmptyPatch)
+                {
+                    outcome.Error = "译文只命中了插件 / IPC 标识符，为保留插件识别功能，没有写入。";
+                    return outcome;
+                }
+
                 // ① 内嵌本地化资源（.resx / ResourceManager）：按「容器 + key」改值。
                 //    只动主程序集的内嵌容器：官方 zh 卫星优先（ResourceManager 的查找顺序），
                 //    我们只负责把它没覆盖的中性资源补上。
@@ -257,7 +278,7 @@ internal static class UITextPatcher
                     }
                 }
 
-                if (outcome.PatchedTotal == 0)
+                if (outcome.PatchedTotal == 0 && !allowEmptyPatch)
                 {
                     // NoMatch：盘上可能已经是我们的旧补丁（记录丢了）——调用方据此做一次自愈重试，见 UITextPatchManager.Apply
                     outcome.NoMatch = true;
@@ -396,6 +417,7 @@ internal static class UITextPatcher
         {
             using (var module = UIStringExtractor.LoadModule(sourcePath, searchDirectories))
             {
+                var identities = UIStringExtractor.FunctionalIdentifiers(module);
                 foreach (var type in module.GetTypes())
                 {
                     foreach (var method in type.Methods)
@@ -408,6 +430,11 @@ internal static class UITextPatcher
                         foreach (var instruction in method.Body.Instructions)
                         {
                             if (instruction.OpCode.Code != Code.Ldstr || instruction.Operand is not string literal)
+                            {
+                                continue;
+                            }
+
+                            if (identities.Contains(literal))
                             {
                                 continue;
                             }

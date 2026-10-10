@@ -98,8 +98,8 @@ def display_part(literal: str) -> str:
     return literal.split("###", 1)[0]
 
 
-def export_pack(pack: dict) -> tuple[dict | None, int, int]:
-    """本机包 → 库包；返回 (库包或 None, 因已是中文而跳过的条数, 因本机标了不翻而跳过的条数)。
+def export_pack(pack: dict) -> tuple[dict | None, int, int, int, int]:
+    """本机包 → 库包；返回 (库包或 None, 已是中文跳过的条数, 本机不翻跳过的条数, 自动排除收回数, 标识符跳过的条数)。
 
     已经是中文的（含原生「中文###ID」标签）不导出：它们不需要翻译，翻出来的也只是噪声
     （2026-10-02 扫出 AetherBlackbox / ARSR / ArmoireButler 一批）。
@@ -107,16 +107,22 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
     不该随库外溢——否则会把图标资源名 / 缓存 id 这类不该翻的条目教给别人。
     **例外（同日追加）**：系统「自动排除」的条目照常导出——它标的是「已不在新一轮抽取的候选里」，
     最常见成因是「这条已经翻好并打进了 DLL」，正是库最该收的译文。
+    **标识符不导出（2026-10-10）**：Role=Excluded 是插件 1.4.0.17 起对插件 / IPC 标识符的
+    判定——它们可能同时画在界面上，但翻出去会破坏插件识别，一条都不进库。
     """
     skipped_chinese = 0
     skipped_local = 0
     recovered_auto = 0
+    skipped_identities = 0
     skipped_set = set(pack.get("skipped") or [])
     skipped_res_set = set(pack.get("skippedResources") or [])
     skipped_attr_set = set(pack.get("skippedAttributes") or [])
     entries = []
     for item in pack.get("entries") or []:
         if not translated(item) or not (item.get("Original") or ""):
+            continue
+        if (item.get("Role") or "") == "Excluded":
+            skipped_identities += 1
             continue
         if item["Original"] in skipped_set:
             if is_auto_skipped(item):
@@ -183,7 +189,7 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
         )
 
     if not entries and not resources and not attributes:
-        return None, skipped_chinese, skipped_local, recovered_auto
+        return None, skipped_chinese, skipped_local, recovered_auto, skipped_identities
 
     meta = pack.get("_meta") or {}
     library_pack = {
@@ -197,7 +203,7 @@ def export_pack(pack: dict) -> tuple[dict | None, int, int]:
         "resources": resources,
         "attributes": attributes,
     }
-    return library_pack, skipped_chinese, skipped_local, recovered_auto
+    return library_pack, skipped_chinese, skipped_local, recovered_auto, skipped_identities
 
 
 def _overlay(base: list[dict], local: list[dict], key) -> tuple[list[dict], int, int, int, int]:
@@ -269,6 +275,7 @@ def main(argv: list[str] | None = None) -> int:
     total_overridden = 0
     total_added = 0
     total_skipped_local = 0
+    total_skipped_identities = 0
     for file_name in sorted(os.listdir(args.packs_dir)):
         if not file_name.endswith(".json"):
             continue
@@ -285,11 +292,12 @@ def main(argv: list[str] | None = None) -> int:
         if not isinstance(pack, dict) or "entries" not in pack:
             continue  # 不是译文包（如别的 json）
 
-        library_pack, skipped_chinese, skipped_local, recovered_auto = export_pack(pack)
+        library_pack, skipped_chinese, skipped_local, recovered_auto, skipped_identities = export_pack(pack)
         if library_pack is None:
             print(f"  [{internal_name}] 没有可导出的译文，跳过")
             continue
         total_skipped_local += skipped_local
+        total_skipped_identities += skipped_identities
 
         target = os.path.join(args.out, file_name)
         override_stats = ""
@@ -315,6 +323,7 @@ def main(argv: list[str] | None = None) -> int:
         cn_note = f" ｜ 已是中文跳过 {skipped_chinese}" if skipped_chinese else ""
         cn_note += f" ｜ 不翻跳过 {skipped_local}" if skipped_local else ""
         cn_note += f" ｜ 自动排除收回 {recovered_auto}" if recovered_auto else ""
+        cn_note += f" ｜ 标识符跳过 {skipped_identities}" if skipped_identities else ""
         print(f"  [{internal_name}] 条目 {entries} · 资源 {resources} · 属性 {attributes}{override_stats}{cn_note}")
 
         if not args.dry_run:
@@ -329,7 +338,7 @@ def main(argv: list[str] | None = None) -> int:
     print()
     print(
         f"共 {exported} 个插件：条目 {total_entries} · 资源 {total_resources} · 属性 {total_attributes}"
-        f"（相对库里已有：覆盖 {total_overridden} · 新增 {total_added}；本机不翻跳过 {total_skipped_local}）"
+        f"（相对库里已有：覆盖 {total_overridden} · 新增 {total_added}；本机不翻跳过 {total_skipped_local} · 标识符跳过 {total_skipped_identities}）"
     )
     if args.dry_run:
         print("（dry-run，没有写盘）")

@@ -5,6 +5,35 @@ namespace FireGaze.UIText;
 /// </summary>
 internal static class UICallSemantics
 {
+    /// <summary>Returns the identity argument; IPC payloads and shared-data values are not identities.</summary>
+    public static int FunctionalIdentityArgument(string typeFullName, string methodName, int parameterCount)
+    {
+        if (methodName is "GetIpcProvider" or "GetIpcSubscriber" or "GetIpcCaller"
+            || (typeFullName.EndsWith("DalamudReflector", StringComparison.Ordinal)
+                && methodName is "TryGetDalamudPlugin" or "GetDalamudPlugin"))
+        {
+            return 0;
+        }
+
+        // Public EzIPC overloads: (object/Type, prefix, wrapper).
+        // The internal overload adds instanceType before prefix. Vendored copies use the same contract.
+        if (methodName == "Init" && (typeFullName.EndsWith(".EzIpcManager.EzIPC", StringComparison.Ordinal)
+            || typeFullName == "GatherBuddy.Plugin.EzIPC"))
+        {
+            return parameterCount == 4 ? 2 : parameterCount == 3 ? 1 : -1;
+        }
+
+        if ((typeFullName is "Dalamud.Plugin.IDalamudPluginInterface" or "Dalamud.Plugin.DalamudPluginInterface"
+                && methodName is "GetOrCreateData" or "TryGetData" or "GetData" or "RelinquishData")
+            || (typeFullName.EndsWith(".EzSharedDataManager.EzSharedData", StringComparison.Ordinal)
+                && methodName is "TryGet" or "GetOrCreate"))
+        {
+            return 0;
+        }
+
+        return -1;
+    }
+
     /// <summary>
     ///     类型名不含 ImGui 字样、但确实在画界面的包装器（前缀匹配）。
     /// </summary>

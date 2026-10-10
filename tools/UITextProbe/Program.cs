@@ -198,6 +198,7 @@ if (asJson)
             Role = e.Role.ToString(),
             e.Reason,
             e.PreserveID,
+            e.IsFunctionalIdentifier,
         }),
         new System.Text.Json.JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
     Console.WriteLine(json);

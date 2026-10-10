@@ -15,14 +15,16 @@ internal sealed partial class UITextTab
     private bool workflowDisposed;
     private DateTime queueTickAt;
     private readonly ConcurrentDictionary<string, MaintenanceResult> maintenance = new(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<string, DateTime> recoveryRetries = new(StringComparer.Ordinal);
     private readonly Dictionary<string, string> diagnosticInput = new(StringComparer.Ordinal);
     private readonly ConcurrentDictionary<string, DiagnosticResult> diagnostics = new(StringComparer.Ordinal);
     private readonly HashSet<string> diagnosticBusy = new(StringComparer.Ordinal);
 
-    private sealed record MaintenanceResult(UITextPack Candidate, string Baseline, string DLLHash,
-        int NewTexts, HashSet<string> NewOriginals, int LibraryChanges, int AddedTranslations, int ChangedTranslations, string? Warning)
+    private sealed record MaintenanceResult(UITextPack Candidate, string Baseline, string DLLHash, string SourceHash,
+        int NewTexts, HashSet<string> NewOriginals, int LibraryChanges, int AddedTranslations, int ChangedTranslations,
+        int SafetyChanges, int IdentityRepairs, string? Warning)
     {
-        public bool CanApply => UITextMaintenance.CanApplyUpdate(new(AddedTranslations, ChangedTranslations, 0, 0), Warning);
+        public bool CanApply => UITextMaintenance.CanApplyUpdate(new(AddedTranslations, ChangedTranslations, 0, 0), Warning, SafetyChanges + IdentityRepairs);
     }
     private sealed record DiagnosticResult(string Query, List<UITextDiagnostic> Matches, string? Error);
 
@@ -84,6 +86,7 @@ internal sealed partial class UITextTab
         this.workflowDisposed = true;
         this.workQueue.SetPaused(true);
         this.run?.Cancel.Cancel();
+        this.recoveryRetries.Clear();
     }
 
     private void DrawQueueToolbar()
@@ -98,7 +101,7 @@ internal sealed partial class UITextTab
         }
         ImGui.EndDisabled();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-            ImGui.SetTooltip("检查所有已抽取插件的公共译文更新，不修改插件。");
+            ImGui.SetTooltip("检查所有已抽取插件的公共译文更新与插件识别 / IPC 误翻，不修改插件；发现问题后点击更新修复。");
 
         var jobs = this.workQueue.Items;
         var updates = this.index?.All.Where(e => this.maintenance.TryGetValue(e.InternalName, out var result) && result.CanApply).ToList() ?? [];
@@ -115,7 +118,7 @@ internal sealed partial class UITextTab
             }
             UiHelpers.PopPrimaryButton();
             ImGui.EndDisabled();
-            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("写入检查到的全部译文更新，并依次重载插件。保留人工译文，不做全量机器重翻；请先停下插件任务。");
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("应用译文更新与安全修复，并依次重载插件。保留正常人工译文，功能标识保持原文；请先停下插件任务。");
         }
 
         if (jobs.Any(j => j.State is UITextJobState.Pending or UITextJobState.Running))
@@ -123,6 +126,7 @@ internal sealed partial class UITextTab
             UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("取消队列"));
             if (ImGui.SmallButton("取消队列"))
             {
+                this.recoveryRetries.Clear();
                 this.workQueue.Cancel();
                 if (this.workQueue.Active is not null && this.run is { CanCancel: true } active)
                 {
@@ -178,7 +182,7 @@ internal sealed partial class UITextTab
     {
         if (this.run is not null || !this.runs.TryEnter(entry.InternalName, "检查汉化更新", out _)) return;
         this.maintenance.TryRemove(entry.InternalName, out _);
-        var active = new Run { InternalName = entry.InternalName, Mode = RunMode.CheckUpdates, Stage = "正在检查新增文本与译文更新…", CanCancel = true };
+        var active = new Run { InternalName = entry.InternalName, Mode = RunMode.CheckUpdates, Stage = "正在检查新增文本、译文更新与插件联动…", CanCancel = true };
         this.run = active;
         active.Task = Task.Run(async () =>
         {
@@ -187,8 +191,12 @@ internal sealed partial class UITextTab
                 var before = this.store.Load(entry.InternalName);
                 var baseline = before.ToJSON();
                 if (string.IsNullOrEmpty(entry.DLLPath)) throw new IOException("没有找到插件文件，请刷新列表后重试。");
-                var guard = this.patches.ExtractWithGuard(entry);
+                var guard = await this.patches.ExtractWithRecoveryAsync(entry, active.Cancel.Token).ConfigureAwait(false);
                 if (guard.Extraction.Error is not null) throw new IOException(guard.Extraction.Error);
+                this.recoveryRetries.TryRemove(entry.InternalName, out _);
+                var sourceHash = this.patches.MaintenanceSourceSignature(entry);
+                var identityRepairs = this.patches.FunctionalRepairCount(entry);
+                active.Cancel.Token.ThrowIfCancellationRequested();
                 var added = UITextMaintenance.NewCandidates(before, guard.Extraction);
                 var newOriginals = UITextMaintenance.NewOriginals(before, guard.Extraction);
                 var candidate = UITextPack.FromJSON(baseline, out _)!;
@@ -203,13 +211,29 @@ internal sealed partial class UITextTab
                     throw new IOException("检查期间插件文件发生了变化，请重新检查。");
                 var preview = UITextFlow.PreviewMerge(before, candidate);
                 var warning = this.plugin.Config.UITextLibraryEnabled ? this.plugin.TextLibrary.LastError : null;
-                this.maintenance[entry.InternalName] = new(candidate, baseline, hash, added, newOriginals, libraryChanges,
-                    preview.Added, preview.Overwritten, warning);
-                this.FinishRun(active, new RowNote { Kind = warning is null ? NoteKind.Info : NoteKind.Bad,
-                    Text = warning is not null ? "译文库暂时查不到，请稍后重新检查。"
+                if (warning is not null)
+                {
+                    // A failed download may have merged a partial public pack. Offline repair uses only saved translations.
+                    candidate = UITextPack.FromJSON(baseline, out _)!;
+                    UITextFlow.MergeExtraction(candidate, guard.Extraction);
+                    preview = UITextFlow.PreviewMerge(before, candidate);
+                }
+                if (this.patches.MaintenanceSourceSignature(entry) != sourceHash)
+                    throw new IOException("检查期间原始备份发生了变化，请重新检查。");
+                var safetyChanges = UITextMaintenance.FunctionalTranslationChanges(before, candidate, guard.Extraction);
+                this.maintenance[entry.InternalName] = new(candidate, baseline, hash, sourceHash, added, newOriginals, libraryChanges,
+                    preview.Added, preview.Overwritten, safetyChanges, identityRepairs, warning);
+                this.FinishRun(active, new RowNote { Kind = warning is null || safetyChanges + identityRepairs > 0 ? NoteKind.Info : NoteKind.Bad,
+                    Text = safetyChanges + identityRepairs > 0 ? $"发现汉化安全问题，可点击更新修复（译文 {safetyChanges} 条，已写入标识 {identityRepairs} 条）。"
+                        : warning is not null ? "译文库暂时查不到，请稍后重新检查。"
                         : preview.Added + preview.Overwritten > 0 ? "有汉化更新，可点击更新。" : "检查完成，公共译文已是最新。", Detail = warning });
             }
             catch (OperationCanceledException) { this.FinishRun(active, new RowNote { Kind = NoteKind.Info, Text = "已取消检查，没有修改译文或插件。" }); }
+            catch (UITextRecoveryPendingException e)
+            {
+                this.recoveryRetries[entry.InternalName] = DateTime.UtcNow.AddMinutes(2);
+                this.FinishRun(active, new RowNote { Kind = NoteKind.Info, Text = "正在等待原始插件包，FireGaze 会自动重试恢复；现有译文和插件已保留。", Detail = e.Message });
+            }
             catch (Exception e) { this.FinishRun(active, new RowNote { Kind = NoteKind.Bad, Text = "检查失败：" + e.GetBaseException().Message }); }
         });
     }
@@ -219,6 +243,8 @@ internal sealed partial class UITextTab
         if (this.maintenance.TryGetValue(entry.InternalName, out var result))
         {
             ImGui.TextDisabled($"新增文本 {result.NewTexts} 条 · 补入译文 {result.AddedTranslations} 条 · 更新译文 {result.ChangedTranslations} 条");
+            if (result.SafetyChanges + result.IdentityRepairs > 0)
+                ImGui.TextDisabled($"安全修复：排除误翻 {result.SafetyChanges} 条 · 恢复插件 / IPC 标识 {result.IdentityRepairs} 条");
             if (result.Warning is { } warning) UiHelpers.ColoredWrapped(UiHelpers.Warn, "公共译文库检查未完成：" + warning);
         }
     }
@@ -313,11 +339,14 @@ internal sealed partial class UITextTab
             try
             {
                 if (this.store.Load(entry.InternalName).ToJSON() != result.Baseline
-                    || string.IsNullOrEmpty(entry.DLLPath) || MaintenanceSignature(entry, result.Candidate) != result.DLLHash)
+                    || string.IsNullOrEmpty(entry.DLLPath) || MaintenanceSignature(entry, result.Candidate) != result.DLLHash
+                    || this.patches.MaintenanceSourceSignature(entry) != result.SourceHash)
                     throw new IOException("插件或本机译文已经变化，请重新检查更新。");
                 if (!this.store.Save(entry.InternalName, result.Candidate, out var error)) throw new IOException(error);
                 this.maintenance.TryRemove(entry.InternalName, out _);
-                var outcome = await this.patches.ApplyAndReloadAsync(entry).ConfigureAwait(false);
+                var safetyRepair = result.SafetyChanges + result.IdentityRepairs > 0;
+                var outcome = await this.patches.ApplyAndReloadAsync(entry, safetyRepair: safetyRepair).ConfigureAwait(false);
+                if (outcome.Ok && safetyRepair) outcome = (true, "已应用汉化安全修复；" + outcome.Message);
                 this.FinishRun(active, new RowNote { Kind = outcome.Ok ? NoteKind.Good : NoteKind.Bad, Text = outcome.Message });
             }
             catch (Exception e)
@@ -353,7 +382,7 @@ internal sealed partial class UITextTab
             DiagnosticResult result;
             try
             {
-                var extraction = this.patches.ExtractWithGuard(entry).Extraction;
+                var extraction = (await this.patches.ExtractWithRecoveryAsync(entry).ConfigureAwait(false)).Extraction;
                 var pack = this.store.Load(entry.InternalName);
                 var applied = this.patches.StatusOf(entry, out _) == UITextPatchStatus.Applied;
                 result = new(query, UITextMaintenance.Diagnose(pack, extraction, query, applied, this.patches.PackNewerThanPatch(entry)), extraction.Error);

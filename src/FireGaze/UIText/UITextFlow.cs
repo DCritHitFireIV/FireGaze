@@ -60,6 +60,11 @@ internal static class UITextFlow
         {
             if (item.Role == UITextRole.Excluded)
             {
+                if (item.IsFunctionalIdentifier && pack.Find(item.Original) is { } identifier)
+                {
+                    identifier.Role = "Excluded";
+                    identifier.RoleReason = item.Reason;
+                }
                 continue;
             }
 

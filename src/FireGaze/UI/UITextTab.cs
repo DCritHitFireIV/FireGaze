@@ -1483,7 +1483,7 @@ internal sealed partial class UITextTab
         ImGui.BeginDisabled(busy || editorOpen);
         if (ImGui.Button("检查汉化更新###uit-check-one")) this.StartMaintenance(plugin);
         ImGui.EndDisabled();
-        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("只检查这个插件的新增文本和公共译文更新，不修改插件。");
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("检查这个插件的新增文本、公共译文更新与插件识别 / IPC 误翻，不修改插件；发现问题后点击更新修复。");
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("这句怎么还是英文"));
         if (ImGui.Button("这句怎么还是英文###uit-english")) ImGui.OpenPopup("###uit-english-popup");
@@ -2032,7 +2032,7 @@ internal sealed partial class UITextTab
             var packTouchedSincePatch = packTimeBefore > patchedAt.AddSeconds(1);
 
             run.Stage = "正在读取插件界面文本…";
-            var guard = await Task.Run(() => this.patches.ExtractWithGuard(entry), token).ConfigureAwait(false);
+            var guard = await this.patches.ExtractWithRecoveryAsync(entry, token).ConfigureAwait(false);
             var extraction = guard.Extraction;
             if (extraction.Error is not null)
             {
@@ -3008,8 +3008,11 @@ internal sealed partial class UITextTab
             else
             {
                 var note = this.notes.GetValueOrDefault(run.InternalName);
-                this.workQueue.Complete(run.InternalName, note?.Kind != NoteKind.Bad && !run.Cancel.IsCancellationRequested,
-                    note?.Text ?? "任务已结束");
+                if (!run.Cancel.IsCancellationRequested && this.recoveryRetries.TryRemove(run.InternalName, out var retryAt))
+                    this.workQueue.DeferRecovery(run.InternalName, retryAt, note?.Text ?? "等待原始包，自动重试");
+                else
+                    this.workQueue.Complete(run.InternalName, note?.Kind != NoteKind.Bad && !run.Cancel.IsCancellationRequested,
+                        note?.Text ?? "任务已结束");
             }
         }
         run.Cancel.Dispose();

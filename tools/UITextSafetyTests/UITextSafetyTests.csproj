@@ -1,14 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <AssemblyName>fgtest</AssemblyName>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AssemblyName>fgtest</AssemblyName>
     <FireGazeBuildDir Condition="'$(FireGazeBuildDir)' == ''">../../src/FireGaze/bin/Release</FireGazeBuildDir>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FireGaze"><HintPath>$(FireGazeBuildDir)/FireGaze.dll</HintPath></Reference>
     <Reference Include="dnlib"><HintPath>$(FireGazeBuildDir)/dnlib.dll</HintPath></Reference>
+    <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>
   </ItemGroup>
 </Project>

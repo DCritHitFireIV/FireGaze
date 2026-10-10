@@ -266,7 +266,7 @@ internal sealed class UITextEditorWindow : Window
 
         // 抽取走 ExtractWithGuard：它会自动改读原始备份；万一还是抽到「译文###原文」形态，
         // 会换备份重抽或停下报错，绝不把假原文并进包（2026-10-02 防污染）。
-        this.extractionTask = Task.Run(() => this.patches.ExtractWithGuard(this.entry));
+        this.extractionTask = Task.Run(() => this.patches.ExtractWithRecoveryAsync(this.entry));
     }
 
     private void PollExtraction()

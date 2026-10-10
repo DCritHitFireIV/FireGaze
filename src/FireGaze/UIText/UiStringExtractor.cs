@@ -28,6 +28,10 @@ public static class UIStringExtractor
     /// <summary>调试用：只给名字里含这个片段的方法打逐条 IL 栈深（临时排查用）。</summary>
     public static string? TraceKey { get; set; }
 
+    internal static HashSet<string> FunctionalIdentifiers(ModuleDefMD module) =>
+        new Scanner(module, string.Empty).Run(includeResources: false).Entries
+            .Where(e => e.IsFunctionalIdentifier).Select(e => e.Original).ToHashSet(StringComparer.Ordinal);
+
     /// <summary>
     ///     抽取一个程序集；读不出来（加壳 / 加密 / 不是 .NET 程序集）时返回带 <see cref="UITextExtraction.Error" /> 的结果。
     /// </summary>
@@ -189,6 +193,7 @@ public static class UIStringExtractor
                         Role = item.Role,
                         Reason = item.Reason,
                         PreserveID = item.PreserveID,
+                        IsFunctionalIdentifier = item.IsFunctionalIdentifier,
                     };
 
                 if (indexByOriginal.TryGetValue(item.Original, out var index))
@@ -203,11 +208,15 @@ public static class UIStringExtractor
                     {
                         Original = existing.Original,
                         Context = keep.Context,
-                        Role = conflict ? UITextRole.Ambiguous : keep.Role,
-                        Reason = conflict
+                        Role = existing.IsFunctionalIdentifier || tagged.IsFunctionalIdentifier
+                            ? UITextRole.Excluded : conflict ? UITextRole.Ambiguous : keep.Role,
+                        Reason = existing.IsFunctionalIdentifier || tagged.IsFunctionalIdentifier
+                            ? "插件 / IPC 标识符（翻译或反向还原会破坏插件识别）"
+                            : conflict
                             ? "同一原文在不同程序集里角色冲突（一份当界面文本、一份当功能语境），默认不翻；确认安全可在编辑器里单条翻"
                             : keep.Reason,
                         PreserveID = existing.PreserveID || tagged.PreserveID,
+                        IsFunctionalIdentifier = existing.IsFunctionalIdentifier || tagged.IsFunctionalIdentifier,
                     };
                 }
                 else
@@ -459,6 +468,9 @@ public static class UIStringExtractor
         private readonly List<(string Callee, string Method, int Param)> returnToParamRefs = [];
         private readonly List<(string Callee, string Caller)> returnToReturnRefs = [];
         private readonly List<(int Literal, string Method)> literalReturns = [];
+        private readonly HashSet<int> identityLiterals = [];
+        private readonly HashSet<(string Method, int Param)> identityParams = [];
+        private readonly HashSet<string> identityReturns = [];
 
         /// <summary>
         ///     接口 / 基类虚方法的键 → 本程序集里的实现方法键。
@@ -486,7 +498,7 @@ public static class UIStringExtractor
             this.path = path;
         }
 
-        public UITextExtraction Run()
+        public UITextExtraction Run(bool includeResources = true)
         {
             foreach (var type in this.module.GetTypes())
             {
@@ -539,7 +551,7 @@ public static class UIStringExtractor
             Stage($"solve methods={this.methods.Count} literals={this.literals.Count}");
             this.Classify();
             Stage("classify");
-            var result = this.BuildResult();
+            var result = this.BuildResult(includeResources);
             Stage($"build entries={result.Entries.Count}");
             return result;
         }
@@ -1104,6 +1116,11 @@ public static class UIStringExtractor
 
                     if (instr.Operand is IField field)
                     {
+                        if (field.Name.String is "InternalName" or "<InternalName>k__BackingField")
+                        {
+                            this.ProtectIdentity(scan, value);
+                        }
+
                         if (value.IsKnown)
                         {
                             var fieldKey = FieldKey(field);
@@ -1384,6 +1401,17 @@ public static class UIStringExtractor
                 {
                     Push(stack, result);
                 }
+            }
+
+            // Dependency / IPC prefixes / shared-data keys: resolve the argument position by API contract.
+            // Run before constructor and UI heuristics; only the identity, never IPC payloads, is protected.
+            var identityArgument = UICallSemantics.FunctionalIdentityArgument(typeName, methodName, argValues.Length);
+            if (identityArgument >= 0 && identityArgument < argValues.Length
+                && UICallSemantics.IsStringLikeOrGeneric(paramTypes[identityArgument]))
+            {
+                this.ProtectIdentity(scan, argValues[identityArgument]);
+                Leave(MakeResult(callee, argValues, isInternal: false));
+                return;
             }
 
             // 构造函数：参数不直接进 UI，但对象带着这些字符串走
@@ -1890,6 +1918,19 @@ public static class UIStringExtractor
             // 让字段「可见」：getter 里的 ldfld 读得到 FromField，Ret 才会登记 fieldReturnRefs；
             // 值本身为空壳，真正的元素由集合初始化器（Add）并进来
             this.fieldValues.TryAdd(fieldKey, V.FromField(fieldKey));
+        }
+
+        private void ProtectIdentity(MethodScan scan, V value)
+        {
+            this.identityLiterals.UnionWith(value.IDs);
+            foreach (var param in value.Params)
+            {
+                this.identityParams.Add((scan.Key, param));
+            }
+
+            if (value.FieldKey is { } field) this.identityParams.Add((field, 0));
+            this.identityReturns.UnionWith(value.CallKeys);
+            this.MarkDangerous(scan, value, "插件 / IPC 标识符", hardKey: true);
         }
 
         private void MarkDangerous(MethodScan scan, V value, string target, bool hardKey = false, bool dictionaryKey = false)
@@ -2466,9 +2507,62 @@ public static class UIStringExtractor
 
         private void Classify()
         {
+            this.ClassifyFunctionalIdentifiers();
             this.ClassifyFlow(this.passRefs, ui: true);
             this.ClassifyFlow(this.passRefs, ui: false);
             this.ClassifyReturns();
+        }
+
+        private void ClassifyFunctionalIdentifiers()
+        {
+            // Monotone finite sets: follow wrapper parameters, returned identities and field getters.
+            bool changed;
+            do
+            {
+                changed = false;
+                foreach (var (from, fromParam, to, toParam) in this.paramFlowRefs)
+                {
+                    if (this.identityParams.Contains((to, toParam)))
+                    {
+                        changed |= this.identityParams.Add((from, fromParam));
+                    }
+                }
+
+                foreach (var (callee, method, param) in this.returnToParamRefs)
+                {
+                    if (this.identityParams.Contains((method, param)))
+                    {
+                        changed |= this.identityReturns.Add(callee);
+                    }
+                }
+
+                foreach (var (from, to) in this.returnToReturnRefs)
+                {
+                    if (this.identityReturns.Contains(to))
+                    {
+                        changed |= this.identityReturns.Add(from);
+                    }
+                }
+
+                foreach (var (field, method) in this.fieldReturnRefs)
+                {
+                    if (this.identityReturns.Contains(method))
+                    {
+                        changed |= this.identityParams.Add((field, 0));
+                    }
+                }
+            }
+            while (changed);
+
+            foreach (var (literal, method, param) in this.passRefs)
+            {
+                if (this.identityParams.Contains((method, param))) this.identityLiterals.Add(literal);
+            }
+
+            foreach (var (literal, method) in this.literalReturns)
+            {
+                if (this.identityReturns.Contains(method)) this.identityLiterals.Add(literal);
+            }
         }
 
         private void ClassifyFlow(List<(int Literal, string Method, int Param)> refs, bool ui)
@@ -2632,12 +2726,25 @@ public static class UIStringExtractor
 
         // ── 产出 ─────────────────────────────────────────────────────────────
 
-        private UITextExtraction BuildResult()
+        private UITextExtraction BuildResult(bool includeResources)
         {
             var entries = new List<UITextEntry>();
 
             foreach (var literal in this.literals)
             {
+                if (this.identityLiterals.Contains(this.literalIDs[literal.Text]))
+                {
+                    entries.Add(new UITextEntry
+                    {
+                        Original = literal.Text,
+                        Context = literal.Context,
+                        Role = UITextRole.Excluded,
+                        Reason = "插件 / IPC 标识符（翻译或反向还原会破坏插件识别）",
+                        IsFunctionalIdentifier = true,
+                    });
+                    continue;
+                }
+
                 if (!LooksTranslatable(literal.Text))
                 {
                     entries.Add(new UITextEntry
@@ -2782,8 +2889,8 @@ public static class UIStringExtractor
             {
                 AssemblyPath = this.path,
                 ResourceKeyCount = this.resourceKeyIds.Count,
-                Resources = this.ScanResources(),
-                Attributes = this.ScanAttributes(),
+                Resources = includeResources ? this.ScanResources() : [],
+                Attributes = includeResources ? this.ScanAttributes() : [],
                 Entries = entries,
             };
         }

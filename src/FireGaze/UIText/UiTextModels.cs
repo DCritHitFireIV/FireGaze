@@ -53,6 +53,9 @@ public sealed class UITextEntry
     ///     打补丁时要写成 <c>译文###原文</c>，把 ID 留在原文上，避免译文相同的控件互相撞 ID。
     /// </summary>
     public bool PreserveID { get; init; }
+
+    /// <summary>Plugin/IPC identity confirmed by current IL. Neither manual translations nor inverse recovery may rewrite it.</summary>
+    public bool IsFunctionalIdentifier { get; init; }
 }
 
 /// <summary>

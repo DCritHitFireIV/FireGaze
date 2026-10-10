@@ -13,6 +13,7 @@ internal sealed class UITextJob
     public UITextJobMode Mode { get; set; }
     public UITextJobState State { get; set; }
     public string Message { get; set; } = string.Empty;
+    public DateTime? RetryAt { get; set; }
 }
 
 internal sealed class UITextJobQueue
@@ -61,9 +62,10 @@ internal sealed class UITextJobQueue
     public UITextJob? BeginNext()
     {
         if (Paused || Active is not null) return null;
-        var job = Items.FirstOrDefault(j => j.State == UITextJobState.Pending);
+        var job = Items.FirstOrDefault(j => j.State == UITextJobState.Pending && (j.RetryAt is null || j.RetryAt <= DateTime.UtcNow));
         if (job is null) return null;
         job.State = UITextJobState.Running;
+        job.RetryAt = null;
         if (Save()) return job;
         job.State = UITextJobState.Pending;
         Paused = true;
@@ -75,6 +77,15 @@ internal sealed class UITextJobQueue
         var job = Active;
         if (job?.InternalName != name) return;
         job.State = ok ? UITextJobState.Done : UITextJobState.Failed;
+        job.Message = message;
+        if (!Save()) Paused = true;
+    }
+
+    public void DeferRecovery(string name, DateTime retryAt, string message)
+    {
+        if (Active is not { } job || job.InternalName != name || job.Mode != UITextJobMode.CheckUpdates) return;
+        job.State = UITextJobState.Pending;
+        job.RetryAt = retryAt;
         job.Message = message;
         if (!Save()) Paused = true;
     }

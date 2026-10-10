@@ -63,6 +63,25 @@ try
     recovered.Complete("E", true, "done");
     Check(recovered.BeginNext()?.InternalName == "F", "a requested row starts automatically after the active plugin completes");
 
+    var deferRecovery = typeof(UITextJobQueue).GetMethod("DeferRecovery");
+    Check(deferRecovery is not null, "unavailable originals defer automatic recovery in the persistent queue");
+    var retryQueue = new UITextJobQueue(Path.Combine(Path.GetDirectoryName(path)!, "recovery-queue.json"));
+    retryQueue.Request("Repair", "Repair", UITextJobMode.CheckUpdates);
+    retryQueue.BeginNext();
+    deferRecovery!.Invoke(retryQueue, ["Repair", DateTime.UtcNow.AddMinutes(2), "等待原始包，自动重试"]);
+    Check(retryQueue.Active is null && retryQueue.BeginNext() is null, "automatic recovery waits for its retry time without spinning");
+    retryQueue.Request("Other", "Other", UITextJobMode.CheckUpdates);
+    Check(retryQueue.BeginNext()?.InternalName == "Other", "deferred recovery does not block checks for other plugins");
+    retryQueue.Complete("Other", true, "checked");
+    retryQueue = new UITextJobQueue(Path.Combine(Path.GetDirectoryName(path)!, "recovery-queue.json"));
+    retryQueue.SetPaused(false);
+    Check(retryQueue.Items[0].Message.Contains("自动重试") && retryQueue.BeginNext() is null, "recovery retry and delay survive a FireGaze reload");
+    typeof(UITextJob).GetProperty("RetryAt")!.SetValue(retryQueue.Items[0], DateTime.UtcNow.AddSeconds(-1));
+    Check(retryQueue.BeginNext()?.InternalName == "Repair", "due automatic recovery resumes through the same serial queue");
+    deferRecovery.Invoke(retryQueue, ["Repair", DateTime.UtcNow.AddMinutes(2), "等待原始包，自动重试"]);
+    retryQueue.Cancel();
+    Check(retryQueue.Items[0].State == UITextJobState.Skipped && retryQueue.BeginNext() is null, "cancelling the queue also cancels deferred automatic recovery");
+
     var discovery = new FireGaze.Discovery.DiscoveryStateStore(Path.GetDirectoryName(path)!);
     var watchInstall = typeof(FireGaze.Discovery.DiscoveryStateStore).GetMethod("WatchInstallation");
     var completeInstalls = typeof(FireGaze.Discovery.DiscoveryStateStore).GetMethod("CompleteInstallations");
@@ -126,7 +145,7 @@ try
     var updatePolicy = typeof(UITextMaintenance).GetMethod("CanApplyUpdate");
     Check(updatePolicy is not null, "update availability uses real translation differences");
     bool CanUpdate(UITextPack current, UITextPack candidate, string? warning = null) => (bool)updatePolicy!.Invoke(null,
-        [UITextFlow.PreviewMerge(current, candidate), warning])!;
+        [UITextFlow.PreviewMerge(current, candidate), warning, 0])!;
     var unchanged = UITextPack.FromJSON(pack.ToJSON(), out _)!;
     Check(!CanUpdate(pack, unchanged), "unchanged public translations do not show an update action");
     var changedPack = UITextPack.FromJSON(pack.ToJSON(), out _)!;
