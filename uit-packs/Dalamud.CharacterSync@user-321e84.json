@@ -1,258 +1,183 @@
 {
-  "type": "uit-contribution",
-  "plugin": "Dalamud.CharacterSync",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-10",
+    "source": "user",
+    "label": "玩家包 · 321e84",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Open the Character Sync configuration.",
       "Translated": "打开角色同步配置。",
       "Context": "CharacterSyncPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Character Data Sync has been installed, but it won't do anything until you configure it and restart your game. Please use /pcharsync to access the settings.",
       "Translated": "角色数据同步已安装，但在您配置并重新启动游戏之前，它不会执行任何操作。请使用/pcharsync访问设置。",
       "Context": "CharacterSyncPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Setup needed!",
       "Translated": "需要设置！",
       "Context": "CharacterSyncPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_MinimizedText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Character Data Sync has been updated. It will not function until you restart your game.",
       "Translated": "角色数据同步已更新。在您重新开始游戏之前，它不会起作用。",
       "Context": "CharacterSyncPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Restart required!",
       "Translated": "须重启",
       "Context": "CharacterSyncPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_MinimizedText"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Character Data Sync has been loaded in the middle of gameplay so it has automatically disabled itself. It will not function until you restart your game.",
       "Translated": "角色数据同步已在游戏过程中加载，因此它已自动禁用自身。在您重新开始游戏之前，它不会起作用。",
       "Context": "CharacterSyncPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ Notification.set_Content"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Character Sync Config",
       "Translated": "字符同步配置",
       "Context": "ConfigWindow..ctor",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ 窗口标题"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "This window allows you to configure Character Sync.",
       "Translated": "此窗口允许您配置角色同步。",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Click the button below while being logged in on your main character - all logins from now on will use this character's save data!",
       "Translated": "在主角登录时单击下面的按钮-从现在开始，所有登录都将使用此角色的保存数据！",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "None of your save data will be modified.",
       "Translated": "您的任何保存数据都不会被修改。",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Please note that it is recommended to restart your game after changing these settings.",
       "Translated": "请注意，建议在更改这些设置后重新启动游戏。",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Please log in before using this plugin.",
       "Translated": "请在使用此插件之前登录。",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Set save data to current character",
       "Translated": "将保存数据设置为当前字符",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": " on ",
       "Translated": "开",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "No character was set as main character yet.",
       "Translated": "尚未将任何角色设置为主角。",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Please click the button above while being logged in on your main character.",
       "Translated": "在您的主角上登录时，请点击上面的按钮。",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Currently set to ",
       "Translated": "当前设置为 !link",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The logged in character is ",
       "Translated": "登录的字符是",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Backups to keep:",
       "Translated": "备份保留",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Open Backups Folder",
       "Translated": "打开备份文件夹",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sync Hotbars",
       "Translated": "同步热条",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sync Macros",
       "Translated": "同步宏",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sync Keybinds",
       "Translated": "同步密钥绑定",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sync Character Settings",
       "Translated": "同步字符设置",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sync Keyboard Settings",
       "Translated": "同步键盘设置",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sync Gamepad Settings",
       "Translated": "同步游戏板设置",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Sync Card Sets and Verminion Settings",
       "Translated": "同步卡集和 Verminion 设置",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Save",
       "Translated": "保存",
       "Context": "ConfigWindow.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Button"
+      "Source": "ai:public-caiyun"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-10T08:15:57",
-  "imported": {
-    "archive": "uit-direct-2026-10-10T08-15-44-989Z-7ac3be7a-2026-10-10T081557.json",
-    "accepted": 28,
-    "filled": 28,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 28 条 `Dalamud.CharacterSync` 的界面文字译文，已收为**独立译文包** `uit-packs/Dalamud.CharacterSync@user-321e84.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 28 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
