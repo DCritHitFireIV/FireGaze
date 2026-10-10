@@ -1,7 +1,7 @@
 {
   "_meta": {
     "format": 2,
-    "updatedAt": "2026-10-06",
+    "updatedAt": "2026-10-10",
     "source": "user",
     "label": "玩家包 · a2ea97",
     "kinds": [
@@ -562,12 +562,6 @@
       "Source": "library"
     },
     {
-      "Original": "Stylist",
-      "Translated": "造型师",
-      "Context": "Stylist_IPCSubscriber.get_IsEnabled",
-      "Source": "library"
-    },
-    {
       "Original": "All Targets Can Attack aka Tank/Autoduty Mode",
       "Translated": "所有目标都可以在坦克/自动驾驶模式下攻击",
       "Context": "RSR_IPCSubscriber.GetHostileTypeDescription",
@@ -595,12 +589,6 @@
       "Original": "Unknown Target Type",
       "Translated": "未知目标类型",
       "Context": "RSR_IPCSubscriber.GetHostileTypeDescription",
-      "Source": "library"
-    },
-    {
-      "Original": "Lifestream",
-      "Translated": "生命流",
-      "Context": "Lifestream_IPCSubscriber.get_IsEnabled",
       "Source": "library"
     },
     {
@@ -811,12 +799,6 @@
       "Original": "December",
       "Translated": "十二月",
       "Context": "DateWidget..cctor",
-      "Source": "library"
-    },
-    {
-      "Original": "Avarice",
-      "Translated": "贪婪",
-      "Context": "Avarice_Reflection..cctor",
       "Source": "library"
     },
     {
@@ -2586,5 +2568,10 @@
       "Source": "library"
     }
   ],
-  "attributes": []
+  "attributes": [],
+  "skipped": [
+    "Stylist",
+    "Lifestream",
+    "Avarice"
+  ]
 }

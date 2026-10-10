@@ -1,7 +1,7 @@
 {
   "_meta": {
     "format": 2,
-    "updatedAt": "2026-10-03",
+    "updatedAt": "2026-10-10",
     "pluginVersion": null,
     "source": "library"
   },
@@ -2653,13 +2653,6 @@
       "Source": "library"
     },
     {
-      "Original": "Party",
-      "Translated": "小队",
-      "Context": "MainDebugWindow.Draw",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
       "Original": "Inventory",
       "Translated": "背包",
       "Context": "MainDebugWindow.Draw",
@@ -5103,13 +5096,6 @@
       "Source": "library"
     },
     {
-      "Original": "Hide",
-      "Translated": "躲藏",
-      "Context": "AFrostyReception.DefineObjectives",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
       "Original": "Guard 3",
       "Translated": "守卫 3",
       "Context": "AFrostyReception.DefineObjectives",
@@ -5176,13 +5162,6 @@
       "Original": "Teleport",
       "Translated": "传送",
       "Context": "AFrostyReception.DefineObjectives",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
-      "Original": "Combat",
-      "Translated": "战斗",
-      "Context": "InFromTheCold.DefineObjectives",
       "PreserveID": false,
       "Source": "library"
     },
@@ -6701,13 +6680,6 @@
     {
       "Original": "Dive bait",
       "Translated": "潜洞诱导",
-      "Context": "UCOBStates.P3BlackfireTrio",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
-      "Original": "Dive",
-      "Translated": "潜洞",
       "Context": "UCOBStates.P3BlackfireTrio",
       "PreserveID": false,
       "Source": "library"
@@ -19943,13 +19915,6 @@
       "Source": "library"
     },
     {
-      "Original": "Downtime",
-      "Translated": "停手",
-      "Context": "DMUStates.Phase4",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
       "Original": "Thunder + element 1",
       "Translated": "闪雷 + 属性1",
       "Context": "DMUStates.Phase3",
@@ -22162,13 +22127,6 @@
       "Source": "library"
     },
     {
-      "Original": "Partner",
-      "Translated": "搭档",
-      "Context": "ColorClash.AddGlobalHints",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
       "Original": "Proximity tankbusters",
       "Translated": "近战坦克死刑",
       "Context": "ColorRiot.AddGlobalHints",
@@ -22199,13 +22157,6 @@
     {
       "Original": "Double Style starts",
       "Translated": "双手涂鸦开始",
-      "Context": "M06SSugarRiotStates.DoubleStyle",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
-      "Original": "Stun",
-      "Translated": "眩晕",
       "Context": "M06SSugarRiotStates.DoubleStyle",
       "PreserveID": false,
       "Source": "library"
@@ -26061,13 +26012,6 @@
       "Source": "library"
     },
     {
-      "Original": "Interrupt",
-      "Translated": "打断",
-      "Context": "A13ArkAngelsStates.Meteor",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
       "Original": "Cone resolve",
       "Translated": "扇形判定",
       "Context": "A13ArkAngelsStates.Guillotine",
@@ -26567,13 +26511,6 @@
     {
       "Original": "Use normally",
       "Translated": "正常使用",
-      "Context": "VeynBRD.Definition",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
-      "Original": "Delay",
-      "Translated": "延迟",
       "Context": "VeynBRD.Definition",
       "PreserveID": false,
       "Source": "library"
@@ -28150,13 +28087,6 @@
       "Original": "Do nothing if the player doesn't have a target",
       "Translated": "若玩家没有目标则不执行任何操作",
       "Context": "TargetingRenderer.DrawValue",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
-      "Original": "Enabled",
-      "Translated": "启用",
-      "Context": "DefaultOnRenderer.DrawValue",
       "PreserveID": false,
       "Source": "library"
     },
@@ -33733,13 +33663,6 @@
       "Source": "library"
     },
     {
-      "Original": "Heal",
-      "Translated": "治疗",
-      "Context": "DSW1States.HoliestHallowing",
-      "PreserveID": false,
-      "Source": "library"
-    },
-    {
       "Original": "Aim away from other tears!",
       "Translated": "瞄准远离其他裂痕！",
       "Context": "HyperdimensionalSlash.AddHints",
@@ -39085,5 +39008,18 @@
       "Context": "[投稿]",
       "Source": "library"
     }
+  ],
+  "skipped": [
+    "Party",
+    "Hide",
+    "Combat",
+    "Dive",
+    "Downtime",
+    "Partner",
+    "Stun",
+    "Interrupt",
+    "Delay",
+    "Enabled",
+    "Heal"
   ]
 }

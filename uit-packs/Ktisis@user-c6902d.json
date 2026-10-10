@@ -1,7 +1,7 @@
 {
   "_meta": {
     "format": 2,
-    "updatedAt": "2026-10-07",
+    "updatedAt": "2026-10-10",
     "source": "user",
     "label": "玩家包 · c6902d",
     "kinds": [
@@ -145,18 +145,6 @@
       "Original": "Overlay",
       "Translated": "覆盖",
       "Context": "V2MigratorWindow.DrawOverlay",
-      "Source": "library"
-    },
-    {
-      "Original": "Ktisis.SelectedBones",
-      "Translated": "Ktisis.Selected Bones",
-      "Context": "IpcProvider..ctor",
-      "Source": "library"
-    },
-    {
-      "Original": "Ktisis.PosingChanged",
-      "Translated": "Ktisis.姿势改变",
-      "Context": "IpcProvider..ctor",
       "Source": "library"
     },
     {
@@ -809,5 +797,9 @@
     }
   ],
   "resources": [],
-  "attributes": []
+  "attributes": [],
+  "skipped": [
+    "Ktisis.SelectedBones",
+    "Ktisis.PosingChanged"
+  ]
 }
