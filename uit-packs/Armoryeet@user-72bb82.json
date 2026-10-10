@@ -1,0 +1,867 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-10",
+    "source": "user",
+    "label": "玩家包 · 72bb82",
+    "kinds": [
+      "free"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Item ",
+      "Translated": "项目",
+      "Context": "ArmouryScanner.Scan",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use /yeet scan for the reviewed workflow with selection and capacity checks.",
+      "Translated": "使用/yeet 扫描对已审核的工作流进行选择和容量检查。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Immediate expert commands",
+      "Translated": "即时专家命令",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The commands below scan and enqueue immediately without the reviewed confirmation window. Gearset protection and movement blockers still apply.",
+      "Translated": "下面的命令会立即扫描并排队，无需经过审核确认窗口。Gearset 保护和移动阻止器仍然适用。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Immediate movement",
+      "Translated": "即时移动",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Click Copy beside any row, then paste the command into chat.",
+      "Translated": "点击任意行旁边的 “复制”，然后将命令粘贴到 chat 中。",
+      "Context": "CommandReferenceUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Armoryeet commands",
+      "Translated": "Armoryet 命令",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open reviewed results",
+      "Translated": "打开审核结果",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show movement status",
+      "Translated": "显示运动状态",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stop the active queue",
+      "Translated": "停止活动队列",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use /yeet help for aliases and the full list.",
+      "Translated": "使用/yet 帮助获取别名和完整列表。",
+      "Context": "CommandReferenceUI.DrawCompactTooltip",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Command",
+      "Translated": "命令",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Purpose",
+      "Translated": "目的",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "CommandReferenceUI.DrawSection",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Armoryeet Settings###ArmoryeetSettings",
+      "Translated": "Armoryet 设置",
+      "Context": "ConfigUI..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Configure when Armoryeet scans, what it includes, and how reviewed moves behave.",
+      "Translated": "配置 Armoryet 扫描时、扫描内容以及评估后的动作行为。",
+      "Context": "ConfigUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Behavior",
+      "Translated": "行为",
+      "Context": "ConfigUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scan scope",
+      "Translated": "扫描范围",
+      "Context": "ConfigUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Movement",
+      "Translated": "动作",
+      "Context": "ConfigUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Opening and scanning",
+      "Translated": "打开和扫描",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Choose when scan results should refresh automatically.",
+      "Translated": "选取扫描结果何时自动刷新。",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scan when the main window opens",
+      "Translated": "主窗口打开时扫描",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Keeps reviewed results current whenever you open Armoryeet.",
+      "Translated": "每次打开 Armoryet 时都会随时查看最新结果。",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scan after login",
+      "Translated": "登录后扫描",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Prepares results as soon as your character becomes available.",
+      "Translated": "一旦您的角色可用，就准备好结果。",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rescan after a completed move",
+      "Translated": "完成移动后重新扫描",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Refreshes every Armoury group after the final item is processed.",
+      "Translated": "处理完最终物品后，刷新每个武器组。",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Window behavior",
+      "Translated": "窗口行为",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Control what happens after a reviewed move finishes.",
+      "Translated": "控制已审查走势结束后会发生什么。",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Close after a completed move",
+      "Translated": "完成移动后关闭",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Closes only after completion has been reconciled safely.",
+      "Translated": "只有在完工后才能关闭的项目已经安全调和。",
+      "Context": "ConfigUI.DrawBehavior",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Only enabled Armoury Chest containers are included by the main Scan button and /yeet chest. Container-specific commands keep their existing explicit behavior.",
+      "Translated": "仅启用的 Armoury Chest 容器包含在主 Scan 按钮和/yeet Chest 中。特定于容器的命令保留其现有的显式行为。",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Weapons",
+      "Translated": "武器",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Head",
+      "Translated": "头部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Body",
+      "Translated": "身体",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hands",
+      "Translated": "手",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Waist",
+      "Translated": "腰部",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Legs",
+      "Translated": "双腿",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Feet",
+      "Translated": "脚",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Accessories",
+      "Translated": "配饰",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ears",
+      "Translated": "耳朵",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Neck",
+      "Translated": "脖子",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Wrists",
+      "Translated": "手腕",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rings",
+      "Translated": "戒指",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Soul crystals are always protected and are never part of the scan scope.",
+      "Translated": "灵魂水晶始终受到保护，永远不会成为扫描范围的一部分。",
+      "Context": "ConfigUI.DrawScanScope",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Timing",
+      "Translated": "时机",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "A short delay makes inventory updates easier for the game client to process.",
+      "Translated": "短暂的延迟使得游戏客户端更容易处理库存更新。",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Delay between items",
+      "Translated": "物品之间的延迟",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "250 ms is the recommended default. Move retries still use their own safety interval.",
+      "Translated": "250 毫秒是推荐的默认值。移动重试仍然使用自己的安全间隔。",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Advanced",
+      "Translated": "高级",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Confirmation is an important final review step. Capacity and selection are still checked when confirmation is bypassed.",
+      "Translated": "确认是重要的最终审核步骤。当绕过确认时，仍会检查容量和选择。",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Move reviewed selections without confirmation",
+      "Translated": "在未确认的情况下移动审核过的选项",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The main Move button begins immediately. Expert slash commands are already immediate.",
+      "Translated": "主移动按钮立即开始工作。专家斜杠命令已经立即生效。",
+      "Context": "ConfigUI.DrawMovement",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select All###",
+      "Translated": "选择全部",
+      "Context": "ConfigUI.Group",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clear All###",
+      "Translated": "清除所有",
+      "Context": "ConfigUI.Group",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "-none",
+      "Translated": "-None",
+      "Context": "ConfigUI.Group",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Inventory unavailable",
+      "Translated": "库存不可用",
+      "Context": "ItemMover.OnFrameworkUpdate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No free inventory slots",
+      "Translated": "没有免费库存槽",
+      "Context": "ItemMover.OnFrameworkUpdate",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Idle",
+      "Translated": "空闲",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Moving ",
+      "Translated": "移动",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Paused: ",
+      "Translated": "暂停：",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Moved ",
+      "Translated": "已移动",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ", skipped ",
+      "Translated": "，跳过",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stopped after ",
+      "Translated": "之后停止",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "; moved ",
+      "Translated": "; 已移动",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Failed: ",
+      "Translated": "失败：",
+      "Context": "ItemMover.FormatStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Armoryeet.",
+      "Translated": "打开 Armoryet。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Armoryeet (alias: /armoryeet).\n/yeet help → Show commands and aliases.",
+      "Translated": "Open Armoryet(别名/armoreyet)。\n/yeet help →显示命令和别名。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Armoryeet settings.",
+      "Translated": "打开 armoryeet 设置。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "enabled armoury categories",
+      "Translated": "已启用的武器库类别",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "main hand",
+      "Translated": "主手",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "off hand",
+      "Translated": "手动",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Move queue stopped.",
+      "Translated": "移动队列停止。",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unknown command: /yeet ",
+      "Translated": "未知命令:/yeet",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ". Use /yeet help.",
+      "Translated": "使用/yet 帮助。",
+      "Context": "Plugin.OnYeetCommand",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scan found ",
+      "Translated": "扫描发现",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " item(s).",
+      "Translated": "item(s)。",
+      "Context": "Plugin.ScanAndOpen",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Already moving. Use /yeet stop first.",
+      "Translated": "已经在移动了。先使用/yeet stop。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No unregistered ",
+      "Translated": "无未注册",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " item(s) found.",
+      "Translated": "找到项目 (s)。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " unregistered ",
+      "Translated": "未注册",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " item(s) to inventory.",
+      "Translated": "清单中的 item(s)。",
+      "Context": "Plugin.ScanAndMove",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Idle. No scan results.",
+      "Translated": "空闲。无扫描结果。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Idle. Last scan found ",
+      "Translated": "空闲。发现最后一次扫描",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " group(s). ",
+      "Translated": "group(s)。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " protected.",
+      "Translated": "受保护。",
+      "Context": "Plugin.PrintStatus",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Commands: /yeet, /yeet scan, /yeet chest, /yeet weapons, /yeet armor, /yeet accessories, /yeet mainhand, /yeet offhand, /yeet head, /yeet body, /yeet hands, /yeet waist, /yeet legs, /yeet feet, /yeet ears, /yeet neck, /yeet wrist, /yeet rings, /yeet settings, /yeet stop, /yeet status.",
+      "Translated": "命令:/yeet,/yeet scan,/yeet 胸膛，/yeet 武器，/yeet 装甲，/yeet 配件，/yeet 手部，/yeet 手部，/yeet 头部，/yeet 身体，/yeet 手，/yeet 腰，/yeet 腿，/yeet 脚，/yeet 耳朵，/yeet 脖子，/yeet 手腕，/yeet 戒指，/yeet 设置，/yeet 停止，/yeet 状态。",
+      "Context": "Plugin.PrintHelp",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hover the ? button in Armoryeet for a quick command reference.",
+      "Translated": "在 Armoryet 中悬停？按钮以获取快速命令参考。",
+      "Context": "Plugin.PrintHelp",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "⌕  Scan",
+      "Translated": "⓮ 扫描",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "↻  Rescan",
+      "Translated": "⻻ 重新扫描",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "✓  Select All",
+      "Translated": "✓ 选择全部",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "×  Clear All",
+      "Translated": "× 清除所有",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Filter by item name...",
+      "Translated": "按项目名称过滤......",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Scan armoury chest for gear not used by gearsets.",
+      "Translated": "扫描武器箱，寻找未被齿轮组使用的齿轮。",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No unregistered armoury items found.",
+      "Translated": "未发现未注册武器装备。",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No items match the filter.",
+      "Translated": "没有项目与过滤器匹配。",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Showing ",
+      "Translated": "显示",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " of ",
+      "Translated": "的",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " items. Selection totals include hidden items.",
+      "Translated": "项目。选择总数包括隐藏项目。",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Selected ",
+      "Translated": "已选择",
+      "Context": "PluginUI.DrawSummary",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "   Protected: ",
+      "Translated": "受保护：",
+      "Context": "PluginUI.DrawSummary",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "   Free slots: ",
+      "Translated": "空闲插槽：",
+      "Context": "PluginUI.DrawSummary",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Free ",
+      "Translated": "免费",
+      "Context": "PluginUI.DrawSummary",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " more inventory slot(s) to move this selection.",
+      "Translated": "更多库存槽来移动这个选择。",
+      "Context": "PluginUI.DrawSummary",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Group",
+      "Translated": "群组",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Count",
+      "Translated": "计数",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Some items are selected. Click to select the whole group.",
+      "Translated": "某些项目被选中。点击以选择整个群组。",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select all in ",
+      "Translated": "选择所有内容",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Selected",
+      "Translated": "已选择",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Icon",
+      "Translated": "图标",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Item",
+      "Translated": "物品",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Item ID: ",
+      "Translated": "物品 ID:",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "\nArmoury slot: ",
+      "Translated": "武器槽：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "\nContainer: ",
+      "Translated": "容器：",
+      "Context": "PluginUI.DrawGroup",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show skipped details",
+      "Translated": "显示跳过的细节",
+      "Context": "PluginUI.DrawProgress",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hide skipped details",
+      "Translated": "隐藏跳过的细节",
+      "Context": "PluginUI.DrawProgress",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rescan now",
+      "Translated": "现在重新扫描",
+      "Context": "PluginUI.DrawProgress",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "■  Stop",
+      "Translated": "■ 停",
+      "Context": "PluginUI.DrawActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "→  Move ",
+      "Translated": "→ 移动",
+      "Context": "PluginUI.DrawActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " selected items to Inventory",
+      "Translated": "将选定的项目移动到清单",
+      "Context": "PluginUI.DrawActions",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select at least one item.",
+      "Translated": "选择至少一个物品。",
+      "Context": "PluginUI.GetDisabledReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "A move is already active.",
+      "Translated": "一个移动已经被激活。",
+      "Context": "PluginUI.GetDisabledReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Confirm or cancel the pending move first.",
+      "Translated": "首先确认或取消待处理的行动。",
+      "Context": "PluginUI.GetDisabledReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Not enough inventory space: ",
+      "Translated": "库存空间不足：",
+      "Context": "PluginUI.GetDisabledReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " required, ",
+      "Translated": "需要，",
+      "Context": "PluginUI.GetDisabledReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " available.",
+      "Translated": "可用。",
+      "Context": "PluginUI.GetDisabledReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Confirm move###ArmoryeetConfirm",
+      "Translated": "确认移动",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Move ",
+      "Translated": "移动",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " selected item(s) to Inventory?",
+      "Translated": "选定的项目 (s) 是否已移动到库存？",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Required slots: ",
+      "Translated": "所需槽位：",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "   Available when opened: ",
+      "Translated": "打开时可用：",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Selection or capacity changed. Cancel and review again.",
+      "Translated": "选择或容量发生变化。取消并再次审核。",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Move",
+      "Translated": "移动",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "PluginUI.DrawConfirmation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "soul crystals are protected",
+      "Translated": "灵魂水晶受到保护",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "the scanned Armoury slot is now empty",
+      "Translated": "扫描的武器槽现在是空的",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "the item in the Armoury slot changed",
+      "Translated": "武器槽中的项目已更改",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "the item is now used by a gearset or equipped",
+      "Translated": "该物品现在由齿轮组使用或配备",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "the move did not complete after repeated attempts",
+      "Translated": "经过多次尝试后，行动未能完成。",
+      "Context": "PluginUI.FormatSkipReason",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Main Hand",
+      "Translated": "主手",
+      "Context": "PluginUI.FormatInventoryType",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Off Hand",
+      "Translated": "随手",
+      "Context": "PluginUI.FormatInventoryType",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": ".ctor",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
