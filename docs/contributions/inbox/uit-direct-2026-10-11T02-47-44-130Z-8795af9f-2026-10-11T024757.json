@@ -1,0 +1,2855 @@
+{
+  "issue": "direct-2026-10-11T02-47-44-130Z-8795af9f",
+  "receivedAt": "2026-10-11 02:47:57",
+  "author": "匿名直传",
+  "plugin": "Aurum",
+  "fingerprint": "f0a042666cbd950a",
+  "packFile": "Aurum@user-f0a042.json",
+  "accepted": 340,
+  "filled": 340,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Aurum",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Open Aurum crafting profit calculator",
+        "Translated": "Open Aurum 制造利润计算器",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Aurum Configuration###AurumConfig",
+        "Translated": "Aurum 配置",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "UI Scale",
+        "Translated": "UI 规模",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Movable Config Window",
+        "Translated": "可移动配置窗口",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Rows Per Page",
+        "Translated": "每页行数",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Column Visibility",
+        "Translated": "列可见性",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "API Settings",
+        "Translated": "API 设置",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Preferred World",
+        "Translated": "首选世界",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Leave as 'Auto' to use your current world, or specify a world name.",
+        "Translated": "输入 “Auto” 以使用您当前的世界，或指定一个世界名称。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Remember Last World Selection",
+        "Translated": "记住上一个世界选择",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "If enabled, the dashboard will remember the last world you refreshed data for,\noverriding 'Auto' until you change it back.",
+        "Translated": "如果启用，仪表盘将记住您上次刷新数据的世界，\n覆盖 “自动”，直到你将其修改回来。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Market Data Cache Duration (Minutes)",
+        "Translated": "市场数据缓存时间 (分钟)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Cache will expire after ",
+        "Translated": "缓存将在",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " minutes",
+        "Translated": "分钟",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " hours and ",
+        "Translated": "小时和",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Clear Market Data Cache",
+        "Translated": "清理市场数据缓存",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": " entries)",
+        "Translated": "条目)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Max Concurrent API Requests",
+        "Translated": "最大并发 API 请求",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "API Rate Limit (Requests/Minute)",
+        "Translated": "API 速率限制 (请求/分钟)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Batch Size (Items per Request)",
+        "Translated": "批处理大小 (每个请求的项目)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Number of items to fetch in a single API call.\nUniversalis supports up to 100, but lower values may improve responsiveness.",
+        "Translated": "在一次 API 调用中需要获取的项目数量。\nUniversalis 最高可支持 100，但较低的值可能会提高响应性。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Max Recipes to Analyze",
+        "Translated": "要分析的最大食谱",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Maximum number of recipes to fetch and analyze when refreshing.\nHigher values take longer but provide more comprehensive results.\nRecommended: 1000-2000 for balance between speed and coverage.",
+        "Translated": "刷新时需要获取和分析的食谱数量上限。\n更高的数值需要更长时间，但能提供更全面的结果。\n推荐:1000-2000，以平衡速度和覆盖范围。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "API Request Timeout (Seconds)",
+        "Translated": "API 请求超时 (秒)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Work Offline (Disable API)",
+        "Translated": "离线工作 (禁用 API)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "If enabled, no network requests will be made.\nThe plugin will only use cached data.",
+        "Translated": "如果启用，则不会发出网络请求。\n插件将只使用缓存数据。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Filtering & Sorting",
+        "Translated": "过滤与排序",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Minimum Profit (Gil)",
+        "Translated": "最小利润 (Gil)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Show Only Profitable Items",
+        "Translated": "仅显示有利可图的项目",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Category Filters",
+        "Translated": "类别过滤器",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Combat Gear",
+        "Translated": "战斗装备",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Crafting & Gathering Gear",
+        "Translated": "工艺和采集装备",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Furniture & Housing",
+        "Translated": "家具和住房",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Consumables (Food/Potions)",
+        "Translated": "消耗品 (食物/魔药)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Crafting Materials",
+        "Translated": "制作材料",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Other",
+        "Translated": "其他",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show High Risk Items",
+        "Translated": "显示高风险物品",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Cross-World Settings",
+        "Translated": "跨世界设置",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Est. Travel Cost (Gil)",
+        "Translated": "埃斯特。旅行费用 (吉尔)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Estimated gil cost to travel to another world (teleport fees).\nUsed to calculate net profit for cross-world arbitrage.",
+        "Translated": "前往另一个世界的预估基尔成本 (传送费)。\n用于计算跨世界套利的净利润。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Max Items to Fetch per Cycle",
+        "Translated": "每个周期要获取的最大项目数",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Max Items to Track",
+        "Translated": "要跟踪的最大物品数量",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Maximum number of items to keep in the priority tracking system.\nOlder/lower priority items may be removed when this limit is reached.",
+        "Translated": "优先级跟踪系统中需要保留的最大项目数量。\n达到此限制时，可能会删除较旧/较低优先级的项目。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Database Size: ",
+        "Translated": "数据库大小：",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Optimize Database (VACUUM)",
+        "Translated": "优化数据库 (VACUUM)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reclaims unused space and defragments the database file.\nMay take a few seconds.",
+        "Translated": "回收未使用的空间并对数据库文件进行碎片整理。\n可能需要几秒钟。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Auto-Optimize Frequency (Days)",
+        "Translated": "自动优化频率 (天)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "How often to automatically run database optimization.\nSet to 0 to disable.",
+        "Translated": "自动运行数据库优化的频率有多高？\n设置为 0 即可禁用。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Last optimized: ",
+        "Translated": "上次优化：",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "API Usage Statistics",
+        "Translated": "API 使用统计",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Requests (Last Minute): ",
+        "Translated": "请求 (最后一分钟):",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Requests (Last Hour): ",
+        "Translated": "请求 (最后一小时):",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Requests (Today): ",
+        "Translated": "今天的请求：",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Total Requests: ",
+        "Translated": "总请求：",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Rate Limited: ",
+        "Translated": "速率限制：",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Errors/Retries: ",
+        "Translated": "错误/重试：",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "API Token Bucket (Burst Capacity)",
+        "Translated": "API 代币存储桶 (突发容量)",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tokens replenish over time.\nRequests consume 1 token.\nEmpty bucket = Rate Limiting active.",
+        "Translated": "代币会随着时间推移而补充。\n请求消耗 1 个代币。\n空桶 = 速率限制已启用。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "API: Degraded (Cache Only)",
+        "Translated": "API:降级 (仅缓存)",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Universalis API Usage",
+        "Translated": "通用 API 使用",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Last Minute: ",
+        "Translated": "最后一分钟：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Last Hour: ",
+        "Translated": "最后一小时：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Today: ",
+        "Translated": "今天：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Total Session: ",
+        "Translated": "总会话：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Throttled: ",
+        "Translated": "窒息：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " times",
+        "Translated": "时间",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Errors: ",
+        "Translated": "错误：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Status: Degraded (High Error Rate)",
+        "Translated": "状态：降级 (高错误率)",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "The plugin is temporarily avoiding API calls\nto prevent further errors.",
+        "Translated": "插件正在暂时避免 API 调用\n为了防止进一步的错误。",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Status: Healthy",
+        "Translated": "状态：健康",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Cache: ",
+        "Translated": "缓存：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Cache Performance",
+        "Translated": "缓存性能",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hit Rate: ",
+        "Translated": "命中率：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hits: ",
+        "Translated": "命中率：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Active Entries: ",
+        "Translated": "活跃条目：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Expired: ",
+        "Translated": "已过期：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Total: ",
+        "Translated": "总计：",
+        "Context": "DashboardWindow.DrawStatusBar",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Market-Aware Crafting Profits",
+        "Translated": "市场感知型手工制作利润",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "📦 Download Data",
+        "Translated": "🦦下载数据",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Loading...",
+        "Translated": "正在加载...",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Cancelling...",
+        "Translated": "取消......",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "📋 Copy Report",
+        "Translated": "📋 复制报告",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copy a formatted text summary to clipboard for sharing",
+        "Translated": "将格式化文本摘要拷贝到剪贴板以共享",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Report this error on GitHub",
+        "Translated": "在 GitHub 上报告此错误",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Showing ",
+        "Translated": "显示",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " of ",
+        "Translated": "的",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " recipes",
+        "Translated": "食谱",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Avg Profit: ",
+        "Translated": "年利润：",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "(Updated ",
+        "Translated": "(更新)",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Click 'Refresh' to load profit data",
+        "Translated": "点击 “刷新” 以加载利润数据",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " item(s) selected",
+        "Translated": "已选择的项目",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "📋 Export Crafting List",
+        "Translated": "📋 出口手工艺清单",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Generate a full crafting list with all sub-crafts for selected items",
+        "Translated": "为所选物品生成包含所有子工艺的完整制作列表",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Clear Selection",
+        "Translated": "清晰选择",
+        "Context": "DashboardWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Data Mode:",
+        "Translated": "数据模式：",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Live (Fetch from API)",
+        "Translated": "直播 (从 API 获取)",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Fetch fresh market data from Universalis API on each refresh.\nSlower but always up-to-date.",
+        "Translated": "每次刷新都会从 Universalis API 获取新的市场数据。\n速度更慢，但始终保持最新。",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Cached (Pre-downloaded)",
+        "Translated": "缓存 (预下载)",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Use only pre-downloaded market data from your database.\nMuch faster but requires downloading data first via Data Manager.\nData freshness depends on when you last downloaded.",
+        "Translated": "仅使用数据库中预先下载的市场数据。\n更快，但需要先通过数据管理器下载数据。\n数据的新鲜度取决于最后一次下载的时间。",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Expansion:",
+        "Translated": "扩展：",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Filters:",
+        "Translated": "过滤器：",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Level:",
+        "Translated": "等级：",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Min Profit:",
+        "Translated": "最小利润：",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Search items...",
+        "Translated": "搜索项目...",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Profitable Only",
+        "Translated": "只有利润",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Housing Boom",
+        "Translated": "房地产繁荣",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Focuses on profitable furnishing crafts and ranks them by housing-patch demand, profit, and low competition.",
+        "Translated": "专注于有利可图的家具工艺，并根据房地产需求、利润和低竞争力对其进行排名。",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Expansion Filter",
+        "Translated": "扩张过滤器",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable to scan ALL items from a specific expansion (ignores level filters).\nClick Refresh after enabling.",
+        "Translated": "能够扫描特定扩展的所有项目 (忽略级别过滤器)。\n启用后单击 “刷新”。",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Categories...",
+        "Translated": "类别...",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Columns...",
+        "Translated": "列...",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "ColumnVisibility",
+        "Translated": "列可见性",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Sort by:",
+        "Translated": "按以下方式排序：",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Reset Sort",
+        "Translated": "重置排序",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reset to default sort (Recommendation Score)",
+        "Translated": "重置为默认排序 (推荐评分)",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Show/Hide Columns:",
+        "Translated": "显示/隐藏列：",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Crafting & Gathering",
+        "Translated": "制作与收集",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Furniture",
+        "Translated": "家具",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Consumables",
+        "Translated": "消费品",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Materials",
+        "Translated": "材料",
+        "Context": "DashboardWindow.DrawFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "No data loaded. Click 'Refresh' to analyze the market.",
+        "Translated": "未加载数据。点击 “刷新” 以分析市场。",
+        "Context": "DashboardWindow.DrawProfitList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "No items match your filters.",
+        "Translated": "没有项目与您的过滤器匹配。",
+        "Context": "DashboardWindow.DrawProfitList",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Recipe Level: ",
+        "Translated": "食谱级别：",
+        "Context": "DashboardWindow.DrawProfitRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Item Level: ",
+        "Translated": "物品等级：",
+        "Context": "DashboardWindow.DrawProfitRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Crafting Level: ",
+        "Translated": "生产等级：",
+        "Context": "DashboardWindow.DrawProfitRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Warnings:",
+        "Translated": "警告：",
+        "Context": "DashboardWindow.DrawProfitRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Data is stale (from cache). API might be unreachable.",
+        "Translated": "数据已过期 (来自缓存)。API 可能无法访问。",
+        "Context": "DashboardWindow.DrawProfitRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Add to Crafting List",
+        "Translated": "添加到创作列表",
+        "Context": "DashboardWindow.DrawProfitRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Quantity to produce",
+        "Translated": "要生产的数量",
+        "Context": "DashboardWindow.DrawProfitRow",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Click to sort by ",
+        "Translated": "点击以排序",
+        "Context": "DashboardWindow.DrawSortableHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Starting...",
+        "Translated": "开始......",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Finding housing recipes...",
+        "Translated": "寻找住房配方......",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Recipe categories may need updating for the current game data.",
+        "Translated": "食谱类别可能需要更新当前游戏数据。",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Housing Boom: ",
+        "Translated": "房地产繁荣：",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Try selecting a different expansion.",
+        "Translated": "尝试选择不同的扩展。",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Cached: ",
+        "Translated": "缓存：",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Use the 'Download Data' button to pre-download market data for this expansion.",
+        "Translated": "使用 “下载数据” 按钮为此扩展预先下载市场数据。",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Expansion: ",
+        "Translated": "扩展：",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Live: ",
+        "Translated": "直播：",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Try Cached mode if live Universalis requests are slow, or reduce Max Recipes to Analyze.",
+        "Translated": "如果现场 Universalis 请求速度缓慢，请尝试缓存模式，或减少最大配方以进行分析。",
+        "Context": "RefreshDataAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No item selected.",
+        "Translated": "未选择任何项目。",
+        "Context": "DetailWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Current Listings",
+        "Translated": "当前清单",
+        "Context": "DetailWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Recent Sales",
+        "Translated": "近期销售额",
+        "Context": "DetailWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "(Lvl ",
+        "Translated": "（等级）",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Copy",
+        "Translated": "复制",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copy analysis to clipboard",
+        "Translated": "将分析复制到剪贴板",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Share Link",
+        "Translated": "共享链接",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copy shareable link with profit & scores to clipboard",
+        "Translated": "将包含利润和评分的可共享链接复制到剪贴板",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Checking Worlds...",
+        "Translated": "检查世界......",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Check Cross-World Prices",
+        "Translated": "查看跨世界价格",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "DC Data Loaded",
+        "Translated": "DC 数据加载",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Data Center market data has been fetched.\nSee 'Cheapest' row in Market Snapshot below.",
+        "Translated": "数据中心已获取市场数据。\n请参阅下方 “市场快照” 中的 “最便宜” 行。",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Error: ",
+        "Translated": "错误：",
+        "Context": "DetailWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " gil",
+        "Translated": "Gil",
+        "Context": "DetailWindow.CopyToClipboard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "MARKET SNAPSHOT",
+        "Translated": "市场快照",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Sale Velocity:",
+        "Translated": "销售速度：",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Current Listings:",
+        "Translated": "当前清单：",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Cheapest (Buy):",
+        "Translated": "最便宜 (买入):",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Save ",
+        "Translated": "保存",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " gil per item by buying on ",
+        "Translated": "每件商品通过购买获得的金额",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Best (Sell):",
+        "Translated": "最佳 (卖出):",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Prices are higher on ",
+        "Translated": "价格在",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " gil).\n\nWARNING: You cannot sell items on other worlds as a visitor.\nYou must transfer your Home World to ",
+        "Translated": "Gil)。\n\n警告：作为游客，你不能在其他世界出售商品。\n你必须将家园世界转移到",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": " to sell there.\n(Note: Home World transfers usually incur a 90-day cooldown)",
+        "Translated": "在那里出售。\n(注:Home World 转移通常会导致 90 天的冷却期)",
+        "Context": "DetailWindow.DrawMarketSnapshot",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "PROFIT ANALYSIS",
+        "Translated": "利润分析",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Expected Sale:",
+        "Translated": "预期销售额：",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Vendor Price:",
+        "Translated": "供应商价格：",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Crafting Cost:",
+        "Translated": "制作成本：",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Market Tax (5%):",
+        "Translated": "市场税 (5%):",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Net Profit:",
+        "Translated": "净利润：",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Arbitrage Profit:",
+        "Translated": "套利利润：",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Potential profit by buying on ",
+        "Translated": "通过继续购买而获得的潜在套利",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "\nand selling on current world (after tax & travel).",
+        "Translated": "并在当前世界范围内销售 (税后和旅行后)。",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Margin:",
+        "Translated": "边际：",
+        "Context": "DetailWindow.DrawProfitBreakdown",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "INGREDIENT BREAKDOWN",
+        "Translated": "拆解成分",
+        "Context": "DetailWindow.DrawCostDetails",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Unit",
+        "Translated": "单位",
+        "Context": "DetailWindow.DrawCostDetails",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Total",
+        "Translated": "总计",
+        "Context": "DetailWindow.DrawCostDetails",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Source: ",
+        "Translated": "来源：",
+        "Context": "DetailWindow.DrawIngredientColumns",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "No current listings found.",
+        "Translated": "未找到当前列表。",
+        "Context": "DetailWindow.DrawCurrentListings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Price",
+        "Translated": "价格",
+        "Context": "DetailWindow.DrawCurrentListings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "World",
+        "Translated": "世界",
+        "Context": "DetailWindow.DrawCurrentListings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Retainer",
+        "Translated": "保留者",
+        "Context": "DetailWindow.DrawCurrentListings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "City: ",
+        "Translated": "城市：",
+        "Context": "DetailWindow.DrawCurrentListings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "RECENT SALES",
+        "Translated": "近期销售额",
+        "Context": "DetailWindow.DrawRecentSales",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Buyer",
+        "Translated": "买家",
+        "Context": "DetailWindow.DrawRecentSales",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Sold: ",
+        "Translated": "销售额：",
+        "Context": "DetailWindow.DrawRecentSales",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "RISK ASSESSMENT",
+        "Translated": "风险评估",
+        "Context": "DetailWindow.DrawRiskAnalysis",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Score: ",
+        "Translated": "得分：",
+        "Context": "DetailWindow.DrawRiskAnalysis",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "RECOMMENDATION",
+        "Translated": "推荐",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Weighted Score:",
+        "Translated": "加权评分：",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Recommended to Craft",
+        "Translated": "向工艺推荐",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Craft with Caution",
+        "Translated": "谨慎的工艺",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Not Recommended",
+        "Translated": "不推荐",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Suggested Batch: ",
+        "Translated": "建议批次：",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Est. Sell Time: ",
+        "Translated": "EST. 销售时间：",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " days",
+        "Translated": "天数",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Suggested Price:",
+        "Translated": "建议价格：",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "(undercuts by 1 gil)",
+        "Translated": "(减去 1 个基尔)",
+        "Context": "DetailWindow.DrawRecommendation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "MARKET TIMING",
+        "Translated": "市场择时",
+        "Context": "DetailWindow.DrawMarketTiming",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Best Days:",
+        "Translated": "最好的日子：",
+        "Context": "DetailWindow.DrawMarketTiming",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Peak Hours (UTC):",
+        "Translated": "高峰时段 (UTC):",
+        "Context": "DetailWindow.DrawMarketTiming",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "RECIPE INFO",
+        "Translated": "食谱信息",
+        "Context": "DetailWindow.DrawRecipeInfo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Yields: ",
+        "Translated": "产出：",
+        "Context": "DetailWindow.DrawRecipeInfo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Est. Time: ",
+        "Translated": "东部时间：",
+        "Context": "DetailWindow.DrawRecipeInfo",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Current Filter",
+        "Translated": "当前滤波器",
+        "Context": "FilterWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Presets",
+        "Translated": "预设",
+        "Context": "FilterWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Configure advanced filtering options below.",
+        "Translated": "在下方配置高级过滤选项。",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Search",
+        "Translated": "搜索",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Item Name:",
+        "Translated": "项目名称：",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Basic Requirements",
+        "Translated": "基本要求",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Equip Level:",
+        "Translated": "装备等级：",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Required character level to equip the item.",
+        "Translated": "需要字符级别才能装备项目。",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "The item's distinct power level (iLvl).",
+        "Translated": "项目的独特功率等级 (iLvl)。",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Market & Profit",
+        "Translated": "市场与利润",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Min Profit (Gil)",
+        "Translated": "最小利润 (Gil)",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Minimum expected profit per unit.",
+        "Translated": "每单位最低预期利润。",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Min ROI %",
+        "Translated": "最低投资回报率",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Minimum Return on Investment percentage.",
+        "Translated": "最低投资回报率百分比。",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Min Sales/Day",
+        "Translated": "最小销售额/日",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Minimum number of sales per day (Sale Velocity).",
+        "Translated": "每天最小销售数量 (销售速度)。",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Categories",
+        "Translated": "类别",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Jobs / Classes",
+        "Translated": "工作/课程",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Select specific jobs to include:",
+        "Translated": "选择特定职位以包括：",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "All Jobs",
+        "Translated": "所有工作",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Equipment Slots",
+        "Translated": "设备槽",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Filter by equipment slot:",
+        "Translated": "按设备槽过滤：",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Main Hand",
+        "Translated": "主手",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Head",
+        "Translated": "头部",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Body",
+        "Translated": "身体",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Hands",
+        "Translated": "手",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Legs",
+        "Translated": "腿",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Feet",
+        "Translated": "脚",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Off Hand",
+        "Translated": "随手",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Ears",
+        "Translated": "耳朵",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Neck",
+        "Translated": "脖子",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Wrists",
+        "Translated": "手腕",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Rings",
+        "Translated": "戒指",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Item Sources",
+        "Translated": "物品来源",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Crafted Items",
+        "Translated": "手工艺品",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Gathered Items",
+        "Translated": "收集的物品",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Items obtained via Mining, Botany, or Fishing.",
+        "Translated": "通过挖矿、植物学或钓鱼获得的物品。",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Vendor Items",
+        "Translated": "供应商商品",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Market Prohibited / Untradeable",
+        "Translated": "市场禁止/不可交易",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Market Tradeable",
+        "Translated": "市场可交易",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Exclude Untradeable / Ex",
+        "Translated": "排除不可交易/前",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Item Types",
+        "Translated": "项目类型",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Combat Gear (Weapons & Armor)",
+        "Translated": "战斗装备 (武器和护甲)",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Consumables (Food, Potions)",
+        "Translated": "消耗品 (食物、药水)",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Item Properties",
+        "Translated": "物品属性",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Rarity (1-7):",
+        "Translated": "稀有度 (1-7):",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Min Materia Slots",
+        "Translated": "最小物质槽",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Dyeable Only",
+        "Translated": "仅可染色",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Collectable Only",
+        "Translated": "仅可收集",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Exclude Unique/Untradeable",
+        "Translated": "排除唯一/不可交易",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Exclude Market Prohibited",
+        "Translated": "禁止市场排除",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Apply Filter",
+        "Translated": "应用过滤器",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Reset",
+        "Translated": "重置",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Save as Preset",
+        "Translated": "保存为预设",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Preset Name:",
+        "Translated": "预设名称：",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Save",
+        "Translated": "保存",
+        "Context": "FilterWindow.DrawCurrentFilterTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "No presets saved.",
+        "Translated": "没有保存预设。",
+        "Context": "FilterWindow.DrawPresetsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Level: ",
+        "Translated": "等级：",
+        "Context": "FilterWindow.DrawPresetsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "\nProfit: >",
+        "Translated": "收益:>",
+        "Context": "FilterWindow.DrawPresetsTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Load Selected",
+        "Translated": "选择加载",
+        "Context": "FilterWindow.DrawPresetsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "FilterWindow.DrawPresetsTab",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "No shopping list generated.",
+        "Translated": "未生成购物清单。",
+        "Context": "ShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Shopping List Created: ",
+        "Translated": "创建购物清单：",
+        "Context": "ShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Copy to Clipboard",
+        "Translated": "复制到剪贴板",
+        "Context": "ShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Export to CSV",
+        "Translated": "导出到 CSV",
+        "Context": "ShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Teamcraft Import JSON",
+        "Translated": "Teamcraft 导入 JSON",
+        "Context": "ShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copies a JSON string to clipboard that can be imported into Teamcraft.\n(Lists -> Import List -> Paste JSON)",
+        "Translated": "将 JSON 字符串复制到剪贴板，以便导入 Teamcraft。\n(列表->导入列表->粘贴 JSON)",
+        "Context": "ShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Crafting Plan",
+        "Translated": "制作计划",
+        "Context": "ShoppingListWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Source",
+        "Translated": "来源",
+        "Context": "ShoppingListWindow.DrawMaterialsTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Est. Cost",
+        "Translated": "埃斯特。成本",
+        "Context": "ShoppingListWindow.DrawMaterialsTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "TOTAL",
+        "Translated": "总计",
+        "Context": "ShoppingListWindow.DrawMaterialsTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No crafting steps available.",
+        "Translated": "无可用的制作步骤。",
+        "Context": "ShoppingListWindow.DrawCraftingPlan",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Step",
+        "Translated": "第一步",
+        "Context": "ShoppingListWindow.DrawCraftingPlan",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Quantity",
+        "Translated": "数量",
+        "Context": "ShoppingListWindow.DrawCraftingPlan",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Ingredients",
+        "Translated": "材料",
+        "Context": "ShoppingListWindow.DrawCraftingPlan",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "(Yields ",
+        "Translated": "(收益率)",
+        "Context": "ShoppingListWindow.DrawCraftingPlan",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " crafts)",
+        "Translated": "手工艺)",
+        "Context": "ShoppingListWindow.DrawCraftingPlan",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "None",
+        "Translated": "无",
+        "Context": "ShoppingListWindow.DrawCraftingPlan",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Check your internet connection and try again.",
+        "Translated": "检查您的互联网连接，然后再试一次。",
+        "Context": "ErrorMessageUtils.GetSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "We're sending too many requests. The plugin will automatically slow down.",
+        "Translated": "我们发送的请求太多了。插件会自动减速。",
+        "Context": "ErrorMessageUtils.GetSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Try refreshing fewer items or wait a bit.",
+        "Translated": "尝试少刷新一些物品，或者稍等片刻。",
+        "Context": "ErrorMessageUtils.GetSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Server maintenance or temporary issue. Try again in 10-15 minutes.",
+        "Translated": "服务器维护或临时问题。10-15 分钟后再次尝试。",
+        "Context": "ErrorMessageUtils.GetSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Restarting the game might fix this if it keeps happening.",
+        "Translated": "如果这种情况持续发生，重启游戏可能会解决这个问题。",
+        "Context": "ErrorMessageUtils.GetSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "If this persists, please report it on GitHub.",
+        "Translated": "如果这种情况持续，请在 GitHub 上报告。",
+        "Context": "ErrorMessageUtils.GetSuggestion",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No recent sales data available",
+        "Translated": "最近没有销售数据可用",
+        "Context": "MarketAnalysisService.AnalyzeMarket",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "This item has no sales history. Demand is unknown.",
+        "Translated": "这件商品没有销售历史。需求未知。",
+        "Context": "MarketAnalysisService.AnalyzeMarket",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Using Cached Data",
+        "Translated": "使用缓存数据",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "The API was unreachable or the request failed. Showing cached data which may be outdated.",
+        "Translated": "API 无法访问或请求失败。显示可能已过期的缓存数据。",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Market oversupplied",
+        "Translated": "市场供应过剩",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " listings but only ",
+        "Translated": "清单，但仅限",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " sales/day. Supply will last ",
+        "Translated": "销售额/当日。供应将持续",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " days.",
+        "Translated": "几天。",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Market saturation imminent",
+        "Translated": "市场饱和即将来临",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Falling demand (",
+        "Translated": "需求下降 (",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": ") with moderate supply. Saturation likely.",
+        "Translated": ") 供应适中。可能出现饱和。",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Supply accumulating",
+        "Translated": "供给积累",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Supply is accumulating (",
+        "Translated": "供应正在积累 (",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " days supply). Competition is increasing.",
+        "Translated": "日供应。竞争正在加剧。",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Low sales volume",
+        "Translated": "销售量低",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Only ",
+        "Translated": "只有",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " sales per day. This item sells slowly.",
+        "Translated": "每日销售额。这件商品销售缓慢。",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Price war detected",
+        "Translated": "发现价格战",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Prices are volatile (",
+        "Translated": "价格是波动的 (",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": ") and demand is falling (",
+        "Translated": ") 和需求在下降 (",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "No recent sales",
+        "Translated": "最近没有销售额",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Last sale was ",
+        "Translated": "最近的销售额是",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " days ago. Market may be dead.",
+        "Translated": "几天前。市场可能已经死寂。",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Many sellers at same price",
+        "Translated": "许多卖家以相同的价格卖出",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " sellers listing at ",
+        "Translated": "卖家在",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " gil. Hard to stand out.",
+        "Translated": "gil。很难脱颖而出。",
+        "Context": "MarketAnalysisService.GenerateWarnings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Potential Price Gouging",
+        "Translated": "潜在的价格拉抬",
+        "Context": "MarketAnalysisService.DetectPriceManipulation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Current lowest price (",
+        "Translated": "当前最低价格 (",
+        "Context": "MarketAnalysisService.DetectPriceManipulation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": ") is >3x the recent median sales price (",
+        "Translated": ") 是最近销售价格中位数 (",
+        "Context": "MarketAnalysisService.DetectPriceManipulation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Suspicious Sales Detected",
+        "Translated": "检测到可疑销售",
+        "Context": "MarketAnalysisService.DetectPriceManipulation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "A sale for ",
+        "Translated": "销售价格为",
+        "Context": "MarketAnalysisService.DetectPriceManipulation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": " gil detected (10x median). Possible RMT or gil transfer.",
+        "Translated": "检测到吉尔 (10 倍中位数)。可能是 RMT 或吉尔转移。",
+        "Context": "MarketAnalysisService.DetectPriceManipulation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Best selling day: ",
+        "Translated": "最佳销售日：",
+        "Context": "MarketAnalysisService.CalculatePeakDemand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " sales). Peak hour: ",
+        "Translated": "销售高峰时间：",
+        "Context": "MarketAnalysisService.CalculatePeakDemand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": ":00 UTC.",
+        "Translated": ": 00 UTC。",
+        "Context": "MarketAnalysisService.CalculatePeakDemand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": " Highest prices on ",
+        "Translated": "最高价格",
+        "Context": "MarketAnalysisService.CalculatePeakDemand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "No market data available",
+        "Translated": "无法获取市场数据",
+        "Context": "ProfitService.CreateEmptyResult",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Unable to fetch market data from Universalis API",
+        "Translated": "无法从 Universalis API 获取市场数据",
+        "Context": "ProfitService.CreateEmptyResult",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Recent Transfer Cooldown",
+        "Translated": "近期转账冷却",
+        "Context": "CheckCrossWorldPricesAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "You transferred ",
+        "Translated": "你转移了",
+        "Context": "CheckCrossWorldPricesAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "m ago. Small profit (",
+        "Translated": "小额利润 (",
+        "Context": "CheckCrossWorldPricesAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "g) may not be worth the effort.",
+        "Translated": "g) 可能不值得付出努力。",
+        "Context": "CheckCrossWorldPricesAsync.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Limsa Lominsa",
+        "Translated": "利姆萨·洛明萨",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Gridania",
+        "Translated": "格里德尼亚",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Ul'dah",
+        "Translated": "乌尔达",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Ishgard",
+        "Translated": "伊什加德",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Kugane",
+        "Translated": "库甘",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Crystarium",
+        "Translated": "水晶馆",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Old Sharlayan",
+        "Translated": "老沙拉扬",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Radz-at-Han",
+        "Translated": "拉兹 - 阿特 - 汉",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "City ",
+        "Translated": "城市",
+        "Context": "UniversalisService.GetCityName",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
