@@ -1,216 +1,153 @@
 {
-  "type": "uit-contribution",
-  "plugin": "PriceInsight",
-  "kinds": [
-    "free"
-  ],
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-11",
+    "source": "user",
+    "label": "玩家包 · 320e0a",
+    "kinds": [
+      "free"
+    ]
+  },
   "entries": [
     {
       "Original": "Price Insight Config",
       "Translated": "价格洞察配置",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Begin"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Tap Alt to refresh prices",
       "Translated": "点击 Alt 以刷新价格",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Prefetch prices for items in inventory",
       "Translated": "预测库存中物品的价格",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Prefetch prices for all items in inventory, chocobo saddlebag and retainer when logging in.",
       "Translated": "登录时提前预览所有商品的价格，包括库存、巧克力马鞍袋和保留金。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Use current world as home world",
       "Translated": "使用当前世界作为家庭世界",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "The current world you're on will be considered your \"home world\".\nUseful if you're datacenter travelling and want to see prices there.",
       "Translated": "你当前所在的世界将被视为你的 “家”。\n如果你正在数据中心旅行，想看看那里的价格，这很有用。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show cheapest price in:",
       "Translated": "显示最便宜的价格：",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Region",
       "Translated": "地区",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Datacenter",
       "Translated": "数据中心",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Home world",
       "Translated": "家庭世界",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show most recent purchase in:",
       "Translated": "显示最近的购买情况：",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Text"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show the average sales per day based on sales of the last 4 days.",
       "Translated": "显示基于过去 4 天销售额的每日平均销售额。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show the average sale price based on sales of the last 4 days.",
       "Translated": "显示基于过去 4 天销售额的平均销售价格。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show stack sale price",
       "Translated": "显示堆栈销售价格",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show the price of the hovered stack if sold at the given unit price.",
       "Translated": "显示如果以给定单价出售，浮动堆栈的价格。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show age of data",
       "Translated": "显示数据的年龄",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show when the price info was last refreshed.\nCan be turned off to reduce tooltip bloat.",
       "Translated": "显示上次更新价格信息的时间。\n可以关闭以减少工具提示膨胀。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show datacenter for foreign worlds",
       "Translated": "向外部世界展示数据中心",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show the datacenter for worlds from other datacenters when displaying prices for the entire region.\nCan be turned off to reduce tooltip bloat.",
       "Translated": "显示整个区域的价格时，显示来自其他数据中心世界的数据中心。\n可以关闭以减少工具提示膨胀。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Always display NQ and HQ prices",
       "Translated": "始终显示 NQ 和 HQ 价格",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "PreserveID": true,
-      "Role": "UI",
-      "RoleReason": "→ ImGui.Checkbox"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Show the prices for both NQ and HQ of an item.\nWhen turned off will only display price for the current quality (use Ctrl to switch between NQ and HQ).",
       "Translated": "显示商品的 NQ 和 HQ 价格。\n当关闭时，只显示当前质量的价格 (使用 Ctrl 在 NQ 和 HQ 之间切换)。",
       "Context": "ConfigUI.Draw",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Include all datacenters available via datacenter traveling.",
       "Translated": "包括通过数据中心旅行提供的所有数据中心。",
       "Context": "ConfigUI.TooltipRegion",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ ImGui.SetTooltip"
+      "Source": "ai:public-caiyun"
     },
     {
       "Original": "Price Insight Configuration Menu",
       "Translated": "Price Insight 配置菜单",
       "Context": "PriceInsightPlugin..ctor",
-      "Source": "ai:public-caiyun",
-      "Role": "UI",
-      "RoleReason": "→ CommandInfo.HelpMessage"
+      "Source": "ai:public-caiyun"
     }
   ],
   "resources": [],
-  "attributes": [],
-  "importedAt": "2026-10-11T05:38:50",
-  "imported": {
-    "archive": "uit-direct-2026-10-11T05-38-37-412Z-6dcab419-2026-10-11T053850.json",
-    "accepted": 23,
-    "filled": 23,
-    "overwritten": 0,
-    "kept": 0,
-    "rejected": 0
-  },
-  "importedNote": "收到 23 条 `PriceInsight` 的界面文字译文，已收为**独立译文包** `uit-packs/PriceInsight@user-320e0a.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 23 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+  "attributes": []
 }
