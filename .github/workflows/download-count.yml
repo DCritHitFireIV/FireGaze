@@ -16,13 +16,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Update pluginmaster.json
+      - name: Update download statistics and README badge
         id: update
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
           import json, os, urllib.request
+          from pathlib import Path
 
           token = os.environ['GH_TOKEN']
           repo = os.environ['GITHUB_REPOSITORY']
@@ -71,6 +72,14 @@ jobs:
               json.dump(master, handle, ensure_ascii=False, indent=2)
               handle.write('\n')
 
+          # Preserve the full count as text so Shields does not abbreviate it to k/M.
+          badge_path = Path('Resources/download-count.json')
+          badge = {'schemaVersion': 1, 'label': '下载', 'message': f'{total:,}', 'color': 'blue'}
+          badge_text = json.dumps(badge, ensure_ascii=False, indent=2) + '\n'
+          if not badge_path.exists() or badge_path.read_text(encoding='utf-8') != badge_text:
+              badge_path.write_text(badge_text, encoding='utf-8')
+              changed = True
+
           print(f'total downloads = {total}, latest update = {latest_update}, changed = {changed}')
           with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
               out.write(f'changed={str(changed).lower()}\n')
@@ -81,7 +90,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pluginmaster.json
+          git add pluginmaster.json Resources/download-count.json
           git commit -m "chore: update download count"
           # 并发推送兜底：定时回写期间别的机器人工作流也在往 main 推，裸 push 会被 fetch first 拒绝
           git push || { git pull --rebase && git push; }
