@@ -1,0 +1,1721 @@
+{
+  "issue": "direct-2026-10-12T04-18-44-991Z-1453bfd2",
+  "receivedAt": "2026-10-12 04:18:58",
+  "author": "匿名直传",
+  "plugin": "Questionable",
+  "fingerprint": "7acd7e216c16b001",
+  "packFile": "Questionable@user-7acd7e.json",
+  "accepted": 209,
+  "filled": 209,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Questionable",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Questionable",
+        "Translated": "可疑",
+        "Context": "[Questionable] QuestionablePlugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "QuestionableConfigTabs",
+        "Translated": "可疑 ConfigTabs",
+        "Context": "[Questionable] ConfigWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabBar"
+      },
+      {
+        "Original": "Questionable Debug Overlay###QuestionableDebugOverlay",
+        "Translated": "可疑调试覆盖",
+        "Context": "[Questionable] DebugOverlay..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Journal",
+        "Translated": "日志",
+        "Context": "[Questionable] JournalProgressWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabBar"
+      },
+      {
+        "Original": "Questionable Setup###QuestionableOneTimeSetup",
+        "Translated": "可疑设置",
+        "Context": "[Questionable] OneTimeSetupWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Finish Setup",
+        "Translated": "完成设置",
+        "Context": "[Questionable] OneTimeSetupWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+      },
+      {
+        "Original": "Missing required plugins",
+        "Translated": "缺少必要的插件",
+        "Context": "[Questionable] OneTimeSetupWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+      },
+      {
+        "Original": "Close window & don't enable Questionable",
+        "Translated": "关闭窗口并不启用 “可疑” 功能",
+        "Context": "[Questionable] OneTimeSetupWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+      },
+      {
+        "Original": "Quest",
+        "Translated": "任务",
+        "Context": "[Questionable] PriorityWindow.DrawQuestList",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Quest Selection###QuestionableQuestSelection",
+        "Translated": "任务选择",
+        "Context": "[Questionable] QuestSelectionWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Only show quests currently offered",
+        "Translated": "目前仅提供显示任务",
+        "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Not table",
+        "Translated": "不是表",
+        "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Id",
+        "Translated": "ID",
+        "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Actions",
+        "Translated": "动作",
+        "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Copy as file name",
+        "Translated": "复制为文件名",
+        "Context": "[Questionable] QuestSelectionWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Copied '",
+        "Translated": "已复制",
+        "Context": "[Questionable] QuestSelectionWindow.CopyToClipboard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "' to clipboard",
+        "Translated": "’ 到剪贴板",
+        "Context": "[Questionable] QuestSelectionWindow.CopyToClipboard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Quest Validation###QuestionableValidator",
+        "Translated": "这个验证",
+        "Context": "[Questionable] QuestValidationWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Simulate quest",
+        "Translated": "模拟这个",
+        "Context": "[Questionable] QuestValidationWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Questionable v",
+        "Translated": "可疑 v",
+        "Context": "[Questionable] QuestWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Notice",
+        "Translated": "注意",
+        "Context": "[Questionable] QuestWindow.DrawContent",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "In Combat",
+        "Translated": "在战斗中",
+        "Context": "[Questionable] ActiveQuestComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "No active quest",
+        "Translated": "无活动任务",
+        "Context": "[Questionable] ActiveQuestComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " quests loaded",
+        "Translated": "已加载任务",
+        "Context": "[Questionable] ActiveQuestComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Simulated Quest: ",
+        "Translated": "模拟任务：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Gathering: ",
+        "Translated": "收集：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "This quest is loaded from your 'pluginConfigs\\Questionable\\Quests' directory.\nThis gets loaded even if Questionable ships with a newer/different version of the quest.",
+        "Translated": "此任务从 “pluginConfigs\\Questionable\\Quests” 目录加载。\n即使可疑人物携带更新/不同版本的任务，这个也会被加载。",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Quest: ",
+        "Translated": "任务：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Disabled",
+        "Translated": "禁用",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Stop Conditions:",
+        "Translated": "停止条件：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Stop at level ",
+        "Translated": "停止在等级",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Stop after completing any of these quests:",
+        "Translated": "完成这些任务中的任何一个后停止：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Certain priority quest (e.g. class quests) may be started/completed by\nthe plugin prior to continuing, usually at a teleport step.",
+        "Translated": "某些优先级任务 (例如类任务) 可以通过以下方式开始/完成：\n插件在继续之前，通常是在瞬间移动步骤中。",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Available priority quests:",
+        "Translated": "可用的优先级任务：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "(none)",
+        "Translated": "(无)",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Unavailable priority quests:",
+        "Translated": "不可用优先任务：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Next Quest: ",
+        "Translated": "下一个任务：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestNames",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "(Next quest in story line not accepted)",
+        "Translated": "(故事线中的下一个任务未接受)",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestWork",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "(Not accepted)",
+        "Translated": "(不接受)",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestWork",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Stop after the current quest completes.",
+        "Translated": "当前任务完成后停止。",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Cancel scheduled stop after current quest.",
+        "Translated": "取消当前任务后的预定停留。",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Stop after the next teleport.",
+        "Translated": "下一次传送后停止。",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Cancel scheduled stop after teleport.",
+        "Translated": "取消传送后的停留计划。",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Skip",
+        "Translated": "跳过",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+      },
+      {
+        "Original": "Skip the current step of the quest path.",
+        "Translated": "跳过任务路径的当前步骤。",
+        "Context": "[Questionable] ActiveQuestComponent.DrawQuestButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Quest sim active (experimental)",
+        "Translated": "活跃任务 (实验性)",
+        "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Sequence: ",
+        "Translated": "序列：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Step: ",
+        "Translated": "步骤：",
+        "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Skip current task",
+        "Translated": "跳过当前任务",
+        "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Clear sim",
+        "Translated": "清楚明白",
+        "Context": "[Questionable] ActiveQuestComponent.DrawSimulationControls",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hard Mode Primals",
+        "Translated": "原始硬模式",
+        "Context": "[Questionable] ARealmRebornComponent.DrawPrimals",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Crystal Tower Raids",
+        "Translated": "水晶塔突袭",
+        "Context": "[Questionable] ARealmRebornComponent.DrawAllianceRaids",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "QST prio: ",
+        "Translated": "QST 优先：",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sim: ",
+        "Translated": "是的：",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tracked Quest ",
+        "Translated": "追踪任务",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tracked Quest: ",
+        "Translated": "追踪任务：",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Daily Quest ",
+        "Translated": "每日任务",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Director: ",
+        "Translated": "导演：",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "  EHI EEI: ",
+        "Translated": "EHI EI:",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hovered Item: ",
+        "Translated": "悬浮物品：",
+        "Context": "[Questionable] CreationUtilsComponent.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Target: ",
+        "Translated": "目标：",
+        "Context": "[Questionable] CreationUtilsComponent.DrawTargetDetails",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Distance: ",
+        "Translated": "距离：",
+        "Context": "[Questionable] CreationUtilsComponent.DrawTargetDetails",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "To Target",
+        "Translated": "目标",
+        "Context": "[Questionable] CreationUtilsComponent.DrawInteractionButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+      },
+      {
+        "Original": "Cancel pathfinding",
+        "Translated": "取消路径发现",
+        "Context": "[Questionable] CreationUtilsComponent.DrawInteractionButtons",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Interact with your current target.",
+        "Translated": "与当前目标互动。",
+        "Context": "[Questionable] CreationUtilsComponent.DrawInteractionButtons",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Left click: Copy target position as JSON.\nRight click: Copy target position as C# code.",
+        "Translated": "左键点击：将目标位置复制为 JSON。\n右键单击：将目标位置复制为 C#代码。",
+        "Context": "[Questionable] CreationUtilsComponent.DrawCopyButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Left click: Copy your position as JSON.\nRight click: Copy your position as C# code.",
+        "Translated": "左键点击：将您的位置复制为 JSON。\n右键点击：将您的位置复制为 C#代码。",
+        "Context": "[Questionable] CreationUtilsComponent.DrawCopyButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Event",
+        "Translated": "事件",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Repeatable",
+        "Translated": "可重复",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Instant",
+        "Translated": "即时",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Author: ",
+        "Translated": "作者：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Authors: ",
+        "Translated": "作者：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Comment: ",
+        "Translated": "评论：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Last checked: ",
+        "Translated": "最后检查：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Society: ",
+        "Translated": "社会：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawInner",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Requires all:",
+        "Translated": "需要所有：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Requires one:",
+        "Translated": "需要一个：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Unknown Quest (",
+        "Translated": "未知任务 (",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Requires Carrier Level ",
+        "Translated": "需要载体等级",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Blocked by (if all completed):",
+        "Translated": "被阻止 (如果全部完成):",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Blocked by (if at least completed):",
+        "Translated": "被 (至少完成) 以下内容阻止：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Blocked by (if completed):",
+        "Translated": "被 (如果已完成):",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Requires:",
+        "Translated": "要求：",
+        "Context": "[Questionable] QuestTooltipComponent.DrawQuestUnlocks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sponsor QST development",
+        "Translated": "QST 开发赞助商",
+        "Context": "[Questionable] QuickAccessButtonsComponent.DrawSponsorButton",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Future message",
+        "Translated": "未来消息",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "As of version xxxx, QST includes a feature where you can click the ! button next to the quest progress buttons to report an issue with the current quest. This message is to notify you that if you choose to make use of this new feature and submit a bug report, QST will automatically capture and upload the following information:",
+        "Translated": "从 xxxx 版本开始，QST 包含一个功能，您可以点击任务进度按钮旁边的！按钮来报告当前任务的问题。这条消息是为了通知您，如果您选择使用这个新功能并提交 bug 报告，QST 将自动捕获并上传以下信息：",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "List of all enabled plugins and their version numbers",
+        "Translated": "所有已启用插件及其版本号的列表",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "The last ten actions taken by QST",
+        "Translated": "QST 最近采取的十项行动",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "The quest/sequence/step you are on when clicking the button",
+        "Translated": "点击按钮时您所处的任务/序列/步骤",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Your list of priority quests",
+        "Translated": "您的优先任务清单",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "A short configurable message from Settings, if set",
+        "Translated": "一条来自 “设置” 的简短可配置消息 (如果已设置)",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "This feature will never send any information to the bug report service unless you click the ! button highlighted in red below. If you would like to opt out of seeing this button, click the orange \"Opt Out\" button below. Otherwise, click the green \"Dismiss\" button to hide this warning.",
+        "Translated": "此功能永远不会向 bug 报告服务发送任何信息，除非您点击下面用红色突出显示的！按钮。如果您想选择不看到此按钮，请点击下面的橙色 “选择退出” 按钮。否则，点击绿色 “解除” 按钮以隐藏此警告。",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Opt Out",
+        "Translated": "选择退出",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+      },
+      {
+        "Original": "Dismiss",
+        "Translated": "解除",
+        "Context": "[Questionable] ReportWarningComponent.DrawReportWarning",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+      },
+      {
+        "Original": "Allied Societies",
+        "Translated": "联合社会",
+        "Context": "[Questionable] AlliedSocietyJournalComponent.DrawAlliedSocietyQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Remaining: ",
+        "Translated": "剩余：",
+        "Context": "[Questionable] AlliedSocietyJournalComponent.DrawAlliedSocietyQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "DrawAlliedSocietyQuests",
+        "Translated": "绘制 Allied Society 任务",
+        "Context": "[Questionable] AlliedSocietyJournalComponent.DrawAlliedSocietyQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Neutral",
+        "Translated": "中性",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Recognized",
+        "Translated": "已识别",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Friendly",
+        "Translated": "友好",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Trusted",
+        "Translated": "值得信赖",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Respected",
+        "Translated": "尊敬的",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Honored",
+        "Translated": "尊敬的",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sworn",
+        "Translated": "宣誓",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Allied",
+        "Translated": "联合",
+        "Context": "[Questionable] AlliedSocietyJournalComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Gathering Points",
+        "Translated": "聚集点",
+        "Context": "[Questionable] GatheringJournalComponent.DrawGatheringItems",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabItem"
+      },
+      {
+        "Original": "Search areas, gathering points and items",
+        "Translated": "搜索区域、聚集点和物品",
+        "Context": "[Questionable] GatheringJournalComponent.DrawGatheringItems",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Supported",
+        "Translated": "支持",
+        "Context": "[Questionable] GatheringJournalComponent.DrawGatheringItems",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Collected",
+        "Translated": "已收集",
+        "Context": "[Questionable] GatheringJournalComponent.DrawGatheringItems",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "No area, gathering point or item matches your search text.",
+        "Translated": "没有区域、聚集点或项目与搜索文本匹配。",
+        "Context": "[Questionable] GatheringJournalComponent.DrawGatheringItems",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " Lv. ",
+        "Translated": "Lv。",
+        "Context": "[Questionable] GatheringJournalComponent.DrawPoint",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Explanation",
+        "Translated": "解释",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "The list below contains all quests that appear in your journal.",
+        "Translated": "下面的列表包含您日志中出现的所有任务。",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "'Supported' lists quests that Questionable can do for you",
+        "Translated": "“支持” 列出了 Questionable 可以为您完成的任务",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "'Completed' lists quests your current character has completed.",
+        "Translated": "“已完成” 列表查询您当前角色已完成的任务。",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Not all quests can be completed even if they're listed as available, e.g. starting city quest chains.",
+        "Translated": "并非所有任务都能完成，即使它们被列为可用，例如启动城市任务链。",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "The text in the Supported column indicates the last time a quest path was reported to work perfectly.",
+        "Translated": "支持列中的文本表示最后一次报告任务路径完美工作的情况。",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Quests can be added to Priority Quests, either individually or by group, with the right click menu.",
+        "Translated": "任务可以单独或通过右键菜单添加到优先级任务中。",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColoredWrapped"
+      },
+      {
+        "Original": "Completed",
+        "Translated": "已完成",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "No quest or category matches your search.",
+        "Translated": "没有任务或类别与您的搜索相匹配。",
+        "Context": "[Questionable] QuestJournalComponent.DrawQuests",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Add to Priority Quests",
+        "Translated": "添加到优先级任务",
+        "Context": "[Questionable] QuestJournalUtils.ShowContextMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Start as next quest",
+        "Translated": "从下一个任务开始",
+        "Context": "[Questionable] QuestJournalUtils.ShowContextMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "View in Quest Map",
+        "Translated": "查看任务地图",
+        "Context": "[Questionable] QuestJournalUtils.ShowContextMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Add all to Priority Quests",
+        "Translated": "将所有内容添加到优先级任务",
+        "Context": "[Questionable] QuestJournalUtils.ShowQuestGroupContextMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Remove all from Priority Quests",
+        "Translated": "从优先级任务中移除所有内容",
+        "Context": "[Questionable] QuestJournalUtils.ShowQuestGroupContextMenu",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Orchestrion Rolls",
+        "Translated": "Orchestration Rolls",
+        "Context": "[Questionable] QuestRewardComponent.DrawItemRewards",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Triple Triad Cards",
+        "Translated": "三张三合牌",
+        "Context": "[Questionable] QuestRewardComponent.DrawItemRewards",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Fashion Accessories",
+        "Translated": "时尚配饰",
+        "Context": "[Questionable] QuestRewardComponent.DrawItemRewards",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Obtained from: ",
+        "Translated": "获自：",
+        "Context": "[Questionable] QuestRewardComponent.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Liza Carvelli",
+        "Translated": "莉莎·卡韦利",
+        "Context": "[Questionable] AboutConfigComponent.DrawTab",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Duties",
+        "Translated": "职责",
+        "Context": "[Questionable] DutyConfigComponent.DrawConfigTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Table"
+      },
+      {
+        "Original": "Boss Mod (VBM)",
+        "Translated": "老板模式 (VBM)",
+        "Context": "[Questionable] PluginConfigComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Wrath Combo",
+        "Translated": "愤怒组合",
+        "Context": "[Questionable] PluginConfigComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Rotation Solver Reborn",
+        "Translated": "旋转求解器重生",
+        "Context": "[Questionable] PluginConfigComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "AEAssist",
+        "Translated": "AEAAssist",
+        "Context": "[Questionable] PluginConfigComponent..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "LimsaLominsa",
+        "Translated": "Limsa Lominsa",
+        "Context": "[Questionable] SinglePlayerDutyConfigComponent.DrawMainScenarioConfigTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Table"
+      },
+      {
+        "Original": "Gridania (",
+        "Translated": "格里丹尼亚 (Gridania)",
+        "Context": "[Questionable] SinglePlayerDutyConfigComponent.DrawMainScenarioConfigTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Ul'dah (",
+        "Translated": "Ul‘dah (",
+        "Context": "[Questionable] SinglePlayerDutyConfigComponent.DrawMainScenarioConfigTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Other",
+        "Translated": "其他",
+        "Context": "[Questionable] SinglePlayerDutyConfigComponent.DrawOtherQuestConfigTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Table"
+      },
+      {
+        "Original": " disabled quest(s)",
+        "Translated": "禁用任务 (s)",
+        "Context": "[Questionable] DisabledTribesAsIssues",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Invalid aethernet shortcut: ",
+        "Translated": "无效以太网快捷方式：",
+        "Context": "[Questionable] AethernetShortcutValidator.Validate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " to ",
+        "Translated": "到",
+        "Context": "[Questionable] AethernetShortcutValidator.Validate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Missing sequence",
+        "Translated": "缺失序列",
+        "Context": "[Questionable] BasicSequenceValidator.ValidateSequences",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Duplicate sequence",
+        "Translated": "重复序列",
+        "Context": "[Questionable] BasicSequenceValidator.ValidateSequences",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Missing quest start",
+        "Translated": "缺失任务开始",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Instant quest should not have any sequences after the start",
+        "Translated": "即时任务开始后不应该有任何序列",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Class quest should have an aetheryte shortcut to be done automatically",
+        "Translated": "班级任务应该有一个以太网快捷方式来自动完成",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Duplicate completion flags: ",
+        "Translated": "复制完成标志：",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " invalid: ",
+        "Translated": "无效：",
+        "Context": "[Questionable] DialogueChoiceValidator.Validate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Prompt",
+        "Translated": "提示",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Answer",
+        "Translated": "答案",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "JSON Validation failed",
+        "Translated": "JSON 验证失败",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Next quest should not reference itself",
+        "Translated": "接下来的任务不应该涉及自身",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Quest is disabled",
+        "Translated": "任务已禁用",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Invalid chat message: ",
+        "Translated": "无效聊天消息：",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Single player instance ",
+        "Translated": "单玩家实例",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": " not used",
+        "Translated": "未使用",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Duplicate singleplayer duty index: ",
+        "Translated": "重复的单玩家任务索引：",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unexpected AcceptQuest step",
+        "Translated": "意料之外的 AcceptQuest 步骤",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "No AcceptQuest step",
+        "Translated": "无接受任务步骤",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unexpected CompleteQuest step",
+        "Translated": "意料之外的完整任务步骤",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "No CompleteQuest step",
+        "Translated": "无 CompleteQuest 步骤",
+        "Context": "[Questionable] Validate.MoveNext",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "This quest uses the White Wolf Gate, which requires that you unlock all aethernet shards in Gridania.\nThis should have happened as part of the quest \"Close To Home\" if starting in Gridania, or \"The Ul'dahn/Lominsan Envoy\" for the other cities.\nPlease unlock the aethernet shards, or complete the current quest sequence manually before continuing.",
+        "Translated": "这个任务使用白狼之门，它要求您解锁格里丹尼亚的所有以太网碎片。\n如果从格里丹尼亚开始，这应该是 “接近家园” 任务的一部分;如果从其他城市开始，则应该是 “乌丹/罗敏桑使者” 任务的一部分。\n请解锁以太网分片，或手动完成当前任务序列后再继续。",
+        "Context": "[Questionable] QuestFunctions.GetCurrentQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Quest ",
+        "Translated": "任务",
+        "Context": "[Questionable] QuestFunctions.GetMainScenarioQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Starting in Limsa Lominsa",
+        "Translated": "从 Limsa Lominsa 开始",
+        "Context": "[Questionable] JournalData..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Starting in Gridania",
+        "Translated": "从格里丹尼亚出发",
+        "Context": "[Questionable] JournalData..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Starting in Ul'dah",
+        "Translated": "从乌尔达开始",
+        "Context": "[Questionable] JournalData..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNodeEx"
+      },
+      {
+        "Original": "Unknown subcommand ",
+        "Translated": "未知子命令",
+        "Context": "[Questionable] CommandHandler.ProcessCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Saved ",
+        "Translated": "已保存",
+        "Context": "[Questionable] CommandHandler.ProcessDebugCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " unlock links to log.",
+        "Translated": "解锁日志链接。",
+        "Context": "[Questionable] CommandHandler.ProcessDebugCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "New unlock links: ",
+        "Translated": "新的解锁链接：",
+        "Context": "[Questionable] CommandHandler.ProcessDebugCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Could not query unlock links.",
+        "Translated": "无法查询解锁链接。",
+        "Context": "[Questionable] CommandHandler.ProcessDebugCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Locked taxi stands:",
+        "Translated": "锁定的士站：",
+        "Context": "[Questionable] CommandHandler.ProcessDebugCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Active festivals: ",
+        "Translated": "活跃的节日：",
+        "Context": "[Questionable] CommandHandler.ProcessDebugCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Please complete the one-time setup first.",
+        "Translated": "请先完成一次性设置。",
+        "Context": "[Questionable] CommandHandler.OpenSetupIfNeeded",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "You don't have the debug overlay enabled.",
+        "Translated": "您没有启用调试覆盖。",
+        "Context": "[Questionable] CommandHandler.ConfigureDebugOverlay",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Set highlighted quest to ",
+        "Translated": "将突出显示的任务设置为",
+        "Context": "[Questionable] CommandHandler.ConfigureDebugOverlay",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Unknown quest ",
+        "Translated": "未知任务",
+        "Context": "[Questionable] CommandHandler.ConfigureDebugOverlay",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Cleared highlighted quest.",
+        "Translated": "已完成突出显示的任务。",
+        "Context": "[Questionable] CommandHandler.ConfigureDebugOverlay",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " is locked.",
+        "Translated": "被锁定了。",
+        "Context": "[Questionable] CommandHandler.SetNextQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Set next quest to ",
+        "Translated": "将下一个任务设置为",
+        "Context": "[Questionable] CommandHandler.SetNextQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Cleared next quest.",
+        "Translated": "已完成下一个任务。",
+        "Context": "[Questionable] CommandHandler.SetNextQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Simulating quest ",
+        "Translated": "模拟任务",
+        "Context": "[Questionable] CommandHandler.SetSimulatedQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Cleared simulated quest.",
+        "Translated": "已完成模拟任务。",
+        "Context": "[Questionable] CommandHandler.SetSimulatedQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Mount ID: ",
+        "Translated": "挂载 ID:",
+        "Context": "[Questionable] CommandHandler.PrintMountId",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": ", Name: ",
+        "Translated": "名称：",
+        "Context": "[Questionable] CommandHandler.PrintMountId",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": ", Obtainable: ",
+        "Translated": "可获得：",
+        "Context": "[Questionable] CommandHandler.PrintMountId",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Yes",
+        "Translated": "是的",
+        "Context": "[Questionable] CommandHandler.PrintMountId",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "No",
+        "Translated": "不",
+        "Context": "[Questionable] CommandHandler.PrintMountId",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "You are not mounted.",
+        "Translated": "你没有被安装。",
+        "Context": "[Questionable] CommandHandler.PrintMountId",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "No associated quest (",
+        "Translated": "没有相关任务 (",
+        "Context": "[Questionable] ContextMenuController.StartGathering",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Reached or exceeded target level ",
+        "Translated": "达到或超过目标等级",
+        "Context": "[Questionable] QuestController.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Automatically refreshing quest step as no progress detected for ",
+        "Translated": "自动刷新任务步骤，因为未检测到进展",
+        "Context": "[Questionable] QuestController.CheckAutoRefreshCondition",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " seconds.",
+        "Translated": "秒。",
+        "Context": "[Questionable] QuestController.CheckAutoRefreshCondition",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Completed quest '",
+        "Translated": "任务已完成",
+        "Context": "[Questionable] QuestController.UpdateCurrentQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "', which is configured as a stopping point.",
+        "Translated": "这被配置为一个停止点。",
+        "Context": "[Questionable] QuestController.UpdateCurrentQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "', stopping as requested.",
+        "Translated": "’，按要求停止。",
+        "Context": "[Questionable] QuestController.UpdateCurrentQuest",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Stopping after teleport as requested.",
+        "Translated": "按要求传送后停止。",
+        "Context": "[Questionable] QuestController.OnTaskComplete",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Unsupported Area entered (",
+        "Translated": "进入非支持区域 (",
+        "Context": "[Questionable] PartyWatchDog.TerritoryChanged",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Other party members present",
+        "Translated": "其他党员在场",
+        "Context": "[Questionable] PartyWatchDog.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "The quest '",
+        "Translated": "任务",
+        "Context": "[Questionable] TaskCreator.CreateTasks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "' has been marked as Disabled for the following reason: ",
+        "Translated": "已被标记为禁用，原因如下：",
+        "Context": "[Questionable] TaskCreator.CreateTasks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "We recommend you complete this quest manually, as the provided path may not run successfully.",
+        "Translated": "我们建议您手动完成这个任务，因为提供的路径可能无法成功运行。",
+        "Context": "[Questionable] TaskCreator.CreateTasks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Thank you for your patience as we expand QST's support to include this quest in a future update.",
+        "Translated": "感谢您的耐心支持，我们正在扩大 QST 的支持范围，将这个任务纳入未来的更新中。",
+        "Context": "[Questionable] TaskCreator.CreateTasks",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": " requires a job like ",
+        "Translated": "需要一个类似",
+        "Context": "[Questionable] DoInteract.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "but you do not have a valid job configured in QST Settings.",
+        "Translated": "但您在 QST 设置中没有配置有效的作业。",
+        "Context": "[Questionable] DoInteract.Update",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Navmesh: ",
+        "Translated": "导航网格：",
+        "Context": "[Questionable] WaitSinglePlayerDutyExecutor.GetDebugState",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Lifestream: busy",
+        "Translated": "生活流：繁忙",
+        "Context": "[Questionable] Executor.GetDebugState",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
