@@ -1,0 +1,141 @@
+{
+  "issue": "direct-2026-10-12T04-16-54-427Z-f831e868",
+  "receivedAt": "2026-10-12 04:17:09",
+  "author": "匿名直传",
+  "plugin": "HighFpsPhysicsPlugin",
+  "fingerprint": "901945c7e62e379f",
+  "packFile": "HighFpsPhysicsPlugin@user-901945.json",
+  "accepted": 14,
+  "filled": 14,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "HighFpsPhysicsPlugin",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Open Configuration Window\n/physics on - Enable Physics Change\n/physics off - Disable Physics Change\n/physics t - Toggle Physics Change",
+        "Translated": "打开配置窗口\n/physics on - 启用物理变更\n/physics off - 禁用物理变更\n/physics t - 切换物理变更",
+        "Context": "HighFpsPhysicsPlugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Disabling Physics Modification",
+        "Translated": "禁用物理修改",
+        "Context": "Physics.Disable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Enabling Physics Modification",
+        "Translated": "启用 Physics 修改",
+        "Context": "Physics.Enable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "HighFPSPhysics - Configuration",
+        "Translated": "HighFPPhysics - 配置",
+        "Context": "ConfigurationWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "This plugin may cause brief visual errors in cutscenes",
+        "Translated": "这个插件可能会在过场动画中导致短暂的视觉错误。",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "If you experience issues, disable the plugin",
+        "Translated": "如果您遇到问题，请禁用插件。",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Enable On Startup",
+        "Translated": "启用 On Startup",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "High FPS Fix is",
+        "Translated": "高 FPS Fix 是",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Enabled",
+        "Translated": "已启用",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Disabled",
+        "Translated": "已禁用",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Disable",
+        "Translated": "禁用",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Enable",
+        "Translated": "启用",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Physics FPS",
+        "Translated": "物理 FPS",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Sets target physics FPS, default is 60.",
+        "Translated": "设置目标物理 FPS，默认值为 60。",
+        "Context": "ConfigurationWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}

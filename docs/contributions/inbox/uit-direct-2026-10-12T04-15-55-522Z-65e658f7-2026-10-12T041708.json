@@ -1,0 +1,99 @@
+{
+  "issue": "direct-2026-10-12T04-15-55-522Z-65e658f7",
+  "receivedAt": "2026-10-12 04:17:08",
+  "author": "匿名直传",
+  "plugin": "Glamourer",
+  "fingerprint": "afdd616fc7ba403f",
+  "packFile": "Glamourer@user-afdd61.json",
+  "accepted": 10,
+  "filled": 10,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Glamourer",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "The compact equipment bar will only display when a valid state can be selected.",
+        "Translated": "紧凑型设备栏仅在可以选择有效状态时显示。",
+        "Context": "[Glamourer] CommandService.OnGlamourer",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Use without argument to toggle the main window.",
+        "Translated": "使用无参数切换主窗口。",
+        "Context": "[Glamourer] CommandService.OnGlamourer",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Valid arguments for /glamour are:",
+        "Translated": "/glamour 的有效论据包括：",
+        "Context": "[Glamourer] CommandService.PrintHelp",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "    》 If the design set name is a valid natural number it will be used as a index. Design names that are such numbers can not be dealt with.",
+        "Translated": "如果设计集名称是一个有效的自然数，它将被用作索引。如果设计集名称是这样的数，则无法处理。",
+        "Context": "[Glamourer] CommandService.SetAutomation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "    》 If multiple design sets have the same name, the first one will be changed.",
+        "Translated": "如果多个设计集具有相同的名称，第一个设计集将被更改。",
+        "Context": "[Glamourer] CommandService.SetAutomation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "    》 The name is case-insensitive.",
+        "Translated": "名字不区分大小写。",
+        "Context": "[Glamourer] CommandService.SetAutomation",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Could not copy state to clipboard: Failure to write to clipboard.",
+        "Translated": "无法将状态复制到剪贴板：无法写入剪贴板。",
+        "Context": "[Glamourer] CommandService.CopyState",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      }
+    ],
+    "resources": [],
+    "attributes": [
+      {
+        "Original": "Use the order given by the game's list of objects.",
+        "Translated": "使用游戏对象列表给出的顺序。",
+        "Context": "[属性] TooltipAttribute [Glamourer] Glamourer.Config.ActorSortMode::Default",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Original": "Order available actors alphabetically by their name.",
+        "Translated": "按字母顺序排列可用演员的姓名。",
+        "Context": "[属性] TooltipAttribute [Glamourer] Glamourer.Config.ActorSortMode::Lexicographical",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Original": "Order available actors alphabetically by their name, but keep your own character at the top.",
+        "Translated": "按字母顺序排列可用演员的名字，但把你自己的角色放在最上面。",
+        "Context": "[属性] TooltipAttribute [Glamourer] Glamourer.Config.ActorSortMode::LexicographicalPlayerFirst",
+        "Source": "ai:public-caiyun"
+      }
+    ]
+  }
+}
