@@ -1,1 +1,244 @@
-{"type":"uit-contribution","plugin":"Penumbra","kinds":["free"],"entries":[{"Original":"Penumbra Texture Editor and Combiner","Translated":"午夜纹理编辑器和合成器","Context":"[Penumbra] CombiningTextureEditorFactory.get_DisplayName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ 接口文本属性"},{"Original":"Penumbra Pre Bone Deformer Editor","Translated":"预骨变形器编辑器编号","Context":"[Penumbra] DeformerEditorFactory.get_DisplayName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ 接口文本属性"},{"Original":"Penumbra Shader Package Editor","Translated":"Penumbra 着色器包编辑器","Context":"[Penumbra] ShaderPackageEditorFactory.get_DisplayName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ 接口文本属性"},{"Original":"Penumbra Shader Parameter Viewer","Translated":"着色器参数查看器编号","Context":"[Penumbra] ShaderParameterViewerFactory.get_DisplayName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ 接口文本属性"},{"Original":"Penumbra Model Editor","Translated":"模型编辑器","Context":"[Penumbra] ModelEditorFactory.get_DisplayName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ 接口文本属性"},{"Original":"Penumbra Material Editor","Translated":"材质编辑器着色器","Context":"[Penumbra] MaterialEditorFactory.get_DisplayName","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ 接口文本属性"},{"Original":"Extracting '","Translated":"提取","Context":"[Penumbra] ArchiveExtractionNotification.get_NotificationMessage","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":" of ","Translated":"的","Context":"[Penumbra] ArchiveExtractionNotification.NotificationActions","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Extraction complete.","Translated":"提取完成。","Context":"[Penumbra] ArchiveExtractionNotification.NotificationActions","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ INotification.set_Content"}],"resources":[],"attributes":[{"Original":"Create an ephemeral Direct3D device object per texture compression operation.","Translated":"为纹理压缩操作创建临时 Direct3D 设备对象。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Transient","Source":"ai:public-caiyun"},{"Original":"Create a persistent Direct3D device object on the first texture compression operation and keep it until Penumbra is unloaded or when this setting is changed.","Translated":"在第一次纹理压缩操作中创建一个持久的 Direct3D 设备对象，并保持该对象直到 Penumbra 下载或更改此设置。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Singleton","Source":"ai:public-caiyun"},{"Original":"Do not create an auxiliary Direct3D device object, and use the game's main one instead.\nWill cause freezes while doing texture compression operations.\nPrefer the above options if possible.","Translated":"不要创建辅助 Direct3D 设备对象，而是使用游戏的主对象。\n在进行纹理压缩操作时会导致冻结。\n如果可能，请选择上述选项。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Borrowed","Source":"ai:public-caiyun"},{"Original":"Do not create an auxiliary Direct3D device object, and use a software compression method instead.\nWill significantly slow down texture compression operations, and significantly degrade the output quality.\nONLY USE AS A LAST RESORT.","Translated":"不要创建辅助 Direct3D 设备对象，而是使用软件压缩方法。\n将显著减慢纹理压缩操作，并显著降低输出质量。\n仅用作最后的备用方案。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::None","Source":"ai:public-caiyun"},{"Original":"Multiplies the RGB channel values of the input and the overlay.\nApplies the result over the input.","Translated":"将输入和叠加的 RGB 通道值相乘。\n将结果应用于输入。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyOver","Source":"ai:public-caiyun"},{"Original":"Multiplies the RGB channel values of the input and the overlay.\nApplies the input over the result.","Translated":"将输入和叠加的 RGB 通道值相乘。\n将输入应用于结果。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyUnder","Source":"ai:public-caiyun"},{"Original":"Multiplies the RGBA channel values of the input and the overlay.\nThis mode is commutative.","Translated":"将输入和叠加的 RGBA 通道值相乘。\n这种模式是可交换的。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyRgba","Source":"ai:public-caiyun"},{"Original":"Inverts the RGB channel values of the input and the overlay, multiplies them, and inverts them back.\nApplies the result over the input.","Translated":"反转输入和叠加的 RGB 通道值，将它们相乘，然后再反转回来。\n将结果应用于输入。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendScreenOver","Source":"ai:public-caiyun"},{"Original":"Inverts the RGBA channel values of the input and the overlay, multiplies them, and inverts them back.\nThis mode is commutative.","Translated":"反转输入和叠加的 RGBA 通道值，将它们相乘，然后再反转回来。\n这种模式是可交换的。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendScreenRgba","Source":"ai:public-caiyun"},{"Original":"Darkens the overlay where the input is darker, lightens the overlay where the input is lighter.\nApplies the result over the input.","Translated":"使输入颜色较深的叠层变深，使输入颜色较浅的叠层变浅。\n将结果应用于输入。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayOver","Source":"ai:public-caiyun"},{"Original":"Darkens the overlay where the input is darker, lightens the overlay where the input is lighter.\nApplies the input over the result.","Translated":"使输入颜色较深的叠层变深，使输入颜色较浅的叠层变浅。\n将输入应用于结果。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayUnder","Source":"ai:public-caiyun"},{"Original":"Darkens the overlay where the input is darker, lightens the overlay where the input is lighter, including the Alpha channel.\nThis mode is commutative.","Translated":"使输入较暗的叠层变暗，使输入较亮的叠层变亮，包括 Alpha 通道。\n这种模式是可交换的。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayRgba","Source":"ai:public-caiyun"},{"Original":"Darkens the input where the overlay is darker, lightens the input where the overlay is lighter.\nApplies the result over the input.","Translated":"在覆盖较深的地方调暗输入，在覆盖较浅的地方调亮输入。\n将结果应用于输入。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightOver","Source":"ai:public-caiyun"},{"Original":"Darkens the input where the overlay is darker, lightens the input where the overlay is lighter.\nApplies the input over the result.","Translated":"在覆盖较深的地方调暗输入，在覆盖较浅的地方调亮输入。\n将输入应用于结果。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightUnder","Source":"ai:public-caiyun"},{"Original":"Darkens the input where the overlay is darker, lightens the input where the overlay is lighter, including the Alpha channel.\nThis mode is commutative.","Translated":"在覆盖层较暗的地方调暗输入，在覆盖层较亮的地方调亮输入，包括 Alpha 通道。\n这种模式是可交换的。","Context":"[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightRgba","Source":"ai:public-caiyun"},{"Original":"Keep this mod's state as it is. If it is currently inherited, no other options will be applied.","Translated":"保持此模式的状态不变。如果它当前是继承的，则不会应用其他选项。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Ignored","Source":"ai:public-caiyun"},{"Original":"Set this mod's state to be inherited. If temporary, uses forced inheritance. No other options will be applied.","Translated":"将此模式的状态设置为继承。如果是临时的，则使用强制继承。不会应用其他选项。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Inherited","Source":"ai:public-caiyun"},{"Original":"Disable this mod.","Translated":"禁用此模式。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Disabled","Source":"ai:public-caiyun"},{"Original":"Enable this mod.","Translated":"启用此模式。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Enabled","Source":"ai:public-caiyun"},{"Original":"Toggle this mod (if it is currently enabled, disable it and vice versa). Enables the mod if it is currently inherited.","Translated":"切换此模式 (如果当前已启用，则禁用它，反之亦然)。如果当前已继承，则启用该模式。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Toggle","Source":"ai:public-caiyun"},{"Original":"Remove temporary settings for this mod if there are any. Does nothing else.","Translated":"移除此模式的临时设置 (如果有的话)。不要做其他任何事情。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::RemoveTemporary","Source":"ai:public-caiyun"},{"Original":"Keep this option's state as it is.","Translated":"保持此选项的状态不变。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Ignored","Source":"ai:public-caiyun"},{"Original":"Disable this option. For single select groups, the first non-disabled, non-ignored option will be prioritized if there is no available enabled or toggled option.","Translated":"禁用此选项。对于单个选择组，如果没有可用的已启用或切换选项，则优先考虑第一个未禁用、未忽略的选项。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Disabled","Source":"ai:public-caiyun"},{"Original":"Enable this option. For single select groups, the first enabled option will be prioritized.","Translated":"启用此选项。对于单个选择组，第一个启用的选项将被优先考虑。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Enabled","Source":"ai:public-caiyun"},{"Original":"Toggle this option (if it is currently enabled, disable it and vice versa). For single select groups, the first currently disabled option with toggle will be prioritized if there is no available enabled option.","Translated":"切换此选项 (如果当前已启用，则禁用它，反之亦然)。对于单个选择组，如果没有可用的已启用选项，则优先使用当前已禁用的第一个带切换的选项。","Context":"[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Toggle","Source":"ai:public-caiyun"}]}
+{
+  "type": "uit-contribution",
+  "plugin": "Penumbra",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Penumbra Texture Editor and Combiner",
+      "Translated": "午夜纹理编辑器和合成器",
+      "Context": "[Penumbra] CombiningTextureEditorFactory.get_DisplayName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性"
+    },
+    {
+      "Original": "Penumbra Pre Bone Deformer Editor",
+      "Translated": "预骨变形器编辑器编号",
+      "Context": "[Penumbra] DeformerEditorFactory.get_DisplayName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性"
+    },
+    {
+      "Original": "Penumbra Shader Package Editor",
+      "Translated": "Penumbra 着色器包编辑器",
+      "Context": "[Penumbra] ShaderPackageEditorFactory.get_DisplayName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性"
+    },
+    {
+      "Original": "Penumbra Shader Parameter Viewer",
+      "Translated": "着色器参数查看器编号",
+      "Context": "[Penumbra] ShaderParameterViewerFactory.get_DisplayName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性"
+    },
+    {
+      "Original": "Penumbra Model Editor",
+      "Translated": "模型编辑器",
+      "Context": "[Penumbra] ModelEditorFactory.get_DisplayName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性"
+    },
+    {
+      "Original": "Penumbra Material Editor",
+      "Translated": "材质编辑器着色器",
+      "Context": "[Penumbra] MaterialEditorFactory.get_DisplayName",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性"
+    },
+    {
+      "Original": "Extracting '",
+      "Translated": "提取",
+      "Context": "[Penumbra] ArchiveExtractionNotification.get_NotificationMessage",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": " of ",
+      "Translated": "的",
+      "Context": "[Penumbra] ArchiveExtractionNotification.NotificationActions",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Extraction complete.",
+      "Translated": "提取完成。",
+      "Context": "[Penumbra] ArchiveExtractionNotification.NotificationActions",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Create an ephemeral Direct3D device object per texture compression operation.",
+      "Translated": "为纹理压缩操作创建临时 Direct3D 设备对象。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Transient",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create a persistent Direct3D device object on the first texture compression operation and keep it until Penumbra is unloaded or when this setting is changed.",
+      "Translated": "在第一次纹理压缩操作中创建一个持久的 Direct3D 设备对象，并保持该对象直到 Penumbra 下载或更改此设置。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Singleton",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Do not create an auxiliary Direct3D device object, and use the game's main one instead.\nWill cause freezes while doing texture compression operations.\nPrefer the above options if possible.",
+      "Translated": "不要创建辅助 Direct3D 设备对象，而是使用游戏的主对象。\n在进行纹理压缩操作时会导致冻结。\n如果可能，请选择上述选项。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::Borrowed",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Do not create an auxiliary Direct3D device object, and use a software compression method instead.\nWill significantly slow down texture compression operations, and significantly degrade the output quality.\nONLY USE AS A LAST RESORT.",
+      "Translated": "不要创建辅助 Direct3D 设备对象，而是使用软件压缩方法。\n将显著减慢纹理压缩操作，并显著降低输出质量。\n仅用作最后的备用方案。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.AuxiliaryDeviceMode::None",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Multiplies the RGB channel values of the input and the overlay.\nApplies the result over the input.",
+      "Translated": "将输入和叠加的 RGB 通道值相乘。\n将结果应用于输入。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyOver",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Multiplies the RGB channel values of the input and the overlay.\nApplies the input over the result.",
+      "Translated": "将输入和叠加的 RGB 通道值相乘。\n将输入应用于结果。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyUnder",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Multiplies the RGBA channel values of the input and the overlay.\nThis mode is commutative.",
+      "Translated": "将输入和叠加的 RGBA 通道值相乘。\n这种模式是可交换的。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendMultiplyRgba",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Inverts the RGB channel values of the input and the overlay, multiplies them, and inverts them back.\nApplies the result over the input.",
+      "Translated": "反转输入和叠加的 RGB 通道值，将它们相乘，然后再反转回来。\n将结果应用于输入。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendScreenOver",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Inverts the RGBA channel values of the input and the overlay, multiplies them, and inverts them back.\nThis mode is commutative.",
+      "Translated": "反转输入和叠加的 RGBA 通道值，将它们相乘，然后再反转回来。\n这种模式是可交换的。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendScreenRgba",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Darkens the overlay where the input is darker, lightens the overlay where the input is lighter.\nApplies the result over the input.",
+      "Translated": "使输入颜色较深的叠层变深，使输入颜色较浅的叠层变浅。\n将结果应用于输入。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayOver",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Darkens the overlay where the input is darker, lightens the overlay where the input is lighter.\nApplies the input over the result.",
+      "Translated": "使输入颜色较深的叠层变深，使输入颜色较浅的叠层变浅。\n将输入应用于结果。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayUnder",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Darkens the overlay where the input is darker, lightens the overlay where the input is lighter, including the Alpha channel.\nThis mode is commutative.",
+      "Translated": "使输入较暗的叠层变暗，使输入较亮的叠层变亮，包括 Alpha 通道。\n这种模式是可交换的。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendOverlayRgba",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Darkens the input where the overlay is darker, lightens the input where the overlay is lighter.\nApplies the result over the input.",
+      "Translated": "在覆盖较深的地方调暗输入，在覆盖较浅的地方调亮输入。\n将结果应用于输入。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightOver",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Darkens the input where the overlay is darker, lightens the input where the overlay is lighter.\nApplies the input over the result.",
+      "Translated": "在覆盖较深的地方调暗输入，在覆盖较浅的地方调亮输入。\n将输入应用于结果。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightUnder",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Darkens the input where the overlay is darker, lightens the input where the overlay is lighter, including the Alpha channel.\nThis mode is commutative.",
+      "Translated": "在覆盖层较暗的地方调暗输入，在覆盖层较亮的地方调亮输入，包括 Alpha 通道。\n这种模式是可交换的。",
+      "Context": "[属性] TooltipAttribute [Penumbra] Penumbra.Import.Textures.CombinedTexture/CombineOp::BlendHardLightRgba",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Keep this mod's state as it is. If it is currently inherited, no other options will be applied.",
+      "Translated": "保持此模式的状态不变。如果它当前是继承的，则不会应用其他选项。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Ignored",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Set this mod's state to be inherited. If temporary, uses forced inheritance. No other options will be applied.",
+      "Translated": "将此模式的状态设置为继承。如果是临时的，则使用强制继承。不会应用其他选项。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Inherited",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Disable this mod.",
+      "Translated": "禁用此模式。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Disabled",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable this mod.",
+      "Translated": "启用此模式。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Enabled",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggle this mod (if it is currently enabled, disable it and vice versa). Enables the mod if it is currently inherited.",
+      "Translated": "切换此模式 (如果当前已启用，则禁用它，反之亦然)。如果当前已继承，则启用该模式。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::Toggle",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove temporary settings for this mod if there are any. Does nothing else.",
+      "Translated": "移除此模式的临时设置 (如果有的话)。不要做其他任何事情。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.ModState::RemoveTemporary",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Keep this option's state as it is.",
+      "Translated": "保持此选项的状态不变。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Ignored",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Disable this option. For single select groups, the first non-disabled, non-ignored option will be prioritized if there is no available enabled or toggled option.",
+      "Translated": "禁用此选项。对于单个选择组，如果没有可用的已启用或切换选项，则优先考虑第一个未禁用、未忽略的选项。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Disabled",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable this option. For single select groups, the first enabled option will be prioritized.",
+      "Translated": "启用此选项。对于单个选择组，第一个启用的选项将被优先考虑。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Enabled",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggle this option (if it is currently enabled, disable it and vice versa). For single select groups, the first currently disabled option with toggle will be prioritized if there is no available enabled option.",
+      "Translated": "切换此选项 (如果当前已启用，则禁用它，反之亦然)。对于单个选择组，如果没有可用的已启用选项，则优先使用当前已禁用的第一个带切换的选项。",
+      "Context": "[属性] TooltipAttribute [Penumbra.Api] Penumbra.Api.Preset.OptionState::Toggle",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "importedAt": "2026-10-12T04:18:29",
+  "imported": {
+    "archive": "uit-direct-2026-10-12T04-18-17-531Z-1053566e-2026-10-12T041829.json",
+    "accepted": 34,
+    "filled": 34,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 34 条 `Penumbra` 的界面文字译文，已收为**独立译文包** `uit-packs/Penumbra@user-474b42.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 34 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}

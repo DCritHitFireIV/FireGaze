@@ -1,0 +1,1292 @@
+{
+  "issue": "direct-2026-10-12T04-17-34-427Z-7dfdb1fc",
+  "receivedAt": "2026-10-12 04:18:29",
+  "author": "匿名直传",
+  "plugin": "Lifestream",
+  "fingerprint": "eeea6425e6afb59b",
+  "packFile": "Lifestream@user-eeea64.json",
+  "accepted": 148,
+  "filled": 148,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Lifestream",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "All",
+        "Translated": "所有",
+        "Context": "Utils.DrawWorldSelector",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.CollectionCheckbox"
+      },
+      {
+        "Original": "Point: ",
+        "Translated": "要点：",
+        "Context": "Utils.ScreenToWorldSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\nLeft-click to finish",
+        "Translated": "左键单击以完成",
+        "Context": "Utils.ScreenToWorldSelector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "target",
+        "Translated": "目标",
+        "Context": "Utils.DrawVector2Selector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "splatoon",
+        "Translated": "Splatoon",
+        "Context": "Utils.DrawVector2Selector",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "Autodetect",
+        "Translated": "自动检测",
+        "Context": "Utils.GetInnNameFromTerritory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Logout",
+        "Translated": "注销",
+        "Context": "DCChange.SelectYesLogout",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "ABMenu ",
+        "Translated": "AB 菜单",
+        "Context": "PaissaImporter.DrawPaissaBook",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Size",
+        "Translated": "尺寸",
+        "Context": "PaissaImporter.DrawPaissaBook",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Bids",
+        "Translated": "出价",
+        "Context": "PaissaImporter.DrawPaissaBook",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Allowed Tenants",
+        "Translated": "允许的租户",
+        "Context": "PaissaImporter.DrawPaissaBook",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Plot",
+        "Translated": "情节",
+        "Context": "PaissaImporter.DrawPaissaBook",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Apartment",
+        "Translated": "公寓",
+        "Context": "PaissaImporter.DrawPaissaBook",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Subdivision Apartment",
+        "Translated": "细分公寓",
+        "Context": "PaissaImporter.DrawPaissaBook",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Editing ",
+        "Translated": "编辑",
+        "Context": "InputWardDetailDialog.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopupModal"
+      },
+      {
+        "Original": "LifestreamTabs",
+        "Translated": "Lifestream 选项卡",
+        "Context": "MainGui.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Debug",
+        "Translated": "调试",
+        "Context": "MainGui.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Lifestream Overlay",
+        "Translated": "Lifestream 覆盖",
+        "Context": "Overlay..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "LifestreamPopup",
+        "Translated": "Lifestream 弹出",
+        "Context": "Overlay.Popup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Lifestream progress overlay",
+        "Translated": "Lifestream 进度叠加",
+        "Context": "ProgressOverlay..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "~Command",
+        "Translated": "～命令",
+        "Context": "TabCustomAlias.DrawAlias",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Command ",
+        "Translated": "命令",
+        "Context": "TabCustomAlias.DrawAlias",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader"
+      },
+      {
+        "Original": "walktopoint",
+        "Translated": "walktopoint(步行点)",
+        "Context": "TabCustomAlias.DrawCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat3"
+      },
+      {
+        "Original": "walktopointextra",
+        "Translated": "走到点外",
+        "Context": "TabCustomAlias.DrawCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat3"
+      },
+      {
+        "Original": "Filter",
+        "Translated": "过滤器",
+        "Context": "TabCustomAlias.DrawCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ String>.Get"
+      },
+      {
+        "Original": "Data ID",
+        "Translated": "数据 ID",
+        "Context": "TabCustomAlias.DrawCommand",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputUint"
+      },
+      {
+        "Original": "Clone",
+        "Translated": "克隆",
+        "Context": "DrawAlias",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "Multipath",
+        "Translated": "多路径",
+        "Context": "TabMultipath.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": " worlds",
+        "Translated": "世界",
+        "Context": "TabTravelBan.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "debug",
+        "Translated": "调试",
+        "Context": "UIDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Data editor",
+        "Translated": "数据编辑器",
+        "Context": "UIDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Housing data",
+        "Translated": "住房数据",
+        "Context": "UIDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Lifestream Edit Path",
+        "Translated": "生命流编辑路径",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Finish",
+        "Translated": "完成",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Load from config folder",
+        "Translated": "从配置文件夹加载",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Autotest",
+        "Translated": "自动测试",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Autotest active",
+        "Translated": "Autotest 处于活动状态",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Autotest aetheryte",
+        "Translated": "自动测试以太网",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Autotest ward",
+        "Translated": "自动测试病房",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Autotest current plot",
+        "Translated": "自动测试当前情节",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Show pathes",
+        "Translated": "显示路径",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show first point",
+        "Translated": "显示第一个点",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Plot: ",
+        "Translated": "情节：",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Resize",
+        "Translated": "调整大小",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Resize arrays",
+        "Translated": "调整数组大小",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Begin path calculation",
+        "Translated": "开始路径计算",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "For plot ",
+        "Translated": "对于绘图",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Edit",
+        "Translated": "编辑",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Path",
+        "Translated": "路径",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Create data for ",
+        "Translated": "为",
+        "Context": "UIDebug.Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Available ",
+        "Translated": "可用",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\nIsOccupied ",
+        "Translated": "IsOccuped",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Address book ipc test",
+        "Translated": "地址簿 ipc 测试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Addresses with folders",
+        "Translated": "带文件夹的地址",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "World test",
+        "Translated": "世界测试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Worlds: ",
+        "Translated": "世界：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextCopy"
+      },
+      {
+        "Original": "Public worlds:",
+        "Translated": "公共世界：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Image test",
+        "Translated": "图像测试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "IPC test - travel from chara select screen",
+        "Translated": "IPC 测试——从 Chara 选择界面开始游览",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Chara name",
+        "Translated": "字符名称",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Chara world",
+        "Translated": "查拉世界",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Destination",
+        "Translated": "目的地",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "No login",
+        "Translated": "无需登录",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "ApproachConditionIsMet",
+        "Translated": "Approach ConditionIsMet",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "ApproachConditionIsMet: ",
+        "Translated": "Approach ConditionIsMet:",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Agent Map debug",
+        "Translated": "Agent Map 调试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": " - press ctrl to copy",
+        "Translated": "- 按 ctrl 键复制",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Copy",
+        "Translated": "复制",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "IPC debug",
+        "Translated": "IPC 调试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "AethernetTeleportToFirmament",
+        "Translated": "Aethernet TeleportTo Firmment",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Active aetheryte: ",
+        "Translated": "Active Aetheryte:",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Chat",
+        "Translated": "聊天",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Send message (echo)",
+        "Translated": "发送消息 (回声)",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Send message (current channel)",
+        "Translated": "发送消息 (当前频道)",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Use sprint",
+        "Translated": "使用 sprint",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Use jump",
+        "Translated": "使用跳转",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Try invalid string",
+        "Translated": "尝试无效字符串",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Context",
+        "Translated": "上下文",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Custom aethernet",
+        "Translated": "自定义以太网",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Copy target",
+        "Translated": "复制目标",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Active: ",
+        "Translated": "活跃：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Valid: ",
+        "Translated": "有效：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "FromIGameObject: ",
+        "Translated": "来自 IGameObject:",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Get file list",
+        "Translated": "获取文件列表",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Open PF self",
+        "Translated": "打开 PF 自我",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Curcular movelemt",
+        "Translated": "圆周运动",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "precision",
+        "Translated": "精确度",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Single>.Get"
+      },
+      {
+        "Original": "Import",
+        "Translated": "导入",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Set target",
+        "Translated": "设定目标",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Set exit",
+        "Translated": "设置退出",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Precision",
+        "Translated": "精确度",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputFloat"
+      },
+      {
+        "Original": "Tolerance",
+        "Translated": "容忍度",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Calculate",
+        "Translated": "计算",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "List: ",
+        "Translated": "列表：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Candidate: ",
+        "Translated": "候选人：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "CharaSelectListMenu",
+        "Translated": "CharaSelectList 菜单",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Selected chara: ",
+        "Translated": "选定字符：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Marker ",
+        "Translated": "标记",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": ", pos: ",
+        "Translated": ",post:",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": ", distance: ",
+        "Translated": "距离：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Dalamud",
+        "Translated": "在内陆",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "YesNo",
+        "Translated": "是/否",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Switch",
+        "Translated": "切换",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Instance",
+        "Translated": "实例",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Max instances: ",
+        "Translated": "最大实例：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\nInitialized: ",
+        "Translated": "初始化：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\nDrawConditions: ",
+        "Translated": "绘制条件：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "instance data reset",
+        "Translated": "实例数据重置",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "game version reset",
+        "Translated": "游戏版本重置",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Player interactable: ",
+        "Translated": "交互式玩家：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Is moving: ",
+        "Translated": "正在移动：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "IsOccupied: ",
+        "Translated": "IsOccuped:",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Casting: ",
+        "Translated": "选角：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Data test",
+        "Translated": "数据测试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Key:\r\n    Name: ",
+        "Translated": "关键：\n名称：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\n    Pos: ",
+        "Translated": "邮件：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\n    Group: ",
+        "Translated": "群组：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\n    Territory: ",
+        "Translated": "地区：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\nValue:\r\n    Cnt: ",
+        "Translated": "价值：\nCnt:",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Name: ",
+        "Translated": "名称：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\nPos: ",
+        "Translated": "邮件：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\nGroup: ",
+        "Translated": "群组：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\r\nTerritory: ",
+        "Translated": "地区：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Lobby test",
+        "Translated": "游说测试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Locked: ",
+        "Translated": "已锁定：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Addon test",
+        "Translated": "附加测试",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Entries: ",
+        "Translated": "条目：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Refresh color",
+        "Translated": "刷新颜色",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Render",
+        "Translated": "渲染",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Save",
+        "Translated": "存储",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Housing manager",
+        "Translated": "房屋经理",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Ward: ",
+        "Translated": "沃德：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Division: ",
+        "Translated": "分类：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "World",
+        "Translated": "世界",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Resi",
+        "Translated": "拒绝",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Ward",
+        "Translated": "沃德",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Go",
+        "Translated": "前往",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "State",
+        "Translated": "状态",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "ResidentialAethernet.ActiveAetheryte = ",
+        "Translated": "居住以太网。活动以太网=",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Housing aethernet",
+        "Translated": "Housing aethernet(住宅以太网)",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Index",
+        "Translated": "索引",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Open context menu",
+        "Translated": "打开上下文菜单",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Names: ",
+        "Translated": "名称：",
+        "Context": "UIDebug.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Set",
+        "Translated": "设置",
+        "Context": "Housing",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Points: ",
+        "Translated": "要点：",
+        "Context": "Housing",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": ", Distance: ",
+        "Translated": "，距离：",
+        "Context": "Housing",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Focused: ",
+        "Translated": "聚焦：",
+        "Context": "DrawOverlay",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Lifestream CharaSelect background",
+        "Translated": "直播 CharaSelect 背景",
+        "Context": "BackgroundWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
