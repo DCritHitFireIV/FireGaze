@@ -1,0 +1,40 @@
+{
+  "issue": "direct-2026-10-12T04-14-50-059Z-d5e41d4c",
+  "receivedAt": "2026-10-12 04:16:04",
+  "author": "匿名直传",
+  "plugin": "EdgeTTS.Dalamud",
+  "fingerprint": "91e41416ac278eba",
+  "packFile": "EdgeTTS.Dalamud@user-91e414.json",
+  "accepted": 2,
+  "filled": 2,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "EdgeTTS.Dalamud",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "EdgeTTSMainTabBar",
+        "Translated": "EdgeTTMainTabBar",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.TabBar"
+      },
+      {
+        "Original": "Gender.",
+        "Translated": "性别。",
+        "Context": "MainWindow.DrawHeader",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
