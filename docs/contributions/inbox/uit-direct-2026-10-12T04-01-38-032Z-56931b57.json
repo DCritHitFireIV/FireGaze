@@ -1,1 +1,186 @@
-{"type":"uit-contribution","plugin":"ActionTimelineReplacement","kinds":["free"],"entries":[{"Original":"ActionTimeline Replacement v","Translated":"动作时间线替换 v","Context":"ConfigWindow..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Toggle action timeline config window","Translated":"切换操作时间线配置窗口","Context":"WindowManager..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Null","Translated":"零","Context":"ActionOffsetModel.DrawImplementation","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Edit","Translated":"编辑","Context":"ActionTimelineReplacementSetModel.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Icon","Translated":"图标","Context":"ActionTimelineReplacementSetModel.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Animation Start","Translated":"动画开始","Context":"ActionTimelineReplacementSetModel.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Animation End","Translated":"动画结束","Context":"ActionTimelineReplacementSetModel.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Action Timeline Hit","Translated":"动作时间轴命中","Context":"ActionTimelineReplacementSetModel.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Add new skill","Translated":"添加新技能","Context":"ActionTimelineReplacementSetModel.DrawSearch","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Enable Replacement","Translated":"启用替换","Context":"MainModel..ctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Enable AdvancedMode","Translated":"启用高级模式","Context":"MainModel..ctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Main Table","Translated":"主表","Context":"MainModel.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImRaii.Table"},{"Original":"Side Bar","Translated":"侧边栏","Context":"MainModel.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Set","Translated":"设置","Context":"MainModel.DrawSideBar","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.OpenPopup"},{"Original":"PopUp","Translated":"弹出","Context":"MainModel.DrawSideBar","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.OpenPopup"},{"Original":"Export","Translated":"导出","Context":"MainModel.DrawSideBar","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Delete","Translated":"删除","Context":"MainModel.DrawSideBar","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Create","Translated":"创建","Context":"MainModel.DrawSideBar","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Import","Translated":"导入","Context":"MainModel.DrawSideBar","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "ActionTimelineReplacement",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "ActionTimeline Replacement v",
+      "Translated": "动作时间线替换 v",
+      "Context": "ConfigWindow..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Toggle action timeline config window",
+      "Translated": "切换操作时间线配置窗口",
+      "Context": "WindowManager..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Null",
+      "Translated": "零",
+      "Context": "ActionOffsetModel.DrawImplementation",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Edit",
+      "Translated": "编辑",
+      "Context": "ActionTimelineReplacementSetModel.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Icon",
+      "Translated": "图标",
+      "Context": "ActionTimelineReplacementSetModel.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Animation Start",
+      "Translated": "动画开始",
+      "Context": "ActionTimelineReplacementSetModel.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Animation End",
+      "Translated": "动画结束",
+      "Context": "ActionTimelineReplacementSetModel.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Action Timeline Hit",
+      "Translated": "动作时间轴命中",
+      "Context": "ActionTimelineReplacementSetModel.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Add new skill",
+      "Translated": "添加新技能",
+      "Context": "ActionTimelineReplacementSetModel.DrawSearch",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Enable Replacement",
+      "Translated": "启用替换",
+      "Context": "MainModel..ctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Enable AdvancedMode",
+      "Translated": "启用高级模式",
+      "Context": "MainModel..ctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Main Table",
+      "Translated": "主表",
+      "Context": "MainModel.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table"
+    },
+    {
+      "Original": "Side Bar",
+      "Translated": "侧边栏",
+      "Context": "MainModel.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Set",
+      "Translated": "设置",
+      "Context": "MainModel.DrawSideBar",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup"
+    },
+    {
+      "Original": "PopUp",
+      "Translated": "弹出",
+      "Context": "MainModel.DrawSideBar",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.OpenPopup"
+    },
+    {
+      "Original": "Export",
+      "Translated": "导出",
+      "Context": "MainModel.DrawSideBar",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "MainModel.DrawSideBar",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Create",
+      "Translated": "创建",
+      "Context": "MainModel.DrawSideBar",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Import",
+      "Translated": "导入",
+      "Context": "MainModel.DrawSideBar",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-12T04:01:50",
+  "imported": {
+    "archive": "uit-direct-2026-10-12T04-01-38-032Z-56931b57-2026-10-12T040150.json",
+    "accepted": 19,
+    "filled": 19,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 19 条 `ActionTimelineReplacement` 的界面文字译文，已收为**独立译文包** `uit-packs/ActionTimelineReplacement@user-5079f9.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 19 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
