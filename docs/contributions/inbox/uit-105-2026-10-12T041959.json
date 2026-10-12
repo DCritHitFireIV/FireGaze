@@ -1,0 +1,194 @@
+{
+  "issue": "105",
+  "receivedAt": "2026-10-12 04:19:59",
+  "author": "firegaze-relay[bot]",
+  "plugin": "Umbra",
+  "fingerprint": "4d8c7ced78da6ed4",
+  "packFile": "Umbra@user-4d8c7c.json",
+  "accepted": 20,
+  "filled": 20,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Umbra",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Invalid setting: \"",
+        "Translated": "无效设置:“",
+        "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Usage: /umbra-toolbar-profile <profile name>.",
+        "Translated": "用法:/umbra-toolbar-profile <profile name>。",
+        "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Available profiles: ",
+        "Translated": "可用 profile:",
+        "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Usage: /umbra-aux <show|hide|toggle> [name].",
+        "Translated": "用法:/umbra-aux <show|hide|toggle> [name]。",
+        "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Invalid auxiliary toolbar name: \"",
+        "Translated": "无效的辅助工具栏名称:“",
+        "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Available toolbars: ",
+        "Translated": "可用工具栏：",
+        "Context": "[Umbra] UmbraBindings.HandleUmbraCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Show Node Inspector",
+        "Translated": "显示节点检查器",
+        "Context": "[Umbra] Plugin.UpdateDevBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Draw Bounding Boxes",
+        "Translated": "绘制边界框",
+        "Context": "[Umbra] Plugin.UpdateDevBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Draw Reflow & Repaint Boxes",
+        "Translated": "绘制回流和重新绘制框",
+        "Context": "[Umbra] Plugin.UpdateDevBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Open config directory",
+        "Translated": "打开配置目录",
+        "Context": "[Umbra] Plugin.UpdateDevBar",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Pick from...",
+        "Translated": "从...",
+        "Context": "[Umbra] ColorInputPopupNode.OnDraw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Invalid data.",
+        "Translated": "无效数据。",
+        "Context": "[Umbra] WidgetManager.CreateProfileFromClipboard",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Copy error text",
+        "Translated": "复制错误文本",
+        "Context": "[Umbra.Common] CrashLogger.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Discord",
+        "Translated": "不协调",
+        "Context": "[Umbra.Common] CrashLogger.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Disable custom plugins",
+        "Translated": "禁用自定义插件",
+        "Context": "[Umbra.Common] CrashLogger.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Umbra Error",
+        "Translated": "Umbra 错误",
+        "Context": "[Umbra.Common] CrashLogger..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "An uncaught exception occurred in Umbra.",
+        "Translated": "在 Umbra 发生了一个未捕获的异常。",
+        "Context": "[Umbra.Common] CrashLogger..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "If you have any custom plugins installed, please disable them and try again. If the issue persists, please report it to the Umbra team by joining our Discord server and reporting the issue in the #support channel. Please include the following information:\n\n\t1. The error message displayed below.\n\t2. A description of what you were doing when the error occurred.\n\t3. Any steps you took to try to resolve the issue.\n\nThank you for your help!",
+        "Translated": "如果您安装了任何自定义插件，请禁用它们并重试。如果问题仍然存在，请通过加入我们的 Discord 服务器并在#support 频道报告问题，向 Umbra 团队报告。请提供以下信息：\n\n1. 下面显示的错误消息。\n2. 错误发生时你正在做什么的描述。\n3.你为解决问题所采取的任何步骤。\n\n感谢您的帮助！",
+        "Context": "[Umbra.Common] CrashLogger..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Migration Failed",
+        "Translated": "迁移失败",
+        "Context": "[Umbra.Common] MigrationManager.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "OK",
+        "Translated": "好的",
+        "Context": "[Umbra.Common] MigrationManager.OnDraw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
