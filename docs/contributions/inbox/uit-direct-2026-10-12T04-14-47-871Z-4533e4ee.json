@@ -1,1 +1,172 @@
-{"type":"uit-contribution","plugin":"FireGaze","kinds":["free"],"entries":[{"Original":"）###DiscoveryUndoAdd","Translated":")","Context":"DiscoveryTab.DrawCore","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"plugin","Translated":"插件","Context":"UITextTab.DrawList","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"actions","Translated":"操作","Context":"UITextTab.DrawList","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"row","Translated":"行","Context":"DiscoveryTab.DrawRow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InvisibleButton"},{"Original":"Plugin Installer###XlPluginInstaller","Translated":"插件安装器","Context":"InstallerListScroll..cctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiP.FindWindowByName"},{"Original":"）###DisableSelected","Translated":")","Context":"RepoAuditTab.DrawActionBar","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"）…###DeleteSelected","Translated":")...","Context":"RepoAuditTab.DrawActionBar","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"）###SelectFiltered","Translated":")","Context":"RepoAuditTab.DrawActionBar","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"）###IconDownload","Translated":")","Context":"RepoAuditTab.DrawIconMaintenance","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"NameMode","Translated":"名称模式","Context":"TranslateTab.Draw","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"PunchlineMode","Translated":"简介模式","Context":"TranslateTab.Draw","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"DescriptionMode","Translated":"描述模式","Context":"TranslateTab.Draw","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"-Original","Translated":"-原文","Context":"TranslateTab.ModeRow","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"-Chinese","Translated":"-中文","Context":"TranslateTab.ModeRow","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"-Both","Translated":"-双语","Context":"TranslateTab.ModeRow","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"DeepL API key","Translated":"DeepL API 密钥","Context":"UITextSettingsWindow.Draw","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"）：Settings → ","Translated":"）：设置 →","Context":"TestChannel.MoveNext","Source":"library","Role":"UI","RoleReason":"→ ImGui.TextWrapped"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "FireGaze",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "）###DiscoveryUndoAdd",
+      "Translated": ")",
+      "Context": "DiscoveryTab.DrawCore",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "plugin",
+      "Translated": "插件",
+      "Context": "UITextTab.DrawList",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "actions",
+      "Translated": "操作",
+      "Context": "UITextTab.DrawList",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "row",
+      "Translated": "行",
+      "Context": "DiscoveryTab.DrawRow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InvisibleButton"
+    },
+    {
+      "Original": "Plugin Installer###XlPluginInstaller",
+      "Translated": "插件安装器",
+      "Context": "InstallerListScroll..cctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiP.FindWindowByName"
+    },
+    {
+      "Original": "）###DisableSelected",
+      "Translated": ")",
+      "Context": "RepoAuditTab.DrawActionBar",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "）…###DeleteSelected",
+      "Translated": ")...",
+      "Context": "RepoAuditTab.DrawActionBar",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "）###SelectFiltered",
+      "Translated": ")",
+      "Context": "RepoAuditTab.DrawActionBar",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "）###IconDownload",
+      "Translated": ")",
+      "Context": "RepoAuditTab.DrawIconMaintenance",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "NameMode",
+      "Translated": "名称模式",
+      "Context": "TranslateTab.Draw",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "PunchlineMode",
+      "Translated": "简介模式",
+      "Context": "TranslateTab.Draw",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "DescriptionMode",
+      "Translated": "描述模式",
+      "Context": "TranslateTab.Draw",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "-Original",
+      "Translated": "-原文",
+      "Context": "TranslateTab.ModeRow",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "-Chinese",
+      "Translated": "-中文",
+      "Context": "TranslateTab.ModeRow",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "-Both",
+      "Translated": "-双语",
+      "Context": "TranslateTab.ModeRow",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "DeepL API key",
+      "Translated": "DeepL API 密钥",
+      "Context": "UITextSettingsWindow.Draw",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "）：Settings → ",
+      "Translated": "）：设置 →",
+      "Context": "TestChannel.MoveNext",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-12T04:15:00",
+  "imported": {
+    "archive": "uit-direct-2026-10-12T04-14-47-871Z-4533e4ee-2026-10-12T041500.json",
+    "accepted": 17,
+    "filled": 17,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 17 条 `FireGaze` 的界面文字译文，已收为**独立译文包** `uit-packs/FireGaze@user-83cb6a.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 17 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
