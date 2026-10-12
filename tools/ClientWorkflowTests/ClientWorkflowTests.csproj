@@ -5,10 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>fgtest</AssemblyName>
+    <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
     <FireGazeBuildDir Condition="'$(FireGazeBuildDir)' == ''">../../src/FireGaze/bin/Release</FireGazeBuildDir>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FireGaze"><HintPath>$(FireGazeBuildDir)/FireGaze.dll</HintPath></Reference>
     <Reference Include="dnlib"><HintPath>$(FireGazeBuildDir)/dnlib.dll</HintPath></Reference>
+    <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>$(DALAMUD_HOME)/Newtonsoft.Json.dll</HintPath></Reference>
   </ItemGroup>
 </Project>

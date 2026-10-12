@@ -18,8 +18,8 @@
        只收「不依赖 Dalamud / 插件本体」的纯逻辑文件；Plugin.Log 由 ProbeStubs.cs 提供空实现。 -->
   <ItemGroup>
     <Compile Include="../../src/FireGaze/Internal/EmbeddedPdb.cs" LinkBase="Internal" />
-    <Compile Include="../../src/FireGaze/UIText/UIStringExtractor.cs" LinkBase="UIText" />
-    <Compile Include="../../src/FireGaze/UIText/UICallSemantics.cs" LinkBase="UIText" />
+    <Compile Include="../../src/FireGaze/UIText/UiStringExtractor.cs" LinkBase="UIText" />
+    <Compile Include="../../src/FireGaze/UIText/UiCallSemantics.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UiTextModels.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UITextRules.cs" LinkBase="UIText" />
     <Compile Include="../../src/FireGaze/UIText/UITextLocalizationFiles.cs" LinkBase="UIText" />

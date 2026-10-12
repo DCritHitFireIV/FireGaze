@@ -102,6 +102,15 @@ internal sealed class UITextStore
         }
     }
 
+    public UITextPack LoadRequired(string internalName)
+    {
+        this.EnsureRestored(internalName);
+        var pack = UITextPack.FromJSON(File.ReadAllText(this.PathOf(internalName), Encoding.UTF8), out var error)
+            ?? throw new IOException("译文包无法读取：" + error);
+        pack.Meta.Source ??= "local";
+        return pack;
+    }
+
     /// <summary>
     ///     读一个包；文件没变时直接复用上次解析出的对象（只给只读用途：列表行摘要 / 投稿体检）。
     ///     要改包（编辑器、翻译流程）一律走 <see cref="Load" /> 拿独立副本，避免共享实例被改。

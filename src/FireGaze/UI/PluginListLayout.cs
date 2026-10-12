@@ -13,7 +13,7 @@ internal static class PluginListLayout
     public const float DetailInset = IconSize + IconTextGap;
     public const float SearchWidth = 300f;
     public const float FilterWidth = 160f;
-    public static float MainSlotWidth() => MaxWidth("写入并重载", "一键汉化", "重新汉化", "点击更新", "重试");
+    public static float MainSlotWidth() => MaxWidth("写入并重载", "一键汉化", "更新汉化", "点击更新", "重试");
     public static float OpenSlotWidth() => MaxWidth("启用插件", "设置", "打开");
     private static float MaxWidth(params string[] labels) => labels.Max(UiHelpers.LabelWidth);
 
@@ -44,7 +44,7 @@ internal static class PluginListLayout
             + MaxWidth("加入自己的库", "启用") + 10f
             + MaxWidth("一键安装", "安装中…", "去汉化", "安装器") + ImGui.GetStyle().ItemSpacing.X;
         var translation = padding + MainSlotWidth() + OpenSlotWidth()
-            + UiHelpers.LabelWidth("还原原文") + UiHelpers.LabelWidth("一键上传") + 46f;
+            + UiHelpers.LabelWidth("还原原文") + UiHelpers.LabelWidth("一键上传") + 46f + ImGui.GetFrameHeight() + 4f;
         return MeasureSharedActionsWidth(discovery, translation);
     }
 

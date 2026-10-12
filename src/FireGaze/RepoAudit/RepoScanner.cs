@@ -294,7 +294,7 @@ public static class RepoScanner
             return;
         }
 
-        var outcome = await FetchBestAsync(client, item.URL, cancellationToken).ConfigureAwait(false);
+        var outcome = await FetchBestCoreAsync(client, item.URL, cancellationToken, repository: true).ConfigureAwait(false);
 
         if (outcome.Success is { } success)
         {
@@ -415,11 +415,18 @@ public static class RepoScanner
     ///     直连 + 镜像一起竞速，取第一个成功的结果。
     /// </summary>
     private static async Task<FetchOutcome> FetchBestAsync(HttpClient client, string url, CancellationToken cancellationToken)
+        => await FetchBestCoreAsync(client, url, cancellationToken, repository: false).ConfigureAwait(false);
+
+    internal static async Task<string?> FetchRepositoryBodyAsync(HttpClient client, string url, CancellationToken cancellationToken)
+        => (await FetchBestCoreAsync(client, url, cancellationToken, repository: true, requireBody: true).ConfigureAwait(false)).Success?.Text;
+
+    private static async Task<FetchOutcome> FetchBestCoreAsync(HttpClient client, string url, CancellationToken cancellationToken, bool repository, bool requireBody = false)
     {
         var channels = BuildChannels(url);
         using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         var failures = new List<FetchResult>(3);
-        var tasks = channels.Select(c => FetchOneAsync(client, c, linked.Token)).ToList();
+        var tasks = channels.Select(c => FetchOneCoreAsync(client, c, linked.Token, conditional: !requireBody)).ToList();
+        FetchResult? invalidBody = null;
 
         while (tasks.Count > 0)
         {
@@ -438,6 +445,22 @@ public static class RepoScanner
 
             if (result.Success)
             {
+                if (requireBody && result.NotModified) continue;
+                if (repository && result.NotModified && OutcomeCache.TryGetValue(result.URL, out var cached)
+                    && cached.Status == RepoStatus.Invalid)
+                {
+                    invalidBody ??= result;
+                    continue;
+                }
+                if (repository && !result.NotModified)
+                {
+                    var check = ManifestCheck.Check(result.Text ?? string.Empty);
+                    if (check.CheckerAvailable && !check.Ok)
+                    {
+                        invalidBody ??= result;
+                        continue;
+                    }
+                }
                 try
                 {
                     linked.Cancel();
@@ -453,10 +476,14 @@ public static class RepoScanner
             failures.Add(result);
         }
 
-        return new FetchOutcome(null, failures);
+        cancellationToken.ThrowIfCancellationRequested();
+        return new FetchOutcome(invalidBody, failures);
     }
 
     private static async Task<FetchResult> FetchOneAsync(HttpClient client, string url, CancellationToken cancellationToken)
+        => await FetchOneCoreAsync(client, url, cancellationToken, conditional: true).ConfigureAwait(false);
+
+    private static async Task<FetchResult> FetchOneCoreAsync(HttpClient client, string url, CancellationToken cancellationToken, bool conditional)
     {
         try
         {
@@ -464,7 +491,7 @@ public static class RepoScanner
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             // 条件请求：带上上次的 ETag / Last-Modified，没变就是 304（省流量、也省时间）
-            if (OutcomeCache.TryGetValue(url, out var cached))
+            if (conditional && OutcomeCache.TryGetValue(url, out var cached))
             {
                 if (!string.IsNullOrEmpty(cached.ETag))
                 {
@@ -489,7 +516,8 @@ public static class RepoScanner
                 return new FetchResult(url, 304, null, null, true, true);
             }
 
-            var text = await response.Content.ReadAsStringAsync(CancellationToken.None).ConfigureAwait(false);
+            var text = response.IsSuccessStatusCode
+                ? await response.Content.ReadAsStringAsync(timeout.Token).ConfigureAwait(false) : null;
             return new FetchResult(
                 url,
                 (int)response.StatusCode,

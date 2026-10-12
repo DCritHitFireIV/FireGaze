@@ -81,6 +81,15 @@ try
     deferRecovery.Invoke(retryQueue, ["Repair", DateTime.UtcNow.AddMinutes(2), "等待原始包，自动重试"]);
     retryQueue.Cancel();
     Check(retryQueue.Items[0].State == UITextJobState.Skipped && retryQueue.BeginNext() is null, "cancelling the queue also cancels deferred automatic recovery");
+    var bounded = new UITextJobQueue(Path.Combine(Path.GetDirectoryName(path)!, "bounded-recovery.json"));
+    bounded.Request("Repair", "Repair", UITextJobMode.CheckUpdates);
+    for (var attempt = 0; attempt < 4; attempt++)
+    {
+        bounded.BeginNext();
+        bounded.DeferRecovery("Repair", DateTime.UtcNow.AddSeconds(-1), "等待原包");
+    }
+    Check(bounded.BeginNext() is null && bounded.Items[0].State == UITextJobState.Failed,
+        "unavailable originals cannot trigger infinite repeated IL scans");
 
     var discovery = new FireGaze.Discovery.DiscoveryStateStore(Path.GetDirectoryName(path)!);
     var watchInstall = typeof(FireGaze.Discovery.DiscoveryStateStore).GetMethod("WatchInstallation");
@@ -193,7 +202,10 @@ try
         "tab navigation is not overwritten by default selection");
     Check(takeTab.Invoke(selection, null) is null, "a consumed tab request does not trap users on that tab");
     await InstallerTests.Run(Check);
+    await RecoveryTests.Run(Check);
+    await RetranslationTests.Run(Check);
     await DiscoveryUiTests.Run(Check);
+    await FullCoverageTests.Run(Check);
     Console.WriteLine($"ALL PASS {checks}");
 }
 

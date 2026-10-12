@@ -18,6 +18,12 @@ void Check(bool ok, string name)
 }
 try
 {
+    var blockedSaveDirectory = Path.Combine(root, "blocked-save");
+    File.WriteAllText(blockedSaveDirectory, "existing-file");
+    var blockedStore = new UITextStore(blockedSaveDirectory);
+    Check(!blockedStore.Save("Target", new UITextPack(), out var saveError) && saveError is not null
+        && File.ReadAllText(blockedSaveDirectory) == "existing-file",
+        "blocked save destination fails explicitly and preserves the existing file");
     foreach (var (typeName, methodName, identity, identityIndex, parameterCount) in new[]
     {
         ("ECommons.Reflection.DalamudReflector", "TryGetDalamudPlugin", "vnavmesh", 0, 1),
@@ -138,6 +144,15 @@ try
     try { _ = UITextMaintenance.FunctionalRepairs(clean, broken, "wrong hash", Hash(broken)); }
     catch (IOException) { rejectedHash = true; }
     Check(rejectedHash, "an unverified original backup cannot authorize an IPC repair");
+    var verifiedBaseline = typeof(UITextMaintenance).GetMethod("HasVerifiedBaseline");
+    Check(verifiedBaseline is not null, "verified baselines bypass translated-text guesses for native Chinese forks");
+    if (verifiedBaseline is not null)
+    {
+        var recorded = new UITextPatchState { Files = [new() { Path = broken, BackupPath = clean, SourceHash = UITextPatchStore.HashOf(clean), PatchedHash = UITextPatchStore.HashOf(broken) }] };
+        Check((bool)verifiedBaseline.Invoke(null, [new[] { broken }, recorded])!, "matching backup and patch hashes authorize the existing original baseline");
+        recorded.Files![0].SourceHash = "damaged";
+        Check(!(bool)verifiedBaseline.Invoke(null, [new[] { broken }, recorded])!, "corrupt baseline still requires automatic original recovery");
+    }
     var recovery = typeof(UITextPatcher).Assembly.GetType("FireGaze.UIText.UITextOriginalRecovery");
     var adoptPackage = recovery?.GetMethod("AdoptPackage");
     Check(adoptPackage is not null, "missing backups can be recovered automatically from an original package");
@@ -185,6 +200,21 @@ try
         var repairedOutcome = UITextPatcher.Patch(state.BackupPath!, recoveredCopy, sanitized, allowEmptyPatch: true);
         Check(repairedOutcome.Ok && ReadString(recoveredCopy, "Lookup") == "vnavmesh.Nav.IsReady", "recovered baseline repairs the already localized binary");
         Check(backupStore.TryAdopt("Fixture", installed, entry.Version)?.HasBackup == true, "recovered baseline survives lost config through durable manifests");
+        // Simulate a native Chinese fork that coincides with three public translations.
+        var nativePack = new UITextPack();
+        nativePack.GetOrAdd("Native lookup text", null, false).Translated = "vnavmesh.Nav.IsReady";
+        nativePack.GetOrAdd("Native English label", null, false).Translated = "Enable navigation";
+        nativePack.GetOrAdd("Native Chinese label", null, false).Translated = "已有中文界面";
+        var packStore = new UITextStore(Path.Combine(root, "native-packs"));
+        packStore.Save("Fixture", nativePack, out _);
+        var manager = (UITextPatchManager)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(UITextPatchManager));
+        var fieldFlags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+        typeof(UITextPatchManager).GetField("packs", fieldFlags)!.SetValue(manager, packStore);
+        typeof(UITextPatchManager).GetField("store", fieldFlags)!.SetValue(manager, backupStore);
+        Check(manager.ExtractWithGuard(entry, allowRecovery: false).Extraction.Error is null,
+            "three translation coincidences in a verified baseline cannot trigger package recovery");
+        var nativeGuard = await manager.ExtractWithRecoveryAsync(entry);
+        Check(nativeGuard.Extraction.Error is null, "verified native baseline avoids network recovery even when a pack mistranslates an identifier to its text");
         using var cancelled = new CancellationTokenSource();
         cancelled.Cancel();
         var cancellationObserved = false;
@@ -199,7 +229,7 @@ try
             if (request.RequestUri!.AbsolutePath == "/repository")
             {
                 repoAttempts++;
-                return new(System.Net.HttpStatusCode.OK) { Content = new StringContent("[{\"InternalName\":\"Fixture\",\"AssemblyVersion\":\"1.0.0.0\",\"DownloadLinkInstall\":\"https://fixture.test/Fixture.zip\"}]") };
+                return new(System.Net.HttpStatusCode.OK) { Content = new ByteArrayContent(System.Text.Encoding.UTF8.GetPreamble().Concat(System.Text.Encoding.UTF8.GetBytes("[{\"InternalName\":\"Fixture\",\"AssemblyVersion\":\"1.0.0.0\",\"DownloadLinkInstall\":\"https://fixture.test/Fixture.zip\"}]")).ToArray()) };
             }
             packageAttempts++;
             return packageAttempts == 1 ? new(System.Net.HttpStatusCode.ServiceUnavailable)

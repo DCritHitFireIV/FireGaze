@@ -30,6 +30,9 @@ internal static class RepoSubmitChecker
     };
 
     public static async Task<RepoSubmitCheck> CheckAsync(string url, CancellationToken cancellationToken)
+        => await CheckFromClientAsync(Client, url, cancellationToken).ConfigureAwait(false);
+
+    internal static async Task<RepoSubmitCheck> CheckFromClientAsync(HttpClient client, string url, CancellationToken cancellationToken)
     {
         var text = (url ?? string.Empty).Trim();
         if (!Uri.TryCreate(text, UriKind.Absolute, out var parsed) ||
@@ -40,7 +43,7 @@ internal static class RepoSubmitChecker
 
         var normalized = InstalledPluginsIndex.NormalizeRepositoryURL(text);
 
-        var body = await FetchAsync(text, cancellationToken).ConfigureAwait(false);
+        var body = await RepoScanner.FetchRepositoryBodyAsync(client, text, cancellationToken).ConfigureAwait(false);
         if (body is null)
         {
             return new RepoSubmitCheck(false, "取不到这个地址：可能网络不通、404、或者它需要登录；确认地址能在浏览器打开后重试", normalized, 0, 0);
@@ -77,68 +80,4 @@ internal static class RepoSubmitChecker
         return new RepoSubmitCheck(true, $"检测通过：{valid} 条插件{extra}", normalized, check.Count, check.Dropped);
     }
 
-    /// <summary>多线路竞速抓正文（直连 + 镜像）；全部失败返回 null。</summary>
-    private static async Task<string?> FetchAsync(string url, CancellationToken cancellationToken)
-    {
-        var channels = RepoScanner.BuildChannels(url);
-        using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        var tasks = channels.Select(channel => FetchOneAsync(channel, linked.Token)).ToList();
-        while (tasks.Count > 0)
-        {
-            var finished = await Task.WhenAny(tasks).ConfigureAwait(false);
-            tasks.Remove(finished);
-
-            string? body;
-            try
-            {
-                body = await finished.ConfigureAwait(false);
-            }
-            catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
-            {
-                continue;
-            }
-            catch (Exception)
-            {
-                continue;
-            }
-
-            if (body is null)
-            {
-                continue;
-            }
-
-            try
-            {
-                linked.Cancel();
-            }
-            catch
-            {
-                // ignore
-            }
-
-            return body;
-        }
-
-        return null;
-    }
-
-    private static async Task<string?> FetchOneAsync(string url, CancellationToken cancellationToken)
-    {
-        try
-        {
-            using var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            using var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
-
-            return await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-        }
-        catch
-        {
-            return null;
-        }
-    }
 }

@@ -77,7 +77,7 @@ internal sealed partial class DiscoveryTab
     private DateTime lastPendingRetry = DateTime.MinValue;
 
     /// <summary>后台点赞成功后的云端真值（UI 线程取用，避免后台改字典）。</summary>
-    private readonly ConcurrentQueue<(string Plugin, int Total, int Weekly)> likeResults = new();
+    private readonly ConcurrentQueue<(string Plugin, int Total, int Weekly, string Week)> likeResults = new();
 
     /// <summary>当前展开详情的那一行（内部名）；空 = 没展开。</summary>
     private string? expandedEntry;
@@ -238,7 +238,8 @@ internal sealed partial class DiscoveryTab
             else
             {
                 ActivityLog.Warning("插件发现", $"云库刷新失败：{finished.Message}");
-                SetStatus("刷新失败：" + finished.Message, isError: true);
+                SetStatus(plugin.Table.Count > 0 ? "暂未获取到新云库，继续使用本机词表；约一小时后自动重试。"
+                    : "云库暂不可用，约一小时后自动重试；也可稍后手动刷新。", isError: false);
             }
         }
 

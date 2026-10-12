@@ -252,13 +252,14 @@ internal sealed class UITextPatchManager
         cancel.ThrowIfCancellationRequested();
         var pack = this.packs.Load(entry.InternalName);
         var state = this.LoadStateOrAdopt(entry);
+        var trustedBaseline = UITextMaintenance.HasVerifiedBaseline(UITextRules.ResolveCompanions(entry.DLLPath, entry.InternalName), state);
         var invalidBackup = state?.EffectiveFiles.Any(f => File.Exists(f.Path)
             && string.Equals(UITextPatchStore.HashOf(f.Path), f.PatchedHash, StringComparison.OrdinalIgnoreCase)
             && (!f.HasBackup || !string.Equals(UITextPatchStore.HashOf(f.BackupPath!), f.SourceHash, StringComparison.OrdinalIgnoreCase))) == true;
         var guard = invalidBackup ? (new UITextExtraction { Error = "需要恢复原始包" }, string.Empty)
             : this.ExtractWithGuard(entry, allowRecovery: false);
         if (UITextRules.IsDoNotLocalize(entry.InternalName)) return guard;
-        if (!invalidBackup && guard.Item1.Error is null && !UITextMaintenance.SuspectFunctionalTranslations(pack, guard.Item1))
+        if (!invalidBackup && guard.Item1.Error is null && (trustedBaseline || !UITextMaintenance.SuspectFunctionalTranslations(pack, guard.Item1)))
         {
             try { _ = this.FunctionalRepairCount(entry); return guard; }
             catch (IOException) { /* Reacquire originals when an old record cannot be trusted. */ }
@@ -822,7 +823,9 @@ internal sealed class UITextPatchManager
 
         var sources = this.ExtractionSourceOf(entry, out var note, out var searchDirectories);
         var extraction = UIStringExtractor.ExtractMany(sources, searchDirectories);
-        if (extraction.Error is not null || !LooksLikePatchedDLL(extraction, entry.InternalName))
+        if (extraction.Error is not null
+            || UITextMaintenance.HasVerifiedBaseline(UITextRules.ResolveCompanions(entry.DLLPath, entry.InternalName), this.LoadStateOrAdopt(entry))
+            || !LooksLikePatchedDLL(extraction, entry.InternalName))
         {
             return (extraction, note);
         }

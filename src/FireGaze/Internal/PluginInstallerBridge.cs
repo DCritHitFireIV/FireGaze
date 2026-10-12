@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Reflection;
+using FireGaze.Diagnostics;
 using FireGaze.RepoAudit;
 
 namespace FireGaze.Internal;
@@ -51,8 +52,28 @@ internal static class PluginInstallerBridge
             foreach (var status in new[] { "installStatus", "updateStatus", "enableDisableStatus" })
                 if (Read(window, status)?.ToString() == "InProgress") return Failed("卫月正在安装、更新或启停插件，请完成后重试");
 
-            var candidates = Items(manager, "AvailablePlugins")
+            List<object> Candidates() => Items(manager, "AvailablePlugins")
                 .Where(m => Name(m) == internalName && MatchesSource(Read(m, "SourceRepo")!, repositoryURL, official)).ToList();
+            var candidates = Candidates();
+            if (candidates.Count == 0)
+            {
+                ActivityLog.Info("插件发现", internalName + "：可安装列表暂未找到指定来源，自动刷新卫月仓库后重试一次");
+                var refresh = manager.GetType().GetMethod("SetPluginReposFromConfigAsync", InstanceFlags, [typeof(bool)])
+                    ?? throw new MissingMethodException("SetPluginReposFromConfigAsync");
+                var refreshTask = refresh.Invoke(manager, [true]) as Task
+                    ?? throw new InvalidOperationException("仓库刷新没有返回任务");
+                await refreshTask.WaitAsync(timeout < TimeSpan.FromSeconds(30) ? timeout : TimeSpan.FromSeconds(30)).ConfigureAwait(false);
+                // Refresh awaits network I/O; recheck native guards and concurrent installs afterwards.
+                if (Flag(manager, "SafeMode")) return Failed("卫月处于安全模式，请先退出安全模式再安装");
+                if (!Flag(manager, "PluginsReady") || !Flag(manager, "ReposReady"))
+                    return Failed("卫月仍在读取插件库，已转交安装器继续处理");
+                existing = Items(manager, "InstalledPlugins").FirstOrDefault(p => Name(p) == internalName);
+                if (existing is not null)
+                    return new(IsSuccessfullyInstalled(existing), true, false, "这个插件已经安装，请到插件汉化查看；加载异常可在卫月安装器处理");
+                foreach (var status in new[] { "installStatus", "updateStatus", "enableDisableStatus" })
+                    if (Read(window, status)?.ToString() == "InProgress") return Failed("卫月正在安装、更新或启停插件，请完成后重试");
+                candidates = Candidates();
+            }
             if (candidates.Count == 0) return Failed("这条来源暂时没有可安装的版本，请刷新插件库后重试，或打开安装器查看");
             if (candidates.Count != 1) return Failed("这条来源存在多个同名版本，请在卫月安装器确认后安装");
             var manifest = candidates[0];

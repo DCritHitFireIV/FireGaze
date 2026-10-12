@@ -146,7 +146,7 @@ internal sealed partial class DiscoveryTab
     {
         while (likeResults.TryDequeue(out var like))
         {
-            if (discoveryStats is null)
+            if (discoveryStats is null || like.Week != DiscoveryWeek.Current() || discoveryStats.Week != like.Week)
             {
                 continue;
             }

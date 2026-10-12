@@ -1,6 +1,7 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
+using FireGaze.Diagnostics;
 
 namespace FireGaze.UI;
 
@@ -29,6 +30,7 @@ internal sealed class MainWindow : Window
     private readonly DiscoveryTab discoveryTab;
 
     private readonly MainTabSelection tabSelection = new();
+    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Warning("界面耗时", message));
 
     public MainWindow(Plugin plugin, UITextTab uiTextTab)
         : base("FireGaze###FireGaze", ImGuiWindowFlags.None)
@@ -96,6 +98,7 @@ internal sealed class MainWindow : Window
             var flags = pendingSelect == MainTab.UIText ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("插件汉化", flags))
             {
+                using var timing = uiDiagnostics.Measure("UIText.Draw");
                 this.uiTextTab.Draw();
                 ImGui.EndTabItem();
             }
@@ -103,6 +106,7 @@ internal sealed class MainWindow : Window
             flags = pendingSelect == MainTab.Discovery ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("插件发现", flags))
             {
+                using var timing = uiDiagnostics.Measure("Discovery.Draw");
                 discoveryTab.Draw();
                 ImGui.EndTabItem();
             }
@@ -110,6 +114,7 @@ internal sealed class MainWindow : Window
             flags = pendingSelect == MainTab.RepoAudit ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("仓库体检", flags))
             {
+                using var timing = uiDiagnostics.Measure("RepoAudit.Draw");
                 repoAuditTab.Draw();
                 ImGui.EndTabItem();
             }
@@ -117,6 +122,7 @@ internal sealed class MainWindow : Window
             flags = pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("简介汉化", flags))
             {
+                using var timing = uiDiagnostics.Measure("Translate.Draw");
                 translateTab.Draw();
                 ImGui.EndTabItem();
             }
@@ -124,6 +130,7 @@ internal sealed class MainWindow : Window
             flags = pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("插件安装器", flags))
             {
+                using var timing = uiDiagnostics.Measure("Installer.Draw");
                 installerTab.Draw();
                 ImGui.EndTabItem();
             }

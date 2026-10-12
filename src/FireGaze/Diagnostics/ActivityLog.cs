@@ -53,11 +53,12 @@ internal static class ActivityLog
     private static readonly object Gate = new();
     private static readonly List<ActivityEntry> Recent = new();
     private static readonly ConcurrentQueue<ActivityEntry> Pending = new();
-    private static readonly Regex UserPath = new(@"[A-Za-z]:\\Users\\[^\\\s]+", RegexOptions.Compiled);
+    private static readonly Regex UserPath = new(@"[A-Za-z]:[\\/]Users[\\/][^\\/\r\n""'<>|]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     private static readonly Regex UserPathUnix = new(@"/home/[^/\s]+", RegexOptions.Compiled);
     private static readonly Regex SecretToken = new(
-        @"(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{16,}|sctapi\.ftqq\.com/\S+)",
+        @"(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{16,}|sctapi\.ftqq\.com/\S+)",
         RegexOptions.Compiled);
+    private static readonly Regex BearerToken = new(@"(\bBearer\s+)[A-Za-z0-9._~+/=-]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     private static string? logDirectory;
     private static Timer? flushTimer;
@@ -111,7 +112,8 @@ internal static class ActivityLog
         ActivityEntry entry;
         try
         {
-            entry = new ActivityEntry(DateTime.Now, level, scope, message, error?.ToString());
+            entry = new ActivityEntry(DateTime.Now, level, RedactSecrets(scope), RedactSecrets(message),
+                error is null ? null : RedactSecrets(error.ToString()));
             lock (Gate)
             {
                 Recent.Add(entry);
@@ -188,14 +190,16 @@ internal static class ActivityLog
         {
             var result = UserPath.Replace(text, @"C:\Users\%USER%");
             result = UserPathUnix.Replace(result, "/home/%USER%");
-            result = SecretToken.Replace(result, "%SECRET%");
-            return result;
+            return RedactSecrets(result);
         }
         catch
         {
             return text;
         }
     }
+
+    private static string RedactSecrets(string text)
+        => BearerToken.Replace(SecretToken.Replace(text, "%SECRET%"), "$1%SECRET%");
 
     private static string Format(ActivityEntry entry, bool redact)
     {

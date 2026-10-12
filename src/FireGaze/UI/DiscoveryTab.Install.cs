@@ -17,7 +17,7 @@ internal sealed partial class DiscoveryTab
         this.installingName = entry.InternalName;
         this.installFallbackName = null;
         this.WatchDiscoveryInstallation(entry.InternalName);
-        SetStatus("正在安装 " + entry.DisplayName + "…", isError: false);
+        SetStatus("正在准备安装 " + entry.DisplayName + "，必要时自动刷新插件库…", isError: false);
         ActivityLog.Info("插件发现", "请求卫月安装 " + entry.InternalName);
         this.installTask = PluginInstallerBridge.InstallAsync(entry.InternalName, entry.RepositoryURL, entry.IsOfficial);
     }
@@ -39,9 +39,26 @@ internal sealed partial class DiscoveryTab
         this.discoveryInstalledTask = null;
         this.discoveryInstalled = InstalledPluginsIndex.Build();
         this.discoveryInstalledAt = DateTime.Now;
-        SetStatus(name + "：" + result.Message, isError: !result.Ok && !result.StillRunning);
         if (result.Ok) ActivityLog.Info("插件发现", name + "：" + result.Message);
         else ActivityLog.Warning("插件发现", name + "：" + result.Message);
+        if (!result.Ok)
+        {
+            // Keep native safety/permission decisions intact, but complete the navigation fallback for the player.
+            var opened = PluginInstallerBridge.Open(name, out var error);
+            if (opened)
+            {
+                if (!result.StillRunning) this.WatchDiscoveryInstallation(name);
+                SetStatus(name + (result.StillRunning ? "：卫月仍在处理，已定位安装器查看进度。"
+                    : "：已自动定位到插件安装器。"), isError: false);
+                ActivityLog.Info("插件发现", name + "：自动打开并定位原生安装器");
+            }
+            else
+            {
+                SetStatus(name + "：暂未完成安装，请稍后重试；也可从插件菜单打开安装器。", isError: false);
+                ActivityLog.Warning("插件发现", name + "：自动定位安装器不可用：" + error);
+            }
+        }
+        else SetStatus(name + "：" + result.Message, isError: false);
     }
 
     private void OpenInstallationFallback(string name)

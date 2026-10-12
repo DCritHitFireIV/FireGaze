@@ -63,7 +63,7 @@ internal sealed partial class RepoAuditTab
 
         if (list.Count == 0)
         {
-            SetStatus("仓库列表是空的，或者都被排除了。", true);
+            SetStatus("没有需要检查的仓库；可以调整筛选或先添加插件库。", false);
             return;
         }
 

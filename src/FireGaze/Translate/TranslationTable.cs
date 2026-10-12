@@ -539,10 +539,15 @@ public sealed class TranslationTable
             ConnectTimeout = TimeSpan.FromSeconds(10),
         };
         using var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
+        return await UpdateFromClientAsync(client, cancellationToken).ConfigureAwait(false);
+    }
 
+    internal async Task<(bool Ok, string Message)> UpdateFromClientAsync(HttpClient client, CancellationToken cancellationToken)
+    {
         var errors = new List<string>();
         foreach (var url in new[] { RemoteURL, MirrorAtmoomen, MirrorGhProxy })
         {
+            cancellationToken.ThrowIfCancellationRequested();
             try
             {
                 var text = await client.GetStringAsync(url, cancellationToken).ConfigureAwait(false);
@@ -560,8 +565,8 @@ public sealed class TranslationTable
                 if (localDate is not null && (remoteDate is null || remoteDate < localDate))
                 {
                     var remoteLabel = remoteDate is null ? "没有维护日期" : $"{remoteDate:yyyy-MM-dd}";
-                    return (false, $"GitHub 上那份词表更旧（本机 {localDate:yyyy-MM-dd} / 远端 {remoteLabel}），没有替换。"
-                                    + "要强制用远端那份，删掉配置目录里的 translations.json 再更新。");
+                    errors.Add($"{url}：词表比本机旧（本机 {localDate:yyyy-MM-dd} / 远端 {remoteLabel}），保留本机词表");
+                    continue;
                 }
 
                 Directory.CreateDirectory(configDirectory);
@@ -575,6 +580,7 @@ public sealed class TranslationTable
                 BumpRevision();
                 return (true, $"已更新词表：{dict.Count} 条（{url}）");
             }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
             catch (Exception e)
             {
                 errors.Add($"{url}：{e.Message}");

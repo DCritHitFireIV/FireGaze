@@ -48,7 +48,7 @@ internal sealed class UITextOriginalRecovery
         {
             try
             {
-                using var json = JsonDocument.Parse(await this.FetchAsync(repository, MaxMetadataBytes, cancel).ConfigureAwait(false));
+                using var json = ParseMetadata(await this.FetchAsync(repository, MaxMetadataBytes, cancel).ConfigureAwait(false));
                 if (json.RootElement.ValueKind == JsonValueKind.Array)
                     foreach (var manifest in json.RootElement.EnumerateArray())
                     {
@@ -75,7 +75,7 @@ internal sealed class UITextOriginalRecovery
             {
                 try
                 {
-                    using var releases = JsonDocument.Parse(await this.FetchAsync(new Uri($"https://api.github.com/repos/{repo}/releases?per_page=100"), MaxMetadataBytes, cancel).ConfigureAwait(false));
+                    using var releases = ParseMetadata(await this.FetchAsync(new Uri($"https://api.github.com/repos/{repo}/releases?per_page=100"), MaxMetadataBytes, cancel).ConfigureAwait(false));
                     foreach (var release in releases.RootElement.EnumerateArray())
                     {
                         // Tags are only search hints. The package, MVID and executable code must still match.
@@ -157,7 +157,8 @@ internal sealed class UITextOriginalRecovery
             var manifestEntry = archive.GetEntry(prefix + Path.ChangeExtension(mainName, ".json"));
             if (manifestEntry is null || manifestEntry.Length > MaxMetadataBytes) throw new IOException("原始包缺少插件清单");
             using (var stream = manifestEntry.Open())
-            using (var manifest = JsonDocument.Parse(stream))
+            using (var reader = new StreamReader(stream, detectEncodingFromByteOrderMarks: true))
+            using (var manifest = JsonDocument.Parse(reader.ReadToEnd()))
                 if (Text(manifest.RootElement, "InternalName") != entry.InternalName
                     || !SameVersion(Text(manifest.RootElement, "AssemblyVersion"), entry.Version))
                     throw new IOException("原始包的名称或版本不匹配");
@@ -209,21 +210,20 @@ internal sealed class UITextOriginalRecovery
         using var current = ModuleDefMD.Load(currentPath);
         if (original.Mvid is null || original.Mvid != current.Mvid || original.Assembly?.FullName != current.Assembly?.FullName) return false;
         if (!original.GetAssemblyRefs().Select(a => a.FullName).Order().SequenceEqual(current.GetAssemblyRefs().Select(a => a.FullName).Order())) return false;
-        string Shape(ModuleDef module)
+        IEnumerable<string> Shape(ModuleDef module)
         {
-            var lines = new List<string>();
             foreach (var type in module.GetTypes())
             {
-                lines.Add($"T:{type.FullName}:{type.Attributes}:{type.BaseType}");
-                lines.AddRange(type.Interfaces.Select(i => "I:" + i.Interface));
-                lines.AddRange(type.Fields.Select(f => $"F:{f.FullName}:{f.Attributes}:{Convert.ToHexString(f.InitialValue ?? [])}"));
+                yield return $"T:{type.FullName}:{type.Attributes}:{type.BaseType}";
+                foreach (var i in type.Interfaces) yield return "I:" + i.Interface;
+                foreach (var f in type.Fields) yield return $"F:{f.FullName}:{f.Attributes}:{Convert.ToHexString(f.InitialValue ?? [])}";
                 foreach (var method in type.Methods)
                 {
-                    lines.Add($"M:{method.FullName}:{method.Attributes}:{method.ImplAttributes}:{method.HasBody}");
+                    yield return $"M:{method.FullName}:{method.Attributes}:{method.ImplAttributes}:{method.HasBody}";
                     if (!method.HasBody) continue;
                     var body = method.Body;
                     int Index(Instruction? instruction) => instruction is null ? -1 : body.Instructions.IndexOf(instruction);
-                    lines.Add($"B:{body.InitLocals}:{string.Join(',', body.Variables.Select(v => v.Type.FullName))}");
+                    yield return $"B:{body.InitLocals}:{string.Join(',', body.Variables.Select(v => v.Type.FullName))}";
                     foreach (var instruction in body.Instructions)
                     {
                         var operand = instruction.OpCode.Code == Code.Ldstr ? "<text>" : instruction.Operand switch
@@ -237,15 +237,17 @@ internal sealed class UITextOriginalRecovery
                             null => string.Empty,
                             var value => value.ToString(),
                         };
-                        lines.Add(instruction.OpCode.Code + ":" + operand);
+                        yield return instruction.OpCode.Code + ":" + operand;
                     }
-                    lines.AddRange(body.ExceptionHandlers.Select(h => $"E:{h.HandlerType}:{h.CatchType}:{Index(h.TryStart)}:{Index(h.TryEnd)}:{Index(h.HandlerStart)}:{Index(h.HandlerEnd)}:{Index(h.FilterStart)}"));
+                    foreach (var h in body.ExceptionHandlers) yield return $"E:{h.HandlerType}:{h.CatchType}:{Index(h.TryStart)}:{Index(h.TryEnd)}:{Index(h.HandlerStart)}:{Index(h.HandlerEnd)}:{Index(h.FilterStart)}";
                 }
             }
-            return string.Join('\n', lines);
         }
-        return Shape(original) == Shape(current);
+        return Shape(original).SequenceEqual(Shape(current));
     }
+
+    private static JsonDocument ParseMetadata(byte[] bytes) => JsonDocument.Parse(
+        bytes.AsMemory(bytes.AsSpan().StartsWith(new byte[] { 0xEF, 0xBB, 0xBF }) ? 3 : 0));
 
     private static ZipArchiveEntry FindEntry(ZipArchive archive, string name)
     {

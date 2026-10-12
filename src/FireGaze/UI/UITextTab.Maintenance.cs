@@ -60,6 +60,7 @@ internal sealed partial class UITextTab
     {
         if (this.workflowDisposed || DateTime.UtcNow - this.queueTickAt < TimeSpan.FromMilliseconds(200)) return;
         this.queueTickAt = DateTime.UtcNow;
+        this.CleanupRewritePreview();
         this.PollRun();
         if (this.installedPluginsDirty && this.indexRebuild is null)
         {
@@ -86,6 +87,7 @@ internal sealed partial class UITextTab
         this.workflowDisposed = true;
         this.workQueue.SetPaused(true);
         this.run?.Cancel.Cancel();
+        this.pendingRewrite?.Cancel.Cancel();
         this.recoveryRetries.Clear();
     }
 
@@ -155,7 +157,7 @@ internal sealed partial class UITextTab
 
     private void TickQueue()
     {
-        if (this.workflowDisposed || this.run is not null || this.pendingStart is not null || this.editor.IsOpen || this.diagnosticBusy.Count > 0) return;
+        if (this.workflowDisposed || this.run is not null || this.pendingStart is not null || this.pendingRewrite is not null || this.editor.IsOpen || this.diagnosticBusy.Count > 0) return;
         if (this.workQueue.Active is { } abandoned)
         {
             this.workQueue.Complete(abandoned.InternalName, false, "已取消，没有开始任务");
@@ -173,6 +175,8 @@ internal sealed partial class UITextTab
             if (this.maintenance.TryGetValue(entry.InternalName, out var update) && update.CanApply) this.ApplyMaintenance(entry, update);
             else this.workQueue.Complete(job.InternalName, false, "请重新检查汉化更新后再更新。");
         }
+        else if (job.Mode is UITextJobMode.UpgradeTranslations or UITextJobMode.RetranslateNonHuman or UITextJobMode.RestoreTranslations)
+            this.StartRewrite(entry, job);
         else this.StartOneClick(entry, this.maintenance.GetValueOrDefault(entry.InternalName)?.NewOriginals is { Count: > 0 } newTexts ? newTexts : null);
         if (this.run is null && this.pendingStart is null)
             this.workQueue.Complete(job.InternalName, false, this.notes.GetValueOrDefault(job.InternalName)?.Text ?? "任务未能开始");
@@ -202,15 +206,25 @@ internal sealed partial class UITextTab
                 var candidate = UITextPack.FromJSON(baseline, out _)!;
                 UITextFlow.MergeExtraction(candidate, guard.Extraction);
                 var hash = MaintenanceSignature(entry, candidate);
-                var libraryChanges = this.plugin.Config.UITextLibraryEnabled
-                    ? await this.plugin.TextLibrary.MergeIntoAsync(candidate, entry.InternalName, active.Cancel.Token, forceRefresh: true).ConfigureAwait(false) : 0;
+                var libraryChanges = 0;
+                string? warning = null;
+                if (this.plugin.Config.UITextLibraryEnabled)
+                {
+                    var library = await UITextMaintenance.FetchLibraryCandidateAsync(candidate, async (copy, token) =>
+                    {
+                        var changes = await this.plugin.TextLibrary.MergeIntoAsync(copy, entry.InternalName, token, forceRefresh: true).ConfigureAwait(false);
+                        return (changes, this.plugin.TextLibrary.LastError);
+                    }, active.Cancel.Token).ConfigureAwait(false);
+                    candidate = library.Candidate;
+                    libraryChanges = library.Changes;
+                    warning = library.Warning;
+                }
                 active.Cancel.Token.ThrowIfCancellationRequested();
                 // A public pack can contain obsolete keys; classify again before offering a DLL write.
                 UITextFlow.MergeExtraction(candidate, guard.Extraction);
                 if (MaintenanceSignature(entry, candidate) != hash)
                     throw new IOException("检查期间插件文件发生了变化，请重新检查。");
                 var preview = UITextFlow.PreviewMerge(before, candidate);
-                var warning = this.plugin.Config.UITextLibraryEnabled ? this.plugin.TextLibrary.LastError : null;
                 if (warning is not null)
                 {
                     // A failed download may have merged a partial public pack. Offline repair uses only saved translations.

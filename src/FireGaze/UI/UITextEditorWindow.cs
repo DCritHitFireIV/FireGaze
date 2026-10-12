@@ -167,6 +167,7 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
+        if (this.dirty && !this.SaveIfDirty(force: true)) return;
         this.entry = target;
         this.pack = this.store.Load(target.InternalName);
         this.packLoadedMtime = this.PackMtime(target.InternalName);
@@ -184,7 +185,7 @@ internal sealed class UITextEditorWindow : Window
 
     public override void OnClose()
     {
-        this.SaveIfDirty(force: true);
+        if (!this.SaveIfDirty(force: true)) this.IsOpen = true;
     }
 
     /// <summary>点开时总是展开（折叠状态会被 ImGui 的 ini 记住，2026-10-02 实测）。</summary>
@@ -576,7 +577,7 @@ internal sealed class UITextEditorWindow : Window
 
         this.MarkDirty();
         var failed = outcome.Result.Failed.Count;
-        var summary = (this.translateOverwriteExisting ? "全量重翻完成" : "翻译完成") + $"（{outcome.Channel}）：写入 {applied} 条" +
+        var summary = (outcome.Result.Error == "已取消" ? "已停止翻译" : this.translateOverwriteExisting ? "全量重翻完成" : "翻译完成") + $"（{outcome.Channel}）：写入 {applied} 条" +
                       (failed > 0 ? $" · 失败 {failed} 条" : string.Empty) +
                       (placeholderRejected > 0 ? $" · 占位符对不上跳过 {placeholderRejected} 条" : string.Empty) +
                       (unchanged > 0 ? $" · 原样返回 {unchanged} 条" : string.Empty);
@@ -600,7 +601,7 @@ internal sealed class UITextEditorWindow : Window
             summary += $" · 尚未应用——点「写入并重载」（共 {unapplied} 条）";
         }
 
-        this.SetStatus(summary, applied == 0 && failed > 0);
+        this.SetStatus(summary, UITextTranslationSession.IsFailure(outcome.Result, applied, placeholderRejected, unchanged));
     }
 
     /// <summary>
@@ -613,7 +614,7 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        this.SaveIfDirty(force: true);
+        if (!this.SaveIfDirty(force: true)) return;
         var target = this.entry;
         this.SetStatus("正在写入补丁…（写入后会自动重载插件）", false);
         this.patchTask = Task.Run(() => this.patches.ApplyAndReloadAsync(target));
@@ -629,7 +630,7 @@ internal sealed class UITextEditorWindow : Window
             return;
         }
 
-        this.SaveIfDirty(force: true);
+        if (!this.SaveIfDirty(force: true)) return;
         var target = this.entry;
         this.SetStatus("正在还原原始文件…（还原后会自动重载插件）", false);
         this.patchTask = Task.Run(() => this.patches.RestoreAndReloadAsync(target));
@@ -1549,21 +1550,21 @@ internal sealed class UITextEditorWindow : Window
         }
     }
 
-    private void SaveIfDirty(bool force)
+    private bool SaveIfDirty(bool force)
     {
         if (!this.dirty)
         {
-            return;
+            return true;
         }
 
         if (!force && (DateTime.Now - this.dirtySince).TotalSeconds < 1.5)
         {
-            return;
+            return false;
         }
 
         if (this.entry is null)
         {
-            return;
+            return false;
         }
 
         // 盘上被外部更新过（例如编辑器开着时某个列表页任务刚跑完）：先把自己的「人工修改」并回磁盘那份，
@@ -1578,10 +1579,12 @@ internal sealed class UITextEditorWindow : Window
             this.dirty = false;
             this.lastSaveAt = DateTime.Now;
             this.packLoadedMtime = this.PackMtime(this.entry.InternalName);
+            return true;
         }
         else
         {
             this.SetStatus("保存失败：" + error, true);
+            return false;
         }
     }
 

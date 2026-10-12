@@ -5,6 +5,33 @@ internal sealed record UITextDiagnostic(string Original, string? Context, string
 
 internal static class UITextMaintenance
 {
+    public static async Task<(UITextPack Candidate, int Changes, string? Warning)> FetchLibraryCandidateAsync(
+        UITextPack baseline, Func<UITextPack, CancellationToken, Task<(int Changes, string? Warning)>> fetch,
+        CancellationToken token, int retryDelayMilliseconds = 1000)
+    {
+        var json = baseline.ToJSON();
+        string? warning = null;
+        for (var attempt = 0; attempt < 2; attempt++)
+        {
+            token.ThrowIfCancellationRequested();
+            var candidate = UITextPack.FromJSON(json, out _)!;
+            var outcome = await fetch(candidate, token).ConfigureAwait(false);
+            token.ThrowIfCancellationRequested();
+            if (outcome.Warning is null) return (candidate, outcome.Changes, null);
+            warning = outcome.Warning;
+            if (attempt == 0) await Task.Delay(retryDelayMilliseconds, token).ConfigureAwait(false);
+        }
+        // No partial remote content may escape a failed check.
+        return (UITextPack.FromJSON(json, out _)!, 0, warning);
+    }
+
+    public static bool HasVerifiedBaseline(IReadOnlyList<string> paths, UITextPatchState? state) => paths.Count > 0 && state is not null
+        && paths.All(path => state.EffectiveFiles.Any(f => f.HasBackup
+            && Path.GetFileName(f.Path).Equals(Path.GetFileName(path), StringComparison.OrdinalIgnoreCase)
+            && !string.IsNullOrEmpty(f.SourceHash) && !string.IsNullOrEmpty(f.PatchedHash)
+            && string.Equals(UITextPatchStore.HashOf(path), f.PatchedHash, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(UITextPatchStore.HashOf(f.BackupPath!), f.SourceHash, StringComparison.OrdinalIgnoreCase)));
+
     public static bool CanApplyUpdate(UITextFlow.MergePreview preview, string? warning, int safetyRepairs = 0) => safetyRepairs > 0
         || (warning is null && (preview.Added > 0 || preview.Overwritten > 0));
 

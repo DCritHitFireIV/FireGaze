@@ -41,6 +41,8 @@ internal sealed class DiscoveryStateStore
 
     /// <summary>本机状态文件读/写出过问题（界面给一次性提示，不让失败一直静默）。</summary>
     private bool persistFailed;
+    private bool loadFailed;
+    private string? invalidBackup;
 
     public DiscoveryStateStore(string configDirectory)
     {
@@ -90,6 +92,7 @@ internal sealed class DiscoveryStateStore
         lock (gate)
         {
             likedWeeks[internalName] = week;
+            pending.RemoveAll(x => x.Type == "like" && x.Plugin == internalName && x.Week != week);
             if (!pending.Any(x => x.Type == "like" && string.Equals(x.Plugin, internalName, StringComparison.Ordinal)))
             {
                 pending.Add(new DiscoveryPendingAction
@@ -186,7 +189,8 @@ internal sealed class DiscoveryStateStore
         lock (gate)
         {
             pending.RemoveAll(x => x.Type == action.Type
-                                   && string.Equals(x.Plugin, action.Plugin, StringComparison.Ordinal));
+                                   && string.Equals(x.Plugin, action.Plugin, StringComparison.Ordinal)
+                                   && x.Week == action.Week && x.AtUTC == action.AtUTC);
             SaveLocked();
         }
     }
@@ -206,6 +210,15 @@ internal sealed class DiscoveryStateStore
         lock (gate)
         {
             pending.RemoveAll(x => x.Type == "like" && string.Equals(x.Plugin, internalName, StringComparison.Ordinal));
+            SaveLocked();
+        }
+    }
+
+    public void CompleteLikeForWeek(string internalName, string week)
+    {
+        lock (gate)
+        {
+            pending.RemoveAll(x => x.Type == "like" && x.Plugin == internalName && x.Week == week);
             SaveLocked();
         }
     }
@@ -270,7 +283,8 @@ internal sealed class DiscoveryStateStore
     {
         // 超过 30 天的陈旧上报没有重试意义（周榜早就翻篇了），直接丢
         var cutoff = DateTimeOffset.UtcNow.AddDays(-30).ToUnixTimeSeconds();
-        pending.RemoveAll(x => x.AtUTC < cutoff);
+        var week = DiscoveryWeek.Current();
+        if (pending.RemoveAll(x => x.AtUTC < cutoff || x.Type == "like" && x.Week != week) > 0) SaveLocked();
     }
 
     private void Load()
@@ -282,22 +296,26 @@ internal sealed class DiscoveryStateStore
                 return;
             }
 
-            var doc = JsonSerializer.Deserialize<PersistedState>(File.ReadAllText(path));
-            if (doc is null)
-            {
-                return;
-            }
+            var doc = JsonSerializer.Deserialize<PersistedState>(File.ReadAllText(path))
+                ?? throw new IOException("Invalid discovery state.");
+            if (doc.Pending?.Any(x => x is null || x.Type is not ("like" or "add")
+                    || string.IsNullOrWhiteSpace(x.Plugin) || x.Type == "like" && string.IsNullOrWhiteSpace(x.Week)) == true)
+                throw new IOException("Invalid pending discovery action.");
 
             likedWeeks = doc.LikedWeeks is null
                 ? new Dictionary<string, string>(StringComparer.Ordinal)
                 : new Dictionary<string, string>(doc.LikedWeeks, StringComparer.Ordinal);
             pending = doc.Pending ?? [];
-            installationTargets = new HashSet<string>(doc.InstallationTargets ?? [], StringComparer.Ordinal);
+            installationTargets = new HashSet<string>((doc.InstallationTargets ?? []).Where(x => !string.IsNullOrWhiteSpace(x)), StringComparer.Ordinal);
             submittedRepos = doc.SubmittedRepos is null
                 ? new Dictionary<string, long>(StringComparer.Ordinal)
                 : new Dictionary<string, long>(doc.SubmittedRepos, StringComparer.Ordinal);
             if (doc.Stats is not null)
             {
+                doc.Stats.Week ??= string.Empty;
+                doc.Stats.WeeklyLikes ??= new(StringComparer.Ordinal);
+                doc.Stats.TotalLikes ??= new(StringComparer.Ordinal);
+                doc.Stats.Recommends ??= new(StringComparer.Ordinal);
                 CachedStats = doc.Stats;
             }
         }
@@ -305,6 +323,8 @@ internal sealed class DiscoveryStateStore
         {
             // 坏文件当没有：不因此让页签不可用（但要让界面提示一次，不静默）
             persistFailed = true;
+            loadFailed = true;
+            CachedStats = null;
             likedWeeks = new Dictionary<string, string>(StringComparer.Ordinal);
             pending = [];
             installationTargets = new(StringComparer.Ordinal);
@@ -326,7 +346,14 @@ internal sealed class DiscoveryStateStore
             };
             var json = JsonSerializer.Serialize(doc, JSONOptions);
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            if (loadFailed && invalidBackup is null && File.Exists(path))
+            {
+                var backup = path + ".invalid-" + Guid.NewGuid().ToString("N");
+                File.Copy(path, backup);
+                invalidBackup = backup;
+            }
             AtomicFile.WriteAllText(path, json + Environment.NewLine, System.Text.Encoding.UTF8);
+            loadFailed = false;
             persistFailed = false;
         }
         catch

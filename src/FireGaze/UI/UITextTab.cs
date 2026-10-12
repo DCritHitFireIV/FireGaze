@@ -88,6 +88,7 @@ internal sealed partial class UITextTab
         ExtractOnly,
         CheckUpdates,
         ApplyUpdates,
+        Rewrite,
     }
 
     private sealed class Run
@@ -113,6 +114,7 @@ internal sealed partial class UITextTab
     private readonly UITextStore store;
     private readonly UITextPatchManager patches;
     private readonly UITextRunLock runs;
+    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Warning("界面耗时", message));
 
     private InstalledPluginsIndex? index;
     private DateTime indexAt = DateTime.MinValue;
@@ -233,13 +235,16 @@ internal sealed partial class UITextTab
     {
         this.PollRun();
         var headerOrigin = ImGui.GetCursorPosY();
-        this.DrawToolbar();
-        this.TickQueue();
-        this.DrawQueueToolbar();
+        using (uiDiagnostics.Measure("UIText.Toolbar"))
+        {
+            this.DrawToolbar();
+            this.TickQueue();
+            this.DrawQueueToolbar();
+        }
         PluginListLayout.FinishHeader(headerOrigin);
         this.DrawRunningBar();
-        this.DrawList();
-        this.DrawPendingModals();
+        using (uiDiagnostics.Measure("UIText.List")) this.DrawList();
+        using (uiDiagnostics.Measure("UIText.Dialogs")) this.DrawPendingModals();
     }
 
     // ── 工具条 ───────────────────────────────────────────────────────────
@@ -411,7 +416,7 @@ internal sealed partial class UITextTab
         ImGui.PushStyleColor(ImGuiCol.ChildBg, new Vector4(0.12f, 0.15f, 0.19f, 1f));
         if (ImGui.BeginChild("###UITextRunning", new Vector2(0, ImGui.GetFrameHeight() + 8)))
         {
-            var verb = run.Mode switch { RunMode.ExtractOnly => "正在抽取", RunMode.CheckUpdates => "正在检查更新", RunMode.ApplyUpdates => "正在更新汉化", _ => "正在汉化" };
+            var verb = run.Mode switch { RunMode.ExtractOnly => "正在抽取", RunMode.CheckUpdates => "正在检查更新", RunMode.ApplyUpdates => "正在更新汉化", RunMode.Rewrite => "正在处理译文", _ => "正在汉化" };
             var stage = run.Stage;
             if (run.CanCancel && run.TranslateStartedTicks > 0)
             {
@@ -790,8 +795,8 @@ internal sealed partial class UITextTab
             var update = this.maintenance.GetValueOrDefault(plugin.InternalName);
             var canUpdate = update?.CanApply == true;
             var queued = this.workQueue.Items.Any(j => j.InternalName == plugin.InternalName
-                && j.Mode is UITextJobMode.Translate or UITextJobMode.ApplyUpdates && j.State == UITextJobState.Pending);
-            var label = queued ? "已排队" : canUpdate ? "点击更新" : retryable ? "重试" : writeOnly ? "写入并重载" : fullyLocalized ? "重新汉化" : "一键汉化";
+                && j.Mode != UITextJobMode.CheckUpdates && j.State == UITextJobState.Pending);
+            var label = queued ? "已排队" : canUpdate ? "点击更新" : retryable ? "重试" : writeOnly ? "写入并重载" : fullyLocalized ? "更新汉化" : "一键汉化";
             ImGui.BeginDisabled(editorOpen || queued);
             if (canUpdate || !fullyLocalized)
             {
@@ -824,6 +829,8 @@ internal sealed partial class UITextTab
                                 ? "重新抽取一遍：有新文本或写法变了会重打补丁；都没有就只报「已是最新」。\n原文件备份与「还原原文」照旧。"
                                 : "翻译没翻的条目 → 写入插件 DLL → 自动重载插件。\n原文件会先备份，随时可以「还原原文」。"));
             }
+
+            this.DrawRewriteMenu(plugin, busy || editorOpen || queued);
 
             // 第二槽位：**未加载 → 启用插件；已加载 → 打开/设置**，两者互斥（用户要求：不允许两个同时亮），
             // 且用同一个固定宽度——不管哪个按钮，后面的「还原原文 / 一键上传」都能对齐。
@@ -2189,8 +2196,8 @@ internal sealed partial class UITextTab
                 // 通道整条不可用、或回来的比没回来的少 → 真失败；只有个别没回来、其余「原样返回」
                 // （多是格式串 / 内部名）的，不算失败——继续把已翻好的写进插件，那几条用状态行如实提示并给「重试」。
                 var leftoverFailure = applied == 0 && result.Failed.Count > 0;
-                var mostlyDelivered = unchanged + rejected > result.Failed.Count;
-                if (result.Error is not null || (leftoverFailure && !mostlyDelivered))
+                token.ThrowIfCancellationRequested();
+                if (UITextTranslationSession.IsFailure(result, applied, rejected, unchanged))
                 {
                     if (token.IsCancellationRequested)
                         throw new OperationCanceledException(token);
@@ -2491,6 +2498,7 @@ internal sealed partial class UITextTab
 
     private void DrawPendingModals()
     {
+        this.DrawRewriteModal();
         if (this.feedbackOpen)
         {
             this.DrawFeedbackModal();
@@ -3009,7 +3017,12 @@ internal sealed partial class UITextTab
             {
                 var note = this.notes.GetValueOrDefault(run.InternalName);
                 if (!run.Cancel.IsCancellationRequested && this.recoveryRetries.TryRemove(run.InternalName, out var retryAt))
+                {
                     this.workQueue.DeferRecovery(run.InternalName, retryAt, note?.Text ?? "等待原始包，自动重试");
+                    var deferred = this.workQueue.Items.LastOrDefault(j => j.InternalName == run.InternalName && j.Mode == UITextJobMode.CheckUpdates);
+                    if (deferred?.State == UITextJobState.Failed)
+                        this.notes[run.InternalName] = new RowNote { Kind = NoteKind.Info, Text = deferred.Message };
+                }
                 else
                     this.workQueue.Complete(run.InternalName, note?.Kind != NoteKind.Bad && !run.Cancel.IsCancellationRequested,
                         note?.Text ?? "任务已结束");
@@ -3153,6 +3166,7 @@ internal sealed partial class UITextTab
     /// </summary>
     private void RefreshRows()
     {
+        using var timing = uiDiagnostics.Measure("UIText.RefreshRows");
         var info = new Dictionary<string, RowInfo>(StringComparer.Ordinal);
         if (this.index is { Available: true })
         {

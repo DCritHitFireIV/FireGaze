@@ -373,9 +373,11 @@ internal sealed partial class DiscoveryTab
     /// <summary>本机点赞：先记下来（支持离线/失败重试），再后台上报；成功用云端真值回填。</summary>
     private void MarkLike(TranslationIndexEntry entry)
     {
-        discoveryState.MarkLiked(entry.InternalName, DiscoveryWeek.Current());
+        var week = DiscoveryWeek.Current();
+        discoveryState.MarkLiked(entry.InternalName, week);
         if (discoveryStats is not null)
         {
+            if (discoveryStats.Week != week) { discoveryStats.Week = week; discoveryStats.WeeklyLikes.Clear(); }
             discoveryStats.WeeklyLikes[entry.InternalName] = discoveryStats.WeeklyOf(entry.InternalName) + 1;
             discoveryStats.TotalLikes[entry.InternalName] = discoveryStats.TotalOf(entry.InternalName) + 1;
         }
@@ -393,8 +395,8 @@ internal sealed partial class DiscoveryTab
                 return;
             }
 
-            discoveryState.CompleteLike(name);
-            likeResults.Enqueue((name, total, weekly));
+            discoveryState.CompleteLikeForWeek(name, week);
+            likeResults.Enqueue((name, total, weekly, week));
         });
     }
 

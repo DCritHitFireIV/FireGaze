@@ -20,6 +20,50 @@ internal static class InstallerTests
         check(result.Ok && !result.Already && !result.Running && f.Manager.InstalledPlugins.Single().InternalName == "Target",
             "one-click installation succeeds only after the native installed state is ready");
         f = new();
+        f.Manager.AvailablePlugins.Clear();
+        f.Manager.RefreshedManifest = new();
+        result = await Run(f);
+        check(result.Ok && f.Manager.RefreshCount == 1 && f.Manager.InstalledPlugins.Count == 1,
+            "Sceneweaver missing-list reproduction refreshes once and completes native installation automatically");
+        f = new();
+        f.Manager.AvailablePlugins.Clear();
+        result = await Run(f);
+        check(!result.Ok && f.Manager.RefreshCount == 1 && f.Manager.InstalledPlugins.Count == 0,
+            "a still-missing source stops after one refresh rather than retrying forever");
+        f = new();
+        f.Manager.AvailablePlugins.Clear();
+        f.Manager.RefreshedManifest = new() { SourceRepo = new() { PluginMasterUrl = "https://wrong.example/master.json" } };
+        result = await Run(f);
+        check(!result.Ok && f.Manager.InstalledPlugins.Count == 0,
+            "automatic refresh cannot install a same-name plugin from another source");
+        f = new();
+        f.Manager.AvailablePlugins.Clear();
+        f.Manager.RefreshFailure = true;
+        result = await Run(f);
+        check(!result.Ok && f.Manager.RefreshCount == 1,
+            "repository refresh errors return a recoverable result without starting installation");
+        f = new();
+        f.Manager.AvailablePlugins.Clear();
+        f.Manager.RefreshedManifest = new();
+        f.Manager.AfterRefresh = () => f.Manager.SafeMode = true;
+        result = await Run(f);
+        check(!result.Ok && f.Manager.InstalledPlugins.Count == 0,
+            "safe mode enabled during recovery prevents native installation");
+        f = new();
+        f.Manager.AvailablePlugins.Clear();
+        f.Manager.RefreshedManifest = new();
+        f.Manager.AfterRefresh = () => f.Window.updateStatus = InstallStatus.InProgress;
+        result = await Run(f);
+        check(!result.Ok && f.Manager.InstalledPlugins.Count == 0,
+            "a native update started during refresh cannot race recovery installation");
+        f = new();
+        f.Manager.AvailablePlugins.Clear();
+        f.Manager.RefreshDelay = 100;
+        result = await Run(f, timeout: 10);
+        check(!result.Ok && !result.Running && f.Manager.InstalledPlugins.Count == 0,
+            "slow repository recovery is bounded and never reports a started installation");
+        await Task.Delay(120);
+        f = new();
         f.Manager.AvailablePlugins.Insert(0, new() { SourceRepo = new() { PluginMasterUrl = "https://wrong.example/master.json" } });
         result = await Run(f);
         check(result.Ok && f.Manager.InstalledPlugins.Single().InstalledFromUrl == "https://example.com/master.json",
@@ -107,6 +151,19 @@ internal sealed class InstallFixture
 }
 internal sealed class ManagerFixture
 {
+    public int RefreshCount;
+    public ManifestFixture? RefreshedManifest;
+    public bool RefreshFailure;
+    public int RefreshDelay;
+    public Action? AfterRefresh;
+    public async Task SetPluginReposFromConfigAsync(bool force)
+    {
+        RefreshCount++;
+        if (RefreshFailure) throw new IOException("refresh unavailable");
+        if (RefreshDelay > 0) await Task.Delay(RefreshDelay);
+        if (RefreshedManifest is not null) AvailablePlugins.Add(RefreshedManifest);
+        AfterRefresh?.Invoke();
+    }
     public bool PluginsReady { get; set; } = true;
     public bool ReposReady { get; set; } = true;
     public bool SafeMode { get; set; }

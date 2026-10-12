@@ -829,6 +829,12 @@ public sealed class Plugin : IDalamudPlugin
             }
         }
 
+        if (!ok)
+        {
+            // Keep the usable table and move the existing daily check forward to a one-hour retry.
+            Config.LastTableUpdateCheckUTC = DateTime.UtcNow.AddHours(-23);
+            SaveConfig();
+        }
         return (ok, message);
     }
 
