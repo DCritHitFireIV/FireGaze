@@ -1,1 +1,170 @@
-{"type":"uit-contribution","plugin":"BDTHPlugin","entries":[{"Original":"BDTH Debug","Translated":"BDTH 调试","Context":"DebugWindow..ctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Gamepad Mode: ","Translated":"手柄模式：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"CanEditItem: ","Translated":"可编辑物品：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"IsHousingOpen: ","Translated":"房屋界面已打开：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"LayoutWorld: ","Translated":"布局世界：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Housing Structure: ","Translated":"房屋结构：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Mode: ","Translated":"模式：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"State: ","Translated":"状态：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"State2: ","Translated":"状态2：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Active: ","Translated":"激活：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Hover: ","Translated":"悬停：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Rotating: ","Translated":"旋转中：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Housing Module: ","Translated":"房屋模块：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Current Territory: ","Translated":"当前区域：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Outdoor Territory: ","Translated":"室外区域：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Indoor Territory: ","Translated":"室内区域：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Position: ","Translated":"位置：","Context":"DebugWindow.Draw","Source":"library","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Burning Down the House##BDTH","Translated":"燃烧殆尽##BDTH","Context":"MainWindow..ctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"FurnishingListItems","Translated":"家具列表项","Context":"FurnitureList.Draw","Source":"library"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "BDTHPlugin",
+  "entries": [
+    {
+      "Original": "BDTH Debug",
+      "Translated": "BDTH 调试",
+      "Context": "DebugWindow..ctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Gamepad Mode: ",
+      "Translated": "手柄模式：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "CanEditItem: ",
+      "Translated": "可编辑物品：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "IsHousingOpen: ",
+      "Translated": "房屋界面已打开：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "LayoutWorld: ",
+      "Translated": "布局世界：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Housing Structure: ",
+      "Translated": "房屋结构：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Mode: ",
+      "Translated": "模式：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "State: ",
+      "Translated": "状态：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "State2: ",
+      "Translated": "状态2：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Active: ",
+      "Translated": "激活：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Hover: ",
+      "Translated": "悬停：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Rotating: ",
+      "Translated": "旋转中：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Housing Module: ",
+      "Translated": "房屋模块：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Current Territory: ",
+      "Translated": "当前区域：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Outdoor Territory: ",
+      "Translated": "室外区域：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Indoor Territory: ",
+      "Translated": "室内区域：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Position: ",
+      "Translated": "位置：",
+      "Context": "DebugWindow.Draw",
+      "Source": "library",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Burning Down the House##BDTH",
+      "Translated": "燃烧殆尽##BDTH",
+      "Context": "MainWindow..ctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "FurnishingListItems",
+      "Translated": "家具列表项",
+      "Context": "FurnitureList.Draw",
+      "Source": "library"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-12T04:13:28",
+  "imported": {
+    "archive": "uit-direct-2026-10-12T04-13-17-456Z-024fda8e-2026-10-12T041328.json",
+    "accepted": 19,
+    "filled": 19,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 19 条 `BDTHPlugin` 的界面文字译文，已收为**独立译文包** `uit-packs/BDTHPlugin@user-53d991.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 19 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
