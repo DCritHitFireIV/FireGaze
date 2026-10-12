@@ -1,0 +1,325 @@
+{
+  "issue": "99",
+  "receivedAt": "2026-10-12 04:17:52",
+  "author": "firegaze-relay[bot]",
+  "plugin": "MultiHit",
+  "fingerprint": "9794eaeb029d31c4",
+  "packFile": "MultiHit@user-9794ea.json",
+  "accepted": 35,
+  "filled": 35,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "MultiHit",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Open MultiHit window.",
+        "Translated": "打开 MultiHit 窗口。",
+        "Context": "Plugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "MultiHit Configuration Window",
+        "Translated": "MultiHit 配置窗口",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Enabled",
+        "Translated": "已启用",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Export",
+        "Translated": "导出",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import",
+        "Translated": "导入",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Whether to validate the sum of action percentage does not exceed 100%%",
+        "Translated": "是否验证行动百分比总和不超过 100%",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Add new action",
+        "Translated": "添加新行动",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Enable",
+        "Translated": "启用",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Disable",
+        "Translated": "禁用",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Edit Name",
+        "Translated": "编辑名称",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Save",
+        "Translated": "保存",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "action",
+        "Translated": "动作",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginPopupContextItem"
+      },
+      {
+        "Original": "Add Group",
+        "Translated": "添加群组",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Add Group Popup",
+        "Translated": "添加群组弹出窗口",
+        "Context": "ConfigWindow.DrawGroup",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.OpenPopup"
+      },
+      {
+        "Original": "Please select action",
+        "Translated": "请选择操作",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Interruptible",
+        "Translated": "不可中断",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Whether other animation can interrupt the upcoming flytext.",
+        "Translated": "其他动画是否会打断即将到来的飞行文本？",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Show Hit",
+        "Translated": "显示热门",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Whether to show the Hit#i in flytext.",
+        "Translated": "是否在飞行文本中显示 Hit#i?",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Show Final",
+        "Translated": "显示最终",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Whether to show the original hit as final hit.",
+        "Translated": "是否将最初的成功展示为最终的成功？",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Delay: ",
+        "Translated": "延迟：",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Delay the final hit (after the last hit).",
+        "Translated": "延迟最终命中 (在最后一次命中之后)",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "30 = 1 second",
+        "Translated": "30 = 1 秒",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Custom Name",
+        "Translated": "定制名称",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Customize action names in flytext.",
+        "Translated": "在飞行文本中自定义操作名称。",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Add Hit",
+        "Translated": "添加命中",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Clear",
+        "Translated": "清晰",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hit ",
+        "Translated": "命中率",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Percentage: ",
+        "Translated": "百分比：",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Apply to all hits",
+        "Translated": "应用于所有命中",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Custom colors only work when alpha is not 0.",
+        "Translated": "自定义颜色仅在 alpha 不为 0 时有效。",
+        "Context": "ConfigWindow.DrawDetail",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Show Settings",
+        "Translated": "显示设置",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hello, world",
+        "Translated": "你好，世界",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
