@@ -1,1 +1,185 @@
-{"type":"uit-contribution","plugin":"PatMe","packName":"小小小小腿","kinds":["llm"],"entries":[{"Original":"Show counters in chat","Translated":"在聊天中显示计数","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Toggle counter UI","Translated":"切换计数器界面","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Head pats","Translated":"摸头","Context":"Plugin.CreateEmoteCounters","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Dotes","Translated":"宠爱","Context":"Plugin.CreateEmoteCounters","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Hugs","Translated":"拥抱","Context":"Plugin.CreateEmoteCounters","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Pat Config","Translated":"摸头配置","Context":"PluginWindowConfig..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Counter UI:","Translated":"计数器界面：","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Show emote counter on screen","Translated":"在屏幕上显示表情计数","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Lock counter position","Translated":"锁定计数器位置","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Auto collapse counter","Translated":"自动折叠计数器","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Rewards:","Translated":"奖励：","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Use splash screen","Translated":"使用启动画面","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Use progress notify","Translated":"使用进度通知","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Use fly text","Translated":"使用浮动文字","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Include names in fly text","Translated":"在浮动文字中包含名字","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Emotes:","Translated":"表情：","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Track: dote","Translated":"追踪：溺爱","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Track: hug & embrace","Translated":"追踪：拥抱与仙光的拥抱","Context":"PluginWindowConfig.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Pat Count","Translated":"抚摸次数","Context":"PluginWindowCounter..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "PatMe",
+  "packName": "小小小小腿",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Show counters in chat",
+      "Translated": "在聊天中显示计数",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Toggle counter UI",
+      "Translated": "切换计数器界面",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Head pats",
+      "Translated": "摸头",
+      "Context": "Plugin.CreateEmoteCounters",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Dotes",
+      "Translated": "宠爱",
+      "Context": "Plugin.CreateEmoteCounters",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Hugs",
+      "Translated": "拥抱",
+      "Context": "Plugin.CreateEmoteCounters",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Pat Config",
+      "Translated": "摸头配置",
+      "Context": "PluginWindowConfig..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Counter UI:",
+      "Translated": "计数器界面：",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Show emote counter on screen",
+      "Translated": "在屏幕上显示表情计数",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Lock counter position",
+      "Translated": "锁定计数器位置",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Auto collapse counter",
+      "Translated": "自动折叠计数器",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Rewards:",
+      "Translated": "奖励：",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Use splash screen",
+      "Translated": "使用启动画面",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Use progress notify",
+      "Translated": "使用进度通知",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Use fly text",
+      "Translated": "使用浮动文字",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Include names in fly text",
+      "Translated": "在浮动文字中包含名字",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Emotes:",
+      "Translated": "表情：",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Track: dote",
+      "Translated": "追踪：溺爱",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Track: hug & embrace",
+      "Translated": "追踪：拥抱与仙光的拥抱",
+      "Context": "PluginWindowConfig.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Pat Count",
+      "Translated": "抚摸次数",
+      "Context": "PluginWindowCounter..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-13T15:34:01",
+  "imported": {
+    "archive": "uit-direct-2026-10-13T15-33-43-402Z-e579fd41-2026-10-13T153400.json",
+    "accepted": 19,
+    "filled": 19,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 19 条 `PatMe` 的界面文字译文，已收为**独立译文包** `uit-packs/PatMe@user-f8197b.json`，包名「小小小小腿」。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 19 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
