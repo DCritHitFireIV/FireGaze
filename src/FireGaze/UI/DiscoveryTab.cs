@@ -259,14 +259,14 @@ internal sealed partial class DiscoveryTab
 
         UiHelpers.SameLineOrWrap(PluginListLayout.SearchWidth);
         ImGui.SetNextItemWidth(PluginListLayout.SearchWidth);
-        if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、一行简介、详情…", ref search, 256))
+        if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、简介、详情…", ref search, 256))
         {
             rebuildPending = true;
         }
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("全字段搜索：插件名（原文+译文）、作者、一行简介、详情；大小写不敏感。");
+            ImGui.SetTooltip("全字段搜索：插件名（原文+译文）、作者、简介、详情；大小写不敏感。");
         }
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("排序") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);

@@ -109,8 +109,9 @@ internal sealed partial class RepoAuditTab
         // ---------------- 第二行：选择摘要 + 恢复动作 ----------------
         var undo = plugin.Config.UndoHistory.Count > 0 ? plugin.Config.UndoHistory[^1] : null;
 
-        var hint = selectedCount == 0
-            ? $"结果 {snapshot.Count} 行 · 已选 0 —— 勾选列表行，或用「全选当前」"
+        // 没勾选时不显示摘要行（用户 2026-10-13：去掉「已选 0 —— 勾选列表行，或用「全选当前」」）
+        string? hint = selectedCount == 0
+            ? null
             : $"结果 {snapshot.Count} 行 · 已选 {selectedCount}（共 {ProblemCount()} 个问题项"
               + (selectedHidden > 0 ? $"，其中 {selectedHidden} 项不在当前筛选内）" : "）");
 
@@ -123,13 +124,17 @@ internal sealed partial class RepoAuditTab
             _ => null,
         };
 
-        if (sortText is not null)
+        if (hint is not null && sortText is not null)
         {
             hint += $" · {sortText}";
         }
 
-        ImGui.TextDisabled(hint);
-        var hintWidth = ImGui.GetItemRectSize().X;
+        var hintWidth = 0f;
+        if (hint is not null)
+        {
+            ImGui.TextDisabled(hint);
+            hintWidth = ImGui.GetItemRectSize().X;
+        }
 
         // 靠右摆放恢复类动作（SameLine 的参数是「距行首的绝对偏移」，不是剩余宽度）
         var undoLabel = undo is null ? "撤回上次操作###Undo" : $"撤回：{undo.Describe()}###Undo";

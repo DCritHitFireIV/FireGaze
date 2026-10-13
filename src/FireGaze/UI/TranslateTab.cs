@@ -162,8 +162,6 @@ internal sealed class TranslateTab
             }
         }
 
-        ImGui.TextDisabled($"词表每天自动更新 · 下次检查：{DescribeNextCheck()}");
-
         if (!string.IsNullOrEmpty(statusMessage))
         {
             ImGui.TextWrapped(statusMessage);
@@ -173,11 +171,7 @@ internal sealed class TranslateTab
         ImGui.Text($"词表：{plugin.Table.Count} 条 · 上次应用改写 {plugin.LastTranslatedCount} 条清单");
         ImGui.SameLine();
         ImGui.TextDisabled("· " + DescribeTableUpdate());
-        if (plugin.Table.LoadedFrom is not null)
-        {
-            ImGui.TextDisabled($"来源文件：{plugin.Table.LoadedFrom}");
-        }
-        else
+        if (plugin.Table.LoadedFrom is null)
         {
             ImGui.TextDisabled("词表未加载");
         }
@@ -194,7 +188,7 @@ internal sealed class TranslateTab
             ImGui.TableHeadersRow();
 
             ModeRow("插件名", "NameMode", config.NameMode, m => config.NameMode = m);
-            ModeRow("一行简介", "PunchlineMode", config.PunchlineMode, m => config.PunchlineMode = m);
+            ModeRow("简介", "PunchlineMode", config.PunchlineMode, m => config.PunchlineMode = m);
             ModeRow("插件详情", "DescriptionMode", config.DescriptionMode, m => config.DescriptionMode = m);
 
             ImGui.EndTable();
@@ -280,18 +274,6 @@ internal sealed class TranslateTab
         DayOfWeek.Saturday => "周六",
         _ => "周日",
     };
-
-    private string DescribeNextCheck()
-    {
-        var config = plugin.Config;
-        if (config.LastTableUpdateCheckUTC == default)
-        {
-            return "游戏启动后";
-        }
-
-        var next = config.LastTableUpdateCheckUTC.AddHours(24);
-        return next <= DateTime.UtcNow ? "即将检查" : next.ToLocalTime().ToString("yyyy-MM-dd HH:mm");
-    }
 
     private void ModeRow(string label, string id, DisplayMode current, Action<DisplayMode> set)
     {

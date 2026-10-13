@@ -55,7 +55,7 @@ internal sealed partial class RepoAuditTab
         ImGui.Indent();
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
-            "检查哪些已装插件缺图标并批量下载；下过的图标存在本地，重开游戏不用重下。");
+            "检查哪些已装插件缺图标并批量下载。");
         ImGui.Unindent();
 
         ImGui.Spacing();

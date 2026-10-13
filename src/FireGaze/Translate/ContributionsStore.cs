@@ -76,7 +76,7 @@ internal sealed class ContributionRecord
         var field = Field switch
         {
             "Name" => "插件名",
-            "Punchline" => "一行简介",
+            "Punchline" => "简介",
             _ => "插件详情",
         };
 

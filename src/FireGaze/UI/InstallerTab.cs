@@ -21,12 +21,6 @@ internal sealed class InstallerTab
         // 图标检查 / 下载的推进：面板搬到了这一页，下载期间每帧都要推进
         repoAudit.TickIconMaintenance();
 
-        UiHelpers.ColoredWrapped(
-            UiHelpers.Muted,
-            "下面两项都只影响插件安装器的列表显示，不影响插件仓库的获取与刷新。");
-
-        ImGui.Separator();
-
         var block = plugin.Config.BlockInstallerAutoRefresh;
         if (ImGui.Checkbox("拦截打开插件管理器时的自动刷新###BlockAutoRefresh", ref block))
         {
@@ -50,12 +44,6 @@ internal sealed class InstallerTab
         }
 
         ImGui.Indent();
-        UiHelpers.ColoredWrapped(
-            UiHelpers.Muted,
-            remember
-                ? "开启中：关掉窗口再打开，列表会回到上次的位置。"
-                : "已关闭：每次都从列表顶部开始。");
-
         if (remember && !block)
         {
             UiHelpers.ColoredWrapped(
@@ -64,15 +52,6 @@ internal sealed class InstallerTab
         }
 
         ImGui.Unindent();
-
-        ImGui.Spacing();
-        ImGui.Separator();
-        UiHelpers.ColoredWrapped(
-            UiHelpers.Muted,
-            "状态：" + plugin.InstallerFeatures.StatusText(block, remember));
-        UiHelpers.ColoredWrapped(
-            UiHelpers.Muted,
-            "改动立即保存：拦截即刻生效，位置记忆在下次打开插件安装器时生效。");
 
         ImGui.Spacing();
         ImGui.Separator();
