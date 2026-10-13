@@ -1,1 +1,1027 @@
-{"type":"uit-contribution","plugin":"Chronofoil.Plugin","kinds":["free","llm","human"],"entries":[{"Original":"Logged Out","Translated":"已登出","Context":"AuthManager.RefreshToken","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"You have been logged out of the Chronofoil Service.","Translated":"你已从Chronofoil服务登出。","Context":"AuthManager.RefreshToken","Source":"user","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Auto Upload Warning","Translated":"自动上传警告","Context":"AutoUploadService.Begin","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"Warning: You have auto-upload enabled, but you are not logged in to the Chronofoil Service.","Translated":"警告：你已启用自动上传，但尚未登录Chronofoil服务。","Context":"AutoUploadService.Begin","Source":"user","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":". Please see the log for more information.","Translated":"。请查看日志以获取更多信息。","Context":"BackgroundUpload.Error","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Censoring upload...","Translated":"正在审查上传内容...","Context":"BackgroundUpload.SetStep","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Preparing upload...","Translated":"正在准备上传...","Context":"BackgroundUpload.SetStep","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Successfully uploaded ","Translated":"上传成功","Context":"BackgroundUpload.SetStep","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Uploading...","Translated":"正在上传...","Context":"BackgroundUpload.SetStep","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"step text","Translated":"步骤文本","Context":"BackgroundUpload.SetStep","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Failed to upload capture ","Translated":"上传捕获失败","Context":"BackgroundUpload.Upload","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Successfully uploaded capture ","Translated":"成功上传捕获","Context":"BackgroundUpload.Upload","Source":"ai:deepseek","Role":"UI","RoleReason":"→ INotification.set_Content"},{"Original":"Uploading ","Translated":"上传中","Context":"BackgroundUpload.Upload","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"Chronofoil Error","Translated":"Chronofoil错误","Context":"CaptureHookManager.PacketsFromFrame2","Source":"user","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"] A frame was compressed.","Translated":"] 已压缩一帧。","Context":"CaptureHookManager.PacketsFromFrame2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Captures are available for upload","Translated":"捕获可供上传","Context":"CaptureManager.Notify","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Capture session started: ","Translated":"捕获会话已开始：","Context":"CaptureSessionManager.Begin","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Capture session finalized: ","Translated":"捕获会话已完成：","Context":"CaptureSessionManager.End","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Capture ID","Translated":"捕获 ID","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Captures in progress must be finished before they can be uploaded.","Translated":"进行中的捕获必须完成后才能上传。","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Delete","Translated":"删除","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Delete from Server","Translated":"从服务器删除","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"End Time","Translated":"结束时间","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"File Size","Translated":"文件大小","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Hold Left Shift and Left Control at the same time to delete this capture from the server. This is not reversible.","Translated":"同时按住左 Shift 和左 Ctrl 可从服务器删除此捕获。此操作不可撤销。","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hold Left Shift and Left Control at the same time to delete this capture. This is not reversible.","Translated":"同时按住左 Shift 和左 Ctrl 可删除此捕获。此操作不可撤销。","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hold Left Shift and click to quick upload.","Translated":"按住左 Shift 并点击可快速上传。","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Ignored","Translated":"已忽略","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Ignores this capture. Chronofoil will not notify you about non-uploaded, ignored captures, nor will it let you upload ignored captures.","Translated":"忽略此捕获。Chronofoil不会通知你未上传、已忽略的捕获，也不会允许你上传已忽略的捕获。","Context":"CaptureTab.Draw","Source":"user","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"In Progress","Translated":"进行中","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Length","Translated":"时长","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"No","Translated":"否","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Please wait...","Translated":"请稍候……","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Start Time","Translated":"开始时间","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"To upload, please Log In to the Chronofoil Service.","Translated":"如需上传，请登录Chronofoil服务。","Context":"CaptureTab.Draw","Source":"user","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"To upload, turn off ignore for this capture.","Translated":"如需上传，请关闭此捕获的忽略。","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"To upload, turn on uploading in the settings tab.","Translated":"如需上传，请在设置标签页中开启上传。","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Unknown","Translated":"未知","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Upload","Translated":"上传","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Uploaded","Translated":"已上传","Context":"CaptureTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Yes","Translated":"是","Context":"CaptureTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Open the Chronofoil UI.","Translated":"打开Chronofoil界面。","Context":"Chronofoil..ctor","Source":"user","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Loading FAQ...","Translated":"正在加载常见问题……","Context":"FaqTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Chronofoil Login","Translated":"Chronofoil登录","Context":"LoginModal..ctor","Source":"user","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Please authorize the application with Discord in your web browser.","Translated":"请在浏览器中使用 Discord 授权该应用。","Context":"LoginModal.DrawAuth","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Authentication with the Chronofoil server was successful!","Translated":"已成功通过Chronofoil服务器验证！","Context":"LoginModal.DrawDone","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Chronofoil encountered an error during login.","Translated":"Chronofoil在登录时遇到错误。","Context":"LoginModal.DrawError","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"The error is as follows:","Translated":"错误如下：","Context":"LoginModal.DrawError","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"About","Translated":"关于","Context":"MainWindow.DrawAboutTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"by perchbird","Translated":"作者 perchbird","Context":"MainWindow.DrawAboutTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Captures","Translated":"捕获","Context":"MainWindow.DrawCaptureTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Faq","Translated":"常见问题","Context":"MainWindow.DrawFaqTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Settings","Translated":"设置","Context":"MainWindow.DrawSettingsTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Uploads","Translated":"上传","Context":"MainWindow.DrawUploadsTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"New Chronofoil ToS","Translated":"Chronofoil服务条款","Context":"NewTosModal..ctor","Source":"user","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Thank you for accepting the new Chronofoil Terms of Service (effective ","Translated":"感谢您接受新的Chronofoil服务条款（生效日期","Context":"NewTosModal.DrawDone","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Chronofoil encountered an error during registration.","Translated":"Chronofoil在注册时遇到错误。","Context":"NewTosModal.DrawError","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Effective date: ","Translated":"生效日期：","Context":"NewTosModal.DrawTos","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Finish","Translated":"完成","Context":"NewTosModal.DrawTos","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"I do not understand, or do not agree, to the terms and conditions","Translated":"我不理解或不同意这些条款和条件","Context":"NewTosModal.DrawTos","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"I understand and agree to the terms and conditions","Translated":"我理解并同意这些条款和条件","Context":"NewTosModal.DrawTos","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Please read and accept the new Chronofoil Terms of Service.","Translated":"请阅读并接受新的Chronofoil服务条款。","Context":"NewTosModal.DrawTos","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Chronofoil Registration","Translated":"Chronofoil注册","Context":"RegisterModal..ctor","Source":"user","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Chronofoil registration is only necessary if you would like to contribute packet captures to the central capture repository.","Translated":"仅当您希望将数据包捕获贡献到中央捕获仓库时，才需要注册Chronofoil。","Context":"RegisterModal.DrawTos","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Next","Translated":"下一步","Context":"RegisterModal.DrawTos","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Please read the terms and conditions carefully. It contains important information regarding your privacy as a Chronofoil user.","Translated":"请仔细阅读条款和条件。其中包含有关您作为光阴之翼用户隐私的重要信息。","Context":"RegisterModal.DrawTos","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Registration is not necessary for capturing packets for your own purposes.","Translated":"仅为个人用途捕获数据包无需注册。","Context":"RegisterModal.DrawTos","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" via ","Translated":"通过","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Authenticated as ","Translated":"已认证为","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Chronofoil Storage Directory:","Translated":"Chronofoil存储目录：","Context":"SettingsTab.Draw","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Default 'public' time for uploads: ","Translated":"上传的默认“公开”时间：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Default metrics time for uploads: ","Translated":"上传的默认指标时间：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Enable Notifications:","Translated":"启用通知：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Enable Quick Upload:","Translated":"启用快速上传：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Enable Uploading:","Translated":"启用上传：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Log in with:","Translated":"登录方式：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Main","Translated":"主要","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Notifications","Translated":"通知","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"On Capture End:","Translated":"捕获结束时：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"On Capture Start:","Translated":"捕获开始时：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Quick Upload allows you to bypass the upload user interface and perform uploads in one click by holding Left Shift when clicking upload. The entire upload process will run in the background and use your default privacy settings. If all opcodes are not available for censoring, the warning will not appear, and the upload will continue.","Translated":"快速上传允许您绕过上传用户界面，在点击上传时按住左 Shift 即可一键上传。整个上传过程将在后台运行，并使用您的默认隐私设置。如果并非所有操作码都可用于审查，则不会出现警告，上传将继续进行。","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Register with:","Translated":"注册方式：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Remind me on startup if I have non-ignored, non-uploaded captures:","Translated":"启动时若有未忽略、未上传的捕获则提醒我：","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Settings are invalid.","Translated":"设置无效。","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColoredWrapped"},{"Original":"The 'metrics time' is how long from the time of upload that it will take for your captures to appear in the Chronofoil metrics system for developers to query. This does not prevent an individual from querying the metrics system and recreating your capture, but it makes it incredibly difficult, while still providing useful information to developers. This setting is your default time and will be set automatically for uploads, but can be overridden at upload time.","Translated":"“指标时间”是指从上传之时起，您的捕获出现在Chronofoil指标系统中供开发者查询所需的时间。这并不能阻止个人查询指标系统并重建您的捕获，但会使其变得极其困难，同时仍能为开发者提供有用的信息。此设置是您的默认时间，上传时将自动设置，但可在上传时覆盖。","Context":"SettingsTab.Draw","Source":"user","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"The 'public time' is how long from the time of upload that it will take for your captures to be available for raw download. This provides the full capture file to individuals, which allows them to do whatever - extract information, places visited, or even replay the packet capture on their own machine if they have that capability. This setting is your default time and will be set automatically for uploads, but can be overridden at upload time","Translated":"“公开时间”是指从上传之时起，您的捕获可供原始下载所需的时间。这会向个人提供完整的捕获文件，使他们能够做任何事——提取信息、访问过的地点，甚至在他们自己的机器上重放数据包捕获（如果他们有此能力）。此设置是您的默认时间，上传时将自动设置，但可在上传时覆盖。","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"The minimum Metrics time is 7 days from the date of upload.","Translated":"最短指标时间为上传之日起 7 天。","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColoredWrapped"},{"Original":"The minimum Public time is 14 days from the date of upload.","Translated":"最短公开时间为上传之日起 14 天。","Context":"SettingsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColoredWrapped"},{"Original":"Upload Capture","Translated":"上传捕获","Context":"UploadModal..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Chronofoil tracks these on your game client - if you've sent a censorable packet, Chronofoil will know its opcode and censor it accordingly.","Translated":"Chronofoil会在你的游戏客户端上追踪这些操作——如果你发送过可审查的数据包，光阴之翼会知道它的操作码并相应地进行审查。","Context":"UploadModal.DrawCensorNotice","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"However, you can opt to not upload now and try again later when all censorable opcodes are known.","Translated":"不过，你可以选择现在不上传，等所有可审查的操作码都已知后再试。","Context":"UploadModal.DrawCensorNotice","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Some sensitive packet opcodes that Chronofoil censors are not available from your client or the server.","Translated":"Chronofoil 审查的某些敏感数据包操作码无法从你的客户端或服务器获取。","Context":"UploadModal.DrawCensorNotice","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"What this means is that nobody on the current game version has performed a certain task (for example, sending a letter) - including you.","Translated":"这意味着当前游戏版本上没有人执行过某项特定操作（例如发送信件）——包括你在内。","Context":"UploadModal.DrawCensorNotice","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"You should be safe to upload, considering if you've performed one of these censorable actions, Chronofoil would know the opcode.","Translated":"你可以放心上传，因为如果你执行过这些可审查的操作之一，Chronofoil会知道其操作码。","Context":"UploadModal.DrawCensorNotice","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Censoring capture...","Translated":"正在审查捕获...","Context":"UploadModal.DrawCensorProgress","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" will be available at the following times:","Translated":"将在以下时间可用：","Context":"UploadModal.DrawDone","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Metrics: ","Translated":"指标：","Context":"UploadModal.DrawDone","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Public: ","Translated":"公开：","Context":"UploadModal.DrawDone","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Upload successful!","Translated":"上传成功！","Context":"UploadModal.DrawDone","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Your capture ","Translated":"你的捕获","Context":"UploadModal.DrawDone","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Chronofoil encountered an error while uploading the capture.","Translated":"Chronofoil在上传捕获时遇到错误。","Context":"UploadModal.DrawError","Source":"user","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Preparing for upload...","Translated":"正在准备上传……","Context":"UploadModal.DrawPrepare","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Duration: ","Translated":"时长：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"End: ","Translated":"结束：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"For download: ","Translated":"下载：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"For metrics: ","Translated":"指标：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Metrics time for this capture: ","Translated":"此捕获的指标时间：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Override my normal settings for this capture upload: ","Translated":"为此捕获上传覆盖我的常规设置：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Preparing to upload capture ","Translated":"正在准备上传捕获","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Public time for this capture: ","Translated":"此捕获的公开时间：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Start: ","Translated":"开始：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"The 'metrics time' is how long from the time of upload that it will take for the capture to appear in the\r\nChronofoil metrics system for developers to query.\r\nThis does not prevent an individual from querying the metrics system and recreating your capture, but it\r\nmakes it incredibly difficult, while still providing useful information to developers.","Translated":"“指标时间”是指从上传时刻起，捕获出现在\nChronofoil 指标系统中供开发者查询所需的时间。\n这并不能阻止个人查询指标系统并重建你的捕获，但\n会使其变得极其困难，同时仍能为开发者提供有用的信息。","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"The 'public time' is how long from the time of upload that it will take for the capture to be available for raw download.\r\nThis provides the full capture file to individuals, which allows them to do whatever - extract information, places visited,\r\nor even replay the packet capture on their own machine if they so choose.","Translated":"“公开时间”是指从上传时刻起，捕获可供原始下载所需的时间。\n这会将完整的捕获文件提供给个人，使他们能够做任何事——提取信息、访问过的地点，\n甚至如果他们愿意，可以在自己的机器上重放数据包捕获。","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"With your settings, these captures will be available:","Translated":"根据你的设置，这些捕获将可用：","Context":"UploadModal.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Uploading capture...","Translated":"正在上传捕获...","Context":"UploadModal.DrawUploadProgress","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Failed to get capture list.","Translated":"获取捕获列表失败。","Context":"UploadsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"First contribution start: ","Translated":"首次贡献开始：","Context":"UploadsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Last contribution end: ","Translated":"最后贡献结束：","Context":"UploadsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Metrics Time","Translated":"指标时间","Context":"UploadsTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Public Time","Translated":"公开时间","Context":"UploadsTab.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Total time contributed: ","Translated":"总贡献时间：","Context":"UploadsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"test","Translated":"测试","Context":"UploadsTab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"End of Service","Translated":"服务终止","Context":"Util.GetTimeString","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Chronofoil.Plugin",
+  "kinds": [
+    "free",
+    "llm",
+    "human"
+  ],
+  "entries": [
+    {
+      "Original": "Logged Out",
+      "Translated": "已登出",
+      "Context": "AuthManager.RefreshToken",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "You have been logged out of the Chronofoil Service.",
+      "Translated": "你已从Chronofoil服务登出。",
+      "Context": "AuthManager.RefreshToken",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Auto Upload Warning",
+      "Translated": "自动上传警告",
+      "Context": "AutoUploadService.Begin",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "Warning: You have auto-upload enabled, but you are not logged in to the Chronofoil Service.",
+      "Translated": "警告：你已启用自动上传，但尚未登录Chronofoil服务。",
+      "Context": "AutoUploadService.Begin",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": ". Please see the log for more information.",
+      "Translated": "。请查看日志以获取更多信息。",
+      "Context": "BackgroundUpload.Error",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Censoring upload...",
+      "Translated": "正在审查上传内容...",
+      "Context": "BackgroundUpload.SetStep",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Preparing upload...",
+      "Translated": "正在准备上传...",
+      "Context": "BackgroundUpload.SetStep",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Successfully uploaded ",
+      "Translated": "上传成功",
+      "Context": "BackgroundUpload.SetStep",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Uploading...",
+      "Translated": "正在上传...",
+      "Context": "BackgroundUpload.SetStep",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "step text",
+      "Translated": "步骤文本",
+      "Context": "BackgroundUpload.SetStep",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Failed to upload capture ",
+      "Translated": "上传捕获失败",
+      "Context": "BackgroundUpload.Upload",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Successfully uploaded capture ",
+      "Translated": "成功上传捕获",
+      "Context": "BackgroundUpload.Upload",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ INotification.set_Content"
+    },
+    {
+      "Original": "Uploading ",
+      "Translated": "上传中",
+      "Context": "BackgroundUpload.Upload",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "Chronofoil Error",
+      "Translated": "Chronofoil错误",
+      "Context": "CaptureHookManager.PacketsFromFrame2",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "] A frame was compressed.",
+      "Translated": "] 已压缩一帧。",
+      "Context": "CaptureHookManager.PacketsFromFrame2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Captures are available for upload",
+      "Translated": "捕获可供上传",
+      "Context": "CaptureManager.Notify",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Capture session started: ",
+      "Translated": "捕获会话已开始：",
+      "Context": "CaptureSessionManager.Begin",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Capture session finalized: ",
+      "Translated": "捕获会话已完成：",
+      "Context": "CaptureSessionManager.End",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Capture ID",
+      "Translated": "捕获 ID",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Captures in progress must be finished before they can be uploaded.",
+      "Translated": "进行中的捕获必须完成后才能上传。",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Delete from Server",
+      "Translated": "从服务器删除",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "End Time",
+      "Translated": "结束时间",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "File Size",
+      "Translated": "文件大小",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Hold Left Shift and Left Control at the same time to delete this capture from the server. This is not reversible.",
+      "Translated": "同时按住左 Shift 和左 Ctrl 可从服务器删除此捕获。此操作不可撤销。",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hold Left Shift and Left Control at the same time to delete this capture. This is not reversible.",
+      "Translated": "同时按住左 Shift 和左 Ctrl 可删除此捕获。此操作不可撤销。",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hold Left Shift and click to quick upload.",
+      "Translated": "按住左 Shift 并点击可快速上传。",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Ignored",
+      "Translated": "已忽略",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Ignores this capture. Chronofoil will not notify you about non-uploaded, ignored captures, nor will it let you upload ignored captures.",
+      "Translated": "忽略此捕获。Chronofoil不会通知你未上传、已忽略的捕获，也不会允许你上传已忽略的捕获。",
+      "Context": "CaptureTab.Draw",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "In Progress",
+      "Translated": "进行中",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Length",
+      "Translated": "时长",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "No",
+      "Translated": "否",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Please wait...",
+      "Translated": "请稍候……",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Start Time",
+      "Translated": "开始时间",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "To upload, please Log In to the Chronofoil Service.",
+      "Translated": "如需上传，请登录Chronofoil服务。",
+      "Context": "CaptureTab.Draw",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "To upload, turn off ignore for this capture.",
+      "Translated": "如需上传，请关闭此捕获的忽略。",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "To upload, turn on uploading in the settings tab.",
+      "Translated": "如需上传，请在设置标签页中开启上传。",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Unknown",
+      "Translated": "未知",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Upload",
+      "Translated": "上传",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Uploaded",
+      "Translated": "已上传",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Yes",
+      "Translated": "是",
+      "Context": "CaptureTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Open the Chronofoil UI.",
+      "Translated": "打开Chronofoil界面。",
+      "Context": "Chronofoil..ctor",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Loading FAQ...",
+      "Translated": "正在加载常见问题……",
+      "Context": "FaqTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Chronofoil Login",
+      "Translated": "Chronofoil登录",
+      "Context": "LoginModal..ctor",
+      "Source": "user",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Please authorize the application with Discord in your web browser.",
+      "Translated": "请在浏览器中使用 Discord 授权该应用。",
+      "Context": "LoginModal.DrawAuth",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Authentication with the Chronofoil server was successful!",
+      "Translated": "已成功通过Chronofoil服务器验证！",
+      "Context": "LoginModal.DrawDone",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Chronofoil encountered an error during login.",
+      "Translated": "Chronofoil在登录时遇到错误。",
+      "Context": "LoginModal.DrawError",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "The error is as follows:",
+      "Translated": "错误如下：",
+      "Context": "LoginModal.DrawError",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "MainWindow.DrawAboutTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "by perchbird",
+      "Translated": "作者 perchbird",
+      "Context": "MainWindow.DrawAboutTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Captures",
+      "Translated": "捕获",
+      "Context": "MainWindow.DrawCaptureTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Faq",
+      "Translated": "常见问题",
+      "Context": "MainWindow.DrawFaqTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Uploads",
+      "Translated": "上传",
+      "Context": "MainWindow.DrawUploadsTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "New Chronofoil ToS",
+      "Translated": "Chronofoil服务条款",
+      "Context": "NewTosModal..ctor",
+      "Source": "user",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Thank you for accepting the new Chronofoil Terms of Service (effective ",
+      "Translated": "感谢您接受新的Chronofoil服务条款（生效日期",
+      "Context": "NewTosModal.DrawDone",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Chronofoil encountered an error during registration.",
+      "Translated": "Chronofoil在注册时遇到错误。",
+      "Context": "NewTosModal.DrawError",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Effective date: ",
+      "Translated": "生效日期：",
+      "Context": "NewTosModal.DrawTos",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Finish",
+      "Translated": "完成",
+      "Context": "NewTosModal.DrawTos",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "I do not understand, or do not agree, to the terms and conditions",
+      "Translated": "我不理解或不同意这些条款和条件",
+      "Context": "NewTosModal.DrawTos",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "I understand and agree to the terms and conditions",
+      "Translated": "我理解并同意这些条款和条件",
+      "Context": "NewTosModal.DrawTos",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Please read and accept the new Chronofoil Terms of Service.",
+      "Translated": "请阅读并接受新的Chronofoil服务条款。",
+      "Context": "NewTosModal.DrawTos",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Chronofoil Registration",
+      "Translated": "Chronofoil注册",
+      "Context": "RegisterModal..ctor",
+      "Source": "user",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Chronofoil registration is only necessary if you would like to contribute packet captures to the central capture repository.",
+      "Translated": "仅当您希望将数据包捕获贡献到中央捕获仓库时，才需要注册Chronofoil。",
+      "Context": "RegisterModal.DrawTos",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Next",
+      "Translated": "下一步",
+      "Context": "RegisterModal.DrawTos",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Please read the terms and conditions carefully. It contains important information regarding your privacy as a Chronofoil user.",
+      "Translated": "请仔细阅读条款和条件。其中包含有关您作为光阴之翼用户隐私的重要信息。",
+      "Context": "RegisterModal.DrawTos",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Registration is not necessary for capturing packets for your own purposes.",
+      "Translated": "仅为个人用途捕获数据包无需注册。",
+      "Context": "RegisterModal.DrawTos",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " via ",
+      "Translated": "通过",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Authenticated as ",
+      "Translated": "已认证为",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Chronofoil Storage Directory:",
+      "Translated": "Chronofoil存储目录：",
+      "Context": "SettingsTab.Draw",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Default 'public' time for uploads: ",
+      "Translated": "上传的默认“公开”时间：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Default metrics time for uploads: ",
+      "Translated": "上传的默认指标时间：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Enable Notifications:",
+      "Translated": "启用通知：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Enable Quick Upload:",
+      "Translated": "启用快速上传：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Enable Uploading:",
+      "Translated": "启用上传：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Log in with:",
+      "Translated": "登录方式：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Main",
+      "Translated": "主要",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Notifications",
+      "Translated": "通知",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "On Capture End:",
+      "Translated": "捕获结束时：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "On Capture Start:",
+      "Translated": "捕获开始时：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Quick Upload allows you to bypass the upload user interface and perform uploads in one click by holding Left Shift when clicking upload. The entire upload process will run in the background and use your default privacy settings. If all opcodes are not available for censoring, the warning will not appear, and the upload will continue.",
+      "Translated": "快速上传允许您绕过上传用户界面，在点击上传时按住左 Shift 即可一键上传。整个上传过程将在后台运行，并使用您的默认隐私设置。如果并非所有操作码都可用于审查，则不会出现警告，上传将继续进行。",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Register with:",
+      "Translated": "注册方式：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Remind me on startup if I have non-ignored, non-uploaded captures:",
+      "Translated": "启动时若有未忽略、未上传的捕获则提醒我：",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Settings are invalid.",
+      "Translated": "设置无效。",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped"
+    },
+    {
+      "Original": "The 'metrics time' is how long from the time of upload that it will take for your captures to appear in the Chronofoil metrics system for developers to query. This does not prevent an individual from querying the metrics system and recreating your capture, but it makes it incredibly difficult, while still providing useful information to developers. This setting is your default time and will be set automatically for uploads, but can be overridden at upload time.",
+      "Translated": "“指标时间”是指从上传之时起，您的捕获出现在Chronofoil指标系统中供开发者查询所需的时间。这并不能阻止个人查询指标系统并重建您的捕获，但会使其变得极其困难，同时仍能为开发者提供有用的信息。此设置是您的默认时间，上传时将自动设置，但可在上传时覆盖。",
+      "Context": "SettingsTab.Draw",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "The 'public time' is how long from the time of upload that it will take for your captures to be available for raw download. This provides the full capture file to individuals, which allows them to do whatever - extract information, places visited, or even replay the packet capture on their own machine if they have that capability. This setting is your default time and will be set automatically for uploads, but can be overridden at upload time",
+      "Translated": "“公开时间”是指从上传之时起，您的捕获可供原始下载所需的时间。这会向个人提供完整的捕获文件，使他们能够做任何事——提取信息、访问过的地点，甚至在他们自己的机器上重放数据包捕获（如果他们有此能力）。此设置是您的默认时间，上传时将自动设置，但可在上传时覆盖。",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "The minimum Metrics time is 7 days from the date of upload.",
+      "Translated": "最短指标时间为上传之日起 7 天。",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped"
+    },
+    {
+      "Original": "The minimum Public time is 14 days from the date of upload.",
+      "Translated": "最短公开时间为上传之日起 14 天。",
+      "Context": "SettingsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColoredWrapped"
+    },
+    {
+      "Original": "Upload Capture",
+      "Translated": "上传捕获",
+      "Context": "UploadModal..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Chronofoil tracks these on your game client - if you've sent a censorable packet, Chronofoil will know its opcode and censor it accordingly.",
+      "Translated": "Chronofoil会在你的游戏客户端上追踪这些操作——如果你发送过可审查的数据包，光阴之翼会知道它的操作码并相应地进行审查。",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "However, you can opt to not upload now and try again later when all censorable opcodes are known.",
+      "Translated": "不过，你可以选择现在不上传，等所有可审查的操作码都已知后再试。",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Some sensitive packet opcodes that Chronofoil censors are not available from your client or the server.",
+      "Translated": "Chronofoil 审查的某些敏感数据包操作码无法从你的客户端或服务器获取。",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "What this means is that nobody on the current game version has performed a certain task (for example, sending a letter) - including you.",
+      "Translated": "这意味着当前游戏版本上没有人执行过某项特定操作（例如发送信件）——包括你在内。",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "You should be safe to upload, considering if you've performed one of these censorable actions, Chronofoil would know the opcode.",
+      "Translated": "你可以放心上传，因为如果你执行过这些可审查的操作之一，Chronofoil会知道其操作码。",
+      "Context": "UploadModal.DrawCensorNotice",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Censoring capture...",
+      "Translated": "正在审查捕获...",
+      "Context": "UploadModal.DrawCensorProgress",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " will be available at the following times:",
+      "Translated": "将在以下时间可用：",
+      "Context": "UploadModal.DrawDone",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Metrics: ",
+      "Translated": "指标：",
+      "Context": "UploadModal.DrawDone",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Public: ",
+      "Translated": "公开：",
+      "Context": "UploadModal.DrawDone",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Upload successful!",
+      "Translated": "上传成功！",
+      "Context": "UploadModal.DrawDone",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Your capture ",
+      "Translated": "你的捕获",
+      "Context": "UploadModal.DrawDone",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Chronofoil encountered an error while uploading the capture.",
+      "Translated": "Chronofoil在上传捕获时遇到错误。",
+      "Context": "UploadModal.DrawError",
+      "Source": "user",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Preparing for upload...",
+      "Translated": "正在准备上传……",
+      "Context": "UploadModal.DrawPrepare",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Duration: ",
+      "Translated": "时长：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "End: ",
+      "Translated": "结束：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "For download: ",
+      "Translated": "下载：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "For metrics: ",
+      "Translated": "指标：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Metrics time for this capture: ",
+      "Translated": "此捕获的指标时间：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Override my normal settings for this capture upload: ",
+      "Translated": "为此捕获上传覆盖我的常规设置：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Preparing to upload capture ",
+      "Translated": "正在准备上传捕获",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Public time for this capture: ",
+      "Translated": "此捕获的公开时间：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Start: ",
+      "Translated": "开始：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "The 'metrics time' is how long from the time of upload that it will take for the capture to appear in the\r\nChronofoil metrics system for developers to query.\r\nThis does not prevent an individual from querying the metrics system and recreating your capture, but it\r\nmakes it incredibly difficult, while still providing useful information to developers.",
+      "Translated": "“指标时间”是指从上传时刻起，捕获出现在\nChronofoil 指标系统中供开发者查询所需的时间。\n这并不能阻止个人查询指标系统并重建你的捕获，但\n会使其变得极其困难，同时仍能为开发者提供有用的信息。",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "The 'public time' is how long from the time of upload that it will take for the capture to be available for raw download.\r\nThis provides the full capture file to individuals, which allows them to do whatever - extract information, places visited,\r\nor even replay the packet capture on their own machine if they so choose.",
+      "Translated": "“公开时间”是指从上传时刻起，捕获可供原始下载所需的时间。\n这会将完整的捕获文件提供给个人，使他们能够做任何事——提取信息、访问过的地点，\n甚至如果他们愿意，可以在自己的机器上重放数据包捕获。",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "With your settings, these captures will be available:",
+      "Translated": "根据你的设置，这些捕获将可用：",
+      "Context": "UploadModal.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Uploading capture...",
+      "Translated": "正在上传捕获...",
+      "Context": "UploadModal.DrawUploadProgress",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Failed to get capture list.",
+      "Translated": "获取捕获列表失败。",
+      "Context": "UploadsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "First contribution start: ",
+      "Translated": "首次贡献开始：",
+      "Context": "UploadsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Last contribution end: ",
+      "Translated": "最后贡献结束：",
+      "Context": "UploadsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Metrics Time",
+      "Translated": "指标时间",
+      "Context": "UploadsTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Public Time",
+      "Translated": "公开时间",
+      "Context": "UploadsTab.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Total time contributed: ",
+      "Translated": "总贡献时间：",
+      "Context": "UploadsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "test",
+      "Translated": "测试",
+      "Context": "UploadsTab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "End of Service",
+      "Translated": "服务终止",
+      "Context": "Util.GetTimeString",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-13T19:45:48",
+  "imported": {
+    "archive": "uit-direct-2026-10-13T19-45-32-902Z-22cc3d69-2026-10-13T194548.json",
+    "accepted": 123,
+    "filled": 123,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 123 条 `Chronofoil.Plugin` 的界面文字译文，已收为**独立译文包** `uit-packs/Chronofoil.Plugin@user-546862.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 123 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
