@@ -202,7 +202,7 @@ internal sealed partial class RepoAuditTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("勾选后连已停用的库一起扫描（该设置会被保存）");
+            ImGui.SetTooltip("勾选后连已停用的库一起扫描");
         }
 
         // ---------------- 进度 / 统计 ----------------
@@ -324,7 +324,7 @@ internal sealed partial class RepoAuditTab
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
-                "读不到卫月的插件列表，可能是卫月升级改了内部字段——「已安装」这一列显示为 —，这次没法判断哪条库链没在用。");
+                "读不到卫月的插件列表，「已安装」这一列显示为 —，这次没法判断哪条库链没在用。");
         }
 
         // ---------------- 搜索（贴着下面的列表） ----------------

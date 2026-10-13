@@ -50,7 +50,7 @@ internal sealed partial class DiscoveryTab
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("先在本机把这个地址抓下来、用卫月的仓库契约检测一遍；不合格会告诉你原因。\n检测通过才发往云端，之后由云端工作流复核收录。");
+            ImGui.SetTooltip("先在本地检查这个地址能不能被安装器识别；不合格会说原因。\n通过后才投稿到云端，由维护者复核收录。");
         }
 
         if (submitMessage is { Length: > 0 })

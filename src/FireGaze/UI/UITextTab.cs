@@ -267,10 +267,6 @@ internal sealed partial class UITextTab
         UiHelpers.SameLineOrWrap(PluginListLayout.SearchWidth);
         ImGui.SetNextItemWidth(PluginListLayout.SearchWidth);
         ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名 / 目录名…", ref this.search, 128);
-        if (ImGui.IsItemHovered())
-        {
-            ImGui.SetTooltip("插件名和内部名都能搜（内部名就是插件目录名）。");
-        }
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("状态") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
         ImGui.BeginGroup();
@@ -2379,7 +2375,7 @@ internal sealed partial class UITextTab
         ImGui.Checkbox("附带诊断日志（推荐）", ref this.feedbackAttachLog);
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip($"最近 {FeedbackSender.LogEntries} 条 FireGaze 日志（Info 及以上），已脱敏。");
+            ImGui.SetTooltip($"最近 {FeedbackSender.LogEntries} 条日志，已脱敏。");
         }
 
         if (this.feedbackAttachLog)

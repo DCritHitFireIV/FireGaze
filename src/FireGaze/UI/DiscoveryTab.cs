@@ -197,7 +197,7 @@ internal sealed partial class DiscoveryTab
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
-                $"读不到卫月的插件库列表（{index.FailureReason}）。可能是卫月升级改了内部字段——本页暂时不可用。");
+                $"读不到卫月的插件库列表（{index.FailureReason}）。本页暂时不可用。");
             ImGui.Spacing();
             if (ImGui.Button("重试###RetryIndex"))
             {

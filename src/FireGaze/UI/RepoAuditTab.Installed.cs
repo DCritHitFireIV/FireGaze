@@ -110,7 +110,7 @@ internal sealed partial class RepoAuditTab
 
         if (!indexReady)
         {
-            ImGui.SetTooltip("读不到卫月的已装插件列表，可能是卫月升级改了内部字段；本次无法判断。");
+            ImGui.SetTooltip("读不到已安装插件数据，本次无法判断。");
             return;
         }
 
