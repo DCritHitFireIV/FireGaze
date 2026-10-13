@@ -1,0 +1,372 @@
+{
+  "issue": "direct-2026-10-13T16-50-41-578Z-bd295f2c",
+  "receivedAt": "2026-10-13 16:50:56",
+  "author": "匿名直传",
+  "plugin": "PeepingTom",
+  "fingerprint": "0d7397bab52af89a",
+  "packFile": "PeepingTom@user-0d7397.json",
+  "accepted": 49,
+  "filled": 49,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "PeepingTom",
+    "packName": "小笨狗",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Peeping Tom",
+        "Translated": "偷窥狂",
+        "Context": "Plugin.get_Name",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Use with no arguments to show the list. Use with \"c\" or \"config\" to show the config",
+        "Translated": "不带参数使用可显示列表。使用 \"c\" 或 \"config\" 显示配置",
+        "Context": "Plugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Alias for /ppeepingtom",
+        "Translated": "/ppeepingtom 的别名",
+        "Context": "Plugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      }
+    ],
+    "resources": [
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundPathHelp",
+        "Original": "Leave this blank to use a built-in sound.",
+        "Translated": "留空则使用内置音效。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsMarkersMarkTargetColour",
+        "Original": "Target mark colour",
+        "Translated": "目标标记颜色",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsMarkersMarkTargetingSize",
+        "Original": "Targeting mark size",
+        "Translated": "选定目标标记大小",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundCooldown",
+        "Original": "Cooldown for sound (seconds)",
+        "Translated": "音效冷却（秒）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundEnabled",
+        "Original": "Play sound when targeted",
+        "Translated": "被选为目标时播放音效",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsMarkersMarkTargetSize",
+        "Original": "Target mark size",
+        "Translated": "目标标记大小",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowShowCombat",
+        "Original": "Show window while in combat",
+        "Translated": "战斗中显示窗口",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowTab",
+        "Original": "Window",
+        "Translated": "窗口",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsHistoryTab",
+        "Original": "History",
+        "Translated": "历史记录",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsFilterLogBlacklistedPlayers",
+        "Original": "Log blacklisted players",
+        "Translated": "记录黑名单玩家",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsHistoryEnabled",
+        "Original": "Show previous targeters",
+        "Translated": "显示之前的选定目标者",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "MainTargetingYou",
+        "Original": "Targeting you",
+        "Translated": "选定你为目标",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowShowCutscene",
+        "Original": "Show window while in cutscenes",
+        "Translated": "过场动画中显示窗口",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsMarkersMarkTarget",
+        "Original": "Mark your target",
+        "Translated": "标记你的目标",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsFilterTab",
+        "Original": "Filters",
+        "Translated": "过滤器",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SoundChatError",
+        "Original": "Could not play sound file: {0}",
+        "Translated": "无法播放音效文件：{0}",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsHistoryTimestamps",
+        "Original": "Show timestamps",
+        "Translated": "显示时间戳",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundVolume",
+        "Original": "Volume of sound",
+        "Translated": "音量",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsMarkersMarkTargetingColour",
+        "Original": "Targeting mark colour",
+        "Translated": "选定目标标记颜色",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsFilterLogAlliance",
+        "Original": "Log alliance members",
+        "Translated": "记录团队队员",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsFilterLogParty",
+        "Original": "Log party members",
+        "Translated": "记录小队队员",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundDefaultDevice",
+        "Original": "Default",
+        "Translated": "默认",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowOpenLogin",
+        "Original": "Open on login",
+        "Translated": "登录时打开",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "MainHelpExamine",
+        "Original": "Click to link, Alt-click to examine, or right click to target.",
+        "Translated": "点击链接，Alt+点击查看，右键选定目标。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "MainHelpNoExamine",
+        "Original": "Click to link or right click to target.",
+        "Translated": "点击链接或右键选定目标。",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundPlayWhenClosed",
+        "Original": "Play sound when window is closed",
+        "Translated": "窗口关闭时播放音效",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsBehaviourExamineEnabled",
+        "Original": "Open examine window on Alt-click",
+        "Translated": "Alt+点击时打开查看窗口",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsHistoryRecordClosed",
+        "Original": "Record history when window is closed",
+        "Translated": "窗口关闭时记录历史",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsMarkersTab",
+        "Original": "Markers",
+        "Translated": "标记",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundInvalidDevice",
+        "Original": "Invalid device",
+        "Translated": "无效设备",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsMarkersMarkTargeting",
+        "Original": "Mark targeting you",
+        "Translated": "标记选定你的目标",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsBehaviourTab",
+        "Original": "Behaviour",
+        "Translated": "行为",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundPath",
+        "Original": "Path to audio file",
+        "Translated": "音频文件路径",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowAllowMovement",
+        "Original": "Allow moving the main window",
+        "Translated": "允许移动主窗口",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsFilterLogSelf",
+        "Original": "Log yourself",
+        "Translated": "记录自己",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsHistoryAmount",
+        "Original": "Number of previous targeters to keep",
+        "Translated": "保留的先前目标数量",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowShowConfigButton",
+        "Original": "Show settings button",
+        "Translated": "显示设置按钮",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsFilterLogCombat",
+        "Original": "Log targeters engaged in combat",
+        "Translated": "记录进入战斗的目标",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsAdvancedTab",
+        "Original": "Advanced",
+        "Translated": "高级",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundTab",
+        "Original": "Sound",
+        "Translated": "声音",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowAllowResize",
+        "Original": "Allow resizing the main window",
+        "Translated": "允许调整主窗口大小",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsSoundOutputDevice",
+        "Original": "Output device",
+        "Translated": "输出设备",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowShowInstance",
+        "Original": "Show window while in instance",
+        "Translated": "进入副本时显示窗口",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsAdvancedPollFrequency",
+        "Original": "Poll frequency in milliseconds",
+        "Translated": "轮询频率（毫秒）",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsBehaviourFocusHover",
+        "Original": "Focus target on hover",
+        "Translated": "悬停时聚焦目标",
+        "Source": "ai:deepseek"
+      },
+      {
+        "Container": "PeepingTom.Resources.Language.resources",
+        "Key": "SettingsWindowAllowCloseWithEscape",
+        "Original": "Allow closing the main window with the escape key",
+        "Translated": "允许使用 Esc 键关闭主窗口",
+        "Source": "ai:deepseek"
+      }
+    ],
+    "attributes": []
+  }
+}
