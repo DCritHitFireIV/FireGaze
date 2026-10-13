@@ -664,7 +664,7 @@ internal sealed partial class UITextTab
                 UiHelpers.Fitted(punchline.Replace('\n', ' '), punchline);
             }
 
-            // meta 行：状态徽标在行首（固定 x，方便竖向扫） + 内部名 · 版本
+            // meta 行：状态徽标在行首（固定 x，方便竖向扫）
             if (info is { PackNewerThanPatch: true, Patch: UITextPatchStatus.Applied })
             {
                 // 「已汉化」本身是绿色终态，只有「有改动待写入」是橙色警告
@@ -686,12 +686,6 @@ internal sealed partial class UITextTab
             {
                 ImGui.SetTooltip("中文插件：本身就是中文界面，FireGaze 不抽取 / 不翻译 / 不打包 / 不上传。\n有旧补丁记录时可以点「还原原文」恢复原版。");
             }
-
-            var identity = $"{plugin.InternalName}{(string.IsNullOrEmpty(plugin.Version) ? string.Empty : " · v" + plugin.Version)}";
-            ImGui.SameLine(0, 8f);
-            ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
-            UiHelpers.Fitted(identity, identity);
-            ImGui.PopStyleColor();
 
             if (running && this.run is { Total: > 0 } active)
             {

@@ -27,7 +27,7 @@ internal sealed partial class DiscoveryTab
         }
 
         ImGui.TextWrapped("知道别的插件库？把地址发到云库 —— 收录后所有人能在发现页搜到，并跟着词表增量翻译。");
-        ImGui.TextDisabled("需要公开可读的仓库文件（pluginmaster.json / repo.json）；官方主库不用投。");
+        ImGui.TextDisabled("需要公开可读的仓库文件（pluginmaster.json / repo.json）。");
 
         ImGui.SetNextItemWidth(430);
         ImGui.InputTextWithHint("###DiscoverySubmitUrl", "仓库地址…", ref submitInput, 512);

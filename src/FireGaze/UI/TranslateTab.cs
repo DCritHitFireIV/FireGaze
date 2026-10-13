@@ -193,11 +193,6 @@ internal sealed class TranslateTab
 
             ImGui.EndTable();
         }
-
-        ImGui.Spacing();
-        ImGui.TextDisabled(
-            "上游更新了简介后会跳过该段的翻译；等下一次词表更新后再生效。");
-
     }
 
     /// <summary>
