@@ -1,0 +1,1690 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-13",
+    "source": "user",
+    "label": "buyian",
+    "kinds": [
+      "free"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Actions",
+      "Translated": "动作",
+      "Context": "ActionsModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Addons",
+      "Translated": "附录",
+      "Context": "AddonModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Config",
+      "Translated": "配置",
+      "Context": "ConfigModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "string",
+      "Translated": "字符串",
+      "Context": "ConfigModule.GetType",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Value does not match pattern",
+      "Translated": "值与模式不匹配",
+      "Context": "ConfigModule.ValidateValue",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Run",
+      "Translated": "运行",
+      "Context": "EnginesModule.RegisterDocumentation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Executes content using the relevant engine",
+      "Translated": "使用相关引擎执行内容",
+      "Context": "EnginesModule.RegisterDocumentation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Executes content using the ",
+      "Translated": "使用",
+      "Context": "EnginesModule.RegisterDocumentation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " engine",
+      "Translated": "引擎",
+      "Context": "EnginesModule.RegisterDocumentation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NLua",
+      "Translated": "Nlua",
+      "Context": "EnginesModule.RegisterDocumentationStatic",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Entity",
+      "Translated": "实体",
+      "Context": "EntityModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fates",
+      "Translated": "命运",
+      "Context": "FateModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Instances",
+      "Translated": "实例",
+      "Context": "InstancesModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Inventory",
+      "Translated": "库存",
+      "Context": "InventoryModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Gets all available IPC plugins",
+      "Translated": "获取所有可用的 IPC 插件",
+      "Context": "IPCModule.RegisterDocumentation",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Player",
+      "Translated": "玩家",
+      "Context": "PlayerModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Quests",
+      "Translated": "任务",
+      "Context": "QuestsModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "System",
+      "Translated": "系统",
+      "Context": "SystemModule.get_ModuleName",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " - Changelog###",
+      "Translated": "变更日志",
+      "Context": "ChangelogWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed recursive spawning of temporary macros caused by function-level trigger events",
+      "Translated": "由函数级触发事件引起的临时宏的固定递归生成",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added pause/resume/stop all commands",
+      "Translated": "添加暂停/恢复/停止所有命令",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added a lua stub generator (outputs in config directory, used for script linting) by Faye",
+      "Translated": "添加了一个 lua stub 发生器 (配置目录中的输出，用于脚本 linting)，作者 Faye",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed native macro execution where waits weren't being applied properly",
+      "Translated": "修复了未正确应用等待的本地宏执行",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed /loop",
+      "Translated": "已修复/loop",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed craft skip trigger on non craft actions",
+      "Translated": "非手工操作中的固定手工跳过触发器",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added imports for all enums, now callable via luanet.enum",
+      "Translated": "所有枚举都增加了进口，现在可以通过 lunat.enum 调用",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added OnCleanup function for lua scripts.",
+      "Translated": "为 lua 脚本添加了 OnCleanup 功能。",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added syntax highlighting to the editor",
+      "Translated": "在编辑器中添加语法突显",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added type change ability in the editor",
+      "Translated": "在编辑器中添加了类型更改功能",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed Craftloop, and some action skip/waits",
+      "Translated": "固定的工艺循环，以及一些动作跳过/等待",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed autoretainer post process event",
+      "Translated": "固定自持者后期处理事件",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added more advanced stub generator by Faye",
+      "Translated": "添加了更多先进的末端发生器，作者:Faye",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed remote dependencies and added a file cache system",
+      "Translated": "修复远程依赖关系并添加文件缓存系统",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed deleting folders. Added renaming folders.",
+      "Translated": "修复删除文件夹。添加重命名文件夹。",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added a config module to provide macros with configurable settings, editable outside of code",
+      "Translated": "添加了配置模块，为宏提供可配置的设置，可在代码外编辑",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added import from url for new macros.",
+      "Translated": "为新宏添加了从 url 导入的内容。",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added OnActivePluginsChanged",
+      "Translated": "添加了 OnActivePluginsChanged",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Changed list index modifier name from listindex to list",
+      "Translated": "将列表索引修饰名称从列表索引更改为列表",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added duty started/wiped/completed events",
+      "Translated": "新增任务已开始/已擦除/已完成事件",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed git macros resetting configs on update",
+      "Translated": "修复的 git 宏在更新时重置配置",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed how some lists were handled in the configs, as well as string representations of other types",
+      "Translated": "修复了某些列表在配置中的处理方式，以及其他类型的字符串表示",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed ipc enums not being registered",
+      "Translated": "未注册的固定 ipc 枚举",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added option to auto show status window on script start. Also fixed the carets not showing in the help menu for Axis fonts.",
+      "Translated": "添加了在脚本启动时自动显示状态窗口的选项。还修复了 Axis 字体的帮助菜单中未显示的光标。",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Added OnChatMessage metadata filters so it's actually usable. See the wiki for usage.",
+      "Translated": "添加了 OnChatMessage 元数据过滤器，使其实际可用。请参阅 wiki 以了解使用方法。",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macro names display in error messages now",
+      "Translated": "宏名称现在显示在错误信息中",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fixed trigger events persisting after a macro is deleted",
+      "Translated": "删除宏后仍然存在的固定触发事件",
+      "Context": "ChangelogWindow.AddGeneralChangelogs",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Version ",
+      "Translated": "版本",
+      "Context": "ChangelogWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select a macro or create a new one",
+      "Translated": "选择宏或创建新的宏",
+      "Context": "MacroEditor.DrawEmptyState",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pause",
+      "Translated": "暂停",
+      "Context": "MacroEditor.DrawActionButtons",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "MacroEditor.DrawActionButtons",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "MacroEditor.DrawActionButtons",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Resume",
+      "Translated": "简历",
+      "Context": "MacroEditor.GetStartOrResumeAction",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No macros running",
+      "Translated": "无宏正在运行",
+      "Context": "MacroEditor.DrawRightAlignedControls",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " running",
+      "Translated": "运行",
+      "Context": "MacroEditor.DrawRightAlignedControls",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggle Line Numbers",
+      "Translated": "切换行号",
+      "Context": "MacroEditor.DrawRightAlignedControls",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Whitespace",
+      "Translated": "显示空白",
+      "Context": "MacroEditor.DrawRightAlignedControls",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Syntax Highlighting",
+      "Translated": "语法突显",
+      "Context": "MacroEditor.DrawRightAlignedControls",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "MacroEditor.DrawRightAlignedControls",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Name: ",
+      "Translated": "名称：",
+      "Context": "MacroEditor.DrawStatusBar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "  |  Lines: ",
+      "Translated": "| 行：",
+      "Context": "MacroEditor.DrawStatusBar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "  |  Chars: ",
+      "Translated": "| 车辆：",
+      "Context": "MacroEditor.DrawStatusBar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "  |  Column: ",
+      "Translated": "| 列：",
+      "Context": "MacroEditor.DrawStatusBar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "  |  Readonly: ",
+      "Translated": "| Readonly:",
+      "Context": "MacroEditor.DrawStatusBar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Type: ",
+      "Translated": "类型：",
+      "Context": "MacroEditor.DrawStatusBar",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Help",
+      "Translated": "帮助",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " - Macro Status###",
+      "Translated": "宏状态",
+      "Context": "StatusWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "StatusWindow",
+      "Translated": "状态窗口",
+      "Context": "StatusWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Trigger Events",
+      "Translated": "显示触发事件",
+      "Context": "StatusWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hide Trigger Events",
+      "Translated": "隐藏触发事件",
+      "Context": "StatusWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macro Status",
+      "Translated": "宏状态",
+      "Context": "StatusWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collapse",
+      "Translated": "崩溃",
+      "Context": "StatusWindow.DrawCollapsibleMacro",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Expand",
+      "Translated": "扩展",
+      "Context": "StatusWindow.DrawCollapsibleMacro",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Registered Trigger Events",
+      "Translated": "已注册的触发事件",
+      "Context": "StatusWindow.DrawTriggerEventsSection",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No trigger events registered",
+      "Translated": "未注册触发事件",
+      "Context": "StatusWindow.DrawTriggerEventsSection",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Running Macros Only",
+      "Translated": "仅显示正在运行的宏",
+      "Context": "StatusWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show All Macros",
+      "Translated": "显示所有宏",
+      "Context": "StatusWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Click Commands",
+      "Translated": "点击命令",
+      "Context": "HelpClicksTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Available Clicks",
+      "Translated": "可用点击",
+      "Context": "HelpClicksTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Click commands can be used to interact with game UI elements. You can use these in your macros.",
+      "Translated": "点击命令可以用来与游戏 UI 元素交互。你可以在宏中使用这些命令。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Items in red are properties that themselves have methods (not callable directly).",
+      "Translated": "红色项是本身具有方法的属性 (不能直接调用)。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Command Line Interface",
+      "Translated": "命令行界面",
+      "Context": "HelpCliTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Main Command",
+      "Translated": "主命令",
+      "Context": "HelpCliTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Aliases",
+      "Translated": "别名",
+      "Context": "HelpCliTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Command",
+      "Translated": "命令",
+      "Context": "HelpCliTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Description",
+      "Translated": "描述",
+      "Context": "HelpCliTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The following commands can be used in chat or your macro text.",
+      "Translated": "以下命令可用于聊天或宏文本。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Modifiers",
+      "Translated": "修饰符",
+      "Context": "HelpCommandsTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Status Monitoring",
+      "Translated": "状态监控",
+      "Context": "HelpGeneralTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger Events",
+      "Translated": "触发事件",
+      "Context": "HelpGeneralTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macro Metadata",
+      "Translated": "宏元数据",
+      "Context": "HelpGeneralTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Git Integration",
+      "Translated": "Git 集成",
+      "Context": "HelpGeneralTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " is an expansion of the native macro system, with smart helpers, additional commands and modifiers, and unlimited macros.",
+      "Translated": "这是对原生宏系统的扩展，包括智能助手、额外的命令和修饰符，以及无限制的宏。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "It also supports scripting with Lua, so you can write macros that are more complex than the native system can handle.",
+      "Translated": "它还支持使用 Lua 语言编写脚本，因此你可以编写比原生系统更复杂的宏。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "That status window shows all currently running macros and their current state",
+      "Translated": "那个状态窗口显示所有当前运行的宏及其当前状态。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macro States",
+      "Translated": "宏状态",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ready: Macro has been loaded but hasn't started running",
+      "Translated": "准备：宏已加载，但尚未开始运行",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Running: Macro is currently executing",
+      "Translated": "正在运行：宏当前正在运行",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Paused: Macro execution has been temporarily stopped",
+      "Translated": "暂停：宏执行已暂时停止",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Completed: Macro has finished execution",
+      "Translated": "已完成：宏已完成执行",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Failed: Macro encountered an error during execution",
+      "Translated": "失败:Macro 在执行过程中遇到错误",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macros can be configured to trigger automatically based on specific game events:",
+      "Translated": "宏可以配置为根据特定游戏事件自动触发：",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lua macros can also be configured to have individual functions trigger automatically (provided the script was already running).",
+      "Translated": "Lua 宏也可以配置为自动触发单个函数 (前提是脚本已经在运行)。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Any function that begins with the name of a TriggerEvent will be registered in the ",
+      "Translated": "任何以 TriggerEvent 名称开头的函数都将在其中注册。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " when the script is started.",
+      "Translated": "当脚本启动时。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "For ",
+      "Translated": "对于",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " specifically, the event name must be followed by the addon name and event type, such as",
+      "Translated": "具体而言，事件名称后必须紧跟加号名称和事件类型，例如",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macros can be configured with metadata to provide specific configurations to the framework regarding macro execution.",
+      "Translated": "宏可以使用元数据进行配置，以便为框架提供与宏执行相关的特定配置。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The metadata can be edited in the Macros Settings section when a macro is selected in the library.",
+      "Translated": "在资源库中选择宏时，可以在宏设置部分中编辑元数据。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The metadata can be written to the file using the button provided in the above section. This is crucial for macros stored remotely (i.e. github) for the framework to know what settings to use when they're imported",
+      "Translated": "元数据可以使用上述部分提供的按钮写入文件。这对于框架的远程存储宏 (即 github) 来说至关重要，因为它们知道在导入时要使用哪些设置。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Dependencies and conflicts",
+      "Translated": "依赖关系和冲突",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macros can also be configured to require other plugins to run, and a message will be printed if the requirement is not met.",
+      "Translated": "宏也可以配置为要求其他插件运行，如果未满足要求，则会打印一条消息。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Similiarly, macros can be configured to disable other plugins while running, though this requires plugins to be pre-defined in the framework to support this.",
+      "Translated": "类似地，宏可以配置为在运行时禁用其他插件，尽管这需要框架中预定义的插件来支持这一点。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Like plugin dependencies, macros can support relying on other macros, whether they're local (already loaded into snd) or remote (i.e. github)",
+      "Translated": "与插件依赖一样，宏可以支持对其他宏的依赖，无论是本地宏 (已加载到 snd 中) 还是远程宏 (例如 github)。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macros can now be connected to a github url and auto converted into a \"Git Macro\"",
+      "Translated": "宏现在可以连接到 github URL，并自动转换为 “Git 宏”。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Git macros support auto updating when a new version is released (checked on startup), and going between versions via the version history modal (found in the Macro Settings section)",
+      "Translated": "Git 宏支持在发布新版本时自动更新 (启动时检查)，并通过版本历史记录模式在版本之间切换 (可在宏设置部分中找到)。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "A macro is automatically identified as a git macro when it has a repository url in its metadata. To convert a git macro back into a local macro, simply wipe the url or click the Reset Git Data button in the settings",
+      "Translated": "当宏的元数据中包含仓库 URL 时，它会自动被标识为 git 宏。要将 git 宏转换回本地宏，只需擦除 URL 或点击设置中的 “重置 Git 数据” 按钮。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Virtual Keys",
+      "Translated": "虚拟密钥",
+      "Context": "HelpKeysTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use the /send command to simulate keyboard input. This is useful for interacting with UI elements that don't have dedicated click commands.",
+      "Translated": "使用/send 命令模拟键盘输入。这对于与没有专用单击命令的 UI 元素交互很有用。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "VirtualKeysColumns",
+      "Translated": "VirtualKeys 栏",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lua Scripting",
+      "Translated": "Lua 脚本",
+      "Context": "HelpLuaTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Example:",
+      "Translated": "示例：",
+      "Context": "HelpLuaTab.DrawExamples",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Below are all of the functions and properties provided by the framework. Click any to copy the full call path to clipboard. Hover any function to learn more about it.",
+      "Translated": "以下是该框架提供的所有功能和属性。单击任何一个，将完整的调用路径复制到剪贴板。悬停任何功能以了解更多信息。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Cli",
+      "Translated": "单击",
+      "Context": "HelpTab.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clicks",
+      "Translated": "单击",
+      "Context": "HelpTab.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Keys & Sends",
+      "Translated": "密钥和发送",
+      "Context": "HelpTab.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select a macro to view and edit its settings",
+      "Translated": "选择宏以查看和编辑其设置",
+      "Context": "MacroSettingsSection.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macro Configuration",
+      "Translated": "宏配置",
+      "Context": "MacroSettingsSection.DrawMacroConfig",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reset",
+      "Translated": "重置",
+      "Context": "MacroSettingsSection.DrawConfigItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reset to default value: ",
+      "Translated": "重置为默认值：",
+      "Context": "MacroSettingsSection.DrawConfigItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Range: ",
+      "Translated": "范围：",
+      "Context": "MacroSettingsSection.DrawConfigItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No choices defined",
+      "Translated": "未定义任何选项",
+      "Context": "MacroSettingsSection.DrawConfigItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove",
+      "Translated": "移除",
+      "Context": "MacroSettingsSection.DrawConfigItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Invalid validation pattern: ",
+      "Translated": "无效验证模式：",
+      "Context": "MacroSettingsSection.DrawConfigItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Value matches validation pattern",
+      "Translated": "值与验证模式匹配",
+      "Context": "MacroSettingsSection.DrawConfigItem",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "General Information",
+      "Translated": "一般信息",
+      "Context": "MacroSettingsSection.DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Git Information",
+      "Translated": "Git 信息",
+      "Context": "MacroSettingsSection.DrawGitInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CraftLoop Settings",
+      "Translated": "CraftLoop 设置",
+      "Context": "MacroSettingsSection.DrawCraftLoop",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Plugin Dependencies",
+      "Translated": "插件依赖关系",
+      "Context": "MacroSettingsSection.DrawPluginDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Plugin Conflicts",
+      "Translated": "插件冲突",
+      "Context": "MacroSettingsSection.DrawPluginConflicts",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Macro Dependencies",
+      "Translated": "宏依赖",
+      "Context": "MacroSettingsSection.DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Author:",
+      "Translated": "作者：",
+      "Context": "DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Version:",
+      "Translated": "版本：",
+      "Context": "DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Description:",
+      "Translated": "描述：",
+      "Context": "DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Write Metadata to Content",
+      "Translated": "将元数据写入内容",
+      "Context": "DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Writes the current metadata (author, version, description, dependencies, triggers) to the macro content. If metadata already exists, it will be updated.",
+      "Translated": "将当前元数据 (作者、版本、描述、依赖项、触发器) 写入宏内容。如果元数据已经存在，则会进行更新。",
+      "Context": "DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Read Metadata from Content",
+      "Translated": "从内容中读取元数据",
+      "Context": "DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reads metadata (author, version, description, dependencies, triggers) from the macro content and updates the settings.",
+      "Translated": "从宏内容中读取元数据 (作者、版本、描述、依赖项、触发器)，并更新设置。",
+      "Context": "DrawGeneralInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter a GitHub URL (e.g., https://github.com/owner/repo/blob/branch/path)",
+      "Translated": "输入 GitHub URL(例如，https://github.com/owner/repo/blob/branch/path)",
+      "Context": "DrawGitInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Auto Update",
+      "Translated": "自动更新",
+      "Context": "DrawGitInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Import",
+      "Translated": "导入",
+      "Context": "DrawGitInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Version History",
+      "Translated": "版本历史",
+      "Context": "DrawGitInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reset Git Info",
+      "Translated": "重置 Git 信息",
+      "Context": "DrawGitInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Wipes all git information and reverts this macro back to a standard local macro.",
+      "Translated": "擦除所有 git 信息并将此宏恢复为标准本地宏。",
+      "Context": "DrawGitInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Crafting Loop",
+      "Translated": "启用创建循环",
+      "Context": "DrawCraftLoop",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loop Count",
+      "Translated": "循环计数",
+      "Context": "DrawCraftLoop",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "(-1 = infinite)",
+      "Translated": "(-1 = 无限)",
+      "Context": "DrawCraftLoop",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Addon Event Configuration",
+      "Translated": "Addon 事件配置",
+      "Context": "DrawTriggers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Addon Name:",
+      "Translated": "Addon 名称：",
+      "Context": "DrawTriggers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Event Type:",
+      "Translated": "事件类型：",
+      "Context": "DrawTriggers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clear Addon Event Config",
+      "Translated": "清除 Addon 事件配置",
+      "Context": "DrawTriggers",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No plugin dependencies configured",
+      "Translated": "未配置依赖关系插件",
+      "Context": "DrawPluginDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove dependency",
+      "Translated": "移除依赖关系",
+      "Context": "DrawPluginDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No plugins configured to disable",
+      "Translated": "没有配置为禁用的插件",
+      "Context": "DrawPluginConflicts",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Remove plugin",
+      "Translated": "移除插件",
+      "Context": "DrawPluginConflicts",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No macro dependencies configured",
+      "Translated": "未配置宏依赖关系",
+      "Context": "DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add New Dependency",
+      "Translated": "添加新依赖",
+      "Context": "DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Local Dependency Type:",
+      "Translated": "本地依赖类型：",
+      "Context": "DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter the full path to a local file",
+      "Translated": "输入本地文件的完整路径",
+      "Context": "DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add File Dependency",
+      "Translated": "添加文件依赖关系",
+      "Context": "DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter a GitHub URL (e.g., https://github.com/owner/repo or https://github.com/owner/repo/blob/branch/path)",
+      "Translated": "输入 GitHub URL(例如，https://github.com/owner/repo 或 https://github.com/owner/ repo/blob/branch/path)",
+      "Context": "DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add Dependency",
+      "Translated": "添加依赖关系",
+      "Context": "DrawDependencies",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Main",
+      "Translated": "主要",
+      "Context": "MacrosTab.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tree",
+      "Translated": "树",
+      "Context": "MacrosTab.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Editor",
+      "Translated": "编辑器",
+      "Context": "MacrosTab.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Search Folders & Macros...",
+      "Translated": "搜索文件夹和宏...",
+      "Context": "MacrosTab.DrawLeftPanel",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FOLDERS",
+      "Translated": "文件夹",
+      "Context": "MacrosTab.DrawMacroTreeHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Collapse folder tree",
+      "Translated": "崩溃文件夹树",
+      "Context": "MacrosTab.DrawMacroTreeHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Expand folder tree",
+      "Translated": "展开文件夹树",
+      "Context": "MacrosTab.DrawMacroTreeHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create a new macro",
+      "Translated": "创建新宏",
+      "Context": "MacrosTab.DrawMacroTreeHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create a new folder",
+      "Translated": "创建新文件夹",
+      "Context": "MacrosTab.DrawMacroTreeHeader",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Error loading folders",
+      "Translated": "加载文件夹时出错",
+      "Context": "MacrosTab.DrawCustomFolders",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No macros in this folder",
+      "Translated": "此文件夹中没有宏",
+      "Context": "MacrosTab.DrawFolderContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Error loading macros",
+      "Translated": "错误加载宏",
+      "Context": "MacrosTab.DrawFolderContents",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Folder: ",
+      "Translated": "文件夹：",
+      "Context": "MacrosTab.DrawFolderContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Delete Folder",
+      "Translated": "删除文件夹",
+      "Context": "MacrosTab.DrawFolderContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Delete this folder and move all macros to root folder",
+      "Translated": "删除此文件夹并将所有宏移至根文件夹",
+      "Context": "MacrosTab.DrawFolderContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "SEARCH RESULTS",
+      "Translated": "搜索结果",
+      "Context": "MacrosTab.DrawSearchResults",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "MATCHING MACROS",
+      "Translated": "匹配宏",
+      "Context": "MacrosTab.DrawSearchResults",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No matching folders or macros",
+      "Translated": "无匹配文件夹或宏",
+      "Context": "MacrosTab.DrawSearchResults",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Copy Content",
+      "Translated": "复制内容",
+      "Context": "MacrosTab.HandleMacroContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "MacrosTab.HandleMacroContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Type",
+      "Translated": "类型",
+      "Context": "MacrosTab.HandleMacroContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Move to folder",
+      "Translated": "移动到文件夹",
+      "Context": "MacrosTab.HandleMacroContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select destination folder:",
+      "Translated": "选择目标文件夹：",
+      "Context": "MacrosTab.HandleMacroContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " (current)",
+      "Translated": "(当前)",
+      "Context": "MacrosTab.HandleMacroContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create new folder...",
+      "Translated": "创建新文件夹......",
+      "Context": "MacrosTab.HandleMacroContextMenu",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "General Settings",
+      "Translated": "一般设置",
+      "Context": "SettingsTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Crafting Settings",
+      "Translated": "手工设置",
+      "Context": "SettingsTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Error Handling",
+      "Translated": "错误处理",
+      "Context": "SettingsTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lua Options",
+      "Translated": "Lua 选项",
+      "Context": "SettingsTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Legacy Macro Import",
+      "Translated": "传统宏导入",
+      "Context": "SettingsTab.DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Propagate Controls to Child Macros",
+      "Translated": "将控制传播到儿童宏",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "When enabled, pausing, resuming and stopping macros will also pause, resume and stop the child macros.",
+      "Translated": "当启用时，暂停、恢复和停止宏也将暂停、恢复和停止子宏。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Auto-open Status Window on Script Start",
+      "Translated": "脚本启动时自动打开状态窗口",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "When enabled, the macro status window will automatically open when a script starts running.",
+      "Translated": "启用后，当脚本开始运行时，宏状态窗口将自动打开。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Skip craft actions when not crafting",
+      "Translated": "在非制作时跳过手工操作",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Smart wait for crafting actions",
+      "Translated": "智能等待制作行动",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Skip quality increasing actions when at 100% HQ chance",
+      "Translated": "在 100% 的 HQ 概率下跳过提高质量的行动",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Count /loop number as total iterations",
+      "Translated": "将/循环编号计为总迭代次数",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Always echo /loop commands",
+      "Translated": "始终回声/循环命令",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use CraftLoop template",
+      "Translated": "使用 CraftLoop 模板",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CraftLoop Template",
+      "Translated": "CraftLoop 模板",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Start crafting loops from recipe note window",
+      "Translated": "从菜谱注释窗口开始制作循环",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CraftLoop maxwait value",
+      "Translated": "CraftLoop maxwait 值",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CraftLoop echo",
+      "Translated": "CraftLoop 回声",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stop on error",
+      "Translated": "停止错误",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Only meant for native macros.",
+      "Translated": "仅适用于原生宏。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Timeout Retries",
+      "Translated": "最大超时重试",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Noisy Errors",
+      "Translated": "噪声错误",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Beep Frequency",
+      "Translated": "哔声频率",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Beep Duration",
+      "Translated": "哔声持续时间",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Beep Count",
+      "Translated": "哔哔声计数",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lua require paths (where to look for Lua modules):",
+      "Translated": "Lua 需要路径 (在哪里寻找 Lua 模块):",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Path #",
+      "Translated": "路径 #",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "This path is invalid.",
+      "Translated": "此路径无效。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "This path is valid.",
+      "Translated": "这条路径是有效的。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add Path",
+      "Translated": "添加路径",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Import macros from the old version of ",
+      "Translated": "从旧版本导入宏",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ". These are not guaranteed to work any more but can be imported as a reference.\nYou can copy an old config to clipboard and click the import button, or it will automatically attempt to find the old config file.",
+      "Translated": "这些不能保证继续工作，但可以作为参考进口。\n您可以将旧配置复制到剪贴板并点击导入按钮，或者它会自动尝试找到旧的配置文件。",
+      "Context": "DrawTab",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create New Folder",
+      "Translated": "创建新文件夹",
+      "Context": "CreateFolderModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Name:",
+      "Translated": "名称：",
+      "Context": "CreateFolderModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create",
+      "Translated": "创建",
+      "Context": "CreateFolderModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Create New Macro",
+      "Translated": "创建新宏",
+      "Context": "CreateMacroModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Type:",
+      "Translated": "类型：",
+      "Context": "CreateMacroModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Optional: Import from Github",
+      "Translated": "可选：从 Github 导入",
+      "Context": "CreateMacroModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Importing...",
+      "Translated": "导入...",
+      "Context": "CreateMacroModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Failed to import from GitHub: ",
+      "Translated": "从 GitHub 导入失败：",
+      "Context": "ImportFromGitHub.MoveNext",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " has been fully rewritten to support the framework changes from API 12.",
+      "Translated": "已完全重写以支持 API 12 的框架变更。",
+      "Context": "FirstTimeWarningModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Native macros should work much the same as before.",
+      "Translated": "原生宏的工作方式应该与以前大致相同。",
+      "Context": "FirstTimeWarningModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lua macros will not work at all. Scripts authors will need to write new scripts.",
+      "Translated": "Lua 宏将完全无法工作。脚本作者将需要编写新的脚本。",
+      "Context": "FirstTimeWarningModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "There is a legacy macro importer located in the settings menu.",
+      "Translated": "设置菜单中有一个传统宏导入器。",
+      "Context": "FirstTimeWarningModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "This message will only be displayed once and will stop showing upon the release of API13.",
+      "Translated": "这条消息将只显示一次，并在 API13 发布后停止显示。",
+      "Context": "FirstTimeWarningModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Acknowledge and Close",
+      "Translated": "确认并关闭",
+      "Context": "FirstTimeWarningModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Migration Preview Failed",
+      "Translated": "迁移预览失败",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Close",
+      "Translated": "关闭",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Import Macros",
+      "Translated": "导入宏",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Review the macros that will be imported from the old configuration.",
+      "Translated": "检查将从旧配置中导入的宏。",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select All New Macros",
+      "Translated": "选择所有新宏",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "in ",
+      "Translated": "在",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Content:",
+      "Translated": "内容：",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Crafting Loop: ",
+      "Translated": "制作循环：",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loop Count: ",
+      "Translated": "循环计数：",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Trigger Events: ",
+      "Translated": "触发事件：",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Import Selected Macros",
+      "Translated": "导入选定宏",
+      "Context": "MigrationModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No valid configuration found in clipboard or config file",
+      "Translated": "剪贴板或配置文件中未发现有效配置",
+      "Context": "MigrationModal.PreviewMigration",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Error previewing migration: ",
+      "Translated": "迁移预览错误：",
+      "Context": "MigrationModal.PreviewMigration",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Selected macros imported successfully!",
+      "Translated": "选定的宏成功导入！",
+      "Context": "MigrationModal.ApplySelectedChanges",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Replace",
+      "Translated": "替换",
+      "Context": "MigrationModal.PreviewMacrosFromOldStructure",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter new folder name:",
+      "Translated": "输入新文件夹名称：",
+      "Context": "RenameFolderModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Folder name '",
+      "Translated": "文件夹名称",
+      "Context": "RenameFolderModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "' already exists.",
+      "Translated": "'已经存在。",
+      "Context": "RenameFolderModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enter new name:",
+      "Translated": "输入新名称：",
+      "Context": "RenameModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Confirm",
+      "Translated": "确认",
+      "Context": "RenameModal.DrawModal",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Loading commit history...",
+      "Translated": "加载提交历史记录......",
+      "Context": "VersionHistoryModal.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No commit history available.",
+      "Translated": "没有提交历史记录。",
+      "Context": "VersionHistoryModal.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current Version",
+      "Translated": "当前版本",
+      "Context": "VersionHistoryModal.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Update",
+      "Translated": "更新",
+      "Context": "VersionHistoryModal.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Restore",
+      "Translated": "恢复",
+      "Context": "VersionHistoryModal.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Author: ",
+      "Translated": "作者：",
+      "Context": "VersionHistoryModal.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Failed to load commit history: ",
+      "Translated": "无法加载提交历史记录：",
+      "Context": "LoadCommits.MoveNext",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Failed to update to version ",
+      "Translated": "未能更新到版本",
+      "Context": "UpdateToVersion.MoveNext",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "async",
+      "Translated": "异步",
+      "Context": "LuaTypeConverter.GetLuaType",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Asynchronous operation",
+      "Translated": "异步操作",
+      "Context": "LuaTypeConverter.GetLuaType",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Changed name",
+      "Translated": "名称更改",
+      "Context": "[投稿]",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Renamed from GetInventoryItem to GetInventoryItemBySlot",
+      "Translated": "从 GetInventoryItem 重新命名为 GetInventoryItemBySlot",
+      "Context": "[投稿]",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Support for Key Items",
+      "Translated": "关键项的支持",
+      "Context": "[投稿]",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Potential fix for fake movement",
+      "Translated": "虚假动作的潜在修复",
+      "Context": "[投稿]",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Support for EquippedItems and RetainerEquippedItems containers",
+      "Translated": "支持装备物品和 Retainer 装备物品容器",
+      "Context": "[投稿]",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Changed value type to object to accept arrays",
+      "Translated": "将值类型更改为对象以接受数组",
+      "Context": "[投稿]",
+      "Source": "ai:public-caiyun"
+    }
+  ]
+}
