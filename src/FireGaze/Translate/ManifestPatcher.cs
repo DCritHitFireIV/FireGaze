@@ -289,6 +289,7 @@ public sealed class ManifestPatcher
     ///     当前文本像不像「UTF-8 被按 GBK 写坏」的乱码。做法是把它回译试试：
     ///     把文本按 GBK 编回字节、再按 UTF-8 解码；能还原出正常汉字的就是乱码。
     ///     私用区/替换符代表「已经丢掉的那个字节」，先切段再逐段判，避免整串失配。
+    ///     坏了两遍的文本（发版脚本每跑一次多坏一层）第一遍回译仍是乱码，所以最多回译两次。
     /// </summary>
     internal static bool LooksLikeMojibake(string text)
     {
@@ -330,24 +331,25 @@ public sealed class ManifestPatcher
                     continue;
                 }
 
-                var decoded = Encoding.UTF8.GetString(gbk.GetBytes(segment));
-                var cjk = 0;
-                var bad = 0;
-                foreach (var ch in decoded)
+                // 坏一遍：第一次回译就该还原出「像中文」的结果。
+                // 坏两遍（2026-10-13 raine01/AuraCanAI：作者的发版脚本用 ANSI 读 UTF-8 再按 UTF-8 写回，
+                // 每发一次版多坏一层）：第一次回译出来仍是乱码，得再回译一次；第二次的结果里
+                // 还留着第一次丢字节的洞，所以放宽坏点上限（坏一遍的口径不变，fgtest 有锚点）。
+                var candidate = segment;
+                for (var round = 0; round < 2; round++)
                 {
-                    if (ch >= '\u4e00' && ch <= '\u9fff')
+                    var decoded = Encoding.UTF8.GetString(gbk.GetBytes(candidate));
+                    if (decoded.Length == 0 || string.Equals(decoded, candidate, StringComparison.Ordinal))
                     {
-                        cjk++;
+                        break;
                     }
-                    else if (ch == '\ufffd' || (ch >= '\ue000' && ch <= '\uf8ff'))
-                    {
-                        bad++;
-                    }
-                }
 
-                if (cjk >= 3 && bad <= 2 && bad * 4 <= cjk)
-                {
-                    return true;
+                    if (LooksLikeChineseAfterRoundTrip(decoded, relaxed: round > 0))
+                    {
+                        return true;
+                    }
+
+                    candidate = decoded;
                 }
             }
 
@@ -357,6 +359,34 @@ public sealed class ManifestPatcher
         {
             return false;
         }
+    }
+
+    /// <summary>
+    ///     回译结果像不像「本来就是中文的文本」：汉字够多、坏点够少。
+    ///     relaxed = 第二遍回译（文本里带着第一次丢字节留下的洞，坏点上限放宽）。
+    /// </summary>
+    private static bool LooksLikeChineseAfterRoundTrip(string decoded, bool relaxed)
+    {
+        var cjk = 0;
+        var bad = 0;
+        foreach (var ch in decoded)
+        {
+            if (ch >= '\u4e00' && ch <= '\u9fff')
+            {
+                cjk++;
+            }
+            else if (ch == '\ufffd' || (ch >= '\ue000' && ch <= '\uf8ff'))
+            {
+                bad++;
+            }
+        }
+
+        if (cjk < 3)
+        {
+            return false;
+        }
+
+        return relaxed ? bad <= 2 * cjk : bad <= 2 && bad * 4 <= cjk;
     }
 
     private static FieldInfo? FindField(Type type, string name)

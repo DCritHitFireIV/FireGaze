@@ -549,6 +549,16 @@ internal sealed class TranslationIndex
 
         table.TryGetValue(internalName, out var entry);
 
+        // 上游乱码（UTF-8 被按 GBK 写坏，甚至坏了两遍）：卫月清单里是乱码、词表里有干净原文时，
+        // 显示与搜索一律用词表那份 —— ManifestPatcher 负责把清单改回去，这里保证发现/参与翻译页
+        // 在补丁生效前也不会先渲染出乱码（2026-10-13 AuraCanAI）。
+        if (entry is not null)
+        {
+            name = PreferClean(name, entry.Name);
+            punchline = PreferClean(punchline, entry.Punchline);
+            description = PreferClean(description, entry.Description);
+        }
+
         var result = new TranslationIndexEntry
         {
             InternalName = internalName,
@@ -579,6 +589,23 @@ internal sealed class TranslationIndex
         }
 
         return result;
+    }
+
+    /// <summary>
+    ///     卫月清单里的字段是乱码、词表里有干净文本时，优先用词表的（否则原样返回清单文本）。
+    ///     只认「UTF-8 被按 GBK 写坏」的乱码；干净的中文/英文原文照旧。
+    /// </summary>
+    private static string PreferClean(string fromManifest, TransPair? pair)
+    {
+        if (!ManifestPatcher.LooksLikeMojibake(fromManifest))
+        {
+            return fromManifest;
+        }
+
+        var candidate = pair?.Original ?? string.Empty;
+        return !string.IsNullOrWhiteSpace(candidate) && !ManifestPatcher.LooksLikeMojibake(candidate)
+            ? candidate
+            : fromManifest;
     }
 
     /// <summary>
