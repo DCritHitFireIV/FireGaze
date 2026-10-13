@@ -1,0 +1,720 @@
+{
+  "issue": "direct-2026-10-13T13-51-53-113Z-958a1a91",
+  "receivedAt": "2026-10-13 13:52:08",
+  "author": "匿名直传",
+  "plugin": "NoSoliciting",
+  "fingerprint": "6de018117c777ae4",
+  "packFile": "NoSoliciting@user-6de018.json",
+  "accepted": 97,
+  "filled": 97,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "NoSoliciting",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Opens the NoSoliciting configuration (deprecated)",
+        "Translated": "打开 NoSoliciting 配置 (已弃用)",
+        "Context": "[NoSoliciting] Commands..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Opens the NoSoliciting configuration",
+        "Translated": "打开无请求配置",
+        "Context": "[NoSoliciting] Commands..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "] The /prmt command is deprecated and will be removed. Please use /nosol instead.",
+        "Translated": "] /prmt 命令已弃用，将被删除。请改用/nosol。",
+        "Context": "[NoSoliciting] Commands.OnCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Party Finder",
+        "Translated": "派对访问器",
+        "Context": "[NoSoliciting] ChatTypeExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Tell (Incoming)",
+        "Translated": "告诉 (即将到来)",
+        "Context": "[NoSoliciting] ChatTypeExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Tell (Outgoing)",
+        "Translated": "Tell(外向)",
+        "Context": "[NoSoliciting] ChatTypeExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Party (Cross-world)",
+        "Translated": "派对 (跨世界)",
+        "Context": "[NoSoliciting] ChatTypeExt.Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "NoSoliciting",
+        "Translated": "无需请求",
+        "Context": "[NoSoliciting] Plugin.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "[NoSoliciting] Report.SetUpReportModal",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "chat",
+        "Translated": "聊天",
+        "Context": "[NoSoliciting] Settings.DrawOtherFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "-remove",
+        "Translated": "--remove",
+        "Context": "[NoSoliciting] Settings.DrawCustom",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "-substring-add",
+        "Translated": "-子字符串添加",
+        "Context": "[NoSoliciting] Settings.DrawCustom",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      }
+    ],
+    "resources": [
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalOriginalClassification",
+        "Original": "This message's original classification: {0}",
+        "Translated": "这条消息的原始分类:{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalDisabledCustom",
+        "Original": "You cannot report messages filtered because of a custom filter.",
+        "Translated": "您无法报告由于自定义过滤器而被过滤的消息。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportToastSuccess",
+        "Original": "Party Finder listing hosted by {0} reported successfully.",
+        "Translated": "由{0}主持的 Part Finder 列表报告成功。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "PhishingDescription",
+        "Original": "Messages trying to trick you into revealing your account details in order to steal your account",
+        "Translated": "试图诱骗您透露帐户详情以窃取您帐户的信息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "OtherTab",
+        "Original": "Other",
+        "Translated": "其他",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "RmtGilDescription",
+        "Original": "Real-money trade involving gil or items (also known as RMT bots)",
+        "Translated": "涉及基尔或物品的实物货币交易 (也称为 RMT 机器人)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalReport",
+        "Original": "Report",
+        "Translated": "报告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalCopy",
+        "Original": "Copy to clipboard",
+        "Translated": "复制到剪贴板",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportStatusInProgress",
+        "Original": "sending",
+        "Translated": "发送",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportColumnHost",
+        "Original": "Host",
+        "Translated": "主机",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "FiltersTab",
+        "Original": "Filters",
+        "Translated": "筛选器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "EnableCustomPartyFinderFilters",
+        "Original": "Enable custom Party Finder filters",
+        "Translated": "启用自定义派对访问器过滤器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalHelp1",
+        "Original": "Reporting this message will let the developer know that you think this message was incorrectly classified.",
+        "Translated": "报告此消息将让开发人员知道您认为此消息被错误分类。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalHelp2",
+        "Original": "NoSoliciting only works for English messages. Do not report non-English messages.",
+        "Translated": "免请求仅适用于英语消息。请勿报告非英语消息。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalTitle",
+        "Original": "Report to {0}",
+        "Translated": "向{0}报告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "TradeDescription",
+        "Original": "Messages advertising trading items or services for gil, such as omnicrafters looking for work or people selling rare items off the market board",
+        "Translated": "广告信息用 Gil 交易商品或服务，例如全能型人才寻找工作，或者有人在市场上出售稀有商品。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelTabVersion",
+        "Original": "Version: {0}",
+        "Translated": "版本:{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportToNoSoliciting",
+        "Original": "Report to NoSoliciting",
+        "Translated": "向 NoRequesting 报告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "NormalDescription",
+        "Original": "Normal messages that should not be filtered",
+        "Translated": "不应被过滤的正常消息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "PartyFinderFilters",
+        "Original": "Party Finder filters",
+        "Translated": "派对访达过滤器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalClassificationOtherDescription",
+        "Original": "Messages that don't fall under any of the other categories.",
+        "Translated": "不属于任何其他类别的消息。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "StaticCategory",
+        "Original": "Static recruitment",
+        "Translated": "静态招募",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelTabStatus",
+        "Original": "Model status: {0}",
+        "Translated": "模型状态:{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "AdvancedMode",
+        "Original": "Advanced mode",
+        "Translated": "高级模式",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "RmtContentCategory",
+        "Original": "RMT (content)",
+        "Translated": "RMT(内容)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "StaticDescription",
+        "Original": "Statics looking for members or players looking for a static",
+        "Translated": "查找成员或玩家的静态搜索",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ShowReportingWindow",
+        "Original": "Show reporting window",
+        "Translated": "显示报告窗口",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportColumnSender",
+        "Original": "Sender",
+        "Translated": "发件人",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalDisabledSameClassification",
+        "Original": "Reporting is disabled because you must choose a different classification than the original.",
+        "Translated": "报告被禁用，因为您必须选择与原始分类不同的分类。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "RmtGilCategory",
+        "Original": "RMT (gil)",
+        "Translated": "RMT(gil)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportHelp",
+        "Original": "Click on one of the entries below to report it to the developer as miscategorised.",
+        "Translated": "点击下面的其中一个条目，向开发者报告其分类错误。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportColumnReason",
+        "Original": "Reason",
+        "Translated": "原因",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportColumnChannel",
+        "Original": "Channel",
+        "Translated": "频道",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "FluffCategory",
+        "Original": "Fluff",
+        "Translated": "Fluff(绒毛)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "RoleplayingCategory",
+        "Original": "Roleplaying ads",
+        "Translated": "角色扮演式广告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "CommunityCategory",
+        "Original": "Community ads",
+        "Translated": "社区广告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportColumnMessage",
+        "Original": "Message",
+        "Translated": "消息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportStatusUnknown",
+        "Original": "unknown",
+        "Translated": "未知",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "SaveFilters",
+        "Original": "Save filters",
+        "Translated": "保存过滤器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "TradeCategory",
+        "Original": "Trade ads",
+        "Translated": "贸易广告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelStatusDownloadingModel",
+        "Original": "Downloading model",
+        "Translated": "下载模型",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ChatFilters",
+        "Original": "Chat filters",
+        "Translated": "聊天过滤器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "CommunityDescription",
+        "Original": "Advertisements for general-purpose communities, generally Discord servers",
+        "Translated": "通用社区广告，通常是 Discord 服务器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportStatusFailure",
+        "Original": "failed to send",
+        "Translated": "未能发送",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelStatusDownloadingManifest",
+        "Original": "Downloading model manifest",
+        "Translated": "下载模型清单",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "PhishingCategory",
+        "Original": "Phishing messages",
+        "Translated": "钓鱼消息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "RoleplayingDescription",
+        "Original": "Advertisements for personal RP, RP communities, venues, or anything else related to roleplaying",
+        "Translated": "个人 RP、RP 社区、场地或任何与角色扮演相关的广告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalDisabledItemLevel",
+        "Original": "You cannot report messages filtered because of item level.",
+        "Translated": "由于项目级别的原因，您无法报告过滤后的消息。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "RmtContentDescription",
+        "Original": "Real-money trade involving content (also known as content sellers)",
+        "Translated": "涉及内容的实物货币交易 (也称为内容卖方)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelStatusPreparing",
+        "Original": "Preparing to update model",
+        "Translated": "准备更新模型",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalClassificationOther",
+        "Original": "Other",
+        "Translated": "其他",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "EnableCustomChatFilters",
+        "Original": "Enable custom chat filters",
+        "Translated": "启用自定义聊天过滤器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "FreeCompanyCategory",
+        "Original": "Free Company ads",
+        "Translated": "免费公司广告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "FilterPrivatePfs",
+        "Original": "Apply filters to private Party Finder listings",
+        "Translated": "将过滤器应用于私人 “派对访达” 列表",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "LogFilteredPfs",
+        "Original": "Log filtered PFs",
+        "Translated": "记录过滤后的 PF",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "NormalCategory",
+        "Original": "Normal messages",
+        "Translated": "正常消息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "FluffDescription",
+        "Original": "Messages that don't fall into other categories and are not for content (Party Finder)",
+        "Translated": "不属于其他类别且不适用于内容的消息 (Party Finder)",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "LogFilteredMessages",
+        "Original": "Log filtered messages",
+        "Translated": "记录过滤后的消息",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelStatusInitialised",
+        "Original": "Initialised",
+        "Translated": "初始化",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "StaticSubDescription",
+        "Original": "Statics looking for fill-ins of missing members for clears",
+        "Translated": "静电寻找失踪成员填补空缺",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportPartyFinderTab",
+        "Original": "Party Finder",
+        "Translated": "派对访问器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelTab",
+        "Original": "Model",
+        "Translated": "模型",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "AdvancedWarning1",
+        "Original": "Do not change advanced settings unless you know what you are doing.",
+        "Translated": "除非你知道自己在做什么，否则不要更改高级设置。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "AdvancedWarning2",
+        "Original": "The machine learning model was trained with certain channels in mind.",
+        "Translated": "机器学习模型是根据特定渠道进行训练的。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "FilterIlvlPfs",
+        "Original": "Filter PFs with item level above maximum",
+        "Translated": "过滤项目级别高于最大值的 PF",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportStatusSuccessful",
+        "Original": "sent successfully",
+        "Translated": "已成功发送",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportColumnTimestamp",
+        "Original": "Timestamp",
+        "Translated": "时间戳",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelStatusInitialising",
+        "Original": "Initialising model and classifier",
+        "Translated": "初始化模型和分类器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportColumnDescription",
+        "Original": "Description",
+        "Translated": "描述",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelTabError",
+        "Original": "Last error: {0}",
+        "Translated": "最后一个错误:{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "OtherFiltersTab",
+        "Original": "Other filters",
+        "Translated": "其他过滤器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalDisabledFilterNotEnabled",
+        "Original": "Reporting is disabled because you weren't filtering for this kind of message at the time you saw it.",
+        "Translated": "报告被禁用，因为您在看到此类消息时没有过滤它。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalDisabledBadModel",
+        "Original": "Reporting is disabled because your ML model was not functioning when you saw this message.",
+        "Translated": "报告被禁用，因为您看到此消息时机器学习模型无法正常工作。",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "RegularExpressionsToFilter",
+        "Original": "Regular expressions to filter",
+        "Translated": "用于过滤的正则表达式",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ModelStatusUninitialised",
+        "Original": "Uninitialised",
+        "Translated": "未初始化",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalSuggestedClassification",
+        "Original": "How do you think this message should have been classified?",
+        "Translated": "你认为这条信息应该如何分类？",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "SubstringsToFilter",
+        "Original": "Substrings to filter",
+        "Translated": "要过滤的子字符串",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "OtherGameLanguage",
+        "Original": "Use the game's language setting instead of Dalamud's",
+        "Translated": "使用游戏的语言设置，而不是 Dalamud 的设置",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalGoToCustomButton",
+        "Original": "Go to custom filters",
+        "Translated": "前往自定义过滤器",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "UpdateModel",
+        "Original": "Update model",
+        "Translated": "更新模型",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportStatusMessage",
+        "Original": "Last report status: {0}",
+        "Translated": "上次报告状态:{0}",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportModalCancel",
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "FreeCompanyDescription",
+        "Original": "Advertisements for Free Companies",
+        "Translated": "自由企业广告",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "ReportChatTab",
+        "Original": "Chat",
+        "Translated": "聊天",
+        "Source": "ai:public-caiyun"
+      },
+      {
+        "Container": "NoSoliciting.Resources.Language.resources",
+        "Key": "StaticSubCategory",
+        "Original": "Static substitutes",
+        "Translated": "静态替代品",
+        "Source": "ai:public-caiyun"
+      }
+    ],
+    "attributes": []
+  }
+}
