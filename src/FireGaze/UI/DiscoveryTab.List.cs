@@ -92,7 +92,7 @@ internal sealed partial class DiscoveryTab
     {
         var isOpen = string.Equals(expandedEntry, entry.InternalName, StringComparison.Ordinal);
         ImGui.PushID(entry.InternalName);
-        ImGui.TableNextRow();
+        PluginListLayout.BeginFoldedRow(rowHeight);
 
         // 整行点击展开详情（与「插件汉化」同一写法）：Selectable 铺在行底层、跨所有列、允许按钮覆盖。
         // 必须先切到列 0 再取行内坐标——TableNextRow 之后光标还停在上一行结束的位置，

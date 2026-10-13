@@ -45,11 +45,33 @@ internal static class DiscoveryUiTests
             foreach (var scale in new[] { 1f, 1.5f, 2f })
             {
                 var height = (float)foldedHeight.Invoke(null, [16f * scale, 24f * scale, 4f * scale])!;
-                check(height == MathF.Max(24f * scale + 16f, MathF.Max(40f, 56f * scale) + 4f),
+                check(height == MathF.Max(24f * scale + 16f, MathF.Max(40f, 56f * scale) + MathF.Max(4f, 4f * scale)),
                     "the common folded row fits icon and three text lines, scale " + scale);
             }
         }
         var headerEnd = layout!.GetMethod("MeasureHeaderEnd");
+        var textOffset = layout.GetMethod("MeasureFoldedTextOffset");
+        check(textOffset is not null, "folded translation text reserves ImGui trailing spacing instead of adding two pixels per row");
+        if (textOffset is not null)
+        {
+            foreach (var scale in new[] { 1f, 1.5f, 2f })
+            {
+                var height = (float)foldedHeight!.Invoke(null, [16f * scale, 24f * scale, 4f * scale])!;
+                var offset = (float)textOffset.Invoke(null, [height, 56f * scale, 4f * scale])!;
+                check(offset >= 0 && offset + 56f * scale + 4f * scale <= height,
+                    "three-line group and trailing spacing fit the folded row at scale " + scale);
+            }
+        }
+        var toolbarRows = layout.GetMethod("MeasureToolbarRows");
+        check(toolbarRows is not null, "both top toolbars reserve the v30 first-row controls without moving settings or feedback");
+        if (toolbarRows is not null)
+        {
+            foreach (var width in new[] { 544f, 684f, 1244f })
+            {
+                var rows = (int)toolbarRows.Invoke(null, [width, new[] { 60f, 300f, 200f, 90f, 50f }, 10f])!;
+                check(rows == (width < 740f ? 2 : 1), "shared toolbar wraps at the same window width " + width);
+            }
+        }
         check(headerEnd is not null, "both plugin tabs use a shared three-row toolbar baseline");
         if (headerEnd is not null)
         {

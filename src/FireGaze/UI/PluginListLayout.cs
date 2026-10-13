@@ -20,7 +20,13 @@ internal static class PluginListLayout
     public static float RefreshSlotWidth() => MaxWidth("刷新", "刷新中…");
 
     public static float MeasureFoldedRowHeight(float textLineHeight, float frameHeight, float spacing)
-        => MathF.Max(frameHeight + 16f, MathF.Max(IconSize, textLineHeight * 3f + spacing * 2f) + 4f);
+        => MathF.Max(frameHeight + 16f, MathF.Max(IconSize, textLineHeight * 3f + spacing * 2f) + MathF.Max(4f, spacing));
+
+    public static float MeasureFoldedTextOffset(float rowHeight, float textHeight, float spacing)
+        => MathF.Max(0f, (rowHeight - textHeight - spacing * 2f) * 0.5f);
+
+    public static void BeginFoldedRow(float height)
+        => ImGui.TableNextRow(ImGuiTableRowFlags.None, height + ImGui.GetStyle().CellPadding.Y * 2f);
 
     public static float FoldedRowHeight() => MeasureFoldedRowHeight(ImGui.GetTextLineHeight(),
         ImGui.GetFrameHeight(), ImGui.GetStyle().ItemSpacing.Y);
@@ -28,10 +34,45 @@ internal static class PluginListLayout
     public static float MeasureHeaderEnd(float origin, float current, float frameHeight, float spacing)
         => MathF.Max(current, origin + 3f * (frameHeight + spacing));
 
+    public static int MeasureToolbarRows(float width, float[] controlWidths, float spacing)
+    {
+        var rows = 1;
+        var used = 0f;
+        foreach (var control in controlWidths)
+        {
+            var next = used > 0 ? used + spacing + control : control;
+            if (used > 0 && next > width)
+            {
+                rows++;
+                used = control;
+            }
+            else used = next;
+        }
+        return rows;
+    }
+
+    private static int ToolbarRows() => MeasureToolbarRows(
+        ImGui.GetWindowContentRegionMax().X - ImGui.GetWindowContentRegionMin().X,
+        [RefreshSlotWidth(), SearchWidth, MaxWidth("状态", "排序") + FilterWidth + ImGui.GetStyle().ItemSpacing.X,
+            UiHelpers.LabelWidth("翻译设置…"), UiHelpers.LabelWidth("反馈…")], 10f);
+
+    public static void ToolbarSameLineOrWrap(float width)
+    {
+        // The preceding item already advanced the cursor to the next row.
+        if (ImGui.GetItemRectMax().X + 10f + width <= ImGui.GetWindowDrawList().GetClipRectMax().X)
+            ImGui.SameLine(0, 10f);
+    }
+
+    public static void FinishToolbarRow(float origin)
+        => ImGui.SetCursorPosY(MathF.Max(ImGui.GetCursorPosY(),
+            origin + ToolbarRows() * (ImGui.GetFrameHeight() + ImGui.GetStyle().ItemSpacing.Y)));
+
     public static void FinishHeader(float origin)
     {
-        ImGui.SetCursorPosY(MeasureHeaderEnd(origin, ImGui.GetCursorPosY(),
-            ImGui.GetFrameHeight(), ImGui.GetStyle().ItemSpacing.Y));
+        var minimum = MeasureHeaderEnd(origin, ImGui.GetCursorPosY(),
+            ImGui.GetFrameHeight(), ImGui.GetStyle().ItemSpacing.Y);
+        ImGui.SetCursorPosY(MathF.Max(minimum, origin + (ToolbarRows() + 2f)
+            * (ImGui.GetFrameHeight() + ImGui.GetStyle().ItemSpacing.Y)));
         ImGui.Separator();
     }
 

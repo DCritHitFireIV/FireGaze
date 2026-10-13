@@ -143,9 +143,6 @@ internal sealed partial class UITextTab
     /// </summary>
     private readonly ConcurrentDictionary<string, RowNote> notes = new(StringComparer.Ordinal);
 
-    /// <summary>每行实测高度（整行点击的 Selectable 用；首帧用估算值）。</summary>
-    private readonly Dictionary<string, float> rowHeights = new(StringComparer.Ordinal);
-
     /// <summary>正在上传译文的插件（防重复点击）。后台任务的收尾会删、界面线程会查，所以用并发字典。
     /// 键存在 = 忙；值不用。</summary>
     private readonly ConcurrentDictionary<string, bool> uploading = new(StringComparer.Ordinal);
@@ -251,6 +248,7 @@ internal sealed partial class UITextTab
 
     private void DrawToolbar()
     {
+        var toolbarOrigin = ImGui.GetCursorPosY();
         if (ImGui.Button("刷新###UITextRefresh", new Vector2(PluginListLayout.RefreshSlotWidth(), 0)))
         {
             this.index = InstalledPluginsIndex.Build();
@@ -264,11 +262,11 @@ internal sealed partial class UITextTab
             ImGui.SetTooltip("重新读一遍已装插件列表（刚装 / 刚更新过插件时点它）。");
         }
 
-        UiHelpers.SameLineOrWrap(PluginListLayout.SearchWidth);
+        PluginListLayout.ToolbarSameLineOrWrap(PluginListLayout.SearchWidth);
         ImGui.SetNextItemWidth(PluginListLayout.SearchWidth);
         ImGui.InputTextWithHint("###UITextPluginSearch", "搜索插件名 / 目录名…", ref this.search, 128);
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("状态") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
+        PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("状态") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
         ImGui.BeginGroup();
         ImGui.TextDisabled("状态");
         ImGui.SameLine();
@@ -286,7 +284,7 @@ internal sealed partial class UITextTab
         }
         ImGui.EndGroup();
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("翻译设置…"));
+        PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("翻译设置…"));
         if (ImGui.Button("翻译设置…"))
         {
             this.settings.IsOpen = true;
@@ -299,6 +297,7 @@ internal sealed partial class UITextTab
         }
 
         this.DrawFeedbackButton();
+        PluginListLayout.FinishToolbarRow(toolbarOrigin);
 
         ImGui.Checkbox("只看第三方", ref this.onlyThirdParty);
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("只看已启用") + ImGui.GetFrameHeight());
@@ -371,7 +370,7 @@ internal sealed partial class UITextTab
         }
         else
         {
-            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth(feedbackLabel));
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth(feedbackLabel));
         }
 
         if (ImGui.Button(feedbackLabel))
@@ -605,18 +604,16 @@ internal sealed partial class UITextTab
         var editorOpen = this.editor.IsOpen && string.Equals(this.editor.CurrentInternalName, plugin.InternalName, StringComparison.Ordinal);
 
         ImGui.PushID(plugin.InternalName);
-        ImGui.TableNextRow();
+        var foldedHeight = PluginListLayout.FoldedRowHeight();
+        PluginListLayout.BeginFoldedRow(foldedHeight);
 
         // 整行点击展开（2026-10-03 用户要求）：Selectable 铺在行底层、跨所有列、允许被覆盖——
         // 点行的任何地方（图标 / 文字 / 空白）都展开收起；按钮在自己区域优先接收点击。
-        var foldedHeight = PluginListLayout.FoldedRowHeight();
-        var rowHeight = MathF.Max(foldedHeight,
-            this.rowHeights.TryGetValue(plugin.InternalName, out var knownHeight) ? knownHeight : foldedHeight);
         ImGui.TableSetColumnIndex(0);
         var rowStartY = ImGui.GetCursorPosY();
         if (ImGui.Selectable("##row", isOpen,
                 ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap,
-                new Vector2(0, rowHeight)))
+                new Vector2(0, foldedHeight)))
         {
             this.expanded = isOpen ? string.Empty : plugin.InternalName;
         }
@@ -624,8 +621,6 @@ internal sealed partial class UITextTab
         ImGui.SameLine(0, 0);
 
         // ── 左列：图标 + 文本块 ──
-        var rowTop = ImGui.GetCursorScreenPos().Y;
-
         // 展开指示已去掉（用户 2026-10-07：与「插件发现」保持一致，不要行首的 ▸/▾）
         const float iconSize = PluginListLayout.IconSize;
         ImGui.SetCursorPosY(rowStartY + MathF.Max(2f, (foldedHeight - iconSize) * 0.5f));
@@ -636,7 +631,7 @@ internal sealed partial class UITextTab
 
         ImGui.SameLine(0, PluginListLayout.IconTextGap);
         var textHeight = ImGui.GetTextLineHeight() * 3f + ImGui.GetStyle().ItemSpacing.Y * 2f;
-        ImGui.SetCursorPosY(rowStartY + MathF.Max(2f, (foldedHeight - textHeight) * 0.5f));
+        ImGui.SetCursorPosY(rowStartY + PluginListLayout.MeasureFoldedTextOffset(foldedHeight, textHeight, ImGui.GetStyle().ItemSpacing.Y));
         ImGui.BeginGroup();
         {
             UiHelpers.Fitted(plugin.DisplayName, plugin.DisplayName);
@@ -700,14 +695,11 @@ internal sealed partial class UITextTab
         }
 
         ImGui.EndGroup();
-        // 量一下这一行实际多高，下一帧 Selectable 用它（首帧先用估算值）。
-        this.rowHeights[plugin.InternalName] = Math.Max(foldedHeight, ImGui.GetItemRectMax().Y - rowTop);
 
         // ── 右列：操作 ──
         ImGui.TableNextColumn();
         ImGui.SetCursorPosY(rowStartY + (foldedHeight - ImGui.GetFrameHeight()) * 0.5f);
         this.DrawRowActions(plugin, info, running, busy, editorOpen, isOpen);
-        this.rowHeights[plugin.InternalName] = Math.Max(this.rowHeights[plugin.InternalName], ImGui.GetItemRectMax().Y - rowTop);
 
         ImGui.PopID();
     }

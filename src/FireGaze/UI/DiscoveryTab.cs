@@ -257,7 +257,7 @@ internal sealed partial class DiscoveryTab
             }
         }
 
-        UiHelpers.SameLineOrWrap(PluginListLayout.SearchWidth);
+        PluginListLayout.ToolbarSameLineOrWrap(PluginListLayout.SearchWidth);
         ImGui.SetNextItemWidth(PluginListLayout.SearchWidth);
         if (ImGui.InputTextWithHint("###DiscoverySearch", "搜索插件名、作者、简介、详情…", ref search, 256))
         {
@@ -269,7 +269,7 @@ internal sealed partial class DiscoveryTab
             ImGui.SetTooltip("全字段搜索：插件名（原文+译文）、作者、简介、详情；大小写不敏感。");
         }
 
-        UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("排序") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
+        PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("排序") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
         ImGui.BeginGroup();
         ImGui.TextDisabled("排序");
         ImGui.SameLine();
@@ -296,7 +296,7 @@ internal sealed partial class DiscoveryTab
 
         if (sortMode == DiscoverySortMode.Random)
         {
-            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("换一批"));
+            PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("换一批"));
             if (ImGui.Button("换一批###DiscoveryShuffle"))
             {
                 shuffleOrder.Clear();
@@ -310,6 +310,7 @@ internal sealed partial class DiscoveryTab
         }
 
         // ---------------- 筛选 + 计数（第二行，避免挤成一团） ----------------
+        PluginListLayout.FinishToolbarRow(headerOrigin);
         if (ImGui.Checkbox("隐藏主库###DiscoveryHideOfficial", ref hideOfficial))
         {
             rebuildPending = true;
