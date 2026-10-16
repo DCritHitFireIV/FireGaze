@@ -1,0 +1,19 @@
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>FireGaze.LocalPreview</AssemblyName>
+    <Version>0.1.0.0</Version>
+    <Authors>fire</Authors>
+    <Name>FireGaze 本地试用验证</Name>
+    <DalamudApiLevel>15</DalamudApiLevel>
+    <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+    <DalamudLibPath>$(DALAMUD_HOME)/</DalamudLibPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../FireGaze.LocalPreview.Core/FireGaze.LocalPreview.Core.csproj" />
+  </ItemGroup>
+</Project>
