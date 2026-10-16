@@ -30,6 +30,14 @@ static unsafe class NativeHarness
         ("slot-reentry-during-child-enable", ChildEnableReentry),
         ("clone-hierarchy-not-targetable", CloneNotTargetable),
         ("pending-child-draw-enabled-once", PendingDraw),
+        ("source-draw-swap-no-stale-restore", SourceDrawSwap),
+        ("source-draw-lease-reasserts-owned-bit", ReassertVisibility),
+        ("ground-motion-writes-owned-root-only", MotionOwnedRoot),
+        ("ground-motion-does-not-restart-loop", MotionLoop),
+        ("ground-motion-landing-once", MotionLanding),
+        ("ground-motion-yields-to-emote", MotionEmote),
+        ("ground-motion-refuses-unready-and-reused-actor", MotionOwnership),
+        ("ground-motion-preserves-accessory-pose", MotionAccessory),
     ];
     public static int Run(string[] args)
     {
@@ -65,24 +73,23 @@ static unsafe class NativeHarness
     static void Same(byte[] before, Character* after, string why) => Check(before.SequenceEqual(Bytes(after)), why);
     static void OnlyFlags(byte[] before, Character* p)
     {
-        byte[] after = Bytes(p); int start = (int)Marshal.OffsetOf<GameObject>(nameof(GameObject.RenderFlags));
-        for (int i = 0; i < before.Length; i++) if (i < start || i >= start + sizeof(VisibilityFlags)) Check(before[i] == after[i], $"source changed at +0x{i:X}");
+        Same(before, p, "presentation must preserve every real Character byte including RenderFlags");
     }
     static void RootUnchanged()
     {
         using var f = new F(); byte[] before = Bytes(f.Source); var p = MustCreate(f);
         Eq((nint)Actor(p), (nint)f.Clone, "separate actor pointer"); Same(before, f.Source, "Create touched source"); Settle(p, f); OnlyFlags(before, f.Source);
-        Eq((ulong)f.Source->RenderFlags, 0x802UL, "source hide owns only bit2"); Eq(f.Allocates, 1, "allocate once"); Eq(f.Param, (byte)1, "reserve child slot");
+        Eq((ulong)f.Source->RenderFlags, 0x800UL, "real model lifecycle flags preserved"); Check(!f.Source->DrawObject->IsVisible,"real source draw still visible"); Eq(f.Allocates, 1, "allocate once"); Eq(f.Param, (byte)1, "reserve child slot");
         Check(f.Flags.Count > 0, "native copy absent"); foreach (uint flags in f.Flags) Eq(flags & (1u|2u|0x20u|0x400u|0x8000u|0x400000u), 0u, "copy excludes mode children targets timeline");
         f.Source->Position = new Vector3(40,50,60); f.Source->Rotation = 1.25f; f.Source->TargetId = 901UL; f.Source->SoftTargetId = 902UL;
         before = Bytes(f.Source); Check(Tick(p, f.Source), "follow refused");
         Eq((Vector3)f.Clone->Position, new Vector3(40,50,60), "follow logical position"); Eq(f.Clone->Rotation, 1.25f, "follow yaw");
         Eq(f.Clone->TargetId.Id, 901UL, "follow target"); Eq(f.Clone->SoftTargetId.Id, 902UL, "follow soft target"); Same(before, f.Source, "follow touched source"); Eq(f.SourceWrites, 0, "native writes source");
-        Dispose(p); OnlyFlags(before, f.Source); Eq((ulong)f.Source->RenderFlags, 0x800UL, "source visible again"); Eq(f.Deletes, 1, "delete once");
+        Dispose(p); OnlyFlags(before, f.Source); Eq((ulong)f.Source->RenderFlags, 0x800UL, "source visible again"); Check(f.Source->DrawObject->IsVisible,"source visibility not restored"); Eq(f.Deletes, 1, "delete once");
     }
     static void HideAfterReady() { using var f = new F(); f.Ready = false; var p = MustCreate(f); for(int i=0;i<4;i++) { Tick(p,f.Source); Eq((ulong)f.Source->RenderFlags,0x800UL,"hidden before draw ready"); } Check(!Ready(p),"ready too early"); Eq(f.Enables,0,"enable before ready"); Settle(p,f); Check(f.Enables>0,"enable missing"); Dispose(p); }
-    static void OwnedFlags() { using var f = new F(); var p = MustCreate(f); Settle(p,f); f.Source->RenderFlags |= (VisibilityFlags)0x400; Dispose(p); Eq((ulong)f.Source->RenderFlags,0xC00UL,"unrelated flags lost"); }
-    static void PreexistingFlags() { using var f = new F(); f.Source->RenderFlags |= (VisibilityFlags)2; var p=MustCreate(f); Settle(p,f); Dispose(p); Eq((ulong)f.Source->RenderFlags,0x802UL,"preexisting hide lost"); }
+    static void OwnedFlags() { using var f = new F(); var p = MustCreate(f); Settle(p,f); f.Source->RenderFlags |= (VisibilityFlags)0x400; f.Source->DrawObject->Flags |= 0x40; Dispose(p); Eq((ulong)f.Source->RenderFlags,0xC00UL,"unrelated flags lost"); Eq(f.Source->DrawObject->Flags,(byte)0x69,"restore owns only visibility bit"); }
+    static void PreexistingFlags() { using var f = new F(); f.Source->DrawObject->Flags=0x28; var p=MustCreate(f); Settle(p,f); Dispose(p); Eq(f.Source->DrawObject->Flags,(byte)0x28,"preexisting visibility preserved"); }
     static void SlotPointer() { using var f = new F(); var p=MustCreate(f); Settle(p,f); f.Manager->BattleCharas[F.Slot].BattleChara=f.Replacement; byte[] b=Bytes((Character*)f.Replacement); Check(!Tick(p,f.Source),"slot reuse accepted"); Dispose(p); Eq(f.Deletes,0,"reused slot deleted"); Same(b,(Character*)f.Replacement,"replacement touched"); }
     static void SlotGeneration() { using var f = new F(); var p=MustCreate(f); Settle(p,f); F.Generation(f.Clone,9876); byte[] b=Bytes(f.Clone); Check(!Tick(p,f.Source),"same pointer generation accepted"); Dispose(p); Eq(f.Deletes,0,"new generation deleted"); Same(b,f.Clone,"new generation touched"); }
     static void SourcePointer() { using var f = new F(); var p=MustCreate(f); Settle(p,f); *f.Local=f.Replacement; byte[] old=Bytes(f.Source), next=Bytes((Character*)f.Replacement); Check(!Tick(p,(Character*)f.Replacement),"new source accepted"); Dispose(p); Same(old,f.Source,"old source touched"); Same(next,(Character*)f.Replacement,"new source touched"); Eq(f.Deletes,1,"clone leaked"); }
@@ -94,7 +101,7 @@ static unsafe class NativeHarness
     static void ChildVisibility()
     {
         using var f=new F(); f.AttachChildren(); var p=MustCreate(f); Settle(p,f);
-        foreach(nint a in f.Children) Eq((ulong)((Character*)a)->RenderFlags,0x802UL,"original child not hidden");
+        foreach(nint a in f.Children) Check(!((Character*)a)->DrawObject->IsVisible,"original child not hidden");
         foreach(nint a in f.Children) ((Character*)a)->RenderFlags |= (VisibilityFlags)0x400;
         Dispose(p); foreach(nint a in f.Children) Eq((ulong)((Character*)a)->RenderFlags,0xC00UL,"original child owned flag restore");
     }
@@ -129,8 +136,8 @@ static unsafe class NativeHarness
     }
     static void ChildPreexistingHide()
     {
-        using var f=new F(); f.AttachChildren(); foreach(nint child in f.Children) ((Character*)child)->RenderFlags|=(VisibilityFlags)2;
-        var p=MustCreate(f); Settle(p,f); Dispose(p); foreach(nint child in f.Children) Eq((ulong)((Character*)child)->RenderFlags,0x802UL,"preexisting child hide cleared");
+        using var f=new F(); f.AttachChildren(); foreach(nint child in f.Children) ((Character*)child)->DrawObject->Flags=0x28;
+        var p=MustCreate(f); Settle(p,f); Dispose(p); foreach(nint child in f.Children) Eq(((Character*)child)->DrawObject->Flags,(byte)0x28,"preexisting child hide cleared");
     }
     static void CopyReentry()
     {
@@ -147,7 +154,7 @@ static unsafe class NativeHarness
         foreach(nint child in f.Children) Eq((ulong)((Character*)child)->RenderFlags,0x800UL,"source child hidden before clone children ready");
         f.ChildReady=true; Settle(p,f); Eq(f.ChildEnables,3,"all clone children need drawing enabled");
         foreach(nint child in f.PreviewChildren) Check(((Character*)child)->DrawObject!=null&&((Character*)child)->DrawObject->IsVisible,"clone child draw absent");
-        foreach(nint child in f.Children) Eq((ulong)((Character*)child)->RenderFlags,0x802UL,"source child not hidden atomically"); Dispose(p);
+        foreach(nint child in f.Children) Check(!((Character*)child)->DrawObject->IsVisible,"source child not hidden atomically"); Dispose(p);
     }
     static void CloneChildDrawLoss()
     {
@@ -179,6 +186,62 @@ static unsafe class NativeHarness
         f.Clone->DrawObject->IsVisible=true; foreach(nint child in f.PreviewChildren) ((Character*)child)->DrawObject->IsVisible=true;
         Settle(p,f); Dispose(p);
     }
+    static void SourceDrawSwap()
+    {
+        using var f=new F();var p=MustCreate(f);Settle(p,f);var old=f.Source->DrawObject;byte oldFlags=old->Flags;
+        var next=(DrawObject*)NativeMemory.AllocZeroed((nuint)sizeof(DrawObject));
+        try { next->Flags=0x49;f.Source->DrawObject=next;Tick(p,f.Source);Check(!next->IsVisible,"replacement draw not hidden");Eq(old->Flags,oldFlags,"stale draw touched");Dispose(p);Eq(next->Flags,(byte)0x49,"replacement lease not restored");Eq(old->Flags,oldFlags,"stale draw restored"); }
+        finally {NativeMemory.Free(next);}
+    }
+    static void ReassertVisibility()
+    {
+        using var f=new F();var p=MustCreate(f);Settle(p,f);f.Source->DrawObject->Flags|=9;Tick(p,f.Source);
+        Check(!f.Source->DrawObject->IsVisible,"native refresh leaked real model");Dispose(p);Eq(f.Source->DrawObject->Flags,(byte)0x29,"owned visibility not restored");
+    }
+    static void Motion(object actor,bool emote=false)
+    {
+        var method=ActorType.GetMethod("UpdateGroundedMotion",All);
+        Check(method!=null,"owned actor has no grounded animation writer");
+        method!.Invoke(actor,[emote, null]);
+    }
+    static void MotionOwnedRoot()
+    {
+        using var f=new F();f.AttachCloneChildren();var p=MustCreate(f);Settle(p,f);
+        f.Source->Timeline.TimelineSequencer.TimelineIds[0]=13;f.Clone->Mount.MountId=446;
+        byte[] source=Bytes(f.Source),child=Bytes((Character*)f.PreviewChildren[0]);
+        Motion(p);Eq(f.PlayCalls,1,"one animation start");Eq(f.LastTimeline,(ushort)13,"sampled ground clip on root");
+        Eq(f.Clone->Timeline.BaseOverride,(ushort)13,"root pin");Same(source,f.Source,"motion touched real player");Same(child,(Character*)f.PreviewChildren[0],"motion directly wrote mount child");
+        Eq(f.SourceWrites,0,"native source writes");Dispose(p);
+    }
+    static void MotionLoop()
+    {
+        using var f=new F();var p=MustCreate(f);Settle(p,f);f.Clone->Mount.MountId=446;f.Source->Timeline.TimelineSequencer.TimelineIds[0]=22;
+        Motion(p);Motion(p);Eq(f.PlayCalls,1,"held run did not restart");
+        f.Source->Timeline.TimelineSequencer.TimelineIds[0]=3;Motion(p);Eq(f.LastTimeline,(ushort)166,"stop uses rider mounted idle");Eq(f.Clone->Mount.MountId,(ushort)446,"mount state preserved");Dispose(p);
+    }
+    static void MotionLanding()
+    {
+        using var f=new F();var p=MustCreate(f);Settle(p,f);
+        foreach(ushort clip in new ushort[]{31,32,33}){f.Source->Timeline.TimelineSequencer.TimelineIds[0]=clip;Motion(p);}
+        Eq(f.PlayCalls,3,"jump stages played once");Eq(f.Clone->Timeline.BaseOverride,(ushort)0,"landing not pinned");
+        for(int i=0;i<10;i++)Motion(p);Eq(f.PlayCalls,3,"landing never restarted");Dispose(p);
+    }
+    static void MotionEmote()
+    {
+        using var f=new F();var p=MustCreate(f);Settle(p,f);f.Source->Timeline.TimelineSequencer.TimelineIds[0]=13;f.Clone->Timeline.BaseOverride=999;
+        Motion(p,true);Eq(f.PlayCalls,0,"actual emote owns animation");Eq(f.Clone->Timeline.BaseOverride,(ushort)999,"emote pin preserved");Motion(p);Eq(f.PlayCalls,1,"motion resumes after action");Dispose(p);
+    }
+    static void MotionOwnership()
+    {
+        using var f=new F();var p=MustCreate(f);f.Source->Timeline.TimelineSequencer.TimelineIds[0]=13;Motion(p);Eq(f.PlayCalls,0,"unready actor untouched");
+        Settle(p,f);f.Manager->BattleCharas[F.Slot].BattleChara=f.Replacement;byte[] old=Bytes(f.Clone),replacement=Bytes((Character*)f.Replacement);
+        Motion(p);Eq(f.PlayCalls,0,"reused actor untouched");Same(old,f.Clone,"old actor written");Same(replacement,(Character*)f.Replacement,"replacement written");Dispose(p);
+    }
+    static void MotionAccessory()
+    {
+        using var f=new F();var p=MustCreate(f);Settle(p,f);f.Source->Timeline.TimelineSequencer.TimelineIds[0]=13;f.Clone->OrnamentData.OrnamentId=58;f.Clone->Timeline.BaseOverride=7367;
+        Motion(p);Eq(f.PlayCalls,0,"onfoot sample did not overwrite accessory pose");Eq(f.Clone->Timeline.BaseOverride,(ushort)7367,"native accessory pose retained");Dispose(p);
+    }
 
     sealed class F : IDisposable
     {
@@ -189,14 +252,14 @@ static unsafe class NativeHarness
         public Character* Source=>(Character*)root; public Character* Clone=>(Character*)clone;
         public readonly BattleChara** Local=(BattleChara**)NativeMemory.AllocZeroed((nuint)sizeof(nint));
         readonly nint* vtable=(nint*)NativeMemory.AllocZeroed(0x300); readonly DrawObject* bodyDraw=Alloc<DrawObject>(); readonly DrawObject* cloneDraw=Alloc<DrawObject>();
-        public readonly List<nint> Children=[], PreviewChildren=[], PreviewDraws=[]; public readonly List<uint> Flags=[];
-        public bool Ready=true,ChildReady=true,DrawVisibleOnEnable=true,FailAllocate,FailLookup,ReplaceSlotDuringCopy,ReplaceSlotDuringChildEnable; public int Allocates,Deletes,Enables,ChildEnables,SourceWrites,UnownedNativeWrites; public byte Param; public ulong? ResolvedTarget,ResolvedSoftTarget;
+        public readonly List<nint> Children=[], PreviewChildren=[], PreviewDraws=[], SourceDraws=[]; public readonly List<uint> Flags=[];
+        public bool Ready=true,ChildReady=true,DrawVisibleOnEnable=true,FailAllocate,FailLookup,ReplaceSlotDuringCopy,ReplaceSlotDuringChildEnable; public int Allocates,Deletes,Enables,ChildEnables,SourceWrites,UnownedNativeWrites,PlayCalls;public ushort LastTimeline; public byte Param; public ulong? ResolvedTarget,ResolvedSoftTarget;
         public F()
         {
             current=this; vtable[1]=(nint)(delegate* unmanaged<GameObject*,ulong>)&Identity; vtable[12]=(nint)(delegate* unmanaged<GameObject*,void>)&Enable; vtable[13]=(nint)(delegate* unmanaged<GameObject*,void>)&Disable; vtable[23]=(nint)(delegate* unmanaged<GameObject*,DrawObject*>)&GetDraw;
             Init(Source,0,500,111); Init(Clone,207,0xE0000000,222); Init((Character*)Replacement,207,0xE0000000,333); Clone->ChildObject=(Character*)reservedChild;
             Source->Mode=CharacterModes.Normal; Source->ModeParam=19; Source->EmoteController.EmoteId=71; Source->Timeline.BaseOverride=33; Source->Timeline.TimelineSequencer.TimelineIds[0]=31;
-            Source->Position=new Vector3(10,20,30); Source->Rotation=.75f; Source->RenderFlags=(VisibilityFlags)0x800; Source->DrawObject=bodyDraw; Source->TargetId=801UL; Source->SoftTargetId=802UL;
+            Source->Position=new Vector3(10,20,30); Source->Rotation=.75f; Source->RenderFlags=(VisibilityFlags)0x800; Source->DrawObject=bodyDraw; bodyDraw->Flags=0x29; Source->TargetId=801UL; Source->SoftTargetId=802UL;
             *Local=root; Manager->BattleCharaMemory=clone; Manager->BattleCharaSize=(uint)sizeof(BattleChara);
             ClientObjectManager.Addresses.Instance.Value=(nint)Manager; ClientObjectManager.Addresses.CreateBattleCharacter.Value=(nint)(delegate* unmanaged<ClientObjectManager*,uint,byte,uint>)&Allocate;
             ClientObjectManager.Addresses.GetObjectByIndex.Value=(nint)(delegate* unmanaged<ClientObjectManager*,ushort,Character*>)&Lookup; ClientObjectManager.Addresses.GetIndexByObject.Value=(nint)(delegate* unmanaged<ClientObjectManager*,GameObject*,uint>)&Index;
@@ -205,11 +268,12 @@ static unsafe class NativeHarness
             GameObject.Addresses.IsReadyToDraw.Value=(nint)(delegate* unmanaged<GameObject*,byte>)&NativeReady; GameObject.Addresses.SetPosition.Value=(nint)(delegate* unmanaged<GameObject*,float,float,float,void>)&Position; GameObject.Addresses.SetRotation.Value=(nint)(delegate* unmanaged<GameObject*,float,void>)&Rotation;
             Character.Addresses.GetTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong>)&Target; Character.Addresses.GetSoftTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong>)&SoftTarget;
             Character.Addresses.SetTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong,void>)&SetTarget; Character.Addresses.SetSoftTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong,void>)&SetSoftTarget;
+            ActionTimelineSequencer.Addresses.PlayTimeline.Value=(nint)(delegate* unmanaged<ActionTimelineSequencer*,ushort,void*,void>)&Play;
         }
         void Init(Character* p,ushort index,uint eid,uint gen) { *(nint**)p=vtable; p->ObjectIndex=index; p->EntityId=eid; p->ObjectKind=ObjectKind.Pc; p->TargetableStatus=(ObjectTargetableFlags)11; Generation(p,gen); p->Mount.OwnerObject=p; p->CompanionData.OwnerObject=p; p->OrnamentData.OwnerObject=p; p->DrawData.OwnerObject=p; p->CharacterSetup.OwnerObject=p; p->Timeline.OwnerObject=p; }
         public void AttachChildren()
         {
-            for(int i=0;i<3;i++) { var child=(Character*)Alloc<BattleChara>(); Init(child,(ushort)(2+i),1000u+(uint)i,400u+(uint)i); child->RenderFlags=(VisibilityFlags)0x800; Children.Add((nint)child); }
+            for(int i=0;i<3;i++) { var child=(Character*)Alloc<BattleChara>(); Init(child,(ushort)(2+i),1000u+(uint)i,400u+(uint)i); child->RenderFlags=(VisibilityFlags)0x800; child->DrawObject=Alloc<DrawObject>(); child->DrawObject->Flags=0x29; SourceDraws.Add((nint)child->DrawObject); Children.Add((nint)child); }
             Source->Mount.MountObject=(Character*)Children[0]; Source->CompanionData.CompanionObject=(Companion*)Children[1]; Source->OrnamentData.OrnamentObject=(Ornament*)Children[2];
         }
         public void AttachCloneChildren()
@@ -252,7 +316,8 @@ static unsafe class NativeHarness
         [UnmanagedCallersOnly] static ulong SoftTarget(Character* p)=>p==current.Source?current.ResolvedSoftTarget??p->SoftTargetId.Id:p->SoftTargetId.Id;
         [UnmanagedCallersOnly] static void SetTarget(Character* p,ulong id) { Track((GameObject*)p); p->TargetId=id; }
         [UnmanagedCallersOnly] static void SetSoftTarget(Character* p,ulong id) { Track((GameObject*)p); p->SoftTargetId=id; }
+        [UnmanagedCallersOnly] static void Play(ActionTimelineSequencer* sequence,ushort id,void* unknown) {current.PlayCalls++;current.LastTimeline=id;Track((GameObject*)sequence->Parent);}
         static T* Alloc<T>()where T:unmanaged=>(T*)NativeMemory.AllocZeroed((nuint)sizeof(T));
-        public void Dispose() { foreach(nint child in Children.Concat(PreviewChildren).Concat(PreviewDraws))NativeMemory.Free((void*)child); NativeMemory.Free(Manager); NativeMemory.Free(root); NativeMemory.Free(clone); NativeMemory.Free(reservedChild); NativeMemory.Free(Replacement); NativeMemory.Free(Local); NativeMemory.Free(vtable); NativeMemory.Free(bodyDraw); NativeMemory.Free(cloneDraw); }
+        public void Dispose() { foreach(nint child in Children.Concat(PreviewChildren).Concat(PreviewDraws).Concat(SourceDraws))NativeMemory.Free((void*)child); NativeMemory.Free(Manager); NativeMemory.Free(root); NativeMemory.Free(clone); NativeMemory.Free(reservedChild); NativeMemory.Free(Replacement); NativeMemory.Free(Local); NativeMemory.Free(vtable); NativeMemory.Free(bodyDraw); NativeMemory.Free(cloneDraw); }
     }
 }

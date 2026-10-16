@@ -61,6 +61,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     private ActorSnapshot? baseline;
     private HmsPresentationBaseline? hmsBaseline;
     private NativePreviewActor? visualActor;
+    private bool deferredEmote;
     private nint actorAddress;
     private ulong actorId;
     private uint territory;
@@ -349,6 +350,10 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
             case PreviewSlot.Minion: actor->CompanionData.SetupCompanion((short)effect.Id, 0); break;
             case PreviewSlot.Accessory: actor->OrnamentData.SetupOrnament((short)effect.Id, 0); break;
             case PreviewSlot.Emote:
+                // Initial native drawing can reset the animation lanes. Start the
+                // selected action only after the display hierarchy is actually ready.
+                if (visualActor is { IsReady: false }) { deferredEmote = true; break; }
+                deferredEmote = false;
                 var row = data.GetExcelSheet<Emote>().GetRow(effect.Id);
                 bool displayMounted = effects.ContainsKey(PreviewSlot.Mount) || actor->Mount.MountId != 0;
                 int postureSlot = displayMounted ? 4 : actor->Mode == CharacterModes.InPositionLoop ? actor->ModeParam == 1 ? 2 : 3 : 0;
@@ -368,6 +373,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
 
     public void Clear(PreviewSlot slot)
     {
+        if (slot == PreviewSlot.Emote) deferredEmote = false;
         if (!effects.TryGetValue(slot, out var effect)) return;
         if (visualActor is not null)
         {
@@ -559,6 +565,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     }
     private void Forget()
     {
+        deferredEmote = false;
         InvalidateExternalPresentation();
         var owned = visualActor; visualActor = null;
         try { owned?.Dispose(); } catch (Exception ex) { ReportHandoff(ex); }
@@ -606,6 +613,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         var actor = visualActor?.Actor;
         if (actor == null || visualActor is null) { ClearAll(false); return; }
         if (!visualActor.Tick(Bound())) return;
+        ApplyPendingEmote();
+        if (visualActor is null || visualActor.Actor != actor || Bound() == null) return;
         foreach (var effect in effects.Values.ToArray())
         {
             if (spawnWait.TryGetValue(effect.Slot, out int frames) && frames > 0)
@@ -630,6 +639,31 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
             }
         }
         if (!HasActivePreview) Forget();
+        else ApplyGroundedMotion(actor);
+    }
+    private void ApplyGroundedMotion(NativeCharacter* actor)
+    {
+        if (visualActor is not { } display || display.Actor != actor) return;
+        var expectedRevision = revision;
+        bool emoteActive = PreviewEmoteActive(actor);
+        // Native allocation lookups can synchronously start another action on the
+        // same display actor. Recheck semantic ownership after the writer's last
+        // native lookup; pointer/generation checks alone cannot detect that change.
+        display.UpdateGroundedMotion(emoteActive, () => !disposed && revision == expectedRevision
+            && visualActor == display && HasActivePreview && PreviewEmoteActive(actor) == emoteActive);
+    }
+    private bool PreviewEmoteActive(NativeCharacter* actor) => deferredEmote
+        || effects.TryGetValue(PreviewSlot.Emote, out var effect) && IsEmoteTimeline(actor, effect.Id);
+    private void ApplyPendingEmote()
+    {
+        if (!deferredEmote || visualActor is not { IsReady: true } display) return;
+        deferredEmote = false;
+        var actor = display.Actor;
+        if (actor == null || display != visualActor || !effects.TryGetValue(PreviewSlot.Emote, out var effect)) return;
+        var previousOwnCall = ownCall;
+        ownCall = true;
+        try { Apply(actor, effect); }
+        finally { ownCall = previousOwnCall; }
     }
     private bool IsTeleportCast()
     {
@@ -641,8 +675,11 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     private bool IsEmoteTimeline(NativeCharacter* actor, ushort emoteId)
     {
         if (data.GetExcelSheet<Emote>().GetRowOrDefault(emoteId) is not { } row) return false;
-        ushort currentTimeline = actor->Timeline.TimelineSequencer.TimelineIds[0];
-        foreach (var timeline in row.ActionTimeline) if (timeline.RowId != 0 && timeline.RowId == currentTimeline) return true;
+        // Mounted and facial actions occupy overlay lanes. The base lane can stay
+        // at mounted idle for their whole lifetime; it cannot establish completion.
+        foreach (var currentTimeline in actor->Timeline.TimelineSequencer.TimelineIds)
+            foreach (var timeline in row.ActionTimeline)
+                if (timeline.RowId != 0 && timeline.RowId == currentTimeline) return true;
         return false;
     }
     private void Cancel(string reason) { ClearForReason(PreviewExitReason.Busy); Raise(PreviewCancelled, reason); }
@@ -778,14 +815,73 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     {
         // A real container teardown (including the native HUD dismount) ends only the mount slot.
         // Native action handoffs already own their full accepted-input transaction.
-        bool mountOnly = !Bypass && nativeDepth == 0 && id == 0 && container->OwnerObject == Bound()
+        var actor = Bound();
+        var ownedDisplay = visualActor;
+        long currentRevision = revision;
+        bool mountOnly = !Bypass && nativeDepth == 0 && id == 0 && actor != null && container != null
+            && container->OwnerObject == actor && BindingCurrent()
             && effects.ContainsKey(PreviewSlot.Mount);
         mountSetup!.Original(container,id,top,body,legs,stain,unk6,unk7);
-        if (!mountOnly) return;
+        if (!mountOnly || revision != currentRevision || visualActor != ownedDisplay || !BindingCurrent() || Bound() != actor) return;
+        if (ownedDisplay is not null)
+        {
+            try { CompleteDisplayDismount(actor, ownedDisplay, currentRevision); }
+            catch (Exception ex) { ReportHandoff(ex); }
+            return;
+        }
         effects.Remove(PreviewSlot.Mount);
         spawnWait.Remove(PreviewSlot.Mount);
         revision++;
         RestoreImplicitMinion(Bound());
+        if (!HasActivePreview) Forget();
+    }
+
+    private void CompleteDisplayDismount(NativeCharacter* actor, NativePreviewActor ownedDisplay, long expectedRevision)
+    {
+        bool Current() => !disposed && revision == expectedRevision && visualActor == ownedDisplay
+            && BindingCurrent() && Bound() == actor;
+        var display = ownedDisplay.Actor;
+        // Both actor lookup and native teardown can re-enter preview/lifecycle code.
+        if (!Current() || actor == null || actor->Mount.MountId != 0 || display == null
+            || !effects.TryGetValue(PreviewSlot.Mount, out var effect)
+            || display->Mount.MountId != 0 && display->Mount.MountId != effect.Id) return;
+        var mode = display->Mode;
+        var modeParam = display->ModeParam;
+        bool previousOwnCall = ownCall;
+        ownCall = true;
+        try
+        {
+            // This is the new native unmounted state, never a restoration of the old baseline.
+            display->Mount.CreateAndSetupMount(0,0,0,0,0,0,0);
+            var currentDisplay = ownedDisplay.Actor;
+            if (!Current() || currentDisplay != display || actor->Mount.MountId != 0 || display->Mount.MountId != 0) return;
+            if (mode == CharacterModes.Mounted)
+            {
+                display->Mode = actor->Mode == CharacterModes.Mounted ? CharacterModes.Normal : actor->Mode;
+                display->ModeParam = actor->Mode == CharacterModes.Mounted ? (byte)0 : actor->ModeParam;
+            }
+            else { display->Mode = mode; display->ModeParam = modeParam; }
+        }
+        finally { ownCall = previousOwnCall; }
+        // Isolated previews never modify the real actor. Future manual clears must
+        // restore its newly accepted state, not the mount/posture from preview entry.
+        var nativeBaseline = ActorSnapshot.Read(actor, includeObjectAddresses: false);
+        var nativeHmsBaseline = HmsPresentationBaseline.Read(actor);
+        if (nativeBaseline.Mode == CharacterModes.Mounted)
+        {
+            // The outer dismount can finish mode/timeline changes after this hook.
+            // Normalize only our value snapshots; never write the real source.
+            nativeBaseline = nativeBaseline with { Mode = CharacterModes.Normal, ModeParam = 0, Timeline = 0, BaseOverride = 0,
+                Presentation = nativeBaseline.Presentation with { CharMode = (byte)CharacterModes.Normal, CharModeParam = 0, TimelineId = 0, BaseOverride = 0 } };
+            nativeHmsBaseline = nativeHmsBaseline with { Root = nativeHmsBaseline.Root with { Mode = CharacterModes.Normal, ModeParam = 0,
+                Timeline = nativeHmsBaseline.Root.Timeline with { T0 = 0, BaseOverride = 0 } } };
+        }
+        baseline = nativeBaseline;
+        hmsBaseline = nativeHmsBaseline;
+        InvalidateExternalPresentation();
+        effects.Remove(PreviewSlot.Mount);
+        spawnWait.Remove(PreviewSlot.Mount);
+        revision++;
         if (!HasActivePreview) Forget();
     }
 
@@ -802,6 +898,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         private readonly bool projectedMetadata;
         private readonly bool external;
         private readonly bool isolated;
+        private readonly NativePreviewActor? displayOwner;
         private readonly long revision;
         public Suspension(ActorPreviewRuntime runtime, bool projectMetadata = false)
         {
@@ -812,7 +909,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
             address = (nint)actor;
             revision = runtime.revision;
             current = ActorSnapshot.Read(actor);
-            isolated = runtime.visualActor is not null;
+            displayOwner = runtime.visualActor;
+            isolated = displayOwner is not null;
             if (isolated) return;
             // No containers are destroyed. Only public semantic state is temporarily exposed as
             // the real baseline while the engine checks/starts this one synchronous native input.
@@ -857,7 +955,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
             if (isolated)
             {
                 if (runtime.revision != revision || !runtime.BindingCurrent()) return;
-                if (intent.Slot == PreviewSlot.Mount && intent.Id == 0) runtime.Clear(PreviewSlot.Mount);
+                if (intent.Slot == PreviewSlot.Mount && intent.Id == 0)
+                    runtime.CompleteDisplayDismount((NativeCharacter*)address, displayOwner!, revision);
                 else runtime.ClearAll(false);
                 Raise(runtime.NativeInputAccepted);
                 return;

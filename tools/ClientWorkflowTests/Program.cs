@@ -11,6 +11,7 @@ void Check(bool condition, string name)
 var path = Path.Combine(Path.GetTempPath(), "firegaze-client-tests-" + Guid.NewGuid(), "queue.json");
 try
 {
+    await LocalPreviewSettingsTests.Run(Check);
     var queue = new UITextJobQueue(path);
     queue.Enqueue("A", "Alpha", UITextJobMode.Translate);
     queue.Enqueue("A", "Alpha", UITextJobMode.Translate);

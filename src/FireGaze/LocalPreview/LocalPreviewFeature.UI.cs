@@ -48,13 +48,18 @@ public sealed partial class LocalPreviewFeature
     };
 
     private void SetCategory(MenuKind kind, bool value)
+        => OnFramework(() => { SetCategoryCore(kind, value); return true; });
+
+    private void SetCategoryCore(MenuKind kind, bool value)
     {
+        if (disposed) return;
         switch (kind)
         {
             case MenuKind.Mount: config.LocalPreviewMountEnabled = value; break;
             case MenuKind.Minion: config.LocalPreviewMinionEnabled = value; break;
             case MenuKind.Accessory: config.LocalPreviewAccessoryEnabled = value; break;
             case MenuKind.Emote: config.LocalPreviewEmoteEnabled = value; break;
+            default: return;
         }
         if (!value) runtime?.Clear((PreviewSlot)kind);
         if (kind == MenuKind.Emote && enabled && runtime is not null)
@@ -65,6 +70,16 @@ public sealed partial class LocalPreviewFeature
         Cleanup(saveConfig, "保存分类开关");
     }
 
+    private void SetItemMenus(bool value)
+        => OnFramework(() => { SetItemMenusCore(value); return true; });
+
+    private void SetItemMenusCore(bool value)
+    {
+        if (disposed) return;
+        config.LocalPreviewItemMenusEnabled = value;
+        Cleanup(saveConfig, "保存物品右键开关");
+    }
+
     public void DrawContent()
     {
         if (disposed) return;
@@ -72,11 +87,7 @@ public sealed partial class LocalPreviewFeature
         var currentEnabled = enabled;
         if (ImGui.Checkbox("开启本地试用", ref currentEnabled)) SetEnabled(currentEnabled);
         var itemMenus = config.LocalPreviewItemMenusEnabled;
-        if (ImGui.Checkbox("开启右键对物品的试穿", ref itemMenus))
-        {
-            config.LocalPreviewItemMenusEnabled = itemMenus;
-            Cleanup(saveConfig, "保存物品右键开关");
-        }
+        if (ImGui.Checkbox("开启右键对物品的试穿", ref itemMenus)) SetItemMenus(itemMenus);
         ImGui.TextDisabled("支持背包及聊天中的收录物品，也支持右键玩家、场景宠物和情感动作提示。");
         foreach (var kind in Enum.GetValues<MenuKind>())
         {

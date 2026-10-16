@@ -3,6 +3,7 @@ using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
 
 namespace FireGaze.LocalPreview.Runtime;
@@ -14,7 +15,6 @@ namespace FireGaze.LocalPreview.Runtime;
 /// </summary>
 public sealed unsafe class NativePreviewActor : IDisposable
 {
-    private const VisibilityFlags Hidden = (VisibilityFlags)0x02;
     // The reviewed CN GameObject initializer allocates this generation at RVA 0x89D45A.
     // Unlike GetGameObjectId, it changes when the same local object slot is reused.
     private const int GenerationOffset = 0x74;
@@ -29,10 +29,11 @@ public sealed unsafe class NativePreviewActor : IDisposable
     private readonly uint sourceGeneration;
     private readonly VisibilityLease[] sourceChildren = new VisibilityLease[3];
     private readonly ChildDrawState[] cloneChildren = new ChildDrawState[3];
+    private readonly GroundedPreviewMotion motion = new();
     private readonly IPluginLog? log;
     private ulong allocationId;
     private bool hasAllocationId;
-    private bool ownsSourceHide;
+    private VisibilityLease sourceVisibility;
     private bool drawRequested;
     private bool bodyWasVisible;
     private int drawFrames;
@@ -50,6 +51,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
         sourceId = source->GetGameObjectId().Id;
         sourceGeneration = Generation(source);
         this.log = log;
+        sourceVisibility = new VisibilityLease(source);
         for (var i = 0; i < sourceChildren.Length; i++)
         {
             var child = GetChild(source, i);
@@ -195,6 +197,28 @@ public sealed unsafe class NativePreviewActor : IDisposable
         }
     }
 
+    /// <summary>Animates only this owned root from known genuine ground clips.</summary>
+    public void UpdateGroundedMotion(bool emoteActuallyActive, Func<bool>? canApply = null)
+    {
+        if (disposed || !IsReady) return;
+        var actor = GetOwnedActor();
+        var source = GetSource();
+        if (actor == null || source == null || !BindingMatches(source, actor)) return;
+        // Handheld accessories have their own posture resolver. An on-foot source
+        // cannot establish the corresponding accessory clip, so leave it native.
+        var sample = GroundedMotionClassifier.Classify(source->Timeline.TimelineSequencer.TimelineIds[0],
+            actor->OrnamentData.OrnamentId == 0);
+        // A planner is scoped to this allocation; generation 1 never crosses actors.
+        var plan = motion.Plan(sample, new(1, actor->Mount.MountId), emoteActuallyActive, actor->Timeline.BaseOverride);
+        if (!BindingMatches(source, actor) || GetSource() != source || GetRawOwnedActor() != actor) return;
+        // Native lookups above can re-enter preview hooks on this same allocation.
+        // Recheck the request/lane ownership after them; no native call may separate
+        // this guard from the first write. A rejected plan must not consume its edge.
+        if (canApply is not null && !canApply()) { motion.Reset(); return; }
+        if (plan.WriteBaseOverride) actor->Timeline.BaseOverride = plan.BaseOverride;
+        if (plan.PlayTimeline != 0) actor->Timeline.TimelineSequencer.PlayTimeline(plan.PlayTimeline);
+    }
+
     private bool BindingMatches(NativeCharacter* source, NativeCharacter* actor) =>
         GetSource() == source && GetOwnedActor() == actor;
 
@@ -306,18 +330,13 @@ public sealed unsafe class NativePreviewActor : IDisposable
                 || !sourceChildren[i].MatchesRaw(children[i]))) children[i] = null;
         if (hide)
         {
-            if ((source->RenderFlags & Hidden) == 0)
-            {
-                source->RenderFlags |= Hidden;
-                ownsSourceHide = true;
-            }
+            sourceVisibility.HideResolved(source);
             for (var i = 0; i < sourceChildren.Length; i++)
                 sourceChildren[i].HideResolved(children[i]);
         }
         else
         {
-            if (ownsSourceHide) source->RenderFlags &= ~Hidden;
-            ownsSourceHide = false;
+            sourceVisibility.ReleaseResolved(source);
             for (var i = 0; i < sourceChildren.Length; i++)
                 sourceChildren[i].ReleaseResolved(children[i]);
         }
@@ -336,14 +355,19 @@ public sealed unsafe class NativePreviewActor : IDisposable
         private readonly NativeCharacter* address;
         private readonly uint generation;
         private readonly ulong id;
-        private bool ownsHide;
+        // Bit 0 controls presentation; bit 3 is rewritten by native culling. Keeping
+        // the GameObject model flags untouched preserves its model and gameplay updates.
+        private const byte VisibleBit = 1;
+        private DrawObject* drawAddress;
+        private byte restoreBits;
 
         public VisibilityLease(NativeCharacter* actor)
         {
             address = actor;
             generation = Generation(actor);
             id = actor->GetGameObjectId().Id;
-            ownsHide = false;
+            drawAddress = null;
+            restoreBits = 0;
         }
 
         public readonly bool MatchesRaw(NativeCharacter* current) => current != null && current == address
@@ -354,16 +378,24 @@ public sealed unsafe class NativePreviewActor : IDisposable
 
         public void HideResolved(NativeCharacter* current)
         {
-            if (current == null || (current->RenderFlags & Hidden) != 0) return;
-            current->RenderFlags |= Hidden;
-            ownsHide = true;
+            var draw = current != null ? current->DrawObject : null;
+            if (draw != drawAddress)
+            {
+                // A replaced draw may already be freed. Never restore through its old address.
+                drawAddress = draw;
+                restoreBits = 0;
+            }
+            if (draw == null) return;
+            restoreBits |= (byte)(draw->Flags & VisibleBit);
+            draw->Flags &= unchecked((byte)~VisibleBit);
         }
 
         public void ReleaseResolved(NativeCharacter* current)
         {
-            var restore = ownsHide;
-            ownsHide = false;
-            if (restore && current != null) current->RenderFlags &= ~Hidden;
+            var draw = current != null ? current->DrawObject : null;
+            if (draw != null && draw == drawAddress) draw->Flags |= restoreBits;
+            drawAddress = null;
+            restoreBits = 0;
         }
     }
 

@@ -44,6 +44,23 @@ unsafe class Program
             ("queued companion outer true without leaf preserves preview", CompanionQueued),
             ("companion true without normal execution evidence preserves preview", CompanionTrueWithoutExecution),
             ("companion rejection after cooldown change preserves preview", CompanionRejectedCooldown),
+            ("real container dismount clears clone without resurrecting mounted baseline", NativeSetupDismount),
+            ("real container dismount releases last display slot", NativeSetupLastSlot),
+            ("real container callback cannot clear a replacement preview", NativeSetupReplacement),
+            ("real container callback cannot clear a stale territory preview", NativeSetupTerritory),
+            ("real container lookup reentry cannot clear obsolete display", NativeSetupLookup),
+            ("real container dismount never tears down a changed display mount", NativeSetupChangedDisplay),
+            ("owned container call does not relinquish preview", NativeSetupOwned),
+            ("accepted mount0 handoff clears only clone mount without restoring baseline", LocationDismount),
+            ("rejected mount0 handoff retains display preview", LocationRejected),
+            ("accepted nonzero mount handoff still ends all preview slots", LocationMountAccepted),
+            ("display teardown reentry cannot erase a new clone mount", DisplayTeardownReplacement),
+            ("display teardown reentry cannot erase a new real mount", DisplayTeardownNativeWinner),
+            ("display teardown preserves an unrelated emote posture", DisplayTeardownEmoteMode),
+            ("display teardown uses current real mode instead of mounted baseline", DisplayTeardownCurrentMode),
+            ("native dismount followed by another trial never restores historical mount", DismountThenTrial),
+            ("native dismount refreshes posture and timeline used by later emote clear", DismountThenEmoteClear),
+            ("transitional mounted source normalizes snapshot without writing real state", DismountTransitionalMode),
         ];
         int failed=0; foreach(var (name,test) in cases) try { test(); Console.WriteLine("PASS "+name); } catch(Exception e) { failed++; while(e is TargetInvocationException {InnerException:{} inner}) e=inner; Console.WriteLine("FAIL "+name+": "+e.Message); }
         Console.WriteLine($"{cases.Length-failed}/{cases.Length} production dismount boundary cases passed"); return failed==0?0:1;
@@ -78,6 +95,32 @@ unsafe class Program
     static void CompanionQueued() { using var f=new F(); f.PrepareCompanion(false); f.NativeResult=true; Eq(f.Use(ActionType.Companion,41),true,"queue result preserved"); Eq(f.OriginalCalls,1,"outer once"); Eq(f.LeafCalls,0,"leaf was not executed"); Eq(f.Runtime.ActiveEffects.Count,2,"queue acceptance does not end preview"); }
     static void CompanionTrueWithoutExecution() { using var f=new F(); f.PrepareCompanion(true,false); Eq(f.Companion(41),true,"special branch true preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.Runtime.ActiveEffects.Count,2,"no normal execution evidence retains preview"); Eq(f.NativeAccepted,0,"no false commit"); }
     static void CompanionRejectedCooldown() { using var f=new F(); f.PrepareCompanion(false,true); Eq(f.Companion(71),false,"special branch rejection preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.ActionMgr->CompanionActionCooldown>0,true,"rejection branch really changed cooldown"); Eq(f.Runtime.ActiveEffects.Count,2,"cooldown alone cannot commit"); Eq(f.NativeAccepted,0,"no false commit"); }
+    static void NativeSetupDismount()
+    {
+        using var f=new F(42,42); f.Clone->Mount.MountObject=f.Clone;
+        f.Setup(0);
+        Eq(f.SetupCalls,1,"real native original once"); Eq(f.Source->Mount.MountId,(ushort)0,"real native dismount retained");
+        Eq(f.Clone->Mount.MountId,(ushort)0,"clone mount removed rather than old baseline 42 restored"); Eq(f.Clone->Mount.MountObject==null,true,"clone mount child torn down");
+        Eq(f.Clone->Mode,CharacterModes.Normal,"mounted pose released"); Eq(f.Clone->EmoteController.EmoteId,(ushort)71,"unrelated emote retained");
+        Eq(f.Runtime.ActiveEffects.Count,1,"only mount ownership ended"); Eq(f.Runtime.ActiveEffects[0].Slot,PreviewSlot.Emote,"emote ownership kept");
+        Eq(f.Spawn.ContainsKey(PreviewSlot.Mount),false,"pending mount removed"); Eq(f.MountCalls,1,"one clone teardown"); Eq(f.SourceMountCalls,0,"real original not repeated"); Eq(f.NativeAccepted,0,"container notification does not invent accepted-input event");
+    }
+    static void NativeSetupLastSlot() { using var f=new F(42,42); f.Effects.Remove(PreviewSlot.Emote); f.Setup(0); Eq(f.Runtime.HasActivePreview,false,"last preview ended"); Eq(f.Deletes,1,"owned clone disposed once"); Eq(f.SetupCalls,1,"one native original"); }
+    static void NativeSetupReplacement() { using var f=new F(42,42); f.SetupAfter=()=>{ f.Effects[PreviewSlot.Mount]=new(PreviewSlot.Mount,447); f.Clone->Mount.MountId=447; Set(f.Runtime,"revision",1L); }; f.Setup(0); Eq(f.Clone->Mount.MountId,(ushort)447,"replacement clone preserved"); Eq(f.Runtime.ActiveEffects.Count,2,"replacement ownership preserved"); Eq(f.MountCalls,0,"no stale display teardown"); Eq(f.SetupCalls,1,"native original once"); }
+    static void NativeSetupTerritory() { using var f=new F(42,42); f.SetupAfter=()=>f.Territory=2; f.Setup(0); Eq(f.Runtime.ActiveEffects.Count,2,"stale preview not touched"); Eq(f.MountCalls,0,"stale clone not touched"); }
+    static void NativeSetupLookup() { using var f=new F(42,42); f.ReenterLookup=true; f.Setup(0); Eq(f.Runtime.ActiveEffects.Count,2,"lookup invalidation keeps new ownership"); Eq(f.MountCalls,0,"obsolete clone not touched"); }
+    static void NativeSetupChangedDisplay() { using var f=new F(42,42); f.Clone->Mount.MountId=447; f.Setup(0); Eq(f.Clone->Mount.MountId,(ushort)447,"unowned display mount preserved"); Eq(f.Runtime.ActiveEffects.Count,2,"mismatched ownership preserved"); Eq(f.MountCalls,0,"no unrelated teardown"); }
+    static void NativeSetupOwned() { using var f=new F(42,42); Set(f.Runtime,"ownCall",true); f.Setup(0); Eq(f.Runtime.ActiveEffects.Count,2,"own call not cancelled"); Eq(f.Clone->Mount.MountId,(ushort)446,"display unchanged"); Eq(f.SetupCalls,1,"real original once"); }
+    static void LocationDismount() { using var f=new F(42,42); f.LocationResult=true; f.LocationSetup=0; Eq(f.Location(ActionType.Mount,0),true,"native true preserved"); Eq(f.LocationCalls,1,"native location once"); Eq(f.SetupCalls,1,"native container original once"); Eq(f.Source->Mount.MountId,(ushort)0,"real native state preserved"); Eq(f.Clone->Mount.MountId,(ushort)0,"old baseline must not return"); Eq(f.Clone->Mode,CharacterModes.Normal,"mounted pose released"); Eq(f.Runtime.ActiveEffects.Count,1,"emote retained"); Eq(f.NativeAccepted,1,"accepted input reported once"); Eq(f.MountCalls,1,"one display teardown"); }
+    static void LocationRejected() { using var f=new F(42,42); Eq(f.Location(ActionType.Mount,0),false,"native rejection preserved"); Eq(f.LocationCalls,1,"native once"); Eq(f.Clone->Mount.MountId,(ushort)446,"rejected input retains display"); Eq(f.Runtime.ActiveEffects.Count,2,"all ownership retained"); Eq(f.NativeAccepted,0,"no accepted event"); }
+    static void LocationMountAccepted() { using var f=new F(42,42); f.LocationResult=true; f.LocationSetup=55; Eq(f.Location(ActionType.Mount,55),true,"native acceptance preserved"); Eq(f.Source->Mount.MountId,(ushort)55,"native winner retained"); Eq(f.Runtime.HasActivePreview,false,"all trial ownership ended"); Eq(f.Deletes,1,"display released once"); Eq(f.NativeAccepted,1,"accepted event once"); Eq(f.LocationCalls,1,"native once"); }
+    static void DisplayTeardownReplacement() { using var f=new F(42,42); f.DisplayAfter=()=>{f.Clone->Mount.MountId=447;f.Clone->Mode=CharacterModes.Mounted;}; f.Setup(0); Eq(f.Clone->Mount.MountId,(ushort)447,"reentrant display winner preserved"); Eq(f.Clone->Mode,CharacterModes.Mounted,"reentrant display posture preserved"); Eq(f.Runtime.ActiveEffects.Count,2,"stale teardown cannot erase ownership"); }
+    static void DisplayTeardownNativeWinner() { using var f=new F(42,42); f.DisplayAfter=()=>{f.Source->Mount.MountId=55;f.Source->Mode=CharacterModes.Mounted;}; f.Setup(0); Eq(f.Source->Mount.MountId,(ushort)55,"new real native winner preserved"); Eq(f.Runtime.ActiveEffects.Count,2,"dismount cleanup no longer has current evidence"); }
+    static void DisplayTeardownEmoteMode() { using var f=new F(42,42); f.Clone->Mode=CharacterModes.EmoteLoop;f.Clone->ModeParam=3; f.Setup(0); Eq(f.Clone->Mode,CharacterModes.EmoteLoop,"emote posture survives container teardown"); Eq(f.Clone->ModeParam,(byte)3,"emote mode argument preserved"); Eq(f.Runtime.ActiveEffects.Count,1,"emote preview preserved"); }
+    static void DisplayTeardownCurrentMode() { using var f=new F(42,42); f.SetupAfter=()=>{f.Source->Mode=CharacterModes.Crafting;f.Source->ModeParam=5;}; f.Setup(0); Eq(f.Clone->Mode,CharacterModes.Crafting,"current native mode wins over historical mounted mode"); Eq(f.Clone->ModeParam,(byte)5,"current mode argument copied"); Eq(f.Source->Mode,CharacterModes.Crafting,"real mode untouched"); }
+    static void DismountThenTrial() { using var f=new F(42,42); f.Setup(0); f.ApplyDisplayMount(447); f.Runtime.Clear(PreviewSlot.Mount); Eq(f.Clone->Mount.MountId,(ushort)0,"later clear must not resurrect the historical real mount"); Eq(f.Clone->Mode,CharacterModes.Normal,"later clear uses unmounted posture"); Eq(f.Source->Mount.MountId,(ushort)0,"real dismount preserved throughout"); Eq(f.Runtime.ActiveEffects.Count,1,"emote still retained"); }
+    static void DismountThenEmoteClear() { using var f=new F(42,42,555); f.SetupAfter=()=>f.Source->Timeline.TimelineSequencer.TimelineIds[0]=13; f.Setup(0); f.Clone->EmoteController.EmoteId=0; f.Runtime.Clear(PreviewSlot.Emote); Eq(f.LastTimeline,(ushort)13,"later clear restores current unmounted timeline, never historical mounted timeline 555"); Eq(f.Clone->Mode,CharacterModes.Normal,"later emote clear never restores mounted posture"); Eq(f.Source->Mode,CharacterModes.Normal,"real mode remains native"); }
+    static void DismountTransitionalMode() { using var f=new F(42,42,555); f.SetupAfter=()=>{f.Source->Mode=CharacterModes.Mounted;f.Source->ModeParam=7;}; f.Setup(0); byte[] real=new ReadOnlySpan<byte>(f.Source,sizeof(Character)).ToArray(); f.Clone->EmoteController.EmoteId=0; f.Runtime.Clear(PreviewSlot.Emote); Eq(f.Clone->Mode,CharacterModes.Normal,"snapshot of mount0 must not retain transitional mounted posture"); Eq(f.Clone->ModeParam,(byte)0,"snapshot mode parameter normalized"); Eq(f.LastTimeline,(ushort)0,"transitional mounted timeline is not replayed"); Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"all real source bytes preserved"); }
     static void Set(object o,string name,object? value) => o.GetType().GetField(name,All)!.SetValue(o,value);
     static object Ptr(void* p,Type t)=>Pointer.Box(p,t.MakePointerType());
     static T Proxy<T>(Func<MethodInfo,object?[]?,object?> call) where T:class { var p=DispatchProxy.Create<T,ServiceProxy>(); ((ServiceProxy)(object)p).Call=call; return p; }
@@ -90,26 +133,32 @@ unsafe class Program
     {
         public readonly Character* Source=Alloc<Character>(), Clone=Alloc<Character>(); public readonly ClientObjectManager* Manager=Alloc<ClientObjectManager>();
         public readonly ActionManager* ActionMgr=Alloc<ActionManager>();
-        readonly nint* table=(nint*)NativeMemory.AllocZeroed(0x300); readonly Character** local=(Character**)NativeMemory.AllocZeroed((nuint)sizeof(nint)); public readonly ActorPreviewRuntime Runtime;
+        readonly nint* table=(nint*)NativeMemory.AllocZeroed(0x300); readonly Character** local=(Character**)NativeMemory.AllocZeroed((nuint)sizeof(nint)); readonly ActionManager** localAction=(ActionManager**)NativeMemory.AllocZeroed((nuint)sizeof(nint)); public readonly ActorPreviewRuntime Runtime;
         public Dictionary<PreviewSlot,PreviewEffect> Effects=new(); public uint Territory=1; public int OriginalCalls,StatusCalls,MountCalls,SourceMountCalls,NativeAccepted,Cancelled,Deletes,LeafCalls; public uint LastId,LastLeafId,NestedLeafId; public bool NativeResult,NativeClearsMount,LeafResult,LeafChangesCooldown,ReenterLookup;
-        public F(ushort baselineMount=0,ushort realMount=0)
+        public readonly Dictionary<PreviewSlot,int> Spawn=new() { [PreviewSlot.Mount]=60 }; public int SetupCalls,LocationCalls; public ushort LastTimeline; public bool LocationResult; public short? LocationSetup; public Action? SetupAfter,DisplayAfter;
+        public F(ushort baselineMount=0,ushort realMount=0,ushort baselineTimeline=0)
         {
             current=this; *(nint**)Source=table; *(nint**)Clone=table; table[1]=(nint)(delegate* unmanaged<GameObject*,ulong>)&Identity;
             Source->EntityId=500; Source->ObjectIndex=0; Clone->EntityId=700; Clone->ObjectIndex=207; Source->Mount.OwnerObject=Source; Clone->Mount.OwnerObject=Clone;
-            Source->Mount.MountId=baselineMount; Clone->Mount.MountId=446; Clone->EmoteController.EmoteId=71;
+            Source->Mount.MountId=baselineMount; Source->Mode=baselineMount==0?CharacterModes.Normal:CharacterModes.Mounted; Clone->Mount.MountId=446; Clone->EmoteController.EmoteId=71; Clone->Mode=CharacterModes.Mounted;
+            Source->Timeline.TimelineSequencer.TimelineIds[0]=baselineTimeline;
             Manager->BattleCharas[207].BattleChara=(BattleChara*)Clone;
             ClientObjectManager.Addresses.Instance.Value=(nint)Manager;
             ClientObjectManager.Addresses.GetObjectByIndex.Value=(nint)(delegate* unmanaged<ClientObjectManager*,ushort,Character*>)&Lookup;
             ClientObjectManager.Addresses.DeleteObjectByIndex.Value=(nint)(delegate* unmanaged<ClientObjectManager*,ushort,byte,void>)&Delete;
             *local=Source; Control.Addresses.GetLocalPlayer.Value=(nint)local;
+            *localAction=ActionMgr; ActionManager.Addresses.Instance.Value=(nint)localAction;
             MountContainer.Addresses.CreateAndSetupMount.Value=(nint)(delegate* unmanaged<MountContainer*,short,uint,uint,uint,byte,byte,byte,void>)&Mount;
+            Character.Addresses.SetMode.Value=(nint)(delegate* unmanaged<Character*,CharacterModes,byte,void>)&SetMode;
+            ActionTimelineSequencer.Addresses.PlayTimeline.Value=(nint)(delegate* unmanaged<ActionTimelineSequencer*,ushort,void*,void>)&Play;
             Runtime=(ActorPreviewRuntime)RuntimeHelpers.GetUninitializedObject(RuntimeType);
             var player=Proxy<IPlayerCharacter>((m,a)=>m.Name switch {"get_Address"=>(nint)Source,"get_GameObjectId"=>500UL,_=>m.ReturnType.IsValueType?Activator.CreateInstance(m.ReturnType):null});
             Set(Runtime,"objects",Proxy<IObjectTable>((m,a)=>m.Name=="get_LocalPlayer"?player:null));
             Set(Runtime,"clientState",Proxy<IClientState>((m,a)=>m.Name switch {"get_IsLoggedIn"=>true,"get_TerritoryType"=>Territory,_=>null}));
+            Set(Runtime,"conditions",Proxy<ICondition>((m,a)=>m.ReturnType==typeof(bool)?false:null));
             Set(Runtime,"actorAddress",(nint)Source); Set(Runtime,"actorId",500UL); Set(Runtime,"territory",1u);
             Set(Runtime,"effects",Effects); Effects[PreviewSlot.Mount]=new(PreviewSlot.Mount,446); Effects[PreviewSlot.Emote]=new(PreviewSlot.Emote,71);
-            Set(Runtime,"spawnWait",new Dictionary<PreviewSlot,int>()); Set(Runtime,"implicitMinion",new ImplicitMinionOwnership());
+            Set(Runtime,"spawnWait",Spawn); Set(Runtime,"implicitMinion",new ImplicitMinionOwnership());
             Set(Runtime,"hmsEvidence",Activator.CreateInstance(RuntimeType.GetField("hmsEvidence",All)!.FieldType));
             var intent=RuntimeType.GetNestedType("NativeIntent",All)!; Set(Runtime,"handoff",Activator.CreateInstance(typeof(NativeInputHandoff<>).MakeGenericType(intent)));
             var snapshot=RuntimeType.GetNestedType("ActorSnapshot",All)!; Set(Runtime,"baseline",snapshot.GetMethod("Read",All)!.Invoke(null,[Ptr(Source,typeof(Character)),false]));
@@ -118,11 +167,17 @@ unsafe class Program
             Set(Runtime,"visualActor",typeof(NativePreviewActor).GetConstructors(All).Single().Invoke([Ptr(Manager,typeof(ClientObjectManager)),(ushort)207,Ptr(Clone,typeof(Character)),Ptr(Source,typeof(Character)),null]));
             ActionManager.Delegates.UseAction original=(mgr,type,id,target,extra,mode,combo,area)=> {OriginalCalls++;LastId=id;if(NativeClearsMount)Source->Mount.MountId=0;if(NestedLeafId!=0)Companion(NestedLeafId);return NativeResult;};
             ActionManager.Delegates.GetActionStatus status=(mgr,type,id,target,recast,casting,info)=>{StatusCalls++;return 0x243;};
+            MountContainer.Delegates.CreateAndSetupMount setup=(container,id,top,body,legs,stain,unk6,unk7)=>{ SetupCalls++; MountEffect(container,id); SetupAfter?.Invoke(); };
+            ActionManager.Delegates.UseActionLocation location=(mgr,type,id,target,pos,extra,a7)=>{ LocationCalls++; if(LocationSetup is {} mount)Setup(mount); return LocationResult; };
             Set(Runtime,"useAction",Hook(original)); Set(Runtime,"actionStatus",Hook(status));
+            Set(Runtime,"mountSetup",Hook(setup)); Set(Runtime,"useLocation",Hook(location));
             Runtime.NativeInputAccepted+=()=>NativeAccepted++; Runtime.PreviewCancelled+=_=>Cancelled++;
         }
         public bool Use(ActionType type,uint id)=>(bool)RuntimeType.GetMethod("UseActionDetour",All)!.Invoke(Runtime,[Ptr(ActionMgr,typeof(ActionManager)),type,id,0UL,0u,ActionManager.UseActionMode.None,0u,Ptr(null,typeof(bool))])!;
         public uint Status(ActionType type,uint id)=>(uint)RuntimeType.GetMethod("ActionStatusDetour",All)!.Invoke(Runtime,[Ptr(null,typeof(ActionManager)),type,id,0UL,false,false,Ptr(null,typeof(uint))])!;
+        public void Setup(short id)=>RuntimeType.GetMethod("MountSetupDetour",All)!.Invoke(Runtime,[Ptr(&Source->Mount,typeof(MountContainer)),id,0u,0u,0u,(byte)0,(byte)0,(byte)0]);
+        public bool Location(ActionType type,uint id)=>(bool)RuntimeType.GetMethod("UseLocationDetour",All)!.Invoke(Runtime,[Ptr(ActionMgr,typeof(ActionManager)),type,id,0UL,Ptr(null,typeof(System.Numerics.Vector3)),0u,(byte)0])!;
+        public void ApplyDisplayMount(ushort id) { RuntimeType.GetMethod("Apply",All)!.Invoke(Runtime,[Ptr(Clone,typeof(Character)),new PreviewEffect(PreviewSlot.Mount,id)]); Effects[PreviewSlot.Mount]=new(PreviewSlot.Mount,id); Spawn[PreviewSlot.Mount]=60; }
         public void PrepareCompanion(bool result,bool? changesCooldown=null)
         {
             LeafResult=result; LeafChangesCooldown=changesCooldown??result;
@@ -133,13 +188,16 @@ unsafe class Program
         }
         bool CompanionOriginal(ActionManager* mgr,uint id) { LeafCalls++;LastLeafId=id;if(LeafChangesCooldown)mgr->CompanionActionCooldown=1;return LeafResult; }
         public bool Companion(uint id)=>(bool)(RuntimeType.GetMethod("UseCompanionDetour",All) ?? throw new Exception("production companion leaf detour is missing")).Invoke(Runtime,[Ptr(ActionMgr,typeof(ActionManager)),id])!;
-        public void Dispose() { NativeMemory.Free(Source);NativeMemory.Free(Clone);NativeMemory.Free(Manager);NativeMemory.Free(table);NativeMemory.Free(local);NativeMemory.Free(ActionMgr); }
+        public void Dispose() { NativeMemory.Free(Source);NativeMemory.Free(Clone);NativeMemory.Free(Manager);NativeMemory.Free(table);NativeMemory.Free(local);NativeMemory.Free(localAction);NativeMemory.Free(ActionMgr); }
         static T* Alloc<T>() where T:unmanaged=>(T*)NativeMemory.AllocZeroed((nuint)sizeof(T));
     }
     [UnmanagedCallersOnly] static ulong Identity(GameObject* obj)=>obj->EntityId;
     [UnmanagedCallersOnly] static Character* Lookup(ClientObjectManager* mgr,ushort slot) { if(current.ReenterLookup) {current.ReenterLookup=false;current.Territory=2;} return (Character*)mgr->BattleCharas[slot].BattleChara; }
     [UnmanagedCallersOnly] static void Delete(ClientObjectManager* mgr,ushort slot,byte param) { current.Deletes++;mgr->BattleCharas[slot].BattleChara=null; }
-    [UnmanagedCallersOnly] static void Mount(MountContainer* container,short id,uint top,uint body,uint legs,byte stain,byte unk6,byte unk7) {current.MountCalls++;if(container->OwnerObject==current.Source)current.SourceMountCalls++;container->MountId=(ushort)id;}
+    static void MountEffect(MountContainer* container,short id) { container->MountId=(ushort)id; if(id==0){container->MountObject=null;container->OwnerObject->Mode=CharacterModes.Normal;container->OwnerObject->ModeParam=0;} }
+    [UnmanagedCallersOnly] static void Mount(MountContainer* container,short id,uint top,uint body,uint legs,byte stain,byte unk6,byte unk7) {current.MountCalls++;if(container->OwnerObject==current.Source)current.SourceMountCalls++;MountEffect(container,id);current.DisplayAfter?.Invoke();}
+    [UnmanagedCallersOnly] static void SetMode(Character* actor,CharacterModes mode,byte param) { actor->Mode=mode;actor->ModeParam=param; }
+    [UnmanagedCallersOnly] static void Play(ActionTimelineSequencer* sequencer,ushort id,void* unk) { current.LastTimeline=id;sequencer->TimelineIds[0]=id; }
 }
 public class ServiceProxy : DispatchProxy
 {

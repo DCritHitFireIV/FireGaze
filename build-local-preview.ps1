@@ -4,11 +4,13 @@ $ErrorActionPreference = 'Stop'
 $previewRoot = $PSScriptRoot
 $env:DALAMUD_HOME = Join-Path $env:APPDATA 'XIVLauncherCN\addon\Hooks\dev'
 
-foreach ($previewSuite in @('LocalPreviewTests', 'PreviewRuntimeBoundaryTests', 'NativePreviewActorTests', 'NativeDismountTests', 'HmsShadowTests', 'HmsOriginalAdapterTests')) {
+foreach ($previewSuite in @('LocalPreviewTests', 'PreviewRuntimeBoundaryTests', 'GroundedPreviewMotionTests', 'NativePreviewActorTests', 'NativeDismountTests', 'HmsShadowTests', 'HmsOriginalAdapterTests')) {
     dotnet run --project (Join-Path $previewRoot "tools\$previewSuite\$previewSuite.csproj") -c Release
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
 if ($SqpackPath) {
+    dotnet run --project (Join-Path $previewRoot 'tools\NativeEmoteTests\NativeEmoteTests.csproj') -c Release -- $SqpackPath
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     dotnet run --project (Join-Path $previewRoot 'tools\LocalPreviewInteractionTests\LocalPreviewInteractionTests.csproj') -c Release -- --sqpack $SqpackPath
 } else {
     dotnet run --project (Join-Path $previewRoot 'tools\LocalPreviewInteractionTests\LocalPreviewInteractionTests.csproj') -c Release

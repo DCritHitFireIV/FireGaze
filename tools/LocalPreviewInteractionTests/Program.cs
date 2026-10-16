@@ -11,6 +11,48 @@ void Check(bool result, string label)
 }
 
 var menuOptions = new PreviewMenuOptions();
+// A settings command must validate the full request before touching preferences.
+// Numeric enum spellings and bool-like values must not select a setting silently.
+var optionCommandType = typeof(PreviewKind).Assembly.GetType("FireGaze.LocalPreview.Interaction.PreviewOptionCommand");
+Check(optionCommandType is not null, "settings commands expose a validated production parser");
+var tryParseOption = optionCommandType!.GetMethod("TryParse")!;
+object? ParseOption(string[]? tokens, bool expectedSuccess, string label)
+{
+    object?[] args = [tokens, null];
+    var success = (bool)tryParseOption.Invoke(null, args)!;
+    Check(success == expectedSuccess, label);
+    if (!success)
+        Check(args[1]!.Equals(Activator.CreateInstance(optionCommandType)), label + " leaves no stale request");
+    return args[1];
+}
+foreach (var (name, expectedOption) in new[]
+{
+    ("mount", "Mount"), ("minion", "Minion"), ("accessory", "Accessory"),
+    ("emote", "Emote"), ("items", "Items"),
+})
+    foreach (var (value, expectedEnabled) in new[] { ("on", true), ("off", false) })
+    {
+        var parsed = ParseOption(["option", name, value], true, $"accepts {name} {value}")!;
+        Check(optionCommandType.GetProperty("Option")!.GetValue(parsed)!.ToString() == expectedOption,
+            $"{name} targets only its own preference");
+        Check((bool)optionCommandType.GetProperty("Enabled")!.GetValue(parsed)! == expectedEnabled,
+            $"{name} {value} retains the requested enabled state");
+    }
+var mixedCaseOption = ParseOption(["OpTiOn", "AcCeSsOrY", "OfF"], true, "settings command names ignore case")!;
+Check(optionCommandType.GetProperty("Option")!.GetValue(mixedCaseOption)!.ToString() == "Accessory" &&
+    !(bool)optionCommandType.GetProperty("Enabled")!.GetValue(mixedCaseOption)!, "mixed case does not change the requested preference or value");
+foreach (var (tokens, name) in new (string[]?, string)[]
+{
+    (null, "null request"), ([], "empty request"), (["option"], "missing preference and value"),
+    (["option", "mount"], "missing value"), (["option", "mount", "on", "off"], "extra argument"),
+    (["mount", "mount", "on"], "wrong command"), (["option", "all", "on"], "unknown preference"),
+    (["option", "0", "on"], "numeric valid-enum value"), (["option", "99", "on"], "numeric unknown-enum value"),
+    (["option", "Mount,Minion", "on"], "combined enum names"), (["option", "mount", "1"], "numeric true"),
+    (["option", "mount", "0"], "numeric false"), (["option", "mount", "true"], "boolean true spelling"),
+    (["option", "mount", "false"], "boolean false spelling"), (["option", "mount", "toggle"], "implicit toggle"),
+    (["option", "", "on"], "empty preference"), (["option", "mount", ""], "empty value"),
+})
+    ParseOption(tokens, false, "rejects " + name);
 // AtkTextNode replaces MouseClick data with a zeroed LinkData union. Only the
 // synchronous parent dispatch identifies its button; no frame/time cache is valid.
 var mouseContextType=typeof(NativeLinkContext).Assembly.GetType("FireGaze.LocalPreview.Interaction.NativeMouseDispatchContext");

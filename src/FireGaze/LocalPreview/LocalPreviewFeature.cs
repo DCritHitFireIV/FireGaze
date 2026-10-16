@@ -222,6 +222,28 @@ public sealed partial class LocalPreviewFeature : IDisposable
             case "cancel": Cancel(); break;
             case "on": SetEnabled(true); break;
             case "off": SetEnabled(false); break;
+            case "option":
+                if (!PreviewOptionCommand.TryParse(parts, out var option))
+                {
+                    Chat.PrintError("[本地试用] 用法：/firegaze preview option mount|minion|accessory|emote|items on|off");
+                    break;
+                }
+                switch (option.Option)
+                {
+                    case PreviewOption.Mount: SetCategory(MenuKind.Mount, option.Enabled); break;
+                    case PreviewOption.Minion: SetCategory(MenuKind.Minion, option.Enabled); break;
+                    case PreviewOption.Accessory: SetCategory(MenuKind.Accessory, option.Enabled); break;
+                    case PreviewOption.Emote: SetCategory(MenuKind.Emote, option.Enabled); break;
+                    case PreviewOption.Items: SetItemMenus(option.Enabled); break;
+                }
+                var optionName = option.Option switch
+                {
+                    PreviewOption.Mount => "坐骑", PreviewOption.Minion => "宠物",
+                    PreviewOption.Accessory => "时尚配饰", PreviewOption.Emote => "情感动作",
+                    _ => "物品右键试穿",
+                };
+                Chat.Print($"[本地试用] {optionName}已{(option.Enabled ? "开启" : "关闭")}。");
+                break;
             case "native":
                 if (pluginInterface.IsDev) ExecuteDevelopmentNative(parts);
                 break;
@@ -252,7 +274,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
             case "minion": ParseRequest(MenuKind.Minion, parts); break;
             case "accessory": ParseRequest(MenuKind.Accessory, parts); break;
             case "emote": ParseRequest(MenuKind.Emote, parts); break;
-            default: Chat.PrintError("[本地试用] 用法：/firegaze preview status|cancel|on|off|mount|minion|accessory|emote <编号>"); break;
+            default: Chat.PrintError("[本地试用] 用法：/firegaze preview status|cancel|on|off|mount|minion|accessory|emote <编号>；option <分类或 items> on|off"); break;
         }
     }
 
