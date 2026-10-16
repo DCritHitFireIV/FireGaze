@@ -1,0 +1,437 @@
+{
+  "issue": "direct-2026-10-16T05-46-53-597Z-25c0510c",
+  "receivedAt": "2026-10-16 05:47:05",
+  "author": "匿名直传",
+  "plugin": "Dropbox",
+  "fingerprint": "2735726586f1c84d",
+  "packFile": "Dropbox@user-273572.json",
+  "accepted": 48,
+  "filled": 48,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Dropbox",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "You begin trade with ",
+        "Translated": "开始与以下角色交易：",
+        "Context": "Dropbox.Chat_ChatMessage",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ Notify.Info"
+      },
+      {
+        "Original": "You finished trade with ",
+        "Translated": "完成与以下角色的交易：",
+        "Context": "Dropbox.Chat_ChatMessage",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ Notify.Info"
+      },
+      {
+        "Original": "Trade canceled",
+        "Translated": "交易已取消",
+        "Context": "Dropbox.Chat_ChatMessage",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Info"
+      },
+      {
+        "Original": "Tabs",
+        "Translated": "标签页",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Main",
+        "Translated": "常规",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Item Trade Queue",
+        "Translated": "物品交易队列",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Whitelist",
+        "Translated": "白名单",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Debug",
+        "Translated": "调试",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Enable auto-accept trades",
+        "Translated": "启用自动接受交易",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Save enabled state through game restarts",
+        "Translated": "重启游戏后保持启用状态",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Delay before accepting, s",
+        "Translated": "接受前延迟（秒）",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SliderIntAsFloat"
+      },
+      {
+        "Original": "Auto-confirm once 5 item slots are filled",
+        "Translated": "放满5格物品后自动确认",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Auto-confirm on incoming gil offering, >=",
+        "Translated": "收到金币大于等于该数值时自动确认：",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Silent operation",
+        "Translated": "静默运行",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Delay between trades, frames",
+        "Translated": "每次交易间隔延迟（帧）",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Trade open command throttle, ms",
+        "Translated": "发起交易命令频率限制（毫秒）",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Auto-clear focus target when finished trade",
+        "Translated": "交易完成后自动清除焦点目标",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Do not confirm outgoing trades",
+        "Translated": "不自动确认主动发起的交易",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Not operational",
+        "Translated": "未运行",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Accept trades only from whitelisted characters",
+        "Translated": "仅接受白名单角色的交易",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Add target",
+        "Translated": "添加目标",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Import from Game Files",
+        "Translated": "从游戏文件导入",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Point it to your game configuration folder, usually it's \"Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn\" unless you changed it or using Linux. Character IDs on which you ever logged in will be whitelisted. Their names, however, will not be resolved. You'll have to trade with them or log into them to populate name.",
+        "Translated": "将其指向你的游戏配置文件夹，通常为“Documents\\My Games\\FINAL FANTASY XIV - 重生之境”（除非你修改过或正在使用 Linux）。曾登录过的角色 ID 将被加入白名单。但角色名不会被直接读取，需要与对应角色交易或登录该角色以填充名字。",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "~Character",
+        "Translated": "~角色",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Character ",
+        "Translated": "角色",
+        "Context": "Dropbox.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Tasks",
+        "Translated": "任务",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Step on",
+        "Translated": "开启单步",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Step off",
+        "Translated": "关闭单步",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Step",
+        "Translated": "单步执行",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Maxgil",
+        "Translated": "最大金币",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Open",
+        "Translated": "打开",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Set 6",
+        "Translated": "设置 6",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Plugin is paused by ",
+        "Translated": "插件已被以下暂停：",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Resume",
+        "Translated": "继续",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Stop",
+        "Translated": "停止",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Processing task: \n",
+        "Translated": "正在处理任务：",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Select items to trade:",
+        "Translated": "选择要交易的物品：",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Search",
+        "Translated": "搜索",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Show only selected",
+        "Translated": "仅显示已选",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Gil",
+        "Translated": "金币",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Checkbox"
+      },
+      {
+        "Original": "Items",
+        "Translated": "道具",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Checkbox"
+      },
+      {
+        "Original": "Crystals",
+        "Translated": "水晶",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Checkbox"
+      },
+      {
+        "Original": "All",
+        "Translated": "全部",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Checkbox"
+      },
+      {
+        "Original": "Tradeable gear",
+        "Translated": "可交易装备",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Checkbox"
+      },
+      {
+        "Original": "Begin trading with ",
+        "Translated": "开始交易：",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Clear focus target",
+        "Translated": "清除焦点目标",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Focus target your trade partner to begin trading.",
+        "Translated": "将交易对象设为焦点目标以开始交易。",
+        "Context": "ItemQueueUI.Draw",
+        "Source": "ai:llm",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Left click - all\nRight click - none",
+        "Translated": "左键点击 - 全部\n右键点击 - 无",
+        "Context": "Draw",
+        "Source": "ai:llm",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HoveredAndClicked"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
