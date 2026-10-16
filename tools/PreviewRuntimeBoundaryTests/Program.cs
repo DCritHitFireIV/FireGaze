@@ -28,6 +28,10 @@ var tests = new (string, Action)[] {
     ("new native minion wins over displaced baseline", ImplicitMinionWinner),
     ("accepted winner timeline is never replayed over", AcceptedTimeline),
     ("old territory cannot restore baseline before next update", RestoreOldTerritory),
+    ("managed emote rejection overrides a misleading native true", EvidenceRejected),
+    ("managed emote acceptance commits once and preserves outer result", EvidenceAccepted),
+    ("nested evidence rejection does not undo an earlier real execution", EvidenceNestedWinner),
+    ("evidence outside native run cannot affect the next input", EvidenceOutside),
 };
 var failed = 0;
 foreach (var (name, test) in tests) { try { test(); Console.WriteLine("PASS " + name); } catch(Exception ex) { failed++; Console.WriteLine("FAIL " + name + ": " + ex.Message); } }
@@ -35,6 +39,26 @@ Console.WriteLine($"{tests.Length - failed}/{tests.Length} passed");
 return failed == 0 ? 0 : 1;
 
 static void Equal<T>(T actual, T expected) { if (!EqualityComparer<T>.Default.Equals(actual, expected)) throw new Exception($"expected {expected}; got {actual}"); }
+static void EvidenceRejected() {
+ var bridge = new NativeInputHandoff<int>(); var lease = new Lease(); int runs=0;
+ Equal(bridge.Run(1, () => { runs++; Equal(bridge.ReportDecision(1,false),true); return true; },true,_=>lease),true);
+ Equal(runs,1); Equal(lease.Accepted,0); Equal(lease.Resumed,1);
+}
+static void EvidenceAccepted() {
+ var bridge = new NativeInputHandoff<int>(); var lease = new Lease(); int runs=0;
+ Equal(bridge.Run(1, () => { runs++; Equal(bridge.ReportDecision(9,true),true); return false; },true,_=>lease),false);
+ Equal(runs,1); Equal(lease.Accepted,1); Equal(lease.AcceptedIntent,9); Equal(lease.Resumed,0);
+}
+static void EvidenceNestedWinner() {
+ var bridge = new NativeInputHandoff<int>(); var lease = new Lease();
+ Equal(bridge.Run(1, () => { bridge.Run(9,()=>true,true,_=>new Lease()); bridge.ReportDecision(1,false); return true; },true,_=>lease),true);
+ Equal(lease.Accepted,1); Equal(lease.AcceptedIntent,9);
+}
+static void EvidenceOutside() {
+ var bridge = new NativeInputHandoff<int>(); var lease = new Lease();
+ Equal(bridge.ReportDecision(9,true),false);
+ Equal(bridge.Run(1,()=>false,true,_=>lease),false); Equal(lease.Accepted,0); Equal(lease.Resumed,1);
+}
 static void Rejected() {
  var bridge = new NativeInputHandoff<int>(); var lease = new Lease(); int runs=0;
  var ret = bridge.Run(1, () => { runs++; Equal(lease.Suspended, true); return false; }, startedFromResult: true, _ => lease);

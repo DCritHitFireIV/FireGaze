@@ -15,5 +15,9 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../FireGaze.LocalPreview.Core/FireGaze.LocalPreview.Core.csproj" />
+    <Reference Include="0Harmony">
+      <HintPath>$(DalamudLibPath)0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 </Project>

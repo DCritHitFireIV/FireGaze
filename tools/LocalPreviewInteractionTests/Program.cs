@@ -74,6 +74,38 @@ Check(!templates.TryResolve(new byte[] { 7 }, out _) && !templates.TryResolve([]
 templates.Add(45, new byte[] { 8, 9 });
 templates.ExcludeNonEmoteTemplate(new byte[] { 8, 9 });
 Check(!templates.TryResolve(new byte[] { 8, 9 }, out _), "system log sharing emote template cannot become a false clickable action");
+
+// Missing native queue identity, reusing the latest action, or keeping a retired
+// queue slot must fail these consumer-visible fixed-message identity checks.
+var queueBindings = new NativeEmoteQueueBindings();
+queueBindings.CaptureEmission((ushort)42, Array.Empty<nint>(), new nint[] { 100 });
+queueBindings.CaptureEmission((ushort)43, new nint[] { 100 }, new nint[] { 100, 200 });
+ushort exactQueueId;
+Check(queueBindings.TryGet((nint)100, out exactQueueId) && exactQueueId == 42, "an earlier queued sentence keeps its original emote after a later native action");
+Check(queueBindings.TryGet((nint)200, out exactQueueId) && exactQueueId == 43, "different actions with identical prose retain independent numeric identities");
+queueBindings.RetainLive(new nint[] { 100, 200 });
+queueBindings.CompleteFormat((nint)100, 0);
+Check(queueBindings.TryGet((nint)100, out exactQueueId) && exactQueueId == 42, "native format retry retains exact identity across delayed queue processing");
+queueBindings.CompleteFormat((nint)100, 1);
+Check(!queueBindings.TryGet((nint)100, out exactQueueId), "successful format retires the queue binding before its slot can be reused");
+queueBindings.CompleteFormat((nint)200, -1);
+Check(!queueBindings.TryGet((nint)200, out exactQueueId), "native rejected format retires the queue binding without converting minus one to true");
+queueBindings.CaptureEmission((ushort)44, Array.Empty<nint>(), new nint[] { 100 });
+queueBindings.RetainLive(Array.Empty<nint>());
+Check(!queueBindings.TryGet((nint)100, out exactQueueId), "queue removal clears a message that was filtered before formatting");
+queueBindings.CaptureEmission((ushort)45, Array.Empty<nint>(), new nint[] { 100 });
+Check(queueBindings.TryGet((nint)100, out exactQueueId) && exactQueueId == 45, "reused queue storage belongs only to the new native emission");
+queueBindings.CaptureEmission((ushort)46, new nint[] { 100 }, new nint[] { 100 });
+Check(queueBindings.TryGet((nint)100, out exactQueueId) && exactQueueId == 45, "an action that adds no log cannot steal an already queued sentence");
+queueBindings.CaptureEmission((ushort)47, new nint[] { 100 }, new nint[] { 100, 300, 400 });
+Check(!queueBindings.TryGet((nint)300, out exactQueueId) && !queueBindings.TryGet((nint)400, out exactQueueId), "unexpected multiple emissions cannot guess a message owner");
+queueBindings.CaptureEmission((ushort)48, new nint[] { 100 }, new nint[] { 100, 500 });
+queueBindings.CaptureEmission((ushort)49, new nint[] { 100 }, new nint[] { 100, 500, 600 });
+Check(queueBindings.TryGet((nint)500, out exactQueueId) && exactQueueId == 48
+    && queueBindings.TryGet((nint)600, out exactQueueId) && exactQueueId == 49,
+    "nested native emissions keep their own queue item instead of inheriting the outer action");
+queueBindings.Clear();
+Check(!queueBindings.TryGet((nint)500, out exactQueueId), "disposal clears all pending queue identities");
 Console.WriteLine($"PASS: {passed} interaction checks");
 
 var sqpackOption = Array.IndexOf(args, "--sqpack");
@@ -114,5 +146,26 @@ if (sqpackOption >= 0 && sqpackOption + 1 < args.Length)
     Console.WriteLine($"CN emotes={emotes.Count} withLogRows={emotesWithLogs} uniqueTemplates={logIndex.UniqueCount} ambiguousTemplates={logIndex.AmbiguousCount}");
     foreach (var conflict in logIndex.ConflictEmoteGroups)
         Console.WriteLine("CN ambiguous template emotes=" + string.Join(",", conflict));
+    var cnBindings = new NativeEmoteQueueBindings();
+    var cnQueue = new List<nint>();
+    var cnMessageIds = new List<ushort>();
+    foreach (var emote in emotes)
+    {
+        if (emote.RowId == 0 || emote.RowId > ushort.MaxValue
+            || (emote.LogMessageTargeted.RowId == 0 && emote.LogMessageUntargeted.RowId == 0)) continue;
+        var before = cnQueue.ToArray();
+        cnQueue.Add((nint)emote.RowId);
+        cnMessageIds.Add((ushort)emote.RowId);
+        cnBindings.CaptureEmission((ushort)emote.RowId, before, cnQueue.ToArray());
+    }
+    foreach (var id in cnMessageIds)
+    {
+        Check(cnBindings.TryGet((nint)id, out var immutableId) && immutableId == id,
+            "CN native emission keeps exact action after every later queued action: " + id);
+        var sentence = NativeEmoteLinkBuilder.Wrap(new SeStringBuilder().Append("原生情感动作提示。").ToArray(), immutableId);
+        Check(NativeEmoteLinkBuilder.TryReadEmoteId(sentence, out var menuId) && menuId == id,
+            "CN sentence menu resolves numeric action even when all prose is identical: " + id);
+    }
+    Console.WriteLine($"CN exact queue and sentence identity coverage={cnMessageIds.Count}/{emotesWithLogs}");
     Console.WriteLine($"PASS: {passed} interaction checks including current CN item data");
 }

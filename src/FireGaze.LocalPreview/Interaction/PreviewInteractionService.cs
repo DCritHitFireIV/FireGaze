@@ -38,7 +38,7 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     private bool chatProbeEnabled;
 
     public InteractionCapabilities Capabilities { get; private set; } =
-        new(true, true, false, false, "原生情感提示整句右键探针尚未开启；角色和收录物品菜单已注册。");
+        new(true, true, false, false, "原生情感提示整句链接尚未开启；角色和收录物品菜单已注册。");
     public int ObservedEmotes { get; private set; }
     public int ChatMessagesLinked { get; private set; }
     public int ChatMessagesWithoutExactContext { get; private set; }
@@ -75,16 +75,16 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     }
 
     /// <summary>
-    /// Enables exact native emote-log capture and observes native link events through public
-    /// addon lifecycle callbacks. The caller controls when this probe is run.
+    /// Enables exact native emote-log capture and native menu context. Call during
+    /// normal feature initialization so every subsequent native sentence is linked.
     /// </summary>
-    public bool EnableNativeChatProbe()
+    public bool EnableNativeChatLinks()
     {
         if (disposed) return false;
-        if (chatProbeEnabled) return true;
+        if (chatProbeEnabled) return nativeLogCapture.Enabled;
         if (addonLifecycle is null)
         {
-            Capabilities = Capabilities with { Detail = "未提供原生界面生命周期服务；整句探针未开启。" };
+            Capabilities = Capabilities with { Detail = "未提供原生界面生命周期服务；整句链接未开启。" };
             return false;
         }
         try
@@ -95,22 +95,25 @@ public sealed unsafe class PreviewInteractionService : IDisposable
             chatProbeEnabled = true;
             Capabilities = Capabilities with
             {
-                NativeEmoteSentenceProbe = true,
+                NativeEmoteSentenceProbe = captureReady,
                 Detail = captureReady
-                    ? "已开启原生情感句捕获和 Emote 链接探针；须实测整句右键菜单，不代表已经通过验收。"
-                    : "原生句捕获未开启；仅可用原生 Emote 示例链接验证右键链路，基础右键菜单仍可使用。",
+                    ? "已开启原生情感句捕获：每句绑定发出时的 Emote ID，可经游戏原生菜单试用；仍需实测验收。"
+                    : "原生情感句捕获未开启，已有 Emote 链接的菜单观察和基础右键菜单仍可使用。",
             };
-            return true;
+            return captureReady;
         }
         catch (Exception ex)
         {
             addonLifecycle.UnregisterListener(AddonEvent.PreReceiveEvent, ChatPanels, BeforeNativeChatEvent);
             addonLifecycle.UnregisterListener(AddonEvent.PostReceiveEvent, ChatPanels, AfterNativeChatEvent);
-            log.Error(ex, "[LocalPreview] Native chat sentence probe could not start.");
-            Capabilities = Capabilities with { Detail = "原生情感提示链接探针启动失败。" };
+            log.Error(ex, "[LocalPreview] Native chat sentence links could not start.");
+            Capabilities = Capabilities with { Detail = "原生情感提示链接启动失败。" };
             return false;
         }
     }
+
+    // Retain the existing diagnostic command API; normal hosts call the method above.
+    public bool EnableNativeChatProbe() => EnableNativeChatLinks();
 
     public void RecordEmote(ulong actorObjectId, ushort emoteId)
     {

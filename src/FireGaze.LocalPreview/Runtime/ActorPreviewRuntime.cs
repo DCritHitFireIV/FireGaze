@@ -28,7 +28,7 @@ public sealed record RuntimeCapabilities(bool Mount, bool Minion, bool Accessory
 /// relinquishes all ownership. Never invokes an action manager to implement a preview.
 /// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-public sealed unsafe class ActorPreviewRuntime : IDisposable
+public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
 {
     private readonly IFramework framework;
     private readonly IClientState clientState;
@@ -51,6 +51,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     private Hook<EmoteController.Delegates.PlayEmote>? playEmote;
     private Hook<MountContainer.Delegates.CreateAndSetupMount>? mountSetup;
     private ActorSnapshot? baseline;
+    private HmsPresentationBaseline? hmsBaseline;
     private nint actorAddress;
     private ulong actorId;
     private uint territory;
@@ -61,11 +62,14 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     private long revision;
     private ExternalBinding? externalBinding;
     private NativeIntent externalIntent;
+    private long nextHmsEvidence;
+    private readonly Dictionary<long, (ExternalBinding Binding, ushort EmoteId)> hmsEvidence = new();
 
     public event Action<ulong, ushort>? EmoteObserved;
     public event Action<ulong, ushort>? NativeEmoteEntered;
     public event Action<ulong, ushort>? NativeEmoteExited;
     public event Action? NativeInputAccepted;
+    public event Action<ushort>? ExternalEmoteAccepted;
     public event Action<string>? PreviewCancelled;
     public (ulong OwnerId, ushort EmoteId)? CurrentNativeEmote { get; private set; }
     public bool HasActivePreview => effects.Count != 0;
@@ -78,6 +82,46 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
         return !disposed && HasActivePreview && BindingCurrent() && baseline is { } snapshot
             ? new(1, true, actorId, territory, revision, snapshot.Presentation)
             : new(1, false, 0, clientState.TerritoryType, revision, null);
+    }
+
+    public bool TryGetHmsCaptureFrame(out HmsCaptureFrame frame)
+    {
+        frame = default;
+        if (disposed || objects.LocalPlayer is not { } player || !clientState.IsLoggedIn) return false;
+        if (!HasActivePreview)
+        {
+            frame = new(player.Address, player.GameObjectId, clientState.TerritoryType, revision, false, default, false, false);
+            return true;
+        }
+        if (!BindingCurrent() || hmsBaseline is not { } snapshot) return false;
+        var actor = Bound();
+        bool ownedEmoteTimeline = effects.TryGetValue(PreviewSlot.Emote, out var emote)
+            && actor->EmoteController.EmoteId == emote.Id && IsEmoteTimeline(actor, emote.Id);
+        frame = new(actorAddress, actorId, territory, revision, true, snapshot,
+            effects.ContainsKey(PreviewSlot.Mount), ownedEmoteTimeline);
+        return true;
+    }
+    public bool IsHmsCaptureFrameCurrent(in HmsCaptureFrame frame)
+        => !disposed && clientState.IsLoggedIn && objects.LocalPlayer is { } player
+            && player.Address == frame.Address && player.GameObjectId == frame.ActorId
+            && clientState.TerritoryType == frame.Territory && revision == frame.Revision
+            && HasActivePreview == frame.Project && (!frame.Project || BindingCurrent());
+
+    /// <summary>Records actual HMS dispatch even when an outer native emote hook owns suspension.</summary>
+    public long BeginHmsEmoteEvidence(ushort id)
+    {
+        if (disposed || ownCall || !HasActivePreview || !BindingCurrent() || id == 0
+            || nextHmsEvidence == long.MaxValue || hmsEvidence.Count >= 64) return 0;
+        long token = ++nextHmsEvidence;
+        hmsEvidence.Add(token, (new(actorAddress, actorId, territory, revision), id));
+        return token;
+    }
+    public void CompleteHmsEmoteEvidence(long token, bool accepted)
+    {
+        if (token == 0 || !hmsEvidence.Remove(token, out var evidence)) return;
+        if (disposed || !BindingCurrent()
+            || evidence.Binding != new ExternalBinding(actorAddress, actorId, territory, revision)) return;
+        handoff.ReportDecision(new(PreviewSlot.Emote, evidence.EmoteId), accepted);
     }
 
     /// <summary>The external plugin invokes its operation exactly once between these two methods.</summary>
@@ -451,11 +495,14 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
         territory = clientState.TerritoryType;
         actorAddress = (nint)actor;
         actorId = objects.LocalPlayer?.GameObjectId ?? 0;
-        baseline = ActorSnapshot.Read(actor);
+        // Long-lived baselines contain values only. Child addresses are useful solely inside
+        // a synchronous native suspension and are never retained across preview frames.
+        baseline = ActorSnapshot.Read(actor, includeObjectAddresses: false);
+        hmsBaseline = HmsPresentationBaseline.Read(actor);
         revision++;
         return true;
     }
-    private void Forget() { InvalidateExternalPresentation(); implicitMinion.Reset(); baseline = null; actorAddress = 0; actorId = 0; revision++; }
+    private void Forget() { InvalidateExternalPresentation(); implicitMinion.Reset(); hmsEvidence.Clear(); baseline = null; hmsBaseline = null; actorAddress = 0; actorId = 0; revision++; }
     private NativeCharacter* Local() => objects.LocalPlayer is { } p ? (NativeCharacter*)p.Address : null;
     private NativeCharacter* Bound() => objects.LocalPlayer is { } p && p.Address == actorAddress && p.GameObjectId == actorId ? (NativeCharacter*)p.Address : null;
     private static ushort MinionId(NativeCharacter* actor) => actor->CompanionData.CompanionObject == null ? (ushort)0 : (ushort)actor->CompanionData.CompanionObject->BaseId;
@@ -575,8 +622,14 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     private bool CanAgentEmoteDetour(AgentEmote* agent, ushort id) => Bypass ? canAgentEmote!.Original(agent,id) : InspectNative(() => canAgentEmote!.Original(agent,id),new(PreviewSlot.Emote,id));
     private bool ExecuteEmoteDetour(EmoteManager* mgr, ushort id, EmoteController.PlayEmoteOption* option)
     {
-        if (Bypass) return executeEmote!.Original(mgr,id,option);
-        return RunNative(new(PreviewSlot.Emote,id), () => executeEmote!.Original(mgr,id,option), true);
+        bool Original()
+        {
+            bool accepted = executeEmote!.Original(mgr,id,option);
+            if (accepted && !ownCall && id != 0) Raise(ExternalEmoteAccepted, id);
+            return accepted;
+        }
+        if (Bypass) return Original();
+        return RunNative(new(PreviewSlot.Emote,id), Original, true);
     }
     private void ExecuteAgentEmoteDetour(AgentEmote* agent, ushort id, EmoteController.PlayEmoteOption* option, bool history, bool live)
     {
@@ -601,6 +654,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
             }
             if (result && !ownCall && !(handoff.HasExternal && owner == actorId) && id is > 0 and <= ushort.MaxValue)
                 Raise(EmoteObserved,owner,(ushort)id);
+            if (result && !ownCall && owner == objects.LocalPlayer?.GameObjectId && id is > 0 and <= ushort.MaxValue)
+                Raise(ExternalEmoteAccepted, (ushort)id);
             return result;
         }
         finally
@@ -776,7 +831,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
         ushort MountId, ushort MinionId, ushort AccessoryId, nint MountObject, nint MinionObject, nint AccessoryObject,
         PresentationSnapshot Presentation)
     {
-        public static ActorSnapshot Read(NativeCharacter* actor)
+        public static ActorSnapshot Read(NativeCharacter* actor, bool includeObjectAddresses = true)
         {
             var companion = actor->CompanionData.CompanionObject;
             var minionGo = (FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*)companion;
@@ -803,7 +858,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
             return new(actor->Mode,actor->ModeParam,actor->EmoteController.EmoteId,
                 actor->EmoteController.CPoseState,actor->EmoteController.CurrentPoseType,actor->Timeline.BaseOverride,
                 actor->Timeline.TimelineSequencer.TimelineIds[0],actor->Mount.MountId,ActorPreviewRuntime.MinionId(actor),actor->OrnamentData.OrnamentId,
-                (nint)mount,(nint)companion,(nint)actor->OrnamentData.OrnamentObject,presentation);
+                includeObjectAddresses ? (nint)mount : 0,includeObjectAddresses ? (nint)companion : 0,
+                includeObjectAddresses ? (nint)actor->OrnamentData.OrnamentObject : 0,presentation);
         }
     }
 
@@ -813,10 +869,15 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     public void Dispose()
     {
         if (disposed) return;
-        framework.Update -= Update;
-        ClearAll();
-        disposed = true;
-        foreach(var hook in installedHooks.AsEnumerable().Reverse()) { try { hook.Dispose(); } catch(Exception ex) { log.Warning(ex,"[LocalPreview] Hook disposal failed."); } }
-        installedHooks.Clear();
+        try { framework.Update -= Update; } catch (Exception ex) { ReportHandoff(ex); }
+        try { ClearAll(); }
+        catch (Exception ex) { ReportHandoff(ex); }
+        finally
+        {
+            effects.Clear(); spawnWait.Clear(); Forget(); disposed = true;
+            foreach(var hook in installedHooks.AsEnumerable().Reverse())
+                try { hook.Dispose(); } catch(Exception ex) { try { log.Warning(ex,"[LocalPreview] Hook disposal failed."); } catch { } }
+            installedHooks.Clear();
+        }
     }
 }

@@ -44,6 +44,14 @@ public sealed class Plugin : IDalamudPlugin
     /// </summary>
     [PluginService] public static IDataManager DataManager { get; private set; } = null!;
 
+    [PluginService] public static IClientState ClientState { get; private set; } = null!;
+    [PluginService] public static IObjectTable Objects { get; private set; } = null!;
+    [PluginService] public static ICondition Conditions { get; private set; } = null!;
+    [PluginService] public static IGameInteropProvider Interop { get; private set; } = null!;
+    [PluginService] public static IGameGui GameGUI { get; private set; } = null!;
+    [PluginService] public static IContextMenu ContextMenu { get; private set; } = null!;
+    [PluginService] public static IAddonLifecycle AddonLifecycle { get; private set; } = null!;
+
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
     private readonly MainWindow window;
@@ -64,6 +72,7 @@ public sealed class Plugin : IDalamudPlugin
     private DateTime iconWarmUpRetryAfter = DateTime.MinValue;
     private bool iconWarmUpRequested;
     private bool startupInitDone;
+    private LocalPreview.LocalPreviewFeature? localPreview;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
 
@@ -252,6 +261,21 @@ public sealed class Plugin : IDalamudPlugin
         {
             Log.Error(e, "[FireGaze] 延迟初始化失败");
         }
+
+        try
+        {
+            localPreview = new LocalPreview.LocalPreviewFeature(pluginInterface, Framework, ClientState,
+                Objects, Conditions, DataManager, Interop, Log, Chat, GameGUI, ContextMenu,
+                CommandManager, AddonLifecycle, Config.LocalPreviewEnabled, value =>
+                {
+                    Config.LocalPreviewEnabled = value;
+                    SaveConfig(force: true);
+                });
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "[FireGaze] 本地试用初始化失败");
+        }
     }
 
     /// <summary>
@@ -357,6 +381,16 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
+        try
+        {
+            localPreview?.Dispose();
+            localPreview = null;
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "[FireGaze] 本地试用清理失败");
+        }
+
         uiTextTab.StopWorkflows();
         try
         {
@@ -520,7 +554,16 @@ public sealed class Plugin : IDalamudPlugin
 
     private void OnCommand(string command, string args)
     {
-        var arg = args.Trim().ToLowerInvariant();
+        var trimmed = args.Trim();
+        if (trimmed.Equals("preview", StringComparison.OrdinalIgnoreCase)
+            || trimmed.StartsWith("preview ", StringComparison.OrdinalIgnoreCase))
+        {
+            if (localPreview is null) Chat.PrintError("[本地试用] 功能正在初始化，请稍后再试。");
+            else localPreview.OnCommand(trimmed["preview".Length..].TrimStart());
+            return;
+        }
+
+        var arg = trimmed.ToLowerInvariant();
 
         switch (arg)
         {
@@ -540,7 +583,7 @@ public sealed class Plugin : IDalamudPlugin
                 OpenContributeWindow();
                 break;
             default:
-                Chat.Print("[FireGaze] 用法：/firegaze [zh|update|translate]");
+                Chat.Print("[FireGaze] 用法：/firegaze [zh|update|translate|preview]");
                 break;
         }
     }

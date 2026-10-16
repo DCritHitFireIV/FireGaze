@@ -51,12 +51,26 @@ public sealed class NativeInputHandoff<TIntent>
     private int depth;
     private bool started;
     private TIntent acceptedIntent = default!;
+    private long decisionRevision;
     private long nextExternalToken;
     private long externalToken;
     private TIntent externalIntent = default!;
     private IPreviewSuspension<TIntent>? externalLease;
 
     public bool HasExternal => externalToken != 0;
+
+    /// <summary>
+    /// A reviewed managed executor can report stronger evidence than its enclosing native bool.
+    /// Rejection suppresses inference from that call's return value; it never erases an earlier
+    /// accepted nested native execution. Return values and original invocation counts are untouched.
+    /// </summary>
+    public bool ReportDecision(TIntent intent, bool accepted)
+    {
+        if (depth == 0 || HasExternal) return false;
+        decisionRevision++;
+        if (accepted) { started = true; acceptedIntent = intent; }
+        return true;
+    }
 
     /// <summary>
     /// Suspends once before an external plugin reads presentation state. The caller alone invokes
@@ -102,8 +116,9 @@ public sealed class NativeInputHandoff<TIntent>
     {
         if (depth > 0)
         {
+            long decisionBefore = decisionRevision;
             bool nestedResult = original();
-            if (nestedResult && startedFromResult)
+            if (nestedResult && startedFromResult && decisionBefore == decisionRevision)
             {
                 started = true;
                 acceptedIntent = intent;
@@ -116,10 +131,11 @@ public sealed class NativeInputHandoff<TIntent>
         acceptedIntent = intent;
         depth++;
         bool result;
+        long outerDecisionBefore = decisionRevision;
         try
         {
             result = original();
-            if (result && startedFromResult)
+            if (result && startedFromResult && outerDecisionBefore == decisionRevision)
             {
                 started = true;
                 acceptedIntent = intent;

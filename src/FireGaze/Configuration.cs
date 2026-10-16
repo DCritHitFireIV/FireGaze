@@ -84,6 +84,9 @@ public sealed class Configuration : IPluginConfiguration
     [JsonProperty("Version")]
     public int Version { get; set; } = 1;
 
+    [JsonProperty("LocalPreviewEnabled")]
+    public bool LocalPreviewEnabled { get; set; } = true;
+
     // ---------------- 插件安装器（位置记忆 + 拦住自动刷新） ----------------
 
     /// <summary>
