@@ -87,6 +87,21 @@ public sealed class Configuration : IPluginConfiguration
     [JsonProperty("LocalPreviewEnabled")]
     public bool LocalPreviewEnabled { get; set; } = true;
 
+    [JsonProperty("LocalPreviewItemMenusEnabled")]
+    public bool LocalPreviewItemMenusEnabled { get; set; } = true;
+
+    [JsonProperty("LocalPreviewMountEnabled")]
+    public bool LocalPreviewMountEnabled { get; set; } = true;
+
+    [JsonProperty("LocalPreviewMinionEnabled")]
+    public bool LocalPreviewMinionEnabled { get; set; } = true;
+
+    [JsonProperty("LocalPreviewAccessoryEnabled")]
+    public bool LocalPreviewAccessoryEnabled { get; set; } = true;
+
+    [JsonProperty("LocalPreviewEmoteEnabled")]
+    public bool LocalPreviewEmoteEnabled { get; set; } = true;
+
     // ---------------- 插件安装器（位置记忆 + 拦住自动刷新） ----------------
 
     /// <summary>

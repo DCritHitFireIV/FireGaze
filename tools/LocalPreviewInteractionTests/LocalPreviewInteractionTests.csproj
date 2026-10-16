@@ -7,7 +7,10 @@
     <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze.LocalPreview/Interaction/NativeEmoteMenuPolicy.cs" Link="NativeEmoteMenuPolicy.cs" />
     <Compile Include="../../src/FireGaze.LocalPreview/Interaction/InteractionModels.cs" Link="InteractionModels.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Interaction/PreviewCatalog.cs" Link="PreviewCatalog.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Interaction/ChatItemMenuResolver.cs" Link="ChatItemMenuResolver.cs" />
     <Compile Include="../../src/FireGaze.LocalPreview/Interaction/NativeEmoteLinkBuilder.cs" Link="NativeEmoteLinkBuilder.cs" />
     <Compile Include="../../src/FireGaze.LocalPreview/Interaction/EmoteLogTemplateIndex.cs" Link="EmoteLogTemplateIndex.cs" />
     <Compile Include="../../src/FireGaze.LocalPreview/Interaction/NativeEmoteQueueBindings.cs" Link="NativeEmoteQueueBindings.cs" />

@@ -4,7 +4,7 @@ $ErrorActionPreference = 'Stop'
 $previewRoot = $PSScriptRoot
 $env:DALAMUD_HOME = Join-Path $env:APPDATA 'XIVLauncherCN\addon\Hooks\dev'
 
-foreach ($previewSuite in @('LocalPreviewTests', 'PreviewRuntimeBoundaryTests', 'HmsShadowTests', 'HmsOriginalAdapterTests')) {
+foreach ($previewSuite in @('LocalPreviewTests', 'PreviewRuntimeBoundaryTests', 'NativePreviewActorTests', 'NativeDismountTests', 'HmsShadowTests', 'HmsOriginalAdapterTests')) {
     dotnet run --project (Join-Path $previewRoot "tools\$previewSuite\$previewSuite.csproj") -c Release
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }

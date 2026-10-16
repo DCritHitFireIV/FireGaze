@@ -255,7 +255,7 @@ public sealed class Plugin : IDalamudPlugin
             Log.Information(
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {Table.Count} 条；" +
                 $"汉化 = {(Config.TranslateEnabled ? "开" : "关")}");
-            Log.Information("[FireGaze] 页签顺序：插件汉化 / 插件发现 / 仓库体检 / 简介汉化 / 插件安装器");
+            Log.Information("[FireGaze] 页签顺序：插件汉化 / 插件发现 / 仓库体检 / 简介汉化 / 插件安装器 / 坐骑试用");
         }
         catch (Exception e)
         {
@@ -266,11 +266,7 @@ public sealed class Plugin : IDalamudPlugin
         {
             localPreview = new LocalPreview.LocalPreviewFeature(pluginInterface, Framework, ClientState,
                 Objects, Conditions, DataManager, Interop, Log, Chat, GameGUI, ContextMenu,
-                CommandManager, AddonLifecycle, Config.LocalPreviewEnabled, value =>
-                {
-                    Config.LocalPreviewEnabled = value;
-                    SaveConfig(force: true);
-                });
+                CommandManager, AddonLifecycle, Config, () => SaveConfig(force: true));
         }
         catch (Exception e)
         {
@@ -542,6 +538,16 @@ public sealed class Plugin : IDalamudPlugin
         OpenWindow(MainTab.UIText);
     }
 
+    internal void DrawLocalPreview()
+    {
+        if (localPreview is null)
+        {
+            ImGui.TextWrapped("本地试用功能正在初始化，请稍后再试。");
+            return;
+        }
+        localPreview.DrawContent();
+    }
+
     /// <summary>
     ///     打开「插件发现」页签（原「参与翻译」独立窗口已并入主窗口第五页签）。
     /// </summary>
@@ -558,8 +564,10 @@ public sealed class Plugin : IDalamudPlugin
         if (trimmed.Equals("preview", StringComparison.OrdinalIgnoreCase)
             || trimmed.StartsWith("preview ", StringComparison.OrdinalIgnoreCase))
         {
-            if (localPreview is null) Chat.PrintError("[本地试用] 功能正在初始化，请稍后再试。");
-            else localPreview.OnCommand(trimmed["preview".Length..].TrimStart());
+            var previewArguments = trimmed["preview".Length..].TrimStart();
+            if (previewArguments.Length == 0) OpenWindow(MainTab.LocalPreview);
+            else if (localPreview is null) Chat.PrintError("[本地试用] 功能正在初始化，请稍后再试。");
+            else localPreview.OnCommand(previewArguments);
             return;
         }
 

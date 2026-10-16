@@ -9,6 +9,8 @@ namespace FireGaze.LocalPreview.Runtime {
         public event Action<ushort>? ExternalEmoteAccepted;
         public bool HasActivePreview {get;set;}
         public int EvidenceCompleted,Rejections,Accepted,Cleanups;
+        public nint OwnedDisplay;
+        public bool OwnsDisplayActor(nint address)=>address!=0 && address==OwnedDisplay;
         public CaptureProjection GetCaptureProjection()=>new(1,false,0,0,0,null);
         public long BeginExternalPresentation(int kind,uint id)=>HasActivePreview?1:0;
         public bool EndExternalPresentation(long token,bool accepted) {if(accepted) Accepted++; else Rejections++;return true;}

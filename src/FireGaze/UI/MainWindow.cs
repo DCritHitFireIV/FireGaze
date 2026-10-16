@@ -6,7 +6,7 @@ using FireGaze.Diagnostics;
 namespace FireGaze.UI;
 
 /// <summary>
-///     主窗口的页签（顺序就是界面上的顺序：插件汉化 → 插件发现 → 仓库体检 → 简介汉化 → 插件安装器）。
+///     主窗口的页签（界面顺序：插件汉化 → 插件发现 → 仓库体检 → 简介汉化 → 插件安装器 → 坐骑试用）。
 /// </summary>
 public enum MainTab
 {
@@ -15,6 +15,7 @@ public enum MainTab
     Installer = 2,
     Discovery = 3,
     UIText = 4,
+    LocalPreview = 5,
 }
 
 /// <summary>
@@ -132,6 +133,14 @@ internal sealed class MainWindow : Window
             {
                 using var timing = uiDiagnostics.Measure("Installer.Draw");
                 installerTab.Draw();
+                ImGui.EndTabItem();
+            }
+
+            flags = pendingSelect == MainTab.LocalPreview ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            if (ImGui.BeginTabItem("坐骑试用", flags))
+            {
+                using var timing = uiDiagnostics.Measure("LocalPreview.Draw");
+                plugin.DrawLocalPreview();
                 ImGui.EndTabItem();
             }
 

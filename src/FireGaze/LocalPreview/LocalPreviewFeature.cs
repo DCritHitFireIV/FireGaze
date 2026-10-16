@@ -15,7 +15,7 @@ namespace FireGaze.LocalPreview;
 using FireGaze.LocalPreview.Compatibility;
 
 /// <summary>FireGaze-owned local preview feature and diagnostics.</summary>
-public sealed class LocalPreviewFeature : IDisposable
+public sealed partial class LocalPreviewFeature : IDisposable
 {
     private readonly IFramework Framework;
     private readonly IClientState ClientState;
@@ -31,14 +31,14 @@ public sealed class LocalPreviewFeature : IDisposable
     private readonly IAddonLifecycle AddonLifecycle;
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly ICallGateProvider<string> diagnosticsIpc;
-    private readonly Action<bool> saveEnabled;
+    private readonly Configuration config;
+    private readonly Action saveConfig;
     private HmsOriginalAdapter? hmsAdapter;
     private ActorPreviewRuntime? runtime;
     private PreviewInteractionService? interaction;
     private bool enabled;
     private bool diagnosticsRegistered;
     private bool initialized;
-    private bool visible;
     private bool disposed;
     private string lastMessage = "等待插件加载阶段完成";
     private HmsCoexistenceDecision coexistence = HmsCoexistencePolicy.Decide(0, null);
@@ -48,21 +48,21 @@ public sealed class LocalPreviewFeature : IDisposable
         IClientState clientState, IObjectTable objects, ICondition conditions, IDataManager data,
         IGameInteropProvider interop, IPluginLog log, IChatGui chat, IGameGui gameGUI,
         IContextMenu contextMenu, ICommandManager commands, IAddonLifecycle addonLifecycle,
-        bool initialEnabled, Action<bool> saveEnabled)
+        Configuration config, Action saveConfig)
     {
         this.pluginInterface = pluginInterface;
         Framework = framework; ClientState = clientState; Objects = objects; Condition = conditions;
         Data = data; Interop = interop; Log = log; Chat = chat; GameGUI = gameGUI;
         ContextMenu = contextMenu; Commands = commands; AddonLifecycle = addonLifecycle;
-        enabled = initialEnabled;
-        this.saveEnabled = saveEnabled;
+        this.config = config;
+        enabled = config.LocalPreviewEnabled;
+        this.saveConfig = saveConfig;
         diagnosticsIpc = pluginInterface.GetIpcProvider<string>("FireGaze.LocalPreview.Diagnostics");
         try
         {
             diagnosticsIpc.RegisterFunc(() => OnFramework(Diagnostics));
             diagnosticsRegistered = true;
             Framework.Update += Update;
-            pluginInterface.UiBuilder.Draw += Draw;
             Log.Information("[LocalPreview] FireGaze 本地试用功能正在初始化");
         }
         catch
@@ -90,16 +90,15 @@ public sealed class LocalPreviewFeature : IDisposable
         try
         {
             runtime = new ActorPreviewRuntime(Framework, ClientState, Objects, Condition, Data, Interop, Log);
+            LoadCatalog();
             hmsAdapter = new HmsOriginalAdapter(pluginInterface, Commands, runtime, Log);
             RefreshCoexistence();
-            interaction = new PreviewInteractionService(ContextMenu, Chat, GameGUI, Objects, Data,
-                ClientState, Interop, Log, Request, () => runtime?.CurrentNativeEmote, AddonLifecycle);
-            interaction.EnableNativeChatLinks();
+            CreateInteraction();
             runtime.EmoteObserved += RecordEmote;
             runtime.NativeInputAccepted += OnNativeAccepted;
             runtime.PreviewCancelled += OnCancelled;
             lastMessage = "本地试用入口已就绪";
-            if (!enabled) { interaction.Dispose(); interaction = null; }
+            if (!enabled) { interaction?.Dispose(); interaction = null; }
             Log.Information("[LocalPreview] 初始化完成：" + Diagnostics());
         }
         catch (Exception ex)
@@ -120,6 +119,11 @@ public sealed class LocalPreviewFeature : IDisposable
         if (disposed || !enabled || runtime is null)
         {
             Chat.PrintError("[本地试用] 功能尚未就绪或已关闭。");
+            return;
+        }
+        if (!MenuOptions().Allows(kind, false))
+        {
+            Chat.PrintError("[本地试用] 该分类的试用已关闭。");
             return;
         }
         RefreshCoexistence();
@@ -182,7 +186,8 @@ public sealed class LocalPreviewFeature : IDisposable
     {
         if (enabled == value) return;
         enabled = value;
-        Cleanup(() => saveEnabled(value), "保存开关");
+        config.LocalPreviewEnabled = value;
+        Cleanup(saveConfig, "保存开关");
         if (!value)
         {
             Cancel();
@@ -192,9 +197,7 @@ public sealed class LocalPreviewFeature : IDisposable
         }
         else if (runtime is not null)
         {
-            interaction = new PreviewInteractionService(ContextMenu, Chat, GameGUI, Objects, Data,
-                ClientState, Interop, Log, Request, () => runtime?.CurrentNativeEmote, AddonLifecycle);
-            interaction.EnableNativeChatLinks();
+            CreateInteraction();
             runtime.EmoteObserved -= RecordEmote;
             runtime.EmoteObserved += RecordEmote;
             lastMessage = "本地试用已开启";
@@ -212,13 +215,16 @@ public sealed class LocalPreviewFeature : IDisposable
     public void OnCommand(string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        if (parts.Length == 0) { visible = !visible; return; }
+        if (parts.Length == 0) return; // Main window navigation is owned by Plugin.
         switch (parts[0].ToLowerInvariant())
         {
             case "status": Chat.Print("[本地试用] " + Diagnostics()); break;
             case "cancel": Cancel(); break;
             case "on": SetEnabled(true); break;
             case "off": SetEnabled(false); break;
+            case "native":
+                if (pluginInterface.IsDev) ExecuteDevelopmentNative(parts);
+                break;
             case "chatprobe":
                 lastMessage = interaction?.EnableNativeChatProbe() == true
                     ? "情感提示整句原生右键探针已开启，请使用原生情感动作并右键提示。"
@@ -262,7 +268,8 @@ public sealed class LocalPreviewFeature : IDisposable
 
     private string Diagnostics() => JsonSerializer.Serialize(new
     {
-        version = "1.4.0.33", enabled, initialized, coexistence,
+        version = typeof(LocalPreviewFeature).Assembly.GetName().Version?.ToString(), enabled, initialized, coexistence, options = MenuOptions(),
+        catalogCounts = Enum.GetValues<MenuKind>().ToDictionary(k => k.ToString(), k => catalog.Search(k, "").Count),
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
@@ -280,34 +287,16 @@ public sealed class LocalPreviewFeature : IDisposable
         nativeLogCaptureDetail = interaction?.NativeLogCaptureDetail,
         itemMenusResolved = interaction?.ItemMenusResolved,
         lastMenuContext = interaction?.LastMenuContext,
+        lastNativeEmoteEvent = interaction?.LastNativeEmoteEvent,
         active = runtime?.ActiveEffects,
         lastMessage,
     });
-
-    private void Draw()
-    {
-        if (!visible || disposed) return;
-        if (ImGui.Begin("FireGaze 本地试用", ref visible, ImGuiWindowFlags.AlwaysAutoResize))
-        {
-            var currentEnabled = enabled;
-            if (ImGui.Checkbox("启用本地试用", ref currentEnabled)) SetEnabled(currentEnabled);
-            ImGui.TextWrapped(lastMessage);
-            if (!coexistence.Allowed) ImGui.TextWrapped(coexistence.Reason);
-            if (runtime is not null)
-                foreach (var effect in runtime.ActiveEffects) ImGui.TextUnformatted($"{effect.Slot}: {effect.Id}");
-            if (ImGui.Button("结束全部试用")) Cancel();
-            ImGui.SameLine();
-            if (ImGui.Button("输出诊断")) Chat.Print("[本地试用] " + Diagnostics());
-        }
-        ImGui.End();
-    }
 
     public void Dispose()
     {
         if (disposed) return;
         disposed = true;
         Cleanup(() => Framework.Update -= Update, "帧回调");
-        Cleanup(() => pluginInterface.UiBuilder.Draw -= Draw, "窗口回调");
         if (diagnosticsRegistered) Cleanup(diagnosticsIpc.UnregisterFunc, "诊断 IPC");
         DisposeComponent(interaction, "菜单入口");
         if (runtime is not null)

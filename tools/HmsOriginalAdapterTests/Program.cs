@@ -35,6 +35,21 @@ var tests = new (string, Action)[] {
     ("real toggle comparisons project at call sites even when original getters were inlined", SemanticComparisons),
     ("real emote core rejection completes evidence without claiming native execution", CoreRejects),
     ("real Dalamud exposed plugin resolves the exact original HMS instance", DiscoverInstance),
+    ("HMS visibility reads preserve the real kind and isolate only the owned display actor", VisibilityPattern),
+    ("changed HMS visibility IL refuses a partial exemption", ChangedVisibilityPattern),
+    ("visibility exemption never changes actual actor kind or affects another actor", VisibilityScope),
+    ("official HMS loaded from a stream verifies its exact exposed plugin file", InstallReleaseStream),
+    ("dev HMS loaded from a stream verifies its exact exposed plugin file", InstallDevStream),
+    ("stream loaded HMS refuses another audited binary before patching", StreamWrongBinary),
+    ("stream loaded HMS refuses a changed file before patching", StreamChangedBinary),
+    ("stream loaded HMS refuses a file belonging to another instance", StreamWrongInstance),
+    ("HMS dispose detaches then removes genuine delegates across Dev release and reload", HmsIsolationTests.DisposeDuringDetach),
+    ("FireGaze detach restores real HMS entry before a later HMS dispose", HmsIsolationTests.DetachBeforeDispose),
+    ("closed generic HMS methods retain their exact plugin assembly identity", HmsIsolationTests.GenericMembers),
+    ("detach keeps another Harmony owner's native detour", HmsIsolationTests.OtherOwnerSurvives),
+    ("detach never takes ownership of an externally removed patch", HmsIsolationTests.MissingOwnerIsUntouched),
+    ("both real HMS binaries isolate all eleven audited closed generic members", AuditedGenericIsolation),
+    ("a late Harmony patch failure cleans every partially installed target", PartialInstallFailure),
 };
 int failed = 0;
 foreach (var (name, test) in tests) { try { test(); Console.WriteLine("PASS " + name); } catch (Exception ex) { failed++; Console.WriteLine("FAIL " + name + ": " + ex.GetBaseException().Message); } }
@@ -114,8 +129,11 @@ void InstallRelease() {
         field.SetValue(instance,RuntimeHelpers.GetUninitializedObject(field.FieldType));
     }
     var runtime=new ActorPreviewRuntime();
+    MethodInfo[] installed=[];
     using(var adapter=new HmsOriginalAdapter(NullService.New<IDalamudPluginInterface>(),NullService.New<ICommandManager>(),runtime,NullService.New<IPluginLog>())) {
-        typeof(HmsOriginalAdapter).GetMethod("Install",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(adapter,new[]{(object)target,instance});
+        InstallForTest(adapter,target,instance,ExposedInstance(instance,target.Location));
+        installed=((IEnumerable<MethodInfo>)typeof(HmsOriginalAdapter).GetField("patched",BindingFlags.Instance|BindingFlags.NonPublic)!.GetValue(adapter)!).ToArray();
+        Equal(installed.Length,20);
         var detect=target.GetType("HMSync.Services.LocalStateDetector")!.GetMethod("Detect")!;
         Equal(Harmony.GetPatchInfo(detect)?.Owners.Any(o=>o.StartsWith("FireGaze.LocalPreview.HmsOriginal.",StringComparison.Ordinal)),true);
         // active=false: invoke genuine transformed method safely without reaching native memory.
@@ -124,8 +142,9 @@ void InstallRelease() {
     }
     var method=target.GetType("HMSync.Services.LocalStateDetector")!.GetMethod("Detect")!;
     Equal(Harmony.GetPatchInfo(method)?.Owners.Any(o=>o.StartsWith("FireGaze.LocalPreview.HmsOriginal.",StringComparison.Ordinal))??false,false);
+    foreach(var original in installed) Equal(HmsIsolationTests.HasNativeDetour(original),false);
 }
-void InInstalled(Action<Assembly,object,ActorPreviewRuntime,HmsOriginalAdapter> test,Assembly? supplied=null) {
+void InInstalled(Action<Assembly,object,ActorPreviewRuntime,HmsOriginalAdapter> test,Assembly? supplied=null,string? suppliedPath=null) {
     var target=supplied??AssemblyLoadContext.Default.Assemblies.Single(a=>a.GetName().Name=="HMSync");
     var type=target.GetType("HMSync.HMSyncPlugin",true)!;
     var instance=RuntimeHelpers.GetUninitializedObject(type);
@@ -135,7 +154,7 @@ void InInstalled(Action<Assembly,object,ActorPreviewRuntime,HmsOriginalAdapter> 
     }
     var runtime=new ActorPreviewRuntime();
     using var adapter=new HmsOriginalAdapter(NullService.New<IDalamudPluginInterface>(),NullService.New<ICommandManager>(),runtime,NullService.New<IPluginLog>());
-    typeof(HmsOriginalAdapter).GetMethod("Install",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(adapter,new[]{(object)target,instance});
+    InstallForTest(adapter,target,instance,ExposedInstance(instance,suppliedPath??target.Location));
     try {test(target,instance,runtime,adapter);} finally {HmsShadowActor.BeginAllowed=true;}
 }
 void FaultResumesOriginal()=>InInstalled((target,instance,runtime,adapter)=> {
@@ -198,4 +217,148 @@ void DiscoverInstance() {
     var resolved=typeof(HmsOriginalAdapter).GetMethod("FindInstance",BindingFlags.NonPublic|BindingFlags.Static)!.Invoke(null,new[]{exposed});
     Equal(ReferenceEquals(resolved,hms),true);
 }
-public static class Fixture { public static nint Address(object value)=>0; public static void Marker() {} public static ushort Semantic(object value)=>0; }
+object ExposedInstance(object hms,string file) {
+    var exposedType=typeof(IDalamudPluginInterface).Assembly.GetType("Dalamud.Plugin.ExposedPlugin",true)!;
+    var exposed=RuntimeHelpers.GetUninitializedObject(exposedType);
+    var field=exposedType.GetFields(BindingFlags.NonPublic|BindingFlags.Instance).Single(f=>f.FieldType.FullName=="Dalamud.Plugin.Internal.Types.LocalPlugin");
+    var local=RuntimeHelpers.GetUninitializedObject(field.FieldType);
+    field.SetValue(exposed,local);
+    field.FieldType.GetField("instance",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(local,hms);
+    field.FieldType.GetField("<DllFile>k__BackingField",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(local,new FileInfo(file));
+    return exposed;
+}
+void InstallForTest(HmsOriginalAdapter adapter,Assembly target,object instance,object exposed) {
+    var method=typeof(HmsOriginalAdapter).GetMethod("Install",BindingFlags.Instance|BindingFlags.NonPublic)!;
+    method.Invoke(adapter,new[]{(object)target,instance,exposed});
+}
+void StreamContext(string path,Action<Assembly> test) {
+    var context=new AssemblyLoadContext("HMS-stream-adapter-offline-"+Guid.NewGuid().ToString("N"),true);
+    try {
+        using var stream=File.OpenRead(path);
+        var target=context.LoadFromStream(stream);
+        Equal(target.Location,"");
+        test(target);
+    }
+    finally {context.Unload();}
+}
+void InstallReleaseStream()=>StreamContext(release,target=>InInstalled((assembly,instance,runtime,adapter)=> {
+    var detect=assembly.GetType("HMSync.Services.LocalStateDetector",true)!.GetMethod("Detect")!;
+    Equal(Harmony.GetPatchInfo(detect)?.Owners.Any(o=>o.StartsWith("FireGaze.LocalPreview.HmsOriginal.",StringComparison.Ordinal)),true);
+},target,release));
+void InstallDevStream()=>StreamContext(dev,target=>InInstalled((assembly,instance,runtime,adapter)=> {
+    var detect=assembly.GetType("HMSync.Services.LocalStateDetector",true)!.GetMethod("Detect")!;
+    Equal(Harmony.GetPatchInfo(detect)?.Owners.Any(o=>o.StartsWith("FireGaze.LocalPreview.HmsOriginal.",StringComparison.Ordinal)),true);
+},target,dev));
+void AssertStreamRefused(Assembly target,string path,bool wrongInstance,string expectedMessage) {
+    var type=target.GetType("HMSync.HMSyncPlugin",true)!;
+    var instance=RuntimeHelpers.GetUninitializedObject(type);
+    var exposed=ExposedInstance(wrongInstance?RuntimeHelpers.GetUninitializedObject(type):instance,path);
+    var runtime=new ActorPreviewRuntime();
+    using var adapter=new HmsOriginalAdapter(NullService.New<IDalamudPluginInterface>(),NullService.New<ICommandManager>(),runtime,NullService.New<IPluginLog>());
+    try {InstallForTest(adapter,target,instance,exposed);throw new Exception("expected stream binary rejection");}
+    catch(TargetInvocationException ex) when(ex.InnerException is InvalidOperationException inner && inner.Message.Contains(expectedMessage,StringComparison.Ordinal)) { }
+    Equal(runtime.Cleanups,0);
+    var detect=target.GetType("HMSync.Services.LocalStateDetector",true)!.GetMethod("Detect")!;
+    Equal(Harmony.GetPatchInfo(detect)?.Owners.Any(o=>o.StartsWith("FireGaze.LocalPreview.HmsOriginal.",StringComparison.Ordinal))??false,false);
+}
+void StreamWrongBinary()=>StreamContext(release,target=>AssertStreamRefused(target,dev,false,"identity"));
+void StreamChangedBinary() {
+    var path=Path.Combine(Path.GetTempPath(),"firegaze-hms-guard-"+Guid.NewGuid().ToString("N")+".dll");
+    try {
+        var bytes=File.ReadAllBytes(release);bytes[^1]^=0x40;File.WriteAllBytes(path,bytes);
+        StreamContext(release,target=>AssertStreamRefused(target,path,false,"fingerprint"));
+    }
+    finally {File.Delete(path);}
+}
+void StreamWrongInstance()=>StreamContext(release,target=>AssertStreamRefused(target,release,true,"instance"));
+void AuditedGenericIsolation() {
+    foreach(var path in new[]{dev,release}) StreamContext(path,assembly=> {
+        int total=0;
+        foreach(var (type,name,expected) in new[]{
+            ("HMSync.HMSyncPlugin","Dispose",3),
+            ("HMSync.Services.LocalStateDetector","Detect",1),
+            ("HMSync.Services.StateCaptureService","OnFrameworkUpdate",2),
+            ("HMSync.HMSyncPlugin","OnCommand",1),
+            ("HMSync.HMSyncPlugin","DoLoad",3),
+            ("HMSync.Services.ZoneLoadService","LoadZone",1)}) {
+            var original=assembly.GetType(type,true)!.GetMethod(name,BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic)!;
+            var input=PatchProcessor.GetOriginalInstructions(original).ToList();
+            var output=HmsHarmonyIsolation.PreserveGenericMembers(input,original).ToList();
+            var isolated=output.Count(i=>i.operand is DynamicMethod);
+            Equal(isolated,expected); total+=isolated;
+            Equal(output.Count,input.Count);
+        }
+        Equal(total,11);
+    });
+}
+void PartialInstallFailure() {
+    var target=AssemblyLoadContext.Default.Assemblies.Single(a=>a.GetName().Name=="HMSync");
+    var type=target.GetType("HMSync.HMSyncPlugin",true)!;
+    var instance=RuntimeHelpers.GetUninitializedObject(type);
+    foreach(var name in new[]{"detector","stateCapture","stateApply","zoneLoad"}) {
+        var field=type.GetField(name,BindingFlags.Instance|BindingFlags.NonPublic)!;
+        field.SetValue(instance,RuntimeHelpers.GetUninitializedObject(field.FieldType));
+    }
+    var installed=new[]{
+        target.GetType("HMSync.Services.LocalStateDetector",true)!.GetMethod("Detect")!,
+        target.GetType("HMSync.Services.LocalStateDetector",true)!.GetMethod("Reset")!,
+        target.GetType("HMSync.Services.StateCaptureService",true)!.GetMethod("OnFrameworkUpdate",BindingFlags.Instance|BindingFlags.NonPublic)!};
+    using var adapter=new HmsOriginalAdapter(NullService.New<IDalamudPluginInterface>(),NullService.New<ICommandManager>(),new ActorPreviewRuntime(),NullService.New<IPluginLog>());
+    var owner=(Harmony)typeof(HmsOriginalAdapter).GetField("harmony",BindingFlags.Instance|BindingFlags.NonPublic)!.GetValue(adapter)!;
+    var injector=new Harmony("FireGaze.HmsIsolation.FailureInjector."+Guid.NewGuid().ToString("N"));
+    var patchApi=typeof(Harmony).GetMethod(nameof(Harmony.Patch))!;
+    injector.Patch(patchApi,postfix:new HarmonyMethod(typeof(Fixture).GetMethod(nameof(Fixture.FailAfterPatch))!));
+    try {
+        Fixture.PatchFailureCountdown=3;
+        try {InstallForTest(adapter,target,instance,ExposedInstance(instance,target.Location));throw new Exception("expected late patch failure");}
+        catch(TargetInvocationException ex) when(ex.GetBaseException() is InvalidOperationException {Message:"injected failure after patch installation"}) { }
+        Equal(Fixture.PatchFailureCountdown,0);
+        foreach(var method in installed) {
+            Equal(Harmony.GetPatchInfo(method)?.Owners.Contains(owner.Id)??false,false);
+            Equal(HmsIsolationTests.HasNativeDetour(method),false);
+        }
+    }
+    finally {
+        Fixture.PatchFailureCountdown=0;
+        HmsHarmonyIsolation.Detach(owner,installed);
+        HmsHarmonyIsolation.Detach(injector,new[]{patchApi});
+    }
+}
+void VisibilityPattern() {
+    foreach(var (method,count) in new[]{("HideAll",1),("Update",2)}) {
+        var input=RealIl("HMSync.Services.ActorVisibilityService",method);
+        var output=((IEnumerable<CodeInstruction>)Invoke("ReplaceVisibilityKindReads",input,typeof(Fixture).GetMethod(nameof(Fixture.VisibilityKind))!,count)!).ToList();
+        Equal(output.Count(i=>i.opcode==OpCodes.Ldfld && i.operand is FieldInfo f && f.Name=="ObjectKind"),0);
+        Equal(output.Count(i=>Equals(i.operand,typeof(Fixture).GetMethod(nameof(Fixture.VisibilityKind)))),count);
+    }
+}
+void ChangedVisibilityPattern() {
+    var input=RealIl("HMSync.Services.ActorVisibilityService","HideAll");
+    input.Remove(input.First(i=>i.opcode==OpCodes.Ldfld && i.operand is FieldInfo f && f.Name=="ObjectKind"));
+    try { Invoke("ReplaceVisibilityKindReads",input,typeof(Fixture).GetMethod(nameof(Fixture.VisibilityKind))!,1); throw new Exception("expected visibility rejection"); }
+    catch(TargetInvocationException ex) when(ex.InnerException is InvalidOperationException) { }
+}
+unsafe void VisibilityScope()=>InInstalled((target,instance,runtime,adapter)=> {
+    var filter=(VisibilityFilter)typeof(HmsOriginalAdapter).GetMethod("ReadVisibilityKind",BindingFlags.Static|BindingFlags.NonPublic)!.CreateDelegate(typeof(VisibilityFilter));
+    FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject owned=default,other=default;
+    owned.ObjectKind=FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind.Pc;
+    other.ObjectKind=FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind.Pc;
+    runtime.OwnedDisplay=(nint)(&owned);
+    Equal(filter(&owned),FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind.BattleNpc);
+    Equal(filter(&other),FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind.Pc);
+    Equal(owned.ObjectKind,FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind.Pc);
+    runtime.OwnedDisplay=0;
+    Equal(filter(&owned),FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind.Pc);
+});
+unsafe delegate FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind VisibilityFilter(FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* actor);
+public static class Fixture {
+    public static nint Address(object value)=>0;
+    public static void Marker() {}
+    public static ushort Semantic(object value)=>0;
+    public static unsafe FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind VisibilityKind(FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* actor)=>actor->ObjectKind;
+    public static int PatchFailureCountdown;
+    public static void FailAfterPatch(Harmony __instance) {
+        if(PatchFailureCountdown>0 && __instance.Id.StartsWith("FireGaze.LocalPreview.HmsOriginal.",StringComparison.Ordinal)
+            && --PatchFailureCountdown==0) throw new InvalidOperationException("injected failure after patch installation");
+    }
+}

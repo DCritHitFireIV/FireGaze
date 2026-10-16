@@ -7,6 +7,15 @@ namespace FireGaze.LocalPreview.Compatibility;
 /// <summary>Validated transformations of original HMS IL. No HMS implementation is copied.</summary>
 public static class HmsOriginalPatchRules
 {
+    public static IEnumerable<CodeInstruction> ReplaceVisibilityKindReads(IEnumerable<CodeInstruction> instructions, MethodInfo bridge, int expected)
+    {
+        var result=instructions.Select(i=>new CodeInstruction(i)).ToList();
+        var reads=result.Where(i=>i.opcode==OpCodes.Ldfld && i.operand is FieldInfo { Name:"ObjectKind", DeclaringType.FullName:"FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject" }).ToArray();
+        if(reads.Length!=expected) throw new InvalidOperationException("HMS visibility kind pattern changed");
+        foreach(var read in reads) { read.opcode=OpCodes.Call; read.operand=bridge; }
+        return result;
+    }
+
     private static bool Address(CodeInstruction instruction) => instruction.opcode == OpCodes.Callvirt
         && instruction.operand is MethodInfo { Name: "get_Address", DeclaringType.FullName: "Dalamud.Game.ClientState.Objects.Types.IGameObject" };
 

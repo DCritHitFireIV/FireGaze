@@ -6,9 +6,12 @@ using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.Gui.ContextMenu;
 using Dalamud.Game.Text;
 using Dalamud.Plugin.Services;
+using Dalamud.Hooking;
 using FireGaze.LocalPreview.Core;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Client.UI;
 using Lumina.Excel.Sheets;
 using Lumina.Text.ReadOnly;
 using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
@@ -29,10 +32,17 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     private readonly IAddonLifecycle? addonLifecycle;
     private readonly IPluginLog log;
     private readonly Action<PreviewKind, uint> requestPreview;
+    private readonly Func<PreviewMenuOptions> options;
+    private readonly IReadOnlyDictionary<uint, uint> emoteUnlockLinks;
     private readonly NativeEmoteLogCapture nativeLogCapture;
+    private readonly IGameInteropProvider interop;
+    private Hook<AtkResNode.Delegates.DispatchEvent>? dispatchEvent;
+    [ThreadStatic] private static NativeMouseDispatchContext? mouseDispatch;
     private readonly EmoteHistory history = new();
-    private static readonly string[] ChatPanels = ["ChatLogPanel_0", "ChatLogPanel_1", "ChatLogPanel_2", "ChatLogPanel_3"];
+    private static readonly string[] ChatPanels = ["ChatLog", "ChatLogPanel_0", "ChatLogPanel_1", "ChatLogPanel_2", "ChatLogPanel_3"];
     private readonly NativeLinkContext nativeLink = new();
+    private readonly Stack<EmoteMenuInvocation> nativeClicks = new();
+    private readonly record struct EmoteMenuInvocation(bool RightClick, int MenusBefore, uint OwnerAddon);
     private long generation;
     private bool disposed;
     private bool chatProbeEnabled;
@@ -52,12 +62,13 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     public string NativeLogCaptureDetail => nativeLogCapture.Detail;
     public int ItemMenusResolved { get; private set; }
     public string LastMenuContext { get; private set; } = "尚未观察菜单";
+    public string LastNativeEmoteEvent { get; private set; } = "尚未观察情感链接事件";
 
     public PreviewInteractionService(IContextMenu menus, IChatGui chat, IGameGui gameGui, IObjectTable objects,
         IDataManager data, IClientState clientState, IGameInteropProvider interop, IPluginLog log,
         Action<PreviewKind, uint> requestPreview,
         Func<(ulong OwnerId, ushort EmoteId)?>? currentNativeEmote = null,
-        IAddonLifecycle? addonLifecycle = null)
+        IAddonLifecycle? addonLifecycle = null, Func<PreviewMenuOptions>? options = null)
     {
         this.menus = menus;
         this.chat = chat;
@@ -66,7 +77,11 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         this.clientState = clientState;
         this.addonLifecycle = addonLifecycle;
         this.log = log;
+        this.interop = interop;
         this.requestPreview = requestPreview;
+        this.options = options ?? (() => new());
+        this.emoteUnlockLinks = data.GetExcelSheet<Emote>().Where(emote => emote.RowId != 0 && emote.UnlockLink != 0)
+            .ToDictionary(emote => emote.RowId, emote => emote.UnlockLink);
         this.nativeLogCapture = new(data, interop, log);
         history.ChangeTerritory(clientState.TerritoryType);
         menus.OnMenuOpened += OnMenuOpened;
@@ -89,6 +104,12 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         }
         try
         {
+            // AtkTextNode.DispatchEvent constructs LinkMouseClick recursively from
+            // MouseClick and deliberately zeroes the rest of its data. Preserve the
+            // original button only for that synchronous, same-node call chain.
+            dispatchEvent = interop.HookFromAddress<AtkResNode.Delegates.DispatchEvent>(
+                AtkResNode.Addresses.DispatchEvent.Value, DispatchNativeEvent);
+            dispatchEvent.Enable();
             addonLifecycle.RegisterListener(AddonEvent.PreReceiveEvent, ChatPanels, BeforeNativeChatEvent);
             addonLifecycle.RegisterListener(AddonEvent.PostReceiveEvent, ChatPanels, AfterNativeChatEvent);
             var captureReady = nativeLogCapture.Enable();
@@ -104,6 +125,8 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         }
         catch (Exception ex)
         {
+            dispatchEvent?.Dispose();
+            dispatchEvent = null;
             addonLifecycle.UnregisterListener(AddonEvent.PreReceiveEvent, ChatPanels, BeforeNativeChatEvent);
             addonLifecycle.UnregisterListener(AddonEvent.PostReceiveEvent, ChatPanels, AfterNativeChatEvent);
             log.Error(ex, "[LocalPreview] Native chat sentence links could not start.");
@@ -114,6 +137,15 @@ public sealed unsafe class PreviewInteractionService : IDisposable
 
     // Retain the existing diagnostic command API; normal hosts call the method above.
     public bool EnableNativeChatProbe() => EnableNativeChatLinks();
+
+    private bool DispatchNativeEvent(AtkResNode* node, AtkEventDispatcher.Event* evt)
+    {
+        var context = mouseDispatch ??= new();
+        context.Enter((nint)node, evt != null && evt->State.EventType == AtkEventType.MouseClick
+            ? evt->EventData.MouseData.ButtonId : null);
+        try { return dispatchEvent!.Original(node, evt); }
+        finally { context.Exit(); }
+    }
 
     public void RecordEmote(ulong actorObjectId, ushort emoteId)
     {
@@ -131,6 +163,7 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         generation++;
         history.ChangeTerritory(territory);
         nativeLink.Clear();
+        nativeClicks.Clear();
     }
 
     private void OnMenuOpened(IMenuOpenedArgs args)
@@ -154,14 +187,27 @@ public sealed unsafe class PreviewInteractionService : IDisposable
 
             if (args.Target is MenuTargetInventory inventory)
             {
-                // This is the exact temporary inventory slot used by native item links too.
-                // Never fall back to LastLinkedItemId, which can belong to a different message.
+                if (!options().Items) return;
+                // Inventory menus expose their exact selected slot. Chat links
+                // use a DEFAULT menu and their own current ChatLog context below.
                 var item = inventory.TargetItem;
-                if (item is { } slot && ResolveItem(slot.BaseItemId) is { } request)
+                if (item is { } slot)
                 {
-                    AddItem(args, request);
-                    ItemMenusResolved++;
+                    var requests = ResolveItems(slot.BaseItemId);
+                    if (requests.Count == 1) AddItem(args, requests[0], fromItem: true);
+                    else if (requests.Count > 1) AddEmoteSubmenu(args, requests);
+                    if (requests.Count > 0) ItemMenusResolved++;
                 }
+                return;
+            }
+
+            if (TryGetChatItem(args, out var chatItemId))
+            {
+                if (!options().Items) return;
+                var requests = ResolveItems(chatItemId);
+                if (requests.Count == 1) AddItem(args, requests[0], fromItem: true);
+                else if (requests.Count > 1) AddEmoteSubmenu(args, requests);
+                if (requests.Count > 0) ItemMenusResolved++;
                 return;
             }
 
@@ -185,12 +231,28 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         catch (Exception ex) { log.Error(ex, "[LocalPreview] Context menu collection failed."); }
     }
 
-    public MenuPreviewRequest? ResolveItem(uint itemId)
+    public IReadOnlyList<MenuPreviewRequest> ResolveItems(uint itemId)
     {
-        if (!data.GetExcelSheet<Item>().TryGetRow(itemId, out var item) || !item.ItemAction.IsValid) return null;
+        if (!data.GetExcelSheet<Item>().TryGetRow(itemId, out var item) || !item.ItemAction.IsValid) return [];
         var action = item.ItemAction.Value;
-        var request = ItemCollectionResolver.Resolve(action.Action.RowId, action.Data[0]);
-        return request is { } value && Valid(value) ? value : null;
+        return ItemCollectionResolver.ResolveAll(action.Action.RowId, action.Data[0], emoteUnlockLinks)
+            .Where(Valid).ToArray();
+    }
+
+    private static bool TryGetChatItem(IMenuOpenedArgs args, out uint itemId)
+    {
+        itemId = 0;
+        if (args.MenuType != ContextMenuType.Default || args.AddonPtr == 0
+            || !ChatItemMenuResolver.IsChatAddon(args.AddonName)) return false;
+        var context = AgentContext.Instance();
+        var chatLog = AgentChatLog.Instance();
+        if (context == null || chatLog == null || args.AgentPtr != (nint)context) return false;
+        var addon = (AtkUnitBase*)args.AddonPtr;
+        // Chat item links open the DEFAULT menu, not the inventory menu. This
+        // field belongs to that menu's current ChatLog owner; no last-link cache.
+        return ChatItemMenuResolver.TryResolve(new(true, args.AddonName, addon->Id, args.AgentPtr,
+            (nint)context, context->OwnerAddon, (nint)chatLog, args.EventInterfaces.Contains((nint)chatLog),
+            chatLog->ContextItemId), out itemId);
     }
 
     private bool Valid(MenuPreviewRequest request) => request.Kind switch
@@ -202,9 +264,9 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         _ => false,
     };
 
-    private void AddItem(IMenuOpenedArgs args, MenuPreviewRequest request)
+    private void AddItem(IMenuOpenedArgs args, MenuPreviewRequest request, bool fromItem = false)
     {
-        if (!Valid(request)) return;
+        if (!options().Allows(request.Kind, fromItem) || !Valid(request)) return;
         var menuGeneration = generation;
         args.AddMenuItem(new MenuItem
         {
@@ -217,9 +279,45 @@ public sealed unsafe class PreviewInteractionService : IDisposable
             },
             OnClicked = _ =>
             {
-                if (!disposed && menuGeneration == generation) requestPreview(request.Kind, request.Id);
+                if (!disposed && menuGeneration == generation && options().Allows(request.Kind, fromItem))
+                    requestPreview(request.Kind, request.Id);
             },
         });
+    }
+
+    private void AddEmoteSubmenu(IMenuOpenedArgs args, IReadOnlyList<MenuPreviewRequest> requests)
+    {
+        if (!options().Allows(PreviewKind.Emote, fromItem: true)) return;
+        var menuGeneration = generation;
+        var selections = requests.Where(request => request.Kind == PreviewKind.Emote && Valid(request)).ToArray();
+        if (selections.Length == 0) return;
+        args.AddMenuItem(new MenuItem
+        {
+            Name = "试用情感动作",
+            IsSubmenu = true,
+            OnClicked = clicked =>
+            {
+                if (!CanSelect()) return;
+                var children = selections.Select(request => (IMenuItem)new MenuItem
+                {
+                    Name = EmoteName(request.Id),
+                    OnClicked = _ =>
+                    {
+                        if (CanSelect()) requestPreview(request.Kind, request.Id);
+                    },
+                }).ToArray();
+                clicked.OpenSubmenu("试用情感动作", children);
+            },
+        });
+
+        bool CanSelect() => !disposed && menuGeneration == generation
+            && options().Allows(PreviewKind.Emote, fromItem: true);
+    }
+
+    private string EmoteName(uint id)
+    {
+        var name = data.GetExcelSheet<Emote>().GetRow(id).Name.ToString();
+        return string.IsNullOrWhiteSpace(name) ? $"情感动作 #{id}" : name;
     }
 
     private void OnChatMessage(IHandleableChatMessage message)
@@ -235,6 +333,8 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     {
         if (disposed) return;
         ushort id = 0;
+        bool rightClick = false;
+        uint ownerAddon = 0;
         try
         {
             if (args is AddonReceiveEventArgs received
@@ -248,6 +348,16 @@ public sealed unsafe class PreviewInteractionService : IDisposable
                 {
                     id = observedId;
                     NativeEmoteLinkEventsObserved++;
+                    ownerAddon = received.Addon.IsNull ? 0U : ((AtkUnitBase*)received.Addon.Address)->Id;
+                    // LinkData is a pointer in this event's union, not AtkMouseData.
+                    rightClick = mouseDispatch?.Button == 1;
+                    var input = UIInputData.Instance();
+                    if (input != null)
+                    {
+                        var raw = input->CursorInputs;
+                        var filtered = input->UIFilteredCursorInputs;
+                        LastNativeEmoteEvent = $"emote={id}, right={rightClick}, dispatchButton={mouseDispatch?.Button.ToString() ?? "none"}, raw={(int)raw.MouseButtonHeldFlags}/{(int)raw.MouseButtonPressedFlags}/{(int)raw.MouseButtonReleasedFlags}, filtered={(int)filtered.MouseButtonHeldFlags}/{(int)filtered.MouseButtonPressedFlags}/{(int)filtered.MouseButtonReleasedFlags}, owner={ownerAddon}";
+                    }
                 }
             }
         }
@@ -255,9 +365,29 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         // Do not retain AtkEventData/LinkData pointers. Only this immutable row ID survives
         // until PostReceiveEvent. Zero masks an unrelated nested event.
         nativeLink.Enter(id);
+        nativeClicks.Push(new(rightClick, NativeEmoteMenusObserved, ownerAddon));
     }
 
-    private void AfterNativeChatEvent(AddonEvent type, AddonArgs args) => nativeLink.Exit();
+    private void AfterNativeChatEvent(AddonEvent type, AddonArgs args)
+    {
+        try
+        {
+            if (disposed || !nativeClicks.TryPop(out var click) || !options().Emote
+                || !NativeEmoteMenuPolicy.ShouldOpen(nativeLink.EmoteId, click.RightClick,
+                    click.MenusBefore, NativeEmoteMenusObserved, click.OwnerAddon)) return;
+            var context = AgentContext.Instance();
+            if (context == null || !Valid(new(PreviewKind.Emote, nativeLink.EmoteId))) return;
+            // Native Emote links do not provide their own context menu on this client.
+            // A disabled native heading makes the ordinary ContextMenu nonempty; Dalamud
+            // then adds the actionable entry through the same OnMenuOpened callback.
+            // Do not SetMenuTitle: that selects AddonContextMenuTitle instead.
+            context->ClearMenu();
+            context->AddMenuItem(EmoteName(nativeLink.EmoteId), null, 0, disabled: true);
+            context->OpenContextMenuForAddon(click.OwnerAddon, true);
+        }
+        catch (Exception ex) { log.Error(ex, "[LocalPreview] Native emote context menu could not open."); }
+        finally { nativeLink.Exit(); }
+    }
 
     private static ActorIdentity Identity(IGameObject actor) => new(actor.GameObjectId, (ulong)actor.Address);
 
@@ -275,7 +405,10 @@ public sealed unsafe class PreviewInteractionService : IDisposable
             addonLifecycle.UnregisterListener(AddonEvent.PostReceiveEvent, ChatPanels, AfterNativeChatEvent);
         }
         nativeLink.Clear();
+        nativeClicks.Clear();
         nativeLogCapture.Dispose();
+        dispatchEvent?.Dispose();
+        dispatchEvent = null;
         history.Clear();
     }
 }

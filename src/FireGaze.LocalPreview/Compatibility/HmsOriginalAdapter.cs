@@ -70,7 +70,7 @@ public sealed class HmsOriginalAdapter : IDisposable
             if(!ReferenceEquals(candidate,assembly) || !ReferenceEquals(instance,plugin))
             {
                 Detach();
-                try { Install(candidate,instance); rejected=null; }
+                try { Install(candidate,instance,loaded[0]); rejected=null; }
                 catch { rejected=new(candidate); throw; }
             }
             if(fault!=null) return new(false,fault);
@@ -87,10 +87,20 @@ public sealed class HmsOriginalAdapter : IDisposable
         }
     }
 
-    private void Install(Assembly target, object instance)
+    private void Install(Assembly target, object instance, object exposed)
     {
         if(current!=null && !ReferenceEquals(current,this)) throw new InvalidOperationException("Another local preview host already owns HMS compatibility");
-        var bytes=File.ReadAllBytes(target.Location);
+        // Dalamud may load plugin assemblies from streams; Assembly.Location is then
+        // empty. Read only the DLL belonging to this exact exposed LocalPlugin instance.
+        var local=FindLocalPlugin(exposed);
+        if(local==null || !ReferenceEquals(ReadField(local,"instance"),instance)
+            || !ReferenceEquals(instance.GetType().Assembly,target))
+            throw new InvalidOperationException("HMS exposed plugin instance differs from the loaded candidate");
+        var file=local.GetType().GetProperty("DllFile",BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic)?.GetValue(local) as FileInfo
+            ?? throw new InvalidOperationException("HMS exposed plugin DLL file is unavailable");
+        var bytes=File.ReadAllBytes(file.FullName);
+        if(!ReferenceEquals(ReadField(local,"instance"),instance))
+            throw new InvalidOperationException("HMS exposed plugin instance changed during binary verification");
         var profile=HmsOriginalFingerprint.Identify(bytes) ?? throw new InvalidOperationException("Unsupported HMS binary fingerprint");
         if(target.ManifestModule.ModuleVersionId!=profile.Mvid || target.GetName().Version!=profile.Version)
             throw new InvalidOperationException("Loaded HMS identity differs from the audited file");
@@ -99,6 +109,7 @@ public sealed class HmsOriginalAdapter : IDisposable
         var captureType=target.GetType("HMSync.Services.StateCaptureService",true)!;
         var applyType=target.GetType("HMSync.Services.StateApplyService",true)!;
         var zoneType=target.GetType("HMSync.Services.ZoneLoadService",true)!;
+        var visibilityType=target.GetType("HMSync.Services.ActorVisibilityService",true)!;
         object Field(string name,Type expected)
         {
             var field=root.GetField(name,BindingFlags.Instance|BindingFlags.NonPublic);
@@ -138,13 +149,18 @@ public sealed class HmsOriginalAdapter : IDisposable
             Method(zoneType,"LoadZone","System.Void","System.UInt32","System.Collections.Generic.HashSet`1<System.UInt16>","System.Nullable`1<FFXIVClientStructs.FFXIV.Common.Math.Vector3>","System.Nullable`1<System.Single>"),
             Method(zoneType,"ReloadZone","System.Void","System.Collections.Generic.HashSet`1<System.UInt16>")};
         var dispose=Method(root,"Dispose","System.Void");
+        var visibility=new[]{Method(visibilityType,"HideAll","System.Void"),Method(visibilityType,"Update","System.Void")};
         // Validate every transformation before installing any hook.
+        HmsHarmonyIsolation.ValidateRuntime();
+        foreach(var method in new[]{detect,reset,capture,mount,minion,ornament,emote,stop,dispose}.Concat(semantics).Concat(lifecycle).Concat(visibility))
+            HmsHarmonyIsolation.PreserveGenericMembers(PatchProcessor.GetOriginalInstructions(method),method).ToArray();
         foreach(var method in new[]{detect,reset}) HmsOriginalPatchRules.ReplaceCaptureAddresses(PatchProcessor.GetOriginalInstructions(method),Bridge(nameof(DetectorAddress)),true).ToArray();
         HmsOriginalPatchRules.ReplaceCaptureAddresses(PatchProcessor.GetOriginalInstructions(capture),Bridge(nameof(BodyAddress)),false).ToArray();
         HmsOriginalPatchRules.MarkEmoteDispatches(PatchProcessor.GetOriginalInstructions(emote),Bridge(nameof(MarkDispatch))).ToArray();
         HmsOriginalPatchRules.MarkEmoteStop(PatchProcessor.GetOriginalInstructions(stop),Bridge(nameof(MarkDispatch))).ToArray();
         foreach(var method in new[]{mount,minion,ornament}) HmsOriginalPatchRules.MarkPresentationDispatches(PatchProcessor.GetOriginalInstructions(method),Bridge(nameof(MarkDispatch)),method.Name).ToArray();
         foreach(var method in semantics) HmsOriginalPatchRules.ReplaceSemanticReads(PatchProcessor.GetOriginalInstructions(method),Bridge(SemanticBridge(method.Name)),method.Name).ToArray();
+        foreach(var method in visibility) HmsOriginalPatchRules.ReplaceVisibilityKindReads(PatchProcessor.GetOriginalInstructions(method),Bridge(nameof(ReadVisibilityKind)),method.Name=="HideAll"?1:2).ToArray();
 
         runtime.BeforeHmsLifecycle();
         assembly=target; plugin=instance; zoneLoad=zone; detector=ownDetector; this.capture=ownCapture; apply=ownApply; current=this; fault=null;
@@ -156,6 +172,7 @@ public sealed class HmsOriginalAdapter : IDisposable
             Patch(stop,nameof(StopPrefix),null,nameof(StopTranspiler),nameof(InputFinalizer));
             // Transform the actual comparisons rather than small getters that may already be JIT-inlined.
             foreach(var method in semantics) Patch(method,null,null,nameof(SemanticTranspiler));
+            foreach(var method in visibility) Patch(method,null,null,nameof(VisibilityTranspiler));
             foreach(var method in lifecycle) Patch(method,nameof(LifecyclePrefix));
             Patch(dispose,nameof(DisposePrefix));
             log.Information("[LocalPreview] Original HMS adapter installed: {Profile}, {Mvid}",profile.Name,profile.Mvid);
@@ -168,7 +185,12 @@ public sealed class HmsOriginalAdapter : IDisposable
     private static MethodInfo Bridge(string name)=>typeof(HmsOriginalAdapter).GetMethod(name,BindingFlags.Static|BindingFlags.NonPublic)!;
     private static HarmonyMethod? PatchMethod(string? name)=>name==null?null:new HarmonyMethod(Bridge(name));
     private void Patch(MethodInfo method,string? prefix=null,string? postfix=null,string? transpiler=null,string? finalizer=null)
-    { harmony.Patch(method,PatchMethod(prefix),PatchMethod(postfix),PatchMethod(transpiler),PatchMethod(finalizer)); patched.Add(method); }
+    {
+        // Harmony can register its detour before a later callback fails. Track the attempted
+        // target first so Install's cleanup also sees that partially completed operation.
+        patched.Add(method);
+        harmony.Patch(method,PatchMethod(prefix),PatchMethod(postfix),PatchMethod(transpiler??nameof(GenericTranspiler)),PatchMethod(finalizer));
+    }
 
     private static bool CapturePrefix(object __instance,MethodBase __originalMethod,out CaptureCall __state)
     {
@@ -214,12 +236,21 @@ public sealed class HmsOriginalAdapter : IDisposable
         catch(Exception ex) { throw new HmsCaptureIsolationException(ex); }
     }
     private static IEnumerable<CodeInstruction> CaptureTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)
-        => HmsOriginalPatchRules.ReplaceCaptureAddresses(instructions,Bridge(__originalMethod.Name=="OnFrameworkUpdate"?nameof(BodyAddress):nameof(DetectorAddress)),__originalMethod.Name!="OnFrameworkUpdate");
-    private static IEnumerable<CodeInstruction> EmoteTranspiler(IEnumerable<CodeInstruction> instructions)=>HmsOriginalPatchRules.MarkEmoteDispatches(instructions,Bridge(nameof(MarkDispatch)));
-    private static IEnumerable<CodeInstruction> StopTranspiler(IEnumerable<CodeInstruction> instructions)=>HmsOriginalPatchRules.MarkEmoteStop(instructions,Bridge(nameof(MarkDispatch)));
-    private static IEnumerable<CodeInstruction> SetupTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsOriginalPatchRules.MarkPresentationDispatches(instructions,Bridge(nameof(MarkDispatch)),__originalMethod.Name);
+        => HmsHarmonyIsolation.PreserveGenericMembers(HmsOriginalPatchRules.ReplaceCaptureAddresses(instructions,Bridge(__originalMethod.Name=="OnFrameworkUpdate"?nameof(BodyAddress):nameof(DetectorAddress)),__originalMethod.Name!="OnFrameworkUpdate"),__originalMethod);
+    private static IEnumerable<CodeInstruction> GenericTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsHarmonyIsolation.PreserveGenericMembers(instructions,__originalMethod);
+    private static IEnumerable<CodeInstruction> EmoteTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsHarmonyIsolation.PreserveGenericMembers(HmsOriginalPatchRules.MarkEmoteDispatches(instructions,Bridge(nameof(MarkDispatch))),__originalMethod);
+    private static IEnumerable<CodeInstruction> StopTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsHarmonyIsolation.PreserveGenericMembers(HmsOriginalPatchRules.MarkEmoteStop(instructions,Bridge(nameof(MarkDispatch))),__originalMethod);
+    private static IEnumerable<CodeInstruction> SetupTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsHarmonyIsolation.PreserveGenericMembers(HmsOriginalPatchRules.MarkPresentationDispatches(instructions,Bridge(nameof(MarkDispatch)),__originalMethod.Name),__originalMethod);
     private static string SemanticBridge(string method)=>method switch { "OnCommand"=>nameof(ReadMount),"DoMinion"=>nameof(ReadMinion),_=>nameof(ReadOrnament) };
-    private static IEnumerable<CodeInstruction> SemanticTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsOriginalPatchRules.ReplaceSemanticReads(instructions,Bridge(SemanticBridge(__originalMethod.Name)),__originalMethod.Name);
+    private static IEnumerable<CodeInstruction> SemanticTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsHarmonyIsolation.PreserveGenericMembers(HmsOriginalPatchRules.ReplaceSemanticReads(instructions,Bridge(SemanticBridge(__originalMethod.Name)),__originalMethod.Name),__originalMethod);
+    private static IEnumerable<CodeInstruction> VisibilityTranspiler(IEnumerable<CodeInstruction> instructions,MethodBase __originalMethod)=>HmsHarmonyIsolation.PreserveGenericMembers(HmsOriginalPatchRules.ReplaceVisibilityKindReads(instructions,Bridge(nameof(ReadVisibilityKind)),__originalMethod.Name=="HideAll"?1:2),__originalMethod);
+    private static unsafe FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind ReadVisibilityKind(FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject* actor)
+    {
+        // Exempt only this allocation from HMS's non-peer player hiding. No actual kind,
+        // HMS peer roster, materialization watch or gameplay identity is changed.
+        if(current?.runtime.OwnsDisplayActor((nint)actor)==true) return FFXIVClientStructs.FFXIV.Client.Game.Object.ObjectKind.BattleNpc;
+        return actor->ObjectKind;
+    }
 
     private static void InputPrefix(object __instance,MethodBase __originalMethod,object[] __args,out InputCall? __state)
     {
@@ -310,7 +341,8 @@ public sealed class HmsOriginalAdapter : IDisposable
     {
         if(assembly==null && patched.Count==0) return;
         if(assembly!=null) { try { runtime.BeforeHmsLifecycle(); } catch(Exception ex) { log.Error(ex,"[LocalPreview] HMS detach cleanup failed"); } }
-        try { harmony.UnpatchAll(harmony.Id); }
+        try { HmsHarmonyIsolation.Detach(harmony,patched); }
+        catch(Exception ex) { try { log.Error(ex,"[LocalPreview] HMS patch detach failed; original HMS disposal will continue"); } catch { } }
         finally { patched.Clear(); if(ReferenceEquals(current,this)) current=null; assembly=null; plugin=null; zoneLoad=null; detector=null;capture=null;apply=null; fault=null; }
     }
     private static bool ReadBool(object? value,string name)=>value?.GetType().GetProperty(name)?.GetValue(value) as bool? ?? false;
@@ -318,9 +350,10 @@ public sealed class HmsOriginalAdapter : IDisposable
     {
         // Current Dalamud captures this primary-constructor argument as <plugin>P; older
         // builds used an explicit plugin field. Both still expose the same exact LocalPlugin.
-        object? raw=ReadField(exposed,"plugin")??ReadField(exposed,"<plugin>P");
+        object? raw=FindLocalPlugin(exposed);
         return raw==null?null:ReadField(raw,"instance");
     }
+    private static object? FindLocalPlugin(object exposed)=>ReadField(exposed,"plugin")??ReadField(exposed,"<plugin>P");
     private static object? ReadField(object value,string name)
     {
         for(var type=value.GetType();type!=null;type=type.BaseType)
