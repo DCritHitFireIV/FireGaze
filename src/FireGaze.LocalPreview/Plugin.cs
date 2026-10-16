@@ -8,6 +8,7 @@ using Dalamud.Plugin.Services;
 using Dalamud.Game.Text.SeStringHandling;
 using FireGaze.LocalPreview.Interaction;
 using FireGaze.LocalPreview.Runtime;
+using FireGaze.LocalPreview.Core;
 using MenuKind = FireGaze.LocalPreview.Interaction.PreviewKind;
 
 namespace FireGaze.LocalPreview;
@@ -31,6 +32,12 @@ public sealed class Plugin : IDalamudPlugin
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly DateTime loadedAt = DateTime.UtcNow;
     private readonly ICallGateProvider<string> diagnosticsIpc;
+    private readonly ICallGateProvider<string> captureProjectionIpc;
+    private readonly ICallGateProvider<int, uint, long> beginExternalIpc;
+    private readonly ICallGateProvider<long, bool, bool> endExternalIpc;
+    private readonly ICallGateProvider<object> hmsLifecycleIpc;
+    private readonly ICallGateSubscriber<int> hmsApi;
+    private readonly ICallGateSubscriber<int, object> hmsHostState;
     private ActorPreviewRuntime? runtime;
     private PreviewInteractionService? interaction;
     private bool enabled = true;
@@ -38,7 +45,9 @@ public sealed class Plugin : IDalamudPlugin
     private bool visible;
     private bool disposed;
     private string lastMessage = "等待插件加载阶段完成";
-    private DateTime nextConflictCheck;
+    private HmsCoexistenceDecision coexistence = HmsCoexistencePolicy.Decide(0, null);
+    private DateTime nextCoexistenceCheck;
+    private int loadedHmsCount;
 
     public Plugin(IDalamudPluginInterface pluginInterface)
     {
@@ -48,33 +57,39 @@ public sealed class Plugin : IDalamudPlugin
             HelpMessage = "本地试用验证：status / cancel / on / off / mount|minion|accessory|emote <编号>",
         });
         diagnosticsIpc = pluginInterface.GetIpcProvider<string>("FireGaze.LocalPreview.Diagnostics");
-        diagnosticsIpc.RegisterFunc(() => Framework.RunOnFrameworkThread(Diagnostics).GetAwaiter().GetResult());
+        diagnosticsIpc.RegisterFunc(() => OnFramework(Diagnostics));
+        hmsApi = pluginInterface.GetIpcSubscriber<int>("HMSync.LocalPreview.ApiVersion");
+        hmsHostState = pluginInterface.GetIpcSubscriber<int, object>("HMSync.LocalPreview.HostState");
+        captureProjectionIpc = pluginInterface.GetIpcProvider<string>("FireGaze.LocalPreview.GetCaptureProjection");
+        captureProjectionIpc.RegisterFunc(() => OnFramework(() => runtime is null
+            ? "{\"ApiVersion\":1,\"Active\":false}"
+            : JsonSerializer.Serialize(runtime.GetCaptureProjection())));
+        beginExternalIpc = pluginInterface.GetIpcProvider<int, uint, long>("FireGaze.LocalPreview.BeginExternalPresentation");
+        beginExternalIpc.RegisterFunc((kind, id) => OnFramework(() => runtime?.BeginExternalPresentation(kind, id) ?? 0));
+        endExternalIpc = pluginInterface.GetIpcProvider<long, bool, bool>("FireGaze.LocalPreview.EndExternalPresentation");
+        endExternalIpc.RegisterFunc((token, accepted) => OnFramework(() => runtime?.EndExternalPresentation(token, accepted) == true));
+        hmsLifecycleIpc = pluginInterface.GetIpcProvider<object>("FireGaze.LocalPreview.BeforeHmsLifecycle");
+        hmsLifecycleIpc.RegisterAction(() => OnFramework(() => { runtime?.BeforeHmsLifecycle(); return true; }));
+        NotifyHmsHostState(1);
         Framework.Update += Update;
         pluginInterface.UiBuilder.Draw += Draw;
         pluginInterface.UiBuilder.OpenMainUi += OpenUi;
         pluginInterface.UiBuilder.OpenConfigUi += OpenUi;
-        Log.Information("[LocalPreview] 独立宿主已加载，版本 0.1.0.0");
+        Log.Information("[LocalPreview] 独立宿主已加载，版本 0.1.0.1");
     }
 
     private void Update(IFramework framework)
     {
-        if (disposed || DateTime.UtcNow - loadedAt < TimeSpan.FromSeconds(3) || DateTime.UtcNow < nextConflictCheck) return;
-        nextConflictCheck = DateTime.UtcNow.AddSeconds(1);
-        var conflict = pluginInterface.InstalledPlugins.FirstOrDefault(p => p.IsLoaded &&
-            (p.InternalName.Equals("HMSync", StringComparison.OrdinalIgnoreCase) ||
-             p.InternalName.Equals("HMSyncDev", StringComparison.OrdinalIgnoreCase)));
-        if (conflict is not null)
+        if (disposed || DateTime.UtcNow - loadedAt < TimeSpan.FromSeconds(3)) return;
+        if (!initialized || runtime?.HasActivePreview == true || DateTime.UtcNow >= nextCoexistenceCheck)
         {
-            if (initialized)
-            {
-                interaction?.Dispose();
-                interaction = null;
-                runtime?.Dispose();
-                runtime = null;
-                initialized = false;
-            }
-            lastMessage = $"本地验证前请先停用 {conflict.Name}，避免两个插件同时控制角色状态。";
-            return;
+            RefreshCoexistence();
+            nextCoexistenceCheck = DateTime.UtcNow.AddSeconds(1);
+        }
+        if (!coexistence.Allowed && runtime?.HasActivePreview == true)
+        {
+            runtime.BeforeHmsLifecycle();
+            lastMessage = coexistence.Reason;
         }
         if (initialized) return;
         initialized = true;
@@ -108,6 +123,13 @@ public sealed class Plugin : IDalamudPlugin
             Chat.PrintError("[本地试用] 功能尚未就绪或已关闭。");
             return;
         }
+        RefreshCoexistence();
+        if (!coexistence.Allowed)
+        {
+            lastMessage = coexistence.Reason;
+            Chat.PrintError("[本地试用] " + lastMessage);
+            return;
+        }
         if (id == 0 || id > ushort.MaxValue)
         {
             Chat.PrintError("[本地试用] 无效的试用编号。");
@@ -122,6 +144,13 @@ public sealed class Plugin : IDalamudPlugin
         };
         try
         {
+            // Invalidate any previous clean-unload marker before native display is changed.
+            if (!NotifyHmsHostState(1) && loadedHmsCount != 0)
+            {
+                lastMessage = "HMS 兼容桥尚未就绪，请稍后再试。";
+                Chat.PrintError("[本地试用] " + lastMessage);
+                return;
+            }
             if (runtime.TryApply(new PreviewEffect(slot, (ushort)id), out var reason))
             {
                 lastMessage = $"已本地试用 {kind} #{id}";
@@ -180,6 +209,30 @@ public sealed class Plugin : IDalamudPlugin
 
     private void RecordEmote(ulong actorId, ushort emoteId) => interaction?.RecordEmote(actorId, emoteId);
 
+    private static T OnFramework<T>(Func<T> action) => Framework.IsInFrameworkUpdateThread
+        ? action() : Framework.RunOnFrameworkThread(action).GetAwaiter().GetResult();
+
+    private void RefreshCoexistence()
+    {
+        var count = pluginInterface.InstalledPlugins.Count(p => p.IsLoaded &&
+            (p.InternalName.Equals("HMSync", StringComparison.OrdinalIgnoreCase) ||
+             p.InternalName.Equals("HMSyncDev", StringComparison.OrdinalIgnoreCase)));
+        int? apiVersion = null;
+        if (count == 1)
+        {
+            try { apiVersion = hmsApi.InvokeFunc(); }
+            catch { /* Missing compatibility provider is not an idle HMS state. */ }
+        }
+        coexistence = HmsCoexistencePolicy.Decide(count, apiVersion);
+        loadedHmsCount = count;
+    }
+
+    private bool NotifyHmsHostState(int state)
+    {
+        try { hmsHostState.InvokeAction(state); return true; }
+        catch { return false; }
+    }
+
     private void OnCommand(string command, string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
@@ -233,7 +286,7 @@ public sealed class Plugin : IDalamudPlugin
 
     private string Diagnostics() => JsonSerializer.Serialize(new
     {
-        version = "0.1.0.0", enabled, initialized,
+        version = "0.1.0.1", enabled, initialized, coexistence,
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
@@ -265,6 +318,7 @@ public sealed class Plugin : IDalamudPlugin
             var currentEnabled = enabled;
             if (ImGui.Checkbox("启用本地试用", ref currentEnabled)) SetEnabled(currentEnabled);
             ImGui.TextWrapped(lastMessage);
+            if (!coexistence.Allowed) ImGui.TextWrapped(coexistence.Reason);
             if (runtime is not null)
                 foreach (var effect in runtime.ActiveEffects) ImGui.TextUnformatted($"{effect.Slot}: {effect.Id}");
             if (ImGui.Button("结束全部试用")) Cancel();
@@ -292,6 +346,12 @@ public sealed class Plugin : IDalamudPlugin
             runtime.PreviewCancelled -= OnCancelled;
             runtime.Dispose();
         }
+        // Only a completed cleanup can release HMS's conservative capture pause on unload.
+        NotifyHmsHostState(0);
+        captureProjectionIpc.UnregisterFunc();
+        beginExternalIpc.UnregisterFunc();
+        endExternalIpc.UnregisterFunc();
+        hmsLifecycleIpc.UnregisterAction();
         Log.Information("[LocalPreview] 独立宿主已卸载");
     }
 }

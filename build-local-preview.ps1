@@ -1,4 +1,4 @@
-param([string]$SqpackPath = '')
+param([string]$SqpackPath = '', [string]$HmsCompatRoot = '')
 
 $ErrorActionPreference = 'Stop'
 $previewRoot = $PSScriptRoot
@@ -14,5 +14,9 @@ if ($SqpackPath) {
     dotnet run --project (Join-Path $previewRoot 'tools\LocalPreviewInteractionTests\LocalPreviewInteractionTests.csproj') -c Release
 }
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+if ($HmsCompatRoot) {
+    dotnet run --project (Join-Path $previewRoot 'tools\PreviewBridgeContractTests\PreviewBridgeContractTests.csproj') -c Release "-p:HmsCompatRoot=$HmsCompatRoot"
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
 dotnet build (Join-Path $previewRoot 'src\FireGaze.LocalPreview\FireGaze.LocalPreview.csproj') -c Release --no-incremental
 exit $LASTEXITCODE

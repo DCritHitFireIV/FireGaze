@@ -51,6 +51,51 @@ public sealed class NativeInputHandoff<TIntent>
     private int depth;
     private bool started;
     private TIntent acceptedIntent = default!;
+    private long nextExternalToken;
+    private long externalToken;
+    private TIntent externalIntent = default!;
+    private IPreviewSuspension<TIntent>? externalLease;
+
+    public bool HasExternal => externalToken != 0;
+
+    /// <summary>
+    /// Suspends once before an external plugin reads presentation state. The caller alone invokes
+    /// its original operation; native hooks reached inside it share this suppression boundary.
+    /// </summary>
+    public long BeginExternal(TIntent intent, System.Func<IPreviewSuspension<TIntent>> suspend)
+    {
+        if (depth != 0 || HasExternal) return 0;
+        if (nextExternalToken == long.MaxValue) return 0;
+        var lease = suspend();
+        externalIntent = intent;
+        externalLease = lease;
+        externalToken = ++nextExternalToken;
+        depth++;
+        return externalToken;
+    }
+
+    /// <summary>A stale binding releases suppression without replaying either old snapshot.</summary>
+    public bool CompleteExternal(long token, bool accepted, bool bindingCurrent)
+    {
+        if (token == 0 || token != externalToken || externalLease == null) return false;
+        var lease = externalLease;
+        var intent = externalIntent;
+        InvalidateExternal();
+        if (!bindingCurrent) return false;
+        if (accepted) lease.Accept(intent);
+        else lease.Resume();
+        return true;
+    }
+
+    /// <summary>Actor/map/ownership loss must never resume a previously suspended preview.</summary>
+    public void InvalidateExternal()
+    {
+        if (!HasExternal) return;
+        externalToken = 0;
+        externalLease = null;
+        externalIntent = default!;
+        depth--;
+    }
 
     public bool Run(TIntent intent, System.Func<bool> original, bool startedFromResult,
         System.Func<TIntent, IPreviewSuspension<TIntent>> suspend)

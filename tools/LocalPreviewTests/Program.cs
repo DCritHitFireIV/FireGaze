@@ -2,6 +2,41 @@ using FireGaze.LocalPreview.Core;
 
 var tests = new List<(string Name, Action Run)>
 {
+    ("preview works without HMS even when a stale bridge reports an unknown version", () =>
+    {
+        True(HmsCoexistencePolicy.Decide(0, null).Allowed, "HMS must be optional");
+        True(HmsCoexistencePolicy.Decide(0, 42).Allowed, "an absent HMS cannot block standalone previews");
+    }),
+    ("one compatible HMS permits preview without a session-state restriction", () =>
+    {
+        var decision = HmsCoexistencePolicy.Decide(1, 1);
+        True(decision.Allowed, "a compatible bridge must allow HMS and preview together");
+        Equal("", decision.Reason);
+    }),
+    ("loaded HMS with a missing or failed bridge gives compatible-build guidance", () =>
+    {
+        var decision = HmsCoexistencePolicy.Decide(1, null);
+        True(!decision.Allowed, "loaded HMS needs its capture and input bridge");
+        True(decision.Reason.Contains("配套兼容版"), "the user needs an actionable compatible-build instruction");
+    }),
+    ("loaded HMS rejects unsupported bridge versions", () =>
+    {
+        foreach (var version in new[] { -1, 0, 2, int.MaxValue })
+        {
+            var decision = HmsCoexistencePolicy.Decide(1, version);
+            True(!decision.Allowed, $"unsupported bridge {version} must not control the actor");
+            True(decision.Reason.Contains("配套兼容版"), "unsupported versions need compatible-build guidance");
+        }
+    }),
+    ("multiple loaded HMS plugins cannot share one bridge", () =>
+    {
+        foreach (var count in new[] { 2, 3 })
+        {
+            var decision = HmsCoexistencePolicy.Decide(count, 1);
+            True(!decision.Allowed, "a compatible bridge cannot arbitrate two loaded HMS plugins");
+            True(!string.IsNullOrWhiteSpace(decision.Reason), "conflicting controllers need an explanation");
+        }
+    }),
     ("new preview becomes active", () =>
     {
         var session = new PreviewSession();

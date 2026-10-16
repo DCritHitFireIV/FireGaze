@@ -6,9 +6,10 @@ public readonly record struct PreviewRestoreDecision(bool TouchActor, bool Resto
 /// <summary>Baseline presentation is restored only while that presentation remains legal.</summary>
 public static class PreviewRestorePolicy
 {
-    public static PreviewRestoreDecision Decide(PreviewExitReason reason, bool actorAllowsPreview, bool ownsMode)
+    public static PreviewRestoreDecision Decide(PreviewExitReason reason, bool actorAllowsPreview, bool ownsMode,
+        bool bindingCurrent = true)
     {
-        if (reason is PreviewExitReason.ActorChanged or PreviewExitReason.ZoneChanged) return new(false,false,false);
+        if (!bindingCurrent || reason is PreviewExitReason.ActorChanged or PreviewExitReason.ZoneChanged) return new(false,false,false);
         bool baseline = reason == PreviewExitReason.Manual && actorAllowsPreview;
         return new(true,baseline,baseline && ownsMode);
     }

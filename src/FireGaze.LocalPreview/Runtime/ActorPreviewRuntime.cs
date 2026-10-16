@@ -39,6 +39,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     private readonly Dictionary<PreviewSlot, PreviewEffect> effects = new();
     private readonly List<IDisposable> installedHooks = new();
     private readonly NativeInputHandoff<NativeIntent> handoff = new();
+    private readonly ImplicitMinionOwnership implicitMinion = new();
     private readonly Dictionary<PreviewSlot, int> spawnWait = new();
     private Hook<ActionManager.Delegates.UseAction>? useAction;
     private Hook<ActionManager.Delegates.UseActionLocation>? useLocation;
@@ -56,6 +57,10 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     private bool ownCall;
     private bool disposed;
     private int nativeDepth;
+    private bool replacingPreview;
+    private long revision;
+    private ExternalBinding? externalBinding;
+    private NativeIntent externalIntent;
 
     public event Action<ulong, ushort>? EmoteObserved;
     public event Action<ulong, ushort>? NativeEmoteEntered;
@@ -66,6 +71,74 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     public bool HasActivePreview => effects.Count != 0;
     public IReadOnlyList<PreviewEffect> ActiveEffects => effects.Values.ToArray();
     public RuntimeCapabilities Capabilities { get; private set; } = new(false, false, false, false, false, false, "未初始化");
+
+    public CaptureProjection GetCaptureProjection()
+    {
+        if (HasActivePreview && !BindingCurrent()) BeforeHmsLifecycle();
+        return !disposed && HasActivePreview && BindingCurrent() && baseline is { } snapshot
+            ? new(1, true, actorId, territory, revision, snapshot.Presentation)
+            : new(1, false, 0, clientState.TerritoryType, revision, null);
+    }
+
+    /// <summary>The external plugin invokes its operation exactly once between these two methods.</summary>
+    public long BeginExternalPresentation(int kind, uint id)
+    {
+        if (disposed || ownCall || nativeDepth != 0 || !HasActivePreview || !BindingCurrent()
+            || kind is < (int)PreviewSlot.Mount or > (int)PreviewSlot.Emote || id > ushort.MaxValue) return 0;
+        var intent = new NativeIntent((PreviewSlot)kind, id);
+        try
+        {
+            long token = handoff.BeginExternal(intent, () => new Suspension(this, projectMetadata: true));
+            if (token == 0) return 0;
+            externalBinding = new(actorAddress, actorId, territory, revision);
+            externalIntent = intent;
+            nativeDepth++;
+            return token;
+        }
+        catch (Exception ex) { ReportHandoff(ex); return 0; }
+    }
+
+    public bool EndExternalPresentation(long token, bool accepted)
+    {
+        if (externalBinding is not { } binding) return false;
+        bool current = !disposed && BindingCurrent() && binding == new ExternalBinding(actorAddress, actorId, territory, revision);
+        var intent = externalIntent;
+        ulong owner = binding.ActorId;
+        try
+        {
+            bool completed = handoff.CompleteExternal(token, accepted, current);
+            if (completed && accepted && intent.Slot == PreviewSlot.Emote && intent.Id is > 0 and <= ushort.MaxValue)
+                Raise(EmoteObserved, owner, (ushort)intent.Id);
+            return completed;
+        }
+        catch (Exception ex) { ReportHandoff(ex); return false; }
+        finally
+        {
+            // An obsolete token must not release the protection of a newer transaction.
+            if (!handoff.HasExternal) ReleaseExternalProtection();
+        }
+    }
+
+    /// <summary>HMS owns the ensuing lifecycle cleanup; remove our visuals without replaying history.</summary>
+    public void BeforeHmsLifecycle()
+    {
+        if (BindingCurrent()) ClearForReason(PreviewExitReason.Busy);
+        else ClearAll(false);
+    }
+
+    private bool BindingCurrent() => clientState.IsLoggedIn && territory == clientState.TerritoryType && Bound() != null;
+    private void ReleaseExternalProtection()
+    {
+        if (externalBinding == null) return;
+        externalBinding = null;
+        nativeDepth--;
+    }
+    private void InvalidateExternalPresentation()
+    {
+        handoff.InvalidateExternal();
+        ReleaseExternalProtection();
+    }
+    private readonly record struct ExternalBinding(nint Address, ulong ActorId, uint Territory, long Revision);
 
     public ActorPreviewRuntime(IFramework framework, IClientState clientState, IObjectTable objects,
         ICondition conditions, IDataManager data, IGameInteropProvider interop, IPluginLog log)
@@ -144,6 +217,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     {
         reason = "";
         if (disposed || !Capabilities.InputBridge) { reason = Capabilities.Reason; return false; }
+        if (nativeDepth != 0) { reason = "原生操作正在执行，请稍后再试。"; return false; }
         if (!clientState.IsLoggedIn || IsTeleportCast()) { reason = "当前状态无法开始试用。"; return false; }
         if (conditions[ConditionFlag.Crafting] || conditions[ConditionFlag.PreparingToCraft]) { reason = "正在制作状态中，请稍后再试"; return false; }
         if (conditions[ConditionFlag.InCombat] || conditions[ConditionFlag.Unconscious]
@@ -154,21 +228,27 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
         if (!Valid(effect)) { reason = "该对象没有可用的本地显示资源。"; return false; }
         if (!EnsureBaseline(actor)) { reason = "角色或地图刚发生变化，请重试。"; return false; }
         // Conflicts are removed only after the requested resource has passed validation.
-        foreach (var slot in GetConflicts(effect)) Clear(slot);
+        replacingPreview = true;
+        try { foreach (var slot in GetConflicts(effect)) Clear(slot); }
+        finally { replacingPreview = false; }
         if (!EnsureBaseline(actor)) { reason = "角色或地图刚发生变化，请重试。"; return false; }
         try
         {
             ownCall = true;
+            if (effect.Slot == PreviewSlot.Mount) implicitMinion.Begin(baseline!.Value.MinionId, MinionId(actor));
             Apply(actor, effect);
             effects[effect.Slot] = effect;
             spawnWait[effect.Slot] = 60;
+            revision++;
             if (effect.Slot == PreviewSlot.Mount && effects.TryGetValue(PreviewSlot.Emote, out var heldEmote)) Apply(actor, heldEmote);
+            RestoreImplicitMinion(actor);
             return true;
         }
         catch (Exception ex)
         {
             log.Error(ex, "[LocalPreview] Applying local effect failed.");
             RestoreSlot(actor, effect.Slot, baseline!.Value, preserveCurrent: false);
+            RestoreImplicitMinion(actor);
             if (!HasActivePreview) Forget();
             reason = "本地试用未能启动，已恢复原显示。";
             return false;
@@ -218,15 +298,20 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     public void Clear(PreviewSlot slot)
     {
         if (!effects.TryGetValue(slot, out var effect)) return;
+        InvalidateExternalPresentation();
         var actor = Bound();
         try
         {
             if (actor != null && baseline is { } snapshot)
             {
                 ownCall = true;
-                var decision = PreviewRestorePolicy.Decide(PreviewExitReason.Manual, AllowsPresentation(), OwnsMode(actor));
-                if (decision.RestoreBaseline) RestoreSlot(actor, slot, snapshot, preserveCurrent: true);
-                else RemoveOwnedSlot(actor, slot);
+                var decision = PreviewRestorePolicy.Decide(PreviewExitReason.Manual, AllowsPresentation(), OwnsMode(actor), BindingCurrent());
+                if (decision.TouchActor)
+                {
+                    if (slot == PreviewSlot.Mount) implicitMinion.Observe(MinionId(actor), actor->CompanionData.CompanionId);
+                    if (decision.RestoreBaseline) RestoreSlot(actor, slot, snapshot, preserveCurrent: true);
+                    else RemoveOwnedSlot(actor, slot);
+                }
             }
         }
         catch (Exception ex) { ReportHandoff(ex); }
@@ -235,12 +320,15 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
             ownCall = false;
             effects.Remove(slot);
             spawnWait.Remove(slot);
-            if (!HasActivePreview) Forget();
+            revision++;
+            if (!replacingPreview) RestoreImplicitMinion(actor);
+            if (!HasActivePreview && !replacingPreview) Forget();
         }
     }
 
     public void ClearAll(bool restoreBaseline = true)
     {
+        InvalidateExternalPresentation();
         if (restoreBaseline) foreach (var slot in effects.Keys.ToArray()) Clear(slot);
         effects.Clear();
         spawnWait.Clear();
@@ -364,12 +452,31 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
         actorAddress = (nint)actor;
         actorId = objects.LocalPlayer?.GameObjectId ?? 0;
         baseline = ActorSnapshot.Read(actor);
+        revision++;
         return true;
     }
-    private void Forget() { baseline = null; actorAddress = 0; actorId = 0; }
+    private void Forget() { InvalidateExternalPresentation(); implicitMinion.Reset(); baseline = null; actorAddress = 0; actorId = 0; revision++; }
     private NativeCharacter* Local() => objects.LocalPlayer is { } p ? (NativeCharacter*)p.Address : null;
     private NativeCharacter* Bound() => objects.LocalPlayer is { } p && p.Address == actorAddress && p.GameObjectId == actorId ? (NativeCharacter*)p.Address : null;
     private static ushort MinionId(NativeCharacter* actor) => actor->CompanionData.CompanionObject == null ? (ushort)0 : (ushort)actor->CompanionData.CompanionObject->BaseId;
+
+    private void RestoreImplicitMinion(NativeCharacter* actor)
+    {
+        if (actor == null || !BindingCurrent() || actor != Bound()) return;
+        ushort current = MinionId(actor);
+        implicitMinion.Observe(current, actor->CompanionData.CompanionId);
+        if (!implicitMinion.ShouldRestore(true, AllowsPresentation(), effects.ContainsKey(PreviewSlot.Mount),
+                effects.ContainsKey(PreviewSlot.Minion), current, actor->CompanionData.CompanionId)) return;
+        bool previousOwnCall = ownCall;
+        ownCall = true;
+        try
+        {
+            actor->CompanionData.SetupCompanion((short)implicitMinion.Id, 0);
+            implicitMinion.Reset();
+        }
+        catch (Exception ex) { ReportHandoff(ex); }
+        finally { ownCall = previousOwnCall; }
+    }
 
     private void Update(IFramework _)
     {
@@ -387,6 +494,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
             || conditions[ConditionFlag.BetweenAreas] || conditions[ConditionFlag.BetweenAreas51]
             || conditions[ConditionFlag.WatchingCutscene] || conditions[ConditionFlag.OccupiedInCutSceneEvent]
             || IsTeleportCast()) { Cancel("当前状态已结束试用"); return; }
+        if (handoff.HasExternal) return;
         var actor = Bound();
         foreach (var effect in effects.Values.ToArray())
         {
@@ -411,6 +519,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
                 else { effects.Remove(effect.Slot); spawnWait.Remove(effect.Slot); }
             }
         }
+        RestoreImplicitMinion(actor);
         if (!HasActivePreview) Forget();
     }
     private bool IsTeleportCast()
@@ -432,7 +541,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
     private readonly record struct NativeIntent(PreviewSlot Slot, uint Id);
     private bool Relevant(ActionType type) => type is ActionType.Mount or ActionType.Companion or ActionType.Ornament;
     private static PreviewSlot Slot(ActionType type) => type switch { ActionType.Mount => PreviewSlot.Mount, ActionType.Companion => PreviewSlot.Minion, _ => PreviewSlot.Accessory };
-    private bool Bypass => ownCall || !HasActivePreview || disposed;
+    private bool Bypass => ownCall || !HasActivePreview || disposed || handoff.HasExternal;
     private IPreviewSuspension<NativeIntent> Suspend(NativeIntent _) => new Suspension(this);
     private void ReportHandoff(Exception exception)
     {
@@ -490,7 +599,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
                 try { result = playEmote!.Original(controller,id,option); }
                 catch(Exception ex) { ReportHandoff(ex); return false; }
             }
-            if (result && !ownCall && id is > 0 and <= ushort.MaxValue) Raise(EmoteObserved,owner,(ushort)id);
+            if (result && !ownCall && !(handoff.HasExternal && owner == actorId) && id is > 0 and <= ushort.MaxValue)
+                Raise(EmoteObserved,owner,(ushort)id);
             return result;
         }
         finally
@@ -509,6 +619,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
         if (!mountOnly) return;
         effects.Remove(PreviewSlot.Mount);
         spawnWait.Remove(PreviewSlot.Mount);
+        revision++;
+        RestoreImplicitMinion(Bound());
         if (!HasActivePreview) Forget();
     }
 
@@ -522,12 +634,17 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
         private readonly bool projectedMount;
         private readonly bool projectedAccessory;
         private readonly bool projectedMinion;
-        public Suspension(ActorPreviewRuntime runtime)
+        private readonly bool projectedMetadata;
+        private readonly bool external;
+        private readonly long revision;
+        public Suspension(ActorPreviewRuntime runtime, bool projectMetadata = false)
         {
             this.runtime = runtime;
+            external = projectMetadata;
             var actor = runtime.Bound();
             if (actor == null || runtime.baseline is not { } baseline) return;
             address = (nint)actor;
+            revision = runtime.revision;
             current = ActorSnapshot.Read(actor);
             // No containers are destroyed. Only public semantic state is temporarily exposed as
             // the real baseline while the engine checks/starts this one synchronous native input.
@@ -536,25 +653,36 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
             projectedMount = runtime.effects.TryGetValue(PreviewSlot.Mount,out var mount) && actor->Mount.MountId == mount.Id;
             projectedAccessory = runtime.effects.TryGetValue(PreviewSlot.Accessory,out var accessory) && actor->OrnamentData.OrnamentId == accessory.Id;
             projectedMinion = runtime.effects.TryGetValue(PreviewSlot.Minion,out var minion) && MinionId(actor) == minion.Id;
+            projectedMetadata = projectMetadata && projectedEmote;
             if (projectedMode) { actor->Mode = baseline.Mode; actor->ModeParam = baseline.ModeParam; }
             if (projectedEmote) actor->EmoteController.EmoteId = baseline.EmoteId;
             if (projectedMount) actor->Mount.MountId = baseline.MountId;
             if (projectedAccessory) actor->OrnamentData.OrnamentId = baseline.AccessoryId;
             if (projectedMinion && actor->CompanionData.CompanionObject != null)
                 actor->CompanionData.CompanionObject->BaseId = baseline.MinionId;
+            if (projectedMetadata) WriteMetadata(actor, baseline);
         }
         public void Resume()
             => ResumeCore(includeMount: true);
         private void ResumeCore(bool includeMount)
         {
             var actor = runtime.Bound();
-            if (actor == null || (nint)actor != address) return;
+            if (actor == null || (nint)actor != address || runtime.revision != revision || !runtime.BindingCurrent()) return;
             if (projectedMode) { actor->Mode = current.Mode; actor->ModeParam = current.ModeParam; }
             if (projectedEmote) actor->EmoteController.EmoteId = current.EmoteId;
             if (projectedMount && includeMount) actor->Mount.MountId = current.MountId;
             if (projectedAccessory) actor->OrnamentData.OrnamentId = current.AccessoryId;
             if (projectedMinion && (nint)actor->CompanionData.CompanionObject == current.MinionObject && actor->CompanionData.CompanionObject != null)
                 actor->CompanionData.CompanionObject->BaseId = current.MinionId;
+            if (projectedMetadata) WriteMetadata(actor, current);
+        }
+        private static void WriteMetadata(NativeCharacter* actor, ActorSnapshot snapshot)
+        {
+            actor->EmoteController.CPoseState = snapshot.Pose;
+            actor->EmoteController.CurrentPoseType = snapshot.PoseType;
+            actor->Timeline.BaseOverride = snapshot.BaseOverride;
+            actor->Timeline.TimelineSequencer.TimelineIds[0] = snapshot.Timeline;
+            actor->Timeline.IsWeaponDrawn = snapshot.Presentation.WeaponDrawn;
         }
         public void Accept(NativeIntent intent)
         {
@@ -565,11 +693,20 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
                 ResumeCore(includeMount: false);
                 runtime.effects.Remove(PreviewSlot.Mount);
                 runtime.spawnWait.Remove(PreviewSlot.Mount);
+                runtime.revision++;
+                runtime.RestoreImplicitMinion(runtime.Bound());
                 if (!runtime.HasActivePreview) runtime.Forget();
                 return;
             }
             var actor = runtime.Bound();
-            if (actor == null || (nint)actor != address) { runtime.ClearAll(false); return; }
+            if (actor == null || (nint)actor != address || runtime.revision != revision || !runtime.BindingCurrent())
+            {
+                if (runtime.revision == revision) runtime.ClearAll(false);
+                return;
+            }
+            ushort exposedTimeline = projectedMetadata ? runtime.baseline!.Value.Timeline : current.Timeline;
+            var acceptedPresentation = external || winner == PreviewSlot.Emote || actor->Timeline.TimelineSequencer.TimelineIds[0] != exposedTimeline
+                ? ActorSnapshot.Read(actor) : (ActorSnapshot?)null;
             runtime.ownCall = true;
             try
             {
@@ -605,7 +742,9 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
                         && NativeOwnershipPolicy.RemovePendingChild(actor->OrnamentData.OrnamentId,baseline.AccessoryId,intent.Id,
                             (nint)actor->OrnamentData.OrnamentObject == current.AccessoryObject))
                         actor->OrnamentData.SetupOrnament(0,0);
-                    if (winner != PreviewSlot.Emote && runtime.effects.ContainsKey(PreviewSlot.Emote) && actor->EmoteController.EmoteId == baseline.EmoteId)
+                    if (NativeOwnershipPolicy.RestorePreviousTimeline(winner == PreviewSlot.Emote, runtime.effects.ContainsKey(PreviewSlot.Emote),
+                        actor->EmoteController.EmoteId, baseline.EmoteId, actor->Timeline.TimelineSequencer.TimelineIds[0],
+                        exposedTimeline, actor->Mode == baseline.Mode))
                     {
                         actor->Timeline.BaseOverride = baseline.BaseOverride;
                         if (baseline.Timeline != 0 && actor->Mode == baseline.Mode) actor->Timeline.TimelineSequencer.PlayTimeline(baseline.Timeline);
@@ -614,6 +753,15 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
             }
             finally
             {
+                // A sibling container's teardown may reset the rider's scalar presentation.
+                // Preserve the accepted external operation's new state, without executing it again.
+                if (acceptedPresentation is { } accepted && runtime.Bound() == actor && runtime.BindingCurrent())
+                {
+                    actor->Mode = accepted.Mode;
+                    actor->ModeParam = accepted.ModeParam;
+                    actor->EmoteController.EmoteId = accepted.EmoteId;
+                    WriteMetadata(actor, accepted);
+                }
                 runtime.effects.Clear();
                 runtime.spawnWait.Clear();
                 runtime.Forget();
@@ -625,12 +773,38 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable
 
     private readonly record struct ActorSnapshot(CharacterModes Mode, byte ModeParam, ushort EmoteId,
         byte Pose, EmoteController.PoseType PoseType, ushort BaseOverride, ushort Timeline,
-        ushort MountId, ushort MinionId, ushort AccessoryId, nint MountObject, nint MinionObject, nint AccessoryObject)
+        ushort MountId, ushort MinionId, ushort AccessoryId, nint MountObject, nint MinionObject, nint AccessoryObject,
+        PresentationSnapshot Presentation)
     {
-        public static ActorSnapshot Read(NativeCharacter* actor) => new(actor->Mode,actor->ModeParam,actor->EmoteController.EmoteId,
-            actor->EmoteController.CPoseState,actor->EmoteController.CurrentPoseType,actor->Timeline.BaseOverride,
-            actor->Timeline.TimelineSequencer.TimelineIds[0],actor->Mount.MountId,ActorPreviewRuntime.MinionId(actor),actor->OrnamentData.OrnamentId,
-            (nint)actor->Mount.MountObject,(nint)actor->CompanionData.CompanionObject,(nint)actor->OrnamentData.OrnamentObject);
+        public static ActorSnapshot Read(NativeCharacter* actor)
+        {
+            var companion = actor->CompanionData.CompanionObject;
+            var minionGo = (FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*)companion;
+            var minionOffset = minionGo != null ? minionGo->Position - actor->GameObject.Position : default;
+            var draw = actor->GameObject.DrawObject;
+            var bodyOffset = draw != null ? draw->Object.Position - actor->GameObject.Position : default;
+            var mount = actor->Mount.MountObject;
+            ushort mountTimeline = mount != null ? mount->Timeline.TimelineSequencer.TimelineIds[0] : (ushort)0;
+            float pitch = 0;
+            if (actor->Mode == CharacterModes.Mounted && mountTimeline is >= 4040 and <= 4058
+                && mount != null && mount->DrawObject != null)
+            {
+                var q = mount->DrawObject->Rotation;
+                pitch = MathF.Asin(Math.Clamp(2f * (q.W * q.X - q.Y * q.Z), -1f, 1f));
+            }
+            var presentation = new PresentationSnapshot((byte)actor->Mode,actor->ModeParam,actor->EmoteController.EmoteId,
+                actor->Timeline.TimelineSequencer.TimelineIds[0],actor->Timeline.BaseOverride,(byte)actor->EmoteController.CurrentPoseType,
+                actor->EmoteController.CPoseState,actor->Timeline.IsWeaponDrawn,actor->Mount.MountId,mountTimeline,pitch,
+                ActorPreviewRuntime.MinionId(actor),companion != null ? (byte)companion->Behavior : (byte)0,
+                companion != null ? companion->Timeline.TimelineSequencer.TimelineIds[0] : (ushort)0,
+                minionOffset.X,minionOffset.Y,minionOffset.Z,minionGo != null ? minionGo->Rotation : 0,
+                actor->OrnamentData.OrnamentId,actor->OrnamentData.OrnamentId != 0 ? actor->Timeline.TimelineSequencer.TimelineIds[0] : (ushort)0,
+                bodyOffset.X,bodyOffset.Y,bodyOffset.Z);
+            return new(actor->Mode,actor->ModeParam,actor->EmoteController.EmoteId,
+                actor->EmoteController.CPoseState,actor->EmoteController.CurrentPoseType,actor->Timeline.BaseOverride,
+                actor->Timeline.TimelineSequencer.TimelineIds[0],actor->Mount.MountId,ActorPreviewRuntime.MinionId(actor),actor->OrnamentData.OrnamentId,
+                (nint)mount,(nint)companion,(nint)actor->OrnamentData.OrnamentObject,presentation);
+        }
     }
 
     private static void Raise(Action? handlers) { if (handlers == null) return; foreach(Action h in handlers.GetInvocationList()) { try { h(); } catch { } } }

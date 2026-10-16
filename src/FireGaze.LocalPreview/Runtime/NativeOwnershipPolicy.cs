@@ -10,4 +10,9 @@ public static class NativeOwnershipPolicy
         => sameObject && currentId == baselineId && currentId != requestedId;
     public static bool RemovePendingMount(ushort currentId, ushort baselineId, uint requestedId, bool sameObject)
         => sameObject && currentId == baselineId && currentId != requestedId;
+
+    public static bool RestorePreviousTimeline(bool emoteWinner, bool previewEmote, ushort currentEmoteId,
+        ushort baselineEmoteId, ushort currentTimeline, ushort exposedTimeline, bool baselineMode)
+        => !emoteWinner && previewEmote && currentEmoteId == baselineEmoteId
+            && currentTimeline == exposedTimeline && baselineMode;
 }
