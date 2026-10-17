@@ -1,0 +1,1077 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-17",
+    "source": "user",
+    "label": "玩家包 · e11f3c",
+    "kinds": [
+      "free"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Avarice",
+      "Translated": "七宗罪",
+      "Context": "Avarice.get_Name",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggle configuration window. Use '/avarice draw' to toggle drawing, '/avarice debug' for debug mode.",
+      "Translated": "切换配置窗口。使用“/avarice draw”切换绘图，对于调试模式，使用“/avarice debug”。",
+      "Context": "Avarice..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Debug mode ",
+      "Translated": "调试模式",
+      "Context": "Avarice..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "disabled",
+      "Translated": "禁用",
+      "Context": "Avarice..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "enabled",
+      "Translated": "启用",
+      "Context": "Avarice..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Drawing ",
+      "Translated": "绘图",
+      "Context": "Avarice..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "(no damage)",
+      "Translated": "无损失",
+      "Context": "Memory.ReceiveActionEffectDetour",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Avarice Positional Debug###AvaricePosDebug",
+      "Translated": "贪婪定位调试",
+      "Context": "PositionalDebugWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Captures param2 from your own action-damage packets (the value the hit/miss table is keyed on).",
+      "Translated": "从您自己的动作损伤数据包（命中/未命中表键入的值）中捕获param2。",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Play any job that uses positionals, land hits from rear and flank, then deliberately miss a few. Compare the Verdict column to where you were actually standing. param2 marked with * matched a 'hit' row in the table. Use Copy export to share the raw values.",
+      "Translated": "玩任何使用定位器的作业，从后方和侧面命中，然后故意错过一些。将“判决”列与您实际站立的位置进行比较。标有*的param2与表中的“命中”行匹配。使用复制导出共享原始值。",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Only positional-table actions",
+      "Translated": "仅positional-table操作",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Pause capture",
+      "Translated": "暂停捕获",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clear",
+      "Translated": "清空",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Copy export",
+      "Translated": "复制<g id=\"1\">   </g>导出",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Frame",
+      "Translated": "框架",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Action",
+      "Translated": "操作",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "In table",
+      "Translated": "在表格中：",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Verdict",
+      "Translated": "判决",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "no",
+      "Translated": "否",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "yes",
+      "Translated": "是",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Positional HIT!",
+      "Translated": "位置命中！",
+      "Context": "PositionalFeedbackManager.TriggerFeedback",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Positional MISS!",
+      "Translated": "位置失误！",
+      "Context": "PositionalFeedbackManager.TriggerFeedback",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Avarice overlay",
+      "Translated": "贪婪叠加",
+      "Context": "Canvas..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Label Not Set",
+      "Translated": "标签未设置",
+      "Context": "InfoBox..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Action Not Set",
+      "Translated": "行动未设定:.",
+      "Context": ".ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Configuration - ",
+      "Translated": "Configuration",
+      "Context": "ConfigWindow..ctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Log",
+      "Translated": "轮盘日志",
+      "Context": "ConfigWindow.DrawNavRail",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "ConfigWindow.DrawNavRail",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Open Positional Debug window",
+      "Translated": "打开位置调试窗口",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "StaticAutoDetectRadiusData",
+      "Translated": "静态自动检测半径数据",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visual Feedback System:",
+      "Translated": "视觉反馈系统：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Test Feedback:",
+      "Translated": "测试反馈：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Success",
+      "Translated": "显示成功文本",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Failure",
+      "Translated": "显示失败",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hide",
+      "Translated": "隱藏",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Action override test",
+      "Translated": "动作覆盖测试",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current action override: ",
+      "Translated": "当前操作覆盖：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Combo: ",
+      "Translated": "连击",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": ", time=",
+      "Translated": "时间",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "N. S. ",
+      "Translated": "n  s",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Is target positional: ",
+      "Translated": "是目标位置：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Test IPC",
+      "Translated": "测试IPC",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Thickness:",
+      "Translated": "厚度 ：",
+      "Context": "ConfigWindow.DrawUnfilledSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "  Color:",
+      "Translated": "颜色:",
+      "Context": "ConfigWindow.DrawUnfilledSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "  Colours:",
+      "Translated": "颜色：",
+      "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "If enabled, the borders of each segment will automatically be set to a higher alpha variation of their own respective setting.",
+      "Translated": "如果启用，每个段的边框将自动设置为其各自设置的更高alpha变体。",
+      "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "            Front:",
+      "Translated": "正面：",
+      "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "            Rear:",
+      "Translated": "后",
+      "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "            Left Flank:",
+      "Translated": "左支",
+      "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "            Right Flank:",
+      "Translated": "右翼突进",
+      "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Overlays",
+      "Translated": "叠加",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Feedback",
+      "Translated": "反馈",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Profiles",
+      "Translated": "剖面",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Statistics",
+      "Translated": "统计学",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Advanced",
+      "Translated": "高级",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "About",
+      "Translated": "软件简介",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current profile:",
+      "Translated": "当前账户资料",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "CurrentProfiles",
+      "Translated": "当前配置文件",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Profile name...",
+      "Translated": "个人资料名称...",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Assign profiles to jobs",
+      "Translated": "将配置文件分配给职位",
+      "Context": "TabProfiles..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Last profile can not be removed",
+      "Translated": "最后的个人资料无法删除",
+      "Context": "Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "This is default profile.",
+      "Translated": "这是默认配置文件。",
+      "Context": "Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Make this profile default",
+      "Translated": "将此配置文件设为默认值",
+      "Context": "Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "<unassigned>",
+      "Translated": "<未分配>",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Unassign",
+      "Translated": "取消分配",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Splatoon",
+      "Translated": "喷射战士",
+      "Context": "TabSettings.DrawAdvanced",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "<se.10>",
+      "Translated": "<SE.10>",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Drawing",
+      "Translated": "绘画",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Positional feedback",
+      "Translated": "位置反馈",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rendering",
+      "Translated": "渲染",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Positional Anticipation",
+      "Translated": "位置预期",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Melee Range Options",
+      "Translated": "近战范围选项",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Entity Damage Pixels",
+      "Translated": "实体损坏像素",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable drawing",
+      "Translated": "启用绘图",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "(/avarice draw)",
+      "Translated": "（/贪婪平局）",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Toggle all overlay drawing features. Can also be toggled with /avarice draw command",
+      "Translated": "切换所有叠加绘图功能。也可以使用 /avarice 绘制命令进行切换",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Only show for positional targets",
+      "Translated": "仅显示位置目标",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "When enabled, overlays will only be shown when targeting an enemy that requires positional attacks",
+      "Translated": "启用后，仅当瞄准需要位置攻击的敌人时才会显示叠加层",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Still show distance indicator for non-positional targets",
+      "Translated": "仍然显示非位置目标的距离指示器",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "When enabled, the Enemy Distance Indicator will still show even when targeting enemies without positionals (like omnidirectional bosses)",
+      "Translated": "启用后，即使瞄准没有位置的敌人（例如全向 Boss），敌人距离指示器仍然会显示",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show positional Ring without Positional checks when non-positional buffs are present",
+      "Translated": "当存在非位置增益时，显示不带位置检查的位置环",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "When enabled, the Enemy Distance Indicator and positional ring without positional checks when the target has non-positional buffs",
+      "Translated": "启用后，当目标具有非位置增益时，敌人距离指示器和位置环不会进行位置检查",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Visual Mode:",
+      "Translated": "视觉模式：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Vector (Checkmark/X)",
+      "Translated": "矢量（复选标记/X）",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Game VFX (VFXEditor)",
+      "Translated": "游戏视觉特效（VFXEditor）",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Game VFX includes built-in sounds",
+      "Translated": "游戏视觉特效包括内置声音",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Test Hit",
+      "Translated": "测试命中",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Test Miss",
+      "Translated": "测试小姐",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Icon Size",
+      "Translated": "图标大小",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Print on miss",
+      "Translated": "错过时打印",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Print on hit",
+      "Translated": "命中时打印",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Encounter summary on combat end",
+      "Translated": "战斗结束遭遇总结",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Warning: Pictomancy may have issues on Mac/Linux.",
+      "Translated": "警告：Pictomancy 在 Mac/Linux 上可能会出现问题。",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Render under UI (Pictomancy)",
+      "Translated": "在 UI 下渲染（Pictomancy）",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "When enabled, overlays will render underneath the game's native UI elements (action bars, job gauges, etc.) instead of on top.",
+      "Translated": "启用后，叠加层将呈现在游戏的本机 UI 元素（操作栏、工作仪表等）下方，而不是顶部。",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clip around native UI",
+      "Translated": "围绕原生 UI 进行剪辑",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Automatically clips rendering around native UI elements.",
+      "Translated": "自动剪辑原生 UI 元素周围的渲染。",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Max Opacity",
+      "Translated": "最大不透明度",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Maximum opacity for all rendered overlays (0-255).",
+      "Translated": "所有渲染叠加层的最大不透明度 (0-255)。",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rear Colour:",
+      "Translated": "背面颜色：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Flank Colour:",
+      "Translated": "侧翼颜色：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Colour:",
+      "Translated": "颜色：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Radius 3y:",
+      "Translated": "半径 3y：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Radius 2y:",
+      "Translated": "半径 2y：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Lines:",
+      "Translated": "线路：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "mr",
+      "Translated": "先生",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable anticipation pie",
+      "Translated": "启用预期饼图",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rear:",
+      "Translated": "后部：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "antr",
+      "Translated": "第二",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Flank:",
+      "Translated": "侧翼：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "antf",
+      "Translated": "安特夫",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Disable on True North",
+      "Translated": "禁用正北",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ninja:",
+      "Translated": "忍者：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show rear when Trick Attack is off cooldown",
+      "Translated": "当特技攻击结束冷却时显示后方",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show both valid positionals based on Kazematoi charges",
+      "Translated": "根据 Kazematoi 收费显示两个有效位置",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Samurai:",
+      "Translated": "武士：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Disable anticipation while under Meikyo Shisui",
+      "Translated": "在酒井明镜手下时禁用预期",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Reaper:",
+      "Translated": "收割者：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Anticipate first:",
+      "Translated": "先预测一下：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rear",
+      "Translated": "后部",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Flank",
+      "Translated": "侧翼",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use Rotation Solver Reborn to anticipate positionals",
+      "Translated": "使用 Rotation Solver Reborn 来预测位置",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ability/weaponskill Range Size",
+      "Translated": "能力/武器技能范围大小",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Melee Auto-attack Range Size",
+      "Translated": "近战自动攻击范围大小",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Displays the player's damage hitbox — a small pixel between your feet. Customizable via Thickness, but the default is recommended.",
+      "Translated": "显示玩家的伤害命中框——双脚之间的一个小像素。可通过厚度自定义，但建议使用默认值。",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "dot",
+      "Translated": "点",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Party Members",
+      "Translated": "党员",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "dotp",
+      "Translated": "点",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "All Players",
+      "Translated": "所有玩家",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "dota",
+      "Translated": "刀塔",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Displays a ring around you showing the reach of auto attacks.",
+      "Translated": "在您周围显示一个环，显示自动攻击的范围。",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "hitbox",
+      "Translated": "命中框",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Splatoon IPC",
+      "Translated": "启用 Splatoon IPC",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enables changing the colour of your Player Damage Pixel based on if your position is determined to be within the bounds of a preset configured as \"dangerous\".",
+      "Translated": "允许根据您的位置是否位于配置为“危险”的预设范围内来更改玩家伤害像素的颜色。",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Danger Pixel Colour",
+      "Translated": "危险像素颜色",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "The colour your Player Damage Pixel will change to if you are standing in a configured danger zone. You must have the Player Damage Pixel feature enabled for this to do anything.",
+      "Translated": "如果您站在配置的危险区域中，您的玩家伤害像素将更改为颜色。您必须启用“玩家伤害像素”功能才能执行任何操作。",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "This feature will probably not function for any pre-6.5 presets as it specifically requires the preset author to apply the \"Dangerous\" attribute to the preset metadata for Avarice to read it. Additionally, you must enable this feature in Splatoon in General settings.",
+      "Translated": "此功能可能不适用于任何 6.5 之前的预设，因为它特别要求预设作者将“危险”属性应用于预设元数据，以便 Avarice 读取它。此外，您必须在 Splatoon 的常规设置中启用此功能。",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Total stats",
+      "Translated": "总统计数据",
+      "Context": "TabStatistics..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Current encounter",
+      "Translated": "当前遭遇",
+      "Context": "TabStatistics..cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Job ",
+      "Translated": "工作",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Hits ",
+      "Translated": "点击数",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " Total ",
+      "Translated": "全部的",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Success %  ",
+      "Translated": "成功 ％",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clear data (hold shift+ctrl)",
+      "Translated": "清除数据（按住shift+ctrl）",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "No data",
+      "Translated": "无数据",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hits: ",
+      "Translated": "点击次数：",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " out of ",
+      "Translated": "出于",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Clear data",
+      "Translated": "清除数据",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Recent encounter",
+      "Translated": "最近的遭遇",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Stats will be reset on next positional cast",
+      "Translated": "统计数据将在下一次定位施放时重置",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Finalize",
+      "Translated": "最终确定",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Ich habe es für sie gemacht.\nEs tut mir leid, dass ich nicht der Grösste bin.\nAber du bist meine Inspiration.",
+      "Translated": "我为她做的。\n对不起，我不是最伟大的。\n但你是我的灵感。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Configurable arena centre pixel with additional boss alignment pixel with colour validation.",
+      "Translated": "可配置的竞技场中心像素，带有额外的 Boss 对齐像素和颜色验证。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Tank Centralisation Pixel",
+      "Translated": "启用坦克集中像素",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Displays a dot directly under the boss to assist with arena centralisation. This is a per-profile option.",
+      "Translated": "在 Boss 正下方显示一个点，以协助竞技场集中化。这是每个配置文件的选项。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enable Duty Arena Centre Pixel",
+      "Translated": "启用执勤竞技场中心像素",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Displays a dot at the configured centre of the duty arena. This is a per-profile option.",
+      "Translated": "在任务区域的配置中心显示一个点。这是每个配置文件的选项。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Duty Centre Pixel Colour",
+      "Translated": "任务中心像素颜色",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Duty Centre Radius",
+      "Translated": "工作中心半径",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Centred Pixel Colour",
+      "Translated": "中心像素颜色",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Uncentred Pixel Colour",
+      "Translated": "非中心像素颜色",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tank Pixel Size",
+      "Translated": "坦克像素尺寸",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Duty Centralisation zone overrides",
+      "Translated": "值班集中区域覆盖",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Add new override:",
+      "Translated": "添加新的覆盖：",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select...",
+      "Translated": "选择...",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Filter",
+      "Translated": "筛选",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Name",
+      "Translated": "姓名",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Middle point override",
+      "Translated": "中点覆盖",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Auto",
+      "Translated": "汽车",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "ECommonsButton",
+      "Translated": "电子共享按钮",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Tactical Compass",
+      "Translated": "战术指南针",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Game font family and size",
+      "Translated": "游戏字体系列和大小",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Font Scale",
+      "Translated": "字体比例",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Distance Offset",
+      "Translated": "距离偏移",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "North Color",
+      "Translated": "北色",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Other Colors",
+      "Translated": "其他颜色",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}

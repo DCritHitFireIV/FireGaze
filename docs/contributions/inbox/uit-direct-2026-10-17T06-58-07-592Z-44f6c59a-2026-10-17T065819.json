@@ -1,0 +1,1527 @@
+{
+  "issue": "direct-2026-10-17T06-58-07-592Z-44f6c59a",
+  "receivedAt": "2026-10-17 06:58:19",
+  "author": "匿名直传",
+  "plugin": "Avarice",
+  "fingerprint": "e11f3c58d99bffe1",
+  "packFile": "Avarice@user-e11f3c.json",
+  "accepted": 177,
+  "filled": 177,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Avarice",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Avarice",
+        "Translated": "七宗罪",
+        "Context": "Avarice.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Toggle configuration window. Use '/avarice draw' to toggle drawing, '/avarice debug' for debug mode.",
+        "Translated": "切换配置窗口。使用“/avarice draw”切换绘图，对于调试模式，使用“/avarice debug”。",
+        "Context": "Avarice..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Debug mode ",
+        "Translated": "调试模式",
+        "Context": "Avarice..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "disabled",
+        "Translated": "禁用",
+        "Context": "Avarice..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "enabled",
+        "Translated": "启用",
+        "Context": "Avarice..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Drawing ",
+        "Translated": "绘图",
+        "Context": "Avarice..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "(no damage)",
+        "Translated": "无损失",
+        "Context": "Memory.ReceiveActionEffectDetour",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Avarice Positional Debug###AvaricePosDebug",
+        "Translated": "贪婪定位调试",
+        "Context": "PositionalDebugWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Captures param2 from your own action-damage packets (the value the hit/miss table is keyed on).",
+        "Translated": "从您自己的动作损伤数据包（命中/未命中表键入的值）中捕获param2。",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Play any job that uses positionals, land hits from rear and flank, then deliberately miss a few. Compare the Verdict column to where you were actually standing. param2 marked with * matched a 'hit' row in the table. Use Copy export to share the raw values.",
+        "Translated": "玩任何使用定位器的作业，从后方和侧面命中，然后故意错过一些。将“判决”列与您实际站立的位置进行比较。标有*的param2与表中的“命中”行匹配。使用复制导出共享原始值。",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Only positional-table actions",
+        "Translated": "仅positional-table操作",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Pause capture",
+        "Translated": "暂停捕获",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Clear",
+        "Translated": "清空",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Copy export",
+        "Translated": "复制<g id=\"1\">   </g>导出",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.ButtonCopy"
+      },
+      {
+        "Original": "Frame",
+        "Translated": "框架",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Action",
+        "Translated": "操作",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "In table",
+        "Translated": "在表格中：",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Verdict",
+        "Translated": "判决",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "no",
+        "Translated": "否",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "yes",
+        "Translated": "是",
+        "Context": "PositionalDebugWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Positional HIT!",
+        "Translated": "位置命中！",
+        "Context": "PositionalFeedbackManager.TriggerFeedback",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Positional MISS!",
+        "Translated": "位置失误！",
+        "Context": "PositionalFeedbackManager.TriggerFeedback",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Avarice overlay",
+        "Translated": "贪婪叠加",
+        "Context": "Canvas..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Label Not Set",
+        "Translated": "标签未设置",
+        "Context": "InfoBox..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Action Not Set",
+        "Translated": "行动未设定:.",
+        "Context": ".ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " Configuration - ",
+        "Translated": "Configuration",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Log",
+        "Translated": "轮盘日志",
+        "Context": "ConfigWindow.DrawNavRail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Debug",
+        "Translated": "调试",
+        "Context": "ConfigWindow.DrawNavRail",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Open Positional Debug window",
+        "Translated": "打开位置调试窗口",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "StaticAutoDetectRadiusData",
+        "Translated": "静态自动检测半径数据",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Visual Feedback System:",
+        "Translated": "视觉反馈系统：",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Test Feedback:",
+        "Translated": "测试反馈：",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Show Success",
+        "Translated": "显示成功文本",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Show Failure",
+        "Translated": "显示失败",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Hide",
+        "Translated": "隱藏",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Action override test",
+        "Translated": "动作覆盖测试",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Current action override: ",
+        "Translated": "当前操作覆盖：",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Combo: ",
+        "Translated": "连击",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": ", time=",
+        "Translated": "时间",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextCopy"
+      },
+      {
+        "Original": "N. S. ",
+        "Translated": "n  s",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Is target positional: ",
+        "Translated": "是目标位置：",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Test IPC",
+        "Translated": "测试IPC",
+        "Context": "ConfigWindow.Debug",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Thickness:",
+        "Translated": "厚度 ：",
+        "Context": "ConfigWindow.DrawUnfilledSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "  Color:",
+        "Translated": "颜色:",
+        "Context": "ConfigWindow.DrawUnfilledSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "  Colours:",
+        "Translated": "颜色：",
+        "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "If enabled, the borders of each segment will automatically be set to a higher alpha variation of their own respective setting.",
+        "Translated": "如果启用，每个段的边框将自动设置为其各自设置的更高alpha变体。",
+        "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "            Front:",
+        "Translated": "正面：",
+        "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "            Rear:",
+        "Translated": "后",
+        "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "            Left Flank:",
+        "Translated": "左支",
+        "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "            Right Flank:",
+        "Translated": "右翼突进",
+        "Context": "ConfigWindow.DrawUnfilledMultiSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Overlays",
+        "Translated": "叠加",
+        "Context": "ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Feedback",
+        "Translated": "反馈",
+        "Context": "ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Profiles",
+        "Translated": "剖面",
+        "Context": "ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Statistics",
+        "Translated": "统计学",
+        "Context": "ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Advanced",
+        "Translated": "高级",
+        "Context": "ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "About",
+        "Translated": "软件简介",
+        "Context": "ConfigWindow..cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Current profile:",
+        "Translated": "当前账户资料",
+        "Context": "TabProfiles.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "CurrentProfiles",
+        "Translated": "当前配置文件",
+        "Context": "TabProfiles.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.InputWithRightButtonsArea"
+      },
+      {
+        "Original": "Profile name...",
+        "Translated": "个人资料名称...",
+        "Context": "TabProfiles.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Assign profiles to jobs",
+        "Translated": "将配置文件分配给职位",
+        "Context": "TabProfiles..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Last profile can not be removed",
+        "Translated": "最后的个人资料无法删除",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ Notify.Error"
+      },
+      {
+        "Original": "This is default profile.",
+        "Translated": "这是默认配置文件。",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Make this profile default",
+        "Translated": "将此配置文件设为默认值",
+        "Context": "Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "<unassigned>",
+        "Translated": "<未分配>",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Unassign",
+        "Translated": "取消分配",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": "Splatoon",
+        "Translated": "喷射战士",
+        "Context": "TabSettings.DrawAdvanced",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "<se.10>",
+        "Translated": "<SE.10>",
+        "Context": "TabSettings..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Drawing",
+        "Translated": "绘画",
+        "Context": "TabSettings..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Positional feedback",
+        "Translated": "位置反馈",
+        "Context": "TabSettings..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Rendering",
+        "Translated": "渲染",
+        "Context": "TabSettings..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Positional Anticipation",
+        "Translated": "位置预期",
+        "Context": "TabSettings..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Melee Range Options",
+        "Translated": "近战范围选项",
+        "Context": "TabSettings..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Entity Damage Pixels",
+        "Translated": "实体损坏像素",
+        "Context": "TabSettings..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Enable drawing",
+        "Translated": "启用绘图",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "(/avarice draw)",
+        "Translated": "（/贪婪平局）",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Toggle all overlay drawing features. Can also be toggled with /avarice draw command",
+        "Translated": "切换所有叠加绘图功能。也可以使用 /avarice 绘制命令进行切换",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Only show for positional targets",
+        "Translated": "仅显示位置目标",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "When enabled, overlays will only be shown when targeting an enemy that requires positional attacks",
+        "Translated": "启用后，仅当瞄准需要位置攻击的敌人时才会显示叠加层",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Still show distance indicator for non-positional targets",
+        "Translated": "仍然显示非位置目标的距离指示器",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "When enabled, the Enemy Distance Indicator will still show even when targeting enemies without positionals (like omnidirectional bosses)",
+        "Translated": "启用后，即使瞄准没有位置的敌人（例如全向 Boss），敌人距离指示器仍然会显示",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Show positional Ring without Positional checks when non-positional buffs are present",
+        "Translated": "当存在非位置增益时，显示不带位置检查的位置环",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "When enabled, the Enemy Distance Indicator and positional ring without positional checks when the target has non-positional buffs",
+        "Translated": "启用后，当目标具有非位置增益时，敌人距离指示器和位置环不会进行位置检查",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Visual Mode:",
+        "Translated": "视觉模式：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Vector (Checkmark/X)",
+        "Translated": "矢量（复选标记/X）",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Game VFX (VFXEditor)",
+        "Translated": "游戏视觉特效（VFXEditor）",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Combo"
+      },
+      {
+        "Original": "Game VFX includes built-in sounds",
+        "Translated": "游戏视觉特效包括内置声音",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Test Hit",
+        "Translated": "测试命中",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Test Miss",
+        "Translated": "测试小姐",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Icon Size",
+        "Translated": "图标大小",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Print on miss",
+        "Translated": "错过时打印",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Print on hit",
+        "Translated": "命中时打印",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Encounter summary on combat end",
+        "Translated": "战斗结束遭遇总结",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Warning: Pictomancy may have issues on Mac/Linux.",
+        "Translated": "警告：Pictomancy 在 Mac/Linux 上可能会出现问题。",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Render under UI (Pictomancy)",
+        "Translated": "在 UI 下渲染（Pictomancy）",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "When enabled, overlays will render underneath the game's native UI elements (action bars, job gauges, etc.) instead of on top.",
+        "Translated": "启用后，叠加层将呈现在游戏的本机 UI 元素（操作栏、工作仪表等）下方，而不是顶部。",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Clip around native UI",
+        "Translated": "围绕原生 UI 进行剪辑",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Automatically clips rendering around native UI elements.",
+        "Translated": "自动剪辑原生 UI 元素周围的渲染。",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Max Opacity",
+        "Translated": "最大不透明度",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Maximum opacity for all rendered overlays (0-255).",
+        "Translated": "所有渲染叠加层的最大不透明度 (0-255)。",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Rear Colour:",
+        "Translated": "背面颜色：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Flank Colour:",
+        "Translated": "侧翼颜色：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Colour:",
+        "Translated": "颜色：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Radius 3y:",
+        "Translated": "半径 3y：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Radius 2y:",
+        "Translated": "半径 2y：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Lines:",
+        "Translated": "线路：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "mr",
+        "Translated": "先生",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Enable anticipation pie",
+        "Translated": "启用预期饼图",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Rear:",
+        "Translated": "后部：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "antr",
+        "Translated": "第二",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Flank:",
+        "Translated": "侧翼：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "antf",
+        "Translated": "安特夫",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Disable on True North",
+        "Translated": "禁用正北",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Ninja:",
+        "Translated": "忍者：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Show rear when Trick Attack is off cooldown",
+        "Translated": "当特技攻击结束冷却时显示后方",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Show both valid positionals based on Kazematoi charges",
+        "Translated": "根据 Kazematoi 收费显示两个有效位置",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Samurai:",
+        "Translated": "武士：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Disable anticipation while under Meikyo Shisui",
+        "Translated": "在酒井明镜手下时禁用预期",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reaper:",
+        "Translated": "收割者：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Anticipate first:",
+        "Translated": "先预测一下：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Rear",
+        "Translated": "后部",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Flank",
+        "Translated": "侧翼",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Use Rotation Solver Reborn to anticipate positionals",
+        "Translated": "使用 Rotation Solver Reborn 来预测位置",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Ability/weaponskill Range Size",
+        "Translated": "能力/武器技能范围大小",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Melee Auto-attack Range Size",
+        "Translated": "近战自动攻击范围大小",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Displays the player's damage hitbox — a small pixel between your feet. Customizable via Thickness, but the default is recommended.",
+        "Translated": "显示玩家的伤害命中框——双脚之间的一个小像素。可通过厚度自定义，但建议使用默认值。",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "dot",
+        "Translated": "点",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Party Members",
+        "Translated": "党员",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "dotp",
+        "Translated": "点",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "All Players",
+        "Translated": "所有玩家",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "dota",
+        "Translated": "刀塔",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Displays a ring around you showing the reach of auto attacks.",
+        "Translated": "在您周围显示一个环，显示自动攻击的范围。",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "hitbox",
+        "Translated": "命中框",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Enable Splatoon IPC",
+        "Translated": "启用 Splatoon IPC",
+        "Context": "TabSplatoon.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enables changing the colour of your Player Damage Pixel based on if your position is determined to be within the bounds of a preset configured as \"dangerous\".",
+        "Translated": "允许根据您的位置是否位于配置为“危险”的预设范围内来更改玩家伤害像素的颜色。",
+        "Context": "TabSplatoon.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Danger Pixel Colour",
+        "Translated": "危险像素颜色",
+        "Context": "TabSplatoon.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "The colour your Player Damage Pixel will change to if you are standing in a configured danger zone. You must have the Player Damage Pixel feature enabled for this to do anything.",
+        "Translated": "如果您站在配置的危险区域中，您的玩家伤害像素将更改为颜色。您必须启用“玩家伤害像素”功能才能执行任何操作。",
+        "Context": "TabSplatoon.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "This feature will probably not function for any pre-6.5 presets as it specifically requires the preset author to apply the \"Dangerous\" attribute to the preset metadata for Avarice to read it. Additionally, you must enable this feature in Splatoon in General settings.",
+        "Translated": "此功能可能不适用于任何 6.5 之前的预设，因为它特别要求预设作者将“危险”属性应用于预设元数据，以便 Avarice 读取它。此外，您必须在 Splatoon 的常规设置中启用此功能。",
+        "Context": "TabSplatoon.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Total stats",
+        "Translated": "总统计数据",
+        "Context": "TabStatistics..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Current encounter",
+        "Translated": "当前遭遇",
+        "Context": "TabStatistics..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": " Job ",
+        "Translated": "工作",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": " Hits ",
+        "Translated": "点击数",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": " Total ",
+        "Translated": "全部的",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Success %  ",
+        "Translated": "成功 ％",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Clear data (hold shift+ctrl)",
+        "Translated": "清除数据（按住shift+ctrl）",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "No data",
+        "Translated": "无数据",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Hits: ",
+        "Translated": "点击次数：",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": " out of ",
+        "Translated": "出于",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Clear data",
+        "Translated": "清除数据",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Recent encounter",
+        "Translated": "最近的遭遇",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiGroup.BeginGroupBox"
+      },
+      {
+        "Original": "Stats will be reset on next positional cast",
+        "Translated": "统计数据将在下一次定位施放时重置",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Finalize",
+        "Translated": "最终确定",
+        "Context": ".cctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Ich habe es für sie gemacht.\nEs tut mir leid, dass ich nicht der Grösste bin.\nAber du bist meine Inspiration.",
+        "Translated": "我为她做的。\n对不起，我不是最伟大的。\n但你是我的灵感。",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Configurable arena centre pixel with additional boss alignment pixel with colour validation.",
+        "Translated": "可配置的竞技场中心像素，带有额外的 Boss 对齐像素和颜色验证。",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Enable Tank Centralisation Pixel",
+        "Translated": "启用坦克集中像素",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Displays a dot directly under the boss to assist with arena centralisation. This is a per-profile option.",
+        "Translated": "在 Boss 正下方显示一个点，以协助竞技场集中化。这是每个配置文件的选项。",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Enable Duty Arena Centre Pixel",
+        "Translated": "启用执勤竞技场中心像素",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Displays a dot at the configured centre of the duty arena. This is a per-profile option.",
+        "Translated": "在任务区域的配置中心显示一个点。这是每个配置文件的选项。",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiComponents.HelpMarker"
+      },
+      {
+        "Original": "Duty Centre Pixel Colour",
+        "Translated": "任务中心像素颜色",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Duty Centre Radius",
+        "Translated": "工作中心半径",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Centred Pixel Colour",
+        "Translated": "中心像素颜色",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Uncentred Pixel Colour",
+        "Translated": "非中心像素颜色",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Tank Pixel Size",
+        "Translated": "坦克像素尺寸",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Duty Centralisation zone overrides",
+        "Translated": "值班集中区域覆盖",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Add new override:",
+        "Translated": "添加新的覆盖：",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Select...",
+        "Translated": "选择...",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginCombo"
+      },
+      {
+        "Original": "Filter",
+        "Translated": "筛选",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Name",
+        "Translated": "姓名",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Middle point override",
+        "Translated": "中点覆盖",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Auto",
+        "Translated": "汽车",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "ECommonsButton",
+        "Translated": "电子共享按钮",
+        "Context": "TabTank.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButton"
+      },
+      {
+        "Original": "Tactical Compass",
+        "Translated": "战术指南针",
+        "Context": "BoxCompass.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Game font family and size",
+        "Translated": "游戏字体系列和大小",
+        "Context": "BoxCompass.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EnumCombo"
+      },
+      {
+        "Original": "Font Scale",
+        "Translated": "字体比例",
+        "Context": "BoxCompass.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Distance Offset",
+        "Translated": "距离偏移",
+        "Context": "BoxCompass.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "North Color",
+        "Translated": "北色",
+        "Context": "BoxCompass.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      },
+      {
+        "Original": "Other Colors",
+        "Translated": "其他颜色",
+        "Context": "BoxCompass.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.ColorEdit4"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
