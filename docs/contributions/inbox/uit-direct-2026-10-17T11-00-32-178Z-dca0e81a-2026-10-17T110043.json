@@ -1,0 +1,477 @@
+{
+  "issue": "direct-2026-10-17T11-00-32-178Z-dca0e81a",
+  "receivedAt": "2026-10-17 11:00:43",
+  "author": "匿名直传",
+  "plugin": "AutoJailMarker",
+  "fingerprint": "973827cd6e106a93",
+  "packFile": "AutoJailMarker@user-973827.json",
+  "accepted": 55,
+  "filled": 55,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "AutoJailMarker",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Auto Jail Marker",
+        "Translated": "自动监狱标记",
+        "Context": "AutoJailMarkerPlugin.get_Name",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "-Initializing Plugin-",
+        "Translated": "-初始化插件-",
+        "Context": "AutoJailMarkerPlugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " - Settings",
+        "Translated": "- 设置",
+        "Context": "AutoJailMarkerPlugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": " - Priority list",
+        "Translated": "- 优先级列表",
+        "Context": "AutoJailMarkerPlugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "---Marking Players---",
+        "Translated": "---标记玩家---",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "---Begin Matching Targets---",
+        "Translated": "---开始匹配目标---",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Not in priority list - using party list as priority",
+        "Translated": "不在优先级列表中 - 使用小队列表作为优先级",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": ">start match for ",
+        "Translated": ">开始匹配",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": " mark: {0} - Party list position: {1}",
+        "Translated": "标记: {0} - 小队列表位置: {1}",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "--> FOUND",
+        "Translated": "--> 已找到",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "--> NOT FOUND",
+        "Translated": "--> 未找到",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Finished Marking",
+        "Translated": "标记完成",
+        "Context": "AutoJailMarkerPlugin.ExecuteMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Added {0} to PartyIndex list as {1}.",
+        "Translated": "已将 {0} 作为 {1} 添加到小队索引列表。",
+        "Context": "AutoJailMarkerPlugin.CreatePartyPrioList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "---Clearing Marks---",
+        "Translated": "---清除标记---",
+        "Context": "AutoJailMarkerPlugin.ClearMarkers",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Auto Jail Marker - Settings",
+        "Translated": "自动监狱标记 - 设置",
+        "Context": "ConfigWindow.DrawSettingsWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "General Settings",
+        "Translated": "常规设置",
+        "Context": "ConfigWindow.DrawGeneralSection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Enabled",
+        "Translated": "启用",
+        "Context": "ConfigWindow.DrawGeneralSection",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Debug messages",
+        "Translated": "调试消息",
+        "Context": "ConfigWindow.DrawGeneralSection",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "On: Output debug messages",
+        "Translated": "开: 输出调试消息",
+        "Context": "ConfigWindow.DrawGeneralSection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Priority Settings",
+        "Translated": "优先级设置",
+        "Context": "ConfigWindow.DrawPrioritySection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Change Priority",
+        "Translated": "更改优先级",
+        "Context": "ConfigWindow.DrawPrioritySection",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "No priorities have been configured yet\nClick here to configure",
+        "Translated": "尚未配置优先级\n点击此处进行配置",
+        "Context": "ConfigWindow.DrawPrioritySection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Use job priority",
+        "Translated": "使用职业优先级",
+        "Context": "ConfigWindow.DrawPrioritySection",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "On: Use jobs as priority\nOff: Use player names as priority",
+        "Translated": "开：以职业为优先级\n关：以玩家名称为优先级",
+        "Context": "ConfigWindow.DrawPrioritySection",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Checks",
+        "Translated": "检查",
+        "Context": "ConfigWindow.DrawChecks",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Try Marks",
+        "Translated": "测试标记",
+        "Context": "ConfigWindow.DrawTryMarksButton",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Try to see if the plugin can set marks in general",
+        "Translated": "测试插件能否正常设置标记",
+        "Context": "ConfigWindow.DrawTryMarksButton",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Check Priority",
+        "Translated": "检查优先级",
+        "Context": "ConfigWindow.DrawCheckPrioButton",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Check if the party prio is working. 3 players are selected randomly.",
+        "Translated": "检查队伍优先级是否生效。随机选择3名玩家。",
+        "Context": "ConfigWindow.DrawCheckPrioButton",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Party size must be greater than 2",
+        "Translated": "队伍人数必须大于2",
+        "Context": "ConfigWindow.DrawCheckPrioButton",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Not in a party. Cross-World party are not supported",
+        "Translated": "不在队伍中。不支持跨服队伍",
+        "Context": "ConfigWindow.DrawCheckPrioButton",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Information",
+        "Translated": "信息",
+        "Context": "ConfigWindow.DrawInformation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Current place: ",
+        "Translated": "当前位置：",
+        "Context": "ConfigWindow.DrawInformation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Marking ",
+        "Translated": "标记",
+        "Context": "ConfigWindow.DrawInformation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "activated",
+        "Translated": "已启用",
+        "Context": "ConfigWindow.DrawInformation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": ": In UwU",
+        "Translated": "：在UwU中",
+        "Context": "ConfigWindow.DrawInformation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "deactivated",
+        "Translated": "机能停止",
+        "Context": "ConfigWindow.DrawInformation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": ": Not in UwU",
+        "Translated": "：不在UwU中",
+        "Context": "ConfigWindow.DrawInformation",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Current Party list from Game data",
+        "Translated": "来自游戏数据的当前队伍列表",
+        "Context": "ConfigWindow.DrawPartyTable",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "ConfigWindow.DrawPartyTable",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "EntityID",
+        "Translated": "实体ID",
+        "Context": "ConfigWindow.DrawPartyTable",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Auto Jail Marker - Priority List",
+        "Translated": "自动监禁标记 - 优先级列表",
+        "Context": "PriorityListWindow.DrawPriorityWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Priority ",
+        "Translated": "优先级",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Character",
+        "Translated": "角色",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Job",
+        "Translated": "职业",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " List",
+        "Translated": "列表",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Read-only",
+        "Translated": "只读",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Firstname Lastname[@Server]",
+        "Translated": "名 姓[@服务器]",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Duplicate character.\nIf you have two characters with the same name in your group,\nplease add the server for both so that the plugin works properly.\ne.g. Firstname Lastname@Server",
+        "Translated": "角色重复。\n如果你的队伍中有两个同名角色，\n请为两者都添加服务器，以便插件正常工作。\n例如：名 姓@服务器",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Set target",
+        "Translated": "设置目标",
+        "Context": "PriorityListWindow.DrawPriorityTable",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Target isn't a player",
+        "Translated": "目标不是玩家",
+        "Context": "PriorityListWindow.SetCharacterFromTarget",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Import party list",
+        "Translated": "导入队伍列表",
+        "Context": "PriorityListWindow.DrawImportButton",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "First",
+        "Translated": "第一",
+        "Context": "Helper..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Second",
+        "Translated": "第二",
+        "Context": "Helper..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      },
+      {
+        "Original": "Third",
+        "Translated": "第三",
+        "Context": "Helper..cctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.Print"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}

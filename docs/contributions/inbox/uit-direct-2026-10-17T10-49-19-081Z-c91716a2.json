@@ -1,1 +1,900 @@
-{"type":"uit-contribution","plugin":"BeastieBuddy","kinds":["llm"],"entries":[{"Original":"Opens the BeastieBuddy monster search window.","Translated":"打开 BeastieBuddy 怪物搜索窗口。","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"BeastieBuddy standalone is here!\nFFXIV ToS-compliant. No Dalamud or game interaction. Works on patch days!\nCode + SHA-256: https://github.com/rail2025/BeastieBuddy-App/\nSmartScreen may warn. Free. Click the icon or this link!","Translated":"BeastieBuddy 独立版来了！\n符合 FFXIV 服务条款。无需 Dalamud 或游戏任务指令。补丁日也能用！\n代码 + SHA-256：https://github.com/rail2025/BeastieBuddy-App/\nSmartScreen 可能会警告。免费。点击图标或此链接！","Context":"Plugin.AnnounceStandaloneApp","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"BeastieBuddy Standalone App","Translated":"BeastieBuddy 独立应用","Context":"Plugin.AnnounceStandaloneApp","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"A ToS-safe version is here! Check chat for details.","Translated":"符合服务条款的版本来了！详情请查看聊天。","Context":"Plugin.AnnounceStandaloneApp","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"About BeastieBuddy","Translated":"关于 BeastieBuddy","Context":"AboutWindow..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Version: ","Translated":"版本：","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Release Date: 7/22/2025","Translated":"发布日期：2025/7/22","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Created by: rail","Translated":"作者：rail","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"VFX Beacon system adapted from NorthStar by Pistachio Herald.","Translated":"VFX 信标系统改编自 Pistachio Herald 的 NorthStar。","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"With special thanks to the Dalamud Discord community.","Translated":"特别感谢 Dalamud Discord 社区。","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Check out my other projects on github.com/rail2025/","Translated":"选集我在 github.com/rail2025/ 上的其他项目","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"AetherBlackbox, AetherDraw, OBStoABB, and more.","Translated":"AetherBlackbox、AetherDraw、OBStoABB 等。","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Opens the GitHub Issues page in your browser.","Translated":"在浏览器中打开 GitHub Issues 页面。","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Donate (Ko-fi)","Translated":"捐赠（Ko-fi）","Context":"AboutWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Support the developer!","Translated":"支持开发者！","Context":"AboutWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Loading Combat Lab data...","Translated":"正在加载战斗实验室数据...","Context":"BestiaryCombatLab.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Weakness","Translated":"衰弱","Context":"BestiaryCombatLab.DrawControls","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Mult","Translated":"倍率","Context":"BestiaryCombatLab.DrawControls","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputFloat"},{"Original":"Board","Translated":"面板","Context":"BestiaryCombatLab.DrawControls","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Vulns (","Translated":"易伤（","Context":"BestiaryCombatLab.DrawControls","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Slot ","Translated":"槽位","Context":"BestiaryCombatLab.DrawTimeline","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Empty","Translated":"空","Context":"BestiaryCombatLab.DrawTimeline","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"[Optimized Rank Order: Slot ","Translated":"[优化排名顺序：槽位","Context":"BestiaryCombatLab.DrawCandidates","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"[Baseline Rank Order: Slot ","Translated":"[基准排名顺序：槽位","Context":"BestiaryCombatLab.DrawCandidates","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Rank","Translated":"排名","Context":"BestiaryCombatLab.DrawCandidates","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Icon","Translated":"图标","Context":"BestiaryCombatLab.DrawCandidates","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Name","Translated":"名称","Context":"BestiaryCombatLab.DrawCandidates","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Kin","Translated":"种类","Context":"BestiaryCombatLab.DrawCandidates","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Action","Translated":"技能","Context":"BestiaryCombatLab.DrawCandidates","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Physical","Translated":"物理","Context":"BestiaryCombatLab..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Magic","Translated":"魔法","Context":"BestiaryCombatLab..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Board 1 (80)","Translated":"面板 1 (80)","Context":"BestiaryCombatLab..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Board 2 (105)","Translated":"面板 2 (105)","Context":"BestiaryCombatLab..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Board 3 (130)","Translated":"面板 3 (130)","Context":"BestiaryCombatLab..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Board 4 (155)","Translated":"面板 4 (155)","Context":"BestiaryCombatLab..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Board 5 (180)","Translated":"面板 5 (180)","Context":"BestiaryCombatLab..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Loading Beastmaster Journal...","Translated":"正在加载驯兽师日志...","Context":"BestiaryUIV2.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Collection","Translated":"收藏","Context":"BestiaryUIV2.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Details","Translated":"详情","Context":"BestiaryUIV2.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"BEASTMASTER JOURNAL","Translated":"驯兽师日志","Context":"BestiaryUIV2.DrawHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Novice Tracker","Translated":"新手追踪者","Context":"BestiaryUIV2.DrawHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Experienced Hunter","Translated":"资深猎人","Context":"BestiaryUIV2.DrawHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Master Beastmaster","Translated":"驯兽大师","Context":"BestiaryUIV2.DrawHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Living Bestiary","Translated":"活体图鉴","Context":"BestiaryUIV2.DrawHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Captured","Translated":"已捕获","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Uncaptured","Translated":"未捕获","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"List","Translated":"列表","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Cards","Translated":"卡片","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Search beasts...","Translated":"搜索野兽...","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Filters (","Translated":"筛选 (","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Elements","Translated":"元素","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Classifications","Translated":"分类","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Status","Translated":"状态","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Location","Translated":"位置","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Reset All","Translated":"全部重置","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Apply/Close","Translated":"应用/关闭","Context":"BestiaryUIV2.DrawFilters","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Check","Translated":"勾选","Context":"BestiaryUIV2.DrawList","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Classification","Translated":"分类","Context":"BestiaryUIV2.DrawList","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"CardGrid","Translated":"卡片网格","Context":"BestiaryUIV2.DrawCards","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Table"},{"Original":"Page ","Translated":"页","Context":"BestiaryUIV2.DrawCards","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"No. ","Translated":"编号","Context":"BestiaryUIV2.DrawDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Habitat","Translated":"栖息地","Context":"BestiaryUIV2.DrawDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Find Spawn Locations","Translated":"查找刷新位置","Context":"BestiaryUIV2.DrawDetails","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Trick","Translated":"技巧","Context":"BestiaryUIV2.DrawDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Table"},{"Original":"Tempered Release","Translated":"释放","Context":"BestiaryUIV2.DrawDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Table"},{"Original":"Borrow","Translated":"借用","Context":"BestiaryUIV2.DrawDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Table"},{"Original":"Parting Blow","Translated":"最后一击","Context":"BestiaryUIV2.DrawDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Table"},{"Original":"Beastmaster Journal","Translated":"驯兽师日志","Context":"BestiaryUIV2.DrawEmptyDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Select a creature card to view its habitat, abilities, and collection details.","Translated":"选择一张生物卡片以查看其栖息地、能力和收集详情。","Context":"BestiaryUIV2.DrawEmptyDetails","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"[Feed Cap: ","Translated":"[喂食上限：","Context":"BestiaryUIV2.DrawCrucibleTop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Crucible Rank: %d","Translated":"熔炉等级：%d","Context":"BestiaryUIV2.DrawCrucibleTop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"STR","Translated":"力量","Context":"BestiaryUIV2.DrawCrucibleTop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"INT","Translated":"智力","Context":"BestiaryUIV2.DrawCrucibleTop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Title","Translated":"标题","Context":"BestiaryUIV2.DrawAbilityCard","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Collected: ","Translated":"已收集：","Context":"BestiaryUIV2.DrawCollectionStats","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Search spells...","Translated":"搜索技能...","Context":"BlueMageUI.DrawListView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Learned","Translated":"已学习","Context":"BlueMageUI.DrawListView","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Not Learned","Translated":"未学习","Context":"BlueMageUI.DrawListView","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"← Back to Spell List","Translated":"← 返回技能列表","Context":"BlueMageUI.DrawDetailView","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Source: ","Translated":"来源：","Context":"BlueMageUI.DrawDetailView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Location: ","Translated":"位置：","Context":"BlueMageUI.DrawDetailView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Coordinates: (","Translated":"坐标：(","Context":"BlueMageUI.DrawDetailView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Switches to the Beastie Search tab to find possible spawn locations.","Translated":"切换到怪物搜索标签页以查找可能的刷新位置。","Context":"BlueMageUI.DrawDetailView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"VFX Beacon Settings","Translated":"特效信标设置","Context":"ConfigWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Enable Map Beacons","Translated":"启用地图信标","Context":"ConfigWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Pillar Min Distance","Translated":"光柱最小距离","Context":"ConfigWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"The minimum distance you must be from the target to see the large Pillar.\nIf you are closer than this, the small Star will be shown instead.\n(Lower value = Pillar stays visible longer as you approach)","Translated":"看到大型光柱所需与目标的最小距离。\n若距离小于此值，将改为显示小星星。\n（数值越低 = 接近时光柱保持可见的时间越长）","Context":"ConfigWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Star Draw Distance","Translated":"星星绘制距离","Context":"ConfigWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Distance at which the pillar turns into a small star.","Translated":"光柱变为小星星的距离。","Context":"ConfigWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Star Height Offset","Translated":"星星高度偏移","Context":"ConfigWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Movable Config Window","Translated":"可移动设置窗口","Context":"ConfigWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Teleport Settings (Teleporter plugin required)","Translated":"传送设置（需要 Teleporter 插件）","Context":"ConfigWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Auto Teleport on Click","Translated":"点击自动传送","Context":"ConfigWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When enabled, clicking a search result will automatically teleport you to the nearest aetheryte in that zone. Requires the Teleporter plugin.","Translated":"启用后，点击搜索结果将自动传送至该区域最近的以太之光。需要 Teleporter 插件。","Context":"ConfigWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Searching...","Translated":"搜索中...","Context":"MainWindow.GetFooterMessage","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Blue Mage Spellbook","Translated":"青魔法师技能书","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Bestiary","Translated":"怪物图鉴","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Combat Lab","Translated":"战斗实验室","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Try the standalone, ToS-abiding, never-breaking-on-patch-days, overlay app instead!","Translated":"试试独立、合规、版本更新日永不失效的悬浮窗应用吧！","Context":"MainWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Search for a monster...","Translated":"搜索怪物...","Context":"MainWindow.DrawSearchTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Settings","Translated":"设置","Context":"MainWindow.DrawSearchTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"About","Translated":"关于","Context":"MainWindow.DrawSearchTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"No monsters found.","Translated":"未找到怪物。","Context":"MainWindow.DrawSearchTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Unknown Zone","Translated":"未知区域","Context":"MobData..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "BeastieBuddy",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Opens the BeastieBuddy monster search window.",
+      "Translated": "打开 BeastieBuddy 怪物搜索窗口。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "BeastieBuddy standalone is here!\nFFXIV ToS-compliant. No Dalamud or game interaction. Works on patch days!\nCode + SHA-256: https://github.com/rail2025/BeastieBuddy-App/\nSmartScreen may warn. Free. Click the icon or this link!",
+      "Translated": "BeastieBuddy 独立版来了！\n符合 FFXIV 服务条款。无需 Dalamud 或游戏任务指令。补丁日也能用！\n代码 + SHA-256：https://github.com/rail2025/BeastieBuddy-App/\nSmartScreen 可能会警告。免费。点击图标或此链接！",
+      "Context": "Plugin.AnnounceStandaloneApp",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "BeastieBuddy Standalone App",
+      "Translated": "BeastieBuddy 独立应用",
+      "Context": "Plugin.AnnounceStandaloneApp",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "A ToS-safe version is here! Check chat for details.",
+      "Translated": "符合服务条款的版本来了！详情请查看聊天。",
+      "Context": "Plugin.AnnounceStandaloneApp",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "About BeastieBuddy",
+      "Translated": "关于 BeastieBuddy",
+      "Context": "AboutWindow..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Version: ",
+      "Translated": "版本：",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Release Date: 7/22/2025",
+      "Translated": "发布日期：2025/7/22",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Created by: rail",
+      "Translated": "作者：rail",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "VFX Beacon system adapted from NorthStar by Pistachio Herald.",
+      "Translated": "VFX 信标系统改编自 Pistachio Herald 的 NorthStar。",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "With special thanks to the Dalamud Discord community.",
+      "Translated": "特别感谢 Dalamud Discord 社区。",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Check out my other projects on github.com/rail2025/",
+      "Translated": "选集我在 github.com/rail2025/ 上的其他项目",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "AetherBlackbox, AetherDraw, OBStoABB, and more.",
+      "Translated": "AetherBlackbox、AetherDraw、OBStoABB 等。",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Opens the GitHub Issues page in your browser.",
+      "Translated": "在浏览器中打开 GitHub Issues 页面。",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Donate (Ko-fi)",
+      "Translated": "捐赠（Ko-fi）",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Support the developer!",
+      "Translated": "支持开发者！",
+      "Context": "AboutWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Loading Combat Lab data...",
+      "Translated": "正在加载战斗实验室数据...",
+      "Context": "BestiaryCombatLab.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Weakness",
+      "Translated": "衰弱",
+      "Context": "BestiaryCombatLab.DrawControls",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Mult",
+      "Translated": "倍率",
+      "Context": "BestiaryCombatLab.DrawControls",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputFloat"
+    },
+    {
+      "Original": "Board",
+      "Translated": "面板",
+      "Context": "BestiaryCombatLab.DrawControls",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Vulns (",
+      "Translated": "易伤（",
+      "Context": "BestiaryCombatLab.DrawControls",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Slot ",
+      "Translated": "槽位",
+      "Context": "BestiaryCombatLab.DrawTimeline",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Empty",
+      "Translated": "空",
+      "Context": "BestiaryCombatLab.DrawTimeline",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "[Optimized Rank Order: Slot ",
+      "Translated": "[优化排名顺序：槽位",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "[Baseline Rank Order: Slot ",
+      "Translated": "[基准排名顺序：槽位",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Rank",
+      "Translated": "排名",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Icon",
+      "Translated": "图标",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Kin",
+      "Translated": "种类",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Action",
+      "Translated": "技能",
+      "Context": "BestiaryCombatLab.DrawCandidates",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Physical",
+      "Translated": "物理",
+      "Context": "BestiaryCombatLab..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Magic",
+      "Translated": "魔法",
+      "Context": "BestiaryCombatLab..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Board 1 (80)",
+      "Translated": "面板 1 (80)",
+      "Context": "BestiaryCombatLab..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Board 2 (105)",
+      "Translated": "面板 2 (105)",
+      "Context": "BestiaryCombatLab..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Board 3 (130)",
+      "Translated": "面板 3 (130)",
+      "Context": "BestiaryCombatLab..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Board 4 (155)",
+      "Translated": "面板 4 (155)",
+      "Context": "BestiaryCombatLab..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Board 5 (180)",
+      "Translated": "面板 5 (180)",
+      "Context": "BestiaryCombatLab..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Loading Beastmaster Journal...",
+      "Translated": "正在加载驯兽师日志...",
+      "Context": "BestiaryUIV2.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Collection",
+      "Translated": "收藏",
+      "Context": "BestiaryUIV2.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Details",
+      "Translated": "详情",
+      "Context": "BestiaryUIV2.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "BEASTMASTER JOURNAL",
+      "Translated": "驯兽师日志",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Novice Tracker",
+      "Translated": "新手追踪者",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Experienced Hunter",
+      "Translated": "资深猎人",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Master Beastmaster",
+      "Translated": "驯兽大师",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Living Bestiary",
+      "Translated": "活体图鉴",
+      "Context": "BestiaryUIV2.DrawHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Captured",
+      "Translated": "已捕获",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Uncaptured",
+      "Translated": "未捕获",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "List",
+      "Translated": "列表",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Cards",
+      "Translated": "卡片",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Search beasts...",
+      "Translated": "搜索野兽...",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Filters (",
+      "Translated": "筛选 (",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Elements",
+      "Translated": "元素",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Classifications",
+      "Translated": "分类",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Status",
+      "Translated": "状态",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Location",
+      "Translated": "位置",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Reset All",
+      "Translated": "全部重置",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Apply/Close",
+      "Translated": "应用/关闭",
+      "Context": "BestiaryUIV2.DrawFilters",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Check",
+      "Translated": "勾选",
+      "Context": "BestiaryUIV2.DrawList",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Classification",
+      "Translated": "分类",
+      "Context": "BestiaryUIV2.DrawList",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "CardGrid",
+      "Translated": "卡片网格",
+      "Context": "BestiaryUIV2.DrawCards",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table"
+    },
+    {
+      "Original": "Page ",
+      "Translated": "页",
+      "Context": "BestiaryUIV2.DrawCards",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "No. ",
+      "Translated": "编号",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Habitat",
+      "Translated": "栖息地",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Find Spawn Locations",
+      "Translated": "查找刷新位置",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Trick",
+      "Translated": "技巧",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table"
+    },
+    {
+      "Original": "Tempered Release",
+      "Translated": "释放",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table"
+    },
+    {
+      "Original": "Borrow",
+      "Translated": "借用",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table"
+    },
+    {
+      "Original": "Parting Blow",
+      "Translated": "最后一击",
+      "Context": "BestiaryUIV2.DrawDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Table"
+    },
+    {
+      "Original": "Beastmaster Journal",
+      "Translated": "驯兽师日志",
+      "Context": "BestiaryUIV2.DrawEmptyDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Select a creature card to view its habitat, abilities, and collection details.",
+      "Translated": "选择一张生物卡片以查看其栖息地、能力和收集详情。",
+      "Context": "BestiaryUIV2.DrawEmptyDetails",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "[Feed Cap: ",
+      "Translated": "[喂食上限：",
+      "Context": "BestiaryUIV2.DrawCrucibleTop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Crucible Rank: %d",
+      "Translated": "熔炉等级：%d",
+      "Context": "BestiaryUIV2.DrawCrucibleTop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "STR",
+      "Translated": "力量",
+      "Context": "BestiaryUIV2.DrawCrucibleTop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "INT",
+      "Translated": "智力",
+      "Context": "BestiaryUIV2.DrawCrucibleTop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Title",
+      "Translated": "标题",
+      "Context": "BestiaryUIV2.DrawAbilityCard",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Collected: ",
+      "Translated": "已收集：",
+      "Context": "BestiaryUIV2.DrawCollectionStats",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Search spells...",
+      "Translated": "搜索技能...",
+      "Context": "BlueMageUI.DrawListView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Learned",
+      "Translated": "已学习",
+      "Context": "BlueMageUI.DrawListView",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Not Learned",
+      "Translated": "未学习",
+      "Context": "BlueMageUI.DrawListView",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "← Back to Spell List",
+      "Translated": "← 返回技能列表",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Source: ",
+      "Translated": "来源：",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Location: ",
+      "Translated": "位置：",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Coordinates: (",
+      "Translated": "坐标：(",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Switches to the Beastie Search tab to find possible spawn locations.",
+      "Translated": "切换到怪物搜索标签页以查找可能的刷新位置。",
+      "Context": "BlueMageUI.DrawDetailView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "VFX Beacon Settings",
+      "Translated": "特效信标设置",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Enable Map Beacons",
+      "Translated": "启用地图信标",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Pillar Min Distance",
+      "Translated": "光柱最小距离",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "The minimum distance you must be from the target to see the large Pillar.\nIf you are closer than this, the small Star will be shown instead.\n(Lower value = Pillar stays visible longer as you approach)",
+      "Translated": "看到大型光柱所需与目标的最小距离。\n若距离小于此值，将改为显示小星星。\n（数值越低 = 接近时光柱保持可见的时间越长）",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Star Draw Distance",
+      "Translated": "星星绘制距离",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Distance at which the pillar turns into a small star.",
+      "Translated": "光柱变为小星星的距离。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Star Height Offset",
+      "Translated": "星星高度偏移",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Movable Config Window",
+      "Translated": "可移动设置窗口",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Teleport Settings (Teleporter plugin required)",
+      "Translated": "传送设置（需要 Teleporter 插件）",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Auto Teleport on Click",
+      "Translated": "点击自动传送",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When enabled, clicking a search result will automatically teleport you to the nearest aetheryte in that zone. Requires the Teleporter plugin.",
+      "Translated": "启用后，点击搜索结果将自动传送至该区域最近的以太之光。需要 Teleporter 插件。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Searching...",
+      "Translated": "搜索中...",
+      "Context": "MainWindow.GetFooterMessage",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Blue Mage Spellbook",
+      "Translated": "青魔法师技能书",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Bestiary",
+      "Translated": "怪物图鉴",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Combat Lab",
+      "Translated": "战斗实验室",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Try the standalone, ToS-abiding, never-breaking-on-patch-days, overlay app instead!",
+      "Translated": "试试独立、合规、版本更新日永不失效的悬浮窗应用吧！",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Search for a monster...",
+      "Translated": "搜索怪物...",
+      "Context": "MainWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "MainWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "MainWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "No monsters found.",
+      "Translated": "未找到怪物。",
+      "Context": "MainWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Unknown Zone",
+      "Translated": "未知区域",
+      "Context": "MobData..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-17T11:00:43",
+  "imported": {
+    "archive": "uit-direct-2026-10-17T10-49-19-081Z-c91716a2-2026-10-17T110043.json",
+    "accepted": 104,
+    "filled": 104,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 104 条 `BeastieBuddy` 的界面文字译文，已收为**独立译文包** `uit-packs/BeastieBuddy@user-ea0cea.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 104 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
