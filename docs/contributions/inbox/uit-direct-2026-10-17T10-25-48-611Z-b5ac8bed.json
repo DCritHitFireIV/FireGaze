@@ -1,1 +1,2724 @@
-{"type":"uit-contribution","plugin":"VIWI","kinds":["llm"],"entries":[{"Original":"OFF","Translated":"关","Context":"MainDashboardWindow.DrawPageEntry","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"ON","Translated":"开","Context":"MainDashboardWindow.DrawPageEntry","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"♥ Donate ♥","Translated":"♥ 捐赠 ♥","Context":"MainDashboardWindow.DrawDonateButton","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Support Vera and the development of VIWI ♥\nOpens Kofi in your browser.","Translated":"支持 Vera 和 VIWI 的开发 ♥\n在浏览器中打开 Kofi。","Context":"MainDashboardWindow.DrawDonateButton","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Passkey","Translated":"通行密钥","Context":"MainDashboardWindow.DrawPasskeyField","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Press Enter to submit.","Translated":"按回车提交。","Context":"MainDashboardWindow.DrawPasskeyField","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Unlocked!","Translated":"已解锁！","Context":"MainDashboardWindow.DrawPasskeyField","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"♥Unlocked♥","Translated":"♥已解锁♥","Context":"MainDashboardWindow.DrawPasskeyField","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Incorrect passkey.","Translated":"通行密钥错误。","Context":"MainDashboardWindow.DrawPasskeyField","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"AoEasy is not initialized yet.","Translated":"AoEasy 尚未初始化。","Context":"AoEasyPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Stop Running Away From Me!","Translated":"别再躲着我了！","Context":"AoEasyPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Enabled:","Translated":"已启用：","Context":"AoEasyPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"No - Click the OFF button to Enable AoEasy!!","Translated":"否 - 点击“关”按钮以启用 AoEasy！！","Context":"AoEasyPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Yes","Translated":"是","Context":"AoEasyPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Description:","Translated":"描述：","Context":"AoEasyPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"STILL IN DEVELOPMENT!!!","Translated":"仍在开发中！！！","Context":"AoEasyPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"AutoLogin","Translated":"自动登录","Context":"AutoLoginPage.get_DisplayName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"AutoLogin is not initialized yet.","Translated":"自动登录尚未初始化。","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"AutoLogin - V","Translated":"自动登录 - V","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"DDoS Begone!","Translated":"DDoS 退散！","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"No - Click the OFF button to Enable AutoLogin!!","Translated":"否 - 点击关闭按钮以启用自动登录！！","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"AutoLogin is an Anti-DDoS module that will store the details of your last-known active character and attempt to automatically reconnect to them in the event of a sudden disconnect.\nIn addition, AutoLogin prevents your client from killing itself on any lobby/disconnection errors.","Translated":"自动登录是一个防 DDoS 模块，会保存你最后活跃角色的信息，并在突然断线时尝试自动重连。\n此外，自动登录可防止客户端因任何大厅/断线错误而自行退出。","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Service Account Index: ","Translated":"服务账号索引：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Current Saved Character: ","Translated":"当前保存角色：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Home Data Center: ","Translated":"所属数据中心：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Currently Visiting: ","Translated":"当前所在：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":", on ","Translated":"，于","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Detected Region: ","Translated":"检测到的区域：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"No Character Detected\nAutoLogin updates character data on Logins, as well as World/Area changes\nIf you're logged in and seeing this message, move around!","Translated":"未检测到角色\n自动登录会在登录以及切换世界/区域时更新角色数据\n如果你已登录却看到此消息，请移动一下！","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Most Recent Character Per Region:","Translated":"各区域最近角色：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Enable QuickLaunch Menu (Title Screen)","Translated":"启用快速启动菜单（标题画面）","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Login On Game Launch","Translated":"游戏启动时登录","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Note: Holding Shift at any point of the login process will cancel this.","Translated":"注意：在登录过程中的任意时刻按住 Shift 将取消此操作。","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Restart State: RestartingClient=","Translated":"重启状态：RestartingClient=","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":", PendingRegion=","Translated":"，PendingRegion=","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Restart on Auth Error","Translated":"认证错误时重启","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Experimental: Will attempt to restart your client in the event of an Auth Error.\nSome notes on this:\nIf you have an OTP on your account you will need to use the XIV Auth App\nIf you do not enable \"Log in automatically\" in XIVLauncher this will not work.\nIf you do not set up commands or AR Multi on launch, this will only log you back into your last character, nothing else.\nYou are using this feature entirely at your own risk - It is literally accessing files on your PC to open clients.","Translated":"实验性：将在发生认证错误时尝试重启客户端。\n几点说明：\n如果你的账号启用了 OTP，你需要使用 XIV Auth App\n如果你未在 XIVLauncher 中启用“自动登录”，此功能将无效。\n如果你未在启动时设置命令或 AR Multi，此功能只会让你重新登录到上一个角色，仅此而已。\n使用此功能完全风险自负 - 它实际上会访问你电脑上的文件来打开客户端。","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Restart Client","Translated":"重启客户端","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Launches a new client using your settings, and kills this one - resetting your Auth Token.","Translated":"使用你的设置启动新客户端，并关闭当前客户端——重置你的认证令牌。","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Login On Auth Relaunch","Translated":"认证重启时登录","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Status:","Translated":"状态：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Launch Path:","Translated":"启动路径：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"example: C:\\Program Files (x86)\\XIVLauncher\\XIVLauncher.exe","Translated":"示例：C:\\Program Files (x86)\\XIVLauncher\\XIVLauncher.exe","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Launch Arguments:","Translated":"启动参数：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"example: --roamingPath=\"%appdata%\\XIVLauncher\" --account=yoship-False-False","Translated":"示例：--roamingPath=\"%appdata%\\XIVLauncher\" --account=yoship-False-False","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"VIWI has helped you recover from: ","Translated":"VIWI 已帮你从以下问题中恢复：","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" Connection Errors","Translated":"连接错误","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"What are you, an OCE player??","Translated":"你是什么，OCE 玩家吗？？","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Typical NA Server day.","Translated":"典型的 NA 服务器日常。","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"YOSHIP SAVE US!! PLEASE WE'RE BEGGING YOU!!","Translated":"YOSHIP 救救我们！！求求你了！！","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" Authentication Errors","Translated":"认证错误","Context":"AutoLoginPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":": (none)","Translated":"：（无）","Context":"AutoLoginPage.DrawRegionRow","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" (visiting ","Translated":"（访问中","Context":"AutoLoginPage.DrawRegionRow","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"KitchenSink is not initialized yet.","Translated":"KitchenSink 尚未初始化。","Context":"KitchenSinkPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Yes, Everything Is Included!","Translated":"是的，全部包含！","Context":"KitchenSinkPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"No - Click the OFF button to Enable KitchenSink!!","Translated":"否——点击 OFF 按钮以启用 KitchenSink！！","Context":"KitchenSinkPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"KitchenSink is a collection of small utility tools, overlays, and QoL commands originally put together by Liza.\nCharacter Switching helpers, Dropbox helpers, GlamourSet Tracking, OC Carrot Markers, and more!\nSome features require specific plugins (e.g. AutoRetainer, Dropbox) to be installed.","Translated":"KitchenSink 是一系列小型实用工具、悬浮窗和便捷命令的集合，最初由 Liza 整理。\n包含角色切换助手、Dropbox 助手、幻化套装追踪、OC 胡萝卜标记等！\n部分功能需要安装特定插件（如 AutoRetainer、Dropbox）。","Context":"KitchenSinkPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Not logged in","Translated":"未登录","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Logged in","Translated":"已登录","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"AutoRetainer:","Translated":"AutoRetainer：","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Not loaded","Translated":"未加载","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Loaded (not ready)","Translated":"已加载（未就绪）","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Ready","Translated":"就绪","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"AutoRetainer enables some character-aware features in KitchenSink:\n\n• Character switching commands (/k+, /k-, /ks)\n• DTR bar character index display\n• Character storing for leve count indicators\n","Translated":"AutoRetainer 可为 KitchenSink 启用部分角色相关功能：\n\n• 角色切换命令（/k+、/k-、/ks）\n• DTR 栏角色索引显示\n• 为理符数量指示器存储角色","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Dropbox:","Translated":"Dropbox：","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Dropbox enables inventory and trade helpers via /dbq commands.","Translated":"Dropbox 可通过 /dbq 命令启用背包与交易助手。","Context":"KitchenSinkPage.DrawQuickStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Per-character settings","Translated":"角色独立设置","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"KitchenSink stores some options per character (by LocalContentId).\nIf you don't see your character here, log in once so KitchenSink can capture it.","Translated":"KitchenSink 会按角色（依据 LocalContentId）存储部分选项。\n如果此处未显示你的角色，请登录一次以便 KitchenSink 捕获。","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Filter characters (name/world)","Translated":"筛选角色（名称/服务器）","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"No character entries yet.","Translated":"暂无角色条目。","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"No matches.","Translated":"无匹配项。","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Character","Translated":"角色","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Warn character about Leve Allowances on Login","Translated":"登录时提醒角色理符额度","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Delete this character entry from KitchenSink","Translated":"从 KitchenSink 删除此角色条目","Context":"KitchenSinkPage.DrawPerCharacterSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Weapon Icons (Armoury Board Overlay)","Translated":"武器图标（兵装盘悬浮窗）","Context":"KitchenSinkPage.DrawWeaponIconsSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Enable Weapon Icons overlay","Translated":"启用武器图标悬浮窗","Context":"KitchenSinkPage.DrawWeaponIconsSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Draws job/role icons over Armoury Board item slots.","Translated":"在军械库物品栏上绘制职业/职能图标。","Context":"KitchenSinkPage.DrawWeaponIconsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Mini mode (bottom-left icons)","Translated":"迷你模式（左下角图标）","Context":"KitchenSinkPage.DrawWeaponIconsSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Draws smaller icons anchored to the bottom-left of each Armoury slot.","Translated":"在每个军械库栏位左下角绘制较小的图标。","Context":"KitchenSinkPage.DrawWeaponIconsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Require Ctrl key","Translated":"需要按住 Ctrl 键","Context":"KitchenSinkPage.DrawWeaponIconsSection","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When enabled, overlay only appears while holding Ctrl.","Translated":"启用后，仅在按住 Ctrl 时显示覆盖层。","Context":"KitchenSinkPage.DrawWeaponIconsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Commands:","Translated":"命令：","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Command","Translated":"命令","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Description","Translated":"说明","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Character Switcher","Translated":"角色切换","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Switch to the next AR-enabled character.","Translated":"切换到下一个启用 AR 的角色。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Switch to the previous AR-enabled character.","Translated":"切换到上一个启用 AR 的角色。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Switch to the first character with a matching name.","Translated":"切换到第一个名称匹配的角色。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Switch to the Nth character on the specified world.","Translated":"切换到指定服务器上的第 N 个角色。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Dropbox Queue","Translated":"Dropbox 队列","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Queue items for the next trade (* = all).","Translated":"将物品加入下次交易队列（* = 全部）。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Remove all items from the queue.","Translated":"清空队列中的所有物品。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Generate a command to fill your inventory.","Translated":"生成填充背包的命令。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Generate a command to fill shards/crystals to 9999.","Translated":"生成将碎晶/水晶填充至 9999 的命令。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Utilities","Translated":"实用工具","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Toggle weather overlay or set forecast length.","Translated":"切换天气覆盖层或设置天气预报时长。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Show the glamour set tracker.","Translated":"显示幻化套装追踪器。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Toggle OC Bunny overlay.","Translated":"切换 OC Bunny 悬浮窗。","Context":"KitchenSinkPage.DrawCommandsCheatsheet","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"VIWI – Vera's Integrated World Improvements","Translated":"VIWI – Vera 的集成世界改进","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"VIWI Version: ","Translated":"VIWI 版本：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Character Details:","Translated":"角色详情：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Name: ","Translated":"名称：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Current World: ","Translated":"当前世界：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Job: (","Translated":"职业：(","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"\"  Level: ","Translated":"\"  等级：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Exp in level: ","Translated":"当前等级经验：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Location: (","Translated":"位置：(","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Location: Unknown / invalid territory.","Translated":"位置：未知 / 无效区域。","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Target: ","Translated":"目标：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":", BaseID: ","Translated":"，BaseID：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":", ObjID: ","Translated":"，ObjID：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"DistanceToTarget: ","Translated":"距目标距离：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Player rot=","Translated":"玩家朝向=","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":", Target rot=","Translated":"，目标朝向=","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Target: None","Translated":"目标：无","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"DistanceToTarget: 0","Translated":"距目标距离：0","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Busy / Not Loaded","Translated":"忙碌 / 未加载","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"System Info","Translated":"系统信息","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Time: ","Translated":"时间：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Time Zone: ","Translated":"时区：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"FPS: ","Translated":"FPS：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":" ms/frame)","Translated":"毫秒/帧）","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"FPS: Unknown","Translated":"FPS：未知","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Logged in: ","Translated":"登录：","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Loaded Modules","Translated":"已加载模块","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Disabled","Translated":"已禁用","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"Enabled","Translated":"已启用","Context":"OverviewDashboardPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BulletText"},{"Original":"SideCheck is not initialized yet.","Translated":"SideCheck 尚未初始化。","Context":"SideCheckPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"It's always better from behind!","Translated":"从背后总是更好！","Context":"SideCheckPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"No - Click the OFF button to Enable SideCheck!!","Translated":"否 - 点击 OFF 按钮以启用 SideCheck！！","Context":"SideCheckPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Workshoppa is not initialized yet.","Translated":"Workshoppa 尚未初始化。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Workshop Project Automation","Translated":"工坊项目自动化","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"No - Click the OFF button to Enable Workshoppa!!","Translated":"否 - 点击 OFF 按钮以启用 Workshoppa！！","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Workshoppa is a workshop project manager and automator originally created by Liza,\nnow completely rewritten using ECommons and fully integrated into VIWI.\nWorkshoppa allows you to queue multiple company projects and automatically turn in the required materials\nto progress each project to its next stage.\nAdditionally, Workshoppa includes features for automatically purchasing Grade 6 Dark Matter for repair kits,\nas well as recursively purchasing ceruleum fuel tanks from the FC mammet.","Translated":"Workshoppa 是一个工坊项目管理和自动化工具，最初由 Liza 创建，\n现已使用 ECommons 完全重写并完全集成到 VIWI 中。\nWorkshoppa 允许你排队多个部队项目，并自动提交所需材料\n以推进每个项目进入下一阶段。\n此外，Workshoppa 还包含自动购买用于修理工具的 6 级暗物质的功能，\n以及从部队人偶处递归购买青磷水罐的功能。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Settings","Translated":"设置","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Enable Repair Kit Calculator","Translated":"启用修理工具计算器","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Feature to Automatically purchase Grade6DarkMatter from *JUNKMONGER* vendors. \nThis is based off the CURRENT number of DarkMatterCLUSTERS you have in your inventory at a 5:1 ratio for crafting RepairKits.","Translated":"自动从 *废品商* 处购买 6 级暗物质的功能。\n此功能基于你背包中当前拥有的暗物质簇数量，按 5:1 的比例制作修理工具。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Enable Ceruleum Tank Calculator","Translated":"启用青磷水罐计算器","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Feature to Automatically purchase CerueleumFuelTanks from *FC MAMMET & RESIDENT CARETAKER* vendors. \nJust input how many stacks of fuel you would like to buy in the respective window.","Translated":"自动从 *部队人偶与房屋管理人* 处购买青磷水罐的功能。\n只需在相应窗口中输入你想购买的燃料组数。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Enable Mudstone Calculator","Translated":"启用泥岩计算器","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Feature to Automatically purchase Mudstone from *(RESIDENTIAL DISTRICT) MATERIAL SUPPLIER* vendors. \nJust input how many stacks of mudstones you would like to buy in the respective window.","Translated":"自动从 *(住宅区) 材料供应商* 处购买泥岩的功能。\n只需在相应窗口中输入你想购买的泥岩组数。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Grindstone Level Targets","Translated":"磨石等级目标","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Set your Target level and ensure you have enough materials to reach it!!","Translated":"设置你的目标等级，并确保你有足够的材料达到它！！","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Enable","Translated":"启用","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Job","Translated":"职业","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Current Lvl","Translated":"当前等级","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Target Lvl","Translated":"目标等级","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Required Material","Translated":"所需材料","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Quantity","Translated":"数量","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"This takes Road-To-90 status into consideration! Buy whatever number you see!","Translated":"此功能会考虑「通往90级之路」状态！看到多少数量就买多少！","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Elm Lumber","Translated":"榆木木材","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Mudstone","Translated":"泥岩","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Spruce Log","Translated":"云杉原木","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Open Workshoppa UI.","Translated":"打开工坊界面。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Buy a given number of ceruleum tank stacks.","Translated":"购买指定数量的青磷水罐堆叠。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Fill your inventory with a given number of ceruleum tank stacks.","Translated":"用指定数量的青磷水罐堆叠填满背包。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Buy a given number of mudstone stacks.","Translated":"购买指定数量的泥岩堆叠。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Fill your inventory with a given number of mudstone stacks.","Translated":"用指定数量的泥岩堆叠填满背包。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Starts the experimental leveling feature.","Translated":"启动实验性升级功能。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Buy Grade6DarkMatter at a 5:1 ratio for RepairKits.","Translated":"以 5:1 的比例用修理工具购买6级暗物质。","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Open Workshoppa","Translated":"打开工坊","Context":"WorkshoppaPage.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"[Workshoppa] All leveling targets are complete/disabled. Closing Windows.","Translated":"[工坊] 所有升级目标已完成/已禁用。正在关闭窗口。","Context":"WorkshoppaModule.ContributeSpecificMaterial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"[Workshoppa] Out of ","Translated":"[工坊] 已用完","Context":"WorkshoppaModule.ContributeSpecificMaterial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" for this project; will continue with other enabled items.","Translated":"用于此项目；将继续处理其他已启用的物品。","Context":"WorkshoppaModule.ContributeSpecificMaterial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] Couldn't auto-merge ","Translated":"[工坊] 无法自动合并","Context":"WorkshoppaModule.ContributeSpecificMaterial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" after ","Translated":"在尝试","Context":"WorkshoppaModule.ContributeSpecificMaterial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" attempts. Merge manually to continue.","Translated":"次后。请手动合并以继续。","Context":"WorkshoppaModule.ContributeSpecificMaterial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] You don't have the needed ","Translated":"[工坊] 你没有所需的","Context":"WorkshoppaModule.ContributeMaterials","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" to continue.","Translated":"以继续。","Context":"WorkshoppaModule.ContributeMaterials","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"item","Translated":"物品","Context":"WorkshoppaModule.SafeItemName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] Current craft was not found in WorkshopCache. Stopping.","Translated":"[工坊] 在工坊缓存中未找到当前制作。正在停止。","Context":"WorkshoppaModule.SelectCraftCategory","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] That workshop category/type appears to be unavailable (likely not unlocked?). Stopping.","Translated":"[工坊] 该工坊类别/类型似乎不可用（可能未解锁？）。正在停止。","Context":"WorkshoppaModule.SelectCraftCategory","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] That workshop craft appears to be unavailable (likely not unlocked?). Stopping.","Translated":"[工坊] 该工坊制作似乎不可用（可能未解锁？）。正在停止。","Context":"WorkshoppaModule.SelectCraft","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Open Workshoppa UI","Translated":"打开工坊界面","Context":"WorkshoppaModule.Enable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"[Workshoppa] Stall detected on stage ","Translated":"[工坊] 在舞台上检测到货摊","Context":"WorkshoppaModule.OnFrameworkUpdate","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" while leveling, Restarting Project.","Translated":"升级中，正在重启项目。","Context":"WorkshoppaModule.OnFrameworkUpdate","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] Please report this message to Vera!","Translated":"[工坊] 请将此消息报告给 Vera！","Context":"WorkshoppaModule.OnFrameworkUpdate","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":", Bailing out.","Translated":"，正在退出。","Context":"WorkshoppaModule.OnFrameworkUpdate","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] Note that workshoppa does not support Lowering Quality of materials for your own safety!","Translated":"[工坊] 请注意，为了您的安全，工坊不支持降低材料品质！","Context":"WorkshoppaModule.OnFrameworkUpdate","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Usage: ","Translated":"用法：","Context":"WorkshoppaModule.ProcessFuelBuyCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" <stacks>","Translated":"<组数>","Context":"WorkshoppaModule.ProcessFuelBuyCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Disabled =[","Translated":"已禁用 =[","Context":"WorkshoppaModule.ProcessStoneFillCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[Workshoppa] Reached Target Level or out of Materials, Stopping.","Translated":"[工坊] 已达到目标等级或材料耗尽，停止。","Context":"WorkshoppaModule.SelectYesNoPostSetup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Ceruleum Tanks###WorkshoppaCeruleumTankWindow","Translated":"青磷水箱","Context":"WorkshoppaCeruleumTankWindow..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Inventory","Translated":"背包","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Ceruleum Tanks: ","Translated":"青磷水箱：","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Free Slots: ","Translated":"空位：","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Stacks to Buy","Translated":"购买组数","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Fill Partial Stacks (+","Translated":"补满不满组（+","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Buying ","Translated":"购买中","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Cancel Auto-Buy","Translated":"取消自动购买","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Auto-Buy ","Translated":"自动购买","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":" for ","Translated":"用于","Context":"WorkshoppaCeruleumTankWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"stacks","Translated":"组","Context":"WorkshoppaCeruleumTankWindow.FormatStackCount","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"stack","Translated":"组","Context":"WorkshoppaCeruleumTankWindow.FormatStackCount","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Could not start purchase, shop window is not open.","Translated":"无法开始购买，商店窗口未打开。","Context":"WorkshoppaCeruleumTankWindow.StartPurchase","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Not buying ceruleum tanks, you already have enough.","Translated":"不购买青磷水箱，你已经足够多了。","Context":"WorkshoppaCeruleumTankWindow.StartPurchase","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Starting purchase of ","Translated":"开始购买","Context":"WorkshoppaCeruleumTankWindow.StartPurchase","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" ceruleum tanks.","Translated":"青磷水箱。","Context":"WorkshoppaCeruleumTankWindow.StartPurchase","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Grindstone Shop Window###WorkshoppaGrindstoneShopWindow","Translated":"磨石商店窗口","Context":"WorkshoppaGrindstoneShopWindow..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Processing purchase...","Translated":"正在处理购买...","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Grindstone","Translated":"磨石","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"This complements Workshoppa's experimental leveling feature that will\nrepeatedly start and discontinue projects while turning in items to level classes\n\nThis only requires you to be at least the minimum level shown in config to start,\nNote that after level 90, Workshop projects no longer grant EXP.","Translated":"这配合了 Workshoppa 的实验性升级功能，会\n反复开始和停刊项目，同时交纳物品来升级职业\n\n这仅要求你至少达到配置中显示的最低等级才能开始，\n注意 90 级后，工坊项目不再提供经验值。","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":" items...","Translated":"物品...","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Estimated Time Remaining: ","Translated":"预计剩余时间：","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Mudstones","Translated":"泥石","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" Active","Translated":"启用","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":" Target Level","Translated":"目标等级","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":" Buy","Translated":"购买","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":" Item","Translated":"物品","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Mudstone (MIN)","Translated":"泥石 (MIN)","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Elm Lumber (CRP)","Translated":"榆木木材 (CRP)","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"You have ","Translated":"你有","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"\nYou need ","Translated":"你需要","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" more for your level target of (","Translated":"更多以达到你的等级目标（","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"You can currently carry up to ","Translated":"你当前最多可携带","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" more.","Translated":"更多。","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Note that you can enable level targets in the\n","Translated":"注意：你可以在","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"VIWI dashboard to get calculations for the Grindstone shop.","Translated":"VIWI 仪表盘中启用等级目标，以获取磨刀石商店的计算结果。","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Items to Buy","Translated":"购买物品","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"Autofill","Translated":"自动填充","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Teleport to Workshop after purchase.","Translated":"购买后传送至工坊。","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"This requires Lifestream to be enabled","Translated":"这需要启用 Lifestream","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Estimated Purchase Time: ","Translated":"预计购买时间：","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" items for ","Translated":"物品，花费","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":" Gil","Translated":"金币","Context":"WorkshoppaGrindstoneShopWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Not buying item, you already have enough.","Translated":"不购买该物品，你已有足够数量。","Context":"WorkshoppaGrindstoneShopWindow.StartPurchase","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" items.","Translated":"物品。","Context":"WorkshoppaGrindstoneShopWindow.StartPurchase","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Repair Kits###WorkshoppaRepairKitWindow","Translated":"修理工具","Context":"WorkshoppaRepairKitWindow..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Dark Matter Clusters: ","Translated":"暗物质簇：","Context":"WorkshoppaRepairKitWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Grade 6 Dark Matter: ","Translated":"6级暗物质：","Context":"WorkshoppaRepairKitWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Missing Grade 6 Dark Matter: ","Translated":"缺少6级暗物质：","Context":"WorkshoppaRepairKitWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Auto-Buy missing Dark Matter for ","Translated":"自动购买缺少的暗物质，用于","Context":"WorkshoppaRepairKitWindow.DrawContent","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Currently Crafting:","Translated":"当前制作：","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Check Inventory","Translated":"检查库存","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Resume","Translated":"继续","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Start Crafting","Translated":"开始制作","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Cancel","Translated":"取消","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Hold CTRL+SHIFT to remove this as craft. You have to manually use the fabrication station to cancel or finish the workshop project before you can continue using the queue.","Translated":"按住 CTRL+SHIFT 将其从制作中移除。你必须手动使用制作台取消或完成工坊项目，才能继续使用队列。","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Pause","Translated":"暂停","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Currently Crafting: ---","Translated":"当前制作：---","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Level Up Classes","Translated":"升级职业","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Enable Grindstone","Translated":"启用磨刀石","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"SEE VIWI CONFIG - WORKSHOPPA - GRINDSTONE\n**Note that clicking Level Up Classes will clear your QUEUE!!**\n\nThis is an experimental leveling feature that will repeatedly start and\ndiscontinue projects while turning in materials to level various classes.\n\nThis only requires you to meet a minimum level to start,\nand is a bit costly in later levels, but takes minimal time and effort on your part.\n\nNote that after level 90, Workshop projects no longer grant EXP.","Translated":"参见 VIWI 配置 - WORKSHOPPA - GRINDSTONE\n**注意：点击升级职业将清空你的队列！！**\n\n这是一个实验性的升级功能，会反复开始并\n停刊项目，同时上交材料来提升各职业等级。\n\n只需达到最低等级即可开始，\n后期等级花费略高，但能为你节省大量时间和精力。\n\n注意：90 级后，工坊项目不再提供经验值。","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"QuickConfig","Translated":"快速配置","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Queue:","Translated":"队列：","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Remove ","Translated":"移除","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Add Craft...","Translated":"添加制作...","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Filter...","Translated":"筛选...","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Debug (Stage): ","Translated":"调试（阶段）：","Context":"WorkshoppaWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Presets","Translated":"预设","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"Import Queue from Preset","Translated":"从预设导入队列","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Imported ","Translated":"已导入","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":" items from preset.","Translated":"个物品（来自预设）。","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Export Queue to Preset","Translated":"导出队列到预设","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Preset Name...","Translated":"预设名称...","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Save","Translated":"保存","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Saved queue as preset '","Translated":"已将队列保存为预设 '","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Delete Preset","Translated":"删除预设","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Deleted preset '","Translated":"已删除预设 '","Context":"WorkshoppaWindow.DrawPresetsMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Clipboard","Translated":"剪贴板","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"Import Queue from Clipboard","Translated":"从剪贴板导入队列","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":" items from clipboard.","Translated":"个物品（来自剪贴板）。","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Export Queue to Clipboard","Translated":"导出队列到剪贴板","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Copied queue content to clipboard.","Translated":"已将队列内容复制到剪贴板。","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Export Material List to Clipboard","Translated":"导出材料清单到剪贴板","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Copied material list to clipboard.","Translated":"已将材料清单复制到剪贴板。","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Export Gathered/Venture materials to Clipboard","Translated":"导出采集/探险材料到剪贴板","Context":"WorkshoppaWindow.DrawClipboardMenu","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Items needed for all crafts in queue:","Translated":"队列中所有制作所需物品：","Context":"WorkshoppaWindow.CheckMaterial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"You are not in the Company Workshop.","Translated":"你不在部队工坊内。","Context":"WorkshoppaWindow.ShowErrorConditions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"You are not near a Fabrication Station.","Translated":"你不在制作台附近。","Context":"WorkshoppaWindow.ShowErrorConditions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"You need to be a Disciple of the Hand or Land to start crafting.","Translated":"你需要是能工巧匠或大地使者才能开始制作。","Context":"WorkshoppaWindow.ShowErrorConditions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"[Workshoppa] Leveling Failed - Are you on a DoH/oL Class and by a usable workshop?","Translated":"[Workshoppa] 升级失败 - 你是否处于能工巧匠/大地使者职业且靠近可用的工坊？","Context":"WorkshoppaWindow.StartLevelingConditions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Leveling Materials:","Translated":"升级材料：","Context":"WorkshoppaWindow.DrawLevelingTimeEstimate","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Remaining Turn-ins: ","Translated":"剩余交纳：","Context":"WorkshoppaWindow.DrawLevelingTimeEstimate","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" materials / ","Translated":"材料 /","Context":"WorkshoppaWindow.DrawIfAny","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" turn-ins","Translated":"交纳","Context":"WorkshoppaWindow.DrawIfAny","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Bunny locations are now ","Translated":"兔洞位置现已","Context":"BunnyBlessed.ProcessCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"disabled","Translated":"禁用","Context":"BunnyBlessed.ProcessCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"marked","Translated":"标记","Context":"BunnyBlessed.ProcessCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Character Index","Translated":"角色索引","Context":"CharacterSwitch..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IDtrBar.Get"},{"Original":"Unknown Character Index","Translated":"未知角色索引","Context":"CharacterSwitch..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IDtrBar.Get"},{"Original":"[KitchenSink] AutoRetainer not ready.","Translated":"[KitchenSink] AutoRetainer 未就绪。","Context":"CharacterSwitch.FindCharacter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] AutoRetainer returned 0 registered characters.","Translated":"[KitchenSink] AutoRetainer 返回 0 个已注册角色。","Context":"CharacterSwitch.FindCharacter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] Current CID not found in AutoRetainer list.","Translated":"[KitchenSink] 当前 CID 未在 AutoRetainer 列表中找到。","Context":"CharacterSwitch.FindCharacter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] No character to switch to found.","Translated":"[KitchenSink] 未找到可切换的角色。","Context":"CharacterSwitch.FindCharacter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] FindCharacter failed (see log).","Translated":"[KitchenSink] FindCharacter 失败（见日志）。","Context":"CharacterSwitch.FindCharacter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] Usage: /ks <world/name> [index]","Translated":"[KitchenSink] 用法：/ks <world/name> [index]","Context":"CharacterSwitch.PickCharacterImpl","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] AutoRetainer not ready or returned no registered characters.","Translated":"[KitchenSink] AutoRetainer 未就绪或未返回已注册角色。","Context":"CharacterSwitch.PickCharacterImpl","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] AutoRetainer returned no usable characters.","Translated":"[KitchenSink] AutoRetainer 未返回可用角色。","Context":"CharacterSwitch.PickCharacterImpl","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] No character found for \"","Translated":"[KitchenSink] 未找到角色：“","Context":"CharacterSwitch.PickCharacterImpl","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] AutoRetainer IPC isn't available.","Translated":"[KitchenSink] AutoRetainer IPC 不可用。","Context":"CharacterSwitch.PickCharacterImpl","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[KitchenSink] PickCharacter failed (see logs).","Translated":"[KitchenSink] PickCharacter 失败（见日志）。","Context":"CharacterSwitch.PickCharacterImpl","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Can't switch characters (bound by duty or occupied)","Translated":"无法切换角色（任务中或忙碌）","Context":"CharacterSwitch.SwitchCharacter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Switch to ","Translated":"切换到","Context":"CharacterSwitch.SwitchCharacter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Usage: /dbq request item1:qty1 item2:qty2 [...]","Translated":"用法：/dbq request 物品1:数量1 物品2:数量2 [...]","Context":"DropboxQueue.BuildRequest","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"No items need to be filled","Translated":"没有需要补充的物品","Context":"DropboxQueue.BuildRequest","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"dbq: ","Translated":"dbq：","Context":"DropboxQueue.ParseArguments","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"dbq: Multiple errors occured:","Translated":"dbq：发生多个错误：","Context":"DropboxQueue.ParseArguments","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Glamour Sets###KsGlamourSets","Translated":"幻化套装","Context":"GlamourSetter..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"You are not logged in.","Translated":"你尚未登录。","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Please access your glamour dresser.","Translated":"请打开幻化柜。","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Complete Sets: ","Translated":"完整套装：","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Space saved: ","Translated":"节省空间：","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" items","Translated":"件物品","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Show missing only","Translated":"仅显示缺失","Context":"GlamourSetter.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Tabs","Translated":"标签页","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabBar"},{"Original":"Normal","Translated":"普通","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"MGP","Translated":"金碟币","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Allied Societies","Translated":"友好部族","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Unobtainable","Translated":"无法获取","Context":"GlamourSetter.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Special","Translated":"特殊","Context":"GlamourSetter.DrawSpecialtyTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Eternal Bonding","Translated":"永结同心","Context":"GlamourSetter.DrawSpecialtyTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Makai Sets (MGP)","Translated":"魔界套装 (MGP)","Context":"GlamourSetter.DrawSpecialtyTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Rathalos Sets (undyed)","Translated":"火龙套装 (未染色)","Context":"GlamourSetter.DrawSpecialtyTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Wolf Marks: ","Translated":"狼印：","Context":"GlamourSetter.DrawMissingItemHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Trophy Crystals: ","Translated":"战利水晶：","Context":"GlamourSetter.DrawMissingItemHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"MGP: ","Translated":"MGP：","Context":"GlamourSetter.DrawMissingItemHeader","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" (Can be completed)","Translated":"(可完成)","Context":"GlamourSetter.DrawSetRange","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" (Can afford)","Translated":"(可购买)","Context":"GlamourSetter.DrawSetRange","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Weather Forecast###KsWeatherForecast","Translated":"天气预报","Context":"WeatherForecast..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Weather overlay is now ","Translated":"天气悬浮窗现已","Context":"WeatherForecast.ProcessCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"enabled","Translated":"启用","Context":"WeatherForecast.ProcessCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Restart the client using AutoLogin settings. Optional: /viwirestart NA|EU|OCE|JP","Translated":"使用自动登录设置重启客户端。可选：/viwirestart NA|EU|OCE|JP","Context":"AutoLoginModule.Enable","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"VIWI - AutoLogin","Translated":"VIWI - 自动登录","Context":"QuickLaunchOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Logging In: ","Translated":"正在登录：","Context":"QuickLaunchOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"AutoLogin is running...","Translated":"自动登录运行中...","Context":"QuickLaunchOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Click button or Hold Shift to cancel","Translated":"点击按钮或按住 Shift 取消","Context":"QuickLaunchOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Stop AutoLogin","Translated":"停止自动登录","Context":"QuickLaunchOverlay.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Hold CTRL while clicking to restart the client.","Translated":"按住 CTRL 点击以重启客户端。","Context":"QuickLaunchOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Opens the VIWI dashboard.","Translated":"打开 VIWI 仪表盘。","Context":"VIWIPlugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "VIWI",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "OFF",
+      "Translated": "关",
+      "Context": "MainDashboardWindow.DrawPageEntry",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "ON",
+      "Translated": "开",
+      "Context": "MainDashboardWindow.DrawPageEntry",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "♥ Donate ♥",
+      "Translated": "♥ 捐赠 ♥",
+      "Context": "MainDashboardWindow.DrawDonateButton",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Support Vera and the development of VIWI ♥\nOpens Kofi in your browser.",
+      "Translated": "支持 Vera 和 VIWI 的开发 ♥\n在浏览器中打开 Kofi。",
+      "Context": "MainDashboardWindow.DrawDonateButton",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Passkey",
+      "Translated": "通行密钥",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Press Enter to submit.",
+      "Translated": "按回车提交。",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Unlocked!",
+      "Translated": "已解锁！",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "♥Unlocked♥",
+      "Translated": "♥已解锁♥",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Incorrect passkey.",
+      "Translated": "通行密钥错误。",
+      "Context": "MainDashboardWindow.DrawPasskeyField",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "AoEasy is not initialized yet.",
+      "Translated": "AoEasy 尚未初始化。",
+      "Context": "AoEasyPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Stop Running Away From Me!",
+      "Translated": "别再躲着我了！",
+      "Context": "AoEasyPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Enabled:",
+      "Translated": "已启用：",
+      "Context": "AoEasyPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "No - Click the OFF button to Enable AoEasy!!",
+      "Translated": "否 - 点击“关”按钮以启用 AoEasy！！",
+      "Context": "AoEasyPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Yes",
+      "Translated": "是",
+      "Context": "AoEasyPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Description:",
+      "Translated": "描述：",
+      "Context": "AoEasyPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "STILL IN DEVELOPMENT!!!",
+      "Translated": "仍在开发中！！！",
+      "Context": "AoEasyPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "AutoLogin",
+      "Translated": "自动登录",
+      "Context": "AutoLoginPage.get_DisplayName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "AutoLogin is not initialized yet.",
+      "Translated": "自动登录尚未初始化。",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "AutoLogin - V",
+      "Translated": "自动登录 - V",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "DDoS Begone!",
+      "Translated": "DDoS 退散！",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "No - Click the OFF button to Enable AutoLogin!!",
+      "Translated": "否 - 点击关闭按钮以启用自动登录！！",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "AutoLogin is an Anti-DDoS module that will store the details of your last-known active character and attempt to automatically reconnect to them in the event of a sudden disconnect.\nIn addition, AutoLogin prevents your client from killing itself on any lobby/disconnection errors.",
+      "Translated": "自动登录是一个防 DDoS 模块，会保存你最后活跃角色的信息，并在突然断线时尝试自动重连。\n此外，自动登录可防止客户端因任何大厅/断线错误而自行退出。",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Service Account Index: ",
+      "Translated": "服务账号索引：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Current Saved Character: ",
+      "Translated": "当前保存角色：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Home Data Center: ",
+      "Translated": "所属数据中心：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Currently Visiting: ",
+      "Translated": "当前所在：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": ", on ",
+      "Translated": "，于",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Detected Region: ",
+      "Translated": "检测到的区域：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "No Character Detected\nAutoLogin updates character data on Logins, as well as World/Area changes\nIf you're logged in and seeing this message, move around!",
+      "Translated": "未检测到角色\n自动登录会在登录以及切换世界/区域时更新角色数据\n如果你已登录却看到此消息，请移动一下！",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Most Recent Character Per Region:",
+      "Translated": "各区域最近角色：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Enable QuickLaunch Menu (Title Screen)",
+      "Translated": "启用快速启动菜单（标题画面）",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Login On Game Launch",
+      "Translated": "游戏启动时登录",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Note: Holding Shift at any point of the login process will cancel this.",
+      "Translated": "注意：在登录过程中的任意时刻按住 Shift 将取消此操作。",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Restart State: RestartingClient=",
+      "Translated": "重启状态：RestartingClient=",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": ", PendingRegion=",
+      "Translated": "，PendingRegion=",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Restart on Auth Error",
+      "Translated": "认证错误时重启",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Experimental: Will attempt to restart your client in the event of an Auth Error.\nSome notes on this:\nIf you have an OTP on your account you will need to use the XIV Auth App\nIf you do not enable \"Log in automatically\" in XIVLauncher this will not work.\nIf you do not set up commands or AR Multi on launch, this will only log you back into your last character, nothing else.\nYou are using this feature entirely at your own risk - It is literally accessing files on your PC to open clients.",
+      "Translated": "实验性：将在发生认证错误时尝试重启客户端。\n几点说明：\n如果你的账号启用了 OTP，你需要使用 XIV Auth App\n如果你未在 XIVLauncher 中启用“自动登录”，此功能将无效。\n如果你未在启动时设置命令或 AR Multi，此功能只会让你重新登录到上一个角色，仅此而已。\n使用此功能完全风险自负 - 它实际上会访问你电脑上的文件来打开客户端。",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Restart Client",
+      "Translated": "重启客户端",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Launches a new client using your settings, and kills this one - resetting your Auth Token.",
+      "Translated": "使用你的设置启动新客户端，并关闭当前客户端——重置你的认证令牌。",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Login On Auth Relaunch",
+      "Translated": "认证重启时登录",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Status:",
+      "Translated": "状态：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Launch Path:",
+      "Translated": "启动路径：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "example: C:\\Program Files (x86)\\XIVLauncher\\XIVLauncher.exe",
+      "Translated": "示例：C:\\Program Files (x86)\\XIVLauncher\\XIVLauncher.exe",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Launch Arguments:",
+      "Translated": "启动参数：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "example: --roamingPath=\"%appdata%\\XIVLauncher\" --account=yoship-False-False",
+      "Translated": "示例：--roamingPath=\"%appdata%\\XIVLauncher\" --account=yoship-False-False",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "VIWI has helped you recover from: ",
+      "Translated": "VIWI 已帮你从以下问题中恢复：",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " Connection Errors",
+      "Translated": "连接错误",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "What are you, an OCE player??",
+      "Translated": "你是什么，OCE 玩家吗？？",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Typical NA Server day.",
+      "Translated": "典型的 NA 服务器日常。",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "YOSHIP SAVE US!! PLEASE WE'RE BEGGING YOU!!",
+      "Translated": "YOSHIP 救救我们！！求求你了！！",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " Authentication Errors",
+      "Translated": "认证错误",
+      "Context": "AutoLoginPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": ": (none)",
+      "Translated": "：（无）",
+      "Context": "AutoLoginPage.DrawRegionRow",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " (visiting ",
+      "Translated": "（访问中",
+      "Context": "AutoLoginPage.DrawRegionRow",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "KitchenSink is not initialized yet.",
+      "Translated": "KitchenSink 尚未初始化。",
+      "Context": "KitchenSinkPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Yes, Everything Is Included!",
+      "Translated": "是的，全部包含！",
+      "Context": "KitchenSinkPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "No - Click the OFF button to Enable KitchenSink!!",
+      "Translated": "否——点击 OFF 按钮以启用 KitchenSink！！",
+      "Context": "KitchenSinkPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "KitchenSink is a collection of small utility tools, overlays, and QoL commands originally put together by Liza.\nCharacter Switching helpers, Dropbox helpers, GlamourSet Tracking, OC Carrot Markers, and more!\nSome features require specific plugins (e.g. AutoRetainer, Dropbox) to be installed.",
+      "Translated": "KitchenSink 是一系列小型实用工具、悬浮窗和便捷命令的集合，最初由 Liza 整理。\n包含角色切换助手、Dropbox 助手、幻化套装追踪、OC 胡萝卜标记等！\n部分功能需要安装特定插件（如 AutoRetainer、Dropbox）。",
+      "Context": "KitchenSinkPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Not logged in",
+      "Translated": "未登录",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Logged in",
+      "Translated": "已登录",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "AutoRetainer:",
+      "Translated": "AutoRetainer：",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Not loaded",
+      "Translated": "未加载",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Loaded (not ready)",
+      "Translated": "已加载（未就绪）",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Ready",
+      "Translated": "就绪",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "AutoRetainer enables some character-aware features in KitchenSink:\n\n• Character switching commands (/k+, /k-, /ks)\n• DTR bar character index display\n• Character storing for leve count indicators\n",
+      "Translated": "AutoRetainer 可为 KitchenSink 启用部分角色相关功能：\n\n• 角色切换命令（/k+、/k-、/ks）\n• DTR 栏角色索引显示\n• 为理符数量指示器存储角色",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Dropbox:",
+      "Translated": "Dropbox：",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Dropbox enables inventory and trade helpers via /dbq commands.",
+      "Translated": "Dropbox 可通过 /dbq 命令启用背包与交易助手。",
+      "Context": "KitchenSinkPage.DrawQuickStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Per-character settings",
+      "Translated": "角色独立设置",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "KitchenSink stores some options per character (by LocalContentId).\nIf you don't see your character here, log in once so KitchenSink can capture it.",
+      "Translated": "KitchenSink 会按角色（依据 LocalContentId）存储部分选项。\n如果此处未显示你的角色，请登录一次以便 KitchenSink 捕获。",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Filter characters (name/world)",
+      "Translated": "筛选角色（名称/服务器）",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "No character entries yet.",
+      "Translated": "暂无角色条目。",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "No matches.",
+      "Translated": "无匹配项。",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Character",
+      "Translated": "角色",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Warn character about Leve Allowances on Login",
+      "Translated": "登录时提醒角色理符额度",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Delete this character entry from KitchenSink",
+      "Translated": "从 KitchenSink 删除此角色条目",
+      "Context": "KitchenSinkPage.DrawPerCharacterSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Weapon Icons (Armoury Board Overlay)",
+      "Translated": "武器图标（兵装盘悬浮窗）",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Enable Weapon Icons overlay",
+      "Translated": "启用武器图标悬浮窗",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Draws job/role icons over Armoury Board item slots.",
+      "Translated": "在军械库物品栏上绘制职业/职能图标。",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Mini mode (bottom-left icons)",
+      "Translated": "迷你模式（左下角图标）",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Draws smaller icons anchored to the bottom-left of each Armoury slot.",
+      "Translated": "在每个军械库栏位左下角绘制较小的图标。",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Require Ctrl key",
+      "Translated": "需要按住 Ctrl 键",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When enabled, overlay only appears while holding Ctrl.",
+      "Translated": "启用后，仅在按住 Ctrl 时显示覆盖层。",
+      "Context": "KitchenSinkPage.DrawWeaponIconsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Commands:",
+      "Translated": "命令：",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Command",
+      "Translated": "命令",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Description",
+      "Translated": "说明",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Character Switcher",
+      "Translated": "角色切换",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Switch to the next AR-enabled character.",
+      "Translated": "切换到下一个启用 AR 的角色。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Switch to the previous AR-enabled character.",
+      "Translated": "切换到上一个启用 AR 的角色。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Switch to the first character with a matching name.",
+      "Translated": "切换到第一个名称匹配的角色。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Switch to the Nth character on the specified world.",
+      "Translated": "切换到指定服务器上的第 N 个角色。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Dropbox Queue",
+      "Translated": "Dropbox 队列",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Queue items for the next trade (* = all).",
+      "Translated": "将物品加入下次交易队列（* = 全部）。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Remove all items from the queue.",
+      "Translated": "清空队列中的所有物品。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Generate a command to fill your inventory.",
+      "Translated": "生成填充背包的命令。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Generate a command to fill shards/crystals to 9999.",
+      "Translated": "生成将碎晶/水晶填充至 9999 的命令。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Utilities",
+      "Translated": "实用工具",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Toggle weather overlay or set forecast length.",
+      "Translated": "切换天气覆盖层或设置天气预报时长。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Show the glamour set tracker.",
+      "Translated": "显示幻化套装追踪器。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Toggle OC Bunny overlay.",
+      "Translated": "切换 OC Bunny 悬浮窗。",
+      "Context": "KitchenSinkPage.DrawCommandsCheatsheet",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "VIWI – Vera's Integrated World Improvements",
+      "Translated": "VIWI – Vera 的集成世界改进",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "VIWI Version: ",
+      "Translated": "VIWI 版本：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Character Details:",
+      "Translated": "角色详情：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Name: ",
+      "Translated": "名称：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Current World: ",
+      "Translated": "当前世界：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Job: (",
+      "Translated": "职业：(",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "\"  Level: ",
+      "Translated": "\"  等级：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Exp in level: ",
+      "Translated": "当前等级经验：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Location: (",
+      "Translated": "位置：(",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Location: Unknown / invalid territory.",
+      "Translated": "位置：未知 / 无效区域。",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Target: ",
+      "Translated": "目标：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": ", BaseID: ",
+      "Translated": "，BaseID：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": ", ObjID: ",
+      "Translated": "，ObjID：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "DistanceToTarget: ",
+      "Translated": "距目标距离：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Player rot=",
+      "Translated": "玩家朝向=",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": ", Target rot=",
+      "Translated": "，目标朝向=",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Target: None",
+      "Translated": "目标：无",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "DistanceToTarget: 0",
+      "Translated": "距目标距离：0",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Busy / Not Loaded",
+      "Translated": "忙碌 / 未加载",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "System Info",
+      "Translated": "系统信息",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Time: ",
+      "Translated": "时间：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Time Zone: ",
+      "Translated": "时区：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "FPS: ",
+      "Translated": "FPS：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": " ms/frame)",
+      "Translated": "毫秒/帧）",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "FPS: Unknown",
+      "Translated": "FPS：未知",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Logged in: ",
+      "Translated": "登录：",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Loaded Modules",
+      "Translated": "已加载模块",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Disabled",
+      "Translated": "已禁用",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "Enabled",
+      "Translated": "已启用",
+      "Context": "OverviewDashboardPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BulletText"
+    },
+    {
+      "Original": "SideCheck is not initialized yet.",
+      "Translated": "SideCheck 尚未初始化。",
+      "Context": "SideCheckPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "It's always better from behind!",
+      "Translated": "从背后总是更好！",
+      "Context": "SideCheckPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "No - Click the OFF button to Enable SideCheck!!",
+      "Translated": "否 - 点击 OFF 按钮以启用 SideCheck！！",
+      "Context": "SideCheckPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Workshoppa is not initialized yet.",
+      "Translated": "Workshoppa 尚未初始化。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Workshop Project Automation",
+      "Translated": "工坊项目自动化",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "No - Click the OFF button to Enable Workshoppa!!",
+      "Translated": "否 - 点击 OFF 按钮以启用 Workshoppa！！",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Workshoppa is a workshop project manager and automator originally created by Liza,\nnow completely rewritten using ECommons and fully integrated into VIWI.\nWorkshoppa allows you to queue multiple company projects and automatically turn in the required materials\nto progress each project to its next stage.\nAdditionally, Workshoppa includes features for automatically purchasing Grade 6 Dark Matter for repair kits,\nas well as recursively purchasing ceruleum fuel tanks from the FC mammet.",
+      "Translated": "Workshoppa 是一个工坊项目管理和自动化工具，最初由 Liza 创建，\n现已使用 ECommons 完全重写并完全集成到 VIWI 中。\nWorkshoppa 允许你排队多个部队项目，并自动提交所需材料\n以推进每个项目进入下一阶段。\n此外，Workshoppa 还包含自动购买用于修理工具的 6 级暗物质的功能，\n以及从部队人偶处递归购买青磷水罐的功能。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Enable Repair Kit Calculator",
+      "Translated": "启用修理工具计算器",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Feature to Automatically purchase Grade6DarkMatter from *JUNKMONGER* vendors. \nThis is based off the CURRENT number of DarkMatterCLUSTERS you have in your inventory at a 5:1 ratio for crafting RepairKits.",
+      "Translated": "自动从 *废品商* 处购买 6 级暗物质的功能。\n此功能基于你背包中当前拥有的暗物质簇数量，按 5:1 的比例制作修理工具。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Enable Ceruleum Tank Calculator",
+      "Translated": "启用青磷水罐计算器",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Feature to Automatically purchase CerueleumFuelTanks from *FC MAMMET & RESIDENT CARETAKER* vendors. \nJust input how many stacks of fuel you would like to buy in the respective window.",
+      "Translated": "自动从 *部队人偶与房屋管理人* 处购买青磷水罐的功能。\n只需在相应窗口中输入你想购买的燃料组数。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Enable Mudstone Calculator",
+      "Translated": "启用泥岩计算器",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Feature to Automatically purchase Mudstone from *(RESIDENTIAL DISTRICT) MATERIAL SUPPLIER* vendors. \nJust input how many stacks of mudstones you would like to buy in the respective window.",
+      "Translated": "自动从 *(住宅区) 材料供应商* 处购买泥岩的功能。\n只需在相应窗口中输入你想购买的泥岩组数。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Grindstone Level Targets",
+      "Translated": "磨石等级目标",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Set your Target level and ensure you have enough materials to reach it!!",
+      "Translated": "设置你的目标等级，并确保你有足够的材料达到它！！",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Enable",
+      "Translated": "启用",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Job",
+      "Translated": "职业",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Current Lvl",
+      "Translated": "当前等级",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Target Lvl",
+      "Translated": "目标等级",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Required Material",
+      "Translated": "所需材料",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Quantity",
+      "Translated": "数量",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "This takes Road-To-90 status into consideration! Buy whatever number you see!",
+      "Translated": "此功能会考虑「通往90级之路」状态！看到多少数量就买多少！",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Elm Lumber",
+      "Translated": "榆木木材",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Mudstone",
+      "Translated": "泥岩",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Spruce Log",
+      "Translated": "云杉原木",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Open Workshoppa UI.",
+      "Translated": "打开工坊界面。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Buy a given number of ceruleum tank stacks.",
+      "Translated": "购买指定数量的青磷水罐堆叠。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Fill your inventory with a given number of ceruleum tank stacks.",
+      "Translated": "用指定数量的青磷水罐堆叠填满背包。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Buy a given number of mudstone stacks.",
+      "Translated": "购买指定数量的泥岩堆叠。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Fill your inventory with a given number of mudstone stacks.",
+      "Translated": "用指定数量的泥岩堆叠填满背包。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Starts the experimental leveling feature.",
+      "Translated": "启动实验性升级功能。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Buy Grade6DarkMatter at a 5:1 ratio for RepairKits.",
+      "Translated": "以 5:1 的比例用修理工具购买6级暗物质。",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Open Workshoppa",
+      "Translated": "打开工坊",
+      "Context": "WorkshoppaPage.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "[Workshoppa] All leveling targets are complete/disabled. Closing Windows.",
+      "Translated": "[工坊] 所有升级目标已完成/已禁用。正在关闭窗口。",
+      "Context": "WorkshoppaModule.ContributeSpecificMaterial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "[Workshoppa] Out of ",
+      "Translated": "[工坊] 已用完",
+      "Context": "WorkshoppaModule.ContributeSpecificMaterial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " for this project; will continue with other enabled items.",
+      "Translated": "用于此项目；将继续处理其他已启用的物品。",
+      "Context": "WorkshoppaModule.ContributeSpecificMaterial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] Couldn't auto-merge ",
+      "Translated": "[工坊] 无法自动合并",
+      "Context": "WorkshoppaModule.ContributeSpecificMaterial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " after ",
+      "Translated": "在尝试",
+      "Context": "WorkshoppaModule.ContributeSpecificMaterial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " attempts. Merge manually to continue.",
+      "Translated": "次后。请手动合并以继续。",
+      "Context": "WorkshoppaModule.ContributeSpecificMaterial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] You don't have the needed ",
+      "Translated": "[工坊] 你没有所需的",
+      "Context": "WorkshoppaModule.ContributeMaterials",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " to continue.",
+      "Translated": "以继续。",
+      "Context": "WorkshoppaModule.ContributeMaterials",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "item",
+      "Translated": "物品",
+      "Context": "WorkshoppaModule.SafeItemName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] Current craft was not found in WorkshopCache. Stopping.",
+      "Translated": "[工坊] 在工坊缓存中未找到当前制作。正在停止。",
+      "Context": "WorkshoppaModule.SelectCraftCategory",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] That workshop category/type appears to be unavailable (likely not unlocked?). Stopping.",
+      "Translated": "[工坊] 该工坊类别/类型似乎不可用（可能未解锁？）。正在停止。",
+      "Context": "WorkshoppaModule.SelectCraftCategory",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] That workshop craft appears to be unavailable (likely not unlocked?). Stopping.",
+      "Translated": "[工坊] 该工坊制作似乎不可用（可能未解锁？）。正在停止。",
+      "Context": "WorkshoppaModule.SelectCraft",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Open Workshoppa UI",
+      "Translated": "打开工坊界面",
+      "Context": "WorkshoppaModule.Enable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "[Workshoppa] Stall detected on stage ",
+      "Translated": "[工坊] 在舞台上检测到货摊",
+      "Context": "WorkshoppaModule.OnFrameworkUpdate",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " while leveling, Restarting Project.",
+      "Translated": "升级中，正在重启项目。",
+      "Context": "WorkshoppaModule.OnFrameworkUpdate",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] Please report this message to Vera!",
+      "Translated": "[工坊] 请将此消息报告给 Vera！",
+      "Context": "WorkshoppaModule.OnFrameworkUpdate",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": ", Bailing out.",
+      "Translated": "，正在退出。",
+      "Context": "WorkshoppaModule.OnFrameworkUpdate",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] Note that workshoppa does not support Lowering Quality of materials for your own safety!",
+      "Translated": "[工坊] 请注意，为了您的安全，工坊不支持降低材料品质！",
+      "Context": "WorkshoppaModule.OnFrameworkUpdate",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Usage: ",
+      "Translated": "用法：",
+      "Context": "WorkshoppaModule.ProcessFuelBuyCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " <stacks>",
+      "Translated": "<组数>",
+      "Context": "WorkshoppaModule.ProcessFuelBuyCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Disabled =[",
+      "Translated": "已禁用 =[",
+      "Context": "WorkshoppaModule.ProcessStoneFillCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[Workshoppa] Reached Target Level or out of Materials, Stopping.",
+      "Translated": "[工坊] 已达到目标等级或材料耗尽，停止。",
+      "Context": "WorkshoppaModule.SelectYesNoPostSetup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Ceruleum Tanks###WorkshoppaCeruleumTankWindow",
+      "Translated": "青磷水箱",
+      "Context": "WorkshoppaCeruleumTankWindow..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Inventory",
+      "Translated": "背包",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Ceruleum Tanks: ",
+      "Translated": "青磷水箱：",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Free Slots: ",
+      "Translated": "空位：",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Stacks to Buy",
+      "Translated": "购买组数",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Fill Partial Stacks (+",
+      "Translated": "补满不满组（+",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Buying ",
+      "Translated": "购买中",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Cancel Auto-Buy",
+      "Translated": "取消自动购买",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Auto-Buy ",
+      "Translated": "自动购买",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": " for ",
+      "Translated": "用于",
+      "Context": "WorkshoppaCeruleumTankWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "stacks",
+      "Translated": "组",
+      "Context": "WorkshoppaCeruleumTankWindow.FormatStackCount",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "stack",
+      "Translated": "组",
+      "Context": "WorkshoppaCeruleumTankWindow.FormatStackCount",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Could not start purchase, shop window is not open.",
+      "Translated": "无法开始购买，商店窗口未打开。",
+      "Context": "WorkshoppaCeruleumTankWindow.StartPurchase",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Not buying ceruleum tanks, you already have enough.",
+      "Translated": "不购买青磷水箱，你已经足够多了。",
+      "Context": "WorkshoppaCeruleumTankWindow.StartPurchase",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Starting purchase of ",
+      "Translated": "开始购买",
+      "Context": "WorkshoppaCeruleumTankWindow.StartPurchase",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " ceruleum tanks.",
+      "Translated": "青磷水箱。",
+      "Context": "WorkshoppaCeruleumTankWindow.StartPurchase",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Grindstone Shop Window###WorkshoppaGrindstoneShopWindow",
+      "Translated": "磨石商店窗口",
+      "Context": "WorkshoppaGrindstoneShopWindow..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Processing purchase...",
+      "Translated": "正在处理购买...",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Grindstone",
+      "Translated": "磨石",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "This complements Workshoppa's experimental leveling feature that will\nrepeatedly start and discontinue projects while turning in items to level classes\n\nThis only requires you to be at least the minimum level shown in config to start,\nNote that after level 90, Workshop projects no longer grant EXP.",
+      "Translated": "这配合了 Workshoppa 的实验性升级功能，会\n反复开始和停刊项目，同时交纳物品来升级职业\n\n这仅要求你至少达到配置中显示的最低等级才能开始，\n注意 90 级后，工坊项目不再提供经验值。",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": " items...",
+      "Translated": "物品...",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Estimated Time Remaining: ",
+      "Translated": "预计剩余时间：",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Mudstones",
+      "Translated": "泥石",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " Active",
+      "Translated": "启用",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": " Target Level",
+      "Translated": "目标等级",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": " Buy",
+      "Translated": "购买",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": " Item",
+      "Translated": "物品",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Mudstone (MIN)",
+      "Translated": "泥石 (MIN)",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Elm Lumber (CRP)",
+      "Translated": "榆木木材 (CRP)",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "You have ",
+      "Translated": "你有",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "\nYou need ",
+      "Translated": "你需要",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " more for your level target of (",
+      "Translated": "更多以达到你的等级目标（",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "You can currently carry up to ",
+      "Translated": "你当前最多可携带",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " more.",
+      "Translated": "更多。",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Note that you can enable level targets in the\n",
+      "Translated": "注意：你可以在",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "VIWI dashboard to get calculations for the Grindstone shop.",
+      "Translated": "VIWI 仪表盘中启用等级目标，以获取磨刀石商店的计算结果。",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Items to Buy",
+      "Translated": "购买物品",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "Autofill",
+      "Translated": "自动填充",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Teleport to Workshop after purchase.",
+      "Translated": "购买后传送至工坊。",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "This requires Lifestream to be enabled",
+      "Translated": "这需要启用 Lifestream",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Estimated Purchase Time: ",
+      "Translated": "预计购买时间：",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " items for ",
+      "Translated": "物品，花费",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": " Gil",
+      "Translated": "金币",
+      "Context": "WorkshoppaGrindstoneShopWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Not buying item, you already have enough.",
+      "Translated": "不购买该物品，你已有足够数量。",
+      "Context": "WorkshoppaGrindstoneShopWindow.StartPurchase",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " items.",
+      "Translated": "物品。",
+      "Context": "WorkshoppaGrindstoneShopWindow.StartPurchase",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Repair Kits###WorkshoppaRepairKitWindow",
+      "Translated": "修理工具",
+      "Context": "WorkshoppaRepairKitWindow..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Dark Matter Clusters: ",
+      "Translated": "暗物质簇：",
+      "Context": "WorkshoppaRepairKitWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Grade 6 Dark Matter: ",
+      "Translated": "6级暗物质：",
+      "Context": "WorkshoppaRepairKitWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Missing Grade 6 Dark Matter: ",
+      "Translated": "缺少6级暗物质：",
+      "Context": "WorkshoppaRepairKitWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Auto-Buy missing Dark Matter for ",
+      "Translated": "自动购买缺少的暗物质，用于",
+      "Context": "WorkshoppaRepairKitWindow.DrawContent",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Currently Crafting:",
+      "Translated": "当前制作：",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Check Inventory",
+      "Translated": "检查库存",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Resume",
+      "Translated": "继续",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Start Crafting",
+      "Translated": "开始制作",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Cancel",
+      "Translated": "取消",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Hold CTRL+SHIFT to remove this as craft. You have to manually use the fabrication station to cancel or finish the workshop project before you can continue using the queue.",
+      "Translated": "按住 CTRL+SHIFT 将其从制作中移除。你必须手动使用制作台取消或完成工坊项目，才能继续使用队列。",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Pause",
+      "Translated": "暂停",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Currently Crafting: ---",
+      "Translated": "当前制作：---",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Level Up Classes",
+      "Translated": "升级职业",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Enable Grindstone",
+      "Translated": "启用磨刀石",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "SEE VIWI CONFIG - WORKSHOPPA - GRINDSTONE\n**Note that clicking Level Up Classes will clear your QUEUE!!**\n\nThis is an experimental leveling feature that will repeatedly start and\ndiscontinue projects while turning in materials to level various classes.\n\nThis only requires you to meet a minimum level to start,\nand is a bit costly in later levels, but takes minimal time and effort on your part.\n\nNote that after level 90, Workshop projects no longer grant EXP.",
+      "Translated": "参见 VIWI 配置 - WORKSHOPPA - GRINDSTONE\n**注意：点击升级职业将清空你的队列！！**\n\n这是一个实验性的升级功能，会反复开始并\n停刊项目，同时上交材料来提升各职业等级。\n\n只需达到最低等级即可开始，\n后期等级花费略高，但能为你节省大量时间和精力。\n\n注意：90 级后，工坊项目不再提供经验值。",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "QuickConfig",
+      "Translated": "快速配置",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Queue:",
+      "Translated": "队列：",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Remove ",
+      "Translated": "移除",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Add Craft...",
+      "Translated": "添加制作...",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Filter...",
+      "Translated": "筛选...",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Debug (Stage): ",
+      "Translated": "调试（阶段）：",
+      "Context": "WorkshoppaWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Presets",
+      "Translated": "预设",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "Import Queue from Preset",
+      "Translated": "从预设导入队列",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Imported ",
+      "Translated": "已导入",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": " items from preset.",
+      "Translated": "个物品（来自预设）。",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Export Queue to Preset",
+      "Translated": "导出队列到预设",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Preset Name...",
+      "Translated": "预设名称...",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Save",
+      "Translated": "保存",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Saved queue as preset '",
+      "Translated": "已将队列保存为预设 '",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Delete Preset",
+      "Translated": "删除预设",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Deleted preset '",
+      "Translated": "已删除预设 '",
+      "Context": "WorkshoppaWindow.DrawPresetsMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Clipboard",
+      "Translated": "剪贴板",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "Import Queue from Clipboard",
+      "Translated": "从剪贴板导入队列",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": " items from clipboard.",
+      "Translated": "个物品（来自剪贴板）。",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Export Queue to Clipboard",
+      "Translated": "导出队列到剪贴板",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Copied queue content to clipboard.",
+      "Translated": "已将队列内容复制到剪贴板。",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Export Material List to Clipboard",
+      "Translated": "导出材料清单到剪贴板",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Copied material list to clipboard.",
+      "Translated": "已将材料清单复制到剪贴板。",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Export Gathered/Venture materials to Clipboard",
+      "Translated": "导出采集/探险材料到剪贴板",
+      "Context": "WorkshoppaWindow.DrawClipboardMenu",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Items needed for all crafts in queue:",
+      "Translated": "队列中所有制作所需物品：",
+      "Context": "WorkshoppaWindow.CheckMaterial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "You are not in the Company Workshop.",
+      "Translated": "你不在部队工坊内。",
+      "Context": "WorkshoppaWindow.ShowErrorConditions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "You are not near a Fabrication Station.",
+      "Translated": "你不在制作台附近。",
+      "Context": "WorkshoppaWindow.ShowErrorConditions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "You need to be a Disciple of the Hand or Land to start crafting.",
+      "Translated": "你需要是能工巧匠或大地使者才能开始制作。",
+      "Context": "WorkshoppaWindow.ShowErrorConditions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "[Workshoppa] Leveling Failed - Are you on a DoH/oL Class and by a usable workshop?",
+      "Translated": "[Workshoppa] 升级失败 - 你是否处于能工巧匠/大地使者职业且靠近可用的工坊？",
+      "Context": "WorkshoppaWindow.StartLevelingConditions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Leveling Materials:",
+      "Translated": "升级材料：",
+      "Context": "WorkshoppaWindow.DrawLevelingTimeEstimate",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Remaining Turn-ins: ",
+      "Translated": "剩余交纳：",
+      "Context": "WorkshoppaWindow.DrawLevelingTimeEstimate",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " materials / ",
+      "Translated": "材料 /",
+      "Context": "WorkshoppaWindow.DrawIfAny",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " turn-ins",
+      "Translated": "交纳",
+      "Context": "WorkshoppaWindow.DrawIfAny",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Bunny locations are now ",
+      "Translated": "兔洞位置现已",
+      "Context": "BunnyBlessed.ProcessCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "disabled",
+      "Translated": "禁用",
+      "Context": "BunnyBlessed.ProcessCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "marked",
+      "Translated": "标记",
+      "Context": "BunnyBlessed.ProcessCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Character Index",
+      "Translated": "角色索引",
+      "Context": "CharacterSwitch..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IDtrBar.Get"
+    },
+    {
+      "Original": "Unknown Character Index",
+      "Translated": "未知角色索引",
+      "Context": "CharacterSwitch..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IDtrBar.Get"
+    },
+    {
+      "Original": "[KitchenSink] AutoRetainer not ready.",
+      "Translated": "[KitchenSink] AutoRetainer 未就绪。",
+      "Context": "CharacterSwitch.FindCharacter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] AutoRetainer returned 0 registered characters.",
+      "Translated": "[KitchenSink] AutoRetainer 返回 0 个已注册角色。",
+      "Context": "CharacterSwitch.FindCharacter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] Current CID not found in AutoRetainer list.",
+      "Translated": "[KitchenSink] 当前 CID 未在 AutoRetainer 列表中找到。",
+      "Context": "CharacterSwitch.FindCharacter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] No character to switch to found.",
+      "Translated": "[KitchenSink] 未找到可切换的角色。",
+      "Context": "CharacterSwitch.FindCharacter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] FindCharacter failed (see log).",
+      "Translated": "[KitchenSink] FindCharacter 失败（见日志）。",
+      "Context": "CharacterSwitch.FindCharacter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] Usage: /ks <world/name> [index]",
+      "Translated": "[KitchenSink] 用法：/ks <world/name> [index]",
+      "Context": "CharacterSwitch.PickCharacterImpl",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] AutoRetainer not ready or returned no registered characters.",
+      "Translated": "[KitchenSink] AutoRetainer 未就绪或未返回已注册角色。",
+      "Context": "CharacterSwitch.PickCharacterImpl",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] AutoRetainer returned no usable characters.",
+      "Translated": "[KitchenSink] AutoRetainer 未返回可用角色。",
+      "Context": "CharacterSwitch.PickCharacterImpl",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] No character found for \"",
+      "Translated": "[KitchenSink] 未找到角色：“",
+      "Context": "CharacterSwitch.PickCharacterImpl",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] AutoRetainer IPC isn't available.",
+      "Translated": "[KitchenSink] AutoRetainer IPC 不可用。",
+      "Context": "CharacterSwitch.PickCharacterImpl",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[KitchenSink] PickCharacter failed (see logs).",
+      "Translated": "[KitchenSink] PickCharacter 失败（见日志）。",
+      "Context": "CharacterSwitch.PickCharacterImpl",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Can't switch characters (bound by duty or occupied)",
+      "Translated": "无法切换角色（任务中或忙碌）",
+      "Context": "CharacterSwitch.SwitchCharacter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Switch to ",
+      "Translated": "切换到",
+      "Context": "CharacterSwitch.SwitchCharacter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Usage: /dbq request item1:qty1 item2:qty2 [...]",
+      "Translated": "用法：/dbq request 物品1:数量1 物品2:数量2 [...]",
+      "Context": "DropboxQueue.BuildRequest",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "No items need to be filled",
+      "Translated": "没有需要补充的物品",
+      "Context": "DropboxQueue.BuildRequest",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "dbq: ",
+      "Translated": "dbq：",
+      "Context": "DropboxQueue.ParseArguments",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "dbq: Multiple errors occured:",
+      "Translated": "dbq：发生多个错误：",
+      "Context": "DropboxQueue.ParseArguments",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Glamour Sets###KsGlamourSets",
+      "Translated": "幻化套装",
+      "Context": "GlamourSetter..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "You are not logged in.",
+      "Translated": "你尚未登录。",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Please access your glamour dresser.",
+      "Translated": "请打开幻化柜。",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Complete Sets: ",
+      "Translated": "完整套装：",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Space saved: ",
+      "Translated": "节省空间：",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " items",
+      "Translated": "件物品",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Show missing only",
+      "Translated": "仅显示缺失",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Tabs",
+      "Translated": "标签页",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabBar"
+    },
+    {
+      "Original": "Normal",
+      "Translated": "普通",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "MGP",
+      "Translated": "金碟币",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Allied Societies",
+      "Translated": "友好部族",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Unobtainable",
+      "Translated": "无法获取",
+      "Context": "GlamourSetter.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Special",
+      "Translated": "特殊",
+      "Context": "GlamourSetter.DrawSpecialtyTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Eternal Bonding",
+      "Translated": "永结同心",
+      "Context": "GlamourSetter.DrawSpecialtyTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Makai Sets (MGP)",
+      "Translated": "魔界套装 (MGP)",
+      "Context": "GlamourSetter.DrawSpecialtyTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Rathalos Sets (undyed)",
+      "Translated": "火龙套装 (未染色)",
+      "Context": "GlamourSetter.DrawSpecialtyTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Wolf Marks: ",
+      "Translated": "狼印：",
+      "Context": "GlamourSetter.DrawMissingItemHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Trophy Crystals: ",
+      "Translated": "战利水晶：",
+      "Context": "GlamourSetter.DrawMissingItemHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "MGP: ",
+      "Translated": "MGP：",
+      "Context": "GlamourSetter.DrawMissingItemHeader",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " (Can be completed)",
+      "Translated": "(可完成)",
+      "Context": "GlamourSetter.DrawSetRange",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " (Can afford)",
+      "Translated": "(可购买)",
+      "Context": "GlamourSetter.DrawSetRange",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Weather Forecast###KsWeatherForecast",
+      "Translated": "天气预报",
+      "Context": "WeatherForecast..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Weather overlay is now ",
+      "Translated": "天气悬浮窗现已",
+      "Context": "WeatherForecast.ProcessCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "enabled",
+      "Translated": "启用",
+      "Context": "WeatherForecast.ProcessCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Restart the client using AutoLogin settings. Optional: /viwirestart NA|EU|OCE|JP",
+      "Translated": "使用自动登录设置重启客户端。可选：/viwirestart NA|EU|OCE|JP",
+      "Context": "AutoLoginModule.Enable",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "VIWI - AutoLogin",
+      "Translated": "VIWI - 自动登录",
+      "Context": "QuickLaunchOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Logging In: ",
+      "Translated": "正在登录：",
+      "Context": "QuickLaunchOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "AutoLogin is running...",
+      "Translated": "自动登录运行中...",
+      "Context": "QuickLaunchOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Click button or Hold Shift to cancel",
+      "Translated": "点击按钮或按住 Shift 取消",
+      "Context": "QuickLaunchOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Stop AutoLogin",
+      "Translated": "停止自动登录",
+      "Context": "QuickLaunchOverlay.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Hold CTRL while clicking to restart the client.",
+      "Translated": "按住 CTRL 点击以重启客户端。",
+      "Context": "QuickLaunchOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Opens the VIWI dashboard.",
+      "Translated": "打开 VIWI 仪表盘。",
+      "Context": "VIWIPlugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-17T10:26:00",
+  "imported": {
+    "archive": "uit-direct-2026-10-17T10-25-48-611Z-b5ac8bed-2026-10-17T102559.json",
+    "accepted": 331,
+    "filled": 331,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 331 条 `VIWI` 的界面文字译文，已收为**独立译文包** `uit-packs/VIWI@user-319d38.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 331 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
