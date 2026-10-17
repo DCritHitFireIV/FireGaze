@@ -1,1 +1,1707 @@
-{"type":"uit-contribution","plugin":"Avarice","kinds":["free","llm"],"entries":[{"Original":"Avarice","Translated":"贪欲","Context":"Avarice.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Debug mode ","Translated":"调试模式","Context":"Avarice..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"disabled","Translated":"已禁用","Context":"Avarice..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"enabled","Translated":"已启用","Context":"Avarice..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Drawing ","Translated":"绘制","Context":"Avarice..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Toggle configuration window. Use '/avarice draw' to toggle drawing, '/avarice debug' for debug mode.","Translated":"切换配置窗口。使用 '/avarice draw' 切换绘制，'/avarice debug' 切换调试模式。","Context":"Avarice..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"(no damage)","Translated":"(无伤害)","Context":"Memory.ReceiveActionEffectDetour","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Avarice Positional Debug###AvaricePosDebug","Translated":"贪欲身位调试","Context":"PositionalDebugWindow..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Captures param2 from your own action-damage packets (the value the hit/miss table is keyed on).","Translated":"从自身技能伤害数据包中捕获 param2（命中/未命中表的键值）。","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Play any job that uses positionals, land hits from rear and flank, then deliberately miss a few. Compare the Verdict column to where you were actually standing. param2 marked with * matched a 'hit' row in the table. Use Copy export to share the raw values.","Translated":"使用任意有身位的职业，从背面和侧面命中，然后故意打空几次。将终审开庭列与实际站位对比。标记 * 的 param2 匹配了表中的“命中”行。使用复制导出分享原始值。","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Only positional-table actions","Translated":"仅身位表技能","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Pause capture","Translated":"暂停捕获","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Clear","Translated":"清除","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Copy export","Translated":"复制导出","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.ButtonCopy"},{"Original":"Frame","Translated":"帧","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Action","Translated":"技能","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"In table","Translated":"在表中","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Pos","Translated":"位置","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Verdict","Translated":"终审开庭","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"no","Translated":"否","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"yes","Translated":"是","Context":"PositionalDebugWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Positional HIT!","Translated":"身位命中！","Context":"PositionalFeedbackManager.TriggerFeedback","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Positional MISS!","Translated":"身位未命中！","Context":"PositionalFeedbackManager.TriggerFeedback","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Avarice overlay","Translated":"贪欲覆盖层","Context":"Canvas..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":" Configuration - ","Translated":"设置 -","Context":"ConfigWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"About","Translated":"关于","Context":"ConfigWindow..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Avarice credits and support.","Translated":"Avarice 鸣谢与支持。","Context":"ConfigWindow.DrawBody","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Log","Translated":"日志","Context":"ConfigWindow.DrawNavRail","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Internal plugin log.","Translated":"插件内部日志。","Context":"ConfigWindow.DrawBody","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Debug","Translated":"调试","Context":"ConfigWindow.DrawNavRail","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Developer tools for this profile.","Translated":"此配置的开发者工具。","Context":"ConfigWindow.DrawBody","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Open Positional Debug window","Translated":"打开身位调试窗口","Context":"ConfigWindow.Debug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Wrath positional hint:","Translated":"Wrath 身位提示：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Installed: ","Translated":"已安装：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Use Wrath: ","Translated":"使用 Wrath：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"IPC available: ","Translated":"IPC 可用：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"IPC error: ","Translated":"IPC 错误：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Wire: [","Translated":"连接：[","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Hint: dir=","Translated":"提示：dir=","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"StaticAutoDetectRadiusData","Translated":"静态自动检测半径数据","Context":"ConfigWindow.Debug","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Visual Feedback System:","Translated":"视觉反馈系统：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Test Feedback:","Translated":"测试反馈：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Show Success","Translated":"显示成功","Context":"ConfigWindow.Debug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Show Failure","Translated":"显示失败","Context":"ConfigWindow.Debug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Hide","Translated":"隐藏","Context":"ConfigWindow.Debug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Action override test","Translated":"技能覆盖测试","Context":"ConfigWindow.Debug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputInt"},{"Original":"set action override","Translated":"设置技能覆盖","Context":"ConfigWindow.Debug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Current action override: ","Translated":"当前动作覆盖：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Combo: ","Translated":"连击：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":", time=","Translated":"，时间=","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextCopy"},{"Original":"N. S. ","Translated":"n  s","Context":"ConfigWindow.Debug","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Is target positional: ","Translated":"是否身位目标：","Context":"ConfigWindow.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Test IPC","Translated":"测试 IPC","Context":"ConfigWindow.Debug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Overlays","Translated":"悬浮层","Context":"ConfigWindow..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Feedback","Translated":"反馈","Context":"ConfigWindow..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Profiles","Translated":"配置","Context":"ConfigWindow..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Statistics","Translated":"统计","Context":"ConfigWindow..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Advanced","Translated":"高级","Context":"ConfigWindow..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Name this profile, set the default, and assign jobs. Switch profiles from the list on the left.","Translated":"为此配置命名、设为默认并分配职业。从左侧列表切换配置。","Context":"TabProfiles.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Profile name...","Translated":"配置名称...","Context":"TabProfiles.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Delete","Translated":"删除","Context":"Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"The last profile cannot be removed.","Translated":"最后一个配置无法删除。","Context":"TabProfiles.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ Notify.Error"},{"Original":"This is the default profile.","Translated":"这是默认配置。","Context":"TabProfiles.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Make default","Translated":"设为默认","Context":"TabProfiles.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"<unassigned>","Translated":"<未分配>","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Unassign","Translated":"取消分配","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"What Avarice draws on the target, you, and the arena.","Translated":"Avarice 在目标、你和场地上绘制的覆盖层。","Context":"TabSettings.DrawOverlays","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Target","Translated":"目标","Context":"TabSettings.DrawOverlays","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Player","Translated":"玩家","Context":"TabSettings.DrawOverlays","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"World","Translated":"场地","Context":"TabSettings.DrawOverlays","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Enable drawing","Translated":"启用绘制","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Toggle all overlay drawing. You can also use /avarice draw.","Translated":"切换所有覆盖层绘制。也可使用 /avarice draw。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"(/avarice draw)","Translated":"（/贪婪平局）","Context":".cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Only show for positional targets","Translated":"仅对身位目标显示","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When enabled, overlays only show when the target needs positionals.","Translated":"启用后，仅当目标需要身位时显示覆盖层。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Still show distance indicator for non-positional targets","Translated":"非身位目标仍显示距离指示","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Keeps the enemy distance indicator on targets that do not have positionals.","Translated":"在无需身位的目标上保留敌人距离指示器。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Show the ring when the target has a non-positional buff","Translated":"当目标带有非身位增益时显示圆环","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Shows the distance indicator and positional ring when the target has a non-positional buff.","Translated":"当目标带有非身位增益时显示距离指示器和身位圆环。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Enable anticipation pie","Translated":"启用预判扇形","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"ant","Translated":"预判","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EnumCombo"},{"Original":"Rear","Translated":"后部","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"Ambiguous","RoleReason":"既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"},{"Original":"antr","Translated":"第二","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Thickness","Translated":"粗细","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Flank","Translated":"侧翼","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"Ambiguous","RoleReason":"既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"},{"Original":"antf","Translated":"安特夫","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Disable on True North","Translated":"真北时禁用","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Hides the anticipation pie while True North is active.","Translated":"真北激活时隐藏预判扇形。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Use Wrath Combo for the next positional","Translated":"使用 Wrath Combo 判断下一个身位","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Uses Wrath Combo when it has a next positional. Otherwise your combo.","Translated":"当 Wrath Combo 有下一个身位时使用它，否则使用你的连击。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Uses Wrath Combo when it has a next positional. Otherwise Rotation Solver or your combo.","Translated":"当 Wrath Combo 有下一个身位时使用它，否则使用 Rotation Solver 或你的连击。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Use Rotation Solver for the next positional","Translated":"使用 Rotation Solver 判断下一个身位","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Uses Rotation Solver when it has a next positional. Otherwise your combo.","Translated":"当 Rotation Solver 有下一个身位时使用它，否则使用你的连击。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Uses Rotation Solver when Wrath is unused or has no hint. Otherwise your combo.","Translated":"当 Wrath 未使用或无提示时使用 Rotation Solver，否则使用你的连击。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Job options","Translated":"职业选项","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"These apply when Avarice is reading your combo, not Wrath or Rotation Solver.","Translated":"这些仅在 Avarice 解析你的连击时生效，而非 Wrath 或 Rotation Solver。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Ninja","Translated":"忍者","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Show rear when Trick Attack is ready","Translated":"攻其不备就绪时显示背面","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When Trick Attack or Kunai's Bane is off cooldown, show rear.","Translated":"当攻其不备或百雷铳冷却完毕时，显示背面。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Show both positionals from Kazematoi","Translated":"显示风缠的双身位","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"With 1–3 Kazematoi charges, show rear and flank.","Translated":"拥有 1–3 层风缠时，显示背面和侧面。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Samurai","Translated":"武士","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Hide during Meikyo Shisui","Translated":"明镜止水期间隐藏","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Hides the pie while Meikyo Shisui is active.","Translated":"明镜止水激活时隐藏饼图。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Reaper","Translated":"钐镰客","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Anticipate first:","Translated":"优先预判：","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Which positional to show when both Gibbet and Gallows are available.","Translated":"当绞刑和缢杀均可用时显示哪个身位。","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Highlight the slice you are in","Translated":"高亮你所在的扇区","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"cur","Translated":"当前","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EnumCombo"},{"Original":"Show the front slice","Translated":"显示前方扇区","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"front","Translated":"前方","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EnumCombo"},{"Original":"Color","Translated":"颜色","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Enemy distance indicator","Translated":"敌人距离指示器","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Weaponskill range (3y)","Translated":"战技范围 (3y)","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Auto-attack range (2y)","Translated":"自动攻击范围 (2y)","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Lines","Translated":"线条","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"mr","Translated":"先生","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat"},{"Original":"Ability / weaponskill range","Translated":"能力 / 战技范围","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat"},{"Original":"Melee auto-attack range","Translated":"近战自动攻击范围","Context":"TabSettings.DrawTarget","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.DragFloat"},{"Original":"No target","Translated":"无目标","Context":"TabSettings.DrawAnticipationStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Wrath","Translated":"怒气","Context":"TabSettings.DrawAnticipationStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Rotation Solver","Translated":"循环求解器","Context":"TabSettings.DrawAnticipationStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Combo","Translated":"连击","Context":"TabSettings.DrawAnticipationStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"None","Translated":"无","Context":"TabSettings.DrawAnticipationStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Rear+Flank","Translated":"背身+侧身","Context":"TabSettings.DrawAnticipationStatus","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Player damage pixel","Translated":"玩家伤害像素","Context":"TabSettings.DrawPlayer","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"dot","Translated":"点","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"Ambiguous","RoleReason":"既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"},{"Original":"A small pixel at your feet for the damage hitbox. Default thickness is recommended.","Translated":"脚下显示一个小像素表示伤害判定框。建议使用默认粗细。","Context":"TabSettings.DrawPlayer","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Player reach outline","Translated":"玩家触及轮廓","Context":"TabSettings.DrawPlayer","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"hitbox","Translated":"命中框","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"Ambiguous","RoleReason":"既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"},{"Original":"A ring around you showing auto-attack reach.","Translated":"在你周围显示一个圆环，表示自动攻击触及范围。","Context":"TabSettings.DrawPlayer","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Party members","Translated":"小队成员","Context":"TabSettings.DrawPlayer","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"dotp","Translated":"点","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"Ambiguous","RoleReason":"既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"},{"Original":"All players","Translated":"所有玩家","Context":"TabSettings.DrawPlayer","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"dota","Translated":"刀塔","Context":".cctor","Source":"ai:public-caiyun","PreserveID":true,"Role":"Ambiguous","RoleReason":"既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"},{"Original":"What happens when you hit or miss a positional.","Translated":"命中或未命中身位时的提示效果。","Context":"TabSettings.DrawFeedback","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Visual mode","Translated":"视觉模式","Context":"TabSettings.DrawFeedback","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Vector (Checkmark/X)","Translated":"矢量（勾/叉）","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Game VFX","Translated":"游戏特效","Context":"TabSettings.DrawFeedback","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Game VFX includes built-in sounds.","Translated":"游戏特效包含内置音效。","Context":"TabSettings.DrawFeedback","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Icon size","Translated":"图标大小","Context":"TabSettings.DrawFeedback","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Print on miss","Translated":"未命中时打印","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Print on hit","Translated":"命中时打印","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Encounter summary on combat end","Translated":"战斗结束时显示遭遇摘要","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Test miss","Translated":"测试未命中","Context":"TabSettings.DrawFeedbackSide","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Test hit","Translated":"测试命中","Context":"TabSettings.DrawFeedbackSide","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Renderer options and optional Splatoon integration.","Translated":"渲染器选项及可选的 Splatoon 集成。","Context":"TabSettings.DrawAdvanced","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Warning: Pictomancy may have issues on Mac/Linux.","Translated":"警告：Pictomancy 在 Mac/Linux 上可能有问题。","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Render under UI (Pictomancy)","Translated":"在 UI 下渲染（Pictomancy）","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When enabled, overlays render underneath native UI instead of on top.","Translated":"启用后，悬浮层将渲染在原生 UI 下方而非上方。","Context":"TabSettings.DrawAdvanced","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Clip around native UI","Translated":"围绕原生 UI 裁剪","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Automatically clips rendering around native UI elements.","Translated":"自动围绕原生 UI 元素裁剪渲染。","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Max opacity","Translated":"最大不透明度","Context":"TabSettings.DrawAdvanced","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Maximum opacity for all rendered overlays (0-255).","Translated":"所有渲染覆盖层的最大不透明度（0-255）。","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"<se.10>","Translated":"<SE.10>","Context":"TabSettings..cctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Change colour in danger zones","Translated":"在危险领域内改变颜色","Context":"TabSplatoon.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Turns the player damage pixel a warning colour when Splatoon marks your position as dangerous. Needs the player damage pixel on, and Splatoon must expose danger zones.","Translated":"当 Splatoon 将你的位置标记为危险时，将玩家伤害像素变为警告颜色。需要开启玩家伤害像素，且 Splatoon 必须暴露危险领域。","Context":"TabSplatoon.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Danger colour","Translated":"危险颜色","Context":"TabSplatoon.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Colour used while you are standing in a Splatoon danger zone.","Translated":"当你站在 Splatoon 危险领域内时使用的颜色。","Context":"TabSplatoon.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Works on presets that mark themselves as dangerous. Enable the matching option in Splatoon's general settings. Older presets from before 6.5 usually do not set this.","Translated":"适用于将自身标记为危险的预设。请在 Splatoon 的常规设置中启用对应选项。6.5 之前的旧预设通常不会设置此项。","Context":"TabSplatoon.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Positional hits and misses for this profile.","Translated":"此配置的身位命中与未命中。","Context":"TabStatistics.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextWrapped"},{"Original":"Total","Translated":"总计","Context":"TabStatistics.DrawTotals","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"No positional hits recorded on this profile yet.","Translated":"此配置尚未记录身位命中。","Context":"TabStatistics.DrawTotals","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Job","Translated":"职业","Context":"TabStatistics.DrawTotals","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Hits","Translated":"命中","Context":"TabStatistics.DrawTotals","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Success %","Translated":"成功率 %","Context":"TabStatistics.DrawTotals","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Clear data (hold Shift+Ctrl)","Translated":"清除数据（按住 Shift+Ctrl）","Context":"TabStatistics.DrawTotals","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"No encounter data yet. Hits and misses appear after you use a positional.","Translated":"尚无战斗数据。使用身位后才会显示命中与未命中。","Context":"TabStatistics.DrawEncounter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Hits: ","Translated":"命中：","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":" out of ","Translated":"共","Context":".cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Clear data","Translated":"清除数据","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Stats reset on the next positional.","Translated":"下次身位时重置统计。","Context":"TabStatistics.DrawEncounter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Finalize","Translated":"完成","Context":".cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Ich habe es für sie gemacht.\nEs tut mir leid, dass ich nicht der Grösste bin.\nAber du bist meine Inspiration.","Translated":"我为她做的。\n对不起，我不是最伟大的。\n但你是我的灵感。","Context":"TabTank.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiEx.Tooltip"},{"Original":"Tank centralisation pixel","Translated":"坦克居中像素","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"A dot under the boss to help centre the arena. This is per-profile.","Translated":"Boss 下方的圆点，用于帮助居中场地。此设置按配置保存。","Context":"TabTank.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Duty arena centre pixel","Translated":"任务场地中心像素","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"A dot at the configured centre of the duty arena. This is per-profile.","Translated":"任务场地配置中心处的圆点。此项按配置档案独立设置。","Context":"TabTank.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Duty centre colour","Translated":"任务中心颜色","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"On-centre distance","Translated":"中心距离","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Lower means the boss must sit closer to the arena centre to use the on-centre colour.","Translated":"数值越低，Boss 需越靠近场地中心才会使用中心颜色。","Context":"TabTank.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"On-centre colour","Translated":"中心颜色","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Off-centre colour","Translated":"偏离中心颜色","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Pixel size","Translated":"像素大小","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Add new override:","Translated":"添加新覆盖：","Context":"TabTank.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextV"},{"Original":"Select...","Translated":"选择...","Context":"TabTank.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Filter","Translated":"筛选","Context":"TabTank.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Name","Translated":"名称","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Middle point override","Translated":"中点覆盖","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Auto","Translated":"自动","Context":"TabTank.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"ECommonsButton","Translated":"电子共享按钮","Context":"TabTank.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiEx.IconButton"},{"Original":"compass","Translated":"罗盘","Context":"BoxCompass.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EnumCombo"},{"Original":"Tactical compass","Translated":"战术罗盘","Context":"BoxCompass.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"N / S / E / W letters around you.","Translated":"在你周围显示 N / S / E / W 字母。","Context":"BoxCompass.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Game font","Translated":"游戏字体","Context":"BoxCompass.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.EnumCombo"},{"Original":"Font scale","Translated":"字体缩放","Context":"BoxCompass.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Distance from you","Translated":"与你距离","Context":"BoxCompass.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"North color","Translated":"北方颜色","Context":"BoxCompass.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Other colors","Translated":"其他颜色","Context":"BoxCompass.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Avarice",
+  "kinds": [
+    "free",
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Avarice",
+      "Translated": "贪欲",
+      "Context": "Avarice.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Debug mode ",
+      "Translated": "调试模式",
+      "Context": "Avarice..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "disabled",
+      "Translated": "已禁用",
+      "Context": "Avarice..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "enabled",
+      "Translated": "已启用",
+      "Context": "Avarice..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Drawing ",
+      "Translated": "绘制",
+      "Context": "Avarice..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Toggle configuration window. Use '/avarice draw' to toggle drawing, '/avarice debug' for debug mode.",
+      "Translated": "切换配置窗口。使用 '/avarice draw' 切换绘制，'/avarice debug' 切换调试模式。",
+      "Context": "Avarice..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "(no damage)",
+      "Translated": "(无伤害)",
+      "Context": "Memory.ReceiveActionEffectDetour",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Avarice Positional Debug###AvaricePosDebug",
+      "Translated": "贪欲身位调试",
+      "Context": "PositionalDebugWindow..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Captures param2 from your own action-damage packets (the value the hit/miss table is keyed on).",
+      "Translated": "从自身技能伤害数据包中捕获 param2（命中/未命中表的键值）。",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Play any job that uses positionals, land hits from rear and flank, then deliberately miss a few. Compare the Verdict column to where you were actually standing. param2 marked with * matched a 'hit' row in the table. Use Copy export to share the raw values.",
+      "Translated": "使用任意有身位的职业，从背面和侧面命中，然后故意打空几次。将终审开庭列与实际站位对比。标记 * 的 param2 匹配了表中的“命中”行。使用复制导出分享原始值。",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Only positional-table actions",
+      "Translated": "仅身位表技能",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Pause capture",
+      "Translated": "暂停捕获",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Clear",
+      "Translated": "清除",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Copy export",
+      "Translated": "复制导出",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.ButtonCopy"
+    },
+    {
+      "Original": "Frame",
+      "Translated": "帧",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Action",
+      "Translated": "技能",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "In table",
+      "Translated": "在表中",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Pos",
+      "Translated": "位置",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Verdict",
+      "Translated": "终审开庭",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "no",
+      "Translated": "否",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "yes",
+      "Translated": "是",
+      "Context": "PositionalDebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Positional HIT!",
+      "Translated": "身位命中！",
+      "Context": "PositionalFeedbackManager.TriggerFeedback",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Positional MISS!",
+      "Translated": "身位未命中！",
+      "Context": "PositionalFeedbackManager.TriggerFeedback",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Avarice overlay",
+      "Translated": "贪欲覆盖层",
+      "Context": "Canvas..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": " Configuration - ",
+      "Translated": "设置 -",
+      "Context": "ConfigWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Avarice credits and support.",
+      "Translated": "Avarice 鸣谢与支持。",
+      "Context": "ConfigWindow.DrawBody",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Log",
+      "Translated": "日志",
+      "Context": "ConfigWindow.DrawNavRail",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Internal plugin log.",
+      "Translated": "插件内部日志。",
+      "Context": "ConfigWindow.DrawBody",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "ConfigWindow.DrawNavRail",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Developer tools for this profile.",
+      "Translated": "此配置的开发者工具。",
+      "Context": "ConfigWindow.DrawBody",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Open Positional Debug window",
+      "Translated": "打开身位调试窗口",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Wrath positional hint:",
+      "Translated": "Wrath 身位提示：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Installed: ",
+      "Translated": "已安装：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Use Wrath: ",
+      "Translated": "使用 Wrath：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "IPC available: ",
+      "Translated": "IPC 可用：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "IPC error: ",
+      "Translated": "IPC 错误：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Wire: [",
+      "Translated": "连接：[",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Hint: dir=",
+      "Translated": "提示：dir=",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "StaticAutoDetectRadiusData",
+      "Translated": "静态自动检测半径数据",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Visual Feedback System:",
+      "Translated": "视觉反馈系统：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Test Feedback:",
+      "Translated": "测试反馈：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Show Success",
+      "Translated": "显示成功",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Show Failure",
+      "Translated": "显示失败",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Hide",
+      "Translated": "隐藏",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Action override test",
+      "Translated": "技能覆盖测试",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    },
+    {
+      "Original": "set action override",
+      "Translated": "设置技能覆盖",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Current action override: ",
+      "Translated": "当前动作覆盖：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Combo: ",
+      "Translated": "连击：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": ", time=",
+      "Translated": "，时间=",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextCopy"
+    },
+    {
+      "Original": "N. S. ",
+      "Translated": "n  s",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Is target positional: ",
+      "Translated": "是否身位目标：",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Test IPC",
+      "Translated": "测试 IPC",
+      "Context": "ConfigWindow.Debug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Overlays",
+      "Translated": "悬浮层",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Feedback",
+      "Translated": "反馈",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Profiles",
+      "Translated": "配置",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Statistics",
+      "Translated": "统计",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Advanced",
+      "Translated": "高级",
+      "Context": "ConfigWindow..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Name this profile, set the default, and assign jobs. Switch profiles from the list on the left.",
+      "Translated": "为此配置命名、设为默认并分配职业。从左侧列表切换配置。",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Profile name...",
+      "Translated": "配置名称...",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "The last profile cannot be removed.",
+      "Translated": "最后一个配置无法删除。",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ Notify.Error"
+    },
+    {
+      "Original": "This is the default profile.",
+      "Translated": "这是默认配置。",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Make default",
+      "Translated": "设为默认",
+      "Context": "TabProfiles.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "<unassigned>",
+      "Translated": "<未分配>",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Unassign",
+      "Translated": "取消分配",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "What Avarice draws on the target, you, and the arena.",
+      "Translated": "Avarice 在目标、你和场地上绘制的覆盖层。",
+      "Context": "TabSettings.DrawOverlays",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Target",
+      "Translated": "目标",
+      "Context": "TabSettings.DrawOverlays",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Player",
+      "Translated": "玩家",
+      "Context": "TabSettings.DrawOverlays",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "World",
+      "Translated": "场地",
+      "Context": "TabSettings.DrawOverlays",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Enable drawing",
+      "Translated": "启用绘制",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Toggle all overlay drawing. You can also use /avarice draw.",
+      "Translated": "切换所有覆盖层绘制。也可使用 /avarice draw。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "(/avarice draw)",
+      "Translated": "（/贪婪平局）",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Only show for positional targets",
+      "Translated": "仅对身位目标显示",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When enabled, overlays only show when the target needs positionals.",
+      "Translated": "启用后，仅当目标需要身位时显示覆盖层。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Still show distance indicator for non-positional targets",
+      "Translated": "非身位目标仍显示距离指示",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Keeps the enemy distance indicator on targets that do not have positionals.",
+      "Translated": "在无需身位的目标上保留敌人距离指示器。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Show the ring when the target has a non-positional buff",
+      "Translated": "当目标带有非身位增益时显示圆环",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Shows the distance indicator and positional ring when the target has a non-positional buff.",
+      "Translated": "当目标带有非身位增益时显示距离指示器和身位圆环。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Enable anticipation pie",
+      "Translated": "启用预判扇形",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "ant",
+      "Translated": "预判",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo"
+    },
+    {
+      "Original": "Rear",
+      "Translated": "后部",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "Ambiguous",
+      "RoleReason": "既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"
+    },
+    {
+      "Original": "antr",
+      "Translated": "第二",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Thickness",
+      "Translated": "粗细",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Flank",
+      "Translated": "侧翼",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "Ambiguous",
+      "RoleReason": "既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"
+    },
+    {
+      "Original": "antf",
+      "Translated": "安特夫",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Disable on True North",
+      "Translated": "真北时禁用",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Hides the anticipation pie while True North is active.",
+      "Translated": "真北激活时隐藏预判扇形。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Use Wrath Combo for the next positional",
+      "Translated": "使用 Wrath Combo 判断下一个身位",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Uses Wrath Combo when it has a next positional. Otherwise your combo.",
+      "Translated": "当 Wrath Combo 有下一个身位时使用它，否则使用你的连击。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Uses Wrath Combo when it has a next positional. Otherwise Rotation Solver or your combo.",
+      "Translated": "当 Wrath Combo 有下一个身位时使用它，否则使用 Rotation Solver 或你的连击。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Use Rotation Solver for the next positional",
+      "Translated": "使用 Rotation Solver 判断下一个身位",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Uses Rotation Solver when it has a next positional. Otherwise your combo.",
+      "Translated": "当 Rotation Solver 有下一个身位时使用它，否则使用你的连击。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Uses Rotation Solver when Wrath is unused or has no hint. Otherwise your combo.",
+      "Translated": "当 Wrath 未使用或无提示时使用 Rotation Solver，否则使用你的连击。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Job options",
+      "Translated": "职业选项",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "These apply when Avarice is reading your combo, not Wrath or Rotation Solver.",
+      "Translated": "这些仅在 Avarice 解析你的连击时生效，而非 Wrath 或 Rotation Solver。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Ninja",
+      "Translated": "忍者",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Show rear when Trick Attack is ready",
+      "Translated": "攻其不备就绪时显示背面",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When Trick Attack or Kunai's Bane is off cooldown, show rear.",
+      "Translated": "当攻其不备或百雷铳冷却完毕时，显示背面。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Show both positionals from Kazematoi",
+      "Translated": "显示风缠的双身位",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "With 1–3 Kazematoi charges, show rear and flank.",
+      "Translated": "拥有 1–3 层风缠时，显示背面和侧面。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Samurai",
+      "Translated": "武士",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Hide during Meikyo Shisui",
+      "Translated": "明镜止水期间隐藏",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Hides the pie while Meikyo Shisui is active.",
+      "Translated": "明镜止水激活时隐藏饼图。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Reaper",
+      "Translated": "钐镰客",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Anticipate first:",
+      "Translated": "优先预判：",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Which positional to show when both Gibbet and Gallows are available.",
+      "Translated": "当绞刑和缢杀均可用时显示哪个身位。",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Highlight the slice you are in",
+      "Translated": "高亮你所在的扇区",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "cur",
+      "Translated": "当前",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo"
+    },
+    {
+      "Original": "Show the front slice",
+      "Translated": "显示前方扇区",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "front",
+      "Translated": "前方",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo"
+    },
+    {
+      "Original": "Color",
+      "Translated": "颜色",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Enemy distance indicator",
+      "Translated": "敌人距离指示器",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Weaponskill range (3y)",
+      "Translated": "战技范围 (3y)",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Auto-attack range (2y)",
+      "Translated": "自动攻击范围 (2y)",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Lines",
+      "Translated": "线条",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "mr",
+      "Translated": "先生",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat"
+    },
+    {
+      "Original": "Ability / weaponskill range",
+      "Translated": "能力 / 战技范围",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat"
+    },
+    {
+      "Original": "Melee auto-attack range",
+      "Translated": "近战自动攻击范围",
+      "Context": "TabSettings.DrawTarget",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.DragFloat"
+    },
+    {
+      "Original": "No target",
+      "Translated": "无目标",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Wrath",
+      "Translated": "怒气",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Rotation Solver",
+      "Translated": "循环求解器",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Combo",
+      "Translated": "连击",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "None",
+      "Translated": "无",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Rear+Flank",
+      "Translated": "背身+侧身",
+      "Context": "TabSettings.DrawAnticipationStatus",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Player damage pixel",
+      "Translated": "玩家伤害像素",
+      "Context": "TabSettings.DrawPlayer",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "dot",
+      "Translated": "点",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "Ambiguous",
+      "RoleReason": "既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"
+    },
+    {
+      "Original": "A small pixel at your feet for the damage hitbox. Default thickness is recommended.",
+      "Translated": "脚下显示一个小像素表示伤害判定框。建议使用默认粗细。",
+      "Context": "TabSettings.DrawPlayer",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Player reach outline",
+      "Translated": "玩家触及轮廓",
+      "Context": "TabSettings.DrawPlayer",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "hitbox",
+      "Translated": "命中框",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "Ambiguous",
+      "RoleReason": "既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"
+    },
+    {
+      "Original": "A ring around you showing auto-attack reach.",
+      "Translated": "在你周围显示一个圆环，表示自动攻击触及范围。",
+      "Context": "TabSettings.DrawPlayer",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Party members",
+      "Translated": "小队成员",
+      "Context": "TabSettings.DrawPlayer",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "dotp",
+      "Translated": "点",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "Ambiguous",
+      "RoleReason": "既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"
+    },
+    {
+      "Original": "All players",
+      "Translated": "所有玩家",
+      "Context": "TabSettings.DrawPlayer",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "dota",
+      "Translated": "刀塔",
+      "Context": ".cctor",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "Ambiguous",
+      "RoleReason": "既当控件 ID 用又当普通文字显示：加 ###原文 会在文字处漏出后缀，不加可能撞控件 ID"
+    },
+    {
+      "Original": "What happens when you hit or miss a positional.",
+      "Translated": "命中或未命中身位时的提示效果。",
+      "Context": "TabSettings.DrawFeedback",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Visual mode",
+      "Translated": "视觉模式",
+      "Context": "TabSettings.DrawFeedback",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Vector (Checkmark/X)",
+      "Translated": "矢量（勾/叉）",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Game VFX",
+      "Translated": "游戏特效",
+      "Context": "TabSettings.DrawFeedback",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Game VFX includes built-in sounds.",
+      "Translated": "游戏特效包含内置音效。",
+      "Context": "TabSettings.DrawFeedback",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Icon size",
+      "Translated": "图标大小",
+      "Context": "TabSettings.DrawFeedback",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Print on miss",
+      "Translated": "未命中时打印",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Print on hit",
+      "Translated": "命中时打印",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Encounter summary on combat end",
+      "Translated": "战斗结束时显示遭遇摘要",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Test miss",
+      "Translated": "测试未命中",
+      "Context": "TabSettings.DrawFeedbackSide",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Test hit",
+      "Translated": "测试命中",
+      "Context": "TabSettings.DrawFeedbackSide",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Renderer options and optional Splatoon integration.",
+      "Translated": "渲染器选项及可选的 Splatoon 集成。",
+      "Context": "TabSettings.DrawAdvanced",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Warning: Pictomancy may have issues on Mac/Linux.",
+      "Translated": "警告：Pictomancy 在 Mac/Linux 上可能有问题。",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Render under UI (Pictomancy)",
+      "Translated": "在 UI 下渲染（Pictomancy）",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When enabled, overlays render underneath native UI instead of on top.",
+      "Translated": "启用后，悬浮层将渲染在原生 UI 下方而非上方。",
+      "Context": "TabSettings.DrawAdvanced",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Clip around native UI",
+      "Translated": "围绕原生 UI 裁剪",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Automatically clips rendering around native UI elements.",
+      "Translated": "自动围绕原生 UI 元素裁剪渲染。",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Max opacity",
+      "Translated": "最大不透明度",
+      "Context": "TabSettings.DrawAdvanced",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Maximum opacity for all rendered overlays (0-255).",
+      "Translated": "所有渲染覆盖层的最大不透明度（0-255）。",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "<se.10>",
+      "Translated": "<SE.10>",
+      "Context": "TabSettings..cctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Change colour in danger zones",
+      "Translated": "在危险领域内改变颜色",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Turns the player damage pixel a warning colour when Splatoon marks your position as dangerous. Needs the player damage pixel on, and Splatoon must expose danger zones.",
+      "Translated": "当 Splatoon 将你的位置标记为危险时，将玩家伤害像素变为警告颜色。需要开启玩家伤害像素，且 Splatoon 必须暴露危险领域。",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Danger colour",
+      "Translated": "危险颜色",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Colour used while you are standing in a Splatoon danger zone.",
+      "Translated": "当你站在 Splatoon 危险领域内时使用的颜色。",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Works on presets that mark themselves as dangerous. Enable the matching option in Splatoon's general settings. Older presets from before 6.5 usually do not set this.",
+      "Translated": "适用于将自身标记为危险的预设。请在 Splatoon 的常规设置中启用对应选项。6.5 之前的旧预设通常不会设置此项。",
+      "Context": "TabSplatoon.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Positional hits and misses for this profile.",
+      "Translated": "此配置的身位命中与未命中。",
+      "Context": "TabStatistics.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextWrapped"
+    },
+    {
+      "Original": "Total",
+      "Translated": "总计",
+      "Context": "TabStatistics.DrawTotals",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "No positional hits recorded on this profile yet.",
+      "Translated": "此配置尚未记录身位命中。",
+      "Context": "TabStatistics.DrawTotals",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Job",
+      "Translated": "职业",
+      "Context": "TabStatistics.DrawTotals",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Hits",
+      "Translated": "命中",
+      "Context": "TabStatistics.DrawTotals",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Success %",
+      "Translated": "成功率 %",
+      "Context": "TabStatistics.DrawTotals",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Clear data (hold Shift+Ctrl)",
+      "Translated": "清除数据（按住 Shift+Ctrl）",
+      "Context": "TabStatistics.DrawTotals",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "No encounter data yet. Hits and misses appear after you use a positional.",
+      "Translated": "尚无战斗数据。使用身位后才会显示命中与未命中。",
+      "Context": "TabStatistics.DrawEncounter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Hits: ",
+      "Translated": "命中：",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": " out of ",
+      "Translated": "共",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Clear data",
+      "Translated": "清除数据",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Stats reset on the next positional.",
+      "Translated": "下次身位时重置统计。",
+      "Context": "TabStatistics.DrawEncounter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Finalize",
+      "Translated": "完成",
+      "Context": ".cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Ich habe es für sie gemacht.\nEs tut mir leid, dass ich nicht der Grösste bin.\nAber du bist meine Inspiration.",
+      "Translated": "我为她做的。\n对不起，我不是最伟大的。\n但你是我的灵感。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Tooltip"
+    },
+    {
+      "Original": "Tank centralisation pixel",
+      "Translated": "坦克居中像素",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "A dot under the boss to help centre the arena. This is per-profile.",
+      "Translated": "Boss 下方的圆点，用于帮助居中场地。此设置按配置保存。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Duty arena centre pixel",
+      "Translated": "任务场地中心像素",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "A dot at the configured centre of the duty arena. This is per-profile.",
+      "Translated": "任务场地配置中心处的圆点。此项按配置档案独立设置。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Duty centre colour",
+      "Translated": "任务中心颜色",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "On-centre distance",
+      "Translated": "中心距离",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Lower means the boss must sit closer to the arena centre to use the on-centre colour.",
+      "Translated": "数值越低，Boss 需越靠近场地中心才会使用中心颜色。",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "On-centre colour",
+      "Translated": "中心颜色",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Off-centre colour",
+      "Translated": "偏离中心颜色",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Pixel size",
+      "Translated": "像素大小",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Add new override:",
+      "Translated": "添加新覆盖：",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV"
+    },
+    {
+      "Original": "Select...",
+      "Translated": "选择...",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Filter",
+      "Translated": "筛选",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Middle point override",
+      "Translated": "中点覆盖",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Auto",
+      "Translated": "自动",
+      "Context": "TabTank.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "ECommonsButton",
+      "Translated": "电子共享按钮",
+      "Context": "TabTank.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton"
+    },
+    {
+      "Original": "compass",
+      "Translated": "罗盘",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo"
+    },
+    {
+      "Original": "Tactical compass",
+      "Translated": "战术罗盘",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "N / S / E / W letters around you.",
+      "Translated": "在你周围显示 N / S / E / W 字母。",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Game font",
+      "Translated": "游戏字体",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EnumCombo"
+    },
+    {
+      "Original": "Font scale",
+      "Translated": "字体缩放",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Distance from you",
+      "Translated": "与你距离",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "North color",
+      "Translated": "北方颜色",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Other colors",
+      "Translated": "其他颜色",
+      "Context": "BoxCompass.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-17T09:57:46",
+  "imported": {
+    "archive": "uit-direct-2026-10-17T09-57-34-161Z-49414426-2026-10-17T095746.json",
+    "accepted": 199,
+    "filled": 199,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 199 条 `Avarice` 的界面文字译文，已收为**独立译文包** `uit-packs/Avarice@user-77c47b.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 199 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
