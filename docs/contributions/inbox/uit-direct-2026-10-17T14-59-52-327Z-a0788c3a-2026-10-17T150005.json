@@ -1,0 +1,65 @@
+{
+  "issue": "direct-2026-10-17T14-59-52-327Z-a0788c3a",
+  "receivedAt": "2026-10-17 15:00:05",
+  "author": "匿名直传",
+  "plugin": "FPSPlugin",
+  "fingerprint": "6dc80900d936470f",
+  "packFile": "FPSPlugin@user-6dc809.json",
+  "accepted": 5,
+  "filled": 5,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "FPSPlugin",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "FPS Plugin",
+        "Translated": "FPS插件",
+        "Context": "FPSPlugin.get_Name",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "FPS Display",
+        "Translated": "FPS显示",
+        "Context": "FPSPlugin.OnFrameworkUpdate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IDtrBar.Get"
+      },
+      {
+        "Original": "Open config window for ",
+        "Translated": "打开配置窗口",
+        "Context": "FPSPlugin.SetupCommands",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": ". /pfps [show|hide|toggle|reset]",
+        "Translated": "./pfps [show | hide | toggle | reset]",
+        "Context": "FPSPlugin.SetupCommands",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Tracking Timespan (Seconds)",
+        "Translated": "跟踪时间跨度（秒）",
+        "Context": "FPSPluginConfig.DrawConfigUI",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}

@@ -1,1 +1,62 @@
-{"type":"uit-contribution","plugin":"FPSPlugin","kinds":["free"],"entries":[{"Original":"FPS Plugin","Translated":"FPS插件","Context":"FPSPlugin.get_Name","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"FPS Display","Translated":"FPS显示","Context":"FPSPlugin.OnFrameworkUpdate","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ IDtrBar.Get"},{"Original":"Open config window for ","Translated":"打开配置窗口","Context":"FPSPlugin.SetupCommands","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":". /pfps [show|hide|toggle|reset]","Translated":"./pfps [show | hide | toggle | reset]","Context":"FPSPlugin.SetupCommands","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Tracking Timespan (Seconds)","Translated":"跟踪时间跨度（秒）","Context":"FPSPluginConfig.DrawConfigUI","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputInt"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "FPSPlugin",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "FPS Plugin",
+      "Translated": "FPS插件",
+      "Context": "FPSPlugin.get_Name",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "FPS Display",
+      "Translated": "FPS显示",
+      "Context": "FPSPlugin.OnFrameworkUpdate",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ IDtrBar.Get"
+    },
+    {
+      "Original": "Open config window for ",
+      "Translated": "打开配置窗口",
+      "Context": "FPSPlugin.SetupCommands",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": ". /pfps [show|hide|toggle|reset]",
+      "Translated": "./pfps [show | hide | toggle | reset]",
+      "Context": "FPSPlugin.SetupCommands",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Tracking Timespan (Seconds)",
+      "Translated": "跟踪时间跨度（秒）",
+      "Context": "FPSPluginConfig.DrawConfigUI",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputInt"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-17T15:00:05",
+  "imported": {
+    "archive": "uit-direct-2026-10-17T14-59-52-327Z-a0788c3a-2026-10-17T150005.json",
+    "accepted": 5,
+    "filled": 5,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 5 条 `FPSPlugin` 的界面文字译文，已收为**独立译文包** `uit-packs/FPSPlugin@user-6dc809.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 5 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
