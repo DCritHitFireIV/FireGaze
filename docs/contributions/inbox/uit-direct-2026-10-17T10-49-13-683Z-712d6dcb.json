@@ -1,1 +1,98 @@
-{"type":"uit-contribution","plugin":"vfaux","kinds":["llm"],"entries":[{"Original":"Show plugin window","Translated":"显示插件窗口","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Easier Faux Hollows is not compatible with ezFauxHollows","Translated":"Easier Faux Hollows 与 ezFauxHollows 不兼容","Context":"Plugin.ShowEzFauxHollowsError","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Solver strategy: always find swords first","Translated":"求解策略：始终优先寻找剑","Context":"PluginWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Current game board","Translated":"当前游戏棋盘","Context":"PluginWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Debug board","Translated":"调试棋盘","Context":"PluginWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Randomize!","Translated":"随机化！","Context":"PluginWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Reset tiles","Translated":"重置格子","Context":"PluginWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Pattern not found!","Translated":"未找到图案！","Context":"PluginWindow.DrawBoardTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Current pattern: ","Translated":"当前图案：","Context":"PluginWindow.DrawBoardTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "vfaux",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Show plugin window",
+      "Translated": "显示插件窗口",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Easier Faux Hollows is not compatible with ezFauxHollows",
+      "Translated": "Easier Faux Hollows 与 ezFauxHollows 不兼容",
+      "Context": "Plugin.ShowEzFauxHollowsError",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Solver strategy: always find swords first",
+      "Translated": "求解策略：始终优先寻找剑",
+      "Context": "PluginWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Current game board",
+      "Translated": "当前游戏棋盘",
+      "Context": "PluginWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Debug board",
+      "Translated": "调试棋盘",
+      "Context": "PluginWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Randomize!",
+      "Translated": "随机化！",
+      "Context": "PluginWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Reset tiles",
+      "Translated": "重置格子",
+      "Context": "PluginWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Pattern not found!",
+      "Translated": "未找到图案！",
+      "Context": "PluginWindow.DrawBoardTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Current pattern: ",
+      "Translated": "当前图案：",
+      "Context": "PluginWindow.DrawBoardTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-17T10:49:24",
+  "imported": {
+    "archive": "uit-direct-2026-10-17T10-49-13-683Z-712d6dcb-2026-10-17T104924.json",
+    "accepted": 9,
+    "filled": 9,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 9 条 `vfaux` 的界面文字译文，已收为**独立译文包** `uit-packs/vfaux@user-ec9399.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 9 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
