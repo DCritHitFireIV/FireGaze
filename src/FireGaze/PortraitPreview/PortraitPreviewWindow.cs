@@ -11,7 +11,7 @@ using Dalamud.Plugin.Services;
 namespace FireGaze.PortraitPreview;
 
 internal sealed record PortraitBrowserItem(uint ID, string Name, uint Icon, byte DyeChannels, bool Available, string Reason);
-internal sealed record PortraitDye(byte ID, string Name, uint Color);
+internal sealed record PortraitHistoryListItem(long ID, DateTimeOffset At, string Label, bool IsCurrent);
 
 /// <summary>The window reads snapshots; the feature owns Framework-thread changes and editor identity checks.</summary>
 internal interface IPortraitPreviewViewModel
@@ -28,10 +28,21 @@ internal interface IPortraitPreviewViewModel
     void Dye(PortraitSlot slot, int channel, byte stain);
     void SetVisibility(bool head, bool weapon, bool visor);
     void ClosePreview();
+    bool SyncPlate { get; }
+    void SetSyncPlate(bool enabled);
+    bool CanUndo { get; }
+    bool CanRedo { get; }
+    void Undo();
+    void Redo();
+    IReadOnlyList<PortraitHistoryListItem> History { get; }
+    string HistoryStatus { get; }
+    void RestoreHistory(long id);
+    IReadOnlyList<PortraitAppearanceGroup> AppearanceGroups { get; }
+    void ChangeAppearance(string groupID, int value);
 }
 
 /// <summary>Independent wardrobe UI using game-local textures, without Dresser code or plugin IPC.</summary>
-internal sealed class PortraitPreviewWindow : Window, IDisposable
+internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 {
     private static readonly PortraitSlot[] Slots =
     [
@@ -54,9 +65,12 @@ internal sealed class PortraitPreviewWindow : Window, IDisposable
     private int dyeChannel;
     private string search = string.Empty;
     private bool disposed;
+    private bool appearanceTab;
+    private string selectedAppearance = "";
+    private bool showHistory;
 
     public PortraitPreviewWindow(IPortraitPreviewViewModel feature, IDalamudPluginInterface pluginInterface, ITextureProvider textures)
-        : base("肖像实时预览###FireGazePortraitPreview", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
+        : base("肖像实时编辑###FireGazePortraitPreview", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
     {
         this.feature = feature;
         this.pluginInterface = pluginInterface;
@@ -81,16 +95,24 @@ internal sealed class PortraitPreviewWindow : Window, IDisposable
         var current = feature.Current;
         if (!feature.IsActive || current is null)
         {
-            ImGui.TextWrapped("请先打开肖像编辑器，再点击旁边的「实时预览」。");
+            ImGui.TextWrapped("请先打开肖像编辑器，再点击旁边的「FireGaze修改」。");
             return;
         }
 
-        DrawTab("装备", true, true);
+        if (DrawTab("装备", !appearanceTab, true)) appearanceTab = false;
         ImGui.SameLine();
-        DrawTab("美容师", false, false);
+        if (DrawTab("美容师", appearanceTab, true)) appearanceTab = true;
         ImGui.SameLine();
         ImGui.TextDisabled("仅预览当前肖像，关闭后还原");
+        DrawEditingToolbar();
         ImGui.Separator();
+
+        if (appearanceTab)
+        {
+            DrawAppearance();
+            DrawHistoryPopup();
+            return;
+        }
 
         var summaryHeight = ImGui.GetTextLineHeightWithSpacing() * 2.6f;
         var mainHeight = Math.Max(260f * Scale, ImGui.GetContentRegionAvail().Y - summaryHeight);
@@ -126,16 +148,17 @@ internal sealed class PortraitPreviewWindow : Window, IDisposable
             ImGui.EndPopup();
         }
         if (!string.IsNullOrWhiteSpace(feature.Status)) ImGui.TextWrapped(feature.Status);
+        DrawHistoryPopup();
     }
 
     private static float Scale => ImGui.GetFontSize() / 17f;
 
-    private void DrawTab(string text, bool active, bool enabled)
+    private bool DrawTab(string text, bool active, bool enabled)
     {
         var size = new Vector2(116, 38) * Scale;
         var origin = ImGui.GetCursorScreenPos();
         ImGui.BeginDisabled(!enabled);
-        ImGui.InvisibleButton($"###PortraitTab{text}", size);
+        var clicked = ImGui.InvisibleButton($"###PortraitTab{text}", size);
         var texture = GetPart("ui/uld/MiragePrismPlate.uld", "ui/uld/MiragePrismPlate2_hr1.tex", active ? 5 : 4);
         var draw = ImGui.GetWindowDrawList();
         if (texture is not null)
@@ -152,8 +175,7 @@ internal sealed class PortraitPreviewWindow : Window, IDisposable
         draw.AddText(origin + (size - textSize) * 0.5f,
             ImGui.GetColorU32(enabled ? new Vector4(0.16f, 0.14f, 0.10f, 1) : new Vector4(0.70f, 0.70f, 0.70f, 1)), text);
         ImGui.EndDisabled();
-        if (!enabled && ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-            ImGui.SetTooltip("美容师功能将在后续版本提供。");
+        return enabled && clicked;
     }
 
     private void DrawSlots(PortraitLook current)
@@ -320,7 +342,7 @@ internal sealed class PortraitPreviewWindow : Window, IDisposable
 
     private void DrawDyePalette()
     {
-        ImGui.SetNextWindowSize(new Vector2(390, 400) * Scale, ImGuiCond.Appearing);
+        ImGui.SetNextWindowSize(new Vector2(570, 620) * Scale, ImGuiCond.Appearing);
         if (!ImGui.BeginPopup("###PortraitDyePalette")) return;
         var look = feature.Current;
         var piece = look is null ? default : look.Pieces[(int)dyeSlot];
@@ -334,6 +356,7 @@ internal sealed class PortraitPreviewWindow : Window, IDisposable
         }
         ImGui.TextUnformatted($"{SlotName(dyeSlot)} · 染色 {dyeChannel + 1}");
         ImGui.TextDisabled("全部原生颜色，仅作用于肖像，不消耗染剂");
+        DrawUndoRedo();
         if (ImGui.Button("清除染色"))
         {
             feature.Dye(dyeSlot, dyeChannel, 0);
@@ -341,24 +364,26 @@ internal sealed class PortraitPreviewWindow : Window, IDisposable
         }
         ImGui.Separator();
         ImGui.BeginChild("###PortraitStainColors", new Vector2(0, 0), false);
-        var edge = 25f * Scale;
-        var columns = Math.Max(1, (int)((ImGui.GetContentRegionAvail().X + ImGui.GetStyle().ItemSpacing.X) / (edge + ImGui.GetStyle().ItemSpacing.X)));
-        var index = 0;
-        foreach (var dye in feature.Dyes)
+        var edge = 32f * Scale;
+        var columns = Math.Clamp((int)((ImGui.GetContentRegionAvail().X + ImGui.GetStyle().ItemSpacing.X) / (edge + ImGui.GetStyle().ItemSpacing.X)), 1, 12);
+        foreach (var group in PortraitDyePalette.Group(feature.Dyes))
         {
-            if (dye.ID == 0) continue;
-            if (index++ % columns != 0) ImGui.SameLine();
-            var selected = (dyeChannel == 0 ? piece.Stain0 : piece.Stain1) == dye.ID;
-            if (selected) ImGui.PushStyleColor(ImGuiCol.Border, new Vector4(1, 0.86f, 0.45f, 1));
-            ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, selected ? 2f * Scale : 0f);
-            var clicked = ImGui.ColorButton($"###PortraitDye{dye.ID}", DyeColor(dye.Color), ImGuiColorEditFlags.NoTooltip, new Vector2(edge));
-            ImGui.PopStyleVar();
-            if (selected) ImGui.PopStyleColor();
-            if (ImGui.IsItemHovered()) ImGui.SetTooltip(dye.Name);
-            if (clicked)
+            ImGui.Spacing();
+            ImGui.TextUnformatted(group.Name);
+            var index = 0;
+            foreach (var dye in group.Dyes)
             {
-                feature.Dye(dyeSlot, dyeChannel, dye.ID);
-                ImGui.CloseCurrentPopup();
+                if (index++ % columns != 0) ImGui.SameLine();
+                var selected = (dyeChannel == 0 ? piece.Stain0 : piece.Stain1) == dye.ID;
+                var position = ImGui.GetCursorScreenPos();
+                var clicked = ImGui.ColorButton($"###PortraitDye{dye.ID}", DyeColor(dye.Color), ImGuiColorEditFlags.NoTooltip, new Vector2(edge));
+                if (selected)
+                {
+                    ImGui.GetWindowDrawList().AddRect(position, position + new Vector2(edge), 0xff80dcff, 3f * Scale, ImDrawFlags.None, 2f * Scale);
+                    ImGui.GetWindowDrawList().AddText(position + new Vector2(3, 1) * Scale, dye.Color < 0x808080 ? 0xffffffff : 0xff202020, "✓");
+                }
+                if (ImGui.IsItemHovered()) ImGui.SetTooltip(dye.Name);
+                if (clicked) feature.Dye(dyeSlot, dyeChannel, dye.ID);
             }
         }
         ImGui.EndChild();

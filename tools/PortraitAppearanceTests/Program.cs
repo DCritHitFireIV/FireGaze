@@ -85,10 +85,22 @@ Throws(()=>new PortraitAppearanceCatalog([new(profile.Key,[new("legacy","旧版�
 Throws(()=>new PortraitAppearanceCatalog([new(profile.Key,[new("hair","发型",6,255,0,[new(300,"300")])])]),"Oversize encoded value rejected");
 Throws(()=>new PortraitAppearanceCatalog([new(profile.Key,[new("hair","发型",6,255,0,[new(1,"1"),new(1,"重复")])])]),"Duplicate option values rejected");
 Throws(()=>new PortraitAppearanceCatalog([new(profile.Key,[new("feature","特征",12,3,0,[new(0,"0")]),new("overlap","重叠",12,2,1,[new(0,"0")])])]),"Overlapping controls rejected");
-if(args.Contains("--game-data"))
+var sqpackIndex = Array.IndexOf(args, "--sqpack");
+string? sqpack = null;
+if (sqpackIndex >= 0)
+{
+    if (sqpackIndex + 1 >= args.Length || string.IsNullOrWhiteSpace(args[sqpackIndex + 1]) || !Directory.Exists(args[sqpackIndex + 1]))
+        throw new ArgumentException("--sqpack requires an existing game sqpack directory.");
+    sqpack = Path.GetFullPath(args[sqpackIndex + 1]);
+}
+else if (args.Contains("--game-data"))
 {
     var config=JsonDocument.Parse(File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"XIVLauncherCN","launcherConfigV3.json")));
-    using var data=new GameData(Path.Combine(config.RootElement.GetProperty("GamePath").GetString()!,"game","sqpack"),new LuminaOptions{DefaultExcelLanguage=Language.ChineseSimplified,PanicOnSheetChecksumMismatch=false});
+    sqpack = Path.Combine(config.RootElement.GetProperty("GamePath").GetString()!,"game","sqpack");
+}
+if (sqpack is not null)
+{
+    using var data=new GameData(sqpack,new LuminaOptions{DefaultExcelLanguage=Language.ChineseSimplified,PanicOnSheetChecksumMismatch=false});
     var actual=new PortraitAppearanceCatalog(data);
     var snapshot=new byte[26]; snapshot[0]=1; snapshot[4]=1; snapshot[5]=1;
     var actualGroups=actual.Build(snapshot);
@@ -130,4 +142,5 @@ if(args.Contains("--game-data"))
     }
     Console.WriteLine($"Live game-data menu groups checked: {featureCount}");
 }
+else Console.WriteLine("SKIP current-client appearance game-data checks: no --sqpack or --game-data argument; base checks only.");
 Console.WriteLine($"PASS PortraitAppearanceTests {checks} checks");

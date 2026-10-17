@@ -49,6 +49,7 @@ if ($RequireFullValidation -and (!$SqpackPath -or !$HmsCompatRoot)) {
 }
 
 function Invoke-PreviewSuite([string]$Suite, [string[]]$SuiteArguments = @()) {
+    Write-Output "Running offline suite: $Suite"
     $previewDotnetArgs = @('run', '--project', (Join-Path $previewRoot "tools\$Suite\$Suite.csproj"), '-c', 'Release') + $SuiteArguments
     & dotnet @previewDotnetArgs
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -62,20 +63,29 @@ Invoke-PreviewSuite 'LocalPreviewPreferencesTests'
 foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'PortraitOwnedTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+foreach ($previewSuite in @('PortraitEditorStateTests', 'PortraitEditingTests', 'PortraitHistoryTests', 'PortraitPlateMirrorTests', 'PortraitFeatureIntegrationTests')) {
+    Invoke-PreviewSuite $previewSuite
+}
 
 if ($SqpackPath) {
+    foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {
+        Invoke-PreviewSuite $previewSuite @('--', '--sqpack', $SqpackPath)
+    }
     Invoke-PreviewSuite 'GposeEmoteTests' @('--', $SqpackPath)
     foreach ($previewSuite in @('TrialSpecialHotbarTests', 'TrialSpecialRuntimeTests', 'NativeCompatibilityTests', 'NativeEmoteTests')) {
         Invoke-PreviewSuite $previewSuite @('--', $SqpackPath)
     }
     Invoke-PreviewSuite 'LocalPreviewInteractionTests' @('--', '--sqpack', $SqpackPath)
 } else {
+    foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {
+        Invoke-PreviewSuite $previewSuite
+    }
     Invoke-PreviewSuite 'GposeEmoteTests'
     Invoke-PreviewSuite 'LocalPreviewInteractionTests'
     foreach ($previewSuite in @('TrialSpecialHotbarTests', 'TrialSpecialRuntimeTests', 'NativeCompatibilityTests', 'NativeEmoteTests')) {
         $previewSkippedSuites.Add($previewSuite)
     }
-    Write-Warning 'No current CN SqpackPath: four data-dependent suites and the GPose/item-data extensions were not run.'
+    Write-Warning 'No current CN SqpackPath: four data-dependent suites and the GPose/item/portrait game-data extensions were not run; portrait appearance/validation ran their base checks only.'
 }
 
 if ($HmsCompatRoot) {
@@ -92,7 +102,7 @@ foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests', 'Artifac
     Invoke-PreviewSuite $previewSuite
 }
 
-Write-Output "Offline validation finished: $previewCompletedSuites/21 suites; skipped: $($previewSkippedSuites -join ', ')."
-if (!$SqpackPath) { Write-Output 'Current-client GPose and item-data coverage is incomplete.' }
+Write-Output "Offline validation finished: $previewCompletedSuites/28 suites; skipped: $($previewSkippedSuites -join ', ')."
+if (!$SqpackPath) { Write-Output 'Current-client GPose, item-data, portrait appearance, and portrait validation coverage is incomplete.' }
 Write-Output 'Build and offline checks do not prove in-game or two-client acceptance.'
 exit 0

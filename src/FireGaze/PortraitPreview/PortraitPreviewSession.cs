@@ -22,6 +22,7 @@ internal interface IPortraitPreviewTarget
     bool IsCurrent(PortraitIdentity identity);
     PortraitLook? Capture(PortraitIdentity identity);
     bool Apply(PortraitIdentity identity, PortraitLook look);
+    bool RestoreOriginal(PortraitIdentity identity, PortraitLook look) => Apply(identity, look);
 }
 
 /// <summary>Owns one editor wardrobe without taking ownership of camera, lighting, or pose.</summary>
@@ -55,6 +56,15 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
     public void Validate()
     {
         if (IsActive && !target.IsCurrent(identity)) Forget();
+    }
+
+    public bool ObserveLook(PortraitLook observed)
+    {
+        Validate();
+        if (!IsActive || observed.Pieces.Length != 13 || observed.Pieces[12].ItemID > ushort.MaxValue) return false;
+        // The native adapter has already applied and validated this historical snapshot.
+        Current = observed.Copy();
+        return true;
     }
 
     public bool Replace(PortraitSlot slot, PortraitPiece piece)
@@ -93,7 +103,7 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
         if (restore is null) return true;
         if (!target.IsCurrent(previous)) { Forget(); return true; }
         bool restored;
-        try { restored = target.Apply(previous, restore); }
+        try { restored = target.RestoreOriginal(previous, restore); }
         catch { return false; }
         // A replaced native allocation owns its own appearance. Never roll the old look into it.
         if (!target.IsCurrent(previous)) { Forget(); return true; }

@@ -3,7 +3,7 @@
  <ItemGroup>
   <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
   <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.cs" Link="NativePortraitTarget.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/NativePortraitTarget.cs')" />
-  <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
+  <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.EditorState.cs" Link="NativePortraitTarget.EditorState.cs" /><Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="PortraitEditorState.cs" /><Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.Controls.cs" Link="NativePortraitTarget.Controls.cs" /><Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.PlateMirror.cs" Link="NativePortraitTarget.PlateMirror.cs" /><Compile Include="../../src/FireGaze/PortraitPreview/PortraitPlateMirror*.cs" Link="%(Filename)%(Extension)" /><Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
   <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
   <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
  </ItemGroup>

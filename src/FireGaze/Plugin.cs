@@ -569,6 +569,16 @@ public sealed class Plugin : IDalamudPlugin
         localPreview.DrawContent();
     }
 
+    internal void DrawPortraitEditor()
+    {
+        if (portraitPreview is null)
+        {
+            ImGui.TextWrapped("肖像实时编辑功能正在初始化，请稍后再试。");
+            return;
+        }
+        portraitPreview.DrawContent();
+    }
+
     /// <summary>
     ///     打开「插件发现」页签（原「参与翻译」独立窗口已并入主窗口第五页签）。
     /// </summary>

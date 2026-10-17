@@ -6,7 +6,7 @@ using FireGaze.Diagnostics;
 namespace FireGaze.UI;
 
 /// <summary>
-///     主窗口的页签（界面顺序：插件汉化 → 插件发现 → 仓库体检 → 简介汉化 → 插件安装器 → 坐骑试用）。
+///     主窗口的页签（界面顺序：插件汉化 → 插件发现 → 仓库体检 → 简介汉化 → 插件安装器 → 坐骑试用 → 肖像实时编辑）。
 /// </summary>
 public enum MainTab
 {
@@ -16,6 +16,7 @@ public enum MainTab
     Discovery = 3,
     UIText = 4,
     LocalPreview = 5,
+    PortraitEditor = 6,
 }
 
 /// <summary>
@@ -141,6 +142,14 @@ internal sealed class MainWindow : Window
             {
                 using var timing = uiDiagnostics.Measure("LocalPreview.Draw");
                 plugin.DrawLocalPreview();
+                ImGui.EndTabItem();
+            }
+
+            flags = pendingSelect == MainTab.PortraitEditor ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            if (ImGui.BeginTabItem("肖像实时编辑", flags))
+            {
+                using var timing = uiDiagnostics.Measure("PortraitEditor.Draw");
+                plugin.DrawPortraitEditor();
                 ImGui.EndTabItem();
             }
 

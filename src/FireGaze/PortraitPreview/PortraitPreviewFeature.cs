@@ -15,7 +15,7 @@ using CabinetRow = Lumina.Excel.Sheets.Cabinet;
 
 namespace FireGaze.PortraitPreview;
 
-internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel, IDisposable
+internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewViewModel, IDisposable
 {
     private readonly NativePortraitTarget target;
     private readonly PortraitPreviewSession session;
@@ -48,7 +48,7 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
             .ToDictionary(row => row.RowId);
         glasses = Plugin.DataManager.GetExcelSheet<Glasses>().Where(row => row.RowId > 0 && row.Model != 0).ToDictionary(row => row.RowId);
         dyes = Plugin.DataManager.GetExcelSheet<Stain>().Where(row => row.RowId <= byte.MaxValue && !string.IsNullOrWhiteSpace(row.Name.ToString()))
-            .Select(row => new PortraitDye((byte)row.RowId, row.Name.ToString(), row.Color)).ToArray();
+            .Select(row => new PortraitDye((byte)row.RowId, row.Name.ToString(), row.Color, row.Shade, row.SubOrder)).ToArray();
         owned = new(id => equipment.ContainsKey(id % 1_000_000) ? id % 1_000_000 : null);
         cache = new(configDirectory);
         cache.Load(owned, out _);
@@ -56,8 +56,9 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
         var cabinetItems = Plugin.DataManager.GetExcelSheet<CabinetRow>().Select(row => new OwnedCabinetItem(row.RowId, row.Item.RowId)).ToArray();
         inventory = new(() => Plugin.Framework.IsInFrameworkUpdateThread, CurrentCharacter, () => cabinetItems, IsRetainerInventoryOpen);
         target = new(Plugin.Framework, Plugin.Objects, Plugin.GameGUI, Plugin.Interop,
-            identity => session?.BlockSave(identity) == true, Error, Plugin.AgentLifecycle);
+            identity => session?.BlockSave(identity) == true, Error, Plugin.AgentLifecycle, Plugin.AddonLifecycle);
         session = new(target);
+        InitializeEditing(configDirectory);
         window = new(this, pluginInterface, Plugin.Textures);
         windows.AddWindow(window);
         diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
@@ -90,6 +91,10 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
             canBlockSave = target.CanBlockSave, blockedSaves = target.BlockedSaves, blockedSaveEvents = target.BlockedSaveEvents, nativeError = target.LastError,
             active = IsActive, status, look = Current, sourceSummary, sources = ownedView.Sources,
             ownedCount = ownedView.Items.Count, browser = browser.ToDictionary(p => p.Key.ToString(), p => p.Value),
+            editorState = resolved ? target.CaptureEditorState(identity) : null,
+            syncPlate, plateMirrorActive = target.IsPlateMirrorActive, plateMirrorError = target.PlateMirrorError,
+            canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
+            historyRows, appearanceGroups,
         });
     }
 
@@ -122,6 +127,7 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
         {
             inventory.ObserveRetainerLoads();
             session.Validate();
+            PollEditing();
             editorAvailable = target.TryResolve(out _, out var bounds, out _);
             if (editorAvailable) buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
             if (!session.IsActive && window.IsOpen) window.IsOpen = false;
@@ -226,35 +232,48 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
 
     public void Equip(PortraitSlot slot, uint id) => Mutate(() =>
     {
+        if (!SynchronizeCurrentLook()) return;
         var item = GetItems(slot).FirstOrDefault(row => row.ID == id);
         if (item is not { Available: true }) { Error(item?.Reason ?? "该物品不在当前已读取的拥有记录中。"); return; }
         var variant = ownedView.Items.FirstOrDefault(row => row.ItemID == id)?.Variants.FirstOrDefault();
+        HandleHistoryResult(historyBatch.Flush());
         if (!session.Replace(slot, new(id, item.DyeChannels > 0 ? variant?.Stain1 ?? 0 : (byte)0, item.DyeChannels > 1 ? variant?.Stain2 ?? 0 : (byte)0)))
             Error("当前肖像模型无法应用该装备，请等待加载后重试。");
+        else RecordDirectChange("更换装备：" + item.Name);
     });
 
     public void Clear(PortraitSlot slot) => Mutate(() =>
     {
+        if (!SynchronizeCurrentLook()) return;
+        HandleHistoryResult(historyBatch.Flush());
         if (!session.Replace(slot, default)) Error("当前肖像模型无法清空该部位。");
+        else RecordDirectChange("清空装备部位");
     });
 
     public void Dye(PortraitSlot slot, int channel, byte stain) => Mutate(() =>
     {
+        if (!SynchronizeCurrentLook()) return;
         if (Current is not { } look || (uint)slot >= 13 || channel is < 0 or > 1) return;
         var piece = look.Pieces[(int)slot];
         var item = GetItem(slot, piece.ItemID);
         if (item is null || channel >= item.DyeChannels || (stain != 0 && !dyes.Any(row => row.ID == stain))) return;
         var next = channel == 0 ? piece with { Stain0 = stain } : piece with { Stain1 = stain };
+        HandleHistoryResult(historyBatch.Flush());
         if (!session.Replace(slot, next)) Error("当前肖像模型无法应用该染色。");
+        else RecordDirectChange($"染色 {channel + 1}：" + (dyes.FirstOrDefault(dye => dye.ID == stain)?.Name ?? "无"));
     });
 
     public void SetVisibility(bool head, bool weapon, bool visor) => Mutate(() =>
     {
+        if (!SynchronizeCurrentLook()) return;
+        HandleHistoryResult(historyBatch.Flush());
         if (!session.SetVisibility(head, weapon, visor)) Error("当前肖像模型无法修改显示状态。");
+        else RecordDirectChange("装备显示设置");
     });
 
     public void ClosePreview() => Mutate(() =>
     {
+        FlushEditing();
         if (!session.Close())
         {
             window.IsOpen = true;
@@ -262,6 +281,7 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
             return;
         }
         window.IsOpen = false;
+        SynchronizeAfterClose();
         cacheWriter.Queue(owned.ExportJSON());
         status = "已结束临时外观预览，可以保存肖像。";
     });
@@ -282,6 +302,8 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
     private void Draw()
     {
         if (disposed) return;
+        pointerHeld = ImGui.IsMouseDown(ImGuiMouseButton.Left) || ImGui.IsMouseDown(ImGuiMouseButton.Right)
+            || ImGui.IsMouseDown(ImGuiMouseButton.Middle);
         if (editorAvailable)
         {
             var viewport = ImGui.GetMainViewport();
@@ -289,7 +311,7 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
             ImGui.SetNextWindowBgAlpha(.8f);
             if (ImGui.Begin("###FireGazePortraitAnchor", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoSavedSettings | ImGuiWindowFlags.NoFocusOnAppearing))
             {
-                if (ImGui.Button(IsActive ? "关闭实时预览" : "实时预览"))
+                if (ImGui.Button(IsActive ? "关闭FireGaze修改" : "FireGaze修改"))
                 {
                     if (IsActive) ClosePreview(); else OpenPreview();
                 }
@@ -305,6 +327,12 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
         else if (parts is ["status"]) Plugin.Chat.Print("[肖像实时预览] " + status);
+        else if (parts is ["undo"]) Undo();
+        else if (parts is ["redo"]) Redo();
+        else if (parts is ["restore", var record] && long.TryParse(record, out var recordID) && recordID > 0) RestoreHistory(recordID);
+        else if (parts is ["appearance", var group, var option] && int.TryParse(option, out var appearanceValue)) ChangeAppearance(group, appearanceValue);
+        else if (parts is ["sync", "on"]) SetSyncPlate(true);
+        else if (parts is ["sync", "off"]) SetSyncPlate(false);
         else if (parts is ["equip", var slot, var value] && Enum.TryParse<PortraitSlot>(slot, true, out var parsed) && Enum.IsDefined(parsed) && uint.TryParse(value, out var id)) Equip(parsed, id);
         else if (parts is ["clear", var name] && Enum.TryParse<PortraitSlot>(name, true, out var clear) && Enum.IsDefined(clear)) Clear(clear);
         else if (parts is ["editor", var kind]) Mutate(() => OpenEditor(kind));
@@ -324,8 +352,8 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
             if (!target.CanBlockSave || !target.TryResolve(out var owner, out _, out _) || !session.BlockSave(owner))
             { Error("必须先开启实时预览，才能验证保存保护。"); return; }
             AtkValue* values = stackalloc AtkValue[2];
-            values[0].SetInt(0);
-            values[1].SetInt(9);
+            values[0] = new() { Type = AtkValueType.Int, Int = 0 };
+            values[1] = new() { Type = AtkValueType.Int, Int = 9 };
             AtkValue result = default;
             ((AgentBannerEditor*)owner.Editor)->ReceiveEvent(&result, values, 2, 0);
         });
@@ -382,6 +410,7 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
         if (disposed) return;
         void Release()
         {
+            FlushEditing();
             if (!session.Close() && !target.AbortCapturedEditor())
                 Plugin.Log.Error("[肖像实时预览] 外观还原及编辑器关闭均失败：{Error}", target.LastError ?? "未知原因");
             cacheWriter.Queue(owned.ExportJSON());
@@ -393,6 +422,7 @@ internal sealed unsafe class PortraitPreviewFeature : IPortraitPreviewViewModel,
         if (Plugin.Framework.IsInFrameworkUpdateThread) Release();
         else Plugin.Framework.RunOnFrameworkThread(Release).GetAwaiter().GetResult();
         cacheWriter.Dispose();
+        history.Dispose();
         diagnostics.UnregisterFunc();
         windows.RemoveAllWindows();
         window.Dispose();

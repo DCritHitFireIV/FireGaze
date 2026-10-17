@@ -32,7 +32,7 @@ internal unsafe interface IPortraitNativeApi
 /// item, changes a gearset/banner record, or writes the world player. All entry points fail closed
 /// outside the Framework thread or after an editor/model allocation has changed.
 /// </summary>
-internal sealed unsafe class NativePortraitTarget : IPortraitPreviewTarget, IDisposable
+internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarget, IDisposable
 {
     private const int GenerationOffset = 0x74;
     private static readonly byte[] NativeSlots = [0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12];
@@ -46,6 +46,7 @@ internal sealed unsafe class NativePortraitTarget : IPortraitPreviewTarget, IDis
     private PortraitLook? originalLook;
     private PortraitIdentity originalIdentity;
     private bool disposed;
+    private PortraitPlateMirror? plateMirror;
     public string? LastError { get; private set; }
     public bool CanBlockSave => saveHook is { IsEnabled: true } && saveEventRegistered;
     public uint BlockedSaves { get; private set; }
@@ -53,9 +54,10 @@ internal sealed unsafe class NativePortraitTarget : IPortraitPreviewTarget, IDis
 
     public NativePortraitTarget(IFramework framework, IObjectTable objects, IGameGui gameGUI,
         IGameInteropProvider interop, Func<PortraitIdentity, bool> blockSave, Action<string> error,
-        IAgentLifecycle agentLifecycle)
+        IAgentLifecycle agentLifecycle, IAddonLifecycle addonLifecycle)
         : this(new LiveApi(framework, objects, gameGUI, agentLifecycle), blockSave, error)
     {
+        plateMirror = new PortraitPlateMirror(framework, gameGUI, objects, addonLifecycle, IsCurrent);
         var address = (nint)AgentBannerEditorState.MemberFunctionPointers.Save;
         if (address == 0) { LastError = "当前游戏版本无法核验肖像保存接口。"; return; }
         try
@@ -354,6 +356,7 @@ internal sealed unsafe class NativePortraitTarget : IPortraitPreviewTarget, IDis
     public void Dispose()
     {
         if (disposed) return;
+        plateMirror?.Dispose(); plateMirror = null;
         disposed = true;
         if (saveEventRegistered) agentLifecycle?.UnregisterListener(AgentEvent.PreReceiveEvent,
             Dalamud.Game.Agent.AgentId.BannerEditor, OnAgentEvent);
@@ -369,7 +372,7 @@ internal sealed unsafe class NativePortraitTarget : IPortraitPreviewTarget, IDis
         public readonly byte Crests = view->FreeCompanyCrestBitfield;
     }
 
-    private sealed class LiveApi(IFramework framework, IObjectTable objects, IGameGui gameGUI,
+    private sealed partial class LiveApi(IFramework framework, IObjectTable objects, IGameGui gameGUI,
         IAgentLifecycle agentLifecycle) : IPortraitNativeApi
     {
         public bool IsFrameworkThread => framework.IsInFrameworkUpdateThread;
