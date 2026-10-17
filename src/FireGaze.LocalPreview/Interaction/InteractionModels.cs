@@ -19,43 +19,6 @@ public readonly record struct MenuPreviewRequest(PreviewKind Kind, uint Id);
 
 public readonly record struct ObjectPreviewSnapshot(ushort MountId, ushort MinionId, ushort AccessoryId);
 
-/// <summary>Only a nested dispatch for the same text node inherits its original click.</summary>
-public sealed class NativeMouseDispatchContext
-{
-    private readonly Stack<(nint Node, byte? Button)> previous = new();
-    private nint node;
-    public byte? Button { get; private set; }
-    public void Enter(nint currentNode, byte? clickedButton)
-    {
-        previous.Push((node, Button));
-        Button = clickedButton ?? (currentNode != 0 && node == currentNode ? Button : null);
-        node = currentNode;
-    }
-    public void Exit()
-    {
-        var parent = previous.TryPop(out var value) ? value : default;
-        node = parent.Item1;
-        Button = parent.Item2;
-    }
-}
-
-public sealed class NativeLinkContext
-{
-    private readonly Stack<ushort> previous = new();
-    public ushort EmoteId { get; private set; }
-    public void Enter(ushort emoteId)
-    {
-        previous.Push(EmoteId);
-        EmoteId = emoteId;
-    }
-    public void Exit() => EmoteId = previous.TryPop(out var value) ? value : (ushort)0;
-    public void Clear()
-    {
-        EmoteId = 0;
-        previous.Clear();
-    }
-}
-
 public static class PreviewMenuResolver
 {
     public static IReadOnlyList<MenuPreviewRequest> Resolve(ObjectPreviewSnapshot snapshot, ushort emoteId)

@@ -1,25 +1,20 @@
-using Dalamud.Game.Addon.Lifecycle;
-using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
 using Dalamud.Game.Chat;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.Gui.ContextMenu;
 using Dalamud.Game.Text;
 using Dalamud.Plugin.Services;
-using Dalamud.Hooking;
 using FireGaze.LocalPreview.Core;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using FFXIVClientStructs.FFXIV.Client.UI;
 using Lumina.Excel.Sheets;
-using Lumina.Text.ReadOnly;
 using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
 
 namespace FireGaze.LocalPreview.Interaction;
 
 public sealed record InteractionCapabilities(bool ObjectMenus, bool ItemMenus, bool NativeEmoteSentenceProbe,
-    bool NativeEmoteContextObserved, string Detail);
+    bool NativeEmoteContextObserved, string Detail, bool DirectEmoteClick = false);
 
 /// <summary>Collects immutable menu selections. Native display changes belong to the runtime.</summary>
 public sealed unsafe class PreviewInteractionService : IDisposable
@@ -29,20 +24,13 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     private readonly IObjectTable objects;
     private readonly IDataManager data;
     private readonly IClientState clientState;
-    private readonly IAddonLifecycle? addonLifecycle;
     private readonly IPluginLog log;
     private readonly Action<PreviewKind, uint> requestPreview;
     private readonly Func<PreviewMenuOptions> options;
     private readonly IReadOnlyDictionary<uint, uint> emoteUnlockLinks;
     private readonly NativeEmoteLogCapture nativeLogCapture;
-    private readonly IGameInteropProvider interop;
-    private Hook<AtkResNode.Delegates.DispatchEvent>? dispatchEvent;
-    [ThreadStatic] private static NativeMouseDispatchContext? mouseDispatch;
+    private EmoteChatLink? chatLink;
     private readonly EmoteHistory history = new();
-    private static readonly string[] ChatPanels = ["ChatLog", "ChatLogPanel_0", "ChatLogPanel_1", "ChatLogPanel_2", "ChatLogPanel_3"];
-    private readonly NativeLinkContext nativeLink = new();
-    private readonly Stack<EmoteMenuInvocation> nativeClicks = new();
-    private readonly record struct EmoteMenuInvocation(bool RightClick, int MenusBefore, uint OwnerAddon);
     private long generation;
     private bool disposed;
     private bool chatProbeEnabled;
@@ -52,8 +40,8 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     public int ObservedEmotes { get; private set; }
     public int ChatMessagesLinked { get; private set; }
     public int ChatMessagesWithoutExactContext { get; private set; }
-    public int NativeEmoteMenusObserved { get; private set; }
-    public int NativeEmoteLinkEventsObserved { get; private set; }
+    public int NativeEmoteMenusObserved => 0; // Legacy diagnostics: sentence menus have been retired.
+    public int NativeEmoteLinkEventsObserved => chatLink?.ClicksObserved ?? 0;
     public bool NativeLogCaptureEnabled => nativeLogCapture.Enabled;
     public int NativeLogMessagesLinked => nativeLogCapture.MessagesLinked;
     public int UniqueEmoteLogTemplates => nativeLogCapture.UniqueTemplates;
@@ -62,7 +50,8 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     public string NativeLogCaptureDetail => nativeLogCapture.Detail;
     public int ItemMenusResolved { get; private set; }
     public string LastMenuContext { get; private set; } = "尚未观察菜单";
-    public string LastNativeEmoteEvent { get; private set; } = "尚未观察情感链接事件";
+    public string LastNativeEmoteEvent => chatLink?.LastClickedEmote is > 0 and var id
+        ? $"click emote={id}" : "尚未观察情感链接点击";
 
     public PreviewInteractionService(IContextMenu menus, IChatGui chat, IGameGui gameGui, IObjectTable objects,
         IDataManager data, IClientState clientState, IGameInteropProvider interop, IPluginLog log,
@@ -75,14 +64,12 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         this.objects = objects;
         this.data = data;
         this.clientState = clientState;
-        this.addonLifecycle = addonLifecycle;
         this.log = log;
-        this.interop = interop;
         this.requestPreview = requestPreview;
         this.options = options ?? (() => new());
         this.emoteUnlockLinks = data.GetExcelSheet<Emote>().Where(emote => emote.RowId != 0 && emote.UnlockLink != 0)
             .ToDictionary(emote => emote.RowId, emote => emote.UnlockLink);
-        this.nativeLogCapture = new(data, interop, log);
+        this.nativeLogCapture = new(data, interop, log, (message, id) => WrapEmoteMessage(message, id));
         history.ChangeTerritory(clientState.TerritoryType);
         menus.OnMenuOpened += OnMenuOpened;
         chat.ChatMessage += OnChatMessage;
@@ -90,45 +77,35 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     }
 
     /// <summary>
-    /// Enables exact native emote-log capture and native menu context. Call during
+    /// Enables exact native emote-log capture and managed left-click links. Call during
     /// normal feature initialization so every subsequent native sentence is linked.
     /// </summary>
     public bool EnableNativeChatLinks()
     {
         if (disposed) return false;
         if (chatProbeEnabled) return nativeLogCapture.Enabled;
-        if (addonLifecycle is null)
-        {
-            Capabilities = Capabilities with { Detail = "未提供原生界面生命周期服务；整句链接未开启。" };
-            return false;
-        }
         try
         {
-            // AtkTextNode.DispatchEvent constructs LinkMouseClick recursively from
-            // MouseClick and deliberately zeroes the rest of its data. Preserve the
-            // original button only for that synchronous, same-node call chain.
-            dispatchEvent = interop.HookFromAddress<AtkResNode.Delegates.DispatchEvent>(
-                AtkResNode.Addresses.DispatchEvent.Value, DispatchNativeEvent);
-            dispatchEvent.Enable();
-            addonLifecycle.RegisterListener(AddonEvent.PreReceiveEvent, ChatPanels, BeforeNativeChatEvent);
-            addonLifecycle.RegisterListener(AddonEvent.PostReceiveEvent, ChatPanels, AfterNativeChatEvent);
+            chatLink = new(chat, () => !disposed && options().Emote, id =>
+            {
+                if (Valid(new(PreviewKind.Emote, id))) requestPreview(PreviewKind.Emote, id);
+            });
             var captureReady = nativeLogCapture.Enable();
             chatProbeEnabled = true;
             Capabilities = Capabilities with
             {
                 NativeEmoteSentenceProbe = captureReady,
+                DirectEmoteClick = true,
                 Detail = captureReady
-                    ? "已开启原生情感句捕获：每句绑定发出时的 Emote ID，可经游戏原生菜单试用；仍需实测验收。"
-                    : "原生情感句捕获未开启，已有 Emote 链接的菜单观察和基础右键菜单仍可使用。",
+                    ? "已开启情感提示整句点击：左键直接本地试用该句发出时的动作，不打开整句右键菜单。"
+                    : "原生情感句捕获未开启；点击链接处理及角色、物品右键菜单仍可使用。",
             };
             return captureReady;
         }
         catch (Exception ex)
         {
-            dispatchEvent?.Dispose();
-            dispatchEvent = null;
-            addonLifecycle.UnregisterListener(AddonEvent.PreReceiveEvent, ChatPanels, BeforeNativeChatEvent);
-            addonLifecycle.UnregisterListener(AddonEvent.PostReceiveEvent, ChatPanels, AfterNativeChatEvent);
+            chatLink?.Dispose();
+            chatLink = null;
             log.Error(ex, "[LocalPreview] Native chat sentence links could not start.");
             Capabilities = Capabilities with { Detail = "原生情感提示链接启动失败。" };
             return false;
@@ -138,14 +115,8 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     // Retain the existing diagnostic command API; normal hosts call the method above.
     public bool EnableNativeChatProbe() => EnableNativeChatLinks();
 
-    private bool DispatchNativeEvent(AtkResNode* node, AtkEventDispatcher.Event* evt)
-    {
-        var context = mouseDispatch ??= new();
-        context.Enter((nint)node, evt != null && evt->State.EventType == AtkEventType.MouseClick
-            ? evt->EventData.MouseData.ButtonId : null);
-        try { return dispatchEvent!.Original(node, evt); }
-        finally { context.Exit(); }
-    }
+    public byte[] WrapEmoteMessage(ReadOnlySpan<byte> message, ushort emoteId)
+        => chatLink?.Wrap(message, emoteId) ?? [];
 
     public void RecordEmote(ulong actorObjectId, ushort emoteId)
     {
@@ -162,8 +133,6 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     {
         generation++;
         history.ChangeTerritory(territory);
-        nativeLink.Clear();
-        nativeClicks.Clear();
     }
 
     private void OnMenuOpened(IMenuOpenedArgs args)
@@ -172,19 +141,6 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         try
         {
             LastMenuContext = $"type={args.MenuType}, addon={args.AddonName ?? "<world>"}, agent=0x{args.AgentPtr:X}";
-            if (nativeLink.EmoteId != 0 && args.MenuType == ContextMenuType.Default)
-            {
-                var id = nativeLink.EmoteId;
-                AddItem(args, new(PreviewKind.Emote, id));
-                NativeEmoteMenusObserved++;
-                Capabilities = Capabilities with
-                {
-                    NativeEmoteContextObserved = true,
-                    Detail = "已观察原生 Emote 链接打开游戏菜单并注入试用项；仍需右键整句人工验收。",
-                };
-                return;
-            }
-
             if (args.Target is MenuTargetInventory inventory)
             {
                 if (!options().Items) return;
@@ -325,68 +281,8 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         if (disposed || !chatProbeEnabled || message.LogKind != XivChatType.StandardEmote) return;
         // Queue printing can occur long after PlayEmote returns. Never bind this message
         // from CurrentNativeEmote, the actor's latest emote, elapsed time or chat prose.
-        if (NativeEmoteLinkBuilder.TryReadEmoteId(message.OriginalMessage.Data.Span, out _)) ChatMessagesLinked++;
+        if (chatLink?.TryRead(message.OriginalMessage.Data.Span, out _) == true) ChatMessagesLinked++;
         else ChatMessagesWithoutExactContext++;
-    }
-
-    private void BeforeNativeChatEvent(AddonEvent type, AddonArgs args)
-    {
-        if (disposed) return;
-        ushort id = 0;
-        bool rightClick = false;
-        uint ownerAddon = 0;
-        try
-        {
-            if (args is AddonReceiveEventArgs received
-                && (byte)received.AtkEventType == (byte)AtkEventType.LinkMouseClick
-                && received.AtkEventData != 0)
-            {
-                var link = ((AtkEventData*)received.AtkEventData)->LinkData;
-                if (link != null && link->Payload != null && NativeEmoteLinkBuilder.TryReadEmoteId(
-                    new ReadOnlySeStringSpan(link->Payload).Data, out var observedId)
-                    && Valid(new(PreviewKind.Emote, observedId)))
-                {
-                    id = observedId;
-                    NativeEmoteLinkEventsObserved++;
-                    ownerAddon = received.Addon.IsNull ? 0U : ((AtkUnitBase*)received.Addon.Address)->Id;
-                    // LinkData is a pointer in this event's union, not AtkMouseData.
-                    rightClick = mouseDispatch?.Button == 1;
-                    var input = UIInputData.Instance();
-                    if (input != null)
-                    {
-                        var raw = input->CursorInputs;
-                        var filtered = input->UIFilteredCursorInputs;
-                        LastNativeEmoteEvent = $"emote={id}, right={rightClick}, dispatchButton={mouseDispatch?.Button.ToString() ?? "none"}, raw={(int)raw.MouseButtonHeldFlags}/{(int)raw.MouseButtonPressedFlags}/{(int)raw.MouseButtonReleasedFlags}, filtered={(int)filtered.MouseButtonHeldFlags}/{(int)filtered.MouseButtonPressedFlags}/{(int)filtered.MouseButtonReleasedFlags}, owner={ownerAddon}";
-                    }
-                }
-            }
-        }
-        catch (Exception ex) { log.Error(ex, "[LocalPreview] Native emote event inspection failed; original event remains unchanged."); }
-        // Do not retain AtkEventData/LinkData pointers. Only this immutable row ID survives
-        // until PostReceiveEvent. Zero masks an unrelated nested event.
-        nativeLink.Enter(id);
-        nativeClicks.Push(new(rightClick, NativeEmoteMenusObserved, ownerAddon));
-    }
-
-    private void AfterNativeChatEvent(AddonEvent type, AddonArgs args)
-    {
-        try
-        {
-            if (disposed || !nativeClicks.TryPop(out var click) || !options().Emote
-                || !NativeEmoteMenuPolicy.ShouldOpen(nativeLink.EmoteId, click.RightClick,
-                    click.MenusBefore, NativeEmoteMenusObserved, click.OwnerAddon)) return;
-            var context = AgentContext.Instance();
-            if (context == null || !Valid(new(PreviewKind.Emote, nativeLink.EmoteId))) return;
-            // Native Emote links do not provide their own context menu on this client.
-            // A disabled native heading makes the ordinary ContextMenu nonempty; Dalamud
-            // then adds the actionable entry through the same OnMenuOpened callback.
-            // Do not SetMenuTitle: that selects AddonContextMenuTitle instead.
-            context->ClearMenu();
-            context->AddMenuItem(EmoteName(nativeLink.EmoteId), null, 0, disabled: true);
-            context->OpenContextMenuForAddon(click.OwnerAddon, true);
-        }
-        catch (Exception ex) { log.Error(ex, "[LocalPreview] Native emote context menu could not open."); }
-        finally { nativeLink.Exit(); }
     }
 
     private static ActorIdentity Identity(IGameObject actor) => new(actor.GameObjectId, (ulong)actor.Address);
@@ -399,16 +295,9 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         menus.OnMenuOpened -= OnMenuOpened;
         chat.ChatMessage -= OnChatMessage;
         clientState.TerritoryChanged -= OnTerritoryChanged;
-        if (chatProbeEnabled && addonLifecycle is not null)
-        {
-            addonLifecycle.UnregisterListener(AddonEvent.PreReceiveEvent, ChatPanels, BeforeNativeChatEvent);
-            addonLifecycle.UnregisterListener(AddonEvent.PostReceiveEvent, ChatPanels, AfterNativeChatEvent);
-        }
-        nativeLink.Clear();
-        nativeClicks.Clear();
         nativeLogCapture.Dispose();
-        dispatchEvent?.Dispose();
-        dispatchEvent = null;
+        chatLink?.Dispose();
+        chatLink = null;
         history.Clear();
     }
 }

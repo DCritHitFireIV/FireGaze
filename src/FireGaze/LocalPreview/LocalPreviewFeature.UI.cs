@@ -20,7 +20,9 @@ public sealed partial class LocalPreviewFeature
     private void CreateInteraction()
     {
         interaction = new PreviewInteractionService(ContextMenu, Chat, GameGUI, Objects, Data,
-            ClientState, Interop, Log, Request, () => runtime?.CurrentNativeEmote, AddonLifecycle, MenuOptions);
+            ClientState, Interop, Log,
+            (kind, id) => OnFramework(() => { Request(kind, id); return true; }),
+            () => runtime?.CurrentNativeEmote, AddonLifecycle, MenuOptions);
         if (config.LocalPreviewEmoteEnabled) interaction.EnableNativeChatLinks();
     }
 
@@ -88,7 +90,7 @@ public sealed partial class LocalPreviewFeature
         if (ImGui.Checkbox("开启本地试用", ref currentEnabled)) SetEnabled(currentEnabled);
         var itemMenus = config.LocalPreviewItemMenusEnabled;
         if (ImGui.Checkbox("开启右键对物品的试穿", ref itemMenus)) SetItemMenus(itemMenus);
-        ImGui.TextDisabled("支持背包及聊天中的收录物品，也支持右键玩家、场景宠物和情感动作提示。");
+        ImGui.TextDisabled("支持右键背包及聊天中的收录物品、玩家和场景宠物；左键点击情感动作提示可直接试用。");
         foreach (var kind in Enum.GetValues<MenuKind>())
         {
             if (kind != MenuKind.Mount) ImGui.SameLine();

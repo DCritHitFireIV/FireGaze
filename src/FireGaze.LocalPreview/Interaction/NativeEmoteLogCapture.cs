@@ -17,7 +17,8 @@ namespace FireGaze.LocalPreview.Interaction;
 /// The formatter receives that item's Parameters at offset zero, even after
 /// multiple frames. Neither displayed prose nor the latest actor emote is used.
 /// </summary>
-internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInteropProvider interop, IPluginLog log) : IDisposable
+internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInteropProvider interop, IPluginLog log,
+    Func<byte[], ushort, byte[]> linkMessage) : IDisposable
 {
     // CN PlayEmote calls this writer with (controller, emoteId, targetId). It
     // queues the message and owns row overrides such as emote 106 on a minion.
@@ -166,9 +167,8 @@ internal sealed unsafe class NativeEmoteLogCapture(IDataManager data, IGameInter
             var writing = false;
             try
             {
-                if (NativeEmoteLinkBuilder.TryReadEmoteId(output->AsSpan(), out _)) return result;
                 original = output->AsSpan().ToArray();
-                var linked = NativeEmoteLinkBuilder.Wrap(original, emoteId);
+                var linked = linkMessage(original, emoteId);
                 if (linked.Length == 0) return result;
                 writing = true;
                 output->SetString(linked);

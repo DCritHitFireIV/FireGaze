@@ -53,39 +53,6 @@ foreach (var (tokens, name) in new (string[]?, string)[]
     (["option", "", "on"], "empty preference"), (["option", "mount", ""], "empty value"),
 })
     ParseOption(tokens, false, "rejects " + name);
-// AtkTextNode replaces MouseClick data with a zeroed LinkData union. Only the
-// synchronous parent dispatch identifies its button; no frame/time cache is valid.
-var mouseContextType=typeof(NativeLinkContext).Assembly.GetType("FireGaze.LocalPreview.Interaction.NativeMouseDispatchContext");
-Check(mouseContextType is not null,"native link click retains its synchronous original mouse dispatch");
-var mouseContext=Activator.CreateInstance(mouseContextType!)!;
-void MouseEnter(nint node,byte? button)=>mouseContextType!.GetMethod("Enter")!.Invoke(mouseContext,[node,button]);
-void MouseExit()=>mouseContextType!.GetMethod("Exit")!.Invoke(mouseContext,null);
-byte? MouseButton()=>(byte?)mouseContextType!.GetProperty("Button")!.GetValue(mouseContext);
-MouseEnter(100,(byte)1); MouseEnter(100,null);
-Check(MouseButton()==1,"zeroed link event inherits exact enclosing right click");
-MouseExit(); MouseEnter(200,null);
-Check(MouseButton() is null,"another node cannot inherit a pending right click");
-MouseExit(); MouseEnter(100,(byte)0); MouseEnter(100,null);
-Check(MouseButton()==0,"nested left click masks enclosing right click");
-MouseExit(); MouseExit();
-Check(MouseButton()==1,"nested dispatch restores its enclosing click");
-MouseExit(); MouseExit();
-Check(MouseButton() is null,"completed dispatch cannot leak a stale button");
-MouseEnter(100,null);
-Check(MouseButton() is null,"direct synthetic link event never guesses the last click");
-MouseExit();
-// The game emits an Emote LinkMouseClick but does not open a context menu for it.
-// The fallback must open once for the current right click, never for left clicks
-// or when the native handler already opened a menu.
-var emoteMenuPolicy=typeof(NativeLinkContext).Assembly.GetType("FireGaze.LocalPreview.Interaction.NativeEmoteMenuPolicy");
-Check(emoteMenuPolicy is not null,"native emote right-click menu fallback exists");
-bool OpenEmoteMenu(ushort id,bool right,int before,int after,uint owner)
-    =>(bool)emoteMenuPolicy!.GetMethod("ShouldOpen")!.Invoke(null,new object[]{id,right,before,after,owner})!;
-Check(OpenEmoteMenu(21,true,0,0,81),"right-click full sentence requests a native menu");
-Check(!OpenEmoteMenu(21,false,0,0,81),"left-click never requests the trial context menu");
-Check(!OpenEmoteMenu(21,true,2,3,81),"an existing native menu is not opened a second time");
-Check(!OpenEmoteMenu(0,true,0,0,81),"unrelated native chat event cannot inherit earlier emote");
-Check(!OpenEmoteMenu(21,true,0,0,0),"missing chat addon owner prevents a fallback menu");
 // Chat item links belong to the native DEFAULT menu. Reading an inventory slot
 // or a remembered link would miss this route or attach the previous item's action.
 var chatItem = new ChatItemMenuContext(true, "ChatLog", 81, 100, 100, 81, 200, true, 52272);
@@ -188,13 +155,15 @@ foreach (var payload in new ReadOnlySeStringSpan(linked))
     if (payload.Type != ReadOnlySePayloadType.Macro || payload.MacroCode != MacroCode.Link) continue;
     Check(payload.TryGetExpression(out var kind) && kind.TryGetUInt(out var value), "link has numeric native type");
     kind.TryGetUInt(out var linkKind);
-    if (linkKind == 15)
+    if (linkKind == 205)
     {
         linkCount++;
-        Check(payload.TryGetExpression(out _, out var id) && id.TryGetUInt(out var emoteId) && emoteId == 42, "native sentence embeds immutable observed emote id");
+        Check(payload.TryGetExpression(out _, out var command, out var id) && command.TryGetUInt(out var commandId)
+            && commandId == 0x46470001 && id.TryGetUInt(out var emoteId) && emoteId == 42,
+            "sentence embeds the registered direct-click route and immutable observed emote id");
     }
     if (linkKind == 206) endCount++;
-    Check(linkKind is 15 or 206, "nested player links do not steal native sentence context");
+    Check(linkKind is 205 or 206, "whole sentence uses a Dalamud click link rather than a native emote or nested player link");
 }
 Check(linkCount == 1 && endCount == 1, "sentence has exactly one balanced native emote link");
 Check(new ReadOnlySeStringSpan(linked).ExtractText() == "Test Player做出了敬礼的动作。", "whole sentence text survives linking");
@@ -203,19 +172,6 @@ Check(NativeEmoteLinkBuilder.Wrap(linked, 42).SequenceEqual(linked), "repeated w
 Check(NativeEmoteLinkBuilder.TryReadEmoteId(linked, out var decoded) && decoded == 42, "native link callback decodes fixed message action");
 Check(!NativeEmoteLinkBuilder.TryReadEmoteId(source, out _), "player link cannot inherit previous emote context");
 Check(!NativeEmoteLinkBuilder.TryReadEmoteId(new byte[] { 2, 39 }, out _), "truncated payload rejected without changing callback flow");
-var scopes = new NativeLinkContext();
-scopes.Enter(42);
-Check(scopes.EmoteId == 42, "native menu reads active message emote");
-scopes.Enter(0);
-Check(scopes.EmoteId == 0, "unrelated nested event cannot reuse outer chat message");
-scopes.Exit();
-Check(scopes.EmoteId == 42, "returning from nested event restores outer message");
-scopes.Exit();
-Check(scopes.EmoteId == 0, "post event clears all transient chat context");
-scopes.Enter(43);
-scopes.Clear();
-scopes.Exit();
-Check(scopes.EmoteId == 0, "disable clears native event context even before late post event");
 var templates = new EmoteLogTemplateIndex();
 templates.Add(42, new byte[] { 1, 2, 3 });
 templates.Add(42, new byte[] { 1, 2, 3 });

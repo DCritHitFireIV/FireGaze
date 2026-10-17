@@ -249,7 +249,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
                 break;
             case "chatprobe":
                 lastMessage = interaction?.EnableNativeChatProbe() == true
-                    ? "情感提示整句原生右键探针已开启，请使用原生情感动作并右键提示。"
+                    ? "情感提示整句点击已开启，请使用原生情感动作并左键点击新提示。"
                     : "聊天探针未能开启，请查看诊断。";
                 Chat.Print("[本地试用] " + lastMessage);
                 break;
@@ -258,8 +258,9 @@ public sealed partial class LocalPreviewFeature : IDisposable
                     Data.GetExcelSheet<Lumina.Excel.Sheets.Emote>().TryGetRow(emoteID, out var emote))
                 {
                     interaction?.EnableNativeChatProbe();
-                    var text = System.Text.Encoding.UTF8.GetBytes($"[本地试用验证] 请右键这整句话：{emote.Name}");
-                    Chat.Print(SeString.Parse(NativeEmoteLinkBuilder.Wrap(text, emoteID)));
+                    var text = System.Text.Encoding.UTF8.GetBytes($"[本地试用验证] 左键点击这整句话试用：{emote.Name}");
+                    var linked = interaction?.WrapEmoteMessage(text, emoteID) ?? [];
+                    if (linked.Length != 0) Chat.Print(SeString.Parse(linked));
                 }
                 else Chat.PrintError("[本地试用] 用法：/firegaze preview sampleemote <有效情感动作编号>");
                 break;
@@ -301,6 +302,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         chatMessagesWithoutExactContext = interaction?.ChatMessagesWithoutExactContext,
         nativeEmoteMenusObserved = interaction?.NativeEmoteMenusObserved,
         nativeEmoteLinkEventsObserved = interaction?.NativeEmoteLinkEventsObserved,
+        emoteSentenceClickEnabled = interaction?.Capabilities.DirectEmoteClick,
         nativeLogCaptureEnabled = interaction?.NativeLogCaptureEnabled,
         nativeLogMessagesLinked = interaction?.NativeLogMessagesLinked,
         uniqueEmoteLogTemplates = interaction?.UniqueEmoteLogTemplates,

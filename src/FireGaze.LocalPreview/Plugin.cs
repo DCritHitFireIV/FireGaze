@@ -254,8 +254,9 @@ public sealed class Plugin : IDalamudPlugin
                     Data.GetExcelSheet<Lumina.Excel.Sheets.Emote>().TryGetRow(emoteId, out var emote))
                 {
                     interaction?.EnableNativeChatProbe();
-                    var text = System.Text.Encoding.UTF8.GetBytes($"[本地试用验证] 请右键这整句话：{emote.Name}");
-                    Chat.Print(SeString.Parse(NativeEmoteLinkBuilder.Wrap(text, emoteId)));
+                    var text = System.Text.Encoding.UTF8.GetBytes($"[本地试用验证] 左键点击这整句话试用：{emote.Name}");
+                    var linked = interaction?.WrapEmoteMessage(text, emoteId) ?? [];
+                    if (linked.Length != 0) Chat.Print(SeString.Parse(linked));
                 }
                 else Chat.PrintError("[本地试用] 用法：/fgpreview sampleemote <有效情感动作编号>");
                 break;
