@@ -1,7 +1,7 @@
 {
   "_meta": {
     "format": 2,
-    "updatedAt": "2026-10-17",
+    "updatedAt": "2026-10-17T11:25:51Z",
     "source": "user",
     "label": "玩家包 · 1bc097",
     "kinds": [
@@ -95,7 +95,7 @@
     },
     {
       "Original": "emote-vis",
-      "Translated": "表情可见性",
+      "Translated": "emote-vis",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -107,7 +107,7 @@
     },
     {
       "Original": "item-vis",
-      "Translated": "物品可见性",
+      "Translated": "item-vis",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -119,7 +119,7 @@
     },
     {
       "Original": "minion-vis",
-      "Translated": "宠物可见性",
+      "Translated": "minion-vis",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -131,13 +131,13 @@
     },
     {
       "Original": "action-vis",
-      "Translated": "动作显示",
+      "Translated": "action-vis",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
     {
       "Original": "instance-vis",
-      "Translated": "副本显示",
+      "Translated": "instance-vis",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -149,7 +149,7 @@
     },
     {
       "Original": "tribe-vis",
-      "Translated": "蛮族显示",
+      "Translated": "tribe-vis",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -161,7 +161,7 @@
     },
     {
       "Original": "job-vis",
-      "Translated": "职业显示",
+      "Translated": "job-vis",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -173,7 +173,7 @@
     },
     {
       "Original": "indent-",
-      "Translated": "缩进-",
+      "Translated": "indent-",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -257,5 +257,15 @@
     }
   ],
   "resources": [],
-  "attributes": []
+  "attributes": [],
+  "skipped": [
+    "emote-vis",
+    "item-vis",
+    "minion-vis",
+    "action-vis",
+    "instance-vis",
+    "tribe-vis",
+    "job-vis",
+    "indent-"
+  ]
 }
