@@ -1,0 +1,376 @@
+{
+  "issue": "direct-2026-10-17T10-44-24-736Z-80a4cd20",
+  "receivedAt": "2026-10-17 10:44:37",
+  "author": "匿名直传",
+  "plugin": "QuestMap",
+  "fingerprint": "1bc0971f7d12492e",
+  "packFile": "QuestMap@user-1bc097.json",
+  "accepted": 41,
+  "filled": 41,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "QuestMap",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Show Quest Map",
+        "Translated": "显示任务地图",
+        "Context": "Commands..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Show information for a specified quest by name or id",
+        "Translated": "按名称或 ID 显示指定任务的信息",
+        "Context": "Commands..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Show graph for a specified quest by name or id",
+        "Translated": "按名称或 ID 显示指定任务的图表",
+        "Context": "Commands..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Quest Map",
+        "Translated": "任务地图",
+        "Context": "Plugin.get_Name",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Begin"
+      },
+      {
+        "Original": "Options",
+        "Translated": "设置",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Quest list",
+        "Translated": "任务列表",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Show completed quests",
+        "Translated": "显示已完成任务",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Show seasonal quests",
+        "Translated": "显示季节任务",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Quest map",
+        "Translated": "任务地图",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Show arrowheads",
+        "Translated": "显示箭头",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Condense final MSQ quests",
+        "Translated": "合并最终主线任务",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Show redundant arrows",
+        "Translated": "显示冗余箭头",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Reward/unlock visibility",
+        "Translated": "奖励/解锁可见性",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "Emotes",
+        "Translated": "表情",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "emote-vis",
+        "Translated": "表情可见性",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Items",
+        "Translated": "物品",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "item-vis",
+        "Translated": "物品可见性",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Minions",
+        "Translated": "宠物",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "minion-vis",
+        "Translated": "宠物可见性",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Actions",
+        "Translated": "技能",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "action-vis",
+        "Translated": "动作显示",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "instance-vis",
+        "Translated": "副本显示",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Beast tribes",
+        "Translated": "蛮族",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "tribe-vis",
+        "Translated": "蛮族显示",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Jobs",
+        "Translated": "职业",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginMenu"
+      },
+      {
+        "Original": "job-vis",
+        "Translated": "职业显示",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.MenuItem"
+      },
+      {
+        "Original": "Filter",
+        "Translated": "筛选",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "indent-",
+        "Translated": "缩进-",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreePush"
+      },
+      {
+        "Original": "No quest selected",
+        "Translated": "未选择任务",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Generating map...",
+        "Translated": "正在生成地图...",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Task did not complete successfully",
+        "Translated": "任务未能成功完成",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Task did not complete successfully (null)",
+        "Translated": "任务未能成功完成 (null)",
+        "Context": "PluginUi.DrawMainWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Level: ",
+        "Translated": "等级：",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Exp: ",
+        "Translated": "经验：",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Rewards",
+        "Translated": "奖励",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Optional rewards",
+        "Translated": "可选奖励",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Beast tribe",
+        "Translated": "蛮族",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Unknown",
+        "Translated": "未知",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Mark issuer on map",
+        "Translated": "在地图上标记发布者",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Open quest in Journal",
+        "Translated": "在任务日志中打开任务",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      },
+      {
+        "Original": "Show quest graph",
+        "Translated": "显示任务图",
+        "Context": "PluginUi.DrawInfoWindow",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextUnformatted"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
