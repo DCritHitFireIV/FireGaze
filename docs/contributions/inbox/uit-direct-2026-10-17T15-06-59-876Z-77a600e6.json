@@ -1,1 +1,680 @@
-{"type":"uit-contribution","plugin":"HuntHelper","kinds":["free"],"entries":[{"Original":"Hunt Helper","Translated":"狩猎助手","Context":"Plugin.get_Name","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"new expansion, who dis?","Translated":"新扩张，谁DIS ？","Context":"SubmitDataPrompt.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"submit found spawn points to help make **INSERT EXPANSION NAME HERE** hunt map images?\n(this is from hunthelper btw)","Translated":"提交找到的生成点，以帮助制作* *在此处插入扩展名* *狩猎地图图像？\n（这是来自hunthelper btw ）","Context":"SubmitDataPrompt.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"yes, never show me this again","Translated":"好了, 别再提示","Context":"SubmitDataPrompt.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"no :(, never show me this again","Translated":"好了, 别再提示","Context":"SubmitDataPrompt.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"You can opt in / out from the settings on the main map ui.","Translated":"您可以从主地图UI上的设置中选择加入/退出。","Context":"SubmitDataPrompt.Draw","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Can't find ","Translated":"“在范围内无法找到：","Context":"MapDataManager.LoadSpawnPointData","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Enabled","Translated":"已启用","Context":"HuntManager.GetDatabaseAsString","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_CentreText"},{"Original":"File ","Translated":"文件","Context":"HuntManager.LoadFilesIntoDic","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" missing... Please replace missing file(s).\n","Translated":"缺失...请更换缺失的文件。","Context":"HuntManager.LoadFilesIntoDic","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"name","Translated":"名称","Context":"CounterUI.DrawCounter","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"count","Translated":"计数","Context":"CounterUI.DrawCounter","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Chirp count does not affect BoP spawn, this info is just for fun.","Translated":"啁啾计数不会影响BoP生成，此信息只是为了好玩。","Context":"CounterUI.DrawCounter","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_HelpMarker"},{"Original":"May finish earlier based on the last failed fate before you entered the zone","Translated":"可以根据您进入该区域之前的最后一次失败命运提前完成","Context":"CounterUI.DrawNunWindowString","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_HelpMarker"},{"Original":"Countdown: ","Translated":"开启倒计时:","Context":"CounterUI.DrawNunCountdownString","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"reset","Translated":"重置","Context":"CounterUI.DrawNunResetButton","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"FAIL","Translated":"未通过","Context":"CounterUI.UpdateCurrentFates","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"FAIL: NOT INITIATED","Translated":"失败：未启动","Context":"CounterUI.UpdateCurrentFates","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Countdown reset.","Translated":"倒计时重置。","Context":"CounterUI.UpdateCurrentFates","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Fates","Translated":"命运","Context":"CounterUI.DrawCurrentFateUI","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Click a Fate to see it on the map.","Translated":"点击命运在地图上查看。","Context":"CounterUI.DrawCurrentFateUI","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_HoveredToolTip"},{"Original":"upcoming or requires activation - can fail if not activated in time","Translated":"即将到来或需要激活-如果未及时激活，可能会失败","Context":"CounterUI.GetFateTimeString","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Debug stuff","Translated":"调试东西","Context":"DebugUI.Draw","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Territory: ","Translated":"地区：","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Territory ID: ","Translated":"区域ID ：","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"pos: X: (","Translated":"X坐标","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"nearby hunts & object table debug","Translated":"附近的狩猎和对象表调试","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Nearby Mobs","Translated":"附近的暴徒","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"priority:","Translated":"优先：","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"KIND: ","Translated":"种类:","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"NAMEID: ","Translated":"姓名ID ：","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Found: ","Translated":"找到：","Context":"DebugUI.LocalObjects","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Random Debug Info?!:","Translated":"随机调试信息？ ！ ：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Content1 Region: ","Translated":"内容1区域：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Window Size: ","Translated":"窗口大小","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Window  Pos: ","Translated":"窗口位置：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"rotation: ","Translated":"旋光","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Player Pos: (","Translated":"玩家位置： （","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Player Pos: ","Translated":"玩家位置：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Map: ","Translated":"地图：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_RightAlignText"},{"Original":"Coord size: ","Translated":"坐标大小：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_RightAlignText"},{"Original":"Priority Mob:","Translated":"优先移动：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_RightAlignText"},{"Original":"Rank ","Translated":"清醒值排行","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_RightAlignText"},{"Original":"Other nearby mobs:","Translated":"附近的其他暴徒：","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_RightAlignText"},{"Original":"Rank: ","Translated":"品阶:","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_RightAlignText"},{"Original":"Can't find local player","Translated":"找不到本地玩家","Context":"DebugUI.PositionalInfo","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"subIndex:","Translated":"上标","Context":"DebugUI.Aetherytes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"territory:","Translated":"地区：","Context":"DebugUI.Aetherytes","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Not Found","Translated":"找不到","Context":"DebugUI.UpdateLocalStuff","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Show Map Name","Translated":"显示地图名称","Context":"HuntTrainUI.DrawHuntTrainWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Options Window","Translated":"选项窗口","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Spawn Point Filter","Translated":"生成点过滤器","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Select which Rank to display Spawn Points for","Translated":"选择要显示哪个排名的生成点","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_HoveredToolTip"},{"Original":"Use High-Contrast Colour","Translated":"使用高对比度颜色","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Use a high-contrast colour for Spawn Points,\n\nCan be changed from Visuals > Colours","Translated":"对生成点使用高对比度颜色，\n\n可以从“视觉效果” > “颜色”进行更改","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_HoveredToolTip"},{"Original":"submit found hunt position data?","Translated":"提交找到的寻线位置数据？","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"opt in","Translated":"加入宣告","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"first","Translated":"第一頁","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"second","Translated":"秒","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"1#visualsizing","Translated":"1 # visualsizing","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"2#visualsizing","Translated":"2 # visualsizing","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"3#visualsizing","Translated":"3 # visualsizing","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"1#coloursizing","Translated":"1 #上色","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"2#coloursizing","Translated":"2 #上色","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"3#coloursizing","Translated":"3 #上色","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Path Colour","Translated":"路径颜色","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.ColorEdit4"},{"Original":"Set Alpha (A) to zero to disable.","Translated":"将Alpha (A)设置为零以禁用。","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiUtil.ImGui_HelpMarker"},{"Original":"#settingsLabel","Translated":"# settingsLabel","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"#settingsValue","Translated":"# settingsValue","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Hunt: <flag> <name> <rank> <hpp>\n\nCosmetic: <goldstar> <silverstar> <warning> <nocircle> <controllerbutton0> <controllerbutton1>\n <priorityworld> <elementallevel> <exclamationrectangle> <notoriousmonster> <alarm> <fanfestival>","Translated":"狩猎：<flag> <name> <rank> <hpp>\n\n外观： <goldstar> <silverstar> <warning> <nocircle> <controllerbutton0> <controllerbutton1>\n <priorityworld> <elementallevel> <exclamationrectangle> <notoriousmonster> <alarm> <fanfestival>","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextMultiline"},{"Original":"Nearby Mob List","Translated":"附近的暴徒名单","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Language","Translated":"语言","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Translate","Translated":"翻译","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"If you want to help translate this plugin","Translated":"如果您想帮助翻译此插件","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" -- click me","Translated":"点我","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"or dm me @ img#7855","Translated":"或dm me @ img # 7855","Context":"MapUI.DrawOptionsWindow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"help, i've fallen over","Translated":"救命，我摔倒了","Context":"MapUI.DrawSettingsWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Buttons","Translated":"纽扣","Context":"SpawnPointFinderUI.DrawSpawnPointRefinementWindow","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "HuntHelper",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Hunt Helper",
+      "Translated": "狩猎助手",
+      "Context": "Plugin.get_Name",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "new expansion, who dis?",
+      "Translated": "新扩张，谁DIS ？",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "submit found spawn points to help make **INSERT EXPANSION NAME HERE** hunt map images?\n(this is from hunthelper btw)",
+      "Translated": "提交找到的生成点，以帮助制作* *在此处插入扩展名* *狩猎地图图像？\n（这是来自hunthelper btw ）",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "yes, never show me this again",
+      "Translated": "好了, 别再提示",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "no :(, never show me this again",
+      "Translated": "好了, 别再提示",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "You can opt in / out from the settings on the main map ui.",
+      "Translated": "您可以从主地图UI上的设置中选择加入/退出。",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Can't find ",
+      "Translated": "“在范围内无法找到：",
+      "Context": "MapDataManager.LoadSpawnPointData",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Enabled",
+      "Translated": "已启用",
+      "Context": "HuntManager.GetDatabaseAsString",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_CentreText"
+    },
+    {
+      "Original": "File ",
+      "Translated": "文件",
+      "Context": "HuntManager.LoadFilesIntoDic",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " missing... Please replace missing file(s).\n",
+      "Translated": "缺失...请更换缺失的文件。",
+      "Context": "HuntManager.LoadFilesIntoDic",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "name",
+      "Translated": "名称",
+      "Context": "CounterUI.DrawCounter",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "count",
+      "Translated": "计数",
+      "Context": "CounterUI.DrawCounter",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Chirp count does not affect BoP spawn, this info is just for fun.",
+      "Translated": "啁啾计数不会影响BoP生成，此信息只是为了好玩。",
+      "Context": "CounterUI.DrawCounter",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HelpMarker"
+    },
+    {
+      "Original": "May finish earlier based on the last failed fate before you entered the zone",
+      "Translated": "可以根据您进入该区域之前的最后一次失败命运提前完成",
+      "Context": "CounterUI.DrawNunWindowString",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HelpMarker"
+    },
+    {
+      "Original": "Countdown: ",
+      "Translated": "开启倒计时:",
+      "Context": "CounterUI.DrawNunCountdownString",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "reset",
+      "Translated": "重置",
+      "Context": "CounterUI.DrawNunResetButton",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "FAIL",
+      "Translated": "未通过",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "FAIL: NOT INITIATED",
+      "Translated": "失败：未启动",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Countdown reset.",
+      "Translated": "倒计时重置。",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Fates",
+      "Translated": "命运",
+      "Context": "CounterUI.DrawCurrentFateUI",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Click a Fate to see it on the map.",
+      "Translated": "点击命运在地图上查看。",
+      "Context": "CounterUI.DrawCurrentFateUI",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HoveredToolTip"
+    },
+    {
+      "Original": "upcoming or requires activation - can fail if not activated in time",
+      "Translated": "即将到来或需要激活-如果未及时激活，可能会失败",
+      "Context": "CounterUI.GetFateTimeString",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Debug stuff",
+      "Translated": "调试东西",
+      "Context": "DebugUI.Draw",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Territory: ",
+      "Translated": "地区：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Territory ID: ",
+      "Translated": "区域ID ：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "pos: X: (",
+      "Translated": "X坐标",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "nearby hunts & object table debug",
+      "Translated": "附近的狩猎和对象表调试",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Nearby Mobs",
+      "Translated": "附近的暴徒",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "priority:",
+      "Translated": "优先：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "KIND: ",
+      "Translated": "种类:",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "NAMEID: ",
+      "Translated": "姓名ID ：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Found: ",
+      "Translated": "找到：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Random Debug Info?!:",
+      "Translated": "随机调试信息？ ！ ：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Content1 Region: ",
+      "Translated": "内容1区域：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Window Size: ",
+      "Translated": "窗口大小",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Window  Pos: ",
+      "Translated": "窗口位置：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "rotation: ",
+      "Translated": "旋光",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Player Pos: (",
+      "Translated": "玩家位置： （",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Player Pos: ",
+      "Translated": "玩家位置：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Map: ",
+      "Translated": "地图：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText"
+    },
+    {
+      "Original": "Coord size: ",
+      "Translated": "坐标大小：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText"
+    },
+    {
+      "Original": "Priority Mob:",
+      "Translated": "优先移动：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText"
+    },
+    {
+      "Original": "Rank ",
+      "Translated": "清醒值排行",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText"
+    },
+    {
+      "Original": "Other nearby mobs:",
+      "Translated": "附近的其他暴徒：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText"
+    },
+    {
+      "Original": "Rank: ",
+      "Translated": "品阶:",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_RightAlignText"
+    },
+    {
+      "Original": "Can't find local player",
+      "Translated": "找不到本地玩家",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "subIndex:",
+      "Translated": "上标",
+      "Context": "DebugUI.Aetherytes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "territory:",
+      "Translated": "地区：",
+      "Context": "DebugUI.Aetherytes",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Not Found",
+      "Translated": "找不到",
+      "Context": "DebugUI.UpdateLocalStuff",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Show Map Name",
+      "Translated": "显示地图名称",
+      "Context": "HuntTrainUI.DrawHuntTrainWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Options Window",
+      "Translated": "选项窗口",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Spawn Point Filter",
+      "Translated": "生成点过滤器",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Select which Rank to display Spawn Points for",
+      "Translated": "选择要显示哪个排名的生成点",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HoveredToolTip"
+    },
+    {
+      "Original": "Use High-Contrast Colour",
+      "Translated": "使用高对比度颜色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Use a high-contrast colour for Spawn Points,\n\nCan be changed from Visuals > Colours",
+      "Translated": "对生成点使用高对比度颜色，\n\n可以从“视觉效果” > “颜色”进行更改",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HoveredToolTip"
+    },
+    {
+      "Original": "submit found hunt position data?",
+      "Translated": "提交找到的寻线位置数据？",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "opt in",
+      "Translated": "加入宣告",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "first",
+      "Translated": "第一頁",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "second",
+      "Translated": "秒",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "1#visualsizing",
+      "Translated": "1 # visualsizing",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "2#visualsizing",
+      "Translated": "2 # visualsizing",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "3#visualsizing",
+      "Translated": "3 # visualsizing",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "1#coloursizing",
+      "Translated": "1 #上色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "2#coloursizing",
+      "Translated": "2 #上色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "3#coloursizing",
+      "Translated": "3 #上色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Path Colour",
+      "Translated": "路径颜色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ColorEdit4"
+    },
+    {
+      "Original": "Set Alpha (A) to zero to disable.",
+      "Translated": "将Alpha (A)设置为零以禁用。",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiUtil.ImGui_HelpMarker"
+    },
+    {
+      "Original": "#settingsLabel",
+      "Translated": "# settingsLabel",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "#settingsValue",
+      "Translated": "# settingsValue",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Hunt: <flag> <name> <rank> <hpp>\n\nCosmetic: <goldstar> <silverstar> <warning> <nocircle> <controllerbutton0> <controllerbutton1>\n <priorityworld> <elementallevel> <exclamationrectangle> <notoriousmonster> <alarm> <fanfestival>",
+      "Translated": "狩猎：<flag> <name> <rank> <hpp>\n\n外观： <goldstar> <silverstar> <warning> <nocircle> <controllerbutton0> <controllerbutton1>\n <priorityworld> <elementallevel> <exclamationrectangle> <notoriousmonster> <alarm> <fanfestival>",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextMultiline"
+    },
+    {
+      "Original": "Nearby Mob List",
+      "Translated": "附近的暴徒名单",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Language",
+      "Translated": "语言",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Translate",
+      "Translated": "翻译",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "If you want to help translate this plugin",
+      "Translated": "如果您想帮助翻译此插件",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " -- click me",
+      "Translated": "点我",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "or dm me @ img#7855",
+      "Translated": "或dm me @ img # 7855",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "help, i've fallen over",
+      "Translated": "救命，我摔倒了",
+      "Context": "MapUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Buttons",
+      "Translated": "纽扣",
+      "Context": "SpawnPointFinderUI.DrawSpawnPointRefinementWindow",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-17T15:07:09",
+  "imported": {
+    "archive": ""
+  },
+  "importedNote": "同一份投稿内容之前已经收到过了（issue #direct-2026-10-17T15-00-26-589Z-6fa1faaa），这次跳过（没有重复并入）。"
+}
