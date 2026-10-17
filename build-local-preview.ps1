@@ -58,6 +58,7 @@ function Invoke-PreviewSuite([string]$Suite, [string[]]$SuiteArguments = @()) {
 foreach ($previewSuite in @('LocalPreviewTests', 'PreviewRuntimeBoundaryTests', 'GroundedPreviewMotionTests', 'NativePreviewActorTests', 'NativeDismountTests', 'HmsShadowTests', 'HmsOriginalAdapterTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+Invoke-PreviewSuite 'LocalPreviewPreferencesTests'
 
 if ($SqpackPath) {
     Invoke-PreviewSuite 'GposeEmoteTests' @('--', $SqpackPath)
@@ -88,7 +89,7 @@ foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 
-Write-Output "Offline validation finished: $previewCompletedSuites/16 suites; skipped: $($previewSkippedSuites -join ', ')."
+Write-Output "Offline validation finished: $previewCompletedSuites/17 suites; skipped: $($previewSkippedSuites -join ', ')."
 if (!$SqpackPath) { Write-Output 'Current-client GPose and item-data coverage is incomplete.' }
 Write-Output 'Build and offline checks do not prove in-game or two-client acceptance.'
 exit 0

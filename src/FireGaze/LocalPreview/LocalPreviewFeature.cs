@@ -39,6 +39,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
     private volatile bool enabled;
     private bool diagnosticsRegistered;
     private volatile bool initialized;
+    private bool preferencesInitialized;
     private volatile bool disposed;
     private PreviewEffect[] uiActiveEffects = [];
     private string lastMessage = "等待插件加载阶段完成";
@@ -58,7 +59,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
         Data = data; Interop = interop; Log = log; Chat = chat; GameGUI = gameGUI;
         ContextMenu = contextMenu; Commands = commands; AddonLifecycle = addonLifecycle;
         this.config = config;
-        enabled = config.LocalPreviewEnabled;
+        preferences = new(config);
+        enabled = config.LocalPreviewSettingsRevision != 0 && config.LocalPreviewEnabled;
         this.saveConfig = saveConfig;
         this.textures = textures;
         this.keys = keys;
@@ -87,6 +89,15 @@ public sealed partial class LocalPreviewFeature : IDisposable
     private void UpdateCore(IFramework framework)
     {
         if (disposed) return;
+        if (!preferencesInitialized)
+        {
+            preferencesInitialized = true;
+            if (Preferences.Migrate())
+            {
+                enabled = false;
+                Cleanup(saveConfig, "保存本地试用默认设置");
+            }
+        }
         if (!initialized || runtime?.HasActivePreview == true || DateTime.UtcNow >= nextCoexistenceCheck)
         {
             RefreshCoexistence();
@@ -166,8 +177,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
         {
             if (runtime.TryApply(new PreviewEffect(slot, (ushort)id), out var reason))
             {
-                lastMessage = $"已本地试用 {kind} #{id}";
-                Log.Information("[LocalPreview] " + lastMessage);
+                lastMessage = $"已开始本地试用{CategoryName(kind)}";
+                Log.Information("[LocalPreview] {Message} {Kind} #{Id}", lastMessage, kind, id);
             }
             else
             {
@@ -207,6 +218,11 @@ public sealed partial class LocalPreviewFeature : IDisposable
 
     private void SetEnabledCore(bool value)
     {
+        if (!value)
+        {
+            Preferences.CompleteEnable(false);
+            enableConfirmationVisible = false;
+        }
         if (enabled == value) return;
         enabled = value;
         config.LocalPreviewEnabled = value;
@@ -272,9 +288,21 @@ public sealed partial class LocalPreviewFeature : IDisposable
         {
             case "status": Chat.Print("[本地试用] " + Diagnostics()); break;
             case "cancel": Cancel(); break;
-            case "on": SetEnabled(true); break;
+            case "on":
+                if (pluginInterface?.IsDev == true) SetEnabled(true);
+                else
+                {
+                    RequestEnabled(true);
+                    Chat.Print("[本地试用] 请打开「坐骑试用」页，阅读说明后确认开启。");
+                }
+                break;
             case "off": SetEnabled(false); break;
             case "option":
+                if (pluginInterface?.IsDev != true)
+                {
+                    Chat.PrintError("[本地试用] 四类试用统一开启，请在「坐骑试用」页设置。");
+                    break;
+                }
                 if (!PreviewOptionCommand.TryParse(parts, out var option))
                 {
                     Chat.PrintError("[本地试用] 用法：/firegaze preview option mount|minion|accessory|emote|items on|off");
@@ -295,6 +323,10 @@ public sealed partial class LocalPreviewFeature : IDisposable
                     _ => "物品右键试穿",
                 };
                 Chat.Print($"[本地试用] {optionName}已{(option.Enabled ? "开启" : "关闭")}。");
+                break;
+            case "chatlinks":
+                if (pluginInterface?.IsDev == true && parts.Length == 2 && parts[1] is "on" or "off")
+                    SetChatLinks(parts[1] == "on");
                 break;
             case "native":
                 if (pluginInterface.IsDev) ExecuteDevelopmentNative(parts);
@@ -352,6 +384,9 @@ public sealed partial class LocalPreviewFeature : IDisposable
     private string Diagnostics() => JsonSerializer.Serialize(new
     {
         version = typeof(LocalPreviewFeature).Assembly.GetName().Version?.ToString(), enabled, initialized, coexistence, options = MenuOptions(),
+        chatLinksPreference = config.LocalPreviewChatLinksEnabled,
+        chatLinksEffective = enabled && Preferences.CanLinkEmoteMessages,
+        enableConfirmationPending = Preferences.ConfirmationPending,
         catalogCounts = Enum.GetValues<MenuKind>().ToDictionary(k => k.ToString(), k => catalog.Search(k, "").Count),
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,

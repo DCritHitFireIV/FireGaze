@@ -51,10 +51,12 @@ internal static unsafe class GposeSittingServiceCases
                                 && f.Native.Clone->EmoteController.CurrentPoseType==(sit==52?EmoteController.PoseType.GroundSit:EmoteController.PoseType.Sit),
                                 label+" pins active trial sitting as the persistent photo default after preview cleanup");
                         else if(stillSitting)
-                            check(f.Service.CurrentEmoteId==0 && f.Service.ReplayCount==0 && f.Native.Calls==0
+                            check(f.Service.CurrentEmoteId==0 && f.Service.ReplayCount==1 && f.Native.Calls==1
                                 && f.Native.Clone->EmoteController.EmoteId==sit
-                                && f.Native.Clone->Mode==(CharacterModes)row.EmoteMode.Value.ConditionMode,
-                                label+" leaves the native inherited seated pose untouched");
+                                && f.Native.Clone->Timeline.BaseOverride==row.ActionTimeline[0].RowId
+                                && f.Native.Clone->Timeline.TimelineSequencer.TimelineIds[0]==row.ActionTimeline[0].RowId
+                                && f.Native.Clone->Mode==CharacterModes.AnimLock,
+                                label+" pins current native sitting so delayed photo history cannot resume an older action");
                         else
                             check(f.Service.CurrentEmoteId==0 && f.Service.ReplayCount==1 && f.Native.Calls==0
                                 && f.Native.Clone->Timeline.BaseOverride==3 && f.Native.Clone->EmoteController.EmoteId==0
@@ -63,6 +65,102 @@ internal static unsafe class GposeSittingServiceCases
                         check(new ReadOnlySpan<byte>(f.Native.Source,sizeof(FFXIVClientStructs.FFXIV.Client.Game.Character.Character)).SequenceEqual(authoritative),
                             label+" leaves every authoritative source byte unchanged");
                     }
+        // Live failure: the clone initially inherited a sustained native sit, then
+        // GPose's delayed old history replaced it with the preceding ordinary emote.
+        // Exercise the real entry capture/replay with that delayed state at phase 6/7.
+        foreach(var posture in new[]{(Id:(ushort)50,Mode:(byte)2,Loop:(ushort)643),
+            (Id:(ushort)52,Mode:(byte)1,Loop:(ushort)654),(Id:(ushort)98,Mode:(byte)1,Loop:(ushort)3138)})
+            foreach(byte nativePose in new byte[]{0,2})
+            {
+                using var f=new ServiceFixture(game);
+                f.Service.RecordNative(21);
+                f.SetNativeSitting(posture.Id,11);
+                f.Native.Source->ModeParam=posture.Mode;
+                // Current CN native cpose variants can expose the None sentinel.
+                f.Native.Source->EmoteController.CurrentPoseType=(EmoteController.PoseType)255;
+                f.Native.Source->EmoteController.CPoseState=nativePose;
+                f.Native.Clone->EmoteController.CPoseState=4;
+                f.Update();
+                var source=new ReadOnlySpan<byte>(f.Native.Source,sizeof(FFXIVClientStructs.FFXIV.Client.Game.Character.Character)).ToArray();
+                f.Native.PhotoPhase=6;f.EnterAndUpdate();
+                check(f.Native.Calls==0 && f.Native.ModeCalls==0 && f.Service.ReplayCount==0,
+                    $"native sitting #{posture.Id} pose {nativePose} waits until native photo initialization finishes");
+                f.SetInheritedOldAction();f.Native.PhotoPhase=7;f.Update();
+                check(f.Service.CurrentEmoteId==0 && f.Service.ReplayCount==1 && f.Service.LastAppliedEmoteId==posture.Id
+                    && f.Native.Calls==1 && f.Native.Clone->EmoteController.EmoteId==posture.Id
+                    && f.Native.Clone->EmoteController.CPoseState==nativePose
+                    && f.Native.Clone->EmoteController.CurrentPoseType==(posture.Mode==1?EmoteController.PoseType.GroundSit:EmoteController.PoseType.Sit)
+                    && f.Native.Clone->Mode==CharacterModes.AnimLock && f.Native.Clone->ModeParam==0
+                    && f.Native.Clone->Timeline.BaseOverride==posture.Loop
+                    && f.Native.Clone->Timeline.TimelineSequencer.TimelineIds[0]==posture.Loop,
+                    $"native sitting #{posture.Id} pose {nativePose} replaces delayed old photo history with its captured seated loop");
+                check(new ReadOnlySpan<byte>(f.Native.Source,sizeof(FFXIVClientStructs.FFXIV.Client.Game.Character.Character)).SequenceEqual(source),
+                    $"native sitting #{posture.Id} pose {nativePose} leaves every real-player byte unchanged");
+                int calls=f.Native.Calls,modeCalls=f.Native.ModeCalls,timelineCalls=f.Native.TimelineCalls;
+                f.Native.Clone->Mode=CharacterModes.Normal;f.Native.Clone->EmoteController.EmoteId=1;
+                f.Native.Clone->EmoteController.CPoseState=3;
+                f.Native.Clone->Timeline.BaseOverride=999;f.Native.Clone->Timeline.TimelineSequencer.TimelineIds[0]=999;f.Update();
+                check(f.Service.ReplayCount==1 && f.Native.Calls==calls && f.Native.ModeCalls==modeCalls
+                    && f.Native.TimelineCalls==timelineCalls && f.Native.Clone->Mode==CharacterModes.Normal
+                    && f.Native.Clone->EmoteController.EmoteId==1 && f.Native.Clone->EmoteController.CPoseState==3
+                    && f.Native.Clone->Timeline.BaseOverride==999 && f.Native.Clone->Timeline.TimelineSequencer.TimelineIds[0]==999,
+                    $"native sitting #{posture.Id} pose {nativePose} is applied once and preserves later posing edits");
+            }
+        foreach(var posture in new[]{(Actual:(ushort)52,Stale:(ushort)0,Mode:(byte)1,Want:(ushort)52,Loop:(ushort)654),
+            (Actual:(ushort)50,Stale:(ushort)21,Mode:(byte)2,Want:(ushort)50,Loop:(ushort)643),
+            (Actual:(ushort)52,Stale:(ushort)50,Mode:(byte)1,Want:(ushort)52,Loop:(ushort)654)})
+        {
+            using var f=new ServiceFixture(game);
+            f.Service.RecordNative(21);f.SetNativeSitting(posture.Actual,11);
+            f.Native.Source->ModeParam=posture.Mode;
+            f.Native.Source->EmoteController.EmoteId=posture.Stale;
+            f.Native.Source->EmoteController.CPoseState=2;f.Update();
+            f.SetInheritedOldAction();f.EnterAndUpdate();
+            check(f.Service.ReplayCount==1 && f.Service.LastAppliedEmoteId==posture.Want
+                && f.Native.Clone->EmoteController.EmoteId==posture.Want && f.Native.Clone->EmoteController.CPoseState==2
+                && f.Native.Clone->Timeline.BaseOverride==posture.Loop && f.Native.Clone->Mode==CharacterModes.AnimLock,
+                $"native sitting mode {posture.Mode} with unavailable or stale id {posture.Stale} uses only its verified basic posture");
+        }
+        using(var f=new ServiceFixture(game))
+        {
+            f.Service.RecordNative(21);f.SetNativeSitting(52,11);
+            f.Native.Source->ModeParam=0;f.Native.Source->EmoteController.EmoteId=0;
+            f.Update();f.SetInheritedOldAction();f.EnterAndUpdate();
+            check(f.Service.CurrentEmoteId==0 && f.Service.ReplayCount==0 && f.Native.Calls==0 && f.Native.ModeCalls==0,
+                "an unidentified native seated mode cannot replay a stale ordinary action or invent a seated variant");
+        }
+        foreach(byte mode in new byte[]{1,2})foreach(ushort stale in new ushort[]{0,21})
+        {
+            using var f=new ServiceFixture(game);
+            f.Service.RecordNative(21);
+            f.Native.Source->Mode=CharacterModes.InPositionLoop;f.Native.Source->ModeParam=mode;
+            f.Native.Source->EmoteController.CurrentPoseType=(EmoteController.PoseType)255;
+            f.Native.Source->EmoteController.EmoteId=stale;f.Native.Source->EmoteController.CPoseState=2;
+            var source=new ReadOnlySpan<byte>(f.Native.Source,sizeof(FFXIVClientStructs.FFXIV.Client.Game.Character.Character)).ToArray();
+            f.Update();f.SetInheritedOldAction();f.EnterAndUpdate();
+            ushort expectedId=mode==1?(ushort)52:(ushort)50,expectedLoop=mode==1?(ushort)654:(ushort)643;
+            check(f.Service.CurrentEmoteId==0 && f.Service.ReplayCount==1 && f.Service.LastAppliedEmoteId==expectedId
+                && f.Native.Clone->EmoteController.EmoteId==expectedId && f.Native.Clone->EmoteController.CPoseState==2
+                && f.Native.Clone->Timeline.BaseOverride==expectedLoop && f.Native.Clone->Mode==CharacterModes.AnimLock,
+                $"native mode11 parameter {mode} identifies sitting when pose and emote metadata are both unavailable ({stale})");
+            check(new ReadOnlySpan<byte>(f.Native.Source,sizeof(FFXIVClientStructs.FFXIV.Client.Game.Character.Character)).SequenceEqual(source),
+                $"native mode11 parameter {mode} metadata fallback leaves the real player unchanged ({stale})");
+        }
+        foreach(var rejected in new[]{(Mode:CharacterModes.InPositionLoop,Param:(byte)0,Owner:true),
+            (Mode:CharacterModes.InPositionLoop,Param:(byte)3,Owner:true),
+            (Mode:CharacterModes.EmoteLoop,Param:(byte)1,Owner:true),
+            (Mode:CharacterModes.InPositionLoop,Param:(byte)1,Owner:false)})
+        {
+            using var f=new ServiceFixture(game);
+            f.Service.RecordNative(21);f.Native.Source->Mode=rejected.Mode;f.Native.Source->ModeParam=rejected.Param;
+            f.Native.Source->EmoteController.CurrentPoseType=(EmoteController.PoseType)255;
+            f.Native.Source->EmoteController.EmoteId=0;
+            if(!rejected.Owner)f.Native.Source->EmoteController.OwnerObject=null;
+            f.Update();f.SetInheritedOldAction();f.EnterAndUpdate();
+            check(f.Service.CurrentEmoteId==21 && f.Service.LastAppliedEmoteId==21
+                && f.Service.ReplayCount==1 && f.Native.Clone->EmoteController.EmoteId==21,
+                $"mode {(byte)rejected.Mode} parameter {rejected.Param} owner {rejected.Owner} without posture metadata cannot invent a sit or erase ordinary memory");
+        }
         foreach(bool firstTrial in new[]{false,true})foreach(bool lastTrial in new[]{false,true})
         {
             using var f=new ServiceFixture(game);
@@ -175,6 +273,7 @@ internal static unsafe class GposeSittingServiceCases
         public void SetNativeSitting(ushort id,byte mode)
         {
             Native.Source->Mode=(CharacterModes)mode;Native.Source->EmoteController.EmoteId=id;
+            Native.Source->ModeParam=id==50?(byte)2:(byte)1;
             Native.Source->EmoteController.CurrentPoseType=id==52?EmoteController.PoseType.GroundSit:EmoteController.PoseType.Sit;
             Native.Clone->Mode=(CharacterModes)mode;Native.Clone->EmoteController.EmoteId=id;
         }

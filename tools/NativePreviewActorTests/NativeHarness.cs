@@ -15,6 +15,12 @@ static unsafe class NativeHarness
     static readonly Type ActorType = Assembly.GetExecutingAssembly().GetType("FireGaze.LocalPreview.Runtime.NativePreviewActor")!;
     static readonly (string Name, Action Test)[] Cases = [
         ("root-state-unchanged", RootUnchanged), ("hide-only-after-ready", HideAfterReady),
+        ("emote-voice-copies-the-local-players-selected-voice", VoiceFromLocalPlayer),
+        ("emote-voice-follows-current-local-player-setting", VoiceFollowsCurrentSetting),
+        ("emote-voice-refuses-foreign-vfx-owners", VoiceRejectsForeignContainers),
+        ("emote-voice-does-not-write-after-source-replacement", VoiceSourceReplacement),
+        ("emote-voice-does-not-write-after-native-follow-reentry", VoiceFollowReentry),
+        ("emote-voice-does-not-write-after-final-native-lookup-reentry", VoiceLookupReentry),
         ("native-hook-allocation-guard-rejects-foreign-reused-and-disposed", NativeAllocationGuard),
         ("owned-visibility-restored", OwnedFlags), ("preexisting-hide-preserved", PreexistingFlags),
         ("slot-reused-pointer", SlotPointer), ("slot-reused-generation", SlotGeneration),
@@ -132,6 +138,69 @@ static unsafe class NativeHarness
         Eq((Vector3)f.Clone->Position, new Vector3(40,50,60), "follow logical position"); Eq(f.Clone->Rotation, 1.25f, "follow yaw");
         Eq(f.Clone->TargetId.Id, 901UL, "follow target"); Eq(f.Clone->SoftTargetId.Id, 902UL, "follow soft target"); Same(before, f.Source, "follow touched source"); Eq(f.SourceWrites, 0, "native writes source");
         Dispose(p); OnlyFlags(before, f.Source); Eq((ulong)f.Source->RenderFlags, 0x800UL, "source visible again"); Check(f.Source->DrawObject->IsVisible,"source visibility not restored"); Eq(f.Deletes, 1, "delete once");
+    }
+    static void VoiceFromLocalPlayer()
+    {
+        // The native setup helper assigns a default voice from race/sex. The
+        // selected player voice is stored outside CustomizeData in Vfx.VoiceId.
+        foreach (ushort selected in new ushort[] { 0, 8759, 9150, ushort.MaxValue })
+        {
+            using var f = new F(); f.Source->Vfx.VoiceId = selected;
+            byte[] source = Bytes(f.Source); var p = MustCreate(f);
+            Eq(f.Clone->Vfx.VoiceId, selected, "display voice must retain the actual selection after both native setup calls");
+            Same(source, f.Source, "copying the selected voice wrote to the real player"); Dispose(p);
+        }
+    }
+    static void VoiceFollowsCurrentSetting()
+    {
+        using var f = new F(); f.Source->Vfx.VoiceId = 8759; var p = MustCreate(f); Settle(p, f);
+        foreach (ushort selected in new ushort[] { 9150, 0, 8759 })
+        {
+            f.Source->Vfx.VoiceId = selected; f.Clone->Vfx.VoiceId = 8819;
+            byte[] source = Bytes(f.Source); Check(Tick(p, f.Source), "valid follow refused");
+            Eq(f.Clone->Vfx.VoiceId, selected, "later emotes must use the current player setting, including zero");
+            Same(source, f.Source, "refreshing a display voice modified the player");
+        }
+        Dispose(p);
+    }
+    static void VoiceRejectsForeignContainers()
+    {
+        foreach (bool sourceContainer in new[] { true, false })
+        {
+            using var f = new F(); var actor = sourceContainer ? f.Source : f.Clone;
+            actor->Vfx.OwnerObject = (Character*)f.Replacement;
+            f.Source->Vfx.VoiceId = 9150; byte[] source = Bytes(f.Source), foreign = Bytes((Character*)f.Replacement);
+            Check(Create(f.Source) == null, "preview accepted a VFX container belonging to another actor");
+            Same(source, f.Source, "invalid voice binding modified source"); Same(foreign, (Character*)f.Replacement, "invalid voice binding modified foreign actor");
+            Eq(f.Deletes, 1, "invalid VFX binding leaked its display allocation");
+        }
+    }
+    static void VoiceSourceReplacement()
+    {
+        using var f = new F(); var p = MustCreate(f); Settle(p, f);
+        f.Source->Vfx.VoiceId = 9150; f.Clone->Vfx.VoiceId = 8819;
+        *f.Local = f.Replacement; byte[] clone = Bytes(f.Clone), source = Bytes(f.Source), replacement = Bytes((Character*)f.Replacement);
+        Check(!Tick(p, (Character*)f.Replacement), "replaced source accepted");
+        Same(clone, f.Clone, "stale clone voice was updated after source replacement");
+        Same(source, f.Source, "stale source modified"); Same(replacement, (Character*)f.Replacement, "replacement player modified"); Dispose(p);
+    }
+    static void VoiceFollowReentry()
+    {
+        using var f = new F(); var p = MustCreate(f); Settle(p, f);
+        f.Source->Vfx.VoiceId = 9150; f.Clone->Vfx.VoiceId = 8819;
+        f.OnPosition = () => F.Generation(f.Clone, 99999);
+        Check(!Tick(p, f.Source), "native follow reentry accepted reused display allocation");
+        Eq(f.Clone->Vfx.VoiceId, (ushort)8819, "voice written after native callback invalidated allocation"); Dispose(p);
+    }
+    static void VoiceLookupReentry()
+    {
+        using var f = new F(); var p = MustCreate(f); Settle(p, f);
+        f.Source->Vfx.VoiceId = 9150; f.Clone->Vfx.VoiceId = 8819;
+        // The final manager lookup follows GetSource. A native callback there
+        // must not allow us to copy from a source generation just invalidated.
+        f.OnRotation = () => f.OnLookup = () => F.Generation(f.Source, 99999);
+        Check(!Tick(p, f.Source), "native lookup reentry accepted replaced source generation");
+        Eq(f.Clone->Vfx.VoiceId, (ushort)8819, "voice copied from stale source after final native lookup"); Dispose(p);
     }
     static void HideAfterReady() { using var f = new F(); f.Ready = false; var p = MustCreate(f); for(int i=0;i<4;i++) { Tick(p,f.Source); Eq((ulong)f.Source->RenderFlags,0x800UL,"hidden before draw ready"); } Check(!Ready(p),"ready too early"); Eq(f.Enables,0,"enable before ready"); Settle(p,f); Check(f.Enables>0,"enable missing"); Dispose(p); }
     static void OwnedFlags() { using var f = new F(); var p = MustCreate(f); Settle(p,f); f.Source->RenderFlags |= (VisibilityFlags)0x400; f.Source->DrawObject->Flags |= 0x40; Dispose(p); Eq((ulong)f.Source->RenderFlags,0xC00UL,"unrelated flags lost"); Eq(f.Source->DrawObject->Flags,(byte)0x69,"restore owns only visibility bit"); }
@@ -697,7 +766,7 @@ static unsafe class NativeHarness
         readonly nint* vtable=(nint*)NativeMemory.AllocZeroed(0x300); readonly DrawObject* bodyDraw=Alloc<DrawObject>(); readonly DrawObject* cloneDraw=Alloc<DrawObject>();
         public readonly List<nint> Children=[], PreviewChildren=[], PreviewDraws=[], SourceDraws=[], SourceWeapons=[], CloneWeapons=[], WeaponDraws=[]; public readonly List<uint> Flags=[];
         public readonly List<(nint Actor,ushort Clip)> Played=[];
-        public Action? OnPlay;
+        public Action? OnPlay, OnPosition, OnRotation, OnLookup;
         public bool Ready=true,ChildReady=true,DrawVisibleOnEnable=true,FailAllocate,FailLookup,ReplaceSlotDuringCopy,ReplaceSlotDuringChildEnable; public int Allocates,Deletes,Enables,ChildEnables,SourceWrites,UnownedNativeWrites,PlayCalls,NativeCalls;public ushort LastTimeline; public byte Param; public ulong? ResolvedTarget,ResolvedSoftTarget;
         public F()
         {
@@ -715,7 +784,7 @@ static unsafe class NativeHarness
             Character.Addresses.SetTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong,void>)&SetTarget; Character.Addresses.SetSoftTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong,void>)&SetSoftTarget;
             ActionTimelineSequencer.Addresses.PlayTimeline.Value=(nint)(delegate* unmanaged<ActionTimelineSequencer*,ushort,void*,void>)&Play;
         }
-        void Init(Character* p,ushort index,uint eid,uint gen) { *(nint**)p=vtable; p->ObjectIndex=index; p->EntityId=eid; p->ObjectKind=ObjectKind.Pc; p->TargetableStatus=(ObjectTargetableFlags)11; Generation(p,gen); p->Mount.OwnerObject=p; p->CompanionData.OwnerObject=p; p->OrnamentData.OwnerObject=p; p->DrawData.OwnerObject=p; p->CharacterSetup.OwnerObject=p; p->Timeline.OwnerObject=p; p->Timeline.TimelineSequencer.Parent=p; }
+        void Init(Character* p,ushort index,uint eid,uint gen) { *(nint**)p=vtable; p->ObjectIndex=index; p->EntityId=eid; p->ObjectKind=ObjectKind.Pc; p->TargetableStatus=(ObjectTargetableFlags)11; Generation(p,gen); p->Mount.OwnerObject=p; p->CompanionData.OwnerObject=p; p->OrnamentData.OwnerObject=p; p->DrawData.OwnerObject=p; p->Vfx.OwnerObject=p; p->CharacterSetup.OwnerObject=p; p->Timeline.OwnerObject=p; p->Timeline.TimelineSequencer.Parent=p; }
         public void AttachChildren()
         {
             for(int i=0;i<3;i++) { var child=(Character*)Alloc<BattleChara>(); Init(child,(ushort)(2+i),1000u+(uint)i,400u+(uint)i); child->RenderFlags=(VisibilityFlags)0x800; child->DrawObject=Alloc<DrawObject>(); child->DrawObject->Flags=0x29; SourceDraws.Add((nint)child->DrawObject); Children.Add((nint)child); }
@@ -753,7 +822,7 @@ static unsafe class NativeHarness
         static void Track(GameObject* p) { if(p==(GameObject*)current.Source||p==(GameObject*)current.Replacement)current.SourceWrites++; }
         [UnmanagedCallersOnly] static ulong Identity(GameObject* p) { current.NativeCalls++;return ((ulong)p->EntityId<<32)|p->ObjectIndex; }
         [UnmanagedCallersOnly] static uint Allocate(ClientObjectManager* m,uint index,byte param) { current.NativeCalls++;current.Allocates++; current.Param=param; if(current.FailAllocate)return uint.MaxValue; m->BattleCharas[Slot].BattleChara=current.clone; m->BattleCharas[Slot].ObjectKind=ObjectKind.Pc; return Slot; }
-        [UnmanagedCallersOnly] static Character* Lookup(ClientObjectManager* m,ushort index) { current.NativeCalls++;return current.FailLookup?null:(Character*)m->BattleCharas[index].BattleChara; }
+        [UnmanagedCallersOnly] static Character* Lookup(ClientObjectManager* m,ushort index) { current.NativeCalls++;current.OnLookup?.Invoke();return current.FailLookup?null:(Character*)m->BattleCharas[index].BattleChara; }
         [UnmanagedCallersOnly] static uint Index(ClientObjectManager* m,GameObject* p) { current.NativeCalls++;return (GameObject*)m->BattleCharas[Slot].BattleChara==p?Slot:uint.MaxValue; }
         [UnmanagedCallersOnly] static void Delete(ClientObjectManager* m,ushort index,byte param) { current.NativeCalls++;current.Deletes++; m->BattleCharas[index].BattleChara=null; }
         [UnmanagedCallersOnly] static ulong Copy(CharacterSetupContainer* c,Character* source,uint flags)
@@ -761,6 +830,9 @@ static unsafe class NativeHarness
             current.NativeCalls++;
             if(current.Manager->BattleCharas[Slot].BattleChara!=(BattleChara*)c->OwnerObject)current.UnownedNativeWrites++;
             current.Flags.Add(flags); Track((GameObject*)c->OwnerObject); c->OwnerObject->ObjectKind=source->ObjectKind;
+            // Reviewed native setup chooses this race/sex default unless flag 8
+            // copies the voice; production deliberately avoids that unknown flag.
+            c->OwnerObject->Vfx.VoiceId = 8819;
             if(current.ReplaceSlotDuringCopy)current.Manager->BattleCharas[Slot].BattleChara=current.Replacement;
             return 1;
         }
@@ -780,8 +852,8 @@ static unsafe class NativeHarness
         }
         [UnmanagedCallersOnly] static void Disable(GameObject* p) { current.NativeCalls++;Track(p); p->DrawObject=null; }
         [UnmanagedCallersOnly] static DrawObject* GetDraw(GameObject* p) { current.NativeCalls++;return p->DrawObject; }
-        [UnmanagedCallersOnly] static void Position(GameObject* p,float x,float y,float z) { current.NativeCalls++;Track(p); p->Position=new Vector3(x,y,z); }
-        [UnmanagedCallersOnly] static void Rotation(GameObject* p,float value) { current.NativeCalls++;Track(p); p->Rotation=value; }
+        [UnmanagedCallersOnly] static void Position(GameObject* p,float x,float y,float z) { current.NativeCalls++;Track(p); p->Position=new Vector3(x,y,z); current.OnPosition?.Invoke(); }
+        [UnmanagedCallersOnly] static void Rotation(GameObject* p,float value) { current.NativeCalls++;Track(p); p->Rotation=value; current.OnRotation?.Invoke(); }
         [UnmanagedCallersOnly] static ulong Target(Character* p) { current.NativeCalls++;return p==current.Source?current.ResolvedTarget??p->TargetId.Id:p->TargetId.Id; }
         [UnmanagedCallersOnly] static ulong SoftTarget(Character* p) { current.NativeCalls++;return p==current.Source?current.ResolvedSoftTarget??p->SoftTargetId.Id:p->SoftTargetId.Id; }
         [UnmanagedCallersOnly] static void SetTarget(Character* p,ulong id) { current.NativeCalls++;Track((GameObject*)p); p->TargetId=id; }

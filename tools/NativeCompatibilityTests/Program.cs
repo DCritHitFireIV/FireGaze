@@ -62,6 +62,18 @@ unsafe static class Program
         foreach (var actionTimeline in new[] { false, true })
         {
             var kind = actionTimeline ? "PlayActionTimeline" : "PlayTimeline";
+            foreach (var succeeds in new[] { false, true })
+            {
+                var captured = succeeds;
+                cases.Add(($"native U1 caller of source {kind} receives {succeeds} and commits only success", () => NativeTimelineResult(actionTimeline, captured, "source")));
+                foreach (var scenario in new[] { "foreign", "null", "own call", "runtime disposed", "no preview", "binding changed", "unrelated timeline", "worker" })
+                {
+                    var capturedScenario = scenario;
+                    cases.Add(($"native U1 caller of {kind} {scenario} preserves {succeeds} without handoff", () => NativeTimelineResult(actionTimeline, captured, capturedScenario)));
+                }
+            }
+            cases.Add(($"nested {kind} false inside outer false never accepts preview handoff", () => NestedTimelineResult(actionTimeline, false)));
+            cases.Add(($"nested {kind} true remains execution evidence when outer returns false", () => NestedTimelineResult(actionTimeline, true)));
             cases.Add(($"source {kind} matching Emote row ends preview after one Original", () => TimelineSource(actionTimeline)));
             if (actionTimeline) cases.Add(("source PlayActionTimeline recognizes loop-only match", () => TimelineSource(true, loopOnly: true)));
             foreach (var scenario in new[] { "clone", "foreign", "null", "own call", "runtime disposed", "no preview", "binding changed", "zero timeline", "unrelated timeline" })
@@ -297,6 +309,51 @@ unsafe static class Program
         Eq(f.LastParam, (nint)0x12345678, "native parameter preserved"); Ended(f);
         Eq(f.ExternalEmotes, 1, "one external emote event"); Eq(f.ExternalEmote, EmoteId, "external emote identity");
         Eq(f.Source->Timeline.TimelineSequencer.TimelineIds[0], loopOnly ? (ushort)65535 : emoteTimeline, "native timeline result survives cleanup");
+    }
+    static void NativeTimelineResult(bool actionTimeline, bool succeeds, string scenario)
+    {
+        using var f = new NativeFixture(data); f.PrepareVisibility();
+        f.Source->EmoteController.EmoteId = EmoteId;
+        f.TimelineNativeResult = succeeds ? (byte)1 : (byte)0;
+        if (scenario == "worker") f.FrameworkThread = false;
+        else ConfigureBypass(f, scenario);
+        var actor = scenario == "foreign" ? f.Foreign : scenario == "null" ? null : f.Source;
+        ushort intro = scenario == "unrelated timeline" ? ushort.MaxValue : emoteTimeline;
+        byte result = f.NativeTimeline(actionTimeline, actor, intro, 65535);
+        Eq(result, succeeds ? (byte)1 : (byte)0, "native caller sees the original U1 result");
+        Once(f, actor == null ? 0 : actionTimeline ? (nint)(&actor->Timeline) : (nint)(&actor->Timeline.TimelineSequencer));
+        Eq(f.LastIntro, intro, "native intro forwarded");
+        Eq(f.LastParam, (nint)0x12345678, "native param forwarded");
+        if (actionTimeline) Eq(f.LastLoop, (ushort)65535, "native loop forwarded");
+        if (scenario == "source" && succeeds)
+        {
+            Ended(f); Eq(f.ExternalEmotes, 1, "accepted timeline records one emote");
+            Eq(f.ExternalEmote, EmoteId, "accepted timeline records its actual identity");
+        }
+        else
+        {
+            Kept(f, scenario != "no preview");
+            Eq(f.ExternalEmotes, 0, "rejected or unrelated timeline cannot record an emote");
+        }
+        if (actor != null) Eq(actor->Timeline.TimelineSequencer.TimelineIds[0], intro, "native timeline side effect preserved even on false");
+    }
+    static void NestedTimelineResult(bool actionTimeline, bool innerSucceeds)
+    {
+        using var f = new NativeFixture(data); f.PrepareVisibility();
+        f.Source->EmoteController.EmoteId = EmoteId;
+        byte inner = 255;
+        f.DuringOriginal = () => {
+            f.DuringOriginal = null;
+            f.TimelineNativeResult = innerSucceeds ? (byte)1 : (byte)0;
+            inner = f.NativeTimeline(!actionTimeline, f.Source, emoteTimeline);
+            f.TimelineNativeResult = 0;
+        };
+        byte outer = f.NativeTimeline(actionTimeline, f.Source, emoteTimeline);
+        Eq(outer, (byte)0, "outer native false is never replaced by nested success");
+        Eq(inner, innerSucceeds ? (byte)1 : (byte)0, "inner native U1 result survives its own detour");
+        Eq(f.OriginalCalls, 2, "each native original executes once");
+        Eq(f.ExternalEmotes, innerSucceeds ? 1 : 0, "only an actually successful native timeline records an emote");
+        if (innerSucceeds) Ended(f); else Kept(f);
     }
     static void TimelineBypass(bool actionTimeline, string scenario)
     {

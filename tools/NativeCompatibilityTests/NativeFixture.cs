@@ -44,6 +44,7 @@ unsafe sealed class NativeFixture : IDisposable
     public ulong FlagsAtOriginal;
     public Action? DuringOriginal;
     public bool SetupAccepts = true;
+    public byte TimelineNativeResult = 1;
     public bool SetupWritesCompanionId = true;
     public bool SetupWritesCompanionObject;
     public Companion* SetupCompanionObject;
@@ -101,14 +102,8 @@ unsafe sealed class NativeFixture : IDisposable
             OriginalCalls++; LastPointer = (nint)container; LastId = id; LastExtra = param;
             if (SetupAccepts && container != null) container->OrnamentId = unchecked((ushort)id);
             DuringOriginal?.Invoke(); }));
-        Install("timelinePlay", (ActionTimelineSequencer.Delegates.PlayTimeline)((sequence, id, param) => {
-            OriginalCalls++; LastPointer = (nint)sequence; LastIntro = id; LastParam = (nint)param;
-            if (sequence != null) sequence->TimelineIds[0] = id;
-            DuringOriginal?.Invoke(); }));
-        Install("actionTimelinePlay", (TimelineContainer.Delegates.PlayActionTimeline)((timeline, intro, loop, param) => {
-            OriginalCalls++; LastPointer = (nint)timeline; LastIntro = intro; LastLoop = loop; LastParam = (nint)param;
-            if (timeline != null) timeline->TimelineSequencer.TimelineIds[0] = intro;
-            DuringOriginal?.Invoke(); }));
+        InstallNativeTimelineOriginal(false);
+        InstallNativeTimelineOriginal(true);
     }
 
     void Initialize(Character* actor, uint id, ushort index, uint generation)
@@ -116,7 +111,7 @@ unsafe sealed class NativeFixture : IDisposable
         *(nint**)actor = table; table[1] = (nint)(delegate* unmanaged<GameObject*, ulong>)&Identity;
         actor->EntityId = id; actor->ObjectIndex = index; Generation(actor, generation);
         actor->Mount.OwnerObject = actor; actor->CompanionData.OwnerObject = actor; actor->OrnamentData.OwnerObject = actor;
-        actor->DrawData.OwnerObject = actor;
+        actor->DrawData.OwnerObject = actor; actor->Vfx.OwnerObject = actor;
     }
 
     public void PrepareVisibility()
@@ -144,20 +139,64 @@ unsafe sealed class NativeFixture : IDisposable
     public void Ornament(OrnamentContainer* container, short id, uint param = 0x12345678) => Invoke("OrnamentSetupDetour", Ptr(container, typeof(OrnamentContainer)), id, param);
     public void Timeline(ActionTimelineSequencer* sequence, ushort id, nint param = 0x12345678) => Invoke("TimelinePlayDetour", Ptr(sequence, typeof(ActionTimelineSequencer)), id, Ptr((void*)param, typeof(void)));
     public void ActionTimeline(TimelineContainer* timeline, ushort intro, ushort loop, nint param = 0x12345678) => Invoke("ActionTimelinePlayDetour", Ptr(timeline, typeof(TimelineContainer)), intro, loop, Ptr((void*)param, typeof(void)));
+    // Execute the compiled production detour as the native game's BOOL/U1 caller
+    // does. The original is an actual unmanaged callback on private allocations;
+    // no hook installation, executable patching or game process is involved.
+    public byte NativeTimeline(bool actionTimeline, Character* actor, ushort intro, ushort loop = 0)
+    {
+        var field = actionTimeline ? "actionTimelinePlay" : "timelinePlay";
+        var method = actionTimeline ? "ActionTimelinePlayDetour" : "TimelinePlayDetour";
+        var delegateType = RuntimeType.GetField(field, All)!.FieldType.GetGenericArguments()[0];
+        InstallNativeTimelineOriginal(actionTimeline);
+        var detour = RuntimeType.GetMethod(method, All)!.CreateDelegate(delegateType, Runtime);
+        var address = Marshal.GetFunctionPointerForDelegate(detour);
+        byte result = actionTimeline
+            ? ((delegate* unmanaged<TimelineContainer*, ushort, ushort, void*, byte>)address)(actor == null ? null : &actor->Timeline, intro, loop, (void*)0x12345678)
+            : ((delegate* unmanaged<ActionTimelineSequencer*, ushort, void*, byte>)address)(actor == null ? null : &actor->Timeline.TimelineSequencer, intro, (void*)0x12345678);
+        GC.KeepAlive(detour);
+        return result;
+    }
+    void InstallNativeTimelineOriginal(bool actionTimeline)
+    {
+        var field = actionTimeline ? "actionTimelinePlay" : "timelinePlay";
+        var delegateType = RuntimeType.GetField(field, All)!.FieldType.GetGenericArguments()[0];
+        nint original = actionTimeline
+            ? (nint)(delegate* unmanaged<TimelineContainer*, ushort, ushort, void*, byte>)&NativeActionTimelineOriginal
+            : (nint)(delegate* unmanaged<ActionTimelineSequencer*, ushort, void*, byte>)&NativeTimelineOriginal;
+        InstallDelegate(field, Marshal.GetDelegateForFunctionPointer(original, delegateType));
+    }
     void Invoke(string method, params object?[] args) => RuntimeType.GetMethod(method, All)!.Invoke(Runtime, args);
     public static void Set(object target, string field, object? value) => target.GetType().GetField(field, All)!.SetValue(target, value);
     static object Ptr(void* pointer, Type type) => Pointer.Box(pointer, type.MakePointerType());
     static T Proxy<T>(Func<MethodInfo, object?[]?, object?> call) where T : class
     { var proxy = DispatchProxy.Create<T, ServiceProxy>(); ((ServiceProxy)(object)proxy).Call = call; return proxy; }
     void Install<T>(string field, T original) where T : Delegate
+        => InstallDelegate(field, original);
+    void InstallDelegate(string field, Delegate original)
     {
-        var type = typeof(Hook<>).Assembly.GetType("Dalamud.Hooking.Internal.FunctionPointerVariableHook`1")!.MakeGenericType(typeof(T));
+        var type = typeof(Hook<>).Assembly.GetType("Dalamud.Hooking.Internal.FunctionPointerVariableHook`1")!.MakeGenericType(original.GetType());
         var hook = RuntimeHelpers.GetUninitializedObject(type); Set(hook, "originalDelegate", original); Set(Runtime, field, hook);
     }
     T* Alloc<T>() where T : unmanaged { var pointer = (T*)NativeMemory.AllocZeroed((nuint)sizeof(T)); allocations.Add((nint)pointer); return pointer; }
     [UnmanagedCallersOnly] static ulong Identity(GameObject* obj) => obj->EntityId;
     [UnmanagedCallersOnly] static Character* Lookup(ClientObjectManager* manager, ushort slot) => (Character*)manager->BattleCharas[slot].BattleChara;
     [UnmanagedCallersOnly] static void Delete(ClientObjectManager* manager, ushort slot, byte param) { current.Deletes++; manager->BattleCharas[slot].BattleChara = null; }
+    [UnmanagedCallersOnly] static byte NativeTimelineOriginal(ActionTimelineSequencer* sequence, ushort id, void* param)
+    {
+        current.OriginalCalls++; current.LastPointer = (nint)sequence;
+        current.LastIntro = id; current.LastParam = (nint)param;
+        if (sequence != null) sequence->TimelineIds[0] = id;
+        current.DuringOriginal?.Invoke();
+        return current.TimelineNativeResult;
+    }
+    [UnmanagedCallersOnly] static byte NativeActionTimelineOriginal(TimelineContainer* timeline, ushort intro, ushort loop, void* param)
+    {
+        current.OriginalCalls++; current.LastPointer = (nint)timeline;
+        current.LastIntro = intro; current.LastLoop = loop; current.LastParam = (nint)param;
+        if (timeline != null) timeline->TimelineSequencer.TimelineIds[0] = intro;
+        current.DuringOriginal?.Invoke();
+        return current.TimelineNativeResult;
+    }
     public void Dispose()
     {
         ClientObjectManager.Addresses.Instance.Value = previousManager; ClientObjectManager.Addresses.GetObjectByIndex.Value = previousLookup;

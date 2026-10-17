@@ -161,7 +161,11 @@ public sealed unsafe class GposeEmoteService : IDisposable
     {
         if(actor==null || actor->EmoteController.OwnerObject!=(BattleChara*)actor
             || actor->Mode is not (CharacterModes.EmoteLoop or CharacterModes.InPositionLoop))return false;
-        return actor->EmoteController.CurrentPoseType is EmoteController.PoseType.Sit or EmoteController.PoseType.GroundSit
+        // Current CN mode 11 parameters 1/2 are the native ground/chair modes.
+        // Their pose can be 255 and EmoteId stale during builtin/cpose changes.
+        // Do not extend this metadata fallback to ordinary EmoteLoop mode 3.
+        return actor->Mode==CharacterModes.InPositionLoop && actor->ModeParam is 1 or 2
+            || actor->EmoteController.CurrentPoseType is EmoteController.PoseType.Sit or EmoteController.PoseType.GroundSit
             || data.GetExcelSheet<Emote>().GetRowOrDefault(actor->EmoteController.EmoteId) is {} row && row.EmoteMode.RowId is 1 or 2;
     }
 
@@ -189,7 +193,25 @@ public sealed unsafe class GposeEmoteService : IDisposable
             return memory.BeginPostureEntry(owner,active.EmoteId,active.Pose);
         }
         var source=objects.LocalPlayer is {} local?(NativeCharacter*)local.Address:null;
-        return memory.EmoteId==0 && IsNativeSitting(source)?memory.BeginNativePostureEntry(owner):memory.BeginEntry(owner);
+        if(memory.EmoteId==0 && IsNativeSitting(source))
+        {
+            ushort id=source->EmoteController.EmoteId;
+            byte mode=source->ModeParam;
+            // Native GPose can replay an older ordinary history after initially
+            // inheriting this sit. Capture the actual seated variant before entry
+            // cleanup and apply its default once on the owned, ready photo copy.
+            if(mode is 1 or 2)
+            {
+                if(data.GetExcelSheet<Emote>().GetRowOrDefault(id) is not {} posture || posture.EmoteMode.RowId!=mode)
+                    id=mode==1?(ushort)52:(ushort)50;
+                if(data.GetExcelSheet<Emote>().GetRowOrDefault(id) is {} nativeRow && nativeRow.EmoteMode.RowId==mode)
+                    return memory.BeginPostureEntry(owner,id,source->EmoteController.CPoseState);
+            }
+            // An unknown native posture cannot authorize an invented action or
+            // revive the preceding ordinary emote. Keep its native copy untouched.
+            return memory.BeginUnidentifiedPostureEntry(owner);
+        }
+        return memory.BeginEntry(owner);
     }
 
     private void InstallEntryHook()
@@ -350,11 +372,12 @@ public sealed unsafe class GposeEmoteService : IDisposable
             && MatchesIdentity(clone,source) && clone->EmoteController.OwnerObject==(BattleChara*)clone
             && clone->Timeline.OwnerObject==clone && clone->Timeline.TimelineSequencer.Parent==clone;
         if(!TryPlayOnGposeClone(clone,source,id,pose,Current) || !Current())return false;
-        // A trial posture is absent from native photo history. Its ordinary
-        // seated mode lets that history resume an older action, so pin this
-        // posture's own seated loop once on the owned copy, like ordinary defaults.
+        // The ordinary seated mode lets native photo history resume an older
+        // action even for a real sit. Pin the captured posture's own seated loop
+        // once on the owned copy, like ordinary defaults.
         clone->SetMode(CharacterModes.AnimLock,0);
         if(!Current())return false;
+        clone->EmoteController.CPoseState=pose;
         clone->EmoteController.CurrentPoseType=modeParam==1?EmoteController.PoseType.GroundSit:EmoteController.PoseType.Sit;
         clone->Timeline.BaseOverride=loopTimeline;
         clone->Timeline.TimelineSequencer.PlayTimeline(loopTimeline);

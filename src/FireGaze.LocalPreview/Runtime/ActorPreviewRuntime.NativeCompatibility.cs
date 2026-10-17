@@ -1,5 +1,6 @@
 using Dalamud.Hooking;
 using Dalamud.Plugin.Services;
+using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
@@ -9,6 +10,15 @@ namespace FireGaze.LocalPreview.Runtime;
 
 public sealed unsafe partial class ActorPreviewRuntime
 {
+    // Both current CN timeline functions return their native success in AL. The
+    // installed ClientStructs declares them void; using those delegates for a
+    // managed detour loses success even when Original already started the intro.
+    // Keep the generated addresses and the audited BOOL/U1 return ABI instead.
+    // See docs/local-preview-timeline-abi-2026-10-17.md.
+    [return: MarshalAs(UnmanagedType.U1)]
+    private delegate bool PlayTimelineNative(ActionTimelineSequencer* sequence, ushort id, void* param);
+    [return: MarshalAs(UnmanagedType.U1)]
+    private delegate bool PlayActionTimelineNative(TimelineContainer* timeline, ushort intro, ushort loop, void* param);
     // Reviewed current CN BattleChara virtual Update and Character DisableDraw.
     // Update calls the RenderFlags consumer before drawing. These signatures must
     // resolve uniquely; no fixed runtime addresses or managed method rewriting.
@@ -18,8 +28,8 @@ public sealed unsafe partial class ActorPreviewRuntime
     private Hook<GameObject.Delegates.DisableDraw>? characterDisable;
     private Hook<CompanionContainer.Delegates.SetupCompanion>? companionSetup;
     private Hook<OrnamentContainer.Delegates.SetupOrnament>? ornamentSetup;
-    private Hook<ActionTimelineSequencer.Delegates.PlayTimeline>? timelinePlay;
-    private Hook<TimelineContainer.Delegates.PlayActionTimeline>? actionTimelinePlay;
+    private Hook<PlayTimelineNative>? timelinePlay;
+    private Hook<PlayActionTimelineNative>? actionTimelinePlay;
     private bool hmsVisibilityProtection;
     private long hmsVisibilityRepairs;
     private Dictionary<ushort, ushort>? emoteTimelineIdentities;
@@ -32,8 +42,8 @@ public sealed unsafe partial class ActorPreviewRuntime
         characterDisable = Install(interop.HookFromSignature<GameObject.Delegates.DisableDraw>(CharacterDisableSignature, CharacterDisableDetour));
         companionSetup = Install(interop.HookFromAddress<CompanionContainer.Delegates.SetupCompanion>(CompanionContainer.Addresses.SetupCompanion.Value, CompanionSetupDetour));
         ornamentSetup = Install(interop.HookFromAddress<OrnamentContainer.Delegates.SetupOrnament>(OrnamentContainer.Addresses.SetupOrnament.Value, OrnamentSetupDetour));
-        timelinePlay = Install(interop.HookFromAddress<ActionTimelineSequencer.Delegates.PlayTimeline>(ActionTimelineSequencer.Addresses.PlayTimeline.Value, TimelinePlayDetour));
-        actionTimelinePlay = Install(interop.HookFromAddress<TimelineContainer.Delegates.PlayActionTimeline>(TimelineContainer.Addresses.PlayActionTimeline.Value, ActionTimelinePlayDetour));
+        timelinePlay = Install(interop.HookFromAddress<PlayTimelineNative>(ActionTimelineSequencer.Addresses.PlayTimeline.Value, TimelinePlayDetour));
+        actionTimelinePlay = Install(interop.HookFromAddress<PlayActionTimelineNative>(TimelineContainer.Addresses.PlayActionTimeline.Value, ActionTimelinePlayDetour));
     }
 
     private void CharacterUpdateDetour(GameObject* obj)
@@ -132,21 +142,31 @@ public sealed unsafe partial class ActorPreviewRuntime
         }
     }
 
-    private void TimelinePlayDetour(ActionTimelineSequencer* sequence, ushort id, void* param)
+    private bool TimelinePlayDetour(ActionTimelineSequencer* sequence, ushort id, void* param)
     {
-        if (!framework.IsInFrameworkUpdateThread) { timelinePlay!.Original(sequence,id,param); return; }
+        if (!framework.IsInFrameworkUpdateThread) return timelinePlay!.Original(sequence,id,param);
         var source = Bound();
-        if (!framework.IsInFrameworkUpdateThread || source == null || sequence != &source->Timeline.TimelineSequencer || !IsSourceEmoteTimeline(id,out var emote)) { timelinePlay!.Original(sequence,id,param); return; }
+        if (source == null || sequence != &source->Timeline.TimelineSequencer || !IsSourceEmoteTimeline(id,out var emote)) return timelinePlay!.Original(sequence,id,param);
         var intent = new NativeIntent(PreviewSlot.Emote,emote);
-        RunNative(intent, () => { timelinePlay!.Original(sequence,id,param); handoff.ReportDecision(intent,true); if (emote!=0) Raise(ExternalEmoteAccepted,emote); return true; },false);
+        return RunNative(intent, () => {
+            bool accepted = timelinePlay!.Original(sequence,id,param);
+            handoff.ReportDecision(intent,accepted);
+            if (accepted && emote!=0) Raise(ExternalEmoteAccepted,emote);
+            return accepted;
+        },false);
     }
 
-    private void ActionTimelinePlayDetour(TimelineContainer* timeline, ushort intro, ushort loop, void* param)
+    private bool ActionTimelinePlayDetour(TimelineContainer* timeline, ushort intro, ushort loop, void* param)
     {
-        if (!framework.IsInFrameworkUpdateThread) { actionTimelinePlay!.Original(timeline,intro,loop,param); return; }
+        if (!framework.IsInFrameworkUpdateThread) return actionTimelinePlay!.Original(timeline,intro,loop,param);
         var source = Bound();
-        if (!framework.IsInFrameworkUpdateThread || source == null || timeline != &source->Timeline || !(IsSourceEmoteTimeline(intro,out var emote) || IsSourceEmoteTimeline(loop,out emote))) { actionTimelinePlay!.Original(timeline,intro,loop,param); return; }
+        if (source == null || timeline != &source->Timeline || !(IsSourceEmoteTimeline(intro,out var emote) || IsSourceEmoteTimeline(loop,out emote))) return actionTimelinePlay!.Original(timeline,intro,loop,param);
         var intent = new NativeIntent(PreviewSlot.Emote,emote);
-        RunNative(intent, () => { actionTimelinePlay!.Original(timeline,intro,loop,param); handoff.ReportDecision(intent,true); if (emote!=0) Raise(ExternalEmoteAccepted,emote); return true; },false);
+        return RunNative(intent, () => {
+            bool accepted = actionTimelinePlay!.Original(timeline,intro,loop,param);
+            handoff.ReportDecision(intent,accepted);
+            if (accepted && emote!=0) Raise(ExternalEmoteAccepted,emote);
+            return accepted;
+        },false);
     }
 }

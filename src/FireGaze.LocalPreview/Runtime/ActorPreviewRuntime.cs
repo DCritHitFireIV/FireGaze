@@ -289,8 +289,8 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             case Hook<FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject.Delegates.DisableDraw> h: h.Enable(); break;
             case Hook<CompanionContainer.Delegates.SetupCompanion> h: h.Enable(); break;
             case Hook<OrnamentContainer.Delegates.SetupOrnament> h: h.Enable(); break;
-            case Hook<ActionTimelineSequencer.Delegates.PlayTimeline> h: h.Enable(); break;
-            case Hook<TimelineContainer.Delegates.PlayActionTimeline> h: h.Enable(); break;
+            case Hook<PlayTimelineNative> h: h.Enable(); break;
+            case Hook<PlayActionTimelineNative> h: h.Enable(); break;
         }
     }
 

@@ -67,7 +67,7 @@ public sealed class GposeEmoteMemory
         return entry;
     }
 
-    /// <summary>An active trial sit belongs to this entry only, never persistent history.</summary>
+    /// <summary>The current trial or native sit belongs to this entry only, never persistent history.</summary>
     public long BeginPostureEntry(ulong owner,ushort id,byte requestedPose)
     {
         long token=BeginEntry(owner);
@@ -75,8 +75,8 @@ public sealed class GposeEmoteMemory
         return token;
     }
 
-    /// <summary>The native photo copy already inherits the current real seated posture.</summary>
-    public long BeginNativePostureEntry(ulong owner)
+    /// <summary>An unidentified native posture cannot authorize an invented local replay.</summary>
+    public long BeginUnidentifiedPostureEntry(ulong owner)
     {
         long token=BeginEntry(owner);entryEmote=0;entryNeedsIdle=false;return token;
     }

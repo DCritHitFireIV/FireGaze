@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Dalamud.Plugin.Services;
+using Dalamud.Plugin;
 using FireGaze;
 
 internal static class LocalPreviewSettingsTests
@@ -13,6 +14,7 @@ internal static class LocalPreviewSettingsTests
         var kindType = typeof(Configuration).Assembly.GetType("FireGaze.LocalPreview.Interaction.PreviewKind")!;
         await VerifyDisposeDispatch(featureType, check);
         await VerifyUiDispatch(featureType, kindType, check);
+        await VerifyEnableConfirmation(featureType, check);
         foreach (var name in new[] { "Mount", "Minion", "Accessory", "Emote" })
         {
             var (feature, config, framework) = Fixture(featureType);
@@ -83,6 +85,50 @@ internal static class LocalPreviewSettingsTests
                 commandConfig.LocalPreviewEmoteEnabled && commandConfig.LocalPreviewItemMenusEnabled,
                 "invalid settings command cannot mutate preferences: " + arguments);
         }
+    }
+
+    private static async Task VerifyEnableConfirmation(Type featureType, Action<bool, string> check)
+    {
+        var request = featureType.GetMethod("RequestEnabled", Instance)!;
+        var complete = featureType.GetMethod("CompleteEnableConfirmation", Instance)!;
+        var (feature, config, framework) = Fixture(featureType);
+        config.LocalPreviewEnabled = false;
+        featureType.GetField("enabled", Instance)!.SetValue(feature, false);
+        request.Invoke(feature, [true]);
+        check(!config.LocalPreviewEnabled && framework.Saves == 0 && framework.Schedules == 0,
+            "opening the real enable confirmation does not enable or save preview");
+        complete.Invoke(feature, [false]);
+        check(!config.LocalPreviewEnabled && framework.Saves == 0,
+            "canceling the real enable confirmation keeps preview disabled");
+        framework.HoldDispatch = true;
+        request.Invoke(feature, [true]);
+        await Task.Run(() => complete.Invoke(feature, [true]));
+        check(!config.LocalPreviewEnabled && framework.Saves == 0 && framework.Schedules == 1,
+            "confirming from render queues configuration and runtime activation on framework");
+        framework.Flush();
+        check(config.LocalPreviewEnabled && (bool)featureType.GetField("enabled", Instance)!.GetValue(feature)!
+                && framework.Saves == 1 && !config.LocalPreviewChatLinksEnabled,
+            "framework confirmation enables all preview menus while chat linking remains opted out");
+        featureType.GetMethod("SetEnabled", Instance)!.Invoke(feature, [false]);
+        framework.Flush();
+        request.Invoke(feature, [true]);
+        check(!config.LocalPreviewEnabled && (bool)featureType.GetField("enableConfirmationVisible", Instance)!.GetValue(feature)!,
+            "every new off-to-on request requires confirmation again");
+        complete.Invoke(feature, [false]);
+        check(!config.LocalPreviewEnabled && framework.Saves == 2,
+            "closing a later confirmation cannot reuse earlier consent to enable preview");
+
+        var (released, releaseConfig, releaseFramework) = Fixture(featureType);
+        ((SettingsPluginProxy)(object)featureType.GetField("pluginInterface", Instance)!.GetValue(released)!).IsDev = false;
+        releaseConfig.LocalPreviewEnabled = false;
+        featureType.GetField("enabled", Instance)!.SetValue(released, false);
+        await Task.Run(() => featureType.GetMethod("OnCommand")!.Invoke(released, ["on"]));
+        check(!releaseConfig.LocalPreviewEnabled && releaseFramework.Saves == 0 && releaseFramework.ChatCalls == 1
+                && (bool)featureType.GetField("enableConfirmationVisible", Instance)!.GetValue(released)!,
+            "release on command opens the same confirmation instead of bypassing consent");
+        await Task.Run(() => featureType.GetMethod("OnCommand")!.Invoke(released, ["option mount off"]));
+        check(releaseConfig.LocalPreviewMountEnabled && releaseFramework.Saves == 0,
+            "release commands cannot expose hidden individual category preferences");
     }
 
     private static async Task VerifyDisposeDispatch(Type featureType, Action<bool, string> check)
@@ -161,6 +207,7 @@ internal static class LocalPreviewSettingsTests
         {
             ("SetEnabled", [false]), ("Cancel", []), ("CancelSlot", [Enum.Parse(slotType, "Mount")]),
             ("SetCategory", [Enum.Parse(kindType, "Mount"), false]), ("SetItemMenus", [false]),
+            ("SetChatLinks", [true]),
             ("Request", [Enum.Parse(kindType, "Mount"), (uint)1]),
         })
         {
@@ -186,6 +233,7 @@ internal static class LocalPreviewSettingsTests
                 "SetEnabled" => !config.LocalPreviewEnabled && framework.Saves == 1,
                 "SetCategory" => !config.LocalPreviewMountEnabled && framework.Saves == 1,
                 "SetItemMenus" => !config.LocalPreviewItemMenusEnabled && framework.Saves == 1,
+                "SetChatLinks" => config.LocalPreviewChatLinksEnabled && framework.Saves == 1,
                 "Request" => framework.ChatCalls == 1,
                 "Cancel" => (string?)featureType.GetField("lastMessage", Instance)!.GetValue(feature) == "全部试用已结束",
                 _ => framework.ChatCalls == 0 && framework.Saves == 0,
@@ -197,7 +245,7 @@ internal static class LocalPreviewSettingsTests
             featureType.GetField("disposed", Instance)!.SetValue(disposedFeature, true);
             disposedFramework.Flush();
             check(disposedConfig.LocalPreviewEnabled && disposedConfig.LocalPreviewMountEnabled &&
-                disposedConfig.LocalPreviewItemMenusEnabled && disposedFramework.Saves == 0 && disposedFramework.ChatCalls == 0 &&
+                disposedConfig.LocalPreviewItemMenusEnabled && !disposedConfig.LocalPreviewChatLinksEnabled && disposedFramework.Saves == 0 && disposedFramework.ChatCalls == 0 &&
                 featureType.GetField("lastMessage", Instance)!.GetValue(disposedFeature) is null,
                 method + " queued before unload cannot mutate or call client services after disposal");
         }
@@ -232,11 +280,13 @@ internal static class LocalPreviewSettingsTests
 
     private static (object Feature, Configuration Config, SettingsFrameworkProxy Framework) Fixture(Type featureType)
     {
-        var config = new Configuration();
+        var config = new Configuration { LocalPreviewEnabled = true, LocalPreviewSettingsRevision = 1 };
         var service = DispatchProxy.Create<IFramework, SettingsFrameworkProxy>();
         var framework = (SettingsFrameworkProxy)(object)service;
         var feature = RuntimeHelpers.GetUninitializedObject(featureType);
         featureType.GetField("Framework", Instance)!.SetValue(feature, service);
+        var plugin = DispatchProxy.Create<IDalamudPluginInterface, SettingsPluginProxy>();
+        featureType.GetField("pluginInterface", Instance)!.SetValue(feature, plugin);
         var chat = DispatchProxy.Create<IChatGui, SettingsChatProxy>();
         ((SettingsChatProxy)(object)chat).OnPrint = () =>
         {
@@ -253,6 +303,13 @@ internal static class LocalPreviewSettingsTests
         }));
         return (feature, config, framework);
     }
+}
+
+public class SettingsPluginProxy : DispatchProxy
+{
+    public bool IsDev = true;
+    protected override object? Invoke(MethodInfo? method, object?[]? arguments)
+        => method!.Name == "get_IsDev" ? IsDev : throw new NotSupportedException(method.Name);
 }
 
 public class SettingsChatProxy : DispatchProxy

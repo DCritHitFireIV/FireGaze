@@ -53,6 +53,7 @@ foreach (var (tokens, name) in new (string[]?, string)[]
     (["option", "", "on"], "empty preference"), (["option", "mount", ""], "empty value"),
 })
     ParseOption(tokens, false, "rejects " + name);
+MarketItemMenuCases.Run(Check);
 // Chat item links belong to the native DEFAULT menu. Reading an inventory slot
 // or a remembered link would miss this route or attach the previous item's action.
 var chatItem = new ChatItemMenuContext(true, "ChatLog", 81, 100, 100, 81, 200, true, 52272);
@@ -258,6 +259,21 @@ if (sqpackOption >= 0 && sqpackOption + 1 < args.Length)
         var selected = items.GetRow(selectedId).ItemAction.Value;
         Check(ResolveUnlock(selected.Action.RowId, selected.Data[0]).Single() == new MenuPreviewRequest(kind, collectionId),
             "current CN chat collection item reaches its exact preview action: " + itemId);
+        foreach (var marketContext in new[]
+        {
+            new MarketItemMenuContext(true, "ItemSearch", 81, 100, 100, 81, 200,
+                true, false, 81, 264, itemId, 0, 0, 0, 0, 0),
+            new MarketItemMenuContext(true, "ItemSearchResult", 82, 100, 100, 82, 200,
+                false, true, 81, 0, 0, itemId, 3, itemId, 9999, 3),
+        })
+        {
+            Check(MarketItemMenuResolver.TryResolve(marketContext, out var marketItemId),
+                "current CN collection item resolves from the native market menu: " + marketContext.AddonName + "/" + itemId);
+            var marketAction = items.GetRow(marketItemId).ItemAction.Value;
+            Check(ResolveUnlock(marketAction.Action.RowId, marketAction.Data[0]).Single()
+                    == new MenuPreviewRequest(kind, collectionId),
+                "market item reaches its exact CN collection instead of an earlier menu item: " + itemId);
+        }
     }
     var supportedCollectionItems = items.Where(item => item.ItemAction.IsValid
         && item.ItemAction.Value.Action.RowId is 1322 or 853 or 20086).ToArray();

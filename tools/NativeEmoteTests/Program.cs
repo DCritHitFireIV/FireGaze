@@ -125,6 +125,7 @@ unsafe sealed class PlaybackFixture : IDisposable
         table[23]=(nint)(delegate* unmanaged<GameObject*,DrawObject*>)&GetDraw;
         source->EntityId=500;clone->EntityId=700;clone->ObjectIndex=207;
         source->Mount.OwnerObject=source;clone->Mount.OwnerObject=clone;
+        source->Vfx.OwnerObject=source;clone->Vfx.OwnerObject=clone;
         source->Timeline.OwnerObject=source;clone->Timeline.OwnerObject=clone;
         source->Timeline.TimelineSequencer.Parent=source;clone->Timeline.TimelineSequencer.Parent=clone;
         source->DrawObject=sourceDraw;clone->DrawObject=cloneDraw;mount->DrawObject=mountDraw;

@@ -507,6 +507,7 @@ unsafe class Program
         {
             current=this; *(nint**)Source=table; *(nint**)Clone=table; table[1]=(nint)(delegate* unmanaged<GameObject*,ulong>)&Identity;
             Source->EntityId=500; Source->ObjectIndex=0; Clone->EntityId=700; Clone->ObjectIndex=207; Source->Mount.OwnerObject=Source; Clone->Mount.OwnerObject=Clone;
+            Source->Vfx.OwnerObject=Source; Clone->Vfx.OwnerObject=Clone;
             Source->Mount.MountId=baselineMount; Source->Mode=baselineMount==0?CharacterModes.Normal:CharacterModes.Mounted; Clone->Mount.MountId=446; Clone->EmoteController.EmoteId=71; Clone->Mode=CharacterModes.Mounted;
             Source->Timeline.TimelineSequencer.TimelineIds[0]=baselineTimeline;
             Manager->BattleCharas[207].BattleChara=(BattleChara*)Clone;

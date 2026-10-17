@@ -209,7 +209,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
     }
 
     /// <summary>
-    /// Follow the genuine local player's transform and target. Return true once the display
+    /// Follow the genuine local player's transform, target and selected voice. Return true once the display
     /// actor is visible. Presentation state on the clone is left to the preview runtime.
     /// </summary>
     public bool Tick(NativeCharacter* source)
@@ -423,8 +423,14 @@ public sealed unsafe class NativePreviewActor : IDisposable
         if (GetSource() != source || GetOwnedActor() != actor) return false;
         actor->GameObject.SetRotation(rotation);
         if (GetSource() != source || GetOwnedActor() != actor) return false;
+        if (!IsCurrentAllocation(actor) || source->Vfx.OwnerObject != source || actor->Vfx.OwnerObject != actor) return false;
         actor->TargetId = target;
         actor->SoftTargetId = softTarget;
+        // VoiceId is outside CustomizeData. Both native appearance setup calls
+        // choose a race/sex default, which need not be the player's selected voice.
+        // Only the owned display actor follows the live player's current setting;
+        // the native animation sound events still choose their normal variation.
+        actor->Vfx.VoiceId = source->Vfx.VoiceId;
         return true;
     }
 

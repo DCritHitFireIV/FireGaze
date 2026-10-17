@@ -27,6 +27,7 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     private readonly IPluginLog log;
     private readonly Action<PreviewKind, uint> requestPreview;
     private readonly Func<PreviewMenuOptions> options;
+    private readonly Func<bool> chatLinksAllowed;
     private readonly IReadOnlyDictionary<uint, uint> emoteUnlockLinks;
     private readonly NativeEmoteLogCapture nativeLogCapture;
     private EmoteChatLink? chatLink;
@@ -57,7 +58,8 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         IDataManager data, IClientState clientState, IGameInteropProvider interop, IPluginLog log,
         Action<PreviewKind, uint> requestPreview,
         Func<(ulong OwnerId, ushort EmoteId)?>? currentNativeEmote = null,
-        IAddonLifecycle? addonLifecycle = null, Func<PreviewMenuOptions>? options = null)
+        IAddonLifecycle? addonLifecycle = null, Func<PreviewMenuOptions>? options = null,
+        Func<bool>? chatLinksAllowed = null)
     {
         this.menus = menus;
         this.chat = chat;
@@ -67,6 +69,7 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         this.log = log;
         this.requestPreview = requestPreview;
         this.options = options ?? (() => new());
+        this.chatLinksAllowed = chatLinksAllowed ?? (() => true);
         this.emoteUnlockLinks = data.GetExcelSheet<Emote>().Where(emote => emote.RowId != 0 && emote.UnlockLink != 0)
             .ToDictionary(emote => emote.RowId, emote => emote.UnlockLink);
         this.nativeLogCapture = new(data, interop, log, (message, id) => WrapEmoteMessage(message, id));
@@ -82,11 +85,11 @@ public sealed unsafe class PreviewInteractionService : IDisposable
     /// </summary>
     public bool EnableNativeChatLinks()
     {
-        if (disposed) return false;
+        if (disposed || !chatLinksAllowed()) return false;
         if (chatProbeEnabled) return nativeLogCapture.Enabled;
         try
         {
-            chatLink = new(chat, () => !disposed && options().Emote, id =>
+            chatLink = new(chat, () => !disposed && options().Emote && chatLinksAllowed(), id =>
             {
                 if (Valid(new(PreviewKind.Emote, id))) requestPreview(PreviewKind.Emote, id);
             });
@@ -157,7 +160,7 @@ public sealed unsafe class PreviewInteractionService : IDisposable
                 return;
             }
 
-            if (TryGetChatItem(args, out var chatItemId))
+            if (TryGetChatItem(args, out var chatItemId) || TryGetMarketItem(args, out chatItemId))
             {
                 if (!options().Items) return;
                 var requests = ResolveItems(chatItemId);
@@ -209,6 +212,25 @@ public sealed unsafe class PreviewInteractionService : IDisposable
         return ChatItemMenuResolver.TryResolve(new(true, args.AddonName, addon->Id, args.AgentPtr,
             (nint)context, context->OwnerAddon, (nint)chatLog, args.EventInterfaces.Contains((nint)chatLog),
             chatLog->ContextItemId), out itemId);
+    }
+
+    private static bool TryGetMarketItem(IMenuOpenedArgs args, out uint itemId)
+    {
+        itemId = 0;
+        if (args.MenuType != ContextMenuType.Default || args.AddonPtr == 0
+            || !MarketItemMenuResolver.IsMarketAddon(args.AddonName)) return false;
+        var context = AgentContext.Instance();
+        var itemSearch = AgentItemSearch.Instance();
+        if (context == null || itemSearch == null || args.AgentPtr != (nint)context) return false;
+        var addon = (AtkUnitBase*)args.AddonPtr;
+        var hovered = itemSearch->ResultHoveredItem;
+        return MarketItemMenuResolver.TryResolve(new(true, args.AddonName, addon->Id, args.AgentPtr,
+            (nint)context, context->OwnerAddon, (nint)itemSearch,
+            args.EventInterfaces.Contains((nint)itemSearch),
+            args.EventInterfaces.Contains((nint)itemSearch + MarketItemMenuResolver.ResultEventInterfaceOffset),
+            itemSearch->AddonId, (nint)context->UpdateChecker, context->UpdateCheckerParam,
+            itemSearch->ResultItemId, itemSearch->ResultSelectedIndex, hovered.ItemId,
+            (uint)hovered.Container, hovered.Slot), out itemId);
     }
 
     private bool Valid(MenuPreviewRequest request) => request.Kind switch
