@@ -1,1 +1,721 @@
-{"type":"uit-contribution","plugin":"Orbwalker","kinds":["llm"],"entries":[{"Original":"Slidecast Mode (Click to enable)","Translated":"滑步模式（点击启用）","Context":"ImGuiOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Slidecast Mode (Active)","Translated":"滑步模式（已启用）","Context":"ImGuiOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Lock Movement (Click to enable)","Translated":"锁定移动（点击启用）","Context":"ImGuiOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Lock Movement (Active)","Translated":"锁定移动（已启用）","Context":"ImGuiOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Plugin Enabled (Click to disable)","Translated":"插件已启用（点击禁用）","Context":"ImGuiOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Plugin Disabled (Click to enable)","Translated":"插件已禁用（点击启用）","Context":"ImGuiOverlay.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Orbwalker","Translated":"奥布行者","Context":"Orbwalker.get_Name","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ AboutTab.Draw"},{"Original":"OrbwalkerOverlay","Translated":"Orbwalker Overlay","Context":"Overlay..ctor","Source":"library","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Default","Translated":"默认","Context":"UI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Settings","Translated":"设置","Context":"UI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Classes/Jobs","Translated":"职业/特职","Context":"UI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Extras","Translated":"扩展","Context":"UI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"About","Translated":"关于","Context":"UI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Debug","Translated":"调试","Context":"UI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Enable Orbwalker","Translated":"启用 Orbwalker","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Controller Mode","Translated":"手柄模式","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Enable this to configure Controller specific options instead.","Translated":"启用后将改为配置手柄专用选项。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Movement","Translated":"移动","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Slidecast Window Calibration","Translated":"滑步窗口校准","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Switch between automatic slidecast window calibration or manually setting a value.\n\n\"Automatic\" mode is fully reliable, but will always result in smaller slidecast windows. You may also need to manually configure based on current spell speed or network latency.","Translated":"在自动滑步窗口校准与手动设置数值之间切换。\n\n“自动”模式完全可靠，但滑步窗口始终较小。你可能还需要根据当前咏速或网络延迟进行手动配置。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Automatic","Translated":"自动","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.RadioButtonBool"},{"Original":"Manual","Translated":"手动","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.RadioButtonBool"},{"Original":"Unlock at, s","Translated":"解锁于，秒","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Orbwalking Mode","Translated":"走位模式","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Switch between two available Orbwalking modes:\n\n \"Slidecast\" mode is the default and simply prevents player movement until the slidecast window is available, locking movement again to begin the next cast. You must be stationary for the first cast in most cases. \n\n\"Slidelock\" mode on the otherhand permanently locks the player from moving while in combat and only allows for movement during the slidecast window. The movement release key is the only way to enable movement when this mode is used.","Translated":"在两种可用的走位模式之间切换：\n\n“滑步”模式为默认模式，仅阻止玩家在滑步窗口可用前移动，并在开始下一次咏唱时再次锁定移动。大多数情况下，首次咏唱时你必须保持静止。\n\n“滑锁”模式则会在战斗中永久锁定玩家移动，仅在滑步窗口期间允许移动。使用此模式时，移动释放键是启用移动的唯一方式。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Slidecast","Translated":"滑步","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Slidelock","Translated":"滑锁","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Buffer Initial Cast","Translated":"缓冲首次咏唱","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Removes the requirement for the player to be stationary when channeling the first cast by buffering it until movement is halted. This setting may cause strange behavior with plugins such as Redirect or ReAction, or prevent their options from working at all, be warned!","Translated":"通过缓冲首次咏唱直到移动停止，移除玩家在引导首次咏唱时必须静止的要求。此设置可能导致 Redirect 或 ReAction 等插件出现异常行为，或使其选项完全失效，请注意！","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Block All Movement","Translated":"阻止所有移动","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Blocks all movement when holding down a specified key.","Translated":"按住指定按键时阻止所有移动。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Bind a key to fully block any character movement.","Translated":"绑定一个按键以完全阻止任何角色移动。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Bind a key to instantly unlock player movement and cancel any channeling cast. Note that movement is only enabled whilst the key is held, therefore a mouse button is recommended.","Translated":"绑定一个按键以立即解锁玩家移动并取消任何正在引导的咏唱。注意，仅在按住该键时才会启用移动，因此推荐使用鼠标按键。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Permanently Release","Translated":"永久释放","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Releases player movement - used primarily by the release key setting above.","Translated":"释放玩家移动——主要供上方的释放键设置使用。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Release Key Mode:","Translated":"释放键模式：","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Switches the movement release key from needing to be held, to becoming a toggle.","Translated":"将移动释放键从需要按住切换为开关模式。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Hold","Translated":"按住","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.RadioButtonBool"},{"Original":"Toggle","Translated":"开关","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.RadioButtonBool"},{"Original":"Enable Mouse Button Release","Translated":"启用鼠标按键释放","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Allows emergency movement via holding down MB1 and MB2 simultaneously.","Translated":"允许同时按住鼠标左键和右键进行紧急移动。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Movement keys:","Translated":"移动按键：","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextV"},{"Original":"Ground Targeting Hold (seconds):","Translated":"地面选定目标按住时间（秒）：","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextV"},{"Original":"Spells which have cast times that are also targeted on the ground (mainly found in BLU) register casting as the target appears, and will cancel cast times if moving as it's confirmed. This option forces your character to stop as the target appears for however long as to not cancel the cast pre-emptively.","Translated":"具有咏唱时间且需在地面选定目标的技能（主要见于青魔）会在目标出现时开始咏唱，若此时移动则会因确认目标而取消咏唱。此选项会强制角色在目标出现时停止移动，持续相应时间，以避免提前取消咏唱。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Overlay","Translated":"悬浮窗","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Image-based","Translated":"基于图像","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.RadioButtonBool"},{"Original":"Vector-based","Translated":"基于矢量","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.RadioButtonBool"},{"Original":"Display Overlay","Translated":"显示悬浮窗","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Choose when to display the Orbwalker overlay when enabled.","Translated":"选择启用时显示 Orbwalker 悬浮窗的时机。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"In Combat","Translated":"战斗中","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"In Duty","Translated":"任务中","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Always","Translated":"始终","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Overlay scale","Translated":"悬浮窗缩放","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Vertical layout","Translated":"垂直布局","Context":"UI.Settings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Display buttons vertically instead of horizontally. Only available with vector-based overlay.","Translated":"以垂直而非水平方式显示按钮。仅适用于基于矢量的悬浮窗。","Context":"UI.Settings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Jobs","Translated":"职业","Context":"UI.Jobs","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Select the jobs you wish to use Orbwalker's movement locking features on. Not all jobs have cast times, but if you have the extra features enabled for the general actions it will apply to those jobs.","Translated":"选择你希望使用 Orbwalker 移动锁定功能的职业。并非所有职业都有咏唱时间，但若你为通用动作启用了额外功能，这些功能也会应用于这些职业。","Context":"UI.Jobs","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Toggle:","Translated":"切换：","Context":"UI.Jobs","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.TextV"},{"Original":"All","Translated":"全部","Context":"UI.Jobs","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Casters","Translated":"法系","Context":"UI.Jobs","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"DoH","Translated":"生产职业","Context":"UI.Jobs","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"DoL","Translated":"采集职业","Context":"UI.Jobs","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Current: ","Translated":"当前：","Context":"UI.Jobs","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Job-specific Actions","Translated":"职业技能","Context":"UI.Extras","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Actions that are not technically casts but can be interrupted or stopped early due to movement of any kind.","Translated":"严格来说并非读条，但会因任何移动而被打断或提前中止的技能。","Context":"UI.Extras","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Block movement when these actions are active:","Translated":"这些技能激活时禁止移动：","Context":"UI.Extras","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Passage of Arms (PLD)","Translated":"武装戍卫（PLD）","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Flamethrower (MCH)","Translated":"火焰喷射器（MCH）","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Meditate (SAM)","Translated":"默想（SAM）","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Improvisation (DNC)","Translated":"即兴表演（DNC）","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Phantom Flurry (BLU)","Translated":"鬼宿脚（BLU）","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Miscellaneous Casts","Translated":"其他读条","Context":"UI.Extras","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Block movement when these actions are being casted:","Translated":"这些技能读条时禁止移动：","Context":"UI.Extras","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Teleport","Translated":"传送","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Return","Translated":"返回","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"PvP","Translated":"玩家对战","Context":"UI.Extras","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Enable PvP Orbwalking","Translated":"启用 PvP 走位","Context":"UI.Extras","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Allows use when in PvP game modes such as Frontlines and Crystaline Conflict.\n\nThis is considered an unfair advantage over other players so use at your own risk (and conscious).","Translated":"允许在战场、水晶冲突等 PvP 模式中使用。\n\n这被视为对其他玩家的不公平优势，请自行承担风险（并保持清醒）。","Context":"UI.Extras","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"GCD: ","Translated":"GCD：","Context":"UI.Debug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"\nRCorGRD:","Translated":"RCorGRD：","Context":"UI.Debug","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Now press new key...","Translated":"请按下新按键...","Context":"UI.DrawKeybind","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Auto-detect new key","Translated":"自动检测新按键","Context":"UI.DrawKeybind","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Select key manually:","Translated":"手动选择按键：","Context":"UI.DrawKeybind","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"ECommonsButton","Translated":"电子共享按钮","Context":"UI.DrawKeybind","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGuiEx.IconButton"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Orbwalker",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Slidecast Mode (Click to enable)",
+      "Translated": "滑步模式（点击启用）",
+      "Context": "ImGuiOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Slidecast Mode (Active)",
+      "Translated": "滑步模式（已启用）",
+      "Context": "ImGuiOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Lock Movement (Click to enable)",
+      "Translated": "锁定移动（点击启用）",
+      "Context": "ImGuiOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Lock Movement (Active)",
+      "Translated": "锁定移动（已启用）",
+      "Context": "ImGuiOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Plugin Enabled (Click to disable)",
+      "Translated": "插件已启用（点击禁用）",
+      "Context": "ImGuiOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Plugin Disabled (Click to enable)",
+      "Translated": "插件已禁用（点击启用）",
+      "Context": "ImGuiOverlay.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Orbwalker",
+      "Translated": "奥布行者",
+      "Context": "Orbwalker.get_Name",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ AboutTab.Draw"
+    },
+    {
+      "Original": "OrbwalkerOverlay",
+      "Translated": "Orbwalker Overlay",
+      "Context": "Overlay..ctor",
+      "Source": "library",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "UI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "UI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Classes/Jobs",
+      "Translated": "职业/特职",
+      "Context": "UI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Extras",
+      "Translated": "扩展",
+      "Context": "UI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "UI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "UI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Enable Orbwalker",
+      "Translated": "启用 Orbwalker",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Controller Mode",
+      "Translated": "手柄模式",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Enable this to configure Controller specific options instead.",
+      "Translated": "启用后将改为配置手柄专用选项。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Movement",
+      "Translated": "移动",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Slidecast Window Calibration",
+      "Translated": "滑步窗口校准",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Switch between automatic slidecast window calibration or manually setting a value.\n\n\"Automatic\" mode is fully reliable, but will always result in smaller slidecast windows. You may also need to manually configure based on current spell speed or network latency.",
+      "Translated": "在自动滑步窗口校准与手动设置数值之间切换。\n\n“自动”模式完全可靠，但滑步窗口始终较小。你可能还需要根据当前咏速或网络延迟进行手动配置。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Automatic",
+      "Translated": "自动",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool"
+    },
+    {
+      "Original": "Manual",
+      "Translated": "手动",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool"
+    },
+    {
+      "Original": "Unlock at, s",
+      "Translated": "解锁于，秒",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Orbwalking Mode",
+      "Translated": "走位模式",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Switch between two available Orbwalking modes:\n\n \"Slidecast\" mode is the default and simply prevents player movement until the slidecast window is available, locking movement again to begin the next cast. You must be stationary for the first cast in most cases. \n\n\"Slidelock\" mode on the otherhand permanently locks the player from moving while in combat and only allows for movement during the slidecast window. The movement release key is the only way to enable movement when this mode is used.",
+      "Translated": "在两种可用的走位模式之间切换：\n\n“滑步”模式为默认模式，仅阻止玩家在滑步窗口可用前移动，并在开始下一次咏唱时再次锁定移动。大多数情况下，首次咏唱时你必须保持静止。\n\n“滑锁”模式则会在战斗中永久锁定玩家移动，仅在滑步窗口期间允许移动。使用此模式时，移动释放键是启用移动的唯一方式。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Slidecast",
+      "Translated": "滑步",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Slidelock",
+      "Translated": "滑锁",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Buffer Initial Cast",
+      "Translated": "缓冲首次咏唱",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Removes the requirement for the player to be stationary when channeling the first cast by buffering it until movement is halted. This setting may cause strange behavior with plugins such as Redirect or ReAction, or prevent their options from working at all, be warned!",
+      "Translated": "通过缓冲首次咏唱直到移动停止，移除玩家在引导首次咏唱时必须静止的要求。此设置可能导致 Redirect 或 ReAction 等插件出现异常行为，或使其选项完全失效，请注意！",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Block All Movement",
+      "Translated": "阻止所有移动",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Blocks all movement when holding down a specified key.",
+      "Translated": "按住指定按键时阻止所有移动。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Bind a key to fully block any character movement.",
+      "Translated": "绑定一个按键以完全阻止任何角色移动。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Bind a key to instantly unlock player movement and cancel any channeling cast. Note that movement is only enabled whilst the key is held, therefore a mouse button is recommended.",
+      "Translated": "绑定一个按键以立即解锁玩家移动并取消任何正在引导的咏唱。注意，仅在按住该键时才会启用移动，因此推荐使用鼠标按键。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Permanently Release",
+      "Translated": "永久释放",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Releases player movement - used primarily by the release key setting above.",
+      "Translated": "释放玩家移动——主要供上方的释放键设置使用。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Release Key Mode:",
+      "Translated": "释放键模式：",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Switches the movement release key from needing to be held, to becoming a toggle.",
+      "Translated": "将移动释放键从需要按住切换为开关模式。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Hold",
+      "Translated": "按住",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool"
+    },
+    {
+      "Original": "Toggle",
+      "Translated": "开关",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool"
+    },
+    {
+      "Original": "Enable Mouse Button Release",
+      "Translated": "启用鼠标按键释放",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Allows emergency movement via holding down MB1 and MB2 simultaneously.",
+      "Translated": "允许同时按住鼠标左键和右键进行紧急移动。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Movement keys:",
+      "Translated": "移动按键：",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV"
+    },
+    {
+      "Original": "Ground Targeting Hold (seconds):",
+      "Translated": "地面选定目标按住时间（秒）：",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV"
+    },
+    {
+      "Original": "Spells which have cast times that are also targeted on the ground (mainly found in BLU) register casting as the target appears, and will cancel cast times if moving as it's confirmed. This option forces your character to stop as the target appears for however long as to not cancel the cast pre-emptively.",
+      "Translated": "具有咏唱时间且需在地面选定目标的技能（主要见于青魔）会在目标出现时开始咏唱，若此时移动则会因确认目标而取消咏唱。此选项会强制角色在目标出现时停止移动，持续相应时间，以避免提前取消咏唱。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Overlay",
+      "Translated": "悬浮窗",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Image-based",
+      "Translated": "基于图像",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool"
+    },
+    {
+      "Original": "Vector-based",
+      "Translated": "基于矢量",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.RadioButtonBool"
+    },
+    {
+      "Original": "Display Overlay",
+      "Translated": "显示悬浮窗",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Choose when to display the Orbwalker overlay when enabled.",
+      "Translated": "选择启用时显示 Orbwalker 悬浮窗的时机。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "In Combat",
+      "Translated": "战斗中",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "In Duty",
+      "Translated": "任务中",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Always",
+      "Translated": "始终",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Overlay scale",
+      "Translated": "悬浮窗缩放",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Vertical layout",
+      "Translated": "垂直布局",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Display buttons vertically instead of horizontally. Only available with vector-based overlay.",
+      "Translated": "以垂直而非水平方式显示按钮。仅适用于基于矢量的悬浮窗。",
+      "Context": "UI.Settings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Jobs",
+      "Translated": "职业",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Select the jobs you wish to use Orbwalker's movement locking features on. Not all jobs have cast times, but if you have the extra features enabled for the general actions it will apply to those jobs.",
+      "Translated": "选择你希望使用 Orbwalker 移动锁定功能的职业。并非所有职业都有咏唱时间，但若你为通用动作启用了额外功能，这些功能也会应用于这些职业。",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Toggle:",
+      "Translated": "切换：",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TextV"
+    },
+    {
+      "Original": "All",
+      "Translated": "全部",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Casters",
+      "Translated": "法系",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "DoH",
+      "Translated": "生产职业",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "DoL",
+      "Translated": "采集职业",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Current: ",
+      "Translated": "当前：",
+      "Context": "UI.Jobs",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Job-specific Actions",
+      "Translated": "职业技能",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Actions that are not technically casts but can be interrupted or stopped early due to movement of any kind.",
+      "Translated": "严格来说并非读条，但会因任何移动而被打断或提前中止的技能。",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Block movement when these actions are active:",
+      "Translated": "这些技能激活时禁止移动：",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Passage of Arms (PLD)",
+      "Translated": "武装戍卫（PLD）",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Flamethrower (MCH)",
+      "Translated": "火焰喷射器（MCH）",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Meditate (SAM)",
+      "Translated": "默想（SAM）",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Improvisation (DNC)",
+      "Translated": "即兴表演（DNC）",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Phantom Flurry (BLU)",
+      "Translated": "鬼宿脚（BLU）",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Miscellaneous Casts",
+      "Translated": "其他读条",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Block movement when these actions are being casted:",
+      "Translated": "这些技能读条时禁止移动：",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Teleport",
+      "Translated": "传送",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Return",
+      "Translated": "返回",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "PvP",
+      "Translated": "玩家对战",
+      "Context": "UI.Extras",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Enable PvP Orbwalking",
+      "Translated": "启用 PvP 走位",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Allows use when in PvP game modes such as Frontlines and Crystaline Conflict.\n\nThis is considered an unfair advantage over other players so use at your own risk (and conscious).",
+      "Translated": "允许在战场、水晶冲突等 PvP 模式中使用。\n\n这被视为对其他玩家的不公平优势，请自行承担风险（并保持清醒）。",
+      "Context": "UI.Extras",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "GCD: ",
+      "Translated": "GCD：",
+      "Context": "UI.Debug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "\nRCorGRD:",
+      "Translated": "RCorGRD：",
+      "Context": "UI.Debug",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Now press new key...",
+      "Translated": "请按下新按键...",
+      "Context": "UI.DrawKeybind",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Auto-detect new key",
+      "Translated": "自动检测新按键",
+      "Context": "UI.DrawKeybind",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Select key manually:",
+      "Translated": "手动选择按键：",
+      "Context": "UI.DrawKeybind",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "ECommonsButton",
+      "Translated": "电子共享按钮",
+      "Context": "UI.DrawKeybind",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButton"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-17T10:24:37",
+  "imported": {
+    "archive": ""
+  },
+  "importedNote": "同一份投稿内容之前已经收到过了（issue #direct-2026-10-17T09-42-44-495Z-bde660cc），这次跳过（没有重复并入）。"
+}
