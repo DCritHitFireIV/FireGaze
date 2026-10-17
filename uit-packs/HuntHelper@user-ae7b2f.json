@@ -1,0 +1,483 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-17",
+    "source": "user",
+    "label": "玩家包 · ae7b2f",
+    "kinds": [
+      "free"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Hunt Helper",
+      "Translated": "狩猎助手",
+      "Context": "Plugin.get_Name",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "new expansion, who dis?",
+      "Translated": "新扩张，谁DIS ？",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "submit found spawn points to help make **INSERT EXPANSION NAME HERE** hunt map images?\n(this is from hunthelper btw)",
+      "Translated": "提交找到的生成点，以帮助制作* *在此处插入扩展名* *狩猎地图图像？\n（这是来自hunthelper btw ）",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "yes, never show me this again",
+      "Translated": "好了, 别再提示",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "no :(, never show me this again",
+      "Translated": "好了, 别再提示",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "You can opt in / out from the settings on the main map ui.",
+      "Translated": "您可以从主地图UI上的设置中选择加入/退出。",
+      "Context": "SubmitDataPrompt.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Can't find ",
+      "Translated": "“在范围内无法找到：",
+      "Context": "MapDataManager.LoadSpawnPointData",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Enabled",
+      "Translated": "已启用",
+      "Context": "HuntManager.GetDatabaseAsString",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "File ",
+      "Translated": "文件",
+      "Context": "HuntManager.LoadFilesIntoDic",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " missing... Please replace missing file(s).\n",
+      "Translated": "缺失...请更换缺失的文件。",
+      "Context": "HuntManager.LoadFilesIntoDic",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "name",
+      "Translated": "名称",
+      "Context": "CounterUI.DrawCounter",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "count",
+      "Translated": "计数",
+      "Context": "CounterUI.DrawCounter",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Chirp count does not affect BoP spawn, this info is just for fun.",
+      "Translated": "啁啾计数不会影响BoP生成，此信息只是为了好玩。",
+      "Context": "CounterUI.DrawCounter",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "May finish earlier based on the last failed fate before you entered the zone",
+      "Translated": "可以根据您进入该区域之前的最后一次失败命运提前完成",
+      "Context": "CounterUI.DrawNunWindowString",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Countdown: ",
+      "Translated": "开启倒计时:",
+      "Context": "CounterUI.DrawNunCountdownString",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "reset",
+      "Translated": "重置",
+      "Context": "CounterUI.DrawNunResetButton",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FAIL",
+      "Translated": "未通过",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "FAIL: NOT INITIATED",
+      "Translated": "失败：未启动",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Countdown reset.",
+      "Translated": "倒计时重置。",
+      "Context": "CounterUI.UpdateCurrentFates",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Fates",
+      "Translated": "命运",
+      "Context": "CounterUI.DrawCurrentFateUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Click a Fate to see it on the map.",
+      "Translated": "点击命运在地图上查看。",
+      "Context": "CounterUI.DrawCurrentFateUI",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "upcoming or requires activation - can fail if not activated in time",
+      "Translated": "即将到来或需要激活-如果未及时激活，可能会失败",
+      "Context": "CounterUI.GetFateTimeString",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Debug stuff",
+      "Translated": "调试东西",
+      "Context": "DebugUI.Draw",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Territory: ",
+      "Translated": "地区：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Territory ID: ",
+      "Translated": "区域ID ：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "pos: X: (",
+      "Translated": "X坐标",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "nearby hunts & object table debug",
+      "Translated": "附近的狩猎和对象表调试",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Nearby Mobs",
+      "Translated": "附近的暴徒",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "priority:",
+      "Translated": "优先：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "KIND: ",
+      "Translated": "种类:",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "NAMEID: ",
+      "Translated": "姓名ID ：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Found: ",
+      "Translated": "找到：",
+      "Context": "DebugUI.LocalObjects",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Random Debug Info?!:",
+      "Translated": "随机调试信息？ ！ ：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Content1 Region: ",
+      "Translated": "内容1区域：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Window Size: ",
+      "Translated": "窗口大小",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Window  Pos: ",
+      "Translated": "窗口位置：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "rotation: ",
+      "Translated": "旋光",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Player Pos: (",
+      "Translated": "玩家位置： （",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Player Pos: ",
+      "Translated": "玩家位置：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Map: ",
+      "Translated": "地图：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Coord size: ",
+      "Translated": "坐标大小：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Priority Mob:",
+      "Translated": "优先移动：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rank ",
+      "Translated": "清醒值排行",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Other nearby mobs:",
+      "Translated": "附近的其他暴徒：",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Rank: ",
+      "Translated": "品阶:",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Can't find local player",
+      "Translated": "找不到本地玩家",
+      "Context": "DebugUI.PositionalInfo",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "subIndex:",
+      "Translated": "上标",
+      "Context": "DebugUI.Aetherytes",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "territory:",
+      "Translated": "地区：",
+      "Context": "DebugUI.Aetherytes",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Not Found",
+      "Translated": "找不到",
+      "Context": "DebugUI.UpdateLocalStuff",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Show Map Name",
+      "Translated": "显示地图名称",
+      "Context": "HuntTrainUI.DrawHuntTrainWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Options Window",
+      "Translated": "选项窗口",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Spawn Point Filter",
+      "Translated": "生成点过滤器",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Select which Rank to display Spawn Points for",
+      "Translated": "选择要显示哪个排名的生成点",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use High-Contrast Colour",
+      "Translated": "使用高对比度颜色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Use a high-contrast colour for Spawn Points,\n\nCan be changed from Visuals > Colours",
+      "Translated": "对生成点使用高对比度颜色，\n\n可以从“视觉效果” > “颜色”进行更改",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "submit found hunt position data?",
+      "Translated": "提交找到的寻线位置数据？",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "opt in",
+      "Translated": "加入宣告",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "first",
+      "Translated": "第一頁",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "second",
+      "Translated": "秒",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "1#visualsizing",
+      "Translated": "1 # visualsizing",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "2#visualsizing",
+      "Translated": "2 # visualsizing",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "3#visualsizing",
+      "Translated": "3 # visualsizing",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "1#coloursizing",
+      "Translated": "1 #上色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "2#coloursizing",
+      "Translated": "2 #上色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "3#coloursizing",
+      "Translated": "3 #上色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Path Colour",
+      "Translated": "路径颜色",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Set Alpha (A) to zero to disable.",
+      "Translated": "将Alpha (A)设置为零以禁用。",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "#settingsLabel",
+      "Translated": "# settingsLabel",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "#settingsValue",
+      "Translated": "# settingsValue",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Hunt: <flag> <name> <rank> <hpp>\n\nCosmetic: <goldstar> <silverstar> <warning> <nocircle> <controllerbutton0> <controllerbutton1>\n <priorityworld> <elementallevel> <exclamationrectangle> <notoriousmonster> <alarm> <fanfestival>",
+      "Translated": "狩猎：<flag> <name> <rank> <hpp>\n\n外观： <goldstar> <silverstar> <warning> <nocircle> <controllerbutton0> <controllerbutton1>\n <priorityworld> <elementallevel> <exclamationrectangle> <notoriousmonster> <alarm> <fanfestival>",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Nearby Mob List",
+      "Translated": "附近的暴徒名单",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Language",
+      "Translated": "语言",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Translate",
+      "Translated": "翻译",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "If you want to help translate this plugin",
+      "Translated": "如果您想帮助翻译此插件",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": " -- click me",
+      "Translated": "点我",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "or dm me @ img#7855",
+      "Translated": "或dm me @ img # 7855",
+      "Context": "MapUI.DrawOptionsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "help, i've fallen over",
+      "Translated": "救命，我摔倒了",
+      "Context": "MapUI.DrawSettingsWindow",
+      "Source": "ai:public-caiyun"
+    },
+    {
+      "Original": "Buttons",
+      "Translated": "纽扣",
+      "Context": "SpawnPointFinderUI.DrawSpawnPointRefinementWindow",
+      "Source": "ai:public-caiyun"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
