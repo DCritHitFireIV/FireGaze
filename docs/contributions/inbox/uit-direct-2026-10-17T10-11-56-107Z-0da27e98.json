@@ -1,1 +1,3240 @@
-{"type":"uit-contribution","plugin":"TheCollector","kinds":["llm"],"entries":[{"Original":"Automation halted: ","Translated":"自动化已暂停：","Context":"AutomationHandler.Invoke","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":". Acknowledge it in the main window before retrying.","Translated":"。请在主窗口中确认后再重试。","Context":"AutomationHandler.Invoke","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Please configure your preferred shop territory in the Settings tab!","Translated":"请在设置标签页中配置你偏好的商店区域！","Context":"AutomationHandler.Invoke","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Still scanning vendor data — try again in a few seconds.","Translated":"仍在扫描商人数据 — 请稍等几秒后重试。","Context":"AutomationHandler.Invoke","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Still scanning Firmament data — try again in a few seconds.","Translated":"仍在扫描天穹街数据 — 请稍等几秒后重试。","Context":"AutomationHandler.Invoke","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Cannot start automation while in combat.","Translated":"战斗中无法启动自动化。","Context":"AutomationHandler.Invoke","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Cannot start automation while in a duty.","Translated":"任务中无法启动自动化。","Context":"AutomationHandler.Invoke","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Automation is already running.","Translated":"自动化已在运行中。","Context":"AutomationHandler.InvokeBuy","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Automation stopped: ","Translated":"自动化已停止：","Context":"AutomationHandler.TripHardFail","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Inventory near full — pausing Artisan to turn collectables in.","Translated":"背包接近满 — 暂停 Artisan 以提交收藏品。","Context":"AutomationHandler.OnArtisanInventoryFull","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Turn-in done — resuming Artisan list.","Translated":"提交完成 — 恢复 Artisan 列表。","Context":"AutomationHandler.TryStartStage","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Resource inspection done — starting Artisan list.","Translated":"资源检查完成 — 开始 Artisan 列表。","Context":"AutomationHandler.TryStartStage","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Stop condition met: ","Translated":"已满足停止条件：","Context":"AutomationHandler.TryStartStage","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Purchase list complete! Stopping automation.","Translated":"购买列表完成！正在停止自动化。","Context":"AutomationHandler.OnFinishedTradingCore","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Opens the main UI. \n/collector config - Opens up the config UI\n/collector collect - Starts turning in collectables.\n/collector inspect - Runs the Skybuilders' resource inspection.\n/collector changelog - Opens the changelog.","Translated":"打开主界面。\n/collector config - 打开配置界面\n/collector collect - 开始提交收藏品。\n/collector inspect - 运行天穹街资源检查。\n/collector changelog - 打开更新日志。","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Version 0.8.2","Translated":"版本 0.8.2","Context":"ChangelogUi.Add_0_8_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Custom commands — run any chat command at points in the loop (before the Artisan craft starts, after a turn-in, buy or Kupo run, when the loop goes idle, ...), e.g. /li gc to craft away from the vendor. Optionally wait until travel is done before continuing (Settings → Integrations)","Translated":"自定义命令 — 在循环的各个节点运行任意聊天命令（Artisan 制作开始前、提交/购买/库啵好运道之后、循环空闲时……），例如 /li gc 可在远离商人处制作。可选择等待移动完成后再继续（设置 → 集成）","Context":"ChangelogUi.Add_0_8_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed Kupo of Fortune crashing the game","Translated":"修复库啵好运道导致游戏崩溃的问题","Context":"ChangelogUi.Add_0_8_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed Firmament turn-ins stalling on the second item","Translated":"修复天穹街提交在第二件物品时卡住的问题","Context":"ChangelogUi.Add_0_8_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed resource inspection looping forever","Translated":"修复资源检查无限循环的问题","Context":"ChangelogUi.Add_0_8_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added /collector kupo to play your held Kupo of Fortune cards on demand","Translated":"新增 /collector kupo 命令，可按需使用持有的库啵好运道卡片","Context":"ChangelogUi.Add_0_8_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.8.1","Translated":"版本 0.8.1","Context":"ChangelogUi.Add_0_8_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Resource-inspection options now only appear on Firmament (where they apply), and the Normal system regains its 'Craft selected Artisan list on autogather finish' option","Translated":"资源检查选项现在只在天穹街（适用场景）显示，普通系统恢复“自动采集完成后制作所选工匠列表”选项","Context":"ChangelogUi.Add_0_8_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed the scrip shop run wandering off when you weren't in your preferred shop's zone — it now stops cleanly instead of walking toward out-of-zone coordinates","Translated":"修复了不在首选商店区域时，刷票据商店会乱跑的问题——现在会干净地停止，而不是朝区域外坐标移动","Context":"ChangelogUi.Add_0_8_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.8.0","Translated":"版本 0.8.0","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"The Kupo of Fortune and resource-inspection features live under the still-experimental Firmament mode (System toggle → Shift-click 'Firmament'). Please report anything that breaks","Translated":"库啵好运道和资源检查功能位于仍处于实验阶段的天穹街模式（系统开关 → Shift 点击“天穹街”）。如有异常请反馈","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Kupo of Fortune automation — after a Firmament turn-in, automatically walk to Lizbeth and play your held cards so Kupo Vouchers earned past the 10-card cap aren't wasted. Configurable play threshold and chest choice (Settings → General)","Translated":"库啵好运道自动化——天穹街交付后，自动走向莉兹贝丝并使用持有的卡片，避免超过 10 张上限后获得的库啵兑换券被浪费。可配置使用阈值和宝箱选择（设置 → 通用）","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Skybuilders' resource inspection and a full hands-free loop — chain GatherBuddyReborn autogather → resource inspection → Artisan craft → collect, then restart (Settings → Integrations)","Translated":"天穹街资源检查与全自动循环——串联 GatherBuddyReborn 自动采集 → 资源检查 → 工匠制作 → 收藏品采集，然后重新开始（设置 → 集成）","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Artisan crafting now triggers correctly inside the Firmament — it was silently inert before","Translated":"工匠制作现在能在天穹街内正确触发——此前会静默失效","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added an in-progress status while an Artisan list is crafting","Translated":"新增工匠列表制作进行中的状态显示","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed a Kupo of Fortune game crash, and Kupo interactions now respect your configured UI delay","Translated":"修复了库啵好运道游戏崩溃的问题，库啵交互现在会遵循你配置的 UI 延迟","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added a 'stop after N full loops' stop condition, with full-loop counting in the session stats (Planner and Settings → Goal)","Translated":"新增“完成 N 次完整循环后停止”的停止条件，会话统计中会记录完整循环次数（规划器与设置 → 目标）","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed Firmament appraiser row resolution so the correct collectable is turned in","Translated":"修复了天穹街鉴定师行解答所问题，确保交付正确的收藏品","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Per-addon UI delays — tune the wait for each game window individually (Settings → Timing)","Translated":"按插件区分的 UI 延迟——可单独调整每个游戏窗口的等待时间（设置 → 计时）","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Auto turn-in when you open a Collectables shop or Firmament appraiser window yourself — skips travel and doesn't start buying (Settings → General)","Translated":"当你自行打开收藏品商店或天穹街鉴定师窗口时自动交付——跳过移动且不会开始购买（设置 → 通用）","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Kupo now waits for a real appraiser run before playing, resets the voucher count afterwards, resumes an interrupted turn-in, and skips the voucher pause on manual window turn-ins","Translated":"库啵现在会等待真正的鉴定师流程后再使用，之后重置兑换券计数，恢复被中断的交付，并在手动窗口交付时跳过兑换券暂停","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"The changelog now credits outside contributors inline, and you can reopen it any time with /collector changelog or Settings → General → View changelog","Translated":"更新日志现在会内联标注外部贡献者，并可随时通过 /collector changelog 或 设置 → 通用 → 查看更新日志 重新打开","Context":"ChangelogUi.Add_0_8_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.7.0","Translated":"版本 0.7.0","Context":"ChangelogUi.Add_0_7_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Experimental Firmament (Skybuilders' Scrip) support — turn in Skybuilders' collectables and buy from the Firmament scrip shop.","Translated":"实验性天穹街（天穹工匠票据）支持 — 可交纳天穹工匠收藏品，并在天穹街票据商店购买。","Context":"ChangelogUi.Add_0_7_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Firmament mode is experimental — in the System toggle, hold Shift and click 'Firmament' to enable it. Expect rough edges, and please report anything that breaks","Translated":"天穹街模式为实验性功能 — 在系统开关中按住 Shift 并点击“天穹街”即可启用。可能存在粗糙之处，如有问题请反馈","Context":"ChangelogUi.Add_0_7_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.6.2","Translated":"版本 0.6.2","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added a 'Copy troubleshooting info' button (Settings → General and on the hard-fail banner) — paste it along with your issue report","Translated":"新增“复制故障排查信息”按钮（设置 → 常规以及硬失败横幅上）— 请将其与问题报告一并粘贴","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Purchases and turn-ins are now verified against your actual scrip count, so a missed dialog can no longer record progress that didn't happen","Translated":"购买和交纳现在会与实际票据数量核对，因此漏掉的对话框不会再记录未发生的进度","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed the Deliveroo run crashing right after teleporting (now waits for the navmesh to be ready) and disabling Deliveroo mid-list","Translated":"修复了 Deliveroo 在传送后立即崩溃的问题（现在会等待导航网格就绪）以及列表中途中禁用 Deliveroo 的问题","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed the stop button fighting the Artisan inventory-full watcher — stopping now sticks","Translated":"修复了停止按钮与 Artisan 背包已满守望者冲突的问题 — 现在停止会生效","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed the Artisan inventory-full pause giving up silently and timing out while the last craft finished","Translated":"修复了 Artisan 背包已满暂停时静默放弃、以及在最后一次制作完成时超时的问题","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Inventory space is now only checked when actually buying, not when starting automation","Translated":"现在仅在真正购买时检查背包空间，而非启动自动化时","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Summoning bells in inns and player housing are recognized again for AutoRetainer","Translated":"旅馆和玩家房屋中的召唤铃再次可被 AutoRetainer 识别","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Vendor data now loads in the background instead of stalling the game on login","Translated":"商人数据现在在后台加载，不再在登录时卡住游戏","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Planner tab is much lighter on the framerate","Translated":"规划器标签页对帧率的影响大幅降低","Context":"ChangelogUi.Add_0_6_2","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.6.1","Translated":"版本 0.6.1","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Multi-character scrip balance dashboard (Characters tab) — refreshes on login and after each turn-in / buy cycle, so AutoRetainer cycles piggyback samples for every character","Translated":"多角色票据余额仪表盘（角色标签页）— 在登录时及每次交纳/购买循环后刷新，因此 AutoRetainer 循环会为每个角色顺带采样","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Discord webhook notifications on hard-fail, goal complete, stop-condition, and (optional) scrip-cap reached","Translated":"硬失败、目标完成、停止条件以及（可选的）票据上限达到时的 Discord webhook 通知","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"User-configurable stop conditions: scrips earned, buy cycles, session minutes","Translated":"用户可配置的停止条件：获得票据数、购买循环数、会话分钟数","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Planner now credits collectables already in your bags against the estimated turn-ins (overview and per-row table)","Translated":"规划器现在会将背包中已有的收藏品计入预估交纳数（总览和逐行表格）","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Planner Session panel shows per-currency scrips earned alongside scrips spent","Translated":"规划器会话面板显示各货币获得的票据以及花费的票据","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Settings → Goal grows a Stop Conditions section with enable+value rows","Translated":"设置 → 目标新增停止条件区域，包含启用+数值行","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Refreshed the changelog UI to match the rest of the theme; dropped the OtterGui dependency","Translated":"更新了更新日志界面以匹配整体主题；移除了 OtterGui 依赖","Context":"ChangelogUi.Add_0_6_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.6.0","Translated":"版本 0.6.0","Context":"ChangelogUi.Add_0_6_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Refreshed the UI styling across the main, planner, and settings tabs","Translated":"刷新了主界面、规划器和设置标签页的界面样式","Context":"ChangelogUi.Add_0_6_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Split the purchase list into separate Gathering and Crafting tabs","Translated":"将购买列表拆分为采集和制作两个独立标签页","Context":"ChangelogUi.Add_0_6_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added a hard-fail banner that halts automation when something goes wrong","Translated":"新增硬性失败横幅，出错时停止自动化","Context":"ChangelogUi.Add_0_6_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added a reserve scrip floor so purchases leave a configurable amount unspent","Translated":"新增票据保留下限，购买时保留可配置的未花费数量","Context":"ChangelogUi.Add_0_6_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.5.8","Translated":"版本 0.5.8","Context":"ChangelogUi.Add_0_5_8","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Updated for API15","Translated":"适配 API15","Context":"ChangelogUi.Add_0_5_8","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.5.5 testing","Translated":"版本 0.5.5 测试","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added Deliveroo integration — can now check for Deliveroo between runs","Translated":"新增 Deliveroo 集成 — 现在可在运行间检查 Deliveroo","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added a Planner tab for setting scrip goals and stopping automation when complete","Translated":"新增规划器标签页，可设置票据目标并在完成后停止自动化","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Merged settings into the main window — config window now just opens main window","Translated":"将设置合并到主窗口 — 配置窗口现在仅打开主窗口","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Reorganized the UI into tabs (Main, Planner, Settings)","Translated":"将界面重组为标签页（主界面、规划器、设置）","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added collapsible panels and session stats tracking","Translated":"新增可折叠面板和会话统计追踪","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added handling for equippable items","Translated":"新增可装备物品处理","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"General code cleanup and bug fixes","Translated":"常规代码清理和错误修复","Context":"ChangelogUi.Add_0_5_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.5.3","Translated":"版本 0.5.3","Context":"ChangelogUi.Add_0_5_3","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Fixed some more bugs","Translated":"修复了更多错误","Context":"ChangelogUi.Add_0_5_3","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.5.1","Translated":"版本 0.5.1","Context":"ChangelogUi.Add_0_5_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Fixed some bugs","Translated":"修复了一些错误","Context":"ChangelogUi.Add_0_5_1","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.5.0","Translated":"版本 0.5.0","Context":"ChangelogUi.Add_0_5_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added AutoRetainer integration","Translated":"新增 AutoRetainer 集成","Context":"ChangelogUi.Add_0_5_0","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.4.8 testing","Translated":"版本 0.4.8 测试","Context":"ChangelogUi.Add_0_4_8","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added the option to check for completed ventures between runs via AutoRetainer","Translated":"新增选项：通过 AutoRetainer 在每次运行之间检查已完成的探险任务","Context":"ChangelogUi.Add_0_4_8","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.4.6","Translated":"版本 0.4.6","Context":"ChangelogUi.Add_0_4_6","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Updated logic for reading scrip amount, fixing various issues","Translated":"更新解析票据数量的逻辑，修复多项问题","Context":"ChangelogUi.Add_0_4_6","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.4.5","Translated":"版本 0.4.5","Context":"ChangelogUi.Add_0_4_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Bandaid fix for cases where the user has missing scripshop subpages and it cant find the item - now forces through every sub page trying to find the item","Translated":"临时修复用户缺少票据商店子页面导致找不到物品的情况——现在会强制遍历每个子页面以查找物品","Context":"ChangelogUi.Add_0_4_5","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Now matches scripshopitems with ItemIds instead of strings, supporting more languages than english (You might have to re-add your items to purchase for them to show up properly)","Translated":"现在使用物品 ID 而非字符串匹配票据商店物品，支持英语以外的更多语言（你可能需要重新添加要购买的物品才能正常显示）","Context":"ChangelogUi.Add_0_4_4","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.40","Translated":"版本 0.40","Context":"ChangelogUi.Add0_40","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"The plugin will now turn in any remaining collectables after finishing scrip shop purchases","Translated":"插件现在会在完成票据商店购买后上交所有剩余的收藏品","Context":"ChangelogUi.Add0_40","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Collectable turn-in will now abort early if you're hitting scrip cap again as well","Translated":"如果再次达到票据上限，收藏品上交现在也会提前中止","Context":"ChangelogUi.Add0_40","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.39","Translated":"版本 0.39","Context":"ChangelogUi.Add0_39","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Re-enabled functionality","Translated":"重新启用功能","Context":"ChangelogUi.Add0_39","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Merged ArtisanBuddy functionality into TheCollector, adding the ability to craft a selected artisan list after autogather disables","Translated":"将 ArtisanBuddy 功能合并到 TheCollector，新增在自动采集禁用后制作所选工匠列表的功能","Context":"ChangelogUi.Add0_39","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Removed the feature to enable auto collectable turn-in after autogather disables","Translated":"移除自动采集禁用后启用自动收藏品上交的功能","Context":"ChangelogUi.Add0_39","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.38","Translated":"版本 0.38","Context":"ChangelogUi.Add0_38","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"With the most recent testing build of GatherBuddyReborn, it has implemented the feature to automatically turn-in collectables and also handle scripshop purchases.\nFor the time being I'm going disable the functionality of this Plugin till the next version, where I will cut out all the gatherable collectable stuff so it'll be crafting only.\nThis should be out in the next couple of days, a big thank you to anyone using the plugin and those who decided to support!♡","Translated":"随着 GatherBuddyReborn 最新测试版构建，它已实现自动上交收藏品以及处理票据商店购买的功能。\n目前我将暂时禁用本插件的相关功能，直到下个版本，届时我会移除所有可采集收藏品相关内容，使其仅保留制作功能。\n这应该会在接下来几天内发布，非常感谢所有使用本插件的用户以及决定支持的人！♡","Context":"ChangelogUi.Add0_38","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.37","Translated":"版本 0.37","Context":"ChangelogUi.Add0_37","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"If you had your shop preferred shop set to Gridania, please select something else and then re-select Gridania for everything to work correctly, thank you!","Translated":"如果你将首选商店设置为格里达尼亚，请先选择其他商店，然后重新选择格里达尼亚，以确保一切正常工作，谢谢！","Context":"ChangelogUi.Add0_37","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Now properly checks if you can actually teleport when artisan is done crafting a list","Translated":"现在会正确检查工匠完成列表制作后你是否真的可以传送","Context":"ChangelogUi.Add0_37","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed a bug where it wouldn't teleport when you're in a housing ward","Translated":"修复了在住宅区时不会传送的问题","Context":"ChangelogUi.Add0_37","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Now moves to the shop instead of teleporting if you're in the same territory and are somewhat nearby","Translated":"现在如果在同一区域且距离较近，会改为走向商店而不是传送","Context":"ChangelogUi.Add0_37","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.36","Translated":"版本 0.36","Context":"ChangelogUi.Add0_36","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added failsafe for buying scrip items so it wont buy the wrong shop item anymore if it cant find the selected one in the shop tab","Translated":"为购买票据物品添加了保护机制，当在商店标签页中找不到所选物品时，不会再购买错误的商店物品","Context":"ChangelogUi.Add0_36","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Made it fetch the data for the scrip shop items from the git repo instead of locally, allowing for edits without having to actually update the plugin","Translated":"改为从 git 仓库获取票据商店物品数据而非本地数据，这样无需实际更新插件即可进行编辑","Context":"ChangelogUi.Add0_36","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.35","Translated":"版本 0.35","Context":"ChangelogUi.Add0_35","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added Mason's Abrasive and fixed a few items indices","Translated":"添加了 Mason's Abrasive 并修正了几个物品索引","Context":"ChangelogUi.Add0_35","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.34","Translated":"版本 0.34","Context":"ChangelogUi.Add0_34","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"If your crafter or gatherer is high enough level but you haven't unlocked the corresponding Scrip Exchange tab (e.g. \"Purple Scrip Exchange – Lv. 80 Materials/Bait/Tokens\"), the plugin may purchase the wrong item.\nUnlock the relevant Splendors vendor tabs before setting higher-level items.","Translated":"如果你的制作或采集职业等级足够高，但尚未解锁对应的票据兑换标签页（例如“紫色票据兑换 – 80级 材料/鱼饵/代币”），插件可能会购买错误的物品。\n在设置更高等级物品前，请先解锁相关的华丽品商人标签页。","Context":"ChangelogUi.Add0_34","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed collectable sorting in your inventory completely now","Translated":"彻底修复了背包中收藏品的排序问题","Context":"ChangelogUi.Add0_34","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.33","Translated":"版本 0.33","Context":"ChangelogUi.Add0_33","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Filtered 'Gazelle Leather' out of the list of collectables in your inventory since Luminas IsCollectable flag returns true for it for some reason???","Translated":"从背包收藏品列表中过滤掉了“瞪羚皮革”，因为 Luminas 的 IsCollectable 标志不知为何对它返回 true？？？","Context":"ChangelogUi.Add0_33","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.32","Translated":"版本 0.32","Context":"ChangelogUi.Add0_32","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Increased timeout on turning in collectables, which should enable full inventory turn-ins now","Translated":"增加了提交收藏品的超时时间，现在应该可以完整提交整个背包了","Context":"ChangelogUi.Add0_32","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed bought items not adding up anymore","Translated":"修复了已购买物品数量不再累加的问题","Context":"ChangelogUi.Add0_32","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.31","Translated":"版本 0.31","Context":"ChangelogUi.Add0_31","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added Lifestream integration and with that new CollectableShop locations Solution Nine and Gridania","Translated":"添加了 Lifestream 集成，并新增了收藏品商店位置：九号解决方案和格里达尼亚","Context":"ChangelogUi.Add0_31","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Further improved automation","Translated":"进一步改进了自动化","Context":"ChangelogUi.Add0_31","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.30","Translated":"版本 0.30","Context":"ChangelogUi.Add0_30","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added new scripshopitem Levinchrome Aethersand!","Translated":"添加了新的票据商店物品：雷光灵砂！","Context":"ChangelogUi.Add0_30","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed scripshopautomation breaking. Sorry!","Translated":"修复了收藏品商店自动化失效的问题。抱歉！","Context":"ChangelogUi.Add0_30","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.29","Translated":"版本 0.29","Context":"ChangelogUi.Add0_29","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Refactored the whole automation handling","Translated":"重构了整个自动化处理逻辑","Context":"ChangelogUi.Add0_29","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added /collector stop command to stop automation as well as a window with a stop button that appears when automation is running","Translated":"新增 /collector stop 命令用于停止自动化，以及自动化运行时显示的带停止按钮的窗口","Context":"ChangelogUi.Add0_29","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Added new config option to start collecting once you finish fishing","Translated":"新增配置选项：钓鱼结束后自动开始采集","Context":"ChangelogUi.Add0_29","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Exposed a few functions via EzIPC","Translated":"通过 EzIPC 暴露了若干函数","Context":"ChangelogUi.Add0_29","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Version 0.28","Translated":"版本 0.28","Context":"ChangelogUi.Add0_28","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Added changelog window!","Translated":"新增更新日志窗口！","Context":"ChangelogUi.Add0_28","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Marked Solution nine teleport as not functional & made it not interactable and also set the Eulmore one as default","Translated":"将九号解决方案传送标记为不可用并设为不可交互，同时将游末邦设为默认","Context":"ChangelogUi.Add0_28","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Fixed a bug where it would fail to buy items if the quantity was set too high","Translated":"修复了数量设置过高时购买物品失败的 bug","Context":"ChangelogUi.Add0_28","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Made certain config settings not interactable if the required plugins are not installed","Translated":"当所需插件未安装时，部分配置项将不可交互","Context":"ChangelogUi.Add0_28","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"No changelog entries yet.","Translated":"暂无更新日志条目。","Context":"ChangelogWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"The Collector — ","Translated":"收藏家 —","Context":"ChangelogWindow.DrawHero","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"From the changelog history","Translated":"来自更新日志历史","Context":"ChangelogWindow.DrawHero","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"New since you last opened the changelog","Translated":"自上次打开更新日志以来的新内容","Context":"ChangelogWindow.DrawHero","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"(no entries)","Translated":"（无条目）","Context":"ChangelogWindow.DrawEntries","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Show new updates","Translated":"显示新更新","Context":"ChangelogWindow.DrawFooter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Only show important updates","Translated":"仅显示重要更新","Context":"ChangelogWindow.DrawFooter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Never show on launch","Translated":"启动时不再显示","Context":"ChangelogWindow.DrawFooter","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Combo"},{"Original":"Got it","Translated":"知道了","Context":"ChangelogWindow.DrawFooter","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.AccentButton"},{"Original":"Heads up","Translated":"提示","Context":"DrawEntries","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Highlights","Translated":"亮点","Context":"DrawEntries","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Changes","Translated":"变更","Context":"DrawEntries","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"CharsToolbar","Translated":"角色工具栏","Context":"MainWindow.DrawCharactersTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"CharsEmpty","Translated":"暂无角色","Context":"MainWindow.DrawCharactersTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"CharsTable","Translated":"角色列表","Context":"MainWindow.DrawCharactersTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"Main","Translated":"主页","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Planner","Translated":"规划","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Characters","Translated":"角色","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Settings","Translated":"设置","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"The Collector","Translated":"收藏家","Context":"MainWindow.DrawHero","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"Scrip turn-ins, purchases, and gathering loops","Translated":"票据交纳、购买与采集循环","Context":"MainWindow.DrawHero","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.HeroBanner"},{"Original":"HardFail","Translated":"严重错误","Context":"MainWindow.DrawHardFailBanner","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"StatusBar","Translated":"状态栏","Context":"MainWindow.DrawStatusRow","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"SystemToggle","Translated":"系统开关","Context":"MainWindow.DrawSystemToggle","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"Experimental — hold Shift and click to enable.","Translated":"实验性 — 按住 Shift 并点击以启用。","Context":"MainWindow.DrawSystemOption","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Experimental feature.","Translated":"实验性功能。","Context":"MainWindow.DrawSystemOption","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Support Me","Translated":"支持我","Context":"MainWindow.DrawSupportButton","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.AccentButton"},{"Original":"AddItem_","Translated":"添加物品_","Context":"MainWindow.DrawAddItem","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"No items added yet.","Translated":"尚未添加任何物品。","Context":"MainWindow.DrawItemsList","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"ItemsList_","Translated":"物品列表_","Context":"MainWindow.DrawItemsList","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"AddItem_Firmament","Translated":"添加物品_天穹街","Context":"MainWindow.DrawFirmamentAddItem","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"ItemsList_Firmament","Translated":"物品列表_天穹街","Context":"MainWindow.DrawFirmamentItemsList","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"Add items to your purchase list on the Main tab to see the plan.","Translated":"在主标签页将物品添加到购买列表以查看计划。","Context":"MainWindow.DrawPlannerTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"PlanOverview","Translated":"计划概览","Context":"MainWindow.DrawPlannerOverview","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"CostBreakdown","Translated":"成本明细","Context":"MainWindow.DrawPlannerCostBreakdown","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.CollapsiblePanel"},{"Original":"Scrip Cost Breakdown","Translated":"票据成本明细","Context":"MainWindow.DrawPlannerCostBreakdown","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.CollapsiblePanel"},{"Original":"CollectableOptions","Translated":"收藏品选项","Context":"MainWindow.DrawPlannerCollectables","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.CollapsiblePanel"},{"Original":"Collectable Turn-in Options","Translated":"收藏品提交选项","Context":"MainWindow.DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.CollapsiblePanel"},{"Original":"SessionStats","Translated":"会话统计","Context":"MainWindow.DrawPlannerSession","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.CollapsiblePanel"},{"Original":"Session","Translated":"会话","Context":"MainWindow.DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.CollapsiblePanel"},{"Original":"AllTimeScrips","Translated":"累计票据","Context":"MainWindow.DrawPlannerSession","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"vnavmesh plugin is not installed or not ready.","Translated":"vnavmesh 插件未安装或未就绪。","Context":"MainWindow.DrawSettingsTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"General","Translated":"常规","Context":"MainWindow.DrawSettingsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Integrations","Translated":"集成","Context":"MainWindow.DrawSettingsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Goal","Translated":"目标","Context":"MainWindow.DrawSettingsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Timing","Translated":"时机","Context":"MainWindow.DrawSettingsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Debug","Translated":"调试","Context":"MainWindow.DrawSettingsTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"InstalledPlgs","Translated":"已安装插件","Context":"MainWindow.DrawInstalledPlugins","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":"optional","Translated":"可选","Context":"MainWindow.DrawPluginStatus","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Chip"},{"Original":"required","Translated":"必需","Context":"MainWindow.DrawPluginStatus","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Chip"},{"Original":"Collectable Shop","Translated":"收藏品商店","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Select a territory","Translated":"选择区域","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Scanning vendor data...","Translated":"正在扫描商人数据...","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" (Lifestream required)","Translated":"（需要 Lifestream）","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Lifestream plugin is required to reach this territory.","Translated":"需要 Lifestream 插件才能前往该区域。","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Play Kupo of Fortune to spend held cards","Translated":"玩库啵好运道以消耗持有的卡片","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"After a Firmament turn-in, walk to Lizbeth and play any Kupo of Fortune\ncards you hold so vouchers earned past the 10-card cap aren't wasted.","Translated":"在天穹街交纳后，走到莉兹贝丝处并玩掉你持有的所有库啵好运道\n卡片，以免超过 10 张上限后获得的兑换券被浪费。","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Play when cards held reach:","Translated":"持有卡片达到以下数量时游玩：","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Chest to scratch:","Translated":"抓击的宝箱：","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Left can only win 2nd-4th prize (avoids the jackpot and the\nconsolation). Random right can win any of the 5 prizes.","Translated":"左侧只能赢得第 2-4 等奖（避开部队特效：金碟币提高和\n慰藉）。随机右侧可赢得全部 5 个奖项。","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Automation","Translated":"自动化","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Buy items after each trade instead of on capping scrips","Translated":"每次交易后购买物品，而非在票据达到上限时购买","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Reset each quantity after completing the list","Translated":"完成列表后重置每个数量","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Collect on finished fishing","Translated":"钓鱼完成后进行收藏品采集","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Auto turn in when opening a collectables window manually","Translated":"手动打开收藏品窗口时自动交纳","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When you open the Collectables shop or the Firmament appraiser (HWDSupply) yourself,\nturn in eligible collectables automatically. Skips travel and does not start buying.","Translated":"当你自行打开收藏品商店或天穹街鉴定人（HWDSupply）时，\n自动交纳符合条件的收藏品。跳过移动且不会开始购买。","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Reserve scrips:","Translated":"保留票据：","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Purchases will leave at least this many scrips of each currency unspent.","Translated":"购买后每种货币至少保留此数量的票据不花费。","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Troubleshooting","Translated":"故障排除","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"About","Translated":"关于","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"View changelog","Translated":"查看更新日志","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Opens the changelog window.","Translated":"打开更新日志窗口。","Context":"MainWindow.DrawSettingsGeneral","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Copy troubleshooting info","Translated":"复制故障排除信息","Context":"MainWindow.DrawCopyTroubleshootingButton","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Copies plugin state, settings and dependency status to the clipboard.\nPaste it along with your issue report.","Translated":"将插件状态、设置和依赖状态复制到剪贴板。\n请随问题报告一并粘贴。","Context":"MainWindow.DrawCopyTroubleshootingButton","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Copied!","Translated":"已复制！","Context":"MainWindow.DrawCopyTroubleshootingButton","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"<none>","Translated":"<无>","Context":"MainWindow.BuildTroubleshootingInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"<empty>","Translated":"<空>","Context":"MainWindow.BuildTroubleshootingInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Enable Autogather on finish","Translated":"采集完成后启用自动采集","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"GatherbuddyReborn is not installed or not ready.","Translated":"GatherbuddyReborn 未安装或未就绪。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Turn in collectables on autogather finish","Translated":"自动采集完成后提交收藏品","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Disabled while \"Craft selected Artisan list on autogather finish\" is enabled (Artisan section).","Translated":"当“自动采集完成后制作所选 Artisan 列表”启用时禁用（Artisan 部分）。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Disabled while \"Run resource inspection on autogather finish\" is enabled.","Translated":"当“自动采集完成后运行资源检查”启用时禁用。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Run resource inspection on autogather finish","Translated":"自动采集完成后运行资源检查","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Disabled while \"Turn in collectables on autogather finish\" is enabled.","Translated":"当“自动采集完成后提交收藏品”启用时禁用。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Artisan is not installed or not ready.","Translated":"Artisan 未安装或未就绪。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Artisan and GatherbuddyReborn are not installed or not ready.","Translated":"Artisan 和 GatherbuddyReborn 未安装或未就绪。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Craft selected Artisan list on resource inspection finish","Translated":"资源检查完成后制作选定的 Artisan 列表","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"After a resource-inspection run finishes (gather → inspect → craft),\nstart the selected Artisan list.","Translated":"资源检查流程（采集 → 检查 → 制作）结束后，\n启动选定的 Artisan 列表。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Craft selected Artisan list on autogather finish","Translated":"自动采集完成后制作选定的 Artisan 列表","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Disabled while \"Turn in collectables on autogather finish\" is enabled (GatherBuddyReborn section).","Translated":"启用“自动采集完成后交纳收藏品”时禁用（GatherBuddyReborn 部分）。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"After GatherBuddyReborn autogather finishes, start the selected Artisan list.","Translated":"GatherBuddyReborn 自动采集完成后，启动选定的 Artisan 列表。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Collect on finish crafting an Artisan list","Translated":"完成 Artisan 列表制作后采集收藏品","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Pause Artisan when inventory is full, turn in, then resume","Translated":"背包满时暂停 Artisan，交纳后继续","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When the running Artisan list drops below the free-slot threshold and\nyou have collectables, pause the list, run the turn-in cascade, then\nresume the list from where it left off.","Translated":"当运行中的 Artisan 列表低于空闲槽位阈值且\n你有收藏品时，暂停列表，执行交纳流程，然后\n从暂停处继续列表。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Pause when free slots ≤","Translated":"空闲槽位 ≤ 时暂停","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Check for available ventures between runs","Translated":"在运行间隔检查可用探险","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"AutoRetainer is not installed or not ready.","Translated":"AutoRetainer 未安装或未就绪。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Run Deliveroo GC turn-ins between runs","Translated":"在运行间隔执行 Deliveroo 大国防联军交纳","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Deliveroo is not installed or not ready.","Translated":"Deliveroo 未安装或未就绪。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Lifestream plugin is required for Maelstrom GC turn-ins.","Translated":"黑涡斗技场大国防联军交纳需要 Lifestream 插件。","Context":"MainWindow.DrawSettingsIntegrations","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Custom Commands","Translated":"自定义命令","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Run any chat command at a point in the loop — e.g. \"/li gc\" before crafting to craft at your Grand Company \"Wait\" holds the loop until Lifestream is idle and you can act again before continuing.","Translated":"在循环中的某个节点运行任意聊天命令 — 例如制作前运行“/li gc”以在大国防联军处制作。“等待”会保持循环直到 Lifestream 空闲且你可以再次行动后再继续。","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"On","Translated":"启用","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Trigger","Translated":"触发","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Command","Translated":"命令","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Wait","Translated":"等待","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Sent through the chat handler, so plugin commands (/li, /vnav, …) and game commands both work.","Translated":"通过聊天处理器发送，因此插件命令（/li、/vnav、…）和游戏命令均可使用。","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hold the loop until Lifestream is idle, no zone change is in flight\nand you can act again, before the next step runs.","Translated":"在下一步执行前保持循环，直到 Lifestream 空闲、没有正在进行的区域切换且你可以再次行动。","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add command","Translated":"添加命令","Context":"MainWindow.DrawSettingsCommandHooks","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.AccentButton"},{"Original":"Artisan List:","Translated":"Artisan 列表：","Context":"MainWindow.DrawArtisanListPicker","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"(Artisan not ready)","Translated":"（Artisan 未就绪）","Context":"MainWindow.DrawArtisanListPicker","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"(no lists in Artisan)","Translated":"（Artisan 中无列表）","Context":"MainWindow.DrawArtisanListPicker","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Send Discord notifications","Translated":"发送 Discord 通知","Context":"MainWindow.DrawSettingsDiscord","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Webhook URL:","Translated":"Webhook URL：","Context":"MainWindow.DrawSettingsDiscord","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Posts a test message to verify the webhook works.","Translated":"发送测试消息以验证 Webhook 是否可用。","Context":"MainWindow.DrawSettingsDiscord","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Notify on:","Translated":"通知时机：","Context":"MainWindow.DrawSettingsDiscord","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Goal complete (purchase list done)","Translated":"目标完成（购买列表完成）","Context":"MainWindow.DrawSettingsDiscord","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Stop condition met","Translated":"满足停止条件","Context":"MainWindow.DrawSettingsDiscord","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Scrip cap reached","Translated":"达到票据上限","Context":"MainWindow.DrawSettingsDiscord","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"UI Delay","Translated":"UI 延迟","Context":"MainWindow.DrawSettingsTiming","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Delay between UI interactions during automation, set per addon. Lower values run faster but may misbehave on slower machines or with high latency. Addons ","Translated":"自动化期间 UI 交互之间的延迟，按插件设置。较低的值运行更快，但在较慢的机器或高延迟下可能出错。未设置覆盖的插件","Context":"MainWindow.DrawSettingsTiming","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"without an override use the default (","Translated":"使用默认值（","Context":"MainWindow.DrawSettingsTiming","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" ms).","Translated":"毫秒）。","Context":"MainWindow.DrawSettingsTiming","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Using default (","Translated":"使用默认值（","Context":"MainWindow.DrawSettingsTiming","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" ms)","Translated":"毫秒）","Context":"MainWindow.DrawSettingsTiming","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Goal Automation","Translated":"目标自动化","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Stop gathering when purchase list is complete","Translated":"购买清单完成后停止采集","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When enabled, automation will stop instead of\nre-enabling autogather once all items are purchased.","Translated":"启用后，所有物品购买完毕时将停止自动化，\n而不是重新启用自动采集。","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Stop Conditions","Translated":"停止条件","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Evaluated between turn-in and buy cycles. Counters reset when the plugin reloads.","Translated":"在交纳与购买循环之间评估。插件重载时计数器重置。","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Stop after scrips earned","Translated":"获得票据后停止","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Total scrips estimated earned this session (using HighReward).\nApplies across currencies.","Translated":"本次会话预计获得的总票据（使用 HighReward）。\n适用于所有货币。","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Stop after buy cycles","Translated":"购买循环后停止","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Number of times the shop has been visited and purchases completed.","Translated":"商店访问并完成购买的次数。","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Stop after session minutes","Translated":"会话分钟数后停止","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Real elapsed minutes since the current session started.","Translated":"当前会话开始以来实际经过的分钟数。","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Stop after full loops","Translated":"完整循环后停止","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"One full loop = a complete gather → inspect → craft cycle, counted when\nautogather is re-enabled. Stops after finishing the current cycle.","Translated":"一个完整循环 = 一次完整的采集 → 检查 → 制作周期，在\n重新启用自动采集时计数。完成当前循环后停止。","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Hide fishing collectables from planner","Translated":"在规划器中隐藏钓鱼收藏品","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Hide collectables above your job level","Translated":"隐藏高于当前职业等级的收藏品","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Filters the planner to only show collectables you can\nactually gather or craft. Also gates the 'best' pick.","Translated":"筛选规划器，仅显示你实际能够\n采集或制作的收藏品。同时限制“最佳”选择。","Context":"MainWindow.DrawSettingsGoal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"State","Translated":"状态","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Plugin state","Translated":"插件状态","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Territory","Translated":"区域","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Preferred","Translated":"首选","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Active source","Translated":"活动来源","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Config version","Translated":"配置版本","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Has collectible","Translated":"有收藏品","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Free inv slots","Translated":"空闲背包格","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Automation running","Translated":"自动化运行中","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"  collectable","Translated":"收藏品","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"  scrip shop","Translated":"票据商店","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"  autoretainer","Translated":"自动雇员","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"  deliveroo","Translated":"交付","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Session started","Translated":"会话开始","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Turn-ins","Translated":"交纳次数","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Items purchased","Translated":"已购物品","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Full loops","Translated":"完整循环","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Scrips earned","Translated":"已获票据","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Current item","Translated":"当前物品","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" more","Translated":"更多","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Collectable NPC","Translated":"收藏品 NPC","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Scrip NPC","Translated":"票据 NPC","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Pipelines","Translated":"流水线","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Starts the pipeline directly, bypassing the automation cascade.","Translated":"直接启动流水线，绕过自动化倾泻。","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Start collectable","Translated":"开始采集收藏品","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Start scrip shop","Translated":"开始代币商店","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Start autoretainer","Translated":"开始自动雇员","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Start deliveroo","Translated":"开始配送","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Start resource inspection","Translated":"开始资源检查","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Start Kupo of Fortune","Translated":"开始库啵好运道","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Walk to Lizbeth in the Firmament and play any held Kupo of Fortune\ncards. Runs standalone — won't trigger the buy/cascade flow.","Translated":"前往天穹街的莉兹贝丝处并游玩所有持有的库啵好运道\n卡牌。独立运行——不会触发购买/倾泻流程。","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Force stop all","Translated":"强制停止全部","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Reset","Translated":"重置","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Hold Ctrl to enable destructive buttons.","Translated":"按住 Ctrl 启用危险按钮。","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Ctrl held — buttons are armed.","Translated":"已按住 Ctrl——按钮已激活。","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Clear hard fail","Translated":"清除硬失败","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Reset session counters","Translated":"重置会话计数","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Reset purchased amounts","Translated":"重置已购买数量","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Clear character balances","Translated":"清除角色余额","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Clear total scrips spent","Translated":"清除代币总支出","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Dump to log","Translated":"导出到日志","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Vendor catalog","Translated":"商人目录","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Scrip shop items","Translated":"代币商店物品","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Full config","Translated":"完整配置","Context":"MainWindow.DrawSettingsDebug","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Automation halted","Translated":"自动化已停止","Context":"MainWindow.DrawHardFailBanner","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Acknowledge","Translated":"确认","Context":"MainWindow.DrawHardFailBanner","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.DangerButton"},{"Original":" done","Translated":"完成","Context":"MainWindow.DrawStatusRow","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"System","Translated":"系统","Context":"MainWindow.DrawSystemToggle","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Normal Scrips","Translated":"普通票据","Context":"MainWindow.DrawSystemToggle","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Firmament","Translated":"天穹街","Context":"MainWindow.DrawSystemToggle","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Add Item","Translated":"添加物品","Context":"MainWindow.DrawFirmamentAddItem","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Already in list","Translated":"已在列表中","Context":"MainWindow.DrawFirmamentAddItem","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Select an item...","Translated":"选择物品...","Context":"MainWindow.DrawFirmamentAddItem","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginCombo"},{"Original":"Filter...","Translated":"筛选...","Context":"MainWindow.DrawFirmamentAddItem","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"All-Time Scrips Spent","Translated":"累计消耗票据","Context":"MainWindow.DrawPlannerSession","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"No characters sampled yet — log in or press \"Sample current\".","Translated":"尚未采样任何角色 — 请登录或点击“采样当前角色”。","Context":"DrawCharactersTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Required & Optional Plugins","Translated":"必需与可选插件","Context":"DrawInstalledPlugins","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Last-known scrip balances per character.","Translated":"各角色最近已知的票据余额。","Context":"DrawCharactersTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Sample current","Translated":"采样当前角色","Context":"DrawCharactersTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Read the active character's scrip balances now.\nBalances also refresh automatically after each turn-in and buy cycle.","Translated":"立即读取当前角色的票据余额。\n每次交纳与购买循环后余额也会自动刷新。","Context":"DrawCharactersTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Character","Translated":"角色","Context":"DrawCharactersTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"World","Translated":"服务器","Context":"DrawCharactersTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Last sampled ","Translated":"上次采样","Context":"DrawCharactersTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" ago.","Translated":"前。","Context":"DrawCharactersTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Purchase List","Translated":"购买列表","Context":"DrawItemsList","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.SectionHeader"},{"Original":"Item","Translated":"物品","Context":"DrawItemsList","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Progress","Translated":"进度","Context":"DrawItemsList","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Qty","Translated":"数量","Context":"DrawItemsList","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Cost: ","Translated":"花费：","Context":"DrawItemsList","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" scrips each","Translated":"枚票据/个","Context":"DrawItemsList","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Unique items can only be owned one at a time","Translated":"唯一物品同时只能持有一个","Context":"DrawItemsList","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"All items purchased!","Translated":"所有物品已购买！","Context":"DrawPlannerOverview","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" needed","Translated":"需要","Context":"DrawPlannerOverview","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" turn-ins via ","Translated":"上交方式","Context":"DrawPlannerOverview","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" already covered by inventory collectables","Translated":"已由背包中的收藏品覆盖","Context":"DrawPlannerOverview","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Unit Cost","Translated":"单价","Context":"DrawPlannerCostBreakdown","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Remaining","Translated":"剩余","Context":"DrawPlannerCostBreakdown","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Total","Translated":"总计","Context":"DrawPlannerCostBreakdown","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Done","Translated":"完成","Context":"DrawPlannerCostBreakdown","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Subtotal","Translated":"小计","Context":"DrawPlannerCostBreakdown","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Filter collectables...","Translated":"筛选收藏品...","Context":"DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Lv","Translated":"等级","Context":"DrawPlannerCollectables","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Collectable","Translated":"收藏品","Context":"DrawPlannerCollectables","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Scrips / Turn-in","Translated":"票据 / 上交","Context":"DrawPlannerCollectables","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Turn-ins Needed","Translated":"所需交纳","Context":"DrawPlannerCollectables","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Requires level ","Translated":"需要等级","Context":"DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" on the matching job.","Translated":"在对应职业上。","Context":"DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" (you are ","Translated":"(你当前","Context":"DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"best","Translated":"最佳","Context":"DrawPlannerCollectables","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Chip"},{"Original":"Most efficient collectable for this currency.","Translated":"该货币下最高效的收藏品。","Context":"DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" in inv","Translated":"背包中","Context":"DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiHelper.Chip"},{"Original":" held — will be turned in before gathering more.","Translated":"已持有 — 将在继续采集前交纳。","Context":"DrawPlannerCollectables","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Show more (","Translated":"显示更多 (","Context":"DrawPlannerCollectables","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Turn-ins:    ","Translated":"交纳次数:","Context":"DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Buy cycles:  ","Translated":"购买循环:","Context":"DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Full loops:  ","Translated":"完整循环:","Context":"DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Scrips earned: ","Translated":"获得票据:","Context":"DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" earned: ","Translated":"已获得:","Context":"DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" spent: ","Translated":"已消耗:","Context":"DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Elapsed:     ","Translated":"已用时间:","Context":"DrawPlannerSession","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"StatusInfo","Translated":"状态信息","Context":"StopUi.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.Panel"},{"Original":" left)","Translated":"剩余)","Context":"StopUi.DrawStatusInfo","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Stop","Translated":"停止","Context":"StopUi.DrawStopButton","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiHelper.DangerButton"},{"Original":"Collectables turn-in","Translated":"收藏品交纳","Context":"AddonDelays..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Scrip exchange","Translated":"票据兑换","Context":"AddonDelays..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Firmament shop","Translated":"天穹街商店","Context":"AddonDelays..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Firmament turn-in","Translated":"天穹街交纳","Context":"AddonDelays..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Resource inspection","Translated":"资源检查","Context":"AddonDelays..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"Scrip","Translated":"票据","Context":"CurrencyHelper.GetCurrencyName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Item ","Translated":"物品","Context":"CurrencyHelper.GetCurrencyName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Resource Inspection","Translated":"资源检查","Context":"ResourceInspectionScripSystem.get_DisplayName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ 接口文本属性"}],"resources":[],"attributes":[{"Original":"Moving to vendor","Translated":"前往商人","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::MovingToCollectableVendor","Source":"ai:deepseek"},{"Original":"Teleporting","Translated":"传送中","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::Teleporting","Source":"ai:deepseek"},{"Original":"Exchanging items","Translated":"兑换物品","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::ExchangingItems","Source":"ai:deepseek"},{"Original":"Spending scrip","Translated":"消耗票据","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::SpendingScrip","Source":"ai:deepseek"},{"Original":"Idle","Translated":"空闲","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::Idle","Source":"ai:deepseek"},{"Original":"AutoRetainer running","Translated":"AutoRetainer 运行中","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::AutoRetainer","Source":"ai:deepseek"},{"Original":"Deliveroo running","Translated":"Deliveroo 运行中","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::Deliveroo","Source":"ai:deepseek"},{"Original":"Crafting Artisan list","Translated":"制作 Artisan 列表","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::ProcessingArtisanList","Source":"ai:deepseek"},{"Original":"Running command hooks","Translated":"运行命令钩子","Context":"[属性] DescriptionAttribute TheCollector.Data.PluginState::RunningCommandHooks","Source":"ai:deepseek"}]}
+{
+  "type": "uit-contribution",
+  "plugin": "TheCollector",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Automation halted: ",
+      "Translated": "自动化已暂停：",
+      "Context": "AutomationHandler.Invoke",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": ". Acknowledge it in the main window before retrying.",
+      "Translated": "。请在主窗口中确认后再重试。",
+      "Context": "AutomationHandler.Invoke",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Please configure your preferred shop territory in the Settings tab!",
+      "Translated": "请在设置标签页中配置你偏好的商店区域！",
+      "Context": "AutomationHandler.Invoke",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Still scanning vendor data — try again in a few seconds.",
+      "Translated": "仍在扫描商人数据 — 请稍等几秒后重试。",
+      "Context": "AutomationHandler.Invoke",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Still scanning Firmament data — try again in a few seconds.",
+      "Translated": "仍在扫描天穹街数据 — 请稍等几秒后重试。",
+      "Context": "AutomationHandler.Invoke",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Cannot start automation while in combat.",
+      "Translated": "战斗中无法启动自动化。",
+      "Context": "AutomationHandler.Invoke",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Cannot start automation while in a duty.",
+      "Translated": "任务中无法启动自动化。",
+      "Context": "AutomationHandler.Invoke",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Automation is already running.",
+      "Translated": "自动化已在运行中。",
+      "Context": "AutomationHandler.InvokeBuy",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Automation stopped: ",
+      "Translated": "自动化已停止：",
+      "Context": "AutomationHandler.TripHardFail",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Inventory near full — pausing Artisan to turn collectables in.",
+      "Translated": "背包接近满 — 暂停 Artisan 以提交收藏品。",
+      "Context": "AutomationHandler.OnArtisanInventoryFull",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Turn-in done — resuming Artisan list.",
+      "Translated": "提交完成 — 恢复 Artisan 列表。",
+      "Context": "AutomationHandler.TryStartStage",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Resource inspection done — starting Artisan list.",
+      "Translated": "资源检查完成 — 开始 Artisan 列表。",
+      "Context": "AutomationHandler.TryStartStage",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Stop condition met: ",
+      "Translated": "已满足停止条件：",
+      "Context": "AutomationHandler.TryStartStage",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Purchase list complete! Stopping automation.",
+      "Translated": "购买列表完成！正在停止自动化。",
+      "Context": "AutomationHandler.OnFinishedTradingCore",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Opens the main UI. \n/collector config - Opens up the config UI\n/collector collect - Starts turning in collectables.\n/collector inspect - Runs the Skybuilders' resource inspection.\n/collector changelog - Opens the changelog.",
+      "Translated": "打开主界面。\n/collector config - 打开配置界面\n/collector collect - 开始提交收藏品。\n/collector inspect - 运行天穹街资源检查。\n/collector changelog - 打开更新日志。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Version 0.8.2",
+      "Translated": "版本 0.8.2",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Custom commands — run any chat command at points in the loop (before the Artisan craft starts, after a turn-in, buy or Kupo run, when the loop goes idle, ...), e.g. /li gc to craft away from the vendor. Optionally wait until travel is done before continuing (Settings → Integrations)",
+      "Translated": "自定义命令 — 在循环的各个节点运行任意聊天命令（Artisan 制作开始前、提交/购买/库啵好运道之后、循环空闲时……），例如 /li gc 可在远离商人处制作。可选择等待移动完成后再继续（设置 → 集成）",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed Kupo of Fortune crashing the game",
+      "Translated": "修复库啵好运道导致游戏崩溃的问题",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed Firmament turn-ins stalling on the second item",
+      "Translated": "修复天穹街提交在第二件物品时卡住的问题",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed resource inspection looping forever",
+      "Translated": "修复资源检查无限循环的问题",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added /collector kupo to play your held Kupo of Fortune cards on demand",
+      "Translated": "新增 /collector kupo 命令，可按需使用持有的库啵好运道卡片",
+      "Context": "ChangelogUi.Add_0_8_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.8.1",
+      "Translated": "版本 0.8.1",
+      "Context": "ChangelogUi.Add_0_8_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Resource-inspection options now only appear on Firmament (where they apply), and the Normal system regains its 'Craft selected Artisan list on autogather finish' option",
+      "Translated": "资源检查选项现在只在天穹街（适用场景）显示，普通系统恢复“自动采集完成后制作所选工匠列表”选项",
+      "Context": "ChangelogUi.Add_0_8_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed the scrip shop run wandering off when you weren't in your preferred shop's zone — it now stops cleanly instead of walking toward out-of-zone coordinates",
+      "Translated": "修复了不在首选商店区域时，刷票据商店会乱跑的问题——现在会干净地停止，而不是朝区域外坐标移动",
+      "Context": "ChangelogUi.Add_0_8_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.8.0",
+      "Translated": "版本 0.8.0",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "The Kupo of Fortune and resource-inspection features live under the still-experimental Firmament mode (System toggle → Shift-click 'Firmament'). Please report anything that breaks",
+      "Translated": "库啵好运道和资源检查功能位于仍处于实验阶段的天穹街模式（系统开关 → Shift 点击“天穹街”）。如有异常请反馈",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Kupo of Fortune automation — after a Firmament turn-in, automatically walk to Lizbeth and play your held cards so Kupo Vouchers earned past the 10-card cap aren't wasted. Configurable play threshold and chest choice (Settings → General)",
+      "Translated": "库啵好运道自动化——天穹街交付后，自动走向莉兹贝丝并使用持有的卡片，避免超过 10 张上限后获得的库啵兑换券被浪费。可配置使用阈值和宝箱选择（设置 → 通用）",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Skybuilders' resource inspection and a full hands-free loop — chain GatherBuddyReborn autogather → resource inspection → Artisan craft → collect, then restart (Settings → Integrations)",
+      "Translated": "天穹街资源检查与全自动循环——串联 GatherBuddyReborn 自动采集 → 资源检查 → 工匠制作 → 收藏品采集，然后重新开始（设置 → 集成）",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Artisan crafting now triggers correctly inside the Firmament — it was silently inert before",
+      "Translated": "工匠制作现在能在天穹街内正确触发——此前会静默失效",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added an in-progress status while an Artisan list is crafting",
+      "Translated": "新增工匠列表制作进行中的状态显示",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed a Kupo of Fortune game crash, and Kupo interactions now respect your configured UI delay",
+      "Translated": "修复了库啵好运道游戏崩溃的问题，库啵交互现在会遵循你配置的 UI 延迟",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added a 'stop after N full loops' stop condition, with full-loop counting in the session stats (Planner and Settings → Goal)",
+      "Translated": "新增“完成 N 次完整循环后停止”的停止条件，会话统计中会记录完整循环次数（规划器与设置 → 目标）",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed Firmament appraiser row resolution so the correct collectable is turned in",
+      "Translated": "修复了天穹街鉴定师行解答所问题，确保交付正确的收藏品",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Per-addon UI delays — tune the wait for each game window individually (Settings → Timing)",
+      "Translated": "按插件区分的 UI 延迟——可单独调整每个游戏窗口的等待时间（设置 → 计时）",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Auto turn-in when you open a Collectables shop or Firmament appraiser window yourself — skips travel and doesn't start buying (Settings → General)",
+      "Translated": "当你自行打开收藏品商店或天穹街鉴定师窗口时自动交付——跳过移动且不会开始购买（设置 → 通用）",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Kupo now waits for a real appraiser run before playing, resets the voucher count afterwards, resumes an interrupted turn-in, and skips the voucher pause on manual window turn-ins",
+      "Translated": "库啵现在会等待真正的鉴定师流程后再使用，之后重置兑换券计数，恢复被中断的交付，并在手动窗口交付时跳过兑换券暂停",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "The changelog now credits outside contributors inline, and you can reopen it any time with /collector changelog or Settings → General → View changelog",
+      "Translated": "更新日志现在会内联标注外部贡献者，并可随时通过 /collector changelog 或 设置 → 通用 → 查看更新日志 重新打开",
+      "Context": "ChangelogUi.Add_0_8_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.7.0",
+      "Translated": "版本 0.7.0",
+      "Context": "ChangelogUi.Add_0_7_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Experimental Firmament (Skybuilders' Scrip) support — turn in Skybuilders' collectables and buy from the Firmament scrip shop.",
+      "Translated": "实验性天穹街（天穹工匠票据）支持 — 可交纳天穹工匠收藏品，并在天穹街票据商店购买。",
+      "Context": "ChangelogUi.Add_0_7_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Firmament mode is experimental — in the System toggle, hold Shift and click 'Firmament' to enable it. Expect rough edges, and please report anything that breaks",
+      "Translated": "天穹街模式为实验性功能 — 在系统开关中按住 Shift 并点击“天穹街”即可启用。可能存在粗糙之处，如有问题请反馈",
+      "Context": "ChangelogUi.Add_0_7_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.6.2",
+      "Translated": "版本 0.6.2",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added a 'Copy troubleshooting info' button (Settings → General and on the hard-fail banner) — paste it along with your issue report",
+      "Translated": "新增“复制故障排查信息”按钮（设置 → 常规以及硬失败横幅上）— 请将其与问题报告一并粘贴",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Purchases and turn-ins are now verified against your actual scrip count, so a missed dialog can no longer record progress that didn't happen",
+      "Translated": "购买和交纳现在会与实际票据数量核对，因此漏掉的对话框不会再记录未发生的进度",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed the Deliveroo run crashing right after teleporting (now waits for the navmesh to be ready) and disabling Deliveroo mid-list",
+      "Translated": "修复了 Deliveroo 在传送后立即崩溃的问题（现在会等待导航网格就绪）以及列表中途中禁用 Deliveroo 的问题",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed the stop button fighting the Artisan inventory-full watcher — stopping now sticks",
+      "Translated": "修复了停止按钮与 Artisan 背包已满守望者冲突的问题 — 现在停止会生效",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed the Artisan inventory-full pause giving up silently and timing out while the last craft finished",
+      "Translated": "修复了 Artisan 背包已满暂停时静默放弃、以及在最后一次制作完成时超时的问题",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Inventory space is now only checked when actually buying, not when starting automation",
+      "Translated": "现在仅在真正购买时检查背包空间，而非启动自动化时",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Summoning bells in inns and player housing are recognized again for AutoRetainer",
+      "Translated": "旅馆和玩家房屋中的召唤铃再次可被 AutoRetainer 识别",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Vendor data now loads in the background instead of stalling the game on login",
+      "Translated": "商人数据现在在后台加载，不再在登录时卡住游戏",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Planner tab is much lighter on the framerate",
+      "Translated": "规划器标签页对帧率的影响大幅降低",
+      "Context": "ChangelogUi.Add_0_6_2",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.6.1",
+      "Translated": "版本 0.6.1",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Multi-character scrip balance dashboard (Characters tab) — refreshes on login and after each turn-in / buy cycle, so AutoRetainer cycles piggyback samples for every character",
+      "Translated": "多角色票据余额仪表盘（角色标签页）— 在登录时及每次交纳/购买循环后刷新，因此 AutoRetainer 循环会为每个角色顺带采样",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Discord webhook notifications on hard-fail, goal complete, stop-condition, and (optional) scrip-cap reached",
+      "Translated": "硬失败、目标完成、停止条件以及（可选的）票据上限达到时的 Discord webhook 通知",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "User-configurable stop conditions: scrips earned, buy cycles, session minutes",
+      "Translated": "用户可配置的停止条件：获得票据数、购买循环数、会话分钟数",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Planner now credits collectables already in your bags against the estimated turn-ins (overview and per-row table)",
+      "Translated": "规划器现在会将背包中已有的收藏品计入预估交纳数（总览和逐行表格）",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Planner Session panel shows per-currency scrips earned alongside scrips spent",
+      "Translated": "规划器会话面板显示各货币获得的票据以及花费的票据",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Settings → Goal grows a Stop Conditions section with enable+value rows",
+      "Translated": "设置 → 目标新增停止条件区域，包含启用+数值行",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Refreshed the changelog UI to match the rest of the theme; dropped the OtterGui dependency",
+      "Translated": "更新了更新日志界面以匹配整体主题；移除了 OtterGui 依赖",
+      "Context": "ChangelogUi.Add_0_6_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.6.0",
+      "Translated": "版本 0.6.0",
+      "Context": "ChangelogUi.Add_0_6_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Refreshed the UI styling across the main, planner, and settings tabs",
+      "Translated": "刷新了主界面、规划器和设置标签页的界面样式",
+      "Context": "ChangelogUi.Add_0_6_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Split the purchase list into separate Gathering and Crafting tabs",
+      "Translated": "将购买列表拆分为采集和制作两个独立标签页",
+      "Context": "ChangelogUi.Add_0_6_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added a hard-fail banner that halts automation when something goes wrong",
+      "Translated": "新增硬性失败横幅，出错时停止自动化",
+      "Context": "ChangelogUi.Add_0_6_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added a reserve scrip floor so purchases leave a configurable amount unspent",
+      "Translated": "新增票据保留下限，购买时保留可配置的未花费数量",
+      "Context": "ChangelogUi.Add_0_6_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.5.8",
+      "Translated": "版本 0.5.8",
+      "Context": "ChangelogUi.Add_0_5_8",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Updated for API15",
+      "Translated": "适配 API15",
+      "Context": "ChangelogUi.Add_0_5_8",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.5.5 testing",
+      "Translated": "版本 0.5.5 测试",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added Deliveroo integration — can now check for Deliveroo between runs",
+      "Translated": "新增 Deliveroo 集成 — 现在可在运行间检查 Deliveroo",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added a Planner tab for setting scrip goals and stopping automation when complete",
+      "Translated": "新增规划器标签页，可设置票据目标并在完成后停止自动化",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Merged settings into the main window — config window now just opens main window",
+      "Translated": "将设置合并到主窗口 — 配置窗口现在仅打开主窗口",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Reorganized the UI into tabs (Main, Planner, Settings)",
+      "Translated": "将界面重组为标签页（主界面、规划器、设置）",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added collapsible panels and session stats tracking",
+      "Translated": "新增可折叠面板和会话统计追踪",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added handling for equippable items",
+      "Translated": "新增可装备物品处理",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "General code cleanup and bug fixes",
+      "Translated": "常规代码清理和错误修复",
+      "Context": "ChangelogUi.Add_0_5_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.5.3",
+      "Translated": "版本 0.5.3",
+      "Context": "ChangelogUi.Add_0_5_3",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Fixed some more bugs",
+      "Translated": "修复了更多错误",
+      "Context": "ChangelogUi.Add_0_5_3",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.5.1",
+      "Translated": "版本 0.5.1",
+      "Context": "ChangelogUi.Add_0_5_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Fixed some bugs",
+      "Translated": "修复了一些错误",
+      "Context": "ChangelogUi.Add_0_5_1",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.5.0",
+      "Translated": "版本 0.5.0",
+      "Context": "ChangelogUi.Add_0_5_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added AutoRetainer integration",
+      "Translated": "新增 AutoRetainer 集成",
+      "Context": "ChangelogUi.Add_0_5_0",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.4.8 testing",
+      "Translated": "版本 0.4.8 测试",
+      "Context": "ChangelogUi.Add_0_4_8",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added the option to check for completed ventures between runs via AutoRetainer",
+      "Translated": "新增选项：通过 AutoRetainer 在每次运行之间检查已完成的探险任务",
+      "Context": "ChangelogUi.Add_0_4_8",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.4.6",
+      "Translated": "版本 0.4.6",
+      "Context": "ChangelogUi.Add_0_4_6",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Updated logic for reading scrip amount, fixing various issues",
+      "Translated": "更新解析票据数量的逻辑，修复多项问题",
+      "Context": "ChangelogUi.Add_0_4_6",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.4.5",
+      "Translated": "版本 0.4.5",
+      "Context": "ChangelogUi.Add_0_4_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Bandaid fix for cases where the user has missing scripshop subpages and it cant find the item - now forces through every sub page trying to find the item",
+      "Translated": "临时修复用户缺少票据商店子页面导致找不到物品的情况——现在会强制遍历每个子页面以查找物品",
+      "Context": "ChangelogUi.Add_0_4_5",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Now matches scripshopitems with ItemIds instead of strings, supporting more languages than english (You might have to re-add your items to purchase for them to show up properly)",
+      "Translated": "现在使用物品 ID 而非字符串匹配票据商店物品，支持英语以外的更多语言（你可能需要重新添加要购买的物品才能正常显示）",
+      "Context": "ChangelogUi.Add_0_4_4",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.40",
+      "Translated": "版本 0.40",
+      "Context": "ChangelogUi.Add0_40",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "The plugin will now turn in any remaining collectables after finishing scrip shop purchases",
+      "Translated": "插件现在会在完成票据商店购买后上交所有剩余的收藏品",
+      "Context": "ChangelogUi.Add0_40",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Collectable turn-in will now abort early if you're hitting scrip cap again as well",
+      "Translated": "如果再次达到票据上限，收藏品上交现在也会提前中止",
+      "Context": "ChangelogUi.Add0_40",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.39",
+      "Translated": "版本 0.39",
+      "Context": "ChangelogUi.Add0_39",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Re-enabled functionality",
+      "Translated": "重新启用功能",
+      "Context": "ChangelogUi.Add0_39",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Merged ArtisanBuddy functionality into TheCollector, adding the ability to craft a selected artisan list after autogather disables",
+      "Translated": "将 ArtisanBuddy 功能合并到 TheCollector，新增在自动采集禁用后制作所选工匠列表的功能",
+      "Context": "ChangelogUi.Add0_39",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Removed the feature to enable auto collectable turn-in after autogather disables",
+      "Translated": "移除自动采集禁用后启用自动收藏品上交的功能",
+      "Context": "ChangelogUi.Add0_39",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.38",
+      "Translated": "版本 0.38",
+      "Context": "ChangelogUi.Add0_38",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "With the most recent testing build of GatherBuddyReborn, it has implemented the feature to automatically turn-in collectables and also handle scripshop purchases.\nFor the time being I'm going disable the functionality of this Plugin till the next version, where I will cut out all the gatherable collectable stuff so it'll be crafting only.\nThis should be out in the next couple of days, a big thank you to anyone using the plugin and those who decided to support!♡",
+      "Translated": "随着 GatherBuddyReborn 最新测试版构建，它已实现自动上交收藏品以及处理票据商店购买的功能。\n目前我将暂时禁用本插件的相关功能，直到下个版本，届时我会移除所有可采集收藏品相关内容，使其仅保留制作功能。\n这应该会在接下来几天内发布，非常感谢所有使用本插件的用户以及决定支持的人！♡",
+      "Context": "ChangelogUi.Add0_38",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.37",
+      "Translated": "版本 0.37",
+      "Context": "ChangelogUi.Add0_37",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "If you had your shop preferred shop set to Gridania, please select something else and then re-select Gridania for everything to work correctly, thank you!",
+      "Translated": "如果你将首选商店设置为格里达尼亚，请先选择其他商店，然后重新选择格里达尼亚，以确保一切正常工作，谢谢！",
+      "Context": "ChangelogUi.Add0_37",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Now properly checks if you can actually teleport when artisan is done crafting a list",
+      "Translated": "现在会正确检查工匠完成列表制作后你是否真的可以传送",
+      "Context": "ChangelogUi.Add0_37",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed a bug where it wouldn't teleport when you're in a housing ward",
+      "Translated": "修复了在住宅区时不会传送的问题",
+      "Context": "ChangelogUi.Add0_37",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Now moves to the shop instead of teleporting if you're in the same territory and are somewhat nearby",
+      "Translated": "现在如果在同一区域且距离较近，会改为走向商店而不是传送",
+      "Context": "ChangelogUi.Add0_37",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.36",
+      "Translated": "版本 0.36",
+      "Context": "ChangelogUi.Add0_36",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added failsafe for buying scrip items so it wont buy the wrong shop item anymore if it cant find the selected one in the shop tab",
+      "Translated": "为购买票据物品添加了保护机制，当在商店标签页中找不到所选物品时，不会再购买错误的商店物品",
+      "Context": "ChangelogUi.Add0_36",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Made it fetch the data for the scrip shop items from the git repo instead of locally, allowing for edits without having to actually update the plugin",
+      "Translated": "改为从 git 仓库获取票据商店物品数据而非本地数据，这样无需实际更新插件即可进行编辑",
+      "Context": "ChangelogUi.Add0_36",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.35",
+      "Translated": "版本 0.35",
+      "Context": "ChangelogUi.Add0_35",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added Mason's Abrasive and fixed a few items indices",
+      "Translated": "添加了 Mason's Abrasive 并修正了几个物品索引",
+      "Context": "ChangelogUi.Add0_35",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.34",
+      "Translated": "版本 0.34",
+      "Context": "ChangelogUi.Add0_34",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "If your crafter or gatherer is high enough level but you haven't unlocked the corresponding Scrip Exchange tab (e.g. \"Purple Scrip Exchange – Lv. 80 Materials/Bait/Tokens\"), the plugin may purchase the wrong item.\nUnlock the relevant Splendors vendor tabs before setting higher-level items.",
+      "Translated": "如果你的制作或采集职业等级足够高，但尚未解锁对应的票据兑换标签页（例如“紫色票据兑换 – 80级 材料/鱼饵/代币”），插件可能会购买错误的物品。\n在设置更高等级物品前，请先解锁相关的华丽品商人标签页。",
+      "Context": "ChangelogUi.Add0_34",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed collectable sorting in your inventory completely now",
+      "Translated": "彻底修复了背包中收藏品的排序问题",
+      "Context": "ChangelogUi.Add0_34",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.33",
+      "Translated": "版本 0.33",
+      "Context": "ChangelogUi.Add0_33",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Filtered 'Gazelle Leather' out of the list of collectables in your inventory since Luminas IsCollectable flag returns true for it for some reason???",
+      "Translated": "从背包收藏品列表中过滤掉了“瞪羚皮革”，因为 Luminas 的 IsCollectable 标志不知为何对它返回 true？？？",
+      "Context": "ChangelogUi.Add0_33",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.32",
+      "Translated": "版本 0.32",
+      "Context": "ChangelogUi.Add0_32",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Increased timeout on turning in collectables, which should enable full inventory turn-ins now",
+      "Translated": "增加了提交收藏品的超时时间，现在应该可以完整提交整个背包了",
+      "Context": "ChangelogUi.Add0_32",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed bought items not adding up anymore",
+      "Translated": "修复了已购买物品数量不再累加的问题",
+      "Context": "ChangelogUi.Add0_32",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.31",
+      "Translated": "版本 0.31",
+      "Context": "ChangelogUi.Add0_31",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added Lifestream integration and with that new CollectableShop locations Solution Nine and Gridania",
+      "Translated": "添加了 Lifestream 集成，并新增了收藏品商店位置：九号解决方案和格里达尼亚",
+      "Context": "ChangelogUi.Add0_31",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Further improved automation",
+      "Translated": "进一步改进了自动化",
+      "Context": "ChangelogUi.Add0_31",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.30",
+      "Translated": "版本 0.30",
+      "Context": "ChangelogUi.Add0_30",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added new scripshopitem Levinchrome Aethersand!",
+      "Translated": "添加了新的票据商店物品：雷光灵砂！",
+      "Context": "ChangelogUi.Add0_30",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed scripshopautomation breaking. Sorry!",
+      "Translated": "修复了收藏品商店自动化失效的问题。抱歉！",
+      "Context": "ChangelogUi.Add0_30",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.29",
+      "Translated": "版本 0.29",
+      "Context": "ChangelogUi.Add0_29",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Refactored the whole automation handling",
+      "Translated": "重构了整个自动化处理逻辑",
+      "Context": "ChangelogUi.Add0_29",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added /collector stop command to stop automation as well as a window with a stop button that appears when automation is running",
+      "Translated": "新增 /collector stop 命令用于停止自动化，以及自动化运行时显示的带停止按钮的窗口",
+      "Context": "ChangelogUi.Add0_29",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Added new config option to start collecting once you finish fishing",
+      "Translated": "新增配置选项：钓鱼结束后自动开始采集",
+      "Context": "ChangelogUi.Add0_29",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Exposed a few functions via EzIPC",
+      "Translated": "通过 EzIPC 暴露了若干函数",
+      "Context": "ChangelogUi.Add0_29",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Version 0.28",
+      "Translated": "版本 0.28",
+      "Context": "ChangelogUi.Add0_28",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Added changelog window!",
+      "Translated": "新增更新日志窗口！",
+      "Context": "ChangelogUi.Add0_28",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Marked Solution nine teleport as not functional & made it not interactable and also set the Eulmore one as default",
+      "Translated": "将九号解决方案传送标记为不可用并设为不可交互，同时将游末邦设为默认",
+      "Context": "ChangelogUi.Add0_28",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Fixed a bug where it would fail to buy items if the quantity was set too high",
+      "Translated": "修复了数量设置过高时购买物品失败的 bug",
+      "Context": "ChangelogUi.Add0_28",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Made certain config settings not interactable if the required plugins are not installed",
+      "Translated": "当所需插件未安装时，部分配置项将不可交互",
+      "Context": "ChangelogUi.Add0_28",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "No changelog entries yet.",
+      "Translated": "暂无更新日志条目。",
+      "Context": "ChangelogWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "The Collector — ",
+      "Translated": "收藏家 —",
+      "Context": "ChangelogWindow.DrawHero",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "From the changelog history",
+      "Translated": "来自更新日志历史",
+      "Context": "ChangelogWindow.DrawHero",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "New since you last opened the changelog",
+      "Translated": "自上次打开更新日志以来的新内容",
+      "Context": "ChangelogWindow.DrawHero",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "(no entries)",
+      "Translated": "（无条目）",
+      "Context": "ChangelogWindow.DrawEntries",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Show new updates",
+      "Translated": "显示新更新",
+      "Context": "ChangelogWindow.DrawFooter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Only show important updates",
+      "Translated": "仅显示重要更新",
+      "Context": "ChangelogWindow.DrawFooter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Never show on launch",
+      "Translated": "启动时不再显示",
+      "Context": "ChangelogWindow.DrawFooter",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Combo"
+    },
+    {
+      "Original": "Got it",
+      "Translated": "知道了",
+      "Context": "ChangelogWindow.DrawFooter",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.AccentButton"
+    },
+    {
+      "Original": "Heads up",
+      "Translated": "提示",
+      "Context": "DrawEntries",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Highlights",
+      "Translated": "亮点",
+      "Context": "DrawEntries",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Changes",
+      "Translated": "变更",
+      "Context": "DrawEntries",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "CharsToolbar",
+      "Translated": "角色工具栏",
+      "Context": "MainWindow.DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "CharsEmpty",
+      "Translated": "暂无角色",
+      "Context": "MainWindow.DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "CharsTable",
+      "Translated": "角色列表",
+      "Context": "MainWindow.DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "Main",
+      "Translated": "主页",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Planner",
+      "Translated": "规划",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Characters",
+      "Translated": "角色",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "The Collector",
+      "Translated": "收藏家",
+      "Context": "MainWindow.DrawHero",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "Scrip turn-ins, purchases, and gathering loops",
+      "Translated": "票据交纳、购买与采集循环",
+      "Context": "MainWindow.DrawHero",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.HeroBanner"
+    },
+    {
+      "Original": "HardFail",
+      "Translated": "严重错误",
+      "Context": "MainWindow.DrawHardFailBanner",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "StatusBar",
+      "Translated": "状态栏",
+      "Context": "MainWindow.DrawStatusRow",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "SystemToggle",
+      "Translated": "系统开关",
+      "Context": "MainWindow.DrawSystemToggle",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "Experimental — hold Shift and click to enable.",
+      "Translated": "实验性 — 按住 Shift 并点击以启用。",
+      "Context": "MainWindow.DrawSystemOption",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Experimental feature.",
+      "Translated": "实验性功能。",
+      "Context": "MainWindow.DrawSystemOption",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Support Me",
+      "Translated": "支持我",
+      "Context": "MainWindow.DrawSupportButton",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.AccentButton"
+    },
+    {
+      "Original": "AddItem_",
+      "Translated": "添加物品_",
+      "Context": "MainWindow.DrawAddItem",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "No items added yet.",
+      "Translated": "尚未添加任何物品。",
+      "Context": "MainWindow.DrawItemsList",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "ItemsList_",
+      "Translated": "物品列表_",
+      "Context": "MainWindow.DrawItemsList",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "AddItem_Firmament",
+      "Translated": "添加物品_天穹街",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "ItemsList_Firmament",
+      "Translated": "物品列表_天穹街",
+      "Context": "MainWindow.DrawFirmamentItemsList",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "Add items to your purchase list on the Main tab to see the plan.",
+      "Translated": "在主标签页将物品添加到购买列表以查看计划。",
+      "Context": "MainWindow.DrawPlannerTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "PlanOverview",
+      "Translated": "计划概览",
+      "Context": "MainWindow.DrawPlannerOverview",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "CostBreakdown",
+      "Translated": "成本明细",
+      "Context": "MainWindow.DrawPlannerCostBreakdown",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel"
+    },
+    {
+      "Original": "Scrip Cost Breakdown",
+      "Translated": "票据成本明细",
+      "Context": "MainWindow.DrawPlannerCostBreakdown",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel"
+    },
+    {
+      "Original": "CollectableOptions",
+      "Translated": "收藏品选项",
+      "Context": "MainWindow.DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel"
+    },
+    {
+      "Original": "Collectable Turn-in Options",
+      "Translated": "收藏品提交选项",
+      "Context": "MainWindow.DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel"
+    },
+    {
+      "Original": "SessionStats",
+      "Translated": "会话统计",
+      "Context": "MainWindow.DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel"
+    },
+    {
+      "Original": "Session",
+      "Translated": "会话",
+      "Context": "MainWindow.DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.CollapsiblePanel"
+    },
+    {
+      "Original": "AllTimeScrips",
+      "Translated": "累计票据",
+      "Context": "MainWindow.DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "vnavmesh plugin is not installed or not ready.",
+      "Translated": "vnavmesh 插件未安装或未就绪。",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "General",
+      "Translated": "常规",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Integrations",
+      "Translated": "集成",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Goal",
+      "Translated": "目标",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Timing",
+      "Translated": "时机",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "MainWindow.DrawSettingsTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "InstalledPlgs",
+      "Translated": "已安装插件",
+      "Context": "MainWindow.DrawInstalledPlugins",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": "optional",
+      "Translated": "可选",
+      "Context": "MainWindow.DrawPluginStatus",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Chip"
+    },
+    {
+      "Original": "required",
+      "Translated": "必需",
+      "Context": "MainWindow.DrawPluginStatus",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Chip"
+    },
+    {
+      "Original": "Collectable Shop",
+      "Translated": "收藏品商店",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Select a territory",
+      "Translated": "选择区域",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Scanning vendor data...",
+      "Translated": "正在扫描商人数据...",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " (Lifestream required)",
+      "Translated": "（需要 Lifestream）",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Lifestream plugin is required to reach this territory.",
+      "Translated": "需要 Lifestream 插件才能前往该区域。",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Play Kupo of Fortune to spend held cards",
+      "Translated": "玩库啵好运道以消耗持有的卡片",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "After a Firmament turn-in, walk to Lizbeth and play any Kupo of Fortune\ncards you hold so vouchers earned past the 10-card cap aren't wasted.",
+      "Translated": "在天穹街交纳后，走到莉兹贝丝处并玩掉你持有的所有库啵好运道\n卡片，以免超过 10 张上限后获得的兑换券被浪费。",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Play when cards held reach:",
+      "Translated": "持有卡片达到以下数量时游玩：",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Chest to scratch:",
+      "Translated": "抓击的宝箱：",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Left can only win 2nd-4th prize (avoids the jackpot and the\nconsolation). Random right can win any of the 5 prizes.",
+      "Translated": "左侧只能赢得第 2-4 等奖（避开部队特效：金碟币提高和\n慰藉）。随机右侧可赢得全部 5 个奖项。",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Automation",
+      "Translated": "自动化",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Buy items after each trade instead of on capping scrips",
+      "Translated": "每次交易后购买物品，而非在票据达到上限时购买",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Reset each quantity after completing the list",
+      "Translated": "完成列表后重置每个数量",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Collect on finished fishing",
+      "Translated": "钓鱼完成后进行收藏品采集",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Auto turn in when opening a collectables window manually",
+      "Translated": "手动打开收藏品窗口时自动交纳",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When you open the Collectables shop or the Firmament appraiser (HWDSupply) yourself,\nturn in eligible collectables automatically. Skips travel and does not start buying.",
+      "Translated": "当你自行打开收藏品商店或天穹街鉴定人（HWDSupply）时，\n自动交纳符合条件的收藏品。跳过移动且不会开始购买。",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Reserve scrips:",
+      "Translated": "保留票据：",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Purchases will leave at least this many scrips of each currency unspent.",
+      "Translated": "购买后每种货币至少保留此数量的票据不花费。",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Troubleshooting",
+      "Translated": "故障排除",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "About",
+      "Translated": "关于",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "View changelog",
+      "Translated": "查看更新日志",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Opens the changelog window.",
+      "Translated": "打开更新日志窗口。",
+      "Context": "MainWindow.DrawSettingsGeneral",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Copy troubleshooting info",
+      "Translated": "复制故障排除信息",
+      "Context": "MainWindow.DrawCopyTroubleshootingButton",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Copies plugin state, settings and dependency status to the clipboard.\nPaste it along with your issue report.",
+      "Translated": "将插件状态、设置和依赖状态复制到剪贴板。\n请随问题报告一并粘贴。",
+      "Context": "MainWindow.DrawCopyTroubleshootingButton",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Copied!",
+      "Translated": "已复制！",
+      "Context": "MainWindow.DrawCopyTroubleshootingButton",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "<none>",
+      "Translated": "<无>",
+      "Context": "MainWindow.BuildTroubleshootingInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "<empty>",
+      "Translated": "<空>",
+      "Context": "MainWindow.BuildTroubleshootingInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Enable Autogather on finish",
+      "Translated": "采集完成后启用自动采集",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "GatherbuddyReborn is not installed or not ready.",
+      "Translated": "GatherbuddyReborn 未安装或未就绪。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Turn in collectables on autogather finish",
+      "Translated": "自动采集完成后提交收藏品",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Disabled while \"Craft selected Artisan list on autogather finish\" is enabled (Artisan section).",
+      "Translated": "当“自动采集完成后制作所选 Artisan 列表”启用时禁用（Artisan 部分）。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Disabled while \"Run resource inspection on autogather finish\" is enabled.",
+      "Translated": "当“自动采集完成后运行资源检查”启用时禁用。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Run resource inspection on autogather finish",
+      "Translated": "自动采集完成后运行资源检查",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Disabled while \"Turn in collectables on autogather finish\" is enabled.",
+      "Translated": "当“自动采集完成后提交收藏品”启用时禁用。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Artisan is not installed or not ready.",
+      "Translated": "Artisan 未安装或未就绪。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Artisan and GatherbuddyReborn are not installed or not ready.",
+      "Translated": "Artisan 和 GatherbuddyReborn 未安装或未就绪。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Craft selected Artisan list on resource inspection finish",
+      "Translated": "资源检查完成后制作选定的 Artisan 列表",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "After a resource-inspection run finishes (gather → inspect → craft),\nstart the selected Artisan list.",
+      "Translated": "资源检查流程（采集 → 检查 → 制作）结束后，\n启动选定的 Artisan 列表。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Craft selected Artisan list on autogather finish",
+      "Translated": "自动采集完成后制作选定的 Artisan 列表",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Disabled while \"Turn in collectables on autogather finish\" is enabled (GatherBuddyReborn section).",
+      "Translated": "启用“自动采集完成后交纳收藏品”时禁用（GatherBuddyReborn 部分）。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "After GatherBuddyReborn autogather finishes, start the selected Artisan list.",
+      "Translated": "GatherBuddyReborn 自动采集完成后，启动选定的 Artisan 列表。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Collect on finish crafting an Artisan list",
+      "Translated": "完成 Artisan 列表制作后采集收藏品",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Pause Artisan when inventory is full, turn in, then resume",
+      "Translated": "背包满时暂停 Artisan，交纳后继续",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When the running Artisan list drops below the free-slot threshold and\nyou have collectables, pause the list, run the turn-in cascade, then\nresume the list from where it left off.",
+      "Translated": "当运行中的 Artisan 列表低于空闲槽位阈值且\n你有收藏品时，暂停列表，执行交纳流程，然后\n从暂停处继续列表。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Pause when free slots ≤",
+      "Translated": "空闲槽位 ≤ 时暂停",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Check for available ventures between runs",
+      "Translated": "在运行间隔检查可用探险",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "AutoRetainer is not installed or not ready.",
+      "Translated": "AutoRetainer 未安装或未就绪。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Run Deliveroo GC turn-ins between runs",
+      "Translated": "在运行间隔执行 Deliveroo 大国防联军交纳",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Deliveroo is not installed or not ready.",
+      "Translated": "Deliveroo 未安装或未就绪。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Lifestream plugin is required for Maelstrom GC turn-ins.",
+      "Translated": "黑涡斗技场大国防联军交纳需要 Lifestream 插件。",
+      "Context": "MainWindow.DrawSettingsIntegrations",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Custom Commands",
+      "Translated": "自定义命令",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Run any chat command at a point in the loop — e.g. \"/li gc\" before crafting to craft at your Grand Company \"Wait\" holds the loop until Lifestream is idle and you can act again before continuing.",
+      "Translated": "在循环中的某个节点运行任意聊天命令 — 例如制作前运行“/li gc”以在大国防联军处制作。“等待”会保持循环直到 Lifestream 空闲且你可以再次行动后再继续。",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "On",
+      "Translated": "启用",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Trigger",
+      "Translated": "触发",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Command",
+      "Translated": "命令",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Wait",
+      "Translated": "等待",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Sent through the chat handler, so plugin commands (/li, /vnav, …) and game commands both work.",
+      "Translated": "通过聊天处理器发送，因此插件命令（/li、/vnav、…）和游戏命令均可使用。",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hold the loop until Lifestream is idle, no zone change is in flight\nand you can act again, before the next step runs.",
+      "Translated": "在下一步执行前保持循环，直到 Lifestream 空闲、没有正在进行的区域切换且你可以再次行动。",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add command",
+      "Translated": "添加命令",
+      "Context": "MainWindow.DrawSettingsCommandHooks",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.AccentButton"
+    },
+    {
+      "Original": "Artisan List:",
+      "Translated": "Artisan 列表：",
+      "Context": "MainWindow.DrawArtisanListPicker",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "(Artisan not ready)",
+      "Translated": "（Artisan 未就绪）",
+      "Context": "MainWindow.DrawArtisanListPicker",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "(no lists in Artisan)",
+      "Translated": "（Artisan 中无列表）",
+      "Context": "MainWindow.DrawArtisanListPicker",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Send Discord notifications",
+      "Translated": "发送 Discord 通知",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Webhook URL:",
+      "Translated": "Webhook URL：",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Posts a test message to verify the webhook works.",
+      "Translated": "发送测试消息以验证 Webhook 是否可用。",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Notify on:",
+      "Translated": "通知时机：",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Goal complete (purchase list done)",
+      "Translated": "目标完成（购买列表完成）",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Stop condition met",
+      "Translated": "满足停止条件",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Scrip cap reached",
+      "Translated": "达到票据上限",
+      "Context": "MainWindow.DrawSettingsDiscord",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "UI Delay",
+      "Translated": "UI 延迟",
+      "Context": "MainWindow.DrawSettingsTiming",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Delay between UI interactions during automation, set per addon. Lower values run faster but may misbehave on slower machines or with high latency. Addons ",
+      "Translated": "自动化期间 UI 交互之间的延迟，按插件设置。较低的值运行更快，但在较慢的机器或高延迟下可能出错。未设置覆盖的插件",
+      "Context": "MainWindow.DrawSettingsTiming",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "without an override use the default (",
+      "Translated": "使用默认值（",
+      "Context": "MainWindow.DrawSettingsTiming",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " ms).",
+      "Translated": "毫秒）。",
+      "Context": "MainWindow.DrawSettingsTiming",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Using default (",
+      "Translated": "使用默认值（",
+      "Context": "MainWindow.DrawSettingsTiming",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " ms)",
+      "Translated": "毫秒）",
+      "Context": "MainWindow.DrawSettingsTiming",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Goal Automation",
+      "Translated": "目标自动化",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Stop gathering when purchase list is complete",
+      "Translated": "购买清单完成后停止采集",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When enabled, automation will stop instead of\nre-enabling autogather once all items are purchased.",
+      "Translated": "启用后，所有物品购买完毕时将停止自动化，\n而不是重新启用自动采集。",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Stop Conditions",
+      "Translated": "停止条件",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Evaluated between turn-in and buy cycles. Counters reset when the plugin reloads.",
+      "Translated": "在交纳与购买循环之间评估。插件重载时计数器重置。",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Stop after scrips earned",
+      "Translated": "获得票据后停止",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Total scrips estimated earned this session (using HighReward).\nApplies across currencies.",
+      "Translated": "本次会话预计获得的总票据（使用 HighReward）。\n适用于所有货币。",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Stop after buy cycles",
+      "Translated": "购买循环后停止",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Number of times the shop has been visited and purchases completed.",
+      "Translated": "商店访问并完成购买的次数。",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Stop after session minutes",
+      "Translated": "会话分钟数后停止",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Real elapsed minutes since the current session started.",
+      "Translated": "当前会话开始以来实际经过的分钟数。",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Stop after full loops",
+      "Translated": "完整循环后停止",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "One full loop = a complete gather → inspect → craft cycle, counted when\nautogather is re-enabled. Stops after finishing the current cycle.",
+      "Translated": "一个完整循环 = 一次完整的采集 → 检查 → 制作周期，在\n重新启用自动采集时计数。完成当前循环后停止。",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Hide fishing collectables from planner",
+      "Translated": "在规划器中隐藏钓鱼收藏品",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Hide collectables above your job level",
+      "Translated": "隐藏高于当前职业等级的收藏品",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Filters the planner to only show collectables you can\nactually gather or craft. Also gates the 'best' pick.",
+      "Translated": "筛选规划器，仅显示你实际能够\n采集或制作的收藏品。同时限制“最佳”选择。",
+      "Context": "MainWindow.DrawSettingsGoal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "State",
+      "Translated": "状态",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Plugin state",
+      "Translated": "插件状态",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Territory",
+      "Translated": "区域",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Preferred",
+      "Translated": "首选",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Active source",
+      "Translated": "活动来源",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Config version",
+      "Translated": "配置版本",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Has collectible",
+      "Translated": "有收藏品",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Free inv slots",
+      "Translated": "空闲背包格",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Automation running",
+      "Translated": "自动化运行中",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "  collectable",
+      "Translated": "收藏品",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "  scrip shop",
+      "Translated": "票据商店",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "  autoretainer",
+      "Translated": "自动雇员",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "  deliveroo",
+      "Translated": "交付",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Session started",
+      "Translated": "会话开始",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Turn-ins",
+      "Translated": "交纳次数",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Items purchased",
+      "Translated": "已购物品",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Full loops",
+      "Translated": "完整循环",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Scrips earned",
+      "Translated": "已获票据",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Current item",
+      "Translated": "当前物品",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " more",
+      "Translated": "更多",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Collectable NPC",
+      "Translated": "收藏品 NPC",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Scrip NPC",
+      "Translated": "票据 NPC",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Pipelines",
+      "Translated": "流水线",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Starts the pipeline directly, bypassing the automation cascade.",
+      "Translated": "直接启动流水线，绕过自动化倾泻。",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Start collectable",
+      "Translated": "开始采集收藏品",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Start scrip shop",
+      "Translated": "开始代币商店",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Start autoretainer",
+      "Translated": "开始自动雇员",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Start deliveroo",
+      "Translated": "开始配送",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Start resource inspection",
+      "Translated": "开始资源检查",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Start Kupo of Fortune",
+      "Translated": "开始库啵好运道",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Walk to Lizbeth in the Firmament and play any held Kupo of Fortune\ncards. Runs standalone — won't trigger the buy/cascade flow.",
+      "Translated": "前往天穹街的莉兹贝丝处并游玩所有持有的库啵好运道\n卡牌。独立运行——不会触发购买/倾泻流程。",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Force stop all",
+      "Translated": "强制停止全部",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Reset",
+      "Translated": "重置",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Hold Ctrl to enable destructive buttons.",
+      "Translated": "按住 Ctrl 启用危险按钮。",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Ctrl held — buttons are armed.",
+      "Translated": "已按住 Ctrl——按钮已激活。",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Clear hard fail",
+      "Translated": "清除硬失败",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Reset session counters",
+      "Translated": "重置会话计数",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Reset purchased amounts",
+      "Translated": "重置已购买数量",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Clear character balances",
+      "Translated": "清除角色余额",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Clear total scrips spent",
+      "Translated": "清除代币总支出",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Dump to log",
+      "Translated": "导出到日志",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Vendor catalog",
+      "Translated": "商人目录",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Scrip shop items",
+      "Translated": "代币商店物品",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Full config",
+      "Translated": "完整配置",
+      "Context": "MainWindow.DrawSettingsDebug",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Automation halted",
+      "Translated": "自动化已停止",
+      "Context": "MainWindow.DrawHardFailBanner",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Acknowledge",
+      "Translated": "确认",
+      "Context": "MainWindow.DrawHardFailBanner",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.DangerButton"
+    },
+    {
+      "Original": " done",
+      "Translated": "完成",
+      "Context": "MainWindow.DrawStatusRow",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "System",
+      "Translated": "系统",
+      "Context": "MainWindow.DrawSystemToggle",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Normal Scrips",
+      "Translated": "普通票据",
+      "Context": "MainWindow.DrawSystemToggle",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Firmament",
+      "Translated": "天穹街",
+      "Context": "MainWindow.DrawSystemToggle",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Add Item",
+      "Translated": "添加物品",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Already in list",
+      "Translated": "已在列表中",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Select an item...",
+      "Translated": "选择物品...",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginCombo"
+    },
+    {
+      "Original": "Filter...",
+      "Translated": "筛选...",
+      "Context": "MainWindow.DrawFirmamentAddItem",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "All-Time Scrips Spent",
+      "Translated": "累计消耗票据",
+      "Context": "MainWindow.DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "No characters sampled yet — log in or press \"Sample current\".",
+      "Translated": "尚未采样任何角色 — 请登录或点击“采样当前角色”。",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Required & Optional Plugins",
+      "Translated": "必需与可选插件",
+      "Context": "DrawInstalledPlugins",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Last-known scrip balances per character.",
+      "Translated": "各角色最近已知的票据余额。",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Sample current",
+      "Translated": "采样当前角色",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Read the active character's scrip balances now.\nBalances also refresh automatically after each turn-in and buy cycle.",
+      "Translated": "立即读取当前角色的票据余额。\n每次交纳与购买循环后余额也会自动刷新。",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Character",
+      "Translated": "角色",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "World",
+      "Translated": "服务器",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Last sampled ",
+      "Translated": "上次采样",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " ago.",
+      "Translated": "前。",
+      "Context": "DrawCharactersTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Purchase List",
+      "Translated": "购买列表",
+      "Context": "DrawItemsList",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.SectionHeader"
+    },
+    {
+      "Original": "Item",
+      "Translated": "物品",
+      "Context": "DrawItemsList",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Progress",
+      "Translated": "进度",
+      "Context": "DrawItemsList",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Qty",
+      "Translated": "数量",
+      "Context": "DrawItemsList",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Cost: ",
+      "Translated": "花费：",
+      "Context": "DrawItemsList",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " scrips each",
+      "Translated": "枚票据/个",
+      "Context": "DrawItemsList",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Unique items can only be owned one at a time",
+      "Translated": "唯一物品同时只能持有一个",
+      "Context": "DrawItemsList",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "All items purchased!",
+      "Translated": "所有物品已购买！",
+      "Context": "DrawPlannerOverview",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " needed",
+      "Translated": "需要",
+      "Context": "DrawPlannerOverview",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " turn-ins via ",
+      "Translated": "上交方式",
+      "Context": "DrawPlannerOverview",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " already covered by inventory collectables",
+      "Translated": "已由背包中的收藏品覆盖",
+      "Context": "DrawPlannerOverview",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Unit Cost",
+      "Translated": "单价",
+      "Context": "DrawPlannerCostBreakdown",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Remaining",
+      "Translated": "剩余",
+      "Context": "DrawPlannerCostBreakdown",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Total",
+      "Translated": "总计",
+      "Context": "DrawPlannerCostBreakdown",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Done",
+      "Translated": "完成",
+      "Context": "DrawPlannerCostBreakdown",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Subtotal",
+      "Translated": "小计",
+      "Context": "DrawPlannerCostBreakdown",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Filter collectables...",
+      "Translated": "筛选收藏品...",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Lv",
+      "Translated": "等级",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Collectable",
+      "Translated": "收藏品",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Scrips / Turn-in",
+      "Translated": "票据 / 上交",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Turn-ins Needed",
+      "Translated": "所需交纳",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Requires level ",
+      "Translated": "需要等级",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " on the matching job.",
+      "Translated": "在对应职业上。",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " (you are ",
+      "Translated": "(你当前",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "best",
+      "Translated": "最佳",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Chip"
+    },
+    {
+      "Original": "Most efficient collectable for this currency.",
+      "Translated": "该货币下最高效的收藏品。",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " in inv",
+      "Translated": "背包中",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Chip"
+    },
+    {
+      "Original": " held — will be turned in before gathering more.",
+      "Translated": "已持有 — 将在继续采集前交纳。",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Show more (",
+      "Translated": "显示更多 (",
+      "Context": "DrawPlannerCollectables",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Turn-ins:    ",
+      "Translated": "交纳次数:",
+      "Context": "DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Buy cycles:  ",
+      "Translated": "购买循环:",
+      "Context": "DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Full loops:  ",
+      "Translated": "完整循环:",
+      "Context": "DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Scrips earned: ",
+      "Translated": "获得票据:",
+      "Context": "DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " earned: ",
+      "Translated": "已获得:",
+      "Context": "DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " spent: ",
+      "Translated": "已消耗:",
+      "Context": "DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Elapsed:     ",
+      "Translated": "已用时间:",
+      "Context": "DrawPlannerSession",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "StatusInfo",
+      "Translated": "状态信息",
+      "Context": "StopUi.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.Panel"
+    },
+    {
+      "Original": " left)",
+      "Translated": "剩余)",
+      "Context": "StopUi.DrawStatusInfo",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "StopUi.DrawStopButton",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiHelper.DangerButton"
+    },
+    {
+      "Original": "Collectables turn-in",
+      "Translated": "收藏品交纳",
+      "Context": "AddonDelays..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Scrip exchange",
+      "Translated": "票据兑换",
+      "Context": "AddonDelays..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Firmament shop",
+      "Translated": "天穹街商店",
+      "Context": "AddonDelays..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Firmament turn-in",
+      "Translated": "天穹街交纳",
+      "Context": "AddonDelays..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Resource inspection",
+      "Translated": "资源检查",
+      "Context": "AddonDelays..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "Scrip",
+      "Translated": "票据",
+      "Context": "CurrencyHelper.GetCurrencyName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Item ",
+      "Translated": "物品",
+      "Context": "CurrencyHelper.GetCurrencyName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Resource Inspection",
+      "Translated": "资源检查",
+      "Context": "ResourceInspectionScripSystem.get_DisplayName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ 接口文本属性"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Moving to vendor",
+      "Translated": "前往商人",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::MovingToCollectableVendor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Teleporting",
+      "Translated": "传送中",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::Teleporting",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Exchanging items",
+      "Translated": "兑换物品",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::ExchangingItems",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Spending scrip",
+      "Translated": "消耗票据",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::SpendingScrip",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Idle",
+      "Translated": "空闲",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::Idle",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "AutoRetainer running",
+      "Translated": "AutoRetainer 运行中",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::AutoRetainer",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Deliveroo running",
+      "Translated": "Deliveroo 运行中",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::Deliveroo",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Crafting Artisan list",
+      "Translated": "制作 Artisan 列表",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::ProcessingArtisanList",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Running command hooks",
+      "Translated": "运行命令钩子",
+      "Context": "[属性] DescriptionAttribute TheCollector.Data.PluginState::RunningCommandHooks",
+      "Source": "ai:deepseek"
+    }
+  ],
+  "importedAt": "2026-10-17T10:12:09",
+  "imported": {
+    "archive": "uit-direct-2026-10-17T10-11-56-107Z-0da27e98-2026-10-17T101209.json",
+    "accepted": 390,
+    "filled": 390,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 390 条 `TheCollector` 的界面文字译文，已收为**独立译文包** `uit-packs/TheCollector@user-67cb13.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 390 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
