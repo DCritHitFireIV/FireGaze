@@ -1,0 +1,60 @@
+{
+  "issue": "direct-2026-10-17T14-32-04-900Z-1b322eac",
+  "receivedAt": "2026-10-17 14:32:16",
+  "author": "匿名直传",
+  "plugin": "DcTraveler",
+  "fingerprint": "39151971568ea018",
+  "packFile": "DcTraveler@user-391519.json",
+  "accepted": 4,
+  "filled": 4,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "DcTraveler",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "A Wonderful Configuration Window###With a constant ID",
+        "Translated": "精彩的配置窗口",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Random Config Bool",
+        "Translated": "随机配置布尔值",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Movable Config Window",
+        "Translated": "可移动配置窗口",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "TEST",
+        "Translated": "测试",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
