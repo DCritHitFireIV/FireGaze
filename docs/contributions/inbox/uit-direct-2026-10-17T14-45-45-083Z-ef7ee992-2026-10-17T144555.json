@@ -136,5 +136,12 @@
     ],
     "resources": [],
     "attributes": []
+  },
+  "review": {
+    "result": "rejected",
+    "at": "2026-10-18",
+    "issue": 165,
+    "by": "maintainer",
+    "reason": "不是界面文字：13 条都是 FireGaze 自己插件里的 ImGui 控件 ID、查表候选与代码片段，没有一条是可见的英文。`plugin`/`actions` 是 TableSetupColumn 的列 ID（该表不画表头）；`row` 是 Selectable(\"##row\") 的隐藏 ID；`like-` 是 `喜欢###like-…` 的 ID 后缀；`Plugin Installer###XlPluginInstaller` 是 InstallerListScroll 用来找卫月安装器窗口的候选名；`NameMode`/`PunchlineMode`/`DescriptionMode`/`-Original`/`-Chinese`/`-Both` 是 RadioButton 的 ID 后缀；`DeepL API key` 只进 `###key-…` 隐藏 ID，DrawKeyRow 并不画它；`）：Settings → ` 是状态句被编译器拆出的片段（TestChannel.MoveNext）。FireGaze 自身界面本来就是中文，这一包翻不出可见变化，改 ID 反而会动控件身份。整包（13 条）已从 uit-packs 删除，索引同步移除。"
   }
 }
