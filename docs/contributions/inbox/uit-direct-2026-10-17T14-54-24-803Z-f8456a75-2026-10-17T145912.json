@@ -1,0 +1,142 @@
+{
+  "issue": "direct-2026-10-17T14-54-24-803Z-f8456a75",
+  "receivedAt": "2026-10-17 14:59:12",
+  "author": "匿名直传",
+  "plugin": "AudibleCharacterStatus",
+  "fingerprint": "60e005d146dfb06b",
+  "packFile": "AudibleCharacterStatus@user-60e005.json",
+  "accepted": 14,
+  "filled": 14,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "AudibleCharacterStatus",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Allows the sound from this plugin to play when the game is in the background.",
+        "Translated": "允许在游戏处于后台时播放此插件的声音。",
+        "Context": "PluginConfiguriation.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Enable Sound Outside of Combat",
+        "Translated": "在战斗之外启用声音",
+        "Context": "PluginConfiguriation.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Enable to make sounds play even while not in combat.",
+        "Translated": "即使不在战斗中也能发出声音。",
+        "Context": "PluginConfiguriation.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Save",
+        "Translated": "保存",
+        "Context": "PluginConfiguriation.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Low HP",
+        "Translated": "低生命值",
+        "Context": "PluginConfiguriation.LowHpSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Plays a sound when HP is low, based on the set percentage.",
+        "Translated": "根据设定的百分比，在生命值较低时播放声音。",
+        "Context": "PluginConfiguriation.LowHpSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sound File Path",
+        "Translated": "音效檔",
+        "Context": "PluginConfiguriation.LowHpSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Percent To Trigger Low HP",
+        "Translated": "触发低血量的百分比",
+        "Context": "PluginConfiguriation.LowHpSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Sets the timer for when the sound will play again. (In Seconds)\nEx: 0.4 will play the sound every 0.4 seconds.\nSet to -100 for no looping",
+        "Translated": "设置声音再次播放的时间计时器。（以秒为单位）\n例如： 0.4将每0.4秒播放一次声音。\n设置为-100表示无循环",
+        "Context": "PluginConfiguriation.LowHpSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Low MP",
+        "Translated": "低MP",
+        "Context": "PluginConfiguriation.LowMpSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TreeNode"
+      },
+      {
+        "Original": "Plays a sound when MP is low, based on the set percentage.",
+        "Translated": "根据设置的百分比，在MP较低时播放声音。",
+        "Context": "PluginConfiguriation.LowMpSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Percent To Trigger Low MP",
+        "Translated": "触发低MP的百分比",
+        "Context": "PluginConfiguriation.LowMpSettings",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "File not found.",
+        "Translated": "文件无法找到.",
+        "Context": "PluginConfiguriation.FindSoundMessage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "File is not supported. Use MP3, WAV, or OGG.",
+        "Translated": "文件不受支持。使用MP3、WAV或OGG。",
+        "Context": "PluginConfiguriation.FindSoundMessage",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
