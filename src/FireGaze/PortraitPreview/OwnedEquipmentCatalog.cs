@@ -1,0 +1,203 @@
+using System.Text.Json;
+
+namespace FireGaze.PortraitPreview;
+
+/// <summary>Framework-thread owned cache. A failed/unloaded read never means an empty source.</summary>
+internal sealed class OwnedEquipmentCatalog
+{
+    private const int CacheVersion = 1;
+    private static readonly TimeSpan CurrentFor = TimeSpan.FromMinutes(15);
+    private readonly Func<uint, uint?> resolveOwnedEquipmentID;
+    private Dictionary<OwnedCharacterKey, Dictionary<OwnedSourceKey, SourceSnapshot>> characters = [];
+    private OwnedCharacterKey? active;
+
+    public OwnedEquipmentCatalog(Func<uint, uint?> resolveOwnedEquipmentID)
+    {
+        this.resolveOwnedEquipmentID = resolveOwnedEquipmentID ?? throw new ArgumentNullException(nameof(resolveOwnedEquipmentID));
+    }
+
+    public void ActivateCharacter(OwnedCharacterKey key)
+    {
+        ValidateCharacter(key);
+        if (active == key) return;
+        active = key;
+        if (!characters.TryGetValue(key, out var sources)) characters[key] = sources = [];
+        foreach (var snapshot in sources.Values)
+            if (snapshot.ReadAt is not null) { snapshot.Unavailable = true; snapshot.Reason = "已读取记录，重新登录后尚未刷新"; }
+    }
+
+    public void DeactivateCharacter() => active = null;
+
+    public void RegisterSource(OwnedSourceKey source)
+    {
+        ValidateSource(source);
+        var sources = ActiveSources();
+        if (!sources.ContainsKey(source)) sources[source] = new();
+    }
+
+    /// <summary>Only call for a complete, successfully loaded source snapshot; empty is then authoritative.</summary>
+    public bool ApplyRead(OwnedCharacterKey character, OwnedSourceKey source, DateTimeOffset readAt, IEnumerable<OwnedItemRecord> records)
+    {
+        if (active != character) return false;
+        ValidateCharacter(character);
+        ValidateSource(source);
+        var sources = ActiveSources();
+        if (sources.TryGetValue(source, out var prior) && prior.ReadAt > readAt) return false;
+        var equipment = Normalize(records);
+        sources[source] = new() { ReadAt = readAt, Items = equipment, Reason = "已读取记录" };
+        return true;
+    }
+
+    public bool MarkUnavailable(OwnedCharacterKey character, OwnedSourceKey source, string reason)
+    {
+        if (active != character) return false;
+        ValidateSource(source);
+        RegisterSource(source);
+        var snapshot = ActiveSources()[source];
+        snapshot.Unavailable = true;
+        snapshot.Reason = string.IsNullOrWhiteSpace(reason) ? "来源尚未读取或当前不可用" : reason;
+        return true;
+    }
+
+    public OwnedEquipmentView BuildView(DateTimeOffset now)
+    {
+        if (active is not { } key) return new(null, [], []);
+        var entries = new Dictionary<uint, List<OwnedItemVariant>>();
+        var sourceViews = new List<OwnedSourceView>();
+        foreach (var (source, snapshot) in ActiveSources().OrderBy(s => s.Key.Kind).ThenBy(s => s.Key.RetainerID))
+        {
+            var status = Status(snapshot, now);
+            var reason = snapshot.Reason;
+            if (snapshot.ReadAt is not null && status == OwnedReadStatus.PossiblyStale && !snapshot.Unavailable)
+                reason = "已读取记录可能过期";
+            sourceViews.Add(new(source, status, snapshot.ReadAt, snapshot.Items.Count, reason));
+            foreach (var item in snapshot.Items)
+            {
+                if (!entries.TryGetValue(item.BaseItemID, out var variants)) entries[item.BaseItemID] = variants = [];
+                var raw = item.Record;
+                variants.Add(new(source, raw.ItemID, raw.ContainerID, raw.Slot, raw.Quantity, raw.Stain1, raw.Stain2, raw.GlamourID, raw.HighQuality, status));
+            }
+        }
+        return new(key,
+            entries.OrderBy(e => e.Key).Select(e => new OwnedEquipmentEntry(e.Key, e.Value.AsReadOnly())).ToList().AsReadOnly(),
+            sourceViews.AsReadOnly());
+    }
+
+    public string ExportJSON()
+    {
+        var document = new CacheDocument { Version = CacheVersion };
+        foreach (var (character, sources) in characters.OrderBy(c => c.Key.AccountID).ThenBy(c => c.Key.ContentID))
+        {
+            var owner = new CharacterDocument { Character = character };
+            foreach (var (source, snapshot) in sources.OrderBy(s => s.Key.Kind).ThenBy(s => s.Key.RetainerID))
+                owner.Sources.Add(new() { Source = source, ReadAt = snapshot.ReadAt, Items = snapshot.Items.Select(i => i.Record).ToList() });
+            document.Characters.Add(owner);
+        }
+        return JsonSerializer.Serialize(document);
+    }
+
+    /// <summary>Parse and validate into a replacement map first. Bad cache input cannot erase live observations.</summary>
+    public bool ImportJSON(string jsonText)
+    {
+        if (jsonText is null || jsonText.Length > 16_000_000) return false;
+        try
+        {
+            var document = JsonSerializer.Deserialize<CacheDocument>(jsonText);
+            if (document is null || document.Version != CacheVersion || document.Characters is null || document.Characters.Count > 64) return false;
+            var replacement = new Dictionary<OwnedCharacterKey, Dictionary<OwnedSourceKey, SourceSnapshot>>();
+            foreach (var owner in document.Characters)
+            {
+                if (owner is null || owner.Sources is null || owner.Sources.Count > 512) return false;
+                ValidateCharacter(owner.Character);
+                var sources = new Dictionary<OwnedSourceKey, SourceSnapshot>();
+                foreach (var source in owner.Sources)
+                {
+                    if (source is null || source.Items is null || (source.ReadAt is null && source.Items.Count != 0)) return false;
+                    ValidateSource(source.Source);
+                    if (!sources.TryAdd(source.Source, new()
+                    {
+                        ReadAt = source.ReadAt,
+                        Items = Normalize(source.Items),
+                        Unavailable = true,
+                        Reason = source.ReadAt is null ? "尚未读取" : "已读取记录，尚未在本次登录刷新",
+                    })) return false;
+                }
+                if (!replacement.TryAdd(owner.Character, sources)) return false;
+            }
+            characters = replacement;
+            if (active is { } key && !characters.ContainsKey(key)) characters[key] = [];
+            return true;
+        }
+        catch (Exception ex) when (ex is JsonException or ArgumentException or NotSupportedException)
+        {
+            return false;
+        }
+    }
+
+    private List<NormalizedItem> Normalize(IEnumerable<OwnedItemRecord> records)
+    {
+        ArgumentNullException.ThrowIfNull(records);
+        var equipment = new List<NormalizedItem>();
+        var slots = new HashSet<(uint Container, int Slot)>();
+        var count = 0;
+        foreach (var item in records)
+        {
+            if (++count > 20_000 || item is null || item.Slot < 0 || item.Slot > 100_000 || !slots.Add((item.ContainerID, item.Slot)))
+                throw new ArgumentException("Invalid or duplicate physical inventory location.", nameof(records));
+            if (item.ItemID == 0 || item.Quantity == 0) continue;
+            var itemID = resolveOwnedEquipmentID(item.ItemID);
+            if (itemID is not > 0) continue;
+            equipment.Add(new(itemID.Value, item));
+        }
+        return equipment;
+    }
+
+    private Dictionary<OwnedSourceKey, SourceSnapshot> ActiveSources()
+    {
+        if (active is not { } key) throw new InvalidOperationException("No character is active.");
+        return characters[key];
+    }
+
+    private static OwnedReadStatus Status(SourceSnapshot snapshot, DateTimeOffset now)
+    {
+        if (snapshot.ReadAt is not { } readAt) return OwnedReadStatus.Unread;
+        return snapshot.Unavailable || now < readAt || now - readAt > CurrentFor ? OwnedReadStatus.PossiblyStale : OwnedReadStatus.Current;
+    }
+
+    private static void ValidateCharacter(OwnedCharacterKey key)
+    {
+        if (key.AccountID == 0 || key.ContentID == 0) throw new ArgumentException("Both account and content identities are required.", nameof(key));
+    }
+
+    private static void ValidateSource(OwnedSourceKey key)
+    {
+        var retainer = key.Kind is OwnedSourceKind.RetainerInventory or OwnedSourceKind.RetainerEquipped;
+        if (!Enum.IsDefined(key.Kind) || retainer != (key.RetainerID != 0))
+            throw new ArgumentException("Invalid inventory source or retainer identity.", nameof(key));
+    }
+
+    private sealed record NormalizedItem(uint BaseItemID, OwnedItemRecord Record);
+    private sealed class SourceSnapshot
+    {
+        public DateTimeOffset? ReadAt { get; set; }
+        public List<NormalizedItem> Items { get; set; } = [];
+        public bool Unavailable { get; set; }
+        public string Reason { get; set; } = "尚未读取";
+    }
+    private sealed class CacheDocument
+    {
+        public int Version { get; set; }
+        public List<CharacterDocument> Characters { get; set; } = [];
+    }
+    private sealed class CharacterDocument
+    {
+        public OwnedCharacterKey Character { get; set; }
+        public List<SourceDocument> Sources { get; set; } = [];
+    }
+    private sealed class SourceDocument
+    {
+        public OwnedSourceKey Source { get; set; }
+        public DateTimeOffset? ReadAt { get; set; }
+        public List<OwnedItemRecord> Items { get; set; } = [];
+    }
+}

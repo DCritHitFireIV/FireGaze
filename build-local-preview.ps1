@@ -59,6 +59,9 @@ foreach ($previewSuite in @('LocalPreviewTests', 'PreviewRuntimeBoundaryTests', 
     Invoke-PreviewSuite $previewSuite
 }
 Invoke-PreviewSuite 'LocalPreviewPreferencesTests'
+foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'PortraitOwnedTests')) {
+    Invoke-PreviewSuite $previewSuite
+}
 
 if ($SqpackPath) {
     Invoke-PreviewSuite 'GposeEmoteTests' @('--', $SqpackPath)
@@ -82,14 +85,14 @@ if ($HmsCompatRoot) {
     Write-Warning 'No isolated HmsCompatRoot fixture: historical bridge contract suite was not run.'
 }
 
-# These last two suites inspect the freshly built host assembly.
+# These last three suites inspect the freshly built host assembly and payload.
 & dotnet build (Join-Path $previewRoot 'src\FireGaze\FireGaze.csproj') -c Release --no-incremental
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests')) {
+foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests', 'ArtifactPortabilityTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 
-Write-Output "Offline validation finished: $previewCompletedSuites/17 suites; skipped: $($previewSkippedSuites -join ', ')."
+Write-Output "Offline validation finished: $previewCompletedSuites/21 suites; skipped: $($previewSkippedSuites -join ', ')."
 if (!$SqpackPath) { Write-Output 'Current-client GPose and item-data coverage is incomplete.' }
 Write-Output 'Build and offline checks do not prove in-game or two-client acceptance.'
 exit 0

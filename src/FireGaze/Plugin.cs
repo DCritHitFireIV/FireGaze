@@ -48,9 +48,11 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] public static IObjectTable Objects { get; private set; } = null!;
     [PluginService] public static ICondition Conditions { get; private set; } = null!;
     [PluginService] public static IGameInteropProvider Interop { get; private set; } = null!;
+    [PluginService] public static ISigScanner SigScanner { get; private set; } = null!;
     [PluginService] public static IGameGui GameGUI { get; private set; } = null!;
     [PluginService] public static IContextMenu ContextMenu { get; private set; } = null!;
     [PluginService] public static IAddonLifecycle AddonLifecycle { get; private set; } = null!;
+    [PluginService] public static IAgentLifecycle AgentLifecycle { get; private set; } = null!;
     [PluginService] public static IKeyState Keys { get; private set; } = null!;
 
     private readonly IDalamudPluginInterface pluginInterface;
@@ -74,6 +76,7 @@ public sealed class Plugin : IDalamudPlugin
     private bool iconWarmUpRequested;
     private bool startupInitDone;
     private LocalPreview.LocalPreviewFeature? localPreview;
+    private PortraitPreview.PortraitPreviewFeature? portraitPreview;
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
 
@@ -273,6 +276,14 @@ public sealed class Plugin : IDalamudPlugin
         {
             Log.Error(e, "[FireGaze] 本地试用初始化失败");
         }
+        try
+        {
+            portraitPreview = new PortraitPreview.PortraitPreviewFeature(pluginInterface, ConfigDirectory);
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "[FireGaze] 肖像实时预览初始化失败");
+        }
     }
 
     /// <summary>
@@ -378,6 +389,15 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
+        try
+        {
+            portraitPreview?.Dispose();
+            portraitPreview = null;
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "[FireGaze] 肖像实时预览清理失败");
+        }
         try
         {
             localPreview?.Dispose();
@@ -562,6 +582,13 @@ public sealed class Plugin : IDalamudPlugin
     private void OnCommand(string command, string args)
     {
         var trimmed = args.Trim();
+        if (trimmed.Equals("portrait", StringComparison.OrdinalIgnoreCase)
+            || trimmed.StartsWith("portrait ", StringComparison.OrdinalIgnoreCase))
+        {
+            if (portraitPreview is null) Chat.PrintError("[肖像实时预览] 功能正在初始化，请稍后再试。");
+            else portraitPreview.OnCommand(trimmed["portrait".Length..].TrimStart());
+            return;
+        }
         if (trimmed.Equals("preview", StringComparison.OrdinalIgnoreCase)
             || trimmed.StartsWith("preview ", StringComparison.OrdinalIgnoreCase))
         {
