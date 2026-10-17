@@ -1,0 +1,738 @@
+{
+  "issue": "direct-2026-10-17T10-29-52-047Z-db4b9e9d",
+  "receivedAt": "2026-10-17 10:30:03",
+  "author": "匿名直传",
+  "plugin": "Facade",
+  "fingerprint": "f4281323cac027ae",
+  "packFile": "Facade@user-f42813.json",
+  "accepted": 85,
+  "filled": 85,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "Facade",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "No override",
+        "Translated": "无覆盖",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "None",
+        "Translated": "无",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Heavensturn",
+        "Translated": "降神节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Valentione's Day",
+        "Translated": "恋人节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Little Ladies' Day",
+        "Translated": "女儿节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Hatching Tide",
+        "Translated": "彩蛋节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Make It Rain",
+        "Translated": "金碟狂欢节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Moonfire Faire",
+        "Translated": "红莲节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "The Rising",
+        "Translated": "新生庆典",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "All Saint's Wake",
+        "Translated": "守护天节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Starlight Celebration",
+        "Translated": "星芒节",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Starlight Celebration (No Snow)",
+        "Translated": "星芒节（无雪）",
+        "Context": "ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Facade##FacadeConfigWindow",
+        "Translated": "外观##FacadeConfigWindow",
+        "Context": "ConfigWindow..ctor",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Add Facade",
+        "Translated": "添加外观",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import Facades from Clipboard\n(Hold SHIFT to export)",
+        "Translated": "从剪贴板导入外观\n（按住 SHIFT 导出）",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Export Facades from this division to Clipboard",
+        "Translated": "将此分区的外观导出到剪贴板",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Copied to Clipboard!",
+        "Translated": "已复制到剪贴板！",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Imported ",
+        "Translated": "已导入",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " Facades!",
+        "Translated": "外观！",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "No valid data found in Clipboard",
+        "Translated": "剪贴板中未找到有效数据",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Switch to Festival Facades",
+        "Translated": "切换到节日外观",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Switch to Exterior Facades",
+        "Translated": "切换到外观立面",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Visit the division you want to modify an exterior in first.",
+        "Translated": "请先前往你想修改外观的区段。",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Controlled by Foolery",
+        "Translated": "由 Foolery 控制",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "When other players are on Facade plots:",
+        "Translated": "当其他玩家位于外观立面地块时：",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Do Nothing",
+        "Translated": "不处理",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Players might clip or float on the Facade.",
+        "Translated": "玩家可能会穿模或悬浮在外观立面上。",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Reset Facade",
+        "Translated": "重置外观立面",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Facade plots will be reset when players are on it.",
+        "Translated": "玩家位于其上时将重置外观立面地块。",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hide Players",
+        "Translated": "隐藏玩家",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Players on a Facade plot will be hidden.",
+        "Translated": "位于外观立面地块上的玩家将被隐藏。",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Foolery",
+        "Translated": "愚人众",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "library",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Special behavior on certain days.",
+        "Translated": "特定日期的特殊行为。",
+        "Context": "ConfigWindow.DrawSettings",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Undyed",
+        "Translated": "未染色",
+        "Context": "ConfigWindow.DrawColorCircle",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Selectable"
+      },
+      {
+        "Original": " other Festival Facade",
+        "Translated": "其他节日外观立面",
+        "Context": "ConfigWindow.DrawFestivalFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " in other wards.",
+        "Translated": "在其他区。",
+        "Context": "ConfigWindow.DrawFestivalFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "  You can only change the Festival Facade of the current ward.\n  (Click to see the location of other Festival Facades.)",
+        "Translated": "只能更改当前区域的节日外观。\n  （点击查看其他节日外观的位置。）",
+        "Context": "ConfigWindow.DrawFestivalFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "  Switching from an override back to 'No override' might not re-apply the original festival.\n  Re-visit the current ward to fix this.",
+        "Translated": "从覆盖切换回“无覆盖”可能不会重新应用原本的节日。\n  请重新访问当前区域以修复此问题。",
+        "Context": "ConfigWindow.DrawFestivalFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Facades are being controlled by Foolery.",
+        "Translated": "外观立面正由 Foolery 控制。",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Today is ",
+        "Translated": "今天是",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": ". You can turn this off in the settings.",
+        "Translated": "。你可以在设置中关闭此功能。",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "There are no Facades in your current division.",
+        "Translated": "你当前区段没有外观立面。",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "facadeTable",
+        "Translated": "外观表",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "library",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Table"
+      },
+      {
+        "Original": "Plot ",
+        "Translated": "地块",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " more Facade",
+        "Translated": "更多外墙",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": " in other divisions.",
+        "Translated": "在其他分区。",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "You are only being shown Facades from the current division.\n(Click to see the location of other Facades.)",
+        "Translated": "仅显示当前分区的外墙。\n（点击查看其他外墙的位置。）",
+        "Context": "ConfigWindow.DrawFacadeList",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Importing Facades for:",
+        "Translated": "正在导入外墙：",
+        "Context": "ConfigWindow.DrawFacadeImport",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " - Ward ",
+        "Translated": "- 区",
+        "Context": "ConfigWindow.DrawFacadeImport",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " - Division ",
+        "Translated": "- 分区",
+        "Context": "ConfigWindow.DrawFacadeImport",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "This might override some of your Facades in that division.",
+        "Translated": "这可能会覆盖该分区中的部分外墙。",
+        "Context": "ConfigWindow.DrawFacadeImport",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Confirm",
+        "Translated": "确认",
+        "Context": "ConfigWindow.DrawFacadeImport",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Cancel",
+        "Translated": "取消",
+        "Context": "ConfigWindow.DrawFacadeImport",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Something went very wrong",
+        "Translated": "发生严重错误",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Preset Name",
+        "Translated": "预设名称",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Save",
+        "Translated": "保存",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "New Preset",
+        "Translated": "新建预设",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Import Preset",
+        "Translated": "导入预设",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Imported Preset!",
+        "Translated": "预设已导入！",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "No presets found",
+        "Translated": "未找到预设",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Name",
+        "Translated": "名称",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Load this Preset",
+        "Translated": "加载此预设",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Overwrite this Preset",
+        "Translated": "覆盖此预设",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Delete Preset",
+        "Translated": "删除预设",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Export Preset to Clipboard",
+        "Translated": "导出预设到剪贴板",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Hover me for help.",
+        "Translated": "悬停查看帮助。",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "  You can only load presets for the correct plot size.\n  You can export presets if you hold SHIFT.\n  You can delete presets if you hold CTRL.",
+        "Translated": "只能加载对应地块大小的预设。\n  按住 SHIFT 可导出预设。\n  按住 CTRL 可删除预设。",
+        "Context": "ConfigWindow.DrawPresets",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "World",
+        "Translated": "世界",
+        "Context": "ConfigWindow.DrawFacadeLocations",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "District",
+        "Translated": "区域",
+        "Context": "ConfigWindow.DrawFacadeLocations",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Ward",
+        "Translated": "区",
+        "Context": "ConfigWindow.DrawFacadeLocations",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Total",
+        "Translated": "总计",
+        "Context": "ConfigWindow.DrawFacadeLocations",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TableSetupColumn"
+      },
+      {
+        "Original": "Adding Facade",
+        "Translated": "添加外观",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Editing Facade (Plot ",
+        "Translated": "编辑外观（地块",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Preset",
+        "Translated": "预设",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Individual",
+        "Translated": "单独",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.RadioButton"
+      },
+      {
+        "Original": "Load Preset",
+        "Translated": "加载预设",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Save Preset",
+        "Translated": "保存预设",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Select all exterior options first",
+        "Translated": "请先选择所有外观选项",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Delete",
+        "Translated": "删除",
+        "Context": "ConfigWindow.DrawEditScreen",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Select Plot",
+        "Translated": "选择地块",
+        "Context": "ConfigWindow.DrawPlotDropdown",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Exterior",
+        "Translated": "外观",
+        "Context": "ConfigWindow.DrawExteriorDropdown",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": " Color",
+        "Translated": "颜色",
+        "Context": "ConfigWindow.DrawSingularStainDropdown",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImRaii.Combo"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "Facades",
+        "Translated": "外观",
+        "Context": "ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SetTooltip"
+      },
+      {
+        "Original": "See '/facade help' for more.",
+        "Translated": "输入“/facade help”查看更多。",
+        "Context": "CommandService.StartAsync",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
