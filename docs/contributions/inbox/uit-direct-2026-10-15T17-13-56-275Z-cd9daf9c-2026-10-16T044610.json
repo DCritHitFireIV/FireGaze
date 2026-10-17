@@ -38,5 +38,12 @@
     ],
     "resources": [],
     "attributes": []
+  },
+  "review": {
+    "result": "rejected",
+    "at": "2026-10-17",
+    "issue": 119,
+    "by": "maintainer",
+    "reason": "不是界面文字：两条都是字体字形范围字符串（FontManager.BuildRange → ImFontGlyphRangesBuilderPtr.AddText），被当成可见文本送去机翻，译文是字母表乱码；整包（2 条）已从 uit-packs 删除，索引同步移除。"
   }
 }
