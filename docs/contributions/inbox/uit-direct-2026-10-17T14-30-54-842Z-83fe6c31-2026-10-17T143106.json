@@ -1,0 +1,1032 @@
+{
+  "issue": "direct-2026-10-17T14-30-54-842Z-83fe6c31",
+  "receivedAt": "2026-10-17 14:31:06",
+  "author": "匿名直传",
+  "plugin": "CashFlow",
+  "fingerprint": "d925442198e55aa7",
+  "packFile": "CashFlow@user-d92544.json",
+  "accepted": 123,
+  "filled": 123,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "CashFlow",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Time format error",
+        "Translated": "格式错误",
+        "Context": "Utils.ToPreferredTimeString",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Loading, please wait...",
+        "Translated": "加载中，请稍候...",
+        "Context": "BaseTab`1.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Press enter load the data",
+        "Translated": "按Enter键加载数据",
+        "Context": "BaseTab`1.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Export as CSV",
+        "Translated": "导出 CSV",
+        "Context": "BaseTab`1.DrawDateFilter",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Search Player's Name...",
+        "Translated": "搜索玩家姓名...",
+        "Context": "BaseTab`1..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Search Item...",
+        "Translated": "搜索项目...",
+        "Context": "BaseTab`1..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Only Gil",
+        "Translated": "只有Gil",
+        "Context": "TabTradeLog.DrawExtraFilters",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Received gil",
+        "Translated": "已收到GIL",
+        "Context": "TabTradeLog.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Gave gil",
+        "Translated": "Gave Gil",
+        "Context": "TabTradeLog.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "~Item",
+        "Translated": "道具",
+        "Context": "TabTradeLog.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Qty",
+        "Translated": "数量",
+        "Context": "TabTradeLog.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Gave item",
+        "Translated": "赠送道具",
+        "Context": "TabTradeLog.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Received item",
+        "Translated": "已接收物料",
+        "Context": "TabTradeLog.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Counterparty",
+        "Translated": "交易对手方",
+        "Context": "TabTradeLog..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "~Gil",
+        "Translated": "GIL",
+        "Context": "TabTradeLog..ctor",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Trade Log",
+        "Translated": "贸易记录",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Purchase Log",
+        "Translated": "购买日志",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Sale Log",
+        "Translated": "销售日志",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "NPC Sale Log",
+        "Translated": "NPC销售日志",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "NPC Purchase Log",
+        "Translated": "购买日志",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Gil History",
+        "Translated": "GIL历史",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "MainWindow.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.EzTabBar"
+      },
+      {
+        "Original": "Records per page",
+        "Translated": "每页记录",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.SliderInt"
+      },
+      {
+        "Original": "Merge sequential gil-only trades with the same player into one",
+        "Translated": "将与同一玩家的连续gil-only交易合并为一个",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Does not affects how trades are stored in database, only affects view",
+        "Translated": "不影响交易在数据库中的存储方式，仅影响视图",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Time limit for merging trades, minutes",
+        "Translated": "合并交易的时间限制，分钟",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderInt"
+      },
+      {
+        "Original": "Change arrows directions",
+        "Translated": "更改箭头方向",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Date format:",
+        "Translated": "日期格式：",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextV"
+      },
+      {
+        "Original": "Month/Day",
+        "Translated": "格式：2020/12/30 月 12：00：00/天/年小时：分钟：秒",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.RadioButtonBool"
+      },
+      {
+        "Original": "Show history when trading",
+        "Translated": "交易时显示历史记录",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Time, minutes",
+        "Translated": "时间（分钟）",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputInt"
+      },
+      {
+        "Original": "Censor Names",
+        "Translated": "审查员姓名",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Lesser Censor Mode",
+        "Translated": "初级审查模式",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Reset Censor Seed",
+        "Translated": "重置审查种子",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Display UTC time",
+        "Translated": "显示UTC时间",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Your local time will still be used for internal calculations",
+        "Translated": "您的当地时间仍将用于内部计算",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Use custom time format",
+        "Translated": "自定义时间格式",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Custom time format",
+        "Translated": "自定义时间格式",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputText"
+      },
+      {
+        "Original": "Click to open help",
+        "Translated": "单击以打开",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.HelpMarker"
+      },
+      {
+        "Original": "Set fixed graph start date",
+        "Translated": "设置固定的图形开始日期",
+        "Context": "MainWindow.DrawSettingsGeneral",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Test speed",
+        "Translated": "测试速度：",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "No raii: ",
+        "Translated": "无raii ：",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "\nRaii: ",
+        "Translated": "Raii ：",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Restart",
+        "Translated": "重启",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Merchant",
+        "Translated": "海盗商人",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "Selected items: ",
+        "Translated": "所选项目数:",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "ItemID",
+        "Translated": "项目ID:",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Price",
+        "Translated": "价格",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Color1",
+        "Translated": "颜色1",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Color2",
+        "Translated": "颜色2",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Availability",
+        "Translated": "可用性",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Last purchased",
+        "Translated": "最后购买时间",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CollapsingHeader"
+      },
+      {
+        "Original": "\nItemId ",
+        "Translated": "项目ID:",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Trade partner: ",
+        "Translated": "贸易伙伴",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Load cidmap",
+        "Translated": "加载cidmap",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Load trades",
+        "Translated": "加载交易",
+        "Context": "TabDebug.Draw",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Button"
+      },
+      {
+        "Original": "Here you can select certain data to be hidden for certain characters. Please note that even if you will hide it, entries will still be recorded unless the character is fully blacklisted from data creation.",
+        "Translated": "在这里，您可以选择要为某些字符隐藏的某些数据。请注意，即使您将其隐藏，除非字符被完全列入数据创建黑名单，否则条目仍将被记录。",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.TextWrapped"
+      },
+      {
+        "Original": "Search...",
+        "Translated": "搜索...",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "~Character",
+        "Translated": "角色",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Data Types",
+        "Translated": "数据类型",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Unblacklist character",
+        "Translated": "取消黑名单字符",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.IconButtonWithText"
+      },
+      {
+        "Original": "Display gil history",
+        "Translated": "显示GIL历史记录",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Display NPC purchases",
+        "Translated": "显示NPC购买",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Display NPC sales",
+        "Translated": "显示NPC销售",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Display normal Market Board purchases",
+        "Translated": "显示正常的市场板购买",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Display normal Retainer Sales",
+        "Translated": "显示正常固定器销售",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Display purchases from Mannequinn",
+        "Translated": "展示从Mannequinn购买的产品",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Display mannequinn sales",
+        "Translated": "显示器人体模型销售",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Display trade log",
+        "Translated": "显示交易日志",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Blacklist ",
+        "Translated": "黑名单",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": " from the plugin and IRRECOVERABLY DELETE ALL PREVIOUSLY RECORDED DATA FOR IT. \n\nThis will completely remove all the data associated with ",
+        "Translated": "并无法恢复地删除以前为IT记录的所有数据。 \n\n这将完全删除与以下内容相关的所有数据：",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": " from the database, and will prevent any entries for ",
+        "Translated": "从数据库中，并将阻止任何条目",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": " from being created in future.\n\nHold SHIFT and CTRL and click this button.",
+        "Translated": "从将来创建。\n\n按住SHIFT和CTRL并单击此按钮。",
+        "Context": "TabExclusions.Draw",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Within last ",
+        "Translated": "过去之内",
+        "Context": "TradeOverlay.DrawInternal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": " minutes",
+        "Translated": "分钟数",
+        "Context": "TradeOverlay.DrawInternal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Gave",
+        "Translated": "给",
+        "Context": "TradeOverlay.DrawInternal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Received",
+        "Translated": "已发放",
+        "Context": "TradeOverlay.DrawInternal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Item",
+        "Translated": "道具",
+        "Context": "TradeOverlay.DrawInternal",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Date before ",
+        "Translated": "推荐最接近的日期之前或之后",
+        "Context": "DateWidget.Validate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": " is not possible",
+        "Translated": "不、可、能",
+        "Context": "DateWidget.Validate",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ Notification.set_Content"
+      },
+      {
+        "Original": "Input",
+        "Translated": "输入",
+        "Context": "DateWidget.DatePickerWithInput",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Mon",
+        "Translated": "星期一",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Tue",
+        "Translated": "週二",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Wed",
+        "Translated": "周三",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Thu",
+        "Translated": "週四",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Fri",
+        "Translated": "週五",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Sat",
+        "Translated": "週六",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "January",
+        "Translated": "1月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "February",
+        "Translated": "2月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "March",
+        "Translated": "3月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "April",
+        "Translated": "4 月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "May",
+        "Translated": "5月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "June",
+        "Translated": "6月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "July",
+        "Translated": "7月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "August",
+        "Translated": "8月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "September",
+        "Translated": "九月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "October",
+        "Translated": "十月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "November",
+        "Translated": "十一月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "December",
+        "Translated": "十二月",
+        "Context": "DateWidget..cctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.CalcTextSize"
+      },
+      {
+        "Original": "Averages",
+        "Translated": "平均值",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Gil given to, top-5:",
+        "Translated": "GIL给予，前5名：",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Character",
+        "Translated": "角色",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "~Total Gil",
+        "Translated": "~ Total GIL",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Gil received from, top-5:",
+        "Translated": "GIL收到，前5名：",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Items sold, gil, top-5:",
+        "Translated": "已售物品， GIL ，前五名：",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Items purchased, gil, top-5:",
+        "Translated": "已购物品， GIL ，前五名：",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Diff",
+        "Translated": "差异",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "TOTAL:",
+        "Translated": "合计：",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Total profit/loss per last year:",
+        "Translated": "去年利润/亏损总额：",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Average per day",
+        "Translated": "每天平均小时数",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Average per week",
+        "Translated": "平均每週185美元",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Average per month",
+        "Translated": "每月平均",
+        "Context": "TabGilHistory.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Paid",
+        "Translated": "已付款",
+        "Context": "TabNpcPurchases.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "~Item Name",
+        "Translated": "项目名称",
+        "Context": "TabNpcPurchases.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "This is a buyback",
+        "Translated": "这是回购",
+        "Context": "TabNpcPurchases.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Your Retainer",
+        "Translated": "您的固定器",
+        "Context": "TabRetainerSales.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "Buyer",
+        "Translated": "买方",
+        "Context": "TabRetainerSales.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "This sale was done via Mannequinn",
+        "Translated": "此次销售是通过Mannequinn完成的",
+        "Context": "TabRetainerSales.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "Search Player's/Retainer's Name...",
+        "Translated": "搜索玩家/保留者的姓名...",
+        "Context": "TabRetainerSales..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.InputTextWithHint"
+      },
+      {
+        "Original": "Retainer",
+        "Translated": "预付款：",
+        "Context": "TabShopPurchases.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.BeginDefaultTable"
+      },
+      {
+        "Original": "This purchase was done via Mannequinn",
+        "Translated": "此购买是通过Mannequinn完成的",
+        "Context": "TabShopPurchases.DrawTable",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Tooltip"
+      },
+      {
+        "Original": "UnixTime",
+        "Translated": "时间",
+        "Context": "SqliteDataProvider.GetTrades",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      },
+      {
+        "Original": "Quantity",
+        "Translated": "数量",
+        "Context": "SqliteDataProvider.GetRetainerHistory",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGuiEx.Text"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
