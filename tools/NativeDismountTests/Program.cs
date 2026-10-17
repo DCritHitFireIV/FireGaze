@@ -33,6 +33,25 @@ unsafe class Program
             ("reused display actor cannot consume general-action23", ReusedDisplay),
             ("nested native transaction cannot become local cancellation", Nested),
             ("status checks retain native rejection and never cancel", Status),
+            ("rejected requested mount ends every trial and forwards exact input once", MountIntentRejected),
+            ("queued acknowledgement of active user mount intent still ends every trial", MountIntentQueued),
+            ("macro requested mount ends every trial without inventing native acceptance", MountIntentMacro),
+            ("automatic queued mount replay does not cancel a later trial on rejection", MountQueueReplay),
+            ("queued mount replay reaching a rejected location leaf preserves later trial", MountQueueLocationRejected),
+            ("rejected immediate mount location leaf preserves every trial", MountLocationRejected),
+            ("mount roulette9 without a valid candidate ends every trial", () => RandomMountRejected(9)),
+            ("flying mount roulette24 without a valid candidate ends every trial", () => RandomMountRejected(24)),
+            ("random mount dispatcher and nested mount paths cancel only once", RandomMountNested),
+            ("queued random selector with default-mode nested mount preserves later trials on rejection", RandomMountQueueNestedRejected),
+            ("internal rejected mount dispatch cannot cancel a user trial", MountIntentNested),
+            ("owned mount dispatch cannot cancel a user trial", MountIntentOwned),
+            ("mount request without an active mount trial keeps other rejected trials", MountIntentWithoutTrial),
+            ("stale territory mount intent cannot clear unrelated preview ownership", MountIntentStale),
+            ("lost display ownership does not authorize mount intent cancellation", MountIntentReused),
+            ("nonzero mount status preflight never cancels a user trial", MountIntentStatus),
+            ("status inspection reentering rejected mount paths cannot imply user intent", MountIntentStatusReentry),
+            ("owned actor lookup reentry cannot steal outer mount intent cancellation", MountIntentLookupReentry),
+            ("owned actor lookup invalidation revokes mount intent cancellation", MountIntentLookupStale),
             ("single mount cancellation releases the display actor", SingleMount),
             ("owned-call bypass does not cancel a local mount", OwnCall),
             ("display mount mismatch does not consume input", DisplayMismatch),
@@ -75,7 +94,7 @@ unsafe class Program
         Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"all real player bytes unchanged");
         Eq(f.NativeAccepted,0,"local exit is not reported as native acceptance"); Eq(f.Cancelled,1,"local exit reported once");
     }
-    static void OtherGeneral() { using var f=new F(); foreach(uint id in new uint[]{0,1,22,24,ushort.MaxValue}) { Eq(f.Use(ActionType.GeneralAction,id),false,"native result"); Eq(f.LastId,id,"exact id"); } Eq(f.OriginalCalls,5,"each original once"); Eq(f.Runtime.ActiveEffects.Count,2,"preview retained"); }
+    static void OtherGeneral() { using var f=new F(); foreach(uint id in new uint[]{0,1,22,ushort.MaxValue}) { Eq(f.Use(ActionType.GeneralAction,id),false,"native result"); Eq(f.LastId,id,"exact id"); } Eq(f.OriginalCalls,4,"each original once"); Eq(f.Runtime.ActiveEffects.Count,2,"preview retained"); }
     static void RealBaseline() { using var f=new F(42,42); f.NativeResult=true; f.NativeClearsMount=true; Eq(f.Use(ActionType.GeneralAction,23),true,"native result"); Eq(f.OriginalCalls,1,"one native dismount"); Eq(f.Source->Mount.MountId,(ushort)0,"new native state kept"); Eq(f.Runtime.ActiveEffects.Count,2,"outer true is not execution evidence"); Eq(f.MountCalls,0,"no premature display rebuild from outer true"); }
     static void GenuineMount() { using var f=new F(0,42); f.NativeResult=false; Eq(f.Use(ActionType.GeneralAction,23),false,"native rejection retained"); Eq(f.OriginalCalls,1,"real mount forwarded once"); Eq(f.Runtime.ActiveEffects.Count,2,"rejection keeps preview"); }
     static void OldBaseline() { using var f=new F(42,0); Eq(f.Use(ActionType.GeneralAction,23),false,"native rejection retained"); Eq(f.OriginalCalls,1,"old mounted baseline forwarded"); Eq(f.Runtime.ActiveEffects.Count,2,"preview retained"); }
@@ -84,6 +103,137 @@ unsafe class Program
     static void ReusedDisplay() { using var f=new F(); f.Manager->BattleCharas[207].BattleChara=null; Eq(f.Use(ActionType.GeneralAction,23),false,"native result"); Eq(f.OriginalCalls,1,"lost ownership forwarded"); Eq(f.MountCalls,0,"reused slot untouched"); }
     static void Nested() { using var f=new F(); Set(f.Runtime,"nativeDepth",1); Eq(f.Use(ActionType.GeneralAction,23),false,"native result"); Eq(f.OriginalCalls,1,"nested call forwarded"); Eq(f.MountCalls,0,"nested input not consumed"); }
     static void Status() { using var f=new F(); Eq(f.Status(ActionType.GeneralAction,23),0x243u,"native not-mounted status preserved"); Eq(f.StatusCalls,1,"status original once"); Eq(f.Runtime.ActiveEffects.Count,2,"preflight never cancels"); }
+    static void MountIntentRejected()
+    {
+        using var f=new F(42,0);byte[] real=new ReadOnlySpan<byte>(f.Source,sizeof(Character)).ToArray();
+        f.NativeBefore=()=>Eq(f.Runtime.HasActivePreview,false,"user mount intent releases trials before native dispatch");
+        Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.None,987UL,17,29),false,"native rejection preserved");
+        Eq(f.OriginalCalls,1,"native mount request forwarded once");Eq(f.LastType,ActionType.Mount,"action type preserved");Eq(f.LastId,55u,"requested mount preserved");
+        Eq(f.LastTarget,987UL,"native target preserved");Eq(f.LastExtra,17u,"extra parameter preserved");Eq(f.LastCombo,29u,"combo parameter preserved");Eq(f.LastMode,ActionManager.UseActionMode.None,"mode preserved");
+        Eq(f.Runtime.HasActivePreview,false,"rejected user intent ends all trial slots");Eq(f.Deletes,1,"display released once");Eq(f.NativeAccepted,0,"rejection is not native acceptance");Eq(f.Cancelled,1,"intent cancellation reported once");
+        Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"intent cancellation cannot restore historical mounted snapshot over real source");Eq(f.SourceMountCalls,0,"real mount container never modified");
+    }
+    static void MountIntentQueued()
+    {
+        using var f=new F();f.NativeResult=true;
+        Eq(f.Use(ActionType.Mount,55),true,"native queued acknowledgement preserved");Eq(f.OriginalCalls,1,"user request sent once");
+        Eq(f.Runtime.HasActivePreview,false,"active user intent ends trials before queued execution");Eq(f.Deletes,1,"display released once");Eq(f.NativeAccepted,0,"outer queued true cannot invent execution evidence");
+    }
+    static void MountIntentMacro()
+    {
+        using var f=new F();Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.Macro),false,"macro rejection preserved");
+        Eq(f.OriginalCalls,1,"macro dispatched once");Eq(f.LastMode,ActionManager.UseActionMode.Macro,"macro mode forwarded unchanged");Eq(f.Runtime.HasActivePreview,false,"macro is active user mount intent");Eq(f.NativeAccepted,0,"rejected macro is not accepted input");
+    }
+    static void MountQueueReplay()
+    {
+        foreach(bool result in new[]{false,true})
+        {
+            using var f=new F();f.NativeResult=result;
+            Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.Queue),result,"queued replay result preserved");Eq(f.OriginalCalls,1,"queued replay dispatched once");Eq(f.LastMode,ActionManager.UseActionMode.Queue,"queue mode preserved");
+            Eq(f.Runtime.ActiveEffects.Count,2,"automatic replay cannot cancel a new trial from intent alone");Eq(f.Deletes,0,"automatic replay keeps current display");Eq(f.NativeAccepted,0,"queued outer return is not execution proof");Eq(f.Cancelled,0,"automatic replay does not report active user cancellation");
+        }
+    }
+    static void MountQueueLocationRejected()
+    {
+        using var f=new F();f.NestedLocationId=55;
+        Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.Queue),false,"queued replay native rejection preserved");
+        Eq(f.OriginalCalls,1,"outer replay once");Eq(f.LocationCalls,1,"nested native location leaf once");Eq(f.Runtime.ActiveEffects.Count,2,"rejected queued location cannot erase a later user trial");Eq(f.Deletes,0,"display retained after rejected replay");Eq(f.NativeAccepted,0,"no false native acceptance");
+    }
+    static void MountLocationRejected()
+    {
+        using var f=new F(42,0);byte[] real=new ReadOnlySpan<byte>(f.Source,sizeof(Character)).ToArray();
+        f.LocationBefore=()=>Eq(f.Runtime.ActiveEffects.Count,2,"immediate leaf alone does not establish active user intent");
+        Eq(f.Location(ActionType.Mount,55),false,"native location rejection preserved");Eq(f.LocationCalls,1,"native location original once");
+        Eq(f.Runtime.ActiveEffects.Count,2,"rejected immediate leaf preserves every trial");Eq(f.Deletes,0,"rejected immediate leaf retains display");Eq(f.NativeAccepted,0,"rejection is not accepted input");Eq(f.Cancelled,0,"immediate leaf does not invent user cancellation");
+        Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"rejected direct location leaves every real source byte unchanged");
+    }
+    static void RandomMountRejected(uint id)
+    {
+        using var f=new F();f.NativeBefore=()=>Eq(f.Runtime.HasActivePreview,false,"random mount intent clears trials before candidate selection");
+        Eq(f.Use(ActionType.GeneralAction,id),false,"random mount rejection/no candidate result preserved");Eq(f.OriginalCalls,1,"random selector original called once");Eq(f.LastType,ActionType.GeneralAction,"random selector type preserved");Eq(f.LastId,id,"exact random selector id preserved");
+        Eq(f.Runtime.HasActivePreview,false,"random mount user intent ends all trials even without candidate");Eq(f.Deletes,1,"random selector releases display once");Eq(f.Cancelled,1,"one random intent cancellation");Eq(f.NativeAccepted,0,"rejected random selector is not native acceptance");
+    }
+    static void RandomMountNested()
+    {
+        foreach(uint id in new uint[]{9,24})
+        {
+            using var f=new F();f.RandomNestedMountId=55;f.NestedLocationId=55;
+            Eq(f.Use(ActionType.GeneralAction,id),false,"outer random native rejection preserved");Eq(f.OriginalCalls,2,"one selector and one resolved-mount original, neither replayed");Eq(f.LocationCalls,1,"resolved mount's immediate leaf forwarded once");Eq(f.LastType,ActionType.Mount,"random selection reaches concrete mount dispatcher");Eq(f.LastId,55u,"resolved random mount id forwarded");
+            Eq(f.Runtime.HasActivePreview,false,"random user intent ends every trial");Eq(f.Deletes,1,"nested concrete mount cannot delete display twice");Eq(f.Cancelled,1,"random and resolved mount share one intent cancellation");Eq(f.NativeAccepted,0,"nested rejected originals cannot invent acceptance");
+        }
+    }
+    static void RandomMountQueueNestedRejected()
+    {
+        foreach(uint id in new uint[]{9,24})
+        {
+            using var f=new F();f.RandomNestedMountId=55;f.NestedLocationId=55;var dispatches=new List<(ActionType Type,uint Id,ActionManager.UseActionMode Mode)>();
+            f.NativeBefore=()=>dispatches.Add((f.LastType,f.LastId,f.LastMode));
+            Eq(f.Use(ActionType.GeneralAction,id,ActionManager.UseActionMode.Queue),false,"queued random selector rejection preserved");Eq(f.OriginalCalls,2,"queued selector and resolved mount originals each once");Eq(f.LocationCalls,1,"resolved immediate mount leaf once");
+            Eq(dispatches.Count,2,"both queued selector and nested mount dispatched");Eq(dispatches[0],(ActionType.GeneralAction,id,ActionManager.UseActionMode.Queue),"outer queued random request forwarded unchanged");Eq(dispatches[1],(ActionType.Mount,55u,ActionManager.UseActionMode.None),"native selector can reset mode while dispatching its mount");
+            Eq(f.Runtime.ActiveEffects.Count,2,"queued selector's nested default mode cannot masquerade as new user intent");Eq(f.Deletes,0,"rejected queued random replay preserves later display");Eq(f.Cancelled,0,"queued replay does not cancel user trials");Eq(f.NativeAccepted,0,"rejected immediate leaf does not report acceptance");
+        }
+    }
+    static void MountIntentNested()
+    {
+        using var f=new F();Set(f.Runtime,"nativeDepth",1);
+        Eq(f.Use(ActionType.Mount,55),false,"nested dispatcher rejection preserved");Eq(f.Location(ActionType.Mount,55),false,"nested location rejection preserved");
+        Eq(f.OriginalCalls,1,"nested dispatch original once");Eq(f.LocationCalls,1,"nested location original once");Eq(f.Runtime.ActiveEffects.Count,2,"internal native paths do not imply new user intent");Eq(f.Deletes,0,"internal rejection retains display");Eq(f.Cancelled,0,"internal rejection not reported as user cancellation");
+    }
+    static void MountIntentOwned()
+    {
+        using var f=new F();Set(f.Runtime,"ownCall",true);
+        Eq(f.Use(ActionType.Mount,55),false,"owned native result preserved");Eq(f.Location(ActionType.Mount,55),false,"owned location result preserved");
+        Eq(f.OriginalCalls,1,"owned dispatcher once");Eq(f.LocationCalls,1,"owned location once");Eq(f.Runtime.ActiveEffects.Count,2,"owned native calls preserve user trials");Eq(f.Deletes,0,"owned calls cannot release current display");
+    }
+    static void MountIntentWithoutTrial()
+    {
+        using var f=new F();f.Effects.Remove(PreviewSlot.Mount);
+        Eq(f.Use(ActionType.Mount,55),false,"native dispatcher rejection");Eq(f.Location(ActionType.Mount,55),false,"native location rejection");
+        Eq(f.OriginalCalls,1,"dispatcher once");Eq(f.LocationCalls,1,"location once");Eq(f.Runtime.ActiveEffects.Count,1,"rejected mount request preserves unrelated emote when no mount is being tried");Eq(f.Runtime.ActiveEffects[0].Slot,PreviewSlot.Emote,"emote trial retained");Eq(f.Cancelled,0,"no mount intent cancellation without mount trial");
+    }
+    static void MountIntentStale()
+    {
+        using var f=new F();f.Territory=2;
+        Eq(f.Use(ActionType.Mount,55),false,"stale dispatcher result");Eq(f.Location(ActionType.Mount,55),false,"stale location result");
+        Eq(f.OriginalCalls,1,"stale dispatcher once");Eq(f.LocationCalls,1,"stale location once");Eq(f.Runtime.ActiveEffects.Count,2,"obsolete binding is not cancellation authority");Eq(f.Deletes,0,"stale display not touched");
+    }
+    static void MountIntentReused()
+    {
+        using var f=new F();f.Manager->BattleCharas[207].BattleChara=null;
+        Eq(f.Use(ActionType.Mount,55),false,"unowned dispatcher result");Eq(f.Location(ActionType.Mount,55),false,"unowned location result");
+        Eq(f.OriginalCalls,1,"unowned dispatcher once");Eq(f.LocationCalls,1,"unowned location once");Eq(f.Runtime.ActiveEffects.Count,2,"lost display identity does not authorize intent cleanup");Eq(f.Deletes,0,"unowned native slot not deleted");
+    }
+    static void MountIntentStatus()
+    {
+        using var f=new F();Eq(f.Status(ActionType.Mount,55),0x243u,"nonzero mount native status unchanged");Eq(f.StatusCalls,1,"native preflight once");
+        Eq(f.Runtime.ActiveEffects.Count,2,"status query is not active user mount intent");Eq(f.Deletes,0,"status query preserves display");Eq(f.Cancelled,0,"status query does not report cancellation");Eq(f.NativeAccepted,0,"status query cannot accept native input");
+    }
+    static void MountIntentStatusReentry()
+    {
+        using var f=new F();f.StatusNestedId=55;
+        Eq(f.Status(ActionType.Mount,55),0x243u,"native status result preserved after nested probes");Eq(f.StatusCalls,1,"status original once");
+        Eq(f.OriginalCalls,1,"status nested dispatcher once");Eq(f.LocationCalls,1,"status nested location once");Eq(f.LastId,55u,"status nested mount request preserved");
+        Eq(f.Runtime.ActiveEffects.Count,2,"status-inspection native calls cannot cancel current trial as user intent");Eq(f.Deletes,0,"status reentry preserves owned display");Eq(f.Cancelled,0,"status reentry is not active user cancellation");Eq(f.NativeAccepted,0,"rejected status probes do not accept native input");
+    }
+    static void MountIntentLookupReentry()
+    {
+        using var f=new F();bool nestedResult=true;int lookups=0;var order=new List<string>();var observations=new List<(uint Id,bool Active)>();
+        f.LookupBefore=()=>{lookups++;nestedResult=f.Use(ActionType.Mount,56);};
+        f.NativeBefore=()=>{observations.Add((f.LastId,f.Runtime.HasActivePreview));order.Add("native"+f.LastId);};
+        f.Runtime.PreviewCancelled+=_=>order.Add("cancel");
+        Eq(f.Use(ActionType.Mount,55),false,"outer rejected request result preserved");Eq(nestedResult,false,"lookup-nested rejection preserved");Eq(lookups,1,"lookup reentry callback consumed once");
+        Eq(f.OriginalCalls,2,"nested and outer originals each dispatched once");Eq(observations.Count,2,"both native dispatch states recorded");
+        Eq(observations[0],(56u,true),"lookup-nested native dispatch must see the current trials still active");Eq(observations[1],(55u,false),"outer native dispatch must see trials already released");
+        Eq(string.Join(",",order),"native56,cancel,native55","only the outer user intent cancels, between nested and outer originals");
+        Eq(f.Runtime.HasActivePreview,false,"outer mount intent ends all trials");Eq(f.Cancelled,1,"one outer intent cancellation");Eq(f.Deletes,1,"one display release");Eq(f.NativeAccepted,0,"neither rejected original reports native acceptance");
+    }
+    static void MountIntentLookupStale()
+    {
+        using var f=new F();f.ReenterLookup=true;bool? activeDuringOriginal=null;f.NativeBefore=()=>activeDuringOriginal=f.Runtime.HasActivePreview;
+        Eq(f.Use(ActionType.Mount,55),false,"original rejection preserved after lookup invalidation");Eq(f.ReenterLookup,false,"ownership lookup actually reentered");Eq(f.Territory,2u,"lookup changed current territory");
+        Eq(f.OriginalCalls,1,"stale outer original forwarded once");Eq(activeDuringOriginal,true,"invalidated ownership cannot clear trials before original dispatch");
+        Eq(f.Runtime.ActiveEffects.Count,2,"lookup invalidation leaves unrelated ownership intact");Eq(f.Deletes,0,"invalidated lookup cannot delete display");Eq(f.Cancelled,0,"stale binding cannot report intent cancellation");Eq(f.NativeAccepted,0,"rejected stale original cannot accept input");
+    }
     static void SingleMount() { using var f=new F(); f.Effects.Remove(PreviewSlot.Emote); Eq(f.Use(ActionType.GeneralAction,23),true,"local exit"); Eq(f.Runtime.HasActivePreview,false,"all ownership ended"); Eq(f.Deletes,1,"owned display released once"); Eq(f.OriginalCalls,0,"no native input replay"); }
     static void OwnCall() { using var f=new F(); Set(f.Runtime,"ownCall",true); Eq(f.Use(ActionType.GeneralAction,23),false,"original result"); Eq(f.OriginalCalls,1,"original once"); Eq(f.Runtime.ActiveEffects.Count,2,"owned call preserved preview"); }
     static void DisplayMismatch() { using var f=new F(); f.Clone->Mount.MountId=447; Eq(f.Use(ActionType.GeneralAction,23),false,"original result"); Eq(f.OriginalCalls,1,"original once"); Eq(f.MountCalls,0,"changed display not torn down"); }
@@ -134,8 +284,8 @@ unsafe class Program
         public readonly Character* Source=Alloc<Character>(), Clone=Alloc<Character>(); public readonly ClientObjectManager* Manager=Alloc<ClientObjectManager>();
         public readonly ActionManager* ActionMgr=Alloc<ActionManager>();
         readonly nint* table=(nint*)NativeMemory.AllocZeroed(0x300); readonly Character** local=(Character**)NativeMemory.AllocZeroed((nuint)sizeof(nint)); readonly ActionManager** localAction=(ActionManager**)NativeMemory.AllocZeroed((nuint)sizeof(nint)); public readonly ActorPreviewRuntime Runtime;
-        public Dictionary<PreviewSlot,PreviewEffect> Effects=new(); public uint Territory=1; public int OriginalCalls,StatusCalls,MountCalls,SourceMountCalls,NativeAccepted,Cancelled,Deletes,LeafCalls; public uint LastId,LastLeafId,NestedLeafId; public bool NativeResult,NativeClearsMount,LeafResult,LeafChangesCooldown,ReenterLookup;
-        public readonly Dictionary<PreviewSlot,int> Spawn=new() { [PreviewSlot.Mount]=60 }; public int SetupCalls,LocationCalls; public ushort LastTimeline; public bool LocationResult; public short? LocationSetup; public Action? SetupAfter,DisplayAfter;
+        public Dictionary<PreviewSlot,PreviewEffect> Effects=new(); public uint Territory=1; public int OriginalCalls,StatusCalls,MountCalls,SourceMountCalls,NativeAccepted,Cancelled,Deletes,LeafCalls; public uint LastId,LastLeafId,NestedLeafId,NestedLocationId,RandomNestedMountId,StatusNestedId,LastExtra,LastCombo; public ulong LastTarget; public ActionType LastType; public ActionManager.UseActionMode LastMode; public bool NativeResult,NativeClearsMount,LeafResult,LeafChangesCooldown,ReenterLookup;
+        public readonly Dictionary<PreviewSlot,int> Spawn=new() { [PreviewSlot.Mount]=60 }; public int SetupCalls,LocationCalls; public ushort LastTimeline; public bool LocationResult; public short? LocationSetup; public Action? SetupAfter,DisplayAfter,NativeBefore,LocationBefore,LookupBefore;
         public F(ushort baselineMount=0,ushort realMount=0,ushort baselineTimeline=0)
         {
             current=this; *(nint**)Source=table; *(nint**)Clone=table; table[1]=(nint)(delegate* unmanaged<GameObject*,ulong>)&Identity;
@@ -165,15 +315,15 @@ unsafe class Program
             Source->Mount.MountId=realMount;
             // Constructor only records pointers and ids; no native actor is created.
             Set(Runtime,"visualActor",typeof(NativePreviewActor).GetConstructors(All).Single().Invoke([Ptr(Manager,typeof(ClientObjectManager)),(ushort)207,Ptr(Clone,typeof(Character)),Ptr(Source,typeof(Character)),null]));
-            ActionManager.Delegates.UseAction original=(mgr,type,id,target,extra,mode,combo,area)=> {OriginalCalls++;LastId=id;if(NativeClearsMount)Source->Mount.MountId=0;if(NestedLeafId!=0)Companion(NestedLeafId);return NativeResult;};
-            ActionManager.Delegates.GetActionStatus status=(mgr,type,id,target,recast,casting,info)=>{StatusCalls++;return 0x243;};
+            ActionManager.Delegates.UseAction original=(mgr,type,id,target,extra,mode,combo,area)=> {OriginalCalls++;LastType=type;LastId=id;LastTarget=target;LastExtra=extra;LastMode=mode;LastCombo=combo;NativeBefore?.Invoke();if(NativeClearsMount)Source->Mount.MountId=0;if(NestedLeafId!=0)Companion(NestedLeafId);if(type==ActionType.GeneralAction&&RandomNestedMountId!=0)Use(ActionType.Mount,RandomNestedMountId);if(NestedLocationId!=0&&(RandomNestedMountId==0||type==ActionType.Mount))Location(ActionType.Mount,NestedLocationId);return NativeResult;};
+            ActionManager.Delegates.GetActionStatus status=(mgr,type,id,target,recast,casting,info)=>{StatusCalls++;if(StatusNestedId!=0){Use(ActionType.Mount,StatusNestedId);Location(ActionType.Mount,StatusNestedId);}return 0x243;};
             MountContainer.Delegates.CreateAndSetupMount setup=(container,id,top,body,legs,stain,unk6,unk7)=>{ SetupCalls++; MountEffect(container,id); SetupAfter?.Invoke(); };
-            ActionManager.Delegates.UseActionLocation location=(mgr,type,id,target,pos,extra,a7)=>{ LocationCalls++; if(LocationSetup is {} mount)Setup(mount); return LocationResult; };
+            ActionManager.Delegates.UseActionLocation location=(mgr,type,id,target,pos,extra,a7)=>{ LocationCalls++; LocationBefore?.Invoke();if(LocationSetup is {} mount)Setup(mount); return LocationResult; };
             Set(Runtime,"useAction",Hook(original)); Set(Runtime,"actionStatus",Hook(status));
             Set(Runtime,"mountSetup",Hook(setup)); Set(Runtime,"useLocation",Hook(location));
             Runtime.NativeInputAccepted+=()=>NativeAccepted++; Runtime.PreviewCancelled+=_=>Cancelled++;
         }
-        public bool Use(ActionType type,uint id)=>(bool)RuntimeType.GetMethod("UseActionDetour",All)!.Invoke(Runtime,[Ptr(ActionMgr,typeof(ActionManager)),type,id,0UL,0u,ActionManager.UseActionMode.None,0u,Ptr(null,typeof(bool))])!;
+        public bool Use(ActionType type,uint id,ActionManager.UseActionMode mode=ActionManager.UseActionMode.None,ulong target=0,uint extra=0,uint combo=0)=>(bool)RuntimeType.GetMethod("UseActionDetour",All)!.Invoke(Runtime,[Ptr(ActionMgr,typeof(ActionManager)),type,id,target,extra,mode,combo,Ptr(null,typeof(bool))])!;
         public uint Status(ActionType type,uint id)=>(uint)RuntimeType.GetMethod("ActionStatusDetour",All)!.Invoke(Runtime,[Ptr(null,typeof(ActionManager)),type,id,0UL,false,false,Ptr(null,typeof(uint))])!;
         public void Setup(short id)=>RuntimeType.GetMethod("MountSetupDetour",All)!.Invoke(Runtime,[Ptr(&Source->Mount,typeof(MountContainer)),id,0u,0u,0u,(byte)0,(byte)0,(byte)0]);
         public bool Location(ActionType type,uint id)=>(bool)RuntimeType.GetMethod("UseLocationDetour",All)!.Invoke(Runtime,[Ptr(ActionMgr,typeof(ActionManager)),type,id,0UL,Ptr(null,typeof(System.Numerics.Vector3)),0u,(byte)0])!;
@@ -192,7 +342,7 @@ unsafe class Program
         static T* Alloc<T>() where T:unmanaged=>(T*)NativeMemory.AllocZeroed((nuint)sizeof(T));
     }
     [UnmanagedCallersOnly] static ulong Identity(GameObject* obj)=>obj->EntityId;
-    [UnmanagedCallersOnly] static Character* Lookup(ClientObjectManager* mgr,ushort slot) { if(current.ReenterLookup) {current.ReenterLookup=false;current.Territory=2;} return (Character*)mgr->BattleCharas[slot].BattleChara; }
+    [UnmanagedCallersOnly] static Character* Lookup(ClientObjectManager* mgr,ushort slot) { var before=current.LookupBefore;current.LookupBefore=null;before?.Invoke();if(current.ReenterLookup) {current.ReenterLookup=false;current.Territory=2;} return (Character*)mgr->BattleCharas[slot].BattleChara; }
     [UnmanagedCallersOnly] static void Delete(ClientObjectManager* mgr,ushort slot,byte param) { current.Deletes++;mgr->BattleCharas[slot].BattleChara=null; }
     static void MountEffect(MountContainer* container,short id) { container->MountId=(ushort)id; if(id==0){container->MountObject=null;container->OwnerObject->Mode=CharacterModes.Normal;container->OwnerObject->ModeParam=0;} }
     [UnmanagedCallersOnly] static void Mount(MountContainer* container,short id,uint top,uint body,uint legs,byte stain,byte unk6,byte unk7) {current.MountCalls++;if(container->OwnerObject==current.Source)current.SourceMountCalls++;MountEffect(container,id);current.DisplayAfter?.Invoke();}

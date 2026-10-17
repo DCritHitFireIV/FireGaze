@@ -700,13 +700,42 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         finally { nativeDepth--; }
     }
     private T InspectNative<T>(Func<T> original, NativeIntent intent)
-        => handoff.InspectGuarded(original, () => Suspend(intent), ReportHandoff);
+    {
+        // A query may re-enter the dispatcher. It is still inspection, not a new
+        // user attempt, even though handoff tracks its own independent depth.
+        nativeDepth++;
+        try { return handoff.InspectGuarded(original, () => Suspend(intent), ReportHandoff); }
+        finally { nativeDepth--; }
+    }
 
     // CN GeneralAction row 23 is the explicit hotbar "Dismount" input. Its native
     // status and dispatcher reject MountId == 0 before the mount-container hook.
     // A display-only mount therefore ends here; no gameplay state is fabricated.
     private static bool IsExplicitDismount(ActionType type, uint id)
         => (type == ActionType.GeneralAction && id == 23) || (type == ActionType.Mount && id == 0);
+
+    // Current CN GeneralAction 9/24 select a mount before recursively dispatching
+    // UseAction(Mount, selectedId). Handle the outer request even without a candidate.
+    private static bool IsActiveMountRequest(ActionType type, uint id, ActionManager.UseActionMode mode)
+        => mode is ActionManager.UseActionMode.None or ActionManager.UseActionMode.Macro
+            && ((type == ActionType.Mount && id != 0) || IsMountRoulette(type, id));
+
+    private static bool IsMountRoulette(ActionType type, uint id)
+        => type == ActionType.GeneralAction && id is 9 or 24;
+
+    private bool CanCancelMountAttempt()
+    {
+        if (Bypass || !effects.ContainsKey(PreviewSlot.Mount) || !BindingCurrent()) return false;
+        var currentRevision = revision;
+        var owned = visualActor;
+        var source = Bound();
+        if (owned is null) return false;
+        var display = owned.Actor;
+        // The native lookup can re-enter. Never cancel a replacement preview or
+        // touch a display slot whose ownership has already been lost.
+        return display != null && !Bypass && effects.ContainsKey(PreviewSlot.Mount)
+            && revision == currentRevision && owned == visualActor && BindingCurrent() && Bound() == source;
+    }
 
     private bool TryExitDisplayMount()
     {
@@ -729,6 +758,27 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
 
     private bool UseActionDetour(ActionManager* mgr, ActionType type, uint id, ulong target, uint extra, ActionManager.UseActionMode mode, uint combo, bool* area)
     {
+        if (!Bypass && nativeDepth == 0 && IsActiveMountRequest(type, id, mode))
+        {
+            // User intent now ends the trial even if native validation rejects or
+            // only queues this request. Protect cleanup and dispatch as one input;
+            // preserve every argument/result and never replay the native call.
+            nativeDepth++;
+            try
+            {
+                // Ownership lookup is native too and belongs inside this protection.
+                bool cancel = false;
+                try { cancel = CanCancelMountAttempt(); }
+                catch (Exception ex) { ReportHandoff(ex); }
+                if (cancel)
+                {
+                    try { ClearForReason(PreviewExitReason.Busy); Raise(PreviewCancelled, "已尝试使用原生坐骑，全部试用已结束"); }
+                    catch (Exception ex) { ReportHandoff(ex); }
+                    return useAction!.Original(mgr,type,id,target,extra,mode,combo,area);
+                }
+            }
+            finally { nativeDepth--; }
+        }
         if (!Bypass && IsExplicitDismount(type, id))
         {
             if (TryExitDisplayMount()) return true;
@@ -736,6 +786,11 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
             // true can also mean queued/dispatched, so it cannot commit preview cleanup.
             return useAction!.Original(mgr,type,id,target,extra,mode,combo,area);
         }
+        // A queued roulette can dispatch an inner Mount with its default mode.
+        // Keep it within one transaction so that inner call is not a new attempt;
+        // a real accepted leaf still uses the existing native handoff rules.
+        if (!Bypass && IsMountRoulette(type, id))
+            return RunNative(new(PreviewSlot.Mount,id), () => useAction!.Original(mgr,type,id,target,extra,mode,combo,area), false);
         if (Bypass || !Relevant(type)) return useAction!.Original(mgr,type,id,target,extra,mode,combo,area);
         return RunNative(new(Slot(type),id), () => useAction!.Original(mgr,type,id,target,extra,mode,combo,area), false);
     }
