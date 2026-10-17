@@ -1,0 +1,129 @@
+{
+  "issue": "direct-2026-10-17T09-50-57-727Z-16017809",
+  "receivedAt": "2026-10-17 09:51:09",
+  "author": "匿名直传",
+  "plugin": "EasyZoomReborn",
+  "fingerprint": "2a21c54ff1801515",
+  "packFile": "EasyZoomReborn@user-2a21c5.json",
+  "accepted": 12,
+  "filled": 12,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "EasyZoomReborn",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Opens the EasyZoomReborn configuration window.",
+        "Translated": "打开 EasyZoomReborn 配置窗口。",
+        "Context": "EasyZoomRebornPlugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": " Settings",
+        "Translated": "设置",
+        "Context": "EasyZoomRebornPlugin.CreateWindows",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "General",
+        "Translated": "常规",
+        "Context": "SettingsWindow.Draw",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BeginTabItem"
+      },
+      {
+        "Original": "Disable camera collision",
+        "Translated": "禁用相机冲击",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "FOV",
+        "Translated": "视野",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "FOV Min",
+        "Translated": "视野最小值",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "FOV Max",
+        "Translated": "视野最大值",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Zoom",
+        "Translated": "缩放",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SliderFloat"
+      },
+      {
+        "Original": "Zoom Min",
+        "Translated": "缩放最小值",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Zoom Max",
+        "Translated": "缩放最大值",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Look At Height Offset",
+        "Translated": "注视高度偏移",
+        "Context": "SettingsWindow.DrawGeneralTab",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.DragFloat"
+      },
+      {
+        "Original": "Support the developer on Ko-fi",
+        "Translated": "在 Ko-fi 上支持开发者",
+        "Context": ".ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
