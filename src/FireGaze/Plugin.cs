@@ -51,6 +51,7 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] public static IGameGui GameGUI { get; private set; } = null!;
     [PluginService] public static IContextMenu ContextMenu { get; private set; } = null!;
     [PluginService] public static IAddonLifecycle AddonLifecycle { get; private set; } = null!;
+    [PluginService] public static IKeyState Keys { get; private set; } = null!;
 
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly WindowSystem windowSystem = new("FireGaze");
@@ -266,7 +267,7 @@ public sealed class Plugin : IDalamudPlugin
         {
             localPreview = new LocalPreview.LocalPreviewFeature(pluginInterface, Framework, ClientState,
                 Objects, Conditions, DataManager, Interop, Log, Chat, GameGUI, ContextMenu,
-                CommandManager, AddonLifecycle, Config, () => SaveConfig(force: true));
+                CommandManager, AddonLifecycle, Config, () => SaveConfig(force: true), Textures, Keys);
         }
         catch (Exception e)
         {

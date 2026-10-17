@@ -36,19 +36,22 @@ public sealed partial class LocalPreviewFeature : IDisposable
     private HmsOriginalAdapter? hmsAdapter;
     private ActorPreviewRuntime? runtime;
     private PreviewInteractionService? interaction;
-    private bool enabled;
+    private volatile bool enabled;
     private bool diagnosticsRegistered;
-    private bool initialized;
-    private bool disposed;
+    private volatile bool initialized;
+    private volatile bool disposed;
+    private PreviewEffect[] uiActiveEffects = [];
     private string lastMessage = "等待插件加载阶段完成";
     private HmsCoexistenceDecision coexistence = HmsCoexistencePolicy.Decide(0, null);
     private DateTime nextCoexistenceCheck;
+    private readonly ITextureProvider? textures;
+    private readonly IKeyState? keys;
 
     public LocalPreviewFeature(IDalamudPluginInterface pluginInterface, IFramework framework,
         IClientState clientState, IObjectTable objects, ICondition conditions, IDataManager data,
         IGameInteropProvider interop, IPluginLog log, IChatGui chat, IGameGui gameGUI,
         IContextMenu contextMenu, ICommandManager commands, IAddonLifecycle addonLifecycle,
-        Configuration config, Action saveConfig)
+        Configuration config, Action saveConfig, ITextureProvider? textures = null, IKeyState? keys = null)
     {
         this.pluginInterface = pluginInterface;
         Framework = framework; ClientState = clientState; Objects = objects; Condition = conditions;
@@ -57,6 +60,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
         this.config = config;
         enabled = config.LocalPreviewEnabled;
         this.saveConfig = saveConfig;
+        this.textures = textures;
+        this.keys = keys;
         diagnosticsIpc = pluginInterface.GetIpcProvider<string>("FireGaze.LocalPreview.Diagnostics");
         try
         {
@@ -75,6 +80,13 @@ public sealed partial class LocalPreviewFeature : IDisposable
     private void Update(IFramework framework)
     {
         if (disposed) return;
+        try { UpdateCore(framework); }
+        finally { PublishActiveEffects(); }
+    }
+
+    private void UpdateCore(IFramework framework)
+    {
+        if (disposed) return;
         if (!initialized || runtime?.HasActivePreview == true || DateTime.UtcNow >= nextCoexistenceCheck)
         {
             RefreshCoexistence();
@@ -85,7 +97,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
             runtime.BeforeHmsLifecycle();
             lastMessage = coexistence.Reason;
         }
-        if (initialized) return;
+        if (initialized) { UpdatePresentationExtras(); return; }
         initialized = true;
         try
         {
@@ -97,12 +109,14 @@ public sealed partial class LocalPreviewFeature : IDisposable
             runtime.EmoteObserved += RecordEmote;
             runtime.NativeInputAccepted += OnNativeAccepted;
             runtime.PreviewCancelled += OnCancelled;
+            InitializePresentationExtras();
             lastMessage = "本地试用入口已就绪";
             if (!enabled) { interaction?.Dispose(); interaction = null; }
             Log.Information("[LocalPreview] 初始化完成：" + Diagnostics());
         }
         catch (Exception ex)
         {
+            DisposePresentationExtras();
             DisposeComponent(interaction, "菜单入口");
             DisposeComponent(runtime, "角色显示");
             DisposeComponent(hmsAdapter, "HMS 适配");
@@ -115,6 +129,9 @@ public sealed partial class LocalPreviewFeature : IDisposable
     }
 
     private void Request(MenuKind kind, uint id)
+        => DispatchMutation(() => RequestCore(kind, id));
+
+    private void RequestCore(MenuKind kind, uint id)
     {
         if (disposed || !enabled || runtime is null)
         {
@@ -177,12 +194,18 @@ public sealed partial class LocalPreviewFeature : IDisposable
     }
 
     private void Cancel()
+        => DispatchMutation(CancelCore);
+
+    private void CancelCore()
     {
         runtime?.ClearAll();
         lastMessage = "全部试用已结束";
     }
 
     private void SetEnabled(bool value)
+        => DispatchMutation(() => SetEnabledCore(value));
+
+    private void SetEnabledCore(bool value)
     {
         if (enabled == value) return;
         enabled = value;
@@ -190,7 +213,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         Cleanup(saveConfig, "保存开关");
         if (!value)
         {
-            Cancel();
+            CancelCore();
             interaction?.Dispose();
             interaction = null;
             lastMessage = "本地试用已关闭";
@@ -206,6 +229,32 @@ public sealed partial class LocalPreviewFeature : IDisposable
 
     private void RecordEmote(ulong actorID, ushort emoteID) => interaction?.RecordEmote(actorID, emoteID);
 
+    // Render and menu callbacks must never wait for Framework while Framework may
+    // be waiting for rendering. Re-check lifetime when queued work actually runs.
+    private void DispatchMutation(Action action)
+    {
+        if (disposed) return;
+        void Execute()
+        {
+            if (disposed) return;
+            try { action(); }
+            catch (Exception ex) { Log.Error(ex, "[LocalPreview] 操作未能执行"); }
+            finally { if (!disposed) PublishActiveEffects(); }
+        }
+        if (Framework.IsInFrameworkUpdateThread) Execute();
+        else _ = Framework.RunOnFrameworkThread(() => { Execute(); return true; });
+    }
+
+    private void PublishActiveEffects()
+        => System.Threading.Volatile.Write(ref uiActiveEffects,
+            disposed ? [] : runtime?.ActiveEffects.ToArray() ?? []);
+
+    private PreviewEffect[] ReadActiveEffects()
+        => System.Threading.Volatile.Read(ref uiActiveEffects) ?? [];
+
+    private void CancelSlot(PreviewSlot slot)
+        => DispatchMutation(() => runtime?.Clear(slot));
+
     private T OnFramework<T>(Func<T> action) => Framework.IsInFrameworkUpdateThread
         ? action() : Framework.RunOnFrameworkThread(action).GetAwaiter().GetResult();
 
@@ -213,6 +262,9 @@ public sealed partial class LocalPreviewFeature : IDisposable
         => coexistence = hmsAdapter?.Refresh() ?? new(false, "兼容适配正在初始化");
 
     public void OnCommand(string arguments)
+        => DispatchMutation(() => OnCommandCore(arguments));
+
+    private void OnCommandCore(string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         if (parts.Length == 0) return; // Main window navigation is owned by Plugin.
@@ -246,6 +298,14 @@ public sealed partial class LocalPreviewFeature : IDisposable
                 break;
             case "native":
                 if (pluginInterface.IsDev) ExecuteDevelopmentNative(parts);
+                break;
+            case "special":
+                if (pluginInterface.IsDev && parts.Length==2 && int.TryParse(parts[1],out var slot) && slot is >=0 and <=6)
+                    OnFramework(() => { PublishSpecialBar(); return specialHotbarModel?.Current is { } bar && ActivateSpecialSlot(slot,bar.Revision); });
+                break;
+            case "photo":
+                if (pluginInterface.IsDev && parts.Length==2 && parts[1] is "enter" or "exit")
+                    SetDevelopmentPhoto(parts[1]=="enter");
                 break;
             case "chatprobe":
                 lastMessage = interaction?.EnableNativeChatProbe() == true
@@ -296,6 +356,17 @@ public sealed partial class LocalPreviewFeature : IDisposable
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
+        weaponVisibility = new { installed = runtime?.WeaponVisibilityGatesInstalled,
+            regularSuppressed = runtime?.WeaponVisibilitySuppressions, extraSuppressed = runtime?.ExtraWeaponVisibilitySuppressions },
+        nativeRequestsConsumed = runtime?.NativeRequestsConsumed,
+        hmsVisibilityRepairs = runtime?.HmsVisibilityRepairs,
+        specialBar = specialHotbarModel?.Current,
+        flightPoseActive = runtime?.FlightPoseActive ?? false,
+        activePreviewEmoteId = runtime?.GetActivePreviewEmote()?.EmoteId ?? 0,
+        specialKeyboardAvailable = specialHotbarView?.KeyboardAvailable,
+        nativeSpecialBar = specialHotbarView is null ? null : new { available=specialHotbarView.NativeAvailable,
+            active=specialHotbarView.NativeActive, detail=specialHotbarView.NativeStatus, inputsConsumed=specialHotbarView.NativeInputsConsumed },
+        gposeMemory = gposeEmotes is null ? null : new { id=gposeEmotes.CurrentEmoteId, installed=gposeEmotes.Installed, replays=gposeEmotes.ReplayCount, detail=gposeEmotes.Detail },
         interaction = interaction?.Capabilities,
         observedEmotes = interaction?.ObservedEmotes,
         chatMessagesLinked = interaction?.ChatMessagesLinked,
@@ -317,10 +388,15 @@ public sealed partial class LocalPreviewFeature : IDisposable
     });
 
     public void Dispose()
+        => OnFramework(() => { DisposeCore(); return true; });
+
+    private void DisposeCore()
     {
         if (disposed) return;
         disposed = true;
+        System.Threading.Volatile.Write(ref uiActiveEffects, []);
         Cleanup(() => Framework.Update -= Update, "帧回调");
+        DisposePresentationExtras();
         if (diagnosticsRegistered) Cleanup(diagnosticsIpc.UnregisterFunc, "诊断 IPC");
         DisposeComponent(interaction, "菜单入口");
         if (runtime is not null)

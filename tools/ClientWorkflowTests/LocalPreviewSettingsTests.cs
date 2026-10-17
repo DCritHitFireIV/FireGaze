@@ -11,6 +11,8 @@ internal static class LocalPreviewSettingsTests
     {
         var featureType = typeof(Configuration).Assembly.GetType("FireGaze.LocalPreview.LocalPreviewFeature")!;
         var kindType = typeof(Configuration).Assembly.GetType("FireGaze.LocalPreview.Interaction.PreviewKind")!;
+        await VerifyDisposeDispatch(featureType, check);
+        await VerifyUiDispatch(featureType, kindType, check);
         foreach (var name in new[] { "Mount", "Minion", "Accessory", "Emote" })
         {
             var (feature, config, framework) = Fixture(featureType);
@@ -76,11 +78,156 @@ internal static class LocalPreviewSettingsTests
         {
             var (commandFeature, commandConfig, commandFramework) = Fixture(featureType);
             await Task.Run(() => featureType.GetMethod("OnCommand")!.Invoke(commandFeature, [arguments]));
-            check(commandFramework.Schedules == 0 && commandFramework.Saves == 0 && commandConfig.LocalPreviewMountEnabled &&
+            check(commandFramework.Saves == 0 && commandConfig.LocalPreviewMountEnabled &&
                 commandConfig.LocalPreviewMinionEnabled && commandConfig.LocalPreviewAccessoryEnabled &&
                 commandConfig.LocalPreviewEmoteEnabled && commandConfig.LocalPreviewItemMenusEnabled,
                 "invalid settings command cannot mutate preferences: " + arguments);
         }
+    }
+
+    private static async Task VerifyDisposeDispatch(Type featureType, Action<bool, string> check)
+    {
+        var dispose = featureType.GetMethod("Dispose")!;
+        var (feature, _, framework) = Fixture(featureType);
+        var state = ObserveCleanup(featureType, feature, framework);
+        framework.HoldDispatch = true;
+        Exception? failure = null;
+        var caller = Task.Run(() =>
+        {
+            try { dispose.Invoke(feature, null); }
+            catch (Exception ex) { failure = ex; }
+        });
+        await Task.WhenAny(framework.DispatchObserved.Task, caller, Task.Delay(1500));
+        bool waited = !caller.IsCompleted && framework.Schedules == 1;
+        bool untouched = state.Removes == 0 && state.Completions == 0;
+        framework.Flush();
+        await caller;
+        check(waited && untouched && failure is null,
+            "worker disposal waits for framework cleanup and performs no native-facing cleanup before dispatch");
+        check(state.Removes == 1 && state.Completions == 1 && state.InsideFramework && state.ClosedBeforeCleanup,
+            "feature disposal closes input and render state before one complete framework cleanup");
+        framework.HoldDispatch = false;
+        await Task.Run(() => dispose.Invoke(feature, null));
+        check(state.Removes == 1 && state.Completions == 1,
+            "repeated worker disposal cannot repeat feature component cleanup");
+
+        var (inline, _, inlineFramework) = Fixture(featureType);
+        var inlineState = ObserveCleanup(featureType, inline, inlineFramework);
+        inlineFramework.InsideFramework = true;
+        dispose.Invoke(inline, null);
+        dispose.Invoke(inline, null);
+        check(inlineFramework.Schedules == 0 && inlineState.Removes == 1 && inlineState.Completions == 1
+                && inlineState.InsideFramework && inlineState.ClosedBeforeCleanup,
+            "framework disposal completes inline without scheduling or repeating cleanup");
+    }
+
+    private static CleanupState ObserveCleanup(Type featureType, object feature,
+        SettingsFrameworkProxy framework)
+    {
+        var state = new CleanupState();
+        var effectsType = featureType.GetField("uiActiveEffects", Instance)!.FieldType.GetElementType()!;
+        featureType.GetField("uiActiveEffects", Instance)!.SetValue(feature, Array.CreateInstance(effectsType, 1));
+        framework.OnRemoveUpdate = () =>
+        {
+            state.Removes++;
+            state.InsideFramework &= framework.InsideFramework;
+            state.ClosedBeforeCleanup &= (bool)featureType.GetField("disposed", Instance)!.GetValue(feature)!
+                && ((Array)featureType.GetField("uiActiveEffects", Instance)!.GetValue(feature)!).Length == 0;
+        };
+        var log = DispatchProxy.Create<IPluginLog, SettingsLogProxy>();
+        ((SettingsLogProxy)(object)log).OnLog = method =>
+        {
+            state.InsideFramework &= framework.InsideFramework;
+            if (method == "Information") state.Completions++;
+        };
+        featureType.GetField("Log", Instance)!.SetValue(feature, log);
+        return state;
+    }
+
+    private sealed class CleanupState
+    {
+        public int Removes;
+        public int Completions;
+        public bool InsideFramework = true;
+        public bool ClosedBeforeCleanup = true;
+    }
+
+    private static async Task VerifyUiDispatch(Type featureType, Type kindType, Action<bool, string> check)
+    {
+        var slotType = featureType.Assembly.GetType("FireGaze.LocalPreview.Runtime.PreviewSlot")!;
+        // A direct setter, a synchronous framework wait, or a missing unload guard
+        // must each fail this real feature invocation with a deferred dispatcher.
+        foreach (var (method, arguments) in new (string, object?[])[]
+        {
+            ("SetEnabled", [false]), ("Cancel", []), ("CancelSlot", [Enum.Parse(slotType, "Mount")]),
+            ("SetCategory", [Enum.Parse(kindType, "Mount"), false]), ("SetItemMenus", [false]),
+            ("Request", [Enum.Parse(kindType, "Mount"), (uint)1]),
+        })
+        {
+            var (feature, config, framework) = Fixture(featureType);
+            framework.HoldDispatch = true;
+            var mutation = featureType.GetMethod(method, Instance)!;
+            Exception? failure = null;
+            var caller = Task.Run(() =>
+            {
+                try { mutation.Invoke(feature, arguments); }
+                catch (Exception ex) { failure = ex; }
+            });
+            var returned = await Task.WhenAny(caller, Task.Delay(1500)) == caller;
+            var untouched = config.LocalPreviewEnabled && config.LocalPreviewMountEnabled &&
+                config.LocalPreviewItemMenusEnabled && framework.Saves == 0 && framework.ChatCalls == 0;
+            if (!returned) framework.Flush(); // Release a broken blocking implementation before failing.
+            await caller;
+            check(returned && failure is null && framework.Schedules == 1 && untouched,
+                method + " returns to the render caller without waiting or mutating native-facing state");
+            framework.Flush();
+            check(method switch
+            {
+                "SetEnabled" => !config.LocalPreviewEnabled && framework.Saves == 1,
+                "SetCategory" => !config.LocalPreviewMountEnabled && framework.Saves == 1,
+                "SetItemMenus" => !config.LocalPreviewItemMenusEnabled && framework.Saves == 1,
+                "Request" => framework.ChatCalls == 1,
+                "Cancel" => (string?)featureType.GetField("lastMessage", Instance)!.GetValue(feature) == "全部试用已结束",
+                _ => framework.ChatCalls == 0 && framework.Saves == 0,
+            }, method + " executes its state change after framework dispatch");
+
+            var (disposedFeature, disposedConfig, disposedFramework) = Fixture(featureType);
+            disposedFramework.HoldDispatch = true;
+            mutation.Invoke(disposedFeature, arguments);
+            featureType.GetField("disposed", Instance)!.SetValue(disposedFeature, true);
+            disposedFramework.Flush();
+            check(disposedConfig.LocalPreviewEnabled && disposedConfig.LocalPreviewMountEnabled &&
+                disposedConfig.LocalPreviewItemMenusEnabled && disposedFramework.Saves == 0 && disposedFramework.ChatCalls == 0 &&
+                featureType.GetField("lastMessage", Instance)!.GetValue(disposedFeature) is null,
+                method + " queued before unload cannot mutate or call client services after disposal");
+        }
+
+        var (snapshotFeature, _, snapshotFramework) = Fixture(featureType);
+        snapshotFramework.InsideFramework = true;
+        var runtimeType = featureType.Assembly.GetType("FireGaze.LocalPreview.Runtime.ActorPreviewRuntime")!;
+        var effectType = featureType.Assembly.GetType("FireGaze.LocalPreview.Runtime.PreviewEffect")!;
+        var runtime = RuntimeHelpers.GetUninitializedObject(runtimeType);
+        var effects = (System.Collections.IDictionary)Activator.CreateInstance(typeof(Dictionary<,>).MakeGenericType(slotType, effectType))!;
+        var slot = Enum.Parse(slotType, "Mount");
+        effects.Add(slot, Activator.CreateInstance(effectType, [slot, (ushort)223, (byte)0])!);
+        runtimeType.GetField("effects", Instance)!.SetValue(runtime, effects);
+        featureType.GetField("runtime", Instance)!.SetValue(snapshotFeature, runtime);
+        featureType.GetMethod("PublishActiveEffects", Instance)!.Invoke(snapshotFeature, null);
+        var snapshot = (Array)featureType.GetMethod("ReadActiveEffects", Instance)!.Invoke(snapshotFeature, null)!;
+        effects.Clear();
+        check(snapshot.Length == 1, "render effect snapshot survives later framework dictionary changes");
+        featureType.GetMethod("PublishActiveEffects", Instance)!.Invoke(snapshotFeature, null);
+        check(((Array)featureType.GetMethod("ReadActiveEffects", Instance)!.Invoke(snapshotFeature, null)!).Length == 0 && snapshot.Length == 1,
+            "publishing a new effect snapshot never mutates a snapshot already held by the render caller");
+
+        var (closedFeature, _, closedFramework) = Fixture(featureType);
+        featureType.GetField("runtime", Instance)!.SetValue(closedFeature, runtime);
+        closedFramework.HoldDispatch = true;
+        featureType.GetMethod("Request", Instance)!.Invoke(closedFeature, [Enum.Parse(kindType, "Mount"), (uint)223]);
+        featureType.GetField("enabled", Instance)!.SetValue(closedFeature, false);
+        closedFramework.Flush();
+        check(closedFramework.ChatCalls == 1 && effects.Count == 0,
+            "a request queued while enabled cannot start a preview after the feature is closed");
     }
 
     private static (object Feature, Configuration Config, SettingsFrameworkProxy Framework) Fixture(Type featureType)
@@ -90,8 +237,15 @@ internal static class LocalPreviewSettingsTests
         var framework = (SettingsFrameworkProxy)(object)service;
         var feature = RuntimeHelpers.GetUninitializedObject(featureType);
         featureType.GetField("Framework", Instance)!.SetValue(feature, service);
-        featureType.GetField("Chat", Instance)!.SetValue(feature, DispatchProxy.Create<IChatGui, SettingsChatProxy>());
+        var chat = DispatchProxy.Create<IChatGui, SettingsChatProxy>();
+        ((SettingsChatProxy)(object)chat).OnPrint = () =>
+        {
+            if (!framework.InsideFramework) throw new InvalidOperationException("client chat ran outside the framework thread");
+            framework.ChatCalls++;
+        };
+        featureType.GetField("Chat", Instance)!.SetValue(feature, chat);
         featureType.GetField("config", Instance)!.SetValue(feature, config);
+        featureType.GetField("enabled", Instance)!.SetValue(feature, true);
         featureType.GetField("saveConfig", Instance)!.SetValue(feature, (Action)(() =>
         {
             if (!framework.InsideFramework) throw new InvalidOperationException("configuration save ran outside the framework thread");
@@ -103,8 +257,24 @@ internal static class LocalPreviewSettingsTests
 
 public class SettingsChatProxy : DispatchProxy
 {
+    public Action OnPrint = () => { };
     protected override object? Invoke(MethodInfo? method, object?[]? arguments)
-        => method!.Name is "Print" or "PrintError" ? null : throw new NotSupportedException(method.Name);
+    {
+        if (method!.Name is not ("Print" or "PrintError")) throw new NotSupportedException(method.Name);
+        OnPrint();
+        return null;
+    }
+}
+
+public class SettingsLogProxy : DispatchProxy
+{
+    public Action<string> OnLog = _ => { };
+    protected override object? Invoke(MethodInfo? method, object?[]? arguments)
+    {
+        OnLog(method!.Name);
+        if (method.ReturnType == typeof(void)) return null;
+        return method.ReturnType.IsValueType ? Activator.CreateInstance(method.ReturnType) : null;
+    }
 }
 
 public class SettingsFrameworkProxy : DispatchProxy
@@ -112,14 +282,43 @@ public class SettingsFrameworkProxy : DispatchProxy
     public bool InsideFramework;
     public int Schedules;
     public int Saves;
+    public int ChatCalls;
+    public bool HoldDispatch;
+    private readonly System.Collections.Concurrent.ConcurrentQueue<Action> pending = new();
     public Action BeforeDispatch = () => { };
+    public Action OnRemoveUpdate = () => { };
+    public readonly TaskCompletionSource<bool> DispatchObserved = new(TaskCreationOptions.RunContinuationsAsynchronously);
+
+    public void Flush()
+    {
+        while (pending.TryDequeue(out var action)) action();
+    }
 
     protected override object? Invoke(MethodInfo? method, object?[]? arguments)
     {
         if (method!.Name == "get_IsInFrameworkUpdateThread") return InsideFramework;
+        if (method.Name == "remove_Update") { OnRemoveUpdate(); return null; }
         if (method.Name != "RunOnFrameworkThread") throw new NotSupportedException(method.Name);
         BeforeDispatch();
         Schedules++;
+        if (HoldDispatch)
+        {
+            var resultType = method.ReturnType.GenericTypeArguments[0];
+            var completion = Activator.CreateInstance(typeof(TaskCompletionSource<>).MakeGenericType(resultType))!;
+            pending.Enqueue(() =>
+            {
+                InsideFramework = true;
+                try
+                {
+                    var value = ((Delegate)arguments![0]!).DynamicInvoke();
+                    completion.GetType().GetMethod("SetResult")!.Invoke(completion, [value]);
+                }
+                catch (Exception ex) { completion.GetType().GetMethod("SetException", [typeof(Exception)])!.Invoke(completion, [ex]); }
+                finally { InsideFramework = false; }
+            });
+            DispatchObserved.TrySetResult(true);
+            return completion.GetType().GetProperty("Task")!.GetValue(completion);
+        }
         InsideFramework = true;
         try
         {

@@ -291,6 +291,8 @@ public sealed class Plugin : IDalamudPlugin
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
+        weaponVisibility = new { installed = runtime?.WeaponVisibilityGatesInstalled,
+            regularSuppressed = runtime?.WeaponVisibilitySuppressions, extraSuppressed = runtime?.ExtraWeaponVisibilitySuppressions },
         interaction = interaction?.Capabilities,
         observedEmotes = interaction?.ObservedEmotes,
         chatMessagesLinked = interaction?.ChatMessagesLinked,

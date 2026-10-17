@@ -7,7 +7,7 @@
     <Platforms>x64</Platforms>
     <AssemblyName>FireGaze</AssemblyName>
     <Name>FireGaze</Name>
-        <Version>1.4.0.44</Version>
+    <Version>1.4.0.48</Version>
     <Authors>fire</Authors>
     <Author>fire</Author>
     <IconUrl>https://raw.githubusercontent.com/DCritHitFireIV/FireGaze/main/Resources/icon.png?v=2</IconUrl>
@@ -56,10 +56,6 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
     <Compile Include="..\FireGaze.LocalPreview\Runtime\**\*.cs" LinkBase="LocalPreview\Runtime" />
     <Compile Include="..\FireGaze.LocalPreview\Interaction\**\*.cs" LinkBase="LocalPreview\Interaction" />
     <Compile Include="..\FireGaze.LocalPreview\Compatibility\**\*.cs" LinkBase="LocalPreview\Compatibility" />
-    <Reference Include="0Harmony">
-      <HintPath>$(DalamudLibPath)0Harmony.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
   </ItemGroup>
 
 </Project>

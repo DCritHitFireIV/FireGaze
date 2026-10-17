@@ -8,6 +8,7 @@ using Character = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 // Calls the production native-timeline predicate against private character memory
 // and the actual CN sheet. A base-lane-only regression loses mounted overlays.
@@ -63,7 +64,9 @@ unsafe class Program
         using(var playback=new PlaybackFixture(data))
         {
             playback.PrepareMotion();playback.Motion();
-            Check(playback.PlayCalls==1 && playback.LastTimeline==13 && playback.BaseOverride==13,"stable runtime motion reaches the owned rider");
+            Check(playback.PlayCalls==2 && playback.RiderPlayCalls==1 && playback.RiderTimeline==6709
+                && playback.MountPlayCalls==1 && playback.MountTimeline==13 && playback.BaseOverride==6709,
+                "stable runtime motion separately reaches mounted rider and owned mount child");
         }
         using(var playback=new PlaybackFixture(data))
         {
@@ -86,7 +89,9 @@ unsafe class Program
             playback.Motion();
             Check(playback.PlayCalls==0 && playback.BaseOverride==0,"changed ownership revision discards a motion plan before writing");
             playback.Motion();
-            Check(playback.PlayCalls==1 && playback.LastTimeline==13,"discarded motion plan does not consume the next valid playback edge");
+            Check(playback.PlayCalls==2 && playback.RiderPlayCalls==1 && playback.RiderTimeline==6709
+                && playback.MountPlayCalls==1 && playback.MountTimeline==13,
+                "discarded motion plan does not consume either lane's next valid playback edge");
         }
         Console.WriteLine($"{passed}/{passed+failed} production native emote cases passed");
         return failed==0?0:1;
@@ -98,28 +103,44 @@ unsafe sealed class PlaybackFixture : IDisposable
     static PlaybackFixture current=null!;
     readonly Character* source=(Character*)NativeMemory.AllocZeroed((nuint)sizeof(Character));
     readonly Character* clone=(Character*)NativeMemory.AllocZeroed((nuint)sizeof(Character));
+    readonly Character* mount=(Character*)NativeMemory.AllocZeroed((nuint)sizeof(Character));
+    readonly DrawObject* sourceDraw=(DrawObject*)NativeMemory.AllocZeroed((nuint)sizeof(DrawObject));
+    readonly DrawObject* cloneDraw=(DrawObject*)NativeMemory.AllocZeroed((nuint)sizeof(DrawObject));
+    readonly DrawObject* mountDraw=(DrawObject*)NativeMemory.AllocZeroed((nuint)sizeof(DrawObject));
     readonly ClientObjectManager* manager=(ClientObjectManager*)NativeMemory.AllocZeroed((nuint)sizeof(ClientObjectManager));
-    readonly nint* table=(nint*)NativeMemory.AllocZeroed(64);
+    readonly nint* table=(nint*)NativeMemory.AllocZeroed(0x300);
     readonly Character** local=(Character**)NativeMemory.AllocZeroed((nuint)sizeof(nint));
     readonly ActorPreviewRuntime runtime;
     readonly NativePreviewActor display;
     public Dictionary<PreviewSlot,PreviewEffect> Effects=new();
     public int PlayCalls;public ushort LastTimeline;
+    public int RiderPlayCalls,MountPlayCalls;public ushort RiderTimeline,MountTimeline;
     int lookupCount;
     public System.Action? OnFinalMotionLookup;
     public PlaybackFixture(IDataManager data)
     {
-        current=this;*(nint**)source=table;*(nint**)clone=table;
+        current=this;*(nint**)source=table;*(nint**)clone=table;*(nint**)mount=table;
         table[1]=(nint)(delegate* unmanaged<GameObject*,ulong>)&Identity;
+        table[12]=(nint)(delegate* unmanaged<GameObject*,void>)&Enable;
+        table[23]=(nint)(delegate* unmanaged<GameObject*,DrawObject*>)&GetDraw;
         source->EntityId=500;clone->EntityId=700;clone->ObjectIndex=207;
         source->Mount.OwnerObject=source;clone->Mount.OwnerObject=clone;
         source->Timeline.OwnerObject=source;clone->Timeline.OwnerObject=clone;
         source->Timeline.TimelineSequencer.Parent=source;clone->Timeline.TimelineSequencer.Parent=clone;
+        source->DrawObject=sourceDraw;clone->DrawObject=cloneDraw;mount->DrawObject=mountDraw;
+        sourceDraw->IsVisible=true;cloneDraw->IsVisible=true;mountDraw->IsVisible=true;
+        mount->Timeline.OwnerObject=mount;mount->Timeline.TimelineSequencer.Parent=mount;
+        mount->Mount.OwnerObject=mount;mount->DrawData.OwnerObject=mount;
         *local=source;Control.Addresses.GetLocalPlayer.Value=(nint)local;
         manager->BattleCharas[207].BattleChara=(BattleChara*)clone;
         ClientObjectManager.Addresses.Instance.Value=(nint)manager;
         ClientObjectManager.Addresses.GetObjectByIndex.Value=(nint)(delegate* unmanaged<ClientObjectManager*,ushort,Character*>)&Lookup;
         ActionTimelineSequencer.Addresses.PlayTimeline.Value=(nint)(delegate* unmanaged<ActionTimelineSequencer*,ushort,void*,void>)&Play;
+        GameObject.Addresses.IsReadyToDraw.Value=(nint)(delegate* unmanaged<GameObject*,byte>)&DrawReady;
+        GameObject.Addresses.SetPosition.Value=(nint)(delegate* unmanaged<GameObject*,float,float,float,void>)&Position;
+        GameObject.Addresses.SetRotation.Value=(nint)(delegate* unmanaged<GameObject*,float,void>)&Rotation;
+        Character.Addresses.GetTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong>)&Target;
+        Character.Addresses.GetSoftTargetId.Value=(nint)(delegate* unmanaged<Character*,ulong>)&SoftTarget;
         display=(NativePreviewActor)typeof(NativePreviewActor).GetConstructors(All).Single().Invoke([Pointer.Box(manager,typeof(ClientObjectManager*)),(ushort)207,Pointer.Box(clone,typeof(Character*)),Pointer.Box(source,typeof(Character*)),null]);
         runtime=(ActorPreviewRuntime)RuntimeHelpers.GetUninitializedObject(typeof(ActorPreviewRuntime));
         Set("data",data);Set("effects",Effects);Set("visualActor",display);
@@ -140,9 +161,13 @@ unsafe sealed class PlaybackFixture : IDisposable
     public ushort BaseOverride=>clone->Timeline.BaseOverride;
     public void PrepareMotion()
     {
-        Ready=true;source->Timeline.TimelineSequencer.TimelineIds[0]=13;
-        clone->Mount.MountId=446;clone->Timeline.BaseOverride=0;
+        source->Timeline.TimelineSequencer.TimelineIds[0]=13;
+        clone->Mount.MountId=446;clone->Mount.MountObject=mount;clone->Timeline.BaseOverride=0;
         Effects[PreviewSlot.Mount]=new(PreviewSlot.Mount,446);
+        // Collect real owned-child readiness through production Tick. IsReady=true
+        // alone cannot establish a valid visible rider/mount hierarchy.
+        display.Tick(source);
+        if (!display.Tick(source)) throw new InvalidOperationException("motion fixture did not reach native draw readiness");
         lookupCount=0;
     }
     public void AdvanceRevision()
@@ -167,16 +192,27 @@ unsafe sealed class PlaybackFixture : IDisposable
     [UnmanagedCallersOnly] static ulong Identity(GameObject* obj)=>obj->EntityId;
     [UnmanagedCallersOnly] static Character* Lookup(ClientObjectManager* manager,ushort slot)
     {
-        if(++current.lookupCount==4 && current.OnFinalMotionLookup is {} callback)
+        // Runtime Actor + writer initial bind + initial guard precede planning.
+        // The fifth lookup is the guard after planning, before either lane writes.
+        if(++current.lookupCount==5 && current.OnFinalMotionLookup is {} callback)
         { current.OnFinalMotionLookup=null;callback(); }
         return (Character*)manager->BattleCharas[slot].BattleChara;
     }
     [UnmanagedCallersOnly] static void Play(ActionTimelineSequencer* sequencer,ushort id,void* unk)
     {
         current.PlayCalls++;current.LastTimeline=id;
+        if(sequencer->Parent==current.clone){current.RiderPlayCalls++;current.RiderTimeline=id;}
+        if(sequencer->Parent==current.mount){current.MountPlayCalls++;current.MountTimeline=id;}
         sequencer->TimelineIds[id==686?1:0]=id;
     }
-    public void Dispose() {NativeMemory.Free(source);NativeMemory.Free(clone);NativeMemory.Free(manager);NativeMemory.Free(table);NativeMemory.Free(local);}
+    [UnmanagedCallersOnly] static byte DrawReady(GameObject* obj)=>1;
+    [UnmanagedCallersOnly] static void Enable(GameObject* obj)=>obj->DrawObject->IsVisible=true;
+    [UnmanagedCallersOnly] static DrawObject* GetDraw(GameObject* obj)=>obj->DrawObject;
+    [UnmanagedCallersOnly] static void Position(GameObject* obj,float x,float y,float z)=>obj->Position=new(x,y,z);
+    [UnmanagedCallersOnly] static void Rotation(GameObject* obj,float value)=>obj->Rotation=value;
+    [UnmanagedCallersOnly] static ulong Target(Character* obj)=>obj->TargetId.Id;
+    [UnmanagedCallersOnly] static ulong SoftTarget(Character* obj)=>obj->SoftTargetId.Id;
+    public void Dispose() {NativeMemory.Free(source);NativeMemory.Free(clone);NativeMemory.Free(mount);NativeMemory.Free(sourceDraw);NativeMemory.Free(cloneDraw);NativeMemory.Free(mountDraw);NativeMemory.Free(manager);NativeMemory.Free(table);NativeMemory.Free(local);}
 }
 sealed class GameDataFixture(Lumina.GameData game) : IDataManager
 {

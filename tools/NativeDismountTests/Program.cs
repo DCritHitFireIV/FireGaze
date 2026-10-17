@@ -9,6 +9,7 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using Character = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
 
 // Executes the compiled production detours against private allocations and managed originals.
@@ -33,7 +34,13 @@ unsafe class Program
             ("reused display actor cannot consume general-action23", ReusedDisplay),
             ("nested native transaction cannot become local cancellation", Nested),
             ("status checks retain native rejection and never cancel", Status),
-            ("rejected requested mount ends every trial and forwards exact input once", MountIntentRejected),
+            ("first native mount input is consumed and second input dispatches once", MountIntentRejected),
+            ("native collection switch consumes first input during accessory trial", AccessoryFirstInput),
+            ("minion trial clears only incompatible display accessory before setup", MinionDisplayConflict),
+            ("accessory trial clears live display minion even when container id is zero", () => AccessoryDisplayConflict(0,true,255)),
+            ("accessory trial clears occupied display minion with no resolved base id", () => AccessoryDisplayConflict(0,true,0)),
+            ("accessory trial clears pending display minion before setup", () => AccessoryDisplayConflict(255,false,0)),
+            ("accessory trial skips minion teardown when display container is empty", () => AccessoryDisplayConflict(0,false,0)),
             ("queued acknowledgement of active user mount intent still ends every trial", MountIntentQueued),
             ("macro requested mount ends every trial without inventing native acceptance", MountIntentMacro),
             ("automatic queued mount replay does not cancel a later trial on rejection", MountQueueReplay),
@@ -80,6 +87,21 @@ unsafe class Program
             ("native dismount followed by another trial never restores historical mount", DismountThenTrial),
             ("native dismount refreshes posture and timeline used by later emote clear", DismountThenEmoteClear),
             ("transitional mounted source normalizes snapshot without writing real state", DismountTransitionalMode),
+            ("weapon visibility gate suppresses each leased source slot after original exactly once", WeaponGateOwned),
+            ("extra weapon visibility gate maps index zero to the fourth leased slot", ExtraWeaponGateOwned),
+            ("weapon visibility gates preserve native false results", WeaponGateNativeFalse),
+            ("weapon visibility gates preserve clone foreign and invalid-index queries", WeaponGateForeign),
+            ("weapon visibility gates forward without a visual actor", WeaponGateNoActor),
+            ("weapon visibility gates forward when runtime is disposed", WeaponGateDisposedRuntime),
+            ("weapon visibility gates forward when display actor is disposed", WeaponGateDisposedActor),
+            ("weapon visibility gates forward before display readiness", WeaponGateUnready),
+            ("weapon visibility gates revalidate ownership after original executes", WeaponGateOriginalInvalidation),
+            ("worker collection input passes original without cancelling a trial", WorkerCollection),
+            ("worker dismount input cannot tear down the display", WorkerDismount),
+            ("worker special input never calls the local action handler", WorkerSpecial),
+            ("worker companion execution leaves preview ownership unchanged", WorkerCompanion),
+            ("worker native mount setup never releases the display", WorkerSetup),
+            ("worker location acceptance does not mutate preview state", WorkerLocation),
         ];
         int failed=0; foreach(var (name,test) in cases) try { test(); Console.WriteLine("PASS "+name); } catch(Exception e) { failed++; while(e is TargetInvocationException {InnerException:{} inner}) e=inner; Console.WriteLine("FAIL "+name+": "+e.Message); }
         Console.WriteLine($"{cases.Length-failed}/{cases.Length} production dismount boundary cases passed"); return failed==0?0:1;
@@ -94,6 +116,54 @@ unsafe class Program
         Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"all real player bytes unchanged");
         Eq(f.NativeAccepted,0,"local exit is not reported as native acceptance"); Eq(f.Cancelled,1,"local exit reported once");
     }
+    static void WorkerCollection()
+    {
+        using var f=new F();f.FrameworkThread=false;
+        Eq(f.Use(ActionType.Mount,1),false,"native result preserved");
+        Eq(f.OriginalCalls,1,"original invoked exactly once");
+        Eq(f.Runtime.ActiveEffects.Count,2,"trial remains owned");
+        Eq(f.Runtime.NativeRequestsConsumed,0L,"worker call is not deliberate user input");
+        Eq(f.Deletes,0,"no display teardown");
+    }
+    static void WorkerDismount()
+    {
+        using var f=new F();f.FrameworkThread=false;
+        Eq(f.Use(ActionType.GeneralAction,23),false,"native rejection retained");
+        Eq(f.OriginalCalls,1,"original invoked exactly once");
+        Eq(f.Runtime.ActiveEffects.Count,2,"worker never edits effects");
+        Eq(f.MountCalls,0,"display mount not changed");
+    }
+    static void WorkerSpecial()
+    {
+        using var f=new F();f.FrameworkThread=false;var localCalls=0;
+        f.Runtime.SpecialActionInput=_=>{localCalls++;return true;};
+        Eq(f.Use(ActionType.Action,20122),false,"native result retained");
+        Eq(localCalls,0,"no Framework-only local handler invocation");
+        Eq(f.OriginalCalls,1,"original invoked exactly once");
+    }
+    static void WorkerCompanion()
+    {
+        using var f=new F();f.FrameworkThread=false;f.PrepareCompanion(true);
+        Eq(f.Companion(255),true,"native leaf accepted");
+        Eq(f.LeafCalls,1,"original leaf invoked exactly once");
+        Eq(f.Runtime.ActiveEffects.Count,2,"worker acceptance cannot change effects");
+        Eq(f.NativeAccepted,0,"no worker mutation notification");
+    }
+    static void WorkerSetup()
+    {
+        using var f=new F();f.FrameworkThread=false;f.Setup(0);
+        Eq(f.SetupCalls,1,"native setup invoked exactly once");
+        Eq(f.Runtime.ActiveEffects.Count,2,"worker setup cannot clear preview ownership");
+        Eq(f.MountCalls,0,"no local mount teardown");
+    }
+    static void WorkerLocation()
+    {
+        using var f=new F();f.FrameworkThread=false;f.LocationResult=true;
+        Eq(f.Location(ActionType.Mount,1),true,"native location accepted");
+        Eq(f.LocationCalls,1,"original invoked exactly once");
+        Eq(f.Runtime.ActiveEffects.Count,2,"worker location does not suspend or restore");
+        Eq(f.NativeAccepted,0,"no worker acceptance notification");
+    }
     static void OtherGeneral() { using var f=new F(); foreach(uint id in new uint[]{0,1,22,ushort.MaxValue}) { Eq(f.Use(ActionType.GeneralAction,id),false,"native result"); Eq(f.LastId,id,"exact id"); } Eq(f.OriginalCalls,4,"each original once"); Eq(f.Runtime.ActiveEffects.Count,2,"preview retained"); }
     static void RealBaseline() { using var f=new F(42,42); f.NativeResult=true; f.NativeClearsMount=true; Eq(f.Use(ActionType.GeneralAction,23),true,"native result"); Eq(f.OriginalCalls,1,"one native dismount"); Eq(f.Source->Mount.MountId,(ushort)0,"new native state kept"); Eq(f.Runtime.ActiveEffects.Count,2,"outer true is not execution evidence"); Eq(f.MountCalls,0,"no premature display rebuild from outer true"); }
     static void GenuineMount() { using var f=new F(0,42); f.NativeResult=false; Eq(f.Use(ActionType.GeneralAction,23),false,"native rejection retained"); Eq(f.OriginalCalls,1,"real mount forwarded once"); Eq(f.Runtime.ActiveEffects.Count,2,"rejection keeps preview"); }
@@ -106,23 +176,78 @@ unsafe class Program
     static void MountIntentRejected()
     {
         using var f=new F(42,0);byte[] real=new ReadOnlySpan<byte>(f.Source,sizeof(Character)).ToArray();
-        f.NativeBefore=()=>Eq(f.Runtime.HasActivePreview,false,"user mount intent releases trials before native dispatch");
-        Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.None,987UL,17,29),false,"native rejection preserved");
-        Eq(f.OriginalCalls,1,"native mount request forwarded once");Eq(f.LastType,ActionType.Mount,"action type preserved");Eq(f.LastId,55u,"requested mount preserved");
+        Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.None,987UL,17,29),true,"first input consumed locally");
+        Eq(f.OriginalCalls,0,"first input cannot reach native mount execution");
+        Eq(f.Runtime.HasActivePreview,false,"first input ends all trial slots");Eq(f.Deletes,1,"display released once");Eq(f.NativeAccepted,0,"consumed input is not native acceptance");Eq(f.Cancelled,1,"cancellation reported once");
+        Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"cancellation leaves all source bytes unchanged");
+        Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.None,987UL,17,29),false,"second input gets native rejection");
+        Eq(f.OriginalCalls,1,"second input dispatched exactly once");Eq(f.LastType,ActionType.Mount,"action type preserved");Eq(f.LastId,55u,"requested mount preserved");
         Eq(f.LastTarget,987UL,"native target preserved");Eq(f.LastExtra,17u,"extra parameter preserved");Eq(f.LastCombo,29u,"combo parameter preserved");Eq(f.LastMode,ActionManager.UseActionMode.None,"mode preserved");
         Eq(f.Runtime.HasActivePreview,false,"rejected user intent ends all trial slots");Eq(f.Deletes,1,"display released once");Eq(f.NativeAccepted,0,"rejection is not native acceptance");Eq(f.Cancelled,1,"intent cancellation reported once");
         Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"intent cancellation cannot restore historical mounted snapshot over real source");Eq(f.SourceMountCalls,0,"real mount container never modified");
     }
+    static void AccessoryFirstInput()
+    {
+        foreach(var type in new[]{ActionType.Mount,ActionType.Ornament,ActionType.Companion})
+        {
+            using var f=new F();f.Effects.Remove(PreviewSlot.Mount);f.Effects[PreviewSlot.Accessory]=new(PreviewSlot.Accessory,5);
+            Eq(f.Use(type,17),true,"first collection input consumed while trying accessory");Eq(f.OriginalCalls,0,"native use not invoked");Eq(f.Runtime.HasActivePreview,false,"all previews ended");
+            Eq(f.Use(type,17),false,"second collection input gets native result");Eq(f.OriginalCalls,1,"second input native once");
+        }
+    }
+    static void MinionDisplayConflict()
+    {
+        using var f=new F();f.Effects.Clear();f.Clone->Mount.MountId=0;f.Clone->OrnamentData.OwnerObject=f.Clone;f.Clone->OrnamentData.OrnamentId=41;
+        f.Source->OrnamentData.OrnamentId=41;f.Clone->CompanionData.OwnerObject=f.Clone;
+        CompanionContainer.Addresses.SetupCompanion.Value=(nint)(delegate* unmanaged<CompanionContainer*,short,uint,void>)&TrialCompanion;
+        OrnamentContainer.Addresses.SetupOrnament.Value=(nint)(delegate* unmanaged<OrnamentContainer*,short,uint,void>)&TrialOrnament;
+        RuntimeType.GetMethod("Apply",All)!.Invoke(f.Runtime,[Ptr(f.Clone,typeof(Character)),new PreviewEffect(PreviewSlot.Minion,255)]);
+        Eq(f.Clone->OrnamentData.OrnamentId,(ushort)0,"incompatible display accessory removed");
+        Eq(f.Clone->CompanionData.CompanionId,(ushort)255,"native minion setup accepts after display accessory removal");
+        Eq(f.Source->OrnamentData.OrnamentId,(ushort)41,"genuine accessory unchanged");
+    }
+    [UnmanagedCallersOnly] static void TrialCompanion(CompanionContainer* c,short id,uint p) { if(c->OwnerObject->OrnamentData.OrnamentId==0)c->CompanionId=(ushort)id; }
+    [UnmanagedCallersOnly] static void TrialOrnament(OrnamentContainer* c,short id,uint p) { c->OrnamentId=(ushort)id; }
+    static void AccessoryDisplayConflict(ushort metadata,bool hasObject,uint baseId)
+    {
+        using var f=new F();f.Effects.Clear();f.Clone->Mount.MountId=0;
+        f.Source->CompanionData.OwnerObject=f.Source;f.Clone->CompanionData.OwnerObject=f.Clone;f.Clone->OrnamentData.OwnerObject=f.Clone;
+        f.Source->CompanionData.CompanionObject=(Companion*)f.VisibilityForeignCharacter();f.Source->CompanionData.CompanionObject->BaseId=255;
+        f.Clone->CompanionData.CompanionId=metadata;
+        if(hasObject) { f.Clone->CompanionData.CompanionObject=(Companion*)f.VisibilityForeignCharacter();f.Clone->CompanionData.CompanionObject->BaseId=baseId; }
+        byte[] real=new ReadOnlySpan<byte>(f.Source,sizeof(Character)).ToArray();
+        nint setupCompanion=CompanionContainer.Addresses.SetupCompanion.Value,setupOrnament=OrnamentContainer.Addresses.SetupOrnament.Value;
+        try
+        {
+            CompanionContainer.Addresses.SetupCompanion.Value=(nint)(delegate* unmanaged<CompanionContainer*,short,uint,void>)&ClearDisplayCompanion;
+            OrnamentContainer.Addresses.SetupOrnament.Value=(nint)(delegate* unmanaged<OrnamentContainer*,short,uint,void>)&OrnamentAfterCompanion;
+            RuntimeType.GetMethod("Apply",All)!.Invoke(f.Runtime,[Ptr(f.Clone,typeof(Character)),new PreviewEffect(PreviewSlot.Accessory,56)]);
+            Eq(f.Clone->CompanionData.CompanionObject==null,true,"incompatible display minion object removed");
+            Eq(f.Clone->CompanionData.CompanionId,(ushort)0,"incompatible display minion metadata removed");
+            Eq(f.CompanionClearCalls,hasObject||metadata!=0?1:0,"exactly one teardown only for an occupied display container");
+            Eq(f.Clone->OrnamentData.OrnamentId,(ushort)56,"accessory setup accepts after incompatible display minion removal");
+            Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"genuine source minion and all source bytes unchanged");
+        }
+        finally { CompanionContainer.Addresses.SetupCompanion.Value=setupCompanion;OrnamentContainer.Addresses.SetupOrnament.Value=setupOrnament; }
+    }
+    [UnmanagedCallersOnly] static void ClearDisplayCompanion(CompanionContainer* c,short id,uint p)
+    {
+        if(id!=0)return;current.CompanionClearCalls++;c->CompanionId=0;c->CompanionObject=null;
+    }
+    [UnmanagedCallersOnly] static void OrnamentAfterCompanion(OrnamentContainer* c,short id,uint p)
+    {
+        if(c->OwnerObject->CompanionData.CompanionObject==null&&c->OwnerObject->CompanionData.CompanionId==0)c->OrnamentId=(ushort)id;
+    }
     static void MountIntentQueued()
     {
         using var f=new F();f.NativeResult=true;
-        Eq(f.Use(ActionType.Mount,55),true,"native queued acknowledgement preserved");Eq(f.OriginalCalls,1,"user request sent once");
+        Eq(f.Use(ActionType.Mount,55),true,"native queued acknowledgement preserved");Eq(f.OriginalCalls,0,"first input cannot queue native use");
         Eq(f.Runtime.HasActivePreview,false,"active user intent ends trials before queued execution");Eq(f.Deletes,1,"display released once");Eq(f.NativeAccepted,0,"outer queued true cannot invent execution evidence");
     }
     static void MountIntentMacro()
     {
-        using var f=new F();Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.Macro),false,"macro rejection preserved");
-        Eq(f.OriginalCalls,1,"macro dispatched once");Eq(f.LastMode,ActionManager.UseActionMode.Macro,"macro mode forwarded unchanged");Eq(f.Runtime.HasActivePreview,false,"macro is active user mount intent");Eq(f.NativeAccepted,0,"rejected macro is not accepted input");
+        using var f=new F();Eq(f.Use(ActionType.Mount,55,ActionManager.UseActionMode.Macro),true,"macro input consumed");
+        Eq(f.OriginalCalls,0,"macro not dispatched");Eq(f.Runtime.HasActivePreview,false,"macro is active user mount intent");Eq(f.NativeAccepted,0,"rejected macro is not accepted input");
     }
     static void MountQueueReplay()
     {
@@ -150,7 +275,7 @@ unsafe class Program
     static void RandomMountRejected(uint id)
     {
         using var f=new F();f.NativeBefore=()=>Eq(f.Runtime.HasActivePreview,false,"random mount intent clears trials before candidate selection");
-        Eq(f.Use(ActionType.GeneralAction,id),false,"random mount rejection/no candidate result preserved");Eq(f.OriginalCalls,1,"random selector original called once");Eq(f.LastType,ActionType.GeneralAction,"random selector type preserved");Eq(f.LastId,id,"exact random selector id preserved");
+        Eq(f.Use(ActionType.GeneralAction,id),true,"random first input consumed");Eq(f.OriginalCalls,0,"random selector not dispatched");
         Eq(f.Runtime.HasActivePreview,false,"random mount user intent ends all trials even without candidate");Eq(f.Deletes,1,"random selector releases display once");Eq(f.Cancelled,1,"one random intent cancellation");Eq(f.NativeAccepted,0,"rejected random selector is not native acceptance");
     }
     static void RandomMountNested()
@@ -158,7 +283,7 @@ unsafe class Program
         foreach(uint id in new uint[]{9,24})
         {
             using var f=new F();f.RandomNestedMountId=55;f.NestedLocationId=55;
-            Eq(f.Use(ActionType.GeneralAction,id),false,"outer random native rejection preserved");Eq(f.OriginalCalls,2,"one selector and one resolved-mount original, neither replayed");Eq(f.LocationCalls,1,"resolved mount's immediate leaf forwarded once");Eq(f.LastType,ActionType.Mount,"random selection reaches concrete mount dispatcher");Eq(f.LastId,55u,"resolved random mount id forwarded");
+            Eq(f.Use(ActionType.GeneralAction,id),true,"first random mount input consumed");Eq(f.OriginalCalls,0,"selector not dispatched");Eq(f.LocationCalls,0,"no location dispatch");
             Eq(f.Runtime.HasActivePreview,false,"random user intent ends every trial");Eq(f.Deletes,1,"nested concrete mount cannot delete display twice");Eq(f.Cancelled,1,"random and resolved mount share one intent cancellation");Eq(f.NativeAccepted,0,"nested rejected originals cannot invent acceptance");
         }
     }
@@ -221,10 +346,10 @@ unsafe class Program
         f.LookupBefore=()=>{lookups++;nestedResult=f.Use(ActionType.Mount,56);};
         f.NativeBefore=()=>{observations.Add((f.LastId,f.Runtime.HasActivePreview));order.Add("native"+f.LastId);};
         f.Runtime.PreviewCancelled+=_=>order.Add("cancel");
-        Eq(f.Use(ActionType.Mount,55),false,"outer rejected request result preserved");Eq(nestedResult,false,"lookup-nested rejection preserved");Eq(lookups,1,"lookup reentry callback consumed once");
-        Eq(f.OriginalCalls,2,"nested and outer originals each dispatched once");Eq(observations.Count,2,"both native dispatch states recorded");
-        Eq(observations[0],(56u,true),"lookup-nested native dispatch must see the current trials still active");Eq(observations[1],(55u,false),"outer native dispatch must see trials already released");
-        Eq(string.Join(",",order),"native56,cancel,native55","only the outer user intent cancels, between nested and outer originals");
+        Eq(f.Use(ActionType.Mount,55),true,"outer input consumed");Eq(nestedResult,false,"lookup-nested rejection preserved");Eq(lookups,1,"lookup reentry callback consumed once");
+        Eq(f.OriginalCalls,1,"only nested original dispatched");Eq(observations.Count,1,"only nested dispatch state recorded");
+        Eq(observations[0],(56u,true),"lookup-nested native dispatch must see the current trials still active");
+        Eq(string.Join(",",order),"native56,cancel","outer input cancels without native replay");
         Eq(f.Runtime.HasActivePreview,false,"outer mount intent ends all trials");Eq(f.Cancelled,1,"one outer intent cancellation");Eq(f.Deletes,1,"one display release");Eq(f.NativeAccepted,0,"neither rejected original reports native acceptance");
     }
     static void MountIntentLookupStale()
@@ -241,8 +366,8 @@ unsafe class Program
     static void CompanionAccepted() { using var f=new F(); f.PrepareCompanion(true); Eq(f.Companion(41),true,"leaf result"); Eq(f.LeafCalls,1,"one leaf execution"); Eq(f.LastLeafId,41u,"exact companion id"); Eq(f.Runtime.HasActivePreview,false,"all previews ended"); Eq(f.NativeAccepted,1,"one accepted event"); Eq(f.Deletes,1,"display released"); }
     static void CompanionRejected() { using var f=new F(); f.PrepareCompanion(false); Eq(f.Companion(41),false,"native rejection"); Eq(f.LeafCalls,1,"one leaf execution"); Eq(f.Runtime.ActiveEffects.Count,2,"all previews retained"); Eq(f.NativeAccepted,0,"no accepted event"); }
     static void CompanionOwnCall() { using var f=new F(); f.PrepareCompanion(true); Set(f.Runtime,"ownCall",true); Eq(f.Companion(41),true,"original leaf result"); Eq(f.LeafCalls,1,"one original leaf"); Eq(f.Runtime.ActiveEffects.Count,2,"owned call preserves previews"); }
-    static void CompanionNested() { using var f=new F(); f.PrepareCompanion(true); f.NestedLeafId=41; Eq(f.Use(ActionType.Companion,41),false,"outer false preserved"); Eq(f.OriginalCalls,1,"outer invoked once"); Eq(f.LeafCalls,1,"nested leaf invoked once"); Eq(f.Runtime.HasActivePreview,false,"accepted nested leaf ends previews"); Eq(f.NativeAccepted,1,"one commit"); }
-    static void CompanionQueued() { using var f=new F(); f.PrepareCompanion(false); f.NativeResult=true; Eq(f.Use(ActionType.Companion,41),true,"queue result preserved"); Eq(f.OriginalCalls,1,"outer once"); Eq(f.LeafCalls,0,"leaf was not executed"); Eq(f.Runtime.ActiveEffects.Count,2,"queue acceptance does not end preview"); }
+    static void CompanionNested() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(true); f.NestedLeafId=41; Eq(f.Use(ActionType.Companion,41),false,"outer false preserved"); Eq(f.OriginalCalls,1,"outer invoked once"); Eq(f.LeafCalls,1,"nested leaf invoked once"); Eq(f.Runtime.HasActivePreview,false,"accepted nested leaf ends previews"); Eq(f.NativeAccepted,1,"one commit"); }
+    static void CompanionQueued() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(false); f.NativeResult=true; Eq(f.Use(ActionType.Companion,41),true,"queue result preserved"); Eq(f.OriginalCalls,1,"outer once"); Eq(f.LeafCalls,0,"leaf was not executed"); Eq(f.Runtime.ActiveEffects.Count,1,"queue acceptance does not end preview"); }
     static void CompanionTrueWithoutExecution() { using var f=new F(); f.PrepareCompanion(true,false); Eq(f.Companion(41),true,"special branch true preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.Runtime.ActiveEffects.Count,2,"no normal execution evidence retains preview"); Eq(f.NativeAccepted,0,"no false commit"); }
     static void CompanionRejectedCooldown() { using var f=new F(); f.PrepareCompanion(false,true); Eq(f.Companion(71),false,"special branch rejection preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.ActionMgr->CompanionActionCooldown>0,true,"rejection branch really changed cooldown"); Eq(f.Runtime.ActiveEffects.Count,2,"cooldown alone cannot commit"); Eq(f.NativeAccepted,0,"no false commit"); }
     static void NativeSetupDismount()
@@ -271,6 +396,94 @@ unsafe class Program
     static void DismountThenTrial() { using var f=new F(42,42); f.Setup(0); f.ApplyDisplayMount(447); f.Runtime.Clear(PreviewSlot.Mount); Eq(f.Clone->Mount.MountId,(ushort)0,"later clear must not resurrect the historical real mount"); Eq(f.Clone->Mode,CharacterModes.Normal,"later clear uses unmounted posture"); Eq(f.Source->Mount.MountId,(ushort)0,"real dismount preserved throughout"); Eq(f.Runtime.ActiveEffects.Count,1,"emote still retained"); }
     static void DismountThenEmoteClear() { using var f=new F(42,42,555); f.SetupAfter=()=>f.Source->Timeline.TimelineSequencer.TimelineIds[0]=13; f.Setup(0); f.Clone->EmoteController.EmoteId=0; f.Runtime.Clear(PreviewSlot.Emote); Eq(f.LastTimeline,(ushort)13,"later clear restores current unmounted timeline, never historical mounted timeline 555"); Eq(f.Clone->Mode,CharacterModes.Normal,"later emote clear never restores mounted posture"); Eq(f.Source->Mode,CharacterModes.Normal,"real mode remains native"); }
     static void DismountTransitionalMode() { using var f=new F(42,42,555); f.SetupAfter=()=>{f.Source->Mode=CharacterModes.Mounted;f.Source->ModeParam=7;}; f.Setup(0); byte[] real=new ReadOnlySpan<byte>(f.Source,sizeof(Character)).ToArray(); f.Clone->EmoteController.EmoteId=0; f.Runtime.Clear(PreviewSlot.Emote); Eq(f.Clone->Mode,CharacterModes.Normal,"snapshot of mount0 must not retain transitional mounted posture"); Eq(f.Clone->ModeParam,(byte)0,"snapshot mode parameter normalized"); Eq(f.LastTimeline,(ushort)0,"transitional mounted timeline is not replayed"); Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(real),true,"all real source bytes preserved"); }
+    static void AssertVisibilityCall(F f,DrawDataContainer* container,uint index,int count)
+    {
+        Eq(f.VisibilityCalls,count,"native visibility original called exactly once for each query");
+        Eq(f.LastVisibilityContainer,(nint)container,"visibility original received exact container");
+        Eq(f.LastVisibilityIndex,index,"visibility original received exact unsigned slot/index");
+    }
+    static void WeaponGateOwned()
+    {
+        using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(false);
+        byte[] source=new ReadOnlySpan<byte>(f.Source,sizeof(Character)).ToArray();
+        for(uint slot=0;slot<3;slot++)
+        {
+            Eq(f.Visibility(false,&f.Source->DrawData,slot),false,"native true is suppressed for current hidden source lease");
+            AssertVisibilityCall(f,&f.Source->DrawData,slot,(int)slot+1);
+        }
+        Eq(new ReadOnlySpan<byte>(f.Source,sizeof(Character)).SequenceEqual(source),true,"visibility detour wrote real Character bytes");
+        Eq(f.Runtime.ActiveEffects.Count,2,"visibility query cannot cancel preview effects");Eq(f.Deletes,0,"visibility query cannot tear down display actor");
+    }
+    static void ExtraWeaponGateOwned()
+    {
+        using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(true);
+        Eq(f.Visibility(true,&f.Source->DrawData,0),false,"extra index zero suppresses leased fourth source weapon");
+        AssertVisibilityCall(f,&f.Source->DrawData,0,1);
+        Eq(f.Runtime.ActiveEffects.Count,2,"extra visibility query retains preview effects");
+    }
+    static void WeaponGateNativeFalse()
+    {
+        foreach(bool extra in new[]{false,true})
+        {
+            using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(extra);f.VisibilityResult=false;
+            Eq(f.Visibility(extra,&f.Source->DrawData,0),false,"native rejection must remain false");AssertVisibilityCall(f,&f.Source->DrawData,0,1);
+            Eq(f.Runtime.ActiveEffects.Count,2,"native visibility rejection cannot cancel previews");
+        }
+    }
+    static void WeaponGateForeign()
+    {
+        foreach(bool extra in new[]{false,true})
+        {
+            using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(extra);var foreign=f.VisibilityForeignCharacter();
+            Eq(f.Visibility(extra,&f.Clone->DrawData,0),true,"display clone must retain its native weapon visibility");AssertVisibilityCall(f,&f.Clone->DrawData,0,1);
+            Eq(f.Visibility(extra,&foreign->DrawData,0),true,"foreign character with aliased render pointers must retain native visibility");AssertVisibilityCall(f,&foreign->DrawData,0,2);
+            uint invalid=extra?1u:3u;
+            Eq(f.Visibility(extra,&f.Source->DrawData,invalid),true,"out-of-range gate index must pass through");AssertVisibilityCall(f,&f.Source->DrawData,invalid,3);
+            Eq(f.Visibility(extra,&f.Source->DrawData,uint.MaxValue),true,"unsigned extreme index must pass through without wraparound");AssertVisibilityCall(f,&f.Source->DrawData,uint.MaxValue,4);
+        }
+    }
+    static void WeaponGateNoActor()
+    {
+        foreach(bool extra in new[]{false,true})
+        {
+            using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(extra);Set(f.Runtime,"visualActor",null);
+            Eq(f.Visibility(extra,&f.Source->DrawData,0),true,"no display actor must preserve native true");AssertVisibilityCall(f,&f.Source->DrawData,0,1);
+        }
+    }
+    static void WeaponGateDisposedRuntime()
+    {
+        foreach(bool extra in new[]{false,true})
+        {
+            using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(extra);Set(f.Runtime,"disposed",true);
+            Eq(f.Visibility(extra,&f.Source->DrawData,0),true,"disposed runtime cannot suppress native visibility");AssertVisibilityCall(f,&f.Source->DrawData,0,1);
+        }
+    }
+    static void WeaponGateDisposedActor()
+    {
+        foreach(bool extra in new[]{false,true})
+        {
+            using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(extra);f.Display.Dispose();
+            Eq(f.Visibility(extra,&f.Source->DrawData,0),true,"disposed display actor cannot suppress native visibility");AssertVisibilityCall(f,&f.Source->DrawData,0,1);
+        }
+    }
+    static void WeaponGateUnready()
+    {
+        foreach(bool extra in new[]{false,true})
+        {
+            using var f=new F();f.PrepareVisibilityHook(extra);
+            Eq(f.Visibility(extra,&f.Source->DrawData,0),true,"unready display actor cannot suppress native visibility");AssertVisibilityCall(f,&f.Source->DrawData,0,1);
+        }
+    }
+    static void WeaponGateOriginalInvalidation()
+    {
+        foreach(bool extra in new[]{false,true})
+        {
+            using var f=new F();f.PrepareVisibility();f.PrepareVisibilityHook(extra);
+            f.VisibilityAfter=()=>*(uint*)((byte*)f.Source+0x74)=9876;
+            Eq(f.Visibility(extra,&f.Source->DrawData,0),true,"source generation changed inside original revokes old suppression lease");AssertVisibilityCall(f,&f.Source->DrawData,0,1);
+            Eq(*(uint*)((byte*)f.Source+0x74),9876u,"native original side effect preserved");
+        }
+    }
     static void Set(object o,string name,object? value) => o.GetType().GetField(name,All)!.SetValue(o,value);
     static object Ptr(void* p,Type t)=>Pointer.Box(p,t.MakePointerType());
     static T Proxy<T>(Func<MethodInfo,object?[]?,object?> call) where T:class { var p=DispatchProxy.Create<T,ServiceProxy>(); ((ServiceProxy)(object)p).Call=call; return p; }
@@ -281,11 +494,15 @@ unsafe class Program
     }
     sealed class F : IDisposable
     {
+        public bool FrameworkThread=true;
         public readonly Character* Source=Alloc<Character>(), Clone=Alloc<Character>(); public readonly ClientObjectManager* Manager=Alloc<ClientObjectManager>();
         public readonly ActionManager* ActionMgr=Alloc<ActionManager>();
         readonly nint* table=(nint*)NativeMemory.AllocZeroed(0x300); readonly Character** local=(Character**)NativeMemory.AllocZeroed((nuint)sizeof(nint)); readonly ActionManager** localAction=(ActionManager**)NativeMemory.AllocZeroed((nuint)sizeof(nint)); public readonly ActorPreviewRuntime Runtime;
         public Dictionary<PreviewSlot,PreviewEffect> Effects=new(); public uint Territory=1; public int OriginalCalls,StatusCalls,MountCalls,SourceMountCalls,NativeAccepted,Cancelled,Deletes,LeafCalls; public uint LastId,LastLeafId,NestedLeafId,NestedLocationId,RandomNestedMountId,StatusNestedId,LastExtra,LastCombo; public ulong LastTarget; public ActionType LastType; public ActionManager.UseActionMode LastMode; public bool NativeResult,NativeClearsMount,LeafResult,LeafChangesCooldown,ReenterLookup;
-        public readonly Dictionary<PreviewSlot,int> Spawn=new() { [PreviewSlot.Mount]=60 }; public int SetupCalls,LocationCalls; public ushort LastTimeline; public bool LocationResult; public short? LocationSetup; public Action? SetupAfter,DisplayAfter,NativeBefore,LocationBefore,LookupBefore;
+        public readonly Dictionary<PreviewSlot,int> Spawn=new() { [PreviewSlot.Mount]=60 }; public int SetupCalls,LocationCalls,CompanionClearCalls; public ushort LastTimeline; public bool LocationResult; public short? LocationSetup; public Action? SetupAfter,DisplayAfter,NativeBefore,LocationBefore,LookupBefore;
+        readonly List<nint> visibilityAllocations=[];
+        public int VisibilityCalls;public nint LastVisibilityContainer;public uint LastVisibilityIndex;public bool VisibilityResult=true;public Action? VisibilityAfter;
+        public NativePreviewActor Display=>(NativePreviewActor)RuntimeType.GetField("visualActor",All)!.GetValue(Runtime)!;
         public F(ushort baselineMount=0,ushort realMount=0,ushort baselineTimeline=0)
         {
             current=this; *(nint**)Source=table; *(nint**)Clone=table; table[1]=(nint)(delegate* unmanaged<GameObject*,ulong>)&Identity;
@@ -302,6 +519,7 @@ unsafe class Program
             Character.Addresses.SetMode.Value=(nint)(delegate* unmanaged<Character*,CharacterModes,byte,void>)&SetMode;
             ActionTimelineSequencer.Addresses.PlayTimeline.Value=(nint)(delegate* unmanaged<ActionTimelineSequencer*,ushort,void*,void>)&Play;
             Runtime=(ActorPreviewRuntime)RuntimeHelpers.GetUninitializedObject(RuntimeType);
+            Set(Runtime,"framework",Proxy<IFramework>((m,a)=>m.Name=="get_IsInFrameworkUpdateThread"?FrameworkThread:null));
             var player=Proxy<IPlayerCharacter>((m,a)=>m.Name switch {"get_Address"=>(nint)Source,"get_GameObjectId"=>500UL,_=>m.ReturnType.IsValueType?Activator.CreateInstance(m.ReturnType):null});
             Set(Runtime,"objects",Proxy<IObjectTable>((m,a)=>m.Name=="get_LocalPlayer"?player:null));
             Set(Runtime,"clientState",Proxy<IClientState>((m,a)=>m.Name switch {"get_IsLoggedIn"=>true,"get_TerritoryType"=>Territory,_=>null}));
@@ -336,9 +554,52 @@ unsafe class Program
             var hook=typeof(Program).GetMethod(nameof(Hook),All)!.MakeGenericMethod(delegateType).Invoke(null,[original]);
             Set(Runtime,"useCompanion",hook);
         }
+        DrawObject* VisibilityDraw()
+        {
+            var draw=Alloc<Weapon>();draw->Flags=0x29;visibilityAllocations.Add((nint)draw);return (DrawObject*)draw;
+        }
+        public void PrepareVisibility()
+        {
+            Source->DrawData.OwnerObject=Source;Clone->DrawData.OwnerObject=Clone;
+            Source->DrawObject=VisibilityDraw();Clone->DrawObject=VisibilityDraw();
+            for(int i=0;i<4;i++)
+            {
+                var sourceDraw=VisibilityDraw();var cloneDraw=VisibilityDraw();
+                ref var source=ref (i<3?ref Source->DrawData.WeaponData[i]:ref Source->DrawData.UnkWeaponData[0]);
+                ref var clone=ref (i<3?ref Clone->DrawData.WeaponData[i]:ref Clone->DrawData.UnkWeaponData[0]);
+                source.Weapon=(Weapon*)sourceDraw;source.DrawData.DrawObject=sourceDraw;
+                clone.Weapon=(Weapon*)cloneDraw;clone.DrawData.DrawObject=cloneDraw;
+            }
+            Eq((bool)typeof(NativePreviewActor).GetMethod("SetSourceVisibility",All)!.Invoke(Display,[true])!,true,"fixture acquired real source visibility lease");
+            typeof(NativePreviewActor).GetProperty("IsReady",All)!.SetValue(Display,true);
+            Set(Display,"drawRequested",true);Set(Display,"bodyWasVisible",true);
+            Eq(Source->DrawObject->IsVisible,false,"fixture source is hidden by production lease");Eq(Clone->DrawObject->IsVisible,true,"fixture clone has a visible draw");
+        }
+        public Character* VisibilityForeignCharacter()
+        {
+            var actor=Alloc<Character>();visibilityAllocations.Add((nint)actor);
+            *(nint**)actor=table;actor->EntityId=900;actor->ObjectIndex=33;actor->DrawData=Source->DrawData;actor->DrawData.OwnerObject=actor;return actor;
+        }
+        public void PrepareVisibilityHook(bool extra)
+        {
+            string name=extra?"extraWeaponVisibility":"weaponVisibility";
+            var field=RuntimeType.GetField(name,All)??throw new Exception("production "+name+" hook boundary is missing");
+            var delegateType=field.FieldType.GetGenericArguments().Single();
+            var original=Delegate.CreateDelegate(delegateType,this,GetType().GetMethod(nameof(VisibilityOriginal),All)!);
+            var hook=typeof(Program).GetMethod(nameof(Hook),All)!.MakeGenericMethod(delegateType).Invoke(null,[original]);field.SetValue(Runtime,hook);
+        }
+        bool VisibilityOriginal(DrawDataContainer* container,uint index)
+        {
+            VisibilityCalls++;LastVisibilityContainer=(nint)container;LastVisibilityIndex=index;VisibilityAfter?.Invoke();return VisibilityResult;
+        }
+        public bool Visibility(bool extra,DrawDataContainer* container,uint index)
+        {
+            string method=extra?"ExtraWeaponVisibilityDetour":"WeaponVisibilityDetour";
+            return (bool)(RuntimeType.GetMethod(method,All)??throw new Exception("production "+method+" is missing")).Invoke(Runtime,[Ptr(container,typeof(DrawDataContainer)),index])!;
+        }
         bool CompanionOriginal(ActionManager* mgr,uint id) { LeafCalls++;LastLeafId=id;if(LeafChangesCooldown)mgr->CompanionActionCooldown=1;return LeafResult; }
         public bool Companion(uint id)=>(bool)(RuntimeType.GetMethod("UseCompanionDetour",All) ?? throw new Exception("production companion leaf detour is missing")).Invoke(Runtime,[Ptr(ActionMgr,typeof(ActionManager)),id])!;
-        public void Dispose() { NativeMemory.Free(Source);NativeMemory.Free(Clone);NativeMemory.Free(Manager);NativeMemory.Free(table);NativeMemory.Free(local);NativeMemory.Free(localAction);NativeMemory.Free(ActionMgr); }
+        public void Dispose() { foreach(nint allocation in visibilityAllocations)NativeMemory.Free((void*)allocation);NativeMemory.Free(Source);NativeMemory.Free(Clone);NativeMemory.Free(Manager);NativeMemory.Free(table);NativeMemory.Free(local);NativeMemory.Free(localAction);NativeMemory.Free(ActionMgr); }
         static T* Alloc<T>() where T:unmanaged=>(T*)NativeMemory.AllocZeroed((nuint)sizeof(T));
     }
     [UnmanagedCallersOnly] static ulong Identity(GameObject* obj)=>obj->EntityId;

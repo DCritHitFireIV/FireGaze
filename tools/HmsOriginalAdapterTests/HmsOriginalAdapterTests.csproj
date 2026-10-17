@@ -4,21 +4,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Fixtures/**/*.cs" />
-    <ProjectReference Include="Fixtures/Dev/HmsFixture.Dev.csproj" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="Fixtures/Release/HmsFixture.Release.csproj" ReferenceOutputAssembly="false" />
-    <Reference Include="0Harmony"><HintPath>$(DalamudHome)/0Harmony.dll</HintPath></Reference>
     <Reference Include="Dalamud"><HintPath>$(DalamudHome)/Dalamud.dll</HintPath></Reference>
     <Reference Include="FFXIVClientStructs"><HintPath>$(DalamudHome)/FFXIVClientStructs.dll</HintPath></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(DalamudHome)/InteropGenerator.Runtime.dll</HintPath></Reference>
     <Reference Include="Serilog"><HintPath>$(DalamudHome)/Serilog.dll</HintPath></Reference>
     <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalAdapter.cs" Link="HmsOriginalAdapter.cs" />
-    <Compile Include="../../src/FireGaze.LocalPreview/Runtime/CaptureProjection.cs" Link="CaptureProjection.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalBodyState.cs" Link="HmsOriginalBodyState.cs" />
     <Compile Include="../../src/FireGaze.LocalPreview.Core/HmsCoexistencePolicy.cs" Link="HmsCoexistencePolicy.cs" />
-    <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalPatchRules.cs" Condition="Exists('../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalPatchRules.cs')" Link="HmsOriginalPatchRules.cs" />
     <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalFingerprint.cs" Condition="Exists('../../src/FireGaze.LocalPreview/Compatibility/HmsOriginalFingerprint.cs')" Link="HmsOriginalFingerprint.cs" />
-    <Compile Include="../../src/FireGaze.LocalPreview/Compatibility/HmsHarmonyIsolation.cs" Condition="Exists('../../src/FireGaze.LocalPreview/Compatibility/HmsHarmonyIsolation.cs')" Link="HmsHarmonyIsolation.cs" />
   </ItemGroup>
-  <Target Name="CopyIsolationFixtures" AfterTargets="Build">
-    <Copy SourceFiles="Fixtures/Dev/bin/$(Configuration)/net10.0-windows/HMSync.dll" DestinationFolder="$(TargetDir)FixtureDev" />
-    <Copy SourceFiles="Fixtures/Release/bin/$(Configuration)/net10.0-windows/HMSync.dll" DestinationFolder="$(TargetDir)FixtureRelease" />
-  </Target>
 </Project>

@@ -9,7 +9,8 @@ namespace FireGaze.LocalPreview;
 
 public sealed partial class LocalPreviewFeature
 {
-    private PreviewCatalog catalog = new([]);
+    private volatile PreviewCatalog catalog = new([]);
+    private PreviewCatalog? renderedCatalog;
     private readonly Dictionary<MenuKind, string> queries = new();
     private readonly Dictionary<MenuKind, IReadOnlyList<PreviewCatalogEntry>> filtered = new();
 
@@ -21,7 +22,7 @@ public sealed partial class LocalPreviewFeature
     {
         interaction = new PreviewInteractionService(ContextMenu, Chat, GameGUI, Objects, Data,
             ClientState, Interop, Log,
-            (kind, id) => OnFramework(() => { Request(kind, id); return true; }),
+            Request,
             () => runtime?.CurrentNativeEmote, AddonLifecycle, MenuOptions);
         if (config.LocalPreviewEmoteEnabled) interaction.EnableNativeChatLinks();
     }
@@ -35,7 +36,6 @@ public sealed partial class LocalPreviewFeature
         entries.AddRange(Data.GetExcelSheet<Emote>().Where(e => e.ActionTimeline[0].RowId != 0)
             .Select(e => new PreviewCatalogEntry(MenuKind.Emote, e.RowId, e.Name.ToString())));
         catalog = new(entries);
-        filtered.Clear();
     }
 
     private static string CategoryName(MenuKind kind) => kind switch
@@ -50,7 +50,7 @@ public sealed partial class LocalPreviewFeature
     };
 
     private void SetCategory(MenuKind kind, bool value)
-        => OnFramework(() => { SetCategoryCore(kind, value); return true; });
+        => DispatchMutation(() => SetCategoryCore(kind, value));
 
     private void SetCategoryCore(MenuKind kind, bool value)
     {
@@ -73,7 +73,7 @@ public sealed partial class LocalPreviewFeature
     }
 
     private void SetItemMenus(bool value)
-        => OnFramework(() => { SetItemMenusCore(value); return true; });
+        => DispatchMutation(() => SetItemMenusCore(value));
 
     private void SetItemMenusCore(bool value)
     {
@@ -91,6 +91,8 @@ public sealed partial class LocalPreviewFeature
         var itemMenus = config.LocalPreviewItemMenusEnabled;
         if (ImGui.Checkbox("开启右键对物品的试穿", ref itemMenus)) SetItemMenus(itemMenus);
         ImGui.TextDisabled("支持右键背包及聊天中的收录物品、玩家和场景宠物；左键点击情感动作提示可直接试用。");
+        ImGui.TextWrapped("试用坐骑或配饰会显示本地特殊热键栏。原生召唤键第一次只结束试用，第二次才执行召唤；右键试用可直接切换。");
+        ImGui.TextDisabled("拍照模式沿用最近一次实际使用或试用的情感动作；坐下不会清除这条记录。");
         foreach (var kind in Enum.GetValues<MenuKind>())
         {
             if (kind != MenuKind.Mount) ImGui.SameLine();
@@ -100,11 +102,10 @@ public sealed partial class LocalPreviewFeature
         ImGui.TextWrapped(lastMessage);
         if (!coexistence.Allowed) ImGui.TextWrapped(coexistence.Reason);
         if (ImGui.Button("结束全部试用")) Cancel();
-        if (runtime is not null)
-            foreach (var effect in runtime.ActiveEffects)
+        foreach (var effect in ReadActiveEffects())
             {
                 ImGui.SameLine();
-                if (ImGui.SmallButton($"结束{CategoryName((MenuKind)effect.Slot)}##{effect.Slot}")) runtime.Clear(effect.Slot);
+                if (ImGui.SmallButton($"结束{CategoryName((MenuKind)effect.Slot)}##{effect.Slot}")) CancelSlot(effect.Slot);
             }
         ImGui.Separator();
         if (!initialized || runtime is null) { ImGui.TextWrapped("试用功能正在初始化，请稍后再试。"); return; }
@@ -120,13 +121,19 @@ public sealed partial class LocalPreviewFeature
 
     private void DrawCatalog(MenuKind kind)
     {
+        var currentCatalog = catalog;
+        if (!ReferenceEquals(renderedCatalog, currentCatalog))
+        {
+            filtered.Clear();
+            renderedCatalog = currentCatalog;
+        }
         ImGui.PushID((int)kind);
         var query = queries.GetValueOrDefault(kind, "");
         ImGui.SetNextItemWidth(Math.Max(120, ImGui.GetContentRegionAvail().X - ImGui.GetFontSize() * 9));
         if (ImGui.InputTextWithHint("##search", "搜索名称或编号", ref query, 160) || !filtered.ContainsKey(kind))
         {
             queries[kind] = query;
-            filtered[kind] = catalog.Search(kind, query);
+            filtered[kind] = currentCatalog.Search(kind, query);
         }
         ImGui.SameLine();
         ImGui.TextDisabled($"{filtered[kind].Count} 项");

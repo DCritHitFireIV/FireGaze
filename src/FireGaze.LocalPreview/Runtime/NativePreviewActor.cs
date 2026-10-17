@@ -30,12 +30,14 @@ public sealed unsafe class NativePreviewActor : IDisposable
     private readonly VisibilityLease[] sourceChildren = new VisibilityLease[3];
     private readonly ChildDrawState[] cloneChildren = new ChildDrawState[3];
     private readonly GroundedPreviewMotion motion = new();
+    private GroundedFlightPoseClips flightPoseClips = GroundedFlightPoseClips.Standard;
     private readonly IPluginLog? log;
     private ulong allocationId;
     private bool hasAllocationId;
     private VisibilityLease sourceVisibility;
     private bool drawRequested;
     private bool bodyWasVisible;
+    private bool sourceSuppressionActive;
     private int drawFrames;
     private bool disposed;
 
@@ -64,6 +66,73 @@ public sealed unsafe class NativePreviewActor : IDisposable
     public ushort ObjectIndex => objectIndex;
     public bool IsReady { get; private set; }
     public bool IsDisposed => disposed;
+
+    /// <summary>Stores only verified display-loop IDs. No native state is changed.</summary>
+    public void SetFlightPoseClips(GroundedFlightPoseClips clips)
+    {
+        if (clips.IsValid) flightPoseClips = clips;
+    }
+
+    // Read-only ownership check for native detours. Generated singleton reads only;
+    // no native object lookup may re-enter while the engine is updating this actor.
+    public bool IsCurrentAllocation(NativeCharacter* actor)
+    {
+        if (disposed || actor == null || actor != allocatedActor) return false;
+        var source = (NativeCharacter*)Control.GetLocalPlayer();
+        return source != null && source == sourceAddress && Generation(source) == sourceGeneration
+            && ClientObjectManager.Instance() == manager && slot < manager->BattleCharas.Length
+            && manager->BattleCharas[slot].BattleChara == (BattleChara*)actor
+            && actor->ObjectIndex == objectIndex && Generation(actor) == allocationGeneration;
+    }
+
+    /// <summary>Read-only mounted child guard; never performs native object lookups.</summary>
+    public bool IsCurrentMountChild(NativeCharacter* child)
+    {
+        if (disposed || !IsReady || child == null || !IsCurrentAllocation(allocatedActor)) return false;
+        var actor = allocatedActor;
+        var source = sourceAddress;
+        if (actor->Mount.OwnerObject != actor || actor->Mount.MountId == 0 || actor->Mount.MountObject != child
+            || child == actor || child == source || child == source->ChildObject
+            || child == source->Mount.MountObject || child == (NativeCharacter*)source->CompanionData.CompanionObject
+            || child == (NativeCharacter*)source->OrnamentData.OrnamentObject
+            || child == (NativeCharacter*)actor->CompanionData.CompanionObject
+            || child == (NativeCharacter*)actor->OrnamentData.OrnamentObject
+            || cloneChildren[0].Address != child || cloneChildren[0].Generation != Generation(child)
+            || child->Timeline.OwnerObject != child || child->Timeline.TimelineSequencer.Parent != child
+            || child->DrawObject == null || !child->DrawObject->IsVisible) return false;
+        return true;
+    }
+
+    /// <summary>
+    /// Read-only guard used inside the native weapon visibility queries. Only an existing
+    /// source draw lease can suppress a result; no native lookup or presentation call is
+    /// allowed here, because those can re-enter the query while the client updates a weapon.
+    /// Logical slots 0..2 are the regular weapons; slot 3 is the extra weapon.
+    /// </summary>
+    public bool ShouldSuppressWeaponVisibility(DrawDataContainer* container, int weaponSlot)
+    {
+        if (disposed || !IsReady || !sourceSuppressionActive || container == null
+            || weaponSlot is < 0 or > 3) return false;
+        // Both getters below are generated static-address reads, not native functions.
+        var source = (NativeCharacter*)Control.GetLocalPlayer();
+        if (source == null || source != sourceAddress || Generation(source) != sourceGeneration
+            || ClientObjectManager.Instance() != manager || slot >= manager->BattleCharas.Length
+            || manager->BattleCharas[slot].BattleChara != (BattleChara*)allocatedActor) return false;
+        if (allocatedActor->ObjectIndex != objectIndex || Generation(allocatedActor) != allocationGeneration
+            || allocatedActor->DrawObject == null || !allocatedActor->DrawObject->IsVisible) return false;
+
+        if (container == &source->DrawData)
+            return container->OwnerObject == source
+                && sourceVisibility.OwnsWeapon(source, weaponSlot);
+        for (var i = 0; i < sourceChildren.Length; i++)
+        {
+            var child = GetChild(source, i);
+            if (sourceChildren[i].MatchesRaw(child) && container == &child->DrawData)
+                return container->OwnerObject == child
+                    && sourceChildren[i].OwnsWeapon(child, weaponSlot);
+        }
+        return false;
+    }
 
     /// <summary>
     /// Reserve a character and its companion slot, then copy appearance and equipment through
@@ -197,26 +266,104 @@ public sealed unsafe class NativePreviewActor : IDisposable
         }
     }
 
-    /// <summary>Animates only this owned root from known genuine ground clips.</summary>
-    public void UpdateGroundedMotion(bool emoteActuallyActive, Func<bool>? canApply = null)
+    /// <summary>Animates the owned rider and mount from read-only, verified locomotion loops.</summary>
+    public void UpdateGroundedMotion(bool emoteActuallyActive, Func<bool>? canApply = null, bool flightPose = false)
     {
         if (disposed || !IsReady) return;
         var actor = GetOwnedActor();
         var source = GetSource();
         if (actor == null || source == null || !BindingMatches(source, actor)) return;
+        var mountId = actor->Mount.MountId;
+        var child = mountId != 0 ? actor->Mount.MountObject : null;
+        var childGeneration = child != null ? Generation(child) : 0;
+        NativeCharacter* sampledSourceMount = null;
+        ushort sampledSourceMountId = 0;
+        uint sampledSourceMountGeneration = 0;
+        bool mountedSourceSample = false;
+
+        bool MountedSourceCurrent() => source->Mode == CharacterModes.Mounted
+            && source->Timeline.OwnerObject == source && source->Timeline.TimelineSequencer.Parent == source
+            && source->Mount.OwnerObject == source && sampledSourceMountId != 0
+            && source->Mount.MountId == sampledSourceMountId && source->Mount.MountObject == sampledSourceMount
+            && sampledSourceMount != null && sampledSourceMount != source && sampledSourceMount != actor
+            && sampledSourceMount != child && sampledSourceMount != (NativeCharacter*)source->CompanionData.CompanionObject
+            && sampledSourceMount != (NativeCharacter*)source->OrnamentData.OrnamentObject
+            && sampledSourceMount != (NativeCharacter*)actor->CompanionData.CompanionObject
+            && sampledSourceMount != (NativeCharacter*)actor->OrnamentData.OrnamentObject
+            && Generation(sampledSourceMount) == sampledSourceMountGeneration
+            && sampledSourceMount->Timeline.OwnerObject == sampledSourceMount
+            && sampledSourceMount->Timeline.TimelineSequencer.Parent == sampledSourceMount;
+
+        bool Current()
+        {
+            // Native identity lookups and the request guard can re-enter plugin code.
+            // Finish with raw allocation/container checks before every lane write.
+            if (canApply is not null && !canApply() || !BindingMatches(source, actor)) return false;
+            if (canApply is not null && !canApply()) return false;
+            if (disposed || !IsReady || (NativeCharacter*)Control.GetLocalPlayer() != source
+                || source != sourceAddress || Generation(source) != sourceGeneration
+                || ClientObjectManager.Instance() != manager || slot >= manager->BattleCharas.Length
+                || manager->BattleCharas[slot].BattleChara != (BattleChara*)actor
+                || actor != allocatedActor || actor->ObjectIndex != objectIndex
+                || Generation(actor) != allocationGeneration || actor->Mount.OwnerObject != actor
+                || actor->Mount.MountId != mountId || actor->Timeline.OwnerObject != actor
+                || actor->Timeline.TimelineSequencer.Parent != actor || actor->DrawObject == null
+                || !actor->DrawObject->IsVisible) return false;
+            if (mountedSourceSample && !MountedSourceCurrent()) return false;
+            if (mountId == 0) return true;
+            if (child == null || actor->Mount.MountObject != child || child == actor || child == source
+                || child == source->ChildObject || child == source->Mount.MountObject
+                || child == (NativeCharacter*)source->CompanionData.CompanionObject
+                || child == (NativeCharacter*)source->OrnamentData.OrnamentObject
+                || child == (NativeCharacter*)actor->CompanionData.CompanionObject
+                || child == (NativeCharacter*)actor->OrnamentData.OrnamentObject
+                || Generation(child) != childGeneration || cloneChildren[0].Address != child
+                || cloneChildren[0].Generation != childGeneration || child->Timeline.OwnerObject != child
+                || child->Timeline.TimelineSequencer.Parent != child || child->DrawObject == null
+                || !child->DrawObject->IsVisible) return false;
+            return true;
+        }
+
+        if (!Current()) { motion.Reset(); return; }
+        var sourceTimeline = source->Timeline.TimelineSequencer.TimelineIds[0];
+        if (sourceTimeline is 166 or 167 or 6709 or 4047 or 4048 or 6703)
+        {
+            // Genuine mounted loops are only visual inputs. The source hierarchy
+            // must remain owned and current through both display-lane writes.
+            // Flying rider_run shares walk/back/run; its child's verified loops
+            // disambiguate walk directions. Rider glide uses our existing run
+            // appearance, not native flight manoeuvres or takeoff/landing events.
+            sampledSourceMount = source->Mount.MountObject;
+            sampledSourceMountId = source->Mount.MountId;
+            sampledSourceMountGeneration = sampledSourceMount != null ? Generation(sampledSourceMount) : 0;
+            mountedSourceSample = MountedSourceCurrent();
+            sourceTimeline = mountedSourceSample ? sourceTimeline switch
+            {
+                166 or 4047 => (ushort)3,
+                6709 => (ushort)13,
+                4048 => sampledSourceMount->Timeline.TimelineSequencer.TimelineIds[0] switch
+                    { 4053 => (ushort)13, 4046 => (ushort)16, _ => (ushort)22 },
+                _ => (ushort)22,
+            } : (ushort)0;
+        }
         // Handheld accessories have their own posture resolver. An on-foot source
         // cannot establish the corresponding accessory clip, so leave it native.
-        var sample = GroundedMotionClassifier.Classify(source->Timeline.TimelineSequencer.TimelineIds[0],
-            actor->OrnamentData.OrnamentId == 0);
+        var sample = GroundedMotionClassifier.Classify(sourceTimeline,
+            actor->OrnamentData.OrnamentId == 0,
+            source->Mode == CharacterModes.Normal && source->EmoteController.EmoteId == 0
+                && (byte)source->EmoteController.CurrentPoseType == 0 && source->EmoteController.CPoseState > 0);
         // A planner is scoped to this allocation; generation 1 never crosses actors.
-        var plan = motion.Plan(sample, new(1, actor->Mount.MountId), emoteActuallyActive, actor->Timeline.BaseOverride);
-        if (!BindingMatches(source, actor) || GetSource() != source || GetRawOwnedActor() != actor) return;
-        // Native lookups above can re-enter preview hooks on this same allocation.
-        // Recheck the request/lane ownership after them; no native call may separate
-        // this guard from the first write. A rejected plan must not consume its edge.
-        if (canApply is not null && !canApply()) { motion.Reset(); return; }
+        var plan = motion.Plan(sample, new(1, mountId, (ulong)(nuint)child, childGeneration, flightPose, flightPoseClips), emoteActuallyActive,
+            actor->Timeline.BaseOverride, child != null ? child->Timeline.BaseOverride : (ushort)0);
+        if (!Current()) { motion.Reset(); return; }
         if (plan.WriteBaseOverride) actor->Timeline.BaseOverride = plan.BaseOverride;
         if (plan.PlayTimeline != 0) actor->Timeline.TimelineSequencer.PlayTimeline(plan.PlayTimeline);
+        // The first native playback may replace an allocation, request or child.
+        // Never continue the old plan on that hierarchy after re-entry.
+        if (!Current()) { motion.Reset(); return; }
+        if (child == null) return;
+        if (plan.WriteMountBaseOverride) child->Timeline.BaseOverride = plan.MountBaseOverride;
+        if (plan.PlayMountTimeline != 0) child->Timeline.TimelineSequencer.PlayTimeline(plan.PlayMountTimeline);
     }
 
     private bool BindingMatches(NativeCharacter* source, NativeCharacter* actor) =>
@@ -319,6 +466,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
     // checks and flag writes contain no native calls, so root and attachments change together.
     private bool SetSourceVisibility(bool hide)
     {
+        sourceSuppressionActive = false;
         var source = GetSource();
         if (source == null) return false;
         NativeCharacter** children = stackalloc NativeCharacter*[3];
@@ -333,6 +481,7 @@ public sealed unsafe class NativePreviewActor : IDisposable
             sourceVisibility.HideResolved(source);
             for (var i = 0; i < sourceChildren.Length; i++)
                 sourceChildren[i].HideResolved(children[i]);
+            sourceSuppressionActive = true;
         }
         else
         {
@@ -388,6 +537,28 @@ public sealed unsafe class NativePreviewActor : IDisposable
 
         public readonly NativeCharacter* Resolve(NativeCharacter* current) => MatchesRaw(current)
             && current->GetGameObjectId().Id == id && MatchesRaw(current) ? current : null;
+
+        public readonly bool OwnsWeapon(NativeCharacter* current, int weaponSlot)
+        {
+            if (!MatchesRaw(current) || parts == null || partCount == 0) return false;
+            ref var weapon = ref (weaponSlot < 3
+                ? ref current->DrawData.WeaponData[weaponSlot]
+                : ref current->DrawData.UnkWeaponData[0]);
+            var render = (DrawObject*)weapon.Weapon;
+            var attached = weapon.DrawData.DrawObject;
+            var owner = (nint)weapon.Weapon;
+            var model = weapon.ModelId.Value;
+            return (render != null || attached != null)
+                && (render == null || OwnsPart(render, owner, model))
+                && (attached == null || OwnsPart(attached, owner, model));
+        }
+
+        private readonly bool OwnsPart(DrawObject* draw, nint owner, ulong model)
+        {
+            for (var i = 0; i < partCount; i++)
+                if (parts[i].Draw == draw && parts[i].Owner == owner && parts[i].Model == model) return true;
+            return false;
+        }
 
         public void HideResolved(NativeCharacter* current)
         {

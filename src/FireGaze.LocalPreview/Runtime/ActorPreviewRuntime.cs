@@ -29,7 +29,7 @@ public sealed record RuntimeCapabilities(bool Mount, bool Minion, bool Accessory
 /// relinquishes all ownership. Never invokes an action manager to implement a preview.
 /// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
+public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadowSource
 {
     private readonly IFramework framework;
     private readonly IClientState clientState;
@@ -49,6 +49,16 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     [return: MarshalAs(UnmanagedType.U1)]
     private delegate bool UseCompanionNative(ActionManager* manager, uint id);
     private Hook<UseCompanionNative>? useCompanion;
+    // Both reviewed CN queries return the weapon presentation decision later written
+    // to DrawObject.Flags bit 0. Preserve their full ABI, including the extra-slot index.
+    private const string WeaponVisibilitySignature = "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B D9 8B FA 48 8B 49 08 40 32 F6 0F B6 91";
+    private const string ExtraWeaponVisibilitySignature = "48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 48 8B D9 83 FA 01 72 ?? 32 C0 48 8B 5C 24 ?? 48 83 C4 ?? 5F C3 48 8B 49 08";
+    [return: MarshalAs(UnmanagedType.U1)]
+    private delegate bool WeaponVisibilityNative(DrawDataContainer* container, uint index);
+    private Hook<WeaponVisibilityNative>? weaponVisibility;
+    private Hook<WeaponVisibilityNative>? extraWeaponVisibility;
+    private long weaponVisibilitySuppressions;
+    private long extraWeaponVisibilitySuppressions;
     private Hook<ActionManager.Delegates.UseAction>? useAction;
     private Hook<ActionManager.Delegates.UseActionLocation>? useLocation;
     private Hook<ActionManager.Delegates.GetActionStatus>? actionStatus;
@@ -80,12 +90,24 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     public event Action<ulong, ushort>? NativeEmoteExited;
     public event Action? NativeInputAccepted;
     public event Action<ushort>? ExternalEmoteAccepted;
+    public event Action<ushort, byte>? PreviewEmoteStarted;
     public event Action<string>? PreviewCancelled;
+    public Func<uint, bool>? SpecialActionInput { get; set; }
+    public long NativeRequestsConsumed { get; private set; }
+    public long Revision => revision;
+    public (ushort Mount, ushort Accessory) GenuineCollections
+    {
+        get { var actor=Local(); return actor == null ? default : (actor->Mount.MountId,actor->OrnamentData.OrnamentId); }
+    }
     public (ulong OwnerId, ushort EmoteId)? CurrentNativeEmote { get; private set; }
     public bool HasActivePreview => effects.Count != 0;
     public IReadOnlyList<PreviewEffect> ActiveEffects => effects.Values.ToArray();
     public bool OwnsDisplayActor(nint address) => address!=0 && visualActor is not null && (nint)visualActor.Actor==address;
     public RuntimeCapabilities Capabilities { get; private set; } = new(false, false, false, false, false, false, "未初始化");
+    public bool WeaponVisibilityGatesInstalled => !disposed
+        && weaponVisibility is { IsEnabled: true } && extraWeaponVisibility is { IsEnabled: true };
+    public long WeaponVisibilitySuppressions => System.Threading.Interlocked.Read(ref weaponVisibilitySuppressions);
+    public long ExtraWeaponVisibilitySuppressions => System.Threading.Interlocked.Read(ref extraWeaponVisibilitySuppressions);
 
     public CaptureProjection GetCaptureProjection()
     {
@@ -221,6 +243,9 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
             executeAgentEmote = Install(interop.HookFromAddress<AgentEmote.Delegates.ExecuteEmote>(AgentEmote.Addresses.ExecuteEmote.Value, ExecuteAgentEmoteDetour));
             playEmote = Install(interop.HookFromAddress<EmoteController.Delegates.PlayEmote>(EmoteController.Addresses.PlayEmote.Value, PlayEmoteDetour));
             mountSetup = Install(interop.HookFromAddress<MountContainer.Delegates.CreateAndSetupMount>(MountContainer.Addresses.CreateAndSetupMount.Value, MountSetupDetour));
+            weaponVisibility = Install(interop.HookFromSignature<WeaponVisibilityNative>(WeaponVisibilitySignature, WeaponVisibilityDetour));
+            extraWeaponVisibility = Install(interop.HookFromSignature<WeaponVisibilityNative>(ExtraWeaponVisibilitySignature, ExtraWeaponVisibilityDetour));
+            InstallOriginalHmsNativeBoundaries(interop);
             bool mount = MountContainer.Addresses.CreateAndSetupMount.Value != 0;
             bool minion = CompanionContainer.Addresses.SetupCompanion.Value != 0;
             bool accessory = OrnamentContainer.Addresses.SetupOrnament.Value != 0;
@@ -250,6 +275,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         switch (hook)
         {
             case Hook<UseCompanionNative> h: h.Enable(); break;
+            case Hook<WeaponVisibilityNative> h: h.Enable(); break;
             case Hook<ActionManager.Delegates.UseAction> h: h.Enable(); break;
             case Hook<ActionManager.Delegates.UseActionLocation> h: h.Enable(); break;
             case Hook<ActionManager.Delegates.GetActionStatus> h: h.Enable(); break;
@@ -259,7 +285,39 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
             case Hook<AgentEmote.Delegates.ExecuteEmote> h: h.Enable(); break;
             case Hook<EmoteController.Delegates.PlayEmote> h: h.Enable(); break;
             case Hook<MountContainer.Delegates.CreateAndSetupMount> h: h.Enable(); break;
+            case Hook<FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject.Delegates.Update> h: h.Enable(); break;
+            case Hook<FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject.Delegates.DisableDraw> h: h.Enable(); break;
+            case Hook<CompanionContainer.Delegates.SetupCompanion> h: h.Enable(); break;
+            case Hook<OrnamentContainer.Delegates.SetupOrnament> h: h.Enable(); break;
+            case Hook<ActionTimelineSequencer.Delegates.PlayTimeline> h: h.Enable(); break;
+            case Hook<TimelineContainer.Delegates.PlayActionTimeline> h: h.Enable(); break;
         }
+    }
+
+    private bool WeaponVisibilityDetour(DrawDataContainer* container, uint weaponSlot)
+    {
+        bool result = weaponVisibility!.Original(container, weaponSlot);
+        if (!result || disposed || !framework.IsInFrameworkUpdateThread || weaponSlot >= 3) return result;
+        try
+        {
+            if (visualActor?.ShouldSuppressWeaponVisibility(container, (int)weaponSlot) != true) return result;
+            System.Threading.Interlocked.Increment(ref weaponVisibilitySuppressions);
+            return false;
+        }
+        catch { return result; }
+    }
+
+    private bool ExtraWeaponVisibilityDetour(DrawDataContainer* container, uint extraIndex)
+    {
+        bool result = extraWeaponVisibility!.Original(container, extraIndex);
+        if (!result || disposed || !framework.IsInFrameworkUpdateThread || extraIndex != 0) return result;
+        try
+        {
+            if (visualActor?.ShouldSuppressWeaponVisibility(container, 3) != true) return result;
+            System.Threading.Interlocked.Increment(ref extraWeaponVisibilitySuppressions);
+            return false;
+        }
+        catch { return result; }
     }
 
     public IReadOnlyList<PreviewSlot> GetConflicts(PreviewEffect effect)
@@ -267,8 +325,8 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         var conflicts = new HashSet<PreviewSlot> { effect.Slot };
         if (effect.Slot == PreviewSlot.Mount) { conflicts.Add(PreviewSlot.Accessory); conflicts.Add(PreviewSlot.Minion); }
         if (effect.Slot == PreviewSlot.Mount && effects.TryGetValue(PreviewSlot.Emote, out var emote) && !HasEmoteVariant(emote.Id, 4)) conflicts.Add(PreviewSlot.Emote);
-        if (effect.Slot == PreviewSlot.Accessory) conflicts.Add(PreviewSlot.Mount);
-        if (effect.Slot == PreviewSlot.Minion) conflicts.Add(PreviewSlot.Mount);
+        if (effect.Slot == PreviewSlot.Accessory) { conflicts.Add(PreviewSlot.Mount); conflicts.Add(PreviewSlot.Minion); }
+        if (effect.Slot == PreviewSlot.Minion) { conflicts.Add(PreviewSlot.Mount); conflicts.Add(PreviewSlot.Accessory); }
         if (effect.Slot == PreviewSlot.Emote && effects.ContainsKey(PreviewSlot.Mount) && !HasEmoteVariant(effect.Id, 4)) conflicts.Add(PreviewSlot.Mount);
         return conflicts.Where(effects.ContainsKey).ToArray();
     }
@@ -343,12 +401,25 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         switch (effect.Slot)
         {
             case PreviewSlot.Mount:
+                if (visualActor?.IsCurrentAllocation(actor) == true && actor->OrnamentData.OrnamentId != 0) actor->OrnamentData.SetupOrnament(0,0);
                 actor->Mount.CreateAndSetupMount((short)effect.Id, 0, 0, 0, 0, 0, 0);
                 actor->Mode = effect.Id == 0 ? CharacterModes.Normal : CharacterModes.Mounted;
                 actor->ModeParam = 0;
                 break;
-            case PreviewSlot.Minion: actor->CompanionData.SetupCompanion((short)effect.Id, 0); break;
-            case PreviewSlot.Accessory: actor->OrnamentData.SetupOrnament((short)effect.Id, 0); break;
+            case PreviewSlot.Minion:
+                if (visualActor?.IsCurrentAllocation(actor) == true)
+                {
+                    if (actor->OrnamentData.OrnamentId != 0) actor->OrnamentData.SetupOrnament(0,0);
+                    if (actor->Mount.MountId != 0) { actor->Mount.CreateAndSetupMount(0,0,0,0,0,0,0); actor->Mode=CharacterModes.Normal; actor->ModeParam=0; }
+                }
+                actor->CompanionData.SetupCompanion((short)effect.Id, 0); break;
+            case PreviewSlot.Accessory:
+                if (visualActor?.IsCurrentAllocation(actor) == true)
+                {
+                    if (actor->CompanionData.CompanionId != 0 || actor->CompanionData.CompanionObject != null) actor->CompanionData.SetupCompanion(0,0);
+                    if (actor->Mount.MountId != 0) { actor->Mount.CreateAndSetupMount(0,0,0,0,0,0,0); actor->Mode=CharacterModes.Normal; actor->ModeParam=0; }
+                }
+                actor->OrnamentData.SetupOrnament((short)effect.Id, 0); break;
             case PreviewSlot.Emote:
                 // Initial native drawing can reset the animation lanes. Start the
                 // selected action only after the display hierarchy is actually ready.
@@ -367,6 +438,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
                 actor->Timeline.TimelineSequencer.PlayTimeline(intro != 0 ? intro : timeline);
                 // Pose is zero by default; callers must explicitly request a pose clone.
                 if (effect.Pose != 0) actor->EmoteController.CPoseState = effect.Pose;
+                Raise(PreviewEmoteStarted, effect.Id, effect.Pose);
                 break;
         }
     }
@@ -617,6 +689,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         if (visualActor is null || visualActor.Actor != actor || Bound() == null) return;
         foreach (var effect in effects.Values.ToArray())
         {
+            if (effect.Slot == PreviewSlot.Emote && SpecialActionActive) continue;
             if (spawnWait.TryGetValue(effect.Slot, out int frames) && frames > 0)
             {
                 spawnWait[effect.Slot] = frames - 1;
@@ -627,7 +700,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
                 PreviewSlot.Mount => actor->Mount.MountId == effect.Id && actor->Mount.MountObject != null,
                 PreviewSlot.Minion => MinionId(actor) == effect.Id,
                 PreviewSlot.Accessory => actor->OrnamentData.OrnamentId == effect.Id && actor->OrnamentData.OrnamentObject != null,
-                _ => actor->EmoteController.EmoteId == effect.Id && IsEmoteTimeline(actor, effect.Id),
+                _ => PreviewEmoteIdentityMatches(actor, effect.Id) && IsEmoteTimeline(actor, effect.Id),
             };
             if (!present)
             {
@@ -645,12 +718,14 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     {
         if (visualActor is not { } display || display.Actor != actor) return;
         var expectedRevision = revision;
-        bool emoteActive = PreviewEmoteActive(actor);
+        bool emoteActive = PreviewEmoteActive(actor) || SpecialActionActive;
+        bool flightPose = FlightPoseActive;
         // Native allocation lookups can synchronously start another action on the
         // same display actor. Recheck semantic ownership after the writer's last
         // native lookup; pointer/generation checks alone cannot detect that change.
         display.UpdateGroundedMotion(emoteActive, () => !disposed && revision == expectedRevision
-            && visualActor == display && HasActivePreview && PreviewEmoteActive(actor) == emoteActive);
+            && visualActor == display && HasActivePreview && (PreviewEmoteActive(actor) || SpecialActionActive) == emoteActive
+            && FlightPoseActive == flightPose, flightPose);
     }
     private bool PreviewEmoteActive(NativeCharacter* actor) => deferredEmote
         || effects.TryGetValue(PreviewSlot.Emote, out var effect) && IsEmoteTimeline(actor, effect.Id);
@@ -687,7 +762,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     private readonly record struct NativeIntent(PreviewSlot Slot, uint Id);
     private bool Relevant(ActionType type) => type is ActionType.Mount or ActionType.Companion or ActionType.Ornament;
     private static PreviewSlot Slot(ActionType type) => type switch { ActionType.Mount => PreviewSlot.Mount, ActionType.Companion => PreviewSlot.Minion, _ => PreviewSlot.Accessory };
-    private bool Bypass => ownCall || !HasActivePreview || disposed || handoff.HasExternal;
+    private bool Bypass => !framework.IsInFrameworkUpdateThread || ownCall || !HasActivePreview || disposed || handoff.HasExternal;
     private IPreviewSuspension<NativeIntent> Suspend(NativeIntent _) => new Suspension(this);
     private void ReportHandoff(Exception exception)
     {
@@ -716,16 +791,16 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
 
     // Current CN GeneralAction 9/24 select a mount before recursively dispatching
     // UseAction(Mount, selectedId). Handle the outer request even without a candidate.
-    private static bool IsActiveMountRequest(ActionType type, uint id, ActionManager.UseActionMode mode)
+    private static bool IsActiveCollectionRequest(ActionType type, uint id, ActionManager.UseActionMode mode)
         => mode is ActionManager.UseActionMode.None or ActionManager.UseActionMode.Macro
-            && ((type == ActionType.Mount && id != 0) || IsMountRoulette(type, id));
+            && ((type is ActionType.Mount or ActionType.Ornament or ActionType.Companion && id != 0) || IsMountRoulette(type, id));
 
     private static bool IsMountRoulette(ActionType type, uint id)
         => type == ActionType.GeneralAction && id is 9 or 24;
 
     private bool CanCancelMountAttempt()
     {
-        if (Bypass || !effects.ContainsKey(PreviewSlot.Mount) || !BindingCurrent()) return false;
+        if (Bypass || !(effects.ContainsKey(PreviewSlot.Mount) || effects.ContainsKey(PreviewSlot.Accessory)) || !BindingCurrent()) return false;
         var currentRevision = revision;
         var owned = visualActor;
         var source = Bound();
@@ -733,7 +808,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         var display = owned.Actor;
         // The native lookup can re-enter. Never cancel a replacement preview or
         // touch a display slot whose ownership has already been lost.
-        return display != null && !Bypass && effects.ContainsKey(PreviewSlot.Mount)
+        return display != null && !Bypass && (effects.ContainsKey(PreviewSlot.Mount) || effects.ContainsKey(PreviewSlot.Accessory))
             && revision == currentRevision && owned == visualActor && BindingCurrent() && Bound() == source;
     }
 
@@ -758,11 +833,16 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
 
     private bool UseActionDetour(ActionManager* mgr, ActionType type, uint id, ulong target, uint extra, ActionManager.UseActionMode mode, uint combo, bool* area)
     {
-        if (!Bypass && nativeDepth == 0 && IsActiveMountRequest(type, id, mode))
+        if (!disposed && framework.IsInFrameworkUpdateThread && !ownCall && nativeDepth == 0 && type == ActionType.Action && SpecialActionInput is { } special)
         {
-            // User intent now ends the trial even if native validation rejects or
-            // only queues this request. Protect cleanup and dispatch as one input;
-            // preserve every argument/result and never replay the native call.
+            try { if (special(id)) return true; }
+            catch (Exception ex) { ReportHandoff(ex); }
+        }
+        if (!Bypass && nativeDepth == 0 && IsActiveCollectionRequest(type, id, mode))
+        {
+            // The first deliberate collection input exits the local trial only.
+            // Do not validate, queue, dispatch or replay it; a second user input
+            // enters the complete native path with the original parameters.
             nativeDepth++;
             try
             {
@@ -772,9 +852,10 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
                 catch (Exception ex) { ReportHandoff(ex); }
                 if (cancel)
                 {
-                    try { ClearForReason(PreviewExitReason.Busy); Raise(PreviewCancelled, "已尝试使用原生坐骑，全部试用已结束"); }
+                    try { ClearForReason(PreviewExitReason.Busy); Raise(PreviewCancelled, "试用已结束，再次使用将执行原生召唤"); }
                     catch (Exception ex) { ReportHandoff(ex); }
-                    return useAction!.Original(mgr,type,id,target,extra,mode,combo,area);
+                    NativeRequestsConsumed++;
+                    return true;
                 }
             }
             finally { nativeDepth--; }
@@ -827,7 +908,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
         bool Original()
         {
             bool accepted = executeEmote!.Original(mgr,id,option);
-            if (accepted && !ownCall && id != 0) Raise(ExternalEmoteAccepted, id);
+            if (accepted && framework.IsInFrameworkUpdateThread && !ownCall && id != 0) Raise(ExternalEmoteAccepted, id);
             return accepted;
         }
         if (Bypass) return Original();
@@ -840,6 +921,7 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     }
     private bool PlayEmoteDetour(EmoteController* controller, uint id, EmoteController.PlayEmoteOption* option)
     {
+        if (!framework.IsInFrameworkUpdateThread) return playEmote!.Original(controller,id,option);
         ulong owner = controller->OwnerObject == null ? 0 : controller->OwnerObject->GetGameObjectId();
         var previous = CurrentNativeEmote;
         CurrentNativeEmote = id <= ushort.MaxValue ? (owner,(ushort)id) : null;
@@ -868,6 +950,18 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     }
     private void MountSetupDetour(MountContainer* container, short id, uint top, uint body, uint legs, byte stain, byte unk6, byte unk7)
     {
+        if (!framework.IsInFrameworkUpdateThread)
+        { mountSetup!.Original(container,id,top,body,legs,stain,unk6,unk7); return; }
+        if (!Bypass && id != 0 && container != null && container->OwnerObject == Bound())
+        {
+            var intent = new NativeIntent(PreviewSlot.Mount,unchecked((ushort)id));
+            RunNative(intent, () => {
+                mountSetup!.Original(container,id,top,body,legs,stain,unk6,unk7);
+                handoff.ReportDecision(intent, container->OwnerObject == Bound() && container->MountId == unchecked((ushort)id));
+                return true;
+            }, false);
+            return;
+        }
         // A real container teardown (including the native HUD dismount) ends only the mount slot.
         // Native action handoffs already own their full accepted-input transaction.
         var actor = Bound();
@@ -1144,12 +1238,21 @@ public sealed unsafe class ActorPreviewRuntime : IDisposable, IHmsShadowSource
     public void Dispose()
     {
         if (disposed) return;
+        if (framework.IsInFrameworkUpdateThread) DisposeCore();
+        else framework.RunOnFrameworkThread(DisposeCore).GetAwaiter().GetResult();
+    }
+    private void DisposeCore()
+    {
+        if (disposed) return;
+        // Native visibility restoration, owned-object deletion and hook removal
+        // are one synchronous Framework operation, including during worker unload.
+        disposed = true;
         try { framework.Update -= Update; } catch (Exception ex) { ReportHandoff(ex); }
         try { ClearAll(); }
         catch (Exception ex) { ReportHandoff(ex); }
         finally
         {
-            effects.Clear(); spawnWait.Clear(); Forget(); disposed = true;
+            effects.Clear(); spawnWait.Clear(); Forget();
             foreach(var hook in installedHooks.AsEnumerable().Reverse())
                 try { hook.Dispose(); } catch(Exception ex) { try { log.Warning(ex,"[LocalPreview] Hook disposal failed."); } catch { } }
             installedHooks.Clear();
