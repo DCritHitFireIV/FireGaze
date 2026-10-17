@@ -1,0 +1,356 @@
+{
+  "issue": "direct-2026-10-17T10-13-47-463Z-dc1fb2da",
+  "receivedAt": "2026-10-17 10:14:00",
+  "author": "匿名直传",
+  "plugin": "NoSillyReborn",
+  "fingerprint": "6ca921a6e9f6f8d1",
+  "packFile": "NoSillyReborn@user-6ca921.json",
+  "accepted": 41,
+  "filled": 41,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "NoSillyReborn",
+    "kinds": [
+      "llm"
+    ],
+    "entries": [
+      {
+        "Original": "Open the No Silly Reborn window. Use /nosilly to toggle.",
+        "Translated": "打开 No Silly Reborn 窗口。使用 /nosilly 切换。",
+        "Context": "[NoSillyReborn] Plugin..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "No Silly Reborn Configuration###NoSillyRebornConfig",
+        "Translated": "No Silly Reborn 设置",
+        "Context": "[NoSillyReborn] ConfigWindow..ctor",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ 窗口标题"
+      },
+      {
+        "Original": "Enable No Silly Reborn (intercept wrong actions)",
+        "Translated": "启用 No Silly Reborn（拦截错误操作）",
+        "Context": "[NoSillyReborn] ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Movable config window",
+        "Translated": "可移动设置窗口",
+        "Context": "[NoSillyReborn] ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Checkbox"
+      },
+      {
+        "Original": "Per-Job Intercept Toggle",
+        "Translated": "按职业拦截开关",
+        "Context": "[NoSillyReborn] ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " rule",
+        "Translated": "规则",
+        "Context": "[NoSillyReborn] ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Active Rules",
+        "Translated": "生效规则",
+        "Context": "[NoSillyReborn] ConfigWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Disabled",
+        "Translated": "已禁用",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Enabled",
+        "Translated": "已启用",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Status: ",
+        "Translated": "状态：",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Settings",
+        "Translated": "设置",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "PreserveID": true,
+        "Role": "UI",
+        "RoleReason": "→ ImGui.SmallButton"
+      },
+      {
+        "Original": "Not logged in or between zones.",
+        "Translated": "未登录或处于区域切换中。",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Loading job data...",
+        "Translated": "正在加载职业数据...",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Current job:",
+        "Translated": "当前职业：",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " [Level ",
+        "Translated": "[等级",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": " intercept rule",
+        "Translated": "拦截规则",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": " active.",
+        "Translated": "生效中。",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "  No intercept rules for this job.",
+        "Translated": "该职业无拦截规则。",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "Last Intercepted Action",
+        "Translated": "最近拦截的操作",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "No intercepts recorded yet.",
+        "Translated": "暂无拦截记录。",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Original ID : ",
+        "Translated": "原始 ID：",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Replaced by : ",
+        "Translated": "替换为：",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      },
+      {
+        "Original": "Reason      : ",
+        "Translated": "原因      ：",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextWrapped"
+      },
+      {
+        "Original": "Active Rules for Current Job",
+        "Translated": "当前职业的生效规则",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextColored"
+      },
+      {
+        "Original": "No rules registered for this job.",
+        "Translated": "此职业未注册任何规则。",
+        "Context": "[NoSillyReborn] MainWindow.Draw",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.TextDisabled"
+      },
+      {
+        "Original": "Lightspeed → Blocked (Lightspeed active)",
+        "Translated": "光速 → 已阻止（光速生效中）",
+        "Context": "[NoSillyReborn] AstrologianRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Burst Shot → Refulgent Arrow (Hawk's Eye active)",
+        "Translated": "爆发射击 → 辉煌箭（鹰眼生效中）",
+        "Context": "[NoSillyReborn] BardRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Wide Volley → Shadowbite (Hawk's Eye active)",
+        "Translated": "广域群射 → 影噬箭（鹰眼生效中）",
+        "Context": "[NoSillyReborn] BardRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Burst Shot → Refulgent Arrow (Barrage active)",
+        "Translated": "爆发射击 → 辉煌箭（纷乱箭生效中）",
+        "Context": "[NoSillyReborn] BardRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Wide Volley → Shadowbite (Barrage active)",
+        "Translated": "广域群射 → 影噬箭（纷乱箭生效中）",
+        "Context": "[NoSillyReborn] BardRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Apex Arrow → Blast Arrow (Blast Arrow Ready active)",
+        "Translated": "绝峰箭 → 爆破箭（爆破箭预备生效中）",
+        "Context": "[NoSillyReborn] BardRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Troubadour → Blocked (Physranged mit already active)",
+        "Translated": "行吟 → 已阻止（远敏减伤已生效）",
+        "Context": "[NoSillyReborn] BardRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Triplecast → Blocked (Triplecast active)",
+        "Translated": "三连咏唱 → 已阻止（三连咏唱生效中）",
+        "Context": "[NoSillyReborn] BlackMageRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Shield Samba → Blocked (Physranged mit already active)",
+        "Translated": "防守之桑巴 → 已阻止（远敏减伤已生效）",
+        "Context": "[NoSillyReborn] DancerRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Life Surge → Blocked (Life Surge active)",
+        "Translated": "龙剑 → 已阻止（龙剑生效中）",
+        "Context": "[NoSillyReborn] DragoonRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Reassemble → Blocked (Reassembled active)",
+        "Translated": "整备 → 已阻止（整备生效中）",
+        "Context": "[NoSillyReborn] MachinistRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Tactician → Blocked (Physranged mit already active)",
+        "Translated": "策动 → 已阻止（远敏减伤已生效）",
+        "Context": "[NoSillyReborn] MachinistRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Acceleration → Blocked (Acceleration or Grand Impact Ready active)",
+        "Translated": "促进 → 已阻止（促进或显贵冲击预备生效中）",
+        "Context": "[NoSillyReborn] RedMageRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Meikyo Shisui → Blocked (Meikyo Shisui active)",
+        "Translated": "明镜止水 → 已阻止（明镜止水生效中）",
+        "Context": "[NoSillyReborn] SamuraiRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Radiant Aegis → Blocked (Radiant Aegis active)",
+        "Translated": "守护之光 → 已阻止（守护之光生效中）",
+        "Context": "[NoSillyReborn] SummonerRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      },
+      {
+        "Original": "Thin Air → Blocked (Thin Air active)",
+        "Translated": "无中生有 → 已阻止（无中生有生效中）",
+        "Context": "[NoSillyReborn] WhiteMageRules..ctor",
+        "Source": "ai:deepseek",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.BulletText"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
