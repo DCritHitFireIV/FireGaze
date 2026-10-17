@@ -32,6 +32,16 @@ static unsafe class NativeHarness
         ("pending-child-draw-enabled-once", PendingDraw),
         ("source-draw-swap-no-stale-restore", SourceDrawSwap),
         ("source-draw-lease-reasserts-owned-bit", ReassertVisibility),
+        ("weapon-draw-hidden-only-after-ready", WeaponVisibility),
+        ("weapon-draw-restore-owned-bit-only", WeaponRestore),
+        ("weapon-native-reassert-and-late-appearance", WeaponReassertLate),
+        ("weapon-draw-replacement-no-stale-write", WeaponDrawSwap),
+        ("weapon-source-pointer-replacement-untouched", WeaponSourcePointer),
+        ("weapon-source-generation-reuse-untouched", WeaponSourceGeneration),
+        ("weapon-child-identity-replacement-untouched", WeaponChildIdentity),
+        ("weapon-clone-draw-loss-restores-source", WeaponDrawLoss),
+        ("weapon-independent-render-pairs-and-extra-slot", WeaponRenderPairs),
+        ("weapon-alias-slot-movement-keeps-restore-owner", WeaponAliasMovement),
         ("ground-motion-writes-owned-root-only", MotionOwnedRoot),
         ("ground-motion-does-not-restart-loop", MotionLoop),
         ("ground-motion-landing-once", MotionLanding),
@@ -198,6 +208,125 @@ static unsafe class NativeHarness
         using var f=new F();var p=MustCreate(f);Settle(p,f);f.Source->DrawObject->Flags|=9;Tick(p,f.Source);
         Check(!f.Source->DrawObject->IsVisible,"native refresh leaked real model");Dispose(p);Eq(f.Source->DrawObject->Flags,(byte)0x29,"owned visibility not restored");
     }
+    static void WeaponVisibility()
+    {
+        using var f=new F();f.AttachWeapons();f.Ready=false;
+        byte[] source=Bytes(f.Source);var p=MustCreate(f);
+        for(int frame=0;frame<4;frame++)Tick(p,f.Source);
+        foreach(nint draw in f.SourceWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"source weapon hidden before clone ready");
+        Settle(p,f);
+        foreach(nint draw in f.SourceWeapons)Check(!((DrawObject*)draw)->IsVisible,"ready clone left original main/off/system weapon visible");
+        foreach(nint draw in f.CloneWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"clone weapon render flags changed");
+        Same(source,f.Source,"hiding source weapon modified real Character or DrawData");
+        Dispose(p);
+        foreach(nint draw in f.SourceWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"original weapon visibility not restored");
+        foreach(nint draw in f.CloneWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"cleanup modified clone weapon flags");
+    }
+    static void WeaponRestore()
+    {
+        using var f=new F();f.AttachWeapons();((DrawObject*)f.SourceWeapons[1])->Flags=0x28;
+        var p=MustCreate(f);Settle(p,f);
+        Check(!((DrawObject*)f.SourceWeapons[0])->IsVisible,"original weapon was never hidden");
+        ((DrawObject*)f.SourceWeapons[0])->Flags|=0x40;
+        Dispose(p);Dispose(p);
+        Eq(((DrawObject*)f.SourceWeapons[0])->Flags,(byte)0x69,"weapon cleanup lost unrelated render flags");
+        Eq(((DrawObject*)f.SourceWeapons[1])->Flags,(byte)0x28,"weapon cleanup showed a previously hidden offhand");
+        Eq(((DrawObject*)f.SourceWeapons[2])->Flags,(byte)0x29,"system weapon visibility not restored");
+    }
+    static void WeaponReassertLate()
+    {
+        using var f=new F();f.AttachWeapons();f.Source->DrawData.WeaponData[2].Weapon=null;f.Source->DrawData.WeaponData[2].DrawData.DrawObject=null;
+        var p=MustCreate(f);Settle(p,f);
+        Check(!((DrawObject*)f.SourceWeapons[0])->IsVisible,"initial mainhand not hidden");
+        ((DrawObject*)f.SourceWeapons[0])->Flags|=9;
+        f.Source->DrawData.WeaponData[2].Weapon=(Weapon*)f.SourceWeapons[2];
+        f.Source->DrawData.WeaponData[2].DrawData.DrawObject=(DrawObject*)f.SourceWeapons[2];
+        Check(Tick(p,f.Source),"late weapon invalidated root binding");
+        foreach(nint draw in f.SourceWeapons)Check(!((DrawObject*)draw)->IsVisible,"native refresh or late weapon escaped hiding");
+        Dispose(p);foreach(nint draw in f.SourceWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"native-refreshed or late weapon failed restore");
+    }
+    static void WeaponDrawSwap()
+    {
+        using var f=new F();f.AttachWeapons();var p=MustCreate(f);Settle(p,f);
+        var old=(DrawObject*)f.SourceWeapons[0];Check(!old->IsVisible,"old weapon not hidden");byte oldFlags=old->Flags;
+        var next=f.NewWeaponDraw();next->Flags=0x49;
+        f.Source->DrawData.WeaponData[0].Weapon=(Weapon*)next;f.Source->DrawData.WeaponData[0].DrawData.DrawObject=next;
+        Check(Tick(p,f.Source),"replacement weapon invalidated root");Check(!next->IsVisible,"new weapon draw not hidden");Eq(old->Flags,oldFlags,"replaced weapon draw touched");
+        Dispose(p);Eq(next->Flags,(byte)0x49,"new weapon lease not restored");Eq(old->Flags,oldFlags,"stale weapon restored after replacement");
+    }
+    static void WeaponSourcePointer()
+    {
+        using var f=new F();f.AttachWeapons();var p=MustCreate(f);Settle(p,f);
+        Check(!((DrawObject*)f.SourceWeapons[0])->IsVisible,"old source weapon not hidden");
+        var replacement=f.AttachWeaponsTo((Character*)f.Replacement);byte[] old=f.SourceWeapons.Select(draw=>((DrawObject*)draw)->Flags).ToArray();
+        *f.Local=f.Replacement;Check(!Tick(p,(Character*)f.Replacement),"replacement source accepted");Dispose(p);
+        for(int i=0;i<3;i++){Eq(((DrawObject*)f.SourceWeapons[i])->Flags,old[i],"old source weapon touched after pointer replacement");Eq(((DrawObject*)replacement[i])->Flags,(byte)0x29,"new source weapon touched");}
+    }
+    static void WeaponSourceGeneration()
+    {
+        using var f=new F();f.AttachWeapons();var p=MustCreate(f);Settle(p,f);
+        Check(!((DrawObject*)f.SourceWeapons[0])->IsVisible,"source weapon not hidden");
+        F.Generation(f.Source,8765);foreach(nint draw in f.SourceWeapons)((DrawObject*)draw)->Flags|=1;
+        Check(!Tick(p,f.Source),"reused source generation accepted");Dispose(p);
+        foreach(nint draw in f.SourceWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"reused source weapon modified");
+    }
+    static void WeaponChildIdentity()
+    {
+        using var f=new F();f.AttachChildren();var oldChild=(Character*)f.Children[0];var old=f.AttachWeaponsTo(oldChild);
+        var p=MustCreate(f);Settle(p,f);
+        foreach(nint draw in old)Check(!((DrawObject*)draw)->IsVisible,"source attachment weapon not hidden");
+        var replacement=f.AttachWeaponsTo((Character*)f.Replacement);f.Source->Mount.MountObject=(Character*)f.Replacement;
+        foreach(nint draw in old)((DrawObject*)draw)->Flags|=0x40;
+        Check(Tick(p,f.Source),"child identity replacement invalidated root");Dispose(p);
+        foreach(nint draw in old)Eq(((DrawObject*)draw)->Flags,(byte)0x68,"detached child weapon restored through stale identity");
+        foreach(nint draw in replacement)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"replacement child weapon touched without lease identity");
+    }
+    static void WeaponDrawLoss()
+    {
+        using var f=new F();f.AttachWeapons();var p=MustCreate(f);Settle(p,f);
+        foreach(nint draw in f.SourceWeapons)Check(!((DrawObject*)draw)->IsVisible,"ready source weapon not hidden");
+        f.Clone->DrawObject=null;f.Ready=false;Check(!Tick(p,f.Source),"missing clone draw still ready");
+        foreach(nint draw in f.SourceWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"draw loss left floating source weapon hidden");
+        Settle(p,f);foreach(nint draw in f.SourceWeapons)Check(!((DrawObject*)draw)->IsVisible,"weapon did not rehide after clone recovered");Dispose(p);
+    }
+    static void WeaponRenderPairs()
+    {
+        using var f=new F();f.CloneWeapons.AddRange(f.AttachWeaponsTo(f.Clone));
+        var pairs=new List<(nint Weapon,nint Draw)>();
+        for(int i=0;i<4;i++)
+        {
+            var weapon=f.NewWeaponDraw();var draw=f.NewWeaponDraw();draw->Flags=0x49;
+            ref var data=ref (i<3?ref f.Source->DrawData.WeaponData[i]:ref f.Source->DrawData.UnkWeaponData[0]);
+            data.Weapon=(Weapon*)weapon;data.DrawData.DrawObject=draw;pairs.Add(((nint)weapon,(nint)draw));
+        }
+        byte[] source=Bytes(f.Source);var p=MustCreate(f);Settle(p,f);
+        foreach(var pair in pairs)
+        {
+            Eq(((DrawObject*)pair.Weapon)->Flags,(byte)0x28,"independent weapon render remained visible");
+            Eq(((DrawObject*)pair.Draw)->Flags,(byte)0x48,"independent draw render remained visible");
+            ((DrawObject*)pair.Draw)->Flags|=0x80;
+        }
+        Check(!f.Source->DrawObject->IsVisible,"full render set left body visible");
+        Same(source,f.Source,"independent render hiding modified real Character");
+        Dispose(p);
+        foreach(var pair in pairs)
+        {
+            Eq(((DrawObject*)pair.Weapon)->Flags,(byte)0x29,"independent weapon restore lost owned visibility");
+            Eq(((DrawObject*)pair.Draw)->Flags,(byte)0xC9,"independent draw restore lost unrelated flags");
+        }
+        foreach(nint draw in f.CloneWeapons)Eq(((DrawObject*)draw)->Flags,(byte)0x29,"independent source render lease touched clone weapons");
+    }
+    static void WeaponAliasMovement()
+    {
+        using var f=new F();var shared=f.NewWeaponDraw();
+        f.Source->DrawData.WeaponData[0].Weapon=(Weapon*)shared;f.Source->DrawData.WeaponData[0].DrawData.DrawObject=shared;
+        f.Source->DrawData.WeaponData[1]=f.Source->DrawData.WeaponData[0];
+        var p=MustCreate(f);Settle(p,f);Eq(shared->Flags,(byte)0x28,"shared source render not hidden");
+        f.Source->DrawData.WeaponData[0]=default;
+        Check(Tick(p,f.Source),"moving alias invalidated root");Eq(shared->Flags,(byte)0x28,"moving alias exposed source render");
+        shared->Flags|=0x40;Dispose(p);Dispose(p);
+        Eq(shared->Flags,(byte)0x69,"moving alias lost its original visibility owner");
+    }
     static void Motion(object actor,bool emote=false)
     {
         var method=ActorType.GetMethod("UpdateGroundedMotion",All);
@@ -252,7 +381,7 @@ static unsafe class NativeHarness
         public Character* Source=>(Character*)root; public Character* Clone=>(Character*)clone;
         public readonly BattleChara** Local=(BattleChara**)NativeMemory.AllocZeroed((nuint)sizeof(nint));
         readonly nint* vtable=(nint*)NativeMemory.AllocZeroed(0x300); readonly DrawObject* bodyDraw=Alloc<DrawObject>(); readonly DrawObject* cloneDraw=Alloc<DrawObject>();
-        public readonly List<nint> Children=[], PreviewChildren=[], PreviewDraws=[], SourceDraws=[]; public readonly List<uint> Flags=[];
+        public readonly List<nint> Children=[], PreviewChildren=[], PreviewDraws=[], SourceDraws=[], SourceWeapons=[], CloneWeapons=[], WeaponDraws=[]; public readonly List<uint> Flags=[];
         public bool Ready=true,ChildReady=true,DrawVisibleOnEnable=true,FailAllocate,FailLookup,ReplaceSlotDuringCopy,ReplaceSlotDuringChildEnable; public int Allocates,Deletes,Enables,ChildEnables,SourceWrites,UnownedNativeWrites,PlayCalls;public ushort LastTimeline; public byte Param; public ulong? ResolvedTarget,ResolvedSoftTarget;
         public F()
         {
@@ -280,6 +409,25 @@ static unsafe class NativeHarness
         {
             for(int i=0;i<3;i++) { var child=(Character*)Alloc<BattleChara>(); Init(child,(ushort)(10+i),2000u+(uint)i,600u+(uint)i); PreviewChildren.Add((nint)child); PreviewDraws.Add((nint)Alloc<DrawObject>()); }
             Clone->Mount.MountObject=(Character*)PreviewChildren[0]; Clone->CompanionData.CompanionObject=(Companion*)PreviewChildren[1]; Clone->OrnamentData.OrnamentObject=(Ornament*)PreviewChildren[2];
+        }
+        public void AttachWeapons()
+        {
+            SourceWeapons.AddRange(AttachWeaponsTo(Source));CloneWeapons.AddRange(AttachWeaponsTo(Clone));
+        }
+        public nint[] AttachWeaponsTo(Character* actor)
+        {
+            var draws=new nint[3];
+            for(int i=0;i<3;i++)
+            {
+                var draw=NewWeaponDraw();draws[i]=(nint)draw;
+                actor->DrawData.WeaponData[i].Weapon=(Weapon*)draw;
+                actor->DrawData.WeaponData[i].DrawData.DrawObject=draw;
+            }
+            return draws;
+        }
+        public DrawObject* NewWeaponDraw()
+        {
+            var weapon=Alloc<Weapon>();weapon->Flags=0x29;WeaponDraws.Add((nint)weapon);return (DrawObject*)weapon;
         }
         public static void Generation(Character* p,uint value)=>*(uint*)((byte*)p+0x74)=value;
         static void Track(GameObject* p) { if(p==(GameObject*)current.Source||p==(GameObject*)current.Replacement)current.SourceWrites++; }
@@ -318,6 +466,6 @@ static unsafe class NativeHarness
         [UnmanagedCallersOnly] static void SetSoftTarget(Character* p,ulong id) { Track((GameObject*)p); p->SoftTargetId=id; }
         [UnmanagedCallersOnly] static void Play(ActionTimelineSequencer* sequence,ushort id,void* unknown) {current.PlayCalls++;current.LastTimeline=id;Track((GameObject*)sequence->Parent);}
         static T* Alloc<T>()where T:unmanaged=>(T*)NativeMemory.AllocZeroed((nuint)sizeof(T));
-        public void Dispose() { foreach(nint child in Children.Concat(PreviewChildren).Concat(PreviewDraws).Concat(SourceDraws))NativeMemory.Free((void*)child); NativeMemory.Free(Manager); NativeMemory.Free(root); NativeMemory.Free(clone); NativeMemory.Free(reservedChild); NativeMemory.Free(Replacement); NativeMemory.Free(Local); NativeMemory.Free(vtable); NativeMemory.Free(bodyDraw); NativeMemory.Free(cloneDraw); }
+        public void Dispose() { foreach(nint child in Children.Concat(PreviewChildren).Concat(PreviewDraws).Concat(SourceDraws).Concat(WeaponDraws))NativeMemory.Free((void*)child); NativeMemory.Free(Manager); NativeMemory.Free(root); NativeMemory.Free(clone); NativeMemory.Free(reservedChild); NativeMemory.Free(Replacement); NativeMemory.Free(Local); NativeMemory.Free(vtable); NativeMemory.Free(bodyDraw); NativeMemory.Free(cloneDraw); }
     }
 }

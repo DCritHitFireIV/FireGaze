@@ -358,16 +358,29 @@ public sealed unsafe class NativePreviewActor : IDisposable
         // Bit 0 controls presentation; bit 3 is rewritten by native culling. Keeping
         // the GameObject model flags untouched preserves its model and gameplay updates.
         private const byte VisibleBit = 1;
-        private DrawObject* drawAddress;
-        private byte restoreBits;
+        // Body plus both render pointers for main hand, off hand, system and the
+        // client's extra weapon slot. Aliases are collected only once per frame.
+        private const int MaxDrawParts = 9;
+        private readonly DrawPart[] parts;
+        private int partCount;
+
+        private struct DrawPart
+        {
+            public DrawObject* Draw;
+            public nint Owner;
+            public ulong Model;
+            public byte RestoreBits;
+            public readonly bool SameIdentity(in DrawPart other)
+                => Draw == other.Draw && Owner == other.Owner && Model == other.Model;
+        }
 
         public VisibilityLease(NativeCharacter* actor)
         {
             address = actor;
             generation = Generation(actor);
             id = actor->GetGameObjectId().Id;
-            drawAddress = null;
-            restoreBits = 0;
+            parts = new DrawPart[MaxDrawParts];
+            partCount = 0;
         }
 
         public readonly bool MatchesRaw(NativeCharacter* current) => current != null && current == address
@@ -378,24 +391,65 @@ public sealed unsafe class NativePreviewActor : IDisposable
 
         public void HideResolved(NativeCharacter* current)
         {
-            var draw = current != null ? current->DrawObject : null;
-            if (draw != drawAddress)
+            if (parts is null) return;
+            Span<DrawPart> live = stackalloc DrawPart[MaxDrawParts];
+            var liveCount = CollectParts(current, live);
+            // Determine ownership before overwriting the previous set. A render pointer
+            // that moved between aliased slots keeps one lease, never two restore owners.
+            for (var i = 0; i < liveCount; i++)
             {
-                // A replaced draw may already be freed. Never restore through its old address.
-                drawAddress = draw;
-                restoreBits = 0;
+                for (var j = 0; j < partCount; j++)
+                    if (live[i].SameIdentity(parts[j])) { live[i].RestoreBits = parts[j].RestoreBits; break; }
             }
-            if (draw == null) return;
-            restoreBits |= (byte)(draw->Flags & VisibleBit);
-            draw->Flags &= unchecked((byte)~VisibleBit);
+            for (var i = 0; i < liveCount; i++)
+            {
+                live[i].RestoreBits |= (byte)(live[i].Draw->Flags & VisibleBit);
+                live[i].Draw->Flags &= unchecked((byte)~VisibleBit);
+                parts[i] = live[i];
+            }
+            // A removed or replaced draw may already be freed. Discard its lease
+            // without dereferencing it; only currently bound render objects are touched.
+            partCount = liveCount;
         }
 
         public void ReleaseResolved(NativeCharacter* current)
         {
-            var draw = current != null ? current->DrawObject : null;
-            if (draw != null && draw == drawAddress) draw->Flags |= restoreBits;
-            drawAddress = null;
-            restoreBits = 0;
+            if (parts is null) return;
+            Span<DrawPart> live = stackalloc DrawPart[MaxDrawParts];
+            var liveCount = CollectParts(current, live);
+            for (var i = 0; i < liveCount; i++)
+                for (var j = 0; j < partCount; j++)
+                    if (live[i].SameIdentity(parts[j]))
+                    {
+                        live[i].Draw->Flags |= parts[j].RestoreBits;
+                        break;
+                    }
+            partCount = 0;
+        }
+
+        private static int CollectParts(NativeCharacter* current, Span<DrawPart> live)
+        {
+            if (current == null) return 0;
+            var count = 0;
+            AddPart(live, ref count, current->DrawObject, (nint)current, 0);
+            for (var i = 0; i < current->DrawData.WeaponData.Length; i++)
+                AddWeapon(live, ref count, ref current->DrawData.WeaponData[i]);
+            for (var i = 0; i < current->DrawData.UnkWeaponData.Length; i++)
+                AddWeapon(live, ref count, ref current->DrawData.UnkWeaponData[i]);
+            return count;
+        }
+
+        private static void AddWeapon(Span<DrawPart> live, ref int count, ref DrawObjectData weapon)
+        {
+            AddPart(live, ref count, (DrawObject*)weapon.Weapon, (nint)weapon.Weapon, weapon.ModelId.Value);
+            AddPart(live, ref count, weapon.DrawData.DrawObject, (nint)weapon.Weapon, weapon.ModelId.Value);
+        }
+
+        private static void AddPart(Span<DrawPart> live, ref int count, DrawObject* draw, nint owner, ulong model)
+        {
+            if (draw == null) return;
+            for (var i = 0; i < count; i++) if (live[i].Draw == draw) return;
+            live[count++] = new DrawPart { Draw = draw, Owner = owner, Model = model };
         }
     }
 
