@@ -1,0 +1,88 @@
+{
+  "issue": "168",
+  "receivedAt": "2026-10-17 14:54:38",
+  "author": "firegaze-relay[bot]",
+  "plugin": "BetterMountRoulette",
+  "fingerprint": "1fafd13579e84b32",
+  "packFile": "BetterMountRoulette@user-1fafd1.json",
+  "accepted": 8,
+  "filled": 8,
+  "overwritten": 0,
+  "kept": 0,
+  "rejected": [],
+  "payload": {
+    "type": "uit-contribution",
+    "plugin": "BetterMountRoulette",
+    "kinds": [
+      "free"
+    ],
+    "entries": [
+      {
+        "Original": "Open the config window.",
+        "Translated": "打开配置窗口。",
+        "Context": "BetterMountRoulettePlugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Mount a random mount from the specified group, e.g. \"/pmount My Group\" summons a mount from the \"My Group\" group",
+        "Translated": "从指定组中随机挂载一个坐骑，例如“/pmount我的组”从“我的组”组中召唤一个坐骑",
+        "Context": "BetterMountRoulettePlugin..ctor",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ CommandInfo.HelpMessage"
+      },
+      {
+        "Original": "Invalid command: ",
+        "Translated": "无效命令",
+        "Context": "BetterMountRoulettePlugin.HandleCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Please specify a mount group",
+        "Translated": "请指定装载组",
+        "Context": "ActionHandler.HandleMountCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Mount group \"",
+        "Translated": "挂载组\"",
+        "Context": "ActionHandler.HandleMountCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "\" not found.",
+        "Translated": "未找到。",
+        "Context": "ActionHandler.HandleMountCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Unable to summon mount from group \"",
+        "Translated": "无法从群组中召唤坐骑\"",
+        "Context": "ActionHandler.HandleMountCommand",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ IChatGui.PrintError"
+      },
+      {
+        "Original": "Modes:",
+        "Translated": "模式：",
+        "Context": "CharacterManagementRenderer.PluginSpecificSettings",
+        "Source": "ai:public-caiyun",
+        "Role": "UI",
+        "RoleReason": "→ ImGui.Text"
+      }
+    ],
+    "resources": [],
+    "attributes": []
+  }
+}
