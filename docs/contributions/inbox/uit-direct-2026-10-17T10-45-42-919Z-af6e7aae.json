@@ -1,1 +1,1733 @@
-{"type":"uit-contribution","plugin":"Dalamud.FindAnything","kinds":["llm"],"entries":[{"Original":"Cannot teleport in this situation.","Translated":"当前情况下无法传送。","Context":"Teleporter.ShowTeleportResult","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Cannot teleport to that destination.","Translated":"无法传送到该目的地。","Context":"Teleporter.ShowTeleportResult","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Teleport failed.","Translated":"传送失败。","Context":"Teleporter.ShowTeleportResult","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Teleported to ","Translated":"已传送至","Context":"Teleporter.ShowTeleportResult","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"Open the Wotsit settings.","Translated":"打开 Wotsit 设置。","Context":"FindAnythingPlugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Could not render Wotsit UI. Please report this error.","Translated":"无法渲染 Wotsit 界面。请报告此错误。","Context":"Finder.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Gearset","Translated":"套装","Context":"Gearset.ToString","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Just start typing to search!","Translated":"直接输入即可搜索！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Press enter to select results!","Translated":"按回车选择结果！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Press the up and down buttons to scroll!","Translated":"按上下键滚动！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Search for aetherytes or zone names!","Translated":"搜索以太之光或区域名称！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Search for emotes or duties!","Translated":"搜索情感动作或任务！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Search for game commands, like timers!","Translated":"搜索游戏命令，例如计时器！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Run chat commands by typing them here!","Translated":"在此输入以运行聊天命令！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Link macros to search in \"wotsit settings\"!","Translated":"在“Wotsit 设置”中关联宏以进行搜索！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Search for names of gearsets, jobs or roles!","Translated":"搜索套装、职业或职能名称！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Type mathematical expressions into the search bar!","Translated":"在搜索栏中输入数学表达式！","Context":"HintResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"General","Translated":"常规","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"How to open","Translated":"打开方式","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Keyboard Combo","Translated":"组合键","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Key Double Tap","Translated":"按键双击","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Prevent passthrough to game","Translated":"阻止传递至游戏","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Search mode","Translated":"搜索模式","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Use this menu to select the default search mode:\n  - \"Simple\" looks for the exact text entered.\n  - \"Fuzzy\" finds close matches to your text even if some characters are missing (e.g. \"dufi\" can locate the Duty Finder).\n  - \"FuzzyParts\" is like Fuzzy but each word in the input is searched for separately, so that input word order does not matter.","Translated":"使用此菜单选择默认搜索模式：\n  - “简单”查找输入的精确文本。\n  - “模糊”查找与文本接近的匹配项，即使缺少部分字符（例如“dufi”可找到任务搜索器）。\n  - “模糊分词”类似模糊，但会分别搜索输入的每个词，因此输入词序无关紧要。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"When using fuzzy search modes, results are shown in order from best match to worst match.","Translated":"使用模糊搜索模式时，结果按匹配程度从高到低显示。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Search prefixes","Translated":"搜索前缀","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Inputting one of the prefixes below as the first character of your search text will temporarily change the search mode for that search.","Translated":"在搜索文本首位输入以下任一前缀，可临时更改该次搜索的搜索模式。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Simple search mode prefix","Translated":"简单搜索模式前缀","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Fuzzy search mode prefix","Translated":"模糊搜索模式前缀","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"FuzzyParts search mode prefix","Translated":"模糊分词搜索模式前缀","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Scrolling","Translated":"滚动","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"When using the keyboard to scroll through results, customise the scroll delay and speed.","Translated":"使用键盘滚动结果时，可自定义滚动延迟和速度。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"- The \"System\" scroll style matches the key repeat rate and delays from your operating system.\n- The \"Custom\" scroll style lets you customize these settings for Wotsit.","Translated":"- “系统”滚动样式与操作系统的按键重复率和延迟一致。\n- “自定义”滚动样式可让你为 Wotsit 自定义这些设置。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Line scroll repeat delay","Translated":"行滚动重复延迟","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"The number of milliseconds after to wait after pressing and holding Up/Down before the movement begins to repeat.\n\nControl-click the slider to enter a custom value. Default: 120.","Translated":"按住上/下键后，开始重复移动前等待的毫秒数。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：120。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Line scroll repeat interval","Translated":"行滚动重复间隔","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"The number of milliseconds between each repeated line movement. Smaller numbers will repeat faster.\n\nIn the old system, \"Slow\" was 120, \"Medium\" was 65, and \"Fast\" was 30.\n\nControl-click the slider to enter a custom value. Default: 65.","Translated":"每次重复行移动之间的毫秒数。数值越小重复越快。\n\n在旧系统中，“慢”为 120，“中”为 65，“快”为 30。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：65。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Page scroll repeat delay","Translated":"翻页滚动重复延迟","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"The number of milliseconds after to wait after pressing and holding Pgp/PgD before the movement begins to repeat.\n\nControl-click the slider to enter a custom value. Default: 200.","Translated":"按住 Pgp/PgD 后，等待多少毫秒才开始重复移动。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：200。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Page scroll repeat interval","Translated":"翻页重复间隔","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderInt"},{"Original":"The number of milliseconds between each repeated page movement. Smaller numbers will repeat faster.\n\nControl-click the slider to enter a custom value. Default: 200.","Translated":"每次重复翻页之间的毫秒数。数值越小重复越快。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：200。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Crafting recipes","Translated":"制作配方","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Merge multiple crafting recipes for the same item","Translated":"合并同一物品的多个制作配方","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"When selecting a item with only one recipe...","Translated":"选择仅有单个配方的物品时...","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"When selecting a item with multiple recipes...","Translated":"选择有多个配方的物品时...","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"When selecting a recipe...","Translated":"选择配方时...","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.Combo"},{"Original":"Search window","Translated":"搜索窗口","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Disable window sounds","Translated":"禁用窗口音效","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Disable fade in/out","Translated":"禁用淡入/淡出","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Disable background blur","Translated":"禁用背景模糊","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"If background blur is enabled in global Dalamud style options, check this to force it off for Wotsit.","Translated":"若 Dalamud 全局样式选项中启用了背景模糊，勾选此项可强制对 Wotsit 关闭。","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Override background opacity","Translated":"覆盖背景不透明度","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Override background opacity value","Translated":"覆盖背景不透明度值","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat"},{"Original":"Search window position offset","Translated":"搜索窗口位置偏移","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SliderFloat2"},{"Original":"Other stuff","Translated":"其他","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Enable Search History","Translated":"启用搜索历史","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Show Gil cost in Aetheryte results","Translated":"在以太之光结果中显示金币花费","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Show \"Market Board\" shortcut to teleport to the closest market board city","Translated":"显示“市场布告板”快捷方式，传送至最近的市场布告板城市","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Show \"Striking Dummy\" shortcut to teleport to the closest striking dummy location","Translated":"显示“木人”快捷方式，传送至最近的木人位置","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Show \"Inn Room\" shortcut to teleport to the closest inn room","Translated":"显示“旅馆房间”快捷方式，传送至最近的旅馆房间","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Don't consider Limsa a valid Inn Room location","Translated":"不将利姆萨视为有效的旅馆房间位置","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Show Emote command in search result","Translated":"在搜索结果中显示情感动作命令","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Try to prevent spoilers in wiki mode(not 100% reliable)","Translated":"尝试在 wiki 模式下防止剧透（并非 100% 可靠）","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Directly go to wiki mode when opening search","Translated":"打开搜索时直接进入 wiki 模式","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Don't open Wotsit in combat","Translated":"战斗中不打开 Wotsit","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Force TeamCraft links to open in your browser","Translated":"强制 TeamCraft 链接在浏览器中打开","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Disable mouse selection in results list unless Quick Select Key is held","Translated":"除非按住快速选择键，否则禁用结果列表中的鼠标选择","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Match plugin settings and interface links using short form without 'Open'","Translated":"使用不带“打开”的短格式匹配插件设置和界面链接","Context":"SettingsWindow.DrawGeneralTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Math constants","Translated":"数学常量","Context":"SettingsWindow.DrawConstantsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Use this menu to tie constants to values, to be used in expressions.\nAdd a constant again to edit it.","Translated":"使用此菜单将常量绑定到值，以便在表达式中使用。\n再次添加常量即可编辑。","Context":"SettingsWindow.DrawConstantsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Name","Translated":"名称","Context":"SettingsWindow.DrawConstantsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Value","Translated":"值","Context":"SettingsWindow.DrawConstantsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Add new constant","Translated":"添加新常量","Context":"SettingsWindow.DrawConstantsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Copy constants to clipboard","Translated":"复制常量到剪贴板","Context":"SettingsWindow.DrawConstantsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Import constants from clipboard","Translated":"从剪贴板导入常量","Context":"SettingsWindow.DrawConstantsSection","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Other plugins","Translated":"其他插件","Context":"SettingsWindow.DrawIpcTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Details","Translated":"详情","Context":"SettingsWindow.DrawIpcTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Plugin","Translated":"插件","Context":"SettingsWindow.DrawIpcTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Please select a plugin","Translated":"请选择一个插件","Context":"SettingsWindow.DrawIpcDetail","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Enable","Translated":"启用","Context":"SettingsWindow.DrawIpcDetailConfig","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Override weight","Translated":"覆盖权重","Context":"SettingsWindow.DrawIpcDetailConfig","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Search","Translated":"搜索","Context":"SettingsWindow.DrawIpcDetailBindings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Searches via \"Search text\" (same as Wotsit search).","Translated":"通过“搜索文本”进行搜索（与 Wotsit 搜索相同）。","Context":"SettingsWindow.DrawIpcDetailBindings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Display name","Translated":"显示名称","Context":"SettingsWindow.DrawIpcDetailBindings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Search text","Translated":"搜索文本","Context":"SettingsWindow.DrawIpcDetailBindings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Macro links","Translated":"宏链接","Context":"SettingsWindow.DrawMacrosTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Search direction","Translated":"搜索方向","Context":"SettingsWindow.DrawMacrosTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Use this to change the order in which macro links are searched. This may affect which macro links are displayed higher in the result list.","Translated":"用于更改宏链接的搜索顺序。这可能会影响结果列表中宏链接的显示顺序。","Context":"SettingsWindow.DrawMacrosTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Top to bottom","Translated":"从上到下","Context":"SettingsWindow.DrawMacrosTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Bottom to top","Translated":"从下到上","Context":"SettingsWindow.DrawMacrosTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.RadioButton"},{"Original":"Use this menu to tie search results to macros.\nClick \"Add Macro\", enter the text you want to access it under, select whether or not it is a shared macro and enter its ID.\nUse the ';' character to add search text for a macro, only the first part text will be shown, e.g. \"SGE;sage;healer\".","Translated":"使用此菜单将搜索结果与宏关联。\n点击“添加宏”，输入用于访问它的文本，选择是否为共享宏并输入其 ID。\n使用“;”字符为宏添加搜索文本，仅显示第一部分文本，例如“SGE;sage;healer”。","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Search Name","Translated":"搜索名称","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Kind","Translated":"类型","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Shared","Translated":"共享","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"ID/Line","Translated":"ID/行","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Icon","Translated":"图标","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Copy","Translated":"复制","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Import","Translated":"导入","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Rearrange","Translated":"重新排序","Context":"SettingsWindow.DrawMacroSettingsView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Use arrows or drag and drop macros to change the order.","Translated":"使用箭头或拖放宏来更改顺序。","Context":"SettingsWindow.DrawMacroArrangeView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Stop rearranging","Translated":"停止重新排序","Context":"SettingsWindow.DrawMacroArrangeView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Reverse all","Translated":"全部反转","Context":"SettingsWindow.DrawMacroArrangeView","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.IconButtonWithText"},{"Original":"Save","Translated":"保存","Context":"SettingsWindow.DrawSaveFooter","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Save and Close","Translated":"保存并关闭","Context":"SettingsWindow.DrawSaveFooter","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Discard","Translated":"放弃","Context":"SettingsWindow.DrawSaveFooter","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"What to search","Translated":"搜索内容","Context":"SettingsWindow.DrawSearchTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"Search order","Translated":"搜索顺序","Context":"SettingsWindow.DrawSearchTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"When using the default \"Simple\" search mode, results will appear in the order defined below.\n\nFor fuzzy search modes, results appear in 'best match' to 'worst match' order, and the order defined below will be used only for tie-breaks (when multiple results match equally well).\n\nUn-ticking a check box will cause all entries from that category to be ignored in any mode.","Translated":"使用默认的“简单”搜索模式时，结果将按下方定义的顺序显示。\n\n对于模糊搜索模式，结果按“最佳匹配”到“最差匹配”的顺序显示，下方定义的顺序仅用于打破平局（当多个结果匹配程度相同时）。\n\n取消勾选某个复选框将导致该类别中的所有条目在任何模式下都被忽略。","Context":"SettingsWindow.DrawSearchTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Weight","Translated":"权重","Context":"SettingsWindow.DrawSearchTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"The weight setting for each category can be used to adjust the internal match score calculated for results when using fuzzy search modes. When compared to the default weight of 100, for example, a category with a weight of 200 will have its match scores doubled while a category with a weight of 50 will have them halved.\n\nSearch results with higher weightings tend to have higher match scores, and therefore appear higher in the results list.\n\nWeights are ignored when using the \"Simple\" search mode.","Translated":"每个类别的权重设置可用于调整模糊搜索模式下为结果计算的内部匹配分数。例如，与默认权重 100 相比，权重为 200 的类别其匹配分数将翻倍，而权重为 50 的类别其匹配分数将减半。\n\n权重较高的搜索结果往往具有较高的匹配分数，因此在结果列表中显示得更靠前。\n\n使用“简单”搜索模式时忽略权重。","Context":"SettingsWindow.DrawSearchTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiComponents.HelpMarker"},{"Original":"Mathematical Expressions","Translated":"数学表达式","Context":"SettingsWindow.DrawSearchTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CheckboxFlags"},{"Original":"Search...","Translated":"搜索...","Context":"FilterCombo`1.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":" Gil)","Translated":"金币)","Context":"AetheryteSearchResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Run chat command \"","Translated":"运行聊天命令 \"","Context":"ChatCommandSearchResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Crafting Recipe (","Translated":"制作配方 (","Context":"CraftingRecipeResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Duty Roulette","Translated":"任务轮盘","Context":"ContentRouletteSearchResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Emote","Translated":"情感动作","Context":"EmoteSearchResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Facewear Style","Translated":"面部饰品样式","Context":"FacewearStyleResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Fashion Accessory","Translated":"时尚配饰","Context":"FashionAccessoryResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Gathering Item","Translated":"采集物品","Context":"GatheringItemResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"adventurer","Translated":"冒险者","Context":"GearsetsModule..cctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Macros","Translated":"宏","Context":"MacroLinkSearchResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Invalid macro: ","Translated":"无效宏：","Context":"MacroLinkSearchResult.Selected","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Individual","Translated":"单独","Context":"MacroLinkSearchResult.Selected","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Invalid slash command:","Translated":"无效斜杠命令：","Context":"MacroLinkSearchResult.Selected","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Slash command too long:","Translated":"斜杠命令过长：","Context":"MacroLinkSearchResult.Selected","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" = ERROR","Translated":"= 错误","Context":"ExpressionResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Minion","Translated":"宠物","Context":"MinionResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Mount","Translated":"坐骑","Context":"MountResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Other Plugins","Translated":"其他插件","Context":"PluginSettingsSearchResult.get_CatName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Choose action for \"","Translated":"选择动作：","Context":"CoordinateActionLookup.GetPlaceholder","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Place flag and teleport to ","Translated":"标记并传送到","Context":"CoordinateActionResult.GetActionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Place flag","Translated":"标记","Context":"CoordinateActionResult.GetActionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Choose recipe for \"","Translated":"选择配方：","Context":"CraftingRecipeLookup.GetPlaceholder","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Choose emote mode for \"","Translated":"选择情感动作模式：","Context":"EmoteModeLookup.GetPlaceholder","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Default Choice","Translated":"默认选择","Context":"EmoteModeChoicerResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Only Motion","Translated":"仅动作","Context":"EmoteModeChoicerResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Choose facewear for \"","Translated":"选择面部饰品：","Context":"FacewearLookup.GetPlaceholder","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Type to search...","Translated":"输入以搜索...","Context":"ModuleLookup.GetPlaceholder","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Current Duty","Translated":"当前任务","Context":"WikiLookup.Lookup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Duty","Translated":"任务","Context":"WikiLookup.Lookup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Quest","Translated":"任务","Context":"WikiLookup.Lookup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Item","Translated":"道具","Context":"WikiLookup.Lookup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Search for \"","Translated":"搜索“","Context":"WikiTextResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"\" in wikis...","Translated":"”于 Wiki...","Context":"WikiTextResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Choose site for \"","Translated":"选择站点：","Context":"WikiSiteLookup.GetPlaceholder","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Open on ","Translated":"打开于","Context":"WikiSiteChoicerResult.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"a special set of bespoke, handcrafted DN emojis","Translated":"一套特别定制的手工 DN 表情","Context":"EmoteSetReward.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"DN Desktop Wallpaper","Translated":"DN 桌面壁纸","Context":"WallpaperReward.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Wallpaper bought!","Translated":"壁纸已购买！","Context":"WallpaperReward.Bought","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"Congrats!","Translated":"恭喜！","Context":"WallpaperReward.Bought","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Failed to set wallpaper.","Translated":"设置壁纸失败。","Context":"Wallpaper.Set","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"Failed to set wallpaper as the registry key could not found.","Translated":"设置壁纸失败，找不到注册表项。","Context":"Wallpaper.Set","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Squeaky Toy Dispenser","Translated":"吱吱玩具发放器","Context":"GameWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"HUGE Frisbee","Translated":"超大飞盘","Context":"GameWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Scooby Snacks","Translated":"狗狗零食","Context":"GameWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Water Hose + Pool set","Translated":"水管+泳池套装","Context":"GameWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Endless supply of Premium Dog Food","Translated":"无限量高级狗粮","Context":"GameWindow..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"DN Farm###dnwindow","Translated":"DN 农场","Context":"GameWindow..ctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Earned rested DN!","Translated":"获得休息 DN！","Context":"GameWindow.EarnRestedDn","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Title"},{"Original":"You earned ","Translated":"你获得了","Context":"GameWindow.EarnRestedDn","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":" DN from resting for ","Translated":"DN，休息了","Context":"GameWindow.EarnRestedDn","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":" hours.","Translated":"小时。","Context":"GameWindow.EarnRestedDn","Source":"ai:deepseek","Role":"UI","RoleReason":"→ Notification.set_Content"},{"Original":"Dogcred","Translated":"狗币","Context":"GameWindow.GetDogName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" Dog","Translated":"狗","Context":"GameWindow.GetDogName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"\"You did very well, ","Translated":"“你做得非常好，","Context":"GameWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":".\nA strange traveler from another world handed me this... Here, it is for you.\"","Translated":"。\n一个来自异世界的奇怪旅行者把这个交给了我……来，这是给你的。”","Context":"GameWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"You have a Golden Ticket! Keep it close and don't tell anyone... you never know.\nNow run home, and don't stop till you get there.","Translated":"你有一张金券！收好它，别告诉任何人……世事难料。\n现在快回家，到家之前别停下。","Context":"GameWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Your ticket number:","Translated":"您的票号：","Context":"GameWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"OK","Translated":"确定","Context":"GameWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Your farm has space for ","Translated":"您的农场可容纳","Context":"GameWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":" dogs.","Translated":"只狗。","Context":"GameWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Farm","Translated":"农场","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"my love","Translated":"我的爱","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"\"Peace has returned to the DN hills.\nEveryone is living happily.\nYou did it.\nThank you, ","Translated":"“和平已重回DN山丘。\n大家都幸福地生活着。\n你做到了。\n谢谢你，","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Oh no! A thief is here to rob you!\nYou have to stop it!\n\nYou have ","Translated":"哦不！有小偷来抢劫你！\n你必须阻止它！\n\n你还有","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" seconds left until he'll get away!","Translated":"秒，之后他就会逃走！","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Call the cops","Translated":"报警","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Oh no! A thief has robbed your farm and you didn't catch it!\nYou lost ","Translated":"哦不！小偷洗劫了你的农场，而你没抓住他！\n你失去了","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" DN, that's a lot...","Translated":"DN，这可真不少……","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Keep your eyes peeled! A thief may appear...","Translated":"睁大眼睛！小偷可能会出现……","Context":"GameWindow.DrawFarmTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Buy ","Translated":"购买","Context":"GameWindow.DrawFarmTabNoseShop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Release from duty###release","Translated":"解除任务","Context":"GameWindow.DrawFarmTabNoseShop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Buy your first ","Translated":"购买你的第一只","Context":"GameWindow.DrawFarmTabNoseShop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Only pro dogs know this: You can hold SHIFT to buy 10 at once!","Translated":"只有老手狗才知道：按住SHIFT可一次购买10只！","Context":"GameWindow.DrawFarmTabNoseShop","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Buy your first dog (","Translated":"购买你的第一只狗（","Context":"GameWindow.DrawFarmTabNoseShop","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"City","Translated":"城市","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImRaii.TabItem"},{"Original":"DN Construction Co.","Translated":"DN建筑公司","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"\"Working on it! We'll be done in ","Translated":"“正在处理！我们将在","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" minutes.\"","Translated":"分钟后完成。”","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"\"Hey, what's up. Need a bigger farm?\nYou'll be able to get more dogs if you upgrade it.\"","Translated":"“嘿，怎么了。需要更大的农场吗？\n升级后你就能养更多狗了。”","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Buy Farm Upgrade: ","Translated":"购买农场升级：","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"\"Sorry, your farm is as big as it gets.\nNothing I can do, we don't have the permit to make it any bigger!\"","Translated":"“抱歉，你的农场已经最大了。\n我无能为力，我们没有扩建许可！”","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"DN Needs & Utilities","Translated":"DN需求与设施","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"\"Hi, welcome to DN Needs & Utilities. Here you can buy stuff that your dogs will love.\nWhat can I get you?\"","Translated":"“你好，欢迎来到DN需求与设施。这里可以买到你的狗会喜欢的东西。\n需要点什么？”","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"This will increase DN gain by ","Translated":"这将使DN获取量增加","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"DN Boutique","Translated":"DN精品店","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"\"The DN boutique is still under renovation, we're very sorry!\nPlease come back when you cleared the game, we should be done by then!\"","Translated":"“DN精品店仍在装修中，非常抱歉！\n请在游戏开始后回来，那时我们应该就完工了！”","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"\"Hello! Welcome to the DN Boutique!\nWe offer a wide variety of handcrafted DN accessories to improve your living space!\"","Translated":"“你好！欢迎来到DN精品店！\n我们提供各种手工DN饰品，改善你的生活空间！”","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"DN Sage","Translated":"DN贤者","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"\"If you are weary of this world, you may start anew.\nConsider your life a journey, and you will find your way.\nAltogether, you have earned ","Translated":"“若你厌倦了这个世界，可以重新开始。\n将人生视为旅程，你终会找到方向。\n你总共获得了","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":" DN.\n\nIs this what you want?\"","Translated":"DN。\n\n确定要这样做吗？”","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Yes","Translated":"是","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"No","Translated":"否","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Goat's Golden Ticket","Translated":"山羊的金票","Context":"GameWindow.DrawCityTab","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"}],"resources":[],"attributes":[{"Original":"Search in Crafting Log","Translated":"在制作笔记中搜索","Context":"[属性] DisplayAttribute.Name Dalamud.FindAnything.Configuration/CraftingSingleSelectAction::SearchInLog","Source":"ai:deepseek"},{"Original":"Open in Crafting Log","Translated":"在制作笔记中打开","Context":"[属性] DisplayAttribute.Name Dalamud.FindAnything.Configuration/CraftingSingleSelectAction::OpenInLog","Source":"ai:deepseek"},{"Original":"Search in Wotsit","Translated":"在 Wotsit 中搜索","Context":"[属性] DisplayAttribute.Name Dalamud.FindAnything.Configuration/CraftingMergedSelectAction::SearchInFinder","Source":"ai:deepseek"}]}
+{
+  "type": "uit-contribution",
+  "plugin": "Dalamud.FindAnything",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Cannot teleport in this situation.",
+      "Translated": "当前情况下无法传送。",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Cannot teleport to that destination.",
+      "Translated": "无法传送到该目的地。",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Teleport failed.",
+      "Translated": "传送失败。",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Teleported to ",
+      "Translated": "已传送至",
+      "Context": "Teleporter.ShowTeleportResult",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "Open the Wotsit settings.",
+      "Translated": "打开 Wotsit 设置。",
+      "Context": "FindAnythingPlugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Could not render Wotsit UI. Please report this error.",
+      "Translated": "无法渲染 Wotsit 界面。请报告此错误。",
+      "Context": "Finder.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Gearset",
+      "Translated": "套装",
+      "Context": "Gearset.ToString",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Just start typing to search!",
+      "Translated": "直接输入即可搜索！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Press enter to select results!",
+      "Translated": "按回车选择结果！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Press the up and down buttons to scroll!",
+      "Translated": "按上下键滚动！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Search for aetherytes or zone names!",
+      "Translated": "搜索以太之光或区域名称！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Search for emotes or duties!",
+      "Translated": "搜索情感动作或任务！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Search for game commands, like timers!",
+      "Translated": "搜索游戏命令，例如计时器！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Run chat commands by typing them here!",
+      "Translated": "在此输入以运行聊天命令！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Link macros to search in \"wotsit settings\"!",
+      "Translated": "在“Wotsit 设置”中关联宏以进行搜索！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Search for names of gearsets, jobs or roles!",
+      "Translated": "搜索套装、职业或职能名称！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Type mathematical expressions into the search bar!",
+      "Translated": "在搜索栏中输入数学表达式！",
+      "Context": "HintResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "General",
+      "Translated": "常规",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "How to open",
+      "Translated": "打开方式",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Keyboard Combo",
+      "Translated": "组合键",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Key Double Tap",
+      "Translated": "按键双击",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Prevent passthrough to game",
+      "Translated": "阻止传递至游戏",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Search mode",
+      "Translated": "搜索模式",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Use this menu to select the default search mode:\n  - \"Simple\" looks for the exact text entered.\n  - \"Fuzzy\" finds close matches to your text even if some characters are missing (e.g. \"dufi\" can locate the Duty Finder).\n  - \"FuzzyParts\" is like Fuzzy but each word in the input is searched for separately, so that input word order does not matter.",
+      "Translated": "使用此菜单选择默认搜索模式：\n  - “简单”查找输入的精确文本。\n  - “模糊”查找与文本接近的匹配项，即使缺少部分字符（例如“dufi”可找到任务搜索器）。\n  - “模糊分词”类似模糊，但会分别搜索输入的每个词，因此输入词序无关紧要。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "When using fuzzy search modes, results are shown in order from best match to worst match.",
+      "Translated": "使用模糊搜索模式时，结果按匹配程度从高到低显示。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Search prefixes",
+      "Translated": "搜索前缀",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Inputting one of the prefixes below as the first character of your search text will temporarily change the search mode for that search.",
+      "Translated": "在搜索文本首位输入以下任一前缀，可临时更改该次搜索的搜索模式。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Simple search mode prefix",
+      "Translated": "简单搜索模式前缀",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Fuzzy search mode prefix",
+      "Translated": "模糊搜索模式前缀",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "FuzzyParts search mode prefix",
+      "Translated": "模糊分词搜索模式前缀",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Scrolling",
+      "Translated": "滚动",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "When using the keyboard to scroll through results, customise the scroll delay and speed.",
+      "Translated": "使用键盘滚动结果时，可自定义滚动延迟和速度。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "- The \"System\" scroll style matches the key repeat rate and delays from your operating system.\n- The \"Custom\" scroll style lets you customize these settings for Wotsit.",
+      "Translated": "- “系统”滚动样式与操作系统的按键重复率和延迟一致。\n- “自定义”滚动样式可让你为 Wotsit 自定义这些设置。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Line scroll repeat delay",
+      "Translated": "行滚动重复延迟",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "The number of milliseconds after to wait after pressing and holding Up/Down before the movement begins to repeat.\n\nControl-click the slider to enter a custom value. Default: 120.",
+      "Translated": "按住上/下键后，开始重复移动前等待的毫秒数。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：120。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Line scroll repeat interval",
+      "Translated": "行滚动重复间隔",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "The number of milliseconds between each repeated line movement. Smaller numbers will repeat faster.\n\nIn the old system, \"Slow\" was 120, \"Medium\" was 65, and \"Fast\" was 30.\n\nControl-click the slider to enter a custom value. Default: 65.",
+      "Translated": "每次重复行移动之间的毫秒数。数值越小重复越快。\n\n在旧系统中，“慢”为 120，“中”为 65，“快”为 30。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：65。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Page scroll repeat delay",
+      "Translated": "翻页滚动重复延迟",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "The number of milliseconds after to wait after pressing and holding Pgp/PgD before the movement begins to repeat.\n\nControl-click the slider to enter a custom value. Default: 200.",
+      "Translated": "按住 Pgp/PgD 后，等待多少毫秒才开始重复移动。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：200。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Page scroll repeat interval",
+      "Translated": "翻页重复间隔",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderInt"
+    },
+    {
+      "Original": "The number of milliseconds between each repeated page movement. Smaller numbers will repeat faster.\n\nControl-click the slider to enter a custom value. Default: 200.",
+      "Translated": "每次重复翻页之间的毫秒数。数值越小重复越快。\n\n按住 Ctrl 点击滑块可输入自定义值。默认：200。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Crafting recipes",
+      "Translated": "制作配方",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Merge multiple crafting recipes for the same item",
+      "Translated": "合并同一物品的多个制作配方",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "When selecting a item with only one recipe...",
+      "Translated": "选择仅有单个配方的物品时...",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "When selecting a item with multiple recipes...",
+      "Translated": "选择有多个配方的物品时...",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "When selecting a recipe...",
+      "Translated": "选择配方时...",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.Combo"
+    },
+    {
+      "Original": "Search window",
+      "Translated": "搜索窗口",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Disable window sounds",
+      "Translated": "禁用窗口音效",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Disable fade in/out",
+      "Translated": "禁用淡入/淡出",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Disable background blur",
+      "Translated": "禁用背景模糊",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "If background blur is enabled in global Dalamud style options, check this to force it off for Wotsit.",
+      "Translated": "若 Dalamud 全局样式选项中启用了背景模糊，勾选此项可强制对 Wotsit 关闭。",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Override background opacity",
+      "Translated": "覆盖背景不透明度",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Override background opacity value",
+      "Translated": "覆盖背景不透明度值",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat"
+    },
+    {
+      "Original": "Search window position offset",
+      "Translated": "搜索窗口位置偏移",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SliderFloat2"
+    },
+    {
+      "Original": "Other stuff",
+      "Translated": "其他",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Enable Search History",
+      "Translated": "启用搜索历史",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Show Gil cost in Aetheryte results",
+      "Translated": "在以太之光结果中显示金币花费",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Show \"Market Board\" shortcut to teleport to the closest market board city",
+      "Translated": "显示“市场布告板”快捷方式，传送至最近的市场布告板城市",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Show \"Striking Dummy\" shortcut to teleport to the closest striking dummy location",
+      "Translated": "显示“木人”快捷方式，传送至最近的木人位置",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Show \"Inn Room\" shortcut to teleport to the closest inn room",
+      "Translated": "显示“旅馆房间”快捷方式，传送至最近的旅馆房间",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Don't consider Limsa a valid Inn Room location",
+      "Translated": "不将利姆萨视为有效的旅馆房间位置",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Show Emote command in search result",
+      "Translated": "在搜索结果中显示情感动作命令",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Try to prevent spoilers in wiki mode(not 100% reliable)",
+      "Translated": "尝试在 wiki 模式下防止剧透（并非 100% 可靠）",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Directly go to wiki mode when opening search",
+      "Translated": "打开搜索时直接进入 wiki 模式",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Don't open Wotsit in combat",
+      "Translated": "战斗中不打开 Wotsit",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Force TeamCraft links to open in your browser",
+      "Translated": "强制 TeamCraft 链接在浏览器中打开",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Disable mouse selection in results list unless Quick Select Key is held",
+      "Translated": "除非按住快速选择键，否则禁用结果列表中的鼠标选择",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Match plugin settings and interface links using short form without 'Open'",
+      "Translated": "使用不带“打开”的短格式匹配插件设置和界面链接",
+      "Context": "SettingsWindow.DrawGeneralTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Math constants",
+      "Translated": "数学常量",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Use this menu to tie constants to values, to be used in expressions.\nAdd a constant again to edit it.",
+      "Translated": "使用此菜单将常量绑定到值，以便在表达式中使用。\n再次添加常量即可编辑。",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Name",
+      "Translated": "名称",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Value",
+      "Translated": "值",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Add new constant",
+      "Translated": "添加新常量",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Copy constants to clipboard",
+      "Translated": "复制常量到剪贴板",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Import constants from clipboard",
+      "Translated": "从剪贴板导入常量",
+      "Context": "SettingsWindow.DrawConstantsSection",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Other plugins",
+      "Translated": "其他插件",
+      "Context": "SettingsWindow.DrawIpcTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Details",
+      "Translated": "详情",
+      "Context": "SettingsWindow.DrawIpcTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Plugin",
+      "Translated": "插件",
+      "Context": "SettingsWindow.DrawIpcTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Please select a plugin",
+      "Translated": "请选择一个插件",
+      "Context": "SettingsWindow.DrawIpcDetail",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Enable",
+      "Translated": "启用",
+      "Context": "SettingsWindow.DrawIpcDetailConfig",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Override weight",
+      "Translated": "覆盖权重",
+      "Context": "SettingsWindow.DrawIpcDetailConfig",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Search",
+      "Translated": "搜索",
+      "Context": "SettingsWindow.DrawIpcDetailBindings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Searches via \"Search text\" (same as Wotsit search).",
+      "Translated": "通过“搜索文本”进行搜索（与 Wotsit 搜索相同）。",
+      "Context": "SettingsWindow.DrawIpcDetailBindings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Display name",
+      "Translated": "显示名称",
+      "Context": "SettingsWindow.DrawIpcDetailBindings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Search text",
+      "Translated": "搜索文本",
+      "Context": "SettingsWindow.DrawIpcDetailBindings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Macro links",
+      "Translated": "宏链接",
+      "Context": "SettingsWindow.DrawMacrosTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Search direction",
+      "Translated": "搜索方向",
+      "Context": "SettingsWindow.DrawMacrosTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Use this to change the order in which macro links are searched. This may affect which macro links are displayed higher in the result list.",
+      "Translated": "用于更改宏链接的搜索顺序。这可能会影响结果列表中宏链接的显示顺序。",
+      "Context": "SettingsWindow.DrawMacrosTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Top to bottom",
+      "Translated": "从上到下",
+      "Context": "SettingsWindow.DrawMacrosTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Bottom to top",
+      "Translated": "从下到上",
+      "Context": "SettingsWindow.DrawMacrosTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.RadioButton"
+    },
+    {
+      "Original": "Use this menu to tie search results to macros.\nClick \"Add Macro\", enter the text you want to access it under, select whether or not it is a shared macro and enter its ID.\nUse the ';' character to add search text for a macro, only the first part text will be shown, e.g. \"SGE;sage;healer\".",
+      "Translated": "使用此菜单将搜索结果与宏关联。\n点击“添加宏”，输入用于访问它的文本，选择是否为共享宏并输入其 ID。\n使用“;”字符为宏添加搜索文本，仅显示第一部分文本，例如“SGE;sage;healer”。",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Search Name",
+      "Translated": "搜索名称",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Kind",
+      "Translated": "类型",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Shared",
+      "Translated": "共享",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "ID/Line",
+      "Translated": "ID/行",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Icon",
+      "Translated": "图标",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Copy",
+      "Translated": "复制",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Import",
+      "Translated": "导入",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Rearrange",
+      "Translated": "重新排序",
+      "Context": "SettingsWindow.DrawMacroSettingsView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Use arrows or drag and drop macros to change the order.",
+      "Translated": "使用箭头或拖放宏来更改顺序。",
+      "Context": "SettingsWindow.DrawMacroArrangeView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Stop rearranging",
+      "Translated": "停止重新排序",
+      "Context": "SettingsWindow.DrawMacroArrangeView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Reverse all",
+      "Translated": "全部反转",
+      "Context": "SettingsWindow.DrawMacroArrangeView",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.IconButtonWithText"
+    },
+    {
+      "Original": "Save",
+      "Translated": "保存",
+      "Context": "SettingsWindow.DrawSaveFooter",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Save and Close",
+      "Translated": "保存并关闭",
+      "Context": "SettingsWindow.DrawSaveFooter",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Discard",
+      "Translated": "放弃",
+      "Context": "SettingsWindow.DrawSaveFooter",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "What to search",
+      "Translated": "搜索内容",
+      "Context": "SettingsWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "Search order",
+      "Translated": "搜索顺序",
+      "Context": "SettingsWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "When using the default \"Simple\" search mode, results will appear in the order defined below.\n\nFor fuzzy search modes, results appear in 'best match' to 'worst match' order, and the order defined below will be used only for tie-breaks (when multiple results match equally well).\n\nUn-ticking a check box will cause all entries from that category to be ignored in any mode.",
+      "Translated": "使用默认的“简单”搜索模式时，结果将按下方定义的顺序显示。\n\n对于模糊搜索模式，结果按“最佳匹配”到“最差匹配”的顺序显示，下方定义的顺序仅用于打破平局（当多个结果匹配程度相同时）。\n\n取消勾选某个复选框将导致该类别中的所有条目在任何模式下都被忽略。",
+      "Context": "SettingsWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Weight",
+      "Translated": "权重",
+      "Context": "SettingsWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "The weight setting for each category can be used to adjust the internal match score calculated for results when using fuzzy search modes. When compared to the default weight of 100, for example, a category with a weight of 200 will have its match scores doubled while a category with a weight of 50 will have them halved.\n\nSearch results with higher weightings tend to have higher match scores, and therefore appear higher in the results list.\n\nWeights are ignored when using the \"Simple\" search mode.",
+      "Translated": "每个类别的权重设置可用于调整模糊搜索模式下为结果计算的内部匹配分数。例如，与默认权重 100 相比，权重为 200 的类别其匹配分数将翻倍，而权重为 50 的类别其匹配分数将减半。\n\n权重较高的搜索结果往往具有较高的匹配分数，因此在结果列表中显示得更靠前。\n\n使用“简单”搜索模式时忽略权重。",
+      "Context": "SettingsWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiComponents.HelpMarker"
+    },
+    {
+      "Original": "Mathematical Expressions",
+      "Translated": "数学表达式",
+      "Context": "SettingsWindow.DrawSearchTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CheckboxFlags"
+    },
+    {
+      "Original": "Search...",
+      "Translated": "搜索...",
+      "Context": "FilterCombo`1.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": " Gil)",
+      "Translated": "金币)",
+      "Context": "AetheryteSearchResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Run chat command \"",
+      "Translated": "运行聊天命令 \"",
+      "Context": "ChatCommandSearchResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Crafting Recipe (",
+      "Translated": "制作配方 (",
+      "Context": "CraftingRecipeResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Duty Roulette",
+      "Translated": "任务轮盘",
+      "Context": "ContentRouletteSearchResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Emote",
+      "Translated": "情感动作",
+      "Context": "EmoteSearchResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Facewear Style",
+      "Translated": "面部饰品样式",
+      "Context": "FacewearStyleResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Fashion Accessory",
+      "Translated": "时尚配饰",
+      "Context": "FashionAccessoryResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Gathering Item",
+      "Translated": "采集物品",
+      "Context": "GatheringItemResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "adventurer",
+      "Translated": "冒险者",
+      "Context": "GearsetsModule..cctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Macros",
+      "Translated": "宏",
+      "Context": "MacroLinkSearchResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Invalid macro: ",
+      "Translated": "无效宏：",
+      "Context": "MacroLinkSearchResult.Selected",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Individual",
+      "Translated": "单独",
+      "Context": "MacroLinkSearchResult.Selected",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Invalid slash command:",
+      "Translated": "无效斜杠命令：",
+      "Context": "MacroLinkSearchResult.Selected",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Slash command too long:",
+      "Translated": "斜杠命令过长：",
+      "Context": "MacroLinkSearchResult.Selected",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " = ERROR",
+      "Translated": "= 错误",
+      "Context": "ExpressionResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Minion",
+      "Translated": "宠物",
+      "Context": "MinionResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Mount",
+      "Translated": "坐骑",
+      "Context": "MountResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Other Plugins",
+      "Translated": "其他插件",
+      "Context": "PluginSettingsSearchResult.get_CatName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Choose action for \"",
+      "Translated": "选择动作：",
+      "Context": "CoordinateActionLookup.GetPlaceholder",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Place flag and teleport to ",
+      "Translated": "标记并传送到",
+      "Context": "CoordinateActionResult.GetActionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Place flag",
+      "Translated": "标记",
+      "Context": "CoordinateActionResult.GetActionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Choose recipe for \"",
+      "Translated": "选择配方：",
+      "Context": "CraftingRecipeLookup.GetPlaceholder",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Choose emote mode for \"",
+      "Translated": "选择情感动作模式：",
+      "Context": "EmoteModeLookup.GetPlaceholder",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Default Choice",
+      "Translated": "默认选择",
+      "Context": "EmoteModeChoicerResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Only Motion",
+      "Translated": "仅动作",
+      "Context": "EmoteModeChoicerResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Choose facewear for \"",
+      "Translated": "选择面部饰品：",
+      "Context": "FacewearLookup.GetPlaceholder",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Type to search...",
+      "Translated": "输入以搜索...",
+      "Context": "ModuleLookup.GetPlaceholder",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Current Duty",
+      "Translated": "当前任务",
+      "Context": "WikiLookup.Lookup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Duty",
+      "Translated": "任务",
+      "Context": "WikiLookup.Lookup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Quest",
+      "Translated": "任务",
+      "Context": "WikiLookup.Lookup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Item",
+      "Translated": "道具",
+      "Context": "WikiLookup.Lookup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Search for \"",
+      "Translated": "搜索“",
+      "Context": "WikiTextResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "\" in wikis...",
+      "Translated": "”于 Wiki...",
+      "Context": "WikiTextResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Choose site for \"",
+      "Translated": "选择站点：",
+      "Context": "WikiSiteLookup.GetPlaceholder",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Open on ",
+      "Translated": "打开于",
+      "Context": "WikiSiteChoicerResult.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "a special set of bespoke, handcrafted DN emojis",
+      "Translated": "一套特别定制的手工 DN 表情",
+      "Context": "EmoteSetReward.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "DN Desktop Wallpaper",
+      "Translated": "DN 桌面壁纸",
+      "Context": "WallpaperReward.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Wallpaper bought!",
+      "Translated": "壁纸已购买！",
+      "Context": "WallpaperReward.Bought",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "Congrats!",
+      "Translated": "恭喜！",
+      "Context": "WallpaperReward.Bought",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Failed to set wallpaper.",
+      "Translated": "设置壁纸失败。",
+      "Context": "Wallpaper.Set",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "Failed to set wallpaper as the registry key could not found.",
+      "Translated": "设置壁纸失败，找不到注册表项。",
+      "Context": "Wallpaper.Set",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Squeaky Toy Dispenser",
+      "Translated": "吱吱玩具发放器",
+      "Context": "GameWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "HUGE Frisbee",
+      "Translated": "超大飞盘",
+      "Context": "GameWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Scooby Snacks",
+      "Translated": "狗狗零食",
+      "Context": "GameWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Water Hose + Pool set",
+      "Translated": "水管+泳池套装",
+      "Context": "GameWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Endless supply of Premium Dog Food",
+      "Translated": "无限量高级狗粮",
+      "Context": "GameWindow..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "DN Farm###dnwindow",
+      "Translated": "DN 农场",
+      "Context": "GameWindow..ctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Earned rested DN!",
+      "Translated": "获得休息 DN！",
+      "Context": "GameWindow.EarnRestedDn",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Title"
+    },
+    {
+      "Original": "You earned ",
+      "Translated": "你获得了",
+      "Context": "GameWindow.EarnRestedDn",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": " DN from resting for ",
+      "Translated": "DN，休息了",
+      "Context": "GameWindow.EarnRestedDn",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": " hours.",
+      "Translated": "小时。",
+      "Context": "GameWindow.EarnRestedDn",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ Notification.set_Content"
+    },
+    {
+      "Original": "Dogcred",
+      "Translated": "狗币",
+      "Context": "GameWindow.GetDogName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " Dog",
+      "Translated": "狗",
+      "Context": "GameWindow.GetDogName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "\"You did very well, ",
+      "Translated": "“你做得非常好，",
+      "Context": "GameWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": ".\nA strange traveler from another world handed me this... Here, it is for you.\"",
+      "Translated": "。\n一个来自异世界的奇怪旅行者把这个交给了我……来，这是给你的。”",
+      "Context": "GameWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "You have a Golden Ticket! Keep it close and don't tell anyone... you never know.\nNow run home, and don't stop till you get there.",
+      "Translated": "你有一张金券！收好它，别告诉任何人……世事难料。\n现在快回家，到家之前别停下。",
+      "Context": "GameWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Your ticket number:",
+      "Translated": "您的票号：",
+      "Context": "GameWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "OK",
+      "Translated": "确定",
+      "Context": "GameWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Your farm has space for ",
+      "Translated": "您的农场可容纳",
+      "Context": "GameWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": " dogs.",
+      "Translated": "只狗。",
+      "Context": "GameWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Farm",
+      "Translated": "农场",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "my love",
+      "Translated": "我的爱",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "\"Peace has returned to the DN hills.\nEveryone is living happily.\nYou did it.\nThank you, ",
+      "Translated": "“和平已重回DN山丘。\n大家都幸福地生活着。\n你做到了。\n谢谢你，",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Oh no! A thief is here to rob you!\nYou have to stop it!\n\nYou have ",
+      "Translated": "哦不！有小偷来抢劫你！\n你必须阻止它！\n\n你还有",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " seconds left until he'll get away!",
+      "Translated": "秒，之后他就会逃走！",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Call the cops",
+      "Translated": "报警",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Oh no! A thief has robbed your farm and you didn't catch it!\nYou lost ",
+      "Translated": "哦不！小偷洗劫了你的农场，而你没抓住他！\n你失去了",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " DN, that's a lot...",
+      "Translated": "DN，这可真不少……",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Keep your eyes peeled! A thief may appear...",
+      "Translated": "睁大眼睛！小偷可能会出现……",
+      "Context": "GameWindow.DrawFarmTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Buy ",
+      "Translated": "购买",
+      "Context": "GameWindow.DrawFarmTabNoseShop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Release from duty###release",
+      "Translated": "解除任务",
+      "Context": "GameWindow.DrawFarmTabNoseShop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Buy your first ",
+      "Translated": "购买你的第一只",
+      "Context": "GameWindow.DrawFarmTabNoseShop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Only pro dogs know this: You can hold SHIFT to buy 10 at once!",
+      "Translated": "只有老手狗才知道：按住SHIFT可一次购买10只！",
+      "Context": "GameWindow.DrawFarmTabNoseShop",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Buy your first dog (",
+      "Translated": "购买你的第一只狗（",
+      "Context": "GameWindow.DrawFarmTabNoseShop",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "City",
+      "Translated": "城市",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImRaii.TabItem"
+    },
+    {
+      "Original": "DN Construction Co.",
+      "Translated": "DN建筑公司",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "\"Working on it! We'll be done in ",
+      "Translated": "“正在处理！我们将在",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " minutes.\"",
+      "Translated": "分钟后完成。”",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "\"Hey, what's up. Need a bigger farm?\nYou'll be able to get more dogs if you upgrade it.\"",
+      "Translated": "“嘿，怎么了。需要更大的农场吗？\n升级后你就能养更多狗了。”",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Buy Farm Upgrade: ",
+      "Translated": "购买农场升级：",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "\"Sorry, your farm is as big as it gets.\nNothing I can do, we don't have the permit to make it any bigger!\"",
+      "Translated": "“抱歉，你的农场已经最大了。\n我无能为力，我们没有扩建许可！”",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "DN Needs & Utilities",
+      "Translated": "DN需求与设施",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "\"Hi, welcome to DN Needs & Utilities. Here you can buy stuff that your dogs will love.\nWhat can I get you?\"",
+      "Translated": "“你好，欢迎来到DN需求与设施。这里可以买到你的狗会喜欢的东西。\n需要点什么？”",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "This will increase DN gain by ",
+      "Translated": "这将使DN获取量增加",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "DN Boutique",
+      "Translated": "DN精品店",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "\"The DN boutique is still under renovation, we're very sorry!\nPlease come back when you cleared the game, we should be done by then!\"",
+      "Translated": "“DN精品店仍在装修中，非常抱歉！\n请在游戏开始后回来，那时我们应该就完工了！”",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "\"Hello! Welcome to the DN Boutique!\nWe offer a wide variety of handcrafted DN accessories to improve your living space!\"",
+      "Translated": "“你好！欢迎来到DN精品店！\n我们提供各种手工DN饰品，改善你的生活空间！”",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "DN Sage",
+      "Translated": "DN贤者",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "\"If you are weary of this world, you may start anew.\nConsider your life a journey, and you will find your way.\nAltogether, you have earned ",
+      "Translated": "“若你厌倦了这个世界，可以重新开始。\n将人生视为旅程，你终会找到方向。\n你总共获得了",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": " DN.\n\nIs this what you want?\"",
+      "Translated": "DN。\n\n确定要这样做吗？”",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Yes",
+      "Translated": "是",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "No",
+      "Translated": "否",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Goat's Golden Ticket",
+      "Translated": "山羊的金票",
+      "Context": "GameWindow.DrawCityTab",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    }
+  ],
+  "resources": [],
+  "attributes": [
+    {
+      "Original": "Search in Crafting Log",
+      "Translated": "在制作笔记中搜索",
+      "Context": "[属性] DisplayAttribute.Name Dalamud.FindAnything.Configuration/CraftingSingleSelectAction::SearchInLog",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Open in Crafting Log",
+      "Translated": "在制作笔记中打开",
+      "Context": "[属性] DisplayAttribute.Name Dalamud.FindAnything.Configuration/CraftingSingleSelectAction::OpenInLog",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Search in Wotsit",
+      "Translated": "在 Wotsit 中搜索",
+      "Context": "[属性] DisplayAttribute.Name Dalamud.FindAnything.Configuration/CraftingMergedSelectAction::SearchInFinder",
+      "Source": "ai:deepseek"
+    }
+  ],
+  "importedAt": "2026-10-17T10:45:55",
+  "imported": {
+    "archive": "uit-direct-2026-10-17T10-45-42-919Z-af6e7aae-2026-10-17T104555.json",
+    "accepted": 208,
+    "filled": 208,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 208 条 `Dalamud.FindAnything` 的界面文字译文，已收为**独立译文包** `uit-packs/Dalamud.FindAnything@user-2cdcc5.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 208 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
