@@ -94,20 +94,8 @@
       "Source": "ai:deepseek"
     },
     {
-      "Original": "emote-vis",
-      "Translated": "表情可见性",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
       "Original": "Items",
       "Translated": "物品",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
-      "Original": "item-vis",
-      "Translated": "物品可见性",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -118,26 +106,8 @@
       "Source": "ai:deepseek"
     },
     {
-      "Original": "minion-vis",
-      "Translated": "宠物可见性",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
       "Original": "Actions",
       "Translated": "技能",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
-      "Original": "action-vis",
-      "Translated": "动作显示",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
-      "Original": "instance-vis",
-      "Translated": "副本显示",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -148,32 +118,14 @@
       "Source": "ai:deepseek"
     },
     {
-      "Original": "tribe-vis",
-      "Translated": "蛮族显示",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
       "Original": "Jobs",
       "Translated": "职业",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
     {
-      "Original": "job-vis",
-      "Translated": "职业显示",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
       "Original": "Filter",
       "Translated": "筛选",
-      "Context": "PluginUi.DrawMainWindow",
-      "Source": "ai:deepseek"
-    },
-    {
-      "Original": "indent-",
-      "Translated": "缩进-",
       "Context": "PluginUi.DrawMainWindow",
       "Source": "ai:deepseek"
     },
@@ -257,5 +209,15 @@
     }
   ],
   "resources": [],
-  "attributes": []
+  "attributes": [],
+  "skipped": [
+    "emote-vis",
+    "item-vis",
+    "minion-vis",
+    "action-vis",
+    "instance-vis",
+    "tribe-vis",
+    "job-vis",
+    "indent-"
+  ]
 }
