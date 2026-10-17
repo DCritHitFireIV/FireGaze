@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+  <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+  <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+ </PropertyGroup>
+ <ItemGroup>
+  <PackageReference Include="DailyRoutines.CodeAnalysis" Version="2.6.0" PrivateAssets="all" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAppearanceModels.cs" Link="PortraitAppearanceModels.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAppearanceCatalog.cs" Link="PortraitAppearanceCatalog.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAppearanceGameData.cs" Link="PortraitAppearanceGameData.cs" />
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAppearanceDalamud.cs" Link="PortraitAppearanceDalamud.cs" />
+  <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>
+  <Reference Include="Lumina"><HintPath>$(DALAMUD_HOME)/Lumina.dll</HintPath></Reference>
+  <Reference Include="Lumina.Excel"><HintPath>$(DALAMUD_HOME)/Lumina.Excel.dll</HintPath></Reference>
+  <Reference Include="Microsoft.Extensions.ObjectPool"><HintPath>$(DALAMUD_HOME)/Microsoft.Extensions.ObjectPool.dll</HintPath></Reference>
+ </ItemGroup>
+</Project>
