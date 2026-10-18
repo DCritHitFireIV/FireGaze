@@ -5,8 +5,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewPresentation.cs')">$(DefineConstants);HAS_PRESENTATION</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitHistoryPhotoLayout.cs')">$(DefineConstants);HAS_PHOTO_LAYOUT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewPresentation.cs" Link="PortraitPreviewPresentation.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewPresentation.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryPhotoLayout.cs" Link="PortraitHistoryPhotoLayout.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitHistoryPhotoLayout.cs')" />
   </ItemGroup>
 </Project>

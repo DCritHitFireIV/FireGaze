@@ -59,6 +59,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     private readonly IPortraitPreviewViewModel feature;
     private readonly IDalamudPluginInterface pluginInterface;
     private readonly ITextureProvider textures;
+    private readonly PortraitHistoryPhotos? photos;
     private readonly Dictionary<string, UldWrapper?> ulds = new(StringComparer.Ordinal);
     private readonly Dictionary<(string Uld, string Texture, int Part), IDalamudTextureWrap?> parts = new();
     private PortraitSlot selectedSlot = PortraitSlot.Head;
@@ -71,12 +72,13 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     private bool showHistory;
     private PortraitBrowserItem? inspectedItem;
 
-    public PortraitPreviewWindow(IPortraitPreviewViewModel feature, IDalamudPluginInterface pluginInterface, ITextureProvider textures)
+    public PortraitPreviewWindow(IPortraitPreviewViewModel feature, IDalamudPluginInterface pluginInterface, ITextureProvider textures, PortraitHistoryPhotos? photos = null)
         : base("肖像实时编辑###FireGazePortraitPreview", ImGuiWindowFlags.None)
     {
         this.feature = feature;
         this.pluginInterface = pluginInterface;
         this.textures = textures;
+        this.photos = photos;
         Size = new Vector2(920, 760);
         SizeCondition = ImGuiCond.FirstUseEver;
         SizeConstraints = new WindowSizeConstraints { MinimumSize = new Vector2(700, 540) };

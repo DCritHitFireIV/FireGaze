@@ -60,7 +60,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             identity => session?.BlockSave(identity) == true, Error, Plugin.AgentLifecycle, Plugin.AddonLifecycle);
         session = new(target);
         InitializeEditing(configDirectory);
-        window = new(this, pluginInterface, Plugin.Textures);
+        InitializePhotos(configDirectory);
+        window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
         diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
         diagnostics.RegisterFunc(() => OnFramework(Diagnostics));
@@ -97,6 +98,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             plateMirrorDisposalRestored = target.PlateMirrorDisposalRestored,
             canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
             historyRows, appearanceGroups,
+            historyPhotos = photos.Diagnostics(),
+            historyPhotosView = window.HistoryPhotosView, historyWindowOpen = window.HistoryWindowOpen,
         });
     }
 
@@ -130,6 +133,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             inventory.ObserveRetainerLoads();
             session.Validate();
             PollEditing();
+            PollPhotos();
             editorAvailable = target.TryResolve(out _, out var bounds, out _);
             if (editorAvailable) buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
             if (!session.IsActive && window.IsOpen) window.IsOpen = false;
@@ -326,6 +330,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             }
             ImGui.End();
         }
+        photos.Draw(pointerHeld);
         windows.Draw();
     }
 
@@ -337,6 +342,11 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         else if (parts is ["status"]) Plugin.Chat.Print("[肖像实时编辑] " + Status);
         else if (parts is ["undo"]) Undo();
         else if (parts is ["redo"]) Redo();
+        else if (parts is ["history", var view] && view is "list" or "photos") Mutate(() =>
+        {
+            if (!session.IsActive) { Error("请先打开 FireGaze修改。"); return; }
+            window.OpenHistory(view == "photos");
+        });
         else if (parts is ["restore", var record] && long.TryParse(record, out var recordID) && recordID > 0) RestoreHistory(recordID);
         else if (parts is ["appearance", var group, var option] && int.TryParse(option, out var appearanceValue)) ChangeAppearance(group, appearanceValue);
         else if (parts is ["sync", "on"]) SetSyncPlate(true);
@@ -418,6 +428,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (disposed) return;
         void Release()
         {
+            photos.Dispose();
             FlushEditing();
             if (!session.Close() && !target.AbortCapturedEditor())
                 Plugin.Log.Error("[肖像实时预览] 外观还原及编辑器关闭均失败：{Error}", target.LastError ?? "未知原因");

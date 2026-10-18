@@ -132,8 +132,9 @@ namespace FireGaze.PortraitPreview
             IsPlateMirrorActive = false;
             return true;
         }
+        public PortraitEditorSnapshot? MirroredSnapshot;
         public bool UpdatePlateMirror(PortraitIdentity identity, PortraitEditorSnapshot snapshot, bool enabled)
-        { if (!IsCurrent(identity)) return false; MirrorUpdates++; IsPlateMirrorActive = enabled; return enabled; }
+        { if (!IsCurrent(identity)) return false; MirrorUpdates++; MirroredSnapshot = snapshot.Copy(); IsPlateMirrorActive = enabled; return enabled; }
         public void Dispose() => NativeMemory.Free(State);
     }
 
@@ -154,6 +155,8 @@ namespace FireGaze.PortraitPreview
         public PortraitHistoryKey? Key => observedKey;
         public int MirrorUpdates => target.MirrorUpdates;
         public bool DeferredBaseline => deferredBaselineSync;
+        public PortraitEditorSnapshot? ObservedSnapshot => observedEditor;
+        public PortraitEditorSnapshot? MirroredSnapshot => target.MirroredSnapshot;
 
         public PortraitPreviewFeature(string file, int byteLimit = PortraitHistoryStore.MaximumBytes)
         {

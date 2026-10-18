@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><NoWarn>$(NoWarn);CA1416</NoWarn>
+    <PhotoServiceSource Condition="'$(PhotoServiceSource)' == ''">../../src/FireGaze/PortraitPreview/PortraitPhotoService.cs</PhotoServiceSource>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(PhotoServiceSource)" Link="PortraitPhotoService.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailCache.cs" Link="PortraitThumbnailCache.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailCaptureGate.cs" Link="PortraitThumbnailCaptureGate.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailTextureCache.cs" Link="PortraitThumbnailTextureCache.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailImage.cs" Link="PortraitThumbnailImage.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryStore.cs" Link="PortraitHistoryStore.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryWriter.cs" Link="PortraitHistoryWriter.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="PortraitEditorState.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
+    <Reference Include="Dalamud.Bindings.ImGui"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.Bindings.ImGui.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

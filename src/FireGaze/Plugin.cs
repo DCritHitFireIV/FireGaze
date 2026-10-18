@@ -38,6 +38,7 @@ public sealed class Plugin : IDalamudPlugin
     ///     纹理服务（图标落盘缓存 → 纹理用；卫月注入）。
     /// </summary>
     [PluginService] public static ITextureProvider Textures { get; private set; } = null!;
+    [PluginService] public static ITextureReadbackProvider TextureReadback { get; private set; } = null!;
 
     /// <summary>
     ///     游戏数据（「插件汉化」的 FF14 术语表读 Lumina 表用；不联网）。
@@ -599,7 +600,7 @@ public sealed class Plugin : IDalamudPlugin
         if (trimmed.Equals("portrait", StringComparison.OrdinalIgnoreCase)
             || trimmed.StartsWith("portrait ", StringComparison.OrdinalIgnoreCase))
         {
-            if (portraitPreview is null) Chat.PrintError("[肖像实时预览] 功能正在初始化，请稍后再试。");
+            if (portraitPreview is null) Chat.PrintError("[肖像实时编辑] 功能正在初始化，请稍后再试。");
             else portraitPreview.OnCommand(trimmed["portrait".Length..].TrimStart());
             return;
         }

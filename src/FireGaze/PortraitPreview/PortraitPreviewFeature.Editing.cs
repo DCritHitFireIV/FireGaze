@@ -13,6 +13,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private PortraitHistoryStore history = null!;
     private PortraitHistoryBatch historyBatch = null!;
     private PortraitEditorSnapshot? observedEditor;
+    private PortraitEditorSnapshot? historyObservedEditor;
+    private PortraitEditorSnapshot? historyLabelBaseline;
     private PortraitHistoryKey? observedKey;
     private PortraitIdentity observedIdentity;
     private PortraitHistoryListItem[] historyRows = [];
@@ -68,10 +70,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var owner = CurrentCharacter();
         if (historyOwner != owner)
         {
-            HandleHistoryResult(historyBatch.Flush());
+            HandleHistoryBatchResult(historyBatch.Flush());
             RequestPlateMirrorClose();
             historyOwner = owner;
             observedEditor = null;
+            historyObservedEditor = null;
             observedIdentity = default;
             observedKey = null;
             deferredBaselineSync = false;
@@ -96,8 +99,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
             if (observedIdentity.IsValid && target.IsCurrent(observedIdentity)) return;
             if (observedEditor is not null)
             {
-                HandleHistoryResult(historyBatch.Flush());
+                HandleHistoryBatchResult(historyBatch.Flush());
                 observedEditor = null;
+                historyObservedEditor = null;
                 observedIdentity = default;
                 observedKey = null;
                 deferredBaselineSync = false;
@@ -121,51 +125,73 @@ internal sealed unsafe partial class PortraitPreviewFeature
             // Close can restore while the addon is hidden. The first ready sample is a restored
             // baseline, even if strict capture could not run during the close itself.
             historyBatch.Cancel();
+            historyLabelBaseline = null;
             observedEditor = captured;
+            historyObservedEditor = captured;
             appearanceGroups = appearance.Build(captured.Customize);
         }
         deferredBaselineSync = false;
         if (observedIdentity != identity || observedKey != key)
         {
-            HandleHistoryResult(historyBatch.Flush());
+            HandleHistoryBatchResult(historyBatch.Flush());
             observedIdentity = identity;
             observedKey = key;
             observedEditor = captured;
+            historyObservedEditor = captured;
             HandleHistoryResult(history.Record(key, captured.ToJSON(), "打开肖像"));
             appearanceGroups = appearance.Build(captured.Customize);
             RefreshHistoryRows();
         }
         else
         {
-            var previous = observedEditor;
-            var changed = previous is null || !previous.SameForHistory(captured);
+            var previous = historyObservedEditor;
+            var recording = ForHistory(captured, previous);
+            var changed = previous is null || !previous.SameForHistory(recording);
+            // Session synchronization and photo eligibility always see the real live editor,
+            // independently of which animation fields are eligible for durable history.
+            observedEditor = captured;
             if (changed)
             {
-                var label = DescribeChange(previous, captured);
-                observedEditor = captured;
+                historyLabelBaseline ??= previous;
+                var label = DescribeChange(historyLabelBaseline, recording);
+                historyObservedEditor = recording;
                 appearanceGroups = appearance.Build(captured.Customize);
-                HandleHistoryResult(historyBatch.Observe(key, captured.ToJSON(), pointerHeld, keyboard, label));
+                HandleHistoryBatchResult(historyBatch.Observe(key, recording.ToJSON(), pointerHeld, keyboard, label));
             }
             else if (observedEditor is not null)
             {
                 // Keep a canonical payload while playback advances; release edges still reach Batch.
-                HandleHistoryResult(historyBatch.AdvanceInput(pointerHeld, keyboard));
+                HandleHistoryBatchResult(historyBatch.AdvanceInput(pointerHeld, keyboard));
             }
-            HandleHistoryResult(historyBatch.FlushIdle());
+            HandleHistoryBatchResult(historyBatch.FlushIdle());
         }
         if (syncPlate && !target.UpdatePlateMirror(identity, captured, true))
             historyStatus = "等待本人铭牌预览加载完成";
         PublishHistoryNavigation();
     }
 
-    private static string DescribeChange(PortraitEditorSnapshot? before, PortraitEditorSnapshot after)
+    private string DescribeChange(PortraitEditorSnapshot? before, PortraitEditorSnapshot after)
+        => PortraitEditLabels.Describe(before, after, before is null ? null : appearance.Build(before.Customize), appearance.Build(after.Customize));
+
+    private static PortraitEditorSnapshot ForHistory(PortraitEditorSnapshot current, PortraitEditorSnapshot? baseline)
     {
-        if (before is null) return "编辑肖像";
-        if (!before.Customize.SequenceEqual(after.Customize)) return "美容师修改";
-        if (!before.Look.Pieces.SequenceEqual(after.Look.Pieces)) return "换装或染色";
-        if (before.Look.HeadVisible != after.Look.HeadVisible || before.Look.WeaponVisible != after.Look.WeaponVisible || before.Look.Visor != after.Look.Visor) return "装备显示设置";
-        if (before.Composition.Background != after.Composition.Background || before.Composition.Frame != after.Composition.Frame || before.Composition.Decoration != after.Composition.Decoration) return "背景与装饰";
-        return "姿势、镜头与灯光";
+        if (baseline is null || current.Composition.Paused) return current;
+        // Playing or selecting an unpaused action is a preview. Keep the last history pose
+        // until the player freezes a frame, while still recording camera/look/light edits.
+        var previous = baseline.Composition;
+        return current with { Composition = current.Composition with
+        {
+            BannerTimeline = previous.BannerTimeline,
+            PoseClassJob = previous.PoseClassJob,
+            AnimationProgress = previous.AnimationProgress,
+            Paused = previous.Paused,
+        } };
+    }
+
+    private void HandleHistoryBatchResult(PortraitHistoryWriteResult? result)
+    {
+        if (result is not null) historyLabelBaseline = null;
+        HandleHistoryResult(result);
     }
 
     private void HandleHistoryResult(PortraitHistoryWriteResult? result)
@@ -200,7 +226,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void FlushEditing()
     {
-        HandleHistoryResult(historyBatch.Flush());
+        HandleHistoryBatchResult(historyBatch.Flush());
         RequestPlateMirrorClose();
     }
 
@@ -230,7 +256,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)) return;
         var before = target.CaptureEditorState(identity);
         if (before is null) return;
-        HandleHistoryResult(historyBatch.Flush());
+        HandleHistoryBatchResult(historyBatch.Flush());
         if (!appearance.TryChange(before.Customize, groupID, value, out var customized, out var reason)) { Error(reason); return; }
         if (!target.ApplyEditorState(identity, before with { Customize = customized })) { Error(target.LastError ?? "暂时无法预览此美容选项，请稍后重试。"); return; }
         var selectedGroup = appearance.Build(customized).FirstOrDefault(group => group.ID == groupID);
@@ -243,12 +269,18 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (!target.TryResolve(out var identity, out _, out _) || target.CaptureEditorState(identity) is not { } captured
             || GetHistoryKey(identity, captured) is not { } key) return;
-        HandleHistoryResult(historyBatch.Flush());
+        HandleHistoryBatchResult(historyBatch.Flush());
+        var baseline = observedIdentity == identity && observedKey == key ? historyObservedEditor : null;
+        var recording = ForHistory(captured, baseline);
+        if (baseline is not null
+            && label is "清空装备部位" or "装备显示设置" or "美容师修改")
+            label = DescribeChange(baseline, recording);
         observedEditor = captured;
+        historyObservedEditor = recording;
         observedIdentity = identity;
         observedKey = key;
         appearanceGroups = appearance.Build(captured.Customize);
-        HandleHistoryResult(history.Record(key, captured.ToJSON(), label));
+        HandleHistoryResult(history.Record(key, recording.ToJSON(), label));
         if (syncPlate) _ = target.UpdatePlateMirror(identity, captured, true);
         RefreshHistoryRows();
     }
@@ -262,7 +294,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (!target.TryResolve(out var identity, out _, out _)) { Error("请先打开对应肖像编辑器。"); return; }
         var before = target.CaptureEditorState(identity);
         if (before is null || GetHistoryKey(identity, before) is not { } key) return;
-        HandleHistoryResult(historyBatch.Flush());
+        HandleHistoryBatchResult(historyBatch.Flush());
         PortraitHistorySelection selected;
         var found = kind switch
         {
@@ -292,6 +324,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         }
         _ = session.ObserveLook(desired.Look);
         observedEditor = target.CaptureEditorState(identity) ?? desired;
+        historyObservedEditor = ForHistory(observedEditor, desired);
         observedIdentity = identity;
         observedKey = key;
         appearanceGroups = appearance.Build(observedEditor.Customize);
@@ -315,10 +348,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void SynchronizeAfterClose()
     {
         historyBatch.Cancel();
+        historyLabelBaseline = null;
         deferredBaselineSync = true;
         if (target.TryResolve(out var identity, out _, out _) && target.CaptureEditorState(identity) is { } restored)
         {
             observedEditor = restored;
+            historyObservedEditor = restored;
             observedIdentity = identity;
             observedKey = GetHistoryKey(identity, restored);
             appearanceGroups = appearance.Build(restored.Customize);

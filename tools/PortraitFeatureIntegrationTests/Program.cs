@@ -15,6 +15,8 @@ unsafe class Program
         RaptureGearsetModule.Value=(RaptureGearsetModule*)NativeMemory.AllocZeroed((nuint)sizeof(RaptureGearsetModule));
         try
         {
+            PortraitOperationLabelTests.Run(root, Check);
+            PortraitPlaybackHistoryTests.Run(root, Check);
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"session-history.json")))
             {
                 feature.Sample();

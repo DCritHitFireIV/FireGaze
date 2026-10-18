@@ -9,6 +9,21 @@ namespace FireGaze.PortraitPreview;
 internal sealed partial class PortraitPreviewWindow
 {
     private static readonly ConditionalWeakTable<IPortraitPreviewViewModel, PortraitHistoryPresentation> HistoryPresentation = new();
+    private bool historyPhotosView;
+    private bool historyViewChanged;
+    private float historyListScroll;
+    private float historyPhotoScroll;
+    private int historyPhotoRequests;
+
+    public bool HistoryPhotosView => historyPhotosView;
+    public bool HistoryWindowOpen => showHistory;
+
+    public void OpenHistory(bool photoView)
+    {
+        historyViewChanged |= historyPhotosView != photoView;
+        historyPhotosView = photoView;
+        showHistory = true;
+    }
 
     private void DrawUndoRedo()
     {
@@ -50,19 +65,33 @@ internal sealed partial class PortraitPreviewWindow
     {
         if (!showHistory) return;
         var workArea = ImGui.GetMainViewport().WorkSize;
-        ImGui.SetNextWindowSizeConstraints(Vector2.Zero, PortraitPopupLayout.MaximumSize(workArea, Scale));
+        ImGui.SetNextWindowSizeConstraints(Vector2.Zero,
+            Vector2.Min(PortraitPopupLayout.MaximumSize(workArea, Scale), new Vector2(960, 1040) * Scale));
         ImGui.SetNextWindowSize(PortraitPopupLayout.PreferredSize(new Vector2(460, 570) * Scale, workArea, Scale), ImGuiCond.FirstUseEver);
         if (ImGui.Begin("肖像历史记录###FireGazePortraitHistory", ref showHistory))
+        {
+            if (DrawTab("操作记录", !historyPhotosView, true) && historyPhotosView)
+            { historyPhotosView = false; historyViewChanged = true; }
+            ImGui.SameLine();
+            if (DrawTab("照片", historyPhotosView, true) && !historyPhotosView)
+            { historyPhotosView = true; historyViewChanged = true; }
             DrawHistoryRows(feature, true);
+        }
         ImGui.End();
     }
 
-    internal static void DrawHistoryRows(IPortraitPreviewViewModel feature, bool allowRestore)
+    internal void DrawHistoryRows(IPortraitPreviewViewModel feature, bool allowRestore)
     {
+        historyPhotoRequests = 0;
         if (!string.IsNullOrWhiteSpace(feature.HistoryStatus)) ImGui.TextWrapped(feature.HistoryStatus);
         if (!allowRestore) ImGui.TextWrapped("请先打开对应的肖像编辑器。");
         ImGui.Separator();
         ImGui.BeginChild("###PortraitHistoryEntries", new Vector2(0, 0), false);
+        if (historyViewChanged)
+        {
+            ImGui.SetScrollY(historyPhotosView ? historyPhotoScroll : historyListScroll);
+            historyViewChanged = false;
+        }
         var records = feature.History;
         if (records.Count == 0) ImGui.TextUnformatted("暂无编辑记录。");
         var days = HistoryPresentation.GetValue(feature, _ => new PortraitHistoryPresentation()).Get(records);
@@ -70,6 +99,11 @@ internal sealed partial class PortraitPreviewWindow
         {
             if (!ImGui.CollapsingHeader(PortraitHistoryLabels.DayHeader(day.Date, day.Records.Count), ImGuiTreeNodeFlags.DefaultOpen)) continue;
             var dayRecords = day.Records;
+            if (historyPhotosView)
+            {
+                DrawHistoryPhotos(dayRecords, allowRestore);
+                continue;
+            }
             var clipper = new ImGuiListClipper();
             clipper.Begin(dayRecords.Count, ImGui.GetTextLineHeightWithSpacing());
             while (clipper.Step())
@@ -80,22 +114,72 @@ internal sealed partial class PortraitPreviewWindow
                 var label = PortraitHistoryLabels.RecordLabel(record);
                 if (ImGui.Selectable(label, record.IsCurrent) && allowRestore) feature.RestoreHistory(record.ID);
                 FireGazeSymbols.DrawSelection(ImGui.GetItemRectMin(), ImGui.GetItemRectMax(), record.IsCurrent, ImGui.IsItemFocused());
-                if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) || ImGui.IsItemFocused())
-                {
-                    ImGui.BeginTooltip();
-                    ImGui.PushTextWrapPos(ImGui.GetFontSize() * 22f);
-                    ImGui.TextUnformatted($"{record.At.ToLocalTime():yyyy-MM-dd HH:mm:ss}{(record.IsCurrent ? " · 当前" : "")}");
-                    ImGui.TextWrapped(record.Label);
-                    ImGui.Separator();
-                    ImGui.TextWrapped(allowRestore ? "恢复此刻的装备、美容、姿势、镜头、灯光及装饰" : "请先打开对应肖像编辑器");
-                    ImGui.PopTextWrapPos();
-                    ImGui.EndTooltip();
-                }
+                DrawHistoryTooltip(record, allowRestore);
                 ImGui.PopID();
             }
             clipper.End();
         }
+        if (historyPhotosView) historyPhotoScroll = ImGui.GetScrollY(); else historyListScroll = ImGui.GetScrollY();
         ImGui.EndChild();
+    }
+
+    private void DrawHistoryPhotos(IReadOnlyList<PortraitHistoryListItem> records, bool allowRestore)
+    {
+        var gap = ImGui.GetStyle().ItemSpacing;
+        var layout = PortraitHistoryPhotoLayout.For(ImGui.GetContentRegionAvail().X, gap.X, Scale);
+        var captionHeight = ImGui.GetTextLineHeightWithSpacing() * 3;
+        var rowHeight = layout.ImageHeight + captionHeight + gap.Y;
+        var clipper = new ImGuiListClipper();
+        clipper.Begin((records.Count + layout.Columns - 1) / layout.Columns, rowHeight);
+        while (clipper.Step())
+        for (var row = clipper.DisplayStart; row < clipper.DisplayEnd; row++)
+        for (var column = 0; column < layout.Columns; column++)
+        {
+            var index = row * layout.Columns + column;
+            if (index >= records.Count) break;
+            var record = records[index];
+            if (column != 0) ImGui.SameLine();
+            ImGui.PushID(record.ID.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            ImGui.BeginGroup();
+            var origin = ImGui.GetCursorScreenPos();
+            var card = new Vector2(layout.Width, rowHeight - gap.Y);
+            var clicked = ImGui.Selectable("###PortraitHistoryPhoto", record.IsCurrent, ImGuiSelectableFlags.None, card);
+            var focused = ImGui.IsItemFocused();
+            var draw = ImGui.GetWindowDrawList();
+            var imageSize = new Vector2(layout.Width, layout.ImageHeight);
+            if (historyPhotoRequests++ < 32 && photos?.Get(record.ID) is { } texture)
+                draw.AddImage(texture.Handle, origin, origin + imageSize);
+            else
+            {
+                draw.AddRectFilled(origin, origin + imageSize, ImGui.GetColorU32(FireGazePalette.Panel));
+                var text = "暂无照片";
+                draw.AddText(origin + (imageSize - ImGui.CalcTextSize(text)) * .5f, ImGui.GetColorU32(FireGazePalette.Muted), text);
+            }
+            FireGazeSymbols.DrawSelection(origin, origin + card, record.IsCurrent, focused);
+            DrawHistoryTooltip(record, allowRestore);
+            var caption = origin + new Vector2(4 * Scale, layout.ImageHeight + gap.Y);
+            draw.PushClipRect(origin, origin + card, true);
+            draw.AddText(caption, ImGui.GetColorU32(FireGazePalette.Text), $"{record.At.ToLocalTime():HH:mm:ss}{(record.IsCurrent ? " · 当前" : "")}");
+            draw.AddText(caption + new Vector2(0, ImGui.GetTextLineHeightWithSpacing()), ImGui.GetColorU32(FireGazePalette.Text), record.Label);
+            draw.PopClipRect();
+            if (clicked && allowRestore) feature.RestoreHistory(record.ID);
+            ImGui.EndGroup();
+            ImGui.PopID();
+        }
+        clipper.End();
+    }
+
+    private static void DrawHistoryTooltip(PortraitHistoryListItem record, bool allowRestore)
+    {
+        if (!ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) && !ImGui.IsItemFocused()) return;
+        ImGui.BeginTooltip();
+        ImGui.PushTextWrapPos(ImGui.GetFontSize() * 22f);
+        ImGui.TextUnformatted($"{record.At.ToLocalTime():yyyy-MM-dd HH:mm:ss}{(record.IsCurrent ? " · 当前" : "")}");
+        ImGui.TextWrapped(record.Label);
+        ImGui.Separator();
+        ImGui.TextWrapped(allowRestore ? "恢复此刻的装备、美容、姿势、镜头、灯光及装饰" : "请先打开对应肖像编辑器");
+        ImGui.PopTextWrapPos();
+        ImGui.EndTooltip();
     }
 
     private void DrawAppearance()

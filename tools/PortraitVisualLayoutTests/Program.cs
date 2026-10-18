@@ -26,6 +26,21 @@ Check(PortraitPreviewLayout.FitsInline(500, 350, 140, 10), "toolbar can use exac
 Check(!PortraitPreviewLayout.FitsInline(500, 350, 141, 10), "toolbar wraps the next action instead of clipping its last pixel");
 Check(!PortraitPreviewLayout.FitsInline(0, 0, 30, 10), "zero-width content does not request an inline action");
 
+// A photo row must fit at every supported width without stretching a portrait.
+#if HAS_PHOTO_LAYOUT
+foreach (var scale in new[] { 1f, 1.25f, 1.5f, 2f })
+foreach (var width in new[] { 90f, 240f, 460f, 920f })
+{
+    var layout = PortraitHistoryPhotoLayout.For(width, 8 * scale, scale);
+    Check(layout.Columns >= 1 && layout.Columns * layout.Width + (layout.Columns - 1) * 8 * scale <= width + .01f,
+        $"photo cards fit available width {width}, scale {scale}");
+    Check(Math.Abs(layout.ImageHeight / layout.Width - 1.6f) < .0001f,
+        $"photo cards preserve portrait aspect at width {width}, scale {scale}");
+}
+#else
+Check(false, "history has no responsive photo grid layout");
+#endif
+
 var historyDate = new DateTime(2026, 10, 18);
 var historyRecord = new PortraitHistoryListItem(42,
     new DateTimeOffset(new DateTime(2026, 10, 18, 12, 34, 56, DateTimeKind.Local)), "发型：选项 12", true);
