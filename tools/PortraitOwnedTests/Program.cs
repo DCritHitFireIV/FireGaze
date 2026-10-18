@@ -50,10 +50,10 @@ Case("source snapshots replace atomically and ignore older observations", () => 
  c.ApplyRead(alice,bag,now.AddSeconds(-1),[Item(345)]); Check(c.BuildView(now).Items.Single().ItemID==123,"old observation ignored");
  c.ApplyRead(alice,bag,now.AddSeconds(2),[Item(456)]); Check(c.BuildView(now.AddSeconds(2)).Items.Single().ItemID==456,"new read replaces old");
 });
-Case("accounts characters and retainers never cross contaminate", () => {
+Case("content identities and retainers never cross contaminate", () => {
  var c=New(); c.ActivateCharacter(alice); c.ApplyRead(alice,retainerA,now,[Item(123)]); c.ApplyRead(alice,retainerB,now,[Item(234)]);
  c.ActivateCharacter(bob); Check(c.BuildView(now).Items.Count==0,"other character empty"); c.ApplyRead(bob,bag,now,[Item(345)]);
- c.ActivateCharacter(sameContentOtherAccount); Check(c.BuildView(now).Items.Count==0,"other account empty");
+ c.ActivateCharacter(sameContentOtherAccount); Check(c.BuildView(now).Items.Count==2,"same content account alias retains cache");
  c.ActivateCharacter(alice); Check(c.BuildView(now).Items.Count==2,"first character restored");
  Check(c.BuildView(now).Sources.All(s=>s.Status==OwnedReadStatus.PossiblyStale),"reactivation marks stale");
  Check(c.BuildView(now).Items.SelectMany(i=>i.Variants).Select(v=>v.Source.RetainerID).Order().SequenceEqual(new ulong[]{501,502}),"retainer itemIDs retained");
@@ -99,5 +99,7 @@ var nativeResult=NativeReadTests.Run(); passed+=nativeResult.Passed;failed+=nati
 var fileResult=CacheFileTests.Run();passed+=fileResult.Passed;failed+=fileResult.Failed;
 var writerResult=CacheWriterTests.Run();passed+=writerResult.Passed;failed+=writerResult.Failed;
 var gateResult=RetainerGateTests.Run();passed+=gateResult.Passed;failed+=gateResult.Failed;
+var migrationResult=OwnedMigrationTests.Run();passed+=migrationResult.Passed;failed+=migrationResult.Failed;
+var migrationFileResult=OwnedCacheMigrationFileTests.Run();passed+=migrationFileResult.Passed;failed+=migrationFileResult.Failed;
 Console.WriteLine($"PortraitOwnedTests: {passed} passed, {failed} failed");
 Environment.ExitCode=failed==0 ? 0 : 1;

@@ -1,6 +1,6 @@
 namespace FireGaze.PortraitPreview;
 
-/// <summary>Immutable UTF-8 fragments retain the compact v1 format without a full caller-thread buffer.</summary>
+/// <summary>Immutable UTF-8 fragments retain the compact v2 format without a full caller-thread buffer.</summary>
 internal sealed class PortraitHistoryWriteDocument
 {
     private readonly byte[] prefix;

@@ -18,20 +18,20 @@ var directory = Path.Combine(Path.GetTempPath(), "portrait-history-tests-" + Gui
 Directory.CreateDirectory(directory);
 string FileFor(string name) => Path.Combine(directory, name + ".json");
 var now = new DateTimeOffset(2026, 10, 17, 23, 59, 0, TimeSpan.FromHours(8));
-var key = new PortraitHistoryKey(10, 20, PortraitHistoryEntryPoint.GearsetPortrait, 3, "race-1-job-19-v1");
+var key = new PortraitHistoryKey(20, PortraitHistoryEntryPoint.GearsetPortrait, 3, "race-1-job-19-v1");
 try
 {
+    passed += await HistoryMigrationTests.Run(directory);
     // Missing validation or shared cursors would accept bad identities or expose another portrait.
     using (var store = new PortraitHistoryStore(FileFor("isolation"), () => now))
     {
         Check(store.Record(key with { ContentID = 0 }, "{}").Status == PortraitHistoryWriteStatus.InvalidKey, "zero content identity is rejected");
-        Check(store.Record(key with { AccountID = 0 }, "{}").Status == PortraitHistoryWriteStatus.InvalidKey, "zero account identity is rejected");
         Check(store.Record(key, "not-json").Status == PortraitHistoryWriteStatus.InvalidJson, "malformed snapshot is rejected before changing history");
         Check(store.Record(key, "{\"head\":1}").Status == PortraitHistoryWriteStatus.Added, "first compatible portrait snapshot is recorded");
         var exportedFirst = JsonSerializer.SerializeToElement(store.GetRecords(key)[0]);
         Check(exportedFirst.TryGetProperty("Label", out var defaultLabel) && defaultLabel.GetString() == "编辑肖像", "history snapshots persist a readable operation label for the list UI");
-        foreach (var other in new[] { key with { AccountID = 11 }, key with { ContentID = 21 }, key with { SourceID = 4 }, key with { EntryPoint = PortraitHistoryEntryPoint.AdventurerPlate }, key with { CompatToken = "race-2-job-19-v1" } })
-            Check(store.GetRecords(other).Count == 0 && !store.TryGetUndo(other, out _), "account character entry source and compatibility boundaries isolate history");
+        foreach (var other in new[] { key with { ContentID = 21 }, key with { SourceID = 4 }, key with { EntryPoint = PortraitHistoryEntryPoint.AdventurerPlate }, key with { CompatToken = "race-2-job-19-v1" } })
+            Check(store.GetRecords(other).Count == 0 && !store.TryGetUndo(other, out _), "character entry source and compatibility boundaries isolate history");
         Check(store.Record(key, "{ \"head\" : 1 }").Status == PortraitHistoryWriteStatus.Duplicate && store.GetRecords(key).Count == 1, "format-only JSON differences do not create repeated snapshots");
         Check(store.CurrentRecordID(key) == store.GetRecords(key)[0].ID && store.CurrentRecordID(key with { SourceID = 77 }) is null,
             "the UI can mark the actual selected navigation node without inventing a cursor for another portrait");
@@ -40,8 +40,8 @@ try
         var groups = store.GetDayGroups(key);
         Check(groups.Count == 2 && groups[0].Date == new DateOnly(2026, 10, 18) && groups[1].Date == new DateOnly(2026, 10, 17), "history groups snapshots by recorded local date with newest day first");
         Check(await store.FlushAsync(), "accepted history reaches the atomic persistence worker");
-        Check(store.Count == 2 && store.Bytes == new FileInfo(FileFor("isolation")).Length && store.GetRecordsForOwner(10, 20).Count == 2
-            && store.GetRecordsForOwner(11, 20).Count == 0, "owner-wide history and cached byte diagnostics remain available without a live editor");
+        Check(store.Count == 2 && store.Bytes == new FileInfo(FileFor("isolation")).Length && store.GetRecordsForOwner(20).Count == 2
+            && store.GetRecordsForOwner(21).Count == 0, "CID-wide history and cached byte diagnostics remain available without a live editor");
     }
     using (var loaded = new PortraitHistoryStore(FileFor("isolation")))
     {
@@ -108,7 +108,7 @@ try
             "identical-content restore audit provenance and cursor survive process reload");
     }
 
-    // Streamed persistence must remain byte-for-byte compatible with the compact v1 serializer.
+    // Streamed persistence must remain byte-for-byte compatible with the compact v2 serializer.
     var compatibilityPath = FileFor("utf8-compatibility");
     var escapedKey = key with { CompatToken = "兼容<测试>\"\\🙂" };
     using (var store = new PortraitHistoryStore(compatibilityPath, () => now))
@@ -118,11 +118,11 @@ try
         Check(await store.FlushAsync(), "escaped snapshot fixture reaches the persistent writer");
         var expected = JsonSerializer.SerializeToUtf8Bytes(new
         {
-            Version = 1, NextID = newest.ID + 1, Records = store.GetRecords(escapedKey).Reverse().ToArray(),
+            Version = 2, NextID = newest.ID + 1, Records = store.GetRecords(escapedKey).Reverse().ToArray(),
             Cursors = new[] { new { Key = escapedKey, ID = newest.ID, Redo = Array.Empty<long>() } },
         });
         Check(File.ReadAllBytes(compatibilityPath).SequenceEqual(expected) && store.Bytes == expected.Length,
-            "v1 serialization preserves exact UTF-8 escaping, separators, property order and byte accounting");
+            "v2 serialization preserves exact UTF-8 escaping, separators, property order and byte accounting");
         Check(store.TryGetUndo(escapedKey, out var undo), "compatibility fixture has a historical predecessor");
         var before = File.ReadAllBytes(compatibilityPath);
         var beforeCount = store.Count; var beforeBytes = store.Bytes;
@@ -133,7 +133,7 @@ try
     }
     using (var loaded = new PortraitHistoryStore(compatibilityPath))
         Check(!loaded.IsReadOnly && loaded.GetRecords(escapedKey).Count == 2,
-            "streamed escaped v1 output reloads through the existing document validator");
+            "streamed escaped v2 output reloads through the document validator");
 
     // Removing a one-digit reference can grow its encoding to 'null'; many restore targets share that ID.
     var referencePath = FileFor("pruned-short-references");
@@ -142,7 +142,7 @@ try
         $"{{\"i\":{id}}}", id == 1 ? null : 1, "x")).ToArray();
     var referenceBytes = JsonSerializer.SerializeToUtf8Bytes(new
     {
-        Version = 1, NextID = 21L, Records = referenceRecords,
+        Version = 2, NextID = 21L, Records = referenceRecords,
         Cursors = new[] { new { Key = key, ID = 20L, Redo = Array.Empty<long>() } },
     });
     File.WriteAllBytes(referencePath, referenceBytes);
@@ -157,7 +157,7 @@ try
             "pruning repairs every removed parent and restore target in one detached candidate");
         var expected = JsonSerializer.SerializeToUtf8Bytes(new
         {
-            Version = 1, NextID = 22L, Records = remaining.Reverse().ToArray(),
+            Version = 2, NextID = 22L, Records = remaining.Reverse().ToArray(),
             Cursors = new[] { new { Key = key, ID = 21L, Redo = Array.Empty<long>() } },
         });
         Check(await store.FlushAsync() && store.Bytes <= referenceBytes.Length && store.Bytes == expected.Length
@@ -186,12 +186,12 @@ try
     }).Append(longAdded).ToArray();
     var desiredLongBytes = JsonSerializer.SerializeToUtf8Bytes(new
     {
-        Version = 1, NextID = newLongID + 1, Records = desiredLongRecords,
+        Version = 2, NextID = newLongID + 1, Records = desiredLongRecords,
         Cursors = new[] { new { Key = key, ID = newLongID, Redo = Array.Empty<long>() } },
     });
     var originalLongBytes = JsonSerializer.SerializeToUtf8Bytes(new
     {
-        Version = 1, NextID = newLongID, Records = longRecords,
+        Version = 2, NextID = newLongID, Records = longRecords,
         Cursors = new[] { new { Key = key, ID = newLongID - 1, Redo = Array.Empty<long>() } },
     });
     Check(originalLongBytes.Length <= desiredLongBytes.Length,
@@ -206,7 +206,7 @@ try
             "repairing shared long targets before the next quota check avoids deleting extra history");
         Check(await store.FlushAsync() && store.Bytes == desiredLongBytes.Length
             && File.ReadAllBytes(shrinkingPath).SequenceEqual(desiredLongBytes),
-            "the one-removal long-target result exactly fills the quota and matches compact v1 bytes");
+            "the one-removal long-target result exactly fills the quota and matches compact v2 bytes");
     }
 
     // A global UTF-8 byte budget must not erase valid records when one snapshot cannot fit.
@@ -261,7 +261,7 @@ try
     }
     using (var store = new PortraitHistoryStore(FileFor("global-budget"), () => now, byteLimit: 3500))
     {
-        var another = key with { AccountID = 100, ContentID = 200 };
+        var another = key with { ContentID = 200 };
         var protectedCurrent = store.Record(another, "{\"text\":\"" + new string('z', 500) + "\"}").Record!;
         for (var i = 0; i < 8; i++) store.Record(key, "{\"text\":\"" + new string((char)('a' + i), 500) + "\"}");
         Check(store.CurrentRecordID(another) == protectedCurrent.ID && store.TryGetRecord(another, protectedCurrent.ID, out _) && store.Bytes <= 3500,

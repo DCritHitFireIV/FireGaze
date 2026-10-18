@@ -60,7 +60,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var source = plate ? 0 : gearsets->EnabledGearsetIndex2EntryIndex[enabledIndex];
         if (!plate && (source < 0 || source >= 100)) return null;
         var compat = $"{snapshot.Version}|{snapshot.GameBuild}|{snapshot.Customize[0]}:{snapshot.Customize[1]}:{snapshot.Customize[4]}:{snapshot.Customize[5]}";
-        return new(owner.AccountID, owner.ContentID, plate ? PortraitHistoryEntryPoint.AdventurerPlate : PortraitHistoryEntryPoint.GearsetPortrait, source, compat);
+        return new(owner.ContentID, plate ? PortraitHistoryEntryPoint.AdventurerPlate : PortraitHistoryEntryPoint.GearsetPortrait, source, compat);
     }
 
     private void PollEditing()
@@ -184,7 +184,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void RefreshHistoryRows()
     {
         var owner = CurrentCharacter();
-        var records = owner is null ? [] : observedKey is { } key ? history.GetRecords(key) : history.GetRecordsForOwner(owner.Value.AccountID, owner.Value.ContentID);
+        var records = owner is null ? [] : observedKey is { } key ? history.GetRecords(key) : history.GetRecordsForOwner(owner.Value.ContentID);
         var current = observedKey is { } active ? history.CurrentRecordID(active) : null;
         historyRows = records.Select(record => new PortraitHistoryListItem(record.ID, record.Timestamp,
             record.Label, record.ID == current)).ToArray();

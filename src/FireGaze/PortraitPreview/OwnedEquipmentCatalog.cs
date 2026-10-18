@@ -1,14 +1,17 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FireGaze.PortraitPreview;
 
 /// <summary>Framework-thread owned cache. A failed/unloaded read never means an empty source.</summary>
 internal sealed class OwnedEquipmentCatalog
 {
-    private const int CacheVersion = 1;
+    private const int CacheVersion = 2;
     private static readonly TimeSpan CurrentFor = TimeSpan.FromMinutes(15);
     private readonly Func<uint, uint?> resolveOwnedEquipmentID;
-    private Dictionary<OwnedCharacterKey, Dictionary<OwnedSourceKey, SourceSnapshot>> characters = [];
+    // AccountID can change between sessions for the same character. It is still required
+    // in active/callback guards, but is not a durable cache identity.
+    private Dictionary<ulong, Dictionary<OwnedSourceKey, SourceSnapshot>> characters = [];
     private OwnedCharacterKey? active;
 
     public OwnedEquipmentCatalog(Func<uint, uint?> resolveOwnedEquipmentID)
@@ -21,7 +24,7 @@ internal sealed class OwnedEquipmentCatalog
         ValidateCharacter(key);
         if (active == key) return;
         active = key;
-        if (!characters.TryGetValue(key, out var sources)) characters[key] = sources = [];
+        if (!characters.TryGetValue(key.ContentID, out var sources)) characters[key.ContentID] = sources = [];
         foreach (var snapshot in sources.Values)
             if (snapshot.ReadAt is not null) { snapshot.Unavailable = true; snapshot.Reason = "已读取记录，重新登录后尚未刷新"; }
     }
@@ -44,6 +47,7 @@ internal sealed class OwnedEquipmentCatalog
         var sources = ActiveSources();
         if (sources.TryGetValue(source, out var prior) && prior.ReadAt > readAt) return false;
         var equipment = Normalize(records);
+        if (prior?.ReadAt == readAt && !prior.Items.SequenceEqual(equipment)) return false;
         sources[source] = new() { ReadAt = readAt, Items = equipment, Reason = "已读取记录" };
         return true;
     }
@@ -84,11 +88,14 @@ internal sealed class OwnedEquipmentCatalog
     }
 
     public string ExportJSON()
+        => Serialize(characters);
+
+    private static string Serialize(Dictionary<ulong, Dictionary<OwnedSourceKey, SourceSnapshot>> records)
     {
         var document = new CacheDocument { Version = CacheVersion };
-        foreach (var (character, sources) in characters.OrderBy(c => c.Key.AccountID).ThenBy(c => c.Key.ContentID))
+        foreach (var (contentID, sources) in records.OrderBy(c => c.Key))
         {
-            var owner = new CharacterDocument { Character = character };
+            var owner = new CharacterDocument { ContentID = contentID };
             foreach (var (source, snapshot) in sources.OrderBy(s => s.Key.Kind).ThenBy(s => s.Key.RetainerID))
                 owner.Sources.Add(new() { Source = source, ReadAt = snapshot.ReadAt, Items = snapshot.Items.Select(i => i.Record).ToList() });
             document.Characters.Add(owner);
@@ -99,16 +106,49 @@ internal sealed class OwnedEquipmentCatalog
     /// <summary>Parse and validate into a replacement map first. Bad cache input cannot erase live observations.</summary>
     public bool ImportJSON(string jsonText)
     {
+        if (!TryReadJSON(jsonText, out var replacement, out _)) return false;
+        characters = replacement;
+        if (active is { } key && !characters.ContainsKey(key.ContentID)) characters[key.ContentID] = [];
+        return true;
+    }
+
+    /// <summary>Validate without changing live observations, so disk migration can commit first.</summary>
+    internal bool PrepareImportJSON(string jsonText, out string currentJSON, out bool legacy)
+    {
+        currentJSON = string.Empty;
+        if (!TryReadJSON(jsonText, out var replacement, out legacy)) return false;
+        currentJSON = Serialize(replacement);
+        return true;
+    }
+
+    private bool TryReadJSON(string jsonText, out Dictionary<ulong, Dictionary<OwnedSourceKey, SourceSnapshot>> replacement, out bool legacy)
+    {
+        replacement = [];
+        legacy = false;
         if (jsonText is null || jsonText.Length > 16_000_000) return false;
         try
         {
-            var document = JsonSerializer.Deserialize<CacheDocument>(jsonText);
-            if (document is null || document.Version != CacheVersion || document.Characters is null || document.Characters.Count > 64) return false;
-            var replacement = new Dictionary<OwnedCharacterKey, Dictionary<OwnedSourceKey, SourceSnapshot>>();
-            foreach (var owner in document.Characters)
+            using var envelope = JsonDocument.Parse(jsonText);
+            if (envelope.RootElement.ValueKind != JsonValueKind.Object
+                || !envelope.RootElement.TryGetProperty("Version", out var version) || version.ValueKind != JsonValueKind.Number || !version.TryGetInt32(out var schema)
+                || !envelope.RootElement.TryGetProperty("Characters", out var ownerArray) || ownerArray.ValueKind != JsonValueKind.Array) return false;
+            if (schema is not (1 or CacheVersion)) return false;
+            legacy = schema == 1;
+            var owners = legacy
+                ? JsonSerializer.Deserialize<LegacyCacheDocument>(jsonText)?.Characters?.Select(owner => owner is null ? null : new ImportOwner(owner.Character.ContentID, owner.Character, owner.Sources)).ToList()
+                : JsonSerializer.Deserialize<CacheDocument>(jsonText)?.Characters?.Select(owner => owner is null ? null : new ImportOwner(owner.ContentID, null, owner.Sources)).ToList();
+            if (owners is null || owners.Count > 64) return false;
+            var legacyOwners = new HashSet<OwnedCharacterKey>();
+            var conflicts = new HashSet<(ulong ContentID, OwnedSourceKey Source)>();
+            foreach (var owner in owners)
             {
                 if (owner is null || owner.Sources is null || owner.Sources.Count > 512) return false;
-                ValidateCharacter(owner.Character);
+                if (owner.ContentID == 0) return false;
+                if (owner.LegacyCharacter is { } character)
+                {
+                    ValidateCharacter(character);
+                    if (!legacyOwners.Add(character)) return false;
+                }
                 var sources = new Dictionary<OwnedSourceKey, SourceSnapshot>();
                 foreach (var source in owner.Sources)
                 {
@@ -122,11 +162,24 @@ internal sealed class OwnedEquipmentCatalog
                         Reason = source.ReadAt is null ? "尚未读取" : "已读取记录，尚未在本次登录刷新",
                     })) return false;
                 }
-                if (!replacement.TryAdd(owner.Character, sources)) return false;
+                if (!replacement.TryGetValue(owner.ContentID, out var existing)) replacement.Add(owner.ContentID, sources);
+                else
+                {
+                    if (!legacy) return false;
+                    foreach (var (source, candidate) in sources)
+                    {
+                        if (!existing.TryGetValue(source, out var prior) || candidate.ReadAt is not null && (prior.ReadAt is null || candidate.ReadAt > prior.ReadAt))
+                        {
+                            existing[source] = candidate;
+                            conflicts.Remove((owner.ContentID, source));
+                        }
+                        else if (candidate.ReadAt == prior.ReadAt && !candidate.Items.SequenceEqual(prior.Items))
+                            conflicts.Add((owner.ContentID, source));
+                    }
+                    if (existing.Count > 512) return false;
+                }
             }
-            characters = replacement;
-            if (active is { } key && !characters.ContainsKey(key)) characters[key] = [];
-            return true;
+            return conflicts.Count == 0;
         }
         catch (Exception ex) when (ex is JsonException or ArgumentException or NotSupportedException)
         {
@@ -149,13 +202,13 @@ internal sealed class OwnedEquipmentCatalog
             if (itemID is not > 0) continue;
             equipment.Add(new(itemID.Value, item));
         }
-        return equipment;
+        return equipment.OrderBy(i => i.Record.ContainerID).ThenBy(i => i.Record.Slot).ToList();
     }
 
     private Dictionary<OwnedSourceKey, SourceSnapshot> ActiveSources()
     {
         if (active is not { } key) throw new InvalidOperationException("No character is active.");
-        return characters[key];
+        return characters[key.ContentID];
     }
 
     private static OwnedReadStatus Status(SourceSnapshot snapshot, DateTimeOffset now)
@@ -187,17 +240,36 @@ internal sealed class OwnedEquipmentCatalog
     private sealed class CacheDocument
     {
         public int Version { get; set; }
+        [JsonRequired]
         public List<CharacterDocument> Characters { get; set; } = [];
     }
     private sealed class CharacterDocument
     {
-        public OwnedCharacterKey Character { get; set; }
+        [JsonRequired]
+        public ulong ContentID { get; set; }
+        [JsonRequired]
         public List<SourceDocument> Sources { get; set; } = [];
     }
+    private sealed class LegacyCacheDocument
+    {
+        [JsonRequired]
+        public List<LegacyCharacterDocument> Characters { get; set; } = [];
+    }
+    private sealed class LegacyCharacterDocument
+    {
+        [JsonRequired]
+        public OwnedCharacterKey Character { get; set; }
+        [JsonRequired]
+        public List<SourceDocument> Sources { get; set; } = [];
+    }
+    private sealed record ImportOwner(ulong ContentID, OwnedCharacterKey? LegacyCharacter, List<SourceDocument>? Sources);
     private sealed class SourceDocument
     {
+        [JsonRequired]
         public OwnedSourceKey Source { get; set; }
+        [JsonRequired]
         public DateTimeOffset? ReadAt { get; set; }
+        [JsonRequired]
         public List<OwnedItemRecord> Items { get; set; } = [];
     }
 }

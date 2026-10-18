@@ -15,6 +15,20 @@ unsafe class Program
         RaptureGearsetModule.Value=(RaptureGearsetModule*)NativeMemory.AllocZeroed((nuint)sizeof(RaptureGearsetModule));
         try
         {
+            using(var feature=new PortraitPreviewFeature(Path.Combine(root,"session-history.json")))
+            {
+                feature.Sample();
+                feature.EditComposition(c=>c with {CameraYaw=.25f});feature.RecordDirect();
+                var ids=feature.History.Select(row=>row.ID).ToArray();
+                feature.Owner=new(999,20);feature.Sample();
+                Check(ids.All(id=>feature.History.Any(row=>row.ID==id)),
+                    "new runtime account alias for the same character retains persistent portrait history");
+                Check(feature.History.Count==ids.Length,
+                    "session identity change does not create a duplicate unchanged portrait baseline");
+                feature.Owner=new(999,21);feature.Sample();
+                Check(feature.History.Count==1 && !feature.History.Any(row=>ids.Contains(row.ID)),
+                    "stable history still isolates a different character content identity");
+            }
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"mirror-close-retry.json")))
             {
                 feature.Sample();feature.OpenPreview();feature.SetSyncPlate(true);

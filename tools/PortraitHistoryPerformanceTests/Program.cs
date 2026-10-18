@@ -8,7 +8,7 @@ var output = args.Length > 0 ? Path.GetFullPath(args[0]) : null;
 var directory = Path.Combine(Path.GetTempPath(), "firegaze-history-performance-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(directory);
 var path = Path.Combine(directory, "synthetic-history.json");
-var key = new PortraitHistoryKey(101, 202, PortraitHistoryEntryPoint.GearsetPortrait, 1, "qa-synthetic-v1");
+var key = new PortraitHistoryKey(202, PortraitHistoryEntryPoint.GearsetPortrait, 1, "qa-synthetic-v2");
 var zone = TimeZoneInfo.CreateCustomTimeZone("QA-plus-eight", TimeSpan.FromHours(8), "QA", "QA");
 var now = new DateTimeOffset(2026, 10, 18, 12, 0, 0, TimeSpan.FromHours(8));
 var checks = new List<string>();
@@ -47,7 +47,7 @@ byte[] Fixture(int count)
         PortraitHistoryRecordKind.Edit, Snapshot(index).ToJSON(), Label: "调整构图" )).ToArray();
     return JsonSerializer.SerializeToUtf8Bytes(new
     {
-        Version = 1, NextID = count + 1L, Records = records,
+        Version = 2, NextID = count + 1L, Records = records,
         Cursors = new[] { new { Key = key, ID = (long)count, Redo = Array.Empty<long>() } },
     });
 }

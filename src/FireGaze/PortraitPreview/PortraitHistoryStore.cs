@@ -1,14 +1,15 @@
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
 namespace FireGaze.PortraitPreview;
 
 internal enum PortraitHistoryEntryPoint { GearsetPortrait, AdventurerPlate }
-internal readonly record struct PortraitHistoryKey(ulong AccountID, ulong ContentID, PortraitHistoryEntryPoint EntryPoint,
+internal readonly record struct PortraitHistoryKey(ulong ContentID, PortraitHistoryEntryPoint EntryPoint,
     int SourceID, string CompatToken)
 {
-    public bool IsValid => AccountID != 0 && ContentID != 0 && Enum.IsDefined(EntryPoint) && SourceID >= 0
+    public bool IsValid => ContentID != 0 && Enum.IsDefined(EntryPoint) && SourceID >= 0
         && !string.IsNullOrWhiteSpace(CompatToken) && CompatToken.Length <= 512;
 }
 
@@ -48,14 +49,15 @@ internal sealed class PortraitHistoryStore : IDisposable
     public int Count { get { lock (gate) return records.Count; } }
     public int Bytes { get { lock (gate) return serializedBytes; } }
 
-    public PortraitHistoryStore(string filePath, Func<DateTimeOffset>? clock = null, int byteLimit = MaximumBytes)
+    public PortraitHistoryStore(string filePath, Func<DateTimeOffset>? clock = null, int byteLimit = MaximumBytes,
+        IPortraitHistoryMigrationFiles? migrationFiles = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
         if (byteLimit is <= 0 or > MaximumBytes) throw new ArgumentOutOfRangeException(nameof(byteLimit));
         this.clock = clock ?? (() => DateTimeOffset.Now);
         this.byteLimit = byteLimit;
         var path = Path.GetFullPath(filePath);
-        Load(path);
+        Load(path, migrationFiles ?? new PortraitHistoryMigrationFiles());
         if (!IsReadOnly) writer = new(path, byteLimit);
     }
 
@@ -64,9 +66,9 @@ internal sealed class PortraitHistoryStore : IDisposable
         lock (gate) return records.Where(record => record.Key == key).Reverse().ToArray();
     }
 
-    public IReadOnlyList<PortraitHistoryRecord> GetRecordsForOwner(ulong accountID, ulong contentID)
+    public IReadOnlyList<PortraitHistoryRecord> GetRecordsForOwner(ulong contentID)
     {
-        lock (gate) return records.Where(record => record.Key.AccountID == accountID && record.Key.ContentID == contentID).Reverse().ToArray();
+        lock (gate) return records.Where(record => record.Key.ContentID == contentID).Reverse().ToArray();
     }
 
     public long? CurrentRecordID(PortraitHistoryKey key)
@@ -208,7 +210,7 @@ internal sealed class PortraitHistoryStore : IDisposable
         var changedEncoding = new Dictionary<long, byte[]> { [added.ID] = JsonSerializer.SerializeToUtf8Bytes(added) };
         byte[] EncodingFor(PortraitHistoryRecord record) => changedEncoding.TryGetValue(record.ID, out var changed)
             ? changed : encodedRecords[record.ID];
-        var prefix = Encoding.UTF8.GetBytes("{\"Version\":1,\"NextID\":" + (nextID + 1).ToString(CultureInfo.InvariantCulture) + ",\"Records\":[");
+        var prefix = Encoding.UTF8.GetBytes("{\"Version\":2,\"NextID\":" + (nextID + 1).ToString(CultureInfo.InvariantCulture) + ",\"Records\":[");
         var suffix = Encoding.UTF8.GetBytes("],\"Cursors\":" + JsonSerializer.Serialize(nextCursors
             .Select(pair => new SavedCursor(pair.Key, pair.Value.ID, pair.Value.Redo)).ToList()) + "}");
         long byteCount = prefix.Length + suffix.Length + Math.Max(0, nextRecords.Count - 1);
@@ -270,31 +272,50 @@ internal sealed class PortraitHistoryStore : IDisposable
         catch (JsonException) { return false; }
     }
 
-    private void Load(string path)
+    private void Load(string path, IPortraitHistoryMigrationFiles migrationFiles)
     {
         try
         {
             if (!File.Exists(path)) return;
             if (new FileInfo(path).Length > byteLimit) throw new InvalidDataException("肖像历史文件超过容量上限，已保留原文件。");
             var fileBytes = File.ReadAllBytes(path);
-            var document = JsonSerializer.Deserialize<Document>(fileBytes);
-            if (document is not { Version: 1, NextID: > 0 and < long.MaxValue, Records: not null, Cursors: not null }
-                || document.Records.Any(record => record is null || !record.Key.IsValid || record.ID <= 0
-                    || !Enum.IsDefined(record.Kind) || !TryNormalize(record.SnapshotJSON, out _))
-                || document.Records.Select(record => record.ID).Distinct().Count() != document.Records.Count
-                || document.Records.Any(record => record.ID >= document.NextID)
-                || !document.Records.Select(record => record.ID).SequenceEqual(document.Records.Select(record => record.ID).Order()))
+            using var root = JsonDocument.Parse(fileBytes);
+            if (root.RootElement.ValueKind != JsonValueKind.Object
+                || !root.RootElement.TryGetProperty("Version", out var version) || version.ValueKind != JsonValueKind.Number
+                || !version.TryGetInt32(out var versionNumber))
                 throw new InvalidDataException("肖像历史文件无效，已保留原文件。");
-            var byID = document.Records.ToDictionary(record => record.ID);
-            if (document.Records.Any(record => record.ParentID is { } parent && (!byID.TryGetValue(parent, out var previous)
-                    || previous.Key != record.Key || parent >= record.ID)
-                || record.TargetID is { } target && (!byID.TryGetValue(target, out var previousTarget) || previousTarget.Key != record.Key || target >= record.ID))
-                || document.Cursors.Any(cursor => cursor is null || !cursor.Key.IsValid || cursor.Redo is null
-                    || !byID.TryGetValue(cursor.ID, out var current) || current.Key != cursor.Key
-                    || cursor.Redo.Any(id => !byID.TryGetValue(id, out var redo) || redo.Key != cursor.Key))
-                || document.Cursors.Select(cursor => cursor.Key).Distinct().Count() != document.Cursors.Count
-                || document.Records.Any(record => !document.Cursors.Any(cursor => cursor.Key == record.Key)))
-                throw new InvalidDataException("肖像历史记录关系无效，已保留原文件。");
+            Document document;
+            if (versionNumber == 1)
+            {
+                var legacy = JsonSerializer.Deserialize<LegacyDocument>(fileBytes);
+                if (legacy is not { Records: not null, Cursors: not null }
+                    || !ValidDocument(legacy.NextID,
+                        legacy.Records.Select(row => row is null ? null : new ValidationRecord<LegacyKey>(row.ID, row.Key, row.ParentID, row.TargetID, row.Kind, row.SnapshotJSON)).ToArray(),
+                        legacy.Cursors.Select(row => row is null ? null : new ValidationCursor<LegacyKey>(row.Key, row.ID, row.Redo)).ToArray(), key => key.IsValid))
+                    throw new InvalidDataException("肖像历史记录关系无效，已保留原文件。");
+                // Validate using the complete old key first: canonicalization must not make
+                // an originally corrupt cross-account parent/target appear legitimate.
+                var latestOperations = legacy.Records.GroupBy(record => record.Key)
+                    .ToDictionary(group => group.Key, group => group.Max(record => record.ID));
+                var selectedCursors = legacy.Cursors.GroupBy(cursor => cursor.Key.Canonical)
+                    .Select(group => group.OrderByDescending(cursor => latestOperations[cursor.Key]).First())
+                    .Select(cursor => new SavedCursor(cursor.Key.Canonical, cursor.ID, cursor.Redo.ToList())).ToList();
+                document = new(2, legacy.NextID, legacy.Records.Select(record => new PortraitHistoryRecord(record.ID,
+                    record.Key.Canonical, record.Timestamp, record.ParentID, record.Kind, record.SnapshotJSON,
+                    record.TargetID, record.Label)).ToList(), selectedCursors);
+                ValidateCurrent(document);
+                var candidate = JsonSerializer.SerializeToUtf8Bytes(document);
+                if (candidate.Length > byteLimit) throw new InvalidDataException("肖像历史升级后超过容量上限，已保留原文件。");
+                PersistMigration(path, fileBytes, candidate, migrationFiles);
+                fileBytes = candidate;
+            }
+            else if (versionNumber == 2)
+            {
+                document = JsonSerializer.Deserialize<Document>(fileBytes)
+                    ?? throw new InvalidDataException("肖像历史文件无效，已保留原文件。");
+                ValidateCurrent(document);
+            }
+            else throw new InvalidDataException("肖像历史版本暂不支持，已保留原文件。");
             records = document.Records;
             encodedRecords = records.ToDictionary(record => record.ID, record => JsonSerializer.SerializeToUtf8Bytes(record));
             cursors = document.Cursors.ToDictionary(cursor => cursor.Key, cursor => new Cursor(cursor.ID, cursor.Redo));
@@ -307,6 +328,72 @@ internal sealed class PortraitHistoryStore : IDisposable
             cursors = [];
             IsReadOnly = true;
             LoadError = "肖像历史暂时无法读取，未覆盖原文件：" + exception.Message;
+        }
+    }
+
+    private static void ValidateCurrent(Document document)
+    {
+        if (document is not { Version: 2, Records: not null, Cursors: not null }
+            || !ValidDocument(document.NextID,
+                document.Records.Select(row => row is null ? null : new ValidationRecord<PortraitHistoryKey>(row.ID, row.Key, row.ParentID, row.TargetID, row.Kind, row.SnapshotJSON)).ToArray(),
+                document.Cursors.Select(row => row is null ? null : new ValidationCursor<PortraitHistoryKey>(row.Key, row.ID, row.Redo)).ToArray(), key => key.IsValid))
+            throw new InvalidDataException("肖像历史记录关系无效，已保留原文件。");
+    }
+
+    private static bool ValidDocument<TKey>(long next, ValidationRecord<TKey>?[] rows, ValidationCursor<TKey>?[] saved,
+        Func<TKey, bool> isValid) where TKey : notnull
+    {
+        if (next is <= 0 or >= long.MaxValue
+            || rows.Any(row => row is null || !isValid(row.Key) || row.ID <= 0 || row.ID >= next
+                || !Enum.IsDefined(row.Kind) || !TryNormalize(row.SnapshotJSON, out _))
+            || rows.Select(row => row!.ID).Distinct().Count() != rows.Length
+            || !rows.Select(row => row!.ID).SequenceEqual(rows.Select(row => row!.ID).Order())) return false;
+        var byID = rows.ToDictionary(row => row!.ID, row => row!);
+        var comparer = EqualityComparer<TKey>.Default;
+        if (rows.Any(row => row!.ParentID is { } parent && (!byID.TryGetValue(parent, out var previous)
+                || !comparer.Equals(previous.Key, row.Key) || parent >= row.ID)
+            || row!.TargetID is { } target && (!byID.TryGetValue(target, out var previousTarget)
+                || !comparer.Equals(previousTarget.Key, row.Key) || target >= row.ID))
+            || saved.Any(cursor => cursor is null || !isValid(cursor.Key) || cursor.Redo is null
+                || !byID.TryGetValue(cursor.ID, out var current) || !comparer.Equals(current.Key, cursor.Key)
+                || cursor.Redo.Any(id => !byID.TryGetValue(id, out var redo) || !comparer.Equals(redo.Key, cursor.Key)))
+            || saved.Select(cursor => cursor!.Key).Distinct().Count() != saved.Length) return false;
+        var keys = saved.Select(cursor => cursor!.Key).ToHashSet();
+        return rows.All(record => keys.Contains(record!.Key));
+    }
+
+    private static void PersistMigration(string path, byte[] original, byte[] candidate, IPortraitHistoryMigrationFiles files)
+    {
+        var backup = path + ".v1-" + Convert.ToHexString(SHA256.HashData(original)) + ".bak";
+        var temporary = Path.Combine(Path.GetDirectoryName(path)!, "." + Path.GetFileName(path) + ".migration-" + Guid.NewGuid().ToString("N") + ".tmp");
+        var backupTemporary = Path.Combine(Path.GetDirectoryName(path)!, "." + Path.GetFileName(path) + ".backup-" + Guid.NewGuid().ToString("N") + ".tmp");
+        try
+        {
+            if (!files.Exists(backup))
+            {
+                // A failed/partial write cannot occupy the durable backup name and poison
+                // future retries. Publish only bytes already verified against the source.
+                files.WriteNewAndFlush(backupTemporary, original);
+                if (!files.ReadAllBytes(backupTemporary).SequenceEqual(original))
+                    throw new InvalidDataException("肖像历史升级备份未能验证，已保留原文件。");
+                files.MoveNew(backupTemporary, backup);
+            }
+            if (!files.ReadAllBytes(backup).SequenceEqual(original))
+                throw new InvalidDataException("肖像历史升级备份未能验证，已保留原文件。");
+            files.WriteNewAndFlush(temporary, candidate);
+            if (!files.ReadAllBytes(temporary).SequenceEqual(candidate))
+                throw new InvalidDataException("肖像历史升级文件未能验证，已保留原文件。");
+            if (!files.ReadAllBytes(path).SequenceEqual(original))
+                throw new InvalidDataException("肖像历史已被其他操作更新，本次升级未覆盖原文件。");
+            files.Replace(temporary, path);
+        }
+        finally
+        {
+            foreach (var ownedTemporary in new[] { temporary, backupTemporary })
+            {
+                try { if (files.Exists(ownedTemporary)) files.Delete(ownedTemporary); }
+                catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or System.Security.SecurityException) { }
+            }
         }
     }
 
@@ -329,4 +416,40 @@ internal sealed class PortraitHistoryStore : IDisposable
     private sealed record Cursor(long ID, List<long> Redo);
     private sealed record SavedCursor(PortraitHistoryKey Key, long ID, List<long> Redo);
     private sealed record Document(int Version, long NextID, List<PortraitHistoryRecord> Records, List<SavedCursor> Cursors);
+    private sealed record ValidationRecord<TKey>(long ID, TKey Key, long? ParentID, long? TargetID, PortraitHistoryRecordKind Kind, string SnapshotJSON);
+    private sealed record ValidationCursor<TKey>(TKey Key, long ID, List<long> Redo);
+    private readonly record struct LegacyKey(ulong AccountID, ulong ContentID, PortraitHistoryEntryPoint EntryPoint, int SourceID, string CompatToken)
+    {
+        public bool IsValid => AccountID != 0 && Canonical.IsValid;
+        public PortraitHistoryKey Canonical => new(ContentID, EntryPoint, SourceID, CompatToken);
+    }
+    private sealed record LegacyRecord(long ID, LegacyKey Key, DateTimeOffset Timestamp, long? ParentID,
+        PortraitHistoryRecordKind Kind, string SnapshotJSON, long? TargetID = null, string Label = "编辑肖像");
+    private sealed record LegacyCursor(LegacyKey Key, long ID, List<long> Redo);
+    private sealed record LegacyDocument(int Version, long NextID, List<LegacyRecord> Records, List<LegacyCursor> Cursors);
+}
+
+internal interface IPortraitHistoryMigrationFiles
+{
+    bool Exists(string path);
+    byte[] ReadAllBytes(string path);
+    void WriteNewAndFlush(string path, byte[] bytes);
+    void MoveNew(string source, string destination);
+    void Replace(string source, string destination);
+    void Delete(string path);
+}
+
+internal sealed class PortraitHistoryMigrationFiles : IPortraitHistoryMigrationFiles
+{
+    public bool Exists(string path) => File.Exists(path);
+    public byte[] ReadAllBytes(string path) => File.ReadAllBytes(path);
+    public void WriteNewAndFlush(string path, byte[] bytes)
+    {
+        using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+        stream.Write(bytes);
+        stream.Flush(flushToDisk: true);
+    }
+    public void Replace(string source, string destination) => File.Replace(source, destination, null);
+    public void MoveNew(string source, string destination) => File.Move(source, destination);
+    public void Delete(string path) => File.Delete(path);
 }
