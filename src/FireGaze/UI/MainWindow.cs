@@ -6,7 +6,7 @@ using FireGaze.Diagnostics;
 namespace FireGaze.UI;
 
 /// <summary>
-///     主窗口的页签（界面顺序：插件汉化 → 插件发现 → 仓库体检 → 简介汉化 → 插件安装器 → 坐骑试用 → 肖像实时编辑）。
+///     主窗口的页签（界面顺序：插件汉化 → 插件发现 → 仓库体检 → 简介汉化 → 插件安装器 → 坐骑试用 → 肖像同步预览）。
 /// </summary>
 public enum MainTab
 {
@@ -84,17 +84,6 @@ internal sealed class MainWindow : Window
 
     public override void Draw()
     {
-        var markSize = ImGui.GetTextLineHeight();
-        FireGazeSymbols.DrawMark(ImGui.GetCursorScreenPos(), markSize);
-        ImGui.Dummy(new Vector2(markSize));
-        ImGui.SameLine();
-        ImGui.TextUnformatted("FireGaze");
-        ImGui.SameLine();
-        // 只留版本号：开发版热重载频繁，出问题时一眼就能分辨屏幕上的窗口是不是旧实例的幽灵
-        ImGui.TextDisabled($"v{typeof(MainWindow).Assembly.GetName().Version}");
-
-        ImGui.Separator();
-
         if (ImGui.BeginTabBar("###FireGazeTabs"))
         {
             // Consume before drawing: navigation requested by a tab survives until the next frame.
@@ -148,7 +137,7 @@ internal sealed class MainWindow : Window
             }
 
             flags = pendingSelect == MainTab.PortraitEditor ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("肖像实时编辑", flags))
+            if (ImGui.BeginTabItem("肖像同步预览", flags))
             {
                 using var timing = uiDiagnostics.Measure("PortraitEditor.Draw");
                 plugin.DrawPortraitEditor();

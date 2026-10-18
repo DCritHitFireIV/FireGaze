@@ -15,13 +15,6 @@ void Check(bool value, string name)
 #if !HAS_VISUAL_SYSTEM
 Check(false, "the production palette, theme and symbol implementation is required");
 #else
-Check(UiHelpers.Muted == FireGazePalette.Muted && UiHelpers.Good == FireGazePalette.Good
-    && UiHelpers.Warn == FireGazePalette.Warn && UiHelpers.Bad == FireGazePalette.Bad
-    && UiHelpers.Accent == FireGazePalette.Action && UiHelpers.Skip == FireGazePalette.Skip,
-    "existing status helpers share the approved semantic palette");
-Check(InsStyle.Card == FireGazePalette.Panel && InsStyle.Neutral == FireGazePalette.Muted
-    && InsStyle.Bright == FireGazePalette.Text && InsStyle.Pink == FireGazePalette.Action,
-    "legacy list helper names no longer introduce a different brand or translucent text");
 static double Luminance(Vector4 color)
 {
     static double Channel(double value) => value <= .04045 ? value / 12.92 : Math.Pow((value + .055) / 1.055, 2.4);
@@ -34,6 +27,28 @@ static double Contrast(Vector4 left, Vector4 right)
     return (Math.Max(a, b) + .05) / (Math.Min(a, b) + .05);
 }
 
+// These independently specified dark viewing surfaces reproduce the real failure:
+// reusing a white-label button fill as a status foreground makes the status vanish.
+// The assertions exercise the actual helper outputs, not source text or exact tokens.
+var darkViewingSurfaces = new[]
+{
+    new Vector4(43 / 255f, 43 / 255f, 43 / 255f, 1),
+    new Vector4(51 / 255f, 51 / 255f, 51 / 255f, 1),
+    new Vector4(74 / 255f, 74 / 255f, 74 / 255f, 1),
+};
+foreach (var surface in darkViewingSurfaces)
+foreach (var foreground in new[] { UiHelpers.Muted, UiHelpers.Good, UiHelpers.Warn, UiHelpers.Bad, UiHelpers.Info, UiHelpers.Accent, UiHelpers.Skip,
+    InsStyle.Neutral, InsStyle.Bright, InsStyle.LikedRed })
+    Check(Contrast(foreground, surface) >= 4.5, "status and list text remain readable on dark viewing surfaces");
+foreach (var style in Enum.GetValues<FireGazeButtonStyle>())
+{
+    var button = UiHelpers.SemanticButtonColors(style, false);
+    foreach (var fill in new[] { button.Fill, button.Hover, button.Active })
+        Check(Contrast(button.Text, fill) >= 4.5, style + " action label remains readable in every enabled state");
+    var disabledButton = UiHelpers.SemanticButtonColors(style, true);
+    Check(Contrast(disabledButton.Text, disabledButton.Fill) >= 4.5, style + " disabled label remains readable");
+}
+
 foreach (var field in typeof(FireGazePalette).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
 {
     if (field.FieldType != typeof(Vector4)) continue;
@@ -44,12 +59,25 @@ foreach (var field in typeof(FireGazePalette).GetFields(System.Reflection.Bindin
 }
 foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover })
     Check(background.X == background.Y && background.Y == background.Z, "a color-judgment surface is truly achromatic");
-foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Selected })
-foreach (var foreground in new[] { FireGazePalette.Text, FireGazePalette.Muted, FireGazePalette.Good, FireGazePalette.Warn, FireGazePalette.Bad, FireGazePalette.Skip })
+foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover, FireGazePalette.Selected })
+foreach (var foreground in new[] { FireGazePalette.Text, UiHelpers.Muted, UiHelpers.Good, UiHelpers.Warn, UiHelpers.Bad, UiHelpers.Info, UiHelpers.Skip })
     Check(Contrast(foreground, background) >= 4.5, "body and status text meet contrast on every supported surface");
 foreach (var background in new[] { FireGazePalette.Action, FireGazePalette.ActionHover, FireGazePalette.ActionActive, FireGazePalette.Good, FireGazePalette.Bad })
     Check(Contrast(FireGazePalette.White, background) >= 4.5, "filled semantic actions keep readable text");
-Check(Contrast(FireGazePalette.Border, FireGazePalette.Panel) >= 3, "necessary control boundaries remain visible");
+foreach (var background in new[] { FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover, FireGazePalette.Selected })
+    Check(Contrast(FireGazePalette.Border, background) >= 3, "necessary control boundaries remain visible in every control state");
+Check(Contrast(InsStyle.AvatarText, InsStyle.CardActive) >= 4.5,
+    "a missing plugin icon keeps its letter readable against the actual avatar surface");
+Check(Contrast(FireGazePalette.White, FireGazePalette.SelectionShadow) >= 4.5,
+    "the selection check has a readable outline over arbitrary equipment and dye images");
+var inputRoles = new[] { ImGuiCol.CheckMark, ImGuiCol.SliderGrab, ImGuiCol.SliderGrabActive }
+    .Concat(Enum.GetValues<ImGuiCol>().Where(role => role.ToString() is "NavCursor" or "NavHighlight" or "NavWindowingHighlight"));
+foreach (var role in inputRoles)
+foreach (var surface in new[] { FireGazePalette.Raised, FireGazePalette.Hover, FireGazePalette.Selected })
+    Check(Contrast(FireGazeTheme.Colors.Single(entry => entry.Role == role).Color, surface) >= 3,
+        role + " stays visible against actual input and selected surfaces");
+Check(Contrast(UiHelpers.Info, FireGazePalette.Panel) >= 4.5,
+    "information and link text use a readable foreground instead of the primary button fill");
 
 var roles = Enum.GetValues<ImGuiCol>().Where(value => value.ToString() is not "Count" and not "COUNT").Distinct().ToArray();
 Check(FireGazeTheme.Colors.Select(entry => entry.Role).Distinct().Count() == roles.Length

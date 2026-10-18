@@ -11,13 +11,14 @@ internal static class InsStyle
     public static readonly Vector4 Card = FireGazePalette.Panel;
     public static readonly Vector4 CardHover = FireGazePalette.Hover;
     public static readonly Vector4 CardActive = FireGazePalette.Selected;
-    public static readonly Vector4 LikedRed = FireGazePalette.Bad;
+    public static readonly Vector4 LikedRed = FireGazePalette.BadText;
     public static readonly Vector4 Neutral = FireGazePalette.Muted;
     public static readonly Vector4 Bright = FireGazePalette.Text;
     // Historical helper names remain source compatible; the primary action is now the shared blue.
     public static readonly Vector4 Pink = FireGazePalette.Action;
     public static readonly Vector4 PinkHover = FireGazePalette.ActionHover;
     public static readonly Vector4 White = FireGazePalette.White;
+    internal static readonly Vector4 AvatarText = FireGazePalette.Focus;
 
     /// <summary>Local list rounding; no line metrics or global style are changed.</summary>
     public static void PushRounded()
@@ -125,7 +126,7 @@ internal static class InsStyle
         var textSize = ImGui.CalcTextSize(initial);
         drawList.AddText(
             start + ((new Vector2(size, size) - textSize) * 0.5f),
-            ImGui.GetColorU32(FireGazePalette.Action),
+            ImGui.GetColorU32(AvatarText),
             initial);
 
         ImGui.Dummy(new Vector2(size, size));

@@ -80,7 +80,14 @@ internal sealed class PortraitHistoryStore : IDisposable
         .GroupBy(record => DateOnly.FromDateTime(record.Timestamp.Date))
         .OrderByDescending(group => group.Key).Select(group => new PortraitHistoryDay(group.Key, group.ToArray())).ToArray();
 
+    /// <summary>Validate quota and the complete next history document before changing a native preview.</summary>
+    public PortraitHistoryWriteResult PrepareRecord(PortraitHistoryKey key, string snapshotJSON, string label = "编辑肖像")
+        => RecordCore(key, snapshotJSON, label, commit: false);
+
     public PortraitHistoryWriteResult Record(PortraitHistoryKey key, string snapshotJSON, string label = "编辑肖像")
+        => RecordCore(key, snapshotJSON, label, commit: true);
+
+    private PortraitHistoryWriteResult RecordCore(PortraitHistoryKey key, string snapshotJSON, string label, bool commit)
     {
         lock (gate)
         {
@@ -93,7 +100,7 @@ internal sealed class PortraitHistoryStore : IDisposable
             var added = new PortraitHistoryRecord(nextID, key, clock(), current?.ID, PortraitHistoryRecordKind.Edit, normalized, Label: NormalizeLabel(label, "编辑肖像"));
             var nextCursors = CloneCursors();
             nextCursors[key] = new(added.ID, []);
-            return Accept(added, nextCursors);
+            return Accept(added, nextCursors, commit);
         }
     }
 

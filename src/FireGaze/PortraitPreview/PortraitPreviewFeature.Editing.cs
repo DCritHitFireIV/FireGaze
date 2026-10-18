@@ -339,9 +339,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (!RetryPlateMirrorClose()) return;
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)
             || target.CaptureEditorState(identity) is not { } current)
-        { Error("请先在肖像编辑器旁打开 FireGaze修改。"); return; }
+        { Error("请先在肖像编辑器旁打开 FireGaze预览。"); return; }
         syncPlate = true;
-        status = "肖像修改已开启。";
+        status = "肖像预览已开启。";
         if (!target.UpdatePlateMirror(identity, current, true)) status = "已开启同步，请打开自己的冒险者铭牌查看本地预览。";
     });
 
@@ -370,11 +370,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void DrawContent()
     {
-        ImGui.TextWrapped("在装备套装肖像或冒险者铭牌编辑器旁点击「FireGaze修改」，可预览装备、染色和美容。关闭后还原临时外观。");
-        ImGui.TextDisabled("仅本人可见。请先关闭 FireGaze修改，再保存肖像。");
+        ImGui.TextWrapped("在装备套装肖像或冒险者铭牌编辑器旁点击「FireGaze预览」，可预览装备、染色和美容。关闭后还原临时外观。");
+        ImGui.TextDisabled("仅本人可见。请先关闭预览，再保存肖像。");
         using (UiHelpers.Disabled(!editorAvailable))
         {
-            if (ImGui.Button(IsActive ? "打开修改窗口" : "FireGaze修改")) OpenPreview();
+            if (ImGui.Button(IsActive ? "打开预览窗口" : "FireGaze预览")) OpenPreview();
         }
         ImGui.SameLine();
         using (UiHelpers.Disabled(!CanUndo))
@@ -387,7 +387,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             if (ImGui.Button("重做")) Redo();
         }
         var sync = SyncPlate;
-        if (ImGui.Checkbox("肖像实时同步铭牌", ref sync)) SetSyncPlate(sync);
+        if (ImGui.Checkbox("同步铭牌预览", ref sync)) SetSyncPlate(sync);
         ImGui.TextDisabled("同步只影响本地铭牌预览，关闭后还原。");
         if (plateMirrorCloseError is not null) ImGui.TextWrapped(plateMirrorCloseError);
     }

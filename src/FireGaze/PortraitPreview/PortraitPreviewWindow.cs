@@ -12,8 +12,6 @@ using FireGaze.UI;
 
 namespace FireGaze.PortraitPreview;
 
-internal sealed record PortraitBrowserItem(uint ID, string Name, uint Icon, byte DyeChannels, bool Available, string Reason);
-
 /// <summary>The window reads snapshots; the feature owns Framework-thread changes and editor identity checks.</summary>
 internal interface IPortraitPreviewViewModel
 {
@@ -23,6 +21,10 @@ internal interface IPortraitPreviewViewModel
     IReadOnlyList<string> SourceSummary { get; }
     IReadOnlyList<PortraitDye> Dyes { get; }
     IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot);
+    IReadOnlyList<OwnedSourceView> Sources => [];
+    string SourceGuideKey => string.Empty;
+    IReadOnlyList<string> StorageLocations(uint id) => [];
+    void EquipFromSources(PortraitSlot slot, uint id, IReadOnlyCollection<OwnedSourceKind> sources) => Equip(slot, id);
     PortraitBrowserItem? GetItem(PortraitSlot slot, uint id);
     void Equip(PortraitSlot slot, uint id);
     void Clear(PortraitSlot slot);
@@ -40,6 +42,18 @@ internal interface IPortraitPreviewViewModel
     void RestoreHistory(long id);
     IReadOnlyList<PortraitAppearanceGroup> AppearanceGroups { get; }
     void ChangeAppearance(string groupID, int value);
+
+    // Portrait library surfaces are optional so older view models and offline fixtures remain valid.
+    PortraitGlamourPlateView? GlamourPlateView => null;
+    void ApplyGlamourPlate(int index) { }
+    IReadOnlyList<PortraitFavoriteEntry> Favorites => [];
+    string FavoritesStatus => string.Empty;
+    string FavoriteAvailability(Guid id) => string.Empty;
+    void SaveFavorite(string name, IReadOnlyCollection<string> tags) { }
+    void RestoreFavorite(Guid id) { }
+    void RenameFavorite(Guid id, string name) { }
+    void TagFavorite(Guid id, IReadOnlyCollection<string> tags) { }
+    void RemoveFavorite(Guid id) { }
 }
 
 /// <summary>Independent wardrobe UI using game-local textures, without Dresser code or plugin IPC.</summary>
@@ -71,9 +85,19 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     private string selectedAppearance = "";
     private bool showHistory;
     private PortraitBrowserItem? inspectedItem;
+    private readonly HashSet<OwnedSourceKind> selectedSources = [];
+    private readonly HashSet<byte> selectedDyes = [];
+    private PortraitEquipmentSort equipmentSort;
+    private IReadOnlyList<PortraitBrowserItem>? cachedCatalog;
+    private IReadOnlyList<PortraitBrowserItem> filteredItems = [];
+    private string cachedSearch = "";
+    private bool filtersChanged = true;
+    private bool showSourceGuide;
+    private readonly PortraitSourceGuideState sourceGuide = new();
+    private string lastSourceOwner = "";
 
     public PortraitPreviewWindow(IPortraitPreviewViewModel feature, IDalamudPluginInterface pluginInterface, ITextureProvider textures, PortraitHistoryPhotos? photos = null)
-        : base("肖像实时编辑###FireGazePortraitPreview", ImGuiWindowFlags.None)
+        : base("肖像同步预览###FireGazePortraitPreview", ImGuiWindowFlags.None)
     {
         this.feature = feature;
         this.pluginInterface = pluginInterface;
@@ -88,10 +112,24 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     {
         selectedSlot = PortraitSlot.Head;
         search = string.Empty;
+        if (lastSourceOwner != feature.SourceGuideKey)
+        {
+            lastSourceOwner = feature.SourceGuideKey;
+            selectedSources.Clear();
+            selectedDyes.Clear();
+            cachedCatalog = null;
+            filtersChanged = true;
+        }
+        showSourceGuide = sourceGuide.ShouldShow(feature.SourceGuideKey,
+            feature.Sources.Any(source => source.Status == OwnedReadStatus.Unread));
         ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
     }
 
-    public override void OnClose() => feature.ClosePreview();
+    public override void OnClose()
+    {
+        analysis.Invalidate();
+        feature.ClosePreview();
+    }
 
     public override void PreDraw()
     {
@@ -106,7 +144,8 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var current = feature.Current;
         if (!feature.IsActive || current is null)
         {
-            ImGui.TextWrapped("请先打开肖像编辑器，再点击旁边的「FireGaze修改」。");
+            analysis.Invalidate();
+            ImGui.TextWrapped("请先打开肖像编辑器，再点击旁边的「FireGaze预览」。");
             return;
         }
 
@@ -117,29 +156,31 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             ImGui.CalcTextSize("仅本地 · 关闭后还原").X);
         ImGui.TextUnformatted("仅本地 · 关闭后还原");
         DrawEditingToolbar();
+        DrawLibraryToolbar();
         ImGui.Separator();
 
         if (appearanceTab)
         {
             DrawAppearance();
             DrawHistoryPopup();
+            DrawLibraryPopups();
             return;
         }
 
         var summaryHeight = ImGui.GetTextLineHeightWithSpacing() * 3.2f;
         var mainHeight = Math.Max(220f * Scale, ImGui.GetContentRegionAvail().Y - summaryHeight);
         var leftWidth = PortraitPreviewLayout.SideWidth(ImGui.GetContentRegionAvail().X, Scale);
-        ImGui.BeginChild("###PortraitEquipment", new Vector2(leftWidth, mainHeight), true);
+        ImGui.BeginChild("###PortraitEquipment", new Vector2(leftWidth, mainHeight), false);
         DrawSlots(current);
         ImGui.Separator();
         DrawEquipmentControls(current);
         ImGui.EndChild();
         ImGui.SameLine();
-        ImGui.BeginChild("###PortraitOwnedBrowser", new Vector2(0, mainHeight), true);
+        ImGui.BeginChild("###PortraitOwnedBrowser", new Vector2(0, mainHeight), false);
         DrawBrowser(current);
         ImGui.EndChild();
 
-        if (ImGui.SmallButton("来源记录")) ImGui.OpenPopup("###PortraitSourceRecords");
+        if (ImGui.SmallButton("存储位置")) ImGui.OpenPopup("###PortraitSourceRecords");
         var sourceStatus = feature.SourceSummary.Count == 0 ? "尚未读取来源记录" : "查看已读取的物品来源";
         ContinueToolbar(ImGui.GetWindowPos().X + ImGui.GetWindowContentRegionMax().X,
             ImGui.CalcTextSize(sourceStatus).X);
@@ -155,9 +196,10 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             if (feature.SourceSummary.Count == 0) ImGui.TextUnformatted("尚未读取物品。请先打开对应的背包、投影台或雇员背包。");
             ImGui.EndPopup();
         }
-        ImGui.TextWrapped("关闭 FireGaze修改 后才能重新保存肖像。");
+        ImGui.TextWrapped("请先关闭预览，再保存肖像。");
         if (!string.IsNullOrWhiteSpace(feature.Status)) ImGui.TextWrapped(feature.Status);
         DrawHistoryPopup();
+        DrawLibraryPopups();
     }
 
     private static float Scale => ImGui.GetFontSize() / 17f;
@@ -243,15 +285,21 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     private void DrawBrowser(PortraitLook current)
     {
+        DrawSourceGuide();
         ImGui.SetNextItemWidth(-1);
-        ImGui.InputTextWithHint("###PortraitEquipmentSearch", "搜索已拥有装备名称或编号", ref search, 100);
+        ImGui.InputTextWithHint("###PortraitEquipmentSearch", "搜索装备名称或编号", ref search, 100);
+        DrawEquipmentFilters(selectedSlot == PortraitSlot.Facewear);
         var needle = search.Trim();
-        var items = feature.GetItems(selectedSlot);
-        if (needle.Length > 0)
+        var catalog = feature.GetItems(selectedSlot);
+        if (filtersChanged || !ReferenceEquals(cachedCatalog, catalog) || cachedSearch != needle)
         {
-            var isID = uint.TryParse(needle, NumberStyles.None, CultureInfo.InvariantCulture, out var id);
-            items = items.Where(item => item.Name.Contains(needle, StringComparison.OrdinalIgnoreCase) || isID && item.ID == id).ToArray();
+            var query = PortraitLibraryPresentation.ForSlot(new(needle, selectedSources, selectedDyes, equipmentSort), selectedSlot);
+            filteredItems = PortraitEquipmentFilter.Apply(catalog, query);
+            cachedCatalog = catalog;
+            cachedSearch = needle;
+            filtersChanged = false;
         }
+        var items = filteredItems;
         ImGui.TextDisabled($"{SlotName(selectedSlot)} · 已拥有 {items.Count} 项");
         ImGui.Separator();
         inspectedItem = null;
@@ -260,7 +308,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         ImGui.BeginChild("###PortraitOwnedGrid", new Vector2(0, gridHeight), false);
         if (items.Count == 0)
         {
-            ImGui.TextWrapped(needle.Length > 0 ? "没有找到符合名称或编号的已拥有装备。" : "尚未读取到此部位的已拥有装备。");
+            ImGui.TextWrapped(needle.Length > 0 || selectedSources.Count > 0 || selectedDyes.Count > 0 ? "没有符合条件的装备。" : "尚未读取到此部位的装备。");
         }
         else
         {
@@ -282,7 +330,10 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
                         var item = items[index];
                         ImGui.PushID(index);
                         if (DrawItemIcon("###OwnedItem", item, cell, current.Pieces[(int)selectedSlot].ItemID == item.ID, null) && item.Available)
-                            feature.Equip(selectedSlot, item.ID);
+                        {
+                            if (selectedSlot == PortraitSlot.Facewear) feature.Equip(selectedSlot, item.ID);
+                            else feature.EquipFromSources(selectedSlot, item.ID, selectedSources.ToArray());
+                        }
                         ImGui.PopID();
                     }
                 }
@@ -294,7 +345,9 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var detail = inspectedItem ?? feature.GetItem(selectedSlot, current.Pieces[(int)selectedSlot].ItemID);
         if (detail is not null)
         {
-            ImGui.TextWrapped($"{detail.Name} · #{detail.ID}");
+            ImGui.TextWrapped(detail.Name);
+            var locations = feature.StorageLocations(detail.ID);
+            if (locations.Count > 0) ImGui.TextWrapped("存储位置：" + string.Join("、", locations));
             if (!detail.Available) ImGui.TextWrapped(string.IsNullOrWhiteSpace(detail.Reason) ? "当前角色无法预览此物品。" : detail.Reason);
         }
         else ImGui.TextWrapped("选择物品即可预览。");
@@ -339,7 +392,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             ImGui.TextUnformatted(item?.Name ?? (emptySlot is { } slot ? $"{SlotName(slot)} · 空" : "未读取装备信息"));
             if (item is not null)
             {
-                ImGui.TextDisabled($"#{item.ID}");
+                foreach (var location in feature.StorageLocations(item.ID)) ImGui.TextDisabled(location);
                 if (item.DyeChannels > 0) ImGui.TextDisabled($"支持 {item.DyeChannels} 处染色");
                 if (!item.Available && !string.IsNullOrWhiteSpace(item.Reason)) ImGui.TextWrapped(item.Reason);
             }
@@ -453,6 +506,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     {
         if (disposed) return;
         disposed = true;
+        analysis.Dispose();
         foreach (var part in parts.Values) part?.Dispose();
         foreach (var uld in ulds.Values) uld?.Dispose();
         parts.Clear();

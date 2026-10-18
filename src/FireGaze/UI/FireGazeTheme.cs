@@ -91,16 +91,16 @@ internal static class FireGazeTheme
         "FrameBgHovered" or "ButtonHovered" or "HeaderHovered" or "TabHovered" => FireGazePalette.Hover,
         "FrameBgActive" or "ButtonActive" or "HeaderActive" or "Header" or "TextSelectedBg" or "DockingPreview" => FireGazePalette.Selected,
         "ScrollbarGrab" => FireGazePalette.Border,
-        "ScrollbarGrabHovered" or "SliderGrab" or "CheckMark" or "PlotLines" => FireGazePalette.Action,
-        "ScrollbarGrabActive" or "SliderGrabActive" or "SeparatorHovered" or "PlotLinesHovered" => FireGazePalette.ActionHover,
-        "SeparatorActive" => FireGazePalette.ActionActive,
-        "ResizeGripHovered" or "ResizeGripActive" => FireGazePalette.Action,
+        "ScrollbarGrabHovered" or "SliderGrab" or "CheckMark" or "PlotLines" => FireGazePalette.Focus,
+        "ScrollbarGrabActive" or "SliderGrabActive" or "SeparatorHovered" or "PlotLinesHovered" => FireGazePalette.Focus,
+        "SeparatorActive" => FireGazePalette.Focus,
+        "ResizeGripHovered" or "ResizeGripActive" => FireGazePalette.Focus,
         "Tab" or "TabUnfocused" or "TabDimmed" => FireGazePalette.Window,
         "TabActive" or "TabUnfocusedActive" or "TabSelected" or "TabDimmedSelected" => FireGazePalette.Selected,
         "TabSelectedOverline" or "TabDimmedSelectedOverline" or "TextLink" or "NavCursor" or "NavHighlight"
-            or "NavWindowingHighlight" or "DragDropTarget" => FireGazePalette.Action,
-        "PlotHistogram" => FireGazePalette.Good,
-        "PlotHistogramHovered" => FireGazePalette.Action,
+            or "NavWindowingHighlight" or "DragDropTarget" => FireGazePalette.Focus,
+        "PlotHistogram" => FireGazePalette.GoodText,
+        "PlotHistogramHovered" => FireGazePalette.Focus,
         // A future binding can add roles. Keep them readable and fixed rather than inherit a host color.
         _ => FireGazePalette.Panel,
     };

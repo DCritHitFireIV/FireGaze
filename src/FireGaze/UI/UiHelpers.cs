@@ -10,11 +10,11 @@ namespace FireGaze.UI;
 internal static class UiHelpers
 {
     public static readonly Vector4 Muted = FireGazePalette.Muted;
-    public static readonly Vector4 Good = FireGazePalette.Good;
+    public static readonly Vector4 Good = FireGazePalette.GoodText;
     public static readonly Vector4 Warn = FireGazePalette.Warn;
-    public static readonly Vector4 Bad = FireGazePalette.Bad;
-    public static readonly Vector4 Info = FireGazePalette.Action;
-    public static readonly Vector4 Accent = FireGazePalette.Action;
+    public static readonly Vector4 Bad = FireGazePalette.BadText;
+    public static readonly Vector4 Info = FireGazePalette.Focus;
+    public static readonly Vector4 Accent = FireGazePalette.Focus;
 
     /// <summary>Use in place of the native pair so disabled input also has a distinct readable appearance.</summary>
     public static void BeginDisabled(bool disabled = true) => FireGazeDisabled.Begin(disabled);

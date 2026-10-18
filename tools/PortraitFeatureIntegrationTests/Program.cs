@@ -17,6 +17,7 @@ unsafe class Program
         {
             PortraitOperationLabelTests.Run(root, Check);
             PortraitPlaybackHistoryTests.Run(root, Check);
+            PortraitLibraryIntegrationTests.Run(root, Check);
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"session-history.json")))
             {
                 feature.Sample();

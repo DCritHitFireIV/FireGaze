@@ -53,11 +53,11 @@ internal sealed partial class PortraitPreviewWindow
         DrawUndoRedo();
         ContinueToolbar(right, ImGui.CalcTextSize("历史记录").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("历史记录")) showHistory = !showHistory;
-        ContinueToolbar(right, ImGui.CalcTextSize("肖像实时同步铭牌").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X);
+        ContinueToolbar(right, ImGui.CalcTextSize("同步铭牌预览").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X);
         var sync = feature.SyncPlate;
-        if (ImGui.Checkbox("肖像实时同步铭牌", ref sync)) feature.SetSyncPlate(sync);
-        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("仅同步自己看到的铭牌预览。关闭 FireGaze修改 后还原，不会保存到铭牌。");
-        if (sync) ImGui.TextWrapped("同步本地铭牌预览 · 关闭 FireGaze修改 后还原");
+        if (ImGui.Checkbox("同步铭牌预览", ref sync)) feature.SetSyncPlate(sync);
+        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("仅同步自己看到的铭牌预览。关闭预览后还原，不会保存到铭牌。");
+        if (sync) ImGui.TextWrapped("同步本地铭牌预览 · 关闭预览后还原");
         ImGui.PopID();
     }
 
@@ -256,7 +256,7 @@ internal sealed partial class PortraitPreviewWindow
             if (!inspected.Available) ImGui.TextWrapped(string.IsNullOrWhiteSpace(inspected.Reason) ? "当前角色无法预览此选项。" : inspected.Reason);
         }
         ImGui.EndChild();
-        ImGui.TextWrapped("美容仅用于当前肖像，关闭 FireGaze修改 后还原。");
+        ImGui.TextWrapped("美容仅用于当前肖像，关闭预览后还原。");
         if (!string.IsNullOrWhiteSpace(feature.Status)) ImGui.TextWrapped(feature.Status);
     }
 

@@ -236,6 +236,15 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         lock (sync) return !disposed && records.TryGetValue(recordID, out var value) ? loaded.Get(value.Key) : null;
     }
 
+    // A favorite can reuse an already captured image across characters. Browsing never renders
+    // older states into the live editor; the durable snapshot remains usable if its photo expires.
+    public IDalamudTextureWrap? GetSnapshot(ulong contentID, PortraitEditorSnapshot snapshot)
+    {
+        var key = PortraitThumbnailCache.KeyForSnapshot(contentID.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            + "|" + snapshot.ToJSON());
+        lock (sync) return !disposed ? loaded.Get(key) : null;
+    }
+
     public void Dispose()
     {
         Task? diskWrite, diskMaintenance;

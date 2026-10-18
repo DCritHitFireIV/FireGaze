@@ -309,7 +309,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         }
         if (!blocked) return false;
         BlockedSaves++;
-        try { error("请先关闭 FireGaze修改，再重新保存肖像。"); }
+        try { error("请先关闭预览，再重新保存肖像。"); }
         catch (Exception ex) { LastError = "肖像保存已阻止，但提示显示失败：" + ex.Message; }
         return true;
     }

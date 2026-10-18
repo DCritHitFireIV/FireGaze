@@ -4,6 +4,16 @@
 </PropertyGroup><ItemGroup>
  <PackageReference Include="DailyRoutines.CodeAnalysis" Version="2.6.0" PrivateAssets="all" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Editing.cs" Link="Feature.Editing.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Library.cs" Link="Feature.Library.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitFavoritesStore.cs" Link="FavoritesStore.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlateModels.cs" Link="GlamourPlateModels.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlateCatalog.cs" Link="GlamourPlateCatalog.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlateCache.cs" Link="GlamourPlateCache.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEquipmentFilter.cs" Link="EquipmentFilter.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedCacheWriter.cs" Link="CacheWriter.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedCacheSavePolicy.cs" Link="CacheSavePolicy.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentCatalog.cs" Link="OwnedEquipmentCatalog.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentCacheFile.cs" Link="OwnedEquipmentCacheFile.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="Session.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="EditorState.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditLabels.cs" Link="EditLabels.cs" />

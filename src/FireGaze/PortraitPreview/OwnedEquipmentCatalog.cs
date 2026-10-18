@@ -14,6 +14,13 @@ internal sealed class OwnedEquipmentCatalog
     private Dictionary<ulong, Dictionary<OwnedSourceKey, SourceSnapshot>> characters = [];
     private OwnedCharacterKey? active;
 
+    /// <summary>
+    /// Advances for a first authoritative source read or changed physical equipment content.
+    /// Read times and availability are live status; refreshing them does not require a disk rewrite.
+    /// Loading a disk baseline does not count as a new native observation.
+    /// </summary>
+    public long ContentRevision { get; private set; }
+
     public OwnedEquipmentCatalog(Func<uint, uint?> resolveOwnedEquipmentID)
     {
         this.resolveOwnedEquipmentID = resolveOwnedEquipmentID ?? throw new ArgumentNullException(nameof(resolveOwnedEquipmentID));
@@ -48,7 +55,10 @@ internal sealed class OwnedEquipmentCatalog
         if (sources.TryGetValue(source, out var prior) && prior.ReadAt > readAt) return false;
         var equipment = Normalize(records);
         if (prior?.ReadAt == readAt && !prior.Items.SequenceEqual(equipment)) return false;
+        var changed = prior?.ReadAt is null || !prior.Items.SequenceEqual(equipment);
+        var nextRevision = changed ? checked(ContentRevision + 1) : ContentRevision;
         sources[source] = new() { ReadAt = readAt, Items = equipment, Reason = "已读取记录" };
+        ContentRevision = nextRevision;
         return true;
     }
 

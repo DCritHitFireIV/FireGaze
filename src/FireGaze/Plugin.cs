@@ -578,7 +578,7 @@ public sealed class Plugin : IDalamudPlugin
     {
         if (portraitPreview is null)
         {
-            ImGui.TextWrapped("肖像实时编辑功能正在初始化，请稍后再试。");
+            ImGui.TextWrapped("肖像同步预览功能正在初始化，请稍后再试。");
             return;
         }
         portraitPreview.DrawContent();
@@ -600,7 +600,7 @@ public sealed class Plugin : IDalamudPlugin
         if (trimmed.Equals("portrait", StringComparison.OrdinalIgnoreCase)
             || trimmed.StartsWith("portrait ", StringComparison.OrdinalIgnoreCase))
         {
-            if (portraitPreview is null) Chat.PrintError("[肖像实时编辑] 功能正在初始化，请稍后再试。");
+            if (portraitPreview is null) Chat.PrintError("[肖像同步预览] 功能正在初始化，请稍后再试。");
             else portraitPreview.OnCommand(trimmed["portrait".Length..].TrimStart());
             return;
         }

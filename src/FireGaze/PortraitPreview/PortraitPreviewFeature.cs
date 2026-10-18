@@ -24,6 +24,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private readonly OwnedNativeInventoryReader inventory;
     private readonly OwnedEquipmentCacheFile cache;
     private readonly OwnedCacheWriter cacheWriter;
+    private readonly OwnedCacheSavePolicy ownedSavePolicy;
     private readonly PortraitPreviewWindow window;
     private readonly WindowSystem windows = new("FireGazePortrait");
     private readonly IDalamudPluginInterface pluginInterface;
@@ -39,7 +40,6 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private Vector2 buttonPosition;
     private bool editorAvailable;
     private DateTime nextInventoryRead;
-    private DateTime nextCacheWrite;
     private bool disposed;
 
     public PortraitPreviewFeature(IDalamudPluginInterface pluginInterface, string configDirectory)
@@ -54,12 +54,14 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         cache = new(configDirectory);
         cache.Load(owned, out _);
         cacheWriter = new(json => cache.SaveJSON(json, out _));
+        ownedSavePolicy = new(cacheWriter, owned.ContentRevision);
         var cabinetItems = Plugin.DataManager.GetExcelSheet<CabinetRow>().Select(row => new OwnedCabinetItem(row.RowId, row.Item.RowId)).ToArray();
         inventory = new(() => Plugin.Framework.IsInFrameworkUpdateThread, CurrentCharacter, () => cabinetItems, IsRetainerInventoryOpen);
         target = new(Plugin.Framework, Plugin.Objects, Plugin.GameGUI, Plugin.Interop,
             identity => session?.BlockSave(identity) == true, Error, Plugin.AgentLifecycle, Plugin.AddonLifecycle);
         session = new(target);
         InitializeEditing(configDirectory);
+        InitializeLibrary(configDirectory);
         InitializePhotos(configDirectory);
         window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
@@ -71,7 +73,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     public bool IsActive => session.IsActive;
     public PortraitLook? Current => session.Current;
-    public string Status => plateMirrorCloseError ?? status;
+    public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
     public IReadOnlyList<string> SourceSummary => sourceSummary;
     public IReadOnlyList<PortraitDye> Dyes => dyes;
     public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => browser.TryGetValue(slot, out var values) ? values : [];
@@ -100,6 +102,14 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             historyRows, appearanceGroups,
             historyPhotos = photos.Diagnostics(),
             historyPhotosView = window.HistoryPhotosView, historyWindowOpen = window.HistoryWindowOpen,
+            glamourPlates = glamourPlateView is { } plate ? new { status = plate.Status.ToString(), readAt = plate.ReadAt, reason = plate.Reason, count = plate.Plates.Count,
+                plates = plate.Plates.Select(value => new { index = value.Index + 1, pieces = value.Pieces }),
+                writes = glamourPlateCache.CompletedWrites, failedWrites = glamourPlateCache.FailedWrites, savedRevision = glamourPlateCache.SavedRevision,
+                readOnly = glamourPlateCache.IsReadOnly, lastWriteSucceeded = glamourPlateCache.LastWriteSucceeded } : null,
+            ownedCache = new { contentRevision = owned.ContentRevision, savedRevision = cacheWriter.SavedRevision,
+                outstandingRevision = cacheWriter.OutstandingRevision, writes = cacheWriter.CompletedWrites, failedWrites = cacheWriter.FailedWrites },
+            favorites = new { count = favoriteEntries.Count, status = favoritesStatus, readOnly = favoritesStore.IsReadOnly,
+                entries = favoriteEntries.Select(value => new { value.ID, value.Name, value.Tags, value.SourceName }) },
         });
     }
 
@@ -133,6 +143,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             inventory.ObserveRetainerLoads();
             session.Validate();
             PollEditing();
+            PollLibrary();
             PollPhotos();
             editorAvailable = target.TryResolve(out _, out var bounds, out _);
             if (editorAvailable) buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
@@ -141,11 +152,6 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             {
                 nextInventoryRead = DateTime.UtcNow.AddSeconds(2);
                 RefreshInventory();
-            }
-            if (DateTime.UtcNow >= nextCacheWrite)
-            {
-                nextCacheWrite = DateTime.UtcNow.AddSeconds(30);
-                cacheWriter.Queue(owned.ExportJSON());
             }
         }
         catch (Exception ex)
@@ -166,14 +172,17 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             if (source.Records is not null) owned.ApplyRead(character, source.Source, DateTimeOffset.UtcNow, source.Records);
             else owned.MarkUnavailable(character, source.Source, source.Reason);
         }
+        // Each complete observation batch queues changed data immediately; success is acknowledged
+        // by the worker, so an unchanged subsequent batch also retries a previous disk failure.
+        QueueOwnedCacheIfNeeded();
         ownedView = owned.BuildView(DateTimeOffset.UtcNow);
         var known = ownedView.Items.Select(item => item.ItemID).Concat(Current?.Pieces.Take(12).Select(piece => piece.ItemID) ?? []).Distinct();
         metadata = known.Where(equipment.ContainsKey).ToDictionary(id => id, id => BrowserItem(equipment[id]));
-        var retainerNames = capture.Retainers.ToDictionary(row => row.RetainerID, row => row.Name);
+        foreach (var retainer in capture.Retainers) retainerDisplayNames[retainer.RetainerID] = retainer.Name;
         sourceSummary = ownedView.Sources.Select(source =>
         {
             var name = SourceName(source.Source);
-            if (source.Source.RetainerID != 0 && retainerNames.TryGetValue(source.Source.RetainerID, out var retainerName))
+            if (source.Source.RetainerID != 0 && retainerDisplayNames.TryGetValue(source.Source.RetainerID, out var retainerName))
                 name = (source.Source.Kind == OwnedSourceKind.RetainerEquipped ? "雇员装备 · " : "雇员背包 · ") + retainerName;
             var state = source.Status switch
             {
@@ -195,7 +204,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             }
             else
                 next[slot] = ownedView.Items.Where(entry => equipment.TryGetValue(entry.ItemID, out var item) && Matches(item.EquipSlotCategory.Value, slot))
-                    .Select(entry => metadata[entry.ItemID]).OrderBy(item => item.Name).ToArray();
+                    .Select(entry => metadata[entry.ItemID] with { Sources = entry.Variants.Select(variant => variant.Source.Kind).Distinct().ToArray() })
+                    .OrderBy(item => item.Name).ToArray();
         }
         browser = next;
     }
@@ -214,7 +224,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             };
             if (!raceAllowed || (state->Sex == 0 ? !restriction.Male : !restriction.Female)) reason = "该外观不支持当前角色的种族或性别";
         }
-        return new(row.RowId, row.Name.ToString(), row.Icon, row.DyeCount, reason.Length == 0, reason);
+        return new(row.RowId, row.Name.ToString(), row.Icon, row.DyeCount, reason.Length == 0, reason,
+            Convert.ToUInt32(row.LevelItem.RowId), Convert.ToUInt32(row.LevelEquip));
     }
 
     private static bool Matches(EquipSlotCategory row, PortraitSlot slot) => slot switch
@@ -231,7 +242,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (!target.CanBlockSave) { Error(target.LastError ?? "暂时无法阻止肖像保存，为避免保存临时外观，本次未开启预览。请稍后重试。"); return; }
         if (!target.TryResolve(out var identity, out _, out _) || !session.Open(identity)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
         RefreshInventory();
-        status = "肖像修改已开启。";
+        status = "肖像预览已开启。";
         window.IsOpen = true;
         window.BringToFront();
     });
@@ -288,7 +299,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         }
         window.IsOpen = false;
         SynchronizeAfterClose();
-        cacheWriter.Queue(owned.ExportJSON());
+        QueueOwnedCacheIfNeeded();
         status = "临时外观已还原，现在可以保存肖像。";
     });
 
@@ -297,10 +308,10 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         status = message;
         // Disposal can finish after a native callback unwinds. Keep that eventual failure in
         // the log even when the feature has already detached its update and draw handlers.
-        if (disposed) Plugin.Log.Error("[肖像实时编辑] 卸载收尾未完成：{Error}", message);
+        if (disposed) Plugin.Log.Error("[肖像同步预览] 卸载收尾未完成：{Error}", message);
         var playerMessage = disposed && !target.PlateMirrorDisposalRestored
             ? "本地铭牌预览未能还原，请关闭后重新打开铭牌。" : message;
-        Plugin.Chat.PrintError("[肖像实时编辑] " + playerMessage);
+        Plugin.Chat.PrintError("[肖像同步预览] " + playerMessage);
     }
 
     private void Mutate(System.Action action)
@@ -323,7 +334,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             ImGui.SetNextWindowBgAlpha(1f);
             if (ImGui.Begin("###FireGazePortraitAnchor", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoSavedSettings | ImGuiWindowFlags.NoFocusOnAppearing))
             {
-                if (ImGui.Button(IsActive ? "关闭FireGaze修改" : "FireGaze修改"))
+                if (ImGui.Button(IsActive ? "关闭预览" : "FireGaze预览"))
                 {
                     if (IsActive) ClosePreview(); else OpenPreview();
                 }
@@ -339,15 +350,20 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
-        else if (parts is ["status"]) Plugin.Chat.Print("[肖像实时编辑] " + Status);
+        else if (parts is ["status"]) Plugin.Chat.Print("[肖像同步预览] " + Status);
         else if (parts is ["undo"]) Undo();
         else if (parts is ["redo"]) Redo();
         else if (parts is ["history", var view] && view is "list" or "photos") Mutate(() =>
         {
-            if (!session.IsActive) { Error("请先打开 FireGaze修改。"); return; }
+            if (!session.IsActive) { Error("请先打开 FireGaze预览。"); return; }
             window.OpenHistory(view == "photos");
         });
         else if (parts is ["restore", var record] && long.TryParse(record, out var recordID) && recordID > 0) RestoreHistory(recordID);
+        else if (parts is ["favorite", "save"]) SaveFavorite($"肖像 {DateTime.Now:yyyy-MM-dd HH:mm:ss}", []);
+        else if (parts is ["favorite", "restore", var favorite] && Guid.TryParseExact(favorite, "D", out var favoriteID)) RestoreFavorite(favoriteID);
+        else if (parts is ["favorite", "remove", var removeFavorite] && Guid.TryParseExact(removeFavorite, "D", out var removeFavoriteID)) RemoveFavorite(removeFavoriteID);
+        else if (parts is ["plate", var plateNumber] && int.TryParse(plateNumber, out var plateIndex) && plateIndex is >= 1 and <= 20) ApplyGlamourPlate(plateIndex - 1);
+        else if (parts is ["favorites"]) Mutate(() => window.OpenFavorites());
         else if (parts is ["appearance", var group, var option] && int.TryParse(option, out var appearanceValue)) ChangeAppearance(group, appearanceValue);
         else if (parts is ["sync", "on"]) SetSyncPlate(true);
         else if (parts is ["sync", "off"]) SetSyncPlate(false);
@@ -392,7 +408,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                 if (editor->IsAgentActive()) editor->Hide();
             return;
         }
-        if (session.IsActive) { Error("请先关闭 FireGaze修改，再切换肖像编辑器。"); return; }
+        if (session.IsActive) { Error("请先关闭预览，再切换肖像编辑器。"); return; }
         if (editor->IsAgentActive()) { Error("请先关闭已有肖像编辑器。"); return; }
         if (kind == "gearset")
         {
@@ -414,15 +430,6 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         }
     }
 
-    private static string SourceName(OwnedSourceKey source) => source.Kind switch
-    {
-        OwnedSourceKind.Equipped => "身上装备", OwnedSourceKind.Inventory => "背包", OwnedSourceKind.Armoury => "兵装库",
-        OwnedSourceKind.Saddlebag => "陆行鸟鞍囊", OwnedSourceKind.PremiumSaddlebag => "额外鞍囊",
-        OwnedSourceKind.GlamourDresser => "投影台", OwnedSourceKind.Armoire => "收藏柜",
-        OwnedSourceKind.RetainerInventory => $"雇员背包 {source.RetainerID}",
-        OwnedSourceKind.RetainerEquipped => $"雇员装备 {source.RetainerID}", _ => "物品来源",
-    };
-
     public void Dispose()
     {
         if (disposed) return;
@@ -432,7 +439,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             FlushEditing();
             if (!session.Close() && !target.AbortCapturedEditor())
                 Plugin.Log.Error("[肖像实时预览] 外观还原及编辑器关闭均失败：{Error}", target.LastError ?? "未知原因");
-            cacheWriter.Queue(owned.ExportJSON());
+            QueueOwnedCacheIfNeeded();
+            DisposeLibrary();
             target.Dispose();
         }
         disposed = true;
