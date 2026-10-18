@@ -26,6 +26,56 @@ Check(PortraitPreviewLayout.FitsInline(500, 350, 140, 10), "toolbar can use exac
 Check(!PortraitPreviewLayout.FitsInline(500, 350, 141, 10), "toolbar wraps the next action instead of clipping its last pixel");
 Check(!PortraitPreviewLayout.FitsInline(0, 0, 30, 10), "zero-width content does not request an inline action");
 
+var historyDate = new DateTime(2026, 10, 18);
+var historyRecord = new PortraitHistoryListItem(42,
+    new DateTimeOffset(new DateTime(2026, 10, 18, 12, 34, 56, DateTimeKind.Local)), "发型：选项 12", true);
+var changedRecord = historyRecord with { At = historyRecord.At.AddHours(1), Label = "更换装备：测试装备", IsCurrent = false };
+var identityFailures = new List<string>();
+if (ImGuiIdentity(PortraitHistoryLabels.DayHeader(historyDate, 1)) != ImGuiIdentity(PortraitHistoryLabels.DayHeader(historyDate, 2)))
+    identityFailures.Add("adding a record changes the date header identity and loses its collapsed state");
+if (ImGuiIdentity(PortraitHistoryLabels.RecordLabel(historyRecord)) != ImGuiIdentity(PortraitHistoryLabels.RecordLabel(changedRecord)))
+    identityFailures.Add("current marker, label or time changes the identity of the same history record");
+Check(identityFailures.Count == 0, identityFailures.Count == 0
+    ? "date counts and history display changes preserve both control identities"
+    : string.Join("; ", identityFailures));
+foreach (var (candidate, name) in new[]
+{
+    (historyRecord with { IsCurrent = false }, "current marker"),
+    (historyRecord with { Label = "更换装备：测试装备" }, "visible operation label"),
+    (historyRecord with { At = historyRecord.At.AddHours(1) }, "visible local time"),
+})
+    Check(ImGuiIdentity(PortraitHistoryLabels.RecordLabel(candidate)) == ImGuiIdentity(PortraitHistoryLabels.RecordLabel(historyRecord)),
+        $"changing only the {name} preserves the same record's keyboard identity");
+Check(ImGuiIdentity(PortraitHistoryLabels.DayHeader(historyDate.AddHours(12), 1)) == ImGuiIdentity(PortraitHistoryLabels.DayHeader(historyDate, 2)),
+    "the same local calendar date keeps its collapse identity regardless of time or count");
+Check(ImGuiIdentity(PortraitHistoryLabels.DayHeader(historyDate, 1)) != ImGuiIdentity(PortraitHistoryLabels.DayHeader(historyDate.AddDays(1), 1)),
+    "different calendar dates keep independent collapse identities");
+Check(ImGuiIdentity(PortraitHistoryLabels.RecordLabel(historyRecord)) != ImGuiIdentity(PortraitHistoryLabels.RecordLabel(historyRecord with { ID = 43 })),
+    "different records keep independent navigation identities");
+Check(ImGuiIdentity(PortraitHistoryLabels.DayHeader(historyDate, 1)) != ImGuiIdentity(PortraitHistoryLabels.RecordLabel(historyRecord)),
+    "date headers and history records have separate identity namespaces");
+
+var originalCulture = System.Globalization.CultureInfo.CurrentCulture;
+try
+{
+    System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
+    var englishDay = PortraitHistoryLabels.DayHeader(historyDate, 2);
+    var englishRecord = PortraitHistoryLabels.RecordLabel(historyRecord);
+    Check(VisibleLabel(englishDay) == "2026-10-18 · 2 条", "date header keeps the existing visible date and record count");
+    Check(VisibleLabel(englishRecord) == "12:34:56  发型：选项 12  · 当前", "record keeps the existing visible local time, label and current marker");
+    Check(VisibleLabel(PortraitHistoryLabels.RecordLabel(changedRecord)) == "13:34:56  更换装备：测试装备", "noncurrent record keeps its visible text without a current marker");
+    System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("th-TH");
+    var thaiDay = PortraitHistoryLabels.DayHeader(historyDate, 99);
+    Check(VisibleLabel(thaiDay) == "2569-10-18 · 99 条", "date display still follows the existing current-culture calendar");
+    Check(ImGuiIdentity(thaiDay) == ImGuiIdentity(englishDay), "culture and count changes cannot reopen the same calendar date");
+    Check(ImGuiIdentity(PortraitHistoryLabels.RecordLabel(changedRecord)) == ImGuiIdentity(englishRecord),
+        "culture and visible record changes cannot move its keyboard identity");
+}
+finally
+{
+    System.Globalization.CultureInfo.CurrentCulture = originalCulture;
+}
+
 var plusEight = TimeZoneInfo.CreateCustomTimeZone("test-plus-eight", TimeSpan.FromHours(8), "test", "test");
 var cache = new PortraitHistoryPresentation();
 var source = new CountingHistory([
@@ -56,6 +106,18 @@ Check(false, "portrait presentation must fit narrow scaled grids and cache immut
 Console.WriteLine($"PortraitVisualLayoutTests: {checks} passed, 0 failed");
 
 #if HAS_PRESENTATION
+static string ImGuiIdentity(string label)
+{
+    var marker = label.LastIndexOf("###", StringComparison.Ordinal);
+    return marker < 0 ? label : label[(marker + 3)..];
+}
+
+static string VisibleLabel(string label)
+{
+    var marker = label.IndexOf("##", StringComparison.Ordinal);
+    return marker < 0 ? label : label[..marker];
+}
+
 sealed class CountingHistory(IReadOnlyList<PortraitHistoryListItem> rows) : IReadOnlyList<PortraitHistoryListItem>
 {
     public int Reads { get; private set; }

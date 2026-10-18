@@ -84,6 +84,9 @@ namespace FireGaze.PortraitPreview
         public int CaptureCalls;
         public int ApplyCalls;
         public int MirrorUpdates;
+        public int MirrorCloseCalls;
+        public bool RejectMirrorClose;
+        public bool IsPlateMirrorActive;
         public string? LastError = null;
         public string SnapshotGameBuild { get; set; } = "fixture";
 
@@ -122,9 +125,15 @@ namespace FireGaze.PortraitPreview
             if (!Ready || !IsCurrent(identity) || RejectApply || !snapshot.IsCompatibleWith(Snapshot)) return false;
             ApplyCalls++; Snapshot = snapshot.Copy(); return true;
         }
-        public bool ClosePlateMirror() => true;
+        public bool ClosePlateMirror()
+        {
+            MirrorCloseCalls++;
+            if (RejectMirrorClose && IsPlateMirrorActive) return false;
+            IsPlateMirrorActive = false;
+            return true;
+        }
         public bool UpdatePlateMirror(PortraitIdentity identity, PortraitEditorSnapshot snapshot, bool enabled)
-        { if (!IsCurrent(identity)) return false; MirrorUpdates++; return enabled; }
+        { if (!IsCurrent(identity)) return false; MirrorUpdates++; IsPlateMirrorActive = enabled; return enabled; }
         public void Dispose() => NativeMemory.Free(State);
     }
 
@@ -139,7 +148,7 @@ namespace FireGaze.PortraitPreview
         public OwnedCharacterKey? Owner = new(10,20);
         public string? LastError;
         public bool IsActive => session.IsActive;
-        public string Status => status;
+        public string Status => plateMirrorCloseError ?? status;
         public PortraitHistoryStore Store => history;
         public NativePortraitTarget Native => target;
         public PortraitHistoryKey? Key => observedKey;
@@ -169,6 +178,9 @@ namespace FireGaze.PortraitPreview
         public void RecordDirect(string label="测试操作") => RecordDirectChange(label);
         public void RefreshRows() => RefreshHistoryRows();
         public void Advance(int milliseconds) => testClock=testClock.AddMilliseconds(milliseconds);
+        public void OverwriteStatus(string value) => status = value;
+        public void FlushOnly() => FlushEditing();
+        public void PollThrottled() { nextEditorSample=DateTime.MaxValue; PollEditing(); }
         public bool SyncLatestLook() => SynchronizeCurrentLook();
         public bool SetNativeVisibility(bool head, bool weapon, bool visor) => session.SetVisibility(head, weapon, visor);
         public void Dispose() {Plugin.Keys.Held=false;history.Dispose();target.Dispose();}

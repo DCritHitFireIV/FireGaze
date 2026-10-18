@@ -49,7 +49,9 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawHistoryPopup()
     {
         if (!showHistory) return;
-        ImGui.SetNextWindowSize(new Vector2(460, 570) * Scale, ImGuiCond.FirstUseEver);
+        var workArea = ImGui.GetMainViewport().WorkSize;
+        ImGui.SetNextWindowSizeConstraints(Vector2.Zero, PortraitPopupLayout.MaximumSize(workArea, Scale));
+        ImGui.SetNextWindowSize(PortraitPopupLayout.PreferredSize(new Vector2(460, 570) * Scale, workArea, Scale), ImGuiCond.FirstUseEver);
         if (ImGui.Begin("肖像历史记录###FireGazePortraitHistory", ref showHistory))
             DrawHistoryRows(feature, true);
         ImGui.End();
@@ -66,7 +68,7 @@ internal sealed partial class PortraitPreviewWindow
         var days = HistoryPresentation.GetValue(feature, _ => new PortraitHistoryPresentation()).Get(records);
         foreach (var day in days)
         {
-            if (!ImGui.CollapsingHeader($"{day.Date:yyyy-MM-dd} · {day.Records.Count} 条", ImGuiTreeNodeFlags.DefaultOpen)) continue;
+            if (!ImGui.CollapsingHeader(PortraitHistoryLabels.DayHeader(day.Date, day.Records.Count), ImGuiTreeNodeFlags.DefaultOpen)) continue;
             var dayRecords = day.Records;
             var clipper = new ImGuiListClipper();
             clipper.Begin(dayRecords.Count, ImGui.GetTextLineHeightWithSpacing());
@@ -75,7 +77,7 @@ internal sealed partial class PortraitPreviewWindow
             {
                 var record = dayRecords[index];
                 ImGui.PushID(record.ID.ToString(System.Globalization.CultureInfo.InvariantCulture));
-                var label = $"{record.At.ToLocalTime():HH:mm:ss}  {record.Label}{(record.IsCurrent ? "  · 当前" : "")}";
+                var label = PortraitHistoryLabels.RecordLabel(record);
                 if (ImGui.Selectable(label, record.IsCurrent) && allowRestore) feature.RestoreHistory(record.ID);
                 FireGazeSymbols.DrawSelection(ImGui.GetItemRectMin(), ImGui.GetItemRectMax(), record.IsCurrent, ImGui.IsItemFocused());
                 if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) || ImGui.IsItemFocused())

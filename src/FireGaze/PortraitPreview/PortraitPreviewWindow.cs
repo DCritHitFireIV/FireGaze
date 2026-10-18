@@ -134,7 +134,9 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         ContinueToolbar(ImGui.GetWindowPos().X + ImGui.GetWindowContentRegionMax().X,
             ImGui.CalcTextSize(sourceStatus).X);
         ImGui.TextUnformatted(sourceStatus);
-        ImGui.SetNextWindowSize(new Vector2(540 * Scale, 0), ImGuiCond.Appearing);
+        var sourceWorkArea = ImGui.GetMainViewport().WorkSize;
+        ImGui.SetNextWindowSizeConstraints(Vector2.Zero, PortraitPopupLayout.MaximumSize(sourceWorkArea, Scale));
+        ImGui.SetNextWindowSize(PortraitPopupLayout.PreferredSize(new Vector2(540 * Scale, 0), sourceWorkArea, Scale), ImGuiCond.Appearing);
         if (ImGui.BeginPopup("###PortraitSourceRecords"))
         {
             ImGui.TextUnformatted("物品来源");
@@ -349,7 +351,9 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     private void DrawDyePalette()
     {
-        ImGui.SetNextWindowSize(new Vector2(570, 620) * Scale, ImGuiCond.Appearing);
+        var workArea = ImGui.GetMainViewport().WorkSize;
+        ImGui.SetNextWindowSizeConstraints(Vector2.Zero, PortraitPopupLayout.MaximumSize(workArea, Scale));
+        ImGui.SetNextWindowSize(PortraitPopupLayout.PreferredSize(new Vector2(570, 620) * Scale, workArea, Scale), ImGuiCond.Appearing);
         if (!ImGui.BeginPopup("###PortraitDyePalette")) return;
         var look = feature.Current;
         var piece = look is null ? default : look.Pieces[(int)dyeSlot];

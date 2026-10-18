@@ -15,6 +15,73 @@ unsafe class Program
         RaptureGearsetModule.Value=(RaptureGearsetModule*)NativeMemory.AllocZeroed((nuint)sizeof(RaptureGearsetModule));
         try
         {
+            using(var feature=new PortraitPreviewFeature(Path.Combine(root,"mirror-close-retry.json")))
+            {
+                feature.Sample();feature.OpenPreview();feature.SetSyncPlate(true);
+                feature.Native.RejectMirrorClose=true;feature.SetSyncPlate(false);
+                Check(!feature.SyncPlate && feature.Native.IsPlateMirrorActive && feature.Status.Contains("尚未还原"),
+                    "failed mirror close separates disabled intent from retained lease and reports incomplete restoration");
+                var updates=feature.MirrorUpdates;var closes=feature.Native.MirrorCloseCalls;
+                feature.OverwriteStatus("临时外观已还原，现在可以保存肖像。");
+                Check(feature.Status.Contains("尚未还原") && !feature.Status.Contains("现在可以保存"),
+                    "pending mirror restoration takes precedence over a later generic preview-close success status");
+                feature.PollThrottled();
+                Check(feature.Native.MirrorCloseCalls==closes+1 && feature.MirrorUpdates==updates && feature.Native.IsPlateMirrorActive,
+                    "pending mirror restoration retries before snapshot throttling without resuming synchronization");
+                feature.Native.Ready=false;feature.PollThrottled();
+                Check(feature.Native.MirrorCloseCalls==closes+2 && feature.MirrorUpdates==updates && feature.Status.Contains("尚未还原"),
+                    "hidden editor still retries its retained mirror close before the loading early return");
+                feature.SetSyncPlate(true);
+                Check(!feature.SyncPlate && feature.MirrorUpdates==updates && feature.Native.IsPlateMirrorActive,
+                    "re-enabling cannot reacquire synchronization while an older mirror lease still cannot close");
+                feature.Native.RejectMirrorClose=false;feature.PollThrottled();
+                Check(!feature.Native.IsPlateMirrorActive && !feature.SyncPlate && feature.MirrorUpdates==updates && !feature.Status.Contains("尚未还原"),
+                    "successful later close clears the pending error without silently re-enabling synchronization");
+                closes=feature.Native.MirrorCloseCalls;feature.PollThrottled();
+                Check(feature.Native.MirrorCloseCalls==closes,
+                    "restored mirror stops retrying after its close succeeds");
+                feature.Native.Ready=true;feature.SetSyncPlate(true);
+                Check(feature.SyncPlate && feature.Native.IsPlateMirrorActive && !feature.Status.Contains("已结束"),
+                    "explicit re-enable after completed restoration cannot retain the previous ended status");
+            }
+            foreach(var reason in new[]{"owner","model","flush"})
+            using(var feature=new PortraitPreviewFeature(Path.Combine(root,$"mirror-close-{reason}.json")))
+            {
+                feature.Sample();feature.OpenPreview();feature.SetSyncPlate(true);
+                var updates=feature.MirrorUpdates;
+                feature.Native.RejectMirrorClose=true;
+                if(reason=="owner") feature.Owner=new(100,200);
+                else if(reason=="model") feature.Native.Current=false;
+                else feature.FlushOnly();
+                feature.Sample();
+                Check(!feature.SyncPlate && feature.Native.IsPlateMirrorActive && feature.Status.Contains("尚未还原"),
+                    $"{reason} close failure keeps restoration pending while disabling mirror intent");
+                var closes=feature.Native.MirrorCloseCalls;
+                feature.Sample();feature.RecordDirect();
+                Check(feature.Native.MirrorCloseCalls>closes && feature.MirrorUpdates==updates,
+                    $"{reason} cleanup retries on subsequent frames without mirroring current or replacement editor state");
+                feature.Native.RejectMirrorClose=false;feature.Sample();
+                Check(!feature.Native.IsPlateMirrorActive && !feature.SyncPlate && feature.MirrorUpdates==updates,
+                    $"{reason} cleanup releases the pending lease without resuming old synchronization");
+            }
+            using(var feature=new PortraitPreviewFeature(Path.Combine(root,"mirror-replaced-model.json")))
+            {
+                feature.Sample();feature.OpenPreview();feature.SetSyncPlate(true);
+                feature.Native.RejectMirrorClose=true;
+                feature.Native.Identity=feature.Native.Identity with {Model=77,Generation=78};
+                feature.Sample();
+                Check(!feature.SyncPlate && feature.Native.IsPlateMirrorActive && feature.Status.Contains("尚未还原"),
+                    "a newly resolved replacement model stops old mirror intent before its first editor sample");
+                var updates=feature.MirrorUpdates;var look=feature.Native.Snapshot.Look.Copy();
+                look.Pieces[(int)PortraitSlot.Body]=new(987,7,8);
+                feature.Native.Snapshot=feature.Native.Snapshot with {Look=look};
+                feature.Sample();feature.RecordDirect();
+                Check(feature.MirrorUpdates==updates && feature.Native.Snapshot.Look.Pieces[(int)PortraitSlot.Body]==new PortraitPiece(987,7,8),
+                    "pending old-model cleanup does not re-sync or overwrite replacement editor appearance");
+                feature.Native.RejectMirrorClose=false;feature.Sample();
+                Check(!feature.Native.IsPlateMirrorActive && !feature.SyncPlate && feature.MirrorUpdates==updates,
+                    "replacement model cleanup completes without carrying synchronization into the new model");
+            }
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"close.json")))
             {
                 feature.Sample();

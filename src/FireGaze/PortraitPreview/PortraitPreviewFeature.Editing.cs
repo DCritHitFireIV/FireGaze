@@ -20,6 +20,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private string historyStatus = "";
     private bool pointerHeld;
     private bool syncPlate;
+    private bool plateMirrorClosePending;
+    private string? plateMirrorCloseError;
     private bool canUndo;
     private bool canRedo;
     private DateTime nextEditorSample;
@@ -67,8 +69,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (historyOwner != owner)
         {
             HandleHistoryResult(historyBatch.Flush());
-            _ = target.ClosePlateMirror();
-            syncPlate = false;
+            RequestPlateMirrorClose();
             historyOwner = owner;
             observedEditor = null;
             observedIdentity = default;
@@ -77,6 +78,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
             appearanceGroups = [];
             historyRows = [];
             RefreshHistoryRows();
+        }
+        else
+        {
+            // Restoration is independent of snapshot readiness/throttling and must never restart
+            // synchronization. The target retains and validates the old owner/texture lease.
+            RetryPlateMirrorClose();
         }
         // Input is observed, never injected or consumed. Poll release edges even when the snapshot
         // interval is throttled so one continuous native drag becomes one history transaction.
@@ -95,12 +102,13 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 observedKey = null;
                 deferredBaselineSync = false;
                 appearanceGroups = [];
-                _ = target.ClosePlateMirror();
-                syncPlate = false;
+                RequestPlateMirrorClose();
                 RefreshHistoryRows();
             }
+            else if (syncPlate) RequestPlateMirrorClose();
             return;
         }
+        if (observedIdentity.IsValid && observedIdentity != identity) RequestPlateMirrorClose();
         if (DateTime.UtcNow < nextEditorSample && sampledPointer == pointerHeld && sampledKeyboard == keyboard) return;
         sampledPointer = pointerHeld;
         sampledKeyboard = keyboard;
@@ -193,8 +201,28 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void FlushEditing()
     {
         HandleHistoryResult(historyBatch.Flush());
-        _ = target.ClosePlateMirror();
+        RequestPlateMirrorClose();
+    }
+
+    private void RequestPlateMirrorClose()
+    {
         syncPlate = false;
+        plateMirrorClosePending = true;
+        RetryPlateMirrorClose();
+    }
+
+    private bool RetryPlateMirrorClose()
+    {
+        if (!plateMirrorClosePending) return true;
+        if (!target.ClosePlateMirror())
+        {
+            plateMirrorCloseError = "本地铭牌预览尚未还原，正在重试。";
+            return false;
+        }
+        plateMirrorClosePending = false;
+        if (plateMirrorCloseError is not null) status = "本地铭牌预览已结束。";
+        plateMirrorCloseError = null;
+        return true;
     }
 
     public void ChangeAppearance(string groupID, int value) => Mutate(() =>
@@ -274,11 +302,13 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void SetSyncPlate(bool enabled) => Mutate(() =>
     {
-        if (!enabled) { _ = target.ClosePlateMirror(); syncPlate = false; return; }
+        if (!enabled) { RequestPlateMirrorClose(); return; }
+        if (!RetryPlateMirrorClose()) return;
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)
             || target.CaptureEditorState(identity) is not { } current)
         { Error("请先在肖像编辑器旁打开 FireGaze修改。"); return; }
         syncPlate = true;
+        status = "肖像修改已开启。";
         if (!target.UpdatePlateMirror(identity, current, true)) status = "已开启同步，请打开自己的冒险者铭牌查看本地预览。";
     });
 
@@ -324,5 +354,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var sync = SyncPlate;
         if (ImGui.Checkbox("肖像实时同步铭牌", ref sync)) SetSyncPlate(sync);
         ImGui.TextDisabled("同步只影响本地铭牌预览，关闭后还原。");
+        if (plateMirrorCloseError is not null) ImGui.TextWrapped(plateMirrorCloseError);
     }
 }

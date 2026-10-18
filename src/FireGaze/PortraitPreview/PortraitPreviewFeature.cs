@@ -70,7 +70,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     public bool IsActive => session.IsActive;
     public PortraitLook? Current => session.Current;
-    public string Status => status;
+    public string Status => plateMirrorCloseError ?? status;
     public IReadOnlyList<string> SourceSummary => sourceSummary;
     public IReadOnlyList<PortraitDye> Dyes => dyes;
     public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => browser.TryGetValue(slot, out var values) ? values : [];
@@ -90,10 +90,10 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             openType = openType.ToString(), identity = new { editor = (long)identity.Editor, state = (long)identity.State,
                 model = (long)identity.Model, identity.Generation, identity.Character }, bounds,
             canBlockSave = target.CanBlockSave, blockedSaves = target.BlockedSaves, blockedSaveEvents = target.BlockedSaveEvents, nativeError = target.LastError,
-            active = IsActive, status, look = Current, sourceSummary, sources = ownedView.Sources,
+            active = IsActive, status = Status, look = Current, sourceSummary, sources = ownedView.Sources,
             ownedCount = ownedView.Items.Count, browser = browser.ToDictionary(p => p.Key.ToString(), p => p.Value),
             editorState = resolved ? target.CaptureEditorState(identity) : null,
-            syncPlate, plateMirrorActive = target.IsPlateMirrorActive, plateMirrorError = target.PlateMirrorError,
+            syncPlate, plateMirrorClosePending, plateMirrorActive = target.IsPlateMirrorActive, plateMirrorError = target.PlateMirrorError,
             canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
             historyRows, appearanceGroups,
         });
@@ -328,7 +328,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
-        else if (parts is ["status"]) Plugin.Chat.Print("[肖像实时编辑] " + status);
+        else if (parts is ["status"]) Plugin.Chat.Print("[肖像实时编辑] " + Status);
         else if (parts is ["undo"]) Undo();
         else if (parts is ["redo"]) Redo();
         else if (parts is ["restore", var record] && long.TryParse(record, out var recordID) && recordID > 0) RestoreHistory(recordID);
