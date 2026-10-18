@@ -1,202 +1,143 @@
 name: inbox
 
-# 玩家在游戏里点「一键提交」→ 插件打开填好的新建 issue 页 → 玩家按 Submit。
-# 这个工作流接手：把投稿落进仓库 → 在 issue 上回一句「收到了」 → 用 secret 里的地址通知维护者。
-#
-# 为什么不让插件直接推手机：那需要把推送密钥内嵌进发给所有玩家的插件（独立审查 P0-2）。
-# 密钥现在只在仓库 secret `SERVER3_PUSH_URL` 里；没配就跳过通知（其余步骤照跑）。
-
+# Each event has its own transaction. Never cancel pending contribution events.
+# A push collision refetches main and reruns ingestion, including index generation.
+# Periodic/manual recovery handles an interrupted event or an App's missed push event.
 on:
   issues:
     types: [opened, edited]
-  # 中继直传的界面文字投稿（/uit-submit 提交的文件）——2026-10-04 新增：
-  # 几千条的投稿不再走 issue 粘贴，提交后由本工作流自动并入 uit-packs/。
   push:
     branches: [main]
     paths:
       - 'docs/contributions/inbox/uit-direct-*.json'
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: 'Recovery lookback in days'
+        type: number
+        default: 7
+      max_pages:
+        description: 'Maximum Issues API pages (100 issues per page)'
+        type: number
+        default: 5
 
 permissions:
   contents: write
   issues: write
 
 jobs:
-  inbox:
-    # 反馈 issue 不归这里管（归 feedback.yml）；以前不筛，反馈 issue 也会跑本工作流，
-    # 而反馈没有 summary.txt，通知步骤 cat 失败 + set -e 直接把整条工作流弄红（2026-10-07 实测）
-    if: github.event_name == 'issues' && !startsWith(github.event.issue.title, '[反馈]')
+  ingest:
+    if: github.event_name != 'issues' || startsWith(github.event.issue.title, '[译文贡献]') || startsWith(github.event.issue.title, '翻译贡献 ')
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
+    timeout-minutes: 20
     steps:
-      - name: Checkout
+      - name: Checkout latest main
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: 把投稿收进仓库
-        id: inbox
+      - name: Persist contributions with bounded rebuild retries
+        id: ingest
         env:
-          # 用环境变量传正文：把 issue 正文直接插进 shell 命令等于给注入开门（工作流有 contents:write）
-          ISSUE_BODY: ${{ github.event.issue.body }}
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ github.event_name == 'issues' && 'issue' || github.event_name == 'push' && 'direct' || 'recover' }}
+          LOOKBACK_DAYS: ${{ inputs.lookback_days || 7 }}
+          MAX_PAGES: ${{ inputs.max_pages || 5 }}
         run: |
-          printf '%s' "$ISSUE_BODY" > "$RUNNER_TEMP/issue-body.md"
-          python scripts/inbox_contribution.py \
-            --issue "${{ github.event.issue.number }}" \
-            --body "$RUNNER_TEMP/issue-body.md" \
-            --author "${{ github.event.issue.user.login }}" \
-            --summary-out "$RUNNER_TEMP/summary.txt" \
-            --comment-out "$RUNNER_TEMP/comment.md" \
-            --notify-out "$RUNNER_TEMP/notify.md" | tee "$RUNNER_TEMP/inbox.log"
+          python scripts/process_inbox_job.py \
+            --repo "$GITHUB_WORKSPACE" \
+            --mode "$MODE" \
+            --event "$GITHUB_EVENT_PATH" \
+            --output-dir "$RUNNER_TEMP/inbox-persisted" \
+            --lookback-days "$LOOKBACK_DAYS" \
+            --max-pages "$MAX_PAGES"
 
-      - name: 把界面文字投稿收进 uit-packs
-        # 插件「插件汉化 → 更多 → 提交人工译文到公共库…」发的投稿：并进 uit-packs/<内部名>.json
-        if: contains(github.event.issue.body, 'uit-contribution')
-        env:
-          ISSUE_BODY: ${{ github.event.issue.body }}
-        run: |
-          printf '%s' "$ISSUE_BODY" > "$RUNNER_TEMP/issue-body.md"
-          python scripts/inbox_uit.py \
-            --issue "${{ github.event.issue.number }}" \
-            --body "$RUNNER_TEMP/issue-body.md" \
-            --author "${{ github.event.issue.user.login }}" \
-            --comment-out "$RUNNER_TEMP/comment.md" \
-            --summary-out "$RUNNER_TEMP/summary.txt" | tee "$RUNNER_TEMP/inbox-uit.log"
-
-      - name: 提交存档
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # 收件箱目录可能不存在（测试数据清理后再没有任何投稿落过盘；feedback/普通 issue 也会触发本工作流）——
-          # 直接 git add 一个不存在的路径会 fatal: pathspec did not match，把整条工作流卡死在存档一步。
-          if [ -d docs/contributions/inbox ]; then
-            git add docs/contributions/inbox
-          fi
-          git add uit-packs
-          if git diff --quiet --cached; then
-            echo "存档没有变化（同一条 issue 又编辑了？）"
-          else
-            git commit -m "chore: 收下 issue #${{ github.event.issue.number }} 的译文投稿"
-            # 并发推送兜底：收稿期间别的机器人工作流也在往 main 推，裸 push 会被 fetch first 拒绝
-            git push || { git pull --rebase && git push; }
-          fi
-
-      - name: 回话给提交者
+      # Recovery transactions are independent: earlier successes still receive
+      # their replies even if a later issue fails. Failed attempts publish nothing.
+      - name: Reply only for persisted new contributions
+        if: always() && steps.ingest.outcome != 'skipped'
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const path = process.env.RUNNER_TEMP + '/comment.md';
-            if (!fs.existsSync(path)) {
-              console.log('没有 comment.md（收稿脚本没给回复内容），跳过');
-              return;
+            const path = require('path');
+            const directory = path.join(process.env.RUNNER_TEMP, 'inbox-persisted', 'issues');
+            if (!fs.existsSync(directory)) return;
+            let failed = false;
+            for (const filename of fs.readdirSync(directory).filter(name => name.endsWith('.json'))) {
+              const item = JSON.parse(fs.readFileSync(path.join(directory, filename), 'utf8'));
+              try {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: item.issue_number,
+                  body: item.comment,
+                });
+              } catch (error) {
+                failed = true;
+                core.error(`Could not reply to persisted issue #${item.issue_number}: ${error.message}`);
+              }
             }
-            const body = fs.readFileSync(path, 'utf8');
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body,
-            });
+            if (failed) core.setFailed('Some persisted contributions could not receive their reply');
 
-      - name: 通知维护者（配了 secret 才发）
-        env:
-          PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-        run: |
-          if [ -z "$PUSH_URL" ]; then
-            echo "没有配置 SERVER3_PUSH_URL，跳过手机通知（仓库里已经存下这次投稿）"
-            exit 0
-          fi
-          if [ ! -s "$RUNNER_TEMP/summary.txt" ]; then
-            echo "这条 issue 没有可收录的投稿（比如链接投稿 / 反馈），跳过通知"
-            exit 0
-          fi
-          TITLE="FireGaze 译文投稿 $(cat "$RUNNER_TEMP/summary.txt")"
-          if [ -f "$RUNNER_TEMP/notify.md" ]; then
-            DETAILS="$(cat "$RUNNER_TEMP/notify.md")"
-          else
-            DETAILS="$(cat "$RUNNER_TEMP/summary.txt")"
-          fi
-          case "$ISSUE_BODY" in
-            *uit-contribution*)
-              HOWTO="界面文字投稿已自动并入 uit-packs/，无需手动收录；抽查后随每周库更新对玩家生效"
-              ;;
-            *)
-              HOWTO="审核后用 python scripts/import_contributions.py docs/contributions/inbox/<存档>.json --push 收录"
-              ;;
-          esac
-          BODY="$DETAILS
-
-          https://github.com/${GITHUB_REPOSITORY}/issues/${{ github.event.issue.number }}
-          $HOWTO"
-          curl -sS -X POST "$PUSH_URL" \
-            --data-urlencode "title=$TITLE" \
-            --data-urlencode "desp=$BODY" || echo "通知发送失败（不影响收录）"
-
-  direct:
-    # 中继直传的界面文字投稿：校验 + 并入 uit-packs + 留档 + 通知。
-    # 没有 issue 可回——投稿者在插件里直接拿到云端文件/提交链接。
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: 并入直传投稿
-        run: |
-          python scripts/ingest_uit_direct.py --summary-out "$RUNNER_TEMP/summary.txt" --reviews-dir "$RUNNER_TEMP/reviews"
-
-      - name: 提交存档与译文包
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/contributions/inbox uit-packs
-          if git diff --quiet --cached; then
-            echo "没有变化（这一批直传已经并入过）"
-            exit 0
-          fi
-          git commit -m "chore: 并入玩家直传的界面文字投稿"
-          git push || { git pull --rebase && git push; }
-
-      - name: 把抽查内容发成 issue（机器人）
-        # 2026-10-04 用户要求：入库之外，再开一条 issue 供抽查（含包名 + 原文→译文样本）
+      - name: Publish persisted review samples
+        if: always() && steps.ingest.outcome != 'skipped'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ ! -d "$RUNNER_TEMP/reviews" ]; then
-            echo "这次没有新收稿（没有抽查内容）"
-            exit 0
+          if [ -d "$RUNNER_TEMP/inbox-persisted/reviews" ]; then
+            python scripts/post_review_issues.py --reviews-dir "$RUNNER_TEMP/inbox-persisted/reviews"
           fi
-          python scripts/post_review_issues.py --reviews-dir "$RUNNER_TEMP/reviews" || echo "发 issue 失败（不影响已并入的译文）"
 
-      - name: 通知维护者（配了 secret 才发）
+      - name: Notify maintainer for persisted new contributions
+        if: always() && steps.ingest.outcome != 'skipped'
         env:
           PUSH_URL: ${{ secrets.SERVER3_PUSH_URL }}
         run: |
-          if [ -z "$PUSH_URL" ]; then
-            echo "没有配置 SERVER3_PUSH_URL，跳过手机通知（仓库里已经存下这次投稿）"
-            exit 0
-          fi
-          if [ ! -s "$RUNNER_TEMP/summary.txt" ]; then
-            echo "这次没有新并入的投稿，不通知"
-            exit 0
-          fi
-          TITLE="FireGaze 直传投稿 $(head -1 "$RUNNER_TEMP/summary.txt" | cut -c1-60)"
-          BODY="$(cat "$RUNNER_TEMP/summary.txt")
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import urllib.parse
+          import urllib.request
 
-          界面文字投稿已自动并入 uit-packs/，无需手动收录；抽查后随下次库更新对玩家生效
-          https://github.com/${GITHUB_REPOSITORY}/commits/main"
-          curl -sS -X POST "$PUSH_URL" \
-            --data-urlencode "title=$TITLE" \
-            --data-urlencode "desp=$BODY" || echo "通知发送失败（不影响收录）"
+          url = os.environ.get('PUSH_URL')
+          if not url:
+              print('No notification endpoint configured; contributions are already persisted.')
+              raise SystemExit(0)
+          root = Path(os.environ['RUNNER_TEMP']) / 'inbox-persisted'
+          messages = []
+          for path in sorted((root / 'issues').glob('*.json')):
+              item = json.loads(path.read_text(encoding='utf-8'))
+              if item.get('summary'):
+                  link = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/issues/{item['issue_number']}"
+                  messages.append(('FireGaze 译文投稿 ' + item['summary'][:100],
+                                   (item.get('notify') or item['summary']) + '\n\n' + link))
+          direct_summary = root / 'summary.txt'
+          if direct_summary.exists():
+              summary = direct_summary.read_text(encoding='utf-8')
+              messages.append(('FireGaze 直传投稿 ' + summary.splitlines()[0][:60], summary))
+          for title, body in messages:
+              encoded = urllib.parse.urlencode({'title': title, 'desp': body}).encode('utf-8')
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(url, data=encoded), timeout=30) as response:
+                      response.read()
+              except OSError:
+                  print('Notification failed; the contribution remains persisted.')
+          PY
+
+      - name: Preserve persisted outbox for inspection
+        if: always() && steps.ingest.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: inbox-persisted-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/inbox-persisted
+          if-no-files-found: ignore
+          retention-days: 7

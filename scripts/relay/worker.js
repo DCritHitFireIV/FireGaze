@@ -1,4 +1,4 @@
-// FireGaze 中继（Cloudflare Worker）v13
+// FireGaze 中继（Cloudflare Worker）v14
 //
 // 客户端（插件）POST → 本 Worker 校验/限流/垃圾检测 → 用服务端凭据在仓库里建 issue
 // → 现有 GitHub Actions 工作流负责：存档 + 回评 + 用 secret 通知维护者手机。
@@ -92,7 +92,10 @@ let poolEmptyNotifiedAt = 0;
 
 // 界面译文直传（/uit-submit）
 const UIT_SUBMIT_MAX_CHARS = 4_000_000; // 投稿 JSON 上限（几千条约几百 KB，留足余量）
-const UIT_SUBMIT_PER_IP_LIMIT = 6; // 每分钟每 IP（正常玩家一次「一键提交」= 1 次）
+const UIT_SUBMIT_PER_IP_LIMIT = 12; // 每分钟每 IP，容纳一次提交多个插件；仍按 isolate 近似限流
+const SUBMISSION_BUDGET_MS = 15_000; // 旧客户端 HttpClient 20 秒超时，给往返和回退留余量
+const GITHUB_CALL_TIMEOUT_MS = 3_000; // 包含读取响应正文
+const INBOX_MAX_ATTEMPTS = 7; // 连鉴权/冲突确认最多 45 次外部请求，低于 Workers Free 的 50 次限制
 
 // 公共库下载量 / 点赞（/library-download、/library-like、/library-counts）
 const LIBRARY_DOWNLOAD_PER_IP_LIMIT = 60; // 每分钟每 IP（正常一次下载 = 1 次）
@@ -111,10 +114,10 @@ const BANNED_PATTERNS = [
   /贷款/, /开票/, /usdt/i, /telegram/i, /whatsapp/i, /兼职刷单/, /色情/, /成人服务/,
 ];
 
-function json(obj, status = 200) {
+function json(obj, status = 200, headers = {}) {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers },
   });
 }
 
@@ -128,6 +131,101 @@ function allow(ip, limit = PER_IP_LIMIT, bucket = 'inbox') {
   }
   rec.n += 1;
   return rec.n <= limit;
+}
+
+function retryAfter(ip, bucket) {
+  const start = hits.get(`${bucket}|${ip}`)?.start ?? Date.now();
+  return Math.max(1, Math.ceil((start + WINDOW_MS - Date.now()) / 1000));
+}
+
+function submissionContext() {
+  const started = Date.now();
+  return { started, deadline: started + SUBMISSION_BUDGET_MS, id: randomTag(), attempts: 0 };
+}
+
+// Only our fixed stage/code names and a bounded GitHub request ID reach diagnostics.
+// Never serialize upstream response bodies, exceptions, credentials, submitted text or IPs.
+function submissionError(stage, code, status = 0, requestId = '') {
+  return Object.assign(new Error(code), {
+    relay: true, stage, code, status,
+    requestId: /^[A-Za-z0-9:._-]{1,128}$/.test(requestId) ? requestId : '',
+  });
+}
+
+function submissionDiagnostic(error, context) {
+  const safe = error?.relay ? error : submissionError('internal', 'internal-error');
+  return {
+    stage: safe.stage, code: safe.code, status: safe.status,
+    requestId: safe.requestId, attempts: context.attempts,
+  };
+}
+
+function logSubmission(outcome, context, diagnostic = {}) {
+  console.log(JSON.stringify({ event: 'uit-submit', id: context.id, outcome,
+    elapsedMs: Date.now() - context.started, attempts: context.attempts, ...diagnostic }));
+}
+
+// The race also bounds non-fetch work and response.json(); aborting fetch alone
+// would leave a stalled body reader outside the deadline.
+async function withinSubmission(context, stage, work, limit = GITHUB_CALL_TIMEOUT_MS) {
+  const remaining = context.deadline - Date.now();
+  if (remaining <= 0) throw submissionError(stage, 'deadline-exceeded');
+  const controller = new AbortController();
+  const timeoutMs = Math.min(remaining, limit);
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      reject(submissionError(stage, timeoutMs === remaining ? 'deadline-exceeded' : 'upstream-timeout'));
+      controller.abort();
+    }, timeoutMs);
+  });
+  try {
+    return await Promise.race([Promise.resolve().then(() => work(controller.signal)), timeout]);
+  } catch (error) {
+    if (error?.relay) throw error;
+    throw submissionError(stage, 'upstream-network');
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function githubJson(url, options, context, stage) {
+  return withinSubmission(context, stage, async signal => {
+    const response = await fetch(url, { ...options, signal });
+    if (!response.ok) {
+      // Workers permits six open connections per request. Release unread errors
+      // before retrying, without inspecting or logging their possibly private body.
+      response.body?.cancel().catch(() => {});
+      throw submissionError(stage, 'github-error', response.status,
+        response.headers.get('X-GitHub-Request-Id') ?? '');
+    }
+    return response.json();
+  });
+}
+
+async function readSubmissionText(request, context) {
+  return withinSubmission(context, 'body', async signal => {
+    const reader = request.body?.getReader();
+    if (!reader) return '';
+    const cancel = () => { reader.cancel().catch(() => {}); };
+    signal.addEventListener('abort', cancel, { once: true });
+    try {
+      const decoder = new TextDecoder();
+      let text = '';
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) return text + decoder.decode();
+        text += decoder.decode(value, { stream: true });
+        if (text.length > UIT_SUBMIT_MAX_CHARS) {
+          cancel();
+          return text;
+        }
+      }
+    } finally {
+      signal.removeEventListener('abort', cancel);
+      reader.releaseLock();
+    }
+  }, SUBMISSION_BUDGET_MS);
 }
 
 /// 每 IP 每日字符预算（实例内存计数，只在单个 isolate 内准确——够挡「一台机器刷完额度」）。
@@ -145,14 +243,22 @@ function chargeChars(ip, chars) {
 /// 界面译文直传：把 POST 正文原样提交成仓库里的一份投稿文件。
 /// 只做长度与关键字粗检（几千条的大 JSON 全量解析不值当，真正的校验在仓库工作流里）。
 async function handleUitSubmit(request, env, ip) {
+  const context = submissionContext();
   if (!allow(ip, UIT_SUBMIT_PER_IP_LIMIT, 'uitsubmit')) {
-    return json({ ok: false, error: 'too many requests' }, 429);
+    logSubmission('rate-limited', context);
+    return json({ ok: false, error: 'too many requests' }, 429,
+      { 'Retry-After': String(retryAfter(ip, 'uitsubmit')) });
   }
 
   let text;
   try {
-    text = await request.text();
-  } catch {
+    text = await readSubmissionText(request, context);
+  } catch (error) {
+    if (error?.code === 'deadline-exceeded') {
+      const diagnostic = submissionDiagnostic(error, context);
+      logSubmission('failed', context, diagnostic);
+      return json({ ok: false, error: 'body unreadable', ...diagnostic }, 408);
+    }
     return json({ ok: false, error: 'body unreadable' }, 400);
   }
 
@@ -172,9 +278,11 @@ async function handleUitSubmit(request, env, ip) {
 
   let token;
   try {
-    token = await githubToken(env, repo);
+    token = await githubToken(env, repo, context);
   } catch (e) {
-    return json({ ok: false, error: 'server auth failed', detail: String(e).slice(0, 200) }, 500);
+    const diagnostic = submissionDiagnostic(e, context);
+    logSubmission('failed', context, diagnostic);
+    return json({ ok: false, error: 'server auth failed', detail: diagnostic.code, ...diagnostic }, 500);
   }
 
   if (!token) {
@@ -183,14 +291,17 @@ async function handleUitSubmit(request, env, ip) {
 
   // 直传写仓库需要 App 的 Contents: 写权限；没给会在这里拿到 403，客户端会回退到「打开提交页」
   try {
-    const result = await commitInboxFile(env, repo, token, path, text);
+    const result = await commitInboxFile(env, repo, token, path, text, context);
+    logSubmission('accepted', context);
     return json({
       ok: true,
       file: `https://github.com/${repo}/blob/main/${path}`,
       commit: `https://github.com/${repo}/commit/${result}`,
     });
   } catch (e) {
-    return json({ ok: false, error: 'commit failed', detail: String(e).slice(0, 200) }, 502);
+    const diagnostic = submissionDiagnostic(e, context);
+    logSubmission('failed', context, diagnostic);
+    return json({ ok: false, error: 'commit failed', detail: diagnostic.code, ...diagnostic }, 502);
   }
 }
 
@@ -201,8 +312,8 @@ function randomTag() {
 
 /// 用 Git Data API 把一个新文件提交到 main（不用 base64，省 CPU）：
 /// 取 head → 建 blob → 建 tree（base_tree=当前）→ 建 commit → 更新 ref。
-/// 并发提交撞车（ref 被推走）时整个流程重试一次。
-async function commitInboxFile(env, repo, token, path, content, attempt = 0) {
+/// 并发提交撞车时，带退避重新读取 main、重建 tree/commit，始终 force:false。
+async function commitInboxFile(env, repo, token, path, content, context = submissionContext()) {
   const headers = {
     Authorization: `Bearer ${token}`,
     Accept: 'application/vnd.github+json',
@@ -212,54 +323,48 @@ async function commitInboxFile(env, repo, token, path, content, attempt = 0) {
   const api = (suffix) => `https://api.github.com/repos/${repo}${suffix}`;
   const message = `chore(uit-packs): 收录玩家直传投稿（${path.split('/').pop()}）`;
 
-  try {
-    const headRes = await fetch(api('/git/ref/heads/main'), { headers });
-    if (!headRes.ok) throw new Error(`ref ${headRes.status}`);
-    const headSha = (await headRes.json()).object.sha;
-
-    const commitRes = await fetch(api(`/git/commits/${headSha}`), { headers });
-    if (!commitRes.ok) throw new Error(`commit ${commitRes.status}`);
-    const treeSha = (await commitRes.json()).tree.sha;
-
-    const blobRes = await fetch(api('/git/blobs'), {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ content, encoding: 'utf-8' }),
-    });
-    if (!blobRes.ok) throw new Error(`blob ${blobRes.status}`);
-    const blobSha = (await blobRes.json()).sha;
-
-    const treeMake = await fetch(api('/git/trees'), {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({
+  const get = (suffix, stage) => githubJson(api(suffix), { headers }, context, stage);
+  const post = (suffix, body, stage, method = 'POST') => githubJson(api(suffix), {
+    method, headers, body: JSON.stringify(body),
+  }, context, stage);
+  let blobSha;
+  for (let attempt = 1; attempt <= INBOX_MAX_ATTEMPTS; attempt++) {
+    context.attempts = attempt;
+    let headSha;
+    let newCommit;
+    try {
+      headSha = (await get('/git/ref/heads/main', 'ref')).object.sha;
+      const treeSha = (await get(`/git/commits/${headSha}`, 'commit')).tree.sha;
+      // Blobs are immutable and independent of main; reuse it after a conflict.
+      if (!blobSha) blobSha = (await post('/git/blobs', { content, encoding: 'utf-8' }, 'blob')).sha;
+      const newTree = (await post('/git/trees', {
         base_tree: treeSha,
         tree: [{ path, mode: '100644', type: 'blob', sha: blobSha }],
-      }),
-    });
-    if (!treeMake.ok) throw new Error(`tree ${treeMake.status}`);
-    const newTree = (await treeMake.json()).sha;
-
-    const commitMake = await fetch(api('/git/commits'), {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ message, tree: newTree, parents: [headSha] }),
-    });
-    if (!commitMake.ok) throw new Error(`commit-create ${commitMake.status}`);
-    const newCommit = (await commitMake.json()).sha;
-
-    const refUpdate = await fetch(api('/git/refs/heads/main'), {
-      method: 'PATCH',
-      headers,
-      body: JSON.stringify({ sha: newCommit, force: false }),
-    });
-    if (!refUpdate.ok) throw new Error(`ref-update ${refUpdate.status}`);
-    return newCommit;
-  } catch (error) {
-    if (attempt < 1) {
-      return commitInboxFile(env, repo, token, path, content, attempt + 1);
+      }, 'tree')).sha;
+      newCommit = (await post('/git/commits', {
+        message, tree: newTree, parents: [headSha],
+      }, 'commit-create')).sha;
+      await post('/git/refs/heads/main', { sha: newCommit, force: false }, 'ref-update', 'PATCH');
+      return newCommit;
+    } catch (error) {
+      let retryable = error?.code === 'upstream-timeout' || error?.code === 'upstream-network'
+        || error?.status === 408 || error?.status === 429 || error?.status >= 500;
+      const uncertainUpdate = error?.stage === 'ref-update'
+        && (retryable || error.status === 409 || error.status === 422);
+      if (uncertainUpdate && context.deadline > Date.now()) {
+        const currentHead = (await get('/git/ref/heads/main', 'ref-check')).object.sha;
+        if (currentHead === newCommit) return newCommit; // PATCH accepted; only its response was lost.
+        // A 422 is also used for validation/rules failures. Only retry it when main moved.
+        retryable = retryable || currentHead !== headSha;
+      }
+      if (!retryable || error?.code === 'deadline-exceeded') throw error;
+      if (attempt === INBOX_MAX_ATTEMPTS) {
+        throw submissionError(error.stage, 'retry-exhausted', error.status, error.requestId);
+      }
+      logSubmission('retry', context, submissionDiagnostic(error, context));
+      const delay = Math.min(500, 80 * (2 ** (attempt - 1))) + Math.floor(Math.random() * 100);
+      await withinSubmission(context, 'retry-delay', () => sleep(delay), SUBMISSION_BUDGET_MS);
     }
-    throw error;
   }
 }
 
@@ -1107,9 +1212,11 @@ async function signAppJwt(appId, privateKeyPem) {
   return `${head}.${payload}.${b64url(sig)}`;
 }
 
-async function githubToken(env, repo) {
+async function githubToken(env, repo, context = null) {
   if (env.APP_ID && env.APP_PRIVATE_KEY) {
-    const jwt = await signAppJwt(env.APP_ID, env.APP_PRIVATE_KEY);
+    const jwt = context
+      ? await withinSubmission(context, 'app-sign', () => signAppJwt(env.APP_ID, env.APP_PRIVATE_KEY), SUBMISSION_BUDGET_MS)
+      : await signAppJwt(env.APP_ID, env.APP_PRIVATE_KEY);
     const headers = {
       Authorization: `Bearer ${jwt}`,
       Accept: 'application/vnd.github+json',
@@ -1118,15 +1225,23 @@ async function githubToken(env, repo) {
 
     let installationId = env.INSTALLATION_ID;
     if (!installationId) {
-      const res = await fetch(`https://api.github.com/repos/${repo}/installation`, { headers });
-      if (!res.ok) throw new Error(`app installation lookup ${res.status}`);
-      installationId = (await res.json()).id;
+      const url = `https://api.github.com/repos/${repo}/installation`;
+      if (context) {
+        installationId = (await githubJson(url, { headers }, context, 'app-installation')).id;
+      } else {
+        const res = await fetch(url, { headers });
+        if (!res.ok) throw new Error(`app installation lookup ${res.status}`);
+        installationId = (await res.json()).id;
+      }
     }
 
-    const tokenRes = await fetch(`https://api.github.com/app/installations/${installationId}/access_tokens`, {
+    const tokenUrl = `https://api.github.com/app/installations/${installationId}/access_tokens`;
+    const tokenOptions = {
       method: 'POST',
       headers,
-    });
+    };
+    if (context) return (await githubJson(tokenUrl, tokenOptions, context, 'app-token')).token;
+    const tokenRes = await fetch(tokenUrl, tokenOptions);
     if (!tokenRes.ok) throw new Error(`app token ${tokenRes.status}`);
     return (await tokenRes.json()).token;
   }
@@ -1172,7 +1287,7 @@ export default {
         return handlePoolStatus(request, env);
       }
 
-      return json({ ok: true, service: 'firegaze-relay', version: 13 });
+      return json({ ok: true, service: 'firegaze-relay', version: 14 });
     }
 
     if (request.method !== 'POST') {
