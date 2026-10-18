@@ -48,12 +48,19 @@ internal sealed unsafe partial class NativePortraitTarget
         var paused=native.IsPaused(view);
         if (!IsCurrent(identity)) return null;
         var state=(AgentBannerEditorState*)identity.State;
-        var follow=((Character*)identity.Character)->LookAt.BannerCameraFollowFlag;
+        var actor=(Character*)identity.Character;
+        var follow=actor->LookAt.BannerCameraFollowFlag;
+        // Exported directions are half-precision controller outputs that can settle after a
+        // restore. History owns the requested controls, including while camera follow is on.
+        var headDirection=actor->LookAt.BannerHeadDirection;
+        var eyeDirection=actor->LookAt.BannerEyeDirection;
         if (!IsCurrent(identity)) return null;
         var snapshot=new PortraitEditorSnapshot {
             GameBuild=SnapshotGameBuild, EntryPoint=(byte)state->OpenType, Look=ReadLook(view),
             Customize=view->ModelData.CustomizeData.Data.ToArray(), HideVieraEars=view->PortraitCharacterData.HideVieraEars,
             Composition=ReadComposition(view,state,&data,paused) with {
+                HeadDirection=new(headDirection.X,headDirection.Y),
+                EyeDirection=new(eyeDirection.X,eyeDirection.Y),
                 HeadFacingCamera=(follow&LookAtContainer.BannerCameraFollowFlags.Head)!=0,
                 EyesFacingCamera=(follow&LookAtContainer.BannerCameraFollowFlags.Eyes)!=0}
         };

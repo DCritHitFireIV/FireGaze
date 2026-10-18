@@ -22,6 +22,7 @@ unsafe class Program {
   var target=typeof(PortraitLook).Assembly.GetType("FireGaze.PortraitPreview.NativePortraitTarget");
   Check(target?.GetMethod("CaptureEditorState")!=null && target.GetMethod("ApplyEditorState")!=null,"complete native editor capture and restore entrypoints exist");
   Check(typeof(PortraitComposition).GetProperty("HeadFacingCamera")!=null && typeof(PortraitComposition).GetProperty("EyesFacingCamera")!=null,"native camera tracking toggles are included in complete snapshots");
+  GazeCaptureTests.Run(Check);
   using(var beautyFixture=new EditorFixture {Paused=true,RestartPoseOnSeek=true})
   using(var beautyTarget=new NativePortraitTarget(beautyFixture,_=>true,_=>{})) {
    beautyFixture.Data.AnimationProgress=.001f;
