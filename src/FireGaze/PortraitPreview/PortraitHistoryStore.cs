@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text;
 using System.Text.Json;
 
 namespace FireGaze.PortraitPreview;
@@ -33,6 +35,8 @@ internal sealed class PortraitHistoryStore : IDisposable
     private readonly int byteLimit;
     private readonly PortraitHistoryWriter? writer;
     private List<PortraitHistoryRecord> records = [];
+    // Fragments are immutable once encoded and are shared safely with queued worker snapshots.
+    private Dictionary<long, byte[]> encodedRecords = [];
     private Dictionary<PortraitHistoryKey, Cursor> cursors = [];
     private long nextID = 1;
     private long revision;
@@ -201,33 +205,54 @@ internal sealed class PortraitHistoryStore : IDisposable
         // Build and trim a detached candidate. Failure must leave both current memory and disk intact.
         var nextRecords = records.Append(added).ToList();
         var protectedIDs = nextCursors.Values.SelectMany(cursor => cursor.Redo.Append(cursor.ID)).Append(added.ID).ToHashSet();
-        byte[] bytes;
-        while (true)
+        var changedEncoding = new Dictionary<long, byte[]> { [added.ID] = JsonSerializer.SerializeToUtf8Bytes(added) };
+        byte[] EncodingFor(PortraitHistoryRecord record) => changedEncoding.TryGetValue(record.ID, out var changed)
+            ? changed : encodedRecords[record.ID];
+        var prefix = Encoding.UTF8.GetBytes("{\"Version\":1,\"NextID\":" + (nextID + 1).ToString(CultureInfo.InvariantCulture) + ",\"Records\":[");
+        var suffix = Encoding.UTF8.GetBytes("],\"Cursors\":" + JsonSerializer.Serialize(nextCursors
+            .Select(pair => new SavedCursor(pair.Key, pair.Value.ID, pair.Value.Redo)).ToList()) + "}");
+        long byteCount = prefix.Length + suffix.Length + Math.Max(0, nextRecords.Count - 1);
+        foreach (var record in nextRecords) byteCount += EncodingFor(record).Length;
+        while (byteCount > byteLimit)
         {
-            var ids = nextRecords.Select(record => record.ID).ToHashSet();
+            // Repair this removal before checking quota again: long shared IDs becoming null can
+            // shrink many surviving fragments enough to retain the next-oldest record.
+            var remove = nextRecords.FindIndex(record => !protectedIDs.Contains(record.ID));
+            if (remove < 0) return new(PortraitHistoryWriteStatus.TooLarge);
+            var removed = nextRecords[remove];
+            byteCount -= EncodingFor(removed).Length + (nextRecords.Count > 1 ? 1 : 0);
+            nextRecords.RemoveAt(remove);
             for (var index = 0; index < nextRecords.Count; index++)
             {
                 var record = nextRecords[index];
-                nextRecords[index] = record with
-                {
-                    ParentID = record.ParentID is { } parent && ids.Contains(parent) ? parent : null,
-                    TargetID = record.TargetID is { } target && ids.Contains(target) ? target : null,
-                };
+                var parent = record.ParentID == removed.ID ? null : record.ParentID;
+                var target = record.TargetID == removed.ID ? null : record.TargetID;
+                if (parent == record.ParentID && target == record.TargetID) continue;
+                var repaired = record with { ParentID = parent, TargetID = target };
+                var encoded = JsonSerializer.SerializeToUtf8Bytes(repaired);
+                byteCount += encoded.Length - EncodingFor(record).Length;
+                changedEncoding[record.ID] = encoded;
+                nextRecords[index] = repaired;
             }
-            bytes = JsonSerializer.SerializeToUtf8Bytes(new Document(1, nextID + 1, nextRecords,
-                nextCursors.Select(pair => new SavedCursor(pair.Key, pair.Value.ID, pair.Value.Redo)).ToList()));
-            if (bytes.Length <= byteLimit) break;
-            var remove = nextRecords.FindIndex(record => !protectedIDs.Contains(record.ID));
-            if (remove < 0) return new(PortraitHistoryWriteStatus.TooLarge);
-            nextRecords.RemoveAt(remove);
         }
         if (!commit) return new(PortraitHistoryWriteStatus.Added, nextRecords.First(record => record.ID == added.ID));
-        if (writer is null || !writer.Queue(bytes)) return new(PortraitHistoryWriteStatus.Disposed);
+        var nextEncoding = new Dictionary<long, byte[]>(nextRecords.Count);
+        var fragments = new byte[nextRecords.Count][];
+        for (var index = 0; index < nextRecords.Count; index++)
+        {
+            var record = nextRecords[index];
+            var fragment = EncodingFor(record);
+            fragments[index] = fragment;
+            nextEncoding.Add(record.ID, fragment);
+        }
+        var document = new PortraitHistoryWriteDocument(prefix, fragments, suffix);
+        if (writer is null || !writer.Queue(document)) return new(PortraitHistoryWriteStatus.Disposed);
         records = nextRecords;
+        encodedRecords = nextEncoding;
         cursors = nextCursors;
         nextID++;
         revision++;
-        serializedBytes = bytes.Length;
+        serializedBytes = document.Length;
         return new(PortraitHistoryWriteStatus.Added, records.First(record => record.ID == added.ID));
     }
 
@@ -271,6 +296,7 @@ internal sealed class PortraitHistoryStore : IDisposable
                 || document.Records.Any(record => !document.Cursors.Any(cursor => cursor.Key == record.Key)))
                 throw new InvalidDataException("肖像历史记录关系无效，已保留原文件。");
             records = document.Records;
+            encodedRecords = records.ToDictionary(record => record.ID, record => JsonSerializer.SerializeToUtf8Bytes(record));
             cursors = document.Cursors.ToDictionary(cursor => cursor.Key, cursor => new Cursor(cursor.ID, cursor.Redo));
             nextID = document.NextID;
             serializedBytes = fileBytes.Length;

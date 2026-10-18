@@ -1510,7 +1510,7 @@ internal sealed class UITextPatchManager
         if (restored == 0)
         {
             this.store.Save(state with { LastError = "找不到备份文件，无法自动还原" });
-            return (false, "找不到备份文件（备份目录被清过？）——需要手动重装这个插件。");
+            return (false, "找不到可用备份，无法还原。请先在卫月插件安装器中重新安装此插件。");
         }
 
         this.store.Delete(entry.InternalName);
@@ -1518,7 +1518,7 @@ internal sealed class UITextPatchManager
         this.ClearHashCache();
         var suffix = reason is null ? string.Empty : $"（{reason}）";
         Plugin.Log?.Information($"[内部文本] {entry.InternalName}：已还原原始 DLL{suffix}（{restored} 个文件）");
-        return (true, "已还原成原始文件" + suffix + "；重载插件后恢复英文。");
+        return (true, "已还原成原始文件" + suffix + "；重载插件后恢复原文。");
     }
 
     /// <summary>
@@ -1570,10 +1570,10 @@ internal sealed class UITextPatchManager
 
         ActivityLog.Info("还原原文", $"{entry.InternalName}：{message}");
 
-        message = message.Replace("；重载插件后恢复英文。", string.Empty, StringComparison.Ordinal);
+        message = message.Replace("；重载插件后恢复原文。", string.Empty, StringComparison.Ordinal);
         if (!entry.IsLoaded)
         {
-            return (true, message + "；插件当前未加载，下次加载自动恢复英文。");
+            return (true, message + "；插件当前未加载，下次加载自动恢复原文。");
         }
 
         var (reloadOk, reloadMessage) = await this.ReloadAsync(entry).ConfigureAwait(false);

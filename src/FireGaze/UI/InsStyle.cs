@@ -4,62 +4,54 @@ using Dalamud.Bindings.ImGui;
 namespace FireGaze.UI;
 
 /// <summary>
-///     ins 风（Instagram 设计语言）在 ImGui 里的克制移植：圆角、卡片面色差、圆形头像、
-///     一屏一处渐变（展开行的左侧条）、已赞红心、粉色 CTA。
-///     游戏内不刷浅色底——搬的是结构，不是白底。守则见 ~/.pi/agent/skills/ins-style-ui/SKILL.md。
+///     Existing list helpers keep their call sites and item IDs while using FireGaze's shared workbench.
 /// </summary>
 internal static class InsStyle
 {
-    // 取自 xiaohongshu 设计系统（深色模式）的 token：
-    //   Surface #19191E（紫调近黑）/ 品牌红 #FF2E4D / 标题白 84% / 段落白 56%
-    //   卡片圆角 12–16、按钮全胶囊、零阴影（层级靠间距与圆角）
-    public static readonly Vector4 Card = new(0.102f, 0.102f, 0.125f, 1f);        // #1A1A20 卡片面（紫调）
-    public static readonly Vector4 CardHover = new(0.122f, 0.122f, 0.149f, 1f);   // #1F1F26
-    public static readonly Vector4 CardActive = new(0.137f, 0.137f, 0.169f, 1f);  // #23232B 展开态
-    public static readonly Vector4 LikedRed = new(0.999f, 0.180f, 0.302f, 1f);    // #FF2E4D 已赞红心
-    public static readonly Vector4 Neutral = new(1f, 1f, 1f, 0.56f);              // 段落文字（半透明白）
-    public static readonly Vector4 Bright = new(1f, 1f, 1f, 0.84f);               // 标题文字
-    public static readonly Vector4 Pink = new(0.999f, 0.180f, 0.302f, 1f);        // #FF2E4D 主 CTA
-    public static readonly Vector4 PinkHover = new(1f, 0.278f, 0.384f, 1f);       // #FF4762 悬停提亮
-    public static readonly Vector4 White = new(1f, 1f, 1f, 1f);
+    public static readonly Vector4 Card = FireGazePalette.Panel;
+    public static readonly Vector4 CardHover = FireGazePalette.Hover;
+    public static readonly Vector4 CardActive = FireGazePalette.Selected;
+    public static readonly Vector4 LikedRed = FireGazePalette.Bad;
+    public static readonly Vector4 Neutral = FireGazePalette.Muted;
+    public static readonly Vector4 Bright = FireGazePalette.Text;
+    // Historical helper names remain source compatible; the primary action is now the shared blue.
+    public static readonly Vector4 Pink = FireGazePalette.Action;
+    public static readonly Vector4 PinkHover = FireGazePalette.ActionHover;
+    public static readonly Vector4 White = FireGazePalette.White;
 
-    /// <summary>整页圆角基调（成对调用）：卡片 12、按钮胶囊。</summary>
+    /// <summary>Local list rounding; no line metrics or global style are changed.</summary>
     public static void PushRounded()
     {
-        ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 12f);
-        ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 12f);
-        ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarRounding, 8f);
+        var scale = ImGui.GetFontSize() / 17f;
+        ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 4f * scale);
+        ImGui.PushStyleVar(ImGuiStyleVar.ChildRounding, 6f * scale);
+        ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarRounding, 6f * scale);
     }
 
     public static void PopRounded() => ImGui.PopStyleVar(3);
 
     /// <summary>
-    ///     画一行卡片底。跨列绘制前调用方要自己 <c>PushClipRect(min, max, false)</c> 顶掉单元格裁剪。
-    ///     展开态额外在左侧画 3px 的 IG 渐变竖条（一屏只此一处渐变）。
+    ///     画一行资料底。跨列绘制仍由调用方管理单元格裁剪。
     /// </summary>
     public static void DrawCard(Vector2 min, Vector2 max, bool active, bool hovered)
     {
         var draw = ImGui.GetWindowDrawList();
         var color = active ? CardActive : hovered ? CardHover : Card;
-        draw.AddRectFilled(min, max, ImGui.GetColorU32(color), 14f);
-        // xiaohongshu 规范：卡片不加左侧彩色描边（SaaS/dashboard 味）——展开态只用更亮的卡面区分
+        draw.AddRectFilled(min, max, ImGui.GetColorU32(color), 6f * ImGui.GetFontSize() / 17f);
     }
 
-    /// <summary>IG 粉 CTA（圆角胶囊、白字）；返回是否点击。宽度按标签 + 内边距实算。</summary>
+    /// <summary>Primary action retains the original ID; native Button supplies focus and disabled handling.</summary>
     public static bool PinkButton(string label, float width)
     {
-        var visible = VisibleLabel(label);
-        // 命中区必须给真实高度：以前传 (width, 0f)，InvisibleButton 是 0 高的矩形，
-        // 悬停/点击永远命中不了——按钮画得出来但点不着（2026-10-07 用户实测「加入自己的库没反应」）
         var actual = new Vector2(width, ImGui.GetFrameHeight());
-        var pos = ImGui.GetCursorScreenPos();
-        var clicked = ImGui.InvisibleButton(label, actual);
-        var hovered = ImGui.IsItemHovered();
-        var draw = ImGui.GetWindowDrawList();
-        draw.AddRectFilled(pos, pos + actual, ImGui.GetColorU32(hovered ? PinkHover : Pink), actual.Y * 0.5f);
-        var textSize = ImGui.CalcTextSize(visible);
-        draw.AddText(pos + ((actual - textSize) * 0.5f), ImGui.GetColorU32(White), visible);
-        return clicked;
+        UiHelpers.PushPrimaryButton();
+        try
+        {
+            var clicked = ImGui.Button(label, actual);
+            if (ImGui.IsItemFocused()) FireGazeSymbols.DrawFocus(ImGui.GetItemRectMin(), ImGui.GetItemRectMax());
+            return clicked;
+        }
+        finally { UiHelpers.PopPrimaryButton(); }
     }
 
     public static float PinkButtonWidth(string label)
@@ -72,18 +64,27 @@ internal static class InsStyle
         return index >= 0 ? label[..index] : label;
     }
 
-    /// <summary>红心按钮：已赞 #ED4956、未赞中性、悬停提亮；命中区不小于 40px。已赞时点击不再触发。</summary>
+    /// <summary>Heart keeps its original item ID and hit region while gaining native navigation/disabled behavior.</summary>
     public static bool HeartButton(string id, bool liked, bool unsynced, float width)
     {
         var size = new Vector2(width, ImGui.GetFrameHeight());
         var pos = ImGui.GetCursorScreenPos();
-        var clicked = ImGui.InvisibleButton(id, size);
+        bool clicked;
+        using (UiHelpers.Disabled(liked))
+        {
+            // Repaint the native label below, keeping the exact original ID instead of renaming it to a glyph.
+            clicked = ImGui.Button(id, size);
+        }
         var hovered = ImGui.IsItemHovered();
+        var focused = ImGui.IsItemFocused();
         var draw = ImGui.GetWindowDrawList();
+        draw.AddRectFilled(pos, pos + size, ImGui.GetColorU32(hovered ? FireGazePalette.Hover : FireGazePalette.Panel),
+            4f * ImGui.GetFontSize() / 17f);
         var color = liked ? LikedRed : hovered ? Bright : Neutral;
         var text = unsynced ? "♥ *" : "♥";
         var textSize = ImGui.CalcTextSize(text);
         draw.AddText(pos + ((size - textSize) * 0.5f), ImGui.GetColorU32(color), text);
+        if (focused) FireGazeSymbols.DrawFocus(pos, pos + size);
         return clicked && !liked;
     }
 
@@ -102,12 +103,12 @@ internal static class InsStyle
             new Vector2(0f, 0f),
             new Vector2(1f, 1f),
             ImGui.GetColorU32(White),
-            size / 2f);
+            6f * ImGui.GetFontSize() / 17f);
         return true;
     }
 
     /// <summary>
-    ///     字母头像（无图插件的占位，正圆）：「插件汉化」与「插件发现」共用同一个形状与配色，
+    ///     字母头像（无图插件的占位）：「插件汉化」与「插件发现」共用同一个形状与配色，
     ///     两个页签的头像列看起来是同一套东西。
     /// </summary>
     public static void DrawLetterAvatar(string name, float size)
@@ -117,14 +118,14 @@ internal static class InsStyle
         drawList.AddRectFilled(
             start,
             start + new Vector2(size, size),
-            ImGui.GetColorU32(new Vector4(0.22f, 0.25f, 0.31f, 1f)),
-            size / 2f);
+            ImGui.GetColorU32(FireGazePalette.Selected),
+            6f * ImGui.GetFontSize() / 17f);
 
-        var initial = string.IsNullOrEmpty(name) ? "?" : name[..1].ToUpperInvariant();
+        var initial = string.IsNullOrEmpty(name) ? "?" : System.Globalization.StringInfo.GetNextTextElement(name).ToUpperInvariant();
         var textSize = ImGui.CalcTextSize(initial);
         drawList.AddText(
             start + ((new Vector2(size, size) - textSize) * 0.5f),
-            ImGui.GetColorU32(new Vector4(0.80f, 0.86f, 0.96f, 1f)),
+            ImGui.GetColorU32(FireGazePalette.Action),
             initial);
 
         ImGui.Dummy(new Vector2(size, size));

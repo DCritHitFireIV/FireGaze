@@ -26,7 +26,7 @@ internal sealed partial class DiscoveryTab
         }
 
         refreshInFlight = true;
-        SetStatus("正在从 GitHub 拉取最新云库…", isError: false);
+        SetStatus("正在更新插件列表…", isError: false);
         _ = Task.Run(async () =>
         {
             try
@@ -233,7 +233,7 @@ internal sealed partial class DiscoveryTab
     private void AddRepoFromRow(string url, string internalName)
     {
         var added = plugin.AddThirdPartyRepository(url, out var message);
-        SetStatus(added ? "已把这条库链加进你的插件列表" : message, !added);
+        SetStatus(added ? "已添加仓库链接" : message, !added);
         if (added)
         {
             MarkRepoState(url, enabled: true);
@@ -312,7 +312,7 @@ internal sealed partial class DiscoveryTab
         plugin.TrackFirstSeen();
         MarkRepoState(url, enabled: true);
         var reloading = plugin.Repos.TriggerReload(out var reloadError);
-        SetStatus(reloading ? "已启用这条库；卫月正在抓取它的插件" : "库已启用，但刷新失败：" + reloadError + "；请在卫月安装器重试刷新", isError: !reloading);
+        SetStatus(reloading ? "仓库已启用，正在刷新插件列表" : "库已启用，但刷新失败：" + reloadError + "；请在卫月安装器重试刷新", isError: !reloading);
         rebuildPending = true;
     }
 

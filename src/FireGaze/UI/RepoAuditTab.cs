@@ -152,15 +152,12 @@ internal sealed partial class RepoAuditTab
         var tSetup = drawWatch.ElapsedMilliseconds;
 
         // ---------------- 说明（压到两行以内） ----------------
-        ImGui.TextWrapped("扫描全部第三方仓库，检查链接是否失效、链接是否合规，校验口径与卫月一致。");
+        ImGui.TextWrapped("检查第三方仓库链接是否可用，以及能否被卫月识别。");
 
         // ---------------- 扫描控制 ----------------
         // 图标下载进行中时，体检按钮就地置灰（别再画第二个同名按钮）
         var scanBlocked = iconDownloadRunning;
-        if (scanBlocked)
-        {
-            ImGui.BeginDisabled();
-        }
+        using var disabledScope1 = UiHelpers.Disabled(scanBlocked);
 
         // 体检过之后按钮改叫「重新体检」（行状态提示里也是这个词）
         var scanLabel = plugin.Config.LastScanUTC != default ? "重新体检" : "开始体检";
@@ -183,12 +180,13 @@ internal sealed partial class RepoAuditTab
             StartScan();
         }
 
+        disabledScope1.Dispose();
         if (scanBlocked)
         {
-            ImGui.EndDisabled();
+
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
             {
-                ImGui.SetTooltip("图标正在「插件安装器」页下载；先等它跑完，或去那页点「停止下载」。");
+                ImGui.SetTooltip("正在下载图标，请等待完成，或到「插件安装器」停止下载。");
             }
         }
 
@@ -269,10 +267,7 @@ internal sealed partial class RepoAuditTab
         // 第二行：与健康度正交的两个开关（使用情况 / 图标展开）
         var indexReady = installedIndex is { Available: true };
 
-        if (!indexReady)
-        {
-            ImGui.BeginDisabled();
-        }
+        using var disabledScope2 = UiHelpers.Disabled(!indexReady);
 
         if (ImGui.Checkbox("只看有插件的###OnlyWithPlugins", ref onlyWithPlugins) && onlyWithPlugins)
         {
@@ -283,7 +278,7 @@ internal sealed partial class RepoAuditTab
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(indexReady
-                ? "只显示装了插件的库，适合逐条看图标缺不缺"
+                ? "只显示本机已从中安装插件的仓库。"
                 : "插件数据不可用，暂时不能按这个筛选");
         }
 
@@ -297,14 +292,11 @@ internal sealed partial class RepoAuditTab
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(indexReady
-                ? "只显示没装过插件的库"
+                ? "只显示本机未从中安装插件的仓库。"
                 : "插件数据不可用，暂时不能按这个筛选");
         }
 
-        if (!indexReady)
-        {
-            ImGui.EndDisabled();
-        }
+        disabledScope2.Dispose();
 
         ImGui.SameLine();
         var showIcons = plugin.Config.ShowInstalledIcons;
@@ -316,7 +308,7 @@ internal sealed partial class RepoAuditTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("勾选后每条库链下面展开已安装插件的图标；列表每行会变高，可视的库链会变少；悬停图标条可一次看到全部名字");
+            ImGui.SetTooltip("显示每个仓库中已安装插件的图标，悬停可查看名称。");
         }
 
 
@@ -336,7 +328,7 @@ internal sealed partial class RepoAuditTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("按 URL 子串过滤列表（例如输入 \"Atmo\" 只看该作者的库）");
+            ImGui.SetTooltip("搜索仓库地址中包含的文字。");
         }
 
         List<RepoAuditItem> snapshot;
@@ -366,7 +358,7 @@ internal sealed partial class RepoAuditTab
 
         if (snapshot.Count == 0)
         {
-            ImGui.TextDisabled("当前筛选下没有库；换个筛选、或清掉搜索和勾选试试。");
+            ImGui.TextDisabled("没有匹配的仓库，请更换关键词或清除筛选。");
         }
 
         var tableHeight = MathF.Max(120f, ImGui.GetContentRegionAvail().Y - 6f);
@@ -398,7 +390,7 @@ internal sealed partial class RepoAuditTab
             ImGui.TableHeader("仓库地址");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("列里是库链地址；悬停具体行可看这条库一共提供多少个插件。");
+                ImGui.SetTooltip("悬停仓库地址可查看它提供的插件数量。");
             }
 
             ImGui.TableNextColumn();
@@ -406,8 +398,8 @@ internal sealed partial class RepoAuditTab
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip(
-                    "从这条库链装了 N 个插件。离线统计，装/卸插件后自动重算。\n"
-                    + "点一下按数量排行，再点一下反向；\n"
+                    "本机从此仓库安装的插件数量。\n"
+                    + "点击列标题可切换排序；\n"
                     + "「—」= 本次读不到已装插件数据，不会当成 0。");
             }
 
@@ -415,7 +407,7 @@ internal sealed partial class RepoAuditTab
             ImGui.TableHeader("首次记录");
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("FireGaze 第一次看到这条链接的时间；\n安装本插件之前就存在的库没有记录，排序时排最后。");
+                ImGui.SetTooltip("FireGaze 首次记录此仓库的日期；\n安装本插件之前就存在的库没有记录，排序时排最后。");
             }
 
             // 读取 ImGui 的排序状态：点列头切换升/降；点「状态」列回到默认的严重度顺序
@@ -478,10 +470,7 @@ internal sealed partial class RepoAuditTab
                 var isSelected = selected.Contains(item.URL);
 
                 // 未体检的行不可勾选：没有体检结论就没有可依据的处理
-                if (!item.IsSelectable)
-                {
-                    ImGui.BeginDisabled();
-                }
+                using var disabledScope3 = UiHelpers.Disabled(!item.IsSelectable);
 
                 if (ImGui.Checkbox("##sel-" + item.URL, ref isSelected))
                 {
@@ -495,9 +484,10 @@ internal sealed partial class RepoAuditTab
                     }
                 }
 
+                disabledScope3.Dispose();
                 if (!item.IsSelectable)
                 {
-                    ImGui.EndDisabled();
+
                     if (ImGui.IsItemHovered())
                     {
                         ImGui.SetTooltip("还没体检过：先点「开始体检」，再决定要不要处理这个库。");
@@ -560,7 +550,7 @@ internal sealed partial class RepoAuditTab
                     ImGui.TextDisabled("未记录");
                     if (ImGui.IsItemHovered())
                     {
-                        ImGui.SetTooltip("卫月不记录仓库添加时间。\nFireGaze 只会记录自己第一次看到该链接的时间；\n安装本插件之前就存在的库没有记录。");
+                        ImGui.SetTooltip("这是 FireGaze 首次记录此仓库的日期，不是仓库添加日期。此前已有的仓库可能没有记录。");
                     }
                 }
                 else

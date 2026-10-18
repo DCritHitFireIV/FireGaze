@@ -31,8 +31,8 @@ internal sealed class InstallerTab
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
             block
-                ? "开启中：后台刷新照常进行，但不会再把你正在看的列表顶回顶部。"
-                : "已关闭：后台刷新时，列表和滚动位置会被重置回顶部。");
+                ? "已开启：后台刷新照常进行，当前浏览位置保持不变。"
+                : "已关闭：后台刷新可能使列表回到顶部。");
         ImGui.Unindent();
 
         ImGui.Spacing();
@@ -48,7 +48,7 @@ internal sealed class InstallerTab
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
-                "提示：上面那项关着时，后台刷新可能把记住的位置清零，这一项就会时灵时不灵。");
+                "自动刷新可能重置浏览位置。建议同时开启上方的刷新拦截。");
         }
 
         ImGui.Unindent();

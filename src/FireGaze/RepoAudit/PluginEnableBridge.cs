@@ -65,7 +65,7 @@ internal static class PluginEnableBridge
     {
         if (rawPlugin is null)
         {
-            return (false, "读不到这个插件的实例（卫月结构变了？）。");
+            return (false, "无法读取此插件的信息，请刷新列表后重试。");
         }
 
         var type = rawPlugin.GetType();
@@ -73,7 +73,7 @@ internal static class PluginEnableBridge
         var internalName = (ReadProperty(ReadProperty(rawPlugin, "Manifest"), "InternalName") as string) ?? string.Empty;
         if (workingID == Guid.Empty || internalName.Length == 0)
         {
-            return (false, "读不到插件的内部标识（卫月结构变了？）。");
+            return (false, "无法读取此插件的信息，请刷新列表后重试。");
         }
 
         // 已经在跑就别再 LoadAsync（卫月会抛「无法加载 X, 已经加载」，用户看到的就是这个红字）
@@ -98,7 +98,7 @@ internal static class PluginEnableBridge
         var loadAsync = type.GetMethod("LoadAsync", BindingFlags.Public | BindingFlags.Instance, [typeof(Dalamud.Plugin.PluginLoadReason), typeof(bool), typeof(CancellationToken)]);
         if (loadAsync?.Invoke(rawPlugin, [reason, false, CancellationToken.None]) is not Task task)
         {
-            return (false, "找不到加载入口（LoadAsync）——卫月结构可能变了。");
+            return (false, "当前无法启用此插件，请在卫月插件安装器中重试。");
         }
 
         task.GetAwaiter().GetResult();
@@ -120,7 +120,7 @@ internal static class PluginEnableBridge
         var profileManagerType = dalamud.GetType("Dalamud.Plugin.Internal.Profiles.ProfileManager", throwOnError: false);
         if (serviceOpen is null || profileManagerType is null)
         {
-            return "没能记下启用状态（找不到 ProfileManager）";
+            return "未能保存启用状态，重启游戏后可能需要重新启用。";
         }
 
         var get = serviceOpen.MakeGenericType(profileManagerType)
@@ -128,7 +128,7 @@ internal static class PluginEnableBridge
         var manager = get?.Invoke(null, null);
         if (manager is null)
         {
-            return "没能记下启用状态（ProfileManager 不可用）";
+            return "未能保存启用状态，重启游戏后可能需要重新启用。";
         }
 
         object? chosen = null;
@@ -149,7 +149,7 @@ internal static class PluginEnableBridge
         chosen ??= manager.GetType().GetProperty("DefaultProfile")?.GetValue(manager);
         if (chosen is null)
         {
-            return "没能记下启用状态（找不到 Profile）";
+            return "未能保存启用状态，重启游戏后可能需要重新启用。";
         }
 
         var addOrUpdate = chosen.GetType().GetMethod("AddOrUpdateAsync", [typeof(Guid), typeof(string), typeof(bool), typeof(bool)]);

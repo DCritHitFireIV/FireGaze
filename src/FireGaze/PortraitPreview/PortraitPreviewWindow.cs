@@ -7,11 +7,11 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
+using FireGaze.UI;
 
 namespace FireGaze.PortraitPreview;
 
 internal sealed record PortraitBrowserItem(uint ID, string Name, uint Icon, byte DyeChannels, bool Available, string Reason);
-internal sealed record PortraitHistoryListItem(long ID, DateTimeOffset At, string Label, bool IsCurrent);
 
 /// <summary>The window reads snapshots; the feature owns Framework-thread changes and editor identity checks.</summary>
 internal interface IPortraitPreviewViewModel
@@ -68,9 +68,10 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     private bool appearanceTab;
     private string selectedAppearance = "";
     private bool showHistory;
+    private PortraitBrowserItem? inspectedItem;
 
     public PortraitPreviewWindow(IPortraitPreviewViewModel feature, IDalamudPluginInterface pluginInterface, ITextureProvider textures)
-        : base("肖像实时编辑###FireGazePortraitPreview", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
+        : base("肖像实时编辑###FireGazePortraitPreview", ImGuiWindowFlags.None)
     {
         this.feature = feature;
         this.pluginInterface = pluginInterface;
@@ -102,8 +103,9 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         if (DrawTab("装备", !appearanceTab, true)) appearanceTab = false;
         ImGui.SameLine();
         if (DrawTab("美容师", appearanceTab, true)) appearanceTab = true;
-        ImGui.SameLine();
-        ImGui.TextDisabled("仅预览当前肖像，关闭后还原");
+        ContinueToolbar(ImGui.GetWindowPos().X + ImGui.GetWindowContentRegionMax().X,
+            ImGui.CalcTextSize("仅本地 · 关闭后还原").X);
+        ImGui.TextUnformatted("仅本地 · 关闭后还原");
         DrawEditingToolbar();
         ImGui.Separator();
 
@@ -114,15 +116,11 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             return;
         }
 
-        var summaryHeight = ImGui.GetTextLineHeightWithSpacing() * 2.6f;
-        var mainHeight = Math.Max(260f * Scale, ImGui.GetContentRegionAvail().Y - summaryHeight);
-        var leftWidth = 198f * Scale;
-        ImGui.BeginChild("###PortraitEquipment", new Vector2(leftWidth, mainHeight), true,
-            ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse);
-        var slotHeight = Math.Max(1, ImGui.GetContentRegionAvail().Y - 220f * Scale);
-        ImGui.BeginChild("###PortraitEquipmentSlots", new Vector2(0, slotHeight), false);
+        var summaryHeight = ImGui.GetTextLineHeightWithSpacing() * 3.2f;
+        var mainHeight = Math.Max(220f * Scale, ImGui.GetContentRegionAvail().Y - summaryHeight);
+        var leftWidth = PortraitPreviewLayout.SideWidth(ImGui.GetContentRegionAvail().X, Scale);
+        ImGui.BeginChild("###PortraitEquipment", new Vector2(leftWidth, mainHeight), true);
         DrawSlots(current);
-        ImGui.EndChild();
         ImGui.Separator();
         DrawEquipmentControls(current);
         ImGui.EndChild();
@@ -132,21 +130,20 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         ImGui.EndChild();
 
         if (ImGui.SmallButton("来源记录")) ImGui.OpenPopup("###PortraitSourceRecords");
-        var showSourceTooltip = ImGui.IsItemHovered();
-        ImGui.SameLine();
-        ImGui.TextUnformatted("已拥有物品 · 关闭实时预览后才能保存肖像");
-        if (showSourceTooltip)
-        {
-            ImGui.BeginTooltip();
-            foreach (var source in feature.SourceSummary) ImGui.TextUnformatted(source);
-            ImGui.EndTooltip();
-        }
+        var sourceStatus = feature.SourceSummary.Count == 0 ? "尚未读取来源记录" : "查看已读取的物品来源";
+        ContinueToolbar(ImGui.GetWindowPos().X + ImGui.GetWindowContentRegionMax().X,
+            ImGui.CalcTextSize(sourceStatus).X);
+        ImGui.TextUnformatted(sourceStatus);
+        ImGui.SetNextWindowSize(new Vector2(540 * Scale, 0), ImGuiCond.Appearing);
         if (ImGui.BeginPopup("###PortraitSourceRecords"))
         {
-            foreach (var source in feature.SourceSummary) ImGui.TextUnformatted(source);
-            if (feature.SourceSummary.Count == 0) ImGui.TextDisabled("尚未读取来源记录");
+            ImGui.TextUnformatted("物品来源");
+            ImGui.Separator();
+            foreach (var source in feature.SourceSummary) ImGui.TextWrapped(source);
+            if (feature.SourceSummary.Count == 0) ImGui.TextUnformatted("尚未读取物品。请先打开对应的背包、投影台或雇员背包。");
             ImGui.EndPopup();
         }
+        ImGui.TextWrapped("关闭 FireGaze修改 后才能重新保存肖像。");
         if (!string.IsNullOrWhiteSpace(feature.Status)) ImGui.TextWrapped(feature.Status);
         DrawHistoryPopup();
     }
@@ -155,26 +152,13 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     private bool DrawTab(string text, bool active, bool enabled)
     {
-        var size = new Vector2(116, 38) * Scale;
-        var origin = ImGui.GetCursorScreenPos();
-        ImGui.BeginDisabled(!enabled);
-        var clicked = ImGui.InvisibleButton($"###PortraitTab{text}", size);
-        var texture = GetPart("ui/uld/MiragePrismPlate.uld", "ui/uld/MiragePrismPlate2_hr1.tex", active ? 5 : 4);
-        var draw = ImGui.GetWindowDrawList();
-        if (texture is not null)
+        var size = new Vector2(88, 44) * Scale;
+        bool clicked;
+        using (UiHelpers.Disabled(!enabled))
         {
-            var tint = enabled ? Vector4.One : new Vector4(1, 1, 1, 0.4f);
-            draw.AddImage(texture.Handle, origin, origin + size, Vector2.Zero, Vector2.One, ImGui.GetColorU32(tint));
+            clicked = FireGazeSymbols.NeutralButton($"{text}###PortraitTab{text}", size, active);
+            FireGazeSymbols.DrawSelection(ImGui.GetItemRectMin(), ImGui.GetItemRectMax(), active);
         }
-        else
-        {
-            draw.AddRectFilled(origin, origin + size,
-                ImGui.GetColorU32(active ? new Vector4(0.70f, 0.58f, 0.31f, 1) : new Vector4(0.29f, 0.29f, 0.32f, 1)), 5 * Scale);
-        }
-        var textSize = ImGui.CalcTextSize(text);
-        draw.AddText(origin + (size - textSize) * 0.5f,
-            ImGui.GetColorU32(enabled ? new Vector4(0.16f, 0.14f, 0.10f, 1) : new Vector4(0.70f, 0.70f, 0.70f, 1)), text);
-        ImGui.EndDisabled();
         return enabled && clicked;
     }
 
@@ -205,27 +189,35 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var piece = current.Pieces[(int)selectedSlot];
         var item = feature.GetItem(selectedSlot, piece.ItemID);
         ImGui.TextUnformatted(SlotName(selectedSlot));
+        if (item is not null) ImGui.TextWrapped(item.Name);
         if (ImGui.Button("清空当前部位", new Vector2(-1, 0))) feature.Clear(selectedSlot);
         for (var channel = 0; channel < 2; channel++)
         {
-            if (channel != 0) ImGui.SameLine();
             var available = item is not null && item.DyeChannels > channel && selectedSlot != PortraitSlot.Facewear;
-            ImGui.BeginDisabled(!available);
             var stain = channel == 0 ? piece.Stain0 : piece.Stain1;
-            var color = feature.Dyes.FirstOrDefault(dye => dye.ID == stain)?.Color ?? 0x808080;
-            if (ImGui.ColorButton($"染色 {channel + 1}###PortraitStain{channel}", DyeColor(color), ImGuiColorEditFlags.NoTooltip,
-                    new Vector2(28, 24) * Scale))
+            var dye = feature.Dyes.FirstOrDefault(dye => dye.ID == stain);
+            var color = dye?.Color ?? 0x808080;
+            var position = ImGui.GetCursorScreenPos();
+            var extent = new Vector2(28) * Scale;
+            if (ImGui.ColorButton($"染色 {channel + 1}###PortraitStain{channel}", available ? DyeColor(color) : FireGazePalette.Raised,
+                    ImGuiColorEditFlags.NoTooltip, extent) && available)
             {
                 dyeSlot = selectedSlot;
                 dyeChannel = channel;
                 ImGui.OpenPopup("###PortraitDyePalette");
             }
-            ImGui.EndDisabled();
-            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+            var hovered = ImGui.IsItemHovered();
+            var focused = ImGui.IsItemFocused();
+            FireGazeSymbols.DrawSelection(ImGui.GetItemRectMin(), ImGui.GetItemRectMax(), false, focused);
+            if (!available) DrawUnavailableMarker(position);
+            ImGui.SameLine();
+            ImGui.TextWrapped($"染色 {channel + 1} · {(available ? stain == 0 ? "无染色" : dye?.Name ?? $"#{stain}" : "不支持")}");
+            if (hovered || focused)
                 ImGui.SetTooltip(available ? $"选择染色 {channel + 1}，不消耗染剂" : "当前装备不支持此染色通道");
         }
-        ImGui.SameLine();
-        ImGui.TextDisabled("染色 1 / 2");
+        if (item is null || item.DyeChannels == 0 || selectedSlot == PortraitSlot.Facewear)
+            ImGui.TextWrapped("当前部位不支持染色。");
+        else if (item.DyeChannels == 1) ImGui.TextWrapped("当前装备仅支持一种染色。");
 
         var head = current.HeadVisible;
         var weapon = current.WeaponVisible;
@@ -250,16 +242,19 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         }
         ImGui.TextDisabled($"{SlotName(selectedSlot)} · 已拥有 {items.Count} 项");
         ImGui.Separator();
-        ImGui.BeginChild("###PortraitOwnedGrid", Vector2.Zero, false);
+        inspectedItem = null;
+        var detailsHeight = ImGui.GetTextLineHeightWithSpacing() * 3.4f;
+        var gridHeight = Math.Max(56 * Scale, ImGui.GetContentRegionAvail().Y - detailsHeight);
+        ImGui.BeginChild("###PortraitOwnedGrid", new Vector2(0, gridHeight), false);
         if (items.Count == 0)
         {
             ImGui.TextWrapped(needle.Length > 0 ? "没有找到符合名称或编号的已拥有装备。" : "尚未读取到此部位的已拥有装备。");
         }
         else
         {
-            var cell = 82f * Scale;
+            var cell = PortraitPreviewLayout.GridEdge(ImGui.GetContentRegionAvail().X, 82f * Scale);
             var gap = ImGui.GetStyle().ItemSpacing;
-            var columns = Math.Max(1, (int)((ImGui.GetContentRegionAvail().X + gap.X) / (cell + gap.X)));
+            var columns = PortraitPreviewLayout.Columns(ImGui.GetContentRegionAvail().X, cell, gap.X);
             var rows = (items.Count + columns - 1) / columns;
             var clipper = new ImGuiListClipper();
             clipper.Begin(rows, cell + gap.Y);
@@ -274,10 +269,8 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
                         if (col != 0) ImGui.SameLine();
                         var item = items[index];
                         ImGui.PushID(index);
-                        ImGui.BeginDisabled(!item.Available);
                         if (DrawItemIcon("###OwnedItem", item, cell, current.Pieces[(int)selectedSlot].ItemID == item.ID, null) && item.Available)
                             feature.Equip(selectedSlot, item.ID);
-                        ImGui.EndDisabled();
                         ImGui.PopID();
                     }
                 }
@@ -285,18 +278,26 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             clipper.End();
         }
         ImGui.EndChild();
+        ImGui.Separator();
+        var detail = inspectedItem ?? feature.GetItem(selectedSlot, current.Pieces[(int)selectedSlot].ItemID);
+        if (detail is not null)
+        {
+            ImGui.TextWrapped($"{detail.Name} · #{detail.ID}");
+            if (!detail.Available) ImGui.TextWrapped(string.IsNullOrWhiteSpace(detail.Reason) ? "当前角色无法预览此物品。" : detail.Reason);
+        }
+        else ImGui.TextWrapped("选择物品即可预览。");
     }
 
     private bool DrawItemIcon(string id, PortraitBrowserItem? item, float size, bool selected, PortraitSlot? emptySlot)
     {
         var position = ImGui.GetCursorScreenPos();
         var extent = new Vector2(size);
-        var clicked = ImGui.InvisibleButton(id, extent);
+        var clicked = ImGui.Button(id, extent);
         var hovered = ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled);
+        var focused = ImGui.IsItemFocused();
         var draw = ImGui.GetWindowDrawList();
         var dimmed = item is { Available: false } && emptySlot is null;
-        var tint = dimmed ? new Vector4(0.45f, 0.45f, 0.45f, 0.65f) : Vector4.One;
-        draw.AddRectFilled(position, position + extent, ImGui.GetColorU32(new Vector4(0.20f, 0.20f, 0.22f, 0.95f)), size * 0.12f);
+        var tint = dimmed ? new Vector4(0.65f, 0.65f, 0.65f, 1f) : Vector4.One;
         if (item is { Icon: > 0 } && textures.GetFromGameIcon(new GameIconLookup(item.Icon)).TryGetWrap(out var icon, out _))
         {
             var inset = new Vector2(size * 0.06f);
@@ -314,30 +315,36 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             else
             {
                 var text = SlotName(slot);
-                draw.AddText(position + (extent - ImGui.CalcTextSize(text)) / 2, ImGui.GetColorU32(new Vector4(0.6f, 0.6f, 0.6f, 1)), text);
+                draw.AddText(position + (extent - ImGui.CalcTextSize(text)) / 2, ImGui.GetColorU32(FireGazePalette.Muted), text);
             }
         }
-        var frame = GetPart("ui/uld/MiragePrismPlate.uld", "ui/uld/MiragePrismBoxIcon_hr1.tex", 2);
-        if (frame is not null) draw.AddImage(frame.Handle, position, position + extent, Vector2.Zero, Vector2.One, ImGui.GetColorU32(tint));
-        if (selected || hovered)
+        FireGazeSymbols.DrawSelection(position, position + extent, selected, focused);
+        if (dimmed) DrawUnavailableMarker(position);
+        if (hovered || focused)
         {
-            var highlight = GetPart("ui/uld/Character.uld", "ui/uld/IconA_Frame_hr1.tex", 16);
-            if (highlight is not null) draw.AddImage(highlight.Handle, position - new Vector2(2 * Scale), position + extent + new Vector2(2 * Scale));
-            else draw.AddRect(position, position + extent, ImGui.GetColorU32(new Vector4(1, 0.86f, 0.45f, 1)), size * 0.12f, ImDrawFlags.None, 2 * Scale);
-        }
-        if (hovered)
-        {
+            if (emptySlot is null) inspectedItem = item;
             ImGui.BeginTooltip();
             ImGui.TextUnformatted(item?.Name ?? (emptySlot is { } slot ? $"{SlotName(slot)} · 空" : "未读取装备信息"));
             if (item is not null)
             {
                 ImGui.TextDisabled($"#{item.ID}");
-                if (item.DyeChannels > 0) ImGui.TextDisabled($"支持 {item.DyeChannels} 个染色通道");
+                if (item.DyeChannels > 0) ImGui.TextDisabled($"支持 {item.DyeChannels} 处染色");
                 if (!item.Available && !string.IsNullOrWhiteSpace(item.Reason)) ImGui.TextWrapped(item.Reason);
             }
             ImGui.EndTooltip();
         }
         return clicked;
+    }
+
+    private static void DrawUnavailableMarker(Vector2 position)
+    {
+        var marker = position + new Vector2(3 * Scale);
+        var draw = ImGui.GetWindowDrawList();
+        draw.AddRectFilled(marker, marker + new Vector2(16 * Scale), ImGui.GetColorU32(FireGazePalette.Raised), 2 * Scale);
+        draw.AddLine(marker + new Vector2(4, 4) * Scale, marker + new Vector2(12, 12) * Scale,
+            ImGui.GetColorU32(FireGazePalette.Muted), 1.5f * Scale);
+        draw.AddLine(marker + new Vector2(12, 4) * Scale, marker + new Vector2(4, 12) * Scale,
+            ImGui.GetColorU32(FireGazePalette.Muted), 1.5f * Scale);
     }
 
     private void DrawDyePalette()
@@ -355,7 +362,9 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             return;
         }
         ImGui.TextUnformatted($"{SlotName(dyeSlot)} · 染色 {dyeChannel + 1}");
-        ImGui.TextDisabled("全部原生颜色，仅作用于肖像，不消耗染剂");
+        var currentStain = dyeChannel == 0 ? piece.Stain0 : piece.Stain1;
+        ImGui.TextUnformatted($"当前：{(currentStain == 0 ? "无染色" : feature.Dyes.FirstOrDefault(dye => dye.ID == currentStain)?.Name ?? $"#{currentStain}")}");
+        ImGui.TextDisabled("染色仅用于肖像预览，不消耗染剂");
         DrawUndoRedo();
         if (ImGui.Button("清除染色"))
         {
@@ -377,12 +386,8 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
                 var selected = (dyeChannel == 0 ? piece.Stain0 : piece.Stain1) == dye.ID;
                 var position = ImGui.GetCursorScreenPos();
                 var clicked = ImGui.ColorButton($"###PortraitDye{dye.ID}", DyeColor(dye.Color), ImGuiColorEditFlags.NoTooltip, new Vector2(edge));
-                if (selected)
-                {
-                    ImGui.GetWindowDrawList().AddRect(position, position + new Vector2(edge), 0xff80dcff, 3f * Scale, ImDrawFlags.None, 2f * Scale);
-                    ImGui.GetWindowDrawList().AddText(position + new Vector2(3, 1) * Scale, dye.Color < 0x808080 ? 0xffffffff : 0xff202020, "✓");
-                }
-                if (ImGui.IsItemHovered()) ImGui.SetTooltip(dye.Name);
+                FireGazeSymbols.DrawSelection(position, position + new Vector2(edge), selected, ImGui.IsItemFocused());
+                if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip(dye.Name);
                 if (clicked) feature.Dye(dyeSlot, dyeChannel, dye.ID);
             }
         }

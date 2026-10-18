@@ -83,9 +83,9 @@ internal sealed class TranslateTab
         // ---------------- 顶部：更新词表（最显眼） ----------------
         if (updateInFlight)
         {
-            ImGui.BeginDisabled();
+            using var disabledScope1 = UiHelpers.Disabled();
             ImGui.Button("从 GitHub 更新词表###UpdateTable");
-            ImGui.EndDisabled();
+            disabledScope1.Dispose();
         }
         else if (ImGui.Button("从 GitHub 更新词表###UpdateTable"))
         {
@@ -129,7 +129,7 @@ internal sealed class TranslateTab
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Muted,
-                "检测到 FastDalamudCN：它也在翻译插件简介，而且译文会更优先显示。建议在 Fast 里关掉简介翻译，或关掉本插件的简介汉化。");
+                "FastDalamudCN 的简介译文会优先显示。请在两个插件中选择一个负责简介汉化。");
 
             if (ImGui.SmallButton("打开 FastDalamudCN 设置###OpenFastDalamudCN"))
             {
@@ -151,7 +151,7 @@ internal sealed class TranslateTab
             if (enabled)
             {
                 var applied = plugin.ApplyTranslations();
-                statusMessage = $"已启用：本次改写 {applied} 条清单";
+                statusMessage = $"已启用，已更新 {applied} 条插件介绍";
                 ActivityLog.Info("简介汉化", $"已启用，改写 {applied} 条清单");
             }
             else
@@ -168,7 +168,7 @@ internal sealed class TranslateTab
         }
 
         // ---------------- 词表状态 ----------------
-        ImGui.Text($"词表：{plugin.Table.Count} 条 · 上次应用改写 {plugin.LastTranslatedCount} 条清单");
+        ImGui.Text($"词表 {plugin.Table.Count} 条 · 上次更新 {plugin.LastTranslatedCount} 条插件介绍");
         ImGui.SameLine();
         ImGui.TextDisabled("· " + DescribeTableUpdate());
         if (plugin.Table.LoadedFrom is null)
@@ -181,7 +181,7 @@ internal sealed class TranslateTab
         // ---------------- 三个字段的呈现方式 ----------------
         if (ImGui.BeginTable("###modeTable", 4, ImGuiTableFlags.SizingFixedFit | ImGuiTableFlags.PadOuterX))
         {
-            ImGui.TableSetupColumn("字段", ImGuiTableColumnFlags.WidthFixed, 90);
+            ImGui.TableSetupColumn("内容", ImGuiTableColumnFlags.WidthFixed, 90);
             ImGui.TableSetupColumn("原版", ImGuiTableColumnFlags.WidthFixed, 70);
             ImGui.TableSetupColumn("中文", ImGuiTableColumnFlags.WidthFixed, 70);
             ImGui.TableSetupColumn("双语", ImGuiTableColumnFlags.WidthFixed, 70);
@@ -209,7 +209,7 @@ internal sealed class TranslateTab
         // ② 老词表没有维护日期：只本机取用过的时间，不能冒充「维护日期」
         if (plugin.Config.LastTableUpdateLocal != default)
         {
-            return $"词表维护：未标注，本机 {plugin.Config.LastTableUpdateLocal:MM-dd} 取到";
+            return $"词表更新日期未标注 · 本机读取于 {plugin.Config.LastTableUpdateLocal:MM-dd}";
         }
 
         // ③ 随插件装上的那份（同样是未标注）
@@ -227,7 +227,7 @@ internal sealed class TranslateTab
     {
         if (entry?.RawPlugin is null)
         {
-            return "没找到 FastDalamudCN 实例（可能已被停用）。";
+            return "未找到正在运行的 FastDalamudCN。";
         }
 
         if (!entry.IsLoaded)
@@ -245,7 +245,7 @@ internal sealed class TranslateTab
             var open = uiBuilder?.GetType().GetMethod("OpenConfig", flags);
             if (open is null)
             {
-                return "打不开：卫月没有这个入口（版本变化？）。";
+                return "无法打开设置，请在插件安装器中打开 FastDalamudCN。";
             }
 
             open.Invoke(uiBuilder, null);

@@ -9,18 +9,26 @@ namespace FireGaze.UI;
 /// </summary>
 internal static class UiHelpers
 {
-    public static readonly Vector4 Muted = new(0.65f, 0.65f, 0.65f, 1f);
-    public static readonly Vector4 Good = new(0.45f, 0.85f, 0.45f, 1f);
-    public static readonly Vector4 Warn = new(0.95f, 0.75f, 0.35f, 1f);
-    public static readonly Vector4 Bad = new(0.95f, 0.45f, 0.45f, 1f);
-    public static readonly Vector4 Info = new(0.62f, 0.76f, 0.94f, 1f);
-    public static readonly Vector4 Accent = new(0.55f, 0.75f, 1f, 1f);
+    public static readonly Vector4 Muted = FireGazePalette.Muted;
+    public static readonly Vector4 Good = FireGazePalette.Good;
+    public static readonly Vector4 Warn = FireGazePalette.Warn;
+    public static readonly Vector4 Bad = FireGazePalette.Bad;
+    public static readonly Vector4 Info = FireGazePalette.Action;
+    public static readonly Vector4 Accent = FireGazePalette.Action;
+
+    /// <summary>Use in place of the native pair so disabled input also has a distinct readable appearance.</summary>
+    public static void BeginDisabled(bool disabled = true) => FireGazeDisabled.Begin(disabled);
+    public static void EndDisabled() => FireGazeDisabled.End();
+    public static bool IsDisabled => FireGazeDisabled.IsDisabled;
+
+    /// <summary>Prefer this using scope when an early return or exception may leave the drawing block.</summary>
+    public static IDisposable Disabled(bool disabled = true) => FireGazeDisabled.Push(disabled);
 
     /// <summary>
     ///     「跳过」的终态色（中文插件 · 不汉化等）：特意不用 Info 蓝——蓝在本页签表示「有进度/待处理」，
     ///     复用会让「不汉化」被读成「正在处理」（2026-10-02 v4 定向复评 F8）。
     /// </summary>
-    public static readonly Vector4 Skip = new(0.78f, 0.70f, 0.95f, 1f);
+    public static readonly Vector4 Skip = FireGazePalette.Skip;
 
     public static Vector4 StatusColor(RepoStatus status) => status switch
     {
@@ -60,12 +68,10 @@ internal static class UiHelpers
     /// </summary>
     public static void PushPrimaryButton()
     {
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.23f, 0.37f, 0.55f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.28f, 0.44f, 0.64f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.20f, 0.33f, 0.50f, 1f));
+        PushSemanticButton(FireGazeButtonStyle.Primary);
     }
 
-    public static void PopPrimaryButton() => ImGui.PopStyleColor(3);
+    public static void PopPrimaryButton() => ImGui.PopStyleColor(4);
 
     /// <summary>
     ///     「启用插件」这类正向动作的按钮：偏绿，与主色（蓝）区分，用户能一眼看到。
@@ -73,12 +79,10 @@ internal static class UiHelpers
     /// </summary>
     public static void PushEnableButton()
     {
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.18f, 0.42f, 0.28f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.22f, 0.52f, 0.34f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.15f, 0.36f, 0.24f, 1f));
+        PushSemanticButton(FireGazeButtonStyle.Enable);
     }
 
-    public static void PopEnableButton() => ImGui.PopStyleColor(3);
+    public static void PopEnableButton() => ImGui.PopStyleColor(4);
 
     /// <summary>
     ///     破坏性动作的按钮（还原原文 / 删除）：红系实底，与主色（蓝）、启用（绿）一眼区分。
@@ -87,12 +91,28 @@ internal static class UiHelpers
     /// </summary>
     public static void PushDangerButton()
     {
-        ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0.55f, 0.20f, 0.20f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(0.66f, 0.25f, 0.25f, 1f));
-        ImGui.PushStyleColor(ImGuiCol.ButtonActive, new Vector4(0.48f, 0.17f, 0.17f, 1f));
+        PushSemanticButton(FireGazeButtonStyle.Danger);
     }
 
-    public static void PopDangerButton() => ImGui.PopStyleColor(3);
+    public static void PopDangerButton() => ImGui.PopStyleColor(4);
+
+    internal static FireGazeButtonColors SemanticButtonColors(FireGazeButtonStyle style, bool disabled)
+    {
+        if (disabled) return new(FireGazePalette.Hover, FireGazePalette.Hover, FireGazePalette.Hover, FireGazePalette.Muted);
+        if (style == FireGazeButtonStyle.Primary)
+            return new(FireGazePalette.Action, FireGazePalette.ActionHover, FireGazePalette.ActionActive, FireGazePalette.White);
+        var fill = style == FireGazeButtonStyle.Enable ? FireGazePalette.Good : FireGazePalette.Bad;
+        return new(fill, fill * new Vector4(.88f, .88f, .88f, 1), fill * new Vector4(.76f, .76f, .76f, 1), FireGazePalette.White);
+    }
+
+    private static void PushSemanticButton(FireGazeButtonStyle style)
+    {
+        var colors = SemanticButtonColors(style, IsDisabled);
+        ImGui.PushStyleColor(ImGuiCol.Button, colors.Fill);
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, colors.Hover);
+        ImGui.PushStyleColor(ImGuiCol.ButtonActive, colors.Active);
+        ImGui.PushStyleColor(ImGuiCol.Text, colors.Text);
+    }
 
     /// <summary>按钮标签的可见宽度（去掉 <c>###ID</c> 后缀）：给 <see cref="SameLineOrWrap" /> 估位置用。</summary>
     public static float LabelWidth(string label)

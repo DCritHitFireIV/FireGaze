@@ -6,6 +6,8 @@ unsafe class Program
 {
     private static int passed;
     private static void Check(bool value,string name) {if(!value)throw new InvalidOperationException(name);passed++;Console.WriteLine("PASS "+name);}
+    private static bool ReportsHistorySpaceFailure(PortraitPreviewFeature feature) => feature.HistoryStatus.Contains("空间不足")
+        && feature.HistoryStatus.Contains("本次修改尚未记录") && feature.HistoryStatus.Contains("已有记录已保留");
     public static int Main()
     {
         var root=Path.Combine(Path.GetTempPath(),"firegaze-feature-integration-"+Guid.NewGuid().ToString("N"));
@@ -81,11 +83,11 @@ unsafe class Program
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"quota.json"),byteLimit:512))
             {
                 feature.Sample();
-                Check(feature.Store.Count==0 && feature.HistoryStatus.Contains("超过"),"initial oversized record reports its real store rejection");
+                Check(feature.Store.Count==0 && ReportsHistorySpaceFailure(feature),"initial oversized record reports capacity rejection and preserves existing history");
                 feature.RefreshRows();
-                Check(feature.HistoryStatus.Contains("超过"),"ordinary history list refresh preserves the operation error");
+                Check(ReportsHistorySpaceFailure(feature),"ordinary history list refresh preserves capacity reason and recovery facts");
                 feature.RecordDirect();feature.RefreshRows();
-                Check(feature.Store.Count==0 && feature.HistoryStatus.Contains("超过"),"direct action failure survives its unconditional list refresh");
+                Check(feature.Store.Count==0 && ReportsHistorySpaceFailure(feature),"direct action failure survives its unconditional list refresh with its capacity reason");
             }
             var blockedFile=Path.Combine(root,"blocked-history.json");Directory.CreateDirectory(blockedFile);
             using(var feature=new PortraitPreviewFeature(blockedFile))
@@ -118,7 +120,8 @@ unsafe class Program
                 feature.Native.CanBlockSave=false;feature.RestoreHistory(record.ID);
                 Check(!feature.IsActive && feature.Native.ApplyCalls==calls,"invalid restoration cannot bypass validation when save guard is unavailable");
                 feature.RestoreHistory(valid.ID);
-                Check(!feature.IsActive && feature.Native.ApplyCalls==calls && feature.Native.CaptureCalls==captures && feature.LastError?.Contains("保存保护")==true,
+                Check(!feature.IsActive && feature.Native.ApplyCalls==calls && feature.Native.CaptureCalls==captures && feature.LastError?.Contains("无法阻止肖像保存")==true
+                    && feature.LastError.Contains("本次未恢复记录"),
                     "valid history restoration checks save guard before opening a lease");
             }
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"apply-failure.json")))

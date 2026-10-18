@@ -184,7 +184,7 @@ internal static class UITextPatcher
             var total = pack.Entries.Count + pack.Resources.Count + pack.Attributes.Count;
             if (total == 0)
             {
-                outcome.Error = "译文包里还没有任何条目（先「一键汉化」或「抽取界面文本」）。";
+                outcome.Error = "译文包里还没有任何条目。请先使用「一键汉化」或「重新读取文字」。";
             }
             else if (pack.TranslatedTotal == 0)
             {

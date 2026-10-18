@@ -93,7 +93,7 @@ internal sealed partial class UITextTab
 
     private void DrawQueueToolbar()
     {
-        ImGui.BeginDisabled(this.index is not { Available: true });
+        using var disabledScope1 = UiHelpers.Disabled(this.index is not { Available: true });
         if (ImGui.Button("检查汉化更新"))
         {
             foreach (var entry in this.index!.All.Where(e => this.rows.GetValueOrDefault(e.InternalName)?.HasPack == true
@@ -101,16 +101,16 @@ internal sealed partial class UITextTab
                 this.workQueue.Enqueue(entry.InternalName, entry.DisplayName, UITextJobMode.CheckUpdates);
             this.workQueue.SetPaused(false);
         }
-        ImGui.EndDisabled();
+        disabledScope1.Dispose();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-            ImGui.SetTooltip("检查所有已抽取插件的公共译文更新与插件识别 / IPC 误翻，不修改插件；发现问题后点击更新修复。");
+            ImGui.SetTooltip("检查已读取插件的译文更新和可能影响功能的误翻，不修改插件。发现更新后可点击应用。");
 
         var jobs = this.workQueue.Items;
         var updates = this.index?.All.Where(e => this.maintenance.TryGetValue(e.InternalName, out var result) && result.CanApply).ToList() ?? [];
         if (updates.Count > 0)
         {
             UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth($"批量更新 {updates.Count}"));
-            ImGui.BeginDisabled(this.run is not null || this.editor.IsOpen || this.diagnosticBusy.Count > 0
+            using var disabledScope2 = UiHelpers.Disabled(this.run is not null || this.editor.IsOpen || this.diagnosticBusy.Count > 0
                 || jobs.Any(j => j.State is UITextJobState.Pending or UITextJobState.Running));
             UiHelpers.PushPrimaryButton();
             if (ImGui.Button($"批量更新 {updates.Count}###uit-update-all"))
@@ -119,8 +119,8 @@ internal sealed partial class UITextTab
                 this.workQueue.SetPaused(false);
             }
             UiHelpers.PopPrimaryButton();
-            ImGui.EndDisabled();
-            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("应用译文更新与安全修复，并依次重载插件。保留正常人工译文，功能标识保持原文；请先停下插件任务。");
+            disabledScope2.Dispose();
+            if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled)) ImGui.SetTooltip("应用译文更新并依次重载插件，保留正常人工译文。请先停止插件任务。");
         }
 
         if (jobs.Any(j => j.State is UITextJobState.Pending or UITextJobState.Running))
@@ -186,7 +186,7 @@ internal sealed partial class UITextTab
     {
         if (this.run is not null || !this.runs.TryEnter(entry.InternalName, "检查汉化更新", out _)) return;
         this.maintenance.TryRemove(entry.InternalName, out _);
-        var active = new Run { InternalName = entry.InternalName, Mode = RunMode.CheckUpdates, Stage = "正在检查新增文本、译文更新与插件联动…", CanCancel = true };
+        var active = new Run { InternalName = entry.InternalName, Mode = RunMode.CheckUpdates, Stage = "正在检查界面文字和译文更新…", CanCancel = true };
         this.run = active;
         active.Task = Task.Run(async () =>
         {
@@ -238,7 +238,7 @@ internal sealed partial class UITextTab
                 this.maintenance[entry.InternalName] = new(candidate, baseline, hash, sourceHash, added, newOriginals, libraryChanges,
                     preview.Added, preview.Overwritten, safetyChanges, identityRepairs, warning);
                 this.FinishRun(active, new RowNote { Kind = warning is null || safetyChanges + identityRepairs > 0 ? NoteKind.Info : NoteKind.Bad,
-                    Text = safetyChanges + identityRepairs > 0 ? $"发现汉化安全问题，可点击更新修复（译文 {safetyChanges} 条，已写入标识 {identityRepairs} 条）。"
+                    Text = safetyChanges + identityRepairs > 0 ? $"发现可能影响插件功能的误翻，可点击更新修复（共 {safetyChanges + identityRepairs} 条）。"
                         : warning is not null ? "译文库暂时查不到，请稍后重新检查。"
                         : preview.Added + preview.Overwritten > 0 ? "有汉化更新，可点击更新。" : "检查完成，公共译文已是最新。", Detail = warning });
             }
@@ -258,7 +258,7 @@ internal sealed partial class UITextTab
         {
             ImGui.TextDisabled($"新增文本 {result.NewTexts} 条 · 补入译文 {result.AddedTranslations} 条 · 更新译文 {result.ChangedTranslations} 条");
             if (result.SafetyChanges + result.IdentityRepairs > 0)
-                ImGui.TextDisabled($"安全修复：排除误翻 {result.SafetyChanges} 条 · 恢复插件 / IPC 标识 {result.IdentityRepairs} 条");
+                ImGui.TextDisabled($"功能相关误翻：{result.SafetyChanges + result.IdentityRepairs} 条");
             if (result.Warning is { } warning) UiHelpers.ColoredWrapped(UiHelpers.Warn, "公共译文库检查未完成：" + warning);
         }
     }
@@ -287,14 +287,14 @@ internal sealed partial class UITextTab
             this.diagnostics.TryRemove(entry.InternalName, out _);
         }
         var checking = this.diagnosticBusy.Contains(entry.InternalName);
-        ImGui.BeginDisabled(busy || checking || input.Trim().Length == 0);
+        using var disabledScope3 = UiHelpers.Disabled(busy || checking || input.Trim().Length == 0);
         if (ImGui.Button(checking ? "检查中…###uit-diagnose" : "检查这句###uit-diagnose")) this.StartDiagnosis(entry, input);
-        ImGui.EndDisabled();
+        disabledScope3.Dispose();
         if (this.diagnostics.TryGetValue(entry.InternalName, out var diagnosis) && diagnosis.Query == input)
         {
             if (diagnosis.Error is { } error) UiHelpers.ColoredWrapped(UiHelpers.Bad, "检查失败：" + error);
             else if (diagnosis.Matches.Count == 0)
-                ImGui.TextWrapped("没有找到这句。它可能是拼接出来的文字，或存放在目前读不到的语言文件里。可以换成其中几个英文词再查，或准备反馈。");
+                ImGui.TextWrapped("没有找到这句，可用其中几个英文词重试，或提交反馈。");
             else
             {
                 if (diagnosis.Matches.Count == 10) ImGui.TextDisabled("最多显示 10 处匹配，可输入更完整的原文");
@@ -306,10 +306,10 @@ internal sealed partial class UITextTab
                     ImGui.TextWrapped(match.Kind switch
                     {
                         UITextDiagnosticKind.KeptOriginal => "这句被保留为原文。单词缺少语境、可能影响插件功能，或你曾标记不翻；不要直接全量重翻。",
-                        UITextDiagnosticKind.Excluded => "这句用于插件功能或查表，不能直接替换成中文。",
+                        UITextDiagnosticKind.Excluded => "这句可能影响插件功能，不能直接替换为中文。",
                         UITextDiagnosticKind.NeedsReview => "译文需要校对，检查通过前不会写入插件。",
                         UITextDiagnosticKind.ReadyToApply => "已有译文，但还没有应用到当前插件。可以写入并重载。",
-                        UITextDiagnosticKind.AlreadyTranslated => "已有译文和补丁。若仍显示英文，先确认插件已重载，并检查它自己的语言设置。",
+                        UITextDiagnosticKind.AlreadyTranslated => "汉化已应用。若仍显示英文，请先重载插件，并检查插件自己的语言设置。",
                         _ => "已经找到了这句，但还没有译文。可以进入编辑校对，结合上下文处理。",
                     });
                     if (match.Translation.Length > 0) ImGui.TextWrapped("译文：" + match.Translation);
@@ -322,10 +322,10 @@ internal sealed partial class UITextTab
                     ImGui.PopID();
                 }
             }
-            ImGui.BeginDisabled(busy);
+            using var disabledScope4 = UiHelpers.Disabled(busy);
             if (diagnosis.Matches.Any(m => m.Kind != UITextDiagnosticKind.Excluded) && ImGui.Button("定位到编辑校对###uit-diagnose-editor"))
                 this.editor.OpenForText(entry, diagnosis.Query);
-            ImGui.EndDisabled();
+            disabledScope4.Dispose();
             if (ImGui.Button("准备反馈###uit-diagnose-feedback"))
             {
                 this.feedbackCategory = 0;
@@ -335,9 +335,9 @@ internal sealed partial class UITextTab
             }
             if (diagnosis.Matches.Any(m => m.Kind == UITextDiagnosticKind.ReadyToApply))
             {
-                ImGui.BeginDisabled(busy);
+                using var disabledScope5 = UiHelpers.Disabled(busy);
                 if (ImGui.Button("写入并重载###uit-diagnose-apply")) this.StartApplyCurrent(entry);
-                ImGui.EndDisabled();
+                disabledScope5.Dispose();
             }
         }
         ImGui.EndPopup();

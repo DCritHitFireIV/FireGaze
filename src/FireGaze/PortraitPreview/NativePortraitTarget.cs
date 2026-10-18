@@ -59,7 +59,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     {
         plateMirror = new PortraitPlateMirror(framework, gameGUI, objects, addonLifecycle, IsCurrent);
         var address = (nint)AgentBannerEditorState.MemberFunctionPointers.Save;
-        if (address == 0) { LastError = "当前游戏版本无法核验肖像保存接口。"; return; }
+        if (address == 0) { LastError = "当前游戏版本无法阻止肖像保存，暂不能开启临时预览。"; return; }
         try
         {
             saveHook = interop.HookFromAddress<AgentBannerEditorState.Delegates.Save>(address, SaveDetour);
@@ -68,7 +68,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         }
         catch (Exception ex)
         {
-            LastError = "肖像保存保护无法启用：" + ex.Message;
+            LastError = "无法阻止肖像保存，暂不能开启临时预览：" + ex.Message;
             saveHook?.Dispose(); saveHook = null;
         }
     }
@@ -279,7 +279,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
             if (InterceptSaveEvent((nint)receive.GetAgentPointer<AgentBannerEditor>(), receive.AtkValues,
                 receive.ValueCount, receive.EventKind)) receive.PreventOriginal();
         }
-        catch (Exception ex) { LastError = "肖像保存事件检查失败：" + ex.Message; }
+        catch (Exception ex) { LastError = "无法检查本次肖像保存：" + ex.Message; }
     }
 
     internal bool InterceptSaveEvent(nint requestedEditor, nint eventValues, uint count, ulong kind)
@@ -302,13 +302,13 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         try { blocked = ShouldBlockSave(requestedState); }
         catch (Exception ex)
         {
-            LastError = "肖像保存保护检查失败：" + ex.Message;
+            LastError = "未能确认肖像保存是否已阻止：" + ex.Message;
             // Callback failures must not escape a native detour or save a temporary appearance.
             return IsCapturedStateOwner(requestedState);
         }
         if (!blocked) return false;
         BlockedSaves++;
-        try { error("请先关闭实时预览，再重新保存肖像。"); }
+        try { error("请先关闭 FireGaze修改，再重新保存肖像。"); }
         catch (Exception ex) { LastError = "肖像保存已阻止，但提示显示失败：" + ex.Message; }
         return true;
     }
@@ -348,7 +348,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         {
             if (!api.TryHideOriginalEditor(editor, (AgentBannerEditorState*)originalIdentity.State)) return false;
         }
-        catch (Exception ex) { LastError = "无法关闭临时肖像编辑器原始实例：" + ex.Message; return false; }
+        catch (Exception ex) { LastError = "再次尝试关闭临时肖像编辑器失败：" + ex.Message; return false; }
         return !IsCapturedStateOwner(originalIdentity.State);
     }
 

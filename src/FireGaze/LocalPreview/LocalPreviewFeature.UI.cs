@@ -125,9 +125,10 @@ public sealed partial class LocalPreviewFeature
 
         ImGui.Spacing();
         var chatLinks = config.LocalPreviewChatLinksEnabled;
-        ImGui.BeginDisabled(!enabled);
-        if (ImGui.Checkbox("开启对情感动作文字提示的试用###LocalPreviewChatLinks", ref chatLinks)) SetChatLinks(chatLinks);
-        ImGui.EndDisabled();
+        using (UiHelpers.Disabled(!enabled))
+        {
+            if (ImGui.Checkbox("开启对情感动作文字提示的试用###LocalPreviewChatLinks", ref chatLinks)) SetChatLinks(chatLinks);
+        }
         ImGui.Indent();
         UiHelpers.ColoredWrapped(UiHelpers.Muted,
             "开启后，聊天栏里的「光之战士表演起了默剧。」这整句提示会变成可点击的文字；左键点击就会让自己的角色试用该动作，对其他人不可见。关闭时，新提示保持原样，不可点击。");

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+    <DefineConstants Condition="Exists('../../src/FireGaze/UI/FireGazePalette.cs') And Exists('../../src/FireGaze/UI/FireGazeTheme.cs') And Exists('../../src/FireGaze/UI/FireGazeSymbols.cs')">$(DefineConstants);HAS_VISUAL_SYSTEM</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/UI/FireGazeDisabled.cs')">$(DefineConstants);HAS_DISABLED_SYSTEM</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dalamud.Bindings.ImGui"><HintPath>$(DALAMUD_HOME)/Dalamud.Bindings.ImGui.dll</HintPath></Reference>
+    <Compile Include="../../src/FireGaze/UI/FireGazePalette.cs" Link="FireGazePalette.cs" Condition="Exists('../../src/FireGaze/UI/FireGazePalette.cs')" />
+    <Compile Include="../../src/FireGaze/UI/FireGazeTheme.cs" Link="FireGazeTheme.cs" Condition="Exists('../../src/FireGaze/UI/FireGazeTheme.cs')" />
+    <Compile Include="../../src/FireGaze/UI/FireGazeDisabled.cs" Link="FireGazeDisabled.cs" Condition="Exists('../../src/FireGaze/UI/FireGazeDisabled.cs')" />
+    <Compile Include="../../src/FireGaze/UI/FireGazeSymbols.cs" Link="FireGazeSymbols.cs" Condition="Exists('../../src/FireGaze/UI/FireGazeSymbols.cs')" />
+    <Compile Include="../../src/FireGaze/UI/UiHelpers.cs" Link="UiHelpers.cs" />
+    <Compile Include="../../src/FireGaze/UI/InsStyle.cs" Link="InsStyle.cs" />
+  </ItemGroup>
+</Project>

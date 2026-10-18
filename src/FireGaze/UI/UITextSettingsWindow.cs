@@ -39,7 +39,7 @@ internal sealed class UITextSettingsWindow : Window
 
     public override void Draw()
     {
-        ImGui.TextWrapped("这里决定「一键汉化」用什么方式把英文翻成中文。免费接口按 IP 限流，条目多时建议用自己的大模型 key。");
+        ImGui.TextWrapped("选择「一键汉化」使用的翻译通道。各通道的可用额度、速度与费用不同。");
         ImGui.Separator();
 
         var config = this.plugin.Config;
@@ -87,16 +87,16 @@ internal sealed class UITextSettingsWindow : Window
         if (string.Equals(config.UITextChannel, "public-caiyun", StringComparison.Ordinal))
         {
             ImGui.TextDisabled(
-                "由 FireGaze 维护者自费提供的公共彩云小译额度：免费、不用填 key，一次最多 50 条、几百条几秒翻完。\n" +
-                "在额度用完 / 密钥失效前放给大家用；不可用时会自动改用免费通道并在结果里说明，也可以随时换成下面的其他通道。");
+                "使用共享免费额度，无需填写 key。\n" +
+                "不可用时会自动切换免费通道，你也可以选择其他通道。");
         }
 
         if (config.UITextChannel is "auto" or "google" or "mymemory")
         {
             ImGui.TextDisabled(
-                "免费通道按 IP 限流：Google 会返回 429、MyMemory 每天只有约 5000 词，而且是一条一条翻（每个词条约 0.8 秒）。\n" +
-                "想免费又要快，用「FireGaze 公共彩云」（不用 key）或「彩云小译」（注册后到「应用管理」创建应用，页面右边「管理」→「访问控制」里复制 token 填进来，" +
-                "新用户送 100 万字（一个月），一次能提交 50 条、几百条几秒翻完）。");
+                "免费通道可能限流，批量翻译较慢。\n" +
+                "也可选择「FireGaze 公共彩云」，或使用自己申请的「彩云小译」token。" +
+                "可用额度与费用以服务商当前规则为准。");
         }
 
         if (config.UITextUseGlossary && !string.Equals(config.UITextChannel, "llm", StringComparison.Ordinal))
@@ -118,8 +118,8 @@ internal sealed class UITextSettingsWindow : Window
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(
-                "有现成译文时直接下载，不用花你自己的 key；玩家自己改过的译文不会被覆盖。\n" +
-                "拉不到（网络 / 仓库里还没有这个插件）就照旧用自己的翻译通道。");
+                "优先下载现成译文，节省翻译额度。自己改过的译文会保留。\n" +
+                "没有可用译文时，继续使用所选翻译通道。");
         }
 
         var translateGrey = config.UITextTranslateGreyList;
@@ -139,9 +139,9 @@ internal sealed class UITextSettingsWindow : Window
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("灰名单 = 既画在界面上、又被拿去做比较或当键名的字符串；以及查表用的英文句子。\n" +
-                             "词典式汉化插件的设置页说明文字多是后一种，翻译后会直接显示译文本身。\n" +
-                             "默认不翻，翻错可能影响功能。");
+            ImGui.SetTooltip("灰名单是可能同时影响界面与插件功能的文字。\n" +
+                             "翻译这些文字可能影响正常运行，建议在「编辑校对」中逐条确认。\n" +
+                             "默认不翻译。");
         }
 
         // 开启灰名单的确认框（默认焦点在「取消」；Esc / 点外关闭会经 ref 自动复位）
@@ -152,7 +152,7 @@ internal sealed class UITextSettingsWindow : Window
 
         if (ImGui.BeginPopupModal("连灰名单一起翻###ConfirmGrey", ref this.greyConfirmPending, ImGuiWindowFlags.AlwaysAutoResize))
         {
-            ImGui.TextWrapped("灰名单里的字符串多被插件当作键名或查表用，翻译它们很可能影响插件的正常功能。");
+            ImGui.TextWrapped("翻译灰名单可能影响插件正常运行。");
             ImGui.TextWrapped("建议保持关闭；确实需要时，到「编辑校对」里对具体条目逐条确认后再翻。");
             ImGui.Separator();
             if (ImGui.Button("取消", new Vector2(120, 0)))
@@ -179,7 +179,7 @@ internal sealed class UITextSettingsWindow : Window
         }
 
         var autoRepatch = config.UITextAutoRepatch;
-        if (ImGui.Checkbox("插件更新后自动重打汉化补丁", ref autoRepatch))
+        if (ImGui.Checkbox("插件更新后自动恢复汉化", ref autoRepatch))
         {
             config.UITextAutoRepatch = autoRepatch;
             changed = true;
@@ -188,9 +188,9 @@ internal sealed class UITextSettingsWindow : Window
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(
-                "插件更新会换掉 DLL，汉化补丁需要重打。\n" +
-                "勾上：下次启动 / 打开插件时自动重打（静默写入，不主动重载插件）。\n" +
-                "取消勾选：只在你点「一键汉化」时才动文件。");
+                "插件更新后，原有汉化可能失效。\n" +
+                "开启后，下次启动或打开插件时会自动恢复汉化，不主动重载插件。\n" +
+                "关闭后，需要手动点击「一键汉化」。");
         }
 
         if (string.Equals(config.UITextChannel, "llm", StringComparison.Ordinal))
@@ -242,9 +242,9 @@ internal sealed class UITextSettingsWindow : Window
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip(
-                    "翻译时把命中的官方译名（地名 / 副本 / 技能 / 状态 / 坐骑…）喂给模型，专有名词前后一致。\n" +
-                    "只在大模型通道生效；免费接口带不了术语表。\n" +
-                    "术语表随插件打包，不用联网，也不会读你的游戏客户端。");
+                    "翻译时参考 FF14 官方译名，统一地名、技能、坐骑等名称。\n" +
+                    "仅在大模型通道生效。\n" +
+                    "术语表可离线使用。");
             }
 
             if (config.UITextUseGlossary)
@@ -272,7 +272,7 @@ internal sealed class UITextSettingsWindow : Window
                     ImGui.TextDisabled(FFXIVGlossary.Ready ? $"已就绪 {FFXIVGlossary.Count} 条" : "加载中…");
                 }
 
-                ImGui.TextDisabled("只在大模型通道生效；免费接口带不了术语表。");
+                ImGui.TextDisabled("仅在大模型通道生效。");
             }
         }
 
@@ -291,7 +291,7 @@ internal sealed class UITextSettingsWindow : Window
             this.DrawKeyRow("DeepL API key", config.UITextDeepLKeyProtected, v => config.UITextDeepLKeyProtected = v, ref changed);
         }
 
-        ImGui.TextDisabled("key 只存在本机（DPAPI 加密），不会随任何提交上传；换机器/换 Windows 用户后需要重填。");
+        ImGui.TextDisabled("key 仅在本机加密保存，不随反馈或译文投稿上传。更换电脑或 Windows 用户后需重新填写。");
         ImGui.TextDisabled("除 key 外，设置立即生效并自动保存；key 要点「保存 key」才生效。");
         if (this.messageKey.Length > 0)
         {
@@ -307,13 +307,13 @@ internal sealed class UITextSettingsWindow : Window
     /// <summary>每个通道一句话：要不要 key、额度、快慢（盲评 CF-08：别让用户跨窗口背参数）。</summary>
     private static string ChannelHint(string key) => key switch
     {
-        "public-caiyun" => "FireGaze 公共彩云：维护者自费提供的免费额度，不用填 key；额度用完 / 密钥失效或网络到不了时会自动回退免费通道。",
-        "auto" => "免费·自动：按可用性依次尝试免 key 接口，失败会自动换下一个；按 IP 限流，条目多时慢。",
-        "caiyun" => "彩云小译：一次最多 50 条，新号送 100 万字 / 一个月；需要自填 token（免费注册）。",
-        "google" => "Google 免 key：不用 key，逐条翻译、随时可能被限流（429）。",
-        "mymemory" => "MyMemory：不用 key，每天约 5000 词，逐条翻译。",
-        "llm" => "大模型：速度最快、质量最好，需要自填 API key（只存本机）。",
-        "deepl" => "DeepL：需要自填 API key。",
+        "public-caiyun" => "FireGaze 公共彩云：共享免费额度，无需 key；不可用时自动切换免费通道。",
+        "auto" => "免费·自动：无需 key，自动尝试可用的免费通道；可能限流。",
+        "caiyun" => "彩云小译：需要自己的 token，额度与费用以服务商规则为准。",
+        "google" => "Google 免 key：无需 key，可能限流。",
+        "mymemory" => "MyMemory：无需 key，可用额度受服务商限制。",
+        "llm" => "大模型：需要自己的 API key，可使用 FF14 官方译名术语表；可能产生服务商费用。",
+        "deepl" => "DeepL：需要自己的 API key，额度与费用以服务商规则为准。",
         _ => string.Empty,
     };
 
@@ -363,13 +363,13 @@ internal sealed class UITextSettingsWindow : Window
                     apply(protectedValue);
                     changed = true;
                     this.keyInput = string.Empty;
-                    this.messageKey = "已保存（DPAPI 加密）。";
+                    this.messageKey = "已加密保存。";
                 }
             }
         }
 
         ImGui.SameLine();
-        ImGui.BeginDisabled(existing is null);
+        using var disabledScope1 = UiHelpers.Disabled(existing is null);
         if (ImGui.Button("清除###clear-" + label))
         {
             apply(string.Empty);
@@ -378,7 +378,7 @@ internal sealed class UITextSettingsWindow : Window
             this.messageKey = "已清除。";
         }
 
-        ImGui.EndDisabled();
+        disabledScope1.Dispose();
         if (existing is null && ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
             ImGui.SetTooltip("没有已保存的 key，不用清除。");

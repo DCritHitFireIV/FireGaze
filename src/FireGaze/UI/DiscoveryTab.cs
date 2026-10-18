@@ -147,7 +147,7 @@ internal sealed partial class DiscoveryTab
 
             UiHelpers.ColoredWrapped(
                 UiHelpers.Bad,
-                $"这个页签刚才出错了 {drawErrorCount} 次（已写进日志）：{detail}");
+                $"插件发现暂时无法显示，请稍后重试。详情：{detail}");
         }
     }
 
@@ -178,7 +178,7 @@ internal sealed partial class DiscoveryTab
         // 本机状态文件读写出过问题就给一次提示（failure-path 审计留的唯一未处理项）
         if (discoveryState.TakePersistFailure())
         {
-            SetStatus("本机记录读写出错，点赞与推荐的重试队列可能会丢", isError: true);
+            SetStatus("无法读写本机记录，部分点赞和推荐记录可能无法保留。", isError: true);
             ActivityLog.Warning("插件发现", "discovery-state.json 读/写失败：点赞与推荐的重试队列可能丢失");
         }
 
@@ -187,7 +187,7 @@ internal sealed partial class DiscoveryTab
             ImGui.TextDisabled("正在读取插件库…");
             if (waitingForReposSince is not null)
             {
-                ImGui.TextDisabled("卫月正在刷新插件库，等它读完再统计（通常几秒）。");
+                ImGui.TextDisabled("卫月正在刷新插件库，请稍候。");
             }
 
             return;
@@ -197,7 +197,7 @@ internal sealed partial class DiscoveryTab
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
-                $"读不到卫月的插件库列表（{index.FailureReason}）。本页暂时不可用。");
+                $"无法读取插件库，暂时不能浏览。原因：{index.FailureReason}");
             ImGui.Spacing();
             if (ImGui.Button("重试###RetryIndex"))
             {
@@ -210,17 +210,17 @@ internal sealed partial class DiscoveryTab
 
         // ---------------- 搜索 + 排序（第一行） ----------------
         // 刷新云库（用户 2026-10-07）：从 GitHub 重拉一次词表——刚投稿的库链收录后，点它就能在列表里看到
-        ImGui.BeginDisabled(refreshInFlight);
-        if (ImGui.Button(refreshInFlight ? "刷新中…###DiscoveryRefresh" : "刷新###DiscoveryRefresh",
-                new Vector2(PluginListLayout.RefreshSlotWidth(), 0)))
+        using (UiHelpers.Disabled(refreshInFlight))
         {
-            StartCloudRefresh();
+            if (ImGui.Button(refreshInFlight ? "刷新中…###DiscoveryRefresh" : "刷新###DiscoveryRefresh",
+                    new Vector2(PluginListLayout.RefreshSlotWidth(), 0)))
+            {
+                StartCloudRefresh();
+            }
         }
-
-        ImGui.EndDisabled();
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("从 GitHub 重拉一次云库并重建列表。\n投稿的库链收录后，点它就能确认是否已经上云。");
+            ImGui.SetTooltip("更新插件列表，也可查看投稿是否已收录。");
         }
 
         if (refreshResult is { } finished)
@@ -266,7 +266,7 @@ internal sealed partial class DiscoveryTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("全字段搜索：插件名（原文+译文）、作者、简介、详情；大小写不敏感。");
+            ImGui.SetTooltip("搜索原文或中文名称、作者、简介和详情，不区分大小写。");
         }
 
         PluginListLayout.ToolbarSameLineOrWrap(UiHelpers.LabelWidth("排序") + PluginListLayout.FilterWidth + ImGui.GetStyle().ItemSpacing.X);
@@ -290,7 +290,7 @@ internal sealed partial class DiscoveryTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("默认：本周点赞降序，同赞按插件名。\n推荐排行按在插件发现选择并成功安装的次数排序。");
+            ImGui.SetTooltip("默认按本周点赞排序。推荐排行按通过此页成功安装的次数排序。");
         }
         ImGui.EndGroup();
 
@@ -305,7 +305,7 @@ internal sealed partial class DiscoveryTab
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("重新洗牌；滚动时顺序不会变，想看新的再点一次。");
+                ImGui.SetTooltip("更换随机排序；浏览时顺序保持不变。");
             }
         }
 
@@ -318,7 +318,7 @@ internal sealed partial class DiscoveryTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("隐掉卫月官方主库（Dip17）里的插件，只看第三方；官方库本来就在安装器里，不用从这里加。");
+            ImGui.SetTooltip("只显示第三方插件，隐藏卫月官方库中的插件。");
         }
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("隐藏已在库") + ImGui.GetFrameHeight());
@@ -329,16 +329,16 @@ internal sealed partial class DiscoveryTab
 
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("隐掉仓库已经在你的列表里的插件（含官方主库），剩下的都是还能加进库的。");
+            ImGui.SetTooltip("隐藏仓库已在你列表中的插件，包含官方库。");
         }
 
         UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth($"{index.All.Count} 个插件"));
         ImGui.TextDisabled($"{index.All.Count} 个插件");
         if (ImGui.IsItemHovered())
         {
-            ImGui.SetTooltip("云端词表里的插件总数（含官方主库；筛选只影响显示）。"
+            ImGui.SetTooltip("可浏览的插件总数，包含官方库；筛选不会改变此数量。"
                              + (incompatibleHidden > 0
-                                 ? $"\n已按兼容性隐藏 {incompatibleHidden} 个：它们的卫月 API 等级太旧，装了也不会加载。"
+                                 ? $"\n另有 {incompatibleHidden} 个插件与当前卫月不兼容，已隐藏。"
                                  : string.Empty));
         }
 
@@ -362,13 +362,13 @@ internal sealed partial class DiscoveryTab
         var remaining = iconInFlight + this.iconQueue.Count;
         if (remaining > 0) messages.Add($"图标加载中，还剩 {remaining}");
         else if (this.iconQueue.CoolingCount(DateTime.UtcNow) > 0) messages.Add("部分图标暂不可用，稍后重试");
-        if (indexMayBePartial) messages.Add("正在等卫月读完插件库");
+        if (indexMayBePartial) messages.Add("正在读取插件库");
         if (discoveryStats is null && statsFetchFailed) messages.Add("统计暂不可用");
         if (messages.Count > 0)
         {
             ImGui.SameLine(0, 8f);
             ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Muted);
-            UiHelpers.Fitted(string.Join(" · ", messages), "图标按可见范围下载并缓存；失败后等两分钟再重试，不影响搜索和安装。");
+            UiHelpers.Fitted(string.Join(" · ", messages), "图标暂不可用时会稍后重试，不影响搜索和安装。");
             ImGui.PopStyleColor();
         }
 

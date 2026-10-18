@@ -10,8 +10,8 @@ internal sealed partial class RepoAuditTab
     private string StatusTooltip(RepoAuditItem item) => item.Status switch
     {
         RepoStatus.Invalid =>
-            "链接不合规：这个链接返回的不是仓库 JSON（常见原因：填了 GitHub 网页地址而不是 raw 地址）。\n"
-            + "后果：该库的插件会全部加载不出来，还可能导致插件列表残缺或排版错乱。\n"
+            "不是有效的仓库文件链接，请使用仓库文件的直接链接，不要填写 GitHub 页面地址。\n"
+            + "此链接无法提供可加载的插件列表。\n"
             + (item.Note ?? string.Empty),
         RepoStatus.Dead => "链接已失效（404 / 410）。\n" + (item.Note ?? string.Empty),
         RepoStatus.Unreachable =>

@@ -84,9 +84,11 @@ internal sealed class MainWindow : Window
 
     public override void Draw()
     {
-        ImGui.PushStyleColor(ImGuiCol.Text, UiHelpers.Accent);
+        var markSize = ImGui.GetTextLineHeight();
+        FireGazeSymbols.DrawMark(ImGui.GetCursorScreenPos(), markSize);
+        ImGui.Dummy(new Vector2(markSize));
+        ImGui.SameLine();
         ImGui.TextUnformatted("FireGaze");
-        ImGui.PopStyleColor();
         ImGui.SameLine();
         // 只留版本号：开发版热重载频繁，出问题时一眼就能分辨屏幕上的窗口是不是旧实例的幽灵
         ImGui.TextDisabled($"v{typeof(MainWindow).Assembly.GetName().Version}");

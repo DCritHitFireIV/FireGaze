@@ -26,31 +26,24 @@ internal sealed partial class DiscoveryTab
             return;
         }
 
-        ImGui.TextWrapped("知道别的插件库？把地址发到云库 —— 收录后所有人能在发现页搜到，并跟着词表增量翻译。");
-        ImGui.TextDisabled("需要公开可读的仓库文件（pluginmaster.json / repo.json）。");
+        ImGui.TextWrapped("提交其他插件仓库的地址，收录后可在「插件发现」中浏览。");
+        ImGui.TextDisabled("请填写可公开访问的仓库文件链接（pluginmaster.json 或 repo.json）。");
 
         ImGui.SetNextItemWidth(430);
         ImGui.InputTextWithHint("###DiscoverySubmitUrl", "仓库地址…", ref submitInput, 512);
         ImGui.SameLine();
         var canSubmit = submitInput.Trim().Length > 0 && !submitBusy;
-        if (!canSubmit)
+        using (UiHelpers.Disabled(!canSubmit))
         {
-            ImGui.BeginDisabled();
-        }
-
-        if (ImGui.Button(submitBusy ? "检测中…###DiscoverySubmitBtn" : "投稿###DiscoverySubmitBtn"))
-        {
-            StartSubmit();
-        }
-
-        if (!canSubmit)
-        {
-            ImGui.EndDisabled();
+            if (ImGui.Button(submitBusy ? "检测中…###DiscoverySubmitBtn" : "投稿###DiscoverySubmitBtn"))
+            {
+                StartSubmit();
+            }
         }
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            ImGui.SetTooltip("先在本地检查这个地址能不能被安装器识别；不合格会说原因。\n通过后才投稿到云端，由维护者复核收录。");
+            ImGui.SetTooltip("先检查仓库链接，通过后提交给维护者审核。");
         }
 
         if (submitMessage is { Length: > 0 })
@@ -61,7 +54,7 @@ internal sealed partial class DiscoveryTab
         var pending = SubmittedButNotInCloud();
         if (pending.Count > 0)
         {
-            ImGui.TextDisabled($"已投稿、等收录：{pending.Count} 条");
+            ImGui.TextDisabled($"等待收录：{pending.Count} 条");
             if (ImGui.IsItemHovered())
             {
                 ImGui.SetTooltip(string.Join("\n", pending.Take(8)));
@@ -83,7 +76,7 @@ internal sealed partial class DiscoveryTab
                 var check = await RepoSubmitChecker.CheckAsync(url, CancellationToken.None).ConfigureAwait(false);
                 if (!check.Ok)
                 {
-                    submitMessage = "打回：" + check.Message;
+                    submitMessage = "链接检查未通过：" + check.Message;
                     submitIsError = true;
                     ActivityLog.Info("插件发现", $"投稿被本地检测打回：{url} → {check.Message}");
                     return;
@@ -91,7 +84,7 @@ internal sealed partial class DiscoveryTab
 
                 if (RepoExistsInIndex(check.NormalizedURL, onlyKnown: false))
                 {
-                    submitMessage = "这条库链已经在云库里了";
+                    submitMessage = "此仓库已收录。";
                     submitIsError = false;
                     ActivityLog.Debug("插件发现", $"投稿跳过（云库已有）：{check.NormalizedURL}");
                     return;
@@ -100,14 +93,14 @@ internal sealed partial class DiscoveryTab
                 var (ok, message) = await DiscoveryRelay.SubmitRepoAsync(url, CancellationToken.None).ConfigureAwait(false);
                 if (!ok)
                 {
-                    submitMessage = "投稿失败：" + message + "（地址没丢，网络好了再点一次）";
+                    submitMessage = "投稿失败：" + message + "（已保留地址，请稍后重试）";
                     submitIsError = true;
                     ActivityLog.Warning("插件发现", $"投稿提交失败（{url}）：{message}");
                     return;
                 }
 
                 discoveryState.MarkRepoSubmitted(check.NormalizedURL ?? string.Empty);
-                submitMessage = "已投稿（" + check.Message + "），等云端收录；收录后会触发一次增量翻译";
+                submitMessage = "已投稿（" + check.Message + "），等待收录。";
                 submitIsError = false;
                 submitInput = string.Empty;
                 ActivityLog.Info("插件发现", $"投稿已受理：{check.NormalizedURL ?? url}");

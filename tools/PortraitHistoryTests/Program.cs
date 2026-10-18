@@ -108,6 +108,107 @@ try
             "identical-content restore audit provenance and cursor survive process reload");
     }
 
+    // Streamed persistence must remain byte-for-byte compatible with the compact v1 serializer.
+    var compatibilityPath = FileFor("utf8-compatibility");
+    var escapedKey = key with { CompatToken = "兼容<测试>\"\\🙂" };
+    using (var store = new PortraitHistoryStore(compatibilityPath, () => now))
+    {
+        store.Record(escapedKey, "{\"caption\":\"说：\\\"你好\\\" <tag> 🙂\"}", "换装：\"耳饰\"\\🙂");
+        var newest = store.Record(escapedKey, "{\"caption\":\"第二条\"}", "第二步").Record!;
+        Check(await store.FlushAsync(), "escaped snapshot fixture reaches the persistent writer");
+        var expected = JsonSerializer.SerializeToUtf8Bytes(new
+        {
+            Version = 1, NextID = newest.ID + 1, Records = store.GetRecords(escapedKey).Reverse().ToArray(),
+            Cursors = new[] { new { Key = escapedKey, ID = newest.ID, Redo = Array.Empty<long>() } },
+        });
+        Check(File.ReadAllBytes(compatibilityPath).SequenceEqual(expected) && store.Bytes == expected.Length,
+            "v1 serialization preserves exact UTF-8 escaping, separators, property order and byte accounting");
+        Check(store.TryGetUndo(escapedKey, out var undo), "compatibility fixture has a historical predecessor");
+        var before = File.ReadAllBytes(compatibilityPath);
+        var beforeCount = store.Count; var beforeBytes = store.Bytes;
+        Check(store.PrepareCommit(undo).Status == PortraitHistoryWriteStatus.Added && await store.FlushAsync()
+            && store.Count == beforeCount && store.Bytes == beforeBytes && store.CurrentRecordID(escapedKey) == newest.ID
+            && File.ReadAllBytes(compatibilityPath).SequenceEqual(before),
+            "preparing a candidate publishes no cursor, byte-accounting, record or queued-file mutation");
+    }
+    using (var loaded = new PortraitHistoryStore(compatibilityPath))
+        Check(!loaded.IsReadOnly && loaded.GetRecords(escapedKey).Count == 2,
+            "streamed escaped v1 output reloads through the existing document validator");
+
+    // Removing a one-digit reference can grow its encoding to 'null'; many restore targets share that ID.
+    var referencePath = FileFor("pruned-short-references");
+    var referenceRecords = Enumerable.Range(1, 20).Select(id => new PortraitHistoryRecord(id, key, now,
+        id == 1 ? null : id - 1, id == 1 ? PortraitHistoryRecordKind.Edit : PortraitHistoryRecordKind.Restore,
+        $"{{\"i\":{id}}}", id == 1 ? null : 1, "x")).ToArray();
+    var referenceBytes = JsonSerializer.SerializeToUtf8Bytes(new
+    {
+        Version = 1, NextID = 21L, Records = referenceRecords,
+        Cursors = new[] { new { Key = key, ID = 20L, Redo = Array.Empty<long>() } },
+    });
+    File.WriteAllBytes(referencePath, referenceBytes);
+    using (var store = new PortraitHistoryStore(referencePath, () => now, referenceBytes.Length))
+    {
+        Check(!store.IsReadOnly && store.Record(key, "{\"i\":21}", "x").Status == PortraitHistoryWriteStatus.Added,
+            "exact-budget pruning accepts an edit when many short parent and target references become null");
+        var remaining = store.GetRecords(key);
+        var remainingIDs = remaining.Select(record => record.ID).ToHashSet();
+        Check(!remainingIDs.Contains(1) && remaining.All(record => record.ParentID is not { } parent || remainingIDs.Contains(parent))
+            && remaining.All(record => record.TargetID is not { } target || remainingIDs.Contains(target)),
+            "pruning repairs every removed parent and restore target in one detached candidate");
+        var expected = JsonSerializer.SerializeToUtf8Bytes(new
+        {
+            Version = 1, NextID = 22L, Records = remaining.Reverse().ToArray(),
+            Cursors = new[] { new { Key = key, ID = 21L, Redo = Array.Empty<long>() } },
+        });
+        Check(await store.FlushAsync() && store.Bytes <= referenceBytes.Length && store.Bytes == expected.Length
+            && File.ReadAllBytes(referencePath).SequenceEqual(expected),
+            "reference growth after trimming is included in the exact byte quota and persisted payload");
+    }
+    using (var loaded = new PortraitHistoryStore(referencePath, byteLimit: referenceBytes.Length))
+        Check(!loaded.IsReadOnly && loaded.CurrentRecordID(key) == 21,
+            "pruned short-reference candidate reloads with a valid current cursor");
+
+    // A long shared target shrinks when replaced by null; use the repaired byte count before trimming again.
+    var shrinkingPath = FileFor("pruned-long-references");
+    const long oldestLongID = 123456;
+    const int longRecordCount = 24;
+    var longRecords = Enumerable.Range(0, longRecordCount).Select(offset => new PortraitHistoryRecord(oldestLongID + offset,
+        key, now, offset == 0 ? null : oldestLongID + offset - 1,
+        offset == 0 ? PortraitHistoryRecordKind.Edit : PortraitHistoryRecordKind.Restore,
+        $"{{\"i\":{offset}}}", offset == 0 ? null : oldestLongID, "x")).ToArray();
+    var newLongID = oldestLongID + longRecordCount;
+    var longSnapshot = JsonSerializer.Serialize(new { caption = new string('x', 120) });
+    var longAdded = new PortraitHistoryRecord(newLongID, key, now, newLongID - 1, PortraitHistoryRecordKind.Edit, longSnapshot, Label: "x");
+    var desiredLongRecords = longRecords.Skip(1).Select(record => record with
+    {
+        ParentID = record.ParentID == oldestLongID ? null : record.ParentID,
+        TargetID = record.TargetID == oldestLongID ? null : record.TargetID,
+    }).Append(longAdded).ToArray();
+    var desiredLongBytes = JsonSerializer.SerializeToUtf8Bytes(new
+    {
+        Version = 1, NextID = newLongID + 1, Records = desiredLongRecords,
+        Cursors = new[] { new { Key = key, ID = newLongID, Redo = Array.Empty<long>() } },
+    });
+    var originalLongBytes = JsonSerializer.SerializeToUtf8Bytes(new
+    {
+        Version = 1, NextID = newLongID, Records = longRecords,
+        Cursors = new[] { new { Key = key, ID = newLongID - 1, Redo = Array.Empty<long>() } },
+    });
+    Check(originalLongBytes.Length <= desiredLongBytes.Length,
+        "long-target regression starts with a valid file already below its exact repaired quota");
+    File.WriteAllBytes(shrinkingPath, originalLongBytes);
+    using (var store = new PortraitHistoryStore(shrinkingPath, () => now, desiredLongBytes.Length))
+    {
+        Check(!store.IsReadOnly && store.Record(key, longSnapshot, "x").Status == PortraitHistoryWriteStatus.Added,
+            "long-target regression accepts a detached candidate that can fit after one removal");
+        Check(store.Count == longRecordCount && store.GetRecords(key).Select(record => record.ID).Reverse()
+            .SequenceEqual(desiredLongRecords.Select(record => record.ID)),
+            "repairing shared long targets before the next quota check avoids deleting extra history");
+        Check(await store.FlushAsync() && store.Bytes == desiredLongBytes.Length
+            && File.ReadAllBytes(shrinkingPath).SequenceEqual(desiredLongBytes),
+            "the one-removal long-target result exactly fills the quota and matches compact v1 bytes");
+    }
+
     // A global UTF-8 byte budget must not erase valid records when one snapshot cannot fit.
     using (var store = new PortraitHistoryStore(FileFor("budget"), () => now, byteLimit: 1800))
     {

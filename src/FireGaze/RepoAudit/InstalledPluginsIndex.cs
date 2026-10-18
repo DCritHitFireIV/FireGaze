@@ -139,7 +139,7 @@ internal sealed class InstalledPluginsIndex
             var managerType = dalamud.GetType("Dalamud.Plugin.Internal.PluginManager", throwOnError: false);
             if (serviceOpen is null || managerType is null)
             {
-                return Unavailable("拿不到卫月的插件管理器类型");
+                return Unavailable("无法读取已安装插件列表，请稍后刷新重试。");
             }
 
             var get = serviceOpen.MakeGenericType(managerType)
@@ -147,13 +147,13 @@ internal sealed class InstalledPluginsIndex
             var manager = get?.Invoke(null, null);
             if (manager is null)
             {
-                return Unavailable("拿不到卫月的插件管理器实例");
+                return Unavailable("无法读取已安装插件列表，请稍后刷新重试。");
             }
 
             const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
             if (managerType.GetProperty("InstalledPlugins", flags)?.GetValue(manager) is not IEnumerable plugins)
             {
-                return Unavailable("读不到 InstalledPlugins");
+                return Unavailable("无法读取已安装插件列表，请稍后刷新重试。");
             }
 
             var byRepository = new Dictionary<string, List<InstalledPluginEntry>>(StringComparer.Ordinal);
@@ -243,7 +243,7 @@ internal sealed class InstalledPluginsIndex
             // 第二道防「假 0」：装了插件却一个来源地址都读不到 ⇒ 多半是字段改名了，宁可报「不可用」
             if (all.Count > 0 && byRepository.Count == 0)
             {
-                return Unavailable("已装插件都读不到来源地址（InstalledFromUrl 可能改名了）");
+                return Unavailable("无法读取已安装插件的来源，暂时不能统计仓库使用情况。");
             }
 
             Plugin.Log?.Debug($"[FireGaze] 已装插件索引：{all.Count} 个插件，{byRepository.Count} 条库链在用");

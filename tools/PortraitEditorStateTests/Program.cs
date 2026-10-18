@@ -107,10 +107,3 @@ unsafe class Program {
   Console.WriteLine($"{pass}/{pass+fail} editor snapshot cases passed");return fail==0?0:1;
  }
 }
-
-
-
-
-
-
-

@@ -34,7 +34,7 @@ internal sealed partial class DiscoveryTab
         if (filtered.Count == 0)
         {
             ImGui.TextDisabled(index is { Available: true }
-                ? "没有匹配的插件 —— 换个关键词，或清掉筛选试试。"
+                ? "没有匹配的插件，请更换关键词或清除筛选。"
                 : "云端插件库暂时是空的。");
             return;
         }
@@ -183,7 +183,7 @@ internal sealed partial class DiscoveryTab
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("把这条库加进你的第三方插件列表（会先自动备份）");
+                ImGui.SetTooltip("添加此仓库链接，会先自动备份。");
             }
         }
         else if (enableAction)
@@ -199,29 +199,30 @@ internal sealed partial class DiscoveryTab
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("保留链接、把它重新启用；启用后卫月会去抓它的插件");
+                ImGui.SetTooltip("重新启用此仓库，并刷新插件列表。");
             }
         }
 
         if (navigate)
         {
             ImGui.SetCursorScreenPos(new Vector2(positions.NavigateX, actionOrigin.Y));
-            ImGui.PushStyleColor(ImGuiCol.Button, installed ? new Vector4(0.23f, 0.29f, 0.28f, 1f) : new Vector4(0.27f, 0.27f, 0.32f, 1f));
-            ImGui.PushStyleColor(ImGuiCol.ButtonHovered, installed ? new Vector4(0.30f, 0.37f, 0.34f, 1f) : new Vector4(0.34f, 0.34f, 0.41f, 1f));
-            ImGui.PushStyleColor(ImGuiCol.ButtonActive, installed ? new Vector4(0.19f, 0.25f, 0.23f, 1f) : new Vector4(0.23f, 0.23f, 0.28f, 1f));
-            ImGui.BeginDisabled(!installed && this.installTask is not null);
-            if (ImGui.Button(navigateLabel + "###discovery-next", new Vector2(navigateWidth, 0)))
+            ImGui.PushStyleColor(ImGuiCol.Button, FireGazePalette.Raised);
+            ImGui.PushStyleColor(ImGuiCol.ButtonHovered, FireGazePalette.Hover);
+            ImGui.PushStyleColor(ImGuiCol.ButtonActive, FireGazePalette.Selected);
+            using (UiHelpers.Disabled(!installed && this.installTask is not null))
             {
-                if (installed) this.plugin.OpenTranslationFor(entry.InternalName);
-                else if (installedKnown) this.StartInstallation(entry);
-                else this.OpenInstallationFallback(entry.InternalName);
+                if (ImGui.Button(navigateLabel + "###discovery-next", new Vector2(navigateWidth, 0)))
+                {
+                    if (installed) this.plugin.OpenTranslationFor(entry.InternalName);
+                    else if (installedKnown) this.StartInstallation(entry);
+                    else this.OpenInstallationFallback(entry.InternalName);
+                }
             }
-            ImGui.EndDisabled();
             ImGui.PopStyleColor(3);
             if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
-                ImGui.SetTooltip(installed ? "进入插件汉化，把这个插件放到列表第一行。"
+                ImGui.SetTooltip(installed ? "前往「插件汉化」并定位此插件。"
                     : this.installTask is not null ? "卫月正在安装插件，请完成后再安装另一个。"
-                    : installedKnown ? "直接用卫月安装这个插件；成功后可以去汉化，安装成功才计入推荐次数。"
+                    : installedKnown ? "通过卫月安装此插件，成功后可前往汉化。"
                     : "暂时读不到已安装插件，请在卫月安装器确认。");
         }
         // Explicit slots keep all actions on the same baseline without wrap-dependent row heights.
@@ -265,24 +266,24 @@ internal sealed partial class DiscoveryTab
         }
 
         DrawKeyValue("推荐", $"{recommends} 次");
-        if (ImGui.IsItemHovered()) ImGui.SetTooltip("从插件发现选择并成功安装这个插件的次数，不代表完整的下载量。");
+        if (ImGui.IsItemHovered()) ImGui.SetTooltip("通过「插件发现」成功安装的次数，不是全部下载量。");
         DrawKeyValue("点赞", discoveryStats is null ? "统计暂不可用（点赞会先记在本机）" : total.ToString());
 
         if (entry.IsOfficial)
         {
-            ImGui.TextDisabled("来自卫月官方主库（Dip17）：本来就在你的库里，不用加库。");
+            ImGui.TextDisabled("来自卫月官方库，无需另行添加仓库。");
             ImGui.Unindent(detailInset);
             return;
         }
 
         if (entry.RepositoryURL is not { Length: > 0 } url)
         {
-            ImGui.TextDisabled("来源未知：旧词表没有记这条插件的库链。");
+            ImGui.TextDisabled("暂未取得此插件的仓库地址。");
             ImGui.Unindent(detailInset);
             return;
         }
 
-        ImGui.TextDisabled("库链");
+        ImGui.TextDisabled("仓库链接");
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(url);
@@ -292,7 +293,7 @@ internal sealed partial class DiscoveryTab
         if (ImGui.SmallButton("复制###copy"))
         {
             ImGui.SetClipboardText(url);
-            SetStatus("已复制库链地址", isError: false);
+            SetStatus("已复制仓库链接", isError: false);
         }
 
         if (ImGui.IsItemHovered())
@@ -359,11 +360,11 @@ internal sealed partial class DiscoveryTab
             var lines = new List<string>
             {
                 hasStats ? $"总共 {total} 赞 · 本周 {weekly} 赞" : "统计暂不可用（点赞会先记在本机，恢复后显示计数）",
-                liked ? "这周你已经点过赞了（下周可以再点）" : "点一下为这个插件点赞（一周一次，匿名上报）",
+                liked ? "本周已点赞，下周可再次点赞。" : "为此插件点赞，每周一次，匿名提交。",
             };
             if (unsynced)
             {
-                lines.Add("* 有点赞还没同步到云端，会自动重试");
+                lines.Add("部分点赞尚未同步，将自动重试。");
             }
 
             ImGui.SetTooltip(string.Join("\n", lines));

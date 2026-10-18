@@ -159,7 +159,7 @@ public sealed class Plugin : IDalamudPlugin
         windowSystem.AddWindow(quotaNoticeWindow);
         window = new MainWindow(this, uiTextTab = new UI.UITextTab(this, uiTextEditorWindow, uiTextSettingsWindow, TextPacks, uiTextPatchManager, uiTextRunLock));
         windowSystem.AddWindow(window);
-        pluginInterface.UiBuilder.Draw += windowSystem.Draw;
+        pluginInterface.UiBuilder.Draw += DrawWindows;
         pluginInterface.UiBuilder.Draw += TickInstallerListScroll;
         pluginInterface.UiBuilder.OpenConfigUi += ToggleWindow;
         pluginInterface.UiBuilder.OpenMainUi += OpenMainWindow;
@@ -453,7 +453,7 @@ public sealed class Plugin : IDalamudPlugin
         // 变成“幽灵窗口”（2026-10-07 实机遇到：旧实例的页签顺序一直留在屏幕上）
         try
         {
-            pluginInterface.UiBuilder.Draw -= windowSystem.Draw;
+            pluginInterface.UiBuilder.Draw -= DrawWindows;
             pluginInterface.UiBuilder.Draw -= TickInstallerListScroll;
             pluginInterface.UiBuilder.OpenConfigUi -= ToggleWindow;
             pluginInterface.UiBuilder.OpenMainUi -= OpenMainWindow;
@@ -516,6 +516,10 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>
     ///     切换主窗口。
     /// </summary>
+    // The style must exist before WindowSystem begins any window, including its popup/tooltip children.
+    // This callback owns only FireGaze windows; disposal restores the host before the next plugin draws.
+    private void DrawWindows() => FireGazeTheme.Draw(windowSystem.Draw);
+
     public void ToggleWindow() => window.Toggle();
 
     /// <summary>

@@ -46,7 +46,7 @@ internal sealed partial class RepoAuditTab
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(
-                "图标存到本地，重开游戏不用重下，插件安装器里也能直接用。\n"
+                "保存已下载的图标，下次打开游戏时可继续使用。\n"
                 + "关掉后每次重启都要重新下载。");
         }
 
@@ -60,10 +60,7 @@ internal sealed partial class RepoAuditTab
         ImGui.Spacing();
 
         var canCheck = indexReady && !scanning && !iconDownloadRunning;
-        if (!canCheck)
-        {
-            ImGui.BeginDisabled();
-        }
+        using var disabledScope1 = UiHelpers.Disabled(!canCheck);
 
         if (ImGui.Button(iconCheckDone ? "重新检查缺图标###IconCheck" : "检查缺图标###IconCheck"))
         {
@@ -74,23 +71,17 @@ internal sealed partial class RepoAuditTab
         {
             ImGui.SetTooltip(
                 (indexReady ? string.Empty : "插件数据不可用，暂时不能检查。\n")
-                + "哪里还没图标就看这里；范围是所有已安装插件。\n"
+                + "检查所有已安装插件缺少的图标。\n"
                 + "这一步只查不下载。");
         }
 
-        if (!canCheck)
-        {
-            ImGui.EndDisabled();
-        }
+        disabledScope1.Dispose();
 
         ImGui.SameLine();
 
         // 第二步：看过清单后由用户决定下不下
         var canDownload = indexReady && !scanning && iconCheckDone;
-        if (!canDownload)
-        {
-            ImGui.BeginDisabled();
-        }
+        using var disabledScope2 = UiHelpers.Disabled(!canDownload);
 
         if (ImGui.Button(iconDownloadRunning
                 ? "停止下载###IconDownload"
@@ -110,15 +101,12 @@ internal sealed partial class RepoAuditTab
         {
             ImGui.SetTooltip(
                 (indexReady ? string.Empty : "插件数据不可用，暂时不能下载。\n")
-                + (iconCheckDone ? string.Empty : "先点「检查缺图标」，拿到清单再决定。\n")
-                + "把上一步查出来缺的图标下载到本地，重开游戏不用重下。\n"
+                + (iconCheckDone ? string.Empty : "请先点击「检查缺图标」。\n")
+                + "下载检查结果中缺少的图标。\n"
                 + "中途可点「停止下载」。");
         }
 
-        if (!canDownload)
-        {
-            ImGui.EndDisabled();
-        }
+        disabledScope2.Dispose();
 
         // 状态：下载进行中给进度条，其余给文字（含「缺图标」名单悬停展开）
         if (iconDownloadRunning && iconDownloadTotal > 0)

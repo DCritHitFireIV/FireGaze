@@ -1,6 +1,34 @@
 namespace FireGaze.PortraitPreview;
 
-/// <summary>One worker atomically writes the newest full document; superseded pending documents coalesce.</summary>
+/// <summary>Immutable UTF-8 fragments retain the compact v1 format without a full caller-thread buffer.</summary>
+internal sealed class PortraitHistoryWriteDocument
+{
+    private readonly byte[] prefix;
+    private readonly byte[][] records;
+    private readonly byte[] suffix;
+    public int Length { get; }
+
+    public PortraitHistoryWriteDocument(byte[] prefix, byte[][] records, byte[] suffix)
+    {
+        this.prefix = prefix;
+        this.records = records;
+        this.suffix = suffix;
+        Length = checked(prefix.Length + suffix.Length + records.Sum(record => record.Length) + Math.Max(0, records.Length - 1));
+    }
+
+    public void WriteTo(Stream stream)
+    {
+        stream.Write(prefix);
+        for (var index = 0; index < records.Length; index++)
+        {
+            if (index != 0) stream.Write(","u8);
+            stream.Write(records[index]);
+        }
+        stream.Write(suffix);
+    }
+}
+
+/// <summary>One worker atomically writes the newest fragment snapshot; superseded pending documents coalesce.</summary>
 internal sealed class PortraitHistoryWriter : IDisposable
 {
     private readonly object gate = new();
@@ -9,7 +37,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
     private readonly string path;
     private readonly int byteLimit;
     private readonly Task worker;
-    private (long Sequence, byte[] Bytes)? pending;
+    private (long Sequence, PortraitHistoryWriteDocument Document)? pending;
     private long submitted;
     private long completed;
     private bool stopping;
@@ -24,13 +52,13 @@ internal sealed class PortraitHistoryWriter : IDisposable
         worker = Task.Run(Work);
     }
 
-    public bool Queue(byte[] bytes)
+    public bool Queue(PortraitHistoryWriteDocument document)
     {
         lock (gate)
         {
-            if (stopping || bytes.Length > byteLimit) return false;
+            if (stopping || document.Length > byteLimit) return false;
             var needsSignal = pending is null;
-            pending = (++submitted, bytes);
+            pending = (++submitted, document);
             if (needsSignal) signal.Release();
             return true;
         }
@@ -52,7 +80,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
         while (true)
         {
             await signal.WaitAsync().ConfigureAwait(false);
-            (long Sequence, byte[] Bytes) request;
+            (long Sequence, PortraitHistoryWriteDocument Document) request;
             lock (gate)
             {
                 if (pending is not { } value)
@@ -64,7 +92,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
                 pending = null;
             }
             string? failure = null;
-            try { Write(request.Bytes); }
+            try { Write(request.Document); }
             catch (Exception exception) { failure = exception.Message; }
             lock (gate)
             {
@@ -82,17 +110,17 @@ internal sealed class PortraitHistoryWriter : IDisposable
         }
     }
 
-    private void Write(byte[] bytes)
+    private void Write(PortraitHistoryWriteDocument document)
     {
-        if (bytes.Length > byteLimit) throw new InvalidDataException("肖像历史快照超过容量上限。");
+        if (document.Length > byteLimit) throw new InvalidDataException("肖像历史快照超过容量上限。");
         var directory = Path.GetDirectoryName(path)!;
         Directory.CreateDirectory(directory);
         var temporary = Path.Combine(directory, $".{Path.GetFileName(path)}.{Guid.NewGuid():N}.tmp");
         try
         {
-            using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 64 * 1024))
             {
-                stream.Write(bytes);
+                document.WriteTo(stream);
                 stream.Flush(flushToDisk: true);
             }
             if (File.Exists(path)) File.Replace(temporary, path, null);

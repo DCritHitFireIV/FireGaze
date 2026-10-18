@@ -5,6 +5,7 @@ using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Ipc;
+using FireGaze.UI;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -145,7 +146,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         catch (Exception ex)
         {
             Plugin.Log.Warning(ex, "[肖像实时预览] 更新失败");
-            status = "编辑模型或物品数据尚未就绪";
+            status = "肖像或物品信息尚未加载完成";
         }
     }
 
@@ -172,7 +173,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             var state = source.Status switch
             {
                 OwnedReadStatus.Current => "已读取",
-                OwnedReadStatus.PossiblyStale => "已读取缓存，可能过期",
+                OwnedReadStatus.PossiblyStale => "记录可能过期",
                 _ => "尚未读取",
             };
             var readAt = source.ReadAt is { } time ? $" · {time.ToLocalTime():MM-dd HH:mm}" : "";
@@ -222,10 +223,10 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     public void OpenPreview() => Mutate(() =>
     {
-        if (!target.CanBlockSave) { Error(target.LastError ?? "肖像保存保护尚未就绪，无法开始预览。"); return; }
+        if (!target.CanBlockSave) { Error(target.LastError ?? "暂时无法阻止肖像保存，为避免保存临时外观，本次未开启预览。请稍后重试。"); return; }
         if (!target.TryResolve(out var identity, out _, out _) || !session.Open(identity)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
         RefreshInventory();
-        status = "仅改变当前肖像；关闭实时预览后才能保存。";
+        status = "肖像修改已开启。";
         window.IsOpen = true;
         window.BringToFront();
     });
@@ -234,11 +235,11 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     {
         if (!SynchronizeCurrentLook()) return;
         var item = GetItems(slot).FirstOrDefault(row => row.ID == id);
-        if (item is not { Available: true }) { Error(item?.Reason ?? "该物品不在当前已读取的拥有记录中。"); return; }
+        if (item is not { Available: true }) { Error(item?.Reason ?? "尚未在已读取的物品中找到此装备。"); return; }
         var variant = ownedView.Items.FirstOrDefault(row => row.ItemID == id)?.Variants.FirstOrDefault();
         HandleHistoryResult(historyBatch.Flush());
         if (!session.Replace(slot, new(id, item.DyeChannels > 0 ? variant?.Stain1 ?? 0 : (byte)0, item.DyeChannels > 1 ? variant?.Stain2 ?? 0 : (byte)0)))
-            Error("当前肖像模型无法应用该装备，请等待加载后重试。");
+            Error("暂时无法预览此装备，请等待肖像加载后重试。");
         else RecordDirectChange("更换装备：" + item.Name);
     });
 
@@ -246,7 +247,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     {
         if (!SynchronizeCurrentLook()) return;
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.Replace(slot, default)) Error("当前肖像模型无法清空该部位。");
+        if (!session.Replace(slot, default)) Error("暂时无法清空此部位，请稍后重试。");
         else RecordDirectChange("清空装备部位");
     });
 
@@ -259,7 +260,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (item is null || channel >= item.DyeChannels || (stain != 0 && !dyes.Any(row => row.ID == stain))) return;
         var next = channel == 0 ? piece with { Stain0 = stain } : piece with { Stain1 = stain };
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.Replace(slot, next)) Error("当前肖像模型无法应用该染色。");
+        if (!session.Replace(slot, next)) Error("暂时无法预览此染色，请稍后重试。");
         else RecordDirectChange($"染色 {channel + 1}：" + (dyes.FirstOrDefault(dye => dye.ID == stain)?.Name ?? "无"));
     });
 
@@ -267,7 +268,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     {
         if (!SynchronizeCurrentLook()) return;
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.SetVisibility(head, weapon, visor)) Error("当前肖像模型无法修改显示状态。");
+        if (!session.SetVisibility(head, weapon, visor)) Error("暂时无法更改装备显示，请稍后重试。");
         else RecordDirectChange("装备显示设置");
     });
 
@@ -277,19 +278,19 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (!session.Close())
         {
             window.IsOpen = true;
-            Error("临时外观尚未成功还原，请等待模型加载后再次关闭。");
+            Error("临时外观尚未还原，请等待肖像加载后再次关闭。");
             return;
         }
         window.IsOpen = false;
         SynchronizeAfterClose();
         cacheWriter.Queue(owned.ExportJSON());
-        status = "已结束临时外观预览，可以保存肖像。";
+        status = "临时外观已还原，现在可以保存肖像。";
     });
 
     private void Error(string message)
     {
         status = message;
-        Plugin.Chat.PrintError("[肖像实时预览] " + message);
+        Plugin.Chat.PrintError("[肖像实时编辑] " + message);
     }
 
     private void Mutate(System.Action action)
@@ -302,13 +303,14 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private void Draw()
     {
         if (disposed) return;
+        using var theme = FireGazeTheme.Push();
         pointerHeld = ImGui.IsMouseDown(ImGuiMouseButton.Left) || ImGui.IsMouseDown(ImGuiMouseButton.Right)
             || ImGui.IsMouseDown(ImGuiMouseButton.Middle);
         if (editorAvailable)
         {
             var viewport = ImGui.GetMainViewport();
             ImGui.SetNextWindowPos(viewport.Pos + buttonPosition, ImGuiCond.Always);
-            ImGui.SetNextWindowBgAlpha(.8f);
+            ImGui.SetNextWindowBgAlpha(1f);
             if (ImGui.Begin("###FireGazePortraitAnchor", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoSavedSettings | ImGuiWindowFlags.NoFocusOnAppearing))
             {
                 if (ImGui.Button(IsActive ? "关闭FireGaze修改" : "FireGaze修改"))
@@ -326,7 +328,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
-        else if (parts is ["status"]) Plugin.Chat.Print("[肖像实时预览] " + status);
+        else if (parts is ["status"]) Plugin.Chat.Print("[肖像实时编辑] " + status);
         else if (parts is ["undo"]) Undo();
         else if (parts is ["redo"]) Redo();
         else if (parts is ["restore", var record] && long.TryParse(record, out var recordID) && recordID > 0) RestoreHistory(recordID);
@@ -374,7 +376,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                 if (editor->IsAgentActive()) editor->Hide();
             return;
         }
-        if (session.IsActive) { Error("请先关闭实时预览，再切换肖像编辑器。"); return; }
+        if (session.IsActive) { Error("请先关闭 FireGaze修改，再切换肖像编辑器。"); return; }
         if (editor->IsAgentActive()) { Error("请先关闭已有肖像编辑器。"); return; }
         if (kind == "gearset")
         {

@@ -1,5 +1,6 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using FireGaze.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -166,9 +167,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
         else if (result.Status is not PortraitHistoryWriteStatus.Duplicate)
             historyWriteError = result.Status switch
             {
-                PortraitHistoryWriteStatus.TooLarge => "此条记录超过历史空间限制，已有记录已保留。",
-                PortraitHistoryWriteStatus.ReadOnlyCorrupt => "历史文件无法读取，已保留原文件；本次不覆盖历史。",
-                _ => "本次历史未提交，请稍后重试。",
+                PortraitHistoryWriteStatus.TooLarge => "历史记录空间不足，本次修改尚未记录。已有记录已保留。",
+                PortraitHistoryWriteStatus.ReadOnlyCorrupt => "历史记录无法读取，原文件已保留。本次修改未能记录。",
+                _ => "这次编辑记录未能保存，请稍后重试。",
             };
     }
 
@@ -179,7 +180,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var current = observedKey is { } active ? history.CurrentRecordID(active) : null;
         historyRows = records.Select(record => new PortraitHistoryListItem(record.ID, record.Timestamp,
             record.Label, record.ID == current)).ToArray();
-        historyStatus = $"{history.Count} 条记录 · {history.Bytes / (1024f * 1024f):0.00} / 10 MB";
+        historyStatus = $"{history.Count} 条记录";
         PublishHistoryNavigation();
     }
 
@@ -203,8 +204,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (before is null) return;
         HandleHistoryResult(historyBatch.Flush());
         if (!appearance.TryChange(before.Customize, groupID, value, out var customized, out var reason)) { Error(reason); return; }
-        if (!target.ApplyEditorState(identity, before with { Customize = customized })) { Error(target.LastError ?? "当前肖像模型无法应用此美容选项。"); return; }
-        RecordDirectChange("美容师修改");
+        if (!target.ApplyEditorState(identity, before with { Customize = customized })) { Error(target.LastError ?? "暂时无法预览此美容选项，请稍后重试。"); return; }
+        var selectedGroup = appearance.Build(customized).FirstOrDefault(group => group.ID == groupID);
+        var selectedOption = selectedGroup?.Options.FirstOrDefault(option => option.Value == value);
+        RecordDirectChange(selectedGroup is not null && selectedOption is not null
+            ? $"{selectedGroup.Label}：{selectedOption.Label}" : "美容师修改");
     });
 
     private void RecordDirectChange(string label)
@@ -246,8 +250,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var preparation = history.PrepareCommit(selected);
         if (preparation.Status is not (PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate))
         { HandleHistoryResult(preparation); return; }
-        if (!target.CanBlockSave) { Error("保存保护尚未就绪，无法恢复历史。"); return; }
-        if (!session.IsActive && !session.Open(identity)) { Error("肖像模型尚未就绪。"); return; }
+        if (!target.CanBlockSave) { Error("暂时无法阻止肖像保存，为避免保存临时外观，本次未恢复记录。请稍后重试。"); return; }
+        if (!session.IsActive && !session.Open(identity)) { Error("肖像尚未加载完成，请稍后重试。"); return; }
         window.IsOpen = true;
         if (!target.ApplyEditorState(identity, desired)) { Error(target.LastError ?? "恢复历史失败，当前肖像已保留。"); return; }
         var committed = kind == PortraitHistorySelectionKind.Restore ? history.CommitRestore(selected) : history.CommitNavigation(selected);
@@ -255,7 +259,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         {
             _ = target.ApplyEditorState(identity, before);
             HandleHistoryResult(committed);
-            Error("历史未提交，已尝试还原本次操作。");
+            Error("未能保存这次恢复，已尝试还原本次操作。");
             return;
         }
         _ = session.ObserveLook(desired.Look);
@@ -263,7 +267,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         observedIdentity = identity;
         observedKey = key;
         appearanceGroups = appearance.Build(observedEditor.Customize);
-        status = kind == PortraitHistorySelectionKind.Undo ? "已撤回上一步" : kind == PortraitHistorySelectionKind.Redo ? "已重做" : "已恢复所选时刻；恢复前的记录仍保留。";
+        status = kind == PortraitHistorySelectionKind.Undo ? "已撤回上一步" : kind == PortraitHistorySelectionKind.Redo ? "已重做" : "已恢复所选时刻";
         if (syncPlate) _ = target.UpdatePlateMirror(identity, observedEditor, true);
         RefreshHistoryRows();
     }
@@ -273,7 +277,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (!enabled) { _ = target.ClosePlateMirror(); syncPlate = false; return; }
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)
             || target.CaptureEditorState(identity) is not { } current)
-        { Error("请先打开肖像实时编辑。"); return; }
+        { Error("请先在肖像编辑器旁打开 FireGaze修改。"); return; }
         syncPlate = true;
         if (!target.UpdatePlateMirror(identity, current, true)) status = "已开启同步，请打开自己的冒险者铭牌查看本地预览。";
     });
@@ -301,22 +305,24 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void DrawContent()
     {
-        ImGui.TextWrapped("在装备套装肖像或冒险者铭牌的编辑器旁点击「FireGaze修改」，即可更换装备、染色及美容。关闭后还原临时外观。");
-        ImGui.TextDisabled("仅本地预览；临时外观开启时需先关闭，再重新保存肖像。");
-        ImGui.BeginDisabled(!editorAvailable);
-        if (ImGui.Button(IsActive ? "打开修改窗口" : "FireGaze修改")) OpenPreview();
-        ImGui.EndDisabled();
+        ImGui.TextWrapped("在装备套装肖像或冒险者铭牌编辑器旁点击「FireGaze修改」，可预览装备、染色和美容。关闭后还原临时外观。");
+        ImGui.TextDisabled("仅本人可见。请先关闭 FireGaze修改，再保存肖像。");
+        using (UiHelpers.Disabled(!editorAvailable))
+        {
+            if (ImGui.Button(IsActive ? "打开修改窗口" : "FireGaze修改")) OpenPreview();
+        }
         ImGui.SameLine();
-        ImGui.BeginDisabled(!CanUndo);
-        if (ImGui.Button("撤回")) Undo();
-        ImGui.EndDisabled();
+        using (UiHelpers.Disabled(!CanUndo))
+        {
+            if (ImGui.Button("撤回")) Undo();
+        }
         ImGui.SameLine();
-        ImGui.BeginDisabled(!CanRedo);
-        if (ImGui.Button("重做")) Redo();
-        ImGui.EndDisabled();
+        using (UiHelpers.Disabled(!CanRedo))
+        {
+            if (ImGui.Button("重做")) Redo();
+        }
         var sync = SyncPlate;
         if (ImGui.Checkbox("肖像实时同步铭牌", ref sync)) SetSyncPlate(sync);
         ImGui.TextDisabled("同步只影响本地铭牌预览，关闭后还原。");
-        PortraitPreviewWindow.DrawHistoryRows(this, editorAvailable);
     }
 }

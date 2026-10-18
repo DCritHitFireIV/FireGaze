@@ -70,7 +70,7 @@ internal sealed unsafe partial class NativePortraitTarget
         try {
             if (!Apply(identity,snapshot.Look) || !ApplyCustomization(identity,snapshot.Customize,snapshot.HideVieraEars)
                 || !IsCurrent(identity))
-            { if (!IsCurrent(identity)) return false; throw new InvalidOperationException("当前模型未接受临时外观。"); }
+            { if (!IsCurrent(identity)) return false; throw new InvalidOperationException("当前肖像未能应用临时外观。"); }
             // ImportPortraitData restarts SetPoseTimed, even for an identical pose. Beauty and
             // wardrobe edits must leave a paused timeline untouched instead of creating a
             // transient zero-progress state before the requested pose settles next frame.
@@ -82,7 +82,7 @@ internal sealed unsafe partial class NativePortraitTarget
             return IsCurrent(identity);
         }
         catch(Exception ex) {
-            LastError="肖像历史还原失败："+ex.Message;
+            LastError="肖像编辑未能应用："+ex.Message;
             try {
                 if (IsCurrent(identity)) {
                     Apply(identity,before.Look);

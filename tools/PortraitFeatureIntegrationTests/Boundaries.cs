@@ -37,6 +37,16 @@ namespace Dalamud.Bindings.ImGui
     }
 }
 
+namespace FireGaze.UI
+{
+    // Only the unused drawing boundary is declared here; production editing state is exercised below.
+    internal static class UiHelpers
+    {
+        public static IDisposable Disabled(bool value = true) => new DrawingScope();
+        private sealed class DrawingScope : IDisposable { public void Dispose() { } }
+    }
+}
+
 namespace FireGaze
 {
     internal static class Plugin

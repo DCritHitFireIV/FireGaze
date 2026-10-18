@@ -32,7 +32,3 @@ unsafe sealed class EditorFixture : IPortraitNativeApi,IPortraitEditorNativeApi,
  public bool UpdateCustomization(CharaViewPortrait* v,Character* c,byte[] x){Calls++;if(ThrowCustomize){ThrowCustomize=false;throw new InvalidOperationException("customize failure");}if(RejectCustomize)return false;x.AsSpan().CopyTo(c->DrawData.CustomizeData.Data);return true;}
  public void Dispose(){NativeMemory.Free(Editor);NativeMemory.Free(State);NativeMemory.Free(View);NativeMemory.Free(Actor);NativeMemory.Free(Real);}
 }
-
-
-
-

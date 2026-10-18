@@ -127,12 +127,12 @@ internal sealed partial class RepoAuditTab
         }
         else
         {
-            lines.Add("只表示没从它装过插件：可能你在别的机器装过、它只是备用源、或插件是手动/开发版装的。");
+            lines.Add("本机未从此仓库安装插件，不代表仓库无用；请确认是否为备用源。");
         }
 
         if (item.InstalledPlugins.Any(x => iconDead.Contains(x.InternalName)))
         {
-            lines.Add("带「缺图标」的是这次检查没缓存到的，可以点「下载图标」；带「图标地址失效」的要作者更新清单。图标只影响列表里的小图，不影响插件运行。");
+            lines.Add("缺少的图标可点击「下载图标」补齐；地址失效需由作者更新。缺少图标不影响插件运行。");
         }
 
         ImGui.SetTooltip(string.Join('\n', lines));
@@ -257,7 +257,7 @@ internal sealed partial class RepoAuditTab
                     : iconDead.Contains(entry.InternalName)
                         ? entry.DisplayName + "\n图标地址已失效，需要作者更新清单"
                         : entry.DeclaresIcon
-                            ? entry.DisplayName + "\n图标还没缓存下来；只影响列表里的小图，不影响插件运行"
+                            ? entry.DisplayName + "\n图标暂不可用，不影响插件运行。"
                             : entry.DisplayName + "\n这个插件没有提供图标；只影响列表里的小图，不影响插件运行";
 
                 ImGui.SetTooltip(tooltip);
