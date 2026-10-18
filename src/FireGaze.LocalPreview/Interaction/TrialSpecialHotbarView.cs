@@ -66,7 +66,7 @@ public sealed unsafe class TrialSpecialHotbarView : IDisposable
             addon->IsVisible = change == TrialSpecialBarVisibilityChange.Restore;
     }
 
-    /// <summary>Uses the player's existing HOTBAR_EX bindings, never assumed digits 1..6.
+    /// <summary>Uses the player's existing twelve HOTBAR_EX bindings, never assumed digit keys.
     /// This consumes only the pressed bound keyboard key in the game buffer; it generates no input.
     /// Native-bar clicks are routed separately by TrialSpecialHotbarModel.TryMapNativeAction.</summary>
     public void PollKeyboard(bool allowed)

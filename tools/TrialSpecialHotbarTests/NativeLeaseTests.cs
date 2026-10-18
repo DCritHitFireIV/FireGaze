@@ -18,12 +18,12 @@ internal static class NativeLeaseTests
         dynamic Command(byte type,uint id)=>Activator.CreateInstance(commandType,type,id)!;
         dynamic original=Array.CreateInstance(commandType,16);dynamic expected=Array.CreateInstance(commandType,16);
         for(var i=0;i<16;i++){original.SetValue(Command(1,(uint)(100+i)),i);expected.SetValue(Command(0,0),i);}
-        expected.SetValue(Command(1,50731),0);expected.SetValue(Command(10,23),6);
+        expected.SetValue(Command(1,50731),0);expected.SetValue(Command(10,23),11);
         dynamic lease=Activator.CreateInstance(leaseType)!;
         check((bool)lease.Acquire(Identity(),original,expected,0u,false),"native lease captures ephemeral slots and hidden addon state");
         int slot=-1;
         check((bool)lease.TryRoute(Identity(),(nint)(1000+0x105a0),Command(1,50731),out slot) && slot==0,"native slot pointer maps to trial action");
-        slot=-1;check((bool)lease.TryRoute(Identity(),(nint)(1000+0x105a0+6*0xe8),Command(10,23),out slot) && slot==6,"native last slot maps to local exit");
+        slot=-1;check((bool)lease.TryRoute(Identity(),(nint)(1000+0x105a0+11*0xe8),Command(10,23),out slot) && slot==11,"native twelfth slot maps to local exit");
         slot=-1;check((bool)lease.TryRoute(Identity(),(nint)(1000+0x105a0+8*0xe8),Command(0,0),out slot) && slot==8,"leased empty slots are consumed");
         slot=-1;check(!(bool)lease.TryRoute(Identity(),(nint)(1000+0x105a0+1),Command(1,50731),out slot),"unaligned native slot pointer is never consumed");
         slot=-1;check(!(bool)lease.TryRoute(Identity(),(nint)(1000+0x11420),Command(1,50731),out slot),"cross hotbar is outside keyboard lease");
@@ -49,8 +49,8 @@ internal static class NativeLeaseTests
         if(invoke is not null)
         {
             bool Can(object identity,int slot,object command)=>(bool)invoke.Invoke((object)lease,[identity,slot,command])!;
-            check(Can(Identity(),0,Command(1,50731)) && Can(Identity(),6,Command(10,23)),"native probe admits only currently owned action and exit slot");
-            check(!Can(Identity(),7,Command(0,0)) && !Can(Identity(),-1,Command(0,0)),"native probe cannot execute extra slots or negative index");
+            check(Can(Identity(),0,Command(1,50731)) && Can(Identity(),11,Command(10,23)),"native probe admits only currently owned action and twelfth exit slot");
+            check(!Can(Identity(),12,Command(0,0)) && !Can(Identity(),-1,Command(0,0)),"native probe cannot execute extra slots or negative index");
             check(!Can(Identity(10),0,Command(1,50731)),"queued native probe with stale revision never executes");
             check(!Can(Identity(),0,Command(1,51026)),"game overwritten command defeats native probe before original dispatcher");
         }

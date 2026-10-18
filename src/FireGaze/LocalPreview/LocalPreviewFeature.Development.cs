@@ -49,7 +49,7 @@ public sealed partial class LocalPreviewFeature
         {
             // The native dispatcher is reached only through a currently leased slot.
             // No unrelated normal, cross or genuine pet hotbar slot is callable here.
-            if(id>6 || specialHotbarView?.NativeActive!=true)return;
+            if(id>Runtime.TrialSpecialHotbarModel.ExitSlot || specialHotbarView?.NativeActive!=true)return;
             result=specialHotbarView.ExecuteNativeSlot(id);
         }
         else if (parts[1] == "emote")

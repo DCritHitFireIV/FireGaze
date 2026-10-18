@@ -70,7 +70,7 @@ public sealed class TrialSpecialHotbarCatalog(ExcelModule excel)
 /// <summary>Framework-thread state and routing shared by clicks and the native special keybinds.</summary>
 public sealed class TrialSpecialHotbarModel(TrialSpecialHotbarCatalog catalog)
 {
-    public const int ExitSlot = 6;
+    public const int ExitSlot = 11;
     private long frame;
     private readonly long[] activatedFrames = new long[ExitSlot + 1];
     private readonly bool[] activated = new bool[ExitSlot + 1];
@@ -119,8 +119,8 @@ public sealed class TrialSpecialHotbarModel(TrialSpecialHotbarCatalog catalog)
         activated[slot] = true;
         activatedFrames[slot] = frame;
         if (slot == ExitSlot) exit();
-        else if (current.Actions[slot] is {Kind:TrialSpecialActionKind.FlightPose}) toggleFlightPose?.Invoke();
-        else if (current.Actions[slot] is { } action) playAction(action.Id);
+        else if (slot < current.Actions.Count && current.Actions[slot] is {Kind:TrialSpecialActionKind.FlightPose}) toggleFlightPose?.Invoke();
+        else if (slot < current.Actions.Count && current.Actions[slot] is { } action) playAction(action.Id);
         return true;
     }
 }

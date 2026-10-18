@@ -28,6 +28,22 @@ internal static unsafe class NativeLifecycleTests
     public static void Run(Action<bool,string> check)
     {
         RuntimeDisposal(check);
+        using(var f=new BarFixture())
+        {
+            f.Framework.Inside=true;
+            f.Lease.Clear();
+            f.Refresh();
+            check(f.Module->PetHotbar.GetHotbarSlot(11)->CommandType==SlotType.GeneralAction
+                && f.Module->PetHotbar.GetHotbarSlot(11)->CommandId==23,
+                "production native publish puts exit in slot twelve");
+            for(var slot=6;slot<11;slot++)
+                check(f.Module->PetHotbar.GetHotbarSlot((uint)slot)->CommandType==0
+                    && f.Module->PetHotbar.GetHotbarSlot((uint)slot)->CommandId==0,
+                    "production native publish leaves intermediate slot "+(slot+1)+" empty");
+            check(f.Execute(11) && f.RoutedSlots.SequenceEqual(new[]{11}),
+                "production native dispatcher routes the twelfth slot to the trial callback");
+            f.Framework.Inside=false;
+        }
         using(var f=new BarFixture(true))
         {
             f.Framework.Inside=true;
@@ -142,7 +158,7 @@ internal static unsafe class NativeLifecycleTests
             Addon->Id=4;Addon->RootNode=Alloc<AtkResNode>();Addon->IsVisible=true;
             var before=new TrialNativeHotbarCommand[16];var expected=new TrialNativeHotbarCommand[16];
             for(var i=0;i<16;i++)before[i]=new((byte)SlotType.GeneralAction,(uint)(100+i));
-            expected[0]=flightPose?new((byte)SlotType.GeneralAction,2):new((byte)SlotType.Action,50731);expected[6]=new((byte)SlotType.GeneralAction,23);
+            expected[0]=flightPose?new((byte)SlotType.GeneralAction,2):new((byte)SlotType.Action,50731);expected[11]=new((byte)SlotType.GeneralAction,23);
             Lease.Acquire(new((nint)Module,(nint)Addon,4,(nint)source,7,0,0,9),before,expected,0,false);
             for(var i=0;i<16;i++){var slot=Module->PetHotbar.GetHotbarSlot((uint)i);slot->CommandType=(SlotType)expected[i].Type;slot->CommandId=expected[i].Id;}
             Module->PetHotbarMode=14;InputFlags=4;

@@ -11,6 +11,7 @@ Check(catalogType is not null, "the trial special bar resolves actions from the 
 if(catalogType is not null) {
     using var game = new Lumina.GameData(args[0], new Lumina.LuminaOptions { DefaultExcelLanguage = Lumina.Data.Language.ChineseSimplified });
     FlightPoseBarTests.Run(game,Check);
+    ExitSlotTests.Run(game,Check);
     dynamic catalog = Activator.CreateInstance(catalogType,game.Excel)!;
     dynamic tank = catalog.GetBar(true,(ushort)223,1L);
     Check((uint)tank.Actions[0].Id==20122,"dwarf tank shows its native cannon action");
@@ -46,9 +47,9 @@ if(catalogType is not null) {
         Check((bool)model.ActivateSlot(1,10L,play,exit) && played.Count==1,"empty replacement slot consumes the old native action");
         Check(!(bool)model.ActivateSlot(0,9L,play,exit) && played.Count==1,"stale queued click never runs a replacement trial");
         model.BeginFrame(101L);Check((bool)model.ActivateSlot(0,10L,play,exit) && played.Count==2,"next input frame can replay the action");
-        Check((bool)model.ActivateSlot(6,10L,play,exit) && exited==1,"last slot exits through the native cleanup callback");
+        Check((bool)model.ActivateSlot(11,10L,play,exit) && exited==1,"twelfth slot exits through the native cleanup callback");
         model.SetPreview(false,(ushort)58,11L);
-        Check(!(bool)model.ActivateSlot(6,10L,play,exit) && exited==1,"stale exit cannot cancel a new trial");
+        Check(!(bool)model.ActivateSlot(11,10L,play,exit) && exited==1,"stale exit cannot cancel a new trial");
         model.Clear();Check(model.Current is null && !(bool)model.ActivateSlot(0,11L,play,exit),"cleared bar relinquishes inputs");
         var inputType=assembly.GetType("FireGaze.LocalPreview.Runtime.TrialSpecialKeyboardRouting");
         Check(inputType is not null,"special bar respects hidden UI and text focus before reading native EX bindings");

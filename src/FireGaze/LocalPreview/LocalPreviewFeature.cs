@@ -332,7 +332,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
                 if (pluginInterface.IsDev) ExecuteDevelopmentNative(parts);
                 break;
             case "special":
-                if (pluginInterface.IsDev && parts.Length==2 && int.TryParse(parts[1],out var slot) && slot is >=0 and <=6)
+                if (pluginInterface.IsDev && parts.Length==2 && int.TryParse(parts[1],out var slot)
+                    && slot is >=0 and <=TrialSpecialHotbarModel.ExitSlot)
                     OnFramework(() => { PublishSpecialBar(); return specialHotbarModel?.Current is { } bar && ActivateSpecialSlot(slot,bar.Revision); });
                 break;
             case "photo":

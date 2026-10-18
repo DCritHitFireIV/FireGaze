@@ -56,7 +56,7 @@ internal static class FlightPoseBarTests
         model.BeginFrame(101);check(Activate(0,30) && toggles==2,"later frame can switch back to ground pose");
         check(!Activate(0,29) && toggles==2,"stale flight click cannot toggle replacement preview");
         check(!model.TryMapNativeAction(2,335,0,out _),"real native Jump/action id never routes to flight toggle");
-        check(Activate(6,30) && exits==1,"flight control preserves final exit slot");
+        check(Activate(11,30) && exits==1,"flight control preserves the twelfth exit slot");
         set.Invoke(model,[true,(ushort)223,31L,false]);model.BeginFrame(102);
         check(Activate(0,31) && plays==1 && toggles==2,"native mount dedicated action still plays through action callback");
         check(Activate(1,31) && toggles==3 && plays==1,"dedicated mount flight slot uses visual callback after its action");
