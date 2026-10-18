@@ -20,6 +20,7 @@ internal unsafe interface IPortraitPlateMirrorApi
     AtkTexture CreateRetainedTexture(PortraitIdentity identity, nint source);
     bool TryWriteTexture(PortraitPlateBinding binding, AtkTexture expected, AtkTexture replacement);
     void ReleaseTexture(ref AtkTexture texture);
+    bool TryCloseOwner(PortraitPlateBinding binding);
 }
 
 /// <summary>
@@ -39,9 +40,13 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
     private bool ownsTexture;
     private readonly PortraitPlateMirror[] overlays = [];
     private bool busy;
+    private bool disposing;
+    private bool disposeRequested;
     private bool disposed;
     public bool IsActive => binding is not null || overlays.Any(overlay => overlay.IsActive);
     public string? LastError { get; private set; }
+    public bool DisposalRestored { get; private set; } = true;
+    internal event Action<string>? DisposalFailed;
 
     internal PortraitPlateMirror(IPortraitPlateMirrorApi api, params IPortraitPlateMirrorApi[] overlayAPIs)
     {
@@ -51,8 +56,10 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
 
     public bool Update(PortraitIdentity identity, PortraitEditorSnapshot snapshot, bool enabled)
     {
+        if (disposed || disposing) return false;
         if (!enabled) return Close();
         if (!UpdateSingle(identity, snapshot)) { _ = Close(); return false; }
+        if (disposed || disposing) return false;
         foreach (var overlay in overlays)
         {
             if (overlay.UpdateSingle(identity, snapshot)) continue;
@@ -65,7 +72,7 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
 
     private bool UpdateSingle(PortraitIdentity identity, PortraitEditorSnapshot snapshot)
     {
-        if (disposed || busy || !api.IsFrameworkThread) return false;
+        if (disposed || disposing || busy || !api.IsFrameworkThread) return false;
         if (!snapshot.IsValid) return false;
         busy = true;
         try
@@ -115,7 +122,7 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
             finally { if (!installed) api.ReleaseTexture(ref next); }
         }
         catch (Exception ex) { LastError = "冒险者铭牌临时显示无法更新：" + ex.Message; return false; }
-        finally { busy = false; }
+        finally { CompleteOperation(); }
     }
 
     public bool Close()
@@ -125,7 +132,13 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
         busy = true;
         try { return CloseCore(); }
         catch (Exception ex) { LastError = "冒险者铭牌临时显示无法还原：" + ex.Message; return false; }
-        finally { busy = false; }
+        finally { CompleteOperation(); }
+    }
+
+    private void CompleteOperation()
+    {
+        busy = false;
+        if (disposeRequested) Dispose();
     }
 
     private bool CloseCore()
@@ -166,11 +179,58 @@ internal sealed unsafe partial class PortraitPlateMirror : IDisposable
 
     public void Dispose()
     {
-        if (disposed) return;
-        if (!Close()) return;
-        foreach (var overlay in overlays) overlay.Dispose();
-        UnregisterNativeEvents();
-        disposed = true;
+        if (disposed || disposing || !api.IsFrameworkThread) return;
+        if (busy) { disposeRequested = true; return; }
+        disposing = true;
+        disposeRequested = false;
+        try
+        {
+            _ = Close();
+            foreach (var overlay in overlays)
+            {
+                overlay.Dispose();
+                if (!overlay.DisposalRestored)
+                {
+                    DisposalRestored = false;
+                    LastError = overlay.LastError;
+                }
+            }
+            // A failed compare can mean a native callback has just replaced the owner. Re-read
+            // once before the unload fallback; ordinary Close keeps its retryable lease.
+            if (Close()) return;
+            busy = true;
+            try
+            {
+                if (binding is { } active && api.IsCurrent(active)) _ = api.TryCloseOwner(active);
+                if (CloseCore()) return;
+            }
+            catch (Exception ex) { LastError = "冒险者铭牌卸载收尾失败：" + ex.Message; }
+            finally { busy = false; }
+            // The native asset still owns the installed temporary reference. Never release it
+            // here: native replacement/finalization will do so. Only our detached original is ours.
+            DisposalRestored = false;
+            LastError = "本地铭牌预览未能还原，请关闭后重新打开铭牌。" + (LastError is null ? "" : " " + LastError);
+            var releaseOriginal = ownsTexture;
+            var released = original;
+            binding = null; original = default; temporary = default; editor = default; ownsTexture = false;
+            if (releaseOriginal) api.ReleaseTexture(ref released);
+        }
+        finally
+        {
+            UnregisterNativeEvents();
+            disposed = true;
+            disposing = false;
+            disposeRequested = false;
+            // A native callback can request disposal while an operation is still busy. Its
+            // caller may already have detached this mirror, so report the eventual result once.
+            var notify = DisposalFailed;
+            DisposalFailed = null;
+            if (!DisposalRestored)
+            {
+                try { notify?.Invoke(LastError ?? "本地铭牌预览未能还原，请关闭后重新打开铭牌。"); }
+                catch { /* Reporting failure must not retain a disposed native lease. */ }
+            }
+        }
     }
 
     partial void UnregisterNativeEvents();

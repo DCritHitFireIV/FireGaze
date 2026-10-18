@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
+using Dalamud.Interface.Utility;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
@@ -89,6 +90,13 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     }
 
     public override void OnClose() => feature.ClosePreview();
+
+    public override void PreDraw()
+    {
+        var bounds = PortraitWindowLayout.ForViewport(ImGui.GetMainViewport().WorkSize, ImGuiHelpers.GlobalScale);
+        Size = bounds.Preferred;
+        SizeConstraints = new WindowSizeConstraints { MinimumSize = bounds.Minimum, MaximumSize = bounds.Maximum };
+    }
 
     public override void Draw()
     {

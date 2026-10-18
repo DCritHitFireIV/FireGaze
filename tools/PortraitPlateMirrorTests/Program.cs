@@ -5,6 +5,8 @@ return 1;
 using FireGaze.PortraitPreview;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
+using Dalamud.Plugin.Services;
+using System.Reflection;
 
 var passed = 0;
 void Check(bool condition, string description)
@@ -84,6 +86,54 @@ try
     disposed.Dispose(); disposed.Dispose();
     Check(api.CurrentKernel == 10 && api.Releases.SequenceEqual([100L]) && !disposed.Update(identity, snapshot, true),
         "plugin unload restores the native image once and rejects later updates");
+    api = new FakeApi();
+    disposed = new PortraitPlateMirror(api);
+    disposed.Update(identity, snapshot, true);
+    api.FailWrite = true;
+    disposed.Dispose();
+    Check(!disposed.IsActive && api.ClosedOwners == 1 && api.Releases.SequenceEqual([10L])
+        && !disposed.Update(identity, snapshot, true),
+        "unload finalizes an owned plate whose texture restoration is refused and releases only its detached original");
+    disposed.Dispose();
+    Check(api.ClosedOwners == 1 && api.Releases.Count == 1,
+        "repeated unload cannot close a former owner or release its lease twice");
+    api = new FakeApi { FailCloseOwner = true };
+    disposed = new PortraitPlateMirror(api);
+    disposed.Update(identity, snapshot, true);
+    api.FailWrite = true;
+    var lifecycle = DispatchProxy.Create<IAddonLifecycle, LifecycleProbe>();
+    typeof(PortraitPlateMirror).GetField("addonLifecycle", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(disposed, lifecycle);
+    disposed.Dispose(); disposed.Dispose();
+    Check(!disposed.IsActive && !disposed.DisposalRestored && disposed.LastError is not null
+        && api.CurrentKernel == 100 && api.Releases.SequenceEqual([10L]) && api.ClosedOwners == 1,
+        "permanently refused unload reports non-restoration while leaving the asset-owned temporary reference intact");
+    Check(((LifecycleProbe)(object)lifecycle).Unregisters == 1 && !disposed.Update(identity, snapshot, true),
+        "failed unload still unregisters its native finalization listener and rejects future updates");
+    api = new FakeApi();
+    disposed = new PortraitPlateMirror(api);
+    disposed.Update(identity, snapshot, true);
+    api.Framework = false; disposed.Dispose();
+    Check(disposed.IsActive && api.Releases.Count == 0 && api.ClosedOwners == 0,
+        "off-thread disposal preserves its lease without hiding a native owner");
+    api.Framework = true; disposed.Dispose();
+    Check(disposed.DisposalRestored && !disposed.IsActive && api.CurrentKernel == 10,
+        "a subsequent framework-thread disposal can still restore the original image");
+    api = new FakeApi();
+    disposed = new PortraitPlateMirror(api);
+    disposed.Update(identity, snapshot, true);
+    api.OnRelease = disposed.Dispose;
+    Check(disposed.Close() && !disposed.IsActive && api.Releases.SequenceEqual([100L])
+        && !disposed.Update(identity, snapshot, true),
+        "disposal requested by a native release callback completes after the active close without double release");
+    api = new FakeApi();
+    disposed = new PortraitPlateMirror(api);
+    disposed.Update(identity, snapshot, true);
+    api.FailWrite = true;
+    api.OnClose = () => { api.ExternalReplace(200); disposed.Dispose(); };
+    disposed.Dispose();
+    Check(disposed.DisposalRestored && api.CurrentKernel == 200 && api.ClosedOwners == 1
+        && api.Releases.SequenceEqual([10L]) && api.StaleReads == 0,
+        "owner replacement and reentrant disposal during native hide preserve the new image and release only our original");
     var character = new FakeApi(); var frame = new FakeApi { Source = 200 }; var accent = new FakeApi { Source = 300 };
     using (var mirror = new PortraitPlateMirror(character, frame, accent))
     {
@@ -101,6 +151,25 @@ try
         Check(!mirror.Update(identity, snapshot, true) && !mirror.IsActive && frame.CurrentKernel == 10 && accent.CurrentKernel == 10,
             "a failed character-layer refresh also closes prior frame and accent leases");
     }
+    character = new FakeApi(); frame = new FakeApi { Source = 200 }; accent = new FakeApi { Source = 300 };
+    disposed = new PortraitPlateMirror(character, frame, accent);
+    disposed.Update(identity, snapshot, true);
+    frame.FailWrite = true; accent.FailWrite = true;
+    frame.OnClose = () => { character.Alive = false; frame.Alive = false; accent.Alive = false; };
+    disposed.Dispose();
+    Check(disposed.DisposalRestored && !disposed.IsActive && frame.ClosedOwners == 1
+        && character.Releases.SequenceEqual([10L]) && frame.Releases.SequenceEqual([10L]) && accent.Releases.SequenceEqual([10L])
+        && character.StaleReads == 0 && frame.StaleReads == 0 && accent.StaleReads == 0,
+        "one native finalization resolves two refused overlay restorations and releases all detached originals once");
+    character = new FakeApi(); frame = new FakeApi { Source = 200, FailCloseOwner = true }; accent = new FakeApi { Source = 300, FailCloseOwner = true };
+    disposed = new PortraitPlateMirror(character, frame, accent);
+    disposed.Update(identity, snapshot, true);
+    frame.FailWrite = true; accent.FailWrite = true;
+    disposed.Dispose();
+    Check(!disposed.DisposalRestored && disposed.LastError is not null && !disposed.IsActive
+        && character.CurrentKernel == 10 && frame.CurrentKernel == 200 && accent.CurrentKernel == 300
+        && character.Releases.SequenceEqual([100L]) && frame.Releases.SequenceEqual([10L]) && accent.Releases.SequenceEqual([10L]),
+        "composite unload preserves failed overlay status even after the character layer restores successfully");
     api = new FakeApi();
     using (var mirror = new PortraitPlateMirror(api))
     {
@@ -131,10 +200,11 @@ catch (Exception ex) { Console.Error.WriteLine(ex); return 1; }
 
 sealed unsafe class FakeApi : IPortraitPlateMirrorApi
 {
-    public bool Framework = true, EditorCurrent = true, Resolvable = true, Alive = true, FailWrite, FailImageWrite, InvalidateOnRetain, InvalidateEditorOnResolve;
+    public bool Framework = true, EditorCurrent = true, Resolvable = true, Alive = true, FailWrite, FailImageWrite, InvalidateOnRetain, InvalidateEditorOnResolve, FailCloseOwner;
     public nint Source = 100;
-    public int Retains, Writes, StaleReads;
+    public int Retains, Writes, StaleReads, ClosedOwners;
     public List<long> Releases = [];
+    public Action? OnClose, OnRelease;
     public PortraitPlateImageState SourceImage = new(0, 0, 256, 420, true);
     public PortraitPlateImageState CurrentImage = new(0, 0, 256, 420, true);
     private AtkTexture current = Make(10);
@@ -155,8 +225,19 @@ sealed unsafe class FakeApi : IPortraitPlateMirrorApi
     { Retains++; if (InvalidateOnRetain) Alive = false; return Make(source); }
     public bool TryWriteTexture(PortraitPlateBinding binding, AtkTexture expected, AtkTexture replacement)
     { if (!Alive) { StaleReads++; return false; } if (FailWrite || current.KernelTexture != expected.KernelTexture) return false; current = replacement; Writes++; return true; }
-    public void ReleaseTexture(ref AtkTexture texture) { Releases.Add((long)texture.KernelTexture); texture = default; }
+    public void ReleaseTexture(ref AtkTexture texture) { Releases.Add((long)texture.KernelTexture); texture = default; OnRelease?.Invoke(); }
+    public bool TryCloseOwner(PortraitPlateBinding binding)
+    { if (!Framework || !Alive) return false; ClosedOwners++; if (FailCloseOwner) return false; if (OnClose is not null) OnClose(); else Alive = false; return !Alive; }
     public void ExternalReplace(nint texture) => current = Make(texture);
     private static AtkTexture Make(nint texture) => new() { KernelTexture = (Texture*)texture, TextureType = TextureType.KernelTexture };
+}
+public class LifecycleProbe : DispatchProxy
+{
+    public int Unregisters;
+    protected override object? Invoke(MethodInfo? method, object?[]? arguments)
+    {
+        if (method!.Name == "UnregisterListener") { Unregisters++; return null; }
+        throw new NotSupportedException(method.Name);
+    }
 }
 #endif

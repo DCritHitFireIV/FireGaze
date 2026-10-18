@@ -81,7 +81,16 @@ internal sealed partial class PortraitPreviewWindow
                 if (ImGui.Selectable(label, record.IsCurrent) && allowRestore) feature.RestoreHistory(record.ID);
                 FireGazeSymbols.DrawSelection(ImGui.GetItemRectMin(), ImGui.GetItemRectMax(), record.IsCurrent, ImGui.IsItemFocused());
                 if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) || ImGui.IsItemFocused())
-                    ImGui.SetTooltip(allowRestore ? "恢复此刻的装备、美容、姿势、镜头、灯光及装饰" : "请先打开对应肖像编辑器");
+                {
+                    ImGui.BeginTooltip();
+                    ImGui.PushTextWrapPos(ImGui.GetFontSize() * 22f);
+                    ImGui.TextUnformatted($"{record.At.ToLocalTime():yyyy-MM-dd HH:mm:ss}{(record.IsCurrent ? " · 当前" : "")}");
+                    ImGui.TextWrapped(record.Label);
+                    ImGui.Separator();
+                    ImGui.TextWrapped(allowRestore ? "恢复此刻的装备、美容、姿势、镜头、灯光及装饰" : "请先打开对应肖像编辑器");
+                    ImGui.PopTextWrapPos();
+                    ImGui.EndTooltip();
+                }
                 ImGui.PopID();
             }
             clipper.End();

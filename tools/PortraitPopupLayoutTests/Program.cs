@@ -45,4 +45,32 @@ foreach (var work in new[] { Vector2.Zero, new Vector2(32, 16), new Vector2(floa
     Check(float.IsFinite(maximum.X) && float.IsFinite(maximum.Y) && maximum.X > 0 && maximum.Y > 0,
         "zero or temporarily unavailable viewport values never reach native sizing as NaN or infinity");
 }
+
+foreach (var scale in new[] { 1f, 1.25f, 1.5f, 2f })
+foreach (var work in new[] { new Vector2(1920, 1080), new Vector2(1366, 768), new Vector2(800, 600) })
+{
+    var (preferred, minimum, maximum) = MainWindowBounds(work, scale);
+    var physicalMinimum = minimum * scale;
+    var physicalMaximum = maximum * scale;
+    Check(physicalMinimum.X < work.X && physicalMinimum.Y < work.Y,
+        $"main editor minimum fits {work.X}x{work.Y} after the host applies {scale}x global scale");
+    Check(physicalMaximum.X < work.X && physicalMaximum.Y < work.Y &&
+        minimum.X <= maximum.X && minimum.Y <= maximum.Y,
+        "host-scaled maximum leaves an outer margin and never falls below the minimum");
+    Check(preferred.X <= maximum.X && preferred.Y <= maximum.Y &&
+        preferred.X >= minimum.X && preferred.Y >= minimum.Y,
+        "main editor preferred size stays between the logical bounds without applying scale twice");
+}
+var normalBounds = MainWindowBounds(new(1920, 1080), 1);
+Check(normalBounds.Preferred == new Vector2(920, 760) && normalBounds.Minimum == new Vector2(700, 540),
+    "a fitting work area preserves the familiar main editor defaults");
+var wideBounds = MainWindowBounds(new(3840, 2160), 2);
+Check(wideBounds.Preferred == new Vector2(920, 760) && wideBounds.Minimum == new Vector2(700, 540),
+    "two-times scale on a large display retains logical defaults for host scaling");
 Console.WriteLine($"PortraitPopupLayoutTests: {passed} passed, 0 failed");
+
+static (Vector2 Preferred, Vector2 Minimum, Vector2 Maximum) MainWindowBounds(Vector2 work, float scale)
+{
+    var bounds = PortraitWindowLayout.ForViewport(work, scale);
+    return (bounds.Preferred, bounds.Minimum, bounds.Maximum);
+}

@@ -48,6 +48,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     private bool disposed;
     private PortraitPlateMirror? plateMirror;
     public string? LastError { get; private set; }
+    public bool PlateMirrorDisposalRestored { get; private set; } = true;
     public bool CanBlockSave => saveHook is { IsEnabled: true } && saveEventRegistered;
     public uint BlockedSaves { get; private set; }
     public uint BlockedSaveEvents { get; private set; }
@@ -57,7 +58,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         IAgentLifecycle agentLifecycle, IAddonLifecycle addonLifecycle)
         : this(new LiveApi(framework, objects, gameGUI, agentLifecycle), blockSave, error)
     {
-        plateMirror = new PortraitPlateMirror(framework, gameGUI, objects, addonLifecycle, IsCurrent);
+        plateMirror = new PortraitPlateMirror(framework, gameGUI, objects, addonLifecycle, agentLifecycle, IsCurrent);
         var address = (nint)AgentBannerEditorState.MemberFunctionPointers.Save;
         if (address == 0) { LastError = "当前游戏版本无法阻止肖像保存，暂不能开启临时预览。"; return; }
         try
@@ -355,13 +356,26 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     private static uint Generation(Character* character) => *(uint*)((byte*)character + GenerationOffset);
     public void Dispose()
     {
-        if (disposed) return;
-        plateMirror?.Dispose(); plateMirror = null;
+        if (disposed || !api.IsFrameworkThread) return;
+        if (plateMirror is not null) plateMirror.DisposalFailed += OnPlateMirrorDisposalFailed;
+        plateMirror?.Dispose();
+        if (plateMirror is { DisposalRestored: false })
+            OnPlateMirrorDisposalFailed(plateMirror.LastError ?? "本地铭牌预览未能还原，请关闭后重新打开铭牌。");
+        plateMirror = null;
         disposed = true;
         if (saveEventRegistered) agentLifecycle?.UnregisterListener(AgentEvent.PreReceiveEvent,
             Dalamud.Game.Agent.AgentId.BannerEditor, OnAgentEvent);
         saveEventRegistered = false; agentLifecycle = null;
         saveHook?.Dispose(); saveHook = null; original = null; originalLook = null;
+    }
+
+    private void OnPlateMirrorDisposalFailed(string message)
+    {
+        if (!PlateMirrorDisposalRestored) return;
+        PlateMirrorDisposalRestored = false;
+        LastError = message;
+        try { error(message); }
+        catch { /* Native resources must still be released if the unload notice cannot display. */ }
     }
 
     private sealed class NativeSnapshot(CharaViewPortrait* view)

@@ -145,9 +145,109 @@ unsafe class Program
   f.RefuseOriginalHide=false;
   Check(t.AbortCapturedEditor() && f.OriginalHideCalls==2 && f.Editor->EditorState==null,
    "emergency teardown uses verified original native hide when a PreHide listener blocks ordinary hide");
+  using(var owner=new PlateOwnerFixture())
+  {
+   var binding=owner.Binding;
+   owner.Framework=false;
+   Check(!PortraitPlateOwnerClose.TryClose(owner,binding) && owner.OwnerReads==0 && owner.HideCalls==0,
+    "plate unload cannot inspect or hide native owner from a worker thread");
+   owner.Framework=true;owner.Current=false;
+   Check(!PortraitPlateOwnerClose.TryClose(owner,binding) && owner.OwnerReads==0,
+    "stale plate lease never inspects a saved card pointer");
+   owner.Current=true;owner.Card->Data=owner.OtherStorage;
+   Check(!PortraitPlateOwnerClose.TryClose(owner,binding) && owner.HideCalls==0,
+    "plate unload rejects the same agent after its storage owner changes");
+   owner.Card->Data=owner.Storage;owner.Storage->ContentId++;
+   Check(!PortraitPlateOwnerClose.TryClose(owner,binding) && owner.HideCalls==0,
+    "plate unload never closes another character's plate at the same native addresses");
+   owner.Storage->ContentId--;owner.RefuseHide=true;
+   Check(!PortraitPlateOwnerClose.TryClose(owner,binding) && owner.HideCalls==1 && owner.OriginalCalls==0,
+    "blocked ordinary plate hide without an original table returns failure rather than guessing an entry point");
+   owner.OriginalAvailable=true;owner.RefuseOriginal=true;
+   Check(!PortraitPlateOwnerClose.TryClose(owner,binding) && owner.OriginalCalls==1,
+    "a refused original plate hide remains a disposal restoration failure");
+   owner.RefuseOriginal=false;
+   Check(PortraitPlateOwnerClose.TryClose(owner,binding) && owner.OriginalCalls==2 && !owner.Current,
+    "verified original native hide closes the captured local plate when ordinary hide is prevented");
+   owner.Current=true;owner.Card->Data=owner.Storage;owner.ReplaceOnHide=true;
+   Check(!PortraitPlateOwnerClose.TryClose(owner,binding) && owner.OriginalCalls==2,
+    "ordinary hide changing storage ownership never forwards original hide to the new owner");
+   owner.Card->Data=owner.Storage;owner.ReplaceOnHide=false;owner.RefuseHide=false;
+   Check(PortraitPlateOwnerClose.TryClose(owner,binding) && owner.OriginalCalls==2,
+    "successful ordinary plate hide never unnecessarily invokes the original table");
+  }
+  var disposedTarget=new NativePortraitTarget(f,_=>false,_=>errors++);
+  f.Editor->EditorState=f.State;
+  disposedTarget.Capture(id);
+  f.Framework=false;disposedTarget.Dispose();f.Framework=true;
+  Check(disposedTarget.IsCurrent(id),"off-thread native target dispose cannot drop a still owned preview lease");
+  disposedTarget.Dispose();
+  var mirrorAPI=new RefusalMirrorApi();var failedMirror=new PortraitPlateMirror(mirrorAPI);
+  failedMirror.Update(new(1,2,3,4,5),new PortraitEditorSnapshot(),true);mirrorAPI.RefuseWrite=true;
+  var notifications=0;
+  var mirrorTarget=new NativePortraitTarget(f,_=>false,_=>notifications++);
+  typeof(NativePortraitTarget).GetField("plateMirror",BindingFlags.Instance|BindingFlags.NonPublic)!.SetValue(mirrorTarget,failedMirror);
+  f.Framework=false;mirrorTarget.Dispose();f.Framework=true;
+  Check(mirrorTarget.IsPlateMirrorActive && mirrorTarget.PlateMirrorDisposalRestored && mirrorAPI.Releases==0 && notifications==0,
+   "off-thread target disposal preserves an active mirror lease and its pending error state for framework cleanup");
+  mirrorTarget.Dispose();mirrorTarget.Dispose();
+  Check(!mirrorTarget.PlateMirrorDisposalRestored && mirrorTarget.LastError is not null && notifications==1
+   && !mirrorTarget.IsPlateMirrorActive && mirrorAPI.Releases==1,
+   "native target reports failed mirror restoration even after detaching its lease during unload");
+  mirrorAPI=new RefusalMirrorApi();failedMirror=new PortraitPlateMirror(mirrorAPI);notifications=0;
+  mirrorTarget=new NativePortraitTarget(f,_=>false,_=>notifications++);
+  typeof(NativePortraitTarget).GetField("plateMirror",BindingFlags.Instance|BindingFlags.NonPublic)!.SetValue(mirrorTarget,failedMirror);
+  mirrorAPI.AfterInstallImage=()=>{mirrorAPI.RefuseWrite=true;mirrorTarget.Dispose();};
+  _=failedMirror.Update(new(1,2,3,4,5),new PortraitEditorSnapshot(),true);
+  Check(!mirrorTarget.PlateMirrorDisposalRestored && mirrorTarget.LastError is not null && notifications==1
+   && !failedMirror.DisposalRestored && mirrorAPI.Releases==1,
+   "deferred mirror disposal reports its final failure to the target after reentrant native teardown returns");
   t.Dispose();Check(!t.IsCurrent(id) && !t.ShouldBlockSave((nint)f.State),"disposed adapter cannot touch native pointers or block saves");
   Console.WriteLine($"{passed}/{passed+failed} portrait native boundary cases passed");return failed==0?0:1;
  }
+}
+
+unsafe sealed class RefusalMirrorApi : IPortraitPlateMirrorApi
+{
+ public bool RefuseWrite;public int Releases;public Action? AfterInstallImage;
+ private AtkTexture texture=Make(10);
+ private static AtkTexture Make(nint value)=>new(){KernelTexture=(FFXIVClientStructs.FFXIV.Client.Graphics.Kernel.Texture*)value,TextureType=TextureType.KernelTexture};
+ public bool IsFrameworkThread=>true;
+ public bool IsEditorCurrent(PortraitIdentity identity)=>true;
+ public nint GetSourceTexture(PortraitIdentity identity)=>100;
+ public PortraitPlateImageState GetSourceImage(PortraitIdentity identity)=>new(0,0,256,420,true);
+ public bool TryResolve(PortraitIdentity identity,out PortraitPlateBinding binding){binding=new(1,2,3,4,5,6,7,8,9);return true;}
+ public bool IsCurrent(PortraitPlateBinding binding)=>true;
+ public AtkTexture ReadTexture(PortraitPlateBinding binding)=>texture;
+ public PortraitPlateImageState ReadImage(PortraitPlateBinding binding)=>new(0,0,256,420,true);
+ public bool TryWriteImage(PortraitPlateBinding binding,PortraitPlateImageState expected,PortraitPlateImageState replacement)
+ {var callback=AfterInstallImage;AfterInstallImage=null;callback?.Invoke();return true;}
+ public AtkTexture CreateRetainedTexture(PortraitIdentity identity,nint source)=>Make(source);
+ public bool TryWriteTexture(PortraitPlateBinding binding,AtkTexture expected,AtkTexture replacement){if(RefuseWrite)return false;texture=replacement;return true;}
+ public void ReleaseTexture(ref AtkTexture value){Releases++;value=default;}
+ public bool TryCloseOwner(PortraitPlateBinding binding)=>false;
+}
+
+unsafe sealed class PlateOwnerFixture : IPortraitPlateOwnerApi,IDisposable
+{
+ public AgentCharaCard* Card=(AgentCharaCard*)NativeMemory.AllocZeroed((nuint)sizeof(AgentCharaCard));
+ public AgentCharaCard.Storage* Storage=(AgentCharaCard.Storage*)NativeMemory.AllocZeroed((nuint)sizeof(AgentCharaCard.Storage));
+ public AgentCharaCard.Storage* OtherStorage=(AgentCharaCard.Storage*)NativeMemory.AllocZeroed((nuint)sizeof(AgentCharaCard.Storage));
+ public bool Framework=true,Current=true,RefuseHide,OriginalAvailable,RefuseOriginal,ReplaceOnHide;
+ public int OwnerReads,HideCalls,OriginalCalls;
+ public PortraitPlateBinding Binding;
+ public PlateOwnerFixture()
+ {
+  Card->Data=Storage;Card->AddonId=12;Storage->AccountId=17;Storage->ContentId=18;
+  Binding=new(11,12,13,14,15,(nint)Storage,17,18,19);
+ }
+ public bool IsFrameworkThread=>Framework;
+ public bool IsCurrent(PortraitPlateBinding binding)=>Current;
+ public AgentCharaCard* GetOwner(){OwnerReads++;return Card;}
+ public void HideOwner(AgentCharaCard* owner){HideCalls++;if(ReplaceOnHide){owner->Data=OtherStorage;return;}if(!RefuseHide)Current=false;}
+ public bool TryHideOriginalOwner(AgentCharaCard* owner,PortraitPlateBinding binding)
+ {if(!OriginalAvailable)return false;OriginalCalls++;if(!RefuseOriginal)Current=false;return true;}
+ public void Dispose(){NativeMemory.Free(Card);NativeMemory.Free(Storage);NativeMemory.Free(OtherStorage);}
 }
 
 sealed class Lifecycle : IAgentLifecycle

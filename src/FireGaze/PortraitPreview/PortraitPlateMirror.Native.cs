@@ -1,5 +1,6 @@
 using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
+using Dalamud.Game.Agent;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
@@ -10,6 +11,33 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FireGaze.PortraitPreview;
 
+internal unsafe interface IPortraitPlateOwnerApi
+{
+    bool IsFrameworkThread { get; }
+    bool IsCurrent(PortraitPlateBinding binding);
+    AgentCharaCard* GetOwner();
+    void HideOwner(AgentCharaCard* owner);
+    bool TryHideOriginalOwner(AgentCharaCard* owner, PortraitPlateBinding binding);
+}
+
+internal static unsafe class PortraitPlateOwnerClose
+{
+    public static bool TryClose(IPortraitPlateOwnerApi api, PortraitPlateBinding binding)
+    {
+        if (!api.IsFrameworkThread || !api.IsCurrent(binding)) return false;
+        var owner = api.GetOwner();
+        if (!Owns(api, owner, binding)) return false;
+        api.HideOwner(owner);
+        if (!api.IsCurrent(binding)) return true;
+        return Owns(api, owner, binding) && api.TryHideOriginalOwner(owner, binding) && !api.IsCurrent(binding);
+    }
+
+    internal static bool Owns(IPortraitPlateOwnerApi api, AgentCharaCard* owner, PortraitPlateBinding binding)
+        => owner != null && api.GetOwner() == owner && owner->Data != null
+            && (nint)owner->Data == binding.Storage && owner->AddonId == binding.AddonID
+            && owner->Data->AccountId == binding.AccountID && owner->Data->ContentId == binding.ContentID;
+}
+
 internal sealed unsafe partial class PortraitPlateMirror
 {
     private readonly IAddonLifecycle? addonLifecycle;
@@ -18,13 +46,13 @@ internal sealed unsafe partial class PortraitPlateMirror
     private sealed class Lifetime { public long Generation = 1; }
 
     public PortraitPlateMirror(IFramework framework, IGameGui gameGUI, IObjectTable objects,
-        IAddonLifecycle addonLifecycle, Func<PortraitIdentity, bool> isEditorCurrent)
+        IAddonLifecycle addonLifecycle, IAgentLifecycle agentLifecycle, Func<PortraitIdentity, bool> isEditorCurrent)
     {
         var lifetime = new Lifetime();
-        liveAPI = new(framework, gameGUI, objects, isEditorCurrent, lifetime, ImageKind.Character);
+        liveAPI = new(framework, gameGUI, objects, agentLifecycle, isEditorCurrent, lifetime, ImageKind.Character);
         api = liveAPI;
-        overlays = [new(new LiveApi(framework, gameGUI, objects, isEditorCurrent, lifetime, ImageKind.Frame)),
-            new(new LiveApi(framework, gameGUI, objects, isEditorCurrent, lifetime, ImageKind.Accent))];
+        overlays = [new(new LiveApi(framework, gameGUI, objects, agentLifecycle, isEditorCurrent, lifetime, ImageKind.Frame)),
+            new(new LiveApi(framework, gameGUI, objects, agentLifecycle, isEditorCurrent, lifetime, ImageKind.Accent))];
         this.addonLifecycle = addonLifecycle;
         // The image asset must be restored before native ULD finalization destroys its texture.
         // A per-addon generation prevents same-address reuse from appearing to be an old owner.
@@ -43,7 +71,8 @@ internal sealed unsafe partial class PortraitPlateMirror
     }
 
     private sealed class LiveApi(IFramework framework, IGameGui gameGUI, IObjectTable objects,
-        Func<PortraitIdentity, bool> isEditorCurrent, Lifetime lifetime, ImageKind kind) : IPortraitPlateMirrorApi
+        IAgentLifecycle agentLifecycle, Func<PortraitIdentity, bool> isEditorCurrent, Lifetime lifetime, ImageKind kind)
+        : IPortraitPlateMirrorApi, IPortraitPlateOwnerApi
     {
         public bool IsFrameworkThread => framework.IsInFrameworkUpdateThread;
         public void AdvanceGeneration() => lifetime.Generation++;
@@ -234,6 +263,22 @@ internal sealed unsafe partial class PortraitPlateMirror
             if (!IsFrameworkThread) throw new InvalidOperationException("纹理释放必须在游戏框架线程执行。");
             texture.ReleaseTexture();
             texture = default;
+        }
+
+        public bool TryCloseOwner(PortraitPlateBinding active) => PortraitPlateOwnerClose.TryClose(this, active);
+        public AgentCharaCard* GetOwner() => AgentCharaCard.Instance();
+        public void HideOwner(AgentCharaCard* owner) => owner->Hide();
+
+        public bool TryHideOriginalOwner(AgentCharaCard* owner, PortraitPlateBinding active)
+        {
+            // Another plugin may prevent ordinary Hide. On unload, use the original table
+            // supplied by Dalamud only after revalidating this exact local plate allocation.
+            if (!IsFrameworkThread || !IsCurrent(active) || !PortraitPlateOwnerClose.Owns(this, owner, active)) return false;
+            var agent = (AgentInterface*)owner;
+            var table = (AgentInterface.AgentInterfaceVirtualTable*)agentLifecycle.GetOriginalVirtualTable((nint)agent->VirtualTable);
+            if (table == null || table->Hide == null || !IsCurrent(active) || !PortraitPlateOwnerClose.Owns(this, owner, active)) return false;
+            table->Hide(agent);
+            return true;
         }
     }
 }

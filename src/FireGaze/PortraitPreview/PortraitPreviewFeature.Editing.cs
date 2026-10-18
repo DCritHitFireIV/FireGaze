@@ -188,7 +188,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var current = observedKey is { } active ? history.CurrentRecordID(active) : null;
         historyRows = records.Select(record => new PortraitHistoryListItem(record.ID, record.Timestamp,
             record.Label, record.ID == current)).ToArray();
-        historyStatus = $"{history.Count} 条记录";
+        historyStatus = string.Empty;
         PublishHistoryNavigation();
     }
 

@@ -94,6 +94,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             ownedCount = ownedView.Items.Count, browser = browser.ToDictionary(p => p.Key.ToString(), p => p.Value),
             editorState = resolved ? target.CaptureEditorState(identity) : null,
             syncPlate, plateMirrorClosePending, plateMirrorActive = target.IsPlateMirrorActive, plateMirrorError = target.PlateMirrorError,
+            plateMirrorDisposalRestored = target.PlateMirrorDisposalRestored,
             canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
             historyRows, appearanceGroups,
         });
@@ -290,7 +291,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private void Error(string message)
     {
         status = message;
-        Plugin.Chat.PrintError("[肖像实时编辑] " + message);
+        // Disposal can finish after a native callback unwinds. Keep that eventual failure in
+        // the log even when the feature has already detached its update and draw handlers.
+        if (disposed) Plugin.Log.Error("[肖像实时编辑] 卸载收尾未完成：{Error}", message);
+        var playerMessage = disposed && !target.PlateMirrorDisposalRestored
+            ? "本地铭牌预览未能还原，请关闭后重新打开铭牌。" : message;
+        Plugin.Chat.PrintError("[肖像实时编辑] " + playerMessage);
     }
 
     private void Mutate(System.Action action)
