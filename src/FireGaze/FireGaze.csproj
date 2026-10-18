@@ -41,6 +41,7 @@ Localization of third-party plugin descriptions; dead-link detection for third-p
 
   <!-- 词表与术语表跟随插件一起打包（发布 zip 里会有 translations.json / ffxiv-glossary.tsv） -->
   <ItemGroup>
+    <None Include="..\..\Resources\icon.png" Link="images\icon.png" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\translations.json" Link="translations.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\ffxiv-glossary.tsv" Link="ffxiv-glossary.tsv" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\uit-rules.json" Link="uit-rules.json" CopyToOutputDirectory="PreserveNewest" />
