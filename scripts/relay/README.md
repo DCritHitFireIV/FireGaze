@@ -95,13 +95,33 @@ POST /uit-submit          正文就是投稿 JSON（与 issue 里的 ```json 块
 200 {"ok":true, "file":"https://github.com/.../blob/main/docs/...json", "commit":"https://github.com/.../commit/<sha>"}
 400 {"ok":false, "error":"not a uit-contribution payload"}   # 不是界面文字投稿
 413 {"ok":false, "error":"too large"}                          # 超过 4,000,000 字符
-502 {"ok":false, "error":"commit failed"}                     # App 缺 Contents 权限 / 仓库不可写
+429 {"ok":false, "error":"too many requests"}                  # Retry-After 响应头给出等待秒数
+502 {"ok":false, "error":"commit failed", "detail":"github-error",
+     "stage":"blob", "status":403, "requestId":"ABCD:1234", "code":"github-error", "attempts":1}
 ```
 
 - 投稿者立刻拿到云端文件/提交链接；**没有人工审核中转**，并入失败也能用 git revert 精确回滚
   （硬规则仍在 CI：空译文/超长/控制字符/违规词/容器名非法会被跳过并点名）
 - 幂等：同一份内容重复投递由内容指纹拦住；payload 文件带 `importedAt` 后不再重复并入
-- 限流：每 IP 每分钟 6 次
+- 限流：每 IP 每分钟 12 次，允许一次提交多个插件；实例内存计数，属于近似限流。429 带 `Retry-After`（1–60 秒）
+- v14 为整次直传设置 **15 秒预算**，覆盖读取请求正文、App 签名/取 token、GitHub 响应正文及重试；
+  单次 GitHub 调用最多 3 秒，给旧客户端的 20 秒超时留出余量
+- `main` 被其他投稿或工作流推进时重新读取最新树，最多 7 轮，指数退避并加随机抖动；始终 `force:false`，
+  保留其他写入。blob 在重试间复用，含 App 鉴权最多 45 次外部请求，低于 Workers Free 的每请求 50 次限制
+- 永久 401/403、仓库不存在等错误直接失败；`ref-update` 422 只有在复查确认 `main` 已推进时才重试。
+  PATCH 响应丢失时先检查当前 head，若已是本次 commit 则返回成功。网络中断仍可能产生无法确认的结果，
+  不承诺恰好一次投递；重复并入继续由既有内容指纹处理
+- 保持旧版 `ok/error/detail/file/commit` 字段；失败额外返回 `stage/status/requestId/code/attempts`。
+  服务端 JSON 日志只含随机关联 ID、阶段、状态、请求 ID、次数及耗时，不记录 token、IP 或投稿原文/译文
+
+#### 更新现有 Dashboard Worker
+
+本次仍为单文件 Module Worker：把完整 `scripts/relay/worker.js` 粘贴到现有 Worker 的 **Edit code** 后 Deploy，
+沿用现有变量、机密、KV 和触发器，无须新增绑定或权限。部署后读取原地址，健康响应应为
+`{"ok":true,"service":"firegaze-relay","version":14}`；仅仓库文件更新不会自动部署 Cloudflare。
+旧客户端请求与响应契约保持兼容，本次服务器修复不要求发布新的 DLL。
+
+离线回归：`node --test scripts/relay/worker.test.mjs`（只模拟 GitHub HTTP，不会向真实仓库投稿）。
 
 ### 公共库下载量 / 点赞（`/library-download`、`/library-like`、`/library-counts`，2026-10-04 新增；v6 起按包）
 
@@ -142,7 +162,7 @@ GitHub 自带的 `schedule` 实测不可靠：`translate.yml` 的周一自动跑
 
 - 只收 POST + JSON；正文上限 60KB
 - 每 IP 每分钟 5 次投稿/反馈（实例内存计数，近似限流）；`/translate` 单独计，每分钟 120 次 + 每天 40 万字符
-- `/uit-submit` 每 IP 每分钟 6 次，正文（投稿 JSON）上限 4,000,000 字符；`/library-download` 每 IP 每分钟 60 次
+- `/uit-submit` 每 IP 每分钟 12 次，正文（投稿 JSON）上限 4,000,000 字符；`/library-download` 每 IP 每分钟 60 次
 - 反馈额外检查：长度、链接数、垃圾词、几乎只有链接、重复刷屏；**不过关不建 issue**
 - 发布后 `scripts/feedback_triage.py`（`feedback.yml`）二次复核：垃圾 → 关 issue +`spam` 标；正常 → `feedback` 标 + 回话 +（可选）Server酱
 - 被刷时的处理：吊销 App 私钥（重新生成）或换 PAT、重新部署换个 URL（旧客户端会回退到「打开 issue 页」）
