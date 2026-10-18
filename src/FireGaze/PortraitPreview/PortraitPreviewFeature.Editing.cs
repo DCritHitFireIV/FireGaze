@@ -70,6 +70,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var owner = CurrentCharacter();
         if (historyOwner != owner)
         {
+            CancelLightDrag();
             HandleHistoryBatchResult(historyBatch.Flush());
             RequestPlateMirrorClose();
             historyOwner = owner;
@@ -99,6 +100,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             if (observedIdentity.IsValid && target.IsCurrent(observedIdentity)) return;
             if (observedEditor is not null)
             {
+                CancelLightDrag();
                 HandleHistoryBatchResult(historyBatch.Flush());
                 observedEditor = null;
                 historyObservedEditor = null;
@@ -113,12 +115,13 @@ internal sealed unsafe partial class PortraitPreviewFeature
             return;
         }
         if (observedIdentity.IsValid && observedIdentity != identity) RequestPlateMirrorClose();
-        if (DateTime.UtcNow < nextEditorSample && sampledPointer == pointerHeld && sampledKeyboard == keyboard) return;
+        if (!lightDrag.IsActive && DateTime.UtcNow < nextEditorSample && sampledPointer == pointerHeld && sampledKeyboard == keyboard) return;
         sampledPointer = pointerHeld;
         sampledKeyboard = keyboard;
         nextEditorSample = DateTime.UtcNow.AddMilliseconds(50);
         var captured = target.CaptureEditorState(identity);
         if (captured is null || GetHistoryKey(identity, captured) is not { } key) return;
+        ObserveLightDrag(identity,key,captured);
         if (session.IsActive) _ = session.ObserveLook(captured.Look);
         if (deferredBaselineSync && observedIdentity == identity && observedKey == key)
         {
@@ -156,12 +159,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 var label = DescribeChange(historyLabelBaseline, recording);
                 historyObservedEditor = recording;
                 appearanceGroups = appearance.Build(captured.Customize);
-                HandleHistoryBatchResult(historyBatch.Observe(key, recording.ToJSON(), pointerHeld, keyboard, label));
+                HandleHistoryBatchResult(historyBatch.Observe(key, recording.ToJSON(), pointerHeld || lightDrag.IsActive, keyboard, label));
             }
             else if (observedEditor is not null)
             {
                 // Keep a canonical payload while playback advances; release edges still reach Batch.
-                HandleHistoryBatchResult(historyBatch.AdvanceInput(pointerHeld, keyboard));
+                HandleHistoryBatchResult(historyBatch.AdvanceInput(pointerHeld || lightDrag.IsActive, keyboard));
             }
             HandleHistoryBatchResult(historyBatch.FlushIdle());
         }
@@ -226,6 +229,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void FlushEditing()
     {
+        CancelLightDrag();
         HandleHistoryBatchResult(historyBatch.Flush());
         RequestPlateMirrorClose();
     }
@@ -291,6 +295,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void NavigateHistory(PortraitHistorySelectionKind kind, long id)
     {
+        CancelLightDrag();
         if (!target.TryResolve(out var identity, out _, out _)) { Error("请先打开对应肖像编辑器。"); return; }
         var before = target.CaptureEditorState(identity);
         if (before is null || GetHistoryKey(identity, before) is not { } key) return;
@@ -347,6 +352,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void SynchronizeAfterClose()
     {
+        CancelLightDrag();
         historyBatch.Cancel();
         historyLabelBaseline = null;
         deferredBaselineSync = true;

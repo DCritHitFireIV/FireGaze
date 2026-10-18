@@ -76,7 +76,7 @@ namespace FireGaze.PortraitPreview
     {
         public PortraitGlamourPlateCapture? Next;
         public int Calls;
-        public PortraitGlamourPlateCapture Capture() { Calls++; return Next ?? new(owner(), null, "fixture unloaded"); }
+        public PortraitGlamourPlateCapture Capture() { Calls++; _ = framework; return Next ?? new(owner(), null, "fixture unloaded"); }
     }
     internal sealed record PortraitHistoryListItem(long ID, DateTimeOffset At, string Label, bool IsCurrent);
     internal sealed class PortraitPreviewWindow
@@ -95,6 +95,14 @@ namespace FireGaze.PortraitPreview
         public bool Current = true;
         public bool CanBlockSave = true;
         public bool RejectApply = false;
+        public bool RejectLight = false;
+        public int LightWrites;
+        public bool SetDirectionalLightAngles(PortraitIdentity identity,PortraitNativeLightAngles expected,PortraitNativeLightAngles desired)
+        {
+            if(!Ready || !IsCurrent(identity) || RejectLight || !desired.IsValid || PortraitNativeLightAngles.From(Snapshot.Composition)!=expected)return false;
+            if(expected==desired)return true;
+            Snapshot=Snapshot with {Composition=Snapshot.Composition with {DirectionalVerticalAngle=desired.Vertical,DirectionalHorizontalAngle=desired.Horizontal}};LightWrites++;return true;
+        }
         public int CaptureCalls;
         public int EditorCaptureCalls;
         public int ApplyCalls;

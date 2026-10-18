@@ -36,6 +36,8 @@ internal sealed partial class PortraitPreviewWindow
         if (ImGui.Button("投影模板")) showGlamourPlates = true;
         ContinueToolbar(right, ImGui.CalcTextSize("分析").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("分析")) showAnalysis = true;
+        ContinueToolbar(right, ImGui.CalcTextSize("主光方向").X + ImGui.GetStyle().FramePadding.X * 2);
+        if (ImGui.Button("主光方向")) showLight = true;
     }
 
     private void DrawLibraryPopups()
@@ -43,6 +45,7 @@ internal sealed partial class PortraitPreviewWindow
         DrawFavoritesWindow();
         DrawGlamourPlatesWindow();
         DrawAnalysisWindow();
+        DrawLightWindow();
     }
 
     private void DrawFavoritesWindow()

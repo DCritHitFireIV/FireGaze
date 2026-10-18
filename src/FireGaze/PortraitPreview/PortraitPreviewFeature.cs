@@ -63,6 +63,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         InitializeEditing(configDirectory);
         InitializeLibrary(configDirectory);
         InitializePhotos(configDirectory);
+        InitializeLiveCapture();
         window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
         diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
@@ -143,8 +144,10 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             inventory.ObserveRetainerLoads();
             session.Validate();
             PollEditing();
+            ObserveLiveCaptureState();
             PollLibrary();
             PollPhotos();
+            liveImageService?.Update();
             editorAvailable = target.TryResolve(out _, out var bounds, out _);
             if (editorAvailable) buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
             if (!session.IsActive && window.IsOpen) window.IsOpen = false;
@@ -298,6 +301,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             return;
         }
         window.IsOpen = false;
+        liveImageService?.Close();
+        requestedCaptureViewport = null;
         SynchronizeAfterClose();
         QueueOwnedCacheIfNeeded();
         status = "临时外观已还原，现在可以保存肖像。";
@@ -342,6 +347,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             ImGui.End();
         }
         photos.Draw(pointerHeld);
+        DrawLiveCapture();
         windows.Draw();
     }
 
@@ -436,6 +442,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         void Release()
         {
             photos.Dispose();
+            liveImageService?.Dispose();
+            liveCaptureAPI?.Dispose();
             FlushEditing();
             if (!session.Close() && !target.AbortCapturedEditor())
                 Plugin.Log.Error("[肖像实时预览] 外观还原及编辑器关闭均失败：{Error}", target.LastError ?? "未知原因");

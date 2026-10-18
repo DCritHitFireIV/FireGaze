@@ -66,6 +66,9 @@ foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'Port
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests')) {
+    Invoke-PreviewSuite $previewSuite
+}
 foreach ($previewSuite in @('PortraitEditorStateTests', 'PortraitEditingTests', 'PortraitOperationLabelTests', 'PortraitHistoryTests', 'PortraitHistoryPerformanceTests', 'PortraitThumbnailTests', 'PortraitThumbnailPipelineTests', 'PortraitThumbnailSourceTests', 'PortraitHistoryPhotoIntegrationTests', 'PortraitPlateMirrorTests', 'PortraitFeatureIntegrationTests', 'PortraitVisualLayoutTests', 'PortraitPopupLayoutTests', 'VisualSystemTests')) {
     Invoke-PreviewSuite $previewSuite
 }
@@ -105,7 +108,7 @@ foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests', 'Artifac
     Invoke-PreviewSuite $previewSuite
 }
 
-Write-Output "Offline validation finished: $previewCompletedSuites/42 suites; skipped: $($previewSkippedSuites -join ', ')."
+Write-Output "Offline validation finished: $previewCompletedSuites/50 suites; skipped: $($previewSkippedSuites -join ', ')."
 if (!$SqpackPath) { Write-Output 'Current-client GPose, item-data, portrait appearance, and portrait validation coverage is incomplete.' }
 Write-Output 'Build and offline checks do not prove in-game or two-client acceptance.'
 exit 0

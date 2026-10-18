@@ -13,6 +13,7 @@ internal sealed partial class PortraitPreviewWindow
     private bool showAnalysis;
     private long analysisRecord;
     private string analysisInputStatus = "";
+    private IDalamudTextureWrap? analysisPreview;
 
     private void DrawAnalysisWindow()
     {
@@ -21,10 +22,21 @@ internal sealed partial class PortraitPreviewWindow
         if (ImGui.Begin("肖像分析###FireGazePortraitAnalysis", ref showAnalysis))
         {
             ImGui.TextWrapped("基于当前历史记录的肖像照片，供构图与明暗参考。不会改动肖像。");
+            var scope = feature.LiveCaptureScope;
+            if (ImGui.RadioButton("肖像", scope == PortraitImageScope.Portrait))
+                feature.SetLiveCaptureScope(PortraitImageScope.Portrait);
+            ImGui.SameLine();
+            if (ImGui.RadioButton("可见铭牌", scope == PortraitImageScope.VisibleAdventurerPlate))
+                feature.SetLiveCaptureScope(PortraitImageScope.VisibleAdventurerPlate);
+            ImGui.TextDisabled(scope == PortraitImageScope.Portrait
+                ? "高分读取肖像角色与边框装饰。"
+                : "读取当前屏幕可见的完整铭牌，不改变铭牌数据。");
             var current = feature.History.FirstOrDefault(record => record.IsCurrent);
             if (current?.ID != analysisRecord)
             {
                 analysis.Invalidate();
+                analysisPreview?.Dispose();
+                analysisPreview = null;
                 analysisRecord = current?.ID ?? 0;
                 analysisInputStatus = "";
             }
@@ -46,22 +58,44 @@ internal sealed partial class PortraitPreviewWindow
                 ImGui.TextWrapped("基于局部反差与边缘的提示，供检查哪些元素较醒目；不代表真实眼动或第一眼。");
                 DrawAttentionEstimate(result);
             }
+            if (photos?.Get(analysisRecord) is { } compared)
+                DrawComparison(compared, "portrait:" + feature.SourceGuideKey);
         }
         ImGui.End();
-        if (!showAnalysis) analysis.Invalidate();
+        if (!showAnalysis) { analysis.Invalidate(); analysisPreview?.Dispose(); analysisPreview = null; comparisonReference.Clear(); }
     }
 
     private void StartCurrentAnalysis()
     {
         var current = feature.History.FirstOrDefault(record => record.IsCurrent);
-        if (current is null || photos?.Get(current.ID) is not { } texture)
+        if (current is null)
         {
             analysisInputStatus = "当前照片尚未就绪，请暂停动作并稍候再试。";
             return;
         }
         if (analysis.IsBusy) return;
+        IDalamudTextureWrap? retained = null;
+        var live = feature.AcquireCurrentLiveImage();
+        if (live is not null)
+        {
+            retained = live.Texture.CreateWrapSharingLowLevelResource();
+            analysisPreview?.Dispose();
+            analysisPreview = live.Texture.CreateWrapSharingLowLevelResource();
+            var liveKey = $"live:{live.Sample.StateKey}";
+            live.Dispose();
+            if (!analysis.TryStart(liveKey, token => ReadAnalysis(retained, token))) retained.Dispose();
+            analysisInputStatus = "";
+            return;
+        }
+        if (photos?.Get(current.ID) is not { } texture)
+        {
+            analysisInputStatus = "当前高分图像尚未就绪，请暂停动作并稍候再试。";
+            return;
+        }
         // Public texture sharing owns the resource until readback completes, including close/unload.
-        var retained = texture.CreateWrapSharingLowLevelResource();
+        retained = texture.CreateWrapSharingLowLevelResource();
+        analysisPreview?.Dispose();
+        analysisPreview = null;
         var key = current.ID.ToString(System.Globalization.CultureInfo.InvariantCulture);
         if (!analysis.TryStart(key, token => ReadAnalysis(retained, token))) retained.Dispose();
         analysisInputStatus = "";
@@ -103,7 +137,8 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawAttentionEstimate(PortraitImageAnalysisResult result)
     {
-        if (photos?.Get(analysisRecord) is not { } texture) return;
+        var texture = analysisPreview ?? photos?.Get(analysisRecord);
+        if (texture is null) return;
         var origin = ImGui.GetCursorScreenPos();
         var size = new Vector2(160, 256) * Scale;
         ImGui.Image(texture.Handle, size);

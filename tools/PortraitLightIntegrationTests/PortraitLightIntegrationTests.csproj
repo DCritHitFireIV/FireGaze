@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup>
+ <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+ <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+</PropertyGroup><ItemGroup>
+ <PackageReference Include="DailyRoutines.CodeAnalysis" Version="2.6.0" PrivateAssets="all" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Editing.cs" Link="Feature.Editing.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Library.cs" Link="Feature.Library.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitFavoritesStore.cs" Link="FavoritesStore.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlateModels.cs" Link="GlamourPlateModels.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlateCatalog.cs" Link="GlamourPlateCatalog.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitGlamourPlateCache.cs" Link="GlamourPlateCache.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEquipmentFilter.cs" Link="EquipmentFilter.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedCacheWriter.cs" Link="CacheWriter.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedCacheSavePolicy.cs" Link="CacheSavePolicy.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentCatalog.cs" Link="OwnedEquipmentCatalog.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentCacheFile.cs" Link="OwnedEquipmentCacheFile.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="Session.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="EditorState.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditLabels.cs" Link="EditLabels.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorValidation.cs" Link="Validation.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistory*.cs" LinkBase="History" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAppearance*.cs" LinkBase="Appearance" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentModels.cs" Link="OwnedModels.cs" />
+ <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>
+ <Reference Include="Lumina"><HintPath>$(DALAMUD_HOME)/Lumina.dll</HintPath></Reference>
+ <Reference Include="Lumina.Excel"><HintPath>$(DALAMUD_HOME)/Lumina.Excel.dll</HintPath></Reference>
+ <Reference Include="Microsoft.Extensions.ObjectPool"><HintPath>$(DALAMUD_HOME)/Microsoft.Extensions.ObjectPool.dll</HintPath></Reference>
+</ItemGroup><ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightDrag.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightDrag.cs')" /><Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightDirection.cs" /></ItemGroup><PropertyGroup Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightDrag.cs')"><DefineConstants>$(DefineConstants);LIGHT63</DefineConstants></PropertyGroup><ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Light.cs" /></ItemGroup></Project>

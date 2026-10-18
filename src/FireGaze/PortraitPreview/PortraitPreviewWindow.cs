@@ -54,6 +54,14 @@ internal interface IPortraitPreviewViewModel
     void RenameFavorite(Guid id, string name) { }
     void TagFavorite(Guid id, IReadOnlyCollection<string> tags) { }
     void RemoveFavorite(Guid id) { }
+    PortraitCapturedImage? AcquireCurrentLiveImage() => null;
+    PortraitImageScope LiveCaptureScope => PortraitImageScope.Portrait;
+    void SetLiveCaptureScope(PortraitImageScope scope) { }
+    PortraitDirectionalLightView? DirectionalLight => null;
+    void BeginLightDrag(long token) { }
+    void MoveLightDrag(long token, float vertical, float horizontal) { }
+    void EndLightDrag(long token, float vertical, float horizontal) { }
+    void CancelLightDrag(long token) { }
 }
 
 /// <summary>Independent wardrobe UI using game-local textures, without Dresser code or plugin IPC.</summary>
@@ -127,7 +135,11 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     public override void OnClose()
     {
+        CancelLightInteraction();
         analysis.Invalidate();
+        analysisPreview?.Dispose();
+        analysisPreview = null;
+        comparisonReference.Clear();
         feature.ClosePreview();
     }
 
@@ -144,7 +156,11 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var current = feature.Current;
         if (!feature.IsActive || current is null)
         {
+            CancelLightInteraction();
             analysis.Invalidate();
+            analysisPreview?.Dispose();
+            analysisPreview = null;
+            comparisonReference.Clear();
             ImGui.TextWrapped("请先打开肖像编辑器，再点击旁边的「FireGaze预览」。");
             return;
         }
@@ -506,7 +522,11 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     {
         if (disposed) return;
         disposed = true;
+        CancelLightInteraction();
         analysis.Dispose();
+        analysisPreview?.Dispose();
+        analysisPreview = null;
+        comparisonReference.Dispose();
         foreach (var part in parts.Values) part?.Dispose();
         foreach (var uld in ulds.Values) uld?.Dispose();
         parts.Clear();
