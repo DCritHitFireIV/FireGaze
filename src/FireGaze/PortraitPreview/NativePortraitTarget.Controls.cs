@@ -10,11 +10,30 @@ internal sealed unsafe partial class NativePortraitTarget
     {
         private AddonBannerEditor* CurrentAddon(AgentBannerEditorState* state)
         {
+            if (!IsFrameworkThread || state==null) return null;
             var editor=GetEditor();
             if(editor==null || editor->EditorState!=state || state->AgentBannerEditor!=editor) return null;
             var addon=gameGUI.GetAddonByName<AddonBannerEditor>("BannerEditor");
-            return addon!=null && addon->Id==editor->AddonId && GetEditor()==editor
-                && editor->EditorState==state && state->AgentBannerEditor==editor ? addon : null;
+            if (addon==null || GetEditor()!=editor || editor->EditorState!=state || state->AgentBannerEditor!=editor
+                || addon->Id!=editor->AddonId || !addon->IsReady || IsAddonClosing(addon) || addon->AtkUnitBase.VirtualTable==null
+                || addon->AtkUnitBase.VirtualTable->IsFullyLoaded==null) return null;
+            // IsFullyLoaded is a native virtual call. A hook may close/replace this addon or its
+            // editor; re-resolve both before reading a control from the returned allocation.
+            if (!addon->IsFullyLoaded() || GetEditor()!=editor || editor->EditorState!=state
+                || state->AgentBannerEditor!=editor || gameGUI.GetAddonByName<AddonBannerEditor>("BannerEditor")!=addon)
+                return null;
+            return editor->EditorState==state && state->AgentBannerEditor==editor
+                && addon->Id==editor->AddonId && addon->IsReady && !IsAddonClosing(addon) ? addon : null;
+        }
+        private static bool IsAddonClosing(AddonBannerEditor* addon)
+        {
+            // SDK Hide includes the closing transition; TransitionComplete means that neither
+            // open nor close transition is running. These are managed flag reads, so a closing
+            // control owner is rejected before its native readiness vcall or another slider write.
+            return Closing(addon->VisibilityState) || Closing(addon->AppliedVisibilityState);
+
+            static bool Closing(AtkUnitBaseVisibilityState state) => (state & AtkUnitBaseVisibilityState.Hide)!=0
+                && (state & AtkUnitBaseVisibilityState.TransitionComplete)==0;
         }
         public void SyncControls(AgentBannerEditorState* state,PortraitComposition composition)
         {

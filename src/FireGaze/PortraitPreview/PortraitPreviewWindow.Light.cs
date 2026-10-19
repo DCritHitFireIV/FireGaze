@@ -9,6 +9,9 @@ internal sealed partial class PortraitPreviewWindow
     private bool showLight;
     private PortraitLightView lightView = PortraitLightView.Side;
     private long lightTokenSerial;
+    // Every managed caller reserves from the same sequence, including bounded diagnostics.
+    // Reserving a token never reads the editor or invokes a native function.
+    private long NextLightToken() => Interlocked.Increment(ref lightTokenSerial);
     private long lightPointerToken;
     private bool lightNegativeHidden;
     private PortraitLightAngles lightPointerAngles;
@@ -54,7 +57,7 @@ internal sealed partial class PortraitPreviewWindow
             if (PortraitLightDirection.TryProject(current.VerticalDegrees,current.HorizontalDegrees,lightView,out var point)
                 && PortraitLightDirection.TryFromProjection(point,lightView,negative,out var flipped))
             {
-                var token=++lightTokenSerial;
+                var token=NextLightToken();
                 feature.BeginLightDrag(token);
                 feature.EndLightDrag(token,flipped.VerticalDegrees,flipped.HorizontalDegrees);
             }
@@ -67,7 +70,7 @@ internal sealed partial class PortraitPreviewWindow
         _=ImGui.InvisibleButton("###PortraitLightDirectionDisc",size,ImGuiButtonFlags.MouseButtonLeft);
         if (ImGui.IsItemActivated())
         {
-            lightPointerToken=++lightTokenSerial;
+            lightPointerToken=NextLightToken();
             _=PortraitLightDiagram.TryHiddenSide(current,lightView,out lightNegativeHidden);
             lightPointerAngles=current;
             feature.BeginLightDrag(lightPointerToken);

@@ -69,7 +69,7 @@ foreach ($previewSuite in @('PortraitInventoryRefreshTests', 'PortraitRuntimeSaf
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
-foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightingSpaceTests', 'PortraitObserverCameraTests', 'PortraitAnalysisWindowTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests', 'PortraitNativeLiveViewTests', 'PortraitSoftwareCompositionTests')) {
+foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightingSpaceTests', 'PortraitObserverCameraTests', 'PortraitCameraFitTests', 'PortraitAnalysisWindowTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests', 'PortraitNativeLiveViewTests', 'PortraitSoftwareCompositionTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 foreach ($previewSuite in @('PortraitLightingNativeTests', 'PortraitLightingAdapterTests', 'PortraitLightingBindingTests', 'PortraitLightingCaptureTests', 'PortraitLightingControlsTests', 'PortraitLightingFeatureBackendTests')) {
@@ -78,6 +78,10 @@ foreach ($previewSuite in @('PortraitLightingNativeTests', 'PortraitLightingAdap
 foreach ($previewSuite in @('PortraitEditorStateTests', 'PortraitEditingTests', 'PortraitOperationLabelTests', 'PortraitHistoryTests', 'PortraitHistoryPerformanceTests', 'PortraitThumbnailTests', 'PortraitThumbnailPipelineTests', 'PortraitThumbnailSourceTests', 'PortraitHistoryPhotoIntegrationTests', 'PortraitPlateMirrorTests', 'PortraitFeatureIntegrationTests', 'PortraitVisualLayoutTests', 'PortraitPopupLayoutTests', 'VisualSystemTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+# Detached spatial-scene lifecycle contract. This suite intentionally has no
+# Dalamud/native dependency; keep it in the full offline gate so stale callback
+# and ownership regressions fail before any host assembly is built or deployed.
+Invoke-PreviewSuite 'PortraitSpatialSceneTests'
 
 if ($SqpackPath) {
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {

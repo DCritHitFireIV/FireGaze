@@ -11,16 +11,16 @@ static unsafe class LightInputNativeTraceCases
         var messages=new List<string>();var trace=new PortraitLightInputTrace(messages.Add);
         var accepted=false;
         trace.Enter(PortraitLightTraceStage.GestureEnd,()=>accepted=target.SetDirectionalLightAngles(identity,new(0,0),new(30,-45)));
-        check(accepted && fixture.LightSyncCalls==1 && fixture.SyncedVertical==30 && fixture.SyncedHorizontal==-45,
-            "real narrow setter reaches optional control synchronization with exact angles");
+        check(accepted && fixture.LightSyncCalls==0,
+            "real narrow angle setter leaves UI slider synchronization outside the native write transaction");
         string[] expected=["GestureEnd begin","NativeExportBefore begin","NativeExportBefore end","NativeSetAngle begin","NativeSetAngle end",
-            "NativeExportAfter begin","NativeExportAfter end","BannerEntryWrite begin","BannerEntryWrite end","NativeSyncControls begin","NativeSyncControls end","GestureEnd end"];
+            "NativeExportAfter begin","NativeExportAfter end","BannerEntryWrite begin","BannerEntryWrite end","GestureEnd end"];
         check(messages.Select(x=>x[(x.IndexOf(" phase=",StringComparison.Ordinal)+7)..]).SequenceEqual(expected),
             "actual native setter exposes each completed boundary in production call order");
         messages.Clear();fixture.ThrowLightSync=true;
         trace.Enter(PortraitLightTraceStage.GestureEnd,()=>accepted=target.SetDirectionalLightAngles(identity,new(30,-45),new(40,50)));
-        check(!accepted && messages.Any(x=>x.EndsWith("NativeSyncControls failed")) && !string.Join("",messages).Contains("sensitive"),
-            "caught native synchronization exception retains failed phase without sensitive detail");
+        check(accepted && !messages.Any(x=>x.Contains("NativeSyncControls")),
+            "native angle write does not invoke a reentrant slider callback");
         messages.Clear();fixture.ThrowLightSync=false;fixture.ThrowDirectionalSet=true;
         trace.Enter(PortraitLightTraceStage.GestureEnd,()=>accepted=target.SetDirectionalLightAngles(identity,new(40,50),new(60,70)));
         check(!accepted && messages.Any(x=>x.EndsWith("NativeSetAngle failed")) && !messages.Any(x=>x.Contains("NativeExportAfter")),

@@ -60,9 +60,18 @@ internal static class PortraitLightDirection
     public static bool TryQuantize(float vertical, float horizontal, out short nativeVertical, out short nativeHorizontal)
     {
         nativeVertical = nativeHorizontal = 0;
-        if (!TryNormalize(vertical, horizontal, out var angles)) return false;
-        nativeVertical = (short)Math.Round(angles.VerticalDegrees, MidpointRounding.AwayFromZero);
-        nativeHorizontal = (short)Wrap((float)Math.Round(angles.HorizontalDegrees, MidpointRounding.AwayFromZero));
+        // Native stores both signed-short angles, including the equivalent second
+        // vertical hemisphere. Preserve that representation so a preview can restore
+        // an editor snapshot byte-for-byte; projection/drag input remains canonical.
+        if (!float.IsFinite(vertical) || !float.IsFinite(horizontal)
+            || vertical < -180 || vertical > 180 || horizontal < -180 || horizontal > 180)
+            return false;
+        var quantizedVertical = Math.Round(vertical, MidpointRounding.AwayFromZero);
+        var quantizedHorizontal = Math.Round(horizontal, MidpointRounding.AwayFromZero);
+        if (quantizedVertical is < -180 or > 180 || quantizedHorizontal is < -180 or > 180)
+            return false;
+        nativeVertical = (short)quantizedVertical;
+        nativeHorizontal = (short)quantizedHorizontal;
         return true;
     }
 

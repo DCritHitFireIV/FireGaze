@@ -260,7 +260,7 @@ public sealed class Plugin : IDalamudPlugin
             Log.Information(
                 $"[FireGaze] 初始化完成（插件加载阶段已结束）：词表 {Table.Count} 条；" +
                 $"汉化 = {(Config.TranslateEnabled ? "开" : "关")}");
-            Log.Information("[FireGaze] 页签顺序：插件汉化 / 插件发现 / 仓库体检 / 简介汉化 / 插件安装器 / 坐骑试用");
+            Log.Information("[FireGaze] 页签顺序：插件汉化 / 插件发现 / 仓库体检 / 简介汉化 / 插件安装器 / 坐骑试用 / 肖像同步预览");
         }
         catch (Exception e)
         {

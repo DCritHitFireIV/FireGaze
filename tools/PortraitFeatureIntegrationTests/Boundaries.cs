@@ -163,10 +163,12 @@ namespace FireGaze.PortraitPreview
         }
         public bool SetLightingSpace(PortraitIdentity identity, PortraitEditorSnapshot expected, PortraitComposition desired)
         {
-            if (!Ready || !IsCurrent(identity) || RejectApply || !PortraitLightingSpaceBinding.MatchesSnapshot(expected, Snapshot)
-                || !PortraitLightingSpaceBinding.IsValidDesired(desired)) return false;
+            if (!Ready || !IsCurrent(identity) || RejectApply || desired is null
+                || !PortraitLightingSpaceBinding.MatchesSnapshot(expected, Snapshot)) return false;
+            var merged = PortraitLightingSpaceBinding.MergeInto(Snapshot.Composition, desired);
+            if (!PortraitLightingSpace.TryCreateNativeCandidate(Snapshot.Composition, merged, out merged)) return false;
             ApplyCalls++;
-            Snapshot = Snapshot with { Composition = PortraitLightingSpaceBinding.MergeInto(Snapshot.Composition, desired) };
+            Snapshot = Snapshot with { Composition = merged };
             AfterEditorApply?.Invoke();
             return true;
         }

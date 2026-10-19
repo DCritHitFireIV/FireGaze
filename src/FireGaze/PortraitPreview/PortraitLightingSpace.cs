@@ -128,6 +128,36 @@ internal sealed class PortraitLightingSpace
         };
     }
 
+    /// <summary>
+    /// Validates a detached spatial candidate against the range that the native portrait camera
+    /// accepts. The reference viewport may use a wider artistic orbit, but only a candidate that
+    /// is already inside this domain may cross the native write boundary.
+    /// </summary>
+    public static bool TryCreateNativeCandidate(PortraitComposition source, PortraitComposition desired,
+        out PortraitComposition candidate)
+    {
+        candidate = null!;
+        if (source?.IsValid != true || desired?.IsValid != true) return false;
+        if (desired.CameraTarget.X is < -1.6f or > 1.6f || desired.CameraTarget.Y is < -1f or > .5f
+            || desired.CameraTarget.Z is < -.5f or > .5f || desired.CameraDistance is < .5f or > 2f
+            || desired.CameraPitch < -89f * .01745329238474369f || desired.CameraPitch > 30f * .01745329238474369f
+            || !float.IsFinite(desired.CameraYaw) || !float.IsFinite(desired.CameraPitch)
+            || !float.IsFinite(desired.CameraDistance)) return false;
+        var offset = new Vector3(desired.CameraPosition.X - desired.CameraTarget.X,
+            desired.CameraPosition.Y - desired.CameraTarget.Y,
+            desired.CameraPosition.Z - desired.CameraTarget.Z);
+        var measured = offset.Length();
+        if (!float.IsFinite(measured) || MathF.Abs(measured - desired.CameraDistance) > .025f) return false;
+        var expectedPitch = -MathF.Asin(Math.Clamp(offset.Y / measured, -1f, 1f));
+        if (!float.IsFinite(expectedPitch) || MathF.Abs(expectedPitch - desired.CameraPitch) > .03f) return false;
+        var expectedYaw = MathF.Atan2(offset.X, offset.Z);
+        if (!float.IsFinite(expectedYaw) || MathF.Abs(WrapRadians(expectedYaw - desired.CameraYaw)) > .03f) return false;
+        if (desired.DirectionalVerticalAngle is < -180 or > 180 || desired.DirectionalHorizontalAngle is < -180 or > 180)
+            return false;
+        candidate = desired;
+        return true;
+    }
+
     public PortraitSpaceProjection Project(Vector3 world, Vector2 viewportSize = default)
     {
         if (viewportSize == default) viewportSize = new(320, 260);

@@ -24,6 +24,34 @@ var applied=space.ApplyTo(composition);
 Check(float.IsFinite(applied.CameraPosition.X) && float.IsFinite(applied.CameraPosition.Y) && float.IsFinite(applied.CameraPosition.Z),"space camera produces finite native position");
 Check(Math.Abs(applied.CameraPosition.Z-applied.CameraDistance)>.001f || Math.Abs(applied.CameraPosition.X)>.001f,"orbit actually moves native camera position");
 Check(applied.DirectionalVerticalAngle != composition.DirectionalVerticalAngle || applied.DirectionalHorizontalAngle != composition.DirectionalHorizontalAngle,"light interaction produces native directional angles");
+var validApplied = composition with { CameraDistance = 1.2f };
+Check(PortraitLightingSpace.TryCreateNativeCandidate(composition, validApplied, out var nativeCandidate),
+    "spatial candidate is accepted only after native camera-domain validation");
+Check(nativeCandidate.CameraDistance is >= .5f and <= 2f && nativeCandidate.CameraPitch is >= -MathF.PI / 2f and <= MathF.PI / 6f,
+    "validated spatial candidate stays inside the native camera domain");
+var invalidCamera = applied with { CameraDistance = 3.5f };
+Check(!PortraitLightingSpace.TryCreateNativeCandidate(composition, invalidCamera, out _),
+    "spatial candidate outside native distance is rejected before any native write");
+PortraitComposition OrbitCandidate(float pitchDegrees, float yawRadians=0)
+{
+    var pitch=pitchDegrees*.01745329238474369f;
+    return composition with
+    {
+        CameraPitch=pitch, CameraYaw=yawRadians,
+        CameraPosition=new(MathF.Sin(yawRadians)*MathF.Cos(pitch)*1.2f,
+            -MathF.Sin(pitch)*1.2f,MathF.Cos(yawRadians)*MathF.Cos(pitch)*1.2f,0),
+    };
+}
+Check(!PortraitLightingSpace.TryCreateNativeCandidate(composition,OrbitCandidate(-89.5f),out _),
+    "native candidate rejects pitch below audited UIConst minus 89 degrees");
+Check(PortraitLightingSpace.TryCreateNativeCandidate(composition,OrbitCandidate(-89),out _),
+    "native candidate accepts exact audited minimum pitch");
+Check(!PortraitLightingSpace.TryCreateNativeCandidate(composition,composition with {CameraYaw=1},out _),
+    "native candidate rejects yaw inconsistent with camera position and target");
+Check(PortraitLightingSpace.TryCreateNativeCandidate(composition,OrbitCandidate(10,.7f),out _),
+    "native candidate accepts coherent nonzero yaw and pitch");
+Check(PortraitLightingSpace.TryCreateNativeCandidate(composition,OrbitCandidate(0,MathF.PI*2),out _),
+    "equivalent full-turn yaw remains a coherent native candidate");
 var projection=space.Project(new Vector3(0,0,0));
 Check(projection.IsVisible && float.IsFinite(projection.Screen.X) && float.IsFinite(projection.Screen.Y),"space projects subject into the viewport");
 

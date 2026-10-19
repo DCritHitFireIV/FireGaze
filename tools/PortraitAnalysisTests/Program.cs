@@ -168,6 +168,8 @@ Check(PortraitLightDirection.TryNative(-180,180,out var nativeExtreme),"native s
 Check(!PortraitLightDirection.TryNative(-181,0,out _)&&!PortraitLightDirection.TryNative(0,181,out _),"native out-of-range angle is rejected");
 Check(PortraitLightDirection.TryQuantize(44.6f,-179.6f,out var verticalInt,out var horizontalInt),"drag values can be quantized to native integer degrees");
 Check(verticalInt==45&&horizontalInt==-180,"quantized angles round then normalize deterministically");
+Check(PortraitLightDirection.TryQuantize(133.4f,-77.4f,out var rawVertical,out var rawHorizontal),"native-angle restoration accepts the noncanonical vertical hemisphere");
+Check(rawVertical==133&&rawHorizontal==-77,"native-angle restoration preserves the representable signed-short angles");
 Check(!PortraitLightDirection.TryQuantize(float.NegativeInfinity,0,out _,out _),"quantization rejects infinity");
 
 Check(PortraitLightDirection.TryProject(0,0,PortraitLightView.Top,out var top),"top view projects valid direction");

@@ -42,8 +42,13 @@ internal sealed class PortraitLightingSpaceBinding
         PortraitComposition desired, out PortraitComposition merged)
     {
         merged = null!;
-        if (!Matches(identity, historyKey, current) || !IsValidDesired(desired)) return false;
-        merged = MergeInto(current.Composition, desired);
+        if (!Matches(identity, historyKey, current) || desired is null) return false;
+        // Merge only the fields owned by the spatial editor before validating the native
+        // camera domain. Other fields in the UI payload are intentionally ignored so a
+        // stale or malformed background/pose/color value cannot block a valid camera edit.
+        var candidate = MergeInto(current.Composition, desired);
+        if (!PortraitLightingSpace.TryCreateNativeCandidate(current.Composition, candidate, out candidate)) return false;
+        merged = candidate;
         return true;
     }
 
@@ -65,7 +70,8 @@ internal sealed class PortraitLightingSpaceBinding
 
     public static bool IsValidDesired(PortraitComposition desired)
         => desired?.IsValid == true && desired.DirectionalVerticalAngle is >= -180 and <= 180
-            && desired.DirectionalHorizontalAngle is >= -180 and <= 180;
+            && desired.DirectionalHorizontalAngle is >= -180 and <= 180
+            && PortraitLightingSpace.TryCreateNativeCandidate(desired, desired, out _);
 
     private static string KeyFor(PortraitEditorSnapshot value)
     {

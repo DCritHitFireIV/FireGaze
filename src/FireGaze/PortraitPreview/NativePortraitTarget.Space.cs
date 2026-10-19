@@ -14,12 +14,17 @@ internal sealed unsafe partial class NativePortraitTarget
     public bool SetLightingSpace(PortraitIdentity identity, PortraitEditorSnapshot expected, PortraitComposition desired)
     {
         if (!api.IsFrameworkThread || api is not IPortraitEditorNativeApi native
-            || !PortraitLightingSpaceBinding.IsValidDesired(desired)
             || CaptureEditorState(identity) is not { } current
+            || desired is null
             || !PortraitLightingSpaceBinding.MatchesSnapshot(expected, current)) return false;
 
+        // Ignore non-spatial payload fields and validate the merged candidate. This keeps the
+        // native boundary narrow even when a caller carries unrelated stale UI values.
+        var mergedCandidate = PortraitLightingSpaceBinding.MergeInto(current.Composition, desired);
+        if (!PortraitLightingSpace.TryCreateNativeCandidate(current.Composition, mergedCandidate, out var nativeCandidate)) return false;
+
         var before = current.Composition;
-        var merged = PortraitLightingSpaceBinding.MergeInto(before, desired);
+        var merged = PortraitLightingSpaceBinding.MergeInto(before, nativeCandidate);
         var cameraChanged = before.CameraPosition != merged.CameraPosition || before.CameraYaw != merged.CameraYaw
             || before.CameraPitch != merged.CameraPitch || before.CameraDistance != merged.CameraDistance;
         var directionChanged = before.DirectionalVerticalAngle != merged.DirectionalVerticalAngle
@@ -62,19 +67,22 @@ internal sealed unsafe partial class NativePortraitTarget
             if (!IsCurrent(identity)) return false;
             // BannerEntry is an inline working copy; persistent BannerModule records are untouched.
             var state = (AgentBannerEditorState*)identity.State;
-            if (cameraChanged) state->BannerEntry.CameraPosition = new((Half)merged.CameraPosition.X,
-                (Half)merged.CameraPosition.Y, (Half)merged.CameraPosition.Z, (Half)merged.CameraPosition.W);
+            if (cameraChanged)
+            {
+                state->BannerEntry.CameraPosition = new((Half)merged.CameraPosition.X,
+                    (Half)merged.CameraPosition.Y, (Half)merged.CameraPosition.Z, (Half)merged.CameraPosition.W);
+                state->BannerEntry.CameraTarget = new((Half)merged.CameraTarget.X,
+                    (Half)merged.CameraTarget.Y, (Half)merged.CameraTarget.Z, (Half)merged.CameraTarget.W);
+            }
             if (directionChanged)
             {
                 state->BannerEntry.DirectionalLightingVerticalAngle = merged.DirectionalVerticalAngle;
                 state->BannerEntry.DirectionalLightingHorizontalAngle = merged.DirectionalHorizontalAngle;
             }
-            if (api is IPortraitSpaceNativeApi controls)
-            {
-                controls.SyncSpaceControls(state, directionChanged, merged.DirectionalVerticalAngle, merged.DirectionalHorizontalAngle);
-                if (CaptureEditorState(identity) is not { } afterControls
-                    || !PortraitLightingSpaceBinding.MatchesSnapshot(accepted, afterControls)) return false;
-            }
+            // Do not call Atk slider setters from inside a spatial native transaction. Those
+            // callbacks can synchronously rebuild BannerEditor while the camera/light write is
+            // still active; the prior AppHang has no stack proving its cause. The detached export is refreshed on
+            // the next framework sample; the spatial write itself remains the only native mutation.
             return IsCurrent(identity);
         }
         catch (Exception exception)
@@ -90,16 +98,8 @@ internal sealed unsafe partial class NativePortraitTarget
     {
         public void SyncSpaceControls(AgentBannerEditorState* state, bool directionChanged, short vertical, short horizontal)
         {
-            if (directionChanged)
-            {
-                var addon = CurrentAddon(state);
-                if (addon == null) return;
-                if (addon->DirectionalLightingVerticalAngleSlider != null) addon->DirectionalLightingVerticalAngleSlider->SetValue(vertical, false);
-                addon = CurrentAddon(state);
-                if (addon == null) return;
-                if (addon->DirectionalLightingHorizontalAngleSlider != null) addon->DirectionalLightingHorizontalAngleSlider->SetValue(horizontal, false);
-            }
-            if (CurrentAddon(state) != null) state->SetHasChanged(true);
+            // Retained as an explicit no-op interface for older fixtures. Slider updates are
+            // deliberately deferred until a later ordinary editor sample.
         }
     }
 }
