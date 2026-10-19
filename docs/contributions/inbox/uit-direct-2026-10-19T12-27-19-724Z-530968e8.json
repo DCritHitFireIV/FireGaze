@@ -1,1 +1,144 @@
-{"type":"uit-contribution","plugin":"PalacePal","kinds":["llm"],"entries":[{"Original":"value","Translated":"值","Context":"PalaceObject.set_NetworkId","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"You are in a deep dungeon, territory type ","Translated":"你正处于深层迷宫，区域类型","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Sync State = ","Translated":"同步状态 =","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Unknown","Translated":"未知","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" known trap","Translated":"已知陷阱","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" known hoard coffer","Translated":"已知埋藏宝箱","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" silver coffer","Translated":"银宝箱","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":" visible on current floor","Translated":"在当前楼层可见","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Pomander of Sight: ","Translated":"魔陶器：全景：","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Pomander of Intuition: ","Translated":"魔陶器：感知宝藏：","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Could not query current trap/coffer count.","Translated":"无法查询当前陷阱/宝箱数量。","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Traps and coffers may not be discovered even after using a pomander if they're far away (around 1,5-2 rooms).","Translated":"即使使用了魔陶器，如果陷阱和宝箱距离较远（约1.5-2个房间），也可能无法被发现。","Context":"ConfigWindow.DrawDebugTab","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Palace of the Dead","Translated":"死者宫殿","Context":"StatisticsWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Heaven on High","Translated":"天佑女王","Context":"StatisticsWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"},{"Original":"Eureka Orthos","Translated":"正统优雷卡","Context":"StatisticsWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginTabItem"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "PalacePal",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "value",
+      "Translated": "值",
+      "Context": "PalaceObject.set_NetworkId",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "You are in a deep dungeon, territory type ",
+      "Translated": "你正处于深层迷宫，区域类型",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Sync State = ",
+      "Translated": "同步状态 =",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Unknown",
+      "Translated": "未知",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " known trap",
+      "Translated": "已知陷阱",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " known hoard coffer",
+      "Translated": "已知埋藏宝箱",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " silver coffer",
+      "Translated": "银宝箱",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": " visible on current floor",
+      "Translated": "在当前楼层可见",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Pomander of Sight: ",
+      "Translated": "魔陶器：全景：",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Pomander of Intuition: ",
+      "Translated": "魔陶器：感知宝藏：",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Could not query current trap/coffer count.",
+      "Translated": "无法查询当前陷阱/宝箱数量。",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Traps and coffers may not be discovered even after using a pomander if they're far away (around 1,5-2 rooms).",
+      "Translated": "即使使用了魔陶器，如果陷阱和宝箱距离较远（约1.5-2个房间），也可能无法被发现。",
+      "Context": "ConfigWindow.DrawDebugTab",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Palace of the Dead",
+      "Translated": "死者宫殿",
+      "Context": "StatisticsWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Heaven on High",
+      "Translated": "天佑女王",
+      "Context": "StatisticsWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    },
+    {
+      "Original": "Eureka Orthos",
+      "Translated": "正统优雷卡",
+      "Context": "StatisticsWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginTabItem"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-19T12:27:33",
+  "imported": {
+    "archive": "uit-direct-2026-10-19T12-27-19-724Z-530968e8-2026-10-19T122733.json",
+    "accepted": 15,
+    "filled": 15,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 15 条 `PalacePal` 的界面文字译文，已收为**独立译文包** `uit-packs/PalacePal@user-5f62b4.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 15 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
