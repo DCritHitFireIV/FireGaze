@@ -12,7 +12,7 @@ internal static class FireGazePalette
     private static readonly Colors Information = new()
     {
         Window = Rgb(0xEEF1F4), Panel = Rgb(0xF3F5F7), Raised = Rgb(0xF7F8FA),
-        Hover = Rgb(0xE1E8EE), Selected = Rgb(0xD6E3EE), Text = Rgb(0x202A32),
+        Hover = Rgb(0xE8E8E8), Selected = Rgb(0xD6E3EE), Text = Rgb(0x202A32),
         Muted = Rgb(0x536370), Border = Rgb(0x697F90), Action = Rgb(0x3B5F7B),
         ActionHover = Rgb(0x34546D), ActionActive = Rgb(0x294458), Focus = Rgb(0x365D7A),
         BrandEmber = Rgb(0xD45A31), ChartRed = Rgb(0xA84450), ChartGreen = Rgb(0x326A4C),
@@ -23,7 +23,7 @@ internal static class FireGazePalette
     private static readonly Colors Portrait = new()
     {
         Window = Rgb(0xF7F8FA), Panel = Rgb(0xF7F8FA), Raised = Rgb(0xF3F5F7),
-        Hover = Rgb(0xE1E8EE), Selected = Rgb(0xD6E3EE), Text = Rgb(0x202A32),
+        Hover = Rgb(0xE8E8E8), Selected = Rgb(0xD6E3EE), Text = Rgb(0x202A32),
         Muted = Rgb(0x536370), Border = Rgb(0x697F90), Action = Rgb(0x3B5F7B),
         ActionHover = Rgb(0x34546D), ActionActive = Rgb(0x294458), Focus = Rgb(0x365D7A),
         BrandEmber = Rgb(0xD45A31), ChartRed = Rgb(0xA84450), ChartGreen = Rgb(0x326A4C),

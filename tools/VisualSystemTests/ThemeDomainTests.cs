@@ -104,6 +104,9 @@ internal static class ThemeDomainTests
 
     private static void CheckConsumers(RecordingStyleStack stack, Action<bool, string> check, string domain)
     {
+        foreach (var role in new[] { ImGuiCol.FrameBgHovered, ImGuiCol.ButtonHovered, ImGuiCol.HeaderHovered, ImGuiCol.TabHovered })
+            check(Spread(stack.Colors[role]) < .005f && stack.Colors[role] != stack.Colors[ImGuiCol.Header],
+                $"{domain}: real {role} hover is neutral gray and separate from blue selection");
         var surfaces = new[] { ImGuiCol.WindowBg, ImGuiCol.ChildBg, ImGuiCol.PopupBg,
             ImGuiCol.FrameBg, ImGuiCol.FrameBgHovered, ImGuiCol.FrameBgActive, ImGuiCol.Header };
         var consumers = new (string Name, Vector4 Color)[]
