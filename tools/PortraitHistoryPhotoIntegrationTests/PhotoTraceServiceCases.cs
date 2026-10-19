@@ -16,6 +16,7 @@ internal static class PhotoTraceServiceCases
             if (!value) throw new InvalidOperationException(name);
             checks++; Console.WriteLine("PASS " + name);
         }
+        checks += await DrawReadbackBoundaryCases.RunAsync(root, history, key, record, snapshot, identity);
         var lines = new ConcurrentQueue<string>();
         var provider = DispatchProxy.Create<ITextureProvider, TracePhotoProvider>();
         var gpu = (TracePhotoProvider)(object)provider;
@@ -34,6 +35,7 @@ internal static class PhotoTraceServiceCases
         source.Complete(new(new FakeTexture()));
         photos.Poll("traced", identity, record.ID, snapshot, true);
         photos.Draw();
+        await Wait(() => lines.Any(x => x.Contains("task-returned LayerReadback")));
         Check(lines.Any(x => x.Contains("task-returned LayerReadback"))
             && !lines.Any(x => x.Contains("end LayerReadback")),
             "real Draw publishes the pending first raw readback boundary without waiting for it");

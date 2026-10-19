@@ -12,6 +12,7 @@ internal static class PhotoTraceCases
             PendingUpload = new(TaskCreationOptions.RunContinuationsAsynchronously) };
         var source = new Texture(1, 1, [1, 2, 3, 255]);
         var pending = gpu.Compositor.ComposeAsync(1, 1, [new(source)], default, operation);
+        for (var i = 0; i < 3000 && !lines.Any(x => x.Contains("task-returned LayerReadback")); i++) await Task.Delay(1);
         check(!pending.IsCompleted && lines.Any(x => x.Contains("begin LayerReadback"))
             && lines.Any(x => x.Contains("task-returned LayerReadback") && x.Contains("status=Waiting"))
             && !lines.Any(x => x.Contains("end LayerReadback")),

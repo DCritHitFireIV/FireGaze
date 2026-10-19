@@ -53,7 +53,11 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
                     throw new InvalidOperationException("A shared wrapper must have independent disposal ownership.");
                 owned.Add(new(retained, sourceWidth, sourceHeight, placement, uv0, uv1, layer.Tint));
             }
-            return ComposeOwnedAsync(width, height, owned, token, operation);
+            // Public readback can perform synchronous staging/Present submission before returning
+            // its Task. Retain every input on the caller, then keep that synchronous prefix out of
+            // Framework/Draw and any caller lock. Do not pass token to Task.Run: after ownership
+            // transfers, even an already-cancelled operation must execute its release path.
+            return Task.Run(() => ComposeOwnedAsync(width, height, owned, token, operation));
         }
         catch
         {
