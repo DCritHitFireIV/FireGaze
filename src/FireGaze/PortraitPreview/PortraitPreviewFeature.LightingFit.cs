@@ -22,7 +22,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         get
         {
-            var controls = Plugin.Framework.IsInFrameworkUpdateThread && target.TryResolve(out var identity, out _, out _)
+            var controls = captureIsolation.LiveEnabled && Plugin.Framework.IsInFrameworkUpdateThread && target.TryResolve(out var identity, out _, out _)
                 ? target.ReadLightControls(identity) : null;
             return new
             {
@@ -61,6 +61,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void StartLightingFit(PortraitColorToneTarget colorTarget, PortraitSampleRegion region, string? expectedFixedStateKey) => Mutate(() =>
     {
+        if (!captureIsolation.LiveEnabled) { Error("图像工具暂时停用，正在排查稳定性。"); return; }
         if (lightingFitSession is null || lightingFitBackend is null || !session.IsActive || !target.CanBlockSave)
         { Error("请先打开肖像预览并暂停动作。"); return; }
         if (LightingFitMutationBlocked) { Error("灯光取样尚未结束，请稍候。"); return; }
@@ -102,6 +103,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void PollLightingFit()
     {
         if (!Plugin.Framework.IsInFrameworkUpdateThread || lightingFitSession is null) return;
+        if (!captureIsolation.LiveEnabled && !LightingFitMutationBlocked) { lightingFitView = null; return; }
         var wasBlocked = LightingFitMutationBlocked;
         lightingFitCapture?.Update();
         lightingFitAdapter?.Poll();

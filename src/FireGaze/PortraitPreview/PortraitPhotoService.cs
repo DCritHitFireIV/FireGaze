@@ -69,6 +69,11 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         get { lock (sync) return capture?.IsCompleted == true || encoding?.IsCompleted == true; }
     }
 
+    public bool IsBusy
+    {
+        get { lock (sync) return capture is not null || encoding is not null || writing is not null || maintenance is not null; }
+    }
+
     private void PublishCacheMetadata()
     {
         Volatile.Write(ref imageKeys, cache.Keys.ToHashSet(StringComparer.Ordinal));

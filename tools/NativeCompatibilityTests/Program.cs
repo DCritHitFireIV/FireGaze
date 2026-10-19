@@ -25,7 +25,9 @@ unsafe static class Program
             ("current clone bit2 clears before Original; other bits and Original writes survive", CurrentClone),
             ("current clone bit2 clear is idempotent", AlreadyVisible),
             ("source DisableDraw cleans and restores visibility before Original", SourceDisable),
+            ("source Update reasserts hidden visibility after native refresh", SourceUpdateReasserts),
         };
+        cases.AddRange(TimelineHookInstallationTests.Cases());
         foreach (var scenario in new[] { "source", "foreign", "null", "protection disabled", "runtime disposed", "display disposed", "no display", "source generation reused", "clone generation reused", "clone slot reused", "clone index changed", "local player changed", "manager changed" })
         {
             var captured = scenario;
@@ -181,6 +183,14 @@ unsafe static class Program
         f.DuringOriginal = () => cleanedAtOriginal = !f.Runtime.HasActivePreview && f.Display.IsDisposed
             && f.Source->DrawObject->IsVisible && f.Deletes == 1 && f.Manager->BattleCharas[207].BattleChara == null;
         f.Disable(f.Source); Once(f, (nint)f.Source); Eq(cleanedAtOriginal, true, "cleanup completed before Original"); Ended(f, 0);
+    }
+    static void SourceUpdateReasserts()
+    {
+        using var f = new NativeFixture(data); f.PrepareVisibility();
+        f.DuringOriginal = () => f.Source->DrawObject->Flags |= 1;
+        f.Update(f.Source); Once(f, (nint)f.Source);
+        Eq((ulong)f.Source->DrawObject->Flags & 1UL, 0UL, "source update leaked the real body");
+        Kept(f);
     }
     static void DisableBypass(string scenario)
     {

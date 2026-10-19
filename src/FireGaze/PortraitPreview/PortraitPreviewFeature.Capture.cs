@@ -64,6 +64,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void ObserveLiveCaptureState()
     {
+        if (!captureIsolation.LiveEnabled) return;
         var frame = ReadFreshCaptureEditor();
         if (frame is null)
         {
@@ -85,7 +86,10 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void DrawLiveCapture()
     {
         if (LightingFitHistorySuppressed) return;
-        PollLiveCapture();
-        liveImageService?.Draw(pointerHeld || sampledKeyboard);
+        captureIsolation.RunLive(() =>
+        {
+            PollLiveCapture();
+            liveImageService?.Draw(pointerHeld || sampledKeyboard);
+        });
     }
 }

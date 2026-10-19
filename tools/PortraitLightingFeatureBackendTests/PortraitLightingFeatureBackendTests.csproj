@@ -5,6 +5,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs')">$(DefineConstants);HAS_FEATURE_BACKEND</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureIsolation.cs" Link="PortraitCaptureIsolation.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="PortraitEditorState.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryStore.cs" Link="PortraitHistoryStore.cs" />

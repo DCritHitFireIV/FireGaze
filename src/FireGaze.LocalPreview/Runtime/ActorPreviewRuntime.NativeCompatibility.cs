@@ -1,5 +1,6 @@
 using Dalamud.Hooking;
 using Dalamud.Plugin.Services;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
@@ -8,12 +9,16 @@ using GameObject = FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject;
 
 namespace FireGaze.LocalPreview.Runtime;
 
+public sealed record OptionalNativeHookStatus(bool Installed, string Reason);
+
 public sealed unsafe partial class ActorPreviewRuntime
 {
     // Both current CN timeline functions return their native success in AL. The
     // installed ClientStructs declares them void; using those delegates for a
     // managed detour loses success even when Original already started the intro.
-    // Keep the generated addresses and the audited BOOL/U1 return ABI instead.
+    // Retain the audited ABI for clients whose SDK agrees with it. A mismatch
+    // disables these optional observers before asking Dalamud to create a hook;
+    // the verifier in some Dalamud builds logs a mismatch but still installs it.
     // See docs/local-preview-timeline-abi-2026-10-17.md.
     [return: MarshalAs(UnmanagedType.U1)]
     private delegate bool PlayTimelineNative(ActionTimelineSequencer* sequence, ushort id, void* param);
@@ -30,6 +35,10 @@ public sealed unsafe partial class ActorPreviewRuntime
     private Hook<OrnamentContainer.Delegates.SetupOrnament>? ornamentSetup;
     private Hook<PlayTimelineNative>? timelinePlay;
     private Hook<PlayActionTimelineNative>? actionTimelinePlay;
+    private string timelinePlayReason = "Not initialized.";
+    private string actionTimelinePlayReason = "Not initialized.";
+    public OptionalNativeHookStatus TimelinePlayStatus => TimelineHookStatus(timelinePlay, timelinePlayReason);
+    public OptionalNativeHookStatus ActionTimelinePlayStatus => TimelineHookStatus(actionTimelinePlay, actionTimelinePlayReason);
     private bool hmsVisibilityProtection;
     private long hmsVisibilityRepairs;
     private Dictionary<ushort, ushort>? emoteTimelineIdentities;
@@ -42,12 +51,81 @@ public sealed unsafe partial class ActorPreviewRuntime
         characterDisable = Install(interop.HookFromSignature<GameObject.Delegates.DisableDraw>(CharacterDisableSignature, CharacterDisableDetour));
         companionSetup = Install(interop.HookFromAddress<CompanionContainer.Delegates.SetupCompanion>(CompanionContainer.Addresses.SetupCompanion.Value, CompanionSetupDetour));
         ornamentSetup = Install(interop.HookFromAddress<OrnamentContainer.Delegates.SetupOrnament>(OrnamentContainer.Addresses.SetupOrnament.Value, OrnamentSetupDetour));
-        timelinePlay = Install(interop.HookFromAddress<PlayTimelineNative>(ActionTimelineSequencer.Addresses.PlayTimeline.Value, TimelinePlayDetour));
-        actionTimelinePlay = Install(interop.HookFromAddress<PlayActionTimelineNative>(TimelineContainer.Addresses.PlayActionTimeline.Value, ActionTimelinePlayDetour));
+        timelinePlay = InstallOptionalTimelineHook<PlayTimelineNative, ActionTimelineSequencer.Delegates.PlayTimeline>(
+            () => interop.HookFromAddress<PlayTimelineNative>(ActionTimelineSequencer.Addresses.PlayTimeline.Value, TimelinePlayDetour), out timelinePlayReason);
+        actionTimelinePlay = InstallOptionalTimelineHook<PlayActionTimelineNative, TimelineContainer.Delegates.PlayActionTimeline>(
+            () => interop.HookFromAddress<PlayActionTimelineNative>(TimelineContainer.Addresses.PlayActionTimeline.Value, ActionTimelinePlayDetour), out actionTimelinePlayReason);
+    }
+
+    private OptionalNativeHookStatus TimelineHookStatus<T>(Hook<T>? hook, string reason) where T : Delegate
+        => disposed ? new(false, "Runtime disposed.")
+            : hook is null ? new(false, reason)
+            : hook.IsDisposed ? new(false, "Hook disposed.")
+            : hook.IsEnabled ? new(true, "") : new(false, "Hook disabled.");
+
+    private Hook<T>? InstallOptionalTimelineHook<T, TSdk>(Func<Hook<T>> create, out string reason)
+        where T : Delegate where TSdk : Delegate
+    {
+        var actual = typeof(T).GetMethod("Invoke")!;
+        var expected = typeof(TSdk).GetMethod("Invoke")!;
+        var actualParameters = actual.GetParameters();
+        var expectedParameters = expected.GetParameters();
+        if (!NativeParameterMatches(actual.ReturnParameter, expected.ReturnParameter)
+            || actualParameters.Length != expectedParameters.Length
+            || !actualParameters.Zip(expectedParameters).All(pair => NativeParameterMatches(pair.First, pair.Second))
+            || !NativeAttributeMatches<UnmanagedFunctionPointerAttribute>(typeof(T), typeof(TSdk)))
+        {
+            reason = $"SDK signature mismatch: {actual.ReturnType.Name} ({string.Join(", ", actualParameters.Select(p => p.ParameterType.Name))}) versus "
+                + $"{expected.ReturnType.Name} ({string.Join(", ", expectedParameters.Select(p => p.ParameterType.Name))}); optional timeline observer unavailable.";
+            log.Warning("[LocalPreview] {TimelineHook}: {Reason}", typeof(T).Name, reason);
+            return null;
+        }
+        Hook<T>? hook = null;
+        try
+        {
+            hook = create();
+            hook.Enable();
+            installedHooks.Add(hook);
+            reason = "";
+            return hook;
+        }
+        catch (Exception ex)
+        {
+            // A failed optional hook never enters runtime ownership or unwinds
+            // the core input hooks. Release a partially enabled backend here.
+            if (hook is not null)
+                try { hook.Dispose(); }
+                catch (Exception cleanup) { log.Warning(cleanup, "[LocalPreview] Optional timeline hook cleanup failed."); }
+            reason = $"Optional timeline observer unavailable: {ex.Message}";
+            log.Warning(ex, "[LocalPreview] Optional timeline hook setup failed; core input hooks retained.");
+            return null;
+        }
+    }
+
+    private static bool NativeParameterMatches(ParameterInfo actual, ParameterInfo expected)
+        => actual.ParameterType == expected.ParameterType && actual.IsIn == expected.IsIn && actual.IsOut == expected.IsOut
+            && NativeAttributeMatches<MarshalAsAttribute>(actual, expected);
+
+    private static bool NativeAttributeMatches<T>(ICustomAttributeProvider actual, ICustomAttributeProvider expected) where T : Attribute
+    {
+        var left = actual.GetCustomAttributes(typeof(T), false).SingleOrDefault();
+        var right = expected.GetCustomAttributes(typeof(T), false).SingleOrDefault();
+        if (left is null || right is null) return left is null && right is null;
+        return typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance)
+                .All(field => Equals(field.GetValue(left), field.GetValue(right)))
+            && typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(property => property.GetIndexParameters().Length == 0)
+                .All(property => Equals(property.GetValue(left), property.GetValue(right)));
     }
 
     private void CharacterUpdateDetour(GameObject* obj)
     {
+        // The client can refresh the genuine actor after Framework.Update (for
+        // example while a native special action is ending), which may restore its
+        // draw bit. Reapply only the existing, identity-checked presentation lease
+        // after Original; gameplay state and model setup remain untouched.
+        var sourceUpdate = framework.IsInFrameworkUpdateThread && !disposed
+            && visualActor?.IsCurrentSource((NativeCharacter*)obj) == true;
         // HMS writes bit2 directly. Ignore that bit exclusively on our current
         // private display allocation, immediately before native consumption.
         if (framework.IsInFrameworkUpdateThread && !disposed && hmsVisibilityProtection && visualActor?.IsCurrentAllocation((NativeCharacter*)obj) == true)
@@ -56,6 +134,7 @@ public sealed unsafe partial class ActorPreviewRuntime
             if ((flags & 2) != 0) { obj->RenderFlags = (FFXIVClientStructs.FFXIV.Client.Game.Object.VisibilityFlags)(flags & ~2UL); hmsVisibilityRepairs++; }
         }
         characterUpdate!.Original(obj);
+        if (sourceUpdate) visualActor?.ReassertSourceVisibility();
     }
 
     private void CharacterDisableDetour(GameObject* obj)

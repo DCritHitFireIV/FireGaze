@@ -108,6 +108,52 @@ internal static class CaptureLifecycleTests
    var texture=new CountingCaptureTexture();var layers=new PortraitCaptureLayers(576,960,[new(texture)]);
    layers.Dispose();layers.Dispose();Check(texture.Disposes==1,"layer owner disposal is idempotent");
   }
+  {
+   var a=new FakeCaptureApi{Ready=false};using var service=new PortraitLiveImageService(a,()=>now);
+   service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();
+   Check(!service.IsBusy&&a.Captures==0,"unready editor retains a request without a physical task");
+   a.Ready=true;var samples=a.Samples;now=now.AddSeconds(1);
+   service.Update(false);
+   Check(a.Samples==samples&&a.Captures==0,"off revokes a retained request before any native sampling");
+   Check(service.Diagnostics.phase=="closed","off removes even a request with no physical task");
+   service.Update(true);now=now.AddSeconds(1);service.Update(true);
+   Check(a.Samples==samples&&a.Captures==0,"reopening alone cannot revive the revoked native request");
+   service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update(true);
+   now=now.AddMilliseconds(200);service.Update(true);
+   Check(a.Captures==1,"restored live mode accepts a new explicit request after settling");
+   var fresh=new CountingCaptureTexture();a.Complete(new(576,960,[new(fresh)]));
+   service.Update(true);service.Draw();service.Update(true);
+   using(var image=service.AcquireCurrent())Check(image is not null,"fresh live request can publish after isolation ends");
+  }
+  {
+   var a=new FakeCaptureApi();using var service=new PortraitLiveImageService(a,()=>now);
+   service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
+   var samples=a.Samples;
+   service.Update(false);service.Draw();
+   Check(service.IsBusy&&!a.Pending.Task.IsCompleted,"off retains the physical copy barrier without cancelling or synchronously waiting");
+   service.Update(false);
+   Check(a.Samples==samples&&a.Captures==1,"off drains pending work without sampling or starting a second capture");
+   var late=new CountingCaptureTexture();a.Complete(new(576,960,[new(late)]));
+   service.Update(false);service.Draw();service.Update(false);
+   Check(!service.IsBusy&&late.Disposes==1&&a.Composes==0&&service.AcquireCurrent() is null,
+    "off releases late physical layers once without composition or publication");
+   service.Update(true);now=now.AddSeconds(1);service.Update(true);
+   Check(a.Captures==1&&a.Samples==samples,"draining a physical task cannot revive its old request");
+  }
+  foreach(var stage in new[]{"layers","candidate","published"})
+  {
+   var a=new FakeCaptureApi();using var service=new PortraitLiveImageService(a,()=>now);
+   service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
+   var layer=new CountingCaptureTexture();a.Complete(new(576,960,[new(layer)]));service.Update();
+   if(stage!="layers")service.Draw();
+   if(stage=="published")service.Update();
+   var samples=a.Samples;
+   service.Update(false);service.Draw();service.Update(false);
+   Check(layer.Disposes==1&&a.Outputs.All(texture=>texture.Disposes==1),stage+" isolation releases each owned resource once");
+   Check(!service.IsBusy&&service.AcquireCurrent() is null&&a.Samples==samples,
+    stage+" isolation prevents publication and further native sampling");
+   Check(a.Composes==(stage=="layers"?0:1),stage+" isolation starts no extra composition");
+  }
   return checks;
  }
  private static async Task Until(Func<bool> condition)

@@ -47,12 +47,16 @@ internal sealed class PortraitLiveImageService:IDisposable
  {lock(sync){request=null;gate.Reset();ClearCurrent();error=null;}}
  public PortraitCapturedImage? AcquireCurrent()
  {lock(sync)return !disposed&&current is {} image?new(image.Texture.CreateWrapSharingLowLevelResource(),image.Sample):null;}
- public void Update()
+ public void Update(bool allowCapture=true)
  {
   if(!api.IsFrameworkThread)return;
   lock(sync)
   {
    if(disposed)return;
+   // Isolation revokes even a settling request with no physical task. Keep
+   // pending copies owned until completion, but never inspect a native source
+   // or revive a previous request when live capture is later re-enabled.
+   if(!allowCapture){request=null;gate.Reset();ClearCurrent();error=null;}
    PortraitCaptureSample? sample=null;
    var requested=request;
    if(requested is {} desired)

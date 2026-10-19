@@ -41,6 +41,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private bool editorAvailable;
     private DateTime nextInventoryRead;
     private bool disposed;
+    private readonly PortraitCaptureIsolation captureIsolation = new();
+    private readonly PortraitPhaseTrace runtimeTrace = new(message => Plugin.Log.Information("[PortraitTrace] {Stage}", message));
 
     public PortraitPreviewFeature(IDalamudPluginInterface pluginInterface, string configDirectory)
     {
@@ -103,6 +105,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
             historyRows, appearanceGroups,
             historyPhotos = photos.Diagnostics(),
+            captureIsolation = captureIsolation.Mode,
+            runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
             liveCapture = liveImageService?.Diagnostics,
             historyPhotosView = window.HistoryPhotosView, historyWindowOpen = window.HistoryWindowOpen,
             lightingFit = LightingFit,
@@ -145,25 +149,28 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (disposed) return;
         try
         {
-            inventory.ObserveRetainerLoads();
-            session.Validate();
-            PollLightingFit();
-            PollEditing();
-            ObserveLiveCaptureState();
-            PollLibrary();
-            PollPhotos();
-            liveImageService?.Update();
-            editorAvailable = target.TryResolve(out _, out var bounds, out _);
-            if (editorAvailable) buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
+            using (runtimeTrace.Measure("update.retainer-loads")) inventory.ObserveRetainerLoads();
+            using (runtimeTrace.Measure("update.validate")) session.Validate();
+            using (runtimeTrace.Measure("update.lighting-fit")) PollLightingFit();
+            using (runtimeTrace.Measure("update.editing")) PollEditing();
+            using (runtimeTrace.Measure("update.capture-state")) ObserveLiveCaptureState();
+            using (runtimeTrace.Measure("update.library")) PollLibrary();
+            using (runtimeTrace.Measure("update.photos")) PollPhotos();
+            using (runtimeTrace.Measure("update.live-image")) liveImageService?.Update(captureIsolation.LiveEnabled && session.IsActive);
+            using (runtimeTrace.Measure("update.resolve"))
+            {
+                editorAvailable = target.TryResolve(out _, out var bounds, out _);
+                if (editorAvailable) buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
+            }
             if (!session.IsActive && window.IsOpen)
             {
                 window.CloseAuxiliaryWindows();
                 window.IsOpen = false;
             }
-            if (DateTime.UtcNow >= nextInventoryRead)
+            if (PortraitInventoryRefreshPolicy.ShouldRefresh(session.IsActive, DateTime.UtcNow, nextInventoryRead))
             {
                 nextInventoryRead = DateTime.UtcNow.AddSeconds(2);
-                RefreshInventory();
+                using (runtimeTrace.Measure("update.inventory")) RefreshInventory();
             }
         }
         catch (Exception ex)
@@ -251,10 +258,16 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     public void OpenPreview() => Mutate(() =>
     {
-        if (!CancelLightingFitForEdit()) return;
+        runtimeTrace.Arm();
+        using var openPhase = runtimeTrace.Measure("open");
+        using (runtimeTrace.Measure("open.cancel-lighting")) if (!CancelLightingFitForEdit()) return;
         if (!target.CanBlockSave) { Error(target.LastError ?? "暂时无法阻止肖像保存，为避免保存临时外观，本次未开启预览。请稍后重试。"); return; }
-        if (!target.TryResolve(out var identity, out _, out _) || !session.Open(identity)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
-        RefreshInventory();
+        PortraitIdentity identity;
+        using (runtimeTrace.Measure("open.resolve"))
+            if (!target.TryResolve(out identity, out _, out _)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
+        using (runtimeTrace.Measure("open.session"))
+            if (!session.Open(identity)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
+        using (runtimeTrace.Measure("open.inventory")) RefreshInventory();
         status = "肖像预览已开启。";
         window.IsOpen = true;
         window.BringToFront();
@@ -358,10 +371,10 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             }
             ImGui.End();
         }
-        photos.Draw(pointerHeld);
-        DrawLiveCapture();
-        DrawLightingFit();
-        windows.Draw();
+        using (runtimeTrace.Measure("draw.photos")) photos.Draw(pointerHeld);
+        using (runtimeTrace.Measure("draw.live-image")) DrawLiveCapture();
+        using (runtimeTrace.Measure("draw.lighting-fit")) DrawLightingFit();
+        using (runtimeTrace.Measure("draw.windows")) windows.Draw();
     }
 
     public void OnCommand(string arguments)
@@ -370,6 +383,13 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
         else if (parts is ["status"]) Plugin.Chat.Print("[肖像同步预览] " + Status);
+        else if (parts is ["capture-probe", var captureMode]) Mutate(() =>
+        {
+            var busy = photos.IsBusy || liveImageService?.IsBusy == true || LightingFitMutationBlocked;
+            if (!captureIsolation.TryConfigure(captureMode, session.IsActive, busy))
+            { Error("请先关闭预览并等待图像任务结束；诊断通道仅支持 off、history 或 live。"); return; }
+            Plugin.Log.Information("[PortraitTrace] capture isolation changed to {Mode}", captureIsolation.Mode);
+        });
         else if (parts is ["undo"]) Undo();
         else if (parts is ["redo"]) Redo();
         else if (parts is ["light-fit", "cancel"]) CancelLightingFit();

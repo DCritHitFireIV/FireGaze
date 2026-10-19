@@ -85,6 +85,18 @@ public sealed unsafe class NativePreviewActor : IDisposable
             && actor->ObjectIndex == objectIndex && Generation(actor) == allocationGeneration;
     }
 
+    /// <summary>Read-only identity guard for the genuine local actor update hook.</summary>
+    public bool IsCurrentSource(NativeCharacter* actor)
+        => !disposed && actor != null && actor == sourceAddress && GetSource() == actor;
+
+    /// <summary>
+    /// Reapply the existing source draw lease after the client has refreshed a real
+    /// actor. This is deliberately limited to an already-ready, owned preview and
+    /// performs no native setup or object allocation.
+    /// </summary>
+    public bool ReassertSourceVisibility()
+        => !disposed && IsReady && sourceSuppressionActive && SetSourceVisibility(true);
+
     /// <summary>Read-only mounted child guard; never performs native object lookups.</summary>
     public bool IsCurrentMountChild(NativeCharacter* child)
     {

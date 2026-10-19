@@ -18,9 +18,10 @@ internal sealed unsafe partial class PortraitPreviewFeature
             var owner = CurrentCharacter();
             photos.SetRecords(owner is { } character ? history.GetRecordsForOwner(character.ContentID) : [], history.Bytes);
         }
-        var ready = observedKey is not null && observedEditor is not null
+        var ready = false;
+        captureIsolation.RunHistory(() => ready = session.IsActive && observedKey is not null && observedEditor is not null
             && !pointerHeld && !sampledKeyboard && target.TryResolve(out var identity, out _, out _)
-            && identity == observedIdentity;
+            && identity == observedIdentity);
         var key = observedKey;
         var currentID = key is { } current ? history.CurrentRecordID(current) : null;
         var ownerKey = ready ? $"{key}|{observedIdentity}" : "";

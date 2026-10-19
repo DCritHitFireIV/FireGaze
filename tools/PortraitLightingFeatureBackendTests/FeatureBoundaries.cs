@@ -101,6 +101,7 @@ namespace FireGaze.PortraitPreview
   readonly string directory=Path.Combine(Path.GetTempPath(),"FireGazeLightingLifecycle",Guid.NewGuid().ToString("N"));
   readonly TargetBoundary target=new();
   readonly PortraitPreviewSession session;
+  readonly PortraitCaptureIsolation captureIsolation = new();
   readonly PortraitHistoryStore history;
   readonly PortraitHistoryBatch historyBatch;
   readonly object liveCaptureAPI;
@@ -111,8 +112,9 @@ namespace FireGaze.PortraitPreview
   PortraitHistoryKey? observedKey;
   bool deferredBaselineSync,syncPlate;
   public readonly List<string> Errors=[];
-  public PortraitPreviewFeature()
+  public PortraitPreviewFeature(bool enableCapture = true)
   {
+   if (enableCapture) captureIsolation.TryConfigure("live", false, false);
    Directory.CreateDirectory(directory);history=new(Path.Combine(directory,"history.json"));historyBatch=new(history);
    session=new(target);session.Open(target.Identity);liveCaptureAPI=target;
    observedIdentity=target.Identity;observedKey=target.Key;observedEditor=historyObservedEditor=target.Snapshot.Copy();

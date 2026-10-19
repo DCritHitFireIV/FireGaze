@@ -63,6 +63,9 @@ Invoke-PreviewSuite 'LocalPreviewPreferencesTests'
 foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'PortraitOwnedTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+foreach ($previewSuite in @('PortraitInventoryRefreshTests', 'PortraitRuntimeSafetyTests')) {
+    Invoke-PreviewSuite $previewSuite
+}
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
