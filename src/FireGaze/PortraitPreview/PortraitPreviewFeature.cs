@@ -70,6 +70,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         InitializePhotos(configDirectory);
         InitializeLiveCapture();
         InitializeLightingFit();
+        InitializeNativeLive();
         window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
         diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
@@ -162,6 +163,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             using (runtimeTrace.Measure("update.library")) PollLibrary();
             using (runtimeTrace.Measure("update.photos")) PollPhotos();
             using (runtimeTrace.Measure("update.live-image")) liveImageService?.Update(captureIsolation.LiveEnabled && session.IsActive);
+            using (runtimeTrace.Measure("update.native-live")) UpdateNativeLive();
             using (runtimeTrace.Measure("update.resolve"))
             {
                 editorAvailable = target.TryResolve(out _, out var bounds, out _);
@@ -313,6 +315,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     public void ClosePreview() => Mutate(() =>
     {
+        StopNativeLive(PortraitNativeLiveStopReason.UserClosed);
         if (!CancelLightingFitForEdit()) { Error("正在结束灯光调整，请稍候再关闭预览。"); return; }
         FlushEditing();
         if (!session.Close())
@@ -477,6 +480,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         void Release()
         {
             if (!CancelLightingFitForEdit()) _ = target.AbortCapturedEditor();
+            DisposeNativeLive();
             DisposeLightingFit();
             photoDrain = photos.BeginDispose();
             liveImageService?.Dispose();

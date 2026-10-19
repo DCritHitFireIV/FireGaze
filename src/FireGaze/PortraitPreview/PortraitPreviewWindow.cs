@@ -57,6 +57,9 @@ internal interface IPortraitPreviewViewModel
     void TagFavorite(Guid id, IReadOnlyCollection<string> tags) { }
     void RemoveFavorite(Guid id) { }
     PortraitCapturedImage? AcquireCurrentLiveImage() => null;
+    bool NativeLiveEnabled => false;
+    void SetNativeLiveEnabled(bool enabled) { }
+    PortraitNativeLiveBorrow? TryBorrowNativeLive() => null;
     PortraitImageScope LiveCaptureScope => PortraitImageScope.Portrait;
     void SetLiveCaptureScope(PortraitImageScope scope) { }
     PortraitDirectionalLightView? DirectionalLight => null;
@@ -198,6 +201,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         DrawEditingToolbar();
         DrawLibraryToolbar();
         DrawPreviewSettings();
+        DrawNativeLivePreview();
         ImGui.Separator();
 
         ImGui.BeginGroup();

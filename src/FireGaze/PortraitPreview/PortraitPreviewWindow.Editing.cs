@@ -66,6 +66,8 @@ internal sealed partial class PortraitPreviewWindow
         if (ImGui.Checkbox("同步铭牌预览", ref sync)) feature.SetSyncPlate(sync);
         if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("仅同步自己看到的铭牌预览。关闭预览后还原，不会保存到铭牌。");
         ImGui.PopID();
+        ContinueToolbar(right, ImGui.CalcTextSize("动态肖像画面").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X);
+        DrawNativeLiveSetting();
         ContinueToolbar(right, ImGui.CalcTextSize("仅本地 · 关闭后还原").X);
         ImGui.TextDisabled("仅本地 · 关闭后还原");
     }

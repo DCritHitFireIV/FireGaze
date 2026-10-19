@@ -115,6 +115,7 @@ Case("concurrent replacement cannot dispose an active Draw borrow", () =>
 });
 Case("native node source proves owner before and after bounds and retain", () => NativeCases(Check));
 NativeLiveControllerCases.Run(Case, Check);
+NativeLiveFeatureWiringCases.Run(Case, Check);
 Console.WriteLine($"PortraitNativeLiveViewTests: {checks} checks, {failures.Count} failed");
 return failures.Count == 0 ? 0 : 1;
 
