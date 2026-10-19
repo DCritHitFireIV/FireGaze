@@ -123,7 +123,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
                 document.WriteTo(stream);
                 stream.Flush(flushToDisk: true);
             }
-            if (File.Exists(path)) File.Replace(temporary, path, null);
+            if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
             else File.Move(temporary, path);
         }
         finally

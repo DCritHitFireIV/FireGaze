@@ -13,8 +13,13 @@ internal static unsafe class OwnedSceneIntegrationCases
     private const nint Foreign = 0x600;
     public static int Run()
     {
-        var failed = 0;
+        var failed = 0; var total = 0;
         foreach (var (name, test) in new (string, Action)[] {
+            ("strict slot ownership admits creation before the slot is occupied", StrictCreation),
+            ("Setup idle success, idle failure and foreign takeover never release unproved slot", UnprovedSetup),
+            ("throwing Setup may retire only a proven exact owned slot", ThrowingOwnedSetup),
+            ("expired constructor admission frees only the unconstructed allocation", UnconstructedCleanup),
+            ("throwing or foreign-return constructor has no guessed native cleanup", UncertainConstructor),
             ("real dispatcher and scene release cleared slot, then Dtor, then detached confirmation", NativeTakeover),
             ("source close retires scene before original source Release", SourceClose),
             ("new native owner during Release blocks Dtor and any late cleanup", TakeoverDuringRelease),
@@ -22,12 +27,60 @@ internal static unsafe class OwnedSceneIntegrationCases
             ("foreign takeover during own Release never recursively releases or destroys", ReentrantTakeoverDuringRelease),
         })
         {
+            total++;
             try { test(); Console.WriteLine("PASS integration " + name); }
             catch (Exception ex) { failed++; Console.Error.WriteLine("FAIL integration " + name + ": " + ex.Message); }
         }
-        Console.WriteLine($"{5-failed} integration passed; {failed} failed"); return failed == 0 ? 0 : 1;
+        Console.WriteLine($"{total-failed} integration passed; {failed} failed"); return failed == 0 ? 0 : 1;
     }
     static void Check(bool value, string name) { if (!value) throw new Exception(name); }
+    static void StrictCreation()
+    {
+        using var f = new Fixture(); f.Prepare(); f.SourceRender(100);
+        Check(f.Api.ConstructCalls == 1, "strict idle slot prevented the constructor from being called");
+        Check(f.Scene.IsReady, f.Scene.LastError ?? "strict creation did not reach ready");
+    }
+    static void UnprovedSetup()
+    {
+        foreach(var mode in new[]{"return-idle","throw-idle","return-foreign","throw-foreign","reenter-foreign"})
+        {
+            using var f=new Fixture();f.Api.SetupMode=mode;f.Prepare();f.SourceRender(100);
+            Check(f.Api.ConstructCalls==1&&f.Api.SetupStarted,"setup failure fixture never entered native construction/setup");
+            Check(f.Scene.IsQuarantined&&!f.Api.Freed,"unproved setup was not quarantined");
+            Check(!f.Api.Events.Contains("release")&&!f.Api.Events.Any(x=>x.StartsWith("dtor:")),"unproved setup released or destroyed a view");
+            Check(f.Api.SlotOwner==(mode.EndsWith("foreign")?Foreign:0),"foreign slot owner was lost");
+            f.Api.Events.Clear();f.SourceRender(101);
+            Check(f.Api.Events.SequenceEqual(new[]{"source-render"}),"late cleanup ran after unproved setup");
+        }
+    }
+    static void ThrowingOwnedSetup()
+    {
+        using var f=new Fixture();f.Api.SetupMode="throw-owned";f.Prepare();f.SourceRender(100);
+        Check(f.Scene.IsRetired&&!f.Scene.IsQuarantined&&f.Api.Freed,"exact owned throwing Setup did not retire safely");
+        Check(f.Api.Events.SequenceEqual(new[]{"source-render","release","dtor:1"}),"owned Setup cleanup ordering changed");
+        Check(f.Api.ReadsAfterFree==0&&f.Api.SlotOwner==0,"owned Setup cleanup inspected freed view or left a slot");
+        Check(f.Hooks.TryDispose(),"retired throwing Setup blocked hook disposal");
+    }
+    static void UnconstructedCleanup()
+    {
+        using var f=new Fixture();f.Api.RejectConstructAdmission=true;f.Prepare();f.SourceRender(100);
+        Check(f.Api.ConstructCalls==0&&f.Api.FreeUnconstructedCalls==1,"unconstructed allocation was not freed exactly once before Ctor");
+        Check(f.Scene.IsRetired&&!f.Scene.IsQuarantined&&f.Api.ReadsAfterFree==0,"raw allocation cleanup used native view lifetime");
+        Check(f.Api.Events.SequenceEqual(new[]{"source-render"}),"raw allocation cleanup called Release/Dtor");
+        Check(f.Hooks.TryDispose(),"confirmed raw allocation cleanup blocked hook disposal");
+    }
+    static void UncertainConstructor()
+    {
+        foreach(var mode in new[]{"throw","foreign-return"})
+        {
+            using var f=new Fixture();f.Api.ConstructMode=mode;f.Prepare();f.SourceRender(100);
+            Check(f.Api.ConstructCalls==1&&f.Scene.IsQuarantined&&!f.Api.Freed,"uncertain constructor was not quarantined");
+            Check(f.Api.FreeUnconstructedCalls==0&&!f.Api.SetupStarted,"uncertain constructor was freed or entered Setup");
+            Check(f.Api.Events.SequenceEqual(new[]{"source-render"}),"uncertain constructor used guessed cleanup");
+            f.Api.Events.Clear();f.SourceRender(101);
+            Check(f.Api.Events.SequenceEqual(new[]{"source-render"}),"uncertain constructor retried native cleanup");
+        }
+    }
     static void NativeTakeover()
     {
         using var f = new Fixture(); f.Start(); f.Api.Events.Clear(); f.Takeover();
@@ -72,13 +125,16 @@ internal static unsafe class OwnedSceneIntegrationCases
         public Fixture(){Hooks=new(new EnvironmentProof(Api));Factory=new(Api);Api.Factory=Factory;Scene=new(Api);}
         public void Start()
         {
+            Prepare(); SourceRender(100);Check(Scene.IsReady,Scene.LastError??"scene did not reach ready");
+        }
+        public void Prepare()
+        {
             Check(Hooks.TryInstall(Factory),Hooks.LastError??"hooks install failed");
             var snapshot=new PortraitOwnedCharaViewSnapshot(Source,default,default,new CharaViewItem[14],0,new PortraitComposition{Paused=true,CameraDistance=3});
             Check(Hooks.TryRequest(Source,6,lease=>{
                 if(lease.CanCreate)Check(Scene.TryCreate(snapshot,lease),Scene.LastError??"scene create failed");
                 Check(Scene.Advance(lease,lease.NativeFrame),Scene.LastError??"scene advance failed");
             },lease=>Scene.TryRetire(lease)),"request rejected");
-            SourceRender(100);Check(Scene.IsReady,Scene.LastError??"scene did not reach ready");
         }
         public void Takeover()=>Factory.Get<CharaView.Delegates.Initialize>(PortraitOwnedSceneNativeKind.Initialize)((CharaView*)Foreign,null,6,0);
         public void SourceRender(uint frame)=>Factory.Get<CharaView.Delegates.Render>(PortraitOwnedSceneNativeKind.Render)((CharaView*)Source.Model,frame);
@@ -90,12 +146,15 @@ internal static unsafe class OwnedSceneIntegrationCases
         public IReadOnlyList<PortraitOwnedSceneNativeTarget> Targets=>PortraitOwnedSceneHooks.FrozenTargets(unchecked((nint)0x140000000L));
         public bool TryValidateInstallation(out string reason){reason="";return true;}
         public bool IsSourceCurrent(PortraitIdentity source)=>source==Source;
-        public bool IsSlotIdle(uint slot)=>slot==6&&api.SlotOwner==0;
+        public bool IsSlotIdle(uint slot)
+        {
+            if(slot!=6||api.SlotOwner!=0)return false;
+            return !api.RejectConstructAdmission||api.View==0||++api.PostAllocateIdleReads==1;
+        }
         public bool IsSlotOwnedBy(uint slot,nint view)
         {
             if(api.Freed){api.ReadsAfterFree++;throw new InvalidOperationException("accessed freed native view");}
             if(slot!=6||view!=api.View)return false;
-            if(!api.SetupStarted)return IsSlotIdle(slot);
             // Native Release clears these fields; accepting idle in this observer
             // would conceal a missing retirement permit in the production lease.
             var native=(CharaViewPortrait*)view;
@@ -131,12 +190,25 @@ internal static unsafe class OwnedSceneIntegrationCases
         readonly Character* character=(Character*)NativeMemory.AllocZeroed((nuint)sizeof(Character));
         readonly nint camera=(nint)NativeMemory.AllocZeroed(0x200);
         public bool SetupStarted,Freed,TakeoverDuringRelease,TakeoverAfterDtor,ReenterTakeoverDuringRelease;
-        public int ReadsAfterFree;
+        public int ReadsAfterFree,ConstructCalls,FreeUnconstructedCalls,PostAllocateIdleReads;
+        public bool RejectConstructAdmission;
+        public string? SetupMode,ConstructMode;
         public nint Allocate(){View=(nint)NativeMemory.AllocZeroed((nuint)sizeof(CharaViewPortrait));return View;}
-        public void FreeUnconstructed(nint view){NativeMemory.Free((void*)view);Freed=true;}
-        public nint Construct(nint view)=>view;
+        public void FreeUnconstructed(nint view){FreeUnconstructedCalls++;NativeMemory.Free((void*)view);Freed=true;}
+        public nint Construct(nint view){ConstructCalls++;if(ConstructMode=="throw")throw new InvalidOperationException("ctor failed");return ConstructMode=="foreign-return"?Foreign:view;}
         public void Setup(nint view,uint slot,CharaViewCharacterData data)=>Factory.Get<CharaViewPortrait.Delegates.Setup>(PortraitOwnedSceneNativeKind.Setup)((CharaViewPortrait*)view,slot,&data,null,0,0);
-        public void NativeSetup(nint view,uint slot){SetupStarted=true;SlotOwner=view;var v=(CharaViewPortrait*)view;v->ClientObjectId=slot+0xF0;v->ClientObjectIndex=slot;}
+        public void NativeSetup(nint view,uint slot)
+        {
+            SetupStarted=true;
+            if(SetupMode=="throw-idle")throw new InvalidOperationException("setup failed without slot");
+            if(SetupMode=="return-idle")return;
+            if(SetupMode=="reenter-foreign")
+            {Factory.Get<CharaView.Delegates.Initialize>(PortraitOwnedSceneNativeKind.Initialize)((CharaView*)Foreign,null,6,0);return;}
+            if(SetupMode is "return-foreign" or "throw-foreign")
+            {SlotOwner=Foreign;if(SetupMode=="throw-foreign")throw new InvalidOperationException("setup lost slot");return;}
+            SlotOwner=view;var v=(CharaViewPortrait*)view;v->ClientObjectId=slot+0xF0;v->ClientObjectIndex=slot;
+            if(SetupMode=="throw-owned")throw new InvalidOperationException("setup failed with owned slot");
+        }
         public void Render(nint view,uint frame)=>Factory.Get<CharaView.Delegates.Render>(PortraitOwnedSceneNativeKind.Render)((CharaView*)view,frame);
         public void NativeRender(nint view){var v=(CharaViewPortrait*)view;v->State=6;v->CharaViewPortraitCharacterLoaded=true;v->Camera=(FFXIVClientStructs.FFXIV.Client.Graphics.Scene.Camera*)camera;v->CameraManager=0x777;
             character->DrawData.OwnerObject=character;*(uint*)((byte*)character+0x74)=19;}

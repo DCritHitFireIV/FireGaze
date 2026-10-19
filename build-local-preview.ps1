@@ -87,6 +87,8 @@ Invoke-PreviewSuite 'PortraitSpatialSceneTests'
 # boundaries substituted; they do not install hooks or create a live game scene.
 Invoke-PreviewSuite 'PortraitOwnedSceneHookTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneTests'
+Invoke-PreviewSuite 'PortraitOwnedSceneSlotTests'
+Invoke-PreviewSuite 'PortraitNativePhaseObservationTests'
 
 if ($SqpackPath) {
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {

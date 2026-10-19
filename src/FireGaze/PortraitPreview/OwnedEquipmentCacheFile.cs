@@ -137,7 +137,7 @@ internal sealed class OwnedEquipmentCacheFile
                 reason = "拥有装备缓存或备份在迁移期间发生变化，未覆盖";
                 return false;
             }
-            if (File.Exists(filePath)) File.Replace(temporary, filePath, null);
+            if (File.Exists(filePath)) File.Replace(temporary, filePath, migrationOriginal is null ? filePath + ".bak" : null);
             else File.Move(temporary, filePath);
             temporary = null;
             reason = "已保存拥有装备读取记录";

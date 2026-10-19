@@ -51,12 +51,29 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
                 return Fail("The native creation permit expired before binding the allocation.");
             }
             nint result = 0;
-            if (!Call(lease, () => result = api.Construct(view))) return Quarantine("Portrait construction lost its native permit.");
-            constructed = true;
-            if (result != view) return Quarantine("The native portrait constructor returned another allocation.");
+            using (var scope = lease.EnterCreationCall(view, PortraitOwnedSceneCreationCall.Construct))
+            {
+                if (scope is null) return FreeUnconstructed(lease);
+                result = api.Construct(view);
+                constructed = true;
+                if (result != view) return Quarantine("The native portrait constructor returned another allocation.");
+                if (!lease.ConfirmConstructed(view)) return Quarantine("Portrait construction lost its native permit.");
+            }
             var data = source.CreateSetupData();
-            setupStarted = true;
-            if (!Call(lease, () => api.Setup(view, slot, data))) return Quarantine("Portrait setup lost its native permit.");
+            using (var scope = lease.EnterCreationCall(view, PortraitOwnedSceneCreationCall.Setup))
+            {
+                if (scope is null) return Quarantine("Portrait setup lost its native permit.");
+                setupStarted = true;
+                try { api.Setup(view, slot, data); }
+                catch
+                {
+                    // A throwing Setup is eligible only for cleanup, and only
+                    // if the exact native slot really belongs to this view.
+                    lease.ConfirmSetup(view);
+                    throw;
+                }
+                if (!lease.ConfirmSetup(view)) return Quarantine("Portrait setup did not confirm exact native slot ownership.");
+            }
             if (!Owns(lease)) return Quarantine("The native scene was replaced during setup.");
             source.CopyAppearanceTo(ref *(CharaViewPortrait*)view);
             return Owns(lease);
@@ -70,6 +87,17 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
             if (view != 0 && !TryRetire(lease)) return Quarantine(LastError);
             return false;
         }
+    }
+
+    private bool FreeUnconstructed(IPortraitOwnedSceneLease lease)
+    {
+        var allocation = view;
+        api.FreeUnconstructed(allocation);
+        view = 0;
+        IsRetired = true;
+        if (!lease.MarkUnconstructedReleased(allocation))
+            return Fail("The raw portrait allocation was freed but arbitration could not confirm release.");
+        return Fail("The creation permit expired before entering the native constructor.");
     }
 
     /// <summary>Called only from the source's post-original Render phase, using native FrameCount.</summary>

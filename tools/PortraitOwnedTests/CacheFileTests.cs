@@ -23,7 +23,9 @@ internal static class CacheFileTests
    Check(Task.Run(()=>file.SaveJSON(detachedJSON,out _)).GetAwaiter().GetResult(),"detached snapshot can save from worker");
    File.WriteAllText(Path.Combine(directory,"portrait-owned-cache-v1.json"),"not jsonText");
    Check(!file.Load(restored,out _) && restored.BuildView(DateTimeOffset.UtcNow).Items.Count==1,"invalid file preserves prior observations");
-   Check(Directory.EnumerateFiles(directory).Count()==1,"temporary files cleaned");
+   Check(Directory.EnumerateFiles(directory).Select(Path.GetFileName).Order(StringComparer.Ordinal)
+    .SequenceEqual(new[]{"portrait-owned-cache-v1.json","portrait-owned-cache-v1.json.bak"},StringComparer.Ordinal),
+    "only the primary and one recoverable backup remain, with no temporary files");
   } catch(Exception e) {fail++;Console.WriteLine($"FAIL cache-file exception {e.Message}");}
   finally {
    var target=Path.GetFullPath(directory);var tempRoot=Path.GetFullPath(Path.GetTempPath());

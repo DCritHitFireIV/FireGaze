@@ -34,6 +34,34 @@ internal static class OwnedCacheMigrationFileTests
             }
         }
 
+        Case("current cache rotates one recoverable generation and protects it on corrupt load", directory =>
+        {
+            var path = Path.Combine(directory, cacheName); var backup = path + ".bak";
+            var catalog = New(); var cache = new OwnedEquipmentCacheFile(directory);
+            Check(cache.Save(catalog, out _) && !File.Exists(backup), "first current-schema save has no fabricated prior generation");
+            var firstGeneration = File.ReadAllBytes(path);
+            catalog.ApplyRead(character, bag, now.AddSeconds(1), [new(456, 0, 0)]);
+            Check(cache.Save(catalog, out _), "second current-schema generation commits");
+            var secondGeneration = File.ReadAllBytes(path);
+            Check(File.Exists(backup) && File.ReadAllBytes(backup).SequenceEqual(firstGeneration), "normal replacement keeps the exact preceding owned cache");
+            catalog.ApplyRead(character, bag, now.AddSeconds(2), [new(567, 0, 0)]);
+            Check(cache.Save(catalog, out _) && File.Exists(backup) && File.ReadAllBytes(backup).SequenceEqual(secondGeneration), "third normal save rotates one backup to the second generation");
+            var recovery = New();
+            Check(File.Exists(backup) && recovery.ImportJSON(File.ReadAllText(backup)) && recovery.BuildView(now).Items.Single().ItemID == 456,
+                "owned backup independently imports the previous complete source contents");
+            File.WriteAllText(path, "broken current cache");
+            var refused = new OwnedEquipmentCacheFile(directory);
+            Check(!refused.Load(catalog, out _), "corrupt current cache is refused despite a valid backup");
+            catalog.ApplyRead(character, bag, now.AddSeconds(3), [new(678, 0, 0)]);
+            Check(!refused.Save(catalog, out _) && File.ReadAllText(path) == "broken current cache"
+                && File.Exists(backup) && File.ReadAllBytes(backup).SequenceEqual(secondGeneration),
+                "fresh observations cannot overwrite a corrupt owned primary or its valid backup");
+            var preserved = New();
+            Check(File.Exists(backup) && preserved.ImportJSON(File.ReadAllText(backup)) && preserved.BuildView(now).Items.Single().ItemID == 456,
+                "owned backup remains independently readable after primary corruption");
+            Check(Directory.GetFiles(directory).Length == 2, "ordinary owned saves retain only primary and a single backup");
+        });
+
         Case("legacy migration commits backup and v2 before importing", directory =>
         {
             var path = Path.Combine(directory, cacheName); var backup = path + ".v1.bak"; File.WriteAllBytes(path, original);
@@ -47,7 +75,7 @@ internal static class OwnedCacheMigrationFileTests
             Check(!cache.SaveJSON(legacy, out _) && File.ReadAllBytes(path).SequenceEqual(beforeReload), "queued v1 snapshot cannot downgrade migrated primary");
             catalog.ApplyRead(character, dresser, now.AddMinutes(3), [new(456, 7, 0)]);
             Check(cache.Save(catalog, out _) && File.ReadAllBytes(backup).SequenceEqual(original), "normal v2 writes preserve immutable legacy backup");
-            Check(Directory.GetFiles(directory).Length == 2, "migration leaves only primary and backup files");
+            Check(Directory.GetFiles(directory).Length == 3 && File.Exists(path + ".bak"), "normal post-migration writes retain one rolling backup alongside immutable legacy recovery");
         });
 
         Case("backup failure blocks migration and later writer", directory =>

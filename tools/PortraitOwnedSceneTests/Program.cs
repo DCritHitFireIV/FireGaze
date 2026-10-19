@@ -246,9 +246,19 @@ sealed class Lease : IPortraitOwnedSceneLease
     public uint Slot {get;set;}=3;public PortraitIdentity Source {get;set;}=new(101,102,103,9,104);
     public long Epoch {get;set;}=1;public uint NativeFrame {get;set;}=10;
     public bool IsCurrent {get;set;}=true;public bool CanCreate {get;set;}=true;public bool Owns=true,Released,RetirementBegun;
-    nint pointer;
-    public bool TryBindCreatedView(nint view){if(!CanCreate||!IsCurrent)return false;pointer=view;CanCreate=false;return true;}
-    public bool CanAccess(nint view)=>IsCurrent&&Owns&&!Released&&pointer==view&&view!=0;
+    nint pointer;int stage;
+    public bool TryBindCreatedView(nint view){if(!CanCreate||!IsCurrent)return false;pointer=view;CanCreate=false;stage=1;return true;}
+    public IDisposable? EnterCreationCall(nint view,PortraitOwnedSceneCreationCall operation)
+    {
+        if(!IsCurrent||!Owns||Released||view!=pointer||view==0)return null;
+        if(operation==PortraitOwnedSceneCreationCall.Construct&&stage==1){stage=2;return new Scope();}
+        if(operation==PortraitOwnedSceneCreationCall.Setup&&stage==3){stage=4;return new Scope();}
+        return null;
+    }
+    public bool ConfirmConstructed(nint view){if(!IsCurrent||!Owns||view!=pointer||stage!=2)return false;stage=3;return true;}
+    public bool ConfirmSetup(nint view){if(!IsCurrent||!Owns||view!=pointer||stage!=4)return false;stage=5;return true;}
+    public bool MarkUnconstructedReleased(nint view){if(Released||view!=pointer||stage!=1)return false;Released=true;return true;}
+    public bool CanAccess(nint view)=>stage==5&&IsCurrent&&Owns&&!Released&&pointer==view&&view!=0;
     public bool TryBeginRetirement(nint view){if(!CanAccess(view))return false;RetirementBegun=true;return true;}
     public bool CanReleaseView(nint view)=>CanAccess(view);
     public bool MarkReleased(nint view){if(!RetirementBegun||!CanReleaseView(view))return false;Released=true;return true;}

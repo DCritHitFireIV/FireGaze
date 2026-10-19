@@ -222,9 +222,21 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
 
     internal bool IsLeaseCurrent(PortraitOwnedSceneLease current)
         => IsLeasePhaseCurrent(current)
-            && (current.BoundView == 0 ? environment.IsSlotIdle(current.Slot)
-                : current.RetirementStarted && environment.IsSlotIdle(current.Slot)
-                    || environment.IsSlotOwnedBy(current.Slot, current.BoundView));
+            && current.CreationStage switch {
+                PortraitOwnedSceneCreationStage.Unbound or PortraitOwnedSceneCreationStage.Allocated
+                    or PortraitOwnedSceneCreationStage.Constructing or PortraitOwnedSceneCreationStage.Constructed
+                    => environment.IsSlotIdle(current.Slot),
+                PortraitOwnedSceneCreationStage.SetupPending => current.IsCreationCall(PortraitOwnedSceneCreationCall.Setup)
+                    && (environment.IsSlotIdle(current.Slot) || environment.IsSlotOwnedBy(current.Slot, current.BoundView)),
+                PortraitOwnedSceneCreationStage.Owned => current.RetirementStarted && environment.IsSlotIdle(current.Slot)
+                    || environment.IsSlotOwnedBy(current.Slot, current.BoundView),
+                _ => false,
+            };
+
+    internal bool IsCreationSlotIdle(PortraitOwnedSceneLease current)
+        => IsLeasePhaseCurrent(current) && environment.IsSlotIdle(current.Slot);
+    internal bool IsCreationSlotOwned(PortraitOwnedSceneLease current)
+        => IsLeasePhaseCurrent(current) && environment.IsSlotOwnedBy(current.Slot, current.BoundView);
 
     private bool IsLeasePhaseCurrent(PortraitOwnedSceneLease current)
         => ReferenceEquals(lease, current) && !stopped && IsInstalled && phaseDepth > 0

@@ -223,6 +223,38 @@ try
         Check(await store.FlushAsync() && store.GetRecords(key).Count == recordsBefore && File.ReadAllBytes(FileFor("budget")).SequenceEqual(bytesBefore), "oversized rejection preserves existing in-memory records and file bytes");
         Check(!Directory.GetFiles(directory, "*.tmp").Any(), "atomic replacement leaves no incomplete temporary snapshot behind");
     }
+    // Removing the backup argument must lose the previous complete generation, not silently pass.
+    var backupPath = FileFor("rolling-backup");
+    byte[] secondGeneration;
+    using (var store = new PortraitHistoryStore(backupPath, () => now))
+    {
+        store.Record(key, "{\"pose\":1}");
+        Check(await store.FlushAsync() && !File.Exists(backupPath + ".bak"), "first history save creates one primary without inventing a prior generation");
+        var firstGeneration = File.ReadAllBytes(backupPath);
+        store.Record(key, "{\"pose\":2}");
+        Check(await store.FlushAsync(), "second history generation is durably committed");
+        secondGeneration = File.ReadAllBytes(backupPath);
+        Check(File.Exists(backupPath + ".bak") && File.ReadAllBytes(backupPath + ".bak").SequenceEqual(firstGeneration),
+            "history replacement preserves the exact previous complete generation");
+        store.Record(key, "{\"pose\":3}");
+        Check(await store.FlushAsync() && File.ReadAllBytes(backupPath + ".bak").SequenceEqual(secondGeneration),
+            "third history save rotates the single backup to the second complete generation");
+    }
+    using (var recovery = new PortraitHistoryStore(backupPath + ".bak"))
+        Check(!recovery.IsReadOnly && recovery.Count == 2 && recovery.GetRecords(key)[0].SnapshotJSON == "{\"pose\":2}",
+            "history backup independently reloads the prior complete navigation document");
+    File.WriteAllText(backupPath, "{broken primary", new UTF8Encoding(false));
+    using (var store = new PortraitHistoryStore(backupPath))
+        Check(store.IsReadOnly && store.Record(key, "{\"pose\":4}").Status == PortraitHistoryWriteStatus.ReadOnlyCorrupt
+            && await store.FlushAsync() && File.ReadAllText(backupPath) == "{broken primary"
+            && File.ReadAllBytes(backupPath + ".bak").SequenceEqual(secondGeneration),
+            "corrupt history primary cannot overwrite itself or its existing valid backup");
+    using (var recovery = new PortraitHistoryStore(backupPath + ".bak"))
+        Check(!recovery.IsReadOnly && recovery.GetRecords(key)[0].SnapshotJSON == "{\"pose\":2}",
+            "history backup stays independently readable after a corrupt primary is refused");
+    Check(Directory.GetFiles(directory, "rolling-backup.json*").Length == 2,
+        "history rotation retains only the primary and one bounded backup");
+
     var corrupt = FileFor("corrupt");
     File.WriteAllText(corrupt, "{broken history", new UTF8Encoding(false));
     using (var store = new PortraitHistoryStore(corrupt))

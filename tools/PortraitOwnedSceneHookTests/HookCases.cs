@@ -14,6 +14,7 @@ internal static unsafe class HookCases
             ("unproved native coverage never creates a hook or claims a slot", IncompleteCoverage),
             ("failed enabling rolls back every hook and cannot issue a lease", FailedEnable),
             ("source original completes before one own render for a native frame", SourcePhase),
+            ("creation idle permits never authorize general access or release", CreationPermitOnly),
             ("wrong thread and source replacement never issue a lease", WrongThreadAndSource),
             ("out-of-domain source slots cannot create a scene request", SourceSlotDomain),
             ("foreign initialize retires the owned view before deleting its slot", NativeTakeover),
@@ -60,12 +61,41 @@ internal static unsafe class HookCases
     {
         using var f = new Fixture(); True(f.Hooks.TryInstall(f.Factory));
         IPortraitOwnedSceneLease? captured = null;
-        True(f.Request(lease => { captured = lease; True(lease.CanCreate); True(lease.TryBindCreatedView(Owned));
+        True(f.Request(lease => { captured = lease; True(lease.CanCreate); Create(f,lease);
             using var scope = lease.EnterOwnedCall(Owned); True(scope is not null);
-            f.Initialize(Owned, 6); f.Render(Owned, lease.NativeFrame); }));
+            f.Render(Owned, lease.NativeFrame); }));
         f.Render(Source.Model, 99); Trace(f, "render:768:99,initialize:1280:6,render:1280:99");
         True(captured is not null); Equal(captured!.IsCurrent, false); Equal(captured.CanAccess(Owned), false);
         f.Events.Clear(); f.Render(Source.Model, 99); Trace(f, "render:768:99");
+    }
+    static void CreationPermitOnly()
+    {
+        using var f = new Fixture(); True(f.Hooks.TryInstall(f.Factory));
+        True(f.Request(lease => {
+            True(lease.TryBindCreatedView(Owned)); True(lease.IsCurrent);
+            Equal(lease.CanAccess(Owned),false); Equal(lease.CanReleaseView(Owned),false);
+            Equal(lease.EnterOwnedCall(Owned),null);
+            using(var ctor=lease.EnterCreationCall(Owned,PortraitOwnedSceneCreationCall.Construct))
+            { True(ctor is not null); True(lease.ConfirmConstructed(Owned)); }
+            Equal(lease.CanAccess(Owned),false);
+            using(var setup=lease.EnterCreationCall(Owned,PortraitOwnedSceneCreationCall.Setup))
+            { True(setup is not null); Equal(lease.ConfirmSetup(Owned),false);
+              f.Initialize(Owned,6); True(lease.ConfirmSetup(Owned)); Equal(lease.CanAccess(Owned),false); }
+            True(lease.CanAccess(Owned));
+            Equal(lease.EnterCreationCall(Owned,PortraitOwnedSceneCreationCall.Setup),null);
+            f.Environment.SlotOwner=0; Equal(lease.IsCurrent,false); Equal(lease.CanReleaseView(Owned),false);
+        }));
+        f.Render(Source.Model,1);
+        True(f.Hooks.LastError is null);
+    }
+
+    static void Create(Fixture f,IPortraitOwnedSceneLease lease)
+    {
+        True(lease.TryBindCreatedView(Owned));
+        using(var ctor=lease.EnterCreationCall(Owned,PortraitOwnedSceneCreationCall.Construct))
+        { True(ctor is not null); True(lease.ConfirmConstructed(Owned)); }
+        using(var setup=lease.EnterCreationCall(Owned,PortraitOwnedSceneCreationCall.Setup))
+        { True(setup is not null); f.Initialize(Owned,6); True(lease.ConfirmSetup(Owned)); }
     }
     static void WrongThreadAndSource()
     {
@@ -114,16 +144,16 @@ internal static unsafe class HookCases
     static void ForeignReentry()
     {
         using var f = new Fixture(); True(f.Hooks.TryInstall(f.Factory));
-        True(f.Request(lease => { f.Captured = lease; True(lease.TryBindCreatedView(Owned));
-            using var scope = lease.EnterOwnedCall(Owned); True(scope is not null); f.Initialize(Owned, 6);
+        True(f.Request(lease => { f.Captured = lease; Create(f,lease);
+            using var scope = lease.EnterOwnedCall(Owned); True(scope is not null);
             f.Environment.Views[0x600] = 6; f.Initialize(0x600, 6); Equal(lease.CanAccess(Owned), false); }));
         f.Render(Source.Model, 90); Trace(f, "render:768:90,initialize:1280:6,retire,release:1280,initialize:1536:6");
     }
     static void EscapedScope()
     {
         using var f = new Fixture(); True(f.Hooks.TryInstall(f.Factory)); IDisposable? escaped = null; var calls = 0;
-        True(f.Request(lease => { calls++; f.Captured = lease; True(lease.TryBindCreatedView(Owned));
-            escaped = lease.EnterOwnedCall(Owned); f.Initialize(Owned, 6); }));
+        True(f.Request(lease => { calls++; f.Captured = lease; Create(f,lease);
+            escaped = lease.EnterOwnedCall(Owned); }));
         f.Render(Source.Model, 80); Equal(f.Captured!.IsCurrent, false); f.Render(Source.Model, 81);
         Equal(calls, 1); escaped!.Dispose();
     }
@@ -175,8 +205,7 @@ internal static unsafe class HookCases
     static Fixture Active(bool retireSucceeds = true)
     {
         var f = new Fixture(); True(f.Hooks.TryInstall(f.Factory)); f.RetireSucceeds = retireSucceeds;
-        True(f.Request(lease => { f.Captured = lease; if (lease.CanCreate) { True(lease.TryBindCreatedView(Owned));
-            using var scope = lease.EnterOwnedCall(Owned); True(scope is not null); f.Initialize(Owned, 6); }
+        True(f.Request(lease => { f.Captured = lease; if (lease.CanCreate) Create(f,lease);
             using var renderScope = lease.EnterOwnedCall(Owned); True(renderScope is not null); f.Render(Owned, lease.NativeFrame); }));
         f.Render(Source.Model, 100); f.Events.Clear(); return f;
     }
@@ -213,7 +242,7 @@ internal static unsafe class HookCases
         public IReadOnlyList<PortraitOwnedSceneNativeTarget> Targets => PortraitOwnedSceneHooks.FrozenTargets(unchecked((nint)0x140000000L));
         public bool IsSourceCurrent(PortraitIdentity source) => SourceCurrent && source == Source;
         public bool IsSlotIdle(uint slot) => slot == 6 && SlotOwner == 0;
-        public bool IsSlotOwnedBy(uint slot, nint view) => slot == 6 && (SlotOwner == view || SlotOwner == 0);
+        public bool IsSlotOwnedBy(uint slot, nint view) => slot == 6 && view != 0 && SlotOwner == view;
         public bool TryReadViewSlot(nint view, out uint slot) { if (ThrowViewRead) throw new InvalidOperationException("observer failed"); return Views.TryGetValue(view, out slot); }
     }
     sealed class FakeFactory(Fixture fixture) : IPortraitOwnedSceneHookFactory

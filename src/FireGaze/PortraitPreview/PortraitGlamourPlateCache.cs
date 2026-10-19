@@ -71,7 +71,7 @@ internal sealed class PortraitGlamourPlateCache : IDisposable
                 file.Write(bytes);
                 file.Flush(true);
             }
-            if (File.Exists(path)) File.Replace(temporary, path, null);
+            if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
             else File.Move(temporary, path);
             return true;
         }

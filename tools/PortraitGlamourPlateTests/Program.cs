@@ -82,6 +82,39 @@ Case("cache writes immediately and preserves corrupt originals",()=>{
   var target=Path.GetFullPath(directory);var root=Path.GetFullPath(Path.GetTempPath());if(target.StartsWith(root,StringComparison.OrdinalIgnoreCase)&&Path.GetFileName(target).StartsWith("firegaze-glamour-plate-",StringComparison.Ordinal)&&Directory.Exists(target))Directory.Delete(target,true);
  }
 });
+Case("template cache retains the previous complete generation and preserves it after corruption",()=>{
+ var directory=Path.Combine(Path.GetTempPath(),"firegaze-glamour-plate-"+Guid.NewGuid().ToString("N"));
+ try{
+  var path=Path.Combine(directory,PortraitGlamourPlateCache.FileName);var backup=path+".bak";
+  var catalog=Catalog();catalog.ActivateCharacter(owner);byte[] secondGeneration;
+  using(var cache=Cache(directory)){
+   cache.Load(catalog,out _);catalog.ApplyRead(owner,now,Pages());
+   Check(cache.QueueIfNeeded(catalog)&&cache.FlushAsync().GetAwaiter().GetResult()&&!File.Exists(backup),"first template save has no fabricated prior generation");
+   var firstGeneration=File.ReadAllBytes(path);
+   catalog.ApplyRead(owner,now.AddSeconds(1),Pages(456));
+   Check(cache.QueueIfNeeded(catalog)&&cache.FlushAsync().GetAwaiter().GetResult(),"second complete template generation commits");
+   secondGeneration=File.ReadAllBytes(path);
+   Check(File.Exists(backup)&&File.ReadAllBytes(backup).SequenceEqual(firstGeneration),"template replacement preserves the exact prior complete generation");
+   catalog.ApplyRead(owner,now.AddSeconds(2),Pages(567));
+   Check(cache.QueueIfNeeded(catalog)&&cache.FlushAsync().GetAwaiter().GetResult()&&File.Exists(backup)&&File.ReadAllBytes(backup).SequenceEqual(secondGeneration),"third template save rotates a single backup to the second generation");
+  }
+  var recovery=Catalog();recovery.ActivateCharacter(owner);
+  Check(File.Exists(backup)&&recovery.ImportJSON(File.ReadAllText(backup))&&recovery.BuildView(now).Plates.Count==20
+   &&recovery.BuildView(now).Plates[0].Pieces[2].ItemID==456&&recovery.BuildView(now).Plates[19].Pieces[11].Stain1==7,"template backup independently reloads all twenty plates and both dye channels");
+  File.WriteAllText(path,"broken primary");
+  using(var refused=Cache(directory)){
+   Check(!refused.Load(catalog,out _)&&refused.IsReadOnly,"corrupt template primary is read-only despite a valid backup");
+   catalog.ApplyRead(owner,now.AddSeconds(3),Pages(678));
+   Check(!refused.QueueIfNeeded(catalog)&&refused.FlushAsync().GetAwaiter().GetResult()&&File.ReadAllText(path)=="broken primary"
+    &&File.Exists(backup)&&File.ReadAllBytes(backup).SequenceEqual(secondGeneration),"fresh template observations preserve both corrupt primary and existing valid backup");
+  }
+  var preserved=Catalog();preserved.ActivateCharacter(owner);
+  Check(File.Exists(backup)&&preserved.ImportJSON(File.ReadAllText(backup))&&preserved.BuildView(now).Plates[0].Pieces[2].ItemID==456,"template backup remains independently readable after primary corruption");
+  Check(Directory.GetFiles(directory).Length==2,"template rotation retains only the primary and one bounded backup");
+ }finally{
+  var target=Path.GetFullPath(directory);var root=Path.GetFullPath(Path.GetTempPath());if(target.StartsWith(root,StringComparison.OrdinalIgnoreCase)&&Path.GetFileName(target).StartsWith("firegaze-glamour-plate-",StringComparison.Ordinal)&&Directory.Exists(target))Directory.Delete(target,true);
+ }
+});
 Case("failed disk write retries the same unchanged content revision",()=>{
  var directory=Path.Combine(Path.GetTempPath(),"firegaze-glamour-plate-"+Guid.NewGuid().ToString("N"));
  try{
