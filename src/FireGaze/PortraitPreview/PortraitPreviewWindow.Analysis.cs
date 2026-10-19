@@ -51,16 +51,16 @@ internal sealed partial class PortraitPreviewWindow
             if (!string.IsNullOrEmpty(analysis.Error)) ImGui.TextWrapped("分析暂时不可用，请重试。");
             if (analysis.CurrentResult is { } result)
             {
-                ImGui.TextDisabled($"{result.Width} × {result.Height} · 有效像素 {result.VisiblePixels:N0}");
+                ImGui.TextDisabled($"图像尺寸：{result.Width} × {result.Height}");
                 DrawHistogram("明暗分布", result.Luma, FireGazePalette.Text);
                 DrawHistogram("红", result.Red, new Vector4(.95f, .45f, .45f, 1));
                 DrawHistogram("绿", result.Green, new Vector4(.45f, .85f, .55f, 1));
                 DrawHistogram("蓝", result.Blue, new Vector4(.45f, .65f, .95f, 1));
                 ImGui.TextUnformatted($"暗部截断 {result.BlackClipFraction:P1} · 高光截断 {result.WhiteClipFraction:P1}");
-                ImGui.TextDisabled("按图像编码值统计，透明边缘不参与；不是物理测光。");
+                ImGui.TextDisabled("透明区域不计入统计。明暗分布仅供画面参考。");
                 ImGui.Separator();
-                ImGui.TextUnformatted("显著区域（估计）");
-                ImGui.TextWrapped("基于局部反差与边缘的提示，供检查哪些元素较醒目；不代表真实眼动或第一眼。");
+                ImGui.TextUnformatted("醒目区域参考");
+                ImGui.TextWrapped("提示画面中较醒目的区域，帮助检查主体是否突出；不预测真实观看顺序。");
                 DrawAttentionEstimate(result);
             }
             if (analysisPreview is { } compared && analysis.CurrentResult is not null)
@@ -203,6 +203,6 @@ internal sealed partial class PortraitPreviewWindow
             var maximum = minimum + new Vector2(region.Width / (float)result.Width, region.Height / (float)result.Height) * fit.Size;
             draw.AddRect(minimum, maximum, ImGui.GetColorU32(FireGazePalette.Warn), 2 * Scale, ImDrawFlags.None, 2 * Scale);
         }
-        if (result.Hotspots.Count == 0) ImGui.TextDisabled("当前画面没有明显的局部反差热点。");
+        if (result.Hotspots.Count == 0) ImGui.TextDisabled("当前画面没有明显突出的区域。");
     }
 }

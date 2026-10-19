@@ -24,8 +24,8 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawLibraryToolbar()
     {
         var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        ContinueToolbar(right, ImGui.CalcTextSize("收藏当前").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("收藏当前"))
+        ContinueToolbar(right, ImGui.CalcTextSize("收藏当前肖像").X + ImGui.GetStyle().FramePadding.X * 2);
+        if (ImGui.Button("收藏当前肖像"))
         {
             feature.SaveFavorite($"肖像 {DateTime.Now:yyyy-MM-dd HH:mm:ss}", []);
             showFavorites = true;
@@ -38,8 +38,8 @@ internal sealed partial class PortraitPreviewWindow
         if (ImGui.Button("分析")) showAnalysis = true;
         ContinueToolbar(right, ImGui.CalcTextSize("主光方向").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("主光方向")) showLight = true;
-        ContinueToolbar(right, ImGui.CalcTextSize("空间灯光").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("空间灯光")) showSpaceLight = true;
+        ContinueToolbar(right, ImGui.CalcTextSize("取景与灯光").X + ImGui.GetStyle().FramePadding.X * 2);
+        if (ImGui.Button("取景与灯光")) showSpaceLight = true;
         ContinueToolbar(right, ImGui.CalcTextSize("色彩曲线").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("色彩曲线")) { feature.SetLiveCaptureScope(PortraitImageScope.Portrait); showLightingFit = true; }
     }
@@ -64,7 +64,7 @@ internal sealed partial class PortraitPreviewWindow
             return;
         }
 
-        ImGui.TextWrapped("收藏保存完整的本地预览快照。它不保存游戏肖像，也不会改变真实装备。");
+        ImGui.TextWrapped("把满意的预览效果加入收藏，之后可再载入。本地收藏不会保存到游戏肖像。");
         ImGui.SetNextItemWidth(-1);
         ImGui.InputTextWithHint("###PortraitFavoriteName", "收藏名称", ref favoriteName, 121);
         ImGui.SetNextItemWidth(-1);
@@ -105,7 +105,7 @@ internal sealed partial class PortraitPreviewWindow
 
         var visible = PortraitLibraryPresentation.Filter(feature.Favorites, favoriteSearch, favoriteTagFilter);
         if (feature.Favorites.Count == 0)
-            ImGui.TextDisabled("还没有收藏。满意时保存当前肖像，之后可从这里恢复。");
+            ImGui.TextDisabled("还没有收藏。点击「收藏当前肖像」，保留满意的预览效果。");
         else if (visible.Count == 0)
             ImGui.TextDisabled("没有符合条件的收藏。");
         else

@@ -21,7 +21,7 @@ internal sealed partial class PortraitPreviewWindow
     {
         if (!showSpaceLight) return;
         ImGui.SetNextWindowSizeConstraints(new Vector2(480, 380) * Scale, new Vector2(900, 780) * Scale);
-        if (!ImGui.Begin("空间灯光参照###FireGazePortraitLightingSpace", ref showSpaceLight))
+        if (!ImGui.Begin("取景与灯光示意###FireGazePortraitLightingSpace", ref showSpaceLight))
         {
             ImGui.End();
             return;
@@ -51,7 +51,7 @@ internal sealed partial class PortraitPreviewWindow
             lightingSpaceBinding = binding;
         }
 
-        ImGui.TextWrapped("在这个参照空间中拖动相机和主光，调整结果会写回当前肖像预览。人物容器与光点是取景参考；游戏原生仍只有主光方向和环境光。");
+        ImGui.TextWrapped("在示意图中调整取景与主光方向，结果同步到肖像。角色外观请以肖像窗口为准。");
         ImGui.TextDisabled("左键拖动相机 · 滚轮推拉 · 右键拖动主光");
         var available = ImGui.GetContentRegionAvail();
         var viewport = new Vector2(MathF.Max(280, available.X), MathF.Max(220, MathF.Min(available.Y - 112 * Scale, 480 * Scale)));
@@ -74,7 +74,6 @@ internal sealed partial class PortraitPreviewWindow
         }
         ImGui.SameLine();
         if (ImGui.Button("主光方向")) showLight = true;
-        ImGui.TextDisabled("空间灯光每次完成一段拖动会写入一条历史记录，可撤回。");
         ImGui.End();
         if (!showSpaceLight)
         {
@@ -176,7 +175,7 @@ internal sealed partial class PortraitPreviewWindow
         if (subject.IsVisible)
             draw.AddCircleFilled(origin + subject.Screen, 4 * Scale, ImGui.GetColorU32(FireGazePalette.Text));
         draw.AddText(origin + new Vector2(12, 12) * Scale, ImGui.GetColorU32(FireGazePalette.Muted),
-            "人物容器  ·  参照空间");
+            "取景示意");
     }
 
     private void CommitLightingSpace()

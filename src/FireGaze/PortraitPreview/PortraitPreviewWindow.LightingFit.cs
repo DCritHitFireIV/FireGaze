@@ -23,7 +23,7 @@ internal sealed partial class PortraitPreviewWindow
         {
             var state = feature.LightingFit;
             var busy = state?.Busy == true;
-            ImGui.TextWrapped("调整目标色彩，由肖像的主光与环境光尝试接近。原生灯光可表达的颜色有限。");
+            ImGui.TextWrapped("设置目标色调，用主光与环境光尽量接近。部分色彩无法通过灯光还原。");
             BindLightingSubject(state);
             using (UiHelpers.Disabled(busy))
             {
@@ -39,7 +39,7 @@ internal sealed partial class PortraitPreviewWindow
             }
             var ready=state?.CanStart==true && lightingSubjectCurrent && lightingControls.Region is not null;
             using (UiHelpers.Disabled(!ready))
-                if (ImGui.Button("应用灯光") && lightingControls.Region is { } region && lightingControls.TryTarget(out var target))
+                if (ImGui.Button("匹配灯光") && lightingControls.Region is { } region && lightingControls.TryTarget(out var target))
                     feature.StartLightingFit(target!,region,state!.FixedStateKey);
             ImGui.SameLine();
             using (UiHelpers.Disabled(!busy))

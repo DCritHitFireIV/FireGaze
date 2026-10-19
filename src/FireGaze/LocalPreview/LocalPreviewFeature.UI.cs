@@ -131,7 +131,7 @@ public sealed partial class LocalPreviewFeature
         }
         ImGui.Indent();
         UiHelpers.ColoredWrapped(UiHelpers.Muted,
-            "开启后，聊天栏里的「光之战士表演起了默剧。」这整句提示会变成可点击的文字；左键点击就会让自己的角色试用该动作，对其他人不可见。关闭时，新提示保持原样，不可点击。");
+            "将新收到的情感动作提示变为可点击文字。\n例如：「光之战士表演起了默剧。」\n左键点击即可试用，仅自己可见。");
         ImGui.Unindent();
 
         if (enabled)

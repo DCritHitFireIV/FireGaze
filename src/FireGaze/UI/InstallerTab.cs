@@ -3,7 +3,7 @@ using Dalamud.Bindings.ImGui;
 namespace FireGaze.UI;
 
 /// <summary>
-///     「插件安装器」页：拦住安装器的自动刷新 + 记住列表浏览位置（两项都默认关）。
+///     「插件安装器」页：刷新时保持列表与重新打开时恢复浏览位置（两项都默认关）。
 /// </summary>
 internal sealed class InstallerTab
 {
@@ -22,7 +22,7 @@ internal sealed class InstallerTab
         repoAudit.TickIconMaintenance();
 
         var block = plugin.Config.BlockInstallerAutoRefresh;
-        if (ImGui.Checkbox("拦截打开插件管理器时的自动刷新###BlockAutoRefresh", ref block))
+        if (ImGui.Checkbox("刷新时保持浏览位置###BlockAutoRefresh", ref block))
         {
             plugin.SetBlockInstallerAutoRefresh(block);
         }
@@ -31,14 +31,14 @@ internal sealed class InstallerTab
         UiHelpers.ColoredWrapped(
             UiHelpers.Muted,
             block
-                ? "已开启：后台刷新照常进行，当前浏览位置保持不变。"
-                : "已关闭：后台刷新可能使列表回到顶部。");
+                ? "刷新期间保持当前列表与浏览位置。"
+                : "刷新时，列表可能回到顶部。");
         ImGui.Unindent();
 
         ImGui.Spacing();
 
         var remember = plugin.Config.RememberListScroll;
-        if (ImGui.Checkbox("记住看到哪里（下次打开接着看）###RememberScroll", ref remember))
+        if (ImGui.Checkbox("重新打开时恢复浏览位置###RememberScroll", ref remember))
         {
             plugin.SetRememberListScroll(remember);
         }
@@ -48,7 +48,7 @@ internal sealed class InstallerTab
         {
             UiHelpers.ColoredWrapped(
                 UiHelpers.Warn,
-                "自动刷新可能重置浏览位置。建议同时开启上方的刷新拦截。");
+                "建议同时开启「刷新时保持浏览位置」。");
         }
 
         ImGui.Unindent();
