@@ -4,6 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/UI/FireGazePalette.cs" Link="FireGazePalette.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.Analysis.cs" Link="Window.Analysis.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.Comparison.cs" Link="Window.Comparison.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAnalysisRequest.cs" Link="PortraitAnalysisRequest.cs" />

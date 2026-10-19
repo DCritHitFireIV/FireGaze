@@ -20,8 +20,9 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawLightingSpaceWindow()
     {
         if (!showSpaceLight) return;
-        ImGui.SetNextWindowSizeConstraints(new Vector2(480, 380) * Scale, new Vector2(900, 780) * Scale);
-        if (!ImGui.Begin("取景与灯光示意###FireGazePortraitLightingSpace", ref showSpaceLight))
+        FireGazeWindowPlacement.Prepare("FireGazePortraitLightingSpace", new Vector2(700, 600) * Scale, Scale, "FireGazePortraitPreview");
+        FireGazeWindowPlacement.Constrain(new Vector2(480, 380) * Scale, new Vector2(900, 780) * Scale, Scale);
+        if (!FireGazeWindowPlacement.Begin("取景与灯光示意###FireGazePortraitLightingSpace", ref showSpaceLight, "FireGazePortraitLightingSpace"))
         {
             ImGui.End();
             return;

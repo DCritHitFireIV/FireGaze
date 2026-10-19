@@ -78,7 +78,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public bool IsActive => session.IsActive;
     public PortraitLook? Current => session.Current;
     public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
-    public IReadOnlyList<string> SourceSummary => sourceSummary;
+    public IReadOnlyList<string> SourceSummary => ownedView.Character == CurrentCharacter() ? sourceSummary : [];
     public IReadOnlyList<PortraitDye> Dyes => dyes;
     public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => browser.TryGetValue(slot, out var values) ? values : [];
     public PortraitBrowserItem? GetItem(PortraitSlot slot, uint id)
@@ -160,7 +160,11 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             using (runtimeTrace.Measure("update.resolve"))
             {
                 editorAvailable = target.TryResolve(out _, out var bounds, out _);
-                if (editorAvailable) buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
+                if (editorAvailable)
+                {
+                    buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
+                    window.SetOwnerBounds(bounds);
+                }
             }
             if (!session.IsActive && window.IsOpen)
             {
@@ -183,7 +187,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private void RefreshInventory()
     {
         var capture = inventory.Capture();
-        if (capture.Character is not { } character) { owned.DeactivateCharacter(); ownedView = new(null, [], []); browser = []; return; }
+        if (capture.Character is not { } character) { owned.DeactivateCharacter(); ownedView = new(null, [], []); sourceSummary = []; retainerRosterView = null; browser = []; return; }
         owned.ActivateCharacter(character);
         foreach (var source in capture.Sources)
         {
@@ -195,23 +199,11 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         // by the worker, so an unchanged subsequent batch also retries a previous disk failure.
         QueueOwnedCacheIfNeeded();
         ownedView = owned.BuildView(DateTimeOffset.UtcNow);
+        retainerRosterView = capture.RetainerRoster;
         var known = ownedView.Items.Select(item => item.ItemID).Concat(Current?.Pieces.Take(12).Select(piece => piece.ItemID) ?? []).Distinct();
         metadata = known.Where(equipment.ContainsKey).ToDictionary(id => id, id => BrowserItem(equipment[id]));
         foreach (var retainer in capture.Retainers) retainerDisplayNames[retainer.RetainerID] = retainer.Name;
-        sourceSummary = ownedView.Sources.Select(source =>
-        {
-            var name = SourceName(source.Source);
-            if (source.Source.RetainerID != 0 && retainerDisplayNames.TryGetValue(source.Source.RetainerID, out var retainerName))
-                name = (source.Source.Kind == OwnedSourceKind.RetainerEquipped ? "雇员装备 · " : "雇员背包 · ") + retainerName;
-            var state = source.Status switch
-            {
-                OwnedReadStatus.Current => "已读取",
-                OwnedReadStatus.PossiblyStale => "记录可能过期",
-                _ => "尚未读取",
-            };
-            var readAt = source.ReadAt is { } time ? $" · {time.ToLocalTime():MM-dd HH:mm}" : "";
-            return $"{name}：{state}（{source.OwnedItemCount}）{readAt} · {source.Reason}";
-        }).ToArray();
+        sourceSummary = PortraitEquipmentSourceSummary.Build(ownedView, retainerRosterView).ToArray();
         var next = new Dictionary<PortraitSlot, PortraitBrowserItem[]>();
         foreach (var slot in Enum.GetValues<PortraitSlot>())
         {

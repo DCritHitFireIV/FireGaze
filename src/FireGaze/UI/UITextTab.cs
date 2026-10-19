@@ -1190,7 +1190,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(660, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.pendingUpload = null;
@@ -1736,7 +1736,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(660, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.pendingCloudApply = null;
@@ -2336,7 +2336,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(600, 0), new Vector2(780, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.feedbackOpen = false;
@@ -2526,7 +2526,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(560, 0), new Vector2(660, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             // 被 Esc / 点到外面关掉 = 取消（下次点「一键汉化」再问）
@@ -2878,7 +2878,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(520, 0), new Vector2(620, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.notes[pending.Entry.InternalName] = new RowNote { Kind = NoteKind.Info, Text = "已取消，没有开始翻译。" };
@@ -3049,7 +3049,7 @@ internal sealed partial class UITextTab
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(480, 0), new Vector2(620, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(660, 440));
         if (!ImGui.BeginPopupModal(Name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             this.pendingRestore = null;

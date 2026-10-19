@@ -41,6 +41,7 @@ internal sealed class OwnedEquipmentCatalog
     public void RegisterSource(OwnedSourceKey source)
     {
         ValidateSource(source);
+        if (!OwnedSourcePolicy.IsSupported(source.Kind)) return;
         var sources = ActiveSources();
         if (!sources.ContainsKey(source)) sources[source] = new();
     }
@@ -51,6 +52,7 @@ internal sealed class OwnedEquipmentCatalog
         if (active != character) return false;
         ValidateCharacter(character);
         ValidateSource(source);
+        if (!OwnedSourcePolicy.IsSupported(source.Kind)) return false;
         var sources = ActiveSources();
         if (sources.TryGetValue(source, out var prior) && prior.ReadAt > readAt) return false;
         var equipment = Normalize(records);
@@ -66,6 +68,7 @@ internal sealed class OwnedEquipmentCatalog
     {
         if (active != character) return false;
         ValidateSource(source);
+        if (!OwnedSourcePolicy.IsSupported(source.Kind)) return false;
         RegisterSource(source);
         var snapshot = ActiveSources()[source];
         snapshot.Unavailable = true;
@@ -116,25 +119,26 @@ internal sealed class OwnedEquipmentCatalog
     /// <summary>Parse and validate into a replacement map first. Bad cache input cannot erase live observations.</summary>
     public bool ImportJSON(string jsonText)
     {
-        if (!TryReadJSON(jsonText, out var replacement, out _)) return false;
+        if (!TryReadJSON(jsonText, out var replacement, out _, out _)) return false;
         characters = replacement;
         if (active is { } key && !characters.ContainsKey(key.ContentID)) characters[key.ContentID] = [];
         return true;
     }
 
     /// <summary>Validate without changing live observations, so disk migration can commit first.</summary>
-    internal bool PrepareImportJSON(string jsonText, out string currentJSON, out bool legacy)
+    internal bool PrepareImportJSON(string jsonText, out string currentJSON, out bool legacy, out bool retiredSources)
     {
         currentJSON = string.Empty;
-        if (!TryReadJSON(jsonText, out var replacement, out legacy)) return false;
+        if (!TryReadJSON(jsonText, out var replacement, out legacy, out retiredSources)) return false;
         currentJSON = Serialize(replacement);
         return true;
     }
 
-    private bool TryReadJSON(string jsonText, out Dictionary<ulong, Dictionary<OwnedSourceKey, SourceSnapshot>> replacement, out bool legacy)
+    private bool TryReadJSON(string jsonText, out Dictionary<ulong, Dictionary<OwnedSourceKey, SourceSnapshot>> replacement, out bool legacy, out bool retiredSources)
     {
         replacement = [];
         legacy = false;
+        retiredSources = false;
         if (jsonText is null || jsonText.Length > 16_000_000) return false;
         try
         {
@@ -164,6 +168,7 @@ internal sealed class OwnedEquipmentCatalog
                 {
                     if (source is null || source.Items is null || (source.ReadAt is null && source.Items.Count != 0)) return false;
                     ValidateSource(source.Source);
+                    if (!OwnedSourcePolicy.IsSupported(source.Source.Kind)) { retiredSources = true; continue; }
                     if (!sources.TryAdd(source.Source, new()
                     {
                         ReadAt = source.ReadAt,

@@ -16,4 +16,4 @@
  <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
  <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
  </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightInputTrace.cs" /></ItemGroup></Project>

@@ -194,8 +194,19 @@ internal sealed class UITextEditorWindow : Window
         ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
     }
 
+    public override void PreDraw()
+    {
+        var scale = Dalamud.Interface.Utility.ImGuiHelpers.GlobalScale;
+        var placement = FireGazeWindowPlacement.Prepare("FireGazeUITextEditor", new System.Numerics.Vector2(980, 640) * scale, scale, "FireGaze");
+        Size = placement.Size / scale;
+        SizeCondition = ImGuiCond.Appearing;
+        var maximum = ImGui.GetMainViewport().WorkSize / scale;
+        SizeConstraints = new WindowSizeConstraints { MinimumSize = System.Numerics.Vector2.Min(new(640, 420), maximum), MaximumSize = maximum };
+    }
+
     public override void Draw()
     {
+        FireGazeWindowPlacement.Remember("FireGazeUITextEditor");
         try
         {
             this.DrawCore();
@@ -930,7 +941,7 @@ internal sealed class UITextEditorWindow : Window
         }
 
         ImGui.SetNextWindowSizeConstraints(new Vector2(560, 0), new Vector2(720, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(720, 420));
         if (!ImGui.BeginPopupModal(name, ref this.retranslateConfirmPending, ImGuiWindowFlags.AlwaysAutoResize))
         {
             return;

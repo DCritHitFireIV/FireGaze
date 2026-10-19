@@ -119,7 +119,7 @@ internal sealed partial class UITextTab
         const string name = "确认译文操作###uit-rewrite-confirm";
         if (pending.NeedsOpen) { ImGui.OpenPopup(name); pending.NeedsOpen = false; }
         ImGui.SetNextWindowSizeConstraints(new Vector2(420, 0), new Vector2(560, float.MaxValue));
-        ImGui.SetNextWindowPos(ImGui.GetMainViewport().GetCenter(), ImGuiCond.Appearing, new Vector2(0.5f, 0.5f));
+        FireGazeWindowPlacement.PrepareModal(new Vector2(560, 420));
         if (!ImGui.BeginPopupModal(name, ImGuiWindowFlags.AlwaysAutoResize))
         {
             // 弹窗被外部关闭（最常见是 Esc）：必须复位状态，否则重翻菜单会一直禁用、TickQueue 也会停摆。

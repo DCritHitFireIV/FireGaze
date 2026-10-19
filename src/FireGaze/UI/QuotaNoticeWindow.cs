@@ -35,8 +35,17 @@ internal sealed class QuotaNoticeWindow : Window
         ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
     }
 
+    public override void PreDraw()
+    {
+        var scale = Dalamud.Interface.Utility.ImGuiHelpers.GlobalScale;
+        FireGazeWindowPlacement.Prepare("FireGazeQuotaNotice", new Vector2(600, 300) * scale, scale, "FireGaze");
+        var maximum = ImGui.GetMainViewport().WorkSize / scale;
+        SizeConstraints = new WindowSizeConstraints { MinimumSize = Vector2.Min(new(540, 0), maximum), MaximumSize = Vector2.Min(new(760, float.MaxValue), maximum) };
+    }
+
     public override void Draw()
     {
+        FireGazeWindowPlacement.Remember("FireGazeQuotaNotice");
         ImGui.PushTextWrapPos(ImGui.GetCursorPosX() + 560f);
 
         ImGui.TextWrapped("公共彩云使用共享免费额度。你也可以在「翻译设置…」中选择其他通道，填写自己申请的 key。");

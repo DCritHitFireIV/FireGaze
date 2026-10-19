@@ -103,8 +103,17 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void PollLightingFit()
     {
         if (!Plugin.Framework.IsInFrameworkUpdateThread || lightingFitSession is null) return;
-        if (!captureIsolation.LiveEnabled && !LightingFitMutationBlocked) { lightingFitView = null; return; }
+        var captureEnabled = captureIsolation.LiveEnabled;
+        if (!captureEnabled && !LightingFitMutationBlocked) { lightingFitView = null; return; }
         var wasBlocked = LightingFitMutationBlocked;
+        if (!captureEnabled)
+        {
+            // Expiry permits only conditional RGB restoration and physical task drain.
+            // Cancel before polling a completed capture, which could otherwise start a new probe.
+            lightingFitSession.Cancel();
+            lightingFitAdapter?.CancelCapturePublication();
+            lightingFitCapture?.Close();
+        }
         lightingFitCapture?.Update();
         lightingFitAdapter?.Poll();
         lightingFitSession.Poll();

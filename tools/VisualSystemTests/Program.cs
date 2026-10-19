@@ -54,9 +54,6 @@ foreach (var field in typeof(FireGazePalette).GetFields(System.Reflection.Bindin
         && color.X is >= 0 and <= 1 && color.Y is >= 0 and <= 1 && color.Z is >= 0 and <= 1,
         "semantic palette " + field.Name + " is opaque and finite");
 }
-foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover })
-    Check(MathF.Abs(background.X - background.Y) > .001f || MathF.Abs(background.Y - background.Z) > .001f,
-        "information surfaces retain a deliberate hue instead of default gray");
 foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover, FireGazePalette.Selected })
 foreach (var foreground in new[] { FireGazePalette.Text, UiHelpers.Muted, UiHelpers.Good, UiHelpers.Warn, UiHelpers.Bad, UiHelpers.Info, UiHelpers.Skip })
     Check(Contrast(foreground, background) >= 4.5, "body and status text meet contrast on every supported surface");

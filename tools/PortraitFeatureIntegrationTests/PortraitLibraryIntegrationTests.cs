@@ -146,13 +146,24 @@ internal static class PortraitLibraryIntegrationTests
         }
         using(var feature=new PortraitPreviewFeature(PathFor("owned-immediate")))
         {
-            var source=new OwnedSourceKey(OwnedSourceKind.RetainerEquipped,7);feature.ObserveOwned(source,[new(100,1,0,1,1,1)]);
+            var source=new OwnedSourceKey(OwnedSourceKind.RetainerInventory,7);feature.ObserveOwned(source,[new(100,1,0,1,1,1)]);
             check(feature.FlushOwned(),"feature persistence gate acknowledges accepted owned-cache write without waiting thirty seconds");
             var path=Path.Combine(root,"library","owned-immediate","portrait-owned-cache-v1.json");var catalog=new OwnedEquipmentCatalog(id=>id);var file=new OwnedEquipmentCacheFile(Path.GetDirectoryName(path)!);
             check(file.Load(catalog,out _),"owned inventory is durable while the feature is still open");catalog.ActivateCharacter(feature.Owner!.Value);
             check(catalog.BuildView(DateTimeOffset.Now).Items.Single().Variants.Single().Stain2==1,"immediate owned write includes full selected source dual-dye record");
             var writes=feature.OwnedWrites;feature.Advance(100);feature.ObserveOwned(source,[new(100,1,0,1,1,1)]);feature.FlushOwned();
             check(feature.OwnedWrites==writes,"unchanged feature capture refresh does not rewrite durable owned content");
+        }
+        using(var feature=new PortraitPreviewFeature(PathFor("retainer-roster-owner")))
+        {
+            var owner=feature.Owner!.Value;var readAt=DateTimeOffset.UtcNow;
+            feature.SetOwnedItems(new(owner,[],[new(new(OwnedSourceKind.RetainerInventory,11),OwnedReadStatus.Current,readAt,3,"")]),PortraitSlot.Body,[]);
+            feature.SetRetainerRoster(new(owner,new ulong[]{11,22},OwnedReadStatus.Current));
+            check(feature.SourceCharacter==owner&&feature.RetainerRoster?.RetainerIDs.Count==2&&feature.Sources.Count==1,"published roster and inventory sources share the current runtime character");
+            feature.Owner=new(99,88);
+            check(feature.RetainerRoster is null&&feature.Sources.Count==0&&feature.SourceCharacter==feature.Owner,"character switch hides prior source rows and roster before throttled native inventory polling");
+            feature.Owner=null;
+            check(feature.RetainerRoster is null&&feature.Sources.Count==0&&feature.SourceCharacter is null,"logout cannot expose previous retainer denominator or source rows");
         }
         using(var feature=new PortraitPreviewFeature(PathFor("owned-write-failure")))
         {

@@ -20,6 +20,8 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private readonly PortraitThumbnailCache cache;
     private readonly PortraitThumbnailCaptureGate gate = new();
     private readonly PortraitThumbnailTextureCache<IDalamudTextureWrap> loaded;
+    private readonly PortraitPhotoTrace photoTrace;
+    private PortraitPhotoTrace.Operation photoOperation = PortraitPhotoTrace.Operation.Silent;
     private readonly CancellationTokenSource lifetime = new();
     private readonly Dictionary<long, (string Key, PortraitEditorSnapshot? Snapshot)> records = [];
     private Task<PortraitThumbnailLayers?>? capture;
@@ -39,8 +41,9 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private long discarded;
 
     public PortraitHistoryPhotos(string path, ITextureProvider textures, ITextureReadbackProvider readback,
-        PortraitThumbnailSource source, int historyBytes)
+        PortraitThumbnailSource source, int historyBytes, Action<string>? logger = null)
     {
+        photoTrace = new(logger);
         this.textures = textures;
         this.readback = readback;
         this.source = source;
@@ -49,8 +52,12 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         PublishCacheMetadata();
         loaded = new(async key =>
         {
-            if (!cache.TryGet(key, out var image) || !PortraitThumbnailImage.IsSafeSize(image)) return null;
-            var result = await textures.CreateFromImageAsync(image, "FireGaze history thumbnail", lifetime.Token).ConfigureAwait(false);
+            var operation = photoTrace.Start(PortraitPhotoOperation.LoadedImage);
+            byte[] image = [];
+            if (!operation.Call(PortraitPhotoPhase.LoadedImageRead, () => cache.TryGet(key, out image))
+                || !PortraitThumbnailImage.IsSafeSize(image)) return null;
+            var result = await operation.CallAsync(PortraitPhotoPhase.LoadedImageUpload,
+                () => textures.CreateFromImageAsync(image, "FireGaze history thumbnail", lifetime.Token)).ConfigureAwait(false);
             if (result.Width == 160 && result.Height == 256) return result;
             result.Dispose();
             return null;
@@ -130,14 +137,15 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                     else
                     {
                         var key = ticket.StateKey;
-                        writing = Task.Run(() =>
+                        var operation = photoOperation;
+                        writing = operation.CallAsync(PortraitPhotoPhase.CacheWrite, () => Task.Run(() =>
                         {
                             int budget;
                             lock (sync) { if (disposed) return false; budget = availableBytes; }
                             var accepted = cache.SetAvailableBytes(budget) && cache.TryPut(key, bytes);
                             PublishCacheMetadata();
                             return accepted;
-                        });
+                        }));
                     }
                 }
                 catch (Exception error) { lastError = error.Message; Reject(); }
@@ -158,7 +166,11 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             }
             if (availableBytes < 84 + 1) return;
             ticket = gate.Begin();
-            if (ticket is not null) capture = source.CaptureAsync(identity, lifetime.Token);
+            if (ticket is not null)
+            {
+                photoOperation = photoTrace.Start(PortraitPhotoOperation.HistoryCapture);
+                capture = source.CaptureAsync(identity, lifetime.Token, photoOperation);
+            }
         }
     }
 
@@ -202,8 +214,9 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     {
         // Both the compositor and the visibility check own their references before Draw returns.
         using var retainedCharacter = character.CreateWrapSharingLowLevelResource();
+        var operation = photoOperation;
         var composed = await new PortraitCaptureSoftwareCompositor(textures, readback)
-            .ComposeAsync(160, 256, layers, token).ConfigureAwait(false);
+            .ComposeAsync(160, 256, layers, token, operation).ConfigureAwait(false);
         return await Encode(composed, retainedCharacter, token).ConfigureAwait(false);
     }
 
@@ -213,13 +226,17 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         using (var retainedCharacter = character.CreateWrapSharingLowLevelResource())
         using (var stream = new MemoryStream())
         {
+            var operation = photoOperation;
             // A ready native model can precede its first rendered frame. Never make an empty
             // image a permanent cache hit; keep the gate retryable until actual pixels exist.
-            var raw = await readback.GetRawImageAsync(retainedCharacter, new TextureModificationArgs { Uv1 = Vector2.One },
-                leaveWrapOpen: true, cancellationToken: token).ConfigureAwait(false);
+            var raw = await operation.CallAsync(PortraitPhotoPhase.VisibleReadback,
+                () => readback.GetRawImageAsync(retainedCharacter, new TextureModificationArgs { Uv1 = Vector2.One },
+                    leaveWrapOpen: true, cancellationToken: token)).ConfigureAwait(false);
             if (!PortraitThumbnailImage.HasVisiblePixels(raw.RawData, raw.Specification.Width, raw.Specification.Height,
                 raw.Specification.Pitch, raw.Specification.DxgiFormat)) return [];
-            await readback.SaveToStreamAsync(texture, Png, stream, leaveWrapOpen: true, leaveStreamOpen: true, cancellationToken: token).ConfigureAwait(false);
+            await operation.CallAsync(PortraitPhotoPhase.PngEncode,
+                () => readback.SaveToStreamAsync(texture, Png, stream, leaveWrapOpen: true,
+                    leaveStreamOpen: true, cancellationToken: token)).ConfigureAwait(false);
             return stream.ToArray();
         }
     }

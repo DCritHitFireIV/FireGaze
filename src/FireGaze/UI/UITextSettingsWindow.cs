@@ -37,8 +37,19 @@ internal sealed class UITextSettingsWindow : Window
         ImGui.SetNextWindowCollapsed(false, ImGuiCond.Always);
     }
 
+    public override void PreDraw()
+    {
+        var scale = Dalamud.Interface.Utility.ImGuiHelpers.GlobalScale;
+        var placement = FireGazeWindowPlacement.Prepare("FireGazeUITextSettings", new Vector2(660, 520) * scale, scale, "FireGaze");
+        Size = placement.Size / scale;
+        SizeCondition = ImGuiCond.Appearing;
+        var maximum = ImGui.GetMainViewport().WorkSize / scale;
+        SizeConstraints = new WindowSizeConstraints { MinimumSize = Vector2.Min(new(520, 320), maximum), MaximumSize = maximum };
+    }
+
     public override void Draw()
     {
+        FireGazeWindowPlacement.Remember("FireGazeUITextSettings");
         ImGui.TextWrapped("选择「一键汉化」使用的翻译通道。各通道的可用额度、速度与费用不同。");
         ImGui.Separator();
 
@@ -150,6 +161,7 @@ internal sealed class UITextSettingsWindow : Window
             ImGui.OpenPopup("连灰名单一起翻###ConfirmGrey");
         }
 
+        FireGazeWindowPlacement.PrepareModal(new Vector2(540, 300));
         if (ImGui.BeginPopupModal("连灰名单一起翻###ConfirmGrey", ref this.greyConfirmPending, ImGuiWindowFlags.AlwaysAutoResize))
         {
             ImGui.TextWrapped("翻译灰名单可能影响插件正常运行。");

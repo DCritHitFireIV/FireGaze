@@ -20,8 +20,10 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
     // Intentionally not async: acquire every independent resource reference before returning to a
     // caller which is allowed to dispose all input wrappers immediately, even while readback waits.
     public Task<IDalamudTextureWrap> ComposeAsync(int width, int height,
-        IReadOnlyList<PortraitCaptureLayer> layers, CancellationToken token = default)
+        IReadOnlyList<PortraitCaptureLayer> layers, CancellationToken token = default,
+        PortraitPhotoTrace.Operation? operation = null)
     {
+        operation ??= PortraitPhotoTrace.Operation.Silent;
         ArgumentNullException.ThrowIfNull(layers);
         token.ThrowIfCancellationRequested();
         if (!ValidDimensions(width, height, PortraitCaptureGeometry.MaximumPixels))
@@ -45,12 +47,13 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
                     || !placement.IsValid || !Finite(uv0) || !Finite(uv1))
                     throw new ArgumentException("Invalid source size or layer mapping.", nameof(layers));
                 token.ThrowIfCancellationRequested();
-                var retained = layer.Texture.CreateWrapSharingLowLevelResource();
+                var retained = operation.Call(PortraitPhotoPhase.RetainLayers,
+                    layer.Texture.CreateWrapSharingLowLevelResource, owned.Count);
                 if (ReferenceEquals(retained, layer.Texture))
                     throw new InvalidOperationException("A shared wrapper must have independent disposal ownership.");
                 owned.Add(new(retained, sourceWidth, sourceHeight, placement, uv0, uv1, layer.Tint));
             }
-            return ComposeOwnedAsync(width, height, owned, token);
+            return ComposeOwnedAsync(width, height, owned, token, operation);
         }
         catch
         {
@@ -60,7 +63,7 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
     }
 
     private async Task<IDalamudTextureWrap> ComposeOwnedAsync(int width, int height,
-        IReadOnlyList<OwnedLayer> layers, CancellationToken token)
+        IReadOnlyList<OwnedLayer> layers, CancellationToken token, PortraitPhotoTrace.Operation operation)
     {
         IDalamudTextureWrap? output = null;
         Exception? failure = null;
@@ -69,23 +72,27 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
             // Only the bounded output has a decoded float canvas. A large source remains bytes and
             // is sampled directly; finish one layer before starting the next public GPU readback.
             var canvas = new float[checked(width * height * 4)];
+            var index = 0;
             foreach (var layer in layers)
             {
                 token.ThrowIfCancellationRequested();
-                var raw = await readback.GetRawImageAsync(layer.Texture,
+                var raw = await operation.CallAsync(PortraitPhotoPhase.LayerReadback, () => readback.GetRawImageAsync(layer.Texture,
                     // Official format normalization handles compressed game UI textures. Keep
                     // full source UV/dimensions: placement, cropping and filtering happen below.
                     new TextureModificationArgs { DxgiFormat = 28, Uv0 = Vector2.Zero, Uv1 = Vector2.One },
-                    leaveWrapOpen: true, cancellationToken: token).ConfigureAwait(false);
+                    leaveWrapOpen: true, cancellationToken: token), index).ConfigureAwait(false);
                 token.ThrowIfCancellationRequested();
                 ValidateRaw(raw.Specification, raw.RawData, layer);
-                await Task.Run(() => CompositeLayer(canvas, width, height, layer,
-                    raw.Specification, raw.RawData, token), token).ConfigureAwait(false);
+                await operation.CallAsync(PortraitPhotoPhase.CpuComposite, () => Task.Run(() => CompositeLayer(canvas, width, height, layer,
+                    raw.Specification, raw.RawData, token), token), index).ConfigureAwait(false);
+                index++;
             }
-            var rgba = await Task.Run(() => Encode(canvas, token), token).ConfigureAwait(false);
+            var rgba = await operation.CallAsync(PortraitPhotoPhase.CpuEncode,
+                () => Task.Run(() => Encode(canvas, token), token)).ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
-            output = await textures.CreateFromRawAsync(new RawImageSpecification(width, height, 28, width * 4),
-                rgba, debugName: "FireGaze portrait CPU composition", cancellationToken: token).ConfigureAwait(false);
+            output = await operation.CallAsync(PortraitPhotoPhase.Upload,
+                () => textures.CreateFromRawAsync(new RawImageSpecification(width, height, 28, width * 4),
+                    rgba, debugName: "FireGaze portrait CPU composition", cancellationToken: token)).ConfigureAwait(false);
             // A provider may complete successfully after ignoring cancellation. Do not publish that
             // resource, and do not abandon its physical task (or release inputs) before completion.
             token.ThrowIfCancellationRequested();

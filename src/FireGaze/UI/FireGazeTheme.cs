@@ -63,7 +63,7 @@ internal static class FireGazeTheme
         draw();
     }
 
-    /// <summary>Warm paper surface for the portrait workspace nested inside the main information shell.</summary>
+    /// <summary>White portrait work surfaces share the main window's neutral palette.</summary>
     public static IDisposable PushPortrait() => PushPortrait(NativeStyleStack.Instance);
 
     internal static IDisposable PushPortrait(IFireGazeStyleStack stack)

@@ -3,7 +3,7 @@ using FireGaze.PortraitPreview;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
-unsafe sealed class EditorFixture : IPortraitNativeApi,IPortraitEditorNativeApi,IDisposable {
+unsafe sealed class EditorFixture : IPortraitNativeApi,IPortraitEditorNativeApi,IPortraitLightNativeApi,IDisposable {
  public AgentBannerEditor* Editor=(AgentBannerEditor*)NativeMemory.AllocZeroed((nuint)sizeof(AgentBannerEditor));
  public AgentBannerEditorState* State=(AgentBannerEditorState*)NativeMemory.AllocZeroed((nuint)sizeof(AgentBannerEditorState));
  public CharaViewPortrait* View=(CharaViewPortrait*)NativeMemory.AllocZeroed((nuint)sizeof(CharaViewPortrait));
@@ -12,6 +12,8 @@ unsafe sealed class EditorFixture : IPortraitNativeApi,IPortraitEditorNativeApi,
  public bool Active=true,BoundsAvailable=true;public bool ReturnNoEditor {get;set;}public bool ReturnNoCharacter {get;set;}public Action? OnEditorLookup {get;set;}
  public bool DeferPause {get;set;}public Action? AfterPause {get;set;}
  public Action? AfterDirectionalSet;public bool ThrowDirectionalSet;
+ public int LightSyncCalls;public short SyncedVertical,SyncedHorizontal;public bool ThrowLightSync;
+ public void SyncDirectionalAngles(AgentBannerEditorState* state,short vertical,short horizontal){LightSyncCalls++;SyncedVertical=vertical;SyncedHorizontal=horizontal;if(state!=State)throw new InvalidOperationException("wrong state");if(ThrowLightSync)throw new InvalidOperationException("sensitive sync detail");}
  public Action? AfterDirectionalColor {get;set;}public Action? AfterAmbientColor {get;set;}
  public ExportedPortraitData Data;public bool Paused,Framework=true,RejectCustomize,ThrowPose,ReplaceOnPose,ThrowCustomize,RestartPoseOnSeek,UseNativeTimelineBias=true,DeferGazeExport;public int Calls,FrameCalls,AccentCalls,VisibilityCalls,PoseCalls,PauseCalls;
  public EditorFixture(){Editor->EditorState=State;State->AgentBannerEditor=Editor;State->CharaView=View;State->OpenType=AgentBannerEditorState.EditorOpenType.Gearset;View->State=6;View->CharaViewPortraitCharacterLoaded=true;Actor->DrawData.OwnerObject=Actor;*(uint*)((byte*)Actor+0x74)=17;View->ModelData.CustomizeData.Race=1;View->ModelData.CustomizeData.Sex=1;View->ModelData.CustomizeData.Tribe=2;View->ModelData.CustomizeData.Hairstyle=4;View->PortraitCharacterData.CustomizeData=View->ModelData.CustomizeData;for(int i=0;i<View->Items.Length;i++)View->Items[i].SlotId=14;View->CharacterVisible=true;View->CameraPosition=new(1.234567f,2,3,4);View->CameraTarget=new(5,6,7,8);View->CameraYaw=2.5f;Data.BannerTimeline=12;Data.AnimationProgress=.25f;Data.Expression=7;Data.BannerBg=30;State->BannerEntry.BannerFrame=40;State->BannerEntry.BannerDecoration=50;}

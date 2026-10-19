@@ -16,7 +16,7 @@ internal static class RetainerGateTests
   Check(!gate.CanRead(bagA),"no initial evidence");gate.Observe(alice,501,all);
   Check(!gate.CanRead(bagA) && !gate.CanRead(equipA),"already-loaded old buffer not trusted");
   gate.Observe(alice,501,unloaded);Check(!gate.CanRead(bagA),"unloaded not readable");gate.Observe(alice,501,all);
-  Check(gate.CanRead(bagA) && gate.CanRead(equipA),"each container explicit reload grants current owner");
+  Check(gate.CanRead(bagA) && !gate.CanRead(equipA),"explicit reload grants inventory but never retired equipped source");
   Check(!gate.CanRead(bob,bagA),"previous frame proof cannot authorize another current character");
   Check(gate.CanRead(alice,bagA),"current identity can use its matching proof");
   Check(!gate.CanRead(bagB),"proof not shared across retainers");

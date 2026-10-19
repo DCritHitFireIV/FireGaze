@@ -24,24 +24,30 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawLibraryToolbar()
     {
         var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        ContinueToolbar(right, ImGui.CalcTextSize("收藏当前肖像").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("收藏当前肖像"))
-        {
+        ContinueToolbar(right, ImGui.CalcTextSize("收藏").X + ImGui.GetStyle().FramePadding.X * 2 + ImGui.GetFrameHeight());
+        ImGui.BeginGroup();
+        if (ImGui.Button("收藏###PortraitFavoriteCurrent"))
             feature.SaveFavorite($"肖像 {DateTime.Now:yyyy-MM-dd HH:mm:ss}", []);
-            showFavorites = true;
+        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("收藏当前预览，之后可以重新载入");
+        ImGui.SameLine(0, 0);
+        if (ImGui.ArrowButton("###PortraitFavoriteMenu", ImGuiDir.Down)) ImGui.OpenPopup("###PortraitFavoriteActions");
+        if (ImGui.BeginPopup("###PortraitFavoriteActions"))
+        {
+            if (ImGui.MenuItem("我的收藏")) showFavorites = true;
+            ImGui.EndPopup();
         }
-        ContinueToolbar(right, ImGui.CalcTextSize("收藏库").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("收藏库")) showFavorites = true;
-        ContinueToolbar(right, ImGui.CalcTextSize("投影模板").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("投影模板")) showGlamourPlates = true;
-        ContinueToolbar(right, ImGui.CalcTextSize("分析").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("分析")) showAnalysis = true;
-        ContinueToolbar(right, ImGui.CalcTextSize("主光方向").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("主光方向")) showLight = true;
-        ContinueToolbar(right, ImGui.CalcTextSize("取景与灯光").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("取景与灯光")) showSpaceLight = true;
-        ContinueToolbar(right, ImGui.CalcTextSize("色彩曲线").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("色彩曲线")) { feature.SetLiveCaptureScope(PortraitImageScope.Portrait); showLightingFit = true; }
+        ImGui.EndGroup();
+        ContinueToolbar(right, ImGui.CalcTextSize("空间参照").X + ImGui.GetStyle().FramePadding.X * 2);
+        if (ImGui.Button("空间参照")) showSpaceLight = true;
+        ContinueToolbar(right, ImGui.CalcTextSize("画面分析").X + ImGui.GetStyle().FramePadding.X * 2);
+        if (ImGui.Button("画面分析")) showAnalysis = true;
+    }
+
+    private void DrawGlamourPlateEntry()
+    {
+        if (ImGui.Button("投影模板###PortraitPlateSwitcher", new Vector2(-1, ImGui.GetFrameHeight() * 1.5f)))
+            showGlamourPlates = true;
+        ImGui.Separator();
     }
 
     private void DrawLibraryPopups()
@@ -57,8 +63,9 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawFavoritesWindow()
     {
         if (!showFavorites) return;
-        ImGui.SetNextWindowSizeConstraints(new Vector2(420, 240) * Scale, new Vector2(760, 840) * Scale);
-        if (!ImGui.Begin("肖像收藏###FireGazePortraitFavorites", ref showFavorites))
+        FireGazeWindowPlacement.Prepare("FireGazePortraitFavorites", new Vector2(540, 640) * Scale, Scale, "FireGazePortraitPreview");
+        FireGazeWindowPlacement.Constrain(new Vector2(420, 240) * Scale, new Vector2(760, 840) * Scale, Scale);
+        if (!FireGazeWindowPlacement.Begin("肖像收藏###FireGazePortraitFavorites", ref showFavorites, "FireGazePortraitFavorites"))
         {
             ImGui.End();
             return;
@@ -205,8 +212,9 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawGlamourPlatesWindow()
     {
         if (!showGlamourPlates) return;
-        ImGui.SetNextWindowSizeConstraints(new Vector2(380, 220) * Scale, new Vector2(760, 720) * Scale);
-        if (!ImGui.Begin("投影模板###FireGazePortraitGlamourPlates", ref showGlamourPlates))
+        FireGazeWindowPlacement.Prepare("FireGazePortraitGlamourPlates", new Vector2(440, 600) * Scale, Scale, "FireGazePortraitPreview");
+        FireGazeWindowPlacement.Constrain(new Vector2(380, 220) * Scale, new Vector2(760, 720) * Scale, Scale);
+        if (!FireGazeWindowPlacement.Begin("投影模板###FireGazePortraitGlamourPlates", ref showGlamourPlates, "FireGazePortraitGlamourPlates"))
         {
             ImGui.End();
             return;

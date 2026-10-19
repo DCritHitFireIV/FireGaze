@@ -46,7 +46,6 @@ internal sealed class OwnedRetainerReadGate
         {
             OwnedSourceKind.RetainerInventory => new[] { InventoryType.RetainerPage1, InventoryType.RetainerPage2, InventoryType.RetainerPage3,
                 InventoryType.RetainerPage4, InventoryType.RetainerPage5, InventoryType.RetainerPage6, InventoryType.RetainerPage7 },
-            OwnedSourceKind.RetainerEquipped => [InventoryType.RetainerEquippedItems],
             _ => [],
         };
         return required.Length > 0 && required.All(type => seenUnloaded.Contains((uint)type) && currentlyLoaded.Contains((uint)type));

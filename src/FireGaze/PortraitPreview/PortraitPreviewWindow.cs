@@ -22,6 +22,8 @@ internal interface IPortraitPreviewViewModel
     IReadOnlyList<PortraitDye> Dyes { get; }
     IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot);
     IReadOnlyList<OwnedSourceView> Sources => [];
+    OwnedCharacterKey? SourceCharacter => null;
+    OwnedRetainerRoster? RetainerRoster => null;
     string SourceGuideKey => string.Empty;
     IReadOnlyList<string> StorageLocations(uint id) => [];
     void EquipFromSources(PortraitSlot slot, uint id, IReadOnlyCollection<OwnedSourceKind> sources) => Equip(slot, id);
@@ -111,6 +113,9 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     private bool showSourceGuide;
     private readonly PortraitSourceGuideState sourceGuide = new();
     private string lastSourceOwner = "";
+    private PortraitEditorBounds? ownerBounds;
+
+    public void SetOwnerBounds(PortraitEditorBounds bounds) => ownerBounds = bounds;
 
     public PortraitPreviewWindow(IPortraitPreviewViewModel feature, IDalamudPluginInterface pluginInterface, ITextureProvider textures, PortraitHistoryPhotos? photos = null)
         : base("肖像同步预览###FireGazePortraitPreview", ImGuiWindowFlags.None)
@@ -165,13 +170,19 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     public override void PreDraw()
     {
         var bounds = PortraitWindowLayout.ForViewport(ImGui.GetMainViewport().WorkSize, ImGuiHelpers.GlobalScale);
-        Size = bounds.Preferred;
+        var scale = ImGuiHelpers.GlobalScale;
+        NearbyWindowBounds? anchor = ownerBounds is { } owner
+            ? new NearbyWindowBounds(ImGui.GetMainViewport().Pos + new Vector2(owner.X, owner.Y), new(owner.Width, owner.Height)) : null;
+        var placement = FireGazeWindowPlacement.Prepare("FireGazePortraitPreview", bounds.Preferred * scale, scale, "FireGaze", anchor);
+        Size = placement.Size / scale;
+        SizeCondition = ImGuiCond.Appearing;
         SizeConstraints = new WindowSizeConstraints { MinimumSize = bounds.Minimum, MaximumSize = bounds.Maximum };
     }
 
     public override void Draw()
     {
         if (disposed) return;
+        FireGazeWindowPlacement.Remember("FireGazePortraitPreview");
         var current = feature.Current;
         if (!feature.IsActive || current is null)
         {
@@ -206,6 +217,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var mainHeight = Math.Max(220f * Scale, ImGui.GetContentRegionAvail().Y - summaryHeight);
         var leftWidth = PortraitPreviewLayout.SideWidth(ImGui.GetContentRegionAvail().X, Scale);
         ImGui.BeginChild("###PortraitEquipment", new Vector2(leftWidth, mainHeight), false);
+        DrawGlamourPlateEntry();
         DrawSlots(current);
         ImGui.Separator();
         DrawEquipmentControls(current);
@@ -322,7 +334,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     {
         DrawSourceGuide();
         ImGui.SetNextItemWidth(-1);
-        ImGui.InputTextWithHint("###PortraitEquipmentSearch", "搜索装备名称或编号", ref search, 100);
+        ImGui.InputTextWithHint("###PortraitEquipmentSearch", "搜索装备名称", ref search, 100);
         DrawEquipmentFilters(selectedSlot == PortraitSlot.Facewear);
         var needle = search.Trim();
         var catalog = feature.GetItems(selectedSlot);

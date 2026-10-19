@@ -302,6 +302,7 @@ internal sealed partial class RepoAuditTab
             deleteRequested = false;
         }
 
+        FireGazeWindowPlacement.PrepareModal(new Vector2(600, 420));
         if (!ImGui.BeginPopupModal("确认删除仓库链接###DeleteConfirm", ImGuiWindowFlags.AlwaysAutoResize))
         {
             return;

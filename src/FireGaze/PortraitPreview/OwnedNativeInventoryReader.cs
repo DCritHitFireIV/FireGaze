@@ -7,7 +7,8 @@ namespace FireGaze.PortraitPreview;
 internal sealed record OwnedCabinetItem(uint CabinetRowID, uint ItemID);
 internal sealed record OwnedRetainerIdentity(ulong RetainerID, string Name);
 internal sealed record OwnedSourceObservation(OwnedSourceKey Source, IReadOnlyList<OwnedItemRecord>? Records, string Reason);
-internal sealed record OwnedNativeCapture(OwnedCharacterKey? Character, IReadOnlyList<OwnedSourceObservation> Sources, IReadOnlyList<OwnedRetainerIdentity> Retainers, string Reason);
+internal sealed record OwnedNativeCapture(OwnedCharacterKey? Character, IReadOnlyList<OwnedSourceObservation> Sources, IReadOnlyList<OwnedRetainerIdentity> Retainers, string Reason,
+    OwnedRetainerRoster? RetainerRoster = null);
 
 /// <summary>
 /// Read-only adapter over the installed ClientStructs. Invoke only on Framework and supply a fresh identity.
@@ -20,6 +21,7 @@ internal sealed unsafe class OwnedNativeInventoryReader(
     Func<ulong, bool>? isRetainerContainerOpen = null)
 {
     private readonly OwnedRetainerReadGate retainerLoads = new();
+    private readonly OwnedRetainerRosterState retainerRoster = new();
 
     /// <summary>Call at the start of every Framework update, including when no portrait editor is open.</summary>
     public void ObserveRetainerLoads()
@@ -29,6 +31,7 @@ internal sealed unsafe class OwnedNativeInventoryReader(
         if (character is not { AccountID: > 0, ContentID: > 0 })
         {
             retainerLoads.Observe(null, 0, new Dictionary<uint, bool>());
+            retainerRoster.Observe(null, null);
             return;
         }
         var manager = RetainerManager.Instance();
@@ -41,7 +44,7 @@ internal sealed unsafe class OwnedNativeInventoryReader(
         }
         var selectedID = selected->RetainerId;
         var loaded = new Dictionary<uint, bool>();
-        foreach (var type in Containers(OwnedSourceKind.RetainerInventory).Concat(Containers(OwnedSourceKind.RetainerEquipped)))
+        foreach (var type in Containers(OwnedSourceKind.RetainerInventory))
         {
             var container = inventory->GetInventoryContainer(type);
             // A missing pointer is unknown. Only the typed IsLoaded=false field arms freshness proof.
@@ -57,11 +60,11 @@ internal sealed unsafe class OwnedNativeInventoryReader(
     {
         if (!isFrameworkThread()) throw new InvalidOperationException("Inventory reads require the Framework thread.");
         var character = currentCharacter();
-        if (character is not { AccountID: > 0, ContentID: > 0 }) return new(null, [], [], "尚未登录角色");
+        if (character is not { AccountID: > 0, ContentID: > 0 }) { retainerRoster.Observe(null, null); return new(null, [], [], "尚未登录角色"); }
         var observations = new List<OwnedSourceObservation>();
         var retainers = new List<OwnedRetainerIdentity>();
         var inventory = InventoryManager.Instance();
-        if (inventory == null) return new(character, [], [], "物品管理器不可用");
+        if (inventory == null) return new(character, [], [], "物品管理器不可用", retainerRoster.Observe(character, null));
 
         foreach (var source in new[] { OwnedSourceKind.Equipped, OwnedSourceKind.Inventory, OwnedSourceKind.Armoury, OwnedSourceKind.Saddlebag, OwnedSourceKind.PremiumSaddlebag })
             observations.Add(ReadGroup(inventory, new(source)));
@@ -94,7 +97,8 @@ internal sealed unsafe class OwnedNativeInventoryReader(
 
         var finder = ItemFinderModule.Instance();
         var manager = RetainerManager.Instance();
-        if (manager != null && manager->IsReady)
+        var rosterReady = TryReadRetainerRoster(character.Value, (nint)manager, (nint)finder, out var rosterIDs);
+        if (rosterReady)
         {
             var activeRetainer = manager->GetActiveRetainer();
             var activeID = activeRetainer == null ? 0 : activeRetainer->RetainerId;
@@ -104,34 +108,34 @@ internal sealed unsafe class OwnedNativeInventoryReader(
                 var name = retainer.Name;
                 var length = name.IndexOf((byte)0);
                 retainers.Add(new(retainer.RetainerId, System.Text.Encoding.UTF8.GetString(length < 0 ? name : name[..length])));
-                foreach (var kind in new[] { OwnedSourceKind.RetainerInventory, OwnedSourceKind.RetainerEquipped })
+                var source = new OwnedSourceKey(OwnedSourceKind.RetainerInventory, retainer.RetainerId);
+                if (activeID != retainer.RetainerId || manager->LastSelectedRetainerId != activeID || isRetainerContainerOpen?.Invoke(activeID) != true)
+                    observations.Add(new(source, null, "雇员容器尚未打开，沿用已读取记录"));
+                else if (!retainerLoads.CanRead(character.Value, source))
+                    observations.Add(new(source, null, "尚未观察到本轮雇员容器重新加载，保留已读取记录"));
+                else
                 {
-                    var source = new OwnedSourceKey(kind, retainer.RetainerId);
-                    if (activeID != retainer.RetainerId || manager->LastSelectedRetainerId != activeID || isRetainerContainerOpen?.Invoke(activeID) != true)
-                        observations.Add(new(source, null, "雇员容器尚未打开，沿用已读取记录"));
-                    else if (!retainerLoads.CanRead(character.Value, source))
-                        observations.Add(new(source, null, "尚未观察到本轮雇员容器重新加载，保留已读取记录"));
-                    else
+                    var read = ReadGroup(inventory, source);
+                    var after = manager->GetActiveRetainer();
+                    if (after == null || after->RetainerId != activeID || manager->LastSelectedRetainerId != activeID)
+                        observations.Add(new(source, null, "读取期间雇员已切换"));
+                    else if (read.Records is { } liveRecords)
                     {
-                        var read = ReadGroup(inventory, source);
-                        var after = manager->GetActiveRetainer();
-                        if (after == null || after->RetainerId != activeID || manager->LastSelectedRetainerId != activeID)
-                            observations.Add(new(source, null, "读取期间雇员已切换"));
-                        else if (read.Records is { } liveRecords)
-                        {
-                            if (finder == null || finder->CharacterContentId != character.Value.ContentID || !finder->IsRetainerManagerReady
-                                || !finder->IsRetainerCurrent(activeID) || !finder->RetainerInventories.TryGetValue(activeID, out var keyed, false)
-                                || keyed.Value == null || !MatchesRetainerCache(kind, liveRecords, (nint)keyed.Value))
-                                observations.Add(new(source, null, "雇员物品归属尚未完成核验，沿用已读取记录"));
-                            else observations.Add(read);
-                        }
+                        if (finder == null || finder->CharacterContentId != character.Value.ContentID || !finder->IsRetainerManagerReady
+                            || !finder->IsRetainerCurrent(activeID) || !finder->RetainerInventories.TryGetValue(activeID, out var keyed, false)
+                            || keyed.Value == null || !MatchesRetainerCache(OwnedSourceKind.RetainerInventory, liveRecords, (nint)keyed.Value))
+                            observations.Add(new(source, null, "雇员物品归属尚未完成核验，沿用已读取记录"));
                         else observations.Add(read);
                     }
+                    else observations.Add(read);
                 }
             }
         }
-        if (currentCharacter() != character) return new(null, [], [], "读取期间角色已切换，已丢弃本次快照");
-        return new(character, observations.AsReadOnly(), retainers.AsReadOnly(), "");
+        if (currentCharacter() != character) { retainerRoster.Observe(null, null); return new(null, [], [], "读取期间角色已切换，已丢弃本次快照"); }
+        rosterReady = rosterReady && TryReadRetainerRoster(character.Value, (nint)manager, (nint)finder, out var rosterAfter)
+            && rosterIDs.SequenceEqual(rosterAfter);
+        var roster = retainerRoster.Observe(character, rosterReady ? rosterIDs : null);
+        return new(character, observations.AsReadOnly(), retainers.AsReadOnly(), "", roster);
     }
 
     private static OwnedSourceObservation ReadGroup(InventoryManager* manager, OwnedSourceKey source)
@@ -180,16 +184,16 @@ internal sealed unsafe class OwnedNativeInventoryReader(
 
     public static bool MatchesRetainerCache(OwnedSourceKind kind, IReadOnlyList<OwnedItemRecord> records, nint cache)
     {
-        if (cache == 0 || kind is not (OwnedSourceKind.RetainerInventory or OwnedSourceKind.RetainerEquipped)) return false;
+        if (cache == 0 || kind != OwnedSourceKind.RetainerInventory) return false;
         var ownerCache = (ItemFinderRetainerInventory*)cache;
         var cached = new Dictionary<uint, ulong>();
         var live = new Dictionary<uint, ulong>();
-        var itemIDs = kind == OwnedSourceKind.RetainerInventory ? ownerCache->ItemIds : ownerCache->EquippedItemIds;
+        var itemIDs = ownerCache->ItemIds;
         for (var index = 0; index < itemIDs.Length; index++)
         {
             var itemID = itemIDs[index] % 1_000_000;
             if (itemID == 0) continue;
-            var quantity = kind == OwnedSourceKind.RetainerInventory ? ownerCache->ItemCount[index] : 1UL;
+            var quantity = ownerCache->ItemCount[index];
             cached[itemID] = cached.GetValueOrDefault(itemID) + quantity;
         }
         foreach (var item in records)
@@ -199,6 +203,23 @@ internal sealed unsafe class OwnedNativeInventoryReader(
             live[itemID] = live.GetValueOrDefault(itemID) + item.Quantity;
         }
         return cached.Count == live.Count && cached.All(pair => live.GetValueOrDefault(pair.Key) == pair.Value);
+    }
+
+    internal static bool TryReadRetainerRoster(OwnedCharacterKey character, nint managerAddress, nint finderAddress, out IReadOnlyList<ulong> ids)
+    {
+        ids = [];
+        var manager = (RetainerManager*)managerAddress;
+        var finder = (ItemFinderModule*)finderAddress;
+        if (character is not { AccountID: > 0, ContentID: > 0 } || manager == null || !manager->IsReady
+            || finder == null || finder->CharacterContentId != character.ContentID || !finder->IsRetainerManagerReady) return false;
+        // Retainers.Length and entitlement describe capacity. Only assigned nonzero IDs describe the hired roster.
+        var assigned = new List<ulong>();
+        foreach (var retainer in manager->Retainers)
+            if (retainer.RetainerId != 0) assigned.Add(retainer.RetainerId);
+        if (assigned.Distinct().Count() != assigned.Count || !manager->IsReady || finder->CharacterContentId != character.ContentID
+            || !finder->IsRetainerManagerReady) return false;
+        ids = assigned.AsReadOnly();
+        return true;
     }
 
     private static InventoryType[] Containers(OwnedSourceKind kind) => kind switch
@@ -211,7 +232,6 @@ internal sealed unsafe class OwnedNativeInventoryReader(
         OwnedSourceKind.PremiumSaddlebag => [InventoryType.PremiumSaddleBag1, InventoryType.PremiumSaddleBag2],
         OwnedSourceKind.RetainerInventory => [InventoryType.RetainerPage1, InventoryType.RetainerPage2, InventoryType.RetainerPage3,
             InventoryType.RetainerPage4, InventoryType.RetainerPage5, InventoryType.RetainerPage6, InventoryType.RetainerPage7],
-        OwnedSourceKind.RetainerEquipped => [InventoryType.RetainerEquippedItems],
         _ => [],
     };
 }

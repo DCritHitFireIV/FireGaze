@@ -21,9 +21,10 @@ namespace Dalamud.Bindings.ImGui
 {
     internal enum ImGuiCond { FirstUseEver }
     internal enum ImDrawFlags { None }
+    internal readonly record struct FilledRectangle(Vector2 Minimum, Vector2 Maximum, uint Color);
     internal sealed class DrawList
     {
-        public void AddRectFilled(Vector2 a, Vector2 b, uint color) { }
+        public void AddRectFilled(Vector2 a, Vector2 b, uint color) => ImGui.FilledRectangles.Add(new(a, b, color));
         public void AddRect(Vector2 a, Vector2 b, uint color, float radius, ImDrawFlags flags, float thickness) { }
         public void AddImage(nint handle, Vector2 a, Vector2 b) { ImGui.LastDrawImageSize = b - a; ImGui.LastImage = handle; }
         public void AddImage(nint handle, Vector2 a, Vector2 b, Vector2 uv0, Vector2 uv1) { ImGui.LastDrawImageSize = b - a; ImGui.LastImage = handle; }
@@ -33,6 +34,7 @@ namespace Dalamud.Bindings.ImGui
     {
         public static string? Click;
         public static List<string> Texts = [];
+        public static List<FilledRectangle> FilledRectangles = [];
         public static Vector2 LastImageSize;
         public static Vector2 LastDrawImageSize;
         public static nint LastImage;
@@ -54,7 +56,11 @@ namespace Dalamud.Bindings.ImGui
         public static void SetNextItemWidth(float width) { }
         public static bool SliderFloat(string id, ref float value, float min, float max, string format) => false;
         public static DrawList GetWindowDrawList() => new();
-        public static uint GetColorU32(Vector4 color) => 0;
+        public static uint GetColorU32(Vector4 color)
+        {
+            static uint Byte(float value) => (uint)Math.Clamp((int)MathF.Round(value * 255), 0, 255);
+            return Byte(color.X) | Byte(color.Y) << 8 | Byte(color.Z) << 16 | Byte(color.W) << 24;
+        }
         public static void Dummy(Vector2 size) { }
         public static void Image(nint handle, Vector2 size) { LastImage = handle; LastImageSize = size; }
         private static bool Consume(string value) { if (Click != value) return false; Click = null; return true; }
@@ -63,12 +69,12 @@ namespace Dalamud.Bindings.ImGui
 }
 namespace FireGaze.UI
 {
-    internal static class FireGazePalette
+    internal static class FireGazeWindowPlacement
     {
-        public static Vector4 Text => Vector4.One;
-        public static Vector4 Panel => Vector4.One;
-        public static Vector4 Warn => Vector4.One;
-        public static Vector4 Focus => Vector4.One;
+        internal static bool Begin(string title, ref bool open, string id) => Dalamud.Bindings.ImGui.ImGui.Begin(title, ref open);
+        public static void Prepare(string id, Vector2 size, float scale, string ownerID) { }
+        public static void Remember(string id) { }
+        public static void Constrain(Vector2 minimum, Vector2 maximum, float scale) { }
     }
 }
 namespace FireGaze
@@ -133,6 +139,7 @@ namespace FireGaze.PortraitPreview
         private readonly PortraitHistoryPhotos? photos;
         public PortraitPreviewWindow(Model model, PortraitHistoryPhotos? photos = null) { feature = model; this.photos = photos; showAnalysis = true; }
         private static void ContinueToolbar(float right, float width) { }
+        private void OpenLightingFit() { }
         public void Dispose() { analysis.Dispose(); analysisPreview?.Dispose(); comparisonReference.Dispose(); }
     }
     internal sealed class Texture(int width, int height, nint handle) : IDalamudTextureWrap

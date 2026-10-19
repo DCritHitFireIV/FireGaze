@@ -14,7 +14,7 @@ internal static class InsStyle
     public static readonly Vector4 LikedRed = FireGazePalette.BadText;
     public static readonly Vector4 Neutral = FireGazePalette.Muted;
     public static readonly Vector4 Bright = FireGazePalette.Text;
-    // Historical helper names remain source compatible; the primary action is now the shared blue.
+    // Historical helper names remain source compatible; the primary action uses the shared neutral fill.
     public static readonly Vector4 Pink = FireGazePalette.Action;
     public static readonly Vector4 PinkHover = FireGazePalette.ActionHover;
     public static readonly Vector4 White = FireGazePalette.White;

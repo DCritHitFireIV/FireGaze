@@ -3,6 +3,8 @@ namespace FireGaze.PortraitPreview;
 internal sealed unsafe partial class PortraitPreviewFeature
 {
     private readonly PortraitLightDrag lightDrag = new();
+    private PortraitLightInputTrace? lightInputTrace;
+    private long lightInputToken;
 
     // Published detached values only. UI code never resolves or reads a native editor.
     public PortraitDirectionalLightView? DirectionalLight => session.IsActive && observedEditor is { } snapshot
@@ -14,17 +16,22 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (!CancelLightingFitForEdit()) return;
         if (lightDrag.IsActive || !lightDrag.CanBegin(token)) return;
-        nextEditorSample=DateTime.MinValue;
-        PollEditing();
-        if (!TryCaptureLight(out var identity,out var key,out var current)) return;
-        HandleHistoryBatchResult(historyBatch.Flush());
-        _=lightDrag.Begin(token,identity,key,PortraitNativeLightAngles.From(current.Composition));
+        var trace=new PortraitLightInputTrace(message=>Plugin.Log.Information(message));
+        trace.Enter(PortraitLightTraceStage.GestureBegin,()=>
+        {
+            nextEditorSample=DateTime.MinValue;
+            PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryPoll,PollEditing);
+            if (!TryCaptureLight(out var identity,out var key,out var current)) return;
+            PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryFlush,()=>HandleHistoryBatchResult(historyBatch.Flush()));
+            if (lightDrag.Begin(token,identity,key,PortraitNativeLightAngles.From(current.Composition)))
+            { lightInputTrace=trace;lightInputToken=token; }
+        });
     });
 
     public void MoveLightDrag(long token, float vertical, float horizontal)
-        => Mutate(() => MoveLightDragNow(token,vertical,horizontal));
+        => Mutate(() => TraceLightInput(token,PortraitLightTraceStage.GestureMove,()=>MoveLightDragNow(token,vertical,horizontal)));
 
-    public void EndLightDrag(long token, float vertical, float horizontal) => Mutate(() =>
+    public void EndLightDrag(long token, float vertical, float horizontal) => Mutate(() => TraceLightInput(token,PortraitLightTraceStage.GestureEnd,()=>
     {
         if (!lightDrag.Owns(token)) return;
         MoveLightDragNow(token,vertical,horizontal);
@@ -32,28 +39,37 @@ internal sealed unsafe partial class PortraitPreviewFeature
         // Capture the final real state while history still treats this as one held gesture.
         // ForHistory keeps playback from entering a lighting history record.
         nextEditorSample=DateTime.MinValue;
-        PollEditing();
+        PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryPoll,PollEditing);
         lightDrag.Cancel();
-        HandleHistoryBatchResult(historyBatch.Flush());
+        PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryFlush,()=>HandleHistoryBatchResult(historyBatch.Flush()));
         PublishHistoryNavigation();
-    });
+    }));
 
-    public void CancelLightDrag(long token) => Mutate(() =>
+    public void CancelLightDrag(long token) => Mutate(() => TraceLightInput(token,PortraitLightTraceStage.GestureCancel,()=>
     {
         if (!lightDrag.Owns(token)) return;
         nextEditorSample=DateTime.MinValue;
-        PollEditing();
+        PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryPoll,PollEditing);
         CancelLightDrag();
-        HandleHistoryBatchResult(historyBatch.Flush());
+        PortraitLightInputTrace.Run(PortraitLightTraceStage.HistoryFlush,()=>HandleHistoryBatchResult(historyBatch.Flush()));
         PublishHistoryNavigation();
-    });
+    }));
+
+    private void TraceLightInput(long token,PortraitLightTraceStage phase,Action operation)
+    {
+        if (lightDrag.Owns(token) && lightInputToken==token && lightInputTrace is { } trace) trace.Enter(phase,operation);
+        else operation();
+    }
 
     private bool TryCaptureLight(out PortraitIdentity identity, out PortraitHistoryKey key, out PortraitEditorSnapshot current)
     {
         identity=default;key=default;current=null!;
+        using var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.CaptureState);
         if (!session.IsActive || !target.CanBlockSave || !target.TryResolve(out identity,out _,out _)
-            || target.CaptureEditorState(identity) is not { } captured || GetHistoryKey(identity,captured) is not { } source) return false;
+            || target.CaptureEditorState(identity) is not { } captured || GetHistoryKey(identity,captured) is not { } source)
+        { phase.Complete();return false; }
         current=captured;key=source;
+        phase.Complete();
         return true;
     }
 

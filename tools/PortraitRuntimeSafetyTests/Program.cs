@@ -30,6 +30,8 @@ Check(isolation.TryConfigure("off", false, false), "capture can be disabled afte
 isolation.RunHistory(() => historyCalls++);
 isolation.RunLive(() => liveCalls++);
 Check(historyCalls == 2 && liveCalls == 1, "disabled capture cannot invoke a retained native callback");
+CaptureLeaseCases.Run(Check);
+LightInputTraceCases.Run(Check);
 long clock = 0;
 var messages = new List<string>();
 var trace = new PortraitPhaseTrace(messages.Add, () => clock);

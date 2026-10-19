@@ -225,6 +225,11 @@ foreach (var timing in new[] { "acquire", "copy" })
         "ignored producer cancellation cleans both source overlays and late character copy");
 }
 
+#if HAS_PHOTO_TRACE
+await PhotoTraceCases.Run(identity, Check);
+#else
+Check(false, "production source photo phase trace is missing");
+#endif
 Console.WriteLine($"{checks}/{checks} portrait thumbnail source checks passed; no game or GPU calls.");
 return 0;
 
@@ -242,7 +247,7 @@ sealed class FakeApi : IPortraitThumbnailSourceApi
     public bool Framework = true, Current = true, Missing, ReplacedOnAcquire, RejectNativeReads, DelayCopies;
     public int LayerCount = 3, Acquires, Copies, FailCopy, CancelCopy;
     public bool IgnoreCancellation, OmitFrame, DefaultOverlayUV1;
-    public Action? AfterAcquire, AfterCopy;
+    public Action? AfterAcquire, BeforeCopy, AfterCopy;
     public List<FakeTexture> Inputs = [], Outputs = [];
     private readonly TaskCompletionSource gate = new(TaskCreationOptions.RunContinuationsAsynchronously);
     public bool IsFrameworkThread { get { if (RejectNativeReads) throw new Exception("native read after await"); return Framework; } }
@@ -265,6 +270,7 @@ sealed class FakeApi : IPortraitThumbnailSourceApi
     }
     public async Task<IDalamudTextureWrap> CopyAsync(PortraitThumbnailInput input, CancellationToken token)
     {
+        BeforeCopy?.Invoke();
         Copies++;
         if (DelayCopies) await gate.Task;
         if (Copies == FailCopy) throw new InvalidOperationException("copy failure");

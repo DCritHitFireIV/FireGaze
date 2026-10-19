@@ -7,6 +7,7 @@
   <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitCaptureBridge.cs')">$(DefineConstants);HAS_BRIDGE</DefineConstants>
  </PropertyGroup>
  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs" Link="PortraitPhotoTrace.cs" />
   <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCapture*.cs" LinkBase="Source" />
   <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLive*.cs" LinkBase="Source" />
   <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="Session.cs" />

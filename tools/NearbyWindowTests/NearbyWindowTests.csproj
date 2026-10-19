@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <DefineConstants Condition="Exists('../../src/FireGaze/UI/NearbyWindowLayout.cs')">$(DefineConstants);HAS_NEARBY_WINDOW_LAYOUT</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/UI/NearbyWindowLayout.cs" Link="NearbyWindowLayout.cs" Condition="Exists('../../src/FireGaze/UI/NearbyWindowLayout.cs')" />
+    <Compile Include="../../src/FireGaze/UI/FireGazeWindowPlacement.cs" Link="FireGazeWindowPlacement.cs" />
+  </ItemGroup>
+</Project>

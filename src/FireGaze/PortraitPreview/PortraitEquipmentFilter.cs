@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace FireGaze.PortraitPreview;
 
 internal sealed record PortraitBrowserItem(
@@ -45,13 +43,12 @@ internal static class PortraitEquipmentFilter
         var sources = query.Sources is { Count: > 0 } ? query.Sources.ToHashSet() : null;
         var dyeChannels = query.DyeChannels is { Count: > 0 } ? query.DyeChannels.ToHashSet() : null;
         var search = (query.Search ?? "").Trim();
-        var idSearch = search.StartsWith('#') ? search[1..] : search;
-        var filtered = items.GroupBy(item => item.ID)
-            .Select(group => group.First() with { Sources = group.SelectMany(item => item.Sources).Distinct().ToArray() })
+        var filtered = items.Where(item => item.Sources.Length == 0 || item.Sources.Any(OwnedSourcePolicy.IsSupported))
+            .GroupBy(item => item.ID)
+            .Select(group => group.First() with { Sources = group.SelectMany(item => item.Sources).Where(OwnedSourcePolicy.IsSupported).Distinct().ToArray() })
             .Where(item => (sources is null || item.Sources.Any(sources.Contains))
                 && (dyeChannels is null || dyeChannels.Contains(item.DyeChannels))
-                && (search.Length == 0 || item.Name.Contains(search, StringComparison.OrdinalIgnoreCase)
-                    || (idSearch.Length > 0 && item.ID.ToString(CultureInfo.InvariantCulture).Contains(idSearch, StringComparison.Ordinal))));
+                && (search.Length == 0 || item.Name.Contains(search, StringComparison.OrdinalIgnoreCase)));
         return query.Sort switch
         {
             PortraitEquipmentSort.ItemLevelAscending => filtered.OrderBy(item => item.ItemLevel)

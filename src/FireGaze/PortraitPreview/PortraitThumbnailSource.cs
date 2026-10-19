@@ -80,11 +80,13 @@ internal sealed class PortraitThumbnailSource
     internal PortraitThumbnailSource(IPortraitThumbnailSourceApi api) => this.api = api;
 
     public async Task<PortraitThumbnailLayers?> CaptureAsync(PortraitIdentity identity,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, PortraitPhotoTrace.Operation? operation = null)
     {
+        operation ??= PortraitPhotoTrace.Operation.Silent;
         cancellationToken.ThrowIfCancellationRequested();
         if (!identity.IsValid || !api.IsFrameworkThread || !api.IsCurrent(identity)) return null;
-        if (!api.TryAcquire(identity, out var inputs) || inputs is null) return null;
+        PortraitThumbnailInputs? inputs = null;
+        if (!operation.Call(PortraitPhotoPhase.SourceAcquire, () => api.TryAcquire(identity, out inputs)) || inputs is null) return null;
         using (inputs)
         {
             if (!api.IsCurrent(identity)) return null;
@@ -93,7 +95,8 @@ internal sealed class PortraitThumbnailSource
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                character = await api.CopyAsync(inputs.Character, cancellationToken).ConfigureAwait(false);
+                character = await operation.CallAsync(PortraitPhotoPhase.SourceCopy,
+                    () => api.CopyAsync(inputs.Character, cancellationToken)).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 frame = inputs.TakeFrame();
                 accent = inputs.TakeAccent();

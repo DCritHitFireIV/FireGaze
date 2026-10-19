@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 
 namespace FireGaze.PortraitPreview;
@@ -43,15 +44,18 @@ internal sealed class OwnedEquipmentCacheFile
                 var bytes = original.AsSpan();
                 if (bytes.StartsWith(preamble)) bytes = bytes[preamble.Length..];
                 var jsonText = new UTF8Encoding(false, true).GetString(bytes);
-                if (!catalog.PrepareImportJSON(jsonText, out var currentJSON, out var legacy))
+                if (!catalog.PrepareImportJSON(jsonText, out var currentJSON, out var legacy, out var retiredSources))
                 {
                     reason = "拥有装备缓存无效，保留原缓存及本次已读取记录";
                     return false;
                 }
-                if (legacy)
+                if (legacy || retiredSources)
                 {
-                    PreserveLegacyBackup(original);
-                    if (!WriteAtomic(currentJSON, out reason, original)) return false;
+                    // A user may temporarily return to an older build and later bring back a changed v2 cache.
+                    // Keep each retired-source recovery copy immutable without blocking the next safe cleanup.
+                    var backupSuffix = legacy ? ".v1.bak" : $".retainer-equipped.{Convert.ToHexString(SHA256.HashData(original))}.bak";
+                    var backupPath = PreserveMigrationBackup(original, backupSuffix);
+                    if (!WriteAtomic(currentJSON, out reason, original, backupPath)) return false;
                 }
                 if (!catalog.ImportJSON(currentJSON)) return false;
                 writesAllowed = true;
@@ -93,23 +97,25 @@ internal sealed class OwnedEquipmentCacheFile
             // Validate the complete detached structure without consulting native/game data.
             // A queued v1 snapshot must never downgrade a successfully migrated primary.
             var validator = new OwnedEquipmentCatalog(itemID => itemID);
-            if (!validator.PrepareImportJSON(jsonText, out _, out var legacy) || legacy) return false;
-            return WriteAtomic(jsonText, out reason);
+            if (!validator.PrepareImportJSON(jsonText, out var currentJSON, out var legacy, out _) || legacy) return false;
+            // Detached observations queued by an older build must not bring retired sources back.
+            return WriteAtomic(currentJSON, out reason);
         }
     }
 
-    private void PreserveLegacyBackup(byte[] original)
+    private string PreserveMigrationBackup(byte[] original, string suffix)
     {
-        var backupPath = filePath + ".v1.bak";
+        var backupPath = filePath + suffix;
         if (!File.Exists(backupPath)) migrationIO.CreateBackup(backupPath, original);
         if (!FileMatches(backupPath, original))
-            throw new IOException("Legacy recovery copy does not match the original cache.");
+            throw new IOException("Recovery copy does not match the original cache.");
+        return backupPath;
     }
 
     private static bool FileMatches(string path, byte[] expected)
         => new FileInfo(path).Length == expected.Length && File.ReadAllBytes(path).AsSpan().SequenceEqual(expected);
 
-    private bool WriteAtomic(string jsonText, out string reason, byte[]? migrationOriginal = null)
+    private bool WriteAtomic(string jsonText, out string reason, byte[]? migrationOriginal = null, string? migrationBackupPath = null)
     {
         string? temporary = null;
         reason = "拥有装备缓存暂时无法保存，保留原缓存";
@@ -126,7 +132,7 @@ internal sealed class OwnedEquipmentCacheFile
             }
             // Verify after staging has finished, immediately before replacing the primary.
             // A changed/disappeared source or recovery copy cannot authorize migration.
-            if (migrationOriginal is not null && (!FileMatches(filePath, migrationOriginal) || !FileMatches(filePath + ".v1.bak", migrationOriginal)))
+            if (migrationOriginal is not null && (migrationBackupPath is null || !FileMatches(filePath, migrationOriginal) || !FileMatches(migrationBackupPath, migrationOriginal)))
             {
                 reason = "拥有装备缓存或备份在迁移期间发生变化，未覆盖";
                 return false;

@@ -64,12 +64,13 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawHistoryPopup()
     {
         if (!showHistory) return;
+        FireGazeWindowPlacement.Prepare("FireGazePortraitHistory", new Vector2(460, 570) * Scale, Scale, "FireGazePortraitPreview");
         var workArea = ImGui.GetMainViewport().WorkSize;
         ImGui.SetNextWindowSizeConstraints(Vector2.Zero,
             Vector2.Min(PortraitPopupLayout.MaximumSize(workArea, Scale), new Vector2(960, 1040) * Scale));
-        ImGui.SetNextWindowSize(PortraitPopupLayout.PreferredSize(new Vector2(460, 570) * Scale, workArea, Scale), ImGuiCond.FirstUseEver);
-        if (ImGui.Begin("肖像历史记录###FireGazePortraitHistory", ref showHistory))
+        if (FireGazeWindowPlacement.Begin("肖像历史记录###FireGazePortraitHistory", ref showHistory, "FireGazePortraitHistory"))
         {
+
             if (DrawTab("操作记录", !historyPhotosView, true) && historyPhotosView)
             { historyPhotosView = false; historyViewChanged = true; }
             ImGui.SameLine();

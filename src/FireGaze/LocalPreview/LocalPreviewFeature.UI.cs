@@ -151,6 +151,7 @@ public sealed partial class LocalPreviewFeature
         var visible = enableConfirmationVisible;
         if (visible && !ImGui.IsPopupOpen(name)) ImGui.OpenPopup(name);
         ImGui.SetNextWindowSize(new Vector2(ImGui.GetFontSize() * 34, 0), ImGuiCond.Appearing);
+        FireGazeWindowPlacement.PrepareModal(new Vector2(ImGui.GetFontSize() * 34, 300));
         if (!ImGui.BeginPopupModal(name, ref visible, ImGuiWindowFlags.AlwaysAutoResize))
         {
             if (!visible && enableConfirmationVisible) CompleteEnableConfirmation(false);

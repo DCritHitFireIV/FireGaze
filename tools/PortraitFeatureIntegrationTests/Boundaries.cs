@@ -52,11 +52,18 @@ namespace FireGaze
     internal static class Plugin
     {
         public static IntegrationKeys Keys { get; } = new();
+        public static IntegrationLogger Log { get; } = new();
         public static IntegrationFramework Framework { get; } = new();
         public static IntegrationObjects Objects { get; } = new();
         public static Dalamud.Plugin.Services.IDataManager DataManager => throw new InvalidOperationException("Live data initialization is outside this integration boundary.");
     }
     internal sealed class IntegrationFramework { public bool IsInFrameworkUpdateThread = true; }
+    internal sealed class IntegrationLogger
+    {
+        public List<string> Messages { get; } = [];
+        public bool Throw { get; set; }
+        public void Information(string message) { if (Throw) throw new IOException("logging unavailable"); Messages.Add(message); }
+    }
     internal sealed class IntegrationObjects { public IntegrationPlayer? LocalPlayer { get; set; } = new(); }
     internal sealed class IntegrationPlayer { public IntegrationName Name { get; } = new(); }
     internal sealed class IntegrationName { public string TextValue { get; set; } = "收藏来源角色"; }
@@ -247,6 +254,7 @@ namespace FireGaze.PortraitPreview
         public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => browser.GetValueOrDefault(slot) ?? [];
         public void SetOwnedItems(OwnedEquipmentView view,PortraitSlot slot,PortraitBrowserItem[] items) {ownedView=view;browser[slot]=items;}
         public void SetRetainerName(ulong id,string name) => retainerDisplayNames[id]=name;
+        public void SetRetainerRoster(OwnedRetainerRoster? roster) => retainerRosterView=roster;
         public void SetLibraryValidation(IReadOnlyList<PortraitValidationItem>? items = null) => editorValidation = new(new PortraitValidationData(items ?? [], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]));
         public void SetAppearance(PortraitAppearanceCatalog catalog) => appearance = catalog;
         public void SetPlateObservations(PortraitGlamourPlate[] plates) { glamourPlates.ActivateCharacter(Owner!.Value);glamourPlates.ApplyRead(Owner.Value,testClock,plates);glamourPlateView=glamourPlates.BuildView(testClock); }

@@ -5,6 +5,23 @@ static class DirectionalLightCases
     public static void Run(string root, Action<bool,string> check)
     {
 #if LIGHT63
+        using (var f=Open(root,"trace"))
+        {
+            var messages=FireGaze.Plugin.Log.Messages;messages.Clear();
+            f.Sample();
+            check(messages.Count==0,"ordinary history sampling cannot arm explicit light input tracing");
+            f.BeginLightDrag(101);f.EndLightDrag(101,20,30);
+            foreach(var phase in new[]{"GestureBegin","GestureEnd","CaptureState","HistoryPoll","HistoryFlush"})
+                check(messages.Any(x=>x.EndsWith(phase+" begin")) && messages.Any(x=>x.EndsWith(phase+" end")),
+                    "explicit light input links balanced production "+phase+" trace");
+            var count=messages.Count;f.Sample();f.EndLightDrag(101,40,50);
+            check(messages.Count==count,"normal sample and duplicate release do not retain ambient light tracing");
+            FireGaze.Plugin.Log.Throw=true;
+            try { f.BeginLightDrag(102);f.EndLightDrag(102,40,50); }
+            finally { FireGaze.Plugin.Log.Throw=false; }
+            check(f.Native.Snapshot.Composition.DirectionalVerticalAngle==40 && f.Native.Snapshot.Composition.DirectionalHorizontalAngle==50,
+                "unavailable plugin logger cannot stop a production feature direction gesture");
+        }
         // Removing same-field ownership checks would overwrite another plugin's latest edit.
         using (var f = Open(root, "conflict"))
         {

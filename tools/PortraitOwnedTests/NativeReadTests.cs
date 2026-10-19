@@ -40,12 +40,15 @@ internal static unsafe class NativeReadTests
    container->Items=items;items[0].ItemId=0;items[0].Quantity=0;
    Check(OwnedNativeInventoryReader.TryReadLoadedContainers(source,[(nint)container],out read,out _) && read.Count==0,"loaded empty explicit");
    Check(!OwnedNativeInventoryReader.TryReadLoadedContainers(source,[],out _,out _),"zero containers not authoritative");
+   container->Type=InventoryType.RetainerEquippedItems;container->Size=2;items[0].ItemId=234;items[0].Quantity=1;
+   items[0].Container=InventoryType.RetainerEquippedItems;items[0].Slot=0;
+   Check(!OwnedNativeInventoryReader.TryReadLoadedContainers(new(OwnedSourceKind.RetainerEquipped,501),[(nint)container],out read,out _) && read.Count==0,"retired retainer equipped containers are never read");
   } finally {NativeMemory.Free(container);NativeMemory.Free(items);}
   var cache=(ItemFinderRetainerInventory*)NativeMemory.AllocZeroed((nuint)sizeof(ItemFinderRetainerInventory));
   try {
    cache->ItemIds[0]=123;cache->ItemCount[0]=2;cache->EquippedItemIds[0]=234;
    Check(OwnedNativeInventoryReader.MatchesRetainerCache(OwnedSourceKind.RetainerInventory,[new(123,10000,0,2)],(nint)cache),"retainer keyed bag cache matches");
-   Check(OwnedNativeInventoryReader.MatchesRetainerCache(OwnedSourceKind.RetainerEquipped,[new(234,11000,0)],(nint)cache),"retainer keyed equipped cache matches");
+   Check(!OwnedNativeInventoryReader.MatchesRetainerCache(OwnedSourceKind.RetainerEquipped,[new(234,11000,0)],(nint)cache),"retired retainer equipped cache cannot authorize reads");
    Check(!OwnedNativeInventoryReader.MatchesRetainerCache(OwnedSourceKind.RetainerInventory,[new(123,10000,0,1)],(nint)cache),"retainer quantity mismatch rejected");
    Check(!OwnedNativeInventoryReader.MatchesRetainerCache(OwnedSourceKind.RetainerInventory,[new(234,10000,0,2)],(nint)cache),"prior retainer buffer rejected");
    Check(!OwnedNativeInventoryReader.MatchesRetainerCache(OwnedSourceKind.RetainerInventory,[new(123,10000,0,2)],0),"missing keyed cache rejected");

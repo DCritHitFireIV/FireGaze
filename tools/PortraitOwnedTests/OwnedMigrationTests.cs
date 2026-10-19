@@ -48,9 +48,9 @@ internal static class OwnedMigrationTests
             };
             var catalog = New(); Check(catalog.ImportJSON(MigrationFixtures.Legacy(legacyOwners)), "four alias legacy document accepted"); catalog.ActivateCharacter(alias);
             var view = catalog.BuildView(now.AddMinutes(2));
-            Check(view.Items.Select(i => i.ItemID).SequenceEqual(new uint[] { 234, 345, 456, 567, 678 }), "latest dresser replaces entire snapshot without item union");
-            Check(view.Sources.Count == 5 && view.Sources.All(s => s.Status == OwnedReadStatus.PossiblyStale), "all merged sources imported stale");
-            Check(view.Items.Single(i => i.ItemID == 234).Variants.Single().Source == retainerA && view.Items.Single(i => i.ItemID == 456).Variants.Single().Source == retainerEquipmentA && view.Items.Single(i => i.ItemID == 567).Variants.Single().Source == retainerB, "retainer inventories and equipped sources remain separate");
+            Check(view.Items.Select(i => i.ItemID).SequenceEqual(new uint[] { 234, 345, 567, 678 }), "latest dresser replaces entire snapshot and retired equipped source is discarded");
+            Check(view.Sources.Count == 4 && view.Sources.All(s => s.Status == OwnedReadStatus.PossiblyStale), "all retained merged sources imported stale");
+            Check(view.Items.Single(i => i.ItemID == 234).Variants.Single().Source == retainerA && view.Items.Single(i => i.ItemID == 567).Variants.Single().Source == retainerB, "retainer inventory ownership remains isolated after equipped removal");
             var metadata = view.Items.Single(i => i.ItemID == 345).Variants.Single();
             Check(metadata.ContainerID == 7 && metadata.Slot == 0 && metadata.Quantity == 1 && metadata.Stain1 == 4 && metadata.Stain2 == 5 && metadata.GlamourID == 900 && metadata.HighQuality, "winning source metadata retained");
             var export = catalog.ExportJSON(); using var doc = JsonDocument.Parse(export);
@@ -58,7 +58,7 @@ internal static class OwnedMigrationTests
             Check(doc.RootElement.GetProperty("Characters").GetArrayLength() == 2 && !export.Contains("AccountID", StringComparison.Ordinal), "export collapses aliases without persistent account ids");
             var reverse = New(); Check(reverse.ImportJSON(MigrationFixtures.Legacy(legacyOwners.Reverse().ToArray())) && reverse.ExportJSON() == export, "legacy migration independent of alias order");
             var reloaded = New(); Check(reloaded.ImportJSON(export) && reloaded.ExportJSON() == export, "v2 export reload is idempotent");
-            reloaded.ActivateCharacter(new(99, 101)); Check(reloaded.BuildView(now).Items.Count == 5, "new session account alias sees imported content records");
+            reloaded.ActivateCharacter(new(99, 101)); Check(reloaded.BuildView(now).Items.Count == 4, "new session account alias sees only retained imported content records");
             reloaded.ActivateCharacter(new(99, 202)); Check(reloaded.BuildView(now).Items.Single().ItemID == 789, "other content source never merged");
         });
 

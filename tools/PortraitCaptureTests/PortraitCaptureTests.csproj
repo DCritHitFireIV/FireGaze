@@ -6,6 +6,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitCaptureGeometry.cs')">$(DefineConstants);HAS_CAPTURE</DefineConstants>
   <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLiveCaptureApi.cs')">$(DefineConstants);HAS_CAPTURE_API</DefineConstants><DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitCaptureNodeReader.cs')">$(DefineConstants);HAS_CAPTURE_NODE</DefineConstants><DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLiveCaptureSource.cs')">$(DefineConstants);HAS_CAPTURE_NATIVE</DefineConstants></PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs" Link="PortraitPhotoTrace.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCapture*.cs" Link="Source/%(Filename)%(Extension)" />
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLive*.cs" Link="Source/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />

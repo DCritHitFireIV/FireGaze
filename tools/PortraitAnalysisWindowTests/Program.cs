@@ -17,6 +17,46 @@ async Task Drain(PortraitPreviewWindow window)
 PortraitCaptureSample Sample(PortraitImageScope scope, string key = "state-1") => new(new(11, 22), new(101, 102, 103, 4, 22), key,
     scope, new(7, Vector2.Zero, new(1920, 1080)), scope == PortraitImageScope.VisibleAdventurerPlate
         ? new(201, 2, 203, 204, 11, 22, 5, new(10, 20, 320, 180), "plate-a") : null);
+static Vector4 Color(uint value) => new((value & 255) / 255f, ((value >> 8) & 255) / 255f,
+    ((value >> 16) & 255) / 255f, (value >> 24) / 255f);
+static double Contrast(Vector4 left, Vector4 right)
+{
+    static double Luminance(Vector4 color)
+    {
+        static double Channel(double value) => value <= .04045 ? value / 12.92 : Math.Pow((value + .055) / 1.055, 2.4);
+        return .2126 * Channel(color.X) + .7152 * Channel(color.Y) + .0722 * Channel(color.Z);
+    }
+    var a = Luminance(left); var b = Luminance(right);
+    return (Math.Max(a, b) + .05) / (Math.Min(a, b) + .05);
+}
+
+{
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = new(20, 32, 5) };
+    using var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.FilledRectangles.Clear();
+    Invoke(window, "DrawAnalysisWindow");
+    var rectangles = ImGui.FilledRectangles.ToArray();
+    var backgrounds = rectangles.Select((rectangle, index) => (rectangle, index))
+        .Where(entry => entry.rectangle.Maximum.X - entry.rectangle.Minimum.X > 120).ToArray();
+    Check(backgrounds.Length == 4, "actual analysis draw submits luma and three RGB histogram surfaces");
+    for (var channel = 0; channel < 3 && backgrounds.Length == 4; channel++)
+    {
+        var background = backgrounds[channel + 1];
+        var end = channel + 2 < backgrounds.Length ? backgrounds[channel + 2].index : rectangles.Length;
+        var bars = rectangles.Skip(background.index + 1).Take(end - background.index - 1)
+            .Where(rectangle => rectangle.Maximum.Y > rectangle.Minimum.Y).ToArray();
+        var label = new[] { "red", "green", "blue" }[channel];
+        Check(bars.Length > 0 && bars.All(bar => Contrast(Color(bar.Color), Color(background.rectangle.Color)) >= 3),
+            $"actual {label} histogram data remains visible at 3:1 against its submitted light surface");
+        Check(bars.Length > 0 && bars.All(bar =>
+        {
+            var color = Color(bar.Color);
+            return channel switch { 0 => color.X > color.Y && color.X > color.Z,
+                1 => color.Y > color.X && color.Y > color.Z, _ => color.Z > color.X && color.Z > color.Y };
+        }), $"actual {label} histogram retains its RGB channel identity");
+    }
+}
 
 // Returning a cached portrait is the original bug: this must perform no readback in plate scope.
 {

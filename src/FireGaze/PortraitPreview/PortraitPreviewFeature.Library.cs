@@ -16,6 +16,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private ulong contentID;
     private string? cachePersistenceWarning;
     private readonly Dictionary<ulong, string> retainerDisplayNames = [];
+    private OwnedRetainerRoster? retainerRosterView;
 
     public ulong ContentID => contentID;
     public string SourceGuideKey => ContentID == 0 ? string.Empty : ContentID.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -237,7 +238,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
         libraryInitialized = false;
     }
 
-    public IReadOnlyList<OwnedSourceView> Sources => ownedView.Sources;
+    public IReadOnlyList<OwnedSourceView> Sources => ownedView.Character == CurrentCharacter() ? ownedView.Sources : [];
+    public OwnedCharacterKey? SourceCharacter => CurrentCharacter();
+    public OwnedRetainerRoster? RetainerRoster => retainerRosterView?.Character == CurrentCharacter() ? retainerRosterView : null;
 
     /// <summary>Every accepted inventory capture batch uses the same revision-aware persistence gate.</summary>
     private bool QueueOwnedCacheIfNeeded() => ownedSavePolicy.QueueIfNeeded(owned);
@@ -268,6 +271,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
         OwnedSourceKind.Saddlebag => "陆行鸟鞍囊", OwnedSourceKind.PremiumSaddlebag => "额外鞍囊",
         OwnedSourceKind.GlamourDresser => "投影台", OwnedSourceKind.Armoire => "收藏柜",
         OwnedSourceKind.RetainerInventory => retainerDisplayNames.TryGetValue(source.RetainerID, out var name) ? "雇员背包 · " + name : "雇员背包",
-        OwnedSourceKind.RetainerEquipped => retainerDisplayNames.TryGetValue(source.RetainerID, out var name) ? "雇员装备 · " + name : "雇员装备", _ => "物品来源",
+        _ => "物品来源",
     };
 }

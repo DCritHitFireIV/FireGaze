@@ -18,7 +18,8 @@ namespace FireGaze.PortraitPreview
         public PortraitIdentity RequestedIdentity;
         public CancellationToken RequestedCancellation;
         private TaskCompletionSource<PortraitThumbnailLayers?> pending = new(TaskCreationOptions.RunContinuationsAsynchronously);
-        public Task<PortraitThumbnailLayers?> CaptureAsync(PortraitIdentity identity, CancellationToken token)
+        public Task<PortraitThumbnailLayers?> CaptureAsync(PortraitIdentity identity, CancellationToken token,
+            PortraitPhotoTrace.Operation? operation = null)
         {
             Calls++; RequestedIdentity = identity; RequestedCancellation = token; return pending.Task;
         }

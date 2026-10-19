@@ -114,6 +114,7 @@ Case("concurrent replacement cannot dispose an active Draw borrow", () =>
     draw.Dispose(); view.Dispose(); Check(source.Textures.Single().Disposes == 1, "cross-thread teardown releases after Draw completion");
 });
 Case("native node source proves owner before and after bounds and retain", () => NativeCases(Check));
+NativeLiveControllerCases.Run(Case, Check);
 Console.WriteLine($"PortraitNativeLiveViewTests: {checks} checks, {failures.Count} failed");
 return failures.Count == 0 ? 0 : 1;
 

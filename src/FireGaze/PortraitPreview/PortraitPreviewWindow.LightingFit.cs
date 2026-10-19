@@ -17,10 +17,11 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawLightingFitWindow()
     {
         if (!showLightingFit) return;
-        ImGui.SetNextWindowSize(new Vector2(500, 740) * Scale, ImGuiCond.FirstUseEver);
-        ImGui.SetNextWindowSizeConstraints(new Vector2(360, 380) * Scale, ImGui.GetMainViewport().WorkSize);
-        if (ImGui.Begin("色彩曲线###FireGazePortraitLightingFit", ref showLightingFit))
+        FireGazeWindowPlacement.Prepare("FireGazePortraitLightingFit", new Vector2(500, 740) * Scale, Scale, "FireGazePortraitPreview");
+        FireGazeWindowPlacement.Constrain(new Vector2(360, 380) * Scale, ImGui.GetMainViewport().WorkSize, Scale);
+        if (FireGazeWindowPlacement.Begin("色彩曲线###FireGazePortraitLightingFit", ref showLightingFit, "FireGazePortraitLightingFit"))
         {
+
             var state = feature.LightingFit;
             var busy = state?.Busy == true;
             ImGui.TextWrapped("设置目标色调，用主光与环境光尽量接近。部分色彩无法通过灯光还原。");
@@ -63,7 +64,7 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawLightingCurve()
     {
         var values=lightingControls.GetPoints(lightingChannel);
-        var color=new[]{new Vector4(.95f,.45f,.45f,1),new Vector4(.45f,.85f,.55f,1),new Vector4(.45f,.65f,.95f,1)}[lightingChannel];
+        var color=new[]{FireGazePalette.ChartRed,FireGazePalette.ChartGreen,FireGazePalette.ChartBlue}[lightingChannel];
         var origin=ImGui.GetCursorScreenPos();
         var size=new Vector2(Math.Max(1,ImGui.GetContentRegionAvail().X),150*Scale);
         ImGui.Dummy(size);

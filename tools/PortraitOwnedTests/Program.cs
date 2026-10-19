@@ -104,5 +104,7 @@ var savePolicyResult=CacheSavePolicyTests.Run();passed+=savePolicyResult.Passed;
 var gateResult=RetainerGateTests.Run();passed+=gateResult.Passed;failed+=gateResult.Failed;
 var migrationResult=OwnedMigrationTests.Run();passed+=migrationResult.Passed;failed+=migrationResult.Failed;
 var migrationFileResult=OwnedCacheMigrationFileTests.Run();passed+=migrationFileResult.Passed;failed+=migrationFileResult.Failed;
+var retiredSourceResult=RetiredSourceTests.Run();passed+=retiredSourceResult.Passed;failed+=retiredSourceResult.Failed;
+var rosterResult=RetainerRosterTests.Run();passed+=rosterResult.Passed;failed+=rosterResult.Failed;
 Console.WriteLine($"PortraitOwnedTests: {passed} passed, {failed} failed");
 Environment.ExitCode=failed==0 ? 0 : 1;

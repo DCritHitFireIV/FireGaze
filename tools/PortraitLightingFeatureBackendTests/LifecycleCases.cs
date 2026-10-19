@@ -15,6 +15,71 @@ internal static class LifecycleCases
    check(feature.LightingFit is null && feature.Errors.Count==1,
     "disabled image tools publish no live source and explain why a fitting request was declined");
   }
+  var captureTime=TimeSpan.Zero;
+  using(var feature=new PortraitPreviewFeature(captureClock:()=>captureTime))
+  {
+   captureTime=TimeSpan.FromSeconds(59);
+   feature.StartLightingFit(goal!,region);
+   feature.CompleteCapture();
+   captureTime=TimeSpan.FromSeconds(60);feature.Tick();
+   check(feature.CaptureCount==1 && feature.NativeWrites==0 && feature.HistoryCount==1,
+    "lease expiry rejects a completed baseline before it can queue a new native probe or GPU capture");
+   check(!feature.Blocked && !feature.IsHistorySuppressed
+     && feature.LightingFit?.Outcome==PortraitLightingFitSessionOutcome.Cancelled,
+    "expired baseline fitting ends as cancellation after its physical capture has drained");
+  }
+  captureTime=TimeSpan.Zero;
+  using(var feature=new PortraitPreviewFeature(captureClock:()=>captureTime))
+  {
+   captureTime=TimeSpan.FromSeconds(59);
+   feature.StartLightingFit(goal!,region);feature.CompleteCapture();feature.Tick();
+   captureTime=TimeSpan.FromSeconds(60);feature.Tick();
+   check(feature.CaptureCount==2 && feature.NativeColors.All(value=>value==100)
+     && feature.Blocked && !feature.IsHistorySuppressed && feature.NativeWrites==2,
+    "lease expiry cancels an unchanged pending probe and restores RGB while retaining its physical GPU barrier");
+   feature.Tick();feature.Tick();
+   check(feature.CaptureCount==2 && feature.NativeWrites==2 && feature.HistoryCount==1,
+    "expired pending probe polling cannot continue calibration or repeat a completed rollback");
+   feature.CompleteCapture();feature.Tick();
+   check(!feature.Blocked && feature.CaptureCount==2 && feature.HistoryCount==1,
+    "an expired pending probe drains its final physical task without scheduling another probe");
+  }
+  captureTime=TimeSpan.Zero;
+  using(var feature=new PortraitPreviewFeature(captureClock:()=>captureTime))
+  {
+   captureTime=TimeSpan.FromSeconds(59);
+   feature.StartLightingFit(goal!,region);feature.CompleteCapture();feature.Tick();
+   check(feature.CaptureCount==2 && feature.NativeColors[0]==116,
+    "lease probe fixture reaches one live isolated RGB write with its physical capture pending");
+   feature.ChangeAmbientBlue(77);
+   captureTime=TimeSpan.FromSeconds(60);feature.Tick();
+   check(feature.NativeColors.SequenceEqual(new[]{100,100,100,100,100,77})
+     && feature.Blocked && !feature.IsHistorySuppressed && feature.NativeWrites==2,
+    "lease expiry conditionally restores owned RGB while preserving the newer player color and pending GPU barrier");
+   feature.Tick();feature.Tick();
+   check(feature.CaptureCount==2 && feature.NativeWrites==2 && feature.HistoryCount==1,
+    "expired probe polling neither queues another sample nor writes duplicate compensation or history");
+   feature.CompleteCapture();feature.Tick();
+   check(!feature.Blocked && feature.NativeColors.SequenceEqual(new[]{100,100,100,100,100,77})
+     && feature.CaptureCount==2 && feature.HistoryCount==1,
+    "late expired probe result drains without publication restart or history commit");
+  }
+  captureTime=TimeSpan.Zero;
+  using(var feature=new PortraitPreviewFeature(captureClock:()=>captureTime))
+  {
+   captureTime=TimeSpan.FromSeconds(59);
+   feature.StartLightingFit(goal!,region);
+   for(var i=0;i<7;i++){feature.CompleteCapture();feature.Tick();}
+   check(feature.CaptureCount==8 && feature.NativeColors.SequenceEqual(new[]{105,105,105,106,106,106}),
+    "lease candidate fixture reaches independently captured proposed RGB before committing history");
+   feature.CompleteCapture();captureTime=TimeSpan.FromSeconds(60);feature.Tick();
+   check(feature.NativeColors.All(value=>value==100) && feature.HistoryCount==1
+     && feature.LightingFit?.Outcome==PortraitLightingFitSessionOutcome.Cancelled && !feature.Blocked,
+    "lease expiry rejects even a completed candidate and restores RGB instead of committing a final edit");
+   feature.Tick();feature.Tick();
+   check(feature.CaptureCount==8 && feature.HistoryCount==1 && feature.LightingFit is null,
+    "expired candidate remains stopped after cleanup and cannot silently resume fitting");
+  }
   using(var feature=new PortraitPreviewFeature())
   {
    feature.StartLightingFit(goal!,region);feature.CompleteCapture();feature.Tick();

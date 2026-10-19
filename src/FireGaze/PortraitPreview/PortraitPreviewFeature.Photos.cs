@@ -7,7 +7,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void InitializePhotos(string directory)
         => photos = new(Path.Combine(directory, "portrait-history-thumbnails-v1.bin"), Plugin.Textures, Plugin.TextureReadback,
-            new(Plugin.Framework, Plugin.GameGUI, Plugin.Textures, target.IsCurrent), history.Bytes);
+            new(Plugin.Framework, Plugin.GameGUI, Plugin.Textures, target.IsCurrent), history.Bytes,
+            message => Plugin.Log.Information("[PortraitPhoto] {Message}", message));
 
     private void PollPhotos()
     {

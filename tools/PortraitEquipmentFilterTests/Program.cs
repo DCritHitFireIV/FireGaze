@@ -34,8 +34,10 @@ CheckIds(new(DyeChannels: [1]), [10], "single-dyeable filtering excludes zero an
 CheckIds(new(DyeChannels: []), [20, 10, 30, 40, 50], "no selected dye categories means all dye channel counts");
 CheckIds(new(Sources: [OwnedSourceKind.Inventory, OwnedSourceKind.Armoire], DyeChannels: [0, 2]), [30, 40], "source and dye groups are combined with AND");
 CheckIds(new(Search: "  ceD  "), [30], "name search trims whitespace and ignores case");
-CheckIds(new(Search: "  3  "), [30], "identifier search matches numeric text");
-CheckIds(new(Search: " #30 "), [30], "identifier search accepts an optional hash prefix");
+CheckIds(new(Search: "  3  "), [], "numeric search does not match equipment identifiers");
+CheckIds(new(Search: " #30 "), [], "hash-prefixed search does not match equipment identifiers");
+Check(PortraitEquipmentFilter.Apply([new(999, "Type 3 Coat", 0, 0, true, "")], new(Search: "3"))
+    .Select(item => item.ID).SequenceEqual(new uint[] { 999 }), "numbers contained in equipment names remain searchable");
 CheckIds(new(Search: "Cedar", Sources: [OwnedSourceKind.Armoire]), [], "search and selected source must both match");
 CheckIds(new(Search: "Cedar", DyeChannels: [1]), [], "search and selected dye category must both match");
 CheckIds(new(Search: "   "), [20, 10, 30, 40, 50], "whitespace-only search does not hide items");
@@ -99,11 +101,19 @@ var sourceCases = new (OwnedSourceKind Source, uint Expected)[]
 {
     (OwnedSourceKind.Equipped, 1), (OwnedSourceKind.Inventory, 2), (OwnedSourceKind.Armoury, 3),
     (OwnedSourceKind.Saddlebag, 4), (OwnedSourceKind.PremiumSaddlebag, 5), (OwnedSourceKind.GlamourDresser, 6),
-    (OwnedSourceKind.Armoire, 7), (OwnedSourceKind.RetainerInventory, 8), (OwnedSourceKind.RetainerEquipped, 9),
+    (OwnedSourceKind.Armoire, 7), (OwnedSourceKind.RetainerInventory, 8),
 };
 foreach (var (source, expected) in sourceCases)
     Check(PortraitEquipmentFilter.Apply(everySource, new(Sources: [source])).Select(item => item.ID)
         .SequenceEqual(new[] { expected }), $"source category {source} is selectable without leaking other categories");
+Check(PortraitEquipmentFilter.Apply(everySource).Select(item => item.ID).SequenceEqual(new uint[] { 1, 2, 3, 4, 5, 6, 7, 8 }),
+    "old browser records owned only by a retainer equipped source cannot surface");
+Check(PortraitEquipmentFilter.Apply(everySource, new(Sources: [OwnedSourceKind.RetainerEquipped])).Count == 0,
+    "a retired source cannot select stale equipment");
+var mixedLegacy = PortraitEquipmentFilter.Apply([
+    new(88, "Shared Coat", 0, 2, true, "", Sources: [OwnedSourceKind.RetainerEquipped, OwnedSourceKind.RetainerInventory])]);
+Check(mixedLegacy.Count == 1 && mixedLegacy[0].Sources.SequenceEqual(new[] { OwnedSourceKind.RetainerInventory }),
+    "a remaining inventory copy stays browsable without retired source metadata");
 
 var largeIDs = new[]
 {
@@ -160,8 +170,12 @@ Check(choice.CanSelect && choice.HasCached && !choice.HasUnread && choice.OwnedI
 choice = choices.Single(source => source.Kind == OwnedSourceKind.RetainerInventory);
 Check(choice.CanSelect && choice.HasUnread && choice.HasCached && choice.OwnedItemCount == 7,
     "retainer categories merge read records without pretending unread retainers were read");
-Check(choices.Select(source => source.Kind).Distinct().Count() == 9 && choices.Count == 9,
+Check(choices.Select(source => source.Kind).Distinct().Count() == 8 && choices.Count == 8,
     "every supported storage category appears once even when no data exists");
+Check(PortraitEquipmentFilterSources.Build(observations.Append(new(
+    new(OwnedSourceKind.RetainerEquipped, 100), OwnedReadStatus.Current, readAt, 9, "")))
+    .All(source => source.Kind != OwnedSourceKind.RetainerEquipped),
+    "old equipped observations never recreate a retainer equipment filter option");
 Check(PortraitEquipmentFilterSources.Build([]).All(source => !source.CanSelect && source.HasUnread),
     "a new character has no selectable storage records");
 Check(observations[0].OwnedItemCount == 2 && observations[2].Status == OwnedReadStatus.PossiblyStale,
@@ -173,6 +187,9 @@ Check(false, "source choices must preserve unread, read-empty, and cached distin
 Check(false, "equipment filtering must provide a default name-ordered query");
 #endif
 
+var retainerCoverage = RetainerCoverageTests.Run();
+checks += retainerCoverage.Passed + retainerCoverage.Failed;
+for (var index = 0; index < retainerCoverage.Failed; index++) failures.Add("retainer coverage behavior failed (see named case above)");
 foreach (var failure in failures) Console.Error.WriteLine("FAIL: " + failure);
 Console.WriteLine($"Portrait equipment filter: {checks - failures.Count}/{checks} checks passed.");
 return failures.Count == 0 ? 0 : 1;

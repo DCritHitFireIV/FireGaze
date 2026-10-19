@@ -42,6 +42,11 @@ static class Cases
     }
     public static async Task<int> Run()
     {
+        #if HAS_PHOTO_TRACE
+        await PhotoTraceCases.Run(Check);
+        #else
+        Check(false, "production software compositor photo phase trace is missing");
+        #endif
         // Pixel expectations are literal, hand-derived fixtures. Only the two public GPU service
         // boundaries are replaced; production models, geometry, ownership and compositor are linked.
         foreach (var (format, bytes, expected) in new[]

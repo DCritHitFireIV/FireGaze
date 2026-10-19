@@ -19,18 +19,38 @@ internal sealed unsafe partial class NativePortraitTarget
         ExportedPortraitData exported=default;
         try
         {
-            native.Export(view,&exported);
+            using (var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.NativeExportBefore))
+            {
+                native.Export(view,&exported);
+                phase.Complete();
+            }
             if (!IsCurrent(identity) || Angles(exported)!=expected) return false;
             if (expected==desired) return true;
-            native.SetDirectionalAngle(view,desired.Vertical,desired.Horizontal);
+            using (var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.NativeSetAngle))
+            {
+                native.SetDirectionalAngle(view,desired.Vertical,desired.Horizontal);
+                phase.Complete();
+            }
             if (!IsCurrent(identity)) return false;
-            native.Export(view,&exported);
+            using (var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.NativeExportAfter))
+            {
+                native.Export(view,&exported);
+                phase.Complete();
+            }
             if (!IsCurrent(identity) || Angles(exported)!=desired) return false;
             var state=(AgentBannerEditorState*)identity.State;
-            state->BannerEntry.DirectionalLightingVerticalAngle=desired.Vertical;
-            state->BannerEntry.DirectionalLightingHorizontalAngle=desired.Horizontal;
+            using (var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.BannerEntryWrite))
+            {
+                state->BannerEntry.DirectionalLightingVerticalAngle=desired.Vertical;
+                state->BannerEntry.DirectionalLightingHorizontalAngle=desired.Horizontal;
+                phase.Complete();
+            }
             if (api is IPortraitLightNativeApi controls && IsCurrent(identity))
+            {
+                using var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.NativeSyncControls);
                 controls.SyncDirectionalAngles(state,desired.Vertical,desired.Horizontal);
+                phase.Complete();
+            }
             return IsCurrent(identity);
         }
         catch(Exception exception)
@@ -51,11 +71,26 @@ internal sealed unsafe partial class NativePortraitTarget
         {
             var addon=CurrentAddon(state);
             if (addon==null) return;
-            if (addon->DirectionalLightingVerticalAngleSlider!=null) addon->DirectionalLightingVerticalAngleSlider->SetValue(vertical,false);
+            if (addon->DirectionalLightingVerticalAngleSlider!=null)
+            {
+                using var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.VerticalSliderSetValue);
+                addon->DirectionalLightingVerticalAngleSlider->SetValue(vertical,false);
+                phase.Complete();
+            }
             addon=CurrentAddon(state);
             if (addon==null) return;
-            if (addon->DirectionalLightingHorizontalAngleSlider!=null) addon->DirectionalLightingHorizontalAngleSlider->SetValue(horizontal,false);
-            if (CurrentAddon(state)!=null) state->SetHasChanged(true);
+            if (addon->DirectionalLightingHorizontalAngleSlider!=null)
+            {
+                using var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.HorizontalSliderSetValue);
+                addon->DirectionalLightingHorizontalAngleSlider->SetValue(horizontal,false);
+                phase.Complete();
+            }
+            if (CurrentAddon(state)!=null)
+            {
+                using var phase=PortraitLightInputTrace.Measure(PortraitLightTraceStage.SetHasChanged);
+                state->SetHasChanged(true);
+                phase.Complete();
+            }
         }
     }
 }

@@ -4,8 +4,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);CA1416</NoWarn>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitThumbnailSource.cs')">$(DefineConstants);HAS_SOURCE</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs')">$(DefineConstants);HAS_PHOTO_TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs" Link="PortraitPhotoTrace.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailSource.cs" Link="PortraitThumbnailSource.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitThumbnailSource.cs')" />
     <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>

@@ -16,12 +16,13 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawLightWindow()
     {
         if (!showLight) { CancelLightInteraction();return; }
+        FireGazeWindowPlacement.Prepare("FireGazePortraitLight", new Vector2(440, 520) * Scale, Scale, "FireGazePortraitLightingSpace");
         var bounds=PortraitLightWindowLayout.ForViewport(ImGui.GetMainViewport().WorkSize,Scale);
         ImGui.SetNextWindowSizeConstraints(bounds.Minimum,bounds.Maximum);
-        ImGui.SetNextWindowSize(bounds.Preferred,ImGuiCond.FirstUseEver);
-        var visible=ImGui.Begin("主光方向###FireGazePortraitLight",ref showLight);
+        var visible=FireGazeWindowPlacement.Begin("主光方向###FireGazePortraitLight", ref showLight, "FireGazePortraitLight");
         if (visible)
         {
+
             var current=feature.DirectionalLight;
             if (current is null)
             {

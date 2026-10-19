@@ -25,8 +25,7 @@ internal static class UiHelpers
     public static IDisposable Disabled(bool disabled = true) => FireGazeDisabled.Push(disabled);
 
     /// <summary>
-    ///     「跳过」的终态色（中文插件 · 不汉化等）：特意不用 Info 蓝——蓝在本页签表示「有进度/待处理」，
-    ///     复用会让「不汉化」被读成「正在处理」（2026-10-02 v4 定向复评 F8）。
+    ///     「跳过」的终态色（中文插件 · 不汉化等）；具体状态仍由文字说明。
     /// </summary>
     public static readonly Vector4 Skip = FireGazePalette.Skip;
 
@@ -63,7 +62,7 @@ internal static class UiHelpers
     }
 
     /// <summary>
-    ///     「要做的事」那种主按钮：比普通按钮深一点、蓝一点，198 行列表里能一眼看到落点。
+    ///     主操作使用深色实底，在长列表中保持明确的操作位置。
     ///     必须配套 <see cref="PopPrimaryButton" />（Push/Pop 数量要成对）。
     /// </summary>
     public static void PushPrimaryButton()
@@ -74,7 +73,7 @@ internal static class UiHelpers
     public static void PopPrimaryButton() => ImGui.PopStyleColor(4);
 
     /// <summary>
-    ///     「启用插件」这类正向动作的按钮：偏绿，与主色（蓝）区分，用户能一眼看到。
+    ///     「启用插件」这类正向动作的按钮，沿用中性深色实底。
     ///     必须配套 <see cref="PopEnableButton" />。
     /// </summary>
     public static void PushEnableButton()
@@ -85,9 +84,8 @@ internal static class UiHelpers
     public static void PopEnableButton() => ImGui.PopStyleColor(4);
 
     /// <summary>
-    ///     破坏性动作的按钮（还原原文 / 删除）：红系实底，与主色（蓝）、启用（绿）一眼区分。
-    ///     跨页规则（2026-10-03 HCI 评审）：主操作=蓝（<see cref="PushPrimaryButton" />）、正向启用=绿、
-    ///     破坏动作=红；橙色只用于警示文字/徽标，不做按钮底色。必须配套 <see cref="PopDangerButton" />。
+    ///     破坏性动作的按钮（还原原文 / 删除）使用红系实底，并以操作文字说明后果。
+    ///     必须配套 <see cref="PopDangerButton" />。
     /// </summary>
     public static void PushDangerButton()
     {

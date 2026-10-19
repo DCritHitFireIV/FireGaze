@@ -4,8 +4,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors><NoWarn>$(NoWarn);CA1416</NoWarn>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitNativeLiveView.cs') And Exists('../../src/FireGaze/PortraitPreview/PortraitNativeLiveNodeSource.cs')">$(DefineConstants);HAS_NATIVE_LIVE_VIEW</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitNativeLiveController.cs')">$(DefineConstants);HAS_NATIVE_LIVE_CONTROLLER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs" Link="PortraitPhotoTrace.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativeLive*.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCapture*.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLive*.cs" Link="Production/%(Filename)%(Extension)" />

@@ -20,10 +20,13 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawAnalysisWindow()
     {
         if (!showAnalysis) return;
-        ImGui.SetNextWindowSize(new Vector2(510, 680) * Scale, ImGuiCond.FirstUseEver);
-        if (ImGui.Begin("肖像分析###FireGazePortraitAnalysis", ref showAnalysis))
+        FireGazeWindowPlacement.Prepare("FireGazePortraitAnalysis", new Vector2(510, 680) * Scale, Scale, "FireGazePortraitPreview");
+        FireGazeWindowPlacement.Constrain(new Vector2(360, 340) * Scale, new Vector2(760, 980) * Scale, Scale);
+        if (FireGazeWindowPlacement.Begin("肖像分析###FireGazePortraitAnalysis", ref showAnalysis, "FireGazePortraitAnalysis"))
         {
+
             ImGui.TextWrapped("基于当前成图，供构图与明暗参考。不会改动肖像。");
+            if (ImGui.Button("灯光拟合")) OpenLightingFit();
             var scope = feature.LiveCaptureScope;
             if (ImGui.RadioButton("肖像", scope == PortraitImageScope.Portrait))
                 feature.SetLiveCaptureScope(PortraitImageScope.Portrait);
@@ -53,9 +56,9 @@ internal sealed partial class PortraitPreviewWindow
             {
                 ImGui.TextDisabled($"图像尺寸：{result.Width} × {result.Height}");
                 DrawHistogram("明暗分布", result.Luma, FireGazePalette.Text);
-                DrawHistogram("红", result.Red, new Vector4(.95f, .45f, .45f, 1));
-                DrawHistogram("绿", result.Green, new Vector4(.45f, .85f, .55f, 1));
-                DrawHistogram("蓝", result.Blue, new Vector4(.45f, .65f, .95f, 1));
+                DrawHistogram("红", result.Red, FireGazePalette.ChartRed);
+                DrawHistogram("绿", result.Green, FireGazePalette.ChartGreen);
+                DrawHistogram("蓝", result.Blue, FireGazePalette.ChartBlue);
                 ImGui.TextUnformatted($"暗部截断 {result.BlackClipFraction:P1} · 高光截断 {result.WhiteClipFraction:P1}");
                 ImGui.TextDisabled("透明区域不计入统计。明暗分布仅供画面参考。");
                 ImGui.Separator();

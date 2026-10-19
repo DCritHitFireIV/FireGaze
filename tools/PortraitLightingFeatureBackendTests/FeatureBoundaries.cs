@@ -101,7 +101,7 @@ namespace FireGaze.PortraitPreview
   readonly string directory=Path.Combine(Path.GetTempPath(),"FireGazeLightingLifecycle",Guid.NewGuid().ToString("N"));
   readonly TargetBoundary target=new();
   readonly PortraitPreviewSession session;
-  readonly PortraitCaptureIsolation captureIsolation = new();
+  readonly PortraitCaptureIsolation captureIsolation;
   readonly PortraitHistoryStore history;
   readonly PortraitHistoryBatch historyBatch;
   readonly object liveCaptureAPI;
@@ -112,8 +112,9 @@ namespace FireGaze.PortraitPreview
   PortraitHistoryKey? observedKey;
   bool deferredBaselineSync,syncPlate;
   public readonly List<string> Errors=[];
-  public PortraitPreviewFeature(bool enableCapture = true)
+  public PortraitPreviewFeature(bool enableCapture = true,Func<TimeSpan>? captureClock = null)
   {
+   captureIsolation = new(captureClock);
    if (enableCapture) captureIsolation.TryConfigure("live", false, false);
    Directory.CreateDirectory(directory);history=new(Path.Combine(directory,"history.json"));historyBatch=new(history);
    session=new(target);session.Open(target.Identity);liveCaptureAPI=target;
@@ -143,6 +144,11 @@ namespace FireGaze.PortraitPreview
   public float CameraPitch=>target.Snapshot.Composition.CameraPitch;
   public void ChangeCamera()=>target.Snapshot=target.Snapshot with{Composition=target.Snapshot.Composition with{CameraPitch=9}};
   public void PlayAndMoveCamera()=>target.Snapshot=target.Snapshot with{Composition=target.Snapshot.Composition with{Paused=false,AnimationProgress=8,CameraPitch=9}};
+  public void ChangeAmbientBlue(byte value)
+  {
+   target.Snapshot=target.Snapshot with{Composition=target.Snapshot.Composition with{AmbientBlue=value}};
+   target.SliderValues[5]=value;
+  }
   PortraitHistoryKey? GetHistoryKey(PortraitIdentity identity,PortraitEditorSnapshot snapshot)=>target.Key;
   static void Mutate(Action action)=>action();
   void Error(string text)=>Errors.Add(text);

@@ -5,19 +5,15 @@ namespace FireGaze.PortraitPreview;
 
 internal sealed partial class PortraitPreviewWindow
 {
-    private static string SourceLabel(OwnedSourceKind kind) => kind switch
-    {
-        OwnedSourceKind.Equipped => "身上装备", OwnedSourceKind.Inventory => "背包",
-        OwnedSourceKind.Armoury => "兵装库", OwnedSourceKind.Saddlebag => "陆行鸟鞍囊",
-        OwnedSourceKind.PremiumSaddlebag => "额外鞍囊", OwnedSourceKind.GlamourDresser => "投影台",
-        OwnedSourceKind.Armoire => "收藏柜", OwnedSourceKind.RetainerInventory => "雇员背包",
-        OwnedSourceKind.RetainerEquipped => "雇员装备", _ => "其他位置",
-    };
+    private static string SourceLabel(OwnedSourceKind kind) => PortraitEquipmentSourceSummary.Label(kind);
 
     private void DrawSourceGuide()
     {
         if (!showSourceGuide) return;
         ImGui.TextWrapped("打开一次投影台、收藏柜、鞍囊或雇员背包后，就能在这里浏览其中的装备。");
+        var retainers = PortraitEquipmentFilterSources.Build(feature.Sources, feature.SourceCharacter, feature.RetainerRoster)
+            .Single(choice => choice.Kind == OwnedSourceKind.RetainerInventory);
+        ImGui.TextWrapped("雇员背包：" + retainers.StatusText);
         if (ImGui.SmallButton("知道了###PortraitSourceGuide")) showSourceGuide = false;
         ImGui.Separator();
     }
@@ -36,21 +32,23 @@ internal sealed partial class PortraitPreviewWindow
             ImGui.SetNextItemWidth(width);
             if (ImGui.BeginCombo("###PortraitSourceFilter", selectedSources.Count == 0 ? "存储位置" : $"存储位置 · {selectedSources.Count}"))
             {
-                var choices = PortraitEquipmentFilterSources.Build(feature.Sources).ToDictionary(choice => choice.Kind);
-                foreach (var kind in Enum.GetValues<OwnedSourceKind>())
+                var choices = PortraitEquipmentFilterSources.Build(feature.Sources, feature.SourceCharacter, feature.RetainerRoster).ToDictionary(choice => choice.Kind);
+                foreach (var kind in OwnedSourcePolicy.SupportedKinds)
                 {
                     var choice = choices[kind];
                     var selected = selectedSources.Contains(kind);
                     if (!choice.CanSelect)
                     {
                         ImGui.PushStyleColor(ImGuiCol.Text, FireGazePalette.Muted);
-                        if (ImGui.Selectable($"{SourceLabel(kind)} · 未读取", false, ImGuiSelectableFlags.DontClosePopups)) showSourceGuide = true;
+                        var unreadLabel = kind == OwnedSourceKind.RetainerInventory ? choice.StatusText : "未读取";
+                        if (ImGui.Selectable($"{SourceLabel(kind)} · {unreadLabel}", false, ImGuiSelectableFlags.DontClosePopups)) showSourceGuide = true;
                         ImGui.PopStyleColor();
                         if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("先打开这个位置读取物品，再回来筛选。");
                         continue;
                     }
-                    var state = (choice.HasUnread ? " · 部分未读" : "") + (choice.HasCached ? " · 已保存记录" : "");
-                    if (ImGui.Checkbox($"{SourceLabel(kind)} · {choice.OwnedItemCount}{state}", ref selected))
+                    var state = kind == OwnedSourceKind.RetainerInventory ? choice.StatusText
+                        : $"{choice.OwnedItemCount}" + (choice.HasUnread ? " · 部分未读" : "") + (choice.HasCached ? " · 已保存记录" : "");
+                    if (ImGui.Checkbox($"{SourceLabel(kind)} · {state}", ref selected))
                     {
                         if (selected) selectedSources.Add(kind); else selectedSources.Remove(kind);
                         filtersChanged = true;

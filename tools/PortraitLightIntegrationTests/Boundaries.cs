@@ -52,11 +52,18 @@ namespace FireGaze
     internal static class Plugin
     {
         public static IntegrationKeys Keys { get; } = new();
+        public static IntegrationLogger Log { get; } = new();
         public static IntegrationFramework Framework { get; } = new();
         public static IntegrationObjects Objects { get; } = new();
         public static Dalamud.Plugin.Services.IDataManager DataManager => throw new InvalidOperationException("Live data initialization is outside this integration boundary.");
     }
     internal sealed class IntegrationFramework { public bool IsInFrameworkUpdateThread = true; }
+    internal sealed class IntegrationLogger
+    {
+        public List<string> Messages { get; } = [];
+        public bool Throw { get; set; }
+        public void Information(string message) { if (Throw) throw new IOException("logging unavailable"); Messages.Add(message); }
+    }
     internal sealed class IntegrationObjects { public IntegrationPlayer? LocalPlayer { get; set; } = new(); }
     internal sealed class IntegrationPlayer { public IntegrationName Name { get; } = new(); }
     internal sealed class IntegrationName { public string TextValue { get; set; } = "收藏来源角色"; }
