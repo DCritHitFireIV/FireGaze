@@ -5,6 +5,7 @@ namespace FireGaze.UI;
 internal readonly record struct PluginListColumns(float Content, float Actions, float Gap);
 internal readonly record struct PluginListSegments(int BeforeCount, int ExpandedIndex, int AfterStart, int AfterCount);
 internal readonly record struct DiscoveryActionPositions(float LikeX, float NavigateX, float LibraryX);
+internal readonly record struct PluginListActionPosition(float X, int Row);
 
 internal static class PluginListLayout
 {
@@ -100,7 +101,63 @@ internal static class PluginListLayout
     }
 
     public static PluginListColumns MeasureLegacyColumns(float width, float scrollbarSize, float actionsWidth)
-        => new(MathF.Max(180f, width - actionsWidth - scrollbarSize - 48f), actionsWidth, scrollbarSize + 48f);
+    {
+        var gap = MathF.Min(MathF.Max(0, width), MathF.Max(0, scrollbarSize) + 48f);
+        var usable = MathF.Max(0, width - gap);
+        var contentMinimum = MathF.Min(180f, usable * .5f);
+        var actions = MathF.Min(MathF.Max(0, actionsWidth), usable - contentMinimum);
+        return new(usable - actions, actions, gap);
+    }
+
+    /// <summary>Position every visible action within its column; zero-width slots keep their identity but take no space.</summary>
+    public static PluginListActionPosition[] MeasureActionFlow(float width, float[] widths, float[] spacing, bool alignRight)
+    {
+        if (widths.Length != spacing.Length) throw new ArgumentException("Action spacing must match its slots.");
+        var result = new PluginListActionPosition[widths.Length];
+        var rowWidths = new List<float>();
+        var row = 0;
+        var used = 0f;
+        for (var i = 0; i < widths.Length; i++)
+        {
+            if (widths[i] <= 0) { result[i] = new(0, -1); continue; }
+            var x = used > 0 ? used + spacing[i] : 0;
+            if (used > 0 && x + widths[i] > width)
+            {
+                rowWidths.Add(used);
+                row++;
+                x = 0;
+            }
+            result[i] = new(x, row);
+            used = x + widths[i];
+        }
+        rowWidths.Add(used);
+        if (alignRight)
+            for (var i = 0; i < result.Length; i++)
+                if (result[i].Row >= 0)
+                    result[i] = result[i] with { X = result[i].X + MathF.Max(0, width - rowWidths[result[i].Row]) };
+        return result;
+    }
+
+    public static float ActionFlowHeight(PluginListActionPosition[] positions, float frameHeight, float spacing)
+    {
+        var rows = positions.Length == 0 ? 0 : positions.Max(p => p.Row) + 1;
+        return rows <= 0 ? 0 : rows * frameHeight + (rows - 1) * spacing;
+    }
+
+    public static float RowHeightForActions(float columnWidth)
+    {
+        var frame = ImGui.GetFrameHeight();
+        var spacing = ImGui.GetStyle().ItemSpacing.Y;
+        var available = MathF.Max(0, columnWidth - ImGui.GetStyle().CellPadding.X * 2f);
+        var translation = MeasureActionFlow(available,
+            [MainSlotWidth() + 4f + frame, OpenSlotWidth(), UiHelpers.LabelWidth("还原原文"), UiHelpers.LabelWidth("一键上传")],
+            [0, 12, 12, 10], false);
+        var discovery = MeasureActionFlow(available,
+            [InsStyle.PinkButtonWidth("加入自己的库"), MaxWidth("一键安装", "安装中…", "去汉化", "安装器"), MathF.Max(40f, ImGui.GetFontSize() * 2.6f)],
+            [0, ImGui.GetStyle().ItemSpacing.X, ImGui.GetStyle().ItemSpacing.X], true);
+        return MathF.Max(FoldedRowHeight(), MathF.Max(ActionFlowHeight(translation, frame, spacing),
+            ActionFlowHeight(discovery, frame, spacing)) + spacing * 2f);
+    }
 
     public static PluginListSegments SplitRows(int count, int expandedIndex)
         => expandedIndex >= 0 && expandedIndex < count

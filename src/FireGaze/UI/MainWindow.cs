@@ -85,7 +85,7 @@ internal sealed class MainWindow : Window
     public override void Draw()
     {
         FireGazeWindowPlacement.Remember("FireGaze");
-        if (ImGui.BeginTabBar("###FireGazeTabs"))
+        if (ImGui.BeginTabBar("###FireGazeTabs", ImGuiTabBarFlags.FittingPolicyScroll | ImGuiTabBarFlags.ListPopupButton))
         {
             // Consume before drawing: navigation requested by a tab survives until the next frame.
             var pendingSelect = tabSelection.Take();

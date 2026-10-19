@@ -53,12 +53,21 @@ internal sealed partial class PortraitPreviewWindow
         DrawUndoRedo();
         ContinueToolbar(right, ImGui.CalcTextSize("历史记录").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("历史记录")) showHistory = !showHistory;
+        ImGui.PopID();
+    }
+
+    private void DrawPreviewSettings()
+    {
+        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
+        DrawGlamourPlateEntry();
         ContinueToolbar(right, ImGui.CalcTextSize("同步铭牌预览").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X);
+        ImGui.PushID("PortraitEditingToolbar");
         var sync = feature.SyncPlate;
         if (ImGui.Checkbox("同步铭牌预览", ref sync)) feature.SetSyncPlate(sync);
         if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("仅同步自己看到的铭牌预览。关闭预览后还原，不会保存到铭牌。");
-        if (sync) ImGui.TextWrapped("同步本地铭牌预览 · 关闭预览后还原");
         ImGui.PopID();
+        ContinueToolbar(right, ImGui.CalcTextSize("仅本地 · 关闭后还原").X);
+        ImGui.TextDisabled("仅本地 · 关闭后还原");
     }
 
     private void DrawHistoryPopup()

@@ -8,17 +8,17 @@ namespace FireGaze.UI;
 /// </summary>
 internal static class InsStyle
 {
-    public static readonly Vector4 Card = FireGazePalette.Panel;
-    public static readonly Vector4 CardHover = FireGazePalette.Hover;
-    public static readonly Vector4 CardActive = FireGazePalette.Selected;
-    public static readonly Vector4 LikedRed = FireGazePalette.BadText;
-    public static readonly Vector4 Neutral = FireGazePalette.Muted;
-    public static readonly Vector4 Bright = FireGazePalette.Text;
+    public static Vector4 Card => FireGazePalette.Panel;
+    public static Vector4 CardHover => FireGazePalette.Hover;
+    public static Vector4 CardActive => FireGazePalette.Selected;
+    public static Vector4 LikedRed => FireGazePalette.BadText;
+    public static Vector4 Neutral => FireGazePalette.Muted;
+    public static Vector4 Bright => FireGazePalette.Text;
     // Historical helper names remain source compatible; the primary action uses the shared neutral fill.
-    public static readonly Vector4 Pink = FireGazePalette.Action;
-    public static readonly Vector4 PinkHover = FireGazePalette.ActionHover;
-    public static readonly Vector4 White = FireGazePalette.White;
-    internal static readonly Vector4 AvatarText = FireGazePalette.Focus;
+    public static Vector4 Pink => FireGazePalette.Action;
+    public static Vector4 PinkHover => FireGazePalette.ActionHover;
+    public static Vector4 White => FireGazePalette.White;
+    internal static Vector4 AvatarText => FireGazePalette.Focus;
 
     /// <summary>Local list rounding; no line metrics or global style are changed.</summary>
     public static void PushRounded()

@@ -37,6 +37,11 @@ internal sealed partial class PortraitPreviewWindow
             ImGui.EndPopup();
         }
         ImGui.EndGroup();
+    }
+
+    private void DrawWorkspaceTools()
+    {
+        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
         ContinueToolbar(right, ImGui.CalcTextSize("空间参照").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("空间参照")) showSpaceLight = true;
         ContinueToolbar(right, ImGui.CalcTextSize("画面分析").X + ImGui.GetStyle().FramePadding.X * 2);
@@ -45,9 +50,14 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawGlamourPlateEntry()
     {
-        if (ImGui.Button("投影模板###PortraitPlateSwitcher", new Vector2(-1, ImGui.GetFrameHeight() * 1.5f)))
-            showGlamourPlates = true;
-        ImGui.Separator();
+        var width = Math.Min(198 * Scale, ImGui.GetContentRegionAvail().X);
+        UiHelpers.PushPrimaryButton();
+        try
+        {
+            if (ImGui.Button("投影模板###PortraitPlateSwitcher", new Vector2(width, ImGui.GetFrameHeight())))
+                showGlamourPlates = true;
+        }
+        finally { UiHelpers.PopPrimaryButton(); }
     }
 
     private void DrawLibraryPopups()

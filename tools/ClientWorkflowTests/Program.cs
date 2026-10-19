@@ -206,6 +206,7 @@ try
     await InstallerTests.Run(Check);
     await RecoveryTests.Run(Check);
     await RetranslationTests.Run(Check);
+    ResponsiveListTests.Run(Check);
     await DiscoveryUiTests.Run(Check);
     await FullCoverageTests.Run(Check);
     Console.WriteLine($"ALL PASS {checks}");

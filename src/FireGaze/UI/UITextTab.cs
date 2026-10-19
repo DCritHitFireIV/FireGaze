@@ -487,14 +487,12 @@ internal sealed partial class UITextTab
 
         const ImGuiTableFlags flags = ImGuiTableFlags.RowBg | ImGuiTableFlags.ScrollY | ImGuiTableFlags.SizingFixedFit;
 
-        // 按钮列按「最宽按钮组合」留宽，左列用固定宽（而不是让内容自撑）——
-        // 2026-10-03 用户要求：行尾按钮必须在同一行，不要换行。
-        // 左列固定宽 = 可用宽 − 按钮列 − 余量（滚动条/单元格边距）；左侧文案用 Fitted 按宽截断，
-        // 不会反过来把按钮列挤窄。窗口真的不够时才由 SameLineOrWrap 兜底换行。
+        // 宽窗保留对齐的操作槽；窄窗在同一行项目内换排，不把任一列推出可视区。
         var columns = PluginListLayout.MeasureLegacyColumns(ImGui.GetContentRegionAvail().X,
             ImGui.GetStyle().ScrollbarSize, ActionsColumnWidth());
         var pluginWidth = columns.Content;
         var actionsWidth = columns.Actions;
+        var rowHeight = PluginListLayout.RowHeightForActions(actionsWidth);
         InsStyle.PushRounded();
         if (!ImGui.BeginTable("###UITextPlugins", 2, flags, new Vector2(0, -1)))
         {
@@ -510,7 +508,7 @@ internal sealed partial class UITextTab
         ImGui.TableSetupColumn("actions", ImGuiTableColumnFlags.WidthFixed, actionsWidth);
         foreach (var plugin in items)
         {
-            this.DrawPluginRow(plugin);
+            this.DrawPluginRow(plugin, rowHeight);
             if (this.expanded == plugin.InternalName)
             {
                 ImGui.TableNextRow();
@@ -595,7 +593,7 @@ internal sealed partial class UITextTab
                || r.PackNewerThanPatch;
     }
 
-    private void DrawPluginRow(InstalledPluginEntry plugin)
+    private void DrawPluginRow(InstalledPluginEntry plugin, float foldedHeight)
     {
         this.rows.TryGetValue(plugin.InternalName, out var info);
         var running = this.run is { } r && string.Equals(r.InternalName, plugin.InternalName, StringComparison.Ordinal);
@@ -604,7 +602,6 @@ internal sealed partial class UITextTab
         var editorOpen = this.editor.IsOpen && string.Equals(this.editor.CurrentInternalName, plugin.InternalName, StringComparison.Ordinal);
 
         ImGui.PushID(plugin.InternalName);
-        var foldedHeight = PluginListLayout.FoldedRowHeight();
         PluginListLayout.BeginFoldedRow(foldedHeight);
 
         // 整行点击展开（2026-10-03 用户要求）：Selectable 铺在行底层、跨所有列、允许被覆盖——
@@ -698,28 +695,56 @@ internal sealed partial class UITextTab
 
         // ── 右列：操作 ──
         ImGui.TableNextColumn();
-        ImGui.SetCursorPosY(rowStartY + (foldedHeight - ImGui.GetFrameHeight()) * 0.5f);
-        this.DrawRowActions(plugin, info, running, busy, editorOpen, isOpen);
+        ImGui.SetCursorPosY(rowStartY);
+        this.DrawRowActions(plugin, info, running, busy, editorOpen, isOpen, foldedHeight);
 
         ImGui.PopID();
     }
 
-    private void DrawRowActions(InstalledPluginEntry plugin, RowInfo? info, bool running, bool busy, bool editorOpen, bool isOpen)
+    private void DrawRowActions(InstalledPluginEntry plugin, RowInfo? info, bool running, bool busy, bool editorOpen, bool isOpen, float rowHeight)
     {
+        var origin = ImGui.GetCursorScreenPos();
+        var right = MathF.Min(origin.X + ImGui.GetContentRegionAvail().X,
+            ImGui.GetWindowDrawList().GetClipRectMax().X) - ImGui.GetStyle().CellPadding.X;
+        var frame = ImGui.GetFrameHeight();
+        var spacing = ImGui.GetStyle().ItemSpacing.Y;
+        float[] widths;
+        float[] gaps;
+        if (info is { DoNotLocalize: true })
+        {
+            widths = [plugin.IsLoaded ? 0 : OpenOrEnableSlotWidth(), info.HasBackup ? UiHelpers.LabelWidth("还原原文") : 0, 0, 0];
+            gaps = [0, 12, 0, 0];
+        }
+        else if (running)
+        {
+            var next = this.run is { CanCancel: true } && this.workQueue.Active is null ? UiHelpers.LabelWidth("取消")
+                : this.run is { CanCancel: false } ? UiHelpers.LabelWidth("写入中…") : 0;
+            widths = [MainActionSlotWidth(), next, 0, info is { Translated: > 0 } ? UiHelpers.LabelWidth("一键上传") : 0];
+            gaps = [0, 8, 0, 10];
+        }
+        else
+        {
+            widths = [MainActionSlotWidth() + 4f + frame, OpenOrEnableSlotWidth(),
+                info is { HasBackup: true } ? UiHelpers.LabelWidth("还原原文") : 0,
+                info is { Translated: > 0 } ? UiHelpers.LabelWidth("一键上传") : 0];
+            gaps = [0, 12, 12, 10];
+        }
+        var positions = PluginListLayout.MeasureActionFlow(MathF.Max(0, right - origin.X), widths, gaps, false);
+        origin.Y += MathF.Max(0, rowHeight - PluginListLayout.ActionFlowHeight(positions, frame, spacing)) * .5f;
+        void Place(int slot) => ImGui.SetCursorScreenPos(origin + new Vector2(positions[slot].X, positions[slot].Row * (frame + spacing)));
+
         if (info is { DoNotLocalize: true })
         {
             // 不汉化 ≠ 不能启用：未加载的也给它一个启用入口（与已加载插件互斥的同一槽位）
             if (!plugin.IsLoaded)
             {
+                Place(0);
                 this.DrawEnableButton(plugin, busy, OpenOrEnableSlotWidth());
             }
 
             if (info.HasBackup)
             {
-                if (!plugin.IsLoaded)
-                {
-                    UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("还原原文"), 12);
-                }
+                Place(1);
 
                 // 破坏性动作：红系实底（跨页规则，与仓库体检的「删除所选」一致；2026-10-03 P2-8）
                 UiHelpers.PushDangerButton();
@@ -741,12 +766,13 @@ internal sealed partial class UITextTab
 
         if (running)
         {
+            Place(0);
             using var disabledScope2 = UiHelpers.Disabled();
             ImGui.Button("一键汉化", new Vector2(MainActionSlotWidth(), 0));
             disabledScope2.Dispose();
             if (this.run is { CanCancel: true } active && this.workQueue.Active is null)
             {
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("取消"), 8);
+                Place(1);
                 if (ImGui.Button("取消###UITextRowCancel"))
                 {
                     active.Cancel.Cancel();
@@ -761,12 +787,13 @@ internal sealed partial class UITextTab
             }
             else if (this.run is { CanCancel: false })
             {
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("写入中…"), 8);
+                Place(1);
                 ImGui.TextDisabled("写入中…");
             }
         }
         else
         {
+            Place(0);
             // Blue belongs to translation/update actions, not the settings shortcut.
             var fullyLocalized = info is { HasPack: true }
                                  && (info.Patch == UITextPatchStatus.Applied || info.Total == 0)
@@ -816,7 +843,7 @@ internal sealed partial class UITextTab
 
             // 第二槽位：**未加载 → 启用插件；已加载 → 打开/设置**，两者互斥（用户要求：不允许两个同时亮），
             // 且用同一个固定宽度——不管哪个按钮，后面的「还原原文 / 一键上传」都能对齐。
-            UiHelpers.SameLineOrWrap(OpenOrEnableSlotWidth(), 12);
+            Place(1);
             if (!plugin.IsLoaded)
             {
                 this.DrawEnableButton(plugin, busy, OpenOrEnableSlotWidth());
@@ -828,7 +855,7 @@ internal sealed partial class UITextTab
 
             if (info is { HasBackup: true })
             {
-                UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("还原原文"), 12);
+                Place(2);
                 if (ImGui.Button("还原原文"))
                 {
                     this.RestoreNow(plugin);
@@ -846,7 +873,7 @@ internal sealed partial class UITextTab
         // 一键上传：把这台机器上已经翻好的译文交给社区公共库（2026-10-02 用户要求）
         if (info is { Translated: > 0 })
         {
-            UiHelpers.SameLineOrWrap(UiHelpers.LabelWidth("一键上传"), 10);
+            Place(3);
             using var disabledScope4 = UiHelpers.Disabled(this.uploading.ContainsKey(plugin.InternalName));
             if (ImGui.Button("一键上传"))
             {

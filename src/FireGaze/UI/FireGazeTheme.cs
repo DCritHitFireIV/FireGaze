@@ -16,9 +16,21 @@ internal interface IFireGazeStyleStack
 /// <summary>Apply before WindowSystem.Draw/Begin, then restore the caller's complete style even on exceptions.</summary>
 internal static class FireGazeTheme
 {
-    internal static readonly (ImGuiCol Role, Vector4 Color)[] Colors = Enum.GetValues<ImGuiCol>()
+    private static readonly ImGuiCol[] ColorRoles = Enum.GetValues<ImGuiCol>()
         .Distinct().Where(role => role.ToString() is not "Count" and not "COUNT")
-        .Select(role => (role, ColorFor(role.ToString()))).ToArray();
+        .ToArray();
+    private static readonly (ImGuiCol Role, Vector4 Color)[] InformationColors =
+        BuildColors(FireGazeColorDomain.Information);
+    private static readonly (ImGuiCol Role, Vector4 Color)[] PortraitColors =
+        BuildColors(FireGazeColorDomain.Portrait);
+    internal static IReadOnlyList<(ImGuiCol Role, Vector4 Color)> Colors =>
+        FireGazePalette.CurrentDomain == FireGazeColorDomain.Portrait ? PortraitColors : InformationColors;
+
+    private static (ImGuiCol Role, Vector4 Color)[] BuildColors(FireGazeColorDomain domain)
+    {
+        var palette = FireGazePalette.ForDomain(domain);
+        return ColorRoles.Select(role => (role, ColorFor(role.ToString(), palette))).ToArray();
+    }
 
     // Keep the existing line metrics: list heights already derive from font/frame metrics.
     internal static readonly (ImGuiStyleVar Role, float Value, bool Scale)[] FloatStyles =
@@ -63,26 +75,13 @@ internal static class FireGazeTheme
         draw();
     }
 
-    /// <summary>White portrait work surfaces share the main window's neutral palette.</summary>
+    /// <summary>Complete white portrait domain, including every floating tool and semantic consumer.</summary>
     public static IDisposable PushPortrait() => PushPortrait(NativeStyleStack.Instance);
 
     internal static IDisposable PushPortrait(IFireGazeStyleStack stack)
     {
         ArgumentNullException.ThrowIfNull(stack);
-        return new OverrideScope(stack,
-        [
-            (ImGuiCol.WindowBg, FireGazePalette.PortraitWindow),
-            (ImGuiCol.ChildBg, FireGazePalette.PortraitPanel),
-            (ImGuiCol.PopupBg, FireGazePalette.PortraitPanel),
-            (ImGuiCol.FrameBg, FireGazePalette.PortraitRaised),
-            (ImGuiCol.Button, FireGazePalette.PortraitRaised),
-            (ImGuiCol.FrameBgHovered, FireGazePalette.PortraitHover),
-            (ImGuiCol.ButtonHovered, FireGazePalette.PortraitHover),
-            (ImGuiCol.Border, FireGazePalette.PortraitBorder),
-            (ImGuiCol.Separator, FireGazePalette.PortraitBorder),
-            (ImGuiCol.TableRowBg, FireGazePalette.PortraitPanel),
-            (ImGuiCol.TableRowBgAlt, FireGazePalette.PortraitRaised),
-        ]);
+        return new OverrideScope(stack, FireGazeColorDomain.Portrait);
     }
 
     internal static void Draw(Action draw, IFireGazeStyleStack stack, float scale)
@@ -99,37 +98,38 @@ internal static class FireGazeTheme
         return new StyleScope(stack, scale);
     }
 
-    private static Vector4 ColorFor(string role) => role switch
+    private static Vector4 ColorFor(string role, FireGazePalette.Colors palette) => role switch
     {
-        "Text" => FireGazePalette.Text,
-        "TextDisabled" => FireGazePalette.Muted,
-        "WindowBg" or "TitleBg" or "TitleBgCollapsed" or "DockingEmptyBg" => FireGazePalette.Window,
-        "ChildBg" or "MenuBarBg" or "TableRowBg" => FireGazePalette.Panel,
-        "PopupBg" or "FrameBg" or "Button" => FireGazePalette.Raised,
-        "TitleBgActive" or "TableHeaderBg" or "TableRowBgAlt" or "ScrollbarBg" => FireGazePalette.Hover,
-        "Border" or "Separator" or "TableBorderStrong" or "ResizeGrip" => FireGazePalette.Border,
-        "TableBorderLight" => FireGazePalette.Hover,
+        "Text" => palette.Text,
+        "TextDisabled" => palette.Muted,
+        "WindowBg" or "TitleBg" or "TitleBgCollapsed" or "DockingEmptyBg" => palette.Window,
+        "ChildBg" or "MenuBarBg" or "TableRowBg" => palette.Panel,
+        "PopupBg" or "FrameBg" or "Button" => palette.Raised,
+        "TitleBgActive" or "TableHeaderBg" or "TableRowBgAlt" or "ScrollbarBg" => palette.Hover,
+        "Border" or "Separator" or "TableBorderStrong" or "ResizeGrip" => palette.Border,
+        "TableBorderLight" => palette.Hover,
         "BorderShadow" or "NavWindowingDimBg" or "ModalWindowDimBg" => Vector4.Zero,
-        "FrameBgHovered" or "ButtonHovered" or "HeaderHovered" or "TabHovered" => FireGazePalette.Hover,
-        "FrameBgActive" or "ButtonActive" or "HeaderActive" or "Header" or "TextSelectedBg" or "DockingPreview" => FireGazePalette.Selected,
-        "ScrollbarGrab" => FireGazePalette.Border,
-        "ScrollbarGrabHovered" or "SliderGrab" or "CheckMark" or "PlotLines" => FireGazePalette.Focus,
-        "ScrollbarGrabActive" or "SliderGrabActive" or "SeparatorHovered" or "PlotLinesHovered" => FireGazePalette.Focus,
-        "SeparatorActive" => FireGazePalette.Focus,
-        "ResizeGripHovered" or "ResizeGripActive" => FireGazePalette.Focus,
-        "Tab" or "TabUnfocused" or "TabDimmed" => FireGazePalette.Window,
-        "TabActive" or "TabUnfocusedActive" or "TabSelected" or "TabDimmedSelected" => FireGazePalette.Selected,
+        "FrameBgHovered" or "ButtonHovered" or "HeaderHovered" or "TabHovered" => palette.Hover,
+        "FrameBgActive" or "ButtonActive" or "HeaderActive" or "Header" or "TextSelectedBg" or "DockingPreview" => palette.Selected,
+        "ScrollbarGrab" => palette.Border,
+        "ScrollbarGrabHovered" or "SliderGrab" or "CheckMark" or "PlotLines" => palette.Focus,
+        "ScrollbarGrabActive" or "SliderGrabActive" or "SeparatorHovered" or "PlotLinesHovered" => palette.Focus,
+        "SeparatorActive" => palette.Focus,
+        "ResizeGripHovered" or "ResizeGripActive" => palette.Focus,
+        "Tab" or "TabUnfocused" or "TabDimmed" => palette.Window,
+        "TabActive" or "TabUnfocusedActive" or "TabSelected" or "TabDimmedSelected" => palette.Selected,
         "TabSelectedOverline" or "TabDimmedSelectedOverline" or "TextLink" or "NavCursor" or "NavHighlight"
-            or "NavWindowingHighlight" or "DragDropTarget" => FireGazePalette.Focus,
-        "PlotHistogram" => FireGazePalette.GoodText,
-        "PlotHistogramHovered" => FireGazePalette.Focus,
+            or "NavWindowingHighlight" or "DragDropTarget" => palette.Focus,
+        "PlotHistogram" => palette.GoodText,
+        "PlotHistogramHovered" => palette.Focus,
         // A future binding can add roles. Keep them readable and fixed rather than inherit a host color.
-        _ => FireGazePalette.Panel,
+        _ => palette.Panel,
     };
 
     private sealed class StyleScope : IDisposable
     {
         private readonly IFireGazeStyleStack stack;
+        private readonly IDisposable domain;
         private int colors;
         private int variables;
         private bool disposed;
@@ -137,6 +137,7 @@ internal static class FireGazeTheme
         public StyleScope(IFireGazeStyleStack stack, float scale)
         {
             this.stack = stack;
+            domain = FireGazePalette.Enter(FireGazeColorDomain.Information);
             try
             {
                 foreach (var entry in Colors)
@@ -168,11 +169,18 @@ internal static class FireGazeTheme
             disposed = true;
             try
             {
-                if (variables > 0) stack.PopVariables(variables);
+                try
+                {
+                    if (variables > 0) stack.PopVariables(variables);
+                }
+                finally
+                {
+                    if (colors > 0) stack.PopColors(colors);
+                }
             }
             finally
             {
-                if (colors > 0) stack.PopColors(colors);
+                domain.Dispose();
             }
         }
     }
@@ -180,15 +188,17 @@ internal static class FireGazeTheme
     private sealed class OverrideScope : IDisposable
     {
         private readonly IFireGazeStyleStack stack;
+        private readonly IDisposable domain;
         private readonly int count;
         private bool disposed;
 
-        public OverrideScope(IFireGazeStyleStack stack, IReadOnlyList<(ImGuiCol Role, Vector4 Color)> colors)
+        public OverrideScope(IFireGazeStyleStack stack, FireGazeColorDomain desiredDomain)
         {
             this.stack = stack;
+            domain = FireGazePalette.Enter(desiredDomain);
             try
             {
-                foreach (var (role, color) in colors) { stack.PushColor(role, color); count++; }
+                foreach (var (role, color) in Colors) { stack.PushColor(role, color); count++; }
             }
             catch
             {
@@ -201,7 +211,14 @@ internal static class FireGazeTheme
         {
             if (disposed) return;
             disposed = true;
-            if (count > 0) stack.PopColors(count);
+            try
+            {
+                if (count > 0) stack.PopColors(count);
+            }
+            finally
+            {
+                domain.Dispose();
+            }
         }
     }
 

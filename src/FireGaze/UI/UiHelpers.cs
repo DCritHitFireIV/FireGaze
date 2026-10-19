@@ -9,12 +9,12 @@ namespace FireGaze.UI;
 /// </summary>
 internal static class UiHelpers
 {
-    public static readonly Vector4 Muted = FireGazePalette.Muted;
-    public static readonly Vector4 Good = FireGazePalette.GoodText;
-    public static readonly Vector4 Warn = FireGazePalette.Warn;
-    public static readonly Vector4 Bad = FireGazePalette.BadText;
-    public static readonly Vector4 Info = FireGazePalette.Focus;
-    public static readonly Vector4 Accent = FireGazePalette.Focus;
+    public static Vector4 Muted => FireGazePalette.Muted;
+    public static Vector4 Good => FireGazePalette.GoodText;
+    public static Vector4 Warn => FireGazePalette.Warn;
+    public static Vector4 Bad => FireGazePalette.BadText;
+    public static Vector4 Info => FireGazePalette.Focus;
+    public static Vector4 Accent => FireGazePalette.Focus;
 
     /// <summary>Use in place of the native pair so disabled input also has a distinct readable appearance.</summary>
     public static void BeginDisabled(bool disabled = true) => FireGazeDisabled.Begin(disabled);
@@ -27,7 +27,7 @@ internal static class UiHelpers
     /// <summary>
     ///     「跳过」的终态色（中文插件 · 不汉化等）；具体状态仍由文字说明。
     /// </summary>
-    public static readonly Vector4 Skip = FireGazePalette.Skip;
+    public static Vector4 Skip => FireGazePalette.Skip;
 
     public static Vector4 StatusColor(RepoStatus status) => status switch
     {
@@ -218,29 +218,11 @@ internal static class UiHelpers
             return;
         }
 
-        var available = ImGui.GetContentRegionAvail().X - 2f;
-        var full = ImGui.CalcTextSize(text).X;
-
-        if (available <= 1f || full <= available)
-        {
-            ImGui.TextUnformatted(text);
-        }
-        else
-        {
-            // 按「总宽 / 可用宽」的比例估算能放几个字符，并给省略号留位。
-            var keep = KeepCount(text.Length, available, full);
-            var candidate = Shorten(text, keep);
-
-            // 中英混排时估算可能偏宽：实测一次，还超就再收一轮
-            var width = ImGui.CalcTextSize(candidate).X;
-            if (width > available)
-            {
-                keep = KeepCount(candidate.Length, available, width);
-                candidate = Shorten(text, keep);
-            }
-
-            ImGui.TextUnformatted(candidate);
-        }
+        var available = MathF.Max(0, MathF.Min(ImGui.GetContentRegionAvail().X,
+            ImGui.GetWindowDrawList().GetClipRectMax().X - ImGui.GetCursorScreenPos().X) - 2f);
+        var fitted = FitText(text, available, static value => ImGui.CalcTextSize(value).X);
+        if (fitted.Length == 0) ImGui.Dummy(new Vector2(available, ImGui.GetTextLineHeight()));
+        else ImGui.TextUnformatted(fitted);
 
         if (!string.IsNullOrEmpty(tooltip) && ImGui.IsItemHovered())
         {
@@ -250,5 +232,28 @@ internal static class UiHelpers
             ImGui.PopTextWrapPos();
             ImGui.EndTooltip();
         }
+    }
+
+    internal static string FitText(string text, float available, Func<string, float> measure)
+    {
+        if (string.IsNullOrEmpty(text) || !float.IsFinite(available) || available <= 0) return string.Empty;
+        if (measure(text) <= available) return text;
+        const string ellipsis = "…";
+        if (measure(ellipsis) > available) return string.Empty;
+        var elements = System.Globalization.StringInfo.ParseCombiningCharacters(text);
+        var low = 0;
+        var high = elements.Length - 1;
+        var best = ellipsis;
+        while (low <= high)
+        {
+            var keep = (low + high) / 2;
+            var head = (keep * 2 + 2) / 3;
+            var tail = keep - head;
+            var candidate = text[..(head == elements.Length ? text.Length : elements[head])] + ellipsis
+                + (tail == 0 ? string.Empty : text[elements[elements.Length - tail]..]);
+            if (measure(candidate) <= available) { best = candidate; low = keep + 1; }
+            else high = keep - 1;
+        }
+        return best;
     }
 }

@@ -195,14 +195,17 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             return;
         }
 
+        DrawEditingToolbar();
+        DrawLibraryToolbar();
+        DrawPreviewSettings();
+        ImGui.Separator();
+
+        ImGui.BeginGroup();
         if (DrawTab("装备", !appearanceTab, true)) appearanceTab = false;
         ImGui.SameLine();
         if (DrawTab("美容师", appearanceTab, true)) appearanceTab = true;
-        ContinueToolbar(ImGui.GetWindowPos().X + ImGui.GetWindowContentRegionMax().X,
-            ImGui.CalcTextSize("仅本地 · 关闭后还原").X);
-        ImGui.TextUnformatted("仅本地 · 关闭后还原");
-        DrawEditingToolbar();
-        DrawLibraryToolbar();
+        ImGui.EndGroup();
+        DrawWorkspaceTools();
         ImGui.Separator();
 
         if (appearanceTab)
@@ -217,7 +220,6 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var mainHeight = Math.Max(220f * Scale, ImGui.GetContentRegionAvail().Y - summaryHeight);
         var leftWidth = PortraitPreviewLayout.SideWidth(ImGui.GetContentRegionAvail().X, Scale);
         ImGui.BeginChild("###PortraitEquipment", new Vector2(leftWidth, mainHeight), false);
-        DrawGlamourPlateEntry();
         DrawSlots(current);
         ImGui.Separator();
         DrawEquipmentControls(current);

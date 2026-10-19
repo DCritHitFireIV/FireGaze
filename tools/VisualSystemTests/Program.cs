@@ -15,6 +15,7 @@ void Check(bool value, string name)
 #if !HAS_VISUAL_SYSTEM
 Check(false, "the production palette, theme and symbol implementation is required");
 #else
+ThemeDomainTests.Run(Check);
 static double Luminance(Vector4 color)
 {
     static double Channel(double value) => value <= .04045 ? value / 12.92 : Math.Pow((value + .055) / 1.055, 2.4);
@@ -27,8 +28,8 @@ static double Contrast(Vector4 left, Vector4 right)
     return (Math.Max(a, b) + .05) / (Math.Min(a, b) + .05);
 }
 
-// The product owns light information surfaces. Status text is checked against those
-// surfaces so a host's unrelated dark theme cannot define FireGaze's visual contract.
+// The product owns its information surfaces. A host's unrelated theme cannot
+// define the foreground contrast or state of these controls.
 var viewingSurfaces = new[]
 {
     FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised,
@@ -46,13 +47,19 @@ foreach (var style in Enum.GetValues<FireGazeButtonStyle>())
     Check(Contrast(disabledButton.Text, disabledButton.Fill) >= 4.5, style + " disabled label remains readable");
 }
 
-foreach (var field in typeof(FireGazePalette).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
+var semanticProperties = typeof(FireGazePalette).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)
+    .Where(property => property.PropertyType == typeof(Vector4)).ToArray();
+Check(semanticProperties.Length > 20, "opacity verification covers the actual semantic palette getters");
+foreach (var domain in Enum.GetValues<FireGazeColorDomain>())
 {
-    if (field.FieldType != typeof(Vector4)) continue;
-    var color = (Vector4)field.GetValue(null)!;
-    Check(color.W == 1 && float.IsFinite(color.X) && float.IsFinite(color.Y) && float.IsFinite(color.Z)
-        && color.X is >= 0 and <= 1 && color.Y is >= 0 and <= 1 && color.Z is >= 0 and <= 1,
-        "semantic palette " + field.Name + " is opaque and finite");
+    using var palette = FireGazePalette.Enter(domain);
+    foreach (var property in semanticProperties)
+    {
+        var color = (Vector4)property.GetValue(null)!;
+        Check(color.W == 1 && float.IsFinite(color.X) && float.IsFinite(color.Y) && float.IsFinite(color.Z)
+            && color.X is >= 0 and <= 1 && color.Y is >= 0 and <= 1 && color.Z is >= 0 and <= 1,
+            domain + " semantic palette " + property.Name + " is opaque and finite");
+    }
 }
 foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover, FireGazePalette.Selected })
 foreach (var foreground in new[] { FireGazePalette.Text, UiHelpers.Muted, UiHelpers.Good, UiHelpers.Warn, UiHelpers.Bad, UiHelpers.Info, UiHelpers.Skip })

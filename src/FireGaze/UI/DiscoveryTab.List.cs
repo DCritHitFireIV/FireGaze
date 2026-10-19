@@ -43,7 +43,7 @@ internal sealed partial class DiscoveryTab
 
         var columns = PluginListLayout.MeasureLegacyColumns(ImGui.GetContentRegionAvail().X,
             ImGui.GetStyle().ScrollbarSize, ActionsColumnWidth());
-        var rowHeight = FoldedRowHeight();
+        var rowHeight = PluginListLayout.RowHeightForActions(columns.Actions);
 
         InsStyle.PushRounded();
         if (!ImGui.BeginTable("###DiscoveryList", 2, flags, new Vector2(0, height)))
@@ -152,7 +152,7 @@ internal sealed partial class DiscoveryTab
 
         // 按原格式让操作组贴右、垂直居中，保留新增安装与汉化入口。
         ImGui.TableNextColumn();
-        ImGui.SetCursorPosY(rowStartY + ((rowHeight - ImGui.GetFrameHeight()) * 0.5f));
+        ImGui.SetCursorPosY(rowStartY);
 
         var url = entry.RepositoryURL is { Length: > 0 } candidate ? candidate : null;
         var addAction = !entry.IsOfficial && url is not null && !entry.RepositoryKnown;
@@ -168,13 +168,17 @@ internal sealed partial class DiscoveryTab
         var actionOrigin = ImGui.GetCursorScreenPos();
         var right = MathF.Min(actionOrigin.X + ImGui.GetContentRegionAvail().X,
             ImGui.GetWindowDrawList().GetClipRectMax().X) - ImGui.GetStyle().CellPadding.X;
-        var positions = PluginListLayout.MeasureDiscoveryActions(right,
-            MathF.Max(40f, ImGui.GetFontSize() * 2.6f), navigate ? navigateWidth : 0f, libraryWidth,
-            ImGui.GetStyle().ItemSpacing.X);
+        var frame = ImGui.GetFrameHeight();
+        var spacing = ImGui.GetStyle().ItemSpacing.Y;
+        var positions = PluginListLayout.MeasureActionFlow(MathF.Max(0, right - actionOrigin.X),
+            [libraryWidth, navigate ? navigateWidth : 0f, MathF.Max(40f, ImGui.GetFontSize() * 2.6f)],
+            [0, ImGui.GetStyle().ItemSpacing.X, ImGui.GetStyle().ItemSpacing.X], true);
+        actionOrigin.Y += MathF.Max(0, rowHeight - PluginListLayout.ActionFlowHeight(positions, frame, spacing)) * .5f;
+        void Place(int slot) => ImGui.SetCursorScreenPos(actionOrigin + new Vector2(positions[slot].X, positions[slot].Row * (frame + spacing)));
 
         if (addAction)
         {
-            ImGui.SetCursorScreenPos(new Vector2(positions.LibraryX, actionOrigin.Y));
+            Place(0);
             const string cta = "加入自己的库";
             if (InsStyle.PinkButton(cta + "###add", InsStyle.PinkButtonWidth(cta)))
             {
@@ -188,7 +192,7 @@ internal sealed partial class DiscoveryTab
         }
         else if (enableAction)
         {
-            ImGui.SetCursorScreenPos(new Vector2(positions.LibraryX, actionOrigin.Y));
+            Place(0);
             UiHelpers.PushEnableButton();
             if (ImGui.Button("启用###enable"))
             {
@@ -205,7 +209,7 @@ internal sealed partial class DiscoveryTab
 
         if (navigate)
         {
-            ImGui.SetCursorScreenPos(new Vector2(positions.NavigateX, actionOrigin.Y));
+            Place(1);
             ImGui.PushStyleColor(ImGuiCol.Button, FireGazePalette.Raised);
             ImGui.PushStyleColor(ImGuiCol.ButtonHovered, FireGazePalette.Hover);
             ImGui.PushStyleColor(ImGuiCol.ButtonActive, FireGazePalette.Selected);
@@ -225,8 +229,8 @@ internal sealed partial class DiscoveryTab
                     : installedKnown ? "通过卫月安装此插件，成功后可前往汉化。"
                     : "暂时读不到已安装插件，请在卫月安装器确认。");
         }
-        // Explicit slots keep all actions on the same baseline without wrap-dependent row heights.
-        ImGui.SetCursorScreenPos(new Vector2(positions.LikeX, actionOrigin.Y));
+        // Each wrapped row is right aligned; the clipper uses the same shared row-height budget.
+        Place(2);
         DrawLikeButton(entry, "row");
 
         ImGui.PopID();

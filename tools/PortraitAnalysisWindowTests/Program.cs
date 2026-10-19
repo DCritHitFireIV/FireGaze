@@ -3,6 +3,7 @@ using System.Reflection;
 using Dalamud.Bindings.ImGui;
 using FireGaze;
 using FireGaze.PortraitPreview;
+using FireGaze.UI;
 
 var passed = 0; var failed = 0;
 void Check(bool pass, string message) { Console.WriteLine((pass ? "PASS " : "FAIL ") + message); if (pass) passed++; else failed++; }
@@ -34,12 +35,18 @@ static double Contrast(Vector4 left, Vector4 right)
     var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = new(20, 32, 5) };
     using var window = new PortraitPreviewWindow(model);
     Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    using var paletteScope = FireGazePalette.Enter(FireGazeColorDomain.Portrait);
     ImGui.FilledRectangles.Clear();
     Invoke(window, "DrawAnalysisWindow");
     var rectangles = ImGui.FilledRectangles.ToArray();
     var backgrounds = rectangles.Select((rectangle, index) => (rectangle, index))
         .Where(entry => entry.rectangle.Maximum.X - entry.rectangle.Minimum.X > 120).ToArray();
     Check(backgrounds.Length == 4, "actual analysis draw submits luma and three RGB histogram surfaces");
+    Check(backgrounds.Length == 4 && backgrounds.All(entry =>
+    {
+        var color = Color(entry.rectangle.Color);
+        return color.X > .9f && color.Y > .9f && color.Z > .9f && color.W == 1;
+    }), "actual portrait histograms submit the white work surface used by portrait floating tools");
     for (var channel = 0; channel < 3 && backgrounds.Length == 4; channel++)
     {
         var background = backgrounds[channel + 1];
