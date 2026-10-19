@@ -146,6 +146,40 @@ static async Task<int> Run()
         Check(File.ReadAllBytes(historyPath).SequenceEqual(historyBefore) && history.Count == 2
             && history.CurrentRecordID(key) == two.ID && history.TryGetUndo(key, out _),
             "all photo eligibility lifecycle and I/O failures preserve real history bytes cursor and undo");
+
+        // Closing a portrait feature on Framework must only seal admission there. The
+        // immutable history writer is drained by the caller outside Framework, so the
+        // close phase never blocks on file I/O.
+        var asyncHistoryPath = Path.Combine(root, "async-close-history.json");
+        var asyncHistory = new PortraitHistoryStore(asyncHistoryPath);
+        asyncHistory.Record(key, initial.ToJSON(), "异步关闭测试");
+        var asyncDrain = asyncHistory.BeginDispose();
+        Check(asyncDrain is not null, "history exposes an explicit managed drain task");
+        Check(await asyncDrain!, "history drain completes accepted writes outside the Framework phase");
+        Check(asyncHistory.Record(key, changed.ToJSON()).Status == PortraitHistoryWriteStatus.Disposed,
+            "history closes admission before its managed writer drain");
+        asyncHistory.Dispose();
+
+        var pendingPhotoMaintenance = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var drainingPhotos = Photos("async-close-photos.bin", new PortraitThumbnailSource(), history.Bytes);
+        typeof(PortraitHistoryPhotos).GetField("maintenance", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .SetValue(drainingPhotos, pendingPhotoMaintenance.Task);
+        var photoServiceDrain = drainingPhotos.BeginDispose();
+        Check(!photoServiceDrain.IsCompleted, "photo close seals immediately while managed maintenance remains observable");
+        pendingPhotoMaintenance.SetResult();
+        await photoServiceDrain;
+        Check(photoServiceDrain.IsCompletedSuccessfully, "photo managed maintenance drains outside the Framework phase");
+        drainingPhotos.Dispose();
+
+        var photoDrainGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var historyDrainGate = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var combinedDrain = PortraitManagedDrain.Combine(photoDrainGate.Task, historyDrainGate.Task);
+        Check(!combinedDrain.IsCompleted, "feature managed drain waits for every accepted close task");
+        historyDrainGate.SetResult();
+        Check(!combinedDrain.IsCompleted, "history completion cannot hide pending photo persistence");
+        photoDrainGate.SetResult();
+        await combinedDrain;
+        Check(combinedDrain.IsCompletedSuccessfully, "managed drain completes after photo and history persistence");
         Console.WriteLine($"PortraitHistoryPhotoIntegrationTests: {checks} passed, 0 failed; no native rendering, game or GPU calls.");
         return 0;
     }

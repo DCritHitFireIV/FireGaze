@@ -43,6 +43,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private bool disposed;
     private readonly PortraitCaptureIsolation captureIsolation = new();
     private readonly PortraitPhaseTrace runtimeTrace = new(message => Plugin.Log.Information("[PortraitTrace] {Stage}", message));
+    private Task? managedDrain;
 
     public PortraitPreviewFeature(IDalamudPluginInterface pluginInterface, string configDirectory,
         Func<PortraitSafetyTrialState>? readWorldTrials = null)
@@ -78,6 +79,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     }
 
     public bool IsActive => session.IsActive;
+    /// <summary>Managed cache/history writes accepted during close, drained outside Framework.</summary>
+    public Task DrainManagedAsync() => managedDrain ?? Task.CompletedTask;
     public PortraitLook? Current => session.Current;
     public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
     public IReadOnlyList<string> SourceSummary => ownedView.Character == CurrentCharacter() ? sourceSummary : [];
@@ -470,11 +473,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public void Dispose()
     {
         if (disposed) return;
+        Task photoDrain = Task.CompletedTask;
         void Release()
         {
             if (!CancelLightingFitForEdit()) _ = target.AbortCapturedEditor();
             DisposeLightingFit();
-            photos.Dispose();
+            photoDrain = photos.BeginDispose();
             liveImageService?.Dispose();
             liveCaptureAPI?.Dispose();
             FlushEditing();
@@ -489,10 +493,27 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         pluginInterface.UiBuilder.Draw -= Draw;
         if (Plugin.Framework.IsInFrameworkUpdateThread) Release();
         else Plugin.Framework.RunOnFrameworkThread(Release).GetAwaiter().GetResult();
-        cacheWriter.Dispose();
-        history.Dispose();
+        // Native ownership is fully released above. File writers are sealed now but drained
+        // asynchronously by the parent lifetime after Framework returns.
+        managedDrain = DrainManagedAsyncCore(photoDrain);
         diagnostics.UnregisterFunc();
         windows.RemoveAllWindows();
         window.Dispose();
+    }
+
+    private Task DrainManagedAsyncCore(Task photoDrain)
+    {
+        var drains = new List<Task>(3)
+        {
+            photoDrain,
+            cacheWriter.BeginDispose(),
+            history.BeginDispose(),
+        };
+        if (glamourPlateCache is not null) drains.Add(glamourPlateCache.BeginDispose());
+        return PortraitManagedDrain.Combine(drains.ToArray()).ContinueWith(task =>
+        {
+            if (task.IsFaulted && task.Exception is { } error)
+                Plugin.Log.Warning(error.GetBaseException(), "[肖像同步预览] 托管文件排空失败");
+        }, TaskScheduler.Default);
     }
 }
