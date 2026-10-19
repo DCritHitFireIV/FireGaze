@@ -59,6 +59,9 @@ function Invoke-PreviewSuite([string]$Suite, [string[]]$SuiteArguments = @()) {
 foreach ($previewSuite in @('LocalPreviewTests', 'PreviewRuntimeBoundaryTests', 'GroundedPreviewMotionTests', 'NativePreviewActorTests', 'NativeDismountTests', 'HmsShadowTests', 'HmsOriginalAdapterTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+foreach ($previewSuite in @('PluginAsyncLifecycleTests', 'ActivityLogLifecycleTests', 'PluginAsyncIntegrationTests')) {
+    Invoke-PreviewSuite $previewSuite
+}
 Invoke-PreviewSuite 'LocalPreviewPreferencesTests'
 foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'PortraitOwnedTests')) {
     Invoke-PreviewSuite $previewSuite

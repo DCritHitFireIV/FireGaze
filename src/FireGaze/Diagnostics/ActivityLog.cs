@@ -68,6 +68,7 @@ internal static class ActivityLog
     private static Action<ActivityLevel, string>? mirror;
     private static int activeWriters;
     private static int started;
+    private static int shutdownCompleted;
     private static bool closing;
 
     /// <summary>同步到卫月日志（由 <see cref="Plugin" /> 注入；可为空，用于测试）。</summary>
@@ -88,6 +89,7 @@ internal static class ActivityLog
             if (shutdownTask is { IsCompleted: true }) shutdownTask = null;
             if (started != 0 || closing) return;
             started = 1;
+            shutdownCompleted = 0;
             try
             {
                 mirror = mirrorCallback;
@@ -147,6 +149,7 @@ internal static class ActivityLog
                 writerDrain = null;
                 activeWriters = 0;
                 started = 0;
+                shutdownCompleted = 1;
                 closing = false;
             }
         }
@@ -180,7 +183,7 @@ internal static class ActivityLog
                 error is null ? null : RedactSecrets(error.ToString()));
             lock (Gate)
             {
-                if (closing || started == 0) return;
+                if (closing || shutdownCompleted != 0) return;
                 activeWriters++;
                 Recent.Add(entry);
                 if (Recent.Count > RetainedEntries)
