@@ -234,12 +234,14 @@ internal static unsafe class HookCases
     }
     sealed class TestEnvironment(bool complete) : IPortraitOwnedSceneHookEnvironment
     {
+        private static long nextModule = 0x140000000;
+        private readonly nint module = (nint)Interlocked.Add(ref nextModule, 0x1000000);
         public bool Framework = true, SourceCurrent = true, ThrowViewRead;
         public nint SlotOwner;
         public Dictionary<nint, uint> Views = new() { [Source.Model] = 4, [Owned] = 6 };
         public bool IsFrameworkThread => Framework;
         public bool TryValidateInstallation(out string reason) { reason = complete ? "" : "context ingress unresolved"; return complete; }
-        public IReadOnlyList<PortraitOwnedSceneNativeTarget> Targets => PortraitOwnedSceneHooks.FrozenTargets(unchecked((nint)0x140000000L));
+        public IReadOnlyList<PortraitOwnedSceneNativeTarget> Targets => PortraitOwnedSceneHooks.FrozenTargets(module);
         public bool IsSourceCurrent(PortraitIdentity source) => SourceCurrent && source == Source;
         public bool IsSlotIdle(uint slot) => slot == 6 && SlotOwner == 0;
         public bool IsSlotOwnedBy(uint slot, nint view) => slot == 6 && view != 0 && SlotOwner == view;
@@ -271,10 +273,11 @@ internal static unsafe class HookCases
     abstract class FakeHookBase : IPortraitOwnedSceneNativeHook
     {
         public bool IsEnabled { get; protected set; }
+        public bool IsDisposed { get; private set; }
         public int DisposeCalls;
         public abstract void Enable();
         public void Disable() => IsEnabled = false;
-        public void Dispose() { DisposeCalls++; IsEnabled = false; }
+        public void Dispose() { DisposeCalls++; IsEnabled = false; IsDisposed = true; }
     }
     sealed class FakeHook<T>(T original, bool fail) : FakeHookBase, IPortraitOwnedSceneNativeHook<T> where T : Delegate
     {

@@ -142,8 +142,10 @@ internal static unsafe class OwnedSceneIntegrationCases
     }
     sealed class EnvironmentProof(Api api) : IPortraitOwnedSceneHookEnvironment
     {
+        private static long nextModule = 0x240000000;
+        private readonly nint module = (nint)Interlocked.Add(ref nextModule, 0x1000000);
         public bool IsFrameworkThread=>true;
-        public IReadOnlyList<PortraitOwnedSceneNativeTarget> Targets=>PortraitOwnedSceneHooks.FrozenTargets(unchecked((nint)0x140000000L));
+        public IReadOnlyList<PortraitOwnedSceneNativeTarget> Targets=>PortraitOwnedSceneHooks.FrozenTargets(module);
         public bool TryValidateInstallation(out string reason){reason="";return true;}
         public bool IsSourceCurrent(PortraitIdentity source)=>source==Source;
         public bool IsSlotIdle(uint slot)
@@ -180,7 +182,7 @@ internal static unsafe class OwnedSceneIntegrationCases
             return new Hook<T>((T)original);
         }
         sealed class Hook<T>(T original):IPortraitOwnedSceneNativeHook<T> where T:Delegate
-        {public T Original=>original;public bool IsEnabled{get;private set;}public void Enable()=>IsEnabled=true;public void Disable()=>IsEnabled=false;public void Dispose()=>IsEnabled=false;}
+        {public T Original=>original;public bool IsEnabled{get;private set;}public bool IsDisposed{get;private set;}public void Enable()=>IsEnabled=true;public void Disable()=>IsEnabled=false;public void Dispose(){IsEnabled=false;IsDisposed=true;}}
     }
     sealed class Api : IPortraitOwnedCharaViewNativeApi,IDisposable
     {

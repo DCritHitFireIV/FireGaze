@@ -16,6 +16,7 @@ internal sealed class DalamudPortraitOwnedSceneHookFactory(IGameInteropProvider 
     {
         public T Original => hook.Original;
         public bool IsEnabled => hook.IsEnabled;
+        public bool IsDisposed => hook.IsDisposed;
         public void Enable() => hook.Enable();
         public void Disable() => hook.Disable();
         public void Dispose() => hook.Dispose();

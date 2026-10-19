@@ -7,7 +7,7 @@ namespace FireGaze.PortraitPreview;
 
 internal enum PortraitOwnedSceneNativeKind { Dtor, Release, Initialize, Update, Setup, Render, CreateClientObject, DeleteClientObject }
 internal readonly record struct PortraitOwnedSceneNativeTarget(PortraitOwnedSceneNativeKind Kind, nint Address);
-internal interface IPortraitOwnedSceneNativeHook : IDisposable { bool IsEnabled { get; } void Enable(); void Disable(); }
+internal interface IPortraitOwnedSceneNativeHook : IDisposable { bool IsEnabled { get; } bool IsDisposed { get; } void Enable(); void Disable(); }
 internal interface IPortraitOwnedSceneNativeHook<out T> : IPortraitOwnedSceneNativeHook where T : Delegate { T Original { get; } }
 internal interface IPortraitOwnedSceneHookFactory
 {
@@ -29,40 +29,51 @@ internal interface IPortraitOwnedSceneHookEnvironment
 /// installs hooks. Installation is all-or-nothing and requires an environment that
 /// has closed the native consumer/context/retirement coverage contract.
 /// </summary>
-internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedSceneHookEnvironment environment) : IDisposable
+internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedSceneHookEnvironment environment,
+    PortraitNativePhaseHostReservations? reservations = null) : IDisposable
 {
     private readonly List<IPortraitOwnedSceneNativeHook> hooks = [];
+    private readonly PortraitNativePhaseHostReservations reservations = reservations ?? new();
+    private PortraitNativePhaseHostReservation? reservation;
     private PortraitOwnedSceneLease? lease;
     private Action<IPortraitOwnedSceneLease>? advance;
     private Func<IPortraitOwnedSceneLease, bool>? retire;
     private PortraitIdentity source;
     private uint requestedSlot, sourceNativeSlot, lastFrame;
-    private bool installed, closing, stopped, hasFrame, retirementInProgress;
+    private bool installed, installing, closing, stopped, hasFrame, retirementInProgress, unknownCreation;
     private long epoch;
     private int phaseDepth, phaseThread, originalDepth;
     public string? LastError { get; private set; }
-    public bool IsInstalled => installed && hooks.All(hook => hook.IsEnabled);
+    public bool IsInstalled => installed && hooks.All(hook => hook.IsEnabled && !hook.IsDisposed);
 
     public bool TryInstall(IPortraitOwnedSceneHookFactory factory)
     {
-        if (installed || stopped || closing || !environment.IsFrameworkThread) return false;
+        if (installed || installing || stopped || closing || reservation is not null || hooks.Count != 0 || !environment.IsFrameworkThread) return false;
+        installing = true;
         try
         {
             if (!environment.TryValidateInstallation(out var reason)) { LastError = reason; return false; }
             if (!NativeAbiMatchesSDK(out reason)) { LastError = reason; return false; }
             var targets = environment.Targets;
             if (!ValidateTargetInventory(targets)) { LastError = "Native target inventory is incomplete or duplicated."; return false; }
+            // The passive observer and every owned generation share this atomic process
+            // reservation. A query before Create is insufficient: another owner can win
+            // the overlapping Render entry between that query and native construction.
+            if (!reservations.TryAcquireBatch(targets.Select(target => target.Address).ToArray(), out reservation, out reason))
+            { LastError = reason; return false; }
             // Exit hooks are first in the immutable inventory. Create all disabled,
             // then enable all; no lease can be requested during partial enabling.
             foreach (var target in targets) CreateHook(factory, target);
+            if (closing) throw new InvalidOperationException("Native installation was closed before enabling.");
             foreach (var hook in hooks) hook.Enable();
-            if (hooks.Any(hook => !hook.IsEnabled)) throw new InvalidOperationException("Native hook did not enable.");
+            if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
             installed = true; return true;
         }
         catch (Exception ex)
         {
-            LastError = ex.Message; DisposeHooks(); return false;
+            LastError = ex.Message; stopped = true; DisposeHooks(); return false;
         }
+        finally { installing = false; }
     }
 
     public bool TryRequest(PortraitIdentity requestedSource, uint slot, Action<IPortraitOwnedSceneLease> onAdvance,
@@ -113,14 +124,19 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     {
         IPortraitOwnedSceneNativeHook<T>? hook = null;
         var detour = makeDetour(() => hook!.Original);
-        hook = factory.Create(target, detour); hooks.Add(hook);
+        // A factory which throws before returning a handle may already have created
+        // native state. No later cleanup can certify that unreturned resource retired.
+        unknownCreation = true;
+        hook = factory.Create(target, detour) ?? throw new InvalidOperationException("Native Create returned no handle.");
+        hooks.Add(hook); unknownCreation = false;
+        if (hook.IsEnabled || hook.IsDisposed) throw new InvalidOperationException("Native hook did not start disabled and live.");
     }
 
     private void Original(Action original)
     {
-        originalDepth++;
+        Interlocked.Increment(ref originalDepth);
         try { original(); }
-        finally { originalDepth--; }
+        finally { Interlocked.Decrement(ref originalDepth); }
     }
 
     private void Render(CharaView* view, uint frame, Func<CharaView.Delegates.Render> original)
@@ -265,21 +281,41 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     public bool TryDispose()
     {
         closing = true;
+        if (installing || Volatile.Read(ref originalDepth) != 0 || phaseDepth != 0)
+        { LastError = "Native installation or an active original/phase must return before hook retirement."; return false; }
         if (lease is { WasReleased: false, BoundView: not 0 })
         { LastError = "Owned native scene must retire in its native phase before hook disposal."; return false; }
-        ClearRequest(); DisposeHooks(); return true;
+        ClearRequest(); return DisposeHooks();
     }
     public void Dispose() => TryDispose();
-    private void DisposeHooks()
+    private bool DisposeHooks()
     {
         installed = false;
+        if (Volatile.Read(ref originalDepth) != 0 || phaseDepth != 0)
+        { LastError = "An active native original/phase still owns the hook batch."; return false; }
+        var complete = true;
         for (var i = hooks.Count - 1; i >= 0; i--)
         {
-            try { if (hooks[i].IsEnabled) hooks[i].Disable(); }
-            catch (Exception ex) { LastError = ex.Message; }
-            try { hooks[i].Dispose(); }
-            catch (Exception ex) { LastError = ex.Message; }
+            try
+            {
+                var hook = hooks[i];
+                if (hook.IsDisposed) continue;
+                if (hook.IsEnabled) hook.Disable();
+                if (hook.IsEnabled) { complete = false; LastError = "A native hook did not disable."; continue; }
+                hook.Dispose();
+                if (!hook.IsDisposed) { complete = false; LastError = "Native hook disposal was not confirmed."; }
+            }
+            catch (Exception ex) { complete = false; LastError = ex.Message; }
+        }
+        if (unknownCreation)
+        { LastError = "Native Create returned no handle; the complete address reservation remains isolated."; return false; }
+        if (!complete) return false;
+        if (reservation is not null)
+        {
+            if (!reservation.TryRelease(out var reason)) { LastError = reason; return false; }
+            reservation = null;
         }
         hooks.Clear();
+        return true;
     }
 }
