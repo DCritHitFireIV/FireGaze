@@ -122,7 +122,9 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
 
  private async Task<IReadOnlyList<PortraitLightRgba>> ReadAndRelease(IDalamudTextureWrap texture)
  {
-  using(texture)return await readback.ReadAsync(texture).ConfigureAwait(false);
+  // A public readback provider may do staging/Present work before it returns its Task. Keep that
+  // synchronous prefix outside Framework: Update only transfers an independently owned wrapper.
+  using(texture)return await Task.Run(()=>readback.ReadAsync(texture)).ConfigureAwait(false);
  }
 
  /// <summary>Call exactly once per UiBuilder.Draw. No native state is read here.</summary>

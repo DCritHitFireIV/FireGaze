@@ -11,8 +11,8 @@ var checks=0;
 void Check(bool condition,string name){if(!condition)throw new InvalidOperationException(name);checks++;Console.WriteLine("PASS "+name);}
 static PortraitLightingFitCaptureFrame Frame(FakeApi api)=>new(api.Sample,api.Surface);
 static void Settle(PortraitLightingFitCaptureBridge bridge){bridge.Update();bridge.Draw();bridge.Update();bridge.Draw();bridge.Update();}
-static void Copied(PortraitLightingFitCaptureBridge bridge,FakeApi api,Texture texture)
-{api.Copy.SetResult(new(2,1,[new(texture)]));bridge.Update();bridge.Draw();bridge.Update();}
+static async Task Copied(PortraitLightingFitCaptureBridge bridge,FakeApi api,Readback readback,Texture texture)
+{api.Copy.SetResult(new(2,1,[new(texture)]));bridge.Update();bridge.Draw();bridge.Update();await Until(()=>readback.Calls==1);}
 static async Task Until(Func<bool> condition){var end=DateTime.UtcNow.AddSeconds(5);while(!condition()){if(DateTime.UtcNow>end)throw new TimeoutException();await Task.Delay(1);}}
 var api=new FakeApi();var readback=new Readback(api);
 using(var bridge=new PortraitLightingFitCaptureBridge(api,readback))
@@ -30,7 +30,7 @@ using(var bridge=new PortraitLightingFitCaptureBridge(api,readback))
  bridge.Draw();Check(api.Composes==0,"copy completion cannot bypass a fresh Framework sample before composition");
  bridge.Update();Check(api.Composes==0,"Framework validation never composes a draw list");
  bridge.Draw();Check(api.Composes==1&&layer.Disposes==1&&readback.Calls==0,"Draw composes and releases input layers without starting CPU readback");
- bridge.Update();Check(readback.Calls==1&&api.Outputs[0].Disposes==0,"next Framework validation begins readback while retaining composed surface");
+ bridge.Update();await Until(()=>readback.Calls==1);Check(api.Outputs[0].Disposes==0,"next Framework validation begins readback while retaining composed surface");
  readback.Pending.SetResult([new(12,34,56,255),new(78,90,123,255)]);
  await Until(()=>api.Outputs[0].Disposes==1);
  Check(!task.IsCompleted,"completed CPU readback waits for Framework post-validation");
@@ -68,7 +68,7 @@ foreach(var phase in new[]{"copy","readback"})
 {
  var a=new FakeApi();var r=new Readback(a);using var bridge=new PortraitLightingFitCaptureBridge(a,r);
  var old=bridge.CaptureAsync(Frame(a));Settle(bridge);
- if(phase=="readback")Copied(bridge,a,new Texture());
+ if(phase=="readback")await Copied(bridge,a,r,new Texture());
  bridge.Close();
  var refused=bridge.CaptureAsync(Frame(a));Check(refused.IsFaulted&&bridge.IsBusy&&!old.IsCompleted,phase+" cancellation preserves one physical in-flight barrier across reopen");_=refused.Exception;
  if(phase=="copy"){var late=new Texture();a.Copy.SetResult(new(2,1,[new(late)]));bridge.Update();Check(late.Disposes==1,"cancelled late copy is disposed exactly once");}
@@ -77,8 +77,16 @@ foreach(var phase in new[]{"copy","readback"})
  var fresh=bridge.CaptureAsync(Frame(a));Check(!fresh.IsCompleted,"new capture may start after old physical work completes");bridge.Close();_=fresh.Exception;
 }
 {
+ var a=new FakeApi();var r=new Readback(a){BlockSubmission=true};using var bridge=new PortraitLightingFitCaptureBridge(a,r);
+ var task=bridge.CaptureAsync(Frame(a));Settle(bridge);await Copied(bridge,a,r,new Texture());
+ Check(r.SubmissionEntered.Wait(TimeSpan.FromSeconds(5)),"physical readback submission starts after Framework validation");
+ Check(!r.SubmissionReturned.IsSet,"Framework update returns while a readback provider synchronous prefix remains blocked");
+ r.ReleaseSubmission.Set();r.Pending.SetResult([new(1,2,3,255),new(4,5,6,255)]);
+ await Until(()=>a.Outputs[0].Disposes==1);bridge.Update();Check(task.IsCompletedSuccessfully,"deferred readback still publishes after Framework validation");
+}
+{
  var a=new FakeApi();var r=new Readback(a);using var bridge=new PortraitLightingFitCaptureBridge(a,r);
- var task=bridge.CaptureAsync(Frame(a));Settle(bridge);Copied(bridge,a,new Texture());
+ var task=bridge.CaptureAsync(Frame(a));Settle(bridge);await Copied(bridge,a,r,new Texture());
  a.Sample=a.Sample with{StateKey="changed-during-readback"};r.Pending.SetResult([new(1,2,3,255),new(4,5,6,255)]);
  await Until(()=>a.Outputs[0].Disposes==1);bridge.Update();
  Check(task.IsFaulted,"full sample is revalidated after CPU readback before publication");_=task.Exception;
@@ -87,7 +95,7 @@ foreach(var phase in new[]{"copy","readback"})
 {
  var a=new FakeApi();var r=new Readback(a);var bridge=new PortraitLightingFitCaptureBridge(a,r);
  var task=bridge.CaptureAsync(Frame(a));Settle(bridge);
- if(phase=="readback")Copied(bridge,a,new Texture());
+ if(phase=="readback")await Copied(bridge,a,r,new Texture());
  var before=DateTime.UtcNow;bridge.Dispose();Check(DateTime.UtcNow-before<TimeSpan.FromSeconds(1)&&!task.IsCompleted,phase+" unload never blocks on unfinished GPU work");
  Texture? late=null;
  if(phase=="copy"){late=new Texture();a.Copy.SetResult(new(2,1,[new(late)]));}
@@ -106,7 +114,8 @@ foreach(var phase in new[]{"copy","compose","readback"})foreach(var dispose in n
  Action cancel=()=>{if(dispose)bridge.Dispose();else bridge.Close();};
  if(phase=="copy")a.OnCapture=cancel;else if(phase=="compose")a.OnCompose=cancel;else r.OnRead=cancel;
  var task=bridge.CaptureAsync(Frame(a));Settle(bridge);
- if(phase=="compose"||phase=="readback")Copied(bridge,a,new Texture());
+ if(phase=="readback")await Copied(bridge,a,r,new Texture());
+ else if(phase=="compose"){a.Copy.SetResult(new(2,1,[new(new Texture())]));bridge.Update();bridge.Draw();bridge.Update();}
  if(phase=="copy")a.Copy.SetResult(new(2,1,[new(new Texture())]));
  else if(phase=="readback")r.Pending.SetResult([new(1,2,3,255),new(4,5,6,255)]);
  for(var spin=0;spin<30&&!task.IsCompleted;spin++){bridge.Update();await Task.Delay(1);}
@@ -122,9 +131,21 @@ foreach(var failure in new[]{"copy","compose","readback","dimensions","pixels","
  {
   if(failure=="compose")a.OnCompose=()=>throw new InvalidOperationException("compose failure");
   a.Copy.SetResult(new(failure=="dimensions"?3:2,1,[new(new Texture())]));bridge.Update();bridge.Draw();bridge.Update();
-  if(failure=="readback")r.Pending.SetException(new InvalidOperationException("read failure"));
-  else if(failure=="pixels")r.Pending.SetResult([new(1,2,3,255)]);
-  else if(failure=="nonfinite")r.Pending.SetResult([new(double.NaN,2,3,255),new(1,2,3,255)]);
+  if(failure=="readback")
+  {
+   await Until(()=>r.Calls==1);
+   r.Pending.SetException(new InvalidOperationException("read failure"));
+  }
+  else if(failure=="pixels")
+  {
+   await Until(()=>r.Calls==1);
+   r.Pending.SetResult([new(1,2,3,255)]);
+  }
+  else if(failure=="nonfinite")
+  {
+   await Until(()=>r.Calls==1);
+   r.Pending.SetResult([new(double.NaN,2,3,255),new(1,2,3,255)]);
+  }
  }
  for(var spin=0;spin<30&&!task.IsCompleted;spin++){bridge.Update();await Task.Delay(1);}
  Check(task.IsFaulted&&!bridge.IsBusy,failure+" failure rejects publication and drains bridge");
@@ -160,8 +181,15 @@ sealed class FakeApi:IPortraitLightingFitCaptureApi
 }
 sealed class Readback(FakeApi api):IPortraitLightingFitReadback
 {
- public int Calls;public Action? OnRead;public TaskCompletionSource<IReadOnlyList<PortraitLightRgba>> Pending=new(TaskCreationOptions.RunContinuationsAsynchronously);
- public Task<IReadOnlyList<PortraitLightRgba>> ReadAsync(IDalamudTextureWrap texture){if(!api.Framework)throw new InvalidOperationException("off-framework readback submission");Calls++;Pending=new(TaskCreationOptions.RunContinuationsAsynchronously);OnRead?.Invoke();return Pending.Task;}
+ public int Calls;public Action? OnRead;public bool BlockSubmission;
+ public ManualResetEventSlim SubmissionEntered=new(false),SubmissionReturned=new(false),ReleaseSubmission=new(false);
+ public TaskCompletionSource<IReadOnlyList<PortraitLightRgba>> Pending=new(TaskCreationOptions.RunContinuationsAsynchronously);
+ public Task<IReadOnlyList<PortraitLightRgba>> ReadAsync(IDalamudTextureWrap texture)
+ {
+  GC.KeepAlive(api);
+  Calls++;Pending=new(TaskCreationOptions.RunContinuationsAsynchronously);OnRead?.Invoke();SubmissionEntered.Set();
+  if(BlockSubmission)ReleaseSubmission.Wait();SubmissionReturned.Set();return Pending.Task;
+ }
 }
 sealed class Texture(int width=2,int height=1):IDalamudTextureWrap
 {
