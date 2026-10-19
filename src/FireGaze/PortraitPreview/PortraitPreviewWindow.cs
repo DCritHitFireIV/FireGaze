@@ -58,10 +58,18 @@ internal interface IPortraitPreviewViewModel
     PortraitImageScope LiveCaptureScope => PortraitImageScope.Portrait;
     void SetLiveCaptureScope(PortraitImageScope scope) { }
     PortraitDirectionalLightView? DirectionalLight => null;
+    PortraitComposition? CurrentComposition => null;
+    PortraitLightingSpaceBinding? CurrentLightingSpaceBinding => null;
+    void ApplyLightingSpace(PortraitLightingSpaceBinding expected, PortraitComposition desired) { }
     void BeginLightDrag(long token) { }
     void MoveLightDrag(long token, float vertical, float horizontal) { }
     void EndLightDrag(long token, float vertical, float horizontal) { }
     void CancelLightDrag(long token) { }
+    PortraitLightingFitView? LightingFit => null;
+    void StartLightingFit(PortraitColorToneTarget target, PortraitSampleRegion region) { }
+    void StartLightingFit(PortraitColorToneTarget target, PortraitSampleRegion region, string? expectedFixedStateKey)
+        => StartLightingFit(target, region);
+    void CancelLightingFit() { }
 }
 
 /// <summary>Independent wardrobe UI using game-local textures, without Dresser code or plugin IPC.</summary>
@@ -135,12 +143,23 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     public override void OnClose()
     {
-        CancelLightInteraction();
+        feature.ClosePreview();
+        if (!feature.IsActive) CloseAuxiliaryWindows();
+    }
+
+    public void CloseAuxiliaryWindows()
+    {
+        showHistory = showFavorites = showGlamourPlates = showAnalysis = showLight = showLightingFit = showSpaceLight = showSourceGuide = false;
+        BindLightingSubject(null);
+        editingFavorite = deletingFavorite = null;
+        // Feature lifetime cleanup owns its gesture; do not resample a retiring editor from a UI callback.
+        lightPointerToken = 0;
         analysis.Invalidate();
         analysisPreview?.Dispose();
         analysisPreview = null;
+        analysisRecord = 0;
+        analysisInputStatus = "";
         comparisonReference.Clear();
-        feature.ClosePreview();
     }
 
     public override void PreDraw()

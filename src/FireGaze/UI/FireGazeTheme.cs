@@ -63,6 +63,28 @@ internal static class FireGazeTheme
         draw();
     }
 
+    /// <summary>Warm paper surface for the portrait workspace nested inside the main information shell.</summary>
+    public static IDisposable PushPortrait() => PushPortrait(NativeStyleStack.Instance);
+
+    internal static IDisposable PushPortrait(IFireGazeStyleStack stack)
+    {
+        ArgumentNullException.ThrowIfNull(stack);
+        return new OverrideScope(stack,
+        [
+            (ImGuiCol.WindowBg, FireGazePalette.PortraitWindow),
+            (ImGuiCol.ChildBg, FireGazePalette.PortraitPanel),
+            (ImGuiCol.PopupBg, FireGazePalette.PortraitPanel),
+            (ImGuiCol.FrameBg, FireGazePalette.PortraitRaised),
+            (ImGuiCol.Button, FireGazePalette.PortraitRaised),
+            (ImGuiCol.FrameBgHovered, FireGazePalette.PortraitHover),
+            (ImGuiCol.ButtonHovered, FireGazePalette.PortraitHover),
+            (ImGuiCol.Border, FireGazePalette.PortraitBorder),
+            (ImGuiCol.Separator, FireGazePalette.PortraitBorder),
+            (ImGuiCol.TableRowBg, FireGazePalette.PortraitPanel),
+            (ImGuiCol.TableRowBgAlt, FireGazePalette.PortraitRaised),
+        ]);
+    }
+
     internal static void Draw(Action draw, IFireGazeStyleStack stack, float scale)
     {
         ArgumentNullException.ThrowIfNull(draw);
@@ -152,6 +174,34 @@ internal static class FireGazeTheme
             {
                 if (colors > 0) stack.PopColors(colors);
             }
+        }
+    }
+
+    private sealed class OverrideScope : IDisposable
+    {
+        private readonly IFireGazeStyleStack stack;
+        private readonly int count;
+        private bool disposed;
+
+        public OverrideScope(IFireGazeStyleStack stack, IReadOnlyList<(ImGuiCol Role, Vector4 Color)> colors)
+        {
+            this.stack = stack;
+            try
+            {
+                foreach (var (role, color) in colors) { stack.PushColor(role, color); count++; }
+            }
+            catch
+            {
+                Dispose();
+                throw;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (disposed) return;
+            disposed = true;
+            if (count > 0) stack.PopColors(count);
         }
     }
 

@@ -145,6 +145,8 @@ unsafe class Program
   f.RefuseOriginalHide=false;
   Check(t.AbortCapturedEditor() && f.OriginalHideCalls==2 && f.Editor->EditorState==null,
    "emergency teardown uses verified original native hide when a PreHide listener blocks ordinary hide");
+  AbortUnreadyCases();
+  PreviewSessionUnreadyCases();
   using(var owner=new PlateOwnerFixture())
   {
    var binding=owner.Binding;
@@ -204,6 +206,71 @@ unsafe class Program
    "deferred mirror disposal reports its final failure to the target after reentrant native teardown returns");
   t.Dispose();Check(!t.IsCurrent(id) && !t.ShouldBlockSave((nint)f.State),"disposed adapter cannot touch native pointers or block saves");
   Console.WriteLine($"{passed}/{passed+failed} portrait native boundary cases passed");return failed==0?0:1;
+ }
+ static void PreviewSessionUnreadyCases()
+ {
+  foreach(var missing in new[]{"view state","local player","character"})
+  {
+   using var f=new Fixture();PortraitPreviewSession? session=null;
+   using var t=new NativePortraitTarget(f,identity=>session?.BlockSave(identity)==true,_=>{});
+   session=new(t);t.TryResolve(out var owner,out _,out _);session.Open(owner);
+   if(missing=="view state")f.View->State=5;else if(missing=="local player")f.Local=null;else f.ReturnNoCharacter=true;
+   session.Validate();
+   Check(session.IsActive && session.BlockSave(owner) && t.ShouldBlockSave((nint)f.State),
+    $"{missing}: actual session validation retains native Save detour protection during same-owner unreadiness");
+   var calls=f.Calls;
+   Check(!session.Close() && session.IsActive && f.Calls==calls && t.ShouldBlockSave((nint)f.State),
+    $"{missing}: close waits for a ready owned portrait and does not silently release save protection");
+   f.View->State=6;f.Local=f.Real;f.ReturnNoCharacter=false;
+   session.Validate();
+   Check(session.IsActive && session.Close() && !session.IsActive && !t.ShouldBlockSave((nint)f.State),
+    $"{missing}: recovery restores the original wardrobe and only then permits native saving");
+  }
+  using(var f=new Fixture())
+  {
+   PortraitPreviewSession? session=null;using var t=new NativePortraitTarget(f,identity=>session?.BlockSave(identity)==true,_=>{});
+   session=new(t);t.TryResolve(out var owner,out _,out _);session.Open(owner);
+   f.Editor->EditorState=null;session.Validate();
+   Check(!session.IsActive && !session.BlockSave(owner) && session.Close(),
+    "actual native state detachment retires the lease without touching a successor");
+  }
+ }
+ static void AbortUnreadyCases()
+ {
+  foreach(var missing in new[]{"view state","local player","character"})
+  {
+   using var f=new Fixture();using var t=new NativePortraitTarget(f,_=>true,_=>{});
+   t.TryResolve(out var owner,out _,out _);t.Capture(owner);
+   if(missing=="view state")f.View->State=5;else if(missing=="local player")f.Local=null;else f.ReturnNoCharacter=true;
+   Check(!t.IsCurrent(owner)&&t.ShouldBlockSave((nint)f.State),$"{missing}: unreadiness retains exact editor-state save lease");
+   Check(t.AbortCapturedEditor()&&f.HideCalls==1&&f.Editor->EditorState==null,
+    $"{missing}: unload really closes the retained editor instead of claiming it was destroyed");
+  }
+  using(var f=new Fixture())using(var t=new NativePortraitTarget(f,_=>true,_=>{}))
+  {
+   t.TryResolve(out var owner,out _,out _);t.Capture(owner);f.View->State=5;f.RefuseHide=true;f.OriginalHideAvailable=true;
+   Check(t.AbortCapturedEditor()&&f.HideCalls==1&&f.OriginalHideCalls==1&&f.Editor->EditorState==null,
+    "unready editor falls back to verified original hide on its unchanged state lease");
+  }
+  using(var f=new Fixture())using(var t=new NativePortraitTarget(f,_=>true,_=>{}))
+  {
+   t.TryResolve(out var owner,out _,out _);t.Capture(owner);f.ReturnNoEditor=true;
+   Check(!t.AbortCapturedEditor()&&f.HideCalls==0,"missing editor lookup is uncertainty and cannot report successful unload cleanup");
+   f.ReturnNoEditor=false;
+   Check(t.ShouldBlockSave((nint)f.State)&&t.AbortCapturedEditor()&&f.HideCalls==1,
+    "temporarily unreadable editor is still blocked and can be retried when lookup returns");
+  }
+  using(var f=new Fixture())using(var t=new NativePortraitTarget(f,_=>true,_=>{}))
+  {
+   t.TryResolve(out var owner,out _,out _);t.Capture(owner);f.OnHide=()=>f.Framework=false;
+   Check(!t.AbortCapturedEditor()&&f.HideCalls==1,"losing Framework during native hide cannot turn an unreadable lease into success");
+   f.Framework=true;
+  }
+  using(var f=new Fixture())
+  {
+   var t=new NativePortraitTarget(f,_=>true,_=>{});t.TryResolve(out var owner,out _,out _);t.Capture(owner);t.Dispose();
+   Check(!t.AbortCapturedEditor()&&f.HideCalls==0,"disposed target cannot prove cleanup or hide its former editor");
+  }
  }
 }
 
@@ -272,6 +339,7 @@ unsafe sealed class Fixture : IPortraitNativeApi,IDisposable
  public Character* Real=(Character*)NativeMemory.AllocZeroed((nuint)sizeof(Character));
  public Character* Local;public bool Framework=true,Active=true,BoundsAvailable=true;public int Calls,Cleared;public Action? OnLookup;public bool ThrowItem,ReplaceOnItem,RefuseHide;public int HideCalls;
  public bool OriginalHideAvailable,RefuseOriginalHide,ReplaceOwnerOnHide;public int OriginalHideCalls;
+ public bool ReturnNoEditor,ReturnNoCharacter;public Action? OnHide;
  public uint Generation {get=>*(uint*)((byte*)Actor+0x74);set=>*(uint*)((byte*)Actor+0x74)=value;}
  public Fixture()
  {
@@ -285,15 +353,15 @@ unsafe sealed class Fixture : IPortraitNativeApi,IDisposable
   View->PortraitCharacterData.GlassesIds[0]=42;View->ModelData.GlassesIds[0]=42;Actor->DrawData.GlassesIds[0]=42;
  }
  public bool IsFrameworkThread=>Framework;
- public AgentBannerEditor* GetEditor()=>Editor;
+ public AgentBannerEditor* GetEditor()=>ReturnNoEditor?null:Editor;
  public bool IsEditorActive(AgentBannerEditor* e)=>Active;
  public bool TryGetBounds(AgentBannerEditor* e,out PortraitEditorBounds bounds) {bounds=new(10,20,800,650);return BoundsAvailable;}
  public Character* GetLocalPlayer()=>Local;
- public Character* GetCharacter(CharaViewPortrait* v) {OnLookup?.Invoke();return Actor;}
+ public Character* GetCharacter(CharaViewPortrait* v) {OnLookup?.Invoke();return ReturnNoCharacter?null:Actor;}
  public void SetItem(CharaViewPortrait* v,byte slot,PortraitPiece p,bool crest) {Calls++;if(ThrowItem)throw new InvalidOperationException("native test failure");if(ReplaceOnItem){Editor->EditorState=null;return;}if(p.ItemID==0)Cleared++;for(int i=0;i<14;i++)if(v->Items[i].SlotId==slot||v->Items[i].SlotId==14) {v->Items[i]=new(){SlotId=slot,ItemId=p.ItemID,Stain0Id=p.Stain0,Stain1Id=p.Stain1};break;}}
  public void SetGlasses(Character* c,ushort glasses) {Calls++;c->DrawData.GlassesIds[0]=glasses;}
  public void SetVisibility(CharaViewPortrait* v,bool head,bool weapon,bool visor) {v->PortraitCharacterData.HeadgearHidden=!head;v->PortraitCharacterData.WeaponHidden=!weapon;v->PortraitCharacterData.VisorClosed=visor;}
- public void HideEditor(AgentBannerEditor* e) {HideCalls++;if(ReplaceOwnerOnHide){State->AgentBannerEditor=null;return;}if(!RefuseHide)e->EditorState=null;}
+ public void HideEditor(AgentBannerEditor* e) {HideCalls++;OnHide?.Invoke();if(ReplaceOwnerOnHide){State->AgentBannerEditor=null;return;}if(!RefuseHide)e->EditorState=null;}
  public bool TryHideOriginalEditor(AgentBannerEditor* e,AgentBannerEditorState* state)
  {
   if(!OriginalHideAvailable || Editor!=e || e->EditorState!=state || state->AgentBannerEditor!=e)return false;

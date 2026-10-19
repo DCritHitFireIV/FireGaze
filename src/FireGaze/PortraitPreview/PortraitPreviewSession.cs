@@ -20,6 +20,9 @@ internal sealed record PortraitLook(PortraitPiece[] Pieces, bool HeadVisible, bo
 internal interface IPortraitPreviewTarget
 {
     bool IsCurrent(PortraitIdentity identity);
+    // Legacy synchronous targets use IsCurrent solely for ownership. Native targets must override
+    // this with positive lifecycle proof when readiness can temporarily prevent a current lookup.
+    bool IsEditorOwnerDestroyed(PortraitIdentity identity) => !IsCurrent(identity);
     PortraitLook? Capture(PortraitIdentity identity);
     bool Apply(PortraitIdentity identity, PortraitLook look);
     bool RestoreOriginal(PortraitIdentity identity, PortraitLook look) => Apply(identity, look);
@@ -55,13 +58,13 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
 
     public void Validate()
     {
-        if (IsActive && !target.IsCurrent(identity)) Forget();
+        if (IsActive && target.IsEditorOwnerDestroyed(identity)) Forget();
     }
 
     public bool ObserveLook(PortraitLook observed)
     {
         Validate();
-        if (!IsActive || observed.Pieces.Length != 13 || observed.Pieces[12].ItemID > ushort.MaxValue) return false;
+        if (!IsActive || !target.IsCurrent(identity) || observed.Pieces.Length != 13 || observed.Pieces[12].ItemID > ushort.MaxValue) return false;
         // The native adapter has already applied and validated this historical snapshot.
         Current = observed.Copy();
         return true;
@@ -88,10 +91,11 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
 
     private bool Apply(PortraitLook next)
     {
-        if (!IsActive || !target.IsCurrent(identity)) { Forget(); return false; }
+        Validate();
+        if (!IsActive || !target.IsCurrent(identity)) return false;
         var applied = target.Apply(identity, next);
-        if (!target.IsCurrent(identity)) { Forget(); return false; }
-        if (!applied) return false;
+        Validate();
+        if (!IsActive || !target.IsCurrent(identity) || !applied) return false;
         Current = next;
         return true;
     }
@@ -101,13 +105,14 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
         var restore = original;
         var previous = identity;
         if (restore is null) return true;
-        if (!target.IsCurrent(previous)) { Forget(); return true; }
+        if (target.IsEditorOwnerDestroyed(previous)) { Forget(); return true; }
+        if (!target.IsCurrent(previous)) return false;
         bool restored;
         try { restored = target.RestoreOriginal(previous, restore); }
         catch { return false; }
         // A replaced native allocation owns its own appearance. Never roll the old look into it.
-        if (!target.IsCurrent(previous)) { Forget(); return true; }
-        if (!restored) return false;
+        if (target.IsEditorOwnerDestroyed(previous)) { Forget(); return true; }
+        if (!restored || !target.IsCurrent(previous)) return false;
         Forget();
         return true;
     }

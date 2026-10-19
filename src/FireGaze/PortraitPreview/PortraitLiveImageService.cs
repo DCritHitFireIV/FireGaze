@@ -2,6 +2,9 @@ using Dalamud.Interface.Textures.TextureWraps;
 
 namespace FireGaze.PortraitPreview;
 
+internal sealed record PortraitLiveCaptureDiagnostics(bool busy,bool hasImage,string? error,
+ string phase,int width,int height,string stateKey);
+
 /// <summary>
 /// One physical copy at a time. Framework validates immutable state; Draw composes owned resources;
 /// another Framework pass validates before publication. No native pointer is used after an await.
@@ -22,6 +25,19 @@ internal sealed class PortraitLiveImageService:IDisposable
  {this.api=api;gate=new(clock??(()=>DateTimeOffset.UtcNow));}
  public string? Error{get{lock(sync)return error;}}
  public bool IsBusy{get{lock(sync)return work is not null;}}
+ public PortraitLiveCaptureDiagnostics Diagnostics
+ {
+  get
+  {
+   lock(sync)
+   {
+    var phase=disposed?"disposed":work is {Candidate:not null}?"awaiting-publication":
+     work is {Consumed:true,Layers:not null}?"awaiting-composition":work is not null?"copying":
+     current is not null?"published":request is null?"closed":"settling";
+    return new(work is not null,current is not null,error,phase,current?.Width??0,current?.Height??0,current?.Sample.StateKey??"");
+   }
+  }
+ }
  public void Request(PortraitImageScope scope,PortraitCaptureViewport viewport)
  {
   if(scope is not (PortraitImageScope.Portrait or PortraitImageScope.VisibleAdventurerPlate))throw new ArgumentOutOfRangeException(nameof(scope));
@@ -81,7 +97,9 @@ internal sealed class PortraitLiveImageService:IDisposable
   lock(sync)
   {
    if(disposed)return;
-   if(inputHeld){gate.Reset();ClearCurrent();return;}
+   // Tools select regions on the independently owned published image. Held input delays new
+   // captures, while Framework's full sample comparison still retires any genuinely stale image.
+   if(inputHeld){gate.Reset();return;}
    if(work is not {Consumed:true,Layers:{} layers} active||!gate.CanAccept(active.Ticket))return;
    active.Layers=null;
    IDalamudTextureWrap? composed=null;

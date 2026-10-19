@@ -1,5 +1,4 @@
 using System.Numerics;
-using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Plugin.Services;
@@ -8,7 +7,7 @@ namespace FireGaze.PortraitPreview;
 
 /// <summary>
 /// Disposable visual indexes for history. Native state is only sampled on Framework; the UI
-/// composites owned copies using Dalamud, and a single background writer owns all cache I/O.
+/// composes owned pixel copies, and a single background writer owns all cache I/O.
 /// Browsing never restores a history state or changes the currently edited portrait.
 /// </summary>
 internal sealed class PortraitHistoryPhotos : IDisposable
@@ -169,7 +168,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         ticket = null;
     }
 
-    /// <summary>Must run within UiBuilder.Draw, where the public draw-list renderer is supported.</summary>
+    /// <summary>Schedules owned pixel work without changing the game's render context.</summary>
     public void Draw(bool pointerDown = false)
     {
         lock (sync)
@@ -182,29 +181,25 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 {
                     using var layers = capture.GetAwaiter().GetResult();
                     if (layers is null || ticket is null || !gate.CanAccept(ticket)) { Reject(); return; }
-                    using var composed = textures.CreateDrawListTexture("FireGaze history composition");
-                    composed.Size = new(160, 256);
-                    composed.ClearColor = Vector4.Zero;
-                    var draw = ImGui.ImDrawList(ImGui.GetDrawListSharedData());
-                    try
-                    {
-                        draw._ResetForNewFrame();
-                        draw.PushClipRect(Vector2.Zero, new(160, 256), false);
-                        draw.AddImage(layers.Character.Handle, Vector2.Zero, new(160, 256));
-                        if (layers.Frame is { } frame) draw.AddImage(frame.Handle, Vector2.Zero, new(160, 256), layers.FrameUV0, layers.FrameUV1);
-                        if (layers.Accent is { } accent) draw.AddImage(accent.Handle, Vector2.Zero, new(160, 256), layers.AccentUV0, layers.AccentUV1);
-                        draw.PopClipRect();
-                        composed.Draw(draw, Vector2.Zero, Vector2.One);
-                    }
-                    finally { draw.Destroy(); }
-                    // This owned reference keeps the composed surface alive until readback ends.
-                    var owned = composed.CreateWrapSharingLowLevelResource();
-                    encoding = Encode(owned, layers.Character, lifetime.Token);
+                    var inputs = new List<PortraitCaptureLayer> { new(layers.Character) };
+                    if (layers.Frame is { } frame) inputs.Add(new(frame, UV0: layers.FrameUV0, UV1: layers.FrameUV1));
+                    if (layers.Accent is { } accent) inputs.Add(new(accent, UV0: layers.AccentUV0, UV1: layers.AccentUV1));
+                    encoding = ComposeAndEncode(inputs, layers.Character, lifetime.Token);
                 }
                 catch (Exception error) { lastError = error.Message; Reject(); }
                 finally { capture = null; }
             }
         }
+    }
+
+    private async Task<byte[]> ComposeAndEncode(IReadOnlyList<PortraitCaptureLayer> layers,
+        IDalamudTextureWrap character, CancellationToken token)
+    {
+        // Both the compositor and the visibility check own their references before Draw returns.
+        using var retainedCharacter = character.CreateWrapSharingLowLevelResource();
+        var composed = await new PortraitCaptureSoftwareCompositor(textures, readback)
+            .ComposeAsync(160, 256, layers, token).ConfigureAwait(false);
+        return await Encode(composed, retainedCharacter, token).ConfigureAwait(false);
     }
 
     private async Task<byte[]> Encode(IDalamudTextureWrap texture, IDalamudTextureWrap character, CancellationToken token)

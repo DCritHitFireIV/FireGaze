@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <AssemblyName>fgtest</AssemblyName><NoWarn>$(NoWarn);CS0436</NoWarn>
+    <DALAMUD_HOME Condition="'$(DALAMUD_HOME)' == ''">$(APPDATA)/XIVLauncherCN/addon/Hooks/dev</DALAMUD_HOME>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow*.cs" LinkBase="Window" />
+    <Reference Include="FireGaze"><HintPath>../../src/FireGaze/bin/Release/FireGaze.dll</HintPath></Reference>
+    <Reference Include="FireGaze.LocalPreview.Core"><HintPath>../../src/FireGaze/bin/Release/FireGaze.LocalPreview.Core.dll</HintPath></Reference>
+    <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>
+    <Reference Include="Dalamud.Bindings.ImGui"><HintPath>$(DALAMUD_HOME)/Dalamud.Bindings.ImGui.dll</HintPath></Reference>
+    <Reference Include="Lumina"><HintPath>$(DALAMUD_HOME)/Lumina.dll</HintPath></Reference>
+    <Reference Include="Lumina.Excel"><HintPath>$(DALAMUD_HOME)/Lumina.Excel.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

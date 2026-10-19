@@ -15,6 +15,8 @@ unsafe class Program
         RaptureGearsetModule.Value=(RaptureGearsetModule*)NativeMemory.AllocZeroed((nuint)sizeof(RaptureGearsetModule));
         try
         {
+            PortraitWindowLifecycleCases.Run(root, Check);
+            PortraitLightingSpaceCommitCases.Run(root, Check);
             PortraitOperationLabelTests.Run(root, Check);
             PortraitPlaybackHistoryTests.Run(root, Check);
             PortraitLibraryIntegrationTests.Run(root, Check);
@@ -236,6 +238,7 @@ unsafe class Program
                 Check(feature.SyncPlate && feature.Key==key && feature.History.Count>0 && feature.MirrorUpdates==mirrors,
                     "temporarily hidden editor retains source and mirror preference without writing to a loading allocation");
             }
+            PortraitLightingSuppressionCases.Run(root,Check);
             Console.WriteLine($"PortraitFeatureIntegrationTests: {passed} passed, 0 failed");
             return 0;
         }

@@ -20,6 +20,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (scope is not (PortraitImageScope.Portrait or PortraitImageScope.VisibleAdventurerPlate)) return;
         if (captureScope == scope) return;
+        if (!CancelLightingFitForEdit()) return;
         captureScope = scope;
         liveImageService?.Close();
         requestedCaptureViewport = null;
@@ -30,7 +31,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         var source = new PortraitLiveCaptureSource(Plugin.Framework, Plugin.GameGUI, Plugin.Objects,
             Plugin.AddonLifecycle, ReadFreshCaptureEditor);
-        liveCaptureAPI = new PortraitLiveCaptureApi(source, new PortraitCaptureTextures(Plugin.Textures));
+        liveCaptureAPI = new PortraitLiveCaptureApi(source, new PortraitCaptureTextures(Plugin.Textures, Plugin.TextureReadback));
         liveImageService = new PortraitLiveImageService(liveCaptureAPI);
     }
 
@@ -83,6 +84,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void DrawLiveCapture()
     {
+        if (LightingFitHistorySuppressed) return;
         PollLiveCapture();
         liveImageService?.Draw(pointerHeld || sampledKeyboard);
     }

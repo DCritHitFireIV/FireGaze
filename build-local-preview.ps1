@@ -66,7 +66,10 @@ foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'Port
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
-foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests')) {
+foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightingSpaceTests', 'PortraitAnalysisWindowTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests', 'PortraitSoftwareCompositionTests')) {
+    Invoke-PreviewSuite $previewSuite
+}
+foreach ($previewSuite in @('PortraitLightingNativeTests', 'PortraitLightingAdapterTests', 'PortraitLightingBindingTests', 'PortraitLightingCaptureTests', 'PortraitLightingControlsTests', 'PortraitLightingFeatureBackendTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 foreach ($previewSuite in @('PortraitEditorStateTests', 'PortraitEditingTests', 'PortraitOperationLabelTests', 'PortraitHistoryTests', 'PortraitHistoryPerformanceTests', 'PortraitThumbnailTests', 'PortraitThumbnailPipelineTests', 'PortraitThumbnailSourceTests', 'PortraitHistoryPhotoIntegrationTests', 'PortraitPlateMirrorTests', 'PortraitFeatureIntegrationTests', 'PortraitVisualLayoutTests', 'PortraitPopupLayoutTests', 'VisualSystemTests')) {
@@ -78,7 +81,7 @@ if ($SqpackPath) {
         Invoke-PreviewSuite $previewSuite @('--', '--sqpack', $SqpackPath)
     }
     Invoke-PreviewSuite 'GposeEmoteTests' @('--', $SqpackPath)
-    foreach ($previewSuite in @('TrialSpecialHotbarTests', 'TrialSpecialRuntimeTests', 'NativeCompatibilityTests', 'NativeEmoteTests')) {
+    foreach ($previewSuite in @('TrialSpecialHotbarTests', 'TrialSpecialRuntimeTests', 'NativeCompatibilityTests', 'NativeCollectionTransitionTests', 'NativeEmoteTests')) {
         Invoke-PreviewSuite $previewSuite @('--', $SqpackPath)
     }
     Invoke-PreviewSuite 'LocalPreviewInteractionTests' @('--', '--sqpack', $SqpackPath)
@@ -88,10 +91,10 @@ if ($SqpackPath) {
     }
     Invoke-PreviewSuite 'GposeEmoteTests'
     Invoke-PreviewSuite 'LocalPreviewInteractionTests'
-    foreach ($previewSuite in @('TrialSpecialHotbarTests', 'TrialSpecialRuntimeTests', 'NativeCompatibilityTests', 'NativeEmoteTests')) {
+    foreach ($previewSuite in @('TrialSpecialHotbarTests', 'TrialSpecialRuntimeTests', 'NativeCompatibilityTests', 'NativeCollectionTransitionTests', 'NativeEmoteTests')) {
         $previewSkippedSuites.Add($previewSuite)
     }
-    Write-Warning 'No current CN SqpackPath: four data-dependent suites and the GPose/item/portrait game-data extensions were not run; portrait appearance/validation ran their base checks only.'
+    Write-Warning 'No current CN SqpackPath: five data-dependent suites and the GPose/item/portrait game-data extensions were not run; portrait appearance/validation ran their base checks only.'
 }
 
 if ($HmsCompatRoot) {
@@ -107,8 +110,9 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests', 'ArtifactPortabilityTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+Invoke-PreviewSuite 'PortraitWindowLifecycleTests'
 
-Write-Output "Offline validation finished: $previewCompletedSuites/50 suites; skipped: $($previewSkippedSuites -join ', ')."
+Write-Output "Offline validation finished: $previewCompletedSuites suites; skipped: $($previewSkippedSuites -join ', ')."
 if (!$SqpackPath) { Write-Output 'Current-client GPose, item-data, portrait appearance, and portrait validation coverage is incomplete.' }
 Write-Output 'Build and offline checks do not prove in-game or two-client acceptance.'
 exit 0

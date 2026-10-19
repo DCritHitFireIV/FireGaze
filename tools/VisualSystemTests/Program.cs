@@ -27,16 +27,13 @@ static double Contrast(Vector4 left, Vector4 right)
     return (Math.Max(a, b) + .05) / (Math.Min(a, b) + .05);
 }
 
-// These independently specified dark viewing surfaces reproduce the real failure:
-// reusing a white-label button fill as a status foreground makes the status vanish.
-// The assertions exercise the actual helper outputs, not source text or exact tokens.
-var darkViewingSurfaces = new[]
+// The product owns light information surfaces. Status text is checked against those
+// surfaces so a host's unrelated dark theme cannot define FireGaze's visual contract.
+var viewingSurfaces = new[]
 {
-    new Vector4(43 / 255f, 43 / 255f, 43 / 255f, 1),
-    new Vector4(51 / 255f, 51 / 255f, 51 / 255f, 1),
-    new Vector4(74 / 255f, 74 / 255f, 74 / 255f, 1),
+    FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised,
 };
-foreach (var surface in darkViewingSurfaces)
+foreach (var surface in viewingSurfaces)
 foreach (var foreground in new[] { UiHelpers.Muted, UiHelpers.Good, UiHelpers.Warn, UiHelpers.Bad, UiHelpers.Info, UiHelpers.Accent, UiHelpers.Skip,
     InsStyle.Neutral, InsStyle.Bright, InsStyle.LikedRed })
     Check(Contrast(foreground, surface) >= 4.5, "status and list text remain readable on dark viewing surfaces");
@@ -58,7 +55,8 @@ foreach (var field in typeof(FireGazePalette).GetFields(System.Reflection.Bindin
         "semantic palette " + field.Name + " is opaque and finite");
 }
 foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover })
-    Check(background.X == background.Y && background.Y == background.Z, "a color-judgment surface is truly achromatic");
+    Check(MathF.Abs(background.X - background.Y) > .001f || MathF.Abs(background.Y - background.Z) > .001f,
+        "information surfaces retain a deliberate hue instead of default gray");
 foreach (var background in new[] { FireGazePalette.Window, FireGazePalette.Panel, FireGazePalette.Raised, FireGazePalette.Hover, FireGazePalette.Selected })
 foreach (var foreground in new[] { FireGazePalette.Text, UiHelpers.Muted, UiHelpers.Good, UiHelpers.Warn, UiHelpers.Bad, UiHelpers.Info, UiHelpers.Skip })
     Check(Contrast(foreground, background) >= 4.5, "body and status text meet contrast on every supported surface");

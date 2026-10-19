@@ -12,6 +12,8 @@ internal sealed partial class PortraitPreviewWindow
     private readonly PortraitAnalysisRequest analysis = new();
     private bool showAnalysis;
     private long analysisRecord;
+    private PortraitImageScope analysisScope = PortraitImageScope.Portrait;
+    private string analysisSourceKey = "";
     private string analysisInputStatus = "";
     private IDalamudTextureWrap? analysisPreview;
 
@@ -21,24 +23,27 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.SetNextWindowSize(new Vector2(510, 680) * Scale, ImGuiCond.FirstUseEver);
         if (ImGui.Begin("肖像分析###FireGazePortraitAnalysis", ref showAnalysis))
         {
-            ImGui.TextWrapped("基于当前历史记录的肖像照片，供构图与明暗参考。不会改动肖像。");
+            ImGui.TextWrapped("基于当前成图，供构图与明暗参考。不会改动肖像。");
             var scope = feature.LiveCaptureScope;
             if (ImGui.RadioButton("肖像", scope == PortraitImageScope.Portrait))
                 feature.SetLiveCaptureScope(PortraitImageScope.Portrait);
             ImGui.SameLine();
             if (ImGui.RadioButton("可见铭牌", scope == PortraitImageScope.VisibleAdventurerPlate))
                 feature.SetLiveCaptureScope(PortraitImageScope.VisibleAdventurerPlate);
+            scope = feature.LiveCaptureScope;
+            if (analysisScope != scope)
+            {
+                analysisScope = scope;
+                ResetAnalysisSource();
+            }
             ImGui.TextDisabled(scope == PortraitImageScope.Portrait
-                ? "高分读取肖像角色与边框装饰。"
+                ? "读取肖像角色与边框装饰。"
                 : "读取当前屏幕可见的完整铭牌，不改变铭牌数据。");
             var current = feature.History.FirstOrDefault(record => record.IsCurrent);
             if (current?.ID != analysisRecord)
             {
-                analysis.Invalidate();
-                analysisPreview?.Dispose();
-                analysisPreview = null;
+                if (analysisSourceKey.StartsWith("history:", StringComparison.Ordinal)) ResetAnalysisSource();
                 analysisRecord = current?.ID ?? 0;
-                analysisInputStatus = "";
             }
             if (ImGui.Button("分析当前记录")) StartCurrentAnalysis();
             if (analysis.IsBusy) ImGui.TextDisabled("正在读取图像…");
@@ -58,8 +63,8 @@ internal sealed partial class PortraitPreviewWindow
                 ImGui.TextWrapped("基于局部反差与边缘的提示，供检查哪些元素较醒目；不代表真实眼动或第一眼。");
                 DrawAttentionEstimate(result);
             }
-            if (photos?.Get(analysisRecord) is { } compared)
-                DrawComparison(compared, "portrait:" + feature.SourceGuideKey);
+            if (analysisPreview is { } compared && analysis.CurrentResult is not null)
+                DrawComparison(compared, "analysis:" + analysisSourceKey);
         }
         ImGui.End();
         if (!showAnalysis) { analysis.Invalidate(); analysisPreview?.Dispose(); analysisPreview = null; comparisonReference.Clear(); }
@@ -67,37 +72,82 @@ internal sealed partial class PortraitPreviewWindow
 
     private void StartCurrentAnalysis()
     {
+        var scope = feature.LiveCaptureScope;
+        if (analysisScope != scope)
+        {
+            analysisScope = scope;
+            ResetAnalysisSource();
+        }
         var current = feature.History.FirstOrDefault(record => record.IsCurrent);
         if (current is null)
         {
+            ResetAnalysisSource();
             analysisInputStatus = "当前照片尚未就绪，请暂停动作并稍候再试。";
             return;
         }
         if (analysis.IsBusy) return;
         IDalamudTextureWrap? retained = null;
         var live = feature.AcquireCurrentLiveImage();
-        if (live is not null)
+        if (live is not null && live.Sample.Scope == scope)
         {
+            var liveKey = LiveSourceKey(live, scope);
+            if (analysisSourceKey == liveKey && analysis.CurrentResult is not null)
+            {
+                live.Dispose();
+                return;
+            }
+            ResetAnalysisSource();
             retained = live.Texture.CreateWrapSharingLowLevelResource();
-            analysisPreview?.Dispose();
             analysisPreview = live.Texture.CreateWrapSharingLowLevelResource();
-            var liveKey = $"live:{live.Sample.StateKey}";
+            analysisSourceKey = liveKey;
+            analysisRecord = current.ID;
             live.Dispose();
             if (!analysis.TryStart(liveKey, token => ReadAnalysis(retained, token))) retained.Dispose();
             analysisInputStatus = "";
             return;
         }
+        live?.Dispose();
+        if (scope == PortraitImageScope.VisibleAdventurerPlate)
+        {
+            ResetAnalysisSource();
+            analysisRecord = current.ID;
+            analysisInputStatus = "当前完整铭牌图像尚未就绪，请打开铭牌并稍候再试。";
+            return;
+        }
         if (photos?.Get(current.ID) is not { } texture)
         {
+            ResetAnalysisSource();
+            analysisRecord = current.ID;
             analysisInputStatus = "当前高分图像尚未就绪，请暂停动作并稍候再试。";
             return;
         }
         // Public texture sharing owns the resource until readback completes, including close/unload.
+        var key = $"history:{feature.SourceGuideKey}:{current.ID}";
+        if (analysisSourceKey == key && analysis.CurrentResult is not null) return;
+        ResetAnalysisSource();
         retained = texture.CreateWrapSharingLowLevelResource();
+        analysisPreview = texture.CreateWrapSharingLowLevelResource();
+        analysisSourceKey = key;
+        analysisRecord = current.ID;
+        if (!analysis.TryStart(key, token => ReadAnalysis(retained, token))) retained.Dispose();
+        analysisInputStatus = "";
+    }
+
+    private static string LiveSourceKey(PortraitCapturedImage image, PortraitImageScope scope)
+    {
+        var sample = image.Sample;
+        var plate = sample.Plate?.VisualKey ?? "";
+        return $"live:{scope}:{sample.Owner.ContentID}:{sample.Editor.Generation}:{sample.StateKey}:{sample.Viewport.ID}:"
+            + $"{sample.Viewport.Size.X:R}x{sample.Viewport.Size.Y:R}:{plate}:{image.Width}x{image.Height}";
+    }
+
+    private void ResetAnalysisSource()
+    {
+        analysis.Invalidate();
         analysisPreview?.Dispose();
         analysisPreview = null;
-        var key = current.ID.ToString(System.Globalization.CultureInfo.InvariantCulture);
-        if (!analysis.TryStart(key, token => ReadAnalysis(retained, token))) retained.Dispose();
+        analysisSourceKey = "";
+        comparisonReference.Clear();
         analysisInputStatus = "";
     }
 
@@ -137,16 +187,20 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawAttentionEstimate(PortraitImageAnalysisResult result)
     {
-        var texture = analysisPreview ?? photos?.Get(analysisRecord);
+        var texture = analysisPreview;
         if (texture is null) return;
         var origin = ImGui.GetCursorScreenPos();
-        var size = new Vector2(160, 256) * Scale;
-        ImGui.Image(texture.Handle, size);
+        var available = new Vector2(Math.Max(160 * Scale, ImGui.GetContentRegionAvail().X), 256 * Scale);
+        if (!PortraitComparisonLayout.TryFit(available, new(texture.Width, texture.Height), out var fit)) return;
+        ImGui.Dummy(available);
+        var imageOrigin = origin + fit.Offset;
+        var imageMaximum = imageOrigin + fit.Size;
+        ImGui.GetWindowDrawList().AddImage(texture.Handle, imageOrigin, imageMaximum);
         var draw = ImGui.GetWindowDrawList();
         foreach (var region in result.Hotspots)
         {
-            var minimum = origin + new Vector2(region.X / (float)result.Width, region.Y / (float)result.Height) * size;
-            var maximum = minimum + new Vector2(region.Width / (float)result.Width, region.Height / (float)result.Height) * size;
+            var minimum = imageOrigin + new Vector2(region.X / (float)result.Width, region.Y / (float)result.Height) * fit.Size;
+            var maximum = minimum + new Vector2(region.Width / (float)result.Width, region.Height / (float)result.Height) * fit.Size;
             draw.AddRect(minimum, maximum, ImGui.GetColorU32(FireGazePalette.Warn), 2 * Scale, ImDrawFlags.None, 2 * Scale);
         }
         if (result.Hotspots.Count == 0) ImGui.TextDisabled("当前画面没有明显的局部反差热点。");

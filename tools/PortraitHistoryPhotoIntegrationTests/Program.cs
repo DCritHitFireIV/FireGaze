@@ -45,6 +45,7 @@ static async Task<int> Run()
         var historyBefore = File.ReadAllBytes(historyPath);
         var records = history.GetRecords(key);
         checks += await PhotoEncodingBoundaryTests.RunAsync(root, history, historyPath, key, one, initial, identity);
+        checks += await PhotoDrawCompositionTests.RunAsync(root, history, key, one, initial, identity);
 
         var source = new PortraitThumbnailSource();
         using (var photos = Photos("eligibility.bin", source, history.Bytes))
@@ -143,7 +144,7 @@ static async Task<int> Run()
         Check(File.ReadAllBytes(historyPath).SequenceEqual(historyBefore) && history.Count == 2
             && history.CurrentRecordID(key) == two.ID && history.TryGetUndo(key, out _),
             "all photo eligibility lifecycle and I/O failures preserve real history bytes cursor and undo");
-        Console.WriteLine($"PortraitHistoryPhotoIntegrationTests: {checks} passed, 0 failed; no Draw, game or GPU calls.");
+        Console.WriteLine($"PortraitHistoryPhotoIntegrationTests: {checks} passed, 0 failed; no native rendering, game or GPU calls.");
         return 0;
     }
     finally { Directory.Delete(root, true); }

@@ -45,6 +45,7 @@ namespace FireGaze.PortraitPreview
         public ImTextureID Handle => new((nint)123);
         public int Width => 160;
         public int Height => 256;
+        public IDalamudTextureWrap CreateWrapSharingLowLevelResource() => new FakeTexture();
         public void Dispose() => Interlocked.Increment(ref disposes);
     }
 }

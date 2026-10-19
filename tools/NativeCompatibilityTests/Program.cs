@@ -14,12 +14,14 @@ unsafe static class Program
 
     static int Main(string[] args)
     {
+        if (args.Contains("--timeline-abi-metadata")) return TimelineAbiMetadata.Write();
         var sqpack = args.FirstOrDefault(a => !a.StartsWith("--"))
             ?? @"C:\Program Files\上海数龙科技有限公司\最终幻想XIV\game\sqpack";
         using var game = new Lumina.GameData(sqpack, new Lumina.LuminaOptions { DefaultExcelLanguage = Lumina.Data.Language.ChineseSimplified });
         data = new GameDataFixture(game);
         emoteTimeline = (ushort)game.GetExcelSheet<Emote>()!.GetRow(EmoteId).ActionTimeline.First(t => t.RowId != 0).RowId;
         var cases = new List<(string Name, Action Run)> {
+            ("timeline native delegate arguments match SDK and preserve audited U1 returns", TimelineAbiMetadata.VerifyProduction),
             ("current clone bit2 clears before Original; other bits and Original writes survive", CurrentClone),
             ("current clone bit2 clear is idempotent", AlreadyVisible),
             ("source DisableDraw cleans and restores visibility before Original", SourceDisable),

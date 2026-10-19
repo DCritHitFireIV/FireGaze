@@ -337,20 +337,48 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     public bool AbortCapturedEditor()
     {
         if (disposed || !api.IsFrameworkThread) return false;
-        if (!IsCapturedStateOwner(originalIdentity.State) || !IsCurrent(originalIdentity)) return true;
-        var editor = api.GetEditor();
-        try { api.HideEditor(editor); }
-        catch (Exception ex) { LastError = "无法关闭临时肖像编辑器：" + ex.Message; }
-        if (!IsCapturedStateOwner(originalIdentity.State)) return true;
-        // A PreHide listener may prevent ordinary Hide. On unload, use only the original table
-        // explicitly supplied by Dalamud, never a guessed function address or a replaced owner.
-        if (!IsCurrent(originalIdentity)) return false;
+        if (!originalIdentity.IsValid) return true;
         try
         {
+            int lease = ReadLease(out var editor);
+            if (lease != 1) return lease == 2;
+            // A complete fresh resolution can prove that the old character allocation
+            // was replaced. Failure to resolve merely means loading or unreadability.
+            if (ModelReplaced()) return true;
+            lease = ReadLease(out editor);
+            if (lease != 1) return lease == 2;
+            try { api.HideEditor(editor); }
+            catch (Exception ex) { LastError = "无法关闭临时肖像编辑器：" + ex.Message; }
+            lease = ReadLease(out editor);
+            if (lease != 1) return lease == 2;
+            if (ModelReplaced()) return true;
+            // A PreHide listener may prevent ordinary Hide. Revalidate the same
+            // editor/state lease even while its CharaView is still loading.
+            lease = ReadLease(out editor);
+            if (lease != 1) return lease == 2;
             if (!api.TryHideOriginalEditor(editor, (AgentBannerEditorState*)originalIdentity.State)) return false;
+            return ReadLease(out _) == 2;
         }
         catch (Exception ex) { LastError = "再次尝试关闭临时肖像编辑器失败：" + ex.Message; return false; }
-        return !IsCapturedStateOwner(originalIdentity.State);
+
+        bool ModelReplaced() => Resolve(out var current, out _, out _, requireReady: false)
+            && current != originalIdentity && !disposed && api.IsFrameworkThread;
+
+        // 0 = uncertain, 1 = exact live lease, 2 = positively detached/replaced.
+        // Resolve current pointers first; never dereference an old identity pointer.
+        int ReadLease(out AgentBannerEditor* editor)
+        {
+            editor = null;
+            if (disposed || !api.IsFrameworkThread) return 0;
+            var current = api.GetEditor();
+            if (current == null || disposed || !api.IsFrameworkThread) return 0;
+            var state = current->EditorState;
+            if (api.GetEditor() != current || disposed || !api.IsFrameworkThread || current->EditorState != state) return 0;
+            if ((nint)current != originalIdentity.Editor || (nint)state != originalIdentity.State
+                || state == null || state->AgentBannerEditor != current) return 2;
+            editor = current;
+            return 1;
+        }
     }
 
     private static uint Generation(Character* character) => *(uint*)((byte*)character + GenerationOffset);

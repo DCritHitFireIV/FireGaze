@@ -27,6 +27,8 @@
  <Reference Include="Microsoft.Extensions.ObjectPool"><HintPath>$(DALAMUD_HOME)/Microsoft.Extensions.ObjectPool.dll</HintPath></Reference>
 </ItemGroup><ItemGroup>
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Light.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Space.cs" />
+ <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingSpaceBinding.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightDrag.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightDirection.cs" />
 </ItemGroup></Project>

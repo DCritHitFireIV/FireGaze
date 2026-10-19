@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.Analysis.cs" Link="Window.Analysis.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.Comparison.cs" Link="Window.Comparison.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAnalysisRequest.cs" Link="PortraitAnalysisRequest.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitImageAnalysis.cs" Link="PortraitImageAnalysis.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitComparison.cs" Link="PortraitComparison.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingSpaceImage.cs" Link="SpaceImage.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.SpaceImage.cs" Link="Window.SpaceImage.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.SpaceImage.cs')" />
+  </ItemGroup>
+</Project>

@@ -38,6 +38,10 @@ internal sealed partial class PortraitPreviewWindow
         if (ImGui.Button("分析")) showAnalysis = true;
         ContinueToolbar(right, ImGui.CalcTextSize("主光方向").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("主光方向")) showLight = true;
+        ContinueToolbar(right, ImGui.CalcTextSize("空间灯光").X + ImGui.GetStyle().FramePadding.X * 2);
+        if (ImGui.Button("空间灯光")) showSpaceLight = true;
+        ContinueToolbar(right, ImGui.CalcTextSize("色彩曲线").X + ImGui.GetStyle().FramePadding.X * 2);
+        if (ImGui.Button("色彩曲线")) { feature.SetLiveCaptureScope(PortraitImageScope.Portrait); showLightingFit = true; }
     }
 
     private void DrawLibraryPopups()
@@ -46,6 +50,8 @@ internal sealed partial class PortraitPreviewWindow
         DrawGlamourPlatesWindow();
         DrawAnalysisWindow();
         DrawLightWindow();
+        DrawLightingSpaceWindow();
+        DrawLightingFitWindow();
     }
 
     private void DrawFavoritesWindow()

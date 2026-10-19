@@ -82,6 +82,10 @@ namespace FireGaze.PortraitPreview
     internal sealed class PortraitPreviewWindow
     {
         public bool IsOpen;
+        public bool HistoryWindowOpen;
+        public bool HistoryPhotosView;
+        public void OpenHistory(bool photos) { HistoryWindowOpen=true;HistoryPhotosView=photos; }
+        public void CloseAuxiliaryWindows() => HistoryWindowOpen=false;
         public static void DrawHistoryRows(PortraitPreviewFeature feature, bool allowed) { }
     }
 
@@ -150,6 +154,15 @@ namespace FireGaze.PortraitPreview
             if (!Ready || !IsCurrent(identity) || RejectApply || !snapshot.IsCompatibleWith(Snapshot)) return false;
             ApplyCalls++; Snapshot = snapshot.Copy();AfterEditorApply?.Invoke(); return true;
         }
+        public bool SetLightingSpace(PortraitIdentity identity, PortraitEditorSnapshot expected, PortraitComposition desired)
+        {
+            if (!Ready || !IsCurrent(identity) || RejectApply || !PortraitLightingSpaceBinding.MatchesSnapshot(expected, Snapshot)
+                || !PortraitLightingSpaceBinding.IsValidDesired(desired)) return false;
+            ApplyCalls++;
+            Snapshot = Snapshot with { Composition = PortraitLightingSpaceBinding.MergeInto(Snapshot.Composition, desired) };
+            AfterEditorApply?.Invoke();
+            return true;
+        }
         public bool ClosePlateMirror()
         {
             MirrorCloseCalls++;
@@ -179,12 +192,22 @@ namespace FireGaze.PortraitPreview
         public OwnedCharacterKey? Owner = new(10,20);
         public string? LastError;
         public bool IsActive => session.IsActive;
+        private bool LightingFitHistorySuppressed;
+        // The actual fit owns native RGB compensation and an asynchronous GPU drain. The
+        // fixture supplies those external effects while the production editing/library chain
+        // remains unchanged, including the order in which it reads and records snapshots.
+        public Func<bool>? FitCancellation;
+        private bool CancelLightingFitForEdit() => FitCancellation?.Invoke() ?? !LightingFitHistorySuppressed;
+        public void SetFitSuppression(bool value) => LightingFitHistorySuppressed=value;
         public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
         public PortraitHistoryStore Store => history;
         public NativePortraitTarget Native => target;
         public PortraitHistoryKey? Key => observedKey;
         public int MirrorUpdates => target.MirrorUpdates;
         public bool DeferredBaseline => deferredBaselineSync;
+        public bool HistoryWindowOpen => window.HistoryWindowOpen;
+        public bool HistoryPhotosView => window.HistoryPhotosView;
+        public void OpenHistory(bool photos=true) => window.OpenHistory(photos);
         public PortraitEditorSnapshot? ObservedSnapshot => observedEditor;
         public PortraitEditorSnapshot? MirroredSnapshot => target.MirroredSnapshot;
 

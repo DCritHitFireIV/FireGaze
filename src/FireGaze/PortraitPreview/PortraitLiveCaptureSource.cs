@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Security.Cryptography;
+using System.Text;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Addon.Lifecycle;
 using Dalamud.Game.Addon.Lifecycle.AddonArgTypes;
@@ -103,6 +104,17 @@ internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSourc
  private bool Current(PortraitCaptureSample expected)
   =>TrySample(expected.Scope,expected.Viewport,out var current)&&current==expected;
 
+ public bool TryDescribePortrait(PortraitCaptureSample sample,out PortraitCaptureSurface? surface)
+ {
+  surface=null;
+  if(!TryAcquirePortrait(sample,out var inputs)||inputs is null)return false;
+  using(inputs)
+  {
+   if(!Current(sample)||inputs.Surface is not{IsValid:true} described)return false;
+   surface=described;return true;
+  }
+ }
+
  public bool TryAcquirePortrait(PortraitCaptureSample sample,out PortraitLiveCaptureInputs? inputs)
  {
   inputs=null;
@@ -137,7 +149,11 @@ internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSourc
     if(!PortraitCaptureGeometry.TryPlacement(character.Bounds,overlay.Bounds,out var placement))return false;
     layers.Add(new(overlay.Texture,placement,overlay.UV0,overlay.UV1,overlay.Tint));
    }
-   inputs=new(new(character.Texture,copy),layers,size);acquired.Clear();return true;
+   var key=FormattableString.Invariant($"{generation}|{component:X}");
+   foreach(var image in acquired)
+    key+=FormattableString.Invariant($"|{(ulong)image.Texture.Handle.Handle:X16}:{image.AllocatedWidth}:{image.AllocatedHeight}:{image.ActualWidth}:{image.ActualHeight}:{image.Bounds.X:R}:{image.Bounds.Y:R}:{image.Bounds.Width:R}:{image.Bounds.Height:R}:{image.UV0.X:R}:{image.UV0.Y:R}:{image.UV1.X:R}:{image.UV1.Y:R}:{image.Tint}");
+   var surface=new PortraitCaptureSurface(Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))),size.Width,size.Height);
+   inputs=new(new(character.Texture,copy),layers,size,surface);acquired.Clear();return true;
   }
   finally{foreach(var layer in acquired)layer.Texture.Dispose();}
  }

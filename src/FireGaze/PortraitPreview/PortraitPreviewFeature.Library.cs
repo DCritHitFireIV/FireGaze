@@ -76,6 +76,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (index is < 0 or >= 20) { Error("投影模板编号无效。"); return; }
         if (CurrentCharacter() is not { } character || glamourPlateView?.Character != character)
         { Error("角色已改变，请等待当前角色的投影模板读取完成。"); return; }
+        // Compensation can restore RGB, so capture only after the fit has fully released it.
+        if (!CancelLightingFitForEdit()) return;
         if (!target.CanBlockSave || !session.IsActive || !target.TryResolve(out var identity, out _, out _)
             || target.CaptureEditorState(identity) is not { } before)
         { Error("请先打开肖像编辑器和 FireGaze预览，等待保存保护就绪。"); return; }
@@ -145,6 +147,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         snapshot = null!;
         reason = "请先打开肖像编辑器和 FireGaze预览。";
+        if (!CancelLightingFitForEdit()) { reason="正在结束灯光调整，请稍候。"; return false; }
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)
             || target.CaptureEditorState(identity) is not { } current) return false;
         if (!editorValidation.IsValid(current, out reason)) return false;
@@ -156,6 +159,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool ApplyLibrarySnapshot(PortraitIdentity identity, PortraitEditorSnapshot before,
         PortraitEditorSnapshot desired, string label, bool preservePlayingHistory = false)
     {
+        if (!CancelLightingFitForEdit()) return false;
         if (!target.CanBlockSave || !session.IsActive || !target.IsCurrent(identity)
             || !desired.IsCompatibleWith(before) || !editorValidation.IsValid(desired, out var validation))
         { Error("肖像暂时无法安全预览，请等待编辑器和保存保护就绪。"); return false; }

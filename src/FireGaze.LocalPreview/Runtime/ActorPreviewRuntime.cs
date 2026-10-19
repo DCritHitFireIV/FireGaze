@@ -72,6 +72,13 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private HmsPresentationBaseline? hmsBaseline;
     private NativePreviewActor? visualActor;
     private bool deferredEmote;
+    private PendingCollection? pendingCollection;
+    private sealed class PendingCollection(NativePreviewActor owner, PreviewEffect effect)
+    {
+        public NativePreviewActor Owner { get; } = owner;
+        public PreviewEffect Effect { get; } = effect;
+        public int Frames { get; set; }
+    }
     private nint actorAddress;
     private ulong actorId;
     private uint territory;
@@ -369,7 +376,13 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             }
             actor = visualActor.Actor;
             if (actor == null) throw new InvalidOperationException("本地展示角色已失效");
+            var applyOwner = visualActor;
+            long applyRevision = revision;
             Apply(actor, effect);
+            // Native setup can synchronously cancel or replace this preview. An
+            // obsolete request must not regain ownership when its call returns.
+            if (revision != applyRevision || visualActor != applyOwner || !applyOwner.IsCurrentAllocation(actor))
+            { reason = "角色或试用状态已变化，请重试。"; return false; }
             effects[effect.Slot] = effect;
             spawnWait[effect.Slot] = 60;
             revision++;
@@ -398,26 +411,35 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private bool HasEmoteVariant(ushort id, int slot) => data.GetExcelSheet<Emote>().GetRowOrDefault(id) is { } row && row.ActionTimeline[slot].RowId != 0;
     private void Apply(NativeCharacter* actor, PreviewEffect effect)
     {
+        var owner = visualActor;
+        long applyRevision = revision;
+        bool ownedDisplay = owner?.IsCurrentAllocation(actor) == true;
+        bool Current() => visualActor == owner && revision == applyRevision && owner?.IsCurrentAllocation(actor) == true;
         switch (effect.Slot)
         {
             case PreviewSlot.Mount:
-                if (visualActor?.IsCurrentAllocation(actor) == true && actor->OrnamentData.OrnamentId != 0) actor->OrnamentData.SetupOrnament(0,0);
+                if (ownedDisplay && actor->OrnamentData.OrnamentId != 0)
+                {
+                    actor->OrnamentData.SetupOrnament(0,0);
+                    if (!Current()) return;
+                }
                 actor->Mount.CreateAndSetupMount((short)effect.Id, 0, 0, 0, 0, 0, 0);
+                if (ownedDisplay && !Current()) return;
                 actor->Mode = effect.Id == 0 ? CharacterModes.Normal : CharacterModes.Mounted;
                 actor->ModeParam = 0;
                 break;
             case PreviewSlot.Minion:
-                if (visualActor?.IsCurrentAllocation(actor) == true)
+                if (ownedDisplay)
                 {
                     if (actor->OrnamentData.OrnamentId != 0) actor->OrnamentData.SetupOrnament(0,0);
-                    if (actor->Mount.MountId != 0) { actor->Mount.CreateAndSetupMount(0,0,0,0,0,0,0); actor->Mode=CharacterModes.Normal; actor->ModeParam=0; }
+                    if (!Current() || AwaitDismount(actor, effect, owner!, applyRevision)) return;
                 }
                 actor->CompanionData.SetupCompanion((short)effect.Id, 0); break;
             case PreviewSlot.Accessory:
-                if (visualActor?.IsCurrentAllocation(actor) == true)
+                if (ownedDisplay)
                 {
                     if (actor->CompanionData.CompanionId != 0 || actor->CompanionData.CompanionObject != null) actor->CompanionData.SetupCompanion(0,0);
-                    if (actor->Mount.MountId != 0) { actor->Mount.CreateAndSetupMount(0,0,0,0,0,0,0); actor->Mode=CharacterModes.Normal; actor->ModeParam=0; }
+                    if (!Current() || AwaitDismount(actor, effect, owner!, applyRevision)) return;
                 }
                 actor->OrnamentData.SetupOrnament((short)effect.Id, 0); break;
             case PreviewSlot.Emote:
@@ -443,8 +465,58 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         }
     }
 
+    // MountId reaches zero before the native child and dismount animation are
+    // released. SetupOrnament/SetupCompanion reject that transitional state.
+    private bool AwaitDismount(NativeCharacter* actor, PreviewEffect effect, NativePreviewActor owner, long expectedRevision)
+    {
+        if (actor->Mount.MountId != 0)
+        {
+            actor->Mount.CreateAndSetupMount(0,0,0,0,0,0,0);
+            if (visualActor != owner || revision != expectedRevision || !owner.IsCurrentAllocation(actor)) return true;
+            if (actor->Mode == CharacterModes.Mounted) { actor->Mode = CharacterModes.Normal; actor->ModeParam = 0; }
+        }
+        if (actor->Mount.MountObject == null && actor->Mount.DismountTimer <= 0) return false;
+        pendingCollection = new(owner, effect);
+        return true;
+    }
+
+    private void ApplyPendingCollection()
+    {
+        var pending = pendingCollection;
+        if (pending is null || disposed || ownCall || nativeDepth != 0 || handoff.HasExternal || !framework.IsInFrameworkUpdateThread) return;
+        if (!BindingCurrent()) { if (pendingCollection == pending) pendingCollection = null; return; }
+        var actor = pending.Owner.Actor;
+        // Actor lookup may re-enter cancellation or another TryApply. Finish with
+        // raw allocation checks before reading containers or calling native setup.
+        if (pendingCollection != pending) return;
+        if (visualActor != pending.Owner || actor == null || !pending.Owner.IsCurrentAllocation(actor)
+            || !effects.TryGetValue(pending.Effect.Slot, out var effect) || effect != pending.Effect)
+        { pendingCollection = null; return; }
+        if (actor->Mount.MountId != 0 || actor->Mount.MountObject != null || !(actor->Mount.DismountTimer <= 0))
+        {
+            // This is a failure deadline, not a fixed delay before applying. Keep
+            // the ordinary child-spawn budget untouched until setup is dispatched.
+            if (++pending.Frames > 180) { pendingCollection = null; Clear(pending.Effect.Slot); }
+            return;
+        }
+        pendingCollection = null;
+        spawnWait[effect.Slot] = 60;
+        long applyRevision = revision;
+        bool previousOwnCall = ownCall;
+        ownCall = true;
+        try { Apply(actor, effect); }
+        catch (Exception ex)
+        {
+            ReportHandoff(ex);
+            if (visualActor == pending.Owner && revision == applyRevision
+                && effects.TryGetValue(effect.Slot, out var currentEffect) && currentEffect == effect) Clear(effect.Slot);
+        }
+        finally { ownCall = previousOwnCall; }
+    }
+
     public void Clear(PreviewSlot slot)
     {
+        if (pendingCollection?.Effect.Slot == slot) pendingCollection = null;
         if (slot == PreviewSlot.Emote) deferredEmote = false;
         if (!effects.TryGetValue(slot, out var effect)) return;
         if (visualActor is not null)
@@ -638,6 +710,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private void Forget()
     {
         deferredEmote = false;
+        pendingCollection = null;
         InvalidateExternalPresentation();
         var owned = visualActor; visualActor = null;
         try { owned?.Dispose(); } catch (Exception ex) { ReportHandoff(ex); }
@@ -682,6 +755,9 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             || conditions[ConditionFlag.WatchingCutscene] || conditions[ConditionFlag.OccupiedInCutSceneEvent]
             || IsTeleportCast()) { Cancel("当前状态已结束试用"); return; }
         if (handoff.HasExternal) return;
+        // A retiring mount can keep Tick() unready; dispatch its replacement as
+        // soon as native teardown is complete, independently of draw readiness.
+        ApplyPendingCollection();
         var actor = visualActor?.Actor;
         if (actor == null || visualActor is null) { ClearAll(false); return; }
         if (!visualActor.Tick(Bound())) return;
@@ -689,6 +765,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         if (visualActor is null || visualActor.Actor != actor || Bound() == null) return;
         foreach (var effect in effects.Values.ToArray())
         {
+            if (pendingCollection?.Effect == effect) continue;
             if (effect.Slot == PreviewSlot.Emote && SpecialActionActive) continue;
             if (spawnWait.TryGetValue(effect.Slot, out int frames) && frames > 0)
             {

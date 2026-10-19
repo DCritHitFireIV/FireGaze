@@ -24,6 +24,7 @@ Check(!PortraitCaptureGeometry.TryTextureCopy(512,512,576,960,new(160,256),out _
 Check(PortraitCaptureGeometry.TryPlacement(new(20,30,200,400),new(30,50,100,200),out var placement)&&placement==new PortraitCaptureRect(.05f,.05f,.5f,.5f),"layer position is relative to the character rectangle");
 Check(!PortraitCaptureGeometry.TryPlacement(new(0,0,0,0),new(1,1,2,2),out _),"invalid parent placement fails");
 checks+=await CaptureLifecycleTests.Run();
+checks+=await CapturePreparationTests.Run();
 checks+=await CapturePipelineTests.Run();
 checks+=CaptureNativeNodeTests.Run();
 checks+=CaptureNativeOwnerTests.Run();

@@ -67,9 +67,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void PollEditing()
     {
+        if (LightingFitHistorySuppressed) return;
         var owner = CurrentCharacter();
         if (historyOwner != owner)
         {
+            if (historyOwner is not null) window.CloseAuxiliaryWindows();
             CancelLightDrag();
             HandleHistoryBatchResult(historyBatch.Flush());
             RequestPlateMirrorClose();
@@ -100,6 +102,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             if (observedIdentity.IsValid && target.IsCurrent(observedIdentity)) return;
             if (observedEditor is not null)
             {
+                window.CloseAuxiliaryWindows();
                 CancelLightDrag();
                 HandleHistoryBatchResult(historyBatch.Flush());
                 observedEditor = null;
@@ -114,7 +117,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
             else if (syncPlate) RequestPlateMirrorClose();
             return;
         }
-        if (observedIdentity.IsValid && observedIdentity != identity) RequestPlateMirrorClose();
+        if (observedIdentity.IsValid && observedIdentity != identity)
+        {
+            window.CloseAuxiliaryWindows();
+            RequestPlateMirrorClose();
+        }
         if (!lightDrag.IsActive && DateTime.UtcNow < nextEditorSample && sampledPointer == pointerHeld && sampledKeyboard == keyboard) return;
         sampledPointer = pointerHeld;
         sampledKeyboard = keyboard;
@@ -136,6 +143,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         deferredBaselineSync = false;
         if (observedIdentity != identity || observedKey != key)
         {
+            if (observedKey is not null) window.CloseAuxiliaryWindows();
             HandleHistoryBatchResult(historyBatch.Flush());
             observedIdentity = identity;
             observedKey = key;
@@ -257,6 +265,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void ChangeAppearance(string groupID, int value) => Mutate(() =>
     {
+        if (!CancelLightingFitForEdit()) return;
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)) return;
         var before = target.CaptureEditorState(identity);
         if (before is null) return;
@@ -271,6 +280,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void RecordDirectChange(string label)
     {
+        if (LightingFitHistorySuppressed) return;
         if (!target.TryResolve(out var identity, out _, out _) || target.CaptureEditorState(identity) is not { } captured
             || GetHistoryKey(identity, captured) is not { } key) return;
         HandleHistoryBatchResult(historyBatch.Flush());
@@ -295,6 +305,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void NavigateHistory(PortraitHistorySelectionKind kind, long id)
     {
+        if (!CancelLightingFitForEdit()) return;
         CancelLightDrag();
         if (!target.TryResolve(out var identity, out _, out _)) { Error("请先打开对应肖像编辑器。"); return; }
         var before = target.CaptureEditorState(identity);
@@ -340,6 +351,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void SetSyncPlate(bool enabled) => Mutate(() =>
     {
+        if (!CancelLightingFitForEdit()) return;
         if (!enabled) { RequestPlateMirrorClose(); return; }
         if (!RetryPlateMirrorClose()) return;
         if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)
@@ -352,6 +364,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void SynchronizeAfterClose()
     {
+        window.CloseAuxiliaryWindows();
         CancelLightDrag();
         historyBatch.Cancel();
         historyLabelBaseline = null;
@@ -370,7 +383,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private bool SynchronizeCurrentLook()
     {
-        return session.IsActive && target.TryResolve(out var identity, out _, out _)
+        return CancelLightingFitForEdit() && session.IsActive && target.TryResolve(out var identity, out _, out _)
             && target.CaptureEditorState(identity) is { } latest && session.ObserveLook(latest.Look);
     }
 

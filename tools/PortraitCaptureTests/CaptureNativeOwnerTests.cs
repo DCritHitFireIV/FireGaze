@@ -48,12 +48,23 @@ internal static class CaptureNativeOwnerTests
   image.Color.R=image.Color.G=image.Color.B=image.Color.A=255;parts.Parts=&part;parts.PartCount=1;
   part.UldAsset=&asset;part.Width=160;part.Height=256;asset.AtkTexture.TextureType=TextureType.KernelTexture;asset.AtkTexture.KernelTexture=&kernel;
   kernel.AllocatedWidth=512;kernel.AllocatedHeight=512;kernel.ActualWidth=400;kernel.ActualHeight=500;kernel.D3D11ShaderResourceView=(void*)123;
-  PortraitLiveCaptureInputs? inputs=null;Check(source.TrySample(PortraitImageScope.Portrait,viewport,out sample)&&source.TryAcquirePortrait(sample!,out inputs)&&inputs is not null,"native portrait source retains actual character render texture");inputs!.Dispose();
+  PortraitLiveCaptureInputs? inputs=null;Check(source.TrySample(PortraitImageScope.Portrait,viewport,out sample)&&source.TryAcquirePortrait(sample!,out inputs)&&inputs is not null,"native portrait source retains actual character render texture");
+  Check(inputs!.Surface is{IsValid:true,Width:400,Height:500},"native capture surface records actual output dimensions");inputs.Dispose();
+  Check(source.TryDescribePortrait(sample!,out var surface)&&surface is{IsValid:true},"native surface description retains real source without GPU pixel copy");
+  game.Frame=game.Frame! with{StateKey="different-light-RGB"};
+  Check(source.TrySample(PortraitImageScope.Portrait,viewport,out sample)&&source.TryDescribePortrait(sample!,out var colorSurface)&&colorSurface==surface,"native surface generation excludes color-only full-state changes");
+  kernel.D3D11ShaderResourceView=(void*)321;
+  Check(source.TryDescribePortrait(sample!,out var srvSurface)&&srvSurface!=surface,"a replaced real SRV changes capture generation");
+  kernel.ActualWidth=390;
+  Check(source.TryDescribePortrait(sample!,out var sized)&&sized is{Width:390}&&sized!=srvSurface,"native render-target size changes capture generation");
+  source.AdvanceGeneration();
+  Check(source.TrySample(PortraitImageScope.Portrait,viewport,out sample)&&source.TryDescribePortrait(sample!,out var generationSurface)&&generationSurface!=sized,"same SRV reused after lifecycle changes capture generation");
+  Check(game.Textures.All(x=>x.Disposes==1),"every independent native surface-description reference is released exactly once");
   // Render-target dimensions are validated at TryAcquire and copied dimensions are validated by
   // the async pipeline. The callback's immutable editor key intentionally does not dereference
   // GPU resources, so a reallocated target cannot be carried across await.
-  var addonAddress=(nint)(&addon);game.OnNodeBounds=()=>((AtkUnitBase*)addonAddress)->UldManager.NodeListCount=0;
-  Check(!source.TryAcquirePortrait(sample!,out _)&&game.Retains==1,"component removed from still-live addon during GetBounds is rejected before retaining its old resource");
+  var retainedBefore=game.Retains;var addonAddress=(nint)(&addon);game.OnNodeBounds=()=>((AtkUnitBase*)addonAddress)->UldManager.NodeListCount=0;
+  Check(!source.TryAcquirePortrait(sample!,out _)&&game.Retains==retainedBefore,"component removed from still-live addon during GetBounds is rejected before retaining its old resource");
   source.Dispose();Check(!source.TrySample(PortraitImageScope.Portrait,viewport,out _),"disposed native source refuses future reads");
   return checks;
 #endif
@@ -72,7 +83,8 @@ internal static class CaptureNativeOwnerTests
   public ComponentType ReadComponentType(nint component)=>ComponentType.Portrait;
   public PortraitCaptureRect? ReadNodeBounds(nint node){OnNodeBounds?.Invoke();return new(0,0,160,256);}
   public PortraitCaptureRect? ReadWindowBounds(nint addon){OnWindowBounds?.Invoke();return Bounds;}
-  public IDalamudTextureWrap Retain(nint handle,int width,int height){Retains++;return new CountingCaptureTexture(width,height);}
+  public List<CountingCaptureTexture> Textures=[];
+  public IDalamudTextureWrap Retain(nint handle,int width,int height){Retains++;var texture=new CountingCaptureTexture(width,height,handle);Textures.Add(texture);return texture;}
  }
 #endif
 }

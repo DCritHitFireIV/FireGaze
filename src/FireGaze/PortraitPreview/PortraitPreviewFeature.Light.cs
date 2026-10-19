@@ -12,6 +12,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void BeginLightDrag(long token) => Mutate(() =>
     {
+        if (!CancelLightingFitForEdit()) return;
         if (lightDrag.IsActive || !lightDrag.CanBegin(token)) return;
         nextEditorSample=DateTime.MinValue;
         PollEditing();

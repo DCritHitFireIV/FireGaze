@@ -6,6 +6,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(PhotoServiceSource)" Link="PortraitPhotoService.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureSoftwareCompositor.cs" Link="PortraitCaptureSoftwareCompositor.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureModels.cs" Link="PortraitCaptureModels.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureGeometry.cs" Link="PortraitCaptureGeometry.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailCache.cs" Link="PortraitThumbnailCache.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailCaptureGate.cs" Link="PortraitThumbnailCaptureGate.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitThumbnailTextureCache.cs" Link="PortraitThumbnailTextureCache.cs" />

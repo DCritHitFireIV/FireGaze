@@ -283,7 +283,7 @@ public sealed class Plugin : IDalamudPlugin
         }
         catch (Exception e)
         {
-            Log.Error(e, "[FireGaze] 肖像实时预览初始化失败");
+            Log.Error(e, "[FireGaze] 肖像同步预览初始化失败");
         }
     }
 
@@ -397,7 +397,7 @@ public sealed class Plugin : IDalamudPlugin
         }
         catch (Exception e)
         {
-            Log.Error(e, "[FireGaze] 肖像实时预览清理失败");
+            Log.Error(e, "[FireGaze] 肖像同步预览清理失败");
         }
         try
         {

@@ -22,6 +22,15 @@ try
     Check(session.BlockSave(target.Identity), "opening alone blocks save before any wardrobe change");
     Check(!session.BlockSave(target.Identity with { Editor = 99 }), "unrelated editor saves are not intercepted");
     target.Available = false;
+    session.Validate();
+    Check(session.IsActive && session.BlockSave(target.Identity), "temporary unreadability retains the preview lease and save guard after Framework validation");
+    Check(!session.ObserveLook(Look(999)) && session.Current!.Pieces[2].ItemID==111,
+        "an unreadable owner cannot publish a new observed appearance");
+    var unreadyCalls=target.Applies;
+    Check(!session.Replace(PortraitSlot.Head,new(999,0,0)) && !session.SetVisibility(false,false,false)
+        && session.IsActive && target.Applies==unreadyCalls,"unready native mutations are refused without retiring the lease");
+    Check(!session.Close() && session.IsActive && session.BlockSave(target.Identity) && target.Applies==unreadyCalls,
+        "close during temporary unreadability retains restoration and save protection for retry");
     Check(session.BlockSave(target.Identity) && session.IsActive, "save event preserves active guard until Framework lifecycle validation runs");
     target.Available = true;
     Check(session.Replace(PortraitSlot.Head, new(222, 3, 4)), "an owned head item can replace the portrait piece");
@@ -75,6 +84,13 @@ try
     Check(session.Open(target.Identity), "valid entry starts before callback replacement");
     Check(!session.Replace(PortraitSlot.Head, new(555, 0, 0)) && !session.IsActive,
         "identity replacement during native apply invalidates subsequent operations");
+    target.DuringApply=null;target.Available=true;
+    Check(session.Open(target.Identity),"same-owner post-write unreadiness fixture opens");
+    target.DuringApply=()=>target.Available=false;
+    Check(!session.Replace(PortraitSlot.Head,new(777,0,0)) && session.IsActive && session.BlockSave(target.Identity),
+        "readiness lost during a native write retains the restoration lease");
+    target.Available=true;target.DuringApply=null;
+    Check(session.Close() && !session.IsActive,"same-owner readiness recovery allows the original wardrobe to restore");
     Console.WriteLine($"{passed}/{passed} portrait session checks passed");
     return 0;
 }
@@ -92,6 +108,7 @@ sealed class Target : IPortraitPreviewTarget
     public int Pose = 9;
     public Action? DuringApply;
     public bool IsCurrent(PortraitIdentity identity) => Available && identity == Identity;
+    public bool IsEditorOwnerDestroyed(PortraitIdentity identity) => identity != Identity;
     public PortraitLook? Capture(PortraitIdentity identity) => IsCurrent(identity) ? Look.Copy() : null;
     public bool Apply(PortraitIdentity identity, PortraitLook look)
     {

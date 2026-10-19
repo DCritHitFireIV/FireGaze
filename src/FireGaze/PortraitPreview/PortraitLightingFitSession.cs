@@ -14,14 +14,19 @@ internal sealed record PortraitLightingFitCapture(PortraitLightingFitState State
 internal interface IPortraitLightingFitSessionAdapter
 {
     bool IsFrameworkThread { get; }
+    /// <summary>A structured native backend may retain a partial write until conditional cleanup succeeds.</summary>
+    bool HasPendingNativeWrite => false;
     bool TryRead(out PortraitLightingFitState state);
     /// <summary>Must prove the original editor/source generation is destroyed. Temporary unreadability is not proof.</summary>
     bool IsEditorOwnerDestroyed(string editorIdentity) => false;
 
     /// <summary>
     /// On Framework, compare the entire expected state immediately before applying only the six RGB
-    /// fields to the current state. False must not mutate anything. Never apply an old full snapshot.
-    /// The adapter must read back/verify the actual native values before returning true.
+    /// fields to the current state. Never apply an old full snapshot. The adapter must read back
+    /// actual native values before true. False normally means no mutation. A failed native call
+    /// may instead retain adapter-owned partial values: it must report HasPendingNativeWrite,
+    /// make TryRead fail until conditional cleanup settles, and keep its cleanup barrier alive
+    /// across cancellation/close. The session then retains its own cleanup/suppression obligation.
     /// </summary>
     bool TrySet(PortraitLightingFitState expected, IReadOnlyList<int> desired);
 

@@ -82,6 +82,7 @@ namespace FireGaze.PortraitPreview
     internal sealed class PortraitPreviewWindow
     {
         public bool IsOpen;
+        public void CloseAuxiliaryWindows() { }
         public static void DrawHistoryRows(PortraitPreviewFeature feature, bool allowed) { }
     }
 
@@ -179,6 +180,8 @@ namespace FireGaze.PortraitPreview
         public OwnedCharacterKey? Owner = new(10,20);
         public string? LastError;
         public bool IsActive => session.IsActive;
+        private bool LightingFitHistorySuppressed => false;
+        private bool CancelLightingFitForEdit() => true;
         public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
         public PortraitHistoryStore Store => history;
         public NativePortraitTarget Native => target;
