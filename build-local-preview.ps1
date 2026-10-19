@@ -69,7 +69,7 @@ foreach ($previewSuite in @('PortraitInventoryRefreshTests', 'PortraitRuntimeSaf
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
-foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightingSpaceTests', 'PortraitAnalysisWindowTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests', 'PortraitSoftwareCompositionTests')) {
+foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightingSpaceTests', 'PortraitAnalysisWindowTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests', 'PortraitNativeLiveViewTests', 'PortraitSoftwareCompositionTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 foreach ($previewSuite in @('PortraitLightingNativeTests', 'PortraitLightingAdapterTests', 'PortraitLightingBindingTests', 'PortraitLightingCaptureTests', 'PortraitLightingControlsTests', 'PortraitLightingFeatureBackendTests')) {
