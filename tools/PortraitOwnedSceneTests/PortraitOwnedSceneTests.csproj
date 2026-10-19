@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);CA1416</NoWarn><DefineConstants>$(DefineConstants);OWNED_FRAME_CONSUMER</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedCharaView.cs')">$(DefineConstants);OWNED_SCENE</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/NativePortraitTarget.OwnedScene.cs')">$(DefineConstants);OWNED_SOURCE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedCharaView*.cs" Link="%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneLeaseContract.cs" Link="PortraitOwnedSceneLeaseContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="PortraitEditorState.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.cs" Link="NativePortraitTarget.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.OwnerLifecycle.cs" Link="NativePortraitTarget.OwnerLifecycle.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.EditorState.cs" Link="NativePortraitTarget.EditorState.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.Controls.cs" Link="NativePortraitTarget.Controls.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.PlateMirror.cs" Link="NativePortraitTarget.PlateMirror.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/NativePortraitTarget.OwnedScene.cs" Link="NativePortraitTarget.OwnedScene.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/NativePortraitTarget.OwnedScene.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPlateMirror*.cs" Link="%(Filename)%(Extension)" />
+    <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

@@ -155,7 +155,15 @@ internal sealed partial class PortraitPreviewWindow
                     ImGui.Dummy(imageSize);
                     var draw = ImGui.GetWindowDrawList();
                     draw.AddRectFilled(origin, origin + imageSize, ImGui.GetColorU32(FireGazePalette.Panel));
-                    draw.AddText(origin + new Vector2(6, 50) * Scale, ImGui.GetColorU32(FireGazePalette.Muted), "暂无照片");
+                    var photoStatus = photos?.FavoritePhotoStatus(entry.SourceContentID, entry.Snapshot);
+                    var photoLabel = photoStatus switch
+                    {
+                        PortraitFavoritePhotoStatus.Available => "载入照片中",
+                        PortraitFavoritePhotoStatus.Capacity => "照片空间已满",
+                        PortraitFavoritePhotoStatus.StorageError => "照片暂不可用",
+                        _ => "暂无照片",
+                    };
+                    draw.AddText(origin + new Vector2(6, 50) * Scale, ImGui.GetColorU32(FireGazePalette.Muted), photoLabel);
                 }
                 ImGui.SetCursorScreenPos(origin + new Vector2(layout.PhotoWidth + spacing.X, 0));
                 ImGui.BeginChild("###PortraitFavoriteMetadata", new Vector2(layout.TextWidth, layout.MetadataHeight), false);

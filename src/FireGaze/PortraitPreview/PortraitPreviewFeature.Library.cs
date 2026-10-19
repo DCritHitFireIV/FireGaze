@@ -23,6 +23,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public PortraitGlamourPlateView? GlamourPlateView => glamourPlateView;
     public IReadOnlyList<PortraitFavoriteEntry> Favorites => favoriteEntries;
     public string FavoritesStatus => favoritesStatus;
+    partial void SynchronizeFavoritePhotos();
 
     private void InitializeLibrary(string directory)
     {
@@ -225,6 +226,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         {
             favoriteEntries = favoritesStore.Entries;
             favoritesStatus = "收藏已保存";
+            SynchronizeFavoritePhotos();
         }
         else SetFavoritesError(result.Reason);
     }

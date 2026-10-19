@@ -18,6 +18,9 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private readonly ITextureReadbackProvider readback;
     private readonly PortraitThumbnailSource source;
     private readonly PortraitThumbnailCache cache;
+    private readonly PortraitFavoritePhotos favoritePhotos;
+    private HashSet<string> favoriteKeys = new(StringComparer.Ordinal);
+    private bool favoriteReferencesKnown;
     private readonly PortraitThumbnailCaptureGate gate = new();
     private readonly PortraitThumbnailTextureCache<IDalamudTextureWrap> loaded;
     private readonly PortraitPhotoTrace photoTrace;
@@ -41,20 +44,30 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private long discarded;
 
     public PortraitHistoryPhotos(string path, ITextureProvider textures, ITextureReadbackProvider readback,
-        PortraitThumbnailSource source, int historyBytes, Action<string>? logger = null)
+        PortraitThumbnailSource source, int historyBytes, Action<string>? logger = null, string? favoritePhotoPath = null,
+        IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>? favoriteSnapshots = null)
     {
         photoTrace = new(logger);
         this.textures = textures;
         this.readback = readback;
         this.source = source;
         availableBytes = Math.Max(0, PortraitThumbnailCache.MaximumBytes - historyBytes);
-        cache = new(path, availableBytes);
+        // On the first upgrade, rescue known favorites before shrinking the old disposable
+        // cache. Otherwise an already completed image could be evicted before being archived.
+        cache = new(path, favoriteSnapshots is null ? availableBytes : PortraitThumbnailCache.MaximumBytes);
+        favoritePhotos = new(favoritePhotoPath ?? Path.ChangeExtension(path, ".favorites.json"));
+        if (favoriteSnapshots is not null)
+        {
+            SetFavoriteSnapshots(favoriteSnapshots);
+            cache.SetAvailableBytes(availableBytes);
+        }
         PublishCacheMetadata();
         loaded = new(async key =>
         {
             var operation = photoTrace.Start(PortraitPhotoOperation.LoadedImage);
             byte[] image = [];
-            if (!operation.Call(PortraitPhotoPhase.LoadedImageRead, () => cache.TryGet(key, out image))
+            if (!operation.Call(PortraitPhotoPhase.LoadedImageRead,
+                    () => favoritePhotos.TryGet(key, out image) || cache.TryGet(key, out image))
                 || !PortraitThumbnailImage.IsSafeSize(image)) return null;
             var result = await operation.CallAsync(PortraitPhotoPhase.LoadedImageUpload,
                 () => textures.CreateFromImageAsync(image, "FireGaze history thumbnail", lifetime.Token)).ConfigureAwait(false);
@@ -68,7 +81,8 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     {
         lock (sync) return new { count = imageKeys.Count, bytes = cacheBytes, availableBytes, loaded = loaded.Count,
             loading = loaded.InFlight, capturing = capture is not null || encoding is not null || writing is not null,
-            saved, discarded, lastError = lastError ?? cacheError };
+            saved, discarded, favoritePhotoCount = favoritePhotos.Count,
+            favoritePhotoError = favoritePhotos.LastError, lastError = lastError ?? cacheError };
     }
 
     public bool NeedsStateValidation
@@ -159,7 +173,8 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 Reject();
             }
             if (!eligible || capture is not null || encoding is not null || writing is not null || maintenance is not null) return;
-            if (Volatile.Read(ref imageKeys).Contains(value.Key!))
+            if (Volatile.Read(ref imageKeys).Contains(value.Key!)
+                || favoritePhotos.Status(value.Key!) == PortraitFavoritePhotoStatus.Available)
             {
                 if (gate.Begin() is { } present) gate.Complete(present, true);
                 return;
@@ -178,7 +193,14 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     {
         if (writing?.IsCompleted != true) return;
         var success = writing.IsCompletedSuccessfully && writing.Result;
-        if (success && ticket is not null) { saved++; loaded.Invalidate(ticket.StateKey); }
+        if (success && ticket is not null)
+        {
+            saved++;
+            // Copy only the completed managed PNG. This never starts another capture or replays
+            // a snapshot. Retain it before ordinary history maintenance can evict the source.
+            SynchronizeFavoritePhotos();
+            loaded.Invalidate(ticket.StateKey);
+        }
         else if (writing.IsFaulted) lastError = writing.Exception?.GetBaseException().Message;
         if (ticket is not null) gate.Complete(ticket, success);
         writing = null;
@@ -253,12 +275,34 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         lock (sync) return !disposed && records.TryGetValue(recordID, out var value) ? loaded.Get(value.Key) : null;
     }
 
-    // A favorite can reuse an already captured image across characters. Browsing never renders
-    // older states into the live editor; the durable snapshot remains usable if its photo expires.
+    public bool SetFavoriteSnapshots(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> values)
+    {
+        ArgumentNullException.ThrowIfNull(values);
+        lock (sync)
+        {
+            if (disposed) return false;
+            favoriteKeys = values.Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+                .ToHashSet(StringComparer.Ordinal);
+            favoriteReferencesKnown = true;
+            return SynchronizeFavoritePhotos();
+        }
+    }
+
+    private bool SynchronizeFavoritePhotos() => !favoriteReferencesKnown || favoritePhotos.Synchronize(favoriteKeys,
+        key => cache.TryGet(key, out var bytes) ? bytes : null);
+
+    public PortraitFavoritePhotoStatus FavoritePhotoStatus(ulong contentID, PortraitEditorSnapshot snapshot)
+        => favoritePhotos.Status(SnapshotKey(contentID, snapshot));
+
+    private static string SnapshotKey(ulong contentID, PortraitEditorSnapshot snapshot)
+        => PortraitThumbnailCache.KeyForSnapshot(contentID.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            + "|" + snapshot.ToJSON());
+
+    // Saved favorites read their independent archive first. The source character remains part
+    // of the key; a different character's identical parameters cannot borrow the wrong model.
     public IDalamudTextureWrap? GetSnapshot(ulong contentID, PortraitEditorSnapshot snapshot)
     {
-        var key = PortraitThumbnailCache.KeyForSnapshot(contentID.ToString(System.Globalization.CultureInfo.InvariantCulture)
-            + "|" + snapshot.ToJSON());
+        var key = SnapshotKey(contentID, snapshot);
         lock (sync) return !disposed ? loaded.Get(key) : null;
     }
 

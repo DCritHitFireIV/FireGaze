@@ -66,7 +66,7 @@ foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'Port
 foreach ($previewSuite in @('PortraitInventoryRefreshTests', 'PortraitRuntimeSafetyTests', 'NearbyWindowTests')) {
     Invoke-PreviewSuite $previewSuite
 }
-foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
+foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitFavoritePhotoTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 foreach ($previewSuite in @('PortraitComparisonTests', 'PortraitLightDiagramTests', 'PortraitLightingSpaceTests', 'PortraitObserverCameraTests', 'PortraitCameraFitTests', 'PortraitAnalysisWindowTests', 'PortraitLightIntegrationTests', 'PortraitLightNativeTests', 'PortraitLightingFitTests', 'PortraitLightingFitSessionTests', 'PortraitSampleRegionTests', 'PortraitCaptureTests', 'PortraitNativeLiveViewTests', 'PortraitSoftwareCompositionTests')) {
@@ -82,6 +82,11 @@ foreach ($previewSuite in @('PortraitEditorStateTests', 'PortraitEditingTests', 
 # Dalamud/native dependency; keep it in the full offline gate so stale callback
 # and ownership regressions fail before any host assembly is built or deployed.
 Invoke-PreviewSuite 'PortraitSpatialSceneTests'
+# Compile the actual native arbitration and owned portrait adapters against the
+# current SDK. These suites exercise call ordering and retirement with native
+# boundaries substituted; they do not install hooks or create a live game scene.
+Invoke-PreviewSuite 'PortraitOwnedSceneHookTests'
+Invoke-PreviewSuite 'PortraitOwnedSceneTests'
 
 if ($SqpackPath) {
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {

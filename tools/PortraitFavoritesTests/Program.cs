@@ -70,6 +70,27 @@ try
     Check(!other.Import(new string('x', PortraitFavoritesStore.MaximumBytes + 1)).Success, "oversize import is rejected before decoding");
     Check(store.Remove(id).Success && new PortraitFavoritesStore(path).Entries.All(entry => entry.ID != id), "remove is immediately durable and leaves other favorites intact");
 
+    var backupPath = Path.Combine(root, "backed-up.json");
+    var backed = new PortraitFavoritesStore(backupPath, () => now);
+    var backedEntry = backed.Add(Snapshot(), 1, "一", "第一版", []).Entry!;
+    var firstGeneration = File.ReadAllBytes(backupPath);
+    Check(backed.Rename(backedEntry.ID, "第二版").Success
+        && File.Exists(backupPath + ".bak") && firstGeneration.SequenceEqual(File.ReadAllBytes(backupPath + ".bak")),
+        "a durable favorite edit immediately preserves the exact previous valid document");
+    var secondGeneration = File.ReadAllBytes(backupPath);
+    Check(backed.SetTags(backedEntry.ID, ["定稿"]).Success
+        && secondGeneration.SequenceEqual(File.ReadAllBytes(backupPath + ".bak"))
+        && Directory.GetFiles(root, "backed-up.json.bak*").Length == 1,
+        "favorite backups rotate a single bounded previous generation across metadata edits");
+    var backupBytes = File.ReadAllBytes(backupPath + ".bak");
+    File.WriteAllText(backupPath, "{damaged-current");
+    var damagedCurrent = new PortraitFavoritesStore(backupPath);
+    Check(damagedCurrent.IsReadOnly && !damagedCurrent.Rename(backedEntry.ID, "不得覆盖").Success
+        && File.ReadAllText(backupPath) == "{damaged-current"
+        && backupBytes.SequenceEqual(File.ReadAllBytes(backupPath + ".bak"))
+        && new PortraitFavoritesStore(backupPath + ".bak").Entries.Single().Name == "第二版",
+        "corrupt current favorites preserve original bytes and a usable previous snapshot backup");
+
     var files = new ControlledFiles();
     var failing = new PortraitFavoritesStore("fake.json", () => now, files);
     var first = failing.Add(Snapshot(), 1, "一", "保留", []);

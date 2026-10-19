@@ -305,7 +305,9 @@ internal sealed class PortraitFavoritesFiles : IPortraitFavoritesFiles
                 stream.Write(document);
                 stream.Flush(flushToDisk: true);
             }
-            if (File.Exists(path)) File.Replace(temporary, path, null);
+            // Keep the previous complete document even when the game exits immediately after
+            // this edit. File.Replace rotates the single backup with the main publication.
+            if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
             else File.Move(temporary, path);
         }
         finally

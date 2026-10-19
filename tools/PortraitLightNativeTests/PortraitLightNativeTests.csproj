@@ -4,6 +4,7 @@
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightInputTrace.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightInputTrace.cs')" />
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState*.cs" Link="%(Filename)%(Extension)" />
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
+<Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedCharaViewSnapshot.cs" Link="PortraitOwnedCharaViewSnapshot.cs" />
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryStore.cs" Link="PortraitHistoryStore.cs" />
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryWriter.cs" Link="PortraitHistoryWriter.cs" />
 <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingSpaceBinding.cs" />
