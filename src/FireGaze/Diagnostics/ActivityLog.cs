@@ -62,33 +62,96 @@ internal static class ActivityLog
 
     private static string? logDirectory;
     private static Timer? flushTimer;
+    private static readonly SemaphoreSlim FlushGate = new(1, 1);
+    private static Task<bool>? shutdownTask;
+    private static TaskCompletionSource<bool>? writerDrain;
+    private static Action<ActivityLevel, string>? mirror;
+    private static int activeWriters;
     private static int started;
+    private static bool closing;
 
     /// <summary>同步到卫月日志（由 <see cref="Plugin" /> 注入；可为空，用于测试）。</summary>
-    public static Action<ActivityLevel, string>? Mirror { get; set; }
+    public static Action<ActivityLevel, string>? Mirror
+    {
+        get { lock (Gate) return mirror; }
+        set { lock (Gate) { if (!closing) mirror = value; } }
+    }
 
     /// <summary>日志目录（初始化后可用；测试时为 null）。</summary>
     public static string? Directory => logDirectory;
 
     /// <summary>启动日志系统（幂等）。初始化失败只影响日志本身。</summary>
-    public static void Initialize(string configDirectory, Action<ActivityLevel, string>? mirror = null)
+    public static void Initialize(string configDirectory, Action<ActivityLevel, string>? mirrorCallback = null)
     {
-        if (Interlocked.Exchange(ref started, 1) == 1)
+        lock (Gate)
         {
-            return;
+            if (shutdownTask is { IsCompleted: true }) shutdownTask = null;
+            if (started != 0 || closing) return;
+            started = 1;
+            try
+            {
+                mirror = mirrorCallback;
+                logDirectory = Path.Combine(configDirectory, "logs");
+                System.IO.Directory.CreateDirectory(logDirectory);
+                flushTimer = new Timer(_ => Flush(), null, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2));
+            }
+            catch
+            {
+                logDirectory = null;
+                flushTimer = null;
+            }
         }
+    }
 
+    /// <summary>
+    /// Closes admission, waits for accepted writers and timer callbacks, then
+    /// writes every accepted pending entry on a worker. Repeated calls share the
+    /// same task. The final cleanup removes callbacks and static roots.
+    /// </summary>
+    public static Task<bool> ShutdownAsync()
+    {
+        lock (Gate)
+        {
+            if (shutdownTask is not null) return shutdownTask;
+            closing = true;
+            var timer = flushTimer;
+            flushTimer = null;
+            writerDrain = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            if (activeWriters == 0) writerDrain.TrySetResult(true);
+            shutdownTask = ShutdownCoreAsync(timer, writerDrain.Task);
+            return shutdownTask;
+        }
+    }
+
+    private static async Task<bool> ShutdownCoreAsync(Timer? timer, Task writers)
+    {
+        var success = true;
         try
         {
-            Mirror = mirror;
-            logDirectory = Path.Combine(configDirectory, "logs");
-            System.IO.Directory.CreateDirectory(logDirectory);
-            flushTimer = new Timer(_ => Flush(), null, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2));
+            if (timer is not null) await timer.DisposeAsync().ConfigureAwait(false);
+            await writers.ConfigureAwait(false);
+            await Task.Run(static () => FlushFinal()).ConfigureAwait(false);
         }
         catch
         {
-            logDirectory = null;
+            success = false;
         }
+        finally
+        {
+            lock (Gate)
+            {
+                mirror = null;
+                logDirectory = null;
+                Recent.Clear();
+                if (!success) Pending.Clear();
+                writerDrain = null;
+                activeWriters = 0;
+                started = 0;
+                closing = false;
+            }
+        }
+
+        return success;
     }
 
     public static void Trace(string scope, string message) => Write(ActivityLevel.Trace, scope, message);
@@ -110,17 +173,22 @@ internal static class ActivityLog
     public static void Write(ActivityLevel level, string scope, string message, Exception? error = null)
     {
         ActivityEntry entry;
+        Action<ActivityLevel, string>? mirrorToCall;
         try
         {
             entry = new ActivityEntry(DateTime.Now, level, RedactSecrets(scope), RedactSecrets(message),
                 error is null ? null : RedactSecrets(error.ToString()));
             lock (Gate)
             {
+                if (closing) return;
+                activeWriters++;
                 Recent.Add(entry);
                 if (Recent.Count > RetainedEntries)
                 {
                     Recent.RemoveRange(0, Recent.Count - RetainedEntries);
                 }
+                Pending.Enqueue(entry);
+                mirrorToCall = mirror;
             }
         }
         catch
@@ -128,18 +196,24 @@ internal static class ActivityLog
             return;
         }
 
-        Pending.Enqueue(entry);
-
         try
         {
-            if (Mirror is { } mirror)
+            if (mirrorToCall is { } callback)
             {
-                mirror(level, Format(entry, redact: false));
+                callback(level, Format(entry, redact: false));
             }
         }
         catch
         {
             // 卫月日志不可用时忽略
+        }
+        finally
+        {
+            lock (Gate)
+            {
+                activeWriters--;
+                if (closing && activeWriters == 0) writerDrain?.TrySetResult(true);
+            }
         }
     }
 
@@ -220,43 +294,37 @@ internal static class ActivityLog
     /// <summary>后台刷盘（计时器线程；绝不从渲染线程调用）。</summary>
     private static void Flush()
     {
-        var directory = logDirectory;
-        if (string.IsNullOrEmpty(directory))
-        {
-            Pending.Clear();
-            return;
-        }
+        if (!FlushGate.Wait(0)) return;
+        try { FlushCore(final: false); }
+        finally { FlushGate.Release(); }
+    }
 
+    private static void FlushFinal()
+    {
+        FlushGate.Wait();
+        try { FlushCore(final: true); }
+        finally { FlushGate.Release(); }
+    }
+
+    private static void FlushCore(bool final)
+    {
+        string? directory;
+        lock (Gate) directory = logDirectory;
+        if (string.IsNullOrEmpty(directory)) { Pending.Clear(); return; }
         try
         {
-            if (Pending.IsEmpty)
-            {
-                return;
-            }
-
+            if (Pending.IsEmpty) return;
             var path = Path.Combine(directory, $"firegaze-{DateTime.Now:yyyyMMdd}.log");
             var builder = new StringBuilder();
             while (Pending.TryDequeue(out var entry))
             {
                 builder.AppendLine(Format(entry, redact: false));
-                if (builder.Length > 200_000)
-                {
-                    break;
-                }
+                if (!final && builder.Length > 200_000) break;
             }
-
-            if (builder.Length > 0)
-            {
-                File.AppendAllText(path, builder.ToString(), new UTF8Encoding(false));
-            }
-
+            if (builder.Length > 0) File.AppendAllText(path, builder.ToString(), new UTF8Encoding(false));
             Prune(directory);
         }
-        catch
-        {
-            // 写盘失败静默（磁盘满/权限），内存里仍保留
-            Pending.Clear();
-        }
+        catch { Pending.Clear(); }
     }
 
     private static void Prune(string directory)
