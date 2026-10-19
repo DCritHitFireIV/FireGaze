@@ -279,7 +279,8 @@ public sealed class Plugin : IDalamudPlugin
         }
         try
         {
-            portraitPreview = new PortraitPreview.PortraitPreviewFeature(pluginInterface, ConfigDirectory);
+            portraitPreview = new PortraitPreview.PortraitPreviewFeature(pluginInterface, ConfigDirectory,
+                () => localPreview?.ReadTrialSafetyState() ?? new(false, false, 0));
         }
         catch (Exception e)
         {

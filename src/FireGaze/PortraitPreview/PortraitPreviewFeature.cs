@@ -44,9 +44,11 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private readonly PortraitCaptureIsolation captureIsolation = new();
     private readonly PortraitPhaseTrace runtimeTrace = new(message => Plugin.Log.Information("[PortraitTrace] {Stage}", message));
 
-    public PortraitPreviewFeature(IDalamudPluginInterface pluginInterface, string configDirectory)
+    public PortraitPreviewFeature(IDalamudPluginInterface pluginInterface, string configDirectory,
+        Func<PortraitSafetyTrialState>? readWorldTrials = null)
     {
         this.pluginInterface = pluginInterface;
+        this.readWorldTrials = readWorldTrials;
         equipment = Plugin.DataManager.GetExcelSheet<Item>().Where(row => row.EquipSlotCategory.RowId != 0 && row.RowId != 0)
             .ToDictionary(row => row.RowId);
         glasses = Plugin.DataManager.GetExcelSheet<Glasses>().Where(row => row.RowId > 0 && row.Model != 0).ToDictionary(row => row.RowId);

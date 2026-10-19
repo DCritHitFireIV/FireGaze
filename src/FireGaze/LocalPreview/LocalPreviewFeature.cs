@@ -48,6 +48,12 @@ public sealed partial class LocalPreviewFeature : IDisposable
     private readonly ITextureProvider? textures;
     private readonly IKeyState? keys;
 
+    // A current Framework read for the sibling portrait safety collector. UI publication is a
+    // separate cache and cannot establish the absence of world effects.
+    internal PortraitPreview.PortraitSafetyTrialState ReadTrialSafetyState()
+        => !disposed && initialized && Framework.IsInFrameworkUpdateThread && runtime is { IsDisposed: false } current
+            ? new(true, current.HasActivePreview, current.Revision) : new(false, false, 0);
+
     public LocalPreviewFeature(IDalamudPluginInterface pluginInterface, IFramework framework,
         IClientState clientState, IObjectTable objects, ICondition conditions, IDataManager data,
         IGameInteropProvider interop, IPluginLog log, IChatGui chat, IGameGui gameGUI,

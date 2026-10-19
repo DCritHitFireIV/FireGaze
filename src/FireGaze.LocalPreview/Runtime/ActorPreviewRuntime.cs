@@ -102,6 +102,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     public Func<uint, bool>? SpecialActionInput { get; set; }
     public long NativeRequestsConsumed { get; private set; }
     public long Revision => revision;
+    internal bool IsDisposed => disposed;
     public (ushort Mount, ushort Accessory) GenuineCollections
     {
         get { var actor=Local(); return actor == null ? default : (actor->Mount.MountId,actor->OrnamentData.OrnamentId); }

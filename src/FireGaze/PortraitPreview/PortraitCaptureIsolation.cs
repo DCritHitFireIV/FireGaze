@@ -29,6 +29,16 @@ internal sealed class PortraitCaptureIsolation
     public bool HistoryEnabled => Mode == "history";
     public bool LiveEnabled => Mode == "live";
 
+    // Observes expiry without advancing ReadMode, clearing its deadline or renewing a lease.
+    public PortraitCaptureLeaseSnapshot Peek()
+    {
+        lock (sync)
+        {
+            var now = clock();
+            return new(mode, expiresAt is { } deadline && now >= deadline ? "off" : mode, now, expiresAt);
+        }
+    }
+
     public bool TryConfigure(string mode, bool active, bool busy)
     {
         lock (sync)
@@ -54,4 +64,10 @@ internal sealed class PortraitCaptureIsolation
 
     public void RunHistory(Action action) { if (HistoryEnabled) action(); }
     public void RunLive(Action action) { if (LiveEnabled) action(); }
+}
+
+internal readonly record struct PortraitCaptureLeaseSnapshot(string ConfiguredMode, string EffectiveMode,
+    TimeSpan Clock, TimeSpan? ExpiresAt)
+{
+    public TimeSpan? Remaining => ExpiresAt is { } deadline ? TimeSpan.FromTicks(Math.Max(0, (deadline - Clock).Ticks)) : null;
 }

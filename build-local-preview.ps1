@@ -66,6 +66,7 @@ foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'Port
 foreach ($previewSuite in @('PortraitInventoryRefreshTests', 'PortraitRuntimeSafetyTests', 'NearbyWindowTests')) {
     Invoke-PreviewSuite $previewSuite
 }
+Invoke-PreviewSuite 'PortraitSafetySnapshotTests'
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitFavoritePhotoTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }
@@ -89,8 +90,14 @@ Invoke-PreviewSuite 'PortraitOwnedSceneHookTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneSlotTests'
 Invoke-PreviewSuite 'PortraitNativePhaseObservationTests'
+Invoke-PreviewSuite 'PortraitNativePhaseHostTests'
+# Map a disposable no-execute image in the test process only; never load Boot,
+# invoke its exports, attach to the game, or install a native hook.
+Invoke-PreviewSuite 'PortraitNativeBootImageTests' @('--', (Join-Path $env:DALAMUD_HOME 'Dalamud.Boot.dll'))
 
 if ($SqpackPath) {
+    # Read the actual configured client's PE only; this suite never opens its process.
+    Invoke-PreviewSuite 'PortraitNativePhaseResolverTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {
         Invoke-PreviewSuite $previewSuite @('--', '--sqpack', $SqpackPath)
     }
@@ -100,6 +107,7 @@ if ($SqpackPath) {
     }
     Invoke-PreviewSuite 'LocalPreviewInteractionTests' @('--', '--sqpack', $SqpackPath)
 } else {
+    $previewSkippedSuites.Add('PortraitNativePhaseResolverTests')
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {
         Invoke-PreviewSuite $previewSuite
     }

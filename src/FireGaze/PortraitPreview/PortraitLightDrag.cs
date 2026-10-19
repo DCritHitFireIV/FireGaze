@@ -19,6 +19,8 @@ internal sealed class PortraitLightDrag
     private PortraitNativeLightAngles lastOwned;
 
     public bool IsActive => token != 0;
+    internal long CurrentToken => token;
+    internal long LastToken => lastToken;
     public bool CanBegin(long requested) => requested>0 && requested>lastToken;
     public bool Owns(long requested) => requested > 0 && token == requested;
 
