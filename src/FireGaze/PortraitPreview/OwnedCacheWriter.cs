@@ -19,6 +19,7 @@ internal sealed class OwnedCacheWriter : IDisposable
     private int completedWrites;
     private int failedWrites;
     private bool? lastWriteSucceeded;
+    private Task<bool>? drainTask;
 
     public OwnedCacheWriter(Func<string, bool> write)
     {
@@ -109,13 +110,28 @@ internal sealed class OwnedCacheWriter : IDisposable
         }
     }
 
-    public void Dispose()
+    /// <summary>Seal new cache writes and return the worker drain without blocking the caller.</summary>
+    public Task<bool> BeginDispose()
     {
         lock (gate)
         {
-            if (!stopping) { stopping = true; signal.Release(); }
+            if (drainTask is not null) return drainTask;
+            stopping = true;
+            signal.Release();
+            drainTask = DrainWorkerAsync();
+            return drainTask;
         }
-        worker.GetAwaiter().GetResult();
+    }
+
+    private async Task<bool> DrainWorkerAsync()
+    {
+        await worker.ConfigureAwait(false);
+        lock (gate) return lastWriteSucceeded ?? true;
+    }
+
+    public void Dispose()
+    {
+        BeginDispose().GetAwaiter().GetResult();
     }
 
     private sealed record Request(long Sequence, long? Revision, string Snapshot);

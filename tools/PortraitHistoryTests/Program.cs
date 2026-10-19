@@ -22,6 +22,7 @@ var key = new PortraitHistoryKey(20, PortraitHistoryEntryPoint.GearsetPortrait, 
 try
 {
     passed += await HistoryMigrationTests.Run(directory);
+    passed += await HistoryManagedDrainTests.Run(directory, key);
     // Missing validation or shared cursors would accept bad identities or expose another portrait.
     using (var store = new PortraitHistoryStore(FileFor("isolation"), () => now))
     {

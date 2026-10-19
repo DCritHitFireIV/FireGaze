@@ -42,6 +42,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private string? lastError;
     private long saved;
     private long discarded;
+    private Task? managedDrain;
 
     public PortraitHistoryPhotos(string path, ITextureProvider textures, ITextureReadbackProvider readback,
         PortraitThumbnailSource source, int historyBytes, Action<string>? logger = null, string? favoritePhotoPath = null,
@@ -306,14 +307,25 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         lock (sync) return !disposed ? loaded.Get(key) : null;
     }
 
-    public void Dispose()
+    /// <summary>
+    /// Seals photo capture and releases Framework-owned texture references without waiting for
+    /// managed cache maintenance. The returned task is safe to await after native cleanup.
+    /// </summary>
+    public Task BeginDispose()
     {
-        Task? diskWrite, diskMaintenance;
+        Task<bool>? diskWrite;
+        Task? diskMaintenance;
         lock (sync)
         {
-            if (disposed) return;
+            if (managedDrain is not null) return managedDrain;
             disposed = true;
-            lifetime.Cancel();
+            // Provider callbacks can await Present. Schedule them off Framework and observe
+            // failures without joining their physical GPU lifetime to managed file cleanup.
+            _ = lifetime.CancelAsync().ContinueWith(task =>
+            {
+                if (task.Exception is not { } error) return;
+                lock (sync) lastError ??= error.GetBaseException().Message;
+            }, TaskScheduler.Default);
             gate.Reset();
             loaded.Dispose();
             diskWrite = writing;
@@ -324,9 +336,28 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             if (encoding is { } encodingPending)
                 _ = encodingPending.ContinueWith(task => { _ = task.Exception; }, TaskScheduler.Default);
             records.Clear();
+            managedDrain = DrainManagedAsync(diskWrite, diskMaintenance);
+            return managedDrain;
         }
-        // These tasks perform managed file I/O only; drain them before a new hot-reloaded owner opens the same cache.
-        try { diskWrite?.GetAwaiter().GetResult(); diskMaintenance?.GetAwaiter().GetResult(); }
-        catch (Exception) { }
+    }
+
+    private async Task DrainManagedAsync(Task<bool>? diskWrite, Task? diskMaintenance)
+    {
+        try
+        {
+            await PortraitManagedDrain.Combine(diskWrite, diskMaintenance).ConfigureAwait(false);
+        }
+        catch (Exception error)
+        {
+            // All accepted managed tasks have settled. Keep a failure observable even when no
+            // Framework Poll can run again; this continuation never re-enters native ownership.
+            lock (sync) lastError ??= error.Message;
+            throw;
+        }
+    }
+
+    public void Dispose()
+    {
+        BeginDispose().GetAwaiter().GetResult();
     }
 }

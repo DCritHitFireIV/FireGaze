@@ -43,6 +43,7 @@ internal sealed class PortraitHistoryStore : IDisposable
     private long revision;
     private int serializedBytes;
     private bool disposed;
+    private Task<bool>? disposeTask;
     public bool IsReadOnly { get; private set; }
     public string? LoadError { get; private set; }
     public string? PersistenceError => writer?.LastError;
@@ -410,14 +411,27 @@ internal sealed class PortraitHistoryStore : IDisposable
         lock (gate) return writer?.FlushAsync() ?? Task.FromResult(true);
     }
 
-    public void Dispose()
+    /// <summary>
+    /// Closes history admission without waiting on the file writer. The returned task drains
+    /// every immutable document accepted before the close and is intended to be awaited after
+    /// Framework-owned native cleanup has returned.
+    /// </summary>
+    public Task<bool> BeginDispose()
     {
+        PortraitHistoryWriter? historyWriter;
         lock (gate)
         {
-            if (disposed) return;
+            if (disposeTask is not null) return disposeTask;
             disposed = true;
+            historyWriter = writer;
+            disposeTask = historyWriter?.BeginDispose() ?? Task.FromResult(true);
+            return disposeTask;
         }
-        writer?.Dispose();
+    }
+
+    public void Dispose()
+    {
+        BeginDispose().GetAwaiter().GetResult();
     }
 
     private sealed record Cursor(long ID, List<long> Redo);

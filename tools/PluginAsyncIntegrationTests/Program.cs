@@ -19,5 +19,7 @@ foreach (var check in checks)
     Console.WriteLine($"{(check.Value ? "PASS" : "FAIL")} {check.Name}");
 
 var failures = checks.Count(check => !check.Value);
-Console.WriteLine($"PluginAsyncIntegrationTests: {checks.Length} checks, {failures} failures");
+var behavior = await LoadThreadCases.Run();
+failures += behavior.Failures;
+Console.WriteLine($"PluginAsyncIntegrationTests: {checks.Length + behavior.Checks} checks, {failures} failures");
 return failures == 0 ? 0 : 1;

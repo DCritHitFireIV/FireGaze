@@ -43,6 +43,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
     private bool stopping;
     private bool lastSuccess = true;
     private string? lastError;
+    private Task<bool>? drainTask;
     public string? LastError { get { lock (gate) return lastError; } }
 
     public PortraitHistoryWriter(string path, int byteLimit)
@@ -72,6 +73,36 @@ internal sealed class PortraitHistoryWriter : IDisposable
             var completion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             waiters.Add((submitted, completion));
             return completion.Task;
+        }
+    }
+
+    /// <summary>
+    /// Seals writer admission and returns a task for the accepted immutable document.
+    /// Callers that own a Framework-bound feature must await this task outside Framework.
+    /// </summary>
+    public Task<bool> BeginDispose()
+    {
+        lock (gate)
+        {
+            if (drainTask is not null) return drainTask;
+            stopping = true;
+            signal.Release();
+            drainTask = DrainWorkerAsync();
+            return drainTask;
+        }
+    }
+
+    private async Task<bool> DrainWorkerAsync()
+    {
+        try
+        {
+            await worker.ConfigureAwait(false);
+            lock (gate) return lastSuccess;
+        }
+        catch (Exception error)
+        {
+            lock (gate) { lastError ??= error.Message; }
+            return false;
         }
     }
 
@@ -135,10 +166,6 @@ internal sealed class PortraitHistoryWriter : IDisposable
 
     public void Dispose()
     {
-        lock (gate)
-        {
-            if (!stopping) { stopping = true; signal.Release(); }
-        }
-        worker.GetAwaiter().GetResult();
+        BeginDispose().GetAwaiter().GetResult();
     }
 }

@@ -514,10 +514,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             history.BeginDispose(),
         };
         if (glamourPlateCache is not null) drains.Add(glamourPlateCache.BeginDispose());
-        return PortraitManagedDrain.Combine(drains.ToArray()).ContinueWith(task =>
-        {
-            if (task.IsFaulted && task.Exception is { } error)
-                Plugin.Log.Warning(error.GetBaseException(), "[肖像同步预览] 托管文件排空失败");
-        }, TaskScheduler.Default);
+        return PortraitManagedDrain.Combine(
+            error => Plugin.Log.Warning(error, "[肖像同步预览] 托管文件排空失败"), drains.ToArray());
     }
 }

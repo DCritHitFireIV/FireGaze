@@ -48,6 +48,8 @@ static async Task<int> Run()
         checks += await PhotoEncodingBoundaryTests.RunAsync(root, history, historyPath, key, one, initial, identity);
         checks += await PhotoDrawCompositionTests.RunAsync(root, history, key, one, initial, identity);
         checks += await PhotoTraceServiceCases.RunAsync(root, history, key, one, initial, identity);
+        checks += await PhotoManagedDrainCases.RunAsync(root, textures, readback, history.Bytes);
+        checks += await ManagedDrainOutcomeCases.RunAsync(root, key, initial);
 
         var source = new PortraitThumbnailSource();
         using (var photos = Photos("eligibility.bin", source, history.Bytes))

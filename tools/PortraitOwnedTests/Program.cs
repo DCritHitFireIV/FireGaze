@@ -98,6 +98,7 @@ Case("read payload is detached from caller memory", () => {
 var nativeResult=NativeReadTests.Run(); passed+=nativeResult.Passed;failed+=nativeResult.Failed;
 var fileResult=CacheFileTests.Run();passed+=fileResult.Passed;failed+=fileResult.Failed;
 var writerResult=CacheWriterTests.Run();passed+=writerResult.Passed;failed+=writerResult.Failed;
+var asyncWriterResult=AsyncCacheWriterTests.Run();passed+=asyncWriterResult.Passed;failed+=asyncWriterResult.Failed;
 var revisionResult=ContentRevisionTests.Run();passed+=revisionResult.Passed;failed+=revisionResult.Failed;
 var trackedWriterResult=TrackedWriterTests.Run();passed+=trackedWriterResult.Passed;failed+=trackedWriterResult.Failed;
 var savePolicyResult=CacheSavePolicyTests.Run();passed+=savePolicyResult.Passed;failed+=savePolicyResult.Failed;

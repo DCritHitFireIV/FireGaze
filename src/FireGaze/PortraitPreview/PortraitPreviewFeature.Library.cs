@@ -235,8 +235,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (!libraryInitialized) return;
         glamourPlateCache.QueueIfNeeded(glamourPlates);
-        glamourPlateCache.FlushAsync().GetAwaiter().GetResult();
-        glamourPlateCache.Dispose();
+        // Seal the writer here; the parent lifetime awaits the managed drain after the
+        // Framework-owned native release has returned.
+        glamourPlateCache.BeginDispose();
         libraryInitialized = false;
     }
 

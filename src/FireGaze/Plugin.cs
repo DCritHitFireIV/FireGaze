@@ -82,6 +82,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
     private DateTime loadedAt;
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
     private readonly PluginWorkLifetime workLifetime = new();
+    private Task? portraitManagedDrain;
     private int disposed;
 
     public Plugin(IDalamudPluginInterface pluginInterface)
@@ -408,19 +409,22 @@ public sealed class Plugin : IAsyncDalamudPlugin
 
     /// <summary>
     ///     The loader's asynchronous contract is the single admission point for ordinary
-    ///     plugin work. Existing construction remains compatible with the current service
-    ///     injection order; the managed lifetime is not marked running until the loader has
-    ///     accepted this instance.
+    ///     plugin work. Initialization touches Framework-bound services, so it is admitted
+    ///     there even when the asynchronous loader invokes this method on a worker thread.
     /// </summary>
     public async Task LoadAsync(CancellationToken cancellationToken)
     {
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
-            InitializeCore();
-            if (!workLifetime.TryStartRunning(out var reason))
-                throw new InvalidOperationException(reason);
-            await Task.CompletedTask.ConfigureAwait(false);
+            await Framework.RunOnFrameworkThread(() =>
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                workLifetime.ShutdownToken.ThrowIfCancellationRequested();
+                InitializeCore();
+                if (!workLifetime.TryStartRunning(out var reason))
+                    throw new InvalidOperationException(reason);
+            }).ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
         }
         catch
@@ -435,9 +439,11 @@ public sealed class Plugin : IAsyncDalamudPlugin
     public void Dispose()
     {
         if (Interlocked.Exchange(ref disposed, 1) != 0) return;
+        var previewToDrain = portraitPreview;
         try
         {
-            portraitPreview?.Dispose();
+            previewToDrain?.Dispose();
+            portraitManagedDrain = previewToDrain?.DrainManagedAsync();
             portraitPreview = null;
         }
         catch (Exception e)
@@ -559,10 +565,16 @@ public sealed class Plugin : IAsyncDalamudPlugin
         if (Framework is null || Framework.IsInFrameworkUpdateThread)
         {
             Dispose();
-            return;
+        }
+        else
+        {
+            await Framework.RunOnFrameworkThread(Dispose).ConfigureAwait(false);
         }
 
-        await Framework.RunOnFrameworkThread(Dispose).ConfigureAwait(false);
+        // History, equipment and template writers are sealed by the Framework phase but
+        // perform only managed file I/O. Await their accepted work after that phase returns.
+        var drain = portraitManagedDrain;
+        if (drain is not null) await drain.ConfigureAwait(false);
     }
 
     /// <summary>

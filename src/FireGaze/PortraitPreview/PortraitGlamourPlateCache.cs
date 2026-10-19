@@ -55,6 +55,8 @@ internal sealed class PortraitGlamourPlateCache : IDisposable
     }
 
     public Task<bool> FlushAsync() => writer.FlushAsync();
+    /// <summary>Stops admissions and returns the managed writer drain for Framework-external awaiting.</summary>
+    public Task<bool> BeginDispose() => writer.BeginDispose();
     public void Dispose() => writer.Dispose();
 
     private bool Write(string snapshot)
