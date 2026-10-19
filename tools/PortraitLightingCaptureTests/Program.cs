@@ -12,7 +12,7 @@ void Check(bool condition,string name){if(!condition)throw new InvalidOperationE
 static PortraitLightingFitCaptureFrame Frame(FakeApi api)=>new(api.Sample,api.Surface);
 static void Settle(PortraitLightingFitCaptureBridge bridge){bridge.Update();bridge.Draw();bridge.Update();bridge.Draw();bridge.Update();}
 static async Task Copied(PortraitLightingFitCaptureBridge bridge,FakeApi api,Readback readback,Texture texture)
-{api.Copy.SetResult(new(2,1,[new(texture)]));bridge.Update();bridge.Draw();bridge.Update();await Until(()=>readback.Calls==1);}
+{api.Copy.SetResult(new(2,1,[new(texture)]));bridge.Update();bridge.Draw();bridge.Update();await Until(()=>readback.SubmissionEntered.IsSet);}
 static async Task Until(Func<bool> condition){var end=DateTime.UtcNow.AddSeconds(5);while(!condition()){if(DateTime.UtcNow>end)throw new TimeoutException();await Task.Delay(1);}}
 var api=new FakeApi();var readback=new Readback(api);
 using(var bridge=new PortraitLightingFitCaptureBridge(api,readback))
@@ -30,7 +30,7 @@ using(var bridge=new PortraitLightingFitCaptureBridge(api,readback))
  bridge.Draw();Check(api.Composes==0,"copy completion cannot bypass a fresh Framework sample before composition");
  bridge.Update();Check(api.Composes==0,"Framework validation never composes a draw list");
  bridge.Draw();Check(api.Composes==1&&layer.Disposes==1&&readback.Calls==0,"Draw composes and releases input layers without starting CPU readback");
- bridge.Update();await Until(()=>readback.Calls==1);Check(api.Outputs[0].Disposes==0,"next Framework validation begins readback while retaining composed surface");
+ bridge.Update();await Until(()=>readback.SubmissionEntered.IsSet);Check(api.Outputs[0].Disposes==0,"next Framework validation begins readback while retaining composed surface");
  readback.Pending.SetResult([new(12,34,56,255),new(78,90,123,255)]);
  await Until(()=>api.Outputs[0].Disposes==1);
  Check(!task.IsCompleted,"completed CPU readback waits for Framework post-validation");
@@ -133,17 +133,17 @@ foreach(var failure in new[]{"copy","compose","readback","dimensions","pixels","
   a.Copy.SetResult(new(failure=="dimensions"?3:2,1,[new(new Texture())]));bridge.Update();bridge.Draw();bridge.Update();
   if(failure=="readback")
   {
-   await Until(()=>r.Calls==1);
+   await Until(()=>r.SubmissionEntered.IsSet);
    r.Pending.SetException(new InvalidOperationException("read failure"));
   }
   else if(failure=="pixels")
   {
-   await Until(()=>r.Calls==1);
+   await Until(()=>r.SubmissionEntered.IsSet);
    r.Pending.SetResult([new(1,2,3,255)]);
   }
   else if(failure=="nonfinite")
   {
-   await Until(()=>r.Calls==1);
+   await Until(()=>r.SubmissionEntered.IsSet);
    r.Pending.SetResult([new(double.NaN,2,3,255),new(1,2,3,255)]);
   }
  }
