@@ -37,7 +37,7 @@ var viewingSurfaces = new[]
 foreach (var surface in viewingSurfaces)
 foreach (var foreground in new[] { UiHelpers.Muted, UiHelpers.Good, UiHelpers.Warn, UiHelpers.Bad, UiHelpers.Info, UiHelpers.Accent, UiHelpers.Skip,
     InsStyle.Neutral, InsStyle.Bright, InsStyle.LikedRed })
-    Check(Contrast(foreground, surface) >= 4.5, "status and list text remain readable on dark viewing surfaces");
+    Check(Contrast(foreground, surface) >= 4.5, "status and list text remain readable on information viewing surfaces");
 foreach (var style in Enum.GetValues<FireGazeButtonStyle>())
 {
     var button = UiHelpers.SemanticButtonColors(style, false);

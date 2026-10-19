@@ -75,7 +75,7 @@ internal static class FireGazeTheme
         draw();
     }
 
-    /// <summary>Complete white portrait domain, including every floating tool and semantic consumer.</summary>
+    /// <summary>Complete softened light portrait domain, including every floating tool and semantic consumer.</summary>
     public static IDisposable PushPortrait() => PushPortrait(NativeStyleStack.Instance);
 
     internal static IDisposable PushPortrait(IFireGazeStyleStack stack)

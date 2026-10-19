@@ -11,25 +11,25 @@ internal static class FireGazePalette
 
     private static readonly Colors Information = new()
     {
-        Window = Rgb(0x202C37), Panel = Rgb(0x202C37), Raised = Rgb(0x273643),
-        Hover = Rgb(0x304352), Selected = Rgb(0x364C5E), Text = Rgb(0xF3F5F7),
-        Muted = Rgb(0xB9C5CF), Border = Rgb(0x8A9CA9), Action = Rgb(0x365B78),
-        ActionHover = Rgb(0x416C8D), ActionActive = Rgb(0x2E4D66), Focus = Rgb(0xC4D9E8),
-        BrandEmber = Rgb(0xDB7650), ChartRed = Rgb(0xF0AFB8), ChartGreen = Rgb(0xA8D7BC),
-        ChartBlue = Rgb(0xA7C9EB), Good = Rgb(0x315B47), GoodText = Rgb(0xA8D7BC),
-        Warn = Rgb(0xE9C590), Bad = Rgb(0x773F47), BadText = Rgb(0xF0AFB8),
-        Skip = Rgb(0xB9C5CF), SelectionShadow = Rgb(0x343434),
+        Window = Rgb(0xEEF1F4), Panel = Rgb(0xF3F5F7), Raised = Rgb(0xF7F8FA),
+        Hover = Rgb(0xE1E8EE), Selected = Rgb(0xD6E3EE), Text = Rgb(0x202A32),
+        Muted = Rgb(0x536370), Border = Rgb(0x697F90), Action = Rgb(0x3B5F7B),
+        ActionHover = Rgb(0x34546D), ActionActive = Rgb(0x294458), Focus = Rgb(0x365D7A),
+        BrandEmber = Rgb(0xD45A31), ChartRed = Rgb(0xA84450), ChartGreen = Rgb(0x326A4C),
+        ChartBlue = Rgb(0x3D6482), Good = Rgb(0x3C614C), GoodText = Rgb(0x2F6247),
+        Warn = Rgb(0x755420), Bad = Rgb(0x834C55), BadText = Rgb(0x8D3F4B),
+        Skip = Rgb(0x536370), SelectionShadow = Rgb(0x343434),
     };
     private static readonly Colors Portrait = new()
     {
-        Window = Rgb(0xFFFFFF), Panel = Rgb(0xFFFFFF), Raised = Rgb(0xFFFFFF),
-        Hover = Rgb(0xF2F2F2), Selected = Rgb(0xECECEC), Text = Rgb(0x202020),
-        Muted = Rgb(0x626262), Border = Rgb(0x858585), Action = Rgb(0x242424),
-        ActionHover = Rgb(0x3A3A3A), ActionActive = Rgb(0x111111), Focus = Rgb(0x242424),
-        BrandEmber = Rgb(0xD45A31), ChartRed = Rgb(0xB73E45), ChartGreen = Rgb(0x257846),
-        ChartBlue = Rgb(0x3264B9), Good = Rgb(0x343434), GoodText = Rgb(0x1B5A38),
-        Warn = Rgb(0x704500), Bad = Rgb(0xA43B46), BadText = Rgb(0x8A2430),
-        Skip = Rgb(0x4C4C4C), SelectionShadow = Rgb(0x343434),
+        Window = Rgb(0xF7F8FA), Panel = Rgb(0xF7F8FA), Raised = Rgb(0xF3F5F7),
+        Hover = Rgb(0xE1E8EE), Selected = Rgb(0xD6E3EE), Text = Rgb(0x202A32),
+        Muted = Rgb(0x536370), Border = Rgb(0x697F90), Action = Rgb(0x3B5F7B),
+        ActionHover = Rgb(0x34546D), ActionActive = Rgb(0x294458), Focus = Rgb(0x365D7A),
+        BrandEmber = Rgb(0xD45A31), ChartRed = Rgb(0xA84450), ChartGreen = Rgb(0x326A4C),
+        ChartBlue = Rgb(0x3D6482), Good = Rgb(0x3C614C), GoodText = Rgb(0x2F6247),
+        Warn = Rgb(0x755420), Bad = Rgb(0x834C55), BadText = Rgb(0x8D3F4B),
+        Skip = Rgb(0x536370), SelectionShadow = Rgb(0x343434),
     };
 
     internal static FireGazeColorDomain CurrentDomain => domain;

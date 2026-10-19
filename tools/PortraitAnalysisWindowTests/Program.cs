@@ -45,8 +45,9 @@ static double Contrast(Vector4 left, Vector4 right)
     Check(backgrounds.Length == 4 && backgrounds.All(entry =>
     {
         var color = Color(entry.rectangle.Color);
-        return color.X > .9f && color.Y > .9f && color.Z > .9f && color.W == 1;
-    }), "actual portrait histograms submit the white work surface used by portrait floating tools");
+        return color.X > .9f && color.Y > .9f && color.Z > .9f && color.W == 1
+            && MathF.Max(color.X, MathF.Max(color.Y, color.Z)) < .99f;
+    }), "actual portrait histograms submit the softened near-white surface used by portrait floating tools");
     for (var channel = 0; channel < 3 && backgrounds.Length == 4; channel++)
     {
         var background = backgrounds[channel + 1];

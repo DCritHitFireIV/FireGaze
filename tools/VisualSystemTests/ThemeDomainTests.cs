@@ -11,27 +11,28 @@ internal static class ThemeDomainTests
         var stack = new RecordingStyleStack();
         var external = stack.Snapshot();
         var defaultMuted = UiHelpers.Muted;
+        var defaultPanel = InsStyle.Card;
         using (FireGazeTheme.Push(stack, 1f))
         {
             var main = stack.Snapshot();
             var mainText = InsStyle.Bright;
-            check(Luminance(stack.Colors[ImGuiCol.WindowBg]) < .08,
-                "information windows present a low luminance surface before Begin");
+            CheckSoftWorkSurfaces(stack, check, "information");
             CheckConsumers(stack, check, "information");
             using (FireGazeTheme.PushPortrait(stack))
             {
-                check(Luminance(stack.Colors[ImGuiCol.WindowBg]) > .9,
-                    "portrait windows and floating tools retain a white work surface");
-                check(UiHelpers.Muted != defaultMuted && InsStyle.Bright != mainText,
-                    "real status and list consumers resolve the active portrait domain instead of cached main colors");
+                CheckSoftWorkSurfaces(stack, check, "portrait");
+                check(Luminance(stack.Colors[ImGuiCol.WindowBg]) > Luminance(FireGazePalette.ForDomain(FireGazeColorDomain.Information).Window)
+                    && InsStyle.Card != defaultPanel,
+                    "the portrait work surface is slightly brighter and real list consumers resolve its domain at use time");
                 CheckConsumers(stack, check, "portrait");
                 DisabledStateTests.Run(check);
                 var portrait = stack.Snapshot();
                 using (FireGazeTheme.Push(stack, 1f))
                 {
                     CheckConsumers(stack, check, "nested independent information window");
-                    check(Luminance(stack.Colors[ImGuiCol.WindowBg]) < .08,
-                        "an information window nested in portrait drawing gets its own domain");
+                    CheckSoftWorkSurfaces(stack, check, "nested independent information window");
+                    check(InsStyle.Card == defaultPanel,
+                        "an information window nested in portrait drawing gets its own surface domain");
                 }
                 check(stack.Snapshot() == portrait,
                     "ending nested information drawing restores the complete portrait color stack");
@@ -49,7 +50,7 @@ internal static class ThemeDomainTests
                     catch (ExpectedPushFailure) { threw = true; }
                     check(threw && stack.Snapshot() == portrait && FireGazePalette.CurrentDomain == FireGazeColorDomain.Portrait
                         && UiHelpers.Muted == FireGazePalette.ForDomain(FireGazeColorDomain.Portrait).Muted,
-                        "a partially pushed information window restores the enclosing white portrait domain");
+                        "a partially pushed information window restores the enclosing portrait domain");
                 }
                 stack.FailAtPush = null;
             }
@@ -81,13 +82,24 @@ internal static class ThemeDomainTests
         }
         check(stack.Snapshot() == external && stack.ColorDepth == 0 && stack.VarDepth == 0,
             "both domains restore the unrelated caller style and dimensions");
-        var mainMuted = UiHelpers.Muted;
+        var mainPanel = InsStyle.Card;
         using (FireGazePalette.Enter(FireGazeColorDomain.Portrait))
         {
-            var workerMuted = Task.Run(() => UiHelpers.Muted).GetAwaiter().GetResult();
-            check(workerMuted == mainMuted && UiHelpers.Muted != workerMuted,
+            var workerPanel = Task.Run(() => InsStyle.Card).GetAwaiter().GetResult();
+            check(workerPanel == mainPanel && InsStyle.Card != workerPanel,
                 "managed palette scopes stay on the UI thread instead of leaking into worker consumers");
         }
+    }
+
+    private static void CheckSoftWorkSurfaces(RecordingStyleStack stack, Action<bool, string> check, string domain)
+    {
+        var surfaces = new[] { ImGuiCol.WindowBg, ImGuiCol.ChildBg, ImGuiCol.PopupBg, ImGuiCol.FrameBg };
+        check(surfaces.All(role => Luminance(stack.Colors[role]) is > .80 and < .98),
+            $"{domain}: actual window, child, popup and input surfaces are bright without pure-white glare");
+        check(Luminance(stack.Colors[ImGuiCol.Text]) < .15,
+            $"{domain}: actual native text uses a dark foreground on the bright work surface");
+        check(surfaces.All(role => Spread(stack.Colors[role]) < .08f),
+            $"{domain}: large work surfaces stay neutral instead of becoming saturated color panels");
     }
 
     private static void CheckConsumers(RecordingStyleStack stack, Action<bool, string> check, string domain)
@@ -119,7 +131,19 @@ internal static class ThemeDomainTests
             check(new[] { ImGuiCol.FrameBg, ImGuiCol.FrameBgHovered, ImGuiCol.FrameBgActive }
                 .All(surface => Contrast(stack.Colors[role], stack.Colors[surface]) >= 3),
                 $"{domain}: {role} remains visible on the actual input fills");
+        var primary = UiHelpers.SemanticButtonColors(FireGazeButtonStyle.Primary, false);
+        check(new[] { primary.Fill, primary.Hover, primary.Active, stack.Colors[ImGuiCol.CheckMark] }
+            .All(color => color.Z > color.Y && color.Y > color.X && Spread(color) < .35f),
+            $"{domain}: real primary and focus consumers use a restrained blue accent");
+        check(stack.Colors[ImGuiCol.Button] != primary.Fill && Luminance(stack.Colors[ImGuiCol.Button]) > .8,
+            $"{domain}: ordinary controls keep the neutral work surface instead of using the primary accent everywhere");
+        check(Contrast(stack.Colors[ImGuiCol.Border], stack.Colors[ImGuiCol.Header]) >= 3
+            && Contrast(stack.Colors[ImGuiCol.CheckMark], stack.Colors[ImGuiCol.Header]) >= 3,
+            $"{domain}: selected native controls retain visible boundaries and a distinct selection mark");
     }
+
+    private static float Spread(Vector4 color) => MathF.Max(color.X, MathF.Max(color.Y, color.Z))
+        - MathF.Min(color.X, MathF.Min(color.Y, color.Z));
 
     private static double Luminance(Vector4 color)
     {
