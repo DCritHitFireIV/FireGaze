@@ -28,6 +28,8 @@ internal static class Program
         var text = string.Join(Environment.NewLine, Directory.GetFiles(Path.Combine(directory, "logs"), "*.log").Select(File.ReadAllText));
         Check(text.Contains("entry-0", StringComparison.Ordinal) && text.Contains("entry-1199", StringComparison.Ordinal), "final flush writes all accepted entries, not one 200KB batch");
         Check(ActivityLog.Mirror is null && ActivityLog.Directory is null, "shutdown clears mirror and directory roots");
+        ActivityLog.Info("lifecycle", "rejected-after-shutdown");
+        Check(!ActivityLog.Snapshot().Contains("rejected-after-shutdown", StringComparison.Ordinal), "writes after shutdown are rejected instead of rooting a closed log");
         Directory.Delete(directory, true);
     }
 

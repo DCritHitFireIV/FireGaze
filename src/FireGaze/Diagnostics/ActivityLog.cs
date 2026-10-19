@@ -180,7 +180,7 @@ internal static class ActivityLog
                 error is null ? null : RedactSecrets(error.ToString()));
             lock (Gate)
             {
-                if (closing) return;
+                if (closing || started == 0) return;
                 activeWriters++;
                 Recent.Add(entry);
                 if (Recent.Count > RetainedEntries)
