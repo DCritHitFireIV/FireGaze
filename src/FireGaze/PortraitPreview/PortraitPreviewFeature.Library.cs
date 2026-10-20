@@ -345,12 +345,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
         storageObservation = Task.Run(storageBudget.RefreshObservation);
     }
 
-    private Task DrainStorageObservation()
-    {
-        storageObservationClosing = true;
-        return storageObservation ?? Task.CompletedTask;
-    }
-
     /// <summary>Retries retained storage work only after the shared authority reports recovery or an explicit user retry.</summary>
     partial void RetryOtherPortraitStorage()
     {

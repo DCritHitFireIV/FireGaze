@@ -155,6 +155,7 @@ foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests', 'Artifac
 }
 Invoke-PreviewSuite 'PortraitWindowLifecycleTests'
 Invoke-PreviewSuite 'PluginPhysicalDrainTests'
+Invoke-PreviewSuite 'PortraitStorageObservationDrainTests'
 
 Write-Output "Offline validation finished: $previewCompletedSuites suites; skipped: $($previewSkippedSuites -join ', ')."
 if (!$SqpackPath) { Write-Output 'Current-client GPose, item-data, portrait appearance, and portrait validation coverage is incomplete.' }
