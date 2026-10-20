@@ -47,6 +47,7 @@ internal sealed class PortraitOwnedSceneSourceCensus : IPortraitNativeSourceRetu
     private readonly Func<long> timestamp;
     private readonly long frequency;
     private readonly int capacity;
+    private readonly bool singleResult;
     private readonly bool attached;
     private readonly Queue<PortraitOwnedSceneSlotCensus> results = new();
     private readonly Dictionary<PortraitNativeThreadStamp, InvocationTree> trees = [];
@@ -57,7 +58,8 @@ internal sealed class PortraitOwnedSceneSourceCensus : IPortraitNativeSourceRetu
 
     internal PortraitOwnedSceneSourceCensus(PortraitNativePhaseHost sourceHost, PortraitNativePhaseHost counters,
         PortraitNativePhaseHost resources, PortraitSourceCensusQualifications? qualifications = null,
-        IPortraitOwnedSceneSlotNativeApi? native = null, Func<long>? timestamp = null, long timestampFrequency = 0, int capacity = 16)
+        IPortraitOwnedSceneSlotNativeApi? native = null, Func<long>? timestamp = null, long timestampFrequency = 0, int capacity = 16,
+        bool singleResult = false)
     {
         this.sourceHost = sourceHost ?? throw new ArgumentNullException(nameof(sourceHost));
         this.counters = counters ?? throw new ArgumentNullException(nameof(counters));
@@ -68,6 +70,7 @@ internal sealed class PortraitOwnedSceneSourceCensus : IPortraitNativeSourceRetu
         if (frequency <= 0 || frequency > long.MaxValue / 300) throw new ArgumentOutOfRangeException(nameof(timestampFrequency));
         if (capacity is < 1 or > 256) throw new ArgumentOutOfRangeException(nameof(capacity));
         this.capacity = capacity;
+        this.singleResult = singleResult;
         var copies = native ?? new PortraitOwnedSceneSlotNativeApi(() => IsNativeReadAdmitted);
         phases = new(copies, IsSynchronousReturnCurrent, IsSynchronousReturnCurrent,
             () => Volatile.Read(ref activeReturn)?.Request.Qualification.Value?.SessionEpoch ?? 0);
@@ -203,6 +206,9 @@ internal sealed class PortraitOwnedSceneSourceCensus : IPortraitNativeSourceRetu
             if (!CurrentStructurally(active)) return;
             if (results.Count == capacity) results.Dequeue();
             results.Enqueue(result);
+            // The explicit diagnostic consumes its request atomically with its
+            // first successful publication, before a later return can read again.
+            if (singleResult) Volatile.Write(ref request, null);
         }
         finally { Monitor.Exit(gate); }
     }

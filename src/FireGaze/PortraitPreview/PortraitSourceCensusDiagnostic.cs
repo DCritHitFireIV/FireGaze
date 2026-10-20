@@ -261,7 +261,8 @@ internal sealed class PortraitSourceCensusDiagnostic
                 () => binding?.BeginCounterMutation(), owner.counterResolve);
             Resources = PortraitNativePhaseHost.CreateResourceIngress(owner.factory, Recorders[2], reservations,
                 () => binding?.BeginResourceMutation(), owner.resourceResolve);
-            Census = binding = new(Source, Counters, Resources, Qualifications, owner.native, ReadRequestTimestamp, owner.frequency, capacity: 1);
+            Census = binding = new(Source, Counters, Resources, Qualifications, owner.native, ReadRequestTimestamp, owner.frequency,
+                capacity: 1, singleResult: true);
             Hosts = [Source, Counters, Resources];
         }
         private long ReadRequestTimestamp()
