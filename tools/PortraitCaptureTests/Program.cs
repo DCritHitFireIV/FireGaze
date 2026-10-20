@@ -28,6 +28,7 @@ checks+=await CapturePreparationTests.Run();
 checks+=await CapturePipelineTests.Run();
 checks+=CaptureNativeNodeTests.Run();
 checks+=CaptureNativeOwnerTests.Run();
+checks+=CaptureRetirementRetentionTests.Run();
 Console.WriteLine($"PortraitCaptureTests: {checks} passed, 0 failed");
 return 0;
 #endif

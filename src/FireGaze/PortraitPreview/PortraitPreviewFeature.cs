@@ -44,6 +44,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private readonly PortraitPhaseTrace runtimeTrace = new(message => Plugin.Log.Information("[PortraitTrace] {Stage}", message));
     private Task? managedDrain;
     private Task? physicalDrain;
+    private Task? incompletePhysicalDrain;
     private readonly TaskCompletionSource incompletePhysicalClose = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
     public PortraitPreviewFeature(IDalamudPluginInterface pluginInterface, string configDirectory,
@@ -73,6 +74,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         InitializeLightingFit();
         InitializeNativeLive();
         InitializeSourceCensus();
+        InitializeOwnedPassive();
         InitializeEditorOpening();
         window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
@@ -87,7 +89,15 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     /// <summary>Managed cache/history writes accepted during close, drained outside Framework.</summary>
     public Task DrainManagedAsync() => managedDrain ?? Task.CompletedTask;
     /// <summary>Actual provider work and late texture release, awaited only after Framework close.</summary>
-    public Task DrainPhysicalAsync() => physicalDrain ?? incompletePhysicalClose.Task;
+    public Task DrainPhysicalAsync()
+    {
+        if (physicalDrain is { } completedClose) return completedClose;
+        // A close exception before aggregation leaves physical ownership unknown. The
+        // host keeps only this task, so that task must also retain the unsealed Feature.
+        lock (incompletePhysicalClose)
+            return physicalDrain ?? (incompletePhysicalDrain ??=
+                PortraitCaptureRetirement.CombineOwned(this, incompletePhysicalClose.Task));
+    }
     public PortraitLook? Current => session.Current;
     public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
     public IReadOnlyList<string> SourceSummary => ownedView.Character == CurrentCharacter() ? sourceSummary : [];
@@ -119,6 +129,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             historyPhotos = photos.Diagnostics(),
             captureIsolation = captureIsolation.Mode,
             sourceCensus = SourceCensusDiagnostics(),
+            ownedPassive = OwnedPassiveDiagnostics(),
             editorOpening = JsonSerializer.SerializeToElement(ReadEditorOpeningReceipt(),
                 new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
@@ -384,13 +395,14 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public void OnCommand(string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (TryOwnedPassiveCommand(parts)) return;
         if (TrySourceCensusCommand(parts)) return;
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
         else if (parts is ["status"]) Plugin.Chat.Print("[肖像同步预览] " + Status);
         else if (parts is ["capture-probe", var captureMode]) Mutate(() =>
         {
-            var busy = photos.IsBusy || liveImageService?.IsBusy == true || LightingFitMutationBlocked;
+            var busy = SourceCensusBlocksOperations || photos.IsBusy || liveImageService?.IsBusy == true || LightingFitMutationBlocked;
             if (!captureIsolation.TryConfigure(captureMode, session.IsActive, busy))
             { Error("请先关闭预览并等待图像任务结束；诊断通道仅支持 off、history 或 live。"); return; }
             Plugin.Log.Information("[PortraitTrace] capture isolation changed to {Mode}", captureIsolation.Mode);
@@ -504,7 +516,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             DisposeLightingFit();
             photoDrain = photos.BeginDispose();
             liveImageService?.Dispose();
-            physicalDrain = Task.WhenAll(photos.DrainPhysicalAsync(),
+            physicalDrain = PortraitCaptureRetirement.CombineOwned(this, photos.DrainPhysicalAsync(),
                 liveImageService?.DrainPhysicalAsync() ?? Task.CompletedTask,
                 lightingFitCapture?.DrainPhysicalAsync() ?? Task.CompletedTask,
                 window.DrainPhysicalAsync(), nativeLivePhysicalDrain, sourceCensusPhysicalDrain);

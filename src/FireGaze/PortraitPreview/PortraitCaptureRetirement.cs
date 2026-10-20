@@ -10,7 +10,8 @@ namespace FireGaze.PortraitPreview;
 internal sealed class PortraitCaptureRetirement
 {
     private readonly object sync = new();
-    private readonly TaskCompletionSource retired = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly StrongBox<object?> retirementRoot = new();
+    private readonly TaskCompletionSource retired;
     private int pending;
     private bool sealedAdmission;
     // A failed Dispose does not prove native/provider ownership was released. Keep both the
@@ -19,6 +20,8 @@ internal sealed class PortraitCaptureRetirement
     // Remember reference identity without retaining successfully released wrappers. A callback
     // can reenter cleanup before Dispose returns, or arrive again after retirement completed.
     private readonly ConditionalWeakTable<IDisposable, object> releaseAttempts = new();
+    public PortraitCaptureRetirement()
+        => retired = new(retirementRoot, TaskCreationOptions.RunContinuationsAsynchronously);
     public int Pending { get { lock (sync) return pending; } }
     public int CleanupFailures { get { lock (sync) return quarantine.Count; } }
     public string? LastCleanupFailureType { get { lock (sync) return quarantine.Values.LastOrDefault()?.GetType().FullName; } }
@@ -88,16 +91,56 @@ internal sealed class PortraitCaptureRetirement
         lock (sync)
         {
             sealedAdmission = true;
-            if (pending == 0) retired.TrySetResult();
+            retirementRoot.Value = this;
+            if (pending == 0)
+            {
+                retirementRoot.Value = null;
+                retired.TrySetResult();
+            }
             return retired.Task;
         }
+    }
+
+    /// <summary>
+    /// Task.WhenAll does not itself retain every unfinished input task. The returned task must
+    /// own both the scope and a private copy of its child tasks until all outcomes are known.
+    /// Use only for physical close, after new admission has already been revoked.
+    /// </summary>
+    public static Task CombineOwned(object owner, params Task[] drains)
+    {
+        ArgumentNullException.ThrowIfNull(owner);
+        ArgumentNullException.ThrowIfNull(drains);
+        var children = drains.ToArray();
+        var all = Task.WhenAll(children);
+        var root = new StrongBox<object?>(new object[] { owner, children });
+        var completion = new TaskCompletionSource(root, TaskCreationOptions.RunContinuationsAsynchronously);
+        _ = all.ContinueWith(static (finished, state) =>
+        {
+            var signal = (TaskCompletionSource)state!;
+            var held = (StrongBox<object?>)signal.Task.AsyncState!;
+            held.Value = null;
+            if (finished.IsFaulted) signal.TrySetException(finished.Exception!.InnerExceptions);
+            else if (finished.IsCanceled)
+            {
+                try { finished.GetAwaiter().GetResult(); }
+                catch (OperationCanceledException cancellation) { signal.TrySetCanceled(cancellation.CancellationToken); }
+            }
+            else signal.TrySetResult();
+        }, completion, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+        return completion.Task;
     }
 
     private void Leave()
     {
         lock (sync)
         {
-            if (--pending == 0 && sealedAdmission) retired.TrySetResult();
+            if (--pending == 0 && sealedAdmission)
+            {
+                // Pending Task.AsyncState roots the owner; a completed task keeps only this
+                // empty BCL box, preserving synchronous IsCompleted without retaining a plugin.
+                retirementRoot.Value = null;
+                retired.TrySetResult();
+            }
         }
     }
 

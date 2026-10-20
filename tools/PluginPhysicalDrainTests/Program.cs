@@ -56,6 +56,7 @@ foreach (var managedFailure in new[] { false, true })
     Console.WriteLine("PASS actual host remains incomplete after unconfirmed provider release; fileFailure=" + managedFailure);
 }
 checks += await CaptureProgressIpcCases.RunAsync(type.Assembly);
+checks += ExceptionalFeatureRetentionCases.Run(type.Assembly);
 Console.WriteLine($"PluginPhysicalDrainTests: {checks} passed, 0 failed; real host method, no game or GPU.");
 return 0;
 
