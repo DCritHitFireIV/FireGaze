@@ -17,7 +17,14 @@ internal enum PortraitHistoryRecordKind { Edit, Restore, Undo, Redo }
 internal enum PortraitHistoryWriteStatus { Added, Duplicate, InvalidKey, InvalidJson, TooLarge, ReadOnlyCorrupt, StaleSelection, Disposed }
 internal sealed record PortraitHistoryRecord(long ID, PortraitHistoryKey Key, DateTimeOffset Timestamp,
     long? ParentID, PortraitHistoryRecordKind Kind, string SnapshotJSON, long? TargetID = null, string Label = "编辑肖像");
-internal sealed record PortraitHistoryWriteResult(PortraitHistoryWriteStatus Status, PortraitHistoryRecord? Record = null);
+/// <summary>
+/// Added means admission into the immutable write queue. For committed edits, Persistence
+/// reports success only after the corresponding document (or a later complete history state)
+/// has been atomically published, and false if that writer attempt fails. Preparation
+/// results do not submit writes and have no boundary.
+/// </summary>
+internal sealed record PortraitHistoryWriteResult(PortraitHistoryWriteStatus Status,
+    PortraitHistoryRecord? Record = null, Task<bool>? Persistence = null);
 internal sealed record PortraitHistoryDay(DateOnly Date, IReadOnlyList<PortraitHistoryRecord> Records);
 internal enum PortraitHistorySelectionKind { Undo, Redo, Restore }
 internal sealed record PortraitHistorySelection(PortraitHistoryKey Key, PortraitHistorySelectionKind Kind,
@@ -257,13 +264,16 @@ internal sealed class PortraitHistoryStore : IDisposable
         }
         var document = new PortraitHistoryWriteDocument(prefix, fragments, suffix);
         if (writer is null || !writer.Queue(document)) return new(PortraitHistoryWriteStatus.Disposed);
+        // Capture this submission's boundary before another store operation can enqueue.
+        // The caller must never wait for disk while holding a Framework/native ownership lease.
+        var persistence = writer.FlushAsync();
         records = nextRecords;
         encodedRecords = nextEncoding;
         cursors = nextCursors;
         nextID++;
         revision++;
         serializedBytes = document.Length;
-        return new(PortraitHistoryWriteStatus.Added, records.First(record => record.ID == added.ID));
+        return new(PortraitHistoryWriteStatus.Added, records.First(record => record.ID == added.ID), persistence);
     }
 
     private static bool TryNormalize(string? json, out string normalized)

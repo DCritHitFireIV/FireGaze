@@ -21,6 +21,7 @@ var now = new DateTimeOffset(2026, 10, 17, 23, 59, 0, TimeSpan.FromHours(8));
 var key = new PortraitHistoryKey(20, PortraitHistoryEntryPoint.GearsetPortrait, 3, "race-1-job-19-v1");
 try
 {
+    passed += await HistoryDurableAcceptanceTests.Run(directory, key);
     passed += await HistoryMigrationTests.Run(directory);
     passed += await HistoryManagedDrainTests.Run(directory, key);
     // Missing validation or shared cursors would accept bad identities or expose another portrait.

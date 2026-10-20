@@ -32,12 +32,14 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool sampledKeyboard;
     private bool deferredBaselineSync;
     private string? historyWriteError;
+    private Task<bool>? historyPersistence;
 
     public bool SyncPlate => syncPlate;
     public bool CanUndo => canUndo;
     public bool CanRedo => canRedo;
     public IReadOnlyList<PortraitHistoryListItem> History => historyRows;
-    public string HistoryStatus => historyWriteError ?? history.LoadError ?? history.PersistenceError ?? historyStatus;
+    public string HistoryStatus => historyWriteError ?? history.LoadError ?? history.PersistenceError
+        ?? (historyPersistence is { IsCompleted: false } ? "正在保存编辑记录…" : historyStatus);
     public IReadOnlyList<PortraitAppearanceGroup> AppearanceGroups => appearanceGroups;
 
     private void InitializeEditing(string directory)
@@ -67,6 +69,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void PollEditing()
     {
+        ObserveHistoryPersistence();
         if (LightingFitHistorySuppressed) return;
         var owner = CurrentCharacter();
         if (historyOwner != owner)
@@ -208,7 +211,13 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void HandleHistoryResult(PortraitHistoryWriteResult? result)
     {
         if (result is null) return;
-        if (result.Status == PortraitHistoryWriteStatus.Added) { historyWriteError = null; RefreshHistoryRows(); }
+        if (result.Status == PortraitHistoryWriteStatus.Added)
+        {
+            historyWriteError = null;
+            if (result.Persistence is not null) historyPersistence = result.Persistence;
+            ObserveHistoryPersistence();
+            RefreshHistoryRows();
+        }
         else if (result.Status is not PortraitHistoryWriteStatus.Duplicate)
             historyWriteError = result.Status switch
             {
@@ -216,6 +225,14 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 PortraitHistoryWriteStatus.ReadOnlyCorrupt => "历史记录无法读取，原文件已保留。本次修改未能记录。",
                 _ => "这次编辑记录未能保存，请稍后重试。",
             };
+    }
+
+    private void ObserveHistoryPersistence()
+    {
+        // Receipt completion is observed without waiting on the writer or calling native code.
+        // PersistenceError remains the writer's latest outcome, so a later successful full
+        // snapshot retry clears a failure even if no editor operation occurs in between.
+        if (historyPersistence is { IsCompleted: true }) historyPersistence = null;
     }
 
     private void RefreshHistoryRows()
@@ -338,6 +355,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             Error("未能保存这次恢复，已尝试还原本次操作。");
             return;
         }
+        HandleHistoryResult(committed);
         _ = session.ObserveLook(desired.Look);
         observedEditor = target.CaptureEditorState(identity) ?? desired;
         historyObservedEditor = ForHistory(observedEditor, desired);
