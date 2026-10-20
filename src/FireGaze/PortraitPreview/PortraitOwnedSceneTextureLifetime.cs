@@ -32,11 +32,14 @@ internal sealed class PortraitOwnedSceneTextureLifetime<T> : IDisposable where T
     }
 
     public int InFlight { get { lock (sync) return copying ? 1 : 0; } }
+    public bool HasCurrentFrame { get { lock (sync) return !closing && physical.CleanupFailures == 0
+        && current is { } frame && frame.Generation == generation; } }
     public int FrameCount { get { lock (sync) return frames.Count; } }
     public int Borrowers { get { lock (sync) return borrowers; } }
     public int CleanupFailures => physical.CleanupFailures;
     public string? LastCopyFailureType { get { lock (sync) return lastCopyFailureType; } }
     public long Generation { get { lock (sync) return closing ? 0 : generation; } }
+    internal event Action? FramePublished;
 
     /// <summary>
     /// Invalidate before any owner/revision/slot/descriptor change. Existing frames remain
@@ -116,6 +119,7 @@ internal sealed class PortraitOwnedSceneTextureLifetime<T> : IDisposable where T
             lock (sync) copying = false;
             if (!transferred) lifetime.Dispose();
         }
+        if (transferred) FramePublished?.Invoke();
     }
 
     public Borrow? TryBorrow(bool allowPreviousGeneration = false)

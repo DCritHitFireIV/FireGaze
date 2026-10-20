@@ -14,6 +14,7 @@ internal static unsafe class EnvironmentCases
         foreach (var (name, run) in new (string, Action)[] {
             ("production installation remains denied without native reads or Hook creation", DefaultDenied),
             ("real native source adapter queues then issues a scoped creation permit", QueueToActualSource),
+            ("actual active environment resumes new token and preserves prepared owner pin", ActiveCounterOwnerPin),
             ("real owner binding permits initialized-to-prepared exactly once", InitializationUpgrade),
             ("actor allocation ABA does not bind the replacement or release it", ActorReplacement),
             ("prepared camera replacement does not silently rebind the live owner", CameraReplacement),
@@ -120,6 +121,32 @@ internal static unsafe class EnvironmentCases
         }
     }
 
+    static void ActiveCounterOwnerPin()
+    {
+        using var f = new Fixture(); f.SetIdle(6);
+        var phases = new PortraitOwnedSceneSlotNativePhaseSource(f.Memory, () => true, () => true, () => 1);
+        var env = new PortraitOwnedSceneHookEnvironment(f.Memory, phases, () => true, unchecked((nint)0x710000000), Validate);
+        Check(env.QueueRequest(f.Phase.Source, 6, 1), "actual active request queue failed");
+        using var originalScope = env.EnterSourcePhase(f.Phase.Source, 90, 1);
+        Check(originalScope is not null && env.TryQualifyActiveSource(f.Phase.Source, 90, 1, 6, out var renderer), "actual complete eight-slot qualification failed");
+        env.TryQualifyActiveSource(f.Phase.Source, 90, 1, 6, out renderer);
+        env.BeginContextLifetimeBatch();
+        env.ObserveContextConstructed(f.Context, f.Context);
+        f.SetOwned(6);
+        Check(env.IsSlotOwnedBy(6, (nint)f.Owned), "actual prepared context ownership did not pin");
+        phases.TryCapture(out var before);
+        using (env.BeginOwnedCounterMutation())
+            Check(!env.IsSourceCurrent(f.Phase.Source) && !phases.TryCapture(out _), "actual environment allowed native reads during own counter Original");
+        using var resumed = env.ResumeOwnedCounterPhase(f.Phase.Source, 90, 1, renderer);
+        Check(resumed is not null && env.IsSlotOwnedBy(6, (nint)f.Owned) && phases.TryCapture(out var after)
+            && after.PhaseToken != before.PhaseToken && after.ManagerGeneration == before.ManagerGeneration, "actual environment failed exact owner/token revalidation");
+        originalScope!.Dispose(); Check(env.IsSourceCurrent(f.Phase.Source), "old source scope closed the replacement token");
+        using (env.BeginOwnedCounterMutation()) { *(uint*)((byte*)f.Actor + 0x74) = 38; }
+        using var replaced = env.ResumeOwnedCounterPhase(f.Phase.Source, 90, 1, renderer);
+        Check(replaced is not null && !env.IsSlotOwnedBy(6, (nint)f.Owned), "actual environment silently rebound same-address character allocation after a counter");
+        env.EndRequest(1);
+        static bool Validate(out string reason) { reason = "self-allocated SDK fixture"; return true; }
+    }
     static void QueueToActualSource()
     {
         using var p = new Pair();

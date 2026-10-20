@@ -15,6 +15,9 @@ internal static class OwnedBrokerPresentationCases
             ("provider release failure holds combined physical quarantine", CleanupFailure),
             ("natural native ownership loss revokes published image and retains quarantine", NaturalLoss),
             ("unused source loss clears only the never-created owner", UnusedSourceLoss),
+            ("observer input revokes pending image without touching native from Framework", ObserverInput),
+            ("session factory shares one broker with copy and physical retirement", BrokerFactory),
+            ("joint experiment holds pending and published frame until observer input", JointPendingFrame),
         }) {
             try { await run(); passed++; Console.WriteLine("PASS owned presentation " + name); }
             catch (Exception error) { failed++; Console.Error.WriteLine("FAIL owned presentation " + name + ": " + error.Message); }
@@ -114,17 +117,98 @@ internal static class OwnedBrokerPresentationCases
         Check(f.Session.Controller.State == PortraitOwnedSceneControllerState.Off && f.Native.Runtime.Events.Count == 0,
             "never-created source loss retained a native scene or fabricated native retirement");
     }
+    private static async Task ObserverInput()
+    {
+        using var f = new SceneFixture(); f.Start();
+        var before = f.Native.Runtime.Events.Count;
+        var side = new PortraitOwnedSceneObserverCameraSnapshot(new(1,0,0), default, MathF.PI/2, 0, 1);
+        Check(f.Session.TrySetObserverCamera(side), "valid observer input was rejected");
+        Check(f.Native.Runtime.Events.Count == before, "Framework observer input made a native call");
+        var late = new Wrap(806); f.Textures.Completion.SetResult(late);
+        await Checks.Wait(() => f.Session.Images.InFlight == 0);
+        Check(late.Disposed && f.Session.Images.TryBorrow() is null && f.Textures.Input!.Disposed,
+            "pending copy from the previous observer published after its camera changed");
+        f.Session.Dispose(); f.Native.Render(3); f.Session.Update();
+        await f.Session.DrainPhysicalAsync().WaitAsync(TimeSpan.FromSeconds(2));
+    }
+    private static async Task BrokerFactory()
+    {
+        using var f = new SceneFixture(true); f.Start();
+        var image = new Wrap(807); f.Textures.Completion.SetResult(image);
+        await Checks.Wait(() => f.Session.Images.InFlight == 0);
+        using (var draw = f.Session.Images.TryBorrow()) Check(draw?.Texture == image, "factory broker never copied its ready owner");
+        f.Session.Dispose(); f.Native.Render(3); f.Session.Update();
+        await f.Session.DrainPhysicalAsync().WaitAsync(TimeSpan.FromSeconds(2));
+        Check(f.Native.Runtime.Retirements == 1 && image.Disposed, "factory broker did not finish exact physical retirement");
+    }
+    private static async Task JointPendingFrame()
+    {
+        var textures = new TextureApi();
+        using var adapter = new PortraitOwnedSceneRenderTargetAdapter(new JointRead(),textures,()=>true);
+        Action<IPortraitOwnedSceneLease>? copy=null;
+        using (var f=new OwnedExperimentBrokerCases.Fixture(true,()=>adapter.Images.InFlight==0 && !adapter.Images.HasCurrentFrame,
+            lease=>copy!(lease)))
+        {
+            using var session=new PortraitOwnedSceneSession((after,_)=>{copy=after;return f.Broker;},()=>f.Runtime,adapter);
+            f.Runtime.BeforeRender=adapter.RevokeResourceEpoch;
+            Check(session.TryStart(f.SourceSnapshot,3),"joint pending fixture starts");
+            f.Render(1);f.Render(2);
+            Check(textures.Copies==1 && adapter.Images.InFlight==1,"ready joint callback did not start real RT adapter copy");
+            var side=new PortraitOwnedSceneObserverCameraSnapshot(new(1,0,0),default,MathF.PI/2,0,1);
+            Check(session.TrySetObserverCamera(side),"pending observer input was rejected");
+            f.Render(3);
+            var stale=new Wrap(808);textures.Completion.SetResult(stale);
+            await Checks.Wait(()=>adapter.Images.InFlight==0);
+            Check(stale.Disposed && adapter.Images.TryBorrow() is null && f.Runtime.Renders==1,
+                "observer change during a pending provider must retire the old copy without another native Render");
+            textures.Completion=new(TaskCreationOptions.RunContinuationsAsynchronously);
+            f.Render(4);f.Render(5);
+            var image=new Wrap(809);textures.Completion.SetResult(image);
+            await Checks.Wait(()=>adapter.Images.InFlight==0);
+            using(var draw=adapter.Images.TryBorrow())Check(draw?.Texture==image,
+                "own Render on the next source frame starved the independent pending provider copy");
+            f.Render(6);
+            using(var draw=adapter.Images.TryBorrow())Check(draw?.Texture==image && f.Runtime.Renders==2,
+                "published independent geometry was revoked before a UI frame could draw it");
+            var back=new PortraitOwnedSceneObserverCameraSnapshot(new(0,0,-1),default,MathF.PI,0,1);
+            Check(session.TrySetObserverCamera(back) && adapter.Images.TryBorrow() is null,
+                "published image stayed current after a new observer input");
+            textures.Completion=new(TaskCreationOptions.RunContinuationsAsynchronously);
+            f.Render(7);var refreshed=new Wrap(810);textures.Completion.SetResult(refreshed);
+            await Checks.Wait(()=>adapter.Images.InFlight==0);
+            using(var draw=adapter.Images.TryBorrow())Check(draw?.Texture==refreshed && image.Disposed && f.Runtime.Renders==3,
+                "observer input did not resume the real joint render/copy or release the replaced copied image");
+            session.Dispose();f.Render(8);
+            await adapter.DrainPhysicalAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            await f.Broker.DrainPhysicalAsync().WaitAsync(TimeSpan.FromSeconds(2));
+            Check(refreshed.Disposed && textures.Input!.Disposed,"joint pending experiment did not drain retained provider ownership");
+        }
+    }
+    private sealed class JointRead:IPortraitOwnedSceneRenderTargetReadApi
+    {
+        public bool TryRead(PortraitOwnedSceneImageOwner owner,IPortraitOwnedSceneLease lease,nint view,
+            out PortraitOwnedSceneRenderTargetRead value)
+        {
+            var phase=new PortraitOwnedSceneSlotPhase(OwnedExperimentBrokerCases.Source,new(1,2,3,4,5),7,1,
+                lease.NativeFrame,6,Environment.CurrentManagedThreadId,true,true);
+            var com=new PortraitOwnedSceneRenderTargetComDescription(503,505,new(512,512,1,1,27,1,0,0,0x28,0,0),new(29,4,0,1));
+            value=new(owner,new(view,402,7,403,404),phase,501,502,503,504,505,512,512,400,450,0x1450,0,1,1,com);
+            return lease.IsCurrent&&lease.CanAccess(view);
+        }
+    }
     private sealed class SceneFixture : IDisposable
     {
         internal readonly BrokerNativeHost Native = new();
         internal readonly TextureApi Textures = new();
         internal readonly SceneRead Read;
         internal readonly PortraitOwnedSceneSession Session;
-        internal SceneFixture()
+        internal SceneFixture(bool useFactory = false)
         {
             Read = new(Native);
             var adapter = new PortraitOwnedSceneRenderTargetAdapter(Read, Textures, () => true);
-            Session = new(() => Native.Framework, Native.CreateEnvironment, Native.Factory, () => Native.Runtime, adapter);
+            Session = useFactory
+                ? new((after, revoked) => Native.CreateBroker(after), () => Native.Runtime, adapter)
+                : new(() => Native.Framework, Native.CreateEnvironment, Native.Factory, () => Native.Runtime, adapter);
         }
         internal void Start() { Check(Session.TryStart(Native.Snapshot(), 3), "request rejected"); Native.Render(1); Native.Render(2); }
         public void Dispose() { Session.Dispose(); Native.Dispose(); }

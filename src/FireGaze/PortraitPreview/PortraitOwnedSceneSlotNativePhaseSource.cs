@@ -107,17 +107,20 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
     // reentrant or concurrent source Render cannot reopen a phase while the
     // counter write is pending. No native read/release occurs in either edge.
     public IDisposable BeginCounterMutation() => BeginDetachedMutation();
+    // Used only after the installed active owner proved exact invocation/manager/slot.
+    // It revokes every old read token but does not invent a manager allocation change.
+    internal IDisposable BeginOwnedCounterMutation() => BeginDetachedMutation(false);
 
     // Resource and counter writes share one depth. Finishing an inner callback
     // cannot reopen source/retirement reads while another Original still runs.
     public IDisposable BeginResourceMutation() => BeginDetachedMutation();
 
-    private IDisposable BeginDetachedMutation()
+    private IDisposable BeginDetachedMutation(bool invalidateManagers = true)
     {
         lock (gate)
         {
             var nextDepth = checked(nativeMutationDepth + 1);
-            var nextGeneration = checked(managerGeneration + 1);
+            var nextGeneration = invalidateManagers ? checked(managerGeneration + 1) : managerGeneration;
             nativeMutationDepth = nextDepth;
             Revoke();
             managerGeneration = nextGeneration;

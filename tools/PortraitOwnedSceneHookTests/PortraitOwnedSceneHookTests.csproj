@@ -8,6 +8,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost.cs')">$(DefineConstants);HAS_OWNED_JOINT_HOST</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneExperimentBroker.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookPhaseContract.cs" Link="Production/PortraitOwnedSceneHookPhaseContract.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneContextContract.cs" Link="Production/PortraitOwnedSceneContextContract.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs" Link="Production/PortraitOwnedSceneSlotReader.cs" />

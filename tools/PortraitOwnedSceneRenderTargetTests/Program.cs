@@ -5,7 +5,10 @@ using FireGaze.PortraitPreview;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 var presentationResult = await OwnedBrokerPresentationCases.Run();
-return presentationResult != 0 ? presentationResult : await Checks.Run();
+if(presentationResult != 0)return presentationResult;
+await ViewportDiagnosticCases.Run();
+await FeatureDisposeCases.Run();
+return await Checks.Run();
 
 static class Checks
 {
@@ -225,7 +228,7 @@ sealed class ReadApi(Runtime runtime) : IPortraitOwnedSceneRenderTargetReadApi
 }
 sealed class TextureApi : IPortraitOwnedSceneRenderTargetTextures
 {
-    internal readonly TaskCompletionSource<IDalamudTextureWrap> Completion = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    internal TaskCompletionSource<IDalamudTextureWrap> Completion = new(TaskCreationOptions.RunContinuationsAsynchronously);
     internal Wrap? Input;
     internal Action? OnRetain,OnCopy;
     internal int Copies;

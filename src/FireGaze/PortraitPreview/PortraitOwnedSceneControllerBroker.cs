@@ -10,13 +10,13 @@ internal sealed class PortraitOwnedSceneControllerBroker(
     Func<bool> framework, Func<IPortraitOwnedSceneHookEnvironment> createEnvironment,
     IPortraitOwnedSceneHookFactory factory, PortraitNativePhaseHostReservations? reservations = null,
     Action<IPortraitOwnedSceneLease>? afterAdvance = null,
-    Action<string>? sourceRevoked = null) : IPortraitOwnedSceneControllerBroker, IDisposable
+    Action<string>? sourceRevoked = null) : IPortraitOwnedSceneSessionBroker
 {
     private IPortraitOwnedSceneHookEnvironment? preparedEnvironment;
     private volatile Request? active;
     private Task lastDrain = Task.CompletedTask;
     private volatile bool disposed;
-    internal string? LastError { get; private set; }
+    public string? LastError { get; private set; }
     public bool IsFrameworkThread { get { try { return framework(); } catch { return false; } } }
     public bool ProductionAdmission
     {
@@ -108,7 +108,7 @@ internal sealed class PortraitOwnedSceneControllerBroker(
         request.Cancelled = true;
         request.Hooks.RequestStop(); // Managed latch only. No guessed native cleanup.
     }
-    internal void Update()
+    public void Update()
     {
         if (!IsFrameworkThread || active is not { } request || request.Depth != 0) return;
         LastError ??= request.Hooks.LastError;
@@ -118,7 +118,7 @@ internal sealed class PortraitOwnedSceneControllerBroker(
         request.Hooks.TryDispose();
         if (request.Hooks.DrainPhysicalAsync().IsCompletedSuccessfully) active = null;
     }
-    internal Task DrainPhysicalAsync() => lastDrain;
+    public Task DrainPhysicalAsync() => lastDrain;
     private static async Task RetainUntilRetired(Request request)
     {
         // Hook installation replaces its initially-complete drain. Wait only after it

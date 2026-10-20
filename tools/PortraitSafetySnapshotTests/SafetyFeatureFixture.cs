@@ -71,6 +71,12 @@ namespace FireGaze.PortraitPreview
             installation = Guid.Empty, hooks = 0, inFlight = 0, reservationHeld = false, failed = false,
             recording = false, productionAdmission = false,
         };
+        private object ReadOwnedViewportSafetyState()=>new
+        {
+            known=true,state="Off",blocksOperations=false,physicalDrainCompleted=true,productionAdmission=false,
+            attempt=0,installation=Guid.Empty,hooks=0,inFlight=0,reservationHeld=false,recording=false,failed=false,
+            imageCopies=0,imageFrames=0,imageBorrowers=0,imageResourcesClean=true,comResourcesClean=true,readbackPending=false,
+        };
         internal readonly PortraitEditorOpeningController Opening = new(() => null, () => 0);
         private PortraitEditorOpeningReceipt ReadEditorOpeningReceipt() => Opening.Read();
         internal PortraitPreviewFeature(Func<TimeSpan>? clock = null, Func<PortraitSafetyTrialState>? trials = null)

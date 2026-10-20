@@ -95,6 +95,15 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks
     /// </summary>
     internal static bool TryValidateCurrentProcess(out string reason)
     {
+        if (!TryValidateCurrentExperiment(out reason)) return false;
+        reason = string.Join("; ", MissingAdmissionEvidence); return false;
+    }
+
+    // Explicit development experiment only. This checks immutable process/ABI
+    // identity; the active owner must still prove current roots/eight slots and
+    // use a fresh real source return for bounded advance or retirement. It never changes normal production admission.
+    internal static bool TryValidateCurrentExperiment(out string reason)
+    {
         try
         {
             using var process = Process.GetCurrentProcess();
@@ -122,7 +131,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks
                 || contextTable[2] != moduleBase + 0x3356B0 || contextTable[3] != moduleBase + 0x3356D0
                 || contextTable[4] != moduleBase + 0x2690B0)
             { reason = "The native context Cleanup vtable differs from the frozen contract."; return false; }
-            reason = string.Join("; ", MissingAdmissionEvidence); return false;
+            reason = "Frozen native process and ABI verified for one bounded joint-source experiment."; return true;
         }
         catch (Exception ex) { reason = ex.Message; return false; }
     }

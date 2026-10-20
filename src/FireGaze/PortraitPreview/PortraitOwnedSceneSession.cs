@@ -9,7 +9,7 @@ namespace FireGaze.PortraitPreview;
 /// </summary>
 internal sealed class PortraitOwnedSceneSession : IDisposable
 {
-    private readonly PortraitOwnedSceneControllerBroker broker;
+    private readonly IPortraitOwnedSceneSessionBroker broker;
     private readonly PortraitOwnedSceneRenderTargetAdapter renderTargets;
     private Task? drain;
     private bool disposed;
@@ -22,9 +22,15 @@ internal sealed class PortraitOwnedSceneSession : IDisposable
         Func<IPortraitOwnedSceneHookEnvironment> createEnvironment, IPortraitOwnedSceneHookFactory factory,
         Func<IPortraitOwnedSceneRuntime> createRuntime, PortraitOwnedSceneRenderTargetAdapter renderTargets,
         PortraitNativePhaseHostReservations? reservations = null)
+        : this((after, revoked) => new PortraitOwnedSceneControllerBroker(framework, createEnvironment,
+            factory, reservations, after, revoked), createRuntime, renderTargets) { }
+
+    internal PortraitOwnedSceneSession(
+        Func<Action<IPortraitOwnedSceneLease>, Action<string>, IPortraitOwnedSceneSessionBroker> createBroker,
+        Func<IPortraitOwnedSceneRuntime> createRuntime, PortraitOwnedSceneRenderTargetAdapter renderTargets)
     {
         this.renderTargets = renderTargets ?? throw new ArgumentNullException(nameof(renderTargets));
-        broker = new(framework, createEnvironment, factory, reservations, CopyReady, RevokeSource);
+        broker = createBroker(CopyReady, RevokeSource) ?? throw new InvalidOperationException("Owned session broker factory returned null.");
         Controller = new(broker, createRuntime);
     }
     private void CopyReady(IPortraitOwnedSceneLease lease) => renderTargets.TryCopy(Controller, lease);
@@ -37,6 +43,13 @@ internal sealed class PortraitOwnedSceneSession : IDisposable
     {
         if (disposed) return false;
         broker.Update(); return Controller.TryStart(source, slot);
+    }
+    internal bool TrySetObserverCamera(PortraitOwnedSceneObserverCameraSnapshot camera)
+    {
+        if (disposed || !Controller.TrySetObserverCamera(camera)) return false;
+        renderTargets.RevokeResourceEpoch();
+        
+        return true;
     }
     internal void Stop(string reason = "Owned scene stopped.")
     {

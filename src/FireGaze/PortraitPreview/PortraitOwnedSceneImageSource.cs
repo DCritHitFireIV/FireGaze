@@ -27,9 +27,11 @@ internal sealed class PortraitOwnedSceneImageSource<T> : IDisposable where T : c
 
     internal PortraitOwnedSceneImageDescriptor? Descriptor => descriptor;
     internal int InFlight => lifetime.InFlight;
+    internal bool HasCurrentFrame => !disposed && lifetime.HasCurrentFrame;
     internal int FrameCount => lifetime.FrameCount;
     internal int Borrowers => lifetime.Borrowers;
     internal bool IsPhysicallyClean => lifetime.CleanupFailures == 0;
+    internal event Action? FramePublished { add => lifetime.FramePublished += value; remove => lifetime.FramePublished -= value; }
 
     internal bool TrySetDescriptor(PortraitOwnedSceneController owner, PortraitOwnedSceneImageDescriptor value)
     {

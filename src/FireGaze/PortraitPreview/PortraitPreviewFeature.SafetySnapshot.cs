@@ -51,6 +51,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 focusSource = "Framework.CursorInputs.IsGameWindowFocused",
                 ownedNativePassiveSupported = true,
                 ownedNativeJointSupported = true,
+                ownedNativeViewportSupported = true,
             });
         }
 
@@ -159,6 +160,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 ownedPassive = JsonSerializer.SerializeToElement(feature.ReadOwnedPassiveSafetyState(),
                     new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
                 ownedJoint = JsonSerializer.SerializeToElement(feature.ReadOwnedJointSafetyState(),
+                    new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+                ownedViewport = JsonSerializer.SerializeToElement(feature.ReadOwnedViewportSafetyState(),
                     new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
                 editorOpening = JsonSerializer.SerializeToElement(feature.ReadEditorOpeningReceipt(),
                     new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),

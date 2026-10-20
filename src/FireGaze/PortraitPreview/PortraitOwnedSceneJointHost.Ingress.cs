@@ -33,8 +33,12 @@ internal sealed class PortraitOwnedSceneJointIngress
     private Guid installation;
     private long epoch, started, deadline, lastTimestamp;
     private int counterDepth, resourceDepth;
-    private bool active, failed, revoked;
+    private bool active, failed, revoked, activeExperiment;
+    private long retirementCalls;
     private PortraitNativeResourceState resource;
+    private ActiveDispatch? activeDispatch;
+    private PortraitOwnedSceneHooks? activeOwner;
+    internal void EnableActiveOwner(PortraitOwnedSceneHooks owner) => activeOwner = owner;
     internal PortraitOwnedSceneJointIngress(PortraitIdentity source, long session, long request,
         PortraitNativeThreadStamp expectedThread, Func<bool> requestCurrent,
         Func<IDisposable?> counters, Func<IDisposable?> resources,
@@ -57,13 +61,14 @@ internal sealed class PortraitOwnedSceneJointIngress
             installation = value;
         }
     }
-    internal bool TryCommit(TimeSpan duration)
+    internal bool TryCommit(TimeSpan duration, bool activeExperiment = false)
     {
         var now = timestamp();
         if (!requestCurrent() || !observation.TryStart(duration)) return false;
         lock (gate)
         {
             if (installation == Guid.Empty || failed || revoked || counterDepth != 0 || resourceDepth != 0) return false;
+            this.activeExperiment = activeExperiment;
             started = lastTimestamp = now; deadline = checked(now + (long)Math.Ceiling(duration.TotalSeconds * frequency)); active = true; return true;
         }
     }
@@ -88,7 +93,15 @@ internal sealed class PortraitOwnedSceneJointIngress
         var isCounter = phase is (int)PortraitNativeObservedPhase.CounterAdd or (int)PortraitNativeObservedPhase.CounterSub;
         IDisposable? mutation = null;
         var guarded = isCounter && argument < 8;
-        if (guarded) mutation = BeginMutation(false);
+        var own = false;
+        if (isCounter && activeOwner is not null && activeDispatch is null)
+            activeOwner.InvalidateActiveJoint("Counter outside the proved active native invocation revoked scene ownership.");
+        if (isCounter && activeDispatch is { } dispatch)
+        {
+            own = dispatch.Owner.TryBeginOwnedCounter(receiver, argument, out mutation);
+            if (!own) dispatch.Owner.InvalidateActiveJoint("Unknown or foreign counter invalidated active ownership.");
+        }
+        if (guarded) mutation = BeginMutation(false, existing: own ? mutation : null);
         var call = default(PortraitNativePhaseCall);
         try
         {
@@ -104,12 +117,14 @@ internal sealed class PortraitOwnedSceneJointIngress
             finally
             {
                 if (guarded) EndMutation(false, phase, returned, 0);
+                if (own) activeDispatch?.Owner.CompleteOwnedCounter(returned);
                 try { observation.End(call, returned); ReconcileRecorder(); } catch (Exception) { Fail(); }
             }
         };
     }
     internal Action<bool, byte>? ObserveResource(int phase, nint receiver)
     {
+        activeOwner?.InvalidateActiveJoint("Global RT resource mutation revoked active scene ownership.");
         var mutation = BeginMutation(true, receiver);
         var call = default(PortraitNativePhaseCall);
         try { if (Current()) call = observation.Begin((PortraitNativeObservedPhase)phase, receiver); ReconcileRecorder(); }
@@ -125,7 +140,7 @@ internal sealed class PortraitOwnedSceneJointIngress
             }
         };
     }
-    private IDisposable? BeginMutation(bool isResource, nint receiver = 0)
+    private IDisposable? BeginMutation(bool isResource, nint receiver = 0, IDisposable? existing = null)
     {
         PortraitOwnedSceneJointMutationNotice notice;
         PortraitOwnedSceneJointMutationNotice? terminal;
@@ -150,7 +165,7 @@ internal sealed class PortraitOwnedSceneJointIngress
         Notify(notice);
         // No receiver is passed to the detached invalidation sink. Its scope
         // spans the real Original even when recording has already expired.
-        try { return (isResource ? resources : counters)() ?? throw new InvalidOperationException("Joint mutation guard was not issued."); }
+        try { return existing ?? (isResource ? resources : counters)() ?? throw new InvalidOperationException("Joint mutation guard was not issued."); }
         catch (Exception) { Fail(); return null; }
     }
     private void EndMutation(bool isResource, int phase, bool returned, byte result)
@@ -175,9 +190,11 @@ internal sealed class PortraitOwnedSceneJointIngress
     }
     internal SourceObservation? BeginSource(nint receiver, uint frame)
     {
-        if (!Current()) return null;
-        var call = observation.Begin(PortraitNativeObservedPhase.SourceCharaViewRender, receiver, frame);
-        if (call.Call <= 0) { ReconcileRecorder(); return null; }
+        var retirement = !Current();
+        if (retirement && !CanRetire()) return null;
+        var call = retirement ? new PortraitNativePhaseCall(0, -Interlocked.Increment(ref retirementCalls), nativeThread())
+            : observation.Begin(PortraitNativeObservedPhase.SourceCharaViewRender, receiver, frame);
+        if (!retirement && call.Call <= 0) { ReconcileRecorder(); return null; }
         PortraitOwnedSceneJointMutationNotice? terminal = null;
         SourceObservation value;
         lock (gate)
@@ -189,13 +206,14 @@ internal sealed class PortraitOwnedSceneJointIngress
             }
             else tree.Poisoned = true;
             if (tree is not null) tree.Depth++;
-            value = new(call, receiver, frame, epoch, observation.ActiveCapture, tree);
+            value = new(call, receiver, frame, epoch, observation.ActiveCapture, tree, retirement);
         }
         if (terminal is not null) FinishRevocation(terminal);
         return value;
     }
     internal bool EndSource(SourceObservation value, bool returned)
     {
+        if (value.RetirementOnly) return returned && CanRetire() && value.Call.Thread == nativeThread();
         try { var confirmed = observation.TryEnd(value.Call, returned); ReconcileRecorder(); return confirmed; }
         catch (Exception) { Fail(); return false; }
     }
@@ -239,6 +257,47 @@ internal sealed class PortraitOwnedSceneJointIngress
             && ReferenceEquals(observation.ActiveCapture, value.Capture) && counterDepth == 0 && resourceDepth == 0
             && value.Receiver == source.Model && value.Call.Thread == expectedThread && value.Tree is { Depth: 1, Poisoned: false };
     }
+    internal ActiveDispatch? TryBeginActiveDispatch(PortraitOwnedSceneHooks owner, PortraitOwnedSceneHooks.JointSourceInvocation invocation, bool retirementOnly)
+    {
+        if (activeDispatch is not null) return null;
+        if (retirementOnly)
+        {
+            if (!invocation.IsReturningFor(owner) || !CanRetire()) return null;
+            var value = invocation.Observation;
+            lock (gate) if (installation != invocation.Installation || value.Epoch != epoch || value.Receiver != source.Model
+                || value.Call.Thread != expectedThread || value.Tree is not { Depth: 1, Poisoned: false }) return null;
+        }
+        else if (!IsSourceReturnCurrent(owner, invocation)) return null;
+        return activeDispatch = new(this, owner, invocation, retirementOnly);
+    }
+    internal bool IsActiveDispatchCurrent(PortraitOwnedSceneHooks owner, ActiveDispatch dispatch)
+        => IsActiveDispatchIdentityCurrent(owner, dispatch) && NoMutation();
+    private bool NoMutation() { lock (gate) return counterDepth == 0 && resourceDepth == 0; }
+    internal bool IsActiveDispatchIdentityCurrent(PortraitOwnedSceneHooks owner, ActiveDispatch dispatch)
+    {
+        if (!ReferenceEquals(dispatch.Ingress, this) || !ReferenceEquals(dispatch.Owner, owner) || dispatch.Closed) return false;
+        if (!dispatch.RetirementOnly && !Current())
+        {
+            if (!CanRetire(true)) return false;
+            dispatch.RetirementOnly = true; owner.MarkActiveRetirementOnly();
+        }
+        if (!dispatch.Invocation.IsReturningFor(owner) || !(dispatch.RetirementOnly ? CanRetire(true) : Current())
+            || nativeThread() != expectedThread) return false;
+        var value = dispatch.Invocation.Observation;
+        lock (gate) return !dispatch.Invalid && (dispatch.RetirementOnly || active && !revoked) && !failed && installation == dispatch.Invocation.Installation
+            && value.Receiver == source.Model && value.Call.Thread == expectedThread
+            && value.Tree is { Depth: 1, Poisoned: false };
+    }
+    internal sealed class ActiveDispatch(PortraitOwnedSceneJointIngress ingress, PortraitOwnedSceneHooks owner,
+        PortraitOwnedSceneHooks.JointSourceInvocation invocation, bool retirementOnly) : IDisposable
+    {
+        internal readonly PortraitOwnedSceneJointIngress Ingress = ingress;
+        internal readonly PortraitOwnedSceneHooks Owner = owner;
+        internal readonly PortraitOwnedSceneHooks.JointSourceInvocation Invocation = invocation;
+        internal bool RetirementOnly = retirementOnly;
+        internal bool Invalid, Closed;
+        public void Dispose() { Closed = true; if (ReferenceEquals(Ingress.activeDispatch, this)) Ingress.activeDispatch = null; }
+    }
     // Called only after the native read scope has closed. The publisher may
     // perform a nonblocking managed DTO commit only; no SDK/native/recorder work.
     internal bool TryPublishCensus(PortraitOwnedSceneHooks owner, PortraitOwnedSceneHooks.JointSourceInvocation invocation,
@@ -266,6 +325,15 @@ internal sealed class PortraitOwnedSceneJointIngress
         lock (gate)
             if (value.Tree is { } tree && trees.TryGetValue(value.Call.Thread, out var current) && ReferenceEquals(current, tree)
                 && --tree.Depth == 0) trees.Remove(value.Call.Thread);
+    }
+    private bool CanRetire(bool executionIdentity = false)
+    {
+        try
+        {
+            if (!requestCurrent() || nativeThread() != expectedThread) return false;
+            lock (gate) return activeExperiment && !failed && installation != Guid.Empty && (executionIdentity || counterDepth == 0 && resourceDepth == 0);
+        }
+        catch (Exception) { Fail(); return false; }
     }
     private bool Current()
     {
@@ -337,5 +405,5 @@ internal sealed class PortraitOwnedSceneJointIngress
     }
     internal sealed class SourceTree { internal int Depth; internal bool Poisoned; }
     internal sealed record SourceObservation(PortraitNativePhaseCall Call, nint Receiver, uint Frame, long Epoch,
-        PortraitNativePhaseCapture? Capture, SourceTree? Tree);
+        PortraitNativePhaseCapture? Capture, SourceTree? Tree, bool RetirementOnly = false);
 }

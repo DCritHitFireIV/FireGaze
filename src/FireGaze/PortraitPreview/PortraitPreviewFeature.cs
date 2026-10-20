@@ -135,6 +135,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             sourceCensus = SourceCensusDiagnostics(),
             ownedPassive = OwnedPassiveDiagnostics(),
             ownedJoint = OwnedJointDiagnostics(),
+            ownedScene = OwnedViewportDiagnostics(),
             editorOpening = JsonSerializer.SerializeToElement(ReadEditorOpeningReceipt(),
                 new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
@@ -182,10 +183,11 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         {
             using (runtimeTrace.Measure("update.editor-opening")) UpdateEditorOpening();
             using (runtimeTrace.Measure("update.source-census")) UpdateSourceCensus();
+            using (runtimeTrace.Measure("update.owned-viewport")) UpdateOwnedViewport();
             using (runtimeTrace.Measure("update.retainer-loads")) inventory.ObserveRetainerLoads();
             using (runtimeTrace.Measure("update.validate")) session.Validate();
             using (runtimeTrace.Measure("update.lighting-fit")) PollLightingFit();
-            using (runtimeTrace.Measure("update.editing")) PollEditing();
+            using (runtimeTrace.Measure("update.editing")) if (!OwnedViewportBlocksOperations) PollEditing();
             using (runtimeTrace.Measure("update.capture-state")) ObserveLiveCaptureState();
             using (runtimeTrace.Measure("update.library")) PollLibrary();
             using (runtimeTrace.Measure("update.photos")) PollPhotos();
@@ -376,7 +378,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         void Apply()
         {
             if (disposed) return;
-            if (!preserveSourceCensus) StopSourceCensusForMutation();
+            if (!preserveSourceCensus)
+            {
+                StopOwnedViewport("A portrait edit is waiting for the independent scene to retire.");
+                if (OwnedViewportBlocksOperations) { Error("正在结束独立人物预览，请稍候再操作。"); return; }
+                StopSourceCensusForMutation();
+            }
             action();
         }
         if (Plugin.Framework.IsInFrameworkUpdateThread) Apply();
@@ -394,12 +401,13 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         using (runtimeTrace.Measure("draw.photos")) photos.Draw(pointerHeld);
         using (runtimeTrace.Measure("draw.live-image")) DrawLiveCapture();
         using (runtimeTrace.Measure("draw.lighting-fit")) DrawLightingFit();
-        using (runtimeTrace.Measure("draw.windows")) if (!SourceCensusBlocksOperations) windows.Draw();
+        using (runtimeTrace.Measure("draw.windows")) if (!SourceCensusBlocksOperations || OwnedViewportVisible) windows.Draw();
     }
 
     public void OnCommand(string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (TryOwnedViewportCommand(parts)) return;
         if (TryOwnedJointCommand(parts)) return;
         if (TryOwnedPassiveCommand(parts)) return;
         if (TrySourceCensusCommand(parts)) return;
@@ -513,6 +521,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private void DisposeCore()
     {
         Task photoDrain = Task.CompletedTask;
+        Task nativePhysical = Task.CompletedTask;
+        Task remainingRelease = Task.CompletedTask;
         void Release()
         {
             DisposeEditorOpening();
@@ -522,7 +532,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             DisposeLightingFit();
             photoDrain = photos.BeginDispose();
             liveImageService?.Dispose();
-            physicalDrain = PortraitCaptureRetirement.CombineOwned(this, photos.DrainPhysicalAsync(),
+            nativePhysical = PortraitCaptureRetirement.CombineOwned(this, photos.DrainPhysicalAsync(),
                 liveImageService?.DrainPhysicalAsync() ?? Task.CompletedTask,
                 lightingFitCapture?.DrainPhysicalAsync() ?? Task.CompletedTask,
                 window.DrainPhysicalAsync(), nativeLivePhysicalDrain, sourceCensusPhysicalDrain);
@@ -534,14 +544,29 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             DisposeLibrary();
             target.Dispose();
         }
+        void BeginRelease()
+        {
+            StopOwnedViewport("Feature disposal is waiting for the independent scene to retire.");
+            if (ownedViewportDrain.IsCompletedSuccessfully) { Release(); return; }
+            remainingRelease = ownedViewportDrain.ContinueWith(finished =>
+            {
+                finished.GetAwaiter().GetResult();
+                return Plugin.Framework.RunOnFrameworkThread(Release);
+            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap();
+        }
         disposed = true;
         Plugin.Framework.Update -= Update;
         pluginInterface.UiBuilder.Draw -= Draw;
-        if (Plugin.Framework.IsInFrameworkUpdateThread) Release();
-        else Plugin.Framework.RunOnFrameworkThread(Release).GetAwaiter().GetResult();
-        // Native ownership is fully released above. File writers are sealed now but drained
-        // asynchronously by the parent lifetime after Framework returns.
-        managedDrain = DrainManagedAsyncCore(photoDrain);
+        if (Plugin.Framework.IsInFrameworkUpdateThread) BeginRelease();
+        else Plugin.Framework.RunOnFrameworkThread(BeginRelease).GetAwaiter().GetResult();
+        managedDrain = PortraitCaptureRetirement.CombineOwned(this, remainingRelease.ContinueWith(finished =>
+        {
+            finished.GetAwaiter().GetResult();
+            return DrainManagedAsyncCore(photoDrain);
+        }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap());
+        physicalDrain = PortraitCaptureRetirement.CombineOwned(this, remainingRelease.ContinueWith(finished =>
+            finished.IsCompletedSuccessfully ? nativePhysical : incompletePhysicalClose.Task,
+            CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap());
         diagnostics.UnregisterFunc();
         windows.RemoveAllWindows();
         window.Dispose();

@@ -1,6 +1,7 @@
 namespace FireGaze.PortraitPreview;
 
 internal enum PortraitOwnedSceneCreationCall { Construct, Setup }
+internal enum PortraitOwnedSceneNativeCall { Render, Release, Dtor }
 
 /// <summary>
 /// A native-phase permit, not an assertion that a numbered UI slot is reserved.
@@ -32,4 +33,7 @@ internal interface IPortraitOwnedSceneLease
     bool CanReleaseView(nint view);
     bool MarkReleased(nint view);
     IDisposable? EnterOwnedCall(nint view);
+    // Typed intent is needed by the physical joint owner; compatibility fixtures
+    // may retain their old permit while the sealed owner records exact operation.
+    IDisposable? EnterNativeCall(nint view, PortraitOwnedSceneNativeCall operation) => EnterOwnedCall(view);
 }

@@ -119,7 +119,7 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
             lastFrame = nativeFrame; hasFrame = true;
             // Native Render includes Update. Calling Update separately would advance animation,
             // pause transitions and native light/camera writes twice in the same game frame.
-            if (!Call(lease, () => api.Render(view, nativeFrame))) return Stop(lease,"Native Render lost its scene or received a retirement request.");
+            if (!Call(lease, () => api.Render(view, nativeFrame), PortraitOwnedSceneNativeCall.Render)) return Stop(lease,"Native Render lost its scene or received a retirement request.");
             if (!TryReadCharacter(lease, out var actor))
             {
                 if (!Owns(lease)) return Quarantine("The native scene was replaced while loading.");
@@ -147,6 +147,31 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
     }
 
     public void RequestRetire() { retireRequested = true; IsReady = false; }
+
+    // This writes only the exact owned portrait, in its current arbitration-issued scope.
+    // It never writes the source editor, composition snapshot, history or world actor.
+    public bool TryApplyObserverCamera(IPortraitOwnedSceneLease lease, PortraitOwnedSceneObserverCameraSnapshot value)
+    {
+        if (!value.IsNativeSupported || !IsReady || busy || retireRequested || IsRetired || IsQuarantined
+            || !compositionApplied || character == 0 || !Owns(lease)) return false;
+        busy = true;
+        try
+        {
+            if (!TryReadCharacter(lease, out _)) return false;
+            var applied = Call(lease, () =>
+            {
+                var current = (CharaViewPortrait*)view;
+                current->CameraPosition = new(value.Position.X, value.Position.Y, value.Position.Z, current->CameraPosition.W);
+                current->CameraTarget = new(value.Target.X, value.Target.Y, value.Target.Z, current->CameraTarget.W);
+                current->CameraYaw = value.Yaw; current->CameraPitch = value.Pitch; current->CameraDistance = value.Distance;
+                api.ApplyCamera(view);
+            });
+            IsReady = false;
+            return applied;
+        }
+        catch (Exception error) { return Stop(lease, "Owned observer camera failed: " + error.Message); }
+        finally { busy = false; }
+    }
 
     /// <summary>
     /// Lends the ready view only synchronously inside the current native phase. Consumers must
@@ -186,11 +211,20 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
                 return Quarantine("Retirement phase expired before native ownership was recorded.");
             if (setupStarted && !released)
             {
-                api.Release(retiring);
+                using (var releaseCall = lease.EnterNativeCall(retiring, PortraitOwnedSceneNativeCall.Release))
+                {
+                    if (releaseCall is null) return Quarantine("Native Release has no exact call capability.");
+                    api.Release(retiring);
+                }
                 released = true;
                 if (!lease.CanReleaseView(retiring)) return Quarantine("Native Release lost the slot permit.");
             }
-            if (constructed) api.Destroy(retiring, 1);
+            if (constructed)
+            {
+                using var destroyCall = lease.EnterNativeCall(retiring, PortraitOwnedSceneNativeCall.Dtor);
+                if (destroyCall is null) return Quarantine("Native Dtor has no exact call capability.");
+                api.Destroy(retiring, 1);
+            }
             else api.FreeUnconstructed(retiring);
             // The pointer may already have been freed; never dereference it after Dtor.
             view = 0;
@@ -208,10 +242,10 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
     private bool Matches(IPortraitOwnedSceneLease lease) => snapshot is not null && lease.Slot == slot
         && lease.Epoch == epoch && lease.Source == snapshot.Source && lease.IsCurrent;
     private bool Owns(IPortraitOwnedSceneLease lease) => view != 0 && Matches(lease) && lease.CanAccess(view);
-    private bool Call(IPortraitOwnedSceneLease lease, Action action)
+    private bool Call(IPortraitOwnedSceneLease lease, Action action, PortraitOwnedSceneNativeCall? operation = null)
     {
         if (!Owns(lease)) return false;
-        using var scope = lease.EnterOwnedCall(view);
+        using var scope = operation is { } exact ? lease.EnterNativeCall(view, exact) : lease.EnterOwnedCall(view);
         if (scope is null || !Owns(lease)) return false;
         if (character != 0 && !BoundCharacterMatches(lease) || retireRequested) return false;
         nativeDepth++;

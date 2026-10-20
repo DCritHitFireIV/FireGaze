@@ -13,6 +13,10 @@ internal static class CensusFeatureCases
     {
         using var fixture = new CensusFeatureBoundary();
         var feature = fixture.Feature;
+        feature.OwnedViewportBusy = true;
+        if (!feature.SourceCensusBlocksOperations)
+            throw new InvalidOperationException("FAIL: an active independent scene must suppress automatic photos and competing image operations.");
+        feature.OwnedViewportBusy = false;
         if (!feature.CensusCommand("native-census", "status") || fixture.Factory.Creates != 0)
             throw new InvalidOperationException("FAIL: actual Feature status must remain passive.");
         if (!feature.CensusSubscribed) throw new InvalidOperationException("FAIL: actual Feature must subscribe its native lifetime revocation.");

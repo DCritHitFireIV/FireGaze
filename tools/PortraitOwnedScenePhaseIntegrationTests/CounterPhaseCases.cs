@@ -64,6 +64,20 @@ internal static unsafe class CounterPhaseCases
         using var lastScope = phases.EnterSource(fixture.Phase.Source, 77, 1);
         Check(lastScope is not null && phases.TryCapture(out var last) && last.ManagerGeneration > next.ManagerGeneration,
             "off-thread revocation cannot reuse the prior generation");
+        lastScope!.Dispose();
+        using (var ownedBeforeScope = phases.EnterSource(fixture.Phase.Source, 80, 4))
+        {
+            Check(ownedBeforeScope is not null && phases.TryCapture(out _), "owned counter starts from an independent real read token");
+            phases.TryCapture(out var ownedBefore);
+            using (phases.BeginOwnedCounterMutation())
+                Check(!phases.TryCapture(out _) && !reader.TryReadCensus(ownedBefore, out _), "proved own counter still revokes every old native read before Original");
+            using var ownedAfterScope = phases.EnterSource(fixture.Phase.Source, 80, 4);
+            Check(ownedAfterScope is not null && phases.TryCapture(out var ownedAfter)
+                && ownedAfter.ManagerGeneration == ownedBefore.ManagerGeneration && ownedAfter.PhaseToken != ownedBefore.PhaseToken,
+                "own counter creates a new read token without fabricating a manager allocation generation");
+            ownedBeforeScope!.Dispose();
+            Check(phases.TryCapture(out _) && !reader.TryReadCensus(ownedBefore, out _), "old owned read token remains unusable and its Dispose cannot close the replacement");
+        }
         host.Stop(); original = () => Check(!phases.TryCapture(out _), "recorder stop still revokes actual phase");
         factory.Call(PortraitNativeObservedPhase.CounterAdd, 1);
         Check(host.Snapshot().CounterInvalidationEpoch == 3 && !host.Snapshot().CounterInvalidationFailed, "detached epoch records all three real phase invalidations");

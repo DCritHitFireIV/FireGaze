@@ -22,9 +22,19 @@ internal sealed partial class PortraitPreviewWindow
         if (!showSpaceLight) return;
         FireGazeWindowPlacement.Prepare("FireGazePortraitLightingSpace", new Vector2(700, 600) * Scale, Scale, "FireGazePortraitPreview");
         FireGazeWindowPlacement.Constrain(new Vector2(480, 380) * Scale, new Vector2(900, 780) * Scale, Scale);
-        if (!FireGazeWindowPlacement.Begin("取景与灯光示意###FireGazePortraitLightingSpace", ref showSpaceLight, "FireGazePortraitLightingSpace"))
+        var title = feature.OwnedViewportVisible ? "独立人物预览（实验）###FireGazePortraitLightingSpace"
+            : "取景与灯光示意###FireGazePortraitLightingSpace";
+        if (!FireGazeWindowPlacement.Begin(title, ref showSpaceLight, "FireGazePortraitLightingSpace"))
         {
             ImGui.End();
+            if (feature.OwnedViewportVisible && !showSpaceLight) feature.CloseOwnedViewportView();
+            return;
+        }
+        if (feature.OwnedViewportVisible)
+        {
+            DrawOwnedViewport();
+            ImGui.End();
+            if (!showSpaceLight) feature.CloseOwnedViewportView();
             return;
         }
 

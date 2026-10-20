@@ -8,6 +8,16 @@ internal sealed class PortraitOwnedSceneLease : IPortraitOwnedSceneLease
     private bool invalid, released;
     private int callDepth, callThread;
     private PortraitOwnedSceneCreationCall? creationCall;
+    private PortraitOwnedSceneNativeKind? executionOperation;
+    private long executionSerial;
+    internal long ExecutionSerial => executionSerial;
+    internal bool HasExecution(PortraitOwnedSceneNativeKind operation, nint view)
+        => view != 0 && view == BoundView && callDepth > 0 && callThread == Environment.CurrentManagedThreadId
+            && !invalid && !released && owner.IsOwnedExecutionIdentityCurrent(this)
+            && (executionOperation == operation
+                || executionOperation == PortraitOwnedSceneNativeKind.Setup && operation == PortraitOwnedSceneNativeKind.Initialize
+                || executionOperation == PortraitOwnedSceneNativeKind.Render && operation == PortraitOwnedSceneNativeKind.Update);
+
     internal PortraitOwnedSceneLease(PortraitOwnedSceneHooks owner, uint slot, PortraitIdentity source, long epoch)
     { this.owner = owner; Slot = slot; Source = source; Epoch = epoch; }
     public uint Slot { get; }
@@ -21,13 +31,13 @@ internal sealed class PortraitOwnedSceneLease : IPortraitOwnedSceneLease
     public bool ConfirmUnusedCreation()
     {
         if (invalid || released || BoundView != 0 || callDepth != 0
-            || CreationStage != PortraitOwnedSceneCreationStage.Unbound || !CanCreate) return false;
+            || CreationStage != PortraitOwnedSceneCreationStage.Unbound || !owner.IsUnusedRetirementCurrent(this)) return false;
         released = true; return true;
     }
     internal bool RetirementStarted { get; private set; }
     internal bool HasOpenOwnedCall => callDepth != 0;
     public bool IsCurrent => !invalid && !released && owner.IsLeaseCurrent(this);
-    public bool CanCreate => CreationStage == PortraitOwnedSceneCreationStage.Unbound && BoundView == 0 && IsCurrent;
+    public bool CanCreate => CreationStage == PortraitOwnedSceneCreationStage.Unbound && BoundView == 0 && IsCurrent && owner.IsCreationAdmitted(this);
     public bool TryBindCreatedView(nint view)
     {
         if (view == 0 || view == Source.Model || callDepth != 0 || !CanCreate) return false;
@@ -43,6 +53,8 @@ internal sealed class PortraitOwnedSceneLease : IPortraitOwnedSceneLease
         CreationStage = operation == PortraitOwnedSceneCreationCall.Construct
             ? PortraitOwnedSceneCreationStage.Constructing : PortraitOwnedSceneCreationStage.SetupPending;
         creationCall = operation; callDepth = 1; callThread = Environment.CurrentManagedThreadId;
+        executionOperation = operation == PortraitOwnedSceneCreationCall.Setup ? PortraitOwnedSceneNativeKind.Setup : null;
+        executionSerial = checked(executionSerial + 1);
         return new CallScope(this);
     }
     internal bool IsCreationCall(PortraitOwnedSceneCreationCall operation)
@@ -90,6 +102,14 @@ internal sealed class PortraitOwnedSceneLease : IPortraitOwnedSceneLease
             || callDepth > 0 && callThread != Environment.CurrentManagedThreadId) return null;
         callDepth++; callThread = Environment.CurrentManagedThreadId; return new CallScope(this);
     }
+    public IDisposable? EnterNativeCall(nint view, PortraitOwnedSceneNativeCall operation)
+    {
+        if (operation is not (PortraitOwnedSceneNativeCall.Render or PortraitOwnedSceneNativeCall.Release or PortraitOwnedSceneNativeCall.Dtor)
+            || callDepth > 0 && !RetirementStarted || !CanAccess(view)) return null;
+        var scope = EnterOwnedCall(view);
+        if (scope is not null) { executionOperation = operation switch { PortraitOwnedSceneNativeCall.Render => PortraitOwnedSceneNativeKind.Render, PortraitOwnedSceneNativeCall.Release => PortraitOwnedSceneNativeKind.Release, _ => PortraitOwnedSceneNativeKind.Dtor }; executionSerial = checked(executionSerial + 1); }
+        return scope;
+    }
     // The entry scope already proved exact ownership before calling native code.
     // That Original may temporarily expose State5 or half-configured context/
     // camera fields. Reentrant calls for the same bound view use this token;
@@ -106,7 +126,7 @@ internal sealed class PortraitOwnedSceneLease : IPortraitOwnedSceneLease
         {
             if (disposed) return; disposed = true;
             if (owner.callThread != Environment.CurrentManagedThreadId) { owner.Invalidate(); return; }
-            owner.callDepth--; if (owner.callDepth == 0) { owner.callThread = 0; owner.creationCall = null; }
+            owner.callDepth--; if (owner.callDepth == 0) { owner.callThread = 0; owner.creationCall = null; owner.executionOperation = null; }
         }
     }
 }

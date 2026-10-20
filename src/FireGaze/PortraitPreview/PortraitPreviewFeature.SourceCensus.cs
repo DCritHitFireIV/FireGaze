@@ -11,7 +11,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool sourceCensusSubscribed;
 
     public bool SourceCensusBlocksOperations => sourceCensus?.BlocksOperations == true || ownedPassive?.BlocksOperations == true
-        || ownedJoint?.BlocksOperations == true;
+        || ownedJoint?.BlocksOperations == true || OwnedViewportBlocksOperations;
     private PortraitSourceCensusSafetyState ReadSourceCensusSafetyState()
         => sourceCensus?.ReadSafetyState() ?? PortraitSourceCensusSafetyState.Unknown;
 

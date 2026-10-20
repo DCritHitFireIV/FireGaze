@@ -19,12 +19,123 @@ internal static unsafe class JointPhysicalHostCases
     {
         try
         {
-            SharedCallbackAndGuards(); EpochAndNestedSource(); PartialInstall();
+            ActiveStopUnbound(); ActiveOwnedChain("none"); ActiveOwnedChain("none", true); ActiveOwnedChain("wrong-operation"); ActiveOwnedChain("wrong-manager"); ActiveOwnedChain("foreign-slot"); ActiveOwnedChain("resource"); ActiveDispatch(); SharedCallbackAndGuards(); EpochAndNestedSource(); PartialInstall();
             PhysicalDrain("original"); PhysicalDrain("completion");
             QualificationAndFailure(); OriginalFailureAndAuthority(); FinalDeadline(); Expiration(); AutomaticRevocationCancellation(); FailureRevocationCancellation();
             Console.WriteLine($"PASS {checks} joint physical host checks"); return 0;
         }
         catch (Exception error) { Console.Error.WriteLine(error); return 1; }
+    }
+    private static void ActiveStopUnbound()
+    {
+        using var f = new Fixture(true);
+        Check(f.Host.TryStartActive(f.Plan, Source, 7, 9, Fixture.Expected, TimeSpan.FromSeconds(2), out var reason), reason);
+        var retired = false;
+        Check(f.Host.TryRequest(Source, 6, _ => throw new InvalidOperationException("stopped experiment advanced"), lease => {
+            retired = true;
+            Check(!lease.CanCreate && !lease.TryBindCreatedView(777) && !f.Host.IsActiveAdvanceAdmitted,
+                "retirement-only unbound lease cannot create or admit images");
+            return true;
+        }), "unbound experiment queues");
+        f.Host.RequestStop();
+        f.Call<CharaView.Delegates.Render>(PortraitNativeObservedPhase.SourceCharaViewRender)((CharaView*)Source.Model, 100);
+        Check(retired && f.Host.TryStop() && f.Host.DrainPhysicalAsync().IsCompletedSuccessfully, "Stop before first source retires the detached request without creation");
+    }
+    private static void ActiveOwnedChain(string injection, bool stopDuringRender = false)
+    {
+        using var f = new Fixture(true);
+        Check(f.Host.TryStartActive(f.Plan, Source, 7, 9, Fixture.Expected, TimeSpan.FromSeconds(2), out var reason), reason);
+        IPortraitOwnedSceneLease? currentLease = null;
+        const int ownView = 777;
+        var setup = f.CallNative<CharaViewPortrait.Delegates.Setup>(PortraitOwnedSceneNativeKind.Setup);
+        var render = f.Call<CharaView.Delegates.Render>(PortraitNativeObservedPhase.SourceCharaViewRender);
+        var add = f.Call<PortraitNativeSlotCounter>(PortraitNativeObservedPhase.CounterAdd);
+        var sub = f.Call<PortraitNativeSlotCounter>(PortraitNativeObservedPhase.CounterSub);
+        var release = f.CallNative<CharaView.Delegates.Release>(PortraitOwnedSceneNativeKind.Release);
+        var dtor = f.CallNative<CharaView.Delegates.Dtor>(PortraitOwnedSceneNativeKind.Dtor);
+        var inSetup = false; var inRender = false; var nested = false; var advances = 0; var retires = 0;
+        f.DuringOriginal = address => {
+            if (address == f.NativeAddress(PortraitOwnedSceneNativeKind.Setup) && inSetup)
+            {
+                f.Env.OwnedView = ownView;
+                if (injection == "wrong-operation") release((CharaView*)ownView);
+                if (injection == "resource") f.Call<PortraitNativeResourceCleanup>(PortraitNativeObservedPhase.ResourceCleanup)((RTManager*)456);
+                add((RenderManager*)(injection == "wrong-manager" ? 124 : 123), injection == "foreign-slot" ? 5u : 6u);
+            }
+            else if (address == f.Address(PortraitNativeObservedPhase.CounterAdd) || address == f.Address(PortraitNativeObservedPhase.CounterSub))
+            {
+                Check(currentLease is not null && !currentLease.IsCurrent, "counter pre-Original denies all old lease reads " + injection);
+                if (injection == "none")
+                {
+                    Check(f.Env.Blocked > 0, "precise own counter blocks native reads throughout Original");
+                    if (!nested) { nested = true; sub((RenderManager*)123, 6); nested = false; }
+                    Check(f.Env.Blocked > 0 && !currentLease!.IsCurrent, "inner return cannot reopen the outer native write");
+                }
+            }
+            else if (address == f.Address(PortraitNativeObservedPhase.SourceCharaViewRender) && inRender)
+            { if (stopDuringRender) f.Host.RequestStop(); sub((RenderManager*)123, 6); }
+            else if (address == f.NativeAddress(PortraitOwnedSceneNativeKind.Release) && retires > 0)
+            { f.Env.OwnedView = 0; sub((RenderManager*)123, 6); }
+        };
+        Check(f.Host.TryRequest(Source, 6, lease => {
+            currentLease = lease; advances++;
+            if (advances == 1)
+            {
+                Check(lease.TryBindCreatedView(ownView), "exact active allocation binds");
+                using (var construct = lease.EnterCreationCall(ownView, PortraitOwnedSceneCreationCall.Construct))
+                    Check(construct is not null && lease.ConfirmConstructed(ownView), "exact active construction confirms");
+                using (var setupCall = lease.EnterCreationCall(ownView, PortraitOwnedSceneCreationCall.Setup))
+                {
+                    Check(setupCall is not null, "exact Setup capability enters");
+                    inSetup = true; setup((CharaViewPortrait*)ownView, 6, null, null, 0, 0); inSetup = false;
+                    Check(lease.ConfirmSetup(ownView) == (injection == "none"), "Setup returns with pinned ownership or conservative denial " + injection);
+                }
+            }
+            else
+            {
+                using var own = lease.EnterNativeCall(ownView, PortraitOwnedSceneNativeCall.Render);
+                Check(own is not null, "exact Render capability enters");
+                inRender = true; render((CharaView*)ownView, lease.NativeFrame); inRender = false;
+                Check(lease.CanAccess(ownView), "own Render counter resumes a fresh source/slot checked phase");
+            }
+        }, lease => {
+            currentLease = lease; retires++;
+            using var own = lease.EnterOwnedCall(ownView);
+            Check(own is not null && lease.TryBeginRetirement(ownView), "retirement-only phase pins exact live owner");
+            using (var call = lease.EnterNativeCall(ownView, PortraitOwnedSceneNativeCall.Release))
+            { Check(call is not null, "typed Release capability enters"); release((CharaView*)ownView); }
+            using (var call = lease.EnterNativeCall(ownView, PortraitOwnedSceneNativeCall.Dtor))
+            { Check(call is not null, "typed Dtor capability enters"); _ = dtor((CharaView*)ownView, 1); }
+            return lease.MarkReleased(ownView);
+        }), "active owned chain queues " + injection);
+        render((CharaView*)Source.Model, 100);
+        if (injection != "none")
+        {
+            Check(f.Env.Resumes == 0 && retires == 0 && !currentLease!.IsCurrent, "foreign mutation cannot resume or recursively release " + injection);
+            Check(!f.Host.TryStop() && !f.Host.DrainPhysicalAsync().IsCompleted, "uncertain native owner remains quarantined " + injection);
+            return;
+        }
+        Check(f.Env.Resumes == 1 && advances == 1 && retires == 0, "first callback creates and outer counter alone resumes");
+        render((CharaView*)Source.Model, 101);
+        Check(advances == 2 && f.Host.Snapshot().SourceReturns.Count == 2, "owned recursive Render does not poison the real source tree");
+        if (!stopDuringRender)
+        {
+            f.Now = 2001; // Recorder/advance deadline passes before the next real source callback.
+            render((CharaView*)Source.Model, 102);
+        }
+        Check(advances == 2 && retires == 1 && !currentLease!.IsCurrent, "deadline permits only actual source-return retirement without another advance");
+        Check(f.Host.TryStop() && f.Host.DrainPhysicalAsync().IsCompletedSuccessfully, "native retirement then physically drains the exact joint batch: " + f.Host.Snapshot() + " / " + ((PortraitOwnedSceneHooks)typeof(PortraitOwnedSceneJointHost).GetField("hooks", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.GetValue(f.Host)!).LastError);
+    }
+    private static void ActiveDispatch()
+    {
+        using var f = new Fixture(true);
+        Check(f.Host.TryStartActive(f.Plan, Source, 7, 9, Fixture.Expected, TimeSpan.FromSeconds(2), out var reason), reason);
+        IPortraitOwnedSceneLease? saved = null;
+        var advances = 0;
+        Check(f.Host.TryRequest(Source, 6, lease => { saved = lease; advances++; Check(lease.CanCreate, "active callback grants an idle phase lease"); }, _ => true), "active detached request queues");
+        Check(advances == 0, "Framework queue cannot issue an active lease");
+        f.Call<CharaView.Delegates.Render>(PortraitNativeObservedPhase.SourceCharaViewRender)((CharaView*)Source.Model, 101);
+        Check(advances == 1 && saved is not null && !saved.IsCurrent, "same-stack source return dispatches once and cannot escape phase");
     }
     private static void SharedCallbackAndGuards()
     {
@@ -291,6 +402,7 @@ internal static unsafe class JointPhysicalHostCases
         internal readonly PortraitOwnedSceneJointPlan Plan;
         internal readonly Provider Provider;
         internal readonly PortraitOwnedSceneJointHost Host;
+        internal readonly Environment Env;
         internal readonly TaskCompletionSource Expiry = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal bool RequestCurrent = true, BadResolution, FailGuard, ThrowRequest, NullGuard;
         internal long Now;
@@ -304,13 +416,14 @@ internal static unsafe class JointPhysicalHostCases
         internal readonly List<PortraitOwnedSceneJointMutationNotice> Notices = [];
         internal string Reason = "";
         private readonly Dictionary<nint, int> originalCalls = [];
-        internal Fixture()
+        internal Fixture(bool active = false)
         {
             current = this;
             Check(PortraitOwnedSceneJointPlan.TryCreate((nint)Interlocked.Add(ref nextBase, 0x10000000), out var plan, out _), "fixture frozen plan"); Plan = plan!;
             Provider = new(this);
             var factory = new DalamudPortraitOwnedSceneJointHookFactory(Provider, new OwnedPhysicalCases.Proof(), Provider, Resolve);
-            Host = new(new Environment(Plan.ModuleBase), factory, Reservations, Guard, Guard,
+            Env = new(Plan.ModuleBase, active);
+            Host = new(Env, factory, Reservations, Guard, Guard,
                 () => ThrowRequest ? throw new InvalidOperationException("request failure") : RequestCurrent,
                 () => { OnClockRead?.Invoke(); return Interlocked.Read(ref Now); }, 1000, () => { OnThreadRead?.Invoke(); return Stamp; }, (_, _) => Expiry.Task,
                 notice => { Notices.Add(notice); OnNotice?.Invoke(notice); });
@@ -327,6 +440,12 @@ internal static unsafe class JointPhysicalHostCases
         internal T Call<T>(PortraitNativeObservedPhase phase) where T : Delegate
         {
             var detour = Provider.Created.Single(h => h.Address == Address(phase)).Detour;
+            return (T)Delegate.CreateDelegate(typeof(T), detour.Target, detour.Method);
+        }
+        internal nint NativeAddress(PortraitOwnedSceneNativeKind kind) => Plan.Targets.First(t => t.Roles.Contains(new(kind, null))).Address;
+        internal T CallNative<T>(PortraitOwnedSceneNativeKind kind) where T : Delegate
+        {
+            var detour = Provider.Created.Single(h => h.Address == NativeAddress(kind)).Detour;
             return (T)Delegate.CreateDelegate(typeof(T), detour.Target, detour.Method);
         }
         internal int Originals(nint address) { lock (originalCalls) return originalCalls.GetValueOrDefault(address); }
@@ -348,15 +467,21 @@ internal static unsafe class JointPhysicalHostCases
         public void Dispose() => Host.TryStop();
     }
     private sealed class GuardScope(Action close) : IDisposable { public void Dispose() => close(); }
-    private sealed class Environment(nint module) : IPortraitOwnedSceneHookEnvironment
+    private sealed class Environment(nint module, bool active) : IPortraitOwnedSceneHookEnvironment, IPortraitOwnedSceneActiveMutationEnvironment
     {
+        internal nint OwnedView;
+        internal int Blocked, Resumes;
+        public bool TryQualifyActiveSource(PortraitIdentity source, uint frame, long request, uint slot, out nint renderer)
+        { renderer = 123; return active && source == Source && slot == 6; }
+        public IDisposable? BeginOwnedCounterMutation() { Blocked++; return new GuardScope(() => Blocked--); }
+        public IDisposable? ResumeOwnedCounterPhase(PortraitIdentity source, uint frame, long request, nint renderer) { Resumes++; return Blocked == 0 ? new GuardScope(() => { }) : null; }
         public bool IsFrameworkThread => true;
         public IReadOnlyList<PortraitOwnedSceneNativeTarget> Targets => PortraitOwnedSceneHooks.FrozenTargets(module);
-        public bool TryValidateInstallation(out string reason) { reason = "scene admission must remain disabled"; return false; }
-        public bool IsSourceCurrent(PortraitIdentity source) => throw new InvalidOperationException("passive owner cannot sample native source");
-        public bool IsSlotIdle(uint slot) => throw new InvalidOperationException("passive owner cannot claim slots");
-        public bool IsSlotOwnedBy(uint slot, nint view) => throw new InvalidOperationException("passive owner cannot inspect slots");
-        public bool TryReadViewSlot(nint view, out uint slot) => throw new InvalidOperationException("passive owner cannot read views");
+        public bool TryValidateInstallation(out string reason) { reason = "scene admission must remain disabled"; return active; }
+        public bool IsSourceCurrent(PortraitIdentity source) => active && Blocked == 0 && source == Source;
+        public bool IsSlotIdle(uint slot) => active && Blocked == 0 && slot == 6 && OwnedView == 0;
+        public bool IsSlotOwnedBy(uint slot, nint view) => active && Blocked == 0 && slot == 6 && view == OwnedView && view != 0;
+        public bool TryReadViewSlot(nint view, out uint slot) { slot = view == Source.Model ? 1u : uint.MaxValue; return active && slot < 8; }
     }
     private static void Signal(nint address, bool direct) => current!.Signal(address, direct);
     private sealed class Provider(Fixture fixture) : IPortraitQualifiedNativeHookProvider, IPortraitNativePhaseHostFactory

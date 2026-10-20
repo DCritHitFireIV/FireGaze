@@ -11,13 +11,14 @@ internal sealed class PortraitOwnedSceneHookEnvironment(
     IPortraitOwnedSceneSlotNativeApi native, PortraitOwnedSceneSlotNativePhaseSource phases,
     Func<bool> framework, nint moduleBase, PortraitOwnedSceneInstallationValidation? validate = null,
     IPortraitOwnedSceneContextAllocationSource? contextAllocations = null)
-    : IPortraitOwnedSceneHookEnvironment, IPortraitOwnedSceneHookPhaseEnvironment, IPortraitOwnedSceneContextEnvironment, IPortraitOwnedSceneContextLifetimeEnvironment
+    : IPortraitOwnedSceneHookEnvironment, IPortraitOwnedSceneHookPhaseEnvironment, IPortraitOwnedSceneContextEnvironment, IPortraitOwnedSceneContextLifetimeEnvironment, IPortraitOwnedSceneActiveMutationEnvironment
 {
     private readonly PortraitOwnedSceneSlotReader reader = new(native, phases);
     private PortraitIdentity source;
     private uint requestedSlot;
     private long request, lastRequest, managerGeneration, sessionEpoch, ownerAllocation;
     private bool lifetimeBatch;
+    private PortraitOwnedSceneSlotRoots activeRoots;
     private PortraitOwnedSceneContextAllocationTracker? lifetimeTracker;
     private IPortraitOwnedSceneContextAllocationSource ContextAllocations
         => contextAllocations ?? (lifetimeTracker ??= new(phases, () => lifetimeBatch && IsFrameworkThread));
@@ -116,11 +117,30 @@ internal sealed class PortraitOwnedSceneHookEnvironment(
         => TryReadContext(context, evidence.View, evidence.Role == PortraitOwnedSceneContextRole.Owned
             && evidence.AllocationEpoch > 0, out var current) && current == evidence;
 
+    public bool TryQualifyActiveSource(PortraitIdentity candidate, uint frame, long requestEpoch, uint targetSlot, out nint renderer)
+    {
+        renderer = 0;
+        if (!Matches(candidate, requestEpoch) || targetSlot != requestedSlot || !TryPhase(out var phase)
+            || phase.NativeFrame != frame || !reader.TryReadCensus(phase, out var census) || !census.Complete
+            || census.Rows.Count != 8 || !phases.TryCapture(out var after) || after != phase
+            || !reader.TryReadSourceSlot(phase, out var sourceSlot) || sourceSlot == targetSlot) return false;
+        if (activeRoots.IsValid && activeRoots != phase.Roots) return false;
+        activeRoots = phase.Roots; renderer = phase.Roots.Renderer; return renderer != 0;
+    }
+    public IDisposable? BeginOwnedCounterMutation() => activeRoots.IsValid ? phases.BeginOwnedCounterMutation() : null;
+    public IDisposable? ResumeOwnedCounterPhase(PortraitIdentity candidate, uint frame, long requestEpoch, nint renderer)
+    {
+        if (!Matches(candidate, requestEpoch) || !activeRoots.IsValid || renderer != activeRoots.Renderer) return null;
+        var scope = phases.EnterSource(candidate, frame, requestEpoch);
+        if (scope is not null && TryPhase(out var phase) && phase.Roots == activeRoots) return scope;
+        scope?.Dispose(); return null;
+    }
+
     public void EndRequest(long requestEpoch)
     {
         if (request != requestEpoch) return;
         phases.EndRequest(requestEpoch); source = default; request = 0; owner = null;
-        managerGeneration = sessionEpoch = ownerAllocation = 0;
+        managerGeneration = sessionEpoch = ownerAllocation = 0; activeRoots = default;
     }
 
     public void BeginContextLifetimeBatch() { lifetimeBatch = true; _ = ContextAllocations; }

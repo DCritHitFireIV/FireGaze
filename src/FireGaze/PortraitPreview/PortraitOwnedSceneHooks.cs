@@ -84,7 +84,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             if (passive && qualified is null) { LastError = reason; return false; }
             if (qualified is not null && !qualified.TryQualifyTransport(targets, out reason)) { LastError = reason; return false; }
             var jointFactory = factory as IPortraitOwnedSceneJointHookFactory;
-            if (jointPlan is not null && (!passive || joint is null || jointFactory is null
+            if (jointPlan is not null && (joint is null || jointFactory is null
                 || !JointConsumersMatch(jointPlan, targets)
                 || !jointFactory.TryQualifyJointTransport(jointPlan, reservations.IsReserved, out reason)))
             { LastError = "Joint transport qualification failed: " + reason; return false; }
@@ -101,7 +101,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             owningFactory = factory; passiveOnly = passive;
             if (jointPlan is not null)
             { jointIngress = joint; installation = Guid.NewGuid(); joint!.Bind(installation); }
-            if (passive)
+            if (passive || jointPlan is not null)
             {
                 passiveLastTimestamp = timestamp(); passiveDeadline = checked(passiveLastTimestamp + (long)(duration.TotalSeconds * timestampFrequency));
                 passiveExpiryTask = ExpirePassiveAsync(duration);
@@ -130,7 +130,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
             installed = true;
             if (jointPlan is null) installation = Guid.NewGuid();
-            else if (!joint!.TryCommit(duration)) throw new InvalidOperationException("Joint diagnostic could not commit its installed callback epoch.");
+            else if (!joint!.TryCommit(duration, !passive)) throw new InvalidOperationException("Joint diagnostic could not commit its installed callback epoch.");
             if (passiveOnly)
             {
                 Volatile.Write(ref passiveContextCollector, new PassiveContextCollector(installation));
@@ -224,25 +224,28 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             case PortraitOwnedSceneNativeKind.Initialize:
                 Add<CharaView.Delegates.Initialize>(factory, target, original => (view, agent, slot, callback) => ObservePassiveNative(target, (nint)view, 3,
                     (long)agent, slot, (long)callback, 0, 0, () => {
-                    BeforeNative((nint)view, slot, false); Original(() => original()(view, agent, slot, callback)); return 0L;
+                    using var ownEntry = BeginOwnNativeEntry(target.Kind, (nint)view);
+                    BeforeNative((nint)view, slot, false, target.Kind); Original(() => original()(view, agent, slot, callback)); return 0L;
                 }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Setup:
                 Add<CharaViewPortrait.Delegates.Setup>(factory, target, original => (view, slot, data, agent, eventID, eventKind) => ObservePassiveNative(target, (nint)view, 5,
                     slot, (long)data, (long)agent, eventID, unchecked((long)eventKind), () => {
-                    BeforeNative((nint)view, slot, false); Original(() => original()(view, slot, data, agent, eventID, eventKind)); return 0L;
+                    using var ownEntry = BeginOwnNativeEntry(target.Kind, (nint)view);
+                    BeforeNative((nint)view, slot, false, target.Kind); Original(() => original()(view, slot, data, agent, eventID, eventKind)); return 0L;
                 }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Release:
                 Add<CharaView.Delegates.Release>(factory, target, original => view => ObservePassiveNative(target, (nint)view, 0,
-                    0, 0, 0, 0, 0, () => { BeforeNative((nint)view, null, true); Original(() => original()(view)); return 0L; }, result => result)); break;
+                    0, 0, 0, 0, 0, () => { using var ownEntry = BeginOwnNativeEntry(target.Kind, (nint)view); BeforeNative((nint)view, null, true, target.Kind); Original(() => original()(view)); return 0L; }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Dtor:
                 Add<CharaView.Delegates.Dtor>(factory, target, original => (view, flags) => (CharaView*)ObservePassiveNative(target, (nint)view, 1,
                     flags, 0, 0, 0, 0, () => {
-                    BeforeNative((nint)view, null, true); CharaView* result = null;
+                    using var ownEntry = BeginOwnNativeEntry(target.Kind, (nint)view);
+                    BeforeNative((nint)view, null, true, target.Kind); CharaView* result = null;
                     Original(() => result = original()(view, flags)); return (nint)result;
                 }, result => (long)result)); break;
             case PortraitOwnedSceneNativeKind.Update:
                 Add<CharaView.Delegates.Update>(factory, target, original => (view, frame, character) => ObservePassiveNative(target, (nint)view, 2,
-                    frame, (long)character, 0, 0, 0, () => { BeforeNative((nint)view, null, false); Original(() => original()(view, frame, character)); return 0L; }, result => result)); break;
+                    frame, (long)character, 0, 0, 0, () => { using var ownEntry = BeginOwnNativeEntry(target.Kind, (nint)view); BeforeNative((nint)view, null, false, target.Kind); Original(() => original()(view, frame, character)); return 0L; }, result => result)); break;
             case PortraitOwnedSceneNativeKind.CreateClientObject:
                 Add<ClientObjectManager.Delegates.CreateBattleCharacter>(factory, target, original => (manager, index, param) => ObservePassiveNative(target, (nint)manager, 2,
                     index, param, 0, 0, 0, () => { BeforeClientObject(index); uint result = 0; Original(() => result = original()(manager, index, param)); return result; }, result => result)); break;
@@ -276,17 +279,20 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
 
     private void Render(CharaView* view, uint frame, Func<CharaView.Delegates.Render> original)
     {
+        using var ownEntry = BeginOwnNativeEntry(PortraitOwnedSceneNativeKind.Render, (nint)view);
         var baseline = BeginPassiveReturn((nint)view);
         var jointSource = BeginJointSource((nint)view, frame);
-        BeforeNative((nint)view, null, false);
+        BeforeNative((nint)view, null, false, PortraitOwnedSceneNativeKind.Render);
         var returned = false;
+        if (jointSource is not null) jointSourceOriginal = jointSource;
         try { Original(() => original()(view, frame)); returned = true; }
         finally
         {
+            if (ReferenceEquals(jointSourceOriginal, jointSource)) jointSourceOriginal = null;
             CompletePassiveReturn(baseline, (nint)view, frame, returned);
             CompleteJointSource(jointSource, returned);
         }
-        try { AfterSourceRender((nint)view, frame); }
+        try { if (jointIngress is null) AfterSourceRender((nint)view, frame); }
         catch (Exception ex) { StopUnsafe("Native source-phase observation failed: " + ex.Message); }
     }
 
@@ -300,6 +306,9 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         using var nativePhase = (environment as IPortraitOwnedSceneHookPhaseEnvironment)?.EnterSourcePhase(source, frame, requestEpoch);
         if (environment is IPortraitOwnedSceneHookPhaseEnvironment && nativePhase is null)
         { StopUnsafe("The native source phase could not be qualified."); return; }
+        if (jointIngress is not null && (environment is not IPortraitOwnedSceneActiveMutationEnvironment activeEnvironment
+            || !IsActiveJointDispatchCurrent || !activeEnvironment.TryQualifyActiveSource(source, frame, requestEpoch, requestedSlot, out jointRenderer)))
+        { StopUnsafe("The same-return complete eight-slot census could not qualify active ownership."); return; }
         if (!environment.IsSourceCurrent(source)
             || !environment.TryReadViewSlot(source.Model, out var currentSourceSlot)
             || currentSourceSlot >= 8 || currentSourceSlot == requestedSlot
@@ -316,7 +325,13 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             lease.SetNativeFrame(frame);
             if (!lease.IsCurrent) { StopUnsafe("Owned slot identity changed."); return; }
             if (closing) { RetireBeforeNative(); return; }
-            try { advance(lease); }
+            try
+            {
+                advance(lease);
+                // Stop during this callback retires before leaving its marker;
+                // otherwise the next real source return can enter retirement only.
+                RetireActiveExperiment();
+            }
             catch (Exception ex) { LastError = ex.Message; RetireBeforeNative(); stopped = true; }
         });
     }
@@ -370,11 +385,19 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         catch (Exception ex) { StopUnsafe("Native client-object observation failed: " + ex.Message); }
     }
 
-    private void BeforeNative(nint view, uint? explicitSlot, bool teardown)
+    private void BeforeNative(nint view, uint? explicitSlot, bool teardown, PortraitOwnedSceneNativeKind operation)
     {
         try
         {
             if (lease is null || stopped) return;
+            // A source Render/its nested source Update is observed without reads.
+            // Only its actual returning marker can reopen native sampling later.
+            if (jointIngress is not null && activeJointDispatch is null && view == source.Model && !teardown && !explicitSlot.HasValue
+                && (operation == PortraitOwnedSceneNativeKind.Render
+                    || operation == PortraitOwnedSceneNativeKind.Update && jointSourceOriginal is not null && originalDepth > 0)) return;
+            if (IsProvedOwnNative(view, operation)) return;
+            if (jointIngress is not null && activeJointDispatch is not null)
+            { InvalidateActiveJoint("A foreign native view invocation interrupted the active owned call."); return; }
             using var nativePhase = EnterRetirementNativePhase();
             if (environment is IPortraitOwnedSceneHookPhaseEnvironment && nativePhase is null)
             { StopUnsafe("The native retirement observation phase could not be qualified."); return; }
@@ -403,7 +426,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             // ever allocates a view. Complete its managed owner in this exact phase;
             // there is no native Release/Dtor or released-view proof to manufacture.
             var unused = retiring.BoundView == 0 && retiring.CreationStage == PortraitOwnedSceneCreationStage.Unbound;
-            if (!(unused ? retiring.CanCreate : retiring.CanReleaseView(retiring.BoundView)))
+            if (!(unused ? IsUnusedRetirementCurrent(retiring) : retiring.CanReleaseView(retiring.BoundView)))
             { StopUnsafe("Owned slot was lost; stale Release is forbidden."); return; }
             bool released;
             retirementInProgress = true;
@@ -460,6 +483,11 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             && phaseThread == Environment.CurrentManagedThreadId && environment.IsFrameworkThread
             && environment.IsSourceCurrent(current.Source);
 
+    internal bool IsCreationAdmitted(PortraitOwnedSceneLease current)
+        => jointIngress is null || !closing && IsActiveAdvanceAdmitted && ReferenceEquals(lease, current);
+    internal bool IsUnusedRetirementCurrent(PortraitOwnedSceneLease current)
+        => ReferenceEquals(lease, current) && current.BoundView == 0 && IsLeasePhaseCurrent(current) && environment.IsSlotIdle(current.Slot);
+
     internal bool IsNativeCallPhaseCurrent(PortraitOwnedSceneLease current) => IsLeasePhaseCurrent(current);
 
     // Called after Dtor(1): never inspect the now-freed view, Character or camera.
@@ -492,7 +520,12 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             || phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0) return false;
         ClearRequest(); return true;
     }
-    public void RequestStop() => closing = true;
+    public void RequestStop()
+    {
+        closing = true;
+        if (activeJointDispatch is { } dispatch)
+        { dispatch.RetirementOnly = true; activeJointRetiring = true; }
+    }
     public void UpdatePassive()
     {
         if (!passiveOnly) return;
@@ -509,14 +542,14 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     public Task DrainPhysicalAsync() => physicalRetired.Task;
     public bool TryDispose()
     {
-        closing = true;
-        jointIngress?.Revoke();
+        RequestStop();
         expiryCancellation.Cancel();
         RevokePassiveBaseline("The owned native generation is closing.");
         if (installing || phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0 && !allHooksPhysical)
         { LastError = "Native installation or an active original/phase must return before hook retirement."; return false; }
         if (lease is { WasReleased: false, BoundView: not 0 })
         { LastError = "Owned native scene must retire in its native phase before hook disposal."; return false; }
+        jointIngress?.Revoke();
         ClearRequest(); var complete = DisposeHooks();
         if (!complete) retirementTask ??= DriveRetirementAsync();
         return complete;

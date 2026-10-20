@@ -32,7 +32,8 @@ internal sealed class PortraitOwnedSceneJointHost : IDisposable
         Func<bool> requestCurrent, Func<long>? timestamp = null, long timestampFrequency = 0,
         Func<PortraitNativeThreadStamp>? nativeThread = null, Func<TimeSpan, CancellationToken, Task>? delay = null,
         Action<PortraitOwnedSceneJointMutationNotice>? mutationReceiver = null,
-        Action<PortraitOwnedSceneHooks, PortraitOwnedSceneHooks.JointSourceInvocation>? sourceReceiver = null)
+        Action<PortraitOwnedSceneHooks, PortraitOwnedSceneHooks.JointSourceInvocation>? sourceReceiver = null,
+        Action<string>? sourceRevoked = null)
     {
         this.factory = factory; this.counters = counters; this.resources = resources; this.requestCurrent = requestCurrent;
         this.mutationReceiver = mutationReceiver;
@@ -41,7 +42,7 @@ internal sealed class PortraitOwnedSceneJointHost : IDisposable
         frequency = timestampFrequency == 0 ? Stopwatch.Frequency : timestampFrequency;
         if (frequency <= 0 || frequency > long.MaxValue / 300) throw new ArgumentOutOfRangeException(nameof(timestampFrequency));
         this.nativeThread = nativeThread ?? (() => new(GetCurrentThreadID(), Environment.CurrentManagedThreadId));
-        hooks = new(environment, reservations, this.timestamp, frequency, this.nativeThread, delay);
+        hooks = new(environment, reservations, this.timestamp, frequency, this.nativeThread, delay, sourceRevoked);
     }
     internal bool TryStart(PortraitOwnedSceneJointPlan plan, PortraitIdentity source, long sessionEpoch, long requestEpoch,
         PortraitNativeThreadStamp expectedThread, TimeSpan duration, out string reason)
@@ -56,6 +57,26 @@ internal sealed class PortraitOwnedSceneJointHost : IDisposable
         reason = hooks.LastError ?? "One physical joint diagnostic installed; no native scene admission.";
         return accepted;
     }
+    internal bool TryStartActive(PortraitOwnedSceneJointPlan plan, PortraitIdentity source, long sessionEpoch, long requestEpoch,
+        PortraitNativeThreadStamp expectedThread, TimeSpan duration, out string reason)
+    {
+        reason = "Active joint transport requires one bounded current native request.";
+        if (!source.IsValid || source.Generation == 0 || sessionEpoch <= 0 || requestEpoch <= 0
+            || expectedThread.NativeID == 0 || expectedThread.ManagedID <= 0 || duration <= TimeSpan.Zero || duration > TimeSpan.FromSeconds(2)
+            || Interlocked.CompareExchange(ref attempted, 1, 0) != 0) return false;
+        ingress = new(source, sessionEpoch, requestEpoch, expectedThread, requestCurrent, counters, resources,
+            timestamp, frequency, nativeThread, mutationReceiver, sourceReceiver);
+        var accepted = hooks.TryInstallJointActive(factory, plan, ingress, duration);
+        reason = hooks.LastError ?? reason;
+        return accepted;
+    }
+    internal bool TryRequest(PortraitIdentity source, uint slot, Action<IPortraitOwnedSceneLease> advance,
+        Func<IPortraitOwnedSceneLease, bool> retire) => hooks.TryRequest(source, slot, advance, retire);
+    internal bool IsActiveDispatchCurrent => hooks.IsActiveJointDispatchCurrent;
+    internal bool IsActiveAdvanceAdmitted => hooks.IsActiveAdvanceAdmitted;
+    internal bool NativeReleaseConfirmed => hooks.NativeReleaseConfirmed;
+    internal void RequestStop() => hooks.RequestStop();
+    internal bool TryCancelUnstartedRequest() => hooks.TryCancelUnstartedRequest();
     internal PortraitOwnedSceneJointHostSnapshot Snapshot()
     {
         var value = ingress?.Snapshot() ?? new(Guid.Empty, 0, 0, 0, 0, 0, false, false, default, [],
@@ -64,7 +85,7 @@ internal sealed class PortraitOwnedSceneJointHost : IDisposable
             value.ResourceDepth, value.Recording, value.Failed, value.Resource, value.SourceReturns, value.Observation,
             hooks.PhysicalHookCount, hooks.PhysicalInFlight, hooks.ReservationHeld, hooks.DrainPhysicalAsync().IsCompletedSuccessfully);
     }
-    internal bool TryStop() { ingress?.Revoke(); return hooks.TryDispose(); }
+    internal bool TryStop() => hooks.TryDispose();
     internal void RevokeEvidence() => ingress?.Revoke();
     internal bool IsSourceReturnCurrent(PortraitOwnedSceneHooks owner, PortraitOwnedSceneHooks.JointSourceInvocation invocation)
         => ingress?.IsSourceReturnCurrent(owner, invocation) == true;

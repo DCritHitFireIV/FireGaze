@@ -75,6 +75,14 @@ internal interface IPortraitPreviewViewModel
     void StartLightingFit(PortraitColorToneTarget target, PortraitSampleRegion region, string? expectedFixedStateKey)
         => StartLightingFit(target, region);
     void CancelLightingFit() { }
+    bool OwnedViewportVisible => false;
+    bool OwnedViewportExperimentActive => false;
+    string OwnedViewportStatus => string.Empty;
+    PortraitOwnedSceneObserverCameraSnapshot? OwnedObserver => null;
+    PortraitOwnedSceneTextureLifetime<IDalamudTextureWrap>.Borrow? TryBorrowOwnedViewport() => null;
+    void SetOwnedObserver(PortraitOwnedSceneObserverCameraSnapshot camera) { }
+    void ResetOwnedObserver() { }
+    void CloseOwnedViewportView() { }
 }
 
 /// <summary>Independent wardrobe UI using game-local textures, without Dresser code or plugin IPC.</summary>
@@ -184,6 +192,12 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             return;
         }
 
+        if (feature.OwnedViewportExperimentActive)
+        {
+            ImGui.TextWrapped(feature.OwnedViewportStatus);
+            DrawLightingSpaceWindow();
+            return;
+        }
         DrawWorkspaceHeader();
 
         if (appearanceTab)

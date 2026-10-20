@@ -29,6 +29,7 @@ internal static unsafe class OwnedSceneIntegrationCases
             ("broker completes real raw allocation cleanup without a destructor", () => BrokerCreationCleanup("raw-free")),
             ("broker completes real Setup self-retirement without double cleanup", () => BrokerCreationCleanup("setup-self-retired")),
             ("broker rejects a retired runtime without native release confirmation", BrokerUnconfirmedCleanup),
+            ("independent observer writes only its own proven view inside the real native phase", OwnedObserverCamera),
         })
         {
             total++;
@@ -43,6 +44,32 @@ internal static unsafe class OwnedSceneIntegrationCases
         using var f = new Fixture(); f.Prepare(); f.SourceRender(100);
         Check(f.Api.ConstructCalls == 1, "strict idle slot prevented the constructor from being called");
         Check(f.Scene.IsReady, f.Scene.LastError ?? "strict creation did not reach ready");
+    }
+    static void OwnedObserverCamera()
+    {
+        using var f = new Fixture();
+        var camera = new PortraitOwnedSceneObserverCameraSnapshot(new(1,0,0), default, MathF.PI/2, 0, 1);
+        IPortraitOwnedSceneLease? captured = null;
+        f.AfterAdvance = lease => {
+            if (captured is not null) return;
+            captured = lease;
+            var before = f.Api.CameraCalls;
+            Check(!f.Scene.TryApplyObserverCamera(lease, camera with { Distance = 3 }) && f.Api.CameraCalls == before,
+                "out-of-range camera reached a native setter");
+            Check(f.Scene.TryApplyObserverCamera(lease, camera), "owned camera did not apply in its real native phase");
+            var view = (CharaViewPortrait*)f.Api.View;
+            Check(view->CameraPosition.X == 1 && view->CameraPosition.Y == 0 && view->CameraPosition.Z == 0
+                && view->CameraTarget.X == 0 && view->CameraYaw == MathF.PI/2 && view->CameraPitch == 0 && view->CameraDistance == 1,
+                "independent camera values did not reach the owned native view");
+            Check(f.Api.CameraCalls == before + 1 && f.Api.LastCameraView == f.Api.View,
+                "observer setter called source/world view or applied more than once");
+            Check(!f.Scene.IsReady, "old rendered image remained ready after a camera write");
+        };
+        f.Prepare(); f.SourceRender(100);
+        var calls = f.Api.CameraCalls;
+        Check(captured is not null && !f.Scene.TryApplyObserverCamera(captured, camera) && f.Api.CameraCalls == calls,
+            "camera command escaped its native source-return lease");
+        f.SourceRender(101); Check(f.Scene.IsReady, "next native Render did not expose the independent camera frame");
     }
     static void BrokerCreationCleanup(string mode)
     {
@@ -161,6 +188,7 @@ internal static unsafe class OwnedSceneIntegrationCases
         public readonly PortraitOwnedSceneHooks Hooks;
         public readonly Factory Factory;
         public readonly PortraitOwnedCharaView Scene;
+        public Action<IPortraitOwnedSceneLease>? AfterAdvance { get; set; }
         public Fixture(){Hooks=new(new EnvironmentProof(Api));Factory=new(Api);Api.Factory=Factory;Scene=new(Api);}
         public void Start()
         {
@@ -173,6 +201,7 @@ internal static unsafe class OwnedSceneIntegrationCases
             Check(Hooks.TryRequest(Source,6,lease=>{
                 if(lease.CanCreate)Check(Scene.TryCreate(snapshot,lease),Scene.LastError??"scene create failed");
                 Check(Scene.Advance(lease,lease.NativeFrame),Scene.LastError??"scene advance failed");
+                AfterAdvance?.Invoke(lease);
             },lease=>Scene.TryRetire(lease)),"request rejected");
         }
         public void Takeover()=>Factory.Get<CharaView.Delegates.Initialize>(PortraitOwnedSceneNativeKind.Initialize)((CharaView*)Foreign,null,6,0);
@@ -232,6 +261,7 @@ internal static unsafe class OwnedSceneIntegrationCases
         readonly nint camera=(nint)NativeMemory.AllocZeroed(0x200);
         public bool SetupStarted,Freed,TakeoverDuringRelease,TakeoverAfterDtor,ReenterTakeoverDuringRelease;
         public int ReadsAfterFree,ConstructCalls,FreeUnconstructedCalls,PostAllocateIdleReads;
+        public int CameraCalls; public nint LastCameraView;
         public bool RejectConstructAdmission,ReturnZeroAllocation;
         public string? SetupMode,ConstructMode;
         public nint Allocate(){if(ReturnZeroAllocation)return 0;View=(nint)NativeMemory.AllocZeroed((nuint)sizeof(CharaViewPortrait));return View;}
@@ -263,7 +293,7 @@ internal static unsafe class OwnedSceneIntegrationCases
         public void SetPoseTimed(nint v,ushort t,float f){}public void SetExpression(nint v,byte e){}public void SetHeadDirection(nint v,float x,float y){}public void SetEyeDirection(nint v,float x,float y){}
         public void SetDirectionalColor(nint v,byte r,byte g,byte b){}public void SetDirectionalBrightness(nint v,byte b){}public void SetDirectionalAngle(nint v,short a,short b){}
         public void SetAmbientColor(nint v,byte r,byte g,byte b){}public void SetAmbientBrightness(nint v,byte b){}public void SetBackground(nint v,ushort b){}public void SetCameraZoom(nint v,byte z){}
-        public void ApplyCamera(nint v){}public void SetPaused(nint v,bool p){}public bool IsPaused(nint v)=>true;public void SetCharacterVisible(nint v,bool visible){}
+        public void ApplyCamera(nint v){CameraCalls++;LastCameraView=v;}public void SetPaused(nint v,bool p){}public bool IsPaused(nint v)=>true;public void SetCharacterVisible(nint v,bool visible){}
         public void Dispose(){if(View!=0&&!Freed)NativeMemory.Free((void*)View);NativeMemory.Free(character);NativeMemory.Free((void*)camera);}
     }
 }

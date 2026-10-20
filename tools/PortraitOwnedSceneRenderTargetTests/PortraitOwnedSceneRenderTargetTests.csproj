@@ -11,6 +11,10 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneImageSource.cs" Link="PortraitOwnedSceneImageSource.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneRenderTarget*.cs" Link="%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSession.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneFirstFrameProof.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneExperimentBroker.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.OwnedViewportDiagnostics.cs" />
+    <Compile Include="../PortraitOwnedSceneHookTests/OwnedExperimentBrokerCases.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneControllerBroker.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks*.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost*.cs" />

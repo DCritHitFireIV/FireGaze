@@ -72,6 +72,8 @@ internal sealed class PortraitSafetySnapshotCollector(IPortraitSafetySnapshotSou
             ValidateSourceCensus(managedConfirmation, runtime, errors);
             ValidateOwnedPassive(managed, runtime, errors);
             ValidateOwnedPassive(managedConfirmation, runtime, errors);
+            ValidateOwnedViewport(managed, runtime, errors);
+            ValidateOwnedViewport(managedConfirmation, runtime, errors);
             if (StableManaged(managed) != StableManaged(managedConfirmation)) errors.Add("managed-changed");
             if (!HasString(runtime, "version") || !HasString(runtime, "mvid") || !HasString(runtime, "instanceID")) errors.Add("runtime-unavailable");
             if (ended < started || sequence <= 0) errors.Add("timing-unavailable");
@@ -246,6 +248,41 @@ internal sealed class PortraitSafetySnapshotCollector(IPortraitSafetySnapshotSou
             "WaitingForSourceReturn" => hooks == 39 && reservation,
             _ => true,
         };
+    }
+
+    private static void ValidateOwnedViewport(JsonElement managed, JsonElement runtime, ISet<string> errors)
+    {
+        var required = runtime.TryGetProperty("ownedNativeViewportSupported", out var capability)
+            && capability.ValueKind == JsonValueKind.True;
+        if (!managed.TryGetProperty("ownedViewport", out var viewport))
+        { if (required) errors.Add("owned-viewport-unavailable"); return; }
+        if (!ValidOwnedViewport(viewport)) errors.Add("owned-viewport-unavailable");
+    }
+
+    private static bool ValidOwnedViewport(JsonElement value)
+    {
+        if (value.ValueKind != JsonValueKind.Object
+            || !value.TryGetProperty("known", out var known) || known.ValueKind != JsonValueKind.True
+            || !value.TryGetProperty("productionAdmission", out var admission) || admission.ValueKind != JsonValueKind.False
+            || !value.TryGetProperty("state", out var state) || state.ValueKind != JsonValueKind.String
+            || state.GetString() is not ("Off" or "Requested" or "Loading" or "Ready" or "Retiring" or "Faulted")
+            || !NonnegativeInt64(value, "attempt", out var attempt)
+            || !HasBoolean(value, "blocksOperations") || !HasBoolean(value, "physicalDrainCompleted")
+            || !HasBoolean(value, "reservationHeld") || !HasBoolean(value, "recording") || !HasBoolean(value, "failed")
+            || !HasInteger(value, "hooks") || !HasInteger(value, "inFlight")
+            || !HasInteger(value, "imageCopies") || !HasInteger(value, "imageFrames") || !HasInteger(value, "imageBorrowers")
+            || !HasBoolean(value, "imageResourcesClean") || !HasBoolean(value, "comResourcesClean") || !HasBoolean(value, "readbackPending")) return false;
+        var drained = value.GetProperty("physicalDrainCompleted").GetBoolean();
+        var blocks = value.GetProperty("blocksOperations").GetBoolean();
+        if (blocks == drained || (drained && state.GetString() != "Off") || !value.GetProperty("imageResourcesClean").GetBoolean()
+            && drained || !value.GetProperty("comResourcesClean").GetBoolean() && drained
+            || value.GetProperty("hooks").GetInt64() > 46 || value.GetProperty("inFlight").GetInt64() > 46) return false;
+        if (attempt == 0)
+            return state.GetString() == "Off" && drained && value.GetProperty("hooks").GetInt64() == 0
+                && value.GetProperty("inFlight").GetInt64() == 0 && !value.GetProperty("reservationHeld").GetBoolean();
+        if (drained && (value.GetProperty("hooks").GetInt64() != 0 || value.GetProperty("inFlight").GetInt64() != 0
+            || value.GetProperty("reservationHeld").GetBoolean() || value.GetProperty("readbackPending").GetBoolean())) return false;
+        return true;
     }
 
     private static bool NonnegativeInt64(JsonElement value, string name, out long number)

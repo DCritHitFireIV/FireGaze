@@ -62,6 +62,8 @@ namespace FireGaze.PortraitPreview
         private readonly CensusIdle? liveImageService = null, lightingFitCapture = null, nativeLiveController = null;
         private bool NativeLiveEnabled => false;
         private bool LightingFitMutationBlocked => false;
+        private bool OwnedViewportBlocksOperations => OwnedViewportBusy;
+        internal bool OwnedViewportBusy;
         internal PortraitPreviewFeature(PortraitIdentity source)
         {
             target = new(source); session = new(target); session.Open(source);

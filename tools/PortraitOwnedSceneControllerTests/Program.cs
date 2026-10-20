@@ -19,6 +19,7 @@ static class ControllerChecks
             PartialCreationWaitsForConfirmedRetirement();
             SynchronousRequestFailureRetainsOwner();
             ClosedAdmissionNeverTouchesNative();
+            ExplicitDevelopmentCapabilityDoesNotOpenProduction();
             NativeSceneStartsOnlyFromOwnedCallback();
             ReadyBorrowIsSynchronousAndRetiringBlocksIt();
             LostLeaseStopsAndNeverRetriesNative();
@@ -32,6 +33,8 @@ static class ControllerChecks
             OwnedImageSourceRejectsForeignRevisionAndSource();
             OwnedImageSourceInvalidatesLateResultOnStop();
             ForeignLeaseEpochCannotBorrowAdvanceOrRetire();
+            ObserverGestureIsQueuedUntilTheNextNativeRender();
+            InitialObserverWaitsForAPreparedViewAndThenARender();
             Console.WriteLine($"PASS: {count} owned-controller checks; native calls only through injected source-phase callbacks; admission remains closed.");
             return 0;
         }
@@ -58,6 +61,15 @@ static class ControllerChecks
         Check(!controller.TryStart(Snapshot(), 3), "closed admission rejects start");
         Check(controller.State == PortraitOwnedSceneControllerState.Off && api.Events.Count == 0 && broker.Requests == 0,
             "closed admission has no allocation or request side effects");
+    }
+    private static void ExplicitDevelopmentCapabilityDoesNotOpenProduction()
+    {
+        var broker = new FakeBroker { DevelopmentCapability = true };
+        using var runtime = new FakeApi(); using var controller = Create(broker, runtime);
+        Check(controller.TryStart(Snapshot(), 3) && !broker.ProductionAdmission,
+            "explicit bounded experiment can queue its first request while production remains closed");
+        Check(runtime.Events.Count == 0, "development capability is not a native phase");
+        controller.Stop(); broker.Retire(new FakeLease(Source, 3));
     }
 
     private static void NativeSceneStartsOnlyFromOwnedCallback()
@@ -182,6 +194,47 @@ static class ControllerChecks
         Check(snapshot.IsValid && snapshot.Position != snapshot.Target, "camera stores detached values");
         Check(!camera.TrySet(new(float.NaN, 0, 0), snapshot.Target, 0, 0, 1), "nonfinite camera rejected");
         Check(camera.Snapshot == snapshot, "invalid camera cannot alter prior state");
+        Check(PortraitOwnedSceneObserverCameraSnapshot.TryFromSource(new(.0002f,.1f,1),new(0,.1f,0),out var canonical)
+            && canonical.IsNativeSupported && canonical.Position==new System.Numerics.Vector3(.0002f,.1f,1),
+            "source observer derives consistent angles from actual source position without moving its camera");
+        Check(!PortraitOwnedSceneObserverCameraSnapshot.TryFromSource(new(0,0,1),new(4,0,0),out _),
+            "unsupported source target is explicit and cannot silently acquire observer controls");
+    }
+    private static void ObserverGestureIsQueuedUntilTheNextNativeRender()
+    {
+        var broker = new FakeBroker { ProductionAdmission = true }; using var runtime = new FakeApi();
+        using var controller = Create(broker, runtime); controller.TryStart(Snapshot(), 3);
+        var lease = new FakeLease(Source, 3); broker.Advance(lease); runtime.Ready = true; broker.Advance(lease);
+        var before = runtime.Events.Count;
+        var side = new PortraitOwnedSceneObserverCameraSnapshot(new(1,0,0), default, MathF.PI/2, 0, 1);
+        var back = new PortraitOwnedSceneObserverCameraSnapshot(new(0,0,-1), default, MathF.PI, 0, 1);
+        Check(controller.TrySetObserverCamera(side) && controller.TrySetObserverCamera(back), "valid observer gestures queue");
+        Check(runtime.Events.Count == before && controller.State == PortraitOwnedSceneControllerState.Loading,
+            "gesture input cannot mutate native camera or expose an old ready frame");
+        broker.Advance(lease);
+        Check(runtime.Events.Skip(before).SequenceEqual(new[] { "observer-camera", "render" }) && runtime.Observer == back,
+            "the latest detached camera is applied once immediately before the next native Render");
+        Check(controller.State == PortraitOwnedSceneControllerState.Ready, "rendered camera revision becomes ready");
+        controller.Stop(); Check(!controller.TrySetObserverCamera(side), "retiring generation rejects observer input");
+        broker.Retire(lease);
+    }
+    private static void InitialObserverWaitsForAPreparedViewAndThenARender()
+    {
+        var broker = new FakeBroker { ProductionAdmission = true }; using var runtime = new FakeApi();
+        using var controller = Create(broker, runtime); controller.TryStart(Snapshot(), 3);
+        var side = new PortraitOwnedSceneObserverCameraSnapshot(new(1,0,0), default, MathF.PI/2, 0, 1);
+        Check(controller.TrySetObserverCamera(side), "initial observer queues before creation");
+        var lease = new FakeLease(Source, 3); broker.Advance(lease); runtime.Ready = true; broker.Advance(lease);
+        Check(runtime.Observer is null && controller.State == PortraitOwnedSceneControllerState.Loading,
+            "first preparation render cannot publish a frame for an unapplied observer");
+        broker.Advance(lease);
+        Check(runtime.Observer == side && controller.State == PortraitOwnedSceneControllerState.Ready,
+            "only a later native render publishes the initial independent observer");
+        var calls = runtime.Events.Count;
+        Check(!controller.TrySetObserverCamera(side with { Distance = 3 }), "unsupported native camera distance is rejected");
+        Check(runtime.Events.Count == calls && controller.State == PortraitOwnedSceneControllerState.Ready,
+            "invalid camera input leaves the current rendered view intact");
+        controller.Stop(); broker.Retire(lease);
     }
 
     private static PortraitOwnedSceneImageDescriptor Descriptor(PortraitOwnedSceneController controller, long generation = 1)
@@ -313,16 +366,17 @@ static class ControllerChecks
 
     private sealed class FakeBroker : IPortraitOwnedSceneControllerBroker
     {
-        internal bool ProductionAdmission, AdvanceDuringRequest, RequestReturnsFalse, RequestThrows; internal int Requests, Cancels;
+        internal bool ProductionAdmission, DevelopmentCapability, AdvanceDuringRequest, RequestReturnsFalse, RequestThrows; internal int Requests, Cancels;
         private Action<IPortraitOwnedSceneLease>? advance; private Func<IPortraitOwnedSceneLease, bool>? retire;
         public bool IsFrameworkThread => true;
+        public bool StartAdmission => ProductionAdmission || DevelopmentCapability;
         bool IPortraitOwnedSceneControllerBroker.ProductionAdmission => ProductionAdmission;
         public bool TryRequest(PortraitIdentity source, uint slot, Action<IPortraitOwnedSceneLease> onAdvance, Func<IPortraitOwnedSceneLease, bool> onRetire)
         {
             Requests++; advance = onAdvance; retire = onRetire;
             if (AdvanceDuringRequest) onAdvance(new FakeLease(source, slot));
             if (RequestThrows) throw new InvalidOperationException("request failed after callback");
-            return ProductionAdmission && !RequestReturnsFalse;
+            return StartAdmission && !RequestReturnsFalse;
         }
         public void Cancel(string reason) { Cancels++; }
         internal void Advance(IPortraitOwnedSceneLease lease) => advance?.Invoke(lease);
@@ -344,6 +398,9 @@ static class ControllerChecks
     {
         internal readonly List<string> Events = []; internal bool Ready; internal bool Created;
         internal bool CreateReturnsFalse, CreateThrows, RetireSucceeds = true; internal int RetireCalls;
+        internal PortraitOwnedSceneObserverCameraSnapshot? Observer;
+        public bool TryApplyObserverCamera(IPortraitOwnedSceneLease lease, PortraitOwnedSceneObserverCameraSnapshot value)
+        { if (!Created || !Ready || !lease.IsCurrent) return false; Observer = value; Events.Add("observer-camera"); return true; }
         bool IPortraitOwnedSceneRuntime.IsReady => Ready;
         public bool TryCreate(PortraitOwnedCharaViewSnapshot source, IPortraitOwnedSceneLease lease)
         {
