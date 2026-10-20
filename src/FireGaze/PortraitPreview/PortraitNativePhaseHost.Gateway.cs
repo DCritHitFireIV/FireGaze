@@ -40,10 +40,10 @@ internal sealed class PortraitNativePhaseHostGateway
 
     public static bool TryCreate(int phase, Type[] parameters, nint targetAddress, out PortraitNativePhaseHostGateway? gateway, out string reason)
     {
-        gateway = null; reason = "Native gateway ABI must use stable pointer types and one of the four observed void signatures.";
-        if (targetAddress <= 0 || phase is < 0 or > 3 || parameters is null || parameters.Length != (phase is 1 or 3 ? 2 : 1)
+        gateway = null; reason = "Native gateway ABI must use stable pointer types and an explicit phase or counter void signature.";
+        if (targetAddress <= 0 || phase is < 0 or > 5 || parameters is null || parameters.Length != (phase is 1 or 3 or 4 or 5 ? 2 : 1)
             || !parameters[0].IsPointer || parameters.Any(type => !StableType(type))
-            || (phase == 1 && parameters[1] != typeof(float)) || (phase == 3 && parameters[1] != typeof(uint))) return false;
+            || (phase == 1 && parameters[1] != typeof(float)) || (phase is 3 or 4 or 5 && parameters[1] != typeof(uint))) return false;
         try
         {
             // The table, key strings and values use only default runtime types.
@@ -218,7 +218,7 @@ internal sealed class PortraitNativePhaseHostGateway
         il.BeginExceptionBlock();
         var noObserver = il.DefineLabel(); il.Emit(OpCodes.Ldloc, copiedObserver); il.Emit(OpCodes.Brfalse, noObserver);
         il.Emit(OpCodes.Ldloc, copiedObserver); il.Emit(OpCodes.Ldc_I4, phase); il.Emit(OpCodes.Ldarg_1); il.Emit(OpCodes.Conv_I);
-        if (phase == 3) il.Emit(OpCodes.Ldarg_2); else il.Emit(OpCodes.Ldc_I4_0);
+        if (phase is 3 or 4 or 5) il.Emit(OpCodes.Ldarg_2); else il.Emit(OpCodes.Ldc_I4_0);
         if (phase == 1) il.Emit(OpCodes.Ldarg_2); else il.Emit(OpCodes.Ldc_R4, 0f);
         il.Emit(OpCodes.Callvirt, ObserverType.GetMethod("Invoke")!); il.Emit(OpCodes.Stloc, completion); il.MarkLabel(noObserver);
         il.BeginCatchBlock(typeof(Exception)); il.Emit(OpCodes.Pop); il.EndExceptionBlock();

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FireGaze.PortraitPreview;
 
-internal enum PortraitNativeObservedPhase { ManagerRender, ManagerUpdateCandidate, SceneCameraUpdate, SourceCharaViewRender }
+internal enum PortraitNativeObservedPhase { ManagerRender, ManagerUpdateCandidate, SceneCameraUpdate, SourceCharaViewRender, CounterAdd, CounterSub }
 internal enum PortraitNativeObservedEdge { Enter, Return, Throw }
 internal enum PortraitNativeFrameOrigin { None, SourceRenderArgument, EnclosingSourceRenderArgument }
 internal enum PortraitNativeObservationStop { Disabled, Expired, Explicit, Disposed, ThreadLimit, DepthLimit, ObserverFailure, InvalidNesting }
@@ -11,7 +11,7 @@ internal readonly record struct PortraitNativeThreadStamp(uint NativeID, int Man
 internal readonly record struct PortraitNativeFrameEvidence(PortraitNativeFrameOrigin Origin, uint Value, nint SourceView);
 internal readonly record struct PortraitNativePhaseRecord(long Sequence, long Capture, long Call, long ParentCall,
     PortraitNativeObservedPhase Phase, PortraitNativeObservedEdge Edge, nint Receiver, PortraitNativeThreadStamp Thread,
-    int Depth, long Timestamp, PortraitNativeFrameEvidence Frame, float? FloatArgument);
+    int Depth, long Timestamp, PortraitNativeFrameEvidence Frame, float? FloatArgument, uint? CounterSlot = null);
 internal readonly record struct PortraitNativePhaseCall(long Capture, long Call, PortraitNativeThreadStamp Thread);
 internal sealed record PortraitNativePhaseObservationSnapshot(bool Observing, PortraitNativeObservationStop Stop,
     long Capture, long OverwrittenRecords, int ObservedThreads, IReadOnlyList<PortraitNativePhaseRecord> Records)
@@ -96,7 +96,7 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
         }
     }
 
-    internal PortraitNativePhaseCall Begin(PortraitNativeObservedPhase phase, nint receiver, uint? frame = null, float? floatArgument = null)
+    internal PortraitNativePhaseCall Begin(PortraitNativeObservedPhase phase, nint receiver, uint? frame = null, float? floatArgument = null, uint? counterSlot = null)
     {
         lock (gate)
         {
@@ -117,7 +117,8 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
                     ? new PortraitNativeFrameEvidence(PortraitNativeFrameOrigin.SourceRenderArgument, frame.Value, receiver)
                     : parent.Frame.Origin == PortraitNativeFrameOrigin.None ? default
                     : parent.Frame with { Origin = PortraitNativeFrameOrigin.EnclosingSourceRenderArgument };
-                var call = new Invocation(checked(++calls), parent.Call, phase, receiver, evidence, floatArgument);
+                var call = new Invocation(checked(++calls), parent.Call, phase, receiver, evidence, floatArgument,
+                    phase is PortraitNativeObservedPhase.CounterAdd or PortraitNativeObservedPhase.CounterSub ? counterSlot : null);
                 Append(call, thread, stack.Count, now, PortraitNativeObservedEdge.Enter);
                 stack.Calls[stack.Count++] = call;
                 return new(capture, call.Call, thread);
@@ -159,7 +160,7 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
     private void Append(Invocation call, PortraitNativeThreadStamp thread, int depth, long now, PortraitNativeObservedEdge edge)
     {
         var row = new PortraitNativePhaseRecord(checked(++sequence), capture, call.Call, call.Parent, call.Phase, edge,
-            call.Receiver, thread, depth, now, call.Frame, call.FloatArgument);
+            call.Receiver, thread, depth, now, call.Frame, call.FloatArgument, call.CounterSlot);
         if (count == ring.Length) { ring[head] = row; head = (head + 1) % ring.Length; overwritten++; }
         else { ring[(head + count) % ring.Length] = row; count++; }
     }
@@ -175,7 +176,7 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
     private static extern uint GetCurrentThreadID();
 
     private readonly record struct Invocation(long Call, long Parent, PortraitNativeObservedPhase Phase,
-        nint Receiver, PortraitNativeFrameEvidence Frame, float? FloatArgument);
+        nint Receiver, PortraitNativeFrameEvidence Frame, float? FloatArgument, uint? CounterSlot);
     private sealed class ThreadStack(int capacity)
     { public readonly Invocation[] Calls = new Invocation[capacity]; public int Count; }
 }

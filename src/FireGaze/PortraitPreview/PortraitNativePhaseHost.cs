@@ -2,7 +2,8 @@ namespace FireGaze.PortraitPreview;
 
 internal enum PortraitNativePhaseHostState { Off, Observing, Installed, Retiring, Retired, Faulted }
 internal sealed record PortraitNativePhaseHostSnapshot(PortraitNativePhaseHostState State, int Hooks, int InFlight,
-    string BackendIdentity, string Detail, PortraitNativePhaseResolvedPlan? Plan, PortraitNativePhaseObservationSnapshot Observation)
+    string BackendIdentity, string Detail, PortraitNativePhaseResolvedPlan? Plan, PortraitNativePhaseObservationSnapshot Observation,
+    long CounterInvalidationEpoch = 0, bool CounterInvalidationFailed = false)
 { public bool ProductionAdmission => false; }
 
 internal delegate bool PortraitNativePhaseHostResolve(Func<nint, bool> isReserved,
@@ -45,19 +46,43 @@ internal sealed class PortraitNativePhaseHost
     private readonly PortraitNativePhaseObservation observation;
     private readonly PortraitNativePhaseHostReservations reservations;
     private readonly PortraitNativePhaseHostResolve resolve;
+    private readonly PortraitNativePhaseTargetSet targetSet;
+    private readonly Func<IDisposable?>? invalidateCounters;
     private readonly List<Entry> entries = [];
     private PortraitNativePhaseHostState state;
     private PortraitNativePhaseResolvedPlan? plan;
     private PortraitNativePhaseHostReservation? reservation;
     private string detail = "Disabled; no native hooks installed.";
+    private long counterInvalidationEpoch;
+    private volatile bool counterInvalidationFailed;
 
     public PortraitNativePhaseHost(IPortraitNativePhaseHostFactory factory, PortraitNativePhaseObservation observation,
         PortraitNativePhaseHostReservations reservations, PortraitNativePhaseHostResolve? resolve = null)
+        : this(factory, observation, reservations, PortraitNativePhaseTargetSet.PhaseObservation, null,
+            resolve ?? PortraitNativePhaseObservationResolver.TryResolveCurrentProcess) { }
+
+    private PortraitNativePhaseHost(IPortraitNativePhaseHostFactory factory, PortraitNativePhaseObservation observation,
+        PortraitNativePhaseHostReservations reservations, PortraitNativePhaseTargetSet targetSet, Func<IDisposable?>? invalidateCounters,
+        PortraitNativePhaseHostResolve resolve)
     {
         this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
         this.observation = observation ?? throw new ArgumentNullException(nameof(observation));
         this.reservations = reservations ?? throw new ArgumentNullException(nameof(reservations));
-        this.resolve = resolve ?? PortraitNativePhaseObservationResolver.TryResolveCurrentProcess;
+        this.resolve = resolve;
+        this.targetSet = targetSet;
+        this.invalidateCounters = invalidateCounters;
+    }
+
+    // Explicit bounded diagnostic host only; no feature creates one or grants an
+    // owned scene. The sink accepts no native receiver and may only revoke/block
+    // detached phases (phaseSource.BeginCounterMutation), never release a scene.
+    public static PortraitNativePhaseHost CreateCounterIngress(IPortraitNativePhaseHostFactory factory,
+        PortraitNativePhaseObservation observation, PortraitNativePhaseHostReservations reservations, Func<IDisposable?> invalidate,
+        PortraitNativePhaseHostResolve? resolve = null)
+    {
+        ArgumentNullException.ThrowIfNull(invalidate);
+        return new(factory, observation, reservations, PortraitNativePhaseTargetSet.CounterIngress, invalidate,
+            resolve ?? PortraitNativePhaseObservationResolver.TryResolveCounterIngressCurrentProcess);
     }
 
     public static bool IsReserved(nint address) => new PortraitNativePhaseHostReservations().IsReserved(address);
@@ -73,13 +98,14 @@ internal sealed class PortraitNativePhaseHost
             {
                 if (!factory.TryQualifyStartDisabled(out reason)) { detail = reason; return false; }
                 if (state == PortraitNativePhaseHostState.Off && !TryInstall(out reason)) { detail = reason; return false; }
-                if (entries.Count != 4 || entries.Any(entry => entry.Hook is null || entry.Hook.IsDisposed || !entry.Hook.IsEnabled))
+                if (entries.Count != PortraitNativeCounterIngressContract.For(targetSet).Count
+                    || entries.Any(entry => entry.Hook is null || entry.Hook.IsDisposed || !entry.Hook.IsEnabled))
                     throw new InvalidOperationException("An installed observation hook changed state.");
                 // Install all four observers before starting; while stopped their
                 // Begin returns no completion token and cannot fabricate records.
                 foreach (var entry in entries) entry.Gateway.SetObserver(Observe);
                 if (!observation.TryStart(duration))
-                { foreach (var entry in entries) entry.Gateway.DetachObserver(); reason = detail = "Bounded recorder did not start."; return false; }
+                { DetachRecordingObservers(); reason = detail = "Bounded recorder did not start."; return false; }
                 state = PortraitNativePhaseHostState.Observing;
                 reason = detail = "Passive phase observation started; native scene admission remains disabled."; return true;
             }
@@ -96,7 +122,7 @@ internal sealed class PortraitNativePhaseHost
     {
         lock (gate)
         {
-            observation.Stop(); foreach (var entry in entries) entry.Gateway.DetachObserver();
+            observation.Stop(); DetachRecordingObservers();
             if (state == PortraitNativePhaseHostState.Observing) state = PortraitNativePhaseHostState.Installed;
         }
     }
@@ -107,9 +133,9 @@ internal sealed class PortraitNativePhaseHost
         {
             var captured = observation.Snapshot();
             if (state == PortraitNativePhaseHostState.Observing && !captured.Observing)
-            { foreach (var entry in entries) entry.Gateway.DetachObserver(); state = PortraitNativePhaseHostState.Installed; }
+            { DetachRecordingObservers(); state = PortraitNativePhaseHostState.Installed; }
             return new(state, entries.Count(entry => entry.Hook is { IsDisposed: false }), entries.Sum(entry => entry.Gateway.ActiveCount),
-                factory.Identity, detail, plan, captured);
+                factory.Identity, detail, plan, captured, Interlocked.Read(ref counterInvalidationEpoch), counterInvalidationFailed);
         }
     }
 
@@ -224,8 +250,12 @@ internal sealed class PortraitNativePhaseHost
                 entry.Gateway.PublishOriginal(entry.Hook.Original);
             }
             if (!factory.TryVerifyUnmodifiedTargets(plan, out reason)) throw new InvalidOperationException(reason);
+            // Revocation must already be attached when the first counter hook
+            // enables. Recording starts separately; no gap grants a valid lease.
+            if (targetSet == PortraitNativePhaseTargetSet.CounterIngress)
+                foreach (var entry in entries) entry.Gateway.SetObserver(Observe);
             foreach (var entry in entries) { entry.Hook!.Enable(); if (!entry.Hook.IsEnabled) throw new InvalidOperationException("Official hook did not enable."); }
-            state = PortraitNativePhaseHostState.Installed; reason = "Four official typed observation hooks installed."; return true;
+            state = PortraitNativePhaseHostState.Installed; reason = "Official typed observation batch installed."; return true;
         }
         catch
         {
@@ -251,24 +281,52 @@ internal sealed class PortraitNativePhaseHost
         return allDisabled;
     }
 
-    private Action<bool>? Observe(int phase, nint receiver, uint frame, float delta)
+    private void DetachRecordingObservers()
     {
-        try
-        {
-            var call = observation.Begin((PortraitNativeObservedPhase)phase, receiver,
-                phase == (int)PortraitNativeObservedPhase.SourceCharaViewRender ? frame : null,
-                phase == (int)PortraitNativeObservedPhase.ManagerUpdateCandidate ? delta : null);
-            return call.Call == 0 ? null : returned => observation.End(call, returned);
-        }
-        catch (Exception) { observation.Stop(); return null; }
+        // Counter invalidation remains active while the installed generation is
+        // alive, independently of the bounded recorder. Retirement always detaches.
+        if (targetSet == PortraitNativePhaseTargetSet.PhaseObservation)
+            foreach (var entry in entries) entry.Gateway.DetachObserver();
     }
 
-    private static bool ValidPlan(PortraitNativePhaseResolvedPlan? value)
+    private Action<bool>? Observe(int phase, nint receiver, uint argument, float delta)
     {
+        IDisposable? mutation = null;
+        var call = default(PortraitNativePhaseCall);
+        try
+        {
+            var counter = phase is (int)PortraitNativeObservedPhase.CounterAdd or (int)PortraitNativeObservedPhase.CounterSub;
+            if (counter && argument < 8)
+            {
+                // Unknown manager/off-thread calls are equally conservative: this
+                // path never reads the receiver. An epoch change is detached data,
+                // not permission to read a slot or run native cleanup here.
+                if (Interlocked.Increment(ref counterInvalidationEpoch) <= 0) counterInvalidationFailed = true;
+                try { mutation = invalidateCounters!() ?? throw new InvalidOperationException("Counter mutation guard was not issued."); }
+                catch (Exception) { counterInvalidationFailed = true; observation.Stop(); }
+            }
+            call = observation.Begin((PortraitNativeObservedPhase)phase, receiver,
+                phase == (int)PortraitNativeObservedPhase.SourceCharaViewRender ? argument : null,
+                phase == (int)PortraitNativeObservedPhase.ManagerUpdateCandidate ? delta : null,
+                counter ? argument : null);
+        }
+        catch (Exception) { observation.Stop(); }
+        // The stable gateway invokes completion from finally even when Original
+        // throws. Logical recording expiry cannot shorten this mutation scope.
+        return call.Call == 0 && mutation is null ? null : returned => {
+            try { mutation?.Dispose(); }
+            catch (Exception) { counterInvalidationFailed = true; observation.Stop(); }
+            finally { observation.End(call, returned); }
+        };
+    }
+
+    private bool ValidPlan(PortraitNativePhaseResolvedPlan? value)
+    {
+        var inventory = PortraitNativeCounterIngressContract.For(targetSet);
         if (value is null || value.ModuleBase <= 0 || value.ModuleSize <= 0 || value.SDKMVID == Guid.Empty
             || value.OnDiskEXESHA256 != PortraitNativePhaseObservationBinding.EXE || value.OnDiskSDKSHA256 != PortraitNativePhaseObservationBinding.SDK
-            || value.Targets.Count != PortraitNativePhaseObservationBinding.Inventory.Count) return false;
-        return value.Targets.SequenceEqual(PortraitNativePhaseObservationBinding.Inventory.Select(contract =>
+            || inventory.Count == 0 || value.Targets.Count != inventory.Count) return false;
+        return value.Targets.SequenceEqual(inventory.Select(contract =>
             new PortraitNativePhaseBoundTarget(contract.Phase, value.ModuleBase + (nint)contract.RVA, contract.Delegate)))
             && value.Targets.Select(target => target.Address).Distinct().Count() == value.Targets.Count;
     }

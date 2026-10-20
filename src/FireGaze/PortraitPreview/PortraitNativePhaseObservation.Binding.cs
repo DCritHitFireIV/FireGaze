@@ -7,7 +7,8 @@ namespace FireGaze.PortraitPreview;
 internal sealed record PortraitNativePhaseEntryEvidence(PortraitNativeObservedPhase Phase, nint Address,
     uint FunctionRootRVA, int PrefixMatches, byte[] Prefix, Type DelegateType, nint SDKResolvedAddress);
 internal readonly record struct PortraitNativePhaseBoundTarget(PortraitNativeObservedPhase Phase, nint Address, Type DelegateType);
-internal sealed record PortraitNativePhaseEntryContract(PortraitNativeObservedPhase Phase, uint RVA, string Prefix, Type Delegate, bool SDKEntry);
+internal sealed record PortraitNativePhaseEntryContract(PortraitNativeObservedPhase Phase, uint RVA, string Prefix, Type Delegate, bool SDKEntry,
+    bool CompleteLeaf = false);
 
 /// <summary>Detached evidence validation only. No resolver, memory reader, installer, or production admission.</summary>
 internal static unsafe class PortraitNativePhaseObservationBinding
@@ -23,14 +24,21 @@ internal static unsafe class PortraitNativePhaseObservationBinding
 
     public static bool TryBind(nint moduleBase, string exeSHA256, string sdkSHA256,
         IReadOnlyList<PortraitNativePhaseEntryEvidence> evidence, out IReadOnlyList<PortraitNativePhaseBoundTarget> targets, out string reason)
+        => TryBind(moduleBase, exeSHA256, sdkSHA256, evidence, PortraitNativePhaseTargetSet.PhaseObservation, out targets, out reason);
+
+    internal static bool TryBind(nint moduleBase, string exeSHA256, string sdkSHA256,
+        IReadOnlyList<PortraitNativePhaseEntryEvidence> evidence, PortraitNativePhaseTargetSet targetSet,
+        out IReadOnlyList<PortraitNativePhaseBoundTarget> targets, out string reason)
     {
         targets = []; reason = "Native observation evidence does not match the audited EXE/SDK entry contracts.";
+        var inventory = PortraitNativeCounterIngressContract.For(targetSet);
         if (nint.Size != 8 || moduleBase <= 0 || exeSHA256 != EXE || sdkSHA256 != SDK || evidence is null
-            || evidence.Count != Inventory.Count || !SDKAbiMatches()) return false;
-        var bound = new PortraitNativePhaseBoundTarget[Inventory.Count];
-        for (var index = 0; index < Inventory.Count; index++)
+            || inventory.Count == 0 || evidence.Count != inventory.Count || !SDKAbiMatches()
+            || targetSet == PortraitNativePhaseTargetSet.CounterIngress && !PortraitNativeCounterIngressContract.ABIValid()) return false;
+        var bound = new PortraitNativePhaseBoundTarget[inventory.Count];
+        for (var index = 0; index < inventory.Count; index++)
         {
-            var expected = Inventory[index];
+            var expected = inventory[index];
             var entry = evidence[index];
             if (moduleBase > nint.MaxValue - (nint)expected.RVA) return false;
             var address = moduleBase + (nint)expected.RVA;

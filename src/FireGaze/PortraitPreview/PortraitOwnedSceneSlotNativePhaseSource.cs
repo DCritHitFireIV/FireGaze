@@ -13,6 +13,7 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
     private PortraitOwnedSceneSlotPhase current;
     private PortraitOwnedSceneSlotRoots previousRoots;
     private int thread;
+    private int nativeCounterDepth;
     private long token, serial, request, session, managerGeneration;
     private bool bootstrapping;
 
@@ -46,7 +47,7 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
 
     private IDisposable? Enter(PortraitIdentity source, uint nativeFrame, long requestEpoch)
     {
-        if (!source.IsValid || source.Generation == 0 || requestEpoch <= 0) return null;
+        if (nativeCounterDepth != 0 || !source.IsValid || source.Generation == 0 || requestEpoch <= 0) return null;
         try
         {
             if (framework?.Invoke() != true || buildValidated?.Invoke() != true
@@ -102,6 +103,20 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
         }
     }
 
+    // Detached pre-write guard. It spans the entire actual native Original, so
+    // reentrant or concurrent source Render cannot reopen a phase while the
+    // counter write is pending. No native read/release occurs in either edge.
+    public IDisposable BeginCounterMutation()
+    {
+        lock (gate)
+        {
+            nativeCounterDepth = checked(nativeCounterDepth + 1);
+            Revoke();
+            managerGeneration = checked(managerGeneration + 1);
+            return new CounterMutation(this);
+        }
+    }
+
     public void EndRequest(long requestEpoch)
     {
         lock (gate) { if (request == requestEpoch) Revoke(); }
@@ -109,7 +124,7 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
 
     private bool Permitted()
     {
-        if (token == 0 || thread != Environment.CurrentManagedThreadId || request <= 0 || session <= 0) return false;
+        if (nativeCounterDepth != 0 || token == 0 || thread != Environment.CurrentManagedThreadId || request <= 0 || session <= 0) return false;
         try { return framework?.Invoke() == true && buildValidated?.Invoke() == true && sessionEpoch?.Invoke() == session; }
         catch (Exception) { return false; }
     }
@@ -130,5 +145,15 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
     {
         private int disposed;
         public void Dispose() { if (Interlocked.Exchange(ref disposed, 1) == 0) owner.Exit(token, owns); }
+    }
+
+    private sealed class CounterMutation(PortraitOwnedSceneSlotNativePhaseSource owner) : IDisposable
+    {
+        private int disposed;
+        public void Dispose()
+        {
+            if (Interlocked.Exchange(ref disposed, 1) != 0) return;
+            lock (owner.gate) { owner.Revoke(); owner.nativeCounterDepth--; }
+        }
     }
 }

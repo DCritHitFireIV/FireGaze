@@ -100,7 +100,10 @@ unsafe
             "an original exception records a throw edge without claiming a successful return");
     });
     Case("every typed original is invoked exactly once on failure", () => {
-        foreach (var phase in Enum.GetValues<PortraitNativeObservedPhase>()) {
+        // These wrappers expose the original four phase ABIs. Counter entries
+        // use the stable host gateway and have their own failure/uint tests.
+        foreach (var phase in new[] { PortraitNativeObservedPhase.ManagerRender, PortraitNativeObservedPhase.ManagerUpdateCandidate,
+            PortraitNativeObservedPhase.SceneCameraUpdate, PortraitNativeObservedPhase.SourceCharaViewRender }) {
             using var recorder = new PortraitNativePhaseObservation(timestamp: () => 0, timestampFrequency: 1000); recorder.TryStart(TimeSpan.FromSeconds(1));
             var wrap = new PortraitNativePhaseObservationWrappers(recorder); var count = 0;
             var expected = new InvalidOperationException("original " + phase); Exception? actual = null;

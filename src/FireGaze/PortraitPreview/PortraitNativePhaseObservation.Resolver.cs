@@ -26,7 +26,8 @@ internal interface IPortraitNativePhaseProcess
 /// is inert metadata, never permission to install a hook, allocate a character or run a scene
 /// method. Installation must atomically reserve its targets and revalidate their live entries.
 /// </summary>
-internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhaseProcess process)
+internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhaseProcess process,
+    PortraitNativePhaseTargetSet targetSet = PortraitNativePhaseTargetSet.PhaseObservation)
 {
     public bool TryResolve(out PortraitNativePhaseResolvedPlan? plan, out string reason)
     {
@@ -34,10 +35,11 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
         reason = "Native observation process, image, or runtime entry validation failed.";
         try
         {
-            if (nint.Size != 8 || !process.TryReadModule(out var module) || !ValidModule(module)
+            if (nint.Size != 8 || PortraitNativeCounterIngressContract.For(targetSet).Count == 0
+                || !process.TryReadModule(out var module) || !ValidModule(module)
                 || !HashMatches(module.FileImage, PortraitNativePhaseObservationBinding.EXE)
                 || !process.TryReadSDK(out var sdk) || !ValidSDK(sdk)
-                || !TryInspectExecutableImage(module.FileImage, module.ImageSize, out var diskEntries, out reason)) return false;
+                || !TryInspectExecutableImage(module.FileImage, module.ImageSize, targetSet, out var diskEntries, out reason)) return false;
             reason = "Runtime native entry, module identity, SDK resolution, or address reservation changed during qualification.";
             if (!ReadEntries(module, diskEntries, out var first)) return false;
             if (!process.TryReadModule(out var after) || after.Name != module.Name || after.BaseAddress != module.BaseAddress
@@ -46,7 +48,7 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                 || !ReadEntries(after, diskEntries, out var second)) return false;
             if (!first.Select(StableEntry).SequenceEqual(second.Select(StableEntry))
                 || !PortraitNativePhaseObservationBinding.TryBind(module.BaseAddress, PortraitNativePhaseObservationBinding.EXE,
-                    PortraitNativePhaseObservationBinding.SDK, second, out var targets, out reason)) return false;
+                    PortraitNativePhaseObservationBinding.SDK, second, targetSet, out var targets, out reason)) return false;
             // A reservation can appear inside the final read. This last sweep rejects
             // that observed drift; it cannot replace the installer's atomic lease.
             if (targets.Any(target => process.IsAddressReserved(target.Address)))
@@ -71,6 +73,14 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
     {
         ArgumentNullException.ThrowIfNull(isAddressReserved);
         return new PortraitNativePhaseObservationResolver(new PortraitNativePhaseCurrentProcess(isAddressReserved)).TryResolve(out plan, out reason);
+    }
+
+    internal static bool TryResolveCounterIngressCurrentProcess(Func<nint, bool> isAddressReserved,
+        out PortraitNativePhaseResolvedPlan? plan, out string reason)
+    {
+        ArgumentNullException.ThrowIfNull(isAddressReserved);
+        return new PortraitNativePhaseObservationResolver(new PortraitNativePhaseCurrentProcess(isAddressReserved),
+            PortraitNativePhaseTargetSet.CounterIngress).TryResolve(out plan, out reason);
     }
 
     private static bool ValidModule(PortraitNativePhaseProcessModule module) => module is not null
@@ -118,6 +128,10 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
 
     internal static bool TryInspectExecutableImage(byte[] image, int moduleSize,
         out IReadOnlyList<PortraitNativePhaseEntryEvidence> entries, out string reason)
+        => TryInspectExecutableImage(image, moduleSize, PortraitNativePhaseTargetSet.PhaseObservation, out entries, out reason);
+
+    internal static bool TryInspectExecutableImage(byte[] image, int moduleSize, PortraitNativePhaseTargetSet targetSet,
+        out IReadOnlyList<PortraitNativePhaseEntryEvidence> entries, out string reason)
     {
         entries = [];
         reason = "Executable PE entry or unwind contract does not match the audited native functions.";
@@ -132,7 +146,9 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             var tableOffset = FileOffset(headers, directory.RelativeVirtualAddress, directory.Size);
             if (tableOffset < 0) return false;
             var result = new List<PortraitNativePhaseEntryEvidence>();
-            foreach (var contract in PortraitNativePhaseObservationBinding.Inventory)
+            var inventory = PortraitNativeCounterIngressContract.For(targetSet);
+            if (inventory.Count == 0) return false;
+            foreach (var contract in inventory)
             {
                 var prefix = Convert.FromHexString(contract.Prefix);
                 if (contract.RVA > int.MaxValue || contract.RVA + prefix.Length > moduleSize) return false;
@@ -147,7 +163,18 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                     if (++count > 1) return false;
                     remaining = remaining[(match + 1)..];
                 }
-                if (count != 1 || !TryFunctionRoot(image, headers, tableOffset, directory.Size, contract.RVA, out var root)
+                if (count != 1) return false;
+                uint root;
+                if (contract.CompleteLeaf)
+                {
+                    // The entire pinned body includes its RET and trailing INT3.
+                    // These two audited leaves have no unwind owner. Accepting an
+                    // entry inside a larger unwind function would revoke the ABI proof.
+                    if (prefix.Length < 2 || prefix[^2] != 0xC3 || prefix[^1] != 0xCC
+                        || HasUnwindOverlap(image, tableOffset, directory.Size, contract.RVA, prefix.Length)) return false;
+                    root = contract.RVA;
+                }
+                else if (!TryFunctionRoot(image, headers, tableOffset, directory.Size, contract.RVA, out root)
                     || root != contract.RVA) return false;
                 result.Add(new(contract.Phase, 0, root, count, prefix, contract.Delegate, 0));
             }
@@ -160,6 +187,18 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             reason = "Executable inspection unavailable: " + ex.GetType().Name;
             return false;
         }
+    }
+
+    private static bool HasUnwindOverlap(byte[] image, int tableOffset, int tableSize, uint start, int length)
+    {
+        var end = (long)start + length;
+        for (var offset = tableOffset; offset < (long)tableOffset + tableSize; offset += 12)
+        {
+            var first = BinaryPrimitives.ReadUInt32LittleEndian(image.AsSpan(offset, 4));
+            var last = BinaryPrimitives.ReadUInt32LittleEndian(image.AsSpan(offset + 4, 4));
+            if (first >= last || first < end && last > start) return true;
+        }
+        return false;
     }
 
     private static int FileOffset(PEHeaders headers, int rva, int length)

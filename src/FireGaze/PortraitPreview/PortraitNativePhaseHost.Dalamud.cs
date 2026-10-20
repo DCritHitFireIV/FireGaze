@@ -79,7 +79,7 @@ internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider
 
     private static bool VerifyEntry(PortraitNativePhaseBoundTarget target)
     {
-        var contract = PortraitNativePhaseObservationBinding.Inventory.SingleOrDefault(entry => entry.Phase == target.Phase);
+        var contract = PortraitNativeCounterIngressContract.Find(target.Phase);
         if (contract is null || target.DelegateType != contract.Delegate) return false;
         var prefix = Convert.FromHexString(contract.Prefix); var observed = new byte[prefix.Length];
         return new PortraitNativePhaseCurrentProcess(_ => false).TryReadMemory(target.Address, observed) && observed.AsSpan().SequenceEqual(prefix);
