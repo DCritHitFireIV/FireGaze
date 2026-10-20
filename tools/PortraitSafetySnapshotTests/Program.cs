@@ -152,6 +152,11 @@ var feature = new PortraitPreviewFeature(() => featureClock, () => new(true, tru
 Check(FireGaze.Plugin.Framework.Dispatches == 0 && feature.EditorReads == 0 && feature.Captures == 0,
     "feature collector initialization does not resolve native state or schedule a callback");
 var actualSource = feature.Source();
+using var hostRuntime = JsonDocument.Parse(actualSource.ReadRuntimeJSON());
+Check(hostRuntime.RootElement.GetProperty("location").GetString()
+    == new SafetyPluginInterface().AssemblyLocation.FullName
+    && hostRuntime.RootElement.GetProperty("location").GetString() != typeof(FireGaze.Plugin).Assembly.Location,
+    "actual feature reports the host watched DLL path instead of a shadow-loaded assembly location");
 FireGaze.Plugin.Framework.IsInFrameworkUpdateThread = true;
 var freshEditor = actualSource.ReadEditor();
 Check(freshEditor.Availability == "Ready" && feature.EditorReads == 1 && feature.Captures == 1

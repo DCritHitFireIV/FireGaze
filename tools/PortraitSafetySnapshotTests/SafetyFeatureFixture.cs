@@ -90,7 +90,11 @@ namespace FireGaze.PortraitPreview
         internal bool HistoryPhotosView => false;
         internal void SetLight(long value) { showLight = true; lightPointerToken = value; lightTokenSerial = value; }
     }
-    internal sealed class SafetyPluginInterface { internal bool IsDev => true; }
+    internal sealed class SafetyPluginInterface
+    {
+        internal bool IsDev => true;
+        internal FileInfo AssemblyLocation => new(Path.Combine(Path.GetTempPath(), "FireGaze-watched-slot", "FireGaze.dll"));
+    }
     internal sealed class SafetyTarget
     {
         internal string SnapshotGameBuild => "audited-test-fixture";

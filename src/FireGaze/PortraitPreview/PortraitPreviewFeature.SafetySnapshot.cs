@@ -44,7 +44,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             return JsonSerializer.Serialize(new
             {
                 version = assembly.GetName().Version?.ToString(), mvid = assembly.ManifestModule.ModuleVersionId,
-                location = assembly.Location, instanceID = feature.safetySnapshotInstance,
+                location = feature.pluginInterface.AssemblyLocation.FullName, instanceID = feature.safetySnapshotInstance,
                 processID = Environment.ProcessId, isDev = feature.pluginInterface.IsDev,
                 sdkVersion = sdk.GetName().Version?.ToString(), sdkMvid = sdk.ManifestModule.ModuleVersionId,
                 gameBuild = feature.target.SnapshotGameBuild,
