@@ -72,6 +72,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         InitializeLiveCapture();
         InitializeLightingFit();
         InitializeNativeLive();
+        InitializeSourceCensus();
         window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
         diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
@@ -116,6 +117,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             historyRows, appearanceGroups,
             historyPhotos = photos.Diagnostics(),
             captureIsolation = captureIsolation.Mode,
+            sourceCensus = SourceCensusDiagnostics(),
             runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
             liveCapture = liveImageService?.Diagnostics,
             historyPhotosView = window.HistoryPhotosView, historyWindowOpen = window.HistoryWindowOpen,
@@ -159,6 +161,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (disposed) return;
         try
         {
+            using (runtimeTrace.Measure("update.source-census")) UpdateSourceCensus();
             using (runtimeTrace.Measure("update.retainer-loads")) inventory.ObserveRetainerLoads();
             using (runtimeTrace.Measure("update.validate")) session.Validate();
             using (runtimeTrace.Measure("update.lighting-fit")) PollLightingFit();
@@ -347,11 +350,17 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         Plugin.Chat.PrintError("[肖像同步预览] " + playerMessage);
     }
 
-    private void Mutate(System.Action action)
+    private void Mutate(System.Action action, bool preserveSourceCensus = false)
     {
         if (disposed) return;
-        if (Plugin.Framework.IsInFrameworkUpdateThread) action();
-        else _ = Plugin.Framework.RunOnFrameworkThread(() => { if (!disposed) action(); });
+        void Apply()
+        {
+            if (disposed) return;
+            if (!preserveSourceCensus) StopSourceCensusForMutation();
+            action();
+        }
+        if (Plugin.Framework.IsInFrameworkUpdateThread) Apply();
+        else _ = Plugin.Framework.RunOnFrameworkThread(Apply);
     }
 
     private void Draw()
@@ -365,12 +374,13 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         using (runtimeTrace.Measure("draw.photos")) photos.Draw(pointerHeld);
         using (runtimeTrace.Measure("draw.live-image")) DrawLiveCapture();
         using (runtimeTrace.Measure("draw.lighting-fit")) DrawLightingFit();
-        using (runtimeTrace.Measure("draw.windows")) windows.Draw();
+        using (runtimeTrace.Measure("draw.windows")) if (!SourceCensusBlocksOperations) windows.Draw();
     }
 
     public void OnCommand(string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (TrySourceCensusCommand(parts)) return;
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
         else if (parts is ["status"]) Plugin.Chat.Print("[肖像同步预览] " + Status);
@@ -476,6 +486,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         Task photoDrain = Task.CompletedTask;
         void Release()
         {
+            DisposeSourceCensus();
             if (!CancelLightingFitForEdit()) _ = target.AbortCapturedEditor();
             DisposeNativeLive();
             DisposeLightingFit();
@@ -484,7 +495,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             physicalDrain = Task.WhenAll(photos.DrainPhysicalAsync(),
                 liveImageService?.DrainPhysicalAsync() ?? Task.CompletedTask,
                 lightingFitCapture?.DrainPhysicalAsync() ?? Task.CompletedTask,
-                window.DrainPhysicalAsync(), nativeLivePhysicalDrain);
+                window.DrainPhysicalAsync(), nativeLivePhysicalDrain, sourceCensusPhysicalDrain);
             liveCaptureAPI?.Dispose();
             FlushEditing();
             if (!session.Close() && !target.AbortCapturedEditor())

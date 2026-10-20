@@ -26,7 +26,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void PollPhotos()
     {
-        if (LightingFitHistorySuppressed) return;
+        if (LightingFitHistorySuppressed || SourceCensusBlocksOperations) return;
         if (!ReferenceEquals(photoRows, historyRows))
         {
             photoRows = historyRows;

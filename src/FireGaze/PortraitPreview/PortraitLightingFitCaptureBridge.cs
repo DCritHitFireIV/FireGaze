@@ -32,6 +32,7 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
  private long drawSerial;
  private bool disposed;
  public bool IsBusy{get{lock(sync)return work is not null;}}
+ internal bool IsPhysicallyIdle=>physical.Pending==0&&physical.CleanupFailures==0;
  public int CleanupFailures=>physical.CleanupFailures;
  public string? LastCleanupFailureType=>physical.LastCleanupFailureType;
 

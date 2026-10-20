@@ -19,6 +19,7 @@ internal static class PhotoPhysicalDrainCases
         if (source.Calls != 1) throw new InvalidOperationException("physical fixture never started an actual capture");
         var managed = photos.BeginDispose();
         await managed.WaitAsync(TimeSpan.FromSeconds(5));
+        if (photos.IsPhysicallyIdle) throw new InvalidOperationException("census physical-idle admission escaped a detached photo copy");
         // Old production has no host physical drain: model exactly its completed host boundary.
         var physical = PhysicalDrain(photos);
         var pendingUntilCompletion = !physical.IsCompleted;
@@ -26,6 +27,7 @@ internal static class PhotoPhysicalDrainCases
         var texture = new FakeTexture();
         source.Complete(new(texture));
         await physical.WaitAsync(TimeSpan.FromSeconds(5));
+        if (!photos.IsPhysicallyIdle) throw new InvalidOperationException("confirmed photo release did not restore detached physical idle");
         for (var retry = 0; retry < 100 && texture.Disposes == 0; retry++) await Task.Delay(1);
         if (!pendingUntilCompletion) throw new InvalidOperationException("host physical drain completed while an actual provider copy was unfinished");
         if (!providerNotLogicallyCancelled) throw new InvalidOperationException("provider task can be logically cancelled before its physical work retires");

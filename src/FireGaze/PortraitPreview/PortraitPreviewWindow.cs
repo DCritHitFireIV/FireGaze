@@ -14,6 +14,7 @@ namespace FireGaze.PortraitPreview;
 /// <summary>The window reads snapshots; the feature owns Framework-thread changes and editor identity checks.</summary>
 internal interface IPortraitPreviewViewModel
 {
+    bool SourceCensusBlocksOperations => false;
     bool IsActive { get; }
     PortraitLook? Current { get; }
     string Status { get; }

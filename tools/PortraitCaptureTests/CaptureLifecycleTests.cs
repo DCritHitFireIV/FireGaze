@@ -73,9 +73,11 @@ internal static class CaptureLifecycleTests
    service.Request(PortraitImageScope.VisibleAdventurerPlate,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
    var before=DateTime.UtcNow;service.Dispose();Check(DateTime.UtcNow-before<TimeSpan.FromSeconds(1)&&!a.Pending.Task.IsCompleted,"unload never waits for Present or an unfinished source");
    var retirement=PhysicalDrain(service);var wasPending=!retirement.IsCompleted;
+   Check(!service.IsBusy&&!service.IsPhysicallyIdle,"logical live-image close cannot qualify census while its physical provider tail remains");
    var late=new CountingCaptureTexture();a.Complete(new(800,500,[new(late)],false));
    await Until(()=>late.Disposes==1);
    await retirement.WaitAsync(TimeSpan.FromSeconds(5));
+   Check(service.IsPhysicallyIdle,"live-image physical idle becomes true only after late resource release");
    Check(wasPending,"host live-image lifetime cannot retire while physical copy is unfinished");
    service.Dispose();service.Update();service.Draw();Check(late.Disposes==1&&a.Composes==0&&service.AcquireCurrent() is null,"late capture after unload is released once and never published");
   }

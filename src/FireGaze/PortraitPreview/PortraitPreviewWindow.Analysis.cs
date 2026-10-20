@@ -19,6 +19,7 @@ internal sealed partial class PortraitPreviewWindow
     private IDisposable? analysisPreviewLifetime;
     private readonly PortraitCaptureRetirement analysisPhysical = new();
     private int analysisResourcesDisposed;
+    internal bool IsSourceCensusIdle => !analysis.IsBusy && analysisPhysical.Pending == 0 && analysisPhysical.CleanupFailures == 0;
 
     private void DrawAnalysisWindow()
     {
@@ -78,6 +79,7 @@ internal sealed partial class PortraitPreviewWindow
 
     private void StartCurrentAnalysis()
     {
+        if (feature.SourceCensusBlocksOperations) { analysisInputStatus = "只读原生诊断正在运行，请结束后重试。"; return; }
         var scope = feature.LiveCaptureScope;
         if (analysisScope != scope)
         {

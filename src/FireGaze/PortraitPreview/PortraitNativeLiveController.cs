@@ -197,4 +197,5 @@ internal sealed class PortraitNativeLiveController : IDisposable
     }
 
     public Task DrainPhysicalAsync() => view.DrainPhysicalAsync();
+    internal bool IsPhysicallyIdle => view.IsPhysicallyIdle;
 }

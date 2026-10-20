@@ -35,8 +35,8 @@ internal interface IPortraitNativePhaseHostFactory
 /// native memory, install hooks, start a recorder or grant any scene admission.
 /// BeginRetirement must run before its plugin's asynchronous DisposeAsync waits;
 /// provider scope disposal is allowed only after WaitForRetirementAsync succeeds.
-/// This component has no production feature caller. Overlapping hook owners (including
-/// owned-scene Render) must join the same registry before that wiring is allowed. A Create
+/// Only the explicit one-attempt diagnostic wires this component into the Feature.
+/// Overlapping hook owners (including owned-scene Render) join the same registry. A Create
 /// failure with no returned handle currently has no attested production compensation and
 /// deliberately cannot complete retirement or authorize provider-scope disposal.
 /// </summary>

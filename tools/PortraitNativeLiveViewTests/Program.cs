@@ -51,9 +51,11 @@ Case("disable retires immediately and waits for all Draw borrowers", () =>
 {
     var source = new Source(); using var view = new PortraitNativeLiveView(source); view.SetEnabled(true); view.Update();
     view.TryBorrow(out var one); view.TryBorrow(out var two); view.SetEnabled(false); view.Update();
+    Check(!view.IsPhysicallyIdle,"census admission remains closed while a disabled native-live image has Draw borrowers");
     Check(!one!.TryGetImage(out _) && !two!.TryGetImage(out _) && !view.TryBorrow(out _), "disabled image becomes inaccessible to old and new draws");
     one.Dispose(); Check(source.Textures[0].Disposes == 0, "one remaining draw keeps its resource alive");
     two!.Dispose(); Check(source.Textures[0].Disposes == 1 && source.Calls == 1, "last draw releases resource and off updates do not acquire");
+    Check(view.IsPhysicallyIdle,"native-live physical idle is restored after its final Draw borrower releases");
 });
 Case("invalidation clears a published image without a new native call", () =>
 {

@@ -108,6 +108,10 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         get { lock (sync) return capture is not null || encoding is not null || writing is not null || maintenance is not null; }
     }
 
+    // A completed logical work slot can still own late provider cleanup.
+    internal bool IsPhysicallyIdle => physical.Pending == 0 && physical.CleanupFailures == 0
+        && loaded.InFlight == 0 && loaded.CleanupFailures == 0;
+
     private void PublishCacheMetadata()
     {
         Volatile.Write(ref imageKeys, cache.Keys.ToHashSet(StringComparer.Ordinal));

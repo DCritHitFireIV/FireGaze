@@ -18,7 +18,8 @@ using RTManager = FFXIVClientStructs.FFXIV.Client.Graphics.Render.RenderTargetMa
 internal static unsafe class SourceReturnCases
 {
     private static int checks, calls;
-    private static Action? sourceOriginal, counterOriginal, resourceOriginal;
+    internal static Action? sourceOriginal;
+    private static Action? counterOriginal, resourceOriginal;
     private static void Check(bool value, string message) { checks++; if (!value) throw new InvalidOperationException("FAIL: " + message); }
     internal static int Run()
     {
@@ -408,7 +409,7 @@ internal static unsafe class SourceReturnCases
     }
     private sealed class DisposeFailure(IDisposable actual) : IDisposable
     { public void Dispose() { actual.Dispose(); throw new IOException("external scope disposal fixture"); } }
-    private static PortraitNativePhaseHostResolve Resolve(PortraitNativePhaseTargetSet set)
+    internal static PortraitNativePhaseHostResolve Resolve(PortraitNativePhaseTargetSet set)
         => (Func<nint, bool> _, out PortraitNativePhaseResolvedPlan? plan, out string reason) => {
             var module = unchecked((nint)0x5C00000000L);
             plan = new(module, 0x3000000, PortraitNativePhaseObservationBinding.EXE, PortraitNativePhaseObservationBinding.SDK,
@@ -424,9 +425,12 @@ internal static unsafe class SourceReturnCases
     public static void CleanupNative(RTManager* manager) => resourceOriginal?.Invoke();
     public static byte RecreateNative(RTManager* manager) { resourceOriginal?.Invoke(); return 0xA7; }
     public static void DirectSource(CharaView* view, uint frame) { }
-    private sealed class Factory : IPortraitNativePhaseHostFactory
+    internal sealed class Factory : IPortraitNativePhaseHostFactory
     {
         internal readonly Dictionary<PortraitNativeObservedPhase, Hook> Hooks = [];
+        internal int Creates;
+        internal bool UnknownCreate = false;
+        internal Action? OnCreate;
         private readonly Dictionary<PortraitNativeObservedPhase, Delegate> detours = [];
         public string Identity => "external Hook boundary only";
         public bool TryQualifyStartDisabled(out string reason) { reason = "fixture"; return true; }
@@ -439,8 +443,11 @@ internal static unsafe class SourceReturnCases
             typeof(SourceReturnCases).GetMethod(target.Phase == PortraitNativeObservedPhase.SourceCharaViewRender ? nameof(DirectSource) : Method(target.Phase))!);
         public IPortraitNativePhaseHostHook Create(PortraitNativePhaseBoundTarget target, Type type, Delegate detour)
         {
-            detours.Add(target.Phase, detour); var hook = new Hook(target.Address, Delegate.CreateDelegate(type, typeof(SourceReturnCases).GetMethod(Method(target.Phase))!));
-            Hooks.Add(target.Phase, hook); return hook;
+            Creates++;
+            OnCreate?.Invoke();
+            if (UnknownCreate) throw new IOException("unknown Create fixture");
+            detours[target.Phase] = detour; var hook = new Hook(target.Address, Delegate.CreateDelegate(type, typeof(SourceReturnCases).GetMethod(Method(target.Phase))!));
+            Hooks[target.Phase] = hook; return hook;
         }
         internal byte Call(PortraitNativeObservedPhase phase, nint receiver, uint frame)
         {
@@ -452,7 +459,7 @@ internal static unsafe class SourceReturnCases
             return ((Func<Delegate, nint, uint, byte>)m.CreateDelegate(typeof(Func<Delegate, nint, uint, byte>)))(entry, receiver, frame);
         }
     }
-    private sealed class Hook(nint address, Delegate original) : IPortraitNativePhaseHostHook
+    internal sealed class Hook(nint address, Delegate original) : IPortraitNativePhaseHostHook
     {
         public nint Address => address; public Delegate Original => original; public string BackendName => "SafetyHook";
         public bool IsEnabled { get; private set; } public bool IsDisposed { get; private set; }

@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace FireGaze.PortraitPreview;
 
-// Issued independently of Render callbacks. No production issuer is connected;
-// positive detached fields alone do not qualify native scene creation.
+// Issued on Framework after independently frozen owner/thread evidence matches
+// passive source records. These fields never qualify native scene creation.
 internal sealed record PortraitSourceCensusQualification(PortraitIdentity Source, long OwnerEpoch, long SessionEpoch,
     long BuildEpoch, PortraitNativeThreadStamp Thread)
 {
@@ -34,7 +34,7 @@ internal sealed class PortraitSourceCensusQualifications
 /// <summary>
 /// Optional bounded observation consumer of the existing SourceRender Host.
 /// Construction reads no clocks/threads/native state, installs no hooks, and
-/// grants nothing. No production caller or qualification issuer is connected.
+/// grants nothing. The explicit one-attempt diagnostic is its only Feature caller.
 /// A complete DTO is historical data, never an idle reservation or scene lease.
 /// </summary>
 internal sealed class PortraitOwnedSceneSourceCensus : IPortraitNativeSourceReturnSink

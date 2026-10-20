@@ -72,6 +72,7 @@ internal sealed class PortraitNativeLiveView : IDisposable
     }
 
     public int DisposalFailures => physical.CleanupFailures;
+    internal bool IsPhysicallyIdle => physical.Pending == 0 && physical.CleanupFailures == 0;
     public Task DrainPhysicalAsync() => physical.Seal();
 
     public void SetEnabled(bool value)

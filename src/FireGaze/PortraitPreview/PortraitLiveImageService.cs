@@ -26,6 +26,7 @@ internal sealed class PortraitLiveImageService:IDisposable
  {this.api=api;gate=new(clock??(()=>DateTimeOffset.UtcNow));}
  public string? Error{get{lock(sync)return error;}}
  public bool IsBusy{get{lock(sync)return work is not null;}}
+ internal bool IsPhysicallyIdle=>physical.Pending==0&&physical.CleanupFailures==0;
  public PortraitLiveCaptureDiagnostics Diagnostics
  {
   get

@@ -14,7 +14,7 @@ using RenderTargetManager = FFXIVClientStructs.FFXIV.Client.Graphics.Render.Rend
 throw new Exception("FAIL: the native eight-slot reader has not been implemented.");
 #else
 return SourceReturnCases.Run() | ResourcePhaseCases.Run() | CounterPhaseCases.Run() | ContextLifetimeHookCases.Run() | ContextEnvironmentCases.Run() | ContextHookCases.Run() | Tests.Run() | PhaseCases.Run() | NativePhaseCases.Run() | EnvironmentCases.Run()
-    | HookCases.Run() | OwnedSceneIntegrationCases.Run() | OwnedReservationCases.Run();
+    | HookCases.Run() | OwnedSceneIntegrationCases.Run() | OwnedReservationCases.Run() | CensusFeatureCases.Run() | CensusDiagnosticCases.Run();
 
 internal static unsafe class Tests
 {

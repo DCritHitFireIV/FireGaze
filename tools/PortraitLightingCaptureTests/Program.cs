@@ -99,11 +99,13 @@ foreach(var phase in new[]{"copy","readback"})
  var before=DateTime.UtcNow;bridge.Dispose();Check(DateTime.UtcNow-before<TimeSpan.FromSeconds(1)&&!task.IsCompleted,phase+" unload never blocks on unfinished GPU work");
  var retirement=bridge.GetType().GetMethod("DrainPhysicalAsync")?.Invoke(bridge,null) as Task??Task.CompletedTask;
  var held=!retirement.IsCompleted;
+ Check(!bridge.IsPhysicallyIdle,phase+" census admission remains closed through the physical lighting tail");
  Texture? late=null;
  if(phase=="copy"){late=new Texture();a.Copy.SetResult(new(2,1,[new(late)]));}
  else r.Pending.SetResult([new(1,2,3,255),new(4,5,6,255)]);
  await Until(()=>task.IsCompleted);
  await retirement.WaitAsync(TimeSpan.FromSeconds(5));
+ Check(bridge.IsPhysicallyIdle,phase+" census physical idle is restored only after release");
  Check(held,phase+" host lifetime remains held until physical completion and late release");
  Check(task.IsFaulted&&(late?.Disposes??a.Outputs[0].Disposes)==1,phase+" late result after unload is released and cannot publish");_=task.Exception;
 }
