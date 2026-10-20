@@ -94,9 +94,9 @@ internal sealed class PortraitHistoryWriter : IDisposable
     {
         lock (gate)
         {
-            if (stopping) return Task.FromResult(lastSuccess);
             if (pending is { } queued) return queued.Completion.Task;
             if (inFlight is not null) return inFlight.Task;
+            if (stopping) return Task.FromResult(lastSuccess);
             if (failedDocument is not { } document) return Task.FromResult(lastSuccess);
             var completion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             pending = (++submitted, document, completion);

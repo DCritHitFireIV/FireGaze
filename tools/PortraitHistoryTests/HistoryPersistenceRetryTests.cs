@@ -146,7 +146,9 @@ internal static class HistoryPersistenceRetryTests
             var close = closing.BeginDispose();
             Check(step.Duration == TimeSpan.FromSeconds(1) && !close.IsCompleted && !boundaryDuringClose.IsCompleted,
                 "closing keeps the already accepted transient retry pending instead of falsely reporting success");
+            var joined = ReferenceEquals(boundaryDuringClose, closing.RetryAsync()) && !closing.RetryAsync().IsCompleted;
             step.Completion.SetResult();
+            Check(joined, "Retry during history close joins its accepted unfinished boundary instead of reporting a previous success");
             Check(await close.WaitAsync(TimeSpan.FromSeconds(5)) && await boundaryDuringClose && delayedFiles.Attempts == 2,
                 "a transient retry accepted before closing can complete its exact immutable document and drain");
         }
