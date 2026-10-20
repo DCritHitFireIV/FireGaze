@@ -36,6 +36,7 @@ internal sealed class PortraitOwnedScenePassiveDiagnostic
         if (frequency <= 0 || frequency > long.MaxValue / 300) throw new ArgumentOutOfRangeException(nameof(timestampFrequency));
     }
     internal PortraitOwnedScenePassiveDiagnosticSnapshot Snapshot => Volatile.Read(ref snapshot);
+    internal PortraitOwnedScenePassiveContextEvents? ContextEvents => Volatile.Read(ref run)?.Hooks?.PassiveContextEvents;
     internal bool BlocksOperations => Volatile.Read(ref run) is { } current && !current.Retired.Task.IsCompletedSuccessfully;
     internal Task DrainPhysicalAsync() => Volatile.Read(ref run) is { } current ? RetainUntilRetiredAsync(current) : Task.CompletedTask;
     private static async Task RetainUntilRetiredAsync(Run current)

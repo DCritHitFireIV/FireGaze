@@ -56,6 +56,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
         {
             state = state.State.ToString(), state.Attempt, state.CensusAttempt, state.Reason,
             safety = ReadOwnedPassiveSafetyState(), productionAdmission = false,
+            contextEvents = ownedPassive?.ContextEvents is { } events ? new
+            {
+                events.Installation, events.Capacity, events.Dropped, productionAdmission = false,
+                events = events.Events.Select(value => new { value.Sequence, kind = value.Kind.ToString(), value.Context, value.Flags,
+                    value.Result, value.OriginalReturned, value.EntryThread, value.ReturnThread, value.EnteredAt, value.ReturnedAt }),
+            } : null,
             sourceReturn = state.SourceReturn is { } result ? new
             {
                 state = result.State.ToString(), result.Installation, result.SessionEpoch,

@@ -112,6 +112,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
             installed = true;
             installation = Guid.NewGuid();
+            if (passiveOnly) Volatile.Write(ref passiveContextCollector, new PassiveContextCollector(installation));
             (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.BeginContextLifetimeBatch();
             return true;
         }
@@ -155,13 +156,25 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         {
             case PortraitOwnedSceneNativeKind.ConstructContext:
                 Add<ConstructContext>(factory, target, original => context => {
-                    nint result = 0; Original(() => result = original()(context));
-                    ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.ObserveContextConstructed(context, result));
-                    return result; }); break;
+                    var invocation = BeginPassiveContextEvent(); nint result = 0; var returned = false;
+                    try
+                    {
+                        Original(() => result = original()(context)); returned = true;
+                        ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.ObserveContextConstructed(context, result));
+                        return result;
+                    }
+                    finally { CompletePassiveContextEvent(invocation, PortraitOwnedScenePassiveContextEventKind.Construct, context, 0, result, returned); }
+                }); break;
             case PortraitOwnedSceneNativeKind.DestroyContext:
                 Add<DestroyContext>(factory, target, original => (context, flags) => {
-                    ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.ObserveContextDestroying(context));
-                    nint result = 0; Original(() => result = original()(context, flags)); return result; }); break;
+                    var invocation = BeginPassiveContextEvent(); nint result = 0; var returned = false;
+                    try
+                    {
+                        ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.ObserveContextDestroying(context));
+                        Original(() => result = original()(context, flags)); returned = true; return result;
+                    }
+                    finally { CompletePassiveContextEvent(invocation, PortraitOwnedScenePassiveContextEventKind.Destroy, context, flags, result, returned); }
+                }); break;
             case PortraitOwnedSceneNativeKind.ConfigureContext:
                 Add<ConfigureContext>(factory, target, original => (context, slot, type) => {
                     BeforeContext(context, ContextMutationKind.Configure, slot, type);
