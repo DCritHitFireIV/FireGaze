@@ -40,6 +40,8 @@ Fits(bounds, new(300,400), new(2,3), "tiny work areas still produce finite reach
 bounds = NearbyWindowLayout.Place(Vector2.Zero, new(800,600), new(float.NaN,float.PositiveInfinity), new(-1,float.NaN), new(float.NaN,-2), float.NaN);
 Fits(bounds, Vector2.Zero, new(800,600), "malformed remembered geometry is normalized without propagating NaN");
 NearbyWindowIntegrationCases.Run(Check);
+PortraitWindowPlacementCases.Run(Check);
+PortraitWorkspaceToolbarCases.Run(Check);
 #else
 Check(false, "child windows need bounded owner-relative placement");
 #endif

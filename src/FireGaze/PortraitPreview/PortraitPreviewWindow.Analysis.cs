@@ -29,7 +29,7 @@ internal sealed partial class PortraitPreviewWindow
         {
 
             ImGui.TextWrapped("基于当前成图，供构图与明暗参考。不会改动肖像。");
-            if (ImGui.Button("灯光拟合")) OpenLightingFit();
+            if (ImGui.Button("灯光拟合")) OpenLightingFit("FireGazePortraitAnalysis");
             var scope = feature.LiveCaptureScope;
             if (ImGui.RadioButton("肖像", scope == PortraitImageScope.Portrait))
                 feature.SetLiveCaptureScope(PortraitImageScope.Portrait);

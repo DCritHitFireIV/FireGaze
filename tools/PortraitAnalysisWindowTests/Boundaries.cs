@@ -149,7 +149,8 @@ namespace FireGaze.PortraitPreview
         private readonly PortraitHistoryPhotos? photos;
         public PortraitPreviewWindow(Model model, PortraitHistoryPhotos? photos = null) { feature = model; this.photos = photos; showAnalysis = true; }
         private static void ContinueToolbar(float right, float width) { }
-        private void OpenLightingFit() { }
+        public string? LightingFitOwner;
+        private void OpenLightingFit(string ownerID = "FireGazePortraitPreview") => LightingFitOwner = ownerID;
         public void Dispose() { DisposeAnalysisResources(); comparisonReference.Dispose(); }
     }
     internal sealed class Texture(int width, int height, nint handle) : IDalamudTextureWrap

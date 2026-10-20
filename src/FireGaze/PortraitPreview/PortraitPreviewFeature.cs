@@ -37,7 +37,6 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private string[] sourceSummary = [];
     private PortraitDye[] dyes = [];
     private string status = "请打开肖像编辑器";
-    private Vector2 buttonPosition;
     private bool editorAvailable;
     private DateTime nextInventoryRead;
     private bool disposed;
@@ -174,7 +173,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                 editorAvailable = target.TryResolve(out _, out var bounds, out _);
                 if (editorAvailable)
                 {
-                    buttonPosition = new(bounds.X + bounds.Width + 8, bounds.Y + 30);
+                    SetPreviewAnchorBounds(bounds);
                     window.SetOwnerBounds(bounds);
                 }
             }
@@ -362,20 +361,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         using var portraitSurface = FireGazeTheme.PushPortrait();
         pointerHeld = ImGui.IsMouseDown(ImGuiMouseButton.Left) || ImGui.IsMouseDown(ImGuiMouseButton.Right)
             || ImGui.IsMouseDown(ImGuiMouseButton.Middle);
-        if (editorAvailable)
-        {
-            var viewport = ImGui.GetMainViewport();
-            ImGui.SetNextWindowPos(viewport.Pos + buttonPosition, ImGuiCond.Always);
-            ImGui.SetNextWindowBgAlpha(1f);
-            if (ImGui.Begin("###FireGazePortraitAnchor", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoSavedSettings | ImGuiWindowFlags.NoFocusOnAppearing))
-            {
-                if (ImGui.Button(IsActive ? "关闭预览" : "FireGaze预览"))
-                {
-                    if (IsActive) ClosePreview(); else OpenPreview();
-                }
-            }
-            ImGui.End();
-        }
+        DrawPreviewAnchor();
         using (runtimeTrace.Measure("draw.photos")) photos.Draw(pointerHeld);
         using (runtimeTrace.Measure("draw.live-image")) DrawLiveCapture();
         using (runtimeTrace.Measure("draw.lighting-fit")) DrawLightingFit();

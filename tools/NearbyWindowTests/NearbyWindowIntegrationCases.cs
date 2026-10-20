@@ -64,10 +64,12 @@ internal static class NearbyWindowIntegrationCases
 
 namespace Dalamud.Bindings.ImGui
 {
-    internal enum ImGuiCond { Appearing }
+    internal enum ImGuiCond { Appearing, Always }
+    [Flags]
+    internal enum ImGuiWindowFlags { NoDecoration = 1, AlwaysAutoResize = 2, NoSavedSettings = 4, NoFocusOnAppearing = 8 }
     internal readonly record struct ImGuiViewportPtr(uint ID, Vector2 WorkPos, Vector2 WorkSize)
-    { public bool IsNull => ID == 0; }
-    internal static class ImGui
+    { public bool IsNull => ID == 0; public Vector2 Pos => WorkPos; }
+    internal static partial class ImGui
     {
         internal static readonly ImGuiViewportPtr Main = new(1, Vector2.Zero, new(1920,1080));
         internal static readonly Dictionary<uint,ImGuiViewportPtr> Known = new() { [1]=Main, [2]=new(2,new(2000,100),new(1600,900)), [3]=new(3,new(5000,200),new(800,600)) };
@@ -82,9 +84,24 @@ namespace Dalamud.Bindings.ImGui
         public static ImGuiViewportPtr FindViewportByID(uint id) => Known.GetValueOrDefault(id);
         public static Vector2 GetWindowPos() => Position;
         public static Vector2 GetWindowSize() => Size;
-        public static float GetFontSize() => 17;
+        public static float GetFontSize() => 17 * FontScale;
         public static int GetFrameCount() => Frame;
         public static bool Begin(string title, ref bool open) => BeginVisible;
+        public static bool Begin(string title, ImGuiWindowFlags flags) => BeginVisible;
+        public static bool Button(string label) => Button(label, Vector2.Zero);
+        public static Vector2 CalcTextSize(string label) => new(label.Split("##")[0].Length * 8 * FontScale, 17 * FontScale);
+        public static float GetFrameHeight() => 25 * FontScale;
+        public static Style GetStyle() => new();
+        internal sealed class Style
+        {
+            public Vector2 FramePadding => new Vector2(4) * FontScale;
+            public Vector2 ItemSpacing => new Vector2(8, 4) * FontScale;
+            public Vector2 ItemInnerSpacing => new Vector2(4) * FontScale;
+            public Vector2 WindowPadding => new(8);
+            public Vector2 WindowMinSize => new(32);
+        }
+        public static void SetNextWindowBgAlpha(float alpha) { }
+        public static void End() { }
         public static void SetNextWindowViewport(uint id) => NextViewport=id;
         public static void SetNextWindowPos(Vector2 position, ImGuiCond condition, Vector2 pivot=default) { NextPosition=position; PositionCondition=condition; }
         public static void SetNextWindowSize(Vector2 size, ImGuiCond condition) => NextSize=size;

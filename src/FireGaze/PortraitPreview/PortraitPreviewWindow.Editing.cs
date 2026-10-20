@@ -25,60 +25,10 @@ internal sealed partial class PortraitPreviewWindow
         showHistory = true;
     }
 
-    private void DrawUndoRedo()
-    {
-        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        using (UiHelpers.Disabled(!feature.CanUndo))
-        {
-            if (ImGui.Button("撤回")) feature.Undo();
-        }
-        ContinueToolbar(right, ImGui.CalcTextSize("重做").X + ImGui.GetStyle().FramePadding.X * 2);
-        using (UiHelpers.Disabled(!feature.CanRedo))
-        {
-            if (ImGui.Button("重做")) feature.Redo();
-        }
-    }
-
-    private static void ContinueToolbar(float right, float nextWidth)
-    {
-        var gap = ImGui.GetStyle().ItemSpacing.X;
-        if (PortraitPreviewLayout.FitsInline(right, ImGui.GetItemRectMax().X, nextWidth, gap))
-            ImGui.SameLine(0, gap);
-    }
-
-    private void DrawEditingToolbar()
-    {
-        ImGui.PushID("PortraitEditingToolbar");
-        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        DrawUndoRedo();
-        ContinueToolbar(right, ImGui.CalcTextSize("历史记录").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("历史记录")) showHistory = !showHistory;
-        ImGui.PopID();
-    }
-
-    private void DrawPreviewSettings()
-    {
-        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        DrawGlamourPlateEntry();
-        ContinueToolbar(right, ImGui.CalcTextSize("同步铭牌预览").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X);
-        ImGui.PushID("PortraitEditingToolbar");
-        var sync = feature.SyncPlate;
-        if (ImGui.Checkbox("同步铭牌预览", ref sync)) feature.SetSyncPlate(sync);
-        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("仅同步自己看到的铭牌预览。关闭预览后还原，不会保存到铭牌。");
-        ImGui.PopID();
-        ContinueToolbar(right, ImGui.CalcTextSize("动态肖像画面").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X);
-        DrawNativeLiveSetting();
-        ContinueToolbar(right, ImGui.CalcTextSize("仅本地 · 关闭后还原").X);
-        ImGui.TextDisabled("仅本地 · 关闭后还原");
-    }
-
     private void DrawHistoryPopup()
     {
         if (!showHistory) return;
-        FireGazeWindowPlacement.Prepare("FireGazePortraitHistory", new Vector2(460, 570) * Scale, Scale, "FireGazePortraitPreview");
-        var workArea = ImGui.GetMainViewport().WorkSize;
-        ImGui.SetNextWindowSizeConstraints(Vector2.Zero,
-            Vector2.Min(PortraitPopupLayout.MaximumSize(workArea, Scale), new Vector2(960, 1040) * Scale));
+        PrepareHistoryWindow();
         if (FireGazeWindowPlacement.Begin("肖像历史记录###FireGazePortraitHistory", ref showHistory, "FireGazePortraitHistory"))
         {
 

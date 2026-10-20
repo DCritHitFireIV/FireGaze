@@ -66,11 +66,18 @@ internal static class FireGazeWindowPlacement
         ImGui.SetNextWindowPos(Vector2.Clamp(center, lower, upper), ImGuiCond.Appearing, new(.5f));
     }
 
+    internal static Vector2 PreparedWorkSize
+    {
+        get
+        {
+            var viewport = ImGui.FindViewportByID(preparedViewportID);
+            return viewport.IsNull ? ImGui.GetMainViewport().WorkSize : viewport.WorkSize;
+        }
+    }
+
     internal static void Constrain(Vector2 minimum, Vector2 maximum, float scale)
     {
-        var viewport = ImGui.FindViewportByID(preparedViewportID);
-        if (viewport.IsNull) viewport = ImGui.GetMainViewport();
-        var cap = Vector2.Max(Vector2.One, viewport.WorkSize - new Vector2(24 * scale));
+        var cap = Vector2.Max(Vector2.One, PreparedWorkSize - new Vector2(24 * scale));
         var upper = Vector2.Min(cap, maximum);
         ImGui.SetNextWindowSizeConstraints(Vector2.Min(minimum, upper), upper);
     }

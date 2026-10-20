@@ -21,45 +21,6 @@ internal sealed partial class PortraitPreviewWindow
 
     public void OpenFavorites() => showFavorites = true;
 
-    private void DrawLibraryToolbar()
-    {
-        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        ContinueToolbar(right, ImGui.CalcTextSize("收藏").X + ImGui.GetStyle().FramePadding.X * 2 + ImGui.GetFrameHeight());
-        ImGui.BeginGroup();
-        if (ImGui.Button("收藏###PortraitFavoriteCurrent"))
-            feature.SaveFavorite($"肖像 {DateTime.Now:yyyy-MM-dd HH:mm:ss}", []);
-        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("收藏当前预览，之后可以重新载入");
-        ImGui.SameLine(0, 0);
-        if (ImGui.ArrowButton("###PortraitFavoriteMenu", ImGuiDir.Down)) ImGui.OpenPopup("###PortraitFavoriteActions");
-        if (ImGui.BeginPopup("###PortraitFavoriteActions"))
-        {
-            if (ImGui.MenuItem("我的收藏")) showFavorites = true;
-            ImGui.EndPopup();
-        }
-        ImGui.EndGroup();
-    }
-
-    private void DrawWorkspaceTools()
-    {
-        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        ContinueToolbar(right, ImGui.CalcTextSize("空间参照").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("空间参照")) showSpaceLight = true;
-        ContinueToolbar(right, ImGui.CalcTextSize("画面分析").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("画面分析")) showAnalysis = true;
-    }
-
-    private void DrawGlamourPlateEntry()
-    {
-        var width = Math.Min(198 * Scale, ImGui.GetContentRegionAvail().X);
-        UiHelpers.PushPrimaryButton();
-        try
-        {
-            if (ImGui.Button("投影模板###PortraitPlateSwitcher", new Vector2(width, ImGui.GetFrameHeight())))
-                showGlamourPlates = true;
-        }
-        finally { UiHelpers.PopPrimaryButton(); }
-    }
-
     private void DrawLibraryPopups()
     {
         DrawFavoritesWindow();

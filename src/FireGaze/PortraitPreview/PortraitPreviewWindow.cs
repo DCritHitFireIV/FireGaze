@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
-using Dalamud.Interface.Utility;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
@@ -169,18 +168,6 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         ClearAnalysisComparison();
     }
 
-    public override void PreDraw()
-    {
-        var bounds = PortraitWindowLayout.ForViewport(ImGui.GetMainViewport().WorkSize, ImGuiHelpers.GlobalScale);
-        var scale = ImGuiHelpers.GlobalScale;
-        NearbyWindowBounds? anchor = ownerBounds is { } owner
-            ? new NearbyWindowBounds(ImGui.GetMainViewport().Pos + new Vector2(owner.X, owner.Y), new(owner.Width, owner.Height)) : null;
-        var placement = FireGazeWindowPlacement.Prepare("FireGazePortraitPreview", bounds.Preferred * scale, scale, "FireGaze", anchor);
-        Size = placement.Size / scale;
-        SizeCondition = ImGuiCond.Appearing;
-        SizeConstraints = new WindowSizeConstraints { MinimumSize = bounds.Minimum, MaximumSize = bounds.Maximum };
-    }
-
     public override void Draw()
     {
         if (disposed) return;
@@ -196,19 +183,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             return;
         }
 
-        DrawEditingToolbar();
-        DrawLibraryToolbar();
-        DrawPreviewSettings();
-        DrawNativeLivePreview();
-        ImGui.Separator();
-
-        ImGui.BeginGroup();
-        if (DrawTab("装备", !appearanceTab, true)) appearanceTab = false;
-        ImGui.SameLine();
-        if (DrawTab("美容师", appearanceTab, true)) appearanceTab = true;
-        ImGui.EndGroup();
-        DrawWorkspaceTools();
-        ImGui.Separator();
+        DrawWorkspaceHeader();
 
         if (appearanceTab)
         {
@@ -254,18 +229,6 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     }
 
     private static float Scale => ImGui.GetFontSize() / 17f;
-
-    private bool DrawTab(string text, bool active, bool enabled)
-    {
-        var size = new Vector2(88, 44) * Scale;
-        bool clicked;
-        using (UiHelpers.Disabled(!enabled))
-        {
-            clicked = FireGazeSymbols.NeutralButton($"{text}###PortraitTab{text}", size, active);
-            FireGazeSymbols.DrawSelection(ImGui.GetItemRectMin(), ImGui.GetItemRectMax(), active);
-        }
-        return enabled && clicked;
-    }
 
     private void DrawSlots(PortraitLook current)
     {

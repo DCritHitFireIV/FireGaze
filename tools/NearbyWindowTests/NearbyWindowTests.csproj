@@ -2,10 +2,21 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants Condition="Exists('../../src/FireGaze/UI/NearbyWindowLayout.cs')">$(DefineConstants);HAS_NEARBY_WINDOW_LAYOUT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/FireGaze/UI/NearbyWindowLayout.cs" Link="NearbyWindowLayout.cs" Condition="Exists('../../src/FireGaze/UI/NearbyWindowLayout.cs')" />
     <Compile Include="../../src/FireGaze/UI/FireGazeWindowPlacement.cs" Link="FireGazeWindowPlacement.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.Placement.cs" Link="Window.Placement.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.Anchor.cs" Link="Feature.Anchor.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitWindowLayout.cs" Link="PortraitWindowLayout.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightWindowLayout.cs" Link="PortraitLightWindowLayout.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPopupLayout.cs" Link="PortraitPopupLayout.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.Toolbar.cs" Link="Window.Toolbar.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewWindow.NativeLive.cs" Link="Window.NativeLive.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewPresentation.cs" Link="PortraitPreviewPresentation.cs" />
+    <Compile Include="../../src/FireGaze/UI/FireGazeSymbols.cs" Link="FireGazeSymbols.cs" />
+    <Compile Include="../../src/FireGaze/UI/FireGazePalette.cs" Link="FireGazePalette.cs" />
   </ItemGroup>
 </Project>

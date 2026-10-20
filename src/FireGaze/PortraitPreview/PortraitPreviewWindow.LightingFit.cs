@@ -12,13 +12,11 @@ internal sealed partial class PortraitPreviewWindow
     private Vector2? lightingRegionStart;
     private string lightingRegionSource = "";
     private bool lightingSubjectCurrent;
-    public void OpenLightingFit() { feature.SetLiveCaptureScope(PortraitImageScope.Portrait); showLightingFit=true; }
 
     private void DrawLightingFitWindow()
     {
         if (!showLightingFit) return;
-        FireGazeWindowPlacement.Prepare("FireGazePortraitLightingFit", new Vector2(500, 740) * Scale, Scale, "FireGazePortraitPreview");
-        FireGazeWindowPlacement.Constrain(new Vector2(360, 380) * Scale, ImGui.GetMainViewport().WorkSize, Scale);
+        PrepareLightingFitWindow();
         if (FireGazeWindowPlacement.Begin("色彩曲线###FireGazePortraitLightingFit", ref showLightingFit, "FireGazePortraitLightingFit"))
         {
 

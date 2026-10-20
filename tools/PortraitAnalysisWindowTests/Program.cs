@@ -32,6 +32,14 @@ static double Contrast(Vector4 left, Vector4 right)
 }
 
 {
+    using var window = new PortraitPreviewWindow(new Model());
+    ImGui.Click = "灯光拟合";
+    Invoke(window, "DrawAnalysisWindow");
+    Check(window.LightingFitOwner == "FireGazePortraitAnalysis",
+        "analysis curve button passes the actual analysis window as the opener");
+}
+
+{
     var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = new(20, 32, 5) };
     using var window = new PortraitPreviewWindow(model);
     Invoke(window, "StartCurrentAnalysis"); await Drain(window);
