@@ -33,11 +33,11 @@ internal sealed class PortraitHistoryWriter : IDisposable
 {
     private readonly object gate = new();
     private readonly SemaphoreSlim signal = new(0);
-    private readonly List<(long Sequence, TaskCompletionSource<bool> Completion)> waiters = [];
     private readonly string path;
     private readonly int byteLimit;
     private readonly Task worker;
-    private (long Sequence, PortraitHistoryWriteDocument Document)? pending;
+    private (long Sequence, PortraitHistoryWriteDocument Document, TaskCompletionSource<bool> Completion)? pending;
+    private TaskCompletionSource<bool>? inFlight;
     private long submitted;
     private long completed;
     private bool stopping;
@@ -59,7 +59,11 @@ internal sealed class PortraitHistoryWriter : IDisposable
         {
             if (stopping || document.Length > byteLimit) return false;
             var needsSignal = pending is null;
-            pending = (++submitted, document);
+            // Every superseded pending document shares its next physical publication.
+            // Keep that boundary rather than accumulating a waiter for every FlushAsync.
+            var completion = pending?.Completion
+                ?? new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            pending = (++submitted, document, completion);
             if (needsSignal) signal.Release();
             return true;
         }
@@ -70,9 +74,9 @@ internal sealed class PortraitHistoryWriter : IDisposable
         lock (gate)
         {
             if (completed >= submitted) return Task.FromResult(lastSuccess);
-            var completion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
-            waiters.Add((submitted, completion));
-            return completion.Task;
+            // At most one physical write and one coalesced pending generation exist.
+            // Returning their shared tasks creates no per-call waiter or async state.
+            return pending is { } request ? request.Completion.Task : inFlight!.Task;
         }
     }
 
@@ -111,7 +115,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
         while (true)
         {
             await signal.WaitAsync().ConfigureAwait(false);
-            (long Sequence, PortraitHistoryWriteDocument Document) request;
+            (long Sequence, PortraitHistoryWriteDocument Document, TaskCompletionSource<bool> Completion) request;
             lock (gate)
             {
                 if (pending is not { } value)
@@ -121,6 +125,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
                 }
                 request = value;
                 pending = null;
+                inFlight = request.Completion;
             }
             string? failure = null;
             try { Write(request.Document); }
@@ -130,12 +135,8 @@ internal sealed class PortraitHistoryWriter : IDisposable
                 completed = request.Sequence;
                 lastSuccess = failure is null;
                 lastError = failure;
-                for (var index = waiters.Count - 1; index >= 0; index--)
-                {
-                    if (waiters[index].Sequence > completed) continue;
-                    waiters[index].Completion.TrySetResult(lastSuccess);
-                    waiters.RemoveAt(index);
-                }
+                request.Completion.TrySetResult(lastSuccess);
+                inFlight = null;
                 if (stopping && pending is null) return;
             }
         }
