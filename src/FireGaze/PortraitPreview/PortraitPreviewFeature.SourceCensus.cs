@@ -11,6 +11,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool sourceCensusSubscribed;
 
     public bool SourceCensusBlocksOperations => sourceCensus?.BlocksOperations == true;
+    private PortraitSourceCensusSafetyState ReadSourceCensusSafetyState()
+        => sourceCensus?.ReadSafetyState() ?? PortraitSourceCensusSafetyState.Unknown;
 
     private void InitializeSourceCensus(PortraitSourceCensusDiagnostic? diagnostic = null)
     {

@@ -35,6 +35,41 @@ Check(cold.Calls.Count == 0, "collector construction executes no source, native,
 var good = new FakeSource();
 var normal = Read(good);
 Check(normal.GetProperty("status").GetString() == "Complete", "fresh stable complete evidence is available");
+var censusMissing = Read(new FakeSource { Version = "1.5.0.42" });
+Check(censusMissing.GetProperty("status").GetString() == "Partial"
+    && censusMissing.GetProperty("unavailableReasons").EnumerateArray().Any(value => value.GetString() == "source-census-unavailable"),
+    "new runtime cannot omit source census physical ownership evidence");
+string CensusManaged(bool active, Action<JsonObject>? edit = null)
+{
+    var managed = JsonNode.Parse(FakeSource.Managed(false))!.AsObject();
+    var host = new { state = active ? "Observing" : "Retired", hooks = active ? 4 : 0, inFlight = 0,
+        reservationHeld = active, failed = false };
+    managed["sourceCensus"] = JsonSerializer.SerializeToNode(new { known = true, state = active ? "Armed" : "Off", attempt = 1,
+        blocksOperations = active, physicalDrainCompleted = !active, source = host, counters = host, resources = host,
+        productionAdmission = false });
+    edit?.Invoke(managed["sourceCensus"]!.AsObject()); return managed.ToJsonString();
+}
+foreach (var activeCensus in new[] { false, true })
+{
+    var value = Read(new FakeSource { Version = "1.5.0.42", ManagedBefore = CensusManaged(activeCensus) });
+    Check(value.GetProperty("status").GetString() == "Complete"
+        && value.GetProperty("managed").GetProperty("sourceCensus").GetProperty("blocksOperations").GetBoolean() == activeCensus,
+        "complete census evidence preserves physical busy/idle for the external guard: " + activeCensus);
+}
+foreach (var mutation in new Action<JsonObject>[] {
+    value => value["known"] = false,
+    value => value["state"] = "Unknown",
+    value => value["blocksOperations"] = true,
+    value => value["source"] = null,
+    value => value["source"]!["inFlight"] = -1,
+    value => value["source"]!["hooks"] = 1,
+    value => value["counters"]!["reservationHeld"] = true,
+    value => value["resources"]!["failed"] = true,
+    value => value["productionAdmission"] = true })
+    Check(Partial(new FakeSource { Version = "1.5.0.42", ManagedBefore = CensusManaged(false, mutation) }, "source-census-unavailable"),
+        "new runtime refuses missing, malformed or falsely drained native ownership evidence");
+Check(Partial(new FakeSource { Version = "1.5.0.42", ManagedBefore = CensusManaged(true), ManagedAfter = CensusManaged(false) }, "managed-changed"),
+    "physical census retirement transition during the two managed reads is not a stable snapshot");
 Check(good.Calls.SequenceEqual(["clock", "runtime", "boundary", "editor", "managed", "editor", "managed", "boundary", "clock"]),
     "two complete confirmations occur in one already-owned Framework callback without mutation work");
 Check(normal.GetProperty("sequence").GetInt64() == 17 && normal.GetProperty("runtime").GetProperty("mvid").GetString() == "mvid-current",
@@ -167,6 +202,16 @@ Check(feature.ConfigureLease(), "feature fixture establishes the original lease 
 featureClock = TimeSpan.FromSeconds(61);
 using var managedRead = JsonDocument.Parse(actualSource.ReadManagedJSON());
 var currentManaged = managedRead.RootElement;
+Check(currentManaged.TryGetProperty("sourceCensus", out var censusUnknown)
+    && !censusUnknown.GetProperty("known").GetBoolean(),
+    "uninitialized actual controller is unknown rather than manufactured idle");
+feature.CensusSafety = new(true, "Retiring", 3, true, false, new("Retiring", 4, 1, true, false),
+    new("Retired", 0, 0, false, false), new("Retired", 0, 0, false, false));
+using var physicalManaged = JsonDocument.Parse(actualSource.ReadManagedJSON());
+Check(physicalManaged.RootElement.GetProperty("sourceCensus").GetProperty("source").GetProperty("inFlight").GetInt32() == 1
+    && physicalManaged.RootElement.GetProperty("sourceCensus").GetProperty("blocksOperations").GetBoolean()
+    && !physicalManaged.RootElement.GetProperty("sourceCensus").GetProperty("physicalDrainCompleted").GetBoolean(),
+    "actual formal adapter serializes physical tail instead of treating logical stop as idle");
 Check(currentManaged.GetProperty("captureIsolation").GetString() == "off"
     && feature.Lease.ConfiguredMode == "history" && feature.Lease.ExpiresAt == TimeSpan.FromSeconds(60),
     "actual adapter uses Peek without expiring or refreshing the stored lease");
@@ -221,12 +266,13 @@ sealed class FakeSource : IPortraitSafetySnapshotSource
     public Func<PortraitSafetyEditorSample, PortraitSafetyEditorSample>? ConfirmationOverride;
     public string ManagedBefore = Managed(false);
     public string? ManagedAfter;
+    public string Version = "1.5.0.37";
     private int boundaries, editors, managed;
     public bool IsFrameworkThread => Framework;
     public bool IsDisposed => Disposed;
     void Call(string name) { Calls.Add(name); if (ThrowAt == name) throw new InvalidOperationException(); }
     public long Timestamp() { Call("clock"); return Calls.Count; }
-    public string ReadRuntimeJSON() { Call("runtime"); return "{\"version\":\"1.5.0.37\",\"mvid\":\"mvid-current\",\"instanceID\":\"instance-current\"}"; }
+    public string ReadRuntimeJSON() { Call("runtime"); return JsonSerializer.Serialize(new { version = Version, mvid = "mvid-current", instanceID = "instance-current" }); }
     public PortraitSafetyBoundary ReadBoundary()
     {
         Call("boundary");

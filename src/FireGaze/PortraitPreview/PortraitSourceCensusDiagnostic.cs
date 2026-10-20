@@ -54,6 +54,23 @@ internal sealed class PortraitSourceCensusDiagnostic
     internal bool IsActive => Snapshot.State is PortraitSourceCensusDiagnosticState.ObservingThread or PortraitSourceCensusDiagnosticState.Armed;
     internal bool BlocksOperations => Volatile.Read(ref run) is { } active && !active.Retired.Task.IsCompleted;
 
+    internal PortraitSourceCensusSafetyState ReadSafetyState()
+    {
+        var current = Volatile.Read(ref run);
+        if (current is null) return new(true, "Off", 0, false, true, null, null, null);
+        var state = Snapshot;
+        static PortraitSourceCensusSafetyHost ReadHost(PortraitNativePhaseHost host)
+        {
+            var value = host.ReadCensusSafetyState();
+            return new(value.State, value.Hooks, value.InFlight, value.ReservationHeld, value.Failed);
+        }
+        var source = ReadHost(current.Source);
+        var counters = ReadHost(current.Counters);
+        var resources = ReadHost(current.Resources);
+        var drained = current.Retired.Task.IsCompletedSuccessfully;
+        return new(true, state.State.ToString(), current.Attempt, !drained, drained, source, counters, resources);
+    }
+
     internal bool TryStart(out string reason)
     {
         reason = "Run on Framework after the previous diagnostic has retired.";

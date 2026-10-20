@@ -52,6 +52,13 @@ internal sealed partial class PortraitNativePhaseHost
     internal PortraitNativePhaseHostHealth Health => Volatile.Read(ref health);
     internal PortraitNativePhaseCapture? SourceCapture => observation.ActiveCapture;
 
+    internal (string State, int Hooks, int InFlight, bool ReservationHeld, bool Failed) ReadCensusSafetyState()
+    {
+        lock (gate)
+            return (state.ToString(), entries.Count(entry => entry.Hook is not null && !entry.Released),
+                entries.Sum(entry => entry.Gateway.ActiveCount), reservation is not null, Health.Failed);
+    }
+
     internal bool TryAttachSourceReturn(IPortraitNativeSourceReturnSink sink)
     {
         ArgumentNullException.ThrowIfNull(sink);

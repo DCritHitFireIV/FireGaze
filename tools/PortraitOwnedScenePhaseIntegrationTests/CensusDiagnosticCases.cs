@@ -20,7 +20,13 @@ internal static unsafe class CensusDiagnosticCases
     private static void DefaultOff()
     {
         using var f = new DiagnosticFixture();
+        Check(f.Controller.GetType().GetMethod("ReadSafetyState", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic) is not null,
+            "controller exposes a read-only fresh physical retirement sample for formal safety evidence");
         f.Controller.Update(); _ = f.Controller.Snapshot;
+        var safety = f.Controller.ReadSafetyState();
+        Check(safety is { Known: true, State: "Off", Attempt: 0, BlocksOperations: false, PhysicalDrainCompleted: true,
+            Source: null, Counters: null, Resources: null, ProductionAdmission: false },
+            "never-started real controller has no physical Host ownership");
         Check(f.Factory.Creates == 0 && f.ThreadReads == 0 && f.ContextReads == 0 && f.ClockReads == 0 && f.Memory.Memory.Reads == 0,
             "construction and inactive polling perform no native/thread/context/clock reads");
     }
@@ -30,6 +36,10 @@ internal static unsafe class CensusDiagnosticCases
         Check(f.Controller.TryStart(out _), "explicit Framework start installs the actual eight-target batches");
         Check(f.Factory.Creates == 8 && f.ThreadBeforeHooks && f.Controller.Snapshot.State == PortraitSourceCensusDiagnosticState.ObservingThread,
             "expected Framework thread is independently frozen before Hook creation");
+        var activeSafety = f.Controller.ReadSafetyState();
+        Check(activeSafety is { BlocksOperations: true, PhysicalDrainCompleted: false, Source: { Hooks: 4, ReservationHeld: true },
+            Counters: { Hooks: 2, ReservationHeld: true }, Resources: { Hooks: 2, ReservationHeld: true } },
+            "formal lifetime evidence includes all eight installed Hooks and all three physical reservations");
         f.Source(0);
         Check(f.Memory.Memory.Reads == 0 && f.Controller.Snapshot.Result is null, "first real frame-zero return only records passive evidence");
         f.Controller.Update();
@@ -41,6 +51,11 @@ internal static unsafe class CensusDiagnosticCases
         Check(f.Controller.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(5)), "successful one-shot attempt retires all three batches");
         Check(f.Controller.Snapshot.State == PortraitSourceCensusDiagnosticState.Off && !f.Controller.IsActive,
             "successful attempt never auto-rearms and becomes off after confirmed retirement");
+        Check(f.Controller.ReadSafetyState() is { BlocksOperations: false, PhysicalDrainCompleted: true,
+            Source: { State: "Retired", Hooks: 0, InFlight: 0, ReservationHeld: false },
+            Counters: { State: "Retired", Hooks: 0, InFlight: 0, ReservationHeld: false },
+            Resources: { State: "Retired", Hooks: 0, InFlight: 0, ReservationHeld: false } },
+            "successful physical completion reports retired Hooks and released reservations for every Host");
         var reads = f.Memory.Memory.Reads;
         f.Source(2); f.Controller.Update();
         Check(f.Memory.Memory.Reads == reads, "retired late gateway calls cannot sample again");
@@ -88,6 +103,14 @@ internal static unsafe class CensusDiagnosticCases
     }
     private static void Expiry()
     {
+        using (var readonlyExpiry = new DiagnosticFixture())
+        {
+            Check(readonlyExpiry.Controller.TryStart(out _), "read-only expiry fixture owns fresh reservations");
+            var reads = readonlyExpiry.ClockReads; readonlyExpiry.Now = 5000;
+            var before = readonlyExpiry.Controller.ReadSafetyState(); var after = readonlyExpiry.Controller.ReadSafetyState();
+            Check(readonlyExpiry.ClockReads == reads && before == after && readonlyExpiry.Controller.IsActive,
+                "formal lifetime reads do not poll/expire recorders, consult clocks or start retirement");
+        }
         using var f = new DiagnosticFixture(); f.Controller.TryStart(out _); f.Now = 5000; f.Controller.Update();
         Check(!f.Controller.IsActive && f.Memory.Memory.Reads == 0 && f.Controller.Snapshot.Result is null, "bounded observation expires without any native read");
         using var armed = new DiagnosticFixture(); armed.Controller.TryStart(out _); armed.Source(0); armed.Controller.Update();
@@ -106,6 +129,7 @@ internal static unsafe class CensusDiagnosticCases
         SourceReturnCases.sourceOriginal = () => { entered.Set(); Check(release.Wait(TimeSpan.FromSeconds(5)), "native original fixture releases"); };
         var native = Task.Run(() => f.Source(2)); Check(entered.Wait(TimeSpan.FromSeconds(5)), "native Original entered before Framework close");
         f.Controller.Stop("Feature dispose"); var drain = f.Controller.DrainPhysicalAsync();
+        var inFlightSafety = f.Controller.ReadSafetyState();
         Check(!drain.IsCompleted && !f.Controller.TryStart(out _), "Framework stop returns but provider drain and new admission remain blocked while Original is active");
         // A completed false host wait is not a confirmed retirement or controller drain.
         var run = typeof(PortraitSourceCensusDiagnostic).GetField("run", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.GetValue(f.Controller)!;
@@ -113,6 +137,9 @@ internal static unsafe class CensusDiagnosticCases
         Check(!host.WaitForRetirementAsync(TimeSpan.FromMilliseconds(1)).GetAwaiter().GetResult() && !drain.IsCompleted,
             "false native-retirement wait cannot release provider scope");
         release.Set(); native.GetAwaiter().GetResult(); SourceReturnCases.sourceOriginal = null;
+        Check(inFlightSafety is { State: "Retiring", BlocksOperations: true, PhysicalDrainCompleted: false,
+            Source: { State: "Retiring", InFlight: 1, ReservationHeld: true } },
+            "stop is not physical retirement while an actual Original/completion remains in flight");
         Check(drain.Wait(TimeSpan.FromSeconds(5)) && f.Controller.Snapshot.Result is null, "physical drain finishes only after Original/completion unwind and rejects stopped result");
     }
     private static void UnknownCreation()
@@ -126,6 +153,9 @@ internal static unsafe class CensusDiagnosticCases
         Check(!controller.DrainPhysicalAsync().IsCompleted && !controller.TryStart(out _)
             && controller.Snapshot.State == PortraitSourceCensusDiagnosticState.Faulted,
             "unknown Create fault retains complete reservations/provider lifetime instead of completing false retirement");
+        Check(controller.ReadSafetyState() is { State: "Faulted", BlocksOperations: true, PhysicalDrainCompleted: false,
+            Counters: { State: "Faulted", ReservationHeld: true } },
+            "unknown Create is visible as retained faulted ownership even when no Hook handle was returned");
         GC.KeepAlive(controller);
     }
     private static PortraitSourceCensusDiagnostic Create(Func<bool> framework, Func<PortraitSourceCensusContext?> context,

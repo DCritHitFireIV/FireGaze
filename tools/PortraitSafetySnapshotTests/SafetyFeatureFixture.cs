@@ -61,6 +61,8 @@ namespace FireGaze.PortraitPreview
         private long lightInputToken;
         private readonly PortraitCaptureIsolation captureIsolation;
         private bool LightingFitMutationBlocked => lightingFitSession.IsActive || lightingFitAdapter.HasPendingCapture || lightingFitCapture.IsBusy;
+        private PortraitSourceCensusSafetyState ReadSourceCensusSafetyState() => CensusSafety;
+        internal PortraitSourceCensusSafetyState CensusSafety = PortraitSourceCensusSafetyState.Unknown;
         internal PortraitPreviewFeature(Func<TimeSpan>? clock = null, Func<PortraitSafetyTrialState>? trials = null)
         { captureIsolation = new(clock); readWorldTrials = trials; }
         private T OnFramework<T>(Func<T> action) => Plugin.Framework.IsInFrameworkUpdateThread ? action() : Plugin.Framework.Dispatch(action);

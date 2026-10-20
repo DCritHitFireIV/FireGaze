@@ -68,6 +68,8 @@ internal sealed class PortraitSafetySnapshotCollector(IPortraitSafetySnapshotSou
             if (JsonSerializer.Serialize(editor, Options) != JsonSerializer.Serialize(editorConfirmation, Options)) errors.Add("editor-changed");
             ValidateManaged(managed, errors);
             ValidateManaged(managedConfirmation, errors);
+            ValidateSourceCensus(managed, runtime, errors);
+            ValidateSourceCensus(managedConfirmation, runtime, errors);
             if (StableManaged(managed) != StableManaged(managedConfirmation)) errors.Add("managed-changed");
             if (!HasString(runtime, "version") || !HasString(runtime, "mvid") || !HasString(runtime, "instanceID")) errors.Add("runtime-unavailable");
             if (ended < started || sequence <= 0) errors.Add("timing-unavailable");
@@ -163,6 +165,43 @@ internal sealed class PortraitSafetySnapshotCollector(IPortraitSafetySnapshotSou
             || !value.TryGetProperty("light", out var light) || !HasBoolean(light, "showLight")
             || !HasInteger(light, "pointerToken") || !HasInteger(light, "serial") || !HasInteger(light, "token") || !HasInteger(light, "lastToken")
             || !HasString(value, "captureIsolation")) errors.Add("managed-unavailable");
+    }
+
+    private static void ValidateSourceCensus(JsonElement managed, JsonElement runtime, ISet<string> errors)
+    {
+        var required = runtime.TryGetProperty("version", out var version) && version.ValueKind == JsonValueKind.String
+            && Version.TryParse(version.GetString(), out var parsed) && parsed >= new Version(1, 5, 0, 42);
+        if (!managed.TryGetProperty("sourceCensus", out var census))
+        { if (required) errors.Add("source-census-unavailable"); return; }
+        if (!ValidSourceCensus(census)) errors.Add("source-census-unavailable");
+    }
+
+    private static bool ValidSourceCensus(JsonElement value)
+    {
+        if (value.ValueKind != JsonValueKind.Object || !value.TryGetProperty("known", out var known) || known.ValueKind != JsonValueKind.True
+            || !value.TryGetProperty("state", out var state) || state.ValueKind != JsonValueKind.String
+            || state.GetString() is not ("Off" or "ObservingThread" or "Armed" or "Retiring" or "Faulted")
+            || !value.TryGetProperty("attempt", out var attempt) || !attempt.TryGetInt64(out var number) || number < 0
+            || !HasBoolean(value, "blocksOperations") || !HasBoolean(value, "physicalDrainCompleted")
+            || value.GetProperty("blocksOperations").GetBoolean() == value.GetProperty("physicalDrainCompleted").GetBoolean()
+            || !value.TryGetProperty("productionAdmission", out var admission) || admission.ValueKind != JsonValueKind.False) return false;
+        var drained = value.GetProperty("physicalDrainCompleted").GetBoolean();
+        if (number == 0)
+            return state.GetString() == "Off" && drained && new[] { "source", "counters", "resources" }
+                .All(name => value.TryGetProperty(name, out var host) && host.ValueKind == JsonValueKind.Null);
+        if (drained && state.GetString() != "Off") return false;
+        foreach (var name in new[] { "source", "counters", "resources" })
+        {
+            if (!value.TryGetProperty(name, out var host) || host.ValueKind != JsonValueKind.Object
+                || !host.TryGetProperty("state", out var hostState) || hostState.ValueKind != JsonValueKind.String
+                || hostState.GetString() is not ("Off" or "Observing" or "Installed" or "Retiring" or "Retired" or "Faulted")
+                || !HasInteger(host, "hooks") || !HasInteger(host, "inFlight")
+                || !HasBoolean(host, "reservationHeld") || !HasBoolean(host, "failed")) return false;
+            if (drained && (hostState.GetString() != "Retired" || host.GetProperty("hooks").GetInt64() != 0
+                || host.GetProperty("inFlight").GetInt64() != 0 || host.GetProperty("reservationHeld").GetBoolean()
+                || host.GetProperty("failed").GetBoolean())) return false;
+        }
+        return true;
     }
 
     private static string StableManaged(JsonElement value)

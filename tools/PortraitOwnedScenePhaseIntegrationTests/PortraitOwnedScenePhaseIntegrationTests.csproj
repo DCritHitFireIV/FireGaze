@@ -11,6 +11,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.SourceCensus.cs')">$(DefineConstants);CENSUS_FEATURE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitSourceCensusSafetyState.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneContextAllocationTracker.cs" Link="Actual/PortraitOwnedSceneContextAllocationTracker.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.cs" Link="Actual/PortraitOwnedSceneHooks.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Native.cs" Link="Actual/PortraitOwnedSceneHooks.Native.cs" />

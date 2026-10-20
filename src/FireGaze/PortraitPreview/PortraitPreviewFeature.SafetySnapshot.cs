@@ -152,6 +152,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
                     inputToken = feature.lightInputToken,
                 },
                 worldTrials = new { known = trials.Known, active = trials.Active, revision = trials.Revision },
+                sourceCensus = JsonSerializer.SerializeToElement(feature.ReadSourceCensusSafetyState(),
+                    new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
                 captureIsolation = lease.EffectiveMode,
                 captureLease = new
                 {
