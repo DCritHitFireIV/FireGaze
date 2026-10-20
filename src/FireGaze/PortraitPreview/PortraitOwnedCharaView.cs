@@ -9,7 +9,7 @@ namespace FireGaze.PortraitPreview;
 /// lease can create, advance or retire it. Production admission remains disabled until the
 /// native environment can prove exclusive context, camera and ClientObject ownership.
 /// </summary>
-internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativeApi api)
+internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativeApi api) : IPortraitOwnedSceneRuntime
 {
     private PortraitOwnedCharaViewSnapshot? snapshot;
     private nint view;

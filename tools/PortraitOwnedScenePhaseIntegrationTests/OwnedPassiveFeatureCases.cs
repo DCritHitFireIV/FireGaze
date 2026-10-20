@@ -1,6 +1,8 @@
 using FireGaze.PortraitPreview;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+using System.Reflection;
 
-internal static class OwnedPassiveFeatureCases
+internal static unsafe class OwnedPassiveFeatureCases
 {
     private static int checks;
     private static void Check(bool value, string reason) { checks++; if (!value) throw new InvalidOperationException(reason); }
@@ -24,6 +26,20 @@ internal static class OwnedPassiveFeatureCases
             feature.OwnedTick();
             Check(provider.Created.Count == 39 && controller.Snapshot.State == PortraitOwnedScenePassiveDiagnosticState.WaitingForSourceReturn,
                 "actual Feature installs bounded owner through its Update partial");
+            var renderAddress = feature.CensusSnapshot!.Source!.Plan!.ModuleBase + 0x9CD4D0;
+            var renderHook = provider.Created.Single(value => value.Address == renderAddress);
+            var render = (CharaView.Delegates.Render)Delegate.CreateDelegate(typeof(CharaView.Delegates.Render), renderHook.Detour.Target, renderHook.Detour.Method);
+            render((CharaView*)boundary.Memory.Source, 17);
+            var nativeEventsProperty = typeof(PortraitOwnedScenePassiveDiagnostic).GetProperty("NativeEvents", BindingFlags.Instance | BindingFlags.NonPublic);
+            var nativeEvents = nativeEventsProperty?.GetValue(controller);
+            var eventItems = nativeEvents?.GetType().GetProperty("Events")?.GetValue(nativeEvents) as System.Collections.IEnumerable;
+            var admission = nativeEvents?.GetType().GetProperty("ProductionAdmission")?.GetValue(nativeEvents);
+            Check(nativeEvents is not null && eventItems?.Cast<object>().Count() == 1 && admission is false,
+                "actual passive diagnostic exposes detached native consumer evidence after a typed source callback");
+            var ownedJson = boundary.Feature.OwnedJSON();
+            Check(ownedJson.Contains("\"nativeEvents\"") && ownedJson.Contains("\"target\":\"Render\"")
+                && ownedJson.Contains("\"receiver\":") && ownedJson.Contains("\"arguments\":[17,0,0,0,0]"),
+                "actual Feature diagnostic JSON serializes target, receiver and scalar native consumer arguments");
             var creates = boundary.Factory.Creates;
             try { feature.CensusCommand("native-census", "start"); } catch (InvalidOperationException) { }
             Check(boundary.Factory.Creates == creates, "active owned Feature blocks a new overlapping native census");

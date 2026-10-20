@@ -37,6 +37,7 @@ internal sealed class PortraitOwnedScenePassiveDiagnostic
     }
     internal PortraitOwnedScenePassiveDiagnosticSnapshot Snapshot => Volatile.Read(ref snapshot);
     internal PortraitOwnedScenePassiveContextEvents? ContextEvents => Volatile.Read(ref run)?.Hooks?.PassiveContextEvents;
+    internal PortraitOwnedScenePassiveNativeEvents? NativeEvents => Volatile.Read(ref run)?.Hooks?.PassiveNativeEvents;
     internal bool BlocksOperations => Volatile.Read(ref run) is { } current && !current.Retired.Task.IsCompletedSuccessfully;
     internal Task DrainPhysicalAsync() => Volatile.Read(ref run) is { } current ? RetainUntilRetiredAsync(current) : Task.CompletedTask;
     private static async Task RetainUntilRetiredAsync(Run current)

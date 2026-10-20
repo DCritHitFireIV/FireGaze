@@ -15,7 +15,10 @@ internal static class ManagedDrainOutcomeCases
 
         // Actual writers complete normally on I/O failure; their bool/status outcome must reach
         // the host even though no Framework poll will run after it has disposed the feature.
-        var invalidPath = Path.Combine(root, "drain-history-is-directory");
+        // Keep the directory name outside every registered portrait file family so
+        // this fixture exercises the writer's path failure without poisoning the
+        // shared storage census for later cases in the same root.
+        var invalidPath = Path.Combine(root, "writer-fixture-directory");
         Directory.CreateDirectory(invalidPath);
         using var history = new PortraitHistoryStore(invalidPath);
         Check(history.Record(key, snapshot.ToJSON(), "history final write").Record is not null,

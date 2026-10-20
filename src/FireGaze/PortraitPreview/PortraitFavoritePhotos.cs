@@ -20,11 +20,17 @@ internal sealed class PortraitFavoritePhotos
     private readonly int maximumBytes;
     private readonly PortraitStorageBudget storage;
     private PortraitStorageCode lastPublishCode;
+    // Serializes archive candidates without covering the committed snapshot reads below.
+    // The archive may hold this gate across a slow atomic replacement; status and image reads
+    // must continue to observe the last committed candidate during that interval.
+    private readonly object operationGate = new();
     private Dictionary<string, SavedPhoto> photos = new(StringComparer.Ordinal);
     private Dictionary<string, PortraitFavoritePhotoStatus> statuses = new(StringComparer.Ordinal);
     private bool readOnly;
-    public string? LastError { get; private set; }
+    public string? LastError { get { lock (gate) return lastError; } }
+    private string? lastError;
     public int Count { get { lock (gate) return photos.Count; } }
+    public bool Contains(string key) { lock (gate) return photos.ContainsKey(key); }
 
     public PortraitFavoritePhotos(string path, int maximumBytes = MaximumBytes, PortraitStorageBudget? storage = null)
     {
@@ -59,16 +65,22 @@ internal sealed class PortraitFavoritePhotos
     /// reader can fill missing images. Every successful change is flushed here, never on unload.
     /// Capacity refuses new photos instead of evicting an existing referenced photo.
     /// </summary>
-    public bool Synchronize(IReadOnlySet<string> references, Func<string, byte[]?> readCompletedPhoto)
+    public bool Synchronize(IReadOnlySet<string> references, Func<string, byte[]?> readCompletedPhoto,
+        bool requestReclaim = true)
     {
         ArgumentNullException.ThrowIfNull(references);
         ArgumentNullException.ThrowIfNull(readCompletedPhoto);
         if (references.Count > MaximumReferences || references.Any(key => !ValidKey(key)))
             throw new ArgumentException("Invalid favorite photo references.", nameof(references));
-        lock (gate)
+        lock (operationGate)
         {
-            if (readOnly) return false;
-            var candidate = photos.Where(pair => references.Contains(pair.Key))
+            Dictionary<string, SavedPhoto> existing;
+            lock (gate)
+            {
+                if (readOnly) return false;
+                existing = new(photos, StringComparer.Ordinal);
+            }
+            var candidate = existing.Where(pair => references.Contains(pair.Key))
                 .ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.Ordinal);
             var candidateBytes = Serialize(candidate).Length;
             var nextStatuses = new Dictionary<string, PortraitFavoritePhotoStatus>(StringComparer.Ordinal);
@@ -94,27 +106,40 @@ internal sealed class PortraitFavoritePhotos
                 candidate.Add(key, photo);
                 candidateBytes += entryBytes;
             }
-            if (SamePhotos(candidate))
+            if (SamePhotos(existing, candidate))
             {
-                statuses = nextStatuses;
-                LastError = null;
+                lock (gate)
+                {
+                    statuses = nextStatuses;
+                    lastError = null;
+                }
                 return true;
             }
-            if (!Publish(candidate))
+            if (!Publish(candidate, requestReclaim, out var publishCode, out var publishError))
             {
-                foreach (var key in references.Where(key => !photos.ContainsKey(key)))
-                    nextStatuses[key] = lastPublishCode == PortraitStorageCode.Capacity
-                        ? PortraitFavoritePhotoStatus.Capacity : PortraitFavoritePhotoStatus.StorageError;
-                statuses = nextStatuses;
+                lock (gate)
+                {
+                    foreach (var key in references.Where(key => !photos.ContainsKey(key)))
+                        nextStatuses[key] = publishCode == PortraitStorageCode.Capacity
+                            ? PortraitFavoritePhotoStatus.Capacity : PortraitFavoritePhotoStatus.StorageError;
+                    statuses = nextStatuses;
+                    lastError = publishError;
+                }
                 return false;
             }
-            statuses = nextStatuses;
+            lock (gate)
+            {
+                photos = candidate;
+                statuses = nextStatuses;
+                lastError = null;
+            }
             return true;
         }
     }
 
-    private bool SamePhotos(Dictionary<string, SavedPhoto> candidate) => candidate.Count == photos.Count
-        && candidate.All(pair => photos.TryGetValue(pair.Key, out var previous) && previous.Checksum == pair.Value.Checksum);
+    private static bool SamePhotos(Dictionary<string, SavedPhoto> previous, Dictionary<string, SavedPhoto> candidate)
+        => candidate.Count == previous.Count
+        && candidate.All(pair => previous.TryGetValue(pair.Key, out var value) && value.Checksum == pair.Value.Checksum);
 
     private static bool ValidKey(string key) => key is { Length: 64 }
         && key.All(value => value is >= '0' and <= '9' or >= 'A' and <= 'F');
@@ -144,31 +169,41 @@ internal sealed class PortraitFavoritePhotos
         {
             // This is intentional saved content, unlike the disposable history image cache.
             readOnly = true;
-            LastError = error.Message;
+            lastError = error.Message;
         }
     }
 
-    private bool Publish(Dictionary<string, SavedPhoto> candidate)
+    private bool Publish(Dictionary<string, SavedPhoto> candidate, bool requestReclaim,
+        out PortraitStorageCode publishCode, out string publishError)
     {
         lastPublishCode = PortraitStorageCode.StorageError;
+        publishCode = PortraitStorageCode.StorageError;
+        publishError = "收藏照片归档暂时无法保存。";
         try
         {
             var bytes = Serialize(candidate);
-            if (bytes.Length > maximumBytes) throw new InvalidDataException("Favorite photo archive exceeds its capacity.");
-            if (!storage.TryPublish(path, bytes.Length, stream => stream.Write(bytes), keepBackup: true, out var result))
+            if (bytes.Length > maximumBytes)
+            {
+                publishCode = PortraitStorageCode.Capacity;
+                publishError = "收藏照片归档超过容量上限。";
+                return false;
+            }
+            if (!storage.TryPublish(path, bytes.Length, stream => stream.Write(bytes), keepBackup: true,
+                    out var result, requestReclaim: requestReclaim))
             {
                 lastPublishCode = result.Code;
-                LastError = result.Reason;
+                publishCode = result.Code;
+                publishError = result.Reason;
                 return false;
             }
             lastPublishCode = PortraitStorageCode.Success;
-            photos = candidate;
-            LastError = null;
+            publishCode = PortraitStorageCode.Success;
+            publishError = "";
             return true;
         }
         catch (Exception error) when (IsStorageError(error))
         {
-            LastError = error.Message;
+            publishError = error.Message;
             return false;
         }
     }

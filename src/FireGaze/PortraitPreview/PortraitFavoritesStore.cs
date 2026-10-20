@@ -15,7 +15,7 @@ internal enum PortraitFavoritesWriteStatus
 }
 
 internal sealed record PortraitFavoritesWriteResult(PortraitFavoritesWriteStatus Status, string Reason = "",
-    PortraitFavoriteEntry? Entry = null)
+    PortraitFavoriteEntry? Entry = null, PortraitStorageCode? StorageCode = null)
 {
     public bool Success => Status is PortraitFavoritesWriteStatus.Saved or PortraitFavoritesWriteStatus.Unchanged;
 }
@@ -182,12 +182,14 @@ internal sealed class PortraitFavoritesStore
         {
             PersistenceError = exception.Result.Reason;
             return new(exception.Result.Code == PortraitStorageCode.Capacity
-                ? PortraitFavoritesWriteStatus.TooLarge : PortraitFavoritesWriteStatus.PersistenceFailed, exception.Result.Reason);
+                ? PortraitFavoritesWriteStatus.TooLarge : PortraitFavoritesWriteStatus.PersistenceFailed,
+                exception.Result.Reason, StorageCode: exception.Result.Code);
         }
         catch (Exception exception) when (IsStorageException(exception))
         {
             PersistenceError = exception.Message;
-            return new(PortraitFavoritesWriteStatus.PersistenceFailed, "收藏未能保存，请检查本地存储后重试。" );
+            return new(PortraitFavoritesWriteStatus.PersistenceFailed, "收藏未能保存，请检查本地存储后重试。",
+                StorageCode: PortraitStorageCode.StorageError);
         }
         // Publish the candidate only after the complete replacement was flushed to stable storage.
         entries = candidate;

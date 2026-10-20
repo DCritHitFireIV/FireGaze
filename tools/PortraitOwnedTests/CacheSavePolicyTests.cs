@@ -27,12 +27,15 @@ internal static class CacheSavePolicyTests
     Check(Queue(policy,catalog)&&Flush(writer),"changed complete source persists immediately");
     Check(file.Load(restored,out _)&&restored.BuildView(now).Items.Single().Variants.Single().Stain2==5,"latest dual dye content is durable without unload");
    });
-   Case("failed save retries identical content rather than marking it clean",()=>{
+   Case("failed save retains identical content without automatic polling and permits explicit retry",()=>{
     var catalog=New();catalog.ActivateCharacter(owner);var file=new OwnedEquipmentCacheFile(Path.Combine(directory,"retry"));file.Load(catalog,out _);var attempts=0;
     using var writer=new OwnedCacheWriter(snapshot=>Interlocked.Increment(ref attempts)==1?false:file.SaveJSON(snapshot,out _));var policy=Policy(writer);
     catalog.ApplyRead(owner,bag,now,[new(123,1,0)]);Check(Queue(policy,catalog)&&!Flush(writer),"first disk failure reported");
     Check(!File.Exists(Path.Combine(directory,"retry","portrait-owned-cache-v1.json")),"failed write cannot fabricate durable file");
-    catalog.ApplyRead(owner,bag,now.AddSeconds(2),[new(123,1,0)]);Check(Queue(policy,catalog)&&Flush(writer),"same content retries on next observation");
+    catalog.ApplyRead(owner,bag,now.AddSeconds(2),[new(123,1,0)]);
+    var repeated=0;for(var index=0;index<100_000;index++)if(Queue(policy,catalog))repeated++;
+    Check(repeated==0&&attempts==1&&writer.NeedsRevision(catalog.ContentRevision),"unchanged failed content remains dirty without restarting on every observation");
+    Check(writer.RetryAsync().GetAwaiter().GetResult(),"explicit retry persists the retained snapshot without another source change");
     var restored=New();Check(file.Load(restored,out _),"retry publishes real cache");restored.ActivateCharacter(owner);Check(restored.BuildView(now).Items.Single().ItemID==123,"retry retained actual source content");
     Check(!Queue(policy,catalog)&&writer.CompletedWrites==2&&writer.FailedWrites==1,"successful retry suppresses further duplicate saves");
    });

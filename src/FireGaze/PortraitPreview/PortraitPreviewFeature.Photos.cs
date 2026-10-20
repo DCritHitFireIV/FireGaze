@@ -11,17 +11,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
             new(Plugin.Framework, Plugin.GameGUI, Plugin.Textures, target.IsCurrent), history.Bytes,
             message => Plugin.Log.Information("[PortraitPhoto] {Message}", message),
             Path.Combine(directory, "portrait-favorite-photos-v1.json"),
-            favoritesStore.IsReadOnly ? null : favoriteEntries.Select(entry => (entry.SourceContentID, entry.Snapshot)));
-        SynchronizeFavoritePhotos();
-    }
-
-    partial void SynchronizeFavoritePhotos()
-    {
-        // An unreadable snapshot library cannot supply a trustworthy reference set. Preserve
-        // its photo archive for recovery instead of treating every saved photo as an orphan.
-        if (photos is null || favoritesStore.IsReadOnly) return;
-        if (!photos.SetFavoriteSnapshots(favoriteEntries.Select(entry => (entry.SourceContentID, entry.Snapshot))))
-            favoritesStatus = "收藏已保存，照片暂时无法保存。";
+            favoritesStore.IsReadOnly ? null : favoriteEntries.Select(entry => (entry.SourceContentID, entry.Snapshot)),
+            storage: storageBudget);
     }
 
     private void PollPhotos()

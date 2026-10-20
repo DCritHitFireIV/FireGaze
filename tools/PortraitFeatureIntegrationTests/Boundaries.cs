@@ -195,6 +195,8 @@ namespace FireGaze.PortraitPreview
         private readonly OwnedEquipmentCatalog owned;
         private readonly OwnedCacheWriter cacheWriter;
         private readonly OwnedCacheSavePolicy ownedSavePolicy;
+        private readonly PortraitStorageBudget storageBudget;
+        private readonly PhotoPersistenceBoundary photos = new();
         private bool editorAvailable = true;
         private string status = "";
         private DateTimeOffset testClock = DateTimeOffset.Parse("2026-10-18T10:00:00+08:00");
@@ -220,8 +222,10 @@ namespace FireGaze.PortraitPreview
         public PortraitEditorSnapshot? ObservedSnapshot => observedEditor;
         public PortraitEditorSnapshot? MirroredSnapshot => target.MirroredSnapshot;
 
-        public PortraitPreviewFeature(string file, int byteLimit = PortraitHistoryStore.MaximumBytes)
+        public PortraitPreviewFeature(string file, int byteLimit = PortraitHistoryStore.MaximumBytes,
+            PortraitStorageBudget? storage = null)
         {
+            storageBudget = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(file)!);
             var customize = new byte[26]; customize[0]=1;customize[4]=1;customize[5]=1;customize[6]=1;
             target = new(new() {GameBuild="fixture",EntryPoint=2,Customize=customize,Composition=new() {BannerTimeline=1},Look=new(new PortraitPiece[13],true,true,false)});
             session = new(target);
@@ -230,8 +234,8 @@ namespace FireGaze.PortraitPreview
             history = new(file,()=>testClock,byteLimit);
             historyBatch = new(history,()=>testClock);
             owned = new(id=>id);
-            var cacheFile=new OwnedEquipmentCacheFile(Path.GetDirectoryName(file)!);cacheFile.Load(owned,out _);
-            cacheWriter=new(json=>cacheFile.SaveJSON(json,out _));ownedSavePolicy=new(cacheWriter);
+            var cacheFile=new OwnedEquipmentCacheFile(Path.GetDirectoryName(file)!, storage:storageBudget);cacheFile.Load(owned,out _);
+            cacheWriter=new(cacheFile.SaveJSONResult,storageBudget);ownedSavePolicy=new(cacheWriter);
             InitializeLibrary(Path.GetDirectoryName(file)!);
             contentID = Owner!.Value.ContentID;
         }
@@ -262,12 +266,28 @@ namespace FireGaze.PortraitPreview
         public void SetPlateObservations(PortraitGlamourPlate[] plates) { glamourPlates.ActivateCharacter(Owner!.Value);glamourPlates.ApplyRead(Owner.Value,testClock,plates);glamourPlateView=glamourPlates.BuildView(testClock); }
         public PortraitGlamourPlateReader PlateReader => glamourPlateReader;
         public void SampleLibrary() => PollLibrary();
+        public void WaitFavorites() { DrainFavoritePersistence().GetAwaiter().GetResult(); ObserveFavoritePersistence(); }
+        public bool RejectFavoriteArchive { get => photos.RejectArchive; set => photos.RejectArchive = value; }
+        public bool FavoriteMetadataDrainSucceeded => DrainFavoritePersistence().GetAwaiter().GetResult();
+        public void MakeStorageObservationDue() => nextStorageObservation = DateTime.MinValue;
+        public void WaitStorageObservation() { storageObservation?.GetAwaiter().GetResult(); PollStorageObservation(); }
         public void SetPlateNext(PortraitGlamourPlate[] plates) => glamourPlateReader.Next = new(Owner,plates,"已读取");
         public void MakePlatePollDue() => nextGlamourPlateRead = DateTime.MinValue;
         public void Equip(PortraitSlot slot,uint id) => throw new InvalidOperationException("Native equip is outside this test boundary.");
         public void ObserveOwned(OwnedSourceKey source,OwnedItemRecord[] records) {owned.ActivateCharacter(Owner!.Value);owned.ApplyRead(Owner.Value,source,testClock,records);QueueOwnedCacheIfNeeded();}
         public bool FlushOwned() => cacheWriter.FlushAsync().GetAwaiter().GetResult();
         public int OwnedWrites => cacheWriter.CompletedWrites;
-        public void Dispose() {Plugin.Keys.Held=false;DisposeLibrary();cacheWriter.Dispose();history.Dispose();target.Dispose();}
+        public void Dispose() {Plugin.Keys.Held=false;DisposeLibrary();DrainStorageObservation().GetAwaiter().GetResult();DrainFavoritePersistence().GetAwaiter().GetResult();cacheWriter.Dispose();history.Dispose();target.Dispose();}
+    }
+
+    internal sealed class PhotoPersistenceBoundary
+    {
+        public bool RejectArchive { get; set; }
+        public IDisposable? ProtectFavoriteSnapshot(ulong owner, PortraitEditorSnapshot snapshot) => null;
+        public bool ReclaimStorage() => true;
+        public bool TryWithStorageReclaim(Func<bool> attempt, Func<bool> capacity) => attempt();
+        public Task<bool> PersistFavoriteAsync(Func<Task<bool>> write,
+            Func<IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>> favorites,
+            (ulong ContentID, PortraitEditorSnapshot Snapshot)? protect = null) => Task.Run(async () => await write() && !RejectArchive);
     }
 }

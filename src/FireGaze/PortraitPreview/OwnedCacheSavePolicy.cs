@@ -21,7 +21,7 @@ internal sealed class OwnedCacheSavePolicy
     {
         ArgumentNullException.ThrowIfNull(catalog);
         var revision = catalog.ContentRevision;
-        if (revision <= baselineRevision || !writer.NeedsRevision(revision)) return false;
+        if (revision <= baselineRevision || !writer.NeedsAutomaticRevision(revision)) return false;
         return writer.Queue(revision, catalog.ExportJSON());
     }
 }

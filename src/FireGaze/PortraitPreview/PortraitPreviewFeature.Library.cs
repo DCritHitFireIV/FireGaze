@@ -15,6 +15,13 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private OwnedCharacterKey? glamourPlateOwner;
     private ulong contentID;
     private string? cachePersistenceWarning;
+    private Task<bool>? favoritePersistence;
+    private volatile bool favoriteMetadataSucceeded = true;
+    private PortraitFavoritesWriteResult? favoriteCompletedResult;
+    private Func<PortraitFavoritesWriteResult>? retainedFavoriteWrite;
+    private (ulong ContentID, PortraitEditorSnapshot Snapshot)? retainedFavoriteProtection;
+    private Task<bool>? storageObservation;
+    private bool storageObservationClosing;
     private readonly Dictionary<ulong, string> retainerDisplayNames = [];
     private OwnedRetainerRoster? retainerRosterView;
 
@@ -23,15 +30,14 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public PortraitGlamourPlateView? GlamourPlateView => glamourPlateView;
     public IReadOnlyList<PortraitFavoriteEntry> Favorites => favoriteEntries;
     public string FavoritesStatus => favoritesStatus;
-    partial void SynchronizeFavoritePhotos();
 
     private void InitializeLibrary(string directory)
     {
         glamourPlates = new();
-        glamourPlateCache = new(directory);
+        glamourPlateCache = new(directory, storage: storageBudget);
         glamourPlateCache.Load(glamourPlates, out _);
         glamourPlateReader = new(() => Plugin.Framework.IsInFrameworkUpdateThread, CurrentCharacter);
-        favoritesStore = new(Path.Combine(directory, "portrait-favorites-v1.json"));
+        favoritesStore = new(Path.Combine(directory, "portrait-favorites-v1.json"), storage: storageBudget);
         favoriteEntries = favoritesStore.Entries;
         // A missing plate cache is a normal first run and must not appear as a favorite error.
         favoritesStatus = favoritesStore.LoadError ?? string.Empty;
@@ -42,6 +48,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void PollLibrary()
     {
         if (!libraryInitialized || !Plugin.Framework.IsInFrameworkUpdateThread) return;
+        ObserveFavoritePersistence();
         // Worker completion is read without disk or native calls. A queued snapshot is not
         // presented as durable while storage is failing, and successful retry clears the warning.
         cachePersistenceWarning = glamourPlateCache.IsReadOnly ? "投影模板记录暂时无法读取，原文件已保留。"
@@ -123,9 +130,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var owner = CurrentCharacter();
         if (owner is not { } character) { SetFavoritesError("尚未进入角色。"); return; }
         var sourceName = Plugin.Objects.LocalPlayer?.Name.TextValue;
-        var result = favoritesStore.Add(snapshot, character.ContentID,
-            string.IsNullOrWhiteSpace(sourceName) ? "当前角色" : sourceName, name, tags);
-        PublishFavoriteResult(result);
+        // Protect an existing completed photo before metadata can make it an intentional save.
+        // The token spans durable metadata, archive synchronization and permanent pin refresh.
+        var savedTags = tags.ToArray();
+        QueueFavoriteWrite(() => favoritesStore.Add(snapshot, character.ContentID,
+            string.IsNullOrWhiteSpace(sourceName) ? "当前角色" : sourceName, name, savedTags), (character.ContentID, snapshot));
     });
 
     public void RestoreFavorite(Guid id) => Mutate(() =>
@@ -141,9 +150,77 @@ internal sealed unsafe partial class PortraitPreviewFeature
         else favoritesStatus = "已恢复收藏：" + entry.Name;
     });
 
-    public void RenameFavorite(Guid id, string name) => Mutate(() => PublishFavoriteResult(favoritesStore.Rename(id, name)));
-    public void TagFavorite(Guid id, IReadOnlyCollection<string> tags) => Mutate(() => PublishFavoriteResult(favoritesStore.SetTags(id, tags)));
-    public void RemoveFavorite(Guid id) => Mutate(() => PublishFavoriteResult(favoritesStore.Remove(id)));
+    public void RenameFavorite(Guid id, string name) => Mutate(() => QueueFavoriteWrite(() => favoritesStore.Rename(id, name)));
+    public void TagFavorite(Guid id, IReadOnlyCollection<string> tags) => Mutate(() =>
+    {
+        var savedTags = tags.ToArray();
+        QueueFavoriteWrite(() => favoritesStore.SetTags(id, savedTags));
+    });
+    public void RemoveFavorite(Guid id) => Mutate(() => QueueFavoriteWrite(() => favoritesStore.Remove(id)));
+
+    private void QueueFavoriteWrite(Func<PortraitFavoritesWriteResult> write,
+        (ulong ContentID, PortraitEditorSnapshot Snapshot)? protection = null)
+    {
+        ObserveFavoritePersistence();
+        if (!libraryInitialized || favoritePersistence is { IsCompleted: false })
+        {
+            SetFavoritesError("上一条收藏仍在保存，请稍候再试。");
+            return;
+        }
+        retainedFavoriteWrite = write;
+        retainedFavoriteProtection = protection;
+        favoriteCompletedResult = null;
+        favoriteMetadataSucceeded = false;
+        favoritesStatus = "正在保存收藏参数…";
+        favoritePersistence = photos.PersistFavoriteAsync(
+            () => PortraitFavoritePersistence.RunAsync(() => WriteFavoriteWithReclaim(write)).ContinueWith(task =>
+            {
+                var result = task.GetAwaiter().GetResult();
+                favoriteCompletedResult = result;
+                favoriteMetadataSucceeded = result.Success;
+                return result.Success;
+            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default),
+            () => favoritesStore.Entries.Select(entry => (entry.SourceContentID, entry.Snapshot)), protection);
+    }
+
+    private void ObserveFavoritePersistence()
+    {
+        if (favoritePersistence is not { IsCompleted: true } || favoriteCompletedResult is not { } result) return;
+        favoriteCompletedResult = null;
+        PublishFavoriteResult(result);
+        if (result.Success)
+        {
+            retainedFavoriteWrite = null;
+            retainedFavoriteProtection = null;
+        }
+    }
+
+    private void RetryFavoritePersistence()
+    {
+        ObserveFavoritePersistence();
+        if (favoritePersistence is { IsCompleted: false } || retainedFavoriteWrite is not { } write) return;
+        var protection = retainedFavoriteProtection;
+        retainedFavoriteProtection = null;
+        QueueFavoriteWrite(write, protection);
+    }
+
+    private Task<bool> DrainFavoritePersistence() => favoritePersistence?.ContinueWith(task =>
+    {
+        _ = task.GetAwaiter().GetResult();
+        // The photo service owns archive recovery and its final-state drain. This receipt
+        // represents metadata only, while still waiting for the entire accepted action.
+        return favoriteMetadataSucceeded;
+    }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default) ?? Task.FromResult(true);
+
+    private PortraitFavoritesWriteResult WriteFavoriteWithReclaim(Func<PortraitFavoritesWriteResult> write)
+    {
+        PortraitFavoritesWriteResult result = null!;
+        // Every store attempt returns its lock and reservation before the next oldest photo
+        // is reclaimed. The shared helper stops at the first success or lack of real progress.
+        photos.TryWithStorageReclaim(() => (result = write()).Success,
+            () => result.Status == PortraitFavoritesWriteStatus.TooLarge && storageBudget.NeedsReclaim);
+        return result;
+    }
 
     private bool TryCurrentSnapshot(out PortraitEditorSnapshot snapshot, out string reason)
     {
@@ -226,7 +303,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         {
             favoriteEntries = favoritesStore.Entries;
             favoritesStatus = "收藏已保存";
-            SynchronizeFavoritePhotos();
+            if (favoritePersistence is { IsCompletedSuccessfully: true, Result: false })
+                favoritesStatus = "收藏已保存，照片暂时无法保存。";
         }
         else SetFavoritesError(result.Reason);
     }
@@ -246,7 +324,40 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public OwnedRetainerRoster? RetainerRoster => retainerRosterView?.Character == CurrentCharacter() ? retainerRosterView : null;
 
     /// <summary>Every accepted inventory capture batch uses the same revision-aware persistence gate.</summary>
-    private bool QueueOwnedCacheIfNeeded() => ownedSavePolicy.QueueIfNeeded(owned);
+    private bool QueueOwnedCacheIfNeeded()
+    {
+        // Inventory capture is also a storage recovery edge. This keeps an unchanged
+        // observation from becoming an implicit retry loop while still retrying the retained
+        // snapshot once the shared authority has verified the previous obstruction is gone.
+        PollStorageObservation();
+        return ownedSavePolicy.QueueIfNeeded(owned);
+    }
+
+    private void PollStorageObservation()
+    {
+        if (storageObservation is { IsCompleted: true } completed)
+        {
+            storageObservation = null;
+            if (completed.IsCompletedSuccessfully && completed.Result) RetryStorageCore();
+        }
+        if (storageObservationClosing || storageObservation is not null || DateTime.UtcNow < nextStorageObservation) return;
+        nextStorageObservation = DateTime.UtcNow.AddSeconds(2);
+        storageObservation = Task.Run(storageBudget.RefreshObservation);
+    }
+
+    private Task DrainStorageObservation()
+    {
+        storageObservationClosing = true;
+        return storageObservation ?? Task.CompletedTask;
+    }
+
+    /// <summary>Retries retained storage work only after the shared authority reports recovery or an explicit user retry.</summary>
+    partial void RetryOtherPortraitStorage()
+    {
+        _ = cacheWriter.RetryAsync();
+        _ = glamourPlateCache.RetryAsync();
+        RetryFavoritePersistence();
+    }
 
     public IReadOnlyList<string> StorageLocations(uint id)
         => ownedView.Items.FirstOrDefault(item => item.ItemID == id)?.Variants
@@ -276,4 +387,24 @@ internal sealed unsafe partial class PortraitPreviewFeature
         OwnedSourceKind.RetainerInventory => retainerDisplayNames.TryGetValue(source.RetainerID, out var name) ? "雇员背包 · " + name : "雇员背包",
         _ => "物品来源",
     };
+}
+
+internal static class PortraitFavoritePersistence
+{
+    internal static async Task<PortraitFavoritesWriteResult> RunAsync(Func<PortraitFavoritesWriteResult> write)
+    {
+        try
+        {
+            var result = write();
+            for (var attempt = 0; attempt < 3
+                && result.StorageCode is PortraitStorageCode.Busy or PortraitStorageCode.StorageError; attempt++)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(1 << attempt)).ConfigureAwait(false);
+                result = write();
+            }
+            return result;
+        }
+        catch (Exception error)
+        { return new(PortraitFavoritesWriteStatus.PersistenceFailed, "收藏写盘失败：" + error.Message); }
+    }
 }

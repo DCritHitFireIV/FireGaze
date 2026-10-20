@@ -18,6 +18,11 @@ try
     var history = Path.Combine(root, "history.json");
     File.WriteAllText(history, "untouched portrait history", Encoding.UTF8);
     var historyBefore = File.ReadAllBytes(history);
+    var fullRoot = Path.Combine(root, "full-root"); Directory.CreateDirectory(fullRoot);
+    using (var full = new FileStream(Path.Combine(fullRoot, "portrait-favorites-v1.json.bak"), FileMode.CreateNew)) full.SetLength(PortraitStorageBudget.DefaultLimitBytes);
+    var fullPath = Path.Combine(fullRoot, "portrait-history-thumbnails-v1.bin");
+    var fullCache = new PortraitThumbnailCache(fullPath, 1000);
+    Check(!fullCache.TryPut(PortraitThumbnailCache.KeyForSnapshot("over-quota"), [1]) && !File.Exists(fullPath), "thumbnail publication respects the shared directory quota");
     var one = PortraitThumbnailCache.KeyForSnapshot("{\"state\":1}");
     var two = PortraitThumbnailCache.KeyForSnapshot("{\"state\":2}");
     var three = PortraitThumbnailCache.KeyForSnapshot("{\"state\":3}");
@@ -33,13 +38,23 @@ try
     Check(cache.TryPut(one, image), "first encoded thumbnail persists");
     Check(cache.Count == 1 && cache.Bytes == new FileInfo(path).Length && cache.Bytes <= 1000, "disk accounting includes serialization metadata");
     var firstSize = cache.Bytes;
+    var mixedRoot = Path.Combine(root, "mixed-pins"); Directory.CreateDirectory(mixedRoot);
+    var mixedStorage = new PortraitStorageBudget(mixedRoot, 1000);
+    var mixedPath = Path.Combine(mixedRoot, "photos.bin");
+    var mixed = new PortraitThumbnailCache(mixedPath, 1000, mixedStorage);
+    Check(mixed.TryPut(one, [1]) && mixed.TryPut(two, [2]), "mixed pin test begins with two real published images");
+    mixed = new PortraitThumbnailCache(mixedPath, 1000, new PortraitStorageBudget(mixedRoot, 220));
+    mixed.SetProtectedKeys(new HashSet<string> { one });
+    var mixedBefore = File.ReadAllBytes(mixedPath);
+    Check(!mixed.ReclaimUnprotected() && mixed.LastStorageCode == PortraitStorageCode.Capacity
+        && File.ReadAllBytes(mixedPath).SequenceEqual(mixedBefore), "a nonempty shrink without candidate headroom safely refuses and preserves pinned pixels");
     image[0] = 99;
     Check(cache.TryGet(one, out var retrieved) && retrieved[0] == 7, "insertion detaches caller bytes");
     retrieved[0] = 88;
     Check(cache.TryGet(one, out var detached) && detached[0] == 7, "retrieval cannot mutate cached image");
     Check(cache.TryPut(one, detached) && cache.Count == 1 && cache.Bytes == firstSize, "same state and image deduplicate");
     Check(cache.TryPut(two, detached) && cache.TryPut(three, detached), "multiple states share one binary file");
-    Check(Directory.GetFiles(root).Length == 2, "successful atomic writes leave only history and one cache file");
+    Check(Directory.GetFiles(root).Count(file=>Path.GetFileName(file)!=".portrait-storage.lock") == 2, "successful atomic writes leave only history and one cache file plus zero-byte coordination lease");
     var restored = new PortraitThumbnailCache(path, 1000);
     Check(restored.Count == 3 && restored.TryGet(two, out var afterRestart) && afterRestart.SequenceEqual(detached), "restart reloads complete thumbnails");
     restored.SetAvailableBytes((int)firstSize);
@@ -71,7 +86,8 @@ try
     }
     File.WriteAllBytes(path, valid);
     var tooSmall = new PortraitThumbnailCache(path, 1);
-    Check(tooSmall.Count == 0 && tooSmall.Bytes == 0 && !File.Exists(path), "restart enforces newly reduced available budget");
+    Check(tooSmall.Count == 1 && File.ReadAllBytes(path).SequenceEqual(valid), "loading cannot evict saved pixels before favorite references are known");
+    Check(tooSmall.SetAvailableBytes(1) && tooSmall.Count == 0 && !File.Exists(path), "explicit unpinned maintenance enforces the reduced available budget");
     File.WriteAllBytes(path, valid);
     using (var stream = new FileStream(path, FileMode.Open, FileAccess.Write)) { stream.Position = 12; stream.Write(BitConverter.GetBytes(int.MaxValue)); }
     var hostile = new PortraitThumbnailCache(path, 1000);

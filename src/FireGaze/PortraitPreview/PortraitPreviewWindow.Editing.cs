@@ -109,12 +109,14 @@ internal sealed partial class PortraitPreviewWindow
             var focused = ImGui.IsItemFocused();
             var draw = ImGui.GetWindowDrawList();
             var imageSize = new Vector2(layout.Width, layout.ImageHeight);
-            if (historyPhotoRequests++ < 32 && photos?.Get(record.ID) is { } texture)
+            var texture = historyPhotoRequests++ < 32 ? photos?.Get(record.ID) : null;
+            if (texture is not null)
                 draw.AddImage(texture.Handle, origin, origin + imageSize);
             else
             {
                 draw.AddRectFilled(origin, origin + imageSize, ImGui.GetColorU32(FireGazePalette.Panel));
-                var text = "暂无照片";
+                var status = photos?.GetHistoryPhotoStatus(record.ID) ?? PortraitHistoryPhotoStatus.Missing;
+                var text = PortraitHistoryPhotoPresentation.Label(status);
                 draw.AddText(origin + (imageSize - ImGui.CalcTextSize(text)) * .5f, ImGui.GetColorU32(FireGazePalette.Muted), text);
             }
             FireGazeSymbols.DrawSelection(origin, origin + card, record.IsCurrent, focused);

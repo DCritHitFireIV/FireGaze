@@ -12,6 +12,7 @@ internal sealed record PortraitOwnedScenePassiveBaseline(PortraitOwnedScenePassi
 
 internal sealed partial class PortraitOwnedSceneHooks
 {
+    private readonly object passiveBaselineGate = new();
     private Guid installation;
     private PortraitOwnedScenePassiveBaseline? passiveBaseline;
     private Task? baselineExpiryTask;
@@ -33,8 +34,14 @@ internal sealed partial class PortraitOwnedSceneHooks
             var snapshot = new PortraitOwnedScenePassiveBaseline(PortraitOwnedScenePassiveBaselineState.Waiting, installation, source,
                 sessionEpoch, expectedThread, null, null, now, Math.Min(passiveDeadline, checked(now + (long)(duration.TotalSeconds * timestampFrequency))),
                 "Waiting for a future actual source invocation of the completely installed owned generation.");
-            if (Interlocked.CompareExchange(ref passiveBaseline, snapshot, null) is not null) return false;
-            baselineExpiryTask = ExpirePassiveBaselineAsync(snapshot, duration); return true;
+            lock (passiveBaselineGate)
+            {
+                if (!passiveOnly || !installed || closing || stopped || installation != snapshot.Installation
+                    || now < passiveLastTimestamp || now >= snapshot.Deadline || passiveBaseline is not null) return false;
+                Volatile.Write(ref passiveBaseline, snapshot);
+            }
+            baselineExpiryTask = ExpirePassiveBaselineAsync(snapshot, duration);
+            return true;
         }
         catch (Exception) { RevokePassiveBaseline("A bounded source Return baseline could not arm."); return false; }
     }
@@ -70,10 +77,10 @@ internal sealed partial class PortraitOwnedSceneHooks
     }
     private void RevokePassiveBaseline(string reason)
     {
-        while (PassiveSourceBaseline is { } current && current.State != PortraitOwnedScenePassiveBaselineState.Revoked)
+        lock (passiveBaselineGate)
         {
-            if (ReferenceEquals(Interlocked.CompareExchange(ref passiveBaseline,
-                current with { State = PortraitOwnedScenePassiveBaselineState.Revoked, Reason = reason }, current), current)) return;
+            if (PassiveSourceBaseline is { } current && current.State != PortraitOwnedScenePassiveBaselineState.Revoked)
+                Volatile.Write(ref passiveBaseline, current with { State = PortraitOwnedScenePassiveBaselineState.Revoked, Reason = reason });
         }
     }
     private static PortraitNativeThreadStamp ReadNativeThread() => new(GetCurrentThreadID(), Environment.CurrentManagedThreadId);

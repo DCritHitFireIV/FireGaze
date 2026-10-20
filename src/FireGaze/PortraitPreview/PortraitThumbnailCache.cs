@@ -9,30 +9,47 @@ internal sealed class PortraitThumbnailCache
     public const int MaximumBytes = 10 * 1024 * 1024;
     public const int MaximumImageBytes = 256 * 1024;
     private const int MaximumEntries = 4096;
+    internal const int MaximumEntriesForReclaim = MaximumEntries;
     private const int HeaderBytes = 16;
+    // Each entry stores a 32-byte key, 32-byte SHA-256, a 4-byte length, and
+    // the payload. Keep the fixed portion aligned with the writer below so
+    // shared-budget reservations match the bytes actually published.
     private const int EntryBytes = 68;
     private static readonly byte[] Magic = "FGTHUMB1"u8.ToArray();
     private readonly string path;
     private readonly object gate = new();
+    private readonly PortraitStorageBudget storage;
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, int> admissionPins = new(StringComparer.Ordinal);
+    private volatile PortraitStorageCode lastStorageCode;
     private List<Entry> entries = [];
     private int availableBytes;
-    private string? lastError;
+    private volatile string? lastError;
+    private bool loadFailed;
+    // Null means that the durable favorite library could not supply trusted references.
+    // Preserve every completed image until that reference set becomes known.
+    private HashSet<string>? protectedKeys = new(StringComparer.Ordinal);
+    private HashSet<string> preferredKeys = new(StringComparer.Ordinal);
     private sealed record Entry(string Key, byte[] Image);
 
-    public PortraitThumbnailCache(string path, int availableBytes)
+    public PortraitThumbnailCache(string path, int availableBytes, PortraitStorageBudget? storage = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
         ValidateBudget(availableBytes);
         this.path = Path.GetFullPath(path);
+        this.storage = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(this.path)!);
+        this.storage.RegisterPath(this.path);
         this.availableBytes = availableBytes;
         Load();
     }
 
-    public int Count { get { lock (gate) return entries.Count; } }
-    public string[] Keys { get { lock (gate) return entries.Select(entry => entry.Key).ToArray(); } }
-    public int Bytes { get { lock (gate) return Size(entries); } }
-    public int AvailableBytes { get { lock (gate) return availableBytes; } }
-    public string? LastError { get { lock (gate) return lastError; } }
+    // Published entry lists are immutable after assignment. Framework observations can read
+    // the committed generation without joining a slow candidate write under gate.
+    public int Count => Volatile.Read(ref entries).Count;
+    public string[] Keys => Volatile.Read(ref entries).Select(entry => entry.Key).ToArray();
+    public int Bytes => Size(Volatile.Read(ref entries));
+    public int AvailableBytes => Volatile.Read(ref availableBytes);
+    public string? LastError => lastError;
+    public PortraitStorageCode LastStorageCode => lastStorageCode;
 
     public static string KeyForSnapshot(string snapshotJSON)
     {
@@ -42,12 +59,47 @@ internal sealed class PortraitThumbnailCache
 
     public bool TryGet(string key, out byte[] image)
     {
-        lock (gate)
+        var entry = Volatile.Read(ref entries).FirstOrDefault(entry => entry.Key == key);
+        image = entry is null ? [] : (byte[])entry.Image.Clone();
+        return entry is not null;
+    }
+
+    // Admission never joins a disk operation. The immutable committed generation supplies a
+    // bounded rescue copy if an already executing replacement won its race with this new pin.
+    public Admission ProtectAdmission(string key)
+    {
+        var committed = Volatile.Read(ref entries);
+        admissionPins.AddOrUpdate(key, 1, (_, count) => checked(count + 1));
+        // Preserve the generation observed before installing the pin. A candidate that had
+        // already passed Fit may commit between those two operations and remove this key.
+        var entry = committed.FirstOrDefault(entry => entry.Key == key)
+            ?? Volatile.Read(ref entries).FirstOrDefault(entry => entry.Key == key);
+        var image = entry is null ? [] : (byte[])entry.Image.Clone();
+        return new(this, key, image);
+    }
+
+    internal sealed class Admission(PortraitThumbnailCache owner, string key, byte[] image) : IDisposable
+    {
+        private PortraitThumbnailCache? value = owner;
+        public byte[] Image { get; } = image;
+        public void Dispose()
         {
-            var entry = entries.FirstOrDefault(entry => entry.Key == key);
-            image = entry is null ? [] : (byte[])entry.Image.Clone();
-            return entry is not null;
+            var cache = Interlocked.Exchange(ref value, null);
+            if (cache is null) return;
+            while (cache.admissionPins.TryGetValue(key, out var count))
+            {
+                if (count == 1)
+                {
+                    if (cache.admissionPins.TryRemove(new KeyValuePair<string, int>(key, count))) return;
+                }
+                else if (cache.admissionPins.TryUpdate(key, count - 1, count)) return;
+            }
         }
+    }
+
+    public bool Contains(string key)
+    {
+        return Volatile.Read(ref entries).Any(entry => entry.Key == key);
     }
 
     public bool TryPut(string key, ReadOnlySpan<byte> image)
@@ -55,27 +107,58 @@ internal sealed class PortraitThumbnailCache
         lock (gate)
         {
             if (!ValidKey(key) || image.Length is <= 0 or > MaximumImageBytes
-                || HeaderBytes + EntryBytes + image.Length > availableBytes) return false;
+                || HeaderBytes + EntryBytes + image.Length > availableBytes)
+            { lastStorageCode = PortraitStorageCode.Capacity; lastError = "照片容量不足或图片数据无效。"; return false; }
+            if (!EnsureLoaded()) return false;
             var previous = entries.FirstOrDefault(entry => entry.Key == key);
             if (previous is not null && image.SequenceEqual(previous.Image)) return true;
             var candidate = entries.Where(entry => entry.Key != key).ToList();
             candidate.Add(new(key, image.ToArray()));
-            Fit(candidate, availableBytes);
+            if (!Fit(candidate, availableBytes, key))
+            { lastStorageCode = PortraitStorageCode.Capacity; lastError = "照片容量不足，现有收藏照片已保留。"; return false; }
             return Publish(candidate);
         }
     }
 
     /// <summary>Pass the space remaining after the history file; negative budgets are invalid.</summary>
-    public bool SetAvailableBytes(int value)
+    public bool SetAvailableBytes(int value, bool requestReclaim = true)
     {
         ValidateBudget(value);
         lock (gate)
         {
-            var candidate = entries.ToList();
-            Fit(candidate, value);
-            if (candidate.Count != entries.Count && !Publish(candidate)) return false;
+            // A failed shrink must never leave the old, larger allowance available to writes.
             availableBytes = value;
-            return true;
+            if (!EnsureLoaded()) return false;
+            var candidate = entries.ToList();
+            var fits = Fit(candidate, value);
+            if (candidate.Count != entries.Count && !Publish(candidate, requestReclaim)) return false;
+            lastError = fits ? null : "照片容量不足，尚未归档的收藏照片已保留。";
+            lastStorageCode = fits ? PortraitStorageCode.Success : PortraitStorageCode.Capacity;
+            return fits;
+        }
+    }
+
+    public void SetProtectedKeys(IReadOnlySet<string>? keys, IReadOnlySet<string>? preferred = null)
+    {
+        lock (gate)
+        {
+            protectedKeys = keys?.ToHashSet(StringComparer.Ordinal);
+            preferredKeys = preferred?.ToHashSet(StringComparer.Ordinal) ?? new(StringComparer.Ordinal);
+        }
+    }
+
+    /// <summary>Reclaims one oldest unpinned image, preferring ordinary photos to archived favorites.</summary>
+    public bool ReclaimUnprotected()
+    {
+        lock (gate)
+        {
+            if (!EnsureLoaded()) return false;
+            var remove = entries.FindIndex(entry => !IsProtected(entry.Key) && !preferredKeys.Contains(entry.Key));
+            if (remove < 0) remove = entries.FindIndex(entry => !IsProtected(entry.Key));
+            if (remove < 0) return true;
+            var candidate = entries.ToList();
+            candidate.RemoveAt(remove);
+            return Publish(candidate, requestReclaim: false);
         }
     }
 
@@ -84,7 +167,8 @@ internal sealed class PortraitThumbnailCache
         ArgumentNullException.ThrowIfNull(liveKeys);
         lock (gate)
         {
-            var candidate = entries.Where(entry => liveKeys.Contains(entry.Key)).ToList();
+            if (!EnsureLoaded()) return false;
+            var candidate = entries.Where(entry => liveKeys.Contains(entry.Key) || IsProtected(entry.Key)).ToList();
             return candidate.Count == entries.Count || Publish(candidate);
         }
     }
@@ -100,14 +184,29 @@ internal sealed class PortraitThumbnailCache
     private static int Size(List<Entry> values) => values.Count == 0 ? 0
         : HeaderBytes + values.Sum(entry => EntryBytes + entry.Image.Length);
 
-    private static void Fit(List<Entry> values, int limit)
+    private bool IsProtected(string key) => admissionPins.ContainsKey(key) || protectedKeys is null || protectedKeys.Contains(key);
+
+    private bool Fit(List<Entry> values, int limit, string? requiredKey = null)
     {
-        while (values.Count > MaximumEntries || Size(values) > limit) values.RemoveAt(0);
+        while (values.Count > MaximumEntries || Size(values) > limit)
+        {
+            var remove = values.FindIndex(entry => entry.Key != requiredKey && !IsProtected(entry.Key)
+                && !preferredKeys.Contains(entry.Key));
+            if (remove < 0) remove = values.FindIndex(entry => entry.Key != requiredKey && !IsProtected(entry.Key));
+            if (remove < 0) return false;
+            values.RemoveAt(remove);
+        }
+        return true;
+    }
+
+    private bool EnsureLoaded()
+    {
+        if (loadFailed) Load();
+        return !loadFailed;
     }
 
     private void Load()
     {
-        if (!File.Exists(path)) return;
         try
         {
             var candidate = new List<Entry>();
@@ -137,55 +236,59 @@ internal sealed class PortraitThumbnailCache
                 }
                 if (stream.Position != stream.Length) throw new InvalidDataException("Unexpected thumbnail data.");
             }
-            var originalCount = candidate.Count;
-            Fit(candidate, availableBytes);
-            if (candidate.Count == originalCount) entries = candidate;
-            else Publish(candidate);
+            // Loading precedes favorite reference discovery. Applying Fit here could erase
+            // the only saved PNG before the archive has had a chance to rescue it.
+            Volatile.Write(ref entries, candidate);
+            loadFailed = false;
+            lastError = null;
+            lastStorageCode = PortraitStorageCode.Success;
         }
-        catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException)
+        catch (Exception error) when (error is FileNotFoundException or DirectoryNotFoundException)
+        {
+            Volatile.Write(ref entries, []);
+            loadFailed = false;
+        }
+        catch (Exception error) when (error is InvalidDataException or ArgumentException)
         {
             lastError = error.Message;
             // This file owns images only. Never open, repair or delete the history file.
-            try { File.Delete(path); } catch (Exception cleanup) when (cleanup is IOException or UnauthorizedAccessException) { lastError = cleanup.Message; }
-            entries = [];
+            if (!storage.TryDeleteOwned(path, out var cleanup)) lastError = cleanup.Reason;
+            Volatile.Write(ref entries, []);
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+        {
+            // A sharing violation or denied read does not establish corruption. Keep the
+            // original charged and refuse publication until its real index can be read.
+            loadFailed = true;
+            lastError = error.Message;
+            lastStorageCode = PortraitStorageCode.StorageError;
         }
     }
 
-    private bool Publish(List<Entry> candidate)
+    private bool Publish(List<Entry> candidate, bool requestReclaim = true)
     {
-        string? temporary = null;
         try
         {
-            if (candidate.Count == 0) File.Delete(path);
-            else
+            var success = candidate.Count == 0
+                ? storage.TryDeleteOwned(path, out var result)
+                : storage.TryPublish(path, Size(candidate), stream =>
             {
-                var directory = Path.GetDirectoryName(path)!;
-                Directory.CreateDirectory(directory);
-                temporary = path + ".tmp-" + Guid.NewGuid().ToString("N");
-                using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                using var writer = new BinaryWriter(stream, Encoding.UTF8, true);
+                writer.Write(Magic);
+                writer.Write(1);
+                writer.Write(candidate.Count);
+                foreach (var entry in candidate)
                 {
-                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, true))
-                    {
-                        writer.Write(Magic);
-                        writer.Write(1);
-                        writer.Write(candidate.Count);
-                        foreach (var entry in candidate)
-                        {
-                            writer.Write(Convert.FromHexString(entry.Key));
-                            writer.Write(SHA256.HashData(entry.Image));
-                            writer.Write(entry.Image.Length);
-                            writer.Write(entry.Image);
-                        }
-                        writer.Flush();
-                    }
-                    if (stream.Length != Size(candidate)) throw new InvalidDataException("Thumbnail size accounting mismatch.");
-                    stream.Flush(true);
+                    writer.Write(Convert.FromHexString(entry.Key));
+                    writer.Write(SHA256.HashData(entry.Image));
+                    writer.Write(entry.Image.Length);
+                    writer.Write(entry.Image);
                 }
-                if (File.Exists(path)) File.Replace(temporary, path, null);
-                else File.Move(temporary, path);
-                temporary = null;
-            }
-            entries = candidate;
+                writer.Flush();
+            }, keepBackup: false, out result, requestReclaim: requestReclaim);
+            lastStorageCode = result.Code;
+            if (!success) { lastError = result.Reason; return false; }
+            Volatile.Write(ref entries, candidate);
             lastError = null;
             return true;
         }
@@ -193,11 +296,6 @@ internal sealed class PortraitThumbnailCache
         {
             lastError = error.Message;
             return false;
-        }
-        finally
-        {
-            if (temporary is not null)
-                try { File.Delete(temporary); } catch (Exception cleanup) when (cleanup is IOException or UnauthorizedAccessException) { lastError = cleanup.Message; }
         }
     }
 }

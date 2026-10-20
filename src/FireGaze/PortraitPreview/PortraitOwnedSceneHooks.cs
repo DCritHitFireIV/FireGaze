@@ -31,7 +31,8 @@ internal interface IPortraitOwnedSceneHookEnvironment
 /// </summary>
 internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedSceneHookEnvironment environment,
     PortraitNativePhaseHostReservations? reservations = null, Func<long>? timestamp = null, long timestampFrequency = 0,
-    Func<PortraitNativeThreadStamp>? nativeThread = null) : IDisposable
+    Func<PortraitNativeThreadStamp>? nativeThread = null,
+    Func<TimeSpan, CancellationToken, Task>? passiveDelay = null) : IDisposable
 {
     private readonly List<IPortraitOwnedSceneNativeHook> hooks = [];
     private IPortraitOwnedSceneNativeHook[] publishedHooks = [];
@@ -47,6 +48,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     private bool passiveOnly;
     private long passiveDeadline, passiveLastTimestamp;
     private readonly Func<long> timestamp = timestamp ?? System.Diagnostics.Stopwatch.GetTimestamp;
+    private readonly Func<TimeSpan, CancellationToken, Task> passiveDelay = passiveDelay
+        ?? ((duration, cancellation) => Task.Delay(duration, cancellation));
     private readonly long timestampFrequency = timestampFrequency == 0 ? System.Diagnostics.Stopwatch.Frequency : timestampFrequency;
     private PortraitOwnedSceneLease? lease;
     private Action<IPortraitOwnedSceneLease>? advance;
@@ -112,7 +115,11 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
             installed = true;
             installation = Guid.NewGuid();
-            if (passiveOnly) Volatile.Write(ref passiveContextCollector, new PassiveContextCollector(installation));
+            if (passiveOnly)
+            {
+                Volatile.Write(ref passiveContextCollector, new PassiveContextCollector(installation));
+                Volatile.Write(ref passiveNativeCollector, new PassiveNativeCollector(installation));
+            }
             (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.BeginContextLifetimeBatch();
             return true;
         }
@@ -155,7 +162,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         switch (target.Kind)
         {
             case PortraitOwnedSceneNativeKind.ConstructContext:
-                Add<ConstructContext>(factory, target, original => context => {
+                Add<ConstructContext>(factory, target, original => context => ObservePassiveNative(target, context, 0,
+                    0, 0, 0, 0, 0, () => {
                     var invocation = BeginPassiveContextEvent(); nint result = 0; var returned = false;
                     try
                     {
@@ -164,9 +172,10 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
                         return result;
                     }
                     finally { CompletePassiveContextEvent(invocation, PortraitOwnedScenePassiveContextEventKind.Construct, context, 0, result, returned); }
-                }); break;
+                }, result => (long)result)); break;
             case PortraitOwnedSceneNativeKind.DestroyContext:
-                Add<DestroyContext>(factory, target, original => (context, flags) => {
+                Add<DestroyContext>(factory, target, original => (context, flags) => ObservePassiveNative(target, context, 1,
+                    flags, 0, 0, 0, 0, () => {
                     var invocation = BeginPassiveContextEvent(); nint result = 0; var returned = false;
                     try
                     {
@@ -174,43 +183,56 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
                         Original(() => result = original()(context, flags)); returned = true; return result;
                     }
                     finally { CompletePassiveContextEvent(invocation, PortraitOwnedScenePassiveContextEventKind.Destroy, context, flags, result, returned); }
-                }); break;
+                }, result => (long)result)); break;
             case PortraitOwnedSceneNativeKind.ConfigureContext:
-                Add<ConfigureContext>(factory, target, original => (context, slot, type) => {
+                Add<ConfigureContext>(factory, target, original => (context, slot, type) => ObservePassiveNative(target, context, 2,
+                    slot, type, 0, 0, 0, () => {
                     BeforeContext(context, ContextMutationKind.Configure, slot, type);
-                    byte result = 0; Original(() => result = original()(context, slot, type)); return result; }); break;
+                    byte result = 0; Original(() => result = original()(context, slot, type)); return result;
+                }, result => result)); break;
             case PortraitOwnedSceneNativeKind.ConfigureDefaultContext:
-                Add<ConfigureDefaultContext>(factory, target, original => (context, slot) => {
+                Add<ConfigureDefaultContext>(factory, target, original => (context, slot) => ObservePassiveNative(target, context, 1,
+                    slot, 0, 0, 0, 0, () => {
                     BeforeContext(context, ContextMutationKind.ConfigureDefault, slot, 0);
-                    byte result = 0; Original(() => result = original()(context, slot)); return result; }); break;
+                    byte result = 0; Original(() => result = original()(context, slot)); return result;
+                }, result => result)); break;
             case PortraitOwnedSceneNativeKind.CleanupContext:
-                Add<CleanupContext>(factory, target, original => context => {
+                Add<CleanupContext>(factory, target, original => context => ObservePassiveNative(target, context, 0,
+                    0, 0, 0, 0, 0, () => {
                     BeforeContext(context, ContextMutationKind.Cleanup, null, null);
-                    Original(() => original()(context)); }); break;
+                    Original(() => original()(context)); return 0L;
+                }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Render:
-                Add<CharaView.Delegates.Render>(factory, target, original => (view, frame) => Render(view, frame, original)); break;
+                Add<CharaView.Delegates.Render>(factory, target, original => (view, frame) => ObservePassiveNative(target, (nint)view, 1,
+                    frame, 0, 0, 0, 0, () => { Render(view, frame, original); return 0L; }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Initialize:
-                Add<CharaView.Delegates.Initialize>(factory, target, original => (view, agent, slot, callback) => {
-                    BeforeNative((nint)view, slot, false); Original(() => original()(view, agent, slot, callback)); }); break;
+                Add<CharaView.Delegates.Initialize>(factory, target, original => (view, agent, slot, callback) => ObservePassiveNative(target, (nint)view, 3,
+                    (long)agent, slot, (long)callback, 0, 0, () => {
+                    BeforeNative((nint)view, slot, false); Original(() => original()(view, agent, slot, callback)); return 0L;
+                }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Setup:
-                Add<CharaViewPortrait.Delegates.Setup>(factory, target, original => (view, slot, data, agent, eventID, eventKind) => {
-                    BeforeNative((nint)view, slot, false); Original(() => original()(view, slot, data, agent, eventID, eventKind)); }); break;
+                Add<CharaViewPortrait.Delegates.Setup>(factory, target, original => (view, slot, data, agent, eventID, eventKind) => ObservePassiveNative(target, (nint)view, 5,
+                    slot, (long)data, (long)agent, eventID, unchecked((long)eventKind), () => {
+                    BeforeNative((nint)view, slot, false); Original(() => original()(view, slot, data, agent, eventID, eventKind)); return 0L;
+                }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Release:
-                Add<CharaView.Delegates.Release>(factory, target, original => view => {
-                    BeforeNative((nint)view, null, true); Original(() => original()(view)); }); break;
+                Add<CharaView.Delegates.Release>(factory, target, original => view => ObservePassiveNative(target, (nint)view, 0,
+                    0, 0, 0, 0, 0, () => { BeforeNative((nint)view, null, true); Original(() => original()(view)); return 0L; }, result => result)); break;
             case PortraitOwnedSceneNativeKind.Dtor:
-                Add<CharaView.Delegates.Dtor>(factory, target, original => (view, flags) => {
+                Add<CharaView.Delegates.Dtor>(factory, target, original => (view, flags) => (CharaView*)ObservePassiveNative(target, (nint)view, 1,
+                    flags, 0, 0, 0, 0, () => {
                     BeforeNative((nint)view, null, true); CharaView* result = null;
-                    Original(() => result = original()(view, flags)); return result; }); break;
+                    Original(() => result = original()(view, flags)); return (nint)result;
+                }, result => (long)result)); break;
             case PortraitOwnedSceneNativeKind.Update:
-                Add<CharaView.Delegates.Update>(factory, target, original => (view, frame, character) => {
-                    BeforeNative((nint)view, null, false); Original(() => original()(view, frame, character)); }); break;
+                Add<CharaView.Delegates.Update>(factory, target, original => (view, frame, character) => ObservePassiveNative(target, (nint)view, 2,
+                    frame, (long)character, 0, 0, 0, () => { BeforeNative((nint)view, null, false); Original(() => original()(view, frame, character)); return 0L; }, result => result)); break;
             case PortraitOwnedSceneNativeKind.CreateClientObject:
-                Add<ClientObjectManager.Delegates.CreateBattleCharacter>(factory, target, original => (manager, index, param) => {
-                    BeforeClientObject(index); uint result = 0; Original(() => result = original()(manager, index, param)); return result; }); break;
+                Add<ClientObjectManager.Delegates.CreateBattleCharacter>(factory, target, original => (manager, index, param) => ObservePassiveNative(target, (nint)manager, 2,
+                    index, param, 0, 0, 0, () => { BeforeClientObject(index); uint result = 0; Original(() => result = original()(manager, index, param)); return result; }, result => result)); break;
             case PortraitOwnedSceneNativeKind.DeleteClientObject:
-                Add<ClientObjectManager.Delegates.DeleteObjectByIndex>(factory, target, original => (manager, index, param) => {
-                    BeforeClientObject(index); Original(() => original()(manager, index, param)); }); break;
+                Add<ClientObjectManager.Delegates.DeleteObjectByIndex>(factory, target, original => (manager, index, param) => ObservePassiveNative(target, (nint)manager, 2,
+                    index, param, 0, 0, 0, () => { BeforeClientObject(index); Original(() => original()(manager, index, param)); return 0L; }, result => result)); break;
         }
     }
 

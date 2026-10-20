@@ -71,6 +71,7 @@ foreach ($previewSuite in @('PortraitInventoryRefreshTests', 'PortraitRuntimeSaf
 }
 Invoke-PreviewSuite 'PortraitSafetySnapshotTests'
 Invoke-PreviewSuite 'PortraitEditorOpeningReceiptTests'
+Invoke-PreviewSuite 'PortraitEditorOpeningNativeTests'
 Invoke-PreviewSuite 'PortraitStorageBudgetTests'
 Invoke-PreviewSuite 'PortraitStorageIntegrationTests'
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitFavoritePhotoTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
@@ -96,6 +97,7 @@ Invoke-PreviewSuite 'PortraitOwnedSceneHookTests'
 Invoke-PreviewSuite 'PortraitOwnedEntryProofTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneTests'
 Invoke-PreviewSuite 'PortraitOwnedTextureTests'
+Invoke-PreviewSuite 'PortraitOwnedSceneControllerTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneSlotTests'
 Invoke-PreviewSuite 'PortraitOwnedScenePhaseIntegrationTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneContextLifetimeTests'
@@ -155,5 +157,5 @@ Invoke-PreviewSuite 'PluginPhysicalDrainTests'
 
 Write-Output "Offline validation finished: $previewCompletedSuites suites; skipped: $($previewSkippedSuites -join ', ')."
 if (!$SqpackPath) { Write-Output 'Current-client GPose, item-data, portrait appearance, and portrait validation coverage is incomplete.' }
-Write-Output 'Build and offline checks do not prove in-game or two-client acceptance.'
+Write-Output 'Build and offline checks do not prove in-game acceptance.'
 exit 0

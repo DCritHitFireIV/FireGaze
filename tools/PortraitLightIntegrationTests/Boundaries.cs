@@ -181,6 +181,8 @@ namespace FireGaze.PortraitPreview
         private readonly OwnedEquipmentCatalog owned;
         private readonly OwnedCacheWriter cacheWriter;
         private readonly OwnedCacheSavePolicy ownedSavePolicy;
+        private readonly PortraitStorageBudget storageBudget;
+        private readonly TestPhotoStorage photos = new();
         private bool editorAvailable = true;
         private string status = "";
         private DateTimeOffset testClock = DateTimeOffset.Parse("2026-10-18T10:00:00+08:00");
@@ -200,12 +202,13 @@ namespace FireGaze.PortraitPreview
 
         public PortraitPreviewFeature(string file, int byteLimit = PortraitHistoryStore.MaximumBytes)
         {
+            storageBudget = PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(Path.GetFullPath(file))!);
             var customize = new byte[26]; customize[0]=1;customize[4]=1;customize[5]=1;customize[6]=1;
             target = new(new() {GameBuild="fixture",EntryPoint=2,Customize=customize,Composition=new() {BannerTimeline=1},Look=new(new PortraitPiece[13],true,true,false)});
             session = new(target);
             appearance = new([new(new(1,1,0,1),[new("hair","发型",6,255,0,[new(1,"发型1"),new(2,"发型2")])])]);
             editorValidation = new(new PortraitValidationData([], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]));
-            history = new(file,()=>testClock,byteLimit);
+            history = new(file,()=>testClock,byteLimit,storage:storageBudget);
             historyBatch = new(history,()=>testClock);
             owned = new(id=>id);
             var cacheFile=new OwnedEquipmentCacheFile(Path.GetDirectoryName(file)!);cacheFile.Load(owned,out _);
@@ -246,5 +249,26 @@ namespace FireGaze.PortraitPreview
         public bool FlushOwned() => cacheWriter.FlushAsync().GetAwaiter().GetResult();
         public int OwnedWrites => cacheWriter.CompletedWrites;
         public void Dispose() {Plugin.Keys.Held=false;DisposeLibrary();cacheWriter.Dispose();history.Dispose();target.Dispose();}
+    }
+
+    internal sealed class TestPhotoStorage
+    {
+        public bool TryWithStorageReclaim(Func<bool> attempt, Func<bool> capacity) => attempt();
+        public Task<bool> PersistFavoriteAsync(Func<Task<bool>> write,
+            Func<IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>> favorites,
+            (ulong ContentID, PortraitEditorSnapshot Snapshot)? protect = null) => Task.Run(write);
+        public IDisposable ProtectFavoriteSnapshot(ulong ownerContentID, PortraitEditorSnapshot snapshot)
+        {
+            _ = ownerContentID;
+            _ = snapshot;
+            return EmptyToken.Instance;
+        }
+        public bool ReclaimStorage() => false;
+
+        private sealed class EmptyToken : IDisposable
+        {
+            public static readonly EmptyToken Instance = new();
+            public void Dispose() { }
+        }
     }
 }

@@ -27,6 +27,7 @@ internal sealed class PortraitStorageBudget
     private readonly PortraitStorageFiles files;
     private readonly HashSet<string> families = new(StringComparer.OrdinalIgnoreCase);
     private readonly Dictionary<string, long> known = new(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<string> directoryTargets = new(StringComparer.OrdinalIgnoreCase);
     private long used;
     private long reserved;
     private long uncertainReservation;
@@ -38,6 +39,12 @@ internal sealed class PortraitStorageBudget
     private DateTime observedEpoch;
     private long reclaimRequested;
     private long reclaimCompleted;
+    private long changeVersion;
+    private TaskCompletionSource change = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    private bool waitingForLease;
+    private long observedUsed;
+    private bool observedDegraded;
+    private long directoryObservationVersion;
 
     public static PortraitStorageBudget ForDirectory(string directory)
     {
@@ -60,6 +67,8 @@ internal sealed class PortraitStorageBudget
         this.files = files ?? new PortraitStorageFiles();
         foreach (var name in ProductionNames) families.Add(name);
         Refresh(scan: true);
+        observedUsed = used;
+        observedDegraded = Snapshot.Degraded;
     }
 
     public PortraitStorageSnapshot Snapshot
@@ -67,10 +76,86 @@ internal sealed class PortraitStorageBudget
         get { lock (gate) return new(limit, used, reserved + uncertainReservation, metadataUnknown || failedCleanup.Count != 0 || used > limit, reason); }
     }
     public long ReclaimRequestVersion { get { lock (gate) return reclaimRequested; } }
+    public long ChangeVersion { get { lock (gate) return changeVersion; } }
+    public Task WaitForChangeAsync(long observedVersion, CancellationToken cancellationToken = default)
+    {
+        Task pending;
+        lock (gate) pending = observedVersion != changeVersion ? Task.CompletedTask : change.Task;
+        return cancellationToken.CanBeCanceled ? pending.WaitAsync(cancellationToken) : pending;
+    }
     internal int TrackedFileCount { get { lock (gate) return known.Count; } }
     public bool NeedsReclaim { get { lock (gate) return reclaimRequested > reclaimCompleted; } }
     public void RequestReclaim() { lock (gate) reclaimRequested++; }
-    public void CompleteReclaim(long version) { lock (gate) reclaimCompleted = Math.Max(reclaimCompleted, Math.Min(version, reclaimRequested)); }
+    public void CompleteReclaim(long version)
+    {
+        lock (gate)
+        {
+            var next = Math.Max(reclaimCompleted, Math.Min(version, reclaimRequested));
+            if (next == reclaimCompleted) return;
+            reclaimCompleted = next;
+            PublishChange();
+        }
+    }
+    private void PublishChange()
+    {
+        var previous = change;
+        change = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        changeVersion++;
+        previous.TrySetResult();
+    }
+
+    /// <summary>
+    /// Bounded host polling may call this off the hot UI path. It never creates a file or
+    /// advances the persistent epoch. True means one recovery edge, never a reclaim ack.
+    /// </summary>
+    public bool RefreshObservation()
+    {
+        long beforeUsed;
+        bool beforeDegraded;
+        long beforeDirectoryVersion;
+        lock (gate)
+        {
+            if (active) return false;
+            active = true;
+            beforeUsed = used;
+            beforeDegraded = metadataUnknown || failedCleanup.Count != 0 || used > limit;
+            beforeDirectoryVersion = directoryObservationVersion;
+        }
+        FileStream? lease = null;
+        try
+        {
+            var scan = false;
+            try
+            {
+                lease = new FileStream(lockPath, FileMode.Open, FileAccess.Read, FileShare.None);
+                var epoch = File.GetLastWriteTimeUtc(lease.SafeFileHandle);
+                scan = epoch != observedEpoch;
+                observedEpoch = epoch;
+            }
+            catch (FileNotFoundException) { scan = true; }
+            catch (DirectoryNotFoundException) { scan = true; }
+            catch (IOException e) when ((e.HResult & 0xffff) is 32 or 33) { return false; }
+            Refresh(scan);
+            lock (gate)
+            {
+                var degraded = metadataUnknown || failedCleanup.Count != 0 || used > limit;
+                var recovered = used < Math.Max(observedUsed, beforeUsed)
+                    || (observedDegraded || beforeDegraded) && !degraded || waitingForLease
+                    || directoryObservationVersion != beforeDirectoryVersion;
+                observedUsed = used;
+                observedDegraded = degraded;
+                waitingForLease = false;
+                if (recovered) PublishChange();
+                return recovered;
+            }
+        }
+        catch (Exception e) when (IsStorageError(e))
+        {
+            lock (gate) { metadataUnknown = true; reason = "肖像存储观察失败：" + e.Message; observedDegraded = true; }
+            return false;
+        }
+        finally { lease?.Dispose(); lock (gate) active = false; }
+    }
 
     /// <summary>Register fixture or future primary names in this same directory and authority.</summary>
     public void RegisterPath(string path)
@@ -88,13 +173,24 @@ internal sealed class PortraitStorageBudget
     }
 
     public bool TryPublish(string path, long expectedLength, Action<Stream> write, bool keepBackup,
-        out PortraitStorageResult result, Action? beforeReplace = null)
+        out PortraitStorageResult result, Action? beforeReplace = null, bool requestReclaim = true)
     {
         if (expectedLength < 0 || write is null || !TryOwnedPath(path, out var primary))
         { result = new(PortraitStorageCode.InvalidPath, "肖像写入路径或长度无效。"); return false; }
+        // A registered path may temporarily be occupied by a directory (for example, a
+        // failed writer fixture). Keep the family registered so it can recover after the
+        // directory is removed, but reject this write locally without degrading quota.
+        if (Directory.Exists(primary))
+        {
+            // This writer has observed the real obstruction even if the background observer
+            // has not run yet. Retain that fact so removing it produces one recovery edge.
+            lock (gate) { if (directoryTargets.Add(primary)) directoryObservationVersion++; }
+            result = new(PortraitStorageCode.InvalidPath, "肖像写入目标不是普通文件。");
+            return false;
+        }
         return Mutate(() =>
         {
-            if (!Reserve(expectedLength, out var rejection)) return rejection;
+            if (!Reserve(expectedLength, out var rejection, requestReclaim)) return rejection;
             var temporary = Path.Combine(directory, $".{Path.GetFileName(primary)}.{Guid.NewGuid():N}.tmp");
             lock (gate) known.TryAdd(temporary, 0);
             try
@@ -183,18 +279,21 @@ internal sealed class PortraitStorageBudget
 
     private bool Mutate(Func<PortraitStorageResult> mutation, out PortraitStorageResult result)
     {
+        long previousUsed;
         lock (gate)
         {
             if (active) { result = new(PortraitStorageCode.Busy, "肖像存储正在写入，请稍后重试。"); return false; }
             active = true;
+            previousUsed = used;
         }
+        var successful = false;
         FileStream? lease = null;
         try
         {
             Directory.CreateDirectory(directory);
             try { lease = new FileStream(lockPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None); }
             catch (IOException e) when ((e.HResult & 0xffff) is 32 or 33)
-            { result = new(PortraitStorageCode.Busy, "另一肖像存储写入尚未结束，请稍后重试。"); return false; }
+            { lock (gate) waitingForLease = true; result = new(PortraitStorageCode.Busy, "另一肖像存储写入尚未结束，请稍后重试。"); return false; }
             var previous = File.GetLastWriteTimeUtc(lease.SafeFileHandle);
             var rescan = previous != observedEpoch;
             // Publish a persistent, verified epoch BEFORE any data changes. A crashed peer's
@@ -207,7 +306,8 @@ internal sealed class PortraitStorageBudget
             observedEpoch = actual;
             Refresh(rescan);
             result = mutation();
-            return result.Code == PortraitStorageCode.Success;
+            successful = result.Code == PortraitStorageCode.Success;
+            return successful;
         }
         catch (Exception e)
         { result = new(PortraitStorageCode.StorageError, "肖像存储写入失败：" + e.Message); return false; }
@@ -220,11 +320,15 @@ internal sealed class PortraitStorageBudget
                 Refresh(scan: false);
                 lease.Dispose();
             }
-            lock (gate) { reserved = 0; active = false; }
+            lock (gate)
+            {
+                reserved = 0; active = false;
+                if (successful || used != previousUsed) PublishChange();
+            }
         }
     }
 
-    private bool Reserve(long bytes, out PortraitStorageResult rejection)
+    private bool Reserve(long bytes, out PortraitStorageResult rejection, bool requestReclaim = true)
     {
         lock (gate)
         {
@@ -232,7 +336,7 @@ internal sealed class PortraitStorageBudget
             { rejection = new(PortraitStorageCode.StorageError, reason.Length != 0 ? reason : "肖像存储状态未知，暂不新增数据。"); return false; }
             if (used > limit || bytes > limit - used - reserved)
             {
-                reclaimRequested++;
+                if (requestReclaim) reclaimRequested++;
                 rejection = new(PortraitStorageCode.Capacity, "肖像历史、图片、收藏和备份的共享存储已达到 128 MiB 上限。");
                 return false;
             }
@@ -273,6 +377,8 @@ internal sealed class PortraitStorageBudget
                 var length = files.GetLength(path);
                 lock (gate)
                 {
+                    var isDirectory = length is null && Directory.Exists(path);
+                    if (isDirectory ? directoryTargets.Add(path) : directoryTargets.Remove(path)) directoryObservationVersion++;
                     if (length is null)
                     {
                         failedCleanup.Remove(path);
@@ -285,7 +391,7 @@ internal sealed class PortraitStorageBudget
                     else known[path] = length.Value;
                 }
             }
-            catch (Exception e) when (IsStorageError(e)) { unknown = true; errorReason = "肖像文件长度未知：" + e.Message; }
+            catch (Exception e) when (IsStorageError(e)) { unknown = true; errorReason = $"肖像文件长度未知（{path}）：{e.Message}"; }
         }
         lock (gate)
         {
@@ -377,6 +483,7 @@ internal class PortraitStorageFiles
             // than looking like zero bytes and accidentally freeing quota.
             var attributes = File.GetAttributes(path);
             if ((attributes & FileAttributes.ReparsePoint) != 0) throw new IOException("肖像存储不接受重解析文件。");
+            if ((attributes & FileAttributes.Directory) != 0) return null;
             return new FileInfo(path).Length;
         }
         catch (FileNotFoundException) { return null; }

@@ -117,13 +117,8 @@ internal sealed partial class PortraitPreviewWindow
                     var draw = ImGui.GetWindowDrawList();
                     draw.AddRectFilled(origin, origin + imageSize, ImGui.GetColorU32(FireGazePalette.Panel));
                     var photoStatus = photos?.FavoritePhotoStatus(entry.SourceContentID, entry.Snapshot);
-                    var photoLabel = photoStatus switch
-                    {
-                        PortraitFavoritePhotoStatus.Available => "载入照片中",
-                        PortraitFavoritePhotoStatus.Capacity => "照片空间已满",
-                        PortraitFavoritePhotoStatus.StorageError => "照片暂不可用",
-                        _ => "暂无照片",
-                    };
+                    var photoLabel = PortraitHistoryPhotoPresentation.FavoriteLabel(
+                        photoStatus ?? PortraitFavoritePhotoStatus.Missing);
                     draw.AddText(origin + new Vector2(6, 50) * Scale, ImGui.GetColorU32(FireGazePalette.Muted), photoLabel);
                 }
                 ImGui.SetCursorScreenPos(origin + new Vector2(layout.PhotoWidth + spacing.X, 0));

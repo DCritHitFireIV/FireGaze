@@ -27,6 +27,23 @@ bool Publish(PortraitStorageBudget budget, string path, int length, bool backup,
     => budget.TryPublish(path, length, stream => stream.Write(new byte[length]), backup, out result);
 Run(root =>
 {
+    var limit = PortraitStorageBudget.DefaultLimitBytes;
+    var protectedBackup = Path.Combine(root, "portrait-favorites-v1.json.bak");
+    using (var seed = new FileStream(protectedBackup, FileMode.CreateNew, FileAccess.Write, FileShare.Read))
+        seed.SetLength(limit - 1);
+    var budget = new PortraitStorageBudget(root, limit);
+    var exact = Path.Combine(root, "portrait-edit-history-v1.json");
+    Check(Publish(budget, exact, 1, false, out _), "fixed 128 MiB budget accepts the exact final byte");
+    Check(budget.Snapshot.UsedBytes == limit && budget.Snapshot.ReservedBytes == 0,
+        "exact fixed budget reports 134217728 used bytes with no reservation");
+    var over = Path.Combine(root, "portrait-owned-cache-v1.json");
+    Check(!Publish(budget, over, 1, false, out var rejection) && rejection.Code == PortraitStorageCode.Capacity,
+        "one byte beyond the fixed 128 MiB budget is rejected");
+    Check(budget.Snapshot.UsedBytes == limit && new FileInfo(exact).Length == 1,
+        "fixed-budget rejection preserves the exact final byte");
+});
+Run(root =>
+{
     var file = Path.Combine(root, "history.json");
     var budget = new PortraitStorageBudget(root, 100);
     budget.RegisterPath(file);
@@ -63,6 +80,26 @@ Run(root =>
     Check(budget.TryDeleteOwned(Path.Combine(root, "portrait-favorites-v1.json.bak"), out _), "explicit owned delete");
     Check(!budget.Snapshot.Degraded && Publish(budget, path, 1, false, out _), "known capacity recovers after explicit deletion");
     Check(!budget.TryDeleteOwned(Path.Combine(root, "unrelated.log"), out _), "unregistered file deletion rejected");
+});
+Run(root =>
+{
+    var directoryTarget = Path.Combine(root, "directory-target");
+    Directory.CreateDirectory(directoryTarget);
+    var budget = new PortraitStorageBudget(root, 100);
+    budget.RegisterPath(directoryTarget);
+    Check(!budget.Snapshot.Degraded, "an existing directory target cannot poison shared metadata");
+    Check(!budget.TryPublish(directoryTarget, 1, s => s.WriteByte(1), false, out var invalid)
+        && invalid.Code == PortraitStorageCode.InvalidPath,
+        "a directory target is rejected as an invalid file path");
+    Check(!budget.Snapshot.Degraded && budget.Snapshot.UsedBytes == 0,
+        "directory rejection leaves the shared budget usable");
+    Directory.Delete(directoryTarget);
+    Check(budget.RefreshObservation(),
+        "removing a rejected directory target publishes one storage recovery edge");
+    Check(!budget.RefreshObservation(),
+        "unchanged absence after directory removal cannot repeat the recovery edge");
+    Check(Publish(budget, directoryTarget, 1, false, out _),
+        "the same registered path can publish after the directory is removed");
 });
 Run(root =>
 {
@@ -169,6 +206,32 @@ Run(root =>
     var budget = new PortraitStorageBudget(root, 1000);
     Check(budget.Snapshot.UsedBytes == expected, "startup accounts every production family migration backup and legacy temporary pattern");
     Check(Directory.GetFiles(root).Length == expected + 1, "startup preserves all existing and unrelated files");
+});
+Run(root =>
+{
+    var budget = new PortraitStorageBudget(root, 10); var path = Path.Combine(root, "portrait-edit-history-v1.json");
+    var version = budget.ChangeVersion; var first = budget.WaitForChangeAsync(version);
+    Check(ReferenceEquals(first, budget.WaitForChangeAsync(version)) && !first.IsCompleted, "unchanged subscribers share one bounded ticket");
+    Check(!Publish(budget, path, 11, false, out _) && !first.IsCompleted && budget.ChangeVersion == version, "capacity rejection cannot wake itself through epoch");
+    budget.CompleteReclaim(budget.ReclaimRequestVersion);
+    Check(first.IsCompletedSuccessfully && budget.ChangeVersion > version, "completed reclaim wakes subscribers once");
+    version = budget.ChangeVersion; var second = budget.WaitForChangeAsync(version);
+    budget.CompleteReclaim(budget.ReclaimRequestVersion);
+    Check(!second.IsCompleted && budget.ChangeVersion == version, "duplicate reclaim completion creates no wakeup");
+    using var cancel = new CancellationTokenSource(); var canceled = budget.WaitForChangeAsync(version, cancel.Token); cancel.Cancel();
+    Check(canceled.IsCanceled && !second.IsCompleted, "subscriber cancellation cannot cancel shared change ticket");
+    Check(Publish(budget, path, 1, false, out _) && second.IsCompletedSuccessfully, "successful publication wakes change subscriber");
+});
+Run(root =>
+{
+    var budget = new PortraitStorageBudget(root, 10);
+    var path = Path.Combine(root, "portrait-edit-history-v1.json");
+    Check(Publish(budget, path, 10, false, out _), "observation recovery seed reaches exact quota");
+    File.Delete(path);
+    Check(budget.RefreshObservation(), "external deletion after a mutation is a recovery edge even before the first observation");
+    Check(!budget.RefreshObservation(), "unchanged observation cannot repeat a recovery edge");
+    budget.RequestReclaim(); budget.CompleteReclaim(budget.ReclaimRequestVersion);
+    Check(!budget.RefreshObservation(), "reclaim acknowledgement without freed bytes is not a recovery edge");
 });
 Console.WriteLine($"Portrait storage budget: {passed} passed, {failed} failed.");
 return failed == 0 ? 0 : 1;

@@ -32,6 +32,7 @@ internal static class TrackedWriterTests
    var attempts=0;using var writer=new OwnedCacheWriter(_=>{var n=Interlocked.Increment(ref attempts);if(n==1)return false;if(n==2)throw new IOException("disk");return true;});
    Check(Queue(writer,4,"content"),"initial save accepted");Check(!Flush(writer).GetAwaiter().GetResult(),"returned failure is not acknowledged");
    Check(Saved(writer)==0&&Outstanding(writer)==0&&Needs(writer,4),"failed revision remains eligible");
+   Check(!Queue(writer,3,"obsolete")&&!Needs(writer,3),"an older revision cannot replace the retained latest failure");
    Check(Queue(writer,4,"content"),"same revision accepted after returned failure");Check(!Flush(writer).GetAwaiter().GetResult(),"thrown failure is not acknowledged");
    Check(Queue(writer,4,"content")&&Flush(writer).GetAwaiter().GetResult(),"same revision retry eventually persists");
    Check(Saved(writer)==4&&writer.CompletedWrites==3&&writer.FailedWrites==2,"saved and failed attempts tracked independently");

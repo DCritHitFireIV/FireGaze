@@ -14,7 +14,7 @@ internal static unsafe class OwnedPhysicalCases
     {
         try
         {
-            Qualification(); Passive(); NewOwnerBaseline(); ExpiryWithoutPolling(); StopAndPartialEnable(); CallbackDrain(); AsyncBatchDrain(); UnknownCreate();
+            Qualification(); Passive(); NewOwnerBaseline(); PassiveBaselineCloseRace(); ExpiryWithoutPolling(); StopAndPartialEnable(); CallbackDrain(); AsyncBatchDrain(); UnknownCreate();
             Console.WriteLine($"PASS {checks} owned physical transport checks"); return 0;
         }
         catch (Exception error) { Console.Error.WriteLine(error); return 1; }
@@ -134,17 +134,60 @@ internal static unsafe class OwnedPhysicalCases
         dispatch((CharaView*)Source.Model, 1);
         Check(hooks.PassiveSourceBaseline?.State == PortraitOwnedScenePassiveBaselineState.Revoked, "late stable direct entry cannot revive retired baseline");
     }
+    private static void PassiveBaselineCloseRace()
+    {
+        var environment = NewEnvironment(); var provider = new Provider();
+        var factory = new DalamudPortraitOwnedSceneHookFactory(provider, new Proof());
+        using var entered = new ManualResetEventSlim(); using var release = new ManualResetEventSlim();
+        var clockReads = 0;
+        var hooks = new PortraitOwnedSceneHooks(environment, timestamp: () => {
+            if (Interlocked.Increment(ref clockReads) == 2)
+            {
+                entered.Set();
+                if (!release.Wait(TimeSpan.FromSeconds(5))) throw new TimeoutException("baseline publish gate did not release");
+            }
+            return 0;
+        }, timestampFrequency: 1000);
+        Check(hooks.TryInstallPassive(factory, TimeSpan.FromSeconds(1)), hooks.LastError ?? "baseline race transport install");
+        var arm = Task.Run(() => hooks.TryArmPassiveSourceBaseline(Source, 7, new PortraitNativeThreadStamp(123, 456), TimeSpan.FromSeconds(1)));
+        Check(entered.Wait(TimeSpan.FromSeconds(5)), "baseline publish gate reached after close checks");
+        hooks.TryDispose();
+        Check(hooks.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(5)), "close race physically drains before baseline publication resumes");
+        release.Set();
+        Check(arm.Wait(TimeSpan.FromSeconds(5)), "baseline race Arm returned");
+        Check(!arm.Result && hooks.PassiveSourceBaseline is not { State: PortraitOwnedScenePassiveBaselineState.Waiting },
+            "a closed generation cannot publish a waiting source baseline after physical retirement");
+    }
     private static void ExpiryWithoutPolling()
     {
-        foreach (var duration in new[] { TimeSpan.FromTicks(1), TimeSpan.FromMilliseconds(20) })
+        var expiredEnvironment = NewEnvironment(); var expiredProvider = new Provider();
+        var expiredFactory = new DalamudPortraitOwnedSceneHookFactory(expiredProvider, new Proof());
+        using (var expired = new PortraitOwnedSceneHooks(expiredEnvironment, timestamp: () => 0, timestampFrequency: 1000,
+            passiveDelay: (_, _) => Task.CompletedTask))
         {
-        var environment = NewEnvironment(); var provider = new Provider();
-        var factory = new DalamudPortraitOwnedSceneHookFactory(provider, new Proof()); using var hooks = new PortraitOwnedSceneHooks(environment);
-        var installed = hooks.TryInstallPassive(factory, duration);
-        Check(installed || duration < TimeSpan.FromMilliseconds(1), hooks.LastError ?? "passive no-poll expiry installs");
-        Check(hooks.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(5)) && !hooks.IsInstalled && Released(environment)
-            && provider.Created.All(hook => hook.IsDisposed), "passive expiry closes and physically drains without a Framework poll: " + duration);
+            Check(!expired.TryInstallPassive(expiredFactory, TimeSpan.FromMilliseconds(20)),
+                "an expiry completed during installation rejects that generation before enabling");
+            Check(expired.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(5)) && !expired.IsInstalled
+                && Released(expiredEnvironment) && expiredProvider.Created.All(hook => hook.IsDisposed),
+                "installation expiry physically drains without a Framework poll");
         }
+
+        var environment = NewEnvironment(); var provider = new Provider();
+        var factory = new DalamudPortraitOwnedSceneHookFactory(provider, new Proof());
+        var timer = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        long now = 0;
+        TimeSpan? requestedDelay = null;
+        using var hooks = new PortraitOwnedSceneHooks(environment, timestamp: () => Interlocked.Read(ref now), timestampFrequency: 1000,
+            passiveDelay: (duration, cancellation) => { requestedDelay = duration; return timer.Task.WaitAsync(cancellation); });
+        Check(hooks.TryInstallPassive(factory, TimeSpan.FromMilliseconds(20)), hooks.LastError ?? "controlled expiry installs");
+        Check(requestedDelay == TimeSpan.FromMilliseconds(20) && hooks.IsInstalled && Reserved(environment)
+            && !hooks.DrainPhysicalAsync().IsCompleted && provider.Created.Count == 39,
+            "all actual hooks are live before their bounded expiry is released");
+        Interlocked.Exchange(ref now, 20);
+        timer.TrySetResult();
+        Check(hooks.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(5)) && !hooks.IsInstalled && Released(environment)
+            && provider.Created.All(hook => hook.IsDisposed),
+            "installed passive expiry closes and physically drains without a Framework poll");
     }
     private static void AsyncBatchDrain()
     {

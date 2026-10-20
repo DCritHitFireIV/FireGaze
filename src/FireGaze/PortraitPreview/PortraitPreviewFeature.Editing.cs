@@ -33,6 +33,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool deferredBaselineSync;
     private string? historyWriteError;
     private Task<bool>? historyPersistence;
+    private DateTime nextStorageObservation;
+    partial void RetryOtherPortraitStorage();
 
     public bool SyncPlate => syncPlate;
     public bool CanUndo => canUndo;
@@ -46,7 +48,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         appearance = new(Plugin.DataManager);
         editorValidation = new(Plugin.DataManager);
-        history = new(Path.Combine(directory, "portrait-edit-history-v1.json"));
+        history = new(Path.Combine(directory, "portrait-edit-history-v1.json"), storage: storageBudget);
         historyBatch = new(history);
         target.SnapshotGameBuild = Plugin.DataManager.GameData.Repositories["ffxiv"].Version;
         RefreshHistoryRows();
@@ -233,6 +235,17 @@ internal sealed unsafe partial class PortraitPreviewFeature
         // PersistenceError remains the writer's latest outcome, so a later successful full
         // snapshot retry clears a failure even if no editor operation occurs in between.
         if (historyPersistence is { IsCompleted: true }) historyPersistence = null;
+        // A completed reclaim request alone is not evidence of restored capacity.
+        // The shared authority reports only a real space, readability or OS lease edge.
+        PollStorageObservation();
+    }
+
+    public void RetryStorage() => Mutate(RetryStorageCore);
+
+    private void RetryStorageCore()
+    {
+        if (history.PersistenceError is not null) historyPersistence = history.RetryAsync();
+        RetryOtherPortraitStorage();
     }
 
     private void RefreshHistoryRows()

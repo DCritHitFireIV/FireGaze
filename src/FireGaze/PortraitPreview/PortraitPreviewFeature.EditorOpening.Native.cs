@@ -13,7 +13,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
         {
             var source = new SafetySnapshotSource(this);
             var before = source.ReadBoundary();
-            if (before.FrameworkAddress <= 0 || before.Frame is not { } frame || before.FocusByte != 1
+            // This SDK byte also reflects DirectInput acquisition. Both known states are
+            // usable; SameOpeningBoundary still requires the exact same second reading.
+            if (before.FrameworkAddress <= 0 || before.Frame is not { } frame || before.FocusByte is not (0 or 1)
                 || before.Conditions is not { Length: 112 } flags || before.SourceAddress <= 0 || before.SourceGeneration == 0
                 || before.Player is not { InCombat: { } combat, IsMoving: { } moving, IsCasting: { } casting,
                     CastActionID: { } cast } player || before.EditorAgent <= 0 || before.EditorState < 0 || before.EditorView < 0

@@ -1,6 +1,8 @@
 using FireGaze.PortraitPreview;
 
 #if HAS_OWNED_HOOKS
+var consumerEventResult = OwnedPassiveConsumerEventsCases.Run();
+if (consumerEventResult != 0) return consumerEventResult;
 var gatewayResult = OwnedGatewayCases.Run();
 if (gatewayResult != 0) return gatewayResult;
 var physicalResult = OwnedPhysicalCases.Run();

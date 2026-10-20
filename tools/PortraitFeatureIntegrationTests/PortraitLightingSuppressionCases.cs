@@ -49,6 +49,7 @@ internal static class PortraitLightingSuppressionCases
         {
             using var feature=TemplateFeature(root,"fit-pending-"+operation);
             feature.SaveFavorite("灯光前收藏",[]);
+            feature.WaitFavorites();
             var favorite=feature.Favorites.Single().ID;
             var record=feature.History.First().ID;
             var source=new OwnedSourceKey(OwnedSourceKind.Inventory);

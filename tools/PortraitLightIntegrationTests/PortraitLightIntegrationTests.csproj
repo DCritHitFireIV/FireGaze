@@ -19,6 +19,7 @@
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditLabels.cs" Link="EditLabels.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorValidation.cs" Link="Validation.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistory*.cs" LinkBase="History" />
+ <Compile Remove="../../src/FireGaze/PortraitPreview/PortraitHistoryPhotoPresentation.cs" />
  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitAppearance*.cs" LinkBase="Appearance" />
  <Compile Include="../../src/FireGaze/PortraitPreview/OwnedEquipmentModels.cs" Link="OwnedModels.cs" />
  <Reference Include="Dalamud"><HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath></Reference>

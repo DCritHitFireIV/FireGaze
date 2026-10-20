@@ -1,5 +1,7 @@
 namespace FireGaze.PortraitPreview;
 
+internal enum PortraitThumbnailTextureState { Missing, Resident, Loading, Failed }
+
 /// <summary>Demand-driven texture ownership; queued and resident resources share one hard bound.</summary>
 internal sealed class PortraitThumbnailTextureCache<T> : IDisposable where T : class, IDisposable
 {
@@ -33,6 +35,17 @@ internal sealed class PortraitThumbnailTextureCache<T> : IDisposable where T : c
     public int TotalCount { get { lock (gate) return residents.Count + pending.Count; } }
     public int CleanupFailures => physical.CleanupFailures;
     public string? LastCleanupFailureType => physical.LastCleanupFailureType;
+
+    public PortraitThumbnailTextureState State(string key)
+    {
+        lock (gate)
+        {
+            if (residents.ContainsKey(key)) return PortraitThumbnailTextureState.Resident;
+            if (pending.ContainsKey(key)) return PortraitThumbnailTextureState.Loading;
+            if (failures.ContainsKey(key)) return PortraitThumbnailTextureState.Failed;
+            return PortraitThumbnailTextureState.Missing;
+        }
+    }
 
     /// <summary>Returns a borrowed resident, or starts a bounded background load. No waiting or backlog.</summary>
     public T? Get(string key)

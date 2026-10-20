@@ -62,6 +62,18 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 events = events.Events.Select(value => new { value.Sequence, kind = value.Kind.ToString(), value.Context, value.Flags,
                     value.Result, value.OriginalReturned, value.EntryThread, value.ReturnThread, value.EnteredAt, value.ReturnedAt }),
             } : null,
+            nativeEvents = ownedPassive?.NativeEvents is { } native ? new
+            {
+                native.Installation, native.Capacity, native.Dropped, productionAdmission = false,
+                events = native.Events.Select(value => new
+                {
+                    value.Sequence, target = value.TargetKind.ToString(), address = value.TargetAddress,
+                    receiver = value.Receiver, value.ArgumentCount,
+                    arguments = new[] { value.Argument0, value.Argument1, value.Argument2, value.Argument3, value.Argument4 },
+                    value.Result, value.OriginalReturned, value.EntryThread, value.ReturnThread,
+                    value.EnteredAt, value.ReturnedAt,
+                }),
+            } : null,
             sourceReturn = state.SourceReturn is { } result ? new
             {
                 state = result.State.ToString(), result.Installation, result.SessionEpoch,

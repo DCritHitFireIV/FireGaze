@@ -5,9 +5,17 @@ internal static class PortraitLibraryIntegrationTests
     public static void Run(string root, Action<bool,string> check)
     {
         string PathFor(string name) {var dir=Path.Combine(root,"library",name);Directory.CreateDirectory(dir);return Path.Combine(dir,"history.json");}
+        using(var feature=new PortraitPreviewFeature(PathFor("metadata-drain")))
+        {
+            feature.RejectFavoriteArchive=true;feature.Sample();feature.OpenPreview();feature.SaveFavorite("参数已保存",[]);feature.WaitFavorites();
+            check(feature.Favorites.Count==1 && feature.FavoritesStatus.Contains("照片暂时无法保存"),
+                "favorite photo failure leaves durable metadata visible with an explicit photo warning");
+            check(feature.FavoriteMetadataDrainSucceeded,
+                "feature metadata drain preserves successful metadata independently of an earlier photo archive receipt");
+        }
         using(var feature=new PortraitPreviewFeature(PathFor("favorites")))
         {
-            feature.Sample();feature.OpenPreview();feature.SaveFavorite("午后",["暖色"]);
+            feature.Sample();feature.OpenPreview();feature.SaveFavorite("午后",["暖色"]);feature.WaitFavorites();
             check(feature.Favorites.Count==1,"real feature saves adventurer-plate favorite with immediate persistence");
             var entry=feature.Favorites[0];var saved=entry.Snapshot.ToJSON();
             var file=Path.Combine(root,"library","favorites","portrait-favorites-v1.json");
@@ -63,7 +71,7 @@ internal static class PortraitLibraryIntegrationTests
             feature.EditComposition(c=>c with {BannerTimeline=1, Paused=true, AnimationProgress=.2f});
             feature.Sample();feature.OpenPreview();
             feature.EditComposition(c=>c with {BannerTimeline=0, Paused=false, AnimationProgress=.6f});
-            feature.Sample();feature.SaveFavorite("播放中收藏",[]);
+            feature.Sample();feature.SaveFavorite("播放中收藏",[]);feature.WaitFavorites();
             var favorite=feature.Favorites.Single();
             feature.EditComposition(c=>c with {BannerTimeline=1, Paused=true, AnimationProgress=.3f});
             feature.Sample();feature.Sample(advanceMilliseconds:600);
@@ -87,7 +95,7 @@ internal static class PortraitLibraryIntegrationTests
         using(var feature=new PortraitPreviewFeature(PathFor("shared")))
         {
             feature.Sample();feature.OpenPreview();feature.EditComposition(c=>c with{Paused=true,CameraYaw=1,DirectionalRed=1,Frame=1,Decoration=1});feature.Sample();
-            feature.ChangeAppearance("hair",2);feature.SaveFavorite("完整肖像",["肖像"]);var favorite=feature.Favorites.Single();var original=favorite.Snapshot.Copy();
+            feature.ChangeAppearance("hair",2);feature.SaveFavorite("完整肖像",["肖像"]);feature.WaitFavorites();var favorite=feature.Favorites.Single();var original=favorite.Snapshot.Copy();
             feature.Owner=new(99,77);feature.Native.Snapshot=feature.Native.Snapshot with{EntryPoint=1,Customize=(byte[])feature.Native.Snapshot.Customize.Clone(),Composition=new(){BannerTimeline=1,Paused=true}};
             feature.Native.Snapshot.Customize[6]=1;feature.Sample();feature.SampleLibrary();var count=feature.Store.Count;
             check(feature.Favorites.Count==1&&feature.Favorites[0].SourceContentID==20&&feature.FavoriteAvailability(favorite.ID)=="",
@@ -102,10 +110,10 @@ internal static class PortraitLibraryIntegrationTests
             var calls=feature.Native.ApplyCalls;feature.Native.Snapshot=feature.Native.Snapshot with{GameBuild="different"};feature.Sample();var history=feature.Store.Count;
             check(feature.FavoriteAvailability(favorite.ID).Contains("版本"),"different build is explicitly unavailable instead of silently rebound");
             feature.RestoreFavorite(favorite.ID);check(feature.Native.ApplyCalls==calls&&feature.Store.Count==history,"different-build restoration performs no partial apply or history append");
-            feature.RenameFavorite(favorite.ID,"重命名");feature.TagFavorite(favorite.ID,["暖色","光"]);
+            feature.RenameFavorite(favorite.ID,"重命名");feature.WaitFavorites();feature.TagFavorite(favorite.ID,["暖色","光"]);feature.WaitFavorites();
             var path=Path.Combine(root,"library","shared","portrait-favorites-v1.json");var stored=new PortraitFavoritesStore(path).Entries.Single();
             check(stored.Name=="重命名"&&stored.Tags.SequenceEqual(["暖色","光"]),"feature rename and tags are immediately durable");
-            feature.RemoveFavorite(favorite.ID);check(feature.Favorites.Count==0&&new PortraitFavoritesStore(path).Entries.Count==0,"feature removal publishes only after durable library update");
+            feature.RemoveFavorite(favorite.ID);feature.WaitFavorites();check(feature.Favorites.Count==0&&new PortraitFavoritesStore(path).Entries.Count==0,"feature removal publishes only after durable library update");
         }
         using(var feature=new PortraitPreviewFeature(PathFor("atomic")))
         {
@@ -171,7 +179,7 @@ internal static class PortraitLibraryIntegrationTests
             var source=new OwnedSourceKey(OwnedSourceKind.Inventory);feature.ObserveOwned(source,[new(100,1,0)]);
             check(!feature.FlushOwned(),"owned write failure is observable before feature disposal");feature.SampleLibrary();
             check(feature.Status.Contains("读取记录未能保存"),"asynchronous cache failure reaches player-visible feature status");
-            Directory.Delete(path);feature.Advance(100);feature.ObserveOwned(source,[new(100,1,0)]);check(feature.FlushOwned(),"unchanged content can recover after storage becomes writable");feature.SampleLibrary();
+            Directory.Delete(path);feature.Advance(100);feature.MakeStorageObservationDue();feature.ObserveOwned(source,[new(100,1,0)]);feature.WaitStorageObservation();check(feature.FlushOwned(),"unchanged content can recover after storage becomes writable");feature.SampleLibrary();
             check(!feature.Status.Contains("读取记录未能保存"),"successful cache recovery clears the player-visible persistence warning");
         }
     }

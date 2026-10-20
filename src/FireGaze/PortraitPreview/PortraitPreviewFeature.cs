@@ -25,6 +25,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private readonly OwnedEquipmentCacheFile cache;
     private readonly OwnedCacheWriter cacheWriter;
     private readonly OwnedCacheSavePolicy ownedSavePolicy;
+    private readonly PortraitStorageBudget storageBudget;
     private readonly PortraitPreviewWindow window;
     private readonly WindowSystem windows = new("FireGazePortrait");
     private readonly IDalamudPluginInterface pluginInterface;
@@ -52,15 +53,16 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     {
         this.pluginInterface = pluginInterface;
         this.readWorldTrials = readWorldTrials;
+        storageBudget = PortraitStorageBudget.ForDirectory(configDirectory);
         equipment = Plugin.DataManager.GetExcelSheet<Item>().Where(row => row.EquipSlotCategory.RowId != 0 && row.RowId != 0)
             .ToDictionary(row => row.RowId);
         glasses = Plugin.DataManager.GetExcelSheet<Glasses>().Where(row => row.RowId > 0 && row.Model != 0).ToDictionary(row => row.RowId);
         dyes = Plugin.DataManager.GetExcelSheet<Stain>().Where(row => row.RowId <= byte.MaxValue && !string.IsNullOrWhiteSpace(row.Name.ToString()))
             .Select(row => new PortraitDye((byte)row.RowId, row.Name.ToString(), row.Color, row.Shade, row.SubOrder)).ToArray();
         owned = new(id => equipment.ContainsKey(id % 1_000_000) ? id % 1_000_000 : null);
-        cache = new(configDirectory);
+        cache = new(configDirectory, storage: storageBudget);
         cache.Load(owned, out _);
-        cacheWriter = new(json => cache.SaveJSON(json, out _));
+        cacheWriter = new(cache.SaveJSONResult, storageBudget);
         ownedSavePolicy = new(cacheWriter, owned.ContentRevision);
         var cabinetItems = Plugin.DataManager.GetExcelSheet<CabinetRow>().Select(row => new OwnedCabinetItem(row.RowId, row.Item.RowId)).ToArray();
         inventory = new(() => Plugin.Framework.IsInFrameworkUpdateThread, CurrentCharacter, () => cabinetItems, IsRetainerInventoryOpen);
@@ -127,6 +129,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
             historyRows, appearanceGroups,
             historyPhotos = photos.Diagnostics(),
+            portraitStorage = storageBudget.Snapshot,
             captureIsolation = captureIsolation.Mode,
             sourceCensus = SourceCensusDiagnostics(),
             ownedPassive = OwnedPassiveDiagnostics(),
@@ -550,6 +553,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             history.BeginDispose(),
         };
         if (glamourPlateCache is not null) drains.Add(glamourPlateCache.BeginDispose());
+        drains.Add(DrainFavoritePersistence());
+        drains.Add(DrainStorageObservation());
         return PortraitManagedDrain.Combine(
             error => Plugin.Log.Warning(error, "[肖像同步预览] 托管文件排空失败"), drains.ToArray());
     }

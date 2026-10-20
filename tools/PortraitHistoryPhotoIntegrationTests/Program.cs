@@ -44,6 +44,13 @@ static async Task<int> Run()
         Check(await history.FlushAsync(), "real history finishes its own independent writer before photo checks");
         var historyBefore = File.ReadAllBytes(historyPath);
         var records = history.GetRecords(key);
+        checks += PhotoDisplayStatusCases.Run();
+        checks += PhotoReclaimPolicyCases.Run();
+        checks += await PhotoNonBlockingStorageCases.RunAsync(root, initial);
+        using (var displayPhotos = Photos("history-display-status.bin", new()))
+            checks += PhotoDisplayStatusCases.RunServiceCases(displayPhotos, two);
+        checks += await FavoriteStoragePressureCases.RunAsync(root, initial);
+        checks += await PhotoMaintenanceRetryCases.RunAsync(root, initial);
         checks += await FavoriteRetentionCases.RunAsync(root, initial);
         checks += await PhotoEncodingBoundaryTests.RunAsync(root, history, historyPath, key, one, initial, identity);
         checks += await PhotoDrawCompositionTests.RunAsync(root, history, key, one, initial, identity);
@@ -98,7 +105,8 @@ static async Task<int> Run()
         var otherImageKey = PortraitThumbnailCache.KeyForSnapshot("20|" + other.SnapshotJSON);
         var cachedPath = Path.Combine(root, "characters.bin");
         var seed = new PortraitThumbnailCache(cachedPath, PortraitThumbnailCache.MaximumBytes - history.Bytes);
-        Check(seed.TryPut(currentImageKey, new byte[] { 1, 2 }) && seed.TryPut(otherImageKey, new byte[] { 3, 4 }), "seed distinct disposable photos for two characters");
+        Check(seed.TryPut(currentImageKey, new byte[] { 1, 2 }) && seed.TryPut(otherImageKey, new byte[] { 3, 4 }),
+            $"seed distinct disposable photos for two characters (code={seed.LastStorageCode}, error={seed.LastError ?? "<none>"})");
         var cachedSource = new PortraitThumbnailSource();
         using (var photos = Photos("characters.bin", cachedSource, history.Bytes))
         {

@@ -119,10 +119,11 @@ Case("failed disk write retries the same unchanged content revision",()=>{
  var directory=Path.Combine(Path.GetTempPath(),"firegaze-glamour-plate-"+Guid.NewGuid().ToString("N"));
  try{
   File.WriteAllText(directory,"block directory creation");var catalog=Catalog();catalog.ActivateCharacter(owner);catalog.ApplyRead(owner,now,Pages());
-  using var cache=Cache(directory);
+  using var cache=new PortraitGlamourPlateCache(directory,retryDelay:(_,_)=>Task.CompletedTask);
   Check(cache.QueueIfNeeded(catalog)&&!cache.FlushAsync().GetAwaiter().GetResult()&&cache.FailedWrites==1,"write failure is observable and leaves the revision dirty");
+  Check(!cache.QueueIfNeeded(catalog)&&cache.CompletedWrites==1&&cache.LastError is not null,"unchanged failed template revision cannot restart on a background observation");
   File.Delete(directory);Directory.CreateDirectory(directory);
-  Check(cache.QueueIfNeeded(catalog)&&cache.FlushAsync().GetAwaiter().GetResult()&&cache.CompletedWrites==2,"same revision succeeds after local storage recovers");
+  Check(cache.RetryAsync().GetAwaiter().GetResult()&&cache.CompletedWrites==2&&cache.LastError is null,"explicit retry persists the retained template revision after local storage recovers");
   var copy=Catalog();using var reader=Cache(directory);Check(reader.Load(copy,out _),"retry is durable before plugin disposal");copy.ActivateCharacter(owner);
   Check(copy.BuildView(now).Plates[19].Pieces[11].Stain1==7,"recovered file preserves complete template set");
  }finally{
@@ -153,4 +154,5 @@ unsafe{
   });
  }finally{NativeMemory.Free(memory);}
 }
+var pressure=await CachePressureTests.Run();passed+=pressure.Passed;failed+=pressure.Failed;
 Console.WriteLine($"PortraitGlamourPlateTests: {passed} passed, {failed} failed; game calls: 0");Environment.ExitCode=failed==0?0:1;

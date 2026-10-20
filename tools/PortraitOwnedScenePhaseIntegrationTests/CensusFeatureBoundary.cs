@@ -87,6 +87,7 @@ namespace FireGaze.PortraitPreview
         internal bool OwnedCommand(params string[] parts) => TryOwnedPassiveCommand(parts);
         internal void OwnedTick() => UpdateOwnedPassive();
         internal PortraitOwnedScenePassiveSafetyState OwnedSafety => ReadOwnedPassiveSafetyState();
+        internal string OwnedJSON() => System.Text.Json.JsonSerializer.Serialize(OwnedPassiveDiagnostics());
         internal string CensusJSON() => System.Text.Json.JsonSerializer.Serialize(SourceCensusDiagnostics());
     }
     internal sealed class CensusTarget(PortraitIdentity source) : IPortraitPreviewTarget

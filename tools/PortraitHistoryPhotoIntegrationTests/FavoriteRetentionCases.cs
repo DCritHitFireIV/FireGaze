@@ -100,7 +100,7 @@ internal static class FavoriteRetentionCases
         Check(migrationConstructor is not null, "startup must migrate known favorite photos before applying the smaller history cache budget");
         using (var service = (PortraitHistoryPhotos)migrationConstructor!.Invoke(new object?[]
             { migrationPath, textures, readback, source, PortraitThumbnailCache.MaximumBytes, null, null,
-                new (ulong ContentID, PortraitEditorSnapshot Snapshot)[] { (10, snapshot) } }))
+                new (ulong ContentID, PortraitEditorSnapshot Snapshot)[] { (10, snapshot) }, null, null }))
         {
             Check(!File.Exists(migrationPath), "migration still applies the actual zero-byte history image budget");
         }

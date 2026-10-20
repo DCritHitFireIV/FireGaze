@@ -14,13 +14,19 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 {
     private static readonly Guid Png = new("1b7cfaf4-713f-473c-bbcd-6137425faeaf");
     private readonly object sync = new();
+    private readonly object favoriteSynchronization = new();
     private readonly ITextureProvider textures;
     private readonly ITextureReadbackProvider readback;
     private readonly PortraitThumbnailSource source;
     private readonly PortraitThumbnailCache cache;
     private readonly PortraitFavoritePhotos favoritePhotos;
+    private readonly PortraitStorageBudget storage;
+    private readonly Func<TimeSpan, CancellationToken, Task> retryDelay;
     private HashSet<string> favoriteKeys = new(StringComparer.Ordinal);
     private bool favoriteReferencesKnown;
+    private HashSet<string> unarchivedFavoriteKeys = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, int> provisionalFavoriteKeys = new(StringComparer.Ordinal);
+    private bool favoriteSynchronizationNeeded;
     private readonly PortraitThumbnailCaptureGate gate = new();
     private readonly PortraitThumbnailTextureCache<IDalamudTextureWrap> loaded;
     private readonly PortraitPhotoTrace photoTrace;
@@ -35,9 +41,24 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private PortraitThumbnailCaptureTicket? ticket;
     private Task<byte[]>? encoding;
     private Task<bool>? writing;
+    private (string Key, byte[] Bytes)? retainedPng;
+    private string? writingKey;
+    private bool retryPngRequested;
+    private string? pngWriteError;
+    private PortraitStorageCode pngWriteCode;
     private Task? maintenance;
+    private Task<bool>? favoriteSynchronizationTask;
+    private bool favoriteMetadataFailed;
+    private IDisposable? retainedFavoriteProtection;
+    private (string Key, byte[] Bytes)? retainedFavoriteImage;
     private int availableBytes;
     private bool maintenanceNeeded;
+    private long maintenanceRequest;
+    private long attemptedMaintenance = -1;
+    private long attemptedStorageChange = -1;
+    private long scheduledReclaimVersion;
+    private int maintenanceAttempts;
+    private string? maintenanceError;
     private HashSet<string> imageKeys = [];
     private int cacheBytes;
     private string? cacheError;
@@ -50,21 +71,26 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 
     public PortraitHistoryPhotos(string path, ITextureProvider textures, ITextureReadbackProvider readback,
         PortraitThumbnailSource source, int historyBytes, Action<string>? logger = null, string? favoritePhotoPath = null,
-        IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>? favoriteSnapshots = null)
+        IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>? favoriteSnapshots = null,
+        Func<TimeSpan, CancellationToken, Task>? retryDelay = null,
+        PortraitStorageBudget? storage = null)
     {
         photoTrace = new(logger);
         this.textures = textures;
         this.readback = readback;
         this.source = source;
+        this.storage = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
+        this.retryDelay = retryDelay ?? Task.Delay;
         availableBytes = Math.Max(0, PortraitThumbnailCache.MaximumBytes - historyBytes);
         // On the first upgrade, rescue known favorites before shrinking the old disposable
         // cache. Otherwise an already completed image could be evicted before being archived.
-        cache = new(path, favoriteSnapshots is null ? availableBytes : PortraitThumbnailCache.MaximumBytes);
-        favoritePhotos = new(favoritePhotoPath ?? Path.ChangeExtension(path, ".favorites.json"));
+        cache = new(path, PortraitThumbnailCache.MaximumBytes, this.storage);
+        cache.SetProtectedKeys(null);
+        favoritePhotos = new(favoritePhotoPath ?? Path.ChangeExtension(path, ".favorites.json"), storage: this.storage);
         if (favoriteSnapshots is not null)
         {
             SetFavoriteSnapshots(favoriteSnapshots);
-            cache.SetAvailableBytes(availableBytes);
+            maintenanceNeeded |= !cache.SetAvailableBytes(availableBytes);
         }
         PublishCacheMetadata();
         loaded = new(async key =>
@@ -87,7 +113,9 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         lock (sync) return new { count = imageKeys.Count, bytes = cacheBytes, availableBytes, loaded = loaded.Count,
             loading = loaded.InFlight, capturing = capture is not null || encoding is not null || writing is not null,
             saved, discarded, favoritePhotoCount = favoritePhotos.Count,
-            favoritePhotoError = favoritePhotos.LastError, lastError = lastError ?? cacheError,
+            favoritePhotoError = favoritePhotos.LastError, lastError = lastError ?? maintenanceError ?? cacheError,
+            maintenancePending = maintenanceNeeded, maintenanceAttempts, favoritePhotoPending = favoriteSynchronizationNeeded,
+            managedFavoritesPending = favoriteSynchronizationTask is { IsCompleted: false },
             physicalPending = physical.Pending, physicalRetiring = physicalDrain is { IsCompleted: false },
             cleanupFailures = physical.CleanupFailures + loaded.CleanupFailures,
             cleanupFailureType = physical.LastCleanupFailureType ?? loaded.LastCleanupFailureType,
@@ -105,7 +133,22 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 
     public bool IsBusy
     {
-        get { lock (sync) return capture is not null || encoding is not null || writing is not null || maintenance is not null; }
+        get { lock (sync) return capture is not null || encoding is not null || writing is not null || maintenance is not null
+            || favoriteSynchronizationTask is { IsCompleted: false }; }
+    }
+
+    public bool HasStorageError { get { lock (sync) return pngWriteError is not null || maintenanceError is not null
+        || cacheError is not null || favoritePhotos.LastError is not null; } }
+
+    public void RetryStorage()
+    {
+        lock (sync)
+        {
+            if (disposed) return;
+            maintenanceNeeded = true;
+            maintenanceRequest++;
+            retryPngRequested = retainedPng is not null;
+        }
     }
 
     // A completed logical work slot can still own late provider cleanup.
@@ -131,6 +174,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                     records[record.ID] = (PortraitThumbnailCache.KeyForSnapshot(record.Key.ContentID.ToString(System.Globalization.CultureInfo.InvariantCulture) + "|" + record.SnapshotJSON), PortraitEditorSnapshot.FromJSON(record.SnapshotJSON));
             availableBytes = Math.Max(0, PortraitThumbnailCache.MaximumBytes - historyBytes);
             maintenanceNeeded = true;
+            maintenanceRequest++;
         }
     }
 
@@ -145,12 +189,21 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 if (maintenance.IsFaulted) lastError = maintenance.Exception?.GetBaseException().Message;
                 maintenance = null;
             }
-            if (maintenanceNeeded && maintenance is null && writing is null)
+            var reclaimVersion = storage.ReclaimRequestVersion;
+            if (storage.NeedsReclaim && reclaimVersion != scheduledReclaimVersion)
+            {
+                scheduledReclaimVersion = reclaimVersion;
+                maintenanceNeeded = true;
+                maintenanceRequest++;
+            }
+            if (maintenanceNeeded && maintenance is null && writing is null
+                && (attemptedMaintenance != maintenanceRequest || attemptedStorageChange != storage.ChangeVersion))
             {
                 var budget = availableBytes;
-                maintenanceNeeded = false;
+                var request = maintenanceRequest;
+                attemptedMaintenance = request;
                 // Keep other characters' disposable photos; their history is not in the current UI.
-                maintenance = Task.Run(() => { cache.SetAvailableBytes(budget); PublishCacheMetadata(); });
+                maintenance = Task.Run(() => MaintainAsync(budget, request));
             }
             var found = currentID is { } id && records.TryGetValue(id, out var record);
             var value = found ? records[currentID!.Value] : default;
@@ -158,6 +211,11 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 && physical.CleanupFailures == 0 && loaded.CleanupFailures == 0;
             var eligible = gate.Observe(owner, currentID ?? 0, value.Key ?? "", ready);
             FinishWrite();
+            if (retryPngRequested && retainedPng is { } retained && writing is null && maintenance is null)
+            {
+                retryPngRequested = false;
+                BeginPngWrite(retained);
+            }
             readyToCompose = capture?.IsCompleted == true && ticket is not null && gate.CanAccept(ticket);
             if (encoding?.IsCompleted == true && maintenance is null)
             {
@@ -168,16 +226,8 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                     if (ticket is null || !gate.CanAccept(ticket) || !PortraitThumbnailImage.IsSafeSize(bytes)) Reject();
                     else
                     {
-                        var key = ticket.StateKey;
-                        var operation = photoOperation;
-                        writing = operation.CallAsync(PortraitPhotoPhase.CacheWrite, () => Task.Run(() =>
-                        {
-                            int budget;
-                            lock (sync) { if (disposed) return false; budget = availableBytes; }
-                            var accepted = cache.SetAvailableBytes(budget) && cache.TryPut(key, bytes);
-                            PublishCacheMetadata();
-                            return accepted;
-                        }));
+                        retainedPng = (ticket.StateKey, bytes);
+                        BeginPngWrite(retainedPng.Value);
                     }
                 }
                 catch (Exception error) { physical.ObserveFailure(error); lastError = error.Message; Reject(); }
@@ -192,6 +242,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 Reject();
             }
             if (!eligible || capture is not null || encoding is not null || writing is not null || maintenance is not null) return;
+            if (retainedPng is { } failed && failed.Key == value.Key) return;
             if (Volatile.Read(ref imageKeys).Contains(value.Key!)
                 || favoritePhotos.Status(value.Key!) == PortraitFavoritePhotoStatus.Available)
             {
@@ -216,18 +267,62 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     {
         if (writing?.IsCompleted != true) return;
         var success = writing.IsCompletedSuccessfully && writing.Result;
-        if (success && ticket is not null)
+        if (success)
         {
             saved++;
             // Copy only the completed managed PNG. This never starts another capture or replays
             // a snapshot. Retain it before ordinary history maintenance can evict the source.
-            SynchronizeFavoritePhotos();
-            loaded.Invalidate(ticket.StateKey);
+            favoriteSynchronizationNeeded = true;
+            maintenanceNeeded = true;
+            maintenanceRequest++;
+            if (writingKey is { } key) loaded.Invalidate(key);
+            if (retainedPng?.Key == writingKey) retainedPng = null;
+            pngWriteError = null;
+            pngWriteCode = PortraitStorageCode.Success;
         }
-        else if (writing.IsFaulted) lastError = writing.Exception?.GetBaseException().Message;
+        else pngWriteError = writing.IsFaulted ? writing.Exception?.GetBaseException().Message
+            : cache.LastError ?? "照片写盘失败，已保留待保存图片。";
+        if (!success) pngWriteCode = cache.LastStorageCode == PortraitStorageCode.Success
+            ? PortraitStorageCode.StorageError : cache.LastStorageCode;
         if (ticket is not null) gate.Complete(ticket, success);
         writing = null;
+        writingKey = null;
         ticket = null;
+    }
+
+    private void BeginPngWrite((string Key, byte[] Bytes) image)
+    {
+        writingKey = image.Key;
+        writing = photoOperation.CallAsync(PortraitPhotoPhase.CacheWrite, () => Task.Run(() => WritePngAsync(image)));
+    }
+
+    private async Task<bool> WritePngAsync((string Key, byte[] Bytes) image)
+    {
+        bool Attempt()
+        {
+            int budget;
+            lock (sync) budget = availableBytes;
+            lock (favoriteSynchronization)
+            {
+                var accepted = cache.SetAvailableBytes(budget) && cache.TryPut(image.Key, image.Bytes);
+                if (accepted) SynchronizeFavoritePhotos();
+                PublishCacheMetadata();
+                return accepted;
+            }
+        }
+        for (var attempt = 0; attempt < 4; attempt++)
+        {
+            if (attempt != 0) await retryDelay(TimeSpan.FromSeconds(1 << (attempt - 1)), CancellationToken.None).ConfigureAwait(false);
+            if (PortraitPhotoReclaimPolicy.TryWithReclaim(
+                attempt: Attempt,
+                capacity: () => cache.LastStorageCode == PortraitStorageCode.Capacity,
+                reclaim: ReclaimStorage,
+                state: () => (cache.Count, (long)cache.Bytes),
+                maxReclaims: PortraitThumbnailCache.MaximumEntriesForReclaim)) return true;
+            if (cache.LastStorageCode == PortraitStorageCode.Capacity) continue;
+            if (cache.LastStorageCode is not (PortraitStorageCode.Busy or PortraitStorageCode.StorageError)) return false;
+        }
+        return false;
     }
 
     /// <summary>Schedules owned pixel work without changing the game's render context.</summary>
@@ -312,21 +407,305 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         lock (sync) return !disposed && records.TryGetValue(recordID, out var value) ? loaded.Get(value.Key) : null;
     }
 
+    public PortraitHistoryPhotoStatus GetHistoryPhotoStatus(long recordID)
+    {
+        string key;
+        bool pendingCapture;
+        bool failedWrite;
+        PortraitStorageCode failedWriteCode;
+        int photoBudget;
+        lock (sync)
+        {
+            if (disposed || !records.TryGetValue(recordID, out var record)) return PortraitHistoryPhotoStatus.Missing;
+            key = record.Key;
+            pendingCapture = ticket?.StateKey == key
+                && (capture is not null || encoding is not null || writingKey == key
+                    || retainedPng?.Key == key && pngWriteError is null);
+            failedWrite = retainedPng?.Key == key && pngWriteError is not null;
+            failedWriteCode = pngWriteCode;
+            photoBudget = availableBytes;
+        }
+
+        var loadState = loaded.State(key);
+        if (loadState == PortraitThumbnailTextureState.Resident) return PortraitHistoryPhotoStatus.Saved;
+        if (loadState == PortraitThumbnailTextureState.Failed) return PortraitHistoryPhotoStatus.StorageError;
+        if (failedWrite)
+            return failedWriteCode == PortraitStorageCode.Capacity
+                ? PortraitHistoryPhotoStatus.Capacity : PortraitHistoryPhotoStatus.StorageError;
+
+        var favoriteStatus = favoritePhotos.Status(key);
+        if (favoriteStatus == PortraitFavoritePhotoStatus.Capacity) return PortraitHistoryPhotoStatus.Capacity;
+        if (favoriteStatus == PortraitFavoritePhotoStatus.StorageError) return PortraitHistoryPhotoStatus.StorageError;
+        var hasDurableImage = Volatile.Read(ref imageKeys).Contains(key) || favoritePhotos.Contains(key);
+        if (loadState == PortraitThumbnailTextureState.Loading || pendingCapture || hasDurableImage)
+            return PortraitHistoryPhotoStatus.Loading;
+        if (photoBudget < 84 + 1) return PortraitHistoryPhotoStatus.Capacity;
+
+        var storageState = storage.Snapshot;
+        if (storageState.UsedBytes > storageState.LimitBytes) return PortraitHistoryPhotoStatus.Capacity;
+        if (storageState.Degraded) return PortraitHistoryPhotoStatus.StorageError;
+        return PortraitHistoryPhotoStatus.Missing;
+    }
+
     public bool SetFavoriteSnapshots(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> values)
     {
         ArgumentNullException.ThrowIfNull(values);
-        lock (sync)
+        var keys = values.Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+            .ToHashSet(StringComparer.Ordinal);
+        return SetFavoriteKeys(keys, accepted: false);
+    }
+
+    private bool SetFavoriteKeys(HashSet<string> keys, bool accepted)
+    {
+        lock (favoriteSynchronization)
         {
-            if (disposed) return false;
-            favoriteKeys = values.Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
-                .ToHashSet(StringComparer.Ordinal);
-            favoriteReferencesKnown = true;
+            lock (sync)
+            {
+                if (disposed && !accepted) return false;
+                favoriteKeys = keys;
+                unarchivedFavoriteKeys = keys.ToHashSet(StringComparer.Ordinal);
+                favoriteReferencesKnown = true;
+                favoriteSynchronizationNeeded = true;
+                maintenanceNeeded = true;
+                maintenanceRequest++;
+                UpdateCacheProtection();
+            }
             return SynchronizeFavoritePhotos();
         }
     }
 
-    private bool SynchronizeFavoritePhotos() => !favoriteReferencesKnown || favoritePhotos.Synchronize(favoriteKeys,
-        key => cache.TryGet(key, out var bytes) ? bytes : null);
+    /// <summary>
+    /// Publishes a new durable reference set from a serialized worker. Accepted work remains
+    /// tracked through close; callers never wait on the archive's physical I/O lock.
+    /// </summary>
+    public Task<bool> SetFavoriteSnapshotsAsync(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> values)
+    {
+        ArgumentNullException.ThrowIfNull(values);
+        var keys = values.Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+            .ToHashSet(StringComparer.Ordinal);
+        return QueueFavoriteWork(() => Task.FromResult(SetFavoriteKeys(keys, accepted: true)));
+    }
+
+    /// <summary>
+    /// Admits one metadata action before close, immediately pinning a committed image. Its worker
+    /// rescues any image displaced by an already executing candidate before
+    /// metadata can become durable, then archives the resulting references before releasing
+    /// that pin. A failed action retains its pin until the next explicit action or retry.
+    /// </summary>
+    public Task<bool> PersistFavoriteAsync(Func<Task<bool>> writeMetadata,
+        Func<IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>> readFavorites,
+        (ulong ContentID, PortraitEditorSnapshot Snapshot)? protect = null)
+    {
+        ArgumentNullException.ThrowIfNull(writeMetadata);
+        ArgumentNullException.ThrowIfNull(readFavorites);
+        var key = protect is { } value ? SnapshotKey(value.ContentID, value.Snapshot) : null;
+        lock (sync)
+        {
+            if (disposed) return Task.FromResult(false);
+            // Purely managed admission: neither the service I/O mutex nor the cache writer
+            // gate is entered on Framework. The bounded rescue copy covers in-flight writes.
+            var admission = key is null ? null : cache.ProtectAdmission(key);
+            return QueueFavoriteWork(async () =>
+            {
+                lock (sync) favoriteMetadataFailed = true;
+                lock (favoriteSynchronization)
+                {
+                    var rescue = admission?.Image ?? [];
+                    if (rescue.Length == 0 && retainedFavoriteImage is { } previous && previous.Key == key)
+                        rescue = previous.Bytes;
+                    retainedFavoriteProtection?.Dispose();
+                    retainedFavoriteProtection = admission;
+                    retainedFavoriteImage = key is not null && rescue.Length != 0 ? (key, rescue) : null;
+                    if (key is not null)
+                    {
+                        lock (sync)
+                        {
+                            provisionalFavoriteKeys[key] = provisionalFavoriteKeys.GetValueOrDefault(key) + 1;
+                            UpdateCacheProtection();
+                        }
+                        retainedFavoriteProtection = new FavoriteActionProtection(new FavoriteProtection(this, key), admission);
+                        if (rescue.Length != 0 && !cache.Contains(key) && !cache.TryPut(key, rescue))
+                        {
+                            PublishCacheMetadata();
+                            return false;
+                        }
+                        PublishCacheMetadata();
+                    }
+                }
+                if (!await writeMetadata().ConfigureAwait(false)) return false;
+                lock (sync) favoriteMetadataFailed = false;
+                var keys = readFavorites().Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+                    .ToHashSet(StringComparer.Ordinal);
+                var archived = SetFavoriteKeys(keys, accepted: true);
+                // Permanent unarchived pins are published by SetFavoriteKeys even when the archive
+                // fails, so the provisional token can end without risking the only durable PNG.
+                lock (favoriteSynchronization)
+                {
+                    retainedFavoriteProtection?.Dispose();
+                    retainedFavoriteProtection = null;
+                    retainedFavoriteImage = null;
+                }
+                return archived;
+            });
+        }
+    }
+
+    private sealed class FavoriteActionProtection(IDisposable policy, IDisposable? admission) : IDisposable
+    {
+        public void Dispose()
+        {
+            policy.Dispose();
+            admission?.Dispose();
+        }
+    }
+
+    private Task<bool> QueueFavoriteWork(Func<Task<bool>> action)
+    {
+        lock (sync)
+        {
+            if (disposed) return Task.FromResult(false);
+            var previous = favoriteSynchronizationTask;
+            return favoriteSynchronizationTask = Task.Run(async () =>
+            {
+                if (previous is not null)
+                {
+                    try { await previous.ConfigureAwait(false); }
+                    catch (Exception error) { lock (sync) lastError = error.Message; }
+                }
+                return await action().ConfigureAwait(false);
+            });
+        }
+    }
+
+    public IDisposable ProtectFavoriteSnapshot(ulong contentID, PortraitEditorSnapshot snapshot)
+    {
+        var key = SnapshotKey(contentID, snapshot);
+        lock (favoriteSynchronization)
+        lock (sync)
+        {
+            if (disposed) return new FavoriteProtection(null, key);
+            provisionalFavoriteKeys[key] = provisionalFavoriteKeys.GetValueOrDefault(key) + 1;
+            UpdateCacheProtection();
+            return new FavoriteProtection(this, key);
+        }
+    }
+
+    private void ReleaseFavoriteProtection(string key)
+    {
+        lock (favoriteSynchronization)
+        lock (sync)
+        {
+            if (!provisionalFavoriteKeys.TryGetValue(key, out var count)) return;
+            if (count == 1) provisionalFavoriteKeys.Remove(key); else provisionalFavoriteKeys[key] = count - 1;
+            UpdateCacheProtection();
+            maintenanceNeeded = true;
+            maintenanceRequest++;
+        }
+    }
+
+    private sealed class FavoriteProtection(PortraitHistoryPhotos? owner, string key) : IDisposable
+    {
+        private PortraitHistoryPhotos? value = owner;
+        public void Dispose() => Interlocked.Exchange(ref value, null)?.ReleaseFavoriteProtection(key);
+    }
+
+    /// <summary>Called outside any other store lock; favorites with no durable archive remain pinned.</summary>
+    public bool ReclaimStorage()
+    {
+        var version = storage.ReclaimRequestVersion;
+        try
+        {
+            lock (favoriteSynchronization)
+            {
+                lock (sync) { if (disposed) return false; }
+                var success = cache.ReclaimUnprotected();
+                PublishCacheMetadata();
+                return success;
+            }
+        }
+        finally { storage.CompleteReclaim(version); }
+    }
+
+    public bool TryWithStorageReclaim(Func<bool> attempt, Func<bool> capacity)
+        => PortraitPhotoReclaimPolicy.TryWithReclaim(attempt, capacity, ReclaimStorage,
+            () => (cache.Count, (long)cache.Bytes), PortraitThumbnailCache.MaximumEntriesForReclaim);
+
+    private bool SynchronizeFavoritePhotos(bool requestReclaim = true)
+    {
+        lock (favoriteSynchronization)
+        {
+            HashSet<string> keys;
+            lock (sync)
+            {
+                if (!favoriteReferencesKnown) return true;
+                keys = favoriteKeys.ToHashSet(StringComparer.Ordinal);
+            }
+            // The archive holds its own lock while invoking this reader. Materialize completed
+            // PNGs first so its callback never takes another store/authority/service lock.
+            var completed = new Dictionary<string, byte[]>(StringComparer.Ordinal);
+            foreach (var key in keys)
+                if (cache.TryGet(key, out var bytes)) completed[key] = bytes;
+            var success = favoritePhotos.Synchronize(keys, key => completed.GetValueOrDefault(key), requestReclaim);
+            var missing = keys.Where(key => favoritePhotos.Status(key) != PortraitFavoritePhotoStatus.Available)
+                .ToHashSet(StringComparer.Ordinal);
+            lock (sync)
+            {
+                unarchivedFavoriteKeys = missing;
+                // A completed PNG that failed to archive is still the only durable copy.
+                // Keep both its pin and a pending retry; missing uncaptured images wait for
+                // FinishWrite rather than serializing the same empty archive repeatedly.
+                favoriteSynchronizationNeeded = !success || missing.Any(completed.ContainsKey);
+                UpdateCacheProtection();
+            }
+            return success && !missing.Any(completed.ContainsKey);
+        }
+    }
+
+    private async Task MaintainAsync(int budget, long request)
+    {
+        var success = false;
+        string? failure = null;
+        for (var attempt = 0; attempt != 4; attempt++)
+        {
+            try
+            {
+                if (attempt != 0) await retryDelay(TimeSpan.FromSeconds(1 << (attempt - 1)), lifetime.Token).ConfigureAwait(false);
+                lock (sync) { if (disposed) return; maintenanceAttempts = attempt + 1; }
+                if (storage.NeedsReclaim) ReclaimStorage();
+                lock (favoriteSynchronization)
+                {
+                    bool synchronize;
+                    lock (sync) synchronize = favoriteSynchronizationNeeded;
+                    var archived = !synchronize || SynchronizeFavoritePhotos(requestReclaim: false);
+                    var fitted = cache.SetAvailableBytes(budget, requestReclaim: false);
+                    PublishCacheMetadata();
+                    success = archived && fitted;
+                    failure = success ? null : cache.LastError ?? favoritePhotos.LastError
+                        ?? "照片暂时无法保存；收藏照片已保留，等待存储空间或下一次重试。";
+                }
+                if (success) break;
+            }
+            catch (OperationCanceledException) when (lifetime.IsCancellationRequested) { return; }
+            catch (Exception error) when (error is IOException or UnauthorizedAccessException or InvalidDataException)
+            { failure = error.Message; }
+        }
+        lock (sync)
+        {
+            if (request == maintenanceRequest) maintenanceNeeded = !success;
+            attemptedStorageChange = storage.ChangeVersion;
+            maintenanceError = failure;
+        }
+    }
+
+    // Called only with sync held. The cache setter changes scalar/reference policy only;
+    // it performs no I/O and never enters the quota authority or another store.
+    private void UpdateCacheProtection()
+    {
+        var preferred = favoriteKeys.Concat(provisionalFavoriteKeys.Keys).ToHashSet(StringComparer.Ordinal);
+        var pinned = favoriteReferencesKnown
+            ? unarchivedFavoriteKeys.Concat(provisionalFavoriteKeys.Keys).ToHashSet(StringComparer.Ordinal) : null;
+        cache.SetProtectedKeys(pinned, preferred);
+    }
 
     public PortraitFavoritePhotoStatus FavoritePhotoStatus(ulong contentID, PortraitEditorSnapshot snapshot)
         => favoritePhotos.Status(SnapshotKey(contentID, snapshot));
@@ -369,13 +748,14 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             }, TaskScheduler.Default);
             gate.Reset();
             loaded.Dispose();
-            diskWrite = writing;
+            diskWrite = writing ?? (retainedPng is not null ? Task.FromResult(false) : null);
             diskMaintenance = maintenance;
             // No blocking wait on Present-dependent copies during hot reload.
             DetachCapture();
             DetachEncoding();
             records.Clear();
-            managedDrain = DrainManagedAsync(diskWrite, diskMaintenance);
+            var favoriteSynchronization = favoriteSynchronizationTask;
+            managedDrain = DrainManagedAsync(diskWrite, diskMaintenance, favoriteSynchronization);
             physicalDrain = Task.WhenAll(physical.Seal(), loaded.DrainPhysicalAsync());
             return managedDrain;
         }
@@ -404,11 +784,22 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
     }
 
-    private async Task DrainManagedAsync(Task<bool>? diskWrite, Task? diskMaintenance)
+    private async Task DrainManagedAsync(Task<bool>? diskWrite, Task? diskMaintenance, Task<bool>? favoriteTail)
     {
+        // BeginDispose starts this method while it owns sync on Framework. Even when every
+        // receipt is already complete, final observation must begin after that call returns.
+        await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
         try
         {
-            await PortraitManagedDrain.Combine(diskWrite, diskMaintenance).ConfigureAwait(false);
+            await Task.WhenAll(new Task?[] { diskWrite, diskMaintenance, favoriteTail }
+                .OfType<Task>()).ConfigureAwait(false);
+            bool favoriteFailed;
+            lock (sync) favoriteFailed = favoriteTail is not null && (favoriteMetadataFailed || favoriteSynchronizationNeeded);
+            // A prior archive receipt may be false even though explicit maintenance has since
+            // published the final archive. Evaluate the durable final state after all accepted
+            // work settles; a failed metadata action must still remain a failed close.
+            if (diskWrite is { Result: false } || favoriteFailed)
+                throw new IOException("照片或收藏仍有未能保存的最终记录。");
         }
         catch (Exception error)
         {
