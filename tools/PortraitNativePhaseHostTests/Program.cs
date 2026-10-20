@@ -34,9 +34,49 @@ public static class Program
                 "explicit four-phase official-hook host is absent");
             HostBehavior();
             HostReservationCases.Run(Check);
+            QualificationDiagnostics();
             Console.WriteLine($"PortraitNativePhaseHostTests: {checks} checks passed."); return 0;
         }
         catch (Exception error) { Console.Error.WriteLine(error); return 1; }
+    }
+
+    private static void QualificationDiagnostics()
+    {
+        var order = new List<string>();
+        Func<bool> Step(string name, bool value) => () => { order.Add(name); return value; };
+        bool Boot(out PortraitNativeBootIdentity? identity, out string reason)
+        {
+            order.Add("boot"); identity = new(1, 2, "disk", "loaded"); reason = "boot rejected"; return false;
+        }
+        var rejected = DalamudPortraitNativePhaseHostFactory.TryEvaluateQualification(
+            false, Step("assembly", false), Step("type", true), Step("hash", true), Step("mvid", true), Step("backend", true),
+            () => { Boot(out var identity, out var reason); return new(false, identity, reason); }, out var rejectedIdentity, out var rejectedReason);
+        Check(!rejected && rejectedIdentity is null && order.SequenceEqual(new[] { "assembly" }),
+            "qualification stops after the first failed provider assembly check");
+        Check(rejectedReason.Contains("providerAssembly=false") && rejectedReason.Contains("boot=not-evaluated"),
+            "qualification diagnostics distinguish a failed check from skipped later checks");
+
+        order.Clear();
+        var bootRejected = DalamudPortraitNativePhaseHostFactory.TryEvaluateQualification(
+            false, Step("assembly", true), Step("type", true), Step("hash", true), Step("mvid", true), Step("backend", true),
+            () => { Boot(out var identity, out var reason); return new(false, identity, reason); }, out var bootIdentity, out var bootReason);
+        Check(!bootRejected && bootIdentity is not null && order.SequenceEqual(new[] { "assembly", "type", "hash", "mvid", "backend", "boot" }),
+            "qualification evaluates Boot only after every provider/backend check passes");
+        Check(bootReason.Contains("boot rejected") && bootReason.Contains("boot=boot rejected"),
+            "Boot failure retains its original reason and appends ordered diagnostics");
+
+        order.Clear();
+        var accepted = DalamudPortraitNativePhaseHostFactory.TryEvaluateQualification(
+            false, Step("assembly", true), Step("type", true), Step("hash", true), Step("mvid", true), Step("backend", true),
+            () => { order.Add("boot"); return new(true, new PortraitNativeBootIdentity(3, 4, "disk", "loaded"), "boot accepted"); },
+            out var acceptedIdentity, out var acceptedReason);
+        Check(accepted && acceptedIdentity?.BaseAddress == 3 && order[^1] == "boot" && acceptedReason.Contains("backendSelection=true"),
+            "all qualification checks return the audited Boot identity");
+        var threw = DalamudPortraitNativePhaseHostFactory.TryEvaluateQualification(
+            false, Step("assembly", true), () => throw new InvalidOperationException("fixture"), Step("hash", true),
+            Step("mvid", true), Step("backend", true), () => new(true, null, "unused"), out var noIdentity, out var errorReason);
+        Check(!threw && noIdentity is null && errorReason.Contains("InvalidOperationException"),
+            "qualification helper treats helper exceptions as rejection without an identity");
     }
 
     private static void TypedPassThrough()

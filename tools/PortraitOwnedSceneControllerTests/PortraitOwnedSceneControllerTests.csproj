@@ -3,9 +3,14 @@
     <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);CA1416</NoWarn><DefineConstants>$(DefineConstants);OWNED_CONTROLLER</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedViewportNavigation.cs')">$(DefineConstants);OWNED_NAVIGATION</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.OwnedObserver.cs')">$(DefineConstants);OWNED_OBSERVER_FEATURE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedCharaView*.cs" Link="%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitObserverCamera.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedViewportNavigation.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedViewportNavigation.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.OwnedObserver.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.OwnedObserver.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneLeaseContract.cs" Link="PortraitOwnedSceneLeaseContract.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneTextureLifetime.cs" Link="PortraitOwnedSceneTextureLifetime.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneImageSource.cs" Link="PortraitOwnedSceneImageSource.cs" />

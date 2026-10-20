@@ -119,16 +119,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
             new(value.CameraPosition.X,value.CameraPosition.Y,value.CameraPosition.Z),
             new(value.CameraTarget.X,value.CameraTarget.Y,value.CameraTarget.Z),out var camera)?camera:null;
     }
-    public void SetOwnedObserver(PortraitOwnedSceneObserverCameraSnapshot camera) => Mutate(() =>
-    {
-        if (!ownedViewportClosing && ownedViewport?.TrySetObserverCamera(camera) == true) ownedObserver = camera;
-    }, preserveSourceCensus: true);
-    public void ResetOwnedObserver() { if (ownedSourceObserver is { } camera) SetOwnedObserver(camera); }
-    public void CloseOwnedViewportView() => Mutate(() =>
-    {
-        StopOwnedViewport("The independent viewport was closed.");
-        if (!OwnedViewportBlocksOperations) ownedViewportViewRequested = false;
-    }, preserveSourceCensus: true);
     private void UpdateOwnedViewport()
     {
         if (ownedViewport is null) return;

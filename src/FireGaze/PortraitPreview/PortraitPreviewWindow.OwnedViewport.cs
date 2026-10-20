@@ -10,7 +10,7 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawOwnedViewport()
     {
         ImGui.TextWrapped(feature.OwnedViewportStatus);
-        ImGui.TextDisabled("左键拖动观察 · 滚轮推拉 · 独立观察不会改动肖像取景");
+        ImGui.TextDisabled("左键拖动观察 · 滚轮推拉 · 屏幕方向键移动（键盘导航尚未启用） · 独立观察不会改动肖像取景");
         var available = ImGui.GetContentRegionAvail();
         var size = new Vector2(MathF.Max(280,available.X),MathF.Max(220,MathF.Min(available.Y-90*Scale,480*Scale)));
         var origin = ImGui.GetCursorScreenPos();
@@ -55,6 +55,10 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.SameLine(); if(ImGui.Button("正面"))SetOwnedDirection(0);
         ImGui.SameLine(); if(ImGui.Button("侧面"))SetOwnedDirection(MathF.PI/2);
         ImGui.SameLine(); if(ImGui.Button("背面"))SetOwnedDirection(MathF.PI);
+        ImGui.SameLine(); if(ImGui.Button("前移"))feature.NudgeOwnedObserver(Vector3.UnitZ);
+        ImGui.SameLine(); if(ImGui.Button("后移"))feature.NudgeOwnedObserver(-Vector3.UnitZ);
+        ImGui.SameLine(); if(ImGui.Button("左移"))feature.NudgeOwnedObserver(-Vector3.UnitX);
+        ImGui.SameLine(); if(ImGui.Button("右移"))feature.NudgeOwnedObserver(Vector3.UnitX);
         ImGui.EndDisabled();
         if(ImGui.Button("结束实验／返回取景示意"))feature.CloseOwnedViewportView();
     }

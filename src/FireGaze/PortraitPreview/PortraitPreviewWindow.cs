@@ -81,6 +81,7 @@ internal interface IPortraitPreviewViewModel
     PortraitOwnedSceneObserverCameraSnapshot? OwnedObserver => null;
     PortraitOwnedSceneTextureLifetime<IDalamudTextureWrap>.Borrow? TryBorrowOwnedViewport() => null;
     void SetOwnedObserver(PortraitOwnedSceneObserverCameraSnapshot camera) { }
+    void NudgeOwnedObserver(Vector3 move) { }
     void ResetOwnedObserver() { }
     void CloseOwnedViewportView() { }
 }

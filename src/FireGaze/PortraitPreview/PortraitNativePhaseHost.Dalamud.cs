@@ -9,6 +9,9 @@ using Dalamud.Plugin.Services;
 
 namespace FireGaze.PortraitPreview;
 
+internal readonly record struct PortraitNativeBootQualificationResult(
+    bool Qualified, PortraitNativeBootIdentity? Identity, string Reason);
+
 /// <summary>Official provider only. No Harmony, MonoMod, custom patching or backend configuration changes.</summary>
 internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider interop) : IPortraitNativePhaseHostFactory, IPortraitQualifiedNativeHookProvider
 {
@@ -25,16 +28,103 @@ internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider
         try
         {
             var assembly = typeof(Hook<>).Assembly;
-            if (assembly.IsCollectible || interop.GetType().Assembly != assembly
-                || interop.GetType().FullName != "Dalamud.Hooking.Internal.GameInteropProviderPluginScoped"
-                || !HashMatches(assembly.Location, DalamudSHA) || !LoadedMVIDMatchesDisk(assembly)
-                || !UsesSafetyHook(assembly)) return false;
-            if (!PortraitNativeBootImageQualifier.TryQualifyCurrentProcess(out bootIdentity, out reason)) return false;
+            if (!TryEvaluateQualification(
+                    assembly.IsCollectible,
+                    () => interop.GetType().Assembly == assembly,
+                    () => interop.GetType().FullName == "Dalamud.Hooking.Internal.GameInteropProviderPluginScoped",
+                    () => HashMatches(assembly.Location, DalamudSHA),
+                    () => LoadedMVIDMatchesDisk(assembly),
+                    () => UsesSafetyHook(assembly),
+                    () =>
+                    {
+                        var result = PortraitNativeBootImageQualifier.TryQualifyCurrentProcess(out var identity, out var bootReason);
+                        return new(result, identity, bootReason);
+                    },
+                    out bootIdentity, out reason)) return false;
             qualified = true;
             Identity = "SafetyHook StartDisabled; loaded Boot code/standard-loader exports match audited image; loaded Dalamud MVID " + assembly.ManifestModule.ModuleVersionId;
             reason = Identity; return true;
         }
         catch (Exception error) { reason = "Official native backend qualification unavailable: " + error.GetType().Name; return false; }
+
+    }
+
+    internal static bool TryEvaluateQualification(
+        bool assemblyCollectible,
+        Func<bool> providerAssemblyMatch,
+        Func<bool> providerTypeMatch,
+        Func<bool> dalamudDiskHashMatch,
+        Func<bool> loadedMvidMatchesDisk,
+        Func<bool> safetyHookSelected,
+        Func<PortraitNativeBootQualificationResult> bootQualifier,
+        out PortraitNativeBootIdentity? bootIdentity,
+        out string reason)
+    {
+        bootIdentity = null;
+        var checks = new QualificationChecks { AssemblyCollectible = assemblyCollectible };
+        try
+        {
+            if (assemblyCollectible) return Reject(checks, out reason);
+            checks.ProviderAssembly = providerAssemblyMatch();
+            if (checks.ProviderAssembly != true) return Reject(checks, out reason);
+            checks.ProviderType = providerTypeMatch();
+            if (checks.ProviderType != true) return Reject(checks, out reason);
+            checks.DalamudDiskHash = dalamudDiskHashMatch();
+            if (checks.DalamudDiskHash != true) return Reject(checks, out reason);
+            checks.LoadedMvid = loadedMvidMatchesDisk();
+            if (checks.LoadedMvid != true) return Reject(checks, out reason);
+            checks.BackendSelection = safetyHookSelected();
+            if (checks.BackendSelection != true) return Reject(checks, out reason);
+            var boot = bootQualifier();
+            checks.BootReason = boot.Reason;
+            bootIdentity = boot.Identity;
+            if (!boot.Qualified)
+            {
+                reason = boot.Reason + " [qualification diagnostics: " + checks.Format() + "]";
+                return false;
+            }
+            reason = checks.Format();
+            return true;
+        }
+        catch (Exception error)
+        {
+            bootIdentity = null;
+            reason = "Official native backend qualification unavailable: " + error.GetType().Name;
+            return false;
+        }
+
+        static bool Reject(QualificationChecks checks, out string reason)
+        {
+            reason = "Official native qualification rejected: " + checks.Format();
+            return false;
+        }
+    }
+
+    private sealed class QualificationChecks
+    {
+        public bool? AssemblyCollectible { get; init; }
+        public bool? ProviderAssembly { get; set; }
+        public bool? ProviderType { get; set; }
+        public bool? DalamudDiskHash { get; set; }
+        public bool? LoadedMvid { get; set; }
+        public bool? BackendSelection { get; set; }
+        public string? BootReason { get; set; }
+
+        public string Format() => string.Join("; ",
+            "assemblyCollectible=" + State(AssemblyCollectible),
+            "providerAssembly=" + State(ProviderAssembly),
+            "providerType=" + State(ProviderType),
+            "dalamudDiskHash=" + State(DalamudDiskHash),
+            "loadedMvid=" + State(LoadedMvid),
+            "backendSelection=" + State(BackendSelection),
+            "boot=" + (BootReason is null ? "not-evaluated" : BootReason));
+
+        private static string State(bool? value) => value switch
+        {
+            true => "true",
+            false => "false",
+            _ => "not-evaluated",
+        };
     }
 
     public bool TryVerifyUnmodifiedTargets(PortraitNativePhaseResolvedPlan plan, out string reason)

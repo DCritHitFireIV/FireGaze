@@ -35,6 +35,8 @@ static class ControllerChecks
             ForeignLeaseEpochCannotBorrowAdvanceOrRetire();
             ObserverGestureIsQueuedUntilTheNextNativeRender();
             InitialObserverWaitsForAPreparedViewAndThenARender();
+            ObserverNavigationCases.Run(Check);
+            ObserverFeatureCases.Run(Check);
             Console.WriteLine($"PASS: {count} owned-controller checks; native calls only through injected source-phase callbacks; admission remains closed.");
             return 0;
         }
