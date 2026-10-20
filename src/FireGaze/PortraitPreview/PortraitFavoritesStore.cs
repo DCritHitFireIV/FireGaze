@@ -44,12 +44,14 @@ internal sealed class PortraitFavoritesStore
         get { lock (gate) return entries.OrderByDescending(entry => entry.UpdatedAt).Select(entry => entry.Copy()).ToArray(); }
     }
 
-    public PortraitFavoritesStore(string filePath, Func<DateTimeOffset>? clock = null, IPortraitFavoritesFiles? files = null)
+    public PortraitFavoritesStore(string filePath, Func<DateTimeOffset>? clock = null, IPortraitFavoritesFiles? files = null,
+        PortraitStorageBudget? storage = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
         path = Path.GetFullPath(filePath);
         this.clock = clock ?? (() => DateTimeOffset.Now);
-        this.files = files ?? new PortraitFavoritesFiles();
+        this.files = files ?? new PortraitFavoritesFiles(storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(path)!));
+        if (this.files is PortraitFavoritesFiles productionFiles) productionFiles.Register(path);
         try
         {
             var bytes = this.files.Read(path, MaximumBytes);
@@ -176,6 +178,12 @@ internal sealed class PortraitFavoritesStore
         { return Invalid(); }
         if (bytes.Length > MaximumBytes) return TooLarge();
         try { files.WriteAtomically(path, bytes); }
+        catch (PortraitFavoritesStorageException exception)
+        {
+            PersistenceError = exception.Result.Reason;
+            return new(exception.Result.Code == PortraitStorageCode.Capacity
+                ? PortraitFavoritesWriteStatus.TooLarge : PortraitFavoritesWriteStatus.PersistenceFailed, exception.Result.Reason);
+        }
         catch (Exception exception) when (IsStorageException(exception))
         {
             PersistenceError = exception.Message;
@@ -279,6 +287,11 @@ internal interface IPortraitFavoritesFiles
 
 internal sealed class PortraitFavoritesFiles : IPortraitFavoritesFiles
 {
+    private readonly PortraitStorageBudget storage;
+
+    public PortraitFavoritesFiles(PortraitStorageBudget storage) => this.storage = storage;
+    public void Register(string path) => storage.RegisterPath(path);
+
     public byte[]? Read(string path, int maximumBytes)
     {
         try
@@ -295,25 +308,12 @@ internal sealed class PortraitFavoritesFiles : IPortraitFavoritesFiles
 
     public void WriteAtomically(string path, byte[] document)
     {
-        var directory = Path.GetDirectoryName(path)!;
-        Directory.CreateDirectory(directory);
-        var temporary = Path.Combine(directory, $".{Path.GetFileName(path)}.{Guid.NewGuid():N}.tmp");
-        try
-        {
-            using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None, 64 * 1024))
-            {
-                stream.Write(document);
-                stream.Flush(flushToDisk: true);
-            }
-            // Keep the previous complete document even when the game exits immediately after
-            // this edit. File.Replace rotates the single backup with the main publication.
-            if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
-            else File.Move(temporary, path);
-        }
-        finally
-        {
-            try { if (File.Exists(temporary)) File.Delete(temporary); }
-            catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or System.Security.SecurityException) { }
-        }
+        if (!storage.TryPublish(path, document.Length, stream => stream.Write(document), keepBackup: true, out var result))
+            throw new PortraitFavoritesStorageException(result);
     }
+}
+
+internal sealed class PortraitFavoritesStorageException(PortraitStorageResult result) : IOException(result.Reason)
+{
+    public PortraitStorageResult Result { get; } = result;
 }

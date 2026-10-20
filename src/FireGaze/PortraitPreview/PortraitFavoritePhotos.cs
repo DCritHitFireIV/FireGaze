@@ -18,18 +18,22 @@ internal sealed class PortraitFavoritePhotos
     private readonly object gate = new();
     private readonly string path;
     private readonly int maximumBytes;
+    private readonly PortraitStorageBudget storage;
+    private PortraitStorageCode lastPublishCode;
     private Dictionary<string, SavedPhoto> photos = new(StringComparer.Ordinal);
     private Dictionary<string, PortraitFavoritePhotoStatus> statuses = new(StringComparer.Ordinal);
     private bool readOnly;
     public string? LastError { get; private set; }
     public int Count { get { lock (gate) return photos.Count; } }
 
-    public PortraitFavoritePhotos(string path, int maximumBytes = MaximumBytes)
+    public PortraitFavoritePhotos(string path, int maximumBytes = MaximumBytes, PortraitStorageBudget? storage = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
         if (maximumBytes is < 128 or > MaximumBytes) throw new ArgumentOutOfRangeException(nameof(maximumBytes));
         this.path = Path.GetFullPath(path);
         this.maximumBytes = maximumBytes;
+        this.storage = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(this.path)!);
+        this.storage.RegisterPath(this.path);
         Load();
     }
 
@@ -99,7 +103,8 @@ internal sealed class PortraitFavoritePhotos
             if (!Publish(candidate))
             {
                 foreach (var key in references.Where(key => !photos.ContainsKey(key)))
-                    nextStatuses[key] = PortraitFavoritePhotoStatus.StorageError;
+                    nextStatuses[key] = lastPublishCode == PortraitStorageCode.Capacity
+                        ? PortraitFavoritePhotoStatus.Capacity : PortraitFavoritePhotoStatus.StorageError;
                 statuses = nextStatuses;
                 return false;
             }
@@ -145,24 +150,18 @@ internal sealed class PortraitFavoritePhotos
 
     private bool Publish(Dictionary<string, SavedPhoto> candidate)
     {
-        string? temporary = null;
+        lastPublishCode = PortraitStorageCode.StorageError;
         try
         {
             var bytes = Serialize(candidate);
             if (bytes.Length > maximumBytes) throw new InvalidDataException("Favorite photo archive exceeds its capacity.");
-            var directory = Path.GetDirectoryName(path)!;
-            Directory.CreateDirectory(directory);
-            temporary = path + ".tmp-" + Guid.NewGuid().ToString("N");
-            using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            if (!storage.TryPublish(path, bytes.Length, stream => stream.Write(bytes), keepBackup: true, out var result))
             {
-                stream.Write(bytes);
-                stream.Flush(flushToDisk: true);
+                lastPublishCode = result.Code;
+                LastError = result.Reason;
+                return false;
             }
-            // Retain one complete prior generation in the same atomic replacement. This is
-            // bounded saved content; a damaged current file remains read-only with its backup.
-            if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
-            else File.Move(temporary, path);
-            temporary = null;
+            lastPublishCode = PortraitStorageCode.Success;
             photos = candidate;
             LastError = null;
             return true;
@@ -171,12 +170,6 @@ internal sealed class PortraitFavoritePhotos
         {
             LastError = error.Message;
             return false;
-        }
-        finally
-        {
-            if (temporary is not null)
-                try { File.Delete(temporary); }
-                catch (Exception error) when (IsStorageError(error)) { LastError = error.Message; }
         }
     }
 

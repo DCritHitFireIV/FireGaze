@@ -16,6 +16,7 @@ var root = Path.Combine(Path.GetTempPath(), "FireGazeFavoritesTests-" + Guid.New
 Directory.CreateDirectory(root);
 try
 {
+    checks += await FavoriteSharedBudgetTests.Run(root, Snapshot());
     var now = new DateTimeOffset(2026, 10, 19, 10, 0, 0, TimeSpan.FromHours(8));
     var path = Path.Combine(root, "shared", "portrait-favorites.json");
     var store = new PortraitFavoritesStore(path, () => now);
