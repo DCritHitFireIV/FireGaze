@@ -128,6 +128,7 @@ namespace FireGaze.PortraitPreview
     internal sealed record PortraitHistoryListItem(long ID, DateTimeOffset At, string Label, bool IsCurrent);
     internal sealed class Model
     {
+        public bool SourceCensusBlocksOperations { get; set; }
         public IReadOnlyList<PortraitHistoryListItem> History { get; set; } = [new(1, DateTimeOffset.UnixEpoch, "记录", true)];
         public PortraitImageScope LiveCaptureScope { get; set; }
         public PortraitCaptureSample? Sample;

@@ -74,6 +74,19 @@ static double Contrast(Vector4 left, Vector4 right)
     }
 }
 
+{
+    var source = new Texture(20, 32, 5);
+    var model = new Model { SourceCensusBlocksOperations = true,
+        Sample = Sample(PortraitImageScope.Portrait), LiveTexture = source };
+    using var window = new PortraitPreviewWindow(model);
+    var calls = Plugin.TextureReadback.Calls;
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    Check(source.Shares.Count == 0 && Plugin.TextureReadback.Calls == calls,
+        "source census physical lifetime blocks analysis before texture sharing or readback");
+    Check(((PortraitAnalysisRequest)Field(window, "analysis")!).CurrentResult is null,
+        "blocked source census analysis does not publish a result");
+}
+
 // Returning a cached portrait is the original bug: this must perform no readback in plate scope.
 {
     var model = new Model { LiveCaptureScope = PortraitImageScope.VisibleAdventurerPlate };
