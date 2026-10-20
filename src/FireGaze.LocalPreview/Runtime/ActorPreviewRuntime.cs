@@ -964,6 +964,25 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     }
     private bool UseCompanionDetour(ActionManager* mgr, uint id)
     {
+        if (nativeClosing || disposed) return useCompanion!.Original(mgr,id);
+        if (!Bypass && nativeDepth == 0 && IsActiveCollectionRequest(ActionType.Companion, id, ActionManager.UseActionMode.None))
+        {
+            nativeDepth++;
+            try
+            {
+                bool cancel = false;
+                try { cancel = CanCancelMountAttempt(); }
+                catch (Exception ex) { ReportHandoff(ex); }
+                if (cancel)
+                {
+                    try { ClearForReason(PreviewExitReason.Busy); Raise(PreviewCancelled, "试用已结束，再次使用将执行原生召唤"); }
+                    catch (Exception ex) { ReportHandoff(ex); }
+                    NativeRequestsConsumed++;
+                    return true;
+                }
+            }
+            finally { nativeDepth--; }
+        }
         if (Bypass) return useCompanion!.Original(mgr,id);
         var intent = new NativeIntent(PreviewSlot.Minion,id);
         var cooldownBefore = mgr != null ? mgr->CompanionActionCooldown : float.NaN;

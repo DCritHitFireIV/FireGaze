@@ -64,6 +64,7 @@ unsafe class Program
             ("display mount mismatch does not consume input", DisplayMismatch),
             ("lookup reentry cannot cancel an obsolete local preview", LookupReentry),
             ("accepted companion leaf removes all preview ownership", CompanionAccepted),
+            ("first companion collection input is consumed during mount or accessory trial", CompanionFirstInput),
             ("rejected companion leaf preserves preview ownership", CompanionRejected),
             ("owned companion leaf bypass preserves preview ownership", CompanionOwnCall),
             ("accepted nested companion leaf commits despite outer false", CompanionNested),
@@ -363,13 +364,31 @@ unsafe class Program
     static void OwnCall() { using var f=new F(); Set(f.Runtime,"ownCall",true); Eq(f.Use(ActionType.GeneralAction,23),false,"original result"); Eq(f.OriginalCalls,1,"original once"); Eq(f.Runtime.ActiveEffects.Count,2,"owned call preserved preview"); }
     static void DisplayMismatch() { using var f=new F(); f.Clone->Mount.MountId=447; Eq(f.Use(ActionType.GeneralAction,23),false,"original result"); Eq(f.OriginalCalls,1,"original once"); Eq(f.MountCalls,0,"changed display not torn down"); }
     static void LookupReentry() { using var f=new F(); f.ReenterLookup=true; Eq(f.Use(ActionType.GeneralAction,23),false,"stale binding forwarded"); Eq(f.OriginalCalls,1,"one original"); Eq(f.MountCalls,0,"obsolete display not torn down"); }
-    static void CompanionAccepted() { using var f=new F(); f.PrepareCompanion(true); Eq(f.Companion(41),true,"leaf result"); Eq(f.LeafCalls,1,"one leaf execution"); Eq(f.LastLeafId,41u,"exact companion id"); Eq(f.Runtime.HasActivePreview,false,"all previews ended"); Eq(f.NativeAccepted,1,"one accepted event"); Eq(f.Deletes,1,"display released"); }
-    static void CompanionRejected() { using var f=new F(); f.PrepareCompanion(false); Eq(f.Companion(41),false,"native rejection"); Eq(f.LeafCalls,1,"one leaf execution"); Eq(f.Runtime.ActiveEffects.Count,2,"all previews retained"); Eq(f.NativeAccepted,0,"no accepted event"); }
+    static void CompanionAccepted() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(true); Eq(f.Companion(41),true,"leaf result"); Eq(f.LeafCalls,1,"one leaf execution"); Eq(f.LastLeafId,41u,"exact companion id"); Eq(f.Runtime.HasActivePreview,false,"all previews ended"); Eq(f.NativeAccepted,1,"one accepted event"); Eq(f.Deletes,1,"display released"); }
+    static void CompanionFirstInput()
+    {
+        foreach(var trial in new[]{PreviewSlot.Mount,PreviewSlot.Accessory})
+        {
+            using var f=new F();
+            if(trial==PreviewSlot.Accessory)
+            {
+                f.Effects.Remove(PreviewSlot.Mount);
+                f.Effects[PreviewSlot.Accessory]=new(PreviewSlot.Accessory,5);
+            }
+            f.PrepareCompanion(true);
+            Eq(f.Companion(41),true,"first pet input is consumed by the active collection trial");
+            Eq(f.LeafCalls,0,"consumed pet input never reaches the native companion executor");
+            Eq(f.Runtime.HasActivePreview,false,"first pet input ends the mount or accessory trial");
+            Eq(f.Runtime.NativeRequestsConsumed,1L,"consumed pet input increments the deliberate-input counter");
+            Eq(f.Cancelled,1,"consumed pet input reports one trial cancellation");
+        }
+    }
+    static void CompanionRejected() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(false); Eq(f.Companion(41),false,"native rejection"); Eq(f.LeafCalls,1,"one leaf execution"); Eq(f.Runtime.ActiveEffects.Count,1,"unrelated emote preview retained"); Eq(f.NativeAccepted,0,"no accepted event"); }
     static void CompanionOwnCall() { using var f=new F(); f.PrepareCompanion(true); Set(f.Runtime,"ownCall",true); Eq(f.Companion(41),true,"original leaf result"); Eq(f.LeafCalls,1,"one original leaf"); Eq(f.Runtime.ActiveEffects.Count,2,"owned call preserves previews"); }
     static void CompanionNested() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(true); f.NestedLeafId=41; Eq(f.Use(ActionType.Companion,41),false,"outer false preserved"); Eq(f.OriginalCalls,1,"outer invoked once"); Eq(f.LeafCalls,1,"nested leaf invoked once"); Eq(f.Runtime.HasActivePreview,false,"accepted nested leaf ends previews"); Eq(f.NativeAccepted,1,"one commit"); }
     static void CompanionQueued() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(false); f.NativeResult=true; Eq(f.Use(ActionType.Companion,41),true,"queue result preserved"); Eq(f.OriginalCalls,1,"outer once"); Eq(f.LeafCalls,0,"leaf was not executed"); Eq(f.Runtime.ActiveEffects.Count,1,"queue acceptance does not end preview"); }
-    static void CompanionTrueWithoutExecution() { using var f=new F(); f.PrepareCompanion(true,false); Eq(f.Companion(41),true,"special branch true preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.Runtime.ActiveEffects.Count,2,"no normal execution evidence retains preview"); Eq(f.NativeAccepted,0,"no false commit"); }
-    static void CompanionRejectedCooldown() { using var f=new F(); f.PrepareCompanion(false,true); Eq(f.Companion(71),false,"special branch rejection preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.ActionMgr->CompanionActionCooldown>0,true,"rejection branch really changed cooldown"); Eq(f.Runtime.ActiveEffects.Count,2,"cooldown alone cannot commit"); Eq(f.NativeAccepted,0,"no false commit"); }
+    static void CompanionTrueWithoutExecution() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(true,false); Eq(f.Companion(41),true,"special branch true preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.Runtime.ActiveEffects.Count,1,"no normal execution evidence retains unrelated preview"); Eq(f.NativeAccepted,0,"no false commit"); }
+    static void CompanionRejectedCooldown() { using var f=new F(); f.Effects.Remove(PreviewSlot.Mount); f.PrepareCompanion(false,true); Eq(f.Companion(71),false,"special branch rejection preserved"); Eq(f.LeafCalls,1,"one original"); Eq(f.ActionMgr->CompanionActionCooldown>0,true,"rejection branch really changed cooldown"); Eq(f.Runtime.ActiveEffects.Count,1,"cooldown alone cannot commit"); Eq(f.NativeAccepted,0,"no false commit"); }
     static void NativeSetupDismount()
     {
         using var f=new F(42,42); f.Clone->Mount.MountObject=f.Clone;
