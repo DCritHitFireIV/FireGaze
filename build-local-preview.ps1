@@ -70,6 +70,7 @@ foreach ($previewSuite in @('PortraitInventoryRefreshTests', 'PortraitRuntimeSaf
     Invoke-PreviewSuite $previewSuite
 }
 Invoke-PreviewSuite 'PortraitSafetySnapshotTests'
+Invoke-PreviewSuite 'PortraitEditorOpeningReceiptTests'
 foreach ($previewSuite in @('PortraitEquipmentFilterTests', 'PortraitFavoritesTests', 'PortraitFavoritePhotoTests', 'PortraitGlamourPlateTests', 'PortraitLibraryPresentationTests', 'PortraitAnalysisTests')) {
     Invoke-PreviewSuite $previewSuite
 }

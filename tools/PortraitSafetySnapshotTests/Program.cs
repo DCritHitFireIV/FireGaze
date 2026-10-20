@@ -70,6 +70,26 @@ foreach (var mutation in new Action<JsonObject>[] {
         "new runtime refuses missing, malformed or falsely drained native ownership evidence");
 Check(Partial(new FakeSource { Version = "1.5.0.42", ManagedBefore = CensusManaged(true), ManagedAfter = CensusManaged(false) }, "managed-changed"),
     "physical census retirement transition during the two managed reads is not a stable snapshot");
+var receiptFlags = Enumerable.Range(0, 112).Select(index => index == 1 ? 1 : 0).ToArray();
+var receiptSample = new PortraitEditorOpeningSample(true, 1, 1, 10, 0, 0, 0, 0, false, -1, -1, 3,
+    new(100, 9, 77, 88, 178, 18, 1, 2, 3, 1000, false, false, false, 0), receiptFlags, false, true, true, null);
+var receiptController = new PortraitEditorOpeningController(() => receiptSample, () => 0);
+var receiptManaged = JsonNode.Parse(CensusManaged(false))!.AsObject();
+receiptManaged["editorOpening"] = JsonSerializer.SerializeToNode(receiptController.Read(),
+    new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+var stableReceiptManaged = receiptManaged.ToJsonString();
+foreach (var changedReceipt in new[] {
+    receiptController.Read() with { Epoch = 2, Status = "Invalidated", Reason = "PreFinalize" },
+    receiptController.Read() with { Before = receiptSample },
+    receiptController.Read() with { Returned = receiptSample with { State = 20, View = 30 } },
+    receiptController.Read() with { ReadyIdentity = new(10,20,30,7,40) } })
+{
+    receiptManaged["editorOpening"] = JsonSerializer.SerializeToNode(changedReceipt,
+        new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+    Check(Partial(new FakeSource { Version = "1.5.0.42", ManagedBefore = stableReceiptManaged,
+        ManagedAfter = receiptManaged.ToJsonString() }, "managed-changed"),
+        "complete managed double sampling detects opening lifecycle, sample and allocation changes");
+}
 Check(good.Calls.SequenceEqual(["clock", "runtime", "boundary", "editor", "managed", "editor", "managed", "boundary", "clock"]),
     "two complete confirmations occur in one already-owned Framework callback without mutation work");
 Check(normal.GetProperty("sequence").GetInt64() == 17 && normal.GetProperty("runtime").GetProperty("mvid").GetString() == "mvid-current",
@@ -202,6 +222,15 @@ Check(feature.ConfigureLease(), "feature fixture establishes the original lease 
 featureClock = TimeSpan.FromSeconds(61);
 using var managedRead = JsonDocument.Parse(actualSource.ReadManagedJSON());
 var currentManaged = managedRead.RootElement;
+Check(currentManaged.TryGetProperty("editorOpening", out var openingReceipt)
+    && openingReceipt.GetProperty("status").GetString() == "NotExecuted"
+    && !openingReceipt.GetProperty("mayMutate").GetBoolean() && !openingReceipt.GetProperty("mayClose").GetBoolean(),
+    "actual formal adapter includes a detached opening receipt without promoting ownership to action permission");
+feature.Opening.Invalidate("Feature lifecycle test");
+using var revokedOpening = JsonDocument.Parse(actualSource.ReadManagedJSON());
+Check(revokedOpening.RootElement.GetProperty("editorOpening").GetProperty("status").GetString() == "Invalidated"
+    && revokedOpening.RootElement.GetProperty("editorOpening").GetProperty("epoch").GetInt64() > openingReceipt.GetProperty("epoch").GetInt64(),
+    "actual formal adapter reflects explicit receipt invalidation without progressing it during sampling");
 Check(currentManaged.TryGetProperty("sourceCensus", out var censusUnknown)
     && !censusUnknown.GetProperty("known").GetBoolean(),
     "uninitialized actual controller is unknown rather than manufactured idle");

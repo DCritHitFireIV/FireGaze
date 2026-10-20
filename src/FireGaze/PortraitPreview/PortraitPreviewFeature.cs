@@ -73,6 +73,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         InitializeLightingFit();
         InitializeNativeLive();
         InitializeSourceCensus();
+        InitializeEditorOpening();
         window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
         diagnostics = pluginInterface.GetIpcProvider<string>("FireGaze.PortraitPreview.Diagnostics");
@@ -118,6 +119,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             historyPhotos = photos.Diagnostics(),
             captureIsolation = captureIsolation.Mode,
             sourceCensus = SourceCensusDiagnostics(),
+            editorOpening = JsonSerializer.SerializeToElement(ReadEditorOpeningReceipt(),
+                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
             liveCapture = liveImageService?.Diagnostics,
             historyPhotosView = window.HistoryPhotosView, historyWindowOpen = window.HistoryWindowOpen,
@@ -161,6 +164,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (disposed) return;
         try
         {
+            using (runtimeTrace.Measure("update.editor-opening")) UpdateEditorOpening();
             using (runtimeTrace.Measure("update.source-census")) UpdateSourceCensus();
             using (runtimeTrace.Measure("update.retainer-loads")) inventory.ObserveRetainerLoads();
             using (runtimeTrace.Measure("update.validate")) session.Validate();
@@ -413,6 +417,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         else if (parts is ["sync", "off"]) SetSyncPlate(false);
         else if (parts is ["equip", var slot, var value] && Enum.TryParse<PortraitSlot>(slot, true, out var parsed) && Enum.IsDefined(parsed) && uint.TryParse(value, out var id)) Equip(parsed, id);
         else if (parts is ["clear", var name] && Enum.TryParse<PortraitSlot>(name, true, out var clear) && Enum.IsDefined(clear)) Clear(clear);
+        else if (parts is ["editor", var receiptedKind, var nonce]) Mutate(() => OpenEditorWithReceipt(receiptedKind, nonce));
         else if (parts is ["editor", var kind]) Mutate(() => OpenEditor(kind));
         else if (parts is ["dye", var dyeSlot, var dyeChannel, var dyeValue] && Enum.TryParse<PortraitSlot>(dyeSlot, true, out var dyeParsed)
             && Enum.IsDefined(dyeParsed) && int.TryParse(dyeChannel, out var channel) && byte.TryParse(dyeValue, out var stain)) Dye(dyeParsed, channel, stain);
@@ -442,6 +447,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private delegate byte OpenPlate(AgentBannerEditor* editor);
 
     private void OpenEditor(string kind)
+    {
+        editorOpening.Invalidate("Unreceipted native editor operation revoked ownership.");
+        OpenEditorCore(kind);
+    }
+
+    private void OpenEditorCore(string kind)
     {
         var editor = AgentBannerEditor.Instance();
         if (editor == null) return;
@@ -486,6 +497,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         Task photoDrain = Task.CompletedTask;
         void Release()
         {
+            DisposeEditorOpening();
             DisposeSourceCensus();
             if (!CancelLightingFitForEdit()) _ = target.AbortCapturedEditor();
             DisposeNativeLive();

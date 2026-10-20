@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitEditorOpeningReceipt.cs')">$(DefineConstants);OPENING_RECEIPT</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorOpeningReceipt.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitEditorOpeningReceipt.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.EditorOpening.cs" />
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>
