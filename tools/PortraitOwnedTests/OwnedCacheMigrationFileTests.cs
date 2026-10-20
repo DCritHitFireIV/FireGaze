@@ -59,7 +59,7 @@ internal static class OwnedCacheMigrationFileTests
             var preserved = New();
             Check(File.Exists(backup) && preserved.ImportJSON(File.ReadAllText(backup)) && preserved.BuildView(now).Items.Single().ItemID == 456,
                 "owned backup remains independently readable after primary corruption");
-            Check(Directory.GetFiles(directory).Length == 2, "ordinary owned saves retain only primary and a single backup");
+            Check(Directory.GetFiles(directory).Count(file => Path.GetFileName(file) != ".portrait-storage.lock") == 2, "ordinary owned saves retain only primary and a single backup plus the zero-byte coordination lease");
         });
 
         Case("legacy migration commits backup and v2 before importing", directory =>
@@ -75,7 +75,7 @@ internal static class OwnedCacheMigrationFileTests
             Check(!cache.SaveJSON(legacy, out _) && File.ReadAllBytes(path).SequenceEqual(beforeReload), "queued v1 snapshot cannot downgrade migrated primary");
             catalog.ApplyRead(character, dresser, now.AddMinutes(3), [new(456, 7, 0)]);
             Check(cache.Save(catalog, out _) && File.ReadAllBytes(backup).SequenceEqual(original), "normal v2 writes preserve immutable legacy backup");
-            Check(Directory.GetFiles(directory).Length == 3 && File.Exists(path + ".bak"), "normal post-migration writes retain one rolling backup alongside immutable legacy recovery");
+            Check(Directory.GetFiles(directory).Count(file => Path.GetFileName(file) != ".portrait-storage.lock") == 3 && File.Exists(path + ".bak"), "normal post-migration writes retain one rolling backup alongside immutable legacy recovery");
         });
 
         Case("backup failure blocks migration and later writer", directory =>
@@ -98,7 +98,7 @@ internal static class OwnedCacheMigrationFileTests
                 Check(!cache.Load(catalog, out _) && catalog.BuildView(now).Items.Single().ItemID == 345, "failed atomic replace cannot accept migrated cache");
                 Check(File.ReadAllBytes(path).SequenceEqual(original), "replace failure preserves original bytes");
                 Check(!cache.Save(catalog, out _), "writer remains blocked after failed replace");
-                Check(Directory.GetFiles(directory).Length == 2 && File.ReadAllBytes(path + ".v1.bak").SequenceEqual(original), "replace failure keeps backup and removes temporary output");
+                Check(Directory.GetFiles(directory).Count(file => Path.GetFileName(file) != ".portrait-storage.lock") == 2 && File.ReadAllBytes(path + ".v1.bak").SequenceEqual(original), "replace failure keeps backup and removes temporary output");
             }
             Check(cache.Load(catalog, out _) && catalog.BuildView(now).Items.Single().ItemID == 234, "replace retry reuses exact backup safely");
         });

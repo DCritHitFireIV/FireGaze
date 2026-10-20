@@ -5,4 +5,5 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitHistoryStore.cs')">$(DefineConstants);HAS_HISTORY</DefineConstants>
   </PropertyGroup>
   <ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistory*.cs" LinkBase="History" /></ItemGroup>
+  <ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitStorageBudget.cs" Link="PortraitStorageBudget.cs" /></ItemGroup>
 </Project>

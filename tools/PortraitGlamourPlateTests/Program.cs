@@ -110,7 +110,7 @@ Case("template cache retains the previous complete generation and preserves it a
   }
   var preserved=Catalog();preserved.ActivateCharacter(owner);
   Check(File.Exists(backup)&&preserved.ImportJSON(File.ReadAllText(backup))&&preserved.BuildView(now).Plates[0].Pieces[2].ItemID==456,"template backup remains independently readable after primary corruption");
-  Check(Directory.GetFiles(directory).Length==2,"template rotation retains only the primary and one bounded backup");
+  Check(Directory.GetFiles(directory).Count(file=>Path.GetFileName(file)!=".portrait-storage.lock")==2,"template rotation retains only the primary and one bounded backup plus the zero-byte coordination lease");
  }finally{
   var target=Path.GetFullPath(directory);var root=Path.GetFullPath(Path.GetTempPath());if(target.StartsWith(root,StringComparison.OrdinalIgnoreCase)&&Path.GetFileName(target).StartsWith("firegaze-glamour-plate-",StringComparison.Ordinal)&&Directory.Exists(target))Directory.Delete(target,true);
  }

@@ -21,4 +21,5 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.LightingFit.cs" Link="Feature.LightingFit.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs" Link="PortraitLightingFitFeatureBackend.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitFeatureBackend.cs')" />
   </ItemGroup>
+  <ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitStorageBudget.cs" Link="PortraitStorageBudget.cs" /></ItemGroup>
 </Project>

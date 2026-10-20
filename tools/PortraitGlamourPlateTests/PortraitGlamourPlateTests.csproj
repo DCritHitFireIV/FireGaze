@@ -12,4 +12,5 @@
   <Reference Include="InteropGenerator.Runtime"><HintPath>$(DALAMUD_HOME)/InteropGenerator.Runtime.dll</HintPath></Reference>
   <Reference Include="Lumina"><HintPath>$(DALAMUD_HOME)/Lumina.dll</HintPath></Reference>
  </ItemGroup>
+  <ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitStorageBudget.cs" Link="PortraitStorageBudget.cs" /></ItemGroup>
 </Project>

@@ -14,4 +14,5 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitSession.cs" Link="PortraitLightingFitSession.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingFitBinding.cs" Link="PortraitLightingFitBinding.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitLightingFitBinding.cs')" />
   </ItemGroup>
+  <ItemGroup><Compile Include="../../src/FireGaze/PortraitPreview/PortraitStorageBudget.cs" Link="PortraitStorageBudget.cs" /></ItemGroup>
 </Project>
