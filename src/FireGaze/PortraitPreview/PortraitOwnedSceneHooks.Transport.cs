@@ -9,6 +9,10 @@ internal interface IPortraitOwnedSceneTransportProof
     bool TryValidate(IReadOnlyList<PortraitOwnedSceneNativeTarget> targets, out string reason);
     bool VerifyEntry(PortraitOwnedSceneNativeTarget target);
 }
+internal interface IPortraitOwnedSceneCreatedHookProof
+{
+    bool VerifyCreatedHook(PortraitOwnedSceneNativeTarget target, IPortraitNativePhaseHostHook hook, Delegate stableDetour, out string reason);
+}
 internal interface IPortraitOwnedSceneQualifiedHookFactory : IPortraitOwnedSceneHookFactory
 {
     string Identity { get; }
@@ -33,7 +37,7 @@ internal sealed class DalamudPortraitOwnedSceneHookFactory : IPortraitOwnedScene
     private readonly List<object> entries = [];
     private IReadOnlyList<PortraitOwnedSceneNativeTarget>? targets;
     internal DalamudPortraitOwnedSceneHookFactory(IGameInteropProvider interop)
-        : this(new DalamudPortraitNativePhaseHostFactory(interop), new UnavailableProof()) { }
+        : this(new DalamudPortraitNativePhaseHostFactory(interop), new PortraitOwnedSceneCurrentTransportProof()) { }
     internal DalamudPortraitOwnedSceneHookFactory(IPortraitQualifiedNativeHookProvider provider, IPortraitOwnedSceneTransportProof proof)
     { this.provider = provider; this.proof = proof; }
     public string Identity => provider.Identity;
@@ -85,6 +89,8 @@ internal sealed class DalamudPortraitOwnedSceneHookFactory : IPortraitOwnedScene
             hook = provider.CreateQualifiedHook(target.Address, gateway.DelegateType, gateway.Detour, () => proof.VerifyEntry(target));
             if (hook.Address != target.Address || hook.BackendName != "SafetyHook" || hook.IsEnabled || hook.IsDisposed)
                 throw new InvalidOperationException("Official owned hook backend/address/start-disabled state differs from qualification.");
+            if (proof is IPortraitOwnedSceneCreatedHookProof created && !created.VerifyCreatedHook(target, hook, gateway.Detour, out var reason))
+                throw new InvalidOperationException(reason);
             gateway.PublishOriginal(hook.Original);
             original = AdaptOriginal(hook.Original);
             gateway.SetForward(dispatcher);
@@ -97,6 +103,8 @@ internal sealed class DalamudPortraitOwnedSceneHookFactory : IPortraitOwnedScene
             {
                 if (Volatile.Read(ref closing) != 0 || retired || !provider.QualificationPreserved() || !proof.VerifyEntry(target) || original is null)
                     throw new InvalidOperationException("Official owned entry qualification changed before Enable.");
+                if (proof is IPortraitOwnedSceneCreatedHookProof created && !created.VerifyCreatedHook(target, hook!, gateway.Detour, out var reason))
+                    throw new InvalidOperationException(reason);
                 hook!.Enable();
                 if (Volatile.Read(ref closing) != 0) throw new InvalidOperationException("Owned hook was closed during Enable.");
             }

@@ -10,7 +10,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private Task sourceCensusPhysicalDrain = Task.CompletedTask;
     private bool sourceCensusSubscribed;
 
-    public bool SourceCensusBlocksOperations => sourceCensus?.BlocksOperations == true;
+    public bool SourceCensusBlocksOperations => sourceCensus?.BlocksOperations == true || ownedPassive?.BlocksOperations == true;
     private PortraitSourceCensusSafetyState ReadSourceCensusSafetyState()
         => sourceCensus?.ReadSafetyState() ?? PortraitSourceCensusSafetyState.Unknown;
 
@@ -46,7 +46,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (parts is ["native-census", "start"])
             Mutate(() =>
             {
-                if (sourceCensus is null) Error("只读八槽诊断尚未初始化。");
+                if (ownedPassive?.BlocksOperations == true) Error("原生转发诊断尚未完成实际退出。");
+                else if (sourceCensus is null) Error("只读八槽诊断尚未初始化。");
                 else if (!sourceCensus.TryStart(out var reason)) Error("只读八槽诊断未启动：" + reason);
                 else Plugin.Chat.Print("[肖像只读诊断] " + sourceCensus.Snapshot.Reason);
             }, preserveSourceCensus: true);
@@ -67,10 +68,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
         return true;
     }
 
-    private void UpdateSourceCensus() => sourceCensus?.Update();
+    private void UpdateSourceCensus() { sourceCensus?.Update(); UpdateOwnedPassive(); }
 
     private void InvalidateSourceCensusSession(string reason)
     {
+        ownedPassive?.Stop(reason);
         sourceCensus?.Revoke(reason);
         while (true)
         {
@@ -104,7 +106,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             sourceCensusSubscribed = false;
         }
         sourceCensus?.Stop("Feature disposal awaits confirmed native retirement.");
-        sourceCensusPhysicalDrain = sourceCensus?.DrainPhysicalAsync() ?? Task.CompletedTask;
+        sourceCensusPhysicalDrain = RetainDiagnosticOwnersUntilDrained(sourceCensus, ownedPassive);
         // Keep the controller strongly owned through the actual physical drain, including faults.
     }
 

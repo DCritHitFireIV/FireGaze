@@ -41,7 +41,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             StopNativeLive(PortraitNativeLiveStopReason.Disabled);
             return;
         }
-        if (!session.IsActive || !target.TryResolve(out var identity, out _, out _)
+        if (SourceCensusBlocksOperations || !session.IsActive || !target.TryResolve(out var identity, out _, out _)
             || nativeLiveController?.TryEnable(identity) != true)
         {
             nativeLiveRequested = false;

@@ -30,7 +30,8 @@ internal interface IPortraitOwnedSceneHookEnvironment
 /// has closed the native consumer/context/retirement coverage contract.
 /// </summary>
 internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedSceneHookEnvironment environment,
-    PortraitNativePhaseHostReservations? reservations = null, Func<long>? timestamp = null, long timestampFrequency = 0) : IDisposable
+    PortraitNativePhaseHostReservations? reservations = null, Func<long>? timestamp = null, long timestampFrequency = 0,
+    Func<PortraitNativeThreadStamp>? nativeThread = null) : IDisposable
 {
     private readonly List<IPortraitOwnedSceneNativeHook> hooks = [];
     private IPortraitOwnedSceneNativeHook[] publishedHooks = [];
@@ -41,6 +42,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     private TaskCompletionSource physicalRetired = CompletedRetirement();
     private Task? retirementTask;
     private Task? passiveExpiryTask;
+    private readonly CancellationTokenSource expiryCancellation = new();
     private int retirementDriving;
     private bool passiveOnly;
     private long passiveDeadline, passiveLastTimestamp;
@@ -84,11 +86,20 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             { LastError = reason; return false; }
             physicalRetired = new(TaskCreationOptions.RunContinuationsAsynchronously);
             owningFactory = factory; passiveOnly = passive;
+            if (passive)
+            {
+                passiveLastTimestamp = timestamp(); passiveDeadline = checked(passiveLastTimestamp + (long)(duration.TotalSeconds * timestampFrequency));
+                passiveExpiryTask = ExpirePassiveAsync(duration);
+            }
             if (qualified is not null && !qualified.TryVerifyUnmodifiedTargets(targets, out reason))
                 throw new InvalidOperationException(reason);
             // Exit hooks are first in the immutable inventory. Create all disabled,
             // then enable all; no lease can be requested during partial enabling.
-            foreach (var target in targets) CreateHook(factory, target);
+            foreach (var target in targets)
+            {
+                if (closing) throw new InvalidOperationException("Native installation was closed before the next Create.");
+                CreateHook(factory, target);
+            }
             if (closing) throw new InvalidOperationException("Native installation was closed before enabling.");
             if (qualified is not null && !qualified.TryVerifyUnmodifiedTargets(targets, out reason))
                 throw new InvalidOperationException(reason);
@@ -100,10 +111,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             }
             if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
             installed = true;
-            if (passive)
-            { passiveLastTimestamp = timestamp(); passiveDeadline = checked(passiveLastTimestamp + (long)(duration.TotalSeconds * timestampFrequency)); }
+            installation = Guid.NewGuid();
             (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.BeginContextLifetimeBatch();
-            if (passive) passiveExpiryTask = ExpirePassiveAsync(duration);
             return true;
         }
         catch (Exception ex)
@@ -216,8 +225,11 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
 
     private void Render(CharaView* view, uint frame, Func<CharaView.Delegates.Render> original)
     {
+        var baseline = BeginPassiveReturn((nint)view);
         BeforeNative((nint)view, null, false);
-        Original(() => original()(view, frame));
+        var returned = false;
+        try { Original(() => original()(view, frame)); returned = true; }
+        finally { CompletePassiveReturn(baseline, (nint)view, frame, returned); }
         try { AfterSourceRender((nint)view, frame); }
         catch (Exception ex) { StopUnsafe("Native source-phase observation failed: " + ex.Message); }
     }
@@ -429,6 +441,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     public bool TryDispose()
     {
         closing = true;
+        expiryCancellation.Cancel();
+        RevokePassiveBaseline("The owned native generation is closing.");
         if (installing || phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0 && !allHooksPhysical)
         { LastError = "Native installation or an active original/phase must return before hook retirement."; return false; }
         if (lease is { WasReleased: false, BoundView: not 0 })

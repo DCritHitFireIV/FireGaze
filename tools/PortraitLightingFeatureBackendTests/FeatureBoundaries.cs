@@ -112,6 +112,7 @@ namespace FireGaze.PortraitPreview
   PortraitHistoryKey? observedKey;
   bool deferredBaselineSync,syncPlate;
   public readonly List<string> Errors=[];
+  public bool SourceCensusBlocksOperations { get; set; }
   public PortraitPreviewFeature(bool enableCapture = true,Func<TimeSpan>? captureClock = null)
   {
    captureIsolation = new(captureClock);

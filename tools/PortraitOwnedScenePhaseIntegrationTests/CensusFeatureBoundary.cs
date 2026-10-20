@@ -82,6 +82,11 @@ namespace FireGaze.PortraitPreview
         internal Task CensusDrain => sourceCensusPhysicalDrain;
         internal bool CensusActive => sourceCensus?.IsActive == true;
         internal PortraitSourceCensusDiagnosticSnapshot? CensusSnapshot => sourceCensus?.Snapshot;
+        internal PortraitSourceCensusDiagnostic CensusController => sourceCensus!;
+        internal void OwnedInitialize(PortraitOwnedScenePassiveDiagnostic value) => InitializeOwnedPassive(value);
+        internal bool OwnedCommand(params string[] parts) => TryOwnedPassiveCommand(parts);
+        internal void OwnedTick() => UpdateOwnedPassive();
+        internal PortraitOwnedScenePassiveSafetyState OwnedSafety => ReadOwnedPassiveSafetyState();
         internal string CensusJSON() => System.Text.Json.JsonSerializer.Serialize(SourceCensusDiagnostics());
     }
     internal sealed class CensusTarget(PortraitIdentity source) : IPortraitPreviewTarget

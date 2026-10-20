@@ -14,7 +14,7 @@ internal static unsafe class OwnedPhysicalCases
     {
         try
         {
-            Qualification(); Passive(); ExpiryWithoutPolling(); StopAndPartialEnable(); CallbackDrain(); AsyncBatchDrain(); UnknownCreate();
+            Qualification(); Passive(); NewOwnerBaseline(); ExpiryWithoutPolling(); StopAndPartialEnable(); CallbackDrain(); AsyncBatchDrain(); UnknownCreate();
             Console.WriteLine($"PASS {checks} owned physical transport checks"); return 0;
         }
         catch (Exception error) { Console.Error.WriteLine(error); return 1; }
@@ -103,13 +103,45 @@ internal static unsafe class OwnedPhysicalCases
                 "explicit stop during " + (partial ? "partial Enable" : "passive observation") + " must close and drain the complete generation");
         }
     }
+    private static void NewOwnerBaseline()
+    {
+        var environment = NewEnvironment(); var provider = new Provider(); var nativeThread = new PortraitNativeThreadStamp(123, 456);
+        var factory = new DalamudPortraitOwnedSceneHookFactory(provider, new Proof());
+        using var hooks = new PortraitOwnedSceneHooks(environment, timestamp: () => 0, timestampFrequency: 1000, nativeThread: () => nativeThread);
+        Check(!hooks.TryArmPassiveSourceBaseline(Source, 7, nativeThread, TimeSpan.FromSeconds(1)), "uninstalled owner cannot arm source return baseline");
+        provider.OnEnable = () => Check(!hooks.TryArmPassiveSourceBaseline(Source, 7, nativeThread, TimeSpan.FromSeconds(1)),
+            "partial Enable cannot arm a source baseline");
+        Check(hooks.TryInstallPassive(factory, TimeSpan.FromSeconds(1)), hooks.LastError ?? "baseline transport install");
+        var native = provider.Created.Single(hook => hook.Address == environment.Targets.Single(target => target.Kind == PortraitOwnedSceneNativeKind.Render).Address);
+        var dispatch = (CharaView.Delegates.Render)Delegate.CreateDelegate(typeof(CharaView.Delegates.Render), native.Detour.Target, native.Detour.Method);
+        dispatch((CharaView*)Source.Model, uint.MaxValue);
+        Check(hooks.PassiveSourceBaseline is null, "unarmed new-owner return cannot become a stored baseline");
+        // Arm while an earlier callback is already inside Original. Its later return
+        // cannot satisfy the requirement for a future invocation of this new owner.
+        duringNative = () => Check(hooks.TryArmPassiveSourceBaseline(Source, 7, nativeThread, TimeSpan.FromSeconds(1)), "baseline arms after complete installation");
+        dispatch((CharaView*)Source.Model, uint.MaxValue); duringNative = null;
+        Check(hooks.PassiveSourceBaseline?.State == PortraitOwnedScenePassiveBaselineState.Waiting, "callback begun before Arm cannot publish baseline after Original");
+        dispatch((CharaView*)(Source.Model + 1), 1);
+        Check(hooks.PassiveSourceBaseline?.State == PortraitOwnedScenePassiveBaselineState.Waiting, "foreign source return cannot satisfy exact view baseline");
+        dispatch((CharaView*)Source.Model, 0);
+        var baseline = hooks.PassiveSourceBaseline;
+        Check(baseline is { State: PortraitOwnedScenePassiveBaselineState.Observed, NativeFrame: 0, ProductionAdmission: false }
+            && baseline.Source == Source && baseline.SessionEpoch == 7 && baseline.Thread == nativeThread && baseline.Installation != Guid.Empty,
+            "fresh actual new-owner source Return records native frame zero, exact source/session/thread without scene admission");
+        Check(!hooks.TryArmPassiveSourceBaseline(Source, 7, nativeThread, TimeSpan.FromSeconds(1)), "one installed owner never rearms or reuses historical baseline");
+        hooks.TryDispose();
+        Check(hooks.PassiveSourceBaseline?.State == PortraitOwnedScenePassiveBaselineState.Revoked, "retirement revokes new-owner baseline");
+        dispatch((CharaView*)Source.Model, 1);
+        Check(hooks.PassiveSourceBaseline?.State == PortraitOwnedScenePassiveBaselineState.Revoked, "late stable direct entry cannot revive retired baseline");
+    }
     private static void ExpiryWithoutPolling()
     {
         foreach (var duration in new[] { TimeSpan.FromTicks(1), TimeSpan.FromMilliseconds(20) })
         {
         var environment = NewEnvironment(); var provider = new Provider();
         var factory = new DalamudPortraitOwnedSceneHookFactory(provider, new Proof()); using var hooks = new PortraitOwnedSceneHooks(environment);
-        Check(hooks.TryInstallPassive(factory, duration), hooks.LastError ?? "passive no-poll expiry installs");
+        var installed = hooks.TryInstallPassive(factory, duration);
+        Check(installed || duration < TimeSpan.FromMilliseconds(1), hooks.LastError ?? "passive no-poll expiry installs");
         Check(hooks.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(5)) && !hooks.IsInstalled && Released(environment)
             && provider.Created.All(hook => hook.IsDisposed), "passive expiry closes and physically drains without a Framework poll: " + duration);
         }
@@ -157,14 +189,14 @@ internal static unsafe class OwnedPhysicalCases
         public bool IsSlotOwnedBy(uint slot, nint view) => false;
         public bool TryReadViewSlot(nint view, out uint slot) { slot = 4; return true; }
     }
-    private sealed class Proof : IPortraitOwnedSceneTransportProof
+    internal sealed class Proof : IPortraitOwnedSceneTransportProof
     {
         public bool Valid = true;
         public int Verifications;
         public bool TryValidate(IReadOnlyList<PortraitOwnedSceneNativeTarget> targets, out string reason) { reason = "detached exact entry proof"; return Valid; }
         public bool VerifyEntry(PortraitOwnedSceneNativeTarget target) { Verifications++; return Valid; }
     }
-    private sealed class Provider : IPortraitQualifiedNativeHookProvider
+    internal sealed class Provider : IPortraitQualifiedNativeHookProvider
     {
         public bool Qualified = true;
         public int FailCreateAt = -1;
@@ -197,7 +229,7 @@ internal static unsafe class OwnedPhysicalCases
             return original;
         }
     }
-    private sealed class NativeHook(nint address, Delegate detour, Delegate original, Func<bool> verifyEntry, Action enabled, Action disabling) : IPortraitNativePhaseHostHook
+    internal sealed class NativeHook(nint address, Delegate detour, Delegate original, Func<bool> verifyEntry, Action enabled, Action disabling) : IPortraitNativePhaseHostHook
     {
         public Delegate Detour => detour;
         public nint Address => address;

@@ -10,3 +10,10 @@ internal interface IPortraitQualifiedNativeHookProvider
     Delegate DirectTarget(nint address, Type delegateType);
     IPortraitNativePhaseHostHook CreateQualifiedHook(nint address, Type delegateType, Delegate detour, Func<bool> verifyEntry);
 }
+
+internal interface IPortraitNativeHookInspection
+{
+    // The object is the actual qualified provider's returned Hook<T>. Inspection
+    // is synchronous, read-only, and never performed while holding a gateway gate.
+    bool TryInspect(Func<object, bool> inspect);
+}

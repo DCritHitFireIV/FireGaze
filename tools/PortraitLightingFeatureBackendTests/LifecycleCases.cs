@@ -7,6 +7,12 @@ internal static class LifecycleCases
  {
   PortraitColorToneTarget.TryCreate([70,134,198],[70,134,198],[70,134,198],out var goal);
   var region=new PortraitSampleRegion(0,0,1,1);
+  using(var feature=new PortraitPreviewFeature())
+  {
+   feature.SourceCensusBlocksOperations=true;feature.StartLightingFit(goal!,region);feature.Tick();
+   check(feature.CaptureCount==0 && feature.NativeWrites==0 && feature.HistoryCount==1 && !feature.Blocked,
+    "pending physical native diagnostic prevents a new lighting probe and any capture, native write or history mutation");
+  }
   using(var feature=new PortraitPreviewFeature(false))
   {
    feature.Tick();feature.StartLightingFit(goal!,region);feature.Tick();

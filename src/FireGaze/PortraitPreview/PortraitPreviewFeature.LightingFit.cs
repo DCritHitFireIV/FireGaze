@@ -61,6 +61,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void StartLightingFit(PortraitColorToneTarget colorTarget, PortraitSampleRegion region, string? expectedFixedStateKey) => Mutate(() =>
     {
+        if (SourceCensusBlocksOperations) { Error("原生诊断尚未完成实际退出，请稍候。"); return; }
         if (!captureIsolation.LiveEnabled) { Error("图像工具暂时停用，正在排查稳定性。"); return; }
         if (lightingFitSession is null || lightingFitBackend is null || !session.IsActive || !target.CanBlockSave)
         { Error("请先打开肖像预览并暂停动作。"); return; }

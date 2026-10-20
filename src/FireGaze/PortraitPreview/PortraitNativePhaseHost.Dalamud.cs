@@ -94,7 +94,7 @@ internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider
         return new PortraitNativePhaseCurrentProcess(_ => false).TryReadMemory(target.Address, observed) && observed.AsSpan().SequenceEqual(prefix);
     }
 
-    private sealed class OfficialHook(object hook, Func<bool> verifyEntry, Func<bool> qualificationPreserved) : IPortraitNativePhaseHostHook
+    private sealed class OfficialHook(object hook, Func<bool> verifyEntry, Func<bool> qualificationPreserved) : IPortraitNativePhaseHostHook, IPortraitNativeHookInspection
     {
         private readonly Type type = hook.GetType();
         public nint Address => (nint)type.GetProperty("Address")!.GetValue(hook)!;
@@ -102,6 +102,7 @@ internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider
         public bool IsEnabled => (bool)type.GetProperty("IsEnabled")!.GetValue(hook)!;
         public bool IsDisposed => (bool)type.GetProperty("IsDisposed")!.GetValue(hook)!;
         public Delegate Original => (Delegate)type.GetProperty("Original")!.GetValue(hook)!;
+        public bool TryInspect(Func<object, bool> inspect) => inspect(hook);
         public void Enable()
         {
             if (!qualificationPreserved() || !verifyEntry()) throw new InvalidOperationException("The native backend or observation entry changed before enable.");

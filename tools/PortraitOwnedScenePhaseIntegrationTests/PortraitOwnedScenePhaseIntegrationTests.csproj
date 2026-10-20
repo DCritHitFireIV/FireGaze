@@ -16,6 +16,13 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.cs" Link="Actual/PortraitOwnedSceneHooks.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Native.cs" Link="Actual/PortraitOwnedSceneHooks.Native.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Lease.cs" Link="Actual/PortraitOwnedSceneHooks.Lease.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Transport.cs" Link="Actual/PortraitOwnedSceneHooks.Transport.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Retirement.cs" Link="Actual/PortraitOwnedSceneHooks.Retirement.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Passive.cs" Link="Actual/PortraitOwnedSceneHooks.Passive.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedScenePassiveDiagnostic.cs" Link="Actual/PortraitOwnedScenePassiveDiagnostic.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedScenePassiveSafetyState.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.EntryProof.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.OwnedPassive.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs" Link="Actual/PortraitOwnedSceneSlotReader.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotCensus.cs" Link="Actual/PortraitOwnedSceneSlotCensus.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSourceCensus.cs" Link="Actual/PortraitOwnedSceneSourceCensus.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSourceCensus.cs')" />
@@ -37,6 +44,7 @@
     <Compile Include="..//PortraitOwnedSceneHookTests/HookCases.cs" Link="ExistingTests/HookCases.cs" />
     <Compile Include="..//PortraitOwnedSceneHookTests/OwnedSceneIntegrationCases.cs" Link="ExistingTests/OwnedSceneIntegrationCases.cs" />
     <Compile Include="..//PortraitOwnedSceneHookTests/OwnedReservationCases.cs" Link="ExistingTests/OwnedReservationCases.cs" />
+    <Compile Include="../PortraitOwnedSceneHookTests/OwnedPhysicalCases.cs" Link="ExistingTests/OwnedPhysicalCases.cs" />
     <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
     <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
     <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
