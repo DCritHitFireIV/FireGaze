@@ -49,6 +49,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 sdkVersion = sdk.GetName().Version?.ToString(), sdkMvid = sdk.ManifestModule.ModuleVersionId,
                 gameBuild = feature.target.SnapshotGameBuild,
                 focusSource = "Framework.CursorInputs.IsGameWindowFocused",
+                ownedNativePassiveSupported = true,
             });
         }
 
@@ -153,6 +154,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 },
                 worldTrials = new { known = trials.Known, active = trials.Active, revision = trials.Revision },
                 sourceCensus = JsonSerializer.SerializeToElement(feature.ReadSourceCensusSafetyState(),
+                    new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+                ownedPassive = JsonSerializer.SerializeToElement(feature.ReadOwnedPassiveSafetyState(),
                     new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
                 editorOpening = JsonSerializer.SerializeToElement(feature.ReadEditorOpeningReceipt(),
                     new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),

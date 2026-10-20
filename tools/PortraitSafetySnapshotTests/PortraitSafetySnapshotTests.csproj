@@ -9,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitSourceCensusSafetyState.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedScenePassiveSafetyState.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorOpeningReceipt.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitSafetySnapshot.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitSafetySnapshot.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureIsolation.cs" />

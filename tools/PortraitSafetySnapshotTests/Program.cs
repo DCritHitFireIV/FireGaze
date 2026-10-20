@@ -70,6 +70,78 @@ foreach (var mutation in new Action<JsonObject>[] {
         "new runtime refuses missing, malformed or falsely drained native ownership evidence");
 Check(Partial(new FakeSource { Version = "1.5.0.42", ManagedBefore = CensusManaged(true), ManagedAfter = CensusManaged(false) }, "managed-changed"),
     "physical census retirement transition during the two managed reads is not a stable snapshot");
+string OwnedManaged(string state = "Off", long attempt = 1, long censusAttempt = 2, int hooks = 0, int inFlight = 0,
+    bool reservation = false, Action<JsonObject>? edit = null)
+{
+    var managed = JsonNode.Parse(CensusManaged(false))!.AsObject();
+    managed["ownedPassive"] = JsonSerializer.SerializeToNode(new { known = true, state, attempt, censusAttempt,
+        blocksOperations = state != "Off", physicalDrainCompleted = state == "Off", hooks, inFlight,
+        reservationHeld = reservation, failed = state == "Faulted", productionAdmission = false });
+    edit?.Invoke(managed["ownedPassive"]!.AsObject()); return managed.ToJsonString();
+}
+Check(Partial(new FakeSource { Version = "1.5.0.42", OwnedCapability = JsonValue.Create(true), ManagedBefore = CensusManaged(false) },
+    "owned-passive-unavailable"), "runtime capability requires independent owned passive physical evidence");
+Check(Partial(new FakeSource { Version = "1.5.0.42", OwnedCapability = JsonValue.Create("true"), ManagedBefore = OwnedManaged() },
+    "owned-passive-unavailable"), "malformed owned passive capability cannot silently disable evidence requirements");
+foreach (var evidence in new[] {
+    OwnedManaged(attempt: 0, censusAttempt: 0), OwnedManaged(),
+    OwnedManaged("WaitingForCensusDrain"), OwnedManaged("Installing"),
+    OwnedManaged("Installing", hooks: 17, reservation: true),
+    OwnedManaged("WaitingForSourceReturn", hooks: 39, reservation: true),
+    OwnedManaged("Retiring"), OwnedManaged("Retiring", hooks: 39, inFlight: 1, reservation: true),
+    OwnedManaged("Faulted") })
+{
+    var value = Read(new FakeSource { Version = "1.5.0.42", OwnedCapability = JsonValue.Create(true), ManagedBefore = evidence });
+    Check(value.GetProperty("status").GetString() == "Complete"
+        && value.GetProperty("managed").GetProperty("ownedPassive").GetRawText()
+            == JsonDocument.Parse(evidence).RootElement.GetProperty("ownedPassive").GetRawText(),
+        "complete owned passive evidence preserves legitimate idle, partial-install, physical-tail or failed state");
+}
+foreach (var mutation in new Action<JsonObject>[] {
+    value => value.Remove("known"), value => value["known"] = false,
+    value => value["state"] = "Unknown", value => value["attempt"] = -1,
+    value => value["attempt"] = 0, value => value["censusAttempt"] = 0,
+    value => value["censusAttempt"] = -1, value => value["hooks"] = -1,
+    value => value["hooks"] = 40, value => value["hooks"] = 1,
+    value => value["inFlight"] = 1, value => value["inFlight"] = -1,
+    value => value["reservationHeld"] = true, value => value["failed"] = true,
+    value => value["blocksOperations"] = true, value => value["physicalDrainCompleted"] = false,
+    value => value["productionAdmission"] = true, value => value.Remove("productionAdmission"),
+    value => value["hooks"] = 4294967296L, value => value["inFlight"] = 4294967296L,
+    value => value["attempt"] = 1.25, value => value["reservationHeld"] = "false" })
+    Check(Partial(new FakeSource { Version = "1.5.0.42", OwnedCapability = JsonValue.Create(true), ManagedBefore = OwnedManaged(edit: mutation) },
+        "owned-passive-unavailable"), "owned passive unknown, malformed or falsely drained evidence fails closed");
+foreach (var evidence in new[] {
+    OwnedManaged("WaitingForCensusDrain", hooks: 1, reservation: true),
+    OwnedManaged("WaitingForCensusDrain", inFlight: 1),
+    OwnedManaged("WaitingForSourceReturn", hooks: 38, reservation: true),
+    OwnedManaged("WaitingForSourceReturn", hooks: 39),
+    OwnedManaged("Installing", hooks: 1), OwnedManaged("Retiring", hooks: 1), OwnedManaged("Faulted", hooks: 1),
+    OwnedManaged("Retiring", inFlight: 1),
+    OwnedManaged("Retiring", edit: value => value["physicalDrainCompleted"] = true),
+    OwnedManaged("Faulted", edit: value => value["failed"] = false),
+    OwnedManaged("Installing", attempt: 0, censusAttempt: 0) })
+    Check(Partial(new FakeSource { Version = "1.5.0.42", OwnedCapability = JsonValue.Create(true), ManagedBefore = evidence },
+        "owned-passive-unavailable"), "owned passive state, count, reservation and attempt invariants must agree");
+foreach (var field in new[] { "state", "attempt", "censusAttempt", "hooks", "inFlight", "blocksOperations",
+    "physicalDrainCompleted", "reservationHeld", "failed" })
+{
+    Check(Partial(new FakeSource { OwnedCapability = JsonValue.Create(true),
+        ManagedBefore = OwnedManaged(edit: value => value.Remove(field)) }, "owned-passive-unavailable"),
+        "owned passive field cannot be omitted: " + field);
+    Check(Partial(new FakeSource { OwnedCapability = JsonValue.Create(true),
+        ManagedBefore = OwnedManaged(edit: value => value[field] = new JsonObject()) }, "owned-passive-unavailable"),
+        "owned passive malformed field is rejected with explicit evidence reason: " + field);
+}
+Check(Partial(new FakeSource { ManagedBefore = OwnedManaged(edit: value => value["known"] = false) }, "owned-passive-unavailable"),
+    "owned passive evidence is validated whenever present even in a historical runtime");
+Check(Partial(new FakeSource { OwnedCapability = JsonValue.Create(false), ManagedBefore = OwnedManaged(edit: value => value["known"] = false) },
+    "owned-passive-unavailable"), "false capability cannot waive malformed owned passive evidence that is present");
+Check(Partial(new FakeSource { Version = "1.5.0.42", OwnedCapability = JsonValue.Create(true), ManagedBefore = OwnedManaged(),
+    ManagedAfter = CensusManaged(false) }, "owned-passive-unavailable"), "confirmation read independently requires owned physical evidence");
+Check(Partial(new FakeSource { Version = "1.5.0.42", OwnedCapability = JsonValue.Create(true),
+    ManagedBefore = OwnedManaged("Retiring", hooks: 39, inFlight: 1, reservation: true), ManagedAfter = OwnedManaged() }, "managed-changed"),
+    "owned physical retirement between complete managed readings cannot become a stable snapshot");
 var receiptFlags = Enumerable.Range(0, 112).Select(index => index == 1 ? 1 : 0).ToArray();
 var receiptSample = new PortraitEditorOpeningSample(true, 1, 1, 10, 0, 0, 0, 0, false, -1, -1, 3,
     new(100, 9, 77, 88, 178, 18, 1, 2, 3, 1000, false, false, false, 0), receiptFlags, false, true, true, null);
@@ -208,6 +280,9 @@ Check(FireGaze.Plugin.Framework.Dispatches == 0 && feature.EditorReads == 0 && f
     "feature collector initialization does not resolve native state or schedule a callback");
 var actualSource = feature.Source();
 using var hostRuntime = JsonDocument.Parse(actualSource.ReadRuntimeJSON());
+Check(hostRuntime.RootElement.TryGetProperty("ownedNativePassiveSupported", out var actualOwnedCapability)
+    && actualOwnedCapability.ValueKind == JsonValueKind.True,
+    "actual feature runtime advertises mandatory owned native passive evidence support");
 Check(hostRuntime.RootElement.GetProperty("location").GetString()
     == new SafetyPluginInterface().AssemblyLocation.FullName
     && hostRuntime.RootElement.GetProperty("location").GetString() != typeof(FireGaze.Plugin).Assembly.Location,
@@ -222,6 +297,9 @@ Check(feature.ConfigureLease(), "feature fixture establishes the original lease 
 featureClock = TimeSpan.FromSeconds(61);
 using var managedRead = JsonDocument.Parse(actualSource.ReadManagedJSON());
 var currentManaged = managedRead.RootElement;
+Check(currentManaged.TryGetProperty("ownedPassive", out var ownedUnknown)
+    && !ownedUnknown.GetProperty("known").GetBoolean(),
+    "actual adapter reports an absent owned passive controller as unknown rather than manufacturing idle");
 Check(currentManaged.TryGetProperty("editorOpening", out var openingReceipt)
     && openingReceipt.GetProperty("status").GetString() == "NotExecuted"
     && !openingReceipt.GetProperty("mayMutate").GetBoolean() && !openingReceipt.GetProperty("mayClose").GetBoolean(),
@@ -241,6 +319,14 @@ Check(physicalManaged.RootElement.GetProperty("sourceCensus").GetProperty("sourc
     && physicalManaged.RootElement.GetProperty("sourceCensus").GetProperty("blocksOperations").GetBoolean()
     && !physicalManaged.RootElement.GetProperty("sourceCensus").GetProperty("physicalDrainCompleted").GetBoolean(),
     "actual formal adapter serializes physical tail instead of treating logical stop as idle");
+feature.OwnedSafety = new(true, "Retiring", 4, 3, true, false, 39, 1, true, false);
+using var ownedPhysicalManaged = JsonDocument.Parse(actualSource.ReadManagedJSON());
+var ownedPhysical = ownedPhysicalManaged.RootElement.GetProperty("ownedPassive");
+Check(ownedPhysical.GetProperty("attempt").GetInt64() == 4 && ownedPhysical.GetProperty("censusAttempt").GetInt64() == 3
+    && ownedPhysical.GetProperty("hooks").GetInt32() == 39 && ownedPhysical.GetProperty("inFlight").GetInt32() == 1
+    && ownedPhysical.GetProperty("reservationHeld").GetBoolean() && ownedPhysical.GetProperty("blocksOperations").GetBoolean()
+    && !ownedPhysical.GetProperty("physicalDrainCompleted").GetBoolean() && !ownedPhysical.GetProperty("productionAdmission").GetBoolean(),
+    "actual formal adapter independently preserves owned attempt, complete hook batch, reservation and physical tail");
 Check(currentManaged.GetProperty("captureIsolation").GetString() == "off"
     && feature.Lease.ConfiguredMode == "history" && feature.Lease.ExpiresAt == TimeSpan.FromSeconds(60),
     "actual adapter uses Peek without expiring or refreshing the stored lease");
@@ -296,12 +382,19 @@ sealed class FakeSource : IPortraitSafetySnapshotSource
     public string ManagedBefore = Managed(false);
     public string? ManagedAfter;
     public string Version = "1.5.0.37";
+    public JsonNode? OwnedCapability;
     private int boundaries, editors, managed;
     public bool IsFrameworkThread => Framework;
     public bool IsDisposed => Disposed;
     void Call(string name) { Calls.Add(name); if (ThrowAt == name) throw new InvalidOperationException(); }
     public long Timestamp() { Call("clock"); return Calls.Count; }
-    public string ReadRuntimeJSON() { Call("runtime"); return JsonSerializer.Serialize(new { version = Version, mvid = "mvid-current", instanceID = "instance-current" }); }
+    public string ReadRuntimeJSON()
+    {
+        Call("runtime");
+        var runtime = JsonSerializer.SerializeToNode(new { version = Version, mvid = "mvid-current", instanceID = "instance-current" })!.AsObject();
+        if (OwnedCapability is not null) runtime["ownedNativePassiveSupported"] = OwnedCapability.DeepClone();
+        return runtime.ToJsonString();
+    }
     public PortraitSafetyBoundary ReadBoundary()
     {
         Call("boundary");

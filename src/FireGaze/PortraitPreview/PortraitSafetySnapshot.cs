@@ -70,6 +70,8 @@ internal sealed class PortraitSafetySnapshotCollector(IPortraitSafetySnapshotSou
             ValidateManaged(managedConfirmation, errors);
             ValidateSourceCensus(managed, runtime, errors);
             ValidateSourceCensus(managedConfirmation, runtime, errors);
+            ValidateOwnedPassive(managed, runtime, errors);
+            ValidateOwnedPassive(managedConfirmation, runtime, errors);
             if (StableManaged(managed) != StableManaged(managedConfirmation)) errors.Add("managed-changed");
             if (!HasString(runtime, "version") || !HasString(runtime, "mvid") || !HasString(runtime, "instanceID")) errors.Add("runtime-unavailable");
             if (ended < started || sequence <= 0) errors.Add("timing-unavailable");
@@ -202,6 +204,62 @@ internal sealed class PortraitSafetySnapshotCollector(IPortraitSafetySnapshotSou
                 || host.GetProperty("failed").GetBoolean())) return false;
         }
         return true;
+    }
+
+    private static void ValidateOwnedPassive(JsonElement managed, JsonElement runtime, ISet<string> errors)
+    {
+        var required = false;
+        if (runtime.TryGetProperty("ownedNativePassiveSupported", out var capability))
+        {
+            if (capability.ValueKind is not (JsonValueKind.True or JsonValueKind.False))
+                errors.Add("owned-passive-unavailable");
+            else required = capability.GetBoolean();
+        }
+        if (!managed.TryGetProperty("ownedPassive", out var passive))
+        { if (required) errors.Add("owned-passive-unavailable"); return; }
+        if (!ValidOwnedPassive(passive)) errors.Add("owned-passive-unavailable");
+    }
+
+    private static bool ValidOwnedPassive(JsonElement value)
+    {
+        if (value.ValueKind != JsonValueKind.Object
+            || !value.TryGetProperty("known", out var known) || known.ValueKind != JsonValueKind.True
+            || !value.TryGetProperty("productionAdmission", out var admission) || admission.ValueKind != JsonValueKind.False
+            || !value.TryGetProperty("state", out var stateValue) || stateValue.ValueKind != JsonValueKind.String
+            || stateValue.GetString() is not ("Off" or "WaitingForCensusDrain" or "Installing" or "WaitingForSourceReturn" or "Retiring" or "Faulted")
+            || !NonnegativeInt64(value, "attempt", out var attempt) || !NonnegativeInt64(value, "censusAttempt", out var censusAttempt)
+            || !NonnegativeInt32(value, "hooks", out var hooks) || hooks > 39
+            || !NonnegativeInt32(value, "inFlight", out var inFlight)
+            || !HasBoolean(value, "blocksOperations") || !HasBoolean(value, "physicalDrainCompleted")
+            || !HasBoolean(value, "reservationHeld") || !HasBoolean(value, "failed")) return false;
+        var state = stateValue.GetString();
+        var drained = value.GetProperty("physicalDrainCompleted").GetBoolean();
+        var blocks = value.GetProperty("blocksOperations").GetBoolean();
+        var reservation = value.GetProperty("reservationHeld").GetBoolean();
+        var failed = value.GetProperty("failed").GetBoolean();
+        if (blocks == drained || drained != (state == "Off") || failed != (state == "Faulted")
+            || (attempt == 0 ? state != "Off" || censusAttempt != 0 : censusAttempt <= 0)
+            || hooks == 0 && inFlight != 0 || hooks > 0 && !reservation) return false;
+        return state switch
+        {
+            "Off" or "WaitingForCensusDrain" => hooks == 0 && inFlight == 0 && !reservation,
+            "WaitingForSourceReturn" => hooks == 39 && reservation,
+            _ => true,
+        };
+    }
+
+    private static bool NonnegativeInt64(JsonElement value, string name, out long number)
+    {
+        number = 0;
+        return value.TryGetProperty(name, out var property) && property.ValueKind == JsonValueKind.Number
+            && property.TryGetInt64(out number) && number >= 0;
+    }
+
+    private static bool NonnegativeInt32(JsonElement value, string name, out int number)
+    {
+        number = 0;
+        return value.TryGetProperty(name, out var property) && property.ValueKind == JsonValueKind.Number
+            && property.TryGetInt32(out number) && number >= 0;
     }
 
     private static string StableManaged(JsonElement value)
