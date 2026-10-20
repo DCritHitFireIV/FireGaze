@@ -35,9 +35,13 @@ internal sealed class PortraitHistoryWriter : IDisposable
     private readonly SemaphoreSlim signal = new(0);
     private readonly string path;
     private readonly int byteLimit;
+    private readonly PortraitStorageBudget storage;
+    private readonly Func<TimeSpan, CancellationToken, Task> retryDelay;
+    private readonly CancellationTokenSource capacityClose = new();
     private readonly Task worker;
     private (long Sequence, PortraitHistoryWriteDocument Document, TaskCompletionSource<bool> Completion)? pending;
     private TaskCompletionSource<bool>? inFlight;
+    private PortraitHistoryWriteDocument? failedDocument;
     private long submitted;
     private long completed;
     private bool stopping;
@@ -46,10 +50,14 @@ internal sealed class PortraitHistoryWriter : IDisposable
     private Task<bool>? drainTask;
     public string? LastError { get { lock (gate) return lastError; } }
 
-    public PortraitHistoryWriter(string path, int byteLimit)
+    public PortraitHistoryWriter(string path, int byteLimit, PortraitStorageBudget? storage = null,
+        Func<TimeSpan, CancellationToken, Task>? retryDelay = null)
     {
-        this.path = path;
+        this.path = Path.GetFullPath(path);
         this.byteLimit = byteLimit;
+        this.storage = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(this.path)!);
+        this.retryDelay = retryDelay ?? Task.Delay;
+        this.storage.RegisterPath(this.path);
         worker = Task.Run(Work);
     }
 
@@ -64,6 +72,7 @@ internal sealed class PortraitHistoryWriter : IDisposable
             var completion = pending?.Completion
                 ?? new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             pending = (++submitted, document, completion);
+            failedDocument = null;
             if (needsSignal) signal.Release();
             return true;
         }
@@ -80,6 +89,23 @@ internal sealed class PortraitHistoryWriter : IDisposable
         }
     }
 
+    /// <summary>Retries the last failed immutable state without creating another history record.</summary>
+    public Task<bool> RetryAsync()
+    {
+        lock (gate)
+        {
+            if (stopping) return Task.FromResult(lastSuccess);
+            if (pending is { } queued) return queued.Completion.Task;
+            if (inFlight is not null) return inFlight.Task;
+            if (failedDocument is not { } document) return Task.FromResult(lastSuccess);
+            var completion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            pending = (++submitted, document, completion);
+            failedDocument = null;
+            signal.Release();
+            return completion.Task;
+        }
+    }
+
     /// <summary>
     /// Seals writer admission and returns a task for the accepted immutable document.
     /// Callers that own a Framework-bound feature must await this task outside Framework.
@@ -90,6 +116,8 @@ internal sealed class PortraitHistoryWriter : IDisposable
         {
             if (drainTask is not null) return drainTask;
             stopping = true;
+            // Reclamation needs a live photo owner. Closing cannot wait indefinitely for it.
+            capacityClose.Cancel();
             signal.Release();
             drainTask = DrainWorkerAsync();
             return drainTask;
@@ -127,41 +155,49 @@ internal sealed class PortraitHistoryWriter : IDisposable
                 pending = null;
                 inFlight = request.Completion;
             }
-            string? failure = null;
-            try { Write(request.Document); }
-            catch (Exception exception) { failure = exception.Message; }
+            PortraitStorageResult result;
+            try { result = await WriteWithRetryAsync(request.Document).ConfigureAwait(false); }
+            catch (Exception exception) { result = new(PortraitStorageCode.StorageError, exception.Message); }
+            bool finished;
             lock (gate)
             {
                 completed = request.Sequence;
-                lastSuccess = failure is null;
-                lastError = failure;
+                lastSuccess = result.Code == PortraitStorageCode.Success;
+                lastError = lastSuccess ? null : result.Reason;
+                failedDocument = !lastSuccess && pending is null ? request.Document : null;
                 request.Completion.TrySetResult(lastSuccess);
                 inFlight = null;
-                if (stopping && pending is null) return;
+                finished = stopping && pending is null;
             }
+            // A completed drain task may remain rooted by its caller. Keep only the
+            // deliberately retained failed document, not its successful request payload.
+            request = default;
+            if (finished) return;
         }
     }
 
-    private void Write(PortraitHistoryWriteDocument document)
+    private async Task<PortraitStorageResult> WriteWithRetryAsync(PortraitHistoryWriteDocument document)
     {
-        if (document.Length > byteLimit) throw new InvalidDataException("肖像历史快照超过容量上限。");
-        var directory = Path.GetDirectoryName(path)!;
-        Directory.CreateDirectory(directory);
-        var temporary = Path.Combine(directory, $".{Path.GetFileName(path)}.{Guid.NewGuid():N}.tmp");
-        try
+        if (document.Length > byteLimit) return new(PortraitStorageCode.InvalidPath, "肖像历史快照超过容量上限。");
+        var transientRetries = 0;
+        var capacityRetried = false;
+        while (true)
         {
-            using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 64 * 1024))
+            var observedStorage = storage.ChangeVersion;
+            if (storage.TryPublish(path, document.Length, document.WriteTo, keepBackup: true, out var result)) return result;
+            lock (gate) lastError = result.Reason;
+            if (result.Code is PortraitStorageCode.Busy or PortraitStorageCode.StorageError)
             {
-                document.WriteTo(stream);
-                stream.Flush(flushToDisk: true);
+                if (transientRetries == 3) return result;
+                await retryDelay(TimeSpan.FromSeconds(1 << transientRetries++), CancellationToken.None).ConfigureAwait(false);
+                continue;
             }
-            if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
-            else File.Move(temporary, path);
-        }
-        finally
-        {
-            try { if (File.Exists(temporary)) File.Delete(temporary); }
-            catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or System.Security.SecurityException) { }
+            if (result.Code != PortraitStorageCode.Capacity || capacityRetried) return result;
+            capacityRetried = true;
+            using var reclaimWait = CancellationTokenSource.CreateLinkedTokenSource(capacityClose.Token);
+            reclaimWait.CancelAfter(TimeSpan.FromSeconds(5));
+            try { await storage.WaitForChangeAsync(observedStorage, reclaimWait.Token).ConfigureAwait(false); }
+            catch (OperationCanceledException) { return result; }
         }
     }
 

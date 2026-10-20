@@ -54,7 +54,8 @@ internal static class HistoryBoundedCompletionTests
         }
 
         var stagedPath = Path.Combine(root, "history-bounded-inflight.json");
-        using (var writer = new PortraitHistoryWriter(stagedPath, 10 * 1024 * 1024))
+        using (var writer = new PortraitHistoryWriter(stagedPath, 10 * 1024 * 1024,
+            retryDelay: (_, _) => Task.CompletedTask))
         {
             // Many real stream writes keep the worker observable between taking its request
             // and completing it. No fake I/O or production test callback replaces the writer.

@@ -42,6 +42,7 @@ internal sealed class PortraitHistoryStore : IDisposable
     private readonly Func<DateTimeOffset> clock;
     private readonly int byteLimit;
     private readonly PortraitHistoryWriter? writer;
+    private readonly PortraitStorageBudget storage;
     private List<PortraitHistoryRecord> records = [];
     // Fragments are immutable once encoded and are shared safely with queued worker snapshots.
     private Dictionary<long, byte[]> encodedRecords = [];
@@ -58,15 +59,18 @@ internal sealed class PortraitHistoryStore : IDisposable
     public int Bytes { get { lock (gate) return serializedBytes; } }
 
     public PortraitHistoryStore(string filePath, Func<DateTimeOffset>? clock = null, int byteLimit = MaximumBytes,
-        IPortraitHistoryMigrationFiles? migrationFiles = null)
+        IPortraitHistoryMigrationFiles? migrationFiles = null, PortraitStorageBudget? storage = null,
+        Func<TimeSpan, CancellationToken, Task>? retryDelay = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
         if (byteLimit is <= 0 or > MaximumBytes) throw new ArgumentOutOfRangeException(nameof(byteLimit));
         this.clock = clock ?? (() => DateTimeOffset.Now);
         this.byteLimit = byteLimit;
         var path = Path.GetFullPath(filePath);
+        this.storage = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(path)!);
+        this.storage.RegisterPath(path);
         Load(path, migrationFiles ?? new PortraitHistoryMigrationFiles());
-        if (!IsReadOnly) writer = new(path, byteLimit);
+        if (!IsReadOnly) writer = new(path, byteLimit, this.storage, retryDelay);
     }
 
     public IReadOnlyList<PortraitHistoryRecord> GetRecords(PortraitHistoryKey key)
@@ -380,7 +384,14 @@ internal sealed class PortraitHistoryStore : IDisposable
         return rows.All(record => keys.Contains(record!.Key));
     }
 
-    private static void PersistMigration(string path, byte[] original, byte[] candidate, IPortraitHistoryMigrationFiles files)
+    private void PersistMigration(string path, byte[] original, byte[] candidate, IPortraitHistoryMigrationFiles files)
+    {
+        if (!storage.TryRunMigration(path, checked((long)original.Length + candidate.Length),
+                () => PersistMigrationFiles(path, original, candidate, files), out var result))
+            throw new IOException(result.Reason);
+    }
+
+    private static void PersistMigrationFiles(string path, byte[] original, byte[] candidate, IPortraitHistoryMigrationFiles files)
     {
         var backup = path + ".v1-" + Convert.ToHexString(SHA256.HashData(original)) + ".bak";
         var temporary = Path.Combine(Path.GetDirectoryName(path)!, "." + Path.GetFileName(path) + ".migration-" + Guid.NewGuid().ToString("N") + ".tmp");
@@ -419,6 +430,12 @@ internal sealed class PortraitHistoryStore : IDisposable
     public Task<bool> FlushAsync()
     {
         lock (gate) return writer?.FlushAsync() ?? Task.FromResult(true);
+    }
+
+    /// <summary>Retries the retained last edit after storage changes or an explicit player action.</summary>
+    public Task<bool> RetryAsync()
+    {
+        lock (gate) return disposed ? Task.FromResult(false) : writer?.RetryAsync() ?? Task.FromResult(false);
     }
 
     /// <summary>

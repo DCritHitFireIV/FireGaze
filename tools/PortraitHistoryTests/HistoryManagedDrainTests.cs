@@ -53,7 +53,7 @@ internal static class HistoryManagedDrainTests
 
         var blockedPath = Path.Combine(root, "history-close-disk-failure.json");
         Directory.CreateDirectory(blockedPath);
-        using var failed = new PortraitHistoryWriter(blockedPath, 1024);
+        using var failed = new PortraitHistoryWriter(blockedPath, 1024, retryDelay: (_, _) => Task.CompletedTask);
         Check(failed.Queue(new(Encoding.UTF8.GetBytes("{\"records\":["), [Encoding.UTF8.GetBytes("{}")], Encoding.UTF8.GetBytes("]}"))),
             "failed history close admits an immutable document before the disk boundary");
         var failureDrain = failed.BeginDispose();

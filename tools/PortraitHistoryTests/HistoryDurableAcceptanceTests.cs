@@ -52,7 +52,7 @@ internal static class HistoryDurableAcceptanceTests
         // A directory at the final file path is a real permanent publication failure.
         var blockedPath = Path.Combine(root, "history-unwritable-durable.json");
         Directory.CreateDirectory(blockedPath);
-        using (var blocked = new PortraitHistoryStore(blockedPath))
+        using (var blocked = new PortraitHistoryStore(blockedPath, retryDelay: (_, _) => Task.CompletedTask))
         {
             var result = blocked.Record(key, "{\"pose\":1}");
             Check(result.Status == PortraitHistoryWriteStatus.Added && !await Boundary(result).WaitAsync(TimeSpan.FromSeconds(5)),
