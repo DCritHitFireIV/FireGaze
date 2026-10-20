@@ -41,6 +41,24 @@ public sealed unsafe partial class ActorPreviewRuntime
     public OptionalNativeHookStatus SdkActionTimelinePlayStatus => TimelineHookStatus(actionTimelinePlay, actionTimelinePlayReason);
     public OptionalNativeHookStatus TimelinePlayStatus => resolvedTimelineAdmitted ? ResolvedTimelinePlayStatus : SdkTimelinePlayStatus;
     public OptionalNativeHookStatus ActionTimelinePlayStatus => resolvedActionTimelineAdmitted ? ResolvedActionTimelinePlayStatus : SdkActionTimelinePlayStatus;
+    // Source isolation does not imply that every official HMS input is observed.
+    // Its fallback emotes can enter either native timeline function directly;
+    // polling cannot establish acceptance for a same-ID replay. Read actual Hook
+    // lifetime/admission on every query rather than retaining constructor success.
+    public OptionalNativeHookStatus HmsInputHandoffStatus
+    {
+        get
+        {
+            if (disposed) return new(false, "Runtime disposed.");
+            if (nativeClosing) return new(false, "Runtime closing.");
+            if (!Capabilities.InputBridge) return new(false, Capabilities.Reason);
+            var timeline = TimelinePlayStatus;
+            if (!timeline.Installed) return new(false, "PlayTimeline observer unavailable: " + timeline.Reason);
+            var action = ActionTimelinePlayStatus;
+            return action.Installed ? new(true, "")
+                : new(false, "PlayActionTimeline observer unavailable: " + action.Reason);
+        }
+    }
     private bool hmsVisibilityProtection;
     private long hmsVisibilityRepairs;
     private Dictionary<ushort, ushort>? emoteTimelineIdentities;

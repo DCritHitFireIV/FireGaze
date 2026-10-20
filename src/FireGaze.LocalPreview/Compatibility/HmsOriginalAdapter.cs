@@ -138,6 +138,16 @@ public sealed class HmsOriginalAdapter : IDisposable
     {
         if (fault != null) return new(false, fault);
         if (zoneLoad == null || relay == null) return new(false, "HMS 兼容监测尚未就绪。");
+        var inputHandoff = runtime.HmsInputHandoffStatus;
+        if (!inputHandoff.Installed)
+        {
+            // The private clone still isolates the source, but HMS direct native
+            // emote inputs are not fully observed. Refuse this trial rather than
+            // silently promising complete handoff; a later healthy poll can reopen.
+            runtime.SetHmsVisibilityProtection(false);
+            if (runtime.HasActivePreview) runtime.BeforeHmsLifecycle();
+            return new(false, "HMS 动作兼容暂不可用，请稍后再试。");
+        }
         var nextLifecycle = ReadLifecycle(zoneLoad, relay);
         var nextBody = readOriginalBody();
         var visibilityActive = visibility != null && ReadField(visibility, "active") is true;

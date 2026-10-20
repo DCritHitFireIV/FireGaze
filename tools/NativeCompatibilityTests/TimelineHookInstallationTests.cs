@@ -3,8 +3,11 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using Dalamud.Hooking;
+using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
+using FireGaze.LocalPreview.Compatibility;
 using FireGaze.LocalPreview.Runtime;
 
 // Substitute only the native patch backend. The real runtime constructor,
@@ -18,7 +21,173 @@ static class TimelineHookInstallationTests
         ("optional hook Enable failure disposes only the rejected hook", EnableFailure),
         ("optional hook cleanup failure cannot disable core or later optional hooks", CleanupFailure),
         ("optional hook signature gate rejects argument and marshalling mismatches", SignatureMismatch),
+        ("core bridge alone cannot admit complete HMS handoff", HandoffMissingObservers),
+        ("one active timeline cannot admit complete HMS handoff", HandoffPartialObservers),
+        ("two active SDK timeline hooks admit HMS handoff until one is disabled", HandoffSdkLifetime),
+        ("qualified resolved timelines admit only after both are published", HandoffResolvedAdmission),
+        ("released resolved hook revokes HMS handoff dynamically", HandoffResolvedLifetime),
+        ("native closing withdraws complete HMS handoff before hook disposal", HandoffClosing),
+        ("runtime disposal withdraws complete HMS handoff", HandoffDisposed),
+        ("actual adapter refuses either single observer from the real runtime", HandoffAdapterPartial),
+        ("actual adapter follows real runtime readiness loss and recovery", HandoffAdapterLifetime),
+        ("actual adapter without HMS accepts the real degraded runtime", HandoffAdapterWithoutHms),
     ];
+
+    // These cases read the real production runtime. Only the native patch backend
+    // is substituted; no fake readiness boolean supplies the expected result.
+    static void HandoffMissingObservers()
+    {
+        using var runtime = Create(new RecordingInterop());
+        Equal(runtime.Capabilities.InputBridge, true, "core bridge is available");
+        Equal(Handoff(runtime).Installed, false, "missing observers cannot prove HMS input handoff");
+    }
+    static void HandoffPartialObservers()
+    {
+        foreach (var field in new[] { "timelinePlay", "actionTimelinePlay" })
+        {
+            using var runtime = Create(new RecordingInterop());
+            InstallObserver(runtime, field);
+            Equal(Handoff(runtime).Installed, false, "each native entry needs its own observer");
+        }
+    }
+    static void HandoffSdkLifetime()
+    {
+        using var runtime = Create(new RecordingInterop());
+        var timeline = InstallObserver(runtime, "timelinePlay");
+        InstallObserver(runtime, "actionTimelinePlay");
+        Equal(Handoff(runtime).Installed, true, "both SDK routes enabled");
+        HookBackendDouble.Get(timeline).Enabled = false;
+        Equal(Handoff(runtime).Installed, false, "disabled hook cannot retain readiness");
+        HookBackendDouble.Get(timeline).Enabled = true;
+        Equal(Handoff(runtime).Installed, true, "reenabled pair supplies current readiness");
+    }
+    static void HandoffResolvedAdmission()
+    {
+        using var runtime = Create(new RecordingInterop());
+        InstallObserver(runtime, "resolvedTimelinePlay");
+        InstallObserver(runtime, "resolvedActionTimelinePlay");
+        Equal(Handoff(runtime).Installed, false, "prepared hooks are not admitted observers");
+        typeof(ActorPreviewRuntime).GetField("resolvedTimelineAdmitted", Private)!.SetValue(runtime, true);
+        Equal(Handoff(runtime).Installed, false, "one admitted entry is incomplete");
+        typeof(ActorPreviewRuntime).GetField("resolvedActionTimelineAdmitted", Private)!.SetValue(runtime, true);
+        Equal(Handoff(runtime).Installed, true, "both qualified internal entries admitted");
+    }
+    static void HandoffResolvedLifetime()
+    {
+        using var runtime = Create(new RecordingInterop());
+        InstallObserver(runtime, "resolvedTimelinePlay");
+        var action = InstallObserver(runtime, "resolvedActionTimelinePlay");
+        foreach (var field in new[] { "resolvedTimelineAdmitted", "resolvedActionTimelineAdmitted" })
+            typeof(ActorPreviewRuntime).GetField(field, Private)!.SetValue(runtime, true);
+        Equal(Handoff(runtime).Installed, true, "admitted resolved routes available");
+        action.Dispose();
+        Equal(Handoff(runtime).Installed, false, "released hook cannot retain readiness");
+    }
+    static void HandoffClosing()
+    {
+        using var runtime = Create(new RecordingInterop());
+        InstallObserver(runtime, "timelinePlay"); InstallObserver(runtime, "actionTimelinePlay");
+        Equal(Handoff(runtime).Installed, true, "precondition");
+        typeof(ActorPreviewRuntime).GetField("nativeClosing", Private)!.SetValue(runtime, true);
+        Equal(Handoff(runtime).Installed, false, "closing callbacks bypass input handoff");
+    }
+    static void HandoffDisposed()
+    {
+        using var runtime = Create(new RecordingInterop());
+        InstallObserver(runtime, "timelinePlay"); InstallObserver(runtime, "actionTimelinePlay");
+        Equal(Handoff(runtime).Installed, true, "precondition");
+        runtime.Dispose();
+        Equal(Handoff(runtime).Installed, false, "disposed runtime cannot hand off");
+    }
+    static void HandoffAdapterPartial()
+    {
+        foreach (var field in new[] { "timelinePlay", "actionTimelinePlay" })
+        {
+            using var runtime = Create(new RecordingInterop());
+            InstallObserver(runtime, field);
+            using var hms = new AuditedHms(runtime);
+            Equal(hms.Adapter.Refresh().Allowed, false, "a single real observer cannot authorize HMS trials");
+            Equal(typeof(ActorPreviewRuntime).GetField("hmsVisibilityProtection", Private)!.GetValue(runtime), false,
+                "degraded route cannot retain HMS clone protection");
+        }
+    }
+    static void HandoffAdapterLifetime()
+    {
+        using var runtime = Create(new RecordingInterop());
+        var timeline = InstallObserver(runtime, "timelinePlay");
+        InstallObserver(runtime, "actionTimelinePlay");
+        using var hms = new AuditedHms(runtime);
+        Equal(hms.Adapter.Refresh().Allowed, true, "full actual pair permits audited HMS");
+        Equal(typeof(ActorPreviewRuntime).GetField("hmsVisibilityProtection", Private)!.GetValue(runtime), true, "protection active");
+        HookBackendDouble.Get(timeline).Enabled = false;
+        Equal(hms.Adapter.Refresh().Allowed, false, "actual disabled observer revokes adapter admission");
+        Equal(typeof(ActorPreviewRuntime).GetField("hmsVisibilityProtection", Private)!.GetValue(runtime), false, "protection withdrawn");
+        HookBackendDouble.Get(timeline).Enabled = true;
+        Equal(hms.Adapter.Refresh().Allowed, true, "actual current readiness reopens admission");
+    }
+    static void HandoffAdapterWithoutHms()
+    {
+        using var runtime = Create(new RecordingInterop());
+        using var hms = new AuditedHms(runtime, loaded: false);
+        Equal(hms.Adapter.Refresh().Allowed, true, "standalone does not require either optional HMS observer");
+    }
+    sealed class AuditedHms : IDisposable
+    {
+        readonly AssemblyLoadContext context = new("HMS real runtime handoff " + Guid.NewGuid(), true);
+        public HmsOriginalAdapter Adapter { get; }
+        public AuditedHms(ActorPreviewRuntime runtime, bool loaded = true)
+        {
+            context.Resolving += (_, name) => AssemblyLoadContext.Default.Assemblies.FirstOrDefault(a => a.GetName().Name == name.Name);
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "XIVLauncherCN/installedPlugins/HMSync/1.0.4.2/HMSync.dll");
+            var target = context.LoadFromAssemblyPath(path);
+            var root = target.GetType("HMSync.HMSyncPlugin", true)!;
+            var instance = RuntimeHelpers.GetUninitializedObject(root);
+            foreach (var name in new[] { "zoneLoad", "relay", "actorVisibility" })
+            {
+                var field = root.GetField(name, Private)!;
+                var owner = RuntimeHelpers.GetUninitializedObject(field.FieldType);
+                field.SetValue(instance, owner);
+                if (name == "actorVisibility") field.FieldType.GetField("active", Private)!.SetValue(owner, true);
+            }
+            var exposedType = typeof(IDalamudPluginInterface).Assembly.GetType("Dalamud.Plugin.ExposedPlugin", true)!;
+            var localType = exposedType.GetFields(Private)
+                .Single(f => f.FieldType.FullName == "Dalamud.Plugin.Internal.Types.LocalPlugin").FieldType;
+            var local = RuntimeHelpers.GetUninitializedObject(localType);
+            localType.GetField("instance", Private)!.SetValue(local, instance);
+            localType.GetField("<DllFile>k__BackingField", Private)!.SetValue(local, new FileInfo(path));
+            var exposed = Proxy.Create<IExposedPlugin>((method, _) => method.Name switch {
+                "get_IsLoaded" => loaded, "get_InternalName" => "HMSync", "get_Name" => "HMapSync", _ => null });
+            ((Proxy)(object)exposed).plugin = local;
+            var host = Proxy.Create<IDalamudPluginInterface>((method, _) => method.Name == "get_InstalledPlugins" ? new[] { exposed } : null);
+            Adapter = new(host, Proxy.Create<ICommandManager>((_, _) => null), runtime,
+                Proxy.Create<IPluginLog>((_, _) => null), () => null);
+        }
+        public void Dispose() { Adapter.Dispose(); context.Unload(); }
+    }
+    static (bool Installed, string Reason) Handoff(ActorPreviewRuntime runtime)
+    {
+        var property = typeof(ActorPreviewRuntime).GetProperty("HmsInputHandoffStatus");
+        if (property is null) throw new Exception("core InputBridge cannot prove both HMS timeline routes: missing runtime readiness");
+        var value = property.GetValue(runtime)!;
+        return ((bool)value.GetType().GetProperty("Installed")!.GetValue(value)!,
+            (string)value.GetType().GetProperty("Reason")!.GetValue(value)!);
+    }
+    static IDisposable InstallObserver(ActorPreviewRuntime runtime, string fieldName)
+    {
+        var field = typeof(ActorPreviewRuntime).GetField(fieldName, Private)!;
+        return (IDisposable)typeof(TimelineHookInstallationTests).GetMethod(nameof(InstallObserverTyped), BindingFlags.NonPublic | BindingFlags.Static)!
+            .MakeGenericMethod(field.FieldType.GetGenericArguments()[0]).Invoke(null, [runtime, field])!;
+    }
+    static IDisposable InstallObserverTyped<T>(ActorPreviewRuntime runtime, FieldInfo field) where T : Delegate
+    {
+        // The real installer gate and ownership path run with matching audited
+        // delegate metadata; only the patch implementation itself is a double.
+        var result = Install<T, T>(runtime, () => HookBackendDouble.Create<T>());
+        if (result.Hook is not IDisposable hook) throw new Exception("test backend could not install observer: " + result.Reason);
+        field.SetValue(runtime, hook);
+        return hook;
+    }
 
     static void RejectedBeforeFactory()
     {
@@ -142,6 +311,7 @@ static class TimelineHookInstallationTests
     }
     public class Proxy : DispatchProxy
     {
+        public object? plugin;
         Func<MethodInfo, object?[]?, object?> handler = null!;
         public static T Create<T>(Func<MethodInfo, object?[]?, object?> handler) where T : class
         { var proxy = DispatchProxy.Create<T, Proxy>(); ((Proxy)(object)proxy).handler = handler; return proxy; }

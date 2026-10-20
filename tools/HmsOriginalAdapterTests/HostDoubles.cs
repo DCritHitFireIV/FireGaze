@@ -4,9 +4,11 @@ using Dalamud.Plugin;
 // Only the game runtime boundary is replaced. The observer and fingerprint verifier are real.
 namespace FireGaze.LocalPreview.Runtime
 {
+    public sealed record OptionalNativeHookStatus(bool Installed, string Reason);
     public sealed class ActorPreviewRuntime
     {
         public bool HasActivePreview { get; set; }
+        public OptionalNativeHookStatus HmsInputHandoffStatus { get; set; } = new(true, "");
         public int Cleanups;
         public bool VisibilityProtection;
         public void SetHmsVisibilityProtection(bool enabled) => VisibilityProtection = enabled;

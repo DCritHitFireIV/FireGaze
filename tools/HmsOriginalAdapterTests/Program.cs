@@ -36,6 +36,10 @@ var tests = new (string Name, Action Run)[]
     ("locomotion timeline changes do not end the trial", Locomotion),
     ("only audited active HMS enables clone visibility protection", Visibility),
     ("unload and dispose withdraw clone visibility protection", VisibilityDetached),
+    ("loaded audited HMS refuses a missing complete input handoff", HandoffMissing),
+    ("lost handoff ends an active trial and withdraws clone protection", HandoffLost),
+    ("recovering complete handoff reopens only future trials", HandoffRecovered),
+    ("absent HMS does not require optional HMS timeline observers", WithoutHmsHandoff),
     ("observer artifact has no managed patch engine dependency", NoPatchEngine),
 };
 var failed = 0;
@@ -235,6 +239,56 @@ void VisibilityDetached()
     fixture.Exposure.Loaded = true; fixture.Refresh();
     Equal(fixture.Runtime.VisibilityProtection, true);
     fixture.Adapter.Dispose();
+    Equal(fixture.Runtime.VisibilityProtection, false);
+}
+void HandoffMissing()
+{
+    using var fixture = new ObserverFixture(release);
+    fixture.Runtime.HmsInputHandoffStatus = new(false, "second timeline unavailable");
+    fixture.Visible(true);
+    var decision = fixture.Refresh();
+    Equal(decision.Allowed, false);
+    Equal(decision.Reason.Contains("second timeline unavailable"), false);
+    Equal(fixture.Runtime.VisibilityProtection, false);
+}
+void HandoffLost()
+{
+    using var fixture = Attached();
+    fixture.Visible(true);
+    Equal(fixture.Refresh().Allowed, true);
+    Equal(fixture.Runtime.VisibilityProtection, true);
+    fixture.Runtime.HasActivePreview = true;
+    fixture.Runtime.HmsInputHandoffStatus = new(false, "observer disabled");
+    var cleanups = fixture.Runtime.Cleanups;
+    Equal(fixture.Refresh().Allowed, false);
+    Equal(fixture.Runtime.HasActivePreview, false);
+    Equal(fixture.Runtime.Cleanups, cleanups + 1);
+    Equal(fixture.Runtime.VisibilityProtection, false);
+    // A stable degraded poll must not restore a stale trial or repeatedly tear down.
+    Equal(fixture.Refresh().Allowed, false);
+    Equal(fixture.Runtime.Cleanups, cleanups + 1);
+}
+void HandoffRecovered()
+{
+    using var fixture = Attached();
+    fixture.Runtime.HasActivePreview = true;
+    fixture.Runtime.HmsInputHandoffStatus = new(false, "observer released");
+    Equal(fixture.Refresh().Allowed, false);
+    fixture.Runtime.HmsInputHandoffStatus = new(true, "");
+    fixture.Visible(true);
+    Equal(fixture.Refresh().Allowed, true);
+    Equal(fixture.Runtime.HasActivePreview, false);
+    Equal(fixture.Runtime.VisibilityProtection, true);
+    Equal(fixture.ZoneHandlers, 1);
+}
+void WithoutHmsHandoff()
+{
+    using var fixture = new ObserverFixture(release);
+    fixture.Exposure.Loaded = false;
+    fixture.Runtime.HmsInputHandoffStatus = new(false, "both timelines unavailable");
+    Equal(fixture.Refresh().Allowed, true);
+    Equal(fixture.ZoneHandlers, 0);
+    Equal(fixture.Runtime.Cleanups, 0);
     Equal(fixture.Runtime.VisibilityProtection, false);
 }
 void NoPatchEngine()

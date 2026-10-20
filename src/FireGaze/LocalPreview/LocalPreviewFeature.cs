@@ -398,6 +398,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
+        hmsInputHandoff = runtime?.HmsInputHandoffStatus,
         timelineObservers = new { play = runtime?.TimelinePlayStatus, action = runtime?.ActionTimelinePlayStatus },
         sdkTimelineObservers = new { play = runtime?.SdkTimelinePlayStatus, action = runtime?.SdkActionTimelinePlayStatus },
         resolvedTimelineObservers = new { play = runtime?.ResolvedTimelinePlayStatus, action = runtime?.ResolvedActionTimelinePlayStatus },
