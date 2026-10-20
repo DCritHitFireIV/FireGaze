@@ -13,7 +13,7 @@ using RenderTargetManager = FFXIVClientStructs.FFXIV.Client.Graphics.Render.Rend
 #if !OWNED_SLOT
 throw new Exception("FAIL: the native eight-slot reader has not been implemented.");
 #else
-return CensusOneShotCases.Run() | SourceReturnCases.Run() | ResourcePhaseCases.Run() | CounterPhaseCases.Run() | ContextLifetimeHookCases.Run() | ContextEnvironmentCases.Run() | ContextHookCases.Run() | Tests.Run() | PhaseCases.Run() | NativePhaseCases.Run() | EnvironmentCases.Run()
+return JointDiagnosticCases.Run() | JointFeatureCases.Run() | CensusOneShotCases.Run() | SourceReturnCases.Run() | ResourcePhaseCases.Run() | CounterPhaseCases.Run() | ContextLifetimeHookCases.Run() | ContextEnvironmentCases.Run() | ContextHookCases.Run() | Tests.Run() | PhaseCases.Run() | NativePhaseCases.Run() | EnvironmentCases.Run()
     | HookCases.Run() | OwnedSceneIntegrationCases.Run() | OwnedReservationCases.Run() | CensusFeatureCases.Run() | OwnedPassiveFeatureCases.Run() | OwnedPassiveHandoffCases.Run() | CensusDiagnosticCases.Run();
 
 internal static unsafe class Tests

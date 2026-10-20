@@ -41,7 +41,13 @@ internal sealed unsafe class PortraitOwnedCharaView(IPortraitOwnedCharaViewNativ
                 if (scope is null || !lease.IsCurrent || !lease.CanCreate) return Fail("The native creation phase expired.");
                 view = api.Allocate();
             }
-            if (view == 0) return Fail("The UI memory space could not allocate the portrait.");
+            if (view == 0)
+            {
+                // Allocate returned no resource. Only this exact unbound lease can
+                // certify managed completion without inventing a native destructor.
+                IsRetired = lease.ConfirmUnusedCreation();
+                return Fail("The UI memory space could not allocate the portrait.");
+            }
             if (!lease.TryBindCreatedView(view))
             {
                 // This allocation has never entered Ctor/Setup and therefore owns no native

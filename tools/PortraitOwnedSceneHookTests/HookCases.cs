@@ -31,6 +31,7 @@ internal static unsafe class HookCases
             ("native Setup ABI preserves both stack arguments after native-first retirement", NativeSetupStack),
             ("native deleting-destructor ABI preserves flags and pointer return", NativeDtorReturn),
             ("closing retires on source phase and tears down hooks after retirement", Closing),
+            ("closing before the first source phase completes the unused request", ClosingBeforeFirstPhase),
             ("all native ABI shapes match the installed SDK", Abi),
         })
         {
@@ -43,6 +44,18 @@ internal static unsafe class HookCases
     static void Equal<T>(T actual, T expected) { if (!EqualityComparer<T>.Default.Equals(actual, expected)) throw new Exception($"expected {expected}; got {actual}"); }
     static void True(bool value) => Equal(value, true);
     static void Trace(Fixture f, string expected) => Equal(string.Join(",", f.Events), expected);
+
+    static void ClosingBeforeFirstPhase()
+    {
+        using var f = new Fixture(); True(f.Hooks.TryInstall(f.Factory));
+        var advances = 0; var retirements = 0;
+        True(f.Hooks.TryRequest(Source, 6, _ => advances++, lease => {
+            True(lease.IsCurrent); True(lease.CanCreate); retirements++; return true;
+        }));
+        f.Hooks.RequestStop(); f.Render(Source.Model, 33);
+        Equal(advances, 0); Equal(retirements, 1);
+        Trace(f, "render:768:33"); True(f.Hooks.TryDispose());
+    }
 
     static void IncompleteCoverage()
     {

@@ -65,6 +65,12 @@ namespace FireGaze.PortraitPreview
         internal PortraitSourceCensusSafetyState CensusSafety = PortraitSourceCensusSafetyState.Unknown;
         private PortraitOwnedScenePassiveSafetyState ReadOwnedPassiveSafetyState() => OwnedSafety;
         internal PortraitOwnedScenePassiveSafetyState OwnedSafety = PortraitOwnedScenePassiveSafetyState.Unknown;
+        private object ReadOwnedJointSafetyState() => new
+        {
+            known = true, state = "Off", attempt = 0, blocksOperations = false, physicalDrainCompleted = true,
+            installation = Guid.Empty, hooks = 0, inFlight = 0, reservationHeld = false, failed = false,
+            recording = false, productionAdmission = false,
+        };
         internal readonly PortraitEditorOpeningController Opening = new(() => null, () => 0);
         private PortraitEditorOpeningReceipt ReadEditorOpeningReceipt() => Opening.Read();
         internal PortraitPreviewFeature(Func<TimeSpan>? clock = null, Func<PortraitSafetyTrialState>? trials = null)

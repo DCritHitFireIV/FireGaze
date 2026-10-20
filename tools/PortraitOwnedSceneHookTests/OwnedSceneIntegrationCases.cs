@@ -25,6 +25,10 @@ internal static unsafe class OwnedSceneIntegrationCases
             ("new native owner during Release blocks Dtor and any late cleanup", TakeoverDuringRelease),
             ("Dtor completion does not read freed view when confirmation loses slot", TakeoverAfterDtor),
             ("foreign takeover during own Release never recursively releases or destroys", ReentrantTakeoverDuringRelease),
+            ("broker completes real zero-allocation creation with no native cleanup", () => BrokerCreationCleanup("zero-allocation")),
+            ("broker completes real raw allocation cleanup without a destructor", () => BrokerCreationCleanup("raw-free")),
+            ("broker completes real Setup self-retirement without double cleanup", () => BrokerCreationCleanup("setup-self-retired")),
+            ("broker rejects a retired runtime without native release confirmation", BrokerUnconfirmedCleanup),
         })
         {
             total++;
@@ -39,6 +43,41 @@ internal static unsafe class OwnedSceneIntegrationCases
         using var f = new Fixture(); f.Prepare(); f.SourceRender(100);
         Check(f.Api.ConstructCalls == 1, "strict idle slot prevented the constructor from being called");
         Check(f.Scene.IsReady, f.Scene.LastError ?? "strict creation did not reach ready");
+    }
+    static void BrokerCreationCleanup(string mode)
+    {
+            using var api = new Api(); var factory = new Factory(api); api.Factory = factory;
+            api.ReturnZeroAllocation = mode == "zero-allocation";
+            api.RejectConstructAdmission = mode == "raw-free";
+            if (mode == "setup-self-retired") api.SetupMode = "throw-owned";
+            using var broker = new PortraitOwnedSceneControllerBroker(() => true, () => new EnvironmentProof(api), factory);
+            using var controller = new PortraitOwnedSceneController(broker, () => new PortraitOwnedCharaView(api));
+            var snapshot = new PortraitOwnedCharaViewSnapshot(Source, default, default, new CharaViewItem[14], 0, new PortraitComposition());
+            Check(controller.TryStart(snapshot, 6), mode + " request failed");
+            factory.Get<CharaView.Delegates.Render>(PortraitOwnedSceneNativeKind.Render)((CharaView*)Source.Model, 100);
+            broker.Update();
+            Check(controller.State == PortraitOwnedSceneControllerState.Off && controller.Source is null,
+                mode + " retained a controller after its exact native cleanup");
+            Check(broker.DrainPhysicalAsync().Wait(TimeSpan.FromSeconds(2)), mode + " retained its physical hooks");
+            Check(api.SlotOwner == 0 && api.ReadsAfterFree == 0, mode + " read freed view or leaked a slot");
+            Check(mode == "zero-allocation" ? api.ConstructCalls == 0 && api.FreeUnconstructedCalls == 0 && api.Events.SequenceEqual(new[] { "source-render" })
+                : mode == "raw-free" ? api.ConstructCalls == 0 && api.FreeUnconstructedCalls == 1 && api.Events.SequenceEqual(new[] { "source-render" })
+                : api.ConstructCalls == 1 && api.Events.SequenceEqual(new[] { "source-render", "release", "dtor:1" }),
+                mode + " fabricated or duplicated native cleanup");
+    }
+    static void BrokerUnconfirmedCleanup()
+    {
+        using var api = new Api { SetupMode = "throw-owned", TakeoverAfterDtor = true };
+        var factory = new Factory(api); api.Factory = factory;
+        using var broker = new PortraitOwnedSceneControllerBroker(() => true, () => new EnvironmentProof(api), factory);
+        using var controller = new PortraitOwnedSceneController(broker, () => new PortraitOwnedCharaView(api));
+        var snapshot = new PortraitOwnedCharaViewSnapshot(Source, default, default, new CharaViewItem[14], 0, new PortraitComposition());
+        Check(controller.TryStart(snapshot, 6), "unconfirmed cleanup request failed");
+        factory.Get<CharaView.Delegates.Render>(PortraitOwnedSceneNativeKind.Render)((CharaView*)Source.Model, 100);
+        broker.Update();
+        Check(api.Freed && api.SlotOwner == Foreign && api.ReadsAfterFree == 0, "fixture did not reach real unconfirmed retirement");
+        Check(controller.Source is not null && controller.ImageOwner is null && !broker.DrainPhysicalAsync().IsCompleted,
+            "runtime IsRetired alone certified native release or dropped quarantine");
     }
     static void UnprovedSetup()
     {
@@ -193,9 +232,9 @@ internal static unsafe class OwnedSceneIntegrationCases
         readonly nint camera=(nint)NativeMemory.AllocZeroed(0x200);
         public bool SetupStarted,Freed,TakeoverDuringRelease,TakeoverAfterDtor,ReenterTakeoverDuringRelease;
         public int ReadsAfterFree,ConstructCalls,FreeUnconstructedCalls,PostAllocateIdleReads;
-        public bool RejectConstructAdmission;
+        public bool RejectConstructAdmission,ReturnZeroAllocation;
         public string? SetupMode,ConstructMode;
-        public nint Allocate(){View=(nint)NativeMemory.AllocZeroed((nuint)sizeof(CharaViewPortrait));return View;}
+        public nint Allocate(){if(ReturnZeroAllocation)return 0;View=(nint)NativeMemory.AllocZeroed((nuint)sizeof(CharaViewPortrait));return View;}
         public void FreeUnconstructed(nint view){FreeUnconstructedCalls++;NativeMemory.Free((void*)view);Freed=true;}
         public nint Construct(nint view){ConstructCalls++;if(ConstructMode=="throw")throw new InvalidOperationException("ctor failed");return ConstructMode=="foreign-return"?Foreign:view;}
         public void Setup(nint view,uint slot,CharaViewCharacterData data)=>Factory.Get<CharaViewPortrait.Delegates.Setup>(PortraitOwnedSceneNativeKind.Setup)((CharaViewPortrait*)view,slot,&data,null,0,0);

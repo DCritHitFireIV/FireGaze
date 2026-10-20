@@ -15,6 +15,9 @@ internal interface IPortraitOwnedSceneLease
     uint NativeFrame { get; }
     bool IsCurrent { get; }
     bool CanCreate { get; }
+    // Detached completion proof only; it never grants access to the released view.
+    bool NativeReleaseConfirmed => false;
+    bool ConfirmUnusedCreation() => false;
     bool TryBindCreatedView(nint view);
     // Creation owns an allocation before it owns a native slot. These permits
     // never authorize Render, general setters, or Release on an idle slot.

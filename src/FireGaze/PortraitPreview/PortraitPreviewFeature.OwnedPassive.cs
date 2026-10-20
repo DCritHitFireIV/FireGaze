@@ -25,7 +25,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (parts is ["native-owned", "start"])
             Mutate(() =>
             {
-                if (ownedPassive is null) Error("原生转发诊断尚未初始化。");
+                if (ownedJoint?.BlocksOperations == true) Error("联合只读诊断尚未完成实际退出。");
+                else if (ownedPassive is null) Error("原生转发诊断尚未初始化。");
                 else if (!ownedPassive.TryStart(out var reason)) Error("原生转发诊断未启动：" + reason);
                 else Plugin.Chat.Print("[肖像原生转发诊断] " + ownedPassive.Snapshot.Reason);
             }, preserveSourceCensus: true);

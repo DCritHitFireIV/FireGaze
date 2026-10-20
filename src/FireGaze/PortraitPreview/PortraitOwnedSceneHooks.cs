@@ -32,7 +32,8 @@ internal interface IPortraitOwnedSceneHookEnvironment
 internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedSceneHookEnvironment environment,
     PortraitNativePhaseHostReservations? reservations = null, Func<long>? timestamp = null, long timestampFrequency = 0,
     Func<PortraitNativeThreadStamp>? nativeThread = null,
-    Func<TimeSpan, CancellationToken, Task>? passiveDelay = null) : IDisposable
+    Func<TimeSpan, CancellationToken, Task>? passiveDelay = null,
+    Action<string>? sourceRevoked = null) : IDisposable
 {
     private readonly List<IPortraitOwnedSceneNativeHook> hooks = [];
     private IPortraitOwnedSceneNativeHook[] publishedHooks = [];
@@ -62,11 +63,13 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     private int phaseDepth, phaseThread, originalDepth;
     public string? LastError { get; private set; }
     public bool IsInstalled => installed && Volatile.Read(ref publishedHooks).All(hook => hook.IsEnabled && !hook.IsDisposed);
+    internal bool NativeReleaseConfirmed => lease?.NativeReleaseConfirmed == true;
 
     public bool TryInstall(IPortraitOwnedSceneHookFactory factory) => TryInstallCore(factory, false, TimeSpan.Zero);
     public bool TryInstallPassive(IPortraitOwnedSceneHookFactory factory, TimeSpan duration)
         => duration > TimeSpan.Zero && duration <= TimeSpan.FromSeconds(5) && TryInstallCore(factory, true, duration);
-    private bool TryInstallCore(IPortraitOwnedSceneHookFactory factory, bool passive, TimeSpan duration)
+    private bool TryInstallCore(IPortraitOwnedSceneHookFactory factory, bool passive, TimeSpan duration,
+        PortraitOwnedSceneJointPlan? jointPlan = null, PortraitOwnedSceneJointIngress? joint = null)
     {
         if (installed || installing || stopped || closing || reservation is not null || hooks.Count != 0 || !environment.IsFrameworkThread) return false;
         installing = true;
@@ -80,15 +83,24 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             var qualified = factory as IPortraitOwnedSceneQualifiedHookFactory;
             if (passive && qualified is null) { LastError = reason; return false; }
             if (qualified is not null && !qualified.TryQualifyTransport(targets, out reason)) { LastError = reason; return false; }
+            var jointFactory = factory as IPortraitOwnedSceneJointHookFactory;
+            if (jointPlan is not null && (!passive || joint is null || jointFactory is null
+                || !JointConsumersMatch(jointPlan, targets)
+                || !jointFactory.TryQualifyJointTransport(jointPlan, reservations.IsReserved, out reason)))
+            { LastError = "Joint transport qualification failed: " + reason; return false; }
             if (passive && (timestampFrequency <= 0 || timestampFrequency > long.MaxValue / 300))
             { LastError = "A bounded passive clock is unavailable."; return false; }
             // The passive observer and every owned generation share this atomic process
             // reservation. A query before Create is insufficient: another owner can win
             // the overlapping Render entry between that query and native construction.
-            if (!reservations.TryAcquireBatch(targets.Select(target => target.Address).ToArray(), out reservation, out reason))
+            var addresses = jointPlan is null ? targets.Select(target => target.Address).ToArray()
+                : jointPlan.Targets.Select(target => target.Address).ToArray();
+            if (!reservations.TryAcquireBatch(addresses, out reservation, out reason))
             { LastError = reason; return false; }
             physicalRetired = new(TaskCreationOptions.RunContinuationsAsynchronously);
             owningFactory = factory; passiveOnly = passive;
+            if (jointPlan is not null)
+            { jointIngress = joint; installation = Guid.NewGuid(); joint!.Bind(installation); }
             if (passive)
             {
                 passiveLastTimestamp = timestamp(); passiveDeadline = checked(passiveLastTimestamp + (long)(duration.TotalSeconds * timestampFrequency));
@@ -96,6 +108,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             }
             if (qualified is not null && !qualified.TryVerifyUnmodifiedTargets(targets, out reason))
                 throw new InvalidOperationException(reason);
+            if (jointPlan is not null && !jointFactory!.TryVerifyJointTargets(jointPlan, out reason)) throw new InvalidOperationException(reason);
             // Exit hooks are first in the immutable inventory. Create all disabled,
             // then enable all; no lease can be requested during partial enabling.
             foreach (var target in targets)
@@ -103,9 +116,11 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
                 if (closing) throw new InvalidOperationException("Native installation was closed before the next Create.");
                 CreateHook(factory, target);
             }
+            if (jointPlan is not null) CreateJointHooks(jointFactory!, jointPlan, joint!);
             if (closing) throw new InvalidOperationException("Native installation was closed before enabling.");
             if (qualified is not null && !qualified.TryVerifyUnmodifiedTargets(targets, out reason))
                 throw new InvalidOperationException(reason);
+            if (jointPlan is not null && !jointFactory!.TryVerifyJointTargets(jointPlan, out reason)) throw new InvalidOperationException(reason);
             foreach (var hook in hooks)
             {
                 if (closing) throw new InvalidOperationException("Native installation was closed during partial enabling.");
@@ -114,7 +129,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             }
             if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
             installed = true;
-            installation = Guid.NewGuid();
+            if (jointPlan is null) installation = Guid.NewGuid();
+            else if (!joint!.TryCommit(duration)) throw new InvalidOperationException("Joint diagnostic could not commit its installed callback epoch.");
             if (passiveOnly)
             {
                 Volatile.Write(ref passiveContextCollector, new PassiveContextCollector(installation));
@@ -261,10 +277,15 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     private void Render(CharaView* view, uint frame, Func<CharaView.Delegates.Render> original)
     {
         var baseline = BeginPassiveReturn((nint)view);
+        var jointSource = BeginJointSource((nint)view, frame);
         BeforeNative((nint)view, null, false);
         var returned = false;
         try { Original(() => original()(view, frame)); returned = true; }
-        finally { CompletePassiveReturn(baseline, (nint)view, frame, returned); }
+        finally
+        {
+            CompletePassiveReturn(baseline, (nint)view, frame, returned);
+            CompleteJointSource(jointSource, returned);
+        }
         try { AfterSourceRender((nint)view, frame); }
         catch (Exception ex) { StopUnsafe("Native source-phase observation failed: " + ex.Message); }
     }
@@ -289,7 +310,6 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         InPhase(() => {
             if (lease is null)
             {
-                if (closing) { ClearRequest(); return; }
                 if (!environment.IsSlotIdle(requestedSlot)) { StopUnsafe("Native slot is no longer idle."); return; }
                 lease = new(this, requestedSlot, source, epoch);
             }
@@ -379,11 +399,15 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         if (!environment.IsFrameworkThread || !environment.IsSourceCurrent(source))
         { StopUnsafe("Cannot retire an owned scene on an unqualified native thread/source."); return; }
         InPhase(() => {
-            if (!retiring.CanReleaseView(retiring.BoundView))
+            // A cancelled request can reach its first genuine source return before it
+            // ever allocates a view. Complete its managed owner in this exact phase;
+            // there is no native Release/Dtor or released-view proof to manufacture.
+            var unused = retiring.BoundView == 0 && retiring.CreationStage == PortraitOwnedSceneCreationStage.Unbound;
+            if (!(unused ? retiring.CanCreate : retiring.CanReleaseView(retiring.BoundView)))
             { StopUnsafe("Owned slot was lost; stale Release is forbidden."); return; }
             bool released;
             retirementInProgress = true;
-            try { released = retire?.Invoke(retiring) == true && retiring.WasReleased; }
+            try { released = retire?.Invoke(retiring) == true && (unused || retiring.WasReleased); }
             catch (Exception ex) { LastError = ex.Message; released = false; }
             finally { retirementInProgress = false; }
             retiring.Invalidate();
@@ -444,11 +468,13 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
 
     private void StopUnsafe(string reason)
     {
+        var first = !stopped;
         LastError = reason; stopped = true; epoch++; lease?.Invalidate();
         // No catch-up Release: after an unknown takeover that would delete the
         // native consumer's new character. Production installation stays blocked
         // until exceptional retirement has a verified safe ownership protocol.
         advance = null; retire = null;
+        if (first) try { sourceRevoked?.Invoke(reason); } catch { /* Managed observers cannot unwind native priority. */ }
     }
 
     private void ClearRequest()
@@ -458,6 +484,14 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         lease?.Invalidate(); lease = null; advance = null; retire = null; source = default; epoch++;
     }
 
+    internal bool TryCancelUnstartedRequest()
+    {
+        // Detached cancellation needs no native slot reads. Reject a callback whose
+        // Original/phase is already running; that genuine return completes retirement.
+        if (!environment.IsFrameworkThread || !IsInstalled || requestEpoch <= 0 || lease is not null
+            || phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0) return false;
+        ClearRequest(); return true;
+    }
     public void RequestStop() => closing = true;
     public void UpdatePassive()
     {
@@ -476,6 +510,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     public bool TryDispose()
     {
         closing = true;
+        jointIngress?.Revoke();
         expiryCancellation.Cancel();
         RevokePassiveBaseline("The owned native generation is closing.");
         if (installing || phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0 && !allHooksPhysical)
@@ -495,6 +530,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     }
     private bool DisposeHooksCore()
     {
+        jointIngress?.Revoke();
         installed = false;
         if (phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0 && !allHooksPhysical)
         { LastError = "An active native original/phase still owns the hook batch."; return false; }

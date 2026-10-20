@@ -4,6 +4,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors><NoWarn>$(NoWarn);CA1416</NoWarn>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.cs')">$(DefineConstants);HAS_OWNED_HOOKS</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs')">$(DefineConstants);HAS_OWNED_JOINT_PLAN</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost.cs')">$(DefineConstants);HAS_OWNED_JOINT_HOST</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookPhaseContract.cs" Link="Production/PortraitOwnedSceneHookPhaseContract.cs" />
@@ -14,6 +16,9 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneLeaseContract.cs" Link="PortraitOwnedSceneLeaseContract.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks*.cs" Link="Production/%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneControllerBroker.cs" Link="Production/PortraitOwnedSceneControllerBroker.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs" Link="Production/PortraitOwnedSceneJointPlan.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost*.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedCharaView*.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="Production/PortraitEditorState.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost*.cs" Link="Production/%(Filename)%(Extension)" />

@@ -77,6 +77,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         InitializeNativeLive();
         InitializeSourceCensus();
         InitializeOwnedPassive();
+        InitializeOwnedJoint();
         InitializeEditorOpening();
         window = new(this, pluginInterface, Plugin.Textures, photos);
         windows.AddWindow(window);
@@ -133,6 +134,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             captureIsolation = captureIsolation.Mode,
             sourceCensus = SourceCensusDiagnostics(),
             ownedPassive = OwnedPassiveDiagnostics(),
+            ownedJoint = OwnedJointDiagnostics(),
             editorOpening = JsonSerializer.SerializeToElement(ReadEditorOpeningReceipt(),
                 new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
             runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
@@ -398,6 +400,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public void OnCommand(string arguments)
     {
         var parts = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (TryOwnedJointCommand(parts)) return;
         if (TryOwnedPassiveCommand(parts)) return;
         if (TrySourceCensusCommand(parts)) return;
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();

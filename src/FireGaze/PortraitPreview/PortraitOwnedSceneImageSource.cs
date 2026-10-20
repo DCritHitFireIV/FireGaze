@@ -65,6 +65,17 @@ internal sealed class PortraitOwnedSceneImageSource<T> : IDisposable where T : c
 
     private void InvalidateOwner() => copyGeneration = lifetime.InvalidateSource();
 
+    // Called exclusively by the RT adapter while already inside TryUseReady. The factory
+    // target contains only retained provider inputs; a view/Texture*/manager must never be
+    // captured by the task or its factory. Reentering TryUseReady here would hit runtime busy.
+    internal bool TryCopyWithinReadyView(PortraitOwnedSceneController owner, IPortraitOwnedSceneLease lease,
+        PortraitOwnedSceneImageDescriptor value, Func<Task<T>> managedFactory)
+        => lease is not null && lease.IsCurrent && lease.Source == value.Owner.Source
+            && lease.Slot == value.Owner.Slot && lease.Epoch == value.Owner.LeaseEpoch
+            && TrySetDescriptor(owner, value) && lifetime.TryCopy(copyGeneration, managedFactory);
+
+    internal void InvalidateNativeSource() => copyGeneration = lifetime.InvalidateSource();
+
     internal PortraitOwnedSceneTextureLifetime<T>.Borrow? TryBorrow(bool allowPreviousGeneration = false)
         => disposed ? null : lifetime.TryBorrow(allowPreviousGeneration);
 

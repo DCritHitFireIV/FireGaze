@@ -13,6 +13,9 @@ internal interface IPortraitOwnedSceneControllerBroker
     bool ProductionAdmission { get; }
     bool TryRequest(PortraitIdentity source, uint slot, Action<IPortraitOwnedSceneLease> onAdvance,
         Func<IPortraitOwnedSceneLease, bool> onRetire);
+    // True certifies that no source callback ever entered and no native owner exists.
+    // Older brokers cannot make this proof and retain the normal retirement path.
+    bool TryCancelUnstartedRequest(string reason) => false;
     void Cancel(string reason);
 }
 
@@ -143,13 +146,13 @@ internal sealed class PortraitOwnedSceneController : IDisposable
     private bool Retire(long token, IPortraitOwnedSceneLease lease)
     {
         if (token != generation || disposed || runtime is null || source is null || lease is null
-            || lease.Source != source.Source || lease.Slot != slot || !lease.IsCurrent
+            || lease.Source != source.Source || lease.Slot != slot || !lease.IsCurrent && !lease.NativeReleaseConfirmed
             || boundLeaseEpoch != 0 && lease.Epoch != boundLeaseEpoch) return false;
         State = PortraitOwnedSceneControllerState.Retiring;
         SetImageOwner(null);
         try
         {
-            var retired = !runtimeMayOwn || runtime.TryRetire(lease);
+            var retired = lease.NativeReleaseConfirmed || !runtimeMayOwn || runtime.TryRetire(lease);
             if (!retired) { Fail("Owned native scene retirement was not confirmed."); return false; }
             runtimeMayOwn = requestCallbackEntered = false;
             boundLeaseEpoch = 0;
@@ -163,6 +166,13 @@ internal sealed class PortraitOwnedSceneController : IDisposable
     private void Fail(string reason)
     {
         LastError = reason; State = PortraitOwnedSceneControllerState.Faulted; SetImageOwner(null); CancelOnce(reason);
+    }
+    internal void RevokeNativeSource(string reason)
+    {
+        if (disposed || State == PortraitOwnedSceneControllerState.Off) return;
+        // Native ownership is already uncertain. Revoke managed images immediately;
+        // retain the runtime owner and let the broker preserve physical quarantine.
+        Fail(reason);
     }
 
     private void SetImageOwner(PortraitOwnedSceneImageOwner? value)
@@ -179,7 +189,32 @@ internal sealed class PortraitOwnedSceneController : IDisposable
     {
         if (cancellationSent) return;
         cancellationSent = true;
-        try { broker.Cancel(reason); } catch (Exception error) { LastError ??= error.Message; }
+        try
+        {
+            if (TryCompleteUnstartedCancellation(reason)) return;
+            broker.Cancel(reason);
+        }
+        catch (Exception error) { LastError ??= error.Message; }
+    }
+
+    private bool TryCompleteUnstartedCancellation(string reason)
+    {
+        if (requestCallbackEntered || runtimeMayOwn || !broker.TryCancelUnstartedRequest(reason)
+            || requestCallbackEntered || runtimeMayOwn) return false;
+        runtime = null; source = null; slot = 0; boundLeaseEpoch = 0;
+        SetImageOwner(null); State = PortraitOwnedSceneControllerState.Off;
+        cancellationSent = false; LastError = null;
+        if (disposeRequested) disposed = true;
+        return true;
+    }
+    internal void Update()
+    {
+        if (disposed || State is not (PortraitOwnedSceneControllerState.Retiring or PortraitOwnedSceneControllerState.Faulted)
+            || requestCallbackEntered || runtimeMayOwn) return;
+        // A foreign Original may have blocked the initial no-owner cancellation proof.
+        // Retry that detached proof on Framework without waiting for another Render.
+        try { TryCompleteUnstartedCancellation("Unused owned request is closing."); }
+        catch (Exception error) { LastError ??= error.Message; }
     }
 
     public void Dispose()

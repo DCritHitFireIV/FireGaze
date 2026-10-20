@@ -17,6 +17,13 @@ internal sealed class PortraitOwnedSceneLease : IPortraitOwnedSceneLease
     internal nint BoundView { get; private set; }
     internal PortraitOwnedSceneCreationStage CreationStage { get; private set; }
     internal bool WasReleased => released;
+    public bool NativeReleaseConfirmed => released;
+    public bool ConfirmUnusedCreation()
+    {
+        if (invalid || released || BoundView != 0 || callDepth != 0
+            || CreationStage != PortraitOwnedSceneCreationStage.Unbound || !CanCreate) return false;
+        released = true; return true;
+    }
     internal bool RetirementStarted { get; private set; }
     internal bool HasOpenOwnedCall => callDepth != 0;
     public bool IsCurrent => !invalid && !released && owner.IsLeaseCurrent(this);

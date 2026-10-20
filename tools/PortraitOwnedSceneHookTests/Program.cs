@@ -1,6 +1,12 @@
 using FireGaze.PortraitPreview;
 
 #if HAS_OWNED_HOOKS
+var brokerResult = OwnedControllerBrokerCases.Run();
+if (brokerResult != 0) return brokerResult;
+var jointHostResult = OwnedJointHostCases.Run();
+if (jointHostResult != 0) return jointHostResult;
+var jointPlanResult = OwnedJointPlanCases.Run();
+if (jointPlanResult != 0) return jointPlanResult;
 var consumerEventResult = OwnedPassiveConsumerEventsCases.Run();
 if (consumerEventResult != 0) return consumerEventResult;
 var gatewayResult = OwnedGatewayCases.Run();

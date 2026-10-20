@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);CA1416</NoWarn><DefineConstants>$(DefineConstants);OWNED_CONTROLLER</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedCharaView*.cs" Link="%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneLeaseContract.cs" Link="PortraitOwnedSceneLeaseContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneTextureLifetime.cs" Link="PortraitOwnedSceneTextureLifetime.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneImageSource.cs" Link="PortraitOwnedSceneImageSource.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneRenderTarget*.cs" Link="%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSession.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneControllerBroker.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks*.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointHost*.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneJointPlan.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost*.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation*.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookPhaseContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneContextContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativeApi.cs" />
+    <Compile Include="../PortraitOwnedSceneHookTests/OwnedControllerBrokerCases.cs" Link="OwnedControllerBrokerCases.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs" Link="PortraitOwnedSceneSlotReader.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotCensus.cs" Link="PortraitOwnedSceneSlotCensus.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitContextInterception.cs" Link="PortraitContextInterception.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureRetirement.cs" Link="PortraitCaptureRetirement.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="PortraitEditorState.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
+    <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
+    <Reference Include="Dalamud.Bindings.ImGui"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.Bindings.ImGui.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>
