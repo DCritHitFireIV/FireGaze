@@ -225,8 +225,23 @@ foreach (var timing in new[] { "acquire", "copy" })
         "ignored producer cancellation cleans both source overlays and late character copy");
 }
 
+{
+    var api = new FakeApi();
+    api.AfterAcquire = () => api.Inputs[0].OnDispose = () => throw new InvalidOperationException("unconfirmed release");
+    var physical = new PortraitCaptureRetirement();
+    var held = physical.Enter();
+    try { using var result = await new PortraitThumbnailSource(api).CaptureAsync(identity); }
+    catch (Exception error) { physical.ObserveFailure(error); }
+    held.Dispose();
+    Check(!physical.Seal().IsCompleted && physical.CleanupFailures > 0,
+        "failed source-input release transfers unconfirmed ownership to the host physical quarantine");
+    Check(api.Inputs.All(value => value.Disposes == 1) && api.Outputs.All(value => value.Disposes == 1),
+        "source-input cleanup failure still releases all independent layers and unpublished output exactly once");
+}
+
 #if HAS_PHOTO_TRACE
 await PhotoTraceCases.Run(identity, Check);
+await PhotoTraceSnapshotCases.Run(Check);
 #else
 Check(false, "production source photo phase trace is missing");
 #endif
@@ -236,10 +251,11 @@ return 0;
 sealed class FakeTexture : IDalamudTextureWrap
 {
     public int Disposes;
+    public Action? OnDispose;
     public ImTextureID Handle => new((nint)123);
     public int Width => 160;
     public int Height => 256;
-    public void Dispose() => Disposes++;
+    public void Dispose() { Disposes++; OnDispose?.Invoke(); }
 }
 
 sealed class FakeApi : IPortraitThumbnailSourceApi

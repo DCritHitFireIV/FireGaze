@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FireGaze.PortraitPreview;
 
-internal enum PortraitOwnedSceneNativeKind { Dtor, Release, Initialize, Update, Setup, Render, CreateClientObject, DeleteClientObject }
+internal enum PortraitOwnedSceneNativeKind { Dtor, Release, Initialize, Update, Setup, Render, CreateClientObject, DeleteClientObject, ConfigureContext, ConfigureDefaultContext, CleanupContext, ConstructContext, DestroyContext }
 internal readonly record struct PortraitOwnedSceneNativeTarget(PortraitOwnedSceneNativeKind Kind, nint Address);
 internal interface IPortraitOwnedSceneNativeHook : IDisposable { bool IsEnabled { get; } bool IsDisposed { get; } void Enable(); void Disable(); }
 internal interface IPortraitOwnedSceneNativeHook<out T> : IPortraitOwnedSceneNativeHook where T : Delegate { T Original { get; } }
@@ -41,7 +41,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     private PortraitIdentity source;
     private uint requestedSlot, sourceNativeSlot, lastFrame;
     private bool installed, installing, closing, stopped, hasFrame, retirementInProgress, unknownCreation;
-    private long epoch;
+    private long epoch, requestEpoch;
     private int phaseDepth, phaseThread, originalDepth;
     public string? LastError { get; private set; }
     public bool IsInstalled => installed && hooks.All(hook => hook.IsEnabled && !hook.IsDisposed);
@@ -67,7 +67,9 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             if (closing) throw new InvalidOperationException("Native installation was closed before enabling.");
             foreach (var hook in hooks) hook.Enable();
             if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
-            installed = true; return true;
+            installed = true;
+            (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.BeginContextLifetimeBatch();
+            return true;
         }
         catch (Exception ex)
         {
@@ -80,18 +82,46 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         Func<IPortraitOwnedSceneLease, bool> onRetire)
     {
         if (!IsInstalled || closing || stopped || advance is not null || !requestedSource.IsValid
-            || requestedSource.Generation == 0 || slot >= 8 || !environment.IsFrameworkThread
-            || !environment.IsSourceCurrent(requestedSource) || !environment.IsSlotIdle(slot)
-            || !environment.TryReadViewSlot(requestedSource.Model, out var sourceSlot) || sourceSlot >= 8 || sourceSlot == slot)
+            || requestedSource.Generation == 0 || slot >= 8 || !environment.IsFrameworkThread) return false;
+        var sourceSlot = uint.MaxValue;
+        if (environment is IPortraitOwnedSceneHookPhaseEnvironment scoped)
+        {
+            // A Framework request carries detached identity only. Reading native slot
+            // state here would require manufacturing a phase before source Render.
+            if (!scoped.QueueRequest(requestedSource, slot, epoch + 1)) return false;
+        }
+        else if (!environment.IsSourceCurrent(requestedSource) || !environment.IsSlotIdle(slot)
+            || !environment.TryReadViewSlot(requestedSource.Model, out sourceSlot) || sourceSlot >= 8 || sourceSlot == slot)
             return false;
         source = requestedSource; sourceNativeSlot = sourceSlot; requestedSlot = slot; advance = onAdvance; retire = onRetire;
-        hasFrame = false; epoch++; return true;
+        hasFrame = false; requestEpoch = ++epoch; return true;
     }
 
     private void CreateHook(IPortraitOwnedSceneHookFactory factory, PortraitOwnedSceneNativeTarget target)
     {
         switch (target.Kind)
         {
+            case PortraitOwnedSceneNativeKind.ConstructContext:
+                Add<ConstructContext>(factory, target, original => context => {
+                    nint result = 0; Original(() => result = original()(context));
+                    ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.ObserveContextConstructed(context, result));
+                    return result; }); break;
+            case PortraitOwnedSceneNativeKind.DestroyContext:
+                Add<DestroyContext>(factory, target, original => (context, flags) => {
+                    ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.ObserveContextDestroying(context));
+                    nint result = 0; Original(() => result = original()(context, flags)); return result; }); break;
+            case PortraitOwnedSceneNativeKind.ConfigureContext:
+                Add<ConfigureContext>(factory, target, original => (context, slot, type) => {
+                    BeforeContext(context, ContextMutationKind.Configure, slot, type);
+                    byte result = 0; Original(() => result = original()(context, slot, type)); return result; }); break;
+            case PortraitOwnedSceneNativeKind.ConfigureDefaultContext:
+                Add<ConfigureDefaultContext>(factory, target, original => (context, slot) => {
+                    BeforeContext(context, ContextMutationKind.ConfigureDefault, slot, 0);
+                    byte result = 0; Original(() => result = original()(context, slot)); return result; }); break;
+            case PortraitOwnedSceneNativeKind.CleanupContext:
+                Add<CleanupContext>(factory, target, original => context => {
+                    BeforeContext(context, ContextMutationKind.Cleanup, null, null);
+                    Original(() => original()(context)); }); break;
             case PortraitOwnedSceneNativeKind.Render:
                 Add<CharaView.Delegates.Render>(factory, target, original => (view, frame) => Render(view, frame, original)); break;
             case PortraitOwnedSceneNativeKind.Initialize:
@@ -153,8 +183,16 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         // scheduling phase. ImGui frame counts never enter this code path.
         if (view != source.Model || originalDepth != 0 || phaseDepth != 0
             || advance is null || stopped || !IsInstalled || !environment.IsFrameworkThread) return;
-        if (!environment.IsSourceCurrent(source)) { StopUnsafe("Source allocation changed."); return; }
         if (hasFrame && lastFrame == frame) return;
+        using var nativePhase = (environment as IPortraitOwnedSceneHookPhaseEnvironment)?.EnterSourcePhase(source, frame, requestEpoch);
+        if (environment is IPortraitOwnedSceneHookPhaseEnvironment && nativePhase is null)
+        { StopUnsafe("The native source phase could not be qualified."); return; }
+        if (!environment.IsSourceCurrent(source)
+            || !environment.TryReadViewSlot(source.Model, out var currentSourceSlot)
+            || currentSourceSlot >= 8 || currentSourceSlot == requestedSlot
+            || sourceNativeSlot != uint.MaxValue && currentSourceSlot != sourceNativeSlot)
+        { StopUnsafe("Source allocation or slot changed."); return; }
+        sourceNativeSlot = currentSourceSlot;
         lastFrame = frame; hasFrame = true;
         InPhase(() => {
             if (lease is null)
@@ -171,11 +209,49 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         });
     }
 
+    private void ObserveLifetime(Action observe)
+    {
+        try { observe(); }
+        catch (Exception error) { StopUnsafe("Native context lifetime observation failed: " + error.Message); }
+    }
+
+    private void BeforeContext(nint context, ContextMutationKind kind, uint? slot, uint? type)
+    {
+        try
+        {
+            var current = lease;
+            if (current is null || stopped) return;
+            using var nativePhase = EnterRetirementNativePhase();
+            if (environment is not IPortraitOwnedSceneContextEnvironment contexts
+                || environment is IPortraitOwnedSceneHookPhaseEnvironment && nativePhase is null
+                || !contexts.TryReadContext(context, current.BoundView, current.IsInOwnedCall, out var evidence)
+                || evidence.RequestEpoch != requestEpoch || evidence.ManagerGeneration <= 0
+                || evidence.PhaseToken <= 0 || evidence.CharacterGeneration == 0
+                || !contexts.IsContextEvidenceCurrent(context, evidence))
+            { StopUnsafe("Unknown native context identity; owned Release is forbidden."); return; }
+            var exactSelf = evidence.Role == PortraitOwnedSceneContextRole.Owned
+                && evidence.View == current.BoundView && evidence.AllocationEpoch > 0 && current.IsInOwnedCall;
+            if (exactSelf) return;
+            var mutation = new ContextMutation(context, kind, evidence.State, slot, type);
+            if (!mutation.Touches(current.Slot) && !mutation.Touches(sourceNativeSlot)) return;
+            // Release can tear down the receiver of the imminent native Original.
+            // An active own Original can likewise still be using its view/context.
+            // Neither is safe to destroy from a reentrant takeover callback.
+            if (evidence.Role == PortraitOwnedSceneContextRole.Owned || current.HasOpenOwnedCall)
+            { StopUnsafe("Native context receiver or active owned call must not be freed before its Original."); return; }
+            RetireBeforeNative();
+        }
+        catch (Exception error) { StopUnsafe("Native context observation failed: " + error.Message); }
+    }
+
     private void BeforeClientObject(uint index)
     {
         try
         {
             if (lease is null || (index != uint.MaxValue && index != 0xF0 + lease.Slot && index != 0xF0 + sourceNativeSlot)) return;
+            using var nativePhase = EnterRetirementNativePhase();
+            if (environment is IPortraitOwnedSceneHookPhaseEnvironment && nativePhase is null)
+            { StopUnsafe("The client-object retirement phase could not be qualified."); return; }
             if (index == 0xF0 + lease.Slot && lease.IsInOwnedCall && originalDepth > 0) return;
             RetireBeforeNative();
         }
@@ -187,6 +263,9 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         try
         {
             if (lease is null || stopped) return;
+            using var nativePhase = EnterRetirementNativePhase();
+            if (environment is IPortraitOwnedSceneHookPhaseEnvironment && nativePhase is null)
+            { StopUnsafe("The native retirement observation phase could not be qualified."); return; }
             if (lease.IsSelfCall(view)) return;
             var affects = view == source.Model && (teardown || explicitSlot.HasValue) || view == lease.BoundView;
             if (!affects)
@@ -200,6 +279,9 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     {
         var retiring = lease;
         if (retiring is null || stopped) return;
+        using var nativePhase = EnterRetirementNativePhase();
+        if (environment is IPortraitOwnedSceneHookPhaseEnvironment && nativePhase is null)
+        { StopUnsafe("The native retirement phase could not be qualified."); return; }
         if (retirementInProgress)
         { StopUnsafe("Native takeover reentered an active owned retirement; recursive Release is forbidden."); return; }
         if (!environment.IsFrameworkThread || !environment.IsSourceCurrent(source))
@@ -217,6 +299,9 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             ClearRequest();
         });
     }
+
+    private IDisposable? EnterRetirementNativePhase()
+        => (environment as IPortraitOwnedSceneHookPhaseEnvironment)?.EnterRetirementPhase(source, lastFrame, requestEpoch);
 
     private void InPhase(Action action)
     {
@@ -259,6 +344,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             && phaseThread == Environment.CurrentManagedThreadId && environment.IsFrameworkThread
             && environment.IsSourceCurrent(current.Source);
 
+    internal bool IsNativeCallPhaseCurrent(PortraitOwnedSceneLease current) => IsLeasePhaseCurrent(current);
+
     // Called after Dtor(1): never inspect the now-freed view, Character or camera.
     internal bool CanConfirmRetirement(PortraitOwnedSceneLease current)
         => current.RetirementStarted && IsLeasePhaseCurrent(current) && environment.IsSlotIdle(current.Slot);
@@ -274,6 +361,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
 
     private void ClearRequest()
     {
+        (environment as IPortraitOwnedSceneHookPhaseEnvironment)?.EndRequest(requestEpoch);
+        requestEpoch = 0;
         lease?.Invalidate(); lease = null; advance = null; retire = null; source = default; epoch++;
     }
 
@@ -291,6 +380,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     private bool DisposeHooks()
     {
         installed = false;
+        ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.EndContextLifetimeBatch());
         if (Volatile.Read(ref originalDepth) != 0 || phaseDepth != 0)
         { LastError = "An active native original/phase still owns the hook batch."; return false; }
         var complete = true;

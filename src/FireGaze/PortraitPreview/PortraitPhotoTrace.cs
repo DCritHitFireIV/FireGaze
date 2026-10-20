@@ -9,6 +9,9 @@ internal enum PortraitPhotoPhase
     CpuEncode, Upload, VisibleReadback, PngEncode, CacheWrite, LoadedImageRead, LoadedImageUpload,
 }
 
+internal sealed record PortraitPhotoStageSnapshot(long OperationID, string Kind, long StageID,
+    string Phase, int Layer, string State, int ThreadID, string? TaskStatus, string? ErrorType);
+
 /// <summary>Bounded operation diagnostics; never samples editor pointers or image/user data.</summary>
 internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
 {
@@ -16,17 +19,26 @@ internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
     private static long serial;
 
     public Operation Start(PortraitPhotoOperation kind)
-        => logger is null ? Operation.Silent : new(logger, Interlocked.Increment(ref serial), kind);
+        => new(logger, Interlocked.Increment(ref serial), kind);
 
-    internal sealed class Operation(Action<string>? logger, long id, PortraitPhotoOperation kind)
+    internal sealed class Operation(Action<string>? logger, long id, PortraitPhotoOperation kind, bool tracking = true)
     {
-        internal static readonly Operation Silent = new(null, 0, default);
+        internal static readonly Operation Silent = new(null, 0, default, false);
         private int reserved;
         private long stages;
+        private readonly object snapshotSync = new();
+        private readonly Dictionary<long, PortraitPhotoStageSnapshot> snapshots = [];
+
+        // This only copies bounded managed values. It remains readable through the
+        // diagnostic server even if the game thread or the external log sink stalls.
+        public PortraitPhotoStageSnapshot[] Snapshot
+        {
+            get { lock (snapshotSync) return snapshots.Values.OrderBy(value => value.StageID).ToArray(); }
+        }
 
         public T Call<T>(PortraitPhotoPhase phase, Func<T> call, int layer = -1)
         {
-            if (logger is null) return call();
+            if (!tracking) return call();
             var scope = Begin(phase, layer, 2);
             try { var result = call(); Finish(scope, "end"); return result; }
             catch (Exception error) { Finish(scope, "fail", error); throw; }
@@ -34,7 +46,7 @@ internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
 
         public async Task<T> CallAsync<T>(PortraitPhotoPhase phase, Func<Task<T>> call, int layer = -1)
         {
-            if (logger is null) return await call().ConfigureAwait(false);
+            if (!tracking) return await call().ConfigureAwait(false);
             var scope = Begin(phase, layer, 3);
             try
             {
@@ -50,7 +62,7 @@ internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
 
         public async Task CallAsync(PortraitPhotoPhase phase, Func<Task> call, int layer = -1)
         {
-            if (logger is null) { await call().ConfigureAwait(false); return; }
+            if (!tracking) { await call().ConfigureAwait(false); return; }
             var scope = Begin(phase, layer, 3);
             try
             {
@@ -73,13 +85,18 @@ internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
                 if (Interlocked.CompareExchange(ref reserved, before + lines, before) == before) break;
             }
             var stage = new Stage(Interlocked.Increment(ref stages), phase, layer, Stopwatch.GetTimestamp());
+            Update(stage, "logging-begin");
             Log("begin", stage);
+            Update(stage, "invoking");
             return stage;
         }
 
         private void Returned(Stage? stage, TaskStatus status)
         {
-            if (stage is not null) Log("task-returned", stage, " status=" + status);
+            if (stage is null) return;
+            Update(stage, "logging-task-returned", status.ToString());
+            Log("task-returned", stage, " status=" + status);
+            Update(stage, "awaiting", status.ToString());
         }
 
         private void Finish(Stage? stage, string state, Exception? error = null)
@@ -87,7 +104,19 @@ internal sealed class PortraitPhotoTrace(Action<string>? logger = null)
             if (stage is null) return;
             var suffix = " elapsedMs=" + (long)Stopwatch.GetElapsedTime(stage.Start).TotalMilliseconds;
             if (error is not null) suffix += " error=" + error.GetType().Name;
+            Update(stage, "logging-terminal", errorType: error?.GetType().Name);
             Log(state, stage, suffix);
+            Update(stage, error is null ? "completed" : "failed", errorType: error?.GetType().Name);
+        }
+
+        private void Update(Stage stage, string state, string? taskStatus = null, string? errorType = null)
+        {
+            lock (snapshotSync)
+            {
+                snapshots.TryGetValue(stage.ID, out var previous);
+                snapshots[stage.ID] = new(id, kind.ToString(), stage.ID, stage.Phase.ToString(), stage.Layer,
+                    state, Environment.CurrentManagedThreadId, taskStatus ?? previous?.TaskStatus, errorType);
+            }
         }
 
         private void Log(string state, Stage stage, string suffix = "")

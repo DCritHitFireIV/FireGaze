@@ -8,6 +8,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private PortraitNativeLiveNodeSource? nativeLiveSource;
     private PortraitNativeLiveController? nativeLiveController;
     private bool nativeLiveRequested;
+    private Task nativeLivePhysicalDrain = Task.CompletedTask;
 
     public bool NativeLiveEnabled => nativeLiveRequested && nativeLiveController?.IsEnabled == true;
 
@@ -70,6 +71,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         nativeLiveRequested = false;
         nativeLiveController?.Dispose();
+        nativeLivePhysicalDrain = nativeLiveController?.DrainPhysicalAsync() ?? Task.CompletedTask;
         nativeLiveController = null;
         nativeLiveSource?.Dispose();
         nativeLiveSource = null;

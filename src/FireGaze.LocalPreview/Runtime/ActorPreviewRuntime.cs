@@ -83,7 +83,8 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private ulong actorId;
     private uint territory;
     private bool ownCall;
-    private bool disposed;
+    private volatile bool disposed;
+    private volatile bool nativeClosing;
     private int nativeDepth;
     private bool replacingPreview;
     private long revision;
@@ -263,7 +264,9 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         }
         catch (Exception ex)
         {
-            foreach (var hook in installedHooks.AsEnumerable().Reverse()) { try { hook.Dispose(); } catch { } }
+            nativeClosing = true;
+            resolvedTimelineAdmitted = resolvedActionTimelineAdmitted = false;
+            foreach (var hook in installedHooks.AsEnumerable().Reverse()) TryDisposeNativeHook(hook);
             installedHooks.Clear();
             log.Error(ex, "[LocalPreview] Native hook setup failed; previews disabled.");
             Capabilities = new(false, false, false, false, false, false, "客户端接口不可用，已关闭本地试用。");
@@ -305,7 +308,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private bool WeaponVisibilityDetour(DrawDataContainer* container, uint weaponSlot)
     {
         bool result = weaponVisibility!.Original(container, weaponSlot);
-        if (!result || disposed || !framework.IsInFrameworkUpdateThread || weaponSlot >= 3) return result;
+        if (!result || nativeClosing || disposed || !framework.IsInFrameworkUpdateThread || weaponSlot >= 3) return result;
         try
         {
             if (visualActor?.ShouldSuppressWeaponVisibility(container, (int)weaponSlot) != true) return result;
@@ -318,7 +321,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private bool ExtraWeaponVisibilityDetour(DrawDataContainer* container, uint extraIndex)
     {
         bool result = extraWeaponVisibility!.Original(container, extraIndex);
-        if (!result || disposed || !framework.IsInFrameworkUpdateThread || extraIndex != 0) return result;
+        if (!result || nativeClosing || disposed || !framework.IsInFrameworkUpdateThread || extraIndex != 0) return result;
         try
         {
             if (visualActor?.ShouldSuppressWeaponVisibility(container, 3) != true) return result;
@@ -840,7 +843,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private readonly record struct NativeIntent(PreviewSlot Slot, uint Id);
     private bool Relevant(ActionType type) => type is ActionType.Mount or ActionType.Companion or ActionType.Ornament;
     private static PreviewSlot Slot(ActionType type) => type switch { ActionType.Mount => PreviewSlot.Mount, ActionType.Companion => PreviewSlot.Minion, _ => PreviewSlot.Accessory };
-    private bool Bypass => !framework.IsInFrameworkUpdateThread || ownCall || !HasActivePreview || disposed || handoff.HasExternal;
+    private bool Bypass => nativeClosing || disposed || !framework.IsInFrameworkUpdateThread || ownCall || !HasActivePreview || handoff.HasExternal;
     private IPreviewSuspension<NativeIntent> Suspend(NativeIntent _) => new Suspension(this);
     private void ReportHandoff(Exception exception)
     {
@@ -911,6 +914,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
 
     private bool UseActionDetour(ActionManager* mgr, ActionType type, uint id, ulong target, uint extra, ActionManager.UseActionMode mode, uint combo, bool* area)
     {
+        if (nativeClosing || disposed) return useAction!.Original(mgr,type,id,target,extra,mode,combo,area);
         if (!disposed && framework.IsInFrameworkUpdateThread && !ownCall && nativeDepth == 0 && type == ActionType.Action && SpecialActionInput is { } special)
         {
             try { if (special(id)) return true; }
@@ -983,6 +987,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private bool CanAgentEmoteDetour(AgentEmote* agent, ushort id) => Bypass ? canAgentEmote!.Original(agent,id) : InspectNative(() => canAgentEmote!.Original(agent,id),new(PreviewSlot.Emote,id));
     private bool ExecuteEmoteDetour(EmoteManager* mgr, ushort id, EmoteController.PlayEmoteOption* option)
     {
+        if (nativeClosing || disposed) return executeEmote!.Original(mgr,id,option);
         bool Original()
         {
             bool accepted = executeEmote!.Original(mgr,id,option);
@@ -999,6 +1004,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     }
     private bool PlayEmoteDetour(EmoteController* controller, uint id, EmoteController.PlayEmoteOption* option)
     {
+        if (nativeClosing || disposed) return playEmote!.Original(controller,id,option);
         if (!framework.IsInFrameworkUpdateThread) return playEmote!.Original(controller,id,option);
         ulong owner = controller->OwnerObject == null ? 0 : controller->OwnerObject->GetGameObjectId();
         var previous = CurrentNativeEmote;
@@ -1028,6 +1034,8 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     }
     private void MountSetupDetour(MountContainer* container, short id, uint top, uint body, uint legs, byte stain, byte unk6, byte unk7)
     {
+        if (nativeClosing || disposed)
+        { mountSetup!.Original(container,id,top,body,legs,stain,unk6,unk7); return; }
         if (!framework.IsInFrameworkUpdateThread)
         { mountSetup!.Original(container,id,top,body,legs,stain,unk6,unk7); return; }
         if (!Bypass && id != 0 && container != null && container->OwnerObject == Bound())
@@ -1117,6 +1125,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         private readonly ActorPreviewRuntime runtime;
         private readonly ActorSnapshot current;
         private readonly nint address;
+        private readonly uint generation;
         private readonly bool projectedMode;
         private readonly bool projectedEmote;
         private readonly bool projectedMount;
@@ -1134,6 +1143,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
             var actor = runtime.Bound();
             if (actor == null || runtime.baseline is not { } baseline) return;
             address = (nint)actor;
+            generation = *(uint*)((byte*)actor + 0x74);
             revision = runtime.revision;
             current = ActorSnapshot.Read(actor);
             displayOwner = runtime.visualActor;
@@ -1160,7 +1170,8 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         private void ResumeCore(bool includeMount)
         {
             var actor = runtime.Bound();
-            if (actor == null || (nint)actor != address || runtime.revision != revision || !runtime.BindingCurrent()) return;
+            if (actor == null || (nint)actor != address || runtime.revision != revision || !runtime.BindingCurrent()
+                || *(uint*)((byte*)actor + 0x74) != generation) return;
             if (projectedMode) { actor->Mode = current.Mode; actor->ModeParam = current.ModeParam; }
             if (projectedEmote) actor->EmoteController.EmoteId = current.EmoteId;
             if (projectedMount && includeMount) actor->Mount.MountId = current.MountId;
@@ -1322,6 +1333,8 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
     private void DisposeCore()
     {
         if (disposed) return;
+        nativeClosing = true;
+        resolvedTimelineAdmitted = resolvedActionTimelineAdmitted = false;
         // Native visibility restoration, owned-object deletion and hook removal
         // are one synchronous Framework operation, including during worker unload.
         disposed = true;
@@ -1332,7 +1345,7 @@ public sealed unsafe partial class ActorPreviewRuntime : IDisposable, IHmsShadow
         {
             effects.Clear(); spawnWait.Clear(); Forget();
             foreach(var hook in installedHooks.AsEnumerable().Reverse())
-                try { hook.Dispose(); } catch(Exception ex) { try { log.Warning(ex,"[LocalPreview] Hook disposal failed."); } catch { } }
+                TryDisposeNativeHook(hook);
             installedHooks.Clear();
         }
     }

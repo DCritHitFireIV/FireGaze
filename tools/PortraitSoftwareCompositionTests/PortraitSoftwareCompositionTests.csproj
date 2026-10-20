@@ -3,12 +3,14 @@
     <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors><NoWarn>$(NoWarn);CA1416</NoWarn>
+    <CompositorSource Condition="'$(CompositorSource)' == ''">../../src/FireGaze/PortraitPreview/PortraitCaptureSoftwareCompositor.cs</CompositorSource>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitCaptureSoftwareCompositor.cs')">$(DefineConstants);HAS_SOFTWARE_COMPOSITOR</DefineConstants>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs')">$(DefineConstants);HAS_PHOTO_TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureRetirement.cs" Link="PortraitCaptureRetirement.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs" Link="PortraitPhotoTrace.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPhotoTrace.cs')" />
-    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureSoftwareCompositor.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitCaptureSoftwareCompositor.cs')" Link="Production/PortraitCaptureSoftwareCompositor.cs" />
+    <Compile Include="$(CompositorSource)" Link="Production/PortraitCaptureSoftwareCompositor.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureModels.cs" Link="Production/PortraitCaptureModels.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureGeometry.cs" Link="Production/PortraitCaptureGeometry.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="Production/PortraitPreviewSession.cs" />

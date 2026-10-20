@@ -83,7 +83,12 @@ internal sealed class PortraitOwnedSceneLease : IPortraitOwnedSceneLease
             || callDepth > 0 && callThread != Environment.CurrentManagedThreadId) return null;
         callDepth++; callThread = Environment.CurrentManagedThreadId; return new CallScope(this);
     }
-    internal bool IsInOwnedCall => callDepth > 0 && callThread == Environment.CurrentManagedThreadId && IsCurrent;
+    // The entry scope already proved exact ownership before calling native code.
+    // That Original may temporarily expose State5 or half-configured context/
+    // camera fields. Reentrant calls for the same bound view use this token;
+    // general access and the call's return still recheck stable slot ownership.
+    internal bool IsInOwnedCall => callDepth > 0 && callThread == Environment.CurrentManagedThreadId
+        && !invalid && !released && owner.IsNativeCallPhaseCurrent(this);
     internal bool IsSelfCall(nint view) => view == BoundView && IsInOwnedCall;
     internal void SetNativeFrame(uint frame) => NativeFrame = frame;
     internal void Invalidate() => invalid = true;

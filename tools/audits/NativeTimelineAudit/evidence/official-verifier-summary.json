@@ -1,0 +1,41 @@
+{
+  "Schema": 1,
+  "Checks": 16,
+  "ClientSha256": "958B78E278AD896493C484EB313FF605AB41EDEFEF74F92B0EE078E69B281BF9",
+  "SdkSha256": "5A7A8EA71E84D7410DBAD8A5391D4759C2A38B1A55F4F3BB745B22B556A6F778",
+  "DalamudSha256": "CE0C3C8004CAC1E9AA96D0DC749463F5F1A32E9B49988419BF320545BF942C6A",
+  "RegisteredAddresses": 2570,
+  "AddressFields": 2570,
+  "UnresolvedAddresses": 0,
+  "NonExecutableProtection": "PAGE_READWRITE",
+  "OfficialVerifierEntries": 2451,
+  "WrapperTimeline": {
+    "Accepted": false,
+    "Errors": [
+      "Hook verification failed for address 0x17C8F606AB0 (relative base: TimelineAudit.exe+0xFFFF818490DF6AB0)\n\nHook creation caller: TimelineAudit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\nName:                 Client::Game::Control::ActionTimelineSequencer.PlayTimeline\nWhy:                  Failed match against expected documentation.\nFail Context:         Return type check.\nPassed Delegate:      Boolean (ActionTimelineSequencer*, UInt16, Void*)\nCorrect Delegate:     Void (ActionTimelineSequencer*, UInt16, Void*)\n\nCanonical Sig:        E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 40\n\nThe hook delegate must exactly match the provided signature to prevent memory corruption and wrong data passed to originals."
+    ]
+  },
+  "WrapperAction": {
+    "Accepted": false,
+    "Errors": [
+      "Hook verification failed for address 0x17C8F8BE410 (relative base: TimelineAudit.exe+0xFFFF8184910AE410)\n\nHook creation caller: TimelineAudit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\nName:                 Client::Game::Character::TimelineContainer.PlayActionTimeline\nWhy:                  Failed match against expected documentation.\nFail Context:         Return type check.\nPassed Delegate:      Boolean (TimelineContainer*, UInt16, UInt16, Void*)\nCorrect Delegate:     Void (TimelineContainer*, UInt16, UInt16, Void*)\n\nCanonical Sig:        E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? B2 12\n\nThe hook delegate must exactly match the provided signature to prevent memory corruption and wrong data passed to originals."
+    ]
+  },
+  "SdkTimeline": {
+    "Accepted": true,
+    "Errors": []
+  },
+  "SdkAction": {
+    "Accepted": true,
+    "Errors": []
+  },
+  "InternalTimeline": {
+    "Accepted": true,
+    "Errors": []
+  },
+  "InternalAction": {
+    "Accepted": true,
+    "Errors": []
+  },
+  "Limitation": "Unknown-address verifier success is not an independent ABI proof or authorization to install; production pre-factory gate stays closed until native contract/ownership and accepted-action identity audits are complete."
+}

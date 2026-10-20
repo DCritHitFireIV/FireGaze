@@ -6,6 +6,10 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.cs')">$(DefineConstants);HAS_OWNED_HOOKS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookPhaseContract.cs" Link="Production/PortraitOwnedSceneHookPhaseContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneContextContract.cs" Link="Production/PortraitOwnedSceneContextContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs" Link="Production/PortraitOwnedSceneSlotReader.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitContextInterception.cs" Link="Production/PortraitContextInterception.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneLeaseContract.cs" Link="PortraitOwnedSceneLeaseContract.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks*.cs" Link="Production/%(Filename)%(Extension)" />

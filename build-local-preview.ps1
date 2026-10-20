@@ -92,6 +92,8 @@ Invoke-PreviewSuite 'PortraitSpatialSceneTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneHookTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneTests'
 Invoke-PreviewSuite 'PortraitOwnedSceneSlotTests'
+Invoke-PreviewSuite 'PortraitOwnedScenePhaseIntegrationTests'
+Invoke-PreviewSuite 'PortraitOwnedSceneContextLifetimeTests'
 Invoke-PreviewSuite 'PortraitNativePhaseObservationTests'
 Invoke-PreviewSuite 'PortraitNativePhaseHostTests'
 # Map a disposable no-execute image in the test process only; never load Boot,
@@ -101,6 +103,8 @@ Invoke-PreviewSuite 'PortraitNativeBootImageTests' @('--', (Join-Path $env:DALAM
 if ($SqpackPath) {
     # Read the actual configured client's PE only; this suite never opens its process.
     Invoke-PreviewSuite 'PortraitNativePhaseResolverTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
+    Invoke-PreviewSuite 'NativeTimelineQualificationTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'), '--boot-dll', (Join-Path $env:DALAMUD_HOME 'Dalamud.Boot.dll'))
+    Invoke-PreviewSuite 'NativeResolvedTimelineTests' @('--', '--sqpack', $SqpackPath)
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {
         Invoke-PreviewSuite $previewSuite @('--', '--sqpack', $SqpackPath)
     }
@@ -111,6 +115,8 @@ if ($SqpackPath) {
     Invoke-PreviewSuite 'LocalPreviewInteractionTests' @('--', '--sqpack', $SqpackPath)
 } else {
     $previewSkippedSuites.Add('PortraitNativePhaseResolverTests')
+    $previewSkippedSuites.Add('NativeTimelineQualificationTests')
+    $previewSkippedSuites.Add('NativeResolvedTimelineTests')
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {
         Invoke-PreviewSuite $previewSuite
     }
@@ -119,7 +125,7 @@ if ($SqpackPath) {
     foreach ($previewSuite in @('TrialSpecialHotbarTests', 'TrialSpecialRuntimeTests', 'NativeCompatibilityTests', 'NativeCollectionTransitionTests', 'NativeEmoteTests')) {
         $previewSkippedSuites.Add($previewSuite)
     }
-    Write-Warning 'No current CN SqpackPath: five data-dependent suites and the GPose/item/portrait game-data extensions were not run; portrait appearance/validation ran their base checks only.'
+    Write-Warning 'No current CN SqpackPath: native phase/timeline and five data-dependent suites were not run; GPose/item/portrait game-data coverage is incomplete.'
 }
 
 if ($HmsCompatRoot) {
@@ -136,6 +142,7 @@ foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests', 'Artifac
     Invoke-PreviewSuite $previewSuite
 }
 Invoke-PreviewSuite 'PortraitWindowLifecycleTests'
+Invoke-PreviewSuite 'PluginPhysicalDrainTests'
 
 Write-Output "Offline validation finished: $previewCompletedSuites suites; skipped: $($previewSkippedSuites -join ', ')."
 if (!$SqpackPath) { Write-Output 'Current-client GPose, item-data, portrait appearance, and portrait validation coverage is incomplete.' }

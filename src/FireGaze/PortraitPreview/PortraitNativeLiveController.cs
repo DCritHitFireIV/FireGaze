@@ -195,4 +195,6 @@ internal sealed class PortraitNativeLiveController : IDisposable
         }
         source.Invalidated -= OnSourceInvalidated;
     }
+
+    public Task DrainPhysicalAsync() => view.DrainPhysicalAsync();
 }

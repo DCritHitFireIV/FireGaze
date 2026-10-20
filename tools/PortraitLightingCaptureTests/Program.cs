@@ -97,10 +97,14 @@ foreach(var phase in new[]{"copy","readback"})
  var task=bridge.CaptureAsync(Frame(a));Settle(bridge);
  if(phase=="readback")await Copied(bridge,a,r,new Texture());
  var before=DateTime.UtcNow;bridge.Dispose();Check(DateTime.UtcNow-before<TimeSpan.FromSeconds(1)&&!task.IsCompleted,phase+" unload never blocks on unfinished GPU work");
+ var retirement=bridge.GetType().GetMethod("DrainPhysicalAsync")?.Invoke(bridge,null) as Task??Task.CompletedTask;
+ var held=!retirement.IsCompleted;
  Texture? late=null;
  if(phase=="copy"){late=new Texture();a.Copy.SetResult(new(2,1,[new(late)]));}
  else r.Pending.SetResult([new(1,2,3,255),new(4,5,6,255)]);
  await Until(()=>task.IsCompleted);
+ await retirement.WaitAsync(TimeSpan.FromSeconds(5));
+ Check(held,phase+" host lifetime remains held until physical completion and late release");
  Check(task.IsFaulted&&(late?.Disposes??a.Outputs[0].Disposes)==1,phase+" late result after unload is released and cannot publish");_=task.Exception;
 }
 {
@@ -111,7 +115,8 @@ foreach(var phase in new[]{"copy","readback"})
 foreach(var phase in new[]{"copy","compose","readback"})foreach(var dispose in new[]{false,true})
 {
  var a=new FakeApi();var r=new Readback(a);var bridge=new PortraitLightingFitCaptureBridge(a,r);
- Action cancel=()=>{if(dispose)bridge.Dispose();else bridge.Close();};
+ var heldInPrefix=false;
+ Action cancel=()=>{if(dispose){bridge.Dispose();heldInPrefix=!(bridge.GetType().GetMethod("DrainPhysicalAsync")?.Invoke(bridge,null) as Task??Task.CompletedTask).IsCompleted;}else bridge.Close();};
  if(phase=="copy")a.OnCapture=cancel;else if(phase=="compose")a.OnCompose=cancel;else r.OnRead=cancel;
  var task=bridge.CaptureAsync(Frame(a));Settle(bridge);
  if(phase=="readback")await Copied(bridge,a,r,new Texture());
@@ -121,6 +126,7 @@ foreach(var phase in new[]{"copy","compose","readback"})foreach(var dispose in n
  for(var spin=0;spin<30&&!task.IsCompleted;spin++){bridge.Update();await Task.Delay(1);}
  Check(task.IsFaulted&&!bridge.IsBusy,phase+" synchronous "+(dispose?"dispose":"close")+" reentrancy preserves and drains physical ownership");
  Check(a.Outputs.All(x=>x.Disposes==1),phase+" synchronous cancellation releases each composed output once");_=task.Exception;bridge.Dispose();
+ if(dispose)Check(heldInPrefix,phase+" reentrant prefix retains physical ownership until actual release");
 }
 foreach(var failure in new[]{"copy","compose","readback","dimensions","pixels","nonfinite"})
 {
@@ -163,18 +169,61 @@ foreach(var input in new (int Width,int Height,int Pitch,int Format,byte[] Bytes
  try{PortraitLightingFitTextureReadback.Decode(input.Bytes,input.Width,input.Height,input.Pitch,input.Format);Check(false,"invalid raw input rejected");}
  catch(InvalidOperationException){Check(true,"invalid format/dimensions/pitch/truncated data rejected before decode");}
 }
+foreach(var phase in new[]{"copy","layers","candidate","readback"})
+{
+ var a=new FakeApi();var r=new Readback(a);var bridge=new PortraitLightingFitCaptureBridge(a,r);
+ var publication=bridge.CaptureAsync(Frame(a));Settle(bridge);
+ var failed=new Texture{OnDispose=()=>throw new InvalidOperationException("unconfirmed release")};
+ if(phase!="copy")
+ {
+  a.Copy.SetResult(new(2,1,[new(failed)]));bridge.Update();
+  if(phase is "candidate" or "readback")
+  {failed.OnDispose=null;bridge.Draw();a.Outputs.Single().OnDispose=()=>throw new InvalidOperationException("unconfirmed release");}
+  if(phase=="readback"){bridge.Update();await Until(()=>r.SubmissionEntered.IsSet);}
+ }
+ bridge.Dispose();var retirement=bridge.DrainPhysicalAsync();
+ if(phase=="copy")a.Copy.SetResult(new(2,1,[new(failed)]));
+ if(phase=="readback")r.Pending.SetResult([new(1,2,3,255),new(4,5,6,255)]);
+ await Until(()=>phase is "candidate" or "readback"?a.Outputs.Single().Disposes==1:failed.Disposes==1);
+ await Task.Delay(20);
+ Check(!retirement.IsCompleted,phase+" lighting texture release failure keeps provider lifetime quarantined");
+ _=publication.Exception;
+}
+foreach(var reentrant in new[]{false,true})
+{
+ var a=new FakeApi();var bridge=new PortraitLightingFitCaptureBridge(a,new Readback(a));
+ var failed=new Texture{OnDispose=()=>throw new InvalidOperationException("unconfirmed description release")};
+ Task? earlyDrain=null;var heldInPrefix=false;
+ a.OnDescribe=()=>
+ {
+  if(reentrant){bridge.Dispose();earlyDrain=bridge.DrainPhysicalAsync();heldInPrefix=!earlyDrain.IsCompleted;}
+  PortraitCaptureCleanupException.DisposeAll(failed);
+ };
+ var accepted=bridge.TryReadFrame(a.Sample.Viewport,out _);
+ bridge.Dispose();var retirement=bridge.DrainPhysicalAsync();
+ Check(!accepted&&failed.Disposes==1&&bridge.CleanupFailures==1&&!retirement.IsCompleted,
+  (reentrant?"reentrant":"ordinary")+" description cleanup failure remains quarantined instead of silently retiring physical ownership");
+ if(reentrant)Check(heldInPrefix&&earlyDrain is{IsCompleted:false},"description owns its synchronous prefix before native cleanup can reenter Dispose and seal");
+}
+{
+ var a=new FakeApi();var bridge=new PortraitLightingFitCaptureBridge(a,new Readback(a));
+ var heldInPrefix=false;Task? earlyDrain=null;
+ a.OnDescribe=()=>{bridge.Dispose();earlyDrain=bridge.DrainPhysicalAsync();heldInPrefix=!earlyDrain.IsCompleted;};
+ var accepted=bridge.TryReadFrame(a.Sample.Viewport,out _);
+ Check(!accepted&&heldInPrefix&&earlyDrain is{IsCompletedSuccessfully:true},"successful description retires only after its reentrant synchronous prefix has returned");
+}
 Console.WriteLine($"PortraitLightingCaptureTests: {checks} passed, 0 failed");return 0;
 
 sealed class FakeApi:IPortraitLightingFitCaptureApi
 {
- public bool Framework=true,Ready=true,ThrowSample;public int Samples,Copies,Composes;public Action? OnCapture,OnCompose;
+ public bool Framework=true,Ready=true,ThrowSample;public int Samples,Copies,Composes;public Action? OnCapture,OnCompose,OnDescribe;
  public PortraitCaptureSample Sample=new(new(1,2),new(3,4,5,6,7),"full-state-a",PortraitImageScope.Portrait,new(1,Vector2.Zero,new(1920,1080)));
  public PortraitCaptureSurface Surface=new("surface-a",2,1);
  public bool IsFrameworkThread=>Framework;
  public TaskCompletionSource<PortraitCaptureLayers?> Copy=new(TaskCreationOptions.RunContinuationsAsynchronously);
  public List<Texture> Outputs=[];
  public bool TrySample(PortraitImageScope scope,PortraitCaptureViewport viewport,out PortraitCaptureSample? sample){if(ThrowSample)throw new InvalidOperationException("private source failure");Samples++;sample=Ready?Sample:null;return Ready;}
- public bool TryDescribePortrait(PortraitCaptureSample sample,out PortraitCaptureSurface? surface){surface=Ready?Surface:null;return Ready;}
+ public bool TryDescribePortrait(PortraitCaptureSample sample,out PortraitCaptureSurface? surface){OnDescribe?.Invoke();surface=Ready?Surface:null;return Ready;}
  public Task<PortraitCaptureLayers?> CaptureAsync(PortraitCaptureSample sample)=>CaptureAsync(sample,Surface);
  public Task<PortraitCaptureLayers?> CaptureAsync(PortraitCaptureSample sample,PortraitCaptureSurface surface){if(!Framework||sample!=Sample||surface!=Surface)throw new InvalidOperationException();Copies++;Copy=new(TaskCreationOptions.RunContinuationsAsynchronously);OnCapture?.Invoke();return Copy.Task;}
  public IDalamudTextureWrap Compose(PortraitCaptureLayers layers){Composes++;OnCompose?.Invoke();var output=new Texture(layers.Width,layers.Height);Outputs.Add(output);return output;}
@@ -194,6 +243,7 @@ sealed class Readback(FakeApi api):IPortraitLightingFitReadback
 sealed class Texture(int width=2,int height=1):IDalamudTextureWrap
 {
  public int Disposes;public ImTextureID Handle=>new((nint)123);public int Width=>width;public int Height=>height;
- public void Dispose()=>Interlocked.Increment(ref Disposes);
+ public Action? OnDispose;
+ public void Dispose(){Interlocked.Increment(ref Disposes);OnDispose?.Invoke();}
 }
 #endif

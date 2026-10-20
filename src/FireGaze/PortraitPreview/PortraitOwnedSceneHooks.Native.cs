@@ -51,6 +51,11 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks
         Add(PortraitOwnedSceneNativeKind.Update, NativeFamilies.Select(family => family.Update));
         Add(PortraitOwnedSceneNativeKind.Setup, [0x9D3960]);
         Add(PortraitOwnedSceneNativeKind.Render, [0x9CD4D0]);
+        Add(PortraitOwnedSceneNativeKind.DestroyContext, [0x2EDFC0]);
+        Add(PortraitOwnedSceneNativeKind.ConstructContext, [0x268F20]);
+        Add(PortraitOwnedSceneNativeKind.CleanupContext, [0x2690B0]);
+        Add(PortraitOwnedSceneNativeKind.ConfigureContext, [0x269020]);
+        Add(PortraitOwnedSceneNativeKind.ConfigureDefaultContext, [0x268F60]);
         Add(PortraitOwnedSceneNativeKind.CreateClientObject, [0x1756410]);
         Add(PortraitOwnedSceneNativeKind.DeleteClientObject, [0x1756840]);
         return result.AsReadOnly();
@@ -85,6 +90,12 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks
             || !Signature<ClientObjectManager.Delegates.CreateBattleCharacter>(typeof(uint), typeof(ClientObjectManager*), typeof(uint), typeof(byte))
             || !Signature<ClientObjectManager.Delegates.DeleteObjectByIndex>(typeof(void), typeof(ClientObjectManager*), typeof(ushort), typeof(byte)))
         { reason = "SDK CharaView/direct ClientObject ABI mismatch."; return false; }
+        if (!Signature<ConstructContext>(typeof(nint), typeof(nint))
+            || !Signature<DestroyContext>(typeof(nint), typeof(nint), typeof(byte))
+            || !Signature<ConfigureContext>(typeof(byte), typeof(nint), typeof(uint), typeof(uint))
+            || !Signature<ConfigureDefaultContext>(typeof(byte), typeof(nint), typeof(uint))
+            || !Signature<CleanupContext>(typeof(void), typeof(nint)))
+        { reason = "Audited native context byte ABI mismatch."; return false; }
         reason = ""; return true;
     }
 
@@ -123,6 +134,11 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks
                     || table[2] != moduleBase + (nint)family.Release || table[10] != moduleBase + (nint)family.Update)
                 { reason = "A native CharaView vtable differs from the frozen allowlist."; return false; }
             }
+            var contextTable = (nint*)(moduleBase + 0x214A6C8);
+            if (contextTable[0] != moduleBase + 0x2EDFC0 || contextTable[1] != moduleBase + 0x268F50
+                || contextTable[2] != moduleBase + 0x3356B0 || contextTable[3] != moduleBase + 0x3356D0
+                || contextTable[4] != moduleBase + 0x2690B0)
+            { reason = "The native context Cleanup vtable differs from the frozen contract."; return false; }
             reason = string.Join("; ", MissingAdmissionEvidence); return false;
         }
         catch (Exception ex) { reason = ex.Message; return false; }
@@ -130,7 +146,7 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks
 
     internal static IReadOnlyList<string> MissingAdmissionEvidence { get; } = Array.AsReadOnly(new[] {
         "Live official-consumer baseline and slot-idle ownership inventory are not connected",
-        "Context configure/cleanup and renderer reset entry points lack a validated typed interception contract",
+        "Context cross-thread lifetime coverage and renderer reset qualification remain incomplete",
         "Off-thread takeover and lost-slot retirement have no verified non-destructive retirement path",
         "Native teardown/device-reset phase qualification and owned copy-drain integration are not connected",
     });

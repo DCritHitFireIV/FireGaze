@@ -203,7 +203,7 @@ static class Cases
             Check(gpu.UploadCalls==0&&source.Shares.Single().Disposes==1,"cancelled late read releases owned source once and never publishes");
         }
         {
-            using var token=new CancellationTokenSource();var gpu=new FakeGpu{PendingUpload=new(TaskCreationOptions.RunContinuationsAsynchronously)};
+            using var token=new CancellationTokenSource();var gpu=new FakeGpu{PendingUpload=new(TaskCreationOptions.RunContinuationsAsynchronously),LogicallyCancelUpload=true};
             var source=new Texture(1,1,[1,2,3,255]);var task=gpu.Compositor.ComposeAsync(1,1,[new(source)],token.Token);
             await Wait(()=>gpu.UploadCalls==1);token.Cancel();await Task.Delay(15);
             Check(!task.IsCompleted&&source.Shares.Single().Disposes==0,"upload cancellation awaits late physical completion and retains its sources");
@@ -211,11 +211,24 @@ static class Cases
             await Throws<OperationCanceledException>(async()=>await task,"late upload cannot publish after cancellation");
             Check(late.Disposes==1&&source.Shares.Single().Disposes==1,"late uploaded texture and retained input are each disposed exactly once");
         }
+        foreach(var stage in new[]{"retained","partial","output"})
+        {
+            var physical=new PortraitCaptureRetirement();var held=physical.Enter();
+            var uploaded=new Texture(stage=="output"?2:1,1,[1,2,3,255]){DisposeFailure=stage=="output"?new InvalidOperationException("output release failed"):null};
+            var gpu=new FakeGpu{UploadResult=uploaded};
+            var one=new Texture(1,1,[1,2,3,255]){SharedDisposeFailure=stage!="output"?new InvalidOperationException("source release failed"):null};
+            var two=new Texture(1,1,[4,5,6,255]){FailShare=stage=="partial"};
+            try{using var result=await gpu.Compositor.ComposeAsync(1,1,[new(one),new(two)]);}
+            catch(Exception error){physical.ObserveFailure(error);}
+            held.Dispose();
+            Check(!physical.Seal().IsCompleted&&physical.CleanupFailures>0,
+                stage+" compositor release failure preserves its resource through the actual task for host quarantine");
+        }
         {
             var uploaded=new Texture(1,1,[1,2,3,255]);var gpu=new FakeGpu{UploadResult=uploaded};
             var one=new Texture(1,1,[1,2,3,255]){SharedDisposeFailure=new InvalidOperationException("release failed")};
             var two=new Texture(1,1,[4,5,6,255]);
-            await Throws<InvalidOperationException>(()=>gpu.Compositor.ComposeAsync(1,1,[new(one),new(two)]),"source release failure faults successful composition");
+            await Throws<PortraitCaptureCleanupException>(()=>gpu.Compositor.ComposeAsync(1,1,[new(one),new(two)]),"source release failure faults successful composition with retained ownership evidence");
             Check(uploaded.Disposes==1&&one.Shares.Single().Disposes==1&&two.Shares.Single().Disposes==1,
                 "failed source release still disposes the unpublished uploaded output and every retained reference");
         }
@@ -223,13 +236,13 @@ static class Cases
             var gpu=new FakeGpu{ReadFailure=new ArgumentException("original read failure")};
             var one=new Texture(1,1,[1,2,3,255]){SharedDisposeFailure=new InvalidOperationException("release failed")};
             var two=new Texture(1,1,[4,5,6,255]);
-            await Throws<ArgumentException>(()=>gpu.Compositor.ComposeAsync(1,1,[new(one),new(two)]),"cleanup failure preserves the original readback failure");
+            await Throws<AggregateException>(()=>gpu.Compositor.ComposeAsync(1,1,[new(one),new(two)]),"cleanup failure preserves the original readback failure together with unconfirmed ownership");
             Check(one.Shares.Single().Disposes==1&&two.Shares.Single().Disposes==1,"original failure cleanup still attempts every retained texture");
         }
         {
             var gpu=new FakeGpu();var one=new Texture(1,1,[1,2,3,255]){SharedDisposeFailure=new ArgumentException("release failed")};
             var two=new Texture(1,1,[4,5,6,255]){FailShare=true};
-            await Throws<InvalidOperationException>(()=>gpu.Compositor.ComposeAsync(1,1,[new(one),new(two)]),"partial retain cleanup preserves the original share failure");
+            await Throws<AggregateException>(()=>gpu.Compositor.ComposeAsync(1,1,[new(one),new(two)]),"partial retain cleanup preserves the original share failure together with unconfirmed ownership");
         }
         {
             var gpu=new FakeGpu();var source=new Texture(1,1,[1,2,3,255]);
@@ -277,6 +290,7 @@ sealed class FakeGpu
     public IDalamudTextureWrap? UploadResult;
     public TaskCompletionSource<(RawImageSpecification Specification,byte[] RawData)>? PendingRead;
     public TaskCompletionSource<IDalamudTextureWrap>? PendingUpload;
+    public bool LogicallyCancelUpload;
     public PortraitCaptureSoftwareCompositor Compositor {get;}
     public FakeGpu()
     {
@@ -297,7 +311,10 @@ sealed class FakeGpu
                 throw new InvalidOperationException("Forbidden texture service call: "+method.Name);
             UploadCalls++;UploadSpec=(RawImageSpecification)args[0]!;UploadBytes=bytes.ToArray();
             if(UploadFailure is not null)return Task.FromException<IDalamudTextureWrap>(UploadFailure);
-            return PendingUpload?.Task??Task.FromResult(UploadResult??new Texture(UploadSpec.Width,UploadSpec.Height,UploadBytes));
+            var physical=PendingUpload?.Task??Task.FromResult(UploadResult??new Texture(UploadSpec.Width,UploadSpec.Height,UploadBytes));
+            // Installed dynamic provider loaders can cancel their exposed task before physical
+            // processing finishes. Model that boundary; production must supply None here.
+            return LogicallyCancelUpload?physical.WaitAsync((CancellationToken)args[3]!):physical;
         });
         Compositor=new(textures,read);
     }

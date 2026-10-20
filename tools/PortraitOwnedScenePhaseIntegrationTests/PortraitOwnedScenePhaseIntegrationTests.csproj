@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors><NoWarn>$(NoWarn);CA1416</NoWarn>
+    <DefineConstants>$(DefineConstants);OWNED_SLOT;HAS_OWNED_HOOKS</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativePhaseSource.cs')">$(DefineConstants);NATIVE_PHASE</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookEnvironment.cs')">$(DefineConstants);REAL_ENVIRONMENT</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneContextAllocationTracker.cs" Link="Actual/PortraitOwnedSceneContextAllocationTracker.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.cs" Link="Actual/PortraitOwnedSceneHooks.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Native.cs" Link="Actual/PortraitOwnedSceneHooks.Native.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Lease.cs" Link="Actual/PortraitOwnedSceneHooks.Lease.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs" Link="Actual/PortraitOwnedSceneSlotReader.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookPhaseContract.cs" Link="Actual/PortraitOwnedSceneHookPhaseContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativePhaseSource.cs" Link="Actual/PortraitOwnedSceneSlotNativePhaseSource.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookEnvironment.cs" Link="Actual/PortraitOwnedSceneHookEnvironment.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneContextContract.cs" Link="Actual/PortraitOwnedSceneContextContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitContextInterception.cs" Link="Actual/PortraitContextInterception.cs" />
+
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="Actual/PortraitPreviewSession.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneLeaseContract.cs" Link="Actual/PortraitOwnedSceneLeaseContract.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativeApi.cs" Link="Actual/PortraitOwnedSceneSlotNativeApi.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost*.cs" Link="Actual/%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation*.cs" Link="Actual/%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedCharaView*.cs" Link="Actual/%(Filename)%(Extension)" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" Link="Actual/PortraitEditorState.cs" />
+    <Compile Include="..//PortraitOwnedSceneHookTests/HookCases.cs" Link="ExistingTests/HookCases.cs" />
+    <Compile Include="..//PortraitOwnedSceneHookTests/OwnedSceneIntegrationCases.cs" Link="ExistingTests/OwnedSceneIntegrationCases.cs" />
+    <Compile Include="..//PortraitOwnedSceneHookTests/OwnedReservationCases.cs" Link="ExistingTests/OwnedReservationCases.cs" />
+    <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

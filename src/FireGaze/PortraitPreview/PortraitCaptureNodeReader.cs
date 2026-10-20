@@ -30,7 +30,7 @@ internal static unsafe class PortraitCaptureNodeReader
     after.AllocatedWidth,after.AllocatedHeight,after.ActualWidth,after.ActualHeight);
    owned=null;return true;
   }
-  finally{owned?.Dispose();}
+  finally{PortraitCaptureCleanupException.DisposeAll(owned);}
  }
  private static bool TryDescribe(nint componentAddress,nint imageAddress,bool character,out Description value)
  {

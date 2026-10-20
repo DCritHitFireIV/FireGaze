@@ -126,7 +126,7 @@ static double Contrast(Vector4 left, Vector4 right)
     ImGui.Click = "设为参考";
     Invoke(window, "DrawAnalysisWindow");
     var reference = Field(window, "comparisonReference")!;
-    var texture = (Texture?)Field(reference, "current");
+    var texture = (Texture?)Field(window, "comparisonOwned");
     Check(texture?.Handle == 6, "comparison reference comes from the actual analyzed plate rather than the history portrait");
     Check(Math.Abs(ImGui.LastDrawImageSize.X / ImGui.LastDrawImageSize.Y - 32f / 18) < .00001f,
         "attention preview preserves the full plate aspect ratio");
@@ -157,6 +157,65 @@ else
     model.Sample = null;
     spaceImage.Invoke(window, [new Vector2(500, 300)]);
     Check(ImGui.LastImage == 0, "space result pane tolerates a closing or refreshing source");
+}
+{
+    var source = new Texture(2, 1, 200);
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = source };
+    var window = new PortraitPreviewWindow(model);
+    var provider = Plugin.TextureReadback;
+    provider.Hold = true; provider.Pending = null;
+    Invoke(window, "StartCurrentAnalysis");
+    var until = DateTime.UtcNow.AddSeconds(5);
+    while (provider.Pending is null) { if (DateTime.UtcNow > until) throw new TimeoutException(); await Task.Delay(1); }
+    var retained = source.Shares[0].Shares[0];
+    window.Dispose();
+    var physical = window.GetType().GetMethod("DrainPhysicalAsync")?.Invoke(window, null) as Task ?? Task.CompletedTask;
+    await Task.Delay(20);
+    Check(!physical.IsCompleted && retained.Disposes == 0,
+        "closing analysis holds host physical retirement and its source until actual readback completion");
+    Check(!provider.LastCancellable, "actual analysis readback cannot logically cancel while provider still uses its source");
+    provider.Pending.TrySetResult(new(new(28, 2, 1, 8), [100,100,100,255,100,100,100,255]));
+    await Drain(window); await physical.WaitAsync(TimeSpan.FromSeconds(5));
+    Check(retained.Disposes == 1, "analysis physical completion releases its transferred source exactly once");
+    provider.Hold = false; provider.Pending = null;
+}
+{
+    var source = new Texture(2, 1, 201);
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = source };
+    var window = new PortraitPreviewWindow(model);
+    Task? prefixDrain = null; var held = false;
+    source.OnShare = () => { window.Dispose(); prefixDrain = window.DrainPhysicalAsync(); held = !prefixDrain.IsCompleted; };
+    var calls = Plugin.TextureReadback.Calls;
+    Invoke(window, "StartCurrentAnalysis");
+    await prefixDrain!.WaitAsync(TimeSpan.FromSeconds(5));
+    Check(held && source.Shares.Single().Disposes == 1 && Plugin.TextureReadback.Calls == calls,
+        "analysis owns the live-acquisition synchronous prefix before reentrant close and releases late output without readback");
+}
+{
+    var source = new Texture(2, 1, 202);
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = source };
+    var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    var preview = (Texture)Field(window, "analysisPreview")!;
+    preview.OnDispose = () => throw new IOException("unconfirmed preview release");
+    window.Dispose();
+    Check(!window.DrainPhysicalAsync().IsCompleted && preview.Disposes == 1,
+        "analysis preview release failure quarantines its provider resource rather than retiring host scope");
+}
+{
+    var source = new Texture(2, 1, 203);
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = source };
+    var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    Invoke(window, "DrawAnalysisWindow");
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    var reference = Field(window, "comparisonReference")!;
+    var resource = (Texture)Field(window, "comparisonOwned")!;
+    resource.OnDispose = () => throw new IOException("unconfirmed comparison release");
+    var escaped = false;
+    try { window.Dispose(); } catch (IOException) { escaped = true; }
+    Check(!escaped && !window.DrainPhysicalAsync().IsCompleted && resource.Disposes == 1,
+        "analysis comparison release failure stays quarantined and cannot bypass host physical retirement");
 }
 Console.WriteLine($"PortraitAnalysisWindowTests: {passed} passed, {failed} failed");
 return failed == 0 ? 0 : 1;

@@ -17,11 +17,12 @@ namespace FireGaze.PortraitPreview
         public int Calls;
         public PortraitIdentity RequestedIdentity;
         public CancellationToken RequestedCancellation;
+        public Action? OnCapture;
         private TaskCompletionSource<PortraitThumbnailLayers?> pending = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public Task<PortraitThumbnailLayers?> CaptureAsync(PortraitIdentity identity, CancellationToken token,
             PortraitPhotoTrace.Operation? operation = null)
         {
-            Calls++; RequestedIdentity = identity; RequestedCancellation = token; return pending.Task;
+            Calls++; RequestedIdentity = identity; RequestedCancellation = token; OnCapture?.Invoke(); return pending.Task;
         }
         public void Complete(PortraitThumbnailLayers layers) => pending.SetResult(layers);
     }
@@ -43,10 +44,13 @@ namespace FireGaze.PortraitPreview
     {
         private int disposes;
         public int Disposes => Volatile.Read(ref disposes);
+        public Action? OnShare;
+        public Action? OnDispose;
+        public List<FakeTexture> Shares = [];
         public ImTextureID Handle => new((nint)123);
         public int Width => 160;
         public int Height => 256;
-        public IDalamudTextureWrap CreateWrapSharingLowLevelResource() => new FakeTexture();
-        public void Dispose() => Interlocked.Increment(ref disposes);
+        public IDalamudTextureWrap CreateWrapSharingLowLevelResource() { OnShare?.Invoke(); var share = new FakeTexture(); Shares.Add(share); return share; }
+        public void Dispose() { Interlocked.Increment(ref disposes); OnDispose?.Invoke(); }
     }
 }

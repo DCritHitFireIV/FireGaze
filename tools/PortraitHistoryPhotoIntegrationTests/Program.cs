@@ -50,6 +50,8 @@ static async Task<int> Run()
         checks += await PhotoTraceServiceCases.RunAsync(root, history, key, one, initial, identity);
         checks += await PhotoManagedDrainCases.RunAsync(root, textures, readback, history.Bytes);
         checks += await ManagedDrainOutcomeCases.RunAsync(root, key, initial);
+        checks += await PhotoPhysicalDrainCases.RunAsync(root, textures, readback);
+        checks += await PhotoProgressReadCases.RunAsync(root, textures, readback);
 
         var source = new PortraitThumbnailSource();
         using (var photos = Photos("eligibility.bin", source, history.Bytes))
@@ -81,7 +83,7 @@ static async Task<int> Run()
         await Settle(closingPhotos, two.ID, changed);
         Check(lateSource.Calls == 1, "unload case has a genuine pending service capture");
         closingPhotos.Dispose();
-        Check(lateSource.RequestedCancellation.IsCancellationRequested, "unload cancels the request without waiting for Present");
+        Check(!lateSource.RequestedCancellation.CanBeCanceled, "unload invalidates publication while preserving physical provider completion");
         var lateTexture = new FakeTexture(); lateSource.Complete(new(lateTexture));
         for (var retry = 0; retry < 100 && lateTexture.Disposes == 0; retry++) await Task.Delay(10);
         Check(lateTexture.Disposes == 1, "a copy completing after unload releases its owned resources once");

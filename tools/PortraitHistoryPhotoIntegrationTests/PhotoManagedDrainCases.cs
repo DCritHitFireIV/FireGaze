@@ -91,17 +91,23 @@ internal static class PhotoManagedDrainCases
             TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
         var returnedWhileBlocked = false;
         var drainCompletedWhileBlocked = false;
+        var physicalPendingWhileBlocked = false;
         try
         {
             Check(callbackEntered.Wait(TimeSpan.FromSeconds(5)), "actual photo lifetime invokes registered provider cancellation callback");
             returnedWhileBlocked = ReferenceEquals(await Task.WhenAny(cancellationClose, Task.Delay(250)), cancellationClose);
             if (returnedWhileBlocked)
+            {
                 drainCompletedWhileBlocked = cancellationClose.Result.IsCompletedSuccessfully;
+                physicalPendingWhileBlocked = !PhotoPhysicalDrainCases.PhysicalDrain(cancellationPhotos).IsCompleted;
+            }
         }
         finally { releaseCallback.Set(); }
         await (await cancellationClose.WaitAsync(TimeSpan.FromSeconds(5)));
         Check(returnedWhileBlocked, "photo Framework close returns while a provider cancellation callback is blocked");
         Check(drainCompletedWhileBlocked, "managed file drain excludes Present-dependent provider cancellation callbacks");
+        Check(physicalPendingWhileBlocked, "host physical drain retains provider scope through blocked cancellation callbacks");
+        await PhotoPhysicalDrainCases.PhysicalDrain(cancellationPhotos).WaitAsync(TimeSpan.FromSeconds(5));
         if (failures.Count != 0) throw new InvalidOperationException(string.Join("; ", failures));
         return checks;
     }

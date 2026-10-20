@@ -37,8 +37,10 @@ public sealed unsafe partial class ActorPreviewRuntime
     private Hook<PlayActionTimelineNative>? actionTimelinePlay;
     private string timelinePlayReason = "Not initialized.";
     private string actionTimelinePlayReason = "Not initialized.";
-    public OptionalNativeHookStatus TimelinePlayStatus => TimelineHookStatus(timelinePlay, timelinePlayReason);
-    public OptionalNativeHookStatus ActionTimelinePlayStatus => TimelineHookStatus(actionTimelinePlay, actionTimelinePlayReason);
+    public OptionalNativeHookStatus SdkTimelinePlayStatus => TimelineHookStatus(timelinePlay, timelinePlayReason);
+    public OptionalNativeHookStatus SdkActionTimelinePlayStatus => TimelineHookStatus(actionTimelinePlay, actionTimelinePlayReason);
+    public OptionalNativeHookStatus TimelinePlayStatus => resolvedTimelineAdmitted ? ResolvedTimelinePlayStatus : SdkTimelinePlayStatus;
+    public OptionalNativeHookStatus ActionTimelinePlayStatus => resolvedActionTimelineAdmitted ? ResolvedActionTimelinePlayStatus : SdkActionTimelinePlayStatus;
     private bool hmsVisibilityProtection;
     private long hmsVisibilityRepairs;
     private Dictionary<ushort, ushort>? emoteTimelineIdentities;
@@ -55,6 +57,9 @@ public sealed unsafe partial class ActorPreviewRuntime
             () => interop.HookFromAddress<PlayTimelineNative>(ActionTimelineSequencer.Addresses.PlayTimeline.Value, TimelinePlayDetour), out timelinePlayReason);
         actionTimelinePlay = InstallOptionalTimelineHook<PlayActionTimelineNative, TimelineContainer.Delegates.PlayActionTimeline>(
             () => interop.HookFromAddress<PlayActionTimelineNative>(TimelineContainer.Addresses.PlayActionTimeline.Value, ActionTimelinePlayDetour), out actionTimelinePlayReason);
+        // This does not override the SDK mismatch decision above. It qualifies
+        // different native function starts with complete independent contracts.
+        if (timelinePlay is null && actionTimelinePlay is null) InstallResolvedTimelineBoundaries(interop);
     }
 
     private OptionalNativeHookStatus TimelineHookStatus<T>(Hook<T>? hook, string reason) where T : Delegate
@@ -94,8 +99,7 @@ public sealed unsafe partial class ActorPreviewRuntime
             // A failed optional hook never enters runtime ownership or unwinds
             // the core input hooks. Release a partially enabled backend here.
             if (hook is not null)
-                try { hook.Dispose(); }
-                catch (Exception cleanup) { log.Warning(cleanup, "[LocalPreview] Optional timeline hook cleanup failed."); }
+                TryDisposeNativeHook(hook);
             reason = $"Optional timeline observer unavailable: {ex.Message}";
             log.Warning(ex, "[LocalPreview] Optional timeline hook setup failed; core input hooks retained.");
             return null;
@@ -120,6 +124,7 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private void CharacterUpdateDetour(GameObject* obj)
     {
+        if (nativeClosing || disposed) { characterUpdate!.Original(obj); return; }
         // The client can refresh the genuine actor after Framework.Update (for
         // example while a native special action is ending), which may restore its
         // draw bit. Reapply only the existing, identity-checked presentation lease
@@ -139,6 +144,7 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private void CharacterDisableDetour(GameObject* obj)
     {
+        if (nativeClosing || disposed) { characterDisable!.Original(obj); return; }
         // HMS Revert has no public pre-event. Its synchronous source teardown
         // enters this native boundary before source/clone draw resources vanish.
         if (framework.IsInFrameworkUpdateThread && !disposed && !ownCall && HasActivePreview && obj != null && (NativeCharacter*)obj == Bound())
@@ -151,7 +157,7 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private void CompanionSetupDetour(CompanionContainer* container, short id, uint param)
     {
-        if (!framework.IsInFrameworkUpdateThread || Bypass || container == null || container->OwnerObject != Bound()) { companionSetup!.Original(container,id,param); return; }
+        if (Bypass || container == null || container->OwnerObject != Bound()) { companionSetup!.Original(container,id,param); return; }
         var source = Bound();
         if (source == null || (NativeCharacter*)Control.GetLocalPlayer() != source || container != &source->CompanionData) { companionSetup!.Original(container,id,param); return; }
         var sourceGeneration = *(uint*)((byte*)source + 0x74);
@@ -182,7 +188,7 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private void OrnamentSetupDetour(OrnamentContainer* container, short id, uint param)
     {
-        if (!framework.IsInFrameworkUpdateThread || Bypass || container == null || container->OwnerObject != Bound()) { ornamentSetup!.Original(container,id,param); return; }
+        if (Bypass || container == null || container->OwnerObject != Bound()) { ornamentSetup!.Original(container,id,param); return; }
         var intent = new NativeIntent(PreviewSlot.Accessory,unchecked((ushort)id));
         RunNative(intent, () => {
             ornamentSetup!.Original(container,id,param);
@@ -194,7 +200,7 @@ public sealed unsafe partial class ActorPreviewRuntime
     private bool IsSourceEmoteTimeline(ushort timeline, out ushort emote)
     {
         emote = 0;
-        if (!framework.IsInFrameworkUpdateThread || Bypass || timeline is 0 or 1 or 3 or 34) return false;
+        if (Bypass || timeline is 0 or 1 or 3 or 34 or 65001) return false;
         var source = Bound();
         if (source == null) return false;
         {
@@ -205,15 +211,34 @@ public sealed unsafe partial class ActorPreviewRuntime
             if (emoteTimelineIdentities is null)
             {
                 emoteTimelineIdentities = new();
+                void Register(uint timelineId, ushort emoteId)
+                {
+                    if (timelineId is 0 or 1 or 3 or 34 or 65001 || timelineId > ushort.MaxValue) return;
+                    var key = (ushort)timelineId;
+                    if (emoteTimelineIdentities.TryGetValue(key, out var previous) && previous != emoteId) emoteTimelineIdentities[key] = 0;
+                    else if (!emoteTimelineIdentities.ContainsKey(key)) emoteTimelineIdentities[key] = emoteId;
+                }
+                var replacements = data.GetExcelSheet<Lumina.Excel.Sheets.ActionTimelineReplace>();
                 foreach (var entry in data.GetExcelSheet<Lumina.Excel.Sheets.Emote>())
                 {
                     if (entry.RowId == 0 || entry.RowId > ushort.MaxValue) continue;
                     foreach (var variant in entry.ActionTimeline)
                     {
                         if (variant.RowId is 0 or 1 or 3 or 34 || variant.RowId > ushort.MaxValue) continue;
-                        var key=(ushort)variant.RowId;
-                        if (emoteTimelineIdentities.TryGetValue(key,out var previous) && previous != entry.RowId) emoteTimelineIdentities[key]=0;
-                        else if (!emoteTimelineIdentities.ContainsKey(key)) emoteTimelineIdentities[key]=(ushort)entry.RowId;
+                        Register(variant.RowId, (ushort)entry.RowId);
+                        // Current CN native action adjustment reads row+6 as an
+                        // ActionTimelineReplace index (sheet 608), then chooses
+                        // its first/second ushort for swimming/diving. Lumina's
+                        // generated name for row+6 is KillUpper; the native route
+                        // and table layout, not that label, establish this use.
+                        // Both columns must exist, exactly as in the native test.
+                        if (variant.Value.KillUpper is var replacementId && replacementId != 0
+                            && replacements.GetRowOrDefault(replacementId) is { } replacement
+                            && replacement.Old.RowId != 0 && replacement.New.RowId != 0)
+                        {
+                            Register(replacement.Old.RowId, (ushort)entry.RowId);
+                            Register(replacement.New.RowId, (ushort)entry.RowId);
+                        }
                     }
                 }
             }
@@ -223,6 +248,7 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private bool TimelinePlayDetour(ActionTimelineSequencer* sequence, ushort id, void* param)
     {
+        if (nativeClosing || disposed) return timelinePlay!.Original(sequence,id,param);
         if (!framework.IsInFrameworkUpdateThread) return timelinePlay!.Original(sequence,id,param);
         var source = Bound();
         if (source == null || sequence != &source->Timeline.TimelineSequencer || !IsSourceEmoteTimeline(id,out var emote)) return timelinePlay!.Original(sequence,id,param);
@@ -237,6 +263,7 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private bool ActionTimelinePlayDetour(TimelineContainer* timeline, ushort intro, ushort loop, void* param)
     {
+        if (nativeClosing || disposed) return actionTimelinePlay!.Original(timeline,intro,loop,param);
         if (!framework.IsInFrameworkUpdateThread) return actionTimelinePlay!.Original(timeline,intro,loop,param);
         var source = Bound();
         if (source == null || timeline != &source->Timeline || !(IsSourceEmoteTimeline(intro,out var emote) || IsSourceEmoteTimeline(loop,out emote))) return actionTimelinePlay!.Original(timeline,intro,loop,param);

@@ -44,6 +44,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private readonly PortraitCaptureIsolation captureIsolation = new();
     private readonly PortraitPhaseTrace runtimeTrace = new(message => Plugin.Log.Information("[PortraitTrace] {Stage}", message));
     private Task? managedDrain;
+    private Task? physicalDrain;
+    private readonly TaskCompletionSource incompletePhysicalClose = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
     public PortraitPreviewFeature(IDalamudPluginInterface pluginInterface, string configDirectory,
         Func<PortraitSafetyTrialState>? readWorldTrials = null)
@@ -77,11 +79,14 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         diagnostics.RegisterFunc(() => OnFramework(Diagnostics));
         Plugin.Framework.Update += Update;
         pluginInterface.UiBuilder.Draw += Draw;
+        InitializeCaptureProgress();
     }
 
     public bool IsActive => session.IsActive;
     /// <summary>Managed cache/history writes accepted during close, drained outside Framework.</summary>
     public Task DrainManagedAsync() => managedDrain ?? Task.CompletedTask;
+    /// <summary>Actual provider work and late texture release, awaited only after Framework close.</summary>
+    public Task DrainPhysicalAsync() => physicalDrain ?? incompletePhysicalClose.Task;
     public PortraitLook? Current => session.Current;
     public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
     public IReadOnlyList<string> SourceSummary => ownedView.Character == CurrentCharacter() ? sourceSummary : [];
@@ -476,6 +481,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public void Dispose()
     {
         if (disposed) return;
+        try { DisposeCore(); }
+        finally { DisposeCaptureProgress(); }
+    }
+
+    private void DisposeCore()
+    {
         Task photoDrain = Task.CompletedTask;
         void Release()
         {
@@ -484,6 +495,10 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             DisposeLightingFit();
             photoDrain = photos.BeginDispose();
             liveImageService?.Dispose();
+            physicalDrain = Task.WhenAll(photos.DrainPhysicalAsync(),
+                liveImageService?.DrainPhysicalAsync() ?? Task.CompletedTask,
+                lightingFitCapture?.DrainPhysicalAsync() ?? Task.CompletedTask,
+                window.DrainPhysicalAsync(), nativeLivePhysicalDrain);
             liveCaptureAPI?.Dispose();
             FlushEditing();
             if (!session.Close() && !target.AbortCapturedEditor())

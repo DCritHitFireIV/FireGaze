@@ -24,16 +24,22 @@ internal sealed class PortraitCaptureLayers(int width,int height,IReadOnlyList<P
  public IReadOnlyList<PortraitCaptureLayer> Layers{get;}=layers;
  public bool RequiresComposition{get;}=requiresComposition;
  private int disposed;
- public void Dispose(){if(Interlocked.Exchange(ref disposed,1)!=0)return;foreach(var item in Layers.Select(x=>x.Texture).Distinct<IDalamudTextureWrap>(ReferenceEqualityComparer.Instance))item.Dispose();}
+ public void Dispose(){if(Interlocked.Exchange(ref disposed,1)!=0)return;PortraitCaptureCleanupException.DisposeAll(Layers.Select(x=>(IDisposable)x.Texture).ToArray());}
 }
-internal sealed class PortraitCapturedImage(IDalamudTextureWrap texture,PortraitCaptureSample sample):IDisposable
+internal sealed class PortraitCapturedImage(IDalamudTextureWrap texture,PortraitCaptureSample sample,
+ PortraitCaptureRetirement? retirement=null,IDisposable? lifetime=null):IDisposable
 {
  public IDalamudTextureWrap Texture{get;}=texture;
  public PortraitCaptureSample Sample{get;}=sample;
  public int Width=>Texture.Width;
  public int Height=>Texture.Height;
  private int disposed;
- public void Dispose(){if(Interlocked.Exchange(ref disposed,1)==0)Texture.Dispose();}
+ public void Dispose()
+ {
+  if(Interlocked.Exchange(ref disposed,1)!=0)return;
+  try{if(retirement is null)PortraitCaptureCleanupException.DisposeAll(Texture);else retirement.Release(Texture);}
+  finally{lifetime?.Dispose();}
+ }
 }
 internal interface IPortraitLiveImageApi
 {

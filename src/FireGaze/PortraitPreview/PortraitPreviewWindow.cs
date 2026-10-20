@@ -163,11 +163,10 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         // Feature lifetime cleanup owns its gesture; do not resample a retiring editor from a UI callback.
         lightPointerToken = 0;
         analysis.Invalidate();
-        analysisPreview?.Dispose();
-        analysisPreview = null;
+        ReleaseAnalysisPreview();
         analysisRecord = 0;
         analysisInputStatus = "";
-        comparisonReference.Clear();
+        ClearAnalysisComparison();
     }
 
     public override void PreDraw()
@@ -191,9 +190,8 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         {
             CancelLightInteraction();
             analysis.Invalidate();
-            analysisPreview?.Dispose();
-            analysisPreview = null;
-            comparisonReference.Clear();
+            ReleaseAnalysisPreview();
+            ClearAnalysisComparison();
             ImGui.TextWrapped("请先打开肖像编辑器，再点击旁边的「FireGaze预览」。");
             return;
         }
@@ -560,9 +558,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         if (disposed) return;
         disposed = true;
         CancelLightInteraction();
-        analysis.Dispose();
-        analysisPreview?.Dispose();
-        analysisPreview = null;
+        DisposeAnalysisResources();
         comparisonReference.Dispose();
         foreach (var part in parts.Values) part?.Dispose();
         foreach (var uld in ulds.Values) uld?.Dispose();

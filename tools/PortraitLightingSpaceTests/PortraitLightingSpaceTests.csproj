@@ -3,6 +3,7 @@
   <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitSpaceObserver.cs')">$(DefineConstants);HAS_OBSERVER</DefineConstants>
  </PropertyGroup>
  <ItemGroup>
+  <Compile Include="../../src/FireGaze/PortraitPreview/PortraitCaptureRetirement.cs" />
   <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightingSpace.cs" />
   <Compile Include="../../src/FireGaze/PortraitPreview/PortraitLightDirection.cs" />
   <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorState.cs" />

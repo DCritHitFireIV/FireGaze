@@ -26,6 +26,10 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private readonly PortraitPhotoTrace photoTrace;
     private PortraitPhotoTrace.Operation photoOperation = PortraitPhotoTrace.Operation.Silent;
     private readonly CancellationTokenSource lifetime = new();
+    private readonly PortraitCaptureRetirement physical = new();
+    private IDisposable? captureLifetime;
+    private IDisposable? encodingLifetime;
+    private Task? physicalDrain;
     private readonly Dictionary<long, (string Key, PortraitEditorSnapshot? Snapshot)> records = [];
     private Task<PortraitThumbnailLayers?>? capture;
     private PortraitThumbnailCaptureTicket? ticket;
@@ -71,9 +75,9 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                     () => favoritePhotos.TryGet(key, out image) || cache.TryGet(key, out image))
                 || !PortraitThumbnailImage.IsSafeSize(image)) return null;
             var result = await operation.CallAsync(PortraitPhotoPhase.LoadedImageUpload,
-                () => textures.CreateFromImageAsync(image, "FireGaze history thumbnail", lifetime.Token)).ConfigureAwait(false);
+                () => textures.CreateFromImageAsync(image, "FireGaze history thumbnail", CancellationToken.None)).ConfigureAwait(false);
             if (result.Width == 160 && result.Height == 256) return result;
-            result.Dispose();
+            PortraitCaptureCleanupException.DisposeAll(result);
             return null;
         });
     }
@@ -83,8 +87,16 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         lock (sync) return new { count = imageKeys.Count, bytes = cacheBytes, availableBytes, loaded = loaded.Count,
             loading = loaded.InFlight, capturing = capture is not null || encoding is not null || writing is not null,
             saved, discarded, favoritePhotoCount = favoritePhotos.Count,
-            favoritePhotoError = favoritePhotos.LastError, lastError = lastError ?? cacheError };
+            favoritePhotoError = favoritePhotos.LastError, lastError = lastError ?? cacheError,
+            physicalPending = physical.Pending, physicalRetiring = physicalDrain is { IsCompleted: false },
+            cleanupFailures = physical.CleanupFailures + loaded.CleanupFailures,
+            cleanupFailureType = physical.LastCleanupFailureType ?? loaded.LastCleanupFailureType,
+            phaseTrace = photoOperation.Snapshot };
     }
+
+    // This route must remain independent of the service lock: a public provider
+    // can still be in its synchronous prefix while Framework owns that lock.
+    public PortraitPhotoStageSnapshot[] ReadCaptureProgress() => Volatile.Read(ref photoOperation).Snapshot;
 
     public bool NeedsStateValidation
     {
@@ -138,7 +150,8 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             }
             var found = currentID is { } id && records.TryGetValue(id, out var record);
             var value = found ? records[currentID!.Value] : default;
-            ready &= found && snapshot is not null && value.Snapshot?.SameForHistory(snapshot) == true;
+            ready &= found && snapshot is not null && value.Snapshot?.SameForHistory(snapshot) == true
+                && physical.CleanupFailures == 0 && loaded.CleanupFailures == 0;
             var eligible = gate.Observe(owner, currentID ?? 0, value.Key ?? "", ready);
             FinishWrite();
             readyToCompose = capture?.IsCompleted == true && ticket is not null && gate.CanAccept(ticket);
@@ -163,14 +176,15 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                         }));
                     }
                 }
-                catch (Exception error) { lastError = error.Message; Reject(); }
-                finally { encoding = null; }
+                catch (Exception error) { physical.ObserveFailure(error); lastError = error.Message; Reject(); }
+                finally { encoding = null; encodingLifetime?.Dispose(); encodingLifetime = null; }
             }
             if (capture?.IsCompleted == true && !readyToCompose)
             {
-                if (capture.IsCompletedSuccessfully) capture.Result?.Dispose();
-                else _ = capture.Exception;
+                if (capture.IsCompletedSuccessfully) physical.Release(capture.Result);
+                else physical.ObserveFailure(capture.Exception);
                 capture = null;
+                captureLifetime?.Dispose(); captureLifetime = null;
                 Reject();
             }
             if (!eligible || capture is not null || encoding is not null || writing is not null || maintenance is not null) return;
@@ -184,8 +198,12 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             ticket = gate.Begin();
             if (ticket is not null)
             {
-                photoOperation = photoTrace.Start(PortraitPhotoOperation.HistoryCapture);
-                capture = source.CaptureAsync(identity, lifetime.Token, photoOperation);
+                Volatile.Write(ref photoOperation, photoTrace.Start(PortraitPhotoOperation.HistoryCapture));
+                captureLifetime = physical.Enter();
+                try { capture = source.CaptureAsync(identity, CancellationToken.None, photoOperation); }
+                catch (Exception error) { physical.ObserveFailure(error); captureLifetime?.Dispose(); captureLifetime = null; throw; }
+                // Dispose may reenter the source's synchronous prefix before capture is assigned.
+                if (disposed) DetachCapture();
             }
         }
     }
@@ -217,17 +235,23 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             if (pointerDown) { gate.Reset(); readyToCompose = false; }
             if (readyToCompose && capture?.IsCompleted == true)
             {
+                var completedCapture = capture; capture = null;
+                var heldCapture = captureLifetime; captureLifetime = null;
+                PortraitThumbnailLayers? layers = null;
                 try
                 {
-                    using var layers = capture.GetAwaiter().GetResult();
+                    layers = completedCapture.GetAwaiter().GetResult();
                     if (layers is null || ticket is null || !gate.CanAccept(ticket)) { Reject(); return; }
                     var inputs = new List<PortraitCaptureLayer> { new(layers.Character) };
                     if (layers.Frame is { } frame) inputs.Add(new(frame, UV0: layers.FrameUV0, UV1: layers.FrameUV1));
                     if (layers.Accent is { } accent) inputs.Add(new(accent, UV0: layers.AccentUV0, UV1: layers.AccentUV1));
-                    encoding = ComposeAndEncode(inputs, layers.Character, lifetime.Token);
+                    encodingLifetime = physical.Enter();
+                    try { encoding = ComposeAndEncode(inputs, layers.Character, lifetime.Token); }
+                    catch (Exception error) { physical.ObserveFailure(error); encodingLifetime?.Dispose(); encodingLifetime = null; throw; }
+                    if (disposed) DetachEncoding();
                 }
-                catch (Exception error) { lastError = error.Message; Reject(); }
-                finally { capture = null; }
+                catch (Exception error) { physical.ObserveFailure(error); lastError = error.Message; Reject(); }
+                finally { physical.Release(layers); heldCapture?.Dispose(); }
             }
         }
     }
@@ -236,32 +260,40 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         IDalamudTextureWrap character, CancellationToken token)
     {
         // Both the compositor and the visibility check own their references before Draw returns.
-        using var retainedCharacter = character.CreateWrapSharingLowLevelResource();
-        var operation = photoOperation;
-        var composed = await new PortraitCaptureSoftwareCompositor(textures, readback)
-            .ComposeAsync(160, 256, layers, token, operation).ConfigureAwait(false);
-        return await Encode(composed, retainedCharacter, token).ConfigureAwait(false);
+        var retainedCharacter = character.CreateWrapSharingLowLevelResource();
+        try
+        {
+            var operation = photoOperation;
+            var composed = await new PortraitCaptureSoftwareCompositor(textures, readback)
+                .ComposeAsync(160, 256, layers, token, operation).ConfigureAwait(false);
+            return await Encode(composed, retainedCharacter, token).ConfigureAwait(false);
+        }
+        finally { physical.Release(retainedCharacter); }
     }
 
     private async Task<byte[]> Encode(IDalamudTextureWrap texture, IDalamudTextureWrap character, CancellationToken token)
     {
-        using (texture)
-        using (var retainedCharacter = character.CreateWrapSharingLowLevelResource())
-        using (var stream = new MemoryStream())
+        IDalamudTextureWrap? retainedCharacter = null;
+        try
         {
+            retainedCharacter = character.CreateWrapSharingLowLevelResource();
+            using var stream = new MemoryStream();
             var operation = photoOperation;
             // A ready native model can precede its first rendered frame. Never make an empty
             // image a permanent cache hit; keep the gate retryable until actual pixels exist.
             var raw = await operation.CallAsync(PortraitPhotoPhase.VisibleReadback,
                 () => readback.GetRawImageAsync(retainedCharacter, new TextureModificationArgs { Uv1 = Vector2.One },
-                    leaveWrapOpen: true, cancellationToken: token)).ConfigureAwait(false);
+                    leaveWrapOpen: true, cancellationToken: CancellationToken.None)).ConfigureAwait(false);
+            token.ThrowIfCancellationRequested();
             if (!PortraitThumbnailImage.HasVisiblePixels(raw.RawData, raw.Specification.Width, raw.Specification.Height,
                 raw.Specification.Pitch, raw.Specification.DxgiFormat)) return [];
             await operation.CallAsync(PortraitPhotoPhase.PngEncode,
                 () => readback.SaveToStreamAsync(texture, Png, stream, leaveWrapOpen: true,
-                    leaveStreamOpen: true, cancellationToken: token)).ConfigureAwait(false);
+                    leaveStreamOpen: true, cancellationToken: CancellationToken.None)).ConfigureAwait(false);
+            token.ThrowIfCancellationRequested();
             return stream.ToArray();
         }
+        finally { physical.Release(retainedCharacter); physical.Release(texture); }
     }
 
     private void Reject()
@@ -321,24 +353,51 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             disposed = true;
             // Provider callbacks can await Present. Schedule them off Framework and observe
             // failures without joining their physical GPU lifetime to managed file cleanup.
+            var cancellationLifetime = physical.Enter();
             _ = lifetime.CancelAsync().ContinueWith(task =>
             {
-                if (task.Exception is not { } error) return;
-                lock (sync) lastError ??= error.GetBaseException().Message;
+                try
+                {
+                    if (task.Exception is { } error)
+                        lock (sync) lastError ??= error.GetBaseException().Message;
+                }
+                finally { cancellationLifetime.Dispose(); }
             }, TaskScheduler.Default);
             gate.Reset();
             loaded.Dispose();
             diskWrite = writing;
             diskMaintenance = maintenance;
             // No blocking wait on Present-dependent copies during hot reload.
-            if (capture is { } pending)
-                _ = pending.ContinueWith(task => { if (task.IsCompletedSuccessfully) task.Result?.Dispose(); else _ = task.Exception; }, TaskScheduler.Default);
-            if (encoding is { } encodingPending)
-                _ = encodingPending.ContinueWith(task => { _ = task.Exception; }, TaskScheduler.Default);
+            DetachCapture();
+            DetachEncoding();
             records.Clear();
             managedDrain = DrainManagedAsync(diskWrite, diskMaintenance);
+            physicalDrain = Task.WhenAll(physical.Seal(), loaded.DrainPhysicalAsync());
             return managedDrain;
         }
+    }
+
+    public Task DrainPhysicalAsync() => physicalDrain ?? throw new InvalidOperationException("Seal photo work before draining it.");
+
+    private void DetachCapture()
+    {
+        if (capture is not { } pending) return;
+        var held = captureLifetime ?? physical.Enter();
+        capture = null; captureLifetime = null;
+        _ = pending.ContinueWith(task =>
+        {
+            try { if (task.IsCompletedSuccessfully) physical.Release(task.Result); else physical.ObserveFailure(task.Exception); }
+            finally { held.Dispose(); }
+        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+    }
+
+    private void DetachEncoding()
+    {
+        if (encoding is not { } pending) return;
+        var held = encodingLifetime ?? physical.Enter();
+        encoding = null; encodingLifetime = null;
+        _ = pending.ContinueWith(task => { try { physical.ObserveFailure(task.Exception); } finally { held.Dispose(); } },
+            CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
     }
 
     private async Task DrainManagedAsync(Task<bool>? diskWrite, Task? diskMaintenance)

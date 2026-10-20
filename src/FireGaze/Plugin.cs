@@ -83,6 +83,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
     private readonly HashSet<string> registeredCommands = new(StringComparer.Ordinal);
     private readonly PluginWorkLifetime workLifetime = new();
     private Task? portraitManagedDrain;
+    private Task? portraitPhysicalDrain;
     private int disposed;
 
     public Plugin(IDalamudPluginInterface pluginInterface)
@@ -443,12 +444,18 @@ public sealed class Plugin : IAsyncDalamudPlugin
         try
         {
             previewToDrain?.Dispose();
-            portraitManagedDrain = previewToDrain?.DrainManagedAsync();
-            portraitPreview = null;
         }
         catch (Exception e)
         {
             Log.Error(e, "[FireGaze] 肖像同步预览清理失败");
+        }
+        finally
+        {
+            // An exceptional Framework release must not let the host skip still-owned
+            // provider work. An unsealed feature deliberately reports an incomplete drain.
+            portraitManagedDrain = previewToDrain?.DrainManagedAsync();
+            portraitPhysicalDrain = previewToDrain?.DrainPhysicalAsync();
+            portraitPreview = null;
         }
         try
         {
@@ -571,10 +578,12 @@ public sealed class Plugin : IAsyncDalamudPlugin
             await Framework.RunOnFrameworkThread(Dispose).ConfigureAwait(false);
         }
 
-        // History, equipment and template writers are sealed by the Framework phase but
-        // perform only managed file I/O. Await their accepted work after that phase returns.
-        var drain = portraitManagedDrain;
-        if (drain is not null) await drain.ConfigureAwait(false);
+        // The host disposes its texture-provider scope after DisposeAsync returns. Logical
+        // cancellation is insufficient: hold that scope through physical completion and late
+        // resource release. When GPU work is stuck this remains visibly pending, never a
+        // successful unload. A file failure must not bypass another unfinished physical task.
+        await Task.WhenAll(portraitManagedDrain ?? Task.CompletedTask,
+            portraitPhysicalDrain ?? Task.CompletedTask).ConfigureAwait(false);
     }
 
     /// <summary>

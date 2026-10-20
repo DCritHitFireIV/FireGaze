@@ -37,7 +37,7 @@ internal sealed class PortraitNativeLiveFrame(PortraitNativeLiveKey key, IDalamu
 
     public void Dispose()
     {
-        if (Interlocked.Exchange(ref disposed, 1) == 0) texture.Dispose();
+        if (Interlocked.Exchange(ref disposed, 1) == 0) PortraitCaptureCleanupException.DisposeAll(texture);
     }
 }
 
@@ -63,7 +63,7 @@ internal sealed class PortraitNativeLiveView : IDisposable
     private long revision;
     private long frameNumber;
     private Slot? current;
-    private int disposalFailures;
+    private readonly PortraitCaptureRetirement physical = new();
 
     public PortraitNativeLiveView(IPortraitNativeLiveSource source)
     {
@@ -71,11 +71,12 @@ internal sealed class PortraitNativeLiveView : IDisposable
         source.Invalidated += Invalidate;
     }
 
-    public int DisposalFailures => Volatile.Read(ref disposalFailures);
+    public int DisposalFailures => physical.CleanupFailures;
+    public Task DrainPhysicalAsync() => physical.Seal();
 
     public void SetEnabled(bool value)
     {
-        PortraitNativeLiveFrame? retired = null;
+        Slot? retired = null;
         lock (gate)
         {
             if (disposed || enabled == value) return;
@@ -83,30 +84,31 @@ internal sealed class PortraitNativeLiveView : IDisposable
             revision++;
             if (!value) retired = RetireCurrent();
         }
-        ReleaseFrame(retired);
+        ReleaseSlot(retired);
     }
 
     public void Invalidate()
     {
-        PortraitNativeLiveFrame? retired;
+        Slot? retired;
         lock (gate)
         {
             revision++;
             retired = RetireCurrent();
         }
-        ReleaseFrame(retired);
+        ReleaseSlot(retired);
     }
 
     public void Update()
     {
         long ticket;
+        IDisposable? candidateLifetime;
         lock (gate)
         {
-            if (disposed || !enabled) return;
+            if (disposed || !enabled || !physical.TryEnter(out candidateLifetime)) return;
             ticket = revision;
         }
         PortraitNativeLiveFrame? candidate = null;
-        PortraitNativeLiveFrame? retired = null;
+        Slot? retired = null;
         try
         {
             if (!source.IsFrameworkThread || !source.TryAcquire(out candidate) || candidate is null
@@ -117,21 +119,24 @@ internal sealed class PortraitNativeLiveView : IDisposable
             }
             lock (gate)
             {
-                if (disposed || !enabled || revision != ticket) return;
+                if (disposed || !enabled || revision != ticket || physical.CleanupFailures != 0) return;
                 // Never deduplicate on SRV: the same render target can contain a new animated frame.
                 retired = RetireCurrent();
-                current = new(candidate, image with { FrameNumber = ++frameNumber });
+                current = new(candidate, image with { FrameNumber = ++frameNumber }, candidateLifetime);
                 candidate = null;
+                candidateLifetime = null;
             }
         }
-        catch (Exception)
+        catch (Exception error)
         {
+            physical.ObserveFailure(error);
             Invalidate();
         }
         finally
         {
-            ReleaseFrame(candidate);
-            ReleaseFrame(retired);
+            physical.Release(candidate);
+            candidateLifetime?.Dispose();
+            ReleaseSlot(retired);
         }
     }
 
@@ -140,7 +145,7 @@ internal sealed class PortraitNativeLiveView : IDisposable
         lock (gate)
         {
             borrow = null;
-            if (disposed || !enabled || current is null || current.Retired) return false;
+            if (disposed || !enabled || current is null || current.Retired || physical.CleanupFailures != 0) return false;
             current.Borrowers++;
             borrow = new(this, current);
             return true;
@@ -160,33 +165,34 @@ internal sealed class PortraitNativeLiveView : IDisposable
 
     internal void Return(Slot slot)
     {
-        PortraitNativeLiveFrame? retired = null;
+        Slot? retired = null;
         lock (gate)
         {
-            if (--slot.Borrowers == 0 && slot.Retired) retired = slot.Frame;
+            if (--slot.Borrowers == 0 && slot.Retired) retired = slot;
         }
-        ReleaseFrame(retired);
+        ReleaseSlot(retired);
     }
 
     // Called under gate. A currently borrowed wrap stays alive until the final Draw borrower returns.
-    private PortraitNativeLiveFrame? RetireCurrent()
+    private Slot? RetireCurrent()
     {
         var slot = current;
         current = null;
         if (slot is null) return null;
         slot.Retired = true;
-        return slot.Borrowers == 0 ? slot.Frame : null;
+        return slot.Borrowers == 0 ? slot : null;
     }
 
-    private void ReleaseFrame(PortraitNativeLiveFrame? frame)
+    private void ReleaseSlot(Slot? slot)
     {
-        try { frame?.Dispose(); }
-        catch (Exception) { Interlocked.Increment(ref disposalFailures); }
+        if (slot is null) return;
+        physical.Release(slot.Frame);
+        slot.Lifetime.Dispose();
     }
 
     public void Dispose()
     {
-        PortraitNativeLiveFrame? retired;
+        Slot? retired;
         lock (gate)
         {
             if (disposed) return;
@@ -196,13 +202,14 @@ internal sealed class PortraitNativeLiveView : IDisposable
             retired = RetireCurrent();
         }
         source.Invalidated -= Invalidate;
-        ReleaseFrame(retired);
+        ReleaseSlot(retired);
     }
 
-    internal sealed class Slot(PortraitNativeLiveFrame frame, PortraitNativeLiveImage image)
+    internal sealed class Slot(PortraitNativeLiveFrame frame, PortraitNativeLiveImage image, IDisposable lifetime)
     {
         public PortraitNativeLiveFrame Frame { get; } = frame;
         public PortraitNativeLiveImage Image { get; } = image;
+        public IDisposable Lifetime { get; } = lifetime;
         public int Borrowers;
         public bool Retired;
     }

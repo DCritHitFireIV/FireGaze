@@ -84,6 +84,112 @@ internal sealed unsafe class PortraitOwnedSceneSlotReader(IPortraitOwnedSceneSlo
         uint ViewState = 0, uint Generation = 0, nint DrawOwner = 0, nint Context = 0,
         nint Camera = 0, uint ContextSlot = 0, uint ContextType = 0, int ContextReferences = 0, byte ContextActive = 0);
 
+    public bool TryReadSourceSlot(PortraitOwnedSceneSlotPhase phase, out uint slot)
+    {
+        slot = uint.MaxValue;
+        try
+        {
+            if (!Qualified(phase) || !SDKLayoutMatches() || !Current(phase)
+                || !ReadSource(phase, out var first) || !ReadSource(phase, out var second)
+                || first != second || !Current(phase)) return false;
+            slot = first.Slot; return true;
+        }
+        catch (Exception) { return false; }
+    }
+
+    public bool TryReadViewSlot(nint view, PortraitOwnedSceneSlotPhase phase, out uint slot)
+    {
+        slot = uint.MaxValue;
+        try
+        {
+            if (view == 0 || !Qualified(phase) || !SDKLayoutMatches()
+                || !Read(view, phase, out ViewHeader first) || !Read(view, phase, out ViewHeader second)
+                || !first.Equals(second) || first.Slot >= 8 || first.ID != first.Slot + 0xF0
+                || !Current(phase)) return false;
+            slot = first.Slot; return true;
+        }
+        catch (Exception) { return false; }
+    }
+
+    // Reads only a candidate. The environment pins its immutable actor generation
+    // on first Setup confirmation and never adopts a later slot replacement.
+    public bool TryReadOwnerCandidate(uint slot, nint view, PortraitOwnedSceneSlotPhase phase,
+        out PortraitOwnedSceneSlotOwner owner)
+    {
+        owner = default;
+        try
+        {
+            if (slot >= 8 || view == 0 || view == phase.Source.Model || !Qualified(phase) || !SDKLayoutMatches()
+                || !Read(view, phase, out ViewHeader header) || header.Slot != slot || header.ID != slot + 0xF0
+                || !Read(EntryAddress(phase.Roots, slot), phase, out ObjectEntry entry)
+                || entry.Character == 0 || entry.Character == (nint)phase.Source.Character || entry.Kind == 0
+                || !Read(entry.Character + 0x74, phase, out uint generation) || generation == 0) return false;
+            PortraitOwnedSceneSlotStage stage;
+            if (header.State == 1 && header.Context == 0 && header.Camera == 0)
+                stage = PortraitOwnedSceneSlotStage.Initialized;
+            else if (header.State is 2 or 3 or 6 && header.Context != 0 && header.Camera != 0)
+                stage = PortraitOwnedSceneSlotStage.Prepared;
+            else return false;
+            var candidate = new PortraitOwnedSceneSlotOwner(view, entry.Character, generation, header.Context, header.Camera, stage);
+            if (!TryReadOwned(slot, candidate, phase, out _)) return false;
+            owner = candidate; return true;
+        }
+        catch (Exception) { return false; }
+    }
+
+    public bool TryReadSourceContext(nint context, PortraitOwnedSceneSlotPhase phase, out ContextState state)
+    {
+        state = default;
+        try
+        {
+            if (context == 0 || !Qualified(phase) || !SDKLayoutMatches() || !Current(phase)
+                || !ReadSource(phase, out var first) || first.Context != context
+                || !ReadSource(phase, out var second) || first != second || !Current(phase)) return false;
+            state = new(first.Slot, first.ContextType, true); return true;
+        }
+        catch (Exception) { return false; }
+    }
+
+    public bool TryReadOwnedContext(nint context, uint slot, PortraitOwnedSceneSlotOwner owner,
+        bool allowLoading, PortraitOwnedSceneSlotPhase phase, out ContextState state)
+    {
+        state = default;
+        try
+        {
+            if (context == 0 || slot >= 8 || owner.View == 0 || owner.Character == 0
+                || owner.CharacterGeneration == 0 || owner.View == phase.Source.Model
+                || owner.Character == (nint)phase.Source.Character || !Qualified(phase) || !SDKLayoutMatches()
+                || !ReadSource(phase, out var sourceBefore) || sourceBefore.Context == context
+                || owner.Stage == PortraitOwnedSceneSlotStage.Prepared && owner.Context != context
+                || owner.Stage == PortraitOwnedSceneSlotStage.Initialized && !allowLoading
+                || !ReadContextBinding(context, slot, owner, allowLoading, phase, out var first)
+                || !ReadSource(phase, out var sourceMiddle) || sourceBefore != sourceMiddle
+                || !ReadContextBinding(context, slot, owner, allowLoading, phase, out var second)
+                || first != second || !ReadSource(phase, out var sourceAfter) || sourceBefore != sourceAfter
+                || !Current(phase)) return false;
+            state = first; return true;
+        }
+        catch (Exception) { return false; }
+    }
+
+    private bool ReadContextBinding(nint context, uint slot, PortraitOwnedSceneSlotOwner owner,
+        bool allowLoading, PortraitOwnedSceneSlotPhase phase, out ContextState state)
+    {
+        state = default;
+        // Establish a known view and pinned actor before reading the receiver.
+        // An unknown context pointer never becomes an ownership probe.
+        if (!Read(EntryAddress(phase.Roots, slot), phase, out ObjectEntry entry)
+            || entry.Character != owner.Character || entry.Kind == 0
+            || !Read(owner.Character + 0x74, phase, out uint generation) || generation != owner.CharacterGeneration
+            || !Read((nint)(&((Character*)owner.Character)->DrawData.OwnerObject), phase, out nint drawOwner)
+            || drawOwner != owner.Character || !Read(owner.View, phase, out ViewHeader header)
+            || header.Slot != slot || header.ID != slot + 0xF0 || header.Context != context
+            || header.State is not (2 or 3 or 5 or 6) || header.State == 5 && !allowLoading
+            || !Read(context, phase, out ContextHeader value) || value.References <= 0
+            || value.Active > 1) return false;
+        state = new(value.Slot, value.Type, value.Active != 0); return true;
+    }
+
     public bool TryReadIdle(uint slot, PortraitOwnedSceneSlotPhase phase, out PortraitOwnedSceneSlotSnapshot snapshot)
         => TryRead(slot, default, phase, false, out snapshot);
 

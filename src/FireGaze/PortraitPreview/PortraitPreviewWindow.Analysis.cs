@@ -16,6 +16,9 @@ internal sealed partial class PortraitPreviewWindow
     private string analysisSourceKey = "";
     private string analysisInputStatus = "";
     private IDalamudTextureWrap? analysisPreview;
+    private IDisposable? analysisPreviewLifetime;
+    private readonly PortraitCaptureRetirement analysisPhysical = new();
+    private int analysisResourcesDisposed;
 
     private void DrawAnalysisWindow()
     {
@@ -70,7 +73,7 @@ internal sealed partial class PortraitPreviewWindow
                 DrawComparison(compared, "analysis:" + analysisSourceKey);
         }
         ImGui.End();
-        if (!showAnalysis) { analysis.Invalidate(); analysisPreview?.Dispose(); analysisPreview = null; comparisonReference.Clear(); }
+        if (!showAnalysis) { analysis.Invalidate(); ReleaseAnalysisPreview(); ClearAnalysisComparison(); }
     }
 
     private void StartCurrentAnalysis()
@@ -89,51 +92,64 @@ internal sealed partial class PortraitPreviewWindow
             return;
         }
         if (analysis.IsBusy) return;
+        if (!analysisPhysical.TryEnter(out var inputLifetime)) return;
         IDalamudTextureWrap? retained = null;
-        var live = feature.AcquireCurrentLiveImage();
-        if (live is not null && live.Sample.Scope == scope)
+        PortraitCapturedImage? live = null;
+        try
         {
-            var liveKey = LiveSourceKey(live, scope);
-            if (analysisSourceKey == liveKey && analysis.CurrentResult is not null)
+            // Admission precedes the external sharing prefix, which may reenter window close.
+            live = feature.AcquireCurrentLiveImage();
+            if (Volatile.Read(ref analysisResourcesDisposed) != 0) return;
+            IDalamudTextureWrap source;
+            string key;
+            if (live is not null && live.Sample.Scope == scope)
             {
-                live.Dispose();
-                return;
+                key = LiveSourceKey(live, scope);
+                source = live.Texture;
             }
+            else
+            {
+                analysisPhysical.Release(live); live = null;
+                if (scope == PortraitImageScope.VisibleAdventurerPlate)
+                {
+                    ResetAnalysisSource();
+                    analysisRecord = current.ID;
+                    analysisInputStatus = "当前完整铭牌图像尚未就绪，请打开铭牌并稍候再试。";
+                    return;
+                }
+                if (analysisPhysical.CleanupFailures != 0 || photos?.Get(current.ID) is not { } texture)
+                {
+                    ResetAnalysisSource();
+                    analysisRecord = current.ID;
+                    analysisInputStatus = "当前高分图像尚未就绪，请暂停动作并稍候再试。";
+                    return;
+                }
+                key = $"history:{feature.SourceGuideKey}:{current.ID}";
+                source = texture;
+            }
+            if (analysisSourceKey == key && analysis.CurrentResult is not null) return;
             ResetAnalysisSource();
-            retained = live.Texture.CreateWrapSharingLowLevelResource();
-            analysisPreview = live.Texture.CreateWrapSharingLowLevelResource();
-            analysisSourceKey = liveKey;
+            if (analysisPhysical.CleanupFailures != 0 || Volatile.Read(ref analysisResourcesDisposed) != 0) return;
+            retained = source.CreateWrapSharingLowLevelResource();
+            if (!TrySetAnalysisPreview(source)) return;
+            // Detect a failed intermediate release before submitting another provider operation.
+            analysisPhysical.Release(live); live = null;
+            if (analysisPhysical.CleanupFailures != 0 || Volatile.Read(ref analysisResourcesDisposed) != 0)
+            { ReleaseAnalysisPreview(); return; }
+            analysisSourceKey = key;
             analysisRecord = current.ID;
-            live.Dispose();
-            if (!analysis.TryStart(liveKey, token => ReadAnalysis(retained, token))) retained.Dispose();
+            var owned = retained; var held = inputLifetime;
+            if (analysis.TryStart(key, token => ReadAnalysis(owned, held, token)))
+            { retained = null; inputLifetime = null; }
             analysisInputStatus = "";
-            return;
         }
-        live?.Dispose();
-        if (scope == PortraitImageScope.VisibleAdventurerPlate)
+        catch (Exception failure)
         {
-            ResetAnalysisSource();
-            analysisRecord = current.ID;
-            analysisInputStatus = "当前完整铭牌图像尚未就绪，请打开铭牌并稍候再试。";
-            return;
+            analysisPhysical.ObserveFailure(failure);
+            ReleaseAnalysisPreview();
+            analysisInputStatus = "暂时无法读取图像，请重试。";
         }
-        if (photos?.Get(current.ID) is not { } texture)
-        {
-            ResetAnalysisSource();
-            analysisRecord = current.ID;
-            analysisInputStatus = "当前高分图像尚未就绪，请暂停动作并稍候再试。";
-            return;
-        }
-        // Public texture sharing owns the resource until readback completes, including close/unload.
-        var key = $"history:{feature.SourceGuideKey}:{current.ID}";
-        if (analysisSourceKey == key && analysis.CurrentResult is not null) return;
-        ResetAnalysisSource();
-        retained = texture.CreateWrapSharingLowLevelResource();
-        analysisPreview = texture.CreateWrapSharingLowLevelResource();
-        analysisSourceKey = key;
-        analysisRecord = current.ID;
-        if (!analysis.TryStart(key, token => ReadAnalysis(retained, token))) retained.Dispose();
-        analysisInputStatus = "";
+        finally { analysisPhysical.Release(live); analysisPhysical.Release(retained); inputLifetime?.Dispose(); }
     }
 
     private static string LiveSourceKey(PortraitCapturedImage image, PortraitImageScope scope)
@@ -147,19 +163,52 @@ internal sealed partial class PortraitPreviewWindow
     private void ResetAnalysisSource()
     {
         analysis.Invalidate();
-        analysisPreview?.Dispose();
-        analysisPreview = null;
+        ReleaseAnalysisPreview();
         analysisSourceKey = "";
-        comparisonReference.Clear();
+        ClearAnalysisComparison();
         analysisInputStatus = "";
     }
 
-    private static async Task<PortraitImageAnalysisResult> ReadAnalysis(IDalamudTextureWrap retained, CancellationToken token)
+    private bool TrySetAnalysisPreview(IDalamudTextureWrap source)
     {
-        using (retained)
+        if (!analysisPhysical.TryEnter(out var held)) return false;
+        IDalamudTextureWrap? owned = null;
+        try
         {
+            owned = source.CreateWrapSharingLowLevelResource();
+            if (Volatile.Read(ref analysisResourcesDisposed) != 0 || analysisPhysical.CleanupFailures != 0) return false;
+            analysisPreview = owned; analysisPreviewLifetime = held;
+            owned = null; held = null;
+            return true;
+        }
+        finally { analysisPhysical.Release(owned); held?.Dispose(); }
+    }
+
+    private void ReleaseAnalysisPreview()
+    {
+        var texture = analysisPreview; analysisPreview = null;
+        var held = analysisPreviewLifetime; analysisPreviewLifetime = null;
+        analysisPhysical.Release(texture); held?.Dispose();
+    }
+
+    private void DisposeAnalysisResources()
+    {
+        Interlocked.Exchange(ref analysisResourcesDisposed, 1);
+        analysis.Dispose();
+        ReleaseAnalysisPreview();
+        ClearAnalysisComparison();
+        _ = analysisPhysical.Seal();
+    }
+
+    public Task DrainPhysicalAsync() => analysisPhysical.Seal();
+
+    private async Task<PortraitImageAnalysisResult> ReadAnalysis(IDalamudTextureWrap retained, IDisposable held, CancellationToken token)
+    {
+        try
+        {
+            token.ThrowIfCancellationRequested();
             var raw = await Plugin.TextureReadback.GetRawImageAsync(retained,
-                new TextureModificationArgs { Uv1 = Vector2.One }, leaveWrapOpen: true, cancellationToken: token).ConfigureAwait(false);
+                new TextureModificationArgs { Uv1 = Vector2.One }, leaveWrapOpen: true, cancellationToken: CancellationToken.None).ConfigureAwait(false);
             var format = raw.Specification.DxgiFormat;
             if (format is not (28 or 29 or 87 or 91)) throw new InvalidOperationException("Unsupported analysis texture format.");
             token.ThrowIfCancellationRequested();
@@ -168,6 +217,8 @@ internal sealed partial class PortraitPreviewWindow
                 format is 28 or 29 ? PortraitPixelOrder.Rgba : PortraitPixelOrder.Bgra,
                 new(MinimumAlpha: 255)), token).ConfigureAwait(false);
         }
+        catch (Exception failure) { analysisPhysical.ObserveFailure(failure); throw; }
+        finally { analysisPhysical.Release(retained); held.Dispose(); }
     }
 
     private static void DrawHistogram(string label, IReadOnlyList<int> bins, Vector4 color)

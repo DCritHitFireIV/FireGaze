@@ -112,7 +112,7 @@ static class TimelineHookInstallationTests
     }
     static List<IDisposable> Owned(ActorPreviewRuntime runtime)
         => (List<IDisposable>)typeof(ActorPreviewRuntime).GetField("installedHooks", Private)!.GetValue(runtime)!;
-    static ActorPreviewRuntime Create(RecordingInterop interop) => new(
+    internal static ActorPreviewRuntime Create(RecordingInterop interop) => new(
         Proxy.Create<IFramework>((m, _) => m.Name == "get_IsInFrameworkUpdateThread" ? true : null),
         Proxy.Create<IClientState>((m, _) => m.Name == "get_TerritoryType" ? 1u : m.ReturnType == typeof(bool) ? false : null),
         Proxy.Create<IObjectTable>((_, _) => null), Proxy.Create<ICondition>((_, _) => false),
@@ -120,10 +120,17 @@ static class TimelineHookInstallationTests
     static void Equal<T>(T actual, T expected, string message)
     { if (!EqualityComparer<T>.Default.Equals(actual, expected)) throw new Exception($"{message}: expected {expected}; got {actual}"); }
 
-    sealed unsafe class RecordingInterop : IGameInteropProvider
+    internal sealed unsafe class RecordingInterop : IGameInteropProvider
     {
         public List<IDisposable> Hooks { get; } = [];
-        Hook<T> Record<T>() where T : Delegate { var hook = HookBackendDouble.Create<T>(); Hooks.Add(hook); return hook; }
+        public int ThrowAtRecord { get; set; }
+        public bool FailAllDispose { get; set; }
+        Hook<T> Record<T>() where T : Delegate
+        {
+            if (ThrowAtRecord == Hooks.Count + 1) throw new InvalidOperationException("core factory unavailable");
+            var hook = HookBackendDouble.Create<T>(); HookBackendDouble.Get(hook).FailDispose = FailAllDispose;
+            Hooks.Add(hook); return hook;
+        }
         public Hook<T> HookFromSignature<T>(string signature, T detour, IGameInteropProvider.HookBackend backend = IGameInteropProvider.HookBackend.Automatic) where T : Delegate => Record<T>();
         public Hook<T> HookFromAddress<T>(nint address, T detour, IGameInteropProvider.HookBackend backend = IGameInteropProvider.HookBackend.Automatic) where T : Delegate => Record<T>();
         public Hook<T> HookFromAddress<T>(nuint address, T detour, IGameInteropProvider.HookBackend backend = IGameInteropProvider.HookBackend.Automatic) where T : Delegate => Record<T>();
@@ -146,7 +153,7 @@ static class TimelineHookInstallationTests
 // patches. Access suppression lives exclusively in this dynamic test assembly.
 public static class HookBackendDouble
 {
-    public sealed class State { public bool Enabled, FailEnable, FailDispose; public int Disposals; }
+    public sealed class State { public bool Enabled, FailEnable, FailDispose; public int Disposals; public Action? OnEnable; }
     static readonly ConditionalWeakTable<object, State> states = new();
     static readonly Dictionary<Type, Type> types = [];
     static readonly ModuleBuilder module = BuildModule();
@@ -159,7 +166,7 @@ public static class HookBackendDouble
         return assembly.DefineDynamicModule("Backend");
     }
     public static State Get(object hook) => states.GetOrCreateValue(hook);
-    public static void Enable(object hook) { var s = Get(hook); if (s.FailEnable) throw new InvalidOperationException("enable unavailable"); s.Enabled = true; }
+    public static void Enable(object hook) { var s = Get(hook); s.OnEnable?.Invoke(); if (s.FailEnable) throw new InvalidOperationException("enable unavailable"); s.Enabled = true; }
     public static void Dispose(object hook) { var s = Get(hook); s.Disposals++; s.Enabled = false; if (s.FailDispose) throw new InvalidOperationException("dispose unavailable"); }
     public static bool Enabled(object hook) => Get(hook).Enabled;
     public static Hook<T> Create<T>() where T : Delegate

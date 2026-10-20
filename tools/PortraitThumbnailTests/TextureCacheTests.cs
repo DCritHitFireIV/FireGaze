@@ -12,6 +12,37 @@ internal static class TextureCacheTests
 #else
         var checks = 0;
         void Check(bool condition, string name) { if (!condition) throw new InvalidOperationException(name); checks++; Console.WriteLine("PASS " + name); }
+        {
+            var owner = new PortraitCaptureRetirement();
+            var released = new Texture();
+            var heldDuringRelease = false;
+            released.OnDispose = () =>
+            {
+                if (released.Disposals != 1) return;
+                owner.Release(released);
+                heldDuringRelease = !owner.Seal().IsCompleted;
+            };
+            owner.Release(released);
+            Check(released.Disposals == 1 && heldDuringRelease && owner.Seal().IsCompletedSuccessfully,
+                "same-wrapper reentrant cleanup never disposes twice or retires before the first release returns");
+            owner.Release(released);
+            Check(released.Disposals == 1, "duplicate cleanup after successful retirement remains an idempotent no-op");
+        }
+        {
+            var owner = new PortraitCaptureRetirement();
+            var failed = new Texture { OnDispose = () => throw new InvalidOperationException("unknown native release state") };
+            owner.Release(failed); owner.Release(failed);
+            Check(failed.Disposals == 1 && owner.CleanupFailures == 1 && !owner.Seal().IsCompleted,
+                "a quarantined wrapper is never retried by duplicate cleanup callbacks");
+        }
+        {
+            var owner = new PortraitCaptureRetirement();
+            var weak = ReleaseCollectible(owner);
+            GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect();
+            Check(!weak.TryGetTarget(out _) && owner.Seal().IsCompletedSuccessfully,
+                "successful once-only release bookkeeping does not strongly retain historical texture wrappers");
+            GC.KeepAlive(owner);
+        }
         var loads = new ConcurrentDictionary<string, TaskCompletionSource<Texture>>();
         var calls = 0;
         using (var cache = new PortraitThumbnailTextureCache<Texture>(key =>
@@ -40,9 +71,12 @@ internal static class TextureCacheTests
         var late = new TaskCompletionSource<Texture?>(TaskCreationOptions.RunContinuationsAsynchronously);
         var disposed = new PortraitThumbnailTextureCache<Texture>(_ => late.Task);
         disposed.Get("late"); disposed.Dispose();
+        var retirement = disposed.DrainPhysicalAsync();
+        Check(!retirement.IsCompleted, "decoder retirement includes queued provider work before a task has returned");
         Check(disposed.Count == 0 && disposed.InFlight == 1, "disposing returns without waiting for an unfinished decoder");
         var lateTexture = new Texture(); late.SetResult(lateTexture);
         await Until(() => lateTexture.Disposals == 1 && disposed.InFlight == 0);
+        await retirement.WaitAsync(TimeSpan.FromSeconds(5));
         Check(disposed.Count == 0 && lateTexture.Disposals == 1, "an asynchronous result arriving after disposal is released once");
 
         var invalidatedLoad = new TaskCompletionSource<Texture?>(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -63,6 +97,47 @@ internal static class TextureCacheTests
             cache.Invalidate("same");
             Check(cache.Count == 0 && replacement.Disposals == 1, "invalidating a resident releases it once");
         }
+        foreach (var stage in new[] { "late", "resident", "eviction", "invalidation" })
+        {
+            var completion = new TaskCompletionSource<Texture?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var cache = new PortraitThumbnailTextureCache<Texture>(key => key == "failed" ? completion.Task : Task.FromResult<Texture?>(null), capacity: 1);
+            var failed = new Texture { OnDispose = () => throw new InvalidOperationException("unconfirmed release") };
+            cache.Get("failed");
+            if (stage == "late") cache.Dispose();
+            completion.SetResult(failed);
+            await Until(() => stage == "late" ? failed.Disposals == 1 : cache.Count == 1);
+            if (stage == "eviction") cache.Get("replacement");
+            if (stage == "invalidation") cache.Invalidate("failed");
+            cache.Dispose();
+            var failedRetirement = cache.DrainPhysicalAsync();
+            await Task.Delay(20);
+            Check(!failedRetirement.IsCompleted && failed.Disposals == 1,
+                stage + " texture cleanup failure quarantines its provider ownership instead of completing host retirement");
+        }
+        {
+            var callsAfterFailure = 0;
+            var failed = new Texture { OnDispose = () => throw new InvalidOperationException("unconfirmed release") };
+            var cache = new PortraitThumbnailTextureCache<Texture>(_ =>
+            { Interlocked.Increment(ref callsAfterFailure); return Task.FromResult<Texture?>(failed); });
+            cache.Get("one"); await Until(() => cache.Count == 1);
+            cache.Invalidate("one");
+            cache.Get("two"); await Task.Delay(20);
+            Check(callsAfterFailure == 1, "quarantined decoder ownership blocks further allocations instead of escaping the hard resource bound");
+            cache.Dispose();
+        }
+        {
+            var evictionCalls = 0;
+            var failed = new Texture { OnDispose = () => throw new InvalidOperationException("unconfirmed eviction release") };
+            var cache = new PortraitThumbnailTextureCache<Texture>(_ =>
+            { Interlocked.Increment(ref evictionCalls); return Task.FromResult<Texture?>(failed); }, capacity: 1);
+            cache.Get("old"); await Until(() => cache.Count == 1);
+            cache.Get("replacement");
+            await Until(() => cache.InFlight == 0);
+            Check(evictionCalls == 1 && cache.Count == 0 && cache.CleanupFailures == 1 && failed.Disposals == 1,
+                "same-Get eviction cleanup failure prevents its reserved replacement from starting or publishing a provider load");
+            cache.Dispose();
+            Check(!cache.DrainPhysicalAsync().IsCompleted, "aborted replacement releases its reservation while failed eviction ownership remains held");
+        }
         var failedCalls = 0;
         var releasingLoad = new TaskCompletionSource<Texture?>(TaskCreationOptions.RunContinuationsAsynchronously);
         using (var releaseGate = new ManualResetEventSlim(false))
@@ -73,9 +148,14 @@ internal static class TextureCacheTests
             releasingLoad.SetResult(releasing);
             await Until(() => releasing.Disposals == 1);
             var heldSlot = cache.InFlight == 1 && cache.TotalCount == 1;
+            cache.Dispose();
+            var physical = cache.DrainPhysicalAsync();
+            var heldForRelease = !physical.IsCompleted;
             releaseGate.Set();
             await Until(() => cache.InFlight == 0);
+            await physical.WaitAsync(TimeSpan.FromSeconds(5));
             Check(heldSlot, "a stale texture keeps its resource reservation until disposal actually finishes");
+            Check(heldForRelease, "host decoder retirement stays incomplete until late texture disposal returns");
         }
         using (var cache = new PortraitThumbnailTextureCache<Texture>(_ =>
         {
@@ -106,6 +186,13 @@ internal static class TextureCacheTests
     }
 
 #if HAS_TEXTURE_CACHE
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private static WeakReference<Texture> ReleaseCollectible(PortraitCaptureRetirement owner)
+    {
+        var texture = new Texture();
+        owner.Release(texture);
+        return new(texture);
+    }
     private static void CheckLimit(Action action)
     {
         try { action(); } catch (ArgumentOutOfRangeException) { return; }

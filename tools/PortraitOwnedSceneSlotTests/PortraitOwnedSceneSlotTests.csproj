@@ -6,6 +6,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs')">$(DefineConstants);OWNED_SLOT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitContextInterception.cs" Link="PortraitContextInterception.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlot*.cs" Link="%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" />
     <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>

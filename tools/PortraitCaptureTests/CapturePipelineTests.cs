@@ -60,6 +60,26 @@ internal static class CapturePipelineTests
   var accepted=new CountingCaptureTexture();fitSource.Inputs=new(new(accepted,new()),[],new(2,1),fitSource.Surface);
   var fitTask=fitApi.CaptureAsync(fitSource.Sample,fitSource.Surface);Check(fitTextures.CopyCalls==1,"matching expected surface starts exactly one physical copy");
   fitTextures.Copy.SetResult(new CountingCaptureTexture(2,1));using(var result=await fitTask)Check(result is{Width:2,Height:1},"matching fit surface preserves actual dimensions");
+  foreach(var stage in new[]{"portrait-input","portrait-copy","plate-input"})
+  {
+   var failingSource=new FakeLiveSource();var failingTextures=new FakeCaptureTextures();
+   using var failingApi=new PortraitLiveCaptureApi(failingSource,failingTextures);
+   var bad=new CountingCaptureTexture{OnDispose=()=>throw new InvalidOperationException("unconfirmed release")};
+   var other=new CountingCaptureTexture();
+   var sample=failingSource.Sample;
+   if(stage=="plate-input")sample=sample with{Scope=PortraitImageScope.VisibleAdventurerPlate,Plate=new(1,2,3,4,5,6,7,new(200,100,576,960),"plate")};
+   else failingSource.Inputs=new(new(stage=="portrait-input"?bad:new CountingCaptureTexture(),new()),[new(other)],new(576,960));
+   failingSource.Sample=sample;
+   var retirement=new PortraitCaptureRetirement();var held=retirement.Enter();
+   var operation=failingApi.CaptureAsync(sample);
+   if(stage=="plate-input"){failingTextures.Viewport.SetResult(bad);await Until(()=>failingTextures.CopyCalls==1);}
+   failingTextures.Copy.SetResult(stage=="portrait-copy"?bad:new CountingCaptureTexture());
+   try{using var result=await operation;}catch(Exception cleanupFailure){retirement.ObserveFailure(cleanupFailure);}
+   held.Dispose();
+   Check(!retirement.Seal().IsCompleted&&retirement.CleanupFailures>0,stage+" cleanup failure crosses the actual API task into host physical quarantine");
+   Check(stage=="plate-input"||other.Disposes==1,stage+" failure attempts every independent overlay cleanup");
+   Check(failingTextures.PreparedTexture is null||failingTextures.PreparedTexture.Disposes==1,stage+" failure releases unpublished flattened output");
+  }
   return checks;
 #endif
  }

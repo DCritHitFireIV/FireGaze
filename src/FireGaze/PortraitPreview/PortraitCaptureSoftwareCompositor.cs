@@ -59,9 +59,9 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
             // transfers, even an already-cancelled operation must execute its release path.
             return Task.Run(() => ComposeOwnedAsync(width, height, owned, token, operation));
         }
-        catch
+        catch (Exception error)
         {
-            Release(owned);
+            if (Release(owned) is { } cleanup) throw new AggregateException(error, cleanup);
             throw;
         }
     }
@@ -84,7 +84,7 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
                     // Official format normalization handles compressed game UI textures. Keep
                     // full source UV/dimensions: placement, cropping and filtering happen below.
                     new TextureModificationArgs { DxgiFormat = 28, Uv0 = Vector2.Zero, Uv1 = Vector2.One },
-                    leaveWrapOpen: true, cancellationToken: token), index).ConfigureAwait(false);
+                    leaveWrapOpen: true, cancellationToken: CancellationToken.None), index).ConfigureAwait(false);
                 token.ThrowIfCancellationRequested();
                 ValidateRaw(raw.Specification, raw.RawData, layer);
                 await operation.CallAsync(PortraitPhotoPhase.CpuComposite, () => Task.Run(() => CompositeLayer(canvas, width, height, layer,
@@ -96,7 +96,7 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
             token.ThrowIfCancellationRequested();
             output = await operation.CallAsync(PortraitPhotoPhase.Upload,
                 () => textures.CreateFromRawAsync(new RawImageSpecification(width, height, 28, width * 4),
-                    rgba, debugName: "FireGaze portrait CPU composition", cancellationToken: token)).ConfigureAwait(false);
+                    rgba, debugName: "FireGaze portrait CPU composition", cancellationToken: CancellationToken.None)).ConfigureAwait(false);
             // A provider may complete successfully after ignoring cancellation. Do not publish that
             // resource, and do not abandon its physical task (or release inputs) before completion.
             token.ThrowIfCancellationRequested();
@@ -111,11 +111,11 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
         // A cleanup failure must not replace the original operation/cancellation exception, and
         // cannot hide an uploaded resource which the caller will never receive to dispose.
         var releaseFailure = Release(layers);
-        failure ??= releaseFailure;
+        if (releaseFailure is not null) failure = failure is null ? releaseFailure : new AggregateException(failure, releaseFailure);
         if (failure is not null)
         {
-            try { output?.Dispose(); }
-            catch { /* Preserve the first failure after attempting every owned cleanup. */ }
+            try { PortraitCaptureCleanupException.DisposeAll(output); }
+            catch (Exception cleanup) { failure = new AggregateException(failure, cleanup); }
             System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(failure).Throw();
         }
         return output!;
@@ -237,13 +237,8 @@ internal sealed class PortraitCaptureSoftwareCompositor(ITextureProvider texture
     private static Exception? Release(IReadOnlyList<OwnedLayer> layers)
     {
         // Do not leave later wrappers unreleased if an individual wrapper's disposal fails.
-        Exception? failure = null;
-        foreach (var layer in layers)
-        {
-            try { layer.Texture.Dispose(); }
-            catch (Exception error) { failure ??= error; }
-        }
-        return failure;
+        try { PortraitCaptureCleanupException.DisposeAll(layers.Select(value => (IDisposable)value.Texture).ToArray()); return null; }
+        catch (Exception error) { return error; }
     }
 
     private sealed record OwnedLayer(IDalamudTextureWrap Texture, int Width, int Height,

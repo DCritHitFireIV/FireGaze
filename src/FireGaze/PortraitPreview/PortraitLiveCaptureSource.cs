@@ -155,7 +155,7 @@ internal sealed unsafe class PortraitLiveCaptureSource:IPortraitLiveCaptureSourc
    var surface=new PortraitCaptureSurface(Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))),size.Width,size.Height);
    inputs=new(new(character.Texture,copy),layers,size,surface);acquired.Clear();return true;
   }
-  finally{foreach(var layer in acquired)layer.Texture.Dispose();}
+  finally{PortraitCaptureCleanupException.DisposeAll(acquired.Select(layer=>(IDisposable)layer.Texture).ToArray());}
  }
 
  private static string? PlateVisualKey(AgentCharaCard.Storage* storage)

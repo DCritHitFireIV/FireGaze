@@ -114,6 +114,30 @@ Case("concurrent replacement cannot dispose an active Draw borrow", () =>
     draw.Dispose(); view.Dispose(); Check(source.Textures.Single().Disposes == 1, "cross-thread teardown releases after Draw completion");
 });
 Case("native node source proves owner before and after bounds and retain", () => NativeCases(Check));
+Case("native live physical retirement includes acquisition prefix and outstanding Draw borrowers", () =>
+{
+    var source = new Source(); var view = new PortraitNativeLiveView(source); view.SetEnabled(true);
+    Task? prefixDrain = null; var prefixHeld = false;
+    source.OnAcquire = () => { view.Dispose(); prefixDrain = PhysicalDrain(view); prefixHeld = !prefixDrain.IsCompleted; };
+    view.Update();
+    Check(prefixHeld && prefixDrain!.IsCompletedSuccessfully && source.Textures.Single().Disposes == 1,
+        "reentrant acquisition cannot retire provider scope until its late frame is released");
+    source = new Source(); view = new(source); view.SetEnabled(true); view.Update();
+    var borrow = GetBorrow(view); view.Dispose(); var drain = PhysicalDrain(view);
+    Check(!drain.IsCompleted && source.Textures.Single().Disposes == 0,
+        "physical retirement waits for the final outstanding Draw borrower");
+    borrow.Dispose();
+    Check(drain.IsCompletedSuccessfully && source.Textures.Single().Disposes == 1,
+        "returning the last Draw borrower releases resource before host retirement completes");
+});
+Case("native live failed release quarantines ownership and prevents another acquisition", () =>
+{
+    var source = new Source { OnCreated = value => value.OnDispose = () => throw new IOException("unconfirmed native live release") };
+    var view = new PortraitNativeLiveView(source); view.SetEnabled(true); view.Update();
+    view.SetEnabled(false); view.SetEnabled(true); view.Update(); view.Dispose();
+    Check(!PhysicalDrain(view).IsCompleted && source.Calls == 1 && source.Textures.Single().Disposes == 1,
+        "failed release holds host provider scope without retry or further native acquisition");
+});
 NativeLiveControllerCases.Run(Case, Check);
 NativeLiveFeatureWiringCases.Run(Case, Check);
 Console.WriteLine($"PortraitNativeLiveViewTests: {checks} checks, {failures.Count} failed");
@@ -121,6 +145,7 @@ return failures.Count == 0 ? 0 : 1;
 
 static PortraitNativeLiveBorrow GetBorrow(PortraitNativeLiveView view)
     => view.TryBorrow(out var value) && value is not null ? value : throw new InvalidOperationException("expected borrow");
+static Task PhysicalDrain(object owner) => owner.GetType().GetMethod("DrainPhysicalAsync")?.Invoke(owner, null) as Task ?? Task.CompletedTask;
 
 static unsafe void NativeCases(Action<bool,string> check)
 {
@@ -164,6 +189,11 @@ static unsafe void NativeCases(Action<bool,string> check)
     check(!source.TryAcquire(out _) && componentLookups==0 && api.Textures.Count==beforeInvalidation,
         "invalidation inside final addon callback stops before old native structures or component lookup are used");
     api.OnAddon=null; api.OnFind=null;
+    api.OnCreated=value=>value.OnDispose=()=>throw new IOException("unconfirmed rejected native SRV");
+    api.OnRetain=()=>api.Owner=new(api.Owner.AccountID+1,api.Owner.ContentID+1);
+    var rejectedView=new PortraitNativeLiveView(source);rejectedView.SetEnabled(true);rejectedView.Update();rejectedView.Dispose();
+    check(!PhysicalDrain(rejectedView).IsCompleted,"native source rejected-owner cleanup failure reaches the host retirement quarantine");
+    api.OnCreated=null;api.OnRetain=null;
     var before=api.Textures.Count; source.Dispose();
     check(!source.TryAcquire(out _) && api.Textures.Count==before,"disposed node source cannot reacquire");
 }
@@ -171,7 +201,7 @@ static unsafe void NativeCases(Action<bool,string> check)
 sealed class TextureLease(nint handle=123,int width=512,int height=512):IDalamudTextureWrap
 {
     public ImTextureID Handle=>new(handle); public int Width=>width; public int Height=>height;
-    public int Disposes; public void Dispose()=>Interlocked.Increment(ref Disposes);
+    public int Disposes; public Action? OnDispose; public void Dispose(){Interlocked.Increment(ref Disposes);OnDispose?.Invoke();}
 }
 sealed class Source:IPortraitNativeLiveSource
 {
@@ -181,11 +211,12 @@ sealed class Source:IPortraitNativeLiveSource
     public nint Handle=123; public PortraitNativeLiveKey Key=KeyA;
     public (uint ActualWidth,uint ActualHeight,uint Width,uint Height) Dimensions=(400,500,512,512);
     public List<TextureLease> Textures=[];
+    public Action<TextureLease>? OnCreated;
     public void Invalidate()=>Invalidated?.Invoke();
     public bool TryAcquire(out PortraitNativeLiveFrame? frame)
     {
         Calls++; frame=null; if(Fail)return false; OnAcquire?.Invoke();
-        var d=Dimensions; var texture=new TextureLease(Handle,(int)d.Width,(int)d.Height); Textures.Add(texture);
+        var d=Dimensions; var texture=new TextureLease(Handle,(int)d.Width,(int)d.Height); Textures.Add(texture);OnCreated?.Invoke(texture);
         frame=new(Key,texture,d.Width,d.Height,d.ActualWidth,d.ActualHeight,uint.MaxValue); return true;
     }
 }
@@ -194,6 +225,7 @@ sealed class NodeApi:IPortraitNativeLiveNodeApi
     public bool IsFrameworkThread=>true; public PortraitIdentity Identity; public PortraitCaptureOwner Owner=new(1,2);
     public nint Addon; public nint Component; public Action? OnBounds; public Action? OnRetain; public Action? OnFind; public Action? OnAddon; public bool ThrowRetain;
     public List<TextureLease> Textures=[];
+    public Action<TextureLease>? OnCreated;
     public PortraitIdentity? ReadReadyEditor()=>Identity;
     public PortraitCaptureOwner ReadOwner()=>Owner;
     public nint ReadEditorAddon() { OnAddon?.Invoke(); return Addon; }
@@ -202,7 +234,7 @@ sealed class NodeApi:IPortraitNativeLiveNodeApi
     public IDalamudTextureWrap Retain(nint handle,int width,int height)
     {
         if(ThrowRetain)throw new InvalidOperationException("retain unavailable");
-        var result=new TextureLease(handle,width,height); Textures.Add(result); OnRetain?.Invoke(); return result;
+        var result=new TextureLease(handle,width,height); Textures.Add(result);OnCreated?.Invoke(result); OnRetain?.Invoke(); return result;
     }
 }
 #endif

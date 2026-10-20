@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/FireGaze.LocalPreview/FireGaze.LocalPreview.csproj" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Runtime/NativeTimelineBoundaryQualifier.cs" Link="NativeTimelineBoundaryQualifier.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Runtime/NativeTimelineBackendContract.cs" Link="NativeTimelineBackendContract.cs" />
+    <Compile Include="../NativeCompatibilityTests/TimelineHookInstallationTests.cs" Link="TimelineHookInstallationTests.cs" />
+    <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>
+    <Reference Include="Serilog"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Serilog.dll</HintPath></Reference>
+    <Reference Include="Lumina"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Lumina.dll</HintPath></Reference>
+    <Reference Include="Lumina.Excel"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Lumina.Excel.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

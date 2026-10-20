@@ -27,26 +27,30 @@ internal interface IPortraitLightingFitReadback
 internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptureApi api,IPortraitLightingFitReadback readback):IDisposable
 {
  private readonly object sync=new();
+ private readonly PortraitCaptureRetirement physical=new();
  private Work? work;
  private long drawSerial;
  private bool disposed;
  public bool IsBusy{get{lock(sync)return work is not null;}}
+ public int CleanupFailures=>physical.CleanupFailures;
+ public string? LastCleanupFailureType=>physical.LastCleanupFailureType;
 
  public bool TryReadFrame(PortraitCaptureViewport viewport,out PortraitLightingFitCaptureFrame? frame)
  {
   frame=null;
-  if(!api.IsFrameworkThread||!viewport.IsValid)return false;
   lock(sync)
   {
+   if(disposed||!viewport.IsValid||!physical.TryEnter(out var lifetime))return false;
    try
    {
-    if(disposed||!api.TrySample(PortraitImageScope.Portrait,viewport,out var sample)
+    if(!api.IsFrameworkThread||!api.TrySample(PortraitImageScope.Portrait,viewport,out var sample)
      ||sample is not{IsValid:true,Scope:PortraitImageScope.Portrait}||sample.Viewport!=viewport
      ||!api.TryDescribePortrait(sample,out var surface)||surface is not{IsValid:true}
      ||!api.TrySample(PortraitImageScope.Portrait,viewport,out var after)||after!=sample||disposed)return false;
     frame=new(sample,surface);return true;
    }
-   catch(Exception){return false;}
+   catch(Exception failure){physical.ObserveFailure(failure);return false;}
+   finally{lifetime.Dispose();}
   }
  }
 
@@ -54,9 +58,10 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
  {
   lock(sync)
   {
-   if(disposed||work is not null||!api.IsFrameworkThread||expected is not{IsValid:true}||!Current(expected))
+   if(disposed||work is not null||!api.IsFrameworkThread||expected is not{IsValid:true}||!Current(expected)
+    ||!physical.TryEnter(out var lifetime))
     return Task.FromException<IReadOnlyList<PortraitLightRgba>>(Failure());
-   work=new(expected,drawSerial);
+   work=new(expected,drawSerial,lifetime);
    return work.Publication.Task;
   }
  }
@@ -79,7 +84,7 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
     if(drawSerial-active.StartedDraw<2)return;
     active.Phase=Phase.Copying;active.Starting=true;
     try{active.Copy=api.CaptureAsync(active.Expected.Sample,active.Expected.Surface);}
-    catch(Exception){Finish(active);}
+    catch(Exception failure){physical.ObserveFailure(failure);Finish(active);}
     finally{active.Starting=false;}
     if(disposed)Detach(active);
     return;
@@ -88,7 +93,7 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
    {
     if(active.Copy?.IsCompleted!=true)return;
     try{active.Layers=active.Copy.GetAwaiter().GetResult();}
-    catch(Exception){active.Invalid=true;}
+    catch(Exception failure){physical.ObserveFailure(failure);active.Invalid=true;}
     active.CopyConsumed=true;
     if(active.Invalid||active.Layers is null||active.Layers.Width!=active.Expected.Width
      ||active.Layers.Height!=active.Expected.Height||active.Layers.Layers.Count==0){Finish(active);return;}
@@ -112,11 +117,12 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
    if(active.Read?.IsCompleted!=true)return;
    IReadOnlyList<PortraitLightRgba>? pixels=null;
    try{pixels=active.Read.GetAwaiter().GetResult();}
-   catch(Exception){active.Invalid=true;}
+   catch(Exception failure){physical.ObserveFailure(failure);active.Invalid=true;}
    if(active.Invalid||pixels is null||pixels.Count!=(long)active.Expected.Width*active.Expected.Height
     ||pixels.Any(pixel=>!pixel.Rgb.IsValid||pixel.A is <0 or >255)){Finish(active);return;}
    active.Publication.TrySetResult(Array.AsReadOnly(pixels.ToArray()));
    if(ReferenceEquals(work,active))work=null;
+   active.Lifetime.Dispose();
   }
  }
 
@@ -124,7 +130,8 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
  {
   // A public readback provider may do staging/Present work before it returns its Task. Keep that
   // synchronous prefix outside Framework: Update only transfers an independently owned wrapper.
-  using(texture)return await Task.Run(()=>readback.ReadAsync(texture)).ConfigureAwait(false);
+  try{return await Task.Run(()=>readback.ReadAsync(texture)).ConfigureAwait(false);}
+  finally{physical.Release(texture);}
  }
 
  /// <summary>Call exactly once per UiBuilder.Draw. No native state is read here.</summary>
@@ -144,8 +151,8 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
     if(!disposed&&!active.Invalid&&ReferenceEquals(work,active))
     {active.Candidate=composed;composed=null;active.Phase=Phase.Composed;}
    }
-   catch(Exception){active.Invalid=true;}
-   finally{composed?.Dispose();layers.Dispose();active.Starting=false;}
+   catch(Exception failure){physical.ObserveFailure(failure);active.Invalid=true;}
+   finally{physical.Release(composed);physical.Release(layers);active.Starting=false;}
    if(disposed||active.Invalid)Finish(active);
   }
  }
@@ -163,11 +170,13 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
  private static InvalidOperationException Failure()=>new("当前肖像图像已变化或尚未准备好，请重试。");
  private void Finish(Work active)
  {
-  active.Layers?.Dispose();active.Layers=null;
-  active.Candidate?.Dispose();active.Candidate=null;
+  physical.Release(active.Layers);active.Layers=null;
+  physical.Release(active.Candidate);active.Candidate=null;
   active.Publication.TrySetException(Failure());
   if(ReferenceEquals(work,active))work=null;
+  active.Lifetime.Dispose();
  }
+ public Task DrainPhysicalAsync()=>physical.Seal();
 
  public void Dispose()
  {
@@ -182,31 +191,33 @@ internal sealed class PortraitLightingFitCaptureBridge(IPortraitLightingFitCaptu
 
  private void Detach(Work active)
  {
-  active.Layers?.Dispose();active.Layers=null;
-  active.Candidate?.Dispose();active.Candidate=null;
+  if(active.Detached)return;active.Detached=true;
+  physical.Release(active.Layers);active.Layers=null;
+  physical.Release(active.Candidate);active.Candidate=null;
   if(active.Phase==Phase.Copying&&active.Copy is{} copy&&!active.CopyConsumed)
   {
    active.CopyConsumed=true;
    _=copy.ContinueWith(task=>
    {
-    if(task.IsCompletedSuccessfully)task.Result?.Dispose();else _=task.Exception;
-    active.Publication.TrySetException(Failure());
+    try{if(task.IsCompletedSuccessfully)physical.Release(task.Result);else physical.ObserveFailure(task.Exception);active.Publication.TrySetException(Failure());}
+    finally{active.Lifetime.Dispose();}
    },CancellationToken.None,TaskContinuationOptions.None,TaskScheduler.Default);
   }
   else if(active.Phase==Phase.Reading&&active.Read is{} read)
-   _=read.ContinueWith(task=>{_=task.Exception;active.Publication.TrySetException(Failure());},
+   _=read.ContinueWith(task=>{try{physical.ObserveFailure(task.Exception);active.Publication.TrySetException(Failure());}finally{active.Lifetime.Dispose();}},
     CancellationToken.None,TaskContinuationOptions.None,TaskScheduler.Default);
-  else active.Publication.TrySetException(Failure());
+  else{active.Publication.TrySetException(Failure());active.Lifetime.Dispose();}
   if(ReferenceEquals(work,active))work=null;
  }
 
  private enum Phase{Settling,Copying,WaitingDraw,Composed,Reading}
- private sealed class Work(PortraitLightingFitCaptureFrame expected,long startedDraw)
+ private sealed class Work(PortraitLightingFitCaptureFrame expected,long startedDraw,IDisposable lifetime)
  {
+  public IDisposable Lifetime{get;}=lifetime;
   public PortraitLightingFitCaptureFrame Expected{get;}=expected;
   public long StartedDraw{get;}=startedDraw;
   public Phase Phase;
-  public bool Invalid,Starting,CopyConsumed;
+  public bool Invalid,Starting,CopyConsumed,Detached;
   public Task<PortraitCaptureLayers?>? Copy;
   public PortraitCaptureLayers? Layers;
   public IDalamudTextureWrap? Candidate;

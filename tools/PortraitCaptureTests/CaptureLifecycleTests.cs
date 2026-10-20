@@ -72,8 +72,11 @@ internal static class CaptureLifecycleTests
    var a=new FakeCaptureApi();var service=new PortraitLiveImageService(a,()=>now);
    service.Request(PortraitImageScope.VisibleAdventurerPlate,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
    var before=DateTime.UtcNow;service.Dispose();Check(DateTime.UtcNow-before<TimeSpan.FromSeconds(1)&&!a.Pending.Task.IsCompleted,"unload never waits for Present or an unfinished source");
+   var retirement=PhysicalDrain(service);var wasPending=!retirement.IsCompleted;
    var late=new CountingCaptureTexture();a.Complete(new(800,500,[new(late)],false));
    await Until(()=>late.Disposes==1);
+   await retirement.WaitAsync(TimeSpan.FromSeconds(5));
+   Check(wasPending,"host live-image lifetime cannot retire while physical copy is unfinished");
    service.Dispose();service.Update();service.Draw();Check(late.Disposes==1&&a.Composes==0&&service.AcquireCurrent() is null,"late capture after unload is released once and never published");
   }
   {
@@ -86,16 +89,21 @@ internal static class CaptureLifecycleTests
   }
   {
    var a=new FakeCaptureApi();using var service=new PortraitLiveImageService(a,()=>now);
-   a.OnCapture=service.Dispose;service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
+   var heldDuringPrefix=false;
+   a.OnCapture=()=>{service.Dispose();heldDuringPrefix=!PhysicalDrain(service).IsCompleted;};service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
    var late=new CountingCaptureTexture();a.Complete(new(576,960,[new(late)]));await Until(()=>late.Disposes==1);
    Check(a.Composes==0,"reentrant unload during source acquisition still observes and releases its late result");
+   Check(heldDuringPrefix,"physical live retirement admits ownership before reentrant provider prefix");
   }
   {
    var a=new FakeCaptureApi();using var service=new PortraitLiveImageService(a,()=>now);
    service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
    var layer=new CountingCaptureTexture();a.Complete(new(576,960,[new(layer)]));service.Update();
-   a.OnCompose=service.Dispose;service.Draw();
+   var heldDuringCompose=false;
+   a.OnCompose=()=>{service.Dispose();heldDuringCompose=!PhysicalDrain(service).IsCompleted;};service.Draw();
    Check(layer.Disposes==1&&a.Outputs.Single().Disposes==1&&service.AcquireCurrent() is null,"reentrant unload during composition releases both layers and returned image once");
+   Check(heldDuringCompose,"physical live retirement cannot complete inside a still-running composition prefix");
+   await PhysicalDrain(service).WaitAsync(TimeSpan.FromSeconds(5));
   }
   {
    var a=new FakeCaptureApi();using var service=new PortraitLiveImageService(a,()=>now);
@@ -154,8 +162,72 @@ internal static class CaptureLifecycleTests
     stage+" isolation prevents publication and further native sampling");
    Check(a.Composes==(stage=="layers"?0:1),stage+" isolation starts no extra composition");
   }
+  foreach(var stage in new[]{"late","layers","candidate","published"})
+  {
+   var a=new FakeCaptureApi();var service=new PortraitLiveImageService(a,()=>now);
+   service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
+   var failed=new CountingCaptureTexture{OnDispose=()=>throw new InvalidOperationException("unconfirmed release")};
+   if(stage!="late")
+   {
+    a.Complete(new(576,960,[new(failed)]));service.Update();
+    if(stage is "candidate" or "published")
+    {failed.OnDispose=null;service.Draw();a.Outputs.Single().OnDispose=()=>throw new InvalidOperationException("unconfirmed release");}
+    if(stage=="published")service.Update();
+   }
+   service.Dispose();var retirement=PhysicalDrain(service);
+   if(stage=="late")a.Complete(new(576,960,[new(failed)]));
+   await Until(()=>stage is "candidate" or "published"?a.Outputs.Single().Disposes==1:failed.Disposes==1);
+   await Task.Delay(20);
+   Check(!retirement.IsCompleted,stage+" live texture release failure quarantines ownership and keeps host retirement pending");
+  }
+  {
+   var failed=new CountingCaptureTexture{OnDispose=()=>throw new InvalidOperationException("unconfirmed release")};
+   var other=new CountingCaptureTexture();var layers=new PortraitCaptureLayers(576,960,[new(failed),new(other)]);
+   try{layers.Dispose();}catch(Exception){}
+   Check(failed.Disposes==1&&other.Disposes==1,"layer release attempts every independent resource even when the first release fails");
+  }
+  foreach(var change in new[]{"none","dispose","close","replace","failed consumer release","failed share cleanup"})
+  {
+   var a=new FakeCaptureApi();var service=new PortraitLiveImageService(a,()=>now);
+   service.Request(PortraitImageScope.Portrait,a.Sample.Viewport);service.Update();now=now.AddMilliseconds(200);service.Update();
+   a.Complete(new(576,960,[new(new CountingCaptureTexture())]));service.Update();service.Draw();service.Update();
+   Task? reentrantDrain=null;var heldInPrefix=false;
+   var output=a.Outputs.Single();
+   output.OnShare=shared=>
+   {
+    switch(change)
+    {
+     case "dispose":service.Dispose();reentrantDrain=PhysicalDrain(service);heldInPrefix=!reentrantDrain.IsCompleted;break;
+     case "close":service.Close();break;
+     case "replace":service.Request(PortraitImageScope.VisibleAdventurerPlate,a.Sample.Viewport);break;
+     case "failed consumer release":shared.OnDispose=()=>throw new InvalidOperationException("unknown shared release");break;
+     case "failed share cleanup":shared.OnDispose=()=>throw new InvalidOperationException("unknown prefix release");PortraitCaptureCleanupException.DisposeAll(shared);break;
+    }
+   };
+   PortraitCapturedImage? borrowed=null;Exception? failure=null;
+   try{borrowed=service.AcquireCurrent();}catch(Exception error){failure=error;}
+   var shared=output.Shares.Single();
+   if(change is "none" or "failed consumer release")
+   {
+    service.Dispose();var retirement=PhysicalDrain(service);
+    Check(borrowed is not null&&!retirement.IsCompleted,"borrowed live image retains provider lifetime until consumer disposal: "+change);
+    borrowed!.Dispose();borrowed.Dispose();
+    Check(shared.Disposes==1,"borrowed live image releases its independent shared wrapper once: "+change);
+    Check(change=="none"?retirement.IsCompletedSuccessfully:!retirement.IsCompleted&&service.Diagnostics.cleanupFailures==1,
+     "borrowed live image confirms physical release or quarantines its failure: "+change);
+   }
+   else
+   {
+    service.Dispose();var retirement=PhysicalDrain(service);
+    Check(failure is null&&borrowed is null&&shared.Disposes==1,"sharing reentry or cleanup failure cannot escape a stale untracked image: "+change);
+    Check(change=="failed share cleanup"?!retirement.IsCompleted&&service.Diagnostics.cleanupFailures==1:retirement.IsCompletedSuccessfully,
+     "sharing prefix completion releases or quarantines actual owned resources: "+change);
+    if(change=="dispose")Check(heldInPrefix&&reentrantDrain is{IsCompletedSuccessfully:true},"sharing prefix owns a physical lease before reentrant dispose seals the scope");
+   }
+  }
   return checks;
  }
+ private static Task PhysicalDrain(object owner)=>owner.GetType().GetMethod("DrainPhysicalAsync")?.Invoke(owner,null) as Task??Task.CompletedTask;
  private static async Task Until(Func<bool> condition)
  {
   var end=DateTime.UtcNow.AddSeconds(5);
@@ -183,11 +255,13 @@ internal sealed class FakeCaptureApi : IPortraitLiveImageApi
 internal sealed class CountingCaptureTexture(int width=576,int height=960,nint handle=123) : IDalamudTextureWrap
 {
  public int Disposes;
+ public Action? OnDispose;
+ public Action<CountingCaptureTexture>? OnShare;
  public List<CountingCaptureTexture> Shares=[];
  public ImTextureID Handle=>new(handle);
  public int Width=>width;
  public int Height=>height;
- public void Dispose()=>Interlocked.Increment(ref Disposes);
- public IDalamudTextureWrap CreateWrapSharingLowLevelResource(){var result=new CountingCaptureTexture(width,height);Shares.Add(result);return result;}
+ public void Dispose(){Interlocked.Increment(ref Disposes);OnDispose?.Invoke();}
+ public IDalamudTextureWrap CreateWrapSharingLowLevelResource(){var result=new CountingCaptureTexture(width,height);Shares.Add(result);OnShare?.Invoke(result);return result;}
 }
 #endif

@@ -399,6 +399,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
         timelineObservers = new { play = runtime?.TimelinePlayStatus, action = runtime?.ActionTimelinePlayStatus },
+        sdkTimelineObservers = new { play = runtime?.SdkTimelinePlayStatus, action = runtime?.SdkActionTimelinePlayStatus },
+        resolvedTimelineObservers = new { play = runtime?.ResolvedTimelinePlayStatus, action = runtime?.ResolvedActionTimelinePlayStatus },
         weaponVisibility = new { installed = runtime?.WeaponVisibilityGatesInstalled,
             regularSuppressed = runtime?.WeaponVisibilitySuppressions, extraSuppressed = runtime?.ExtraWeaponVisibilitySuppressions },
         nativeRequestsConsumed = runtime?.NativeRequestsConsumed,

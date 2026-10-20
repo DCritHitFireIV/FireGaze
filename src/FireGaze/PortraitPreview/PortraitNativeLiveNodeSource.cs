@@ -81,13 +81,19 @@ internal sealed unsafe class PortraitNativeLiveNodeSource : IPortraitNativeLiveS
             acquired = null;
             return true;
         }
+        catch (PortraitCaptureCleanupException)
+        {
+            // The view owns the admitted acquisition prefix. It must quarantine the failed
+            // independent wrapper before returning that prefix's physical lifetime.
+            throw;
+        }
         catch (Exception)
         {
             return false;
         }
         finally
         {
-            acquired?.Texture.Dispose();
+            PortraitCaptureCleanupException.DisposeAll(acquired?.Texture);
         }
     }
 

@@ -40,6 +40,14 @@ internal static class CaptureNativeNodeTests
   image.NodeFlags=0;Check(!PortraitCaptureNodeReader.TryAcquire(address,imageAddress,false,()=>live,Bounds,Retain,out _),"invisible image is not captured");image.NodeFlags=NodeFlags.Visible;
   Dalamud.Interface.Textures.TextureWraps.IDalamudTextureWrap ReentrantRetain(nint srv,int width,int height){var t=new CountingCaptureTexture();retained.Add(t);live=false;return t;}
   Check(!PortraitCaptureNodeReader.TryAcquire(address,imageAddress,false,()=>live,Bounds,ReentrantRetain,out _)&&retained[^1].Disposes==1,"reentrant owner change while acquiring SRV releases the returned public lease");
+  live=true;
+  var failed=new CountingCaptureTexture{OnDispose=()=>throw new InvalidOperationException("unconfirmed release")};
+  Dalamud.Interface.Textures.TextureWraps.IDalamudTextureWrap FailedRelease(nint srv,int width,int height){live=false;return failed;}
+  var physical=new PortraitCaptureRetirement();var held=physical.Enter();
+  try{PortraitCaptureNodeReader.TryAcquire(address,imageAddress,false,()=>live,Bounds,FailedRelease,out _);}
+  catch(Exception cleanup){physical.ObserveFailure(cleanup);}
+  held.Dispose();
+  Check(!physical.Seal().IsCompleted&&failed.Disposes==1,"native owner-change cleanup failure carries the retained SRV into physical quarantine");
   return checks;
 #endif
  }

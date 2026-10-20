@@ -8,6 +8,8 @@ namespace FireGaze.PortraitPreview;
 internal sealed partial class PortraitPreviewWindow
 {
     private readonly PortraitComparisonReference<IDalamudTextureWrap> comparisonReference = new();
+    private IDalamudTextureWrap? comparisonOwned;
+    private IDisposable? comparisonLifetime;
     private bool comparisonWipe;
     private float comparisonFraction = .5f;
 
@@ -16,9 +18,9 @@ internal sealed partial class PortraitPreviewWindow
         if (!ImGui.CollapsingHeader("照片对比")) return;
         ImGui.TextDisabled("保留参考照片后，可继续编辑再比较。");
         var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        if (ImGui.Button("设为参考")) comparisonReference.Set(scope, current.CreateWrapSharingLowLevelResource());
+        if (ImGui.Button("设为参考")) SetAnalysisComparison(scope, current);
         ContinueToolbar(right, ImGui.CalcTextSize("清除参考").X + ImGui.GetStyle().FramePadding.X * 2);
-        if (ImGui.Button("清除参考")) comparisonReference.Clear();
+        if (ImGui.Button("清除参考")) ClearAnalysisComparison();
         ContinueToolbar(right, ImGui.CalcTextSize("并排").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.RadioButton("并排", !comparisonWipe)) comparisonWipe = false;
         ContinueToolbar(right, ImGui.CalcTextSize("叠加").X + ImGui.GetStyle().FramePadding.X * 2);
@@ -57,6 +59,42 @@ internal sealed partial class PortraitPreviewWindow
             DrawComparedPhoto(current, origin + new Vector2(cell.X + gap, 0), cell);
             ImGui.TextDisabled("左侧参考 · 右侧当前照片");
         }
+    }
+
+    private void SetAnalysisComparison(string scope, IDalamudTextureWrap source)
+    {
+        ClearAnalysisComparison();
+        if (Volatile.Read(ref analysisResourcesDisposed) != 0 || !analysisPhysical.TryEnter(out var held)) return;
+        IDalamudTextureWrap? owned = null;
+        try
+        {
+            owned = source.CreateWrapSharingLowLevelResource();
+            if (Volatile.Read(ref analysisResourcesDisposed) != 0 || analysisPhysical.CleanupFailures != 0) return;
+            comparisonOwned = owned; comparisonLifetime = held;
+            comparisonReference.Set(scope, new AnalysisBorrowedTexture(owned));
+            owned = null; held = null;
+        }
+        catch (Exception failure) { analysisPhysical.ObserveFailure(failure); }
+        finally { analysisPhysical.Release(owned); held?.Dispose(); }
+    }
+
+    private void ClearAnalysisComparison()
+    {
+        comparisonReference.Clear();
+        var texture = comparisonOwned; comparisonOwned = null;
+        var held = comparisonLifetime; comparisonLifetime = null;
+        analysisPhysical.Release(texture); held?.Dispose();
+    }
+
+    // The generic comparison controller borrows this view. This window retains the actual
+    // wrapper and its physical lease, including a release which cannot be confirmed.
+    private sealed class AnalysisBorrowedTexture(IDalamudTextureWrap texture) : IDalamudTextureWrap
+    {
+        public ImTextureID Handle => texture.Handle;
+        public int Width => texture.Width;
+        public int Height => texture.Height;
+        public IDalamudTextureWrap CreateWrapSharingLowLevelResource() => texture.CreateWrapSharingLowLevelResource();
+        public void Dispose() { }
     }
 
     private static void DrawComparedPhoto(IDalamudTextureWrap photo, Vector2 origin, Vector2 available)

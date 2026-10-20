@@ -28,7 +28,7 @@ internal sealed class PortraitThumbnailLayers(IDalamudTextureWrap character, IDa
     public void Dispose()
     {
         if (Interlocked.Exchange(ref disposed, 1) != 0) return;
-        Character.Dispose(); Frame?.Dispose(); Accent?.Dispose();
+        PortraitCaptureCleanupException.DisposeAll(Character, Frame, Accent);
     }
 }
 
@@ -50,7 +50,7 @@ internal sealed class PortraitThumbnailInputs(PortraitThumbnailInput character, 
     public void Dispose()
     {
         if (Interlocked.Exchange(ref disposed, 1) != 0) return;
-        Character.Texture.Dispose(); TakeFrame()?.Texture.Dispose(); TakeAccent()?.Texture.Dispose();
+        PortraitCaptureCleanupException.DisposeAll(Character.Texture, TakeFrame()?.Texture, TakeAccent()?.Texture);
     }
 }
 
@@ -86,13 +86,14 @@ internal sealed class PortraitThumbnailSource
         cancellationToken.ThrowIfCancellationRequested();
         if (!identity.IsValid || !api.IsFrameworkThread || !api.IsCurrent(identity)) return null;
         PortraitThumbnailInputs? inputs = null;
-        if (!operation.Call(PortraitPhotoPhase.SourceAcquire, () => api.TryAcquire(identity, out inputs)) || inputs is null) return null;
-        using (inputs)
+        IDalamudTextureWrap? character = null;
+        PortraitThumbnailInput? frame = null, accent = null;
+        PortraitThumbnailLayers? result = null;
+        Exception? failure = null;
+        try
         {
-            if (!api.IsCurrent(identity)) return null;
-            IDalamudTextureWrap? character = null;
-            PortraitThumbnailInput? frame = null, accent = null;
-            try
+            if (operation.Call(PortraitPhotoPhase.SourceAcquire, () => api.TryAcquire(identity, out inputs))
+                && inputs is not null && api.IsCurrent(identity))
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 character = await operation.CallAsync(PortraitPhotoPhase.SourceCopy,
@@ -100,17 +101,24 @@ internal sealed class PortraitThumbnailSource
                 cancellationToken.ThrowIfCancellationRequested();
                 frame = inputs.TakeFrame();
                 accent = inputs.TakeAccent();
-                var result = new PortraitThumbnailLayers(character, frame?.Texture, accent?.Texture,
+                result = new PortraitThumbnailLayers(character, frame?.Texture, accent?.Texture,
                     frame?.CopyArgs.Uv0, frame is null ? null : EffectiveUV1(frame.CopyArgs),
                     accent?.CopyArgs.Uv0, accent is null ? null : EffectiveUV1(accent.CopyArgs));
                 character = null; frame = null; accent = null;
-                return result;
-            }
-            finally
-            {
-                character?.Dispose(); frame?.Texture.Dispose(); accent?.Texture.Dispose();
             }
         }
+        catch (Exception error) { failure = error; }
+        try { PortraitCaptureCleanupException.DisposeAll(inputs, character, frame?.Texture, accent?.Texture); }
+        catch (Exception cleanup) { failure = failure is null ? cleanup : new AggregateException(failure, cleanup); }
+        if (failure is not null)
+        {
+            // Inputs can fail while releasing after a successful copy. That result was never
+            // published and must also be released before propagating ownership to the host.
+            try { PortraitCaptureCleanupException.DisposeAll(result); }
+            catch (Exception cleanup) { failure = new AggregateException(failure, cleanup); }
+            System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(failure).Throw();
+        }
+        return result;
     }
 
     private static Vector2 EffectiveUV1(TextureModificationArgs args)
@@ -197,7 +205,7 @@ internal sealed class PortraitThumbnailSource
             }
             finally
             {
-                character?.Texture.Dispose(); frame?.Texture.Dispose(); accent?.Texture.Dispose();
+                PortraitCaptureCleanupException.DisposeAll(character?.Texture, frame?.Texture, accent?.Texture);
             }
         }
 

@@ -1,3 +1,4 @@
+global using ImTextureID = System.IntPtr;
 using System.Numerics;
 using Dalamud.Interface.Textures.TextureWraps;
 
@@ -83,10 +84,19 @@ namespace FireGaze
     internal sealed class Readback
     {
         public int Calls;
+        public bool Hold, LastCancellable;
+        public TaskCompletionSource<RawImage>? Pending;
         public Task<RawImage> GetRawImageAsync(IDalamudTextureWrap texture, Dalamud.Interface.Textures.TextureModificationArgs args,
             bool leaveWrapOpen, CancellationToken cancellationToken)
         {
             Calls++;
+            LastCancellable = cancellationToken.CanBeCanceled;
+            if (Hold)
+            {
+                Pending = new(TaskCreationOptions.RunContinuationsAsynchronously);
+                cancellationToken.Register(() => Pending.TrySetCanceled(cancellationToken));
+                return Pending.Task;
+            }
             return Task.FromResult(new RawImage(new(28, texture.Width, texture.Height, texture.Width * 4),
                 Enumerable.Repeat(new byte[] { 100, 100, 100, 255 }, texture.Width * texture.Height).SelectMany(x => x).ToArray()));
         }
@@ -140,16 +150,17 @@ namespace FireGaze.PortraitPreview
         public PortraitPreviewWindow(Model model, PortraitHistoryPhotos? photos = null) { feature = model; this.photos = photos; showAnalysis = true; }
         private static void ContinueToolbar(float right, float width) { }
         private void OpenLightingFit() { }
-        public void Dispose() { analysis.Dispose(); analysisPreview?.Dispose(); comparisonReference.Dispose(); }
+        public void Dispose() { DisposeAnalysisResources(); comparisonReference.Dispose(); }
     }
     internal sealed class Texture(int width, int height, nint handle) : IDalamudTextureWrap
     {
         public int Disposes;
+        public Action? OnShare, OnDispose;
         public List<Texture> Shares = [];
         public nint Handle => handle;
         public int Width => width;
         public int Height => height;
-        public IDalamudTextureWrap CreateWrapSharingLowLevelResource() { var copy = new Texture(width, height, handle); Shares.Add(copy); return copy; }
-        public void Dispose() => Disposes++;
+        public IDalamudTextureWrap CreateWrapSharingLowLevelResource() { var copy = new Texture(width, height, handle); Shares.Add(copy); OnShare?.Invoke(); return copy; }
+        public void Dispose() { Disposes++; OnDispose?.Invoke(); }
     }
 }
