@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks><PlatformTarget>x64</PlatformTarget></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.EntryProof.cs" Link="PortraitOwnedSceneHooks.EntryProof.cs" />
+    <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+</Project>
