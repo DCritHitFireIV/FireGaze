@@ -1,1 +1,152 @@
-{"type":"uit-contribution","plugin":"AkuItemSets","kinds":["free"],"entries":[{"Original":" shown","Translated":"显示","Context":"MainWindow.DrawArmoireCandidates","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Class/Job","Translated":"班级/工作","Context":"MainWindow.DrawArmoireCandidates","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Location","Translated":"地点","Context":"MainWindow.DrawArmoireCandidates","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":" | Item #","Translated":"|物品 ＃","Context":"MainWindow.DrawPieceIcon","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Category","Translated":"类别","Context":"MainWindow.DrawScanStatus","Source":"ai:public-caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Done","Translated":"完毕","Context":"MainWindow.DrawSetRow","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.ProgressBar"},{"Original":" visible sets complete | ","Translated":"可见套装完整|","Context":"MainWindow.DrawSetTable","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" with source","Translated":"有来源","Context":"MainWindow.DrawSetTable","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":". Check /xllog for '[AkuItemSets] Outfit source' debug lines.","Translated":"。检查 /xllog 中的“[AkuItemSets] Outfit source”调试行。","Context":"MainWindow.DrawSetTable","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":": 0 matches for current territory #","Translated":": 当前地区有 0 条匹配#","Context":"MainWindow.DrawSetTable","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"No sources are attached to the visible rows. Check /xllog for '[AkuItemSets] Outfit source matching summary'.","Translated":"没有源附加到可见行。检查 /xllog 中的“[AkuItemSets] 服装源匹配摘要”。","Context":"MainWindow.DrawSetTable","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":" candidates, ","Translated":"候选人，","Context":"MainWindow.TryDrawInventoryBackedHighlights","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":" slots","Translated":"插槽","Context":"MainWindow.TryDrawInventoryBackedHighlights","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"AkuItemSets: ","Translated":"Aku 项目集：","Context":"MainWindow.TryDrawInventoryBackedHighlights","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"AkuItemSets: no slot rectangles found","Translated":"AkuItemSets：找不到槽矩形","Context":"MainWindow.TryDrawInventoryBackedHighlights","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ ImGui.CalcTextSize"},{"Original":"Open AkuItemSets and scan this character's item set collection.","Translated":"打开 AkuItemSets 并扫描该角色的项目集集合。","Context":"Plugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "AkuItemSets",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": " shown",
+      "Translated": "显示",
+      "Context": "MainWindow.DrawArmoireCandidates",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Class/Job",
+      "Translated": "班级/工作",
+      "Context": "MainWindow.DrawArmoireCandidates",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Location",
+      "Translated": "地点",
+      "Context": "MainWindow.DrawArmoireCandidates",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": " | Item #",
+      "Translated": "|物品 ＃",
+      "Context": "MainWindow.DrawPieceIcon",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Category",
+      "Translated": "类别",
+      "Context": "MainWindow.DrawScanStatus",
+      "Source": "ai:public-caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Done",
+      "Translated": "完毕",
+      "Context": "MainWindow.DrawSetRow",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.ProgressBar"
+    },
+    {
+      "Original": " visible sets complete | ",
+      "Translated": "可见套装完整|",
+      "Context": "MainWindow.DrawSetTable",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " with source",
+      "Translated": "有来源",
+      "Context": "MainWindow.DrawSetTable",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": ". Check /xllog for '[AkuItemSets] Outfit source' debug lines.",
+      "Translated": "。检查 /xllog 中的“[AkuItemSets] Outfit source”调试行。",
+      "Context": "MainWindow.DrawSetTable",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": ": 0 matches for current territory #",
+      "Translated": ": 当前地区有 0 条匹配#",
+      "Context": "MainWindow.DrawSetTable",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "No sources are attached to the visible rows. Check /xllog for '[AkuItemSets] Outfit source matching summary'.",
+      "Translated": "没有源附加到可见行。检查 /xllog 中的“[AkuItemSets] 服装源匹配摘要”。",
+      "Context": "MainWindow.DrawSetTable",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": " candidates, ",
+      "Translated": "候选人，",
+      "Context": "MainWindow.TryDrawInventoryBackedHighlights",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": " slots",
+      "Translated": "插槽",
+      "Context": "MainWindow.TryDrawInventoryBackedHighlights",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "AkuItemSets: ",
+      "Translated": "Aku 项目集：",
+      "Context": "MainWindow.TryDrawInventoryBackedHighlights",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "AkuItemSets: no slot rectangles found",
+      "Translated": "AkuItemSets：找不到槽矩形",
+      "Context": "MainWindow.TryDrawInventoryBackedHighlights",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CalcTextSize"
+    },
+    {
+      "Original": "Open AkuItemSets and scan this character's item set collection.",
+      "Translated": "打开 AkuItemSets 并扫描该角色的项目集集合。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-20T15:55:55",
+  "imported": {
+    "archive": "uit-direct-2026-10-20T15-55-37-599Z-5e28a8c8-2026-10-20T155555.json",
+    "accepted": 16,
+    "filled": 16,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 16 条 `AkuItemSets` 的界面文字译文，已收为**独立译文包** `uit-packs/AkuItemSets@user-235c59.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 16 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
