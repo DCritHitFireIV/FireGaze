@@ -10,7 +10,7 @@ using Dalamud.Plugin.Services;
 namespace FireGaze.PortraitPreview;
 
 /// <summary>Official provider only. No Harmony, MonoMod, custom patching or backend configuration changes.</summary>
-internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider interop) : IPortraitNativePhaseHostFactory
+internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider interop) : IPortraitNativePhaseHostFactory, IPortraitQualifiedNativeHookProvider
 {
     private const string DalamudSHA = "CE0C3C8004CAC1E9AA96D0DC749463F5F1A32E9B49988419BF320545BF942C6A";
     private bool qualified;
@@ -44,23 +44,29 @@ internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider
     }
 
     public Delegate DirectTarget(PortraitNativePhaseBoundTarget target, Type delegateType)
-        => Marshal.GetDelegateForFunctionPointer(target.Address, delegateType);
+        => DirectTarget(target.Address, delegateType);
+
+    public Delegate DirectTarget(nint address, Type delegateType)
+        => Marshal.GetDelegateForFunctionPointer(address, delegateType);
 
     public IPortraitNativePhaseHostHook Create(PortraitNativePhaseBoundTarget target, Type delegateType, Delegate detour)
+        => CreateQualifiedHook(target.Address, delegateType, detour, () => VerifyEntry(target));
+
+    public IPortraitNativePhaseHostHook CreateQualifiedHook(nint address, Type delegateType, Delegate detour, Func<bool> verifyEntry)
     {
-        if (!QualificationPreserved() || !VerifyEntry(target)
+        if (!QualificationPreserved() || !verifyEntry()
             || detour.GetType() != delegateType || delegateType.Assembly.IsCollectible)
             throw new InvalidOperationException("Official StartDisabled hook qualification was not preserved.");
         var create = typeof(IGameInteropProvider).GetMethods().Single(method => method.Name == nameof(IGameInteropProvider.HookFromAddress)
             && method.IsGenericMethodDefinition && method.GetParameters() is var parameters && parameters.Length == 3 && parameters[0].ParameterType == typeof(nint));
         object hook;
-        try { hook = create.MakeGenericMethod(delegateType).Invoke(interop, [target.Address, detour, IGameInteropProvider.HookBackend.Automatic])!; }
+        try { hook = create.MakeGenericMethod(delegateType).Invoke(interop, [address, detour, IGameInteropProvider.HookBackend.Automatic])!; }
         catch (TargetInvocationException error) when (error.InnerException is not null)
         { ExceptionDispatchInfo.Capture(error.InnerException).Throw(); throw; }
-        return new OfficialHook(hook, target, QualificationPreserved);
+        return new OfficialHook(hook, verifyEntry, QualificationPreserved);
     }
 
-    private bool QualificationPreserved() => qualified && bootIdentity is not null && UsesSafetyHook(typeof(Hook<>).Assembly)
+    public bool QualificationPreserved() => qualified && bootIdentity is not null && UsesSafetyHook(typeof(Hook<>).Assembly)
         && PortraitNativeBootImageQualifier.TryQualifyCurrentProcess(out var current, out _) && current == bootIdentity;
 
     private static bool UsesSafetyHook(Assembly assembly)
@@ -88,7 +94,7 @@ internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider
         return new PortraitNativePhaseCurrentProcess(_ => false).TryReadMemory(target.Address, observed) && observed.AsSpan().SequenceEqual(prefix);
     }
 
-    private sealed class OfficialHook(object hook, PortraitNativePhaseBoundTarget target, Func<bool> qualificationPreserved) : IPortraitNativePhaseHostHook
+    private sealed class OfficialHook(object hook, Func<bool> verifyEntry, Func<bool> qualificationPreserved) : IPortraitNativePhaseHostHook
     {
         private readonly Type type = hook.GetType();
         public nint Address => (nint)type.GetProperty("Address")!.GetValue(hook)!;
@@ -98,7 +104,7 @@ internal sealed class DalamudPortraitNativePhaseHostFactory(IGameInteropProvider
         public Delegate Original => (Delegate)type.GetProperty("Original")!.GetValue(hook)!;
         public void Enable()
         {
-            if (!qualificationPreserved() || !VerifyEntry(target)) throw new InvalidOperationException("The native backend or observation entry changed before enable.");
+            if (!qualificationPreserved() || !verifyEntry()) throw new InvalidOperationException("The native backend or observation entry changed before enable.");
             type.GetMethod("Enable")!.Invoke(hook, null);
         }
         public void Disable() => type.GetMethod("Disable")!.Invoke(hook, null);

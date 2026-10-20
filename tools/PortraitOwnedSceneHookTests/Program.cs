@@ -1,6 +1,10 @@
 using FireGaze.PortraitPreview;
 
 #if HAS_OWNED_HOOKS
+var gatewayResult = OwnedGatewayCases.Run();
+if (gatewayResult != 0) return gatewayResult;
+var physicalResult = OwnedPhysicalCases.Run();
+if (physicalResult != 0) return physicalResult;
 var result = HookCases.Run();
 if (result == 0) result = OwnedSceneIntegrationCases.Run();
 return result == 0 ? OwnedReservationCases.Run() : result;

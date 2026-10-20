@@ -29,7 +29,7 @@ public static class Program
         if (gatewayType is null) { Console.Error.WriteLine("FAIL: stable gateway is absent; native late-entry cannot survive collectible plugin unload."); return 1; }
         try
         {
-            TypedPassThrough(); ObserverFailures(); ConcurrentAndRetire(); RecursivePassThrough(); CollectibleUnload(); MultipleCollectibleCycles();
+            TypedPassThrough(); ObserverFailures(); ConcurrentAndRetire(); RecursivePassThrough(); CollectibleUnload(); MultipleCollectibleCycles(); OwnedForwardCollectibleCycles();
             Check(Assembly.GetExecutingAssembly().GetType("FireGaze.PortraitPreview.PortraitNativePhaseHost") is not null,
                 "explicit four-phase official-hook host is absent");
             HostBehavior();
@@ -133,6 +133,38 @@ public static class Program
     }
 
     private static int GatewayAssemblyCount() => AppDomain.CurrentDomain.GetAssemblies().Count(assembly => assembly.GetName().Name!.StartsWith("FireGaze.NativePhaseGateway.", StringComparison.Ordinal));
+
+    private static void OwnedForwardCollectibleCycles()
+    {
+        Reset();
+        var first = BuildOwnedInCollectibleContext(true); ForceGC(first.Context);
+        Check(!first.Context.IsAlive, "owned exact Forward releases actual collectible dispatcher ALC");
+        var baseline = GatewayAssemblyCount();
+        for (var index = 0; index < 12; index++)
+        {
+            var cycle = BuildOwnedInCollectibleContext(true); ForceGC(cycle.Context);
+            Check(!cycle.Context.IsAlive && ReferenceEquals(first.Entry, cycle.Entry), "owned Forward same entry/ABI reuses stable native delegate across unloads");
+            Check(GatewayAssemblyCount() == baseline, "owned Forward reuse does not grow permanent dynamic assemblies");
+            callers[3](cycle.Entry, 77, 0, 0);
+        }
+        Check(directCalls == 12 && calls == 0, "owned late entries after actual ALC unload reach only direct target");
+        var attached = BuildOwnedInCollectibleContext(false); ForceGC(attached.Context);
+        Check(attached.Context.IsAlive, "control confirms owned exact Forward really roots attached plugin ALC");
+        ClearStableState(attached.Entry, nameof(DirectView)); ForceGC(attached.Context);
+        Check(!attached.Context.IsAlive, "clearing owned exact Forward releases the attached control ALC");
+        callers[3](attached.Entry, 78, 0, 0);
+        Check(directCalls == 13, "owned control's late native entry remains usable");
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static (WeakReference Context, Delegate Entry) BuildOwnedInCollectibleContext(bool retire)
+    {
+        var context = new AssemblyLoadContext("FireGaze owned Forward collectible fixture " + Guid.NewGuid(), true);
+        var assembly = context.LoadFromAssemblyPath(Path.Combine(AppContext.BaseDirectory, "Probe", "PortraitPhaseCollectibleProbe.dll"));
+        var entry = (Delegate)assembly.GetType("CollectibleProbe")!.GetMethod("BuildOwned")!.Invoke(null,
+            new object[] { Method(nameof(NativeView)), Method(nameof(DirectView)), retire })!;
+        var weak = new WeakReference(context); context.Unload(); return (weak, entry);
+    }
 
     private static void HostBehavior()
     {
@@ -322,13 +354,13 @@ public static class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void ClearStableState(Delegate entry)
+    private static void ClearStableState(Delegate entry, string directMethod = nameof(DirectOne))
     {
         var instance = entry.Target!; var type = instance.GetType(); var gate = type.GetField("Gate")!.GetValue(instance)!;
         lock (gate)
         {
             type.GetField("Observer")!.SetValue(instance, null);
-            type.GetField("Original")!.SetValue(instance, Delegate.CreateDelegate(entry.GetType(), Method(nameof(DirectOne))));
+            type.GetField("Original")!.SetValue(instance, Delegate.CreateDelegate(entry.GetType(), Method(directMethod)));
             type.GetField("Retired")?.SetValue(instance, true);
             type.GetField("Owner")?.SetValue(instance, null);
         }

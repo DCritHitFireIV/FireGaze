@@ -11,7 +11,7 @@ namespace FireGaze.PortraitPreview;
 /// Once detached and redirected, its permanent native entry cannot root a plugin.
 /// This class never installs a hook or invokes a native target during creation.
 /// </summary>
-internal sealed class PortraitNativePhaseHostGateway
+internal sealed partial class PortraitNativePhaseHostGateway
 {
     private static readonly Type ObserverType = typeof(Func<int, nint, uint, float, Action<bool>?>);
     private static readonly Type ResourceObserverType = typeof(Func<int, nint, Action<bool, byte>?>);
@@ -59,7 +59,7 @@ internal sealed class PortraitNativePhaseHostGateway
     }
 
     private static bool TryCreateCore(int phase, Type[] parameters, Type returnType, nint targetAddress, bool resource,
-        out PortraitNativePhaseHostGateway? gateway, out string reason)
+        out PortraitNativePhaseHostGateway? gateway, out string reason, bool forwarded = false, CallingConvention convention = CallingConvention.Winapi)
     {
         gateway = null;
         try
@@ -76,10 +76,11 @@ internal sealed class PortraitNativePhaseHostGateway
             if (value is null) AppContext.SetData(RegistryKey, registry);
             var key = targetAddress.ToString("X") + "/" + phase + "/" + string.Join(";", parameters.Select(type => type.AssemblyQualifiedName));
             if (resource) key += "/resource-v1/" + (returnType == typeof(byte) ? "u1" : "void");
+            if (forwarded) key += "/owned-forward-v1/" + (int)convention + "/" + returnType.AssemblyQualifiedName;
             if (registry.TryGetValue(key, out var existing))
             {
                 var candidate = new PortraitNativePhaseHostGateway((Type)existing[0], (Type)existing[1], existing[2], (Delegate)existing[3]);
-                if (candidate.observer.FieldType != (resource ? ResourceObserverType : ObserverType)
+                if (candidate.observer.FieldType != (forwarded ? candidate.DelegateType : resource ? ResourceObserverType : ObserverType)
                     || candidate.DelegateType.GetMethod("Invoke")!.ReturnType != returnType)
                 { reason = "Stable native gateway schema differs from its explicit entry ABI."; return false; }
                 if (!candidate.TryAcquire()) { reason = "The native entry gateway is owned or an earlier direct call is still active."; return false; }
@@ -90,18 +91,19 @@ internal sealed class PortraitNativePhaseHostGateway
             using var context = AssemblyLoadContext.Default.EnterContextualReflection();
             var assembly = AssemblyBuilder.DefineDynamicAssembly(new("FireGaze.NativePhaseGateway." + Guid.NewGuid().ToString("N")), AssemblyBuilderAccess.Run);
             var module = assembly.DefineDynamicModule("Gateway");
-            var delegateType = BuildDelegate(module, parameters, returnType, resource ? CallingConvention.Cdecl : CallingConvention.Winapi);
+            var delegateType = BuildDelegate(module, parameters, returnType, forwarded ? convention : resource ? CallingConvention.Cdecl : CallingConvention.Winapi);
             var bridge = module.DefineType("NativeGateway", TypeAttributes.Public | TypeAttributes.Sealed);
             var gateField = bridge.DefineField("Gate", typeof(object), FieldAttributes.Public);
             var originalField = bridge.DefineField("Original", delegateType, FieldAttributes.Public);
-            var observerField = bridge.DefineField("Observer", resource ? ResourceObserverType : ObserverType, FieldAttributes.Public);
+            var observerField = bridge.DefineField("Observer", forwarded ? delegateType : resource ? ResourceObserverType : ObserverType, FieldAttributes.Public);
             var activeField = bridge.DefineField("Active", typeof(int), FieldAttributes.Public);
             bridge.DefineField("Retired", typeof(bool), FieldAttributes.Public);
             bridge.DefineField("Owner", typeof(object), FieldAttributes.Public);
             var root = bridge.DefineField("Root", typeof(object), FieldAttributes.Public | FieldAttributes.Static);
             var nativeRoot = bridge.DefineField("NativeEntry", delegateType, FieldAttributes.Public);
             bridge.DefineDefaultConstructor(MethodAttributes.Public);
-            if (resource) BuildResourceInvoke(bridge, delegateType, parameters, returnType, phase, gateField, originalField, observerField, activeField);
+            if (forwarded) BuildForwardedInvoke(bridge, delegateType, parameters, returnType, gateField, originalField, observerField, activeField);
+            else if (resource) BuildResourceInvoke(bridge, delegateType, parameters, returnType, phase, gateField, originalField, observerField, activeField);
             else BuildInvoke(bridge, delegateType, parameters, phase, gateField, originalField, observerField, activeField);
             var type = bridge.CreateType()!;
             if (type.Assembly.IsCollectible || AssemblyLoadContext.GetLoadContext(type.Assembly) != AssemblyLoadContext.Default)

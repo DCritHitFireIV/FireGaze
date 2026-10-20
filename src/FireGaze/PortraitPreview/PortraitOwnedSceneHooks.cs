@@ -30,58 +30,101 @@ internal interface IPortraitOwnedSceneHookEnvironment
 /// has closed the native consumer/context/retirement coverage contract.
 /// </summary>
 internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedSceneHookEnvironment environment,
-    PortraitNativePhaseHostReservations? reservations = null) : IDisposable
+    PortraitNativePhaseHostReservations? reservations = null, Func<long>? timestamp = null, long timestampFrequency = 0) : IDisposable
 {
     private readonly List<IPortraitOwnedSceneNativeHook> hooks = [];
+    private IPortraitOwnedSceneNativeHook[] publishedHooks = [];
+    private bool allHooksPhysical = true;
     private readonly PortraitNativePhaseHostReservations reservations = reservations ?? new();
     private PortraitNativePhaseHostReservation? reservation;
+    private IPortraitOwnedSceneHookFactory? owningFactory;
+    private TaskCompletionSource physicalRetired = CompletedRetirement();
+    private Task? retirementTask;
+    private Task? passiveExpiryTask;
+    private int retirementDriving;
+    private bool passiveOnly;
+    private long passiveDeadline, passiveLastTimestamp;
+    private readonly Func<long> timestamp = timestamp ?? System.Diagnostics.Stopwatch.GetTimestamp;
+    private readonly long timestampFrequency = timestampFrequency == 0 ? System.Diagnostics.Stopwatch.Frequency : timestampFrequency;
     private PortraitOwnedSceneLease? lease;
     private Action<IPortraitOwnedSceneLease>? advance;
     private Func<IPortraitOwnedSceneLease, bool>? retire;
     private PortraitIdentity source;
     private uint requestedSlot, sourceNativeSlot, lastFrame;
-    private bool installed, installing, closing, stopped, hasFrame, retirementInProgress, unknownCreation;
+    private volatile bool installed, installing, closing, stopped;
+    private bool hasFrame, retirementInProgress, unknownCreation;
     private long epoch, requestEpoch;
     private int phaseDepth, phaseThread, originalDepth;
     public string? LastError { get; private set; }
-    public bool IsInstalled => installed && hooks.All(hook => hook.IsEnabled && !hook.IsDisposed);
+    public bool IsInstalled => installed && Volatile.Read(ref publishedHooks).All(hook => hook.IsEnabled && !hook.IsDisposed);
 
-    public bool TryInstall(IPortraitOwnedSceneHookFactory factory)
+    public bool TryInstall(IPortraitOwnedSceneHookFactory factory) => TryInstallCore(factory, false, TimeSpan.Zero);
+    public bool TryInstallPassive(IPortraitOwnedSceneHookFactory factory, TimeSpan duration)
+        => duration > TimeSpan.Zero && duration <= TimeSpan.FromSeconds(5) && TryInstallCore(factory, true, duration);
+    private bool TryInstallCore(IPortraitOwnedSceneHookFactory factory, bool passive, TimeSpan duration)
     {
         if (installed || installing || stopped || closing || reservation is not null || hooks.Count != 0 || !environment.IsFrameworkThread) return false;
         installing = true;
         try
         {
-            if (!environment.TryValidateInstallation(out var reason)) { LastError = reason; return false; }
+            var reason = "Passive owned transport requires a qualified official factory.";
+            if (!passive && !environment.TryValidateInstallation(out reason)) { LastError = reason; return false; }
             if (!NativeAbiMatchesSDK(out reason)) { LastError = reason; return false; }
-            var targets = environment.Targets;
+            var targets = environment.Targets.ToArray();
             if (!ValidateTargetInventory(targets)) { LastError = "Native target inventory is incomplete or duplicated."; return false; }
+            var qualified = factory as IPortraitOwnedSceneQualifiedHookFactory;
+            if (passive && qualified is null) { LastError = reason; return false; }
+            if (qualified is not null && !qualified.TryQualifyTransport(targets, out reason)) { LastError = reason; return false; }
+            if (passive && (timestampFrequency <= 0 || timestampFrequency > long.MaxValue / 300))
+            { LastError = "A bounded passive clock is unavailable."; return false; }
             // The passive observer and every owned generation share this atomic process
             // reservation. A query before Create is insufficient: another owner can win
             // the overlapping Render entry between that query and native construction.
             if (!reservations.TryAcquireBatch(targets.Select(target => target.Address).ToArray(), out reservation, out reason))
             { LastError = reason; return false; }
+            physicalRetired = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            owningFactory = factory; passiveOnly = passive;
+            if (qualified is not null && !qualified.TryVerifyUnmodifiedTargets(targets, out reason))
+                throw new InvalidOperationException(reason);
             // Exit hooks are first in the immutable inventory. Create all disabled,
             // then enable all; no lease can be requested during partial enabling.
             foreach (var target in targets) CreateHook(factory, target);
             if (closing) throw new InvalidOperationException("Native installation was closed before enabling.");
-            foreach (var hook in hooks) hook.Enable();
+            if (qualified is not null && !qualified.TryVerifyUnmodifiedTargets(targets, out reason))
+                throw new InvalidOperationException(reason);
+            foreach (var hook in hooks)
+            {
+                if (closing) throw new InvalidOperationException("Native installation was closed during partial enabling.");
+                hook.Enable();
+                if (closing) throw new InvalidOperationException("Native installation was closed during partial enabling.");
+            }
             if (hooks.Any(hook => !hook.IsEnabled || hook.IsDisposed)) throw new InvalidOperationException("Native hook did not enable.");
             installed = true;
+            if (passive)
+            { passiveLastTimestamp = timestamp(); passiveDeadline = checked(passiveLastTimestamp + (long)(duration.TotalSeconds * timestampFrequency)); }
             (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.BeginContextLifetimeBatch();
+            if (passive) passiveExpiryTask = ExpirePassiveAsync(duration);
             return true;
         }
         catch (Exception ex)
         {
-            LastError = ex.Message; stopped = true; DisposeHooks(); return false;
+            LastError = ex.Message; stopped = true;
+            if (!DisposeHooks()) retirementTask ??= DriveRetirementAsync();
+            return false;
         }
-        finally { installing = false; }
+        finally
+        {
+            installing = false;
+            // Sub-millisecond timers may complete synchronously during install.
+            // Their close latch must still retire after the installation guard exits.
+            if (passive && closing) TryDispose();
+        }
     }
 
     public bool TryRequest(PortraitIdentity requestedSource, uint slot, Action<IPortraitOwnedSceneLease> onAdvance,
         Func<IPortraitOwnedSceneLease, bool> onRetire)
     {
-        if (!IsInstalled || closing || stopped || advance is not null || !requestedSource.IsValid
+        if (passiveOnly || !IsInstalled || closing || stopped || advance is not null || !requestedSource.IsValid
             || requestedSource.Generation == 0 || slot >= 8 || !environment.IsFrameworkThread) return false;
         var sourceSlot = uint.MaxValue;
         if (environment is IPortraitOwnedSceneHookPhaseEnvironment scoped)
@@ -159,6 +202,8 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
         unknownCreation = true;
         hook = factory.Create(target, detour) ?? throw new InvalidOperationException("Native Create returned no handle.");
         hooks.Add(hook); unknownCreation = false;
+        allHooksPhysical &= hook is IPortraitOwnedScenePhysicalHook;
+        Volatile.Write(ref publishedHooks, hooks.ToArray());
         if (hook.IsEnabled || hook.IsDisposed) throw new InvalidOperationException("Native hook did not start disabled and live.");
     }
 
@@ -367,29 +412,60 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
     }
 
     public void RequestStop() => closing = true;
+    public void UpdatePassive()
+    {
+        if (!passiveOnly) return;
+        if (closing) { TryDispose(); return; }
+        if (!installed) return;
+        try
+        {
+            var now = timestamp();
+            if (now < passiveLastTimestamp || now >= passiveDeadline) { TryDispose(); return; }
+            passiveLastTimestamp = now;
+        }
+        catch (Exception error) { LastError = error.Message; TryDispose(); }
+    }
+    public Task DrainPhysicalAsync() => physicalRetired.Task;
     public bool TryDispose()
     {
         closing = true;
-        if (installing || Volatile.Read(ref originalDepth) != 0 || phaseDepth != 0)
+        if (installing || phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0 && !allHooksPhysical)
         { LastError = "Native installation or an active original/phase must return before hook retirement."; return false; }
         if (lease is { WasReleased: false, BoundView: not 0 })
         { LastError = "Owned native scene must retire in its native phase before hook disposal."; return false; }
-        ClearRequest(); return DisposeHooks();
+        ClearRequest(); var complete = DisposeHooks();
+        if (!complete) retirementTask ??= DriveRetirementAsync();
+        return complete;
     }
     public void Dispose() => TryDispose();
     private bool DisposeHooks()
     {
+        if (Interlocked.CompareExchange(ref retirementDriving, 1, 0) != 0) return physicalRetired.Task.IsCompletedSuccessfully;
+        try { return DisposeHooksCore(); }
+        finally { Volatile.Write(ref retirementDriving, 0); }
+    }
+    private bool DisposeHooksCore()
+    {
         installed = false;
-        ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.EndContextLifetimeBatch());
-        if (Volatile.Read(ref originalDepth) != 0 || phaseDepth != 0)
+        if (phaseDepth != 0 || Volatile.Read(ref originalDepth) != 0 && !allHooksPhysical)
         { LastError = "An active native original/phase still owns the hook batch."; return false; }
         var complete = true;
+        // Clear every forward before disabling any entry. A copied dispatcher
+        // remains tracked through prefix, Original and completion by its gateway.
+        foreach (var physical in hooks.OfType<IPortraitOwnedScenePhysicalHook>()) physical.DetachForward();
+        foreach (var physical in hooks.OfType<IPortraitOwnedScenePhysicalHook>())
+            if (!physical.BeginRetirement(out var reason)) { complete = false; LastError = reason; }
         for (var i = hooks.Count - 1; i >= 0; i--)
         {
             try
             {
                 var hook = hooks[i];
                 if (hook.IsDisposed) continue;
+                if (hook is IPortraitOwnedScenePhysicalHook physical)
+                {
+                    if (!physical.TryCompleteRetirement(out var reason)) { complete = false; LastError = reason; }
+                    continue;
+                }
                 if (hook.IsEnabled) hook.Disable();
                 if (hook.IsEnabled) { complete = false; LastError = "A native hook did not disable."; continue; }
                 hook.Dispose();
@@ -406,6 +482,12 @@ internal sealed unsafe partial class PortraitOwnedSceneHooks(IPortraitOwnedScene
             reservation = null;
         }
         hooks.Clear();
+        Volatile.Write(ref publishedHooks, []);
+        ObserveLifetime(() => (environment as IPortraitOwnedSceneContextLifetimeEnvironment)?.EndContextLifetimeBatch());
+        owningFactory = null;
+        physicalRetired.TrySetResult();
         return true;
     }
+    private static TaskCompletionSource CompletedRetirement()
+    { var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously); completion.SetResult(); return completion; }
 }

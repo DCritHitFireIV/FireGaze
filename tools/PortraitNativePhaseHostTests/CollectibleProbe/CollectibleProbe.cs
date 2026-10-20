@@ -2,6 +2,28 @@ using System.Reflection;
 
 public static class CollectibleProbe
 {
+    public static unsafe Delegate BuildOwned(MethodInfo original, MethodInfo direct, bool retire)
+    {
+        if (!FireGaze.PortraitPreview.PortraitNativePhaseHostGateway.TryCreateForwarded(5,
+            typeof(FFXIVClientStructs.FFXIV.Client.UI.Misc.CharaView.Delegates.Render), (nint)0xF110039, out var gateway, out var reason))
+            throw new InvalidOperationException(reason);
+        gateway!.PublishOriginal(Delegate.CreateDelegate(gateway.DelegateType, original));
+        var state = new OwnedState();
+        gateway.SetForward((FFXIVClientStructs.FFXIV.Client.UI.Misc.CharaView.Delegates.Render)state.Render);
+        if (retire)
+        {
+            gateway.DetachObserver();
+            if (!gateway.TryRetireTo(Delegate.CreateDelegate(gateway.DelegateType, direct))) throw new InvalidOperationException("Owned fixture did not retire.");
+            gateway.ReleaseOwnership();
+        }
+        return gateway.Detour;
+    }
+    private sealed class OwnedState
+    {
+        private int calls;
+        internal unsafe void Render(FFXIVClientStructs.FFXIV.Client.UI.Misc.CharaView* view, uint frame) => calls++;
+    }
+
     public static Delegate Build(MethodInfo original, MethodInfo direct, bool retire)
     {
         var gatewayType = typeof(CollectibleProbe).Assembly.GetType("FireGaze.PortraitPreview.PortraitNativePhaseHostGateway");

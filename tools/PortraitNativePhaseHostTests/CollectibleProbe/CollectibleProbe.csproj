@@ -5,6 +5,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup><Compile Include="../../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost.Gateway.cs" Link="Production/Gateway.cs" Condition="Exists('../../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost.Gateway.cs')" /></ItemGroup>
+  <ItemGroup><Compile Include="../../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost.Gateway.Forwarded.cs" Link="Production/Gateway.Forwarded.cs" /></ItemGroup>
   <ItemGroup><Compile Include="../../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost.Reservations.cs" Link="Production/Reservations.cs" /></ItemGroup>
   <ItemGroup>
     <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>

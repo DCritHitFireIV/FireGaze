@@ -1,27 +1,10 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Security.Cryptography;
-using Dalamud.Hooking;
-using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FireGaze.PortraitPreview;
-
-internal sealed class DalamudPortraitOwnedSceneHookFactory(IGameInteropProvider interop) : IPortraitOwnedSceneHookFactory
-{
-    public IPortraitOwnedSceneNativeHook<T> Create<T>(PortraitOwnedSceneNativeTarget target, T detour) where T : Delegate
-        => new NativeHook<T>(interop.HookFromAddress(target.Address, detour));
-    private sealed class NativeHook<T>(Hook<T> hook) : IPortraitOwnedSceneNativeHook<T> where T : Delegate
-    {
-        public T Original => hook.Original;
-        public bool IsEnabled => hook.IsEnabled;
-        public bool IsDisposed => hook.IsDisposed;
-        public void Enable() => hook.Enable();
-        public void Disable() => hook.Disable();
-        public void Dispose() => hook.Dispose();
-    }
-}
 
 internal sealed unsafe partial class PortraitOwnedSceneHooks
 {
