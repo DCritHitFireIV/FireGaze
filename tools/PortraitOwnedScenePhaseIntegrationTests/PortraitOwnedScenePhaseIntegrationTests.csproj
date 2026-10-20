@@ -6,6 +6,7 @@
     <DefineConstants>$(DefineConstants);OWNED_SLOT;HAS_OWNED_HOOKS</DefineConstants>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativePhaseSource.cs')">$(DefineConstants);NATIVE_PHASE</DefineConstants>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookEnvironment.cs')">$(DefineConstants);REAL_ENVIRONMENT</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSourceCensus.cs')">$(DefineConstants);SOURCE_RETURN</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneContextAllocationTracker.cs" Link="Actual/PortraitOwnedSceneContextAllocationTracker.cs" />
@@ -14,6 +15,7 @@
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHooks.Lease.cs" Link="Actual/PortraitOwnedSceneHooks.Lease.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs" Link="Actual/PortraitOwnedSceneSlotReader.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotCensus.cs" Link="Actual/PortraitOwnedSceneSlotCensus.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSourceCensus.cs" Link="Actual/PortraitOwnedSceneSourceCensus.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSourceCensus.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookPhaseContract.cs" Link="Actual/PortraitOwnedSceneHookPhaseContract.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotNativePhaseSource.cs" Link="Actual/PortraitOwnedSceneSlotNativePhaseSource.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedSceneHookEnvironment.cs" Link="Actual/PortraitOwnedSceneHookEnvironment.cs" />

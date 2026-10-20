@@ -215,6 +215,7 @@ unsafe
     });
 }
 
+EndConfirmationCases.Run((condition, message) => Check(condition, message), Case);
 BindingCases.Run((condition, message) => Check(condition, message), Case);
 Console.WriteLine($"PortraitNativePhaseObservationTests: {passed} checks, {cases} cases, {failed} failed; game calls/hooks/creation/texture operations: 0");
 return failed == 0 ? 0 : 1;

@@ -13,6 +13,7 @@ internal readonly record struct PortraitNativePhaseRecord(long Sequence, long Ca
     PortraitNativeObservedPhase Phase, PortraitNativeObservedEdge Edge, nint Receiver, PortraitNativeThreadStamp Thread,
     int Depth, long Timestamp, PortraitNativeFrameEvidence Frame, float? FloatArgument, uint? CounterSlot = null, byte? NativeReturn = null);
 internal readonly record struct PortraitNativePhaseCall(long Capture, long Call, PortraitNativeThreadStamp Thread);
+internal sealed record PortraitNativePhaseCapture(long Capture);
 internal sealed record PortraitNativePhaseObservationSnapshot(bool Observing, PortraitNativeObservationStop Stop,
     long Capture, long OverwrittenRecords, int ObservedThreads, IReadOnlyList<PortraitNativePhaseRecord> Records)
 {
@@ -31,6 +32,7 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
     private readonly int maxDepth;
     private bool observing;
     private bool disposed;
+    private PortraitNativePhaseCapture? activeCapture;
     private long capture;
     private long started;
     private long lastTimestamp;
@@ -41,6 +43,7 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
     private int count;
     private int head;
     private PortraitNativeObservationStop stop = PortraitNativeObservationStop.Disabled;
+    internal PortraitNativePhaseCapture? ActiveCapture => Volatile.Read(ref activeCapture);
 
     public PortraitNativePhaseObservation(int capacity = 1024, int maxThreads = 16, int maxDepth = 32,
         Func<long>? timestamp = null, long timestampFrequency = 0, Func<PortraitNativeThreadStamp>? threadStamp = null)
@@ -75,6 +78,7 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
                 threads.Clear();
                 observing = true;
                 stop = PortraitNativeObservationStop.Disabled;
+                Volatile.Write(ref activeCapture, new(capture));
                 return true;
             }
             catch (Exception) { StopCore(PortraitNativeObservationStop.ObserverFailure); return false; }
@@ -128,23 +132,41 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
     }
 
     internal void End(PortraitNativePhaseCall call, bool returned, byte? nativeReturn = null)
+        => _ = TryEnd(call, returned, nativeReturn);
+
+    // Confirmation is consumed synchronously by the exact Host completion; it is
+    // not a phase ticket and cannot make a later/deferred read legal.
+    internal bool TryEnd(PortraitNativePhaseCall call, bool returned, byte? nativeReturn = null)
     {
         lock (gate)
         {
             // A stopped/expired/older capture must never append a fabricated matching edge.
-            if (!observing || call.Call == 0 || call.Capture != capture) return;
+            if (!observing || call.Call == 0 || call.Capture != capture) return false;
             try
             {
-                if (!ReadTimestamp(out var now)) return;
+                if (!ReadTimestamp(out var now)) return false;
                 if (threadStamp() != call.Thread || !threads.TryGetValue(call.Thread, out var stack)
                     || stack.Count == 0 || stack.Calls[stack.Count - 1].Call != call.Call)
-                { StopCore(PortraitNativeObservationStop.InvalidNesting); return; }
+                { StopCore(PortraitNativeObservationStop.InvalidNesting); return false; }
                 var invocation = stack.Calls[--stack.Count];
                 stack.Calls[stack.Count] = default;
                 Append(invocation, call.Thread, stack.Count, now, returned ? PortraitNativeObservedEdge.Return : PortraitNativeObservedEdge.Throw,
                     returned && invocation.Phase == PortraitNativeObservedPhase.ResourceRecreate ? nativeReturn : null);
+                return returned;
             }
-            catch (Exception) { StopCore(PortraitNativeObservationStop.ObserverFailure); }
+            catch (Exception) { StopCore(PortraitNativeObservationStop.ObserverFailure); return false; }
+        }
+    }
+
+    // This only rechecks a still-live recorder capture. A private Host return
+    // marker and the independent source/thread qualification are also required.
+    internal bool IsCaptureActive(PortraitNativePhaseCall call)
+    {
+        lock (gate)
+        {
+            if (!observing || call.Call <= 0 || call.Capture != capture) return false;
+            try { return threadStamp() == call.Thread && ReadTimestamp(out _); }
+            catch (Exception) { StopCore(PortraitNativeObservationStop.ObserverFailure); return false; }
         }
     }
 
@@ -168,6 +190,9 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
 
     private void StopCore(PortraitNativeObservationStop reason)
     {
+        // Revoke before any mutable recorder cleanup. Detached consumers can
+        // reject this exact capture without taking this recorder's gate.
+        Volatile.Write(ref activeCapture, null);
         observing = false; stop = reason;
         foreach (var stack in threads.Values) { Array.Clear(stack.Calls); stack.Count = 0; }
     }

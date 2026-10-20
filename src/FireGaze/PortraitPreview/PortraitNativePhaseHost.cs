@@ -40,7 +40,7 @@ internal interface IPortraitNativePhaseHostFactory
 /// failure with no returned handle currently has no attested production compensation and
 /// deliberately cannot complete retirement or authorize provider-scope disposal.
 /// </summary>
-internal sealed class PortraitNativePhaseHost
+internal sealed partial class PortraitNativePhaseHost
 {
     private readonly object gate = new();
     private readonly IPortraitNativePhaseHostFactory factory;
@@ -74,6 +74,7 @@ internal sealed class PortraitNativePhaseHost
         this.resolve = resolve;
         this.targetSet = targetSet;
         this.invalidateCounters = invalidateCounters;
+        PublishHealth();
     }
 
     // Explicit bounded diagnostic host only; no feature creates one or grants an
@@ -121,6 +122,7 @@ internal sealed class PortraitNativePhaseHost
                 if (!observation.TryStart(duration))
                 { DetachRecordingObservers(); reason = detail = "Bounded recorder did not start."; return false; }
                 state = PortraitNativePhaseHostState.Observing;
+                observationGeneration = checked(observationGeneration + 1); PublishHealth();
                 reason = detail = "Passive phase observation started; native scene admission remains disabled."; return true;
             }
             catch (Exception error)
@@ -136,8 +138,10 @@ internal sealed class PortraitNativePhaseHost
     {
         lock (gate)
         {
+            sourceReturnSink?.Cancel();
             observation.Stop(); DetachRecordingObservers();
             if (state == PortraitNativePhaseHostState.Observing) state = PortraitNativePhaseHostState.Installed;
+            PublishHealth();
         }
     }
 
@@ -147,7 +151,7 @@ internal sealed class PortraitNativePhaseHost
         {
             var captured = observation.Snapshot();
             if (state == PortraitNativePhaseHostState.Observing && !captured.Observing)
-            { DetachRecordingObservers(); state = PortraitNativePhaseHostState.Installed; }
+            { sourceReturnSink?.Cancel(); DetachRecordingObservers(); state = PortraitNativePhaseHostState.Installed; PublishHealth(); }
             return new(state, entries.Count(entry => entry.Hook is { IsDisposed: false }), entries.Sum(entry => entry.Gateway.ActiveCount),
                 factory.Identity, detail, plan, captured, Interlocked.Read(ref counterInvalidationEpoch), counterInvalidationFailed,
                 resource, resourceInvalidationFailed);
@@ -202,17 +206,19 @@ internal sealed class PortraitNativePhaseHost
                 if (unknownCreation)
                 {
                     state = PortraitNativePhaseHostState.Faulted;
+                    PublishHealth();
                     reason = detail = "Native Create did not return a handle; compensation is unproven and the complete address reservation must remain held.";
                     return false;
                 }
                 if (!ReleaseAddresses(out reason)) throw new InvalidOperationException(reason);
                 state = PortraitNativePhaseHostState.Retired;
+                PublishHealth();
                 reason = detail = "Native hooks retired; stable gateways contain no plugin observers. Provider scope may dispose."; return true;
             }
             catch (Exception error)
             {
                 reason = detail = "Native retirement failed: " + error.GetType().Name + "; provider scope must remain alive.";
-                state = PortraitNativePhaseHostState.Faulted; return false;
+                state = PortraitNativePhaseHostState.Faulted; PublishHealth(); return false;
             }
         }
     }
@@ -273,7 +279,8 @@ internal sealed class PortraitNativePhaseHost
             // enables. Recording starts separately; no gap grants a valid lease.
             if (targetSet != PortraitNativePhaseTargetSet.PhaseObservation) AttachObservers();
             foreach (var entry in entries) { entry.Hook!.Enable(); if (!entry.Hook.IsEnabled) throw new InvalidOperationException("Official hook did not enable."); }
-            state = PortraitNativePhaseHostState.Installed; reason = "Official typed observation batch installed."; return true;
+            state = PortraitNativePhaseHostState.Installed; hostGeneration = checked(hostGeneration + 1); PublishHealth();
+            reason = "Official typed observation batch installed."; return true;
         }
         catch
         {
@@ -283,9 +290,10 @@ internal sealed class PortraitNativePhaseHost
 
     private bool BeginRetirementCore()
     {
-        observation.Stop(); foreach (var entry in entries) entry.Gateway.DetachObserver();
         if (state == PortraitNativePhaseHostState.Retired) return true;
         state = PortraitNativePhaseHostState.Retiring;
+        sourceReturnSink?.Cancel(); PublishHealth();
+        observation.Stop(); foreach (var entry in entries) entry.Gateway.DetachObserver();
         var allDisabled = true;
         foreach (var entry in entries.AsEnumerable().Reverse())
         {
@@ -296,6 +304,7 @@ internal sealed class PortraitNativePhaseHost
         detail = allDisabled ? "Observation detached; waiting for asynchronous native retirement."
             : "A native hook could not disable; provider scope must remain alive.";
         if (!allDisabled) state = PortraitNativePhaseHostState.Faulted;
+        PublishHealth();
         return allDisabled;
     }
 
@@ -317,24 +326,25 @@ internal sealed class PortraitNativePhaseHost
     private Action<bool, byte> ObserveResource(int phase, nint receiver)
     {
         IDisposable? mutation = null;
+        var healthBegan = BeginMutationHealth();
         var call = default(PortraitNativePhaseCall);
         lock (gate)
         {
             try { resource = new(checked(resource.Generation + 1), checked(resource.Depth + 1), PortraitNativeResourceTransition.Transitioning, receiver, null); }
-            catch (Exception) { resourceInvalidationFailed = true; }
+            catch (Exception) { resourceInvalidationFailed = true; PublishHealth(); }
         }
         try
         {
             // Scope is obtained independently of the bounded recorder, and its
             // completion spans Original including worker/reentrant native calls.
             try { mutation = invalidateCounters!() ?? throw new InvalidOperationException("Resource mutation guard was not issued."); }
-            catch (Exception) { resourceInvalidationFailed = true; observation.Stop(); }
+            catch (Exception) { MarkInvalidationFailure(true); }
             call = observation.Begin((PortraitNativeObservedPhase)phase, receiver);
         }
         catch (Exception) { observation.Stop(); }
         return (returned, value) => {
             try { mutation?.Dispose(); }
-            catch (Exception) { resourceInvalidationFailed = true; observation.Stop(); }
+            catch (Exception) { MarkInvalidationFailure(true); }
             finally
             {
                 lock (gate)
@@ -345,6 +355,7 @@ internal sealed class PortraitNativePhaseHost
                             : phase == (int)PortraitNativeObservedPhase.ResourceCleanup ? PortraitNativeResourceTransition.CleanupReturned : PortraitNativeResourceTransition.RecreateReturned,
                         NativeReturn = returned && depth == 0 && phase == (int)PortraitNativeObservedPhase.ResourceRecreate ? value : null };
                 }
+                EndMutationHealth(healthBegan);
                 observation.End(call, returned, phase == (int)PortraitNativeObservedPhase.ResourceRecreate ? value : null);
             }
         };
@@ -354,30 +365,51 @@ internal sealed class PortraitNativePhaseHost
     {
         IDisposable? mutation = null;
         var call = default(PortraitNativePhaseCall);
+        var counter = phase is (int)PortraitNativeObservedPhase.CounterAdd or (int)PortraitNativeObservedPhase.CounterSub;
+        var guardedCounter = counter && argument < 8;
+        var healthBegan = false;
+        Action<bool>? sourceCompletion = null;
+        SourceReturnInvocation? sourceInvocation = null;
         try
         {
-            var counter = phase is (int)PortraitNativeObservedPhase.CounterAdd or (int)PortraitNativeObservedPhase.CounterSub;
-            if (counter && argument < 8)
+            if (guardedCounter)
             {
+                healthBegan = BeginMutationHealth();
                 // Unknown manager/off-thread calls are equally conservative: this
                 // path never reads the receiver. An epoch change is detached data,
                 // not permission to read a slot or run native cleanup here.
-                if (Interlocked.Increment(ref counterInvalidationEpoch) <= 0) counterInvalidationFailed = true;
+                if (Interlocked.Increment(ref counterInvalidationEpoch) <= 0) MarkInvalidationFailure(false);
                 try { mutation = invalidateCounters!() ?? throw new InvalidOperationException("Counter mutation guard was not issued."); }
-                catch (Exception) { counterInvalidationFailed = true; observation.Stop(); }
+                catch (Exception) { MarkInvalidationFailure(false); }
             }
             call = observation.Begin((PortraitNativeObservedPhase)phase, receiver,
                 phase == (int)PortraitNativeObservedPhase.SourceCharaViewRender ? argument : null,
                 phase == (int)PortraitNativeObservedPhase.ManagerUpdateCandidate ? delta : null,
                 counter ? argument : null);
+            if (phase == (int)PortraitNativeObservedPhase.SourceCharaViewRender && call.Call > 0)
+            {
+                var sink = Volatile.Read(ref sourceReturnSink);
+                if (sink is not null)
+                {
+                    sourceInvocation = new(this, sourceReturnAuthority, call, receiver, argument, Health);
+                    sourceCompletion = sink.Begin(sourceInvocation);
+                }
+            }
         }
         catch (Exception) { observation.Stop(); }
         // The stable gateway invokes completion from finally even when Original
         // throws. Logical recording expiry cannot shorten this mutation scope.
-        return call.Call == 0 && mutation is null ? null : returned => {
+        return call.Call == 0 && mutation is null && !guardedCounter && sourceCompletion is null ? null : returned => {
             try { mutation?.Dispose(); }
-            catch (Exception) { counterInvalidationFailed = true; observation.Stop(); }
-            finally { observation.End(call, returned); }
+            catch (Exception) { MarkInvalidationFailure(false); }
+            finally
+            {
+                if (guardedCounter) EndMutationHealth(healthBegan);
+                var confirmed = observation.TryEnd(call, returned);
+                sourceInvocation?.Open(sourceReturnAuthority, confirmed);
+                try { sourceCompletion?.Invoke(confirmed); }
+                finally { sourceInvocation?.Close(sourceReturnAuthority); }
+            }
         };
     }
 
