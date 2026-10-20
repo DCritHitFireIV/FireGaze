@@ -14,6 +14,7 @@ namespace FireGaze.PortraitPreview;
 internal sealed class PortraitNativePhaseHostGateway
 {
     private static readonly Type ObserverType = typeof(Func<int, nint, uint, float, Action<bool>?>);
+    private static readonly Type ResourceObserverType = typeof(Func<int, nint, Action<bool, byte>?>);
     private const string RegistryKey = "FireGaze.NativePhaseGateway.Registry.v1";
     private readonly object instance;
     private readonly object gate;
@@ -44,6 +45,23 @@ internal sealed class PortraitNativePhaseHostGateway
         if (targetAddress <= 0 || phase is < 0 or > 5 || parameters is null || parameters.Length != (phase is 1 or 3 or 4 or 5 ? 2 : 1)
             || !parameters[0].IsPointer || parameters.Any(type => !StableType(type))
             || (phase == 1 && parameters[1] != typeof(float)) || (phase is 3 or 4 or 5 && parameters[1] != typeof(uint))) return false;
+        return TryCreateCore(phase, parameters, typeof(void), targetAddress, false, out gateway, out reason);
+    }
+
+    public static unsafe bool TryCreateResource(int phase, Type[] parameters, Type returnType, nint targetAddress,
+        out PortraitNativePhaseHostGateway? gateway, out string reason)
+    {
+        gateway = null; reason = "Actual resource gateway requires audited RT receiver and exact void/byte ABI.";
+        if (targetAddress <= 0 || phase is not (6 or 7) || parameters is null || parameters.Length != 1
+            || parameters[0] != typeof(FFXIVClientStructs.FFXIV.Client.Graphics.Render.RenderTargetManager*)
+            || !StableType(parameters[0]) || returnType != (phase == 6 ? typeof(void) : typeof(byte))) return false;
+        return TryCreateCore(phase, parameters, returnType, targetAddress, true, out gateway, out reason);
+    }
+
+    private static bool TryCreateCore(int phase, Type[] parameters, Type returnType, nint targetAddress, bool resource,
+        out PortraitNativePhaseHostGateway? gateway, out string reason)
+    {
+        gateway = null;
         try
         {
             // The table, key strings and values use only default runtime types.
@@ -57,9 +75,13 @@ internal sealed class PortraitNativePhaseHostGateway
             var registry = (Dictionary<string, object[]>?)value ?? new(StringComparer.Ordinal);
             if (value is null) AppContext.SetData(RegistryKey, registry);
             var key = targetAddress.ToString("X") + "/" + phase + "/" + string.Join(";", parameters.Select(type => type.AssemblyQualifiedName));
+            if (resource) key += "/resource-v1/" + (returnType == typeof(byte) ? "u1" : "void");
             if (registry.TryGetValue(key, out var existing))
             {
                 var candidate = new PortraitNativePhaseHostGateway((Type)existing[0], (Type)existing[1], existing[2], (Delegate)existing[3]);
+                if (candidate.observer.FieldType != (resource ? ResourceObserverType : ObserverType)
+                    || candidate.DelegateType.GetMethod("Invoke")!.ReturnType != returnType)
+                { reason = "Stable native gateway schema differs from its explicit entry ABI."; return false; }
                 if (!candidate.TryAcquire()) { reason = "The native entry gateway is owned or an earlier direct call is still active."; return false; }
                 gateway = candidate; reason = "Existing stable entry/ABI gateway acquired; no new dynamic assembly."; return true;
             }
@@ -68,18 +90,19 @@ internal sealed class PortraitNativePhaseHostGateway
             using var context = AssemblyLoadContext.Default.EnterContextualReflection();
             var assembly = AssemblyBuilder.DefineDynamicAssembly(new("FireGaze.NativePhaseGateway." + Guid.NewGuid().ToString("N")), AssemblyBuilderAccess.Run);
             var module = assembly.DefineDynamicModule("Gateway");
-            var delegateType = BuildDelegate(module, parameters);
+            var delegateType = BuildDelegate(module, parameters, returnType, resource ? CallingConvention.Cdecl : CallingConvention.Winapi);
             var bridge = module.DefineType("NativeGateway", TypeAttributes.Public | TypeAttributes.Sealed);
             var gateField = bridge.DefineField("Gate", typeof(object), FieldAttributes.Public);
             var originalField = bridge.DefineField("Original", delegateType, FieldAttributes.Public);
-            var observerField = bridge.DefineField("Observer", ObserverType, FieldAttributes.Public);
+            var observerField = bridge.DefineField("Observer", resource ? ResourceObserverType : ObserverType, FieldAttributes.Public);
             var activeField = bridge.DefineField("Active", typeof(int), FieldAttributes.Public);
             bridge.DefineField("Retired", typeof(bool), FieldAttributes.Public);
             bridge.DefineField("Owner", typeof(object), FieldAttributes.Public);
             var root = bridge.DefineField("Root", typeof(object), FieldAttributes.Public | FieldAttributes.Static);
             var nativeRoot = bridge.DefineField("NativeEntry", delegateType, FieldAttributes.Public);
             bridge.DefineDefaultConstructor(MethodAttributes.Public);
-            BuildInvoke(bridge, delegateType, parameters, phase, gateField, originalField, observerField, activeField);
+            if (resource) BuildResourceInvoke(bridge, delegateType, parameters, returnType, phase, gateField, originalField, observerField, activeField);
+            else BuildInvoke(bridge, delegateType, parameters, phase, gateField, originalField, observerField, activeField);
             var type = bridge.CreateType()!;
             if (type.Assembly.IsCollectible || AssemblyLoadContext.GetLoadContext(type.Assembly) != AssemblyLoadContext.Default)
             { reason = "The runtime did not place the native gateway in the stable default context."; return false; }
@@ -114,6 +137,19 @@ internal sealed class PortraitNativePhaseHostGateway
     public void SetObserver(Func<int, nint, uint, float, Action<bool>?> value)
     {
         ArgumentNullException.ThrowIfNull(value);
+        if (observer.FieldType != ObserverType) throw new InvalidOperationException("This gateway requires a resource observer.");
+        lock (gate)
+        {
+            CheckOwnership();
+            if ((bool)retired.GetValue(instance)!) throw new InvalidOperationException("A retired native gateway cannot record again.");
+            observer.SetValue(instance, value);
+        }
+    }
+
+    public void SetResourceObserver(Func<int, nint, Action<bool, byte>?> value)
+    {
+        ArgumentNullException.ThrowIfNull(value);
+        if (observer.FieldType != ResourceObserverType) throw new InvalidOperationException("This gateway requires a phase observer.");
         lock (gate)
         {
             CheckOwnership();
@@ -187,15 +223,62 @@ internal sealed class PortraitNativePhaseHostGateway
         return !type.IsGenericType || type.GetGenericArguments().All(StableType);
     }
 
-    private static Type BuildDelegate(ModuleBuilder module, Type[] parameters)
+    private static Type BuildDelegate(ModuleBuilder module, Type[] parameters, Type returnType, CallingConvention convention)
     {
         var type = module.DefineType("NativeEntry", TypeAttributes.Public | TypeAttributes.Sealed, typeof(MulticastDelegate));
-        type.SetCustomAttribute(new CustomAttributeBuilder(typeof(UnmanagedFunctionPointerAttribute).GetConstructor([typeof(CallingConvention)])!, [CallingConvention.Winapi]));
+        type.SetCustomAttribute(new CustomAttributeBuilder(typeof(UnmanagedFunctionPointerAttribute).GetConstructor([typeof(CallingConvention)])!, [convention]));
         type.DefineConstructor(MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.RTSpecialName,
             CallingConventions.Standard, [typeof(object), typeof(nint)]).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
         type.DefineMethod("Invoke", MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual,
-            typeof(void), parameters).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
+            returnType, parameters).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
         return type.CreateType()!;
+    }
+
+    private static void BuildResourceInvoke(TypeBuilder type, Type delegateType, Type[] parameters, Type returnType, int phase,
+        FieldBuilder gate, FieldBuilder original, FieldBuilder observer, FieldBuilder active)
+    {
+        var method = type.DefineMethod("Invoke", MethodAttributes.Public, returnType, parameters);
+        var il = method.GetILGenerator();
+        var copiedOriginal = il.DeclareLocal(delegateType); var copiedObserver = il.DeclareLocal(ResourceObserverType);
+        var completion = il.DeclareLocal(typeof(Action<bool, byte>)); var returned = il.DeclareLocal(typeof(bool));
+        var result = il.DeclareLocal(typeof(byte));
+        var monitorEnter = typeof(Monitor).GetMethod(nameof(Monitor.Enter), [typeof(object)])!;
+        var monitorExit = typeof(Monitor).GetMethod(nameof(Monitor.Exit), [typeof(object)])!;
+        LoadField(gate); il.Emit(OpCodes.Call, monitorEnter);
+        il.BeginExceptionBlock();
+        AddActive(1); LoadField(original); il.Emit(OpCodes.Stloc, copiedOriginal); LoadField(observer); il.Emit(OpCodes.Stloc, copiedObserver);
+        il.BeginFinallyBlock(); LoadField(gate); il.Emit(OpCodes.Call, monitorExit); il.EndExceptionBlock();
+
+        il.BeginExceptionBlock();
+        il.BeginExceptionBlock();
+        var noObserver = il.DefineLabel(); il.Emit(OpCodes.Ldloc, copiedObserver); il.Emit(OpCodes.Brfalse, noObserver);
+        il.Emit(OpCodes.Ldloc, copiedObserver); il.Emit(OpCodes.Ldc_I4, phase); il.Emit(OpCodes.Ldarg_1); il.Emit(OpCodes.Conv_I);
+        il.Emit(OpCodes.Callvirt, ResourceObserverType.GetMethod("Invoke")!); il.Emit(OpCodes.Stloc, completion); il.MarkLabel(noObserver);
+        il.BeginCatchBlock(typeof(Exception)); il.Emit(OpCodes.Pop); il.EndExceptionBlock();
+
+        il.BeginExceptionBlock();
+        il.Emit(OpCodes.Ldloc, copiedOriginal); il.Emit(OpCodes.Ldarg_1);
+        il.Emit(OpCodes.Callvirt, delegateType.GetMethod("Invoke")!);
+        if (returnType == typeof(byte)) il.Emit(OpCodes.Stloc, result);
+        il.Emit(OpCodes.Ldc_I4_1); il.Emit(OpCodes.Stloc, returned);
+        il.BeginFinallyBlock();
+        il.BeginExceptionBlock();
+        var noCompletion = il.DefineLabel(); il.Emit(OpCodes.Ldloc, completion); il.Emit(OpCodes.Brfalse, noCompletion);
+        il.Emit(OpCodes.Ldloc, completion); il.Emit(OpCodes.Ldloc, returned); il.Emit(OpCodes.Ldloc, result);
+        il.Emit(OpCodes.Callvirt, typeof(Action<bool, byte>).GetMethod("Invoke")!); il.MarkLabel(noCompletion);
+        il.BeginCatchBlock(typeof(Exception)); il.Emit(OpCodes.Pop); il.EndExceptionBlock(); il.EndExceptionBlock();
+
+        il.BeginFinallyBlock();
+        LoadField(gate); il.Emit(OpCodes.Call, monitorEnter);
+        il.BeginExceptionBlock(); AddActive(-1);
+        il.BeginFinallyBlock(); LoadField(gate); il.Emit(OpCodes.Call, monitorExit); il.EndExceptionBlock();
+        il.EndExceptionBlock();
+        if (returnType == typeof(byte)) il.Emit(OpCodes.Ldloc, result);
+        il.Emit(OpCodes.Ret);
+
+        void LoadField(FieldBuilder field) { il.Emit(OpCodes.Ldarg_0); il.Emit(OpCodes.Ldfld, field); }
+        void AddActive(int delta)
+        { il.Emit(OpCodes.Ldarg_0); il.Emit(OpCodes.Dup); il.Emit(OpCodes.Ldfld, active); il.Emit(OpCodes.Ldc_I4, delta); il.Emit(OpCodes.Add); il.Emit(OpCodes.Stfld, active); }
     }
 
     private static void BuildInvoke(TypeBuilder type, Type delegateType, Type[] parameters, int phase,

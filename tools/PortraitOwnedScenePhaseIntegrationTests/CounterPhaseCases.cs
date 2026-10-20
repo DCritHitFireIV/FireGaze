@@ -28,9 +28,11 @@ internal static unsafe class CounterPhaseCases
         var previousScope = phases.EnterSource(fixture.Phase.Source, 75, 1);
         Check(previousScope is not null && phases.TryCapture(out var previous) && reader.TryReadIdle(6, previous, out _), "real native phase initially authorizes its scoped slot read");
         phases.TryCapture(out previous);
+        Check(reader.TryReadCensus(previous, out var baseline) && baseline.Complete && baseline.Rows.Count == 8,
+            "actual source scope admits complete detached census before counter mutation");
         var reads = fixture.Memory.Reads;
         original = () => {
-            Check(!phases.TryCapture(out _) && !reader.TryReadIdle(6, previous, out _)
+            Check(!phases.TryCapture(out _) && !reader.TryReadIdle(6, previous, out _) && !reader.TryReadCensus(previous, out _)
                 && fixture.Memory.Reads == reads, "counter prefix revokes actual reader before Original without native dereference");
             using var forbidden = phases.EnterSource(fixture.Phase.Source, 999, 3);
             Check(forbidden is null && fixture.Memory.Reads == reads,
@@ -48,7 +50,7 @@ internal static unsafe class CounterPhaseCases
         reads = fixture.Memory.Reads;
         using var entered = new ManualResetEventSlim(); using var release = new ManualResetEventSlim();
         original = () => {
-            Check(!phases.TryCapture(out _) && fixture.Memory.Reads == reads, "off-thread counter revokes without reading another thread's phase");
+            Check(!phases.TryCapture(out _) && !reader.TryReadCensus(previous, out _) && fixture.Memory.Reads == reads, "off-thread counter revokes census without reading another thread's phase");
             entered.Set(); if (!release.Wait(TimeSpan.FromSeconds(10))) throw new TimeoutException();
         };
         var worker = Task.Run(() => factory.Call(PortraitNativeObservedPhase.CounterSub, 7));

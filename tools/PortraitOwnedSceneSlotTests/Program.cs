@@ -13,7 +13,7 @@ using RenderTargetManager = FFXIVClientStructs.FFXIV.Client.Graphics.Render.Rend
 #if !OWNED_SLOT
 throw new Exception("FAIL: the native eight-slot reader has not been implemented.");
 #else
-return Tests.Run();
+return CensusCases.Run() | Tests.Run();
 
 internal static unsafe class Tests
 {
@@ -286,10 +286,11 @@ internal sealed unsafe class MemoryApi(List<(nint Address, nuint Size)> regions,
 {
     public PortraitOwnedSceneSlotRoots Roots = roots; public int Reads; public nint RejectAddress;
     public Action<nint>? AfterRead;
+    public readonly List<nint> Attempts = [];
     public bool TryReadRoots(out PortraitOwnedSceneSlotRoots value) { Reads++; value = Roots; return true; }
     public bool TryRead<T>(nint address, out T value) where T : unmanaged
     {
-        Reads++; value = default;
+        Reads++; Attempts.Add(address); value = default;
         if (address == RejectAddress || !regions.Any(r => address >= r.Address && (nuint)(address-r.Address) <= r.Size
             && (nuint)sizeof(T) <= r.Size-(nuint)(address-r.Address))) return false;
         value = Unsafe.ReadUnaligned<T>((void*)address); AfterRead?.Invoke(address); return true;

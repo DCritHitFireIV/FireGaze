@@ -46,6 +46,12 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                 || after.ImageSize != module.ImageSize || !HashMatches(after.FileImage, PortraitNativePhaseObservationBinding.EXE)
                 || !process.TryReadSDK(out var sdkAfter) || sdkAfter.LoadedMVID != sdk.LoadedMVID || !ValidSDK(sdkAfter)
                 || !ReadEntries(after, diskEntries, out var second)) return false;
+            // Resource bodies span many copies. Identity may change inside the
+            // last one; a pre-second-round check alone cannot attest its owner.
+            if (targetSet == PortraitNativePhaseTargetSet.ResourceIngress
+                && (!process.TryReadModule(out var final) || final.Name != module.Name || final.BaseAddress != module.BaseAddress
+                    || final.ImageSize != module.ImageSize || !HashMatches(final.FileImage, PortraitNativePhaseObservationBinding.EXE)
+                    || !process.TryReadSDK(out var finalSDK) || finalSDK.LoadedMVID != sdk.LoadedMVID || !ValidSDK(finalSDK))) return false;
             if (!first.Select(StableEntry).SequenceEqual(second.Select(StableEntry))
                 || !PortraitNativePhaseObservationBinding.TryBind(module.BaseAddress, PortraitNativePhaseObservationBinding.EXE,
                     PortraitNativePhaseObservationBinding.SDK, second, targetSet, out var targets, out reason)) return false;
@@ -58,7 +64,7 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             }
             plan = new(module.BaseAddress, module.ImageSize, PortraitNativePhaseObservationBinding.EXE,
                 PortraitNativePhaseObservationBinding.SDK, sdk.LoadedMVID, targets);
-            reason = "The current module's on-disk EXE, loaded SDK MVID and four runtime entry prefixes match; no installation lease or scene admission.";
+            reason = "The current module image, SDK MVID and complete target-set contracts match; no installation lease or scene admission.";
             return true;
         }
         catch (Exception ex) when (ex is not OutOfMemoryException)
@@ -81,6 +87,14 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
         ArgumentNullException.ThrowIfNull(isAddressReserved);
         return new PortraitNativePhaseObservationResolver(new PortraitNativePhaseCurrentProcess(isAddressReserved),
             PortraitNativePhaseTargetSet.CounterIngress).TryResolve(out plan, out reason);
+    }
+
+    internal static bool TryResolveResourceIngressCurrentProcess(Func<nint, bool> isAddressReserved,
+        out PortraitNativePhaseResolvedPlan? plan, out string reason)
+    {
+        ArgumentNullException.ThrowIfNull(isAddressReserved);
+        return new PortraitNativePhaseObservationResolver(new PortraitNativePhaseCurrentProcess(isAddressReserved),
+            PortraitNativePhaseTargetSet.ResourceIngress).TryResolve(out plan, out reason);
     }
 
     private static bool ValidModule(PortraitNativePhaseProcessModule module) => module is not null
@@ -106,7 +120,17 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             var address = module.BaseAddress + (nint)disk.FunctionRootRVA;
             if (process.IsAddressReserved(address)) return false;
             var prefix = new byte[disk.Prefix.Length];
-            if (!process.TryReadMemory(address, prefix) || !prefix.AsSpan().SequenceEqual(disk.Prefix)) return false;
+            string? bodyHash = null;
+            if (PortraitNativeResourceIngressContract.Find(disk.Phase) is { } resource)
+            {
+                if (!PortraitNativeResourceIngressContract.TryReadCompleteBody(process, module.BaseAddress, resource, out var hash)
+                    || hash != disk.CompleteBodySHA256) return false;
+                bodyHash = hash;
+                // The full digest attests the prefix too. Never introduce an
+                // extra prologue-only copy in place of complete fragment reads.
+                disk.Prefix.CopyTo(prefix, 0);
+            }
+            else if (!process.TryReadMemory(address, prefix) || !prefix.AsSpan().SequenceEqual(disk.Prefix)) return false;
             var sdkAddress = disk.Phase switch {
                 PortraitNativeObservedPhase.ManagerRender => process.SDKManagerRender,
                 PortraitNativeObservedPhase.SourceCharaViewRender => process.SDKSourceRender,
@@ -114,14 +138,14 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             };
             var usesSDK = disk.Phase is PortraitNativeObservedPhase.ManagerRender or PortraitNativeObservedPhase.SourceCharaViewRender;
             if (usesSDK && sdkAddress != address) return false;
-            entries[index] = disk with { Address = address, Prefix = prefix, SDKResolvedAddress = sdkAddress };
+            entries[index] = disk with { Address = address, Prefix = prefix, SDKResolvedAddress = sdkAddress, CompleteBodySHA256 = bodyHash };
         }
         return true;
     }
 
-    private static (PortraitNativeObservedPhase, nint, uint, int, Type, nint, string) StableEntry(PortraitNativePhaseEntryEvidence entry)
+    private static (PortraitNativeObservedPhase, nint, uint, int, Type, nint, string, string?) StableEntry(PortraitNativePhaseEntryEvidence entry)
         => (entry.Phase, entry.Address, entry.FunctionRootRVA, entry.PrefixMatches, entry.DelegateType,
-            entry.SDKResolvedAddress, Convert.ToHexString(entry.Prefix));
+            entry.SDKResolvedAddress, Convert.ToHexString(entry.Prefix), entry.CompleteBodySHA256);
 
     private static bool HashMatches(byte[]? image, string expected) => image is not null
         && Convert.ToHexString(SHA256.HashData(image)) == expected;
@@ -165,6 +189,7 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                 }
                 if (count != 1) return false;
                 uint root;
+                string? bodyHash = null;
                 if (contract.CompleteLeaf)
                 {
                     // The entire pinned body includes its RET and trailing INT3.
@@ -174,9 +199,14 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                         || HasUnwindOverlap(image, tableOffset, directory.Size, contract.RVA, prefix.Length)) return false;
                     root = contract.RVA;
                 }
+                else if (PortraitNativeResourceIngressContract.Find(contract.Phase) is { } resource)
+                {
+                    if (!TryResourceFragments(image, headers, tableOffset, directory.Size, contract.RVA, resource)) return false;
+                    root = contract.RVA; bodyHash = resource.SHA256;
+                }
                 else if (!TryFunctionRoot(image, headers, tableOffset, directory.Size, contract.RVA, out root)
                     || root != contract.RVA) return false;
-                result.Add(new(contract.Phase, 0, root, count, prefix, contract.Delegate, 0));
+                result.Add(new(contract.Phase, 0, root, count, prefix, contract.Delegate, 0, bodyHash));
             }
             entries = result.AsReadOnly();
             reason = "Audited PE executable sections, unique prefixes and unwind roots verified.";
@@ -199,6 +229,40 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             if (first >= last || first < end && last > start) return true;
         }
         return false;
+    }
+
+    private static bool TryResourceFragments(byte[] image, PEHeaders headers, int tableOffset, int tableSize, uint root,
+        PortraitNativeResourceBody body)
+    {
+        using var digest = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        var expected = body.Spans.ToHashSet(); var found = new HashSet<PortraitNativeResourceSpan>();
+        foreach (var span in body.Spans)
+        {
+            var length = checked((int)(span.End - span.Begin));
+            if (span.Begin >= span.End || span.End > int.MaxValue
+                || !headers.SectionHeaders.Any(s => (s.SectionCharacteristics & SectionCharacteristics.MemExecute) != 0
+                    && span.Begin >= s.VirtualAddress && span.End <= (long)s.VirtualAddress + s.SizeOfRawData)) return false;
+            var offset = FileOffset(headers, (int)span.Begin, length);
+            if (offset < 0) return false;
+            digest.AppendData(image.AsSpan(offset, length));
+        }
+        if (Convert.ToHexString(digest.GetHashAndReset()) != body.SHA256) return false;
+        for (var offset = tableOffset; offset < (long)tableOffset + tableSize; offset += 12)
+        {
+            var row = image.AsSpan(offset, 12);
+            var span = new PortraitNativeResourceSpan(BinaryPrimitives.ReadUInt32LittleEndian(row),
+                BinaryPrimitives.ReadUInt32LittleEndian(row[4..]), BinaryPrimitives.ReadUInt32LittleEndian(row[8..]));
+            var intersects = body.Spans.Any(s => span.Begin < s.End && span.End > s.Begin);
+            if (intersects && !expected.Contains(span)) return false;
+            var follows = TryUnwindRoot(image, headers, span.Begin, span.End, span.Unwind, out var actualRoot,
+                expected.Contains(span) ? expected : null);
+            if (expected.Contains(span))
+            {
+                if (!found.Add(span) || !follows || actualRoot != root) return false;
+            }
+            else if (follows && actualRoot == root) return false;
+        }
+        return found.SetEquals(expected);
     }
 
     private static int FileOffset(PEHeaders headers, int rva, int length)
@@ -228,10 +292,18 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
             begin = first; end = last; unwind = BinaryPrimitives.ReadUInt32LittleEndian(row[8..]); found = true;
         }
         if (!found) return false;
+        return TryUnwindRoot(image, headers, begin, end, unwind, out root);
+    }
+
+    private static bool TryUnwindRoot(byte[] image, PEHeaders headers, uint begin, uint end, uint unwind, out uint root,
+        ISet<PortraitNativeResourceSpan>? allowed = null)
+    {
+        root = 0;
         var seen = new HashSet<(uint, uint, uint)>();
         for (var depth = 0; depth < 32; depth++)
         {
-            if (begin >= end || unwind > int.MaxValue || !seen.Add((begin, end, unwind))) return false;
+            if (begin >= end || unwind > int.MaxValue || !seen.Add((begin, end, unwind))
+                || allowed is not null && !allowed.Contains(new(begin, end, unwind))) return false;
             var offset = FileOffset(headers, (int)unwind, 4);
             if (offset < 0) return false;
             var data = image.AsSpan(offset, 4);

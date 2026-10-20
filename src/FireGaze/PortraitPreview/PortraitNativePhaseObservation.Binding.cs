@@ -5,7 +5,8 @@ using SceneCameraManager = FFXIVClientStructs.FFXIV.Client.Graphics.Scene.Camera
 namespace FireGaze.PortraitPreview;
 
 internal sealed record PortraitNativePhaseEntryEvidence(PortraitNativeObservedPhase Phase, nint Address,
-    uint FunctionRootRVA, int PrefixMatches, byte[] Prefix, Type DelegateType, nint SDKResolvedAddress);
+    uint FunctionRootRVA, int PrefixMatches, byte[] Prefix, Type DelegateType, nint SDKResolvedAddress,
+    string? CompleteBodySHA256 = null);
 internal readonly record struct PortraitNativePhaseBoundTarget(PortraitNativeObservedPhase Phase, nint Address, Type DelegateType);
 internal sealed record PortraitNativePhaseEntryContract(PortraitNativeObservedPhase Phase, uint RVA, string Prefix, Type Delegate, bool SDKEntry,
     bool CompleteLeaf = false);
@@ -34,7 +35,8 @@ internal static unsafe class PortraitNativePhaseObservationBinding
         var inventory = PortraitNativeCounterIngressContract.For(targetSet);
         if (nint.Size != 8 || moduleBase <= 0 || exeSHA256 != EXE || sdkSHA256 != SDK || evidence is null
             || inventory.Count == 0 || evidence.Count != inventory.Count || !SDKAbiMatches()
-            || targetSet == PortraitNativePhaseTargetSet.CounterIngress && !PortraitNativeCounterIngressContract.ABIValid()) return false;
+            || targetSet == PortraitNativePhaseTargetSet.CounterIngress && !PortraitNativeCounterIngressContract.ABIValid()
+            || targetSet == PortraitNativePhaseTargetSet.ResourceIngress && !PortraitNativeResourceIngressContract.ABIValid()) return false;
         var bound = new PortraitNativePhaseBoundTarget[inventory.Count];
         for (var index = 0; index < inventory.Count; index++)
         {
@@ -44,7 +46,8 @@ internal static unsafe class PortraitNativePhaseObservationBinding
             var address = moduleBase + (nint)expected.RVA;
             if (entry is null || entry.Phase != expected.Phase || entry.Address != address || entry.FunctionRootRVA != expected.RVA
                 || entry.PrefixMatches != 1 || entry.Prefix is null || !entry.Prefix.AsSpan().SequenceEqual(Convert.FromHexString(expected.Prefix))
-                || entry.DelegateType != expected.Delegate || (expected.SDKEntry ? entry.SDKResolvedAddress != address : entry.SDKResolvedAddress != 0))
+                || entry.DelegateType != expected.Delegate || (expected.SDKEntry ? entry.SDKResolvedAddress != address : entry.SDKResolvedAddress != 0)
+                || PortraitNativeResourceIngressContract.Find(expected.Phase) is { } resource && entry.CompleteBodySHA256 != resource.SHA256)
                 return false;
             bound[index] = new(expected.Phase, address, expected.Delegate);
         }

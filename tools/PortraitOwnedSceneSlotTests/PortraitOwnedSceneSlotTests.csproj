@@ -4,6 +4,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);CA1416</NoWarn>
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotReader.cs')">$(DefineConstants);OWNED_SLOT</DefineConstants>
+    <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitOwnedSceneSlotCensus.cs')">$(DefineConstants);SLOT_CENSUS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitContextInterception.cs" Link="PortraitContextInterception.cs" />

@@ -197,6 +197,44 @@ internal sealed unsafe class PortraitOwnedSceneSlotReader(IPortraitOwnedSceneSlo
         out PortraitOwnedSceneSlotSnapshot snapshot)
         => TryRead(slot, owner, phase, true, out snapshot);
 
+    // A census uses the same source/phase/root and fallible raw-table copies as
+    // the existing reader. A failed idle probe is never interpreted as Busy.
+    public bool TryReadCensus(PortraitOwnedSceneSlotPhase phase, out PortraitOwnedSceneSlotCensus census)
+    {
+        census = PortraitOwnedSceneSlotCensus.Incomplete(phase);
+        try
+        {
+            if (!Qualified(phase) || !SDKLayoutMatches() || !Current(phase)
+                || !ReadSource(phase, out var source)) return false;
+            var first = new Sample[8];
+            var second = new Sample[8];
+            for (uint slot = 0; slot < 8; slot++)
+                if (!ReadSample(slot, default, phase, false, out first[slot]) || first[slot].Count < 0) return false;
+            if (!ReadSource(phase, out var middle) || middle != source) return false;
+            for (uint slot = 0; slot < 8; slot++)
+                if (!ReadSample(slot, default, phase, false, out second[slot]) || second[slot].Count < 0) return false;
+            if (!first.SequenceEqual(second) || !ReadSource(phase, out var after) || after != source || !Current(phase)) return false;
+            var rows = new PortraitOwnedSceneSlotCensusRow[8];
+            for (uint slot = 0; slot < 8; slot++)
+            {
+                var sample = first[slot];
+                PortraitOwnedSceneSlotCensusKind kind;
+                if (slot == source.Slot)
+                {
+                    if (sample.Character != (nint)phase.Source.Character || sample.Kind == 0
+                        || sample.RegisteredCamera != source.Camera || sample.Count != source.ActiveCount) return false;
+                    kind = PortraitOwnedSceneSlotCensusKind.Source;
+                }
+                else kind = sample.Character == 0 && sample.Kind == 0 && sample.RegisteredCamera == 0 && sample.Count == 0
+                    ? PortraitOwnedSceneSlotCensusKind.ProvedIdle : PortraitOwnedSceneSlotCensusKind.OccupiedUnknown;
+                rows[slot] = new(slot, kind, sample.Character, (byte)sample.Kind, sample.Index, sample.MemoryIndex,
+                    sample.RegisteredCamera, sample.Count, sample.Active != 0, sample.OffscreenCamera, sample.ViewCamera);
+            }
+            census = new(phase, true, Array.AsReadOnly(rows)); return true;
+        }
+        catch (Exception) { return false; }
+    }
+
     private bool TryRead(uint slot, PortraitOwnedSceneSlotOwner owner, PortraitOwnedSceneSlotPhase phase, bool owned,
         out PortraitOwnedSceneSlotSnapshot snapshot)
     {

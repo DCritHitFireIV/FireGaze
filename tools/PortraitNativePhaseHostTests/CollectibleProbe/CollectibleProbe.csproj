@@ -6,4 +6,8 @@
   </PropertyGroup>
   <ItemGroup><Compile Include="../../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost.Gateway.cs" Link="Production/Gateway.cs" Condition="Exists('../../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost.Gateway.cs')" /></ItemGroup>
   <ItemGroup><Compile Include="../../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost.Reservations.cs" Link="Production/Reservations.cs" /></ItemGroup>
+  <ItemGroup>
+    <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
+    <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>
+  </ItemGroup>
 </Project>

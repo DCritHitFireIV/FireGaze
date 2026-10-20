@@ -3,7 +3,7 @@ using RenderManager = FFXIVClientStructs.FFXIV.Client.Graphics.Render.Manager;
 
 namespace FireGaze.PortraitPreview;
 
-internal enum PortraitNativePhaseTargetSet { PhaseObservation, CounterIngress }
+internal enum PortraitNativePhaseTargetSet { PhaseObservation, CounterIngress, ResourceIngress }
 
 // Complete native leaf ABI, independently audited against the pinned image.
 // The uint is a slot, never a native frame. Neither function returns a value.
@@ -20,11 +20,12 @@ internal static class PortraitNativeCounterIngressContract
     internal static IReadOnlyList<PortraitNativePhaseEntryContract> For(PortraitNativePhaseTargetSet set) => set switch {
         PortraitNativePhaseTargetSet.PhaseObservation => PortraitNativePhaseObservationBinding.Inventory,
         PortraitNativePhaseTargetSet.CounterIngress => Inventory,
+        PortraitNativePhaseTargetSet.ResourceIngress => PortraitNativeResourceIngressContract.Inventory,
         _ => [],
     };
 
     internal static PortraitNativePhaseEntryContract? Find(PortraitNativeObservedPhase kind)
-        => PortraitNativePhaseObservationBinding.Inventory.Concat(Inventory).SingleOrDefault(entry => entry.Phase == kind);
+        => PortraitNativePhaseObservationBinding.Inventory.Concat(Inventory).Concat(PortraitNativeResourceIngressContract.Inventory).SingleOrDefault(entry => entry.Phase == kind);
 
     internal static unsafe bool ABIValid()
     {

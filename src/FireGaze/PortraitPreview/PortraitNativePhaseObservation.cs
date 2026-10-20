@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace FireGaze.PortraitPreview;
 
-internal enum PortraitNativeObservedPhase { ManagerRender, ManagerUpdateCandidate, SceneCameraUpdate, SourceCharaViewRender, CounterAdd, CounterSub }
+internal enum PortraitNativeObservedPhase { ManagerRender, ManagerUpdateCandidate, SceneCameraUpdate, SourceCharaViewRender, CounterAdd, CounterSub, ResourceCleanup, ResourceRecreate }
 internal enum PortraitNativeObservedEdge { Enter, Return, Throw }
 internal enum PortraitNativeFrameOrigin { None, SourceRenderArgument, EnclosingSourceRenderArgument }
 internal enum PortraitNativeObservationStop { Disabled, Expired, Explicit, Disposed, ThreadLimit, DepthLimit, ObserverFailure, InvalidNesting }
@@ -11,7 +11,7 @@ internal readonly record struct PortraitNativeThreadStamp(uint NativeID, int Man
 internal readonly record struct PortraitNativeFrameEvidence(PortraitNativeFrameOrigin Origin, uint Value, nint SourceView);
 internal readonly record struct PortraitNativePhaseRecord(long Sequence, long Capture, long Call, long ParentCall,
     PortraitNativeObservedPhase Phase, PortraitNativeObservedEdge Edge, nint Receiver, PortraitNativeThreadStamp Thread,
-    int Depth, long Timestamp, PortraitNativeFrameEvidence Frame, float? FloatArgument, uint? CounterSlot = null);
+    int Depth, long Timestamp, PortraitNativeFrameEvidence Frame, float? FloatArgument, uint? CounterSlot = null, byte? NativeReturn = null);
 internal readonly record struct PortraitNativePhaseCall(long Capture, long Call, PortraitNativeThreadStamp Thread);
 internal sealed record PortraitNativePhaseObservationSnapshot(bool Observing, PortraitNativeObservationStop Stop,
     long Capture, long OverwrittenRecords, int ObservedThreads, IReadOnlyList<PortraitNativePhaseRecord> Records)
@@ -127,7 +127,7 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
         }
     }
 
-    internal void End(PortraitNativePhaseCall call, bool returned)
+    internal void End(PortraitNativePhaseCall call, bool returned, byte? nativeReturn = null)
     {
         lock (gate)
         {
@@ -141,7 +141,8 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
                 { StopCore(PortraitNativeObservationStop.InvalidNesting); return; }
                 var invocation = stack.Calls[--stack.Count];
                 stack.Calls[stack.Count] = default;
-                Append(invocation, call.Thread, stack.Count, now, returned ? PortraitNativeObservedEdge.Return : PortraitNativeObservedEdge.Throw);
+                Append(invocation, call.Thread, stack.Count, now, returned ? PortraitNativeObservedEdge.Return : PortraitNativeObservedEdge.Throw,
+                    returned && invocation.Phase == PortraitNativeObservedPhase.ResourceRecreate ? nativeReturn : null);
             }
             catch (Exception) { StopCore(PortraitNativeObservationStop.ObserverFailure); }
         }
@@ -157,10 +158,10 @@ internal sealed class PortraitNativePhaseObservation : IDisposable
         StopCore(PortraitNativeObservationStop.Expired); return false;
     }
 
-    private void Append(Invocation call, PortraitNativeThreadStamp thread, int depth, long now, PortraitNativeObservedEdge edge)
+    private void Append(Invocation call, PortraitNativeThreadStamp thread, int depth, long now, PortraitNativeObservedEdge edge, byte? nativeReturn = null)
     {
         var row = new PortraitNativePhaseRecord(checked(++sequence), capture, call.Call, call.Parent, call.Phase, edge,
-            call.Receiver, thread, depth, now, call.Frame, call.FloatArgument, call.CounterSlot);
+            call.Receiver, thread, depth, now, call.Frame, call.FloatArgument, call.CounterSlot, nativeReturn);
         if (count == ring.Length) { ring[head] = row; head = (head + 1) % ring.Length; overwritten++; }
         else { ring[(head + count) % ring.Length] = row; count++; }
     }

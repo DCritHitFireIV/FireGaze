@@ -103,6 +103,7 @@ Invoke-PreviewSuite 'PortraitNativeBootImageTests' @('--', (Join-Path $env:DALAM
 if ($SqpackPath) {
     # Read the actual configured client's PE only; this suite never opens its process.
     Invoke-PreviewSuite 'PortraitCounterIngressTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
+    Invoke-PreviewSuite 'PortraitResourceIngressTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
     Invoke-PreviewSuite 'PortraitNativePhaseResolverTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
     Invoke-PreviewSuite 'NativeTimelineQualificationTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'), '--boot-dll', (Join-Path $env:DALAMUD_HOME 'Dalamud.Boot.dll'))
     Invoke-PreviewSuite 'NativeResolvedTimelineTests' @('--', '--sqpack', $SqpackPath)
@@ -116,6 +117,7 @@ if ($SqpackPath) {
     Invoke-PreviewSuite 'LocalPreviewInteractionTests' @('--', '--sqpack', $SqpackPath)
 } else {
     $previewSkippedSuites.Add('PortraitCounterIngressTests')
+    $previewSkippedSuites.Add('PortraitResourceIngressTests')
     $previewSkippedSuites.Add('PortraitNativePhaseResolverTests')
     $previewSkippedSuites.Add('NativeTimelineQualificationTests')
     $previewSkippedSuites.Add('NativeResolvedTimelineTests')

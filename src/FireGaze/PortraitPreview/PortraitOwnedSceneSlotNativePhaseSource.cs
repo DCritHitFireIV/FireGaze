@@ -13,7 +13,7 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
     private PortraitOwnedSceneSlotPhase current;
     private PortraitOwnedSceneSlotRoots previousRoots;
     private int thread;
-    private int nativeCounterDepth;
+    private int nativeMutationDepth;
     private long token, serial, request, session, managerGeneration;
     private bool bootstrapping;
 
@@ -47,7 +47,7 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
 
     private IDisposable? Enter(PortraitIdentity source, uint nativeFrame, long requestEpoch)
     {
-        if (nativeCounterDepth != 0 || !source.IsValid || source.Generation == 0 || requestEpoch <= 0) return null;
+        if (nativeMutationDepth != 0 || !source.IsValid || source.Generation == 0 || requestEpoch <= 0) return null;
         try
         {
             if (framework?.Invoke() != true || buildValidated?.Invoke() != true
@@ -106,14 +106,22 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
     // Detached pre-write guard. It spans the entire actual native Original, so
     // reentrant or concurrent source Render cannot reopen a phase while the
     // counter write is pending. No native read/release occurs in either edge.
-    public IDisposable BeginCounterMutation()
+    public IDisposable BeginCounterMutation() => BeginDetachedMutation();
+
+    // Resource and counter writes share one depth. Finishing an inner callback
+    // cannot reopen source/retirement reads while another Original still runs.
+    public IDisposable BeginResourceMutation() => BeginDetachedMutation();
+
+    private IDisposable BeginDetachedMutation()
     {
         lock (gate)
         {
-            nativeCounterDepth = checked(nativeCounterDepth + 1);
+            var nextDepth = checked(nativeMutationDepth + 1);
+            var nextGeneration = checked(managerGeneration + 1);
+            nativeMutationDepth = nextDepth;
             Revoke();
-            managerGeneration = checked(managerGeneration + 1);
-            return new CounterMutation(this);
+            managerGeneration = nextGeneration;
+            return new DetachedMutation(this);
         }
     }
 
@@ -124,7 +132,7 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
 
     private bool Permitted()
     {
-        if (nativeCounterDepth != 0 || token == 0 || thread != Environment.CurrentManagedThreadId || request <= 0 || session <= 0) return false;
+        if (nativeMutationDepth != 0 || token == 0 || thread != Environment.CurrentManagedThreadId || request <= 0 || session <= 0) return false;
         try { return framework?.Invoke() == true && buildValidated?.Invoke() == true && sessionEpoch?.Invoke() == session; }
         catch (Exception) { return false; }
     }
@@ -147,13 +155,13 @@ internal sealed class PortraitOwnedSceneSlotNativePhaseSource(
         public void Dispose() { if (Interlocked.Exchange(ref disposed, 1) == 0) owner.Exit(token, owns); }
     }
 
-    private sealed class CounterMutation(PortraitOwnedSceneSlotNativePhaseSource owner) : IDisposable
+    private sealed class DetachedMutation(PortraitOwnedSceneSlotNativePhaseSource owner) : IDisposable
     {
         private int disposed;
         public void Dispose()
         {
             if (Interlocked.Exchange(ref disposed, 1) != 0) return;
-            lock (owner.gate) { owner.Revoke(); owner.nativeCounterDepth--; }
+            lock (owner.gate) { owner.Revoke(); owner.nativeMutationDepth--; }
         }
     }
 }
