@@ -1,1 +1,3124 @@
-{"type":"uit-contribution","plugin":"MacroMate","kinds":["llm"],"entries":[{"Original":"is","Translated":"是","Context":"Is.get_Text","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"is not","Translated":"不是","Context":"IsNot.get_Text","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Less Than","Translated":"小于","Context":"Lt.get_LongText","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Less Than or Equal To","Translated":"小于或等于","Context":"Lte.get_LongText","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Greater Than","Translated":"大于","Context":"Gt.get_LongText","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Greater Than or Equal To","Translated":"大于或等于","Context":"Gte.get_LongText","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Macro Mate: Failed to bind macros on condition change","Translated":"宏搭档：条件变化时绑定宏失败","Context":"MacroMate.Refresh","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Unbinding condition listener...","Translated":"正在解除条件监听...","Context":"MacroMate.Refresh","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Macro Mate","Translated":"宏搭档","Context":"Plugin.get_Name","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Sync '","Translated":"同步 '","Context":"Sync.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Waiting for existing jobs to finish","Translated":"等待现有任务完成","Context":"CheckForUpdates.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Check '","Translated":"检查 '","Context":"CheckMacroForUpdates.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Has update - New Group '","Translated":"有更新 - 新分组 '","Context":"CheckMacroForUpdates.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Has update - New Macro '","Translated":"有更新 - 新宏 '","Context":"CheckMacroForUpdates.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Checking File Headers","Translated":"正在检查文件头","Context":"FetchMacroLinesIfModified.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"No changes - ETag match","Translated":"无变化 - ETag 匹配","Context":"FetchMacroLinesIfModified.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"May have changes - ETag mismatch ","Translated":"可能有变化 - ETag 不匹配","Context":"FetchMacroLinesIfModified.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Downloading File","Translated":"正在下载文件","Context":"FetchMacroLinesIfModified.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"No changes - file lines unmodified","Translated":"无变化 - 文件行未修改","Context":"FetchMacroLinesIfModified.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Has changes - file lines modified","Translated":"有变化 - 文件行已修改","Context":"FetchMacroLinesIfModified.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Fetch Manifest","Translated":"获取清单","Context":"FetchManifest.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Downloading Headers","Translated":"正在下载标头","Context":"FetchManifest.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Has changes - ETag mismatch ","Translated":"有变更 - ETag 不匹配","Context":"FetchManifest.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"icon id","Translated":"图标 ID","Context":"SyncOrCheckMacro.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"notes","Translated":"备注","Context":"SyncOrCheckMacro.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"lines","Translated":"行","Context":"SyncOrCheckMacro.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Has changes - ","Translated":"有变更 -","Context":"SyncOrCheckMacro.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":" modified","Translated":"已修改","Context":"SyncOrCheckMacro.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"No changes","Translated":"无变更","Context":"SyncOrCheckMacro.MoveNext","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TreeNodeEx"},{"Original":"Could not load Macro Mate Cache","Translated":"无法加载 Macro Mate 缓存","Context":"MacroMateCacheV1.Read","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Could not load Macro Mate Config","Translated":"无法加载 Macro Mate 配置","Context":"MacroMateSerializerV1.Read","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Slot ","Translated":"栏位","Context":"MacroConfig.BulkImportFromXIV","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":": Skipped (already managed by Macro Mate)","Translated":"：已跳过（已由 Macro Mate 管理）","Context":"MacroConfig.BulkImportFromXIV","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Unbound","Translated":"未绑定","Context":"MacroLink.Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Individual","Translated":"独立","Context":"MacroLink.Name","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Shared","Translated":"共享","Context":"MacroLink.Name","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"no node found at '","Translated":"未找到节点于 '","Context":"IPCManager.ValidatePath","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"expected macro at '","Translated":"预期宏位于 '","Context":"IPCManager.ValidateMacroPath","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Create Backup","Translated":"创建备份","Context":"BackupWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Open Backup Folder","Translated":"打开备份文件夹","Context":"BackupWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Reload Config File","Translated":"重新加载配置文件","Context":"BackupWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Macro Mate config reloaded","Translated":"Macro Mate 配置已重新加载","Context":"BackupWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.Print"},{"Original":"FileName","Translated":"文件名","Context":"BackupWindow.DrawBackups","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"ModifiedDate","Translated":"修改日期","Context":"BackupWindow.DrawBackups","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"LoadButton","Translated":"加载按钮","Context":"BackupWindow.DrawBackups","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"DeleteButton","Translated":"删除按钮","Context":"BackupWindow.DrawBackups","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Load","Translated":"加载","Context":"BackupWindow.DrawBackups","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Double right click this button to delete ","Translated":"右键双击此按钮以删除","Context":"BackupWindow.DrawBackups","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Load###backups_window/load_popup/","Translated":"加载","Context":"BackupWindow.DrawLoadPopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginPopupModal"},{"Original":"Are you sure you want to load ","Translated":"确定要加载吗","Context":"BackupWindow.DrawLoadPopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"This will overwrite the current configuration","Translated":"这将覆盖当前配置","Context":"BackupWindow.DrawLoadPopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Yes","Translated":"是","Context":"BackupWindow.DrawLoadPopupModal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Convert to Auto-Translate","Translated":"转换为自动翻译","Context":"ConvertToAutoTranslateBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Converts plain text words to Auto-Translate payloads if they match the Auto-Translate dictionary","Translated":"若纯文本词语与自动翻译词典匹配，则将其转换为自动翻译载荷","Context":"ConvertToAutoTranslateBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Min Word Length:","Translated":"最小词长：","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Skip words shorter than this length to avoid replacing common short words","Translated":"跳过短于此长度的词语，以避免替换常见短词","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Max Words:","Translated":"最大词数：","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Maximum number of consecutive words to match (e.g., 3 allows \"Fell Cleave\" to match)","Translated":"最多匹配的连续词数（例如 3 可匹配“裂石飞环”）","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Auto Translate Commands","Translated":"自动翻译命令","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Convert commands like /action to Auto-Translate payloads (commands are the same in all languages)","Translated":"将 /action 等命令转换为自动翻译载荷（命令在所有语言中相同）","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Converted ","Translated":"已转换","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" word(s)","Translated":"词","Context":"ConvertToAutoTranslateBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Introduction","Translated":"简介","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Binding","Translated":"铁锁","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Auto Translation","Translated":"自动翻译","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Paths","Translated":"路径","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Command","Translated":"命令","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Description","Translated":"描述","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Select root","Translated":"选择根节点","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select 'My Group' under root","Translated":"选择根节点下的“My Group”","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"My Group","Translated":"我的分组","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"My Group/Subgroup","Translated":"我的分组/子分组","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select 'Subgroup' under 'My Group' under root","Translated":"选择根节点下“My Group”中的“Subgroup”","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select the first child of root","Translated":"选择根节点的第一个子节点","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"My Group/@2","Translated":"我的分组/@2","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select the third child of 'My Group'","Translated":"选择“My Group”的第三个子节点","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"My Group@1","Translated":"我的分组@1","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select the second child named 'My Group' under root","Translated":"选择根节点下名为“My Group”的第二个子节点","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select the child named 'My/Group' under root","Translated":"选择根节点下名为“My/Group”的子节点","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select the child named 'My@Group' under root","Translated":"选择根节点下名为“My@Group”的子节点","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Select the child named 'My\\Group' under root","Translated":"在 root 下选择名为 'My\\Group' 的子项","Context":"HelpWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Limitations","Translated":"限制","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Tutorial","Translated":"教程","Context":"HelpWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Normal Sprint / PvP / Island Sanctuary macro","Translated":"普通冲刺 / PvP / 开拓无人岛 宏","Context":"HelpWindow.DrawSprintTutorial","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Import Example","Translated":"导入示例","Context":"HelpWindow.DrawSprintTutorial","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Import the final result of this tutorial into your macro config","Translated":"将本教程的最终结果导入到你的宏配置中","Context":"HelpWindow.DrawSprintTutorial","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Help","Translated":"帮助","Context":"HelpWindow..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Add Action","Translated":"添加操作","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Add a new bulk edit action to the action list","Translated":"向操作列表添加新的批量编辑操作","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Apply","Translated":"应用","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Applies all bulk edit actions to all selected macros","Translated":"将所有批量编辑操作应用到所有选中的宏","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Clear All","Translated":"全部清除","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Clear all bulk edit actions","Translated":"清除所有批量编辑操作","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Clear Applied","Translated":"清除已应用","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Clear applied bulk edit actions","Translated":"清除已应用的批量编辑操作","Context":"MacroBulkEditWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Bulk Edit Actions","Translated":"批量编辑操作","Context":"MacroBulkEditWindow.DrawBulkEditActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"These actions will be applied to all selected macros after clicking 'Apply'","Translated":"点击“应用”后，这些操作将应用到所有选中的宏","Context":"MacroBulkEditWindow.DrawBulkEditActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Value","Translated":"值","Context":"MacroBulkEditWindow.DrawBulkEditActions","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Applied","Translated":"已应用","Context":"MacroBulkEditWindow.DrawBulkEditActions","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Delete this action","Translated":"删除此操作","Context":"MacroBulkEditWindow.DrawBulkEditActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"This action has been applied","Translated":"已应用此操作","Context":"MacroBulkEditWindow.DrawBulkEditActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Macro Bulk Edit","Translated":"宏批量编辑","Context":"MacroBulkEditWindow..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Set Icon to","Translated":"设置图标为","Context":"SetIconMacroBulkEdit.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Click to change, right click to reset to default","Translated":"点击更改，右键重置为默认","Context":"SetIconMacroBulkEdit.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Set Icon","Translated":"设置图标","Context":"BulkEditFactory.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Set Link to","Translated":"设置链接为","Context":"SetLinkBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Set Link","Translated":"设置链接","Context":"BulkEditFactory.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Set 'Use Macro Chain' to","Translated":"设置“使用宏链”为","Context":"SetUseMacroChainBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Set 'Use Macro Chain'","Translated":"设置“使用宏链”","Context":"BulkEditFactory.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Set 'Always Linked' to","Translated":"设置“始终链接”为","Context":"SetAlwaysLinkedBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Set 'Always Linked'","Translated":"设置“始终链接”","Context":"BulkEditFactory.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Add 'Or' Condition","Translated":"添加“或”条件","Context":"AddOrConditionBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"When applied add all conditions in this set as an 'Or' condition to selected macros","Translated":"应用时将此集合中的所有条件作为“或”条件添加到所选宏","Context":"AddOrConditionBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Add 'And' Condition","Translated":"添加“与”条件","Context":"AddAndConditionBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Extends the 'And' condition that matches our target filters","Translated":"扩展匹配目标筛选条件的“与”条件","Context":"AddAndConditionBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Target Group","Translated":"目标组","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Only add conditions to the first 'And' group that matches all filters","Translated":"仅将条件添加到第一个匹配所有筛选条件的“与”组","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Only add conditions to the last 'And' group that matches all filters","Translated":"仅将条件添加到最后一个匹配所有筛选条件的“与”组","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add conditions to all groups that match our filters","Translated":"将条件添加到所有匹配筛选条件的组","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Condition Filter","Translated":"条件筛选","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"If set, only update 'And' groups that include this condition","Translated":"若设置，仅更新包含此条件的“与”组","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"<no filter>","Translated":"<无筛选>","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.NullableStringCombo"},{"Original":"Condition","Translated":"条件","Context":"AddAndConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Remove Condition","Translated":"移除条件","Context":"RemoveConditionBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Removes all conditions of this type from selected macros","Translated":"从所选宏中移除此类型的所有条件","Context":"RemoveConditionBulkEditAction.DrawValue","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Remove All Conditions","Translated":"移除所有条件","Context":"RemoveAllConditionsBulkEditAction.DrawLabel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Macro Link Picker","Translated":"宏链接选择器","Context":"MacroLinkPicker..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Link (","Translated":"链接 (","Context":"MacroWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Link this macro to one or more in-game macro slots","Translated":"将此宏链接到一个或多个游戏内宏槽位","Context":"MacroWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Define when to link this macro to the in-game macro slots","Translated":"定义何时将此宏链接到游戏内宏槽位","Context":"MacroWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Link Macros","Translated":"链接宏","Context":"MacroWindow.DrawMainWindows","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"If multiple macros are linked to the same slot, the first one in the tree is chosen.","Translated":"若多个宏链接到同一槽位，则选择树中的第一个。","Context":"MacroWindow.DrawConditionExprEditor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HelpMarker"},{"Original":"Always Linked","Translated":"始终链接","Context":"MacroWindow.DrawConditionExprEditor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Ignore all conditions and always link this macro","Translated":"忽略所有条件并始终链接此宏","Context":"MacroWindow.DrawConditionExprEditor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Run Selected","Translated":"运行所选","Context":"MacroWindow.DrawMacroTextRightClickPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Insert Special Character","Translated":"插入特殊字符","Context":"MacroWindow.DrawMacroTextRightClickPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Use Macro Chain","Translated":"使用宏链","Context":"DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Use Macro Chain when binding long macros. Macros must be linked to adjacent positions for this to work","Translated":"绑定长宏时使用宏链。宏必须链接到相邻位置才能生效","Context":"DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Use Macro Chain when binding long macros. This setting is only availalbe if Macro Chain is installed.","Translated":"绑定长宏时使用宏链。仅在安装了宏链时可用。","Context":"DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Delete!","Translated":"删除！","Context":"DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Node","Translated":"节点","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"MenuButton","Translated":"菜单按钮","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Checkbox","Translated":"复选框","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"New","Translated":"新建","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"Group","Translated":"分组","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Import","Translated":"导入","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"From Preset Code","Translated":"从预设代码","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Import a new macro from a Macro Mate preset code","Translated":"从 Macro Mate 预设代码导入新宏","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"From Game","Translated":"从游戏","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Bulk import macros from existing vanilla macros","Translated":"从现有原生宏批量导入","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Subscription","Translated":"订阅","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Edit Mode","Translated":"编辑模式","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Toggle Edit Mode, which can be used to to edit multiple macros at once (","Translated":"切换编辑模式，可同时编辑多个宏（","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Sort","Translated":"排序","Context":"MainWindow.DrawMenuBar","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Bulk Edit","Translated":"批量编辑","Context":"MainWindow.DrawEditModeActions","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Tool to apply bulk changes to all selected macros","Translated":"对所有选中宏批量应用更改的工具","Context":"MainWindow.DrawEditModeActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Bulk Delete","Translated":"批量删除","Context":"MainWindow.DrawEditModeActions","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Bulk delete all selected macros","Translated":"批量删除所有选中的宏","Context":"MainWindow.DrawEditModeActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Show all macros","Translated":"显示所有宏","Context":"MainWindow.DrawSearchBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Only show macros that are currently bound to a vanilla macro slot","Translated":"仅显示当前绑定到游戏宏栏位的宏","Context":"MainWindow.DrawSearchBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Only show macros that are linked to a vanilla macro slot","Translated":"仅显示链接到游戏宏栏位的宏","Context":"MainWindow.DrawSearchBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Only show macros that do not have any links to a vanilla macro slot","Translated":"仅显示未链接到游戏宏栏位的宏","Context":"MainWindow.DrawSearchBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Search","Translated":"搜索","Context":"MainWindow.DrawSearchBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Clear search text","Translated":"清除搜索文本","Context":"MainWindow.DrawSearchBar","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"This group is provided by a 3rd party, make sure to verify the macros in this group before you run them.\n\nSubscription URL: ","Translated":"此分组由第三方提供，运行前请务必核实其中的宏。\n\n订阅 URL：","Context":"MainWindow.DrawSubscriptionGroupIcons","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Updates are available, use 'Subscription > Sync' to update","Translated":"有可用更新，使用“订阅 > 同步”进行更新","Context":"MainWindow.DrawSubscriptionGroupIcons","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"errors","Translated":"错误","Context":"MainWindow.DrawAlertIcons","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"warnings","Translated":"警告","Context":"MainWindow.DrawAlertIcons","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" Check 'Subscription > Status' for details.","Translated":"查看“订阅 > 状态”了解详情。","Context":"MainWindow.DrawAlertIcon","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":" found in this group.","Translated":"在此分组中发现。","Context":"MainWindow.DrawAlertIcon","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Macro link is active, bound to: ","Translated":"宏链接已激活，绑定到：","Context":"MainWindow.DrawMacroLinkIcon","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Fix Issues","Translated":"修复问题","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"Sync","Translated":"同步","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Download the latest version of this group from the subscription. Create new macros (if any) and applies changes to existing macros.","Translated":"从订阅下载此分组的最新版本。创建新宏（如有）并对现有宏应用更改。","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Check for Updates","Translated":"检查更新","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Check if there are any updates for this group.","Translated":"检查此分组是否有更新。","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Status","Translated":"状态","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Show the last shown status window","Translated":"显示上次显示的状态窗口","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Copy URL to Clipboard","Translated":"复制 URL 到剪贴板","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Add Macro","Translated":"添加宏","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Add Group","Translated":"添加分组","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Edit All","Translated":"全部编辑","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Rename","Translated":"重命名","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Duplicate","Translated":"复制","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Import Here","Translated":"从此导入","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"Import a Macro Mate preset into this group","Translated":"将 Macro Mate 预设导入此分组","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Export to Clipboard","Translated":"导出到剪贴板","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Export this item to the clipboard as a Macro Mate preset","Translated":"将此项目作为 Macro Mate 预设导出到剪贴板","Context":"MainWindow.DrawNodeActionsPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Subscription URL","Translated":"订阅 URL","Context":"MainWindow.DrawNewSubscriptionGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Save","Translated":"保存","Context":"MainWindow.DrawNewSubscriptionGroupPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Rename###mainwindow/rename_popup/","Translated":"重命名","Context":"MainWindow.DrawRenamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Delete###mainwindow/delete_popup/","Translated":"删除","Context":"MainWindow.DrawDeletePopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginPopupModal"},{"Original":"Are you sure you want to delete ","Translated":"确定要删除吗","Context":"MainWindow.DrawDeletePopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"No!","Translated":"否！","Context":"MainWindow.DrawDeletePopupModal","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Are you sure you want to delete all unowned macros in '","Translated":"确定要删除所有未拥有的宏吗，位于“","Context":"MainWindow.DrawDeleteUnownedPopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Delete ","Translated":"删除","Context":"MainWindow.DrawDeleteUnownedPopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":" macros!","Translated":"宏！","Context":"MainWindow.DrawDeleteUnownedPopupModal","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Bulk Delete###mainwindow/bulk_delete_popup","Translated":"批量删除","Context":"MainWindow.DrawBulkDeletePopupModel","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginPopupModal"},{"Original":"Are you sure you want to delete all selected macros (total: ","Translated":"确定要删除所有选中的宏吗（总计：","Context":"MainWindow.DrawBulkDeletePopupModel","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Import###mainwindow/import_code_popup/","Translated":"导入","Context":"MainWindow.DrawImportFromCodePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Import Code","Translated":"导入代码","Context":"MainWindow.DrawImportFromCodePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Paste a preset here and click 'Import'","Translated":"在此粘贴预设，然后点击“导入”","Context":"MainWindow.DrawImportFromCodePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Preset string is invalid","Translated":"预设字符串无效","Context":"MainWindow.DrawImportFromCodePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Import###mainwindow/import_from_game/","Translated":"导入","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Import from Game","Translated":"从游戏导入","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Macro Set","Translated":"宏组","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Macro Slot Start","Translated":"宏栏起始","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Macro Slot End","Translated":"宏栏结束","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Imports ","Translated":"导入","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" macros ","Translated":"宏","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":" (total: ","Translated":"（总计：","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":") into Macro Mate under ","Translated":"）到 Macro Mate 的","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Invalid import: 'Macro Slot Start' must be before 'Macro Slot End'","Translated":"导入无效：'宏槽位起始'必须位于'宏槽位结束'之前","Context":"MainWindow.DrawImportFromGamePopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Sort###mainwindow/sort_popup/","Translated":"排序","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.BeginPopup"},{"Original":"Sort '","Translated":"排序'","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Sort By","Translated":"排序依据","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Sort Direction","Translated":"排序方向","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Group By","Translated":"分组依据","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Sort Subgroups","Translated":"排序子分组","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Enabled: Sort all groups and subgroups","Translated":"启用：排序所有分组和子分组","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Disabled: Only sort this group, leave subgroups untouched","Translated":"禁用：仅排序此分组，不处理子分组","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Apply###sort_apply/{node.Id}","Translated":"应用","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Cancel###sort_cancel/{node.Id}","Translated":"取消","Context":"MainWindow.DrawSortGroupPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"General","Translated":"常规","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Set Link Placeholder Icon","Translated":"设置链接占位图标","Context":"SettingsWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Select the icon used for macro slots that are managed by Macro Mate but currently unlinked (right click to reset to default)","Translated":"选择由 Macro Mate 管理但当前未链接的宏槽位所使用的图标（右键重置为默认）","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Show Vanilla Macro Context Menus","Translated":"显示原版宏上下文菜单","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"When disabled no Macro Mate context menu actions will be shown in the vanilla macro UI","Translated":"禁用后，原版宏界面将不显示 Macro Mate 上下文菜单操作","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Use Macro Chain by Default","Translated":"默认使用宏链","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"If enabled, all newly created macros will enable the 'Use Macro Chain' setting","Translated":"启用后，所有新建宏都将启用'使用宏链'设置","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"This setting is only availalbe if Macro Chain is installed.","Translated":"仅当安装了 Macro Chain 时此设置才可用。","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Subscriptions","Translated":"订阅","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Automatically Check for Subscription Updates","Translated":"自动检查订阅更新","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"When disabled Macro Mate will not automatically check for subscription updates. You will need to manually use the 'Check for Updates' action","Translated":"禁用后 Macro Mate 将不会自动检查订阅更新。你需要手动使用“检查更新”操作","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Automatic Check for Updates Interval (Minutes)","Translated":"自动检查更新间隔（分钟）","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"The number of minutes to wait between automatically checking for updates","Translated":"自动检查更新之间的等待分钟数","Context":"SettingsWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"No operation active","Translated":"无活动操作","Context":"SubscriptionStatusWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Copy Text to Clipboard","Translated":"复制文本到剪贴板","Context":"SubscriptionStatusWindow.DrawTaskPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"IPC Debugging","Translated":"IPC 调试","Context":"DebugWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"result: ","Translated":"结果：","Context":"DebugWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"err: ","Translated":"错误：","Context":"DebugWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Call IPC","Translated":"调用 IPC","Context":"DebugWindow.DrawIpcIsAvailable","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Parent Path","Translated":"父路径","Context":"DebugWindow.DrawIpcCreateMacro","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Icon Id","Translated":"图标 ID","Context":"DebugWindow.DrawIpcCreateMacro","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Path","Translated":"路径","Context":"DebugWindow.DrawIpcCreateGroup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.InputText"},{"Original":"Macro Mate Debug","Translated":"Macro Mate 调试","Context":"DebugWindow..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Or","Translated":"或","Context":"ConditionExprEditor.DrawOrCondition","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Conditions","Translated":"条件","Context":"ConditionExprEditor.DrawOrCondition","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Action","Translated":"操作","Context":"ConditionExprEditor.DrawOrCondition","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Add Condition","Translated":"添加条件","Context":"ConditionExprEditor.DrawOrCondition","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"Add All Current Conditions","Translated":"添加所有当前条件","Context":"ConditionExprEditor.DrawOrCondition","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Adds all currently active conditions to this or condition","Translated":"将当前所有激活条件添加到此或条件","Context":"ConditionExprEditor.DrawOrCondition","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Add 'Or' group","Translated":"添加“或”组","Context":"ConditionExprEditor.DrawOrCondition","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"and","Translated":"且","Context":"ConditionExprEditor.DrawOpExpr","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"This condition is active","Translated":"此条件已激活","Context":"ConditionExprEditor.DrawOpExpr","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Select Current","Translated":"选择当前","Context":"ConditionExprEditor.DrawNumConditionPopup","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Select the currently active condition","Translated":"选择当前激活的条件","Context":"ConditionExprEditor.DrawNumConditionPopup","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"icon id: ","Translated":"图标 ID：","Context":"IconAndName.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Show this macro in the 'User Macros' UI","Translated":"在“用户宏”界面中显示此宏","Context":"IconAndName.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Run","Translated":"运行","Context":"MacroRunMenuItem.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.MenuItem"},{"Original":"Filter...","Translated":"筛选...","Context":"SeStringAutoCompletePopup.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Completion","Translated":"补全","Context":"SeStringAutoCompletePopup.DrawCompletionResults","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Invalid macro slot: ","Translated":"无效的宏槽位：","Context":"VanillaMacroManager.SetMacro","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Macro ","Translated":"宏","Context":"VanillaMacroManager.SetMacro","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" has too many lines (max 15)","Translated":"行数过多（最多 15 行）","Context":"VanillaMacroManager.SetMacro","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"CategoryTree","Translated":"分类树","Context":"IconPickerDialog.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Search ","Translated":"搜索","Context":"IconPickerDialog.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Show Icon Tags","Translated":"显示图标标签","Context":"IconPickerDialog.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"WARNING: Icon tags may contain spoilers! Use at your own risk.","Translated":"警告：图标标签可能包含剧透！请自行承担风险。","Context":"IconPickerDialog.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Icon Picker","Translated":"图标选择器","Context":"IconPickerDialog..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Indexing... ","Translated":"索引中...","Context":"Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"System","Translated":"系统","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Actions","Translated":"技能","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Class/Job","Translated":"职业/特职","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Mounts","Translated":"坐骑","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Minions","Translated":"宠物","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Traits","Translated":"特性","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Fashion","Translated":"时尚","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Items","Translated":"道具","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Equipment","Translated":"装备","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Housing","Translated":"房屋","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"UI","Translated":"界面","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Item Categories","Translated":"道具分类","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Weather","Translated":"天气","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Map Markers","Translated":"地图标记","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Textures","Translated":"纹理","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Art","Translated":"美术","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Splash Logos","Translated":"启动标志","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Event","Translated":"活动","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Markers","Translated":"标记","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Duties/Trials","Translated":"任务/讨伐战","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Nameplate","Translated":"名牌","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Guardian","Translated":"卫护","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Spoilers","Translated":"剧透","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Custom Deliveries","Translated":"老主顾交易","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Grand Company","Translated":"大国防联军","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Quests","Translated":"任务","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Playstyle","Translated":"游玩风格","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Tribes","Translated":"部族","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"World Map","Translated":"世界地图","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Achievements","Translated":"成就","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Hunt Log","Translated":"狩猎日志","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Ocean Fishing","Translated":"出海垂钓","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Submarine Maps","Translated":"潜水艇地图","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Zone Maps","Translated":"区域地图","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Emotes","Translated":"情感动作","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Free Company","Translated":"部队","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Group Pose","Translated":"集体动作","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Eureka","Translated":"优雷卡","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Currencies","Translated":"货币","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Macros","Translated":"宏","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Tags","Translated":"标签","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Gardening Log","Translated":"园艺图鉴","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Log","Translated":"图鉴","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Footprints","Translated":"足迹","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Chocobo Racing","Translated":"陆行鸟竞赛","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Island Sanctuary","Translated":"开拓无人岛","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"DoH/DoL Logs","Translated":"能工巧匠/大地使者图鉴","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Credits","Translated":"制作人员","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"BLU UI","Translated":"青魔法师界面","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Bozja UI","Translated":"博兹雅界面","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"NPC Portraits","Translated":"NPC肖像","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Mahjong","Translated":"麻将","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Fan Festival","Translated":"粉丝节","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Fishing Log","Translated":"钓鱼图鉴","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Notebooks","Translated":"笔记","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Relic Log","Translated":"relic图鉴","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Negotiation","Translated":"谈判","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Orchestration","Translated":"管弦乐谱","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Fall Guys","Translated":"糖豆人","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Hunts","Translated":"狩猎","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Quest Images","Translated":"任务图像","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"New Game+","Translated":"新生","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Popup Texts","Translated":"弹窗文本","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Aesthetics","Translated":"美学","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Japanese Popup Texts","Translated":"日文弹窗文本","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Tutorials","Translated":"教程","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Stamps/Chocobo Racing","Translated":"印章/陆行鸟竞赛","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Boss Titles","Translated":"首领称号","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Adventurer Plate","Translated":"冒险者铭牌","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Statuses","Translated":"状态","Context":"IconPickerIndex.ApplyHardcodedCategories","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IconPickerIndex.ApplyIconCategory"},{"Original":"Favourites","Translated":"收藏夹","Context":"CharPickerDialog.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Right click to add/remove to favourites","Translated":"右键添加/移除收藏","Context":"CharPickerDialog.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiExt.HoverTooltip"},{"Original":"Char Picker","Translated":"角色选择","Context":"CharPickerDialog..cctor","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ 窗口标题"},{"Original":"Content","Translated":"内容","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"<unknown character>","Translated":"<未知角色>","Context":"CurrentCharacterCondition.get_ValueName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Current Character","Translated":"当前角色","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Current Craft - Difficulty","Translated":"当前制作 - 难度","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Current Craft - Max Durability","Translated":"当前制作 - 最大耐久度","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Current Craft - Max Quality","Translated":"当前制作 - 最高品质","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":" - <empty>","Translated":"- <空>","Context":"GearsetCondition.get_ValueName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Gearset","Translated":"套装","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"HUD Layout","Translated":"界面布局","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Job","Translated":"职业","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Location","Translated":"位置","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Map Flag - Location","Translated":"地图标记 - 位置","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"<no conditions>","Translated":"<无条件>","Context":"PlayerConditionCondition.get_ValueName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Player Condition","Translated":"玩家状态","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Player Level","Translated":"玩家等级","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"<no statuses>","Translated":"<无状态>","Context":"PlayerStatusCondition.get_ValueName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Player Status","Translated":"玩家状态效果","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Medicated","Translated":"强化药","Context":"WellFedOrMedicated.get_NarrowName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Well Fed","Translated":"进食","Context":"WellFedOrMedicated.get_NarrowName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"In PvP","Translated":"PvP中","Context":"PvpStateCondition.get_ValueName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"In PvP (exclude Wolves' Den)","Translated":"PvP中（不含竞技场）","Context":"PvpStateCondition.get_ValueName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"Not in PvP","Translated":"非PvP","Context":"PvpStateCondition.get_ValueName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.SetTooltip"},{"Original":"PvP State","Translated":"PvP状态","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Target","Translated":"目标","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"<err:world>","Translated":"<错误:世界>","Context":"WorldCondition.get_NarrowName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"World","Translated":"世界","Context":"ConditionFactory.get_ConditionName","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Show the Macro Mate window","Translated":"显示 Macro Mate 窗口","Context":"PluginCommandManager..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"unrecognized subcommand: '","Translated":"无法识别的子命令：","Context":"PluginCommandManager.OnMainCommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Expected ","Translated":"预期","Context":"PluginCommandManager.OnOpenSubcommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" open <path> (try ","Translated":"open <path>（尝试","Context":"PluginCommandManager.OnOpenSubcommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" help)","Translated":"help）","Context":"PluginCommandManager.OnOpenSubcommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":" run <path> (try ","Translated":"run <path>（尝试","Context":"PluginCommandManager.OnRunSubcommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"The run command can only be used with short macros (<= 15 lines)","Translated":"run 命令仅可用于短宏（<= 15 行）","Context":"PluginCommandManager.OnRunSubcommand","Source":"ai:deepseek","Role":"UI","RoleReason":"→ IChatGui.PrintError"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "MacroMate",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "is",
+      "Translated": "是",
+      "Context": "Is.get_Text",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "is not",
+      "Translated": "不是",
+      "Context": "IsNot.get_Text",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Less Than",
+      "Translated": "小于",
+      "Context": "Lt.get_LongText",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Less Than or Equal To",
+      "Translated": "小于或等于",
+      "Context": "Lte.get_LongText",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Greater Than",
+      "Translated": "大于",
+      "Context": "Gt.get_LongText",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Greater Than or Equal To",
+      "Translated": "大于或等于",
+      "Context": "Gte.get_LongText",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Macro Mate: Failed to bind macros on condition change",
+      "Translated": "宏搭档：条件变化时绑定宏失败",
+      "Context": "MacroMate.Refresh",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Unbinding condition listener...",
+      "Translated": "正在解除条件监听...",
+      "Context": "MacroMate.Refresh",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Macro Mate",
+      "Translated": "宏搭档",
+      "Context": "Plugin.get_Name",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Sync '",
+      "Translated": "同步 '",
+      "Context": "Sync.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Waiting for existing jobs to finish",
+      "Translated": "等待现有任务完成",
+      "Context": "CheckForUpdates.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Check '",
+      "Translated": "检查 '",
+      "Context": "CheckMacroForUpdates.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Has update - New Group '",
+      "Translated": "有更新 - 新分组 '",
+      "Context": "CheckMacroForUpdates.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Has update - New Macro '",
+      "Translated": "有更新 - 新宏 '",
+      "Context": "CheckMacroForUpdates.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Checking File Headers",
+      "Translated": "正在检查文件头",
+      "Context": "FetchMacroLinesIfModified.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "No changes - ETag match",
+      "Translated": "无变化 - ETag 匹配",
+      "Context": "FetchMacroLinesIfModified.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "May have changes - ETag mismatch ",
+      "Translated": "可能有变化 - ETag 不匹配",
+      "Context": "FetchMacroLinesIfModified.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Downloading File",
+      "Translated": "正在下载文件",
+      "Context": "FetchMacroLinesIfModified.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "No changes - file lines unmodified",
+      "Translated": "无变化 - 文件行未修改",
+      "Context": "FetchMacroLinesIfModified.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Has changes - file lines modified",
+      "Translated": "有变化 - 文件行已修改",
+      "Context": "FetchMacroLinesIfModified.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Fetch Manifest",
+      "Translated": "获取清单",
+      "Context": "FetchManifest.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Downloading Headers",
+      "Translated": "正在下载标头",
+      "Context": "FetchManifest.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Has changes - ETag mismatch ",
+      "Translated": "有变更 - ETag 不匹配",
+      "Context": "FetchManifest.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "icon id",
+      "Translated": "图标 ID",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "notes",
+      "Translated": "备注",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "lines",
+      "Translated": "行",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Has changes - ",
+      "Translated": "有变更 -",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": " modified",
+      "Translated": "已修改",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "No changes",
+      "Translated": "无变更",
+      "Context": "SyncOrCheckMacro.MoveNext",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TreeNodeEx"
+    },
+    {
+      "Original": "Could not load Macro Mate Cache",
+      "Translated": "无法加载 Macro Mate 缓存",
+      "Context": "MacroMateCacheV1.Read",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Could not load Macro Mate Config",
+      "Translated": "无法加载 Macro Mate 配置",
+      "Context": "MacroMateSerializerV1.Read",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Slot ",
+      "Translated": "栏位",
+      "Context": "MacroConfig.BulkImportFromXIV",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": ": Skipped (already managed by Macro Mate)",
+      "Translated": "：已跳过（已由 Macro Mate 管理）",
+      "Context": "MacroConfig.BulkImportFromXIV",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Unbound",
+      "Translated": "未绑定",
+      "Context": "MacroLink.Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Individual",
+      "Translated": "独立",
+      "Context": "MacroLink.Name",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Shared",
+      "Translated": "共享",
+      "Context": "MacroLink.Name",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "no node found at '",
+      "Translated": "未找到节点于 '",
+      "Context": "IPCManager.ValidatePath",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "expected macro at '",
+      "Translated": "预期宏位于 '",
+      "Context": "IPCManager.ValidateMacroPath",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Create Backup",
+      "Translated": "创建备份",
+      "Context": "BackupWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Open Backup Folder",
+      "Translated": "打开备份文件夹",
+      "Context": "BackupWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Reload Config File",
+      "Translated": "重新加载配置文件",
+      "Context": "BackupWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Macro Mate config reloaded",
+      "Translated": "Macro Mate 配置已重新加载",
+      "Context": "BackupWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.Print"
+    },
+    {
+      "Original": "FileName",
+      "Translated": "文件名",
+      "Context": "BackupWindow.DrawBackups",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "ModifiedDate",
+      "Translated": "修改日期",
+      "Context": "BackupWindow.DrawBackups",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "LoadButton",
+      "Translated": "加载按钮",
+      "Context": "BackupWindow.DrawBackups",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "DeleteButton",
+      "Translated": "删除按钮",
+      "Context": "BackupWindow.DrawBackups",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Load",
+      "Translated": "加载",
+      "Context": "BackupWindow.DrawBackups",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Double right click this button to delete ",
+      "Translated": "右键双击此按钮以删除",
+      "Context": "BackupWindow.DrawBackups",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Load###backups_window/load_popup/",
+      "Translated": "加载",
+      "Context": "BackupWindow.DrawLoadPopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopupModal"
+    },
+    {
+      "Original": "Are you sure you want to load ",
+      "Translated": "确定要加载吗",
+      "Context": "BackupWindow.DrawLoadPopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "This will overwrite the current configuration",
+      "Translated": "这将覆盖当前配置",
+      "Context": "BackupWindow.DrawLoadPopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Yes",
+      "Translated": "是",
+      "Context": "BackupWindow.DrawLoadPopupModal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Convert to Auto-Translate",
+      "Translated": "转换为自动翻译",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Converts plain text words to Auto-Translate payloads if they match the Auto-Translate dictionary",
+      "Translated": "若纯文本词语与自动翻译词典匹配，则将其转换为自动翻译载荷",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Min Word Length:",
+      "Translated": "最小词长：",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Skip words shorter than this length to avoid replacing common short words",
+      "Translated": "跳过短于此长度的词语，以避免替换常见短词",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Max Words:",
+      "Translated": "最大词数：",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Maximum number of consecutive words to match (e.g., 3 allows \"Fell Cleave\" to match)",
+      "Translated": "最多匹配的连续词数（例如 3 可匹配“裂石飞环”）",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Auto Translate Commands",
+      "Translated": "自动翻译命令",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Convert commands like /action to Auto-Translate payloads (commands are the same in all languages)",
+      "Translated": "将 /action 等命令转换为自动翻译载荷（命令在所有语言中相同）",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Converted ",
+      "Translated": "已转换",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " word(s)",
+      "Translated": "词",
+      "Context": "ConvertToAutoTranslateBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Introduction",
+      "Translated": "简介",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Binding",
+      "Translated": "铁锁",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Auto Translation",
+      "Translated": "自动翻译",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Paths",
+      "Translated": "路径",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Command",
+      "Translated": "命令",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Description",
+      "Translated": "描述",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Select root",
+      "Translated": "选择根节点",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select 'My Group' under root",
+      "Translated": "选择根节点下的“My Group”",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "My Group",
+      "Translated": "我的分组",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "My Group/Subgroup",
+      "Translated": "我的分组/子分组",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select 'Subgroup' under 'My Group' under root",
+      "Translated": "选择根节点下“My Group”中的“Subgroup”",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select the first child of root",
+      "Translated": "选择根节点的第一个子节点",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "My Group/@2",
+      "Translated": "我的分组/@2",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select the third child of 'My Group'",
+      "Translated": "选择“My Group”的第三个子节点",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "My Group@1",
+      "Translated": "我的分组@1",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select the second child named 'My Group' under root",
+      "Translated": "选择根节点下名为“My Group”的第二个子节点",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select the child named 'My/Group' under root",
+      "Translated": "选择根节点下名为“My/Group”的子节点",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select the child named 'My@Group' under root",
+      "Translated": "选择根节点下名为“My@Group”的子节点",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Select the child named 'My\\Group' under root",
+      "Translated": "在 root 下选择名为 'My\\Group' 的子项",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Limitations",
+      "Translated": "限制",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Tutorial",
+      "Translated": "教程",
+      "Context": "HelpWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Normal Sprint / PvP / Island Sanctuary macro",
+      "Translated": "普通冲刺 / PvP / 开拓无人岛 宏",
+      "Context": "HelpWindow.DrawSprintTutorial",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Import Example",
+      "Translated": "导入示例",
+      "Context": "HelpWindow.DrawSprintTutorial",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Import the final result of this tutorial into your macro config",
+      "Translated": "将本教程的最终结果导入到你的宏配置中",
+      "Context": "HelpWindow.DrawSprintTutorial",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Help",
+      "Translated": "帮助",
+      "Context": "HelpWindow..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Add Action",
+      "Translated": "添加操作",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Add a new bulk edit action to the action list",
+      "Translated": "向操作列表添加新的批量编辑操作",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Apply",
+      "Translated": "应用",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Applies all bulk edit actions to all selected macros",
+      "Translated": "将所有批量编辑操作应用到所有选中的宏",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Clear All",
+      "Translated": "全部清除",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Clear all bulk edit actions",
+      "Translated": "清除所有批量编辑操作",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Clear Applied",
+      "Translated": "清除已应用",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Clear applied bulk edit actions",
+      "Translated": "清除已应用的批量编辑操作",
+      "Context": "MacroBulkEditWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Bulk Edit Actions",
+      "Translated": "批量编辑操作",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "These actions will be applied to all selected macros after clicking 'Apply'",
+      "Translated": "点击“应用”后，这些操作将应用到所有选中的宏",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Value",
+      "Translated": "值",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Applied",
+      "Translated": "已应用",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Delete this action",
+      "Translated": "删除此操作",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "This action has been applied",
+      "Translated": "已应用此操作",
+      "Context": "MacroBulkEditWindow.DrawBulkEditActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Macro Bulk Edit",
+      "Translated": "宏批量编辑",
+      "Context": "MacroBulkEditWindow..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Set Icon to",
+      "Translated": "设置图标为",
+      "Context": "SetIconMacroBulkEdit.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Click to change, right click to reset to default",
+      "Translated": "点击更改，右键重置为默认",
+      "Context": "SetIconMacroBulkEdit.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Set Icon",
+      "Translated": "设置图标",
+      "Context": "BulkEditFactory.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Set Link to",
+      "Translated": "设置链接为",
+      "Context": "SetLinkBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Set Link",
+      "Translated": "设置链接",
+      "Context": "BulkEditFactory.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Set 'Use Macro Chain' to",
+      "Translated": "设置“使用宏链”为",
+      "Context": "SetUseMacroChainBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Set 'Use Macro Chain'",
+      "Translated": "设置“使用宏链”",
+      "Context": "BulkEditFactory.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Set 'Always Linked' to",
+      "Translated": "设置“始终链接”为",
+      "Context": "SetAlwaysLinkedBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Set 'Always Linked'",
+      "Translated": "设置“始终链接”",
+      "Context": "BulkEditFactory.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Add 'Or' Condition",
+      "Translated": "添加“或”条件",
+      "Context": "AddOrConditionBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "When applied add all conditions in this set as an 'Or' condition to selected macros",
+      "Translated": "应用时将此集合中的所有条件作为“或”条件添加到所选宏",
+      "Context": "AddOrConditionBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Add 'And' Condition",
+      "Translated": "添加“与”条件",
+      "Context": "AddAndConditionBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Extends the 'And' condition that matches our target filters",
+      "Translated": "扩展匹配目标筛选条件的“与”条件",
+      "Context": "AddAndConditionBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Target Group",
+      "Translated": "目标组",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Only add conditions to the first 'And' group that matches all filters",
+      "Translated": "仅将条件添加到第一个匹配所有筛选条件的“与”组",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Only add conditions to the last 'And' group that matches all filters",
+      "Translated": "仅将条件添加到最后一个匹配所有筛选条件的“与”组",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add conditions to all groups that match our filters",
+      "Translated": "将条件添加到所有匹配筛选条件的组",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Condition Filter",
+      "Translated": "条件筛选",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "If set, only update 'And' groups that include this condition",
+      "Translated": "若设置，仅更新包含此条件的“与”组",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "<no filter>",
+      "Translated": "<无筛选>",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.NullableStringCombo"
+    },
+    {
+      "Original": "Condition",
+      "Translated": "条件",
+      "Context": "AddAndConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Remove Condition",
+      "Translated": "移除条件",
+      "Context": "RemoveConditionBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Removes all conditions of this type from selected macros",
+      "Translated": "从所选宏中移除此类型的所有条件",
+      "Context": "RemoveConditionBulkEditAction.DrawValue",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Remove All Conditions",
+      "Translated": "移除所有条件",
+      "Context": "RemoveAllConditionsBulkEditAction.DrawLabel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Macro Link Picker",
+      "Translated": "宏链接选择器",
+      "Context": "MacroLinkPicker..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Link (",
+      "Translated": "链接 (",
+      "Context": "MacroWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Link this macro to one or more in-game macro slots",
+      "Translated": "将此宏链接到一个或多个游戏内宏槽位",
+      "Context": "MacroWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Define when to link this macro to the in-game macro slots",
+      "Translated": "定义何时将此宏链接到游戏内宏槽位",
+      "Context": "MacroWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Link Macros",
+      "Translated": "链接宏",
+      "Context": "MacroWindow.DrawMainWindows",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "If multiple macros are linked to the same slot, the first one in the tree is chosen.",
+      "Translated": "若多个宏链接到同一槽位，则选择树中的第一个。",
+      "Context": "MacroWindow.DrawConditionExprEditor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HelpMarker"
+    },
+    {
+      "Original": "Always Linked",
+      "Translated": "始终链接",
+      "Context": "MacroWindow.DrawConditionExprEditor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Ignore all conditions and always link this macro",
+      "Translated": "忽略所有条件并始终链接此宏",
+      "Context": "MacroWindow.DrawConditionExprEditor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Run Selected",
+      "Translated": "运行所选",
+      "Context": "MacroWindow.DrawMacroTextRightClickPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Insert Special Character",
+      "Translated": "插入特殊字符",
+      "Context": "MacroWindow.DrawMacroTextRightClickPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Use Macro Chain",
+      "Translated": "使用宏链",
+      "Context": "DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Use Macro Chain when binding long macros. Macros must be linked to adjacent positions for this to work",
+      "Translated": "绑定长宏时使用宏链。宏必须链接到相邻位置才能生效",
+      "Context": "DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Use Macro Chain when binding long macros. This setting is only availalbe if Macro Chain is installed.",
+      "Translated": "绑定长宏时使用宏链。仅在安装了宏链时可用。",
+      "Context": "DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Delete!",
+      "Translated": "删除！",
+      "Context": "DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Node",
+      "Translated": "节点",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "MenuButton",
+      "Translated": "菜单按钮",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Checkbox",
+      "Translated": "复选框",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "New",
+      "Translated": "新建",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "Group",
+      "Translated": "分组",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Import",
+      "Translated": "导入",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "From Preset Code",
+      "Translated": "从预设代码",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Import a new macro from a Macro Mate preset code",
+      "Translated": "从 Macro Mate 预设代码导入新宏",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "From Game",
+      "Translated": "从游戏",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Bulk import macros from existing vanilla macros",
+      "Translated": "从现有原生宏批量导入",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Subscription",
+      "Translated": "订阅",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Edit Mode",
+      "Translated": "编辑模式",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Toggle Edit Mode, which can be used to to edit multiple macros at once (",
+      "Translated": "切换编辑模式，可同时编辑多个宏（",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Sort",
+      "Translated": "排序",
+      "Context": "MainWindow.DrawMenuBar",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Bulk Edit",
+      "Translated": "批量编辑",
+      "Context": "MainWindow.DrawEditModeActions",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Tool to apply bulk changes to all selected macros",
+      "Translated": "对所有选中宏批量应用更改的工具",
+      "Context": "MainWindow.DrawEditModeActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Bulk Delete",
+      "Translated": "批量删除",
+      "Context": "MainWindow.DrawEditModeActions",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Bulk delete all selected macros",
+      "Translated": "批量删除所有选中的宏",
+      "Context": "MainWindow.DrawEditModeActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Show all macros",
+      "Translated": "显示所有宏",
+      "Context": "MainWindow.DrawSearchBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Only show macros that are currently bound to a vanilla macro slot",
+      "Translated": "仅显示当前绑定到游戏宏栏位的宏",
+      "Context": "MainWindow.DrawSearchBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Only show macros that are linked to a vanilla macro slot",
+      "Translated": "仅显示链接到游戏宏栏位的宏",
+      "Context": "MainWindow.DrawSearchBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Only show macros that do not have any links to a vanilla macro slot",
+      "Translated": "仅显示未链接到游戏宏栏位的宏",
+      "Context": "MainWindow.DrawSearchBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Search",
+      "Translated": "搜索",
+      "Context": "MainWindow.DrawSearchBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Clear search text",
+      "Translated": "清除搜索文本",
+      "Context": "MainWindow.DrawSearchBar",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "This group is provided by a 3rd party, make sure to verify the macros in this group before you run them.\n\nSubscription URL: ",
+      "Translated": "此分组由第三方提供，运行前请务必核实其中的宏。\n\n订阅 URL：",
+      "Context": "MainWindow.DrawSubscriptionGroupIcons",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Updates are available, use 'Subscription > Sync' to update",
+      "Translated": "有可用更新，使用“订阅 > 同步”进行更新",
+      "Context": "MainWindow.DrawSubscriptionGroupIcons",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "errors",
+      "Translated": "错误",
+      "Context": "MainWindow.DrawAlertIcons",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "warnings",
+      "Translated": "警告",
+      "Context": "MainWindow.DrawAlertIcons",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " Check 'Subscription > Status' for details.",
+      "Translated": "查看“订阅 > 状态”了解详情。",
+      "Context": "MainWindow.DrawAlertIcon",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": " found in this group.",
+      "Translated": "在此分组中发现。",
+      "Context": "MainWindow.DrawAlertIcon",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Macro link is active, bound to: ",
+      "Translated": "宏链接已激活，绑定到：",
+      "Context": "MainWindow.DrawMacroLinkIcon",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Fix Issues",
+      "Translated": "修复问题",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "Sync",
+      "Translated": "同步",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Download the latest version of this group from the subscription. Create new macros (if any) and applies changes to existing macros.",
+      "Translated": "从订阅下载此分组的最新版本。创建新宏（如有）并对现有宏应用更改。",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Check for Updates",
+      "Translated": "检查更新",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Check if there are any updates for this group.",
+      "Translated": "检查此分组是否有更新。",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Status",
+      "Translated": "状态",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Show the last shown status window",
+      "Translated": "显示上次显示的状态窗口",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Copy URL to Clipboard",
+      "Translated": "复制 URL 到剪贴板",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Add Macro",
+      "Translated": "添加宏",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Add Group",
+      "Translated": "添加分组",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Edit All",
+      "Translated": "全部编辑",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Rename",
+      "Translated": "重命名",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Duplicate",
+      "Translated": "复制",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Import Here",
+      "Translated": "从此导入",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "Import a Macro Mate preset into this group",
+      "Translated": "将 Macro Mate 预设导入此分组",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Export to Clipboard",
+      "Translated": "导出到剪贴板",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Export this item to the clipboard as a Macro Mate preset",
+      "Translated": "将此项目作为 Macro Mate 预设导出到剪贴板",
+      "Context": "MainWindow.DrawNodeActionsPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Subscription URL",
+      "Translated": "订阅 URL",
+      "Context": "MainWindow.DrawNewSubscriptionGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Save",
+      "Translated": "保存",
+      "Context": "MainWindow.DrawNewSubscriptionGroupPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Rename###mainwindow/rename_popup/",
+      "Translated": "重命名",
+      "Context": "MainWindow.DrawRenamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Delete###mainwindow/delete_popup/",
+      "Translated": "删除",
+      "Context": "MainWindow.DrawDeletePopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopupModal"
+    },
+    {
+      "Original": "Are you sure you want to delete ",
+      "Translated": "确定要删除吗",
+      "Context": "MainWindow.DrawDeletePopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "No!",
+      "Translated": "否！",
+      "Context": "MainWindow.DrawDeletePopupModal",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Are you sure you want to delete all unowned macros in '",
+      "Translated": "确定要删除所有未拥有的宏吗，位于“",
+      "Context": "MainWindow.DrawDeleteUnownedPopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Delete ",
+      "Translated": "删除",
+      "Context": "MainWindow.DrawDeleteUnownedPopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": " macros!",
+      "Translated": "宏！",
+      "Context": "MainWindow.DrawDeleteUnownedPopupModal",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Bulk Delete###mainwindow/bulk_delete_popup",
+      "Translated": "批量删除",
+      "Context": "MainWindow.DrawBulkDeletePopupModel",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopupModal"
+    },
+    {
+      "Original": "Are you sure you want to delete all selected macros (total: ",
+      "Translated": "确定要删除所有选中的宏吗（总计：",
+      "Context": "MainWindow.DrawBulkDeletePopupModel",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Import###mainwindow/import_code_popup/",
+      "Translated": "导入",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Import Code",
+      "Translated": "导入代码",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Paste a preset here and click 'Import'",
+      "Translated": "在此粘贴预设，然后点击“导入”",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Preset string is invalid",
+      "Translated": "预设字符串无效",
+      "Context": "MainWindow.DrawImportFromCodePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Import###mainwindow/import_from_game/",
+      "Translated": "导入",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Import from Game",
+      "Translated": "从游戏导入",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Macro Set",
+      "Translated": "宏组",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Macro Slot Start",
+      "Translated": "宏栏起始",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Macro Slot End",
+      "Translated": "宏栏结束",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Imports ",
+      "Translated": "导入",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " macros ",
+      "Translated": "宏",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": " (total: ",
+      "Translated": "（总计：",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": ") into Macro Mate under ",
+      "Translated": "）到 Macro Mate 的",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Invalid import: 'Macro Slot Start' must be before 'Macro Slot End'",
+      "Translated": "导入无效：'宏槽位起始'必须位于'宏槽位结束'之前",
+      "Context": "MainWindow.DrawImportFromGamePopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Sort###mainwindow/sort_popup/",
+      "Translated": "排序",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginPopup"
+    },
+    {
+      "Original": "Sort '",
+      "Translated": "排序'",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Sort By",
+      "Translated": "排序依据",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Sort Direction",
+      "Translated": "排序方向",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Group By",
+      "Translated": "分组依据",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Sort Subgroups",
+      "Translated": "排序子分组",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Enabled: Sort all groups and subgroups",
+      "Translated": "启用：排序所有分组和子分组",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Disabled: Only sort this group, leave subgroups untouched",
+      "Translated": "禁用：仅排序此分组，不处理子分组",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Apply###sort_apply/{node.Id}",
+      "Translated": "应用",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Cancel###sort_cancel/{node.Id}",
+      "Translated": "取消",
+      "Context": "MainWindow.DrawSortGroupPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "General",
+      "Translated": "常规",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Set Link Placeholder Icon",
+      "Translated": "设置链接占位图标",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Select the icon used for macro slots that are managed by Macro Mate but currently unlinked (right click to reset to default)",
+      "Translated": "选择由 Macro Mate 管理但当前未链接的宏槽位所使用的图标（右键重置为默认）",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Show Vanilla Macro Context Menus",
+      "Translated": "显示原版宏上下文菜单",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "When disabled no Macro Mate context menu actions will be shown in the vanilla macro UI",
+      "Translated": "禁用后，原版宏界面将不显示 Macro Mate 上下文菜单操作",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Use Macro Chain by Default",
+      "Translated": "默认使用宏链",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "If enabled, all newly created macros will enable the 'Use Macro Chain' setting",
+      "Translated": "启用后，所有新建宏都将启用'使用宏链'设置",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "This setting is only availalbe if Macro Chain is installed.",
+      "Translated": "仅当安装了 Macro Chain 时此设置才可用。",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Subscriptions",
+      "Translated": "订阅",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Automatically Check for Subscription Updates",
+      "Translated": "自动检查订阅更新",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "When disabled Macro Mate will not automatically check for subscription updates. You will need to manually use the 'Check for Updates' action",
+      "Translated": "禁用后 Macro Mate 将不会自动检查订阅更新。你需要手动使用“检查更新”操作",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Automatic Check for Updates Interval (Minutes)",
+      "Translated": "自动检查更新间隔（分钟）",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "The number of minutes to wait between automatically checking for updates",
+      "Translated": "自动检查更新之间的等待分钟数",
+      "Context": "SettingsWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "No operation active",
+      "Translated": "无活动操作",
+      "Context": "SubscriptionStatusWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Copy Text to Clipboard",
+      "Translated": "复制文本到剪贴板",
+      "Context": "SubscriptionStatusWindow.DrawTaskPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "IPC Debugging",
+      "Translated": "IPC 调试",
+      "Context": "DebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "result: ",
+      "Translated": "结果：",
+      "Context": "DebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "err: ",
+      "Translated": "错误：",
+      "Context": "DebugWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Call IPC",
+      "Translated": "调用 IPC",
+      "Context": "DebugWindow.DrawIpcIsAvailable",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Parent Path",
+      "Translated": "父路径",
+      "Context": "DebugWindow.DrawIpcCreateMacro",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Icon Id",
+      "Translated": "图标 ID",
+      "Context": "DebugWindow.DrawIpcCreateMacro",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Path",
+      "Translated": "路径",
+      "Context": "DebugWindow.DrawIpcCreateGroup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputText"
+    },
+    {
+      "Original": "Macro Mate Debug",
+      "Translated": "Macro Mate 调试",
+      "Context": "DebugWindow..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Or",
+      "Translated": "或",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Conditions",
+      "Translated": "条件",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Action",
+      "Translated": "操作",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Add Condition",
+      "Translated": "添加条件",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "Add All Current Conditions",
+      "Translated": "添加所有当前条件",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Adds all currently active conditions to this or condition",
+      "Translated": "将当前所有激活条件添加到此或条件",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Add 'Or' group",
+      "Translated": "添加“或”组",
+      "Context": "ConditionExprEditor.DrawOrCondition",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "and",
+      "Translated": "且",
+      "Context": "ConditionExprEditor.DrawOpExpr",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "This condition is active",
+      "Translated": "此条件已激活",
+      "Context": "ConditionExprEditor.DrawOpExpr",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Select Current",
+      "Translated": "选择当前",
+      "Context": "ConditionExprEditor.DrawNumConditionPopup",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Select the currently active condition",
+      "Translated": "选择当前激活的条件",
+      "Context": "ConditionExprEditor.DrawNumConditionPopup",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "icon id: ",
+      "Translated": "图标 ID：",
+      "Context": "IconAndName.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Show this macro in the 'User Macros' UI",
+      "Translated": "在“用户宏”界面中显示此宏",
+      "Context": "IconAndName.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Run",
+      "Translated": "运行",
+      "Context": "MacroRunMenuItem.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.MenuItem"
+    },
+    {
+      "Original": "Filter...",
+      "Translated": "筛选...",
+      "Context": "SeStringAutoCompletePopup.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Completion",
+      "Translated": "补全",
+      "Context": "SeStringAutoCompletePopup.DrawCompletionResults",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Invalid macro slot: ",
+      "Translated": "无效的宏槽位：",
+      "Context": "VanillaMacroManager.SetMacro",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Macro ",
+      "Translated": "宏",
+      "Context": "VanillaMacroManager.SetMacro",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " has too many lines (max 15)",
+      "Translated": "行数过多（最多 15 行）",
+      "Context": "VanillaMacroManager.SetMacro",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "CategoryTree",
+      "Translated": "分类树",
+      "Context": "IconPickerDialog.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Search ",
+      "Translated": "搜索",
+      "Context": "IconPickerDialog.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Show Icon Tags",
+      "Translated": "显示图标标签",
+      "Context": "IconPickerDialog.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "WARNING: Icon tags may contain spoilers! Use at your own risk.",
+      "Translated": "警告：图标标签可能包含剧透！请自行承担风险。",
+      "Context": "IconPickerDialog.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Icon Picker",
+      "Translated": "图标选择器",
+      "Context": "IconPickerDialog..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Indexing... ",
+      "Translated": "索引中...",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "System",
+      "Translated": "系统",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Actions",
+      "Translated": "技能",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Class/Job",
+      "Translated": "职业/特职",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Mounts",
+      "Translated": "坐骑",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Minions",
+      "Translated": "宠物",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Traits",
+      "Translated": "特性",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Fashion",
+      "Translated": "时尚",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Items",
+      "Translated": "道具",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Equipment",
+      "Translated": "装备",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Housing",
+      "Translated": "房屋",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "UI",
+      "Translated": "界面",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Item Categories",
+      "Translated": "道具分类",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Weather",
+      "Translated": "天气",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Map Markers",
+      "Translated": "地图标记",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Textures",
+      "Translated": "纹理",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Art",
+      "Translated": "美术",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Splash Logos",
+      "Translated": "启动标志",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Event",
+      "Translated": "活动",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Markers",
+      "Translated": "标记",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Duties/Trials",
+      "Translated": "任务/讨伐战",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Nameplate",
+      "Translated": "名牌",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Guardian",
+      "Translated": "卫护",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Spoilers",
+      "Translated": "剧透",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Custom Deliveries",
+      "Translated": "老主顾交易",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Grand Company",
+      "Translated": "大国防联军",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Quests",
+      "Translated": "任务",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Playstyle",
+      "Translated": "游玩风格",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Tribes",
+      "Translated": "部族",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "World Map",
+      "Translated": "世界地图",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Achievements",
+      "Translated": "成就",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Hunt Log",
+      "Translated": "狩猎日志",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Ocean Fishing",
+      "Translated": "出海垂钓",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Submarine Maps",
+      "Translated": "潜水艇地图",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Zone Maps",
+      "Translated": "区域地图",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Emotes",
+      "Translated": "情感动作",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Free Company",
+      "Translated": "部队",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Group Pose",
+      "Translated": "集体动作",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Eureka",
+      "Translated": "优雷卡",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Currencies",
+      "Translated": "货币",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Macros",
+      "Translated": "宏",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Tags",
+      "Translated": "标签",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Gardening Log",
+      "Translated": "园艺图鉴",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Log",
+      "Translated": "图鉴",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Footprints",
+      "Translated": "足迹",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Chocobo Racing",
+      "Translated": "陆行鸟竞赛",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Island Sanctuary",
+      "Translated": "开拓无人岛",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "DoH/DoL Logs",
+      "Translated": "能工巧匠/大地使者图鉴",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Credits",
+      "Translated": "制作人员",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "BLU UI",
+      "Translated": "青魔法师界面",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Bozja UI",
+      "Translated": "博兹雅界面",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "NPC Portraits",
+      "Translated": "NPC肖像",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Mahjong",
+      "Translated": "麻将",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Fan Festival",
+      "Translated": "粉丝节",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Fishing Log",
+      "Translated": "钓鱼图鉴",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Notebooks",
+      "Translated": "笔记",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Relic Log",
+      "Translated": "relic图鉴",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Negotiation",
+      "Translated": "谈判",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Orchestration",
+      "Translated": "管弦乐谱",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Fall Guys",
+      "Translated": "糖豆人",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Hunts",
+      "Translated": "狩猎",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Quest Images",
+      "Translated": "任务图像",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "New Game+",
+      "Translated": "新生",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Popup Texts",
+      "Translated": "弹窗文本",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Aesthetics",
+      "Translated": "美学",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Japanese Popup Texts",
+      "Translated": "日文弹窗文本",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Tutorials",
+      "Translated": "教程",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Stamps/Chocobo Racing",
+      "Translated": "印章/陆行鸟竞赛",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Boss Titles",
+      "Translated": "首领称号",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Adventurer Plate",
+      "Translated": "冒险者铭牌",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Statuses",
+      "Translated": "状态",
+      "Context": "IconPickerIndex.ApplyHardcodedCategories",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IconPickerIndex.ApplyIconCategory"
+    },
+    {
+      "Original": "Favourites",
+      "Translated": "收藏夹",
+      "Context": "CharPickerDialog.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Right click to add/remove to favourites",
+      "Translated": "右键添加/移除收藏",
+      "Context": "CharPickerDialog.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiExt.HoverTooltip"
+    },
+    {
+      "Original": "Char Picker",
+      "Translated": "角色选择",
+      "Context": "CharPickerDialog..cctor",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ 窗口标题"
+    },
+    {
+      "Original": "Content",
+      "Translated": "内容",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "<unknown character>",
+      "Translated": "<未知角色>",
+      "Context": "CurrentCharacterCondition.get_ValueName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Current Character",
+      "Translated": "当前角色",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Current Craft - Difficulty",
+      "Translated": "当前制作 - 难度",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Current Craft - Max Durability",
+      "Translated": "当前制作 - 最大耐久度",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Current Craft - Max Quality",
+      "Translated": "当前制作 - 最高品质",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": " - <empty>",
+      "Translated": "- <空>",
+      "Context": "GearsetCondition.get_ValueName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Gearset",
+      "Translated": "套装",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "HUD Layout",
+      "Translated": "界面布局",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Job",
+      "Translated": "职业",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Location",
+      "Translated": "位置",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Map Flag - Location",
+      "Translated": "地图标记 - 位置",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "<no conditions>",
+      "Translated": "<无条件>",
+      "Context": "PlayerConditionCondition.get_ValueName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Player Condition",
+      "Translated": "玩家状态",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Player Level",
+      "Translated": "玩家等级",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "<no statuses>",
+      "Translated": "<无状态>",
+      "Context": "PlayerStatusCondition.get_ValueName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Player Status",
+      "Translated": "玩家状态效果",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Medicated",
+      "Translated": "强化药",
+      "Context": "WellFedOrMedicated.get_NarrowName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Well Fed",
+      "Translated": "进食",
+      "Context": "WellFedOrMedicated.get_NarrowName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "In PvP",
+      "Translated": "PvP中",
+      "Context": "PvpStateCondition.get_ValueName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "In PvP (exclude Wolves' Den)",
+      "Translated": "PvP中（不含竞技场）",
+      "Context": "PvpStateCondition.get_ValueName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "Not in PvP",
+      "Translated": "非PvP",
+      "Context": "PvpStateCondition.get_ValueName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    },
+    {
+      "Original": "PvP State",
+      "Translated": "PvP状态",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Target",
+      "Translated": "目标",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "<err:world>",
+      "Translated": "<错误:世界>",
+      "Context": "WorldCondition.get_NarrowName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "World",
+      "Translated": "世界",
+      "Context": "ConditionFactory.get_ConditionName",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Show the Macro Mate window",
+      "Translated": "显示 Macro Mate 窗口",
+      "Context": "PluginCommandManager..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "unrecognized subcommand: '",
+      "Translated": "无法识别的子命令：",
+      "Context": "PluginCommandManager.OnMainCommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Expected ",
+      "Translated": "预期",
+      "Context": "PluginCommandManager.OnOpenSubcommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " open <path> (try ",
+      "Translated": "open <path>（尝试",
+      "Context": "PluginCommandManager.OnOpenSubcommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " help)",
+      "Translated": "help）",
+      "Context": "PluginCommandManager.OnOpenSubcommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": " run <path> (try ",
+      "Translated": "run <path>（尝试",
+      "Context": "PluginCommandManager.OnRunSubcommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "The run command can only be used with short macros (<= 15 lines)",
+      "Translated": "run 命令仅可用于短宏（<= 15 行）",
+      "Context": "PluginCommandManager.OnRunSubcommand",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-21T13:19:13",
+  "imported": {
+    "archive": "uit-direct-2026-10-21T13-18-58-831Z-39f5893c-2026-10-21T131913.json",
+    "accepted": 377,
+    "filled": 377,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 377 条 `MacroMate` 的界面文字译文，已收为**独立译文包** `uit-packs/MacroMate@user-fc78e0.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 377 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
