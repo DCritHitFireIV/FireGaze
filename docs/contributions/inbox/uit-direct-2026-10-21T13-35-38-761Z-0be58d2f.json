@@ -1,1 +1,186 @@
-{"type":"uit-contribution","plugin":"Redirect","kinds":["llm"],"entries":[{"Original":"Redirect","Translated":"重定向","Context":"Plugin.get_Name","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Begin"},{"Original":"Opens the configuration menu","Translated":"打开配置菜单","Context":"Plugin..ctor","Source":"ai:deepseek","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Options","Translated":"选项","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.BeginMenu"},{"Original":"Target redirection options:","Translated":"目标重定向选项：","Context":"PluginUI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Ignore range and target type errors","Translated":"忽略距离和目标类型错误","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Treat all friendly actions as mouseovers","Translated":"将所有友方技能视为鼠标指向","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Include friendly target models","Translated":"包含友方目标模型","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Treat all hostile actions as mouseovers","Translated":"将所有敌对技能视为鼠标指向","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Include hostile target models","Translated":"包含敌对目标模型","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Treat all ground-targeted actions as mouseovers","Translated":"将所有地面目标技能视为鼠标指向","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Place all ground targets at the cursor","Translated":"将所有地面目标放置在光标处","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Allow these actions to queue:","Translated":"允许以下技能进入队列：","Context":"PluginUI.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Ground targeted actions","Translated":"地面目标技能","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Actions from macros","Translated":"宏技能","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":" Role Actions","Translated":"职能技能","Context":"PluginUI.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Select a job to get started!","Translated":"选择一个职业开始！","Context":"PluginUI.DrawActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Search","Translated":"搜索","Context":"PluginUI.DrawActions","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Action","Translated":"技能","Context":"PluginUI.DrawActions","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"},{"Original":"Priority","Translated":"优先级","Context":"PluginUI.DrawActions","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.TableSetupColumn"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Redirect",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Redirect",
+      "Translated": "重定向",
+      "Context": "Plugin.get_Name",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Begin"
+    },
+    {
+      "Original": "Opens the configuration menu",
+      "Translated": "打开配置菜单",
+      "Context": "Plugin..ctor",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Options",
+      "Translated": "选项",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.BeginMenu"
+    },
+    {
+      "Original": "Target redirection options:",
+      "Translated": "目标重定向选项：",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Ignore range and target type errors",
+      "Translated": "忽略距离和目标类型错误",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Treat all friendly actions as mouseovers",
+      "Translated": "将所有友方技能视为鼠标指向",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Include friendly target models",
+      "Translated": "包含友方目标模型",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Treat all hostile actions as mouseovers",
+      "Translated": "将所有敌对技能视为鼠标指向",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Include hostile target models",
+      "Translated": "包含敌对目标模型",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Treat all ground-targeted actions as mouseovers",
+      "Translated": "将所有地面目标技能视为鼠标指向",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Place all ground targets at the cursor",
+      "Translated": "将所有地面目标放置在光标处",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Allow these actions to queue:",
+      "Translated": "允许以下技能进入队列：",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Ground targeted actions",
+      "Translated": "地面目标技能",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Actions from macros",
+      "Translated": "宏技能",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": " Role Actions",
+      "Translated": "职能技能",
+      "Context": "PluginUI.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Select a job to get started!",
+      "Translated": "选择一个职业开始！",
+      "Context": "PluginUI.DrawActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Search",
+      "Translated": "搜索",
+      "Context": "PluginUI.DrawActions",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Action",
+      "Translated": "技能",
+      "Context": "PluginUI.DrawActions",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    },
+    {
+      "Original": "Priority",
+      "Translated": "优先级",
+      "Context": "PluginUI.DrawActions",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TableSetupColumn"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-21T13:37:53",
+  "imported": {
+    "archive": "uit-direct-2026-10-21T13-35-38-761Z-0be58d2f-2026-10-21T133753.json",
+    "accepted": 19,
+    "filled": 19,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 19 条 `Redirect` 的界面文字译文，已收为**独立译文包** `uit-packs/Redirect@user-a758d6.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 19 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
