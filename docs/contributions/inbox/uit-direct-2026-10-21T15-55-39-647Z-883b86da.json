@@ -1,1 +1,288 @@
-{"type":"uit-contribution","plugin":"XIVSchAssitant","kinds":["llm"],"entries":[{"Original":"Auto-summon","Translated":"自动召唤","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Automatically summons Eos on login, instance entry, and after a full wipe.","Translated":"登录、进入副本以及团灭后自动召唤 Eos。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Auto-place at center","Translated":"自动放置到中心","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Repositions Eos to the arena center in 8-player raids. Triggers automatically when you target the boss.","Translated":"在8人团中将 Eos 移动到场地中心。选中首领时自动触发。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Manual override","Translated":"手动覆盖","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"If you manually reposition Eos during a raid, auto-repositioning pauses. A placement target button (⊙) will appear on screen — click it to send Eos back to the arena center and resume auto-placement. Drag it to position it next to your pet action bar.","Translated":"若在副本中手动移动了 Eos，自动放置将暂停。屏幕上会出现放置目标按钮（⊙）——点击可让 Eos 返回场地中心并恢复自动放置。可将其拖动到宠物技能栏附近。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextWrapped"},{"Original":"Button saved at: (","Translated":"按钮保存位置：(","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Move the button back to the center of the screen.","Translated":"将按钮移回屏幕中心。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Button position: default (screen center).","Translated":"按钮位置：默认（屏幕中心）。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"DoT Alert — Biolysis","Translated":"DoT提醒——蛊毒法","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Play alert sound when Biolysis falls off","Translated":"当蛊毒法效果消失时播放提示音","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Chain Stratagem — Countdown","Translated":"连环计——倒计时","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Show visual countdown","Translated":"显示可视倒计时","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Play sound each second","Translated":"每秒播放提示音","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Test countdown (5s)","Translated":"测试倒计时（5秒）","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Custom Arena Centers","Translated":"自定义场地中心","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Enter an 8-player raid to configure its arena center.","Translated":"进入8人团以配置其场地中心。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"Territory: ","Translated":"区域：","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"(custom center active)","Translated":"（自定义中心生效中）","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"(using default 100, 100)","Translated":"（使用默认值 100, 100）","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextColored"},{"Original":"Remove custom center and revert to default (100, 100).","Translated":"移除自定义中心点并恢复默认值 (100, 100)。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Use my position","Translated":"使用我的位置","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Fill X/Z fields with your current in-game position.","Translated":"将当前游戏内位置填入 X/Z 字段。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Use Eos position","Translated":"使用 Eos 的位置","Context":"ConfigWindow.Draw","Source":"ai:llm","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Fill X/Z fields with Eos's current position.","Translated":"将 Eos 的当前位置填入 X/Z 字段。","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextUnformatted"},{"Original":"Saved custom centers:","Translated":"已保存的自定义中心点：","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.TextDisabled"},{"Original":"  Territory ","Translated":"区域","Context":"ConfigWindow.Draw","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Open XIVSchAssistant settings.","Translated":"打开 XIVSchAssistant 设置。","Context":"Plugin..ctor","Source":"ai:llm","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"[XIVSchAssistant] ⚠ Arena center unreachable for territory ","Translated":"[XIVSchAssistant] ⚠ 无法到达该区域的场地中心点","Context":"Plugin.VerifyEosCenterReached","Source":"ai:llm","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Eos could not reach the default position (100, 100) — this arena has a non-standard center. Use /xivsch → Custom Arena Centers to configure the correct position.","Translated":"Eos 无法到达默认位置 (100, 100)——该场地的中心点并非标准位置。请使用 /xivsch → 自定义场地中心点 配置正确的位置。","Context":"Plugin.VerifyEosCenterReached","Source":"ai:llm","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"[XIVSchAssistant] No target selected — please target the boss first, then click again to return Eos to the arena center.","Translated":"[XIVSchAssistant] 未选择目标——请先选定 Boss，然后再次点击使 Eos 返回场地中心。","Context":"Plugin.DrawReturnToCenterButton","Source":"ai:llm","Role":"UI","RoleReason":"→ IChatGui.PrintError"},{"Original":"Return Eos to arena center\nDrag to reposition","Translated":"将 Eos 返回场地中心\n拖动可调整位置","Context":"Plugin.DrawReturnToCenterButton","Source":"ai:llm","Role":"UI","RoleReason":"→ ImGui.SetTooltip"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "XIVSchAssitant",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Auto-summon",
+      "Translated": "自动召唤",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Automatically summons Eos on login, instance entry, and after a full wipe.",
+      "Translated": "登录、进入副本以及团灭后自动召唤 Eos。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Auto-place at center",
+      "Translated": "自动放置到中心",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Repositions Eos to the arena center in 8-player raids. Triggers automatically when you target the boss.",
+      "Translated": "在8人团中将 Eos 移动到场地中心。选中首领时自动触发。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Manual override",
+      "Translated": "手动覆盖",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "If you manually reposition Eos during a raid, auto-repositioning pauses. A placement target button (⊙) will appear on screen — click it to send Eos back to the arena center and resume auto-placement. Drag it to position it next to your pet action bar.",
+      "Translated": "若在副本中手动移动了 Eos，自动放置将暂停。屏幕上会出现放置目标按钮（⊙）——点击可让 Eos 返回场地中心并恢复自动放置。可将其拖动到宠物技能栏附近。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextWrapped"
+    },
+    {
+      "Original": "Button saved at: (",
+      "Translated": "按钮保存位置：(",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Move the button back to the center of the screen.",
+      "Translated": "将按钮移回屏幕中心。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Button position: default (screen center).",
+      "Translated": "按钮位置：默认（屏幕中心）。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "DoT Alert — Biolysis",
+      "Translated": "DoT提醒——蛊毒法",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Play alert sound when Biolysis falls off",
+      "Translated": "当蛊毒法效果消失时播放提示音",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Chain Stratagem — Countdown",
+      "Translated": "连环计——倒计时",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Show visual countdown",
+      "Translated": "显示可视倒计时",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Play sound each second",
+      "Translated": "每秒播放提示音",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Test countdown (5s)",
+      "Translated": "测试倒计时（5秒）",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Custom Arena Centers",
+      "Translated": "自定义场地中心",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Enter an 8-player raid to configure its arena center.",
+      "Translated": "进入8人团以配置其场地中心。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "Territory: ",
+      "Translated": "区域：",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "(custom center active)",
+      "Translated": "（自定义中心生效中）",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "(using default 100, 100)",
+      "Translated": "（使用默认值 100, 100）",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextColored"
+    },
+    {
+      "Original": "Remove custom center and revert to default (100, 100).",
+      "Translated": "移除自定义中心点并恢复默认值 (100, 100)。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Use my position",
+      "Translated": "使用我的位置",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Fill X/Z fields with your current in-game position.",
+      "Translated": "将当前游戏内位置填入 X/Z 字段。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Use Eos position",
+      "Translated": "使用 Eos 的位置",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Fill X/Z fields with Eos's current position.",
+      "Translated": "将 Eos 的当前位置填入 X/Z 字段。",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextUnformatted"
+    },
+    {
+      "Original": "Saved custom centers:",
+      "Translated": "已保存的自定义中心点：",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.TextDisabled"
+    },
+    {
+      "Original": "  Territory ",
+      "Translated": "区域",
+      "Context": "ConfigWindow.Draw",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Open XIVSchAssistant settings.",
+      "Translated": "打开 XIVSchAssistant 设置。",
+      "Context": "Plugin..ctor",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "[XIVSchAssistant] ⚠ Arena center unreachable for territory ",
+      "Translated": "[XIVSchAssistant] ⚠ 无法到达该区域的场地中心点",
+      "Context": "Plugin.VerifyEosCenterReached",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Eos could not reach the default position (100, 100) — this arena has a non-standard center. Use /xivsch → Custom Arena Centers to configure the correct position.",
+      "Translated": "Eos 无法到达默认位置 (100, 100)——该场地的中心点并非标准位置。请使用 /xivsch → 自定义场地中心点 配置正确的位置。",
+      "Context": "Plugin.VerifyEosCenterReached",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "[XIVSchAssistant] No target selected — please target the boss first, then click again to return Eos to the arena center.",
+      "Translated": "[XIVSchAssistant] 未选择目标——请先选定 Boss，然后再次点击使 Eos 返回场地中心。",
+      "Context": "Plugin.DrawReturnToCenterButton",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ IChatGui.PrintError"
+    },
+    {
+      "Original": "Return Eos to arena center\nDrag to reposition",
+      "Translated": "将 Eos 返回场地中心\n拖动可调整位置",
+      "Context": "Plugin.DrawReturnToCenterButton",
+      "Source": "ai:llm",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SetTooltip"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-21T15:55:55",
+  "imported": {
+    "archive": "uit-direct-2026-10-21T15-55-39-647Z-883b86da-2026-10-21T155554.json",
+    "accepted": 32,
+    "filled": 32,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 32 条 `XIVSchAssitant` 的界面文字译文，已收为**独立译文包** `uit-packs/XIVSchAssitant@user-4c0e41.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 32 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
