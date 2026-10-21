@@ -238,5 +238,168 @@ else
     Check(!escaped && !window.DrainPhysicalAsync().IsCompleted && resource.Disposes == 1,
         "analysis comparison release failure stays quarantined and cannot bypass host physical retirement");
 }
+{
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait, "A"), LiveTexture = new(20, 32, 501) };
+    using var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    var referenceA = (Texture)Field(window, "comparisonOwned")!;
+    model.Sample = model.Sample! with { StateKey = "B", Viewport = new(8, new(20, 30), new(1280, 720)) };
+    model.LiveTexture = new(32, 18, 502);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    Check(ReferenceEquals(Field(window, "comparisonOwned"), referenceA) && referenceA.Disposes == 0,
+        "I05 same-session parameter edit and resized B preserve the independent A reference");
+    ImGui.DrawnImages.Clear(); ImGui.Texts.Clear(); Invoke(window, "DrawAnalysisWindow");
+    Check(ImGui.DrawnImages.Any(image => image.Handle == 501) && ImGui.DrawnImages.Any(image => image.Handle == 502),
+        "I05 actual comparison draws retained A beside newly analyzed B");
+    Check(ImGui.DrawnImages.Any(image => image.Handle == 501) && ImGui.DrawnImages.Any(image => image.Handle == 502)
+        && ImGui.DrawnImages.Where(image => image.Handle == 501).All(image => Math.Abs(image.Size.X / image.Size.Y - 20f / 32) < .00001f)
+        && ImGui.DrawnImages.Where(image => image.Handle == 502).All(image => Math.Abs(image.Size.X / image.Size.Y - 32f / 18) < .00001f),
+        "I05 different A and B proportions remain individually letterboxed");
+    Check(ImGui.Texts.Any(text => text.Contains("参考 · 实时肖像") && text.Contains("读取于"))
+        && ImGui.Texts.Any(text => text.Contains("本次分析 · 实时肖像") && text.Contains("读取于")),
+        "I05 each side exposes user-facing provenance and honest read time");
+}
+{
+    var model = new Model { LiveCaptureScope = PortraitImageScope.VisibleAdventurerPlate,
+        Sample = Sample(PortraitImageScope.VisibleAdventurerPlate), LiveTexture = new(32, 18, 601) };
+    using var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    var reference = (Texture)Field(window, "comparisonOwned")!;
+    var provenance = Field(window, "comparisonProvenance");
+    model.Sample = model.Sample! with { StateKey = "B", Viewport = new(9, new(70, 80), new(800, 600)),
+        Plate = model.Sample.Plate! with { Addon = 301, Generation = 6, Rect = new(40, 60, 400, 200), VisualKey = "plate-b" } };
+    model.LiveTexture = new(40, 20, 602);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    Invoke(window, "DrawAnalysisWindow");
+    Check(ReferenceEquals(Field(window, "comparisonOwned"), reference) && reference.Disposes == 0,
+        "I05 plate sample, surface, viewport and size changes preserve same-subject static A");
+    Check(ReferenceEquals(Field(window, "comparisonProvenance"), provenance)
+        && !ReferenceEquals(Field(window, "analysisProvenance"), provenance),
+        "I05 reference provenance stays fixed while B owns independent metadata");
+}
+var changes = new (string Name, Func<PortraitAnalysisSession, PortraitAnalysisSession?> Change)[]
+{
+    ("account", s => s with { Owner = s.Owner with { AccountID = 99 } }),
+    ("character owner", s => s with { Owner = s.Owner with { ContentID = 99 }, Entry = s.Entry with { ContentID = 99 } }),
+    ("editor", s => s with { Editor = s.Editor with { Editor = 999 } }),
+    ("state allocation", s => s with { Editor = s.Editor with { State = 999 } }),
+    ("model allocation", s => s with { Editor = s.Editor with { Model = 999 } }),
+    ("allocation generation", s => s with { Editor = s.Editor with { Generation = 99 } }),
+    ("editor character", s => s with { Editor = s.Editor with { Character = 99 } }),
+    ("entry point", s => s with { Entry = s.Entry with { EntryPoint = PortraitHistoryEntryPoint.AdventurerPlate } }),
+    ("gearset", s => s with { Entry = s.Entry with { SourceID = 9 } }),
+    ("compatibility", s => s with { Entry = s.Entry with { CompatToken = "other" } }),
+    ("missing credential", _ => null),
+    ("invalid generation", s => s with { Editor = s.Editor with { Generation = 0 } }),
+};
+foreach (var change in changes)
+{
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = new(20, 32, 701) };
+    using var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    var reference = (Texture)Field(window, "comparisonOwned")!;
+    var preview = (Texture)Field(window, "analysisPreview")!;
+    model.CurrentAnalysisSession = change.Change(model.CurrentAnalysisSession!);
+    var shares = model.LiveTexture.Shares.Count;
+    ImGui.DrawnImages.Clear(); Invoke(window, "DrawAnalysisWindow");
+    Check(reference.Disposes == 1 && preview.Disposes == 1 && Field(window, "comparisonOwned") is null
+        && ((PortraitAnalysisRequest)Field(window, "analysis")!).CurrentResult is null
+        && !ImGui.DrawnImages.Any(image => image.Handle == 701),
+        $"I05 {change.Name} change clears both sides before draw without another analysis click");
+    Check(model.LiveTexture.Shares.Count == shares,
+        $"I05 {change.Name} draw validation uses cached managed credentials without source acquisition");
+}
+{
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = new(20, 32, 702) };
+    using var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    var reference = (Texture)Field(window, "comparisonOwned")!;
+    model.LiveCaptureScope = PortraitImageScope.VisibleAdventurerPlate;
+    Invoke(window, "DrawAnalysisWindow");
+    Check(reference.Disposes == 1 && Field(window, "comparisonOwned") is null
+        && ((PortraitAnalysisRequest)Field(window, "analysis")!).CurrentResult is null,
+        "I05 image scope change clears both sides before draw");
+}
+foreach (var mismatch in new[] { "missing credential", "live owner", "live editor", "plate owner" })
+{
+    var scope = mismatch == "plate owner" ? PortraitImageScope.VisibleAdventurerPlate : PortraitImageScope.Portrait;
+    var model = new Model { Sample = Sample(scope), LiveCaptureScope = scope, LiveTexture = new(20, 32, 703) };
+    if (mismatch == "missing credential") model.CurrentAnalysisSession = null;
+    if (mismatch == "live owner") model.Sample = model.Sample! with { Owner = new(99, 22) };
+    if (mismatch == "live editor") model.Sample = model.Sample! with { Editor = model.Sample!.Editor with { Generation = 99 } };
+    if (mismatch == "plate owner") model.Sample = model.Sample! with { Plate = model.Sample!.Plate! with { AccountID = 99 } };
+    using var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow"); ImGui.Click = null;
+    Check(((PortraitAnalysisRequest)Field(window, "analysis")!).CurrentResult is not null
+        && Field(window, "comparisonOwned") is null,
+        $"I05 {mismatch} keeps ordinary image analysis available while refusing comparison admission");
+}
+{
+    var atA = new DateTimeOffset(2026, 1, 2, 3, 4, 5, TimeSpan.Zero);
+    var atB = atA.AddHours(2);
+    var model = new Model { History = [new(1, atA, "A", true)] };
+    var photos = new PortraitHistoryPhotos { Photo = new(20, 32, 801) };
+    using var window = new PortraitPreviewWindow(model, photos);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    var reference = (Texture)Field(window, "comparisonOwned")!;
+    model.History = [new(2, atB, "B", true)]; photos.Photo = new(32, 18, 802);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Texts.Clear(); Invoke(window, "DrawAnalysisWindow");
+    Check(ReferenceEquals(Field(window, "comparisonOwned"), reference) && reference.Disposes == 0,
+        "I05 selecting another history record preserves same-session reference A");
+    Check(Field(window, "comparisonProvenance") is PortraitAnalysisProvenance { Source: "历史记录", IsRecordTime: true } left && left.At == atA
+        && Field(window, "analysisProvenance") is PortraitAnalysisProvenance { Source: "历史记录", IsRecordTime: true } right && right.At == atB
+        && ImGui.Texts.Any(text => text.Contains("参考 · 历史记录 · 记录于"))
+        && ImGui.Texts.Any(text => text.Contains("本次分析 · 历史记录 · 记录于"))
+        && !ImGui.Texts.Any(text => text.Contains("当前照片")),
+        "I05 historical A and B expose their distinct record times without pretending to be live");
+}
+{
+    var feature = new PortraitPreviewFeature();
+    Invoke(feature, "PublishAnalysisSession");
+    var original = feature.CurrentAnalysisSession!;
+    feature.historyOwner = new(99, 88); feature.observedIdentity = original.Editor with { Generation = 9 };
+    Check(ReferenceEquals(feature.CurrentAnalysisSession, original) && original.Owner == new PortraitCaptureOwner(11, 22),
+        "I05 UI getter returns one immutable published observation instead of mixing changing fields");
+    feature.observedKey = original.Entry with { ContentID = 88 };
+    Invoke(feature, "PublishAnalysisSession");
+    Check(feature.CurrentAnalysisSession is { Owner.AccountID: 99, Owner.ContentID: 88, Editor.Generation: 9 },
+        "I05 Framework publishes new owner editor and history entry together");
+    feature.session.IsActive = false; Invoke(feature, "PublishAnalysisSession");
+    Check(feature.CurrentAnalysisSession is null, "I05 inactive editor session revokes its comparison credential");
+    feature.session.IsActive = true; feature.observedKey = original.Entry; Invoke(feature, "PublishAnalysisSession");
+    Check(feature.CurrentAnalysisSession is null, "I05 mismatched cached owner and history entry never publish a credential");
+    feature.observedKey = original.Entry with { ContentID = 88 }; feature.disposed = true; Invoke(feature, "PublishAnalysisSession");
+    Check(feature.CurrentAnalysisSession is null, "I05 disposed feature cannot republish comparison credentials");
+}
+{
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = new(20, 32, 704) };
+    var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    var reference = (Texture)Field(window, "comparisonOwned")!;
+    var preview = (Texture)Field(window, "analysisPreview")!;
+    window.Dispose(); window.Dispose();
+    await window.DrainPhysicalAsync().WaitAsync(TimeSpan.FromSeconds(5));
+    Check(reference.Disposes == 1 && preview.Disposes == 1 && model.LiveTexture.Disposes == 0,
+        "I05 repeated close releases reference and analyzed preview exactly once while leaving provider owner intact");
+}
+{
+    var model = new Model { Sample = Sample(PortraitImageScope.Portrait), LiveTexture = new(20, 32, 705) };
+    using var window = new PortraitPreviewWindow(model);
+    Invoke(window, "StartCurrentAnalysis"); await Drain(window);
+    var preview = (Texture)Field(window, "analysisPreview")!;
+    preview.OnShare = () => { ImGui.CloseOnBegin = true; Invoke(window, "DrawAnalysisWindow"); };
+    ImGui.Click = "设为参考"; Invoke(window, "DrawAnalysisWindow");
+    Check(Field(window, "comparisonOwned") is null && Field(window, "comparisonProvenance") is null
+        && preview.Shares.Single().Disposes == 1 && preview.Disposes == 1,
+        "I05 closing actual analysis during pin sharing rejects and releases the late reference without republishing A");
+}
 Console.WriteLine($"PortraitAnalysisWindowTests: {passed} passed, {failed} failed");
 return failed == 0 ? 0 : 1;

@@ -188,6 +188,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             using (runtimeTrace.Measure("update.validate")) session.Validate();
             using (runtimeTrace.Measure("update.lighting-fit")) PollLightingFit();
             using (runtimeTrace.Measure("update.editing")) if (!OwnedViewportBlocksOperations) PollEditing();
+            PublishAnalysisSession();
             using (runtimeTrace.Measure("update.capture-state")) ObserveLiveCaptureState();
             using (runtimeTrace.Measure("update.library")) PollLibrary();
             using (runtimeTrace.Measure("update.photos")) PollPhotos();
@@ -215,6 +216,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         }
         catch (Exception ex)
         {
+            Volatile.Write(ref analysisSession, null);
             Plugin.Log.Warning(ex, "[肖像同步预览] 更新失败");
             status = "肖像或物品信息尚未加载完成";
         }
@@ -384,7 +386,8 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                 if (OwnedViewportBlocksOperations) { Error("正在结束独立人物预览，请稍候再操作。"); return; }
                 StopSourceCensusForMutation();
             }
-            action();
+            try { action(); }
+            finally { PublishAnalysisSession(); }
         }
         if (Plugin.Framework.IsInFrameworkUpdateThread) Apply();
         else _ = Plugin.Framework.RunOnFrameworkThread(Apply);
@@ -520,6 +523,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     private void DisposeCore()
     {
+        Volatile.Write(ref analysisSession, null);
         Task photoDrain = Task.CompletedTask;
         Task nativePhysical = Task.CompletedTask;
         Task remainingRelease = Task.CompletedTask;

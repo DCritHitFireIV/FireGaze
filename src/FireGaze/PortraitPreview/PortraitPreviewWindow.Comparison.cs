@@ -12,20 +12,27 @@ internal sealed partial class PortraitPreviewWindow
     private IDisposable? comparisonLifetime;
     private bool comparisonWipe;
     private float comparisonFraction = .5f;
+    private PortraitAnalysisProvenance? comparisonProvenance;
 
-    private void DrawComparison(IDalamudTextureWrap current, string scope)
+    private void DrawComparison(IDalamudTextureWrap current, bool canCompare)
     {
         if (!ImGui.CollapsingHeader("照片对比")) return;
+        if (!canCompare)
+        {
+            ClearAnalysisComparison();
+            ImGui.TextDisabled("当前照片的角色与编辑会话尚未确认，可继续分析，稍后再设为参考。");
+            return;
+        }
         ImGui.TextDisabled("保留参考照片后，可继续编辑再比较。");
         var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        if (ImGui.Button("设为参考")) SetAnalysisComparison(scope, current);
+        if (ImGui.Button("设为参考")) SetAnalysisComparison("analysis", current);
         ContinueToolbar(right, ImGui.CalcTextSize("清除参考").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("清除参考")) ClearAnalysisComparison();
         ContinueToolbar(right, ImGui.CalcTextSize("并排").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.RadioButton("并排", !comparisonWipe)) comparisonWipe = false;
         ContinueToolbar(right, ImGui.CalcTextSize("叠加").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.RadioButton("叠加", comparisonWipe)) comparisonWipe = true;
-        var reference = comparisonReference.For(scope);
+        var reference = comparisonReference.For("analysis");
         if (reference is null) return;
         var width = Math.Max(1, ImGui.GetContentRegionAvail().X);
         var canvas = new Vector2(width, Math.Min(340 * Scale, width * 1.6f));
@@ -46,7 +53,6 @@ internal sealed partial class PortraitPreviewWindow
                     Vector2.Zero, new Vector2(wipe.UvCut, 1));
             draw.AddLine(new(minimum.X + wipe.Cut, minimum.Y), new(minimum.X + wipe.Cut, maximum.Y),
                 ImGui.GetColorU32(FireGazePalette.Focus), Scale);
-            ImGui.TextDisabled("左侧参考 · 右侧当前照片");
         }
         else
         {
@@ -57,21 +63,32 @@ internal sealed partial class PortraitPreviewWindow
             ImGui.Dummy(canvas);
             DrawComparedPhoto(reference, origin, cell);
             DrawComparedPhoto(current, origin + new Vector2(cell.X + gap, 0), cell);
-            ImGui.TextDisabled("左侧参考 · 右侧当前照片");
         }
+        if (comparisonProvenance is { } left) ImGui.TextWrapped(left.Describe("参考"));
+        if (analysisProvenance is { } rightSource) ImGui.TextWrapped(rightSource.Describe("本次分析"));
     }
 
     private void SetAnalysisComparison(string scope, IDalamudTextureWrap source)
     {
+        var expectedSubject = analysisResultSubject;
+        var expectedResult = analysis.CurrentResult;
+        var expectedProvenance = analysisProvenance;
+        if (expectedSubject is null || expectedSubject != analysisSubject || expectedResult is null) return;
         ClearAnalysisComparison();
         if (Volatile.Read(ref analysisResourcesDisposed) != 0 || !analysisPhysical.TryEnter(out var held)) return;
         IDalamudTextureWrap? owned = null;
         try
         {
             owned = source.CreateWrapSharingLowLevelResource();
-            if (Volatile.Read(ref analysisResourcesDisposed) != 0 || analysisPhysical.CleanupFailures != 0) return;
+            if (Volatile.Read(ref analysisResourcesDisposed) != 0 || analysisPhysical.CleanupFailures != 0 || !showAnalysis) return;
+            // Sharing may synchronously close the analysis or change its Framework-published subject.
+            ObserveAnalysisSubject();
+            if (analysisSubject != expectedSubject || analysisResultSubject != expectedSubject
+                || !ReferenceEquals(analysisPreview, source) || !ReferenceEquals(analysis.CurrentResult, expectedResult)
+                || !ReferenceEquals(analysisProvenance, expectedProvenance)) return;
             comparisonOwned = owned; comparisonLifetime = held;
             comparisonReference.Set(scope, new AnalysisBorrowedTexture(owned));
+            comparisonProvenance = expectedProvenance;
             owned = null; held = null;
         }
         catch (Exception failure) { analysisPhysical.ObserveFailure(failure); }
@@ -81,6 +98,7 @@ internal sealed partial class PortraitPreviewWindow
     private void ClearAnalysisComparison()
     {
         comparisonReference.Clear();
+        comparisonProvenance = null;
         var texture = comparisonOwned; comparisonOwned = null;
         var held = comparisonLifetime; comparisonLifetime = null;
         analysisPhysical.Release(texture); held?.Dispose();

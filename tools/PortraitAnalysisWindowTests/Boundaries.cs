@@ -27,15 +27,17 @@ namespace Dalamud.Bindings.ImGui
     {
         public void AddRectFilled(Vector2 a, Vector2 b, uint color) => ImGui.FilledRectangles.Add(new(a, b, color));
         public void AddRect(Vector2 a, Vector2 b, uint color, float radius, ImDrawFlags flags, float thickness) { }
-        public void AddImage(nint handle, Vector2 a, Vector2 b) { ImGui.LastDrawImageSize = b - a; ImGui.LastImage = handle; }
-        public void AddImage(nint handle, Vector2 a, Vector2 b, Vector2 uv0, Vector2 uv1) { ImGui.LastDrawImageSize = b - a; ImGui.LastImage = handle; }
+        public void AddImage(nint handle, Vector2 a, Vector2 b) { ImGui.DrawnImages.Add((handle, b - a)); ImGui.LastDrawImageSize = b - a; ImGui.LastImage = handle; }
+        public void AddImage(nint handle, Vector2 a, Vector2 b, Vector2 uv0, Vector2 uv1) { ImGui.DrawnImages.Add((handle, b - a)); ImGui.LastDrawImageSize = b - a; ImGui.LastImage = handle; }
         public void AddLine(Vector2 a, Vector2 b, uint color, float thickness) { }
     }
     internal static class ImGui
     {
         public static string? Click;
+        public static bool CloseOnBegin;
         public static List<string> Texts = [];
         public static List<FilledRectangle> FilledRectangles = [];
+        public static List<(nint Handle, Vector2 Size)> DrawnImages = [];
         public static Vector2 LastImageSize;
         public static Vector2 LastDrawImageSize;
         public static nint LastImage;
@@ -44,7 +46,7 @@ namespace Dalamud.Bindings.ImGui
         public static Vector2 CalcTextSize(string text) => new(text.Length * 8, 16);
         public static Style GetStyle() => new();
         public static void SetNextWindowSize(Vector2 size, ImGuiCond condition) { }
-        public static bool Begin(string name, ref bool open) => true;
+        public static bool Begin(string name, ref bool open) { if (CloseOnBegin) { open = false; CloseOnBegin = false; } return true; }
         public static void End() { }
         public static void TextWrapped(string text) => Texts.Add(text);
         public static void TextDisabled(string text) => Texts.Add(text);
@@ -108,8 +110,8 @@ namespace FireGaze.PortraitPreview
 {
     internal enum PortraitImageScope { Portrait, VisibleAdventurerPlate }
     internal readonly record struct PortraitCaptureOwner(ulong AccountID, ulong ContentID) { public bool IsValid => AccountID != 0 && ContentID != 0; }
-    internal readonly record struct PortraitIdentity(nint Editor, nint State, nint Model, long Generation, ulong Character)
-    { public bool IsValid => Editor != 0 && State != 0 && Model != 0 && Generation != 0; }
+    internal readonly record struct PortraitIdentity(nint Editor, nint State, nint Model, uint Generation, ulong Character)
+    { public bool IsValid => Editor != 0 && State != 0 && Model != 0 && Character != 0; }
     internal readonly record struct PortraitCaptureViewport(uint ID, Vector2 Position, Vector2 Size);
     internal readonly record struct PortraitCaptureRect(float X, float Y, float Width, float Height);
     internal sealed record PortraitPlateCaptureBinding(nint Addon, ushort AddonID, nint Agent, nint Storage,
@@ -126,8 +128,22 @@ namespace FireGaze.PortraitPreview
         public void Dispose() => Texture.Dispose();
     }
     internal sealed record PortraitHistoryListItem(long ID, DateTimeOffset At, string Label, bool IsCurrent);
+    internal enum PortraitHistoryEntryPoint { GearsetPortrait, AdventurerPlate }
+    internal readonly record struct PortraitHistoryKey(ulong ContentID, PortraitHistoryEntryPoint EntryPoint, int SourceID, string CompatToken)
+    { public bool IsValid => ContentID != 0 && Enum.IsDefined(EntryPoint) && SourceID >= 0 && !string.IsNullOrWhiteSpace(CompatToken); }
+    internal readonly record struct OwnedCharacterKey(ulong AccountID, ulong ContentID);
+    internal sealed class Session { public bool IsActive = true; }
+    internal sealed unsafe partial class PortraitPreviewFeature
+    {
+        internal bool disposed = false;
+        internal Session session = new();
+        internal OwnedCharacterKey? historyOwner = new(11, 22);
+        internal PortraitIdentity observedIdentity = new(101, 102, 103, 4, 22);
+        internal PortraitHistoryKey? observedKey = new(22, PortraitHistoryEntryPoint.GearsetPortrait, 1, "compat");
+    }
     internal sealed class Model
     {
+        public PortraitAnalysisSession? CurrentAnalysisSession { get; set; } = new(new(11, 22), new(101, 102, 103, 4, 22), new(22, PortraitHistoryEntryPoint.GearsetPortrait, 1, "compat"));
         public bool SourceCensusBlocksOperations { get; set; }
         public IReadOnlyList<PortraitHistoryListItem> History { get; set; } = [new(1, DateTimeOffset.UnixEpoch, "记录", true)];
         public PortraitImageScope LiveCaptureScope { get; set; }

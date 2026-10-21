@@ -15,6 +15,9 @@ internal sealed partial class PortraitPreviewWindow
     private PortraitImageScope analysisScope = PortraitImageScope.Portrait;
     private string analysisSourceKey = "";
     private string analysisInputStatus = "";
+    private PortraitAnalysisSubject? analysisSubject;
+    private PortraitAnalysisSubject? analysisResultSubject;
+    private PortraitAnalysisProvenance? analysisProvenance;
     private IDalamudTextureWrap? analysisPreview;
     private IDisposable? analysisPreviewLifetime;
     private readonly PortraitCaptureRetirement analysisPhysical = new();
@@ -24,6 +27,7 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawAnalysisWindow()
     {
         if (!showAnalysis) return;
+        ObserveAnalysisSubject();
         FireGazeWindowPlacement.Prepare("FireGazePortraitAnalysis", new Vector2(510, 680) * Scale, Scale, "FireGazePortraitPreview");
         FireGazeWindowPlacement.Constrain(new Vector2(360, 340) * Scale, new Vector2(760, 980) * Scale, Scale);
         if (FireGazeWindowPlacement.Begin("肖像分析###FireGazePortraitAnalysis", ref showAnalysis, "FireGazePortraitAnalysis"))
@@ -43,6 +47,7 @@ internal sealed partial class PortraitPreviewWindow
                 analysisScope = scope;
                 ResetAnalysisSource();
             }
+            ObserveAnalysisSubject();
             ImGui.TextDisabled(scope == PortraitImageScope.Portrait
                 ? "读取肖像角色与边框装饰。"
                 : "读取当前屏幕可见的完整铭牌，不改变铭牌数据。");
@@ -71,16 +76,17 @@ internal sealed partial class PortraitPreviewWindow
                 DrawAttentionEstimate(result);
             }
             if (analysisPreview is { } compared && analysis.CurrentResult is not null)
-                DrawComparison(compared, "analysis:" + analysisSourceKey);
+                DrawComparison(compared, analysisResultSubject is not null && analysisResultSubject == analysisSubject);
         }
         ImGui.End();
-        if (!showAnalysis) { analysis.Invalidate(); ReleaseAnalysisPreview(); ClearAnalysisComparison(); }
+        if (!showAnalysis) { ResetAnalysisSource(); ClearAnalysisComparison(); analysisSubject = null; }
     }
 
     private void StartCurrentAnalysis()
     {
         if (feature.SourceCensusBlocksOperations) { analysisInputStatus = "只读原生诊断正在运行，请结束后重试。"; return; }
         var scope = feature.LiveCaptureScope;
+        ObserveAnalysisSubject();
         if (analysisScope != scope)
         {
             analysisScope = scope;
@@ -104,10 +110,14 @@ internal sealed partial class PortraitPreviewWindow
             if (Volatile.Read(ref analysisResourcesDisposed) != 0) return;
             IDalamudTextureWrap source;
             string key;
+            PortraitAnalysisProvenance provenance;
+            PortraitAnalysisSubject? resultSubject;
             if (live is not null && live.Sample.Scope == scope)
             {
                 key = LiveSourceKey(live, scope);
                 source = live.Texture;
+                provenance = new(scope == PortraitImageScope.Portrait ? "实时肖像" : "可见铭牌", DateTimeOffset.Now, false);
+                resultSubject = AnalysisSampleMatchesSubject(live.Sample) ? analysisSubject : null;
             }
             else
             {
@@ -128,6 +138,8 @@ internal sealed partial class PortraitPreviewWindow
                 }
                 key = $"history:{feature.SourceGuideKey}:{current.ID}";
                 source = texture;
+                provenance = new("历史记录", current.At, true);
+                resultSubject = analysisSubject;
             }
             if (analysisSourceKey == key && analysis.CurrentResult is not null) return;
             ResetAnalysisSource();
@@ -139,6 +151,8 @@ internal sealed partial class PortraitPreviewWindow
             if (analysisPhysical.CleanupFailures != 0 || Volatile.Read(ref analysisResourcesDisposed) != 0)
             { ReleaseAnalysisPreview(); return; }
             analysisSourceKey = key;
+            analysisProvenance = provenance;
+            analysisResultSubject = resultSubject;
             analysisRecord = current.ID;
             var owned = retained; var held = inputLifetime;
             if (analysis.TryStart(key, token => ReadAnalysis(owned, held, token)))
@@ -167,9 +181,30 @@ internal sealed partial class PortraitPreviewWindow
         analysis.Invalidate();
         ReleaseAnalysisPreview();
         analysisSourceKey = "";
-        ClearAnalysisComparison();
+        analysisProvenance = null;
+        analysisResultSubject = null;
         analysisInputStatus = "";
     }
+
+    private void ObserveAnalysisSubject()
+    {
+        // The feature publishes a single Framework-observed reference; never read native owners here.
+        var session = feature.CurrentAnalysisSession;
+        var next = session is { Owner.IsValid: true, Editor.IsValid: true, Entry.IsValid: true }
+            && session.Editor.Generation != 0
+            && session.Entry.ContentID == session.Owner.ContentID
+            ? new PortraitAnalysisSubject(session, feature.LiveCaptureScope) : null;
+        if (analysisSubject == next) return;
+        ResetAnalysisSource();
+        ClearAnalysisComparison();
+        analysisSubject = next;
+    }
+
+    private bool AnalysisSampleMatchesSubject(PortraitCaptureSample sample)
+        => analysisSubject is { } subject && sample.Owner == subject.Session.Owner
+            && sample.Editor == subject.Session.Editor && sample.Scope == subject.Scope
+            && (sample.Scope != PortraitImageScope.VisibleAdventurerPlate || sample.Plate is { } plate
+                && plate.AccountID == subject.Session.Owner.AccountID && plate.ContentID == subject.Session.Owner.ContentID);
 
     private bool TrySetAnalysisPreview(IDalamudTextureWrap source)
     {
