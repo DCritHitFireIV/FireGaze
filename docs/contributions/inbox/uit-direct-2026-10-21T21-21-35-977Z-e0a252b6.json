@@ -1,1 +1,200 @@
-{"type":"uit-contribution","plugin":"EasyEyes","kinds":["free"],"entries":[{"Original":"toggle ui","Translated":"切换 ui","Context":"Plugin..ctor","Source":"ai:caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Stop","Translated":"停止","Context":"LogTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Record","Translated":"记录","Context":"LogTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Reset","Translated":"重置","Context":"LogTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Add To Blacklist","Translated":"添加到黑名单","Context":"LogTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Spawn","Translated":"生成","Context":"LogTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Search","Translated":"搜索","Context":"LogTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextWithHint"},{"Original":"Press [Record] to view recent VFXs...","Translated":"点击 [Record]，查看最近的视觉特效。","Context":"LogTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Remove","Translated":"删除","Context":"MainInterface.DrawSpawnButton","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"On Ground","Translated":"在地上","Context":"MainInterface.DrawSpawnButton","Source":"ai:caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"On Self","Translated":"在自己身上","Context":"MainInterface.DrawSpawnButton","Source":"ai:caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Selectable"},{"Original":"Columns","Translated":"列","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Columns"},{"Original":"Add Path","Translated":"添加路径","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Export","Translated":"导出","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Import","Translated":"导入","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Select an item...","Translated":"选择一个项目......","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"Copy Path","Translated":"复制路径","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.SmallButton"},{"Original":"Disabled","Translated":"已禁用","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Notes:","Translated":"注释：","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Text"},{"Original":"-Description","Translated":"描述","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.InputTextMultiline"},{"Original":"Save","Translated":"保存","Context":"VfxTab.Draw","Source":"ai:caiyun","Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Delete","Translated":"删除","Context":"VfxTab.Draw","Source":"ai:caiyun","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.SmallButton"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "EasyEyes",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "toggle ui",
+      "Translated": "切换 ui",
+      "Context": "Plugin..ctor",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Stop",
+      "Translated": "停止",
+      "Context": "LogTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Record",
+      "Translated": "记录",
+      "Context": "LogTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Reset",
+      "Translated": "重置",
+      "Context": "LogTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Add To Blacklist",
+      "Translated": "添加到黑名单",
+      "Context": "LogTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Spawn",
+      "Translated": "生成",
+      "Context": "LogTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Search",
+      "Translated": "搜索",
+      "Context": "LogTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextWithHint"
+    },
+    {
+      "Original": "Press [Record] to view recent VFXs...",
+      "Translated": "点击 [Record]，查看最近的视觉特效。",
+      "Context": "LogTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Remove",
+      "Translated": "删除",
+      "Context": "MainInterface.DrawSpawnButton",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "On Ground",
+      "Translated": "在地上",
+      "Context": "MainInterface.DrawSpawnButton",
+      "Source": "ai:caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "On Self",
+      "Translated": "在自己身上",
+      "Context": "MainInterface.DrawSpawnButton",
+      "Source": "ai:caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Selectable"
+    },
+    {
+      "Original": "Columns",
+      "Translated": "列",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Columns"
+    },
+    {
+      "Original": "Add Path",
+      "Translated": "添加路径",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Export",
+      "Translated": "导出",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Import",
+      "Translated": "导入",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Select an item...",
+      "Translated": "选择一个项目......",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "Copy Path",
+      "Translated": "复制路径",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    },
+    {
+      "Original": "Disabled",
+      "Translated": "已禁用",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Notes:",
+      "Translated": "注释：",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Text"
+    },
+    {
+      "Original": "-Description",
+      "Translated": "描述",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.InputTextMultiline"
+    },
+    {
+      "Original": "Save",
+      "Translated": "保存",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Delete",
+      "Translated": "删除",
+      "Context": "VfxTab.Draw",
+      "Source": "ai:caiyun",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.SmallButton"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-21T21:21:50",
+  "imported": {
+    "archive": "uit-direct-2026-10-21T21-21-35-977Z-e0a252b6-2026-10-21T212150.json",
+    "accepted": 22,
+    "filled": 22,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 22 条 `EasyEyes` 的界面文字译文，已收为**独立译文包** `uit-packs/EasyEyes@user-0f5f3c.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 22 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
