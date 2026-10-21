@@ -1,0 +1,675 @@
+{
+  "_meta": {
+    "format": 2,
+    "updatedAt": "2026-10-21",
+    "source": "user",
+    "label": "玩家包 · bbe3ef",
+    "kinds": [
+      "llm"
+    ]
+  },
+  "entries": [
+    {
+      "Original": "Weatherman",
+      "Translated": "天气控制",
+      "Context": "ClockOffNag.ClockCheck",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Weatherman 2.0",
+      "Translated": "天气控制 2.0",
+      "Context": "Gui.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Quick control",
+      "Translated": "快速控制",
+      "Context": "Gui.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Global setting",
+      "Translated": "全局设置",
+      "Context": "Gui.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Zone-specific settings",
+      "Translated": "区域专属设置",
+      "Context": "Gui.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Weather blacklist",
+      "Translated": "天气黑名单",
+      "Context": "Gui.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "Gui.Draw",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Select weathers which you do not want to ever see again in any zone.",
+      "Translated": "选择你不想在任何区域再看到的天气。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "This setting is not effective for zones that have their weathers overriden in zone-specific settings.",
+      "Translated": "此设置对在区域专属设置中覆盖了天气的区域无效。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Random normally occurring non-blacklisted weather will be selected to replace blacklisted one.",
+      "Translated": "将随机选择正常出现且未被列入黑名单的天气来替换黑名单中的天气。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "If there will be no non-blacklisted weather left to choose from, original weather will be kept.",
+      "Translated": "如果没有未被列入黑名单的天气可供选择，将保留原天气。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Normally occurring weathers in current zone are highlighted green.",
+      "Translated": "当前区域正常出现的天气以绿色高亮显示。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "To unblacklist specific zone without overriding it's weather, go to zone-specific settings and check \"Weather control\"",
+      "Translated": "若要取消特定区域的黑名单而不覆盖其天气，请前往区域专属设置并勾选“天气控制”",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "checkbox on chosen zone without selecting any weathers for it.",
+      "Translated": "复选框，且不为该区域选择任何天气。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Current weather is yellow (normal)",
+      "Translated": "当前天气为黄色（正常）",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "or red (abnormal).",
+      "Translated": "或红色（异常）。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Weather blacklist effective:",
+      "Translated": "天气黑名单生效范围：",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Everywhere",
+      "Translated": "所有场景",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Cutscenes only",
+      "Translated": "仅过场动画",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Everywhere except cutscenes",
+      "Translated": "除过场动画外的所有场景",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Apply weather changes",
+      "Translated": "应用天气变更",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Either click this button or change your zone for settings to become effective.",
+      "Translated": "点击此按钮或切换区域以使设置生效。",
+      "Context": "Gui.DrawTabBlacklist",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Print configuration string",
+      "Translated": "输出配置字符串",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Pause plugin execution",
+      "Translated": "暂停插件执行",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Profiling",
+      "Translated": "性能分析",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Total time: ",
+      "Translated": "总时间：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Total ticks: ",
+      "Translated": "总刻数：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Tick avg: ",
+      "Translated": "平均刻：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "MS avg: ",
+      "Translated": "平均毫秒：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " ms",
+      "Translated": "毫秒",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Time asm: ",
+      "Translated": "时间汇编：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "[custom]",
+      "Translated": "[自定义]",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Weather asm: ",
+      "Translated": "天气汇编：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Sunlight shadow asm: ",
+      "Translated": "阳光阴影汇编：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Mult: ",
+      "Translated": "倍数：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "New mult",
+      "Translated": "新倍数",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "True weather: ",
+      "Translated": "真实天气：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Displayed weather: ",
+      "Translated": "显示天气：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Difference: ",
+      "Translated": "差值：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Time from asm: ",
+      "Translated": "汇编时间：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Current zone: ",
+      "Translated": "当前区域：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Unblacklisted weather: ",
+      "Translated": "未列入黑名单的天气：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Weather list",
+      "Translated": "天气列表",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Selected weather: ",
+      "Translated": "已选天气：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Supported weathers:",
+      "Translated": "支持的天气：",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Occurs normally",
+      "Translated": "正常出现",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Weather allowed zones",
+      "Translated": "天气允许区域",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Time allowed zones",
+      "Translated": "时间允许区域",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "envb files",
+      "Translated": "envb 文件",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Dump all",
+      "Translated": "全部导出",
+      "Context": "Gui.DrawTabDebug",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Global time control: ",
+      "Translated": "全局时间控制：",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "No override - time controlled by game;\nNormal - time controlled by plugin, normal flow; \nFixed - time is fixed to specified value;\nInfiniDay - instead of night, another day cycle will begin\nInfiniDay reversed - instead of night, day cycle rewinds backward\nInfiniNight/InfiniNight reversed - same as day options",
+      "Translated": "不覆盖 - 时间由游戏控制；\n正常 - 时间由插件控制，正常流逝；\n固定 - 时间固定为指定值；\n无限白昼 - 夜晚时开始新的白昼循环\n无限白昼（反向）- 夜晚时白昼循环倒回\n无限黑夜/无限黑夜（反向）- 与白昼选项相同",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Set desired time of day in seconds. Double-click to edit field manually.",
+      "Translated": "设置一天中的目标时间（秒）。双击可手动编辑数值。",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use local PC time",
+      "Translated": "使用本机时间",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Use server time (GMT time)",
+      "Translated": "使用服务器时间（GMT 时间）",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Additional offset, hours: ",
+      "Translated": "额外偏移（小时）：",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Enable music control",
+      "Translated": "启用音乐控制",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Requires Orchestrion plugin installed and enabled.",
+      "Translated": "需要安装并启用 Orchestrion 插件。",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Disable plugin in cutscenes",
+      "Translated": "过场动画中禁用插件",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Enable time control",
+      "Translated": "启用时间控制",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Enable weather control",
+      "Translated": "启用天气控制",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Disable clock out of sync check",
+      "Translated": "禁用时钟不同步检查",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Change time flow speed",
+      "Translated": "更改时间流速",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Time flow speed multiplier",
+      "Translated": "时间流速倍率",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Always show plugin interface in gpose",
+      "Translated": "在 gpose 中始终显示插件界面",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Server info bar:",
+      "Translated": "服务器信息栏：",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Enable",
+      "Translated": "启用",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Always display real weather",
+      "Translated": "始终显示真实天气",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Click action:",
+      "Translated": "点击操作：",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Pause plugin",
+      "Translated": "暂停插件",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Open plugin UI",
+      "Translated": "打开插件界面",
+      "Context": "Gui.DrawTabGlobal",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Pause Weatherman",
+      "Translated": "暂停 Weatherman",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Disable \"Stop Time/Weather\" in gpose to control them with Weatherman.",
+      "Translated": "在 gpose 中禁用“停止时间/天气”以使用 Weatherman 控制它们。",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "These controls will allow you to temporarily adjust weather and time. They are reset on zone change.",
+      "Translated": "这些控件可临时调整天气和时间，切换区域后会重置。",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Time: ",
+      "Translated": "时间：",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Right click me instead!",
+      "Translated": "请右键点击我！",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Precise editing",
+      "Translated": "精确编辑",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Hours:",
+      "Translated": "小时：",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Minutes:",
+      "Translated": "分钟：",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Seconds:",
+      "Translated": "秒：",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Reload zone settings",
+      "Translated": "重载区域设置",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Can't use now",
+      "Translated": "当前无法使用",
+      "Context": "Gui.DrawTabQuickControl",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Filter:",
+      "Translated": "筛选：",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "ID, partial area or zone name",
+      "Translated": "ID、区域或地区名称",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Only modified",
+      "Translated": "仅已修改",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Only fully customizable zones",
+      "Translated": "仅完全可自定义区域",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Current zone on top",
+      "Translated": "当前区域置顶",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Show unnamed zones",
+      "Translated": "显示未命名区域",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Either click this button or change your zone for weather settings to become effective.",
+      "Translated": "点击此按钮或切换区域后，天气设置才会生效。",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Area",
+      "Translated": "地区",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Location",
+      "Translated": "位置",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Time control",
+      "Translated": "时间控制",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Weather control",
+      "Translated": "天气控制",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "BGM override",
+      "Translated": "BGM 覆盖",
+      "Context": "Gui.DrawTabZone",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Unsupported",
+      "Translated": "不支持",
+      "Context": "Gui.PrintZoneRow",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": " weathers",
+      "Translated": "天气",
+      "Context": "Gui.PrintZoneRow",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Original",
+      "Translated": "原始",
+      "Context": "Gui.PrintZoneRow",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Zone has no supported weathers",
+      "Translated": "该区域没有支持的天气",
+      "Context": "Gui.PrintZoneRow",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Orchestrion not found",
+      "Translated": "未找到管弦乐谱",
+      "Context": "Gui.PrintZoneRow",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Music is not enabled",
+      "Translated": "音乐未启用",
+      "Context": "Gui.PrintZoneRow",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "No override",
+      "Translated": "无覆盖",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Normal",
+      "Translated": "正常",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Fixed",
+      "Translated": "固定",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "InfiniDay",
+      "Translated": "无限白昼",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "InfiniDay reversed",
+      "Translated": "无限白昼（反向）",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "InfiniNight",
+      "Translated": "无限黑夜",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "InfiniNight reversed",
+      "Translated": "无限黑夜（反向）",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Real world time",
+      "Translated": "现实时间",
+      "Context": "Gui..cctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "OrchestrionController..ctor",
+      "Source": "ai:deepseek"
+    },
+    {
+      "Original": "Toggle plugin settings",
+      "Translated": "切换插件设置",
+      "Context": ".ctor",
+      "Source": "ai:deepseek"
+    }
+  ],
+  "resources": [],
+  "attributes": []
+}
