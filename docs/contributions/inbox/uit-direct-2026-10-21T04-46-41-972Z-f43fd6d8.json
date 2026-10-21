@@ -1,1 +1,175 @@
-{"type":"uit-contribution","plugin":"Stylist","kinds":["llm"],"entries":[{"Original":"Default","Translated":"默认","Context":"MainWindow.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Settings","Translated":"设置","Context":"MainWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Debug","Translated":"调试","Context":"MainWindow.Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.EzTabBar"},{"Original":"Consider gear from inventory","Translated":"从背包中考虑装备","Context":"MainWindow.DrawSettings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Move replaced items from armory chest to regular inventory","Translated":"将替换的装备从兵装库移至普通背包","Context":"MainWindow.DrawSettings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Re-equip current gearset if it was updated","Translated":"若当前套装已更新则重新装备","Context":"MainWindow.DrawSettings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Checkbox"},{"Original":"Check For Suggestions","Translated":"检查建议","Context":"MainWindow.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.IconButtonWithText"},{"Original":"Configure Notification Zones","Translated":"配置通知区域","Context":"MainWindow.DrawSettings","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.IconButtonWithText"},{"Original":"Blacklisted Gearsets","Translated":"黑名单套装","Context":"MainWindow.DrawSettings","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"Gearset module","Translated":"套装模块","Context":"TabDebug.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.TreeNodeCollapsingHeader"},{"Original":"Jobs","Translated":"职业","Context":"TabDebug.Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGuiEx.TreeNodeCollapsingHeader"},{"Original":"Entry#","Translated":"条目#","Context":"Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.CollapsingHeader"},{"Original":"valid: ","Translated":"有效：","Context":"Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":", candidate: ","Translated":"，候选：","Context":"Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Update ","Translated":"更新","Context":"Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Update armory only ","Translated":"仅更新兵装库","Context":"Draw","Source":"ai:deepseek","PreserveID":true,"Role":"UI","RoleReason":"→ ImGui.Button"},{"Original":"Best items (restriction): \n","Translated":"最佳装备（受限）：","Context":"Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"},{"Original":"Best items (no restriction): \n","Translated":"最佳装备（无限制）：","Context":"Draw","Source":"ai:deepseek","Role":"UI","RoleReason":"→ ImGuiEx.Text"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "Stylist",
+  "kinds": [
+    "llm"
+  ],
+  "entries": [
+    {
+      "Original": "Default",
+      "Translated": "默认",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Settings",
+      "Translated": "设置",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Debug",
+      "Translated": "调试",
+      "Context": "MainWindow.Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.EzTabBar"
+    },
+    {
+      "Original": "Consider gear from inventory",
+      "Translated": "从背包中考虑装备",
+      "Context": "MainWindow.DrawSettings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Move replaced items from armory chest to regular inventory",
+      "Translated": "将替换的装备从兵装库移至普通背包",
+      "Context": "MainWindow.DrawSettings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Re-equip current gearset if it was updated",
+      "Translated": "若当前套装已更新则重新装备",
+      "Context": "MainWindow.DrawSettings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Checkbox"
+    },
+    {
+      "Original": "Check For Suggestions",
+      "Translated": "检查建议",
+      "Context": "MainWindow.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText"
+    },
+    {
+      "Original": "Configure Notification Zones",
+      "Translated": "配置通知区域",
+      "Context": "MainWindow.DrawSettings",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.IconButtonWithText"
+    },
+    {
+      "Original": "Blacklisted Gearsets",
+      "Translated": "黑名单套装",
+      "Context": "MainWindow.DrawSettings",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "Gearset module",
+      "Translated": "套装模块",
+      "Context": "TabDebug.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader"
+    },
+    {
+      "Original": "Jobs",
+      "Translated": "职业",
+      "Context": "TabDebug.Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.TreeNodeCollapsingHeader"
+    },
+    {
+      "Original": "Entry#",
+      "Translated": "条目#",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.CollapsingHeader"
+    },
+    {
+      "Original": "valid: ",
+      "Translated": "有效：",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": ", candidate: ",
+      "Translated": "，候选：",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Update ",
+      "Translated": "更新",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Update armory only ",
+      "Translated": "仅更新兵装库",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "PreserveID": true,
+      "Role": "UI",
+      "RoleReason": "→ ImGui.Button"
+    },
+    {
+      "Original": "Best items (restriction): \n",
+      "Translated": "最佳装备（受限）：",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    },
+    {
+      "Original": "Best items (no restriction): \n",
+      "Translated": "最佳装备（无限制）：",
+      "Context": "Draw",
+      "Source": "ai:deepseek",
+      "Role": "UI",
+      "RoleReason": "→ ImGuiEx.Text"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-21T04:46:56",
+  "imported": {
+    "archive": "uit-direct-2026-10-21T04-46-41-972Z-f43fd6d8-2026-10-21T044655.json",
+    "accepted": 18,
+    "filled": 18,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 18 条 `Stylist` 的界面文字译文，已收为**独立译文包** `uit-packs/Stylist@user-d3650d.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 18 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
