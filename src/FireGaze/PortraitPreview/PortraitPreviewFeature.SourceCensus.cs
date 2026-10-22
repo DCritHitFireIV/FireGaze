@@ -44,6 +44,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool TrySourceCensusCommand(string[] parts)
     {
         if (parts.Length == 0 || parts[0] != "native-census") return false;
+#if !OWNED_SLOT
+        if (!pluginInterface.IsDev) return true;
+#endif
         if (parts is ["native-census", "start"])
             Mutate(() =>
             {

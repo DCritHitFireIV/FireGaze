@@ -89,7 +89,6 @@ public sealed class Plugin : IDalamudPlugin
         if (!coexistence.Allowed && runtime?.HasActivePreview == true)
         {
             runtime.BeforeHmsLifecycle();
-            lastMessage = coexistence.Reason;
         }
         if (initialized) return;
         initialized = true;
@@ -126,8 +125,6 @@ public sealed class Plugin : IDalamudPlugin
         RefreshCoexistence();
         if (!coexistence.Allowed)
         {
-            lastMessage = coexistence.Reason;
-            Chat.PrintError("[本地试用] " + lastMessage);
             return;
         }
         if (id == 0 || id > ushort.MaxValue)
@@ -147,8 +144,6 @@ public sealed class Plugin : IDalamudPlugin
             // Invalidate any previous clean-unload marker before native display is changed.
             if (!NotifyHmsHostState(1) && loadedHmsCount != 0)
             {
-                lastMessage = "HMS 兼容桥尚未就绪，请稍后再试。";
-                Chat.PrintError("[本地试用] " + lastMessage);
                 return;
             }
             if (runtime.TryApply(new PreviewEffect(slot, (ushort)id), out var reason))
@@ -239,7 +234,8 @@ public sealed class Plugin : IDalamudPlugin
         if (parts.Length == 0) { visible = !visible; return; }
         switch (parts[0].ToLowerInvariant())
         {
-            case "status": Chat.Print("[本地试用] " + Diagnostics()); break;
+            case "status": Chat.Print("[本地试用] " + LocalPreviewStatusPresentation.UserStatusSummary(
+                enabled, initialized, runtime is not null, runtime?.ActiveEffects.Count ?? 0)); break;
             case "cancel": Cancel(); break;
             case "on": SetEnabled(true); break;
             case "off": SetEnabled(false); break;
@@ -287,7 +283,7 @@ public sealed class Plugin : IDalamudPlugin
 
     private string Diagnostics() => JsonSerializer.Serialize(new
     {
-        version = "0.1.0.1", enabled, initialized, coexistence,
+        version = "0.1.0.1", enabled, initialized, coexistenceAllowed = coexistence.Allowed, loadedHmsCount,
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
@@ -323,8 +319,9 @@ public sealed class Plugin : IDalamudPlugin
         {
             var currentEnabled = enabled;
             if (ImGui.Checkbox("启用本地试用", ref currentEnabled)) SetEnabled(currentEnabled);
-            ImGui.TextWrapped(lastMessage);
-            if (!coexistence.Allowed) ImGui.TextWrapped(coexistence.Reason);
+            var visibleStatus = LocalPreviewStatusPresentation.VisibleMessage(
+                initialized, runtime is not null, coexistence.Allowed, lastMessage);
+            if (!string.IsNullOrWhiteSpace(visibleStatus)) ImGui.TextWrapped(visibleStatus);
             if (runtime is not null)
                 foreach (var effect in runtime.ActiveEffects) ImGui.TextUnformatted($"{effect.Slot}: {effect.Id}");
             if (ImGui.Button("结束全部试用")) Cancel();

@@ -404,7 +404,14 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 
     public IDalamudTextureWrap? Get(long recordID)
     {
-        lock (sync) return !disposed && records.TryGetValue(recordID, out var value) ? loaded.Get(value.Key) : null;
+        lock (sync)
+        {
+            if (disposed || !records.TryGetValue(recordID, out var value)) return null;
+            // A historical snapshot does not imply that a settled frame was ever photographed.
+            // Do not send absent PNGs to the decoder: its negative cache represents bad images.
+            if (!Volatile.Read(ref imageKeys).Contains(value.Key) && !favoritePhotos.Contains(value.Key)) return null;
+            return loaded.Get(value.Key);
+        }
     }
 
     public PortraitHistoryPhotoStatus GetHistoryPhotoStatus(long recordID)
@@ -414,6 +421,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
         bool failedWrite;
         PortraitStorageCode failedWriteCode;
         int photoBudget;
+        bool isFavorite;
         lock (sync)
         {
             if (disposed || !records.TryGetValue(recordID, out var record)) return PortraitHistoryPhotoStatus.Missing;
@@ -424,18 +432,19 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             failedWrite = retainedPng?.Key == key && pngWriteError is not null;
             failedWriteCode = pngWriteCode;
             photoBudget = availableBytes;
+            isFavorite = favoriteKeys.Contains(key) || provisionalFavoriteKeys.ContainsKey(key);
         }
 
         var loadState = loaded.State(key);
         if (loadState == PortraitThumbnailTextureState.Resident) return PortraitHistoryPhotoStatus.Saved;
-        if (loadState == PortraitThumbnailTextureState.Failed) return PortraitHistoryPhotoStatus.StorageError;
+        if (loadState == PortraitThumbnailTextureState.Failed) return PortraitHistoryPhotoStatus.ReadError;
         if (failedWrite)
             return failedWriteCode == PortraitStorageCode.Capacity
                 ? PortraitHistoryPhotoStatus.Capacity : PortraitHistoryPhotoStatus.StorageError;
 
         var favoriteStatus = favoritePhotos.Status(key);
-        if (favoriteStatus == PortraitFavoritePhotoStatus.Capacity) return PortraitHistoryPhotoStatus.Capacity;
-        if (favoriteStatus == PortraitFavoritePhotoStatus.StorageError) return PortraitHistoryPhotoStatus.StorageError;
+        if (isFavorite && favoriteStatus == PortraitFavoritePhotoStatus.Capacity) return PortraitHistoryPhotoStatus.Capacity;
+        if (isFavorite && favoriteStatus == PortraitFavoritePhotoStatus.StorageError) return PortraitHistoryPhotoStatus.StorageError;
         var hasDurableImage = Volatile.Read(ref imageKeys).Contains(key) || favoritePhotos.Contains(key);
         if (loadState == PortraitThumbnailTextureState.Loading || pendingCapture || hasDurableImage)
             return PortraitHistoryPhotoStatus.Loading;
@@ -443,7 +452,8 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 
         var storageState = storage.Snapshot;
         if (storageState.UsedBytes > storageState.LimitBytes) return PortraitHistoryPhotoStatus.Capacity;
-        if (storageState.Degraded) return PortraitHistoryPhotoStatus.StorageError;
+        // Shared-directory faults are not evidence that this particular record ever had
+        // pixels, nor that a write for its key failed. Actual key-bound failures return above.
         return PortraitHistoryPhotoStatus.Missing;
     }
 

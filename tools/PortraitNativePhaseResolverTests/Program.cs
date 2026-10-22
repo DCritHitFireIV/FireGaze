@@ -7,13 +7,9 @@ using System.Reflection.PortableExecutable;
 using FireGaze.PortraitPreview;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-if (args.Length != 2 || args[0] != "--game-exe")
-{
-    Console.Error.WriteLine("Current audited client EXE disk input required: --game-exe <path>; no process is opened.");
-    return 2;
-}
-var image = File.ReadAllBytes(args[1]);
-var sdk = File.ReadAllBytes(typeof(CharaView).Assembly.Location);
+var fixture = FrozenSdkFixture.Load(args, typeof(CharaView).Assembly);
+var image = File.ReadAllBytes(fixture.GameExecutable);
+var sdk = fixture.Image;
 var moduleBase = unchecked((nint)0x140000000L);
 var roots = new uint[] { 0x2BA030, 0x2B9A40, 0x421D60, 0x9CD4D0 };
 var prefixes = new[] {
@@ -24,7 +20,7 @@ var prefixes = new[] {
 }.Select(Convert.FromHexString).ToArray();
 using var pe = new PEReader(new MemoryStream(image, false));
 var size = pe.PEHeaders.PEHeader!.SizeOfImage;
-var mvid = typeof(CharaView).Assembly.ManifestModule.ModuleVersionId;
+var mvid = fixture.MVID;
 var passed = 0; var failed = 0;
 void Check(bool valid, string message)
 {
@@ -34,22 +30,30 @@ void Check(bool valid, string message)
 FakeProcess Fresh() => new(image, sdk, size, mvid, moduleBase, roots, prefixes);
 bool Resolve(FakeProcess process, out PortraitNativePhaseResolvedPlan? plan)
     => new PortraitNativePhaseObservationResolver(process).TryResolve(out plan, out _);
+bool ResolveWithReason(FakeProcess process, out PortraitNativePhaseResolvedPlan? plan, out string reason)
+    => new PortraitNativePhaseObservationResolver(process).TryResolve(out plan, out reason);
 void Reject(FakeProcess process, string name)
 {
     Check(!Resolve(process, out var plan) && plan is null, name);
 }
 
+if (fixture.CurrentUnsupported)
+{
+    var unsupported = Fresh(); unsupported.SDKImage = fixture.CurrentImage; unsupported.SDKMVID = fixture.CurrentMVID;
+    Check(!Resolve(unsupported, out var unsupportedPlan) && unsupportedPlan is null && unsupported.MemoryReads == 0,
+        "unsupported current SDK refuses all phase targets before native reads or any installation plan");
+}
 var valid = Fresh();
 Check(Resolve(valid, out var resolved) && resolved is { Targets.Count: 4 }
     && resolved.Targets[0].Address == moduleBase + 0x2BA030
     && resolved.Targets[1].Phase == PortraitNativeObservedPhase.ManagerUpdateCandidate
     && resolved.Targets[2].Address == moduleBase + 0x421D60
     && resolved.Targets[3].Address == moduleBase + 0x9CD4D0,
-    "real disk EXE, SDK metadata, executable entries and two live-prefix rounds resolve four inert targets");
+    "real disk EXE, historical SDK metadata and two fixture-prefix rounds resolve four inert targets");
 Check(valid.MemoryReads == 8 && valid.RootReads == 2 && valid.SDKReads == 2,
     "qualification rechecks module, loaded SDK identity and every runtime entry without scene access");
 Check(resolved is not null && resolved.SDKMVID == mvid && resolved.ModuleBase == moduleBase,
-    "plan binds actual loaded SDK MVID and ASLR module identity");
+    "plan binds historical fixture SDK MVID and ASLR module identity");
 Check(!PortraitNativePhaseObservationResolver.TryResolveCurrentProcess(static _ => false, out _, out _),
     "real adapter rejects the test process before reading targets or installing hooks");
 
@@ -64,6 +68,10 @@ wrong = Fresh(); wrong.SDKImage = (byte[])sdk.Clone(); wrong.SDKImage[^1] ^= 1; 
 wrong = Fresh(); wrong.SDKMVID = Guid.NewGuid(); Reject(wrong, "loaded SDK and on-disk module MVID mismatch refuses");
 wrong = Fresh(); wrong.ManagerRender++; Reject(wrong, "SDK manager Render resolves to the exact audited entry");
 wrong = Fresh(); wrong.SourceRender++; Reject(wrong, "SDK source Render resolves to the exact audited entry");
+wrong = Fresh(); wrong.ChangedPrefix = 2;
+Check(!ResolveWithReason(wrong, out _, out var prefixReason) && prefixReason.Contains("RVA 0x421D60", StringComparison.Ordinal)
+    && prefixReason.Contains("runtime prefix", StringComparison.OrdinalIgnoreCase),
+    "runtime prefix rejection reports its phase RVA and failed check");
 for (var index = 0; index < 4; index++)
 {
     wrong = Fresh(); wrong.Unreadable = index; Reject(wrong, "runtime unreadable prefix " + index + " refuses");

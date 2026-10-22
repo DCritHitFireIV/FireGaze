@@ -134,6 +134,29 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         return look;
     }
 
+    /// <summary>Reads the player's real DrawData customization without touching the portrait model.</summary>
+    public byte[]? CaptureLocalCustomize()
+    {
+        if (disposed || !api.IsFrameworkThread) return null;
+        try
+        {
+            var local = api.GetLocalPlayer();
+            return local is null ? null : local->DrawData.CustomizeData.Data.ToArray();
+        }
+        catch { return null; }
+    }
+
+    public ushort? CaptureLocalFacewear()
+    {
+        if (disposed || !api.IsFrameworkThread) return null;
+        try
+        {
+            var local = api.GetLocalPlayer();
+            return local is null ? null : local->DrawData.GlassesIds[0];
+        }
+        catch { return null; }
+    }
+
     public bool Apply(PortraitIdentity identity, PortraitLook look)
     {
         if (look.Pieces.Length != 13 || look.Pieces[12].ItemID > ushort.MaxValue || !IsCurrent(identity)) return false;

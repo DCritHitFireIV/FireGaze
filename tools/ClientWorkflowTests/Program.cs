@@ -11,6 +11,7 @@ void Check(bool condition, string name)
 var path = Path.Combine(Path.GetTempPath(), "firegaze-client-tests-" + Guid.NewGuid(), "queue.json");
 try
 {
+    PortraitReleaseCommandTests.Run(Check);
     EmoteChatLinkTests.Run(Check);
     await LocalPreviewSettingsTests.Run(Check);
     var queue = new UITextJobQueue(path);

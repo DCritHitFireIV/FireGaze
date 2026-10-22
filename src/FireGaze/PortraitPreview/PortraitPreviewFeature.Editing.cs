@@ -43,6 +43,40 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public string HistoryStatus => historyWriteError ?? history.LoadError ?? history.PersistenceError
         ?? (historyPersistence is { IsCompleted: false } ? "正在保存编辑记录…" : historyStatus);
     public IReadOnlyList<PortraitAppearanceGroup> AppearanceGroups => appearanceGroups;
+    public IReadOnlyList<PortraitAppearanceGroup> OriginalAppearanceGroups
+        => originalEditorSnapshot is { } original ? appearance.Build(original.Customize) : [];
+    public IReadOnlyList<PortraitAppearanceGroup> ActualAppearanceGroups
+        => actualCustomize is { Length: PortraitAppearanceCatalog.CustomizeLength } current ? appearance.Build(current) : [];
+
+    public PortraitPreviewMenuState MenuState => PortraitPreviewMenuState.Create(
+        editorAvailable,
+        observedEditor is not null,
+        target.CanBlockSave,
+        IsActive,
+        plateMirrorCloseError);
+
+    public void OpenPlateEditor() => Mutate(() =>
+    {
+        if (IsActive)
+        {
+            Error("请先关闭预览，再打开铭牌编辑器。");
+            return;
+        }
+
+        OpenEditorWithReceipt("plate", Guid.NewGuid().ToString("D"));
+    });
+
+    public void OpenPreviewWindow()
+    {
+        if (IsActive)
+        {
+            window.IsOpen = true;
+            window.BringToFront();
+            return;
+        }
+
+        OpenPreview();
+    }
 
     private void InitializeEditing(string directory)
     {
@@ -288,7 +322,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             return false;
         }
         plateMirrorClosePending = false;
-        if (plateMirrorCloseError is not null) status = "本地铭牌预览已结束。";
+        if (plateMirrorCloseError is not null) SetStatus("本地铭牌预览已结束。");
         plateMirrorCloseError = null;
         return true;
     }
@@ -375,7 +409,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         observedIdentity = identity;
         observedKey = key;
         appearanceGroups = appearance.Build(observedEditor.Customize);
-        status = kind == PortraitHistorySelectionKind.Undo ? "已撤回上一步" : kind == PortraitHistorySelectionKind.Redo ? "已重做" : "已恢复所选时刻";
+        SetStatus(kind == PortraitHistorySelectionKind.Undo ? "已撤回上一步" : kind == PortraitHistorySelectionKind.Redo ? "已重做" : "已恢复所选时刻");
         if (syncPlate) _ = target.UpdatePlateMirror(identity, observedEditor, true);
         RefreshHistoryRows();
     }
@@ -389,8 +423,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
             || target.CaptureEditorState(identity) is not { } current)
         { Error("请先在肖像编辑器旁打开 FireGaze预览。"); return; }
         syncPlate = true;
-        status = "肖像预览已开启。";
-        if (!target.UpdatePlateMirror(identity, current, true)) status = "已开启同步，请打开自己的冒险者铭牌查看本地预览。";
+        SetStatus("肖像预览已开启。");
+        if (!target.UpdatePlateMirror(identity, current, true)) SetStatus("已开启同步，请打开自己的冒险者铭牌查看本地预览。");
     });
 
     private void SynchronizeAfterClose()
@@ -420,25 +454,73 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void DrawContent()
     {
-        ImGui.TextWrapped("在装备套装肖像或冒险者铭牌编辑器旁点击「FireGaze预览」，可预览装备、染色和美容。关闭后还原临时外观。");
-        ImGui.TextDisabled("仅本人可见。请先关闭预览，再保存肖像。");
-        using (UiHelpers.Disabled(!editorAvailable))
+        var menu = MenuState;
+        ImGui.TextWrapped("试换装备、染色和外貌，在预览实际的本人铭牌效果。关闭预览后外观才会还原。");
+
+        ImGui.Separator();
+        ImGui.TextUnformatted("当前状态");
+        ImGui.SameLine();
+        UiHelpers.ColoredWrapped(menu.Status switch
         {
-            if (ImGui.Button(IsActive ? "打开预览窗口" : "FireGaze预览")) OpenPreview();
+            PortraitPreviewMenuStatus.Ready or PortraitPreviewMenuStatus.Active => UiHelpers.Good,
+            PortraitPreviewMenuStatus.RestoreWarning => UiHelpers.Bad,
+            _ => UiHelpers.Muted,
+        }, DescribeMenuStatus(menu.Status));
+
+        if (menu.RestoreWarning is not null)
+            ImGui.TextWrapped(menu.RestoreWarning);
+
+        ImGui.Spacing();
+        using (UiHelpers.Disabled(!menu.CanOpenEditor))
+        {
+            if (ImGui.Button("打开铭牌###PortraitOpenPlate")) OpenPlateEditor();
         }
         ImGui.SameLine();
-        using (UiHelpers.Disabled(!CanUndo))
+        if (menu.CanOpenWindow)
         {
-            if (ImGui.Button("撤回")) Undo();
+            UiHelpers.PushPrimaryButton();
+            try
+            {
+                if (ImGui.Button("打开预览窗口###PortraitOpenPreviewWindow")) OpenPreviewWindow();
+            }
+            finally { UiHelpers.PopPrimaryButton(); }
         }
-        ImGui.SameLine();
-        using (UiHelpers.Disabled(!CanRedo))
+        else
         {
-            if (ImGui.Button("重做")) Redo();
+            using (UiHelpers.Disabled(!menu.CanOpenPreview))
+            {
+                UiHelpers.PushPrimaryButton();
+                try
+                {
+                    if (ImGui.Button("启用 FireGaze 预览###PortraitEnablePreview")) OpenPreviewWindow();
+                }
+                finally { UiHelpers.PopPrimaryButton(); }
+            }
         }
-        var sync = SyncPlate;
-        if (ImGui.Checkbox("同步铭牌预览", ref sync)) SetSyncPlate(sync);
-        ImGui.TextDisabled("同步只影响本地铭牌预览，关闭后还原。");
-        if (plateMirrorCloseError is not null) ImGui.TextWrapped(plateMirrorCloseError);
+
+        ImGui.Spacing();
     }
+
+    private string DescribeEditorType()
+    {
+        if (!editorAvailable) return "未打开";
+        return observedEditor?.EntryPoint switch
+        {
+            null => "加载中",
+            (byte)AgentBannerEditorState.EditorOpenType.Portrait => "普通肖像",
+            (byte)AgentBannerEditorState.EditorOpenType.Gearset => "套装",
+            (byte)AgentBannerEditorState.EditorOpenType.AdventurerPlate => "铭牌",
+            _ => "未知",
+        };
+    }
+
+    private static string DescribeMenuStatus(PortraitPreviewMenuStatus value) => value switch
+    {
+        PortraitPreviewMenuStatus.EditorUnavailable => "编辑器未打开",
+        PortraitPreviewMenuStatus.Loading => "铭牌正在加载",
+        PortraitPreviewMenuStatus.Ready => "可启用预览",
+        PortraitPreviewMenuStatus.Active => "预览进行中",
+        PortraitPreviewMenuStatus.RestoreWarning => "还原异常",
+        _ => "状态未知",
+    };
 }

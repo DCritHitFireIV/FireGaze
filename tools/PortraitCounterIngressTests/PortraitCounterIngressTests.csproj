@@ -6,6 +6,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation.CounterIngress.cs')">$(DefineConstants);COUNTER_INGRESS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../PortraitNativeTestFixtures/FrozenSdkFixture.cs" Link="Fixtures/FrozenSdkFixture.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost*.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation*.cs" Link="Production/%(Filename)%(Extension)" />
     <Reference Include="Dalamud"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/Dalamud.dll</HintPath></Reference>

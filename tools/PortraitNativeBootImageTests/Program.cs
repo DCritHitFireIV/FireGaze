@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 // GetModuleHandle/GetProcAddress, which still needs live game qualification.
 internal static class Program
 {
-    private const string Expected = "862736DA018084B4A35EB149878D827D3AC651AE029915970365B686699B9A37";
+    private const string Expected = "42522951B76905C3664A355EE773F2E42CD47F2C1B187766AE8F7BD456C4B367";
     private static int checks;
     private static readonly string[] Names = ["BootSafetyHookInlineCreate", "BootSafetyHookInlineDestroy", "BootSafetyHookInlineDisable", "BootSafetyHookInlineEnable", "BootSafetyHookInlineGetTrampoline", "BootSafetyHookInlineIsEnabled"];
     private static readonly uint[] RVAs = [0x73690, 0x73800, 0x73860, 0x73930, 0x73A00, 0x73A10];

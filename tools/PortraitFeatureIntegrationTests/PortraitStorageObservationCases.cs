@@ -20,7 +20,9 @@ internal static class PortraitStorageObservationCases
                 else feature.ObserveOwned(new(OwnedSourceKind.Inventory), [new(100, 1, 0)]);
             }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
             if (!files.Entered.Task.Wait(TimeSpan.FromSeconds(5))) throw new InvalidOperationException("The real directory stat was not reached.");
-            var returned = frame.Wait(TimeSpan.FromMilliseconds(250));
+            // The callback must not wait on the deliberately blocked stat. Allow a full
+            // second for a cold test process/JIT while still catching an accidental sync I/O.
+            var returned = frame.Wait(TimeSpan.FromSeconds(1));
             files.Release();
             frame.GetAwaiter().GetResult();
             feature.WaitStorageObservation();

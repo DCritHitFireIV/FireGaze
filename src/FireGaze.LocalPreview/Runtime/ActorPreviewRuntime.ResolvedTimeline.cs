@@ -29,21 +29,34 @@ public sealed unsafe partial class ActorPreviewRuntime
 
     private void InstallResolvedTimelineBoundaries(IGameInteropProvider interop)
     {
-        var qualifier = new NativeTimelineBoundaryQualifier(new NativeTimelineCurrentProcess());
+        var process = new NativeTimelineCurrentProcess(interop);
+        var qualifier = new NativeTimelineBoundaryQualifier(process);
         if (!qualifier.TryQualify(out var plan, out var reason) || plan is null)
         {
             resolvedTimelineReason = resolvedActionTimelineReason = reason;
             return;
         }
         var installed = InstallQualifiedTimelineBoundaries(qualifier, plan,
-            () => interop.HookFromAddress<PlayResolvedTimelineNative>(plan.Timeline.Address, ResolvedTimelinePlayDetour),
+            () => CreateReviewedTimelineBoundary(interop, process, qualifier, plan, plan.Timeline,
+                (PlayResolvedTimelineNative)ResolvedTimelinePlayDetour, hook => resolvedTimelinePlay = hook),
             hook => resolvedTimelinePlay = hook,
-            () => interop.HookFromAddress<PlayResolvedActionTimelineNative>(plan.ActionTimeline.Address, ResolvedActionTimelinePlayDetour),
+            () => CreateReviewedTimelineBoundary(interop, process, qualifier, plan, plan.ActionTimeline,
+                (PlayResolvedActionTimelineNative)ResolvedActionTimelinePlayDetour, hook => resolvedActionTimelinePlay = hook),
             hook => resolvedActionTimelinePlay = hook);
         resolvedTimelineReason = installed.Item1.Reason;
         resolvedActionTimelineReason = installed.Item2.Reason;
         resolvedTimelineAdmitted = installed.Item1.Installed;
         resolvedActionTimelineAdmitted = installed.Item2.Installed;
+    }
+
+    private Hook<T> CreateReviewedTimelineBoundary<T>(IGameInteropProvider interop,
+        NativeTimelineCurrentProcess process, NativeTimelineBoundaryQualifier qualifier, NativeTimelinePlan plan,
+        NativeTimelineTarget target, T detour, Action<Hook<T>?> bind) where T : Delegate
+    {
+        if (!ReviewedSafetyHookApi<T>.TryBind(interop, this, detour, target.Address,
+            () => qualifier.TryConfirmTarget(plan, target), process.ReadReviewedBootEvidence, out var api, out var reason))
+            throw new InvalidOperationException(reason);
+        return ReviewedDisabledHookFactory.Create(api!, target.Address, this, detour, installedHooks, bind, TryDisposeNativeHook);
     }
 
     private (OptionalNativeHookStatus, OptionalNativeHookStatus) InstallQualifiedTimelineBoundaries<T, TAction>(
@@ -82,7 +95,7 @@ public sealed unsafe partial class ActorPreviewRuntime
             // Publish both Original holders before either Enable can expose a
             // callback; an eager constructor is rejected before factory entry.
             bind(hook);
-            installedHooks.Add(hook);
+            if (!installedHooks.Contains(hook)) installedHooks.Add(hook);
             reason = "";
             return hook;
         }

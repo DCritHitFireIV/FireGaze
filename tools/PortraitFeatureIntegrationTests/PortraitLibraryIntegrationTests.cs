@@ -162,6 +162,40 @@ internal static class PortraitLibraryIntegrationTests
             var writes=feature.OwnedWrites;feature.Advance(100);feature.ObserveOwned(source,[new(100,1,0,1,1,1)]);feature.FlushOwned();
             check(feature.OwnedWrites==writes,"unchanged feature capture refresh does not rewrite durable owned content");
         }
+        using(var feature=new PortraitPreviewFeature(PathFor("equipment-owner-publication")))
+        {
+            var originalOwner=feature.Owner;
+            var retainer=new OwnedSourceKey(OwnedSourceKind.RetainerInventory,123);
+            var source=new OwnedSourceView(retainer,OwnedReadStatus.Current,DateTimeOffset.UtcNow,1,"");
+            var oldView=new OwnedEquipmentView(originalOwner,[new(100,[new(retainer,100,1,0,1,0,0,0,false,OwnedReadStatus.Current)])],[source]);
+            feature.SetOwnedItems(oldView,PortraitSlot.Body,[new(100,"原角色独占装备",1,2,true,"")]);
+            feature.SetOwnedItems(oldView,PortraitSlot.Facewear,[new(71,"原角色解锁眼镜",1,0,true,"")]);
+            feature.SetRetainerName(123,"原角色雇员");
+            check(feature.GetItems(PortraitSlot.Body).Single().ID==100 && feature.GetItems(PortraitSlot.Facewear).Single().ID==71,
+                "current owner keeps both owned equipment and its unlocked facewear publication");
+            check(feature.StorageLocations(100).Single()=="雇员背包 · 原角色雇员",
+                "current owner sees the readable retainer location from its own detached inventory");
+            feature.Owner=new(99,88);
+            check(feature.GetItems(PortraitSlot.Body).Count==0 && feature.GetItems(PortraitSlot.Facewear).Count==0,
+                "character switch hides prior equipment and unlocked facewear before inventory polling");
+            check(feature.StorageLocations(100).Count==0,
+                "character switch hides prior equipment locations before inventory polling");
+            feature.Owner=null;
+            check(feature.GetItems(PortraitSlot.Body).Count==0 && feature.GetItems(PortraitSlot.Facewear).Count==0 && feature.StorageLocations(100).Count==0,
+                "logout cannot expose prior equipment, unlocks, or retainer locations");
+            feature.Owner=originalOwner;
+            check(feature.GetItems(PortraitSlot.Body).Single().ID==100 && feature.GetItems(PortraitSlot.Facewear).Single().ID==71 && feature.StorageLocations(100).Count==1,
+                "owner checks preserve the detached publication without clearing valid cached equipment or unlocks");
+            feature.Owner=new(99,88);
+            var inventory=new OwnedSourceKey(OwnedSourceKind.Inventory);
+            var newView=new OwnedEquipmentView(feature.Owner,[new(200,[new(inventory,200,1,0,1,0,0,0,false,OwnedReadStatus.Current)])],[]);
+            feature.SetOwnedItems(newView,PortraitSlot.Body,[new(200,"新角色装备",1,2,true,"")]);
+            feature.SetOwnedItems(newView,PortraitSlot.Facewear,[new(72,"新角色解锁眼镜",1,0,true,"")]);
+            check(feature.GetItems(PortraitSlot.Body).Single().ID==200 && feature.GetItems(PortraitSlot.Facewear).Single().ID==72,
+                "refreshed current-owner publication exposes its own equipment and unlocked facewear");
+            check(feature.StorageLocations(200).Single()=="背包" && feature.StorageLocations(100).Count==0,
+                "refreshed current-owner locations exclude the previous character item and retainer");
+        }
         using(var feature=new PortraitPreviewFeature(PathFor("retainer-roster-owner")))
         {
             var owner=feature.Owner!.Value;var readAt=DateTimeOffset.UtcNow;

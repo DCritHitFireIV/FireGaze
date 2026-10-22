@@ -41,25 +41,45 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
                 || !process.TryReadSDK(out var sdk) || !ValidSDK(sdk)
                 || !TryInspectExecutableImage(module.FileImage, module.ImageSize, targetSet, out var diskEntries, out reason)) return false;
             reason = "Runtime native entry, module identity, SDK resolution, or address reservation changed during qualification.";
-            if (!ReadEntries(module, diskEntries, out var first)) return false;
-            if (!process.TryReadModule(out var after) || after.Name != module.Name || after.BaseAddress != module.BaseAddress
-                || after.ImageSize != module.ImageSize || !HashMatches(after.FileImage, PortraitNativePhaseObservationBinding.EXE)
-                || !process.TryReadSDK(out var sdkAfter) || sdkAfter.LoadedMVID != sdk.LoadedMVID || !ValidSDK(sdkAfter)
-                || !ReadEntries(after, diskEntries, out var second)) return false;
+            if (!ReadEntries(module, diskEntries, out var first, out var entryFailure))
+            { reason = entryFailure; return false; }
+            if (!process.TryReadModule(out var after))
+            { reason = "Module identity re-read failed after the first runtime entry pass."; return false; }
+            if (after.Name != module.Name || after.BaseAddress != module.BaseAddress || after.ImageSize != module.ImageSize)
+            { reason = "Module identity changed after the first runtime entry pass."; return false; }
+            if (!HashMatches(after.FileImage, PortraitNativePhaseObservationBinding.EXE))
+            { reason = "Module image hash changed after the first runtime entry pass."; return false; }
+            if (!process.TryReadSDK(out var sdkAfter))
+            { reason = "Loaded SDK could not be re-read after the first runtime entry pass."; return false; }
+            if (sdkAfter.LoadedMVID != sdk.LoadedMVID || !ValidSDK(sdkAfter))
+            { reason = "Loaded SDK identity or file hash changed after the first runtime entry pass."; return false; }
+            if (!ReadEntries(after, diskEntries, out var second, out entryFailure))
+            { reason = entryFailure; return false; }
             // Resource bodies span many copies. Identity may change inside the
             // last one; a pre-second-round check alone cannot attest its owner.
-            if (targetSet == PortraitNativePhaseTargetSet.ResourceIngress
-                && (!process.TryReadModule(out var final) || final.Name != module.Name || final.BaseAddress != module.BaseAddress
-                    || final.ImageSize != module.ImageSize || !HashMatches(final.FileImage, PortraitNativePhaseObservationBinding.EXE)
-                    || !process.TryReadSDK(out var finalSDK) || finalSDK.LoadedMVID != sdk.LoadedMVID || !ValidSDK(finalSDK))) return false;
-            if (!first.Select(StableEntry).SequenceEqual(second.Select(StableEntry))
-                || !PortraitNativePhaseObservationBinding.TryBind(module.BaseAddress, PortraitNativePhaseObservationBinding.EXE,
+            if (targetSet == PortraitNativePhaseTargetSet.ResourceIngress)
+            {
+                if (!process.TryReadModule(out var final))
+                { reason = "Module identity re-read failed after the final resource-body pass."; return false; }
+                if (final.Name != module.Name || final.BaseAddress != module.BaseAddress || final.ImageSize != module.ImageSize
+                    || !HashMatches(final.FileImage, PortraitNativePhaseObservationBinding.EXE))
+                { reason = "Module identity or image hash changed after the final resource-body pass."; return false; }
+                if (!process.TryReadSDK(out var finalSDK))
+                { reason = "Loaded SDK could not be re-read after the final resource-body pass."; return false; }
+                if (finalSDK.LoadedMVID != sdk.LoadedMVID || !ValidSDK(finalSDK))
+                { reason = "Loaded SDK identity or file hash changed after the final resource-body pass."; return false; }
+            }
+            for (var index = 0; index < first.Length; index++)
+                if (StableEntry(first[index]) != StableEntry(second[index]))
+                { reason = EntryFailure(diskEntries[index], "changed between runtime read passes"); return false; }
+            if (!PortraitNativePhaseObservationBinding.TryBind(module.BaseAddress, PortraitNativePhaseObservationBinding.EXE,
                     PortraitNativePhaseObservationBinding.SDK, second, targetSet, out var targets, out reason)) return false;
             // A reservation can appear inside the final read. This last sweep rejects
             // that observed drift; it cannot replace the installer's atomic lease.
-            if (targets.Any(target => process.IsAddressReserved(target.Address)))
+            var reservedTarget = targets.FirstOrDefault(target => process.IsAddressReserved(target.Address));
+            if (reservedTarget.Address != 0)
             {
-                reason = "A native entry was reserved before the read-only plan was published.";
+                reason = EntryFailure(diskEntries.First(entry => entry.Phase == reservedTarget.Phase), "address became reserved before plan publication");
                 return false;
             }
             plan = new(module.BaseAddress, module.ImageSize, PortraitNativePhaseObservationBinding.EXE,
@@ -111,37 +131,47 @@ internal sealed class PortraitNativePhaseObservationResolver(IPortraitNativePhas
     }
 
     private bool ReadEntries(PortraitNativePhaseProcessModule module, IReadOnlyList<PortraitNativePhaseEntryEvidence> diskEntries,
-        out PortraitNativePhaseEntryEvidence[] entries)
+        out PortraitNativePhaseEntryEvidence[] entries, out string reason)
     {
         entries = new PortraitNativePhaseEntryEvidence[diskEntries.Count];
+        reason = "";
         for (var index = 0; index < diskEntries.Count; index++)
         {
             var disk = diskEntries[index];
             var address = module.BaseAddress + (nint)disk.FunctionRootRVA;
-            if (process.IsAddressReserved(address)) return false;
+            if (process.IsAddressReserved(address))
+            { reason = EntryFailure(disk, "address already reserved before runtime read"); return false; }
             var prefix = new byte[disk.Prefix.Length];
             string? bodyHash = null;
             if (PortraitNativeResourceIngressContract.Find(disk.Phase) is { } resource)
             {
                 if (!PortraitNativeResourceIngressContract.TryReadCompleteBody(process, module.BaseAddress, resource, out var hash)
-                    || hash != disk.CompleteBodySHA256) return false;
+                    || hash != disk.CompleteBodySHA256)
+                { reason = EntryFailure(disk, "complete runtime body mismatch or unreadable"); return false; }
                 bodyHash = hash;
                 // The full digest attests the prefix too. Never introduce an
                 // extra prologue-only copy in place of complete fragment reads.
                 disk.Prefix.CopyTo(prefix, 0);
             }
-            else if (!process.TryReadMemory(address, prefix) || !prefix.AsSpan().SequenceEqual(disk.Prefix)) return false;
+            else if (!process.TryReadMemory(address, prefix))
+            { reason = EntryFailure(disk, "runtime prefix unreadable"); return false; }
+            else if (!prefix.AsSpan().SequenceEqual(disk.Prefix))
+            { reason = EntryFailure(disk, "runtime prefix mismatch"); return false; }
             var sdkAddress = disk.Phase switch {
                 PortraitNativeObservedPhase.ManagerRender => process.SDKManagerRender,
                 PortraitNativeObservedPhase.SourceCharaViewRender => process.SDKSourceRender,
                 _ => 0,
             };
             var usesSDK = disk.Phase is PortraitNativeObservedPhase.ManagerRender or PortraitNativeObservedPhase.SourceCharaViewRender;
-            if (usesSDK && sdkAddress != address) return false;
+            if (usesSDK && sdkAddress != address)
+            { reason = EntryFailure(disk, "SDK-resolved entry address mismatch"); return false; }
             entries[index] = disk with { Address = address, Prefix = prefix, SDKResolvedAddress = sdkAddress, CompleteBodySHA256 = bodyHash };
         }
         return true;
     }
+
+    private static string EntryFailure(PortraitNativePhaseEntryEvidence entry, string detail)
+        => $"{entry.Phase}: {detail} at RVA 0x{entry.FunctionRootRVA:X}.";
 
     private static (PortraitNativeObservedPhase, nint, uint, int, Type, nint, string, string?) StableEntry(PortraitNativePhaseEntryEvidence entry)
         => (entry.Phase, entry.Address, entry.FunctionRootRVA, entry.PrefixMatches, entry.DelegateType,

@@ -17,11 +17,15 @@ internal interface IPortraitPreviewViewModel
     bool SourceCensusBlocksOperations => false;
     bool IsActive { get; }
     PortraitLook? Current { get; }
+    PortraitLook? Original => null;
+    ushort? ActualFacewear => null;
     string Status { get; }
+    bool StatusIsError => false;
     IReadOnlyList<string> SourceSummary { get; }
     IReadOnlyList<PortraitDye> Dyes { get; }
     IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot);
     IReadOnlyList<OwnedSourceView> Sources => [];
+    IReadOnlyList<OwnedEquipmentEntry> EquippedItems => [];
     OwnedCharacterKey? SourceCharacter => null;
     OwnedRetainerRoster? RetainerRoster => null;
     string SourceGuideKey => string.Empty;
@@ -43,6 +47,8 @@ internal interface IPortraitPreviewViewModel
     string HistoryStatus { get; }
     void RestoreHistory(long id);
     IReadOnlyList<PortraitAppearanceGroup> AppearanceGroups { get; }
+    IReadOnlyList<PortraitAppearanceGroup> OriginalAppearanceGroups => [];
+    IReadOnlyList<PortraitAppearanceGroup> ActualAppearanceGroups => [];
     void ChangeAppearance(string groupID, int value);
 
     // Portrait library surfaces are optional so older view models and offline fixtures remain valid.
@@ -167,7 +173,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     public void CloseAuxiliaryWindows()
     {
-        showHistory = showFavorites = showGlamourPlates = showAnalysis = showLight = showLightingFit = showSpaceLight = showSourceGuide = false;
+        showHistory = showFavorites = showGlamourPlates = showAnalysis = showLight = showLightingFit = showSpaceLight = showSourceGuide = showDesignShowcase = false;
         BindLightingSubject(null);
         editingFavorite = deletingFavorite = null;
         // Feature lifetime cleanup owns its gesture; do not resample a retiring editor from a UI callback.
@@ -201,12 +207,14 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             return;
         }
         DrawWorkspaceHeader();
+        DrawDesignShowcaseEntry();
 
         if (appearanceTab)
         {
             DrawAppearance();
             DrawHistoryPopup();
             DrawLibraryPopups();
+            DrawDesignShowcaseWindow();
             return;
         }
 
@@ -239,10 +247,11 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             if (feature.SourceSummary.Count == 0) ImGui.TextUnformatted("尚未读取物品。请先打开对应的背包、投影台或雇员背包。");
             ImGui.EndPopup();
         }
-        ImGui.TextWrapped("请先关闭预览，再保存肖像。");
-        if (!string.IsNullOrWhiteSpace(feature.Status)) ImGui.TextWrapped(feature.Status);
+        if (feature.StatusIsError && !string.IsNullOrWhiteSpace(feature.Status))
+            ImGui.TextWrapped(feature.Status);
         DrawHistoryPopup();
         DrawLibraryPopups();
+        DrawDesignShowcaseWindow();
     }
 
     private static float Scale => ImGui.GetFontSize() / 17f;

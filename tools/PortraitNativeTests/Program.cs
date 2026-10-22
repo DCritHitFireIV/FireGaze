@@ -30,6 +30,13 @@ unsafe class Program
   using var f=new Fixture();bool block=false;int errors=0;using var t=new NativePortraitTarget(f, _=>block, _=>errors++);
   Check(t.TryResolve(out var id,out _,out var open),"valid isolated current portrait resolves");
   Check(open==AgentBannerEditorState.EditorOpenType.Gearset,"gearset editor is supported");
+  f.Real->DrawData.GlassesIds[0]=71;
+  Check(t.CaptureLocalFacewear()==71 && f.View->PortraitCharacterData.GlassesIds[0]==42 && f.Calls==0,
+   "actual facewear baseline reads the real player's typed DrawData field without changing the portrait or invoking native setters");
+  f.Framework=false;
+  Check(t.CaptureLocalFacewear() is null,"actual facewear cannot be captured off the Framework thread");f.Framework=true;
+  f.Local=null;
+  Check(t.CaptureLocalFacewear() is null,"missing real player leaves the facewear baseline unknown rather than empty");f.Local=f.Real;
   f.View->Agent=null;f.View->CharacterLoaded=false;
   Check(t.TryResolve(out _,out _,out _) && t.IsCurrent(id),"sampled CN portrait with null optional agent and base-loaded false resolves using portrait-loaded flag");
   f.View->Agent=(AgentInterface*)f.Real;

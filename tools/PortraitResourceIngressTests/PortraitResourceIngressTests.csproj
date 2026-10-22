@@ -6,6 +6,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation.ResourceIngress.cs')">$(DefineConstants);RESOURCE_INGRESS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../PortraitNativeTestFixtures/FrozenSdkFixture.cs" Link="Fixtures/FrozenSdkFixture.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseHost*.cs" Link="Production/%(Filename)%(Extension)" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation*.cs" Link="Production/%(Filename)%(Extension)" />
     <ProjectReference Include="../PortraitNativePhaseHostTests/CollectibleProbe/CollectibleProbe.csproj" ReferenceOutputAssembly="false" />

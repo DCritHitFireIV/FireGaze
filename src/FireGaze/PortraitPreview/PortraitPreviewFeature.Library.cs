@@ -273,7 +273,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         HandleHistoryResult(result);
         RefreshHistoryRows();
         if (syncPlate) _ = target.UpdatePlateMirror(identity, desired, true);
-        status = label;
+        SetStatus(label);
         return true;
     }
 
@@ -295,6 +295,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         favoritesStatus = reason;
         status = reason;
+        statusIsError = true;
     }
 
     private void PublishFavoriteResult(PortraitFavoritesWriteResult result)
@@ -319,7 +320,12 @@ internal sealed unsafe partial class PortraitPreviewFeature
         libraryInitialized = false;
     }
 
+    public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => ownedView.Character == CurrentCharacter() && browser.TryGetValue(slot, out var values) ? values : [];
+
     public IReadOnlyList<OwnedSourceView> Sources => ownedView.Character == CurrentCharacter() ? ownedView.Sources : [];
+    public IReadOnlyList<OwnedEquipmentEntry> EquippedItems => ownedView.Character == CurrentCharacter()
+        ? ownedView.Items.Where(item => item.Variants.Any(variant => variant.Source.Kind == OwnedSourceKind.Equipped)).ToArray()
+        : [];
     public OwnedCharacterKey? SourceCharacter => CurrentCharacter();
     public OwnedRetainerRoster? RetainerRoster => retainerRosterView?.Character == CurrentCharacter() ? retainerRosterView : null;
 
@@ -354,8 +360,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
     }
 
     public IReadOnlyList<string> StorageLocations(uint id)
-        => ownedView.Items.FirstOrDefault(item => item.ItemID == id)?.Variants
-            .Select(variant => SourceName(variant.Source)).Distinct(StringComparer.Ordinal).ToArray() ?? [];
+        => ownedView.Character == CurrentCharacter() ? ownedView.Items.FirstOrDefault(item => item.ItemID == id)?.Variants
+            .Select(variant => SourceName(variant.Source)).Distinct(StringComparer.Ordinal).ToArray() ?? [] : [];
 
     public void EquipFromSources(PortraitSlot slot, uint id, IReadOnlyCollection<OwnedSourceKind> sources) => Mutate(() =>
     {

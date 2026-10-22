@@ -73,9 +73,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
 
     private int tableUpdateBusy;
     private readonly UI.InstallerListScroll installerListScroll = new();
-    private Task<RepoAudit.InstalledPluginsIndex>? iconWarmUpIndexTask;
-    private DateTime iconWarmUpRetryAfter = DateTime.MinValue;
-    private bool iconWarmUpRequested;
+    private readonly UI.InstallerIconIndexRefresh iconWarmUpIndex = new();
     private bool startupInitDone;
     private LocalPreview.LocalPreviewFeature? localPreview;
     private PortraitPreview.PortraitPreviewFeature? portraitPreview;
@@ -624,6 +622,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
     /// </summary>
     private void OnActivePluginsChanged(Dalamud.Plugin.IActivePluginsChangedEventArgs args)
     {
+        iconWarmUpIndex.NotifyChanged();
         try
         {
             uiTextTab.NotifyInstalledPluginsChanged();
@@ -807,55 +806,25 @@ public sealed class Plugin : IAsyncDalamudPlugin
     }
 
     /// <summary>
-    ///     给图标预热准备「已装插件」索引（后台建一次就够；读不到就过 10 秒再试）。
+    ///     首次打开安装器和已装插件变化后后台重建索引；读不到时过 10 秒再试。
     /// </summary>
     private void EnsureIconWarmUpIndex()
     {
-        if (iconWarmUpRequested)
-        {
-            return;   // 已经排过一次（含空清单），不要每帧重建索引
-        }
+        iconWarmUpIndex.Tick(DateTime.UtcNow, QueueIconWarmUpIndex, Icons.ScheduleWarmUp);
+    }
 
-        if (iconWarmUpIndexTask is null)
-        {
-            if (DateTime.UtcNow < iconWarmUpRetryAfter)
+    private Task<RepoAudit.InstalledPluginsIndex>? QueueIconWarmUpIndex()
+    {
+        var completion = new TaskCompletionSource<RepoAudit.InstalledPluginsIndex>(
+            TaskCreationOptions.RunContinuationsAsynchronously);
+        if (!workLifetime.Queue(_ =>
             {
-                return;
-            }
-
-            var completion = new TaskCompletionSource<RepoAudit.InstalledPluginsIndex>(
-                TaskCreationOptions.RunContinuationsAsynchronously);
-            if (!workLifetime.Queue(_ =>
-                {
-                    try { completion.TrySetResult(RepoAudit.InstalledPluginsIndex.Build()); }
-                    catch (Exception error) { completion.TrySetException(error); }
-                    return ValueTask.CompletedTask;
-                }, out _))
-                return;
-            iconWarmUpIndexTask = completion.Task;
-            return;
-        }
-
-        if (!iconWarmUpIndexTask.IsCompleted)
-        {
-            return;
-        }
-
-        var index = iconWarmUpIndexTask.Status == TaskStatus.RanToCompletion
-            ? iconWarmUpIndexTask.Result
-            : null;
-
-        iconWarmUpIndexTask = null;
-
-        if (index is { Available: true })
-        {
-            iconWarmUpRequested = true;
-            Icons.ScheduleWarmUp(index.All);
-        }
-        else
-        {
-            iconWarmUpRetryAfter = DateTime.UtcNow.AddSeconds(10);
-        }
+                try { completion.TrySetResult(RepoAudit.InstalledPluginsIndex.Build()); }
+                catch (Exception error) { completion.TrySetException(error); }
+                return ValueTask.CompletedTask;
+            }, out _))
+            return null;
+        return completion.Task;
     }
 
     // ------------------------------------------------------------------ 配置

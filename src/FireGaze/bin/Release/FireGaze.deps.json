@@ -1,0 +1,55 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "FireGaze/1.5.0.52": {
+        "dependencies": {
+          "FireGaze.LocalPreview.Core": "1.0.0",
+          "dnlib": "4.5.0"
+        },
+        "runtime": {
+          "FireGaze.dll": {}
+        }
+      },
+      "dnlib/4.5.0": {
+        "runtime": {
+          "lib/net6.0/dnlib.dll": {
+            "assemblyVersion": "4.5.0.0",
+            "fileVersion": "4.5.0.0"
+          }
+        }
+      },
+      "FireGaze.LocalPreview.Core/1.0.0": {
+        "runtime": {
+          "FireGaze.LocalPreview.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FireGaze/1.5.0.52": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "dnlib/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YkwstIbjyiJ12uGIAN8oSmImgVFkPHit7MJXPHvJqeKV1DMNqxZWszjHfykgiSs4Y/XmjnZts7pI2/AYme5/uA==",
+      "path": "dnlib/4.5.0",
+      "hashPath": "dnlib.4.5.0.nupkg.sha512"
+    },
+    "FireGaze.LocalPreview.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

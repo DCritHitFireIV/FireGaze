@@ -38,6 +38,10 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     private string[] sourceSummary = [];
     private PortraitDye[] dyes = [];
     private string status = "请打开肖像编辑器";
+    private bool statusIsError;
+    private PortraitEditorSnapshot? originalEditorSnapshot;
+    private byte[]? actualCustomize;
+    private ushort? actualFacewear;
     private bool editorAvailable;
     private DateTime nextInventoryRead;
     private bool disposed;
@@ -102,10 +106,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                 PortraitCaptureRetirement.CombineOwned(this, incompletePhysicalClose.Task));
     }
     public PortraitLook? Current => session.Current;
+    public PortraitLook? Original => session.Original;
+    public ushort? ActualFacewear => actualFacewear;
     public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
+    public bool StatusIsError => statusIsError || plateMirrorCloseError is not null || cachePersistenceWarning is not null;
     public IReadOnlyList<string> SourceSummary => ownedView.Character == CurrentCharacter() ? sourceSummary : [];
     public IReadOnlyList<PortraitDye> Dyes => dyes;
-    public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => browser.TryGetValue(slot, out var values) ? values : [];
     public PortraitBrowserItem? GetItem(PortraitSlot slot, uint id)
     {
         if (slot == PortraitSlot.Facewear)
@@ -129,6 +135,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             plateMirrorDisposalRestored = target.PlateMirrorDisposalRestored,
             canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
             historyRows, appearanceGroups,
+            designManifest = window.DesignManifestForDiagnostics(),
             historyPhotos = photos.Diagnostics(),
             portraitStorage = storageBudget.Snapshot,
             captureIsolation = captureIsolation.Mode,
@@ -186,6 +193,11 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             using (runtimeTrace.Measure("update.owned-viewport")) UpdateOwnedViewport();
             using (runtimeTrace.Measure("update.retainer-loads")) inventory.ObserveRetainerLoads();
             using (runtimeTrace.Measure("update.validate")) session.Validate();
+            using (runtimeTrace.Measure("update.actual-customize"))
+            {
+                actualCustomize = target.CaptureLocalCustomize();
+                actualFacewear = target.CaptureLocalFacewear();
+            }
             using (runtimeTrace.Measure("update.lighting-fit")) PollLightingFit();
             using (runtimeTrace.Measure("update.editing")) if (!OwnedViewportBlocksOperations) PollEditing();
             PublishAnalysisSession();
@@ -218,7 +230,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         {
             Volatile.Write(ref analysisSession, null);
             Plugin.Log.Warning(ex, "[肖像同步预览] 更新失败");
-            status = "肖像或物品信息尚未加载完成";
+            SetStatus("肖像或物品信息尚未加载完成");
         }
     }
 
@@ -297,8 +309,9 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             if (!target.TryResolve(out identity, out _, out _)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
         using (runtimeTrace.Measure("open.session"))
             if (!session.Open(identity)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
+        originalEditorSnapshot = target.CaptureEditorState(identity)?.Copy();
         using (runtimeTrace.Measure("open.inventory")) RefreshInventory();
-        status = "肖像预览已开启。";
+        SetStatus("肖像预览已开启。");
         window.IsOpen = true;
         window.BringToFront();
     });
@@ -356,22 +369,30 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             return;
         }
         window.IsOpen = false;
+        originalEditorSnapshot = null;
         liveImageService?.Close();
         requestedCaptureViewport = null;
         SynchronizeAfterClose();
         QueueOwnedCacheIfNeeded();
-        status = "临时外观已还原，现在可以保存肖像。";
+        SetStatus("临时外观已还原，现在可以保存肖像。");
     });
 
     private void Error(string message)
     {
         status = message;
+        statusIsError = true;
         // Disposal can finish after a native callback unwinds. Keep that eventual failure in
         // the log even when the feature has already detached its update and draw handlers.
         if (disposed) Plugin.Log.Error("[肖像同步预览] 卸载收尾未完成：{Error}", message);
         var playerMessage = disposed && !target.PlateMirrorDisposalRestored
             ? "本地铭牌预览未能还原，请关闭后重新打开铭牌。" : message;
         Plugin.Chat.PrintError("[肖像同步预览] " + playerMessage);
+    }
+
+    private void SetStatus(string message)
+    {
+        status = message;
+        statusIsError = false;
     }
 
     private void Mutate(System.Action action, bool preserveSourceCensus = false)
@@ -417,6 +438,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (parts.Length == 0 || parts is ["open"]) OpenPreview();
         else if (parts is ["close"]) ClosePreview();
         else if (parts is ["status"]) Plugin.Chat.Print("[肖像同步预览] " + Status);
+        else if (parts is ["look"] or ["design"]) Mutate(() => window.OpenDesignShowcase());
         else if (parts is ["capture-probe", var captureMode]) Mutate(() =>
         {
             var busy = SourceCensusBlocksOperations || photos.IsBusy || liveImageService?.IsBusy == true || LightingFitMutationBlocked;
@@ -469,7 +491,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             AtkValue result = default;
             ((AgentBannerEditor*)owner.Editor)->ReceiveEvent(&result, values, 2, 0);
         });
-        else Error("用法：/firegaze portrait open|close|status；light-space window");
+        else Error("用法：/firegaze portrait open|close|status");
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

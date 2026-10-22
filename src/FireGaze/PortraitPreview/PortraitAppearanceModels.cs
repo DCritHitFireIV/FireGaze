@@ -1,7 +1,8 @@
 namespace FireGaze.PortraitPreview;
 
 internal sealed record PortraitAppearanceOption(int Value, string Label, uint Icon = 0,
-    uint? Color = null, bool Available = true, string? Reason = null);
+    uint? Color = null, bool Available = true, string? Reason = null,
+    string? UnlockItemName = null, uint UnlockItemID = 0, uint UnlockItemIcon = 0);
 
 internal sealed record PortraitAppearanceGroup(string ID, string Label, int CurrentValue,
     IReadOnlyList<PortraitAppearanceOption> Options, string? Description = null);

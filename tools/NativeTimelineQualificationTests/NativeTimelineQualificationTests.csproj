@@ -8,6 +8,10 @@
     <ProjectReference Include="../../src/FireGaze.LocalPreview/FireGaze.LocalPreview.csproj" />
     <Compile Include="../../src/FireGaze.LocalPreview/Runtime/NativeTimelineBoundaryQualifier.cs" Link="NativeTimelineBoundaryQualifier.cs" />
     <Compile Include="../../src/FireGaze.LocalPreview/Runtime/NativeTimelineBackendContract.cs" Link="NativeTimelineBackendContract.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Runtime/ReviewedDetourContract.cs" Link="ReviewedDetourContract.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Runtime/ReviewedDisabledHookFactory.cs" Link="ReviewedDisabledHookFactory.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Runtime/ReviewedSafetyHookApi.cs" Link="ReviewedSafetyHookApi.cs" />
+    <Compile Include="../../src/FireGaze.LocalPreview/Runtime/ReviewedSafetyHookSchema.cs" Link="ReviewedSafetyHookSchema.cs" />
     <Compile Include="../NativeCompatibilityTests/TimelineHookInstallationTests.cs" Link="TimelineHookInstallationTests.cs" />
     <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
     <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>

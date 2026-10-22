@@ -30,7 +30,7 @@ internal interface IPortraitNativeBootProcess
 /// </summary>
 internal sealed class PortraitNativeBootImageQualifier(IPortraitNativeBootProcess process)
 {
-    internal const string ExpectedSHA256 = "862736DA018084B4A35EB149878D827D3AC651AE029915970365B686699B9A37";
+    internal const string ExpectedSHA256 = "42522951B76905C3664A355EE773F2E42CD47F2C1B187766AE8F7BD456C4B367";
     private static readonly (string Name, uint RVA)[] ExportContracts = [
         ("BootSafetyHookInlineCreate", 0x73690), ("BootSafetyHookInlineDestroy", 0x73800),
         ("BootSafetyHookInlineDisable", 0x73860), ("BootSafetyHookInlineEnable", 0x73930),

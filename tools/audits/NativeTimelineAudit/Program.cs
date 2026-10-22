@@ -15,8 +15,8 @@ using InteropGenerator.Runtime;
 internal static unsafe class Program
 {
     private const string ExpectedClient = "958B78E278AD896493C484EB313FF605AB41EDEFEF74F92B0EE078E69B281BF9";
-    private const string ExpectedSdk = "5A7A8EA71E84D7410DBAD8A5391D4759C2A38B1A55F4F3BB745B22B556A6F778";
-    private const string ExpectedDalamud = "CE0C3C8004CAC1E9AA96D0DC749463F5F1A32E9B49988419BF320545BF942C6A";
+    private const string ExpectedSdk = "5726E301EE5456D526F524E9F88659F38A8717CB527FE4A86D83D1ADE0AB9798";
+    private const string ExpectedDalamud = "AF15D754340C659F9F57C110C9914D8C68A068F588725CAAE50AC237B07DA1C4";
     [return: MarshalAs(UnmanagedType.U1)] private delegate bool SdkTimelineU1(ActionTimelineSequencer* sequence, ushort id, void* parameter);
     [return: MarshalAs(UnmanagedType.U1)] private delegate bool SdkActionU1(TimelineContainer* timeline, ushort intro, ushort loop, void* parameter);
     [return: MarshalAs(UnmanagedType.U1)] private delegate bool InternalTimelineU1(ActionTimelineSequencer* sequence, ushort id, void* borrowedResolvedRow, void* borrowedParameter);
@@ -42,6 +42,7 @@ internal static unsafe class Program
                 .SelectMany(type => type.GetFields(BindingFlags.Public | BindingFlags.Static))
                 .Where(field => field.FieldType == typeof(Address)).ToArray();
             var allAddressObjects = allAddressFields.Select(field => (Field: field, Address: (Address)field.GetValue(null)!)).ToArray();
+            Check(allAddressObjects.Length == 2574, "current CN SDK address inventory has 2574 fields");
             Check(allAddressObjects.All(entry => entry.Address.Value == 0), "fresh isolated process begins with unbound SDK addresses");
             FFXIVClientStructs.Interop.Generated.Addresses.Register();
             var resolver = Resolver.GetInstance;
@@ -71,6 +72,7 @@ internal static unsafe class Program
                     });
                 }
             }
+            Check(verifiedEntries.Count == 2455, "current official HookVerifier inventory has 2455 entries");
             Check(!knownAddresses.Contains(image.Base + 0x606B10), "actual complete HookVerifier inventory has no internal resolved-timeline target");
             Check(!knownAddresses.Contains(image.Base + 0x606FD0), "actual complete HookVerifier inventory has no internal resolved-action target");
             var rejectedTimeline = Verify(verifier, typeof(SdkTimelineU1), ActionTimelineSequencer.Addresses.PlayTimeline.Value);

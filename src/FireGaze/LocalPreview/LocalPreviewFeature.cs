@@ -112,7 +112,6 @@ public sealed partial class LocalPreviewFeature : IDisposable
         if (!coexistence.Allowed && runtime?.HasActivePreview == true)
         {
             runtime.BeforeHmsLifecycle();
-            lastMessage = coexistence.Reason;
         }
         if (initialized) { UpdatePresentationExtras(); return; }
         initialized = true;
@@ -163,8 +162,6 @@ public sealed partial class LocalPreviewFeature : IDisposable
         RefreshCoexistence();
         if (!coexistence.Allowed)
         {
-            lastMessage = coexistence.Reason;
-            Chat.PrintError("[本地试用] " + lastMessage);
             return;
         }
         if (id == 0 || id > ushort.MaxValue)
@@ -292,7 +289,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
         if (parts.Length == 0) return; // Main window navigation is owned by Plugin.
         switch (parts[0].ToLowerInvariant())
         {
-            case "status": Chat.Print("[本地试用] " + Diagnostics()); break;
+            case "status": Chat.Print("[本地试用] " + LocalPreviewStatusPresentation.UserStatusSummary(
+                enabled, initialized, runtime is not null, ReadActiveEffects().Length)); break;
             case "cancel": Cancel(); break;
             case "on":
                 if (pluginInterface?.IsDev == true) SetEnabled(true);
@@ -390,7 +388,8 @@ public sealed partial class LocalPreviewFeature : IDisposable
 
     private string Diagnostics() => JsonSerializer.Serialize(new
     {
-        version = typeof(LocalPreviewFeature).Assembly.GetName().Version?.ToString(), enabled, initialized, coexistence, options = MenuOptions(),
+        version = typeof(LocalPreviewFeature).Assembly.GetName().Version?.ToString(), enabled, initialized,
+        coexistenceAllowed = coexistence.Allowed, options = MenuOptions(),
         chatLinksPreference = config.LocalPreviewChatLinksEnabled,
         chatLinksEffective = enabled && Preferences.CanLinkEmoteMessages,
         enableConfirmationPending = Preferences.ConfirmationPending,
@@ -398,7 +397,7 @@ public sealed partial class LocalPreviewFeature : IDisposable
         loggedIn = ClientState.IsLoggedIn,
         territory = ClientState.TerritoryType,
         capabilities = runtime?.Capabilities,
-        hmsInputHandoff = runtime?.HmsInputHandoffStatus,
+        hmsInputHandoffInstalled = runtime?.HmsInputHandoffStatus.Installed,
         timelineObservers = new { play = runtime?.TimelinePlayStatus, action = runtime?.ActionTimelinePlayStatus },
         sdkTimelineObservers = new { play = runtime?.SdkTimelinePlayStatus, action = runtime?.SdkActionTimelinePlayStatus },
         resolvedTimelineObservers = new { play = runtime?.ResolvedTimelinePlayStatus, action = runtime?.ResolvedActionTimelinePlayStatus },

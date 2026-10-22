@@ -32,6 +32,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool TryOwnedViewportCommand(string[] parts)
     {
         if (parts.Length == 0 || parts[0] != "native-scene") return false;
+        // The independent scene remains wired for later development, but is not
+        // a release entry point. Keep the command consumed and silent for users.
+        if (!pluginInterface.IsDev) return true;
         if (parts.Length is 3 or 4 && parts[1] == "start" && uint.TryParse(parts[2], out var slot) && slot < 8
             && (parts.Length==3 || parts[3] is "source" or "front" or "side" or "back"))
             Mutate(() => StartOwnedViewportExperiment(slot,parts.Length==4?parts[3]:"source"), preserveSourceCensus: true);

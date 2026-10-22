@@ -6,6 +6,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation.Resolver.cs')">$(DefineConstants);PHASE_PROCESS_RESOLVER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../PortraitNativeTestFixtures/FrozenSdkFixture.cs" Link="Fixtures/FrozenSdkFixture.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitNativePhaseObservation*.cs" Link="Production/%(Filename)%(Extension)" />
     <Reference Include="FFXIVClientStructs"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/FFXIVClientStructs.dll</HintPath></Reference>
     <Reference Include="InteropGenerator.Runtime"><HintPath>$(APPDATA)/XIVLauncherCN/addon/Hooks/dev/InteropGenerator.Runtime.dll</HintPath></Reference>

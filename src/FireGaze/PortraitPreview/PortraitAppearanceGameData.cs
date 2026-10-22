@@ -125,7 +125,10 @@ internal sealed partial class PortraitAppearanceCatalog
                             var available = !hairstyle || entry.Unknown0 == 0 || entry.Unknown0 == currentFace;
                             var reason = available ? entry.UnlockLink == 0 ? null : $"仅本地预览；原生解锁条件：{entry.HintItem.Value.Name}" : "此发型不适用于当前脸型";
                             var text = entry.FeatureID == 0 ? "无" : $"{name} {entry.FeatureID}";
-                            options.Add(new(entry.FeatureID, text, entry.Icon, Available: available, Reason: reason));
+                            var unlockItem = entry.HintItem;
+                            options.Add(new(entry.FeatureID, text, entry.Icon, Available: available, Reason: reason,
+                                UnlockItemName: unlockItem.RowId == 0 ? null : unlockItem.Value.Name.ToString(),
+                                UnlockItemID: unlockItem.RowId, UnlockItemIcon: unlockItem.RowId == 0 ? 0u : (uint)unlockItem.Value.Icon));
                         }
                         else if (menu.Customize == 20)
                         {

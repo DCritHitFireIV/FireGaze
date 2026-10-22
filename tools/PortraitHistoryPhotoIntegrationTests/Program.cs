@@ -48,7 +48,44 @@ static async Task<int> Run()
         checks += PhotoReclaimPolicyCases.Run();
         checks += await PhotoNonBlockingStorageCases.RunAsync(root, initial);
         using (var displayPhotos = Photos("history-display-status.bin", new()))
-            checks += PhotoDisplayStatusCases.RunServiceCases(displayPhotos, two);
+            checks += await PhotoDisplayStatusCases.RunServiceCases(displayPhotos, two);
+        var unreadablePath = Path.Combine(root, "history-unreadable-image.bin");
+        var unreadableCache = new PortraitThumbnailCache(unreadablePath, PortraitThumbnailCache.MaximumBytes);
+        var unreadableKey = PortraitThumbnailCache.KeyForSnapshot("10|" + two.SnapshotJSON);
+        Check(unreadableCache.TryPut(unreadableKey, [1, 2]), "invalid-image fixture persists real bytes with valid cache checksums");
+        using (var unreadablePhoto = Photos("history-unreadable-image.bin", new()))
+        {
+            unreadablePhoto.SetRecords([two], 0);
+            unreadablePhoto.Get(two.ID);
+            for (var attempt = 0; attempt < 100
+                && (int)unreadablePhoto.Diagnostics().GetType().GetProperty("loading")!.GetValue(unreadablePhoto.Diagnostics())! != 0; attempt++)
+                await Task.Delay(5);
+            Check(unreadablePhoto.GetHistoryPhotoStatus(two.ID).ToString() == "ReadError",
+                "an existing invalid image is reported as a read failure instead of claiming its disk write failed");
+        }
+        var degradedDirectory = Path.Combine(root, "unrelated-storage-error");
+        Directory.CreateDirectory(degradedDirectory);
+        var degradedStorage = new PortraitStorageBudget(degradedDirectory, PortraitStorageBudget.DefaultLimitBytes,
+            new UnreadablePhotoDirectory());
+        Check(degradedStorage.Snapshot.Degraded, "an unrelated directory enumeration denial degrades shared storage");
+        using (var missingPhoto = new PortraitHistoryPhotos(Path.Combine(degradedDirectory, "portrait-history-thumbnails-v1.bin"),
+                   textures, readback, new(), 0, storage: degradedStorage))
+        {
+            missingPhoto.SetRecords([two], 0);
+            Check(missingPhoto.GetHistoryPhotoStatus(two.ID) == PortraitHistoryPhotoStatus.Missing,
+                "an unrelated global storage fault cannot label every uncaptured history photo as a failed write");
+        }
+        var unrelatedFavoriteDirectory = Path.Combine(root, "unrelated-favorite-error");
+        Directory.CreateDirectory(unrelatedFavoriteDirectory);
+        var unrelatedFavoriteArchive = Path.Combine(unrelatedFavoriteDirectory, "portrait-favorite-photos-v1.json");
+        File.WriteAllText(unrelatedFavoriteArchive, "damaged unrelated favorite archive");
+        using (var missingPhoto = new PortraitHistoryPhotos(Path.Combine(unrelatedFavoriteDirectory, "portrait-history-thumbnails-v1.bin"),
+                   textures, readback, new(), 0, favoritePhotoPath: unrelatedFavoriteArchive, favoriteSnapshots: []))
+        {
+            missingPhoto.SetRecords([two], 0);
+            Check(missingPhoto.GetHistoryPhotoStatus(two.ID) == PortraitHistoryPhotoStatus.Missing,
+                "an unrelated damaged favorite archive cannot mark an uncaptured non-favorite image as a failed write");
+        }
         checks += await FavoriteStoragePressureCases.RunAsync(root, initial);
         checks += await PhotoMaintenanceRetryCases.RunAsync(root, initial);
         checks += await FavoriteRetentionCases.RunAsync(root, initial);
@@ -196,4 +233,10 @@ static async Task<int> Run()
         return 0;
     }
     finally { Directory.Delete(root, true); }
+}
+
+internal sealed class UnreadablePhotoDirectory : PortraitStorageFiles
+{
+    public override IEnumerable<string> Enumerate(string directory)
+        => throw new UnauthorizedAccessException("Controlled unrelated directory enumeration denial");
 }

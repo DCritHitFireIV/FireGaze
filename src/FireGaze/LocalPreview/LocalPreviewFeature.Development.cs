@@ -7,6 +7,16 @@ namespace FireGaze.LocalPreview;
 
 public sealed partial class LocalPreviewFeature
 {
+    private static string? DevelopmentBuiltinCommandText(ushort id) => id switch
+    {
+        1 => "/sit",
+        2 => "/groundsit",
+        3 => "/battlemode",
+        // CN TextCommand row 38: open the current player's own adventurer plate.
+        4 => "/myplate",
+        _ => null,
+    };
+
     private unsafe void SetDevelopmentPhoto(bool enter)
     {
         if (disposed || !Framework.IsInFrameworkUpdateThread || !ClientState.IsLoggedIn
@@ -36,7 +46,7 @@ public sealed partial class LocalPreviewFeature
         {
             // Only these genuine game commands are admitted by the development probe.
             // Never substitute a public chat channel or desktop keyboard input.
-            string? text = id switch { 1 => "/sit", 2 => "/groundsit", 3 => "/battlemode", _ => null };
+            var text = DevelopmentBuiltinCommandText(id);
             var ui = FFXIVClientStructs.FFXIV.Client.UI.UIModule.Instance();
             if (text is null || ui == null) return;
             var message = FFXIVClientStructs.FFXIV.Client.System.String.Utf8String.FromString(text);

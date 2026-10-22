@@ -15,7 +15,7 @@ using var window = new PortraitPreviewWindow(new Model(), null!, null!);
 window.IsOpen = true;
 window.OpenHistory(true);
 window.OpenFavorites();
-var auxiliaries = new[] { "showHistory", "showFavorites", "showGlamourPlates", "showAnalysis", "showLight", "showSourceGuide" };
+var auxiliaries = new[] { "showHistory", "showFavorites", "showGlamourPlates", "showAnalysis", "showLight", "showSourceGuide", "showDesignShowcase" };
 foreach (var field in auxiliaries) typeof(PortraitPreviewWindow).GetField(field, BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(window, true);
 window.OnClose();
 foreach (var field in auxiliaries)

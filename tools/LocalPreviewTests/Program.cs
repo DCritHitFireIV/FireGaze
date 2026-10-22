@@ -37,6 +37,21 @@ var tests = new List<(string Name, Action Run)>
             True(!string.IsNullOrWhiteSpace(decision.Reason), "conflicting controllers need an explanation");
         }
     }),
+    ("HMS compatibility refusal is silent in the user status surface", () =>
+    {
+        var denied = HmsCoexistencePolicy.Decide(1, null);
+        True(!denied.Allowed, "an incomplete bridge must still refuse preview");
+        Equal<string?>(null, LocalPreviewStatusPresentation.VisibleMessage(true, true, denied.Allowed, denied.Reason));
+        Equal("本地试用入口已就绪", LocalPreviewStatusPresentation.VisibleMessage(true, true, true, "本地试用入口已就绪"));
+        Equal("试用功能正在初始化，请稍后再试。", LocalPreviewStatusPresentation.VisibleMessage(false, false, denied.Allowed, denied.Reason));
+    }),
+    ("user status summary omits compatibility details", () =>
+    {
+        var summary = LocalPreviewStatusPresentation.UserStatusSummary(true, true, true, 2);
+        True(!summary.Contains("HMS", StringComparison.OrdinalIgnoreCase), "user status must not mention HMS");
+        True(!summary.Contains("兼容", StringComparison.Ordinal), "user status must not explain compatibility");
+        True(summary.Contains("2", StringComparison.Ordinal), "user status still reports active preview count");
+    }),
     ("new preview becomes active", () =>
     {
         var session = new PreviewSession();

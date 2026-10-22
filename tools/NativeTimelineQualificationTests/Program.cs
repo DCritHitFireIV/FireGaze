@@ -28,6 +28,7 @@ internal static unsafe partial class Program
             var addresses = typeof(ActionTimelineSequencer).Assembly.GetTypes().Where(type => type.Name == "Addresses")
                 .SelectMany(type => type.GetFields(BindingFlags.Public | BindingFlags.Static)).Where(field => field.FieldType == typeof(Address))
                 .Select(field => ((Address)field.GetValue(null)!).Value).ToArray();
+            Check(addresses.Length == 2574, "current reviewed CN SDK address inventory must contain 2574 fields");
             var sdk = typeof(ActionTimelineSequencer).Assembly;
             var dalamud = typeof(Dalamud.Hooking.Hook<>).Assembly;
             var metadata = new NativeTimelineMetadata(File.ReadAllBytes(sdk.Location), sdk.ManifestModule.ModuleVersionId,

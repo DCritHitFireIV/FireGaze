@@ -101,7 +101,7 @@ class Image:
 def audit(raw, inventory, data):
     require(hashlib.sha256(raw).hexdigest().upper() == EXPECTED, "full PE identity changed")
     image = Image(raw)
-    require(inventory["UnresolvedAddresses"] == 0 and inventory["AddressFields"] == 2570,
+    require(inventory["UnresolvedAddresses"] == 0 and inventory["AddressFields"] == 2574,
             "complete SDK address inventory was not resolved")
     for rva in (0x606B10, 0x606FD0):
         require(not any(entry["Rva"] is not None and int(entry["Rva"], 16) == rva for entry in inventory["Addresses"]),

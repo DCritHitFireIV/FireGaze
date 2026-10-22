@@ -1,5 +1,6 @@
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using FireGaze.LocalPreview.Core;
 using FireGaze.LocalPreview.Interaction;
 using FireGaze.LocalPreview.Runtime;
 using FireGaze.UI;
@@ -137,9 +138,6 @@ public sealed partial class LocalPreviewFeature
         if (enabled)
         {
             ImGui.Spacing();
-            ImGui.Separator();
-            UiHelpers.ColoredWrapped(UiHelpers.Muted, !initialized || runtime is null
-                ? "试用功能正在初始化，请稍后再试。" : !coexistence.Allowed ? coexistence.Reason : lastMessage);
             if (ReadActiveEffects().Length != 0 && ImGui.Button("结束全部试用###LocalPreviewCancel")) Cancel();
         }
         DrawEnableConfirmation();
@@ -157,9 +155,9 @@ public sealed partial class LocalPreviewFeature
             if (!visible && enableConfirmationVisible) CompleteEnableConfirmation(false);
             return;
         }
-        ImGui.TextWrapped("开启此功能会在本地显示对坐骑、时尚配饰等的试用");
-        ImGui.TextWrapped("例如在海都试用坐骑，其他人眼里你还是在正常走路");
-        ImGui.TextWrapped("试用的情感动作只供本人预览参考动作是否购买，其他玩家不会收到");
+        ImGui.TextWrapped("开启此功能可以在本地试用坐骑、时尚配饰等的例如在海都试用坐骑");
+        ImGui.TextWrapped("其他人眼里你还是在正常走路");
+        ImGui.TextWrapped("试用仅供大家体验参考，是否购买对应道具，只有自己看得到");
         ImGui.Separator();
         if (ImGui.Button("取消", new Vector2(120, 0)))
         {

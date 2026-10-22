@@ -7,6 +7,7 @@ internal enum PortraitHistoryPhotoStatus
     Missing,
     Capacity,
     StorageError,
+    ReadError,
 }
 
 internal static class PortraitHistoryPhotoPresentation
@@ -29,6 +30,7 @@ internal static class PortraitHistoryPhotoPresentation
         PortraitHistoryPhotoStatus.Missing => "暂无照片",
         PortraitHistoryPhotoStatus.Capacity => "照片空间已满",
         PortraitHistoryPhotoStatus.StorageError => "照片写盘失败",
+        PortraitHistoryPhotoStatus.ReadError => "照片读取失败",
         _ => "暂无照片",
     };
 

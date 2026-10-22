@@ -9,15 +9,21 @@ internal sealed class InstallerTab
 {
     private readonly Plugin plugin;
     private readonly RepoAuditTab repoAudit;
+    private readonly TranslateTab translateTab;
 
-    public InstallerTab(Plugin plugin, RepoAuditTab repoAudit)
+    public InstallerTab(Plugin plugin, RepoAuditTab repoAudit, TranslateTab translateTab)
     {
         this.plugin = plugin;
         this.repoAudit = repoAudit;
+        this.translateTab = translateTab;
     }
 
     public void Draw()
     {
+        // Keep the installer workflow first. Icon maintenance still advances below the
+        // surface on every frame, but its manual cache controls are intentionally hidden.
+        ImGui.TextUnformatted("安装器");
+
         // 图标检查 / 下载的推进：面板搬到了这一页，下载期间每帧都要推进
         repoAudit.TickIconMaintenance();
 
@@ -55,6 +61,7 @@ internal sealed class InstallerTab
 
         ImGui.Spacing();
         ImGui.Separator();
-        repoAudit.DrawIconMaintenance();
+        ImGui.TextUnformatted("简介汉化");
+        translateTab.Draw();
     }
 }

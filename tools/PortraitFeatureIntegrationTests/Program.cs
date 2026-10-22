@@ -15,6 +15,7 @@ unsafe class Program
         RaptureGearsetModule.Value=(RaptureGearsetModule*)NativeMemory.AllocZeroed((nuint)sizeof(RaptureGearsetModule));
         try
         {
+            PortraitMenuRenderingCases.Run(root, Check);
             PortraitStorageObservationCases.Run(root, Check);
             PortraitHistoryPersistenceCases.Run(root, Check);
             PortraitWindowLifecycleCases.Run(root, Check);
@@ -40,7 +41,7 @@ unsafe class Program
             {
                 feature.Sample();feature.OpenPreview();feature.SetSyncPlate(true);
                 feature.Native.RejectMirrorClose=true;feature.SetSyncPlate(false);
-                Check(!feature.SyncPlate && feature.Native.IsPlateMirrorActive && feature.Status.Contains("尚未还原"),
+                Check(!feature.SyncPlate && feature.Native.IsPlateMirrorActive && feature.Status.Contains("尚未还原") && feature.StatusIsError,
                     "failed mirror close separates disabled intent from retained lease and reports incomplete restoration");
                 var updates=feature.MirrorUpdates;var closes=feature.Native.MirrorCloseCalls;
                 feature.OverwriteStatus("临时外观已还原，现在可以保存肖像。");
@@ -56,7 +57,7 @@ unsafe class Program
                 Check(!feature.SyncPlate && feature.MirrorUpdates==updates && feature.Native.IsPlateMirrorActive,
                     "re-enabling cannot reacquire synchronization while an older mirror lease still cannot close");
                 feature.Native.RejectMirrorClose=false;feature.PollThrottled();
-                Check(!feature.Native.IsPlateMirrorActive && !feature.SyncPlate && feature.MirrorUpdates==updates && !feature.Status.Contains("尚未还原"),
+                Check(!feature.Native.IsPlateMirrorActive && !feature.SyncPlate && feature.MirrorUpdates==updates && !feature.Status.Contains("尚未还原") && !feature.StatusIsError,
                     "successful later close clears the pending error without silently re-enabling synchronization");
                 closes=feature.Native.MirrorCloseCalls;feature.PollThrottled();
                 Check(feature.Native.MirrorCloseCalls==closes,

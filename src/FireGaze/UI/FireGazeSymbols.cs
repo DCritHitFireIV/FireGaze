@@ -49,4 +49,27 @@ internal static class FireGazeSymbols
             if (selected) ImGui.PopStyleColor();
         }
     }
+
+    /// <summary>A compact glyph-only action. The button keeps a real ImGui hit target,
+    /// but its frame is transparent so the symbol reads as a toolbar affordance.</summary>
+    public static bool IconButton(string label, string tooltip, bool enabled)
+    {
+        using (UiHelpers.Disabled(!enabled))
+        {
+            ImGui.PushStyleColor(ImGuiCol.Button, Vector4.Zero);
+            ImGui.PushStyleColor(ImGuiCol.ButtonHovered, Vector4.Zero);
+            ImGui.PushStyleColor(ImGuiCol.ButtonActive, Vector4.Zero);
+            try
+            {
+                var clicked = ImGui.Button(label, new Vector2(ImGui.GetFrameHeight()));
+                if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip(tooltip);
+                if (ImGui.IsItemFocused()) DrawFocus(ImGui.GetItemRectMin(), ImGui.GetItemRectMax());
+                return clicked;
+            }
+            finally
+            {
+                ImGui.PopStyleColor(3);
+            }
+        }
+    }
 }

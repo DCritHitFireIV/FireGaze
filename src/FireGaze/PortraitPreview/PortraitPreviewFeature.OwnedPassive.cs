@@ -22,6 +22,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool TryOwnedPassiveCommand(string[] parts)
     {
         if (parts.Length == 0 || parts[0] != "native-owned") return false;
+#if !OWNED_SLOT
+        if (!pluginInterface.IsDev) return true;
+#endif
         if (parts is ["native-owned", "start"])
             Mutate(() =>
             {

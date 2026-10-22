@@ -35,6 +35,8 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
     private PortraitLook? original;
     public bool IsActive => original is not null;
     public PortraitLook? Current { get; private set; }
+    /// <summary>Entry wardrobe captured when the preview lease opened.</summary>
+    public PortraitLook? Original => original?.Copy();
 
     public bool Open(PortraitIdentity requested)
     {

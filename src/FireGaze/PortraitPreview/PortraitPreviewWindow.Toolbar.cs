@@ -9,9 +9,7 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawWorkspaceHeader()
     {
         DrawEditingToolbar();
-        DrawLibraryToolbar();
         DrawPreviewSettings();
-        DrawWorkspaceTools();
         ImGui.Separator();
 
         ImGui.BeginGroup();
@@ -31,14 +29,20 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawUndoRedo()
     {
         var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
+        var iconWidth = ImGui.GetFrameHeight();
+        var gap = ImGui.GetStyle().ItemSpacing.X;
+        // Keep the history actions at the far right of the header. They are deliberately
+        // glyph-only controls so the visual weight stays on the current preview.
+        var start = right - iconWidth * 2 - gap;
+        if (start > ImGui.GetItemRectMax().X) ImGui.SameLine(start - ImGui.GetWindowPos().X);
         using (UiHelpers.Disabled(!feature.CanUndo))
         {
-            if (ImGui.Button("撤回")) feature.Undo();
+            if (FireGazeSymbols.IconButton("↶###PortraitUndo", "撤回", feature.CanUndo)) feature.Undo();
         }
-        ContinueToolbar(right, ImGui.CalcTextSize("重做").X + ImGui.GetStyle().FramePadding.X * 2);
+        ImGui.SameLine(0, gap);
         using (UiHelpers.Disabled(!feature.CanRedo))
         {
-            if (ImGui.Button("重做")) feature.Redo();
+            if (FireGazeSymbols.IconButton("↷###PortraitRedo", "重做", feature.CanRedo)) feature.Redo();
         }
     }
 
@@ -52,10 +56,11 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawEditingToolbar()
     {
         ImGui.PushID("PortraitEditingToolbar");
-        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        DrawUndoRedo();
-        ContinueToolbar(right, ImGui.CalcTextSize("历史记录").X + ImGui.GetStyle().FramePadding.X * 2);
         if (ImGui.Button("历史记录")) showHistory = !showHistory;
+        ImGui.PopID();
+        DrawLibraryToolbar();
+        ImGui.PushID("PortraitEditingToolbar");
+        DrawUndoRedo();
         ImGui.PopID();
     }
 
@@ -68,7 +73,7 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.SameLine();
         ImGui.PushID("PortraitEditingToolbar");
         var sync = feature.SyncPlate;
-        if (ImGui.Checkbox("同步铭牌预览", ref sync)) feature.SetSyncPlate(sync);
+        if (ImGui.Checkbox("铭牌同步预览", ref sync)) feature.SetSyncPlate(sync);
         if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("仅同步自己看到的铭牌预览。关闭预览后还原，不会保存到铭牌。");
         ImGui.PopID();
         ImGui.EndGroup();
@@ -92,22 +97,9 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.EndGroup();
     }
 
-    private void DrawWorkspaceTools()
-    {
-        var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        var groupWidth = ImGui.CalcTextSize("空间参照").X + ImGui.CalcTextSize("画面分析").X
-            + ImGui.GetStyle().FramePadding.X * 4 + ImGui.GetStyle().ItemSpacing.X;
-        ContinueToolbar(right, groupWidth);
-        ImGui.BeginGroup();
-        if (ImGui.Button("空间参照")) showSpaceLight = true;
-        ImGui.SameLine();
-        if (ImGui.Button("画面分析")) showAnalysis = true;
-        ImGui.EndGroup();
-    }
-
     private void DrawGlamourPlateEntry()
     {
-        var syncWidth = ImGui.CalcTextSize("同步铭牌预览").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X;
+        var syncWidth = ImGui.CalcTextSize("铭牌同步预览").X + ImGui.GetFrameHeight() + ImGui.GetStyle().ItemInnerSpacing.X;
         var minimum = ImGui.CalcTextSize("投影模板").X + ImGui.GetStyle().FramePadding.X * 2;
         var width = Math.Clamp(ImGui.GetContentRegionAvail().X - syncWidth - ImGui.GetStyle().ItemSpacing.X,
             minimum, 198 * Scale);

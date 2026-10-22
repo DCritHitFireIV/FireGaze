@@ -8,6 +8,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     // Development verification follows the same Framework-owned entry points as the UI.
     private void LightingFitCommand(string[] parts)
     {
+        if (!pluginInterface.IsDev) return;
         if (parts is ["light-fit","window"]) { Mutate(()=>window.OpenLightingFit());return; }
         if (parts is ["light-space","window"]) { Mutate(()=>window.OpenLightingSpace());return; }
         if (parts.Length != 15 || parts[1] != "start") { Error("用法：light-fit start R暗 R中 R亮 G暗 G中 G亮 B暗 B中 B亮 左 上 右 下");return; }

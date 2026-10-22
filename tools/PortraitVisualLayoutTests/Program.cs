@@ -115,6 +115,31 @@ Check(!ReferenceEquals(refreshed, days) && refreshed[1].Records.Single().IsCurre
 var utcDays = cache.Get(changed, TimeZoneInfo.Utc);
 Check(utcDays.Count == 1, "a timezone change rebuilds calendar boundaries");
 Check(cache.Get([], plusEight).Count == 0, "empty history has no invented dates or current event");
+var browse = new PortraitHistoryBrowseSession();
+var initialRows = source.ToArray();
+browse.Begin(initialRows);
+IReadOnlyList<PortraitHistoryListItem> archived = browse.Archived(initialRows);
+Check(archived.Select(row => row.ID).SequenceEqual(new long[] { 1, 3, 2 }), "opening history captures its existing row order without sorting a second time");
+var restoredRows = new[] { new PortraitHistoryListItem(4, DateTimeOffset.Parse("2026-10-18T00:00:00Z"), "恢复旧时刻", true) }
+    .Concat(initialRows.Select(row => row with { IsCurrent = false })).ToArray();
+archived = browse.Archived(restoredRows);
+IReadOnlyList<PortraitHistoryListItem> temporary = browse.Temporary(restoredRows);
+Check(archived.Select(row => row.ID).SequenceEqual(new long[] { 1, 3, 2 }) && temporary.Select(row => row.ID).SequenceEqual(new long[] { 4 }),
+    "restoring an older portrait adds only to the temporary group and cannot push down archived rows");
+var restoredAgain = new[] { new PortraitHistoryListItem(5, DateTimeOffset.Parse("2026-10-18T00:01:00Z"), "恢复另一时刻", true) }
+    .Concat(restoredRows.Select(row => row with { IsCurrent = false })).ToArray();
+archived = browse.Archived(restoredAgain);
+temporary = browse.Temporary(restoredAgain);
+Check(archived.Select(row => row.ID).SequenceEqual(new long[] { 1, 3, 2 }) && temporary.Select(row => row.ID).SequenceEqual(new long[] { 4, 5 }),
+    "multiple history auditions retain the archive positions and append temporary snapshots in click order");
+Check(!archived.Any(row => row.IsCurrent) && temporary.Single(row => row.IsCurrent).ID == 5,
+    "frozen browsing updates current markers from actual history rather than freezing stale selection");
+browse.Begin(restoredAgain);
+archived = browse.Archived(restoredAgain);
+temporary = browse.Temporary(restoredAgain);
+Check(archived.Count == 5 && temporary.Count == 0, "reopening history establishes a fresh baseline and clears the previous temporary grouping");
+Check(ReferenceEquals(archived, browse.Archived(restoredAgain)) && ReferenceEquals(temporary, browse.Temporary(restoredAgain)),
+    "unchanged browse frames reuse both prepared groups without sorting or reallocating rows");
 #else
 Check(false, "portrait presentation must fit narrow scaled grids and cache immutable history views");
 #endif

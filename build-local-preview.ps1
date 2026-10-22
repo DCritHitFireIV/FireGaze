@@ -1,6 +1,7 @@
 param(
     [string]$SqpackPath = '',
     [string]$HmsCompatRoot = '',
+    [string]$PortraitFrozenSdkPath = '',
     [switch]$RequireFullValidation
 )
 
@@ -47,6 +48,9 @@ if ($HmsCompatRoot) {
 if ($RequireFullValidation -and (!$SqpackPath -or !$HmsCompatRoot)) {
     throw 'Full validation requires the current CN SqpackPath and the isolated HmsCompatRoot contract fixture.'
 }
+if ($PortraitFrozenSdkPath -and !(Test-Path -LiteralPath $PortraitFrozenSdkPath -PathType Leaf)) {
+    throw "PortraitFrozenSdkPath does not exist: $PortraitFrozenSdkPath"
+}
 
 function Invoke-PreviewSuite([string]$Suite, [string[]]$SuiteArguments = @()) {
     Write-Output "Running offline suite: $Suite"
@@ -63,6 +67,9 @@ foreach ($previewSuite in @('PluginAsyncLifecycleTests', 'ActivityLogLifecycleTe
     Invoke-PreviewSuite $previewSuite
 }
 Invoke-PreviewSuite 'LocalPreviewPreferencesTests'
+# Exact official metadata plus fake native boundaries; never installs a live Hook.
+Invoke-PreviewSuite 'ReviewedSafetyHookFactoryTests'
+Invoke-PreviewSuite 'IconReuseTests'
 foreach ($previewSuite in @('PortraitPreviewTests', 'PortraitNativeTests', 'PortraitOwnedTests')) {
     Invoke-PreviewSuite $previewSuite
 }
@@ -109,10 +116,14 @@ Invoke-PreviewSuite 'PortraitNativePhaseHostTests'
 Invoke-PreviewSuite 'PortraitNativeBootImageTests' @('--', (Join-Path $env:DALAMUD_HOME 'Dalamud.Boot.dll'))
 
 if ($SqpackPath) {
+    # Frozen SDK bytes are disk-only historical fixtures, never loaded/deployed.
+    # Current unsupported SDK refusal is asserted separately in each suite.
+    $previewPortraitDiskArgs = @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
+    if ($PortraitFrozenSdkPath) { $previewPortraitDiskArgs += @('--frozen-sdk', $PortraitFrozenSdkPath) }
     # Read the actual configured client's PE only; this suite never opens its process.
-    Invoke-PreviewSuite 'PortraitCounterIngressTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
-    Invoke-PreviewSuite 'PortraitResourceIngressTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
-    Invoke-PreviewSuite 'PortraitNativePhaseResolverTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'))
+    Invoke-PreviewSuite 'PortraitCounterIngressTests' $previewPortraitDiskArgs
+    Invoke-PreviewSuite 'PortraitResourceIngressTests' $previewPortraitDiskArgs
+    Invoke-PreviewSuite 'PortraitNativePhaseResolverTests' $previewPortraitDiskArgs
     Invoke-PreviewSuite 'NativeTimelineQualificationTests' @('--', '--game-exe', (Join-Path (Split-Path $SqpackPath -Parent) 'ffxiv_dx11.exe'), '--boot-dll', (Join-Path $env:DALAMUD_HOME 'Dalamud.Boot.dll'))
     Invoke-PreviewSuite 'NativeResolvedTimelineTests' @('--', '--sqpack', $SqpackPath)
     foreach ($previewSuite in @('PortraitAppearanceTests', 'PortraitValidationTests')) {
@@ -150,7 +161,7 @@ if ($HmsCompatRoot) {
 # These last three suites inspect the freshly built host assembly and payload.
 & dotnet build (Join-Path $previewRoot 'src\FireGaze\FireGaze.csproj') -c Release --no-incremental
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-foreach ($previewSuite in @('ClientWorkflowTests', 'UITextSafetyTests', 'ArtifactPortabilityTests')) {
+foreach ($previewSuite in @('ClientWorkflowTests', 'InstallerSettingsTests', 'UITextSafetyTests', 'ArtifactPortabilityTests')) {
     Invoke-PreviewSuite $previewSuite
 }
 Invoke-PreviewSuite 'PortraitWindowLifecycleTests'

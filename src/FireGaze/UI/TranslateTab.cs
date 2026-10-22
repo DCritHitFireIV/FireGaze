@@ -14,6 +14,7 @@ internal sealed class TranslateTab
     private string? updateMessage;
     private string? statusMessage;
     private volatile bool updateInFlight;
+    private readonly object updateGate = new();
 
     // FastDalamudCN 也在翻译插件简介，两者会打架——检测到就在页面上挂一行提示（用户 2026-10-06 定）
     private DateTime fastDalamudCheckedAt = DateTime.MinValue;
@@ -27,11 +28,119 @@ internal sealed class TranslateTab
         this.plugin = plugin;
     }
 
+    internal TranslateTabSnapshot Snapshot => new(
+        plugin.Config.TranslateEnabled,
+        (int)plugin.Config.NameMode,
+        (int)plugin.Config.PunchlineMode,
+        (int)plugin.Config.DescriptionMode,
+        plugin.Table.Count,
+        plugin.Table.LoadedFrom is not null,
+        DescribeTableUpdate(),
+        plugin.LastTranslatedCount,
+        updateInFlight,
+        updateMessage,
+        statusMessage,
+        fastDalamudCheckTask is { IsCompleted: false },
+        fastDalamudCheckedAt,
+        fastDalamudInstalled,
+        fastDalamudEntry?.IsLoaded == true,
+        fastDalamudOpenMessage,
+        plugin.Config.BlockInstallerAutoRefresh,
+        plugin.Config.RememberListScroll,
+        plugin.Config.ListScrollY,
+        plugin.InstallerFeatures.Snapshot);
+
+    internal void SetEnabled(bool enabled)
+    {
+        plugin.Config.TranslateEnabled = enabled;
+        plugin.SaveConfig();
+        if (enabled)
+        {
+            var applied = plugin.ApplyTranslations();
+            statusMessage = $"已启用，已更新 {applied} 条插件介绍";
+            ActivityLog.Info("简介汉化", $"已启用，改写 {applied} 条清单");
+        }
+        else
+        {
+            var restored = plugin.RestoreTranslations();
+            statusMessage = $"已关闭：已把 {restored} 条还原成原文";
+            ActivityLog.Info("简介汉化", $"已关闭，还原 {restored} 条");
+        }
+    }
+
+    internal bool SetDisplayMode(string? field, int mode)
+    {
+        if (mode is < (int)DisplayMode.Original or > (int)DisplayMode.Both)
+        {
+            return false;
+        }
+
+        var value = (DisplayMode)mode;
+        switch (field)
+        {
+            case "NameMode": plugin.Config.NameMode = value; break;
+            case "PunchlineMode": plugin.Config.PunchlineMode = value; break;
+            case "DescriptionMode": plugin.Config.DescriptionMode = value; break;
+            default: return false;
+        }
+
+        plugin.SaveConfig();
+        plugin.ApplyTranslations();
+        return true;
+    }
+
+    internal bool StartTableUpdate()
+    {
+        lock (updateGate)
+        {
+            if (updateInFlight)
+            {
+                return false;
+            }
+
+            updateInFlight = true;
+            updateMessage = "正在更新…";
+        }
+
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var (ok, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
+                updateMessage = message;
+                if (ok)
+                {
+                    ActivityLog.Info("简介汉化", "更新词表：" + message);
+                }
+                else
+                {
+                    ActivityLog.Warning("简介汉化", "更新词表失败：" + message);
+                }
+            }
+            catch (Exception e)
+            {
+                updateMessage = "更新出错：" + e.GetType().Name;
+                ActivityLog.Warning("简介汉化", "更新词表异常：" + e.GetType().Name);
+            }
+            finally
+            {
+                updateInFlight = false;
+            }
+        });
+        return true;
+    }
+
+    internal string OpenConflictSettings()
+    {
+        fastDalamudOpenMessage = TryOpenFastDalamudConfig(fastDalamudEntry);
+        return fastDalamudOpenMessage;
+    }
+
     /// <summary>
     ///     检测本机装没装 FastDalamudCN（内部名 FuckDalamudCN）：装了就在页面上挂冲突提示。
     ///     索引在后台线程建（反射卫月内部，别卡绘制），结果缓存 5 分钟。
     /// </summary>
-    private void EnsureFastDalamudHint()
+    internal void RefreshConflictStatus()
     {
         if (fastDalamudCheckTask is not null)
         {
@@ -78,7 +187,7 @@ internal sealed class TranslateTab
     {
         var config = plugin.Config;
 
-        EnsureFastDalamudHint();
+        RefreshConflictStatus();
 
         // ---------------- 顶部：更新词表（最显眼） ----------------
         if (updateInFlight)
@@ -89,34 +198,7 @@ internal sealed class TranslateTab
         }
         else if (ImGui.Button("从 GitHub 更新词表###UpdateTable"))
         {
-            updateInFlight = true;
-            updateMessage = "正在更新…";
-            _ = Task.Run(async () =>
-            {
-                try
-                {
-                    var (ok, message) = await plugin.UpdateTranslationTableAsync().ConfigureAwait(false);
-                    updateMessage = message;
-                    if (ok)
-                    {
-                        ActivityLog.Info("简介汉化", "更新词表：" + message);
-                    }
-                    else
-                    {
-                        ActivityLog.Warning("简介汉化", "更新词表失败：" + message);
-                    }
-                }
-                catch (Exception e)
-                {
-                    // 原来没有 catch：一抛异常 updateInFlight 永远为 true，按钮就永远禁用了
-                    updateMessage = "更新出错：" + e.GetType().Name;
-                    ActivityLog.Warning("简介汉化", "更新词表异常：" + e.GetType().Name);
-                }
-                finally
-                {
-                    updateInFlight = false;
-                }
-            });
+            StartTableUpdate();
         }
 
         ImGui.SameLine();
@@ -133,7 +215,7 @@ internal sealed class TranslateTab
 
             if (ImGui.SmallButton("打开 FastDalamudCN 设置###OpenFastDalamudCN"))
             {
-                fastDalamudOpenMessage = TryOpenFastDalamudConfig(fastDalamudEntry);
+                OpenConflictSettings();
             }
 
             if (!string.IsNullOrEmpty(fastDalamudOpenMessage))
@@ -146,20 +228,7 @@ internal sealed class TranslateTab
         var enabled = config.TranslateEnabled;
         if (ImGui.Checkbox("启用简介汉化###TranslateEnabled", ref enabled))
         {
-            config.TranslateEnabled = enabled;
-            plugin.SaveConfig();
-            if (enabled)
-            {
-                var applied = plugin.ApplyTranslations();
-                statusMessage = $"已启用，已更新 {applied} 条插件介绍";
-                ActivityLog.Info("简介汉化", $"已启用，改写 {applied} 条清单");
-            }
-            else
-            {
-                var restored = plugin.RestoreTranslations();
-                statusMessage = $"已关闭：已把 {restored} 条还原成原文";
-                ActivityLog.Info("简介汉化", $"已关闭，还原 {restored} 条");
-            }
+            SetEnabled(enabled);
         }
 
         if (!string.IsNullOrEmpty(statusMessage))
@@ -187,9 +256,9 @@ internal sealed class TranslateTab
             ImGui.TableSetupColumn("双语", ImGuiTableColumnFlags.WidthFixed, 70);
             ImGui.TableHeadersRow();
 
-            ModeRow("插件名", "NameMode", config.NameMode, m => config.NameMode = m);
-            ModeRow("简介", "PunchlineMode", config.PunchlineMode, m => config.PunchlineMode = m);
-            ModeRow("插件详情", "DescriptionMode", config.DescriptionMode, m => config.DescriptionMode = m);
+            ModeRow("插件名", "NameMode", config.NameMode);
+            ModeRow("简介", "PunchlineMode", config.PunchlineMode);
+            ModeRow("插件详情", "DescriptionMode", config.DescriptionMode);
 
             ImGui.EndTable();
         }
@@ -270,7 +339,7 @@ internal sealed class TranslateTab
         _ => "周日",
     };
 
-    private void ModeRow(string label, string id, DisplayMode current, Action<DisplayMode> set)
+    private void ModeRow(string label, string id, DisplayMode current)
     {
         var mode = current;
         ImGui.TableNextRow();
@@ -280,25 +349,41 @@ internal sealed class TranslateTab
         ImGui.TableNextColumn();
         if (ImGui.RadioButton($"原版###{id}-Original", mode == DisplayMode.Original))
         {
-            set(DisplayMode.Original);
-            plugin.SaveConfig();
-            plugin.ApplyTranslations();
+            SetDisplayMode(id, (int)DisplayMode.Original);
         }
 
         ImGui.TableNextColumn();
         if (ImGui.RadioButton($"中文###{id}-Chinese", mode == DisplayMode.Chinese))
         {
-            set(DisplayMode.Chinese);
-            plugin.SaveConfig();
-            plugin.ApplyTranslations();
+            SetDisplayMode(id, (int)DisplayMode.Chinese);
         }
 
         ImGui.TableNextColumn();
         if (ImGui.RadioButton($"双语###{id}-Both", mode == DisplayMode.Both))
         {
-            set(DisplayMode.Both);
-            plugin.SaveConfig();
-            plugin.ApplyTranslations();
+            SetDisplayMode(id, (int)DisplayMode.Both);
         }
     }
 }
+
+internal sealed record TranslateTabSnapshot(
+    bool Enabled,
+    int NameMode,
+    int PunchlineMode,
+    int DescriptionMode,
+    int TableCount,
+    bool TableLoaded,
+    string TableUpdateDescription,
+    int LastTranslatedCount,
+    bool UpdateInFlight,
+    string? UpdateMessage,
+    string? StatusMessage,
+    bool ConflictCheckInFlight,
+    DateTime ConflictCheckedAt,
+    bool ConflictInstalled,
+    bool ConflictLoaded,
+    string? ConflictOpenMessage,
+    bool BlockInstallerAutoRefresh,
+    bool RememberListScroll,
+    float? ListScrollY,
+    InstallerListScrollSnapshot Installer);

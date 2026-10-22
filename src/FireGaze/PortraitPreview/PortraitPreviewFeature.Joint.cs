@@ -26,6 +26,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool TryOwnedJointCommand(string[] parts)
     {
         if (parts.Length == 0 || parts[0] != "native-joint") return false;
+#if !OWNED_SLOT
+        if (!pluginInterface.IsDev) return true;
+#endif
         if (parts is ["native-joint", "start"])
             Mutate(() =>
             {

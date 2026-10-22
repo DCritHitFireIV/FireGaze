@@ -45,7 +45,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
             || nativeLiveController?.TryEnable(identity) != true)
         {
             nativeLiveRequested = false;
-            Error("当前肖像尚未准备好动态预览，请等待图像任务结束后重试。");
+            Error("铭牌画面尚未准备好，请稍后重试。");
             return;
         }
         nativeLiveRequested = true;

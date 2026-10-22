@@ -24,25 +24,38 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc
 
 namespace Dalamud.Bindings.ImGui
 {
-    // Rendering isn't invoked in these tests. The declarations let the real content method compile.
+    // Rendering records the real production draw calls without a native ImGui context.
     internal static class ImGui
     {
-        public static void TextWrapped(string value) { }
-        public static void TextDisabled(string value) { }
+        public static readonly List<string> Text = [];
+        public static readonly List<string> Controls = [];
+        public static void ResetDraw() { Text.Clear(); Controls.Clear(); }
+        public static void TextWrapped(string value) => Text.Add(value);
+        public static void TextDisabled(string value) => Text.Add(value);
         public static void BeginDisabled(bool value) { }
         public static void EndDisabled() { }
-        public static bool Button(string value) => false;
-        public static bool Checkbox(string label, ref bool value) => false;
+        public static bool Button(string value) { Controls.Add(value); return false; }
+        public static bool Checkbox(string label, ref bool value) { Controls.Add(label); return false; }
         public static void SameLine() { }
+        public static void Separator() { }
+        public static void TextUnformatted(string value) => Text.Add(value);
+        public static void Spacing() { }
     }
 }
 
 namespace FireGaze.UI
 {
-    // Only the unused drawing boundary is declared here; production editing state is exercised below.
+    // Only the native rendering boundary is supplied here; the production draw method stays real.
     internal static class UiHelpers
     {
+        public static System.Numerics.Vector4 Muted => default;
+        public static System.Numerics.Vector4 Good => default;
+        public static System.Numerics.Vector4 Bad => default;
         public static IDisposable Disabled(bool value = true) => new DrawingScope();
+        public static void ColoredWrapped(System.Numerics.Vector4 color, string text)
+            => Dalamud.Bindings.ImGui.ImGui.Text.Add(text);
+        public static void PushPrimaryButton() { }
+        public static void PopPrimaryButton() { }
         private sealed class DrawingScope : IDisposable { public void Dispose() { } }
     }
 }
@@ -93,6 +106,7 @@ namespace FireGaze.PortraitPreview
         public bool HistoryPhotosView;
         public void OpenHistory(bool photos) { HistoryWindowOpen=true;HistoryPhotosView=photos; }
         public void CloseAuxiliaryWindows() => HistoryWindowOpen=false;
+        public void BringToFront() => IsOpen = true;
         public static void DrawHistoryRows(PortraitPreviewFeature feature, bool allowed) { }
     }
 
@@ -198,7 +212,10 @@ namespace FireGaze.PortraitPreview
         private readonly PortraitStorageBudget storageBudget;
         private readonly PhotoPersistenceBoundary photos = new();
         private bool editorAvailable = true;
+        private PortraitEditorSnapshot? originalEditorSnapshot;
+        private byte[]? actualCustomize;
         private string status = "";
+        private bool statusIsError;
         private DateTimeOffset testClock = DateTimeOffset.Parse("2026-10-18T10:00:00+08:00");
         public OwnedCharacterKey? Owner = new(10,20);
         public string? LastError;
@@ -211,6 +228,7 @@ namespace FireGaze.PortraitPreview
         private bool CancelLightingFitForEdit() => FitCancellation?.Invoke() ?? !LightingFitHistorySuppressed;
         public void SetFitSuppression(bool value) => LightingFitHistorySuppressed=value;
         public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
+        public bool StatusIsError => statusIsError || plateMirrorCloseError is not null || cachePersistenceWarning is not null;
         public PortraitHistoryStore Store => history;
         public NativePortraitTarget Native => target;
         public PortraitHistoryKey? Key => observedKey;
@@ -221,6 +239,12 @@ namespace FireGaze.PortraitPreview
         public void OpenHistory(bool photos=true) => window.OpenHistory(photos);
         public PortraitEditorSnapshot? ObservedSnapshot => observedEditor;
         public PortraitEditorSnapshot? MirroredSnapshot => target.MirroredSnapshot;
+        public void SetMenuObservationForTest(bool available, byte? entryPoint, string? warning = null)
+        {
+            editorAvailable = available;
+            observedEditor = entryPoint is { } entry ? target.Snapshot with { EntryPoint = entry } : null;
+            plateMirrorCloseError = warning;
+        }
 
         public PortraitPreviewFeature(string file, int byteLimit = PortraitHistoryStore.MaximumBytes,
             PortraitStorageBudget? storage = null)
@@ -228,6 +252,8 @@ namespace FireGaze.PortraitPreview
             storageBudget = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(file)!);
             var customize = new byte[26]; customize[0]=1;customize[4]=1;customize[5]=1;customize[6]=1;
             target = new(new() {GameBuild="fixture",EntryPoint=2,Customize=customize,Composition=new() {BannerTimeline=1},Look=new(new PortraitPiece[13],true,true,false)});
+            originalEditorSnapshot = null;
+            actualCustomize = null;
             session = new(target);
             appearance = new([new(new(1,1,0,1),[new("hair","发型",6,255,0,[new(1,"发型1"),new(2,"发型2")])])]);
             editorValidation = new(new PortraitValidationData([], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]));
@@ -241,7 +267,11 @@ namespace FireGaze.PortraitPreview
         }
         private OwnedCharacterKey? CurrentCharacter() => Owner;
         private void Mutate(System.Action action) => action();
-        private void Error(string value) { LastError=status=value; }
+        // The production opening controller is outside this integration boundary. Keep the
+        // receipt entry point available so the real editing partial can compile unchanged.
+        private void OpenEditorWithReceipt(string kind, string nonce) { }
+        private void Error(string value) { LastError=status=value; statusIsError=true; }
+        private void SetStatus(string value) { status=value; statusIsError=false; }
         public void OpenPreview() { if (!target.CanBlockSave || !session.Open(target.Identity)) throw new InvalidOperationException("Test preview not ready."); window.IsOpen=true; }
         public void Sample(bool pointer=false, bool keyboard=false, int advanceMilliseconds=50)
         { testClock=testClock.AddMilliseconds(advanceMilliseconds);pointerHeld=pointer;Plugin.Keys.Held=keyboard;nextEditorSample=DateTime.MinValue;PollEditing(); }
@@ -252,12 +282,11 @@ namespace FireGaze.PortraitPreview
         public void RecordDirect(string label="测试操作") => RecordDirectChange(label);
         public void RefreshRows() => RefreshHistoryRows();
         public void Advance(int milliseconds) => testClock=testClock.AddMilliseconds(milliseconds);
-        public void OverwriteStatus(string value) => status = value;
+        public void OverwriteStatus(string value) { status = value; statusIsError = false; }
         public void FlushOnly() => FlushEditing();
         public void PollThrottled() { nextEditorSample=DateTime.MaxValue; PollEditing(); }
         public bool SyncLatestLook() => SynchronizeCurrentLook();
         public bool SetNativeVisibility(bool head, bool weapon, bool visor) => session.SetVisibility(head, weapon, visor);
-        public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => browser.GetValueOrDefault(slot) ?? [];
         public void SetOwnedItems(OwnedEquipmentView view,PortraitSlot slot,PortraitBrowserItem[] items) {ownedView=view;browser[slot]=items;}
         public void SetRetainerName(ulong id,string name) => retainerDisplayNames[id]=name;
         public void SetRetainerRoster(OwnedRetainerRoster? roster) => retainerRosterView=roster;

@@ -15,10 +15,110 @@ PortraitLook Look(uint head) => new(Enumerable.Range(0, 13)
     .Select(i => new PortraitPiece(i == 2 ? head : (uint)(100+i), 0, 0)).ToArray(), true, true, false);
 try
 {
+    var menu = PortraitPreviewMenuState.Create(false, false, false, false, null);
+    Check(menu.Status == PortraitPreviewMenuStatus.EditorUnavailable && !menu.CanOpenPreview && !menu.CanOpenWindow,
+        "portrait menu reports an unopened editor and disables preview");
+    menu = PortraitPreviewMenuState.Create(true, false, false, false, null);
+    Check(menu.Status == PortraitPreviewMenuStatus.Loading && !menu.CanOpenPreview,
+        "portrait menu reports a loading editor until identity and save guard are ready");
+    menu = PortraitPreviewMenuState.Create(true, true, true, false, null);
+    Check(menu.Status == PortraitPreviewMenuStatus.Ready && menu.CanOpenPreview,
+        "portrait menu enables preview only after editor identity and save guard are ready");
+    menu = PortraitPreviewMenuState.Create(true, true, true, true, null);
+    Check(menu.Status == PortraitPreviewMenuStatus.Active && !menu.CanOpenEditor && menu.CanOpenWindow,
+        "active preview keeps the editor entry locked and exposes the active state");
+    menu = PortraitPreviewMenuState.Create(true, true, true, false, "本地铭牌预览尚未还原");
+    Check(menu.Status == PortraitPreviewMenuStatus.RestoreWarning && !menu.CanOpenPreview,
+        "restore warning blocks a new preview until the local mirror is safe");
+
+    var manifest = PortraitDesignManifest.Build(
+        new[] { new PortraitDesignEntry("head", "头部", "预览", 11, "装备栏", 1001) },
+        new[] { new PortraitDesignEntry("head", "头部", "实际穿着", 10, "当前装备", 1000) },
+        new[] { new PortraitDesignEntry("face", "脸型", "美容师", 2, "美容师数据", 0, PortraitDesignEntryKind.Appearance) });
+    Check(manifest.Items.Count == 3 && manifest.Items[0].Name == "头部" && manifest.Items[0].Icon == 1001,
+        "design manifest preserves preview, equipped and appearance entries with icon and source");
+    var filtered = manifest.Hide("head");
+    Check(filtered.Items.Count == 1 && filtered.Items[0].Kind == PortraitDesignEntryKind.Appearance,
+        "design manifest can hide a selected display item without changing source data");
+    Check(PortraitDesignEntrySlotMap.TryMap(11, out var rightRing) && rightRing == PortraitSlot.RightRing
+        && PortraitDesignEntrySlotMap.TryMap(12, out var leftRing) && leftRing == PortraitSlot.LeftRing
+        && !PortraitDesignEntrySlotMap.TryMap(5, out _),
+        "design manifest maps both equipped rings to their native slots and skips the waist slot");
+
+    var equippedSource = new OwnedSourceKey(OwnedSourceKind.Equipped);
+    var inventorySource = new OwnedSourceKey(OwnedSourceKind.Inventory);
+    var equippedPieces = PortraitDesignEntrySlotMap.ReadEquipped([
+        new(701, [new(equippedSource, 1_000_701, 1000, 11, 1, 7, 8, 901, true, OwnedReadStatus.Current),
+                  new(equippedSource, 701, 1000, 12, 1, 3, 4, 0, false, OwnedReadStatus.Current),
+                  new(inventorySource, 701, 0, 2, 1, 0, 0, 0, false, OwnedReadStatus.Current)]),
+        new(702, [new(equippedSource, 702, 1000, 3, 1, 0, 0, 0, false, OwnedReadStatus.PossiblyStale)]),
+    ], completeRead: true);
+    Check(equippedPieces.Count == 12
+        && equippedPieces.Single(piece => piece.Slot == PortraitSlot.RightRing) == new PortraitDesignEquippedPiece(PortraitSlot.RightRing, 901, 7, 8)
+        && equippedPieces.Single(piece => piece.Slot == PortraitSlot.LeftRing) == new PortraitDesignEquippedPiece(PortraitSlot.LeftRing, 701, 3, 4),
+        "design list resolves current worn glamour and HQ base items while preserving both ring dyes and excluding stale or inventory rows");
+
+    var fullDesign = PortraitDesignManifest.Build([
+        new("preview:Head", "头", "预览", 100, "背包", 1, PortraitDesignEntryKind.Preview, 2, 3),
+        new("preview:RightRing", "右戒指", "预览", 200, "兵装库", 2, PortraitDesignEntryKind.Preview, 0, 0),
+        new("preview:LeftRing", "左戒指", "预览", 201, "兵装库", 3, PortraitDesignEntryKind.Preview, 0, 0),
+    ], [
+        new("equipped:Head", "头", "实际穿着", 100, "身上装备", 1, PortraitDesignEntryKind.Equipped, 2, 4),
+        new("equipped:RightRing", "右戒指", "实际穿着", 200, "身上装备", 2, PortraitDesignEntryKind.Equipped, 0, 0),
+        new("equipped:LeftRing", "左戒指", "实际穿着", 299, "身上装备", 3, PortraitDesignEntryKind.Equipped, 0, 0),
+    ], [
+        new("appearance:preview:hair", "发型 1", "预览美容师", 1, "美容师", 4, PortraitDesignEntryKind.Appearance),
+        new("appearance:actual:hair", "发型 2", "实际外貌", 2, "美容师", 5, PortraitDesignEntryKind.Appearance),
+        new("appearance:preview:lip", "唇色 1", "预览美容师", 1, "美容师", 0, PortraitDesignEntryKind.Appearance),
+        new("appearance:actual:lip", "唇色 1", "实际外貌", 1, "美容师", 0, PortraitDesignEntryKind.Appearance),
+    ]);
+    Check(fullDesign.ForShowcase().Items.Select(row => row.Key).SequenceEqual(new[] { "preview:Head", "preview:RightRing", "preview:LeftRing", "appearance:preview:hair", "appearance:preview:lip" }),
+        "shareable showcase displays only the rendered portrait wardrobe and beautician values without duplicating actual baselines");
+    var designDiff = fullDesign.Differences();
+    Check(designDiff.Items.Select(row => row.Key).SequenceEqual(new[] { "preview:Head", "preview:LeftRing", "equipped:Head", "equipped:LeftRing", "appearance:preview:hair", "appearance:actual:hair" }),
+        "design differences include both sides of equipment, second dye and beautician changes without confusing the two ring slots");
+
+    var unknownDiff = PortraitDesignManifest.Build([
+        new("preview:Head", "头部", "肖像装备", 100, "位置未读取", 1),
+        new("preview:Facewear", "眼镜", "肖像装备", 42, "位置未读取", 1),
+    ], [], [new("appearance:preview:hair", "发型 1", "预览美容师", 1, "美容师", 1, PortraitDesignEntryKind.Appearance)],
+        [new(equippedSource, OwnedReadStatus.PossiblyStale, null, 2, "记录过期")]);
+    Check(unknownDiff.Differences().Items.Count == 0 && unknownDiff.Sources.Single().Status == OwnedReadStatus.PossiblyStale
+        && PortraitDesignEntrySlotMap.ReadEquipped([], completeRead: false).Count == 0,
+        "unread or stale actual baselines cannot become confirmed equipment, facewear or beautician differences and retain source state");
+    var emptyActual = PortraitDesignEntrySlotMap.ReadEquipped([], completeRead: true);
+    var knownEmpty = PortraitDesignManifest.Build([new("preview:Head", "帽子", "肖像装备", 100, "背包", 1)],
+        [new("equipped:Head", "头部 · 未穿戴", "实际穿着", 0, "身上装备", 0, PortraitDesignEntryKind.Equipped)], []);
+    Check(emptyActual.Count == 12 && emptyActual.All(piece => piece.ItemID == 0) && knownEmpty.Differences().Items.Count == 2,
+        "an authoritative complete equipped read proves empty slots and keeps both sides of a newly previewed item");
+    var hiddenLook = Look(111) with { HeadVisible = false, WeaponVisible = false };
+    Check(!PortraitDesignEntrySlotMap.IsRendered(hiddenLook, PortraitSlot.Head)
+        && !PortraitDesignEntrySlotMap.IsRendered(hiddenLook, PortraitSlot.MainHand)
+        && !PortraitDesignEntrySlotMap.IsRendered(hiddenLook, PortraitSlot.OffHand)
+        && PortraitDesignEntrySlotMap.IsRendered(hiddenLook, PortraitSlot.Body),
+        "the shareable wardrobe omits native hidden head and weapon slots while keeping rendered armor");
+    var namedBeauty = PortraitDesignManifest.AppearanceEntries([
+        new("hair", "发型", 128, [new(128, "发型 128", 808, Reason: "不要解析此描述", UnlockItemName: "发型样式：战场短发", UnlockItemID: 12345)]),
+        new("hairColor", "发色", 3, [new(3, "颜色 4", Color: 0xFF1122EE)]),
+    ], "preview", "预览美容师", "美容师").ToArray();
+    Check(namedBeauty[0].Name == "发型 · 发型样式：战场短发" && namedBeauty[0].Icon == 808
+        && namedBeauty[1].Name == "发色 · 颜色 4" && namedBeauty[1].Color == 0xFF1122EE,
+        "beautician showcase uses structured Chinese unlock names and keeps CMP RGBA color bytes unchanged");
+    foreach (var width in new[] { 120f, 220f, 300f, 640f })
+    foreach (var scale in new[] { 1f, 1.5f, 2f })
+    {
+        var rowLayout = PortraitDesignShowcaseLayout.Row(width, scale);
+        Check(rowLayout.TextWidth > 0 && rowLayout.TextX >= rowLayout.IconSize
+            && rowLayout.TextX + rowLayout.TextWidth <= rowLayout.HideX
+            && rowLayout.HideX + rowLayout.HideSize <= width,
+            $"narrow showcase row preserves a wrapped text region and separate hide hit target at {width}/{scale}");
+    }
+
     var target = new Target { Look = Look(111) };
     var session = new PortraitPreviewSession(target);
     Check(!session.IsActive && !session.BlockSave(target.Identity), "inactive preview permits native saving");
-    Check(session.Open(target.Identity) && session.IsActive, "explicit open captures the editor's wardrobe");
+    Check(session.Open(target.Identity) && session.IsActive && session.Original?.Pieces[2].ItemID == 111,
+        "explicit open captures the editor's wardrobe baseline for the design list");
     Check(session.BlockSave(target.Identity), "opening alone blocks save before any wardrobe change");
     Check(!session.BlockSave(target.Identity with { Editor = 99 }), "unrelated editor saves are not intercepted");
     target.Available = false;

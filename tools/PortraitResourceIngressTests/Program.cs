@@ -19,6 +19,7 @@ internal static unsafe class Program
     private static byte result;
     private static nint lastReceiver;
     private static byte[] image = [], sdk = [];
+    private static Guid sdkMVID;
     private static int imageSize;
     private static readonly uint[] rvas = [0x2DBB90, 0x2DBFE0];
     private static readonly (uint Begin, uint End, uint Unwind)[][] spans = [
@@ -27,15 +28,28 @@ internal static unsafe class Program
     ];
     public static int Main(string[] args)
     {
-        if (args.Length != 2 || args[0] != "--game-exe") return 2;
         try
         {
-            image = File.ReadAllBytes(args[1]); sdk = File.ReadAllBytes(typeof(RTManager).Assembly.Location);
+            var fixture = FrozenSdkFixture.Load(args, typeof(RTManager).Assembly);
+            image = File.ReadAllBytes(fixture.GameExecutable); sdk = fixture.Image; sdkMVID = fixture.MVID;
             using var pe = new PEReader(new MemoryStream(image, false)); imageSize = pe.PEHeaders.PEHeader!.SizeOfImage;
+            CurrentUnsupportedSDKRefusesBeforeNativeWork(fixture);
             ABIAndBytePassThrough(); GatewayCallbacksCannotReplaceOriginal(); ResolutionNeedsEveryFragment(); MutationStateDoesNotBecomeReady(); RecordingStopAndErrors(); RetirementAndRegistryReuse(); CollectibleResourceCycles(); BatchBoundaries();
             Console.WriteLine($"PortraitResourceIngressTests: {checks} checks passed; game process access/hooks/scene operations: 0."); return 0;
         }
         catch (Exception error) { Console.Error.WriteLine(error); return 1; }
+    }
+    private static void CurrentUnsupportedSDKRefusesBeforeNativeWork(FrozenSdkFixture fixture)
+    {
+        if (!fixture.CurrentUnsupported) return;
+        Reset(); var process = Fresh(); process.SDKImage = fixture.CurrentImage; process.SDKMVID = fixture.CurrentMVID;
+        Check(!Resolve(process, out var plan) && plan is null && process.MemoryReads == 0,
+            "unsupported current SDK refuses resource targets before native memory reads");
+        var factory = new FakeFactory(); var guards = 0;
+        var host = Host(factory, () => { guards++; return new Guard(() => { }); }, process);
+        Check(!host.TryStart(TimeSpan.FromSeconds(30), out _) && factory.CreateCalls == 0
+            && factory.EnableCalls == 0 && process.MemoryReads == 0 && guards == 0 && nativeCalls == 0,
+            "unsupported current SDK creates/enables no hooks and invokes no resource guard or Original");
     }
     private static void ABIAndBytePassThrough()
     {
@@ -286,10 +300,11 @@ internal static unsafe class Program
     private sealed class FakeProcess(nint baseAddress) : IPortraitNativePhaseProcess
     {
         public nint Base = baseAddress; public Func<nint,bool>? Reservation;
+        public byte[] SDKImage = sdk; public Guid SDKMVID = sdkMVID;
         public int MemoryReads, ModuleReads, SDKReads, MaxRead, ReserveAfter = int.MaxValue, ChangeBaseAfterCopy = int.MaxValue, ChangeMVIAfterCopy = int.MaxValue;
         public uint ChangeRVA, UnreadableRVA; public bool SecondOnly, ChangeBase, ChangeMVID;
         public bool TryReadModule(out PortraitNativePhaseProcessModule module) { ModuleReads++; module = new("ffxiv_dx11.exe", Base + (ChangeBase && ModuleReads > 1 || MemoryReads >= ChangeBaseAfterCopy ? 1 : 0), imageSize, image); return true; }
-        public bool TryReadSDK(out PortraitNativePhaseSDKImage s) { SDKReads++; s = new(sdk, ChangeMVID && SDKReads > 1 || MemoryReads >= ChangeMVIAfterCopy ? Guid.NewGuid() : typeof(RTManager).Assembly.ManifestModule.ModuleVersionId); return true; }
+        public bool TryReadSDK(out PortraitNativePhaseSDKImage s) { SDKReads++; s = new(SDKImage, ChangeMVID && SDKReads > 1 || MemoryReads >= ChangeMVIAfterCopy ? Guid.NewGuid() : SDKMVID); return true; }
         public nint SDKManagerRender => Base + 0x2BA030; public nint SDKSourceRender => Base + 0x9CD4D0;
         public bool IsAddressReserved(nint address) => Reservation?.Invoke(address) == true || MemoryReads >= ReserveAfter;
         public bool TryReadMemory(nint address, Span<byte> output)

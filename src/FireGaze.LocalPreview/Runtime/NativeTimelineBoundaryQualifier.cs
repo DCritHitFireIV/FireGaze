@@ -1,4 +1,5 @@
 using System.Buffers.Binary;
+using Dalamud.Plugin.Services;
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Metadata;
@@ -30,8 +31,8 @@ internal interface INativeTimelineProcess
 internal sealed class NativeTimelineBoundaryQualifier(INativeTimelineProcess process)
 {
     internal const string ClientHash = "958B78E278AD896493C484EB313FF605AB41EDEFEF74F92B0EE078E69B281BF9";
-    internal const string SdkHash = "5A7A8EA71E84D7410DBAD8A5391D4759C2A38B1A55F4F3BB745B22B556A6F778";
-    internal const string DalamudHash = "CE0C3C8004CAC1E9AA96D0DC749463F5F1A32E9B49988419BF320545BF942C6A";
+    internal const string SdkHash = "5726E301EE5456D526F524E9F88659F38A8717CB527FE4A86D83D1ADE0AB9798";
+    internal const string DalamudHash = "AF15D754340C659F9F57C110C9914D8C68A068F588725CAAE50AC237B07DA1C4";
     private static readonly (int Rva, int Size)[] ReviewedSpans = [
         (0x606AB0, 0x54), (0x8BE410, 0x58), (0x606B10, 0x43A), (0x606FD0, 0xA5),
         (0x608530, 0x46B), (0x6089B0, 0x406), (0x8C0000, 0xDA), (0x6180E8, 0x26),
@@ -48,7 +49,7 @@ internal sealed class NativeTimelineBoundaryQualifier(INativeTimelineProcess pro
                 || !process.TryReadMetadata(out var metadata)) return false;
             if (!metadata.UsesDeferredHookBackend)
             {
-                reason = "Reviewed disabled SafetyHook factory unavailable: loaded backend configuration or Boot identity/code did not qualify.";
+                reason = "Reviewed local disabled SafetyHook factory unavailable: official scope or Boot identity/code did not qualify.";
                 return false;
             }
             if (!ValidMetadata(metadata)
@@ -103,7 +104,7 @@ internal sealed class NativeTimelineBoundaryQualifier(INativeTimelineProcess pro
             && Hash(metadata.SdkImage) == SdkHash && Hash(metadata.DalamudImage) == DalamudHash
             && Mvid(metadata.SdkImage) == metadata.LoadedSdkMvid && Mvid(metadata.DalamudImage) == metadata.LoadedDalamudMvid
             && metadata.LoadedSdkMvid != Guid.Empty && metadata.LoadedDalamudMvid != Guid.Empty
-            && metadata.AllSdkAddresses.Count == 2570 && metadata.AllSdkAddresses.All(address => address != 0);
+            && metadata.AllSdkAddresses.Count == 2574 && metadata.AllSdkAddresses.All(address => address != 0);
 
     private static bool SameMetadata(NativeTimelineMetadata left, NativeTimelineMetadata right)
         => left.LoadedSdkMvid == right.LoadedSdkMvid && left.LoadedDalamudMvid == right.LoadedDalamudMvid
@@ -214,7 +215,7 @@ internal sealed class NativeTimelineBoundaryQualifier(INativeTimelineProcess pro
     { using var pe = new PEReader(new MemoryStream(image, false)); var reader = pe.GetMetadataReader(); return reader.GetGuid(reader.GetModuleDefinition().Mvid); }
 }
 
-internal sealed class NativeTimelineCurrentProcess : INativeTimelineProcess
+internal sealed class NativeTimelineCurrentProcess(IGameInteropProvider? interop = null) : INativeTimelineProcess
 {
     public bool TryReadModule(out NativeTimelineModule module)
     {
@@ -240,16 +241,29 @@ internal sealed class NativeTimelineCurrentProcess : INativeTimelineProcess
     }
     private bool UsesReviewedDisabledBackend(Assembly dalamud)
     {
-        var selected = dalamud.GetType("Dalamud.Configuration.Internal.EnvironmentConfiguration")?
-            .GetProperty("DalamudUseSafetyHook", BindingFlags.Public | BindingFlags.Static)?.GetValue(null) is true;
-        if (!selected) return false;
+        if (interop is null
+            || !ReviewedSafetyHookSchema.MatchesIdentity(File.ReadAllBytes(dalamud.Location), dalamud.ManifestModule.ModuleVersionId)
+            || !ReviewedSafetyHookSchema.TryRead(dalamud, out var schema) || interop.GetType() != schema!.Provider)
+            return false;
+        var plugin = schema.Plugin.GetValue(interop);
+        var ready = plugin is not null
+            && ReferenceEquals(schema.PluginAssembly.GetValue(plugin), typeof(ActorPreviewRuntime).Assembly)
+            && schema.Tracked.GetValue(interop) is not null;
+        if (!ready) return false;
+        var boot = ReadReviewedBootEvidence();
+        return NativeTimelineBackendContract.Matches(ready, boot.Image, boot.ReadLoaded);
+    }
+    internal ReviewedBootEvidence ReadReviewedBootEvidence()
+    {
         using var current = Process.GetCurrentProcess();
         var boot = current.Modules.Cast<ProcessModule>().SingleOrDefault(module => module.ModuleName.Equals("Dalamud.Boot.dll", StringComparison.OrdinalIgnoreCase));
-        if (boot is null || boot.BaseAddress <= 0) return false;
-        return NativeTimelineBackendContract.Matches(selected, File.ReadAllBytes(boot.FileName), (rva, length) => {
-            if (rva < 0 || (long)rva + length > boot.ModuleMemorySize || boot.BaseAddress > nint.MaxValue - rva) return null;
+        if (boot is null || boot.BaseAddress <= 0) throw new InvalidOperationException("Loaded official Boot unavailable.");
+        var address = boot.BaseAddress;
+        var size = boot.ModuleMemorySize;
+        return new(File.ReadAllBytes(boot.FileName), (rva, length) => {
+            if (rva < 0 || (long)rva + length > size || address > nint.MaxValue - rva) return null;
             var code = new byte[length];
-            return TryReadMemory(boot.BaseAddress + rva, code) ? code : null;
+            return TryReadMemory(address + rva, code) ? code : null;
         });
     }
     public unsafe bool TryReadMemory(nint address, Span<byte> destination)

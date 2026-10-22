@@ -16,6 +16,7 @@ internal static class Program
     private static Action? duringNative;
     private static Exception? nativeError;
     private static byte[] image = [], sdk = [];
+    private static Guid sdkMVID;
     private static int imageSize;
     private static readonly uint[] rvas = [0x2BA770, 0x2BA790];
     private static readonly byte[][] leafBytes = [
@@ -25,11 +26,12 @@ internal static class Program
 
     public static int Main(string[] args)
     {
-        if (args.Length != 2 || args[0] != "--game-exe") { Console.Error.WriteLine("--game-exe <current audited client> required; disk only, no game process."); return 2; }
         try
         {
-            image = File.ReadAllBytes(args[1]); sdk = File.ReadAllBytes(typeof(RenderManager).Assembly.Location);
+            var fixture = FrozenSdkFixture.Load(args, typeof(RenderManager).Assembly);
+            image = File.ReadAllBytes(fixture.GameExecutable); sdk = fixture.Image; sdkMVID = fixture.MVID;
             using var pe = new PEReader(new MemoryStream(image, false)); imageSize = pe.PEHeaders.PEHeader!.SizeOfImage;
+            CurrentUnsupportedSDKRefusesBeforeNativeWork(fixture);
             ResolverRejectsDrift(); LeafContractRejectsMalformedImages(); TypedCallsInvalidateBeforeOriginal();
             PrefixFailuresNeverReplaceOriginal(); MutationGuardFailuresRemainExplicit(); RecordingStopPreservesInvalidation(); FrameAndSlotHaveSeparateMeaning();
             NestedCounterCalls(); CounterGatewayRejectsWrongABI(); RetirementWaitsForRealOriginal();
@@ -37,6 +39,19 @@ internal static class Program
             Console.WriteLine($"PortraitCounterIngressTests: {checks} checks passed; game process access/hooks/scene operations: 0."); return 0;
         }
         catch (Exception error) { Console.Error.WriteLine(error); return 1; }
+    }
+
+    private static void CurrentUnsupportedSDKRefusesBeforeNativeWork(FrozenSdkFixture fixture)
+    {
+        if (!fixture.CurrentUnsupported) return;
+        Reset(); var process = Fresh(); process.SDK = fixture.CurrentImage; process.MVID = fixture.CurrentMVID;
+        Check(!Resolve(process, out var plan) && plan is null && process.MemoryReads == 0,
+            "unsupported current SDK refuses counter targets before native memory reads");
+        var factory = new FakeFactory(); var guards = 0;
+        var host = Host(factory, Recorder(), () => guards++, process);
+        Check(!host.TryStart(TimeSpan.FromSeconds(30), out _) && factory.CreateCalls == 0
+            && factory.EnableCalls == 0 && process.MemoryReads == 0 && guards == 0 && nativeCalls == 0,
+            "unsupported current SDK creates/enables no hooks and invokes no mutation guard or Original");
     }
 
     // Removing two-round qualification or admitting changed code must break these actual resolver cases.
@@ -321,7 +336,7 @@ internal static class Program
     private sealed class FakeProcess(byte[] executable, byte[] sdkImage, int size, nint moduleBase) : IPortraitNativePhaseProcess
     {
         public byte[] Executable = executable, SDK = sdkImage; public int ImageSize = size;
-        public nint Base = moduleBase; public Guid MVID = typeof(RenderManager).Assembly.ManifestModule.ModuleVersionId;
+        public nint Base = moduleBase; public Guid MVID = sdkMVID;
         public string Name = "ffxiv_dx11.exe"; public int ModuleReads, SDKReads, MemoryReads;
         public int Unreadable = -1, Changed = -1, SecondRound = -1, Reserved = -1, ReserveAfterRead = int.MaxValue;
         public bool ChangeBase, ChangeMVID, ThrowRead; public Func<nint, bool>? Reservation;

@@ -110,6 +110,15 @@ if (sqpack is not null)
     Check(actualGroups.Single(g=>g.ID=="hairColor").Options.Count==192,"Native hair color count");
     Check(actualGroups.Single(g=>g.ID=="lipColor").Options.Select(o=>o.Value).SequenceEqual(Enumerable.Range(0,96).Concat(Enumerable.Range(128,96))),"Native dark/light color indices preserve 96..127 gap");
     Check(actualGroups.Single(g=>g.ID=="facePaint").Options.First().Value==0,"Facepaint includes actual no-paint option");
+    var namedUnlocks = actualGroups.Single(g=>g.ID=="hair").Options.Where(option=>option.UnlockItemID!=0).ToArray();
+    Check(namedUnlocks.Length>0,"Real CN hairstyle options retain structured unlock items");
+    var items = data.GetExcelSheet<Item>()!;
+    foreach (var option in namedUnlocks)
+    {
+        var unlock = items.GetRow(option.UnlockItemID);
+        Check(!string.IsNullOrWhiteSpace(option.UnlockItemName) && option.UnlockItemName == unlock.Name.ToString()
+            && option.UnlockItemIcon == unlock.Icon,"Real CN hairstyle unlock names and icons match their actual item rows");
+    }
     var featureCount=0;
     foreach(var row in data.GetExcelSheet<CharaMakeType>()!)
     {

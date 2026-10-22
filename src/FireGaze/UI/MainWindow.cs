@@ -6,7 +6,7 @@ using FireGaze.Diagnostics;
 namespace FireGaze.UI;
 
 /// <summary>
-///     主窗口的页签（界面顺序：插件汉化 → 插件发现 → 仓库体检 → 简介汉化 → 插件安装器 → 坐骑试用 → 肖像同步预览）。
+///     主窗口页签：插件汉化、插件发现、仓库体检、插件安装器、坐骑试用、肖像同步预览。
 /// </summary>
 public enum MainTab
 {
@@ -27,7 +27,6 @@ internal sealed class MainWindow : Window
     private readonly Plugin plugin;
     private readonly RepoAuditTab repoAuditTab;
     private readonly InstallerTab installerTab;
-    private readonly TranslateTab translateTab;
     private readonly UITextTab uiTextTab;
     private readonly DiscoveryTab discoveryTab;
 
@@ -47,8 +46,7 @@ internal sealed class MainWindow : Window
         this.uiTextTab = uiTextTab;
         this.plugin = plugin;
         repoAuditTab = new RepoAuditTab(plugin);
-        installerTab = new InstallerTab(plugin, repoAuditTab);
-        translateTab = new TranslateTab(plugin);
+        installerTab = new InstallerTab(plugin, repoAuditTab, new TranslateTab(plugin));
         discoveryTab = new DiscoveryTab(plugin);
     }
 
@@ -85,7 +83,7 @@ internal sealed class MainWindow : Window
     public override void Draw()
     {
         FireGazeWindowPlacement.Remember("FireGaze");
-        if (ImGui.BeginTabBar("###FireGazeTabs", ImGuiTabBarFlags.FittingPolicyScroll | ImGuiTabBarFlags.ListPopupButton))
+        if (ImGui.BeginTabBar("###FireGazeTabs", ImGuiTabBarFlags.FittingPolicyScroll))
         {
             // Consume before drawing: navigation requested by a tab survives until the next frame.
             var pendingSelect = tabSelection.Take();
@@ -113,15 +111,7 @@ internal sealed class MainWindow : Window
                 ImGui.EndTabItem();
             }
 
-            flags = pendingSelect == MainTab.Translate ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
-            if (ImGui.BeginTabItem("简介汉化", flags))
-            {
-                using var timing = uiDiagnostics.Measure("Translate.Draw");
-                translateTab.Draw();
-                ImGui.EndTabItem();
-            }
-
-            flags = pendingSelect == MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
+            flags = pendingSelect is MainTab.Translate or MainTab.Installer ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None;
             if (ImGui.BeginTabItem("插件安装器", flags))
             {
                 using var timing = uiDiagnostics.Measure("Installer.Draw");

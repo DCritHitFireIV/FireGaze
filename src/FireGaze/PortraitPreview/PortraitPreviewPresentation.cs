@@ -34,6 +34,39 @@ internal sealed class PortraitHistoryPresentation
     }
 }
 
+/// <summary>A browsing visit owns fixed archive positions; new audit snapshots use a separate list.</summary>
+internal sealed class PortraitHistoryBrowseSession
+{
+    private long[] archiveIDs = [];
+    private HashSet<long> archiveSet = [];
+    private IReadOnlyList<PortraitHistoryListItem>? source;
+    private IReadOnlyList<PortraitHistoryListItem> archived = [];
+    private IReadOnlyList<PortraitHistoryListItem> temporary = [];
+
+    public void Begin(IReadOnlyList<PortraitHistoryListItem> records)
+    {
+        archiveIDs = records.Select(record => record.ID).ToArray();
+        archiveSet = archiveIDs.ToHashSet();
+        source = null;
+        Refresh(records);
+    }
+
+    public IReadOnlyList<PortraitHistoryListItem> Archived(IReadOnlyList<PortraitHistoryListItem> records)
+    { Refresh(records); return archived; }
+
+    public IReadOnlyList<PortraitHistoryListItem> Temporary(IReadOnlyList<PortraitHistoryListItem> records)
+    { Refresh(records); return temporary; }
+
+    private void Refresh(IReadOnlyList<PortraitHistoryListItem> records)
+    {
+        if (ReferenceEquals(source, records)) return;
+        var byID = records.ToDictionary(record => record.ID);
+        archived = archiveIDs.Where(byID.ContainsKey).Select(id => byID[id]).ToArray();
+        temporary = records.Where(record => !archiveSet.Contains(record.ID)).OrderBy(record => record.ID).ToArray();
+        source = records;
+    }
+}
+
 internal static class PortraitPreviewLayout
 {
     public static float SideWidth(float available, float scale)

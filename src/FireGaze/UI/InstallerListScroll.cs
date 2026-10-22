@@ -123,6 +123,19 @@ internal sealed class InstallerListScroll
     /// </summary>
     public bool IsOpen => installerWasOpen;
 
+    internal InstallerListScrollSnapshot Snapshot => new(
+        installerWasOpen,
+        layoutChecked,
+        layoutOk,
+        sawListContent,
+        phase.ToString(),
+        lastRestoreFailed,
+        restoreTarget,
+        restoreFrames,
+        maskedRuns,
+        lastMaskLocal,
+        pluginManager is not null && pluginsReadyProp is not null && reposReadyProp is not null && repoRefreshTaskField is not null);
+
     /// <summary>
     ///     每帧调用（挂在 <c>UiBuilder.Draw</c> 上）。
     /// </summary>

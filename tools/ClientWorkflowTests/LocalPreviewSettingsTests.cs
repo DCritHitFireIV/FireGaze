@@ -12,6 +12,7 @@ internal static class LocalPreviewSettingsTests
     {
         var featureType = typeof(Configuration).Assembly.GetType("FireGaze.LocalPreview.LocalPreviewFeature")!;
         var kindType = typeof(Configuration).Assembly.GetType("FireGaze.LocalPreview.Interaction.PreviewKind")!;
+        VerifyDevelopmentCommandAllowlist(featureType, check);
         await VerifyDisposeDispatch(featureType, check);
         await VerifyUiDispatch(featureType, kindType, check);
         await VerifyEnableConfirmation(featureType, check);
@@ -87,6 +88,22 @@ internal static class LocalPreviewSettingsTests
         }
     }
 
+    private static void VerifyDevelopmentCommandAllowlist(Type featureType, Action<bool, string> check)
+    {
+        var resolve = featureType.GetMethod("DevelopmentBuiltinCommandText",
+            BindingFlags.Static | BindingFlags.NonPublic);
+        check(resolve is not null, "development native probe resolves only its explicit game command allowlist");
+        foreach (var (id, expected) in new (ushort, string?)[]
+        {
+            (1, "/sit"), (2, "/groundsit"), (3, "/battlemode"),
+            (4, "/myplate"), (0, null), (5, null), (ushort.MaxValue, null),
+        })
+        {
+            check((string?)resolve!.Invoke(null, [id]) == expected,
+                $"development builtin probe {id} resolves to the exact game command or rejects it");
+        }
+    }
+
     private static async Task VerifyEnableConfirmation(Type featureType, Action<bool, string> check)
     {
         var request = featureType.GetMethod("RequestEnabled", Instance)!;
@@ -129,6 +146,10 @@ internal static class LocalPreviewSettingsTests
         await Task.Run(() => featureType.GetMethod("OnCommand")!.Invoke(released, ["option mount off"]));
         check(releaseConfig.LocalPreviewMountEnabled && releaseFramework.Saves == 0,
             "release commands cannot expose hidden individual category preferences");
+        var priorReleaseChatCalls = releaseFramework.ChatCalls;
+        await Task.Run(() => featureType.GetMethod("OnCommand")!.Invoke(released, ["native builtin 4"]));
+        check(releaseFramework.ChatCalls == priorReleaseChatCalls && releaseFramework.Saves == 0,
+            "release commands cannot dispatch the development-only native plate probe");
     }
 
     private static async Task VerifyDisposeDispatch(Type featureType, Action<bool, string> check)
