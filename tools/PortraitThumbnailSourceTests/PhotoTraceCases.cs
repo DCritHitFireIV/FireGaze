@@ -8,8 +8,8 @@ internal static class PhotoTraceCases
         var lines = new System.Collections.Concurrent.ConcurrentQueue<string>();
         var operation = new PortraitPhotoTrace(lines.Enqueue).Start(PortraitPhotoOperation.HistoryCapture);
         var api = new FakeApi { DelayCopies = true };
-        api.BeforeCopy = () => check(lines.Any(x => x.Contains("begin SourceCopy"))
-            && !lines.Any(x => x.Contains("task-returned SourceCopy")),
+        api.BeforeCopy = () => check(lines.Count(x => x.Contains("begin SourceCopy")) == api.Copies + 1
+            && lines.Count(x => x.Contains("task-returned SourceCopy")) == api.Copies,
             "source trace precedes the synchronous CopyAsync service prefix");
         var pending = new PortraitThumbnailSource(api).CaptureAsync(identity, default, operation);
         check(!pending.IsCompleted && lines.Any(x => x.Contains("begin SourceCopy"))
@@ -21,6 +21,10 @@ internal static class PhotoTraceCases
         check(lines.Any(x => x.Contains("end SourceAcquire")) && lines.Any(x => x.Contains("end SourceCopy"))
             && lines.All(x => !x.Contains("0x") && !x.Contains("identity")),
             "completed production source phases log terminal records without native addresses");
+        check(new[] { 0, 1, 2 }.All(layer => lines.Count(x => x.StartsWith("begin SourceCopy") && x.Contains(" layer=" + layer + " ")) == 1
+            && lines.Count(x => x.StartsWith("task-returned SourceCopy") && x.Contains(" layer=" + layer + " ")) == 1
+            && lines.Count(x => x.StartsWith("end SourceCopy") && x.Contains(" layer=" + layer + " ")) == 1),
+            "each normalized layer copy has its own begin, task-returned and terminal phase");
 
         lines.Clear();
         var failure = new FakeApi { FailCopy = 1 };
@@ -35,7 +39,7 @@ internal static class PhotoTraceCases
         using var silentResult = await new PortraitThumbnailSource(silentFailure).CaptureAsync(identity, default,
             new PortraitPhotoTrace(_ => throw new IOException("logger path must never escape"))
                 .Start(PortraitPhotoOperation.HistoryCapture));
-        check(silentResult is not null && silentFailure.Copies == 1,
+        check(silentResult is not null && silentFailure.Copies == 3,
             "source tracing logger failure cannot change native acquisition or copy scheduling");
 
         lines.Clear();
