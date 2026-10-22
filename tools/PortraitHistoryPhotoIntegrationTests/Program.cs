@@ -44,6 +44,8 @@ static async Task<int> Run()
         Check(await history.FlushAsync(), "real history finishes its own independent writer before photo checks");
         var historyBefore = File.ReadAllBytes(historyPath);
         var records = history.GetRecords(key);
+        checks += await ProductPhotoStateCases.RunAsync(root, identity);
+        checks += await PhotoGallerySelectionCases.RunAsync(root, identity);
         checks += PhotoDisplayStatusCases.Run();
         checks += PhotoReclaimPolicyCases.Run();
         checks += await PhotoNonBlockingStorageCases.RunAsync(root, initial);

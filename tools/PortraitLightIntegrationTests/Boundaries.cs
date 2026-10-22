@@ -272,6 +272,9 @@ namespace FireGaze.PortraitPreview
 
     internal sealed class TestPhotoStorage
     {
+        // Photo capture is outside this light-editing fixture; no durable image is supplied.
+        public PortraitFavoritePhotoStatus FavoritePhotoStatus(ulong owner, PortraitEditorSnapshot snapshot)
+            => PortraitFavoritePhotoStatus.Missing;
         public bool TryWithStorageReclaim(Func<bool> attempt, Func<bool> capacity) => attempt();
         public Task<bool> PersistFavoriteAsync(Func<Task<bool>> write,
             Func<IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)>> favorites,
@@ -290,4 +293,5 @@ namespace FireGaze.PortraitPreview
             public void Dispose() { }
         }
     }
+    internal enum PortraitFavoritePhotoStatus { Available, Missing, Capacity, StorageError, Pending }
 }

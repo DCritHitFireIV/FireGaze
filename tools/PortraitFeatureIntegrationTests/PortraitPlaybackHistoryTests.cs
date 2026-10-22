@@ -54,8 +54,8 @@ internal static class PortraitPlaybackHistoryTests
             feature.Sample(pointer: true); feature.EditComposition(c => c with { AnimationProgress = .7f });
             feature.Sample(pointer: true); feature.Sample(pointer: false);
             var stored = Current(feature);
-            check(feature.Store.Count == 2 && stored.Composition is { BannerTimeline: 1, PoseClassJob: 0, Paused: true, AnimationProgress: .25f },
-                $"{edit} editing while playing preserves the last recorded pose and does not smuggle play into history");
+            check(feature.Store.Count == 2 && stored.Composition is { BannerTimeline: 2, PoseClassJob: 3, Paused: false },
+                $"{edit} history owns the real playing state so its photograph can match the visible editor");
             check(edit == "camera" ? stored.Composition.CameraYaw == .3f : edit == "background" ? stored.Composition.Background == 1
                 : stored.Look.Pieces[(int)PortraitSlot.Body].ItemID == 600,
                 $"{edit} editing remains fully recorded while animation is playing");
@@ -74,9 +74,9 @@ internal static class PortraitPlaybackHistoryTests
             var look = feature.Native.Snapshot.Look.Copy(); look.Pieces[(int)PortraitSlot.Body] = new(700, 0, 0);
             feature.Native.Snapshot = feature.Native.Snapshot with { Look = look };
             feature.RecordDirect();
-            check(feature.Store.Count == 2 && Current(feature).Composition is { BannerTimeline: 1, Paused: true, AnimationProgress: .25f }
+            check(feature.Store.Count == 2 && Current(feature).Composition is { BannerTimeline: 2, Paused: false }
                 && Current(feature).Look.Pieces[(int)PortraitSlot.Body].ItemID == 700,
-                "direct equipment actions use the same paused history baseline while retaining the actual look edit");
+                "direct equipment history retains the real playing pose and actual look for a matching photograph");
             feature.Sample(advanceMilliseconds: 600); feature.FlushOnly();
             check(feature.Store.Count == 2, "a direct edit during playback cannot create a second passive pose entry");
             feature.Undo(); var count = feature.Store.Count; feature.Sample(advanceMilliseconds: 600);

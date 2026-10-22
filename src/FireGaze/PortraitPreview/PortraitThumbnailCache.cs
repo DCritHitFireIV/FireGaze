@@ -4,7 +4,7 @@ using System.Text;
 namespace FireGaze.PortraitPreview;
 
 /// <summary>Disposable encoded images. History snapshots remain the sole restoration data.</summary>
-internal sealed class PortraitThumbnailCache
+internal sealed partial class PortraitThumbnailCache
 {
     public const int MaximumBytes = 10 * 1024 * 1024;
     public const int MaximumImageBytes = 256 * 1024;

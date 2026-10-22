@@ -17,6 +17,14 @@ internal static class PortraitLibraryIntegrationTests
         {
             feature.Sample();feature.OpenPreview();feature.SaveFavorite("午后",["暖色"]);feature.WaitFavorites();
             check(feature.Favorites.Count==1,"real feature saves adventurer-plate favorite with immediate persistence");
+            check(feature.FavoritesStatus.Contains("参数已保存") && !feature.FavoritesStatus.Contains("收藏和照片已保存"),
+                "metadata completion cannot claim that a missing favorite photograph is saved");
+            feature.FavoritePhotoForTest=PortraitFavoritePhotoStatus.Pending;feature.SampleLibrary();
+            check(feature.FavoritesStatus.Contains("照片正在自动生成"),
+                "an admitted favorite capture advances its status without another save click");
+            feature.FavoritePhotoForTest=PortraitFavoritePhotoStatus.Available;feature.SampleLibrary();
+            check(feature.FavoritesStatus=="收藏和照片已保存。",
+                "favorite completion is announced only after its real photograph is durable");
             var entry=feature.Favorites[0];var saved=entry.Snapshot.ToJSON();
             var file=Path.Combine(root,"library","favorites","portrait-favorites-v1.json");
             var reopened=new PortraitFavoritesStore(file);
@@ -58,9 +66,9 @@ internal static class PortraitLibraryIntegrationTests
             var latest=feature.Store.GetRecords(feature.Key!.Value).First();
             var recorded=PortraitEditorSnapshot.FromJSON(latest.SnapshotJSON)!;
             check(feature.Native.Snapshot.Composition is {BannerTimeline:0, PoseClassJob:1, Paused:false}
-                && recorded.Composition is {BannerTimeline:1, PoseClassJob:0, AnimationProgress:.2f, Paused:true}
+                && recorded.Composition is {BannerTimeline:0, PoseClassJob:1, Paused:false}
                 && recorded.Look.Pieces[3]==new PortraitPiece(100,1,1),
-                "template applies the live playing editor while history keeps its last frozen pose");
+                "template history and its photograph share the real playing editor state");
             feature.EditComposition(c=>c with {Paused=true,AnimationProgress=.8f});feature.Sample();feature.Sample(advanceMilliseconds:600);
             var paused=PortraitEditorSnapshot.FromJSON(feature.Store.GetRecords(feature.Key.Value).First().SnapshotJSON)!;
             check(feature.Store.Count==3 && paused.Composition is {BannerTimeline:0, PoseClassJob:1, AnimationProgress:.8f, Paused:true},
