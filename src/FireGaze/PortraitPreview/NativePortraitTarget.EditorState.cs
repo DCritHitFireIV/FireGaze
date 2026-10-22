@@ -74,8 +74,9 @@ internal sealed unsafe partial class NativePortraitTarget
         if (before is null || !snapshot.IsCompatibleWith(before)) return false;
         var compositionChanged = snapshot.Composition != before.Composition;
         var compositionAttempted = false;
+        var diagnosticBefore = LastError;
         try {
-            if (!Apply(identity,snapshot.Look) || !ApplyCustomization(identity,snapshot.Customize,snapshot.HideVieraEars)
+            if (!Apply(identity,snapshot.Look,reportFailure: false) || !ApplyCustomization(identity,snapshot.Customize,snapshot.HideVieraEars)
                 || !IsCurrent(identity))
             { if (!IsCurrent(identity)) return false; throw new InvalidOperationException("当前肖像未能应用临时外观。"); }
             // ImportPortraitData restarts SetPoseTimed, even for an identical pose. Beauty and
@@ -89,15 +90,19 @@ internal sealed unsafe partial class NativePortraitTarget
             return IsCurrent(identity);
         }
         catch(Exception ex) {
-            LastError="肖像编辑未能应用："+ex.Message;
+            var diagnostic="肖像编辑未能应用："+ex.Message;
+            if (LastError is { } wardrobeError && wardrobeError != diagnosticBefore)
+                diagnostic+="；外观更新详情："+wardrobeError;
             try {
                 if (IsCurrent(identity)) {
-                    Apply(identity,before.Look);
+                    if (!Apply(identity,before.Look,reportFailure: false) && LastError is { } rollbackError)
+                        diagnostic+="；临时外观还原失败："+rollbackError;
                     if (IsCurrent(identity)) ApplyCustomization(identity,before.Customize,before.HideVieraEars);
                     if (compositionAttempted && IsCurrent(identity)) ApplyComposition(identity,before.Composition,null,native);
                 }
-            } catch(Exception rollback) {LastError+="；临时状态还原失败："+rollback.Message;}
-            error(LastError); return false;
+            } catch(Exception rollback) {diagnostic+="；临时状态还原失败："+rollback.Message;}
+            LastError=diagnostic;
+            error("本次肖像调整未能完成，请稍后重试；若仍异常，请结束预览后重新打开铭牌。"); return false;
         }
     }
 

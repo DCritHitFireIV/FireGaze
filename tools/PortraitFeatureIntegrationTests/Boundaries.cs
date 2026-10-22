@@ -51,6 +51,7 @@ namespace FireGaze.UI
         public static System.Numerics.Vector4 Muted => default;
         public static System.Numerics.Vector4 Good => default;
         public static System.Numerics.Vector4 Bad => default;
+        public static System.Numerics.Vector4 Warn => default;
         public static IDisposable Disabled(bool value = true) => new DrawingScope();
         public static void ColoredWrapped(System.Numerics.Vector4 color, string text)
             => Dalamud.Bindings.ImGui.ImGui.Text.Add(text);
@@ -120,6 +121,8 @@ namespace FireGaze.PortraitPreview
         public bool Current = true;
         public bool CanBlockSave = true;
         public bool RejectApply = false;
+        public string? RejectedApplyNotice;
+        public Action<string>? PlayerError;
         public bool RejectLight = false;
         public int LightWrites;
         public bool SetDirectionalLightAngles(PortraitIdentity identity,PortraitNativeLightAngles expected,PortraitNativeLightAngles desired)
@@ -159,20 +162,22 @@ namespace FireGaze.PortraitPreview
         }
         public bool Apply(PortraitIdentity identity, PortraitLook look)
         {
-            if (!IsCurrent(identity) || RejectApply) return false;
+            if (!IsCurrent(identity)) return false;
+            if (RejectApply) { if (RejectedApplyNotice is { } notice) PlayerError?.Invoke(notice); return false; }
             ApplyCalls++;
             Snapshot = Snapshot with { Look = look.Copy() };
             return true;
         }
         public bool RestoreOriginal(PortraitIdentity identity, PortraitLook look)
         {
-            if (!IsCurrent(identity) || RejectApply || Original is null) return false;
+            if (!IsCurrent(identity) || Original is null) return false;
             Snapshot = Snapshot with { Customize = (byte[])Original.Customize.Clone(), HideVieraEars = Original.HideVieraEars };
             return Apply(identity, look);
         }
         public bool ApplyEditorState(PortraitIdentity identity, PortraitEditorSnapshot snapshot)
         {
-            if (!Ready || !IsCurrent(identity) || RejectApply || !snapshot.IsCompatibleWith(Snapshot)) return false;
+            if (!Ready || !IsCurrent(identity) || !snapshot.IsCompatibleWith(Snapshot)) return false;
+            if (RejectApply) { if (RejectedApplyNotice is { } notice) PlayerError?.Invoke(notice); return false; }
             ApplyCalls++; Snapshot = snapshot.Copy();AfterEditorApply?.Invoke(); return true;
         }
         public bool SetLightingSpace(PortraitIdentity identity, PortraitEditorSnapshot expected, PortraitComposition desired)
@@ -219,6 +224,7 @@ namespace FireGaze.PortraitPreview
         private DateTimeOffset testClock = DateTimeOffset.Parse("2026-10-18T10:00:00+08:00");
         public OwnedCharacterKey? Owner = new(10,20);
         public string? LastError;
+        public List<string> ErrorMessages { get; } = [];
         public bool IsActive => session.IsActive;
         private bool LightingFitHistorySuppressed;
         // The actual fit owns native RGB compensation and an asynchronous GPU drain. The
@@ -252,6 +258,7 @@ namespace FireGaze.PortraitPreview
             storageBudget = storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(file)!);
             var customize = new byte[26]; customize[0]=1;customize[4]=1;customize[5]=1;customize[6]=1;
             target = new(new() {GameBuild="fixture",EntryPoint=2,Customize=customize,Composition=new() {BannerTimeline=1},Look=new(new PortraitPiece[13],true,true,false)});
+            target.PlayerError = Error;
             originalEditorSnapshot = null;
             actualCustomize = null;
             session = new(target);
@@ -263,18 +270,22 @@ namespace FireGaze.PortraitPreview
             var cacheFile=new OwnedEquipmentCacheFile(Path.GetDirectoryName(file)!, storage:storageBudget);cacheFile.Load(owned,out _);
             cacheWriter=new(cacheFile.SaveJSONResult,storageBudget);ownedSavePolicy=new(cacheWriter);
             InitializeLibrary(Path.GetDirectoryName(file)!);
+            RefreshSourceCharacter();
             contentID = Owner!.Value.ContentID;
         }
-        private OwnedCharacterKey? CurrentCharacter() => Owner;
+        public int NativeOwnerReads;
+        private OwnedCharacterKey? CurrentCharacter() { NativeOwnerReads++; return Owner; }
+        public void SampleSourceOwner() => RefreshSourceCharacter();
         private void Mutate(System.Action action) => action();
         // The production opening controller is outside this integration boundary. Keep the
         // receipt entry point available so the real editing partial can compile unchanged.
         private void OpenEditorWithReceipt(string kind, string nonce) { }
-        private void Error(string value) { LastError=status=value; statusIsError=true; }
+        public PortraitOpeningAvailability OpeningAvailability { get; set; } = new(true, false, false, []);
+        private void Error(string value) { playerErrorRevision++; ErrorMessages.Add(value); LastError=status=value; statusIsError=true; }
         private void SetStatus(string value) { status=value; statusIsError=false; }
         public void OpenPreview() { if (!target.CanBlockSave || !session.Open(target.Identity)) throw new InvalidOperationException("Test preview not ready."); window.IsOpen=true; }
         public void Sample(bool pointer=false, bool keyboard=false, int advanceMilliseconds=50)
-        { testClock=testClock.AddMilliseconds(advanceMilliseconds);pointerHeld=pointer;Plugin.Keys.Held=keyboard;nextEditorSample=DateTime.MinValue;PollEditing(); }
+        { RefreshSourceCharacter();testClock=testClock.AddMilliseconds(advanceMilliseconds);pointerHeld=pointer;Plugin.Keys.Held=keyboard;nextEditorSample=DateTime.MinValue;PollEditing(); }
         public void EditComposition(Func<PortraitComposition,PortraitComposition> change)
             => target.Snapshot=target.Snapshot with {Composition=change(target.Snapshot.Composition)};
         public void RollbackAndSync()
@@ -296,13 +307,16 @@ namespace FireGaze.PortraitPreview
         public PortraitGlamourPlateReader PlateReader => glamourPlateReader;
         public void SampleLibrary() => PollLibrary();
         public void WaitFavorites() { DrainFavoritePersistence().GetAwaiter().GetResult(); ObserveFavoritePersistence(); }
+        public string? FavoritesLoadErrorForTest => favoritesStore.LoadError;
+        public void PublishFavoriteForTest(PortraitFavoritesWriteResult result) => PublishFavoriteResult(result);
         public bool RejectFavoriteArchive { get => photos.RejectArchive; set => photos.RejectArchive = value; }
         public bool FavoriteMetadataDrainSucceeded => DrainFavoritePersistence().GetAwaiter().GetResult();
         public void MakeStorageObservationDue() => nextStorageObservation = DateTime.MinValue;
         public void WaitStorageObservation() { storageObservation?.GetAwaiter().GetResult(); PollStorageObservation(); }
         public void SetPlateNext(PortraitGlamourPlate[] plates) => glamourPlateReader.Next = new(Owner,plates,"已读取");
         public void MakePlatePollDue() => nextGlamourPlateRead = DateTime.MinValue;
-        public void Equip(PortraitSlot slot,uint id) => throw new InvalidOperationException("Native equip is outside this test boundary.");
+        public int EquipDelegations;
+        public void Equip(PortraitSlot slot,uint id) { EquipDelegations++; throw new InvalidOperationException("Native equip is outside this test boundary."); }
         public void ObserveOwned(OwnedSourceKey source,OwnedItemRecord[] records) {owned.ActivateCharacter(Owner!.Value);owned.ApplyRead(Owner.Value,source,testClock,records);QueueOwnedCacheIfNeeded();}
         public bool FlushOwned() => cacheWriter.FlushAsync().GetAwaiter().GetResult();
         public int OwnedWrites => cacheWriter.CompletedWrites;

@@ -8,6 +8,8 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.SafetySnapshot.cs')">$(DefineConstants);SAFETY_SNAPSHOT_FEATURE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOpeningAvailability.Classification.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOpeningAvailability.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitSourceCensusSafetyState.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOwnedScenePassiveSafetyState.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorOpeningReceipt.cs" />

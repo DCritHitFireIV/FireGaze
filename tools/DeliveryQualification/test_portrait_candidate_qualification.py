@@ -35,7 +35,10 @@ class CandidateQualificationTests(unittest.TestCase):
                        sha256=self.subject.digest(self.source/'FireGaze.dll'))
         inputs = self.subject.current_inputs(self.repo)
         self.value = dict(exitCode=0, inputFilesUnchanged=True, deployedUnchanged=True,
-                          inputBefore=inputs, inputAfter=copy.deepcopy(inputs))
+                          inputBefore=inputs, inputAfter=copy.deepcopy(inputs),
+                          externalFilesUnchanged=True,
+                          externalFilesBefore={'cn-sdk.dll': 'A'*64},
+                          externalFilesAfter={'cn-sdk.dll': 'A'*64})
         self.write_gate(self.suites)
 
     def write_gate(self, suites, summary='Offline validation finished: 2 suites; skipped: .\n'):
@@ -68,6 +71,17 @@ class CandidateQualificationTests(unittest.TestCase):
         self.value['inputBefore']['translations.json'] = '0'*64
         self.write_gate(self.suites)
         with self.assertRaises(RuntimeError): self.qualify()
+
+    def test_external_change_or_missing_external_evidence_cannot_qualify(self):
+        for updates in [dict(externalFilesUnchanged=False),
+                        dict(externalFilesAfter={'cn-sdk.dll': 'B'*64}),
+                        dict(externalFilesBefore={}, externalFilesAfter={})]:
+            with self.subTest(updates=updates):
+                baseline = copy.deepcopy(self.value)
+                self.value.update(updates)
+                self.write_gate(self.suites)
+                with self.assertRaises(RuntimeError): self.qualify()
+                self.value = baseline
 
     def test_root_asset_or_new_code_after_gate_is_rejected(self):
         for path in [self.repo/'translations.json', self.repo/'src/new.cs']:

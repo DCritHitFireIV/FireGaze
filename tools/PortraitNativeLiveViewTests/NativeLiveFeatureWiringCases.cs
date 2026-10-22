@@ -1,39 +1,42 @@
+using FireGaze.PortraitPreview;
+
 internal static class NativeLiveFeatureWiringCases
 {
     public static void Run(Action<string, Action> test, Action<bool, string> check)
     {
-        test("feature and window keep native live view explicit and default off", () =>
+        test("preview lease lifecycle gives each new session one image start and never carries an old frame", () =>
         {
-            var root = FindRoot();
-            var feature = File.ReadAllText(Path.Combine(root, "src", "FireGaze", "PortraitPreview", "PortraitPreviewFeature.NativeLive.cs"));
-            var window = File.ReadAllText(Path.Combine(root, "src", "FireGaze", "PortraitPreview", "PortraitPreviewWindow.NativeLive.cs"));
-            var main = File.ReadAllText(Path.Combine(root, "src", "FireGaze", "PortraitPreview", "PortraitPreviewFeature.cs"));
-            check(feature.Contains("private bool nativeLiveRequested;", StringComparison.Ordinal)
-                && !feature.Contains("private bool nativeLiveRequested = true", StringComparison.Ordinal),
-                "native live intent must begin false and require an explicit user action");
-            check(feature.Contains("captureIsolation.Mode", StringComparison.Ordinal)
-                && feature.Contains("CapturesDrained", StringComparison.Ordinal)
-                && feature.Contains("LightingFitMutationBlocked", StringComparison.Ordinal),
-                "feature qualification must preserve the controller capture and lighting barriers");
-            check(main.Contains("UpdateNativeLive()", StringComparison.Ordinal)
-                && main.Contains("StopNativeLive(PortraitNativeLiveStopReason.UserClosed)", StringComparison.Ordinal),
-                "Framework update and preview close must own controller update and retirement");
-            check(window.Contains("TryBorrowNativeLive", StringComparison.Ordinal)
-                && window.Contains("using var", StringComparison.Ordinal)
-                && window.Contains("AddImage", StringComparison.Ordinal),
-                "window must hold one borrow through AddImage submission");
-            check(!feature.Contains("ApplyLighting", StringComparison.Ordinal)
-                && !window.Contains("ApplyLighting", StringComparison.Ordinal)
-                && !window.Contains("Camera", StringComparison.Ordinal),
-                "stage A wiring must not expose camera or lighting mutation");
+            var target = new SessionTarget();
+            var session = new PortraitPreviewSession(target);
+            var source = new Source();
+            using var controller = new PortraitNativeLiveController(source,
+                () => new(Source.KeyA.Editor, Source.KeyA.Owner, session.BlockSave(Source.KeyA.Editor), true, "off", true, false));
+            check(session.Open(Source.KeyA.Editor)
+                && controller.TryStartSessionOnce(session.Revision, Source.KeyA.Editor),
+                "the first successful preview lease can start its image");
+            controller.Update();
+            check(controller.TryBorrow(out var old), "the first session publishes its native image");
+            check(session.Open(Source.KeyA.Editor)
+                && !controller.TryStartSessionOnce(session.Revision, Source.KeyA.Editor),
+                "opening the current preview window does not restart the image");
+            controller.Stop(PortraitNativeLiveStopReason.UserClosed);
+            check(session.Close() && !old!.TryGetImage(out _), "closing restores the lease and retires its frame");
+            check(session.Open(Source.KeyA.Editor)
+                && controller.TryStartSessionOnce(session.Revision, Source.KeyA.Editor)
+                && !controller.TryBorrow(out _),
+                "a new preview of the same editor starts without displaying the previous session image");
+            old!.Dispose();
+            controller.Update();
+            check(controller.TryBorrow(out var fresh), "the new session publishes only after a fresh acquisition");
+            fresh!.Dispose();
         });
     }
 
-    private static string FindRoot()
+    private sealed class SessionTarget : IPortraitPreviewTarget
     {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "build-local-preview.ps1")))
-            directory = directory.Parent;
-        return directory?.FullName ?? throw new InvalidOperationException("repository root not found");
+        public bool IsCurrent(PortraitIdentity identity) => identity == Source.KeyA.Editor;
+        public PortraitLook? Capture(PortraitIdentity identity) => IsCurrent(identity)
+            ? new(new PortraitPiece[13], true, true, false) : null;
+        public bool Apply(PortraitIdentity identity, PortraitLook look) => IsCurrent(identity);
     }
 }

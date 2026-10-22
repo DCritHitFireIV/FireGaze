@@ -18,12 +18,24 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private Task<bool>? favoritePersistence;
     private volatile bool favoriteMetadataSucceeded = true;
     private PortraitFavoritesWriteResult? favoriteCompletedResult;
+    private PortraitFavoritesWriteResult? lastFavoriteStorageFailure;
     private Func<PortraitFavoritesWriteResult>? retainedFavoriteWrite;
     private (ulong ContentID, PortraitEditorSnapshot Snapshot)? retainedFavoriteProtection;
     private Task<bool>? storageObservation;
     private bool storageObservationClosing;
     private readonly Dictionary<ulong, string> retainerDisplayNames = [];
     private OwnedRetainerRoster? retainerRosterView;
+    private OwnedCharacterKey? sourceCharacter;
+
+    // Publish before the rest of each Framework update, independently of the throttled
+    // inventory capture. Drawing must not resolve PlayerState or the local actor.
+    private void RefreshSourceCharacter()
+    {
+        sourceCharacter = null;
+        sourceCharacter = CurrentCharacter();
+    }
+
+    private bool SourceOwnerCurrent => sourceCharacter is { } owner && ownedView.Character == owner;
 
     public ulong ContentID => contentID;
     public string SourceGuideKey => ContentID == 0 ? string.Empty : ContentID.ToString(System.Globalization.CultureInfo.InvariantCulture);
@@ -40,7 +52,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         favoritesStore = new(Path.Combine(directory, "portrait-favorites-v1.json"), storage: storageBudget);
         favoriteEntries = favoritesStore.Entries;
         // A missing plate cache is a normal first run and must not appear as a favorite error.
-        favoritesStatus = favoritesStore.LoadError ?? string.Empty;
+        favoritesStatus = favoritesStore.LoadError is null ? string.Empty : "收藏文件暂时无法读取，原文件已保留。";
         libraryInitialized = true;
     }
 
@@ -254,8 +266,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         var preparation = history.PrepareRecord(key, payload, label);
         if (preparation.Status is not (PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate))
         { HandleHistoryResult(preparation); Error("这次修改无法记录，原肖像保持不变。"); return false; }
-        if (!target.ApplyEditorState(identity, desired))
-        { Error(target.LastError ?? "本地预览未能应用，原肖像保持不变。"); return false; }
+        if (!ApplyWithFailureNotice(() => target.ApplyEditorState(identity, desired),
+                "本次造型未能应用，请稍后重试。若画面异常，请结束预览。")) return false;
         if (!session.ObserveLook(desired.Look))
         { RollbackLibrarySnapshot(identity, before, "预览状态无法确认，已取消本次修改。"); return false; }
         var result = history.Record(key, payload, label);
@@ -279,6 +291,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void RollbackLibrarySnapshot(PortraitIdentity identity, PortraitEditorSnapshot before, string message)
     {
+        var beforeNotice = playerErrorRevision;
         var restored = target.IsCurrent(identity) && target.ApplyEditorState(identity, before);
         if (restored)
         {
@@ -288,7 +301,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
             appearanceGroups = appearance.Build(before.Customize);
             if (syncPlate) _ = target.UpdatePlateMirror(identity, before, true);
         }
-        Error(restored ? message : "本次修改未完成，还原状态无法确认，请关闭后重新打开肖像编辑器。");
+        ReportFailureIfUnreported(beforeNotice,
+            restored ? message : "本次修改未完成，还原状态无法确认，请关闭后重新打开肖像编辑器。");
     }
 
     private void SetFavoritesError(string reason)
@@ -307,7 +321,25 @@ internal sealed unsafe partial class PortraitPreviewFeature
             if (favoritePersistence is { IsCompletedSuccessfully: true, Result: false })
                 favoritesStatus = "收藏已保存，照片暂时无法保存。";
         }
-        else SetFavoritesError(result.Reason);
+        else
+        {
+            // Storage details can include operating-system messages and local paths.
+            // Keep the detached evidence for diagnostics and map only structured codes to UI.
+            lastFavoriteStorageFailure = result with { Entry = null };
+            SetFavoritesError(result.Status switch
+            {
+                PortraitFavoritesWriteStatus.InvalidInput => "收藏未能保存，请检查名称、标签和肖像内容后重试。",
+                PortraitFavoritesWriteStatus.NotFound => "这条收藏已不存在，请刷新收藏列表后重试。",
+                PortraitFavoritesWriteStatus.ReadOnlyCorrupt => "收藏文件暂时无法读取，原文件已保留。",
+                PortraitFavoritesWriteStatus.TooLarge when result.StorageCode == PortraitStorageCode.Capacity
+                    => "本地肖像存储空间不足，收藏未能保存。已有收藏已保留。",
+                PortraitFavoritesWriteStatus.TooLarge => "收藏容量已满，本次收藏未能保存。已有收藏已保留。",
+                PortraitFavoritesWriteStatus.PersistenceFailed when result.StorageCode == PortraitStorageCode.Busy
+                    => "其他肖像数据正在保存，请稍候重试。",
+                PortraitFavoritesWriteStatus.Conflict => "收藏已被其他操作更新，请刷新收藏列表后重试。",
+                _ => "收藏未能保存，请检查本地存储后重试。已有收藏已保留。",
+            });
+        }
     }
 
     private void DisposeLibrary()
@@ -320,14 +352,14 @@ internal sealed unsafe partial class PortraitPreviewFeature
         libraryInitialized = false;
     }
 
-    public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => ownedView.Character == CurrentCharacter() && browser.TryGetValue(slot, out var values) ? values : [];
+    public IReadOnlyList<PortraitBrowserItem> GetItems(PortraitSlot slot) => SourceOwnerCurrent && browser.TryGetValue(slot, out var values) ? values : [];
 
-    public IReadOnlyList<OwnedSourceView> Sources => ownedView.Character == CurrentCharacter() ? ownedView.Sources : [];
-    public IReadOnlyList<OwnedEquipmentEntry> EquippedItems => ownedView.Character == CurrentCharacter()
+    public IReadOnlyList<OwnedSourceView> Sources => SourceOwnerCurrent ? ownedView.Sources : [];
+    public IReadOnlyList<OwnedEquipmentEntry> EquippedItems => SourceOwnerCurrent
         ? ownedView.Items.Where(item => item.Variants.Any(variant => variant.Source.Kind == OwnedSourceKind.Equipped)).ToArray()
         : [];
-    public OwnedCharacterKey? SourceCharacter => CurrentCharacter();
-    public OwnedRetainerRoster? RetainerRoster => retainerRosterView?.Character == CurrentCharacter() ? retainerRosterView : null;
+    public OwnedCharacterKey? SourceCharacter => sourceCharacter;
+    public OwnedRetainerRoster? RetainerRoster => sourceCharacter is { } owner && retainerRosterView?.Character == owner ? retainerRosterView : null;
 
     /// <summary>Every accepted inventory capture batch uses the same revision-aware persistence gate.</summary>
     private bool QueueOwnedCacheIfNeeded()
@@ -360,14 +392,14 @@ internal sealed unsafe partial class PortraitPreviewFeature
     }
 
     public IReadOnlyList<string> StorageLocations(uint id)
-        => ownedView.Character == CurrentCharacter() ? ownedView.Items.FirstOrDefault(item => item.ItemID == id)?.Variants
+        => SourceOwnerCurrent ? ownedView.Items.FirstOrDefault(item => item.ItemID == id)?.Variants
             .Select(variant => SourceName(variant.Source)).Distinct(StringComparer.Ordinal).ToArray() ?? [] : [];
 
     public void EquipFromSources(PortraitSlot slot, uint id, IReadOnlyCollection<OwnedSourceKind> sources) => Mutate(() =>
     {
-        if (slot == PortraitSlot.Facewear) { Equip(slot, id); return; }
         if (CurrentCharacter() is not { } character || ownedView.Character != character)
         { Error("角色已改变，请等待当前角色的装备来源读取完成。"); return; }
+        if (slot == PortraitSlot.Facewear) { Equip(slot, id); return; }
         if (!SynchronizeCurrentLook()) return;
         var item = GetItems(slot).FirstOrDefault(row => row.ID == id);
         var variant = ownedView.Items.FirstOrDefault(row => row.ItemID == id)?.Variants
@@ -375,8 +407,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (item is not { Available: true } || variant is null) { Error("尚未在选择的来源中读取此装备。"); return; }
         var piece = new PortraitPiece(id, item.DyeChannels > 0 ? variant.Stain1 : (byte)0, item.DyeChannels > 1 ? variant.Stain2 : (byte)0);
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.Replace(slot, piece)) Error("暂时无法预览此装备，请稍后重试。");
-        else RecordDirectChange("更换装备：" + item.Name);
+        if (ApplyWithFailureNotice(() => session.Replace(slot, piece), "暂时无法预览此装备，请稍后重试。"))
+            RecordDirectChange("更换装备：" + item.Name);
     });
 
     private string SourceName(OwnedSourceKey source) => source.Kind switch

@@ -48,6 +48,7 @@ namespace FireGaze.UI
         public static System.Numerics.Vector4 Muted => default;
         public static System.Numerics.Vector4 Good => default;
         public static System.Numerics.Vector4 Bad => default;
+        public static System.Numerics.Vector4 Warn => default;
         public static IDisposable Disabled(bool value = true) => new DrawingScope();
         public static void ColoredWrapped(System.Numerics.Vector4 color, string text) { }
         public static void PushPrimaryButton() { }
@@ -235,7 +236,8 @@ namespace FireGaze.PortraitPreview
         private OwnedCharacterKey? CurrentCharacter() => Owner;
         private void Mutate(System.Action action) => action();
         private void OpenEditorWithReceipt(string kind, string nonce) { }
-        private void Error(string value) { LastError=status=value; }
+        public PortraitOpeningAvailability OpeningAvailability { get; set; } = new(true, false, false, []);
+        private void Error(string value) { playerErrorRevision++; LastError=status=value; }
         private void SetStatus(string value) { status = value; statusIsError = false; }
         public void OpenPreview() { if (!target.CanBlockSave || !session.Open(target.Identity)) throw new InvalidOperationException("Test preview not ready."); window.IsOpen=true; }
         public void Sample(bool pointer=false, bool keyboard=false, int advanceMilliseconds=50)

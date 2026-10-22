@@ -41,6 +41,7 @@ bounds = NearbyWindowLayout.Place(Vector2.Zero, new(800,600), new(float.NaN,floa
 Fits(bounds, Vector2.Zero, new(800,600), "malformed remembered geometry is normalized without propagating NaN");
 NearbyWindowIntegrationCases.Run(Check);
 PortraitWindowPlacementCases.Run(Check);
+PortraitWorkspaceGeometryCases.Run(Check);
 PortraitWorkspaceToolbarCases.Run(Check);
 #else
 Check(false, "child windows need bounded owner-relative placement");
@@ -48,3 +49,4 @@ Check(false, "child windows need bounded owner-relative placement");
 
 Console.WriteLine($"{passed} passed, {failed} failed");
 return failed == 0 ? 0 : 1;
+

@@ -116,9 +116,13 @@ try
 
     var target = new Target { Look = Look(111) };
     var session = new PortraitPreviewSession(target);
+    Check(session.Revision == 0, "no successful preview lease has a session revision");
     Check(!session.IsActive && !session.BlockSave(target.Identity), "inactive preview permits native saving");
     Check(session.Open(target.Identity) && session.IsActive && session.Original?.Pieces[2].ItemID == 111,
         "explicit open captures the editor's wardrobe baseline for the design list");
+    var firstSession = session.Revision;
+    Check(firstSession > 0 && session.Open(target.Identity) && session.Revision == firstSession,
+        "reopening the same active preview retains its session revision");
     Check(session.BlockSave(target.Identity), "opening alone blocks save before any wardrobe change");
     Check(!session.BlockSave(target.Identity with { Editor = 99 }), "unrelated editor saves are not intercepted");
     target.Available = false;
@@ -150,6 +154,7 @@ try
     Check(target.Applies == calls && !session.BlockSave(target.Identity), "close is idempotent and releases save blocking");
 
     session.Open(target.Identity);
+    Check(session.Revision > firstSession, "closing and reopening even the same editor creates a fresh image session");
     session.Replace(PortraitSlot.Facewear, new(8, 2, 0));
     Check(target.Look.Pieces[12].ItemID == 8, "facewear has an independent presentation slot");
     target.Identity = target.Identity with { Model = 91, Generation = 2 };

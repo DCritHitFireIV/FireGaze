@@ -110,7 +110,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
     public ushort? ActualFacewear => actualFacewear;
     public string Status => plateMirrorCloseError ?? cachePersistenceWarning ?? status;
     public bool StatusIsError => statusIsError || plateMirrorCloseError is not null || cachePersistenceWarning is not null;
-    public IReadOnlyList<string> SourceSummary => ownedView.Character == CurrentCharacter() ? sourceSummary : [];
+    public IReadOnlyList<string> SourceSummary => SourceOwnerCurrent ? sourceSummary : [];
     public IReadOnlyList<PortraitDye> Dyes => dyes;
     public PortraitBrowserItem? GetItem(PortraitSlot slot, uint id)
     {
@@ -134,6 +134,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             syncPlate, plateMirrorClosePending, plateMirrorActive = target.IsPlateMirrorActive, plateMirrorError = target.PlateMirrorError,
             plateMirrorDisposalRestored = target.PlateMirrorDisposalRestored,
             canUndo, canRedo, historyStatus, historyCount = history.Count, historyBytes = history.Bytes,
+            historyLoadError = history.LoadError, historyPersistenceError = history.PersistenceError,
             historyRows, appearanceGroups,
             designManifest = window.DesignManifestForDiagnostics(),
             historyPhotos = photos.Diagnostics(),
@@ -145,6 +146,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             ownedScene = OwnedViewportDiagnostics(),
             editorOpening = JsonSerializer.SerializeToElement(ReadEditorOpeningReceipt(),
                 new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+            openingAvailability = JsonSerializer.SerializeToElement(OpeningAvailability,
+                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+            lastOpeningFailure = JsonSerializer.SerializeToElement(LastOpeningFailure,
+                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+            nativeLive = new { requested = nativeLiveRequested, enabled = NativeLiveEnabled,
+                sessionRevision = session.Revision, stopReason = nativeLiveController?.StopReason.ToString() },
             runtimeTrace = new { active = runtimeTrace.ActiveStages, slowStages = runtimeTrace.SlowStages },
             liveCapture = liveImageService?.Diagnostics,
             historyPhotosView = window.HistoryPhotosView, historyWindowOpen = window.HistoryWindowOpen,
@@ -157,6 +164,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             ownedCache = new { contentRevision = owned.ContentRevision, savedRevision = cacheWriter.SavedRevision,
                 outstandingRevision = cacheWriter.OutstandingRevision, writes = cacheWriter.CompletedWrites, failedWrites = cacheWriter.FailedWrites },
             favorites = new { count = favoriteEntries.Count, status = favoritesStatus, readOnly = favoritesStore.IsReadOnly,
+                loadError = favoritesStore.LoadError, persistenceError = favoritesStore.PersistenceError, lastFailure = lastFavoriteStorageFailure,
                 entries = favoriteEntries.Select(value => new { value.ID, value.Name, value.Tags, value.SourceName }) },
         });
     }
@@ -188,6 +196,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (disposed) return;
         try
         {
+            using (runtimeTrace.Measure("update.source-owner")) RefreshSourceCharacter();
             using (runtimeTrace.Measure("update.editor-opening")) UpdateEditorOpening();
             using (runtimeTrace.Measure("update.source-census")) UpdateSourceCensus();
             using (runtimeTrace.Measure("update.owned-viewport")) UpdateOwnedViewport();
@@ -228,6 +237,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         }
         catch (Exception ex)
         {
+            StopNativeLive(PortraitNativeLiveStopReason.UpdateFailed);
             Volatile.Write(ref analysisSession, null);
             Plugin.Log.Warning(ex, "[肖像同步预览] 更新失败");
             SetStatus("肖像或物品信息尚未加载完成");
@@ -300,10 +310,25 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     public void OpenPreview() => Mutate(() =>
     {
+        if (session.IsActive)
+        {
+            window.IsOpen = true;
+            window.BringToFront();
+            return;
+        }
         runtimeTrace.Arm();
         using var openPhase = runtimeTrace.Measure("open");
         using (runtimeTrace.Measure("open.cancel-lighting")) if (!CancelLightingFitForEdit()) return;
-        if (!target.CanBlockSave) { Error(target.LastError ?? "暂时无法阻止肖像保存，为避免保存临时外观，本次未开启预览。请稍后重试。"); return; }
+        editorOpening.RefreshAvailability();
+        var available = OpeningAvailability;
+        if (available.HasBlockers || available.Opening)
+        { ReportOpeningUnavailable(available); return; }
+        if (!target.CanBlockSave)
+        {
+            ReportOpeningUnavailable(PortraitOpeningAvailability.Finish(false, true, false,
+                [PortraitOpeningAvailability.Issue("SaveProtectionUnavailable")]));
+            return;
+        }
         PortraitIdentity identity;
         using (runtimeTrace.Measure("open.resolve"))
             if (!target.TryResolve(out identity, out _, out _)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
@@ -311,6 +336,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
             if (!session.Open(identity)) { Error("请先打开肖像编辑器，等待模型加载完成。"); return; }
         originalEditorSnapshot = target.CaptureEditorState(identity)?.Copy();
         using (runtimeTrace.Measure("open.inventory")) RefreshInventory();
+        UpdateNativeLive();
         SetStatus("肖像预览已开启。");
         window.IsOpen = true;
         window.BringToFront();
@@ -318,22 +344,24 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     public void Equip(PortraitSlot slot, uint id) => Mutate(() =>
     {
+        if (CurrentCharacter() is not { } character || ownedView.Character != character)
+        { Error("角色已改变，请等待当前角色的装备来源读取完成。"); return; }
         if (!SynchronizeCurrentLook()) return;
         var item = GetItems(slot).FirstOrDefault(row => row.ID == id);
         if (item is not { Available: true }) { Error(item?.Reason ?? "尚未在已读取的物品中找到此装备。"); return; }
         var variant = ownedView.Items.FirstOrDefault(row => row.ItemID == id)?.Variants.FirstOrDefault();
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.Replace(slot, new(id, item.DyeChannels > 0 ? variant?.Stain1 ?? 0 : (byte)0, item.DyeChannels > 1 ? variant?.Stain2 ?? 0 : (byte)0)))
-            Error("暂时无法预览此装备，请等待肖像加载后重试。");
-        else RecordDirectChange("更换装备：" + item.Name);
+        if (ApplyWithFailureNotice(() => session.Replace(slot, new(id, item.DyeChannels > 0 ? variant?.Stain1 ?? 0 : (byte)0,
+                item.DyeChannels > 1 ? variant?.Stain2 ?? 0 : (byte)0)), "暂时无法预览此装备，请等待肖像加载后重试。"))
+            RecordDirectChange("更换装备：" + item.Name);
     });
 
     public void Clear(PortraitSlot slot) => Mutate(() =>
     {
         if (!SynchronizeCurrentLook()) return;
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.Replace(slot, default)) Error("暂时无法清空此部位，请稍后重试。");
-        else RecordDirectChange("清空装备部位");
+        if (ApplyWithFailureNotice(() => session.Replace(slot, default), "暂时无法清空此部位，请稍后重试。"))
+            RecordDirectChange("清空装备部位");
     });
 
     public void Dye(PortraitSlot slot, int channel, byte stain) => Mutate(() =>
@@ -345,16 +373,16 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         if (item is null || channel >= item.DyeChannels || (stain != 0 && !dyes.Any(row => row.ID == stain))) return;
         var next = channel == 0 ? piece with { Stain0 = stain } : piece with { Stain1 = stain };
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.Replace(slot, next)) Error("暂时无法预览此染色，请稍后重试。");
-        else RecordDirectChange($"染色 {channel + 1}：" + (dyes.FirstOrDefault(dye => dye.ID == stain)?.Name ?? "无"));
+        if (ApplyWithFailureNotice(() => session.Replace(slot, next), "暂时无法预览此染色，请稍后重试。"))
+            RecordDirectChange($"染色 {channel + 1}：" + (dyes.FirstOrDefault(dye => dye.ID == stain)?.Name ?? "无"));
     });
 
     public void SetVisibility(bool head, bool weapon, bool visor) => Mutate(() =>
     {
         if (!SynchronizeCurrentLook()) return;
         HandleHistoryResult(historyBatch.Flush());
-        if (!session.SetVisibility(head, weapon, visor)) Error("暂时无法更改装备显示，请稍后重试。");
-        else RecordDirectChange("装备显示设置");
+        if (ApplyWithFailureNotice(() => session.SetVisibility(head, weapon, visor), "暂时无法更改装备显示，请稍后重试。"))
+            RecordDirectChange("装备显示设置");
     });
 
     public void ClosePreview() => Mutate(() =>
@@ -362,10 +390,9 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         StopNativeLive(PortraitNativeLiveStopReason.UserClosed);
         if (!CancelLightingFitForEdit()) { Error("正在结束灯光调整，请稍候再关闭预览。"); return; }
         FlushEditing();
-        if (!session.Close())
+        if (!ApplyWithFailureNotice(session.Close, "临时外观尚未还原，请等待肖像加载后再次关闭。"))
         {
             window.IsOpen = true;
-            Error("临时外观尚未还原，请等待肖像加载后再次关闭。");
             return;
         }
         window.IsOpen = false;
@@ -379,6 +406,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
 
     private void Error(string message)
     {
+        playerErrorRevision++;
         status = message;
         statusIsError = true;
         // Disposal can finish after a native callback unwinds. Keep that eventual failure in
@@ -532,7 +560,12 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
         {
             const string pattern = "40 53 48 83 EC 30 48 83 3D ?? ?? ?? ?? 00 48 8B D9 0F 84 ?? ?? ?? ?? 48 8B 41 28 48 85 C0 74 17 83 B8 D8 03 00 00 02 75 0E 48 8B 01 FF 50 28 32 C0";
             try { Marshal.GetDelegateForFunctionPointer<OpenPlate>(Plugin.SigScanner.ScanText(pattern))(editor); }
-            catch (Exception ex) { Error("当前游戏版本无法打开铭牌肖像编辑器：" + ex.Message); }
+            catch (Exception ex)
+            {
+                Plugin.Log.Warning(ex, "[肖像同步预览] Native plate editor opening failed.");
+                if (editorOpening.Read().Status == "Executing") throw;
+                Error("铭牌没有成功打开，请稍后再试。");
+            }
         }
     }
 

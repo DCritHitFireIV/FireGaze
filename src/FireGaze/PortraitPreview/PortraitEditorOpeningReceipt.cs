@@ -31,27 +31,55 @@ internal sealed record PortraitEditorOpeningReceipt(int SchemaVersion, Guid Feat
 /// Binds only roots created synchronously by this exact native invocation. An empty native return
 /// is terminal and can never adopt a later editor. All lifecycle progression is explicit; Read is pure.
 /// </summary>
-internal sealed class PortraitEditorOpeningController(Func<PortraitEditorOpeningSample?> read, Func<double> monotonicClock)
+internal sealed class PortraitEditorOpeningController(Func<PortraitEditorOpeningSample?> read, Func<double> monotonicClock,
+    Func<IReadOnlyList<PortraitOpeningIssue>>? readIssues = null)
 {
     private const int MaximumAttempts = 128;
     private readonly HashSet<Guid> usedNonces = [];
     private PortraitEditorOpeningReceipt receipt = new(1, Guid.NewGuid(), null, 0, 1, null,
         "NotExecuted", -1, 0, 0, null, null, null, null);
     private bool invoking;
+    private PortraitOpeningAvailability availability = PortraitOpeningAvailability.Unavailable;
+    private PortraitOpeningFailure? lastFailure;
 
     public PortraitEditorOpeningReceipt Read() => receipt.Detached();
+    public PortraitOpeningAvailability ReadAvailability() => availability;
+    public PortraitOpeningFailure? ReadLastFailure() => lastFailure?.Detached();
+
+    public void RefreshAvailability(string kind = "plate")
+    {
+        try { availability = PortraitOpeningAvailability.Create(read()?.Detached(), kind, readIssues?.Invoke(),
+            receipt.Status is "Executing" or "ReturnedPending"); }
+        catch (Exception) { availability = PortraitOpeningAvailability.Unavailable; }
+    }
+
+    private void Reject(string reason, PortraitEditorOpeningSample? observed = null, string? playerCode = null,
+        string stage = "Preflight")
+    {
+        var issues = (readIssues?.Invoke() ?? []).ToList();
+        if (playerCode is not null) issues.Add(PortraitOpeningAvailability.Issue(playerCode));
+        availability = PortraitOpeningAvailability.Create(observed, receipt.RequestedEntry ?? "plate", issues);
+        if (!availability.HasBlockers)
+            availability = PortraitOpeningAvailability.Finish(false, availability.EditorAlreadyOpen, false,
+                [PortraitOpeningAvailability.Issue("StateUnavailable")]);
+        var rejected = availability;
+        lastFailure = new(receipt.Serial, receipt.RequestedEntry, reason, stage,
+            playerCode != "OpeningUnavailable", rejected, observed?.Detached());
+        Invalidate(reason);
+        availability = rejected;
+    }
 
     public bool Open(string kind, string nonce, Action nativeInvoke)
     {
         if (invoking)
         {
-            Invalidate("Conflicting nested editor opening.");
+            Reject("Conflicting nested editor opening.", playerCode: "OpeningInProgress");
             return false;
         }
         if (receipt.Epoch == 0 || receipt.Serial == long.MaxValue)
-        { Invalidate("Feature lifetime opening sequence exhausted."); return false; }
+        { Reject("Feature lifetime opening sequence exhausted.", playerCode: "OpeningUnavailable"); return false; }
         if (usedNonces.Count >= MaximumAttempts)
-        { Invalidate("Feature lifetime diagnostic opening capacity exhausted."); return false; }
+        { Reject("Feature lifetime diagnostic opening capacity exhausted.", playerCode: "OpeningUnavailable"); return false; }
         if (kind is not ("gearset" or "plate") || !Guid.TryParseExact(nonce, "D", out var token)
             || token == Guid.Empty || !usedNonces.Add(token)) return false;
 
@@ -69,20 +97,24 @@ internal sealed class PortraitEditorOpeningController(Func<PortraitEditorOpening
         PortraitEditorOpeningSample? before;
         try { before = read()?.Detached(); }
         catch (Exception exception)
-        { Invalidate("Closed native baseline read failed: " + exception.GetType().Name); return false; }
+        { Reject("Closed native baseline read failed: " + exception.GetType().Name); return false; }
         if (receipt.Epoch != epoch || receipt.Status != "NotExecuted") return false;
         if (!double.IsFinite(started) || epoch == 0 || !Closed(before))
         {
-            Invalidate("Closed native baseline unavailable or unsafe.");
+            Reject("Closed native baseline unavailable or unsafe.", before);
             return false;
         }
+        var preflight = PortraitOpeningAvailability.Create(before, kind, readIssues?.Invoke());
+        if (preflight.HasBlockers)
+        { Reject("Opening availability reported an active safety blocker.", before); return false; }
         var sourceID = kind == "gearset" ? before!.CurrentGearsetID : 0;
         if (kind == "gearset" && sourceID is < 0 or > 99)
         {
-            Invalidate("Current gearset identity unavailable.");
+            Reject("Current gearset identity unavailable.", before, "GearsetUnavailable");
             return false;
         }
         receipt = receipt with { Status = "Executing", ExpectedSourceID = sourceID, Before = before };
+        availability = PortraitOpeningAvailability.Create(before, kind, opening: true);
         try
         {
             nativeInvoke();
@@ -94,21 +126,24 @@ internal sealed class PortraitEditorOpeningController(Func<PortraitEditorOpening
             if (returned is { State: 0, View: 0 })
             {
                 receipt = receipt with { Status = "UnprovenReturn", Reason = "Native invocation returned without new roots; later roots will never be adopted." };
+                availability = PortraitOpeningAvailability.Finish(false, false, false, [PortraitOpeningAvailability.Issue("EditorDidNotOpen")]);
+                lastFailure = new(receipt.Serial, kind, receipt.Reason!, "Invocation", true, availability, returned.Detached());
                 return false;
             }
             if (!Bound(returned, before!, requireIdle: true) || returned!.ThreadID != before!.ThreadID
                 || returned.Frame != before.Frame || returned.Source != before.Source)
             {
-                Invalidate("Native return did not preserve the invocation's roots, thread, source and entry.");
+                Reject("Native return did not preserve the invocation's roots, thread, source and entry.", returned, "EditorChanged", "Invocation");
                 return false;
             }
             receipt = receipt with { Status = "ReturnedPending" };
+            availability = PortraitOpeningAvailability.Create(returned, kind, readIssues?.Invoke(), opening: true);
             // Even a synchronous ready identity is only published by explicit lifecycle Update.
             return true;
         }
         catch (Exception exception)
         {
-            Invalidate("Native invocation failed: " + exception.GetType().Name);
+            Reject("Native invocation failed: " + exception.GetType().Name, playerCode: "EditorDidNotOpen", stage: "Invocation");
             return false;
         }
     }
@@ -120,30 +155,36 @@ internal sealed class PortraitEditorOpeningController(Func<PortraitEditorOpening
         PortraitEditorOpeningSample? current;
         try { current = read()?.Detached(); }
         catch (Exception exception)
-        { Invalidate("Bound native identity read failed: " + exception.GetType().Name); return; }
+        { Reject("Bound native identity read failed: " + exception.GetType().Name, stage: "Readiness"); return; }
         if (receipt.Epoch != epoch) return;
         var now = monotonicClock();
         if (!double.IsFinite(now) || now < receipt.StartedMonotonic
             || receipt.Status == "ReturnedPending" && now >= receipt.DeadlineMonotonic)
-        { Invalidate("Pending editor creation exceeded its monotonic budget."); return; }
+        { Reject("Pending editor creation exceeded its monotonic budget.", current, "OpeningTimeout", "Readiness"); return; }
         if (!Bound(current, receipt.Before!, requireIdle: receipt.Status == "ReturnedPending")
             || current!.State != receipt.Returned!.State || current.View != receipt.Returned.View
             || current.Source != receipt.Before!.Source)
-        { Invalidate("Bound editor or source ownership changed."); return; }
+        { Reject("Bound editor or source ownership changed.", current, "EditorChanged", "Readiness"); return; }
+        availability = PortraitOpeningAvailability.Create(current, receipt.RequestedEntry!, readIssues?.Invoke(),
+            receipt.Status == "ReturnedPending");
         if (current.ReadyIdentity is not { } ready)
         {
-            if (receipt.Status == "Ready") Invalidate("Previously ready native identity became unavailable.");
+            if (receipt.Status == "Ready") Reject("Previously ready native identity became unavailable.", current, "EditorChanged", "Readiness");
             return;
         }
         if (ready.Editor != current.Agent || ready.State != current.State || ready.Model != current.View
             || ready.Generation == 0 || ready.Character == 0 || ready.Character == (ulong)current.Source!.Address
             || receipt.ReadyIdentity is { } old && old != ready || !current.AgentActive)
-        { Invalidate("Native ready identity did not match the bound allocation."); return; }
+        { Reject("Native ready identity did not match the bound allocation.", current, "EditorChanged", "Readiness"); return; }
         receipt = receipt with { Status = "Ready", ReadyIdentity = ready };
+        availability = PortraitOpeningAvailability.Create(current, receipt.RequestedEntry!, readIssues?.Invoke());
     }
 
-    public void Invalidate(string reason) => receipt = receipt with
-    { Epoch = Next(receipt.Epoch), Status = "Invalidated", Reason = reason };
+    public void Invalidate(string reason)
+    {
+        receipt = receipt with { Epoch = Next(receipt.Epoch), Status = "Invalidated", Reason = reason };
+        availability = PortraitOpeningAvailability.Unavailable;
+    }
 
     private static long Next(long previous) => previous is > 0 and < long.MaxValue ? previous + 1 : 0;
 

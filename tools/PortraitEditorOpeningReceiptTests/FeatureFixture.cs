@@ -7,7 +7,9 @@ namespace FireGaze
     {
         internal static readonly OpeningAddonLifecycle AddonLifecycle = new();
         internal static readonly OpeningClientState ClientState = new();
+        internal static readonly OpeningLog Log = new();
     }
+    internal sealed class OpeningLog { internal void Warning(string message, params object?[] values) { } }
     internal sealed class OpeningAddonLifecycle
     {
         internal readonly List<Action<AddonEvent, AddonArgs>> Listeners = [];
@@ -37,6 +39,7 @@ namespace FireGaze.PortraitPreview
         internal PortraitPreviewFeature()
             => InitializeEditorOpening(new(ReadEditorOpeningSample, () => Now));
         private PortraitEditorOpeningSample? ReadEditorOpeningSample() { Reads++; return Current; }
+        private IReadOnlyList<PortraitOpeningIssue> ReadEditorOpeningIssues() => [];
         private void OpenEditorCore(string kind)
         {
             Calls++;
@@ -46,6 +49,7 @@ namespace FireGaze.PortraitPreview
             DuringNative?.Invoke();
         }
         private void Error(string error) => Errors++;
+        private void SetStatus(string status) { }
         internal void Open(string kind, string nonce) => OpenEditorWithReceipt(kind, nonce);
         internal void Tick() => UpdateEditorOpening();
         internal PortraitEditorOpeningReceipt Receipt => ReadEditorOpeningReceipt();

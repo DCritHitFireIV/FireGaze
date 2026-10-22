@@ -127,6 +127,23 @@ internal static class PortraitLibraryIntegrationTests
             feature.Native.CanBlockSave=true;feature.Native.AfterEditorApply=()=>feature.Store.Dispose();feature.ApplyGlamourPlate(0);
             check(feature.Native.Snapshot.ToJSON()==before&&feature.Store.Count==count,"history commit failure rolls the full editor back after native application");
         }
+        using(var feature=new PortraitPreviewFeature(PathFor("player-native-failure")))
+        {
+            const string technical="Native editor credential baseline unsafe. InternalException 0x1234";
+            feature.SetLibraryValidation([new(100,1<<3,1,2)]);feature.Sample();feature.OpenPreview();
+            var pages=Enumerable.Range(0,20).Select(i=>new PortraitGlamourPlate(i,new PortraitPiece[12])).ToArray();pages[0].Pieces[3]=new(100,1,1);feature.SetPlateObservations(pages);
+            feature.Native.RejectApply=true;feature.Native.LastError=technical;
+            feature.ApplyGlamourPlate(0);
+            check(feature.StatusIsError && !feature.Status.Contains(technical) && feature.Native.LastError==technical,
+                "template failure keeps native technical evidence out of player status");
+            feature.ChangeAppearance("hair",2);
+            check(feature.StatusIsError && !feature.Status.Contains(technical) && feature.Native.LastError==technical,
+                "beauty failure keeps native technical evidence out of player status");
+            feature.Native.RejectApply=false;feature.ChangeAppearance("hair",2);
+            feature.Native.RejectApply=true;feature.Undo();
+            check(feature.StatusIsError && !feature.Status.Contains(technical) && feature.Native.LastError==technical,
+                "history restore failure keeps native technical evidence out of player status");
+        }
         using(var feature=new PortraitPreviewFeature(PathFor("stale-plate-owner")))
         {
             feature.SetLibraryValidation([new(100,1<<3,1,2)]);feature.Sample();feature.OpenPreview();var pages=Enumerable.Range(0,20).Select(i=>new PortraitGlamourPlate(i,new PortraitPiece[12])).ToArray();pages[0].Pieces[3]=new(100,1,1);feature.SetPlateObservations(pages);
@@ -171,22 +188,33 @@ internal static class PortraitLibraryIntegrationTests
             feature.SetOwnedItems(oldView,PortraitSlot.Body,[new(100,"原角色独占装备",1,2,true,"")]);
             feature.SetOwnedItems(oldView,PortraitSlot.Facewear,[new(71,"原角色解锁眼镜",1,0,true,"")]);
             feature.SetRetainerName(123,"原角色雇员");
+            var ownerReads=feature.NativeOwnerReads;
+            _=feature.GetItems(PortraitSlot.Body);_=feature.Sources;_=feature.EquippedItems;
+            _=feature.SourceCharacter;_=feature.RetainerRoster;_=feature.StorageLocations(100);
+            check(feature.NativeOwnerReads==ownerReads,
+                "drawing published equipment and source details never samples the live native character");
             check(feature.GetItems(PortraitSlot.Body).Single().ID==100 && feature.GetItems(PortraitSlot.Facewear).Single().ID==71,
                 "current owner keeps both owned equipment and its unlocked facewear publication");
             check(feature.StorageLocations(100).Single()=="雇员背包 · 原角色雇员",
                 "current owner sees the readable retainer location from its own detached inventory");
             feature.Owner=new(99,88);
+            check(feature.SourceCharacter==originalOwner && feature.GetItems(PortraitSlot.Body).Count==1 && feature.NativeOwnerReads==ownerReads,
+                "source getters remain on the published Framework snapshot between updates");
+            feature.SampleSourceOwner();
             check(feature.GetItems(PortraitSlot.Body).Count==0 && feature.GetItems(PortraitSlot.Facewear).Count==0,
                 "character switch hides prior equipment and unlocked facewear before inventory polling");
             check(feature.StorageLocations(100).Count==0,
                 "character switch hides prior equipment locations before inventory polling");
             feature.Owner=null;
+            feature.SampleSourceOwner();
             check(feature.GetItems(PortraitSlot.Body).Count==0 && feature.GetItems(PortraitSlot.Facewear).Count==0 && feature.StorageLocations(100).Count==0,
                 "logout cannot expose prior equipment, unlocks, or retainer locations");
             feature.Owner=originalOwner;
+            feature.SampleSourceOwner();
             check(feature.GetItems(PortraitSlot.Body).Single().ID==100 && feature.GetItems(PortraitSlot.Facewear).Single().ID==71 && feature.StorageLocations(100).Count==1,
                 "owner checks preserve the detached publication without clearing valid cached equipment or unlocks");
             feature.Owner=new(99,88);
+            feature.SampleSourceOwner();
             var inventory=new OwnedSourceKey(OwnedSourceKind.Inventory);
             var newView=new OwnedEquipmentView(feature.Owner,[new(200,[new(inventory,200,1,0,1,0,0,0,false,OwnedReadStatus.Current)])],[]);
             feature.SetOwnedItems(newView,PortraitSlot.Body,[new(200,"新角色装备",1,2,true,"")]);
@@ -203,8 +231,10 @@ internal static class PortraitLibraryIntegrationTests
             feature.SetRetainerRoster(new(owner,new ulong[]{11,22},OwnedReadStatus.Current));
             check(feature.SourceCharacter==owner&&feature.RetainerRoster?.RetainerIDs.Count==2&&feature.Sources.Count==1,"published roster and inventory sources share the current runtime character");
             feature.Owner=new(99,88);
+            feature.SampleSourceOwner();
             check(feature.RetainerRoster is null&&feature.Sources.Count==0&&feature.SourceCharacter==feature.Owner,"character switch hides prior source rows and roster before throttled native inventory polling");
             feature.Owner=null;
+            feature.SampleSourceOwner();
             check(feature.RetainerRoster is null&&feature.Sources.Count==0&&feature.SourceCharacter is null,"logout cannot expose previous retainer denominator or source rows");
         }
         using(var feature=new PortraitPreviewFeature(PathFor("owned-write-failure")))

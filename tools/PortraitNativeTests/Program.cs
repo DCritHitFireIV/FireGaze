@@ -154,6 +154,7 @@ unsafe class Program
    "emergency teardown uses verified original native hide when a PreHide listener blocks ordinary hide");
   AbortUnreadyCases();
   PreviewSessionUnreadyCases();
+  NativeFailureNoticeCases.Run(Check);
   using(var owner=new PlateOwnerFixture())
   {
    var binding=owner.Binding;
@@ -283,7 +284,7 @@ unsafe class Program
 
 unsafe sealed class RefusalMirrorApi : IPortraitPlateMirrorApi
 {
- public bool RefuseWrite;public int Releases;public Action? AfterInstallImage;
+ public bool RefuseWrite,ThrowClose;public int Releases;public Action? AfterInstallImage;
  private AtkTexture texture=Make(10);
  private static AtkTexture Make(nint value)=>new(){KernelTexture=(FFXIVClientStructs.FFXIV.Client.Graphics.Kernel.Texture*)value,TextureType=TextureType.KernelTexture};
  public bool IsFrameworkThread=>true;
@@ -299,7 +300,7 @@ unsafe sealed class RefusalMirrorApi : IPortraitPlateMirrorApi
  public AtkTexture CreateRetainedTexture(PortraitIdentity identity,nint source)=>Make(source);
  public bool TryWriteTexture(PortraitPlateBinding binding,AtkTexture expected,AtkTexture replacement){if(RefuseWrite)return false;texture=replacement;return true;}
  public void ReleaseTexture(ref AtkTexture value){Releases++;value=default;}
- public bool TryCloseOwner(PortraitPlateBinding binding)=>false;
+ public bool TryCloseOwner(PortraitPlateBinding binding){if(ThrowClose)throw new InvalidOperationException("mirror close diagnostic sentinel");return false;}
 }
 
 unsafe sealed class PlateOwnerFixture : IPortraitPlateOwnerApi,IDisposable
@@ -346,7 +347,7 @@ unsafe sealed class Fixture : IPortraitNativeApi,IDisposable
  public Character* Real=(Character*)NativeMemory.AllocZeroed((nuint)sizeof(Character));
  public Character* Local;public bool Framework=true,Active=true,BoundsAvailable=true;public int Calls,Cleared;public Action? OnLookup;public bool ThrowItem,ReplaceOnItem,RefuseHide;public int HideCalls;
  public bool OriginalHideAvailable,RefuseOriginalHide,ReplaceOwnerOnHide;public int OriginalHideCalls;
- public bool ReturnNoEditor,ReturnNoCharacter;public Action? OnHide;
+ public bool ReturnNoEditor,ReturnNoCharacter,ThrowGlasses;public Action? OnHide;
  public uint Generation {get=>*(uint*)((byte*)Actor+0x74);set=>*(uint*)((byte*)Actor+0x74)=value;}
  public Fixture()
  {
@@ -366,7 +367,7 @@ unsafe sealed class Fixture : IPortraitNativeApi,IDisposable
  public Character* GetLocalPlayer()=>Local;
  public Character* GetCharacter(CharaViewPortrait* v) {OnLookup?.Invoke();return ReturnNoCharacter?null:Actor;}
  public void SetItem(CharaViewPortrait* v,byte slot,PortraitPiece p,bool crest) {Calls++;if(ThrowItem)throw new InvalidOperationException("native test failure");if(ReplaceOnItem){Editor->EditorState=null;return;}if(p.ItemID==0)Cleared++;for(int i=0;i<14;i++)if(v->Items[i].SlotId==slot||v->Items[i].SlotId==14) {v->Items[i]=new(){SlotId=slot,ItemId=p.ItemID,Stain0Id=p.Stain0,Stain1Id=p.Stain1};break;}}
- public void SetGlasses(Character* c,ushort glasses) {Calls++;c->DrawData.GlassesIds[0]=glasses;}
+ public void SetGlasses(Character* c,ushort glasses) {Calls++;if(ThrowGlasses)throw new InvalidOperationException("rollback glasses diagnostic sentinel");c->DrawData.GlassesIds[0]=glasses;}
  public void SetVisibility(CharaViewPortrait* v,bool head,bool weapon,bool visor) {v->PortraitCharacterData.HeadgearHidden=!head;v->PortraitCharacterData.WeaponHidden=!weapon;v->PortraitCharacterData.VisorClosed=visor;}
  public void HideEditor(AgentBannerEditor* e) {HideCalls++;OnHide?.Invoke();if(ReplaceOwnerOnHide){State->AgentBannerEditor=null;return;}if(!RefuseHide)e->EditorState=null;}
  public bool TryHideOriginalEditor(AgentBannerEditor* e,AgentBannerEditorState* state)

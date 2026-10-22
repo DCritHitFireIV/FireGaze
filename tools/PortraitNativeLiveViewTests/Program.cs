@@ -20,6 +20,8 @@ void Case(string name, Action action)
     catch (Exception error) { failures.Add(name + ": " + error.Message); Console.Error.WriteLine("FAIL: " + failures[^1]); }
 }
 
+NativeLiveLayoutCases.Run(Case, Check);
+
 Case("disabled and disposed view never acquires a native source", () =>
 {
     var source = new Source(); var view = new PortraitNativeLiveView(source);

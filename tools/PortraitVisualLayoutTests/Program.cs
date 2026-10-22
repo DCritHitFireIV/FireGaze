@@ -11,6 +11,9 @@ void Check(bool value, string name)
 }
 
 #if HAS_PRESENTATION
+var workspaceBounds = PortraitWindowLayout.ForViewport(new System.Numerics.Vector2(1600, 1000), 1f);
+Check(workspaceBounds.Preferred == new System.Numerics.Vector2(1120, 760), "workbench prefers 1120x760");
+Check(workspaceBounds.Minimum == new System.Numerics.Vector2(700, 540), "workbench minimum remains 700x540");
 foreach (var scale in new[] { 1f, 1.25f, 1.5f, 2f })
 foreach (var available in new[] { 350f, 540f, 668f, 900f, 1600f })
 {

@@ -62,11 +62,11 @@ foreach (var work in new[] { new Vector2(1920, 1080), new Vector2(1366, 768), ne
         "main editor preferred size stays between the logical bounds without applying scale twice");
 }
 var normalBounds = MainWindowBounds(new(1920, 1080), 1);
-Check(normalBounds.Preferred == new Vector2(920, 760) && normalBounds.Minimum == new Vector2(700, 540),
-    "a fitting work area preserves the familiar main editor defaults");
+Check(normalBounds.Preferred == new Vector2(1120, 760) && normalBounds.Minimum == new Vector2(700, 540),
+    "a fitting work area allows the approved workbench width while retaining its reachable minimum");
 var wideBounds = MainWindowBounds(new(3840, 2160), 2);
-Check(wideBounds.Preferred == new Vector2(920, 760) && wideBounds.Minimum == new Vector2(700, 540),
-    "two-times scale on a large display retains logical defaults for host scaling");
+Check(wideBounds.Preferred == new Vector2(1120, 760) && wideBounds.Minimum == new Vector2(700, 540),
+    "two-times scale on a large display retains the approved logical workbench width for host scaling");
 Console.WriteLine($"PortraitPopupLayoutTests: {passed} passed, 0 failed");
 
 static (Vector2 Preferred, Vector2 Minimum, Vector2 Maximum) MainWindowBounds(Vector2 work, float scale)

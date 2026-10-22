@@ -4,6 +4,7 @@
     <DefineConstants Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs')">$(DefineConstants);HAS_PORTRAIT_SESSION</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOpeningAvailability.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs" Link="PortraitPreviewSession.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewSession.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewMenuState.cs" Link="PortraitPreviewMenuState.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewMenuState.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitDesignManifest.cs" Link="PortraitDesignManifest.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitDesignManifest.cs')" />

@@ -90,5 +90,28 @@ foreach (var preview in new[] { false, true })
     Check(!receipt.Open("gearset", Guid.NewGuid().ToString("D"), () => calls++) && calls == 0,
         "background sampling retains preview and native save guard gates");
 }
+{
+    using var feature = new PortraitPreviewFeature();
+    feature.Before = feature.Before with { Conditions = PortraitPreviewFeature.Flags(45), SourceAddress = 0, Player = null };
+    feature.After = feature.Before;
+    var receipt = new PortraitEditorOpeningController(feature.Sample, () => 0, () => feature.OpeningIssues);
+    var calls = 0;
+    Check(!receipt.Open("plate", Guid.NewGuid().ToString("D"), () => calls++) && calls == 0 && NativeEditor.GetterCalls == 0
+        && receipt.ReadAvailability().Issues.Select(issue => issue.Code).SequenceEqual(new[] { "ChangingArea", "CharacterLoading" }),
+        "area transition retains specific player guidance even when the sampler refuses missing character roots");
+    var reads = feature.BoundaryReads; _ = receipt.ReadAvailability(); _ = receipt.ReadLastFailure();
+    Check(feature.BoundaryReads == reads, "opening messages and retained failure are detached from native sampling");
+}
+foreach (var cause in new[] { "Restoring", "RestoreFailed", "PhotosPending" })
+{
+    using var feature = new PortraitPreviewFeature();
+    if (cause == "RestoreFailed") feature.SetRestoreFailure();
+    else feature.SetBusy(cause == "Restoring" ? "plateClose" : "photosBusy");
+    var receipt = new PortraitEditorOpeningController(feature.Sample, () => 0, () => feature.OpeningIssues);
+    var calls = 0;
+    Check(!receipt.Open("plate", Guid.NewGuid().ToString("D"), () => calls++) && calls == 0
+        && receipt.ReadAvailability().Issues.Any(issue => issue.Code == cause),
+        "real native sampler distinguishes unfinished player operations: " + cause);
+}
 Console.WriteLine($"{passed} passed, {failed} failed");
 return failed == 0 ? 0 : 1;

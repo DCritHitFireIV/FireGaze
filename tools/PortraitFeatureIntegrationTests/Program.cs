@@ -15,6 +15,8 @@ unsafe class Program
         RaptureGearsetModule.Value=(RaptureGearsetModule*)NativeMemory.AllocZeroed((nuint)sizeof(RaptureGearsetModule));
         try
         {
+            PortraitStoragePlayerMessageCases.Run(root, Check);
+            PortraitActionOwnerCases.Run(root, Check);
             PortraitMenuRenderingCases.Run(root, Check);
             PortraitStorageObservationCases.Run(root, Check);
             PortraitHistoryPersistenceCases.Run(root, Check);
@@ -23,6 +25,7 @@ unsafe class Program
             PortraitOperationLabelTests.Run(root, Check);
             PortraitPlaybackHistoryTests.Run(root, Check);
             PortraitLibraryIntegrationTests.Run(root, Check);
+            PortraitPlayerFailureNoticeCases.Run(root, Check);
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"session-history.json")))
             {
                 feature.Sample();
@@ -185,16 +188,18 @@ unsafe class Program
                 Check(!feature.Store.FlushAsync().GetAwaiter().GetResult() && !string.IsNullOrWhiteSpace(feature.Store.PersistenceError),
                     "real background writer reports an unavailable destination without losing the accepted memory record");
                 feature.Sample(advanceMilliseconds:600);
-                Check(feature.HistoryStatus.Contains(feature.Store.PersistenceError!,StringComparison.Ordinal),
-                    "passive native polling publishes asynchronous history persistence failure without requiring another edit");
+                Check(feature.HistoryStatus.Contains("尚未保存",StringComparison.Ordinal)
+                    && !feature.HistoryStatus.Contains(feature.Store.PersistenceError!,StringComparison.Ordinal),
+                    "passive native polling explains an asynchronous write failure without displaying its technical detail");
                 var priorError=feature.Store.PersistenceError!;feature.RefreshRows();
                 Directory.Delete(blockedFile);
                 var recovered=feature.Native.Snapshot with {Composition=feature.Native.Snapshot.Composition with {CameraYaw=1}};
                 feature.Store.Record(feature.Key!.Value,recovered.ToJSON());
                 Check(feature.Store.FlushAsync().GetAwaiter().GetResult() && feature.Store.PersistenceError is null,
                     "real history writer can recover after its destination becomes writable");
-                Check(!feature.HistoryStatus.Contains(priorError,StringComparison.Ordinal),
-                    "completed writer recovery cannot reveal a persistence error cached by an earlier list refresh");
+                Check(!feature.HistoryStatus.Contains(priorError,StringComparison.Ordinal)
+                    && !feature.HistoryStatus.Contains("历史记录尚未保存",StringComparison.Ordinal),
+                    "completed writer recovery clears the friendly failure without revealing a cached technical error");
             }
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"validation.json")))
             {
@@ -221,8 +226,9 @@ unsafe class Program
                 feature.Native.LastError="fixture native apply refused";feature.Native.RejectApply=true;feature.Undo();
                 Check(feature.Store.CurrentRecordID(feature.Key.Value)==cursor && feature.Store.Count==count && !feature.CanRedo,
                     "native history apply refusal cannot move or append the real store cursor");
-                Check(feature.Native.Snapshot.Composition.CameraYaw==1 && feature.LastError=="fixture native apply refused",
-                    "failed native history restoration preserves editor content and surfaces the native error");
+                Check(feature.Native.Snapshot.Composition.CameraYaw==1 && feature.Native.LastError=="fixture native apply refused"
+                    && feature.StatusIsError && !feature.Status.Contains("fixture native apply refused"),
+                    "failed native history restoration preserves editor content and technical diagnostics while showing a player-safe notice");
             }
             using(var feature=new PortraitPreviewFeature(Path.Combine(root,"latest-look.json")))
             {

@@ -116,9 +116,13 @@ namespace FireGaze.PortraitPreview
         public void SetLiveCaptureScope(PortraitImageScope scope) => Scope = scope;
         public bool CanUndo => true;
         public bool CanRedo => true;
-        public int UndoCalls, RedoCalls, FavoriteCalls, SyncCalls, NativeLiveCalls;
+        public int UndoCalls, RedoCalls, FavoriteCalls, SyncCalls, NativeLiveCalls, CloseCalls;
+        public void ClosePreview() => CloseCalls++;
         public bool SyncPlate { get; private set; }
         public bool NativeLiveEnabled { get; set; }
+        public string Status { get; set; } = "";
+        public bool StatusIsError { get; set; }
+        public IReadOnlyList<string> SourceSummary => [];
         public void Undo() => UndoCalls++;
         public void Redo() => RedoCalls++;
         public void SaveFavorite(string name, IReadOnlyCollection<string> tags) => FavoriteCalls++;
@@ -126,7 +130,7 @@ namespace FireGaze.PortraitPreview
         public void SetNativeLiveEnabled(bool value) { NativeLiveEnabled = value; NativeLiveCalls++; }
         public PortraitNativeLiveBorrow? TryBorrowNativeLive() => NativeLiveEnabled ? new() : null;
     }
-    internal readonly record struct NativeLiveImage(nint Handle, float PixelWidth, float PixelHeight,
+    internal readonly record struct NativeLiveImage(nint Handle, int PixelWidth, int PixelHeight,
         Vector2 UV0, Vector2 UV1, uint Tint);
     internal sealed class PortraitNativeLiveBorrow : IDisposable
     {
@@ -140,11 +144,21 @@ namespace FireGaze.PortraitPreview
         private readonly PlacementModel feature = new();
         private PortraitEditorBounds? ownerBounds = null;
         private bool showLightingFit;
-        private bool showHistory, showFavorites, showGlamourPlates, showSpaceLight, showAnalysis, appearanceTab;
+        private bool showHistory, showFavorites, showGlamourPlates, appearanceTab, showDesignShowcase;
+        private bool showSpaceLight = false, showAnalysis = false;
         internal PlacementModel ModelForTest => feature;
+        internal bool DesignTaskForTest => showDesignShowcase;
         internal (bool History, bool Favorites, bool Templates, bool Space, bool Analysis, bool Beauty) ToolStateForTest
             => (showHistory, showFavorites, showGlamourPlates, showSpaceLight, showAnalysis, appearanceTab);
         internal void DrawHeaderForTest() => DrawWorkspaceHeader();
+        internal void DrawPortraitForTest() => DrawWorkspacePortrait();
+        internal void DrawSourceForTest() => DrawSourceRecords();
+        internal bool DrawFooterForTest()
+        {
+            var method = GetType().GetMethod("DrawWorkspaceFooter", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (method is null) return false;
+            method.Invoke(this, null); return true;
+        }
         internal void PrepareHistoryForTest() => PrepareHistoryWindow();
         internal void PrepareLightForTest() => PrepareLightWindow();
         internal void PrepareFitForTest() => PrepareLightingFitWindow();

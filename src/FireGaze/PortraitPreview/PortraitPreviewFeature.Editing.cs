@@ -40,7 +40,9 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public bool CanUndo => canUndo;
     public bool CanRedo => canRedo;
     public IReadOnlyList<PortraitHistoryListItem> History => historyRows;
-    public string HistoryStatus => historyWriteError ?? history.LoadError ?? history.PersistenceError
+    public string HistoryStatus => historyWriteError
+        ?? (history.LoadError is not null ? "历史记录暂时无法读取，原文件已保留。" : null)
+        ?? (history.PersistenceError is not null ? "历史记录尚未保存，请检查本地存储后重试。已有记录已保留。" : null)
         ?? (historyPersistence is { IsCompleted: false } ? "正在保存编辑记录…" : historyStatus);
     public IReadOnlyList<PortraitAppearanceGroup> AppearanceGroups => appearanceGroups;
     public IReadOnlyList<PortraitAppearanceGroup> OriginalAppearanceGroups
@@ -53,7 +55,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         observedEditor is not null,
         target.CanBlockSave,
         IsActive,
-        plateMirrorCloseError);
+        plateMirrorCloseError,
+        OpeningAvailability);
 
     public void OpenPlateEditor() => Mutate(() =>
     {
@@ -335,7 +338,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (before is null) return;
         HandleHistoryBatchResult(historyBatch.Flush());
         if (!appearance.TryChange(before.Customize, groupID, value, out var customized, out var reason)) { Error(reason); return; }
-        if (!target.ApplyEditorState(identity, before with { Customize = customized })) { Error(target.LastError ?? "暂时无法预览此美容选项，请稍后重试。"); return; }
+        if (!ApplyWithFailureNotice(() => target.ApplyEditorState(identity, before with { Customize = customized }),
+                "暂时无法预览此美容选项，请稍后重试。若画面异常，请结束预览。")) return;
         var selectedGroup = appearance.Build(customized).FirstOrDefault(group => group.ID == groupID);
         var selectedOption = selectedGroup?.Options.FirstOrDefault(option => option.Value == value);
         RecordDirectChange(selectedGroup is not null && selectedOption is not null
@@ -393,13 +397,15 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (!target.CanBlockSave) { Error("暂时无法阻止肖像保存，为避免保存临时外观，本次未恢复记录。请稍后重试。"); return; }
         if (!session.IsActive && !session.Open(identity)) { Error("肖像尚未加载完成，请稍后重试。"); return; }
         window.IsOpen = true;
-        if (!target.ApplyEditorState(identity, desired)) { Error(target.LastError ?? "恢复历史失败，当前肖像已保留。"); return; }
+        if (!ApplyWithFailureNotice(() => target.ApplyEditorState(identity, desired),
+                "恢复历史未完成，请稍后重试。若画面异常，请结束预览。")) return;
         var committed = kind == PortraitHistorySelectionKind.Restore ? history.CommitRestore(selected) : history.CommitNavigation(selected);
         if (committed.Status is not (PortraitHistoryWriteStatus.Added or PortraitHistoryWriteStatus.Duplicate))
         {
+            var beforeNotice = playerErrorRevision;
             _ = target.ApplyEditorState(identity, before);
             HandleHistoryResult(committed);
-            Error("未能保存这次恢复，已尝试还原本次操作。");
+            ReportFailureIfUnreported(beforeNotice, "未能保存这次恢复，已尝试还原本次操作。");
             return;
         }
         HandleHistoryResult(committed);
@@ -455,7 +461,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public void DrawContent()
     {
         var menu = MenuState;
-        ImGui.TextWrapped("试换装备、染色和外貌，在预览实际的本人铭牌效果。关闭预览后外观才会还原。");
+        ImGui.TextWrapped("试换装备、染色和外貌，立即查看自己的铭牌效果。结束预览后还原外观。");
 
         ImGui.Separator();
         ImGui.TextUnformatted("当前状态");
@@ -464,11 +470,32 @@ internal sealed unsafe partial class PortraitPreviewFeature
         {
             PortraitPreviewMenuStatus.Ready or PortraitPreviewMenuStatus.Active => UiHelpers.Good,
             PortraitPreviewMenuStatus.RestoreWarning => UiHelpers.Bad,
+            PortraitPreviewMenuStatus.TemporarilyUnavailable => UiHelpers.Warn,
             _ => UiHelpers.Muted,
         }, DescribeMenuStatus(menu.Status));
 
         if (menu.RestoreWarning is not null)
             ImGui.TextWrapped(menu.RestoreWarning);
+        if (!IsActive)
+        {
+            foreach (var issue in OpeningAvailability.Issues)
+            {
+                if (menu.RestoreWarning is not null && issue.Code is "RestoreFailed" or "Restoring") continue;
+                UiHelpers.ColoredWrapped(issue.Code switch
+                {
+                    "OpeningInProgress" or "EditorLoading" or "CharacterLoading" or "ChangingArea" or "WorldTravel"
+                        or "LoggingOut" or "Teleporting" or "Casting" or "Moving" or "Jumping" or "Restoring"
+                        or "PhotosPending" or "PreviousOperationPending" => UiHelpers.Muted,
+                    "RestoreFailed" or "SaveProtectionUnavailable" or "OpeningTimeout" or "EditorChanged"
+                        or "EditorDidNotOpen" or "OpeningRequestExpired" or "OpeningUnavailable" or "StateUnavailable" => UiHelpers.Bad,
+                    _ => UiHelpers.Warn,
+                }, issue.Message);
+            }
+            if (!OpeningAvailability.HasBlockers && (OpeningAvailability.Opening || OpeningAvailability.EditorAlreadyOpen))
+                ImGui.TextWrapped(OpeningAvailability.PrimaryMessage);
+        }
+
+        ImGui.TextWrapped("请勿在传送或切换区域时使用，请等加载结束并站稳。");
 
         ImGui.Spacing();
         using (UiHelpers.Disabled(!menu.CanOpenEditor))
@@ -521,6 +548,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         PortraitPreviewMenuStatus.Ready => "可启用预览",
         PortraitPreviewMenuStatus.Active => "预览进行中",
         PortraitPreviewMenuStatus.RestoreWarning => "还原异常",
+        PortraitPreviewMenuStatus.TemporarilyUnavailable => "暂时无法启用预览",
         _ => "状态未知",
     };
 }

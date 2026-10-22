@@ -4,6 +4,8 @@
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOpeningAvailability.Classification.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitOpeningAvailability.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewFeature.EditorOpening.Native.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitEditorOpeningReceipt.cs" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitSafetySnapshot.cs" />

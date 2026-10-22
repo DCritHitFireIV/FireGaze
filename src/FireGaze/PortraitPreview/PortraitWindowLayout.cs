@@ -11,6 +11,6 @@ internal static class PortraitWindowLayout
         // WindowHost multiplies these logical sizes by GlobalScale after PreDraw.
         var scale = float.IsFinite(globalScale) && globalScale >= .01f ? globalScale : 1f;
         var maximum = PortraitPopupLayout.MaximumSize(work, scale) / scale;
-        return new(Vector2.Min(new(920, 760), maximum), Vector2.Min(new(700, 540), maximum), maximum);
+        return new(Vector2.Min(new(1120, 760), maximum), Vector2.Min(new(700, 540), maximum), maximum);
     }
 }

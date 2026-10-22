@@ -14,6 +14,7 @@ namespace FireGaze.PortraitPreview;
 /// <summary>The window reads snapshots; the feature owns Framework-thread changes and editor identity checks.</summary>
 internal interface IPortraitPreviewViewModel
 {
+    PortraitOpeningAvailability OpeningAvailability => PortraitOpeningAvailability.Unavailable;
     bool SourceCensusBlocksOperations => false;
     bool IsActive { get; }
     PortraitLook? Current { get; }
@@ -143,7 +144,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         this.pluginInterface = pluginInterface;
         this.textures = textures;
         this.photos = photos;
-        Size = new Vector2(920, 760);
+        Size = new Vector2(1120, 760);
         SizeCondition = ImGuiCond.FirstUseEver;
         SizeConstraints = new WindowSizeConstraints { MinimumSize = new Vector2(700, 540) };
     }
@@ -207,51 +208,45 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             return;
         }
         DrawWorkspaceHeader();
-        DrawDesignShowcaseEntry();
+        var area = ImGui.GetContentRegionAvail();
+        var layout = PortraitWorkspaceLayout.For(area.X, area.Y, Scale);
+        var origin = ImGui.GetCursorScreenPos();
+        var selected = SelectedAppearanceGroup();
 
-        if (appearanceTab)
+        DrawWorkspaceRegion("###PortraitWorkspaceNavigation", origin, layout.Navigation, () =>
         {
-            DrawAppearance();
-            DrawHistoryPopup();
-            DrawLibraryPopups();
-            DrawDesignShowcaseWindow();
-            return;
-        }
-
-        var summaryHeight = ImGui.GetTextLineHeightWithSpacing() * 3.2f;
-        var mainHeight = Math.Max(220f * Scale, ImGui.GetContentRegionAvail().Y - summaryHeight);
-        var leftWidth = PortraitPreviewLayout.SideWidth(ImGui.GetContentRegionAvail().X, Scale);
-        ImGui.BeginChild("###PortraitEquipment", new Vector2(leftWidth, mainHeight), false);
-        DrawSlots(current);
-        ImGui.Separator();
-        DrawEquipmentControls(current);
-        ImGui.EndChild();
-        ImGui.SameLine();
-        ImGui.BeginChild("###PortraitOwnedBrowser", new Vector2(0, mainHeight), false);
-        DrawBrowser(current);
-        ImGui.EndChild();
-
-        if (ImGui.SmallButton("存储位置")) ImGui.OpenPopup("###PortraitSourceRecords");
-        var sourceStatus = feature.SourceSummary.Count == 0 ? "尚未读取来源记录" : "查看已读取的物品来源";
-        ContinueToolbar(ImGui.GetWindowPos().X + ImGui.GetWindowContentRegionMax().X,
-            ImGui.CalcTextSize(sourceStatus).X);
-        ImGui.TextUnformatted(sourceStatus);
-        var sourceWorkArea = ImGui.GetMainViewport().WorkSize;
-        ImGui.SetNextWindowSizeConstraints(Vector2.Zero, PortraitPopupLayout.MaximumSize(sourceWorkArea, Scale));
-        ImGui.SetNextWindowSize(PortraitPopupLayout.PreferredSize(new Vector2(540 * Scale, 0), sourceWorkArea, Scale), ImGuiCond.Appearing);
-        if (ImGui.BeginPopup("###PortraitSourceRecords"))
-        {
-            ImGui.TextUnformatted("物品来源");
+            ImGui.TextDisabled(showDesignShowcase ? "展示内容" : appearanceTab ? "美容类别" : "装备部位");
             ImGui.Separator();
-            foreach (var source in feature.SourceSummary) ImGui.TextWrapped(source);
-            if (feature.SourceSummary.Count == 0) ImGui.TextUnformatted("尚未读取物品。请先打开对应的背包、投影台或雇员背包。");
-            ImGui.EndPopup();
-        }
-        if (feature.StatusIsError && !string.IsNullOrWhiteSpace(feature.Status))
-            ImGui.TextWrapped(feature.Status);
+            if (showDesignShowcase) DrawDesignNavigation();
+            else if (appearanceTab) DrawAppearanceNavigation(selected);
+            else DrawSlots(current);
+        });
+        DrawWorkspaceRegion("###PortraitWorkspaceImage", origin, layout.Image, DrawWorkspacePortrait);
+        DrawWorkspaceRegion("###PortraitWorkspaceOptions", origin, layout.Options, () =>
+        {
+            if (showDesignShowcase) DrawDesignShowcaseContents();
+            else if (appearanceTab) DrawAppearanceOptions(selected);
+            else
+            {
+                if (ImGui.CollapsingHeader("染色与装备显示###PortraitEquipmentDetails", ImGuiTreeNodeFlags.DefaultOpen))
+                    DrawEquipmentControls(current);
+                ImGui.Separator();
+                DrawBrowser(current);
+                DrawSourceRecords();
+            }
+        });
+        ImGui.SetCursorScreenPos(origin + new Vector2(0, layout.BodyHeight + layout.Gap));
+        DrawWorkspaceFooter();
         DrawHistoryPopup();
         DrawLibraryPopups();
-        DrawDesignShowcaseWindow();
+    }
+
+    private static void DrawWorkspaceRegion(string id, Vector2 origin, PortraitWorkspaceRegion region, Action draw)
+    {
+        ImGui.SetCursorScreenPos(origin + new Vector2(region.X, region.Y));
+        ImGui.BeginChild(id, new Vector2(region.Width, region.Height), false);
+        try { draw(); }
+        finally { ImGui.EndChild(); }
     }
 
     private static float Scale => ImGui.GetFontSize() / 17f;
@@ -259,7 +254,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     private void DrawSlots(PortraitLook current)
     {
         var spacing = ImGui.GetStyle().ItemSpacing.X;
-        var size = Math.Min(70f * Scale, (ImGui.GetContentRegionAvail().X - spacing) * 0.5f);
+        var size = Math.Min(52f * Scale, (ImGui.GetContentRegionAvail().X - spacing) * 0.5f);
         for (var i = 0; i < Slots.Length; i++)
         {
             var slot = Slots[i];

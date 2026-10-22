@@ -22,10 +22,10 @@ internal static class FireGazePalette
     };
     private static readonly Colors Portrait = new()
     {
-        Window = Rgb(0xF7F8FA), Panel = Rgb(0xF7F8FA), Raised = Rgb(0xF3F5F7),
-        Hover = Rgb(0xE8E8E8), Selected = Rgb(0xD6E3EE), Text = Rgb(0x202A32),
-        Muted = Rgb(0x536370), Border = Rgb(0x697F90), Action = Rgb(0x3B5F7B),
-        ActionHover = Rgb(0x34546D), ActionActive = Rgb(0x294458), Focus = Rgb(0x365D7A),
+        Window = Rgb(0xF4F5F7), Panel = Rgb(0xFCFCFD), Raised = Rgb(0xFAFAFB),
+        Hover = Rgb(0xECECEC), Selected = Rgb(0xF2DDD9), Text = Rgb(0x292D32),
+        Muted = Rgb(0x59616B), Border = Rgb(0x747C86), Action = Rgb(0xBA4A40),
+        ActionHover = Rgb(0xA84037), ActionActive = Rgb(0x92382F), Focus = Rgb(0xA84037),
         BrandEmber = Rgb(0xD45A31), ChartRed = Rgb(0xA84450), ChartGreen = Rgb(0x326A4C),
         ChartBlue = Rgb(0x3D6482), Good = Rgb(0x3C614C), GoodText = Rgb(0x2F6247),
         Warn = Rgb(0x755420), Bad = Rgb(0x834C55), BadText = Rgb(0x8D3F4B),

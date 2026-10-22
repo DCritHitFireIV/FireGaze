@@ -20,82 +20,27 @@ internal sealed partial class PortraitPreviewWindow
 
     public PortraitDesignManifest DesignManifestForDiagnostics() => BuildDesignManifest();
 
-    /// <summary>Compact entry placed in the workspace toolbar; the full surface is a nearby dashboard.</summary>
-    private void DrawDesignShowcaseEntry()
+    private void DrawDesignNavigation()
     {
-        if (ImGui.SmallButton("造型展示###PortraitDesignShowcase")) showDesignShowcase = true;
-        if (ImGui.IsItemHovered() || ImGui.IsItemFocused())
-            ImGui.SetTooltip("把当前肖像的装备、染色和外貌整理成可分享的展示");
-    }
-
-    private void DrawDesignShowcaseWindow()
-    {
-        if (!showDesignShowcase || !feature.IsActive) return;
-        FireGazeWindowPlacement.Prepare("FireGazePortraitDesignShowcase", new Vector2(780 * Scale, 700 * Scale), Scale,
-            "FireGazePortraitPreview");
-        FireGazeWindowPlacement.Constrain(new Vector2(320, 420) * Scale,
-            new Vector2(float.MaxValue), Scale);
-        if (!FireGazeWindowPlacement.Begin("造型展示###FireGazePortraitDesignShowcase", ref showDesignShowcase,
-                "FireGazePortraitDesignShowcase")) { ImGui.End(); return; }
-
-        var manifest = BuildDesignManifest();
-        ImGui.PushStyleColor(ImGuiCol.Text, FireGazePalette.Action);
-        ImGui.TextUnformatted("FIREGAZE  /  当前造型");
-        ImGui.PopStyleColor();
-        ImGui.Spacing();
         if (FireGazeSymbols.NeutralButton("造型全览###PortraitDesignAll", selected: !showDesignList)) showDesignList = false;
-        ImGui.SameLine();
-        if (FireGazeSymbols.NeutralButton("设计清单###PortraitDesignListToggle", selected: showDesignList)) showDesignList = true;
-        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("只保留预览与实际穿着的差异，附带来源位置");
+        if (FireGazeSymbols.NeutralButton("只看差异###PortraitDesignListToggle", selected: showDesignList)) showDesignList = true;
+        if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("对比肖像预览与实际穿着，保留已确认的外观差异");
+        ImGui.Spacing();
+        ImGui.TextWrapped("装备、染色和外貌的来源会随展示项列出。");
         if (hiddenDesignRows.Count > 0)
         {
-            ContinueToolbar(ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X,
-                ImGui.CalcTextSize($"恢复隐藏 ({hiddenDesignRows.Count})").X + ImGui.GetStyle().FramePadding.X * 2);
-            if (ImGui.SmallButton($"恢复隐藏 ({hiddenDesignRows.Count})###PortraitDesignRestoreHidden")) hiddenDesignRows.Clear();
+            ImGui.Separator();
+            ImGui.TextWrapped($"已隐藏 {hiddenDesignRows.Count} 项");
+            if (ImGui.Button("恢复隐藏项###PortraitDesignRestoreHidden")) hiddenDesignRows.Clear();
         }
+    }
+
+    private void DrawDesignShowcaseContents()
+    {
+        var manifest = BuildDesignManifest();
+        ImGui.TextUnformatted(showDesignList ? "造型差异" : "当前造型");
+        ImGui.TextDisabled("预览与实际穿着 · 不改动角色装备");
         ImGui.Separator();
-
-        var available = ImGui.GetContentRegionAvail();
-        var split = available.X >= 620 * Scale;
-        var portraitWidth = split ? Math.Min(252 * Scale, available.X * .34f) : available.X;
-        var portraitHeight = split ? available.Y : Math.Max(150 * Scale, available.Y * .42f);
-        ImGui.BeginChild("###PortraitDesignImage", new Vector2(portraitWidth, portraitHeight), true);
-        var nativeLive = feature.NativeLiveEnabled;
-        if (!nativeLive)
-        {
-            var area = ImGui.GetContentRegionAvail();
-            var buttonSize = new Vector2(Math.Min(182 * Scale, area.X), ImGui.GetFrameHeight() * 1.2f);
-            ImGui.SetCursorPos(ImGui.GetCursorPos() + new Vector2(Math.Max(0, (area.X - buttonSize.X) * .5f),
-                Math.Max(0, (area.Y - buttonSize.Y) * .5f)));
-            UiHelpers.PushPrimaryButton();
-            try
-            {
-                if (ImGui.Button("显示铭牌画面###PortraitDesignShowImage", buttonSize)) feature.SetNativeLiveEnabled(true);
-            }
-            finally { UiHelpers.PopPrimaryButton(); }
-            if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("在造型旁显示游戏铭牌编辑器的实时画面");
-        }
-        else
-        {
-            if (ImGui.SmallButton("隐藏画面###PortraitDesignHideImage")) feature.SetNativeLiveEnabled(false);
-            using var portrait = feature.TryBorrowNativeLive();
-            if (portrait is not null && portrait.TryGetImage(out var live))
-            {
-                var imageArea = ImGui.GetContentRegionAvail();
-                var aspect = live.PixelWidth / (float)Math.Max(1, live.PixelHeight);
-                var width = Math.Min(Math.Max(1, imageArea.X - 16 * Scale), Math.Max(1, imageArea.Y - 16 * Scale) * aspect);
-                var height = width / Math.Max(.01f, aspect);
-                var offset = new Vector2(Math.Max(0, (imageArea.X - width) * .5f), Math.Max(0, (imageArea.Y - height) * .5f));
-                var origin = ImGui.GetCursorScreenPos() + offset;
-                ImGui.Dummy(imageArea);
-                ImGui.GetWindowDrawList().AddImage(live.Handle, origin, origin + new Vector2(width, height), live.UV0, live.UV1, live.Tint);
-            }
-            else ImGui.TextDisabled("正在等待铭牌画面…");
-        }
-        ImGui.EndChild();
-        if (split) ImGui.SameLine();
-
-        ImGui.BeginChild("###PortraitDesignRows", new Vector2(0, 0), false);
         var rows = (showDesignList ? manifest.Differences() : manifest.ForShowcase()).Items;
         if (showDesignList)
         {
@@ -121,8 +66,6 @@ internal sealed partial class PortraitPreviewWindow
             DrawDesignRow(row);
         }
         if (rows.Count > 0 && visibleCount == 0) ImGui.TextDisabled("已隐藏全部展示项，可在上方恢复。");
-        ImGui.EndChild();
-        ImGui.End();
     }
 
     private void DrawDesignRow(PortraitDesignEntry row)

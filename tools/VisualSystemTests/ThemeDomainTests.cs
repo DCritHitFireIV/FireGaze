@@ -136,8 +136,10 @@ internal static class ThemeDomainTests
                 $"{domain}: {role} remains visible on the actual input fills");
         var primary = UiHelpers.SemanticButtonColors(FireGazeButtonStyle.Primary, false);
         check(new[] { primary.Fill, primary.Hover, primary.Active, stack.Colors[ImGuiCol.CheckMark] }
-            .All(color => color.Z > color.Y && color.Y > color.X && Spread(color) < .35f),
-            $"{domain}: real primary and focus consumers use a restrained blue accent");
+            .All(color => FireGazePalette.CurrentDomain == FireGazeColorDomain.Portrait
+                ? color.X > color.Y && color.Y > color.Z && Spread(color) < .55f
+                : color.Z > color.Y && color.Y > color.X && Spread(color) < .35f),
+            $"{domain}: real primary and focus consumers use the domain's restrained accent");
         check(stack.Colors[ImGuiCol.Button] != primary.Fill && Luminance(stack.Colors[ImGuiCol.Button]) > .8,
             $"{domain}: ordinary controls keep the neutral work surface instead of using the primary accent everywhere");
         check(Contrast(stack.Colors[ImGuiCol.Border], stack.Colors[ImGuiCol.Header]) >= 3

@@ -6,79 +6,41 @@ internal static class PortraitWorkspaceToolbarCases
 {
     internal static void Run(Action<bool, string> check)
     {
-        // The preview window owns editing history and plate sync. Deferred spatial,
-        // image-analysis, lighting-fit and independent-scene entries stay hidden
-        // from this compact header until those features are ready for release.
-        var stableLabels = new[] { "↶###PortraitUndo", "↷###PortraitRedo", "历史记录", "收藏###PortraitFavoriteCurrent", "###PortraitFavoriteMenu",
-            "投影模板###PortraitPlateSwitcher", "铭牌同步预览", "装备###PortraitTab装备", "美容师###PortraitTab美容师" };
-        var deferredLabels = new[] { "空间参照", "画面分析", "灯光拟合", "独立人物空间" };
-        foreach (var (width, scale) in new[] { (900f, 1f), (260f, 1f), (450f, 1.5f), (700f, 2f), (900f, 2f) })
+        var headerLabels = new[] { "装备###PortraitTab装备", "美容师###PortraitTab美容师", "造型展示###PortraitTab造型展示",
+            "投影模板###PortraitPlateSwitcher", "收藏###PortraitFavoriteCurrent", "###PortraitFavoriteMenu" };
+        var footerLabels = new[] { "↶###PortraitUndo", "↷###PortraitRedo", "历史记录", "铭牌同步预览", "结束预览###PortraitEndPreview" };
+        foreach (var (width, scale) in new[] { (668f, 1f), (900f, 1f), (1120f, 1f), (1400f, 1.5f), (2240f, 2f) })
         {
             var window = new PortraitPreviewWindow();
             ImGui.ResetItems(width, scale);
             window.DrawHeaderForTest();
-            var items = ImGui.Items.ToArray();
-            ImGui.ItemRect Item(string label) => items.Single(item => item.Label == label);
-            var history = Item(stableLabels[2]); var undo = Item(stableLabels[0]); var redo = Item(stableLabels[1]);
-            var plate = Item(stableLabels[5]); var sync = Item(stableLabels[6]);
-            var equipment = Item(stableLabels[7]); var beauty = Item(stableLabels[8]);
-            var tag = $"{width}px/{scale:0.#}x";
-            check(history.Minimum.Y == undo.Minimum.Y && undo.Minimum.Y == redo.Minimum.Y
-                && history.Maximum.X <= undo.Minimum.X,
-                $"{tag}: history and glyph actions share one compact header row with actions on the right");
-            var favorite = Item(stableLabels[3]); var favoriteMenu = Item(stableLabels[4]);
-            check(favorite.Minimum.Y == history.Minimum.Y && favoriteMenu.Minimum.Y == history.Minimum.Y
-                && favoriteMenu.Maximum.X < undo.Minimum.X,
-                $"{tag}: history and favorites share the left group before the right-aligned glyph actions");
-            check(plate.Minimum.Y == sync.Minimum.Y && plate.Maximum.X < sync.Minimum.X,
-                $"{tag}: actual template and sync draw remain one atomic group");
-            check(equipment.Minimum.Y == beauty.Minimum.Y,
-                $"{tag}: equipment and beautician subtabs remain one row");
-            check(equipment.Minimum.Y > Math.Max(plate.Maximum.Y, sync.Maximum.Y),
-                $"{tag}: appearance subtabs remain below the editing and library controls");
-            check(deferredLabels.All(label => items.All(item => item.Label != label)),
-                $"{tag}: deferred spatial, analysis, lighting and 3D entries stay hidden");
-            check(items.Where(item => stableLabels.Contains(item.Label)).All(item => item.Minimum.X >= 100
-                && item.Maximum.X <= 100 + width + .01f),
-                $"{tag}: actual controls fit the available content width");
-            check(stableLabels.All(label => items.Count(item => item.Label == label) == 1)
-                && Item("↶###PortraitUndo").ID == "PortraitEditingToolbar/↶###PortraitUndo"
-                && sync.ID == "PortraitEditingToolbar/铭牌同步预览"
-                && plate.ID == "投影模板###PortraitPlateSwitcher",
-                $"{tag}: labels and stable widget IDs are preserved exactly once");
-
-            window.ModelForTest.NativeLiveEnabled = true;
+            var header = ImGui.Items.ToArray();
+            var tag = $"{width}px/{scale}x";
+            check(headerLabels.All(label => header.Count(item => item.Label == label) == 1),
+                tag + ": top navigation exposes all three tasks templates and favorites once");
+            check(footerLabels.All(label => header.All(item => item.Label != label)),
+                tag + ": editing actions belong to the fixed footer");
+            check(header.All(item => item.Minimum.X >= 100 && item.Maximum.X <= 100 + width + .02f),
+                tag + ": top actions fit available width");
             ImGui.ResetItems(width, scale);
-            window.DrawHeaderForTest();
-            var withImage = ImGui.Items.ToArray();
-            check(stableLabels.All(label =>
-            {
-                var before = Item(label); var after = withImage.Single(item => item.Label == label);
-                return before.Minimum == after.Minimum && before.Maximum == after.Maximum;
-            }), $"{tag}: enabling optional imagery never displaces stable toolbar controls or subtabs");
-            var toggle = withImage.Single(item => item.Label == "实时铭牌画面");
-            var image = withImage.Single(item => item.Label == "###draw-image");
-            check(toggle.Minimum.Y > equipment.Maximum.Y && image.Minimum.Y > toggle.Maximum.Y,
-                $"{tag}: native-image toggle is adjacent to its image below the stable tool tiers");
+            var hasFooter = window.DrawFooterForTest();
+            check(hasFooter, tag + ": workspace draws its fixed footer");
+            if (!hasFooter) continue;
+            var footer = ImGui.Items.ToArray();
+            check(footerLabels.All(label => footer.Count(item => item.Label == label) == 1),
+                tag + ": every editing and restoration action remains visible once");
+            check(footer.All(item => item.Minimum.X >= 100 && item.Maximum.X <= 100 + width + .02f),
+                tag + ": fixed editing actions stay inside available width");
+            var rows = footer.Where(item => footerLabels.Contains(item.Label)).Select(item => item.Minimum.Y).Distinct().Count();
+            check(rows == (width / scale < 980 ? 2 : 1), tag + ": narrow footer uses two visible rows");
+            check(new[] { "空间参照", "画面分析", "灯光拟合", "独立人物空间" }.All(label => header.Concat(footer).All(item => item.Label != label)),
+                tag + ": deferred tools remain hidden");
         }
-
-        foreach (var scale in new[] { 1f, 2f })
+        foreach (var click in headerLabels.Concat(footerLabels).Concat(["我的收藏"]))
         {
             var window = new PortraitPreviewWindow();
-            window.ModelForTest.NativeLiveEnabled = true;
-            ImGui.ResetItems(900 * scale, scale, contentHeight: 650 * scale);
-            window.DrawHeaderForTest();
-            var image = ImGui.Items.Single(item => item.Label == "###draw-image");
-            check(image.Maximum.Y - image.Minimum.Y <= 180 * scale + .01f
-                && image.Maximum.Y <= 100 + 650 * scale - 300 * scale + .01f,
-                $"{scale}x: optional native picture leaves room for equipment and source actions");
-        }
-
-        foreach (var click in stableLabels.Concat(["实时铭牌画面", "我的收藏"]))
-        {
-            var window = new PortraitPreviewWindow();
-            ImGui.ResetItems(900, 1, click);
-            window.DrawHeaderForTest();
+            ImGui.ResetItems(1120, 1, click);
+            window.DrawHeaderForTest(); window.DrawFooterForTest();
             var model = window.ModelForTest; var state = window.ToolStateForTest;
             var expected = click switch
             {
@@ -89,17 +51,40 @@ internal static class PortraitWorkspaceToolbarCases
                 "###PortraitFavoriteMenu" => ImGui.OpenedPopups.SequenceEqual(["###PortraitFavoriteActions"]),
                 "投影模板###PortraitPlateSwitcher" => state.Templates,
                 "铭牌同步预览" => model.SyncCalls == 1 && model.SyncPlate,
+                "结束预览###PortraitEndPreview" => model.CloseCalls == 1,
                 "装备###PortraitTab装备" => !state.Beauty,
                 "美容师###PortraitTab美容师" => state.Beauty,
-                "实时铭牌画面" => model.NativeLiveCalls == 1 && model.NativeLiveEnabled,
+                "造型展示###PortraitTab造型展示" => window.DesignTaskForTest,
                 "我的收藏" => state.Favorites,
                 _ => false,
             };
-            check(expected && ImGui.ConsumedClicks == 1, $"actual {click} control keeps its original once-only action");
-            check(model.UndoCalls + model.RedoCalls + model.FavoriteCalls + model.SyncCalls + model.NativeLiveCalls
-                == (click is "↶###PortraitUndo" or "↷###PortraitRedo" or "收藏###PortraitFavoriteCurrent" or "铭牌同步预览" or "实时铭牌画面" ? 1 : 0),
-                $"actual {click} control does not invoke unrelated view-model routes");
+            check(expected && ImGui.ConsumedClicks == 1, $"actual {click} control invokes its intended route once");
+            check(model.UndoCalls + model.RedoCalls + model.FavoriteCalls + model.SyncCalls + model.CloseCalls
+                == (click is "↶###PortraitUndo" or "↷###PortraitRedo" or "收藏###PortraitFavoriteCurrent" or "铭牌同步预览" or "结束预览###PortraitEndPreview" ? 1 : 0),
+                $"actual {click} control does not invoke unrelated mutations");
         }
+        foreach (var isError in new[] { false, true })
+        foreach (var liveImage in new[] { false, true })
+        {
+            var window = new PortraitPreviewWindow();
+            window.ModelForTest.Status = "临时外观尚未还原，请等待加载后重试。";
+            window.ModelForTest.StatusIsError = isError;
+            window.ModelForTest.NativeLiveEnabled = liveImage;
+            ImGui.ResetItems(320, 1, contentHeight: 160);
+            window.DrawPortraitForTest();
+            check(ImGui.Items.Any(item => item.Label == window.ModelForTest.Status),
+                "portrait surface keeps the latest player status visible with or without its native image");
+            check(ImGui.PushedColors.Contains((ImGuiCol.Text, isError ? FireGaze.UI.FireGazePalette.BadText : FireGaze.UI.FireGazePalette.Muted)),
+                "persistent status distinguishes a failure from an informational state");
+            check(window.ModelForTest.NativeLiveCalls == 0 && window.ModelForTest.CloseCalls == 0,
+                "rendering persistent status does not repeat a player operation");
+        }
+        ImGui.CurrentViewport = ImGui.Known[3];
+        var sourceWindow = new PortraitPreviewWindow();
+        sourceWindow.DrawSourceForTest();
+        check(ImGui.Maximum == new Vector2(776, 576),
+            "source popup constraints follow the current 800x600 secondary viewport");
+        ImGui.CurrentViewport = ImGui.Main;
         ImGui.ResetItems(900, 1);
     }
 }
@@ -107,7 +92,7 @@ internal static class PortraitWorkspaceToolbarCases
 namespace Dalamud.Bindings.ImGui
 {
     internal enum ImGuiDir { Down }
-    internal enum ImGuiCol { Button, ButtonHovered, ButtonActive }
+    internal enum ImGuiCol { Button, ButtonHovered, ButtonActive, Text }
     internal enum ImDrawFlags { None }
     internal static partial class ImGui
     {
@@ -116,6 +101,7 @@ namespace Dalamud.Bindings.ImGui
         { internal Vector2 Start = start, Minimum = new(float.PositiveInfinity), Maximum = new(float.NegativeInfinity); }
         internal static readonly List<ItemRect> Items = [];
         internal static readonly List<string> OpenedPopups = [];
+        internal static readonly List<(ImGuiCol Role, Vector4 Value)> PushedColors = [];
         private static readonly Stack<string> IDs = [];
         private static readonly Stack<Group> Groups = [];
         private static Vector2 cursor, contentSize = new(900, 1200), itemMin, itemMax;
@@ -127,7 +113,7 @@ namespace Dalamud.Bindings.ImGui
         {
             Position = new(100, 100); cursor = Position; contentSize = new(width, contentHeight);
             FontScale = scale; rowBottom = 100; itemMin = itemMax = cursor;
-            Items.Clear(); OpenedPopups.Clear(); IDs.Clear(); Groups.Clear();
+            Items.Clear(); OpenedPopups.Clear(); PushedColors.Clear(); IDs.Clear(); Groups.Clear();
             click = nextClick; DisabledDepth = ConsumedClicks = 0;
         }
         public static Vector2 GetCursorScreenPos() => cursor;
@@ -159,10 +145,13 @@ namespace Dalamud.Bindings.ImGui
         }
         public static bool ArrowButton(string label, ImGuiDir direction) => Button(label, new(GetFrameHeight()));
         public static void TextDisabled(string label) => Submit(label, CalcTextSize(label));
+        public static void TextUnformatted(string label) => Submit(label, CalcTextSize(label));
+        public static void TextWrapped(string label) => Submit(label, new(MathF.Min(GetContentRegionAvail().X, CalcTextSize(label).X), GetFontSize()));
+        public static bool SmallButton(string label) => Button(label, Vector2.Zero);
         public static bool IsItemHovered() => false;
         public static bool IsItemFocused() => false;
         public static void SetTooltip(string label) { }
-        public static void PushStyleColor(ImGuiCol color, Vector4 value) { }
+        public static void PushStyleColor(ImGuiCol color, Vector4 value) => PushedColors.Add((color, value));
         public static void PopStyleColor(int count = 1) { }
         public static void OpenPopup(string label) => OpenedPopups.Add(label);
         public static bool BeginPopup(string label) => OpenedPopups.Contains(label) || click == "我的收藏";

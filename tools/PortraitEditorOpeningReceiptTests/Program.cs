@@ -12,6 +12,7 @@ internal static class Tests
     public static int Run()
     {
         using var output = Console.Out;
+        OpeningAvailabilityCases.Run(Check);
         {
             var f=new Fixture();
             Check(f.Calls==0 && f.Reads==0,"construction is offline");

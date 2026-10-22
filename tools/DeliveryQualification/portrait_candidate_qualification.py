@@ -47,6 +47,11 @@ def qualify(repo, full_report, version, read_pe=read_pe_metadata):
             and report.get('deployedUnchanged') is True and bool(current)
             and report.get('inputBefore') == report.get('inputAfter') == current,
             'Fresh successful complete gate and unchanged real inputs required')
+    require(report.get('externalFilesUnchanged') is True
+            and isinstance(report.get('externalFilesBefore'), dict)
+            and bool(report['externalFilesBefore'])
+            and report['externalFilesBefore'] == report.get('externalFilesAfter'),
+            'Unchanged real CN client and SDK evidence required')
     projects = sorted(path.stem for path in (repo/'tools').glob('*Tests/*Tests.csproj'))
     executed = re.findall(r'^Running offline suite: (\S+)\s*$', log, re.MULTILINE)
     summaries = re.findall(r'^Offline validation finished: (\d+) suites; skipped: (.*?)\.\s*$', log, re.MULTILINE)

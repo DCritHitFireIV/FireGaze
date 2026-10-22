@@ -8,6 +8,26 @@ internal static class NativeLiveControllerCases
         test("live controller never auto-acquires before an explicit bound enable", () =>
             check(false, "missing explicit identity-bound controller; the raw view retries after acquisition failure and source invalidation"));
 #else
+        test("each preview session starts its image once and never retries a failed start automatically", () =>
+        {
+            var source = new Source(); var reads = 0; var context = Ready() with { CapturesDrained = false };
+            using var controller = new PortraitNativeLiveController(source, () => { reads++; return context; });
+            check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor), "busy initial session cannot start the image");
+            context = Ready();
+            check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor) && reads == 1,
+                "later idle frames do not silently retry the consumed session start");
+            check(controller.TryEnable(Source.KeyA.Editor), "the player can explicitly retry after readiness recovers");
+            controller.Update();
+            check(controller.TryBorrow(out var old), "manual retry publishes this session image");
+            check(controller.TryStartSessionOnce(2, Source.KeyA.Editor), "a fresh preview session gets one new start");
+            check(!old!.TryGetImage(out _) && !controller.TryBorrow(out _), "fresh start cannot reuse the previous session frame");
+            old.Dispose();
+            controller.Stop(PortraitNativeLiveStopReason.UserClosed);
+            var before = reads;
+            check(!controller.TryStartSessionOnce(2, Source.KeyA.Editor) && reads == before,
+                "closing or invalidating a session does not grant another automatic attempt");
+            check(!controller.TryStartSessionOnce(0, Source.KeyA.Editor), "no preview session cannot start an image");
+        });
         test("controller construction and disabled updates do not read context or native source", () =>
         {
             var source = new Source(); var reads = 0;

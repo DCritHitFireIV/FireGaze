@@ -7,6 +7,7 @@ internal enum PortraitPreviewMenuStatus
     Ready,
     Active,
     RestoreWarning,
+    TemporarilyUnavailable,
 }
 
 internal readonly record struct PortraitPreviewMenuState(
@@ -21,16 +22,20 @@ internal readonly record struct PortraitPreviewMenuState(
         bool hasIdentity,
         bool canBlockSave,
         bool active,
-        string? restoreWarning)
+        string? restoreWarning,
+        PortraitOpeningAvailability? availability = null)
     {
+        var canOpen = availability?.CanOpenEditor ?? true;
         if (!string.IsNullOrWhiteSpace(restoreWarning))
-            return new(PortraitPreviewMenuStatus.RestoreWarning, !active, false, active, restoreWarning);
+            return new(PortraitPreviewMenuStatus.RestoreWarning, false, false, active, restoreWarning);
         if (active)
             return new(PortraitPreviewMenuStatus.Active, false, false, true, null);
         if (!editorAvailable)
-            return new(PortraitPreviewMenuStatus.EditorUnavailable, true, false, false, null);
+            return new(PortraitPreviewMenuStatus.EditorUnavailable, canOpen, false, false, null);
         if (!hasIdentity || !canBlockSave)
-            return new(PortraitPreviewMenuStatus.Loading, true, false, false, null);
-        return new(PortraitPreviewMenuStatus.Ready, true, true, false, null);
+            return new(PortraitPreviewMenuStatus.Loading, canOpen, false, false, null);
+        var canPreview = availability is null || availability.EditorAlreadyOpen && !availability.HasBlockers && !availability.Opening;
+        return new(canPreview ? PortraitPreviewMenuStatus.Ready : PortraitPreviewMenuStatus.TemporarilyUnavailable,
+            canOpen, canPreview, false, null);
     }
 }

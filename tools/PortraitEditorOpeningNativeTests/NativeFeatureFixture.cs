@@ -65,6 +65,7 @@ namespace FireGaze.PortraitPreview
         private readonly OpeningLive nativeLiveController = new();
         private readonly OpeningWindow window = new();
         private bool SourceCensusBlocksOperations, NativeLiveEnabled, LightingFitMutationBlocked, plateMirrorClosePending;
+        private string? plateMirrorCloseError;
         private readonly nint agent, state, view, gearsets;
         internal PortraitSafetyBoundary Before, After;
         internal OpeningCharacter? Character = new(77, 88);
@@ -89,6 +90,8 @@ namespace FireGaze.PortraitPreview
         internal static int[] Flags(params int[] active) => Enumerable.Range(0, 112).Select(index => active.Contains(index) ? 1 : 0).ToArray();
         private OpeningCharacter? CurrentCharacter() => Character;
         internal PortraitEditorOpeningSample? Sample() { BoundaryReads = 0; return ReadEditorOpeningSample(); }
+        internal IReadOnlyList<PortraitOpeningIssue> OpeningIssues => ReadEditorOpeningIssues();
+        internal void SetRestoreFailure() { plateMirrorClosePending = true; plateMirrorCloseError = "fixture restore failure"; }
         internal void SetFocus(int? focus) { Before = Before with { FocusByte = focus }; After = Before; }
         internal void SetDisposed() => disposed = true;
         internal void SetBusy(string name)

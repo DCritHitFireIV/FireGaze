@@ -10,5 +10,7 @@
   <ItemGroup>
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPreviewPresentation.cs" Link="PortraitPreviewPresentation.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitPreviewPresentation.cs')" />
     <Compile Include="../../src/FireGaze/PortraitPreview/PortraitHistoryPhotoLayout.cs" Link="PortraitHistoryPhotoLayout.cs" Condition="Exists('../../src/FireGaze/PortraitPreview/PortraitHistoryPhotoLayout.cs')" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitWindowLayout.cs" Link="PortraitWindowLayout.cs" />
+    <Compile Include="../../src/FireGaze/PortraitPreview/PortraitPopupLayout.cs" Link="PortraitPopupLayout.cs" />
   </ItemGroup>
 </Project>

@@ -34,6 +34,7 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
     private PortraitIdentity identity;
     private PortraitLook? original;
     public bool IsActive => original is not null;
+    public long Revision { get; private set; }
     public PortraitLook? Current { get; private set; }
     /// <summary>Entry wardrobe captured when the preview lease opened.</summary>
     public PortraitLook? Original => original?.Copy();
@@ -48,6 +49,7 @@ internal sealed class PortraitPreviewSession(IPortraitPreviewTarget target)
         identity = requested;
         original = captured.Copy();
         Current = captured.Copy();
+        Revision++;
         return true;
     }
 

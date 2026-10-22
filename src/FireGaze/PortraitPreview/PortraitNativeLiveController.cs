@@ -28,6 +28,7 @@ internal sealed class PortraitNativeLiveController : IDisposable
     private bool disposed;
     private long revision;
     private PortraitNativeLiveStopReason stopReason;
+    private long startedSessionRevision;
 
     public PortraitNativeLiveController(IPortraitNativeLiveSource source, Func<PortraitNativeLiveContext> readContext)
     {
@@ -38,6 +39,16 @@ internal sealed class PortraitNativeLiveController : IDisposable
     }
 
     public bool IsEnabled { get { lock (gate) return enabled; } }
+    /// <summary>One attempt per preview lease. Failure remains stopped until a player retries.</summary>
+    public bool TryStartSessionOnce(long sessionRevision, PortraitIdentity requested)
+    {
+        lock (gate)
+        {
+            if (disposed || sessionRevision <= startedSessionRevision) return false;
+            startedSessionRevision = sessionRevision;
+        }
+        return TryEnable(requested);
+    }
     public PortraitNativeLiveStopReason StopReason { get { lock (gate) return stopReason; } }
 
     public bool TryEnable(PortraitIdentity requested)

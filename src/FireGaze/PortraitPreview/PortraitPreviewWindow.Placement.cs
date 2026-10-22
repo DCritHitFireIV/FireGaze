@@ -15,7 +15,7 @@ internal sealed partial class PortraitPreviewWindow
         var scale = ImGuiHelpers.GlobalScale;
         NearbyWindowBounds? anchor = ownerBounds is { } owner
             ? new NearbyWindowBounds(ImGui.GetMainViewport().Pos + new Vector2(owner.X, owner.Y), new(owner.Width, owner.Height)) : null;
-        var placement = FireGazeWindowPlacement.Prepare("FireGazePortraitPreview", new Vector2(920, 760) * scale, scale, "FireGaze", anchor);
+        var placement = FireGazeWindowPlacement.Prepare("FireGazePortraitPreview", new Vector2(1120, 760) * scale, scale, "FireGaze", anchor);
         var bounds = PortraitWindowLayout.ForViewport(FireGazeWindowPlacement.PreparedWorkSize, scale);
         Size = placement.Size / scale;
         SizeCondition = ImGuiCond.Appearing;

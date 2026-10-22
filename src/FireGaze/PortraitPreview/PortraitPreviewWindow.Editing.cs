@@ -176,19 +176,18 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.EndTooltip();
     }
 
-    private void DrawAppearance()
+    private PortraitAppearanceGroup? SelectedAppearanceGroup()
     {
+        var selected = feature.AppearanceGroups.FirstOrDefault(group => group.ID == selectedAppearance)
+            ?? feature.AppearanceGroups.FirstOrDefault();
+        if (selected is not null) selectedAppearance = selected.ID;
+        return selected;
+    }
+
+    private void DrawAppearanceNavigation(PortraitAppearanceGroup? selected)
+    {
+        if (selected is null) { ImGui.TextWrapped("正在读取美容师选项…"); return; }
         var groups = feature.AppearanceGroups;
-        var selected = groups.FirstOrDefault(group => group.ID == selectedAppearance) ?? groups.FirstOrDefault();
-        if (selected is null)
-        {
-            ImGui.TextWrapped("等待当前角色的美容师选项加载。");
-            return;
-        }
-        selectedAppearance = selected.ID;
-        var height = Math.Max(220 * Scale, ImGui.GetContentRegionAvail().Y - ImGui.GetTextLineHeightWithSpacing() * 2);
-        var sideWidth = PortraitPreviewLayout.SideWidth(ImGui.GetContentRegionAvail().X, Scale);
-        ImGui.BeginChild("###PortraitAppearanceGroups", new Vector2(sideWidth, height), true);
         var categoryEdge = PortraitPreviewLayout.GridEdge((ImGui.GetContentRegionAvail().X - ImGui.GetStyle().ItemSpacing.X) * .5f, 80 * Scale);
         for (var i = 0; i < groups.Count; i++)
         {
@@ -209,9 +208,11 @@ internal sealed partial class PortraitPreviewWindow
             ImGui.EndGroup();
             ImGui.PopID();
         }
-        ImGui.EndChild();
-        ImGui.SameLine();
-        ImGui.BeginChild("###PortraitAppearanceOptions", new Vector2(0, height), true);
+    }
+
+    private void DrawAppearanceOptions(PortraitAppearanceGroup? selected)
+    {
+        if (selected is null) { ImGui.TextWrapped("等待当前角色的美容师选项加载。"); return; }
         ImGui.TextUnformatted(selected.Label);
         if (!string.IsNullOrWhiteSpace(selected.Description)) ImGui.TextWrapped(selected.Description);
         ImGui.Separator();
@@ -249,9 +250,6 @@ internal sealed partial class PortraitPreviewWindow
             ImGui.TextWrapped(inspected.Name);
             if (!inspected.Available) ImGui.TextWrapped(string.IsNullOrWhiteSpace(inspected.Reason) ? "当前角色无法预览此选项。" : inspected.Reason);
         }
-        ImGui.EndChild();
-        if (feature.StatusIsError && !string.IsNullOrWhiteSpace(feature.Status))
-            ImGui.TextWrapped(feature.Status);
     }
 
     private bool DrawAppearanceOption(string id, PortraitAppearanceOption? option, float size, bool selected)

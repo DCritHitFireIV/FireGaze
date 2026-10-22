@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FireGaze.PortraitPreview;
 
-/// <summary>Explicit, acquire-only stage A view of the editor's existing portrait target.</summary>
+/// <summary>Acquire-only view of the editor target; starts once per preview lease.</summary>
 internal sealed unsafe partial class PortraitPreviewFeature
 {
     private PortraitNativeLiveNodeSource? nativeLiveSource;
@@ -56,6 +56,15 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     private void UpdateNativeLive()
     {
+        if (!session.IsActive)
+        {
+            if (nativeLiveRequested || nativeLiveController?.IsEnabled == true)
+                StopNativeLive(PortraitNativeLiveStopReason.UserClosed);
+            return;
+        }
+        if (target.TryResolve(out var identity, out _, out _) && !SourceCensusBlocksOperations
+            && nativeLiveController?.TryStartSessionOnce(session.Revision, identity) == true)
+            nativeLiveRequested = true;
         if (!nativeLiveRequested) return;
         nativeLiveController?.Update();
         if (nativeLiveController?.IsEnabled != true) nativeLiveRequested = false;

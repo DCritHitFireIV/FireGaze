@@ -158,6 +158,9 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
     }
 
     public bool Apply(PortraitIdentity identity, PortraitLook look)
+        => Apply(identity, look, reportFailure: true);
+
+    private bool Apply(PortraitIdentity identity, PortraitLook look, bool reportFailure)
     {
         if (look.Pieces.Length != 13 || look.Pieces[12].ItemID > ushort.MaxValue || !IsCurrent(identity)) return false;
         var view = (CharaViewPortrait*)identity.Model;
@@ -219,7 +222,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
                 }
             }
             catch (Exception rollbackError) { LastError += "；外观还原失败：" + rollbackError.Message; }
-            error(LastError);
+            if (reportFailure) error("本次装备预览未能更新，请稍后重试；若仍异常，请结束预览后重新打开铭牌。");
             return false;
         }
     }
@@ -425,7 +428,7 @@ internal sealed unsafe partial class NativePortraitTarget : IPortraitPreviewTarg
         if (!PlateMirrorDisposalRestored) return;
         PlateMirrorDisposalRestored = false;
         LastError = message;
-        try { error(message); }
+        try { error("本地铭牌预览未能完全还原，请关闭后重新打开铭牌。"); }
         catch { /* Native resources must still be released if the unload notice cannot display. */ }
     }
 

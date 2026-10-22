@@ -6,13 +6,35 @@ namespace FireGaze.PortraitPreview;
 
 internal sealed unsafe partial class PortraitPreviewFeature
 {
+    private IReadOnlyList<PortraitOpeningIssue> openingNativeIssues = [];
+    private IReadOnlyList<PortraitOpeningIssue> ReadEditorOpeningIssues() => openingNativeIssues;
+
     private PortraitEditorOpeningSample? ReadEditorOpeningSample()
     {
-        if (disposed || !Plugin.Framework.IsInFrameworkUpdateThread) return null;
+        openingNativeIssues = [];
+        if (disposed || !Plugin.Framework.IsInFrameworkUpdateThread)
+        { openingNativeIssues = [PortraitOpeningAvailability.Issue("StateUnavailable")]; return null; }
         try
         {
             var source = new SafetySnapshotSource(this);
             var before = source.ReadBoundary();
+            var observedIssues = PortraitOpeningAvailability.ConditionIssues(before.Conditions,
+                before.EditorState > 0 || before.EditorView > 0).ToList();
+            void AddIssue(string code) => observedIssues.Add(PortraitOpeningAvailability.Issue(code));
+            if (!target.CanBlockSave) AddIssue("SaveProtectionUnavailable");
+            if (plateMirrorClosePending) AddIssue(string.IsNullOrWhiteSpace(plateMirrorCloseError) ? "Restoring" : "RestoreFailed");
+            if (photos.IsBusy || !photos.IsPhysicallyIdle) AddIssue("PhotosPending");
+            if (before.Player is not { } boundaryPlayer || before.SourceAddress <= 0 || before.SourceGeneration == 0 || CurrentCharacter() is null)
+                AddIssue("CharacterLoading");
+            else
+            {
+                if (boundaryPlayer.CurrentHP == 0) AddIssue("Unconscious");
+                if (boundaryPlayer.InCombat == true) AddIssue("InCombat");
+                if (boundaryPlayer.IsCasting == true || boundaryPlayer.CastActionID is > 0)
+                    AddIssue(boundaryPlayer.CastActionID == 5 ? "Teleporting" : "Casting");
+                if (boundaryPlayer.IsMoving == true) AddIssue("Moving");
+            }
+            openingNativeIssues = Array.AsReadOnly(observedIssues.ToArray());
             // This SDK byte also reflects DirectInput acquisition. Both known states are
             // usable; SameOpeningBoundary still requires the exact same second reading.
             if (before.FrameworkAddress <= 0 || before.Frame is not { } frame || before.FocusByte is not (0 or 1)
@@ -61,7 +83,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
                     player.JobID, player.X, player.Y, player.Z, player.CurrentHP, combat, moving, casting, cast),
                 flags.ToArray(), session.IsActive, target.CanBlockSave, idle, ready);
         }
-        catch (Exception) { return null; }
+        catch (Exception)
+        {
+            openingNativeIssues = Array.AsReadOnly(openingNativeIssues.Append(PortraitOpeningAvailability.Issue("StateUnavailable")).ToArray());
+            return null;
+        }
     }
 
     private static bool SameOpeningBoundary(PortraitSafetyBoundary first, PortraitSafetyBoundary second)
