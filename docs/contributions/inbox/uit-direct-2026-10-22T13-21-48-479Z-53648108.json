@@ -1,1 +1,37 @@
-{"type":"uit-contribution","plugin":"LazyGatherer","kinds":["free"],"entries":[{"Original":"Open the configuration","Translated":"打开配置","Context":"LazyGathererPlugin..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"},{"Original":"Displays GP alert configuration.\n/gpalert <On/Off> -> enable or disable the alert.\n/gpalert <1-9999> -> set the GP threshold.","Translated":"显示 GP 警报配置。\n/gpalert <开/关> -> 启用或禁用警报。\n/gpalert <1-9999> -> 设置 GP 阈值。","Context":"GpAlertController..ctor","Source":"ai:public-caiyun","Role":"UI","RoleReason":"→ CommandInfo.HelpMessage"}],"resources":[],"attributes":[]}
+{
+  "type": "uit-contribution",
+  "plugin": "LazyGatherer",
+  "kinds": [
+    "free"
+  ],
+  "entries": [
+    {
+      "Original": "Open the configuration",
+      "Translated": "打开配置",
+      "Context": "LazyGathererPlugin..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    },
+    {
+      "Original": "Displays GP alert configuration.\n/gpalert <On/Off> -> enable or disable the alert.\n/gpalert <1-9999> -> set the GP threshold.",
+      "Translated": "显示 GP 警报配置。\n/gpalert <开/关> -> 启用或禁用警报。\n/gpalert <1-9999> -> 设置 GP 阈值。",
+      "Context": "GpAlertController..ctor",
+      "Source": "ai:public-caiyun",
+      "Role": "UI",
+      "RoleReason": "→ CommandInfo.HelpMessage"
+    }
+  ],
+  "resources": [],
+  "attributes": [],
+  "importedAt": "2026-10-22T13:22:02",
+  "imported": {
+    "archive": "uit-direct-2026-10-22T13-21-48-479Z-53648108-2026-10-22T132202.json",
+    "accepted": 2,
+    "filled": 2,
+    "overwritten": 0,
+    "kept": 0,
+    "rejected": 0
+  },
+  "importedNote": "收到 2 条 `LazyGatherer` 的界面文字译文，已收为**独立译文包** `uit-packs/LazyGatherer@user-cb58a7.json`。\n\n大家「一键汉化」时会自动合入（也可以在插件详情里单独下载、点赞）；下载数与 👍 按包分开统计。\n\n其中配套资源/属性 2 条。\n\n维护者会抽查；这一条投稿与仓库里的存档都是长期凭证。"
+}
