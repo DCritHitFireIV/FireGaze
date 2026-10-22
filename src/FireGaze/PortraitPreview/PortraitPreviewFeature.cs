@@ -163,7 +163,7 @@ internal sealed unsafe partial class PortraitPreviewFeature : IPortraitPreviewVi
                 readOnly = glamourPlateCache.IsReadOnly, lastWriteSucceeded = glamourPlateCache.LastWriteSucceeded } : null,
             ownedCache = new { contentRevision = owned.ContentRevision, savedRevision = cacheWriter.SavedRevision,
                 outstandingRevision = cacheWriter.OutstandingRevision, writes = cacheWriter.CompletedWrites, failedWrites = cacheWriter.FailedWrites },
-            favorites = new { count = favoriteEntries.Count, status = favoritesStatus, readOnly = favoritesStore.IsReadOnly,
+            favorites = new { count = favoriteEntries.Count, trashCount = favoriteTrashEntries.Count, status = favoritesStatus, readOnly = favoritesStore.IsReadOnly,
                 loadError = favoritesStore.LoadError, persistenceError = favoritesStore.PersistenceError, lastFailure = lastFavoriteStorageFailure,
                 entries = favoriteEntries.Select(value => new { value.ID, value.Name, value.Tags, value.SourceName }) },
         });

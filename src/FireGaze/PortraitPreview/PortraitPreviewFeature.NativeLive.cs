@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FireGaze.PortraitPreview;
 
-/// <summary>Acquire-only view of the editor target; starts once per preview lease.</summary>
+/// <summary>Acquire-only view of the editor target; maintained silently within one preview lease.</summary>
 internal sealed unsafe partial class PortraitPreviewFeature
 {
     private PortraitNativeLiveNodeSource? nativeLiveSource;
@@ -45,7 +45,6 @@ internal sealed unsafe partial class PortraitPreviewFeature
             || nativeLiveController?.TryEnable(identity) != true)
         {
             nativeLiveRequested = false;
-            Error("铭牌画面尚未准备好，请稍后重试。");
             return;
         }
         nativeLiveRequested = true;

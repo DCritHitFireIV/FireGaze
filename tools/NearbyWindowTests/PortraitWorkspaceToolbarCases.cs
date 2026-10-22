@@ -8,7 +8,7 @@ internal static class PortraitWorkspaceToolbarCases
     {
         var headerLabels = new[] { "装备###PortraitTab装备", "美容师###PortraitTab美容师", "造型展示###PortraitTab造型展示",
             "投影模板###PortraitPlateSwitcher", "收藏###PortraitFavoriteCurrent", "###PortraitFavoriteMenu" };
-        var footerLabels = new[] { "↶###PortraitUndo", "↷###PortraitRedo", "历史记录", "铭牌同步预览", "结束预览###PortraitEndPreview" };
+        var footerLabels = new[] { "###PortraitUndo", "###PortraitRedo", "历史记录", "铭牌同步预览", "结束预览###PortraitEndPreview" };
         foreach (var (width, scale) in new[] { (668f, 1f), (900f, 1f), (1120f, 1f), (1400f, 1.5f), (2240f, 2f) })
         {
             var window = new PortraitPreviewWindow();
@@ -22,6 +22,12 @@ internal static class PortraitWorkspaceToolbarCases
                 tag + ": editing actions belong to the fixed footer");
             check(header.All(item => item.Minimum.X >= 100 && item.Maximum.X <= 100 + width + .02f),
                 tag + ": top actions fit available width");
+            check(header.Where(item => headerLabels.Contains(item.Label)).All(item => MathF.Abs(item.Maximum.Y - item.Minimum.Y - 36 * scale) < .02f),
+                tag + ": every top action shares the task navigation height");
+            var template = header.Single(item => item.Label == "投影模板###PortraitPlateSwitcher");
+            var tab = header.Single(item => item.Label == "装备###PortraitTab装备");
+            check(template.Maximum.X - template.Minimum.X <= (tab.Maximum.X - tab.Minimum.X) * 1.5f,
+                tag + ": the four-character template action avoids a disproportionate fixed width");
             ImGui.ResetItems(width, scale);
             var hasFooter = window.DrawFooterForTest();
             check(hasFooter, tag + ": workspace draws its fixed footer");
@@ -44,8 +50,8 @@ internal static class PortraitWorkspaceToolbarCases
             var model = window.ModelForTest; var state = window.ToolStateForTest;
             var expected = click switch
             {
-                "↶###PortraitUndo" => model.UndoCalls == 1,
-                "↷###PortraitRedo" => model.RedoCalls == 1,
+                "###PortraitUndo" => model.UndoCalls == 1,
+                "###PortraitRedo" => model.RedoCalls == 1,
                 "历史记录" => state.History,
                 "收藏###PortraitFavoriteCurrent" => model.FavoriteCalls == 1,
                 "###PortraitFavoriteMenu" => ImGui.OpenedPopups.SequenceEqual(["###PortraitFavoriteActions"]),
@@ -60,7 +66,7 @@ internal static class PortraitWorkspaceToolbarCases
             };
             check(expected && ImGui.ConsumedClicks == 1, $"actual {click} control invokes its intended route once");
             check(model.UndoCalls + model.RedoCalls + model.FavoriteCalls + model.SyncCalls + model.CloseCalls
-                == (click is "↶###PortraitUndo" or "↷###PortraitRedo" or "收藏###PortraitFavoriteCurrent" or "铭牌同步预览" or "结束预览###PortraitEndPreview" ? 1 : 0),
+                == (click is "###PortraitUndo" or "###PortraitRedo" or "收藏###PortraitFavoriteCurrent" or "铭牌同步预览" or "结束预览###PortraitEndPreview" ? 1 : 0),
                 $"actual {click} control does not invoke unrelated mutations");
         }
         foreach (var isError in new[] { false, true })
@@ -78,6 +84,17 @@ internal static class PortraitWorkspaceToolbarCases
                 "persistent status distinguishes a failure from an informational state");
             check(window.ModelForTest.NativeLiveCalls == 0 && window.ModelForTest.CloseCalls == 0,
                 "rendering persistent status does not repeat a player operation");
+        }
+        ImGui.ResetItems(1120, 1);
+        new PortraitPreviewWindow().DrawFooterForTest();
+        check(ImGui.VectorPaths.Count == 4,
+            "undo and redo draw their curve and arrowhead without font glyphs");
+        if (ImGui.VectorPaths.Count == 4)
+        {
+            var undo = ImGui.VectorPaths[1]; var redo = ImGui.VectorPaths[3];
+            check(undo[1].X < undo[0].X && undo[1].X < undo[2].X
+                && redo[1].X > redo[0].X && redo[1].X > redo[2].X,
+                "undo arrowhead points left while redo arrowhead points right");
         }
         ImGui.CurrentViewport = ImGui.Known[3];
         var sourceWindow = new PortraitPreviewWindow();
@@ -113,7 +130,7 @@ namespace Dalamud.Bindings.ImGui
         {
             Position = new(100, 100); cursor = Position; contentSize = new(width, contentHeight);
             FontScale = scale; rowBottom = 100; itemMin = itemMax = cursor;
-            Items.Clear(); OpenedPopups.Clear(); PushedColors.Clear(); IDs.Clear(); Groups.Clear();
+            VectorPaths.Clear(); VectorPath.Clear(); Items.Clear(); OpenedPopups.Clear(); PushedColors.Clear(); IDs.Clear(); Groups.Clear();
             click = nextClick; DisabledDepth = ConsumedClicks = 0;
         }
         public static Vector2 GetCursorScreenPos() => cursor;
@@ -160,7 +177,7 @@ namespace Dalamud.Bindings.ImGui
         public static void Dummy(Vector2 size) => Submit("###image-space", size);
         public static uint GetColorU32(Vector4 color) => 0;
         public static DrawList GetWindowDrawList() => new();
-        internal sealed class DrawList
+        internal sealed partial class DrawList
         {
             public void AddRect(Vector2 a, Vector2 b, uint color, float rounding, ImDrawFlags flags, float thickness) { }
             public void AddLine(Vector2 a, Vector2 b, uint color, float thickness) { }

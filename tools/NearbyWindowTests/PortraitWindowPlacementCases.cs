@@ -110,7 +110,7 @@ namespace FireGaze.PortraitPreview
 {
     internal readonly record struct PortraitEditorBounds(float X, float Y, float Width, float Height);
     internal enum PortraitImageScope { Portrait, VisibleAdventurerPlate }
-    internal sealed class PlacementModel
+    internal sealed partial class PlacementModel
     {
         public PortraitImageScope Scope = PortraitImageScope.VisibleAdventurerPlate;
         public void SetLiveCaptureScope(PortraitImageScope scope) => Scope = scope;
@@ -151,6 +151,7 @@ namespace FireGaze.PortraitPreview
         internal (bool History, bool Favorites, bool Templates, bool Space, bool Analysis, bool Beauty) ToolStateForTest
             => (showHistory, showFavorites, showGlamourPlates, showSpaceLight, showAnalysis, appearanceTab);
         internal void DrawHeaderForTest() => DrawWorkspaceHeader();
+        private void OpenFavorites() => showFavorites = true;
         internal void DrawPortraitForTest() => DrawWorkspacePortrait();
         internal void DrawSourceForTest() => DrawSourceRecords();
         internal bool DrawFooterForTest()

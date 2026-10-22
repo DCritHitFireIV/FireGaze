@@ -20,6 +20,14 @@ PortraitGlamourPlate Page(int index,PortraitPiece[] pieces)=>new(index,pieces);
 bool Merge(PortraitLook current,PortraitGlamourPlate plate,out PortraitLook merged,out string reason)
  =>PortraitGlamourPlateMerge.TryMerge(current,plate,out merged,out reason);
 
+Case("template guidance allows reading through the character glamour-plate interface",()=>{
+ var unloaded=Reader(()=>true,()=>owner,()=>0).Capture();
+ Check(unloaded.Plates is null&&!unloaded.Reason.Contains("投影台")&&unloaded.Reason.Contains("投影模板"),"unloaded reader names the template interface instead of requiring a dresser");
+ var catalog=Catalog();catalog.ActivateCharacter(owner);catalog.ApplyRead(owner,now,Pages());
+ catalog.MarkUnavailable(owner,"打开投影台后可读取投影模板");
+ var view=catalog.BuildView(now);
+ Check(view.Status==OwnedReadStatus.PossiblyStale&&view.Plates.Count==20&&!view.Reason.Contains("投影台"),"legacy unavailable guidance keeps the saved templates while presenting the broader reading entry");
+});
 Case("complete template merge clears empty slots and preserves facewear and display flags",()=>{
  var current=new PortraitLook(Enumerable.Range(0,13).Select(i=>new PortraitPiece((uint)i+1,1,2)).ToArray(),false,true,true);
  var pieces=new PortraitPiece[12];pieces[2]=new(123,4,5);var plate=Page(3,pieces);

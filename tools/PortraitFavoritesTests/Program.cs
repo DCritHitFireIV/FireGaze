@@ -17,6 +17,8 @@ Directory.CreateDirectory(root);
 try
 {
     checks += await FavoriteSharedBudgetTests.Run(root, Snapshot());
+    checks += TrashFavoriteTests.Run(root, Snapshot());
+    checks += FavoriteMasonryTests.Run();
     var now = new DateTimeOffset(2026, 10, 19, 10, 0, 0, TimeSpan.FromHours(8));
     var path = Path.Combine(root, "shared", "portrait-favorites.json");
     var store = new PortraitFavoritesStore(path, () => now);

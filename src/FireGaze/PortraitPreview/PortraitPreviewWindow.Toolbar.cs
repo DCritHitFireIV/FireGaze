@@ -18,8 +18,10 @@ internal sealed partial class PortraitPreviewWindow
         ImGui.SameLine();
         if (DrawTab("造型展示", showDesignShowcase, true))
         { showDesignShowcase = true; appearanceTab = false; }
+        ImGui.SameLine();
+        DrawPortraitVisibilityToggle();
         ImGui.EndGroup();
-        ContinueToolbar(right, 260 * Scale);
+        ContinueToolbar(right, HeaderActionSize("投影模板").X + ImGui.GetStyle().ItemSpacing.X + HeaderActionSize("收藏").X + 44 * Scale);
         ImGui.BeginGroup();
         DrawGlamourPlateEntry();
         DrawLibraryToolbar();
@@ -49,15 +51,34 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawUndoRedo()
     {
-        using (UiHelpers.Disabled(!feature.CanUndo))
-        {
-            if (FireGazeSymbols.IconButton("↶###PortraitUndo", "撤回", feature.CanUndo)) feature.Undo();
-        }
+        if (DrawHistoryArrow("###PortraitUndo", "撤回", feature.CanUndo, false)) feature.Undo();
         ImGui.SameLine();
-        using (UiHelpers.Disabled(!feature.CanRedo))
-        {
-            if (FireGazeSymbols.IconButton("↷###PortraitRedo", "重做", feature.CanRedo)) feature.Redo();
-        }
+        if (DrawHistoryArrow("###PortraitRedo", "重做", feature.CanRedo, true)) feature.Redo();
+    }
+
+    private static bool DrawHistoryArrow(string id, string tooltip, bool enabled, bool redo)
+    {
+        using var disabled = UiHelpers.Disabled(!enabled);
+        var edge = ImGui.GetFrameHeight();
+        var clicked = ImGui.Button(id, new Vector2(edge));
+        var min = ImGui.GetItemRectMin();
+        var draw = ImGui.GetWindowDrawList();
+        var color = ImGui.GetColorU32(enabled ? FireGazePalette.Text : FireGazePalette.Muted);
+        Vector2 Point(float x, float y) => min + new Vector2(redo ? 1 - x : x, y) * edge;
+        draw.PathLineTo(Point(.76f, .76f));
+        draw.PathLineTo(Point(.84f, .60f));
+        draw.PathLineTo(Point(.80f, .43f));
+        draw.PathLineTo(Point(.65f, .29f));
+        draw.PathLineTo(Point(.31f, .29f));
+        draw.PathStroke(color, ImDrawFlags.None, 1.6f * Scale);
+        draw.PathLineTo(Point(.47f, .13f));
+        draw.PathLineTo(Point(.31f, .29f));
+        draw.PathLineTo(Point(.47f, .45f));
+        draw.PathStroke(color, ImDrawFlags.None, 1.6f * Scale);
+        if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled) || ImGui.IsItemFocused())
+            ImGui.SetTooltip(enabled ? tooltip : $"{tooltip} · 暂无可{tooltip}的操作");
+        if (ImGui.IsItemFocused()) FireGazeSymbols.DrawFocus(min, ImGui.GetItemRectMax());
+        return enabled && clicked;
     }
 
     private static void ContinueToolbar(float right, float nextWidth)
@@ -70,16 +91,20 @@ internal sealed partial class PortraitPreviewWindow
     private void DrawLibraryToolbar()
     {
         var right = ImGui.GetCursorScreenPos().X + ImGui.GetContentRegionAvail().X;
-        ContinueToolbar(right, ImGui.CalcTextSize("收藏").X + ImGui.GetStyle().FramePadding.X * 2 + ImGui.GetFrameHeight());
+        ContinueToolbar(right, HeaderActionSize("收藏").X + 44 * Scale);
         ImGui.BeginGroup();
-        if (ImGui.Button("收藏###PortraitFavoriteCurrent"))
+        if (HeaderActionButton("收藏###PortraitFavoriteCurrent"))
             feature.SaveFavorite($"肖像 {DateTime.Now:yyyy-MM-dd HH:mm:ss}", []);
         if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip("收藏当前预览，之后可以重新载入");
-        ImGui.SameLine(0, 0);
-        if (ImGui.ArrowButton("###PortraitFavoriteMenu", ImGuiDir.Down)) ImGui.OpenPopup("###PortraitFavoriteActions");
+        ImGui.SameLine(0, 8 * Scale);
+        if (ImGui.Button("###PortraitFavoriteMenu", new Vector2(36 * Scale))) ImGui.OpenPopup("###PortraitFavoriteActions");
+        var menuCenter = (ImGui.GetItemRectMin() + ImGui.GetItemRectMax()) * .5f;
+        ImGui.GetWindowDrawList().AddTriangleFilled(menuCenter + new Vector2(-4, -2) * Scale,
+            menuCenter + new Vector2(4, -2) * Scale, menuCenter + new Vector2(0, 3) * Scale,
+            ImGui.GetColorU32(FireGazePalette.Text));
         if (ImGui.BeginPopup("###PortraitFavoriteActions"))
         {
-            if (ImGui.MenuItem("我的收藏")) showFavorites = true;
+            if (ImGui.MenuItem("我的收藏")) OpenFavorites();
             ImGui.EndPopup();
         }
         ImGui.EndGroup();
@@ -87,10 +112,18 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawGlamourPlateEntry()
     {
-        var width = MathF.Min(136 * Scale, MathF.Max(1, ImGui.GetContentRegionAvail().X));
-        if (ImGui.Button("投影模板###PortraitPlateSwitcher", new Vector2(width, ImGui.GetFrameHeight())))
-            showGlamourPlates = true;
+        if (HeaderActionButton("投影模板###PortraitPlateSwitcher")) showGlamourPlates = true;
     }
+
+    private static Vector2 HeaderActionSize(string label)
+    {
+        var separator = label.IndexOf("##", StringComparison.Ordinal);
+        var text = separator < 0 ? label : label[..separator];
+        return new(MathF.Max(64 * Scale, ImGui.CalcTextSize(text).X + 24 * Scale), 36 * Scale);
+    }
+
+    private static bool HeaderActionButton(string label)
+        => FireGazeSymbols.NeutralButton(label, HeaderActionSize(label));
 
     private bool DrawTab(string text, bool active, bool enabled)
     {

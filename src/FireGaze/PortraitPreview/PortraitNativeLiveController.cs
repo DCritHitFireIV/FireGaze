@@ -7,13 +7,14 @@ internal readonly record struct PortraitNativeLiveContext(PortraitIdentity Edito
 internal enum PortraitNativeLiveStopReason
 {
     Disabled, UserClosed, OwnerChanged, TerritoryChanged, LoggedOut, UpdateFailed,
-    SourceInvalidated, AcquireFailed, InvalidEnable, Disposed,
+    SourceInvalidated, AcquireFailed, InvalidEnable, ContextBusy, Disposed,
 }
 
 /// <summary>
 /// Owns one explicit live-image attempt, never an editor, camera, light or capture transaction.
 /// The caller owns the source and disposes it after this controller. Enable/Update run on Framework;
-/// Draw borrows managed image descriptors only. Every stop requires another explicit TryEnable.
+/// Draw borrows managed image descriptors only. Transient misses retry within the same owned preview lease;
+/// close, lifecycle invalidation and ownership loss permanently cancel that lease's retry intent.
 /// </summary>
 internal sealed class PortraitNativeLiveController : IDisposable
 {
@@ -29,25 +30,96 @@ internal sealed class PortraitNativeLiveController : IDisposable
     private long revision;
     private PortraitNativeLiveStopReason stopReason;
     private long startedSessionRevision;
+    private readonly Func<long> readMonotonicMilliseconds;
+    private PortraitIdentity automaticEditor;
+    private PortraitCaptureOwner automaticOwner;
+    private bool automaticAllowed;
+    private long nextAutomaticAttempt;
+    private int automaticFailures;
 
-    public PortraitNativeLiveController(IPortraitNativeLiveSource source, Func<PortraitNativeLiveContext> readContext)
+    public PortraitNativeLiveController(IPortraitNativeLiveSource source, Func<PortraitNativeLiveContext> readContext,
+        Func<long>? readMonotonicMilliseconds = null)
     {
         this.source = source;
         this.readContext = readContext;
+        this.readMonotonicMilliseconds = readMonotonicMilliseconds ?? (() => Environment.TickCount64);
         view = new(source);
         source.Invalidated += OnSourceInvalidated;
     }
 
     public bool IsEnabled { get { lock (gate) return enabled; } }
-    /// <summary>One attempt per preview lease. Failure remains stopped until a player retries.</summary>
+    /// <summary>Framework maintenance for one preview lease, with silent bounded-rate retries.</summary>
     public bool TryStartSessionOnce(long sessionRevision, PortraitIdentity requested)
     {
+        long ticket;
         lock (gate)
         {
-            if (disposed || sessionRevision <= startedSessionRevision) return false;
-            startedSessionRevision = sessionRevision;
+            if (disposed || sessionRevision <= 0 || sessionRevision < startedSessionRevision) return false;
+            if (sessionRevision > startedSessionRevision)
+            {
+                StopLocked(PortraitNativeLiveStopReason.Disabled);
+                startedSessionRevision = sessionRevision;
+                automaticEditor = requested;
+                automaticOwner = default;
+                automaticAllowed = true;
+                automaticFailures = 0;
+                nextAutomaticAttempt = readMonotonicMilliseconds();
+            }
+            if (!automaticAllowed || enabled || readMonotonicMilliseconds() < nextAutomaticAttempt) return false;
+            if (!requested.IsValid || requested.Generation == 0 || requested != automaticEditor)
+            {
+                automaticAllowed = false;
+                StopLocked(PortraitNativeLiveStopReason.OwnerChanged);
+                return false;
+            }
+            ticket = revision;
         }
-        return TryEnable(requested);
+        try
+        {
+            if (!source.IsFrameworkThread)
+            {
+                StopIfCurrent(ticket, PortraitNativeLiveStopReason.UpdateFailed);
+                return false;
+            }
+            var context = readContext();
+            lock (gate)
+            {
+                if (disposed || revision != ticket || !automaticAllowed) return false;
+                if (!context.Owner.IsValid || !context.CanBlockSave || automaticOwner.IsValid && context.Owner != automaticOwner
+                    || context.Editor != automaticEditor && context.Editor != default
+                    || context.Editor == automaticEditor && !context.SessionOwnsEditor)
+                {
+                    automaticAllowed = false;
+                    StopLocked(PortraitNativeLiveStopReason.OwnerChanged);
+                    return false;
+                }
+                automaticOwner = context.Owner;
+                if (!Matches(context, automaticEditor, automaticOwner) || !view.IsPhysicallyIdle)
+                {
+                    StopLocked(PortraitNativeLiveStopReason.ContextBusy);
+                    ScheduleAutomaticRetryLocked(PortraitNativeLiveStopReason.ContextBusy);
+                    return false;
+                }
+            }
+            if (!TryEnable(requested)) return false;
+            lock (gate)
+            {
+                // TryEnable reads context again. Neither that callback nor a source invalidation
+                // may follow a changed owner, replace the editor or resurrect a closed lease.
+                if (disposed || !automaticAllowed || boundEditor != automaticEditor || boundOwner != automaticOwner)
+                {
+                    automaticAllowed = false;
+                    StopLocked(PortraitNativeLiveStopReason.OwnerChanged);
+                    return false;
+                }
+                return enabled;
+            }
+        }
+        catch (Exception)
+        {
+            StopIfCurrent(ticket, PortraitNativeLiveStopReason.UpdateFailed);
+            return false;
+        }
     }
     public PortraitNativeLiveStopReason StopReason { get { lock (gate) return stopReason; } }
 
@@ -116,13 +188,14 @@ internal sealed class PortraitNativeLiveController : IDisposable
             if (!IsCurrent(ticket)) return;
             if (!Matches(before, editor, owner))
             {
-                StopIfCurrent(ticket, PortraitNativeLiveStopReason.OwnerChanged);
+                StopIfCurrent(ticket, Owns(before, editor, owner) || TemporarilyUnresolved(before, owner)
+                    ? PortraitNativeLiveStopReason.ContextBusy : PortraitNativeLiveStopReason.OwnerChanged);
                 return;
             }
             view.Update();
             if (!IsCurrent(ticket)) return;
-            // The view intentionally permits retries. This controller converts any failed update
-            // into a final stop for this attempt, without changing the acquire-only view contract.
+            // Failed updates always retire the old descriptor. Only the same active preview
+            // lease may retry later, after a fresh owner/context check and physical retirement.
             using (var verified = view.TryBorrow(out var borrow) ? borrow : null)
             {
                 if (verified is null || !verified.TryGetImage(out var image)
@@ -136,11 +209,16 @@ internal sealed class PortraitNativeLiveController : IDisposable
             if (!IsCurrent(ticket)) return;
             if (!Matches(after, editor, owner))
             {
-                StopIfCurrent(ticket, PortraitNativeLiveStopReason.OwnerChanged);
+                StopIfCurrent(ticket, Owns(after, editor, owner) || TemporarilyUnresolved(after, owner)
+                    ? PortraitNativeLiveStopReason.ContextBusy : PortraitNativeLiveStopReason.OwnerChanged);
                 return;
             }
             lock (gate)
-                if (!disposed && enabled && revision == ticket) frameReady = true;
+                if (!disposed && enabled && revision == ticket)
+                {
+                    frameReady = true;
+                    automaticFailures = 0;
+                }
         }
         catch (Exception)
         {
@@ -161,7 +239,10 @@ internal sealed class PortraitNativeLiveController : IDisposable
     public void Stop(PortraitNativeLiveStopReason reason)
     {
         lock (gate)
+        {
+            automaticAllowed = false;
             if (!disposed) StopLocked(reason);
+        }
     }
 
     private void OnSourceInvalidated() => Stop(PortraitNativeLiveStopReason.SourceInvalidated);
@@ -174,7 +255,25 @@ internal sealed class PortraitNativeLiveController : IDisposable
     private void StopIfCurrent(long ticket, PortraitNativeLiveStopReason reason)
     {
         lock (gate)
-            if (!disposed && revision == ticket) StopLocked(reason);
+            if (!disposed && revision == ticket)
+            {
+                StopLocked(reason);
+                ScheduleAutomaticRetryLocked(reason);
+            }
+    }
+
+    private void ScheduleAutomaticRetryLocked(PortraitNativeLiveStopReason reason)
+    {
+        if (!automaticAllowed) return;
+        if (reason is not (PortraitNativeLiveStopReason.AcquireFailed or PortraitNativeLiveStopReason.InvalidEnable
+            or PortraitNativeLiveStopReason.ContextBusy))
+        {
+            automaticAllowed = false;
+            return;
+        }
+        var delay = 250L << Math.Min(automaticFailures, 3);
+        automaticFailures = Math.Min(automaticFailures + 1, 3);
+        nextAutomaticAttempt = readMonotonicMilliseconds() + delay;
     }
 
     // Called under gate; disabling the view invalidates outstanding descriptors while its
@@ -190,10 +289,16 @@ internal sealed class PortraitNativeLiveController : IDisposable
         view.SetEnabled(false);
     }
 
-    private static bool Matches(PortraitNativeLiveContext context, PortraitIdentity editor, PortraitCaptureOwner owner)
+    private static bool Owns(PortraitNativeLiveContext context, PortraitIdentity editor, PortraitCaptureOwner owner)
         => editor.IsValid && editor.Generation != 0 && context.Editor == editor && owner.IsValid
-            && context.Owner == owner && context.SessionOwnsEditor && context.CanBlockSave
-            && context.CaptureMode == "off" && context.CapturesDrained && !context.LightingFitBusy;
+            && context.Owner == owner && context.SessionOwnsEditor && context.CanBlockSave;
+
+    private static bool TemporarilyUnresolved(PortraitNativeLiveContext context, PortraitCaptureOwner owner)
+        => context.Editor == default && owner.IsValid && context.Owner == owner && context.CanBlockSave;
+
+    private static bool Matches(PortraitNativeLiveContext context, PortraitIdentity editor, PortraitCaptureOwner owner)
+        => Owns(context, editor, owner) && context.CaptureMode == "off"
+            && context.CapturesDrained && !context.LightingFitBusy;
 
     public void Dispose()
     {
@@ -201,6 +306,7 @@ internal sealed class PortraitNativeLiveController : IDisposable
         {
             if (disposed) return;
             disposed = true;
+            automaticAllowed = false;
             StopLocked(PortraitNativeLiveStopReason.Disposed);
             view.Dispose();
         }

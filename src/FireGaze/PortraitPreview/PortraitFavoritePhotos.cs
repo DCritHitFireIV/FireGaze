@@ -13,7 +13,8 @@ internal enum PortraitFavoritePhotoStatus { Available, Missing, Capacity, Storag
 internal sealed class PortraitFavoritePhotos
 {
     public const int MaximumBytes = 16 * 1024 * 1024;
-    private const int MaximumReferences = 5000;
+    // Includes both valid v1 documents when recovering an interrupted older move.
+    public const int MaximumReferences = 10000;
     private static readonly JsonSerializerOptions JSONOptions = new() { MaxDepth = 8 };
     private readonly object gate = new();
     private readonly string path;

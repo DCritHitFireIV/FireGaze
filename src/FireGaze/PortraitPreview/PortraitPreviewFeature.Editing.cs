@@ -32,6 +32,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private bool sampledKeyboard;
     private bool deferredBaselineSync;
     private string? historyWriteError;
+    private string? historyPhotoStatus;
     private Task<bool>? historyPersistence;
     private DateTime nextStorageObservation;
     partial void RetryOtherPortraitStorage();
@@ -43,6 +44,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public string HistoryStatus => historyWriteError
         ?? (history.LoadError is not null ? "历史记录暂时无法读取，原文件已保留。" : null)
         ?? (history.PersistenceError is not null ? "历史记录尚未保存，请检查本地存储后重试。已有记录已保留。" : null)
+        ?? historyPhotoStatus
         ?? (historyPersistence is { IsCompleted: false } ? "正在保存编辑记录…" : historyStatus);
     public IReadOnlyList<PortraitAppearanceGroup> AppearanceGroups => appearanceGroups;
     public IReadOnlyList<PortraitAppearanceGroup> OriginalAppearanceGroups
@@ -86,6 +88,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         appearance = new(Plugin.DataManager);
         editorValidation = new(Plugin.DataManager);
         history = new(Path.Combine(directory, "portrait-edit-history-v1.json"), storage: storageBudget);
+        history.EnablePhotoBackedPublication();
         historyBatch = new(history);
         target.SnapshotGameBuild = Plugin.DataManager.GameData.Repositories["ffxiv"].Version;
         RefreshHistoryRows();
@@ -288,7 +291,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private void RefreshHistoryRows()
     {
         var owner = CurrentCharacter();
-        var records = owner is null ? [] : observedKey is { } key ? history.GetRecords(key) : history.GetRecordsForOwner(owner.Value.ContentID);
+        var records = owner is null ? [] : observedKey is { } key ? history.GetPublishedRecords(key) : history.GetPublishedRecordsForOwner(owner.Value.ContentID);
         var current = observedKey is { } active ? history.CurrentRecordID(active) : null;
         historyRows = records.Select(record => new PortraitHistoryListItem(record.ID, record.Timestamp,
             record.Label, record.ID == current)).ToArray();

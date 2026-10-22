@@ -8,9 +8,9 @@ internal static class NativeLiveFeatureWiringCases
         {
             var target = new SessionTarget();
             var session = new PortraitPreviewSession(target);
-            var source = new Source();
+            var source = new Source(); var now = 0L;
             using var controller = new PortraitNativeLiveController(source,
-                () => new(Source.KeyA.Editor, Source.KeyA.Owner, session.BlockSave(Source.KeyA.Editor), true, "off", true, false));
+                () => new(Source.KeyA.Editor, Source.KeyA.Owner, session.BlockSave(Source.KeyA.Editor), true, "off", true, false), () => now);
             check(session.Open(Source.KeyA.Editor)
                 && controller.TryStartSessionOnce(session.Revision, Source.KeyA.Editor),
                 "the first successful preview lease can start its image");
@@ -22,10 +22,11 @@ internal static class NativeLiveFeatureWiringCases
             controller.Stop(PortraitNativeLiveStopReason.UserClosed);
             check(session.Close() && !old!.TryGetImage(out _), "closing restores the lease and retires its frame");
             check(session.Open(Source.KeyA.Editor)
-                && controller.TryStartSessionOnce(session.Revision, Source.KeyA.Editor)
+                && !controller.TryStartSessionOnce(session.Revision, Source.KeyA.Editor)
                 && !controller.TryBorrow(out _),
-                "a new preview of the same editor starts without displaying the previous session image");
-            old!.Dispose();
+                "a new preview waits for old Draw retirement without displaying the previous session image");
+            old!.Dispose(); now = 250;
+            check(controller.TryStartSessionOnce(session.Revision, Source.KeyA.Editor), "the new preview starts silently after retirement");
             controller.Update();
             check(controller.TryBorrow(out var fresh), "the new session publishes only after a fresh acquisition");
             fresh!.Dispose();

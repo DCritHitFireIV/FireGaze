@@ -23,7 +23,7 @@ internal sealed unsafe class PortraitGlamourPlateReader
         if (owner is not { AccountID: > 0, ContentID: > 0 }) return new(owner, null, "尚未进入角色");
         var address = managerAddress();
         var manager = (MirageManager*)address;
-        if (manager is null || !manager->GlamourPlatesLoaded) return new(owner, null, "打开投影台后可读取投影模板");
+        if (manager is null || !manager->GlamourPlatesLoaded) return new(owner, null, "打开投影模板后即可读取");
         if (manager->IsApplyingGlamourPlate) return new(owner, null, "投影模板正在应用，稍后读取");
         var plates = new PortraitGlamourPlate[20];
         for (var page = 0; page < plates.Length; page++)

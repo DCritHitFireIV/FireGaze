@@ -265,6 +265,7 @@ namespace FireGaze.PortraitPreview
             appearance = new([new(new(1,1,0,1),[new("hair","发型",6,255,0,[new(1,"发型1"),new(2,"发型2")])])]);
             editorValidation = new(new PortraitValidationData([], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1], [0,1]));
             history = new(file,()=>testClock,byteLimit);
+            historyPhotoStatus = null;
             historyBatch = new(history,()=>testClock);
             owned = new(id=>id);
             var cacheFile=new OwnedEquipmentCacheFile(Path.GetDirectoryName(file)!, storage:storageBudget);cacheFile.Load(owned,out _);

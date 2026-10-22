@@ -7,7 +7,7 @@ internal readonly record struct PortraitWorkspaceGeometry(bool Stacked, Portrait
 /// <summary>One body budget keeps the image, editing controls and fixed footer inside the window.</summary>
 internal static class PortraitWorkspaceLayout
 {
-    internal static PortraitWorkspaceGeometry For(float width, float height, float scale)
+    internal static PortraitWorkspaceGeometry For(float width, float height, float scale, bool imageVisible = true)
     {
         scale = float.IsFinite(scale) && scale > 0 ? scale : 1f;
         width = float.IsFinite(width) && width > 0 ? width : 1f;
@@ -17,6 +17,9 @@ internal static class PortraitWorkspaceLayout
         var footer = MathF.Min((stacked ? 72f : 40f) * scale, height * .26f);
         var body = MathF.Max(1f, height - footer - gap);
         var navigation = MathF.Min(176f * scale, width * (stacked ? .28f : .18f));
+        if (!imageVisible)
+            return new(stacked, new(0, 0, navigation, body), default,
+                new(navigation + gap, 0, MathF.Max(1f, width - navigation - gap), body), body, footer, gap);
         if (stacked)
         {
             var imageHeight = MathF.Min(246f * scale, body * .43f);

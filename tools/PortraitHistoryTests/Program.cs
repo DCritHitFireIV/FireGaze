@@ -21,6 +21,7 @@ var now = new DateTimeOffset(2026, 10, 17, 23, 59, 0, TimeSpan.FromHours(8));
 var key = new PortraitHistoryKey(20, PortraitHistoryEntryPoint.GearsetPortrait, 3, "race-1-job-19-v1");
 try
 {
+    passed += await PhotoBackedHistoryCases.Run(directory, key);
     passed += await HistoryPersistenceRetryTests.Run(directory);
     passed += await HistoryBoundedCompletionTests.Run(directory);
     passed += await HistoryDurableAcceptanceTests.Run(directory, key);

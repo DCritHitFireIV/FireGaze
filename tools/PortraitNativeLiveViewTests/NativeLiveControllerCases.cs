@@ -8,25 +8,129 @@ internal static class NativeLiveControllerCases
         test("live controller never auto-acquires before an explicit bound enable", () =>
             check(false, "missing explicit identity-bound controller; the raw view retries after acquisition failure and source invalidation"));
 #else
-        test("each preview session starts its image once and never retries a failed start automatically", () =>
+        test("an active preview silently retries its initial busy image start", () =>
         {
-            var source = new Source(); var reads = 0; var context = Ready() with { CapturesDrained = false };
-            using var controller = new PortraitNativeLiveController(source, () => { reads++; return context; });
-            check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor), "busy initial session cannot start the image");
+            var source = new Source(); var reads = 0; var now = 0L; var context = Ready() with { CapturesDrained = false };
+            using var controller = new PortraitNativeLiveController(source, () => { reads++; return context; }, () => now);
+            check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor), "a busy session cannot acquire an image");
             context = Ready();
-            check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor) && reads == 1,
-                "later idle frames do not silently retry the consumed session start");
-            check(controller.TryEnable(Source.KeyA.Editor), "the player can explicitly retry after readiness recovers");
+            now = 250;
+            check(controller.TryStartSessionOnce(1, Source.KeyA.Editor),
+                "the same active session must retry after readiness recovers without a player click");
             controller.Update();
-            check(controller.TryBorrow(out var old), "manual retry publishes this session image");
-            check(controller.TryStartSessionOnce(2, Source.KeyA.Editor), "a fresh preview session gets one new start");
-            check(!old!.TryGetImage(out _) && !controller.TryBorrow(out _), "fresh start cannot reuse the previous session frame");
-            old.Dispose();
-            controller.Stop(PortraitNativeLiveStopReason.UserClosed);
-            var before = reads;
-            check(!controller.TryStartSessionOnce(2, Source.KeyA.Editor) && reads == before,
-                "closing or invalidating a session does not grant another automatic attempt");
-            check(!controller.TryStartSessionOnce(0, Source.KeyA.Editor), "no preview session cannot start an image");
+            check(controller.TryBorrow(out var fresh), "recovered readiness publishes a current native image");
+            fresh?.Dispose();
+        });
+        test("a temporary native texture miss retries silently within the same session", () =>
+        {
+            var source = new Source { Fail = true }; var now = 0L;
+            using var controller = new PortraitNativeLiveController(source, Ready, () => now);
+            check(controller.TryStartSessionOnce(1, Source.KeyA.Editor), "a ready session starts once");
+            controller.Update();
+            check(!controller.TryBorrow(out _), "missing texture never exposes a previous image");
+            source.Fail = false;
+            now = 250;
+            check(controller.TryStartSessionOnce(1, Source.KeyA.Editor), "transient acquire failure must automatically recover");
+            controller.Update();
+            check(controller.TryBorrow(out var fresh), "automatic recovery publishes a new image");
+            fresh?.Dispose();
+        });
+        test("native misses back off without reading context or acquiring every frame", () =>
+        {
+            var source = new Source { Fail = true }; var now = 0L; var reads = 0;
+            using var controller = new PortraitNativeLiveController(source, () => { reads++; return Ready(); }, () => now);
+            controller.TryStartSessionOnce(1, Source.KeyA.Editor); controller.Update();
+            var firstReads = reads;
+            foreach (var time in new long[] { 1, 100, 249 })
+            {
+                now = time;
+                check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor), "retry is not due before 250ms");
+            }
+            check(reads == firstReads && source.Calls == 1, "ordinary frames do not retry native acquisition or context");
+            foreach (var time in new long[] { 250, 750, 1750, 3750, 5750 })
+            {
+                now = time;
+                check(controller.TryStartSessionOnce(1, Source.KeyA.Editor), "due retries use 250/500/1000/2000ms capped delays");
+                controller.Update();
+            }
+            check(source.Calls == 6, "only scheduled attempts call the native source");
+        });
+        test("capture work temporarily suspends the same lease and resumes after it drains", () =>
+        {
+            var source = new Source(); var now = 0L; var context = Ready();
+            using var controller = new PortraitNativeLiveController(source, () => context, () => now);
+            controller.TryStartSessionOnce(1, Source.KeyA.Editor); controller.Update();
+            controller.TryBorrow(out var old);
+            context = context with { CapturesDrained = false };
+            controller.Update();
+            check(!old!.TryGetImage(out _) && source.Calls == 1, "capture busy retires the image without native work");
+            old.Dispose(); context = Ready(); now = 250;
+            check(controller.TryStartSessionOnce(1, Source.KeyA.Editor), "same owned lease resumes after captures drain");
+            controller.Update();
+            check(controller.TryBorrow(out var fresh), "resume publishes only freshly acquired image");
+            fresh?.Dispose();
+        });
+        test("temporary editor readiness loss retires the frame and recovers only the same identity", () =>
+        {
+            var source = new Source(); var now = 0L; var context = Ready();
+            using var controller = new PortraitNativeLiveController(source, () => context, () => now);
+            controller.TryStartSessionOnce(1, Source.KeyA.Editor); controller.Update();
+            context = context with { Editor = default, SessionOwnsEditor = false };
+            controller.Update();
+            check(!controller.TryBorrow(out _) && source.Calls == 1, "unresolved editor never leaves an old frame visible");
+            context = Ready(); now = 250;
+            check(controller.TryStartSessionOnce(1, Source.KeyA.Editor), "same identity can recover after temporary loading");
+            controller.Update();
+            check(controller.TryBorrow(out var fresh), "loading recovery publishes a current frame"); fresh?.Dispose();
+        });
+        test("automatic retries bind the initial owner and never follow another editor allocation", () =>
+        {
+            foreach (var changed in new[] { Ready() with { Owner = new(9, 10) },
+                Ready() with { Editor = Source.KeyA.Editor with { Generation = 2 } },
+                Ready() with { SessionOwnsEditor = false }, Ready() with { CanBlockSave = false } })
+            {
+                var source = new Source { Fail = true }; var now = 0L; var context = Ready();
+                using var controller = new PortraitNativeLiveController(source, () => context, () => now);
+                controller.TryStartSessionOnce(1, Source.KeyA.Editor); controller.Update();
+                context = changed; now = 250;
+                check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor), "ownership drift blocks the retry before native acquisition");
+                context = Ready(); now = 10000;
+                check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor) && source.Calls == 1,
+                    "original identity returning cannot resurrect the cancelled lease");
+            }
+        });
+        test("close and lifecycle invalidation permanently cancel the same session retry", () =>
+        {
+            foreach (var reason in new[] { PortraitNativeLiveStopReason.UserClosed, PortraitNativeLiveStopReason.Disabled,
+                PortraitNativeLiveStopReason.TerritoryChanged, PortraitNativeLiveStopReason.LoggedOut })
+            {
+                var source = new Source { Fail = true }; var now = 0L;
+                using var controller = new PortraitNativeLiveController(source, Ready, () => now);
+                controller.TryStartSessionOnce(1, Source.KeyA.Editor); controller.Update(); controller.Stop(reason);
+                now = 10000; source.Fail = false;
+                check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor) && source.Calls == 1,
+                    "explicit stop must never silently restart the old preview lease");
+                check(controller.TryStartSessionOnce(2, Source.KeyA.Editor), "only a new preview lease may start again");
+            }
+            var invalidated = new Source { Fail = true }; var clock = 0L;
+            using var stopped = new PortraitNativeLiveController(invalidated, Ready, () => clock);
+            stopped.TryStartSessionOnce(1, Source.KeyA.Editor); stopped.Update(); invalidated.Invalidate();
+            clock = 10000;
+            check(!stopped.TryStartSessionOnce(1, Source.KeyA.Editor) && invalidated.Calls == 1,
+                "PreFinalize-style source invalidation is final for this lease");
+        });
+        test("automatic retry waits for old Draw borrowers to physically retire", () =>
+        {
+            var source = new Source(); var now = 0L;
+            using var controller = new PortraitNativeLiveController(source, Ready, () => now);
+            controller.TryStartSessionOnce(1, Source.KeyA.Editor); controller.Update(); controller.TryBorrow(out var old);
+            source.Fail = true; controller.Update(); source.Fail = false; now = 250;
+            check(!controller.TryStartSessionOnce(1, Source.KeyA.Editor) && source.Calls == 2,
+                "retired but borrowed wrap blocks the next acquisition");
+            old!.Dispose(); now = 750;
+            check(controller.TryStartSessionOnce(1, Source.KeyA.Editor), "retired Draw lease permits the scheduled retry");
+            controller.Update(); check(source.Calls == 3, "retry acquires only after physical retirement");
+            check(controller.TryBorrow(out var fresh), "retired retry publishes its own frame"); fresh?.Dispose();
         });
         test("controller construction and disabled updates do not read context or native source", () =>
         {

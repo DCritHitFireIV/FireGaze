@@ -25,6 +25,13 @@ try
     var png = Png();
     Check(history.TryPut(a, png), "existing completed history image is the only image source");
     var archive = new PortraitFavoritePhotos(archivePath);
+    var recoveredReferences = Enumerable.Range(1, 6000).Select(index => index.ToString("X64")).ToHashSet(StringComparer.Ordinal);
+    var recoveredLast = 6000.ToString("X64");
+    var recoveryPath = Path.Combine(root, "recovery-many.json");
+    var recovery = new PortraitFavoritePhotos(recoveryPath);
+    Check(recovery.Synchronize(recoveredReferences, key => key == recoveredLast ? png : null)
+        && new PortraitFavoritePhotos(recoveryPath).TryGet(recoveredLast, out var recoveredPhoto) && recoveredPhoto.SequenceEqual(png),
+        "combined favorite and trash references retain a tail photo beyond the former five-thousand limit after restart");
     byte[]? ReadCompleted(string key) => history.TryGet(key, out var value) ? value : null;
     Check(archive.Synchronize(new HashSet<string> { a }, ReadCompleted), "a favorite copies its completed PNG into durable independent storage");
     Check(archive.Status(a) == PortraitFavoritePhotoStatus.Available && archive.TryGet(a, out var copy) && copy.SequenceEqual(png),

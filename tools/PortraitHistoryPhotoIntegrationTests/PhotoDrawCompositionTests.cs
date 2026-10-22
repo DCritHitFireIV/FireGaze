@@ -14,6 +14,9 @@ internal static class PhotoDrawCompositionTests
         var gpu = (SafePhotoProvider)(object)provider;
         var source = new PortraitThumbnailSource();
         using var photos = new PortraitHistoryPhotos(Path.Combine(root, "safe-composition.bin"), provider, readback, source, history.Bytes);
+        var photographed = typeof(PortraitHistoryPhotos).GetMethod("GetPhotographedRecordIDs")
+            ?? throw new InvalidOperationException("Photo publication requires a real committed-image index, not pending GPU work.");
+        IReadOnlySet<long> Published() => (IReadOnlySet<long>)photographed.Invoke(photos, null)!;
         photos.SetRecords(history.GetRecords(key), history.Bytes);
         photos.Poll("safe-composition", identity, record.ID, snapshot, true);
         await Task.Delay(250);
@@ -22,6 +25,8 @@ internal static class PhotoDrawCompositionTests
         var captured = new FakeTexture();
         source.Complete(new(captured));
         photos.Poll("safe-composition", identity, record.ID, snapshot, true);
+        if (Published().Count != 0)
+            throw new InvalidOperationException("A completed source copy cannot publish a history photo before PNG persistence.");
         photos.Draw();
         for (var attempt = 0; attempt < 100 && Count(photos, "saved") == 0; attempt++)
         {
@@ -32,7 +37,30 @@ internal static class PhotoDrawCompositionTests
             throw new InvalidOperationException("History photos must save via safe pixel composition without invoking the offscreen draw-list renderer.");
         if (captured.Disposes != 1 || gpu.Output.Disposes != 1)
             throw new InvalidOperationException("Safe photo composition must release input and encoded image exactly once.");
-        return 3;
+        if (!Published().SetEquals([record.ID]))
+            throw new InvalidOperationException("Only the exact record with a durable matching PNG may publish in history.");
+        var publishedPath = Path.Combine(root, "photo-and-history-publication.json");
+        using (var publishedHistory = new PortraitHistoryStore(publishedPath))
+        {
+            publishedHistory.EnablePhotoBackedPublication();
+            var photographedRow = publishedHistory.Record(key, snapshot.ToJSON()).Record!;
+            publishedHistory.Record(key, (snapshot with
+                { Composition = snapshot.Composition with { CameraYaw = .125f } }).ToJSON());
+            publishedHistory.Record(key, (snapshot with
+                { Composition = snapshot.Composition with { CameraYaw = .25f } }).ToJSON());
+            photos.SetRecords(publishedHistory.GetAllRecords(), publishedHistory.Bytes);
+            publishedHistory.SynchronizePhotographedRecords(Published());
+            if (publishedHistory.GetPublishedRecords(key) is not { Count: 1 } published
+                || published[0].ID != photographedRow.ID
+                || photos.GetHistoryPhotoStatus(photographedRow.ID) == PortraitHistoryPhotoStatus.Missing)
+                throw new InvalidOperationException("Rapid later edits must preserve the real photographed state without creating any missing-image gallery card.");
+            if (!await publishedHistory.FlushAsync())
+                throw new InvalidOperationException("Photo-backed history must complete its own durable write.");
+        }
+        using (var restart = new PortraitHistoryStore(publishedPath))
+            if (restart.Count != 1 || restart.IsReadOnly)
+                throw new InvalidOperationException("Only the correct photographed state may survive a history restart.");
+        return 8;
     }
 
     private static long Count(PortraitHistoryPhotos photos, string name)

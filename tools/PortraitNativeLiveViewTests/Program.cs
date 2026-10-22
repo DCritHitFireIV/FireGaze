@@ -21,6 +21,7 @@ void Case(string name, Action action)
 }
 
 NativeLiveLayoutCases.Run(Case, Check);
+NativeLiveSizingCases.Run(Case, Check);
 
 Case("disabled and disposed view never acquires a native source", () =>
 {

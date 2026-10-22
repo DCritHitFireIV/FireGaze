@@ -86,7 +86,16 @@ namespace Dalamud.Bindings.ImGui
         public static Vector2 GetWindowSize() => Size;
         public static float GetFontSize() => 17 * FontScale;
         public static int GetFrameCount() => Frame;
-        public static bool Begin(string title, ref bool open) => BeginVisible;
+        public static bool Begin(string title, ref bool open)
+        {
+            RegularWindowTitles.Add(title);
+            if (title.Contains("###PortraitDyePalette"))
+            {
+                if (RegularWindowTitles.Count(t => t.Contains("###PortraitDyePalette")) == 1) Size = NextSize;
+                ResetItems(Math.Max(1, Size.X - 30), FontScale, contentHeight: Math.Max(1, Size.Y - 30));
+            }
+            return BeginVisible;
+        }
         public static bool Begin(string title, ImGuiWindowFlags flags) => BeginVisible;
         public static bool Button(string label) => Button(label, Vector2.Zero);
         public static Vector2 CalcTextSize(string label) => new(label.Split("##")[0].Length * 8 * FontScale, 17 * FontScale);
@@ -98,13 +107,14 @@ namespace Dalamud.Bindings.ImGui
             public Vector2 ItemSpacing => new Vector2(8, 4) * FontScale;
             public Vector2 ItemInnerSpacing => new Vector2(4) * FontScale;
             public Vector2 WindowPadding => new(8);
+            public float ScrollbarSize => 14 * FontScale;
             public Vector2 WindowMinSize => new(32);
         }
         public static void SetNextWindowBgAlpha(float alpha) { }
         public static void End() { }
         public static void SetNextWindowViewport(uint id) => NextViewport=id;
         public static void SetNextWindowPos(Vector2 position, ImGuiCond condition, Vector2 pivot=default) { NextPosition=position; PositionCondition=condition; }
-        public static void SetNextWindowSize(Vector2 size, ImGuiCond condition) => NextSize=size;
+        public static void SetNextWindowSize(Vector2 size, ImGuiCond condition) { NextSize=size; SizeConditionForTest=condition; }
         public static void SetNextWindowSizeConstraints(Vector2 minimum, Vector2 maximum) { Minimum=minimum; Maximum=maximum; }
     }
 }

@@ -114,7 +114,7 @@ internal sealed partial class UITextTab
     private readonly UITextStore store;
     private readonly UITextPatchManager patches;
     private readonly UITextRunLock runs;
-    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Warning("界面耗时", message));
+    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Trace("界面耗时", message));
 
     private InstalledPluginsIndex? index;
     private DateTime indexAt = DateTime.MinValue;

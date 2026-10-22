@@ -60,6 +60,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     private int maintenanceAttempts;
     private string? maintenanceError;
     private HashSet<string> imageKeys = [];
+    private long imageRevision;
     private int cacheBytes;
     private string? cacheError;
     private bool readyToCompose;
@@ -140,6 +141,38 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     public bool HasStorageError { get { lock (sync) return pngWriteError is not null || maintenanceError is not null
         || cacheError is not null || favoritePhotos.LastError is not null; } }
 
+    public long ImageRevision => Volatile.Read(ref imageRevision);
+
+    public string? HistoryPublicationStatus
+    {
+        get
+        {
+            lock (sync)
+            {
+                if (availableBytes < 85) return "照片空间不足，暂未新增历史记录。已有记录已保留。";
+                if (pngWriteError is not null || maintenanceError is not null || cacheError is not null)
+                    return "预览照片暂时无法保存，请检查本地存储。已有记录已保留。";
+                return lastError is null ? null : "预览照片尚未生成，插件会继续尝试。";
+            }
+        }
+    }
+
+    public IReadOnlySet<long> GetPhotographedRecordIDs()
+    {
+        lock (sync)
+        {
+            var committed = Volatile.Read(ref imageKeys);
+            return records.Where(pair => committed.Contains(pair.Value.Key) || favoritePhotos.Contains(pair.Value.Key))
+                .Select(pair => pair.Key).ToHashSet();
+        }
+    }
+
+    public bool HasPhotographedRecord(long recordID)
+    {
+        lock (sync) return !disposed && records.TryGetValue(recordID, out var record)
+            && (Volatile.Read(ref imageKeys).Contains(record.Key) || favoritePhotos.Contains(record.Key));
+    }
+
     public void RetryStorage()
     {
         lock (sync)
@@ -157,9 +190,12 @@ internal sealed class PortraitHistoryPhotos : IDisposable
 
     private void PublishCacheMetadata()
     {
-        Volatile.Write(ref imageKeys, cache.Keys.ToHashSet(StringComparer.Ordinal));
+        var published = cache.Keys.ToHashSet(StringComparer.Ordinal);
+        var changed = !Volatile.Read(ref imageKeys).SetEquals(published);
+        Volatile.Write(ref imageKeys, published);
         Volatile.Write(ref cacheBytes, cache.Bytes);
         cacheError = cache.LastError;
+        if (changed) Interlocked.Increment(ref imageRevision);
     }
 
     public void SetRecords(IReadOnlyList<PortraitHistoryRecord> values, int historyBytes)
@@ -279,6 +315,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             if (retainedPng?.Key == writingKey) retainedPng = null;
             pngWriteError = null;
             pngWriteCode = PortraitStorageCode.Success;
+            lastError = null;
         }
         else pngWriteError = writing.IsFaulted ? writing.Exception?.GetBaseException().Message
             : cache.LastError ?? "照片写盘失败，已保留待保存图片。";
@@ -460,7 +497,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     public bool SetFavoriteSnapshots(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> values)
     {
         ArgumentNullException.ThrowIfNull(values);
-        var keys = values.Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+        var keys = values.Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
             .ToHashSet(StringComparer.Ordinal);
         return SetFavoriteKeys(keys, accepted: false);
     }
@@ -491,7 +528,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
     public Task<bool> SetFavoriteSnapshotsAsync(IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> values)
     {
         ArgumentNullException.ThrowIfNull(values);
-        var keys = values.Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+        var keys = values.Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
             .ToHashSet(StringComparer.Ordinal);
         return QueueFavoriteWork(() => Task.FromResult(SetFavoriteKeys(keys, accepted: true)));
     }
@@ -544,7 +581,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
                 }
                 if (!await writeMetadata().ConfigureAwait(false)) return false;
                 lock (sync) favoriteMetadataFailed = false;
-                var keys = readFavorites().Take(5001).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
+                var keys = readFavorites().Take(PortraitFavoritePhotos.MaximumReferences + 1).Select(value => SnapshotKey(value.ContentID, value.Snapshot))
                     .ToHashSet(StringComparer.Ordinal);
                 var archived = SetFavoriteKeys(keys, accepted: true);
                 // Permanent unarchived pins are published by SetFavoriteKeys even when the archive
@@ -656,6 +693,7 @@ internal sealed class PortraitHistoryPhotos : IDisposable
             foreach (var key in keys)
                 if (cache.TryGet(key, out var bytes)) completed[key] = bytes;
             var success = favoritePhotos.Synchronize(keys, key => completed.GetValueOrDefault(key), requestReclaim);
+            Interlocked.Increment(ref imageRevision);
             var missing = keys.Where(key => favoritePhotos.Status(key) != PortraitFavoritePhotoStatus.Available)
                 .ToHashSet(StringComparer.Ordinal);
             lock (sync)

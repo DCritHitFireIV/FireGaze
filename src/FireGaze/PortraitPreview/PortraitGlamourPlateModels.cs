@@ -8,6 +8,13 @@ internal sealed record PortraitGlamourPlateCapture(OwnedCharacterKey? Character,
 internal sealed record PortraitGlamourPlateView(OwnedCharacterKey? Character, IReadOnlyList<PortraitGlamourPlate> Plates,
     OwnedReadStatus Status, DateTimeOffset? ReadAt, string Reason);
 
+internal static class PortraitGlamourPlateGuidance
+{
+    internal static string ForPlayer(string reason) => reason
+        .Replace("打开投影台后可读取投影模板", "打开投影模板后即可读取", StringComparison.Ordinal)
+        .Replace("打开投影台", "打开投影模板", StringComparison.Ordinal);
+}
+
 /// <summary>Builds a portrait-only replacement; it never applies a game glamour template.</summary>
 internal static class PortraitGlamourPlateMerge
 {
@@ -17,7 +24,7 @@ internal static class PortraitGlamourPlateMerge
         reason = string.Empty;
         if (current is null || current.Pieces is null || current.Pieces.Length != 13 || !IsValid(plate))
         {
-            reason = "投影模板数据不完整，请重新打开投影台读取";
+            reason = "投影模板数据不完整，请重新打开投影模板读取";
             return false;
         }
         if (!plate.Pieces.Any(piece => piece.ItemID != 0))

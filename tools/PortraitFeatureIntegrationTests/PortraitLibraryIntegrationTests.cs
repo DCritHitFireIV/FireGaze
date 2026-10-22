@@ -113,7 +113,98 @@ internal static class PortraitLibraryIntegrationTests
             feature.RenameFavorite(favorite.ID,"重命名");feature.WaitFavorites();feature.TagFavorite(favorite.ID,["暖色","光"]);feature.WaitFavorites();
             var path=Path.Combine(root,"library","shared","portrait-favorites-v1.json");var stored=new PortraitFavoritesStore(path).Entries.Single();
             check(stored.Name=="重命名"&&stored.Tags.SequenceEqual(["暖色","光"]),"feature rename and tags are immediately durable");
-            feature.RemoveFavorite(favorite.ID);feature.WaitFavorites();check(feature.Favorites.Count==0&&new PortraitFavoritesStore(path).Entries.Count==0,"feature removal publishes only after durable library update");
+            var priorMetadata=File.ReadAllBytes(path);
+            feature.EditFavorite(favorite.ID,"一次编辑",["新标签","日常"]);feature.WaitFavorites();
+            var edited=new PortraitFavoritesStore(path).Entries.Single();
+            check(edited.Name=="一次编辑" && edited.Tags.SequenceEqual(["新标签","日常"])
+                && priorMetadata.SequenceEqual(File.ReadAllBytes(path+".bak")),
+                "one editor confirmation atomically persists both name and tags with a single prior-generation backup");
+            var completeMetadata=File.ReadAllBytes(path);
+            feature.EditFavorite(favorite.ID,"",["不得部分保存"]);feature.WaitFavorites();
+            check(completeMetadata.SequenceEqual(File.ReadAllBytes(path)),
+                "invalid combined metadata edit cannot partially save tags or rewrite the previous favorite");
+            feature.RemoveFavorite(favorite.ID);feature.WaitFavorites();
+            var trashPath=Path.Combine(Path.GetDirectoryName(path)!,"portrait-favorites-trash-v1.json");
+            check(feature.Favorites.Count==0 && feature.FavoriteTrash.Single().ID==favorite.ID
+                && new PortraitFavoritesStore(path).Entries.Single().ID==favorite.ID
+                && new PortraitFavoritesTrashStore(trashPath).Entries.Single().ID==favorite.ID,
+                "delete hides the favorite only after a durable complete tombstone while retaining its compatible source snapshot");
+            feature.RenameFavorite(favorite.ID,"不得修改已删除项");feature.WaitFavorites();
+            feature.TagFavorite(favorite.ID,["不得修改"]);feature.WaitFavorites();
+            feature.EditFavorite(favorite.ID,"不得修改",["不得修改"]);feature.WaitFavorites();
+            check(new PortraitFavoritesStore(path).Entries.Single().Name=="一次编辑"
+                && new PortraitFavoritesStore(path).Entries.Single().Tags.SequenceEqual(["新标签","日常"])
+                && feature.FavoriteTrash.Single().Name=="一次编辑",
+                "stale metadata editor cannot mutate a deleted favorite or create a recovery conflict");
+            feature.RestoreDeletedFavorite(favorite.ID);feature.WaitFavorites();
+            check(feature.Favorites.Single().ID==favorite.ID && feature.Favorites.Single().Name=="一次编辑"
+                && feature.FavoriteTrash.Count==0 && new PortraitFavoritesTrashStore(trashPath).Entries.Count==0,
+                "restoring removes the tombstone durably without changing identity metadata or portrait");
+            feature.RemoveFavorite(favorite.ID);feature.WaitFavorites();
+        }
+        using(var feature=new PortraitPreviewFeature(PathFor("shared")))
+        {
+            var path=Path.Combine(root,"library","shared","portrait-favorites-v1.json");
+            var trashPath=Path.Combine(Path.GetDirectoryName(path)!,"portrait-favorites-trash-v1.json");
+            check(feature.Favorites.Count==0 && feature.FavoriteTrash.Count==1,
+                "restart reconstructs deleted visibility from durable tombstones instead of resurrecting source records");
+            var deleted=feature.FavoriteTrash.Single();
+            feature.RestoreDeletedFavorite(deleted.ID);feature.WaitFavorites();
+            check(feature.Favorites.Single().ID==deleted.ID && feature.Favorites.Single().Snapshot.ToJSON()==deleted.Snapshot.ToJSON()
+                && feature.FavoriteTrash.Count==0,
+                "restarted trash can restore its exact complete snapshot and stable identity");
+            feature.RemoveFavorite(deleted.ID);feature.WaitFavorites();
+            feature.PermanentlyRemoveFavorite(deleted.ID);feature.WaitFavorites();
+            check(feature.Favorites.Count==0 && feature.FavoriteTrash.Count==0
+                && new PortraitFavoritesStore(path).Entries.Count==0 && new PortraitFavoritesTrashStore(trashPath).Entries.Count==0,
+                "permanent deletion removes source and tombstone durably after explicit trash action");
+        }
+        using(var feature=new PortraitPreviewFeature(PathFor("shared")))
+            check(feature.Favorites.Count==0 && feature.FavoriteTrash.Count==0,
+                "permanently deleted favorites cannot return after a second restart");
+        using(var feature=new PortraitPreviewFeature(PathFor("trash-write-failure")))
+        {
+            feature.Sample();feature.OpenPreview();feature.SaveFavorite("安全恢复",["原标签"]);feature.WaitFavorites();
+            var favorite=feature.Favorites.Single();
+            var path=Path.Combine(root,"library","trash-write-failure","portrait-favorites-v1.json");
+            var trashPath=Path.Combine(Path.GetDirectoryName(path)!,"portrait-favorites-trash-v1.json");
+            feature.RemoveFavorite(favorite.ID);feature.WaitFavorites();
+            feature.RestoreDeletedFavorite(favorite.ID);feature.WaitFavorites();
+            var before=File.ReadAllBytes(path);
+            using(var blocked=new FileStream(trashPath,FileMode.Open,FileAccess.Read,FileShare.Read))
+            {
+                feature.RemoveFavorite(favorite.ID);feature.WaitFavorites();
+                check(feature.Favorites.Single().ID==favorite.ID && feature.FavoriteTrash.Count==0
+                    && before.SequenceEqual(File.ReadAllBytes(path)),
+                    "failed tombstone publication cannot hide an active favorite or change its compatible source document");
+            }
+            feature.RemoveFavorite(favorite.ID);feature.WaitFavorites();
+            using(var blocked=new FileStream(trashPath,FileMode.Open,FileAccess.Read,FileShare.Read))
+            {
+                feature.RestoreDeletedFavorite(favorite.ID);feature.WaitFavorites();
+                check(feature.Favorites.Count==0 && feature.FavoriteTrash.Single().ID==favorite.ID
+                    && new PortraitFavoritesStore(path).Entries.Single().ID==favorite.ID,
+                    "failed tombstone removal never rolls back by deleting the existing valid favorite source");
+            }
+            using(var blocked=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read))
+            {
+                feature.PermanentlyRemoveFavorite(favorite.ID);feature.WaitFavorites();
+                check(feature.FavoriteTrash.Single().ID==favorite.ID
+                    && new PortraitFavoritesStore(path).Entries.Single().ID==favorite.ID,
+                    "failed permanent source removal leaves the entire favorite recoverable in trash");
+            }
+            using(var blocked=new FileStream(trashPath,FileMode.Open,FileAccess.Read,FileShare.Read))
+            {
+                feature.PermanentlyRemoveFavorite(favorite.ID);feature.WaitFavorites();
+                check(feature.Favorites.Count==0 && feature.FavoriteTrash.Single().ID==favorite.ID
+                    && new PortraitFavoritesStore(path).Entries.Count==0
+                    && new PortraitFavoritesTrashStore(trashPath).Entries.Single().Snapshot.ToJSON()==favorite.Snapshot.ToJSON(),
+                    "interrupted permanent cleanup retains a complete durable tombstone after the source is already removed");
+            }
+            feature.RestoreDeletedFavorite(favorite.ID);feature.WaitFavorites();
+            check(feature.Favorites.Single().ID==favorite.ID && feature.FavoriteTrash.Count==0
+                && new PortraitFavoritesStore(path).Entries.Single().Name=="安全恢复",
+                "a partial permanent cleanup can recover by restoring its complete tombstone to the source library");
         }
         using(var feature=new PortraitPreviewFeature(PathFor("atomic")))
         {

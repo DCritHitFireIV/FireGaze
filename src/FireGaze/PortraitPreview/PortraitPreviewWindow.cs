@@ -56,13 +56,17 @@ internal interface IPortraitPreviewViewModel
     PortraitGlamourPlateView? GlamourPlateView => null;
     void ApplyGlamourPlate(int index) { }
     IReadOnlyList<PortraitFavoriteEntry> Favorites => [];
+    IReadOnlyList<PortraitFavoriteEntry> FavoriteTrash => [];
     string FavoritesStatus => string.Empty;
     string FavoriteAvailability(Guid id) => string.Empty;
     void SaveFavorite(string name, IReadOnlyCollection<string> tags) { }
     void RestoreFavorite(Guid id) { }
     void RenameFavorite(Guid id, string name) { }
     void TagFavorite(Guid id, IReadOnlyCollection<string> tags) { }
+    void EditFavorite(Guid id, string name, IReadOnlyCollection<string> tags) { }
     void RemoveFavorite(Guid id) { }
+    void RestoreDeletedFavorite(Guid id) { }
+    void PermanentlyRemoveFavorite(Guid id) { }
     PortraitCapturedImage? AcquireCurrentLiveImage() => null;
     PortraitAnalysisSession? CurrentAnalysisSession => null;
     bool NativeLiveEnabled => false;
@@ -152,6 +156,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     public override void OnOpen()
     {
         selectedSlot = PortraitSlot.Head;
+        showDyePalette = false;
         search = string.Empty;
         if (lastSourceOwner != feature.SourceGuideKey)
         {
@@ -174,7 +179,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
 
     public void CloseAuxiliaryWindows()
     {
-        showHistory = showFavorites = showGlamourPlates = showAnalysis = showLight = showLightingFit = showSpaceLight = showSourceGuide = showDesignShowcase = false;
+        showHistory = showFavorites = showGlamourPlates = showAnalysis = showLight = showLightingFit = showSpaceLight = showSourceGuide = showDesignShowcase = showDyePalette = false;
         BindLightingSubject(null);
         editingFavorite = deletingFavorite = null;
         // Feature lifetime cleanup owns its gesture; do not resample a retiring editor from a UI callback.
@@ -193,6 +198,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         var current = feature.Current;
         if (!feature.IsActive || current is null)
         {
+            showDyePalette = false;
             CancelLightInteraction();
             analysis.Invalidate();
             ReleaseAnalysisPreview();
@@ -209,7 +215,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         }
         DrawWorkspaceHeader();
         var area = ImGui.GetContentRegionAvail();
-        var layout = PortraitWorkspaceLayout.For(area.X, area.Y, Scale);
+        var layout = PortraitWorkspaceLayout.For(area.X, area.Y, Scale, workspacePortraitVisible);
         var origin = ImGui.GetCursorScreenPos();
         var selected = SelectedAppearanceGroup();
 
@@ -221,7 +227,8 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             else if (appearanceTab) DrawAppearanceNavigation(selected);
             else DrawSlots(current);
         });
-        DrawWorkspaceRegion("###PortraitWorkspaceImage", origin, layout.Image, DrawWorkspacePortrait);
+        if (workspacePortraitVisible)
+            DrawWorkspaceRegion("###PortraitWorkspaceImage", origin, layout.Image, DrawWorkspacePortrait);
         DrawWorkspaceRegion("###PortraitWorkspaceOptions", origin, layout.Options, () =>
         {
             if (showDesignShowcase) DrawDesignShowcaseContents();
@@ -239,6 +246,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         DrawWorkspaceFooter();
         DrawHistoryPopup();
         DrawLibraryPopups();
+        DrawDyePalette();
     }
 
     private static void DrawWorkspaceRegion(string id, Vector2 origin, PortraitWorkspaceRegion region, Action draw)
@@ -250,28 +258,6 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
     }
 
     private static float Scale => ImGui.GetFontSize() / 17f;
-
-    private void DrawSlots(PortraitLook current)
-    {
-        var spacing = ImGui.GetStyle().ItemSpacing.X;
-        var size = Math.Min(52f * Scale, (ImGui.GetContentRegionAvail().X - spacing) * 0.5f);
-        for (var i = 0; i < Slots.Length; i++)
-        {
-            var slot = Slots[i];
-            var piece = current.Pieces[(int)slot];
-            var item = feature.GetItem(slot, piece.ItemID);
-            ImGui.PushID((int)slot);
-            ImGui.BeginGroup();
-            if (DrawItemIcon("###Slot", item, size, slot == selectedSlot, slot)) selectedSlot = slot;
-            var name = SlotName(slot);
-            var labelWidth = ImGui.CalcTextSize(name).X;
-            ImGui.SetCursorPosX(ImGui.GetCursorPosX() + Math.Max(0, (size - labelWidth) / 2));
-            ImGui.TextUnformatted(name);
-            ImGui.EndGroup();
-            if ((i & 1) == 0 && i + 1 < Slots.Length) ImGui.SameLine();
-            ImGui.PopID();
-        }
-    }
 
     private void DrawEquipmentControls(PortraitLook current)
     {
@@ -293,7 +279,7 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             {
                 dyeSlot = selectedSlot;
                 dyeChannel = channel;
-                ImGui.OpenPopup("###PortraitDyePalette");
+                showDyePalette = true;
             }
             var hovered = ImGui.IsItemHovered();
             var focused = ImGui.IsItemFocused();
@@ -315,7 +301,6 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
         changed |= ImGui.Checkbox("显示武器", ref weapon);
         changed |= ImGui.Checkbox("开合面罩", ref visor);
         if (changed) feature.SetVisibility(head, weapon, visor);
-        DrawDyePalette();
     }
 
     private void DrawBrowser(PortraitLook current)
@@ -445,56 +430,6 @@ internal sealed partial class PortraitPreviewWindow : Window, IDisposable
             ImGui.GetColorU32(FireGazePalette.Muted), 1.5f * Scale);
         draw.AddLine(marker + new Vector2(12, 4) * Scale, marker + new Vector2(4, 12) * Scale,
             ImGui.GetColorU32(FireGazePalette.Muted), 1.5f * Scale);
-    }
-
-    private void DrawDyePalette()
-    {
-        var workArea = ImGui.GetMainViewport().WorkSize;
-        ImGui.SetNextWindowSizeConstraints(Vector2.Zero, PortraitPopupLayout.MaximumSize(workArea, Scale));
-        ImGui.SetNextWindowSize(PortraitPopupLayout.PreferredSize(new Vector2(570, 620) * Scale, workArea, Scale), ImGuiCond.Appearing);
-        if (!ImGui.BeginPopup("###PortraitDyePalette")) return;
-        var look = feature.Current;
-        var piece = look is null ? default : look.Pieces[(int)dyeSlot];
-        var item = feature.GetItem(dyeSlot, piece.ItemID);
-        var supported = feature.IsActive && item is not null && item.DyeChannels > dyeChannel && dyeSlot != PortraitSlot.Facewear;
-        if (!supported)
-        {
-            ImGui.CloseCurrentPopup();
-            ImGui.EndPopup();
-            return;
-        }
-        ImGui.TextUnformatted($"{SlotName(dyeSlot)} · 染色 {dyeChannel + 1}");
-        var currentStain = dyeChannel == 0 ? piece.Stain0 : piece.Stain1;
-        ImGui.TextUnformatted($"当前：{(currentStain == 0 ? "无染色" : feature.Dyes.FirstOrDefault(dye => dye.ID == currentStain)?.Name ?? $"#{currentStain}")}");
-        ImGui.TextDisabled("染色仅用于肖像预览，不消耗染剂");
-        DrawUndoRedo();
-        if (ImGui.Button("清除染色"))
-        {
-            feature.Dye(dyeSlot, dyeChannel, 0);
-            ImGui.CloseCurrentPopup();
-        }
-        ImGui.Separator();
-        ImGui.BeginChild("###PortraitStainColors", new Vector2(0, 0), false);
-        var edge = 32f * Scale;
-        var columns = Math.Clamp((int)((ImGui.GetContentRegionAvail().X + ImGui.GetStyle().ItemSpacing.X) / (edge + ImGui.GetStyle().ItemSpacing.X)), 1, 12);
-        foreach (var group in PortraitDyePalette.Group(feature.Dyes))
-        {
-            ImGui.Spacing();
-            ImGui.TextUnformatted(group.Name);
-            var index = 0;
-            foreach (var dye in group.Dyes)
-            {
-                if (index++ % columns != 0) ImGui.SameLine();
-                var selected = (dyeChannel == 0 ? piece.Stain0 : piece.Stain1) == dye.ID;
-                var position = ImGui.GetCursorScreenPos();
-                var clicked = ImGui.ColorButton($"###PortraitDye{dye.ID}", DyeColor(dye.Color), ImGuiColorEditFlags.NoTooltip, new Vector2(edge));
-                FireGazeSymbols.DrawSelection(position, position + new Vector2(edge), selected, ImGui.IsItemFocused());
-                if (ImGui.IsItemHovered() || ImGui.IsItemFocused()) ImGui.SetTooltip(dye.Name);
-                if (clicked) feature.Dye(dyeSlot, dyeChannel, dye.ID);
-            }
-        }
-        ImGui.EndChild();
-        ImGui.EndPopup();
     }
 
     private IDalamudTextureWrap? GetPart(string uldName, string textureName, int part)

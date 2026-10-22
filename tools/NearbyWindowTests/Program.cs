@@ -43,10 +43,11 @@ NearbyWindowIntegrationCases.Run(Check);
 PortraitWindowPlacementCases.Run(Check);
 PortraitWorkspaceGeometryCases.Run(Check);
 PortraitWorkspaceToolbarCases.Run(Check);
+PortraitEquipmentUiCases.Run(Check);
+PortraitNativeImageInteractionCases.Run(Check);
 #else
 Check(false, "child windows need bounded owner-relative placement");
 #endif
 
 Console.WriteLine($"{passed} passed, {failed} failed");
 return failed == 0 ? 0 : 1;
-

@@ -117,6 +117,9 @@ internal sealed partial class PortraitPreviewWindow
 
     private void DrawHistoryPhotos(IReadOnlyList<PortraitHistoryListItem> records, bool allowRestore)
     {
+        // A cache reclamation can finish after the Framework published this list.
+        // Read the committed image index again before creating photo cards.
+        records = records.Where(record => photos?.HasPhotographedRecord(record.ID) == true).ToArray();
         var gap = ImGui.GetStyle().ItemSpacing;
         var layout = PortraitHistoryPhotoLayout.For(ImGui.GetContentRegionAvail().X, gap.X, Scale);
         var captionHeight = ImGui.GetTextLineHeightWithSpacing() * 3;

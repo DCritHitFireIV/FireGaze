@@ -84,6 +84,21 @@ internal sealed class PortraitFavoritesStore
         }
     }
 
+    /// <summary>Restores a complete favorite with its original stable ID and timestamps.</summary>
+    public PortraitFavoritesWriteResult AddExisting(PortraitFavoriteEntry entry)
+    {
+        lock (gate)
+        {
+            if (Unavailable() is { } unavailable) return unavailable;
+            if (!ValidEntry(entry)) return Invalid();
+            var existing = entries.FirstOrDefault(value => value.ID == entry.ID);
+            if (existing is not null)
+                return SameEntry(existing, entry) ? new(PortraitFavoritesWriteStatus.Unchanged, Entry: existing.Copy())
+                    : new(PortraitFavoritesWriteStatus.Conflict, "同一收藏已有不同内容，请保留原件后重试。");
+            return Persist(entries.Append(entry.Copy()).ToList(), entry);
+        }
+    }
+
     public PortraitFavoritesWriteResult Rename(Guid id, string name)
     {
         lock (gate)
@@ -111,6 +126,23 @@ internal sealed class PortraitFavoritesStore
             var previous = entries[index];
             if (previous.Tags.SequenceEqual(normalized)) return new(PortraitFavoritesWriteStatus.Unchanged, Entry: previous.Copy());
             var updated = previous with { Tags = normalized, UpdatedAt = EditTime(previous) };
+            var candidate = entries.ToList(); candidate[index] = updated;
+            return Persist(candidate, updated);
+        }
+    }
+
+    public PortraitFavoritesWriteResult UpdateMetadata(Guid id, string name, IEnumerable<string>? tags)
+    {
+        lock (gate)
+        {
+            if (Unavailable() is { } unavailable) return unavailable;
+            if (!TryName(name, out var normalizedName) || !TryTags(tags, out var normalizedTags)) return Invalid();
+            var index = entries.FindIndex(entry => entry.ID == id);
+            if (index < 0) return Missing();
+            var previous = entries[index];
+            if (previous.Name == normalizedName && previous.Tags.SequenceEqual(normalizedTags))
+                return new(PortraitFavoritesWriteStatus.Unchanged, Entry: previous.Copy());
+            var updated = previous with { Name = normalizedName, Tags = normalizedTags, UpdatedAt = EditTime(previous) };
             var candidate = entries.ToList(); candidate[index] = updated;
             return Persist(candidate, updated);
         }
@@ -247,6 +279,13 @@ internal sealed class PortraitFavoritesStore
         catch (Exception exception) when (exception is JsonException or NotSupportedException or ArgumentException) { return false; }
     }
 
+    internal static bool ValidEntry(PortraitFavoriteEntry? entry) => entry is not null && entry.ID != Guid.Empty
+        && entry.CreatedAt >= DateTimeOffset.UnixEpoch && entry.UpdatedAt >= entry.CreatedAt
+        && TryName(entry.Name, out var name) && name == entry.Name
+        && TrySourceName(entry.SourceName, out var source) && source == entry.SourceName
+        && entry.Tags is not null && TryTags(entry.Tags, out var tags) && entry.Tags.SequenceEqual(tags)
+        && ValidSnapshot(entry.Snapshot);
+
     private static bool TryReadDocument(byte[] bytes, out List<PortraitFavoriteEntry> loaded, out string error)
     {
         loaded = [];
@@ -259,12 +298,7 @@ internal sealed class PortraitFavoritesStore
             var ids = new HashSet<Guid>();
             foreach (var entry in document.Entries)
             {
-                if (entry is null || entry.ID == Guid.Empty || !ids.Add(entry.ID)
-                    || entry.CreatedAt < DateTimeOffset.UnixEpoch || entry.UpdatedAt < entry.CreatedAt
-                    || !TryName(entry.Name, out var name) || name != entry.Name
-                    || !TrySourceName(entry.SourceName, out var sourceName) || sourceName != entry.SourceName
-                    || entry.Tags is null || !TryTags(entry.Tags, out var tags) || !entry.Tags.SequenceEqual(tags)
-                    || !ValidSnapshot(entry.Snapshot)) return false;
+                if (!ValidEntry(entry) || !ids.Add(entry.ID)) return false;
                 loaded.Add(entry.Copy());
             }
             return true;
@@ -273,12 +307,141 @@ internal sealed class PortraitFavoritesStore
         { loaded = []; return false; }
     }
 
-    private static bool SameEntry(PortraitFavoriteEntry a, PortraitFavoriteEntry b) => a.ID == b.ID
+    internal static bool SameEntry(PortraitFavoriteEntry a, PortraitFavoriteEntry b) => a.ID == b.ID
         && a.CreatedAt == b.CreatedAt && a.UpdatedAt == b.UpdatedAt && a.SourceContentID == b.SourceContentID
         && a.SourceName == b.SourceName && a.Name == b.Name && a.Tags.SequenceEqual(b.Tags)
         && a.Snapshot.ToJSON() == b.Snapshot.ToJSON();
 
     private sealed record SavedDocument(int Version, List<PortraitFavoriteEntry> Entries);
+}
+
+internal sealed record PortraitFavoriteTrashEntry(Guid ID, DateTimeOffset DeletedAt, PortraitFavoriteEntry Favorite)
+{
+    public PortraitFavoriteEntry CopyFavorite() => Favorite.Copy();
+}
+
+/// <summary>Recoverable delete store for favorites. Trash is durable and shares the portrait budget.</summary>
+internal sealed class PortraitFavoritesTrashStore
+{
+    public const int MaximumBytes = PortraitFavoritesStore.MaximumBytes;
+    public const int MaximumEntries = PortraitFavoritesStore.MaximumEntries;
+    private static readonly JsonSerializerOptions JSONOptions = new() { MaxDepth = 32 };
+    private readonly object gate = new();
+    private readonly string path;
+    private readonly Func<DateTimeOffset> clock;
+    private readonly IPortraitFavoritesFiles files;
+    private List<PortraitFavoriteTrashEntry> entries = [];
+    public bool IsReadOnly { get; private set; }
+    public string? LoadError { get; private set; }
+    public string? PersistenceError { get; private set; }
+    public IReadOnlyList<PortraitFavoriteEntry> Entries
+    {
+        get { lock (gate) return entries.OrderByDescending(entry => entry.DeletedAt).Select(entry => entry.CopyFavorite()).ToArray(); }
+    }
+    public IReadOnlyList<PortraitFavoriteTrashEntry> Records
+    {
+        get { lock (gate) return entries.Select(entry => entry with { Favorite = entry.Favorite.Copy() }).ToArray(); }
+    }
+
+    public PortraitFavoritesTrashStore(string filePath, Func<DateTimeOffset>? clock = null,
+        IPortraitFavoritesFiles? files = null, PortraitStorageBudget? storage = null)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
+        path = Path.GetFullPath(filePath);
+        this.clock = clock ?? (() => DateTimeOffset.Now);
+        this.files = files ?? new PortraitFavoritesFiles(storage ?? PortraitStorageBudget.ForDirectory(Path.GetDirectoryName(path)!));
+        if (this.files is PortraitFavoritesFiles productionFiles) productionFiles.Register(path);
+        try
+        {
+            var bytes = this.files.Read(path, MaximumBytes);
+            if (bytes is null) return;
+            if (!TryRead(bytes, out var loaded)) throw new InvalidDataException("回收站文件无法读取，原文件已保留。");
+            entries = loaded;
+        }
+        catch (Exception exception) when (IsStorageException(exception) || exception is JsonException)
+        { IsReadOnly = true; LoadError = exception.Message; }
+    }
+
+    public PortraitFavoritesWriteResult Add(PortraitFavoriteEntry favorite)
+    {
+        lock (gate)
+        {
+            if (IsReadOnly) return new(PortraitFavoritesWriteStatus.ReadOnlyCorrupt, "回收站暂时无法读取，原文件已保留。");
+            if (!PortraitFavoritesStore.ValidEntry(favorite)) return new(PortraitFavoritesWriteStatus.InvalidInput, "收藏内容无效。");
+            var existing = entries.FirstOrDefault(value => value.ID == favorite.ID);
+            if (existing is not null) return PortraitFavoritesStore.SameEntry(existing.Favorite, favorite)
+                ? new(PortraitFavoritesWriteStatus.Unchanged, Entry: existing.CopyFavorite())
+                : new(PortraitFavoritesWriteStatus.Conflict, "回收站中已有内容不同的同名记录，原件已保留。");
+            if (entries.Count >= MaximumEntries) return new(PortraitFavoritesWriteStatus.TooLarge, "回收站容量已满，请先清理已删除收藏。");
+            var now = clock();
+            if (now < DateTimeOffset.UnixEpoch) return new(PortraitFavoritesWriteStatus.InvalidInput, "删除时间无效。");
+            var candidate = entries.Append(new PortraitFavoriteTrashEntry(favorite.ID, now, favorite.Copy())).ToList();
+            return Persist(candidate, favorite);
+        }
+    }
+
+    public PortraitFavoritesWriteResult Remove(Guid id)
+    {
+        lock (gate)
+        {
+            if (IsReadOnly) return new(PortraitFavoritesWriteStatus.ReadOnlyCorrupt, "回收站暂时无法读取，原文件已保留。");
+            var candidate = entries.Where(entry => entry.ID != id).ToList();
+            if (candidate.Count == entries.Count) return new(PortraitFavoritesWriteStatus.NotFound, "这条回收站记录已不存在。");
+            return Persist(candidate);
+        }
+    }
+
+    public PortraitFavoriteEntry? Find(Guid id)
+    {
+        lock (gate) return entries.FirstOrDefault(entry => entry.ID == id)?.CopyFavorite();
+    }
+
+    private PortraitFavoritesWriteResult Persist(List<PortraitFavoriteTrashEntry> candidate, PortraitFavoriteEntry? entry = null)
+    {
+        if (candidate.Count > MaximumEntries) return new(PortraitFavoritesWriteStatus.TooLarge, "回收站容量已满，请先清理已删除收藏。");
+        byte[] bytes;
+        try { bytes = JsonSerializer.SerializeToUtf8Bytes(new SavedDocument(1, candidate), JSONOptions); }
+        catch (Exception exception) when (exception is JsonException or NotSupportedException or ArgumentException)
+        { return new(PortraitFavoritesWriteStatus.InvalidInput, "回收站内容无效。"); }
+        if (bytes.Length > MaximumBytes) return new(PortraitFavoritesWriteStatus.TooLarge, "回收站容量已满，请先清理已删除收藏。");
+        try { files.WriteAtomically(path, bytes); }
+        catch (PortraitFavoritesStorageException exception)
+        {
+            PersistenceError = exception.Result.Reason;
+            return new(exception.Result.Code == PortraitStorageCode.Capacity ? PortraitFavoritesWriteStatus.TooLarge : PortraitFavoritesWriteStatus.PersistenceFailed,
+                exception.Result.Reason, StorageCode: exception.Result.Code);
+        }
+        catch (Exception exception) when (IsStorageException(exception))
+        { PersistenceError = exception.Message; return new(PortraitFavoritesWriteStatus.PersistenceFailed, "回收站未能保存，请检查本地存储后重试。", StorageCode: PortraitStorageCode.StorageError); }
+        entries = candidate;
+        PersistenceError = null;
+        return new(PortraitFavoritesWriteStatus.Saved, Entry: entry?.Copy());
+    }
+
+    private static bool TryRead(byte[] bytes, out List<PortraitFavoriteTrashEntry> loaded)
+    {
+        loaded = [];
+        if (bytes.Length > MaximumBytes) return false;
+        try
+        {
+            var document = JsonSerializer.Deserialize<SavedDocument>(bytes, JSONOptions);
+            if (document?.Version != 1 || document.Entries is null || document.Entries.Count > MaximumEntries) return false;
+            var ids = new HashSet<Guid>();
+            foreach (var record in document.Entries)
+            {
+                if (record is null || record.ID == Guid.Empty || !ids.Add(record.ID) || record.DeletedAt < DateTimeOffset.UnixEpoch
+                    || !PortraitFavoritesStore.ValidEntry(record.Favorite) || record.Favorite.ID != record.ID)
+                    return false;
+                loaded.Add(record with { Favorite = record.Favorite.Copy() });
+            }
+            return true;
+        }
+        catch (Exception exception) when (exception is JsonException or NotSupportedException or ArgumentException)
+        { loaded = []; return false; }
+    }
+    private static bool IsStorageException(Exception exception) => exception is IOException or InvalidDataException or UnauthorizedAccessException
+        or System.Security.SecurityException or ArgumentException or NotSupportedException;
+    private sealed record SavedDocument(int Version, List<PortraitFavoriteTrashEntry> Entries);
 }
 
 internal interface IPortraitFavoritesFiles

@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Timers;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Command;
+using Dalamud.Game.Text;
 using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
@@ -305,6 +306,27 @@ public sealed class Plugin : IAsyncDalamudPlugin
         {
             Log.Error(e, "[FireGaze] 肖像同步预览初始化失败");
         }
+        if (localPreview is not null && portraitPreview is not null && !Config.PreviewFeaturesAnnounced)
+            Framework.Update += AnnouncePreviewFeatures;
+    }
+
+    private void AnnouncePreviewFeatures(IFramework framework)
+    {
+        if (!workLifetime.TryAcquire(out var lease, out _)) return;
+        try
+        {
+            Internal.PreviewFeatureNotice.TryAnnounce(ClientState.IsLoggedIn,
+                localPreview is not null && portraitPreview is not null, Config,
+                message => Chat.Print(new XivChatEntry { Type = XivChatType.Echo, Message = message }),
+                () => SaveConfig(force: true));
+            if (Config.PreviewFeaturesAnnounced) Framework.Update -= AnnouncePreviewFeatures;
+        }
+        catch (Exception error)
+        {
+            Framework.Update -= AnnouncePreviewFeatures;
+            Log.Warning(error, "[FireGaze] 新功能提示暂时未能完成");
+        }
+        finally { lease!.Dispose(); }
     }
 
     /// <summary>
@@ -491,6 +513,7 @@ public sealed class Plugin : IAsyncDalamudPlugin
         try
         {
             Framework.Update -= OnStartupTick;
+            Framework.Update -= AnnouncePreviewFeatures;
         }
         catch
         {

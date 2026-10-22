@@ -52,7 +52,7 @@ internal sealed class QuotaNoticeWindow : Window
         ImGui.Spacing();
         ImGui.TextWrapped("公共额度不可用时会自动切换免费通道。自备 key 的额度与费用以服务商规则为准。");
         ImGui.Spacing();
-        ImGui.TextWrapped("请勿在反馈内容中填写 API key。");
+        ImGui.TextWrapped("想贡献公共彩云可以到dailyroutine的dc，插件反馈里私聊作者。");
 
         ImGui.PopTextWrapPos();
 

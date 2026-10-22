@@ -33,6 +33,20 @@ internal static class PortraitWorkspaceGeometryCases
                     && layout.Image.X + layout.Image.Width < layout.Options.X,
                     tag + ": wide navigation image and options form three separate columns");
         }
+        foreach (var (width, height, scale) in new[] { (700f, 700f, 1f), (1120f, 700f, 1f), (1400f, 1400f, 2f), (2240f, 1400f, 2f) })
+        {
+            var visible = PortraitWorkspaceLayout.For(width, height, scale);
+            var hidden = PortraitWorkspaceLayout.For(width, height, scale, false);
+            check(hidden.Image.Width == 0 && hidden.Image.Height == 0,
+                "hidden portrait does not reserve an invisible image cell");
+            check(hidden.Navigation.Y == 0 && hidden.Options.Y == 0
+                && hidden.Navigation.Height == hidden.BodyHeight && hidden.Options.Height == hidden.BodyHeight,
+                "hiding image restores the whole editing height at wide and narrow sizes");
+            check(hidden.Options.X == hidden.Navigation.Width + hidden.Gap
+                && hidden.Options.X + hidden.Options.Width <= width + .02f
+                && (visible.Stacked ? hidden.Options.Height > visible.Options.Height : hidden.Options.Width > visible.Options.Width),
+                "the editing region receives all released image space without crossing bounds");
+        }
 #endif
     }
 }

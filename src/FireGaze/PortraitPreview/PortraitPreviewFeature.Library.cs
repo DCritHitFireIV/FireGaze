@@ -8,8 +8,11 @@ internal sealed unsafe partial class PortraitPreviewFeature
     private PortraitGlamourPlateReader glamourPlateReader = null!;
     private PortraitGlamourPlateView? glamourPlateView;
     private PortraitFavoritesStore favoritesStore = null!;
+    private PortraitFavoritesTrashStore favoritesTrashStore = null!;
     private IReadOnlyList<PortraitFavoriteEntry> favoriteEntries = [];
+    private IReadOnlyList<PortraitFavoriteEntry> favoriteTrashEntries = [];
     private string favoritesStatus = "";
+    private string favoriteSuccessMessage = "收藏已保存";
     private bool libraryInitialized;
     private DateTime nextGlamourPlateRead;
     private OwnedCharacterKey? glamourPlateOwner;
@@ -41,6 +44,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
     public string SourceGuideKey => ContentID == 0 ? string.Empty : ContentID.ToString(System.Globalization.CultureInfo.InvariantCulture);
     public PortraitGlamourPlateView? GlamourPlateView => glamourPlateView;
     public IReadOnlyList<PortraitFavoriteEntry> Favorites => favoriteEntries;
+    public IReadOnlyList<PortraitFavoriteEntry> FavoriteTrash => favoriteTrashEntries;
     public string FavoritesStatus => favoritesStatus;
 
     private void InitializeLibrary(string directory)
@@ -50,9 +54,10 @@ internal sealed unsafe partial class PortraitPreviewFeature
         glamourPlateCache.Load(glamourPlates, out _);
         glamourPlateReader = new(() => Plugin.Framework.IsInFrameworkUpdateThread, CurrentCharacter);
         favoritesStore = new(Path.Combine(directory, "portrait-favorites-v1.json"), storage: storageBudget);
-        favoriteEntries = favoritesStore.Entries;
+        favoritesTrashStore = new(Path.Combine(directory, "portrait-favorites-trash-v1.json"), storage: storageBudget);
+        PublishFavoriteEntries();
         // A missing plate cache is a normal first run and must not appear as a favorite error.
-        favoritesStatus = favoritesStore.LoadError is null ? string.Empty : "收藏文件暂时无法读取，原文件已保留。";
+        favoritesStatus = favoritesStore.LoadError is null && favoritesTrashStore.LoadError is null ? string.Empty : "收藏文件暂时无法读取，原文件已保留。";
         libraryInitialized = true;
     }
 
@@ -138,6 +143,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
 
     public void SaveFavorite(string name, IReadOnlyCollection<string> tags) => Mutate(() =>
     {
+        if (favoritesStore.Entries.Concat(favoritesTrashStore.Entries).DistinctBy(entry => entry.ID).Count() >= PortraitFavoritesStore.MaximumEntries)
+        { SetFavoritesError("收藏容量已满，请先清理回收站中的部分收藏。已有收藏已保留。"); return; }
         if (!TryCurrentSnapshot(out var snapshot, out var reason)) { SetFavoritesError(reason); return; }
         var owner = CurrentCharacter();
         if (owner is not { } character) { SetFavoritesError("尚未进入角色。"); return; }
@@ -162,24 +169,80 @@ internal sealed unsafe partial class PortraitPreviewFeature
         else favoritesStatus = "已恢复收藏：" + entry.Name;
     });
 
-    public void RenameFavorite(Guid id, string name) => Mutate(() => QueueFavoriteWrite(() => favoritesStore.Rename(id, name)));
+    public void RenameFavorite(Guid id, string name) => Mutate(() =>
+    {
+        if (!favoriteEntries.Any(entry => entry.ID == id)) { SetFavoritesError("这条收藏已移入回收站，请先恢复后再编辑。"); return; }
+        QueueFavoriteWrite(() => favoritesTrashStore.Find(id) is null ? favoritesStore.Rename(id, name)
+            : new(PortraitFavoritesWriteStatus.NotFound));
+    });
     public void TagFavorite(Guid id, IReadOnlyCollection<string> tags) => Mutate(() =>
     {
+        if (!favoriteEntries.Any(entry => entry.ID == id)) { SetFavoritesError("这条收藏已移入回收站，请先恢复后再编辑。"); return; }
         var savedTags = tags.ToArray();
-        QueueFavoriteWrite(() => favoritesStore.SetTags(id, savedTags));
+        QueueFavoriteWrite(() => favoritesTrashStore.Find(id) is null ? favoritesStore.SetTags(id, savedTags)
+            : new(PortraitFavoritesWriteStatus.NotFound));
     });
-    public void RemoveFavorite(Guid id) => Mutate(() => QueueFavoriteWrite(() => favoritesStore.Remove(id)));
+    public void EditFavorite(Guid id, string name, IReadOnlyCollection<string> tags) => Mutate(() =>
+    {
+        if (!favoriteEntries.Any(entry => entry.ID == id)) { SetFavoritesError("这条收藏已移入回收站，请先恢复后再编辑。"); return; }
+        var savedTags = tags.ToArray();
+        QueueFavoriteWrite(() => favoritesTrashStore.Find(id) is null ? favoritesStore.UpdateMetadata(id, name, savedTags)
+            : new(PortraitFavoritesWriteStatus.NotFound));
+    });
+    public void RemoveFavorite(Guid id) => Mutate(() =>
+    {
+        var entry = favoriteEntries.FirstOrDefault(value => value.ID == id);
+        if (entry is null) { SetFavoritesError("找不到这条收藏。"); return; }
+        // The tombstone is the atomic delete authority. Retaining the source snapshot in
+        // the compatible v1 library avoids a two-file move losing data on interruption.
+        QueueFavoriteWrite(() =>
+        {
+            var latest = favoritesStore.Entries.FirstOrDefault(value => value.ID == id);
+            return latest is null ? new(PortraitFavoritesWriteStatus.NotFound) : favoritesTrashStore.Add(latest);
+        }, successMessage: "已移入回收站，可在回收站中恢复。");
+    });
+
+    public void RestoreDeletedFavorite(Guid id) => Mutate(() =>
+    {
+        var entry = favoriteTrashEntries.FirstOrDefault(value => value.ID == id);
+        if (entry is null) { SetFavoritesError("找不到这条回收站记录。"); return; }
+        QueueFavoriteWrite(() =>
+        {
+            var restored = favoritesStore.AddExisting(entry);
+            if (!restored.Success) return restored;
+            var removed = favoritesTrashStore.Remove(id);
+            if (removed.Success) return restored;
+            return removed;
+        }, successMessage: "已恢复收藏。");
+    });
+
+    public void PermanentlyRemoveFavorite(Guid id) => Mutate(() => QueueFavoriteWrite(() =>
+    {
+        // Keep the tombstone and its complete snapshot until the old source has been
+        // removed durably. Failure leaves a recoverable item instead of resurrecting it.
+        if (favoritesTrashStore.Find(id) is null)
+            return new(PortraitFavoritesWriteStatus.NotFound, "这条回收站记录已不存在。");
+        if (favoritesStore.Entries.Any(entry => entry.ID == id))
+        {
+            var removed = favoritesStore.Remove(id);
+            if (!removed.Success) return removed;
+        }
+        return favoritesTrashStore.Remove(id);
+    }, successMessage: "已永久删除收藏。"));
 
     private void QueueFavoriteWrite(Func<PortraitFavoritesWriteResult> write,
-        (ulong ContentID, PortraitEditorSnapshot Snapshot)? protection = null)
+        (ulong ContentID, PortraitEditorSnapshot Snapshot)? protection = null, string successMessage = "收藏已保存")
     {
         ObserveFavoritePersistence();
+        if (favoritesStore.IsReadOnly || favoritesTrashStore.IsReadOnly)
+        { SetFavoritesError("收藏或回收站暂时无法读取，原文件已保留。请修复本地存储后再试。"); return; }
         if (!libraryInitialized || favoritePersistence is { IsCompleted: false })
         {
             SetFavoritesError("上一条收藏仍在保存，请稍候再试。");
             return;
         }
         retainedFavoriteWrite = write;
+        favoriteSuccessMessage = successMessage;
         retainedFavoriteProtection = protection;
         favoriteCompletedResult = null;
         favoriteMetadataSucceeded = false;
@@ -192,7 +255,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 favoriteMetadataSucceeded = result.Success;
                 return result.Success;
             }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default),
-            () => favoritesStore.Entries.Select(entry => (entry.SourceContentID, entry.Snapshot)), protection);
+            () => FavoriteSnapshotsForPhotos(), protection);
     }
 
     private void ObserveFavoritePersistence()
@@ -213,7 +276,7 @@ internal sealed unsafe partial class PortraitPreviewFeature
         if (favoritePersistence is { IsCompleted: false } || retainedFavoriteWrite is not { } write) return;
         var protection = retainedFavoriteProtection;
         retainedFavoriteProtection = null;
-        QueueFavoriteWrite(write, protection);
+        QueueFavoriteWrite(write, protection, favoriteSuccessMessage);
     }
 
     private Task<bool> DrainFavoritePersistence() => favoritePersistence?.ContinueWith(task =>
@@ -316,8 +379,8 @@ internal sealed unsafe partial class PortraitPreviewFeature
     {
         if (result.Success)
         {
-            favoriteEntries = favoritesStore.Entries;
-            favoritesStatus = "收藏已保存";
+            PublishFavoriteEntries();
+            favoritesStatus = favoriteSuccessMessage;
             if (favoritePersistence is { IsCompletedSuccessfully: true, Result: false })
                 favoritesStatus = "收藏已保存，照片暂时无法保存。";
         }
@@ -340,6 +403,17 @@ internal sealed unsafe partial class PortraitPreviewFeature
                 _ => "收藏未能保存，请检查本地存储后重试。已有收藏已保留。",
             });
         }
+    }
+
+    private IEnumerable<(ulong ContentID, PortraitEditorSnapshot Snapshot)> FavoriteSnapshotsForPhotos()
+        => favoritesStore.Entries.Concat(favoritesTrashStore.Entries)
+            .DistinctBy(entry => entry.ID).Select(entry => (entry.SourceContentID, entry.Snapshot));
+
+    private void PublishFavoriteEntries()
+    {
+        favoriteTrashEntries = favoritesTrashStore.Entries;
+        var removed = favoriteTrashEntries.Select(entry => entry.ID).ToHashSet();
+        favoriteEntries = favoritesStore.Entries.Where(entry => !removed.Contains(entry.ID)).ToArray();
     }
 
     private void DisposeLibrary()

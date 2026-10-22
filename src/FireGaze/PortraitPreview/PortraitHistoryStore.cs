@@ -49,6 +49,9 @@ internal sealed class PortraitHistoryStore : IDisposable
     private Dictionary<PortraitHistoryKey, Cursor> cursors = [];
     private long nextID = 1;
     private long revision;
+    private bool photoBackedPublication;
+    private bool photoPublicationKnown;
+    private HashSet<long> photographedRecords = [];
     private int serializedBytes;
     private bool disposed;
     private Task<bool>? disposeTask;
@@ -57,6 +60,7 @@ internal sealed class PortraitHistoryStore : IDisposable
     public string? PersistenceError => writer?.LastError;
     public int Count { get { lock (gate) return records.Count; } }
     public int Bytes { get { lock (gate) return serializedBytes; } }
+    public long NavigationRevision { get { lock (gate) return revision; } }
 
     public PortraitHistoryStore(string filePath, Func<DateTimeOffset>? clock = null, int byteLimit = MaximumBytes,
         IPortraitHistoryMigrationFiles? migrationFiles = null, PortraitStorageBudget? storage = null,
@@ -81,6 +85,79 @@ internal sealed class PortraitHistoryStore : IDisposable
     public IReadOnlyList<PortraitHistoryRecord> GetRecordsForOwner(ulong contentID)
     {
         lock (gate) return records.Where(record => record.Key.ContentID == contentID).Reverse().ToArray();
+    }
+
+    // Undo owns every applied state. The durable gallery owns only states for which
+    // the photo service has already committed the exact matching pixels.
+    public void EnablePhotoBackedPublication()
+    {
+        lock (gate) photoBackedPublication = true;
+    }
+
+    public IReadOnlyList<PortraitHistoryRecord> GetAllRecords()
+    {
+        lock (gate) return records.ToArray();
+    }
+
+    public IReadOnlyList<PortraitHistoryRecord> GetPublishedRecords(PortraitHistoryKey key)
+    {
+        lock (gate) return records.Where(record => record.Key == key
+            && (!photoBackedPublication || photographedRecords.Contains(record.ID))).Reverse().ToArray();
+    }
+
+    public IReadOnlyList<PortraitHistoryRecord> GetPublishedRecordsForOwner(ulong contentID)
+    {
+        lock (gate) return records.Where(record => record.Key.ContentID == contentID
+            && (!photoBackedPublication || photographedRecords.Contains(record.ID))).Reverse().ToArray();
+    }
+
+    public bool SynchronizePhotographedRecords(IReadOnlySet<long> imageRecordIDs)
+    {
+        ArgumentNullException.ThrowIfNull(imageRecordIDs);
+        lock (gate)
+        {
+            if (!photoBackedPublication || disposed || IsReadOnly) return false;
+            var next = records.Where(record => imageRecordIDs.Contains(record.ID)).Select(record => record.ID).ToHashSet();
+            if (photoPublicationKnown && photographedRecords.SetEquals(next)) return false;
+            var document = BuildPhotographedDocument(records, cursors, nextID, next);
+            if (writer is null || !writer.Queue(document)) return false;
+            photographedRecords = next;
+            photoPublicationKnown = true;
+            serializedBytes = document.Length;
+            // Publication does not change a native navigation selection's revision.
+            return true;
+        }
+    }
+
+    private static PortraitHistoryWriteDocument BuildPhotographedDocument(List<PortraitHistoryRecord> values,
+        Dictionary<PortraitHistoryKey, Cursor> navigation, long next,
+        IReadOnlySet<long> photographed)
+    {
+        var byID = values.ToDictionary(record => record.ID);
+        long? Ancestor(long? id)
+        {
+            while (id is { } current && byID.TryGetValue(current, out var value))
+            {
+                if (photographed.Contains(current)) return current;
+                id = value.ParentID;
+            }
+            return null;
+        }
+        var published = values.Where(record => photographed.Contains(record.ID)).Select(record => record with
+        {
+            ParentID = Ancestor(record.ParentID),
+            TargetID = record.TargetID is { } target && photographed.Contains(target) ? target : null,
+        }).ToArray();
+        var saved = published.GroupBy(record => record.Key).Select(group =>
+        {
+            var cursor = navigation[group.Key];
+            var selected = Ancestor(cursor.ID) ?? group.OrderBy(record => record.ID).First().ID;
+            return new SavedCursor(group.Key, selected,
+                cursor.Redo.Where(photographed.Contains).ToList());
+        }).ToArray();
+        var prefix = Encoding.UTF8.GetBytes("{\"Version\":2,\"NextID\":" + next.ToString(CultureInfo.InvariantCulture) + ",\"Records\":[");
+        var suffix = Encoding.UTF8.GetBytes("],\"Cursors\":" + JsonSerializer.Serialize(saved) + "}");
+        return new(prefix, published.Select(record => JsonSerializer.SerializeToUtf8Bytes(record)).ToArray(), suffix);
     }
 
     public long? CurrentRecordID(PortraitHistoryKey key)
@@ -266,7 +343,9 @@ internal sealed class PortraitHistoryStore : IDisposable
             fragments[index] = fragment;
             nextEncoding.Add(record.ID, fragment);
         }
-        var document = new PortraitHistoryWriteDocument(prefix, fragments, suffix);
+        var document = photoBackedPublication
+            ? BuildPhotographedDocument(nextRecords, nextCursors, nextID + 1, photographedRecords)
+            : new PortraitHistoryWriteDocument(prefix, fragments, suffix);
         if (writer is null || !writer.Queue(document)) return new(PortraitHistoryWriteStatus.Disposed);
         // Capture this submission's boundary before another store operation can enqueue.
         // The caller must never wait for disk while holding a Framework/native ownership lease.

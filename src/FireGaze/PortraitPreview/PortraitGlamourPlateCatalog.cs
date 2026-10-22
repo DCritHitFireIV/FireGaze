@@ -53,7 +53,7 @@ internal sealed class PortraitGlamourPlateCatalog
         var status = snapshot.ReadAt is not { } readAt ? OwnedReadStatus.Unread
             : snapshot.Unavailable || now < readAt || now - readAt > CurrentFor ? OwnedReadStatus.PossiblyStale : OwnedReadStatus.Current;
         var reason = status == OwnedReadStatus.PossiblyStale && !snapshot.Unavailable ? "已读取投影模板可能过期" : snapshot.Reason;
-        return new(character, Array.AsReadOnly(snapshot.Plates.Select(PortraitGlamourPlateMerge.Copy).ToArray()), status, snapshot.ReadAt, reason);
+        return new(character, Array.AsReadOnly(snapshot.Plates.Select(PortraitGlamourPlateMerge.Copy).ToArray()), status, snapshot.ReadAt, PortraitGlamourPlateGuidance.ForPlayer(reason));
     }
 
     public string ExportJSON() => JsonSerializer.Serialize(new Document

@@ -159,9 +159,14 @@ Run(root =>
 if (!args.Contains("--quick")) Run(root =>
 {
     var path = Path.Combine(root, "portrait-edit-history-v1.json"); var budget = new PortraitStorageBudget(root, 10);
+    Check(Publish(budget, path, 1, false, out _), "bounded ledger fixture commits its baseline generation");
+    var initialTrackedFiles = budget.TrackedFileCount;
     for (var i = 0; i < 10_000; i++)
         if (!Publish(budget, path, 1, false, out _)) throw new Exception("bounded metadata write failed");
-    Check(budget.TrackedFileCount <= 2 * 6, "ten thousand completed candidates keep bounded ledger metadata");
+    Console.WriteLine($"Ledger diagnostic: initial={initialTrackedFiles}, after10000={budget.TrackedFileCount}, physicalFiles={Directory.GetFiles(root).Length}");
+    Check(budget.TrackedFileCount == initialTrackedFiles, "ten thousand completed candidates keep bounded ledger metadata");
+    Check(!Directory.EnumerateFiles(root).Any(file => file.EndsWith(".tmp", StringComparison.Ordinal)),
+        "ten thousand committed generations retain no physical staging candidates");
 });
 Run(root =>
 {
@@ -193,14 +198,14 @@ Run(root =>
 });
 Run(root =>
 {
-    string[] names = ["portrait-edit-history-v1.json", "portrait-history-thumbnails-v1.bin", "portrait-favorites-v1.json", "portrait-favorite-photos-v1.json", "portrait-owned-cache-v1.json", "portrait-glamour-plates-v1.json"];
+    string[] names = ["portrait-edit-history-v1.json", "portrait-history-thumbnails-v1.bin", "portrait-favorites-v1.json", "portrait-favorite-photos-v1.json", "portrait-favorites-trash-v1.json", "portrait-owned-cache-v1.json", "portrait-glamour-plates-v1.json"];
     var expected = 0;
     foreach (var name in names)
     {
         string[] paths = [name, name + ".bak", name + ".tmp-" + new string('a', 32), "." + name + "." + new string('a', 32) + ".tmp", "." + name + ".migration-" + new string('a', 32) + ".tmp", "." + name + ".backup-" + new string('a', 32) + ".tmp"];
         foreach (var path in paths) { File.WriteAllBytes(Path.Combine(root, path), [1]); expected++; }
     }
-    string[] extras = [names[0] + ".v1-" + new string('c', 64) + ".bak", names[4] + ".v1.bak", names[4] + ".retainer-equipped." + new string('d', 64) + ".bak", ".portrait-glamour-plates-" + new string('e', 32) + ".tmp"];
+    string[] extras = [names[0] + ".v1-" + new string('c', 64) + ".bak", "portrait-owned-cache-v1.json.v1.bak", "portrait-owned-cache-v1.json.retainer-equipped." + new string('d', 64) + ".bak", ".portrait-glamour-plates-" + new string('e', 32) + ".tmp"];
     foreach (var path in extras) { File.WriteAllBytes(Path.Combine(root, path), [1]); expected++; }
     File.WriteAllBytes(Path.Combine(root, ".portrait-favorites-v1.json.not-a-guid.tmp"), new byte[100]);
     var budget = new PortraitStorageBudget(root, 1000);

@@ -17,6 +17,25 @@ void Check(bool condition, string name)
 }
 
 var fresh = new Configuration();
+var noticeType = typeof(Configuration).Assembly.GetType("FireGaze.Internal.PreviewFeatureNotice");
+Check(noticeType is not null, "preview update has a once-only announcement policy");
+if (noticeType is not null)
+{
+    var config = new Configuration();
+    var sent = new List<string>();
+    var saves = 0;
+    bool Announce(bool loggedIn, bool ready) => (bool)noticeType.GetMethod("TryAnnounce")!.Invoke(null,
+        [loggedIn, ready, config, (Action<string>)sent.Add, (Action)(() => saves++)])!;
+    Check(!Announce(false, true) && sent.Count == 0 && saves == 0, "announcement waits until a player is logged in");
+    Check(!Announce(true, false) && sent.Count == 0 && saves == 0, "announcement waits until both advertised features initialize");
+    Check(Announce(true, true) && sent.Single() == "FireGaze: 上线了坐骑试用和肖像同步预览的功能，现在可以试用坐骑、预览铭牌效果了" && saves == 1,
+        "preview announcement preserves the previous discovery announcement format and persists immediately");
+    Check(!Announce(true, true) && sent.Count == 1 && saves == 1, "later frames do not repeat the feature announcement");
+    var restoredConfig = JsonConvert.DeserializeObject<Configuration>(JsonConvert.SerializeObject(config))!;
+    var result = (bool)noticeType.GetMethod("TryAnnounce")!.Invoke(null,
+        [true, true, restoredConfig, (Action<string>)sent.Add, (Action)(() => saves++)])!;
+    Check(!result && sent.Count == 1 && saves == 1, "reloading a saved configuration does not repeat the feature announcement");
+}
 Check(!fresh.LocalPreviewEnabled, "fresh installs cannot enable trial menus before consent");
 var type = typeof(Configuration).Assembly.GetType("FireGaze.LocalPreview.LocalPreviewPreferences");
 Check(type is not null, "preview preference flow owns confirmation and chat consent");

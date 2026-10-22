@@ -18,6 +18,7 @@ internal sealed class PortraitStorageBudget
     [
         "portrait-edit-history-v1.json", "portrait-history-thumbnails-v1.bin",
         "portrait-favorites-v1.json", "portrait-favorite-photos-v1.json",
+        "portrait-favorites-trash-v1.json",
         "portrait-owned-cache-v1.json", "portrait-glamour-plates-v1.json",
     ];
     private readonly object gate = new();

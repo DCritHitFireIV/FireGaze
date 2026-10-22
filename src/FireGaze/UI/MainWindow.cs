@@ -31,7 +31,7 @@ internal sealed class MainWindow : Window
     private readonly DiscoveryTab discoveryTab;
 
     private readonly MainTabSelection tabSelection = new();
-    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Warning("界面耗时", message));
+    private readonly SlowUiDiagnostics uiDiagnostics = new(message => ActivityLog.Trace("界面耗时", message));
 
     public MainWindow(Plugin plugin, UITextTab uiTextTab)
         : base("FireGaze###FireGaze", ImGuiWindowFlags.None)

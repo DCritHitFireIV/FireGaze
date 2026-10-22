@@ -326,4 +326,7 @@ public sealed class Configuration : IPluginConfiguration
     /// </summary>
     [JsonProperty("TranslateQuotaNoticeConfirmed")]
     public bool TranslateQuotaNoticeConfirmed { get; set; }
+
+    [JsonProperty("PreviewFeaturesAnnounced")]
+    public bool PreviewFeaturesAnnounced { get; set; }
 }
